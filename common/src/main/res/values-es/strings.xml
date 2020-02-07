@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="es">
+    <string name="app_name">Anti-Mine</string>
+    <string name="app_description">Deshabilitar las minas ocultas del campo de minas.</string>
+    <string name="remaining_mines">Minas Restantes</string>
+    <string name="levelSetup">Dificultad</string>
+    <string name="standard">Estándar</string>
+    <string name="beginner">Principiante</string>
+    <string name="intermediate">Intermediario</string>
+    <string name="expert">Especialista</string>
+    <string name="open_menu">Abrir Menú</string>
+    <string name="close_menu">Cerrar Menú</string>
+    <string name="settings">Ajustes</string>
+    <string name="animations">Animaciones</string>
+    <string name="vibration">Respuesta táctil</string>
+    <string name="about">Acerca de&#8230;</string>
+    <string name="no_network">Sin conexión a Internet.</string>
+    <string name="events">Estadística</string>
+    <string name="start_over">Nuevo juego</string>
+    <string name="retry_sure">Si iniciar un nuevo juego\nse perderá su progreso actual.</string>
+    <string name="cancel">Cancelar</string>
+    <string name="resume">Continuar</string>
+    <string name="show_licenses">Mostrar Licencias</string>
+    <string name="licenses">Licencias</string>
+    <string name="google_play_games">Google Play Games</string>
+    <string name="leaderboards">Tablas de Clasificación</string>
+    <string name="connect">Conectar</string>
+    <string name="connecting">Conectando&#8230;</string>
+    <string name="disconnect">Desconectar</string>
+    <string name="disconnected">Desconectado</string>
+    <string name="new_game">Nuevo juego</string>
+    <string name="new_game_request">¿Quieres iniciar un nuevo juego?</string>
+    <string name="yes">Sí</string>
+    <string name="general">General</string>
+    <string name="all_mines_disabled">Todas las minas fueron desactivadas.</string>
+    <string name="mines_remaining">%d minas</string>
+    <string name="game_time">Tiempo de juego</string>
+    <string name="covered_field">Campo Cubierto</string>
+    <string name="mine">Mina</string>
+    <string name="exploded_mine">Mina despiezada</string>
+    <string name="game_started">El juego comienza ahora</string>
+    <string name="you_exploded_a_mine">¡Usted ha estallado una mina!</string>
+    <string name="flag_placed">Bandera colocada!</string>
+    <string name="flag_removed">Bandera retirada!</string>
+    <string name="used_software_text">Este juego utiliza el siguiente software:</string>
+    <string name="sign_in_failed">No se ha podido iniciar sesión. Por favor, compruebe la conexión de red y vuelve a intentarlo.</string>
+    <string name="unknown_error">Error desconocido.</string>
+    <string name="retry">Rever</string>
+    <string name="empty">Vacío</string>
+    <string name="sure_quit_desc">Perderá todos los movimientos en el juego actual.</string>
+    <string name="you_won">¡Ganaste!</string>
+    <string name="you_lost">¡Perdiste!</string>
+    <string name="version_s">%s - %s</string>
+    <string name="sound_effects">Efectos de Sonido</string>
+    <string name="quit">Dejar</string>
+    <string name="are_you_sure">¿Estás seguro?</string>
+
+    <string name="custom">Personalizado</string>
+    <string name="start">Empezar</string>
+    <string name="width">Anchura</string>
+    <string name="height">Altura</string>
+    <string name="mines">Minas</string>
+    <string name="auto_flag">Bandera Automática</string>
+
+    <string name="desc_convered_area">Área cubierta</string>
+    <string name="desc_marked_area">Área marcada</string>
+    <string name="desc_question_area">Área dudosa</string>
+    <string name="desc_wrongly_marked_area">Área marcada incorrectamente</string>
+
+    <string name="settings_general">General</string>
+    <string name="settings_vibration_desc">Vibra al explotar o al alternar la marcacion</string>
+    <string name="settings_sound_desc">Hace un sonido de explosión</string>
+    <string name="settings_auto_flag_desc">Agrega una marca en minas resueltas automáticamente</string>
+    <string name="settings_accessibility">Accesibilidad</string>
+    <string name="settings_large_areas">Use áreas grandes</string>
+    <string name="settings_large_areas_desc">Aumenta el área táctil</string>
+
+    <string name="rating_menu">Nos califica ❤</string>
+    <string name="rating_message">Si te gusta este juego, danos un comentario. Nos ayudará mucho.</string>
+    <string name="rating_button">Si ❤️️️</string>
+    <string name="rating_button_no">No</string>
+</resources>

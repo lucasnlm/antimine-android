@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_difficulty"
+        android:title="@string/levelSetup">
+
+        <menu>
+            <item
+                android:id="@+id/standard"
+                android:checkable="false"
+                android:icon="@drawable/unchecked"
+                android:title="@string/standard" />
+
+            <item
+                android:id="@+id/beginner"
+                android:checkable="false"
+                android:icon="@drawable/unchecked"
+                android:title="@string/beginner" />
+
+            <item
+                android:id="@+id/intermediate"
+                android:checkable="false"
+                android:icon="@drawable/unchecked"
+                android:title="@string/intermediate" />
+
+            <item
+                android:id="@+id/expert"
+                android:icon="@drawable/unchecked"
+                android:title="@string/expert" />
+
+            <item
+                android:id="@+id/custom"
+                android:icon="@drawable/unchecked"
+                android:title="@string/custom" />
+
+        </menu>
+    </item>
+
+    <group
+        android:id="@+id/rate_group">
+
+        <item
+            android:id="@+id/rate"
+            android:checkable="false"
+            android:title="@string/rating_menu" />
+
+    </group>
+
+    <group>
+
+        <item
+            android:id="@+id/settings"
+            android:checkable="false"
+            android:title="@string/settings" />
+
+        <item
+            android:id="@+id/about"
+            android:checkable="false"
+            android:title="@string/about" />
+    </group>
+
+</menu>

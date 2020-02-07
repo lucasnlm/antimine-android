@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/accessible_field_size"
+    android:layout_height="@dimen/accessible_field_size"
+    android:focusable="true"
+    android:hapticFeedbackEnabled="true">
+
+    <dev.lucasnlm.antimine.common.level.view.AreaView
+        android:id="@+id/area"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>

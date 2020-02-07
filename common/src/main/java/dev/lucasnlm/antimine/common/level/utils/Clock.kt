@@ -1,0 +1,39 @@
+package dev.lucasnlm.antimine.common.level.utils
+
+import java.util.Timer
+import java.util.TimerTask
+
+class Clock {
+    private var elapsedTimeSeconds: Long = 0
+    private var timer: Timer? = null
+
+    val isStopped: Boolean
+        get() = (timer == null)
+
+    fun reset(initialValue: Long = 0L) {
+        stop()
+        this.elapsedTimeSeconds = initialValue
+    }
+
+    fun time() = elapsedTimeSeconds
+
+    fun stop() {
+        timer?.apply {
+            cancel()
+            purge()
+        }
+        timer = null
+    }
+
+    fun start(onTick: (seconds: Long) -> Unit) {
+        stop()
+        timer = Timer().apply {
+            scheduleAtFixedRate(object : TimerTask() {
+                override fun run() {
+                    elapsedTimeSeconds++
+                    onTick(elapsedTimeSeconds)
+                }
+            }, 1000L, 1000L)
+        }
+    }
+}

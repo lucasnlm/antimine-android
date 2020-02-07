@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
+    <string name="app_name">Anti-Mine</string>
+    <string name="app_description">You have to clear a rectangular board containing hidden "mines" without detonating any of them.</string>
+    <string name="remaining_mines">Remaining mines</string>
+    <string name="levelSetup">Difficulty</string>
+    <string name="standard">Standard</string>
+    <string name="beginner">Beginner</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="expert">Expert</string>
+    <string name="open_menu">Open Menu</string>
+    <string name="close_menu">Close Menu</string>
+    <string name="settings">Settings</string>
+    <string name="animations">Animations</string>
+    <string name="vibration">Haptic Feedback</string>
+    <string name="about">About</string>
+    <string name="no_network">No internet connection.</string>
+    <string name="events">Statistics</string>
+    <string name="start_over">New Game</string>
+    <string name="retry_sure">If you start a new game,\nyour current progress will be lost.</string>
+    <string name="cancel">Cancel</string>
+    <string name="resume">Resume</string>
+    <string name="show_licenses">Show Licenses</string>
+    <string name="licenses">Licenses</string>
+    <string name="google_play_games">Google Play Games</string>
+    <string name="leaderboards">Leaderboards</string>
+    <string name="connect">Connect</string>
+    <string name="connecting">Connecting&#8230;</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="new_game">New Game</string>
+    <string name="new_game_request">Do you want to start a new game?</string>
+    <string name="yes">Yes</string>
+    <string name="general">General</string>
+    <string name="all_mines_disabled">All mines were disabled.</string>
+    <string name="mines_remaining">%d mines</string>
+    <string name="game_time">Game Time</string>
+    <string name="covered_field">Covered Field</string>
+    <string name="mine">Mine</string>
+    <string name="exploded_mine">Exploded Mine</string>
+    <string name="game_started">Game Started</string>
+    <string name="you_exploded_a_mine">You exploded a mine!</string>
+    <string name="flag_placed">Flag placed!</string>
+    <string name="flag_removed">Flag removed!</string>
+    <string name="used_software_text">This game uses the following third parties software:</string>
+    <string name="sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
+    <string name="unknown_error">Unknown error.</string>
+    <string name="retry">Retry</string>
+    <string name="empty">Empty</string>
+    <string name="sure_quit_desc">You\'ll lose all moves on current game.</string>
+    <string name="you_won">You won!</string>
+    <string name="you_lost">You lost!</string>
+    <string name="version_s">%s - %s</string>
+    <string name="sound_effects">Sound Effects</string>
+    <string name="quit">Quit</string>
+    <string name="are_you_sure">Are you sure?</string>
+
+    <string name="custom">Custom</string>
+    <string name="start">Start</string>
+    <string name="width">Width</string>
+    <string name="height">Height</string>
+    <string name="mines">Mines</string>
+    <string name="auto_flag">Game Assistant</string>
+
+    <string name="desc_convered_area">Covered area</string>
+    <string name="desc_marked_area">Marked area</string>
+    <string name="desc_question_area">Doubtful area</string>
+    <string name="desc_wrongly_marked_area">Wrongly marked area</string>
+
+    <string name="settings_general">General</string>
+    <string name="settings_vibration_desc">Vibrates on explosion or flag toggle</string>
+    <string name="settings_sound_desc">Makes a sound of explosion</string>
+    <string name="settings_auto_flag_desc">Adds a flag on resolved mines automatically</string>
+    <string name="settings_accessibility">Accessibility</string>
+    <string name="settings_large_areas">Use Large Areas</string>
+    <string name="settings_large_areas_desc">Increases the touch area</string>
+
+    <string name="rating_menu">Feedback ❤</string>
+    <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
+    <string name="rating_button">Yes ❤️️️</string>
+    <string name="rating_button_no">No</string>
+</resources>

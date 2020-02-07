@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh">
+    <string name="app_name">反雷 - 扫雷</string>
+    <string name="app_description">你需要清除一个隐藏着地雷的矩形面板，不能使任何地雷爆炸。</string>
+    <string name="remaining_mines">剩余地雷</string>
+    <string name="levelSetup">难度</string>
+    <string name="standard">标准</string>
+    <string name="beginner">初级</string>
+    <string name="intermediate">中级</string>
+    <string name="expert">专家</string>
+    <string name="open_menu">打开菜单</string>
+    <string name="close_menu">关闭选单</string>
+    <string name="settings">设置</string>
+    <string name="animations">动画</string>
+    <string name="vibration">触觉反馈</string>
+    <string name="about">关于</string>
+    <string name="no_network">没有网络连接。</string>
+    <string name="events">统计</string>
+    <string name="start_over">新游戏</string>
+    <string name="retry_sure">如果你开始一个新游戏，\n你的当前进度将会丢失。</string>
+    <string name="cancel">取消</string>
+    <string name="resume">恢复</string>
+    <string name="show_licenses">显示许可证</string>
+    <string name="licenses">许可证</string>
+    <string name="google_play_games">Google Play 游戏</string>
+    <string name="leaderboards">排行榜</string>
+    <string name="connect">连接</string>
+    <string name="connecting">正在连接……</string>
+    <string name="disconnect">断开</string>
+    <string name="disconnected">已断开</string>
+    <string name="new_game">新游戏</string>
+    <string name="new_game_request">你要开始一个新游戏吗？</string>
+    <string name="yes">是</string>
+    <string name="general">常规</string>
+    <string name="all_mines_disabled">所有地雷都已失效。</string>
+    <string name="mines_remaining">%d个地雷</string>
+    <string name="game_time">游戏时间</string>
+    <string name="covered_field">覆盖区域</string>
+    <string name="mine">地雷</string>
+    <string name="exploded_mine">爆炸的地雷</string>
+    <string name="game_started">游戏已开始</string>
+    <string name="you_exploded_a_mine">你爆炸了一个地雷！</string>
+    <string name="flag_placed">标记已放置！</string>
+    <string name="flag_removed">标记已移除！</string>
+    <string name="used_software_text">该游戏使用以下第三方软件：</string>
+    <string name="sign_in_failed">登录失败。请检查你的网络连接，然后重试。</string>
+    <string name="unknown_error">未知错误。</string>
+    <string name="retry">重试</string>
+    <string name="empty">空</string>
+    <string name="sure_quit_desc">你将丢失当前游戏中的所有进度。</string>
+    <string name="you_won">你赢了！</string>
+    <string name="you_lost">你输了！</string>
+    <string name="version_s">%s - %s</string>
+    <string name="sound_effects">音效</string>
+    <string name="quit">退出</string>
+    <string name="are_you_sure">确定吗？</string>
+
+    <string name="custom">自定义</string>
+    <string name="start">开始</string>
+    <string name="width">宽度</string>
+    <string name="height">高度</string>
+    <string name="mines">地雷</string>
+    <string name="auto_flag">游戏助手</string>
+
+    <string name="desc_convered_area">覆盖面积</string>
+    <string name="desc_marked_area">标记区域</string>
+    <string name="desc_question_area">怀疑</string>
+    <string name="desc_wrongly_marked_area">标记区域错误</string>
+
+    <string name="settings_general">总</string>
+    <string name="settings_vibration_desc"/>
+    <string name="settings_sound_desc"/>
+    <string name="settings_auto_flag_desc"/>
+    <string name="settings_accessibility">辅助功能</string>
+    <string name="settings_large_areas">使用大面积</string>
+    <string name="settings_large_areas_desc"/>
+
+    <string name="rating_menu">评价应用</string>
+    <string name="rating_message"></string>
+    <string name="rating_button">️️️</string>
+    <string name="rating_button_no"></string>
+</resources>

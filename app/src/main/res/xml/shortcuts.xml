@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutId="play_beginner"
+        android:shortcutShortLabel="@string/beginner"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="antimine://new-game/beginner"/>
+        <categories android:name="android.shortcut.game"/>
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutId="play_intermediate"
+        android:shortcutShortLabel="@string/intermediate"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="antimine://new-game/intermediate"/>
+        <categories android:name="android.shortcut.game"/>
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutId="play_expert"
+        android:shortcutShortLabel="@string/expert"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="antimine://new-game/expert"/>
+        <categories android:name="android.shortcut.game"/>
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutId="play_standard"
+        android:shortcutShortLabel="@string/standard"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="antimine://new-game/standard"/>
+        <categories android:name="android.shortcut.game"/>
+    </shortcut>
+</shortcuts>
