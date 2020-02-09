@@ -40,8 +40,12 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 - Save/Resume state when quit/resume game
 - Put flag on long press
 - Put question mark on double long press
+- Open multiple areas by long pressing the numbers
 - Game assistant to auto-flag discovered mines
+- App shortcuts
+- Split screen
 - Assessability: large toachable area
+- Assessability: screen reader
 
 ## Technical Details
 
