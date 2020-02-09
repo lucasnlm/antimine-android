@@ -1,8 +1,12 @@
-# Anti-mine
+# Anti-mine ![Android CI](https://github.com/lucasnlm/antimine-android/workflows/Android%20CI/badge.svg)
 
 Anti-Mine is a minesweeper puzzle game. The objective is: search for all hidden mines and clear the minefield without explode any of them.
 
 Flag the spaces with mines to make the board a safer place. You win the game when you've flagged every mine on the board. Be careful not to trigger one, or the game is over!
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/lucasnlm/antimine-android/master/extras/image_01.png" width="300px"/>
+</p>
 
 ## Contributing
 
@@ -11,8 +15,8 @@ Feel free to contribute with pull requests.
 ## Download
 
 <a href="https://play.google.com/store/apps/details?id=com.logical.minato">
-    <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
-        alt="Get it on Google Play" height="80"/></a>
+<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
+     alt="Get it on Google Play" height="80"/></a>
 
 ## Building
 
