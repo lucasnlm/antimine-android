@@ -5,6 +5,7 @@ Anti-Mine is a minesweeper puzzle game. The objective is: search for all hidden 
 Flag the spaces with mines to make the board a safer place. You win the game when you've flagged every mine on the board. Be careful not to trigger one, or the game is over!
 
 <p align="center">
+    <img src="https://raw.githubusercontent.com/lucasnlm/antimine-android/master/extras/image_02.png" width="300px"/>
     <img src="https://raw.githubusercontent.com/lucasnlm/antimine-android/master/extras/image_01.png" width="300px"/>
 </p>
 
@@ -39,8 +40,12 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 - Save/Resume state when quit/resume game
 - Put flag on long press
 - Put question mark on double long press
+- Open multiple areas by long pressing the numbers
 - Game assistant to auto-flag discovered mines
+- App shortcuts
+- Split screen
 - Assessability: large toachable area
+- Assessability: screen reader
 
 ## Technical Details
 
