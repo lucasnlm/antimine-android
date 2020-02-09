@@ -150,16 +150,13 @@ class GameViewModel(
             analyticsManager.sentEvent(Event.LongPressArea(index))
         } else {
             levelFacade.openNeighbors(index)
-            refreshGameStatus()
 
             analyticsManager.sentEvent(Event.LongPressMultipleArea(index))
         }
 
         field.postValue(levelFacade.field.toList())
 
-        if (levelFacade.hasMines) {
-            mineCount.postValue(levelFacade.remainingMines())
-        }
+        refreshGameStatus()
     }
 
     fun onClickArea(index: Int) {
@@ -186,20 +183,23 @@ class GameViewModel(
     private fun refreshMineCount() = mineCount.postValue(levelFacade.remainingMines())
 
     private fun refreshGameStatus() {
-        refreshMineCount()
-
         when {
             levelFacade.hasAnyMineExploded() -> {
                 hapticFeedbackInteractor.explosionFeedback()
                 eventObserver.postValue(GameEvent.GameOver)
             }
-            levelFacade.checkVictory() -> eventObserver.postValue(GameEvent.Victory)
             else -> {
                 if (preferencesRepository.useFlagAssistant()){
                     levelFacade.runFlagAssistant()
                 }
                 eventObserver.postValue(GameEvent.Running)
             }
+        }
+
+        refreshMineCount()
+
+        if (levelFacade.checkVictory()) {
+            eventObserver.postValue(GameEvent.Victory)
         }
     }
 
