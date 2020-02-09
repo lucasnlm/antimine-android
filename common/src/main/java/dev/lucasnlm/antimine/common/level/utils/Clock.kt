@@ -3,8 +3,8 @@ package dev.lucasnlm.antimine.common.level.utils
 import java.util.Timer
 import java.util.TimerTask
 
-class Clock {
-    private var elapsedTimeSeconds: Long = 0
+open class Clock {
+    protected var elapsedTimeSeconds: Long = 0
     private var timer: Timer? = null
 
     val isStopped: Boolean
@@ -25,9 +25,11 @@ class Clock {
         timer = null
     }
 
+    open fun provideTimer() = Timer()
+
     fun start(onTick: (seconds: Long) -> Unit) {
         stop()
-        timer = Timer().apply {
+        timer = provideTimer().apply {
             scheduleAtFixedRate(object : TimerTask() {
                 override fun run() {
                     elapsedTimeSeconds++
