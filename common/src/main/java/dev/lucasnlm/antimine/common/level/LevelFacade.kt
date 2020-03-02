@@ -62,7 +62,7 @@ class LevelFacade {
             changed = isCovered
             if (isCovered) {
                 mark = when (mark) {
-                    Mark.None -> Mark.Flag
+                    Mark.PurposefulNone, Mark.None -> Mark.Flag
                     Mark.Flag -> Mark.Question
                     Mark.Question -> Mark.None
                 }
@@ -73,13 +73,15 @@ class LevelFacade {
 
     fun removeMark(index: Int) {
         getArea(index).apply {
-            mark = Mark.None
+            mark = Mark.PurposefulNone
         }
     }
 
     fun hasCoverOn(index: Int): Boolean = getArea(index).isCovered
 
-    fun hasMarkOn(index: Int): Boolean = getArea(index).mark != Mark.None
+    fun hasMarkOn(index: Int): Boolean = getArea(index).mark.run {
+        this != Mark.None && this != Mark.PurposefulNone
+    }
 
     fun plantMinesExcept(index: Int, includeSafeArea: Boolean = false) {
         plantRandomMines(index, includeSafeArea)
@@ -146,9 +148,7 @@ class LevelFacade {
         target.highlighted = !target.highlighted
         target.findNeighbors()
             .filter { it.mark == Mark.None && it.isCovered }
-            .forEach {
-            it.highlighted = !it.highlighted
-        }
+            .forEach { it.highlighted = !it.highlighted }
     }
 
     fun clickArea(index: Int): Boolean = getArea(index).let {
