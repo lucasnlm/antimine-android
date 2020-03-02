@@ -204,11 +204,9 @@ class GameViewModel(
     }
 
     fun runClock() {
-        if (isGameActive()) {
-            clock.run {
-                if (isStopped) start {
-                    elapsedTimeSeconds.postValue(it)
-                }
+        clock.run {
+            if (isStopped) start {
+                elapsedTimeSeconds.postValue(it)
             }
         }
     }
@@ -224,7 +222,6 @@ class GameViewModel(
     fun gameOver() {
         levelFacade.run {
             analyticsManager.sentEvent(Event.GameOver(clock.time(), getStats()))
-
             showAllMines()
             showWrongFlags()
         }
@@ -237,8 +234,7 @@ class GameViewModel(
     fun victory() {
         levelFacade.run {
             analyticsManager.sentEvent(Event.Victory(clock.time(), getStats(), currentDifficulty))
-
-            showAllMines()
+            flagAllMines()
             showWrongFlags()
         }
 
@@ -246,8 +242,6 @@ class GameViewModel(
             saveGame()
         }
     }
-
-    fun isGameActive() = (levelFacade.checkVictory() || levelFacade.hasAnyMineExploded()).not()
 
     fun useAccessibilityMode() = preferencesRepository.useLargeAreas()
 

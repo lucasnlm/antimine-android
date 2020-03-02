@@ -201,6 +201,10 @@ class LevelFacade {
         mines.filter { it.mark != Mark.Flag }.forEach { it.isCovered = false }
     }
 
+    fun flagAllMines() {
+        mines.forEach { it.mark = Mark.Flag }
+    }
+
     fun showWrongFlags() {
         field.filter { it.mark != Mark.None && !it.hasMine }.forEach { it.mistake = true }
     }
@@ -226,7 +230,7 @@ class LevelFacade {
     private fun rightFlags() = mines.count { it.mark == Mark.Flag }
 
     fun checkVictory(): Boolean =
-        hasFlaggedAllMines() && hasIsolatedAllMines() && !hasAnyMineExploded()
+        hasIsolatedAllMines() && !hasAnyMineExploded()
 
     fun remainingMines(): Int {
         val flagsCount = field.count { it.mark == Mark.Flag }

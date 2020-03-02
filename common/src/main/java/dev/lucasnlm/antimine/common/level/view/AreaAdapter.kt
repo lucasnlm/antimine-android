@@ -22,8 +22,7 @@ class AreaAdapter(
     private var isAmbientMode = false
     private val paintSettings: AreaPaintSettings
 
-    private val clickEnabled: Boolean
-        get() = viewModel.isGameActive()
+    private var clickEnabled: Boolean = false
 
     init {
         setHasStableIds(true)
@@ -33,6 +32,10 @@ class AreaAdapter(
     fun setAmbientMode(isAmbientMode: Boolean, isLowBitAmbient: Boolean) {
         this.isLowBitAmbient = isLowBitAmbient
         this.isAmbientMode = isAmbientMode
+    }
+
+    fun setClickEnabled(value: Boolean) {
+        this.clickEnabled = value
     }
 
     fun bindField(area: List<Area>) {
