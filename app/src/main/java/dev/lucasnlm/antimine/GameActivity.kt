@@ -39,6 +39,7 @@ import dev.lucasnlm.antimine.core.analytics.Event
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.utils.isDarkModeEnabled
 import dev.lucasnlm.antimine.level.view.CustomLevelDialogFragment
+import dev.lucasnlm.antimine.level.view.GameOverDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.GlobalScope
@@ -361,16 +362,24 @@ class GameActivity : DaggerAppCompatActivity() {
         if (keepConfirmingNewGame) {
             postDelayed(Handler(), {
                 if (this.gameStatus == GameStatus.Over && !isFinishing) {
-                    AlertDialog.Builder(this, R.style.MyDialog).apply {
-                        setTitle(R.string.new_game)
-                        setMessage(R.string.new_game_request)
-                        setPositiveButton(R.string.yes) { _, _ ->
-                            GlobalScope.launch {
+                    GameOverDialogFragment().apply {
+                        setOnNewGameClicked {
+                                                        GlobalScope.launch {
                                 viewModel.startNewGame()
                             }
                         }
-                        setNegativeButton(R.string.cancel, null)
-                    }.show()
+                        show(supportFragmentManager, "custom_level_fragment")
+                    }
+//                    AlertDialog.Builder(this, R.style.MyDialog).apply {
+//                        setTitle(R.string.new_game)
+//                        setMessage(R.string.new_game_request)
+//                        setPositiveButton(R.string.yes) { _, _ ->
+//                            GlobalScope.launch {
+//                                viewModel.startNewGame()
+//                            }
+//                        }
+//                        setNegativeButton(R.string.cancel, null)
+//                    }.show()
 
                     keepConfirmingNewGame = false
                 }

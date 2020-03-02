@@ -51,6 +51,7 @@
     <string name="sure_quit_desc">You\'ll lose all moves on current game.</string>
     <string name="you_won">You won!</string>
     <string name="you_lost">You lost!</string>
+    <string name="game_over">Game Over!</string>
     <string name="version_s">%s - %s</string>
     <string name="sound_effects">Sound Effects</string>
     <string name="quit">Quit</string>
