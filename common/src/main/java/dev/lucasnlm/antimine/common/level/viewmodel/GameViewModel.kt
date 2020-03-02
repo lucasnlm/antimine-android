@@ -176,6 +176,10 @@ class GameViewModel(
             field.postValue(levelFacade.field.toList())
         }
 
+        if (preferencesRepository.useFlagAssistant() && !levelFacade.hasAnyMineExploded()){
+            levelFacade.runFlagAssistant()
+        }
+
         refreshGameStatus()
         analyticsManager.sentEvent(Event.PressArea(index))
     }
@@ -189,9 +193,6 @@ class GameViewModel(
                 eventObserver.postValue(GameEvent.GameOver)
             }
             else -> {
-                if (preferencesRepository.useFlagAssistant()){
-                    levelFacade.runFlagAssistant()
-                }
                 eventObserver.postValue(GameEvent.Running)
             }
         }

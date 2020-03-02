@@ -81,8 +81,6 @@ class LevelFacade {
 
     fun hasMarkOn(index: Int): Boolean = getArea(index).mark != Mark.None
 
-    fun hasMineOn(index: Int): Boolean = getArea(index).hasMine
-
     fun plantMinesExcept(index: Int, includeSafeArea: Boolean = false) {
         plantRandomMines(index, includeSafeArea)
         putMinesTips()
