@@ -156,7 +156,7 @@ class GameViewModel(
 
         field.postValue(levelFacade.field.toList())
 
-        refreshGameStatus()
+        refreshGame()
     }
 
     fun onClickArea(index: Int) {
@@ -180,13 +180,13 @@ class GameViewModel(
             levelFacade.runFlagAssistant()
         }
 
-        refreshGameStatus()
+        refreshGame()
         analyticsManager.sentEvent(Event.PressArea(index))
     }
 
     private fun refreshMineCount() = mineCount.postValue(levelFacade.remainingMines())
 
-    private fun refreshGameStatus() {
+    private fun refreshGame() {
         when {
             levelFacade.hasAnyMineExploded() -> {
                 hapticFeedbackInteractor.explosionFeedback()
@@ -197,7 +197,9 @@ class GameViewModel(
             }
         }
 
-        refreshMineCount()
+        if (levelFacade.hasMines) {
+            refreshMineCount()
+        }
 
         if (levelFacade.checkVictory()) {
             eventObserver.postValue(GameEvent.Victory)

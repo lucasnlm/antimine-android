@@ -409,4 +409,12 @@ class LevelFacadeTest {
             assertFalse(checkVictory())
         }
     }
+
+    @Test
+    fun testCantShowVictoryIfHasNoMines() {
+        levelFacadeOf(3, 3, 0, 200L).run {
+            plantMinesExcept(3)
+            assertFalse(checkVictory())
+        }
+    }
 }

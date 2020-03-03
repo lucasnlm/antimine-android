@@ -39,8 +39,8 @@ class LevelFacade {
         this.levelSetup = save.levelSetup
         this.randomGenerator = Random().apply { setSeed(save.seed) }
         this.field = save.field.asSequence()
-        this.hasMines = this.field.firstOrNull { it.hasMine }?.hasMine ?: false
         this.mines = this.field.filter { it.hasMine }.asSequence()
+        this.hasMines = this.mines.count() != 0
     }
 
     private fun createEmptyField() {
@@ -86,7 +86,6 @@ class LevelFacade {
     fun plantMinesExcept(index: Int, includeSafeArea: Boolean = false) {
         plantRandomMines(index, includeSafeArea)
         putMinesTips()
-        hasMines = true
     }
 
     private fun plantRandomMines(ignoreIndex: Int, includeSafeArea: Boolean) {
@@ -106,6 +105,7 @@ class LevelFacade {
             .take(levelSetup.mines)
             .forEach { it.hasMine = true }
         mines = field.filter { it.hasMine }.asSequence()
+        hasMines = mines.count() != 0
     }
 
     private fun putMinesTips() {
@@ -228,7 +228,7 @@ class LevelFacade {
     private fun rightFlags() = mines.count { it.mark == Mark.Flag }
 
     fun checkVictory(): Boolean =
-        hasIsolatedAllMines() && !hasAnyMineExploded()
+        hasMines && hasIsolatedAllMines() && !hasAnyMineExploded()
 
     fun remainingMines(): Int {
         val flagsCount = field.count { it.mark == Mark.Flag }
