@@ -11,8 +11,8 @@ android {
         applicationId 'dev.lucasnlm.antimine'
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 41
-        versionName '6.0.1'
+        versionCode 42
+        versionName '6.0.2'
 
         resConfigs 'en', 'pt', 'es', 'zh'
     }
