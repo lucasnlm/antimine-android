@@ -3,9 +3,6 @@ package dev.lucasnlm.antimine.level.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.ShareManager
-import dev.lucasnlm.antimine.common.level.data.Area
-import dev.lucasnlm.antimine.common.level.data.LevelSetup
 
 class EngGameDialogViewModel : ViewModel() {
     fun randomVictoryEmoji() = listOf(
@@ -24,8 +21,4 @@ class EngGameDialogViewModel : ViewModel() {
             rightMines < 4 -> context.getString(arrayOf(R.string.game_over_desc_0, R.string.game_over_desc_1).random())
             else -> context.getString(R.string.game_over_desc_2, rightMines, totalMines, time)
         }
-
-    fun share(context: Context, levelSetup: LevelSetup, field: List<Area>, rightMines: Int, time: Long) {
-        ShareManager(context, levelSetup, field).share(rightMines, time.toInt())
-    }
 }

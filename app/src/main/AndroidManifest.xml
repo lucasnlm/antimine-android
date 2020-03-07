@@ -123,7 +123,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="dev.lucasnlm.antimine.provider"
+            android:authorities="@string/app_file_provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

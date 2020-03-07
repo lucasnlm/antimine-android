@@ -37,7 +37,12 @@
     </item>
 
     <group
-        android:id="@+id/rate_group">
+        android:id="@+id/social_group">
+
+        <item
+            android:id="@+id/share_now"
+            android:checkable="false"
+            android:title="@string/share_menu" />
 
         <item
             android:id="@+id/rate"

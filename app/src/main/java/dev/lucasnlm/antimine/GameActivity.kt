@@ -42,6 +42,7 @@ import dev.lucasnlm.antimine.core.utils.isDarkModeEnabled
 import dev.lucasnlm.antimine.level.view.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
+import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -59,6 +60,7 @@ class GameActivity : DaggerAppCompatActivity() {
     lateinit var analyticsManager: AnalyticsManager
 
     private lateinit var viewModel: GameViewModel
+    private lateinit var shareViewModel: ShareViewModel
 
     private var gameStatus: GameStatus = GameStatus.PreGame
     private val usingLargeArea by lazy { preferencesRepository.useLargeAreas() }
@@ -70,6 +72,8 @@ class GameActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(GameViewModel::class.java)
+        shareViewModel = ViewModelProviders.of(this).get(ShareViewModel::class.java)
+
         bindViewModel()
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
@@ -246,6 +250,7 @@ class GameActivity : DaggerAppCompatActivity() {
                 R.id.about -> showAbout()
                 R.id.settings -> showSettings()
                 R.id.rate -> openRateUsLink("Drawer")
+                R.id.share_now -> shareCurrentGame()
                 else -> handled = false
             }
 
@@ -344,8 +349,10 @@ class GameActivity : DaggerAppCompatActivity() {
     }
 
     private fun showCustomLevelDialog() {
-        CustomLevelDialogFragment().apply {
-            show(supportFragmentManager, "custom_level_fragment")
+        if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
+            CustomLevelDialogFragment().apply {
+                show(supportFragmentManager, CustomLevelDialogFragment.TAG)
+            }
         }
     }
 
@@ -364,15 +371,16 @@ class GameActivity : DaggerAppCompatActivity() {
     }
 
     private fun waitAndShowEndGameDialog(victory: Boolean, await: Long = DateUtils.SECOND_IN_MILLIS) {
-        postDelayed(Handler(), {
-            if (gameStatus is GameStatus.Over && !isFinishing) {
-                val over = gameStatus as GameStatus.Over
-                EndGameDialogFragment.newInstance(victory, over.rightMines, over.totalMines, over.time).apply {
-                    show(supportFragmentManager, "custom_level_fragment")
+        if (supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG) == null) {
+            postDelayed(Handler(), {
+                if (gameStatus is GameStatus.Over && !isFinishing) {
+                    val over = gameStatus as GameStatus.Over
+                    EndGameDialogFragment.newInstance(victory, over.rightMines, over.totalMines, over.time).apply {
+                        show(supportFragmentManager, EndGameDialogFragment.TAG)
+                    }
                 }
-            }
-        }, null, await)
-
+            }, null, await)
+        }
     }
 
     private fun changeDifficulty(newDifficulty: DifficultyPreset) {
@@ -470,6 +478,15 @@ class GameActivity : DaggerAppCompatActivity() {
         if (usingLargeArea != preferencesRepository.useLargeAreas()) {
             finish()
             Intent(this, GameActivity::class.java).run { startActivity(this) }
+        }
+    }
+
+    private fun shareCurrentGame() {
+        val levelSetup = viewModel.levelSetup.value
+        val field = viewModel.field.value
+        val spentTime: Long? = if (gameStatus is GameStatus.Over) currentTime else null
+        GlobalScope.launch {
+            shareViewModel.share(levelSetup, field, spentTime)
         }
     }
 

@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.DaggerAppCompatDialogFragment
@@ -13,6 +12,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.level.viewmodel.EngGameDialogViewModel
+import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,6 +24,7 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
 
     private lateinit var endGameViewModel: EngGameDialogViewModel
     private lateinit var viewModel: GameViewModel
+    private lateinit var shareViewModel: ShareViewModel
 
     private var isVictory: Boolean = false
     private var time: Long = 0L
@@ -36,12 +37,13 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
         activity?.let {
             viewModel = ViewModelProviders.of(it, viewModelFactory).get(GameViewModel::class.java)
             endGameViewModel = ViewModelProviders.of(this).get(EngGameDialogViewModel::class.java)
+            shareViewModel = ViewModelProviders.of(this).get(ShareViewModel::class.java)
         }
 
-        this.isVictory = arguments?.getBoolean(DIALOG_STATE) == true
-        this.time = arguments?.getLong(DIALOG_TIME) ?: 0L
-        this.rightMines = arguments?.getInt(DIALOG_RIGHT_MINES) ?: 0
-        this.totalMines = arguments?.getInt(DIALOG_TOTAL_MINES) ?: 0
+        isVictory = arguments?.getBoolean(DIALOG_STATE) == true
+        time = arguments?.getLong(DIALOG_TIME) ?: 0L
+        rightMines = arguments?.getInt(DIALOG_RIGHT_MINES) ?: 0
+        totalMines = arguments?.getInt(DIALOG_TOTAL_MINES) ?: 0
     }
 
     @SuppressLint("InflateParams")
@@ -74,10 +76,8 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
                 val setup = viewModel.levelSetup.value
                 val field = viewModel.field.value
 
-                if (setup != null && field != null) {
-                    endGameViewModel.share(context, setup, field, rightMines, time)
-                } else {
-                    Toast.makeText(context, context.getString(R.string.fail_to_share), Toast.LENGTH_SHORT).show()
+                GlobalScope.launch {
+                    shareViewModel.share(setup, field, time)
                 }
             }
         }.create()
@@ -97,5 +97,7 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
         private const val DIALOG_TIME = "dialog_time"
         private const val DIALOG_RIGHT_MINES = "dialog_right_mines"
         private const val DIALOG_TOTAL_MINES = "dialog_total_mines"
+
+        val TAG = EndGameDialogFragment::class.simpleName
     }
 }
