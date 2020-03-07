@@ -1,4 +1,4 @@
-# Anti-mine ![Android CI](https://github.com/lucasnlm/antimine-android/workflows/Android%20CI/badge.svg)
+# Anti-mine ![Android CI](https://github.com/lucasnlm/antimine-android/workflows/Android%20CI/badge.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 Anti-Mine is a minesweeper puzzle game. The objective is: search for all hidden mines and clear the minefield without explode any of them.
 
