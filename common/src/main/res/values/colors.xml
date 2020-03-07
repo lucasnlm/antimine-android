@@ -10,14 +10,14 @@
 
     <color name="shortcut_color">#527F8D</color>
 
-    <color name="mines_arround_1">#527F8D</color>
-    <color name="mines_arround_2">#2B8D43</color>
-    <color name="mines_arround_3">#E65100</color>
-    <color name="mines_arround_4">#20A5f7</color>
-    <color name="mines_arround_5">#ED1C24</color>
-    <color name="mines_arround_6">#FFC107</color>
-    <color name="mines_arround_7">#66126B</color>
-    <color name="mines_arround_8">#000000</color>
+    <color name="mines_around_1">#527F8D</color>
+    <color name="mines_around_2">#2B8D43</color>
+    <color name="mines_around_3">#E65100</color>
+    <color name="mines_around_4">#20A5f7</color>
+    <color name="mines_around_5">#ED1C24</color>
+    <color name="mines_around_6">#FFC107</color>
+    <color name="mines_around_7">#66126B</color>
+    <color name="mines_around_8">#000000</color>
 
     <color name="launcher_background">#FCC216</color>
 

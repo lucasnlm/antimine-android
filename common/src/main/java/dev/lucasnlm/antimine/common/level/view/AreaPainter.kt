@@ -114,14 +114,14 @@ fun Area.paintOnCanvas(context: Context,
                     R.color.ambient_color_white
                 } else {
                     when (minesAround) {
-                        1 -> R.color.mines_arround_1
-                        2 -> R.color.mines_arround_2
-                        3 -> R.color.mines_arround_3
-                        4 -> R.color.mines_arround_4
-                        5 -> R.color.mines_arround_5
-                        6 -> R.color.mines_arround_6
-                        7 -> R.color.mines_arround_7
-                        else -> R.color.mines_arround_8
+                        1 -> R.color.mines_around_1
+                        2 -> R.color.mines_around_2
+                        3 -> R.color.mines_around_3
+                        4 -> R.color.mines_around_4
+                        5 -> R.color.mines_around_5
+                        6 -> R.color.mines_around_6
+                        7 -> R.color.mines_around_7
+                        else -> R.color.mines_around_8
                     }
                 }
 
