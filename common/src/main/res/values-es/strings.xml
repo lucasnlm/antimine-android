@@ -30,6 +30,7 @@
     <string name="disconnect">Desconectar</string>
     <string name="disconnected">Desconectado</string>
     <string name="new_game">Nuevo juego</string>
+    <string name="share">Compartir</string>
     <string name="new_game_request">¿Quieres iniciar un nuevo juego?</string>
     <string name="yes">Sí</string>
     <string name="general">General</string>
@@ -51,6 +52,11 @@
     <string name="sure_quit_desc">Perderá todos los movimientos en el juego actual.</string>
     <string name="you_won">¡Ganaste!</string>
     <string name="you_lost">¡Perdiste!</string>
+    <string name="game_over_desc_0">Mantenga presionada un área para marcarla.</string>
+    <string name="game_over_desc_1">Buena suerte en el próximo juego.</string>
+    <string name="game_over_desc_2">Hiciste %1$d/%2$d en %3$d segundos.</string>
+    <string name="game_over_desc_3">¡Fue cerca! Sabes como hacerlo.</string>
+    <string name="game_over_desc_4">Terminaste el campo en %1$d segundos.</string>
     <string name="version_s">%s - %s</string>
     <string name="sound_effects">Efectos de Sonido</string>
     <string name="quit">Dejar</string>

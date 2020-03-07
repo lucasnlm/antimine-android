@@ -31,6 +31,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
 import dev.lucasnlm.antimine.common.level.data.GameEvent
 import dev.lucasnlm.antimine.common.level.data.GameStatus
+import dev.lucasnlm.antimine.common.level.data.Mark
 
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
@@ -39,7 +40,7 @@ import dev.lucasnlm.antimine.core.analytics.Event
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.utils.isDarkModeEnabled
 import dev.lucasnlm.antimine.level.view.CustomLevelDialogFragment
-import dev.lucasnlm.antimine.level.view.GameOverDialogFragment
+import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.GlobalScope
@@ -60,8 +61,10 @@ class GameActivity : DaggerAppCompatActivity() {
     private lateinit var viewModel: GameViewModel
 
     private var gameStatus: GameStatus = GameStatus.PreGame
-    private var keepConfirmingNewGame = true
     private val usingLargeArea by lazy { preferencesRepository.useLargeAreas() }
+    private var totalMines: Int = 0
+    private var rightMines: Int = 0
+    private var currentTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,20 +89,30 @@ class GameActivity : DaggerAppCompatActivity() {
         eventObserver.observe(this@GameActivity, Observer {
             onGameEvent(it)
         })
+
         elapsedTimeSeconds.observe(this@GameActivity, Observer {
             timer.apply {
                 visibility = if (it == 0L) View.GONE else View.VISIBLE
                 text = DateUtils.formatElapsedTime(it)
             }
+            currentTime = it
         })
+
         mineCount.observe(this@GameActivity, Observer {
             minesCount.apply {
                 visibility = View.VISIBLE
                 text = it.toString()
             }
         })
+
         difficulty.observe(this@GameActivity, Observer {
             onChangeDifficulty(it)
+        })
+
+        field.observe(this@GameActivity, Observer { area ->
+            val mines = area.filter { it.hasMine }
+            totalMines = mines.count()
+            rightMines = mines.map { if (it.mark == Mark.Flag) 1 else 0 }.sum()
         })
     }
 
@@ -138,7 +151,7 @@ class GameActivity : DaggerAppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean =
         when (gameStatus) {
-            GameStatus.Over, GameStatus.Running -> {
+            is GameStatus.Over, is GameStatus.Running -> {
                 menuInflater.inflate(R.menu.top_menu_over, menu)
                 true
             }
@@ -180,9 +193,16 @@ class GameActivity : DaggerAppCompatActivity() {
 
         drawer.apply {
             addDrawerListener(
-                ActionBarDrawerToggle(this@GameActivity, drawer, toolbar, R.string.open_menu, R.string.close_menu).apply {
+                ActionBarDrawerToggle(
+                    this@GameActivity,
+                    drawer,
+                    toolbar,
+                    R.string.open_menu,
+                    R.string.close_menu
+                ).apply {
                     if (!isDarkModeEnabled(applicationContext)) {
-                        drawerArrowDrawable.color = ContextCompat.getColor(applicationContext, R.color.primary)
+                        drawerArrowDrawable.color =
+                            ContextCompat.getColor(applicationContext, R.color.primary)
                     }
 
                     syncState()
@@ -195,14 +215,14 @@ class GameActivity : DaggerAppCompatActivity() {
                 }
 
                 override fun onDrawerOpened(drawerView: View) {
-                    if (gameStatus != GameStatus.Over) {
+                    if (gameStatus is GameStatus.Over) {
                         viewModel.pauseGame()
                     }
                     analyticsManager.sentEvent(Event.OpenDrawer())
                 }
 
                 override fun onDrawerClosed(drawerView: View) {
-                    if (gameStatus != GameStatus.Over) {
+                    if (gameStatus is GameStatus.Over) {
                         viewModel.resumeGame()
                     }
                     analyticsManager.sentEvent(Event.CloseDrawer())
@@ -343,65 +363,32 @@ class GameActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private fun showVictory() {
-        AlertDialog.Builder(this, R.style.MyDialog).apply {
-            setTitle(R.string.you_won)
-            setMessage(R.string.all_mines_disabled)
-            setCancelable(false)
-            setPositiveButton(R.string.new_game) { _, _ ->
-                GlobalScope.launch {
-                    viewModel.startNewGame()
-                }
-            }
-            setNegativeButton(R.string.cancel, null)
-            show()
-        }
-    }
-
-    private fun waitAndShowConfirmNewGame() {
-        if (keepConfirmingNewGame) {
-            postDelayed(Handler(), {
-                if (this.gameStatus == GameStatus.Over && !isFinishing) {
-                    GameOverDialogFragment().apply {
-                        setOnNewGameClicked {
-                                                        GlobalScope.launch {
-                                viewModel.startNewGame()
-                            }
-                        }
-                        show(supportFragmentManager, "custom_level_fragment")
-                    }
-//                    AlertDialog.Builder(this, R.style.MyDialog).apply {
-//                        setTitle(R.string.new_game)
-//                        setMessage(R.string.new_game_request)
-//                        setPositiveButton(R.string.yes) { _, _ ->
-//                            GlobalScope.launch {
-//                                viewModel.startNewGame()
-//                            }
-//                        }
-//                        setNegativeButton(R.string.cancel, null)
-//                    }.show()
-
-                    keepConfirmingNewGame = false
-                }
-            }, null, DateUtils.SECOND_IN_MILLIS)
-        }
-    }
-
-    private fun waitAndShowGameOverConfirmNewGame() {
+    private fun waitAndShowEndGameDialog(victory: Boolean, await: Long = DateUtils.SECOND_IN_MILLIS) {
         postDelayed(Handler(), {
-            if (this.gameStatus == GameStatus.Over && !isFinishing) {
-                AlertDialog.Builder(this, R.style.MyDialog).apply {
-                    setTitle(R.string.you_lost)
-                    setMessage(R.string.new_game_request)
-                    setPositiveButton(R.string.yes) { _, _ ->
-                        GlobalScope.launch {
-                            viewModel.startNewGame()
-                        }
+            if (gameStatus is GameStatus.Over && !isFinishing) {
+                val over = gameStatus as GameStatus.Over
+                val message: String = when {
+                    victory -> {
+                        getString(R.string.game_over_desc_4, over.time)
                     }
-                    setNegativeButton(R.string.cancel, null)
-                }.show()
+                    over.rightMines/over.totalMines > 0.9 -> {
+                        getString(R.string.game_over_desc_3)
+                    }
+                    over.rightMines < 4 -> {
+                        getString(arrayOf(R.string.game_over_desc_0,R.string.game_over_desc_1).random())
+
+                    }
+                    else -> {
+                        getString(R.string.game_over_desc_2, over.rightMines, over.totalMines, over.time)
+                    }
+                }
+
+                EndGameDialogFragment.newInstance(message, victory).apply {
+                    show(supportFragmentManager, "custom_level_fragment")
+                }
             }
-        }, null, DateUtils.SECOND_IN_MILLIS)
+        }, null, await)
+
     }
 
     private fun changeDifficulty(newDifficulty: DifficultyPreset) {
@@ -433,27 +420,34 @@ class GameActivity : DaggerAppCompatActivity() {
                 invalidateOptionsMenu()
             }
             GameEvent.Victory -> {
-                gameStatus = GameStatus.Over
+                gameStatus = GameStatus.Over(rightMines, totalMines, currentTime)
                 viewModel.stopClock()
                 viewModel.revealAllEmptyAreas()
                 viewModel.victory()
                 invalidateOptionsMenu()
-                showVictory()
+                waitAndShowEndGameDialog(true, 0L)
             }
             GameEvent.GameOver -> {
-                gameStatus = GameStatus.Over
+                gameStatus = GameStatus.Over(rightMines, totalMines, currentTime)
                 invalidateOptionsMenu()
                 viewModel.stopClock()
                 viewModel.gameOver()
 
-                waitAndShowGameOverConfirmNewGame()
+                waitAndShowEndGameDialog(false)
             }
-            GameEvent.ResumeVictory, GameEvent.ResumeGameOver -> {
-                gameStatus = GameStatus.Over
+            GameEvent.ResumeVictory -> {
+                gameStatus = GameStatus.Over(rightMines, totalMines, currentTime)
                 invalidateOptionsMenu()
                 viewModel.stopClock()
 
-                waitAndShowConfirmNewGame()
+                waitAndShowEndGameDialog(true)
+            }
+            GameEvent.ResumeGameOver -> {
+                gameStatus = GameStatus.Over(rightMines, totalMines, currentTime)
+                invalidateOptionsMenu()
+                viewModel.stopClock()
+
+                waitAndShowEndGameDialog(false)
             }
             else -> {
 
@@ -470,10 +464,12 @@ class GameActivity : DaggerAppCompatActivity() {
 
         appUpdateInfoTask.addOnSuccessListener { info ->
             if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && info.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+                && info.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+            ) {
                 try {
                     appUpdateManager.startUpdateFlowForResult(
-                        info, AppUpdateType.FLEXIBLE, this, 1)
+                        info, AppUpdateType.FLEXIBLE, this, 1
+                    )
                 } catch (e: IntentSender.SendIntentException) {
                     Log.e(TAG, "Fail to request update.")
                 }
@@ -497,7 +493,12 @@ class GameActivity : DaggerAppCompatActivity() {
         try {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
         } catch (e: ActivityNotFoundException) {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName")))
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
+                )
+            )
         }
 
         analyticsManager.sentEvent(Event.TapRatingRequest(from))

@@ -5,13 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/title_emoji"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:textColor="#FF000000"
         android:textSize="52sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,13 +23,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/game_over"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_emoji" />
+        app:layout_constraintTop_toBottomOf="@+id/title_emoji"
+        tools:text="@string/you_lost" />
 
     <TextView
         android:id="@+id/subtitle"
@@ -40,6 +40,7 @@
         android:text="@string/you_lost"
         android:textColor="@color/black"
         android:textSize="14sp"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"

@@ -30,6 +30,7 @@
     <string name="disconnect">断开</string>
     <string name="disconnected">已断开</string>
     <string name="new_game">新游戏</string>
+    <string name="share">分享</string>
     <string name="new_game_request">你要开始一个新游戏吗？</string>
     <string name="yes">是</string>
     <string name="general">常规</string>
@@ -51,6 +52,11 @@
     <string name="sure_quit_desc">你将丢失当前游戏中的所有进度。</string>
     <string name="you_won">你赢了！</string>
     <string name="you_lost">你输了！</string>
+    <string name="game_over_desc_0">长按方块以标记</string>
+    <string name="game_over_desc_1">祝您下一场比赛好运。</string>
+    <string name="game_over_desc_2">您在%3$d秒内完成了%1$d/%2$d分</string>
+    <string name="game_over_desc_3">您几乎做到了！</string>
+    <string name="game_over_desc_4">您在%1$d秒内完成了</string>
     <string name="version_s">%s - %s</string>
     <string name="sound_effects">音效</string>
     <string name="quit">退出</string>
@@ -77,7 +83,7 @@
     <string name="settings_large_areas_desc"/>
 
     <string name="rating_menu">评价应用</string>
-    <string name="rating_message"></string>
-    <string name="rating_button">️️️</string>
-    <string name="rating_button_no"></string>
+    <string name="rating_message"/>
+    <string name="rating_button"/>
+    <string name="rating_button_no"/>
 </resources>

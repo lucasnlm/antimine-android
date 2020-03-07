@@ -102,7 +102,7 @@ class TvGameActivity : DaggerAppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean =
         when (gameStatus) {
-            GameStatus.Over, GameStatus.Running -> {
+            is GameStatus.Over, is GameStatus.Running -> {
                 menuInflater.inflate(R.menu.top_menu_over, menu)
                 true
             }
@@ -202,7 +202,7 @@ class TvGameActivity : DaggerAppCompatActivity() {
     private fun waitAndShowConfirmNewGame() {
         if (keepConfirmingNewGame) {
             HandlerCompat.postDelayed(Handler(), {
-                if (this.gameStatus == GameStatus.Over && !isFinishing) {
+                if (gameStatus is GameStatus.Over && !isFinishing) {
                     AlertDialog.Builder(this, R.style.MyDialog).apply {
                         setTitle(R.string.new_game)
                         setMessage(R.string.new_game_request)
@@ -222,7 +222,7 @@ class TvGameActivity : DaggerAppCompatActivity() {
 
     private fun waitAndShowGameOverConfirmNewGame() {
         HandlerCompat.postDelayed(Handler(), {
-            if (this.gameStatus == GameStatus.Over && !isFinishing) {
+            if (gameStatus is GameStatus.Over && !isFinishing) {
                 AlertDialog.Builder(this, R.style.MyDialog).apply {
                     setTitle(R.string.you_lost)
                     setMessage(R.string.new_game_request)
@@ -266,14 +266,14 @@ class TvGameActivity : DaggerAppCompatActivity() {
                 invalidateOptionsMenu()
             }
             GameEvent.Victory -> {
-                gameStatus = GameStatus.Over
+                gameStatus = GameStatus.Over()
                 viewModel.stopClock()
                 viewModel.revealAllEmptyAreas()
                 invalidateOptionsMenu()
                 showVictory()
             }
             GameEvent.GameOver -> {
-                gameStatus = GameStatus.Over
+                gameStatus = GameStatus.Over()
                 invalidateOptionsMenu()
                 viewModel.stopClock()
                 viewModel.gameOver()
@@ -281,7 +281,7 @@ class TvGameActivity : DaggerAppCompatActivity() {
                 waitAndShowGameOverConfirmNewGame()
             }
             GameEvent.ResumeVictory, GameEvent.ResumeGameOver -> {
-                gameStatus = GameStatus.Over
+                gameStatus = GameStatus.Over()
                 invalidateOptionsMenu()
                 viewModel.stopClock()
 
