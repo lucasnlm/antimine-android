@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.about
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
@@ -22,6 +23,7 @@ class AboutActivity : AppCompatActivity() {
         )
 
         thirdsParties.setOnClickListener { openThirdParties() }
+        sourceCode.setOnClickListener{ openSourceCode() }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
@@ -34,14 +36,18 @@ class AboutActivity : AppCompatActivity() {
         }
 
     private fun bindToolbar() {
-        supportActionBar?.let {  actionBar ->
-            actionBar.setTitle(R.string.about)
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeButtonEnabled(true)
+        supportActionBar?.apply {
+            setTitle(R.string.about)
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
         }
     }
 
     private fun openThirdParties() {
         startActivity(Intent(this, ThirdPartiesActivity::class.java))
+    }
+
+    private fun openSourceCode() {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/lucasnlm/antimine-android")))
     }
 }

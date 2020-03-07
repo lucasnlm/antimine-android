@@ -21,6 +21,7 @@
     <string name="cancel">取消</string>
     <string name="resume">恢复</string>
     <string name="show_licenses">显示许可证</string>
+    <string name="source_code">源代码</string>
     <string name="licenses">许可证</string>
     <string name="google_play_games">Google Play 游戏</string>
     <string name="leaderboards">排行榜</string>
