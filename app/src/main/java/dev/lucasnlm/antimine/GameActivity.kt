@@ -367,23 +367,7 @@ class GameActivity : DaggerAppCompatActivity() {
         postDelayed(Handler(), {
             if (gameStatus is GameStatus.Over && !isFinishing) {
                 val over = gameStatus as GameStatus.Over
-                val message: String = when {
-                    victory -> {
-                        getString(R.string.game_over_desc_4, over.time)
-                    }
-                    over.rightMines/over.totalMines > 0.9 -> {
-                        getString(R.string.game_over_desc_3)
-                    }
-                    over.rightMines < 4 -> {
-                        getString(arrayOf(R.string.game_over_desc_0,R.string.game_over_desc_1).random())
-
-                    }
-                    else -> {
-                        getString(R.string.game_over_desc_2, over.rightMines, over.totalMines, over.time)
-                    }
-                }
-
-                EndGameDialogFragment.newInstance(message, victory).apply {
+                EndGameDialogFragment.newInstance(victory, over.rightMines, over.totalMines, over.time).apply {
                     show(supportFragmentManager, "custom_level_fragment")
                 }
             }
