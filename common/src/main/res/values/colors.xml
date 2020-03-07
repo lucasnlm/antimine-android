@@ -22,7 +22,7 @@
     <color name="launcher_background">#FCC216</color>
 
     <color name="accent">#D32F2F</color>
-    <color name="text_color">#2B2824</color>
+    <color name="text_color">#212121</color>
     <color name="highlight">#212121</color>
 
     <color name="stroke_cover">#000</color>
