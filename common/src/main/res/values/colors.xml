@@ -6,10 +6,6 @@
     <color name="primary">#212121</color>
     <color name="primary_dark">#212121</color>
 
-    <color name="ambient_color_white">#FFFFFF</color>
-
-    <color name="shortcut_color">#527F8D</color>
-
     <color name="mines_around_1">#527F8D</color>
     <color name="mines_around_2">#2B8D43</color>
     <color name="mines_around_3">#E65100</color>
