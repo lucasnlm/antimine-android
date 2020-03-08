@@ -2,7 +2,7 @@ package dev.lucasnlm.antimine.common.level.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
 import androidx.core.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View

@@ -1,9 +1,11 @@
 package dev.lucasnlm.antimine.common.level.utils
 
 import com.nhaarman.mockitokotlin2.mock
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
-import java.util.*
+import java.util.Timer
 
 internal class MockClock(
     private val timer: Timer

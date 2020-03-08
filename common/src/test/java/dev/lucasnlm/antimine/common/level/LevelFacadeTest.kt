@@ -1,7 +1,14 @@
 package dev.lucasnlm.antimine.common.level
 
-import dev.lucasnlm.antimine.common.level.data.*
-import org.junit.Assert.*
+import dev.lucasnlm.antimine.common.level.data.Area
+import dev.lucasnlm.antimine.common.level.data.LevelSetup
+import dev.lucasnlm.antimine.common.level.data.Mark
+import dev.lucasnlm.antimine.common.level.data.isFlag
+import dev.lucasnlm.antimine.common.level.data.isQuestion
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class LevelFacadeTest {
