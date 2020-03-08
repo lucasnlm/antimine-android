@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:textColor="#FF000000"
         android:textSize="52sp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

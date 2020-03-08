@@ -53,15 +53,26 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
                 .from(context)
                 .inflate(R.layout.dialog_end_game, null, false)
                 .apply {
-                    val title = if (isVictory)
-                        endGameViewModel.randomVictoryEmoji() else endGameViewModel.randomGameOverEmoji()
+                    val title = when {
+                        isVictory -> endGameViewModel.randomVictoryEmoji()
+                        else -> endGameViewModel.randomGameOverEmoji()
+                    }
+
                     val titleRes =
                         if (isVictory) R.string.you_won else R.string.you_lost
                     val message = endGameViewModel.messageTo(context, rightMines, totalMines, time, isVictory)
 
-                    findViewById<TextView>(R.id.title_emoji).text = title
                     findViewById<TextView>(R.id.title).text = context.getString(titleRes)
                     findViewById<TextView>(R.id.subtitle).text = message
+                    findViewById<TextView>(R.id.title_emoji).apply {
+                        text = title
+                        setOnClickListener {
+                            text = when {
+                                isVictory -> endGameViewModel.randomVictoryEmoji(text.toString())
+                                else -> endGameViewModel.randomGameOverEmoji(text.toString())
+                            }
+                        }
+                    }
                 }
 
             setView(view)
