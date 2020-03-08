@@ -3,9 +3,20 @@ name: Android CI
 on: [push]
 
 jobs:
+  ktlint:
+    name: Kotlin Linter
+    runs-on: ubuntu-18.04
+
+    steps:
+       - name: "checkout"
+         uses: actions/checkout@v2
+
+       - name: "ktlint"
+         uses: "vroy/gha-kotlin-linter@v1"
+
   test:
     name: Run Unit Tests
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
