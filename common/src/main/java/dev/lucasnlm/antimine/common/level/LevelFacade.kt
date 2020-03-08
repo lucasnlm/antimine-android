@@ -4,6 +4,8 @@ import dev.lucasnlm.antimine.common.level.data.LevelSetup
 import dev.lucasnlm.antimine.common.level.data.Area
 import dev.lucasnlm.antimine.common.level.data.GameStats
 import dev.lucasnlm.antimine.common.level.data.Mark
+import dev.lucasnlm.antimine.common.level.data.isNone
+import dev.lucasnlm.antimine.common.level.data.isNotNone
 import dev.lucasnlm.antimine.common.level.database.data.Save
 import dev.lucasnlm.antimine.common.level.database.data.SaveStatus
 import java.util.Random
@@ -79,9 +81,7 @@ class LevelFacade {
 
     fun hasCoverOn(index: Int): Boolean = getArea(index).isCovered
 
-    fun hasMarkOn(index: Int): Boolean = getArea(index).mark.run {
-        this != Mark.None && this != Mark.PurposefulNone
-    }
+    fun hasMarkOn(index: Int): Boolean = getArea(index).mark.isNotNone()
 
     fun plantMinesExcept(index: Int, includeSafeArea: Boolean = false) {
         plantRandomMines(index, includeSafeArea)
@@ -147,7 +147,7 @@ class LevelFacade {
     private fun toggleHighlight(target: Area) {
         target.highlighted = !target.highlighted
         target.findNeighbors()
-            .filter { it.mark == Mark.None && it.isCovered }
+            .filter { it.mark.isNone() && it.isCovered }
             .forEach { it.highlighted = !it.highlighted }
     }
 
@@ -170,7 +170,7 @@ class LevelFacade {
         getArea(index)
             .findNeighbors()
             .filter {
-                it.mark == Mark.None
+                it.mark.isNone()
             }
             .map {
                 openField(it)
@@ -178,6 +178,8 @@ class LevelFacade {
             }
 
     fun runFlagAssistant() {
+        // Must not select Mark.PurposefulNone, only Mark.None. Otherwise, it will flag
+        // a square that was previously unflagged by player.
         mines.filter { it.mark == Mark.None }.forEach { field ->
             val neighbors = field.findNeighbors()
             val neighborsCount = neighbors.count()
@@ -204,7 +206,7 @@ class LevelFacade {
     }
 
     fun showWrongFlags() {
-        field.filter { it.mark != Mark.None && !it.hasMine }.forEach { it.mistake = true }
+        field.filter { it.mark.isNotNone() && !it.hasMine }.forEach { it.mistake = true }
     }
 
     fun revealAllEmptyAreas() {

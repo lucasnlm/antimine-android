@@ -14,6 +14,7 @@ import android.os.Build
 import androidx.core.view.ViewCompat
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.data.Mark
+import dev.lucasnlm.antimine.common.level.data.isNotNone
 import dev.lucasnlm.antimine.common.level.model.AreaPalette
 
 class AreaView : View {
@@ -58,7 +59,7 @@ class AreaView : View {
 
             if (Build.VERSION.SDK_INT >= 23) {
                 this.foreground = when {
-                    !isAmbientMode && area.isCovered -> getRippleEffect(context)
+                    !isAmbientMode && (area.isCovered || area.minesAround > 0) -> getRippleEffect(context)
                     else -> null
                 }
             }
@@ -86,7 +87,7 @@ class AreaView : View {
                 area.minesAround != 0 -> IMPORTANT_FOR_ACCESSIBILITY_YES
                 area.hasMine -> IMPORTANT_FOR_ACCESSIBILITY_YES
                 area.mistake -> IMPORTANT_FOR_ACCESSIBILITY_YES
-                area.mark != Mark.None && area.mark != Mark.PurposefulNone -> IMPORTANT_FOR_ACCESSIBILITY_YES
+                area.mark.isNotNone() -> IMPORTANT_FOR_ACCESSIBILITY_YES
                 !area.isCovered -> IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
                 else -> IMPORTANT_FOR_ACCESSIBILITY_YES
             }
