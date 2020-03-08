@@ -1,5 +1,7 @@
 package dev.lucasnlm.antimine
 
+import android.content.Context
+import androidx.multidex.MultiDex
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
@@ -18,6 +20,11 @@ class MainApplication : DaggerApplication() {
             .application(this)
             .appModule(AppModule(this))
             .build()
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
 
     override fun onCreate() {
         super.onCreate()
