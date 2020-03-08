@@ -9,6 +9,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.data.Area
 import dev.lucasnlm.antimine.common.level.data.LevelSetup
 import dev.lucasnlm.antimine.common.level.data.Mark
+import dev.lucasnlm.antimine.common.level.model.AreaPalette
 import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
 import dev.lucasnlm.antimine.common.level.view.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.view.paintOnCanvas
@@ -40,6 +41,7 @@ class ShareBuilder(
         val padding = 1f
         val radius = 2f
 
+        val areaPalette = AreaPalette.fromLightTheme()
         val drawableRepository = DrawableRepository()
 
         val paintSettings = AreaPaintSettings(
@@ -79,7 +81,8 @@ class ShareBuilder(
                     drawableRepository = drawableRepository,
                     paintSettings = paintSettings,
                     markPadding = 6,
-                    minePadding = 1
+                    minePadding = 1,
+                    areaPalette = areaPalette
                 )
                 canvas.restore()
             }

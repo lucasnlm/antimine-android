@@ -14,6 +14,7 @@ import android.os.Build
 import androidx.core.view.ViewCompat
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.data.Mark
+import dev.lucasnlm.antimine.common.level.model.AreaPalette
 
 class AreaView : View {
     // Used on Wear OS
@@ -22,6 +23,7 @@ class AreaView : View {
 
     private var area: Area? = null
     private lateinit var paintSettings: AreaPaintSettings
+    private lateinit var palette: AreaPalette
     private val drawableRepository = DrawableRepository()
 
     constructor(context: Context)
@@ -45,6 +47,12 @@ class AreaView : View {
         ).firstOrNull { it } ?: false
 
         if (changed) {
+            this.palette = if (isAmbientMode) {
+                AreaPalette.fromContrast(context)
+            } else {
+                AreaPalette.fromDefault(context)
+            }
+
             this.isAmbientMode = isAmbientMode
             this.isLowBitAmbient = isLowBitAmbient
 
@@ -97,7 +105,16 @@ class AreaView : View {
             setBackgroundResource(android.R.color.transparent)
         }
 
-        area?.paintOnCanvas(context, canvas, isAmbientMode, isLowBitAmbient, isFocused, drawableRepository, paintSettings)
+        area?.paintOnCanvas(
+            context,
+            canvas,
+            isAmbientMode,
+            isLowBitAmbient,
+            isFocused,
+            drawableRepository,
+            paintSettings,
+            palette
+        )
     }
 
     private fun getRippleEffect(context: Context): Drawable? {

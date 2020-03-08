@@ -101,6 +101,12 @@ class WatchLevelFragment: DaggerFragment() {
                 if (it == GameEvent.StartNewGame) {
                     recyclerGrid.scrollToPosition(areaAdapter.itemCount / 2)
                 }
+
+                when (it) {
+                    GameEvent.ResumeGameOver, GameEvent.GameOver,
+                    GameEvent.Victory, GameEvent.ResumeVictory -> areaAdapter.setClickEnabled(false)
+                    else -> areaAdapter.setClickEnabled(true)
+                }
             })
         }
     }

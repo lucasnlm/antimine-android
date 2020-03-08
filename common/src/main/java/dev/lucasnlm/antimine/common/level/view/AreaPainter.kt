@@ -4,10 +4,10 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
-import androidx.core.content.ContextCompat
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.data.Area
 import dev.lucasnlm.antimine.common.level.data.Mark
+import dev.lucasnlm.antimine.common.level.model.AreaPalette
 import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
 
 fun Area.paintOnCanvas(context: Context,
@@ -17,6 +17,7 @@ fun Area.paintOnCanvas(context: Context,
                        isFocused: Boolean,
                        drawableRepository: DrawableRepository,
                        paintSettings: AreaPaintSettings,
+                       areaPalette: AreaPalette,
                        markPadding: Int? = null,
                        minePadding: Int? = null
 ) {
@@ -27,13 +28,13 @@ fun Area.paintOnCanvas(context: Context,
                     style = Paint.Style.STROKE
                     strokeWidth = 2.0f
                     isAntiAlias = !isLowBitAmbient
-                    color = ContextCompat.getColor(context, android.R.color.white)
+                    color = areaPalette.border
                 }
             } else {
                 painter.apply {
                     style = Paint.Style.FILL
                     isAntiAlias = !isLowBitAmbient
-                    color = ContextCompat.getColor(context, R.color.view_cover)
+                    color = areaPalette.covered
                     alpha = if(highlighted) 155 else 255
                 }
             }
@@ -79,13 +80,13 @@ fun Area.paintOnCanvas(context: Context,
                     style = Paint.Style.STROKE
                     strokeWidth = 0.5f
                     isAntiAlias = !isLowBitAmbient
-                    color = ContextCompat.getColor(context, android.R.color.white)
+                    color = areaPalette.border
                 }
             } else {
                 painter.apply {
                     style = Paint.Style.FILL
                     isAntiAlias = !isLowBitAmbient
-                    color = ContextCompat.getColor(context, R.color.view_clean)
+                    color = areaPalette.uncovered
                 }
             }
 
@@ -110,22 +111,16 @@ fun Area.paintOnCanvas(context: Context,
                 )
                 mine?.draw(canvas)
             } else if (minesAround > 0) {
-                val color = if (isAmbientMode) {
-                    R.color.ambient_color_white
-                } else {
-                    when (minesAround) {
-                        1 -> R.color.mines_around_1
-                        2 -> R.color.mines_around_2
-                        3 -> R.color.mines_around_3
-                        4 -> R.color.mines_around_4
-                        5 -> R.color.mines_around_5
-                        6 -> R.color.mines_around_6
-                        7 -> R.color.mines_around_7
-                        else -> R.color.mines_around_8
-                    }
+                painter.color = when (minesAround) {
+                    1 -> areaPalette.minesAround1
+                    2 -> areaPalette.minesAround2
+                    3 -> areaPalette.minesAround3
+                    4 -> areaPalette.minesAround4
+                    5 -> areaPalette.minesAround5
+                    6 -> areaPalette.minesAround6
+                    7 -> areaPalette.minesAround7
+                    else -> areaPalette.minesAround8
                 }
-
-                painter.color = ContextCompat.getColor(context, color)
                 drawText(canvas, painter, minesAround.toString(), paintSettings)
             }
 
@@ -137,11 +132,7 @@ fun Area.paintOnCanvas(context: Context,
                     style = Paint.Style.STROKE
                     strokeWidth = highlightWidth
                     isAntiAlias = !isLowBitAmbient
-                    color = if (isAmbientMode) {
-                        ContextCompat.getColor(context, R.color.white)
-                    } else {
-                        ContextCompat.getColor(context, R.color.highlight)
-                    }
+                    color = areaPalette.highlight
 
                     val rect = RectF(
                         rectF.left + halfWidth,
@@ -163,7 +154,7 @@ fun Area.paintOnCanvas(context: Context,
                 style = Paint.Style.STROKE
                 strokeWidth = highlightWidth
                 isAntiAlias = !isLowBitAmbient
-                color = ContextCompat.getColor(context, R.color.accent)
+                color = areaPalette.focus
             }
 
             val rect = RectF(
