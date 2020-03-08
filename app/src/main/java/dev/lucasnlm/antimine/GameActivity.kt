@@ -71,24 +71,22 @@ class GameActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
+
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(GameViewModel::class.java)
         shareViewModel = ViewModelProviders.of(this).get(ShareViewModel::class.java)
 
         bindViewModel()
-
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
-
         bindToolbarAndDrawer()
-
         loadGameFragment()
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            checkUpdate()
-        }
 
         if (InstantApps.getPackageManagerCompat(this).isInstantApp) {
             bindInstantApp()
         } else {
+            if (Build.VERSION.SDK_INT >= 21) {
+                checkUpdate()
+            }
+
             checkUseCount()
         }
     }
@@ -255,6 +253,7 @@ class GameActivity : DaggerAppCompatActivity() {
                 R.id.settings -> showSettings()
                 R.id.rate -> openRateUsLink("Drawer")
                 R.id.share_now -> shareCurrentGame()
+                R.id.install_new -> installFromInstantApp()
                 else -> handled = false
             }
 
@@ -495,9 +494,15 @@ class GameActivity : DaggerAppCompatActivity() {
         findViewById<View>(R.id.install).apply {
             visibility = View.VISIBLE
             setOnClickListener {
-                InstantApps.showInstallPrompt(this@GameActivity, null, IA_REQUEST_CODE, IA_REFERRER)
+                installFromInstantApp()
             }
         }
+
+        navigationView.menu.setGroupVisible(R.id.install_group, true)
+    }
+
+    private fun installFromInstantApp() {
+        InstantApps.showInstallPrompt(this@GameActivity, null, IA_REQUEST_CODE, IA_REFERRER)
     }
 
     private fun openRateUsLink(from: String) {

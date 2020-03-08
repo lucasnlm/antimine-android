@@ -116,7 +116,7 @@
         android:layout_gravity="start"
         android:clipToPadding="true"
         android:fitsSystemWindows="true"
-        ads:menu="@xml/nav_menu"
+        ads:menu="@menu/nav_menu"
         app:itemTextColor="?android:attr/textColorPrimary" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
