@@ -43,6 +43,7 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 - Put question mark on double long press
 - Open multiple areas by long pressing the numbers
 - Game assistant to auto-flag discovered mines
+- Share game
 - App shortcuts
 - Split screen
 - Assessability: large toachable area
@@ -56,3 +57,4 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 - Dagger
 - Room
 - Coroutines
+
