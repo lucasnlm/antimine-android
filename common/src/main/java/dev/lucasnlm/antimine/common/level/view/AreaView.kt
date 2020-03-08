@@ -59,7 +59,7 @@ class AreaView : View {
 
             if (Build.VERSION.SDK_INT >= 23) {
                 this.foreground = when {
-                    !isAmbientMode && area.isCovered -> getRippleEffect(context)
+                    !isAmbientMode && (area.isCovered || area.minesAround > 0) -> getRippleEffect(context)
                     else -> null
                 }
             }
