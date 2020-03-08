@@ -58,7 +58,8 @@
                     android:textStyle="bold"
                     android:text="@string/default_time_value"
                     tools:visibility="visible"
-                    tools:text="10:00" />
+                    tools:text="10:00"
+                    tools:targetApi="m" />
 
                 <TextView
                     android:id="@+id/minesCount"
@@ -77,7 +78,8 @@
                     android:textStyle="bold"
                     android:visibility="gone"
                     tools:visibility="visible"
-                    tools:text="99" />
+                    tools:text="99"
+                    tools:targetApi="m" />
 
             </LinearLayout>
 
@@ -86,6 +88,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/toolbar" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/install"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/install"
+                android:layout_margin="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"
+                app:backgroundTint="@color/accent"
+                app:pressedTranslationZ="6dp"
+                app:elevation="10dp"
+                app:srcCompat="@drawable/install"
+                tools:visibility="visible"/>
 
         </RelativeLayout>
 
@@ -98,7 +116,7 @@
         android:layout_gravity="start"
         android:clipToPadding="true"
         android:fitsSystemWindows="true"
-        ads:menu="@xml/nav_menu"
+        ads:menu="@menu/nav_menu"
         app:itemTextColor="?android:attr/textColorPrimary" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

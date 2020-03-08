@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <item
         android:id="@+id/nav_difficulty"
         android:title="@string/levelSetup">
@@ -35,6 +36,19 @@
 
         </menu>
     </item>
+
+    <group
+        android:id="@+id/install_group"
+        android:visible="false"
+        tools:visible="true">
+
+        <item
+            android:id="@+id/install_new"
+            android:checkable="false"
+            android:icon="@drawable/install"
+            android:title="@string/install" />
+
+    </group>
 
     <group
         android:id="@+id/social_group">

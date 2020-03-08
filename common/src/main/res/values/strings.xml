@@ -3,6 +3,7 @@
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">You have to clear a rectangular board containing hidden "mines" without detonating any of them.</string>
     <string name="remaining_mines">Remaining mines</string>
+    <string name="install">Install</string>
     <string name="levelSetup">Difficulty</string>
     <string name="standard">Standard</string>
     <string name="beginner">Beginner</string>
