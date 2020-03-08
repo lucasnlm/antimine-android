@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class WatchLevelFragment: DaggerFragment() {
+class WatchLevelFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory
 
@@ -100,6 +100,12 @@ class WatchLevelFragment: DaggerFragment() {
             eventObserver.observe(viewLifecycleOwner, Observer {
                 if (it == GameEvent.StartNewGame) {
                     recyclerGrid.scrollToPosition(areaAdapter.itemCount / 2)
+                }
+
+                when (it) {
+                    GameEvent.ResumeGameOver, GameEvent.GameOver,
+                    GameEvent.Victory, GameEvent.ResumeVictory -> areaAdapter.setClickEnabled(false)
+                    else -> areaAdapter.setClickEnabled(true)
                 }
             })
         }

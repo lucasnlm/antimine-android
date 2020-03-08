@@ -5,7 +5,8 @@ import dev.lucasnlm.antimine.common.level.data.GameStats
 import dev.lucasnlm.antimine.common.level.data.LevelSetup
 
 sealed class Event(
-    val title: String, val extra: Map<String, String> = mapOf()
+    val title: String,
+    val extra: Map<String, String> = mapOf()
 ) {
     class Open : Event("Open game")
 

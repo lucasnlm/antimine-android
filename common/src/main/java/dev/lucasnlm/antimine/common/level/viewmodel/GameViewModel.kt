@@ -5,7 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.common.level.GameModeFactory
 import dev.lucasnlm.antimine.common.level.LevelFacade
-import dev.lucasnlm.antimine.common.level.data.*
+import dev.lucasnlm.antimine.common.level.data.Area
+import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
+import dev.lucasnlm.antimine.common.level.data.GameEvent
+import dev.lucasnlm.antimine.common.level.data.LevelSetup
 import dev.lucasnlm.antimine.common.level.database.data.Save
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
@@ -176,7 +179,7 @@ class GameViewModel(
             field.postValue(levelFacade.field.toList())
         }
 
-        if (preferencesRepository.useFlagAssistant() && !levelFacade.hasAnyMineExploded()){
+        if (preferencesRepository.useFlagAssistant() && !levelFacade.hasAnyMineExploded()) {
             levelFacade.runFlagAssistant()
         }
 

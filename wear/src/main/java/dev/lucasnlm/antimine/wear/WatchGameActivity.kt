@@ -151,8 +151,6 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
 
     private fun onGameEvent(event: GameEvent) {
         when (event) {
-            GameEvent.ResumeGame -> {
-            }
             GameEvent.StartNewGame -> {
                 gameStatus = GameStatus.PreGame
             }
@@ -160,13 +158,13 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
                 gameStatus = GameStatus.Running
             }
             GameEvent.Victory -> {
-                gameStatus = GameStatus.Over
+                gameStatus = GameStatus.Over()
 
                 messageText.text = getString(R.string.victory)
                 waitAndShowNewGameButton()
             }
             GameEvent.GameOver -> {
-                gameStatus = GameStatus.Over
+                gameStatus = GameStatus.Over()
                 viewModel.stopClock()
                 viewModel.gameOver()
 
@@ -174,21 +172,23 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
                 waitAndShowNewGameButton()
             }
             GameEvent.ResumeVictory -> {
-                gameStatus = GameStatus.Over
+                gameStatus = GameStatus.Over()
                 messageText.text = getString(R.string.victory)
+                waitAndShowNewGameButton(0L)
             }
             GameEvent.ResumeGameOver -> {
-                gameStatus = GameStatus.Over
+                gameStatus = GameStatus.Over()
                 messageText.text = getString(R.string.game_over)
+                waitAndShowNewGameButton(0L)
             }
             else -> {
             }
         }
     }
 
-    private fun waitAndShowNewGameButton() {
+    private fun waitAndShowNewGameButton(wait: Long = DateUtils.SECOND_IN_MILLIS) {
         HandlerCompat.postDelayed(Handler(), {
-            if (this.gameStatus == GameStatus.Over && !isFinishing) {
+            if (this.gameStatus is GameStatus.Over && !isFinishing) {
                 newGame.visibility = View.VISIBLE
                 newGame.setOnClickListener {
                     it.visibility = View.GONE
@@ -197,7 +197,7 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
                     }
                 }
             }
-        }, null, DateUtils.SECOND_IN_MILLIS)
+        }, null, wait)
     }
 
     override fun getAmbientCallback(): AmbientCallback = ambientMode

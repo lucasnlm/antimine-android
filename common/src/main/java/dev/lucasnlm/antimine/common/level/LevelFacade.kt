@@ -6,7 +6,7 @@ import dev.lucasnlm.antimine.common.level.data.GameStats
 import dev.lucasnlm.antimine.common.level.data.Mark
 import dev.lucasnlm.antimine.common.level.database.data.Save
 import dev.lucasnlm.antimine.common.level.database.data.SaveStatus
-import java.util.*
+import java.util.Random
 import kotlin.math.floor
 
 class LevelFacade {
@@ -172,7 +172,7 @@ class LevelFacade {
             .filter {
                 it.mark == Mark.None
             }
-            .map{
+            .map {
                 openField(it)
                 it.id
             }

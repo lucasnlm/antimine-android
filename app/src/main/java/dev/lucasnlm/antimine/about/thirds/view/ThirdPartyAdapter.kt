@@ -17,8 +17,9 @@ internal class ThirdPartyAdapter(
     override fun getItemCount(): Int = thirdParties.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThirdPartyItemHolder {
-        val view = LayoutInflater.from(parent.context)
-                                 .inflate(R.layout.view_third_party, parent, false)
+        val view = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.view_third_party, parent, false)
         return ThirdPartyItemHolder(view)
     }
 

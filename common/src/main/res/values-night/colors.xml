@@ -6,23 +6,19 @@
     <color name="primary">#212121</color>
     <color name="primary_dark">#212121</color>
 
-    <color name="ambient_color_white">#FFFFFF</color>
-
-    <color name="shortcut_color">#527F8D</color>
-
-    <color name="mines_arround_1">#d5d2cc</color>
-    <color name="mines_arround_2">#d5d2cc</color>
-    <color name="mines_arround_3">#d5d2cc</color>
-    <color name="mines_arround_4">#d5d2cc</color>
-    <color name="mines_arround_5">#d5d2cc</color>
-    <color name="mines_arround_6">#d5d2cc</color>
-    <color name="mines_arround_7">#d5d2cc</color>
-    <color name="mines_arround_8">#d5d2cc</color>
+    <color name="mines_around_1">#d5d2cc</color>
+    <color name="mines_around_2">#d5d2cc</color>
+    <color name="mines_around_3">#d5d2cc</color>
+    <color name="mines_around_4">#d5d2cc</color>
+    <color name="mines_around_5">#d5d2cc</color>
+    <color name="mines_around_6">#d5d2cc</color>
+    <color name="mines_around_7">#d5d2cc</color>
+    <color name="mines_around_8">#d5d2cc</color>
 
     <color name="launcher_background">#FCC216</color>
 
     <color name="accent">#FFFFFF</color>
-    <color name="text_color">#2B2824</color>
+    <color name="text_color">#FFFFFF</color>
     <color name="highlight">#FFFFFF</color>
 
     <color name="stroke_cover">#757575</color>
