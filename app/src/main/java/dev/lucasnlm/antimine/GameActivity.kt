@@ -25,14 +25,12 @@ import androidx.preference.PreferenceManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
-import dev.lucasnlm.antimine.about.AboutActivity
-import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dagger.android.support.DaggerAppCompatActivity
+import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
 import dev.lucasnlm.antimine.common.level.data.GameEvent
 import dev.lucasnlm.antimine.common.level.data.GameStatus
 import dev.lucasnlm.antimine.common.level.data.Mark
-
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
@@ -42,6 +40,7 @@ import dev.lucasnlm.antimine.core.utils.isDarkModeEnabled
 import dev.lucasnlm.antimine.level.view.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
+import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.GlobalScope
@@ -441,9 +440,7 @@ class GameActivity : DaggerAppCompatActivity() {
 
                 waitAndShowEndGameDialog(false)
             }
-            else -> {
-
-            }
+            else -> { }
         }
     }
 
@@ -455,8 +452,8 @@ class GameActivity : DaggerAppCompatActivity() {
         val appUpdateInfoTask = appUpdateManager.appUpdateInfo
 
         appUpdateInfoTask.addOnSuccessListener { info ->
-            if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && info.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+            if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
+                info.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
             ) {
                 try {
                     appUpdateManager.startUpdateFlowForResult(
@@ -467,7 +464,6 @@ class GameActivity : DaggerAppCompatActivity() {
                 }
             }
         }
-
     }
 
     /**

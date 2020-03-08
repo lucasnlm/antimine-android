@@ -23,7 +23,7 @@ class AboutActivity : AppCompatActivity() {
         )
 
         thirdsParties.setOnClickListener { openThirdParties() }
-        sourceCode.setOnClickListener{ openSourceCode() }
+        sourceCode.setOnClickListener { openSourceCode() }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =

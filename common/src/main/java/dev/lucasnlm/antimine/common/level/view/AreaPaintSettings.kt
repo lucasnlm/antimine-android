@@ -8,4 +8,3 @@ data class AreaPaintSettings(
     val rectF: RectF,
     val radius: Float
 )
-

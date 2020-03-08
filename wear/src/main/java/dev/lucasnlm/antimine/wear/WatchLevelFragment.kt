@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class WatchLevelFragment: DaggerFragment() {
+class WatchLevelFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory
 

@@ -5,8 +5,9 @@ sealed class GameStatus {
 
     object Running : GameStatus()
 
-    class Over(val rightMines: Int = 0,
-               val totalMines: Int = 0,
-               val time: Long = 0
+    class Over(
+        val rightMines: Int = 0,
+        val totalMines: Int = 0,
+        val time: Long = 0
     ) : GameStatus()
 }

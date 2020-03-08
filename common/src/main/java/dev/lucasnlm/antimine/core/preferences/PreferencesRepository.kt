@@ -45,5 +45,4 @@ class PreferencesRepository(
 
     override fun useLargeAreas(): Boolean =
         getBoolean("preference_large_area", false)
-
 }

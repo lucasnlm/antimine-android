@@ -46,7 +46,11 @@ class AreaAdapter(
     override fun getItemCount() = field.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FieldViewHolder {
-        val layout = if (viewModel.useAccessibilityMode()) { R.layout.view_accessibility_field } else { R.layout.view_field }
+        val layout = if (viewModel.useAccessibilityMode()) {
+            R.layout.view_accessibility_field
+        } else {
+            R.layout.view_field
+        }
         val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
         val holder = FieldViewHolder(view)
 

@@ -18,7 +18,6 @@ import org.junit.Test
 import java.io.File
 import java.io.FileOutputStream
 
-
 class AreaScreenshot {
 
     private lateinit var context: Context
@@ -99,7 +98,6 @@ class AreaScreenshot {
         screenshotTest(area, "covered_ambient.png", true)
     }
 
-
     @Test
     fun testUncoveredArea() {
         val area = Area(0, 0, 0, isCovered = false)
@@ -158,7 +156,6 @@ class AreaScreenshot {
         val area = Area(0, 0, 0, isCovered = true, mark = Mark.Question)
         screenshotTest(area, "covered_question_ambient.png", true)
     }
-
 
     @Test
     fun testCoveredAreaHighlighted() {

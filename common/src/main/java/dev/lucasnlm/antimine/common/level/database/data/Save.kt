@@ -31,6 +31,3 @@ data class Save(
     @ColumnInfo(name = "field")
     val field: List<Area>
 )
-
-
-

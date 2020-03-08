@@ -10,16 +10,17 @@ import dev.lucasnlm.antimine.common.level.data.Mark
 import dev.lucasnlm.antimine.common.level.model.AreaPalette
 import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
 
-fun Area.paintOnCanvas(context: Context,
-                       canvas: Canvas,
-                       isAmbientMode: Boolean,
-                       isLowBitAmbient: Boolean,
-                       isFocused: Boolean,
-                       drawableRepository: DrawableRepository,
-                       paintSettings: AreaPaintSettings,
-                       areaPalette: AreaPalette,
-                       markPadding: Int? = null,
-                       minePadding: Int? = null
+fun Area.paintOnCanvas(
+    context: Context,
+    canvas: Canvas,
+    isAmbientMode: Boolean,
+    isLowBitAmbient: Boolean,
+    isFocused: Boolean,
+    drawableRepository: DrawableRepository,
+    paintSettings: AreaPaintSettings,
+    areaPalette: AreaPalette,
+    markPadding: Int? = null,
+    minePadding: Int? = null
 ) {
     paintSettings.run {
         if (isCovered) {
@@ -35,7 +36,7 @@ fun Area.paintOnCanvas(context: Context,
                     style = Paint.Style.FILL
                     isAntiAlias = !isLowBitAmbient
                     color = areaPalette.covered
-                    alpha = if(highlighted) 155 else 255
+                    alpha = if (highlighted) 155 else 255
                 }
             }
 

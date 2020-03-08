@@ -49,7 +49,7 @@ class ClockTest {
         val mockTimer = mock<Timer>()
         val clock = MockClock(mockTimer)
 
-        clock.start {  }
+        clock.start { }
         assertFalse(clock.isStopped)
         clock.stop()
         assertTrue(clock.isStopped)

@@ -176,7 +176,7 @@ class GameViewModel(
             field.postValue(levelFacade.field.toList())
         }
 
-        if (preferencesRepository.useFlagAssistant() && !levelFacade.hasAnyMineExploded()){
+        if (preferencesRepository.useFlagAssistant() && !levelFacade.hasAnyMineExploded()) {
             levelFacade.runFlagAssistant()
         }
 

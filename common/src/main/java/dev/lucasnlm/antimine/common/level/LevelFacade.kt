@@ -172,7 +172,7 @@ class LevelFacade {
             .filter {
                 it.mark == Mark.None
             }
-            .map{
+            .map {
                 openField(it)
                 it.id
             }

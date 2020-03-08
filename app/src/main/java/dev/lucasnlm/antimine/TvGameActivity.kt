@@ -81,7 +81,7 @@ class TvGameActivity : DaggerAppCompatActivity() {
             }
         })
         difficulty.observe(this@TvGameActivity, Observer {
-            //onChangeDifficulty(it)
+            // onChangeDifficulty(it)
         })
     }
 
@@ -287,9 +287,7 @@ class TvGameActivity : DaggerAppCompatActivity() {
 
                 waitAndShowConfirmNewGame()
             }
-            else -> {
-
-            }
+            else -> { }
         }
     }
 
@@ -298,8 +296,8 @@ class TvGameActivity : DaggerAppCompatActivity() {
         val appUpdateInfoTask = appUpdateManager.appUpdateInfo
 
         appUpdateInfoTask.addOnSuccessListener { info ->
-            if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && info.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+            if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
+                info.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
                 try {
                     appUpdateManager.startUpdateFlowForResult(
                         info, AppUpdateType.FLEXIBLE, this, 1)
@@ -308,11 +306,9 @@ class TvGameActivity : DaggerAppCompatActivity() {
                 }
             }
         }
-
     }
 
     companion object {
         const val TAG = "GameActivity"
-        const val PREFERENCE_FIRST_USE = "preference_first_use"
     }
 }

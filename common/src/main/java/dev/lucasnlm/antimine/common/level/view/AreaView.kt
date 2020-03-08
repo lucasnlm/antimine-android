@@ -26,14 +26,11 @@ class AreaView : View {
     private lateinit var palette: AreaPalette
     private val drawableRepository = DrawableRepository()
 
-    constructor(context: Context)
-            : super(context)
+    constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet?)
-            : super(context, attrs)
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
-            : super(context, attrs, defStyleAttr)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     fun bindField(area: Area, isAmbientMode: Boolean, isLowBitAmbient: Boolean, paintSettings: AreaPaintSettings) {
         this.paintSettings = paintSettings
@@ -124,6 +121,4 @@ class AreaView : View {
         )
         return ContextCompat.getDrawable(context, outValue.resourceId)
     }
-
-
 }
