@@ -170,7 +170,7 @@ class LevelFacade {
         getArea(index)
             .findNeighbors()
             .filter {
-                it.mark == Mark.None
+                it.mark == Mark.None || it.mark == Mark.PurposefulNone
             }
             .map {
                 openField(it)

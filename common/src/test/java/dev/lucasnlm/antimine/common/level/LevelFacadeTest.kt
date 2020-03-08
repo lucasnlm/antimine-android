@@ -274,6 +274,33 @@ class LevelFacadeTest {
     }
 
     @Test
+    fun testOpenNeighbors() {
+        levelFacadeOf(5, 5, 24, 200L).run {
+            plantMinesExcept(12)
+            clickArea(12)
+            assertEquals(
+                listOf(
+                    1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1,
+                    1, 1, 0, 1, 1,
+                    1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1),
+                field.map { if (it.isCovered) 1 else 0 }.toList()
+            )
+            openNeighbors(12)
+            assertEquals(
+                listOf(
+                    1, 1, 1, 1, 1,
+                    1, 0, 0, 0, 1,
+                    1, 0, 0, 0, 1,
+                    1, 0, 0, 0, 1,
+                    1, 1, 1, 1, 1),
+                field.map { if (it.isCovered) 1 else 0 }.toList()
+            )
+        }
+    }
+
+    @Test
     fun testOpenSafeZone() {
         levelFacadeOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
