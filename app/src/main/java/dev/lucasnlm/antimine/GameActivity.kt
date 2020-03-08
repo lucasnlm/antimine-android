@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
+import com.google.android.gms.instantapps.InstantApps
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
@@ -85,7 +86,11 @@ class GameActivity : DaggerAppCompatActivity() {
             checkUpdate()
         }
 
-        checkUseCount()
+        if (InstantApps.getPackageManagerCompat(this).isInstantApp) {
+            bindInstantApp()
+        } else {
+            checkUseCount()
+        }
     }
 
     private fun bindViewModel() = viewModel.apply {
@@ -486,6 +491,15 @@ class GameActivity : DaggerAppCompatActivity() {
         }
     }
 
+    private fun bindInstantApp() {
+        findViewById<View>(R.id.install).apply {
+            visibility = View.VISIBLE
+            setOnClickListener {
+                InstantApps.showInstallPrompt(this@GameActivity, null, IA_REQUEST_CODE, IA_REFERRER)
+            }
+        }
+    }
+
     private fun openRateUsLink(from: String) {
         try {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
@@ -503,9 +517,12 @@ class GameActivity : DaggerAppCompatActivity() {
     }
 
     companion object {
-        const val TAG = "GameActivity"
+        val TAG = GameActivity::class.simpleName
         const val PREFERENCE_FIRST_USE = "preference_first_use"
         const val PREFERENCE_USE_COUNT = "preference_use_count"
         const val PREFERENCE_REQUEST_RATING = "preference_request_rating"
+
+        const val IA_REFERRER = "InstallApiActivity"
+        const val IA_REQUEST_CODE = 5
     }
 }

@@ -15,6 +15,7 @@ android {
         versionCode 45
         versionName '6.1.0'
 
+        vectorDrawables.useSupportLibrary true
         resConfigs 'en', 'pt', 'es', 'zh'
     }
 

@@ -3,6 +3,7 @@
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Encontre todas as minas escondidas no campo minado.</string>
     <string name="remaining_mines">Minas Restantes</string>
+    <string name="install">Instalar</string>
     <string name="levelSetup">Dificuldade</string>
     <string name="standard">Padrão</string>
     <string name="beginner">Iniciante</string>
