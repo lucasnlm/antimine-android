@@ -85,15 +85,15 @@ class AreaAdapter(
     }
 
     companion object {
-        private const val TAG = "AreaAdapter"
+        private val TAG = AreaAdapter::class.simpleName
 
-        private fun createAreaPaintSettings(context: Context, useLargeArea: Boolean): AreaPaintSettings {
+        fun createAreaPaintSettings(context: Context, useLargeArea: Boolean): AreaPaintSettings {
             val resources = context.resources
             val padding = resources.getDimension(R.dimen.field_padding)
             val size = if (useLargeArea) {
-                resources.getDimension(R.dimen.accessible_field_size).toInt()
+                resources.getDimension(R.dimen.accessible_field_size)
             } else {
-                resources.getDimension(R.dimen.field_size).toInt()
+                resources.getDimension(R.dimen.field_size)
             }
             return AreaPaintSettings(
                 Paint().apply {
@@ -104,7 +104,7 @@ class AreaAdapter(
                     typeface = Typeface.DEFAULT_BOLD
                     textAlign = Paint.Align.CENTER
                 },
-                RectF(padding, padding, size - padding, size - padding),
+                RectF(0.0f, 0.0f, size, size),
                 resources.getDimension(R.dimen.field_radius)
             )
         }

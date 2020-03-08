@@ -4,6 +4,7 @@
     android:layout_width="@dimen/accessible_field_size"
     android:layout_height="@dimen/accessible_field_size"
     android:focusable="true"
+    android:layout_margin="@dimen/field_padding"
     android:hapticFeedbackEnabled="true">
 
     <dev.lucasnlm.antimine.common.level.view.AreaView

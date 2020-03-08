@@ -130,9 +130,12 @@ fun Area.paintOnCanvas(context: Context,
             }
 
             if (highlighted) {
+                val highlightWidth = context.resources.getDimension(R.dimen.highlight_stroke)
+                val halfWidth = highlightWidth * 0.5f
+
                 painter.apply {
                     style = Paint.Style.STROKE
-                    strokeWidth = 2.0f
+                    strokeWidth = highlightWidth
                     isAntiAlias = !isLowBitAmbient
                     color = if (isAmbientMode) {
                         ContextCompat.getColor(context, R.color.white)
@@ -140,20 +143,37 @@ fun Area.paintOnCanvas(context: Context,
                         ContextCompat.getColor(context, R.color.highlight)
                     }
 
-                    canvas.drawRoundRect(rectF, radius, radius, this)
+                    val rect = RectF(
+                        rectF.left + halfWidth,
+                        rectF.top + halfWidth,
+                        rectF.right - halfWidth,
+                        rectF.bottom - halfWidth
+                    )
+
+                    canvas.drawRoundRect(rect, radius, radius, this)
                 }
             }
         }
 
         if (isFocused) {
+            val highlightWidth = context.resources.getDimension(R.dimen.highlight_stroke)
+            val halfWidth = highlightWidth * 0.5f
+
             painter.apply {
                 style = Paint.Style.STROKE
-                strokeWidth = 4f
+                strokeWidth = highlightWidth
                 isAntiAlias = !isLowBitAmbient
-                color = ContextCompat.getColor(context, android.R.color.holo_orange_dark)
+                color = ContextCompat.getColor(context, R.color.accent)
             }
 
-            canvas.drawRoundRect(rectF, radius, radius, painter)
+            val rect = RectF(
+                rectF.left + halfWidth,
+                rectF.top + halfWidth,
+                rectF.right - halfWidth,
+                rectF.bottom - halfWidth
+            )
+
+            canvas.drawRoundRect(rect, radius, radius * 0.25f, painter)
         }
     }
 }
