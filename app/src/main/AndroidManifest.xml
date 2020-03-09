@@ -1,37 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="dev.lucasnlm.antimine"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
-    android:installLocation="auto"
-    xmlns:dist="http://schemas.android.com/apk/distribution">
+    package="dev.lucasnlm.antimine"
+    android:installLocation="auto">
 
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:smallScreens="true"
-        android:xlargeScreens="true"/>
+        android:xlargeScreens="true" />
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
 
-    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
-    <uses-feature android:name="android.hardware.faketouch" android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.faketouch"
+        android:required="false" />
 
     <dist:module dist:instant="true" />
 
     <application
+        android:name="dev.lucasnlm.antimine.MainApplication"
         android:allowBackup="true"
         android:allowClearUserData="true"
-        android:fullBackupOnly="true"
         android:fullBackupContent="@xml/backup_rules"
+        android:fullBackupOnly="true"
         android:hardwareAccelerated="true"
-        android:name="dev.lucasnlm.antimine.MainApplication"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:isGame="true"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="lollipop">
@@ -41,8 +45,8 @@
             android:theme="@style/Theme.Splash">
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
             <meta-data
@@ -55,9 +59,26 @@
             android:configChanges="screenSize|orientation"
             android:theme="@style/AppTheme.NoActionBar">
 
+            <tools:validation testUrl="https://www.lucasnlm.dev/antimine" />
+            <tools:validation testUrl="http://www.lucasnlm.dev/antimine" />
+            <tools:validation testUrl="https://www.lucasnlm.dev/" />
+            <tools:validation testUrl="http://www.lucasnlm.dev/" />
+            <tools:validation testUrl="www.lucasnlm.dev" />
+
             <meta-data
                 android:name="default-url"
                 android:value="https://www.lucasnlm.dev/antimine" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="new-game"
+                    android:scheme="antimine" />
+            </intent-filter>
 
             <intent-filter
                 android:order="1"
@@ -65,50 +86,52 @@
                 tools:targetApi="m">
 
                 <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
 
-                <data
-                    android:host="lucasnlm.dev"
-                    android:scheme="https" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="http" />
-            </intent-filter>
+                <data android:scheme="https" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="antimine" android:host="new-game" />
-            </intent-filter>
+                <data
+                    android:host="www.lucasnlm.dev" />
 
+                <data
+                    android:host="www.lucasnlm.dev"
+                    android:path="/" />
+
+                <data
+                    android:host="www.lucasnlm.dev"
+                    android:path="/antimine" />
+            </intent-filter>
         </activity>
 
-        <activity android:name="dev.lucasnlm.antimine.TvGameActivity"
+        <activity
+            android:name="dev.lucasnlm.antimine.TvGameActivity"
             android:configChanges="screenSize|orientation"
             android:theme="@style/AppTheme.NoActionBar">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN"/>-->
-<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
-<!--            </intent-filter>-->
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN"/>-->
+            <!--                <category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--            </intent-filter>-->
 
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
 
         <activity
             android:name="dev.lucasnlm.antimine.about.thirds.ThirdPartiesActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name="dev.lucasnlm.antimine.about.TextActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name="dev.lucasnlm.antimine.about.AboutActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name="dev.lucasnlm.antimine.preferences.PreferencesActivity"
@@ -117,7 +140,7 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.lucasnlm.antimine.GameActivity"/>
+                android:value="dev.lucasnlm.antimine.GameActivity" />
 
         </activity>
 
@@ -126,10 +149,10 @@
             android:authorities="@string/app_file_provider"
             android:exported="false"
             android:grantUriPermissions="true">
+
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths">
-            </meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
     </application>
 </manifest>
