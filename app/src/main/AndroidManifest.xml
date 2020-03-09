@@ -63,7 +63,6 @@
             <tools:validation testUrl="http://www.lucasnlm.dev/antimine" />
             <tools:validation testUrl="https://www.lucasnlm.dev/" />
             <tools:validation testUrl="http://www.lucasnlm.dev/" />
-            <tools:validation testUrl="www.lucasnlm.dev" />
 
             <meta-data
                 android:name="default-url"
