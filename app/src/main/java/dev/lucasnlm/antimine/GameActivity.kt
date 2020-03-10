@@ -378,17 +378,26 @@ class GameActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private fun waitAndShowEndGameDialog(victory: Boolean, await: Long = DateUtils.SECOND_IN_MILLIS) {
-        if (supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG) == null) {
-            postDelayed(Handler(), {
-                if (gameStatus is GameStatus.Over && !isFinishing) {
-                    val over = gameStatus as GameStatus.Over
-                    EndGameDialogFragment.newInstance(victory, over.rightMines, over.totalMines, over.time).apply {
-                        showAllowingStateLoss(supportFragmentManager, EndGameDialogFragment.TAG)
-                    }
+    private fun showEndGameDialog(victory: Boolean) {
+        if (gameStatus is GameStatus.Over && !isFinishing) {
+            if (supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG) == null) {
+                val over = gameStatus as GameStatus.Over
+                EndGameDialogFragment.newInstance(victory, over.rightMines, over.totalMines, over.time).apply {
+                    showAllowingStateLoss(supportFragmentManager, EndGameDialogFragment.TAG)
                 }
-            }, null, await)
+            }
         }
+    }
+
+    private fun waitAndShowEndGameDialog(victory: Boolean, await: Long = DateUtils.SECOND_IN_MILLIS) {
+        if (await > 0L) {
+            postDelayed(Handler(), {
+                showEndGameDialog(victory)
+            }, null, await)
+        } else {
+            showEndGameDialog(victory)
+        }
+
     }
 
     private fun changeDifficulty(newDifficulty: DifficultyPreset) {
