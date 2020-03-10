@@ -99,7 +99,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:visibility="gone"
-                app:backgroundTint="@color/accent"
+                app:backgroundTint="@color/install_button"
                 app:pressedTranslationZ="6dp"
                 app:elevation="10dp"
                 app:srcCompat="@drawable/install"

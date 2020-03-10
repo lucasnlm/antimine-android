@@ -56,7 +56,9 @@
         <item
             android:id="@+id/share_now"
             android:checkable="false"
-            android:title="@string/share_menu" />
+            android:visible="false"
+            android:title="@string/share_menu"
+            tools:visible="true" />
 
         <item
             android:id="@+id/rate"

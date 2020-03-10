@@ -22,7 +22,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
-import com.google.android.gms.instantapps.InstantApps
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
@@ -38,6 +37,7 @@ import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.Event
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.utils.isDarkModeEnabled
+import dev.lucasnlm.antimine.instant.InstantAppManager
 import dev.lucasnlm.antimine.level.view.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
@@ -58,6 +58,9 @@ class GameActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var analyticsManager: AnalyticsManager
+
+    @Inject
+    lateinit var instantAppManager: InstantAppManager
 
     private lateinit var viewModel: GameViewModel
     private lateinit var shareViewModel: ShareViewModel
@@ -80,7 +83,7 @@ class GameActivity : DaggerAppCompatActivity() {
         bindToolbarAndDrawer()
         loadGameFragment()
 
-        if (InstantApps.getPackageManagerCompat(this).isInstantApp) {
+        if (instantAppManager.isEnabled()) {
             bindInstantApp()
         } else {
             if (Build.VERSION.SDK_INT >= 21) {
@@ -263,6 +266,8 @@ class GameActivity : DaggerAppCompatActivity() {
 
             handled
         }
+
+        navigationView.menu.findItem(R.id.share_now).isVisible = instantAppManager.isNotEnabled()
 
         if (preferencesRepository.getBoolean(PREFERENCE_FIRST_USE, false)) {
             drawer.openDrawer(GravityCompat.START)
@@ -502,7 +507,7 @@ class GameActivity : DaggerAppCompatActivity() {
     }
 
     private fun installFromInstantApp() {
-        InstantApps.showInstallPrompt(this@GameActivity, null, IA_REQUEST_CODE, IA_REFERRER)
+        instantAppManager.showInstallPrompt(this@GameActivity, null, IA_REQUEST_CODE, IA_REFERRER)
     }
 
     private fun openRateUsLink(from: String) {

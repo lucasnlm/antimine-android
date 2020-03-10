@@ -18,6 +18,7 @@
     <color name="launcher_background">#FCC216</color>
 
     <color name="accent">#FFFFFF</color>
+    <color name="install_button">#E65100</color>
     <color name="text_color">#FFFFFF</color>
     <color name="highlight">#FFFFFF</color>
 

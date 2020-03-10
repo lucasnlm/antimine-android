@@ -11,6 +11,7 @@ import dagger.android.support.DaggerAppCompatDialogFragment
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
+import dev.lucasnlm.antimine.instant.InstantAppManager
 import dev.lucasnlm.antimine.level.viewmodel.EngGameDialogViewModel
 import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
 import kotlinx.coroutines.GlobalScope
@@ -21,6 +22,9 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
 
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory
+
+    @Inject
+    lateinit var instantAppManager: InstantAppManager
 
     private lateinit var endGameViewModel: EngGameDialogViewModel
     private lateinit var viewModel: GameViewModel
@@ -83,12 +87,20 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
                 }
             }
 
-            setNeutralButton(R.string.share) { _, _ ->
-                val setup = viewModel.levelSetup.value
-                val field = viewModel.field.value
+            if (instantAppManager.isEnabled()) {
+                setNeutralButton(R.string.install) { _, _ ->
+                    activity?.run {
+                        instantAppManager.showInstallPrompt(this, null, 0, null)
+                    }
+                }
+            } else {
+                setNeutralButton(R.string.share) { _, _ ->
+                    val setup = viewModel.levelSetup.value
+                    val field = viewModel.field.value
 
-                GlobalScope.launch {
-                    shareViewModel.share(setup, field, time)
+                    GlobalScope.launch {
+                        shareViewModel.share(setup, field, time)
+                    }
                 }
             }
         }.create()
