@@ -22,8 +22,8 @@ class UnlockedHorizontalScrollView : HorizontalScrollView {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean =
-        super.onTouchEvent(event) or recyclerView!!.onTouchEvent(event)
+        super.onTouchEvent(event) || (recyclerView?.onTouchEvent(event) ?: false)
 
     override fun onInterceptTouchEvent(event: MotionEvent): Boolean =
-        super.onInterceptTouchEvent(event) or recyclerView!!.onInterceptTouchEvent(event)
+        super.onInterceptTouchEvent(event) || (recyclerView?.onInterceptTouchEvent(event) ?: false)
 }
