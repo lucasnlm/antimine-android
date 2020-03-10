@@ -56,6 +56,7 @@
 
         <activity
             android:name="dev.lucasnlm.antimine.GameActivity"
+            android:saveEnabled="false"
             android:configChanges="screenSize|orientation"
             android:theme="@style/AppTheme.NoActionBar">
 
