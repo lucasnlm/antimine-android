@@ -1,5 +1,8 @@
 package dev.lucasnlm.antimine.common.level.models
 
+import androidx.annotation.Keep
+
+@Keep
 data class Area(
     val id: Int,
     val posX: Int,
