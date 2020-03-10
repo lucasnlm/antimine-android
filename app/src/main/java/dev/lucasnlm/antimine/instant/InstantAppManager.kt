@@ -14,6 +14,4 @@ class InstantAppManager(
 
     fun showInstallPrompt(activity: Activity, intent: Intent?, requestCode: Int, referrer: String?) =
         InstantApps.showInstallPrompt(activity, intent, requestCode, referrer)
-
 }
-
