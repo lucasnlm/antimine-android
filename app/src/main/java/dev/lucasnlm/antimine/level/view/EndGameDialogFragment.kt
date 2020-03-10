@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.DaggerAppCompatDialogFragment
 import dev.lucasnlm.antimine.R
@@ -48,6 +49,12 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
         time = arguments?.getLong(DIALOG_TIME) ?: 0L
         rightMines = arguments?.getInt(DIALOG_RIGHT_MINES) ?: 0
         totalMines = arguments?.getInt(DIALOG_TOTAL_MINES) ?: 0
+    }
+
+    fun showAllowingStateLoss(manager: FragmentManager, tag: String?) {
+        val fragmentTransaction = manager.beginTransaction()
+        fragmentTransaction.add(this, tag)
+        fragmentTransaction.commitAllowingStateLoss()
     }
 
     @SuppressLint("InflateParams")

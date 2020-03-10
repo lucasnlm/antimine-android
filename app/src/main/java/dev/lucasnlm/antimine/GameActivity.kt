@@ -384,7 +384,7 @@ class GameActivity : DaggerAppCompatActivity() {
                 if (gameStatus is GameStatus.Over && !isFinishing) {
                     val over = gameStatus as GameStatus.Over
                     EndGameDialogFragment.newInstance(victory, over.rightMines, over.totalMines, over.time).apply {
-                        show(supportFragmentManager, EndGameDialogFragment.TAG)
+                        showAllowingStateLoss(supportFragmentManager, EndGameDialogFragment.TAG)
                     }
                 }
             }, null, await)
