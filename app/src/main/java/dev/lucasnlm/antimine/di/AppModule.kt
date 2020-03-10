@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import dev.lucasnlm.antimine.instant.InstantAppManager
 
 @Module
 class AppModule(
@@ -11,4 +12,7 @@ class AppModule(
 ) {
     @Provides
     fun provideContext(): Context = application.applicationContext
+
+    @Provides
+    fun provideInstantAppManager(): InstantAppManager = InstantAppManager(application.applicationContext)
 }
