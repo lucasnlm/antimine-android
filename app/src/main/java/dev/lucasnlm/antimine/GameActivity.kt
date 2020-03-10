@@ -397,7 +397,6 @@ class GameActivity : DaggerAppCompatActivity() {
         } else {
             showEndGameDialog(victory)
         }
-
     }
 
     private fun changeDifficulty(newDifficulty: DifficultyPreset) {
