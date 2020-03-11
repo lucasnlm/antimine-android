@@ -5,15 +5,15 @@ apply plugin: 'io.fabric'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion buildVersion.targetSdk
 
     defaultConfig {
-        applicationId 'dev.lucasnlm.antimine'
-        minSdkVersion 16
-        targetSdkVersion 29
+        applicationId buildVersion.applicationId
+        minSdkVersion buildVersion.minAppSdk
+        targetSdkVersion buildVersion.targetSdk
+        versionCode buildVersion.versionCode
+        versionName buildVersion.versionName
         multiDexEnabled true
-        versionCode 59
-        versionName '6.1.3'
 
         vectorDrawables.useSupportLibrary true
         resConfigs 'en', 'pt', 'es', 'zh'
@@ -40,29 +40,27 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':common')
 
-    // Android
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.preference:preference:1.1.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.multidex:multidex:2.0.1'
+    // AndroidX
+    implementation "androidx.appcompat:appcompat:$versions.appcompat"
+    implementation "androidx.preference:preference:$versions.preference"
+    implementation "androidx.recyclerview:recyclerview:$versions.recyclerview"
+    implementation "androidx.multidex:multidex:$versions.multiDex"
+
+    // Constraint
+    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
 
     // Google
-    implementation 'com.google.android.gms:play-services-instantapps:17.0.0'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'com.google.android.play:core:1.6.5'
+    implementation "com.google.android.gms:play-services-instantapps:$versions.instantApp"
+    implementation "com.google.android.material:material:$versions.material"
+    implementation "com.google.android.play:core:$versions.playCore"
 
     // Dagger
-    def dagger_version='2.21'
-    api "com.google.dagger:dagger-android:$dagger_version"
-    api "com.google.dagger:dagger-android-support:$dagger_version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    api "com.google.dagger:dagger-android:$versions.dagger"
+    api "com.google.dagger:dagger-android-support:$versions.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
 
-    implementation('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
-        transitive = true
-    }
-
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50'
+    // Kotlin
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 }

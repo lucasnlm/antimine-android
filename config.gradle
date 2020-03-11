@@ -1,0 +1,51 @@
+ext.buildVersion = [
+        versionCode  : 55,
+        versionName  : '6.2.0',
+        targetSdk    : 29,
+        minAppSdk    : 16,
+        wearMinAppSdk: 23,
+        applicationId: 'dev.lucasnlm.antimine'
+]
+
+ext.versions = [
+        android         : '3.5.2',
+
+        // Android
+        appcompat       : '1.1.0',
+        preference      : '1.1.0',
+        recyclerview    : '1.1.0',
+        constraintlayout: '1.1.3',
+        multiDex        : '2.0.1',
+        legacySupport   : '1.0.0',
+
+        // Wear OS
+        wear            : '1.0.0',
+
+        // Google Weae
+        playWearable    : '17.0.0',
+        supportWearable : '2.5.0',
+
+        // Google
+        instantApp      : '17.0.0',
+        material        : '1.1.0',
+        playCore        : '1.6.5',
+
+        // Kotlin
+        kotlin          : '1.3.50',
+        coroutines      : '1.3.4',
+
+        // Jetpack
+        lifecycle       : '1.1.1',
+        room            : '2.2.4',
+
+        // Third Party
+        amplitude       : '2.23.2',
+        dagger          : '2.21',
+        moshi           : '1.9.1',
+
+        // Testing
+        junit           : '4.12',
+        mockito         : '2.24.0',
+        mockitoKotlin   : '2.1.0',
+        testCore        : '1.2.0'
+]
