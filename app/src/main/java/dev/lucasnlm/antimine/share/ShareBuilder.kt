@@ -10,6 +10,7 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Typeface
 import androidx.core.content.FileProvider
+import dev.lucasnlm.antimine.BuildConfig
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.data.Area
 import dev.lucasnlm.antimine.common.level.data.LevelSetup
@@ -116,7 +117,7 @@ class ShareBuilder(
     }
 
     private fun shareFile(context: Context, file: File, right: Int, total: Int, spentTime: Long?): Boolean {
-        val imageUri = FileProvider.getUriForFile(context, context.getString(R.string.app_file_provider), file)
+        val imageUri = FileProvider.getUriForFile(context, "${BuildConfig.APPLICATION_ID}.provider", file)
 
         val intent = Intent(Intent.ACTION_SEND).apply {
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
