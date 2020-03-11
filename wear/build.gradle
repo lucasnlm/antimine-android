@@ -11,8 +11,8 @@ android {
         applicationId 'dev.lucasnlm.antimine.wear'
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 45
-        versionName '6.1.0'
+        versionCode 59
+        versionName '6.1.3'
 
         resConfigs 'en', 'pt', 'es', 'zh'
     }
