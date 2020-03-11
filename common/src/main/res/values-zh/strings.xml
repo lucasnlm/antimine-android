@@ -62,7 +62,7 @@
     <string name="share_body_text">我在%3$d秒内获得了%1$d/%2$d分。</string>
     <string name="share_body_text_generic">我在玩%1$s</string>
     <string name="fail_to_share">无法分享游戏</string>
-    <string name="version_s">%s - %s</string>
+    <string name="version_s">%1$s%2$s</string>
     <string name="sound_effects">音效</string>
     <string name="quit">退出</string>
     <string name="are_you_sure">确定吗？</string>
