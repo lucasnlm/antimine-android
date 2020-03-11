@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.DaggerAppCompatDialogFragment
 import dev.lucasnlm.antimine.R
@@ -30,6 +31,7 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
     private lateinit var viewModel: GameViewModel
     private lateinit var shareViewModel: ShareViewModel
 
+    private var hasValidData = false
     private var isVictory: Boolean = false
     private var time: Long = 0L
     private var rightMines: Int = 0
@@ -44,10 +46,19 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
             shareViewModel = ViewModelProviders.of(this).get(ShareViewModel::class.java)
         }
 
-        isVictory = arguments?.getBoolean(DIALOG_STATE) == true
-        time = arguments?.getLong(DIALOG_TIME) ?: 0L
-        rightMines = arguments?.getInt(DIALOG_RIGHT_MINES) ?: 0
-        totalMines = arguments?.getInt(DIALOG_TOTAL_MINES) ?: 0
+        arguments?.run {
+            isVictory = getBoolean(DIALOG_STATE) == true
+            time = getLong(DIALOG_TIME)
+            rightMines = getInt(DIALOG_RIGHT_MINES)
+            totalMines = getInt(DIALOG_TOTAL_MINES)
+            hasValidData = true
+        }
+    }
+
+    fun showAllowingStateLoss(manager: FragmentManager, tag: String?) {
+        val fragmentTransaction = manager.beginTransaction()
+        fragmentTransaction.add(this, tag)
+        fragmentTransaction.commitAllowingStateLoss()
     }
 
     @SuppressLint("InflateParams")
@@ -57,21 +68,35 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
                 .from(context)
                 .inflate(R.layout.dialog_end_game, null, false)
                 .apply {
-                    val title = when {
-                        isVictory -> endGameViewModel.randomVictoryEmoji()
-                        else -> endGameViewModel.randomGameOverEmoji()
+                    val titleEmoji: String
+                    val title: String
+                    val message: String
+
+                    when {
+                        !hasValidData -> {
+                            titleEmoji = endGameViewModel.randomNeutralEmoji()
+                            title = context.getString(R.string.new_game)
+                            message = context.getString(R.string.new_game_request)
+                        }
+                        isVictory -> {
+                            titleEmoji = endGameViewModel.randomVictoryEmoji()
+                            title = context.getString(R.string.you_won)
+                            message = endGameViewModel.messageTo(context, rightMines, totalMines, time, isVictory)
+                        }
+                        else -> {
+                            titleEmoji = endGameViewModel.randomGameOverEmoji()
+                            title = context.getString(R.string.you_lost)
+                            message = endGameViewModel.messageTo(context, rightMines, totalMines, time, isVictory)
+                        }
                     }
 
-                    val titleRes =
-                        if (isVictory) R.string.you_won else R.string.you_lost
-                    val message = endGameViewModel.messageTo(context, rightMines, totalMines, time, isVictory)
-
-                    findViewById<TextView>(R.id.title).text = context.getString(titleRes)
+                    findViewById<TextView>(R.id.title).text = title
                     findViewById<TextView>(R.id.subtitle).text = message
                     findViewById<TextView>(R.id.title_emoji).apply {
-                        text = title
+                        text = titleEmoji
                         setOnClickListener {
                             text = when {
+                                !hasValidData -> endGameViewModel.randomNeutralEmoji(text.toString())
                                 isVictory -> endGameViewModel.randomVictoryEmoji(text.toString())
                                 else -> endGameViewModel.randomGameOverEmoji(text.toString())
                             }
