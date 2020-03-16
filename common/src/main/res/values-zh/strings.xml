@@ -51,7 +51,7 @@
     <string name="unknown_error">未知错误。</string>
     <string name="retry">重试</string>
     <string name="empty">空</string>
-    <string name="sure_quit_desc">你将丢失当前游戏中的所有进度。</string>
+    <string name="quit_confirm">您将失去当前游戏中的所有进度，但也可以在退出之前安装游戏。</string>
     <string name="you_won">你赢了！</string>
     <string name="you_lost">你输了！</string>
     <string name="game_over_desc_0">长按方块以标记</string>

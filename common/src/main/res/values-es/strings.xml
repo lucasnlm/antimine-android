@@ -51,7 +51,7 @@
     <string name="unknown_error">Error desconocido.</string>
     <string name="retry">Rever</string>
     <string name="empty">Vacío</string>
-    <string name="sure_quit_desc">Perderá todos los movimientos en el juego actual.</string>
+    <string name="quit_confirm">Perderá todos los movimientos en el juego actual.\nPero también puedes instalar el juego antes de salir.</string>
     <string name="you_won">¡Ganaste!</string>
     <string name="you_lost">¡Perdiste!</string>
     <string name="game_over_desc_0">Mantenga presionada un área para marcarla.</string>
