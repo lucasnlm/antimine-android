@@ -15,7 +15,7 @@ import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
-import dev.lucasnlm.antimine.core.analytics.Event
+import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -61,7 +61,7 @@ class GameViewModel(
 
         eventObserver.postValue(GameEvent.StartNewGame)
 
-        analyticsManager.sentEvent(Event.NewGame(setup, levelFacade.seed, useAccessibilityMode()))
+        analyticsManager.sentEvent(Analytics.NewGame(setup, levelFacade.seed, useAccessibilityMode()))
 
         return setup
     }
@@ -84,7 +84,7 @@ class GameViewModel(
             else -> eventObserver.postValue(GameEvent.ResumeGame)
         }
 
-        analyticsManager.sentEvent(Event.ResumePreviousGame())
+        analyticsManager.sentEvent(Analytics.ResumePreviousGame())
 
         return setup
     }
@@ -150,11 +150,11 @@ class GameViewModel(
                 hapticFeedbackInteractor.toggleFlagFeedback()
             }
 
-            analyticsManager.sentEvent(Event.LongPressArea(index))
+            analyticsManager.sentEvent(Analytics.LongPressArea(index))
         } else {
             levelFacade.openNeighbors(index)
 
-            analyticsManager.sentEvent(Event.LongPressMultipleArea(index))
+            analyticsManager.sentEvent(Analytics.LongPressMultipleArea(index))
         }
 
         field.postValue(levelFacade.field.toList())
@@ -184,7 +184,7 @@ class GameViewModel(
         }
 
         refreshGame()
-        analyticsManager.sentEvent(Event.PressArea(index))
+        analyticsManager.sentEvent(Analytics.PressArea(index))
     }
 
     private fun refreshMineCount() = mineCount.postValue(levelFacade.remainingMines())
@@ -227,7 +227,7 @@ class GameViewModel(
 
     fun gameOver() {
         levelFacade.run {
-            analyticsManager.sentEvent(Event.GameOver(clock.time(), getStats()))
+            analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getStats()))
             showAllMines()
             showWrongFlags()
         }
@@ -239,7 +239,7 @@ class GameViewModel(
 
     fun victory() {
         levelFacade.run {
-            analyticsManager.sentEvent(Event.Victory(clock.time(), getStats(), currentDifficulty))
+            analyticsManager.sentEvent(Analytics.Victory(clock.time(), getStats(), currentDifficulty))
             flagAllMines()
             showWrongFlags()
         }

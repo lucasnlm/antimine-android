@@ -1,17 +1,17 @@
-package dev.lucasnlm.antimine.core.analytics
+package dev.lucasnlm.antimine.core.analytics.models
 
 import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
 import dev.lucasnlm.antimine.common.level.data.Score
 import dev.lucasnlm.antimine.common.level.data.LevelSetup
 
-sealed class Event(
+sealed class Analytics(
     val title: String,
     val extra: Map<String, String> = mapOf()
 ) {
-    class Open : Event("Open game")
+    class Open : Analytics("Open game")
 
     class NewGame(levelSetup: LevelSetup, seed: Long, useAccessibilityMode: Boolean) :
-        Event("New Game", mapOf(
+        Analytics("New Game", mapOf(
             "Seed" to seed.toString(),
             "Difficulty Preset" to levelSetup.preset.text,
             "Width" to levelSetup.width.toString(),
@@ -21,21 +21,21 @@ sealed class Event(
             )
     )
 
-    class ResumePreviousGame : Event("Resume previous game")
+    class ResumePreviousGame : Analytics("Resume previous game")
 
-    class LongPressArea(index: Int) : Event("Long press area",
+    class LongPressArea(index: Int) : Analytics("Long press area",
         mapOf("Index" to index.toString())
     )
 
-    class LongPressMultipleArea(index: Int) : Event("Long press to open multiple",
+    class LongPressMultipleArea(index: Int) : Analytics("Long press to open multiple",
         mapOf("Index" to index.toString())
     )
 
-    class PressArea(index: Int) : Event("Press area",
+    class PressArea(index: Int) : Analytics("Press area",
         mapOf("Index" to index.toString())
     )
 
-    class GameOver(time: Long, score: Score) : Event("Game Over",
+    class GameOver(time: Long, score: Score) : Analytics("Game Over",
         mapOf(
             "Time" to time.toString(),
             "Right Mines" to score.rightMines.toString(),
@@ -44,7 +44,7 @@ sealed class Event(
             )
     )
 
-    class Victory(time: Long, score: Score, difficultyPreset: DifficultyPreset) : Event(
+    class Victory(time: Long, score: Score, difficultyPreset: DifficultyPreset) : Analytics(
         "Victory",
         mapOf(
             "Time" to time.toString(),
@@ -55,29 +55,29 @@ sealed class Event(
         )
     )
 
-    class Resume : Event("Back to the game")
+    class Resume : Analytics("Back to the game")
 
-    class Quit : Event("Quit game")
+    class Quit : Analytics("Quit game")
 
-    class OpenDrawer : Event("Opened Drawer")
+    class OpenDrawer : Analytics("Opened Drawer")
 
-    class CloseDrawer : Event("Closed Drawer")
+    class CloseDrawer : Analytics("Closed Drawer")
 
-    class OpenAbout : Event("Open About")
+    class OpenAbout : Analytics("Open About")
 
-    class OpenSettings : Event("Open Settings")
+    class OpenSettings : Analytics("Open Settings")
 
-    class ShowRatingRequest(usages: Int) : Event("Shown Rating Request",
+    class ShowRatingRequest(usages: Int) : Analytics("Shown Rating Request",
         mapOf(
             "Usages" to usages.toString()
         ))
 
-    class TapRatingRequest(from: String) : Event("Rating Request",
+    class TapRatingRequest(from: String) : Analytics("Rating Request",
         mapOf(
             "From" to from
         ))
 
-    class TapGameReset(resign: Boolean) : Event("Game reset",
+    class TapGameReset(resign: Boolean) : Analytics("Game reset",
         mapOf("Resign" to resign.toString())
     )
 }

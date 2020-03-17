@@ -31,7 +31,7 @@ import dev.lucasnlm.antimine.common.level.data.*
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
-import dev.lucasnlm.antimine.core.analytics.Event
+import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.utils.isDarkModeEnabled
 import dev.lucasnlm.antimine.instant.InstantAppManager
@@ -141,7 +141,7 @@ class GameActivity : DaggerAppCompatActivity() {
         super.onResume()
         if (status == Status.Running) {
             viewModel.resumeGame()
-            analyticsManager.sentEvent(Event.Resume())
+            analyticsManager.sentEvent(Analytics.Resume())
         }
 
         restartIfNeed()
@@ -154,7 +154,7 @@ class GameActivity : DaggerAppCompatActivity() {
             viewModel.pauseGame()
         }
 
-        analyticsManager.sentEvent(Event.Quit())
+        analyticsManager.sentEvent(Analytics.Quit())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean =
@@ -170,7 +170,7 @@ class GameActivity : DaggerAppCompatActivity() {
         return if (item.itemId == R.id.reset) {
 
             val confirmResign = status == Status.Running
-            analyticsManager.sentEvent(Event.TapGameReset(confirmResign))
+            analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
 
             if (confirmResign) {
                 newGameConfirmation {
@@ -226,14 +226,14 @@ class GameActivity : DaggerAppCompatActivity() {
                     if (status is Status.Over) {
                         viewModel.pauseGame()
                     }
-                    analyticsManager.sentEvent(Event.OpenDrawer())
+                    analyticsManager.sentEvent(Analytics.OpenDrawer())
                 }
 
                 override fun onDrawerClosed(drawerView: View) {
                     if (status is Status.Over) {
                         viewModel.resumeGame()
                     }
-                    analyticsManager.sentEvent(Event.CloseDrawer())
+                    analyticsManager.sentEvent(Analytics.CloseDrawer())
                 }
 
                 override fun onDrawerStateChanged(newState: Int) {
@@ -279,7 +279,7 @@ class GameActivity : DaggerAppCompatActivity() {
         val shouldRequestRating = preferencesRepository.getBoolean(PREFERENCE_REQUEST_RATING, true)
 
         if (current >= 4 && shouldRequestRating) {
-            analyticsManager.sentEvent(Event.ShowRatingRequest(current))
+            analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
             showRequestRating()
         }
 
@@ -364,14 +364,14 @@ class GameActivity : DaggerAppCompatActivity() {
     }
 
     private fun showAbout() {
-        analyticsManager.sentEvent(Event.OpenAbout())
+        analyticsManager.sentEvent(Analytics.OpenAbout())
         Intent(this, AboutActivity::class.java).apply {
             startActivity(this)
         }
     }
 
     private fun showSettings() {
-        analyticsManager.sentEvent(Event.OpenSettings())
+        analyticsManager.sentEvent(Analytics.OpenSettings())
         Intent(this, PreferencesActivity::class.java).apply {
             startActivity(this)
         }
@@ -542,7 +542,7 @@ class GameActivity : DaggerAppCompatActivity() {
             )
         }
 
-        analyticsManager.sentEvent(Event.TapRatingRequest(from))
+        analyticsManager.sentEvent(Analytics.TapRatingRequest(from))
         preferencesRepository.putBoolean(PREFERENCE_REQUEST_RATING, false)
     }
 

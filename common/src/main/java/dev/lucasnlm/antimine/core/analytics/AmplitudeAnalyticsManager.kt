@@ -5,6 +5,7 @@ import android.content.Context
 import com.amplitude.api.Amplitude
 import com.amplitude.api.AmplitudeClient
 import dev.lucasnlm.antimine.common.R
+import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import org.json.JSONObject
 
 class AmplitudeAnalyticsManager(
@@ -21,7 +22,7 @@ class AmplitudeAnalyticsManager(
         }
     }
 
-    override fun sentEvent(event: Event) {
+    override fun sentEvent(event: Analytics) {
         amplitudeClient?.logEvent(event.title, JSONObject(event.extra))
     }
 }
