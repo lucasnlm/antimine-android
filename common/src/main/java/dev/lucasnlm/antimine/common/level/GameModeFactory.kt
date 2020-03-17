@@ -1,34 +1,34 @@
 package dev.lucasnlm.antimine.common.level
 
-import dev.lucasnlm.antimine.common.level.models.DifficultyPreset
+import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 object GameModeFactory {
     fun fromDifficultyPreset(
-        difficulty: DifficultyPreset,
+        difficulty: Difficulty,
         dimensionRepository: IDimensionRepository,
         preferencesRepository: IPreferencesRepository
     ): Minefield =
         when (difficulty) {
-            DifficultyPreset.Standard -> calculateStandardMode(dimensionRepository)
-            DifficultyPreset.Beginner -> Minefield(
+            Difficulty.Standard -> calculateStandardMode(dimensionRepository)
+            Difficulty.Beginner -> Minefield(
                 9,
                 9,
                 10
             )
-            DifficultyPreset.Intermediate -> Minefield(
+            Difficulty.Intermediate -> Minefield(
                 16,
                 16,
                 40
             )
-            DifficultyPreset.Expert -> Minefield(
+            Difficulty.Expert -> Minefield(
                 24,
                 24,
                 99
             )
-            DifficultyPreset.Custom -> preferencesRepository.customGameMode()
+            Difficulty.Custom -> preferencesRepository.customGameMode()
         }
 
     private fun calculateStandardMode(

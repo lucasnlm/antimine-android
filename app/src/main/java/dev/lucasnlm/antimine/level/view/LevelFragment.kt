@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.view.UnlockedHorizontalScrollView
 import dagger.android.support.DaggerFragment
-import dev.lucasnlm.antimine.common.level.models.DifficultyPreset
+import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -110,16 +110,16 @@ open class LevelFragment : DaggerFragment() {
         }
     }
 
-    private fun handleNewGameDeeplink(): DifficultyPreset? {
-        var result: DifficultyPreset? = null
+    private fun handleNewGameDeeplink(): Difficulty? {
+        var result: Difficulty? = null
 
         activity?.intent?.data?.let { uri ->
             if (uri.scheme == DEFAULT_SCHEME) {
                 result = when (uri.schemeSpecificPart.removePrefix("//new-game/")) {
-                    "beginner" -> DifficultyPreset.Beginner
-                    "intermediate" -> DifficultyPreset.Intermediate
-                    "expert" -> DifficultyPreset.Expert
-                    "standard" -> DifficultyPreset.Standard
+                    "beginner" -> Difficulty.Beginner
+                    "intermediate" -> Difficulty.Intermediate
+                    "expert" -> Difficulty.Expert
+                    "standard" -> Difficulty.Standard
                     else -> null
                 }
             }

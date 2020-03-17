@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.common.level.GameModeFactory
 import dev.lucasnlm.antimine.common.level.LevelFacade
 import dev.lucasnlm.antimine.common.level.models.Area
-import dev.lucasnlm.antimine.common.level.models.DifficultyPreset
+import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.database.models.Save
@@ -33,35 +33,35 @@ class GameViewModel(
     private val clock: Clock
 ) : ViewModel() {
     private lateinit var levelFacade: LevelFacade
-    private var currentDifficulty: DifficultyPreset = DifficultyPreset.Standard
+    private var currentDifficulty: Difficulty = Difficulty.Standard
     private var initialized = false
 
     val field = MutableLiveData<List<Area>>()
     val fieldRefresh = MutableLiveData<Int>()
     val elapsedTimeSeconds = MutableLiveData<Long>()
     val mineCount = MutableLiveData<Int>()
-    val difficulty = MutableLiveData<DifficultyPreset>()
+    val difficulty = MutableLiveData<Difficulty>()
     val levelSetup = MutableLiveData<Minefield>()
 
-    private fun startNewGame(gameId: Int, difficultyPreset: DifficultyPreset): Minefield {
+    private fun startNewGame(gameId: Int, difficulty: Difficulty): Minefield {
         clock.reset()
         elapsedTimeSeconds.postValue(0L)
-        currentDifficulty = difficultyPreset
+        currentDifficulty = difficulty
 
         val setup = GameModeFactory.fromDifficultyPreset(
-            difficultyPreset, dimensionRepository, preferencesRepository
+            difficulty, dimensionRepository, preferencesRepository
         )
 
         levelFacade = LevelFacade(gameId, setup)
 
         mineCount.postValue(setup.mines)
-        difficulty.postValue(difficultyPreset)
+        this.difficulty.postValue(difficulty)
         levelSetup.postValue(setup)
         field.postValue(levelFacade.field.toList())
 
         eventObserver.postValue(Event.StartNewGame)
 
-        analyticsManager.sentEvent(Analytics.NewGame(setup, difficultyPreset, levelFacade.seed, useAccessibilityMode()))
+        analyticsManager.sentEvent(Analytics.NewGame(setup, difficulty, levelFacade.seed, useAccessibilityMode()))
 
         return setup
     }
@@ -88,13 +88,13 @@ class GameViewModel(
         return setup
     }
 
-    suspend fun startNewGame(difficultyPreset: DifficultyPreset = currentDifficulty): Minefield =
+    suspend fun startNewGame(difficulty: Difficulty = currentDifficulty): Minefield =
         withContext(Dispatchers.IO) {
             val newGameId = savesRepository.getNewSaveId()
-            startNewGame(newGameId, difficultyPreset)
+            startNewGame(newGameId, difficulty)
         }
 
-    suspend fun onCreate(newGame: DifficultyPreset? = null): Minefield = withContext(Dispatchers.IO) {
+    suspend fun onCreate(newGame: Difficulty? = null): Minefield = withContext(Dispatchers.IO) {
         val lastGame = if (newGame == null) savesRepository.fetchCurrentSave() else null
 
         if (lastGame != null) {

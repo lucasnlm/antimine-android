@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.core.analytics.models
 
-import dev.lucasnlm.antimine.common.level.models.DifficultyPreset
+import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Score
 import dev.lucasnlm.antimine.common.level.models.Minefield
 
@@ -10,10 +10,10 @@ sealed class Analytics(
 ) {
     class Open : Analytics("Open game")
 
-    class NewGame(minefield: Minefield, difficultyPreset: DifficultyPreset, seed: Long, useAccessibilityMode: Boolean) :
+    class NewGame(minefield: Minefield, difficulty: Difficulty, seed: Long, useAccessibilityMode: Boolean) :
         Analytics("New Game", mapOf(
             "Seed" to seed.toString(),
-            "Difficulty Preset" to difficultyPreset.text,
+            "Difficulty Preset" to difficulty.text,
             "Width" to minefield.width.toString(),
             "Height" to minefield.height.toString(),
             "Mines" to minefield.mines.toString(),
@@ -44,11 +44,11 @@ sealed class Analytics(
             )
     )
 
-    class Victory(time: Long, score: Score, difficultyPreset: DifficultyPreset) : Analytics(
+    class Victory(time: Long, score: Score, difficulty: Difficulty) : Analytics(
         "Victory",
         mapOf(
             "Time" to time.toString(),
-            "Difficulty" to difficultyPreset.text,
+            "Difficulty" to difficulty.text,
             "Right Mines" to score.rightMines.toString(),
             "Total Mines" to score.totalMines.toString(),
             "Total Area" to score.totalArea.toString()

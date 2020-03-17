@@ -1,20 +1,20 @@
 package dev.lucasnlm.antimine.common.level.database.converters
 
 import androidx.room.TypeConverter
-import dev.lucasnlm.antimine.common.level.models.DifficultyPreset
+import dev.lucasnlm.antimine.common.level.models.Difficulty
 
 class DifficultyConverter {
 
     @TypeConverter
-    fun toDifficulty(difficulty: Int): DifficultyPreset =
+    fun toDifficulty(difficulty: Int): Difficulty =
         when (difficulty) {
-            0 -> DifficultyPreset.Standard
-            1 -> DifficultyPreset.Beginner
-            2 -> DifficultyPreset.Intermediate
-            3 -> DifficultyPreset.Expert
+            0 -> Difficulty.Standard
+            1 -> Difficulty.Beginner
+            2 -> Difficulty.Intermediate
+            3 -> Difficulty.Expert
             else -> throw IllegalArgumentException("Could not recognize Difficulty")
         }
 
     @TypeConverter
-    fun toInteger(difficulty: DifficultyPreset): Int = difficulty.ordinal
+    fun toInteger(difficulty: Difficulty): Int = difficulty.ordinal
 }

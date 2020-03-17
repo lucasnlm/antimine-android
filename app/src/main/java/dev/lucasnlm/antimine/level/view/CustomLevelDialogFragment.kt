@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 
 import dagger.android.support.DaggerAppCompatDialogFragment
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.common.level.models.DifficultyPreset
+import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
@@ -80,7 +80,7 @@ class CustomLevelDialogFragment : DaggerAppCompatDialogFragment() {
                 )
 
                 GlobalScope.launch(Dispatchers.IO) {
-                    viewModel.startNewGame(DifficultyPreset.Custom)
+                    viewModel.startNewGame(Difficulty.Custom)
                 }
             }
         }.create()

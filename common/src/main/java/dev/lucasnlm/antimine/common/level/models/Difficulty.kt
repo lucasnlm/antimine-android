@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.level.models
 
-enum class DifficultyPreset(
+enum class Difficulty(
     val text: String
 ) {
     Standard("STANDARD"),

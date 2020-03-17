@@ -248,7 +248,7 @@ class LevelFacade {
         (it.posX == this.posX + x) && (it.posY == this.posY + y)
     }
 
-    fun getSaveState(duration: Long, difficulty: DifficultyPreset): Save {
+    fun getSaveState(duration: Long, difficulty: Difficulty): Save {
         val saveStatus: SaveStatus = when {
             checkVictory() -> SaveStatus.VICTORY
             hasAnyMineExploded() -> SaveStatus.DEFEAT

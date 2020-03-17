@@ -250,7 +250,7 @@ class TvGameActivity : DaggerAppCompatActivity() {
         }, null, DateUtils.SECOND_IN_MILLIS)
     }
 
-    private fun changeDifficulty(newDifficulty: DifficultyPreset) {
+    private fun changeDifficulty(newDifficulty: Difficulty) {
         if (status == Status.PreGame) {
             GlobalScope.launch {
                 viewModel.startNewGame(newDifficulty)

@@ -3,7 +3,7 @@ package dev.lucasnlm.antimine.common.level
 import android.util.DisplayMetrics
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
-import dev.lucasnlm.antimine.common.level.models.DifficultyPreset
+import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
@@ -17,7 +17,7 @@ class MinefieldFactoryTest {
     @Test
     fun testFromDifficultyPresetBeginner() {
         GameModeFactory.fromDifficultyPreset(
-            DifficultyPreset.Beginner, dimensionRepository, preferencesRepository
+            Difficulty.Beginner, dimensionRepository, preferencesRepository
         ).run {
             assertEquals(9, width)
             assertEquals(9, height)
@@ -28,7 +28,7 @@ class MinefieldFactoryTest {
     @Test
     fun testFromDifficultyPresetIntermediate() {
         GameModeFactory.fromDifficultyPreset(
-            DifficultyPreset.Intermediate, dimensionRepository, preferencesRepository
+            Difficulty.Intermediate, dimensionRepository, preferencesRepository
         ).run {
             assertEquals(16, width)
             assertEquals(16, height)
@@ -39,7 +39,7 @@ class MinefieldFactoryTest {
     @Test
     fun testFromDifficultyPresetExpert() {
         GameModeFactory.fromDifficultyPreset(
-            DifficultyPreset.Expert, dimensionRepository, preferencesRepository
+            Difficulty.Expert, dimensionRepository, preferencesRepository
         ).run {
             assertEquals(24, width)
             assertEquals(24, height)
@@ -58,7 +58,7 @@ class MinefieldFactoryTest {
         }
 
         GameModeFactory.fromDifficultyPreset(
-            DifficultyPreset.Custom,
+            Difficulty.Custom,
             mock(),
             preferencesRepository
         ).run {
@@ -80,7 +80,7 @@ class MinefieldFactoryTest {
         }
 
         GameModeFactory.fromDifficultyPreset(
-            DifficultyPreset.Standard,
+            Difficulty.Standard,
             dimensionRepository,
             preferencesRepository
         ).run {

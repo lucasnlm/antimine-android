@@ -246,10 +246,10 @@ class GameActivity : DaggerAppCompatActivity() {
             var handled = true
 
             when (item.itemId) {
-                R.id.standard -> changeDifficulty(DifficultyPreset.Standard)
-                R.id.beginner -> changeDifficulty(DifficultyPreset.Beginner)
-                R.id.intermediate -> changeDifficulty(DifficultyPreset.Intermediate)
-                R.id.expert -> changeDifficulty(DifficultyPreset.Expert)
+                R.id.standard -> changeDifficulty(Difficulty.Standard)
+                R.id.beginner -> changeDifficulty(Difficulty.Beginner)
+                R.id.intermediate -> changeDifficulty(Difficulty.Intermediate)
+                R.id.expert -> changeDifficulty(Difficulty.Expert)
                 R.id.custom -> showCustomLevelDialog()
                 R.id.about -> showAbout()
                 R.id.settings -> showSettings()
@@ -286,14 +286,14 @@ class GameActivity : DaggerAppCompatActivity() {
         preferencesRepository.putInt(PREFERENCE_USE_COUNT, current + 1)
     }
 
-    private fun onChangeDifficulty(difficulty: DifficultyPreset) {
+    private fun onChangeDifficulty(difficulty: Difficulty) {
         navigationView.menu.apply {
             arrayOf(
-                DifficultyPreset.Standard to findItem(R.id.standard),
-                DifficultyPreset.Beginner to findItem(R.id.beginner),
-                DifficultyPreset.Intermediate to findItem(R.id.intermediate),
-                DifficultyPreset.Expert to findItem(R.id.expert),
-                DifficultyPreset.Custom to findItem(R.id.custom)
+                Difficulty.Standard to findItem(R.id.standard),
+                Difficulty.Beginner to findItem(R.id.beginner),
+                Difficulty.Intermediate to findItem(R.id.intermediate),
+                Difficulty.Expert to findItem(R.id.expert),
+                Difficulty.Custom to findItem(R.id.custom)
             ).map {
                 it.second to (if (it.first == difficulty) R.drawable.checked else R.drawable.unchecked)
             }.forEach { (menuItem, icon) ->
@@ -407,7 +407,7 @@ class GameActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private fun changeDifficulty(newDifficulty: DifficultyPreset) {
+    private fun changeDifficulty(newDifficulty: Difficulty) {
         if (status == Status.PreGame) {
             GlobalScope.launch {
                 viewModel.startNewGame(newDifficulty)
