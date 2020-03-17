@@ -12,7 +12,7 @@ import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.view.UnlockedHorizontalScrollView
 import dagger.android.support.DaggerFragment
 import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
-import dev.lucasnlm.antimine.common.level.data.GameEvent
+import dev.lucasnlm.antimine.common.level.data.Event
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
@@ -102,8 +102,8 @@ open class LevelFragment : DaggerFragment() {
             })
             eventObserver.observe(viewLifecycleOwner, Observer {
                 when (it) {
-                    GameEvent.ResumeGameOver, GameEvent.GameOver,
-                    GameEvent.Victory, GameEvent.ResumeVictory -> areaAdapter.setClickEnabled(false)
+                    Event.ResumeGameOver, Event.GameOver,
+                    Event.Victory, Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
                     else -> areaAdapter.setClickEnabled(true)
                 }
             })

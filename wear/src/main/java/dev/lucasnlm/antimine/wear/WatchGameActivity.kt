@@ -23,7 +23,7 @@ import androidx.wear.ambient.AmbientModeSupport.AmbientCallback
 import androidx.wear.ambient.AmbientModeSupport.EXTRA_LOWBIT_AMBIENT
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.data.AmbientSettings
-import dev.lucasnlm.antimine.common.level.data.GameEvent
+import dev.lucasnlm.antimine.common.level.data.Event
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -149,21 +149,21 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
         })
     }
 
-    private fun onGameEvent(event: GameEvent) {
+    private fun onGameEvent(event: Event) {
         when (event) {
-            GameEvent.StartNewGame -> {
+            Event.StartNewGame -> {
                 status = Status.PreGame
             }
-            GameEvent.Resume, GameEvent.Running -> {
+            Event.Resume, Event.Running -> {
                 status = Status.Running
             }
-            GameEvent.Victory -> {
+            Event.Victory -> {
                 status = Status.Over()
 
                 messageText.text = getString(R.string.victory)
                 waitAndShowNewGameButton()
             }
-            GameEvent.GameOver -> {
+            Event.GameOver -> {
                 status = Status.Over()
                 viewModel.stopClock()
                 viewModel.gameOver()
@@ -171,12 +171,12 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
                 messageText.text = getString(R.string.game_over)
                 waitAndShowNewGameButton()
             }
-            GameEvent.ResumeVictory -> {
+            Event.ResumeVictory -> {
                 status = Status.Over()
                 messageText.text = getString(R.string.victory)
                 waitAndShowNewGameButton(0L)
             }
-            GameEvent.ResumeGameOver -> {
+            Event.ResumeGameOver -> {
                 status = Status.Over()
                 messageText.text = getString(R.string.game_over)
                 waitAndShowNewGameButton(0L)

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.R
 import dagger.android.support.DaggerFragment
 import dev.lucasnlm.antimine.common.level.data.AmbientSettings
-import dev.lucasnlm.antimine.common.level.data.GameEvent
+import dev.lucasnlm.antimine.common.level.data.Event
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.view.UnlockedHorizontalScrollView
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -98,13 +98,13 @@ class WatchLevelFragment : DaggerFragment() {
                 areaAdapter.notifyItemChanged(it)
             })
             eventObserver.observe(viewLifecycleOwner, Observer {
-                if (it == GameEvent.StartNewGame) {
+                if (it == Event.StartNewGame) {
                     recyclerGrid.scrollToPosition(areaAdapter.itemCount / 2)
                 }
 
                 when (it) {
-                    GameEvent.ResumeGameOver, GameEvent.GameOver,
-                    GameEvent.Victory, GameEvent.ResumeVictory -> areaAdapter.setClickEnabled(false)
+                    Event.ResumeGameOver, Event.GameOver,
+                    Event.Victory, Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
                     else -> areaAdapter.setClickEnabled(true)
                 }
             })

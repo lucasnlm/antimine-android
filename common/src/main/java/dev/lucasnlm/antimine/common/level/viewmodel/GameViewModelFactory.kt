@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import dev.lucasnlm.antimine.common.level.data.GameEvent
+import dev.lucasnlm.antimine.common.level.data.Event
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class GameViewModelFactory @Inject constructor(
     private val application: Application,
-    private val gameEventObserver: MutableLiveData<GameEvent>,
+    private val eventObserver: MutableLiveData<Event>,
     private val savesRepository: ISavesRepository,
     private val dimensionRepository: IDimensionRepository,
     private val preferencesRepository: IPreferencesRepository,
@@ -28,7 +28,7 @@ class GameViewModelFactory @Inject constructor(
         if (modelClass.isAssignableFrom(GameViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             GameViewModel(
-                application, gameEventObserver, savesRepository,
+                application, eventObserver, savesRepository,
                 dimensionRepository, preferencesRepository, hapticFeedbackInteractor,
                 analyticsManager, clock
             ) as T

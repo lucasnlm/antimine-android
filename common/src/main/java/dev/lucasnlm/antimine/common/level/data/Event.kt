@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.level.data
 
-enum class GameEvent {
+enum class Event {
     StartNewGame,
     ResumeGame,
     ResumeGameOver,

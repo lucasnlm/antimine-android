@@ -421,21 +421,21 @@ class GameActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private fun onGameEvent(event: GameEvent) {
+    private fun onGameEvent(event: Event) {
         when (event) {
-            GameEvent.ResumeGame -> {
+            Event.ResumeGame -> {
                 invalidateOptionsMenu()
             }
-            GameEvent.StartNewGame -> {
+            Event.StartNewGame -> {
                 status = Status.PreGame
                 invalidateOptionsMenu()
             }
-            GameEvent.Resume, GameEvent.Running -> {
+            Event.Resume, Event.Running -> {
                 status = Status.Running
                 viewModel.runClock()
                 invalidateOptionsMenu()
             }
-            GameEvent.Victory -> {
+            Event.Victory -> {
                 val score = Score(rightMines, totalMines, totalArea)
                 status = Status.Over(currentTime, score)
                 viewModel.stopClock()
@@ -444,7 +444,7 @@ class GameActivity : DaggerAppCompatActivity() {
                 invalidateOptionsMenu()
                 waitAndShowEndGameDialog(true, 0L)
             }
-            GameEvent.GameOver -> {
+            Event.GameOver -> {
                 val score = Score(rightMines, totalMines, totalArea)
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
@@ -453,7 +453,7 @@ class GameActivity : DaggerAppCompatActivity() {
 
                 waitAndShowEndGameDialog(false)
             }
-            GameEvent.ResumeVictory -> {
+            Event.ResumeVictory -> {
                 val score = Score(rightMines, totalMines, totalArea)
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
@@ -461,7 +461,7 @@ class GameActivity : DaggerAppCompatActivity() {
 
                 waitAndShowEndGameDialog(true)
             }
-            GameEvent.ResumeGameOver -> {
+            Event.ResumeGameOver -> {
                 val score = Score(rightMines, totalMines, totalArea)
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()

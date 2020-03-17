@@ -264,21 +264,21 @@ class TvGameActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private fun onGameEvent(event: GameEvent) {
+    private fun onGameEvent(event: Event) {
         when (event) {
-            GameEvent.ResumeGame -> {
+            Event.ResumeGame -> {
                 invalidateOptionsMenu()
             }
-            GameEvent.StartNewGame -> {
+            Event.StartNewGame -> {
                 status = Status.PreGame
                 invalidateOptionsMenu()
             }
-            GameEvent.Resume, GameEvent.Running -> {
+            Event.Resume, Event.Running -> {
                 status = Status.Running
                 viewModel.runClock()
                 invalidateOptionsMenu()
             }
-            GameEvent.Victory -> {
+            Event.Victory -> {
                 val score = Score(rightMines, totalMines, totalArea)
                 status = Status.Over(currentTime, score)
                 viewModel.stopClock()
@@ -286,7 +286,7 @@ class TvGameActivity : DaggerAppCompatActivity() {
                 invalidateOptionsMenu()
                 showVictory()
             }
-            GameEvent.GameOver -> {
+            Event.GameOver -> {
                 val score = Score(rightMines, totalMines, totalArea)
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
@@ -295,7 +295,7 @@ class TvGameActivity : DaggerAppCompatActivity() {
 
                 waitAndShowGameOverConfirmNewGame()
             }
-            GameEvent.ResumeVictory, GameEvent.ResumeGameOver -> {
+            Event.ResumeVictory, Event.ResumeGameOver -> {
                 val score = Score(rightMines, totalMines, totalArea)
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()

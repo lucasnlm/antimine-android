@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
-import dev.lucasnlm.antimine.common.level.data.GameEvent
+import dev.lucasnlm.antimine.common.level.data.Event
 import dev.lucasnlm.antimine.common.level.database.AppDataBase
 import dev.lucasnlm.antimine.common.level.database.dao.SaveDao
 import dev.lucasnlm.antimine.common.level.repository.DimensionRepository
@@ -23,7 +23,7 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 @Module
 class LevelModule {
     @Provides
-    fun provideGameEventObserver(): MutableLiveData<GameEvent> = MutableLiveData()
+    fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
 
     @Provides
     fun provideClock(): Clock = Clock()
@@ -31,7 +31,7 @@ class LevelModule {
     @Provides
     fun provideGameViewModelFactory(
         application: Application,
-        gameEventObserver: MutableLiveData<GameEvent>,
+        eventObserver: MutableLiveData<Event>,
         savesRepository: ISavesRepository,
         dimensionRepository: IDimensionRepository,
         preferencesRepository: IPreferencesRepository,
@@ -39,7 +39,7 @@ class LevelModule {
         analyticsManager: AnalyticsManager,
         clock: Clock
     ) = GameViewModelFactory(
-        application, gameEventObserver, savesRepository,
+        application, eventObserver, savesRepository,
         dimensionRepository, preferencesRepository, hapticFeedbackInteractor, analyticsManager, clock
     )
 

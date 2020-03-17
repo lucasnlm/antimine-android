@@ -7,7 +7,7 @@ import dev.lucasnlm.antimine.common.level.GameModeFactory
 import dev.lucasnlm.antimine.common.level.LevelFacade
 import dev.lucasnlm.antimine.common.level.data.Area
 import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
-import dev.lucasnlm.antimine.common.level.data.GameEvent
+import dev.lucasnlm.antimine.common.level.data.Event
 import dev.lucasnlm.antimine.common.level.data.LevelSetup
 import dev.lucasnlm.antimine.common.level.database.data.Save
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
@@ -24,7 +24,7 @@ import kotlinx.coroutines.withContext
 
 class GameViewModel(
     val application: Application,
-    val eventObserver: MutableLiveData<GameEvent>,
+    val eventObserver: MutableLiveData<Event>,
     private val savesRepository: ISavesRepository,
     private val dimensionRepository: IDimensionRepository,
     private val preferencesRepository: IPreferencesRepository,
@@ -59,7 +59,7 @@ class GameViewModel(
         levelSetup.postValue(setup)
         field.postValue(levelFacade.field.toList())
 
-        eventObserver.postValue(GameEvent.StartNewGame)
+        eventObserver.postValue(Event.StartNewGame)
 
         analyticsManager.sentEvent(Analytics.NewGame(setup, levelFacade.seed, useAccessibilityMode()))
 
@@ -79,9 +79,9 @@ class GameViewModel(
         field.postValue(levelFacade.field.toList())
 
         when {
-            levelFacade.hasAnyMineExploded() -> eventObserver.postValue(GameEvent.ResumeGameOver)
-            levelFacade.checkVictory() -> eventObserver.postValue(GameEvent.ResumeVictory)
-            else -> eventObserver.postValue(GameEvent.ResumeGame)
+            levelFacade.hasAnyMineExploded() -> eventObserver.postValue(Event.ResumeGameOver)
+            levelFacade.checkVictory() -> eventObserver.postValue(Event.ResumeVictory)
+            else -> eventObserver.postValue(Event.ResumeGame)
         }
 
         analyticsManager.sentEvent(Analytics.ResumePreviousGame())
@@ -117,7 +117,7 @@ class GameViewModel(
     fun pauseGame() {
         if (initialized) {
             if (levelFacade.hasMines) {
-                eventObserver.postValue(GameEvent.Pause)
+                eventObserver.postValue(Event.Pause)
             }
             clock.stop()
         }
@@ -136,7 +136,7 @@ class GameViewModel(
     fun resumeGame() {
         if (initialized) {
             if (levelFacade.hasMines) {
-                eventObserver.postValue(GameEvent.Resume)
+                eventObserver.postValue(Event.Resume)
             }
         }
     }
@@ -193,10 +193,10 @@ class GameViewModel(
         when {
             levelFacade.hasAnyMineExploded() -> {
                 hapticFeedbackInteractor.explosionFeedback()
-                eventObserver.postValue(GameEvent.GameOver)
+                eventObserver.postValue(Event.GameOver)
             }
             else -> {
-                eventObserver.postValue(GameEvent.Running)
+                eventObserver.postValue(Event.Running)
             }
         }
 
@@ -205,7 +205,7 @@ class GameViewModel(
         }
 
         if (levelFacade.checkVictory()) {
-            eventObserver.postValue(GameEvent.Victory)
+            eventObserver.postValue(Event.Victory)
         }
     }
 
