@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.level.repository
 
 import dev.lucasnlm.antimine.common.level.database.dao.SaveDao
-import dev.lucasnlm.antimine.common.level.database.data.Save
+import dev.lucasnlm.antimine.common.level.database.models.Save
 import javax.inject.Inject
 
 interface ISavesRepository {

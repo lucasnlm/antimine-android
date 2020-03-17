@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.level
 
 import dev.lucasnlm.antimine.common.level.data.Area
-import dev.lucasnlm.antimine.common.level.data.LevelSetup
+import dev.lucasnlm.antimine.common.level.data.Minefield
 import dev.lucasnlm.antimine.common.level.data.Mark
 import dev.lucasnlm.antimine.common.level.data.isFlag
 import dev.lucasnlm.antimine.common.level.data.isQuestion
@@ -14,7 +14,7 @@ import org.junit.Test
 class LevelFacadeTest {
 
     private fun levelFacadeOf(width: Int, height: Int, mines: Int, seed: Long = 0L) =
-        LevelFacade(0, LevelSetup(width, height, mines), seed)
+        LevelFacade(0, Minefield(width, height, mines), seed)
 
     private fun LevelFacade.at(id: Int): Area = field.first { it.id == id }
 

@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.level
 
 import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
-import dev.lucasnlm.antimine.common.level.data.LevelSetup
+import dev.lucasnlm.antimine.common.level.data.Minefield
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
@@ -10,18 +10,18 @@ object GameModeFactory {
         difficulty: DifficultyPreset,
         dimensionRepository: IDimensionRepository,
         preferencesRepository: IPreferencesRepository
-    ): LevelSetup =
+    ): Minefield =
         when (difficulty) {
             DifficultyPreset.Standard -> calculateStandardMode(dimensionRepository)
-            DifficultyPreset.Beginner -> LevelSetup(9, 9, 10, difficulty)
-            DifficultyPreset.Intermediate -> LevelSetup(16, 16, 40, difficulty)
-            DifficultyPreset.Expert -> LevelSetup(24, 24, 99, difficulty)
+            DifficultyPreset.Beginner -> Minefield(9, 9, 10)
+            DifficultyPreset.Intermediate -> Minefield(16, 16, 40)
+            DifficultyPreset.Expert -> Minefield(24, 24, 99)
             DifficultyPreset.Custom -> preferencesRepository.customGameMode()
         }
 
     private fun calculateStandardMode(
         dimensionRepository: IDimensionRepository
-    ): LevelSetup {
+    ): Minefield {
         val fieldSize = dimensionRepository.areaSize()
 
         val display = dimensionRepository.displaySize()
@@ -31,11 +31,10 @@ object GameModeFactory {
         val finalWidth = ((width / fieldSize).toInt() - 1).coerceAtLeast(6)
         val finalHeight = ((height / fieldSize).toInt() - 3).coerceAtLeast(9)
 
-        return LevelSetup(
+        return Minefield(
             finalWidth,
             finalHeight,
-            (finalWidth * finalHeight * 0.2).toInt(),
-            DifficultyPreset.Standard
+            (finalWidth * finalHeight * 0.2).toInt()
         )
     }
 }

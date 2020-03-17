@@ -52,7 +52,9 @@ class LevelModule {
 
     @Provides
     fun provideDataBase(application: Application): AppDataBase =
-        Room.databaseBuilder(application, AppDataBase::class.java, DATA_BASE_NAME).build()
+        Room.databaseBuilder(application, AppDataBase::class.java, DATA_BASE_NAME)
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Provides
     fun provideSaveDao(appDataBase: AppDataBase): SaveDao = appDataBase.userDao()

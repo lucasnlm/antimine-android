@@ -2,7 +2,7 @@ package dev.lucasnlm.antimine.core.analytics.models
 
 import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
 import dev.lucasnlm.antimine.common.level.data.Score
-import dev.lucasnlm.antimine.common.level.data.LevelSetup
+import dev.lucasnlm.antimine.common.level.data.Minefield
 
 sealed class Analytics(
     val title: String,
@@ -10,13 +10,13 @@ sealed class Analytics(
 ) {
     class Open : Analytics("Open game")
 
-    class NewGame(levelSetup: LevelSetup, seed: Long, useAccessibilityMode: Boolean) :
+    class NewGame(minefield: Minefield, difficultyPreset: DifficultyPreset, seed: Long, useAccessibilityMode: Boolean) :
         Analytics("New Game", mapOf(
             "Seed" to seed.toString(),
-            "Difficulty Preset" to levelSetup.preset.text,
-            "Width" to levelSetup.width.toString(),
-            "Height" to levelSetup.height.toString(),
-            "Mines" to levelSetup.mines.toString(),
+            "Difficulty Preset" to difficultyPreset.text,
+            "Width" to minefield.width.toString(),
+            "Height" to minefield.height.toString(),
+            "Mines" to minefield.mines.toString(),
             "Accessibility" to useAccessibilityMode.toString()
             )
     )

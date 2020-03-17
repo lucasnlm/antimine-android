@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.common.level.database.data
+package dev.lucasnlm.antimine.common.level.database.models
 
 import androidx.room.TypeConverters
 import dev.lucasnlm.antimine.common.level.database.converters.SaveStatusConverter
