@@ -17,7 +17,7 @@ import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.AreaPalette
 import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
-import dev.lucasnlm.antimine.common.level.view.AreaPaintSettings
+import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.view.paintOnCanvas
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

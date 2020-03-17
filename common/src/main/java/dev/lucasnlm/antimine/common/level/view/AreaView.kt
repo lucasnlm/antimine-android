@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.core.view.ViewCompat
 import dev.lucasnlm.antimine.common.R
+import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.AreaPalette
 
