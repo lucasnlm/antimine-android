@@ -51,7 +51,7 @@
     <string name="unknown_error">Unknown error.</string>
     <string name="retry">Retry</string>
     <string name="empty">Empty</string>
-    <string name="sure_quit_desc">You\'ll lose all moves on current game.</string>
+    <string name="quit_confirm">You\'ll lose all moves on current game.\nBut you can also install the game before quit.</string>
     <string name="you_won">You won!</string>
     <string name="you_lost">You lost!</string>
     <string name="game_over_desc_0">Long press a square to put a flag.</string>

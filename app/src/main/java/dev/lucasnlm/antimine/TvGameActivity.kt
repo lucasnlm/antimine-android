@@ -160,7 +160,7 @@ class TvGameActivity : DaggerAppCompatActivity() {
     private fun showQuitConfirmation(action: () -> Unit) {
         AlertDialog.Builder(this, R.style.MyDialog)
             .setTitle(R.string.are_you_sure)
-            .setMessage(R.string.sure_quit_desc)
+            .setMessage(R.string.quit_confirm)
             .setPositiveButton(R.string.quit) { _, _ -> action() }
             .setNegativeButton(R.string.cancel, null)
             .show()
