@@ -27,7 +27,7 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.android.support.DaggerAppCompatActivity
 import dev.lucasnlm.antimine.about.AboutActivity
-import dev.lucasnlm.antimine.common.level.data.*
+import dev.lucasnlm.antimine.common.level.models.*
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
@@ -436,7 +436,11 @@ class GameActivity : DaggerAppCompatActivity() {
                 invalidateOptionsMenu()
             }
             Event.Victory -> {
-                val score = Score(rightMines, totalMines, totalArea)
+                val score = Score(
+                    rightMines,
+                    totalMines,
+                    totalArea
+                )
                 status = Status.Over(currentTime, score)
                 viewModel.stopClock()
                 viewModel.revealAllEmptyAreas()
@@ -445,7 +449,11 @@ class GameActivity : DaggerAppCompatActivity() {
                 waitAndShowEndGameDialog(true, 0L)
             }
             Event.GameOver -> {
-                val score = Score(rightMines, totalMines, totalArea)
+                val score = Score(
+                    rightMines,
+                    totalMines,
+                    totalArea
+                )
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
                 viewModel.stopClock()
@@ -454,7 +462,11 @@ class GameActivity : DaggerAppCompatActivity() {
                 waitAndShowEndGameDialog(false)
             }
             Event.ResumeVictory -> {
-                val score = Score(rightMines, totalMines, totalArea)
+                val score = Score(
+                    rightMines,
+                    totalMines,
+                    totalArea
+                )
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
                 viewModel.stopClock()
@@ -462,7 +474,11 @@ class GameActivity : DaggerAppCompatActivity() {
                 waitAndShowEndGameDialog(true)
             }
             Event.ResumeGameOver -> {
-                val score = Score(rightMines, totalMines, totalArea)
+                val score = Score(
+                    rightMines,
+                    totalMines,
+                    totalArea
+                )
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
                 viewModel.stopClock()

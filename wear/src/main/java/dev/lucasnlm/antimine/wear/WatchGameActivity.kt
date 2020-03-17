@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.wear.widget.SwipeDismissFrameLayout
 import dagger.android.support.DaggerAppCompatActivity
-import dev.lucasnlm.antimine.common.level.data.Status
+import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
@@ -22,8 +22,8 @@ import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.ambient.AmbientModeSupport.AmbientCallback
 import androidx.wear.ambient.AmbientModeSupport.EXTRA_LOWBIT_AMBIENT
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.common.level.data.AmbientSettings
-import dev.lucasnlm.antimine.common.level.data.Event
+import dev.lucasnlm.antimine.common.level.models.AmbientSettings
+import dev.lucasnlm.antimine.common.level.models.Event
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -59,7 +59,12 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
         override fun onEnterAmbient(ambientDetails: Bundle?) {
             super.onEnterAmbient(ambientDetails)
             val lowBit = ambientDetails?.getBoolean(EXTRA_LOWBIT_AMBIENT) ?: true
-            currentLevelFragment?.setAmbientMode(AmbientSettings(true, lowBit))
+            currentLevelFragment?.setAmbientMode(
+                AmbientSettings(
+                    true,
+                    lowBit
+                )
+            )
             updateClockText(true)
         }
     }

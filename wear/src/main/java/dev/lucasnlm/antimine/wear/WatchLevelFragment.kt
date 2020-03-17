@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.R
 import dagger.android.support.DaggerFragment
-import dev.lucasnlm.antimine.common.level.data.AmbientSettings
-import dev.lucasnlm.antimine.common.level.data.Event
+import dev.lucasnlm.antimine.common.level.models.AmbientSettings
+import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.view.UnlockedHorizontalScrollView
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel

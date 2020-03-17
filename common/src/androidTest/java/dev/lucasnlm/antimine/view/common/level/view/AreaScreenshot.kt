@@ -6,9 +6,9 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.lucasnlm.antimine.common.level.data.Area
-import dev.lucasnlm.antimine.common.level.data.Mark
-import dev.lucasnlm.antimine.common.level.model.AreaPalette
+import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.common.level.models.AreaPalette
 import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.view.paintOnCanvas
@@ -115,7 +115,13 @@ class AreaScreenshot {
         repeat(8) {
             val id = it + 1
             screenshotTest(
-                Area(0, 0, 0, isCovered = false, minesAround = id),
+                Area(
+                    0,
+                    0,
+                    0,
+                    isCovered = false,
+                    minesAround = id
+                ),
                 "mines_around_$id.png"
             )
         }
@@ -126,7 +132,13 @@ class AreaScreenshot {
         repeat(8) {
             val id = it + 1
             screenshotTest(
-                Area(0, 0, 0, isCovered = false, minesAround = id),
+                Area(
+                    0,
+                    0,
+                    0,
+                    isCovered = false,
+                    minesAround = id
+                ),
                 "mines_around_${id}_ambient.png",
                 true
             )
@@ -135,85 +147,173 @@ class AreaScreenshot {
 
     @Test
     fun testCoveredAreaWithFlag() {
-        val area = Area(0, 0, 0, isCovered = true, mark = Mark.Flag)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = true,
+            mark = Mark.Flag
+        )
         screenshotTest(area, "covered_flag.png")
     }
 
     @Test
     fun testCoveredAreaWithFlagAmbient() {
-        val area = Area(0, 0, 0, isCovered = true, mark = Mark.Flag)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = true,
+            mark = Mark.Flag
+        )
         screenshotTest(area, "covered_flag_ambient.png", true)
     }
 
     @Test
     fun testCoveredAreaWithQuestion() {
-        val area = Area(0, 0, 0, isCovered = true, mark = Mark.Question)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = true,
+            mark = Mark.Question
+        )
         screenshotTest(area, "covered_question.png")
     }
 
     @Test
     fun testCoveredAreaWithQuestionAmbient() {
-        val area = Area(0, 0, 0, isCovered = true, mark = Mark.Question)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = true,
+            mark = Mark.Question
+        )
         screenshotTest(area, "covered_question_ambient.png", true)
     }
 
     @Test
     fun testCoveredAreaHighlighted() {
-        val area = Area(0, 0, 0, isCovered = true, highlighted = true)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = true,
+            highlighted = true
+        )
         screenshotTest(area, "covered_highlighted.png")
     }
 
     @Test
     fun testCoveredAreaHighlightedAmbient() {
-        val area = Area(0, 0, 0, isCovered = true, highlighted = true)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = true,
+            highlighted = true
+        )
         screenshotTest(area, "covered_highlighted_ambient.png", true)
     }
 
     @Test
     fun testCoveredAreaWithMine() {
-        val area = Area(0, 0, 0, isCovered = true, hasMine = true)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = true,
+            hasMine = true
+        )
         screenshotTest(area, "covered_mine.png")
     }
 
     @Test
     fun testCoveredAreaWithMineAmbient() {
-        val area = Area(0, 0, 0, isCovered = true, hasMine = true)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = true,
+            hasMine = true
+        )
         screenshotTest(area, "covered_mine_ambient.png", true)
     }
 
     @Test
     fun testUncoveredAreaWithMine() {
-        val area = Area(0, 0, 0, isCovered = false, hasMine = true)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = false,
+            hasMine = true
+        )
         screenshotTest(area, "uncovered_mine.png")
     }
 
     @Test
     fun testUncoveredAreaWithMineAmbient() {
-        val area = Area(0, 0, 0, isCovered = false, hasMine = true)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = false,
+            hasMine = true
+        )
         screenshotTest(area, "uncovered_mine_ambient.png", true)
     }
 
     @Test
     fun testUncoveredAreaHighlighted() {
-        val area = Area(0, 0, 0, isCovered = false, hasMine = false, highlighted = true)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = false,
+            hasMine = false,
+            highlighted = true
+        )
         screenshotTest(area, "uncovered_highlighted.png")
     }
 
     @Test
     fun testUncoveredAreaHighlightedAmbient() {
-        val area = Area(0, 0, 0, isCovered = false, hasMine = false, highlighted = true)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = false,
+            hasMine = false,
+            highlighted = true
+        )
         screenshotTest(area, "uncovered_highlighted_ambient.png", true)
     }
 
     @Test
     fun testUncoveredAreaWithMineExploded() {
-        val area = Area(0, 0, 0, isCovered = false, hasMine = true, mistake = true)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = false,
+            hasMine = true,
+            mistake = true
+        )
         screenshotTest(area, "uncovered_mine_exploded.png")
     }
 
     @Test
     fun testUncoveredAreaWithMineExplodedAmbient() {
-        val area = Area(0, 0, 0, isCovered = false, hasMine = true, mistake = true)
+        val area = Area(
+            0,
+            0,
+            0,
+            isCovered = false,
+            hasMine = true,
+            mistake = true
+        )
         screenshotTest(area, "uncovered_mine_exploded_ambient.png", true)
     }
 
@@ -222,7 +322,14 @@ class AreaScreenshot {
         repeat(8) {
             val id = it + 1
             screenshotTest(
-                Area(0, 0, 0, isCovered = false, minesAround = id, highlighted = true),
+                Area(
+                    0,
+                    0,
+                    0,
+                    isCovered = false,
+                    minesAround = id,
+                    highlighted = true
+                ),
                 "mines_around_highlighted_$id.png"
             )
         }
@@ -233,7 +340,14 @@ class AreaScreenshot {
         repeat(8) {
             val id = it + 1
             screenshotTest(
-                Area(0, 0, 0, isCovered = false, minesAround = id, highlighted = true),
+                Area(
+                    0,
+                    0,
+                    0,
+                    isCovered = false,
+                    minesAround = id,
+                    highlighted = true
+                ),
                 "mines_around_highlighted_${id}_ambient.png",
                 true
             )

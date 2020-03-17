@@ -12,10 +12,10 @@ import android.graphics.Typeface
 import androidx.core.content.FileProvider
 import dev.lucasnlm.antimine.BuildConfig
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.common.level.data.Area
-import dev.lucasnlm.antimine.common.level.data.Minefield
-import dev.lucasnlm.antimine.common.level.data.Mark
-import dev.lucasnlm.antimine.common.level.model.AreaPalette
+import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.common.level.models.AreaPalette
 import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
 import dev.lucasnlm.antimine.common.level.view.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.view.paintOnCanvas

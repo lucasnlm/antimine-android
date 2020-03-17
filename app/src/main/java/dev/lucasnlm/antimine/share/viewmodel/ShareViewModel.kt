@@ -5,8 +5,8 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.share.ShareBuilder
-import dev.lucasnlm.antimine.common.level.data.Area
-import dev.lucasnlm.antimine.common.level.data.Minefield
+import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.common.level.models.Minefield
 
 class ShareViewModel(
     application: Application

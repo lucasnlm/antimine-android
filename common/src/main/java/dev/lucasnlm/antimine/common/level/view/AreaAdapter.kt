@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.R
-import dev.lucasnlm.antimine.common.level.data.Area
+import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 
 class AreaAdapter(

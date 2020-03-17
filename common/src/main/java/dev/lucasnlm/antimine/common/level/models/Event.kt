@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.common.level.data
+package dev.lucasnlm.antimine.common.level.models
 
 enum class Event {
     StartNewGame,

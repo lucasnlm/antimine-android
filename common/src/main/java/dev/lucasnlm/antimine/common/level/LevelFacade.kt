@@ -1,8 +1,8 @@
 package dev.lucasnlm.antimine.common.level
 
-import dev.lucasnlm.antimine.common.level.data.*
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
+import dev.lucasnlm.antimine.common.level.models.*
 import java.util.Random
 import kotlin.math.floor
 
@@ -187,10 +187,10 @@ class LevelFacade {
     }
 
     fun getStats() = Score(
-            mines.filter { !it.mistake && it.mark == Mark.Flag }.count(),
-            mines.count(),
-            field.count()
-        )
+        mines.filter { !it.mistake && it.mark == Mark.Flag }.count(),
+        mines.count(),
+        field.count()
+    )
 
     fun showAllMines() {
         mines.filter { it.mark != Mark.Flag }.forEach { it.isCovered = false }

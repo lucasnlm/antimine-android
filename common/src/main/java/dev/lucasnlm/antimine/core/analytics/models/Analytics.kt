@@ -1,8 +1,8 @@
 package dev.lucasnlm.antimine.core.analytics.models
 
-import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
-import dev.lucasnlm.antimine.common.level.data.Score
-import dev.lucasnlm.antimine.common.level.data.Minefield
+import dev.lucasnlm.antimine.common.level.models.DifficultyPreset
+import dev.lucasnlm.antimine.common.level.models.Score
+import dev.lucasnlm.antimine.common.level.models.Minefield
 
 sealed class Analytics(
     val title: String,

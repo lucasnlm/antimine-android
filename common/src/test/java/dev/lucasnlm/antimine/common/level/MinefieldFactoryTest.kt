@@ -3,8 +3,8 @@ package dev.lucasnlm.antimine.common.level
 import android.util.DisplayMetrics
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
-import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
-import dev.lucasnlm.antimine.common.level.data.Minefield
+import dev.lucasnlm.antimine.common.level.models.DifficultyPreset
+import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import org.junit.Assert.assertEquals
@@ -50,7 +50,11 @@ class MinefieldFactoryTest {
     @Test
     fun testFromDifficultyPresetCustom() {
         val preferencesRepository: IPreferencesRepository = mock {
-            on { customGameMode() } doReturn Minefield(10, 10, 30)
+            on { customGameMode() } doReturn Minefield(
+                10,
+                10,
+                30
+            )
         }
 
         GameModeFactory.fromDifficultyPreset(

@@ -2,7 +2,7 @@ package dev.lucasnlm.antimine.core.preferences
 
 import android.app.Application
 import androidx.preference.PreferenceManager
-import dev.lucasnlm.antimine.common.level.data.Minefield
+import dev.lucasnlm.antimine.common.level.models.Minefield
 import javax.inject.Inject
 
 class PreferencesInteractor @Inject constructor(

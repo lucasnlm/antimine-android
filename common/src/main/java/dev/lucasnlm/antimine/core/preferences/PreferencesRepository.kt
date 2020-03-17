@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.core.preferences
 
-import dev.lucasnlm.antimine.common.level.data.Minefield
+import dev.lucasnlm.antimine.common.level.models.Minefield
 
 interface IPreferencesRepository {
     fun customGameMode(): Minefield

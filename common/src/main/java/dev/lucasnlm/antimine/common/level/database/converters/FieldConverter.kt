@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import dev.lucasnlm.antimine.common.level.data.Area
+import dev.lucasnlm.antimine.common.level.models.Area
 import java.lang.reflect.Type
 
 class FieldConverter {
