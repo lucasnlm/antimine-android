@@ -6,7 +6,7 @@ import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 object GameModeFactory {
-    fun fromDifficultyPreset(
+    fun fromDifficulty(
         difficulty: Difficulty,
         dimensionRepository: IDimensionRepository,
         preferencesRepository: IPreferencesRepository

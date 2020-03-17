@@ -43,27 +43,33 @@ class GameViewModel(
     val difficulty = MutableLiveData<Difficulty>()
     val levelSetup = MutableLiveData<Minefield>()
 
-    private fun startNewGame(gameId: Int, difficulty: Difficulty): Minefield {
+    fun startNewGame(difficulty: Difficulty = currentDifficulty): Minefield {
         clock.reset()
         elapsedTimeSeconds.postValue(0L)
         currentDifficulty = difficulty
 
-        val setup = GameModeFactory.fromDifficultyPreset(
+        val minefield = GameModeFactory.fromDifficulty(
             difficulty, dimensionRepository, preferencesRepository
         )
 
-        levelFacade = LevelFacade(gameId, setup)
+        levelFacade = LevelFacade(minefield)
 
-        mineCount.postValue(setup.mines)
+        mineCount.postValue(minefield.mines)
         this.difficulty.postValue(difficulty)
-        levelSetup.postValue(setup)
+        levelSetup.postValue(minefield)
         field.postValue(levelFacade.field.toList())
 
         eventObserver.postValue(Event.StartNewGame)
 
-        analyticsManager.sentEvent(Analytics.NewGame(setup, difficulty, levelFacade.seed, useAccessibilityMode()))
+        analyticsManager.sentEvent(
+            Analytics.NewGame(
+                minefield, difficulty,
+                levelFacade.seed,
+                useAccessibilityMode()
+            )
+        )
 
-        return setup
+        return minefield
     }
 
     private fun resumeGameFromSave(save: Save): Minefield {
@@ -88,12 +94,6 @@ class GameViewModel(
         return setup
     }
 
-    suspend fun startNewGame(difficulty: Difficulty = currentDifficulty): Minefield =
-        withContext(Dispatchers.IO) {
-            val newGameId = savesRepository.getNewSaveId()
-            startNewGame(newGameId, difficulty)
-        }
-
     suspend fun onCreate(newGame: Difficulty? = null): Minefield = withContext(Dispatchers.IO) {
         val lastGame = if (newGame == null) savesRepository.fetchCurrentSave() else null
 
@@ -104,8 +104,7 @@ class GameViewModel(
         }
 
         if (lastGame == null) {
-            val newGameId = savesRepository.getNewSaveId()
-            startNewGame(newGameId, currentDifficulty)
+            startNewGame(currentDifficulty)
         } else {
             resumeGameFromSave(lastGame)
         }.also {
@@ -236,7 +235,13 @@ class GameViewModel(
 
     fun victory() {
         levelFacade.run {
-            analyticsManager.sentEvent(Analytics.Victory(clock.time(), getStats(), currentDifficulty))
+            analyticsManager.sentEvent(
+                Analytics.Victory(
+                    clock.time(),
+                    getStats(),
+                    currentDifficulty
+                )
+            )
             flagAllMines()
             showWrongFlags()
         }

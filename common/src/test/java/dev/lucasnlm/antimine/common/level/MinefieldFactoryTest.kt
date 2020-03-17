@@ -16,7 +16,7 @@ class MinefieldFactoryTest {
 
     @Test
     fun testFromDifficultyPresetBeginner() {
-        GameModeFactory.fromDifficultyPreset(
+        GameModeFactory.fromDifficulty(
             Difficulty.Beginner, dimensionRepository, preferencesRepository
         ).run {
             assertEquals(9, width)
@@ -27,7 +27,7 @@ class MinefieldFactoryTest {
 
     @Test
     fun testFromDifficultyPresetIntermediate() {
-        GameModeFactory.fromDifficultyPreset(
+        GameModeFactory.fromDifficulty(
             Difficulty.Intermediate, dimensionRepository, preferencesRepository
         ).run {
             assertEquals(16, width)
@@ -38,7 +38,7 @@ class MinefieldFactoryTest {
 
     @Test
     fun testFromDifficultyPresetExpert() {
-        GameModeFactory.fromDifficultyPreset(
+        GameModeFactory.fromDifficulty(
             Difficulty.Expert, dimensionRepository, preferencesRepository
         ).run {
             assertEquals(24, width)
@@ -57,7 +57,7 @@ class MinefieldFactoryTest {
             )
         }
 
-        GameModeFactory.fromDifficultyPreset(
+        GameModeFactory.fromDifficulty(
             Difficulty.Custom,
             mock(),
             preferencesRepository
@@ -79,7 +79,7 @@ class MinefieldFactoryTest {
             }
         }
 
-        GameModeFactory.fromDifficultyPreset(
+        GameModeFactory.fromDifficulty(
             Difficulty.Standard,
             dimensionRepository,
             preferencesRepository

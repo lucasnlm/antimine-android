@@ -9,7 +9,6 @@ import kotlin.math.floor
 class LevelFacade {
     private val minefield: Minefield
     private val randomGenerator: Random
-    private var saveId = 0
     private val startTime = System.currentTimeMillis()
 
     var hasMines = false
@@ -23,8 +22,7 @@ class LevelFacade {
 
     private var mines: Sequence<Area> = sequenceOf()
 
-    constructor(gameId: Int, minefield: Minefield, seed: Long = randomSeed()) {
-        this.saveId = gameId
+    constructor(minefield: Minefield, seed: Long = randomSeed()) {
         this.minefield = minefield
         this.randomGenerator = Random().apply { setSeed(seed) }
         this.seed = seed
@@ -32,7 +30,6 @@ class LevelFacade {
     }
 
     constructor(save: Save) {
-        this.saveId = save.uid
         this.minefield = save.minefield
         this.randomGenerator = Random().apply { setSeed(save.seed) }
         this.field = save.field.asSequence()
@@ -254,7 +251,7 @@ class LevelFacade {
             hasAnyMineExploded() -> SaveStatus.DEFEAT
             else -> SaveStatus.ON_GOING
         }
-        return Save(saveId, seed, startTime, duration, minefield, difficulty, saveStatus, field.toList())
+        return Save(0, seed, startTime, duration, minefield, difficulty, saveStatus, field.toList())
     }
 
     companion object {
