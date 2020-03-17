@@ -2,10 +2,8 @@ package dev.lucasnlm.antimine.common.level
 
 import dev.lucasnlm.antimine.common.level.data.LevelSetup
 import dev.lucasnlm.antimine.common.level.data.Area
-import dev.lucasnlm.antimine.common.level.data.GameStats
+import dev.lucasnlm.antimine.common.level.data.Score
 import dev.lucasnlm.antimine.common.level.data.Mark
-import dev.lucasnlm.antimine.common.level.data.isNone
-import dev.lucasnlm.antimine.common.level.data.isNotNone
 import dev.lucasnlm.antimine.common.level.database.data.Save
 import dev.lucasnlm.antimine.common.level.database.data.SaveStatus
 import java.util.Random
@@ -191,7 +189,7 @@ class LevelFacade {
         }
     }
 
-    fun getStats() = GameStats(
+    fun getStats() = Score(
             mines.filter { !it.mistake && it.mark == Mark.Flag }.count(),
             mines.count(),
             field.count()

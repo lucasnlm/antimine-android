@@ -14,7 +14,6 @@ import android.os.Build
 import androidx.core.view.ViewCompat
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.data.Mark
-import dev.lucasnlm.antimine.common.level.data.isNotNone
 import dev.lucasnlm.antimine.common.level.model.AreaPalette
 
 class AreaView : View {

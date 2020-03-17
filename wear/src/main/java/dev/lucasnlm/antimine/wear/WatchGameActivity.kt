@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.wear.widget.SwipeDismissFrameLayout
 import dagger.android.support.DaggerAppCompatActivity
-import dev.lucasnlm.antimine.common.level.data.GameStatus
+import dev.lucasnlm.antimine.common.level.data.Status
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
@@ -43,7 +43,7 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
 
     private val clock = Clock()
     private var lastShownTime: String? = null
-    private var gameStatus: GameStatus = GameStatus.PreGame
+    private var status: Status = Status.PreGame
 
     private var ambientMode: AmbientCallback = object : AmbientCallback() {
         override fun onExitAmbient() {
@@ -152,19 +152,19 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
     private fun onGameEvent(event: GameEvent) {
         when (event) {
             GameEvent.StartNewGame -> {
-                gameStatus = GameStatus.PreGame
+                status = Status.PreGame
             }
             GameEvent.Resume, GameEvent.Running -> {
-                gameStatus = GameStatus.Running
+                status = Status.Running
             }
             GameEvent.Victory -> {
-                gameStatus = GameStatus.Over()
+                status = Status.Over()
 
                 messageText.text = getString(R.string.victory)
                 waitAndShowNewGameButton()
             }
             GameEvent.GameOver -> {
-                gameStatus = GameStatus.Over()
+                status = Status.Over()
                 viewModel.stopClock()
                 viewModel.gameOver()
 
@@ -172,12 +172,12 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
                 waitAndShowNewGameButton()
             }
             GameEvent.ResumeVictory -> {
-                gameStatus = GameStatus.Over()
+                status = Status.Over()
                 messageText.text = getString(R.string.victory)
                 waitAndShowNewGameButton(0L)
             }
             GameEvent.ResumeGameOver -> {
-                gameStatus = GameStatus.Over()
+                status = Status.Over()
                 messageText.text = getString(R.string.game_over)
                 waitAndShowNewGameButton(0L)
             }
@@ -188,7 +188,7 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
 
     private fun waitAndShowNewGameButton(wait: Long = DateUtils.SECOND_IN_MILLIS) {
         HandlerCompat.postDelayed(Handler(), {
-            if (this.gameStatus is GameStatus.Over && !isFinishing) {
+            if (this.status is Status.Over && !isFinishing) {
                 newGame.visibility = View.VISIBLE
                 newGame.setOnClickListener {
                     it.visibility = View.GONE

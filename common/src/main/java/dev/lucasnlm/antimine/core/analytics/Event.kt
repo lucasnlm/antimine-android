@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.core.analytics
 
 import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
-import dev.lucasnlm.antimine.common.level.data.GameStats
+import dev.lucasnlm.antimine.common.level.data.Score
 import dev.lucasnlm.antimine.common.level.data.LevelSetup
 
 sealed class Event(
@@ -35,23 +35,23 @@ sealed class Event(
         mapOf("Index" to index.toString())
     )
 
-    class GameOver(time: Long, gameStats: GameStats) : Event("Game Over",
+    class GameOver(time: Long, score: Score) : Event("Game Over",
         mapOf(
             "Time" to time.toString(),
-            "Right Mines" to gameStats.rightMines.toString(),
-            "Total Mines" to gameStats.totalMines.toString(),
-            "Total Area" to gameStats.totalArea.toString()
+            "Right Mines" to score.rightMines.toString(),
+            "Total Mines" to score.totalMines.toString(),
+            "Total Area" to score.totalArea.toString()
             )
     )
 
-    class Victory(time: Long, gameStats: GameStats, difficultyPreset: DifficultyPreset) : Event(
+    class Victory(time: Long, score: Score, difficultyPreset: DifficultyPreset) : Event(
         "Victory",
         mapOf(
             "Time" to time.toString(),
             "Difficulty" to difficultyPreset.text,
-            "Right Mines" to gameStats.rightMines.toString(),
-            "Total Mines" to gameStats.totalMines.toString(),
-            "Total Area" to gameStats.totalArea.toString()
+            "Right Mines" to score.rightMines.toString(),
+            "Total Mines" to score.totalMines.toString(),
+            "Total Area" to score.totalArea.toString()
         )
     )
 
