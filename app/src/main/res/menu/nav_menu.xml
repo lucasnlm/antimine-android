@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <item
         android:id="@+id/nav_difficulty"
-        android:title="@string/levelSetup">
+        android:title="@string/minefield">
 
         <menu>
             <item

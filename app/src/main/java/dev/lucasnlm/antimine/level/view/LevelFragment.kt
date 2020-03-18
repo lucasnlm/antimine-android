@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.view.UnlockedHorizontalScrollView
 import dagger.android.support.DaggerFragment
-import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
-import dev.lucasnlm.antimine.common.level.data.GameEvent
+import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
@@ -102,24 +102,24 @@ open class LevelFragment : DaggerFragment() {
             })
             eventObserver.observe(viewLifecycleOwner, Observer {
                 when (it) {
-                    GameEvent.ResumeGameOver, GameEvent.GameOver,
-                    GameEvent.Victory, GameEvent.ResumeVictory -> areaAdapter.setClickEnabled(false)
+                    Event.ResumeGameOver, Event.GameOver,
+                    Event.Victory, Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
                     else -> areaAdapter.setClickEnabled(true)
                 }
             })
         }
     }
 
-    private fun handleNewGameDeeplink(): DifficultyPreset? {
-        var result: DifficultyPreset? = null
+    private fun handleNewGameDeeplink(): Difficulty? {
+        var result: Difficulty? = null
 
         activity?.intent?.data?.let { uri ->
             if (uri.scheme == DEFAULT_SCHEME) {
                 result = when (uri.schemeSpecificPart.removePrefix("//new-game/")) {
-                    "beginner" -> DifficultyPreset.Beginner
-                    "intermediate" -> DifficultyPreset.Intermediate
-                    "expert" -> DifficultyPreset.Expert
-                    "standard" -> DifficultyPreset.Standard
+                    "beginner" -> Difficulty.Beginner
+                    "intermediate" -> Difficulty.Intermediate
+                    "expert" -> Difficulty.Expert
+                    "standard" -> Difficulty.Standard
                     else -> null
                 }
             }

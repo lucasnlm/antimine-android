@@ -5,7 +5,7 @@ import androidx.multidex.MultiDex
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
-import dev.lucasnlm.antimine.core.analytics.Event
+import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.di.AppModule
 import dev.lucasnlm.antimine.di.DaggerAppComponent
 import javax.inject.Inject
@@ -29,6 +29,6 @@ class MainApplication : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
         analyticsManager.setup(applicationContext, mapOf())
-        analyticsManager.sentEvent(Event.Open())
+        analyticsManager.sentEvent(Analytics.Open())
     }
 }

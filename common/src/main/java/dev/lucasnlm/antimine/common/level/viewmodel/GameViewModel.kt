@@ -3,19 +3,19 @@ package dev.lucasnlm.antimine.common.level.viewmodel
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import dev.lucasnlm.antimine.common.level.GameModeFactory
+import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.LevelFacade
-import dev.lucasnlm.antimine.common.level.data.Area
-import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
-import dev.lucasnlm.antimine.common.level.data.GameEvent
-import dev.lucasnlm.antimine.common.level.data.LevelSetup
-import dev.lucasnlm.antimine.common.level.database.data.Save
+import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.common.level.models.Event
+import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
-import dev.lucasnlm.antimine.core.analytics.Event
+import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -24,89 +24,88 @@ import kotlinx.coroutines.withContext
 
 class GameViewModel(
     val application: Application,
-    val eventObserver: MutableLiveData<GameEvent>,
+    val eventObserver: MutableLiveData<Event>,
     private val savesRepository: ISavesRepository,
     private val dimensionRepository: IDimensionRepository,
     private val preferencesRepository: IPreferencesRepository,
     private val hapticFeedbackInteractor: IHapticFeedbackInteractor,
+    private val minefieldRepository: MinefieldRepository,
     private val analyticsManager: AnalyticsManager,
     private val clock: Clock
 ) : ViewModel() {
     private lateinit var levelFacade: LevelFacade
-    private var currentDifficulty: DifficultyPreset = DifficultyPreset.Standard
+    private var currentDifficulty: Difficulty = Difficulty.Standard
     private var initialized = false
 
     val field = MutableLiveData<List<Area>>()
     val fieldRefresh = MutableLiveData<Int>()
     val elapsedTimeSeconds = MutableLiveData<Long>()
     val mineCount = MutableLiveData<Int>()
-    val difficulty = MutableLiveData<DifficultyPreset>()
-    val levelSetup = MutableLiveData<LevelSetup>()
+    val difficulty = MutableLiveData<Difficulty>()
+    val levelSetup = MutableLiveData<Minefield>()
 
-    private fun startNewGame(gameId: Int, difficultyPreset: DifficultyPreset): LevelSetup {
+    fun startNewGame(difficulty: Difficulty = currentDifficulty): Minefield {
         clock.reset()
         elapsedTimeSeconds.postValue(0L)
-        currentDifficulty = difficultyPreset
+        currentDifficulty = difficulty
 
-        val setup = GameModeFactory.fromDifficultyPreset(
-            difficultyPreset, dimensionRepository, preferencesRepository
+        val minefield = minefieldRepository.fromDifficulty(
+            difficulty, dimensionRepository, preferencesRepository
         )
 
-        levelFacade = LevelFacade(gameId, setup)
+        levelFacade = LevelFacade(minefield)
 
-        mineCount.postValue(setup.mines)
-        difficulty.postValue(difficultyPreset)
-        levelSetup.postValue(setup)
+        mineCount.postValue(minefield.mines)
+        this.difficulty.postValue(difficulty)
+        levelSetup.postValue(minefield)
         field.postValue(levelFacade.field.toList())
 
-        eventObserver.postValue(GameEvent.StartNewGame)
+        eventObserver.postValue(Event.StartNewGame)
 
-        analyticsManager.sentEvent(Event.NewGame(setup, levelFacade.seed, useAccessibilityMode()))
+        analyticsManager.sentEvent(
+            Analytics.NewGame(
+                minefield, difficulty,
+                levelFacade.seed,
+                useAccessibilityMode()
+            )
+        )
 
-        return setup
+        return minefield
     }
 
-    private fun resumeGameFromSave(save: Save): LevelSetup {
+    private fun resumeGameFromSave(save: Save): Minefield {
         clock.reset(save.duration)
         elapsedTimeSeconds.postValue(save.duration)
 
-        val setup = save.levelSetup
+        val setup = save.minefield
         levelFacade = LevelFacade(save)
 
         mineCount.postValue(setup.mines)
-        difficulty.postValue(save.levelSetup.preset)
+        difficulty.postValue(save.difficulty)
         levelSetup.postValue(setup)
         field.postValue(levelFacade.field.toList())
 
         when {
-            levelFacade.hasAnyMineExploded() -> eventObserver.postValue(GameEvent.ResumeGameOver)
-            levelFacade.checkVictory() -> eventObserver.postValue(GameEvent.ResumeVictory)
-            else -> eventObserver.postValue(GameEvent.ResumeGame)
+            levelFacade.hasAnyMineExploded() -> eventObserver.postValue(Event.ResumeGameOver)
+            levelFacade.checkVictory() -> eventObserver.postValue(Event.ResumeVictory)
+            else -> eventObserver.postValue(Event.ResumeGame)
         }
 
-        analyticsManager.sentEvent(Event.ResumePreviousGame())
-
+        analyticsManager.sentEvent(Analytics.ResumePreviousGame())
         return setup
     }
 
-    suspend fun startNewGame(difficultyPreset: DifficultyPreset = currentDifficulty): LevelSetup =
-        withContext(Dispatchers.IO) {
-            val newGameId = savesRepository.getNewSaveId()
-            startNewGame(newGameId, difficultyPreset)
-        }
-
-    suspend fun onCreate(newGame: DifficultyPreset? = null): LevelSetup = withContext(Dispatchers.IO) {
+    suspend fun onCreate(newGame: Difficulty? = null): Minefield = withContext(Dispatchers.IO) {
         val lastGame = if (newGame == null) savesRepository.fetchCurrentSave() else null
 
         if (lastGame != null) {
-            currentDifficulty = lastGame.levelSetup.preset
+            currentDifficulty = lastGame.difficulty
         } else if (newGame != null) {
             currentDifficulty = newGame
         }
 
         if (lastGame == null) {
-            val newGameId = savesRepository.getNewSaveId()
-            startNewGame(newGameId, currentDifficulty)
+            startNewGame(currentDifficulty)
         } else {
             resumeGameFromSave(lastGame)
         }.also {
@@ -117,26 +116,24 @@ class GameViewModel(
     fun pauseGame() {
         if (initialized) {
             if (levelFacade.hasMines) {
-                eventObserver.postValue(GameEvent.Pause)
+                eventObserver.postValue(Event.Pause)
             }
             clock.stop()
         }
     }
 
     suspend fun saveGame() {
-        if (initialized) {
-            if (levelFacade.hasMines) {
-                savesRepository.saveGame(
-                    levelFacade.getSaveState().copy(duration = elapsedTimeSeconds.value ?: 0L)
-                )
-            }
+        if (initialized && levelFacade.hasMines) {
+            savesRepository.saveGame(
+                levelFacade.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
+            )
         }
     }
 
     fun resumeGame() {
         if (initialized) {
             if (levelFacade.hasMines) {
-                eventObserver.postValue(GameEvent.Resume)
+                eventObserver.postValue(Event.Resume)
             }
         }
     }
@@ -150,11 +147,11 @@ class GameViewModel(
                 hapticFeedbackInteractor.toggleFlagFeedback()
             }
 
-            analyticsManager.sentEvent(Event.LongPressArea(index))
+            analyticsManager.sentEvent(Analytics.LongPressArea(index))
         } else {
             levelFacade.openNeighbors(index)
 
-            analyticsManager.sentEvent(Event.LongPressMultipleArea(index))
+            analyticsManager.sentEvent(Analytics.LongPressMultipleArea(index))
         }
 
         field.postValue(levelFacade.field.toList())
@@ -184,7 +181,7 @@ class GameViewModel(
         }
 
         refreshGame()
-        analyticsManager.sentEvent(Event.PressArea(index))
+        analyticsManager.sentEvent(Analytics.PressArea(index))
     }
 
     private fun refreshMineCount() = mineCount.postValue(levelFacade.remainingMines())
@@ -193,10 +190,10 @@ class GameViewModel(
         when {
             levelFacade.hasAnyMineExploded() -> {
                 hapticFeedbackInteractor.explosionFeedback()
-                eventObserver.postValue(GameEvent.GameOver)
+                eventObserver.postValue(Event.GameOver)
             }
             else -> {
-                eventObserver.postValue(GameEvent.Running)
+                eventObserver.postValue(Event.Running)
             }
         }
 
@@ -205,7 +202,7 @@ class GameViewModel(
         }
 
         if (levelFacade.checkVictory()) {
-            eventObserver.postValue(GameEvent.Victory)
+            eventObserver.postValue(Event.Victory)
         }
     }
 
@@ -227,7 +224,7 @@ class GameViewModel(
 
     fun gameOver() {
         levelFacade.run {
-            analyticsManager.sentEvent(Event.GameOver(clock.time(), getStats()))
+            analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getStats()))
             showAllMines()
             showWrongFlags()
         }
@@ -239,7 +236,13 @@ class GameViewModel(
 
     fun victory() {
         levelFacade.run {
-            analyticsManager.sentEvent(Event.Victory(clock.time(), getStats(), currentDifficulty))
+            analyticsManager.sentEvent(
+                Analytics.Victory(
+                    clock.time(),
+                    getStats(),
+                    currentDifficulty
+                )
+            )
             flagAllMines()
             showWrongFlags()
         }

@@ -3,21 +3,22 @@ package dev.lucasnlm.antimine.common.level
 import android.util.DisplayMetrics
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
-import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
-import dev.lucasnlm.antimine.common.level.data.LevelSetup
+import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class LevelSetupFactoryTest {
+class MinefieldFactoryTest {
     private val dimensionRepository: IDimensionRepository = mock()
     private val preferencesRepository: IPreferencesRepository = mock()
 
     @Test
     fun testFromDifficultyPresetBeginner() {
-        GameModeFactory.fromDifficultyPreset(
-            DifficultyPreset.Beginner, dimensionRepository, preferencesRepository
+        MinefieldRepository().fromDifficulty(
+            Difficulty.Beginner, dimensionRepository, preferencesRepository
         ).run {
             assertEquals(9, width)
             assertEquals(9, height)
@@ -27,8 +28,8 @@ class LevelSetupFactoryTest {
 
     @Test
     fun testFromDifficultyPresetIntermediate() {
-        GameModeFactory.fromDifficultyPreset(
-            DifficultyPreset.Intermediate, dimensionRepository, preferencesRepository
+        MinefieldRepository().fromDifficulty(
+            Difficulty.Intermediate, dimensionRepository, preferencesRepository
         ).run {
             assertEquals(16, width)
             assertEquals(16, height)
@@ -38,8 +39,8 @@ class LevelSetupFactoryTest {
 
     @Test
     fun testFromDifficultyPresetExpert() {
-        GameModeFactory.fromDifficultyPreset(
-            DifficultyPreset.Expert, dimensionRepository, preferencesRepository
+        MinefieldRepository().fromDifficulty(
+            Difficulty.Expert, dimensionRepository, preferencesRepository
         ).run {
             assertEquals(24, width)
             assertEquals(24, height)
@@ -50,11 +51,15 @@ class LevelSetupFactoryTest {
     @Test
     fun testFromDifficultyPresetCustom() {
         val preferencesRepository: IPreferencesRepository = mock {
-            on { customGameMode() } doReturn LevelSetup(10, 10, 30, DifficultyPreset.Custom)
+            on { customGameMode() } doReturn Minefield(
+                10,
+                10,
+                30
+            )
         }
 
-        GameModeFactory.fromDifficultyPreset(
-            DifficultyPreset.Custom,
+        MinefieldRepository().fromDifficulty(
+            Difficulty.Custom,
             mock(),
             preferencesRepository
         ).run {
@@ -75,8 +80,8 @@ class LevelSetupFactoryTest {
             }
         }
 
-        GameModeFactory.fromDifficultyPreset(
-            DifficultyPreset.Standard,
+        MinefieldRepository().fromDifficulty(
+            Difficulty.Standard,
             dimensionRepository,
             preferencesRepository
         ).run {

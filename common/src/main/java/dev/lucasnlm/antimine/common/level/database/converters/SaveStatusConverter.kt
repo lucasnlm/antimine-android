@@ -1,10 +1,9 @@
 package dev.lucasnlm.antimine.common.level.database.converters
 
 import androidx.room.TypeConverter
-import dev.lucasnlm.antimine.common.level.database.data.SaveStatus
+import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 
 class SaveStatusConverter {
-
     @TypeConverter
     fun toSaveStatus(status: Int): SaveStatus =
         when (status) {

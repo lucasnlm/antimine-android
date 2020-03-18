@@ -5,17 +5,19 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.R
-import dev.lucasnlm.antimine.common.level.data.Area
+import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 
 class AreaAdapter(
     context: Context,
     private val viewModel: GameViewModel
-) : RecyclerView.Adapter<FieldViewHolder>() {
+) : RecyclerView.Adapter<AreaViewHolder>() {
 
     private var field = listOf<Area>()
     private var isLowBitAmbient = false
@@ -23,6 +25,7 @@ class AreaAdapter(
     private val paintSettings: AreaPaintSettings
 
     private var clickEnabled: Boolean = false
+    private var longPressAt: Long = 0L
 
     init {
         setHasStableIds(true)
@@ -45,14 +48,14 @@ class AreaAdapter(
 
     override fun getItemCount() = field.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FieldViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AreaViewHolder {
         val layout = if (viewModel.useAccessibilityMode()) {
             R.layout.view_accessibility_field
         } else {
             R.layout.view_field
         }
         val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
-        val holder = FieldViewHolder(view)
+        val holder = AreaViewHolder(view)
 
         holder.itemView.setOnLongClickListener { target ->
             target.requestFocus()
@@ -76,6 +79,33 @@ class AreaAdapter(
             }
         }
 
+        holder.areaView.setOnKeyListener { _, keyCode, keyEvent ->
+            var handled = false
+
+            if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+                when (keyEvent.action) {
+                    KeyEvent.ACTION_DOWN -> {
+                        longPressAt = System.currentTimeMillis()
+                        handled = true
+                    }
+                    KeyEvent.ACTION_UP -> {
+                        if (clickEnabled) {
+                            val value = System.currentTimeMillis() - longPressAt
+                            if (value > 300L) {
+                                view.performLongClick()
+                            } else {
+                                view.callOnClick()
+                            }
+                        }
+                        longPressAt = System.currentTimeMillis()
+                        handled = true
+                    }
+                }
+            }
+
+            handled
+        }
+
         return holder
     }
 
@@ -83,7 +113,7 @@ class AreaAdapter(
 
     override fun getItemId(position: Int): Long = getItem(position).id.toLong()
 
-    override fun onBindViewHolder(holder: FieldViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AreaViewHolder, position: Int) {
         val field = getItem(position)
         holder.areaView.bindField(field, isAmbientMode, isLowBitAmbient, paintSettings)
     }
@@ -93,7 +123,6 @@ class AreaAdapter(
 
         fun createAreaPaintSettings(context: Context, useLargeArea: Boolean): AreaPaintSettings {
             val resources = context.resources
-            val padding = resources.getDimension(R.dimen.field_padding)
             val size = if (useLargeArea) {
                 resources.getDimension(R.dimen.accessible_field_size)
             } else {

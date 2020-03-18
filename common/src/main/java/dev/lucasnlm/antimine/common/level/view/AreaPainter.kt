@@ -5,9 +5,10 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import dev.lucasnlm.antimine.common.R
-import dev.lucasnlm.antimine.common.level.data.Area
-import dev.lucasnlm.antimine.common.level.data.Mark
-import dev.lucasnlm.antimine.common.level.model.AreaPalette
+import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
+import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.common.level.models.AreaPalette
 import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
 
 fun Area.paintOnCanvas(

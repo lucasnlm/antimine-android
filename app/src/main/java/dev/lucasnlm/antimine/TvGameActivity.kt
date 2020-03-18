@@ -21,9 +21,10 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.android.support.DaggerAppCompatActivity
 import dev.lucasnlm.antimine.about.AboutActivity
-import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
-import dev.lucasnlm.antimine.common.level.data.GameEvent
-import dev.lucasnlm.antimine.common.level.data.GameStatus
+import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.common.level.models.Event
+import dev.lucasnlm.antimine.common.level.models.Score
+import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
@@ -45,7 +46,11 @@ class TvGameActivity : DaggerAppCompatActivity() {
 
     private lateinit var viewModel: GameViewModel
 
-    private var gameStatus: GameStatus = GameStatus.PreGame
+    private var status: Status = Status.PreGame
+    private var totalMines: Int = 0
+    private var totalArea: Int = 0
+    private var rightMines: Int = 0
+    private var currentTime: Long = 0
 
     private var keepConfirmingNewGame = true
 
@@ -68,26 +73,37 @@ class TvGameActivity : DaggerAppCompatActivity() {
         eventObserver.observe(this@TvGameActivity, Observer {
             onGameEvent(it)
         })
+
         elapsedTimeSeconds.observe(this@TvGameActivity, Observer {
             timer.apply {
                 visibility = if (it == 0L) View.GONE else View.VISIBLE
                 text = DateUtils.formatElapsedTime(it)
             }
+            currentTime = it
         })
+
         mineCount.observe(this@TvGameActivity, Observer {
             minesCount.apply {
                 visibility = View.VISIBLE
                 text = it.toString()
             }
         })
+
         difficulty.observe(this@TvGameActivity, Observer {
             // onChangeDifficulty(it)
+        })
+
+        field.observe(this@TvGameActivity, Observer { area ->
+            val mines = area.filter { it.hasMine }
+            totalArea = area.count()
+            totalMines = mines.count()
+            rightMines = mines.map { if (it.mark.isFlag()) 1 else 0 }.sum()
         })
     }
 
     override fun onResume() {
         super.onResume()
-        if (gameStatus == GameStatus.Running) {
+        if (status == Status.Running) {
             viewModel.resumeGame()
         }
     }
@@ -95,14 +111,14 @@ class TvGameActivity : DaggerAppCompatActivity() {
     override fun onPause() {
         super.onPause()
 
-        if (gameStatus == GameStatus.Running) {
+        if (status == Status.Running) {
             viewModel.pauseGame()
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean =
-        when (gameStatus) {
-            is GameStatus.Over, is GameStatus.Running -> {
+        when (status) {
+            is Status.Over, is Status.Running -> {
                 menuInflater.inflate(R.menu.top_menu_over, menu)
                 true
             }
@@ -111,7 +127,7 @@ class TvGameActivity : DaggerAppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.reset) {
-            if (gameStatus == GameStatus.Running) {
+            if (status == Status.Running) {
                 newGameConfirmation {
                     GlobalScope.launch {
                         viewModel.startNewGame()
@@ -202,7 +218,7 @@ class TvGameActivity : DaggerAppCompatActivity() {
     private fun waitAndShowConfirmNewGame() {
         if (keepConfirmingNewGame) {
             HandlerCompat.postDelayed(Handler(), {
-                if (gameStatus is GameStatus.Over && !isFinishing) {
+                if (status is Status.Over && !isFinishing) {
                     AlertDialog.Builder(this, R.style.MyDialog).apply {
                         setTitle(R.string.new_game)
                         setMessage(R.string.new_game_request)
@@ -222,7 +238,7 @@ class TvGameActivity : DaggerAppCompatActivity() {
 
     private fun waitAndShowGameOverConfirmNewGame() {
         HandlerCompat.postDelayed(Handler(), {
-            if (gameStatus is GameStatus.Over && !isFinishing) {
+            if (status is Status.Over && !isFinishing) {
                 AlertDialog.Builder(this, R.style.MyDialog).apply {
                     setTitle(R.string.you_lost)
                     setMessage(R.string.new_game_request)
@@ -237,8 +253,8 @@ class TvGameActivity : DaggerAppCompatActivity() {
         }, null, DateUtils.SECOND_IN_MILLIS)
     }
 
-    private fun changeDifficulty(newDifficulty: DifficultyPreset) {
-        if (gameStatus == GameStatus.PreGame) {
+    private fun changeDifficulty(newDifficulty: Difficulty) {
+        if (status == Status.PreGame) {
             GlobalScope.launch {
                 viewModel.startNewGame(newDifficulty)
             }
@@ -251,37 +267,52 @@ class TvGameActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private fun onGameEvent(event: GameEvent) {
+    private fun onGameEvent(event: Event) {
         when (event) {
-            GameEvent.ResumeGame -> {
+            Event.ResumeGame -> {
                 invalidateOptionsMenu()
             }
-            GameEvent.StartNewGame -> {
-                gameStatus = GameStatus.PreGame
+            Event.StartNewGame -> {
+                status = Status.PreGame
                 invalidateOptionsMenu()
             }
-            GameEvent.Resume, GameEvent.Running -> {
-                gameStatus = GameStatus.Running
+            Event.Resume, Event.Running -> {
+                status = Status.Running
                 viewModel.runClock()
                 invalidateOptionsMenu()
             }
-            GameEvent.Victory -> {
-                gameStatus = GameStatus.Over()
+            Event.Victory -> {
+                val score = Score(
+                    rightMines,
+                    totalMines,
+                    totalArea
+                )
+                status = Status.Over(currentTime, score)
                 viewModel.stopClock()
                 viewModel.revealAllEmptyAreas()
                 invalidateOptionsMenu()
                 showVictory()
             }
-            GameEvent.GameOver -> {
-                gameStatus = GameStatus.Over()
+            Event.GameOver -> {
+                val score = Score(
+                    rightMines,
+                    totalMines,
+                    totalArea
+                )
+                status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
                 viewModel.stopClock()
                 viewModel.gameOver()
 
                 waitAndShowGameOverConfirmNewGame()
             }
-            GameEvent.ResumeVictory, GameEvent.ResumeGameOver -> {
-                gameStatus = GameStatus.Over()
+            Event.ResumeVictory, Event.ResumeGameOver -> {
+                val score = Score(
+                    rightMines,
+                    totalMines,
+                    totalArea
+                )
+                status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
                 viewModel.stopClock()
 

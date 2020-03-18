@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.common.level.view
+package dev.lucasnlm.antimine.common.level.models
 
 import android.graphics.Paint
 import android.graphics.RectF

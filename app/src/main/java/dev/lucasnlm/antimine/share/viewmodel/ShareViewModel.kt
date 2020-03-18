@@ -5,17 +5,17 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.share.ShareBuilder
-import dev.lucasnlm.antimine.common.level.data.Area
-import dev.lucasnlm.antimine.common.level.data.LevelSetup
+import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.common.level.models.Minefield
 
 class ShareViewModel(
     application: Application
 ) : AndroidViewModel(application) {
     private val context = getApplication<Application>().applicationContext
 
-    suspend fun share(levelSetup: LevelSetup?, field: List<Area>?, spentTime: Long?) {
-        val result = if (levelSetup != null && field != null && field.isNotEmpty()) {
-            ShareBuilder(context).share(levelSetup, field, spentTime)
+    suspend fun share(minefield: Minefield?, field: List<Area>?, spentTime: Long?) {
+        val result = if (minefield != null && field != null && field.isNotEmpty()) {
+            ShareBuilder(context).share(minefield, field, spentTime)
         } else {
             false
         }

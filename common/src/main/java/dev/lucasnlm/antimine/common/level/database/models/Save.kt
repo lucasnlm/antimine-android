@@ -1,11 +1,12 @@
-package dev.lucasnlm.antimine.common.level.database.data
+package dev.lucasnlm.antimine.common.level.database.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import dev.lucasnlm.antimine.common.level.data.Area
-import dev.lucasnlm.antimine.common.level.data.LevelSetup
+import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.database.converters.FieldConverter
 import dev.lucasnlm.antimine.common.level.database.converters.SaveStatusConverter
 
@@ -23,8 +24,11 @@ data class Save(
     @ColumnInfo(name = "duration")
     val duration: Long,
 
-    @ColumnInfo(name = "width")
-    val levelSetup: LevelSetup,
+    @ColumnInfo(name = "minefield")
+    val minefield: Minefield,
+
+    @ColumnInfo(name = "difficulty")
+    val difficulty: Difficulty,
 
     @TypeConverters(SaveStatusConverter::class)
     @ColumnInfo(name = "status")

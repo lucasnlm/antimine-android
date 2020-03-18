@@ -1,6 +1,6 @@
-package dev.lucasnlm.antimine.common.level.data
+package dev.lucasnlm.antimine.common.level.models
 
-data class GameStats(
+data class Score(
     val rightMines: Int,
     val totalMines: Int,
     val totalArea: Int

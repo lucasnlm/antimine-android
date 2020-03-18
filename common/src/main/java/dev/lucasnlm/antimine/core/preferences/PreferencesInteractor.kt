@@ -2,7 +2,7 @@ package dev.lucasnlm.antimine.core.preferences
 
 import android.app.Application
 import androidx.preference.PreferenceManager
-import dev.lucasnlm.antimine.common.level.data.LevelSetup
+import dev.lucasnlm.antimine.common.level.models.Minefield
 import javax.inject.Inject
 
 class PreferencesInteractor @Inject constructor(
@@ -12,17 +12,17 @@ class PreferencesInteractor @Inject constructor(
         PreferenceManager.getDefaultSharedPreferences(application)
     }
 
-    fun getCustomMode() = LevelSetup(
+    fun getCustomMode() = Minefield(
         preferences.getInt(PREFERENCE_CUSTOM_GAME_WIDTH, 9),
         preferences.getInt(PREFERENCE_CUSTOM_GAME_HEIGHT, 9),
         preferences.getInt(PREFERENCE_CUSTOM_GAME_MINES, 9)
     )
 
-    fun updateCustomMode(customLevelSetup: LevelSetup) {
+    fun updateCustomMode(customMinefield: Minefield) {
         preferences.edit().apply {
-            putInt(PREFERENCE_CUSTOM_GAME_WIDTH, customLevelSetup.width)
-            putInt(PREFERENCE_CUSTOM_GAME_HEIGHT, customLevelSetup.height)
-            putInt(PREFERENCE_CUSTOM_GAME_MINES, customLevelSetup.mines)
+            putInt(PREFERENCE_CUSTOM_GAME_WIDTH, customMinefield.width)
+            putInt(PREFERENCE_CUSTOM_GAME_HEIGHT, customMinefield.height)
+            putInt(PREFERENCE_CUSTOM_GAME_MINES, customMinefield.mines)
         }.apply()
     }
 

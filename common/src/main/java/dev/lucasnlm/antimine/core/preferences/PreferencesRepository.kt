@@ -1,10 +1,10 @@
 package dev.lucasnlm.antimine.core.preferences
 
-import dev.lucasnlm.antimine.common.level.data.LevelSetup
+import dev.lucasnlm.antimine.common.level.models.Minefield
 
 interface IPreferencesRepository {
-    fun customGameMode(): LevelSetup
-    fun updateCustomGameMode(levelSetup: LevelSetup)
+    fun customGameMode(): Minefield
+    fun updateCustomGameMode(minefield: Minefield)
     fun getBoolean(key: String, defaultValue: Boolean): Boolean
     fun getInt(key: String, defaultValue: Int): Int
     fun putBoolean(key: String, value: Boolean)
@@ -19,11 +19,11 @@ class PreferencesRepository(
     private val preferencesInteractor: PreferencesInteractor
 ) : IPreferencesRepository {
 
-    override fun customGameMode(): LevelSetup =
+    override fun customGameMode(): Minefield =
         preferencesInteractor.getCustomMode()
 
-    override fun updateCustomGameMode(levelSetup: LevelSetup) =
-        preferencesInteractor.updateCustomMode(levelSetup)
+    override fun updateCustomGameMode(minefield: Minefield) =
+        preferencesInteractor.updateCustomMode(minefield)
 
     override fun getBoolean(key: String, defaultValue: Boolean): Boolean =
         preferencesInteractor.getBoolean(key, defaultValue)

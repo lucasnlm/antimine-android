@@ -6,16 +6,16 @@ import android.graphics.Canvas
 import androidx.core.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
-import dev.lucasnlm.antimine.common.level.data.Area
+import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
 import android.util.TypedValue
 import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.core.view.ViewCompat
 import dev.lucasnlm.antimine.common.R
-import dev.lucasnlm.antimine.common.level.data.Mark
-import dev.lucasnlm.antimine.common.level.data.isNotNone
-import dev.lucasnlm.antimine.common.level.model.AreaPalette
+import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
+import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.common.level.models.AreaPalette
 
 class AreaView : View {
     // Used on Wear OS

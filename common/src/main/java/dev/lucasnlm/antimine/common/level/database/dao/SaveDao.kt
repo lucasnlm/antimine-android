@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import dev.lucasnlm.antimine.common.level.database.data.Save
+import dev.lucasnlm.antimine.common.level.database.models.Save
 
 @Dao
 interface SaveDao {

@@ -4,7 +4,7 @@
     <string name="app_description">Deshabilitar las minas ocultas del campo de minas.</string>
     <string name="remaining_mines">Minas Restantes</string>
     <string name="install">Instalar</string>
-    <string name="levelSetup">Dificultad</string>
+    <string name="minefield">Dificultad</string>
     <string name="standard">Estándar</string>
     <string name="beginner">Principiante</string>
     <string name="intermediate">Intermediario</string>

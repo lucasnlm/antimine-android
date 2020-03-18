@@ -1,20 +1,18 @@
 package dev.lucasnlm.antimine.common.level
 
-import dev.lucasnlm.antimine.common.level.data.LevelSetup
-import dev.lucasnlm.antimine.common.level.data.Area
-import dev.lucasnlm.antimine.common.level.data.GameStats
-import dev.lucasnlm.antimine.common.level.data.Mark
-import dev.lucasnlm.antimine.common.level.data.isNone
-import dev.lucasnlm.antimine.common.level.data.isNotNone
-import dev.lucasnlm.antimine.common.level.database.data.Save
-import dev.lucasnlm.antimine.common.level.database.data.SaveStatus
+import dev.lucasnlm.antimine.common.level.database.models.Save
+import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
+import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.common.level.models.Score
 import java.util.Random
 import kotlin.math.floor
 
 class LevelFacade {
-    private val levelSetup: LevelSetup
+    private val minefield: Minefield
     private val randomGenerator: Random
-    private var saveId = 0
     private val startTime = System.currentTimeMillis()
 
     var hasMines = false
@@ -28,17 +26,15 @@ class LevelFacade {
 
     private var mines: Sequence<Area> = sequenceOf()
 
-    constructor(gameId: Int, levelSetup: LevelSetup, seed: Long = randomSeed()) {
-        this.saveId = gameId
-        this.levelSetup = levelSetup
+    constructor(minefield: Minefield, seed: Long = randomSeed()) {
+        this.minefield = minefield
         this.randomGenerator = Random().apply { setSeed(seed) }
         this.seed = seed
         createEmptyField()
     }
 
     constructor(save: Save) {
-        this.saveId = save.uid
-        this.levelSetup = save.levelSetup
+        this.minefield = save.minefield
         this.randomGenerator = Random().apply { setSeed(save.seed) }
         this.field = save.field.asSequence()
         this.mines = this.field.filter { it.hasMine }.asSequence()
@@ -46,8 +42,8 @@ class LevelFacade {
     }
 
     private fun createEmptyField() {
-        val width = levelSetup.width
-        val height = levelSetup.height
+        val width = minefield.width
+        val height = minefield.height
         val fieldSize = width * height
         this.field = (0 until fieldSize).map { index ->
             val yPosition = floor((index / width).toDouble()).toInt()
@@ -102,7 +98,7 @@ class LevelFacade {
         field.filterNot { it.safeZone }
             .toSet()
             .shuffled(randomGenerator)
-            .take(levelSetup.mines)
+            .take(minefield.mines)
             .forEach { it.hasMine = true }
         mines = field.filter { it.hasMine }.asSequence()
         hasMines = mines.count() != 0
@@ -180,22 +176,22 @@ class LevelFacade {
     fun runFlagAssistant() {
         // Must not select Mark.PurposefulNone, only Mark.None. Otherwise, it will flag
         // a square that was previously unflagged by player.
-        mines.filter { it.mark == Mark.None }.forEach { field ->
+        mines.filter { it.mark.isPureNone() }.forEach { field ->
             val neighbors = field.findNeighbors()
             val neighborsCount = neighbors.count()
             val revealedNeighborsCount = neighbors.filter { neighbor ->
-                !neighbor.isCovered || (neighbor.hasMine && neighbor.mark == Mark.Flag)
+                !neighbor.isCovered || (neighbor.hasMine && neighbor.mark.isFlag())
             }.count()
 
             field.mark = if (revealedNeighborsCount == neighborsCount) Mark.Flag else Mark.None
         }
     }
 
-    fun getStats() = GameStats(
-            mines.filter { !it.mistake && it.mark == Mark.Flag }.count(),
-            mines.count(),
-            field.count()
-        )
+    fun getStats() = Score(
+        mines.filter { !it.mistake && it.mark.isFlag() }.count(),
+        mines.count(),
+        field.count()
+    )
 
     fun showAllMines() {
         mines.filter { it.mark != Mark.Flag }.forEach { it.isCovered = false }
@@ -215,7 +211,7 @@ class LevelFacade {
 
     fun hasAnyMineExploded(): Boolean = mines.firstOrNull { it.mistake } != null
 
-    fun hasFlaggedAllMines(): Boolean = rightFlags() == levelSetup.mines
+    fun hasFlaggedAllMines(): Boolean = rightFlags() == minefield.mines
 
     fun hasIsolatedAllMines() =
         mines.map {
@@ -227,13 +223,13 @@ class LevelFacade {
             neighborsCount == isolatedNeighborsCount
         }.filterNot { it }.count() == 0
 
-    private fun rightFlags() = mines.count { it.mark == Mark.Flag }
+    private fun rightFlags() = mines.count { it.mark.isFlag() }
 
     fun checkVictory(): Boolean =
         hasMines && hasIsolatedAllMines() && !hasAnyMineExploded()
 
     fun remainingMines(): Int {
-        val flagsCount = field.count { it.mark == Mark.Flag }
+        val flagsCount = field.count { it.mark.isFlag() }
         val minesCount = mines.count()
         return (minesCount - flagsCount).coerceAtLeast(0)
     }
@@ -253,13 +249,13 @@ class LevelFacade {
         (it.posX == this.posX + x) && (it.posY == this.posY + y)
     }
 
-    fun getSaveState(): Save {
+    fun getSaveState(duration: Long, difficulty: Difficulty): Save {
         val saveStatus: SaveStatus = when {
             checkVictory() -> SaveStatus.VICTORY
             hasAnyMineExploded() -> SaveStatus.DEFEAT
             else -> SaveStatus.ON_GOING
         }
-        return Save(saveId, seed, startTime, 0L, levelSetup, saveStatus, field.toList())
+        return Save(0, seed, startTime, duration, minefield, difficulty, saveStatus, field.toList())
     }
 
     companion object {

@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.common.level.model
+package dev.lucasnlm.antimine.common.level.models
 
 import android.content.Context
 import android.graphics.Color

@@ -27,14 +27,14 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.android.support.DaggerAppCompatActivity
 import dev.lucasnlm.antimine.about.AboutActivity
-import dev.lucasnlm.antimine.common.level.data.DifficultyPreset
-import dev.lucasnlm.antimine.common.level.data.GameEvent
-import dev.lucasnlm.antimine.common.level.data.GameStatus
-import dev.lucasnlm.antimine.common.level.data.Mark
+import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.common.level.models.Event
+import dev.lucasnlm.antimine.common.level.models.Score
+import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
-import dev.lucasnlm.antimine.core.analytics.Event
+import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.utils.isDarkModeEnabled
 import dev.lucasnlm.antimine.instant.InstantAppManager
@@ -65,9 +65,10 @@ class GameActivity : DaggerAppCompatActivity() {
     private lateinit var viewModel: GameViewModel
     private lateinit var shareViewModel: ShareViewModel
 
-    private var gameStatus: GameStatus = GameStatus.PreGame
+    private var status: Status = Status.PreGame
     private val usingLargeArea by lazy { preferencesRepository.useLargeAreas() }
     private var totalMines: Int = 0
+    private var totalArea: Int = 0
     private var rightMines: Int = 0
     private var currentTime: Long = 0
 
@@ -120,8 +121,9 @@ class GameActivity : DaggerAppCompatActivity() {
 
         field.observe(this@GameActivity, Observer { area ->
             val mines = area.filter { it.hasMine }
+            totalArea = area.count()
             totalMines = mines.count()
-            rightMines = mines.map { if (it.mark == Mark.Flag) 1 else 0 }.sum()
+            rightMines = mines.map { if (it.mark.isFlag()) 1 else 0 }.sum()
         })
     }
 
@@ -131,7 +133,7 @@ class GameActivity : DaggerAppCompatActivity() {
                 drawer.closeDrawer(GravityCompat.START)
                 viewModel.resumeGame()
             }
-            gameStatus == GameStatus.Running && instantAppManager.isEnabled() -> showQuitConfirmation {
+            status == Status.Running && instantAppManager.isEnabled() -> showQuitConfirmation {
                 super.onBackPressed()
             }
             else -> super.onBackPressed()
@@ -140,9 +142,9 @@ class GameActivity : DaggerAppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (gameStatus == GameStatus.Running) {
+        if (status == Status.Running) {
             viewModel.resumeGame()
-            analyticsManager.sentEvent(Event.Resume())
+            analyticsManager.sentEvent(Analytics.Resume())
         }
 
         restartIfNeed()
@@ -151,16 +153,16 @@ class GameActivity : DaggerAppCompatActivity() {
     override fun onPause() {
         super.onPause()
 
-        if (gameStatus == GameStatus.Running) {
+        if (status == Status.Running) {
             viewModel.pauseGame()
         }
 
-        analyticsManager.sentEvent(Event.Quit())
+        analyticsManager.sentEvent(Analytics.Quit())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean =
-        when (gameStatus) {
-            is GameStatus.Over, is GameStatus.Running -> {
+        when (status) {
+            is Status.Over, is Status.Running -> {
                 menuInflater.inflate(R.menu.top_menu_over, menu)
                 true
             }
@@ -170,8 +172,8 @@ class GameActivity : DaggerAppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.reset) {
 
-            val confirmResign = gameStatus == GameStatus.Running
-            analyticsManager.sentEvent(Event.TapGameReset(confirmResign))
+            val confirmResign = status == Status.Running
+            analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
 
             if (confirmResign) {
                 newGameConfirmation {
@@ -224,17 +226,17 @@ class GameActivity : DaggerAppCompatActivity() {
                 }
 
                 override fun onDrawerOpened(drawerView: View) {
-                    if (gameStatus is GameStatus.Over) {
+                    if (status is Status.Over) {
                         viewModel.pauseGame()
                     }
-                    analyticsManager.sentEvent(Event.OpenDrawer())
+                    analyticsManager.sentEvent(Analytics.OpenDrawer())
                 }
 
                 override fun onDrawerClosed(drawerView: View) {
-                    if (gameStatus is GameStatus.Over) {
+                    if (status is Status.Over) {
                         viewModel.resumeGame()
                     }
-                    analyticsManager.sentEvent(Event.CloseDrawer())
+                    analyticsManager.sentEvent(Analytics.CloseDrawer())
                 }
 
                 override fun onDrawerStateChanged(newState: Int) {
@@ -247,10 +249,10 @@ class GameActivity : DaggerAppCompatActivity() {
             var handled = true
 
             when (item.itemId) {
-                R.id.standard -> changeDifficulty(DifficultyPreset.Standard)
-                R.id.beginner -> changeDifficulty(DifficultyPreset.Beginner)
-                R.id.intermediate -> changeDifficulty(DifficultyPreset.Intermediate)
-                R.id.expert -> changeDifficulty(DifficultyPreset.Expert)
+                R.id.standard -> changeDifficulty(Difficulty.Standard)
+                R.id.beginner -> changeDifficulty(Difficulty.Beginner)
+                R.id.intermediate -> changeDifficulty(Difficulty.Intermediate)
+                R.id.expert -> changeDifficulty(Difficulty.Expert)
                 R.id.custom -> showCustomLevelDialog()
                 R.id.about -> showAbout()
                 R.id.settings -> showSettings()
@@ -280,21 +282,21 @@ class GameActivity : DaggerAppCompatActivity() {
         val shouldRequestRating = preferencesRepository.getBoolean(PREFERENCE_REQUEST_RATING, true)
 
         if (current >= 4 && shouldRequestRating) {
-            analyticsManager.sentEvent(Event.ShowRatingRequest(current))
+            analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
             showRequestRating()
         }
 
         preferencesRepository.putInt(PREFERENCE_USE_COUNT, current + 1)
     }
 
-    private fun onChangeDifficulty(difficulty: DifficultyPreset) {
+    private fun onChangeDifficulty(difficulty: Difficulty) {
         navigationView.menu.apply {
             arrayOf(
-                DifficultyPreset.Standard to findItem(R.id.standard),
-                DifficultyPreset.Beginner to findItem(R.id.beginner),
-                DifficultyPreset.Intermediate to findItem(R.id.intermediate),
-                DifficultyPreset.Expert to findItem(R.id.expert),
-                DifficultyPreset.Custom to findItem(R.id.custom)
+                Difficulty.Standard to findItem(R.id.standard),
+                Difficulty.Beginner to findItem(R.id.beginner),
+                Difficulty.Intermediate to findItem(R.id.intermediate),
+                Difficulty.Expert to findItem(R.id.expert),
+                Difficulty.Custom to findItem(R.id.custom)
             ).map {
                 it.second to (if (it.first == difficulty) R.drawable.checked else R.drawable.unchecked)
             }.forEach { (menuItem, icon) ->
@@ -365,31 +367,40 @@ class GameActivity : DaggerAppCompatActivity() {
     }
 
     private fun showAbout() {
-        analyticsManager.sentEvent(Event.OpenAbout())
+        analyticsManager.sentEvent(Analytics.OpenAbout())
         Intent(this, AboutActivity::class.java).apply {
             startActivity(this)
         }
     }
 
     private fun showSettings() {
-        analyticsManager.sentEvent(Event.OpenSettings())
+        analyticsManager.sentEvent(Analytics.OpenSettings())
         Intent(this, PreferencesActivity::class.java).apply {
             startActivity(this)
         }
     }
 
     private fun showEndGameDialog(victory: Boolean) {
-        if (gameStatus is GameStatus.Over && !isFinishing) {
+        val currentGameStatus = status
+        if (currentGameStatus is Status.Over && !isFinishing) {
             if (supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG) == null) {
-                val over = gameStatus as GameStatus.Over
-                EndGameDialogFragment.newInstance(victory, over.rightMines, over.totalMines, over.time).apply {
+                val score = currentGameStatus.score
+                EndGameDialogFragment.newInstance(
+                    victory,
+                    score?.rightMines ?: 0,
+                    score?.totalMines ?: 0,
+                    currentGameStatus.time
+                ).apply {
                     showAllowingStateLoss(supportFragmentManager, EndGameDialogFragment.TAG)
                 }
             }
         }
     }
 
-    private fun waitAndShowEndGameDialog(victory: Boolean, await: Long = DateUtils.SECOND_IN_MILLIS) {
+    private fun waitAndShowEndGameDialog(
+        victory: Boolean,
+        await: Long = DateUtils.SECOND_IN_MILLIS
+    ) {
         if (await > 0L) {
             postDelayed(Handler(), {
                 showEndGameDialog(victory)
@@ -399,8 +410,8 @@ class GameActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private fun changeDifficulty(newDifficulty: DifficultyPreset) {
-        if (gameStatus == GameStatus.PreGame) {
+    private fun changeDifficulty(newDifficulty: Difficulty) {
+        if (status == Status.PreGame) {
             GlobalScope.launch {
                 viewModel.startNewGame(newDifficulty)
             }
@@ -413,45 +424,65 @@ class GameActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private fun onGameEvent(event: GameEvent) {
+    private fun onGameEvent(event: Event) {
         when (event) {
-            GameEvent.ResumeGame -> {
+            Event.ResumeGame -> {
                 invalidateOptionsMenu()
             }
-            GameEvent.StartNewGame -> {
-                gameStatus = GameStatus.PreGame
+            Event.StartNewGame -> {
+                status = Status.PreGame
                 invalidateOptionsMenu()
             }
-            GameEvent.Resume, GameEvent.Running -> {
-                gameStatus = GameStatus.Running
+            Event.Resume, Event.Running -> {
+                status = Status.Running
                 viewModel.runClock()
                 invalidateOptionsMenu()
             }
-            GameEvent.Victory -> {
-                gameStatus = GameStatus.Over(rightMines, totalMines, currentTime)
+            Event.Victory -> {
+                val score = Score(
+                    rightMines,
+                    totalMines,
+                    totalArea
+                )
+                status = Status.Over(currentTime, score)
                 viewModel.stopClock()
                 viewModel.revealAllEmptyAreas()
                 viewModel.victory()
                 invalidateOptionsMenu()
                 waitAndShowEndGameDialog(true, 0L)
             }
-            GameEvent.GameOver -> {
-                gameStatus = GameStatus.Over(rightMines, totalMines, currentTime)
+            Event.GameOver -> {
+                val score = Score(
+                    rightMines,
+                    totalMines,
+                    totalArea
+                )
+                status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
                 viewModel.stopClock()
                 viewModel.gameOver()
 
                 waitAndShowEndGameDialog(false)
             }
-            GameEvent.ResumeVictory -> {
-                gameStatus = GameStatus.Over(rightMines, totalMines, currentTime)
+            Event.ResumeVictory -> {
+                val score = Score(
+                    rightMines,
+                    totalMines,
+                    totalArea
+                )
+                status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
                 viewModel.stopClock()
 
                 waitAndShowEndGameDialog(true)
             }
-            GameEvent.ResumeGameOver -> {
-                gameStatus = GameStatus.Over(rightMines, totalMines, currentTime)
+            Event.ResumeGameOver -> {
+                val score = Score(
+                    rightMines,
+                    totalMines,
+                    totalArea
+                )
+                status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
                 viewModel.stopClock()
 
@@ -497,7 +528,7 @@ class GameActivity : DaggerAppCompatActivity() {
     private fun shareCurrentGame() {
         val levelSetup = viewModel.levelSetup.value
         val field = viewModel.field.value
-        val spentTime: Long? = if (gameStatus is GameStatus.Over) currentTime else null
+        val spentTime: Long? = if (status is Status.Over) currentTime else null
         GlobalScope.launch {
             shareViewModel.share(levelSetup, field, spentTime)
         }
@@ -530,7 +561,7 @@ class GameActivity : DaggerAppCompatActivity() {
             )
         }
 
-        analyticsManager.sentEvent(Event.TapRatingRequest(from))
+        analyticsManager.sentEvent(Analytics.TapRatingRequest(from))
         preferencesRepository.putBoolean(PREFERENCE_REQUEST_RATING, false)
     }
 

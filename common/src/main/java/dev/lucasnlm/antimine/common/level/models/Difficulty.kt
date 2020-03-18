@@ -1,6 +1,8 @@
-package dev.lucasnlm.antimine.common.level.data
+package dev.lucasnlm.antimine.common.level.models
 
-enum class DifficultyPreset(val text: String) {
+enum class Difficulty(
+    val text: String
+) {
     Standard("STANDARD"),
     Beginner("BEGINNER"),
     Intermediate("INTERMEDIATE"),
