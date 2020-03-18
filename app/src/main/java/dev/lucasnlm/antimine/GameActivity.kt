@@ -387,8 +387,8 @@ class GameActivity : DaggerAppCompatActivity() {
                 val score = currentGameStatus.score
                 EndGameDialogFragment.newInstance(
                     victory,
-                    score.rightMines,
-                    score.totalMines,
+                    score?.rightMines ?: 0,
+                    score?.totalMines ?: 0,
                     currentGameStatus.time
                 ).apply {
                     showAllowingStateLoss(supportFragmentManager, EndGameDialogFragment.TAG)

@@ -51,7 +51,7 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
             time = getLong(DIALOG_TIME)
             rightMines = getInt(DIALOG_RIGHT_MINES)
             totalMines = getInt(DIALOG_TOTAL_MINES)
-            hasValidData = true
+            hasValidData = (totalMines > 0)
         }
     }
 
