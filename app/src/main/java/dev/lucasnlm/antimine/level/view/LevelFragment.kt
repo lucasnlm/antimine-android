@@ -93,18 +93,26 @@ open class LevelFragment : DaggerFragment() {
             field.observe(viewLifecycleOwner, Observer {
                 areaAdapter.bindField(it)
             })
+
             levelSetup.observe(viewLifecycleOwner, Observer {
                 recyclerGrid.layoutManager =
                     GridLayoutManager(activity, it.width, RecyclerView.VERTICAL, false)
             })
+
             fieldRefresh.observe(viewLifecycleOwner, Observer {
                 areaAdapter.notifyItemChanged(it)
             })
+
             eventObserver.observe(viewLifecycleOwner, Observer {
                 when (it) {
-                    Event.ResumeGameOver, Event.GameOver,
-                    Event.Victory, Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
-                    else -> areaAdapter.setClickEnabled(true)
+                    Event.ResumeGameOver,
+                    Event.GameOver,
+                    Event.Victory,
+                    Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
+                    Event.Running,
+                    Event.ResumeGame,
+                    Event.StartNewGame -> areaAdapter.setClickEnabled(true)
+                    else -> {}
                 }
             })
         }
