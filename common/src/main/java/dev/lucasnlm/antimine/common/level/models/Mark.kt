@@ -10,8 +10,9 @@ enum class Mark {
 
     fun isQuestion(): Boolean = this == Question
 
+    fun isPureNone(): Boolean = this == None
+
     fun isNone(): Boolean = this == None || this == PurposefulNone
 
     fun isNotNone(): Boolean = this.isNone().not()
 }
-

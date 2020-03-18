@@ -3,7 +3,7 @@ package dev.lucasnlm.antimine.common.level.database.converters
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import org.junit.Test
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 
 class MinefieldConverterTest {
     private val expectedJson = "{\"width\":3,\"height\":3,\"mines\":4}"

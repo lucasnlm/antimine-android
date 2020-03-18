@@ -9,7 +9,11 @@ import dagger.Provides
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.database.AppDataBase
 import dev.lucasnlm.antimine.common.level.database.dao.SaveDao
-import dev.lucasnlm.antimine.common.level.repository.*
+import dev.lucasnlm.antimine.common.level.repository.DimensionRepository
+import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
+import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
+import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.HapticFeedbackInteractor
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor

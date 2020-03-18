@@ -2,7 +2,11 @@ package dev.lucasnlm.antimine.common.level
 
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
-import dev.lucasnlm.antimine.common.level.models.*
+import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.common.level.models.Score
 import java.util.Random
 import kotlin.math.floor
 
@@ -172,11 +176,11 @@ class LevelFacade {
     fun runFlagAssistant() {
         // Must not select Mark.PurposefulNone, only Mark.None. Otherwise, it will flag
         // a square that was previously unflagged by player.
-        mines.filter { it.mark == Mark.None }.forEach { field ->
+        mines.filter { it.mark.isPureNone() }.forEach { field ->
             val neighbors = field.findNeighbors()
             val neighborsCount = neighbors.count()
             val revealedNeighborsCount = neighbors.filter { neighbor ->
-                !neighbor.isCovered || (neighbor.hasMine && neighbor.mark == Mark.Flag)
+                !neighbor.isCovered || (neighbor.hasMine && neighbor.mark.isFlag())
             }.count()
 
             field.mark = if (revealedNeighborsCount == neighborsCount) Mark.Flag else Mark.None
@@ -184,7 +188,7 @@ class LevelFacade {
     }
 
     fun getStats() = Score(
-        mines.filter { !it.mistake && it.mark == Mark.Flag }.count(),
+        mines.filter { !it.mistake && it.mark.isFlag() }.count(),
         mines.count(),
         field.count()
     )
@@ -219,13 +223,13 @@ class LevelFacade {
             neighborsCount == isolatedNeighborsCount
         }.filterNot { it }.count() == 0
 
-    private fun rightFlags() = mines.count { it.mark == Mark.Flag }
+    private fun rightFlags() = mines.count { it.mark.isFlag() }
 
     fun checkVictory(): Boolean =
         hasMines && hasIsolatedAllMines() && !hasAnyMineExploded()
 
     fun remainingMines(): Int {
-        val flagsCount = field.count { it.mark == Mark.Flag }
+        val flagsCount = field.count { it.mark.isFlag() }
         val minesCount = mines.count()
         return (minesCount - flagsCount).coerceAtLeast(0)
     }

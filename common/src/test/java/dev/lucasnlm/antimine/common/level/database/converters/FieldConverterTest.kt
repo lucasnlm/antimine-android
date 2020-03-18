@@ -8,7 +8,14 @@ import org.junit.Assert.assertEquals
 
 class FieldConverterTest {
     private val expectedJson =
-        "[{\"id\":1,\"posX\":2,\"posY\":3,\"minesAround\":5,\"safeZone\":false,\"hasMine\":false,\"mistake\":false,\"isCovered\":true,\"mark\":\"None\",\"highlighted\":true},{\"id\":2,\"posX\":5,\"posY\":3,\"minesAround\":0,\"safeZone\":true,\"hasMine\":true,\"mistake\":true,\"isCovered\":false,\"mark\":\"PurposefulNone\",\"highlighted\":false},{\"id\":3,\"posX\":1,\"posY\":1,\"minesAround\":3,\"safeZone\":true,\"hasMine\":true,\"mistake\":false,\"isCovered\":true,\"mark\":\"Flag\",\"highlighted\":true},{\"id\":4,\"posX\":0,\"posY\":0,\"minesAround\":6,\"safeZone\":false,\"hasMine\":false,\"mistake\":false,\"isCovered\":true,\"mark\":\"Question\",\"highlighted\":true}]"
+        "[{\"id\":1,\"posX\":2,\"posY\":3,\"minesAround\":5,\"safeZone\":false,\"hasMine\":false,\"mistake\":false," +
+            "\"isCovered\":true,\"mark\":\"None\",\"highlighted\":true},{\"id\":2,\"posX\":5,\"posY\":3," +
+            "\"minesAround\":0,\"safeZone\":true,\"hasMine\":true,\"mistake\":true,\"isCovered\":false," +
+            "\"mark\":\"PurposefulNone\",\"highlighted\":false},{\"id\":3,\"posX\":1,\"posY\":1," +
+            "\"minesAround\":3,\"safeZone\":true,\"hasMine\":true,\"mistake\":false,\"isCovered\":true," +
+            "\"mark\":\"Flag\",\"highlighted\":true},{\"id\":4,\"posX\":0,\"posY\":0,\"minesAround\":6," +
+            "\"safeZone\":false,\"hasMine\":false,\"mistake\":false,\"isCovered\":true," +
+            "\"mark\":\"Question\",\"highlighted\":true}]"
 
     private val areaList =
         listOf(

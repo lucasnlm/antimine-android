@@ -27,7 +27,10 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.android.support.DaggerAppCompatActivity
 import dev.lucasnlm.antimine.about.AboutActivity
-import dev.lucasnlm.antimine.common.level.models.*
+import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.common.level.models.Event
+import dev.lucasnlm.antimine.common.level.models.Score
+import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
@@ -120,7 +123,7 @@ class GameActivity : DaggerAppCompatActivity() {
             val mines = area.filter { it.hasMine }
             totalArea = area.count()
             totalMines = mines.count()
-            rightMines = mines.map { if (it.mark == Mark.Flag) 1 else 0 }.sum()
+            rightMines = mines.map { if (it.mark.isFlag()) 1 else 0 }.sum()
         })
     }
 
