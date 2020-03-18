@@ -1,18 +1,27 @@
-package dev.lucasnlm.antimine.common.level
+package dev.lucasnlm.antimine.common.level.repository
 
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
-import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
-object GameModeFactory {
+interface IMinefieldRepository {
     fun fromDifficulty(
+        difficulty: Difficulty,
+        dimensionRepository: IDimensionRepository,
+        preferencesRepository: IPreferencesRepository
+    ): Minefield
+}
+
+class MinefieldRepository : IMinefieldRepository {
+    override fun fromDifficulty(
         difficulty: Difficulty,
         dimensionRepository: IDimensionRepository,
         preferencesRepository: IPreferencesRepository
     ): Minefield =
         when (difficulty) {
-            Difficulty.Standard -> calculateStandardMode(dimensionRepository)
+            Difficulty.Standard -> calculateStandardMode(
+                dimensionRepository
+            )
             Difficulty.Beginner -> Minefield(
                 9,
                 9,

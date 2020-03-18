@@ -3,7 +3,7 @@ package dev.lucasnlm.antimine.common.level.viewmodel
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import dev.lucasnlm.antimine.common.level.GameModeFactory
+import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.LevelFacade
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
@@ -29,6 +29,7 @@ class GameViewModel(
     private val dimensionRepository: IDimensionRepository,
     private val preferencesRepository: IPreferencesRepository,
     private val hapticFeedbackInteractor: IHapticFeedbackInteractor,
+    private val minefieldRepository: MinefieldRepository,
     private val analyticsManager: AnalyticsManager,
     private val clock: Clock
 ) : ViewModel() {
@@ -48,7 +49,7 @@ class GameViewModel(
         elapsedTimeSeconds.postValue(0L)
         currentDifficulty = difficulty
 
-        val minefield = GameModeFactory.fromDifficulty(
+        val minefield = minefieldRepository.fromDifficulty(
             difficulty, dimensionRepository, preferencesRepository
         )
 

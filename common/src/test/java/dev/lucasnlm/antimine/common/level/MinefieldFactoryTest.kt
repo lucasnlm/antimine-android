@@ -5,6 +5,7 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import org.junit.Assert.assertEquals
@@ -16,7 +17,7 @@ class MinefieldFactoryTest {
 
     @Test
     fun testFromDifficultyPresetBeginner() {
-        GameModeFactory.fromDifficulty(
+        MinefieldRepository.fromDifficulty(
             Difficulty.Beginner, dimensionRepository, preferencesRepository
         ).run {
             assertEquals(9, width)
@@ -27,7 +28,7 @@ class MinefieldFactoryTest {
 
     @Test
     fun testFromDifficultyPresetIntermediate() {
-        GameModeFactory.fromDifficulty(
+        MinefieldRepository.fromDifficulty(
             Difficulty.Intermediate, dimensionRepository, preferencesRepository
         ).run {
             assertEquals(16, width)
@@ -38,7 +39,7 @@ class MinefieldFactoryTest {
 
     @Test
     fun testFromDifficultyPresetExpert() {
-        GameModeFactory.fromDifficulty(
+        MinefieldRepository.fromDifficulty(
             Difficulty.Expert, dimensionRepository, preferencesRepository
         ).run {
             assertEquals(24, width)
@@ -57,7 +58,7 @@ class MinefieldFactoryTest {
             )
         }
 
-        GameModeFactory.fromDifficulty(
+        MinefieldRepository.fromDifficulty(
             Difficulty.Custom,
             mock(),
             preferencesRepository
@@ -79,7 +80,7 @@ class MinefieldFactoryTest {
             }
         }
 
-        GameModeFactory.fromDifficulty(
+        MinefieldRepository.fromDifficulty(
             Difficulty.Standard,
             dimensionRepository,
             preferencesRepository
