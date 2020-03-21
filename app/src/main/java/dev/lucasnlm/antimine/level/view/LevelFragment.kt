@@ -14,6 +14,7 @@ import dagger.android.support.DaggerFragment
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
+import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import kotlinx.coroutines.Dispatchers
@@ -62,6 +63,7 @@ open class LevelFragment : DaggerFragment() {
         recyclerGrid.apply {
             setHasFixedSize(true)
             isNestedScrollingEnabled = false
+            addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
             adapter = areaAdapter
             alpha = 0.0f
         }

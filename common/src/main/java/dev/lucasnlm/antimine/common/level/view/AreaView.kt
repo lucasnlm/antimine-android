@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.common.level.view
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import androidx.core.content.ContextCompat
@@ -32,6 +31,10 @@ class AreaView : View {
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+    init {
+        isHapticFeedbackEnabled = true
+    }
 
     fun bindField(area: Area, isAmbientMode: Boolean, isLowBitAmbient: Boolean, paintSettings: AreaPaintSettings) {
         this.paintSettings = paintSettings
@@ -68,7 +71,6 @@ class AreaView : View {
         }
     }
 
-    @SuppressLint("InlinedApi")
     private fun bindContentDescription(area: Area) {
         contentDescription = when {
             area.mark == Mark.Flag -> {
@@ -88,7 +90,11 @@ class AreaView : View {
                 area.hasMine -> IMPORTANT_FOR_ACCESSIBILITY_YES
                 area.mistake -> IMPORTANT_FOR_ACCESSIBILITY_YES
                 area.mark.isNotNone() -> IMPORTANT_FOR_ACCESSIBILITY_YES
-                !area.isCovered -> IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+                !area.isCovered -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+                } else {
+                    IMPORTANT_FOR_ACCESSIBILITY_NO
+                }
                 else -> IMPORTANT_FOR_ACCESSIBILITY_YES
             }
         )
@@ -113,6 +119,11 @@ class AreaView : View {
             paintSettings,
             palette
         )
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val size = paintSettings.rectF.width().toInt()
+        setMeasuredDimension(size, size)
     }
 
     private fun getRippleEffect(context: Context): Drawable? {
