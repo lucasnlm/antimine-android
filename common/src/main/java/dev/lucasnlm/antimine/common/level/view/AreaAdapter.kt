@@ -6,7 +6,6 @@ import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.Log
 import android.view.KeyEvent
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.R
@@ -49,12 +48,7 @@ class AreaAdapter(
     override fun getItemCount() = field.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AreaViewHolder {
-        val layout = if (viewModel.useAccessibilityMode()) {
-            R.layout.view_accessibility_field
-        } else {
-            R.layout.view_field
-        }
-        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
+        val view = AreaView(parent.context)
         val holder = AreaViewHolder(view)
 
         holder.itemView.setOnLongClickListener { target ->
@@ -79,7 +73,7 @@ class AreaAdapter(
             }
         }
 
-        holder.areaView.setOnKeyListener { _, keyCode, keyEvent ->
+        holder.itemView.setOnKeyListener { _, keyCode, keyEvent ->
             var handled = false
 
             if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
@@ -115,7 +109,9 @@ class AreaAdapter(
 
     override fun onBindViewHolder(holder: AreaViewHolder, position: Int) {
         val field = getItem(position)
-        holder.areaView.bindField(field, isAmbientMode, isLowBitAmbient, paintSettings)
+        if (holder.itemView is AreaView) {
+            holder.itemView.bindField(field, isAmbientMode, isLowBitAmbient, paintSettings)
+        }
     }
 
     companion object {
