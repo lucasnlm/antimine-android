@@ -5,7 +5,7 @@
     <dimen name="field_size">38dp</dimen>
     <dimen name="accessible_field_size">48dp</dimen>
     <dimen name="field_radius">2dp</dimen>
-    <dimen name="field_padding">1.0dp</dimen>
+    <dimen name="field_padding">1dp</dimen>
     <dimen name="highlight_stroke">2dp</dimen>
     <dimen name="mark_padding">5dp</dimen>
     <dimen name="mine_padding">2dp</dimen>

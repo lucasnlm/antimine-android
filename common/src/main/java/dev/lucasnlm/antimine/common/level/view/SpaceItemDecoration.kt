@@ -10,11 +10,6 @@ class SpaceItemDecoration(@DimenRes private val spaceRes: Int) : ItemDecoration(
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
         val space = view.context.resources.getDimension(spaceRes).toInt()
-        outRect.apply {
-            bottom = space
-            top = space
-            left = space
-            right = space
-        }
+        outRect.offset(space, space)
     }
 }
