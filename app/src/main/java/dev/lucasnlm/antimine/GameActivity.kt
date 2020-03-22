@@ -31,6 +31,7 @@ import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.models.Score
 import dev.lucasnlm.antimine.common.level.models.Status
+import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
@@ -62,6 +63,9 @@ class GameActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var instantAppManager: InstantAppManager
 
+    @Inject
+    lateinit var savesRepository: ISavesRepository
+
     private lateinit var viewModel: GameViewModel
     private lateinit var shareViewModel: ShareViewModel
 
@@ -86,6 +90,7 @@ class GameActivity : DaggerAppCompatActivity() {
 
         if (instantAppManager.isEnabled()) {
             bindInstantApp()
+            savesRepository.setLimit(1)
         } else {
             if (Build.VERSION.SDK_INT >= 21) {
                 checkUpdate()

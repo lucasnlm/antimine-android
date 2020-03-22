@@ -28,6 +28,8 @@ interface AppComponent : AndroidInjector<MainApplication> {
         @BindsInstance
         fun application(application: Application): Builder
 
+        fun levelModule(application: LevelModule): Builder
+
         fun appModule(module: AppModule): Builder
 
         fun build(): AppComponent

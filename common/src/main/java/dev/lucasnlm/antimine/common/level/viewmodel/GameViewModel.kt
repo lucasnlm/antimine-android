@@ -124,9 +124,10 @@ class GameViewModel(
 
     suspend fun saveGame() {
         if (initialized && levelFacade.hasMines) {
-            savesRepository.saveGame(
+            val id = savesRepository.saveGame(
                 levelFacade.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
             )
+            levelFacade.setCurrentSaveId(id?.toInt() ?: 0)
         }
     }
 

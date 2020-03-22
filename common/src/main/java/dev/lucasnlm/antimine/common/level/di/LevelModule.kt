@@ -22,7 +22,23 @@ import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 @Module
-class LevelModule {
+class LevelModule(
+    private val application: Application
+) {
+    private val appDataBase by lazy {
+        Room.databaseBuilder(application, AppDataBase::class.java, DATA_BASE_NAME)
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    private val savesDao by lazy {
+        appDataBase.saveDao()
+    }
+
+    private val savesRepository by lazy {
+        SavesRepository(savesDao)
+    }
+
     @Provides
     fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
 
@@ -60,16 +76,13 @@ class LevelModule {
         DimensionRepository(context, preferencesRepository)
 
     @Provides
-    fun provideDataBase(application: Application): AppDataBase =
-        Room.databaseBuilder(application, AppDataBase::class.java, DATA_BASE_NAME)
-            .fallbackToDestructiveMigration()
-            .build()
+    fun provideDataBase(): AppDataBase = appDataBase
 
     @Provides
-    fun provideSaveDao(appDataBase: AppDataBase): SaveDao = appDataBase.userDao()
+    fun provideSaveDao(): SaveDao = savesDao
 
     @Provides
-    fun provideSavesRepository(saveDao: SaveDao): ISavesRepository = SavesRepository(saveDao)
+    fun provideSavesRepository(): ISavesRepository = savesRepository
 
     @Provides
     fun provideMinefieldRepository(): MinefieldRepository = MinefieldRepository()
@@ -82,6 +95,6 @@ class LevelModule {
         HapticFeedbackInteractor(application, preferencesRepository)
 
     companion object {
-        const val DATA_BASE_NAME = "saves-db"
+        private const val DATA_BASE_NAME = "saves-db"
     }
 }

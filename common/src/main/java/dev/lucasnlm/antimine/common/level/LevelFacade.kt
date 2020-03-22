@@ -14,6 +14,7 @@ class LevelFacade {
     private val minefield: Minefield
     private val randomGenerator: Random
     private val startTime = System.currentTimeMillis()
+    private var saveId = 0
 
     var hasMines = false
         private set
@@ -30,6 +31,7 @@ class LevelFacade {
         this.minefield = minefield
         this.randomGenerator = Random().apply { setSeed(seed) }
         this.seed = seed
+        this.saveId = 0
         createEmptyField()
     }
 
@@ -39,6 +41,7 @@ class LevelFacade {
         this.field = save.field.asSequence()
         this.mines = this.field.filter { it.hasMine }.asSequence()
         this.hasMines = this.mines.count() != 0
+        this.saveId = save.uid
     }
 
     private fun createEmptyField() {
@@ -255,7 +258,11 @@ class LevelFacade {
             hasAnyMineExploded() -> SaveStatus.DEFEAT
             else -> SaveStatus.ON_GOING
         }
-        return Save(0, seed, startTime, duration, minefield, difficulty, saveStatus, field.toList())
+        return Save(saveId, seed, startTime, duration, minefield, difficulty, saveStatus, field.toList())
+    }
+
+    fun setCurrentSaveId(id: Int) {
+        this.saveId = id.coerceAtLeast(0)
     }
 
     companion object {
