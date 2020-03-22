@@ -87,6 +87,7 @@
     <string name="settings_large_areas">Use Large Areas</string>
     <string name="settings_large_areas_desc">Increases the touch area</string>
 
+    <string name="rating">Feedback</string>
     <string name="rating_menu">Feedback ❤</string>
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
     <string name="rating_button">Yes ❤️️️</string>

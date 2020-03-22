@@ -87,6 +87,7 @@
     <string name="settings_large_areas">使用大面积</string>
     <string name="settings_large_areas_desc"/>
 
+    <string name="rating">评价应用</string>
     <string name="rating_menu">评价应用</string>
     <string name="rating_message"/>
     <string name="rating_button"/>
