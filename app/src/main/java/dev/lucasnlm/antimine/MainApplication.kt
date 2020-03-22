@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.multidex.MultiDex
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
+import dev.lucasnlm.antimine.common.level.di.LevelModule
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.di.AppModule
@@ -19,6 +20,7 @@ class MainApplication : DaggerApplication() {
         DaggerAppComponent.builder()
             .application(this)
             .appModule(AppModule(this))
+            .levelModule(LevelModule(this))
             .build()
 
     override fun attachBaseContext(base: Context?) {

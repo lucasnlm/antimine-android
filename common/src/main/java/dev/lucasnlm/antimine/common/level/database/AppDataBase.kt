@@ -22,5 +22,5 @@ import dev.lucasnlm.antimine.common.level.database.models.Save
     DifficultyConverter::class
 )
 abstract class AppDataBase : RoomDatabase() {
-    abstract fun userDao(): SaveDao
+    abstract fun saveDao(): SaveDao
 }
