@@ -12,6 +12,7 @@ class DifficultyConverter {
             1 -> Difficulty.Beginner
             2 -> Difficulty.Intermediate
             3 -> Difficulty.Expert
+            4 -> Difficulty.Custom
             else -> throw IllegalArgumentException("Could not recognize Difficulty")
         }
 

@@ -13,6 +13,7 @@ class DifficultyConverterTest {
         assertEquals(converter.toDifficulty(1), Difficulty.Beginner)
         assertEquals(converter.toDifficulty(2), Difficulty.Intermediate)
         assertEquals(converter.toDifficulty(3), Difficulty.Expert)
+        assertEquals(converter.toDifficulty(4), Difficulty.Custom)
     }
 
     @Test(expected = IllegalArgumentException::class)
@@ -28,5 +29,6 @@ class DifficultyConverterTest {
         assertEquals(converter.toInteger(Difficulty.Beginner), 1)
         assertEquals(converter.toInteger(Difficulty.Intermediate), 2)
         assertEquals(converter.toInteger(Difficulty.Expert), 3)
+        assertEquals(converter.toInteger(Difficulty.Custom), 4)
     }
 }
