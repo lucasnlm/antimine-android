@@ -87,6 +87,7 @@
     <string name="settings_large_areas">Use áreas grandes</string>
     <string name="settings_large_areas_desc">Aumenta el área táctil</string>
 
+    <string name="rating">Nos califica</string>
     <string name="rating_menu">Nos califica ❤</string>
     <string name="rating_message">Si te gusta este juego, danos un comentario. Nos ayudará mucho.</string>
     <string name="rating_button">Si ❤️️️</string>

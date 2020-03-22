@@ -328,6 +328,7 @@ class GameActivity : DaggerAppCompatActivity() {
         if (getString(R.string.rating_message).isNotEmpty()) {
 
             AlertDialog.Builder(this)
+                .setTitle(R.string.rating)
                 .setMessage(R.string.rating_message)
                 .setPositiveButton(R.string.rating_button) { _, _ ->
                     openRateUsLink("Dialog")
