@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   width="810pt"
+   height="1440pt"
+   viewBox="0 0 285.74999 508.00002"
+   version="1.1"
+   id="svg8">
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     transform="translate(0,211.00005)">
+    <rect
+       style="opacity:1;fill:#f6ffd5;fill-opacity:1;stroke:#ac768d;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect826"
+       width="296.44077"
+       height="526.37439"
+       x="-6.949007"
+       y="-222.22231" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.13960361px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:0.78431373;stroke:none;stroke-width:0.25361404;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="142.94185"
+       y="-129.34616"
+       id="text868-8"
+       transform="scale(1.0035095,0.99650277)"><tspan
+         x="142.94185"
+         y="-129.34616"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:16.18613815px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans Medium';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:0.78431373;stroke:none;stroke-width:0.31846467;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         transform="matrix(0.6341969,0,0,1,10.972699,0)"
+         id="tspan2017">También disponible</tspan><tspan
+         x="142.94185"
+         y="-109.11349"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:16.18613815px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans Medium';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:0.78431373;stroke:none;stroke-width:0.31846467;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         transform="matrix(0.6341969,0,0,1,10.972699,0)"
+         id="tspan2808">para <tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans Bold'"
+   id="tspan2812">relojes</tspan></tspan><tspan
+         x="142.94185"
+         y="-88.880814"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:16.18613815px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans Medium';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:0.78431373;stroke:none;stroke-width:0.31846467;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         transform="matrix(0.6341969,0,0,1,10.972699,0)"
+         id="tspan2810">Android</tspan></text>
+    <g
+       id="g2806"
+       transform="matrix(3.3789157,-1.3101455,1.3101455,3.3789157,-1142.5345,789.24671)">
+      <path
+         id="path2096"
+         d="m 413.92158,-80.929349 v 57.73685 c 0,1.57506 -1.19226,2.85194 -2.66295,2.85194 h -21.30366 c -1.47068,0 -2.66295,-1.27688 -2.66295,-2.85194 v -57.73685 c 0,-1.57506 1.19227,-2.85194 2.66295,-2.85194 h 21.30366 c 1.47069,0 2.66295,1.27688 2.66295,2.85194 z"
+         style="fill:#333333;stroke-width:0.25566658" />
+      <g
+         transform="translate(-89.64109,-0.4684425)"
+         id="g2799">
+        <image
+           y="-72.469208"
+           x="473.08459"
+           id="image836"
+           xlink:href="../watch.png"
+           style="image-rendering:optimizeQuality"
+           preserveAspectRatio="none"
+           height="33.478252"
+           width="33.478252"
+           transform="rotate(0.45403107)" />
+        <path
+           style="fill:#000000;stroke-width:0.26105657"
+           d="m 478.84033,-71.243531 c -3.1504,0 -5.70405,2.486284 -5.70405,5.552994 v 28.196614 c 0,3.066966 2.55389,5.552491 5.70405,5.552491 h 22.81565 c 3.1504,0 5.70352,-2.485788 5.70352,-5.552491 v -28.196614 c 0,-3.06671 -2.55312,-5.552994 -5.70352,-5.552994 z m 1.63761,3.127648 h 19.5399 c 2.69806,0 4.88498,2.090476 4.88498,4.669083 v 23.708639 c 0,2.578599 -2.18692,4.669082 -4.88498,4.669082 h -19.5399 c -2.69785,0 -4.88497,-2.090261 -4.88497,-4.669082 V -63.4468 c 0,-2.578607 2.18691,-4.669083 4.88497,-4.669083 z"
+           id="path2098" />
+        <path
+           style="fill:#000000;fill-opacity:0.10267855;stroke-width:0.36216664"
+           d="m 479.60721,-33.299437 -6.23999,-1.941545 2.20497,-32.280608 19.03145,-2.816198 z"
+           id="path2100" />
+      </g>
+    </g>
+  </g>
+  <style
+     id="style5022"
+     type="text/css">
+	.st0{fill:#FFFFFF;}
+</style>
+</svg>
