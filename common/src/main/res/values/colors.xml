@@ -22,7 +22,6 @@
     <color name="text_color">#212121</color>
     <color name="highlight">#212121</color>
 
-    <color name="stroke_cover">#000</color>
     <color name="view_cover">#424242</color>
     <color name="view_clean">#d5d2cc</color>
 

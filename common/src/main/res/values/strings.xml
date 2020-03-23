@@ -23,6 +23,7 @@
     <string name="resume">Resume</string>
     <string name="show_licenses">Show Licenses</string>
     <string name="source_code">Source Code</string>
+    <string name="translation">Translation</string>
     <string name="licenses">Licenses</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="leaderboards">Leaderboards</string>
@@ -47,6 +48,7 @@
     <string name="flag_placed">Flag placed!</string>
     <string name="flag_removed">Flag removed!</string>
     <string name="used_software_text">This game uses the following third parties software:</string>
+    <string name="translators_text">This game was translated by the following people:</string>
     <string name="sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
     <string name="unknown_error">Unknown error.</string>
     <string name="retry">Retry</string>

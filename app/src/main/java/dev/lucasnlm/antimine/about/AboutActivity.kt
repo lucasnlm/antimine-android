@@ -9,6 +9,7 @@ import dev.lucasnlm.antimine.BuildConfig
 import dev.lucasnlm.antimine.R
 
 import dev.lucasnlm.antimine.about.thirds.ThirdPartiesActivity
+import dev.lucasnlm.antimine.about.translators.TranslatorsActivity
 import kotlinx.android.synthetic.main.activity_about.*
 
 class AboutActivity : AppCompatActivity() {
@@ -24,6 +25,7 @@ class AboutActivity : AppCompatActivity() {
 
         thirdsParties.setOnClickListener { openThirdParties() }
         sourceCode.setOnClickListener { openSourceCode() }
+        translation.setOnClickListener { openTranslation() }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
@@ -47,7 +49,15 @@ class AboutActivity : AppCompatActivity() {
         startActivity(Intent(this, ThirdPartiesActivity::class.java))
     }
 
+    private fun openTranslation() {
+        startActivity(Intent(this, TranslatorsActivity::class.java))
+    }
+
     private fun openSourceCode() {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/lucasnlm/antimine-android")))
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(SOURCE_CODE)))
+    }
+
+    companion object {
+        private const val SOURCE_CODE = "https://github.com/lucasnlm/antimine-android"
     }
 }

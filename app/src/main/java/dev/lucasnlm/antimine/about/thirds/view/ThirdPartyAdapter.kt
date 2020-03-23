@@ -12,18 +12,18 @@ import dev.lucasnlm.antimine.about.thirds.data.ThirdParty
 
 internal class ThirdPartyAdapter(
     private val thirdParties: List<ThirdParty>
-) : RecyclerView.Adapter<ThirdPartyItemHolder>() {
+) : RecyclerView.Adapter<ThirdPartyViewHolder>() {
 
     override fun getItemCount(): Int = thirdParties.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThirdPartyItemHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThirdPartyViewHolder {
         val view = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.view_third_party, parent, false)
-        return ThirdPartyItemHolder(view)
+        return ThirdPartyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ThirdPartyItemHolder, position: Int) {
+    override fun onBindViewHolder(holder: ThirdPartyViewHolder, position: Int) {
         val thirdParty = thirdParties[position]
         holder.title.text = thirdParty.name
         holder.itemView.setOnClickListener { view ->

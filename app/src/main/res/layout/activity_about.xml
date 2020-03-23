@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/title"
+        app:srcCompat="@drawable/title"
         app:layout_constraintBottom_toTopOf="@+id/version"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -63,6 +63,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/source_code" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp"/>
+
+        <Button
+            android:id="@+id/translation"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/translation" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

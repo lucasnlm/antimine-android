@@ -25,10 +25,10 @@ class ThirdPartiesActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
         }
 
-        loadLicenses()
+        bindLicenses()
     }
 
-    private fun loadLicenses() {
+    private fun bindLicenses() {
         licenses.adapter = ThirdPartyAdapter(
             listOf(
                 ThirdParty(

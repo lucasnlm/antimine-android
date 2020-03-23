@@ -6,6 +6,6 @@ import android.widget.TextView
 
 import dev.lucasnlm.antimine.R
 
-internal class ThirdPartyItemHolder(view: View) : RecyclerView.ViewHolder(view) {
+internal class ThirdPartyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val title: TextView = view.findViewById(R.id.third_name)
 }
