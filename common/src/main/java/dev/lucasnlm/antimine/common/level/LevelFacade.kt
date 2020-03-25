@@ -96,7 +96,7 @@ class LevelFacade {
                     it.safeZone = true
                 }
 
-                findCrossNeighbors().forEach {  neighbor ->
+                findCrossNeighbors().forEach { neighbor ->
                     neighbor
                         .findCrossNeighbors()
                         .filterNot { it.safeZone }
