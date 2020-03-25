@@ -87,13 +87,20 @@ class LevelFacade {
         putMinesTips()
     }
 
-    private fun plantRandomMines(ignoreIndex: Int, includeSafeArea: Boolean) {
-        getArea(ignoreIndex).run {
+    private fun plantRandomMines(safeIndex: Int, includeSafeArea: Boolean) {
+        getArea(safeIndex).run {
             safeZone = true
 
             if (includeSafeArea) {
                 findNeighbors().forEach {
                     it.safeZone = true
+                }
+
+                findCrossNeighbors().forEach { neighbor ->
+                    neighbor
+                        .findCrossNeighbors()
+                        .filterNot { it.safeZone }
+                        .forEach { it.safeZone = true }
                 }
             }
         }
@@ -127,6 +134,10 @@ class LevelFacade {
 
             if (target.minesAround == 0 && !target.hasMine) {
                 target.findNeighbors().forEach { openField(it) }
+            }
+
+            if (this.hasMines) {
+                field.filter { it.safeZone }.forEach { openField(it) }
             }
 
             if (target.hasMine) {
@@ -246,6 +257,13 @@ class LevelFacade {
         getNeighbor(-1, -1),
         getNeighbor(0, -1),
         getNeighbor(1, -1)
+    ).filterNotNull()
+
+    private fun Area.findCrossNeighbors() = arrayOf(
+        getNeighbor(1, 0),
+        getNeighbor(0, 1),
+        getNeighbor(-1, 0),
+        getNeighbor(0, -1)
     ).filterNotNull()
 
     private fun Area.getNeighbor(x: Int, y: Int) = field.firstOrNull {
