@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import dev.lucasnlm.antimine.R
@@ -20,7 +21,7 @@ class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
+        setContentView(R.layout.activity_empty)
         bindToolbar()
 
         aboutViewModel = ViewModelProviders.of(this).get(AboutViewModel::class.java)
@@ -47,10 +48,11 @@ class AboutActivity : AppCompatActivity() {
 
     private fun replaceFragment(fragment: Fragment, stackName: String?) {
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.content, fragment)
             if (stackName != null) {
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 addToBackStack(stackName)
             }
+            replace(R.id.content, fragment)
         }.commitAllowingStateLoss()
     }
 

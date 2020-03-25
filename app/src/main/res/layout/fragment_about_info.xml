@@ -73,22 +73,23 @@
             android:layout_height="4dp" />
 
         <Button
-            android:id="@+id/sourceCode"
+            android:id="@+id/translation"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/source_code" />
+            android:text="@string/translation" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="4dp" />
 
         <Button
-            android:id="@+id/translation"
+            android:id="@+id/sourceCode"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/translation" />
+            android:text="@string/source_code" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
