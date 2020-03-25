@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
-    tools:context="dev.lucasnlm.antimine.about.translators.TranslatorsActivity">
+    tools:context="dev.lucasnlm.antimine.about.views.translators.TranslatorsFragment">
 
     <TextView
         android:id="@+id/description"

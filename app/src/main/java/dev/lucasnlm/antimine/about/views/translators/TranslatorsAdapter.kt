@@ -1,12 +1,12 @@
-package dev.lucasnlm.antimine.about.translators.view
+package dev.lucasnlm.antimine.about.views.translators
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.about.translators.model.TranslationInfo
+import dev.lucasnlm.antimine.about.models.TranslationInfo
 
-internal class TranslatorsAdapter(
+class TranslatorsAdapter(
     private val translators: List<TranslationInfo>
 ) : RecyclerView.Adapter<TranslatorsViewHolder>() {
 

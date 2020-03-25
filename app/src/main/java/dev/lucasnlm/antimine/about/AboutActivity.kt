@@ -5,27 +5,57 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
-import dev.lucasnlm.antimine.BuildConfig
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import dev.lucasnlm.antimine.R
-
-import dev.lucasnlm.antimine.about.thirds.ThirdPartiesActivity
-import dev.lucasnlm.antimine.about.translators.TranslatorsActivity
-import kotlinx.android.synthetic.main.activity_about.*
+import dev.lucasnlm.antimine.about.views.AboutInfoFragment
+import dev.lucasnlm.antimine.about.models.AboutEvent
+import dev.lucasnlm.antimine.about.views.translators.TranslatorsFragment
+import dev.lucasnlm.antimine.about.views.thirds.ThirdPartiesFragment
+import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 
 class AboutActivity : AppCompatActivity() {
+    private lateinit var aboutViewModel: AboutViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
         bindToolbar()
 
-        version.text = getString(
-            R.string.version_s,
-            getString(R.string.app_name), BuildConfig.VERSION_NAME
-        )
+        aboutViewModel = ViewModelProviders.of(this).get(AboutViewModel::class.java)
 
-        thirdsParties.setOnClickListener { openThirdParties() }
-        sourceCode.setOnClickListener { openSourceCode() }
-        translation.setOnClickListener { openTranslation() }
+        aboutViewModel.eventObserver.observe(this, Observer { event ->
+            when (event) {
+                AboutEvent.ThirdPartyLicenses -> {
+                    replaceFragment(ThirdPartiesFragment(), ThirdPartiesFragment::class.simpleName)
+                }
+                AboutEvent.SourceCode -> {
+                    openSourceCode()
+                }
+                AboutEvent.Translators -> {
+                    replaceFragment(TranslatorsFragment(), TranslatorsFragment::class.simpleName)
+                }
+                else -> {
+                    replaceFragment(AboutInfoFragment(), null)
+                }
+            }
+        })
+
+        replaceFragment(AboutInfoFragment(), null)
+    }
+
+    private fun replaceFragment(fragment: Fragment, stackName: String?) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.content, fragment)
+            if (stackName != null) {
+                addToBackStack(stackName)
+            }
+        }.commitAllowingStateLoss()
+    }
+
+    private fun openSourceCode() {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(SOURCE_CODE)))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
@@ -43,18 +73,6 @@ class AboutActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
         }
-    }
-
-    private fun openThirdParties() {
-        startActivity(Intent(this, ThirdPartiesActivity::class.java))
-    }
-
-    private fun openTranslation() {
-        startActivity(Intent(this, TranslatorsActivity::class.java))
-    }
-
-    private fun openSourceCode() {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(SOURCE_CODE)))
     }
 
     companion object {

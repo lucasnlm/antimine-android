@@ -62,7 +62,7 @@
     <string name="share_body_text">Hice %1$d/%2$d en %3$d segundos.</string>
     <string name="share_body_text_generic">Estoy jugando %1$s</string>
     <string name="fail_to_share">No se pudo compartir el juego</string>
-    <string name="version_s">%1$s - %2$s</string>
+    <string name="version_s">Versión %2$s</string>
     <string name="sound_effects">Efectos de Sonido</string>
     <string name="quit">Dejar</string>
     <string name="are_you_sure">¿Estás seguro?</string>

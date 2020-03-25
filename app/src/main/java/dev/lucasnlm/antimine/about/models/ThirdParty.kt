@@ -1,8 +1,8 @@
-package dev.lucasnlm.antimine.about.thirds.data
+package dev.lucasnlm.antimine.about.models
 
 import androidx.annotation.RawRes
 
-internal data class ThirdParty(
+data class ThirdParty(
     val name: String,
     @RawRes val license: Int
 )

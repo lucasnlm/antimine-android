@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
-    tools:context="dev.lucasnlm.antimine.about.thirds.ThirdPartiesActivity">
+    tools:context="dev.lucasnlm.antimine.about.views.thirds.ThirdPartiesFragment">
 
     <TextView
         android:id="@+id/description"
@@ -16,7 +16,7 @@
         android:paddingTop="24dp"
         android:paddingRight="16dp"
         android:paddingBottom="24dp"
-        android:text="@string/translators_text"
+        android:text="@string/used_software_text"
         android:textColor="?android:attr/textColorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

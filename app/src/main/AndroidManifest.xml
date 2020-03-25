@@ -122,12 +122,12 @@
         </activity>
 
         <activity
-            android:name="dev.lucasnlm.antimine.about.thirds.ThirdPartiesActivity"
+            android:name="dev.lucasnlm.antimine.about.views.thirds.ThirdPartiesFragment"
             android:label="@string/licenses"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name="dev.lucasnlm.antimine.about.translators.TranslatorsActivity"
+            android:name="dev.lucasnlm.antimine.about.views.translators.TranslatorsFragment"
             android:theme="@style/AppTheme" />
 
         <activity

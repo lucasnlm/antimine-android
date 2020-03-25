@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.about.translators.model
+package dev.lucasnlm.antimine.about.models
 
 data class TranslationInfo(
     val language: String,
