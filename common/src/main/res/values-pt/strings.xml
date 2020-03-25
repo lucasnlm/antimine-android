@@ -23,6 +23,7 @@
     <string name="resume">Continuar</string>
     <string name="show_licenses">Mostar Licenças</string>
     <string name="source_code">Código Fonte</string>
+    <string name="translation">Tradução</string>
     <string name="licenses">Licenças</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="leaderboards">Placares</string>
@@ -47,6 +48,7 @@
     <string name="flag_placed">Bandeira posicionada!</string>
     <string name="flag_removed">Bandeira removida!</string>
     <string name="used_software_text">Esse jogo foi desenvolvido utilizando as seguintes bibliotecas:</string>
+    <string name="translators_text">Esse jogo foi traduzido pelas seguintes pessoas:</string>
     <string name="sign_in_failed">Falha ao conectar. Por favor, verifique sua conexão com a internet e tente novamente.</string>
     <string name="unknown_error">Erro desconhecido.</string>
     <string name="retry">Reiniciar</string>
@@ -66,19 +68,16 @@
     <string name="sound_effects">Efeitos Sonoros</string>
     <string name="quit">Sair</string>
     <string name="are_you_sure">Você tem certeza?</string>
-
     <string name="custom">Personalizado</string>
     <string name="start">Iniciar</string>
     <string name="width">Largura</string>
     <string name="height">Altura</string>
     <string name="mines">Minas</string>
     <string name="auto_flag">Bandeiras Automáticas</string>
-
     <string name="desc_convered_area">Área coberta</string>
     <string name="desc_marked_area">Área marcada</string>
     <string name="desc_question_area">Área duvidosa</string>
     <string name="desc_wrongly_marked_area">Área marcada erroneamente</string>
-
     <string name="settings_general">Geral</string>
     <string name="settings_vibration_desc">Vibra ao explodir ou alternar marcação</string>
     <string name="settings_sound_desc">Faz um som ao explodir</string>
@@ -86,7 +85,6 @@
     <string name="settings_accessibility">Acessibilidade</string>
     <string name="settings_large_areas">Usar Área Grande</string>
     <string name="settings_large_areas_desc">Aumenta a área tocável</string>
-
     <string name="rating">Avalie o app</string>
     <string name="rating_menu">Avaliar o app ❤</string>
     <string name="rating_message">Se você está gostando do jogo, por favor deixe um comentário! Isso nos ajuda muito.</string>
