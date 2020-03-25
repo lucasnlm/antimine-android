@@ -64,7 +64,7 @@
     <string name="share_body_text">Du hast %1$d/%2$d in %3$d Sekunden gemacht.</string>
     <string name="share_body_text_generic">Ich spiele %1$s</string>
     <string name="fail_to_share">Teilen des Spieles gescheitert</string>
-    <string name="version_s">%1$s-%2$s</string>
+    <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Sound-Effekte</string>
     <string name="quit">Beenden</string>
     <string name="are_you_sure">Bist du sicher?</string>

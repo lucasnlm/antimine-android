@@ -4,5 +4,5 @@
     android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dev.lucasnlm.antimine.about.AboutActivity"
-    android:fitsSystemWindows="true" />
+    android:fitsSystemWindows="true"
+    tools:context="dev.lucasnlm.antimine.about.AboutActivity" />

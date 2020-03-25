@@ -15,10 +15,6 @@ class AboutViewModel : ViewModel() {
     fun getTranslators() = TranslatorsAdapter(
         listOf(
             TranslationInfo(
-                "Brazilian Portuguese",
-                sequenceOf("Lucas Lima")
-            ),
-            TranslationInfo(
                 "Czech",
                 sequenceOf("novas78@xda")
             ),
@@ -27,8 +23,24 @@ class AboutViewModel : ViewModel() {
                 sequenceOf("Just Humeau")
             ),
             TranslationInfo(
+                "German",
+                sequenceOf("Oswald Boelcke", "wlls_ftn")
+            ),
+            TranslationInfo(
+                "Portuguese (BR)",
+                sequenceOf("Lucas Lima")
+            ),
+            TranslationInfo(
+                "Spanish",
+                sequenceOf("Alfredo Jara")
+            ),
+            TranslationInfo(
                 "Turkish",
                 sequenceOf("Fatih Fırıncı")
+            ),
+            TranslationInfo(
+                "Vietnamese",
+                sequenceOf("pnhpnh")
             )
         )
     )

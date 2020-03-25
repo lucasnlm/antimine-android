@@ -19,9 +19,9 @@
 
             <TextView
                 android:id="@+id/textView"
-                android:textColor="?android:attr/textColorPrimary"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="?android:attr/textColorPrimary" />
 
         </FrameLayout>
     </ScrollView>

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
-import kotlinx.android.synthetic.main.activity_translators.*
+import kotlinx.android.synthetic.main.fragment_translators.*
 
 class TranslatorsFragment : Fragment() {
     private var aboutViewModel: AboutViewModel? = null
@@ -27,7 +27,7 @@ class TranslatorsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? =
-        inflater.inflate(R.layout.activity_translators, container, false)
+        inflater.inflate(R.layout.fragment_translators, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -64,7 +64,7 @@
     <string name="share_body_text">Dokončil jsem %1$d/%2$d za %3$d sekund.</string>
     <string name="share_body_text_generic">Hraju %1$s</string>
     <string name="fail_to_share">Sdílení hra se nezdařilo</string>
-    <string name="version_s">%1$s - %2$s</string>
+    <string name="version_s">Verze %1$s</string>
     <string name="sound_effects">Zvukové efekty</string>
     <string name="quit">Ukončit</string>
     <string name="are_you_sure">Jste si jisti?</string>

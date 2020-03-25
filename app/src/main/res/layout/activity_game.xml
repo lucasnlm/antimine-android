@@ -48,18 +48,18 @@
                     android:drawableStart="@drawable/timer"
                     android:drawableLeft="@drawable/timer"
                     android:drawablePadding="8dp"
+                    android:drawableTint="?android:attr/textColorPrimary"
                     android:gravity="center_vertical"
                     android:includeFontPadding="false"
-                    android:visibility="gone"
                     android:minEms="2"
-                    android:drawableTint="?android:attr/textColorPrimary"
+                    android:text="@string/default_time_value"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="@dimen/text_size"
                     android:textStyle="bold"
-                    android:text="@string/default_time_value"
-                    tools:visibility="visible"
+                    android:visibility="gone"
+                    tools:targetApi="m"
                     tools:text="10:00"
-                    tools:targetApi="m" />
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/minesCount"
@@ -69,17 +69,17 @@
                     android:drawableStart="@drawable/mine"
                     android:drawableLeft="@drawable/mine"
                     android:drawablePadding="8dp"
+                    android:drawableTint="?android:attr/textColorPrimary"
                     android:gravity="center_vertical"
                     android:includeFontPadding="false"
                     android:minEms="3"
-                    android:drawableTint="?android:attr/textColorPrimary"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="@dimen/text_size"
                     android:textStyle="bold"
                     android:visibility="gone"
-                    tools:visibility="visible"
+                    tools:targetApi="m"
                     tools:text="99"
-                    tools:targetApi="m" />
+                    tools:visibility="visible" />
 
             </LinearLayout>
 
@@ -93,15 +93,15 @@
                 android:id="@+id/install"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/install"
-                android:layout_margin="16dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="16dp"
+                android:contentDescription="@string/install"
                 android:visibility="gone"
                 app:backgroundTint="@color/install_button"
-                app:pressedTranslationZ="6dp"
                 app:elevation="10dp"
+                app:pressedTranslationZ="6dp"
                 app:srcCompat="@drawable/install"
                 tools:visibility="visible"/>
 

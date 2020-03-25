@@ -64,7 +64,7 @@
     <string name="share_body_text">Tôi đã dò được %1$d/%2$d mìn trong vòng %3$d giây.</string>
     <string name="share_body_text_generic">Tôi đang chơi %1$s</string>
     <string name="fail_to_share">Không chia sẻ được trò chơi</string>
-    <string name="version_s">%1$s - %2$s</string>
+    <string name="version_s">Phiên bản %1$s</string>
     <string name="sound_effects">Hiệu ứng âm thanh</string>
     <string name="quit">Thoát</string>
     <string name="are_you_sure">Bạn chắc chứ?</string>
