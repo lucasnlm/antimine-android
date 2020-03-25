@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_game">Yeni Oyun</string>
+    <string name="victory">Kazandın!&#xA0;😎</string>
+    <string name="game_over">Patladı!&#xA0;😢</string>
+</resources>
