@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_game">Nová hra</string>
+    <string name="victory">Vyhráli jste!&#xA0;😎</string>
+    <string name="game_over">Výbuch!&#xA0;😢</string>
+</resources>
