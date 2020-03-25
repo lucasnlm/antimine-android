@@ -62,7 +62,7 @@
     <string name="share_body_text">%3$d saniyede %1$d/%2$d yaptım.</string>
     <string name="share_body_text_generic">%1$s oynuyorum</string>
     <string name="fail_to_share">Oyun paylaşılamıyor</string>
-    <string name="version_s">%1$s - %2$s</string>
+    <string name="version_s">Versiyon %1$s</string>
     <string name="sound_effects">Ses Efektleri</string>
     <string name="quit">Çık</string>
     <string name="are_you_sure">Emin misiniz?</string>
