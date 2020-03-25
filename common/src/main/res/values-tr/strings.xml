@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="tr">
     <string name="app_name">Anti-Mine</string>
-    <string name="app_description">Hiçbirini patlatmadan gizli \"mayın\" içeren dikdörtgen bir tahtayı temizlemelisiniz.</string>
+    <string name="app_description">Hiçbirini patlatmadan gizli mayın içeren dikdörtgen bir tahtayı temizlemelisiniz.</string>
     <string name="remaining_mines">Kalan mayınlar</string>
     <string name="install">Yükle</string>
     <string name="minefield">Zorluk</string>
