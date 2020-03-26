@@ -82,6 +82,8 @@ class LevelFacade {
 
     fun hasMarkOn(index: Int): Boolean = getArea(index).mark.isNotNone()
 
+    fun isEmpty(index: Int): Boolean = getArea(index).let { it.minesAround == 0 && !it.hasMine && !it.isCovered }
+
     fun plantMinesExcept(index: Int, includeSafeArea: Boolean = false) {
         plantRandomMines(index, includeSafeArea)
         putMinesTips()
@@ -187,9 +189,11 @@ class LevelFacade {
                 it.id
             }
 
-    fun runFlagAssistant() {
+    fun runFlagAssistant(): Sequence<Int> {
         // Must not select Mark.PurposefulNone, only Mark.None. Otherwise, it will flag
         // a square that was previously unflagged by player.
+        val assists = mutableListOf<Int>()
+
         mines.filter { it.mark.isPureNone() }.forEach { field ->
             val neighbors = field.findNeighbors()
             val neighborsCount = neighbors.count()
@@ -197,8 +201,15 @@ class LevelFacade {
                 !neighbor.isCovered || (neighbor.hasMine && neighbor.mark.isFlag())
             }.count()
 
-            field.mark = if (revealedNeighborsCount == neighborsCount) Mark.Flag else Mark.None
+            if (revealedNeighborsCount == neighborsCount) {
+                assists.add(field.id)
+                field.mark = Mark.Flag
+            } else {
+                field.mark = Mark.None
+            }
         }
+
+        return assists.asSequence()
     }
 
     fun getStats() = Score(
@@ -207,21 +218,25 @@ class LevelFacade {
         field.count()
     )
 
-    fun showAllMines() {
+    fun showAllMines() =
         mines.filter { it.mark != Mark.Flag }.forEach { it.isCovered = false }
-    }
 
-    fun flagAllMines() {
-        mines.forEach { it.mark = Mark.Flag }
-    }
+    fun findExplodedMine() = mines.filter { it.mistake }.firstOrNull()
 
-    fun showWrongFlags() {
+    fun takeExplosionRadius(target: Area, take: Int = 20): Sequence<Area> =
+        mines.filter { it.isCovered && it.mark.isNone() }.sortedBy {
+            val dx1 = (it.posX - target.posX)
+            val dy1 = (it.posY - target.posY)
+            dx1 * dx1 + dy1 * dy1
+        }.take(take)
+
+    fun flagAllMines() = mines.forEach { it.mark = Mark.Flag }
+
+    fun showWrongFlags() =
         field.filter { it.mark.isNotNone() && !it.hasMine }.forEach { it.mistake = true }
-    }
 
-    fun revealAllEmptyAreas() {
+    fun revealAllEmptyAreas() =
         field.filter { !it.hasMine }.forEach { it.isCovered = false }
-    }
 
     fun hasAnyMineExploded(): Boolean = mines.firstOrNull { it.mistake } != null
 

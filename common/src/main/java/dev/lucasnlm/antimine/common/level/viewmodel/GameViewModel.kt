@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.common.level.viewmodel
 
 import android.app.Application
+import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
@@ -19,6 +20,7 @@ import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -58,7 +60,7 @@ class GameViewModel(
         mineCount.postValue(minefield.mines)
         this.difficulty.postValue(difficulty)
         levelSetup.postValue(minefield)
-        field.postValue(levelFacade.field.toList())
+        refreshField()
 
         eventObserver.postValue(Event.StartNewGame)
 
@@ -83,7 +85,7 @@ class GameViewModel(
         mineCount.postValue(setup.mines)
         difficulty.postValue(save.difficulty)
         levelSetup.postValue(setup)
-        field.postValue(levelFacade.field.toList())
+        refreshField()
 
         when {
             levelFacade.hasAnyMineExploded() -> eventObserver.postValue(Event.ResumeGameOver)
@@ -155,8 +157,7 @@ class GameViewModel(
             analyticsManager.sentEvent(Analytics.LongPressMultipleArea(index))
         }
 
-        field.postValue(levelFacade.field.toList())
-
+        refreshField()
         refreshGame()
     }
 
@@ -173,12 +174,15 @@ class GameViewModel(
             }
 
             levelFacade.clickArea(index)
-
-            field.postValue(levelFacade.field.toList())
+            refreshField(index)
         }
 
         if (preferencesRepository.useFlagAssistant() && !levelFacade.hasAnyMineExploded()) {
-            levelFacade.runFlagAssistant()
+            levelFacade.runFlagAssistant().forEach {
+                Handler().post {
+                    refreshField(it)
+                }
+            }
         }
 
         refreshGame()
@@ -223,11 +227,20 @@ class GameViewModel(
         levelFacade.revealAllEmptyAreas()
     }
 
-    fun gameOver() {
+    suspend fun gameOver() {
         levelFacade.run {
             analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getStats()))
-            showAllMines()
+
+            findExplodedMine()?.let { exploded ->
+                takeExplosionRadius(exploded).forEach {
+                    it.isCovered = false
+                    refreshField(it.id)
+                    delay(75L)
+                }
+            }
+
             showWrongFlags()
+            refreshGame()
         }
 
         GlobalScope.launch {
@@ -255,7 +268,11 @@ class GameViewModel(
 
     fun useAccessibilityMode() = preferencesRepository.useLargeAreas()
 
-    private fun refreshField(index: Int) {
-        fieldRefresh.postValue(index)
+    private fun refreshField(index: Int? = null) {
+        if (index == null || levelFacade.isEmpty(index)) {
+            field.postValue(levelFacade.field.toList())
+        } else {
+            fieldRefresh.postValue(index)
+        }
     }
 }

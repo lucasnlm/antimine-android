@@ -43,6 +43,7 @@ import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -99,8 +100,13 @@ class GameActivity : DaggerAppCompatActivity() {
     }
 
     private fun bindViewModel() = viewModel.apply {
+        var lastEvent: Event? = null // TODO use distinctUntilChanged
+
         eventObserver.observe(this@GameActivity, Observer {
-            onGameEvent(it)
+            if (lastEvent != it) {
+                onGameEvent(it)
+                lastEvent = it
+            }
         })
 
         elapsedTimeSeconds.observe(this@GameActivity, Observer {
@@ -459,9 +465,11 @@ class GameActivity : DaggerAppCompatActivity() {
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
                 viewModel.stopClock()
-                viewModel.gameOver()
 
-                waitAndShowEndGameDialog(false)
+                GlobalScope.launch(context = Dispatchers.Main) {
+                    viewModel.gameOver()
+                    waitAndShowEndGameDialog(false)
+                }
             }
             Event.ResumeVictory -> {
                 val score = Score(

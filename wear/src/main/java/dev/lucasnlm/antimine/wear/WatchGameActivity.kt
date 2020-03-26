@@ -171,10 +171,12 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
             Event.GameOver -> {
                 status = Status.Over()
                 viewModel.stopClock()
-                viewModel.gameOver()
 
-                messageText.text = getString(R.string.game_over)
-                waitAndShowNewGameButton()
+                GlobalScope.launch(context = Dispatchers.Main) {
+                    viewModel.gameOver()
+                    messageText.text = getString(R.string.game_over)
+                    waitAndShowNewGameButton()
+                }
             }
             Event.ResumeVictory -> {
                 status = Status.Over()

@@ -32,6 +32,7 @@ import dev.lucasnlm.antimine.level.view.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import kotlinx.android.synthetic.main.activity_tv_game.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -302,9 +303,11 @@ class TvGameActivity : DaggerAppCompatActivity() {
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
                 viewModel.stopClock()
-                viewModel.gameOver()
 
-                waitAndShowGameOverConfirmNewGame()
+                GlobalScope.launch(context = Dispatchers.Main) {
+                    viewModel.gameOver()
+                    waitAndShowGameOverConfirmNewGame()
+                }
             }
             Event.ResumeVictory, Event.ResumeGameOver -> {
                 val score = Score(
