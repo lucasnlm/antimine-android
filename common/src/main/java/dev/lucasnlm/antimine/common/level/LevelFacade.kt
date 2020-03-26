@@ -135,11 +135,11 @@ class LevelFacade {
             target.mark = Mark.None
 
             if (target.minesAround == 0 && !target.hasMine) {
-                target.findNeighbors().forEach { openField(it) }
+                target.findNeighbors().filter { it.isCovered }.forEach { openField(it) }
             }
 
             if (this.hasMines) {
-                field.filter { it.safeZone }.forEach { openField(it) }
+                field.filter { it.safeZone && it.isCovered }.forEach { openField(it) }
             }
 
             if (target.hasMine) {
