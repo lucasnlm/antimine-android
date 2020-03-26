@@ -14,7 +14,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -37,7 +36,6 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.core.utils.isDarkModeEnabled
 import dev.lucasnlm.antimine.instant.InstantAppManager
 import dev.lucasnlm.antimine.level.view.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
@@ -216,11 +214,6 @@ class GameActivity : DaggerAppCompatActivity() {
                     R.string.open_menu,
                     R.string.close_menu
                 ).apply {
-                    if (!isDarkModeEnabled(applicationContext)) {
-                        drawerArrowDrawable.color =
-                            ContextCompat.getColor(applicationContext, R.color.primary)
-                    }
-
                     syncState()
                 }
             )

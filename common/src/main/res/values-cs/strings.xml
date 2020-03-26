@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="cs">
-    <string name="app_name">Antimine</string>
-    <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté miny, aniž by kterákoliv z nich vybuchla.</string>
+    <string name="app_name">Anti-Mine</string>
+    <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté \"miny\", aniž by kterákoliv z nich vybuchla.</string>
     <string name="remaining_mines">Zbývající miny</string>
     <string name="install">Instalovat</string>
     <string name="minefield">Obtížnost</string>
@@ -23,6 +23,7 @@
     <string name="resume">Pokračovat</string>
     <string name="show_licenses">Zobrazit licence</string>
     <string name="source_code">Zdrojový kód</string>
+    <string name="translation">Překlad</string>
     <string name="licenses">Licence</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="leaderboards">Žebříčky</string>
@@ -47,6 +48,7 @@
     <string name="flag_placed">Vlajka umístěna!</string>
     <string name="flag_removed">Vlajka odstraněna!</string>
     <string name="used_software_text">Tato hra používá následující software třetích stran:</string>
+    <string name="translators_text">Tato hra byla přeložena těmito lidmi:</string>
     <string name="sign_in_failed">Nelze se přihlásit. Zkontrolujte síťové připojení a akci opakujte.</string>
     <string name="unknown_error">Neznámá chyba.</string>
     <string name="retry">Opakovat</string>
@@ -62,7 +64,7 @@
     <string name="share_body_text">Dokončil jsem %1$d/%2$d za %3$d sekund.</string>
     <string name="share_body_text_generic">Hraju %1$s</string>
     <string name="fail_to_share">Sdílení hra se nezdařilo</string>
-    <string name="version_s">%1$s - %2$s</string>
+    <string name="version_s">Verze %1$s</string>
     <string name="sound_effects">Zvukové efekty</string>
     <string name="quit">Ukončit</string>
     <string name="are_you_sure">Jste si jisti?</string>

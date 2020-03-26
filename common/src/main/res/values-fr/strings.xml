@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
     <string name="app_name">Anti-Mine</string>
-    <string name="app_description">Vous devez vider un tableau rectangulaire contenant des mines cachées sans en détonner.</string>
+    <string name="app_description">Vous devez vider un tableau rectangulaire contenant des \"mines\" cachées sans en détonner.</string>
     <string name="remaining_mines">Mines restantes</string>
     <string name="install">Installer</string>
     <string name="minefield">Difficulté</string>
@@ -23,6 +23,7 @@
     <string name="resume">Reprendre</string>
     <string name="show_licenses">Montrer les licenses</string>
     <string name="source_code">Code source</string>
+    <string name="translation">Traduction</string>
     <string name="licenses">Licences</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="leaderboards">Classements</string>
@@ -33,7 +34,7 @@
     <string name="new_game">Nouvelle partie</string>
     <string name="share">Partager</string>
     <string name="share_menu">Partager…</string>
-    <string name="new_game_request">Voulez-vous commencer une nouvelle partie?</string>
+    <string name="new_game_request">Voulez-vous commencer une nouvelle partie ?</string>
     <string name="yes">Oui</string>
     <string name="general">Général</string>
     <string name="all_mines_disabled">Toutes les mines ont été désamorcées.</string>
@@ -43,10 +44,11 @@
     <string name="mine">Mine</string>
     <string name="exploded_mine">Mine explosée</string>
     <string name="game_started">La partie a commencé</string>
-    <string name="you_exploded_a_mine">Vous avez touché une mine!</string>
+    <string name="you_exploded_a_mine">Vous avez touché une mine !</string>
     <string name="flag_placed">Drapeau placé !</string>
     <string name="flag_removed">Drapeau retiré !</string>
     <string name="used_software_text">Ce jeu utilise ces logiciels tiers suivants :</string>
+    <string name="translators_text">Ce jeu a été traduit par les personnes suivantes :</string>
     <string name="sign_in_failed">Erreur lors de la connexion. Vérifiez l\'état de votre connexion Internet et réessayez.</string>
     <string name="unknown_error">Erreur inconnue.</string>
     <string name="retry">Réessayer</string>
@@ -62,10 +64,10 @@
     <string name="share_body_text">J\'ai obtenu le score de %1$d/%2$d en %3$d secondes.</string>
     <string name="share_body_text_generic">Je joue à %1$s</string>
     <string name="fail_to_share">Échec du partage de la partie</string>
-    <string name="version_s">%1$s à %2$s</string>
+    <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Effets sonores</string>
     <string name="quit">Quitter</string>
-    <string name="are_you_sure">Vraiment?</string>
+    <string name="are_you_sure">Vraiment ?</string>
     <string name="custom">Personnalisé</string>
     <string name="start">Commencer</string>
     <string name="width">Largeur</string>

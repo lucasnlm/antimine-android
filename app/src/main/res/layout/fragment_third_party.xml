@@ -6,17 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
-    tools:context="dev.lucasnlm.antimine.about.thirds.ThirdPartiesActivity">
+    tools:context="dev.lucasnlm.antimine.about.views.thirds.ThirdPartiesFragment">
 
     <TextView
+        android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:textColor="?android:attr/textColorPrimary"
+        android:paddingLeft="16dp"
+        android:paddingTop="24dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="24dp"
         android:text="@string/used_software_text"
-        android:id="@+id/summary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/licenses"
@@ -26,6 +29,6 @@
         android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/summary" />
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

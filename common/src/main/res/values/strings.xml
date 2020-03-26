@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
-    <string name="app_name">Anti-Mine</string>
-    <string name="app_description">You have to clear a rectangular board containing hidden mines without detonating any of them.</string>
+    <string name="app_name">Antimine</string>
+    <string name="app_description">You have to clear a rectangular board containing hidden \"mines\" without detonating any of them.</string>
     <string name="remaining_mines">Remaining mines</string>
     <string name="install">Install</string>
     <string name="minefield">Difficulty</string>
@@ -23,6 +23,7 @@
     <string name="resume">Resume</string>
     <string name="show_licenses">Show Licenses</string>
     <string name="source_code">Source Code</string>
+    <string name="translation">Translation</string>
     <string name="licenses">Licenses</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="leaderboards">Leaderboards</string>
@@ -47,6 +48,7 @@
     <string name="flag_placed">Flag placed!</string>
     <string name="flag_removed">Flag removed!</string>
     <string name="used_software_text">This game uses the following third parties software:</string>
+    <string name="translators_text">This game was translated by the following people:</string>
     <string name="sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
     <string name="unknown_error">Unknown error.</string>
     <string name="retry">Retry</string>
@@ -62,23 +64,20 @@
     <string name="share_body_text">I did %1$d/%2$d in %3$d seconds.</string>
     <string name="share_body_text_generic">I\'m playing %1$s</string>
     <string name="fail_to_share">Failed to share game</string>
-    <string name="version_s">%1$s - %2$s</string>
+    <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Sound Effects</string>
     <string name="quit">Quit</string>
     <string name="are_you_sure">Are you sure?</string>
-
     <string name="custom">Custom</string>
     <string name="start">Start</string>
     <string name="width">Width</string>
     <string name="height">Height</string>
     <string name="mines">Mines</string>
     <string name="auto_flag">Game Assistant</string>
-
     <string name="desc_convered_area">Covered area</string>
     <string name="desc_marked_area">Marked area</string>
     <string name="desc_question_area">Doubtful area</string>
     <string name="desc_wrongly_marked_area">Wrongly marked area</string>
-
     <string name="settings_general">General</string>
     <string name="settings_vibration_desc">Vibrates on explosion or flag toggle</string>
     <string name="settings_sound_desc">Makes a sound of explosion</string>
@@ -86,7 +85,6 @@
     <string name="settings_accessibility">Accessibility</string>
     <string name="settings_large_areas">Use Large Areas</string>
     <string name="settings_large_areas_desc">Increases the touch area</string>
-
     <string name="rating">Feedback</string>
     <string name="rating_menu">Feedback ❤</string>
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>

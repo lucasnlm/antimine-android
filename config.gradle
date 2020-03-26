@@ -1,6 +1,6 @@
 ext.buildVersion = [
-        versionCode  : 61,
-        versionName  : '6.1.5',
+        versionCode  : 62,
+        versionName  : '6.2.0',
         targetSdk    : 29,
         minAppSdk    : 16,
         wearMinAppSdk: 23,

@@ -6,17 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?android:attr/selectableItemBackground"
+    android:padding="16dp"
     tools:targetApi="m">
 
     <TextView
-        android:id="@+id/third_name"
-        android:layout_width="match_parent"
+        android:id="@+id/language"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         android:textColor="?android:attr/textColorSecondary"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Third Name" />
+        tools:text="Language" />
+
+    <TextView
+        android:id="@+id/translators"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textColor="?android:attr/textColorSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Person A\nPerson B" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

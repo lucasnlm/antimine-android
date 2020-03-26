@@ -23,6 +23,7 @@
     <string name="resume">恢复</string>
     <string name="show_licenses">显示许可证</string>
     <string name="source_code">源代码</string>
+    <string name="translation">翻译</string>
     <string name="licenses">许可证</string>
     <string name="google_play_games">Google Play 游戏</string>
     <string name="leaderboards">排行榜</string>
@@ -47,6 +48,7 @@
     <string name="flag_placed">标记已放置！</string>
     <string name="flag_removed">标记已移除！</string>
     <string name="used_software_text">该游戏使用以下第三方软件：</string>
+    <string name="translators_text">这场游戏被以下人员翻译：</string>
     <string name="sign_in_failed">登录失败。请检查你的网络连接，然后重试。</string>
     <string name="unknown_error">未知错误。</string>
     <string name="retry">重试</string>
@@ -62,7 +64,7 @@
     <string name="share_body_text">我在 %1$d秒内完成了%2$d / %3$d。</string>
     <string name="share_body_text_generic">我正在播放 %1$s</string>
     <string name="fail_to_share">分享游戏失败</string>
-    <string name="version_s">%1$s - %2$s</string>
+    <string name="version_s">版本%1$s</string>
     <string name="sound_effects">声音特效</string>
     <string name="quit">退出</string>
     <string name="are_you_sure">确定吗？</string>
