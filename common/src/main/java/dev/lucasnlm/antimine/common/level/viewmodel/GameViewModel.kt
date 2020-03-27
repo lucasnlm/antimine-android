@@ -143,38 +143,40 @@ class GameViewModel(
 
     fun onLongClick(index: Int) {
         levelFacade.turnOffAllHighlighted()
+        refreshField()
 
         if (levelFacade.hasCoverOn(index)) {
-            if (levelFacade.switchMarkAt(index)) {
-                refreshField(index)
+            levelFacade.switchMarkAt(index).run {
+                refreshField(this)
                 hapticFeedbackInteractor.toggleFlagFeedback()
             }
 
             analyticsManager.sentEvent(Analytics.LongPressArea(index))
         } else {
-            levelFacade.openNeighbors(index)
+            levelFacade.openNeighbors(index).forEach { refreshField(it) }
 
             analyticsManager.sentEvent(Analytics.LongPressMultipleArea(index))
         }
 
-        refreshField()
-        refreshGame()
+        updateGameState()
     }
 
     fun onClickArea(index: Int) {
         levelFacade.turnOffAllHighlighted()
 
         if (levelFacade.hasMarkOn(index)) {
-            levelFacade.removeMark(index)
+            levelFacade.removeMark(index).run {
+                refreshField(this)
+            }
             hapticFeedbackInteractor.toggleFlagFeedback()
-            refreshField(index)
         } else {
             if (!levelFacade.hasMines) {
                 levelFacade.plantMinesExcept(index, true)
             }
 
-            levelFacade.clickArea(index)
-            refreshField(index)
+            levelFacade.clickArea(index).apply {
+                refreshField(this)
+            }
         }
 
         if (preferencesRepository.useFlagAssistant() && !levelFacade.hasAnyMineExploded()) {
@@ -185,13 +187,13 @@ class GameViewModel(
             }
         }
 
-        refreshGame()
+        updateGameState()
         analyticsManager.sentEvent(Analytics.PressArea(index))
     }
 
     private fun refreshMineCount() = mineCount.postValue(levelFacade.remainingMines())
 
-    private fun refreshGame() {
+    private fun updateGameState() {
         when {
             levelFacade.hasAnyMineExploded() -> {
                 hapticFeedbackInteractor.explosionFeedback()
@@ -229,18 +231,19 @@ class GameViewModel(
 
     suspend fun gameOver() {
         levelFacade.run {
-            analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getStats()))
+            analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
 
             findExplodedMine()?.let { exploded ->
                 takeExplosionRadius(exploded).forEach {
                     it.isCovered = false
-                    refreshField(it.id)
+                    refreshField(it)
                     delay(75L)
                 }
             }
 
             showWrongFlags()
-            refreshGame()
+            refreshField()
+            updateGameState()
         }
 
         GlobalScope.launch {
@@ -253,7 +256,7 @@ class GameViewModel(
             analyticsManager.sentEvent(
                 Analytics.Victory(
                     clock.time(),
-                    getStats(),
+                    getScore(),
                     currentDifficulty
                 )
             )
@@ -268,11 +271,12 @@ class GameViewModel(
 
     fun useAccessibilityMode() = preferencesRepository.useLargeAreas()
 
-    private fun refreshField(index: Int? = null) {
-        if (index == null || levelFacade.isEmpty(index)) {
-            field.postValue(levelFacade.field.toList())
-        } else {
-            fieldRefresh.postValue(index)
+    private fun refreshField(area: Area? = null) {
+        when {
+            area == null -> field.postValue(levelFacade.field.toList())
+            !area.isCovered && area.minesAround != 0 -> field.postValue(levelFacade.field.toList())
+            area.safeZone -> field.postValue(levelFacade.field.toList())
+            else -> fieldRefresh.postValue(area.id)
         }
     }
 }

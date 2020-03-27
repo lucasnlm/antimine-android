@@ -100,7 +100,7 @@ class GameActivity : DaggerAppCompatActivity() {
     }
 
     private fun bindViewModel() = viewModel.apply {
-        var lastEvent: Event? = null // TODO use distinctUntilChanged
+        var lastEvent: Event? = null // TODO use distinctUntilChanged when available
 
         eventObserver.observe(this@GameActivity, Observer {
             if (lastEvent != it) {

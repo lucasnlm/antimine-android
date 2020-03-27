@@ -1,8 +1,9 @@
 package dev.lucasnlm.antimine.common.level
 
 import dev.lucasnlm.antimine.common.level.models.Area
-import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.common.level.models.Score
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
@@ -262,6 +263,29 @@ class LevelFacadeTest {
     }
 
     @Test
+    fun testRemoveMark() {
+        levelFacadeOf(3, 3, 1, 200L).run {
+            plantMinesExcept(3)
+            switchMarkAt(7)
+            assertTrue(hasMarkOn(7))
+            removeMark(7)
+            assertTrue(hasNoneOn(7))
+        }
+    }
+
+    @Test
+    fun testTurnOffAllHighlighted() {
+        levelFacadeOf(3, 3, 1, 200L).run {
+            plantMinesExcept(3)
+            getArea(7).highlighted = true
+            getArea(8).highlighted = true
+            assertEquals(field.count { it.highlighted }, 2)
+            turnOffAllHighlighted()
+            assertEquals(field.count { it.highlighted }, 0)
+        }
+    }
+
+    @Test
     fun testOpenField() {
         levelFacadeOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
@@ -327,6 +351,61 @@ class LevelFacadeTest {
     }
 
     @Test
+    fun testFlagAllMines() {
+        levelFacadeOf(3, 3, 5, 200L).run {
+            plantMinesExcept(3)
+            field.filter { it.hasMine  }.forEach {
+                assertFalse(it.mark.isFlag())
+            }
+            flagAllMines()
+            field.filter { it.hasMine  }.forEach {
+                assertTrue(it.mark.isFlag())
+            }
+        }
+    }
+
+    @Test
+    fun testFindExplodedMine() {
+        levelFacadeOf(3, 3, 5, 200L).run {
+            plantMinesExcept(3)
+            val mine = field.first { it.hasMine }
+            assertEquals(findExplodedMine(), null)
+            openField(mine)
+            assertEquals(findExplodedMine(), mine)
+        }
+    }
+
+    @Test
+    fun testTakeExplosionRadius() {
+        levelFacadeOf(6, 6, 10, 200L).run {
+            plantMinesExcept(3)
+            val mine = field.last { it.hasMine }
+            assertEquals(
+                listOf(35, 33, 22, 27, 17, 32, 25, 8, 7, 2),
+                takeExplosionRadius(mine).map { it.id }.toList()
+            )
+        }
+
+        levelFacadeOf(6, 6, 10, 200L).run {
+            plantMinesExcept(3)
+            val mine = field.first { it.hasMine }
+            assertEquals(
+                listOf(2, 8, 7, 17, 22, 25, 27, 32, 33, 35),
+                takeExplosionRadius(mine).map { it.id }.toList()
+            )
+        }
+
+        levelFacadeOf(6, 6, 10, 200L).run {
+            plantMinesExcept(3)
+            val mine = field.filter { it.hasMine }.elementAt(4)
+            assertEquals(
+                listOf(22, 17, 27, 33, 35, 8, 32, 25, 2, 7),
+                takeExplosionRadius(mine).map { it.id }.toList()
+            )
+        }
+    }
+
+    @Test
     fun testShowWrongFlags() {
         levelFacadeOf(3, 3, 5, 200L).run {
             plantMinesExcept(3)
@@ -350,6 +429,22 @@ class LevelFacadeTest {
             revealAllEmptyAreas()
             field.filter { it.id != 3 && !it.hasMine }.map { it.isCovered }.forEach(::assertFalse)
             field.filter { it.hasMine }.map { it.isCovered }.forEach(::assertTrue)
+        }
+    }
+
+    @Test
+    fun testGetScore() {
+        levelFacadeOf(3, 3, 5, 200L).run {
+            assertEquals(getScore(), Score(0, 0, 9))
+            plantMinesExcept(3)
+            assertEquals(getScore(), Score(0, 5, 9))
+            field.filter { it.hasMine }.forEach { it.mark = Mark.Flag }
+            assertEquals(getScore(), Score(5, 5, 9))
+            field.first { it.hasMine }.apply {
+                isCovered = false
+                mistake = true
+            }
+            assertEquals(getScore(), Score(4, 5, 9))
         }
     }
 
