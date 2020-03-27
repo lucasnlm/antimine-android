@@ -354,11 +354,11 @@ class LevelFacadeTest {
     fun testFlagAllMines() {
         levelFacadeOf(3, 3, 5, 200L).run {
             plantMinesExcept(3)
-            field.filter { it.hasMine  }.forEach {
+            field.filter { it.hasMine }.forEach {
                 assertFalse(it.mark.isFlag())
             }
             flagAllMines()
-            field.filter { it.hasMine  }.forEach {
+            field.filter { it.hasMine }.forEach {
                 assertTrue(it.mark.isFlag())
             }
         }
