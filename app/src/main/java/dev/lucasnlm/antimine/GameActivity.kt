@@ -381,7 +381,7 @@ class GameActivity : DaggerAppCompatActivity() {
 
     private fun showEndGameDialog(victory: Boolean) {
         val currentGameStatus = status
-        if (currentGameStatus is Status.Over && !isFinishing) {
+        if (currentGameStatus is Status.Over && !isFinishing && !drawer.isDrawerOpen(GravityCompat.START)) {
             if (supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG) == null) {
                 val score = currentGameStatus.score
                 EndGameDialogFragment.newInstance(
