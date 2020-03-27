@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.common.level.viewmodel
 
 import android.app.Application
 import android.os.Handler
+import android.text.format.DateUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
@@ -229,15 +230,18 @@ class GameViewModel(
         levelFacade.revealAllEmptyAreas()
     }
 
+    fun explosionDelay() = 750L
+
     suspend fun gameOver() {
         levelFacade.run {
             analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
+            val delayMillis = explosionDelay() / levelFacade.mines.count().coerceAtLeast(10)
 
             findExplodedMine()?.let { exploded ->
                 takeExplosionRadius(exploded).forEach {
                     it.isCovered = false
                     refreshField(it)
-                    delay(75L)
+                    delay(delayMillis)
                 }
             }
 

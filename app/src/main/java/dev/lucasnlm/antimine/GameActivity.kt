@@ -402,14 +402,11 @@ class GameActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private fun waitAndShowEndGameDialog(
-        victory: Boolean,
-        await: Long = DateUtils.SECOND_IN_MILLIS
-    ) {
-        if (await > 0L) {
+    private fun waitAndShowEndGameDialog(victory: Boolean, await: Boolean) {
+        if (await) {
             postDelayed(Handler(), {
                 showEndGameDialog(victory)
-            }, null, await)
+            }, null, viewModel.explosionDelay())
         } else {
             showEndGameDialog(victory)
         }
@@ -454,7 +451,10 @@ class GameActivity : DaggerAppCompatActivity() {
                 viewModel.revealAllEmptyAreas()
                 viewModel.victory()
                 invalidateOptionsMenu()
-                waitAndShowEndGameDialog(true, 0L)
+                waitAndShowEndGameDialog(
+                    victory = true,
+                    await = false
+                )
             }
             Event.GameOver -> {
                 val score = Score(
@@ -468,7 +468,10 @@ class GameActivity : DaggerAppCompatActivity() {
 
                 GlobalScope.launch(context = Dispatchers.Main) {
                     viewModel.gameOver()
-                    waitAndShowEndGameDialog(false)
+                    waitAndShowEndGameDialog(
+                        victory = false,
+                        await = true
+                    )
                 }
             }
             Event.ResumeVictory -> {
@@ -481,7 +484,10 @@ class GameActivity : DaggerAppCompatActivity() {
                 invalidateOptionsMenu()
                 viewModel.stopClock()
 
-                waitAndShowEndGameDialog(true)
+                waitAndShowEndGameDialog(
+                    victory = true,
+                    await = true
+                )
             }
             Event.ResumeGameOver -> {
                 val score = Score(
@@ -493,7 +499,10 @@ class GameActivity : DaggerAppCompatActivity() {
                 invalidateOptionsMenu()
                 viewModel.stopClock()
 
-                waitAndShowEndGameDialog(false)
+                waitAndShowEndGameDialog(
+                    victory = false,
+                    await = true
+                )
             }
             else -> { }
         }

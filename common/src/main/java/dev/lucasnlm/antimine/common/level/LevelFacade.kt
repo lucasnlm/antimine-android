@@ -25,7 +25,8 @@ class LevelFacade {
     lateinit var field: Sequence<Area>
         private set
 
-    private var mines: Sequence<Area> = sequenceOf()
+    var mines: Sequence<Area> = sequenceOf()
+        private set
 
     constructor(minefield: Minefield, seed: Long = randomSeed()) {
         this.minefield = minefield
@@ -204,12 +205,12 @@ class LevelFacade {
 
     fun findExplodedMine() = mines.filter { it.mistake }.firstOrNull()
 
-    fun takeExplosionRadius(target: Area, take: Int = 20): Sequence<Area> =
+    fun takeExplosionRadius(target: Area): Sequence<Area> =
         mines.filter { it.isCovered && it.mark.isNone() }.sortedBy {
             val dx1 = (it.posX - target.posX)
             val dy1 = (it.posY - target.posY)
             dx1 * dx1 + dy1 * dy1
-        }.take(take)
+        }
 
     fun flagAllMines() = mines.forEach { it.mark = Mark.Flag }
 
