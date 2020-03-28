@@ -30,7 +30,7 @@ class LevelFacade {
 
     constructor(minefield: Minefield, seed: Long = randomSeed()) {
         this.minefield = minefield
-        this.randomGenerator = Random().apply { setSeed(seed) }
+        this.randomGenerator = Random(seed)
         this.seed = seed
         this.saveId = 0
         createEmptyField()
@@ -38,7 +38,7 @@ class LevelFacade {
 
     constructor(save: Save) {
         this.minefield = save.minefield
-        this.randomGenerator = Random().apply { setSeed(save.seed) }
+        this.randomGenerator = Random(save.seed)
         this.field = save.field.asSequence()
         this.mines = this.field.filter { it.hasMine }.asSequence()
         this.hasMines = this.mines.count() != 0
@@ -125,42 +125,70 @@ class LevelFacade {
     /**
      * Run "Flood Fill algorithm" to open all empty neighbors of a target area.
      */
-    fun openField(target: Area) {
+    fun openField(target: Area): Int {
+        var changes = 0
         target.run {
             if (isCovered) {
+                changes += 1
                 isCovered = false
                 mark = Mark.None
 
                 if (hasMine) {
                     mistake = true
-                } else if (minesAround == 0 && !hasMine) {
+                } else if (minesAround == 0) {
                     findNeighbors()
                         .filter { it.isCovered }
+                        .also {
+                            changes += it.count()
+                        }
                         .forEach { openField(it) }
                 }
             }
         }
+        return changes
     }
 
-    fun turnOffAllHighlighted() {
-        field.forEach {
-            it.highlighted = false
-        }
+    /**
+     * Disable all highlighted areas.
+     *
+     * @return true if any area was changed.
+     */
+    fun turnOffAllHighlighted(): Boolean {
+        var changed: Boolean
+        field
+            .filter { it.highlighted }
+            .also { changed = it.count() != 0 }
+            .forEach { it.highlighted = false }
+        return changed
     }
 
-    private fun toggleHighlight(target: Area) {
+    private fun toggleHighlight(target: Area): Int {
+        var changed = 1
         target.apply {
             highlighted = !highlighted
             findNeighbors()
                 .filter { it.mark.isNone() && it.isCovered }
+                .also { changed += it.count() }
                 .forEach { it.highlighted = !it.highlighted }
         }
+        return changed
     }
 
-    fun clickArea(index: Int): Area = getArea(index).apply {
-        when {
-            isCovered -> openField(getArea(index))
-            minesAround != 0 -> toggleHighlight(this)
+    /**
+     * Open a given area by its index.
+     *
+     * @param index the target index
+     * @return true if multiple areas were open
+     */
+    fun clickArea(index: Int): Int = getArea(index).run {
+        return when {
+            isCovered -> {
+                openField(getArea(index))
+            }
+            minesAround != 0 -> {
+                toggleHighlight(this)
+            }
+            else -> 0
         }
     }
 
