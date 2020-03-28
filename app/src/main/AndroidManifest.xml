@@ -12,9 +12,10 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
+    <uses-permission
+        android:name="android.permission.VIBRATE" />
+    <uses-permission
+        android:name="android.permission.WAKE_LOCK" />
 
     <uses-feature
         android:name="android.hardware.touchscreen"
@@ -57,6 +58,8 @@
         <activity
             android:name="dev.lucasnlm.antimine.GameActivity"
             android:saveEnabled="false"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
             android:configChanges="screenSize|orientation"
             android:theme="@style/AppTheme.NoActionBar">
 

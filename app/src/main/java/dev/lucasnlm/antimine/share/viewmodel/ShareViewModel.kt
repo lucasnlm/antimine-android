@@ -13,8 +13,8 @@ class ShareViewModel(
 ) : AndroidViewModel(application) {
     private val context = getApplication<Application>().applicationContext
 
-    suspend fun share(minefield: Minefield?, field: List<Area>?, spentTime: Long?) {
-        val result = if (minefield != null && field != null && field.isNotEmpty()) {
+    suspend fun share(minefield: Minefield?, field: Sequence<Area>?, spentTime: Long?) {
+        val result = if (minefield != null && field != null && field.count() != 0) {
             ShareBuilder(context).share(minefield, field, spentTime)
         } else {
             false

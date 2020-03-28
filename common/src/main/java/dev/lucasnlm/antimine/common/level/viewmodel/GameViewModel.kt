@@ -39,7 +39,7 @@ class GameViewModel(
     private var currentDifficulty: Difficulty = Difficulty.Standard
     private var initialized = false
 
-    val field = MutableLiveData<List<Area>>()
+    val field = MutableLiveData<Sequence<Area>>()
     val fieldRefresh = MutableLiveData<Int>()
     val elapsedTimeSeconds = MutableLiveData<Long>()
     val mineCount = MutableLiveData<Int>()
@@ -274,13 +274,13 @@ class GameViewModel(
 
     private fun refreshIndex(targetIndex: Int, changes: Int = 1) {
         if (changes > 1) {
-            field.postValue(levelFacade.field.toList())
+            field.postValue(levelFacade.field)
         } else {
             fieldRefresh.postValue(targetIndex)
         }
     }
 
     private fun refreshAll() {
-        field.postValue(levelFacade.field.toList())
+        field.postValue(levelFacade.field)
     }
 }
