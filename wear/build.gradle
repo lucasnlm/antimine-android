@@ -13,8 +13,8 @@ android {
         targetSdkVersion buildVersion.targetSdk
         versionCode buildVersion.versionCode
         versionName buildVersion.versionName
-
-        resConfigs 'en', 'pt', 'es', 'zh'
+        vectorDrawables.useSupportLibrary true
+        resConfigs 'en', 'cs', 'de', 'es', 'fr', 'pt', 'ru', 'tr', 'vi', 'zh'
     }
 
     buildTypes {

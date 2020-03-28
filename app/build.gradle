@@ -14,9 +14,8 @@ android {
         versionCode buildVersion.versionCode
         versionName buildVersion.versionName
         multiDexEnabled true
-
         vectorDrawables.useSupportLibrary true
-        resConfigs 'en', 'pt', 'es', 'zh'
+        resConfigs 'en', 'cs', 'de', 'es', 'fr', 'pt', 'ru', 'tr', 'vi', 'zh'
     }
 
     buildTypes {
