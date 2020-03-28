@@ -94,11 +94,13 @@ class LevelFacade {
                     it.safeZone = true
                 }
 
-                findCrossNeighbors().forEach { neighbor ->
-                    neighbor
-                        .findCrossNeighbors()
-                        .filterNot { it.safeZone }
-                        .forEach { it.safeZone = true }
+                if (this@LevelFacade.minefield. width > 9) {
+                    findCrossNeighbors().forEach { neighbor ->
+                        neighbor
+                            .findCrossNeighbors()
+                            .filterNot { it.safeZone }
+                            .forEach { it.safeZone = true }
+                    }
                 }
             }
         }
