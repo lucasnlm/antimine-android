@@ -43,6 +43,10 @@ class AboutViewModel : ViewModel() {
                 sequenceOf("Fatih Fırıncı")
             ),
             TranslationInfo(
+                "Ukrainian",
+                sequenceOf("dmitry.sh")
+            ),
+            TranslationInfo(
                 "Vietnamese",
                 sequenceOf("pnhpnh")
             )
