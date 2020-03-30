@@ -142,6 +142,10 @@
             android:theme="@style/AppTheme" />
 
         <activity
+            android:name="dev.lucasnlm.antimine.history.HistoryActivity"
+            android:parentActivityName="dev.lucasnlm.antimine.GameActivity" />
+
+        <activity
             android:name="dev.lucasnlm.antimine.preferences.PreferencesActivity"
             android:label="@string/settings"
             android:parentActivityName="dev.lucasnlm.antimine.GameActivity">
@@ -149,7 +153,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="dev.lucasnlm.antimine.GameActivity" />
-
         </activity>
 
         <provider

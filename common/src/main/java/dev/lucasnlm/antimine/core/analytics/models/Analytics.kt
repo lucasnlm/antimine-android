@@ -67,6 +67,8 @@ sealed class Analytics(
 
     class OpenSettings : Analytics("Open Settings")
 
+    class OpenSaveHistory : Analytics("Open Save History")
+
     class ShowRatingRequest(usages: Int) : Analytics("Shown Rating Request",
         mapOf(
             "Usages" to usages.toString()

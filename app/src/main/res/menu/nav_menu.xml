@@ -38,6 +38,16 @@
     </item>
 
     <group
+        android:id="@+id/history_group">
+
+        <item
+            android:id="@+id/previous_games"
+            android:checkable="false"
+            android:title="@string/previous_games" />
+
+    </group>
+
+    <group
         android:id="@+id/install_group"
         android:visible="false"
         tools:visible="true">

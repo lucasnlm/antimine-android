@@ -75,7 +75,7 @@ class GameViewModel(
         return minefield
     }
 
-    private fun resumeGameFromSave(save: Save): Minefield {
+    fun resumeGameFromSave(save: Save): Minefield {
         clock.reset(save.duration)
         elapsedTimeSeconds.postValue(save.duration)
 
