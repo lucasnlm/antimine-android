@@ -44,7 +44,7 @@ class AboutViewModel : ViewModel() {
             ),
             TranslationInfo(
                 "Ukrainian",
-                sequenceOf("dmitry.sh")
+                sequenceOf("Dmitry Shuba")
             ),
             TranslationInfo(
                 "Vietnamese",
