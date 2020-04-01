@@ -403,10 +403,10 @@ class GameActivity : DaggerAppCompatActivity() {
     }
 
     private fun waitAndShowEndGameDialog(victory: Boolean, await: Boolean) {
-        if (await) {
+        if (await && viewModel.explosionDelay() != 0L) {
             postDelayed(Handler(), {
                 showEndGameDialog(victory)
-            }, null, viewModel.explosionDelay())
+            }, null, (viewModel.explosionDelay() * 0.3).toLong())
         } else {
             showEndGameDialog(victory)
         }

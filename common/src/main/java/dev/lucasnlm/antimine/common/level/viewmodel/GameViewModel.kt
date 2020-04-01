@@ -227,7 +227,7 @@ class GameViewModel(
 
     fun revealAllEmptyAreas() = levelFacade.revealAllEmptyAreas()
 
-    fun explosionDelay() = 750L
+    fun explosionDelay() = if (preferencesRepository.useAnimations()) 750L else 0L
 
     suspend fun gameOver() {
         levelFacade.run {
@@ -273,7 +273,7 @@ class GameViewModel(
     fun useAccessibilityMode() = preferencesRepository.useLargeAreas()
 
     private fun refreshIndex(targetIndex: Int, changes: Int = 1) {
-        if (changes > 1) {
+        if (!preferencesRepository.useAnimations() || changes > 1) {
             field.postValue(levelFacade.field)
         } else {
             fieldRefresh.postValue(targetIndex)
