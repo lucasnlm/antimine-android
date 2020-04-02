@@ -1,20 +1,23 @@
 package dev.lucasnlm.antimine.common.level.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
-import androidx.core.content.ContextCompat
-import android.util.AttributeSet
-import android.view.View
-import dev.lucasnlm.antimine.common.level.models.Area
-import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
-import android.util.TypedValue
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.util.AttributeSet
+import android.util.TypedValue
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import dev.lucasnlm.antimine.common.R
+import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
-import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.AreaPalette
+import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
 
 class AreaView : View {
     // Used on Wear OS
@@ -25,6 +28,7 @@ class AreaView : View {
     private lateinit var paintSettings: AreaPaintSettings
     private lateinit var palette: AreaPalette
     private val drawableRepository = DrawableRepository()
+    private var gestureDetector: GestureDetector? = null
 
     constructor(context: Context) : super(context)
 
@@ -34,6 +38,13 @@ class AreaView : View {
 
     init {
         isHapticFeedbackEnabled = true
+    }
+
+    fun setOnDoubleClickListener(listener: GestureDetector.OnDoubleTapListener) {
+        if (gestureDetector == null) {
+            gestureDetector = GestureDetector(context, GestureDetector.SimpleOnGestureListener())
+        }
+        gestureDetector?.setOnDoubleTapListener(listener)
     }
 
     fun bindField(area: Area, isAmbientMode: Boolean, isLowBitAmbient: Boolean, paintSettings: AreaPaintSettings) {
@@ -70,6 +81,10 @@ class AreaView : View {
             invalidate()
         }
     }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouchEvent(event: MotionEvent?): Boolean =
+        (gestureDetector?.onTouchEvent(event) ?: false) || super.onTouchEvent(event)
 
     private fun bindContentDescription(area: Area) {
         contentDescription = when {

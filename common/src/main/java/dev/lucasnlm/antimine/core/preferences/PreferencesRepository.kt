@@ -14,6 +14,7 @@ interface IPreferencesRepository {
     fun useHapticFeedback(): Boolean
     fun useLargeAreas(): Boolean
     fun useAnimations(): Boolean
+    fun useDoubleClickToOpen(): Boolean
 }
 
 class PreferencesRepository(
@@ -49,4 +50,7 @@ class PreferencesRepository(
 
     override fun useAnimations(): Boolean =
         getBoolean("preference_animation", true)
+
+    override fun useDoubleClickToOpen(): Boolean =
+        getBoolean("preference_double_click_open", false)
 }

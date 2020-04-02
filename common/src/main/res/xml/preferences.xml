@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="@string/settings_gameplay"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            android:checked="false"
+            android:defaultValue="false"
+            android:key="preference_double_click_open"
+            android:title="@string/settings_double_click"
+            android:summary="@string/settings_double_click_desc"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/settings_general"

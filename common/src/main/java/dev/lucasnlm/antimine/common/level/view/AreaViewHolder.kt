@@ -5,6 +5,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 class AreaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     init {
-        this.itemView.isFocusable = true
+        itemView.isFocusable = true
     }
 }

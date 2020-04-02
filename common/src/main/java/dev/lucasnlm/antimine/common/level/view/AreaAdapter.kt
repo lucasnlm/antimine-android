@@ -5,7 +5,9 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.Log
+import android.view.GestureDetector
 import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.R
@@ -37,7 +39,7 @@ class AreaAdapter(
     }
 
     fun setClickEnabled(value: Boolean) {
-        this.clickEnabled = value
+        clickEnabled = value
     }
 
     fun bindField(field: Sequence<Area>) {
@@ -45,62 +47,85 @@ class AreaAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount() = field.size
+    override fun getItemCount(): Int = field.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AreaViewHolder {
         val view = AreaView(parent.context)
-        val holder = AreaViewHolder(view)
+        return AreaViewHolder(view).apply {
+            view.setOnDoubleClickListener(object : GestureDetector.OnDoubleTapListener {
+                override fun onDoubleTap(e: MotionEvent?): Boolean {
+                    return false
+                }
 
-        holder.itemView.setOnLongClickListener { target ->
-            target.requestFocus()
-
-            val position = holder.adapterPosition
-            if (position == RecyclerView.NO_POSITION) {
-                Log.d(TAG, "Item no longer exists.")
-            } else if (clickEnabled) {
-                viewModel.onLongClick(position)
-            }
-
-            true
-        }
-
-        holder.itemView.setOnClickListener {
-            val position = holder.adapterPosition
-            if (position == RecyclerView.NO_POSITION) {
-                Log.d(TAG, "Item no longer exists.")
-            } else if (clickEnabled) {
-                viewModel.onClickArea(position)
-            }
-        }
-
-        holder.itemView.setOnKeyListener { _, keyCode, keyEvent ->
-            var handled = false
-
-            if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-                when (keyEvent.action) {
-                    KeyEvent.ACTION_DOWN -> {
-                        longPressAt = System.currentTimeMillis()
-                        handled = true
-                    }
-                    KeyEvent.ACTION_UP -> {
-                        if (clickEnabled) {
-                            val value = System.currentTimeMillis() - longPressAt
-                            if (value > 300L) {
-                                view.performLongClick()
-                            } else {
-                                view.callOnClick()
-                            }
+                override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
+                    val position = adapterPosition
+                    return when {
+                        position == RecyclerView.NO_POSITION -> {
+                            Log.d(TAG, "Item no longer exists.")
+                            false
                         }
-                        longPressAt = System.currentTimeMillis()
-                        handled = true
+                        clickEnabled -> {
+                            viewModel.onDoubleClickArea(position)
+                            true
+                        }
+                        else -> {
+                            false
+                        }
                     }
+                }
+
+                override fun onSingleTapConfirmed(e: MotionEvent?): Boolean = false
+            })
+
+            itemView.setOnLongClickListener { target ->
+                target.requestFocus()
+
+                val position = adapterPosition
+                if (position == RecyclerView.NO_POSITION) {
+                    Log.d(TAG, "Item no longer exists.")
+                } else if (clickEnabled) {
+                    viewModel.onLongClick(position)
+                }
+
+                true
+            }
+
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position == RecyclerView.NO_POSITION) {
+                    Log.d(TAG, "Item no longer exists.")
+                } else if (clickEnabled) {
+                    viewModel.onClickArea(position)
                 }
             }
 
-            handled
-        }
+            itemView.setOnKeyListener { _, keyCode, keyEvent ->
+                var handled = false
 
-        return holder
+                if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+                    when (keyEvent.action) {
+                        KeyEvent.ACTION_DOWN -> {
+                            longPressAt = System.currentTimeMillis()
+                            handled = true
+                        }
+                        KeyEvent.ACTION_UP -> {
+                            if (clickEnabled) {
+                                val value = System.currentTimeMillis() - longPressAt
+                                if (value > 300L) {
+                                    view.performLongClick()
+                                } else {
+                                    view.callOnClick()
+                                }
+                            }
+                            longPressAt = System.currentTimeMillis()
+                            handled = true
+                        }
+                    }
+                }
+
+                handled
+            }
+        }
     }
 
     private fun getItem(position: Int) = field[position]
@@ -109,8 +134,10 @@ class AreaAdapter(
 
     override fun onBindViewHolder(holder: AreaViewHolder, position: Int) {
         val field = getItem(position)
-        if (holder.itemView is AreaView) {
-            holder.itemView.bindField(field, isAmbientMode, isLowBitAmbient, paintSettings)
+        holder.run {
+            if (itemView is AreaView) {
+                itemView.bindField(field, isAmbientMode, isLowBitAmbient, paintSettings)
+            }
         }
     }
 

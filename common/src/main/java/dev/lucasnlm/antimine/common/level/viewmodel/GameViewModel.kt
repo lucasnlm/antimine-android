@@ -150,7 +150,7 @@ class GameViewModel(
             }
 
             analyticsManager.sentEvent(Analytics.LongPressArea(index))
-        } else {
+        } else if (!preferencesRepository.useDoubleClickToOpen()) {
             levelFacade.openNeighbors(index).forEach { refreshIndex(it.id) }
 
             analyticsManager.sentEvent(Analytics.LongPressMultipleArea(index))
@@ -159,17 +159,12 @@ class GameViewModel(
         updateGameState()
     }
 
-    fun onClickArea(index: Int) {
+    fun onDoubleClickArea(index: Int) {
         if (levelFacade.turnOffAllHighlighted()) {
             refreshAll()
         }
 
-        if (levelFacade.hasMarkOn(index)) {
-            levelFacade.removeMark(index).run {
-                refreshIndex(id)
-            }
-            hapticFeedbackInteractor.toggleFlagFeedback()
-        } else {
+        if (preferencesRepository.useDoubleClickToOpen()) {
             if (!levelFacade.hasMines) {
                 levelFacade.plantMinesExcept(index, true)
             }
@@ -189,6 +184,44 @@ class GameViewModel(
 
         updateGameState()
         analyticsManager.sentEvent(Analytics.PressArea(index))
+    }
+
+    fun onClickArea(index: Int) {
+        var openAnyArea = false
+
+        if (levelFacade.turnOffAllHighlighted()) {
+            refreshAll()
+        }
+
+        if (levelFacade.hasMarkOn(index)) {
+            levelFacade.removeMark(index).run {
+                refreshIndex(id)
+            }
+            hapticFeedbackInteractor.toggleFlagFeedback()
+        } else if (!preferencesRepository.useDoubleClickToOpen()) {
+            if (!levelFacade.hasMines) {
+                levelFacade.plantMinesExcept(index, true)
+            }
+
+            levelFacade.clickArea(index).run {
+                refreshIndex(index, this)
+            }
+
+            openAnyArea = true
+        }
+
+        if (openAnyArea) {
+            if (preferencesRepository.useFlagAssistant() && !levelFacade.hasAnyMineExploded()) {
+                levelFacade.runFlagAssistant().forEach {
+                    Handler().post {
+                        refreshIndex(it.id)
+                    }
+                }
+            }
+
+            updateGameState()
+            analyticsManager.sentEvent(Analytics.PressArea(index))
+        }
     }
 
     private fun refreshMineCount() = mineCount.postValue(levelFacade.remainingMines())
