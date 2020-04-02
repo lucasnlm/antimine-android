@@ -40,8 +40,8 @@ class AreaAdapter(
         this.clickEnabled = value
     }
 
-    fun bindField(area: List<Area>) {
-        this.field = area
+    fun bindField(field: Sequence<Area>) {
+        this.field = field.toList()
         notifyDataSetChanged()
     }
 

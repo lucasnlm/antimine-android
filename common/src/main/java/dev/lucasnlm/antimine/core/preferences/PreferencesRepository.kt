@@ -13,6 +13,7 @@ interface IPreferencesRepository {
     fun useFlagAssistant(): Boolean
     fun useHapticFeedback(): Boolean
     fun useLargeAreas(): Boolean
+    fun useAnimations(): Boolean
 }
 
 class PreferencesRepository(
@@ -45,4 +46,7 @@ class PreferencesRepository(
 
     override fun useLargeAreas(): Boolean =
         getBoolean("preference_large_area", false)
+
+    override fun useAnimations(): Boolean =
+        getBoolean("preference_animation", true)
 }

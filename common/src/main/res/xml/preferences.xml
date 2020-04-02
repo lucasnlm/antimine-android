@@ -29,6 +29,13 @@
             android:title="@string/auto_flag"
             android:summary="@string/settings_auto_flag_desc"
             app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:checked="true"
+            android:defaultValue="true"
+            android:key="preference_animation"
+            android:title="@string/animations"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

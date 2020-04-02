@@ -25,11 +25,12 @@ class LevelFacade {
     lateinit var field: Sequence<Area>
         private set
 
-    private var mines: Sequence<Area> = sequenceOf()
+    var mines: Sequence<Area> = sequenceOf()
+        private set
 
     constructor(minefield: Minefield, seed: Long = randomSeed()) {
         this.minefield = minefield
-        this.randomGenerator = Random().apply { setSeed(seed) }
+        this.randomGenerator = Random(seed)
         this.seed = seed
         this.saveId = 0
         createEmptyField()
@@ -37,7 +38,7 @@ class LevelFacade {
 
     constructor(save: Save) {
         this.minefield = save.minefield
-        this.randomGenerator = Random().apply { setSeed(save.seed) }
+        this.randomGenerator = Random(save.seed)
         this.field = save.field.asSequence()
         this.mines = this.field.filter { it.hasMine }.asSequence()
         this.hasMines = this.mines.count() != 0
@@ -55,12 +56,10 @@ class LevelFacade {
         }.asSequence()
     }
 
-    private fun getArea(id: Int) = field.first { it.id == id }
+    fun getArea(id: Int) = field.first { it.id == id }
 
-    fun switchMarkAt(index: Int): Boolean {
-        val changed: Boolean
+    fun switchMarkAt(index: Int): Area =
         getArea(index).apply {
-            changed = isCovered
             if (isCovered) {
                 mark = when (mark) {
                     Mark.PurposefulNone, Mark.None -> Mark.Flag
@@ -69,18 +68,17 @@ class LevelFacade {
                 }
             }
         }
-        return changed
-    }
 
-    fun removeMark(index: Int) {
+    fun removeMark(index: Int) =
         getArea(index).apply {
             mark = Mark.PurposefulNone
         }
-    }
 
     fun hasCoverOn(index: Int): Boolean = getArea(index).isCovered
 
     fun hasMarkOn(index: Int): Boolean = getArea(index).mark.isNotNone()
+
+    fun hasNoneOn(index: Int): Boolean = getArea(index).mark.isNone()
 
     fun plantMinesExcept(index: Int, includeSafeArea: Boolean = false) {
         plantRandomMines(index, includeSafeArea)
@@ -96,11 +94,13 @@ class LevelFacade {
                     it.safeZone = true
                 }
 
-                findCrossNeighbors().forEach { neighbor ->
-                    neighbor
-                        .findCrossNeighbors()
-                        .filterNot { it.safeZone }
-                        .forEach { it.safeZone = true }
+                if (this@LevelFacade.minefield. width > 9) {
+                    findCrossNeighbors().forEach { neighbor ->
+                        neighbor
+                            .findCrossNeighbors()
+                            .filterNot { it.safeZone }
+                            .forEach { it.safeZone = true }
+                    }
                 }
             }
         }
@@ -116,112 +116,137 @@ class LevelFacade {
 
     private fun putMinesTips() {
         field.forEach {
-            it.minesAround = if (it.hasMine) 0 else it.findNeighbors().filter { neighbor ->
+            it.minesAround = if (it.hasMine) 0 else it.findNeighbors().count { neighbor ->
                 neighbor.hasMine
-            }.count()
+            }
         }
     }
 
     /**
      * Run "Flood Fill algorithm" to open all empty neighbors of a target area.
      */
-    fun openField(target: Area): Boolean {
-        val result: Boolean = target.isCovered
+    fun openField(target: Area): Int {
+        var changes = 0
+        target.run {
+            if (isCovered) {
+                changes += 1
+                isCovered = false
+                mark = Mark.None
 
-        if (target.isCovered) {
-            target.isCovered = false
-            target.mark = Mark.None
-
-            if (target.minesAround == 0 && !target.hasMine) {
-                target.findNeighbors().forEach { openField(it) }
-            }
-
-            if (this.hasMines) {
-                field.filter { it.safeZone }.forEach { openField(it) }
-            }
-
-            if (target.hasMine) {
-                target.mistake = true
+                if (hasMine) {
+                    mistake = true
+                } else if (minesAround == 0) {
+                    findNeighbors()
+                        .filter { it.isCovered }
+                        .also {
+                            changes += it.count()
+                        }
+                        .forEach { openField(it) }
+                }
             }
         }
-
-        return result
+        return changes
     }
 
-    fun turnOffAllHighlighted() {
-        field.forEach {
-            it.highlighted = false
+    /**
+     * Disable all highlighted areas.
+     *
+     * @return true if any area was changed.
+     */
+    fun turnOffAllHighlighted(): Boolean {
+        var changed: Boolean
+        field
+            .filter { it.highlighted }
+            .also { changed = it.count() != 0 }
+            .forEach { it.highlighted = false }
+        return changed
+    }
+
+    private fun toggleHighlight(target: Area): Int {
+        var changed = 1
+        target.apply {
+            highlighted = !highlighted
+            findNeighbors()
+                .filter { it.mark.isNone() && it.isCovered }
+                .also { changed += it.count() }
+                .forEach { it.highlighted = !it.highlighted }
         }
+        return changed
     }
 
-    private fun toggleHighlight(target: Area) {
-        target.highlighted = !target.highlighted
-        target.findNeighbors()
-            .filter { it.mark.isNone() && it.isCovered }
-            .forEach { it.highlighted = !it.highlighted }
-    }
-
-    fun clickArea(index: Int): Boolean = getArea(index).let {
-        when {
-            it.isCovered -> {
+    /**
+     * Open a given area by its index.
+     *
+     * @param index the target index
+     * @return true if multiple areas were open
+     */
+    fun clickArea(index: Int): Int = getArea(index).run {
+        return when {
+            isCovered -> {
                 openField(getArea(index))
             }
-            it.minesAround != 0 -> {
-                toggleHighlight(it)
-                true
+            minesAround != 0 -> {
+                toggleHighlight(this)
             }
-            else -> {
-                false
-            }
+            else -> 0
         }
     }
 
-    fun openNeighbors(index: Int): List<Int> =
+    fun openNeighbors(index: Int): Sequence<Area> =
         getArea(index)
             .findNeighbors()
             .filter {
-                it.mark.isNone()
-            }
-            .map {
-                openField(it)
-                it.id
+                it.mark.isNone() && it.isCovered
+            }.also {
+                it.forEach { field -> openField(field) }
             }
 
-    fun runFlagAssistant() {
+    fun runFlagAssistant(): Sequence<Area> {
         // Must not select Mark.PurposefulNone, only Mark.None. Otherwise, it will flag
         // a square that was previously unflagged by player.
+        val assists = mutableListOf<Area>()
+
         mines.filter { it.mark.isPureNone() }.forEach { field ->
             val neighbors = field.findNeighbors()
             val neighborsCount = neighbors.count()
-            val revealedNeighborsCount = neighbors.filter { neighbor ->
+            val revealedNeighborsCount = neighbors.count { neighbor ->
                 !neighbor.isCovered || (neighbor.hasMine && neighbor.mark.isFlag())
-            }.count()
+            }
 
-            field.mark = if (revealedNeighborsCount == neighborsCount) Mark.Flag else Mark.None
+            if (revealedNeighborsCount == neighborsCount) {
+                assists.add(field)
+                field.mark = Mark.Flag
+            } else {
+                field.mark = Mark.None
+            }
         }
+
+        return assists.asSequence()
     }
 
-    fun getStats() = Score(
-        mines.filter { !it.mistake && it.mark.isFlag() }.count(),
+    fun getScore() = Score(
+        mines.count { !it.mistake && it.mark.isFlag() },
         mines.count(),
         field.count()
     )
 
-    fun showAllMines() {
+    fun showAllMines() =
         mines.filter { it.mark != Mark.Flag }.forEach { it.isCovered = false }
-    }
 
-    fun flagAllMines() {
-        mines.forEach { it.mark = Mark.Flag }
-    }
+    fun findExplodedMine() = mines.filter { it.mistake }.firstOrNull()
 
-    fun showWrongFlags() {
-        field.filter { it.mark.isNotNone() && !it.hasMine }.forEach { it.mistake = true }
-    }
+    fun takeExplosionRadius(target: Area): Sequence<Area> =
+        mines.filter { it.isCovered && it.mark.isNone() }.sortedBy {
+            val dx1 = (it.posX - target.posX)
+            val dy1 = (it.posY - target.posY)
+            dx1 * dx1 + dy1 * dy1
+        }
 
-    fun revealAllEmptyAreas() {
-        field.filter { !it.hasMine }.forEach { it.isCovered = false }
-    }
+    fun flagAllMines() = mines.forEach { it.mark = Mark.Flag }
+
+    fun showWrongFlags() = field.filter { it.mark.isNotNone() && !it.hasMine }.forEach { it.mistake = true }
+
+    fun revealAllEmptyAreas() = field.filterNot { it.hasMine }.forEach { it.isCovered = false }
 
     fun hasAnyMineExploded(): Boolean = mines.firstOrNull { it.mistake } != null
 
@@ -231,11 +256,11 @@ class LevelFacade {
         mines.map {
             val neighbors = it.findNeighbors()
             val neighborsCount = neighbors.count()
-            val isolatedNeighborsCount = neighbors.filter { neighbor ->
+            val isolatedNeighborsCount = neighbors.count { neighbor ->
                 !neighbor.isCovered || neighbor.hasMine
-            }.count()
-            neighborsCount == isolatedNeighborsCount
-        }.filterNot { it }.count() == 0
+            }
+            neighborsCount != isolatedNeighborsCount
+        }.count { it } == 0
 
     private fun rightFlags() = mines.count { it.mark.isFlag() }
 
@@ -248,7 +273,7 @@ class LevelFacade {
         return (minesCount - flagsCount).coerceAtLeast(0)
     }
 
-    private fun Area.findNeighbors() = arrayOf(
+    private fun Area.findNeighbors() = sequenceOf(
         getNeighbor(1, 0),
         getNeighbor(1, 1),
         getNeighbor(0, 1),
@@ -259,7 +284,7 @@ class LevelFacade {
         getNeighbor(1, -1)
     ).filterNotNull()
 
-    private fun Area.findCrossNeighbors() = arrayOf(
+    private fun Area.findCrossNeighbors() = sequenceOf(
         getNeighbor(1, 0),
         getNeighbor(0, 1),
         getNeighbor(-1, 0),
@@ -276,7 +301,16 @@ class LevelFacade {
             hasAnyMineExploded() -> SaveStatus.DEFEAT
             else -> SaveStatus.ON_GOING
         }
-        return Save(saveId, seed, startTime, duration, minefield, difficulty, saveStatus, field.toList())
+        return Save(
+            saveId,
+            seed,
+            startTime,
+            duration,
+            minefield,
+            difficulty,
+            saveStatus,
+            field.toList()
+        )
     }
 
     fun setCurrentSaveId(id: Int) {

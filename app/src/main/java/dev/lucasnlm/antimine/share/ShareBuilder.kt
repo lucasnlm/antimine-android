@@ -29,7 +29,7 @@ class ShareBuilder(
 ) {
     private val context: Context = context.applicationContext
 
-    suspend fun share(minefield: Minefield, field: List<Area>, spentTime: Long?): Boolean {
+    suspend fun share(minefield: Minefield, field: Sequence<Area>, spentTime: Long?): Boolean {
         val rightMines = field.count { it.hasMine && it.mark == Mark.Flag }
         val totalMines = field.count { it.hasMine }
 
@@ -42,7 +42,7 @@ class ShareBuilder(
         }
     }
 
-    private suspend fun createImage(minefield: Minefield, field: List<Area>): File? = withContext(Dispatchers.IO) {
+    private suspend fun createImage(minefield: Minefield, field: Sequence<Area>): File? = withContext(Dispatchers.IO) {
         val size = 38f
         val padding = 1f
         val radius = 2f
@@ -75,7 +75,7 @@ class ShareBuilder(
 
         for (x in 0 until minefield.width) {
             for (y in 0 until minefield.height) {
-                val area = field[x + y * minefield.width]
+                val area = field.first { it.id == (x + y * minefield.width) }
                 canvas.save()
                 canvas.translate(x * size + padding, y * size + padding)
                 area.paintOnCanvas(

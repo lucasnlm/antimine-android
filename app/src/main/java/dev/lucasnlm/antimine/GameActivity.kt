@@ -43,6 +43,7 @@ import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -99,8 +100,13 @@ class GameActivity : DaggerAppCompatActivity() {
     }
 
     private fun bindViewModel() = viewModel.apply {
+        var lastEvent: Event? = null // TODO use distinctUntilChanged when available
+
         eventObserver.observe(this@GameActivity, Observer {
-            onGameEvent(it)
+            if (lastEvent != it) {
+                onGameEvent(it)
+                lastEvent = it
+            }
         })
 
         elapsedTimeSeconds.observe(this@GameActivity, Observer {
@@ -396,14 +402,11 @@ class GameActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private fun waitAndShowEndGameDialog(
-        victory: Boolean,
-        await: Long = DateUtils.SECOND_IN_MILLIS
-    ) {
-        if (await > 0L) {
+    private fun waitAndShowEndGameDialog(victory: Boolean, await: Boolean) {
+        if (await && viewModel.explosionDelay() != 0L) {
             postDelayed(Handler(), {
                 showEndGameDialog(victory)
-            }, null, await)
+            }, null, (viewModel.explosionDelay() * 0.3).toLong())
         } else {
             showEndGameDialog(victory)
         }
@@ -448,7 +451,10 @@ class GameActivity : DaggerAppCompatActivity() {
                 viewModel.revealAllEmptyAreas()
                 viewModel.victory()
                 invalidateOptionsMenu()
-                waitAndShowEndGameDialog(true, 0L)
+                waitAndShowEndGameDialog(
+                    victory = true,
+                    await = false
+                )
             }
             Event.GameOver -> {
                 val score = Score(
@@ -459,9 +465,14 @@ class GameActivity : DaggerAppCompatActivity() {
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
                 viewModel.stopClock()
-                viewModel.gameOver()
 
-                waitAndShowEndGameDialog(false)
+                GlobalScope.launch(context = Dispatchers.Main) {
+                    viewModel.gameOver()
+                    waitAndShowEndGameDialog(
+                        victory = false,
+                        await = true
+                    )
+                }
             }
             Event.ResumeVictory -> {
                 val score = Score(
@@ -473,7 +484,10 @@ class GameActivity : DaggerAppCompatActivity() {
                 invalidateOptionsMenu()
                 viewModel.stopClock()
 
-                waitAndShowEndGameDialog(true)
+                waitAndShowEndGameDialog(
+                    victory = true,
+                    await = true
+                )
             }
             Event.ResumeGameOver -> {
                 val score = Score(
@@ -485,7 +499,10 @@ class GameActivity : DaggerAppCompatActivity() {
                 invalidateOptionsMenu()
                 viewModel.stopClock()
 
-                waitAndShowEndGameDialog(false)
+                waitAndShowEndGameDialog(
+                    victory = false,
+                    await = true
+                )
             }
             else -> { }
         }
