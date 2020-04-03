@@ -9,6 +9,6 @@ class HistoryViewModel : ViewModel() {
     val saves = MutableLiveData<List<Save>>()
 
     suspend fun loadAllSaves(saveDao: ISavesRepository) {
-        saves.postValue(saveDao.getAllSaves())
+        saves.postValue(saveDao.getAllSaves().sortedByDescending { it.uid })
     }
 }
