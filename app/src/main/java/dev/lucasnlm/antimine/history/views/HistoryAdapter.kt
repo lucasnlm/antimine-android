@@ -7,6 +7,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import java.text.DateFormat
 
 class HistoryAdapter(
     private val saveHistory: List<Save>,
@@ -21,7 +22,7 @@ class HistoryAdapter(
 
     override fun getItemCount(): Int = saveHistory.size
 
-    override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) = with (saveHistory[position]) {
+    override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) = with(saveHistory[position]) {
         holder.difficulty.text = holder.itemView.context.getString(when (difficulty) {
             Difficulty.Beginner -> R.string.beginner
             Difficulty.Intermediate -> R.string.intermediate
@@ -31,7 +32,8 @@ class HistoryAdapter(
         })
 
         holder.minefieldSize.text = String.format("%d x %d", minefield.width, minefield.height)
-        //holder.minesCount.text = holder.itemView.context.getString(R.string.mines_remaining, minefield.mines)
+        holder.minesCount.text = holder.itemView.context.getString(R.string.mines_remaining, minefield.mines)
+        holder.date.text = DateFormat.getDateInstance().format(startDate)
 
         holder.itemView.setOnClickListener {
             gameViewModel.resumeGameFromSave(this)

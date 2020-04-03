@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,13 +10,25 @@
     android:focusable="true"
     android:padding="16dp">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/badge"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:tint="@color/text_color"
+        app:srcCompat="@drawable/flag" />
+
     <TextView
         android:id="@+id/difficulty"
-        android:textColor="@color/black"
+        android:textColor="@color/text_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@id/badge"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Difficulty" />
 
@@ -24,7 +37,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@id/badge"
         app:layout_constraintTop_toBottomOf="@id/difficulty"
         tools:text="9 x 9" />
 
@@ -37,7 +52,8 @@
         android:layout_marginTop="4dp"
         android:text="-"
         app:layout_constraintStart_toEndOf="@id/minefieldSize"
-        app:layout_constraintTop_toBottomOf="@id/difficulty" />
+        app:layout_constraintTop_toBottomOf="@id/difficulty"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/minesCount"
@@ -51,11 +67,10 @@
         tools:text="9 mines" />
 
     <TextView
-        android:id="@+id/open"
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/open"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
