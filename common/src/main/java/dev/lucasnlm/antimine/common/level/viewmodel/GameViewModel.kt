@@ -140,6 +140,7 @@ class GameViewModel(
     }
 
     fun onLongClick(index: Int) {
+        val isHighlighted = levelFacade.isHighlighted(index)
         levelFacade.turnOffAllHighlighted()
         refreshAll()
 
@@ -150,31 +151,29 @@ class GameViewModel(
             }
 
             analyticsManager.sentEvent(Analytics.LongPressArea(index))
-        } else {
+        } else if (!preferencesRepository.useDoubleClickToOpen() || isHighlighted) {
             levelFacade.openNeighbors(index).forEach { refreshIndex(it.id) }
-
             analyticsManager.sentEvent(Analytics.LongPressMultipleArea(index))
+        } else {
+            levelFacade.highlight(index).run {
+                refreshIndex(index, this)
+            }
         }
 
         updateGameState()
     }
 
-    fun onClickArea(index: Int) {
+    fun onDoubleClickArea(index: Int) {
         if (levelFacade.turnOffAllHighlighted()) {
             refreshAll()
         }
 
-        if (levelFacade.hasMarkOn(index)) {
-            levelFacade.removeMark(index).run {
-                refreshIndex(id)
-            }
-            hapticFeedbackInteractor.toggleFlagFeedback()
-        } else {
+        if (preferencesRepository.useDoubleClickToOpen()) {
             if (!levelFacade.hasMines) {
                 levelFacade.plantMinesExcept(index, true)
             }
 
-            levelFacade.clickArea(index).run {
+            levelFacade.doubleClick(index).run {
                 refreshIndex(index, this)
             }
         }
@@ -189,6 +188,44 @@ class GameViewModel(
 
         updateGameState()
         analyticsManager.sentEvent(Analytics.PressArea(index))
+    }
+
+    fun onClickArea(index: Int) {
+        var openAnyArea = false
+
+        if (levelFacade.turnOffAllHighlighted()) {
+            refreshAll()
+        }
+
+        if (levelFacade.hasMarkOn(index)) {
+            levelFacade.removeMark(index).run {
+                refreshIndex(id)
+            }
+            hapticFeedbackInteractor.toggleFlagFeedback()
+        } else if (!preferencesRepository.useDoubleClickToOpen() || !levelFacade.hasMines) {
+            if (!levelFacade.hasMines) {
+                levelFacade.plantMinesExcept(index, true)
+            }
+
+            levelFacade.singleClick(index).run {
+                refreshIndex(index, this)
+            }
+
+            openAnyArea = true
+        }
+
+        if (openAnyArea) {
+            if (preferencesRepository.useFlagAssistant() && !levelFacade.hasAnyMineExploded()) {
+                levelFacade.runFlagAssistant().forEach {
+                    Handler().post {
+                        refreshIndex(it.id)
+                    }
+                }
+            }
+
+            updateGameState()
+            analyticsManager.sentEvent(Analytics.PressArea(index))
+        }
     }
 
     private fun refreshMineCount() = mineCount.postValue(levelFacade.remainingMines())
@@ -209,6 +246,7 @@ class GameViewModel(
         }
 
         if (levelFacade.checkVictory()) {
+            refreshAll()
             eventObserver.postValue(Event.Victory)
         }
     }

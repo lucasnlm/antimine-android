@@ -79,12 +79,14 @@
     <string name="desc_question_area">Área duvidosa</string>
     <string name="desc_wrongly_marked_area">Área marcada erroneamente</string>
     <string name="settings_general">Geral</string>
+    <string name="settings_gameplay">Jogabilidade</string>
     <string name="settings_vibration_desc">Vibra ao explodir ou alternar marcação</string>
     <string name="settings_sound_desc">Faz um som ao explodir</string>
     <string name="settings_auto_flag_desc">Faz marcação automaticamente em minas resolvidas</string>
     <string name="settings_accessibility">Acessibilidade</string>
     <string name="settings_large_areas">Usar Área Grande</string>
     <string name="settings_large_areas_desc">Aumenta a área tocável</string>
+    <string name="settings_double_click">Duplo Clique</string>
     <string name="rating">Avalie o app</string>
     <string name="rating_menu">Avaliar o app ❤</string>
     <string name="rating_message">Se você está gostando do jogo, por favor deixe um comentário! Isso nos ajuda muito.</string>

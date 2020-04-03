@@ -82,9 +82,11 @@
     <string name="settings_vibration_desc">Rung khi mìn nổ hoặc cắm/dỡ cờ</string>
     <string name="settings_sound_desc">Phát âm thanh nổ mìn</string>
     <string name="settings_auto_flag_desc">Tự cắm cờ vào những chỗ chắc chắn có mìn</string>
+    <string name="settings_gameplay">Cách thức chơi</string>
     <string name="settings_accessibility">Trợ năng</string>
     <string name="settings_large_areas">Vùng chạm lớn</string>
     <string name="settings_large_areas_desc">Tăng kích cỡ các vùng chạm</string>
+    <string name="settings_double_click">Nháy kép</string>
     <string name="rating">Phản hồi</string>
     <string name="rating_menu">Phản hồi ❤</string>
     <string name="rating_message">Nếu bạn thích trò chơi này, hãy gửi phản hồi cho chúng tôi. Nhận xét của bạn sẽ giúp chúng tôi rất nhiều.</string>

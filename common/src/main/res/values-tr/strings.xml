@@ -33,7 +33,7 @@
     <string name="disconnected">Bağlantı kesildi</string>
     <string name="new_game">Yeni Oyun</string>
     <string name="share">Paylaş</string>
-    <string name="share_menu">Paylaş…</string>
+    <string name="share_menu">Paylaş...</string>
     <string name="new_game_request">Yeni bir oyuna başlamak istiyor musunuz?</string>
     <string name="yes">Evet</string>
     <string name="general">Genel</string>
@@ -48,7 +48,7 @@
     <string name="flag_placed">Bayrak yerleştirildi!</string>
     <string name="flag_removed">Bayrak kaldırıldı!</string>
     <string name="used_software_text">Bu oyun aşağıdaki üçüncü taraf yazılımlarını kullanır:</string>
-    <string name="translators_text">Bu oyun aşağıdaki kişiler tarafından çevrilmiştir:</string>
+    <string name="translators_text">Bu oyun aşağıdaki kişiler tarafından çevrilmiştir: </string>
     <string name="sign_in_failed">Oturum açılamadı. Lütfen ağ bağlantınızı kontrol edip tekrar deneyin.</string>
     <string name="unknown_error">Bilinmeyen hata.</string>
     <string name="retry">Yeniden dene</string>
@@ -64,7 +64,7 @@
     <string name="share_body_text">%3$d saniyede %1$d/%2$d yaptım.</string>
     <string name="share_body_text_generic">%1$s oynuyorum</string>
     <string name="fail_to_share">Oyun paylaşılamıyor</string>
-    <string name="version_s">Versiyon %1$s</string>
+    <string name="version_s">Versiyon: %1$s</string>
     <string name="sound_effects">Ses Efektleri</string>
     <string name="quit">Çık</string>
     <string name="are_you_sure">Emin misiniz?</string>
@@ -82,9 +82,11 @@
     <string name="settings_vibration_desc">Patlama veya bayrak yerleştirme/kaldırmada titretir</string>
     <string name="settings_sound_desc">Patlama sesi çıkarır</string>
     <string name="settings_auto_flag_desc">Çözülmüş mayınlara otomatik olarak bayrak ekler</string>
+    <string name="settings_gameplay">Oynanış</string>
     <string name="settings_accessibility">Erişilebilirlik</string>
     <string name="settings_large_areas">Geniş Alanlar Kullan</string>
     <string name="settings_large_areas_desc">Dokunma alanını artırır</string>
+    <string name="settings_double_click">Çift Tıklama</string>
     <string name="rating">Geri bildirim</string>
     <string name="rating_menu">Geri bildirim ❤</string>
     <string name="rating_message">Bu oyunu beğendiyseniz, lütfen bize bir geri bildirim verin. Bize çok yardımcı olacak.</string>
