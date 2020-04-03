@@ -16,7 +16,7 @@ interface SaveDao {
     suspend fun loadAllByIds(gameIds: IntArray): List<Save>
 
     @Query("SELECT * FROM save WHERE uid = :gameId LIMIT 1")
-    suspend fun loadById(gameId: Int): Save
+    suspend fun loadFromId(gameId: Int): Save
 
     @Query("SELECT * FROM save ORDER BY uid DESC LIMIT 1")
     suspend fun loadCurrent(): Save?

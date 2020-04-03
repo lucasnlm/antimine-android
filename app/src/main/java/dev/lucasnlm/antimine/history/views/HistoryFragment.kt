@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
-import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.history.viewmodel.HistoryViewModel
 import kotlinx.android.synthetic.main.fragment_history.*
 import kotlinx.coroutines.GlobalScope
@@ -23,19 +21,13 @@ class HistoryFragment : DaggerFragment() {
     @Inject
     lateinit var savesRepository: ISavesRepository
 
-    @Inject
-    lateinit var viewModelFactory: GameViewModelFactory
-
     private var historyViewModel: HistoryViewModel? = null
-    private lateinit var gameViewModel: GameViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.run {
             historyViewModel = ViewModelProviders.of(this).get(HistoryViewModel::class.java)
         }
-
-        gameViewModel = ViewModelProviders.of(this, viewModelFactory).get(GameViewModel::class.java)
 
         GlobalScope.launch {
             historyViewModel?.loadAllSaves(savesRepository)
@@ -59,7 +51,7 @@ class HistoryFragment : DaggerFragment() {
             layoutManager = LinearLayoutManager(view.context)
 
             historyViewModel?.saves?.observe(viewLifecycleOwner, Observer {
-                adapter = HistoryAdapter(it, gameViewModel)
+                adapter = HistoryAdapter(it)
             })
         }
     }

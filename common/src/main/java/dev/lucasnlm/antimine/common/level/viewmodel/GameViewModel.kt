@@ -75,7 +75,7 @@ class GameViewModel(
         return minefield
     }
 
-    fun resumeGameFromSave(save: Save): Minefield {
+    private fun resumeGameFromSave(save: Save): Minefield {
         clock.reset(save.duration)
         elapsedTimeSeconds.postValue(save.duration)
 
@@ -97,23 +97,51 @@ class GameViewModel(
         return setup
     }
 
-    suspend fun onCreate(newGame: Difficulty? = null): Minefield = withContext(Dispatchers.IO) {
-        val lastGame = if (newGame == null) savesRepository.fetchCurrentSave() else null
+    suspend fun loadGame(uid: Int): Minefield = withContext(Dispatchers.IO) {
+        val lastGame = savesRepository.loadFromId(uid)
 
         if (lastGame != null) {
             currentDifficulty = lastGame.difficulty
-        } else if (newGame != null) {
-            currentDifficulty = newGame
-        }
-
-        if (lastGame == null) {
-            startNewGame(currentDifficulty)
-        } else {
             resumeGameFromSave(lastGame)
+        } else {
+            // Fail to load
+            startNewGame()
         }.also {
             initialized = true
         }
     }
+
+    suspend fun loadLastGame(): Minefield = withContext(Dispatchers.IO) {
+        val lastGame = savesRepository.fetchCurrentSave()
+
+        if (lastGame != null) {
+            currentDifficulty = lastGame.difficulty
+            resumeGameFromSave(lastGame)
+        } else {
+            // Fail to load
+            startNewGame()
+        }.also {
+            initialized = true
+        }
+    }
+
+//    suspend fun onCreate(newGame: Difficulty? = null): Minefield = withContext(Dispatchers.IO) {
+//        val lastGame = if (newGame == null) savesRepository.fetchCurrentSave() else null
+//
+//        if (lastGame != null) {
+//            currentDifficulty = lastGame.difficulty
+//        } else if (newGame != null) {
+//            currentDifficulty = newGame
+//        }
+//
+//        if (lastGame == null) {
+//            startNewGame(currentDifficulty)
+//        } else {
+//            resumeGameFromSave(lastGame)
+//        }.also {
+//            initialized = true
+//        }
+//    }
 
     fun pauseGame() {
         if (initialized) {

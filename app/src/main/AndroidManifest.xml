@@ -81,6 +81,10 @@
                 <data
                     android:host="new-game"
                     android:scheme="antimine" />
+
+                <data
+                    android:host="load-game"
+                    android:scheme="antimine" />
             </intent-filter>
 
             <intent-filter
