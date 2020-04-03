@@ -80,6 +80,8 @@ class LevelFacade {
 
     fun hasNoneOn(index: Int): Boolean = getArea(index).mark.isNone()
 
+    fun isHighlighted(index: Int): Boolean = getArea(index).highlighted
+
     fun plantMinesExcept(index: Int, includeSafeArea: Boolean = false) {
         plantRandomMines(index, includeSafeArea)
         putMinesTips()
@@ -180,7 +182,7 @@ class LevelFacade {
      * @param index the target index
      * @return true if multiple areas were open
      */
-    fun clickArea(index: Int): Int = getArea(index).run {
+    fun singleClick(index: Int): Int = getArea(index).run {
         return when {
             isCovered -> {
                 openField(getArea(index))
@@ -192,13 +194,48 @@ class LevelFacade {
         }
     }
 
+    fun doubleClick(index: Int): Int = getArea(index).run {
+        return when {
+            isCovered -> {
+                openField(getArea(index))
+            }
+            else -> 0
+        }
+    }
+
+    fun highlight(index: Int): Int = getArea(index).run {
+        return when {
+            minesAround != 0 -> {
+                toggleHighlight(this)
+            }
+            else -> 0
+        }
+    }
+
+    fun longPressOpenArea(index: Int): Sequence<Area> {
+        val neighbors = getArea(index).findNeighbors().filter {
+            it.mark.isNone() && it.isCovered
+        }
+
+        val neighborsCount = neighbors.count()
+        val minesCount = neighbors.count { it.hasMine }
+
+        if (neighborsCount == minesCount) {
+            neighbors.forEach { area -> area.mark = Mark.Flag }
+        } else {
+            neighbors.forEach { area -> openField(area) }
+        }
+
+        return neighbors
+    }
+
     fun openNeighbors(index: Int): Sequence<Area> =
         getArea(index)
             .findNeighbors()
             .filter {
                 it.mark.isNone() && it.isCovered
             }.also {
-                it.forEach { field -> openField(field) }
+                it.forEach { area -> openField(area) }
             }
 
     fun runFlagAssistant(): Sequence<Area> {

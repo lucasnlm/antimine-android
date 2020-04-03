@@ -42,9 +42,9 @@ class LevelFacadeTest {
         val mineCount = 3
         levelFacadeOf(3, 3, mineCount).run {
             plantMinesExcept(3)
-            clickArea(3)
+            singleClick(3)
             field.filter { it.isCovered }.forEach { it.mark = Mark.Flag }
-            field.filterNot { it.hasMine }.map { it.id }.forEach { clickArea(it) }
+            field.filterNot { it.hasMine }.map { it.id }.forEach { singleClick(it) }
             assertEquals(
                 field.filter { it.isCovered }.count { it.mark.isFlag() },
                 mineCount
@@ -290,7 +290,7 @@ class LevelFacadeTest {
         levelFacadeOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
             assertEquals(field.filter { it.isCovered }.count(), field.count())
-            clickArea(3)
+            singleClick(3)
             assertFalse(at(3).isCovered)
         }
     }
@@ -299,7 +299,7 @@ class LevelFacadeTest {
     fun testOpenNeighbors() {
         levelFacadeOf(5, 5, 24, 200L).run {
             plantMinesExcept(12)
-            clickArea(12)
+            singleClick(12)
             assertEquals(
                 listOf(
                     1, 1, 1, 1, 1,
@@ -327,7 +327,7 @@ class LevelFacadeTest {
         levelFacadeOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
             assertEquals(field.filter { it.isCovered }.count(), field.count())
-            clickArea(1)
+            singleClick(1)
             assertEquals(field.filter { it.isCovered }.count(), field.count() - 6)
             assertEquals(
                 field.filterNot { it.isCovered }.map { it.id }.toList(),
@@ -486,22 +486,22 @@ class LevelFacadeTest {
             plantMinesExcept(3)
             assertFalse(hasIsolatedAllMines())
 
-            clickArea(6)
+            singleClick(6)
             assertFalse(hasIsolatedAllMines())
 
-            clickArea(4)
+            singleClick(4)
             assertFalse(hasIsolatedAllMines())
 
-            clickArea(2)
+            singleClick(2)
             assertFalse(hasIsolatedAllMines())
 
-            clickArea(3)
+            singleClick(3)
             assertFalse(hasIsolatedAllMines())
 
-            clickArea(5)
+            singleClick(5)
             assertFalse(hasIsolatedAllMines())
 
-            clickArea(8)
+            singleClick(8)
             assertTrue(hasIsolatedAllMines())
         }
     }

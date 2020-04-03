@@ -140,6 +140,7 @@ class GameViewModel(
     }
 
     fun onLongClick(index: Int) {
+        val isHighlighted = levelFacade.isHighlighted(index)
         levelFacade.turnOffAllHighlighted()
         refreshAll()
 
@@ -150,10 +151,13 @@ class GameViewModel(
             }
 
             analyticsManager.sentEvent(Analytics.LongPressArea(index))
-        } else if (!preferencesRepository.useDoubleClickToOpen()) {
+        } else if (!preferencesRepository.useDoubleClickToOpen() || isHighlighted) {
             levelFacade.openNeighbors(index).forEach { refreshIndex(it.id) }
-
             analyticsManager.sentEvent(Analytics.LongPressMultipleArea(index))
+        } else {
+            levelFacade.highlight(index).run {
+                refreshIndex(index, this)
+            }
         }
 
         updateGameState()
@@ -169,7 +173,7 @@ class GameViewModel(
                 levelFacade.plantMinesExcept(index, true)
             }
 
-            levelFacade.clickArea(index).run {
+            levelFacade.doubleClick(index).run {
                 refreshIndex(index, this)
             }
         }
@@ -203,7 +207,7 @@ class GameViewModel(
                 levelFacade.plantMinesExcept(index, true)
             }
 
-            levelFacade.clickArea(index).run {
+            levelFacade.singleClick(index).run {
                 refreshIndex(index, this)
             }
 
@@ -242,6 +246,7 @@ class GameViewModel(
         }
 
         if (levelFacade.checkVictory()) {
+            refreshAll()
             eventObserver.postValue(Event.Victory)
         }
     }
