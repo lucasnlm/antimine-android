@@ -82,9 +82,11 @@
     <string name="settings_vibration_desc">爆炸或标志开关时振动</string>
     <string name="settings_sound_desc">制造一个爆炸声音</string>
     <string name="settings_auto_flag_desc">自动在已解决的地雷上添加一个标志</string>
+    <string name="settings_gameplay">游戏性</string>
     <string name="settings_accessibility">可访问性</string>
     <string name="settings_large_areas">使用大区域</string>
     <string name="settings_large_areas_desc">增加触摸区域</string>
+    <string name="settings_double_click">双击</string>
     <string name="rating">用户反馈</string>
     <string name="rating_menu">反馈 ❤</string>
     <string name="rating_message">如果你喜欢这个游戏，请给我们反馈。这将对我们有很多帮助。</string>

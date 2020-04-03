@@ -15,6 +15,14 @@
             android:summary="@string/settings_double_click_desc"
             app:iconSpaceReserved="false" />
 
+        <SwitchPreferenceCompat
+            android:checked="true"
+            android:defaultValue="true"
+            android:key="preference_assistant"
+            android:title="@string/auto_flag"
+            android:summary="@string/settings_auto_flag_desc"
+            app:iconSpaceReserved="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -35,14 +43,6 @@
             android:key="preference_sound"
             android:title="@string/sound_effects"
             android:summary="@string/settings_sound_desc"
-            app:iconSpaceReserved="false" />
-
-        <SwitchPreferenceCompat
-            android:checked="true"
-            android:defaultValue="true"
-            android:key="preference_assistant"
-            android:title="@string/auto_flag"
-            android:summary="@string/settings_auto_flag_desc"
             app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat

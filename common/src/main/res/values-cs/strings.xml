@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="cs">
     <string name="app_name">Anti-Mine</string>
-    <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté \"miny\", aniž by kterákoliv z nich vybuchla.</string>
+    <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté miny, aniž by kterákoliv z nich vybuchla.</string>
     <string name="remaining_mines">Zbývající miny</string>
     <string name="install">Instalovat</string>
     <string name="minefield">Obtížnost</string>
@@ -82,9 +82,11 @@
     <string name="settings_vibration_desc">Vibrovat při výbuchu miny nebo umístění vlajky</string>
     <string name="settings_sound_desc">Zazní exploze</string>
     <string name="settings_auto_flag_desc">Automaticky přidá vlajku na vyřešené miny</string>
+    <string name="settings_gameplay">Hra</string>
     <string name="settings_accessibility">Přístupnost</string>
     <string name="settings_large_areas">Použít velké oblasti</string>
     <string name="settings_large_areas_desc">Zvyšuje dotykovou oblast</string>
+    <string name="settings_double_click">Poklepání</string>
     <string name="rating">Komentář</string>
     <string name="rating_menu">Komentář ❤</string>
     <string name="rating_message">Pokud se vám tato hra líbí, dejte nám prosím zpětnou vazbu. Hodně nám to pomůže.</string>
