@@ -24,7 +24,7 @@ class AboutViewModel : ViewModel() {
             ),
             TranslationInfo(
                 "German",
-                sequenceOf("Oswald Boelcke", "wlls_ftn")
+                sequenceOf("Oswald Boelcke", "wlls_ftn", "Trafalgar-Square")
             ),
             TranslationInfo(
                 "Portuguese (BR)",
