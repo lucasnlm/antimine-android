@@ -12,7 +12,6 @@
             android:defaultValue="false"
             android:key="preference_double_click_open"
             android:title="@string/settings_double_click"
-            android:summary="@string/settings_double_click_desc"
             app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
