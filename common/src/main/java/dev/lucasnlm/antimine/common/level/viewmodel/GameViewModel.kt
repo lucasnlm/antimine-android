@@ -202,7 +202,7 @@ class GameViewModel(
                 refreshIndex(id)
             }
             hapticFeedbackInteractor.toggleFlagFeedback()
-        } else if (!preferencesRepository.useDoubleClickToOpen()) {
+        } else if (!preferencesRepository.useDoubleClickToOpen() || !levelFacade.hasMines) {
             if (!levelFacade.hasMines) {
                 levelFacade.plantMinesExcept(index, true)
             }
