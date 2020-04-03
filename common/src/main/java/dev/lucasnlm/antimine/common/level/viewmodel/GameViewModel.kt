@@ -38,6 +38,7 @@ class GameViewModel(
     private lateinit var levelFacade: LevelFacade
     private var currentDifficulty: Difficulty = Difficulty.Standard
     private var initialized = false
+    private var oldGame = false
 
     val field = MutableLiveData<Sequence<Area>>()
     val fieldRefresh = MutableLiveData<Int>()
@@ -108,6 +109,7 @@ class GameViewModel(
             startNewGame()
         }.also {
             initialized = true
+            oldGame = true
         }
     }
 
@@ -122,26 +124,9 @@ class GameViewModel(
             startNewGame()
         }.also {
             initialized = true
+            oldGame = false
         }
     }
-
-//    suspend fun onCreate(newGame: Difficulty? = null): Minefield = withContext(Dispatchers.IO) {
-//        val lastGame = if (newGame == null) savesRepository.fetchCurrentSave() else null
-//
-//        if (lastGame != null) {
-//            currentDifficulty = lastGame.difficulty
-//        } else if (newGame != null) {
-//            currentDifficulty = newGame
-//        }
-//
-//        if (lastGame == null) {
-//            startNewGame(currentDifficulty)
-//        } else {
-//            resumeGameFromSave(lastGame)
-//        }.also {
-//            initialized = true
-//        }
-//    }
 
     fun pauseGame() {
         if (initialized) {
@@ -258,6 +243,8 @@ class GameViewModel(
     }
 
     private fun refreshMineCount() = mineCount.postValue(levelFacade.remainingMines())
+
+    fun isCurrentGame() = !oldGame
 
     private fun updateGameState() {
         when {

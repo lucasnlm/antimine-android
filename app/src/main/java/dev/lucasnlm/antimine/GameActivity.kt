@@ -479,10 +479,12 @@ class GameActivity : DaggerAppCompatActivity() {
                 invalidateOptionsMenu()
                 viewModel.stopClock()
 
-                waitAndShowEndGameDialog(
-                    victory = true,
-                    await = true
-                )
+                if (viewModel.isCurrentGame()) {
+                    waitAndShowEndGameDialog(
+                        victory = true,
+                        await = true
+                    )
+                }
             }
             Event.ResumeGameOver -> {
                 val score = Score(
@@ -494,10 +496,12 @@ class GameActivity : DaggerAppCompatActivity() {
                 invalidateOptionsMenu()
                 viewModel.stopClock()
 
-                waitAndShowEndGameDialog(
-                    victory = false,
-                    await = true
-                )
+                if (viewModel.isCurrentGame()) {
+                    waitAndShowEndGameDialog(
+                        victory = false,
+                        await = true
+                    )
+                }
             }
             else -> { }
         }
