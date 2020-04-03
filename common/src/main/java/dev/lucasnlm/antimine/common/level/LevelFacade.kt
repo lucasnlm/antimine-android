@@ -94,7 +94,7 @@ class LevelFacade {
                     it.safeZone = true
                 }
 
-                if (this@LevelFacade.minefield. width > 9) {
+                if (this@LevelFacade.minefield.width > 9) {
                     findCrossNeighbors().forEach { neighbor ->
                         neighbor
                             .findCrossNeighbors()
