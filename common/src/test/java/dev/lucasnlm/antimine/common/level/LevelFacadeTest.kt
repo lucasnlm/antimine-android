@@ -482,27 +482,22 @@ class LevelFacadeTest {
 
     @Test
     fun testHasIsolatedAllMines() {
-        levelFacadeOf(3, 3, 5, 200L).run {
+        val width = 12
+        val height = 12
+        val mines = 9
+        levelFacadeOf(width, height, mines, 200L).run {
             plantMinesExcept(3)
-            assertFalse(hasIsolatedAllMines())
+            field.filterNot { it.hasMine }.take(width * height - 1 - mines).forEach {
+                singleClick(it.id)
+                assertFalse(hasIsolatedAllMines())
+                assertFalse(isGameOver())
+            }
 
-            singleClick(6)
-            assertFalse(hasIsolatedAllMines())
-
-            singleClick(4)
-            assertFalse(hasIsolatedAllMines())
-
-            singleClick(2)
-            assertFalse(hasIsolatedAllMines())
-
-            singleClick(3)
-            assertFalse(hasIsolatedAllMines())
-
-            singleClick(5)
-            assertFalse(hasIsolatedAllMines())
-
-            singleClick(8)
-            assertTrue(hasIsolatedAllMines())
+            field.first { !it.hasMine && it.isCovered }.run {
+                singleClick(id)
+                assertTrue(hasIsolatedAllMines())
+                assertTrue(isGameOver())
+            }
         }
     }
 
@@ -516,7 +511,23 @@ class LevelFacadeTest {
                 isCovered = false
                 mistake = true
             }
+
             assertTrue(hasAnyMineExploded())
+        }
+    }
+
+    @Test
+    fun testGameOverWithMineExploded() {
+        levelFacadeOf(3, 3, 5, 200L).run {
+            plantMinesExcept(3)
+            assertFalse(isGameOver())
+
+            field.first { it.hasMine }.apply {
+                isCovered = false
+                mistake = true
+            }
+
+            assertTrue(isGameOver())
         }
     }
 

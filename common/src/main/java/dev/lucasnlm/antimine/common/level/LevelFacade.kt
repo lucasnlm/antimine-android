@@ -112,7 +112,7 @@ class LevelFacade {
             .shuffled(randomGenerator)
             .take(minefield.mines)
             .forEach { it.hasMine = true }
-        mines = field.filter { it.hasMine }.asSequence()
+        mines = field.filter { it.hasMine }
         hasMines = mines.count() != 0
     }
 
@@ -304,6 +304,9 @@ class LevelFacade {
     fun checkVictory(): Boolean =
         hasMines && hasIsolatedAllMines() && !hasAnyMineExploded()
 
+    fun isGameOver(): Boolean =
+        checkVictory() || hasAnyMineExploded()
+
     fun remainingMines(): Int {
         val flagsCount = field.count { it.mark.isFlag() }
         val minesCount = mines.count()
@@ -355,6 +358,6 @@ class LevelFacade {
     }
 
     companion object {
-        fun randomSeed(): Long = Random().nextLong()
+        private fun randomSeed(): Long = Random().nextLong()
     }
 }
