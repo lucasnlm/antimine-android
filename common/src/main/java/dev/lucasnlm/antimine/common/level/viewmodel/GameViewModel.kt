@@ -134,8 +134,9 @@ class GameViewModel(
     }
 
     fun resumeGame() {
-        if (initialized && levelFacade.hasMines) {
+        if (initialized && levelFacade.hasMines && !levelFacade.isGameOver()) {
             eventObserver.postValue(Event.Resume)
+            runClock()
         }
     }
 

@@ -230,16 +230,12 @@ class GameActivity : DaggerAppCompatActivity() {
                 }
 
                 override fun onDrawerOpened(drawerView: View) {
-                    if (status is Status.Over) {
-                        viewModel.pauseGame()
-                    }
+                    viewModel.pauseGame()
                     analyticsManager.sentEvent(Analytics.OpenDrawer())
                 }
 
                 override fun onDrawerClosed(drawerView: View) {
-                    if (status is Status.Over) {
-                        viewModel.resumeGame()
-                    }
+                    viewModel.resumeGame()
                     analyticsManager.sentEvent(Analytics.CloseDrawer())
                 }
 
