@@ -1,10 +1,5 @@
 # Project specific ProGuard rules
 
-# Crashlytics 2.+
--keep class com.crashlytics.** { *; }
--keep class com.crashlytics.android.**
--keepattributes SourceFile, LineNumberTable, *Annotation*
-
 # For Fabric to properly de-obfuscate your crash reports, you need to remove this line from your ProGuard config:
 -printmapping mapping.txt
 
@@ -36,10 +31,6 @@
 # google gms
 -keep class com.google.android.gms.** { *; }
 -dontwarn com.google.android.gms.**
-
-# amplitude
--keep class com.google.android.gms.ads.** { *; }
--dontwarn okio.**
 
 # recycler view
 -keep public class * extends android.support.v7.widget.RecyclerView$LayoutManager {

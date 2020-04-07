@@ -39,7 +39,6 @@ ext.versions = [
         room            : '2.2.5',
 
         // Third Party
-        amplitude       : '2.23.2',
         dagger          : '2.21',
         moshi           : '1.9.1',
 
