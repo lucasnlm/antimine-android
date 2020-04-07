@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="amplitude_key" translatable="false">{-AMPLITUDE-kEY-}</string>
-    <string name="crashlytics_key" translatable="false">{-CRASHLYTICS-KEY-}</string>
-</resources>

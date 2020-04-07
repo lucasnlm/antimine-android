@@ -35,9 +35,6 @@ dependencies {
     api "android.arch.lifecycle:extensions:$versions.lifecycle"
     implementation "android.arch.lifecycle:viewmodel:$versions.lifecycle"
 
-    // Amplitude
-    implementation "com.amplitude:android-sdk:$versions.amplitude"
-
     // Dagger
     api "com.google.dagger:dagger-android:$versions.dagger"
     api "com.google.dagger:dagger-android-support:$versions.dagger"
