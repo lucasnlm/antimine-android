@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine.common.level.repository
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import kotlin.random.Random
 
 interface IMinefieldRepository {
     fun fromDifficulty(
@@ -10,6 +11,8 @@ interface IMinefieldRepository {
         dimensionRepository: IDimensionRepository,
         preferencesRepository: IPreferencesRepository
     ): Minefield
+
+    fun randomSeed(): Long
 }
 
 class MinefieldRepository : IMinefieldRepository {
@@ -46,11 +49,9 @@ class MinefieldRepository : IMinefieldRepository {
         val fieldSize = dimensionRepository.areaSize()
 
         val display = dimensionRepository.displaySize()
-        val width = display.widthPixels
-        val height = display.heightPixels
 
-        val finalWidth = ((width / fieldSize).toInt() - 1).coerceAtLeast(6)
-        val finalHeight = ((height / fieldSize).toInt() - 3).coerceAtLeast(9)
+        val finalWidth = ((display.width / fieldSize).toInt() - 1).coerceAtLeast(6)
+        val finalHeight = ((display.height / fieldSize).toInt() - 3).coerceAtLeast(9)
 
         return Minefield(
             finalWidth,
@@ -58,4 +59,6 @@ class MinefieldRepository : IMinefieldRepository {
             (finalWidth * finalHeight * 0.2).toInt()
         )
     }
+
+    override fun randomSeed(): Long = Random.nextLong()
 }

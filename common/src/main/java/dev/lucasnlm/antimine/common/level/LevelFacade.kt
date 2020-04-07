@@ -7,8 +7,8 @@ import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Score
-import java.util.Random
 import kotlin.math.floor
+import kotlin.random.Random
 
 class LevelFacade {
     private val minefield: Minefield
@@ -28,7 +28,7 @@ class LevelFacade {
     var mines: Sequence<Area> = sequenceOf()
         private set
 
-    constructor(minefield: Minefield, seed: Long = randomSeed()) {
+    constructor(minefield: Minefield, seed: Long) {
         this.minefield = minefield
         this.randomGenerator = Random(seed)
         this.seed = seed
@@ -195,6 +195,7 @@ class LevelFacade {
     }
 
     fun doubleClick(index: Int): Int = getArea(index).run {
+        @Suppress("unused")
         return when {
             isCovered -> {
                 openField(getArea(index))
@@ -212,6 +213,7 @@ class LevelFacade {
         }
     }
 
+    @Suppress("unused")
     fun longPressOpenArea(index: Int): Sequence<Area> {
         val neighbors = getArea(index).findNeighbors().filter {
             it.mark.isNone() && it.isCovered
@@ -355,9 +357,5 @@ class LevelFacade {
 
     fun setCurrentSaveId(id: Int) {
         this.saveId = id.coerceAtLeast(0)
-    }
-
-    companion object {
-        private fun randomSeed(): Long = Random().nextLong()
     }
 }

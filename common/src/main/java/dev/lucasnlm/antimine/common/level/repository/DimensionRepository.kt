@@ -3,15 +3,19 @@ package dev.lucasnlm.antimine.common.level.repository
 import android.content.Context
 import android.content.res.Resources
 import android.content.res.TypedArray
-import android.util.DisplayMetrics
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 interface IDimensionRepository {
     fun areaSize(): Float
-    fun displaySize(): DisplayMetrics
+    fun displaySize(): Size
     fun actionBarSize(): Int
 }
+
+data class Size(
+    val width: Int,
+    val height: Int
+)
 
 class DimensionRepository(
     private val context: Context,
@@ -24,7 +28,9 @@ class DimensionRepository(
         context.resources.getDimension(R.dimen.field_size)
     }
 
-    override fun displaySize(): DisplayMetrics = Resources.getSystem().displayMetrics
+    override fun displaySize(): Size = with(Resources.getSystem().displayMetrics) {
+        return Size(this.widthPixels, this.heightPixels)
+    }
 
     override fun actionBarSize(): Int {
         val styledAttributes: TypedArray =

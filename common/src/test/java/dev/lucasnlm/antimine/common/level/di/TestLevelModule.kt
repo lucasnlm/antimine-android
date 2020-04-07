@@ -3,57 +3,42 @@ package dev.lucasnlm.antimine.common.level.di
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import androidx.room.Room
 import dagger.Module
 import dagger.Provides
+import dev.lucasnlm.antimine.common.level.database.models.Save
+import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
-import dev.lucasnlm.antimine.common.level.database.AppDataBase
-import dev.lucasnlm.antimine.common.level.repository.DimensionRepository
+import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
-import dev.lucasnlm.antimine.common.level.repository.SavesRepository
+import dev.lucasnlm.antimine.common.level.repository.Size
 import dev.lucasnlm.antimine.common.level.utils.Clock
-import dev.lucasnlm.antimine.common.level.utils.HapticFeedbackInteractor
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 @Module
-open class LevelModule(
+class TestLevelModule(
     private val application: Application
 ) {
-    private val appDataBase by lazy {
-        Room.databaseBuilder(application, AppDataBase::class.java, DATA_BASE_NAME)
-            .fallbackToDestructiveMigration()
-            .build()
-    }
-
-    private val savesDao by lazy {
-        appDataBase.saveDao()
-    }
-
-    private val savesRepository by lazy {
-        SavesRepository(savesDao)
-    }
+    @Provides
+    fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
 
     @Provides
-    open fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
+    fun provideClock(): Clock = Clock()
 
     @Provides
-    open fun provideClock(): Clock = Clock()
-
-    @Provides
-    open fun provideGameViewModelFactory(
+    fun provideGameViewModelFactory(
         application: Application,
         eventObserver: MutableLiveData<Event>,
         savesRepository: ISavesRepository,
         dimensionRepository: IDimensionRepository,
         preferencesRepository: IPreferencesRepository,
         hapticFeedbackInteractor: IHapticFeedbackInteractor,
-        minefieldRepository: IMinefieldRepository,
+        minefieldRepository: MinefieldRepository,
         analyticsManager: AnalyticsManager,
         clock: Clock
     ) = GameViewModelFactory(
@@ -69,26 +54,44 @@ open class LevelModule(
     )
 
     @Provides
-    open fun provideDimensionRepository(
+    fun provideDimensionRepository(
         context: Context,
         preferencesRepository: IPreferencesRepository
-    ): IDimensionRepository =
-        DimensionRepository(context, preferencesRepository)
+    ): IDimensionRepository = object : IDimensionRepository {
+        override fun areaSize(): Float = 50.0f
+
+        override fun displaySize(): Size = Size(50 * 15, 50 * 30)
+
+        override fun actionBarSize(): Int = 50
+    }
 
     @Provides
-    open fun provideSavesRepository(): ISavesRepository = savesRepository
+    fun provideSavesRepository(): ISavesRepository = object : ISavesRepository {
+        override suspend fun fetchCurrentSave(): Save? = null
+
+        override suspend fun saveGame(save: Save): Long? = null
+
+        override fun setLimit(maxSavesStorage: Int) { }
+    }
 
     @Provides
-    open fun provideMinefieldRepository(): IMinefieldRepository = MinefieldRepository()
+    fun provideMinefieldRepository(): IMinefieldRepository = object : IMinefieldRepository {
+        override fun fromDifficulty(
+            difficulty: Difficulty,
+            dimensionRepository: IDimensionRepository,
+            preferencesRepository: IPreferencesRepository
+        ) = Minefield(9, 9, 9)
+
+        override fun randomSeed(): Long = 200
+    }
 
     @Provides
-    open fun provideHapticFeedbackInteractor(
+    fun provideHapticFeedbackInteractor(
         application: Application,
         preferencesRepository: IPreferencesRepository
-    ): IHapticFeedbackInteractor =
-        HapticFeedbackInteractor(application, preferencesRepository)
+    ): IHapticFeedbackInteractor = object : IHapticFeedbackInteractor {
+        override fun toggleFlagFeedback() { }
 
-    companion object {
-        private const val DATA_BASE_NAME = "saves-db"
+        override fun explosionFeedback() { }
     }
 }

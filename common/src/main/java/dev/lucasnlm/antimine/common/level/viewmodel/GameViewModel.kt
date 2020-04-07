@@ -4,7 +4,6 @@ import android.app.Application
 import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.LevelFacade
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
@@ -12,6 +11,7 @@ import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
+import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
@@ -31,7 +31,7 @@ class GameViewModel(
     private val dimensionRepository: IDimensionRepository,
     private val preferencesRepository: IPreferencesRepository,
     private val hapticFeedbackInteractor: IHapticFeedbackInteractor,
-    private val minefieldRepository: MinefieldRepository,
+    private val minefieldRepository: IMinefieldRepository,
     private val analyticsManager: AnalyticsManager,
     private val clock: Clock
 ) : ViewModel() {
@@ -55,7 +55,7 @@ class GameViewModel(
             newDifficulty, dimensionRepository, preferencesRepository
         )
 
-        levelFacade = LevelFacade(minefield)
+        levelFacade = LevelFacade(minefield, minefieldRepository.randomSeed())
 
         mineCount.postValue(minefield.mines)
         difficulty.postValue(newDifficulty)
