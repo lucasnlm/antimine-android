@@ -1,10 +1,5 @@
 # Project specific ProGuard rules
 
-# Crashlytics 2.+
--keep class com.crashlytics.** { *; }
--keep class com.crashlytics.android.**
--keepattributes SourceFile, LineNumberTable, *Annotation*
-
 # For Fabric to properly de-obfuscate your crash reports, you need to remove this line from your ProGuard config:
 -printmapping mapping.txt
 
