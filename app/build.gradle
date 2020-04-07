@@ -30,8 +30,24 @@ android {
         }
     }
 
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     kapt {
         generateStubs true
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources true
+            animationsDisabled true
+        }
     }
 }
 
@@ -59,7 +75,20 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
 
+    testImplementation "com.google.dagger:dagger-android:$versions.dagger"
+    testImplementation "com.google.dagger:dagger-android-support:$versions.dagger"
+
     // Kotlin
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutines"
+
+    // Tests
+    testImplementation "junit:junit:$versions.junit"
+    testImplementation "androidx.test:core:$versions.testCore"
+    testImplementation "androidx.test:core-ktx:$versions.testCore"
+    testImplementation "androidx.test.espresso:espresso-core:$versions.espresso"
+    testImplementation "androidx.test.espresso:espresso-contrib:$versions.espresso"
+    testImplementation "androidx.fragment:fragment-testing:$versions.fragmentTest"
+    testImplementation "org.robolectric:robolectric:$versions.robolectric"
 }

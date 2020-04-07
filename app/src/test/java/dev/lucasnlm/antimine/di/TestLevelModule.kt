@@ -1,52 +1,37 @@
-package dev.lucasnlm.antimine.common.level.di
+package dev.lucasnlm.antimine.di
 
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import androidx.room.Room
 import dagger.Module
 import dagger.Provides
+import dev.lucasnlm.antimine.common.level.di.LevelModule
 import dev.lucasnlm.antimine.common.level.models.Event
-import dev.lucasnlm.antimine.common.level.database.AppDataBase
-import dev.lucasnlm.antimine.common.level.repository.DimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
-import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
-import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
-import dev.lucasnlm.antimine.common.level.utils.HapticFeedbackInteractor
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.mocks.MockDimensionRepository
+import dev.lucasnlm.antimine.mocks.MockHapticFeedbackInteractor
+import dev.lucasnlm.antimine.mocks.MockMinefieldRepository
+import dev.lucasnlm.antimine.mocks.MockSavesRepository
 
 @Module
-open class LevelModule(
-    private val application: Application
-) {
-    private val appDataBase by lazy {
-        Room.databaseBuilder(application, AppDataBase::class.java, DATA_BASE_NAME)
-            .fallbackToDestructiveMigration()
-            .build()
-    }
-
-    private val savesDao by lazy {
-        appDataBase.saveDao()
-    }
-
-    private val savesRepository by lazy {
-        SavesRepository(savesDao)
-    }
+class TestLevelModule(
+    application: Application
+) : LevelModule(application) {
+    @Provides
+    override fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
 
     @Provides
-    open fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
+    override fun provideClock(): Clock = Clock()
 
     @Provides
-    open fun provideClock(): Clock = Clock()
-
-    @Provides
-    open fun provideGameViewModelFactory(
+    override fun provideGameViewModelFactory(
         application: Application,
         eventObserver: MutableLiveData<Event>,
         savesRepository: ISavesRepository,
@@ -69,26 +54,20 @@ open class LevelModule(
     )
 
     @Provides
-    open fun provideDimensionRepository(
+    override fun provideDimensionRepository(
         context: Context,
         preferencesRepository: IPreferencesRepository
-    ): IDimensionRepository =
-        DimensionRepository(context, preferencesRepository)
+    ): IDimensionRepository = MockDimensionRepository()
 
     @Provides
-    open fun provideSavesRepository(): ISavesRepository = savesRepository
+    override fun provideSavesRepository(): ISavesRepository = MockSavesRepository()
 
     @Provides
-    open fun provideMinefieldRepository(): IMinefieldRepository = MinefieldRepository()
+    override fun provideMinefieldRepository(): IMinefieldRepository = MockMinefieldRepository()
 
     @Provides
-    open fun provideHapticFeedbackInteractor(
+    override fun provideHapticFeedbackInteractor(
         application: Application,
         preferencesRepository: IPreferencesRepository
-    ): IHapticFeedbackInteractor =
-        HapticFeedbackInteractor(application, preferencesRepository)
-
-    companion object {
-        private const val DATA_BASE_NAME = "saves-db"
-    }
+    ): IHapticFeedbackInteractor = MockHapticFeedbackInteractor()
 }

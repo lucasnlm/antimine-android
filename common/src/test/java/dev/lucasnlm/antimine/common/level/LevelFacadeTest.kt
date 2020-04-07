@@ -58,7 +58,7 @@ class LevelFacadeTest {
             plantMinesExcept(3)
             assertNotEquals(field.filter { it.hasMine }.map { it.id }.first(), 3)
             field.forEach {
-                if (it.id == 7) {
+                if (it.id == 6) {
                     assertTrue(it.hasMine)
                 } else {
                     assertFalse(it.hasMine)
@@ -84,35 +84,34 @@ class LevelFacadeTest {
         assertTrue(
             levelFacadeOf(3, 3, 1, 200L).apply {
                 plantMinesExcept(3)
-            }.at(7).hasMine
+            }.at(6).hasMine
         )
         assertTrue(
             levelFacadeOf(3, 3, 1, 250L).apply {
                 plantMinesExcept(3)
-            }.at(0).hasMine
+            }.at(1).hasMine
         )
         assertTrue(
             levelFacadeOf(3, 3, 1, 100L).apply {
                 plantMinesExcept(3)
-            }.at(8).hasMine
+            }.at(4).hasMine
         )
         assertTrue(
             levelFacadeOf(3, 3, 1, 170L).apply {
                 plantMinesExcept(3)
-                println(field)
-            }.at(2).hasMine
+            }.at(6).hasMine
         )
     }
 
     @Test
     fun testMineTips() {
-        levelFacadeOf(3, 3, 1, 200L).run {
+        levelFacadeOf(3, 3, 1, 150L).run {
             plantMinesExcept(3)
             assertEquals(
                 listOf(
-                    0, 0, 0,
+                    1, 0, 1,
                     1, 1, 1,
-                    1, 0, 1
+                    0, 0, 0
                 ),
                 field.map { it.minesAround }.toList()
             )
@@ -122,9 +121,9 @@ class LevelFacadeTest {
             plantMinesExcept(3)
             assertEquals(
                 listOf(
-                    1, 0, 1,
-                    2, 2, 2,
-                    1, 0, 1
+                    0, 1, 1,
+                    1, 2, 0,
+                    0, 2, 1
                 ),
                 field.map { it.minesAround }.toList()
             )
@@ -134,9 +133,9 @@ class LevelFacadeTest {
             plantMinesExcept(3)
             assertEquals(
                 listOf(
-                    0, 0, 1,
-                    3, 3, 2,
-                    1, 0, 1
+                    0, 2, 0,
+                    1, 3, 0,
+                    0, 2, 1
                 ),
                 field.map { it.minesAround }.toList()
             )
@@ -146,10 +145,10 @@ class LevelFacadeTest {
             plantMinesExcept(3)
             assertEquals(
                 listOf(
-                    0, 0, 0, 1,
-                    3, 0, 3, 1,
-                    2, 3, 2, 1,
-                    0, 2, 0, 1
+                    0, 0, 2, 1,
+                    0, 5, 0, 2,
+                    2, 4, 0, 2,
+                    0, 2, 1, 1
                 ),
                 field.map { it.minesAround }.toList()
             )
@@ -159,10 +158,10 @@ class LevelFacadeTest {
             plantMinesExcept(3)
             assertEquals(
                 listOf(
-                    0, 0, 1, 0,
-                    2, 2, 1, 0,
-                    0, 0, 0, 0,
-                    0, 0, 0, 0
+                    0, 1, 1, 1,
+                    0, 2, 0, 2,
+                    0, 2, 0, 2,
+                    0, 1, 1, 1
                 ),
                 field.map { it.minesAround }.toList()
             )
@@ -172,10 +171,10 @@ class LevelFacadeTest {
             plantMinesExcept(3)
             assertEquals(
                 listOf(
-                    1, 0, 1, 0,
-                    1, 1, 1, 0,
                     0, 0, 0, 0,
-                    0, 0, 0, 0
+                    0, 1, 1, 1,
+                    0, 1, 0, 1,
+                    0, 1, 1, 1
                 ),
                 field.map { it.minesAround }.toList()
             )
@@ -324,11 +323,11 @@ class LevelFacadeTest {
 
     @Test
     fun testOpenSafeZone() {
-        levelFacadeOf(3, 3, 1, 200L).run {
+        levelFacadeOf(3, 3, 1, 0).run {
             plantMinesExcept(3)
-            assertEquals(field.filter { it.isCovered }.count(), field.count())
+            assertEquals(field.filterNot { it.isCovered }.count(), 0)
             singleClick(1)
-            assertEquals(field.filter { it.isCovered }.count(), field.count() - 6)
+            assertEquals(field.filterNot { it.isCovered }.count(), 6)
             assertEquals(
                 field.filterNot { it.isCovered }.map { it.id }.toList(),
                 listOf(0, 1, 2, 3, 4, 5)
@@ -381,7 +380,7 @@ class LevelFacadeTest {
             plantMinesExcept(3)
             val mine = field.last { it.hasMine }
             assertEquals(
-                listOf(35, 33, 22, 27, 17, 32, 25, 8, 7, 2),
+                listOf(33, 26, 28, 31, 19, 14, 18, 7, 6, 4),
                 takeExplosionRadius(mine).map { it.id }.toList()
             )
         }
@@ -390,7 +389,7 @@ class LevelFacadeTest {
             plantMinesExcept(3)
             val mine = field.first { it.hasMine }
             assertEquals(
-                listOf(2, 8, 7, 17, 22, 25, 27, 32, 33, 35),
+                listOf(4, 14, 7, 28, 6, 19, 26, 18, 33, 31),
                 takeExplosionRadius(mine).map { it.id }.toList()
             )
         }
@@ -399,7 +398,7 @@ class LevelFacadeTest {
             plantMinesExcept(3)
             val mine = field.filter { it.hasMine }.elementAt(4)
             assertEquals(
-                listOf(22, 17, 27, 33, 35, 8, 32, 25, 2, 7),
+                listOf(18, 19, 6, 7, 14, 26, 31, 33, 28, 4),
                 takeExplosionRadius(mine).map { it.id }.toList()
             )
         }
@@ -485,7 +484,7 @@ class LevelFacadeTest {
         val width = 12
         val height = 12
         val mines = 9
-        levelFacadeOf(width, height, mines, 200L).run {
+        levelFacadeOf(width, height, mines, 150L).run {
             plantMinesExcept(3)
             field.filterNot { it.hasMine }.take(width * height - 1 - mines).forEach {
                 singleClick(it.id)

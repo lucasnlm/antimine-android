@@ -47,7 +47,7 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
         }
 
         arguments?.run {
-            isVictory = getBoolean(DIALOG_STATE) == true
+            isVictory = getBoolean(DIALOG_IS_VICTORY) == true
             time = getLong(DIALOG_TIME)
             rightMines = getInt(DIALOG_RIGHT_MINES)
             totalMines = getInt(DIALOG_TOTAL_MINES)
@@ -134,14 +134,14 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
         fun newInstance(victory: Boolean, rightMines: Int, totalMines: Int, time: Long): EndGameDialogFragment =
             EndGameDialogFragment().apply {
                 arguments = Bundle().apply {
-                    putBoolean(DIALOG_STATE, victory)
+                    putBoolean(DIALOG_IS_VICTORY, victory)
                     putInt(DIALOG_RIGHT_MINES, rightMines)
                     putInt(DIALOG_TOTAL_MINES, totalMines)
                     putLong(DIALOG_TIME, time)
                 }
             }
 
-        private const val DIALOG_STATE = "dialog_state"
+        const val DIALOG_IS_VICTORY = "dialog_state"
         private const val DIALOG_TIME = "dialog_time"
         private const val DIALOG_RIGHT_MINES = "dialog_right_mines"
         private const val DIALOG_TOTAL_MINES = "dialog_total_mines"

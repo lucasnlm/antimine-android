@@ -1,12 +1,12 @@
 package dev.lucasnlm.antimine.common.level
 
-import android.util.DisplayMetrics
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
+import dev.lucasnlm.antimine.common.level.repository.Size
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -74,10 +74,7 @@ class MinefieldFactoryTest {
         val dimensionRepository: IDimensionRepository = mock {
             on { areaSize() } doReturn 10.0f
             on { actionBarSize() } doReturn 10
-            on { displaySize() } doReturn DisplayMetrics().apply {
-                widthPixels = 500
-                heightPixels = 1000
-            }
+            on { displaySize() } doReturn Size(500, 1000)
         }
 
         MinefieldRepository().fromDifficulty(

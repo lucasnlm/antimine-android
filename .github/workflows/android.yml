@@ -25,7 +25,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Unit tests
-      run: bash ./gradlew test --stacktrace
+      run: bash ./gradlew -i -d test --stacktrace
 
   build:
     runs-on: ubuntu-latest
