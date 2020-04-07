@@ -2,13 +2,10 @@ package dev.lucasnlm.antimine
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.content.IntentSender
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -21,9 +18,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.android.support.DaggerAppCompatActivity
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.models.Difficulty
@@ -91,10 +85,6 @@ class GameActivity : DaggerAppCompatActivity() {
             bindInstantApp()
             savesRepository.setLimit(1)
         } else {
-            if (Build.VERSION.SDK_INT >= 21) {
-                checkUpdate()
-            }
-
             checkUseCount()
         }
     }
@@ -505,28 +495,6 @@ class GameActivity : DaggerAppCompatActivity() {
     }
 
     /**
-     * Call Google API to request update.
-     */
-    private fun checkUpdate() {
-        val appUpdateManager = AppUpdateManagerFactory.create(this)
-        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
-
-        appUpdateInfoTask.addOnSuccessListener { info ->
-            if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
-                info.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
-            ) {
-                try {
-                    appUpdateManager.startUpdateFlowForResult(
-                        info, AppUpdateType.FLEXIBLE, this, 1
-                    )
-                } catch (e: IntentSender.SendIntentException) {
-                    Log.e(TAG, "Fail to request update.")
-                }
-            }
-        }
-    }
-
-    /**
      * If user change any accessibility preference, the game will restart the activity to
      * apply these changes.
      */
@@ -578,7 +546,6 @@ class GameActivity : DaggerAppCompatActivity() {
     }
 
     companion object {
-        val TAG = GameActivity::class.simpleName
         const val PREFERENCE_FIRST_USE = "preference_first_use"
         const val PREFERENCE_USE_COUNT = "preference_use_count"
         const val PREFERENCE_REQUEST_RATING = "preference_request_rating"

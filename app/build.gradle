@@ -67,7 +67,6 @@ dependencies {
     // Google
     implementation "com.google.android.gms:play-services-instantapps:$versions.instantApp"
     implementation "com.google.android.material:material:$versions.material"
-    implementation "com.google.android.play:core:$versions.playCore"
 
     // Dagger
     api "com.google.dagger:dagger-android:$versions.dagger"
