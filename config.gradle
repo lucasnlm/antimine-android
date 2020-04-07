@@ -21,14 +21,13 @@ ext.versions = [
         // Wear OS
         wear            : '1.0.0',
 
-        // Google Weae
+        // Google Wear
         playWearable    : '17.0.0',
         supportWearable : '2.5.0',
 
         // Google
         instantApp      : '17.0.0',
         material        : '1.1.0',
-        playCore        : '1.7.1',
 
         // Kotlin
         kotlin          : '1.3.70',

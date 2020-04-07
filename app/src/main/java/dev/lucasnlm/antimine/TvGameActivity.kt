@@ -1,12 +1,9 @@
 package dev.lucasnlm.antimine
 
 import android.content.Intent
-import android.content.IntentSender
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -16,9 +13,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.android.support.DaggerAppCompatActivity
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.models.Difficulty
@@ -64,10 +58,6 @@ class TvGameActivity : DaggerAppCompatActivity() {
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         loadGameFragment()
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            checkUpdate()
-        }
     }
 
     private fun bindViewModel() = viewModel.apply {
@@ -323,26 +313,5 @@ class TvGameActivity : DaggerAppCompatActivity() {
             }
             else -> { }
         }
-    }
-
-    private fun checkUpdate() {
-        val appUpdateManager = AppUpdateManagerFactory.create(this)
-        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
-
-        appUpdateInfoTask.addOnSuccessListener { info ->
-            if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
-                info.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
-                try {
-                    appUpdateManager.startUpdateFlowForResult(
-                        info, AppUpdateType.FLEXIBLE, this, 1)
-                } catch (e: IntentSender.SendIntentException) {
-                    Log.e(TAG, "Fail to request update.")
-                }
-            }
-        }
-    }
-
-    companion object {
-        const val TAG = "GameActivity"
     }
 }
