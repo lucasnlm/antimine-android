@@ -1,8 +1,5 @@
 # Project specific ProGuard rules
 
-# For Fabric to properly de-obfuscate your crash reports, you need to remove this line from your ProGuard config:
--printmapping mapping.txt
-
 # support design
 -dontwarn android.support.design.**
 -keep class android.support.design.** { *; }
