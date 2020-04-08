@@ -57,4 +57,5 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
 - [Dagger](https://dagger.dev/android.html)
 - [Room](https://developer.android.com/training/data-storage/room)
+- [Robolectric](http://robolectric.org/)
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
