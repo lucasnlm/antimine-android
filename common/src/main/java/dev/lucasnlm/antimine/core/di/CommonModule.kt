@@ -26,7 +26,5 @@ class CommonModule {
 
     @Singleton
     @Provides
-    fun provideAnalyticsManager(
-        application: Application
-    ): AnalyticsManager = DebugAnalyticsManager()
+    fun provideAnalyticsManager(): AnalyticsManager = DebugAnalyticsManager()
 }

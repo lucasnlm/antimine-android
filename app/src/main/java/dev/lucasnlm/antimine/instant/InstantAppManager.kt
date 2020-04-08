@@ -3,15 +3,15 @@ package dev.lucasnlm.antimine.instant
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import com.google.android.gms.instantapps.InstantApps
+import dev.lucasnlm.external.InstantAppWrapper
 
 class InstantAppManager(
     private val context: Context
 ) {
-    fun isEnabled(): Boolean = InstantApps.getPackageManagerCompat(context).isInstantApp
+    fun isEnabled(): Boolean = InstantAppWrapper().isEnabled(context)
 
     fun isNotEnabled(): Boolean = isEnabled().not()
 
     fun showInstallPrompt(activity: Activity, intent: Intent?, requestCode: Int, referrer: String?) =
-        InstantApps.showInstallPrompt(activity, intent, requestCode, referrer)
+        InstantAppWrapper().showInstallPrompt(activity, intent, requestCode, referrer)
 }

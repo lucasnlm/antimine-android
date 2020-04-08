@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'io.fabric'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -49,11 +48,25 @@ android {
             animationsDisabled true
         }
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        google {
+            dimension "version"
+        }
+
+        foss {
+            dimension "version"
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':common')
+
+    googleImplementation project(':proprietary')
+    fossImplementation project(':foss')
 
     // AndroidX
     implementation "androidx.appcompat:appcompat:$versions.appcompat"
@@ -65,7 +78,6 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
 
     // Google
-    implementation "com.google.android.gms:play-services-instantapps:$versions.instantApp"
     implementation "com.google.android.material:material:$versions.material"
 
     // Dagger
