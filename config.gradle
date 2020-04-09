@@ -1,10 +1,10 @@
 ext.buildVersion = [
-        versionCode  : 62,
+        versionCode  : 603001, // MMmmPPv
         versionName  : '6.3.0',
         targetSdk    : 29,
         minAppSdk    : 16,
         wearMinAppSdk: 23,
-        applicationId: 'dev.lucasnlm.antimine'
+        applicationId: 'com.logical.minato'
 ]
 
 ext.versions = [

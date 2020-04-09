@@ -13,6 +13,7 @@ import dagger.android.support.DaggerFragment
 import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
+import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import dev.lucasnlm.antimine.common.level.view.UnlockedHorizontalScrollView
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
@@ -56,6 +57,7 @@ class WatchLevelFragment : DaggerFragment() {
         recyclerGrid = view.findViewById(R.id.recyclerGrid)
         recyclerGrid.apply {
             setHasFixedSize(true)
+            addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
             isNestedScrollingEnabled = false
             adapter = areaAdapter
             alpha = 0.0f
