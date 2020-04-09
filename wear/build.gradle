@@ -8,7 +8,7 @@ android {
     compileSdkVersion buildVersion.targetSdk
 
     defaultConfig {
-        applicationId 'dev.lucasnlm.antimine.wear'
+        applicationId buildVersion.applicationId
         minSdkVersion buildVersion.wearMinAppSdk
         targetSdkVersion buildVersion.targetSdk
         versionCode buildVersion.versionCode
