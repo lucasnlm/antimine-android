@@ -1,0 +1,5 @@
+ 
+- Explosion animation
+- Double click
+- Translation updates
+- Bug fixes

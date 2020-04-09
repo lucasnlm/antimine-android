@@ -1,0 +1,1 @@
+Ein Puzzle-Spiel, in dem du nach allen verborgenen Minen suchst.
