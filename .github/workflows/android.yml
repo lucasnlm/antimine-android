@@ -14,13 +14,6 @@ jobs:
        - name: "ktlint"
          uses: "vroy/gha-kotlin-linter@v1"
 
-       - name: Codecov
-         uses: codecov/codecov-action@v1.0.6
-         with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          flags: unittests # optional
-          fail_ci_if_error: true # optional (default = false)
-
   test:
     name: Run Unit Tests
     runs-on: ubuntu-latest
@@ -45,3 +38,24 @@ jobs:
         java-version: 1.8
     - name: Build with Gradle
       run: ./gradlew build
+
+  coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+       - uses: actions/checkout@master
+       - name: Setup Python  
+         uses: actions/setup-python@master
+         with:
+           python-version: 3.7
+       - name: Generate coverage report
+         run: |
+           pip install pytest
+           pip install pytest-cov
+           pytest --cov=./ --cov-report=xml
+       - name: Codecov
+         uses: codecov/codecov-action@v1.0.6
+         with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          flags: unittests # optional
+          fail_ci_if_error: true # optional (default = false)
