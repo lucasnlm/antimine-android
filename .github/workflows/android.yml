@@ -14,6 +14,13 @@ jobs:
        - name: "ktlint"
          uses: "vroy/gha-kotlin-linter@v1"
 
+       - name: Codecov
+         uses: codecov/codecov-action@v1.0.6
+         with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          flags: unittests # optional
+          fail_ci_if_error: true # optional (default = false)
+
   test:
     name: Run Unit Tests
     runs-on: ubuntu-latest
