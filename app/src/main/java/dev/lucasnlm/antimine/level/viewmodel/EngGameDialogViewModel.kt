@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.R
 
 class EngGameDialogViewModel : ViewModel() {
-    var paint: Paint = Paint()
+    private val paint: Paint = Paint()
 
     private fun checkGlyphAvailability(glyph: String): Boolean {
         return if (Build.VERSION.SDK_INT >= 23) {
