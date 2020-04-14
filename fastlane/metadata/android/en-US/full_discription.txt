@@ -6,21 +6,23 @@ Be careful not to trigger one!
 
 <b>Features</b>
 
-- Takes up little storage space
-- It can be played without an Internet connection
-- 4 difficulty levels
-- Make your own level
-- Night mode
-- Saves the game automatically
-- Place flags to mark mines
-- Place question marks to flag questionable places
-- Open multiple places by pressing the numbers
-- Place flags automatically when needed
-- Share the game
-- Play with split-screen
-- Accessibility: increase the area of ​​the square
-- Accessibility: screen reader
+<ul>
+<li>Takes up little storage space</li>
+<li>It can be played without an Internet connection</li>
+<li>4 difficulty levels</li>
+<li>Make your own level</li>
+<li>Night mode</li>
+<li>Saves the game automatically</li>
+<li>Place flags to mark mines</li>
+<li>Place question marks to flag questionable places</li>
+<li>Open multiple places by pressing the numbers</li>
+<li>Place flags automatically when needed</li>
+<li>Share the game</li>
+<li>Play with split-screen</li>
+<li>Accessibility: increase the area of ​​the square</li>
+<li>Accessibility: screen reader</li>
+</ul>
 
 <b>Source Code</b>
 
-This game source code is available in: https://github.com/lucasnlm/antimine-android
+This game source code is available <a href="https://github.com/lucasnlm/antimine-android">GitHub</a>.

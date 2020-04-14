@@ -6,21 +6,23 @@ Dávejte pozor, aby žádná mina nevybouchla!
 
 <b>Funkce</b>
 
-- Zabírá málo úložného prostoru
-- Lze hrát bez připojení k internetu
-- 4 rozdílné úrovně
-- Tvorba vlastních úrovní
-- Noční režim
-- Automatické uložení hry
-- Umístění vlajek k označení min
-- Umístění otazníků k označení pochybných míst
-- Stisknutím čísel otevřete více míst
-- Automatické umístění vlajek pokud je potřeba
-- Sdílení hry
-- Hra na rozdělené obrazovce
-- Přístupnost: zvětšení plochy čtverce
-- Přístupnost: čtečka obrazovky
+<ul>
+<li>Zabírá málo úložného prostoru</li>
+<li>Lze hrát bez připojení k internetu</li>
+<li>4 rozdílné úrovně</li>
+<li>Tvorba vlastních úrovní</li>
+<li>Noční režim</li>
+<li>Automatické uložení hry</li>
+<li>Umístění vlajek k označení min</li>
+<li>Umístění otazníků k označení pochybných míst</li>
+<li>Stisknutím čísel otevřete více míst</li>
+<li>Automatické umístění vlajek pokud je potřeba</li>
+<li>Sdílení hry</li>
+<li>Hra na rozdělené obrazovce</li>
+<li>Přístupnost: zvětšení plochy čtverce</li>
+<li>Přístupnost: čtečka obrazovky</li>
+</ul>
 
 <b>Zdrojový kód</b>
 
-Zdrojový kód této hry je k dispozici na: https://github.com/lucasnlm/antimine-android
+Zdrojový kód této hry je k dispozici na: <a href="https://github.com/lucasnlm/antimine-android">GitHub</a>.

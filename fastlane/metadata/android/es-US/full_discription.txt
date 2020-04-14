@@ -6,22 +6,23 @@ Ganas el juego cuando marcas todas las minas en el campo minado.
 
 <b>Caracteristicas</b>
 
-- Ocupa poco espacio de almacenamiento
-- Se puede jugar sin Internet
-- 4 niveles de dificultad
-- Crea tu propio nivel
-- Modo nocturno
-- Guarda el juego automáticamente
-- Coloca banderas para marcar minas
-- Coloque interrogaciónes para marcar lugares cuestionables
-- Abre varios lugares presionando los números
-- Coloque banderas automáticamente cuando sea necesario
-- Comparte el juego
-- Juega con pantalla dividida
-- Accesibilidad: aumenta el área del cuadrado
-- Accesibilidad: lector de pantalla
+<ul>
+<li>Ocupa poco espacio de almacenamiento</li>
+<li>Se puede jugar sin Internet</li>
+<li>4 niveles de dificultad</li>
+<li>Crea tu propio nivel</li>
+<li>Modo nocturno</li>
+<li>Guarda el juego automáticamente</li>
+<li>Coloca banderas para marcar minas</li>
+<li>Coloque interrogaciónes para marcar lugares cuestionables</li>
+<li>Abre varios lugares presionando los números</li>
+<li>Coloque banderas automáticamente cuando sea necesario</li>
+<li>Comparte el juego</li>
+<li>Juega con pantalla dividida</li>
+<li>Accesibilidad: aumenta el área del cuadrado</li>
+<li>Accesibilidad: lector de pantalla</li>
+</ul>
 
 <b>Código Fuente</b>
 
-Este código fuente del juego está disponible en: https://github.com/lucasnlm/antimine-android
-
+Este código fuente del juego está disponible en: <a href="https://github.com/lucasnlm/antimine-android">GitHub</a>
