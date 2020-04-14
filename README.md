@@ -10,9 +10,9 @@ Flag the spaces with mines to make the board a safer place. You win the game whe
 ### Screeshots
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/lucasnlm/antimine-android/master/extras/store/image_1.png" width="275px"/>
-    <img src="https://raw.githubusercontent.com/lucasnlm/antimine-android/master/extras/store/image_5.png" width="275px"/>
-    <img src="https://raw.githubusercontent.com/lucasnlm/antimine-android/master/extras/store/image_3.png" width="275px"/>
+    <img src="https://github.com/lucasnlm/antimine-android/blob/master/fastlane/metadata/android/image_1.png" width="275px"/>
+    <img src="https://github.com/lucasnlm/antimine-android/blob/master/fastlane/metadata/android/image_5.png" width="275px"/>
+    <img src="https://github.com/lucasnlm/antimine-android/blob/master/fastlane/metadata/android/image_3.png" width="275px"/>
 </p>
 
 ## Contributing
