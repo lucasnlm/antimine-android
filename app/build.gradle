@@ -7,11 +7,12 @@ android {
     compileSdkVersion buildVersion.targetSdk
 
     defaultConfig {
+        // versionCode and versionName must be hardcoded to support F-droid
+        versionCode 603001
+        versionName '6.3.0'
         applicationId buildVersion.applicationId
         minSdkVersion buildVersion.minAppSdk
         targetSdkVersion buildVersion.targetSdk
-        versionCode buildVersion.versionCode
-        versionName buildVersion.versionName
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true
         resConfigs 'en', 'cs', 'de', 'es', 'fr', 'pt', 'ru', 'tr', 'vi', 'uk', 'zh'
