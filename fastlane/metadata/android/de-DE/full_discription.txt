@@ -1,0 +1,28 @@
+Antimine ist ein Minesweeper ähnliches Puzzle-Spiel.
+Ziel ist es, die Lücken mit den Minen zu kennzeichnen, um das Feld zu einem sicheren Ort zu machen, ohne sie zum Explodieren zu bringen.
+
+Du gewinnst das Spiel, wenn du jede Mine auf dem Minenfeld markiert hast.
+Sei vorsichtig, nicht eine auszulösen!
+
+<b>Eigenschaften</b>
+
+<ul>
+<li>Belegt wenig Speicherplatz</li>
+<li>Es kann ohne Internetverbindung gespielt werden</li>
+<li>4 Schwierigkeitsgrade</li>
+<li>Erstelle dein eigenes Level</li>
+<li>Nachtmodus</li>
+<li>Speichert das Spiel automatisch</li>
+<li>Platziere Fahnen, um Minen zu markieren</li>
+<li>Platziere Fragezeichen, um fragwürdige Orte zu markieren</li>
+<li>Öffne mehrere Orte durch Drücken der Zahlen</li>
+<li>Markierungen bei Bedarf automatisch platzieren</li>
+<li>Teile das Spiel</li>
+<li>Mit geteiltem Bildschirm spielen</li>
+<li>Zugänglichkeit: Erhöhe die Fläche des Quadrats</li>
+<li>Bedienbarkeit: Bildschirmleser</li>
+</ul>
+
+<b>Quellcode</b>
+
+Der Quellcode dieses Spiels ist verfügbar auf: <a href="https://github.com/lucasnlm/antimine-android">GitHub</a>

@@ -1,0 +1,1 @@
+Un juego de buscaminas donde se buscan minas ocultas de un campo minado.

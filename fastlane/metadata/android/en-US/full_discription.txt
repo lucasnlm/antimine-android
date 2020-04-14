@@ -1,0 +1,28 @@
+Antimine is a minesweeper-like puzzle game.
+The objective is to flag the spaces with mines to make the field a safer place without exploding any of them.
+
+You win the game when you've flagged every mine in the minefield.
+Be careful not to trigger one! 
+
+<b>Features</b>
+
+<ul>
+<li>Takes up little storage space</li>
+<li>It can be played without an Internet connection</li>
+<li>4 difficulty levels</li>
+<li>Make your own level</li>
+<li>Night mode</li>
+<li>Saves the game automatically</li>
+<li>Place flags to mark mines</li>
+<li>Place question marks to flag questionable places</li>
+<li>Open multiple places by pressing the numbers</li>
+<li>Place flags automatically when needed</li>
+<li>Share the game</li>
+<li>Play with split-screen</li>
+<li>Accessibility: increase the area of ​​the square</li>
+<li>Accessibility: screen reader</li>
+</ul>
+
+<b>Source Code</b>
+
+This game source code is available <a href="https://github.com/lucasnlm/antimine-android">GitHub</a>.

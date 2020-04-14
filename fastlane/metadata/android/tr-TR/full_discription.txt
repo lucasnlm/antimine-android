@@ -1,0 +1,29 @@
+Antimine mayın tarlası gibi bir bulmaca oyunudur.
+Amaç, herhangi bir alanı patlatmadan alanı daha güvenli bir yer haline getirmek için mayınlı alanları işaretlemektir.
+
+Mayın tarlasındaki her mayını işaretlediğinizde oyunu kazanırsınız.
+Birini bile tetiklememeye dikkat edin!
+
+<b>Özellikler</b>
+
+<ul>
+<li>Az yer kaplar</li>
+<li>İnternet bağlantısı olmadan oynanabilir</li>
+<li>4 zorluk seviyesi</li>
+<li>Kendi seviyeni yap</li>
+<li>Gece modu</li>
+<li>Oyunu otomatik olarak kaydeder</li>
+<li>Mayınları işaretlemek için bayraklar yerleştir</li>
+<li>Şüpheli yerleri işaretlemek için soru işaretleri yerleştir</li>
+<li>Sayılara basarak birden fazla yer aç</li>
+<li>Gerektiğinde bayrakları otomatik olarak yerleştir</li>
+<li>Oyunu paylaş</li>
+<li>Bölünmüş ekranda oyna</li>
+<li>Erişilebilirlik: karenin alanını artır</li>
+<li>Erişilebilirlik: ekran okuyucu</li>
+</ul>
+
+<b>Kaynak Kodu</b>
+
+Bu oyunun kaynak kodu şu adreste mevcuttur: <a href="https://github.com/lucasnlm/antimine-android">GitHub</a>
+

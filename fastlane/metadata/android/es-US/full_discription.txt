@@ -1,0 +1,28 @@
+Antimine es un juego de rompecabezas como el buscaminas.
+El objetivo del juego es despejar un campo de minas sin detonar ninguna.
+
+Ganas el juego cuando marcas todas las minas en el campo minado.
+¡Tenga cuidado de no activar una mina!
+
+<b>Caracteristicas</b>
+
+<ul>
+<li>Ocupa poco espacio de almacenamiento</li>
+<li>Se puede jugar sin Internet</li>
+<li>4 niveles de dificultad</li>
+<li>Crea tu propio nivel</li>
+<li>Modo nocturno</li>
+<li>Guarda el juego automáticamente</li>
+<li>Coloca banderas para marcar minas</li>
+<li>Coloque interrogaciónes para marcar lugares cuestionables</li>
+<li>Abre varios lugares presionando los números</li>
+<li>Coloque banderas automáticamente cuando sea necesario</li>
+<li>Comparte el juego</li>
+<li>Juega con pantalla dividida</li>
+<li>Accesibilidad: aumenta el área del cuadrado</li>
+<li>Accesibilidad: lector de pantalla</li>
+</ul>
+
+<b>Código Fuente</b>
+
+Este código fuente del juego está disponible en: <a href="https://github.com/lucasnlm/antimine-android">GitHub</a>
