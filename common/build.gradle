@@ -7,11 +7,11 @@ android {
     compileSdkVersion buildVersion.targetSdk
 
     defaultConfig {
+        // versionCode and versionName must be hardcoded to support F-droid
+        versionCode 603001
+        versionName '6.3.0'
         minSdkVersion buildVersion.minAppSdk
         targetSdkVersion buildVersion.targetSdk
-        versionCode buildVersion.versionCode
-        versionName buildVersion.versionName
-
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
