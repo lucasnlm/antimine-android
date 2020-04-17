@@ -6,8 +6,8 @@ android {
     compileSdkVersion buildVersion.targetSdk
 
     defaultConfig {
-        versionCode  : 603011 // MMmmPPv
-        versionName  : '6.3.1'
+        versionCode 603011 // MMmmPPv
+        versionName '6.3.1'
         minSdkVersion buildVersion.minAppSdk
         targetSdkVersion buildVersion.targetSdk
         resConfigs 'en', 'cs', 'de', 'es', 'fr', 'pt', 'ru', 'tr', 'vi', 'uk', 'zh'
