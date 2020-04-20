@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion buildVersion.targetSdk
+    compileSdkVersion 29
 
     defaultConfig {
-        minSdkVersion buildVersion.minAppSdk
-        targetSdkVersion buildVersion.targetSdk
-        versionCode buildVersion.versionCode
-        versionName buildVersion.versionName
+        versionCode 603021 // MMmmPPv
+        versionName '6.3.2'
+        minSdkVersion 16
+        targetSdkVersion 29
         resConfigs 'en', 'cs', 'de', 'es', 'fr', 'pt', 'ru', 'tr', 'vi', 'uk', 'zh'
     }
 
@@ -22,8 +22,10 @@ android {
 }
 
 dependencies {
+    // Dependencies must be hardcoded to support F-droid
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Google
-    implementation "com.google.android.gms:play-services-instantapps:$versions.instantApp"
+    implementation 'com.google.android.gms:play-services-instantapps:17.0.0'
 }
