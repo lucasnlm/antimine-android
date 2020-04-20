@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion buildVersion.targetSdk
+    compileSdkVersion 29
 
     defaultConfig {
         versionCode 603011 // MMmmPPv
         versionName '6.3.1'
-        minSdkVersion buildVersion.minAppSdk
-        targetSdkVersion buildVersion.targetSdk
+        minSdkVersion 16
+        targetSdkVersion 29
         resConfigs 'en', 'cs', 'de', 'es', 'fr', 'pt', 'ru', 'tr', 'vi', 'uk', 'zh'
     }
 
@@ -22,5 +22,7 @@ android {
 }
 
 dependencies {
+    // Dependencies must be hardcoded to support F-droid
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

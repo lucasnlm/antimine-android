@@ -5,15 +5,15 @@ apply plugin: 'kotlin-kapt'
 
 android {
     publishNonDefault true
-    compileSdkVersion buildVersion.targetSdk
+    compileSdkVersion 29
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
         versionCode 603011
         versionName '6.3.1'
-        applicationId buildVersion.applicationId
-        minSdkVersion buildVersion.wearMinAppSdk
-        targetSdkVersion buildVersion.targetSdk
+        applicationId 'dev.lucasnlm.antimine'
+        minSdkVersion 23
+        targetSdkVersion 29
         vectorDrawables.useSupportLibrary true
         resConfigs 'en', 'cs', 'de', 'es', 'fr', 'pt', 'ru', 'tr', 'vi', 'uk', 'zh'
     }
@@ -27,29 +27,31 @@ android {
 }
 
 dependencies {
+    // Dependencies must be hardcoded to support F-droid
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':common')
 
     // Constraint
-    implementation "androidx.appcompat:appcompat:$versions.appcompat"
-    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
-    implementation "androidx.recyclerview:recyclerview:$versions.recyclerview"
-    implementation "androidx.legacy:legacy-support-v4:$versions.legacySupport"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
 
     // Wear OS
-    implementation "androidx.wear:wear:$versions.wear"
-    implementation "com.google.android.gms:play-services-wearable:$versions.playWearable"
-    implementation "com.google.android.support:wearable:$versions.supportWearable"
-    compileOnly "com.google.android.wearable:wearable:$versions.supportWearable"
+    implementation 'androidx.wear:wear:1.0.0'
+    implementation 'com.google.android.gms:play-services-wearable:17.0.0'
+    implementation 'com.google.android.support:wearable:2.5.0'
+    compileOnly 'com.google.android.wearable:wearable:2.5.0'
 
     // Dagger
-    api "com.google.dagger:dagger-android:$versions.dagger"
-    api "com.google.dagger:dagger-android-support:$versions.dagger"
-    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
-    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    api 'com.google.dagger:dagger-android:2.21'
+    api 'com.google.dagger:dagger-android-support:2.21'
+    kapt 'com.google.dagger:dagger-android-processor:2.21'
+    kapt 'com.google.dagger:dagger-compiler:2.21'
 
     // Kotlin
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.5'
 }

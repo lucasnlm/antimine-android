@@ -4,15 +4,15 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion buildVersion.targetSdk
+    compileSdkVersion 29
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
         versionCode 603011
         versionName '6.3.1'
-        applicationId buildVersion.applicationId
-        minSdkVersion buildVersion.minAppSdk
-        targetSdkVersion buildVersion.targetSdk
+        applicationId 'dev.lucanlm.antimine'
+        minSdkVersion 16
+        targetSdkVersion 29
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true
         resConfigs 'en', 'cs', 'de', 'es', 'fr', 'pt', 'ru', 'tr', 'vi', 'uk', 'zh'
@@ -46,19 +46,21 @@ android {
         }
     }
 
-    flavorDimensions "version"
+    flavorDimensions 'version'
     productFlavors {
         google {
-            dimension "version"
+            dimension 'version'
         }
 
         foss {
-            dimension "version"
+            dimension 'version'
         }
     }
 }
 
 dependencies {
+    // Dependencies must be hardcoded to support F-droid
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':common')
 
@@ -66,37 +68,36 @@ dependencies {
     fossImplementation project(':foss')
 
     // AndroidX
-    implementation "androidx.appcompat:appcompat:$versions.appcompat"
-    implementation "androidx.preference:preference:$versions.preference"
-    implementation "androidx.recyclerview:recyclerview:$versions.recyclerview"
-    implementation "androidx.multidex:multidex:$versions.multiDex"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.preference:preference:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     // Constraint
-    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     // Google
-    implementation "com.google.android.material:material:$versions.material"
+    implementation 'com.google.android.material:material:1.1.0'
 
     // Dagger
-    api "com.google.dagger:dagger-android:$versions.dagger"
-    api "com.google.dagger:dagger-android-support:$versions.dagger"
-    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
-    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
-
-    testImplementation "com.google.dagger:dagger-android:$versions.dagger"
-    testImplementation "com.google.dagger:dagger-android-support:$versions.dagger"
+    api 'com.google.dagger:dagger-android:2.21'
+    api 'com.google.dagger:dagger-android-support:2.21'
+    kapt 'com.google.dagger:dagger-android-processor:2.21'
+    kapt 'com.google.dagger:dagger-compiler:2.21'
+    testImplementation 'com.google.dagger:dagger-android:2.21'
+    testImplementation 'com.google.dagger:dagger-android-support:2.21'
 
     // Kotlin
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutines"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.5'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.5'
 
     // Tests
-    testImplementation "junit:junit:$versions.junit"
-    testImplementation "androidx.test:core:$versions.testCore"
-    testImplementation "androidx.test:core-ktx:$versions.testCore"
-    testImplementation "androidx.test.espresso:espresso-core:$versions.espresso"
-    testImplementation "androidx.test.espresso:espresso-contrib:$versions.espresso"
-    testImplementation "androidx.fragment:fragment-testing:$versions.fragmentTest"
-    testImplementation "org.robolectric:robolectric:$versions.robolectric"
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'androidx.test:core:1.2.0'
+    testImplementation 'androidx.test:core-ktx:1.2.0'
+    testImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
+    testImplementation 'androidx.fragment:fragment-testing:1.1.0'
+    testImplementation 'org.robolectric:robolectric:4.3.1'
 }
