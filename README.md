@@ -17,7 +17,7 @@ Flag the spaces with mines to make the board a safer place. You win the game whe
 
 ## Contributing
 
-Feel free to contribute with pull requests.
+Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-android/issues), [feature requests](https://github.com/lucasnlm/antimine-android/issues), [pull requests](https://github.com/lucasnlm/antimine-android/pulls), or [translating](https://crowdin.com/project/antimine-android).
 
 ## Download
 
