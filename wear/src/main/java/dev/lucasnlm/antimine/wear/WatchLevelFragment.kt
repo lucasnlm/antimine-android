@@ -12,6 +12,7 @@ import dev.lucasnlm.antimine.common.R
 import dagger.android.support.DaggerFragment
 import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
+import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -26,6 +27,9 @@ import javax.inject.Inject
 class WatchLevelFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory
+
+    @Inject
+    lateinit var dimensionRepository: IDimensionRepository
 
     private lateinit var viewModel: GameViewModel
     private lateinit var recyclerGrid: RecyclerView
@@ -60,9 +64,7 @@ class WatchLevelFragment : DaggerFragment() {
                     setHasFixedSize(true)
                     isNestedScrollingEnabled = false
                     addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
-                    layoutManager = FixedGridLayoutManager().apply {
-                        setTotalColumnCount(levelSetup.width)
-                    }
+                    layoutManager = makeNewLayoutManager(levelSetup.width, levelSetup.height)
                     adapter = areaAdapter
                     alpha = 0.0f
 
@@ -99,6 +101,19 @@ class WatchLevelFragment : DaggerFragment() {
             })
         }
     }
+
+    private fun makeNewLayoutManager(boardWidth: Int, boardHeight: Int) =
+        FixedGridLayoutManager(boardWidth, calcHorizontalPadding(boardWidth), calcVerticalPadding(boardHeight))
+
+    private fun calcHorizontalPadding(boardWidth: Int): Int =
+        ((recyclerGrid.measuredWidth - dimensionRepository.areaSizeWithPadding() * boardWidth) / 2)
+            .coerceAtLeast(0.0f)
+            .toInt()
+
+    private fun calcVerticalPadding(boardHeight: Int): Int =
+        ((recyclerGrid.measuredHeight - dimensionRepository.areaSizeWithPadding() * boardHeight) / 2)
+            .coerceAtLeast(0.0f)
+            .toInt()
 
     fun setAmbientMode(ambientSettings: AmbientSettings) {
         areaAdapter.apply {

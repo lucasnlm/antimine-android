@@ -19,6 +19,15 @@ public class FixedGridLayoutManager extends RecyclerView.LayoutManager {
 
     private static final String TAG = FixedGridLayoutManager.class.getSimpleName();
 
+    public FixedGridLayoutManager(int columnCount, int horizontalPadding, int verticalPadding) {
+        this.mTotalColumnCount = columnCount;
+        this.horizontalPadding = horizontalPadding;
+        this.verticalPadding = verticalPadding;
+    }
+
+    private final int verticalPadding;
+    private final int horizontalPadding;
+
     private static final int DEFAULT_COUNT = 1;
 
     /* View Removal Constants */
@@ -165,14 +174,14 @@ public class FixedGridLayoutManager extends RecyclerView.LayoutManager {
         if (getChildCount() == 0) { //First or empty layout
             //Reset the visible and scroll positions
             mFirstVisiblePosition = 0;
-            childLeft = getPaddingLeft();
-            childTop = getPaddingTop();
+            childLeft = horizontalPadding;
+            childTop = verticalPadding;
         } else if (!state.isPreLayout()
                 && getVisibleChildCount() >= state.getItemCount()) {
             //Data set is too small to scroll fully, just reset position
             mFirstVisiblePosition = 0;
-            childLeft = getPaddingLeft();
-            childTop = getPaddingTop();
+            childLeft = horizontalPadding;
+            childTop = verticalPadding;
         } else { //Adapter data set changes
             /*
              * Keep the existing initial position, and save off
@@ -188,12 +197,12 @@ public class FixedGridLayoutManager extends RecyclerView.LayoutManager {
              */
             if (!state.isPreLayout() && getVerticalSpace() > (getTotalRowCount() * mDecoratedChildHeight)) {
                 mFirstVisiblePosition = mFirstVisiblePosition % getTotalColumnCount();
-                childTop = getPaddingTop();
+                childTop = verticalPadding;
 
                 //If the shift overscrolls the column max, back it off
                 if ((mFirstVisiblePosition + mVisibleColumnCount) > state.getItemCount()) {
                     mFirstVisiblePosition = Math.max(state.getItemCount() - mVisibleColumnCount, 0);
-                    childLeft = getPaddingLeft();
+                    childLeft = horizontalPadding;
                 }
             }
 
@@ -228,10 +237,10 @@ public class FixedGridLayoutManager extends RecyclerView.LayoutManager {
                 //Correct cases where shifting to the bottom-right overscrolls the top-left
                 // This happens on data sets too small to scroll in a direction.
                 if (getFirstVisibleRow() == 0) {
-                    childTop = Math.min(childTop, getPaddingTop());
+                    childTop = Math.min(childTop, verticalPadding);
                 }
                 if (getFirstVisibleColumn() == 0) {
-                    childLeft = Math.min(childLeft, getPaddingLeft());
+                    childLeft = Math.min(childLeft, horizontalPadding);
                 }
             }
         }
@@ -567,7 +576,7 @@ public class FixedGridLayoutManager extends RecyclerView.LayoutManager {
             //Check right bound
             if (rightBoundReached) {
                 //If we've reached the last column, enforce limits
-                int rightOffset = getHorizontalSpace() - getDecoratedRight(bottomView) + getPaddingRight();
+                int rightOffset = getHorizontalSpace() - getDecoratedRight(bottomView) + horizontalPadding;
                 delta = Math.max(-dx, rightOffset);
             } else {
                 //No limits while the last column isn't visible
@@ -576,7 +585,7 @@ public class FixedGridLayoutManager extends RecyclerView.LayoutManager {
         } else { // Contents are scrolling right
             //Check left bound
             if (leftBoundReached) {
-                int leftOffset = -getDecoratedLeft(topView) + getPaddingLeft();
+                int leftOffset = -getDecoratedLeft(topView) + horizontalPadding;
                 delta = Math.min(-dx, leftOffset);
             } else {
                 delta = -dx;
@@ -653,7 +662,7 @@ public class FixedGridLayoutManager extends RecyclerView.LayoutManager {
                 if (rowOfIndex(getChildCount() - 1) >= (maxRowCount - 1)) {
                     //We are truly at the bottom, determine how far
                     bottomOffset = getVerticalSpace() - getDecoratedBottom(bottomView)
-                            + getPaddingBottom();
+                            + verticalPadding;
                 } else {
                     /*
                      * Extra space added to account for allowing bottom space in the grid.
@@ -661,7 +670,7 @@ public class FixedGridLayoutManager extends RecyclerView.LayoutManager {
                      * ensure that at least one element in that row isn't fully recycled.
                      */
                     bottomOffset = getVerticalSpace() - (getDecoratedBottom(bottomView)
-                            + mDecoratedChildHeight) + getPaddingBottom();
+                            + mDecoratedChildHeight) + verticalPadding;
                 }
 
                 delta = Math.max(-dy, bottomOffset);
@@ -672,7 +681,7 @@ public class FixedGridLayoutManager extends RecyclerView.LayoutManager {
         } else { // Contents are scrolling down
             //Check against top bound
             if (topBoundReached) {
-                int topOffset = -getDecoratedTop(topView) + getPaddingTop();
+                int topOffset = -getDecoratedTop(topView) + verticalPadding;
 
                 delta = Math.min(-dy, topOffset);
             } else {

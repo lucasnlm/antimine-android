@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
-import dev.lucasnlm.antimine.common.R
 import dagger.android.support.DaggerFragment
+import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
+import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -22,9 +23,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+
 open class LevelFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory
+
+    @Inject
+    lateinit var dimensionRepository: IDimensionRepository
 
     private lateinit var viewModel: GameViewModel
     private lateinit var recyclerGrid: RecyclerView
@@ -67,9 +72,7 @@ open class LevelFragment : DaggerFragment() {
                     setHasFixedSize(true)
                     isNestedScrollingEnabled = false
                     addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
-                    layoutManager = FixedGridLayoutManager().apply {
-                        setTotalColumnCount(levelSetup.width)
-                    }
+                    layoutManager = makeNewLayoutManager(levelSetup.width, levelSetup.height)
                     adapter = areaAdapter
                     alpha = 0.0f
 
@@ -87,9 +90,7 @@ open class LevelFragment : DaggerFragment() {
             })
 
             levelSetup.observe(viewLifecycleOwner, Observer {
-                recyclerGrid.layoutManager = FixedGridLayoutManager().apply {
-                    setTotalColumnCount(it.width)
-                }
+                recyclerGrid.layoutManager = makeNewLayoutManager(it.width, it.height)
             })
 
             fieldRefresh.observe(viewLifecycleOwner, Observer {
@@ -105,7 +106,8 @@ open class LevelFragment : DaggerFragment() {
                     Event.Running,
                     Event.ResumeGame,
                     Event.StartNewGame -> areaAdapter.setClickEnabled(true)
-                    else -> { }
+                    else -> {
+                    }
                 }
             })
         }
@@ -128,6 +130,19 @@ open class LevelFragment : DaggerFragment() {
 
         return result
     }
+
+    private fun makeNewLayoutManager(boardWidth: Int, boardHeight: Int) =
+        FixedGridLayoutManager(boardWidth, calcHorizontalPadding(boardWidth), calcVerticalPadding(boardHeight))
+
+    private fun calcHorizontalPadding(boardWidth: Int): Int =
+        ((recyclerGrid.measuredWidth - dimensionRepository.areaSizeWithPadding() * boardWidth) / 2)
+            .coerceAtLeast(0.0f)
+            .toInt()
+
+    private fun calcVerticalPadding(boardHeight: Int): Int =
+        ((recyclerGrid.measuredHeight - dimensionRepository.areaSizeWithPadding() * boardHeight) / 2)
+            .coerceAtLeast(0.0f)
+            .toInt()
 
     companion object {
         const val DEFAULT_SCHEME = "antimine"
