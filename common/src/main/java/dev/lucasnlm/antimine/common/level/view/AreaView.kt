@@ -17,7 +17,6 @@ import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.models.AreaPalette
 import dev.lucasnlm.antimine.common.level.models.Mark
-import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
 
 class AreaView : View {
     // Used on Wear OS
@@ -27,7 +26,6 @@ class AreaView : View {
     private var area: Area? = null
     private lateinit var paintSettings: AreaPaintSettings
     private lateinit var palette: AreaPalette
-    private val drawableRepository = DrawableRepository()
     private var gestureDetector: GestureDetector? = null
 
     constructor(context: Context) : super(context)
@@ -130,7 +128,6 @@ class AreaView : View {
             isAmbientMode,
             isLowBitAmbient,
             isFocused,
-            drawableRepository,
             paintSettings,
             palette
         )

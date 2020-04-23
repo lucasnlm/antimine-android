@@ -4,12 +4,12 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
+import androidx.core.content.ContextCompat
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.AreaPalette
-import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
 
 fun Area.paintOnCanvas(
     context: Context,
@@ -17,7 +17,6 @@ fun Area.paintOnCanvas(
     isAmbientMode: Boolean,
     isLowBitAmbient: Boolean,
     isFocused: Boolean,
-    drawableRepository: DrawableRepository,
     paintSettings: AreaPaintSettings,
     areaPalette: AreaPalette,
     markPadding: Int? = null,
@@ -50,9 +49,9 @@ fun Area.paintOnCanvas(
                     val padding = markPadding ?: context.resources.getDimension(R.dimen.mark_padding).toInt()
 
                     val flag = if (mistake) {
-                        drawableRepository.provideRedFlagDrawable(context)
+                        ContextCompat.getDrawable(context, R.drawable.red_flag)
                     } else {
-                        drawableRepository.provideFlagDrawable(context)
+                        ContextCompat.getDrawable(context, R.drawable.flag)
                     }
 
                     flag?.setBounds(
@@ -64,7 +63,7 @@ fun Area.paintOnCanvas(
                     flag?.draw(canvas)
                 }
                 Mark.Question -> {
-                    val question = drawableRepository.provideQuestionDrawable(context)
+                    val question = ContextCompat.getDrawable(context, R.drawable.question)
 
                     question?.setBounds(
                         rectF.left.toInt(),
@@ -100,9 +99,9 @@ fun Area.paintOnCanvas(
                 val padding = minePadding ?: context.resources.getDimension(R.dimen.mine_padding).toInt()
 
                 val mine = when {
-                    isAmbientMode -> drawableRepository.provideMineLow(context)
-                    mistake -> drawableRepository.provideMineExploded(context)
-                    else -> drawableRepository.provideMine(context)
+                    isAmbientMode -> ContextCompat.getDrawable(context, R.drawable.mine_low)
+                    mistake -> ContextCompat.getDrawable(context, R.drawable.mine_exploded)
+                    else -> ContextCompat.getDrawable(context, R.drawable.mine)
                 }
 
                 mine?.setBounds(
