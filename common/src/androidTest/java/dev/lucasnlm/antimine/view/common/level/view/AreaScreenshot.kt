@@ -9,7 +9,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.AreaPalette
-import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.view.paintOnCanvas
 import org.junit.Assert.assertTrue
@@ -19,11 +18,9 @@ import java.io.File
 import java.io.FileOutputStream
 
 class AreaScreenshot {
-
     private lateinit var context: Context
 
     private fun saveImage(area: Area, fileName: String, ambientMode: Boolean): File {
-        val drawableRepository = DrawableRepository()
         val paintSettings = AreaAdapter.createAreaPaintSettings(context, false)
         val size = paintSettings.rectF.width().toInt()
         val testPadding = 4
@@ -49,7 +46,6 @@ class AreaScreenshot {
             isAmbientMode = ambientMode,
             isLowBitAmbient = false,
             isFocused = false,
-            drawableRepository = drawableRepository,
             paintSettings = paintSettings,
             areaPalette = if (ambientMode) AreaPalette.fromContrast(context) else AreaPalette.fromLightTheme()
         )

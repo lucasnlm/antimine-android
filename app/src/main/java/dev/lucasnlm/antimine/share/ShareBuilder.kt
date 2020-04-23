@@ -16,7 +16,6 @@ import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.AreaPalette
-import dev.lucasnlm.antimine.common.level.repository.DrawableRepository
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.view.paintOnCanvas
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +47,6 @@ class ShareBuilder(
         val radius = 2f
 
         val areaPalette = AreaPalette.fromLightTheme()
-        val drawableRepository = DrawableRepository()
 
         val paintSettings = AreaPaintSettings(
             Paint().apply {
@@ -84,7 +82,6 @@ class ShareBuilder(
                     isAmbientMode = false,
                     isLowBitAmbient = false,
                     isFocused = false,
-                    drawableRepository = drawableRepository,
                     paintSettings = paintSettings,
                     markPadding = 6,
                     minePadding = 1,
