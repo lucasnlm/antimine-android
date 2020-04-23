@@ -909,10 +909,10 @@ public class FixedGridLayoutManager extends RecyclerView.LayoutManager {
     }
 
     private int getHorizontalSpace() {
-        return getWidth() - getPaddingRight() - getPaddingLeft();
+        return getWidth();
     }
 
     private int getVerticalSpace() {
-        return getHeight() - getPaddingBottom() - getPaddingTop();
+        return getHeight();
     }
 }
