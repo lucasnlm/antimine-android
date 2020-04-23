@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.level.view
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,15 +71,15 @@ open class LevelFragment : DaggerFragment() {
             withContext(Dispatchers.Main) {
                 recyclerGrid.apply {
                     setHasFixedSize(true)
-                    isNestedScrollingEnabled = false
                     addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
+                    isNestedScrollingEnabled = false
                     layoutManager = makeNewLayoutManager(levelSetup.width, levelSetup.height)
                     adapter = areaAdapter
                     alpha = 0.0f
 
                     animate().apply {
                         alpha(1.0f)
-                        duration = 1000
+                        duration = DateUtils.SECOND_IN_MILLIS
                     }.start()
                 }
             }
