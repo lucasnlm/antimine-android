@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.level.widget;
+package dev.lucasnlm.antimine.common.level.widget;
 
 import android.content.Context;
 import android.graphics.PointF;

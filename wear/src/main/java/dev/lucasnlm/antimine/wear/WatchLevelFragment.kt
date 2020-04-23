@@ -14,9 +14,9 @@ import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
-import dev.lucasnlm.antimine.common.level.view.UnlockedHorizontalScrollView
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
+import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -27,10 +27,8 @@ class WatchLevelFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory
 
-    private lateinit var root: ViewGroup
     private lateinit var viewModel: GameViewModel
     private lateinit var recyclerGrid: RecyclerView
-    private lateinit var bidirectionalScroll: UnlockedHorizontalScrollView
     private lateinit var areaAdapter: AreaAdapter
 
     override fun onCreateView(
@@ -52,41 +50,30 @@ class WatchLevelFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        root = view.findViewById(R.id.root)
-
         recyclerGrid = view.findViewById(R.id.recyclerGrid)
-        recyclerGrid.apply {
-            setHasFixedSize(true)
-            addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
-            isNestedScrollingEnabled = false
-            adapter = areaAdapter
-            alpha = 0.0f
-        }
-
-        bidirectionalScroll = view.findViewById(R.id.bidirectionalScroll)
-        bidirectionalScroll.setTarget(recyclerGrid)
 
         GlobalScope.launch {
             val levelSetup = viewModel.onCreate()
 
-            val width = levelSetup.width
-
             withContext(Dispatchers.Main) {
-                view.post {
-                    recyclerGrid.layoutManager =
-                        GridLayoutManager(activity, width, RecyclerView.VERTICAL, false)
-
-                    view.post {
-                        recyclerGrid.scrollToPosition(areaAdapter.itemCount / 2)
-                        bidirectionalScroll.scrollBy(recyclerGrid.width / 4, 0)
-                        recyclerGrid.animate().apply {
-                            alpha(1.0f)
-                            duration = 1000
-                        }.start()
+                recyclerGrid.apply {
+                    setHasFixedSize(true)
+                    isNestedScrollingEnabled = false
+                    addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
+                    layoutManager = FixedGridLayoutManager().apply {
+                        setTotalColumnCount(levelSetup.width)
                     }
+                    adapter = areaAdapter
+                    alpha = 0.0f
+
+                    animate().apply {
+                        alpha(1.0f)
+                        duration = 1000
+                    }.start()
                 }
             }
         }
+
 
         viewModel.run {
             field.observe(viewLifecycleOwner, Observer {
