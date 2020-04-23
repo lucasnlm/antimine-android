@@ -1,31 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <dev.lucasnlm.antimine.common.level.view.UnlockedHorizontalScrollView
-        android:id="@+id/bidirectionalScroll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerGrid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:contentDescription="@null"
         android:fadeScrollbars="true"
+        android:importantForAccessibility="no"
         android:overScrollMode="never"
         android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:alpha="0" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerGrid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@null"
-            android:fadeScrollbars="true"
-            android:importantForAccessibility="no"
-            android:overScrollMode="never"
-            android:scrollbars="none" />
-
-    </dev.lucasnlm.antimine.common.level.view.UnlockedHorizontalScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
