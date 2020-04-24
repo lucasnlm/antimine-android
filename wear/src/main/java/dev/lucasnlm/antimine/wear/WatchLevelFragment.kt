@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.wear
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +13,12 @@ import dev.lucasnlm.antimine.common.R
 import dagger.android.support.DaggerFragment
 import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
+import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
-import dev.lucasnlm.antimine.common.level.view.UnlockedHorizontalScrollView
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
+import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -27,10 +29,11 @@ class WatchLevelFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory
 
-    private lateinit var root: ViewGroup
+    @Inject
+    lateinit var dimensionRepository: IDimensionRepository
+
     private lateinit var viewModel: GameViewModel
     private lateinit var recyclerGrid: RecyclerView
-    private lateinit var bidirectionalScroll: UnlockedHorizontalScrollView
     private lateinit var areaAdapter: AreaAdapter
 
     override fun onCreateView(
@@ -52,38 +55,24 @@ class WatchLevelFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        root = view.findViewById(R.id.root)
-
         recyclerGrid = view.findViewById(R.id.recyclerGrid)
-        recyclerGrid.apply {
-            setHasFixedSize(true)
-            addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
-            isNestedScrollingEnabled = false
-            adapter = areaAdapter
-            alpha = 0.0f
-        }
-
-        bidirectionalScroll = view.findViewById(R.id.bidirectionalScroll)
-        bidirectionalScroll.setTarget(recyclerGrid)
 
         GlobalScope.launch {
             val levelSetup = viewModel.onCreate()
 
-            val width = levelSetup.width
-
             withContext(Dispatchers.Main) {
-                view.post {
-                    recyclerGrid.layoutManager =
-                        GridLayoutManager(activity, width, RecyclerView.VERTICAL, false)
+                recyclerGrid.apply {
+                    setHasFixedSize(true)
+                    addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
+                    isNestedScrollingEnabled = false
+                    layoutManager = makeNewLayoutManager(levelSetup.width, levelSetup.height)
+                    adapter = areaAdapter
+                    alpha = 0.0f
 
-                    view.post {
-                        recyclerGrid.scrollToPosition(areaAdapter.itemCount / 2)
-                        bidirectionalScroll.scrollBy(recyclerGrid.width / 4, 0)
-                        recyclerGrid.animate().apply {
-                            alpha(1.0f)
-                            duration = 1000
-                        }.start()
-                    }
+                    animate().apply {
+                        alpha(1.0f)
+                        duration = DateUtils.SECOND_IN_MILLIS
+                    }.start()
                 }
             }
         }
@@ -112,6 +101,19 @@ class WatchLevelFragment : DaggerFragment() {
             })
         }
     }
+
+    private fun makeNewLayoutManager(boardWidth: Int, boardHeight: Int) =
+        FixedGridLayoutManager(boardWidth, calcHorizontalPadding(boardWidth), calcVerticalPadding(boardHeight))
+
+    private fun calcHorizontalPadding(boardWidth: Int): Int =
+        ((recyclerGrid.measuredWidth - dimensionRepository.areaSizeWithPadding() * boardWidth) / 2)
+            .coerceAtLeast(0.0f)
+            .toInt()
+
+    private fun calcVerticalPadding(boardHeight: Int): Int =
+        ((recyclerGrid.measuredHeight - dimensionRepository.areaSizeWithPadding() * boardHeight) / 2)
+            .coerceAtLeast(0.0f)
+            .toInt()
 
     fun setAmbientMode(ambientSettings: AmbientSettings) {
         areaAdapter.apply {

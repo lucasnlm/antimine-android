@@ -60,6 +60,8 @@ class TestLevelModule(
     ): IDimensionRepository = object : IDimensionRepository {
         override fun areaSize(): Float = 50.0f
 
+        override fun areaSizeWithPadding(): Float = 52.0f
+
         override fun displaySize(): Size = Size(50 * 15, 50 * 30)
 
         override fun actionBarSize(): Int = 50
