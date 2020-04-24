@@ -32,7 +32,7 @@ class FixedGridLayoutManager(
     private var firstChangedPosition = 0
     private var changedPositionCount = 0
 
-    override fun supportsPredictiveItemAnimations(): Boolean = true
+    override fun supportsPredictiveItemAnimations(): Boolean = false
 
     override fun onItemsRemoved(recyclerView: RecyclerView, positionStart: Int, itemCount: Int) {
         firstChangedPosition = positionStart
