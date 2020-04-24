@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 
+/// Based on `FixedGridLayoutManager` from https://github.com/devunwired/recyclerview-playground
+
 class FixedGridLayoutManager(
     private var maxColumnCount: Int,
     private val horizontalPadding: Int,
