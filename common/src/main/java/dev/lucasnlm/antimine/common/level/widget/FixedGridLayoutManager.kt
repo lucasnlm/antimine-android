@@ -236,12 +236,10 @@ class FixedGridLayoutManager(
             DIRECTION_DOWN -> firstVisiblePosition += totalColumnCount
         }
 
-        /*
-         * Next, we supply the grid of items that are deemed visible.
-         * If these items were previously there, they will simply be
-         * re-attached. New views that must be created are obtained
-         * from the Recycler and added.
-         */
+        // Next, we supply the grid of items that are deemed visible.
+        // If these items were previously there, they will simply be
+        // re-attached. New views that must be created are obtained
+        // from the Recycler and added.
         var leftOffset = startLeftOffset
         var topOffset = startTopOffset
         for (index in 0 until visibleChildCount) {
@@ -315,13 +313,10 @@ class FixedGridLayoutManager(
             }
         }
 
-        /*
-         * Finally, we ask the Recycler to scrap and store any views
-         * that we did not re-attach. These are views that are not currently
-         * necessary because they are no longer visible.
-         */for (i in 0 until viewCache.size()) {
-            val removingView = viewCache.valueAt(i)
-            recycler.recycleView(removingView!!)
+        for (i in 0 until viewCache.size()) {
+            viewCache.valueAt(i)?.let { removingView ->
+                recycler.recycleView(removingView)
+            }
         }
     }
 
@@ -370,7 +365,11 @@ class FixedGridLayoutManager(
         val leftView = getChildAt(0)
         val rightView = getChildAt(visibleColumnCount - 1)
 
-        val viewSpan = getDecoratedRight(rightView!!) - getDecoratedLeft(leftView!!)
+        if (leftView == null || rightView == null) {
+            return 0
+        }
+
+        val viewSpan = getDecoratedRight(rightView) - getDecoratedLeft(leftView)
         if (viewSpan < horizontalSpace) {
             return 0
         }
@@ -423,7 +422,11 @@ class FixedGridLayoutManager(
         val topView = getChildAt(0)
         val bottomView = getChildAt(childCount - 1)
 
-        val viewSpan = getDecoratedBottom(bottomView!!) - getDecoratedTop(topView!!)
+        if (topView == null || bottomView == null) {
+            return 0
+        }
+
+        val viewSpan = getDecoratedBottom(bottomView) - getDecoratedTop(topView)
         if (viewSpan < verticalSpace) {
             return 0
         }
