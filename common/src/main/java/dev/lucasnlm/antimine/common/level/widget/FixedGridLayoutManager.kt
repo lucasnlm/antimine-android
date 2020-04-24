@@ -367,10 +367,10 @@ class FixedGridLayoutManager(
             return 0
         }
 
-        val topView = getChildAt(0)
-        val bottomView = getChildAt(visibleColumnCount - 1)
+        val leftView = getChildAt(0)
+        val rightView = getChildAt(visibleColumnCount - 1)
 
-        val viewSpan = getDecoratedRight(bottomView!!) - getDecoratedLeft(topView!!)
+        val viewSpan = getDecoratedRight(rightView!!) - getDecoratedLeft(leftView!!)
         if (viewSpan < horizontalSpace) {
             return 0
         }
@@ -379,14 +379,14 @@ class FixedGridLayoutManager(
         val rightBoundReached = lastVisibleColumn >= totalColumnCount
         val delta: Int = if (dx > 0) {
             if (rightBoundReached) {
-                val rightOffset = horizontalSpace - getDecoratedRight(bottomView) + horizontalPadding
+                val rightOffset = horizontalSpace - getDecoratedRight(rightView) + horizontalPadding
                 (-dx).coerceAtLeast(rightOffset)
             } else {
                 -dx
             }
         } else {
             if (leftBoundReached) {
-                val leftOffset = -getDecoratedLeft(topView) + horizontalPadding
+                val leftOffset = -getDecoratedLeft(leftView) + horizontalPadding
                 (-dx).coerceAtMost(leftOffset)
             } else {
                 -dx
@@ -395,13 +395,13 @@ class FixedGridLayoutManager(
 
         offsetChildrenHorizontal(delta)
         if (dx > 0) {
-            if (getDecoratedRight(topView) < 0 && !rightBoundReached) {
+            if (getDecoratedRight(leftView) < 0 && !rightBoundReached) {
                 fillGrid(DIRECTION_END, recycler, state)
             } else if (!rightBoundReached) {
                 fillGrid(DIRECTION_NONE, recycler, state)
             }
         } else {
-            if (getDecoratedLeft(topView) > 0 && !leftBoundReached) {
+            if (getDecoratedLeft(leftView) > 0 && !leftBoundReached) {
                 fillGrid(DIRECTION_START, recycler, state)
             } else if (!leftBoundReached) {
                 fillGrid(DIRECTION_NONE, recycler, state)
