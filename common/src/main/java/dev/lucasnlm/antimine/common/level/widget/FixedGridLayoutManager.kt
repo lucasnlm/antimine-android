@@ -621,9 +621,9 @@ class FixedGridLayoutManager(
         //Current column in the grid
         var column = 0
 
-        constructor(c: Context?, attrs: AttributeSet?) : super(c, attrs) {}
-        constructor(width: Int, height: Int) : super(width, height) {}
-        constructor(source: MarginLayoutParams?) : super(source) {}
-        constructor(source: ViewGroup.LayoutParams?) : super(source) {}
+        constructor(c: Context?, attrs: AttributeSet?) : super(c, attrs)
+        constructor(width: Int, height: Int) : super(width, height)
+        constructor(source: MarginLayoutParams?) : super(source)
+        constructor(source: ViewGroup.LayoutParams?) : super(source)
     }
 }
