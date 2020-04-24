@@ -77,7 +77,6 @@ class WatchLevelFragment : DaggerFragment() {
             }
         }
 
-
         viewModel.run {
             field.observe(viewLifecycleOwner, Observer {
                 areaAdapter.bindField(it)

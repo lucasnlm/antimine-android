@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 
-/// Based on `FixedGridLayoutManager` from https://github.com/devunwired/recyclerview-playground
+// Based on `FixedGridLayoutManager` from https://github.com/devunwired/recyclerview-playground
 
 class FixedGridLayoutManager(
     private var maxColumnCount: Int,
@@ -93,7 +93,7 @@ class FixedGridLayoutManager(
             childLeft = horizontalPadding
             childTop = verticalPadding
         } else if (!state.isPreLayout && visibleChildCount >= state.itemCount) {
-            //Data set is too small to scroll fully, just reset position
+            // Data set is too small to scroll fully, just reset position
             firstVisiblePosition = 0
             childLeft = horizontalPadding
             childTop = verticalPadding
@@ -143,17 +143,17 @@ class FixedGridLayoutManager(
             }
         }
 
-        //Clear all attached views into the recycle bin
+        // Clear all attached views into the recycle bin
         detachAndScrapAttachedViews(recycler)
 
-        //Fill the grid for the initial layout of views
+        // Fill the grid for the initial layout of views
         val finalChildLeft = childLeft
         val finalChildTop = childTop
         if (finalChildLeft != null && finalChildTop != null) {
             fillGrid(DIRECTION_NONE, finalChildLeft, finalChildTop, recycler, state, removedCache)
         }
 
-        //Evaluate any disappearing views that may exist
+        // Evaluate any disappearing views that may exist
         if (!state.isPreLayout && recycler.scrapList.isNotEmpty()) {
             recycler.scrapList
                 .map { it.itemView }
@@ -163,7 +163,7 @@ class FixedGridLayoutManager(
     }
 
     override fun onAdapterChanged(oldAdapter: RecyclerView.Adapter<*>?, newAdapter: RecyclerView.Adapter<*>?) {
-        //Completely scrap the existing layout
+        // Completely scrap the existing layout
         removeAllViews()
     }
 
@@ -173,7 +173,7 @@ class FixedGridLayoutManager(
             visibleColumnCount++
         }
 
-        //Allow minimum value for small data sets
+        // Allow minimum value for small data sets
         visibleColumnCount = visibleColumnCount.coerceAtMost(totalColumnCount)
 
         visibleRowCount = verticalSpace / decoratedChildHeight + 1
@@ -189,7 +189,9 @@ class FixedGridLayoutManager(
     }
 
     private fun fillGrid(
-        direction: Int, emptyLeft: Int, emptyTop: Int,
+        direction: Int,
+        emptyLeft: Int,
+        emptyTop: Int,
         recycler: Recycler,
         state: RecyclerView.State,
         removedPositions: SparseIntArray?
@@ -213,14 +215,14 @@ class FixedGridLayoutManager(
                 DIRECTION_DOWN -> startTopOffset += decoratedChildHeight
             }
 
-            //Cache all views by their existing position, before updating counts
+            // Cache all views by their existing position, before updating counts
             (0 until childCount).forEach { index ->
                 val position = positionOfIndex(index)
                 val child = getChildAt(index)
                 viewCache.put(position, child)
             }
 
-            //Temporarily detach all views.
+            // Temporarily detach all views.
             // Views we still need will be added back at the proper index.
             (0 until viewCache.size())
                 .mapNotNull { index -> viewCache.valueAt(index) }
@@ -251,9 +253,10 @@ class FixedGridLayoutManager(
 
                 removedPositions?.let {
                     for (offset in 0 until it.size()) {
-                        //Look for off-screen removals that are less-than this
-                        if (removedPositions.valueAt(offset) == REMOVE_INVISIBLE && removedPositions.keyAt(offset) < nextPosition) {
-                            //Offset position to match
+                        // Look for off-screen removals that are less-than this
+                        if (removedPositions.valueAt(offset) ==
+                            REMOVE_INVISIBLE && removedPositions.keyAt(offset) < nextPosition) {
+                            // Offset position to match
                             offsetPosition--
                         }
                     }
@@ -264,11 +267,11 @@ class FixedGridLayoutManager(
             }
 
             if (nextPosition < 0 || nextPosition >= state.itemCount) {
-                //Item space beyond the data set, don't attempt to add a view
+                // Item space beyond the data set, don't attempt to add a view
                 continue
             }
 
-            //Layout this position
+            // Layout this position
             var view = viewCache[nextPosition]
             if (view == null) {
                 view = recycler.getViewForPosition(nextPosition)
@@ -289,7 +292,7 @@ class FixedGridLayoutManager(
                     topOffset + decoratedChildHeight
                 )
             } else {
-                //Re-attach the cached view at its new index
+                // Re-attach the cached view at its new index
                 attachView(view)
                 viewCache.remove(nextPosition)
             }
@@ -345,9 +348,14 @@ class FixedGridLayoutManager(
 
         val scroller: LinearSmoothScroller = object : LinearSmoothScroller(recyclerView.context) {
             override fun computeScrollVectorForPosition(targetPosition: Int): PointF? {
-                val rowOffset = (getGlobalRowOfPosition(targetPosition) - getGlobalRowOfPosition(firstVisiblePosition))
-                val columnOffset = (getGlobalColumnOfPosition(targetPosition) - getGlobalColumnOfPosition(firstVisiblePosition))
-                return PointF((columnOffset * decoratedChildWidth).toFloat(), (rowOffset * decoratedChildHeight).toFloat())
+                val rowOffset =
+                    (getGlobalRowOfPosition(targetPosition) - getGlobalRowOfPosition(firstVisiblePosition))
+                val columnOffset =
+                    (getGlobalColumnOfPosition(targetPosition) - getGlobalColumnOfPosition(firstVisiblePosition))
+                return PointF(
+                    (columnOffset * decoratedChildWidth).toFloat(),
+                    (rowOffset * decoratedChildHeight).toFloat()
+                )
             }
         }
         scroller.targetPosition = position
@@ -400,7 +408,7 @@ class FixedGridLayoutManager(
             }
         }
 
-         return -delta
+        return -delta
     }
 
     override fun canScrollHorizontally(): Boolean = true
@@ -493,7 +501,7 @@ class FixedGridLayoutManager(
         offset: Int
     ) {
         if (extraCount > 1) {
-            //FIXME: This code currently causes double layout of views that are still visible…
+            // FIXME: This code currently causes double layout of views that are still visible…
             (1..extraCount)
                 .map { extra -> referencePosition + extra }
                 .filterNot { extraPosition ->
@@ -576,7 +584,6 @@ class FixedGridLayoutManager(
             maxColumnCount
         }
 
-
     private val totalRowCount: Int
         get() {
             return if (itemCount == 0 || maxColumnCount == 0) {
@@ -584,7 +591,7 @@ class FixedGridLayoutManager(
             } else {
                 val maxRow = itemCount / maxColumnCount
 
-                //Bump the row count if it's not exactly even
+                // Bump the row count if it's not exactly even
                 if (itemCount % maxColumnCount != 0) {
                     maxRow + 1
                 } else {
@@ -615,10 +622,10 @@ class FixedGridLayoutManager(
     }
 
     class LayoutParams : RecyclerView.LayoutParams {
-        //Current row in the grid
+        // Current row in the grid
         var row = 0
 
-        //Current column in the grid
+        // Current column in the grid
         var column = 0
 
         constructor(c: Context?, attrs: AttributeSet?) : super(c, attrs)
