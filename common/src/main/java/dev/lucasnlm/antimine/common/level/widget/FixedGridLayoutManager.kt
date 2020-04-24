@@ -14,27 +14,27 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 
 class FixedGridLayoutManager(
-    private var mTotalColumnCount: Int,
+    private var maxColumnCount: Int,
     private val horizontalPadding: Int,
     private val verticalPadding: Int
 ) : RecyclerView.LayoutManager() {
 
-    private var mFirstVisiblePosition = 0
+    private var firstVisiblePosition = 0
 
-    private var mDecoratedChildWidth = 0
-    private var mDecoratedChildHeight = 0
+    private var decoratedChildWidth = 0
+    private var decoratedChildHeight = 0
 
-    private var mVisibleColumnCount = 0
-    private var mVisibleRowCount = 0
+    private var visibleColumnCount = 0
+    private var visibleRowCount = 0
 
-    private var mFirstChangedPosition = 0
-    private var mChangedPositionCount = 0
+    private var firstChangedPosition = 0
+    private var changedPositionCount = 0
 
     override fun supportsPredictiveItemAnimations(): Boolean = true
 
     override fun onItemsRemoved(recyclerView: RecyclerView, positionStart: Int, itemCount: Int) {
-        mFirstChangedPosition = positionStart
-        mChangedPositionCount = itemCount
+        firstChangedPosition = positionStart
+        changedPositionCount = itemCount
     }
 
     override fun onLayoutChildren(recycler: Recycler, state: RecyclerView.State) {
@@ -48,8 +48,8 @@ class FixedGridLayoutManager(
         }
 
         if (!state.isPreLayout) {
-            mChangedPositionCount = 0
-            mFirstChangedPosition = 0
+            changedPositionCount = 0
+            firstChangedPosition = 0
         }
 
         if (childCount == 0) {
@@ -57,8 +57,8 @@ class FixedGridLayoutManager(
                 addView(this)
                 measureChildWithMargins(this, 0, 0)
 
-                mDecoratedChildWidth = getDecoratedMeasuredWidth(this)
-                mDecoratedChildHeight = getDecoratedMeasuredHeight(this)
+                decoratedChildWidth = getDecoratedMeasuredWidth(this)
+                decoratedChildHeight = getDecoratedMeasuredHeight(this)
                 detachAndScrapView(this, recycler)
             }
         }
@@ -75,8 +75,8 @@ class FixedGridLayoutManager(
                 .filter { it.isItemRemoved }
                 .forEach { removedCache.put(it.viewLayoutPosition, REMOVE_VISIBLE) }
 
-            if (removedCache.size() == 0 && mChangedPositionCount > 0) {
-                (mFirstChangedPosition until mFirstChangedPosition + mChangedPositionCount)
+            if (removedCache.size() == 0 && changedPositionCount > 0) {
+                (firstChangedPosition until firstChangedPosition + changedPositionCount)
                     .forEach { index ->
                         removedCache.put(index, REMOVE_INVISIBLE)
                     }
@@ -87,12 +87,12 @@ class FixedGridLayoutManager(
         var childTop: Int? = null
 
         if (childCount == 0) {
-            mFirstVisiblePosition = 0
+            firstVisiblePosition = 0
             childLeft = horizontalPadding
             childTop = verticalPadding
         } else if (!state.isPreLayout && visibleChildCount >= state.itemCount) {
             //Data set is too small to scroll fully, just reset position
-            mFirstVisiblePosition = 0
+            firstVisiblePosition = 0
             childLeft = horizontalPadding
             childTop = verticalPadding
         } else {
@@ -101,18 +101,18 @@ class FixedGridLayoutManager(
                 childTop = getDecoratedTop(topChild)
             }
 
-            if (!state.isPreLayout && verticalSpace > totalRowCount * mDecoratedChildHeight) {
-                mFirstVisiblePosition %= totalColumnCount
+            if (!state.isPreLayout && verticalSpace > totalRowCount * decoratedChildHeight) {
+                firstVisiblePosition %= totalColumnCount
                 childTop = verticalPadding
 
-                if (mFirstVisiblePosition + mVisibleColumnCount > state.itemCount) {
-                    mFirstVisiblePosition = (state.itemCount - mVisibleColumnCount).coerceAtLeast(0)
+                if (firstVisiblePosition + visibleColumnCount > state.itemCount) {
+                    firstVisiblePosition = (state.itemCount - visibleColumnCount).coerceAtLeast(0)
                     childLeft = horizontalPadding
                 }
             }
 
-            val maxFirstRow = totalRowCount - (mVisibleRowCount - 1)
-            val maxFirstCol = totalColumnCount - (mVisibleColumnCount - 1)
+            val maxFirstRow = totalRowCount - (visibleRowCount - 1)
+            val maxFirstCol = totalColumnCount - (visibleColumnCount - 1)
             val isOutOfRowBounds = firstVisibleRow > maxFirstRow
             val isOutOfColBounds = firstVisibleColumn > maxFirstCol
 
@@ -128,9 +128,9 @@ class FixedGridLayoutManager(
                     firstVisibleColumn
                 }
 
-                mFirstVisiblePosition = firstRow * totalColumnCount + firstCol
-                childLeft = horizontalSpace - mDecoratedChildWidth * mVisibleColumnCount
-                childTop = verticalSpace - mDecoratedChildHeight * mVisibleRowCount
+                firstVisiblePosition = firstRow * totalColumnCount + firstCol
+                childLeft = horizontalSpace - decoratedChildWidth * visibleColumnCount
+                childTop = verticalSpace - decoratedChildHeight * visibleRowCount
 
                 if (firstVisibleRow == 0) {
                     childTop = childTop?.coerceAtMost(verticalPadding) ?: verticalSpace
@@ -166,20 +166,20 @@ class FixedGridLayoutManager(
     }
 
     private fun updateWindowSizing() {
-        mVisibleColumnCount = horizontalSpace / mDecoratedChildWidth + 1
-        if (horizontalSpace % mDecoratedChildWidth > 0) {
-            mVisibleColumnCount++
+        visibleColumnCount = horizontalSpace / decoratedChildWidth + 1
+        if (horizontalSpace % decoratedChildWidth > 0) {
+            visibleColumnCount++
         }
 
         //Allow minimum value for small data sets
-        mVisibleColumnCount = mVisibleColumnCount.coerceAtMost(totalColumnCount)
+        visibleColumnCount = visibleColumnCount.coerceAtMost(totalColumnCount)
 
-        mVisibleRowCount = verticalSpace / mDecoratedChildHeight + 1
-        if (verticalSpace % mDecoratedChildHeight > 0) {
-            mVisibleRowCount++
+        visibleRowCount = verticalSpace / decoratedChildHeight + 1
+        if (verticalSpace % decoratedChildHeight > 0) {
+            visibleRowCount++
         }
 
-        mVisibleRowCount.coerceAtMost(totalRowCount)
+        visibleRowCount.coerceAtMost(totalRowCount)
     }
 
     private fun fillGrid(direction: Int, recycler: Recycler, state: RecyclerView.State) {
@@ -192,7 +192,7 @@ class FixedGridLayoutManager(
         state: RecyclerView.State,
         removedPositions: SparseIntArray?
     ) {
-        mFirstVisiblePosition = mFirstVisiblePosition.coerceIn(0, itemCount - 1)
+        firstVisiblePosition = firstVisiblePosition.coerceIn(0, itemCount - 1)
 
         var startLeftOffset = emptyLeft
         var startTopOffset = emptyTop
@@ -205,10 +205,10 @@ class FixedGridLayoutManager(
             }
 
             when (direction) {
-                DIRECTION_START -> startLeftOffset -= mDecoratedChildWidth
-                DIRECTION_END -> startLeftOffset += mDecoratedChildWidth
-                DIRECTION_UP -> startTopOffset -= mDecoratedChildHeight
-                DIRECTION_DOWN -> startTopOffset += mDecoratedChildHeight
+                DIRECTION_START -> startLeftOffset -= decoratedChildWidth
+                DIRECTION_END -> startLeftOffset += decoratedChildWidth
+                DIRECTION_UP -> startTopOffset -= decoratedChildHeight
+                DIRECTION_DOWN -> startTopOffset += decoratedChildHeight
             }
 
             //Cache all views by their existing position, before updating counts
@@ -226,10 +226,10 @@ class FixedGridLayoutManager(
         }
 
         when (direction) {
-            DIRECTION_START -> mFirstVisiblePosition--
-            DIRECTION_END -> mFirstVisiblePosition++
-            DIRECTION_UP -> mFirstVisiblePosition -= totalColumnCount
-            DIRECTION_DOWN -> mFirstVisiblePosition += totalColumnCount
+            DIRECTION_START -> firstVisiblePosition--
+            DIRECTION_END -> firstVisiblePosition++
+            DIRECTION_UP -> firstVisiblePosition -= totalColumnCount
+            DIRECTION_DOWN -> firstVisiblePosition += totalColumnCount
         }
 
         /*
@@ -283,8 +283,8 @@ class FixedGridLayoutManager(
                 measureChildWithMargins(view, 0, 0)
                 layoutDecorated(
                     view, leftOffset, topOffset,
-                    leftOffset + mDecoratedChildWidth,
-                    topOffset + mDecoratedChildHeight
+                    leftOffset + decoratedChildWidth,
+                    topOffset + decoratedChildHeight
                 )
             } else {
                 //Re-attach the cached view at its new index
@@ -292,9 +292,9 @@ class FixedGridLayoutManager(
                 viewCache.remove(nextPosition)
             }
 
-            if (index % mVisibleColumnCount == mVisibleColumnCount - 1) {
+            if (index % visibleColumnCount == visibleColumnCount - 1) {
                 leftOffset = startLeftOffset
-                topOffset += mDecoratedChildHeight
+                topOffset += decoratedChildHeight
 
                 if (state.isPreLayout) {
                     layoutAppearingViews(
@@ -306,7 +306,7 @@ class FixedGridLayoutManager(
                     )
                 }
             } else {
-                leftOffset += mDecoratedChildWidth
+                leftOffset += decoratedChildWidth
             }
         }
 
@@ -326,7 +326,7 @@ class FixedGridLayoutManager(
             return
         }
 
-        mFirstVisiblePosition = position
+        firstVisiblePosition = position
         removeAllViews()
         requestLayout()
     }
@@ -343,9 +343,9 @@ class FixedGridLayoutManager(
 
         val scroller: LinearSmoothScroller = object : LinearSmoothScroller(recyclerView.context) {
             override fun computeScrollVectorForPosition(targetPosition: Int): PointF? {
-                val rowOffset = (getGlobalRowOfPosition(targetPosition) - getGlobalRowOfPosition(mFirstVisiblePosition))
-                val columnOffset = (getGlobalColumnOfPosition(targetPosition) - getGlobalColumnOfPosition(mFirstVisiblePosition))
-                return PointF((columnOffset * mDecoratedChildWidth).toFloat(), (rowOffset * mDecoratedChildHeight).toFloat())
+                val rowOffset = (getGlobalRowOfPosition(targetPosition) - getGlobalRowOfPosition(firstVisiblePosition))
+                val columnOffset = (getGlobalColumnOfPosition(targetPosition) - getGlobalColumnOfPosition(firstVisiblePosition))
+                return PointF((columnOffset * decoratedChildWidth).toFloat(), (rowOffset * decoratedChildHeight).toFloat())
             }
         }
         scroller.targetPosition = position
@@ -358,7 +358,7 @@ class FixedGridLayoutManager(
         }
 
         val topView = getChildAt(0)
-        val bottomView = getChildAt(mVisibleColumnCount - 1)
+        val bottomView = getChildAt(visibleColumnCount - 1)
 
         val viewSpan = getDecoratedRight(bottomView!!) - getDecoratedLeft(topView!!)
         if (viewSpan < horizontalSpace) {
@@ -426,7 +426,7 @@ class FixedGridLayoutManager(
                 val bottomOffset: Int = if (rowOfIndex(childCount - 1) >= maxRowCount - 1) {
                     (verticalSpace - getDecoratedBottom(bottomView) + verticalPadding)
                 } else {
-                    verticalSpace - (getDecoratedBottom(bottomView) + mDecoratedChildHeight) + verticalPadding
+                    verticalSpace - (getDecoratedBottom(bottomView) + decoratedChildHeight) + verticalPadding
                 }
                 (-dy).coerceAtLeast(bottomOffset)
             } else {
@@ -527,63 +527,63 @@ class FixedGridLayoutManager(
         colDelta: Int,
         referenceView: View
     ) {
-        val layoutTop = getDecoratedTop(referenceView) + rowDelta * mDecoratedChildHeight
-        val layoutLeft = getDecoratedLeft(referenceView) + colDelta * mDecoratedChildWidth
+        val layoutTop = getDecoratedTop(referenceView) + rowDelta * decoratedChildHeight
+        val layoutLeft = getDecoratedLeft(referenceView) + colDelta * decoratedChildWidth
         measureChildWithMargins(child, 0, 0)
         layoutDecorated(
             child, layoutLeft, layoutTop,
-            layoutLeft + mDecoratedChildWidth,
-            layoutTop + mDecoratedChildHeight
+            layoutLeft + decoratedChildWidth,
+            layoutTop + decoratedChildHeight
         )
     }
 
     private fun getGlobalColumnOfPosition(position: Int): Int =
-        position % mTotalColumnCount
+        position % maxColumnCount
 
     private fun getGlobalRowOfPosition(position: Int): Int =
-        position / mTotalColumnCount
+        position / maxColumnCount
 
     private fun positionOfIndex(childIndex: Int): Int {
-        val row = childIndex / mVisibleColumnCount
-        val column = childIndex % mVisibleColumnCount
-        return mFirstVisiblePosition + row * totalColumnCount + column
+        val row = childIndex / visibleColumnCount
+        val column = childIndex % visibleColumnCount
+        return firstVisiblePosition + row * totalColumnCount + column
     }
 
     private fun rowOfIndex(childIndex: Int): Int =
         positionOfIndex(childIndex) / totalColumnCount
 
     private val firstVisibleColumn: Int
-        get() = mFirstVisiblePosition % totalColumnCount
+        get() = firstVisiblePosition % totalColumnCount
 
     private val lastVisibleColumn: Int
-        get() = firstVisibleColumn + mVisibleColumnCount
+        get() = firstVisibleColumn + visibleColumnCount
 
     private val firstVisibleRow: Int
-        get() = mFirstVisiblePosition / totalColumnCount
+        get() = firstVisiblePosition / totalColumnCount
 
     private val lastVisibleRow: Int
-        get() = firstVisibleRow + mVisibleRowCount
+        get() = firstVisibleRow + visibleRowCount
 
     private val visibleChildCount: Int
-        get() = mVisibleColumnCount * mVisibleRowCount
+        get() = visibleColumnCount * visibleRowCount
 
     private val totalColumnCount: Int
-        get() = if (itemCount < mTotalColumnCount) {
+        get() = if (itemCount < maxColumnCount) {
             itemCount
         } else {
-            mTotalColumnCount
+            maxColumnCount
         }
 
 
     private val totalRowCount: Int
         get() {
-            return if (itemCount == 0 || mTotalColumnCount == 0) {
+            return if (itemCount == 0 || maxColumnCount == 0) {
                 0
             } else {
-                val maxRow = itemCount / mTotalColumnCount
+                val maxRow = itemCount / maxColumnCount
 
                 //Bump the row count if it's not exactly even
-                if (itemCount % mTotalColumnCount != 0) {
+                if (itemCount % maxColumnCount != 0) {
                     maxRow + 1
                 } else {
                     maxRow
