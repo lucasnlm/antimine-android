@@ -32,5 +32,7 @@ jobs:
         java-version: 1.8
     - name: Build with Gradle
       run: ./gradlew assembleDebug
-    - name: Unit tests
-      run: ./gradlew test --stacktrace
+    - name: App Unit tests
+      run: ./gradlew testGoogleDebugUnitTest --stacktrace
+    - name: Common Unit tests
+      run: ./gradlew testDebugUnitTest --stacktrace
