@@ -70,3 +70,12 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestUtil 'androidx.test:orchestrator:1.2.0'
 }
+
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+    }
+    afterTest { desc, result ->
+        println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}
