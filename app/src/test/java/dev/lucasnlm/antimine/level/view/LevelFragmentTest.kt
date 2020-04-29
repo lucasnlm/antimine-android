@@ -16,7 +16,7 @@ import org.robolectric.shadows.ShadowLooper
 import java.util.concurrent.TimeUnit
 
 @RunWith(RobolectricTestRunner::class)
-@Config(minSdk = 16, maxSdk = 27, application = TestApplication::class)
+@Config(sdk = [16, 19, 21, 26, 27], application = TestApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class LevelFragmentTest {
     @Test
