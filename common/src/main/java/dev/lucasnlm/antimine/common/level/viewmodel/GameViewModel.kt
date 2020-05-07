@@ -271,7 +271,8 @@ class GameViewModel(
     suspend fun gameOver() {
         levelFacade.run {
             analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
-            val delayMillis = explosionDelay() / levelFacade.mines.count().coerceAtLeast(10)
+            val explosionTime = (explosionDelay() / levelFacade.mines.count().coerceAtLeast(10))
+            val delayMillis = explosionTime.coerceAtLeast(25L)
 
             findExplodedMine()?.let { exploded ->
                 takeExplosionRadius(exploded).forEach {
