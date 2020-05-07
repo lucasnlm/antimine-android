@@ -1,5 +1,5 @@
 ## Anti-mine
-![Android CI](https://github.com/lucasnlm/antimine-android/workflows/Android%20CI/badge.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![GitHub release](https://img.shields.io/github/release/lucasnlm/antimine-android.svg?maxAge=60)](https://github.com/lucasnlm/antimine-android/releases) [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/) [![crowdin](https://badges.crowdin.net/antimine-android/localized.svg)](https://crowdin.com/project/antimine-android)
+![Android CI](https://github.com/lucasnlm/antimine-android/workflows/Android%20CI/badge.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![GitHub release](https://img.shields.io/github/release/lucasnlm/antimine-android.svg?maxAge=60)](https://github.com/lucasnlm/antimine-android/releases) [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/) [![crowdin](https://badges.crowdin.net/antimine-android/localized.svg)](https://crowdin.com/project/antimine-android) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flucasnlm%2Fantimine-android.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Flucasnlm%2Fantimine-android?ref=badge_shield)
 
 ### Description
 
@@ -63,3 +63,7 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 - [Room](https://developer.android.com/training/data-storage/room)
 - [Robolectric](http://robolectric.org/)
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flucasnlm%2Fantimine-android.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Flucasnlm%2Fantimine-android?ref=badge_large)

@@ -101,3 +101,12 @@ dependencies {
     testImplementation 'androidx.fragment:fragment-testing:1.1.0'
     testImplementation 'org.robolectric:robolectric:4.3.1'
 }
+
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+    }
+    afterTest { desc, result ->
+        println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}
