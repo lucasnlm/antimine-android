@@ -3,12 +3,14 @@
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Hiçbirini patlatmadan gizli mayın içeren dikdörtgen bir tahtayı temizlemelisiniz.</string>
     <string name="remaining_mines">Kalan mayınlar</string>
+    <string name="previous_games">Önceki Oyun</string>
     <string name="install">Yükle</string>
     <string name="minefield">Zorluk</string>
     <string name="standard">Standart</string>
     <string name="beginner">Başlangıç</string>
     <string name="intermediate">Orta düzey</string>
     <string name="expert">Uzman</string>
+    <string name="open">Aç</string>
     <string name="open_menu">Menüyü Aç</string>
     <string name="close_menu">Menüyü Kapat</string>
     <string name="settings">Ayarlar</string>
@@ -33,7 +35,7 @@
     <string name="disconnected">Bağlantı kesildi</string>
     <string name="new_game">Yeni Oyun</string>
     <string name="share">Paylaş</string>
-    <string name="share_menu">Paylaş…</string>
+    <string name="share_menu">Paylaş...</string>
     <string name="new_game_request">Yeni bir oyuna başlamak istiyor musunuz?</string>
     <string name="yes">Evet</string>
     <string name="general">Genel</string>

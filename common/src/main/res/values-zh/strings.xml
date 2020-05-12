@@ -3,12 +3,14 @@
     <string name="app_name">反雷 - 扫雷</string>
     <string name="app_description">你需要清除一个隐藏着地雷的矩形面板，不能使任何地雷爆炸。</string>
     <string name="remaining_mines">剩余地雷</string>
+    <string name="previous_games">前一盘棋</string>
     <string name="install">安装</string>
     <string name="minefield">难度</string>
     <string name="standard">初级</string>
     <string name="beginner">中级</string>
     <string name="intermediate">中级</string>
     <string name="expert">专家</string>
+    <string name="open">打开</string>
     <string name="open_menu">打开菜单</string>
     <string name="close_menu">关闭选单</string>
     <string name="settings">设置</string>
