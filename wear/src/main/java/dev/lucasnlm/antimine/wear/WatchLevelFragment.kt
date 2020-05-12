@@ -58,7 +58,7 @@ class WatchLevelFragment : DaggerFragment() {
         recyclerGrid = view.findViewById(R.id.recyclerGrid)
 
         GlobalScope.launch {
-            val levelSetup = viewModel.onCreate()
+            val levelSetup = viewModel.loadLastGame()
 
             withContext(Dispatchers.Main) {
                 recyclerGrid.apply {
