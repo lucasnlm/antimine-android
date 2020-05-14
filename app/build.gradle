@@ -15,7 +15,7 @@ android {
         targetSdkVersion 29
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true
-        resConfigs 'en', 'cs', 'de', 'es', 'fr', 'pt', 'ru', 'tr', 'vi', 'uk', 'zh'
+        resConfigs 'en', 'cs', 'de', 'el', 'es', 'fr', 'pt', 'ru', 'tr', 'uk', 'vi', 'zh'
     }
 
     buildTypes {
