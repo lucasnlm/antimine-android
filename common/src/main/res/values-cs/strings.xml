@@ -3,12 +3,14 @@
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté miny, aniž by kterákoliv z nich vybuchla.</string>
     <string name="remaining_mines">Zbývající miny</string>
+    <string name="previous_games">Předchozí hry</string>
     <string name="install">Instalovat</string>
     <string name="minefield">Obtížnost</string>
     <string name="standard">Standardní</string>
     <string name="beginner">Začátečník</string>
     <string name="intermediate">Středně pokročilý</string>
     <string name="expert">Expert</string>
+    <string name="open">Otevřít</string>
     <string name="open_menu">Otevřít nabídku</string>
     <string name="close_menu">Zavřít nabídku</string>
     <string name="settings">Nastavení</string>

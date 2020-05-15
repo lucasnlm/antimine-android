@@ -3,12 +3,14 @@
     <string name="app_name">Antimine</string>
     <string name="app_description">You have to clear a rectangular board containing hidden \"mines\" without detonating any of them.</string>
     <string name="remaining_mines">Remaining mines</string>
+    <string name="previous_games">Previous Games</string>
     <string name="install">Install</string>
     <string name="minefield">Difficulty</string>
     <string name="standard">Standard</string>
     <string name="beginner">Beginner</string>
     <string name="intermediate">Intermediate</string>
     <string name="expert">Expert</string>
+    <string name="open">Open</string>
     <string name="open_menu">Open Menu</string>
     <string name="close_menu">Close Menu</string>
     <string name="settings">Settings</string>

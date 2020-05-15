@@ -30,6 +30,7 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.history.HistoryActivity
 import dev.lucasnlm.antimine.instant.InstantAppManager
 import dev.lucasnlm.antimine.level.view.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
@@ -248,6 +249,7 @@ class GameActivity : DaggerAppCompatActivity() {
                 R.id.settings -> showSettings()
                 R.id.rate -> openRateUsLink("Drawer")
                 R.id.share_now -> shareCurrentGame()
+                R.id.previous_games -> openSaveHistory()
                 R.id.install_new -> installFromInstantApp()
                 else -> handled = false
             }
@@ -364,6 +366,13 @@ class GameActivity : DaggerAppCompatActivity() {
         }
     }
 
+    private fun openSaveHistory() {
+        analyticsManager.sentEvent(Analytics.OpenSaveHistory())
+        Intent(this, HistoryActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
     private fun showSettings() {
         analyticsManager.sentEvent(Analytics.OpenSettings())
         Intent(this, PreferencesActivity::class.java).apply {
@@ -470,10 +479,12 @@ class GameActivity : DaggerAppCompatActivity() {
                 invalidateOptionsMenu()
                 viewModel.stopClock()
 
-                waitAndShowEndGameDialog(
-                    victory = true,
-                    await = true
-                )
+                if (viewModel.isCurrentGame()) {
+                    waitAndShowEndGameDialog(
+                        victory = true,
+                        await = true
+                    )
+                }
             }
             Event.ResumeGameOver -> {
                 val score = Score(
@@ -485,10 +496,12 @@ class GameActivity : DaggerAppCompatActivity() {
                 invalidateOptionsMenu()
                 viewModel.stopClock()
 
-                waitAndShowEndGameDialog(
-                    victory = false,
-                    await = true
-                )
+                if (viewModel.isCurrentGame()) {
+                    waitAndShowEndGameDialog(
+                        victory = false,
+                        await = true
+                    )
+                }
             }
             else -> { }
         }

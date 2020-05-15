@@ -5,7 +5,9 @@ import dev.lucasnlm.antimine.common.level.database.models.Save
 import javax.inject.Inject
 
 interface ISavesRepository {
+    suspend fun getAllSaves(): List<Save>
     suspend fun fetchCurrentSave(): Save?
+    suspend fun loadFromId(id: Int): Save?
     suspend fun saveGame(save: Save): Long?
     fun setLimit(maxSavesStorage: Int)
 }
@@ -14,8 +16,11 @@ class SavesRepository @Inject constructor(
     private val savesDao: SaveDao,
     private var maxSavesStorage: Int = MAX_STORAGE
 ) : ISavesRepository {
+    override suspend fun getAllSaves(): List<Save> = savesDao.getAll()
 
     override suspend fun fetchCurrentSave(): Save? = savesDao.loadCurrent()
+
+    override suspend fun loadFromId(id: Int): Save? = savesDao.loadFromId(id)
 
     override suspend fun saveGame(save: Save): Long? = with(savesDao) {
         if (getSaveCounts() >= maxSavesStorage) {
