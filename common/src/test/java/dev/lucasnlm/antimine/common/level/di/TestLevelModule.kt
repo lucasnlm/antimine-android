@@ -69,7 +69,11 @@ class TestLevelModule(
 
     @Provides
     fun provideSavesRepository(): ISavesRepository = object : ISavesRepository {
+        override suspend fun getAllSaves(): List<Save> = listOf()
+
         override suspend fun fetchCurrentSave(): Save? = null
+
+        override suspend fun loadFromId(id: Int): Save? = null
 
         override suspend fun saveGame(save: Save): Long? = null
 
