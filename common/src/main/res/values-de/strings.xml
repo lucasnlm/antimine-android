@@ -3,12 +3,14 @@
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Du musst eine rechteckige Tafel mit versteckten minen räumen, ohne dass eine davon explodiert.</string>
     <string name="remaining_mines">Verbleibende Minen</string>
+    <string name="previous_games">Vorherige Spiele</string>
     <string name="install">Installieren</string>
     <string name="minefield">Schwierigkeitsgrad</string>
     <string name="standard">Voreinstellung</string>
     <string name="beginner">Anfänger</string>
     <string name="intermediate">Mittleres Niveau</string>
     <string name="expert">Experte</string>
+    <string name="open">Öffnen</string>
     <string name="open_menu">Menü öffnen</string>
     <string name="close_menu">Menü schließen</string>
     <string name="settings">Einstellungen</string>

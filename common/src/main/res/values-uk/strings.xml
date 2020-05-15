@@ -3,12 +3,14 @@
     <string name="app_name">Сапер</string>
     <string name="app_description">Вам потрібно очистити поле від схованих мін, не детонуючи їх.</string>
     <string name="remaining_mines">Залишилося мін</string>
+    <string name="previous_games">Попередня гра</string>
     <string name="install">Встановити</string>
     <string name="minefield">Складність</string>
     <string name="standard">Звичайна</string>
     <string name="beginner">Новачок</string>
     <string name="intermediate">Середній</string>
     <string name="expert">Експрет</string>
+    <string name="open">Відкрити</string>
     <string name="open_menu">Відкрити меню</string>
     <string name="close_menu">Закрити меню</string>
     <string name="settings">Налаштування</string>

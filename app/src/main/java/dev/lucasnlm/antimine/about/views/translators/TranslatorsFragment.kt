@@ -37,8 +37,7 @@ class TranslatorsFragment : Fragment() {
                 DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL)
             )
             layoutManager = LinearLayoutManager(view.context)
+            adapter = aboutViewModel?.getTranslators()
         }
-
-        translators.adapter = aboutViewModel?.getTranslators()
     }
 }
