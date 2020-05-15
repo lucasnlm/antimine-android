@@ -13,6 +13,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        resConfigs 'en', 'cs', 'de', 'el', 'es', 'fr', 'pt', 'ru', 'tr', 'uk', 'vi', 'zh'
     }
 }
 

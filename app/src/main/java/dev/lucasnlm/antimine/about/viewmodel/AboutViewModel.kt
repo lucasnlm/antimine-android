@@ -27,6 +27,10 @@ class AboutViewModel : ViewModel() {
                 sequenceOf("Oswald Boelcke", "wlls_ftn", "Trafalgar-Square")
             ),
             TranslationInfo(
+                "Greek",
+                sequenceOf("Retrial")
+            ),
+            TranslationInfo(
                 "Portuguese (BR)",
                 sequenceOf("Lucas Lima")
             ),
