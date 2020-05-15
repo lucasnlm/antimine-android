@@ -4,7 +4,15 @@ import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 
 class MockSavesRepository : ISavesRepository {
+    override suspend fun getAllSaves(): List<Save> {
+        return listOf()
+    }
+
     override suspend fun fetchCurrentSave(): Save? {
+        return null
+    }
+
+    override suspend fun loadFromId(id: Int): Save? {
         return null
     }
 
