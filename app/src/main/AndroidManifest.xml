@@ -139,11 +139,27 @@
 
         <activity
             android:name="dev.lucasnlm.antimine.about.TextActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.lucasnlm.antimine.about.AboutActivity" />
+        </activity>
 
         <activity
             android:name="dev.lucasnlm.antimine.about.AboutActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.lucasnlm.antimine.GameActivity" />
+        </activity>
+
+        <activity
+            android:name="dev.lucasnlm.antimine.stats.StatsActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.lucasnlm.antimine.GameActivity" />
+        </activity>
 
         <activity
             android:name="dev.lucasnlm.antimine.history.HistoryActivity"

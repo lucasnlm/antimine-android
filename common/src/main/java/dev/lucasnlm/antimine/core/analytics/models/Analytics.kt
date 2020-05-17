@@ -65,6 +65,8 @@ sealed class Analytics(
 
     class OpenAbout : Analytics("Open About")
 
+    class OpenStats : Analytics("Open Stats")
+
     class OpenSettings : Analytics("Open Settings")
 
     class OpenSaveHistory : Analytics("Open Save History")

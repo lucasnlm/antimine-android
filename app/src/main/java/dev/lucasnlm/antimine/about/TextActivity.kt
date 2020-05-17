@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.about
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.view.MenuItem
 import android.view.View
 import dev.lucasnlm.antimine.R
 
@@ -16,8 +15,8 @@ class TextActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        title = intent.getStringExtra(Constants.TEXT_TITLE)
         setContentView(R.layout.activity_text)
-        bindToolbar()
 
         GlobalScope.launch {
             withContext(Dispatchers.Main) {
@@ -39,25 +38,6 @@ class TextActivity : AppCompatActivity() {
                     }
                 }
             }
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var handled = false
-
-        if (item.itemId == android.R.id.home) {
-            onBackPressed()
-            handled = true
-        }
-
-        return handled || super.onOptionsItemSelected(item)
-    }
-
-    private fun bindToolbar() {
-        supportActionBar?.apply {
-            title = intent.getStringExtra(Constants.TEXT_TITLE)
-            setDisplayHomeAsUpEnabled(true)
-            setHomeButtonEnabled(true)
         }
     }
 }

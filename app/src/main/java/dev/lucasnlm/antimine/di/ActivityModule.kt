@@ -6,6 +6,7 @@ import dagger.android.ContributesAndroidInjector
 import dev.lucasnlm.antimine.TvGameActivity
 import dev.lucasnlm.antimine.core.scope.ActivityScope
 import dev.lucasnlm.antimine.history.views.HistoryFragment
+import dev.lucasnlm.antimine.stats.StatsActivity
 
 @Module
 interface ActivityModule {
@@ -16,6 +17,10 @@ interface ActivityModule {
     @ActivityScope
     @ContributesAndroidInjector
     fun contributeHistoryFragmentInjector(): HistoryFragment
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    fun contributeStatsActivityInjector(): StatsActivity
 
     @ActivityScope
     @ContributesAndroidInjector

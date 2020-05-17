@@ -37,6 +37,7 @@ import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
+import dev.lucasnlm.antimine.stats.StatsActivity
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -250,6 +251,7 @@ class GameActivity : DaggerAppCompatActivity() {
                 R.id.rate -> openRateUsLink("Drawer")
                 R.id.share_now -> shareCurrentGame()
                 R.id.previous_games -> openSaveHistory()
+                R.id.stats -> openStats()
                 R.id.install_new -> installFromInstantApp()
                 else -> handled = false
             }
@@ -369,6 +371,13 @@ class GameActivity : DaggerAppCompatActivity() {
     private fun openSaveHistory() {
         analyticsManager.sentEvent(Analytics.OpenSaveHistory())
         Intent(this, HistoryActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
+    private fun openStats() {
+        analyticsManager.sentEvent(Analytics.OpenStats())
+        Intent(this, StatsActivity::class.java).apply {
             startActivity(this)
         }
     }

@@ -45,6 +45,11 @@
             android:checkable="false"
             android:title="@string/previous_games" />
 
+        <item
+            android:id="@+id/stats"
+            android:checkable="false"
+            android:title="@string/events" />
+
     </group>
 
     <group
