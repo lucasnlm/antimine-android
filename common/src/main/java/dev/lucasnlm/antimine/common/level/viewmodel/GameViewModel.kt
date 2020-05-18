@@ -10,9 +10,11 @@ import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.database.models.Save
+import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
@@ -28,6 +30,7 @@ class GameViewModel(
     val application: Application,
     val eventObserver: MutableLiveData<Event>,
     private val savesRepository: ISavesRepository,
+    private val statsRepository: IStatsRepository,
     private val dimensionRepository: IDimensionRepository,
     private val preferencesRepository: IPreferencesRepository,
     private val hapticFeedbackInteractor: IHapticFeedbackInteractor,
@@ -143,6 +146,14 @@ class GameViewModel(
                 levelFacade.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
             )
             levelFacade.setCurrentSaveId(id?.toInt() ?: 0)
+        }
+    }
+
+    private suspend fun saveStats() {
+        if (initialized && levelFacade.hasMines) {
+            levelFacade.getStats(elapsedTimeSeconds.value ?: 0L)?.let {
+                statsRepository.addStats(it)
+            }
         }
     }
 
@@ -303,6 +314,7 @@ class GameViewModel(
         }
 
         GlobalScope.launch {
+            saveStats()
             saveGame()
         }
     }
@@ -321,6 +333,7 @@ class GameViewModel(
         }
 
         GlobalScope.launch {
+            saveStats()
             saveGame()
         }
     }

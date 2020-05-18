@@ -8,12 +8,15 @@ import dev.lucasnlm.antimine.common.level.database.converters.FieldConverter
 import dev.lucasnlm.antimine.common.level.database.converters.MinefieldConverter
 import dev.lucasnlm.antimine.common.level.database.converters.SaveStatusConverter
 import dev.lucasnlm.antimine.common.level.database.dao.SaveDao
+import dev.lucasnlm.antimine.common.level.database.dao.StatsDao
 import dev.lucasnlm.antimine.common.level.database.models.Save
+import dev.lucasnlm.antimine.common.level.database.models.Stats
 
 @Database(
     entities = [
-        Save::class
-    ], version = 2, exportSchema = false
+        Save::class,
+        Stats::class
+    ], version = 3, exportSchema = false
 )
 @TypeConverters(
     FieldConverter::class,
@@ -23,4 +26,5 @@ import dev.lucasnlm.antimine.common.level.database.models.Save
 )
 abstract class AppDataBase : RoomDatabase() {
     abstract fun saveDao(): SaveDao
+    abstract fun statsDao(): StatsDao
 }

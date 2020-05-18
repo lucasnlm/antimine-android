@@ -94,4 +94,6 @@
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
     <string name="rating_button">Yes ❤️️️</string>
     <string name="rating_button_no">No</string>
+    <string name="total_time">Total Time</string>
+    <string name="performance">Performance</string>
 </resources>

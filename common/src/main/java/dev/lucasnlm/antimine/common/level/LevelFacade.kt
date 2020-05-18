@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.common.level
 
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
+import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Mark
@@ -353,6 +354,26 @@ class LevelFacade {
             saveStatus,
             field.toList()
         )
+    }
+
+    fun getStats(duration: Long): Stats? {
+        val gameStatus: SaveStatus = when {
+            checkVictory() -> SaveStatus.VICTORY
+            hasAnyMineExploded() -> SaveStatus.DEFEAT
+            else -> SaveStatus.ON_GOING
+        }
+        return if (gameStatus == SaveStatus.ON_GOING) {
+            null
+        } else {
+            Stats(
+                0,
+                duration,
+                mines.count().toLong(),
+                if (gameStatus == SaveStatus.VICTORY) 1 else 0,
+                minefield.width,
+                minefield.height
+            )
+        }
     }
 
     fun setCurrentSaveId(id: Int) {

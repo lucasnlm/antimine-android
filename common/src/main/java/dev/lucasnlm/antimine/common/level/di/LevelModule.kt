@@ -12,8 +12,10 @@ import dev.lucasnlm.antimine.common.level.repository.DimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
+import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.HapticFeedbackInteractor
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
@@ -35,8 +37,16 @@ open class LevelModule(
         appDataBase.saveDao()
     }
 
+    private val statsDao by lazy {
+        appDataBase.statsDao()
+    }
+
     private val savesRepository by lazy {
         SavesRepository(savesDao)
+    }
+
+    private val statsRepository by lazy {
+        StatsRepository(statsDao)
     }
 
     @Provides
@@ -50,6 +60,7 @@ open class LevelModule(
         application: Application,
         eventObserver: MutableLiveData<Event>,
         savesRepository: ISavesRepository,
+        statsRepository: IStatsRepository,
         dimensionRepository: IDimensionRepository,
         preferencesRepository: IPreferencesRepository,
         hapticFeedbackInteractor: IHapticFeedbackInteractor,
@@ -60,6 +71,7 @@ open class LevelModule(
         application,
         eventObserver,
         savesRepository,
+        statsRepository,
         dimensionRepository,
         preferencesRepository,
         hapticFeedbackInteractor,
@@ -77,6 +89,9 @@ open class LevelModule(
 
     @Provides
     open fun provideSavesRepository(): ISavesRepository = savesRepository
+
+    @Provides
+    open fun provideStatsRepository(): IStatsRepository = statsRepository
 
     @Provides
     open fun provideMinefieldRepository(): IMinefieldRepository = MinefieldRepository()

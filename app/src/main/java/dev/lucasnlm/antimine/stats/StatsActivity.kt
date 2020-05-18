@@ -7,7 +7,7 @@ import dev.lucasnlm.antimine.R
 class StatsActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_empty)
+        setContentView(R.layout.activity_stats)
         setTitle(R.string.events)
     }
 }

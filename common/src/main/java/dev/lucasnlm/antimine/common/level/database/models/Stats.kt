@@ -12,15 +12,15 @@ data class Stats(
     @ColumnInfo(name = "duration")
     val duration: Long,
 
-    @ColumnInfo(name = "durationPerMine")
-    val durationPerMine: Long,
-
     @ColumnInfo(name = "mines")
     val mines: Long,
 
     @ColumnInfo(name = "victory")
-    val victory: Long,
+    val victory: Int,
 
-    @ColumnInfo(name = "victoryPercentage")
-    val victoryPercentage: Long
+    @ColumnInfo(name = "width")
+    val width: Int,
+
+    @ColumnInfo(name = "height")
+    val height: Int
 )

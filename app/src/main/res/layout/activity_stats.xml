@@ -1,5 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="1"
+    android:fitsSystemWindows="true"
+    tools:context=".stats.StatsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TableRow>
+
+        <TextView
+            android:padding="16dp"
+            android:text="@string/mines"
+            android:textColor="@color/text_color" />
+
+        <TextView
+            android:gravity="end"
+            android:padding="16dp"
+            android:text="100" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:padding="16dp"
+            android:text="@string/total_time"
+            android:textColor="@color/text_color" />
+
+        <TextView
+            android:gravity="end"
+            android:padding="16dp"
+            android:text="100" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:padding="16dp"
+            android:text="@string/performance"
+            android:textColor="@color/text_color" />
+
+        <TextView
+            android:gravity="end"
+            android:padding="16dp"
+            android:text="100" />
+    </TableRow>
+</TableLayout>
