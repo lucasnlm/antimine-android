@@ -3,6 +3,7 @@
     <string name="app_name">Antimine</string>
     <string name="app_description">You have to clear a rectangular board containing hidden \"mines\" without detonating any of them.</string>
     <string name="remaining_mines">Remaining mines</string>
+    <string name="games">Games</string>
     <string name="previous_games">Previous Games</string>
     <string name="install">Install</string>
     <string name="minefield">Difficulty</string>
@@ -94,6 +95,8 @@
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
     <string name="rating_button">Yes ❤️️️</string>
     <string name="rating_button_no">No</string>
+    <string name="open_areas">Open Areas</string>
     <string name="total_time">Total Time</string>
+    <string name="average_time">Average Time</string>
     <string name="performance">Performance</string>
 </resources>

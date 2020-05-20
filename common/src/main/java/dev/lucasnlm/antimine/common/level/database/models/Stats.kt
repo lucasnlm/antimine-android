@@ -13,7 +13,7 @@ data class Stats(
     val duration: Long,
 
     @ColumnInfo(name = "mines")
-    val mines: Long,
+    val mines: Int,
 
     @ColumnInfo(name = "victory")
     val victory: Int,
@@ -22,5 +22,8 @@ data class Stats(
     val width: Int,
 
     @ColumnInfo(name = "height")
-    val height: Int
+    val height: Int,
+
+    @ColumnInfo(name = "openArea")
+    val openArea: Int
 )

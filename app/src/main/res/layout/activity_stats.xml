@@ -5,32 +5,78 @@
     android:layout_height="match_parent"
     android:stretchColumns="1"
     android:fitsSystemWindows="true"
+    android:divider="?android:listDivider"
+    android:showDividers="middle"
     tools:context=".stats.StatsActivity">
 
     <TableRow>
+        <TextView
+            android:padding="16dp"
+            android:text="@string/games"
+            android:textColor="@color/text_color" />
 
+        <TextView
+            android:id="@+id/totalGames"
+            android:gravity="end"
+            android:padding="16dp"
+            android:text="0"
+            tools:ignore="HardcodedText" />
+    </TableRow>
+
+    <TableRow>
         <TextView
             android:padding="16dp"
             android:text="@string/mines"
             android:textColor="@color/text_color" />
 
         <TextView
+            android:id="@+id/minesCount"
             android:gravity="end"
             android:padding="16dp"
-            android:text="100" />
+            android:text="-"
+            tools:ignore="HardcodedText" />
     </TableRow>
 
     <TableRow>
-
         <TextView
             android:padding="16dp"
             android:text="@string/total_time"
             android:textColor="@color/text_color" />
 
         <TextView
+            android:id="@+id/totalTime"
             android:gravity="end"
             android:padding="16dp"
-            android:text="100" />
+            android:text="-"
+            tools:ignore="HardcodedText" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:padding="16dp"
+            android:text="@string/average_time"
+            android:textColor="@color/text_color" />
+
+        <TextView
+            android:id="@+id/averageTime"
+            android:gravity="end"
+            android:padding="16dp"
+            android:text="-"
+            tools:ignore="HardcodedText" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:padding="16dp"
+            android:text="@string/open_areas"
+            android:textColor="@color/text_color" />
+
+        <TextView
+            android:id="@+id/openAreas"
+            android:gravity="end"
+            android:padding="16dp"
+            android:text="-"
+            tools:ignore="HardcodedText" />
     </TableRow>
 
     <TableRow>
@@ -41,8 +87,10 @@
             android:textColor="@color/text_color" />
 
         <TextView
+            android:id="@+id/performance"
             android:gravity="end"
             android:padding="16dp"
-            android:text="100" />
+            android:text="-"
+            tools:ignore="HardcodedText" />
     </TableRow>
 </TableLayout>

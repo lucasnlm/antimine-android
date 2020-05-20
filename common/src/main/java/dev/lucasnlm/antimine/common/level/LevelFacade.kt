@@ -368,10 +368,11 @@ class LevelFacade {
             Stats(
                 0,
                 duration,
-                mines.count().toLong(),
+                mines.count(),
                 if (gameStatus == SaveStatus.VICTORY) 1 else 0,
                 minefield.width,
-                minefield.height
+                minefield.height,
+                mines.count { !it.isCovered }
             )
         }
     }
