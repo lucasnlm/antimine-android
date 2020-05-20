@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.stats.model.StatsModel
 
-class StatsViewModel :  ViewModel() {
+class StatsViewModel : ViewModel() {
     val statsObserver = MutableLiveData<StatsModel>()
 
     suspend fun getStatsModel(statsRepository: IStatsRepository): StatsModel? {

@@ -28,6 +28,7 @@ class GameViewModelFactory @Inject constructor(
     private val clock: Clock
 ) : ViewModelProvider.Factory {
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
         if (modelClass.isAssignableFrom(GameViewModel::class.java)) {
             GameViewModel(
