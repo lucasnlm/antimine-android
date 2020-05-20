@@ -3,12 +3,15 @@
     <string name="app_name">Dò mìn</string>
     <string name="app_description">Bạn phải mở tất cả các ô trên một bãi mìn mà không làm nổ cục mìn nào.</string>
     <string name="remaining_mines">Số mìn còn lại</string>
+    <string name="games">Games</string>
+    <string name="previous_games">Previous Games</string>
     <string name="install">Cài đặt</string>
     <string name="minefield">Độ khó</string>
     <string name="standard">Tiêu chuẩn</string>
     <string name="beginner">Dễ</string>
     <string name="intermediate">Trung bình</string>
     <string name="expert">Khó</string>
+    <string name="open">Mở</string>
     <string name="open_menu">Mở menu</string>
     <string name="close_menu">Đóng menu</string>
     <string name="settings">Cài đặt</string>
@@ -92,4 +95,8 @@
     <string name="rating_message">Nếu bạn thích trò chơi này, hãy gửi phản hồi cho chúng tôi. Nhận xét của bạn sẽ giúp chúng tôi rất nhiều.</string>
     <string name="rating_button">Có ❤️️️</string>
     <string name="rating_button_no">Không</string>
+    <string name="open_areas">Open Areas</string>
+    <string name="total_time">Total Time</string>
+    <string name="average_time">Average Time</string>
+    <string name="performance">Performance</string>
 </resources>

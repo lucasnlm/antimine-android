@@ -3,6 +3,7 @@
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté miny, aniž by kterákoliv z nich vybuchla.</string>
     <string name="remaining_mines">Zbývající miny</string>
+    <string name="games">Hry</string>
     <string name="previous_games">Předchozí hry</string>
     <string name="install">Instalovat</string>
     <string name="minefield">Obtížnost</string>
@@ -94,4 +95,8 @@
     <string name="rating_message">Pokud se vám tato hra líbí, dejte nám prosím zpětnou vazbu. Hodně nám to pomůže.</string>
     <string name="rating_button">Ano ❤️️️</string>
     <string name="rating_button_no">Ne</string>
+    <string name="open_areas">Open Areas</string>
+    <string name="total_time">Total Time</string>
+    <string name="average_time">Average Time</string>
+    <string name="performance">Performance</string>
 </resources>

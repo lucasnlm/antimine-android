@@ -3,6 +3,7 @@
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Du musst eine rechteckige Tafel mit versteckten minen räumen, ohne dass eine davon explodiert.</string>
     <string name="remaining_mines">Verbleibende Minen</string>
+    <string name="games">Games</string>
     <string name="previous_games">Vorherige Spiele</string>
     <string name="install">Installieren</string>
     <string name="minefield">Schwierigkeitsgrad</string>
@@ -94,4 +95,8 @@
     <string name="rating_message">Wenn dir dieses Spiel gefällt, gib uns bitte eine Rückmeldung. Es wird uns sehr helfen.</string>
     <string name="rating_button">Ja ❤️️️</string>
     <string name="rating_button_no">Nein</string>
+    <string name="open_areas">Open Areas</string>
+    <string name="total_time">Total Time</string>
+    <string name="average_time">Average Time</string>
+    <string name="performance">Performance</string>
 </resources>

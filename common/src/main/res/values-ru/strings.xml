@@ -3,6 +3,7 @@
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Вам необходимо расчистить прямоугольную площадь со спрятанными минами, не взорвав ни одну из них.</string>
     <string name="remaining_mines">Мин осталось</string>
+    <string name="games">Games</string>
     <string name="previous_games">Предыдущая партия</string>
     <string name="install">Установить</string>
     <string name="minefield">Сложность</string>
@@ -94,4 +95,8 @@
     <string name="rating_message">Нравится игра? Оставьте отзыв, пожалуйста. Это нам очень поможет.</string>
     <string name="rating_button">Да ❤️️️</string>
     <string name="rating_button_no">Нет</string>
+    <string name="open_areas">Open Areas</string>
+    <string name="total_time">Total Time</string>
+    <string name="average_time">Average Time</string>
+    <string name="performance">Performance</string>
 </resources>

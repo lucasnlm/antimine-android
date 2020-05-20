@@ -3,6 +3,7 @@
     <string name="app_name">Antimine</string>
     <string name="app_description">Πρέπει να καθαρίσετε μια ορθογώνια πλακέτα που περιέχει κρυμμένες \"νάρκες\" χωρίς να πυροδοτήσετε καμία από αυτές.</string>
     <string name="remaining_mines">Υπόλοιπες νάρκες</string>
+    <string name="games">Games</string>
     <string name="previous_games">Προηγούμενα Παιχνίδια</string>
     <string name="install">Εγκατάσταση</string>
     <string name="minefield">Δυσκολία</string>
@@ -94,4 +95,8 @@
     <string name="rating_message">Αν σας αρέσει αυτό το παιχνίδι, παρακαλούμε δώστε μας τα σχόλιά σας. Θα μας βοηθήσει πολύ.</string>
     <string name="rating_button">Ναι ❤️️️</string>
     <string name="rating_button_no">Όχι</string>
+    <string name="open_areas">Open Areas</string>
+    <string name="total_time">Total Time</string>
+    <string name="average_time">Average Time</string>
+    <string name="performance">Performance</string>
 </resources>

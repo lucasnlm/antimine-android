@@ -3,6 +3,7 @@
     <string name="app_name">Сапер</string>
     <string name="app_description">Вам потрібно очистити поле від схованих мін, не детонуючи їх.</string>
     <string name="remaining_mines">Залишилося мін</string>
+    <string name="games">Games</string>
     <string name="previous_games">Попередня гра</string>
     <string name="install">Встановити</string>
     <string name="minefield">Складність</string>
@@ -94,4 +95,8 @@
     <string name="rating_message">Якщо вам подобається ця гра, то залиште нам свій відгук. Це нам дуже допоможе.</string>
     <string name="rating_button">Так ❤️️️</string>
     <string name="rating_button_no">Ні</string>
+    <string name="open_areas">Open Areas</string>
+    <string name="total_time">Total Time</string>
+    <string name="average_time">Average Time</string>
+    <string name="performance">Performance</string>
 </resources>

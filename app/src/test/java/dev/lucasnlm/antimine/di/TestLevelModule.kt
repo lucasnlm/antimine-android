@@ -10,6 +10,7 @@ import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
@@ -19,6 +20,7 @@ import dev.lucasnlm.antimine.mocks.MockDimensionRepository
 import dev.lucasnlm.antimine.mocks.MockHapticFeedbackInteractor
 import dev.lucasnlm.antimine.mocks.MockMinefieldRepository
 import dev.lucasnlm.antimine.mocks.MockSavesRepository
+import dev.lucasnlm.antimine.mocks.MockStatsRepository
 
 @Module
 class TestLevelModule(
@@ -35,6 +37,7 @@ class TestLevelModule(
         application: Application,
         eventObserver: MutableLiveData<Event>,
         savesRepository: ISavesRepository,
+        statsRepository: IStatsRepository,
         dimensionRepository: IDimensionRepository,
         preferencesRepository: IPreferencesRepository,
         hapticFeedbackInteractor: IHapticFeedbackInteractor,
@@ -45,6 +48,7 @@ class TestLevelModule(
         application,
         eventObserver,
         savesRepository,
+        statsRepository,
         dimensionRepository,
         preferencesRepository,
         hapticFeedbackInteractor,
@@ -61,6 +65,9 @@ class TestLevelModule(
 
     @Provides
     override fun provideSavesRepository(): ISavesRepository = MockSavesRepository()
+
+    @Provides
+    override fun provideStatsRepository(): IStatsRepository = MockStatsRepository(listOf())
 
     @Provides
     override fun provideMinefieldRepository(): IMinefieldRepository = MockMinefieldRepository()

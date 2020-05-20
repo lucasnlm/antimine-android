@@ -6,12 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import dagger.Module
 import dagger.Provides
 import dev.lucasnlm.antimine.common.level.database.models.Save
+import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.Size
 import dev.lucasnlm.antimine.common.level.utils.Clock
@@ -35,6 +37,7 @@ class TestLevelModule(
         application: Application,
         eventObserver: MutableLiveData<Event>,
         savesRepository: ISavesRepository,
+        statsRepository: IStatsRepository,
         dimensionRepository: IDimensionRepository,
         preferencesRepository: IPreferencesRepository,
         hapticFeedbackInteractor: IHapticFeedbackInteractor,
@@ -45,6 +48,7 @@ class TestLevelModule(
         application,
         eventObserver,
         savesRepository,
+        statsRepository,
         dimensionRepository,
         preferencesRepository,
         hapticFeedbackInteractor,
@@ -89,6 +93,13 @@ class TestLevelModule(
         ) = Minefield(9, 9, 9)
 
         override fun randomSeed(): Long = 200
+    }
+
+    @Provides
+    fun provideStatsRepository(): IStatsRepository = object : IStatsRepository {
+        override suspend fun getAllStats(): List<Stats> = listOf()
+
+        override suspend fun addStats(stats: Stats): Long? = null
     }
 
     @Provides

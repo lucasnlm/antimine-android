@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
@@ -22,7 +21,7 @@ class AboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_empty)
-        bindToolbar()
+        setTitle(R.string.about)
 
         aboutViewModel = ViewModelProviders.of(this).get(AboutViewModel::class.java)
 
@@ -58,23 +57,6 @@ class AboutActivity : AppCompatActivity() {
 
     private fun openSourceCode() {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(SOURCE_CODE)))
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean =
-        when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-
-    private fun bindToolbar() {
-        supportActionBar?.apply {
-            setTitle(R.string.about)
-            setDisplayHomeAsUpEnabled(true)
-            setHomeButtonEnabled(true)
-        }
     }
 
     companion object {
