@@ -195,7 +195,6 @@ class LevelFacade {
     }
 
     fun doubleClick(index: Int): Int = getArea(index).run {
-        @Suppress("unused")
         return when {
             isCovered -> {
                 openField(getArea(index))
