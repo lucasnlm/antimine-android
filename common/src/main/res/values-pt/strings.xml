@@ -3,6 +3,7 @@
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Encontre todas as minas escondidas no campo minado.</string>
     <string name="remaining_mines">Minas Restantes</string>
+    <string name="games">Games</string>
     <string name="previous_games">Jogos Anteriores</string>
     <string name="install">Instalar</string>
     <string name="minefield">Dificuldade</string>
@@ -94,4 +95,8 @@
     <string name="rating_message">Se você está gostando do jogo, por favor deixe um comentário! Isso nos ajuda muito.</string>
     <string name="rating_button">Sim ❤️️️</string>
     <string name="rating_button_no">Não</string>
+    <string name="open_areas">Open Areas</string>
+    <string name="total_time">Total Time</string>
+    <string name="average_time">Average Time</string>
+    <string name="performance">Performance</string>
 </resources>

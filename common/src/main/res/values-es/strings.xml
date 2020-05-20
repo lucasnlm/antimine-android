@@ -3,6 +3,7 @@
     <string name="app_name">Anti-Mina</string>
     <string name="app_description">Usted tiene que limpiar un tablero cuadrado que contiene minas escondidas sin detornarlas.</string>
     <string name="remaining_mines">Minas restantes</string>
+    <string name="games">Games</string>
     <string name="previous_games">Juegos anteriores</string>
     <string name="install">Instalar</string>
     <string name="minefield">Dificultad</string>
@@ -78,7 +79,7 @@
     <string name="auto_flag">Asistente de Juego</string>
     <string name="desc_convered_area">Área cubierta</string>
     <string name="desc_marked_area">Área marcada</string>
-    <string name="desc_question_area">Area dudosa</string>
+    <string name="desc_question_area">Área dudosa</string>
     <string name="desc_wrongly_marked_area">Área marcada incorrectamente</string>
     <string name="settings_general">General</string>
     <string name="settings_vibration_desc">Vibrar al activar la explosión o la bandera</string>
@@ -94,4 +95,8 @@
     <string name="rating_message">Si te gusta este juego, por favor danos un comentario. Nos ayudará mucho.</string>
     <string name="rating_button">Sí ❤️️️</string>
     <string name="rating_button_no">No</string>
+    <string name="open_areas">Open Areas</string>
+    <string name="total_time">Total Time</string>
+    <string name="average_time">Average Time</string>
+    <string name="performance">Performance</string>
 </resources>

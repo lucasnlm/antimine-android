@@ -3,6 +3,7 @@
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Vous devez vider un tableau rectangulaire contenant des mines cachées sans en détonner.</string>
     <string name="remaining_mines">Mines restantes</string>
+    <string name="games">Games</string>
     <string name="previous_games">Parties précédentes</string>
     <string name="install">Installer</string>
     <string name="minefield">Difficulté</string>
@@ -94,4 +95,8 @@
     <string name="rating_message">Si vous aimez ce jeu, n\'hésitez pas à jour donner un retour. Ça nous serait très utile.</string>
     <string name="rating_button">Oui ❤️</string>
     <string name="rating_button_no">Non</string>
+    <string name="open_areas">Open Areas</string>
+    <string name="total_time">Total Time</string>
+    <string name="average_time">Average Time</string>
+    <string name="performance">Performance</string>
 </resources>
