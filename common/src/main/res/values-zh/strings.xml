@@ -3,7 +3,7 @@
     <string name="app_name">反雷 - 扫雷</string>
     <string name="app_description">你需要清除一个隐藏着地雷的矩形面板，不能使任何地雷爆炸。</string>
     <string name="remaining_mines">剩余地雷</string>
-    <string name="games">Games</string>
+    <string name="games">游戏</string>
     <string name="previous_games">前一盘棋</string>
     <string name="install">安装</string>
     <string name="minefield">难度</string>
@@ -67,7 +67,7 @@
     <string name="share_body_text">我在 %1$d秒内完成了%2$d / %3$d。</string>
     <string name="share_body_text_generic">我正在播放 %1$s</string>
     <string name="fail_to_share">分享游戏失败</string>
-    <string name="version_s">版本%1$s</string>
+    <string name="version_s">%1$s - %2$s</string>
     <string name="sound_effects">声音特效</string>
     <string name="quit">退出</string>
     <string name="are_you_sure">确定吗？</string>
@@ -95,8 +95,8 @@
     <string name="rating_message">如果你喜欢这个游戏，请给我们反馈。这将对我们有很多帮助。</string>
     <string name="rating_button">是 ❤️️️</string>
     <string name="rating_button_no">取消</string>
-    <string name="open_areas">Open Areas</string>
-    <string name="total_time">Total Time</string>
-    <string name="average_time">Average Time</string>
-    <string name="performance">Performance</string>
+    <string name="open_areas">开放区域</string>
+    <string name="total_time">总共时间</string>
+    <string name="average_time">平均用时</string>
+    <string name="performance">性能</string>
 </resources>

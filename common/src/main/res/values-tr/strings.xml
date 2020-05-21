@@ -3,7 +3,7 @@
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Hiçbirini patlatmadan gizli mayın içeren dikdörtgen bir tahtayı temizlemelisiniz.</string>
     <string name="remaining_mines">Kalan mayınlar</string>
-    <string name="games">Games</string>
+    <string name="games">Oyunlar</string>
     <string name="previous_games">Önceki Oyun</string>
     <string name="install">Yükle</string>
     <string name="minefield">Zorluk</string>
@@ -95,8 +95,8 @@
     <string name="rating_message">Bu oyunu beğendiyseniz, lütfen bize bir geri bildirim verin. Bize çok yardımcı olacak.</string>
     <string name="rating_button">Evet ❤️️️</string>
     <string name="rating_button_no">Hayır</string>
-    <string name="open_areas">Open Areas</string>
-    <string name="total_time">Total Time</string>
-    <string name="average_time">Average Time</string>
-    <string name="performance">Performance</string>
+    <string name="open_areas">Açık Alanlar</string>
+    <string name="total_time">Toplam Süre</string>
+    <string name="average_time">Ortalama Süre</string>
+    <string name="performance">Performans</string>
 </resources>
