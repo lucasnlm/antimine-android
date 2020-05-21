@@ -41,10 +41,11 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 ## Features
 
 - Game levels: begginner, intermediate, expert and custom
+- Game statistics
 - Android Wear OS support
 - Dark Theme support
 - Save/Resume state when quit/resume game
-- Put flag on long press
+- Put flag on long press or double click
 - Put question mark on double long press
 - Open multiple areas by long pressing the numbers
 - Game assistant to auto-flag discovered mines
