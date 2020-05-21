@@ -95,8 +95,8 @@
     <string name="rating_message">Pokud se vám tato hra líbí, dejte nám prosím zpětnou vazbu. Hodně nám to pomůže.</string>
     <string name="rating_button">Ano ❤️️️</string>
     <string name="rating_button_no">Ne</string>
-    <string name="open_areas">Open Areas</string>
-    <string name="total_time">Total Time</string>
-    <string name="average_time">Average Time</string>
-    <string name="performance">Performance</string>
+    <string name="open_areas">Otevřené oblasti</string>
+    <string name="total_time">Celkový čas</string>
+    <string name="average_time">Průměrný čas</string>
+    <string name="performance">Výkon</string>
 </resources>

@@ -95,8 +95,8 @@
     <string name="rating_message">Se você está gostando do jogo, por favor deixe um comentário! Isso nos ajuda muito.</string>
     <string name="rating_button">Sim ❤️️️</string>
     <string name="rating_button_no">Não</string>
-    <string name="open_areas">Open Areas</string>
-    <string name="total_time">Total Time</string>
-    <string name="average_time">Average Time</string>
-    <string name="performance">Performance</string>
+    <string name="open_areas">Áreas Abertas</string>
+    <string name="total_time">Tempo Total</string>
+    <string name="average_time">Tempo Médio</string>
+    <string name="performance">Desempenho</string>
 </resources>
