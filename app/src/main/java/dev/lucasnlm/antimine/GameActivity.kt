@@ -9,6 +9,7 @@ import android.text.format.DateUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.HandlerCompat.postDelayed
@@ -443,6 +444,7 @@ class GameActivity : DaggerAppCompatActivity() {
                 status = Status.Running
                 viewModel.runClock()
                 invalidateOptionsMenu()
+                keepScreenOn(true)
             }
             Event.Victory -> {
                 val score = Score(
@@ -455,6 +457,7 @@ class GameActivity : DaggerAppCompatActivity() {
                 viewModel.revealAllEmptyAreas()
                 viewModel.victory()
                 invalidateOptionsMenu()
+                keepScreenOn(false)
                 waitAndShowEndGameDialog(
                     victory = true,
                     await = false
@@ -468,6 +471,7 @@ class GameActivity : DaggerAppCompatActivity() {
                 )
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
+                keepScreenOn(false)
                 viewModel.stopClock()
 
                 GlobalScope.launch(context = Dispatchers.Main) {
@@ -565,6 +569,14 @@ class GameActivity : DaggerAppCompatActivity() {
 
         analyticsManager.sentEvent(Analytics.TapRatingRequest(from))
         preferencesRepository.putBoolean(PREFERENCE_REQUEST_RATING, false)
+    }
+
+    private fun keepScreenOn(enabled: Boolean) {
+        if (enabled) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        } else {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
     }
 
     companion object {
