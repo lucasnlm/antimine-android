@@ -21,7 +21,7 @@ Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-andro
 
 ## Download
 
-<a href="https://f-droid.org/en/packages/dev.lucanlm.antimine/">
+<a href="https://f-droid.org/packages/dev.lucanlm.antimine/">
     <img src="https://raw.githubusercontent.com/lucasnlm/antimine-android/master/.github/fdroid.png" alt="Get it on F-Droid" height="80"/>
 </a>
 <a href="https://play.google.com/store/apps/details?id=com.logical.minato">
