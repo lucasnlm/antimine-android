@@ -6,8 +6,8 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        versionCode 603021 // MMmmPPv
-        versionName '6.3.2'
+        versionCode 700011 // MMmmPPv
+        versionName '7.0.1'
         minSdkVersion 16
         targetSdkVersion 29
         resConfigs 'en', 'cs', 'de', 'el', 'es', 'fr', 'pt', 'ru', 'tr', 'uk', 'vi', 'zh'
