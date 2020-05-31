@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="de">
-    <string name="app_name">Anti-Mine</string>
-    <string name="app_description">Du musst eine rechteckige Tafel mit versteckten minen räumen, ohne dass eine davon explodiert.</string>
+    <string name="app_name">Antimine</string>
+    <string name="app_description">Du musst ein rechteckiges Spielfeld, das versteckte Minen enthält, räumen, ohne irgendeine davon zur Explosion zu bringen.</string>
     <string name="remaining_mines">Verbleibende Minen</string>
     <string name="games">Spiele</string>
     <string name="previous_games">Vorherige Spiele</string>
@@ -85,7 +85,7 @@
     <string name="settings_vibration_desc">Vibriert bei Explosion oder Schalten einer Markierung</string>
     <string name="settings_sound_desc">Erzeugt ein Explosionsgeräusch</string>
     <string name="settings_auto_flag_desc">Fügt bei beseitigten Minen automatisch eine Markierung hinzu</string>
-    <string name="settings_gameplay">Spielmechanik</string>
+    <string name="settings_gameplay">Spielablauf</string>
     <string name="settings_accessibility">Barrierefreiheit</string>
     <string name="settings_large_areas">Große Flächen verwenden</string>
     <string name="settings_large_areas_desc">Vergrößert die Tastfläche</string>
