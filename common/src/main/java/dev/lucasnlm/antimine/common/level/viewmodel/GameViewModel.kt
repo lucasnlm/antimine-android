@@ -96,7 +96,41 @@ class GameViewModel(
             else -> eventObserver.postValue(Event.ResumeGame)
         }
 
+        if (save.firstOpen > 0) {
+            levelFacade.singleClick(save.firstOpen)
+        }
+
         analyticsManager.sentEvent(Analytics.ResumePreviousGame())
+        return setup
+    }
+
+    private fun retryGame(save: Save): Minefield {
+        clock.reset()
+        elapsedTimeSeconds.postValue(0L)
+        currentDifficulty = save.difficulty
+
+        val setup = save.minefield
+        levelFacade = LevelFacade(setup, save.seed).apply {
+            plantMinesExcept(save.firstOpen, true)
+            singleClick(save.firstOpen)
+        }
+
+        mineCount.postValue(setup.mines)
+        difficulty.postValue(save.difficulty)
+        levelSetup.postValue(setup)
+        refreshAll()
+
+        eventObserver.postValue(Event.StartNewGame)
+
+        analyticsManager.sentEvent(
+            Analytics.RetryGame(
+                setup, currentDifficulty,
+                levelFacade.seed,
+                useAccessibilityMode(),
+                save.firstOpen
+            )
+        )
+
         return setup
     }
 
@@ -106,6 +140,21 @@ class GameViewModel(
         if (lastGame != null) {
             currentDifficulty = lastGame.difficulty
             resumeGameFromSave(lastGame)
+        } else {
+            // Fail to load
+            startNewGame()
+        }.also {
+            initialized = true
+            oldGame = true
+        }
+    }
+
+    suspend fun retryGame(uid: Int): Minefield = withContext(Dispatchers.IO) {
+        val save = savesRepository.loadFromId(uid)
+
+        if (save != null) {
+            currentDifficulty = save.difficulty
+            retryGame(save)
         } else {
             // Fail to load
             startNewGame()

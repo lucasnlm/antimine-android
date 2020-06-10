@@ -21,6 +21,18 @@ sealed class Analytics(
             )
     )
 
+    class RetryGame(minefield: Minefield, difficulty: Difficulty, seed: Long, useAccessibilityMode: Boolean, firstOpen: Int) :
+        Analytics("New Game", mapOf(
+            "Seed" to seed.toString(),
+            "Difficulty Preset" to difficulty.text,
+            "Width" to minefield.width.toString(),
+            "Height" to minefield.height.toString(),
+            "Mines" to minefield.mines.toString(),
+            "Accessibility" to useAccessibilityMode.toString(),
+            "First Open" to firstOpen.toString()
+        )
+        )
+
     class ResumePreviousGame : Analytics("Resume previous game")
 
     class LongPressArea(index: Int) : Analytics("Long press area",

@@ -38,7 +38,7 @@ class HistoryAdapter(
         holder.itemView.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                data = Uri.parse("antimine://load-game/$uid")
+                data = Uri.parse("antimine://retry-game/$uid")
             }
             it.context.startActivity(intent)
         }

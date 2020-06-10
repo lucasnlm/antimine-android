@@ -41,10 +41,12 @@ class LevelFacade {
     constructor(save: Save) {
         this.minefield = save.minefield
         this.randomGenerator = Random(save.seed)
+        this.saveId = save.uid
+        this.seed = save.seed
+
         this.field = save.field.asSequence()
         this.mines = this.field.filter { it.hasMine }.asSequence()
         this.hasMines = this.mines.count() != 0
-        this.saveId = save.uid
     }
 
     private fun createEmptyField() {
@@ -56,6 +58,8 @@ class LevelFacade {
             val xPosition = (index % width)
             Area(index, xPosition, yPosition)
         }.asSequence()
+        this.hasMines = false
+        this.mines = sequenceOf()
     }
 
     fun getArea(id: Int) = field.first { it.id == id }
