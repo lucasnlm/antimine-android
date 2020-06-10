@@ -35,7 +35,8 @@
     <string name="disconnect">Disconnect</string>
     <string name="disconnected">Disconnected</string>
     <string name="new_game">New Game</string>
-    <string name="share">Share</string>    <string name="share_menu">Share…</string>
+    <string name="share">Share</string>
+    <string name="share_menu">Share…</string>
     <string name="new_game_request">Do you want to start a new game?</string>
     <string name="yes">Yes</string>
     <string name="general">General</string>
