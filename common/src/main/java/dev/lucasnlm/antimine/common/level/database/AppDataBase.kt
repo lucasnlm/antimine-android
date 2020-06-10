@@ -16,7 +16,7 @@ import dev.lucasnlm.antimine.common.level.database.models.Stats
     entities = [
         Save::class,
         Stats::class
-    ], version = 3, exportSchema = false
+    ], version = 4, exportSchema = false
 )
 @TypeConverters(
     FieldConverter::class,
