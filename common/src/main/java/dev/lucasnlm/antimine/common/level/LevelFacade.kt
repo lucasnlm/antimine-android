@@ -16,6 +16,7 @@ class LevelFacade {
     private val randomGenerator: Random
     private val startTime = System.currentTimeMillis()
     private var saveId = 0
+    private var firstOpen = 0
 
     var hasMines = false
         private set
@@ -108,6 +109,7 @@ class LevelFacade {
             }
         }
 
+        firstOpen = safeIndex
         field.filterNot { it.safeZone }
             .toSet()
             .shuffled(randomGenerator)
@@ -350,6 +352,7 @@ class LevelFacade {
             duration,
             minefield,
             difficulty,
+            firstOpen,
             saveStatus,
             field.toList()
         )

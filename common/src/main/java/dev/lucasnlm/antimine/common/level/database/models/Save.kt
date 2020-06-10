@@ -30,6 +30,9 @@ data class Save(
     @ColumnInfo(name = "difficulty")
     val difficulty: Difficulty,
 
+    @ColumnInfo(name = "firstOpen")
+    val firstOpen: Int,
+
     @TypeConverters(SaveStatusConverter::class)
     @ColumnInfo(name = "status")
     val status: SaveStatus,
