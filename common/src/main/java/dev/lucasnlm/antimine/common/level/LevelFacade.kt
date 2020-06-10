@@ -30,11 +30,11 @@ class LevelFacade {
     var mines: Sequence<Area> = sequenceOf()
         private set
 
-    constructor(minefield: Minefield, seed: Long) {
+    constructor(minefield: Minefield, seed: Long, saveId: Int? = null) {
         this.minefield = minefield
         this.randomGenerator = Random(seed)
         this.seed = seed
-        this.saveId = 0
+        this.saveId = saveId ?: 0
         createEmptyField()
     }
 
