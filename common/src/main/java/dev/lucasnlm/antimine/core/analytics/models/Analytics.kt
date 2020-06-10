@@ -18,7 +18,7 @@ sealed class Analytics(
             "Height" to minefield.height.toString(),
             "Mines" to minefield.mines.toString(),
             "Accessibility" to useAccessibilityMode.toString()
-            )
+        )
     )
 
     class RetryGame(minefield: Minefield, difficulty: Difficulty, seed: Long, useAccessibilityMode: Boolean, firstOpen: Int) :
@@ -31,7 +31,7 @@ sealed class Analytics(
             "Accessibility" to useAccessibilityMode.toString(),
             "First Open" to firstOpen.toString()
         )
-        )
+    )
 
     class ResumePreviousGame : Analytics("Resume previous game")
 
@@ -84,14 +84,12 @@ sealed class Analytics(
     class OpenSaveHistory : Analytics("Open Save History")
 
     class ShowRatingRequest(usages: Int) : Analytics("Shown Rating Request",
-        mapOf(
-            "Usages" to usages.toString()
-        ))
+        mapOf("Usages" to usages.toString())
+    )
 
     class TapRatingRequest(from: String) : Analytics("Rating Request",
-        mapOf(
-            "From" to from
-        ))
+        mapOf("From" to from)
+    )
 
     class TapGameReset(resign: Boolean) : Analytics("Game reset",
         mapOf("Resign" to resign.toString())
