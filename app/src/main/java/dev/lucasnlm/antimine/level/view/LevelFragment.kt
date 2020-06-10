@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.DaggerFragment
+import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
@@ -67,10 +68,12 @@ open class LevelFragment : DaggerFragment() {
         GlobalScope.launch {
             val loadGameUid = checkLoadGameDeepLink()
             val newGameDeepLink = checkNewGameDeepLink()
+            val retryDeepLink = checkRetryGameDeepLink()
 
             val levelSetup = when {
                 loadGameUid != null -> viewModel.loadGame(loadGameUid)
                 newGameDeepLink != null -> viewModel.startNewGame(newGameDeepLink)
+                retryDeepLink != null -> viewModel.retryGame(retryDeepLink)
                 else -> viewModel.loadLastGame()
             }
 
@@ -121,12 +124,12 @@ open class LevelFragment : DaggerFragment() {
     }
 
     private fun checkNewGameDeepLink(): Difficulty? = activity?.intent?.data?.let { uri ->
-        if (uri.scheme == DEFAULT_SCHEME) {
-            when (uri.schemeSpecificPart.removePrefix(DEEP_LINK_NEW_GAME_HOST)) {
-                DEEP_LINK_BEGINNER -> Difficulty.Beginner
-                DEEP_LINK_INTERMEDIATE -> Difficulty.Intermediate
-                DEEP_LINK_EXPERT -> Difficulty.Expert
-                DEEP_LINK_STANDARD -> Difficulty.Standard
+        if (uri.scheme == DeepLink.DEFAULT_SCHEME) {
+            when (uri.schemeSpecificPart.removePrefix(DeepLink.DEEP_LINK_NEW_GAME_HOST)) {
+                DeepLink.DEEP_LINK_BEGINNER -> Difficulty.Beginner
+                DeepLink.DEEP_LINK_INTERMEDIATE -> Difficulty.Intermediate
+                DeepLink.DEEP_LINK_EXPERT -> Difficulty.Expert
+                DeepLink.DEEP_LINK_STANDARD -> Difficulty.Standard
                 else -> null
             }
         } else {
@@ -135,8 +138,16 @@ open class LevelFragment : DaggerFragment() {
     }
 
     private fun checkLoadGameDeepLink(): Int? = activity?.intent?.data?.let { uri ->
-        if (uri.scheme == DEFAULT_SCHEME) {
-            uri.schemeSpecificPart.removePrefix(DEEP_LINK_LOAD_GAME_HOST).toIntOrNull()
+        if (uri.scheme == DeepLink.DEFAULT_SCHEME) {
+            uri.schemeSpecificPart.removePrefix(DeepLink.DEEP_LINK_LOAD_GAME_HOST).toIntOrNull()
+        } else {
+            null
+        }
+    }
+
+    private fun checkRetryGameDeepLink(): Int? = activity?.intent?.data?.let { uri ->
+        if (uri.scheme == DeepLink.DEFAULT_SCHEME) {
+            uri.schemeSpecificPart.removePrefix(DeepLink.DEEP_LINK_RETRY_HOST).toIntOrNull()
         } else {
             null
         }
@@ -154,15 +165,4 @@ open class LevelFragment : DaggerFragment() {
         ((recyclerGrid.measuredHeight - dimensionRepository.areaSizeWithPadding() * boardHeight) / 2)
             .coerceAtLeast(0.0f)
             .toInt()
-
-    companion object {
-        const val DEFAULT_SCHEME = "antimine"
-
-        const val DEEP_LINK_NEW_GAME_HOST = "//new-game/"
-        const val DEEP_LINK_LOAD_GAME_HOST = "//load-game/"
-        const val DEEP_LINK_BEGINNER = "beginner"
-        const val DEEP_LINK_INTERMEDIATE = "intermediate"
-        const val DEEP_LINK_EXPERT = "expert"
-        const val DEEP_LINK_STANDARD = "standard"
-    }
 }
