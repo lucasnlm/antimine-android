@@ -12,7 +12,6 @@ import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import kotlinx.android.synthetic.main.activity_level.*
 import javax.inject.Inject
 import android.text.format.DateFormat
@@ -32,9 +31,6 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
 
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory
-
-    @Inject
-    lateinit var preferencesRepository: IPreferencesRepository
 
     private lateinit var viewModel: GameViewModel
     private lateinit var ambientController: AmbientModeSupport.AmbientController
