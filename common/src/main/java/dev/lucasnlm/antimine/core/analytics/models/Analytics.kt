@@ -10,8 +10,14 @@ sealed class Analytics(
 ) {
     class Open : Analytics("Open game")
 
-    class NewGame(minefield: Minefield, difficulty: Difficulty, seed: Long, useAccessibilityMode: Boolean) :
-        Analytics("New Game", mapOf(
+    class NewGame(
+        minefield: Minefield,
+        difficulty: Difficulty,
+        seed: Long,
+        useAccessibilityMode: Boolean
+    ) : Analytics(
+        "New Game",
+        mapOf(
             "Seed" to seed.toString(),
             "Difficulty Preset" to difficulty.text,
             "Width" to minefield.width.toString(),
@@ -21,8 +27,15 @@ sealed class Analytics(
         )
     )
 
-    class RetryGame(minefield: Minefield, difficulty: Difficulty, seed: Long, useAccessibilityMode: Boolean, firstOpen: Int) :
-        Analytics("New Game", mapOf(
+    class RetryGame(
+        minefield: Minefield,
+        difficulty: Difficulty,
+        seed: Long,
+        useAccessibilityMode: Boolean,
+        firstOpen: Int
+    ) : Analytics(
+        "Retry Game",
+        mapOf(
             "Seed" to seed.toString(),
             "Difficulty Preset" to difficulty.text,
             "Width" to minefield.width.toString(),
@@ -35,25 +48,20 @@ sealed class Analytics(
 
     class ResumePreviousGame : Analytics("Resume previous game")
 
-    class LongPressArea(index: Int) : Analytics("Long press area",
-        mapOf("Index" to index.toString())
-    )
+    class LongPressArea(index: Int) : Analytics("Long press area", mapOf("Index" to index.toString()))
 
-    class LongPressMultipleArea(index: Int) : Analytics("Long press to open multiple",
-        mapOf("Index" to index.toString())
-    )
+    class LongPressMultipleArea(index: Int) : Analytics("Long press to open multiple", mapOf("Index" to index.toString()))
 
-    class PressArea(index: Int) : Analytics("Press area",
-        mapOf("Index" to index.toString())
-    )
+    class PressArea(index: Int) : Analytics("Press area", mapOf("Index" to index.toString()))
 
-    class GameOver(time: Long, score: Score) : Analytics("Game Over",
+    class GameOver(time: Long, score: Score) : Analytics(
+        "Game Over",
         mapOf(
             "Time" to time.toString(),
             "Right Mines" to score.rightMines.toString(),
             "Total Mines" to score.totalMines.toString(),
             "Total Area" to score.totalArea.toString()
-            )
+        )
     )
 
     class Victory(time: Long, score: Score, difficulty: Difficulty) : Analytics(
@@ -83,15 +91,9 @@ sealed class Analytics(
 
     class OpenSaveHistory : Analytics("Open Save History")
 
-    class ShowRatingRequest(usages: Int) : Analytics("Shown Rating Request",
-        mapOf("Usages" to usages.toString())
-    )
+    class ShowRatingRequest(usages: Int) : Analytics("Shown Rating Request", mapOf("Usages" to usages.toString()))
 
-    class TapRatingRequest(from: String) : Analytics("Rating Request",
-        mapOf("From" to from)
-    )
+    class TapRatingRequest(from: String) : Analytics("Rating Request", mapOf("From" to from))
 
-    class TapGameReset(resign: Boolean) : Analytics("Game reset",
-        mapOf("Resign" to resign.toString())
-    )
+    class TapGameReset(resign: Boolean) : Analytics("Game reset", mapOf("Resign" to resign.toString()))
 }

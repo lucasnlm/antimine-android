@@ -8,6 +8,7 @@ import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.database.converters.FieldConverter
+import dev.lucasnlm.antimine.common.level.database.converters.FirstOpenConverter
 import dev.lucasnlm.antimine.common.level.database.converters.SaveStatusConverter
 
 @Entity
@@ -30,8 +31,9 @@ data class Save(
     @ColumnInfo(name = "difficulty")
     val difficulty: Difficulty,
 
+    @TypeConverters(FirstOpenConverter::class)
     @ColumnInfo(name = "firstOpen")
-    val firstOpen: Int,
+    val firstOpen: FirstOpen,
 
     @TypeConverters(SaveStatusConverter::class)
     @ColumnInfo(name = "status")

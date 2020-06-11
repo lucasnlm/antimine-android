@@ -124,12 +124,12 @@ open class LevelFragment : DaggerFragment() {
     }
 
     private fun checkNewGameDeepLink(): Difficulty? = activity?.intent?.data?.let { uri ->
-        if (uri.scheme == DeepLink.DEFAULT_SCHEME) {
-            when (uri.schemeSpecificPart.removePrefix(DeepLink.DEEP_LINK_NEW_GAME_HOST)) {
-                DeepLink.DEEP_LINK_BEGINNER -> Difficulty.Beginner
-                DeepLink.DEEP_LINK_INTERMEDIATE -> Difficulty.Intermediate
-                DeepLink.DEEP_LINK_EXPERT -> Difficulty.Expert
-                DeepLink.DEEP_LINK_STANDARD -> Difficulty.Standard
+        if (uri.scheme == DeepLink.SCHEME && uri.authority == DeepLink.NEW_GAME_AUTHORITY) {
+            when (uri.pathSegments.firstOrNull()) {
+                DeepLink.BEGINNER_PATH -> Difficulty.Beginner
+                DeepLink.INTERMEDIATE_PATH -> Difficulty.Intermediate
+                DeepLink.EXPERT_PATH -> Difficulty.Expert
+                DeepLink.STANDARD_PATH -> Difficulty.Standard
                 else -> null
             }
         } else {
@@ -138,16 +138,16 @@ open class LevelFragment : DaggerFragment() {
     }
 
     private fun checkLoadGameDeepLink(): Int? = activity?.intent?.data?.let { uri ->
-        if (uri.scheme == DeepLink.DEFAULT_SCHEME) {
-            uri.schemeSpecificPart.removePrefix(DeepLink.DEEP_LINK_LOAD_GAME_HOST).toIntOrNull()
+        if (uri.scheme == DeepLink.SCHEME && uri.authority == DeepLink.LOAD_GAME_AUTHORITY) {
+            uri.pathSegments.firstOrNull()?.toIntOrNull()
         } else {
             null
         }
     }
 
     private fun checkRetryGameDeepLink(): Int? = activity?.intent?.data?.let { uri ->
-        if (uri.scheme == DeepLink.DEFAULT_SCHEME) {
-            uri.schemeSpecificPart.removePrefix(DeepLink.DEEP_LINK_RETRY_HOST).toIntOrNull()
+        if (uri.scheme == DeepLink.SCHEME && uri.authority == DeepLink.RETRY_HOST_AUTHORITY) {
+            uri.pathSegments.firstOrNull()?.toIntOrNull()
         } else {
             null
         }
