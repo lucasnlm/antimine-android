@@ -150,7 +150,7 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
                 }
             }
 
-        private const val DIALOG_IS_VICTORY = "dialog_state"
+        const val DIALOG_IS_VICTORY = "dialog_state"
         private const val DIALOG_TIME = "dialog_time"
         private const val DIALOG_RIGHT_MINES = "dialog_right_mines"
         private const val DIALOG_TOTAL_MINES = "dialog_total_mines"

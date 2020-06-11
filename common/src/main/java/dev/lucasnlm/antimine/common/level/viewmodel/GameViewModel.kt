@@ -109,7 +109,7 @@ class GameViewModel(
         currentDifficulty = save.difficulty
 
         val setup = save.minefield
-        levelFacade = LevelFacade(setup, save.seed).apply {
+        levelFacade = LevelFacade(setup, save.seed, save.uid).apply {
             if (save.firstOpen is FirstOpen.Position) {
                 plantMinesExcept(save.firstOpen.value, true)
                 singleClick(save.firstOpen.value)

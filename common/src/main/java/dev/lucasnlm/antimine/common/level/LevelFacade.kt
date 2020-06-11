@@ -44,6 +44,7 @@ class LevelFacade {
         this.randomGenerator = Random(save.seed)
         this.saveId = save.uid
         this.seed = save.seed
+        this.firstOpen = save.firstOpen
 
         this.field = save.field.asSequence()
         this.mines = this.field.filter { it.hasMine }.asSequence()
