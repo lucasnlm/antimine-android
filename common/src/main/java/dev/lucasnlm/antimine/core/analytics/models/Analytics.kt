@@ -50,7 +50,8 @@ sealed class Analytics(
 
     class LongPressArea(index: Int) : Analytics("Long press area", mapOf("Index" to index.toString()))
 
-    class LongPressMultipleArea(index: Int) : Analytics("Long press to open multiple", mapOf("Index" to index.toString()))
+    class LongPressMultipleArea(index: Int) :
+        Analytics("Long press to open multiple", mapOf("Index" to index.toString()))
 
     class PressArea(index: Int) : Analytics("Press area", mapOf("Index" to index.toString()))
 

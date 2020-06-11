@@ -95,31 +95,43 @@ open class LevelFragment : DaggerFragment() {
         }
 
         viewModel.run {
-            field.observe(viewLifecycleOwner, Observer {
-                areaAdapter.bindField(it)
-            })
+            field.observe(
+                viewLifecycleOwner,
+                Observer {
+                    areaAdapter.bindField(it)
+                }
+            )
 
-            levelSetup.observe(viewLifecycleOwner, Observer {
-                recyclerGrid.layoutManager = makeNewLayoutManager(it.width, it.height)
-            })
+            levelSetup.observe(
+                viewLifecycleOwner,
+                Observer {
+                    recyclerGrid.layoutManager = makeNewLayoutManager(it.width, it.height)
+                }
+            )
 
-            fieldRefresh.observe(viewLifecycleOwner, Observer {
-                areaAdapter.notifyItemChanged(it)
-            })
+            fieldRefresh.observe(
+                viewLifecycleOwner,
+                Observer {
+                    areaAdapter.notifyItemChanged(it)
+                }
+            )
 
-            eventObserver.observe(viewLifecycleOwner, Observer {
-                when (it) {
-                    Event.ResumeGameOver,
-                    Event.GameOver,
-                    Event.Victory,
-                    Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
-                    Event.Running,
-                    Event.ResumeGame,
-                    Event.StartNewGame -> areaAdapter.setClickEnabled(true)
-                    else -> {
+            eventObserver.observe(
+                viewLifecycleOwner,
+                Observer {
+                    when (it) {
+                        Event.ResumeGameOver,
+                        Event.GameOver,
+                        Event.Victory,
+                        Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
+                        Event.Running,
+                        Event.ResumeGame,
+                        Event.StartNewGame -> areaAdapter.setClickEnabled(true)
+                        else -> {
+                        }
                     }
                 }
-            })
+            )
         }
     }
 

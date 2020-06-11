@@ -12,11 +12,11 @@ sealed class FirstOpen {
     /**
      * Describes the [value] of the first step.
      */
-    class Position (
+    class Position(
         val value: Int
     ) : FirstOpen()
 
-    override fun toString(): String = when(this) {
+    override fun toString(): String = when (this) {
         is Position -> value.toString()
         else -> "Unknown"
     }

@@ -96,42 +96,60 @@ class GameActivity : DaggerAppCompatActivity() {
     private fun bindViewModel() = viewModel.apply {
         var lastEvent: Event? = null // TODO use distinctUntilChanged when available
 
-        eventObserver.observe(this@GameActivity, Observer {
-            if (lastEvent != it) {
-                onGameEvent(it)
-                lastEvent = it
+        eventObserver.observe(
+            this@GameActivity,
+            Observer {
+                if (lastEvent != it) {
+                    onGameEvent(it)
+                    lastEvent = it
+                }
             }
-        })
+        )
 
-        elapsedTimeSeconds.observe(this@GameActivity, Observer {
-            timer.apply {
-                visibility = if (it == 0L) View.GONE else View.VISIBLE
-                text = DateUtils.formatElapsedTime(it)
+        elapsedTimeSeconds.observe(
+            this@GameActivity,
+            Observer {
+                timer.apply {
+                    visibility = if (it == 0L) View.GONE else View.VISIBLE
+                    text = DateUtils.formatElapsedTime(it)
+                }
+                currentTime = it
             }
-            currentTime = it
-        })
+        )
 
-        mineCount.observe(this@GameActivity, Observer {
-            minesCount.apply {
-                visibility = View.VISIBLE
-                text = it.toString()
+        mineCount.observe(
+            this@GameActivity,
+            Observer {
+                minesCount.apply {
+                    visibility = View.VISIBLE
+                    text = it.toString()
+                }
             }
-        })
+        )
 
-        difficulty.observe(this@GameActivity, Observer {
-            onChangeDifficulty(it)
-        })
+        difficulty.observe(
+            this@GameActivity,
+            Observer {
+                onChangeDifficulty(it)
+            }
+        )
 
-        field.observe(this@GameActivity, Observer { area ->
-            val mines = area.filter { it.hasMine }
-            totalArea = area.count()
-            totalMines = mines.count()
-            rightMines = mines.map { if (it.mark.isFlag()) 1 else 0 }.sum()
-        })
+        field.observe(
+            this@GameActivity,
+            Observer { area ->
+                val mines = area.filter { it.hasMine }
+                totalArea = area.count()
+                totalMines = mines.count()
+                rightMines = mines.map { if (it.mark.isFlag()) 1 else 0 }.sum()
+            }
+        )
 
-        saveId.observe(this@GameActivity, Observer {
-            currentSaveId = it
-        })
+        saveId.observe(
+            this@GameActivity,
+            Observer {
+                currentSaveId = it
+            }
+        )
     }
 
     override fun onBackPressed() {
@@ -415,9 +433,13 @@ class GameActivity : DaggerAppCompatActivity() {
 
     private fun waitAndShowEndGameDialog(victory: Boolean, await: Boolean) {
         if (await && viewModel.explosionDelay() != 0L) {
-            postDelayed(Handler(), {
-                showEndGameDialog(victory)
-            }, null, (viewModel.explosionDelay() * 0.3).toLong())
+            postDelayed(
+                Handler(),
+                {
+                    showEndGameDialog(victory)
+                },
+                null, (viewModel.explosionDelay() * 0.3).toLong()
+            )
         } else {
             showEndGameDialog(victory)
         }

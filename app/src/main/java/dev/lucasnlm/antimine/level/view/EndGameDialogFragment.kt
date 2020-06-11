@@ -139,7 +139,7 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
         }.create()
 
     companion object {
-        fun newInstance(victory: Boolean, rightMines: Int, totalMines: Int, time: Long, saveId: Long): EndGameDialogFragment =
+        fun newInstance(victory: Boolean, rightMines: Int, totalMines: Int, time: Long, saveId: Long) =
             EndGameDialogFragment().apply {
                 arguments = Bundle().apply {
                     putBoolean(DIALOG_IS_VICTORY, victory)

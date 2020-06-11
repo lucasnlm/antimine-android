@@ -14,17 +14,17 @@ class StatsViewModel : ViewModel() {
 
         return if (statsCount > 0) {
             val result = stats.fold(
-                    StatsModel(statsCount, 0L, 0L, 0, 0, 0)
-                ) { acc, value ->
-                    StatsModel(
-                        acc.totalGames,
-                        acc.duration + value.duration,
-                        0,
-                        acc.mines + value.mines,
-                        acc.victory + value.victory,
-                        acc.openArea + value.openArea
-                    )
-                }
+                StatsModel(statsCount, 0L, 0L, 0, 0, 0)
+            ) { acc, value ->
+                StatsModel(
+                    acc.totalGames,
+                    acc.duration + value.duration,
+                    0,
+                    acc.mines + value.mines,
+                    acc.victory + value.victory,
+                    acc.openArea + value.openArea
+                )
+            }
             result.copy(averageDuration = result.duration / result.totalGames)
         } else {
             StatsModel(0, 0, 0, 0, 0, 0)

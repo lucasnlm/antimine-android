@@ -12,4 +12,3 @@ object DeepLink {
     const val EXPERT_PATH = "expert"
     const val STANDARD_PATH = "standard"
 }
-
