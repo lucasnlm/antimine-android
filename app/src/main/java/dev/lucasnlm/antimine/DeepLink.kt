@@ -1,15 +1,15 @@
 package dev.lucasnlm.antimine
 
-sealed class DeepLink {
-    companion object {
-        const val DEFAULT_SCHEME = "antimine"
+object DeepLink {
+    const val SCHEME = "antimine"
 
-        const val DEEP_LINK_NEW_GAME_HOST = "//new-game/"
-        const val DEEP_LINK_RETRY_HOST = "//retry-game/"
-        const val DEEP_LINK_LOAD_GAME_HOST = "//load-game/"
-        const val DEEP_LINK_BEGINNER = "beginner"
-        const val DEEP_LINK_INTERMEDIATE = "intermediate"
-        const val DEEP_LINK_EXPERT = "expert"
-        const val DEEP_LINK_STANDARD = "standard"
-    }
+    const val NEW_GAME_AUTHORITY = "new-game"
+    const val RETRY_HOST_AUTHORITY = "retry-game"
+    const val LOAD_GAME_AUTHORITY = "load-game"
+
+    const val BEGINNER_PATH = "beginner"
+    const val INTERMEDIATE_PATH = "intermediate"
+    const val EXPERT_PATH = "expert"
+    const val STANDARD_PATH = "standard"
 }
+
