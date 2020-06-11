@@ -5,6 +5,7 @@ import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.common.level.LevelFacade
+import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
@@ -96,10 +97,6 @@ class GameViewModel(
             else -> eventObserver.postValue(Event.ResumeGame)
         }
 
-        if (save.firstOpen > 0) {
-            levelFacade.singleClick(save.firstOpen)
-        }
-
         analyticsManager.sentEvent(Analytics.ResumePreviousGame())
         return setup
     }
@@ -111,8 +108,10 @@ class GameViewModel(
 
         val setup = save.minefield
         levelFacade = LevelFacade(setup, save.seed).apply {
-            plantMinesExcept(save.firstOpen, true)
-            singleClick(save.firstOpen)
+            if (save.firstOpen is FirstOpen.Position) {
+                plantMinesExcept(save.firstOpen.value, true)
+                singleClick(save.firstOpen.value)
+            }
         }
 
         mineCount.postValue(setup.mines)
@@ -127,7 +126,7 @@ class GameViewModel(
                 setup, currentDifficulty,
                 levelFacade.seed,
                 useAccessibilityMode(),
-                save.firstOpen
+                save.firstOpen.toInt()
             )
         )
 

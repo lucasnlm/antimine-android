@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.common.level
 
+import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.database.models.Stats
@@ -16,7 +17,7 @@ class LevelFacade {
     private val randomGenerator: Random
     private val startTime = System.currentTimeMillis()
     private var saveId = 0
-    private var firstOpen = 0
+    private var firstOpen: FirstOpen = FirstOpen.Unknown
 
     var hasMines = false
         private set
@@ -113,7 +114,7 @@ class LevelFacade {
             }
         }
 
-        firstOpen = safeIndex
+        firstOpen = FirstOpen.Position(safeIndex)
         field.filterNot { it.safeZone }
             .toSet()
             .shuffled(randomGenerator)
