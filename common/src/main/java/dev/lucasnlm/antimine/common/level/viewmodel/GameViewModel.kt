@@ -49,6 +49,7 @@ class GameViewModel(
     val mineCount = MutableLiveData<Int>()
     val difficulty = MutableLiveData<Difficulty>()
     val levelSetup = MutableLiveData<Minefield>()
+    val saveId = MutableLiveData<Long>()
 
     fun startNewGame(newDifficulty: Difficulty = currentDifficulty): Minefield {
         clock.reset()
@@ -97,6 +98,7 @@ class GameViewModel(
             else -> eventObserver.postValue(Event.ResumeGame)
         }
 
+        saveId.postValue(save.uid.toLong())
         analyticsManager.sentEvent(Analytics.ResumePreviousGame())
         return setup
     }
@@ -130,6 +132,7 @@ class GameViewModel(
             )
         )
 
+        saveId.postValue(save.uid.toLong())
         return setup
     }
 
@@ -137,6 +140,7 @@ class GameViewModel(
         val lastGame = savesRepository.loadFromId(uid)
 
         if (lastGame != null) {
+            saveId.postValue(uid.toLong())
             currentDifficulty = lastGame.difficulty
             resumeGameFromSave(lastGame)
         } else {
@@ -152,6 +156,7 @@ class GameViewModel(
         val save = savesRepository.loadFromId(uid)
 
         if (save != null) {
+            saveId.postValue(uid.toLong())
             currentDifficulty = save.difficulty
             retryGame(save)
         } else {
@@ -167,6 +172,7 @@ class GameViewModel(
         val lastGame = savesRepository.fetchCurrentSave()
 
         if (lastGame != null) {
+            saveId.postValue(lastGame.uid.toLong())
             currentDifficulty = lastGame.difficulty
             resumeGameFromSave(lastGame)
         } else {
@@ -192,6 +198,7 @@ class GameViewModel(
             val id = savesRepository.saveGame(
                 levelFacade.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
             )
+            saveId.postValue(id)
             levelFacade.setCurrentSaveId(id?.toInt() ?: 0)
         }
     }

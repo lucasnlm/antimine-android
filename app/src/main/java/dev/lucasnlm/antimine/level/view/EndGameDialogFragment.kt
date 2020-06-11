@@ -36,6 +36,7 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
     private var time: Long = 0L
     private var rightMines: Int = 0
     private var totalMines: Int = 0
+    private var saveId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +49,11 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
 
         arguments?.run {
             isVictory = getBoolean(DIALOG_IS_VICTORY) == true
-            time = getLong(DIALOG_TIME)
-            rightMines = getInt(DIALOG_RIGHT_MINES)
-            totalMines = getInt(DIALOG_TOTAL_MINES)
+            time = getLong(DIALOG_TIME, 0L)
+            rightMines = getInt(DIALOG_RIGHT_MINES, 0)
+            totalMines = getInt(DIALOG_TOTAL_MINES, 0)
             hasValidData = (totalMines > 0)
+            saveId = getLong(DIALOG_SAVE_ID, 0L)
         }
     }
 
@@ -118,7 +120,7 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
                         instantAppManager.showInstallPrompt(this, null, 0, null)
                     }
                 }
-            } else {
+            } else if (isVictory) {
                 setNeutralButton(R.string.share) { _, _ ->
                     val setup = viewModel.levelSetup.value
                     val field = viewModel.field.value
@@ -127,24 +129,32 @@ class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
                         shareViewModel.share(setup, field, time)
                     }
                 }
+            } else {
+                setNeutralButton(R.string.retry) { _, _ ->
+                    GlobalScope.launch {
+                        viewModel.retryGame(saveId.toInt())
+                    }
+                }
             }
         }.create()
 
     companion object {
-        fun newInstance(victory: Boolean, rightMines: Int, totalMines: Int, time: Long): EndGameDialogFragment =
+        fun newInstance(victory: Boolean, rightMines: Int, totalMines: Int, time: Long, saveId: Long): EndGameDialogFragment =
             EndGameDialogFragment().apply {
                 arguments = Bundle().apply {
                     putBoolean(DIALOG_IS_VICTORY, victory)
                     putInt(DIALOG_RIGHT_MINES, rightMines)
                     putInt(DIALOG_TOTAL_MINES, totalMines)
                     putLong(DIALOG_TIME, time)
+                    putLong(DIALOG_SAVE_ID, saveId)
                 }
             }
 
-        const val DIALOG_IS_VICTORY = "dialog_state"
+        private const val DIALOG_IS_VICTORY = "dialog_state"
         private const val DIALOG_TIME = "dialog_time"
         private const val DIALOG_RIGHT_MINES = "dialog_right_mines"
         private const val DIALOG_TOTAL_MINES = "dialog_total_mines"
+        private const val DIALOG_SAVE_ID = "dialog_save_id"
 
         val TAG = EndGameDialogFragment::class.simpleName
     }

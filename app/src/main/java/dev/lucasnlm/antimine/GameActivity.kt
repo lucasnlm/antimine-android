@@ -71,6 +71,7 @@ class GameActivity : DaggerAppCompatActivity() {
     private var totalArea: Int = 0
     private var rightMines: Int = 0
     private var currentTime: Long = 0
+    private var currentSaveId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,6 +127,10 @@ class GameActivity : DaggerAppCompatActivity() {
             totalArea = area.count()
             totalMines = mines.count()
             rightMines = mines.map { if (it.mark.isFlag()) 1 else 0 }.sum()
+        })
+
+        saveId.observe(this@GameActivity, Observer {
+            currentSaveId = it
         })
     }
 
@@ -399,7 +404,8 @@ class GameActivity : DaggerAppCompatActivity() {
                     victory,
                     score?.rightMines ?: 0,
                     score?.totalMines ?: 0,
-                    currentGameStatus.time
+                    currentGameStatus.time,
+                    currentSaveId
                 ).apply {
                     showAllowingStateLoss(supportFragmentManager, EndGameDialogFragment.TAG)
                 }
