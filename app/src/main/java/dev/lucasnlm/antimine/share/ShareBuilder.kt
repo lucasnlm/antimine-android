@@ -66,10 +66,13 @@ class ShareBuilder(
         val bitmap = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
 
-        canvas.drawRect(0.0f, 0.0f, imageWidth.toFloat(), imageHeight.toFloat(), Paint().apply {
-            color = Color.WHITE
-            style = Paint.Style.FILL
-        })
+        canvas.drawRect(
+            0.0f, 0.0f, imageWidth.toFloat(), imageHeight.toFloat(),
+            Paint().apply {
+                color = Color.WHITE
+                style = Paint.Style.FILL
+            }
+        )
 
         for (x in 0 until minefield.width) {
             for (y in 0 until minefield.height) {

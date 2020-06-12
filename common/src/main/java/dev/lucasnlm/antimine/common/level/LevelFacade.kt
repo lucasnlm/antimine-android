@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.common.level
 
+import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.database.models.Stats
@@ -16,6 +17,7 @@ class LevelFacade {
     private val randomGenerator: Random
     private val startTime = System.currentTimeMillis()
     private var saveId = 0
+    private var firstOpen: FirstOpen = FirstOpen.Unknown
 
     var hasMines = false
         private set
@@ -29,21 +31,24 @@ class LevelFacade {
     var mines: Sequence<Area> = sequenceOf()
         private set
 
-    constructor(minefield: Minefield, seed: Long) {
+    constructor(minefield: Minefield, seed: Long, saveId: Int? = null) {
         this.minefield = minefield
         this.randomGenerator = Random(seed)
         this.seed = seed
-        this.saveId = 0
+        this.saveId = saveId ?: 0
         createEmptyField()
     }
 
     constructor(save: Save) {
         this.minefield = save.minefield
         this.randomGenerator = Random(save.seed)
+        this.saveId = save.uid
+        this.seed = save.seed
+        this.firstOpen = save.firstOpen
+
         this.field = save.field.asSequence()
         this.mines = this.field.filter { it.hasMine }.asSequence()
         this.hasMines = this.mines.count() != 0
-        this.saveId = save.uid
     }
 
     private fun createEmptyField() {
@@ -55,6 +60,8 @@ class LevelFacade {
             val xPosition = (index % width)
             Area(index, xPosition, yPosition)
         }.asSequence()
+        this.hasMines = false
+        this.mines = sequenceOf()
     }
 
     fun getArea(id: Int) = field.first { it.id == id }
@@ -108,6 +115,7 @@ class LevelFacade {
             }
         }
 
+        firstOpen = FirstOpen.Position(safeIndex)
         field.filterNot { it.safeZone }
             .toSet()
             .shuffled(randomGenerator)
@@ -350,6 +358,7 @@ class LevelFacade {
             duration,
             minefield,
             difficulty,
+            firstOpen,
             saveStatus,
             field.toList()
         )

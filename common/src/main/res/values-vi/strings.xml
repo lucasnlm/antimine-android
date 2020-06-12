@@ -3,8 +3,8 @@
     <string name="app_name">Dò mìn</string>
     <string name="app_description">Bạn phải mở tất cả các ô trên một bãi mìn mà không làm nổ cục mìn nào.</string>
     <string name="remaining_mines">Số mìn còn lại</string>
-    <string name="games">Games</string>
-    <string name="previous_games">Previous Games</string>
+    <string name="games">Trò chơi</string>
+    <string name="previous_games">Trò chơi Trước</string>
     <string name="install">Cài đặt</string>
     <string name="minefield">Độ khó</string>
     <string name="standard">Tiêu chuẩn</string>
@@ -58,7 +58,9 @@
     <string name="empty">Trống</string>
     <string name="quit_confirm">Trò chơi bạn đang chơi sẽ bị mất.\nNhưng bạn có thể cài đặt trò chơi trước khi thoát.</string>
     <string name="you_won">Thắng rồi!</string>
+    <string name="victory">Chiến thắng</string>
     <string name="you_lost">Thua rồi!</string>
+    <string name="defeat">Thua</string>
     <string name="game_over_desc_0">Nhấn giữ ô vuông để cắm cờ.</string>
     <string name="game_over_desc_1">Chúc bạn may mắn lần sau.</string>
     <string name="game_over_desc_2">Bạn dò được %1$d/%2$d mìn trong vòng %3$d giây.</string>
@@ -95,8 +97,8 @@
     <string name="rating_message">Nếu bạn thích trò chơi này, hãy gửi phản hồi cho chúng tôi. Nhận xét của bạn sẽ giúp chúng tôi rất nhiều.</string>
     <string name="rating_button">Có ❤️️️</string>
     <string name="rating_button_no">Không</string>
-    <string name="open_areas">Open Areas</string>
-    <string name="total_time">Total Time</string>
-    <string name="average_time">Average Time</string>
-    <string name="performance">Performance</string>
+    <string name="open_areas">Khu vực mở</string>
+    <string name="total_time">Tổng thời gian</string>
+    <string name="average_time">Thời gian bình quân</string>
+    <string name="performance">Hiệu năng</string>
 </resources>

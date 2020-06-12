@@ -58,7 +58,9 @@
     <string name="empty">Vacío</string>
     <string name="quit_confirm">Vas a perder todas los movimientos en la partida acutal.\nPero también puedes instalar el juego antes de salir.</string>
     <string name="you_won">¡Ganaste!</string>
+    <string name="victory">Victoria</string>
     <string name="you_lost">¡Perdiste!</string>
+    <string name="defeat">Derrota</string>
     <string name="game_over_desc_0">Mantenga presionado un cuadrado para poner una bandera.</string>
     <string name="game_over_desc_1">Buena suerte en tu próxima partida.</string>
     <string name="game_over_desc_2">Hiciste %1$d/%2$d en %3$d segundos.</string>

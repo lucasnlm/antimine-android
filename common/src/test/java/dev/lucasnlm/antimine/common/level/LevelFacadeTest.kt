@@ -305,7 +305,8 @@ class LevelFacadeTest {
                     1, 1, 1, 1, 1,
                     1, 1, 0, 1, 1,
                     1, 1, 1, 1, 1,
-                    1, 1, 1, 1, 1),
+                    1, 1, 1, 1, 1
+                ),
                 field.map { if (it.isCovered) 1 else 0 }.toList()
             )
             openNeighbors(12)
@@ -315,7 +316,8 @@ class LevelFacadeTest {
                     1, 0, 0, 0, 1,
                     1, 0, 0, 0, 1,
                     1, 0, 0, 0, 1,
-                    1, 1, 1, 1, 1),
+                    1, 1, 1, 1, 1
+                ),
                 field.map { if (it.isCovered) 1 else 0 }.toList()
             )
         }

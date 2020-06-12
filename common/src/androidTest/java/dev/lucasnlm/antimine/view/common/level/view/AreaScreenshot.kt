@@ -36,7 +36,8 @@ class AreaScreenshot {
             Paint().apply {
                 color = if (ambientMode) Color.BLACK else Color.WHITE
                 style = Paint.Style.FILL
-            })
+            }
+        )
 
         canvas.save()
         canvas.translate(testPadding * 0.5f, testPadding.toFloat() * 0.5f)

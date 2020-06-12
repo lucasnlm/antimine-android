@@ -25,22 +25,25 @@ class AboutActivity : AppCompatActivity() {
 
         aboutViewModel = ViewModelProviders.of(this).get(AboutViewModel::class.java)
 
-        aboutViewModel.eventObserver.observe(this, Observer { event ->
-            when (event) {
-                AboutEvent.ThirdPartyLicenses -> {
-                    replaceFragment(ThirdPartiesFragment(), ThirdPartiesFragment::class.simpleName)
-                }
-                AboutEvent.SourceCode -> {
-                    openSourceCode()
-                }
-                AboutEvent.Translators -> {
-                    replaceFragment(TranslatorsFragment(), TranslatorsFragment::class.simpleName)
-                }
-                else -> {
-                    replaceFragment(AboutInfoFragment(), null)
+        aboutViewModel.eventObserver.observe(
+            this,
+            Observer { event ->
+                when (event) {
+                    AboutEvent.ThirdPartyLicenses -> {
+                        replaceFragment(ThirdPartiesFragment(), ThirdPartiesFragment::class.simpleName)
+                    }
+                    AboutEvent.SourceCode -> {
+                        openSourceCode()
+                    }
+                    AboutEvent.Translators -> {
+                        replaceFragment(TranslatorsFragment(), TranslatorsFragment::class.simpleName)
+                    }
+                    else -> {
+                        replaceFragment(AboutInfoFragment(), null)
+                    }
                 }
             }
-        })
+        )
 
         replaceFragment(AboutInfoFragment(), null)
     }
