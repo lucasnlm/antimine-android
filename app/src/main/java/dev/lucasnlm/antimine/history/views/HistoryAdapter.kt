@@ -51,20 +51,10 @@ class HistoryAdapter(
 
         if (status != SaveStatus.VICTORY) {
             holder.replay.setImageResource(R.drawable.replay)
-            holder.replay.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW).apply {
-                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    data = Uri.Builder()
-                        .scheme(DeepLink.SCHEME)
-                        .authority(DeepLink.RETRY_HOST_AUTHORITY)
-                        .appendPath(uid.toString())
-                        .build()
-                }
-                it.context.startActivity(intent)
-            }
+            holder.replay.setOnClickListener { replayGame(it, uid) }
         } else {
             holder.replay.setImageResource(R.drawable.play)
-            holder.replay.setOnClickListener { replayGame(it, uid) }
+            holder.replay.setOnClickListener { loadGame(it, uid) }
         }
 
         holder.itemView.setOnClickListener { loadGame(it, uid) }
