@@ -253,7 +253,8 @@ class FixedGridLayoutManager(
                     for (offset in 0 until it.size()) {
                         // Look for off-screen removals that are less-than this
                         if (removedPositions.valueAt(offset) ==
-                            REMOVE_INVISIBLE && removedPositions.keyAt(offset) < nextPosition) {
+                            REMOVE_INVISIBLE && removedPositions.keyAt(offset) < nextPosition
+                        ) {
                             // Offset position to match
                             offsetPosition--
                         }
