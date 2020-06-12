@@ -58,7 +58,9 @@
     <string name="empty">Vide</string>
     <string name="quit_confirm">Vous perdrez toutes vos actions sur la partie actuelle.\nMais vous pouvez aussi installer le jeu avant de quitter.</string>
     <string name="you_won">Victoire !</string>
+    <string name="victory">Victoire</string>
     <string name="you_lost">Défaite !</string>
+    <string name="defeat">Défaite</string>
     <string name="game_over_desc_0">Appuyez longtemps sur un carré pour poser un drapeau.</string>
     <string name="game_over_desc_1">Bonne chance pour votre prochaine partie.</string>
     <string name="game_over_desc_2">Vous avez obtenu le score de %1$d/%2$d en %3$d secondes.</string>

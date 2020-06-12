@@ -3,7 +3,7 @@
     <string name="app_name">Antimine</string>
     <string name="app_description">Πρέπει να καθαρίσετε μια ορθογώνια πλακέτα που περιέχει κρυμμένες \"νάρκες\" χωρίς να πυροδοτήσετε καμία από αυτές.</string>
     <string name="remaining_mines">Υπόλοιπες νάρκες</string>
-    <string name="games">Games</string>
+    <string name="games">Παιχνίδια</string>
     <string name="previous_games">Προηγούμενα Παιχνίδια</string>
     <string name="install">Εγκατάσταση</string>
     <string name="minefield">Δυσκολία</string>
@@ -58,7 +58,9 @@
     <string name="empty">Κενό</string>
     <string name="quit_confirm">Θα χάσετε όλες τις κινήσεις στο τρέχον παιχνίδι.\nΑλλά μπορείτε επίσης να εγκαταστήσετε το παιχνίδι πριν το κλείσετε.</string>
     <string name="you_won">Κέρδισες!</string>
+    <string name="victory">Νίκη</string>
     <string name="you_lost">Έχασες!</string>
+    <string name="defeat">Ήττα</string>
     <string name="game_over_desc_0">Πατήστε παρατεταμένα ένα τετράγωνο για να τοποθετήσετε μια σημαία.</string>
     <string name="game_over_desc_1">Καλή τύχη στο επόμενο παιχνίδι σας.</string>
     <string name="game_over_desc_2">Πραγματοποίησες %1$d/%2$d σε %3$d δευτερόλεπτα.</string>
@@ -95,8 +97,8 @@
     <string name="rating_message">Αν σας αρέσει αυτό το παιχνίδι, παρακαλούμε δώστε μας τα σχόλιά σας. Θα μας βοηθήσει πολύ.</string>
     <string name="rating_button">Ναι ❤️️️</string>
     <string name="rating_button_no">Όχι</string>
-    <string name="open_areas">Open Areas</string>
-    <string name="total_time">Total Time</string>
-    <string name="average_time">Average Time</string>
-    <string name="performance">Performance</string>
+    <string name="open_areas">Ανοιχτές περιοχές</string>
+    <string name="total_time">Συνολικός Χρόνος</string>
+    <string name="average_time">Μέσος χρόνος</string>
+    <string name="performance">Επίδοση</string>
 </resources>
