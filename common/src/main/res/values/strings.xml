@@ -58,7 +58,9 @@
     <string name="empty">Empty</string>
     <string name="quit_confirm">You\'ll lose all moves on current game.\nBut you can also install the game before quit.</string>
     <string name="you_won">You won!</string>
+    <string name="victory">Victory</string>
     <string name="you_lost">You lost!</string>
+    <string name="defeat">Defeat</string>
     <string name="game_over_desc_0">Long press a square to put a flag.</string>
     <string name="game_over_desc_1">Good luck on your next game.</string>
     <string name="game_over_desc_2">You did %1$d/%2$d in %3$d seconds.</string>

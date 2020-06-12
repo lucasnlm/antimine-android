@@ -33,6 +33,8 @@ class StatsActivity : DaggerAppCompatActivity() {
                 totalGames.text = it.totalGames.toString()
                 performance.text = formatPercentage(100.0 * it.victory / it.totalGames)
                 openAreas.text = it.openArea.toString()
+                victory.text = it.victory.toString()
+                defeat.text = (it.totalGames - it.victory).toString()
             }
         )
 
