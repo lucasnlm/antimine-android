@@ -35,6 +35,10 @@ class AboutViewModel : ViewModel() {
                 sequenceOf("Retrial")
             ),
             TranslationInfo(
+                "Japanese",
+                sequenceOf("Ryota Hasegawa")
+            ),
+            TranslationInfo(
                 "Portuguese (BR)",
                 sequenceOf("Lucas Lima")
             ),
