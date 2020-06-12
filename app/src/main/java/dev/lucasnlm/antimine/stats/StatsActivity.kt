@@ -24,14 +24,19 @@ class StatsActivity : DaggerAppCompatActivity() {
         setTitle(R.string.events)
 
         viewModel = ViewModelProviders.of(this).get(StatsViewModel::class.java)
-        viewModel.statsObserver.observe(this, Observer {
-            minesCount.text = it.mines.toString()
-            totalTime.text = formatTime(it.duration)
-            averageTime.text = formatTime(it.averageDuration)
-            totalGames.text = it.totalGames.toString()
-            performance.text = formatPercentage(100.0 * it.victory / it.totalGames)
-            openAreas.text = it.openArea.toString()
-        })
+        viewModel.statsObserver.observe(
+            this,
+            Observer {
+                minesCount.text = it.mines.toString()
+                totalTime.text = formatTime(it.duration)
+                averageTime.text = formatTime(it.averageDuration)
+                totalGames.text = it.totalGames.toString()
+                performance.text = formatPercentage(100.0 * it.victory / it.totalGames)
+                openAreas.text = it.openArea.toString()
+                victory.text = it.victory.toString()
+                defeat.text = (it.totalGames - it.victory).toString()
+            }
+        )
 
         GlobalScope.launch {
             viewModel.loadStats(statsRepository)

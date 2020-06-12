@@ -3,15 +3,15 @@
     <string name="app_name">Antimine</string>
     <string name="app_description">L\'obbiettivo del gioco è ripulire un campo rettangolare che contiene mine nascoste senza detonarne nessuna.</string>
     <string name="remaining_mines">Mine rimanenti</string>
-    <string name="games">Games</string>
-    <string name="previous_games">Previous Games</string>
+    <string name="games">Giochi</string>
+    <string name="previous_games">Partite Precedenti</string>
     <string name="install">Installare</string>
     <string name="minefield">Difficoltà</string>
     <string name="standard">Predefinito</string>
     <string name="beginner">Principiante</string>
     <string name="intermediate">Normale</string>
     <string name="expert">Esperto</string>
-    <string name="open">Open</string>
+    <string name="open">Apri</string>
     <string name="open_menu">Apri menu</string>
     <string name="close_menu">Chiudi menu</string>
     <string name="settings">Impostazioni</string>
@@ -58,7 +58,9 @@
     <string name="empty">Vuoto</string>
     <string name="quit_confirm">Perderai tutte le mosse effettuate nella partita in corso.\nMa puoi anche installare il gioco prima di uscire.</string>
     <string name="you_won">Hai vinto!</string>
+    <string name="victory">Vittoria</string>
     <string name="you_lost">Hai perso!</string>
+    <string name="defeat">Sconfitta</string>
     <string name="game_over_desc_0">Tieni premuto un quadrato per piazzare una bandiera.</string>
     <string name="game_over_desc_1">Buona fortuna nella prossima partita.</string>
     <string name="game_over_desc_2">Trovate %1$d/%2$d mine in %3$d secondi.</string>
@@ -95,8 +97,8 @@
     <string name="rating_message">Se ti piace questo gioco, per favore inviaci suggerimenti. Puoi aiutare a migliorarlo.</string>
     <string name="rating_button">Sì ❤️️️</string>
     <string name="rating_button_no">No</string>
-    <string name="open_areas">Open Areas</string>
-    <string name="total_time">Total Time</string>
-    <string name="average_time">Average Time</string>
-    <string name="performance">Performance</string>
+    <string name="open_areas">Aree Aperte</string>
+    <string name="total_time">Tempo Totale</string>
+    <string name="average_time">Durata Media</string>
+    <string name="performance">Prestazione</string>
 </resources>

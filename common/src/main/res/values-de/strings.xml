@@ -58,7 +58,9 @@
     <string name="empty">Leer</string>
     <string name="quit_confirm">Du wirst alle Züge im aktuellen Spiel verlieren.\n Doch du kannst auch das Spiel vor der Beendigung installieren.</string>
     <string name="you_won">Du hast gewonnen!</string>
+    <string name="victory">Sieg</string>
     <string name="you_lost">Du hast verloren!</string>
+    <string name="defeat">Niederlage</string>
     <string name="game_over_desc_0">Lang auf das Quadrat drücken, um eine Markierung zu setzen.</string>
     <string name="game_over_desc_1">Viel Glück bei deinem nächsten Spiel.</string>
     <string name="game_over_desc_2">Du hast %1$d/%2$d in %3$d Sekunden gemacht.</string>

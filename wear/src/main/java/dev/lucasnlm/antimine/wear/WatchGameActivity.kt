@@ -12,7 +12,6 @@ import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import kotlinx.android.synthetic.main.activity_level.*
 import javax.inject.Inject
 import android.text.format.DateFormat
@@ -32,9 +31,6 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
 
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory
-
-    @Inject
-    lateinit var preferencesRepository: IPreferencesRepository
 
     private lateinit var viewModel: GameViewModel
     private lateinit var ambientController: AmbientModeSupport.AmbientController
@@ -138,20 +134,32 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
     }
 
     private fun bindViewModel() = viewModel.apply {
-        eventObserver.observe(this@WatchGameActivity, Observer {
-            onGameEvent(it)
-        })
-        elapsedTimeSeconds.observe(this@WatchGameActivity, Observer {
-            // Nothing
-        })
-        mineCount.observe(this@WatchGameActivity, Observer {
-            if (it > 0) {
-                messageText.text = applicationContext.getString(R.string.mines_remaining, it)
+        eventObserver.observe(
+            this@WatchGameActivity,
+            Observer {
+                onGameEvent(it)
             }
-        })
-        difficulty.observe(this@WatchGameActivity, Observer {
-            // Nothing
-        })
+        )
+        elapsedTimeSeconds.observe(
+            this@WatchGameActivity,
+            Observer {
+                // Nothing
+            }
+        )
+        mineCount.observe(
+            this@WatchGameActivity,
+            Observer {
+                if (it > 0) {
+                    messageText.text = applicationContext.getString(R.string.mines_remaining, it)
+                }
+            }
+        )
+        difficulty.observe(
+            this@WatchGameActivity,
+            Observer {
+                // Nothing
+            }
+        )
     }
 
     private fun onGameEvent(event: Event) {
@@ -194,17 +202,21 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
     }
 
     private fun waitAndShowNewGameButton(wait: Long = DateUtils.SECOND_IN_MILLIS) {
-        HandlerCompat.postDelayed(Handler(), {
-            if (this.status is Status.Over && !isFinishing) {
-                newGame.visibility = View.VISIBLE
-                newGame.setOnClickListener {
-                    it.visibility = View.GONE
-                    GlobalScope.launch {
-                        viewModel.startNewGame()
+        HandlerCompat.postDelayed(
+            Handler(),
+            {
+                if (this.status is Status.Over && !isFinishing) {
+                    newGame.visibility = View.VISIBLE
+                    newGame.setOnClickListener {
+                        it.visibility = View.GONE
+                        GlobalScope.launch {
+                            viewModel.startNewGame()
+                        }
                     }
                 }
-            }
-        }, null, wait)
+            },
+            null, wait
+        )
     }
 
     override fun getAmbientCallback(): AmbientCallback = ambientMode

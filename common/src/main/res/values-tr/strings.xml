@@ -58,7 +58,9 @@
     <string name="empty">Boş</string>
     <string name="quit_confirm">Mevcut oyundaki tüm hamleleri kaybedeceksiniz.\nAncak oyunu çıkmadan önce de yükleyebilirsiniz.</string>
     <string name="you_won">Kazandın!</string>
+    <string name="victory">Zafer</string>
     <string name="you_lost">Kaybettin!</string>
+    <string name="defeat">Yenilgi</string>
     <string name="game_over_desc_0">Bayrak koymak için bir kareye uzun bas.</string>
     <string name="game_over_desc_1">Sonraki oyunda iyi şanslar.</string>
     <string name="game_over_desc_2">%3$d saniyede %1$d/%2$d yaptın.</string>

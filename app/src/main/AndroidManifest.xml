@@ -83,6 +83,10 @@
                 <data
                     android:host="load-game"
                     android:scheme="antimine" />
+
+                <data
+                    android:host="retry-game"
+                    android:scheme="antimine" />
             </intent-filter>
 
             <intent-filter
@@ -125,15 +129,6 @@
             <!--                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />-->
             <!--            </intent-filter>-->
         </activity>
-
-        <activity
-            android:name="dev.lucasnlm.antimine.about.views.thirds.ThirdPartiesFragment"
-            android:label="@string/licenses"
-            android:theme="@style/AppTheme" />
-
-        <activity
-            android:name="dev.lucasnlm.antimine.about.views.translators.TranslatorsFragment"
-            android:theme="@style/AppTheme" />
 
         <activity
             android:name="dev.lucasnlm.antimine.about.TextActivity"

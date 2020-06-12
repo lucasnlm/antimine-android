@@ -58,7 +58,9 @@
     <string name="empty">空</string>
     <string name="quit_confirm">您将失去当前游戏中的所有进度，但也可以在退出之前安装游戏。</string>
     <string name="you_won">你获胜了！</string>
+    <string name="victory">你获胜了</string>
     <string name="you_lost">你输了！</string>
+    <string name="defeat">你输了</string>
     <string name="game_over_desc_0">长按方块放置旗帜。</string>
     <string name="game_over_desc_1">下次游戏祝您好运。</string>
     <string name="game_over_desc_2">您在 %1$d 秒内完成了 %2$d/%3$d。</string>

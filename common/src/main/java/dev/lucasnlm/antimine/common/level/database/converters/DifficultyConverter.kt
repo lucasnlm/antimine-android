@@ -4,7 +4,6 @@ import androidx.room.TypeConverter
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 
 class DifficultyConverter {
-
     @TypeConverter
     fun toDifficulty(difficulty: Int): Difficulty =
         when (difficulty) {

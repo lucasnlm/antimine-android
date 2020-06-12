@@ -78,27 +78,39 @@ class WatchLevelFragment : DaggerFragment() {
         }
 
         viewModel.run {
-            field.observe(viewLifecycleOwner, Observer {
-                areaAdapter.bindField(it)
-            })
-            levelSetup.observe(viewLifecycleOwner, Observer {
-                recyclerGrid.layoutManager =
-                    GridLayoutManager(activity, it.width, RecyclerView.VERTICAL, false)
-            })
-            fieldRefresh.observe(viewLifecycleOwner, Observer {
-                areaAdapter.notifyItemChanged(it)
-            })
-            eventObserver.observe(viewLifecycleOwner, Observer {
-                if (it == Event.StartNewGame) {
-                    recyclerGrid.scrollToPosition(areaAdapter.itemCount / 2)
+            field.observe(
+                viewLifecycleOwner,
+                Observer {
+                    areaAdapter.bindField(it)
                 }
+            )
+            levelSetup.observe(
+                viewLifecycleOwner,
+                Observer {
+                    recyclerGrid.layoutManager =
+                        GridLayoutManager(activity, it.width, RecyclerView.VERTICAL, false)
+                }
+            )
+            fieldRefresh.observe(
+                viewLifecycleOwner,
+                Observer {
+                    areaAdapter.notifyItemChanged(it)
+                }
+            )
+            eventObserver.observe(
+                viewLifecycleOwner,
+                Observer {
+                    if (it == Event.StartNewGame) {
+                        recyclerGrid.scrollToPosition(areaAdapter.itemCount / 2)
+                    }
 
-                when (it) {
-                    Event.ResumeGameOver, Event.GameOver,
-                    Event.Victory, Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
-                    else -> areaAdapter.setClickEnabled(true)
+                    when (it) {
+                        Event.ResumeGameOver, Event.GameOver,
+                        Event.Victory, Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
+                        else -> areaAdapter.setClickEnabled(true)
+                    }
                 }
-            })
+            )
         }
     }
 

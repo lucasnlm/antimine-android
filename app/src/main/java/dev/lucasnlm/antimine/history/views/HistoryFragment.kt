@@ -50,9 +50,12 @@ class HistoryFragment : DaggerFragment() {
             )
             layoutManager = LinearLayoutManager(view.context)
 
-            historyViewModel?.saves?.observe(viewLifecycleOwner, Observer {
-                adapter = HistoryAdapter(it)
-            })
+            historyViewModel?.saves?.observe(
+                viewLifecycleOwner,
+                Observer {
+                    adapter = HistoryAdapter(it)
+                }
+            )
         }
     }
 }

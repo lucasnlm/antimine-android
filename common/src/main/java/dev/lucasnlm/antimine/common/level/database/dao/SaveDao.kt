@@ -30,6 +30,6 @@ interface SaveDao {
     @Delete
     suspend fun delete(save: Save)
 
-    @Query("DELETE FROM save WHERE uid NOT IN (SELECT uid FROM save LIMIT :maxStorage)")
+    @Query("DELETE FROM save WHERE uid NOT IN (SELECT uid FROM save WHERE status != 1 LIMIT :maxStorage)")
     suspend fun deleteOldSaves(maxStorage: Int)
 }

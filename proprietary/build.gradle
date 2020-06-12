@@ -10,7 +10,7 @@ android {
         versionName '7.1.0'
         minSdkVersion 16
         targetSdkVersion 29
-        resConfigs 'en', 'cs', 'de', 'el', 'es', 'fr', 'pt', 'ru', 'tr', 'uk', 'vi', 'zh'
+        resConfigs 'en', 'cs', 'de', 'el', 'es', 'fr', 'ja', 'pt', 'ru', 'tr', 'uk', 'vi', 'zh'
     }
 
     buildTypes {
