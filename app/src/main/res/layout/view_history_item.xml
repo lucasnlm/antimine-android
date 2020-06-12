@@ -66,13 +66,16 @@
         app:layout_constraintTop_toBottomOf="@id/difficulty"
         tools:text="9 mines" />
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/open"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/replay"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="@string/retry"
+        android:background="?selectableItemBackgroundBorderless"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/text_color"
+        app:srcCompat="@drawable/retry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

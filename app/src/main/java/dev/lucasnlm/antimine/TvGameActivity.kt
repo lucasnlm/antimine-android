@@ -61,35 +61,50 @@ class TvGameActivity : DaggerAppCompatActivity() {
     }
 
     private fun bindViewModel() = viewModel.apply {
-        eventObserver.observe(this@TvGameActivity, Observer {
-            onGameEvent(it)
-        })
-
-        elapsedTimeSeconds.observe(this@TvGameActivity, Observer {
-            timer.apply {
-                visibility = if (it == 0L) View.GONE else View.VISIBLE
-                text = DateUtils.formatElapsedTime(it)
+        eventObserver.observe(
+            this@TvGameActivity,
+            Observer {
+                onGameEvent(it)
             }
-            currentTime = it
-        })
+        )
 
-        mineCount.observe(this@TvGameActivity, Observer {
-            minesCount.apply {
-                visibility = View.VISIBLE
-                text = it.toString()
+        elapsedTimeSeconds.observe(
+            this@TvGameActivity,
+            Observer {
+                timer.apply {
+                    visibility = if (it == 0L) View.GONE else View.VISIBLE
+                    text = DateUtils.formatElapsedTime(it)
+                }
+                currentTime = it
             }
-        })
+        )
 
-        difficulty.observe(this@TvGameActivity, Observer {
-            // onChangeDifficulty(it)
-        })
+        mineCount.observe(
+            this@TvGameActivity,
+            Observer {
+                minesCount.apply {
+                    visibility = View.VISIBLE
+                    text = it.toString()
+                }
+            }
+        )
 
-        field.observe(this@TvGameActivity, Observer { area ->
-            val mines = area.filter { it.hasMine }
-            totalArea = area.count()
-            totalMines = mines.count()
-            rightMines = mines.map { if (it.mark.isFlag()) 1 else 0 }.sum()
-        })
+        difficulty.observe(
+            this@TvGameActivity,
+            Observer {
+                // onChangeDifficulty(it)
+            }
+        )
+
+        field.observe(
+            this@TvGameActivity,
+            Observer { area ->
+                val mines = area.filter { it.hasMine }
+                totalArea = area.count()
+                totalMines = mines.count()
+                rightMines = mines.map { if (it.mark.isFlag()) 1 else 0 }.sum()
+            }
+        )
     }
 
     override fun onResume() {
@@ -208,10 +223,36 @@ class TvGameActivity : DaggerAppCompatActivity() {
 
     private fun waitAndShowConfirmNewGame() {
         if (keepConfirmingNewGame) {
-            HandlerCompat.postDelayed(Handler(), {
+            HandlerCompat.postDelayed(
+                Handler(),
+                {
+                    if (status is Status.Over && !isFinishing) {
+                        AlertDialog.Builder(this, R.style.MyDialog).apply {
+                            setTitle(R.string.new_game)
+                            setMessage(R.string.new_game_request)
+                            setPositiveButton(R.string.yes) { _, _ ->
+                                GlobalScope.launch {
+                                    viewModel.startNewGame()
+                                }
+                            }
+                            setNegativeButton(R.string.cancel, null)
+                        }.show()
+
+                        keepConfirmingNewGame = false
+                    }
+                },
+                null, DateUtils.SECOND_IN_MILLIS
+            )
+        }
+    }
+
+    private fun waitAndShowGameOverConfirmNewGame() {
+        HandlerCompat.postDelayed(
+            Handler(),
+            {
                 if (status is Status.Over && !isFinishing) {
                     AlertDialog.Builder(this, R.style.MyDialog).apply {
-                        setTitle(R.string.new_game)
+                        setTitle(R.string.you_lost)
                         setMessage(R.string.new_game_request)
                         setPositiveButton(R.string.yes) { _, _ ->
                             GlobalScope.launch {
@@ -220,28 +261,10 @@ class TvGameActivity : DaggerAppCompatActivity() {
                         }
                         setNegativeButton(R.string.cancel, null)
                     }.show()
-
-                    keepConfirmingNewGame = false
                 }
-            }, null, DateUtils.SECOND_IN_MILLIS)
-        }
-    }
-
-    private fun waitAndShowGameOverConfirmNewGame() {
-        HandlerCompat.postDelayed(Handler(), {
-            if (status is Status.Over && !isFinishing) {
-                AlertDialog.Builder(this, R.style.MyDialog).apply {
-                    setTitle(R.string.you_lost)
-                    setMessage(R.string.new_game_request)
-                    setPositiveButton(R.string.yes) { _, _ ->
-                        GlobalScope.launch {
-                            viewModel.startNewGame()
-                        }
-                    }
-                    setNegativeButton(R.string.cancel, null)
-                }.show()
-            }
-        }, null, DateUtils.SECOND_IN_MILLIS)
+            },
+            null, DateUtils.SECOND_IN_MILLIS
+        )
     }
 
     private fun changeDifficulty(newDifficulty: Difficulty) {
