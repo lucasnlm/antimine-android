@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_game">لعبة جديدة</string>
+    <string name="victory">لقد فزت!&#xA0;😎</string>
+    <string name="game_over">انفجر!&#xA0;😢</string>
+</resources>

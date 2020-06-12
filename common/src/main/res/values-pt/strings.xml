@@ -58,7 +58,9 @@
     <string name="empty">Vazio</string>
     <string name="quit_confirm">Você perderá todos os movimentos do jogo atual.\nMas você pode instalar o jogo antes de sair.</string>
     <string name="you_won">Você venceu!</string>
+    <string name="victory">Vitórias</string>
     <string name="you_lost">Você perdeu!</string>
+    <string name="defeat">Derrotas</string>
     <string name="game_over_desc_0">Pressione e segure uma área para marcá-la.</string>
     <string name="game_over_desc_1">Boa sorte no próximo jogo.</string>
     <string name="game_over_desc_2">Você fez %1$d/%2$d em %3$d segundos.</string>

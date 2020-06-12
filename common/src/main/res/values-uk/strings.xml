@@ -3,7 +3,7 @@
     <string name="app_name">Сапер</string>
     <string name="app_description">Вам потрібно очистити поле від схованих мін, не детонуючи їх.</string>
     <string name="remaining_mines">Залишилося мін</string>
-    <string name="games">Games</string>
+    <string name="games">Ігри</string>
     <string name="previous_games">Попередня гра</string>
     <string name="install">Встановити</string>
     <string name="minefield">Складність</string>
@@ -58,7 +58,9 @@
     <string name="empty">Пусто</string>
     <string name="quit_confirm">Ви втратите всі ходи на поточну гру.\nАле ви також можете встановити гру перед виходом.</string>
     <string name="you_won">Ви перемогли!</string>
+    <string name="victory">Перемога</string>
     <string name="you_lost">Програш!</string>
+    <string name="defeat">Поразка</string>
     <string name="game_over_desc_0">Довго натискайте на квадрат, щоб поставити прапорець.</string>
     <string name="game_over_desc_1">Удачі у наступній грі.</string>
     <string name="game_over_desc_2">Я знайшов %1$d/%2$d мін за %3$d секунд.</string>
@@ -95,8 +97,8 @@
     <string name="rating_message">Якщо вам подобається ця гра, то залиште нам свій відгук. Це нам дуже допоможе.</string>
     <string name="rating_button">Так ❤️️️</string>
     <string name="rating_button_no">Ні</string>
-    <string name="open_areas">Open Areas</string>
-    <string name="total_time">Total Time</string>
-    <string name="average_time">Average Time</string>
-    <string name="performance">Performance</string>
+    <string name="open_areas">Відкриті області</string>
+    <string name="total_time">Час перегляду</string>
+    <string name="average_time">Середній час</string>
+    <string name="performance">Ефективність</string>
 </resources>
