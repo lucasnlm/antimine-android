@@ -6,6 +6,10 @@
     <color name="primary">#FFFFFF</color>
     <color name="primary_dark">#9E9E9E</color>
 
+    <color name="victory">#4CAF50</color>
+    <color name="ongoing">#455a64</color>
+    <color name="lose">#F44336</color>
+
     <color name="mines_around_1">#527F8D</color>
     <color name="mines_around_2">#2B8D43</color>
     <color name="mines_around_3">#E65100</color>

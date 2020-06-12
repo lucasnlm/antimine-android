@@ -1,15 +1,18 @@
 package dev.lucasnlm.antimine.history.views
 
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.database.models.Save
+import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.models.Difficulty
-import java.text.DateFormat
 
 class HistoryAdapter(
     private val saveHistory: List<Save>
@@ -34,20 +37,60 @@ class HistoryAdapter(
             }
         )
 
-        holder.minefieldSize.text = String.format("%d x %d", minefield.width, minefield.height)
-        holder.minesCount.text = holder.itemView.context.getString(R.string.mines_remaining, minefield.mines)
-        holder.date.text = DateFormat.getDateInstance().format(startDate)
+        val context = holder.itemView.context
+        holder.flag.setColorFilter(
+            when (status) {
+                SaveStatus.VICTORY -> ContextCompat.getColor(context, R.color.victory)
+                SaveStatus.ON_GOING -> ContextCompat.getColor(context, R.color.ongoing)
+                SaveStatus.DEFEAT -> ContextCompat.getColor(context, R.color.lose)
+            }, PorterDuff.Mode.SRC_IN
+        )
 
-        holder.itemView.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                data = Uri.Builder()
-                    .scheme(DeepLink.SCHEME)
-                    .authority(DeepLink.RETRY_HOST_AUTHORITY)
-                    .appendPath(uid.toString())
-                    .build()
+        holder.minefieldSize.text = String.format("%d x %d", minefield.width, minefield.height)
+        holder.minesCount.text = context.getString(R.string.mines_remaining, minefield.mines)
+
+        if (status != SaveStatus.VICTORY) {
+            holder.replay.setImageResource(R.drawable.replay)
+            holder.replay.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    data = Uri.Builder()
+                        .scheme(DeepLink.SCHEME)
+                        .authority(DeepLink.RETRY_HOST_AUTHORITY)
+                        .appendPath(uid.toString())
+                        .build()
+                }
+                it.context.startActivity(intent)
             }
-            it.context.startActivity(intent)
+        } else {
+            holder.replay.setImageResource(R.drawable.play)
+            holder.replay.setOnClickListener { replayGame(it, uid) }
         }
+
+        holder.itemView.setOnClickListener { loadGame(it, uid) }
+    }
+
+    private fun replayGame(view: View, uid: Int) {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            data = Uri.Builder()
+                .scheme(DeepLink.SCHEME)
+                .authority(DeepLink.RETRY_HOST_AUTHORITY)
+                .appendPath(uid.toString())
+                .build()
+        }
+        view.context.startActivity(intent)
+    }
+
+    private fun loadGame(view: View, uid: Int) {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            data = Uri.Builder()
+                .scheme(DeepLink.SCHEME)
+                .authority(DeepLink.LOAD_GAME_AUTHORITY)
+                .appendPath(uid.toString())
+                .build()
+        }
+        view.context.startActivity(intent)
     }
 }
