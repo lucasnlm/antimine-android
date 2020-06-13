@@ -24,11 +24,11 @@ dependencies {
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.preference:preference:1.1.0'
+    implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     // Constraint
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta7'
 
     // Lifecycle
     api 'android.arch.lifecycle:extensions:1.1.1'
@@ -56,10 +56,10 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'
 
     // Kotlin Lib
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.71'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
 
     // Unit Tests
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     testImplementation 'org.mockito:mockito-core:2.24.0'
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
 

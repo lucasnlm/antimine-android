@@ -33,7 +33,7 @@ dependencies {
 
     // Constraint
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta7'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
@@ -41,8 +41,8 @@ dependencies {
     // Wear OS
     implementation 'androidx.wear:wear:1.0.0'
     implementation 'com.google.android.gms:play-services-wearable:17.0.0'
-    implementation 'com.google.android.support:wearable:2.5.0'
-    compileOnly 'com.google.android.wearable:wearable:2.5.0'
+    implementation 'com.google.android.support:wearable:2.7.0'
+    compileOnly 'com.google.android.wearable:wearable:2.7.0'
 
     // Dagger
     api 'com.google.dagger:dagger-android:2.21'
@@ -52,5 +52,5 @@ dependencies {
 
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.5'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
 }
