@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.level.utils
 
-import android.app.Application
+import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
 import android.os.Build
 import android.os.VibrationEffect
@@ -13,10 +13,10 @@ interface IHapticFeedbackInteractor {
 }
 
 class HapticFeedbackInteractor(
-    application: Application,
+    context: Context,
     private val preferencesRepository: IPreferencesRepository
 ) : IHapticFeedbackInteractor {
-    private val vibrator: Vibrator = application.getSystemService(VIBRATOR_SERVICE) as Vibrator
+    private val vibrator: Vibrator = context.getSystemService(VIBRATOR_SERVICE) as Vibrator
 
     override fun toggleFlagFeedback() {
         if (preferencesRepository.useHapticFeedback()) {

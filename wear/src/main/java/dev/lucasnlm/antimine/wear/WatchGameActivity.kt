@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.wear.widget.SwipeDismissFrameLayout
-import dagger.android.support.DaggerAppCompatActivity
 import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -16,10 +15,12 @@ import kotlinx.android.synthetic.main.activity_level.*
 import javax.inject.Inject
 import android.text.format.DateFormat
 import android.text.format.DateUtils
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat
 import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.ambient.AmbientModeSupport.AmbientCallback
 import androidx.wear.ambient.AmbientModeSupport.EXTRA_LOWBIT_AMBIENT
+import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
@@ -27,7 +28,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider {
+@AndroidEntryPoint
+class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider {
 
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory

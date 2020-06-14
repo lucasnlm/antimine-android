@@ -1,15 +1,15 @@
 package dev.lucasnlm.antimine.core.preferences
 
-import android.app.Application
+import android.content.Context
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import javax.inject.Inject
 
 class PreferencesInteractor @Inject constructor(
-    private val application: Application
+    private val context: Context
 ) {
     private val preferences by lazy {
-        PreferenceManager.getDefaultSharedPreferences(application)
+        PreferenceManager.getDefaultSharedPreferences(context)
     }
 
     fun getCustomMode() = Minefield(

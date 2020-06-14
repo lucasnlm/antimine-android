@@ -1,9 +1,10 @@
 package dev.lucasnlm.antimine.stats
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import dagger.android.support.DaggerAppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
@@ -12,7 +13,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class StatsActivity : DaggerAppCompatActivity() {
+@AndroidEntryPoint
+class StatsActivity : AppCompatActivity() {
     @Inject
     lateinit var statsRepository: IStatsRepository
 
