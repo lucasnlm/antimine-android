@@ -86,10 +86,6 @@ class AboutViewModel : ViewModel() {
             ThirdParty(
                 "Mockito",
                 R.raw.mockito
-            ),
-            ThirdParty(
-                "Sounds",
-                R.raw.sounds
             )
         )
     )
