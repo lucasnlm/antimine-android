@@ -76,7 +76,7 @@ class AboutViewModel : ViewModel() {
                 R.raw.apache2
             ),
             ThirdParty(
-                "Dagger",
+                "Dagger Hilt",
                 R.raw.apache2
             ),
             ThirdParty(
