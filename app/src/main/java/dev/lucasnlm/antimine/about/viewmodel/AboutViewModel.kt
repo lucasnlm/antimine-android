@@ -30,27 +30,12 @@ class AboutViewModel : ViewModel() {
     )
 
     fun getLicenses() = ThirdPartyAdapter(
-        listOf(
-            ThirdParty(
-                "Android SDK License",
-                R.raw.android_sdk
-            ),
-            ThirdParty(
-                "Material Design Icons",
-                R.raw.apache2
-            ),
-            ThirdParty(
-                "Dagger Hilt",
-                R.raw.apache2
-            ),
-            ThirdParty(
-                "Moshi",
-                R.raw.apache2
-            ),
-            ThirdParty(
-                "Mockito",
-                R.raw.mockito
-            )
-        )
+        sequenceOf(
+            "Android SDK License" to R.raw.android_sdk,
+            "Material Design Icons" to R.raw.apache2,
+            "Dagger Hilt" to R.raw.apache2,
+            "Moshi" to R.raw.apache2,
+            "Mockito" to R.raw.mockito
+        ).map { ThirdParty(it.first, it.second) }.toList()
     )
 }
