@@ -33,7 +33,7 @@ import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.history.HistoryActivity
-import dev.lucasnlm.antimine.instant.InstantAppManager
+import dev.lucasnlm.antimine.instant.InstantAppManageable
 import dev.lucasnlm.antimine.level.view.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
@@ -50,19 +50,20 @@ import javax.inject.Inject
 class GameActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var viewModelFactory: GameViewModelFactory
-
-    @Inject
     lateinit var preferencesRepository: IPreferencesRepository
 
     @Inject
     lateinit var analyticsManager: AnalyticsManager
 
     @Inject
-    lateinit var instantAppManager: InstantAppManager
+    lateinit var instantAppManager: InstantAppManageable
 
     @Inject
     lateinit var savesRepository: ISavesRepository
+
+    @Inject
+    lateinit var viewModelFactory: GameViewModelFactory
+
 
     private lateinit var viewModel: GameViewModel
     private lateinit var shareViewModel: ShareViewModel

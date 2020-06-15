@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
+import dev.lucasnlm.antimine.instant.InstantAppManageable
 import dev.lucasnlm.antimine.instant.InstantAppManager
 import dev.lucasnlm.antimine.level.viewmodel.EngGameDialogViewModel
 import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
@@ -27,7 +28,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
     lateinit var viewModelFactory: GameViewModelFactory
 
     @Inject
-    lateinit var instantAppManager: InstantAppManager
+    lateinit var instantAppManager: InstantAppManageable
 
     private lateinit var endGameViewModel: EngGameDialogViewModel
     private lateinit var viewModel: GameViewModel

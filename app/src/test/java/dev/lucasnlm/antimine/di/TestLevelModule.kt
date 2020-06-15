@@ -5,6 +5,11 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
 import dev.lucasnlm.antimine.common.level.di.LevelModule
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
@@ -19,21 +24,18 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.mocks.MockDimensionRepository
 import dev.lucasnlm.antimine.mocks.MockHapticFeedbackInteractor
 import dev.lucasnlm.antimine.mocks.MockMinefieldRepository
-import dev.lucasnlm.antimine.mocks.MockSavesRepository
-import dev.lucasnlm.antimine.mocks.MockStatsRepository
 
 @Module
-class TestLevelModule(
-    application: Application
-) : LevelModule(application) {
+@InstallIn(ActivityComponent::class)
+class TestLevelModule {
     @Provides
-    override fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
+    fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
 
     @Provides
-    override fun provideClock(): Clock = Clock()
+    fun provideClock(): Clock = Clock()
 
     @Provides
-    override fun provideGameViewModelFactory(
+    fun provideGameViewModelFactory(
         application: Application,
         eventObserver: MutableLiveData<Event>,
         savesRepository: ISavesRepository,
@@ -58,23 +60,11 @@ class TestLevelModule(
     )
 
     @Provides
-    override fun provideDimensionRepository(
-        context: Context,
-        preferencesRepository: IPreferencesRepository
-    ): IDimensionRepository = MockDimensionRepository()
+    fun provideDimensionRepository(): IDimensionRepository = MockDimensionRepository()
 
     @Provides
-    override fun provideSavesRepository(): ISavesRepository = MockSavesRepository()
+    fun provideMinefieldRepository(): IMinefieldRepository = MockMinefieldRepository()
 
     @Provides
-    override fun provideStatsRepository(): IStatsRepository = MockStatsRepository(listOf())
-
-    @Provides
-    override fun provideMinefieldRepository(): IMinefieldRepository = MockMinefieldRepository()
-
-    @Provides
-    override fun provideHapticFeedbackInteractor(
-        application: Application,
-        preferencesRepository: IPreferencesRepository
-    ): IHapticFeedbackInteractor = MockHapticFeedbackInteractor()
+    fun provideHapticFeedbackInteractor(): IHapticFeedbackInteractor = MockHapticFeedbackInteractor()
 }

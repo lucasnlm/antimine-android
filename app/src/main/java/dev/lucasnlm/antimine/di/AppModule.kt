@@ -14,6 +14,7 @@ import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
+import dev.lucasnlm.antimine.instant.InstantAppManageable
 import dev.lucasnlm.antimine.instant.InstantAppManager
 
 @Module
@@ -22,7 +23,7 @@ class AppModule() {
     @Provides
     fun provideInstantAppManager(
         @ApplicationContext context: Context
-    ): InstantAppManager = InstantAppManager(context.applicationContext)
+    ): InstantAppManageable = InstantAppManager(context.applicationContext)
 
     @Provides
     fun provideAppDataBase(

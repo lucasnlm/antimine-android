@@ -2,11 +2,18 @@ package dev.lucasnlm.antimine.level.view
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.launchActivity
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.HiltTestApplication
+import dagger.hilt.android.testing.UninstallModules
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.TestApplication
+import dev.lucasnlm.antimine.common.level.di.LevelModule
+import dev.lucasnlm.antimine.di.AppModule
+import junit.framework.TestCase.assertNotNull
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -16,9 +23,15 @@ import org.robolectric.shadows.ShadowLooper
 import java.util.concurrent.TimeUnit
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [16, 19, 21, 26, 27], application = TestApplication::class)
+@UninstallModules(LevelModule::class, AppModule::class)
+@Config(sdk = [16, 28], application = HiltTestApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
+@HiltAndroidTest
 class LevelFragmentTest {
+
+    @get:Rule
+    var rule = HiltAndroidRule(this)
+
     @Test
     fun testShowGameOverWhenTapAMine() {
         launchActivity<GameActivity>().onActivity { activity ->

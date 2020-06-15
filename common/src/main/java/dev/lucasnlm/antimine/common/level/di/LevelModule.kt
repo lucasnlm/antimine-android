@@ -24,7 +24,7 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 @Module
 @InstallIn(ActivityComponent::class)
-open class LevelModule() {
+open class LevelModule {
     @Provides
     open fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
 
