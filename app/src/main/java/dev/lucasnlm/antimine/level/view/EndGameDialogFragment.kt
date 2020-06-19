@@ -14,7 +14,6 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.instant.InstantAppManageable
-import dev.lucasnlm.antimine.instant.InstantAppManager
 import dev.lucasnlm.antimine.level.viewmodel.EngGameDialogViewModel
 import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
 import kotlinx.coroutines.GlobalScope

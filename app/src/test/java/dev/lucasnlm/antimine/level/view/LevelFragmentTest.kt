@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.level.view
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.launchActivity
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.HiltTestApplication

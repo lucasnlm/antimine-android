@@ -64,7 +64,6 @@ class GameActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory
 
-
     private lateinit var viewModel: GameViewModel
     private lateinit var shareViewModel: ShareViewModel
 
