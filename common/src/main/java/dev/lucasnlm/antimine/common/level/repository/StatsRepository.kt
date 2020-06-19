@@ -8,7 +8,7 @@ interface IStatsRepository {
     suspend fun addStats(stats: Stats): Long?
 }
 
-class StatsRepository(
+open class StatsRepository(
     private val statsDao: StatsDao
 ) : IStatsRepository {
     override suspend fun getAllStats(): List<Stats> {
