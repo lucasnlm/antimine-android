@@ -8,7 +8,7 @@ import dev.lucasnlm.external.InstantAppWrapper
 interface InstantAppManageable {
     fun isEnabled(): Boolean
     fun isNotEnabled(): Boolean
-    fun showInstallPrompt(activity: Activity, intent: Intent?, requestCode: Int, referrer: String?)
+    fun showInstallPrompt(activity: Activity, intent: Intent?, requestCode: Int, referrer: String?): Boolean
 }
 
 class InstantAppManager(
@@ -18,6 +18,6 @@ class InstantAppManager(
 
     override fun isNotEnabled(): Boolean = isEnabled().not()
 
-    override fun showInstallPrompt(activity: Activity, intent: Intent?, requestCode: Int, referrer: String?) =
+    override fun showInstallPrompt(activity: Activity, intent: Intent?, requestCode: Int, referrer: String?): Boolean =
         InstantAppWrapper().showInstallPrompt(activity, intent, requestCode, referrer)
 }

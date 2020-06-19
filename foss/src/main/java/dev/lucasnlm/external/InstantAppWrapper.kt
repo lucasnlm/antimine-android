@@ -9,5 +9,5 @@ class InstantAppWrapper {
     // FOSS build doesn't support Instant App
     fun isEnabled(context: Context): Boolean = false
 
-    fun showInstallPrompt(activity: Activity, intent: Intent?, requestCode: Int, referrer: String?) { }
+    fun showInstallPrompt(activity: Activity, intent: Intent?, requestCode: Int, referrer: String?): Boolean = false
 }

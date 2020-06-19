@@ -8,6 +8,6 @@ import com.google.android.gms.instantapps.InstantApps
 class InstantAppWrapper {
     fun isEnabled(context: Context): Boolean = InstantApps.getPackageManagerCompat(context).isInstantApp
 
-    fun showInstallPrompt(activity: Activity, intent: Intent?, requestCode: Int, referrer: String?) =
+    fun showInstallPrompt(activity: Activity, intent: Intent?, requestCode: Int, referrer: String?): Boolean =
         InstantApps.showInstallPrompt(activity, intent, requestCode, referrer)
 }
