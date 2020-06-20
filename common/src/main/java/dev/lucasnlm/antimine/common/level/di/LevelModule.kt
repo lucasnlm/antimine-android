@@ -58,7 +58,7 @@ open class LevelModule {
 
     @Provides
     open fun provideGameViewModelFactory(
-        application: Application,
+        @ApplicationContext context: Context,
         eventObserver: MutableLiveData<Event>,
         savesRepository: ISavesRepository,
         statsRepository: IStatsRepository,
@@ -69,7 +69,7 @@ open class LevelModule {
         analyticsManager: AnalyticsManager,
         clock: Clock
     ) = GameViewModelFactory(
-        application,
+        context,
         eventObserver,
         savesRepository,
         statsRepository,
@@ -83,7 +83,7 @@ open class LevelModule {
 
     @Provides
     open fun provideDimensionRepository(
-        context: Context,
+        @ApplicationContext context: Context,
         preferencesRepository: IPreferencesRepository
     ): IDimensionRepository =
         DimensionRepository(context, preferencesRepository)
@@ -103,10 +103,10 @@ open class LevelModule {
 
     @Provides
     open fun provideHapticFeedbackInteractor(
-        application: Application,
+        @ApplicationContext context: Context,
         preferencesRepository: IPreferencesRepository
     ): IHapticFeedbackInteractor =
-        HapticFeedbackInteractor(application, preferencesRepository)
+        HapticFeedbackInteractor(context, preferencesRepository)
 
     companion object {
         private const val DATA_BASE_NAME = "saves-db"

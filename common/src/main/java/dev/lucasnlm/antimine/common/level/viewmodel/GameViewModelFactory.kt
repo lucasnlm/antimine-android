@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.level.viewmodel
 
-import android.app.Application
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +16,7 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import javax.inject.Inject
 
 class GameViewModelFactory @Inject constructor(
-    private val application: Application,
+    private val context: Context,
     private val eventObserver: MutableLiveData<Event>,
     private val savesRepository: ISavesRepository,
     private val statsRepository: IStatsRepository,
@@ -32,7 +32,7 @@ class GameViewModelFactory @Inject constructor(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
         if (modelClass.isAssignableFrom(GameViewModel::class.java)) {
             GameViewModel(
-                application,
+                context,
                 eventObserver,
                 savesRepository,
                 statsRepository,
