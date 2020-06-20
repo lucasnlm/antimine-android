@@ -43,12 +43,12 @@ abstract class CommonLevelFragment : DaggerFragment() {
         }
     }
 
-    protected  fun makeNewLayoutManager(boardWidth: Int) =
+    protected fun makeNewLayoutManager(boardWidth: Int) =
         FixedGridLayoutManager().apply {
             setTotalColumnCount(boardWidth)
         }
 
-    protected  fun calcHorizontalPadding(boardWidth: Int): Int {
+    protected fun calcHorizontalPadding(boardWidth: Int): Int {
         val activity = requireActivity()
         val displayMetrics = DisplayMetrics()
         activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
