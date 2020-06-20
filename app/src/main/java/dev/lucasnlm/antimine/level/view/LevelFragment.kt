@@ -19,6 +19,7 @@ import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
+import dev.lucasnlm.antimine.common.level.widget.FreeGridLayoutManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -166,7 +167,7 @@ open class LevelFragment : DaggerFragment() {
     }
 
     private fun makeNewLayoutManager(boardWidth: Int, boardHeight: Int) =
-        FixedGridLayoutManager(boardWidth, calcHorizontalPadding(boardWidth), calcVerticalPadding(boardHeight))
+        FreeGridLayoutManager(boardWidth)
 
     private fun calcHorizontalPadding(boardWidth: Int): Int =
         ((recyclerGrid.measuredWidth - dimensionRepository.areaSizeWithPadding() * boardWidth) / 2)
