@@ -20,9 +20,9 @@ class StatsRepository(
     }
 }
 
-class MemoryStatsRepository : IStatsRepository {
-    private val memoryStats = mutableListOf<Stats>()
-
+class MemoryStatsRepository(
+    private val memoryStats: MutableList<Stats> = mutableListOf()
+) : IStatsRepository {
     override suspend fun getAllStats(): List<Stats> = memoryStats.toList()
 
     override suspend fun addStats(stats: Stats): Long? {

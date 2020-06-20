@@ -6,7 +6,7 @@ import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
-class MockMinefieldRepository : IMinefieldRepository {
+class FixedMinefieldRepository : IMinefieldRepository {
     override fun fromDifficulty(
         difficulty: Difficulty,
         dimensionRepository: IDimensionRepository,
