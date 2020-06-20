@@ -1,11 +1,12 @@
 package dev.lucasnlm.antimine.di
 
-import android.app.Application
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
@@ -33,7 +34,7 @@ class TestLevelModule {
 
     @Provides
     fun provideGameViewModelFactory(
-        application: Application,
+        @ApplicationContext context: Context,
         eventObserver: MutableLiveData<Event>,
         savesRepository: ISavesRepository,
         statsRepository: IStatsRepository,
@@ -44,7 +45,7 @@ class TestLevelModule {
         analyticsManager: AnalyticsManager,
         clock: Clock
     ) = GameViewModelFactory(
-        application,
+        context,
         eventObserver,
         savesRepository,
         statsRepository,

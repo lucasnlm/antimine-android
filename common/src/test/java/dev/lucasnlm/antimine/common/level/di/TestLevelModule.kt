@@ -5,6 +5,9 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.lucasnlm.antimine.common.level.mocks.FixedDimensionRepository
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
@@ -22,9 +25,8 @@ import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 @Module
-class TestLevelModule(
-    private val application: Application
-) {
+@InstallIn(ApplicationComponent::class)
+class TestLevelModule {
     @Provides
     fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
 
@@ -33,7 +35,7 @@ class TestLevelModule(
 
     @Provides
     fun provideGameViewModelFactory(
-        application: Application,
+        @ApplicationContext context: Context,
         eventObserver: MutableLiveData<Event>,
         savesRepository: ISavesRepository,
         statsRepository: IStatsRepository,
@@ -44,7 +46,7 @@ class TestLevelModule(
         analyticsManager: AnalyticsManager,
         clock: Clock
     ) = GameViewModelFactory(
-        application,
+        context,
         eventObserver,
         savesRepository,
         statsRepository,
@@ -57,10 +59,7 @@ class TestLevelModule(
     )
 
     @Provides
-    fun provideDimensionRepository(
-        context: Context,
-        preferencesRepository: IPreferencesRepository
-    ): IDimensionRepository = FixedDimensionRepository()
+    fun provideDimensionRepository(): IDimensionRepository = FixedDimensionRepository()
 
     @Provides
     fun provideSavesRepository(): ISavesRepository = MemorySavesRepository()
@@ -72,8 +71,5 @@ class TestLevelModule(
     fun provideStatsRepository(): IStatsRepository = MemoryStatsRepository()
 
     @Provides
-    fun provideHapticFeedbackInteractor(
-        application: Application,
-        preferencesRepository: IPreferencesRepository
-    ): IHapticFeedbackInteractor = DisabledIHapticFeedbackInteractor()
+    fun provideHapticFeedbackInteractor(): IHapticFeedbackInteractor = DisabledIHapticFeedbackInteractor()
 }
