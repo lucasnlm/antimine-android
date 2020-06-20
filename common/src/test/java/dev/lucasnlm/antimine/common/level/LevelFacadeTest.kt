@@ -295,7 +295,7 @@ class LevelFacadeTest {
     }
 
     @Test
-    fun testOpenNeighbors() {
+    fun testOpenNeighborsWithoutFlag() {
         levelFacadeOf(5, 5, 24, 200L).run {
             plantMinesExcept(12)
             singleClick(12)
@@ -309,15 +309,59 @@ class LevelFacadeTest {
                 ),
                 field.map { if (it.isCovered) 1 else 0 }.toList()
             )
+
+            // It won't open any if the mines were not flagged.
             openNeighbors(12)
             assertEquals(
                 listOf(
                     1, 1, 1, 1, 1,
-                    1, 0, 0, 0, 1,
-                    1, 0, 0, 0, 1,
-                    1, 0, 0, 0, 1,
-                    1, 1, 1, 1, 1
-                ),
+                    1, 1, 1, 1, 1,
+                    1, 1, 0, 1, 1,
+                    1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1),
+                field.map { if (it.isCovered) 1 else 0 }.toList()
+            )
+        }
+    }
+
+    @Test
+    fun testOpenNeighbors() {
+        levelFacadeOf(5, 5, 15, 200L).run {
+            plantMinesExcept(12)
+            singleClick(12)
+            assertEquals(
+                listOf(
+                    1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1,
+                    1, 1, 0, 1, 1,
+                    1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1),
+                field.map { if (it.isCovered) 1 else 0 }.toList()
+            )
+
+            // It won't open any if the mines were not flagged.
+            singleClick(14)
+            openNeighbors(14)
+            assertEquals(
+                listOf(
+                    1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1,
+                    1, 1, 0, 1, 0,
+                    1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1),
+                field.map { if (it.isCovered) 1 else 0 }.toList()
+            )
+
+            // After flag its neighbors, it must open all clean neighbors.
+            getArea(14).findNeighbors().filter { it.hasMine }.forEach { it.mark = Mark.Flag }
+            openNeighbors(14)
+            assertEquals(
+                listOf(
+                    1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1,
+                    1, 1, 0, 0, 0,
+                    1, 1, 1, 1, 0,
+                    1, 1, 1, 1, 1),
                 field.map { if (it.isCovered) 1 else 0 }.toList()
             )
         }
