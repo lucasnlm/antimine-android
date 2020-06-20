@@ -37,3 +37,27 @@ class SavesRepository @Inject constructor(
         private const val MAX_STORAGE = 15
     }
 }
+
+class MemorySavesRepository : ISavesRepository {
+    private var memoryList = mutableListOf<Save>()
+    private var maxSavesStorage = -1
+
+    override suspend fun getAllSaves(): List<Save> = memoryList.toList()
+
+    override suspend fun fetchCurrentSave(): Save? = memoryList.lastOrNull()
+
+    override suspend fun loadFromId(id: Int): Save? = memoryList.find { it.uid == id }
+
+    override suspend fun saveGame(save: Save): Long? {
+        if (maxSavesStorage - 1 > 0) {
+            memoryList = memoryList.subList(0, maxSavesStorage - 1)
+        }
+        memoryList.add(save)
+        return memoryList.count().toLong()
+    }
+
+    override fun setLimit(maxSavesStorage: Int) {
+        this.maxSavesStorage = maxSavesStorage
+        memoryList = memoryList.subList(0, maxSavesStorage)
+    }
+}
