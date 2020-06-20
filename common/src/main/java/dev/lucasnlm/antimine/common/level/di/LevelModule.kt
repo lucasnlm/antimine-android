@@ -6,8 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.database.AppDataBase
+import dev.lucasnlm.antimine.common.level.database.dao.SaveDao
+import dev.lucasnlm.antimine.common.level.database.dao.StatsDao
 import dev.lucasnlm.antimine.common.level.repository.DimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
@@ -24,30 +29,26 @@ import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 @Module
-open class LevelModule(
-    private val application: Application
-) {
-    private val appDataBase by lazy {
-        Room.databaseBuilder(application, AppDataBase::class.java, DATA_BASE_NAME)
+@InstallIn(ActivityComponent::class)
+open class LevelModule {
+    @Provides
+    fun provideAppDataBase(
+        @ApplicationContext context: Context
+    ): AppDataBase {
+        return Room.databaseBuilder(context, AppDataBase::class.java, DATA_BASE_NAME)
             .fallbackToDestructiveMigration()
             .build()
     }
 
-    private val savesDao by lazy {
-        appDataBase.saveDao()
-    }
+    @Provides
+    fun provideSavesDao(
+        appDataBase: AppDataBase
+    ): SaveDao = appDataBase.saveDao()
 
-    private val statsDao by lazy {
-        appDataBase.statsDao()
-    }
-
-    private val savesRepository by lazy {
-        SavesRepository(savesDao)
-    }
-
-    private val statsRepository by lazy {
-        StatsRepository(statsDao)
-    }
+    @Provides
+    fun provideStatsDao(
+        appDataBase: AppDataBase
+    ): StatsDao = appDataBase.statsDao()
 
     @Provides
     open fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
@@ -88,10 +89,14 @@ open class LevelModule(
         DimensionRepository(context, preferencesRepository)
 
     @Provides
-    open fun provideSavesRepository(): ISavesRepository = savesRepository
+    open fun provideSavesRepository(
+        savesDao: SaveDao
+    ): ISavesRepository = SavesRepository(savesDao)
 
     @Provides
-    open fun provideStatsRepository(): IStatsRepository = statsRepository
+    open fun provideStatsRepository(
+        statsDao: StatsDao
+    ): IStatsRepository = StatsRepository(statsDao)
 
     @Provides
     open fun provideMinefieldRepository(): IMinefieldRepository = MinefieldRepository()

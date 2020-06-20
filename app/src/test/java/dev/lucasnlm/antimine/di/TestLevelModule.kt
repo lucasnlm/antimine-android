@@ -1,11 +1,11 @@
 package dev.lucasnlm.antimine.di
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import dagger.Module
 import dagger.Provides
-import dev.lucasnlm.antimine.common.level.di.LevelModule
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
@@ -23,17 +23,16 @@ import dev.lucasnlm.antimine.mocks.FixedDimensionRepository
 import dev.lucasnlm.antimine.mocks.FixedMinefieldRepository
 
 @Module
-class TestLevelModule(
-    application: Application
-) : LevelModule(application) {
+@InstallIn(ActivityComponent::class)
+class TestLevelModule {
     @Provides
-    override fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
+    fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
 
     @Provides
-    override fun provideClock(): Clock = Clock()
+    fun provideClock(): Clock = Clock()
 
     @Provides
-    override fun provideGameViewModelFactory(
+    fun provideGameViewModelFactory(
         application: Application,
         eventObserver: MutableLiveData<Event>,
         savesRepository: ISavesRepository,
@@ -58,23 +57,17 @@ class TestLevelModule(
     )
 
     @Provides
-    override fun provideDimensionRepository(
-        context: Context,
-        preferencesRepository: IPreferencesRepository
-    ): IDimensionRepository = FixedDimensionRepository()
+    fun provideDimensionRepository(): IDimensionRepository = FixedDimensionRepository()
 
     @Provides
-    override fun provideSavesRepository(): ISavesRepository = MemorySavesRepository()
+    fun provideSavesRepository(): ISavesRepository = MemorySavesRepository()
 
     @Provides
-    override fun provideStatsRepository(): IStatsRepository = MemoryStatsRepository()
+    fun provideStatsRepository(): IStatsRepository = MemoryStatsRepository()
 
     @Provides
-    override fun provideMinefieldRepository(): IMinefieldRepository = FixedMinefieldRepository()
+    fun provideMinefieldRepository(): IMinefieldRepository = FixedMinefieldRepository()
 
     @Provides
-    override fun provideHapticFeedbackInteractor(
-        application: Application,
-        preferencesRepository: IPreferencesRepository
-    ): IHapticFeedbackInteractor = DisabledHapticFeedbackInteractor()
+    fun provideHapticFeedbackInteractor(): IHapticFeedbackInteractor = DisabledHapticFeedbackInteractor()
 }

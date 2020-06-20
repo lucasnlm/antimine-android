@@ -1,14 +1,9 @@
 package dev.lucasnlm.antimine.wear.di
 
-import android.app.Application
-import android.content.Context
 import dagger.Module
-import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 
 @Module
-class AppModule(
-    private val application: Application
-) {
-    @Provides
-    fun provideContext(): Context = application.applicationContext
-}
+@InstallIn(ApplicationComponent::class)
+class AppModule
