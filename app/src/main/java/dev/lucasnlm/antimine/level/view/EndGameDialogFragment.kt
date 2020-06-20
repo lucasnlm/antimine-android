@@ -6,9 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
-import dagger.android.support.DaggerAppCompatDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
@@ -19,8 +20,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class EndGameDialogFragment : DaggerAppCompatDialogFragment() {
-
+@AndroidEntryPoint
+class EndGameDialogFragment : AppCompatDialogFragment() {
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory
 

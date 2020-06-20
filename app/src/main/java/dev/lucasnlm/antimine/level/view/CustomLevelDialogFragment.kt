@@ -4,9 +4,10 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.lifecycle.ViewModelProviders
 
-import dagger.android.support.DaggerAppCompatDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
@@ -18,7 +19,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CustomLevelDialogFragment : DaggerAppCompatDialogFragment() {
+@AndroidEntryPoint
+class CustomLevelDialogFragment : AppCompatDialogFragment() {
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory
 
