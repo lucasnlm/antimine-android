@@ -9,6 +9,7 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 interface IDimensionRepository {
     fun areaSize(): Float
     fun areaSizeWithPadding(): Float
+    fun areaSeparator(): Float
     fun displaySize(): Size
     fun actionBarSize(): Int
 }
@@ -29,8 +30,12 @@ class DimensionRepository(
         context.resources.getDimension(R.dimen.field_size)
     }
 
+    override fun areaSeparator(): Float {
+        return context.resources.getDimension(R.dimen.field_padding)
+    }
+
     override fun areaSizeWithPadding(): Float {
-        return areaSize() + 2 * context.resources.getDimension(R.dimen.field_padding)
+        return areaSize() + 2 * areaSeparator()
     }
 
     override fun displaySize(): Size = with(Resources.getSystem().displayMetrics) {
