@@ -30,4 +30,4 @@ jobs:
     - name: Build with Gradle
       run: |
         ./gradlew assembleDebug
-        ./gradlew test --stacktrace
+        ./gradlew testGoogleDebugUnitTest --stacktrace

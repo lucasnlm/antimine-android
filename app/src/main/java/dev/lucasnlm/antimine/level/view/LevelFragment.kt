@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Difficulty
@@ -15,6 +16,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@AndroidEntryPoint
 open class LevelFragment : CommonLevelFragment() {
     override val levelFragmentResId: Int = R.layout.fragment_level
 

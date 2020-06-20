@@ -10,16 +10,17 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
-import dagger.android.support.DaggerAppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
@@ -27,7 +28,6 @@ import dev.lucasnlm.antimine.common.level.models.Score
 import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
@@ -45,11 +45,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class GameActivity : DaggerAppCompatActivity() {
-
-    @Inject
-    lateinit var viewModelFactory: GameViewModelFactory
-
+@AndroidEntryPoint
+class GameActivity : AppCompatActivity() {
     @Inject
     lateinit var preferencesRepository: IPreferencesRepository
 
@@ -62,8 +59,8 @@ class GameActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var savesRepository: ISavesRepository
 
-    private lateinit var viewModel: GameViewModel
-    private lateinit var shareViewModel: ShareViewModel
+    private val viewModel: GameViewModel by viewModels()
+    private val shareViewModel: ShareViewModel by viewModels()
 
     private var status: Status = Status.PreGame
     private val usingLargeArea by lazy { preferencesRepository.useLargeAreas() }
@@ -77,9 +74,6 @@ class GameActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
-
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(GameViewModel::class.java)
-        shareViewModel = ViewModelProviders.of(this).get(ShareViewModel::class.java)
 
         bindViewModel()
         bindToolbarAndDrawer()

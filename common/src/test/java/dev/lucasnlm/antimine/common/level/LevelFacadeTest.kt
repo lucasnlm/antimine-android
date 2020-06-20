@@ -318,7 +318,8 @@ class LevelFacadeTest {
                     1, 1, 1, 1, 1,
                     1, 1, 0, 1, 1,
                     1, 1, 1, 1, 1,
-                    1, 1, 1, 1, 1),
+                    1, 1, 1, 1, 1
+                ),
                 field.map { if (it.isCovered) 1 else 0 }.toList()
             )
         }
@@ -335,7 +336,8 @@ class LevelFacadeTest {
                     1, 1, 1, 1, 1,
                     1, 1, 0, 1, 1,
                     1, 1, 1, 1, 1,
-                    1, 1, 1, 1, 1),
+                    1, 1, 1, 1, 1
+                ),
                 field.map { if (it.isCovered) 1 else 0 }.toList()
             )
 
@@ -348,7 +350,8 @@ class LevelFacadeTest {
                     1, 1, 1, 1, 1,
                     1, 1, 0, 1, 0,
                     1, 1, 1, 1, 1,
-                    1, 1, 1, 1, 1),
+                    1, 1, 1, 1, 1
+                ),
                 field.map { if (it.isCovered) 1 else 0 }.toList()
             )
 
@@ -361,7 +364,8 @@ class LevelFacadeTest {
                     1, 1, 1, 1, 1,
                     1, 1, 0, 0, 0,
                     1, 1, 1, 1, 0,
-                    1, 1, 1, 1, 1),
+                    1, 1, 1, 1, 1
+                ),
                 field.map { if (it.isCovered) 1 else 0 }.toList()
             )
         }

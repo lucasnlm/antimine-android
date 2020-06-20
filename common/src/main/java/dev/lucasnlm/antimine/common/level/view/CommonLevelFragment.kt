@@ -6,19 +6,15 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
+import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import dagger.android.support.DaggerFragment
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import javax.inject.Inject
 
-abstract class CommonLevelFragment : DaggerFragment() {
-    @Inject
-    lateinit var viewModelFactory: GameViewModelFactory
-
+abstract class CommonLevelFragment : Fragment() {
     @Inject
     lateinit var dimensionRepository: IDimensionRepository
 
@@ -38,7 +34,7 @@ abstract class CommonLevelFragment : DaggerFragment() {
         super.onCreate(savedInstanceState)
 
         activity?.let {
-            viewModel = ViewModelProviders.of(it, viewModelFactory).get(GameViewModel::class.java)
+            viewModel = it.viewModels<GameViewModel>().value
             areaAdapter = AreaAdapter(it.applicationContext, viewModel)
         }
     }
