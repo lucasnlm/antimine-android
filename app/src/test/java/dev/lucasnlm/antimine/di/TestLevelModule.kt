@@ -16,7 +16,6 @@ import dev.lucasnlm.antimine.common.level.repository.MemorySavesRepository
 import dev.lucasnlm.antimine.common.level.repository.MemoryStatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
-import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.mocks.DisabledHapticFeedbackInteractor
@@ -31,31 +30,6 @@ class TestLevelModule {
 
     @Provides
     fun provideClock(): Clock = Clock()
-
-    @Provides
-    fun provideGameViewModelFactory(
-        @ApplicationContext context: Context,
-        eventObserver: MutableLiveData<Event>,
-        savesRepository: ISavesRepository,
-        statsRepository: IStatsRepository,
-        dimensionRepository: IDimensionRepository,
-        preferencesRepository: IPreferencesRepository,
-        hapticFeedbackInteractor: IHapticFeedbackInteractor,
-        minefieldRepository: IMinefieldRepository,
-        analyticsManager: AnalyticsManager,
-        clock: Clock
-    ) = GameViewModelFactory(
-        context,
-        eventObserver,
-        savesRepository,
-        statsRepository,
-        dimensionRepository,
-        preferencesRepository,
-        hapticFeedbackInteractor,
-        minefieldRepository,
-        analyticsManager,
-        clock
-    )
 
     @Provides
     fun provideDimensionRepository(): IDimensionRepository = FixedDimensionRepository()

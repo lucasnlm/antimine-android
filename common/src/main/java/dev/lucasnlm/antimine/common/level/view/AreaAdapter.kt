@@ -30,7 +30,7 @@ class AreaAdapter(
 
     init {
         setHasStableIds(true)
-        paintSettings = createAreaPaintSettings(context, viewModel.useAccessibilityMode())
+        paintSettings = createAreaPaintSettings(context.applicationContext, viewModel.useAccessibilityMode())
     }
 
     fun setAmbientMode(isAmbientMode: Boolean, isLowBitAmbient: Boolean) {

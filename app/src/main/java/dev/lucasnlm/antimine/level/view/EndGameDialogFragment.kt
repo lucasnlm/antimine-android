@@ -5,14 +5,13 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProviders
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.instant.InstantAppManager
 import dev.lucasnlm.antimine.level.viewmodel.EngGameDialogViewModel
 import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
@@ -22,9 +21,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class EndGameDialogFragment : AppCompatDialogFragment() {
-    @Inject
-    lateinit var viewModelFactory: GameViewModelFactory
-
     @Inject
     lateinit var instantAppManager: InstantAppManager
 
@@ -43,9 +39,9 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
         super.onCreate(savedInstanceState)
 
         activity?.let {
-            viewModel = ViewModelProviders.of(it, viewModelFactory).get(GameViewModel::class.java)
-            endGameViewModel = ViewModelProviders.of(this).get(EngGameDialogViewModel::class.java)
-            shareViewModel = ViewModelProviders.of(this).get(ShareViewModel::class.java)
+            viewModel = it.viewModels<GameViewModel>().value
+            endGameViewModel = it.viewModels<EngGameDialogViewModel>().value
+            shareViewModel = it.viewModels<ShareViewModel>().value
         }
 
         arguments?.run {
@@ -66,7 +62,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
 
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
-        AlertDialog.Builder(context!!, R.style.MyDialog).apply {
+        AlertDialog.Builder(requireContext(), R.style.MyDialog).apply {
             val view = LayoutInflater
                 .from(context)
                 .inflate(R.layout.dialog_end_game, null, false)

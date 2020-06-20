@@ -2,17 +2,15 @@ package dev.lucasnlm.antimine.level.view
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import android.widget.TextView
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.lifecycle.ViewModelProviders
-
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -22,9 +20,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CustomLevelDialogFragment : AppCompatDialogFragment() {
     @Inject
-    lateinit var viewModelFactory: GameViewModelFactory
-
-    @Inject
     lateinit var preferencesRepository: IPreferencesRepository
 
     private lateinit var viewModel: GameViewModel
@@ -33,7 +28,7 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
         super.onCreate(savedInstanceState)
 
         activity?.let {
-            viewModel = ViewModelProviders.of(it, viewModelFactory).get(GameViewModel::class.java)
+            viewModel = it.viewModels<GameViewModel>().value
         }
     }
 
@@ -52,7 +47,7 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(context!!, R.style.MyDialog).apply {
+        return AlertDialog.Builder(requireContext(), R.style.MyDialog).apply {
             setTitle(R.string.new_game)
             setView(R.layout.dialog_custom_game)
             setNegativeButton(R.string.cancel, null)

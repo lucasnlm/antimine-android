@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.level.viewmodel
 
-import android.content.Context
 import android.os.Handler
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.common.level.LevelFacade
@@ -26,8 +26,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class GameViewModel(
-    val context: Context,
+class GameViewModel @ViewModelInject constructor(
     val eventObserver: MutableLiveData<Event>,
     private val savesRepository: ISavesRepository,
     private val statsRepository: IStatsRepository,

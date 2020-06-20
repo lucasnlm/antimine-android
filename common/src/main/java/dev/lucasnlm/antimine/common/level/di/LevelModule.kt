@@ -8,10 +8,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.database.AppDataBase
 import dev.lucasnlm.antimine.common.level.database.dao.SaveDao
 import dev.lucasnlm.antimine.common.level.database.dao.StatsDao
+import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.repository.DimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
@@ -23,8 +23,6 @@ import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.HapticFeedbackInteractor
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
-import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
-import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 @Module
@@ -54,31 +52,6 @@ open class LevelModule {
 
     @Provides
     open fun provideClock(): Clock = Clock()
-
-    @Provides
-    open fun provideGameViewModelFactory(
-        @ApplicationContext context: Context,
-        eventObserver: MutableLiveData<Event>,
-        savesRepository: ISavesRepository,
-        statsRepository: IStatsRepository,
-        dimensionRepository: IDimensionRepository,
-        preferencesRepository: IPreferencesRepository,
-        hapticFeedbackInteractor: IHapticFeedbackInteractor,
-        minefieldRepository: IMinefieldRepository,
-        analyticsManager: AnalyticsManager,
-        clock: Clock
-    ) = GameViewModelFactory(
-        context,
-        eventObserver,
-        savesRepository,
-        statsRepository,
-        dimensionRepository,
-        preferencesRepository,
-        hapticFeedbackInteractor,
-        minefieldRepository,
-        analyticsManager,
-        clock
-    )
 
     @Provides
     open fun provideDimensionRepository(
