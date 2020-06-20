@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.common.level.di
 
-import android.app.Application
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import dagger.Module
