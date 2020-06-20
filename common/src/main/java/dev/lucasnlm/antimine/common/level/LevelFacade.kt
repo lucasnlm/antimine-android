@@ -239,14 +239,25 @@ class LevelFacade {
         return neighbors
     }
 
-    fun openNeighbors(index: Int): Sequence<Area> =
-        getArea(index)
-            .findNeighbors()
-            .filter {
-                it.mark.isNone() && it.isCovered
-            }.also {
-                it.forEach { area -> openField(area) }
-            }
+    /**
+     * Open all tiles neighbors of [index].
+     * If the number of flagged neighbors is less than the number of neighbors
+     * it won't open any of them to avoid miss clicks.
+     */
+    fun openNeighbors(index: Int): Sequence<Area> {
+        val neighbors = getArea(index).findNeighbors()
+        val flaggedCount = neighbors.count { it.mark.isFlag() }
+        return if (flaggedCount >= getArea(index).minesAround) {
+            neighbors
+                .filter {
+                    it.mark.isNone() && it.isCovered
+                }.also {
+                    it.forEach { area -> openField(area) }
+                }
+        } else {
+            sequenceOf()
+        }
+    }
 
     fun runFlagAssistant(): Sequence<Area> {
         // Must not select Mark.PurposefulNone, only Mark.None. Otherwise, it will flag
@@ -323,7 +334,7 @@ class LevelFacade {
         return (minesCount - flagsCount).coerceAtLeast(0)
     }
 
-    private fun Area.findNeighbors() = sequenceOf(
+    fun Area.findNeighbors() = sequenceOf(
         getNeighbor(1, 0),
         getNeighbor(1, 1),
         getNeighbor(0, 1),
