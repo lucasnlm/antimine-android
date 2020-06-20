@@ -67,7 +67,10 @@ abstract class CommonLevelFragment : Fragment() {
             0
         }
 
-        val height = displayMetrics.heightPixels - actionBarHeight
+        val resourceId: Int = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+        val bottom = if (resourceId > 0) { resources.getDimensionPixelSize(resourceId) } else 0
+
+        val height = displayMetrics.heightPixels - actionBarHeight - bottom
         val recyclerViewHeight = (dimensionRepository.areaSize() * boardHeight)
         val separatorsHeight = (dimensionRepository.areaSeparator() * (boardHeight - 1))
 
