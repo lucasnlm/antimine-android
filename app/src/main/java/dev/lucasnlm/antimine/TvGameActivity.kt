@@ -8,12 +8,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
-import dagger.android.support.DaggerAppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
@@ -31,8 +32,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class TvGameActivity : DaggerAppCompatActivity() {
-
+@AndroidEntryPoint
+class TvGameActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: GameViewModelFactory
 
