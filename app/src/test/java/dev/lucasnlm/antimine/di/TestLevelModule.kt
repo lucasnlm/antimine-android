@@ -11,16 +11,16 @@ import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
+import dev.lucasnlm.antimine.common.level.repository.MemorySavesRepository
+import dev.lucasnlm.antimine.common.level.repository.MemoryStatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.mocks.MockDimensionRepository
-import dev.lucasnlm.antimine.mocks.MockHapticFeedbackInteractor
-import dev.lucasnlm.antimine.mocks.MockMinefieldRepository
-import dev.lucasnlm.antimine.mocks.MockSavesRepository
-import dev.lucasnlm.antimine.mocks.MockStatsRepository
+import dev.lucasnlm.antimine.mocks.DisabledHapticFeedbackInteractor
+import dev.lucasnlm.antimine.mocks.FixedDimensionRepository
+import dev.lucasnlm.antimine.mocks.FixedMinefieldRepository
 
 @Module
 class TestLevelModule(
@@ -61,20 +61,20 @@ class TestLevelModule(
     override fun provideDimensionRepository(
         context: Context,
         preferencesRepository: IPreferencesRepository
-    ): IDimensionRepository = MockDimensionRepository()
+    ): IDimensionRepository = FixedDimensionRepository()
 
     @Provides
-    override fun provideSavesRepository(): ISavesRepository = MockSavesRepository()
+    override fun provideSavesRepository(): ISavesRepository = MemorySavesRepository()
 
     @Provides
-    override fun provideStatsRepository(): IStatsRepository = MockStatsRepository(listOf())
+    override fun provideStatsRepository(): IStatsRepository = MemoryStatsRepository()
 
     @Provides
-    override fun provideMinefieldRepository(): IMinefieldRepository = MockMinefieldRepository()
+    override fun provideMinefieldRepository(): IMinefieldRepository = FixedMinefieldRepository()
 
     @Provides
     override fun provideHapticFeedbackInteractor(
         application: Application,
         preferencesRepository: IPreferencesRepository
-    ): IHapticFeedbackInteractor = MockHapticFeedbackInteractor()
+    ): IHapticFeedbackInteractor = DisabledHapticFeedbackInteractor()
 }

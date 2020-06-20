@@ -42,3 +42,9 @@ class HapticFeedbackInteractor(
         }
     }
 }
+
+class DisabledIHapticFeedbackInteractor : IHapticFeedbackInteractor {
+    override fun toggleFlagFeedback() { }
+
+    override fun explosionFeedback() { }
+}

@@ -166,9 +166,11 @@ class WatchGameActivity : DaggerAppCompatActivity(), AmbientModeSupport.AmbientC
         when (event) {
             Event.StartNewGame -> {
                 status = Status.PreGame
+                newGame.visibility = View.GONE
             }
             Event.Resume, Event.Running -> {
                 status = Status.Running
+                newGame.visibility = View.GONE
             }
             Event.Victory -> {
                 status = Status.Over()

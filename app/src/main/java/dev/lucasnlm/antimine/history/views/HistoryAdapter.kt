@@ -43,7 +43,8 @@ class HistoryAdapter(
                 SaveStatus.VICTORY -> ContextCompat.getColor(context, R.color.victory)
                 SaveStatus.ON_GOING -> ContextCompat.getColor(context, R.color.ongoing)
                 SaveStatus.DEFEAT -> ContextCompat.getColor(context, R.color.lose)
-            }, PorterDuff.Mode.SRC_IN
+            },
+            PorterDuff.Mode.SRC_IN
         )
 
         holder.minefieldSize.text = String.format("%d x %d", minefield.width, minefield.height)

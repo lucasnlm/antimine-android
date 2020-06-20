@@ -5,18 +5,17 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import dagger.Module
 import dagger.Provides
-import dev.lucasnlm.antimine.common.level.database.models.Save
-import dev.lucasnlm.antimine.common.level.database.models.Stats
-import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.common.level.mocks.FixedDimensionRepository
 import dev.lucasnlm.antimine.common.level.models.Event
-import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
+import dev.lucasnlm.antimine.common.level.repository.MemorySavesRepository
+import dev.lucasnlm.antimine.common.level.repository.MemoryStatsRepository
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
-import dev.lucasnlm.antimine.common.level.repository.Size
 import dev.lucasnlm.antimine.common.level.utils.Clock
+import dev.lucasnlm.antimine.common.level.utils.DisabledIHapticFeedbackInteractor
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
@@ -61,54 +60,20 @@ class TestLevelModule(
     fun provideDimensionRepository(
         context: Context,
         preferencesRepository: IPreferencesRepository
-    ): IDimensionRepository = object : IDimensionRepository {
-        override fun areaSize(): Float = 50.0f
-
-        override fun areaSizeWithPadding(): Float = 52.0f
-
-        override fun displaySize(): Size = Size(50 * 15, 50 * 30)
-
-        override fun actionBarSize(): Int = 50
-    }
+    ): IDimensionRepository = FixedDimensionRepository()
 
     @Provides
-    fun provideSavesRepository(): ISavesRepository = object : ISavesRepository {
-        override suspend fun getAllSaves(): List<Save> = listOf()
-
-        override suspend fun fetchCurrentSave(): Save? = null
-
-        override suspend fun loadFromId(id: Int): Save? = null
-
-        override suspend fun saveGame(save: Save): Long? = null
-
-        override fun setLimit(maxSavesStorage: Int) { }
-    }
+    fun provideSavesRepository(): ISavesRepository = MemorySavesRepository()
 
     @Provides
-    fun provideMinefieldRepository(): IMinefieldRepository = object : IMinefieldRepository {
-        override fun fromDifficulty(
-            difficulty: Difficulty,
-            dimensionRepository: IDimensionRepository,
-            preferencesRepository: IPreferencesRepository
-        ) = Minefield(9, 9, 9)
-
-        override fun randomSeed(): Long = 200
-    }
+    fun provideMinefieldRepository(): IMinefieldRepository = FixedMinefieldRepository()
 
     @Provides
-    fun provideStatsRepository(): IStatsRepository = object : IStatsRepository {
-        override suspend fun getAllStats(): List<Stats> = listOf()
-
-        override suspend fun addStats(stats: Stats): Long? = null
-    }
+    fun provideStatsRepository(): IStatsRepository = MemoryStatsRepository()
 
     @Provides
     fun provideHapticFeedbackInteractor(
         application: Application,
         preferencesRepository: IPreferencesRepository
-    ): IHapticFeedbackInteractor = object : IHapticFeedbackInteractor {
-        override fun toggleFlagFeedback() { }
-
-        override fun explosionFeedback() { }
-    }
+    ): IHapticFeedbackInteractor = DisabledIHapticFeedbackInteractor()
 }

@@ -19,3 +19,14 @@ class StatsRepository(
         return statsDao.insertAll(stats).firstOrNull()
     }
 }
+
+class MemoryStatsRepository(
+    private val memoryStats: MutableList<Stats> = mutableListOf()
+) : IStatsRepository {
+    override suspend fun getAllStats(): List<Stats> = memoryStats.toList()
+
+    override suspend fun addStats(stats: Stats): Long? {
+        memoryStats.add(stats)
+        return memoryStats.count().toLong()
+    }
+}

@@ -79,10 +79,12 @@ open class LevelFragment : DaggerFragment() {
 
             withContext(Dispatchers.Main) {
                 recyclerGrid.apply {
+                    val horizontalPadding = calcHorizontalPadding(levelSetup.width)
+                    val verticalPadding = calcVerticalPadding(levelSetup.height)
                     setHasFixedSize(true)
                     addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
-                    isNestedScrollingEnabled = false
-                    layoutManager = makeNewLayoutManager(levelSetup.width, levelSetup.height)
+                    setPadding(horizontalPadding, verticalPadding, 0, 0)
+                    layoutManager = makeNewLayoutManager(levelSetup.width)
                     adapter = areaAdapter
                     alpha = 0.0f
 
@@ -105,7 +107,12 @@ open class LevelFragment : DaggerFragment() {
             levelSetup.observe(
                 viewLifecycleOwner,
                 Observer {
-                    recyclerGrid.layoutManager = makeNewLayoutManager(it.width, it.height)
+                    recyclerGrid.apply {
+                        val horizontalPadding = calcHorizontalPadding(it.width)
+                        val verticalPadding = calcVerticalPadding(it.height)
+                        layoutManager = makeNewLayoutManager(it.width)
+                        setPadding(horizontalPadding, verticalPadding, 0, 0)
+                    }
                 }
             )
 
@@ -165,16 +172,22 @@ open class LevelFragment : DaggerFragment() {
         }
     }
 
-    private fun makeNewLayoutManager(boardWidth: Int, boardHeight: Int) =
-        FixedGridLayoutManager(boardWidth, calcHorizontalPadding(boardWidth), calcVerticalPadding(boardHeight))
+    private fun makeNewLayoutManager(boardWidth: Int) =
+        FixedGridLayoutManager().apply {
+            setTotalColumnCount(boardWidth)
+        }
 
-    private fun calcHorizontalPadding(boardWidth: Int): Int =
-        ((recyclerGrid.measuredWidth - dimensionRepository.areaSizeWithPadding() * boardWidth) / 2)
-            .coerceAtLeast(0.0f)
-            .toInt()
+    private fun calcHorizontalPadding(boardWidth: Int): Int {
+        val width = recyclerGrid.measuredWidth
+        val recyclerViewWidth = (dimensionRepository.areaSize() * boardWidth)
+        val separatorsWidth = (dimensionRepository.areaSeparator() * (boardWidth - 1))
+        return ((width - recyclerViewWidth - separatorsWidth) / 2).coerceAtLeast(0.0f).toInt()
+    }
 
-    private fun calcVerticalPadding(boardHeight: Int): Int =
-        ((recyclerGrid.measuredHeight - dimensionRepository.areaSizeWithPadding() * boardHeight) / 2)
-            .coerceAtLeast(0.0f)
-            .toInt()
+    private fun calcVerticalPadding(boardHeight: Int): Int {
+        val height = recyclerGrid.measuredHeight
+        val recyclerViewHeight = (dimensionRepository.areaSize() * boardHeight)
+        val separatorsHeight = (dimensionRepository.areaSeparator() * (boardHeight - 1))
+        return ((height - recyclerViewHeight - separatorsHeight) / 2).coerceAtLeast(0.0f).toInt()
+    }
 }
