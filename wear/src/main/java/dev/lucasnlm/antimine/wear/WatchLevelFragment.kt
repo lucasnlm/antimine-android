@@ -2,54 +2,20 @@ package dev.lucasnlm.antimine.wear
 
 import android.os.Bundle
 import android.text.format.DateUtils
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.R
-import dagger.android.support.DaggerFragment
 import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
-import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
-import dev.lucasnlm.antimine.common.level.view.AreaAdapter
+import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
-import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModelFactory
-import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class WatchLevelFragment : DaggerFragment() {
-    @Inject
-    lateinit var viewModelFactory: GameViewModelFactory
-
-    @Inject
-    lateinit var dimensionRepository: IDimensionRepository
-
-    private lateinit var viewModel: GameViewModel
-    private lateinit var recyclerGrid: RecyclerView
-    private lateinit var areaAdapter: AreaAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.fragment_level, container, false)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        activity?.let {
-            viewModel = ViewModelProviders.of(it, viewModelFactory).get(GameViewModel::class.java)
-            areaAdapter = AreaAdapter(it.applicationContext, viewModel)
-        }
-    }
+class WatchLevelFragment : CommonLevelFragment() {
+    override val levelFragmentResId: Int = R.layout.fragment_level
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -117,25 +83,6 @@ class WatchLevelFragment : DaggerFragment() {
                 }
             )
         }
-    }
-
-    private fun makeNewLayoutManager(boardWidth: Int) =
-        FixedGridLayoutManager().apply {
-            setTotalColumnCount(boardWidth)
-        }
-
-    private fun calcHorizontalPadding(boardWidth: Int): Int {
-        val width = recyclerGrid.measuredWidth
-        val recyclerViewWidth = (dimensionRepository.areaSize() * boardWidth)
-        val separatorsWidth = (dimensionRepository.areaSeparator() * (boardWidth - 1))
-        return ((width - recyclerViewWidth - separatorsWidth) / 2).coerceAtLeast(0.0f).toInt()
-    }
-
-    private fun calcVerticalPadding(boardHeight: Int): Int {
-        val height = recyclerGrid.measuredHeight
-        val recyclerViewHeight = (dimensionRepository.areaSize() * boardHeight)
-        val separatorsHeight = (dimensionRepository.areaSeparator() * (boardHeight - 1))
-        return ((height - recyclerViewHeight - separatorsHeight) / 2).coerceAtLeast(0.0f).toInt()
     }
 
     fun setAmbientMode(ambientSettings: AmbientSettings) {
