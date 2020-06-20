@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.level.view
+package dev.lucasnlm.antimine
 
 import android.os.Build
 import androidx.recyclerview.widget.RecyclerView
@@ -7,9 +7,8 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.HiltTestApplication
 import dagger.hilt.android.testing.UninstallModules
-import dev.lucasnlm.antimine.GameActivity
-import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.di.LevelModule
+import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Rule
@@ -26,7 +25,7 @@ import java.util.concurrent.TimeUnit
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.P], application = HiltTestApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
-class LevelFragmentTest {
+class GameActivityTest {
     @get:Rule
     var rule = HiltAndroidRule(this)
 
