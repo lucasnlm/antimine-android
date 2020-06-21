@@ -18,8 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
-open class LevelFragment : CommonLevelFragment() {
-    override val levelFragmentResId: Int = R.layout.fragment_level
+open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
 
     override fun onPause() {
         super.onPause()
