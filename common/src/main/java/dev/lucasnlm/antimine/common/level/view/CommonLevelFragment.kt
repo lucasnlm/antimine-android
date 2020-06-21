@@ -1,11 +1,13 @@
 package dev.lucasnlm.antimine.common.level.view
 
+import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +15,7 @@ import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import javax.inject.Inject
+
 
 abstract class CommonLevelFragment : Fragment() {
     @Inject
@@ -30,8 +33,8 @@ abstract class CommonLevelFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(levelFragmentResId, container, false)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
         activity?.let {
             viewModel = it.viewModels<GameViewModel>().value
@@ -45,9 +48,9 @@ abstract class CommonLevelFragment : Fragment() {
         }
 
     protected fun calcHorizontalPadding(boardWidth: Int): Int {
-        val activity = requireActivity()
+        val windowManager = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val displayMetrics = DisplayMetrics()
-        activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
 
         val width = displayMetrics.widthPixels
         val recyclerViewWidth = (dimensionRepository.areaSize() * boardWidth)
@@ -56,12 +59,13 @@ abstract class CommonLevelFragment : Fragment() {
     }
 
     protected fun calcVerticalPadding(boardHeight: Int): Int {
-        val activity = requireActivity()
+        val context = requireContext()
+        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val displayMetrics = DisplayMetrics()
-        activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
 
         val typedValue = TypedValue()
-        val actionBarHeight = if (activity.theme.resolveAttribute(android.R.attr.actionBarSize, typedValue, true)) {
+        val actionBarHeight = if (context.theme.resolveAttribute(android.R.attr.actionBarSize, typedValue, true)) {
             TypedValue.complexToDimensionPixelSize(typedValue.data, resources.displayMetrics)
         } else {
             0
