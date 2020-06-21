@@ -8,7 +8,7 @@ sealed class Analytics(
     val title: String,
     val extra: Map<String, String> = mapOf()
 ) {
-    class Open : Analytics("Open game")
+    object Open : Analytics("Open game")
 
     class NewGame(
         minefield: Minefield,
@@ -46,7 +46,7 @@ sealed class Analytics(
         )
     )
 
-    class ResumePreviousGame : Analytics("Resume previous game")
+    object ResumePreviousGame : Analytics("Resume previous game")
 
     class OpenTile(index: Int) : Analytics("Open Tile", mapOf("Index" to index.toString()))
 
@@ -77,23 +77,23 @@ sealed class Analytics(
         )
     )
 
-    class Resume : Analytics("Back to the game")
+    object Resume : Analytics("Back to the game")
 
-    class Quit : Analytics("Quit game")
+    object Quit : Analytics("Quit game")
 
-    class OpenDrawer : Analytics("Opened Drawer")
+    object OpenDrawer : Analytics("Opened Drawer")
 
-    class CloseDrawer : Analytics("Closed Drawer")
+    object CloseDrawer : Analytics("Closed Drawer")
 
-    class OpenAbout : Analytics("Open About")
+    object OpenAbout : Analytics("Open About")
 
     object OpenThemes : Analytics("Open Themes")
 
-    class OpenStats : Analytics("Open Stats")
+    object OpenStats : Analytics("Open Stats")
 
-    class OpenSettings : Analytics("Open Settings")
+    object OpenSettings : Analytics("Open Settings")
 
-    class OpenSaveHistory : Analytics("Open Save History")
+    object OpenSaveHistory : Analytics("Open Save History")
 
     class ShowRatingRequest(usages: Int) : Analytics("Shown Rating Request", mapOf("Usages" to usages.toString()))
 

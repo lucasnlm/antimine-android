@@ -192,7 +192,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
                     resumeGame()
                 }
 
-                analyticsManager.sentEvent(Analytics.Resume())
+                analyticsManager.sentEvent(Analytics.Resume)
             }
         }
     }
@@ -204,7 +204,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
             viewModel.pauseGame()
         }
 
-        analyticsManager.sentEvent(Analytics.Quit())
+        analyticsManager.sentEvent(Analytics.Quit)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean =
@@ -271,7 +271,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
 
                 override fun onDrawerOpened(drawerView: View) {
                     viewModel.pauseGame()
-                    analyticsManager.sentEvent(Analytics.OpenDrawer())
+                    analyticsManager.sentEvent(Analytics.OpenDrawer)
                 }
 
                 override fun onDrawerClosed(drawerView: View) {
@@ -279,7 +279,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
                         viewModel.resumeGame()
                     }
 
-                    analyticsManager.sentEvent(Analytics.CloseDrawer())
+                    analyticsManager.sentEvent(Analytics.CloseDrawer)
                 }
 
                 override fun onDrawerStateChanged(newState: Int) {
@@ -427,7 +427,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
     }
 
     private fun showAbout() {
-        analyticsManager.sentEvent(Analytics.OpenAbout())
+        analyticsManager.sentEvent(Analytics.OpenAbout)
         Intent(this, AboutActivity::class.java).apply {
             startActivity(this)
         }
@@ -441,21 +441,21 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
     }
 
     private fun openSaveHistory() {
-        analyticsManager.sentEvent(Analytics.OpenSaveHistory())
+        analyticsManager.sentEvent(Analytics.OpenSaveHistory)
         Intent(this, HistoryActivity::class.java).apply {
             startActivity(this)
         }
     }
 
     private fun openStats() {
-        analyticsManager.sentEvent(Analytics.OpenStats())
+        analyticsManager.sentEvent(Analytics.OpenStats)
         Intent(this, StatsActivity::class.java).apply {
             startActivity(this)
         }
     }
 
     private fun showSettings() {
-        analyticsManager.sentEvent(Analytics.OpenSettings())
+        analyticsManager.sentEvent(Analytics.OpenSettings)
         Intent(this, PreferencesActivity::class.java).apply {
             startActivity(this)
         }
