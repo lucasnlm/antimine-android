@@ -316,6 +316,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
                 R.id.about -> showAbout()
                 R.id.settings -> showSettings()
                 R.id.rate -> openRateUsLink("Drawer")
+                R.id.themes -> openThemes()
                 R.id.share_now -> shareCurrentGame()
                 R.id.previous_games -> openSaveHistory()
                 R.id.stats -> openStats()
@@ -435,6 +436,13 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
 
     private fun showAbout() {
         analyticsManager.sentEvent(Analytics.OpenAbout)
+        Intent(this, AboutActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
+    private fun openThemes() {
+        analyticsManager.sentEvent(Analytics.OpenThemes)
         Intent(this, AboutActivity::class.java).apply {
             startActivity(this)
         }
