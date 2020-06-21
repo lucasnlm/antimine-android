@@ -41,11 +41,13 @@
         <item
             android:id="@+id/previous_games"
             android:checkable="false"
+            android:icon="@drawable/calendar"
             android:title="@string/previous_games" />
 
         <item
             android:id="@+id/stats"
             android:checkable="false"
+            android:icon="@drawable/stats"
             android:title="@string/events" />
     </group>
 
@@ -58,6 +60,7 @@
         <item
             android:id="@+id/settings"
             android:checkable="false"
+            android:icon="@drawable/settings"
             android:title="@string/settings" />
     </group>
 
@@ -78,11 +81,13 @@
             android:id="@+id/share_now"
             android:checkable="false"
             android:visible="false"
+            android:icon="@drawable/share"
             android:title="@string/share_menu"
             tools:visible="true" />
 
         <item
             android:id="@+id/rate"
+            android:icon="@drawable/hearth"
             android:checkable="false"
             android:title="@string/rating" />
     </group>
@@ -90,6 +95,7 @@
     <group android:id="@+id/about_group">
         <item
             android:id="@+id/about"
+            android:icon="@drawable/info"
             android:checkable="false"
             android:title="@string/about" />
     </group>
