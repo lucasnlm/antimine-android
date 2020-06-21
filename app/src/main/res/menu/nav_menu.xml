@@ -62,6 +62,16 @@
     </group>
 
     <group
+        android:id="@+id/theme_group">
+
+        <item
+            android:id="@+id/themes"
+            android:checkable="false"
+            android:icon="@drawable/themes"
+            android:title="@string/install" />
+    </group>
+
+    <group
         android:id="@+id/install_group"
         android:visible="false"
         tools:visible="true">
