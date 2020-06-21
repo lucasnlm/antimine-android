@@ -43,6 +43,7 @@ import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
 import dev.lucasnlm.antimine.stats.StatsActivity
+import dev.lucasnlm.antimine.theme.ThemeActivity
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -443,7 +444,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
 
     private fun openThemes() {
         analyticsManager.sentEvent(Analytics.OpenThemes)
-        Intent(this, AboutActivity::class.java).apply {
+        Intent(this, ThemeActivity::class.java).apply {
             startActivity(this)
         }
     }
