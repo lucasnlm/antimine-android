@@ -12,8 +12,6 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.history.viewmodel.HistoryViewModel
 import kotlinx.android.synthetic.main.fragment_history.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,7 +27,6 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         saveHistory.apply {
             addItemDecoration(DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL))
             layoutManager = LinearLayoutManager(view.context)
-
             historyViewModel.saves.observe(
                 viewLifecycleOwner,
                 Observer {
@@ -38,8 +35,11 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
             )
         }
 
-        GlobalScope.launch {
-            historyViewModel.loadAllSaves(savesRepository)
-        }
+        historyViewModel.saves.observe(
+            viewLifecycleOwner,
+            Observer {
+                saveHistory.adapter = HistoryAdapter(it)
+            }
+        )
     }
 }
