@@ -63,7 +63,8 @@
             android:title="@string/settings" />
     </group>
 
-    <group android:id="@+id/theme_group">
+    <group android:id="@+id/theme_group"
+        android:visible="false">
 
         <item
             android:id="@+id/themes"
