@@ -41,9 +41,11 @@ class StatsActivity : AppCompatActivity(R.layout.activity_stats) {
         }
     }
 
-    private fun formatPercentage(value: Double) =
-        String.format("%.2f%%", value)
+    companion object {
+        private fun formatPercentage(value: Double) =
+            String.format("%.2f%%", value)
 
-    private fun formatTime(durationSecs: Long) =
-        String.format("%02d:%02d:%02d", durationSecs / 3600, durationSecs % 3600 / 60, durationSecs % 60)
+        private fun formatTime(durationSecs: Long) =
+            String.format("%02d:%02d:%02d", durationSecs / 3600, durationSecs % 3600 / 60, durationSecs % 60)
+    }
 }
