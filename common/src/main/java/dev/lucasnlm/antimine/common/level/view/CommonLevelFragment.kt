@@ -16,7 +16,6 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import javax.inject.Inject
 
-
 abstract class CommonLevelFragment : Fragment() {
     @Inject
     lateinit var dimensionRepository: IDimensionRepository
