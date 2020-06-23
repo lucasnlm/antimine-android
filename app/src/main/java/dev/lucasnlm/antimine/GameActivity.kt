@@ -504,40 +504,6 @@ class GameActivity : AppCompatActivity() {
                     )
                 }
             }
-            Event.ResumeVictory -> {
-                val score = Score(
-                    rightMines,
-                    totalMines,
-                    totalArea
-                )
-                status = Status.Over(currentTime, score)
-                invalidateOptionsMenu()
-                viewModel.stopClock()
-
-                if (viewModel.isCurrentGame()) {
-                    waitAndShowEndGameDialog(
-                        victory = true,
-                        await = true
-                    )
-                }
-            }
-            Event.ResumeGameOver -> {
-                val score = Score(
-                    rightMines,
-                    totalMines,
-                    totalArea
-                )
-                status = Status.Over(currentTime, score)
-                invalidateOptionsMenu()
-                viewModel.stopClock()
-
-                if (viewModel.isCurrentGame()) {
-                    waitAndShowEndGameDialog(
-                        victory = false,
-                        await = true
-                    )
-                }
-            }
             else -> { }
         }
     }
