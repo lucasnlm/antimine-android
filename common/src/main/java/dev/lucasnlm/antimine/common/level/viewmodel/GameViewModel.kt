@@ -92,8 +92,8 @@ class GameViewModel @ViewModelInject constructor(
         refreshAll()
 
         when {
-            levelFacade.hasAnyMineExploded() -> eventObserver.postValue(Event.ResumeGameOver)
-            levelFacade.checkVictory() -> eventObserver.postValue(Event.ResumeVictory)
+            levelFacade.hasAnyMineExploded() -> eventObserver.postValue(Event.GameOver)
+            levelFacade.checkVictory() -> eventObserver.postValue(Event.Victory)
             else -> eventObserver.postValue(Event.ResumeGame)
         }
 

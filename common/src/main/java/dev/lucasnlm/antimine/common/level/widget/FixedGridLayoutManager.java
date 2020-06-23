@@ -76,7 +76,7 @@ public class FixedGridLayoutManager extends RecyclerView.LayoutManager {
 
     @Override
     public boolean isAutoMeasureEnabled() {
-        return true;
+        return false;
     }
 
     /*

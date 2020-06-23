@@ -58,7 +58,6 @@
             android:saveEnabled="false"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:configChanges="screenSize|orientation"
             android:theme="@style/AppTheme.NoActionBar">
 
             <tools:validation testUrl="https://www.lucasnlm.dev/antimine" />

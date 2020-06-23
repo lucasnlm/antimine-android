@@ -48,6 +48,7 @@ open class LevelFragment : CommonLevelFragment() {
                         val horizontalPadding = calcHorizontalPadding(it.width)
                         val verticalPadding = calcVerticalPadding(it.height)
                         layoutManager = makeNewLayoutManager(it.width)
+                        setHasFixedSize(true)
                         setPadding(horizontalPadding, verticalPadding, 0, 0)
                     }
                 }
@@ -64,15 +65,16 @@ open class LevelFragment : CommonLevelFragment() {
                 viewLifecycleOwner,
                 Observer {
                     when (it) {
+                        Event.Pause,
                         Event.ResumeGameOver,
                         Event.GameOver,
                         Event.Victory,
                         Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
                         Event.Running,
+                        Event.Resume,
                         Event.ResumeGame,
                         Event.StartNewGame -> areaAdapter.setClickEnabled(true)
-                        else -> {
-                        }
+                        null -> { }
                     }
                 }
             )
@@ -98,10 +100,10 @@ open class LevelFragment : CommonLevelFragment() {
                 recyclerGrid.apply {
                     val horizontalPadding = calcHorizontalPadding(levelSetup.width)
                     val verticalPadding = calcVerticalPadding(levelSetup.height)
-                    setHasFixedSize(true)
                     addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
                     setPadding(horizontalPadding, verticalPadding, 0, 0)
                     layoutManager = makeNewLayoutManager(levelSetup.width)
+                    setHasFixedSize(true)
                     adapter = areaAdapter
                     alpha = 0.0f
 
