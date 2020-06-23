@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 701021
-        versionName '7.1.2'
+        versionCode 701041
+        versionName '7.1.4'
         minSdkVersion 16
         targetSdkVersion 29
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -54,11 +54,11 @@ dependencies {
     implementation 'android.arch.lifecycle:viewmodel:1.1.1'
 
     // Dagger
-    implementation 'com.google.dagger:hilt-android:2.28-alpha'
+    implementation 'com.google.dagger:hilt-android:2.28.1-alpha'
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01'
-    kapt 'com.google.dagger:hilt-android-compiler:2.28-alpha'
-    testImplementation 'com.google.dagger:hilt-android-testing:2.28-alpha'
-    kaptTest 'com.google.dagger:hilt-android-compiler:2.28-alpha'
+    kapt 'com.google.dagger:hilt-android-compiler:2.28.1-alpha'
+    testImplementation 'com.google.dagger:hilt-android-testing:2.28.1-alpha'
+    kaptTest 'com.google.dagger:hilt-android-compiler:2.28.1-alpha'
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01"
     kapt "androidx.hilt:hilt-compiler:1.0.0-alpha01"
 
