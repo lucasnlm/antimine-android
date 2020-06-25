@@ -16,6 +16,11 @@ import kotlinx.android.synthetic.main.fragment_third_party.*
 class ThirdPartiesFragment : Fragment() {
     private var aboutViewModel: AboutViewModel? = null
 
+    override fun onResume() {
+        super.onResume()
+        activity?.title = getString(R.string.licenses)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.run {
