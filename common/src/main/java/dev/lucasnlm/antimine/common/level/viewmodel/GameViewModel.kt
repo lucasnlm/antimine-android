@@ -268,7 +268,7 @@ class GameViewModel @ViewModelInject constructor(
         analyticsManager.sentEvent(Analytics.PressArea(index))
     }
 
-    fun onClickArea(index: Int) {
+    fun onSingleClick(index: Int) {
         var openAnyArea = false
 
         if (levelFacade.turnOffAllHighlighted()) {

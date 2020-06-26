@@ -95,7 +95,7 @@ class AreaAdapter(
                 if (position == RecyclerView.NO_POSITION) {
                     Log.d(TAG, "Item no longer exists.")
                 } else if (clickEnabled) {
-                    viewModel.onClickArea(position)
+                    viewModel.onSingleClick(position)
                 }
             }
 
