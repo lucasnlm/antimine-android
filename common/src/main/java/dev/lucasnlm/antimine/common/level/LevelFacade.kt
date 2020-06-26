@@ -22,17 +22,14 @@ class LevelFacade {
     private var saveId = 0
     private var firstOpen: FirstOpen = FirstOpen.Unknown
     private val gameControl: GameControl = GameControl.Standard
+    private var mines: Sequence<Area> = emptySequence()
 
     var hasMines = false
         private set
 
-    var seed = 0L
-        private set
+    val seed: Long
 
     lateinit var field: Sequence<Area>
-        private set
-
-    var mines: Sequence<Area> = sequenceOf()
         private set
 
     constructor(minefield: Minefield, seed: Long, saveId: Int? = null) {
@@ -59,68 +56,17 @@ class LevelFacade {
         val width = minefield.width
         val height = minefield.height
         val fieldSize = width * height
-        this.field = (0 until fieldSize).map { index ->
+
+        hasMines = false
+        mines = emptySequence()
+        field = (0 until fieldSize).map { index ->
             val yPosition = floor((index / width).toDouble()).toInt()
             val xPosition = (index % width)
             Area(index, xPosition, yPosition)
         }.asSequence()
-        this.hasMines = false
-        this.mines = sequenceOf()
     }
 
     fun getArea(id: Int) = field.first { it.id == id }
-
-    /**
-     * Run a game [action] on a given tile.
-     * @return The number of changed tiles.
-     */
-    private fun Area.runActionOn(action: Action?): ActionFeedback {
-        val highlightedChanged = turnOffAllHighlighted()
-
-        val changed = when (action) {
-            Action.OpenTile -> {
-                if (!hasMines) {
-                    plantMinesExcept(id, true)
-                }
-
-                if (mark.isNotNone()) {
-                    mark = Mark.PurposefulNone
-                    1
-                } else {
-                    openTile()
-                }
-            }
-            Action.SwitchMark -> {
-                if (isCovered) switchMark()
-                1
-            }
-            Action.HighlightNeighbors -> {
-                if (minesAround != 0) highlight() else 0
-            }
-            Action.OpenNeighbors -> {
-                openNeighbors()
-                8
-            }
-            else -> 0
-        }
-
-        return ActionFeedback(action, id, (changed + highlightedChanged) > 1)
-    }
-
-    fun Area.switchMark(): Area = apply {
-            if (isCovered) {
-                mark = when (mark) {
-                    Mark.PurposefulNone, Mark.None -> Mark.Flag
-                    Mark.Flag -> Mark.Question
-                    Mark.Question -> Mark.None
-                }
-            }
-        }
-
-    fun removeMark(index: Int) =
-        getArea(index).apply {
-            mark = Mark.PurposefulNone
-        }
 
     fun plantMinesExcept(index: Int, includeSafeArea: Boolean = false) {
         plantRandomMines(index, includeSafeArea)
@@ -166,32 +112,6 @@ class LevelFacade {
     }
 
     /**
-     * Run "Flood Fill algorithm" to open all empty neighbors of a target area.
-     */
-    fun Area.openTile(): Int {
-        var changes = 0
-        run {
-            if (isCovered) {
-                changes += 1
-                isCovered = false
-                mark = Mark.None
-
-                if (hasMine) {
-                    mistake = true
-                } else if (minesAround == 0) {
-                    findNeighbors()
-                        .filter { it.isCovered }
-                        .also {
-                            changes += it.count()
-                        }
-                        .forEach { it.openTile() }
-                }
-            }
-        }
-        return changes
-    }
-
-    /**
      * Disable all highlighted areas.
      * @return the number of changed tiles.
      */
@@ -202,65 +122,22 @@ class LevelFacade {
         }
     }
 
-    private fun toggleHighlight(target: Area): Int {
-        var changed = 1
-        target.apply {
-            highlighted = !highlighted
-            findNeighbors()
-                .filter { it.mark.isNone() && it.isCovered }
-                .also { changed += it.count() }
-                .forEach { it.highlighted = !it.highlighted }
-        }
-        return changed
-    }
-
-
-    private fun Area.highlight(): Int = run {
-        return when {
-            minesAround != 0 -> {
-                toggleHighlight(this)
-            }
-            else -> 0
-        }
-    }
-
     fun singleClick(index: Int): ActionFeedback = getArea(index).run {
-        return if (isCovered) {
-            runActionOn(gameControl.onCovered.singleClick)
-        } else {
-            runActionOn(gameControl.onOpen.singleClick)
-        }
+        return runActionOn(
+            if (isCovered) gameControl.onCovered.singleClick else gameControl.onOpen.singleClick
+        )
     }
 
     fun doubleClick(index: Int): ActionFeedback = getArea(index).run {
-        return if (isCovered) {
-            runActionOn(gameControl.onCovered.doubleClick)
-        } else {
-            runActionOn(gameControl.onOpen.doubleClick)
-        }
+        return runActionOn(
+            if (isCovered) gameControl.onCovered.doubleClick else gameControl.onOpen.doubleClick
+        )
     }
 
     fun longPress(index: Int): ActionFeedback = getArea(index).run {
-        return if (isCovered) {
-            runActionOn(gameControl.onCovered.longPress)
-        } else {
-            runActionOn(gameControl.onOpen.longPress)
-        }
-    }
-
-    fun Area.openNeighbors(): Int {
-        val neighbors = findNeighbors()
-        val flaggedCount = neighbors.count { it.mark.isFlag() }
-        return if (flaggedCount >= minesAround) {
-            neighbors
-                .filter {
-                    it.mark.isNone() && it.isCovered
-                }.also {
-                    it.forEach { area -> area.openTile() }
-                }.count()
-        } else {
-            0
-        }
+        return runActionOn(
+            if (isCovered) gameControl.onCovered.longPress else gameControl.onOpen.longPress
+        )
     }
 
     fun runFlagAssistant(): Sequence<Area> {
@@ -291,6 +168,8 @@ class LevelFacade {
         mines.count(),
         field.count()
     )
+
+    fun getMinesCount() = mines.count()
 
     fun showAllMines() =
         mines.filter { it.mark != Mark.Flag }.forEach { it.isCovered = false }
@@ -338,28 +217,6 @@ class LevelFacade {
         return (minesCount - flagsCount).coerceAtLeast(0)
     }
 
-    fun Area.findNeighbors() = sequenceOf(
-        getNeighbor(1, 0),
-        getNeighbor(1, 1),
-        getNeighbor(0, 1),
-        getNeighbor(-1, 1),
-        getNeighbor(-1, 0),
-        getNeighbor(-1, -1),
-        getNeighbor(0, -1),
-        getNeighbor(1, -1)
-    ).filterNotNull()
-
-    private fun Area.findCrossNeighbors() = sequenceOf(
-        getNeighbor(1, 0),
-        getNeighbor(0, 1),
-        getNeighbor(-1, 0),
-        getNeighbor(0, -1)
-    ).filterNotNull()
-
-    private fun Area.getNeighbor(x: Int, y: Int) = field.firstOrNull {
-        (it.posX == this.posX + x) && (it.posY == this.posY + y)
-    }
-
     fun getSaveState(duration: Long, difficulty: Difficulty): Save {
         val saveStatus: SaveStatus = when {
             checkVictory() -> SaveStatus.VICTORY
@@ -402,5 +259,131 @@ class LevelFacade {
 
     fun setCurrentSaveId(id: Int) {
         this.saveId = id.coerceAtLeast(0)
+    }
+
+    /**
+     * Run a game [action] on a given tile.
+     * @return The number of changed tiles.
+     */
+    private fun Area.runActionOn(action: Action?): ActionFeedback {
+        val highlightedChanged = turnOffAllHighlighted()
+
+        val changed = when (action) {
+            Action.OpenTile -> {
+                if (!hasMines) {
+                    plantMinesExcept(id, true)
+                }
+
+                if (mark.isNotNone()) {
+                    mark = Mark.PurposefulNone
+                    1
+                } else {
+                    openTile()
+                }
+            }
+            Action.SwitchMark -> {
+                if (isCovered) switchMark()
+                1
+            }
+            Action.HighlightNeighbors -> {
+                if (minesAround != 0) highlight() else 0
+            }
+            Action.OpenNeighbors -> {
+                openNeighbors()
+                8
+            }
+            else -> 0
+        }
+
+        return ActionFeedback(action, id, (changed + highlightedChanged) > 1)
+    }
+
+    fun Area.switchMark(): Area = apply {
+        if (isCovered) {
+            mark = when (mark) {
+                Mark.PurposefulNone, Mark.None -> Mark.Flag
+                Mark.Flag -> Mark.Question
+                Mark.Question -> Mark.None
+            }
+        }
+    }
+
+    fun Area.removeMark() =
+        this.apply {
+            mark = Mark.PurposefulNone
+        }
+
+    /**
+     * Run "Flood Fill algorithm" to open all empty neighbors of a target area.
+     */
+    fun Area.openTile(): Int {
+        var changes = 0
+        run {
+            if (isCovered) {
+                changes += 1
+                isCovered = false
+                mark = Mark.None
+
+                if (hasMine) {
+                    mistake = true
+                } else if (minesAround == 0) {
+                    findNeighbors()
+                        .filter { it.isCovered }
+                        .also {
+                            changes += it.count()
+                        }
+                        .forEach { it.openTile() }
+                }
+            }
+        }
+        return changes
+    }
+
+    private fun Area.highlight(): Int = run {
+        return when {
+            minesAround != 0 -> {
+                this.toggleHighlight()
+            }
+            else -> 0
+        }
+    }
+
+    private fun Area.toggleHighlight(): Int {
+        var changed = 1
+        apply {
+            highlighted = !highlighted
+            findNeighbors()
+                .filter { it.mark.isNone() && it.isCovered }
+                .also { changed += it.count() }
+                .forEach { it.highlighted = !it.highlighted }
+        }
+        return changed
+    }
+
+    fun Area.openNeighbors(): Int {
+        val neighbors = findNeighbors()
+        val flaggedCount = neighbors.count { it.mark.isFlag() }
+        return if (flaggedCount >= minesAround) {
+            neighbors
+                .filter {
+                    it.mark.isNone() && it.isCovered
+                }.also {
+                    it.forEach { area -> area.openTile() }
+                }.count()
+        } else {
+            0
+        }
+    }
+
+    fun Area.findNeighbors() = sequenceOf(
+        1 to 0, 1 to 1, 0 to 1, -1 to 1, -1 to 0, -1 to -1, 0 to -1, 1 to -1
+    ).map { (x,y) -> getNeighbor(x, y) }.filterNotNull()
+
+    private fun Area.findCrossNeighbors() = sequenceOf(
+        1 to 0, 0 to 1, -1 to 0, 0 to -1
+    ).map { (x, y) -> getNeighbor(x, y) }.filterNotNull()
+
+    private fun Area.getNeighbor(x: Int, y: Int) = field.firstOrNull {
+        (it.posX == this.posX + x) && (it.posY == this.posY + y)
     }
 }

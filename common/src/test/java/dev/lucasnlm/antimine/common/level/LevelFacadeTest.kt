@@ -197,21 +197,21 @@ class LevelFacadeTest {
     fun testFlagAssistant() {
         levelFacadeOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
-            field.filterNot { it.hasMine }.forEach { openTile(it) }
+            field.filterNot { it.hasMine }.forEach { it.openTile() }
             runFlagAssistant()
             field.filter { it.hasMine }.map { it.mark.isFlag() }.forEach(::assertTrue)
         }
 
         levelFacadeOf(3, 3, 2, 200L).run {
             plantMinesExcept(3)
-            field.filterNot { it.hasMine }.forEach { openTile(it) }
+            field.filterNot { it.hasMine }.forEach { it.openTile() }
             runFlagAssistant()
             field.filter { it.hasMine }.map { it.mark.isFlag() }.forEach(::assertTrue)
         }
 
         levelFacadeOf(3, 3, 8, 200L).run {
             plantMinesExcept(3)
-            field.filterNot { it.hasMine }.forEach { openTile(it) }
+            field.filterNot { it.hasMine }.forEach { it.openTile() }
             runFlagAssistant()
             field.filter { it.hasMine }.map { it.mark.isFlag() }.forEach(::assertFalse)
         }
@@ -221,15 +221,19 @@ class LevelFacadeTest {
     fun testSwitchToFlag() {
         levelFacadeOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
-            switchMarkAt(7)
-            field.forEach {
-                if (it.id == 7) {
-                    assertTrue(it.mark.isFlag())
-                } else {
-                    assertFalse(it.mark.isFlag())
+
+            with(getArea(7)) {
+                switchMark()
+                mark.isFlag()
+
+                field.forEach {
+                    if (it.id == 7) {
+                        assertTrue(it.mark.isFlag())
+                    } else {
+                        assertFalse(it.mark.isFlag())
+                    }
                 }
             }
-            assertTrue(hasMarkOn(7))
         }
     }
 
@@ -237,8 +241,13 @@ class LevelFacadeTest {
     fun testSwitchToQuestion() {
         levelFacadeOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
-            switchMarkAt(7)
-            switchMarkAt(7)
+
+            with(getArea(7)) {
+                switchMark()
+                switchMark()
+                assertTrue(mark.isNotNone())
+            }
+
             field.forEach {
                 if (it.id == 7) {
                     assertTrue(it.mark.isQuestion())
@@ -246,7 +255,6 @@ class LevelFacadeTest {
                     assertFalse(it.mark.isQuestion())
                 }
             }
-            assertTrue(hasMarkOn(7))
         }
     }
 
@@ -254,10 +262,14 @@ class LevelFacadeTest {
     fun testSwitchBackToEmpty() {
         levelFacadeOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
-            switchMarkAt(7)
-            switchMarkAt(7)
-            switchMarkAt(7)
-            assertFalse(hasMarkOn(7))
+
+            with (getArea(7)) {
+                switchMark()
+                switchMark()
+                switchMark()
+
+                assertTrue(mark.isNone())
+            }
         }
     }
 
@@ -265,10 +277,13 @@ class LevelFacadeTest {
     fun testRemoveMark() {
         levelFacadeOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
-            switchMarkAt(7)
-            assertTrue(hasMarkOn(7))
-            removeMark(7)
-            assertTrue(hasNoneOn(7))
+
+            with(getArea(7)) {
+                switchMark()
+                assertTrue(mark.isFlag())
+                removeMark()
+                assertTrue(mark.isNone())
+            }
         }
     }
 
@@ -311,7 +326,7 @@ class LevelFacadeTest {
             )
 
             // It won't open any if the mines were not flagged.
-            openNeighbors(12)
+            getArea(12).openNeighbors()
             assertEquals(
                 listOf(
                     1, 1, 1, 1, 1,
@@ -343,7 +358,7 @@ class LevelFacadeTest {
 
             // It won't open any if the mines were not flagged.
             singleClick(14)
-            openNeighbors(14)
+            getArea(14).openNeighbors()
             assertEquals(
                 listOf(
                     1, 1, 1, 1, 1,
@@ -357,7 +372,7 @@ class LevelFacadeTest {
 
             // After flag its neighbors, it must open all clean neighbors.
             getArea(14).findNeighbors().filter { it.hasMine }.forEach { it.mark = Mark.Flag }
-            openNeighbors(14)
+            getArea(14).openNeighbors()
             assertEquals(
                 listOf(
                     1, 1, 1, 1, 1,
@@ -419,7 +434,7 @@ class LevelFacadeTest {
             plantMinesExcept(3)
             val mine = field.first { it.hasMine }
             assertEquals(findExplodedMine(), null)
-            openTile(mine)
+            mine.openTile()
             assertEquals(findExplodedMine(), mine)
         }
     }

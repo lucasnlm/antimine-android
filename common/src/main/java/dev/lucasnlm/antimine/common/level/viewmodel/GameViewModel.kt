@@ -125,7 +125,8 @@ class GameViewModel @ViewModelInject constructor(
 
         analyticsManager.sentEvent(
             Analytics.RetryGame(
-                setup, currentDifficulty,
+                setup,
+                currentDifficulty,
                 levelFacade.seed,
                 useAccessibilityMode(),
                 save.firstOpen.toInt()
@@ -195,8 +196,8 @@ class GameViewModel @ViewModelInject constructor(
             val id = savesRepository.saveGame(
                 levelFacade.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
             )
-            saveId.postValue(id)
             levelFacade.setCurrentSaveId(id?.toInt() ?: 0)
+            saveId.postValue(id)
         }
     }
 
@@ -301,7 +302,7 @@ class GameViewModel @ViewModelInject constructor(
     suspend fun gameOver() {
         levelFacade.run {
             analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
-            val explosionTime = (explosionDelay() / levelFacade.mines.count().coerceAtLeast(10))
+            val explosionTime = (explosionDelay() / levelFacade.getMinesCount().coerceAtLeast(10))
             val delayMillis = explosionTime.coerceAtLeast(25L)
 
             findExplodedMine()?.let { exploded ->
