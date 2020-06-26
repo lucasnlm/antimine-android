@@ -15,7 +15,10 @@ import dev.lucasnlm.antimine.core.control.GameControl
 import kotlin.math.floor
 import kotlin.random.Random
 
-class LevelFacade {
+/**
+ * Controls a minesweeper logic.
+ */
+class GameController {
     private val minefield: Minefield
     private val randomGenerator: Random
     private val startTime = System.currentTimeMillis()

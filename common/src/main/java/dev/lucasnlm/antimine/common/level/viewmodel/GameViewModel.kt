@@ -4,7 +4,7 @@ import android.os.Handler
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import dev.lucasnlm.antimine.common.level.LevelFacade
+import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
@@ -39,7 +39,7 @@ class GameViewModel @ViewModelInject constructor(
     private val analyticsManager: AnalyticsManager,
     private val clock: Clock
 ) : ViewModel() {
-    private lateinit var levelFacade: LevelFacade
+    private lateinit var gameController: GameController
     private var currentDifficulty: Difficulty = Difficulty.Standard
     private var initialized = false
 
@@ -60,7 +60,7 @@ class GameViewModel @ViewModelInject constructor(
             newDifficulty, dimensionRepository, preferencesRepository
         )
 
-        levelFacade = LevelFacade(minefield, minefieldRepository.randomSeed())
+        gameController = GameController(minefield, minefieldRepository.randomSeed())
 
         mineCount.postValue(minefield.mines)
         difficulty.postValue(newDifficulty)
@@ -72,7 +72,7 @@ class GameViewModel @ViewModelInject constructor(
         analyticsManager.sentEvent(
             Analytics.NewGame(
                 minefield, newDifficulty,
-                levelFacade.seed,
+                gameController.seed,
                 useAccessibilityMode()
             )
         )
@@ -85,7 +85,7 @@ class GameViewModel @ViewModelInject constructor(
         elapsedTimeSeconds.postValue(save.duration)
 
         val setup = save.minefield
-        levelFacade = LevelFacade(save)
+        gameController = GameController(save)
 
         mineCount.postValue(setup.mines)
         difficulty.postValue(save.difficulty)
@@ -93,8 +93,8 @@ class GameViewModel @ViewModelInject constructor(
         refreshAll()
 
         when {
-            levelFacade.hasAnyMineExploded() -> eventObserver.postValue(Event.GameOver)
-            levelFacade.checkVictory() -> eventObserver.postValue(Event.Victory)
+            gameController.hasAnyMineExploded() -> eventObserver.postValue(Event.GameOver)
+            gameController.checkVictory() -> eventObserver.postValue(Event.Victory)
             else -> eventObserver.postValue(Event.ResumeGame)
         }
 
@@ -109,7 +109,7 @@ class GameViewModel @ViewModelInject constructor(
         currentDifficulty = save.difficulty
 
         val setup = save.minefield
-        levelFacade = LevelFacade(setup, save.seed, save.uid).apply {
+        gameController = GameController(setup, save.seed, save.uid).apply {
             if (save.firstOpen is FirstOpen.Position) {
                 plantMinesExcept(save.firstOpen.value, true)
                 singleClick(save.firstOpen.value)
@@ -127,7 +127,7 @@ class GameViewModel @ViewModelInject constructor(
             Analytics.RetryGame(
                 setup,
                 currentDifficulty,
-                levelFacade.seed,
+                gameController.seed,
                 useAccessibilityMode(),
                 save.firstOpen.toInt()
             )
@@ -184,7 +184,7 @@ class GameViewModel @ViewModelInject constructor(
 
     fun pauseGame() {
         if (initialized) {
-            if (levelFacade.hasMines) {
+            if (gameController.hasMines) {
                 eventObserver.postValue(Event.Pause)
             }
             clock.stop()
@@ -192,39 +192,39 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     suspend fun saveGame() {
-        if (initialized && levelFacade.hasMines) {
+        if (initialized && gameController.hasMines) {
             val id = savesRepository.saveGame(
-                levelFacade.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
+                gameController.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
             )
-            levelFacade.setCurrentSaveId(id?.toInt() ?: 0)
+            gameController.setCurrentSaveId(id?.toInt() ?: 0)
             saveId.postValue(id)
         }
     }
 
     private suspend fun saveStats() {
-        if (initialized && levelFacade.hasMines) {
-            levelFacade.getStats(elapsedTimeSeconds.value ?: 0L)?.let {
+        if (initialized && gameController.hasMines) {
+            gameController.getStats(elapsedTimeSeconds.value ?: 0L)?.let {
                 statsRepository.addStats(it)
             }
         }
     }
 
     fun resumeGame() {
-        if (initialized && levelFacade.hasMines && !levelFacade.isGameOver()) {
+        if (initialized && gameController.hasMines && !gameController.isGameOver()) {
             eventObserver.postValue(Event.Resume)
             runClock()
         }
     }
 
     fun onLongClick(index: Int) {
-        val feedback = levelFacade.longPress(index)
+        val feedback = gameController.longPress(index)
         refreshIndex(index, feedback.multipleChanges)
         onFeedbackAnalytics(feedback)
         onPostAction()
     }
 
     fun onDoubleClickArea(index: Int) {
-        val feedback = levelFacade.doubleClick(index)
+        val feedback = gameController.doubleClick(index)
         refreshIndex(index, feedback.multipleChanges)
         onFeedbackAnalytics(feedback)
         onPostAction()
@@ -233,15 +233,15 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     fun onSingleClick(index: Int) {
-        val feedback = levelFacade.singleClick(index)
+        val feedback = gameController.singleClick(index)
         refreshIndex(index, feedback.multipleChanges)
         onFeedbackAnalytics(feedback)
         onPostAction()
     }
 
     private fun onPostAction() {
-        if (preferencesRepository.useFlagAssistant() && !levelFacade.hasAnyMineExploded()) {
-            levelFacade.runFlagAssistant().forEach {
+        if (preferencesRepository.useFlagAssistant() && !gameController.hasAnyMineExploded()) {
+            gameController.runFlagAssistant().forEach {
                 Handler().post {
                     refreshIndex(it.id)
                 }
@@ -260,11 +260,11 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun refreshMineCount() = mineCount.postValue(levelFacade.remainingMines())
+    private fun refreshMineCount() = mineCount.postValue(gameController.remainingMines())
 
     private fun updateGameState() {
         when {
-            levelFacade.hasAnyMineExploded() -> {
+            gameController.hasAnyMineExploded() -> {
                 hapticFeedbackInteractor.explosionFeedback()
                 eventObserver.postValue(Event.GameOver)
             }
@@ -273,11 +273,11 @@ class GameViewModel @ViewModelInject constructor(
             }
         }
 
-        if (levelFacade.hasMines) {
+        if (gameController.hasMines) {
             refreshMineCount()
         }
 
-        if (levelFacade.checkVictory()) {
+        if (gameController.checkVictory()) {
             refreshAll()
             eventObserver.postValue(Event.Victory)
         }
@@ -295,14 +295,14 @@ class GameViewModel @ViewModelInject constructor(
         clock.stop()
     }
 
-    fun revealAllEmptyAreas() = levelFacade.revealAllEmptyAreas()
+    fun revealAllEmptyAreas() = gameController.revealAllEmptyAreas()
 
     fun explosionDelay() = if (preferencesRepository.useAnimations()) 750L else 0L
 
     suspend fun gameOver() {
-        levelFacade.run {
+        gameController.run {
             analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
-            val explosionTime = (explosionDelay() / levelFacade.getMinesCount().coerceAtLeast(10))
+            val explosionTime = (explosionDelay() / gameController.getMinesCount().coerceAtLeast(10))
             val delayMillis = explosionTime.coerceAtLeast(25L)
 
             findExplodedMine()?.let { exploded ->
@@ -325,7 +325,7 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     fun victory() {
-        levelFacade.run {
+        gameController.run {
             analyticsManager.sentEvent(
                 Analytics.Victory(
                     clock.time(),
@@ -347,13 +347,13 @@ class GameViewModel @ViewModelInject constructor(
 
     private fun refreshIndex(targetIndex: Int, multipleChanges: Boolean = false) {
         if (!preferencesRepository.useAnimations() || multipleChanges) {
-            field.postValue(levelFacade.field)
+            field.postValue(gameController.field)
         } else {
             fieldRefresh.postValue(targetIndex)
         }
     }
 
     private fun refreshAll() {
-        field.postValue(levelFacade.field)
+        field.postValue(gameController.field)
     }
 }

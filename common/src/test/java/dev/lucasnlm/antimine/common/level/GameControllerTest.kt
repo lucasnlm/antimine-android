@@ -10,12 +10,12 @@ import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class LevelFacadeTest {
+class GameControllerTest {
 
     private fun levelFacadeOf(width: Int, height: Int, mines: Int, seed: Long = 0L) =
-        LevelFacade(Minefield(width, height, mines), seed)
+        GameController(Minefield(width, height, mines), seed)
 
-    private fun LevelFacade.at(id: Int): Area = field.first { it.id == id }
+    private fun GameController.at(id: Int): Area = field.first { it.id == id }
 
     @Test
     fun testLevelEmptyBuilding() {
