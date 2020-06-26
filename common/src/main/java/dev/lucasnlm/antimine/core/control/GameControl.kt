@@ -29,6 +29,32 @@ sealed class GameControl(
             doubleClick = null
         )
     )
+
+    object FastFlag : GameControl(
+        onCovered = Actions(
+            singleClick = Action.SwitchMark,
+            longPress = Action.OpenTile,
+            doubleClick = null
+        ),
+        onOpen = Actions(
+            singleClick = Action.OpenNeighbors,
+            longPress = Action.HighlightNeighbors,
+            doubleClick = null
+        )
+    )
+
+    object DoubleClick : GameControl(
+        onCovered = Actions(
+            singleClick = Action.SwitchMark,
+            longPress = null,
+            doubleClick = Action.OpenTile
+        ),
+        onOpen = Actions(
+            singleClick = Action.HighlightNeighbors,
+            longPress = null,
+            doubleClick = Action.OpenNeighbors
+        )
+    )
 }
 
 data class ActionFeedback(

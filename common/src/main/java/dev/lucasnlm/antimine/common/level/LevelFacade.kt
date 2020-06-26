@@ -98,7 +98,8 @@ class LevelFacade {
                 if (minesAround != 0) highlight() else 0
             }
             Action.OpenNeighbors -> {
-                if (!isCovered) { openNeighbors() } else { 0 }
+                openNeighbors()
+                8
             }
             else -> 0
         }
