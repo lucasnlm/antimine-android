@@ -19,6 +19,8 @@ import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
+import dev.lucasnlm.antimine.core.control.Action
+import dev.lucasnlm.antimine.core.control.ActionFeedback
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -40,7 +42,6 @@ class GameViewModel @ViewModelInject constructor(
     private lateinit var levelFacade: LevelFacade
     private var currentDifficulty: Difficulty = Difficulty.Standard
     private var initialized = false
-    private var oldGame = false
 
     val field = MutableLiveData<Sequence<Area>>()
     val fieldRefresh = MutableLiveData<Int>()
@@ -147,7 +148,6 @@ class GameViewModel @ViewModelInject constructor(
             startNewGame()
         }.also {
             initialized = true
-            oldGame = true
         }
     }
 
@@ -163,7 +163,6 @@ class GameViewModel @ViewModelInject constructor(
             startNewGame()
         }.also {
             initialized = true
-            oldGame = true
         }
     }
 
@@ -179,7 +178,6 @@ class GameViewModel @ViewModelInject constructor(
             startNewGame()
         }.also {
             initialized = true
-            oldGame = false
         }
     }
 
@@ -218,44 +216,29 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     fun onLongClick(index: Int) {
-        val isHighlighted = levelFacade.isHighlighted(index)
-        levelFacade.turnOffAllHighlighted()
-        refreshAll()
-
-        if (levelFacade.hasCoverOn(index)) {
-            levelFacade.switchMarkAt(index).run {
-                refreshIndex(id)
-                hapticFeedbackInteractor.toggleFlagFeedback()
-            }
-
-            analyticsManager.sentEvent(Analytics.LongPressArea(index))
-        } else if (!preferencesRepository.useDoubleClickToOpen() || isHighlighted) {
-            levelFacade.openNeighbors(index).forEach { refreshIndex(it.id) }
-            analyticsManager.sentEvent(Analytics.LongPressMultipleArea(index))
-        } else {
-            levelFacade.highlight(index).run {
-                refreshIndex(index, this)
-            }
-        }
-
-        updateGameState()
+        val feedback = levelFacade.longPress(index)
+        refreshIndex(index, feedback.multipleChanges)
+        onFeedbackAnalytics(feedback)
+        onPostAction()
     }
 
     fun onDoubleClickArea(index: Int) {
-        if (levelFacade.turnOffAllHighlighted()) {
-            refreshAll()
-        }
+        val feedback = levelFacade.doubleClick(index)
+        refreshIndex(index, feedback.multipleChanges)
+        onFeedbackAnalytics(feedback)
+        onPostAction()
 
-        if (preferencesRepository.useDoubleClickToOpen()) {
-            if (!levelFacade.hasMines) {
-                levelFacade.plantMinesExcept(index, true)
-            }
+        hapticFeedbackInteractor.longPressFeedback()
+    }
 
-            levelFacade.doubleClick(index).run {
-                refreshIndex(index, this)
-            }
-        }
+    fun onSingleClick(index: Int) {
+        val feedback = levelFacade.singleClick(index)
+        refreshIndex(index, feedback.multipleChanges)
+        onFeedbackAnalytics(feedback)
+        onPostAction()
+    }
 
+    private fun onPostAction() {
         if (preferencesRepository.useFlagAssistant() && !levelFacade.hasAnyMineExploded()) {
             levelFacade.runFlagAssistant().forEach {
                 Handler().post {
@@ -265,50 +248,18 @@ class GameViewModel @ViewModelInject constructor(
         }
 
         updateGameState()
-        analyticsManager.sentEvent(Analytics.PressArea(index))
     }
 
-    fun onSingleClick(index: Int) {
-        var openAnyArea = false
-
-        if (levelFacade.turnOffAllHighlighted()) {
-            refreshAll()
-        }
-
-        if (levelFacade.hasMarkOn(index)) {
-            levelFacade.removeMark(index).run {
-                refreshIndex(id)
-            }
-            hapticFeedbackInteractor.toggleFlagFeedback()
-        } else if (!preferencesRepository.useDoubleClickToOpen() || !levelFacade.hasMines) {
-            if (!levelFacade.hasMines) {
-                levelFacade.plantMinesExcept(index, true)
-            }
-
-            levelFacade.singleClick(index).run {
-                refreshIndex(index, this)
-            }
-
-            openAnyArea = true
-        }
-
-        if (openAnyArea) {
-            if (preferencesRepository.useFlagAssistant() && !levelFacade.hasAnyMineExploded()) {
-                levelFacade.runFlagAssistant().forEach {
-                    Handler().post {
-                        refreshIndex(it.id)
-                    }
-                }
-            }
-
-            updateGameState()
-            analyticsManager.sentEvent(Analytics.PressArea(index))
+    private fun onFeedbackAnalytics(feedback: ActionFeedback) {
+        when (feedback.action) {
+            Action.OpenTile -> { analyticsManager.sentEvent(Analytics.OpenTile(feedback.index)) }
+            Action.SwitchMark -> { analyticsManager.sentEvent(Analytics.SwitchMark(feedback.index)) }
+            Action.HighlightNeighbors -> { analyticsManager.sentEvent(Analytics.HighlightNeighbors(feedback.index)) }
+            Action.OpenNeighbors -> { analyticsManager.sentEvent(Analytics.OpenNeighbors(feedback.index)) }
         }
     }
 
     private fun refreshMineCount() = mineCount.postValue(levelFacade.remainingMines())
-
-    fun isCurrentGame() = !oldGame
 
     private fun updateGameState() {
         when {
@@ -393,8 +344,8 @@ class GameViewModel @ViewModelInject constructor(
 
     fun useAccessibilityMode() = preferencesRepository.useLargeAreas()
 
-    private fun refreshIndex(targetIndex: Int, changes: Int = 1) {
-        if (!preferencesRepository.useAnimations() || changes > 1) {
+    private fun refreshIndex(targetIndex: Int, multipleChanges: Boolean = false) {
+        if (!preferencesRepository.useAnimations() || multipleChanges) {
             field.postValue(levelFacade.field)
         } else {
             fieldRefresh.postValue(targetIndex)

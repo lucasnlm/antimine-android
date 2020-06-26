@@ -197,21 +197,21 @@ class LevelFacadeTest {
     fun testFlagAssistant() {
         levelFacadeOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
-            field.filterNot { it.hasMine }.forEach { openField(it) }
+            field.filterNot { it.hasMine }.forEach { openTile(it) }
             runFlagAssistant()
             field.filter { it.hasMine }.map { it.mark.isFlag() }.forEach(::assertTrue)
         }
 
         levelFacadeOf(3, 3, 2, 200L).run {
             plantMinesExcept(3)
-            field.filterNot { it.hasMine }.forEach { openField(it) }
+            field.filterNot { it.hasMine }.forEach { openTile(it) }
             runFlagAssistant()
             field.filter { it.hasMine }.map { it.mark.isFlag() }.forEach(::assertTrue)
         }
 
         levelFacadeOf(3, 3, 8, 200L).run {
             plantMinesExcept(3)
-            field.filterNot { it.hasMine }.forEach { openField(it) }
+            field.filterNot { it.hasMine }.forEach { openTile(it) }
             runFlagAssistant()
             field.filter { it.hasMine }.map { it.mark.isFlag() }.forEach(::assertFalse)
         }
@@ -419,7 +419,7 @@ class LevelFacadeTest {
             plantMinesExcept(3)
             val mine = field.first { it.hasMine }
             assertEquals(findExplodedMine(), null)
-            openField(mine)
+            openTile(mine)
             assertEquals(findExplodedMine(), mine)
         }
     }

@@ -9,6 +9,9 @@ import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Score
+import dev.lucasnlm.antimine.core.control.Action
+import dev.lucasnlm.antimine.core.control.ActionFeedback
+import dev.lucasnlm.antimine.core.control.GameControl
 import kotlin.math.floor
 import kotlin.random.Random
 
@@ -18,6 +21,7 @@ class LevelFacade {
     private val startTime = System.currentTimeMillis()
     private var saveId = 0
     private var firstOpen: FirstOpen = FirstOpen.Unknown
+    private val gameControl: GameControl = GameControl.Standard
 
     var hasMines = false
         private set
@@ -66,8 +70,43 @@ class LevelFacade {
 
     fun getArea(id: Int) = field.first { it.id == id }
 
-    fun switchMarkAt(index: Int): Area =
-        getArea(index).apply {
+    /**
+     * Run a game [action] on a given tile.
+     * @return The number of changed tiles.
+     */
+    private fun Area.runActionOn(action: Action?): ActionFeedback {
+        val highlightedChanged = turnOffAllHighlighted()
+
+        val changed = when (action) {
+            Action.OpenTile -> {
+                if (!hasMines) {
+                    plantMinesExcept(id, true)
+                }
+
+                if (mark.isNotNone()) {
+                    mark = Mark.PurposefulNone
+                    1
+                } else {
+                    openTile()
+                }
+            }
+            Action.SwitchMark -> {
+                if (isCovered) switchMark()
+                1
+            }
+            Action.HighlightNeighbors -> {
+                if (minesAround != 0) highlight() else 0
+            }
+            Action.OpenNeighbors -> {
+                if (!isCovered) { openNeighbors() } else { 0 }
+            }
+            else -> 0
+        }
+
+        return ActionFeedback(action, id, (changed + highlightedChanged) > 1)
+    }
+
+    fun Area.switchMark(): Area = apply {
             if (isCovered) {
                 mark = when (mark) {
                     Mark.PurposefulNone, Mark.None -> Mark.Flag
@@ -81,14 +120,6 @@ class LevelFacade {
         getArea(index).apply {
             mark = Mark.PurposefulNone
         }
-
-    fun hasCoverOn(index: Int): Boolean = getArea(index).isCovered
-
-    fun hasMarkOn(index: Int): Boolean = getArea(index).mark.isNotNone()
-
-    fun hasNoneOn(index: Int): Boolean = getArea(index).mark.isNone()
-
-    fun isHighlighted(index: Int): Boolean = getArea(index).highlighted
 
     fun plantMinesExcept(index: Int, includeSafeArea: Boolean = false) {
         plantRandomMines(index, includeSafeArea)
@@ -136,9 +167,9 @@ class LevelFacade {
     /**
      * Run "Flood Fill algorithm" to open all empty neighbors of a target area.
      */
-    fun openField(target: Area): Int {
+    fun Area.openTile(): Int {
         var changes = 0
-        target.run {
+        run {
             if (isCovered) {
                 changes += 1
                 isCovered = false
@@ -152,7 +183,7 @@ class LevelFacade {
                         .also {
                             changes += it.count()
                         }
-                        .forEach { openField(it) }
+                        .forEach { it.openTile() }
                 }
             }
         }
@@ -161,16 +192,13 @@ class LevelFacade {
 
     /**
      * Disable all highlighted areas.
-     *
-     * @return true if any area was changed.
+     * @return the number of changed tiles.
      */
-    fun turnOffAllHighlighted(): Boolean {
-        var changed: Boolean
-        field
-            .filter { it.highlighted }
-            .also { changed = it.count() != 0 }
-            .forEach { it.highlighted = false }
-        return changed
+    fun turnOffAllHighlighted(): Int {
+        return field.filter { it.highlighted }.run {
+            forEach { it.highlighted = false }
+            count()
+        }
     }
 
     private fun toggleHighlight(target: Area): Int {
@@ -185,34 +213,8 @@ class LevelFacade {
         return changed
     }
 
-    /**
-     * Open a given area by its index.
-     *
-     * @param index the target index
-     * @return true if multiple areas were open
-     */
-    fun singleClick(index: Int): Int = getArea(index).run {
-        return when {
-            isCovered -> {
-                openField(getArea(index))
-            }
-            minesAround != 0 -> {
-                toggleHighlight(this)
-            }
-            else -> 0
-        }
-    }
 
-    fun doubleClick(index: Int): Int = getArea(index).run {
-        return when {
-            isCovered -> {
-                openField(getArea(index))
-            }
-            else -> 0
-        }
-    }
-
-    fun highlight(index: Int): Int = getArea(index).run {
+    private fun Area.highlight(): Int = run {
         return when {
             minesAround != 0 -> {
                 toggleHighlight(this)
@@ -221,41 +223,42 @@ class LevelFacade {
         }
     }
 
-    @Suppress("unused")
-    fun longPressOpenArea(index: Int): Sequence<Area> {
-        val neighbors = getArea(index).findNeighbors().filter {
-            it.mark.isNone() && it.isCovered
-        }
-
-        val neighborsCount = neighbors.count()
-        val minesCount = neighbors.count { it.hasMine }
-
-        if (neighborsCount == minesCount) {
-            neighbors.forEach { area -> area.mark = Mark.Flag }
+    fun singleClick(index: Int): ActionFeedback = getArea(index).run {
+        return if (isCovered) {
+            runActionOn(gameControl.onCovered.singleClick)
         } else {
-            neighbors.forEach { area -> openField(area) }
+            runActionOn(gameControl.onOpen.singleClick)
         }
-
-        return neighbors
     }
 
-    /**
-     * Open all tiles neighbors of [index].
-     * If the number of flagged neighbors is less than the number of neighbors
-     * it won't open any of them to avoid miss clicks.
-     */
-    fun openNeighbors(index: Int): Sequence<Area> {
-        val neighbors = getArea(index).findNeighbors()
+    fun doubleClick(index: Int): ActionFeedback = getArea(index).run {
+        return if (isCovered) {
+            runActionOn(gameControl.onCovered.doubleClick)
+        } else {
+            runActionOn(gameControl.onOpen.doubleClick)
+        }
+    }
+
+    fun longPress(index: Int): ActionFeedback = getArea(index).run {
+        return if (isCovered) {
+            runActionOn(gameControl.onCovered.longPress)
+        } else {
+            runActionOn(gameControl.onOpen.longPress)
+        }
+    }
+
+    fun Area.openNeighbors(): Int {
+        val neighbors = findNeighbors()
         val flaggedCount = neighbors.count { it.mark.isFlag() }
-        return if (flaggedCount >= getArea(index).minesAround) {
+        return if (flaggedCount >= minesAround) {
             neighbors
                 .filter {
                     it.mark.isNone() && it.isCovered
                 }.also {
-                    it.forEach { area -> openField(area) }
-                }
+                    it.forEach { area -> area.openTile() }
+                }.count()
         } else {
-            sequenceOf()
+            0
         }
     }
 
