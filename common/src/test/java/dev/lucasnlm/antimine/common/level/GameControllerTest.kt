@@ -263,7 +263,7 @@ class GameControllerTest {
         levelFacadeOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
 
-            with (getArea(7)) {
+            with(getArea(7)) {
                 switchMark()
                 switchMark()
                 switchMark()

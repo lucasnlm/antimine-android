@@ -380,7 +380,7 @@ class GameController {
 
     fun Area.findNeighbors() = sequenceOf(
         1 to 0, 1 to 1, 0 to 1, -1 to 1, -1 to 0, -1 to -1, 0 to -1, 1 to -1
-    ).map { (x,y) -> getNeighbor(x, y) }.filterNotNull()
+    ).map { (x, y) -> getNeighbor(x, y) }.filterNotNull()
 
     private fun Area.findCrossNeighbors() = sequenceOf(
         1 to 0, 0 to 1, -1 to 0, 0 to -1
