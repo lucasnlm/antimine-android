@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.control.view.ControlItemView
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
 import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.core.viewModels
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -22,7 +22,7 @@ class ControlDialogFragment : AppCompatDialogFragment() {
     @Inject
     lateinit var preferencesRepository: IPreferencesRepository
 
-    private val controlViewModel by viewModels<ControlViewModel>()
+    private val controlViewModel  by activityViewModels<ControlViewModel>()
     private val adapter by lazy { ControlListAdapter(controlViewModel) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

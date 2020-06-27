@@ -5,10 +5,10 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -24,9 +24,9 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
     @Inject
     lateinit var instantAppManager: InstantAppManager
 
-    private lateinit var endGameViewModel: EngGameDialogViewModel
-    private lateinit var viewModel: GameViewModel
-    private lateinit var shareViewModel: ShareViewModel
+    private val endGameViewModel by activityViewModels<EngGameDialogViewModel>()
+    private val viewModel by activityViewModels<GameViewModel>()
+    private val shareViewModel by activityViewModels<ShareViewModel>()
 
     private var hasValidData = false
     private var isVictory: Boolean = false
@@ -37,12 +37,6 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        activity?.let {
-            viewModel = it.viewModels<GameViewModel>().value
-            endGameViewModel = it.viewModels<EngGameDialogViewModel>().value
-            shareViewModel = it.viewModels<ShareViewModel>().value
-        }
 
         arguments?.run {
             isVictory = getBoolean(DIALOG_IS_VICTORY) == true

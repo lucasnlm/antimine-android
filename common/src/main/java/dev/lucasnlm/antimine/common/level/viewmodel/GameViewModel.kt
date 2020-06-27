@@ -296,9 +296,11 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     fun updateGameControl() {
-        val controlType = preferencesRepository.controlType()
-        val gameControl = GameControl.fromControlType(controlType)
-        gameController.updateGameControl(gameControl)
+        if (initialized) {
+            val controlType = preferencesRepository.controlType()
+            val gameControl = GameControl.fromControlType(controlType)
+            gameController.updateGameControl(gameControl)
+        }
     }
 
     fun runClock() {

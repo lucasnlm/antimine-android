@@ -1,11 +1,12 @@
-package dev.lucasnlm.antimine.level.view
+package dev.lucasnlm.antimine.custom
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.Difficulty
@@ -22,15 +23,7 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
     @Inject
     lateinit var preferencesRepository: IPreferencesRepository
 
-    private lateinit var viewModel: GameViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        activity?.let {
-            viewModel = it.viewModels<GameViewModel>().value
-        }
-    }
+    private val viewModel by activityViewModels<GameViewModel>()
 
     private fun filterInput(target: String, min: Int): Int {
         var result = min
@@ -56,9 +49,15 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
                 val mapHeight: TextView? = dialog?.findViewById(R.id.map_height)
                 val mapMines: TextView? = dialog?.findViewById(R.id.map_mines)
 
-                var width = filterInput(mapWidth?.text.toString(), MIN_WIDTH)
-                var height = filterInput(mapHeight?.text.toString(), MIN_HEIGHT)
-                var mines = filterInput(mapMines?.text.toString(), MIN_MINES)
+                var width = filterInput(mapWidth?.text.toString(),
+                    MIN_WIDTH
+                )
+                var height = filterInput(mapHeight?.text.toString(),
+                    MIN_HEIGHT
+                )
+                var mines = filterInput(mapMines?.text.toString(),
+                    MIN_MINES
+                )
 
                 if (width * height - 1 < mines) {
                     mines = width * height - 1
@@ -81,6 +80,13 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
                 }
             }
         }.create()
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        if (activity is DialogInterface.OnDismissListener) {
+            (activity as DialogInterface.OnDismissListener).onDismiss(dialog)
+        }
+        super.onDismiss(dialog)
     }
 
     companion object {

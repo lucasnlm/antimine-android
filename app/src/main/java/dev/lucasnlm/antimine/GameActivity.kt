@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.preference.PreferenceManager
@@ -35,7 +36,7 @@ import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.history.HistoryActivity
 import dev.lucasnlm.antimine.instant.InstantAppManager
-import dev.lucasnlm.antimine.level.view.CustomLevelDialogFragment
+import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
@@ -248,7 +249,10 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
                 }
 
                 override fun onDrawerClosed(drawerView: View) {
-                    viewModel.resumeGame()
+                    if (hasNoOtherFocusedDialog()) {
+                        viewModel.resumeGame()
+                    }
+
                     analyticsManager.sentEvent(Analytics.CloseDrawer())
                 }
 
@@ -384,9 +388,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
     }
 
     private fun showControlDialog() {
-        if (status == Status.Running) {
-            viewModel.pauseGame()
-        }
+        viewModel.pauseGame()
 
         if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
             ControlDialogFragment().apply {
@@ -582,10 +584,16 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
         }
     }
 
+    private fun hasNoOtherFocusedDialog(): Boolean {
+        return supportFragmentManager.fragments.count {
+            it !is LevelFragment && it is DialogFragment
+        } == 0
+    }
+
     override fun onDismiss(dialog: DialogInterface?) {
-        if (status == Status.Running) {
-            viewModel.updateGameControl()
-            viewModel.resumeGame()
+        viewModel.run {
+            updateGameControl()
+            resumeGame()
         }
     }
 
