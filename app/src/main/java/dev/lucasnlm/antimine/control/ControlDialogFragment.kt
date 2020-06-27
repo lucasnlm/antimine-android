@@ -22,7 +22,7 @@ class ControlDialogFragment : AppCompatDialogFragment() {
     @Inject
     lateinit var preferencesRepository: IPreferencesRepository
 
-    private val controlViewModel  by activityViewModels<ControlViewModel>()
+    private val controlViewModel by activityViewModels<ControlViewModel>()
     private val adapter by lazy { ControlListAdapter(controlViewModel) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

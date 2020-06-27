@@ -49,13 +49,16 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
                 val mapHeight: TextView? = dialog?.findViewById(R.id.map_height)
                 val mapMines: TextView? = dialog?.findViewById(R.id.map_mines)
 
-                var width = filterInput(mapWidth?.text.toString(),
+                var width = filterInput(
+                    mapWidth?.text.toString(),
                     MIN_WIDTH
                 )
-                var height = filterInput(mapHeight?.text.toString(),
+                var height = filterInput(
+                    mapHeight?.text.toString(),
                     MIN_HEIGHT
                 )
-                var mines = filterInput(mapMines?.text.toString(),
+                var mines = filterInput(
+                    mapMines?.text.toString(),
                     MIN_MINES
                 )
 
