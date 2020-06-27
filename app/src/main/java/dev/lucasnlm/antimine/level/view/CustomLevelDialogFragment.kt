@@ -88,6 +88,6 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
         const val MIN_HEIGHT = 5
         const val MIN_MINES = 3
 
-        val TAG = CustomLevelDialogFragment::class.simpleName
+        const val TAG = "CustomLevelDialogFragment"
     }
 }

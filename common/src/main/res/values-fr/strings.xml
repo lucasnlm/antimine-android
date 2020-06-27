@@ -91,7 +91,7 @@
     <string name="settings_accessibility">Accessibilité</string>
     <string name="settings_large_areas">Utiliser des grandes cases</string>
     <string name="settings_large_areas_desc">Augmenter la zone d\'interaction</string>
-    <string name="settings_double_click">Cliquer deux fois</string>
+    <string name="double_click">Cliquer deux fois</string>
     <string name="rating">Retour d\'expérience</string>
     <string name="rating_menu">Retour d\'expérience ❤️</string>
     <string name="rating_message">Si vous aimez ce jeu, n\'hésitez pas à jour donner un retour. Ça nous serait très utile.</string>

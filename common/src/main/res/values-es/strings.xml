@@ -91,7 +91,7 @@
     <string name="settings_accessibility">Accesibilidad</string>
     <string name="settings_large_areas">Usar áreas grandes</string>
     <string name="settings_large_areas_desc">Aumenta la zona táctil</string>
-    <string name="settings_double_click">Doble clic</string>
+    <string name="double_click">Doble clic</string>
     <string name="rating">Comentarios</string>
     <string name="rating_menu">Comentarios ❤</string>
     <string name="rating_message">Si te gusta este juego, por favor danos un comentario. Nos ayudará mucho.</string>

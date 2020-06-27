@@ -91,7 +91,7 @@
     <string name="settings_accessibility">Спеціальні можливості</string>
     <string name="settings_large_areas">Використовувати збільшену територію</string>
     <string name="settings_large_areas_desc">Збільшує площу дотику</string>
-    <string name="settings_double_click">Подвійний клік</string>
+    <string name="double_click">Подвійний клік</string>
     <string name="rating">Відгук</string>
     <string name="rating_menu">Відгук ❤</string>
     <string name="rating_message">Якщо вам подобається ця гра, то залиште нам свій відгук. Це нам дуже допоможе.</string>

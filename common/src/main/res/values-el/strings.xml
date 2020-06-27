@@ -91,7 +91,7 @@
     <string name="settings_accessibility">Προσβασιμότητα</string>
     <string name="settings_large_areas">Χρησιμοποιήστε μεγάλες περιοχές</string>
     <string name="settings_large_areas_desc">Αύξηση της περιοχής κουμπιών</string>
-    <string name="settings_double_click">Διπλό Κλικ</string>
+    <string name="double_click">Διπλό Κλικ</string>
     <string name="rating">Αξιολόγηση</string>
     <string name="rating_menu">Αξιολόγηση ❤</string>
     <string name="rating_message">Αν σας αρέσει αυτό το παιχνίδι, παρακαλούμε δώστε μας τα σχόλιά σας. Θα μας βοηθήσει πολύ.</string>

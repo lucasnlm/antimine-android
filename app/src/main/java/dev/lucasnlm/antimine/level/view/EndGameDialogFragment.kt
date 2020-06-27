@@ -153,6 +153,6 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
         private const val DIALOG_TOTAL_MINES = "dialog_total_mines"
         private const val DIALOG_SAVE_ID = "dialog_save_id"
 
-        val TAG = EndGameDialogFragment::class.simpleName
+        const val TAG = "EndGameDialogFragment"
     }
 }

@@ -82,7 +82,7 @@ class AreaView : View {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean =
-        (gestureDetector?.onTouchEvent(event) ?: false) || super.onTouchEvent(event)
+        gestureDetector.onTouchEvent(event) || super.onTouchEvent(event)
 
     private fun bindContentDescription(area: Area) {
         contentDescription = when {

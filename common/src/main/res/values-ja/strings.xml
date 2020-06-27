@@ -91,7 +91,7 @@
     <string name="settings_accessibility">アクセシビリティ</string>
     <string name="settings_large_areas">範囲を広くする</string>
     <string name="settings_large_areas_desc">タッチ範囲を増やします</string>
-    <string name="settings_double_click">ダブルクリック</string>
+    <string name="double_click">ダブルクリック</string>
     <string name="rating">フィードバック</string>
     <string name="rating_menu">フィードバック ❤</string>
     <string name="rating_message">もしこのゲームを気に入ったなら、フィードバックをお願いします。私たちへの助けになるはずです。</string>

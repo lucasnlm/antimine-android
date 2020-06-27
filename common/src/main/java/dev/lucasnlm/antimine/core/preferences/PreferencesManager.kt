@@ -5,7 +5,7 @@ import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import javax.inject.Inject
 
-class PreferencesInteractor @Inject constructor(
+class PreferencesManager @Inject constructor(
     private val context: Context
 ) {
     private val preferences by lazy {
@@ -33,6 +33,10 @@ class PreferencesInteractor @Inject constructor(
     fun getInt(key: String, defaultValue: Int) = preferences.getInt(key, defaultValue)
 
     fun putInt(key: String, value: Int) = preferences.edit().putInt(key, value).apply()
+
+    fun removeKey(key: String) {
+        preferences.edit().remove(key).apply()
+    }
 
     companion object {
         private const val PREFERENCE_CUSTOM_GAME_WIDTH = "preference_custom_game_width"

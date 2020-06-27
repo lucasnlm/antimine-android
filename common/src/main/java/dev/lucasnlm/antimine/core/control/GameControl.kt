@@ -1,64 +1,101 @@
 package dev.lucasnlm.antimine.core.control
 
-enum class Action {
+/**
+ * Possible action response to an user action.
+ */
+enum class ActionResponse {
     OpenTile,
     SwitchMark,
     HighlightNeighbors,
     OpenNeighbors,
 }
 
+/**
+ * [Actions] links an [ActionResponse] to an user action.
+ */
 data class Actions(
-    val singleClick: Action?,
-    val doubleClick: Action?,
-    val longPress: Action?
+    val singleClick: ActionResponse?,
+    val doubleClick: ActionResponse?,
+    val longPress: ActionResponse?
 )
 
+/**
+ * These are the current available game control styles.
+ * Check [GameControl] to details.
+ */
+enum class ControlStyle {
+    Standard,
+    DoubleClick,
+    FastFlag
+}
+
+/**
+ * [GameControl] will map an user action (from [Actions]) to an [ActionResponse].
+ * This is necessary because same users rather that single click open the tile, other that it flags the tile.
+ */
 sealed class GameControl(
+    val id: ControlStyle,
     val onCovered: Actions,
     val onOpen: Actions
 ) {
     object Standard : GameControl(
+        id = ControlStyle.Standard,
         onCovered = Actions(
-            singleClick = Action.OpenTile,
-            longPress = Action.SwitchMark,
+            singleClick = ActionResponse.OpenTile,
+            longPress = ActionResponse.SwitchMark,
             doubleClick = null
         ),
         onOpen = Actions(
-            singleClick = Action.HighlightNeighbors,
-            longPress = Action.OpenNeighbors,
+            singleClick = ActionResponse.HighlightNeighbors,
+            longPress = ActionResponse.OpenNeighbors,
             doubleClick = null
         )
     )
 
     object FastFlag : GameControl(
+        id = ControlStyle.FastFlag,
         onCovered = Actions(
-            singleClick = Action.SwitchMark,
-            longPress = Action.OpenTile,
+            singleClick = ActionResponse.SwitchMark,
+            longPress = ActionResponse.OpenTile,
             doubleClick = null
         ),
         onOpen = Actions(
-            singleClick = Action.OpenNeighbors,
-            longPress = Action.HighlightNeighbors,
+            singleClick = ActionResponse.OpenNeighbors,
+            longPress = ActionResponse.HighlightNeighbors,
             doubleClick = null
         )
     )
 
     object DoubleClick : GameControl(
+        id = ControlStyle.DoubleClick,
         onCovered = Actions(
-            singleClick = Action.SwitchMark,
+            singleClick = ActionResponse.SwitchMark,
             longPress = null,
-            doubleClick = Action.OpenTile
+            doubleClick = ActionResponse.OpenTile
         ),
         onOpen = Actions(
-            singleClick = Action.HighlightNeighbors,
+            singleClick = ActionResponse.HighlightNeighbors,
             longPress = null,
-            doubleClick = Action.OpenNeighbors
+            doubleClick = ActionResponse.OpenNeighbors
         )
     )
+
+    companion object {
+        fun fromControlType(controlStyle: ControlStyle): GameControl {
+            return when (controlStyle) {
+                ControlStyle.Standard -> Standard
+                ControlStyle.DoubleClick -> DoubleClick
+                ControlStyle.FastFlag -> FastFlag
+            }
+        }
+    }
 }
 
+/**
+ * A data class used to make feedback or analytics to an user action.
+ */
 data class ActionFeedback(
-    val action: Action?,
+    val actionResponse: ActionResponse?,
     val index: Int,
     val multipleChanges: Boolean
 )

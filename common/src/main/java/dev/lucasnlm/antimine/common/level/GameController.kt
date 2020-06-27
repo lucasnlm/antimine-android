@@ -9,7 +9,7 @@ import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Score
-import dev.lucasnlm.antimine.core.control.Action
+import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.ActionFeedback
 import dev.lucasnlm.antimine.core.control.GameControl
 import kotlin.math.floor
@@ -24,7 +24,7 @@ class GameController {
     private val startTime = System.currentTimeMillis()
     private var saveId = 0
     private var firstOpen: FirstOpen = FirstOpen.Unknown
-    private val gameControl: GameControl = GameControl.Standard
+    private var gameControl: GameControl = GameControl.Standard
     private var mines: Sequence<Area> = emptySequence()
 
     var hasMines = false
@@ -264,15 +264,19 @@ class GameController {
         this.saveId = id.coerceAtLeast(0)
     }
 
+    fun updateGameControl(newGameControl: GameControl) {
+        this.gameControl = newGameControl
+    }
+
     /**
-     * Run a game [action] on a given tile.
+     * Run a game [actionResponse] on a given tile.
      * @return The number of changed tiles.
      */
-    private fun Area.runActionOn(action: Action?): ActionFeedback {
+    private fun Area.runActionOn(actionResponse: ActionResponse?): ActionFeedback {
         val highlightedChanged = turnOffAllHighlighted()
 
-        val changed = when (action) {
-            Action.OpenTile -> {
+        val changed = when (actionResponse) {
+            ActionResponse.OpenTile -> {
                 if (!hasMines) {
                     plantMinesExcept(id, true)
                 }
@@ -284,21 +288,21 @@ class GameController {
                     openTile()
                 }
             }
-            Action.SwitchMark -> {
+            ActionResponse.SwitchMark -> {
                 if (isCovered) switchMark()
                 1
             }
-            Action.HighlightNeighbors -> {
+            ActionResponse.HighlightNeighbors -> {
                 if (minesAround != 0) highlight() else 0
             }
-            Action.OpenNeighbors -> {
+            ActionResponse.OpenNeighbors -> {
                 openNeighbors()
                 8
             }
             else -> 0
         }
 
-        return ActionFeedback(action, id, (changed + highlightedChanged) > 1)
+        return ActionFeedback(actionResponse, id, (changed + highlightedChanged) > 1)
     }
 
     fun Area.switchMark(): Area = apply {

@@ -91,7 +91,6 @@
     <string name="settings_accessibility">Accessibility</string>
     <string name="settings_large_areas">Use Large Areas</string>
     <string name="settings_large_areas_desc">Increases the touch area</string>
-    <string name="settings_double_click">Double Click</string>
     <string name="rating">Feedback</string>
     <string name="rating_menu">Feedback ❤</string>
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
@@ -101,4 +100,12 @@
     <string name="total_time">Total Time</string>
     <string name="average_time">Average Time</string>
     <string name="performance">Performance</string>
+
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="single_click">Single Click</string>
+    <string name="double_click">Double Click</string>
+    <string name="long_press">Long Press</string>
+    <string name="open_tile">Open Area</string>
+
 </resources>

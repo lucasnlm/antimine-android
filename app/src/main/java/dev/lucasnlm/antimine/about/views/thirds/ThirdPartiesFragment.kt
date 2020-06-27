@@ -48,4 +48,8 @@ class ThirdPartiesFragment : Fragment() {
 
         licenses.adapter = aboutViewModel?.getLicenses()
     }
+
+    companion object {
+        const val TAG = "ThirdPartiesFragment"
+    }
 }

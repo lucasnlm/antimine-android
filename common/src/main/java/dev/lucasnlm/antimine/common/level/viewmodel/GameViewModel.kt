@@ -19,8 +19,9 @@ import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
-import dev.lucasnlm.antimine.core.control.Action
+import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.ActionFeedback
+import dev.lucasnlm.antimine.core.control.GameControl
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -61,6 +62,7 @@ class GameViewModel @ViewModelInject constructor(
         )
 
         gameController = GameController(minefield, minefieldRepository.randomSeed())
+        updateGameControl()
 
         mineCount.postValue(minefield.mines)
         difficulty.postValue(newDifficulty)
@@ -86,6 +88,7 @@ class GameViewModel @ViewModelInject constructor(
 
         val setup = save.minefield
         gameController = GameController(save)
+        updateGameControl()
 
         mineCount.postValue(setup.mines)
         difficulty.postValue(save.difficulty)
@@ -114,6 +117,7 @@ class GameViewModel @ViewModelInject constructor(
                 plantMinesExcept(save.firstOpen.value, true)
                 singleClick(save.firstOpen.value)
             }
+            updateGameControl()
         }
 
         mineCount.postValue(setup.mines)
@@ -252,11 +256,19 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     private fun onFeedbackAnalytics(feedback: ActionFeedback) {
-        when (feedback.action) {
-            Action.OpenTile -> { analyticsManager.sentEvent(Analytics.OpenTile(feedback.index)) }
-            Action.SwitchMark -> { analyticsManager.sentEvent(Analytics.SwitchMark(feedback.index)) }
-            Action.HighlightNeighbors -> { analyticsManager.sentEvent(Analytics.HighlightNeighbors(feedback.index)) }
-            Action.OpenNeighbors -> { analyticsManager.sentEvent(Analytics.OpenNeighbors(feedback.index)) }
+        when (feedback.actionResponse) {
+            ActionResponse.OpenTile -> {
+                analyticsManager.sentEvent(Analytics.OpenTile(feedback.index))
+            }
+            ActionResponse.SwitchMark -> {
+                analyticsManager.sentEvent(Analytics.SwitchMark(feedback.index))
+            }
+            ActionResponse.HighlightNeighbors -> {
+                analyticsManager.sentEvent(Analytics.HighlightNeighbors(feedback.index))
+            }
+            ActionResponse.OpenNeighbors -> {
+                analyticsManager.sentEvent(Analytics.OpenNeighbors(feedback.index))
+            }
         }
     }
 
@@ -281,6 +293,12 @@ class GameViewModel @ViewModelInject constructor(
             refreshAll()
             eventObserver.postValue(Event.Victory)
         }
+    }
+
+    fun updateGameControl() {
+        val controlType = preferencesRepository.controlType()
+        val gameControl = GameControl.fromControlType(controlType)
+        gameController.updateGameControl(gameControl)
     }
 
     fun runClock() {

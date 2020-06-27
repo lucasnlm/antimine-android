@@ -91,7 +91,7 @@
     <string name="settings_accessibility">Специальные возможности</string>
     <string name="settings_large_areas">Использовать большие области</string>
     <string name="settings_large_areas_desc">Увеличивает зону касания</string>
-    <string name="settings_double_click">Два нажатия</string>
+    <string name="double_click">Два нажатия</string>
     <string name="rating">Обратная связь</string>
     <string name="rating_menu">Обратная связь ❤</string>
     <string name="rating_message">Нравится игра? Оставьте отзыв, пожалуйста. Это нам очень поможет.</string>

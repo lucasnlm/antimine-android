@@ -91,7 +91,7 @@
     <string name="settings_accessibility">Barrierefreiheit</string>
     <string name="settings_large_areas">Große Flächen verwenden</string>
     <string name="settings_large_areas_desc">Vergrößert die Tastfläche</string>
-    <string name="settings_double_click">Doppelklick</string>
+    <string name="double_click">Doppelklick</string>
     <string name="rating">Rückmeldung</string>
     <string name="rating_menu">Rückmeldung ❤</string>
     <string name="rating_message">Wenn dir dieses Spiel gefällt, gib uns bitte eine Rückmeldung. Es wird uns sehr helfen.</string>

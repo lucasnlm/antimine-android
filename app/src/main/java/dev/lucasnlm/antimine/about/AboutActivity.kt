@@ -30,13 +30,13 @@ class AboutActivity : AppCompatActivity() {
             Observer { event ->
                 when (event) {
                     AboutEvent.ThirdPartyLicenses -> {
-                        replaceFragment(ThirdPartiesFragment(), ThirdPartiesFragment::class.simpleName)
+                        replaceFragment(ThirdPartiesFragment(), ThirdPartiesFragment.TAG)
                     }
                     AboutEvent.SourceCode -> {
                         openSourceCode()
                     }
                     AboutEvent.Translators -> {
-                        replaceFragment(TranslatorsFragment(), TranslatorsFragment::class.simpleName)
+                        replaceFragment(TranslatorsFragment(), TranslatorsFragment.TAG)
                     }
                     else -> {
                         replaceFragment(AboutInfoFragment(), null)

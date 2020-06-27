@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingHorizontal="16dp">
+
+    <androidx.appcompat.widget.AppCompatRadioButton
+        android:id="@+id/radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/standard_details"
+        app:layout_constraintEnd_toStartOf="@id/standard_details"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TableLayout
+        android:id="@+id/standard_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/standard"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow>
+            <TextView
+                android:padding="4dp"
+                android:text="@string/standard"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:padding="4dp"
+                android:text="Single Tap"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/arrow" />
+
+            <TextView
+                android:gravity="right"
+                android:padding="4dp"
+                android:text="Open Area" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:padding="4dp"
+                android:text="Long Tap"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/arrow" />
+
+            <TextView
+                android:gravity="right"
+                android:padding="4dp"
+                android:text="Put Flag" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

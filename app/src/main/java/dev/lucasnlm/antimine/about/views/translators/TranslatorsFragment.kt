@@ -40,4 +40,8 @@ class TranslatorsFragment : Fragment() {
             adapter = aboutViewModel?.getTranslators()
         }
     }
+
+    companion object {
+        const val TAG = "TranslatorsFragment"
+    }
 }

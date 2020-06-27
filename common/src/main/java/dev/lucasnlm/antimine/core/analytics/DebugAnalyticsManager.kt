@@ -14,6 +14,6 @@ class DebugAnalyticsManager : AnalyticsManager {
     }
 
     companion object {
-        val TAG = DebugAnalyticsManager::class.simpleName
+        const val TAG = "DebugAnalyticsManager"
     }
 }

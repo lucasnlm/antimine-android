@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine
 
 import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -28,6 +29,7 @@ import dev.lucasnlm.antimine.common.level.models.Score
 import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.control.ControlDialogFragment
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
@@ -46,7 +48,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class GameActivity : AppCompatActivity() {
+class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
     @Inject
     lateinit var preferencesRepository: IPreferencesRepository
 
@@ -162,6 +164,7 @@ class GameActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (status == Status.Running) {
+            viewModel.updateGameControl()
             viewModel.resumeGame()
             analyticsManager.sentEvent(Analytics.Resume())
         }
@@ -264,6 +267,7 @@ class GameActivity : AppCompatActivity() {
                 R.id.intermediate -> changeDifficulty(Difficulty.Intermediate)
                 R.id.expert -> changeDifficulty(Difficulty.Expert)
                 R.id.custom -> showCustomLevelDialog()
+                R.id.control -> showControlDialog()
                 R.id.about -> showAbout()
                 R.id.settings -> showSettings()
                 R.id.rate -> openRateUsLink("Drawer")
@@ -375,6 +379,18 @@ class GameActivity : AppCompatActivity() {
         if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
             CustomLevelDialogFragment().apply {
                 show(supportFragmentManager, CustomLevelDialogFragment.TAG)
+            }
+        }
+    }
+
+    private fun showControlDialog() {
+        if (status == Status.Running) {
+            viewModel.pauseGame()
+        }
+
+        if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
+            ControlDialogFragment().apply {
+                show(supportFragmentManager, ControlDialogFragment.TAG)
             }
         }
     }
@@ -514,8 +530,7 @@ class GameActivity : AppCompatActivity() {
      */
     private fun restartIfNeed() {
         if (usingLargeArea != preferencesRepository.useLargeAreas()) {
-            finish()
-            Intent(this, GameActivity::class.java).run { startActivity(this) }
+            recreate()
         }
     }
 
@@ -564,6 +579,13 @@ class GameActivity : AppCompatActivity() {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         } else {
             window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+    }
+
+    override fun onDismiss(dialog: DialogInterface?) {
+        if (status == Status.Running) {
+            viewModel.updateGameControl()
+            viewModel.resumeGame()
         }
     }
 
