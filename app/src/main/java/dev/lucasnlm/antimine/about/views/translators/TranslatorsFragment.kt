@@ -13,6 +13,11 @@ import kotlinx.android.synthetic.main.fragment_translators.*
 class TranslatorsFragment : Fragment(R.layout.fragment_translators) {
     private val aboutViewModel: AboutViewModel by activityViewModels()
 
+    override fun onResume() {
+        super.onResume()
+        activity?.setTitle(R.string.translation)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

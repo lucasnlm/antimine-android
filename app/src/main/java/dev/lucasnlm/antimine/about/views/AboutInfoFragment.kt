@@ -13,6 +13,11 @@ import kotlinx.android.synthetic.main.fragment_about_info.*
 class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
     private val aboutViewModel: AboutViewModel by activityViewModels()
 
+    override fun onResume() {
+        super.onResume()
+        activity?.setTitle(R.string.about)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

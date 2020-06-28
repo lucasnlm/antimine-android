@@ -11,12 +11,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class TextActivity : AppCompatActivity() {
-
+class TextActivity : AppCompatActivity(R.layout.activity_text) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         title = intent.getStringExtra(Constants.TEXT_TITLE)
-        setContentView(R.layout.activity_text)
 
         GlobalScope.launch {
             withContext(Dispatchers.Main) {

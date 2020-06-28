@@ -141,6 +141,7 @@
 
         <activity
             android:name="dev.lucasnlm.antimine.about.AboutActivity"
+            android:label="@string/about"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
