@@ -86,7 +86,6 @@
     <string name="settings_general">Genel</string>
     <string name="settings_vibration_desc">Patlama veya bayrak yerleştirme/kaldırmada titretir</string>
     <string name="settings_sound_desc">Patlama sesi çıkarır</string>
-    <string name="settings_auto_flag_desc">Çözülmüş mayınlara otomatik olarak bayrak ekler</string>
     <string name="settings_gameplay">Oynanış</string>
     <string name="settings_accessibility">Erişilebilirlik</string>
     <string name="settings_large_areas">Geniş Alanlar Kullan</string>

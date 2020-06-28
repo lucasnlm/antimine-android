@@ -86,7 +86,6 @@
     <string name="settings_general">General</string>
     <string name="settings_vibration_desc">Vibrar al activar la explosión o la bandera</string>
     <string name="settings_sound_desc">Hace un sonido de explosión</string>
-    <string name="settings_auto_flag_desc">Añade una bandera en minas resueltas automáticamente</string>
     <string name="settings_gameplay">Jugabilidad</string>
     <string name="settings_accessibility">Accesibilidad</string>
     <string name="settings_large_areas">Usar áreas grandes</string>

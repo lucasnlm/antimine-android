@@ -86,7 +86,6 @@
     <string name="settings_general">Generale</string>
     <string name="settings_vibration_desc">Vibra all\'esplosione di una mina oppure quando si piazza una bandiera</string>
     <string name="settings_sound_desc">Fa un suono di esplosione</string>
-    <string name="settings_auto_flag_desc">Aggiunge automaticamente una bandiera sulle mine risolte</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Accessibilità</string>
     <string name="settings_large_areas">Usa grandi aree</string>

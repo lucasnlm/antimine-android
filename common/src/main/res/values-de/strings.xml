@@ -86,7 +86,6 @@
     <string name="settings_general">Allgemein</string>
     <string name="settings_vibration_desc">Vibriert bei Explosion oder Schalten einer Markierung</string>
     <string name="settings_sound_desc">Erzeugt ein Explosionsgeräusch</string>
-    <string name="settings_auto_flag_desc">Fügt bei beseitigten Minen automatisch eine Markierung hinzu</string>
     <string name="settings_gameplay">Spielablauf</string>
     <string name="settings_accessibility">Barrierefreiheit</string>
     <string name="settings_large_areas">Große Flächen verwenden</string>

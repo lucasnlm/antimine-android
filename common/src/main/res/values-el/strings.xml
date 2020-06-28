@@ -86,7 +86,6 @@
     <string name="settings_general">Γενικά</string>
     <string name="settings_vibration_desc">Δόνηση σε έκρηξη ή εναλλαγή σημαίας</string>
     <string name="settings_sound_desc">Κάνει έναν ήχο έκρηξης</string>
-    <string name="settings_auto_flag_desc">Προσθέτει μια σημαία αυτόματα όταν αφαιρούνται οι νάρκες</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Προσβασιμότητα</string>
     <string name="settings_large_areas">Χρησιμοποιήστε μεγάλες περιοχές</string>

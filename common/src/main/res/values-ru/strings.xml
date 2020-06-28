@@ -86,7 +86,6 @@
     <string name="settings_general">Общее</string>
     <string name="settings_vibration_desc">Вибрировать при взрывах и при установке флага</string>
     <string name="settings_sound_desc">Звуки взрывов</string>
-    <string name="settings_auto_flag_desc">Автоматически добавлять флаг на обезвреженные мины</string>
     <string name="settings_gameplay">Геймплей</string>
     <string name="settings_accessibility">Специальные возможности</string>
     <string name="settings_large_areas">Использовать большие области</string>

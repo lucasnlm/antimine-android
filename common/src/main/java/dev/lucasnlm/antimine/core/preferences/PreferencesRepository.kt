@@ -19,6 +19,7 @@ interface IPreferencesRepository {
     fun useHapticFeedback(): Boolean
     fun useLargeAreas(): Boolean
     fun useAnimations(): Boolean
+    fun useQuestionMark(): Boolean
 }
 
 class PreferencesRepository(
@@ -57,6 +58,9 @@ class PreferencesRepository(
 
     override fun useAnimations(): Boolean =
         getBoolean("preference_animation", true)
+
+    override fun useQuestionMark(): Boolean =
+        getBoolean("preference_use_question_mark", true)
 
     override fun controlType(): ControlStyle {
         val index = getInt("preference_control_type", -1)

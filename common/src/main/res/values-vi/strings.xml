@@ -86,7 +86,6 @@
     <string name="settings_general">Tổng quan</string>
     <string name="settings_vibration_desc">Rung khi mìn nổ hoặc cắm/dỡ cờ</string>
     <string name="settings_sound_desc">Phát âm thanh nổ mìn</string>
-    <string name="settings_auto_flag_desc">Tự cắm cờ vào những chỗ chắc chắn có mìn</string>
     <string name="settings_gameplay">Cách thức chơi</string>
     <string name="settings_accessibility">Trợ năng</string>
     <string name="settings_large_areas">Vùng chạm lớn</string>

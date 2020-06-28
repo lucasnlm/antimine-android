@@ -26,6 +26,7 @@ class GameController {
     private var firstOpen: FirstOpen = FirstOpen.Unknown
     private var gameControl: GameControl = GameControl.Standard
     private var mines: Sequence<Area> = emptySequence()
+    private var useQuestionMark = true
 
     var hasMines = false
         private set
@@ -268,6 +269,10 @@ class GameController {
         this.gameControl = newGameControl
     }
 
+    fun useQuestionMark(useQuestionMark: Boolean) {
+        this.useQuestionMark = useQuestionMark
+    }
+
     /**
      * Run a game [actionResponse] on a given tile.
      * @return The number of changed tiles.
@@ -309,7 +314,7 @@ class GameController {
         if (isCovered) {
             mark = when (mark) {
                 Mark.PurposefulNone, Mark.None -> Mark.Flag
-                Mark.Flag -> Mark.Question
+                Mark.Flag -> if (useQuestionMark) Mark.Question else Mark.None
                 Mark.Question -> Mark.None
             }
         }

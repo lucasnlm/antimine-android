@@ -86,7 +86,6 @@
     <string name="settings_general">General</string>
     <string name="settings_vibration_desc">Vibrates on explosion or flag toggle</string>
     <string name="settings_sound_desc">Makes a sound of explosion</string>
-    <string name="settings_auto_flag_desc">Adds a flag on resolved mines automatically</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Accessibility</string>
     <string name="settings_large_areas">Use Large Areas</string>

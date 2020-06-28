@@ -86,7 +86,6 @@
     <string name="settings_general">通用</string>
     <string name="settings_vibration_desc">爆炸或标记时振动</string>
     <string name="settings_sound_desc">播放爆炸声音</string>
-    <string name="settings_auto_flag_desc">自动在已解决的地雷上添加旗帜</string>
     <string name="settings_gameplay">游戏性</string>
     <string name="settings_accessibility">无障碍</string>
     <string name="settings_large_areas">使用大区域</string>

@@ -86,7 +86,6 @@
     <string name="settings_general">Загальне</string>
     <string name="settings_vibration_desc">Вібрує під час вибуху або встановлення прапірця</string>
     <string name="settings_sound_desc">Додає звук вибуху</string>
-    <string name="settings_auto_flag_desc">Встановлювати прапорець на розгаданих ділянках автоматично</string>
     <string name="settings_gameplay">Геймплей</string>
     <string name="settings_accessibility">Спеціальні можливості</string>
     <string name="settings_large_areas">Використовувати збільшену територію</string>

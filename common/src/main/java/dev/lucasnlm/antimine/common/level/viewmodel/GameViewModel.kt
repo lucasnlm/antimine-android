@@ -62,7 +62,7 @@ class GameViewModel @ViewModelInject constructor(
         )
 
         gameController = GameController(minefield, minefieldRepository.randomSeed())
-        updateGameControl()
+        refreshUserPreferences()
 
         mineCount.postValue(minefield.mines)
         difficulty.postValue(newDifficulty)
@@ -88,7 +88,7 @@ class GameViewModel @ViewModelInject constructor(
 
         val setup = save.minefield
         gameController = GameController(save)
-        updateGameControl()
+        refreshUserPreferences()
 
         mineCount.postValue(setup.mines)
         difficulty.postValue(save.difficulty)
@@ -117,7 +117,7 @@ class GameViewModel @ViewModelInject constructor(
                 plantMinesExcept(save.firstOpen.value, true)
                 singleClick(save.firstOpen.value)
             }
-            updateGameControl()
+            refreshUserPreferences()
         }
 
         mineCount.postValue(setup.mines)
@@ -295,11 +295,15 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
-    fun updateGameControl() {
+    fun refreshUserPreferences() {
         if (initialized) {
+            val questionMark = preferencesRepository.useQuestionMark()
             val controlType = preferencesRepository.controlType()
             val gameControl = GameControl.fromControlType(controlType)
-            gameController.updateGameControl(gameControl)
+            gameController.apply {
+                updateGameControl(gameControl)
+                useQuestionMark(questionMark)
+            }
         }
     }
 

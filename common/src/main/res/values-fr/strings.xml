@@ -86,7 +86,6 @@
     <string name="settings_general">Général</string>
     <string name="settings_vibration_desc">Vibrations lors d\'une explosion ou de la pose un drapeau</string>
     <string name="settings_sound_desc">Fait un bruit d\'explosion</string>
-    <string name="settings_auto_flag_desc">Ajouter un drapeau sur des mines sûres automatiquement</string>
     <string name="settings_gameplay">Jouabilité</string>
     <string name="settings_accessibility">Accessibilité</string>
     <string name="settings_large_areas">Utiliser des grandes cases</string>
