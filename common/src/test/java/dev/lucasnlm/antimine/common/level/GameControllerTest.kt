@@ -673,6 +673,33 @@ class GameControllerTest {
     }
 
     @Test
+    fun testControlStandardOpenMultiple() {
+        gameControllerOf(3, 3, 1, 200L).run {
+            plantMinesExcept(3)
+            updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
+            singleClick(3)
+            assertFalse(at(3).isCovered)
+            at(3).findNeighbors().forEach {
+                assertTrue(it.isCovered)
+            }
+
+            field.filter { it.hasMine }.forEach {
+                longPress(it.id)
+                assertTrue(it.mark.isFlag())
+            }
+
+            longPress(3)
+            at(3).findNeighbors().forEach {
+                if (it.hasMine) {
+                    assertTrue(it.isCovered)
+                } else {
+                    assertFalse(it.isCovered)
+                }
+            }
+        }
+    }
+
+    @Test
     fun testControlFirstActionWithFastFlag() {
         gameControllerOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
@@ -685,6 +712,33 @@ class GameControllerTest {
             assertTrue(at(3).isCovered)
             longPress(3)
             assertFalse(at(3).isCovered)
+        }
+    }
+
+    @Test
+    fun testControlFastFlagOpenMultiple() {
+        gameControllerOf(3, 3, 1, 200L).run {
+            plantMinesExcept(3)
+            updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
+            longPress(3)
+            assertFalse(at(3).isCovered)
+            at(3).findNeighbors().forEach {
+                assertTrue(it.isCovered)
+            }
+
+            field.filter { it.hasMine }.forEach {
+                singleClick(it.id)
+                assertTrue(it.mark.isFlag())
+            }
+
+            singleClick(3)
+            at(3).findNeighbors().forEach {
+                if (it.hasMine) {
+                    assertTrue(it.isCovered)
+                } else {
+                    assertFalse(it.isCovered)
+                }
+            }
         }
     }
 
@@ -734,6 +788,33 @@ class GameControllerTest {
             assertTrue(at(targetId).isCovered)
             doubleClick(targetId)
             assertFalse(at(targetId).isCovered)
+        }
+    }
+
+    @Test
+    fun testControlDoubleClickOpenMultiple() {
+        gameControllerOf(3, 3, 1, 200L).run {
+            plantMinesExcept(3)
+            updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
+            doubleClick(3)
+            assertFalse(at(3).isCovered)
+            at(3).findNeighbors().forEach {
+                assertTrue(it.isCovered)
+            }
+
+            field.filter { it.hasMine }.forEach {
+                singleClick(it.id)
+                assertTrue(it.mark.isFlag())
+            }
+
+            doubleClick(3)
+            at(3).findNeighbors().forEach {
+                if (it.hasMine) {
+                    assertTrue(it.isCovered)
+                } else {
+                    assertFalse(it.isCovered)
+                }
+            }
         }
     }
 }
