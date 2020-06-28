@@ -90,7 +90,6 @@
     <string name="settings_accessibility">Προσβασιμότητα</string>
     <string name="settings_large_areas">Χρησιμοποιήστε μεγάλες περιοχές</string>
     <string name="settings_large_areas_desc">Αύξηση της περιοχής κουμπιών</string>
-    <string name="double_click">Διπλό Κλικ</string>
     <string name="rating">Αξιολόγηση</string>
     <string name="rating_menu">Αξιολόγηση ❤</string>
     <string name="rating_message">Αν σας αρέσει αυτό το παιχνίδι, παρακαλούμε δώστε μας τα σχόλιά σας. Θα μας βοηθήσει πολύ.</string>
@@ -100,4 +99,14 @@
     <string name="total_time">Συνολικός Χρόνος</string>
     <string name="average_time">Μέσος χρόνος</string>
     <string name="performance">Επίδοση</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Use Question Flags</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Flag First</string>
+    <string name="single_click">Single Click</string>
+    <string name="double_click">Διπλό Κλικ</string>
+    <string name="long_press">Long Press</string>
+    <string name="open_tile">Open Tile</string>
+    <string name="flag_tile">Flag Tile</string>
 </resources>

@@ -90,7 +90,6 @@
     <string name="settings_accessibility">Спеціальні можливості</string>
     <string name="settings_large_areas">Використовувати збільшену територію</string>
     <string name="settings_large_areas_desc">Збільшує площу дотику</string>
-    <string name="double_click">Подвійний клік</string>
     <string name="rating">Відгук</string>
     <string name="rating_menu">Відгук ❤</string>
     <string name="rating_message">Якщо вам подобається ця гра, то залиште нам свій відгук. Це нам дуже допоможе.</string>
@@ -100,4 +99,14 @@
     <string name="total_time">Час перегляду</string>
     <string name="average_time">Середній час</string>
     <string name="performance">Ефективність</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Використовувати прапорці «?»</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Flag First</string>
+    <string name="single_click">Single Click</string>
+    <string name="double_click">Подвійний клік</string>
+    <string name="long_press">Long Press</string>
+    <string name="open_tile">Open Tile</string>
+    <string name="flag_tile">Flag Tile</string>
 </resources>

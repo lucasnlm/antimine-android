@@ -90,7 +90,6 @@
     <string name="settings_accessibility">Accessibilité</string>
     <string name="settings_large_areas">Utiliser des grandes cases</string>
     <string name="settings_large_areas_desc">Augmenter la zone d\'interaction</string>
-    <string name="double_click">Cliquer deux fois</string>
     <string name="rating">Retour d\'expérience</string>
     <string name="rating_menu">Retour d\'expérience ❤️</string>
     <string name="rating_message">Si vous aimez ce jeu, n\'hésitez pas à jour donner un retour. Ça nous serait très utile.</string>
@@ -100,4 +99,14 @@
     <string name="total_time">Temps de jeu total</string>
     <string name="average_time">Temps de jeu moyen</string>
     <string name="performance">Performance</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Utiliser des drapeaux points d’interrogation</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Flag First</string>
+    <string name="single_click">Single Click</string>
+    <string name="double_click">Cliquer deux fois</string>
+    <string name="long_press">Long Press</string>
+    <string name="open_tile">Open Tile</string>
+    <string name="flag_tile">Flag Tile</string>
 </resources>

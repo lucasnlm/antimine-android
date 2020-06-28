@@ -90,7 +90,6 @@
     <string name="settings_accessibility">Erişilebilirlik</string>
     <string name="settings_large_areas">Geniş Alanlar Kullan</string>
     <string name="settings_large_areas_desc">Dokunma alanını artırır</string>
-    <string name="double_click">Çift Tıklama</string>
     <string name="rating">Geri bildirim</string>
     <string name="rating_menu">Geri bildirim ❤</string>
     <string name="rating_message">Bu oyunu beğendiyseniz, lütfen bize bir geri bildirim verin. Bize çok yardımcı olacak.</string>
@@ -100,4 +99,14 @@
     <string name="total_time">Toplam Süre</string>
     <string name="average_time">Ortalama Süre</string>
     <string name="performance">Performans</string>
+    <string name="ok">Tamam</string>
+    <string name="use_question_mark">Soru İşaretleri Kullan</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Flag First</string>
+    <string name="single_click">Single Click</string>
+    <string name="double_click">Çift Tıklama</string>
+    <string name="long_press">Long Press</string>
+    <string name="open_tile">Open Tile</string>
+    <string name="flag_tile">Flag Tile</string>
 </resources>

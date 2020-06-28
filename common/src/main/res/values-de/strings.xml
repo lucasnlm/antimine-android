@@ -90,7 +90,6 @@
     <string name="settings_accessibility">Barrierefreiheit</string>
     <string name="settings_large_areas">Große Flächen verwenden</string>
     <string name="settings_large_areas_desc">Vergrößert die Tastfläche</string>
-    <string name="double_click">Doppelklick</string>
     <string name="rating">Rückmeldung</string>
     <string name="rating_menu">Rückmeldung ❤</string>
     <string name="rating_message">Wenn dir dieses Spiel gefällt, gib uns bitte eine Rückmeldung. Es wird uns sehr helfen.</string>
@@ -100,4 +99,14 @@
     <string name="total_time">Gesamtzeit</string>
     <string name="average_time">Durchschnittliche Zeit</string>
     <string name="performance">Erfolgsergebnis</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Fragen-Fahne zeigen</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Flag First</string>
+    <string name="single_click">Single Click</string>
+    <string name="double_click">Doppelklick</string>
+    <string name="long_press">Long Press</string>
+    <string name="open_tile">Open Tile</string>
+    <string name="flag_tile">Flag Tile</string>
 </resources>

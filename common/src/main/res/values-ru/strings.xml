@@ -90,7 +90,6 @@
     <string name="settings_accessibility">Специальные возможности</string>
     <string name="settings_large_areas">Использовать большие области</string>
     <string name="settings_large_areas_desc">Увеличивает зону касания</string>
-    <string name="double_click">Два нажатия</string>
     <string name="rating">Обратная связь</string>
     <string name="rating_menu">Обратная связь ❤</string>
     <string name="rating_message">Нравится игра? Оставьте отзыв, пожалуйста. Это нам очень поможет.</string>
@@ -100,4 +99,14 @@
     <string name="total_time">Общее время</string>
     <string name="average_time">Среднее время</string>
     <string name="performance">Производительность</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Использовать флаги-вопросы</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Flag First</string>
+    <string name="single_click">Single Click</string>
+    <string name="double_click">Два нажатия</string>
+    <string name="long_press">Long Press</string>
+    <string name="open_tile">Open Tile</string>
+    <string name="flag_tile">Flag Tile</string>
 </resources>

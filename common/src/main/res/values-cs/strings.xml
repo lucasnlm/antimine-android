@@ -90,7 +90,6 @@
     <string name="settings_accessibility">Přístupnost</string>
     <string name="settings_large_areas">Použít velké oblasti</string>
     <string name="settings_large_areas_desc">Zvyšuje dotykovou oblast</string>
-    <string name="double_click">Poklepání</string>
     <string name="rating">Komentář</string>
     <string name="rating_menu">Komentář ❤</string>
     <string name="rating_message">Pokud se vám tato hra líbí, dejte nám prosím zpětnou vazbu. Hodně nám to pomůže.</string>
@@ -100,4 +99,14 @@
     <string name="total_time">Celkový čas</string>
     <string name="average_time">Průměrný čas</string>
     <string name="performance">Výkon</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Po užívat nejisté vlaječky</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Flag First</string>
+    <string name="single_click">Single Click</string>
+    <string name="double_click">Poklepání</string>
+    <string name="long_press">Long Press</string>
+    <string name="open_tile">Open Tile</string>
+    <string name="flag_tile">Flag Tile</string>
 </resources>

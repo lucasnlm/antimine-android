@@ -81,7 +81,7 @@
     <string name="enable_automatic_flags">Activar situación automática de banderas</string>
     <string name="desc_convered_area">Área cubierta</string>
     <string name="desc_marked_area">Área marcada</string>
-    <string name="desc_question_area">Area dudosa</string>
+    <string name="desc_question_area">Área dudosa</string>
     <string name="desc_wrongly_marked_area">Área marcada incorrectamente</string>
     <string name="settings_general">General</string>
     <string name="settings_vibration_desc">Vibrar al activar la explosión o la bandera</string>
@@ -90,7 +90,6 @@
     <string name="settings_accessibility">Accesibilidad</string>
     <string name="settings_large_areas">Usar áreas grandes</string>
     <string name="settings_large_areas_desc">Aumenta la zona táctil</string>
-    <string name="double_click">Doble clic</string>
     <string name="rating">Comentarios</string>
     <string name="rating_menu">Comentarios ❤</string>
     <string name="rating_message">Si te gusta este juego, por favor danos un comentario. Nos ayudará mucho.</string>
@@ -100,4 +99,14 @@
     <string name="total_time">Tiempo total</string>
     <string name="average_time">Tiempo promedio</string>
     <string name="performance">Desempeño</string>
+    <string name="ok">Aceptar</string>
+    <string name="use_question_mark">Usar banderas de interrogación</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Flag First</string>
+    <string name="single_click">Single Click</string>
+    <string name="double_click">Doble clic</string>
+    <string name="long_press">Long Press</string>
+    <string name="open_tile">Open Tile</string>
+    <string name="flag_tile">Flag Tile</string>
 </resources>
