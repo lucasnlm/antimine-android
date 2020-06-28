@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatRadioButton
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.control.model.ControlModel
+import dev.lucasnlm.antimine.control.model.ControlDetails
 
 class ControlItemView : FrameLayout {
     constructor(context: Context) : super(context)
@@ -37,12 +37,12 @@ class ControlItemView : FrameLayout {
         secondActionResponse = findViewById(R.id.secondActionResponse)
     }
 
-    fun bind(controlModel: ControlModel) {
-        title.text = context.getString(controlModel.titleId)
-        firstAction.text = context.getString(controlModel.firstActionId)
-        firstActionResponse.text = context.getString(controlModel.firstActionResponseId)
-        secondAction.text = context.getString(controlModel.secondActionId)
-        secondActionResponse.text = context.getString(controlModel.secondActionResponseId)
+    fun bind(controlDetails: ControlDetails) {
+        title.text = context.getString(controlDetails.titleId)
+        firstAction.text = context.getString(controlDetails.firstActionId)
+        firstActionResponse.text = context.getString(controlDetails.firstActionResponseId)
+        secondAction.text = context.getString(controlDetails.secondActionId)
+        secondActionResponse.text = context.getString(controlDetails.secondActionResponseId)
     }
 
     fun setRadio(selected: Boolean) {

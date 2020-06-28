@@ -3,7 +3,7 @@ package dev.lucasnlm.antimine.control.model
 import androidx.annotation.StringRes
 import dev.lucasnlm.antimine.core.control.ControlStyle
 
-data class ControlModel(
+data class ControlDetails(
     val id: Long,
     val controlStyle: ControlStyle,
     @StringRes val titleId: Int,

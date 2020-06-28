@@ -4,7 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.control.model.ControlModel
+import dev.lucasnlm.antimine.control.model.ControlDetails
 import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
@@ -14,7 +14,7 @@ class ControlViewModel @ViewModelInject constructor(
     val controlTypeSelected = MutableLiveData(preferencesRepository.controlStyle())
 
     val gameControlOptions = listOf(
-        ControlModel(
+        ControlDetails(
             id = 0L,
             controlStyle = ControlStyle.Standard,
             titleId = R.string.standard,
@@ -23,7 +23,7 @@ class ControlViewModel @ViewModelInject constructor(
             secondActionId = R.string.long_press,
             secondActionResponseId = R.string.flag_tile
         ),
-        ControlModel(
+        ControlDetails(
             id = 1L,
             controlStyle = ControlStyle.FastFlag,
             titleId = R.string.flag_first,
@@ -32,7 +32,7 @@ class ControlViewModel @ViewModelInject constructor(
             secondActionId = R.string.long_press,
             secondActionResponseId = R.string.open_tile
         ),
-        ControlModel(
+        ControlDetails(
             id = 2L,
             controlStyle = ControlStyle.DoubleClick,
             titleId = R.string.double_click,

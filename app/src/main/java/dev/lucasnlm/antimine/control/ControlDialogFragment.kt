@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.control.model.ControlModel
+import dev.lucasnlm.antimine.control.model.ControlDetails
 import dev.lucasnlm.antimine.control.view.ControlItemView
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
@@ -51,9 +51,9 @@ class ControlDialogFragment : AppCompatDialogFragment() {
         private val controlViewModel: ControlViewModel
     ) : BaseAdapter() {
         private var selected = controlViewModel.controlTypeSelected.value
-        private var controlList = listOf<ControlModel>()
+        private var controlList = listOf<ControlDetails>()
 
-        fun setList(list: List<ControlModel>) {
+        fun setList(list: List<ControlDetails>) {
             controlList = list
         }
 
