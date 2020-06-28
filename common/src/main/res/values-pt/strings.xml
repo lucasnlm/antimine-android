@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pt">
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Encontre todas as minas escondidas no campo minado.</string>
-    <string name="remaining_mines">Minas Restantes</string>
     <string name="games">Games</string>
     <string name="previous_games">Jogos Anteriores</string>
     <string name="install">Instalar</string>

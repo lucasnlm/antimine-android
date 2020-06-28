@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="el">
     <string name="app_name">Antimine</string>
     <string name="app_description">Πρέπει να καθαρίσετε μια ορθογώνια πλακέτα που περιέχει κρυμμένες \"νάρκες\" χωρίς να πυροδοτήσετε καμία από αυτές.</string>
-    <string name="remaining_mines">Υπόλοιπες νάρκες</string>
     <string name="games">Παιχνίδια</string>
     <string name="previous_games">Προηγούμενα Παιχνίδια</string>
     <string name="install">Εγκατάσταση</string>

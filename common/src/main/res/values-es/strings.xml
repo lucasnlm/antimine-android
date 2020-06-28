@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="es-rES">
     <string name="app_name">Anti-Mina</string>
     <string name="app_description">Usted tiene que limpiar un tablero cuadrado que contiene minas escondidas sin detornarlas.</string>
-    <string name="remaining_mines">Minas restantes</string>
     <string name="games">Juegos</string>
     <string name="previous_games">Juegos anteriores</string>
     <string name="install">Instalar</string>

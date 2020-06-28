@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="it">
     <string name="app_name">Antimine</string>
     <string name="app_description">L\'obbiettivo del gioco è ripulire un campo rettangolare che contiene mine nascoste senza detonarne nessuna.</string>
-    <string name="remaining_mines">Mine rimanenti</string>
     <string name="games">Giochi</string>
     <string name="previous_games">Partite Precedenti</string>
     <string name="install">Installare</string>

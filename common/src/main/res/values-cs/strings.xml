@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="cs">
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté miny, aniž by kterákoliv z nich vybuchla.</string>
-    <string name="remaining_mines">Zbývající miny</string>
     <string name="games">Hry</string>
     <string name="previous_games">Předchozí hry</string>
     <string name="install">Instalovat</string>

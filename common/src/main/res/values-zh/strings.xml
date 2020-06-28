@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh-rCN">
     <string name="app_name">Antimine - 扫雷</string>
     <string name="app_description">你需要清除一个隐藏着地雷的矩形面板，不能使任何地雷爆炸。</string>
-    <string name="remaining_mines">剩余地雷</string>
     <string name="games">游戏</string>
     <string name="previous_games">上一局</string>
     <string name="install">安装</string>

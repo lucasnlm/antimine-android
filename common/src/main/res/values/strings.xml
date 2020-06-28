@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
     <string name="app_name">Antimine</string>
     <string name="app_description">You have to clear a rectangular board containing hidden mines without detonating any of them.</string>
-    <string name="remaining_mines">Remaining mines</string>
     <string name="games">Games</string>
     <string name="previous_games">Previous Games</string>
     <string name="install">Install</string>

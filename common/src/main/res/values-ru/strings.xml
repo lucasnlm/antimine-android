@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ru">
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Вам необходимо расчистить прямоугольную площадь со спрятанными минами, не взорвав ни одну из них.</string>
-    <string name="remaining_mines">Мин осталось</string>
     <string name="games">Игры</string>
     <string name="previous_games">Предыдущие игры</string>
     <string name="install">Установить</string>

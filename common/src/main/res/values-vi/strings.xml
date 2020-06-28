@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="vi">
     <string name="app_name">Dò mìn</string>
     <string name="app_description">Bạn phải mở tất cả các ô trên một bãi mìn mà không làm nổ cục mìn nào.</string>
-    <string name="remaining_mines">Số mìn còn lại</string>
     <string name="games">Trò chơi</string>
     <string name="previous_games">Trò chơi Trước</string>
     <string name="install">Cài đặt</string>

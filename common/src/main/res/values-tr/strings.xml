@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="tr">
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Hiçbirini patlatmadan gizli mayın içeren dikdörtgen bir tahtayı temizlemelisiniz.</string>
-    <string name="remaining_mines">Kalan mayınlar</string>
     <string name="games">Oyunlar</string>
     <string name="previous_games">Önceki Oyun</string>
     <string name="install">Yükle</string>

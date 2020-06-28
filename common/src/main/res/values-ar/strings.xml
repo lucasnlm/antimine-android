@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ar">
     <string name="app_name">Antimine</string>
     <string name="app_description">يجب عليك مسح لوحة مستطيلة تحتوي على ألغام مخفية دون تفجير أي منها.</string>
-    <string name="remaining_mines">الألغام المتبقية</string>
     <string name="games">ألعاب</string>
     <string name="previous_games">Previous Games</string>
     <string name="install">تثبيت</string>

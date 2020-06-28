@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Vous devez vider un tableau rectangulaire contenant des mines cachées sans en détonner.</string>
-    <string name="remaining_mines">Mines restantes</string>
     <string name="games">Jeux</string>
     <string name="previous_games">Parties précédentes</string>
     <string name="install">Installer</string>
