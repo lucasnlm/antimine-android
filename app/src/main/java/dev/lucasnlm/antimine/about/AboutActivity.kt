@@ -8,13 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.about.views.AboutInfoFragment
 import dev.lucasnlm.antimine.about.models.AboutEvent
-import dev.lucasnlm.antimine.about.views.translators.TranslatorsFragment
-import dev.lucasnlm.antimine.about.views.thirds.ThirdPartiesFragment
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
+import dev.lucasnlm.antimine.about.views.AboutInfoFragment
+import dev.lucasnlm.antimine.about.views.thirds.ThirdPartiesFragment
+import dev.lucasnlm.antimine.about.views.translators.TranslatorsFragment
 
 class AboutActivity : AppCompatActivity(R.layout.activity_empty) {
     private val aboutViewModel: AboutViewModel by viewModels()

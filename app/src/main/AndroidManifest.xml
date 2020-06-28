@@ -132,7 +132,7 @@
         </activity>
 
         <activity
-            android:name="dev.lucasnlm.antimine.about.TextActivity"
+            android:name="dev.lucasnlm.antimine.text.TextActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
