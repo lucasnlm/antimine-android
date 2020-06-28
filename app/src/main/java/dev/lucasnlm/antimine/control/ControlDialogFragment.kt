@@ -36,7 +36,7 @@ class ControlDialogFragment : AppCompatDialogFragment() {
         return AlertDialog.Builder(requireContext(), R.style.MyDialog).apply {
             setTitle(R.string.control)
             setSingleChoiceItems(adapter, currentControl, null)
-            setPositiveButton(android.R.string.ok, null) // TODO OK
+            setPositiveButton(R.string.ok, null) // TODO OK
         }.create()
     }
 
@@ -47,7 +47,7 @@ class ControlDialogFragment : AppCompatDialogFragment() {
         super.onDismiss(dialog)
     }
 
-    class ControlListAdapter(
+    private class ControlListAdapter(
         private val controlViewModel: ControlViewModel
     ) : BaseAdapter() {
         private var selected = controlViewModel.controlTypeSelected.value
@@ -86,6 +86,6 @@ class ControlDialogFragment : AppCompatDialogFragment() {
     }
 
     companion object {
-        const val TAG = "ControlDialogFragment"
+        val TAG = ControlDialogFragment::class.simpleName!!
     }
 }

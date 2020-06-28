@@ -50,6 +50,6 @@ class ThirdPartiesFragment : Fragment() {
     }
 
     companion object {
-        const val TAG = "ThirdPartiesFragment"
+        val TAG = ThirdPartiesFragment::class.simpleName!!
     }
 }

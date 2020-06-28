@@ -42,6 +42,6 @@ class TranslatorsFragment : Fragment() {
     }
 
     companion object {
-        const val TAG = "TranslatorsFragment"
+        val TAG = TranslatorsFragment::class.simpleName!!
     }
 }

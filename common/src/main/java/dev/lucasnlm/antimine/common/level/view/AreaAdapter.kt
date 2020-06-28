@@ -142,7 +142,7 @@ class AreaAdapter(
     }
 
     companion object {
-        const val TAG = "AreaAdapter"
+        val TAG = AreaAdapter::class.simpleName!!
 
         fun createAreaPaintSettings(context: Context, useLargeArea: Boolean): AreaPaintSettings {
             val resources = context.resources
