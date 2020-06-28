@@ -35,7 +35,7 @@
     <string name="disconnected">Bağlantı kesildi</string>
     <string name="new_game">Yeni Oyun</string>
     <string name="share">Paylaş</string>
-    <string name="share_menu">Paylaş...</string>
+    <string name="share_menu">Paylaş…</string>
     <string name="new_game_request">Yeni bir oyuna başlamak istiyor musunuz?</string>
     <string name="yes">Evet</string>
     <string name="general">Genel</string>
@@ -102,10 +102,10 @@
     <string name="use_question_mark">Soru İşaretleri Kullan</string>
     <string name="control">Control</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Flag First</string>
-    <string name="single_click">Single Click</string>
+    <string name="flag_first">Önce İşaretle</string>
+    <string name="single_click">Tek Tıklama</string>
     <string name="double_click">Çift Tıklama</string>
-    <string name="long_press">Long Press</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="long_press">Uzun Basma</string>
+    <string name="open_tile">Karoyu Aç</string>
+    <string name="flag_tile">Karoyu İşaretle</string>
 </resources>

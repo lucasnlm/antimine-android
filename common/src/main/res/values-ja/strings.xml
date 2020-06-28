@@ -30,12 +30,12 @@
     <string name="google_play_games">Google Play ゲーム</string>
     <string name="leaderboards">リーダーボード</string>
     <string name="connect">接続</string>
-    <string name="connecting">接続しています...</string>
+    <string name="connecting">接続しています…</string>
     <string name="disconnect">切断</string>
     <string name="disconnected">切断済み</string>
     <string name="new_game">新しいゲーム</string>
     <string name="share">共有</string>
-    <string name="share_menu">共有...</string>
+    <string name="share_menu">共有…</string>
     <string name="new_game_request">新しくゲームを始めますか？</string>
     <string name="yes">はい</string>
     <string name="general">全般</string>
@@ -50,7 +50,7 @@
     <string name="flag_placed">フラグを立てました！</string>
     <string name="flag_removed">フラグを消しました！</string>
     <string name="used_software_text">このゲームは、以下のサードパーティーソフトウェアを使用しています:</string>
-    <string name="translators_text">このゲームは以下の人々によって翻訳されています:</string>
+    <string name="translators_text">このゲームは、以下の人々によって翻訳されています:</string>
     <string name="sign_in_failed">サインインに失敗しました。インターネット接続を確認してからもう一度お試しください。</string>
     <string name="unknown_error">不明なエラーです。</string>
     <string name="retry">リトライ</string>
@@ -102,10 +102,10 @@
     <string name="use_question_mark">疑いフラグを使用</string>
     <string name="control">Control</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Flag First</string>
-    <string name="single_click">Single Click</string>
+    <string name="flag_first">最初にフラグをつける</string>
+    <string name="single_click">シングルクリック</string>
     <string name="double_click">ダブルクリック</string>
-    <string name="long_press">Long Press</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="long_press">長押し</string>
+    <string name="open_tile">開いた</string>
+    <string name="flag_tile">国旗</string>
 </resources>

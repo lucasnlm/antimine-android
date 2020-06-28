@@ -102,10 +102,10 @@
     <string name="use_question_mark">Fragen-Fahne zeigen</string>
     <string name="control">Control</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Flag First</string>
-    <string name="single_click">Single Click</string>
+    <string name="flag_first">Erste markieren</string>
+    <string name="single_click">Einzelklick</string>
     <string name="double_click">Doppelklick</string>
-    <string name="long_press">Long Press</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="long_press">Lange Drücken</string>
+    <string name="open_tile">Kachel öffnen</string>
+    <string name="flag_tile">Kachel markieren</string>
 </resources>

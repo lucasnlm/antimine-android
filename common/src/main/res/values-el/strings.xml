@@ -103,9 +103,9 @@
     <string name="control">Control</string>
     <string name="arrow">➞</string>
     <string name="flag_first">Flag First</string>
-    <string name="single_click">Single Click</string>
-    <string name="double_click">Διπλό Κλικ</string>
-    <string name="long_press">Long Press</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="single_click">Με ένα κλικ</string>
+    <string name="double_click">Διπλό κλικ</string>
+    <string name="long_press">Πιέστε και κρατήστε</string>
+    <string name="open_tile">Ανοιξε</string>
+    <string name="flag_tile">Σημαία</string>
 </resources>

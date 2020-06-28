@@ -102,10 +102,10 @@
     <string name="use_question_mark">Usa punto interrogativo</string>
     <string name="control">Control</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Flag First</string>
-    <string name="single_click">Single Click</string>
+    <string name="flag_first">Prima Bandiera</string>
+    <string name="single_click">Singolo click</string>
     <string name="double_click">Doppio click</string>
-    <string name="long_press">Long Press</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="long_press">Premi a lungo</string>
+    <string name="open_tile">Quadrato aperto</string>
+    <string name="flag_tile">Quadrato con bandiera</string>
 </resources>

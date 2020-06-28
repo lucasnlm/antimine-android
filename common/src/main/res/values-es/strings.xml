@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="es-rES">
     <string name="app_name">Anti-Mina</string>
-    <string name="app_description">Usted tiene que limpiar un tablero cuadrado que contiene minas escondidas sin detornarlas.</string>
+    <string name="app_description">Usted tiene que limpiar un tablero cuadrado que contiene minas escondidas sin detonarlas.</string>
     <string name="games">Juegos</string>
     <string name="previous_games">Juegos anteriores</string>
     <string name="install">Instalar</string>
@@ -102,10 +102,10 @@
     <string name="use_question_mark">Usar banderas de interrogación</string>
     <string name="control">Control</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Flag First</string>
-    <string name="single_click">Single Click</string>
+    <string name="flag_first">Marcar primero</string>
+    <string name="single_click">Un clic</string>
     <string name="double_click">Doble clic</string>
-    <string name="long_press">Long Press</string>
+    <string name="long_press">Mantenga pulsado</string>
     <string name="open_tile">Open Tile</string>
     <string name="flag_tile">Flag Tile</string>
 </resources>

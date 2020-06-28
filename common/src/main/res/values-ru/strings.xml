@@ -102,10 +102,10 @@
     <string name="use_question_mark">Использовать флаги-вопросы</string>
     <string name="control">Control</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Flag First</string>
-    <string name="single_click">Single Click</string>
-    <string name="double_click">Два нажатия</string>
-    <string name="long_press">Long Press</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="flag_first">Отметить первым</string>
+    <string name="single_click">Одно нажатие</string>
+    <string name="double_click">Двойное нажатие</string>
+    <string name="long_press">Удержание нажатия</string>
+    <string name="open_tile">Открыть плитку</string>
+    <string name="flag_tile">Отметить плитку</string>
 </resources>

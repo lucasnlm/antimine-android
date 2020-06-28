@@ -102,10 +102,10 @@
     <string name="use_question_mark">使用问号旗标</string>
     <string name="control">Control</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Flag First</string>
-    <string name="single_click">Single Click</string>
+    <string name="flag_first">标记在前</string>
+    <string name="single_click">单次点击</string>
     <string name="double_click">双击</string>
-    <string name="long_press">Long Press</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="long_press">长按</string>
+    <string name="open_tile">打开</string>
+    <string name="flag_tile">旗</string>
 </resources>

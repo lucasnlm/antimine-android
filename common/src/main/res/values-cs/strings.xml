@@ -102,10 +102,10 @@
     <string name="use_question_mark">Po užívat nejisté vlaječky</string>
     <string name="control">Control</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Flag First</string>
-    <string name="single_click">Single Click</string>
-    <string name="double_click">Poklepání</string>
-    <string name="long_press">Long Press</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="flag_first">Označit jako první</string>
+    <string name="single_click">Jedno klepnutí</string>
+    <string name="double_click">Dvojí klepnutí</string>
+    <string name="long_press">Dlouhý stisk</string>
+    <string name="open_tile">Otevřít dlaždici</string>
+    <string name="flag_tile">Název vlajky</string>
 </resources>
