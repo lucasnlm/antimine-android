@@ -9,9 +9,9 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun updateCustomGameMode(minefield: Minefield) { }
 
-    override fun controlType(): ControlStyle = ControlStyle.Standard
+    override fun controlStyle(): ControlStyle = ControlStyle.Standard
 
-    override fun useControlType(controlStyle: ControlStyle) { }
+    override fun useControlStyle(controlStyle: ControlStyle) { }
 
     override fun getBoolean(key: String, defaultValue: Boolean): Boolean = false
 

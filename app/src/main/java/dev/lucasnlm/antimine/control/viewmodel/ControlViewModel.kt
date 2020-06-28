@@ -11,7 +11,7 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 class ControlViewModel @ViewModelInject constructor(
     private val preferencesRepository: IPreferencesRepository
 ) : ViewModel() {
-    val controlTypeSelected = MutableLiveData<ControlStyle>(preferencesRepository.controlType())
+    val controlTypeSelected = MutableLiveData(preferencesRepository.controlStyle())
 
     val gameControlOptions = listOf(
         ControlModel(
@@ -44,11 +44,11 @@ class ControlViewModel @ViewModelInject constructor(
     )
 
     init {
-        controlTypeSelected.postValue(preferencesRepository.controlType())
+        controlTypeSelected.postValue(preferencesRepository.controlStyle())
     }
 
     fun selectControlType(controlStyle: ControlStyle) {
-        preferencesRepository.useControlType(controlStyle)
+        preferencesRepository.useControlStyle(controlStyle)
         controlTypeSelected.postValue(controlStyle)
     }
 }

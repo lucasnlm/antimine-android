@@ -12,8 +12,8 @@ interface IPreferencesRepository {
     fun customGameMode(): Minefield
     fun updateCustomGameMode(minefield: Minefield)
 
-    fun controlType(): ControlStyle
-    fun useControlType(controlStyle: ControlStyle)
+    fun controlStyle(): ControlStyle
+    fun useControlStyle(controlStyle: ControlStyle)
 
     fun useFlagAssistant(): Boolean
     fun useHapticFeedback(): Boolean
@@ -62,18 +62,18 @@ class PreferencesRepository(
     override fun useQuestionMark(): Boolean =
         getBoolean("preference_use_question_mark", true)
 
-    override fun controlType(): ControlStyle {
-        val index = getInt("preference_control_type", -1)
+    override fun controlStyle(): ControlStyle {
+        val index = getInt("preference_control_style", -1)
         return ControlStyle.values().getOrNull(index) ?: ControlStyle.Standard
     }
 
-    override fun useControlType(controlStyle: ControlStyle) {
-        putInt("preference_control_type", controlStyle.ordinal)
+    override fun useControlStyle(controlStyle: ControlStyle) {
+        putInt("preference_control_style", controlStyle.ordinal)
     }
 
     private fun migrateOldPreferences() {
         if (getBoolean("preference_double_click_open", false)) {
-            useControlType(ControlStyle.DoubleClick)
+            useControlStyle(ControlStyle.DoubleClick)
             preferencesManager.removeKey("preference_double_click_open")
         }
     }

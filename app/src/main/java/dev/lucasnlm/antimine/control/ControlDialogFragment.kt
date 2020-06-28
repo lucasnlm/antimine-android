@@ -31,7 +31,7 @@ class ControlDialogFragment : AppCompatDialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val currentControl = preferencesRepository.controlType().ordinal
+        val currentControl = preferencesRepository.controlStyle().ordinal
 
         return AlertDialog.Builder(requireContext(), R.style.MyDialog).apply {
             setTitle(R.string.control)

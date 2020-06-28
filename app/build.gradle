@@ -110,6 +110,7 @@ dependencies {
 
     // Tests
     testImplementation 'junit:junit:4.13'
+    testImplementation 'android.arch.core:core-testing:1.1.1'
     testImplementation 'androidx.core:core:1.1.0'
     testImplementation 'androidx.test:core:1.2.0'
     testImplementation 'androidx.test:core-ktx:1.2.0'
@@ -120,6 +121,7 @@ dependencies {
     testImplementation 'androidx.fragment:fragment-testing:1.1.0'
     testImplementation 'org.robolectric:robolectric:4.3.1'
     testImplementation 'androidx.test.ext:junit:1.1.1'
+    testImplementation "io.mockk:mockk:1.10.0"
 
     // Core library
     androidTestImplementation 'androidx.test:core:1.2.0'
