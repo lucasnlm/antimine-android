@@ -12,14 +12,14 @@ import org.junit.Test
 
 class GameControllerTest {
 
-    private fun levelFacadeOf(width: Int, height: Int, mines: Int, seed: Long = 0L) =
+    private fun gameControllerOf(width: Int, height: Int, mines: Int, seed: Long = 0L) =
         GameController(Minefield(width, height, mines), seed)
 
     private fun GameController.at(id: Int): Area = field.first { it.id == id }
 
     @Test
     fun testLevelEmptyBuilding() {
-        levelFacadeOf(3, 3, 1).run {
+        gameControllerOf(3, 3, 1).run {
             assertEquals(
                 field.toList(),
                 listOf(
@@ -40,7 +40,7 @@ class GameControllerTest {
     @Test
     fun testDismissFlagAfterOpen() {
         val mineCount = 3
-        levelFacadeOf(3, 3, mineCount).run {
+        gameControllerOf(3, 3, mineCount).run {
             plantMinesExcept(3)
             singleClick(3)
             field.filter { it.isCovered }.forEach { it.mark = Mark.Flag }
@@ -54,7 +54,7 @@ class GameControllerTest {
 
     @Test
     fun testPlantMines() {
-        levelFacadeOf(3, 3, 1, 200L).run {
+        gameControllerOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
             assertNotEquals(field.filter { it.hasMine }.map { it.id }.first(), 3)
             field.forEach {
@@ -71,7 +71,7 @@ class GameControllerTest {
 
     @Test
     fun testPlantMinesWithSafeArea() {
-        levelFacadeOf(9, 9, 12, 200L).run {
+        gameControllerOf(9, 9, 12, 200L).run {
             plantMinesExcept(3, true)
             field.filter { it.safeZone }.forEach {
                 assertFalse(it.hasMine)
@@ -82,22 +82,22 @@ class GameControllerTest {
     @Test
     fun testLevelRandomness() {
         assertTrue(
-            levelFacadeOf(3, 3, 1, 200L).apply {
+            gameControllerOf(3, 3, 1, 200L).apply {
                 plantMinesExcept(3)
             }.at(6).hasMine
         )
         assertTrue(
-            levelFacadeOf(3, 3, 1, 250L).apply {
+            gameControllerOf(3, 3, 1, 250L).apply {
                 plantMinesExcept(3)
             }.at(1).hasMine
         )
         assertTrue(
-            levelFacadeOf(3, 3, 1, 100L).apply {
+            gameControllerOf(3, 3, 1, 100L).apply {
                 plantMinesExcept(3)
             }.at(4).hasMine
         )
         assertTrue(
-            levelFacadeOf(3, 3, 1, 170L).apply {
+            gameControllerOf(3, 3, 1, 170L).apply {
                 plantMinesExcept(3)
             }.at(6).hasMine
         )
@@ -105,7 +105,7 @@ class GameControllerTest {
 
     @Test
     fun testMineTips() {
-        levelFacadeOf(3, 3, 1, 150L).run {
+        gameControllerOf(3, 3, 1, 150L).run {
             plantMinesExcept(3)
             assertEquals(
                 listOf(
@@ -117,7 +117,7 @@ class GameControllerTest {
             )
         }
 
-        levelFacadeOf(3, 3, 2, 200L).run {
+        gameControllerOf(3, 3, 2, 200L).run {
             plantMinesExcept(3)
             assertEquals(
                 listOf(
@@ -129,7 +129,7 @@ class GameControllerTest {
             )
         }
 
-        levelFacadeOf(3, 3, 3, 200L).run {
+        gameControllerOf(3, 3, 3, 200L).run {
             plantMinesExcept(3)
             assertEquals(
                 listOf(
@@ -141,7 +141,7 @@ class GameControllerTest {
             )
         }
 
-        levelFacadeOf(4, 4, 6, 200L).run {
+        gameControllerOf(4, 4, 6, 200L).run {
             plantMinesExcept(3)
             assertEquals(
                 listOf(
@@ -154,7 +154,7 @@ class GameControllerTest {
             )
         }
 
-        levelFacadeOf(4, 4, 2, 200L).run {
+        gameControllerOf(4, 4, 2, 200L).run {
             plantMinesExcept(3)
             assertEquals(
                 listOf(
@@ -167,7 +167,7 @@ class GameControllerTest {
             )
         }
 
-        levelFacadeOf(4, 4, 1, 200L).run {
+        gameControllerOf(4, 4, 1, 200L).run {
             plantMinesExcept(3)
             assertEquals(
                 listOf(
@@ -180,7 +180,7 @@ class GameControllerTest {
             )
         }
 
-        levelFacadeOf(3, 3, 0, 200L).run {
+        gameControllerOf(3, 3, 0, 200L).run {
             plantMinesExcept(3)
             assertEquals(
                 listOf(
@@ -195,21 +195,21 @@ class GameControllerTest {
 
     @Test
     fun testFlagAssistant() {
-        levelFacadeOf(3, 3, 1, 200L).run {
+        gameControllerOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
             field.filterNot { it.hasMine }.forEach { it.openTile() }
             runFlagAssistant()
             field.filter { it.hasMine }.map { it.mark.isFlag() }.forEach(::assertTrue)
         }
 
-        levelFacadeOf(3, 3, 2, 200L).run {
+        gameControllerOf(3, 3, 2, 200L).run {
             plantMinesExcept(3)
             field.filterNot { it.hasMine }.forEach { it.openTile() }
             runFlagAssistant()
             field.filter { it.hasMine }.map { it.mark.isFlag() }.forEach(::assertTrue)
         }
 
-        levelFacadeOf(3, 3, 8, 200L).run {
+        gameControllerOf(3, 3, 8, 200L).run {
             plantMinesExcept(3)
             field.filterNot { it.hasMine }.forEach { it.openTile() }
             runFlagAssistant()
@@ -219,7 +219,7 @@ class GameControllerTest {
 
     @Test
     fun testSwitchToFlag() {
-        levelFacadeOf(3, 3, 1, 200L).run {
+        gameControllerOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
 
             with(getArea(7)) {
@@ -239,7 +239,7 @@ class GameControllerTest {
 
     @Test
     fun testSwitchToQuestion() {
-        levelFacadeOf(3, 3, 1, 200L).run {
+        gameControllerOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
 
             with(getArea(7)) {
@@ -260,7 +260,7 @@ class GameControllerTest {
 
     @Test
     fun testSwitchToQuestionWithUseQuestionOff() {
-        levelFacadeOf(3, 3, 1, 200L).run {
+        gameControllerOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
             useQuestionMark(false)
 
@@ -276,7 +276,7 @@ class GameControllerTest {
 
     @Test
     fun testSwitchBackToEmpty() {
-        levelFacadeOf(3, 3, 1, 200L).run {
+        gameControllerOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
 
             with(getArea(7)) {
@@ -291,7 +291,7 @@ class GameControllerTest {
 
     @Test
     fun testRemoveMark() {
-        levelFacadeOf(3, 3, 1, 200L).run {
+        gameControllerOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
 
             with(getArea(7)) {
@@ -305,7 +305,7 @@ class GameControllerTest {
 
     @Test
     fun testTurnOffAllHighlighted() {
-        levelFacadeOf(3, 3, 1, 200L).run {
+        gameControllerOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
             getArea(7).highlighted = true
             getArea(8).highlighted = true
@@ -317,7 +317,7 @@ class GameControllerTest {
 
     @Test
     fun testOpenField() {
-        levelFacadeOf(3, 3, 1, 200L).run {
+        gameControllerOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
             assertEquals(field.filter { it.isCovered }.count(), field.count())
             singleClick(3)
@@ -327,7 +327,7 @@ class GameControllerTest {
 
     @Test
     fun testOpenNeighborsWithoutFlag() {
-        levelFacadeOf(5, 5, 24, 200L).run {
+        gameControllerOf(5, 5, 24, 200L).run {
             plantMinesExcept(12)
             singleClick(12)
             assertEquals(
@@ -358,7 +358,7 @@ class GameControllerTest {
 
     @Test
     fun testOpenNeighbors() {
-        levelFacadeOf(5, 5, 15, 200L).run {
+        gameControllerOf(5, 5, 15, 200L).run {
             plantMinesExcept(12)
             singleClick(12)
             assertEquals(
@@ -404,7 +404,7 @@ class GameControllerTest {
 
     @Test
     fun testOpenSafeZone() {
-        levelFacadeOf(3, 3, 1, 0).run {
+        gameControllerOf(3, 3, 1, 0).run {
             plantMinesExcept(3)
             assertEquals(field.filterNot { it.isCovered }.count(), 0)
             singleClick(1)
@@ -418,7 +418,7 @@ class GameControllerTest {
 
     @Test
     fun testShowAllMines() {
-        levelFacadeOf(3, 3, 5, 200L).run {
+        gameControllerOf(3, 3, 5, 200L).run {
             plantMinesExcept(3)
             showAllMines()
             field.filter { it.hasMine && it.mistake }.forEach {
@@ -432,7 +432,7 @@ class GameControllerTest {
 
     @Test
     fun testFlagAllMines() {
-        levelFacadeOf(3, 3, 5, 200L).run {
+        gameControllerOf(3, 3, 5, 200L).run {
             plantMinesExcept(3)
             field.filter { it.hasMine }.forEach {
                 assertFalse(it.mark.isFlag())
@@ -446,7 +446,7 @@ class GameControllerTest {
 
     @Test
     fun testFindExplodedMine() {
-        levelFacadeOf(3, 3, 5, 200L).run {
+        gameControllerOf(3, 3, 5, 200L).run {
             plantMinesExcept(3)
             val mine = field.first { it.hasMine }
             assertEquals(findExplodedMine(), null)
@@ -457,7 +457,7 @@ class GameControllerTest {
 
     @Test
     fun testTakeExplosionRadius() {
-        levelFacadeOf(6, 6, 10, 200L).run {
+        gameControllerOf(6, 6, 10, 200L).run {
             plantMinesExcept(3)
             val mine = field.last { it.hasMine }
             assertEquals(
@@ -466,7 +466,7 @@ class GameControllerTest {
             )
         }
 
-        levelFacadeOf(6, 6, 10, 200L).run {
+        gameControllerOf(6, 6, 10, 200L).run {
             plantMinesExcept(3)
             val mine = field.first { it.hasMine }
             assertEquals(
@@ -475,7 +475,7 @@ class GameControllerTest {
             )
         }
 
-        levelFacadeOf(6, 6, 10, 200L).run {
+        gameControllerOf(6, 6, 10, 200L).run {
             plantMinesExcept(3)
             val mine = field.filter { it.hasMine }.elementAt(4)
             assertEquals(
@@ -487,7 +487,7 @@ class GameControllerTest {
 
     @Test
     fun testShowWrongFlags() {
-        levelFacadeOf(3, 3, 5, 200L).run {
+        gameControllerOf(3, 3, 5, 200L).run {
             plantMinesExcept(3)
             val wrongFlag = field.first { !it.hasMine }.apply {
                 mark = Mark.Flag
@@ -503,7 +503,7 @@ class GameControllerTest {
 
     @Test
     fun testRevealAllEmptyAreas() {
-        levelFacadeOf(3, 3, 5, 200L).run {
+        gameControllerOf(3, 3, 5, 200L).run {
             plantMinesExcept(3)
             field.filter { it.id != 3 }.map { it.isCovered }.forEach(::assertTrue)
             revealAllEmptyAreas()
@@ -514,7 +514,7 @@ class GameControllerTest {
 
     @Test
     fun testGetScore() {
-        levelFacadeOf(3, 3, 5, 200L).run {
+        gameControllerOf(3, 3, 5, 200L).run {
             assertEquals(getScore(), Score(0, 0, 9))
             plantMinesExcept(3)
             assertEquals(getScore(), Score(0, 5, 9))
@@ -530,7 +530,7 @@ class GameControllerTest {
 
     @Test
     fun testFlaggedAllMines() {
-        levelFacadeOf(3, 3, 5, 200L).run {
+        gameControllerOf(3, 3, 5, 200L).run {
             plantMinesExcept(3)
             assertFalse(hasFlaggedAllMines())
             field.forEach {
@@ -544,7 +544,7 @@ class GameControllerTest {
 
     @Test
     fun testRemainingMines() {
-        levelFacadeOf(3, 3, 5, 200L).run {
+        gameControllerOf(3, 3, 5, 200L).run {
             plantMinesExcept(3)
             assertEquals(remainingMines(), 5)
 
@@ -565,7 +565,7 @@ class GameControllerTest {
         val width = 12
         val height = 12
         val mines = 9
-        levelFacadeOf(width, height, mines, 150L).run {
+        gameControllerOf(width, height, mines, 150L).run {
             plantMinesExcept(3)
             field.filterNot { it.hasMine }.take(width * height - 1 - mines).forEach {
                 singleClick(it.id)
@@ -583,7 +583,7 @@ class GameControllerTest {
 
     @Test
     fun testHasAnyMineExploded() {
-        levelFacadeOf(3, 3, 5, 200L).run {
+        gameControllerOf(3, 3, 5, 200L).run {
             plantMinesExcept(3)
             assertFalse(hasAnyMineExploded())
 
@@ -598,7 +598,7 @@ class GameControllerTest {
 
     @Test
     fun testGameOverWithMineExploded() {
-        levelFacadeOf(3, 3, 5, 200L).run {
+        gameControllerOf(3, 3, 5, 200L).run {
             plantMinesExcept(3)
             assertFalse(isGameOver())
 
@@ -613,7 +613,7 @@ class GameControllerTest {
 
     @Test
     fun testVictory() {
-        levelFacadeOf(3, 3, 5, 200L).run {
+        gameControllerOf(3, 3, 5, 200L).run {
             plantMinesExcept(3)
             assertFalse(checkVictory())
 
@@ -630,7 +630,7 @@ class GameControllerTest {
 
     @Test
     fun testCantShowVictoryIfHasNoMines() {
-        levelFacadeOf(3, 3, 0, 200L).run {
+        gameControllerOf(3, 3, 0, 200L).run {
             plantMinesExcept(3)
             assertFalse(checkVictory())
         }
