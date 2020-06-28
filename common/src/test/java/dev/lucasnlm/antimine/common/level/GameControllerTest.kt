@@ -4,6 +4,8 @@ import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Score
+import dev.lucasnlm.antimine.core.control.ControlStyle
+import dev.lucasnlm.antimine.core.control.GameControl
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
@@ -23,16 +25,12 @@ class GameControllerTest {
             assertEquals(
                 field.toList(),
                 listOf(
-                    Area(0, 0, 0, 0),
-                    Area(1, 1, 0, 0),
-                    Area(2, 2, 0, 0),
-                    Area(3, 0, 1, 0),
-                    Area(4, 1, 1, 0),
-                    Area(5, 2, 1, 0),
-                    Area(6, 0, 2, 0),
-                    Area(7, 1, 2, 0),
-                    Area(8, 2, 2, 0)
-                )
+                    0 to 0, 1 to 0, 2 to 0,
+                    0 to 1, 1 to 1, 2 to 1,
+                    0 to 2, 1 to 2, 2 to 2
+                ).mapIndexed { index, (x, y) ->
+                    Area(index, x, y, 0)
+                }
             )
         }
     }
@@ -633,6 +631,109 @@ class GameControllerTest {
         gameControllerOf(3, 3, 0, 200L).run {
             plantMinesExcept(3)
             assertFalse(checkVictory())
+        }
+    }
+
+    @Test
+    fun testControlFirstActionWithStandard() {
+        gameControllerOf(3, 3, 1, 200L).run {
+            plantMinesExcept(3)
+            updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
+            assertTrue(at(3).isCovered)
+            singleClick(3)
+            assertFalse(at(3).isCovered)
+        }
+    }
+
+    @Test
+    fun testControlSecondActionWithStandard() {
+        gameControllerOf(3, 3, 1, 200L).run {
+            plantMinesExcept(3)
+            updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
+
+            useQuestionMark(true)
+            longPress(3)
+            assertTrue(at(3).mark.isFlag())
+            assertTrue(at(3).isCovered)
+            longPress(3)
+            assertTrue(at(3).mark.isQuestion())
+            assertTrue(at(3).isCovered)
+            longPress(3)
+            assertTrue(at(3).mark.isNone())
+            assertTrue(at(3).isCovered)
+
+            useQuestionMark(false)
+            longPress(3)
+            assertTrue(at(3).mark.isFlag())
+            assertTrue(at(3).isCovered)
+            longPress(3)
+            assertTrue(at(3).mark.isNone())
+            assertTrue(at(3).isCovered)
+        }
+    }
+
+    @Test
+    fun testControlFirstActionWithFastFlag() {
+        gameControllerOf(3, 3, 1, 200L).run {
+            plantMinesExcept(3)
+            updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
+            singleClick(3)
+            assertTrue(at(3).isCovered)
+            assertTrue(at(3).mark.isFlag())
+            longPress(3)
+            assertFalse(at(3).mark.isFlag())
+            assertTrue(at(3).isCovered)
+            longPress(3)
+            assertFalse(at(3).isCovered)
+        }
+    }
+
+    @Test
+    fun testControlFirstActionWithDoubleClick() {
+        gameControllerOf(3, 3, 1, 200L).run {
+            plantMinesExcept(3)
+            updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
+            singleClick(3)
+            assertTrue(at(3).isCovered)
+            assertTrue(at(3).mark.isFlag())
+            doubleClick(3)
+            assertFalse(at(3).mark.isFlag())
+            assertTrue(at(3).isCovered)
+            doubleClick(3)
+            assertFalse(at(3).isCovered)
+        }
+    }
+
+    @Test
+    fun testControlFirstActionWithDoubleClickAndWithoutQuestionMark() {
+        gameControllerOf(3, 3, 1, 200L).run {
+            plantMinesExcept(3)
+            updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
+
+            useQuestionMark(true)
+            var targetId = 4
+            singleClick(targetId)
+            assertTrue(at(targetId).isCovered)
+            assertTrue(at(targetId).mark.isFlag())
+            singleClick(targetId)
+            assertTrue(at(targetId).mark.isQuestion())
+            assertTrue(at(targetId).isCovered)
+            singleClick(targetId)
+            assertTrue(at(targetId).mark.isNone())
+            assertTrue(at(targetId).isCovered)
+            doubleClick(targetId)
+            assertFalse(at(targetId).isCovered)
+
+            useQuestionMark(false)
+            targetId = 3
+            singleClick(targetId)
+            assertTrue(at(targetId).isCovered)
+            assertTrue(at(targetId).mark.isFlag())
+            singleClick(targetId)
+            assertFalse(at(targetId).mark.isFlag())
+            assertTrue(at(targetId).isCovered)
+            doubleClick(targetId)
+            assertFalse(at(targetId).isCovered)
         }
     }
 }
