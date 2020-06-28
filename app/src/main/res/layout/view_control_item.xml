@@ -6,18 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
+    android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:background="?android:attr/selectableItemBackground"
-    android:paddingVertical="16dp"
-    android:paddingHorizontal="24dp">
+    android:paddingHorizontal="32dp"
+    android:paddingVertical="24dp">
 
     <androidx.appcompat.widget.AppCompatRadioButton
         android:id="@+id/radio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:padding="4dp"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/standard_details"
         app:layout_constraintEnd_toStartOf="@id/standard_details"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -32,22 +32,26 @@
         tools:text="">
 
         <TableRow>
+
             <TextView
                 android:id="@+id/title"
+                android:textColor="@color/text_color"
                 android:textStyle="bold"
-                tools:text="Title"/>
+                tools:text="Title" />
         </TableRow>
 
         <TableRow android:paddingVertical="4dp">
+
             <TextView
                 android:id="@+id/firstAction"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 tools:text="First Action" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/arrow" />
 
             <TextView
@@ -57,15 +61,17 @@
         </TableRow>
 
         <TableRow>
+
             <TextView
                 android:id="@+id/secondAction"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 tools:text="Long Tap" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="@string/arrow" />
 
             <TextView
