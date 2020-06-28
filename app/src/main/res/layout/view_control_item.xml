@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
     android:clickable="true"
     android:focusable="true"
-    android:paddingHorizontal="16dp">
+    android:background="?android:attr/selectableItemBackground"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="24dp">
 
     <androidx.appcompat.widget.AppCompatRadioButton
         android:id="@+id/radio"
@@ -25,50 +28,50 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/standard"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="">
 
         <TableRow>
             <TextView
-                android:padding="4dp"
-                android:text="@string/standard"
+                android:id="@+id/title"
+                android:textStyle="bold"
+                tools:text="Title"/>
+        </TableRow>
+
+        <TableRow android:paddingVertical="4dp">
+            <TextView
+                android:id="@+id/firstAction"
                 android:textColor="@color/black"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:padding="4dp"
-                android:text="Single Tap"
-                android:textStyle="bold" />
+                tools:text="First Action" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
+                android:layout_marginHorizontal="8dp"
                 android:text="@string/arrow" />
 
             <TextView
-                android:gravity="right"
-                android:padding="4dp"
-                android:text="Open Area" />
+                android:id="@+id/firstActionResponse"
+                android:gravity="end"
+                tools:text="Open Area" />
         </TableRow>
 
         <TableRow>
             <TextView
-                android:padding="4dp"
-                android:text="Long Tap"
-                android:textStyle="bold" />
+                android:id="@+id/secondAction"
+                android:textColor="@color/black"
+                tools:text="Long Tap" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
+                android:layout_marginHorizontal="8dp"
                 android:text="@string/arrow" />
 
             <TextView
-                android:gravity="right"
-                android:padding="4dp"
-                android:text="Put Flag" />
+                android:id="@+id/secondActionResponse"
+                android:gravity="end"
+                tools:text="Put Flag" />
         </TableRow>
     </TableLayout>
 </LinearLayout>

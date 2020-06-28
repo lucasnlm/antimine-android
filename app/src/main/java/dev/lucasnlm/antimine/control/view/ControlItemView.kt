@@ -5,8 +5,10 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatRadioButton
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.control.model.ControlModel
 
 class ControlItemView : FrameLayout {
     constructor(context: Context) : super(context)
@@ -15,6 +17,11 @@ class ControlItemView : FrameLayout {
 
     private val radio: AppCompatRadioButton
     private val root: View
+    private val title: TextView
+    private val firstAction: TextView
+    private val firstActionResponse: TextView
+    private val secondAction: TextView
+    private val secondActionResponse: TextView
 
     init {
         LayoutInflater
@@ -23,6 +30,19 @@ class ControlItemView : FrameLayout {
 
         radio = findViewById(R.id.radio)
         root = findViewById(R.id.root)
+        title = findViewById(R.id.title)
+        firstAction = findViewById(R.id.firstAction)
+        firstActionResponse = findViewById(R.id.firstActionResponse)
+        secondAction = findViewById(R.id.secondAction)
+        secondActionResponse = findViewById(R.id.secondActionResponse)
+    }
+
+    fun bind(controlModel: ControlModel) {
+        title.text = context.getString(controlModel.titleId)
+        firstAction.text = context.getString(controlModel.firstActionId)
+        firstActionResponse.text = context.getString(controlModel.firstActionResponseId)
+        secondAction.text = context.getString(controlModel.secondActionId)
+        secondActionResponse.text = context.getString(controlModel.secondActionResponseId)
     }
 
     fun setRadio(selected: Boolean) {
