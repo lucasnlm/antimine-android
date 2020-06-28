@@ -15,7 +15,7 @@ interface IPreferencesManager {
 
 class PreferencesManager @Inject constructor(
     private val context: Context
-): IPreferencesManager {
+) : IPreferencesManager {
     private val preferences by lazy {
         PreferenceManager.getDefaultSharedPreferences(context)
     }

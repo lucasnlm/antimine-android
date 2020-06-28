@@ -5,7 +5,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-private class TestPreferenceManager: IPreferencesManager {
+private class TestPreferenceManager : IPreferencesManager {
     val values = mutableMapOf<String, Any>()
 
     override fun getBoolean(key: String, defaultValue: Boolean): Boolean {
@@ -31,7 +31,6 @@ private class TestPreferenceManager: IPreferencesManager {
     override fun contains(key: String): Boolean {
         return values.containsKey(key)
     }
-
 }
 
 class PreferencesRepositoryTest {

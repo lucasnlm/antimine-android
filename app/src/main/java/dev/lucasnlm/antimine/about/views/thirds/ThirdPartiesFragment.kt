@@ -1,15 +1,11 @@
 package dev.lucasnlm.antimine.about.views.thirds
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import kotlinx.android.synthetic.main.fragment_third_party.*
