@@ -259,6 +259,22 @@ class GameControllerTest {
     }
 
     @Test
+    fun testSwitchToQuestionWithUseQuestionOff() {
+        levelFacadeOf(3, 3, 1, 200L).run {
+            plantMinesExcept(3)
+            useQuestionMark(false)
+
+            with(getArea(7)) {
+                switchMark()
+                switchMark()
+                assertTrue(mark.isNone())
+            }
+
+            field.forEach { assertFalse(it.mark.isQuestion()) }
+        }
+    }
+
+    @Test
     fun testSwitchBackToEmpty() {
         levelFacadeOf(3, 3, 1, 200L).run {
             plantMinesExcept(3)
