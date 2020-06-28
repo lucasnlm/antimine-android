@@ -54,6 +54,7 @@
         <item
             android:id="@+id/control"
             android:checkable="false"
+            android:icon="@drawable/control"
             android:title="@string/control" />
 
         <item
