@@ -1,12 +1,17 @@
 package dev.lucasnlm.antimine.mocks
 
 import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 class MockPreferencesRepository : IPreferencesRepository {
     override fun customGameMode(): Minefield = Minefield(9, 9, 9)
 
     override fun updateCustomGameMode(minefield: Minefield) { }
+
+    override fun controlType(): ControlStyle = ControlStyle.Standard
+
+    override fun useControlType(controlStyle: ControlStyle) { }
 
     override fun getBoolean(key: String, defaultValue: Boolean): Boolean = false
 
@@ -24,5 +29,5 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun useAnimations(): Boolean = false
 
-    override fun useDoubleClickToOpen(): Boolean = false
+    override fun useQuestionMark(): Boolean = true
 }
