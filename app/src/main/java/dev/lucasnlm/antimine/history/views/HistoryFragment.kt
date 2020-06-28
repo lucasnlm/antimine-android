@@ -1,12 +1,10 @@
 package dev.lucasnlm.antimine.history.views
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,45 +17,29 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HistoryFragment : Fragment() {
+class HistoryFragment : Fragment(R.layout.fragment_history) {
     @Inject
     lateinit var savesRepository: ISavesRepository
 
-    private var historyViewModel: HistoryViewModel? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        activity?.run {
-            historyViewModel = ViewModelProviders.of(this).get(HistoryViewModel::class.java)
-        }
-
-        GlobalScope.launch {
-            historyViewModel?.loadAllSaves(savesRepository)
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.fragment_history, container, false)
+    private val historyViewModel: HistoryViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         saveHistory.apply {
-            addItemDecoration(
-                DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL)
-            )
+            addItemDecoration(DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL))
             layoutManager = LinearLayoutManager(view.context)
 
-            historyViewModel?.saves?.observe(
+            historyViewModel.saves.observe(
                 viewLifecycleOwner,
                 Observer {
                     adapter = HistoryAdapter(it)
                 }
             )
+        }
+
+        GlobalScope.launch {
+            historyViewModel.loadAllSaves(savesRepository)
         }
     }
 }
