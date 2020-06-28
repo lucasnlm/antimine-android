@@ -3,7 +3,7 @@ package dev.lucasnlm.antimine.common.level.mocks
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.Size
 
-class FixedDimensionRepository() : IDimensionRepository {
+class FixedDimensionRepository : IDimensionRepository {
     override fun areaSize(): Float = 50.0f
 
     override fun areaSizeWithPadding(): Float {

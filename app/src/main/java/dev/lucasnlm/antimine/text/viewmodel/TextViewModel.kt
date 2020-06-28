@@ -11,7 +11,7 @@ class TextViewModel(
 
     val text = MutableLiveData<String>()
 
-    suspend fun loadText(@RawRes rawFile: Int) {
+    fun loadText(@RawRes rawFile: Int) {
         val result = getApplication<Application>().resources.openRawResource(rawFile)
             .bufferedReader()
             .readLines()
