@@ -12,5 +12,5 @@ interface StatsDao {
     suspend fun getAll(): List<Stats>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg stats: Stats): Array<Long>
+    suspend fun insertAll(vararg stats: Stats): LongArray
 }

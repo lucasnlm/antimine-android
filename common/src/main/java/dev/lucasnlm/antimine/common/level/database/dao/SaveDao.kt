@@ -25,7 +25,7 @@ interface SaveDao {
     suspend fun getSaveCounts(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg saves: Save): Array<Long>
+    suspend fun insertAll(vararg saves: Save): LongArray
 
     @Delete
     suspend fun delete(save: Save)

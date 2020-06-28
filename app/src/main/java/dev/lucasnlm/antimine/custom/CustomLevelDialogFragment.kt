@@ -9,13 +9,9 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
-import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import dev.lucasnlm.antimine.custom.viewmodel.CreateGameViewModel
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -23,20 +19,27 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
     @Inject
     lateinit var preferencesRepository: IPreferencesRepository
 
-    private val viewModel by activityViewModels<GameViewModel>()
+    private val createGameViewModel by activityViewModels<CreateGameViewModel>()
 
-    private fun filterInput(target: String, min: Int): Int {
-        var result = min
+    private fun getSelectedMinefield(): Minefield {
+        val mapWidth: TextView? = dialog?.findViewById(R.id.map_width)
+        val mapHeight: TextView? = dialog?.findViewById(R.id.map_height)
+        val mapMines: TextView? = dialog?.findViewById(R.id.map_mines)
 
-        try {
-            result = Integer.valueOf(target)
-        } catch (e: NumberFormatException) {
-            result = min
-        } finally {
-            result = result.coerceAtLeast(min)
-        }
+        val width = filterInput(
+            mapWidth?.text.toString(),
+            MIN_WIDTH
+        ).coerceAtMost(MAX_WIDTH)
+        val height = filterInput(
+            mapHeight?.text.toString(),
+            MIN_HEIGHT
+        ).coerceAtMost(MAX_HEIGHT)
+        val mines = filterInput(
+            mapMines?.text.toString(),
+            MIN_MINES
+        ).coerceAtMost(width * height - 1)
 
-        return result
+        return Minefield(width, height, mines)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -45,41 +48,10 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
             setView(R.layout.dialog_custom_game)
             setNegativeButton(R.string.cancel, null)
             setPositiveButton(R.string.start) { _, _ ->
-                val mapWidth: TextView? = dialog?.findViewById(R.id.map_width)
-                val mapHeight: TextView? = dialog?.findViewById(R.id.map_height)
-                val mapMines: TextView? = dialog?.findViewById(R.id.map_mines)
-
-                var width = filterInput(
-                    mapWidth?.text.toString(),
-                    MIN_WIDTH
-                )
-                var height = filterInput(
-                    mapHeight?.text.toString(),
-                    MIN_HEIGHT
-                )
-                var mines = filterInput(
-                    mapMines?.text.toString(),
-                    MIN_MINES
-                )
-
-                if (width * height - 1 < mines) {
-                    mines = width * height - 1
-                }
-
-                width = width.coerceAtMost(50)
-                height = height.coerceAtMost(50)
-                mines = mines.coerceAtLeast(1)
-
-                preferencesRepository.updateCustomGameMode(
-                    Minefield(
-                        width,
-                        height,
-                        mines
-                    )
-                )
-
-                GlobalScope.launch(Dispatchers.IO) {
-                    viewModel.startNewGame(Difficulty.Custom)
+                val minefield = getSelectedMinefield()
+                createGameViewModel.run {
+                    updateCustomGameMode(minefield)
+                    startCustomGame()
                 }
             }
         }.create()
@@ -96,6 +68,23 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
         const val MIN_WIDTH = 5
         const val MIN_HEIGHT = 5
         const val MIN_MINES = 3
+
+        const val MAX_WIDTH = 50
+        const val MAX_HEIGHT = 50
+
+        private fun filterInput(target: String, min: Int): Int {
+            var result = min
+
+            try {
+                result = Integer.valueOf(target)
+            } catch (e: NumberFormatException) {
+                result = min
+            } finally {
+                result = result.coerceAtLeast(min)
+            }
+
+            return result
+        }
 
         val TAG = CustomLevelDialogFragment::class.simpleName!!
     }

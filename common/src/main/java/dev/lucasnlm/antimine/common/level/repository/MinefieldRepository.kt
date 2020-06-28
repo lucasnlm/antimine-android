@@ -25,21 +25,9 @@ class MinefieldRepository : IMinefieldRepository {
             Difficulty.Standard -> calculateStandardMode(
                 dimensionRepository
             )
-            Difficulty.Beginner -> Minefield(
-                9,
-                9,
-                10
-            )
-            Difficulty.Intermediate -> Minefield(
-                16,
-                16,
-                40
-            )
-            Difficulty.Expert -> Minefield(
-                24,
-                24,
-                99
-            )
+            Difficulty.Beginner -> beginnerMinefield
+            Difficulty.Intermediate -> intermediateMinefield
+            Difficulty.Expert -> expertMinefield
             Difficulty.Custom -> preferencesRepository.customGameMode()
         }
 
@@ -56,9 +44,16 @@ class MinefieldRepository : IMinefieldRepository {
         return Minefield(
             finalWidth,
             finalHeight,
-            (finalWidth * finalHeight * 0.2).toInt()
+            (finalWidth * finalHeight * customLevelRatio).toInt()
         )
     }
 
     override fun randomSeed(): Long = Random.nextLong()
+
+    companion object {
+        private val beginnerMinefield = Minefield(9, 9, 10)
+        private val intermediateMinefield = Minefield(16, 16, 40)
+        private val expertMinefield = Minefield(24, 24, 99)
+        private const val customLevelRatio = 0.2
+    }
 }

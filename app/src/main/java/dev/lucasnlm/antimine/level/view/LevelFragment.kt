@@ -123,6 +123,7 @@ open class LevelFragment : CommonLevelFragment() {
                 DeepLink.INTERMEDIATE_PATH -> Difficulty.Intermediate
                 DeepLink.EXPERT_PATH -> Difficulty.Expert
                 DeepLink.STANDARD_PATH -> Difficulty.Standard
+                DeepLink.CUSTOM_PATH -> Difficulty.Custom
                 else -> null
             }
         } else {

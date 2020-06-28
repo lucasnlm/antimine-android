@@ -44,7 +44,11 @@ class HapticFeedbackInteractor(
 }
 
 class DisabledIHapticFeedbackInteractor : IHapticFeedbackInteractor {
-    override fun longPressFeedback() { }
+    override fun longPressFeedback() {
+        // Empty
+    }
 
-    override fun explosionFeedback() { }
+    override fun explosionFeedback() {
+        // Empty
+    }
 }

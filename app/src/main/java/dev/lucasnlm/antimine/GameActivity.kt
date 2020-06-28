@@ -79,7 +79,9 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         bindViewModel()
-        bindToolbarAndDrawer()
+        bindToolbar()
+        bindDrawer()
+        bindNavigationMenu()
         loadGameFragment()
 
         if (instantAppManager.isEnabled()) {
@@ -215,7 +217,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
         }
     }
 
-    private fun bindToolbarAndDrawer() {
+    private fun bindToolbar() {
         setSupportActionBar(toolbar)
         toolbar.title = ""
 
@@ -224,7 +226,9 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
         }
+    }
 
+    private fun bindDrawer() {
         drawer.apply {
             addDrawerListener(
                 ActionBarDrawerToggle(
@@ -260,8 +264,15 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
                     // Empty
                 }
             })
-        }
 
+            if (preferencesRepository.getBoolean(PREFERENCE_FIRST_USE, false)) {
+                openDrawer(GravityCompat.START)
+                preferencesRepository.putBoolean(PREFERENCE_FIRST_USE, true)
+            }
+        }
+    }
+
+    private fun bindNavigationMenu() {
         navigationView.setNavigationItemSelectedListener { item ->
             var handled = true
 
@@ -290,18 +301,13 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
         }
 
         navigationView.menu.findItem(R.id.share_now).isVisible = instantAppManager.isNotEnabled()
-
-        if (preferencesRepository.getBoolean(PREFERENCE_FIRST_USE, false)) {
-            drawer.openDrawer(GravityCompat.START)
-            preferencesRepository.putBoolean(PREFERENCE_FIRST_USE, true)
-        }
     }
 
     private fun checkUseCount() {
         val current = preferencesRepository.getInt(PREFERENCE_USE_COUNT, 0)
         val shouldRequestRating = preferencesRepository.getBoolean(PREFERENCE_REQUEST_RATING, true)
 
-        if (current >= 4 && shouldRequestRating) {
+        if (current >= MIN_USAGES_TO_RATING && shouldRequestRating) {
             analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
             showRequestRating()
         }
@@ -604,5 +610,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
 
         const val IA_REFERRER = "InstallApiActivity"
         const val IA_REQUEST_CODE = 5
+
+        const val MIN_USAGES_TO_RATING = 4
     }
 }

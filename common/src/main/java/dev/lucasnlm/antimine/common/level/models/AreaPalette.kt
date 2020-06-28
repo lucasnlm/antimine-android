@@ -23,8 +23,7 @@ data class AreaPalette(
 ) {
     companion object {
         private fun toArgb(color: Int): Int {
-            return Color.argb(
-                0xFF,
+            return Color.rgb(
                 Color.red(color),
                 Color.green(color),
                 Color.blue(color)
