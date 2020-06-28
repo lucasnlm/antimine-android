@@ -26,6 +26,7 @@
 
     <application
         android:name="dev.lucasnlm.antimine.MainApplication"
+        android:description="@string/app_description"
         android:allowBackup="true"
         android:allowClearUserData="true"
         android:fullBackupContent="@xml/backup_rules"
