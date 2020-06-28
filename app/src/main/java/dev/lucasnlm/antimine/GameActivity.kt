@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine
 
 import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.preference.PreferenceManager
@@ -28,12 +30,13 @@ import dev.lucasnlm.antimine.common.level.models.Score
 import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.control.ControlDialogFragment
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.history.HistoryActivity
 import dev.lucasnlm.antimine.instant.InstantAppManager
-import dev.lucasnlm.antimine.level.view.CustomLevelDialogFragment
+import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
@@ -46,7 +49,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class GameActivity : AppCompatActivity() {
+class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
     @Inject
     lateinit var preferencesRepository: IPreferencesRepository
 
@@ -76,7 +79,9 @@ class GameActivity : AppCompatActivity() {
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         bindViewModel()
-        bindToolbarAndDrawer()
+        bindToolbar()
+        bindDrawer()
+        bindNavigationMenu()
         loadGameFragment()
 
         if (instantAppManager.isEnabled()) {
@@ -162,6 +167,7 @@ class GameActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (status == Status.Running) {
+            viewModel.refreshUserPreferences()
             viewModel.resumeGame()
             analyticsManager.sentEvent(Analytics.Resume())
         }
@@ -211,7 +217,7 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    private fun bindToolbarAndDrawer() {
+    private fun bindToolbar() {
         setSupportActionBar(toolbar)
         toolbar.title = ""
 
@@ -220,7 +226,9 @@ class GameActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
         }
+    }
 
+    private fun bindDrawer() {
         drawer.apply {
             addDrawerListener(
                 ActionBarDrawerToggle(
@@ -245,7 +253,10 @@ class GameActivity : AppCompatActivity() {
                 }
 
                 override fun onDrawerClosed(drawerView: View) {
-                    viewModel.resumeGame()
+                    if (hasNoOtherFocusedDialog()) {
+                        viewModel.resumeGame()
+                    }
+
                     analyticsManager.sentEvent(Analytics.CloseDrawer())
                 }
 
@@ -253,8 +264,15 @@ class GameActivity : AppCompatActivity() {
                     // Empty
                 }
             })
-        }
 
+            if (preferencesRepository.getBoolean(PREFERENCE_FIRST_USE, false)) {
+                openDrawer(GravityCompat.START)
+                preferencesRepository.putBoolean(PREFERENCE_FIRST_USE, true)
+            }
+        }
+    }
+
+    private fun bindNavigationMenu() {
         navigationView.setNavigationItemSelectedListener { item ->
             var handled = true
 
@@ -264,6 +282,7 @@ class GameActivity : AppCompatActivity() {
                 R.id.intermediate -> changeDifficulty(Difficulty.Intermediate)
                 R.id.expert -> changeDifficulty(Difficulty.Expert)
                 R.id.custom -> showCustomLevelDialog()
+                R.id.control -> showControlDialog()
                 R.id.about -> showAbout()
                 R.id.settings -> showSettings()
                 R.id.rate -> openRateUsLink("Drawer")
@@ -282,18 +301,13 @@ class GameActivity : AppCompatActivity() {
         }
 
         navigationView.menu.findItem(R.id.share_now).isVisible = instantAppManager.isNotEnabled()
-
-        if (preferencesRepository.getBoolean(PREFERENCE_FIRST_USE, false)) {
-            drawer.openDrawer(GravityCompat.START)
-            preferencesRepository.putBoolean(PREFERENCE_FIRST_USE, true)
-        }
     }
 
     private fun checkUseCount() {
         val current = preferencesRepository.getInt(PREFERENCE_USE_COUNT, 0)
         val shouldRequestRating = preferencesRepository.getBoolean(PREFERENCE_REQUEST_RATING, true)
 
-        if (current >= 4 && shouldRequestRating) {
+        if (current >= MIN_USAGES_TO_RATING && shouldRequestRating) {
             analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
             showRequestRating()
         }
@@ -375,6 +389,16 @@ class GameActivity : AppCompatActivity() {
         if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
             CustomLevelDialogFragment().apply {
                 show(supportFragmentManager, CustomLevelDialogFragment.TAG)
+            }
+        }
+    }
+
+    private fun showControlDialog() {
+        viewModel.pauseGame()
+
+        if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
+            ControlDialogFragment().apply {
+                show(supportFragmentManager, ControlDialogFragment.TAG)
             }
         }
     }
@@ -514,8 +538,7 @@ class GameActivity : AppCompatActivity() {
      */
     private fun restartIfNeed() {
         if (usingLargeArea != preferencesRepository.useLargeAreas()) {
-            finish()
-            Intent(this, GameActivity::class.java).run { startActivity(this) }
+            recreate()
         }
     }
 
@@ -567,6 +590,19 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
+    private fun hasNoOtherFocusedDialog(): Boolean {
+        return supportFragmentManager.fragments.count {
+            it !is LevelFragment && it is DialogFragment
+        } == 0
+    }
+
+    override fun onDismiss(dialog: DialogInterface?) {
+        viewModel.run {
+            refreshUserPreferences()
+            resumeGame()
+        }
+    }
+
     companion object {
         const val PREFERENCE_FIRST_USE = "preference_first_use"
         const val PREFERENCE_USE_COUNT = "preference_use_count"
@@ -574,5 +610,7 @@ class GameActivity : AppCompatActivity() {
 
         const val IA_REFERRER = "InstallApiActivity"
         const val IA_REQUEST_CODE = 5
+
+        const val MIN_USAGES_TO_RATING = 4
     }
 }

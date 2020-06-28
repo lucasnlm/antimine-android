@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="uk">
     <string name="app_name">Сапер</string>
     <string name="app_description">Вам потрібно очистити поле від схованих мін, не детонуючи їх.</string>
-    <string name="remaining_mines">Залишилося мін</string>
     <string name="games">Ігри</string>
     <string name="previous_games">Попередня гра</string>
     <string name="install">Встановити</string>
@@ -78,7 +77,7 @@
     <string name="width">Ширина</string>
     <string name="height">Висота</string>
     <string name="mines">Міни</string>
-    <string name="auto_flag">Ігровий помічник</string>
+    <string name="enable_automatic_flags">Увімкнути автоматичне розміщення прапорців</string>
     <string name="desc_convered_area">Прихована зона</string>
     <string name="desc_marked_area">Позначена територія</string>
     <string name="desc_question_area">Сумнівна територія</string>
@@ -86,12 +85,10 @@
     <string name="settings_general">Загальне</string>
     <string name="settings_vibration_desc">Вібрує під час вибуху або встановлення прапірця</string>
     <string name="settings_sound_desc">Додає звук вибуху</string>
-    <string name="settings_auto_flag_desc">Встановлювати прапорець на розгаданих ділянках автоматично</string>
     <string name="settings_gameplay">Геймплей</string>
     <string name="settings_accessibility">Спеціальні можливості</string>
     <string name="settings_large_areas">Використовувати збільшену територію</string>
     <string name="settings_large_areas_desc">Збільшує площу дотику</string>
-    <string name="settings_double_click">Подвійний клік</string>
     <string name="rating">Відгук</string>
     <string name="rating_menu">Відгук ❤</string>
     <string name="rating_message">Якщо вам подобається ця гра, то залиште нам свій відгук. Це нам дуже допоможе.</string>
@@ -101,4 +98,14 @@
     <string name="total_time">Час перегляду</string>
     <string name="average_time">Середній час</string>
     <string name="performance">Ефективність</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Використовувати прапорці «?»</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Flag First</string>
+    <string name="single_click">Single Click</string>
+    <string name="double_click">Double Click</string>
+    <string name="long_press">Long Press</string>
+    <string name="open_tile">Open Tile</string>
+    <string name="flag_tile">Flag Tile</string>
 </resources>

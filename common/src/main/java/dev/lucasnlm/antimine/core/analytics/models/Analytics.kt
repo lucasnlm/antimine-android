@@ -48,12 +48,13 @@ sealed class Analytics(
 
     class ResumePreviousGame : Analytics("Resume previous game")
 
-    class LongPressArea(index: Int) : Analytics("Long press area", mapOf("Index" to index.toString()))
+    class OpenTile(index: Int) : Analytics("Open Tile", mapOf("Index" to index.toString()))
 
-    class LongPressMultipleArea(index: Int) :
-        Analytics("Long press to open multiple", mapOf("Index" to index.toString()))
+    class SwitchMark(index: Int) : Analytics("Switch Mark", mapOf("Index" to index.toString()))
 
-    class PressArea(index: Int) : Analytics("Press area", mapOf("Index" to index.toString()))
+    class HighlightNeighbors(index: Int) : Analytics("Highlight Neighbors", mapOf("Index" to index.toString()))
+
+    class OpenNeighbors(index: Int) : Analytics("Open Neighbors", mapOf("Index" to index.toString()))
 
     class GameOver(time: Long, score: Score) : Analytics(
         "Game Over",

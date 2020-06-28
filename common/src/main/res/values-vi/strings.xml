@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="vi">
     <string name="app_name">Dò mìn</string>
     <string name="app_description">Bạn phải mở tất cả các ô trên một bãi mìn mà không làm nổ cục mìn nào.</string>
-    <string name="remaining_mines">Số mìn còn lại</string>
     <string name="games">Trò chơi</string>
     <string name="previous_games">Trò chơi Trước</string>
     <string name="install">Cài đặt</string>
@@ -78,7 +77,7 @@
     <string name="width">Chiều rộng</string>
     <string name="height">Chiều cao</string>
     <string name="mines">Mìn</string>
-    <string name="auto_flag">Trợ lí trò chơi</string>
+    <string name="enable_automatic_flags">Bật tự động để cờ</string>
     <string name="desc_convered_area">Ô đã mở</string>
     <string name="desc_marked_area">Ô đã đánh dấu</string>
     <string name="desc_question_area">Ô còn nghi ngờ</string>
@@ -86,12 +85,10 @@
     <string name="settings_general">Tổng quan</string>
     <string name="settings_vibration_desc">Rung khi mìn nổ hoặc cắm/dỡ cờ</string>
     <string name="settings_sound_desc">Phát âm thanh nổ mìn</string>
-    <string name="settings_auto_flag_desc">Tự cắm cờ vào những chỗ chắc chắn có mìn</string>
     <string name="settings_gameplay">Cách thức chơi</string>
     <string name="settings_accessibility">Trợ năng</string>
     <string name="settings_large_areas">Vùng chạm lớn</string>
     <string name="settings_large_areas_desc">Tăng kích cỡ các vùng chạm</string>
-    <string name="settings_double_click">Nháy kép</string>
     <string name="rating">Phản hồi</string>
     <string name="rating_menu">Phản hồi ❤</string>
     <string name="rating_message">Nếu bạn thích trò chơi này, hãy gửi phản hồi cho chúng tôi. Nhận xét của bạn sẽ giúp chúng tôi rất nhiều.</string>
@@ -101,4 +98,14 @@
     <string name="total_time">Tổng thời gian</string>
     <string name="average_time">Thời gian bình quân</string>
     <string name="performance">Hiệu năng</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Dùng cờ câu hỏi</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Flag First</string>
+    <string name="single_click">Single Click</string>
+    <string name="double_click">Double Click</string>
+    <string name="long_press">Long Press</string>
+    <string name="open_tile">Open Tile</string>
+    <string name="flag_tile">Flag Tile</string>
 </resources>

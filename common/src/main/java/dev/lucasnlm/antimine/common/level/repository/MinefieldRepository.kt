@@ -25,21 +25,9 @@ class MinefieldRepository : IMinefieldRepository {
             Difficulty.Standard -> calculateStandardMode(
                 dimensionRepository
             )
-            Difficulty.Beginner -> Minefield(
-                9,
-                9,
-                10
-            )
-            Difficulty.Intermediate -> Minefield(
-                16,
-                16,
-                40
-            )
-            Difficulty.Expert -> Minefield(
-                24,
-                24,
-                99
-            )
+            Difficulty.Beginner -> beginnerMinefield
+            Difficulty.Intermediate -> intermediateMinefield
+            Difficulty.Expert -> expertMinefield
             Difficulty.Custom -> preferencesRepository.customGameMode()
         }
 
@@ -49,16 +37,26 @@ class MinefieldRepository : IMinefieldRepository {
         val fieldSize = dimensionRepository.areaSize()
 
         val display = dimensionRepository.displaySize()
+        val calculatedWidth = ((display.width / fieldSize).toInt() - HORIZONTAL_STANDARD_GAP)
+        val calculatedHeight = ((display.height / fieldSize).toInt() - VERTICAL_STANDARD_GAP)
+        val finalWidth = calculatedWidth.coerceAtLeast(MIN_STANDARD_WIDTH)
+        val finalHeight = calculatedHeight.coerceAtLeast(MIN_STANDARD_HEIGHT)
+        val finalMines = (finalWidth * finalHeight * CUSTOM_LEVEL_RATIO).toInt()
 
-        val finalWidth = ((display.width / fieldSize).toInt() - 1).coerceAtLeast(6)
-        val finalHeight = ((display.height / fieldSize).toInt() - 3).coerceAtLeast(9)
-
-        return Minefield(
-            finalWidth,
-            finalHeight,
-            (finalWidth * finalHeight * 0.2).toInt()
-        )
+        return Minefield(finalWidth, finalHeight, finalMines)
     }
 
     override fun randomSeed(): Long = Random.nextLong()
+
+    companion object {
+        private val beginnerMinefield = Minefield(9, 9, 10)
+        private val intermediateMinefield = Minefield(16, 16, 40)
+        private val expertMinefield = Minefield(24, 24, 99)
+
+        private const val CUSTOM_LEVEL_RATIO = 0.2
+        private const val HORIZONTAL_STANDARD_GAP = 1
+        private const val VERTICAL_STANDARD_GAP = 3
+        private const val MIN_STANDARD_WIDTH = 6
+        private const val MIN_STANDARD_HEIGHT = 9
+    }
 }

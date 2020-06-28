@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="de">
     <string name="app_name">Antimine</string>
     <string name="app_description">Du musst ein rechteckiges Spielfeld, das versteckte Minen enthält, räumen, ohne irgendeine davon zur Explosion zu bringen.</string>
-    <string name="remaining_mines">Verbleibende Minen</string>
     <string name="games">Spiele</string>
     <string name="previous_games">Vorherige Spiele</string>
     <string name="install">Installieren</string>
@@ -78,7 +77,7 @@
     <string name="width">Breite</string>
     <string name="height">Höhe</string>
     <string name="mines">Minen</string>
-    <string name="auto_flag">Spielassistent</string>
+    <string name="enable_automatic_flags">Automatische Fahnen-Platzierung aktivieren</string>
     <string name="desc_convered_area">Abgedeckte Fläche</string>
     <string name="desc_marked_area">Markierte Fläche</string>
     <string name="desc_question_area">Zweifelhafte Fläche</string>
@@ -86,12 +85,10 @@
     <string name="settings_general">Allgemein</string>
     <string name="settings_vibration_desc">Vibriert bei Explosion oder Schalten einer Markierung</string>
     <string name="settings_sound_desc">Erzeugt ein Explosionsgeräusch</string>
-    <string name="settings_auto_flag_desc">Fügt bei beseitigten Minen automatisch eine Markierung hinzu</string>
     <string name="settings_gameplay">Spielablauf</string>
     <string name="settings_accessibility">Barrierefreiheit</string>
     <string name="settings_large_areas">Große Flächen verwenden</string>
     <string name="settings_large_areas_desc">Vergrößert die Tastfläche</string>
-    <string name="settings_double_click">Doppelklick</string>
     <string name="rating">Rückmeldung</string>
     <string name="rating_menu">Rückmeldung ❤</string>
     <string name="rating_message">Wenn dir dieses Spiel gefällt, gib uns bitte eine Rückmeldung. Es wird uns sehr helfen.</string>
@@ -101,4 +98,14 @@
     <string name="total_time">Gesamtzeit</string>
     <string name="average_time">Durchschnittliche Zeit</string>
     <string name="performance">Erfolgsergebnis</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Fragen-Fahne zeigen</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Erste markieren</string>
+    <string name="single_click">Einzelklick</string>
+    <string name="double_click">Doppelklick</string>
+    <string name="long_press">Lange Drücken</string>
+    <string name="open_tile">Kachel öffnen</string>
+    <string name="flag_tile">Kachel markieren</string>
 </resources>

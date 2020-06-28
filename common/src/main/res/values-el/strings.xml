@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="el">
     <string name="app_name">Antimine</string>
     <string name="app_description">Πρέπει να καθαρίσετε μια ορθογώνια πλακέτα που περιέχει κρυμμένες \"νάρκες\" χωρίς να πυροδοτήσετε καμία από αυτές.</string>
-    <string name="remaining_mines">Υπόλοιπες νάρκες</string>
     <string name="games">Παιχνίδια</string>
     <string name="previous_games">Προηγούμενα Παιχνίδια</string>
     <string name="install">Εγκατάσταση</string>
@@ -78,7 +77,7 @@
     <string name="width">Πλάτος</string>
     <string name="height">Ύψος</string>
     <string name="mines">Νάρκες</string>
-    <string name="auto_flag">Βοηθός Παιχνιδιού</string>
+    <string name="enable_automatic_flags">Ενεργοποίηση αυτόματης τοποθέτησης σημαιών</string>
     <string name="desc_convered_area">Καλυμμένη περιοχή</string>
     <string name="desc_marked_area">Μαρκαρισμένη περιοχή</string>
     <string name="desc_question_area">Αμφισβητήσιμη περιοχή</string>
@@ -86,12 +85,10 @@
     <string name="settings_general">Γενικά</string>
     <string name="settings_vibration_desc">Δόνηση σε έκρηξη ή εναλλαγή σημαίας</string>
     <string name="settings_sound_desc">Κάνει έναν ήχο έκρηξης</string>
-    <string name="settings_auto_flag_desc">Προσθέτει μια σημαία αυτόματα όταν αφαιρούνται οι νάρκες</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Προσβασιμότητα</string>
     <string name="settings_large_areas">Χρησιμοποιήστε μεγάλες περιοχές</string>
     <string name="settings_large_areas_desc">Αύξηση της περιοχής κουμπιών</string>
-    <string name="settings_double_click">Διπλό Κλικ</string>
     <string name="rating">Αξιολόγηση</string>
     <string name="rating_menu">Αξιολόγηση ❤</string>
     <string name="rating_message">Αν σας αρέσει αυτό το παιχνίδι, παρακαλούμε δώστε μας τα σχόλιά σας. Θα μας βοηθήσει πολύ.</string>
@@ -101,4 +98,14 @@
     <string name="total_time">Συνολικός Χρόνος</string>
     <string name="average_time">Μέσος χρόνος</string>
     <string name="performance">Επίδοση</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Use Question Flags</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Flag First</string>
+    <string name="single_click">Με ένα κλικ</string>
+    <string name="double_click">Διπλό κλικ</string>
+    <string name="long_press">Πιέστε και κρατήστε</string>
+    <string name="open_tile">Ανοιξε</string>
+    <string name="flag_tile">Σημαία</string>
 </resources>

@@ -1,56 +1,104 @@
 package dev.lucasnlm.antimine.core.preferences
 
 import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.core.control.ControlStyle
 
 interface IPreferencesRepository {
-    fun customGameMode(): Minefield
-    fun updateCustomGameMode(minefield: Minefield)
     fun getBoolean(key: String, defaultValue: Boolean): Boolean
     fun getInt(key: String, defaultValue: Int): Int
     fun putBoolean(key: String, value: Boolean)
     fun putInt(key: String, value: Int)
 
+    fun customGameMode(): Minefield
+    fun updateCustomGameMode(minefield: Minefield)
+
+    fun controlStyle(): ControlStyle
+    fun useControlStyle(controlStyle: ControlStyle)
+
     fun useFlagAssistant(): Boolean
     fun useHapticFeedback(): Boolean
     fun useLargeAreas(): Boolean
     fun useAnimations(): Boolean
-    fun useDoubleClickToOpen(): Boolean
+    fun useQuestionMark(): Boolean
 }
 
 class PreferencesRepository(
-    private val preferencesInteractor: PreferencesInteractor
+    private val preferencesManager: IPreferencesManager
 ) : IPreferencesRepository {
+    init {
+        migrateOldPreferences()
+    }
 
-    override fun customGameMode(): Minefield =
-        preferencesInteractor.getCustomMode()
+    override fun customGameMode(): Minefield = Minefield(
+        preferencesManager.getInt(PREFERENCE_CUSTOM_GAME_WIDTH, 9),
+        preferencesManager.getInt(PREFERENCE_CUSTOM_GAME_HEIGHT, 9),
+        preferencesManager.getInt(PREFERENCE_CUSTOM_GAME_MINES, 9)
+    )
 
-    override fun updateCustomGameMode(minefield: Minefield) =
-        preferencesInteractor.updateCustomMode(minefield)
+    override fun updateCustomGameMode(minefield: Minefield) {
+        preferencesManager.apply {
+            putInt(PREFERENCE_CUSTOM_GAME_WIDTH, minefield.width)
+            putInt(PREFERENCE_CUSTOM_GAME_HEIGHT, minefield.height)
+            putInt(PREFERENCE_CUSTOM_GAME_MINES, minefield.mines)
+        }
+    }
 
     override fun getBoolean(key: String, defaultValue: Boolean): Boolean =
-        preferencesInteractor.getBoolean(key, defaultValue)
+        preferencesManager.getBoolean(key, defaultValue)
 
     override fun putBoolean(key: String, value: Boolean) =
-        preferencesInteractor.putBoolean(key, value)
+        preferencesManager.putBoolean(key, value)
 
     override fun getInt(key: String, defaultValue: Int): Int =
-        preferencesInteractor.getInt(key, defaultValue)
+        preferencesManager.getInt(key, defaultValue)
 
     override fun putInt(key: String, value: Int) =
-        preferencesInteractor.putInt(key, value)
+        preferencesManager.putInt(key, value)
 
     override fun useFlagAssistant(): Boolean =
-        getBoolean("preference_assistant", true)
+        getBoolean(PREFERENCE_ASSISTANT, true)
 
     override fun useHapticFeedback(): Boolean =
-        getBoolean("preference_vibration", true)
+        getBoolean(PREFERENCE_VIBRATION, true)
 
     override fun useLargeAreas(): Boolean =
-        getBoolean("preference_large_area", false)
+        getBoolean(PREFERENCE_USE_LARGE_TILE, false)
 
     override fun useAnimations(): Boolean =
-        getBoolean("preference_animation", true)
+        getBoolean(PREFERENCE_ANIMATION, true)
 
-    override fun useDoubleClickToOpen(): Boolean =
-        getBoolean("preference_double_click_open", false)
+    override fun useQuestionMark(): Boolean =
+        getBoolean(PREFERENCE_QUESTION_MARK, true)
+
+    override fun controlStyle(): ControlStyle {
+        val index = getInt(PREFERENCE_CONTROL_STYLE, -1)
+        return ControlStyle.values().getOrNull(index) ?: ControlStyle.Standard
+    }
+
+    override fun useControlStyle(controlStyle: ControlStyle) {
+        putInt(PREFERENCE_CONTROL_STYLE, controlStyle.ordinal)
+    }
+
+    private fun migrateOldPreferences() {
+        if (preferencesManager.contains(PREFERENCE_OLD_DOUBLE_CLICK)) {
+            if (getBoolean(PREFERENCE_OLD_DOUBLE_CLICK, false)) {
+                useControlStyle(ControlStyle.DoubleClick)
+            }
+
+            preferencesManager.removeKey(PREFERENCE_OLD_DOUBLE_CLICK)
+        }
+    }
+
+    private companion object {
+        private const val PREFERENCE_VIBRATION = "preference_vibration"
+        private const val PREFERENCE_ASSISTANT = "preference_assistant"
+        private const val PREFERENCE_ANIMATION = "preference_animation"
+        private const val PREFERENCE_USE_LARGE_TILE = "preference_large_area"
+        private const val PREFERENCE_QUESTION_MARK = "preference_use_question_mark"
+        private const val PREFERENCE_CONTROL_STYLE = "preference_control_style"
+        private const val PREFERENCE_OLD_DOUBLE_CLICK = "preference_double_click_open"
+        private const val PREFERENCE_CUSTOM_GAME_WIDTH = "preference_custom_game_width"
+        private const val PREFERENCE_CUSTOM_GAME_HEIGHT = "preference_custom_game_height"
+        private const val PREFERENCE_CUSTOM_GAME_MINES = "preference_custom_game_mines"
+    }
 }

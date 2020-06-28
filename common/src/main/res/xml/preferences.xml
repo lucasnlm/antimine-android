@@ -8,18 +8,17 @@
         app:iconSpaceReserved="false">
 
         <SwitchPreferenceCompat
-            android:checked="false"
-            android:defaultValue="false"
-            android:key="preference_double_click_open"
-            android:title="@string/settings_double_click"
+            android:checked="true"
+            android:defaultValue="true"
+            android:key="preference_use_question_mark"
+            android:title="@string/use_question_mark"
             app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
             android:checked="true"
             android:defaultValue="true"
             android:key="preference_assistant"
-            android:title="@string/auto_flag"
-            android:summary="@string/settings_auto_flag_desc"
+            android:title="@string/enable_automatic_flags"
             app:iconSpaceReserved="false" />
 
     </PreferenceCategory>

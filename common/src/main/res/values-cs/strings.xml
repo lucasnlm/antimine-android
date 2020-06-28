@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="cs">
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté miny, aniž by kterákoliv z nich vybuchla.</string>
-    <string name="remaining_mines">Zbývající miny</string>
     <string name="games">Hry</string>
     <string name="previous_games">Předchozí hry</string>
     <string name="install">Instalovat</string>
@@ -78,7 +77,7 @@
     <string name="width">Šířka</string>
     <string name="height">Výška</string>
     <string name="mines">Miny</string>
-    <string name="auto_flag">Herní asistent</string>
+    <string name="enable_automatic_flags">Povolit automatické umísťování vlaječek</string>
     <string name="desc_convered_area">Pokrytá oblast</string>
     <string name="desc_marked_area">Označená oblast</string>
     <string name="desc_question_area">Pochybná oblast</string>
@@ -86,12 +85,10 @@
     <string name="settings_general">Obecné</string>
     <string name="settings_vibration_desc">Vibrovat při výbuchu miny nebo umístění vlajky</string>
     <string name="settings_sound_desc">Zazní exploze</string>
-    <string name="settings_auto_flag_desc">Automaticky přidá vlajku na vyřešené miny</string>
     <string name="settings_gameplay">Hra</string>
     <string name="settings_accessibility">Přístupnost</string>
     <string name="settings_large_areas">Použít velké oblasti</string>
     <string name="settings_large_areas_desc">Zvyšuje dotykovou oblast</string>
-    <string name="settings_double_click">Poklepání</string>
     <string name="rating">Komentář</string>
     <string name="rating_menu">Komentář ❤</string>
     <string name="rating_message">Pokud se vám tato hra líbí, dejte nám prosím zpětnou vazbu. Hodně nám to pomůže.</string>
@@ -101,4 +98,14 @@
     <string name="total_time">Celkový čas</string>
     <string name="average_time">Průměrný čas</string>
     <string name="performance">Výkon</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Po užívat nejisté vlaječky</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Označit jako první</string>
+    <string name="single_click">Jedno klepnutí</string>
+    <string name="double_click">Dvojí klepnutí</string>
+    <string name="long_press">Dlouhý stisk</string>
+    <string name="open_tile">Otevřít dlaždici</string>
+    <string name="flag_tile">Název vlajky</string>
 </resources>

@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ru">
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Вам необходимо расчистить прямоугольную площадь со спрятанными минами, не взорвав ни одну из них.</string>
-    <string name="remaining_mines">Мин осталось</string>
     <string name="games">Игры</string>
     <string name="previous_games">Предыдущие игры</string>
     <string name="install">Установить</string>
@@ -78,7 +77,7 @@
     <string name="width">Ширина</string>
     <string name="height">Высота</string>
     <string name="mines">Мины</string>
-    <string name="auto_flag">Помощник</string>
+    <string name="enable_automatic_flags">Включить автоматическое открытие мин</string>
     <string name="desc_convered_area">Покрытая область</string>
     <string name="desc_marked_area">Отмеченная область</string>
     <string name="desc_question_area">Сомнительная область</string>
@@ -86,12 +85,10 @@
     <string name="settings_general">Общее</string>
     <string name="settings_vibration_desc">Вибрировать при взрывах и при установке флага</string>
     <string name="settings_sound_desc">Звуки взрывов</string>
-    <string name="settings_auto_flag_desc">Автоматически добавлять флаг на обезвреженные мины</string>
     <string name="settings_gameplay">Геймплей</string>
     <string name="settings_accessibility">Специальные возможности</string>
     <string name="settings_large_areas">Использовать большие области</string>
     <string name="settings_large_areas_desc">Увеличивает зону касания</string>
-    <string name="settings_double_click">Два нажатия</string>
     <string name="rating">Обратная связь</string>
     <string name="rating_menu">Обратная связь ❤</string>
     <string name="rating_message">Нравится игра? Оставьте отзыв, пожалуйста. Это нам очень поможет.</string>
@@ -101,4 +98,14 @@
     <string name="total_time">Общее время</string>
     <string name="average_time">Среднее время</string>
     <string name="performance">Производительность</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Использовать флаги-вопросы</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Отметить первым</string>
+    <string name="single_click">Одно нажатие</string>
+    <string name="double_click">Двойное нажатие</string>
+    <string name="long_press">Удержание нажатия</string>
+    <string name="open_tile">Открыть плитку</string>
+    <string name="flag_tile">Отметить плитку</string>
 </resources>

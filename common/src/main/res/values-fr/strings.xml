@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Vous devez vider un tableau rectangulaire contenant des mines cachées sans en détonner.</string>
-    <string name="remaining_mines">Mines restantes</string>
     <string name="games">Jeux</string>
     <string name="previous_games">Parties précédentes</string>
     <string name="install">Installer</string>
@@ -78,7 +77,7 @@
     <string name="width">Largeur</string>
     <string name="height">Hauteur</string>
     <string name="mines">Mines</string>
-    <string name="auto_flag">Assistant de partie</string>
+    <string name="enable_automatic_flags">Activer le placement automatique des drapeaux</string>
     <string name="desc_convered_area">Terrain couvert</string>
     <string name="desc_marked_area">Terrain marqué</string>
     <string name="desc_question_area">Zone d\'incertitude</string>
@@ -86,12 +85,10 @@
     <string name="settings_general">Général</string>
     <string name="settings_vibration_desc">Vibrations lors d\'une explosion ou de la pose un drapeau</string>
     <string name="settings_sound_desc">Fait un bruit d\'explosion</string>
-    <string name="settings_auto_flag_desc">Ajouter un drapeau sur des mines sûres automatiquement</string>
     <string name="settings_gameplay">Jouabilité</string>
     <string name="settings_accessibility">Accessibilité</string>
     <string name="settings_large_areas">Utiliser des grandes cases</string>
     <string name="settings_large_areas_desc">Augmenter la zone d\'interaction</string>
-    <string name="settings_double_click">Cliquer deux fois</string>
     <string name="rating">Retour d\'expérience</string>
     <string name="rating_menu">Retour d\'expérience ❤️</string>
     <string name="rating_message">Si vous aimez ce jeu, n\'hésitez pas à jour donner un retour. Ça nous serait très utile.</string>
@@ -101,4 +98,14 @@
     <string name="total_time">Temps de jeu total</string>
     <string name="average_time">Temps de jeu moyen</string>
     <string name="performance">Performance</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Utiliser des drapeaux points d’interrogation</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Flag First</string>
+    <string name="single_click">Single Click</string>
+    <string name="double_click">Double Click</string>
+    <string name="long_press">Long Press</string>
+    <string name="open_tile">Open Tile</string>
+    <string name="flag_tile">Flag Tile</string>
 </resources>

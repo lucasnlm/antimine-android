@@ -26,6 +26,7 @@
 
     <application
         android:name="dev.lucasnlm.antimine.MainApplication"
+        android:description="@string/app_description"
         android:allowBackup="true"
         android:allowClearUserData="true"
         android:fullBackupContent="@xml/backup_rules"
@@ -55,6 +56,7 @@
 
         <activity
             android:name="dev.lucasnlm.antimine.GameActivity"
+            android:launchMode="singleTop"
             android:saveEnabled="false"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
@@ -130,7 +132,7 @@
         </activity>
 
         <activity
-            android:name="dev.lucasnlm.antimine.about.TextActivity"
+            android:name="dev.lucasnlm.antimine.text.TextActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -139,6 +141,7 @@
 
         <activity
             android:name="dev.lucasnlm.antimine.about.AboutActivity"
+            android:label="@string/about"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -147,6 +150,7 @@
 
         <activity
             android:name="dev.lucasnlm.antimine.stats.StatsActivity"
+            android:label="@string/events"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -155,6 +159,7 @@
 
         <activity
             android:name="dev.lucasnlm.antimine.history.HistoryActivity"
+            android:label="@string/previous_games"
             android:parentActivityName="dev.lucasnlm.antimine.GameActivity" />
 
         <activity

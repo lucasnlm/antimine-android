@@ -7,10 +7,9 @@ import androidx.preference.PreferenceManager
 
 import dev.lucasnlm.antimine.R
 
-class PreferencesActivity : AppCompatActivity() {
+class PreferencesActivity : AppCompatActivity(R.layout.activity_empty) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_empty)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         // Load the preferences from an XML resource

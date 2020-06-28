@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="tr">
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Hiçbirini patlatmadan gizli mayın içeren dikdörtgen bir tahtayı temizlemelisiniz.</string>
-    <string name="remaining_mines">Kalan mayınlar</string>
     <string name="games">Oyunlar</string>
     <string name="previous_games">Önceki Oyun</string>
     <string name="install">Yükle</string>
@@ -36,7 +35,7 @@
     <string name="disconnected">Bağlantı kesildi</string>
     <string name="new_game">Yeni Oyun</string>
     <string name="share">Paylaş</string>
-    <string name="share_menu">Paylaş...</string>
+    <string name="share_menu">Paylaş…</string>
     <string name="new_game_request">Yeni bir oyuna başlamak istiyor musunuz?</string>
     <string name="yes">Evet</string>
     <string name="general">Genel</string>
@@ -78,7 +77,7 @@
     <string name="width">Genişlik</string>
     <string name="height">Yükseklik</string>
     <string name="mines">Mayın</string>
-    <string name="auto_flag">Oyun Yardımcısı</string>
+    <string name="enable_automatic_flags">Bayrakların otomatik yerleşimini etkinleştir</string>
     <string name="desc_convered_area">Kapalı alan</string>
     <string name="desc_marked_area">İşaretli alan</string>
     <string name="desc_question_area">Şüpheli alan</string>
@@ -86,12 +85,10 @@
     <string name="settings_general">Genel</string>
     <string name="settings_vibration_desc">Patlama veya bayrak yerleştirme/kaldırmada titretir</string>
     <string name="settings_sound_desc">Patlama sesi çıkarır</string>
-    <string name="settings_auto_flag_desc">Çözülmüş mayınlara otomatik olarak bayrak ekler</string>
     <string name="settings_gameplay">Oynanış</string>
     <string name="settings_accessibility">Erişilebilirlik</string>
     <string name="settings_large_areas">Geniş Alanlar Kullan</string>
     <string name="settings_large_areas_desc">Dokunma alanını artırır</string>
-    <string name="settings_double_click">Çift Tıklama</string>
     <string name="rating">Geri bildirim</string>
     <string name="rating_menu">Geri bildirim ❤</string>
     <string name="rating_message">Bu oyunu beğendiyseniz, lütfen bize bir geri bildirim verin. Bize çok yardımcı olacak.</string>
@@ -101,4 +98,14 @@
     <string name="total_time">Toplam Süre</string>
     <string name="average_time">Ortalama Süre</string>
     <string name="performance">Performans</string>
+    <string name="ok">Tamam</string>
+    <string name="use_question_mark">Soru İşaretleri Kullan</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Önce İşaretle</string>
+    <string name="single_click">Tek Tıklama</string>
+    <string name="double_click">Çift Tıklama</string>
+    <string name="long_press">Uzun Basma</string>
+    <string name="open_tile">Karoyu Aç</string>
+    <string name="flag_tile">Karoyu İşaretle</string>
 </resources>

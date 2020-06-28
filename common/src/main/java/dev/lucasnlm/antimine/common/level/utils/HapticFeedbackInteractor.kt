@@ -8,7 +8,7 @@ import android.os.Vibrator
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 interface IHapticFeedbackInteractor {
-    fun toggleFlagFeedback()
+    fun longPressFeedback()
     fun explosionFeedback()
 }
 
@@ -18,7 +18,7 @@ class HapticFeedbackInteractor(
 ) : IHapticFeedbackInteractor {
     private val vibrator: Vibrator = context.getSystemService(VIBRATOR_SERVICE) as Vibrator
 
-    override fun toggleFlagFeedback() {
+    override fun longPressFeedback() {
         if (preferencesRepository.useHapticFeedback()) {
             vibrateTo(70, 240)
             vibrateTo(10, 100)
@@ -44,7 +44,11 @@ class HapticFeedbackInteractor(
 }
 
 class DisabledIHapticFeedbackInteractor : IHapticFeedbackInteractor {
-    override fun toggleFlagFeedback() { }
+    override fun longPressFeedback() {
+        // Empty
+    }
 
-    override fun explosionFeedback() { }
+    override fun explosionFeedback() {
+        // Empty
+    }
 }

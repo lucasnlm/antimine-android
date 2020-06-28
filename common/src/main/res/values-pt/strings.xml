@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pt">
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Encontre todas as minas escondidas no campo minado.</string>
-    <string name="remaining_mines">Minas Restantes</string>
     <string name="games">Games</string>
     <string name="previous_games">Jogos Anteriores</string>
     <string name="install">Instalar</string>
@@ -78,7 +77,7 @@
     <string name="width">Largura</string>
     <string name="height">Altura</string>
     <string name="mines">Minas</string>
-    <string name="auto_flag">Bandeiras Automáticas</string>
+    <string name="enable_automatic_flags">Permitir a colocação automática de bandeiras</string>
     <string name="desc_convered_area">Área coberta</string>
     <string name="desc_marked_area">Área marcada</string>
     <string name="desc_question_area">Área duvidosa</string>
@@ -87,11 +86,9 @@
     <string name="settings_gameplay">Jogabilidade</string>
     <string name="settings_vibration_desc">Vibra ao explodir ou alternar marcação</string>
     <string name="settings_sound_desc">Faz um som ao explodir</string>
-    <string name="settings_auto_flag_desc">Faz marcação automaticamente em minas resolvidas</string>
     <string name="settings_accessibility">Acessibilidade</string>
     <string name="settings_large_areas">Usar Área Grande</string>
     <string name="settings_large_areas_desc">Aumenta a área tocável</string>
-    <string name="settings_double_click">Duplo Clique</string>
     <string name="rating">Avalie o app</string>
     <string name="rating_menu">Avaliar o app ❤</string>
     <string name="rating_message">Se você está gostando do jogo, por favor deixe um comentário! Isso nos ajuda muito.</string>
@@ -101,4 +98,14 @@
     <string name="total_time">Tempo Total</string>
     <string name="average_time">Tempo Médio</string>
     <string name="performance">Desempenho</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Usar bandeiras de interrogação</string>
+    <string name="control">Controles</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Bandeira Primeiro</string>
+    <string name="single_click">Toque Único</string>
+    <string name="double_click">Toque Duplo</string>
+    <string name="long_press">Toque Longo</string>
+    <string name="open_tile">Abrir Quadrado</string>
+    <string name="flag_tile">Colocar Bandeira</string>
 </resources>

@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="it">
     <string name="app_name">Antimine</string>
     <string name="app_description">L\'obbiettivo del gioco è ripulire un campo rettangolare che contiene mine nascoste senza detonarne nessuna.</string>
-    <string name="remaining_mines">Mine rimanenti</string>
     <string name="games">Giochi</string>
     <string name="previous_games">Partite Precedenti</string>
     <string name="install">Installare</string>
@@ -78,7 +77,7 @@
     <string name="width">Larghezza</string>
     <string name="height">Altezza</string>
     <string name="mines">Mine</string>
-    <string name="auto_flag">Assistente di gioco</string>
+    <string name="enable_automatic_flags">Abilita il posizionamento automatico delle bandiere</string>
     <string name="desc_convered_area">Area coperta</string>
     <string name="desc_marked_area">Area segnata</string>
     <string name="desc_question_area">Area incerta</string>
@@ -86,12 +85,10 @@
     <string name="settings_general">Generale</string>
     <string name="settings_vibration_desc">Vibra all\'esplosione di una mina oppure quando si piazza una bandiera</string>
     <string name="settings_sound_desc">Fa un suono di esplosione</string>
-    <string name="settings_auto_flag_desc">Aggiunge automaticamente una bandiera sulle mine risolte</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Accessibilità</string>
     <string name="settings_large_areas">Usa grandi aree</string>
     <string name="settings_large_areas_desc">Aumenta l\'area di tocco</string>
-    <string name="settings_double_click">Doppio click</string>
     <string name="rating">Suggerimenti</string>
     <string name="rating_menu">Suggerimenti ❤</string>
     <string name="rating_message">Se ti piace questo gioco, per favore inviaci suggerimenti. Puoi aiutare a migliorarlo.</string>
@@ -101,4 +98,14 @@
     <string name="total_time">Tempo Totale</string>
     <string name="average_time">Durata Media</string>
     <string name="performance">Prestazione</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Usa punto interrogativo</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Prima Bandiera</string>
+    <string name="single_click">Singolo click</string>
+    <string name="double_click">Doppio click</string>
+    <string name="long_press">Premi a lungo</string>
+    <string name="open_tile">Quadrato aperto</string>
+    <string name="flag_tile">Quadrato con bandiera</string>
 </resources>

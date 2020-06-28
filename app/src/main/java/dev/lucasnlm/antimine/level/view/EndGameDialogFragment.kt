@@ -5,10 +5,10 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -24,9 +24,9 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
     @Inject
     lateinit var instantAppManager: InstantAppManager
 
-    private lateinit var endGameViewModel: EngGameDialogViewModel
-    private lateinit var viewModel: GameViewModel
-    private lateinit var shareViewModel: ShareViewModel
+    private val endGameViewModel by activityViewModels<EngGameDialogViewModel>()
+    private val viewModel by activityViewModels<GameViewModel>()
+    private val shareViewModel by activityViewModels<ShareViewModel>()
 
     private var hasValidData = false
     private var isVictory: Boolean = false
@@ -37,12 +37,6 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        activity?.let {
-            viewModel = it.viewModels<GameViewModel>().value
-            endGameViewModel = it.viewModels<EngGameDialogViewModel>().value
-            shareViewModel = it.viewModels<ShareViewModel>().value
-        }
 
         arguments?.run {
             isVictory = getBoolean(DIALOG_IS_VICTORY) == true
@@ -111,25 +105,29 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                 }
             }
 
-            if (instantAppManager.isEnabled()) {
-                setNeutralButton(R.string.install) { _, _ ->
-                    activity?.run {
-                        instantAppManager.showInstallPrompt(this, null, 0, null)
+            when {
+                instantAppManager.isEnabled() -> {
+                    setNeutralButton(R.string.install) { _, _ ->
+                        activity?.run {
+                            instantAppManager.showInstallPrompt(this, null, 0, null)
+                        }
                     }
                 }
-            } else if (isVictory) {
-                setNeutralButton(R.string.share) { _, _ ->
-                    val setup = viewModel.levelSetup.value
-                    val field = viewModel.field.value
+                isVictory -> {
+                    setNeutralButton(R.string.share) { _, _ ->
+                        val setup = viewModel.levelSetup.value
+                        val field = viewModel.field.value
 
-                    GlobalScope.launch {
-                        shareViewModel.share(setup, field, time)
+                        GlobalScope.launch {
+                            shareViewModel.share(setup, field, time)
+                        }
                     }
                 }
-            } else {
-                setNeutralButton(R.string.retry) { _, _ ->
-                    GlobalScope.launch {
-                        viewModel.retryGame(saveId.toInt())
+                else -> {
+                    setNeutralButton(R.string.retry) { _, _ ->
+                        GlobalScope.launch {
+                            viewModel.retryGame(saveId.toInt())
+                        }
                     }
                 }
             }
@@ -153,6 +151,6 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
         private const val DIALOG_TOTAL_MINES = "dialog_total_mines"
         private const val DIALOG_SAVE_ID = "dialog_save_id"
 
-        val TAG = EndGameDialogFragment::class.simpleName
+        val TAG = EndGameDialogFragment::class.simpleName!!
     }
 }

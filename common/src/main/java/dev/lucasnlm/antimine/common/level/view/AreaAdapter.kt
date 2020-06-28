@@ -95,7 +95,7 @@ class AreaAdapter(
                 if (position == RecyclerView.NO_POSITION) {
                     Log.d(TAG, "Item no longer exists.")
                 } else if (clickEnabled) {
-                    viewModel.onClickArea(position)
+                    viewModel.onSingleClick(position)
                 }
             }
 
@@ -142,7 +142,7 @@ class AreaAdapter(
     }
 
     companion object {
-        private val TAG = AreaAdapter::class.simpleName
+        val TAG = AreaAdapter::class.simpleName!!
 
         fun createAreaPaintSettings(context: Context, useLargeArea: Boolean): AreaPaintSettings {
             val resources = context.resources

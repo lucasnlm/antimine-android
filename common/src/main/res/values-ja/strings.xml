@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ja">
     <string name="app_name">Antimine</string>
     <string name="app_description">地雷が隠された長方形から1つも爆発させることなくクリアしましょう。</string>
-    <string name="remaining_mines">残りの地雷数</string>
     <string name="games">ゲームの数</string>
     <string name="previous_games">前回のゲーム</string>
     <string name="install">インストール</string>
@@ -31,12 +30,12 @@
     <string name="google_play_games">Google Play ゲーム</string>
     <string name="leaderboards">リーダーボード</string>
     <string name="connect">接続</string>
-    <string name="connecting">接続しています...</string>
+    <string name="connecting">接続しています…</string>
     <string name="disconnect">切断</string>
     <string name="disconnected">切断済み</string>
     <string name="new_game">新しいゲーム</string>
     <string name="share">共有</string>
-    <string name="share_menu">共有...</string>
+    <string name="share_menu">共有…</string>
     <string name="new_game_request">新しくゲームを始めますか？</string>
     <string name="yes">はい</string>
     <string name="general">全般</string>
@@ -51,7 +50,7 @@
     <string name="flag_placed">フラグを立てました！</string>
     <string name="flag_removed">フラグを消しました！</string>
     <string name="used_software_text">このゲームは、以下のサードパーティーソフトウェアを使用しています:</string>
-    <string name="translators_text">このゲームは以下の人々によって翻訳されています:</string>
+    <string name="translators_text">このゲームは、以下の人々によって翻訳されています:</string>
     <string name="sign_in_failed">サインインに失敗しました。インターネット接続を確認してからもう一度お試しください。</string>
     <string name="unknown_error">不明なエラーです。</string>
     <string name="retry">リトライ</string>
@@ -78,7 +77,7 @@
     <string name="width">横幅</string>
     <string name="height">縦幅</string>
     <string name="mines">地雷の数</string>
-    <string name="auto_flag">ゲームアシスタント</string>
+    <string name="enable_automatic_flags">フラグを自動的に置くかどうか</string>
     <string name="desc_convered_area">カバーされたエリア</string>
     <string name="desc_marked_area">マークされたエリア</string>
     <string name="desc_question_area">疑わしいエリア</string>
@@ -86,12 +85,10 @@
     <string name="settings_general">全般</string>
     <string name="settings_vibration_desc">爆発またはフラグの切り替え時にバイブレーションを鳴らします</string>
     <string name="settings_sound_desc">爆発音を鳴らします</string>
-    <string name="settings_auto_flag_desc">解決された地雷に自動でフラグを追加します</string>
     <string name="settings_gameplay">ゲームプレイ</string>
     <string name="settings_accessibility">アクセシビリティ</string>
     <string name="settings_large_areas">範囲を広くする</string>
     <string name="settings_large_areas_desc">タッチ範囲を増やします</string>
-    <string name="settings_double_click">ダブルクリック</string>
     <string name="rating">フィードバック</string>
     <string name="rating_menu">フィードバック ❤</string>
     <string name="rating_message">もしこのゲームを気に入ったなら、フィードバックをお願いします。私たちへの助けになるはずです。</string>
@@ -101,4 +98,14 @@
     <string name="total_time">合計時間</string>
     <string name="average_time">平均時間</string>
     <string name="performance">パフォーマンス</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">疑いフラグを使用</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">最初にフラグをつける</string>
+    <string name="single_click">シングルクリック</string>
+    <string name="double_click">ダブルクリック</string>
+    <string name="long_press">長押し</string>
+    <string name="open_tile">開いた</string>
+    <string name="flag_tile">国旗</string>
 </resources>

@@ -37,9 +37,7 @@
         </menu>
     </item>
 
-    <group
-        android:id="@+id/history_group">
-
+    <group android:id="@+id/history_group">
         <item
             android:id="@+id/previous_games"
             android:checkable="false"
@@ -49,7 +47,18 @@
             android:id="@+id/stats"
             android:checkable="false"
             android:title="@string/events" />
+    </group>
 
+    <group android:id="@+id/options_group">
+        <item
+            android:id="@+id/control"
+            android:checkable="false"
+            android:title="@string/control" />
+
+        <item
+            android:id="@+id/settings"
+            android:checkable="false"
+            android:title="@string/settings" />
     </group>
 
     <group
@@ -62,12 +71,9 @@
             android:checkable="false"
             android:icon="@drawable/install"
             android:title="@string/install" />
-
     </group>
 
-    <group
-        android:id="@+id/social_group">
-
+    <group android:id="@+id/social_group">
         <item
             android:id="@+id/share_now"
             android:checkable="false"
@@ -79,20 +85,12 @@
             android:id="@+id/rate"
             android:checkable="false"
             android:title="@string/rating_menu" />
-
     </group>
 
-    <group>
-
-        <item
-            android:id="@+id/settings"
-            android:checkable="false"
-            android:title="@string/settings" />
-
+    <group android:id="@+id/about_group">
         <item
             android:id="@+id/about"
             android:checkable="false"
             android:title="@string/about" />
     </group>
-
 </menu>

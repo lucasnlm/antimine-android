@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="es-rES">
     <string name="app_name">Anti-Mina</string>
-    <string name="app_description">Usted tiene que limpiar un tablero cuadrado que contiene minas escondidas sin detornarlas.</string>
-    <string name="remaining_mines">Minas restantes</string>
+    <string name="app_description">Usted tiene que limpiar un tablero cuadrado que contiene minas escondidas sin detonarlas.</string>
     <string name="games">Juegos</string>
     <string name="previous_games">Juegos anteriores</string>
     <string name="install">Instalar</string>
@@ -78,20 +77,18 @@
     <string name="width">Ancho</string>
     <string name="height">Alto</string>
     <string name="mines">Minas</string>
-    <string name="auto_flag">Asistente de Juego</string>
+    <string name="enable_automatic_flags">Activar situación automática de banderas</string>
     <string name="desc_convered_area">Área cubierta</string>
     <string name="desc_marked_area">Área marcada</string>
-    <string name="desc_question_area">Area dudosa</string>
+    <string name="desc_question_area">Área dudosa</string>
     <string name="desc_wrongly_marked_area">Área marcada incorrectamente</string>
     <string name="settings_general">General</string>
     <string name="settings_vibration_desc">Vibrar al activar la explosión o la bandera</string>
     <string name="settings_sound_desc">Hace un sonido de explosión</string>
-    <string name="settings_auto_flag_desc">Añade una bandera en minas resueltas automáticamente</string>
     <string name="settings_gameplay">Jugabilidad</string>
     <string name="settings_accessibility">Accesibilidad</string>
     <string name="settings_large_areas">Usar áreas grandes</string>
     <string name="settings_large_areas_desc">Aumenta la zona táctil</string>
-    <string name="settings_double_click">Doble clic</string>
     <string name="rating">Comentarios</string>
     <string name="rating_menu">Comentarios ❤</string>
     <string name="rating_message">Si te gusta este juego, por favor danos un comentario. Nos ayudará mucho.</string>
@@ -101,4 +98,14 @@
     <string name="total_time">Tiempo total</string>
     <string name="average_time">Tiempo promedio</string>
     <string name="performance">Desempeño</string>
+    <string name="ok">Aceptar</string>
+    <string name="use_question_mark">Usar banderas de interrogación</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">Marcar primero</string>
+    <string name="single_click">Un clic</string>
+    <string name="double_click">Doble clic</string>
+    <string name="long_press">Mantenga pulsado</string>
+    <string name="open_tile">Open Tile</string>
+    <string name="flag_tile">Flag Tile</string>
 </resources>

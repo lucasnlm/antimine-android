@@ -26,7 +26,10 @@ class AreaView : View {
     private var area: Area? = null
     private lateinit var paintSettings: AreaPaintSettings
     private lateinit var palette: AreaPalette
-    private var gestureDetector: GestureDetector? = null
+
+    private val gestureDetector: GestureDetector by lazy {
+        GestureDetector(context, GestureDetector.SimpleOnGestureListener())
+    }
 
     constructor(context: Context) : super(context)
 
@@ -39,10 +42,7 @@ class AreaView : View {
     }
 
     fun setOnDoubleClickListener(listener: GestureDetector.OnDoubleTapListener) {
-        if (gestureDetector == null) {
-            gestureDetector = GestureDetector(context, GestureDetector.SimpleOnGestureListener())
-        }
-        gestureDetector?.setOnDoubleTapListener(listener)
+        gestureDetector.setOnDoubleTapListener(listener)
     }
 
     fun bindField(area: Area, isAmbientMode: Boolean, isLowBitAmbient: Boolean, paintSettings: AreaPaintSettings) {
@@ -82,7 +82,7 @@ class AreaView : View {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean =
-        (gestureDetector?.onTouchEvent(event) ?: false) || super.onTouchEvent(event)
+        gestureDetector.onTouchEvent(event) || super.onTouchEvent(event)
 
     private fun bindContentDescription(area: Area) {
         contentDescription = when {

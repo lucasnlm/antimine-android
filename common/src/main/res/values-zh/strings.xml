@@ -2,7 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh-rCN">
     <string name="app_name">Antimine - 扫雷</string>
     <string name="app_description">你需要清除一个隐藏着地雷的矩形面板，不能使任何地雷爆炸。</string>
-    <string name="remaining_mines">剩余地雷</string>
     <string name="games">游戏</string>
     <string name="previous_games">上一局</string>
     <string name="install">安装</string>
@@ -78,7 +77,7 @@
     <string name="width">宽度</string>
     <string name="height">高度</string>
     <string name="mines">地雷</string>
-    <string name="auto_flag">游戏助手</string>
+    <string name="enable_automatic_flags">启用旗标自动放置</string>
     <string name="desc_convered_area">覆盖面积</string>
     <string name="desc_marked_area">标记区域</string>
     <string name="desc_question_area">可疑区域</string>
@@ -86,12 +85,10 @@
     <string name="settings_general">通用</string>
     <string name="settings_vibration_desc">爆炸或标记时振动</string>
     <string name="settings_sound_desc">播放爆炸声音</string>
-    <string name="settings_auto_flag_desc">自动在已解决的地雷上添加旗帜</string>
     <string name="settings_gameplay">游戏性</string>
     <string name="settings_accessibility">无障碍</string>
     <string name="settings_large_areas">使用大区域</string>
     <string name="settings_large_areas_desc">增加触摸区域</string>
-    <string name="settings_double_click">双击</string>
     <string name="rating">反馈</string>
     <string name="rating_menu">反馈 ❤</string>
     <string name="rating_message">如果你喜欢这个游戏，请给我们反馈。这将对我们有很多帮助。</string>
@@ -101,4 +98,14 @@
     <string name="total_time">总用时</string>
     <string name="average_time">平均用时</string>
     <string name="performance">性能</string>
+    <string name="ok">确定</string>
+    <string name="use_question_mark">使用问号旗标</string>
+    <string name="control">Control</string>
+    <string name="arrow">➞</string>
+    <string name="flag_first">标记在前</string>
+    <string name="single_click">单次点击</string>
+    <string name="double_click">双击</string>
+    <string name="long_press">长按</string>
+    <string name="open_tile">打开</string>
+    <string name="flag_tile">旗</string>
 </resources>

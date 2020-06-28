@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -20,9 +20,9 @@ abstract class CommonLevelFragment : Fragment() {
     @Inject
     lateinit var dimensionRepository: IDimensionRepository
 
-    protected lateinit var viewModel: GameViewModel
+    protected val viewModel: GameViewModel by activityViewModels()
+    protected val areaAdapter by lazy { AreaAdapter(requireContext(), viewModel) }
     protected lateinit var recyclerGrid: RecyclerView
-    protected lateinit var areaAdapter: AreaAdapter
 
     abstract val levelFragmentResId: Int
 
@@ -31,15 +31,6 @@ abstract class CommonLevelFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(levelFragmentResId, container, false)
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        activity?.let {
-            viewModel = it.viewModels<GameViewModel>().value
-            areaAdapter = AreaAdapter(it.applicationContext, viewModel)
-        }
-    }
 
     protected fun makeNewLayoutManager(boardWidth: Int) =
         FixedGridLayoutManager().apply {
