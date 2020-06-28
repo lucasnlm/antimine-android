@@ -78,7 +78,7 @@
     <string name="width">Ширина</string>
     <string name="height">Висота</string>
     <string name="mines">Міни</string>
-    <string name="auto_flag">Ігровий помічник</string>
+    <string name="enable_automatic_flags">Увімкнути автоматичне розміщення прапорців</string>
     <string name="desc_convered_area">Прихована зона</string>
     <string name="desc_marked_area">Позначена територія</string>
     <string name="desc_question_area">Сумнівна територія</string>

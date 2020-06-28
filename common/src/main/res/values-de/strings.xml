@@ -78,7 +78,7 @@
     <string name="width">Breite</string>
     <string name="height">Höhe</string>
     <string name="mines">Minen</string>
-    <string name="auto_flag">Spielassistent</string>
+    <string name="enable_automatic_flags">Automatische Fahnen-Platzierung aktivieren</string>
     <string name="desc_convered_area">Abgedeckte Fläche</string>
     <string name="desc_marked_area">Markierte Fläche</string>
     <string name="desc_question_area">Zweifelhafte Fläche</string>

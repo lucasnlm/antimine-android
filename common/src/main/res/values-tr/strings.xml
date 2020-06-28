@@ -78,7 +78,7 @@
     <string name="width">Genişlik</string>
     <string name="height">Yükseklik</string>
     <string name="mines">Mayın</string>
-    <string name="auto_flag">Oyun Yardımcısı</string>
+    <string name="enable_automatic_flags">Bayrakların otomatik yerleşimini etkinleştir</string>
     <string name="desc_convered_area">Kapalı alan</string>
     <string name="desc_marked_area">İşaretli alan</string>
     <string name="desc_question_area">Şüpheli alan</string>

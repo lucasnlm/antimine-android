@@ -78,7 +78,7 @@
     <string name="width">Šířka</string>
     <string name="height">Výška</string>
     <string name="mines">Miny</string>
-    <string name="auto_flag">Herní asistent</string>
+    <string name="enable_automatic_flags">Povolit automatické umísťování vlaječek</string>
     <string name="desc_convered_area">Pokrytá oblast</string>
     <string name="desc_marked_area">Označená oblast</string>
     <string name="desc_question_area">Pochybná oblast</string>

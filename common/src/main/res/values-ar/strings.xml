@@ -78,7 +78,7 @@
     <string name="width">Width</string>
     <string name="height">Height</string>
     <string name="mines">Mines</string>
-    <string name="auto_flag">Game Assistant</string>
+    <string name="enable_automatic_flags">تمكين الإضافة التلقائية للأعلام</string>
     <string name="desc_convered_area">Covered area</string>
     <string name="desc_marked_area">Marked area</string>
     <string name="desc_question_area">Doubtful area</string>

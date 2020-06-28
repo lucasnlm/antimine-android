@@ -78,7 +78,7 @@
     <string name="width">Chiều rộng</string>
     <string name="height">Chiều cao</string>
     <string name="mines">Mìn</string>
-    <string name="auto_flag">Trợ lí trò chơi</string>
+    <string name="enable_automatic_flags">Bật tự động để cờ</string>
     <string name="desc_convered_area">Ô đã mở</string>
     <string name="desc_marked_area">Ô đã đánh dấu</string>
     <string name="desc_question_area">Ô còn nghi ngờ</string>

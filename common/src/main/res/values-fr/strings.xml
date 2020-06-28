@@ -78,7 +78,7 @@
     <string name="width">Largeur</string>
     <string name="height">Hauteur</string>
     <string name="mines">Mines</string>
-    <string name="auto_flag">Assistant de partie</string>
+    <string name="enable_automatic_flags">Activer le placement automatique des drapeaux</string>
     <string name="desc_convered_area">Terrain couvert</string>
     <string name="desc_marked_area">Terrain marqué</string>
     <string name="desc_question_area">Zone d\'incertitude</string>

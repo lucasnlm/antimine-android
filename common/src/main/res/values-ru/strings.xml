@@ -78,7 +78,7 @@
     <string name="width">Ширина</string>
     <string name="height">Высота</string>
     <string name="mines">Мины</string>
-    <string name="auto_flag">Помощник</string>
+    <string name="enable_automatic_flags">Включить автоматическое открытие мин</string>
     <string name="desc_convered_area">Покрытая область</string>
     <string name="desc_marked_area">Отмеченная область</string>
     <string name="desc_question_area">Сомнительная область</string>

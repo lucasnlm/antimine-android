@@ -78,7 +78,7 @@
     <string name="width">Largura</string>
     <string name="height">Altura</string>
     <string name="mines">Minas</string>
-    <string name="auto_flag">Bandeiras Automáticas</string>
+    <string name="enable_automatic_flags">Permitir a colocação automática de bandeiras</string>
     <string name="desc_convered_area">Área coberta</string>
     <string name="desc_marked_area">Área marcada</string>
     <string name="desc_question_area">Área duvidosa</string>

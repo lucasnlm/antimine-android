@@ -78,7 +78,7 @@
     <string name="width">Larghezza</string>
     <string name="height">Altezza</string>
     <string name="mines">Mine</string>
-    <string name="auto_flag">Assistente di gioco</string>
+    <string name="enable_automatic_flags">Abilita il posizionamento automatico delle bandiere</string>
     <string name="desc_convered_area">Area coperta</string>
     <string name="desc_marked_area">Area segnata</string>
     <string name="desc_question_area">Area incerta</string>

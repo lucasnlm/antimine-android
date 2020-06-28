@@ -78,7 +78,7 @@
     <string name="width">横幅</string>
     <string name="height">縦幅</string>
     <string name="mines">地雷の数</string>
-    <string name="auto_flag">ゲームアシスタント</string>
+    <string name="enable_automatic_flags">フラグを自動的に置くかどうか</string>
     <string name="desc_convered_area">カバーされたエリア</string>
     <string name="desc_marked_area">マークされたエリア</string>
     <string name="desc_question_area">疑わしいエリア</string>

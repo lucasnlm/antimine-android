@@ -78,7 +78,7 @@
     <string name="width">Πλάτος</string>
     <string name="height">Ύψος</string>
     <string name="mines">Νάρκες</string>
-    <string name="auto_flag">Βοηθός Παιχνιδιού</string>
+    <string name="enable_automatic_flags">Ενεργοποίηση αυτόματης τοποθέτησης σημαιών</string>
     <string name="desc_convered_area">Καλυμμένη περιοχή</string>
     <string name="desc_marked_area">Μαρκαρισμένη περιοχή</string>
     <string name="desc_question_area">Αμφισβητήσιμη περιοχή</string>

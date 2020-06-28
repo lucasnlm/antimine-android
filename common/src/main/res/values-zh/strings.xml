@@ -78,7 +78,7 @@
     <string name="width">宽度</string>
     <string name="height">高度</string>
     <string name="mines">地雷</string>
-    <string name="auto_flag">游戏助手</string>
+    <string name="enable_automatic_flags">启用旗标自动放置</string>
     <string name="desc_convered_area">覆盖面积</string>
     <string name="desc_marked_area">标记区域</string>
     <string name="desc_question_area">可疑区域</string>
