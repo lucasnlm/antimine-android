@@ -20,7 +20,7 @@ class GameControllerTest {
     private fun GameController.at(id: Int): Area = field.first { it.id == id }
 
     @Test
-    fun testLevelEmptyBuilding() {
+    fun aLevelMustBeInitiallyEmpty() {
         gameControllerOf(3, 3, 1).run {
             assertEquals(
                 field.toList(),
@@ -36,17 +36,23 @@ class GameControllerTest {
     }
 
     @Test
-    fun testDismissFlagAfterOpen() {
+    fun testGetTile() {
+        gameControllerOf(3, 3, 1).run {
+            assertEquals(getArea(4), field.first { it.id == 4 })
+        }
+    }
+
+    @Test
+    fun afterOpenATileItsMaskMustBeRemoved() {
         val mineCount = 3
         gameControllerOf(3, 3, mineCount).run {
             plantMinesExcept(3)
+            at(3).mark = Mark.Flag
             singleClick(3)
-            field.filter { it.isCovered }.forEach { it.mark = Mark.Flag }
-            field.filterNot { it.hasMine }.map { it.id }.forEach { singleClick(it) }
-            assertEquals(
-                field.filter { it.isCovered }.count { it.mark.isFlag() },
-                mineCount
-            )
+            assertFalse(at(3).mark.isFlag())
+            singleClick(3)
+            assertTrue(at(3).mark.isNone())
+            assertFalse(at(3).isCovered)
         }
     }
 
@@ -64,6 +70,14 @@ class GameControllerTest {
             }
             assertTrue(hasMines)
             assertEquals(remainingMines(), 1)
+        }
+    }
+
+    @Test
+    fun testGetMinesCount() {
+        gameControllerOf(6, 6, 15, 200L).run {
+            plantMinesExcept(3)
+            assertEquals(15, getMinesCount())
         }
     }
 
