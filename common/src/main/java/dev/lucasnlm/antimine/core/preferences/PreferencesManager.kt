@@ -2,45 +2,33 @@ package dev.lucasnlm.antimine.core.preferences
 
 import android.content.Context
 import androidx.preference.PreferenceManager
-import dev.lucasnlm.antimine.common.level.models.Minefield
 import javax.inject.Inject
+
+interface IPreferencesManager {
+    fun getBoolean(key: String, defaultValue: Boolean): Boolean
+    fun putBoolean(key: String, value: Boolean)
+    fun getInt(key: String, defaultValue: Int): Int
+    fun putInt(key: String, value: Int)
+    fun removeKey(key: String)
+    fun contains(key: String): Boolean
+}
 
 class PreferencesManager @Inject constructor(
     private val context: Context
-) {
+): IPreferencesManager {
     private val preferences by lazy {
         PreferenceManager.getDefaultSharedPreferences(context)
     }
 
-    fun getCustomMode() = Minefield(
-        preferences.getInt(PREFERENCE_CUSTOM_GAME_WIDTH, 9),
-        preferences.getInt(PREFERENCE_CUSTOM_GAME_HEIGHT, 9),
-        preferences.getInt(PREFERENCE_CUSTOM_GAME_MINES, 9)
-    )
+    override fun getBoolean(key: String, defaultValue: Boolean) = preferences.getBoolean(key, defaultValue)
 
-    fun updateCustomMode(customMinefield: Minefield) {
-        preferences.edit().apply {
-            putInt(PREFERENCE_CUSTOM_GAME_WIDTH, customMinefield.width)
-            putInt(PREFERENCE_CUSTOM_GAME_HEIGHT, customMinefield.height)
-            putInt(PREFERENCE_CUSTOM_GAME_MINES, customMinefield.mines)
-        }.apply()
-    }
+    override fun putBoolean(key: String, value: Boolean) = preferences.edit().putBoolean(key, value).apply()
 
-    fun getBoolean(key: String, defaultValue: Boolean) = preferences.getBoolean(key, defaultValue)
+    override fun getInt(key: String, defaultValue: Int) = preferences.getInt(key, defaultValue)
 
-    fun putBoolean(key: String, value: Boolean) = preferences.edit().putBoolean(key, value).apply()
+    override fun putInt(key: String, value: Int) = preferences.edit().putInt(key, value).apply()
 
-    fun getInt(key: String, defaultValue: Int) = preferences.getInt(key, defaultValue)
+    override fun contains(key: String): Boolean = preferences.contains(key)
 
-    fun putInt(key: String, value: Int) = preferences.edit().putInt(key, value).apply()
-
-    fun removeKey(key: String) {
-        preferences.edit().remove(key).apply()
-    }
-
-    companion object {
-        private const val PREFERENCE_CUSTOM_GAME_WIDTH = "preference_custom_game_width"
-        private const val PREFERENCE_CUSTOM_GAME_HEIGHT = "preference_custom_game_height"
-        private const val PREFERENCE_CUSTOM_GAME_MINES = "preference_custom_game_mines"
-    }
+    override fun removeKey(key: String) = preferences.edit().remove(key).apply()
 }

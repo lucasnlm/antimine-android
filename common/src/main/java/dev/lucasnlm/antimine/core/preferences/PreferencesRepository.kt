@@ -23,17 +23,25 @@ interface IPreferencesRepository {
 }
 
 class PreferencesRepository(
-    private val preferencesManager: PreferencesManager
+    private val preferencesManager: IPreferencesManager
 ) : IPreferencesRepository {
     init {
         migrateOldPreferences()
     }
 
-    override fun customGameMode(): Minefield =
-        preferencesManager.getCustomMode()
+    override fun customGameMode(): Minefield = Minefield(
+        preferencesManager.getInt(PREFERENCE_CUSTOM_GAME_WIDTH, 9),
+        preferencesManager.getInt(PREFERENCE_CUSTOM_GAME_HEIGHT, 9),
+        preferencesManager.getInt(PREFERENCE_CUSTOM_GAME_MINES, 9)
+    )
 
-    override fun updateCustomGameMode(minefield: Minefield) =
-        preferencesManager.updateCustomMode(minefield)
+    override fun updateCustomGameMode(minefield: Minefield) {
+        preferencesManager.apply {
+            putInt(PREFERENCE_CUSTOM_GAME_WIDTH, minefield.width)
+            putInt(PREFERENCE_CUSTOM_GAME_HEIGHT, minefield.height)
+            putInt(PREFERENCE_CUSTOM_GAME_MINES, minefield.mines)
+        }
+    }
 
     override fun getBoolean(key: String, defaultValue: Boolean): Boolean =
         preferencesManager.getBoolean(key, defaultValue)
@@ -48,33 +56,49 @@ class PreferencesRepository(
         preferencesManager.putInt(key, value)
 
     override fun useFlagAssistant(): Boolean =
-        getBoolean("preference_assistant", true)
+        getBoolean(PREFERENCE_ASSISTANT, true)
 
     override fun useHapticFeedback(): Boolean =
-        getBoolean("preference_vibration", true)
+        getBoolean(PREFERENCE_VIBRATION, true)
 
     override fun useLargeAreas(): Boolean =
-        getBoolean("preference_large_area", false)
+        getBoolean(PREFERENCE_USE_LARGE_TILE, false)
 
     override fun useAnimations(): Boolean =
-        getBoolean("preference_animation", true)
+        getBoolean(PREFERENCE_ANIMATION, true)
 
     override fun useQuestionMark(): Boolean =
-        getBoolean("preference_use_question_mark", true)
+        getBoolean(PREFERENCE_QUESTION_MARK, true)
 
     override fun controlStyle(): ControlStyle {
-        val index = getInt("preference_control_style", -1)
+        val index = getInt(PREFERENCE_CONTROL_STYLE, -1)
         return ControlStyle.values().getOrNull(index) ?: ControlStyle.Standard
     }
 
     override fun useControlStyle(controlStyle: ControlStyle) {
-        putInt("preference_control_style", controlStyle.ordinal)
+        putInt(PREFERENCE_CONTROL_STYLE, controlStyle.ordinal)
     }
 
     private fun migrateOldPreferences() {
-        if (getBoolean("preference_double_click_open", false)) {
-            useControlStyle(ControlStyle.DoubleClick)
-            preferencesManager.removeKey("preference_double_click_open")
+        if (preferencesManager.contains(PREFERENCE_OLD_DOUBLE_CLICK)) {
+            if (getBoolean(PREFERENCE_OLD_DOUBLE_CLICK, false)) {
+                useControlStyle(ControlStyle.DoubleClick)
+            }
+
+            preferencesManager.removeKey(PREFERENCE_OLD_DOUBLE_CLICK)
         }
+    }
+
+    private companion object {
+        private const val PREFERENCE_VIBRATION = "preference_vibration"
+        private const val PREFERENCE_ASSISTANT = "preference_assistant"
+        private const val PREFERENCE_ANIMATION = "preference_animation"
+        private const val PREFERENCE_USE_LARGE_TILE = "preference_large_area"
+        private const val PREFERENCE_QUESTION_MARK = "preference_use_question_mark"
+        private const val PREFERENCE_CONTROL_STYLE = "preference_control_style"
+        private const val PREFERENCE_OLD_DOUBLE_CLICK = "preference_double_click_open"
+        private const val PREFERENCE_CUSTOM_GAME_WIDTH = "preference_custom_game_width"
+        private const val PREFERENCE_CUSTOM_GAME_HEIGHT = "preference_custom_game_height"
+        private const val PREFERENCE_CUSTOM_GAME_MINES = "preference_custom_game_mines"
     }
 }

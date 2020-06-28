@@ -62,7 +62,6 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01"
     kapt "androidx.hilt:hilt-compiler:1.0.0-alpha01"
 
-
     // Room
     api 'androidx.room:room-runtime:2.2.5'
     api 'androidx.room:room-ktx:2.2.5'
@@ -85,6 +84,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.24.0'
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
+    testImplementation "io.mockk:mockk:1.10.0"
 
     // Core library
     androidTestImplementation 'androidx.test:core:1.2.0'
