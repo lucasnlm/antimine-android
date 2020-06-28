@@ -105,25 +105,29 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                 }
             }
 
-            if (instantAppManager.isEnabled()) {
-                setNeutralButton(R.string.install) { _, _ ->
-                    activity?.run {
-                        instantAppManager.showInstallPrompt(this, null, 0, null)
+            when {
+                instantAppManager.isEnabled() -> {
+                    setNeutralButton(R.string.install) { _, _ ->
+                        activity?.run {
+                            instantAppManager.showInstallPrompt(this, null, 0, null)
+                        }
                     }
                 }
-            } else if (isVictory) {
-                setNeutralButton(R.string.share) { _, _ ->
-                    val setup = viewModel.levelSetup.value
-                    val field = viewModel.field.value
+                isVictory -> {
+                    setNeutralButton(R.string.share) { _, _ ->
+                        val setup = viewModel.levelSetup.value
+                        val field = viewModel.field.value
 
-                    GlobalScope.launch {
-                        shareViewModel.share(setup, field, time)
+                        GlobalScope.launch {
+                            shareViewModel.share(setup, field, time)
+                        }
                     }
                 }
-            } else {
-                setNeutralButton(R.string.retry) { _, _ ->
-                    GlobalScope.launch {
-                        viewModel.retryGame(saveId.toInt())
+                else -> {
+                    setNeutralButton(R.string.retry) { _, _ ->
+                        GlobalScope.launch {
+                            viewModel.retryGame(saveId.toInt())
+                        }
                     }
                 }
             }
