@@ -14,10 +14,13 @@ import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.core.control.ControlStyle
+import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 class AreaAdapter(
     context: Context,
-    private val viewModel: GameViewModel
+    private val viewModel: GameViewModel,
+    private val preferencesRepository: IPreferencesRepository
 ) : RecyclerView.Adapter<AreaViewHolder>() {
 
     private var field = listOf<Area>()
@@ -74,7 +77,18 @@ class AreaAdapter(
                     }
                 }
 
-                override fun onSingleTapConfirmed(e: MotionEvent?): Boolean = false
+                override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+                    if (preferencesRepository.controlStyle() == ControlStyle.DoubleClick) {
+                        val position = adapterPosition
+                        if (position == RecyclerView.NO_POSITION) {
+                            Log.d(TAG, "Item no longer exists.")
+                        } else if (clickEnabled) {
+                            viewModel.onSingleClick(position)
+                            return true
+                        }
+                    }
+                    return false
+                }
             })
 
             itemView.setOnLongClickListener { target ->
@@ -91,11 +105,13 @@ class AreaAdapter(
             }
 
             itemView.setOnClickListener {
-                val position = adapterPosition
-                if (position == RecyclerView.NO_POSITION) {
-                    Log.d(TAG, "Item no longer exists.")
-                } else if (clickEnabled) {
-                    viewModel.onSingleClick(position)
+                if (preferencesRepository.controlStyle() != ControlStyle.DoubleClick) {
+                    val position = adapterPosition
+                    if (position == RecyclerView.NO_POSITION) {
+                        Log.d(TAG, "Item no longer exists.")
+                    } else if (clickEnabled) {
+                        viewModel.onSingleClick(position)
+                    }
                 }
             }
 

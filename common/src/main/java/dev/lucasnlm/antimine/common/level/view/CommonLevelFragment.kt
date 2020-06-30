@@ -13,14 +13,17 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
+import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import javax.inject.Inject
 
 abstract class CommonLevelFragment : Fragment() {
     @Inject
     lateinit var dimensionRepository: IDimensionRepository
+    @Inject
+    lateinit var preferencesRepository: IPreferencesRepository
 
     protected val viewModel: GameViewModel by activityViewModels()
-    protected val areaAdapter by lazy { AreaAdapter(requireContext(), viewModel) }
+    protected val areaAdapter by lazy { AreaAdapter(requireContext(), viewModel, preferencesRepository) }
     protected lateinit var recyclerGrid: RecyclerView
 
     abstract val levelFragmentResId: Int
