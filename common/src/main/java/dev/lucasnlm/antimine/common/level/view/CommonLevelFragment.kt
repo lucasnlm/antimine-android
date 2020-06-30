@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.common.level.view
 import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,19 +53,9 @@ abstract class CommonLevelFragment : Fragment() {
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
 
-        val typedValue = TypedValue()
-        val actionBarHeight = if (context.theme.resolveAttribute(android.R.attr.actionBarSize, typedValue, true)) {
-            TypedValue.complexToDimensionPixelSize(typedValue.data, resources.displayMetrics)
-        } else {
-            0
-        }
-
-        val resourceId: Int = resources.getIdentifier("navigation_bar_height", "dimen", "android")
-        val bottom = if (resourceId > 0) { resources.getDimensionPixelSize(resourceId) } else 0
-
-        val height = displayMetrics.heightPixels - actionBarHeight - bottom
+        val height = recyclerGrid.measuredHeight
         val recyclerViewHeight = (dimensionRepository.areaSize() * boardHeight)
-        val separatorsHeight = (dimensionRepository.areaSeparator() * (boardHeight - 1))
+        val separatorsHeight = (2 * dimensionRepository.areaSeparator() * (boardHeight - 1))
 
         return ((height - recyclerViewHeight - separatorsHeight) / 2).coerceAtLeast(0.0f).toInt()
     }
