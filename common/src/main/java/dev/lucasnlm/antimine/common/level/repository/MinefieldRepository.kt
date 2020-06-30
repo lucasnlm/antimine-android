@@ -35,10 +35,12 @@ class MinefieldRepository : IMinefieldRepository {
         dimensionRepository: IDimensionRepository
     ): Minefield {
         val fieldSize = dimensionRepository.areaSize()
+        val verticalGap = if (dimensionRepository.navigationBarHeight() > 0)
+            VERTICAL_STANDARD_GAP else VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM
 
         val display = dimensionRepository.displaySize()
         val calculatedWidth = ((display.width / fieldSize).toInt() - HORIZONTAL_STANDARD_GAP)
-        val calculatedHeight = ((display.height / fieldSize).toInt() - VERTICAL_STANDARD_GAP)
+        val calculatedHeight = ((display.height / fieldSize).toInt() - verticalGap)
         val finalWidth = calculatedWidth.coerceAtLeast(MIN_STANDARD_WIDTH)
         val finalHeight = calculatedHeight.coerceAtLeast(MIN_STANDARD_HEIGHT)
         val finalMines = (finalWidth * finalHeight * CUSTOM_LEVEL_RATIO).toInt()
@@ -55,6 +57,7 @@ class MinefieldRepository : IMinefieldRepository {
 
         private const val CUSTOM_LEVEL_RATIO = 0.2
         private const val HORIZONTAL_STANDARD_GAP = 1
+        private const val VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM = 4
         private const val VERTICAL_STANDARD_GAP = 3
         private const val MIN_STANDARD_WIDTH = 6
         private const val MIN_STANDARD_HEIGHT = 9

@@ -12,6 +12,7 @@ interface IDimensionRepository {
     fun areaSeparator(): Float
     fun displaySize(): Size
     fun actionBarSize(): Int
+    fun navigationBarHeight(): Int
 }
 
 data class Size(
@@ -50,5 +51,18 @@ class DimensionRepository(
         val actionBarSize: Int = styledAttributes.getDimension(0, 0.0f).toInt()
         styledAttributes.recycle()
         return actionBarSize
+    }
+
+    override fun navigationBarHeight(): Int {
+        // TODO use official mode if available
+        val resources = context.resources
+        val resourceId: Int = resources.getIdentifier(NAVIGATION_BAR_HEIGHT, DEF_TYPE_DIMEN, DEF_PACKAGE)
+        return if (resourceId > 0) { resources.getDimensionPixelSize(resourceId) } else 0
+    }
+
+    companion object {
+        private const val NAVIGATION_BAR_HEIGHT = "navigation_bar_height"
+        private const val DEF_TYPE_DIMEN = "dimen"
+        private const val DEF_PACKAGE = "android"
     }
 }
