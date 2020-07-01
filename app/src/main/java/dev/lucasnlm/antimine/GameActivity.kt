@@ -139,7 +139,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
                 val mines = area.filter { it.hasMine }
                 totalArea = area.count()
                 totalMines = mines.count()
-                rightMines = mines.map { if (it.mark.isFlag()) 1 else 0 }.sum()
+                rightMines = mines.count { it.mark.isFlag() }
             }
         )
 
@@ -166,13 +166,18 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
 
     override fun onResume() {
         super.onResume()
-        if (status == Status.Running) {
-            viewModel.refreshUserPreferences()
-            viewModel.resumeGame()
-            analyticsManager.sentEvent(Analytics.Resume())
-        }
+        val willReset = restartIfNeed()
 
-        restartIfNeed()
+        if (!willReset) {
+            if (status == Status.Running) {
+                viewModel.run {
+                    refreshUserPreferences()
+                    resumeGame()
+                }
+
+                analyticsManager.sentEvent(Analytics.Resume())
+            }
+        }
     }
 
     override fun onPause() {
@@ -536,9 +541,11 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
      * If user change any accessibility preference, the game will restart the activity to
      * apply these changes.
      */
-    private fun restartIfNeed() {
-        if (usingLargeArea != preferencesRepository.useLargeAreas()) {
-            recreate()
+    private fun restartIfNeed(): Boolean {
+        return (usingLargeArea != preferencesRepository.useLargeAreas()).also {
+            if (it) {
+                recreate()
+            }
         }
     }
 
