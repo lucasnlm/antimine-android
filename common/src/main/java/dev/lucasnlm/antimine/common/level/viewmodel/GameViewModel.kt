@@ -94,6 +94,7 @@ class GameViewModel @ViewModelInject constructor(
         difficulty.postValue(save.difficulty)
         levelSetup.postValue(setup)
         refreshAll()
+        refreshMineCount()
 
         when {
             gameController.hasAnyMineExploded() -> eventObserver.postValue(Event.GameOver)
