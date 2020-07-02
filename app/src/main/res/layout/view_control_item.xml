@@ -9,7 +9,10 @@
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:paddingHorizontal="32dp"
+    android:paddingLeft="32dp"
+    android:paddingRight="48dp"
+    android:paddingStart="32dp"
+    android:paddingEnd="48dp"
     android:paddingVertical="24dp">
 
     <androidx.appcompat.widget.AppCompatRadioButton
