@@ -294,8 +294,13 @@ class GameController {
                 }
             }
             ActionResponse.SwitchMark -> {
-                if (isCovered) switchMark()
-                1
+                if (!hasMines) {
+                    plantMinesExcept(id, true)
+                    openTile()
+                } else if (isCovered) {
+                    switchMark()
+                    1
+                } else 0
             }
             ActionResponse.HighlightNeighbors -> {
                 if (minesAround != 0) highlight() else 0
