@@ -831,4 +831,28 @@ class GameControllerTest {
             }
         }
     }
+
+    @Test
+    fun testIfDoubleClickPlantMinesOnFirstClick() {
+        gameControllerOf(9, 9, 72, 200L).run {
+            updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
+            assertFalse(hasMines)
+            assertEquals(0, field.filterNot { it.isCovered }.count())
+            singleClick(40)
+            assertTrue(hasMines)
+            at(40).findNeighbors().forEach { assertFalse(it.isCovered) }
+        }
+    }
+
+    @Test
+    fun testIfFastFlagPlantMinesOnFirstClick() {
+        gameControllerOf(9, 9, 72, 200L).run {
+            updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
+            assertFalse(hasMines)
+            assertEquals(0, field.filterNot { it.isCovered }.count())
+            singleClick(40)
+            assertTrue(hasMines)
+            at(40).findNeighbors().forEach { assertFalse(it.isCovered) }
+        }
+    }
 }
