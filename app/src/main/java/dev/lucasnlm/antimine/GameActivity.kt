@@ -485,6 +485,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
     private fun onGameEvent(event: Event) {
         when (event) {
             Event.ResumeGame -> {
+                status = Status.Running
                 invalidateOptionsMenu()
             }
             Event.StartNewGame -> {
