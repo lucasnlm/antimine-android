@@ -361,7 +361,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
             AlertDialog.Builder(this)
                 .setTitle(R.string.rating)
                 .setMessage(R.string.rating_message)
-                .setPositiveButton(R.string.rating_button) { _, _ ->
+                .setPositiveButton(R.string.yes) { _, _ ->
                     openRateUsLink("Dialog")
                 }
                 .setNegativeButton(R.string.rating_button_no) { _, _ ->
@@ -373,7 +373,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
 
     private fun newGameConfirmation(action: () -> Unit) {
         AlertDialog.Builder(this, R.style.MyDialog).apply {
-            setTitle(R.string.start_over)
+            setTitle(R.string.new_game)
             setMessage(R.string.retry_sure)
             setPositiveButton(R.string.resume) { _, _ -> action() }
             setNegativeButton(R.string.cancel, null)
@@ -553,9 +553,8 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
     private fun shareCurrentGame() {
         val levelSetup = viewModel.levelSetup.value
         val field = viewModel.field.value
-        val spentTime: Long? = if (status is Status.Over) currentTime else null
         GlobalScope.launch {
-            shareViewModel.share(levelSetup, field, spentTime)
+            shareViewModel.share(levelSetup, field)
         }
     }
 
