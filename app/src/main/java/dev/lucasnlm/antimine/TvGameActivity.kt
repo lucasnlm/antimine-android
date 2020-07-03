@@ -162,7 +162,7 @@ class TvGameActivity : AppCompatActivity() {
 
     private fun newGameConfirmation(action: () -> Unit) {
         AlertDialog.Builder(this, R.style.MyDialog).apply {
-            setTitle(R.string.start_over)
+            setTitle(R.string.new_game)
             setMessage(R.string.retry_sure)
             setPositiveButton(R.string.resume) { _, _ -> action() }
             setNegativeButton(R.string.cancel, null)

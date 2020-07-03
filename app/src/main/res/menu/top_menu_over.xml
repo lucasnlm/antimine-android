@@ -8,6 +8,6 @@
     <item
         android:id="@+id/reset"
         android:icon="@drawable/replay"
-        android:title="@string/start_over"
+        android:title="@string/new_game"
         app:showAsAction="ifRoom" />
 </menu>

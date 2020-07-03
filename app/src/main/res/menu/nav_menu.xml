@@ -84,7 +84,7 @@
         <item
             android:id="@+id/rate"
             android:checkable="false"
-            android:title="@string/rating_menu" />
+            android:title="@string/rating" />
     </group>
 
     <group android:id="@+id/about_group">

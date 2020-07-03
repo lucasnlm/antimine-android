@@ -13,10 +13,9 @@ import androidx.core.content.FileProvider
 import dev.lucasnlm.antimine.BuildConfig
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.Area
-import dev.lucasnlm.antimine.common.level.models.Minefield
-import dev.lucasnlm.antimine.common.level.models.Mark
-import dev.lucasnlm.antimine.common.level.models.AreaPalette
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
+import dev.lucasnlm.antimine.common.level.models.AreaPalette
+import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.view.paintOnCanvas
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -28,14 +27,11 @@ class ShareBuilder(
 ) {
     private val context: Context = context.applicationContext
 
-    suspend fun share(minefield: Minefield, field: Sequence<Area>, spentTime: Long?): Boolean {
-        val rightMines = field.count { it.hasMine && it.mark == Mark.Flag }
-        val totalMines = field.count { it.hasMine }
-
+    suspend fun share(minefield: Minefield, field: Sequence<Area>): Boolean {
         val file = createImage(minefield, field)
 
         return if (file != null) {
-            shareFile(context, file, rightMines, totalMines, spentTime)
+            shareFile(context, file)
         } else {
             false
         }
@@ -116,27 +112,13 @@ class ShareBuilder(
         return result
     }
 
-    private fun shareFile(context: Context, file: File, right: Int, total: Int, spentTime: Long?): Boolean {
+    private fun shareFile(context: Context, file: File): Boolean {
         val imageUri = FileProvider.getUriForFile(context, "${BuildConfig.APPLICATION_ID}.provider", file)
 
         val intent = Intent(Intent.ACTION_SEND).apply {
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             putExtra(Intent.EXTRA_STREAM, imageUri)
             putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name))
-            if (spentTime != null) {
-                putExtra(
-                    Intent.EXTRA_TEXT,
-                    context.getString(R.string.share_body_text, right, total, spentTime.toInt())
-                )
-            } else {
-                putExtra(
-                    Intent.EXTRA_TEXT,
-                    context.getString(
-                        R.string.share_body_text_generic,
-                        context.getString(R.string.app_name)
-                    )
-                )
-            }
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             type = "image/png"
         }

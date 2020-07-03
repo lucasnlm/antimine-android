@@ -57,9 +57,9 @@
     <string name="empty">Κενό</string>
     <string name="quit_confirm">Θα χάσετε όλες τις κινήσεις στο τρέχον παιχνίδι.\nΑλλά μπορείτε επίσης να εγκαταστήσετε το παιχνίδι πριν το κλείσετε.</string>
     <string name="you_won">Κέρδισες!</string>
-    <string name="victory">Νίκη</string>
+    <string name="victories">Νίκες</string>
     <string name="you_lost">Έχασες!</string>
-    <string name="defeat">Ήττα</string>
+    <string name="defeats">Ήττες</string>
     <string name="game_over_desc_0">Πατήστε παρατεταμένα ένα τετράγωνο για να τοποθετήσετε μια σημαία.</string>
     <string name="game_over_desc_1">Καλή τύχη στο επόμενο παιχνίδι σας.</string>
     <string name="game_over_desc_2">Πραγματοποίησες %1$d/%2$d σε %3$d δευτερόλεπτα.</string>
@@ -90,7 +90,6 @@
     <string name="settings_large_areas">Χρησιμοποιήστε μεγάλες περιοχές</string>
     <string name="settings_large_areas_desc">Αύξηση της περιοχής κουμπιών</string>
     <string name="rating">Αξιολόγηση</string>
-    <string name="rating_menu">Αξιολόγηση ❤</string>
     <string name="rating_message">Αν σας αρέσει αυτό το παιχνίδι, παρακαλούμε δώστε μας τα σχόλιά σας. Θα μας βοηθήσει πολύ.</string>
     <string name="rating_button">Ναι ❤️️️</string>
     <string name="rating_button_no">Όχι</string>
@@ -98,9 +97,9 @@
     <string name="total_time">Συνολικός Χρόνος</string>
     <string name="average_time">Μέσος χρόνος</string>
     <string name="performance">Επίδοση</string>
-    <string name="ok">OK</string>
-    <string name="use_question_mark">Use Question Flags</string>
-    <string name="control">Control</string>
+    <string name="ok">Εντάξει</string>
+    <string name="use_question_mark">Use Question Mark</string>
+    <string name="control">Ελεγχος</string>
     <string name="arrow">➞</string>
     <string name="flag_first">Flag First</string>
     <string name="single_click">Με ένα κλικ</string>

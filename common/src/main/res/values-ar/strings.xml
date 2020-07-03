@@ -57,9 +57,9 @@
     <string name="empty">فارغ</string>
     <string name="quit_confirm">ستفقد كل تقدمك في اللعبة الحالية.\nولكن يمكنك أيضًا تثبيت اللعبة قبل الخروج.</string>
     <string name="you_won">لقد فزت!</string>
-    <string name="victory">فزت</string>
+    <string name="victories">الانتصارات</string>
     <string name="you_lost">لقد خسرت!</string>
-    <string name="defeat">خسرت</string>
+    <string name="defeats">هزيمة</string>
     <string name="game_over_desc_0">اضغط مطولاً على مربع لوضع علم.</string>
     <string name="game_over_desc_1">حظا موفقا في لعبتك القادمة.</string>
     <string name="game_over_desc_2">You did %1$d/%2$d in %3$d seconds.</string>
@@ -90,7 +90,6 @@
     <string name="settings_large_areas">Use Large Areas</string>
     <string name="settings_large_areas_desc">Increases the touch area</string>
     <string name="rating">تعليقات</string>
-    <string name="rating_menu">Feedback ❤</string>
     <string name="rating_message">إذا أعجبتك هذه اللعبة، يرجى إعطائنا تعليقات. سوف يساعدنا كثيرا.</string>
     <string name="rating_button">نعم ❤️️️</string>
     <string name="rating_button_no">لا</string>
@@ -98,9 +97,9 @@
     <string name="total_time">مجموع الوقت</string>
     <string name="average_time">متوسط الوقت</string>
     <string name="performance">أداء</string>
-    <string name="ok">حسنًا</string>
-    <string name="use_question_mark">Use Question Flags</string>
-    <string name="control">Control</string>
+    <string name="ok">حسناً</string>
+    <string name="use_question_mark">Use Question Mark</string>
+    <string name="control">التحكم</string>
     <string name="arrow">🠨</string>
     <string name="flag_first">Flag First</string>
     <string name="single_click">نقرة واحدة</string>

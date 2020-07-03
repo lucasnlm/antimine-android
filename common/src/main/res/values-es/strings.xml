@@ -57,9 +57,9 @@
     <string name="empty">Vacío</string>
     <string name="quit_confirm">Vas a perder todas los movimientos en la partida acutal.\nPero también puedes instalar el juego antes de salir.</string>
     <string name="you_won">¡Ganaste!</string>
-    <string name="victory">Victoria</string>
+    <string name="victories">Victorias</string>
     <string name="you_lost">¡Perdiste!</string>
-    <string name="defeat">Derrota</string>
+    <string name="defeats">Derrotas</string>
     <string name="game_over_desc_0">Mantenga presionado un cuadrado para poner una bandera.</string>
     <string name="game_over_desc_1">Buena suerte en tu próxima partida.</string>
     <string name="game_over_desc_2">Hiciste %1$d/%2$d en %3$d segundos.</string>
@@ -90,7 +90,6 @@
     <string name="settings_large_areas">Usar áreas grandes</string>
     <string name="settings_large_areas_desc">Aumenta la zona táctil</string>
     <string name="rating">Comentarios</string>
-    <string name="rating_menu">Comentarios ❤</string>
     <string name="rating_message">Si te gusta este juego, por favor danos un comentario. Nos ayudará mucho.</string>
     <string name="rating_button">Sí ❤️️️</string>
     <string name="rating_button_no">No</string>
@@ -98,14 +97,14 @@
     <string name="total_time">Tiempo total</string>
     <string name="average_time">Tiempo promedio</string>
     <string name="performance">Desempeño</string>
-    <string name="ok">Aceptar</string>
-    <string name="use_question_mark">Usar banderas de interrogación</string>
-    <string name="control">Control</string>
+    <string name="ok">Vale</string>
+    <string name="use_question_mark">Use Question Mark</string>
+    <string name="control">Controles</string>
     <string name="arrow">➞</string>
     <string name="flag_first">Marcar primero</string>
     <string name="single_click">Un clic</string>
     <string name="double_click">Doble clic</string>
     <string name="long_press">Mantenga pulsado</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="open_tile">Open área</string>
+    <string name="flag_tile">Marcar área</string>
 </resources>

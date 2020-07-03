@@ -23,13 +23,10 @@ class ThirdPartiesFragment : Fragment(R.layout.fragment_third_party) {
 
         licenses.apply {
             setHasFixedSize(true)
-            addItemDecoration(
-                DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-            )
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             layoutManager = LinearLayoutManager(context)
+            adapter = ThirdPartyAdapter(aboutViewModel.getLicensesList())
         }
-
-        licenses.adapter = aboutViewModel.getLicenses()
     }
 
     companion object {

@@ -74,12 +74,12 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                         isVictory -> {
                             titleEmoji = endGameViewModel.randomVictoryEmoji()
                             title = context.getString(R.string.you_won)
-                            message = endGameViewModel.messageTo(context, rightMines, totalMines, time, isVictory)
+                            message = endGameViewModel.messageTo(context, time, isVictory)
                         }
                         else -> {
                             titleEmoji = endGameViewModel.randomGameOverEmoji()
                             title = context.getString(R.string.you_lost)
-                            message = endGameViewModel.messageTo(context, rightMines, totalMines, time, isVictory)
+                            message = endGameViewModel.messageTo(context, time, isVictory)
                         }
                     }
 
@@ -119,7 +119,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                         val field = viewModel.field.value
 
                         GlobalScope.launch {
-                            shareViewModel.share(setup, field, time)
+                            shareViewModel.share(setup, field)
                         }
                     }
                 }
