@@ -57,9 +57,9 @@
     <string name="empty">空</string>
     <string name="quit_confirm">您将失去当前游戏中的所有进度，但也可以在退出之前安装游戏。</string>
     <string name="you_won">你获胜了！</string>
-    <string name="victory">你获胜了</string>
+    <string name="victories">胜利</string>
     <string name="you_lost">你输了！</string>
-    <string name="defeat">你输了</string>
+    <string name="defeats">失败</string>
     <string name="game_over_desc_0">长按方块放置旗帜。</string>
     <string name="game_over_desc_1">下次游戏祝您好运。</string>
     <string name="game_over_desc_2">您在 %1$d 秒内完成了 %2$d/%3$d。</string>
@@ -90,7 +90,6 @@
     <string name="settings_large_areas">使用大区域</string>
     <string name="settings_large_areas_desc">增加触摸区域</string>
     <string name="rating">反馈</string>
-    <string name="rating_menu">反馈 ❤</string>
     <string name="rating_message">如果你喜欢这个游戏，请给我们反馈。这将对我们有很多帮助。</string>
     <string name="rating_button">是 ❤️️️</string>
     <string name="rating_button_no">否</string>
@@ -98,9 +97,9 @@
     <string name="total_time">总用时</string>
     <string name="average_time">平均用时</string>
     <string name="performance">性能</string>
-    <string name="ok">确定</string>
+    <string name="ok">好的</string>
     <string name="use_question_mark">使用问号旗标</string>
-    <string name="control">Control</string>
+    <string name="control">控制</string>
     <string name="arrow">➞</string>
     <string name="flag_first">标记在前</string>
     <string name="single_click">单次点击</string>

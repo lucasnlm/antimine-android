@@ -57,9 +57,9 @@
     <string name="empty">Пусто</string>
     <string name="quit_confirm">Ви втратите всі ходи на поточну гру.\nАле ви також можете встановити гру перед виходом.</string>
     <string name="you_won">Ви перемогли!</string>
-    <string name="victory">Перемога</string>
+    <string name="victories">Перемог</string>
     <string name="you_lost">Програш!</string>
-    <string name="defeat">Поразка</string>
+    <string name="defeats">Поразок</string>
     <string name="game_over_desc_0">Довго натискайте на квадрат, щоб поставити прапорець.</string>
     <string name="game_over_desc_1">Удачі у наступній грі.</string>
     <string name="game_over_desc_2">Я знайшов %1$d/%2$d мін за %3$d секунд.</string>
@@ -90,7 +90,6 @@
     <string name="settings_large_areas">Використовувати збільшену територію</string>
     <string name="settings_large_areas_desc">Збільшує площу дотику</string>
     <string name="rating">Відгук</string>
-    <string name="rating_menu">Відгук ❤</string>
     <string name="rating_message">Якщо вам подобається ця гра, то залиште нам свій відгук. Це нам дуже допоможе.</string>
     <string name="rating_button">Так ❤️️️</string>
     <string name="rating_button_no">Ні</string>
@@ -98,14 +97,14 @@
     <string name="total_time">Час перегляду</string>
     <string name="average_time">Середній час</string>
     <string name="performance">Ефективність</string>
-    <string name="ok">OK</string>
+    <string name="ok">Гаразд</string>
     <string name="use_question_mark">Використовувати прапорці «?»</string>
-    <string name="control">Control</string>
+    <string name="control">Controls</string>
     <string name="arrow">➞</string>
     <string name="flag_first">Flag First</string>
-    <string name="single_click">Single Click</string>
-    <string name="double_click">Double Click</string>
-    <string name="long_press">Long Press</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="single_click">Одинарний клік</string>
+    <string name="double_click">Подвійний клік</string>
+    <string name="long_press">Довге натискання</string>
+    <string name="open_tile">Відкрити плитку</string>
+    <string name="flag_tile">Прапорець</string>
 </resources>

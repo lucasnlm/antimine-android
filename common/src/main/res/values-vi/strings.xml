@@ -57,9 +57,9 @@
     <string name="empty">Trống</string>
     <string name="quit_confirm">Trò chơi bạn đang chơi sẽ bị mất.\nNhưng bạn có thể cài đặt trò chơi trước khi thoát.</string>
     <string name="you_won">Thắng rồi!</string>
-    <string name="victory">Chiến thắng</string>
+    <string name="victories">Đã thắng</string>
     <string name="you_lost">Thua rồi!</string>
-    <string name="defeat">Thua</string>
+    <string name="defeats">Thua</string>
     <string name="game_over_desc_0">Nhấn giữ ô vuông để cắm cờ.</string>
     <string name="game_over_desc_1">Chúc bạn may mắn lần sau.</string>
     <string name="game_over_desc_2">Bạn dò được %1$d/%2$d mìn trong vòng %3$d giây.</string>
@@ -90,7 +90,6 @@
     <string name="settings_large_areas">Vùng chạm lớn</string>
     <string name="settings_large_areas_desc">Tăng kích cỡ các vùng chạm</string>
     <string name="rating">Phản hồi</string>
-    <string name="rating_menu">Phản hồi ❤</string>
     <string name="rating_message">Nếu bạn thích trò chơi này, hãy gửi phản hồi cho chúng tôi. Nhận xét của bạn sẽ giúp chúng tôi rất nhiều.</string>
     <string name="rating_button">Có ❤️️️</string>
     <string name="rating_button_no">Không</string>
@@ -99,13 +98,13 @@
     <string name="average_time">Thời gian bình quân</string>
     <string name="performance">Hiệu năng</string>
     <string name="ok">OK</string>
-    <string name="use_question_mark">Dùng cờ câu hỏi</string>
-    <string name="control">Control</string>
+    <string name="use_question_mark">Dấu hỏi</string>
+    <string name="control">Controls</string>
     <string name="arrow">➞</string>
     <string name="flag_first">Flag First</string>
     <string name="single_click">Single Click</string>
-    <string name="double_click">Double Click</string>
-    <string name="long_press">Long Press</string>
+    <string name="double_click">Nháy kép</string>
+    <string name="long_press">Bấm giữ</string>
     <string name="open_tile">Open Tile</string>
     <string name="flag_tile">Flag Tile</string>
 </resources>

@@ -11,15 +11,20 @@ class AboutViewModel : ViewModel() {
     val eventObserver = MutableLiveData<AboutEvent>()
 
     fun getTranslatorsList() = mapOf(
+        "Arabic" to sequenceOf("Ahmad Alkurbi"),
         "Chinese Simplified" to sequenceOf("linsui"),
         "Czech" to sequenceOf("novas78@xda"),
+        "Dutch" to sequenceOf("Max Pietersma"),
+        "English" to sequenceOf("miguelsouza2212"),
         "French" to sequenceOf("Just Humeau"),
         "German" to sequenceOf("Oswald Boelcke", "wlls_ftn", "Trafalgar-Square"),
         "Greek" to sequenceOf("Retrial"),
+        "Italian" to sequenceOf("Mattia - MisterWeeMan", "Nicola Lorenzetti"),
         "Japanese" to sequenceOf("Ryota Hasegawa"),
+        "Polish" to sequenceOf("Sebastian Jasiński", "Sebastian Skibiński"),
         "Portuguese (BR)" to sequenceOf("Lucas Lima"),
-        "Russian" to sequenceOf("gaich@xda", "ask45t"),
-        "Spanish" to sequenceOf("Alfredo Jara"),
+        "Russian" to sequenceOf("gaich@xda", "ask45t", "Ekaterina543"),
+        "Spanish" to sequenceOf("Alfredo Jara", "Aldo Rodriguez", "Inail"),
         "Turkish" to sequenceOf("Fatih Fırıncı"),
         "Ukrainian" to sequenceOf("Dmitry Shuba"),
         "Vietnamese" to sequenceOf("pnhpnh")

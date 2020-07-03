@@ -57,9 +57,9 @@
     <string name="empty">Vide</string>
     <string name="quit_confirm">Vous perdrez toutes vos actions sur la partie actuelle.\nMais vous pouvez aussi installer le jeu avant de quitter.</string>
     <string name="you_won">Victoire !</string>
-    <string name="victory">Victoire</string>
+    <string name="victories">Victoires</string>
     <string name="you_lost">Défaite !</string>
-    <string name="defeat">Défaite</string>
+    <string name="defeats">Défaites</string>
     <string name="game_over_desc_0">Appuyez longtemps sur un carré pour poser un drapeau.</string>
     <string name="game_over_desc_1">Bonne chance pour votre prochaine partie.</string>
     <string name="game_over_desc_2">Vous avez obtenu le score de %1$d/%2$d en %3$d secondes.</string>
@@ -90,7 +90,6 @@
     <string name="settings_large_areas">Utiliser des grandes cases</string>
     <string name="settings_large_areas_desc">Augmenter la zone d\'interaction</string>
     <string name="rating">Retour d\'expérience</string>
-    <string name="rating_menu">Retour d\'expérience ❤️</string>
     <string name="rating_message">Si vous aimez ce jeu, n\'hésitez pas à jour donner un retour. Ça nous serait très utile.</string>
     <string name="rating_button">Oui ❤️</string>
     <string name="rating_button_no">Non</string>
@@ -100,12 +99,12 @@
     <string name="performance">Performance</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Utiliser des drapeaux points d’interrogation</string>
-    <string name="control">Control</string>
+    <string name="control">Contrôles</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Flag First</string>
-    <string name="single_click">Single Click</string>
-    <string name="double_click">Double Click</string>
-    <string name="long_press">Long Press</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="flag_first">Drapeau rapide</string>
+    <string name="single_click">Simple clic</string>
+    <string name="double_click">Double clic</string>
+    <string name="long_press">Appui Long</string>
+    <string name="open_tile">Ouvrir la tuile</string>
+    <string name="flag_tile">Placer le drapeau</string>
 </resources>

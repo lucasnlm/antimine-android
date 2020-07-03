@@ -96,7 +96,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
-            android:text="@string/victory"
+            android:text="@string/victories"
             android:textColor="@color/text_color" />
 
         <TextView
@@ -110,7 +110,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
-            android:text="@string/defeat"
+            android:text="@string/defeats"
             android:textColor="@color/text_color" />
 
         <TextView

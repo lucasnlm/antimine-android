@@ -57,9 +57,9 @@
     <string name="empty">Vuoto</string>
     <string name="quit_confirm">Perderai tutte le mosse effettuate nella partita in corso.\nMa puoi anche installare il gioco prima di uscire.</string>
     <string name="you_won">Hai vinto!</string>
-    <string name="victory">Vittoria</string>
+    <string name="victories">Vittorie</string>
     <string name="you_lost">Hai perso!</string>
-    <string name="defeat">Sconfitta</string>
+    <string name="defeats">Sconfitte</string>
     <string name="game_over_desc_0">Tieni premuto un quadrato per piazzare una bandiera.</string>
     <string name="game_over_desc_1">Buona fortuna nella prossima partita.</string>
     <string name="game_over_desc_2">Trovate %1$d/%2$d mine in %3$d secondi.</string>
@@ -90,7 +90,6 @@
     <string name="settings_large_areas">Usa grandi aree</string>
     <string name="settings_large_areas_desc">Aumenta l\'area di tocco</string>
     <string name="rating">Suggerimenti</string>
-    <string name="rating_menu">Suggerimenti ❤</string>
     <string name="rating_message">Se ti piace questo gioco, per favore inviaci suggerimenti. Puoi aiutare a migliorarlo.</string>
     <string name="rating_button">Sì ❤️️️</string>
     <string name="rating_button_no">No</string>
@@ -99,8 +98,8 @@
     <string name="average_time">Durata Media</string>
     <string name="performance">Prestazione</string>
     <string name="ok">OK</string>
-    <string name="use_question_mark">Usa punto interrogativo</string>
-    <string name="control">Control</string>
+    <string name="use_question_mark">Usa il Punto Interrogativo</string>
+    <string name="control">Comandi</string>
     <string name="arrow">➞</string>
     <string name="flag_first">Prima Bandiera</string>
     <string name="single_click">Singolo click</string>

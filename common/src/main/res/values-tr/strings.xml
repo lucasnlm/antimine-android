@@ -57,9 +57,9 @@
     <string name="empty">Boş</string>
     <string name="quit_confirm">Mevcut oyundaki tüm hamleleri kaybedeceksiniz.\nAncak oyunu çıkmadan önce de yükleyebilirsiniz.</string>
     <string name="you_won">Kazandın!</string>
-    <string name="victory">Zafer</string>
+    <string name="victories">Zaferler</string>
     <string name="you_lost">Kaybettin!</string>
-    <string name="defeat">Yenilgi</string>
+    <string name="defeats">Yenilgi</string>
     <string name="game_over_desc_0">Bayrak koymak için bir kareye uzun bas.</string>
     <string name="game_over_desc_1">Sonraki oyunda iyi şanslar.</string>
     <string name="game_over_desc_2">%3$d saniyede %1$d/%2$d yaptın.</string>
@@ -90,7 +90,6 @@
     <string name="settings_large_areas">Geniş Alanlar Kullan</string>
     <string name="settings_large_areas_desc">Dokunma alanını artırır</string>
     <string name="rating">Geri bildirim</string>
-    <string name="rating_menu">Geri bildirim ❤</string>
     <string name="rating_message">Bu oyunu beğendiyseniz, lütfen bize bir geri bildirim verin. Bize çok yardımcı olacak.</string>
     <string name="rating_button">Evet ❤️️️</string>
     <string name="rating_button_no">Hayır</string>
@@ -99,8 +98,8 @@
     <string name="average_time">Ortalama Süre</string>
     <string name="performance">Performans</string>
     <string name="ok">Tamam</string>
-    <string name="use_question_mark">Soru İşaretleri Kullan</string>
-    <string name="control">Control</string>
+    <string name="use_question_mark">Soru İşareti Kullan</string>
+    <string name="control">Kontroller</string>
     <string name="arrow">➞</string>
     <string name="flag_first">Önce İşaretle</string>
     <string name="single_click">Tek Tıklama</string>

@@ -57,9 +57,9 @@
     <string name="empty">Пусто</string>
     <string name="quit_confirm">Все ходы будут потеряны в текущей игре.\nНо вы также можете установить игру перед выходом.</string>
     <string name="you_won">Вы победили!</string>
-    <string name="victory">Победа</string>
+    <string name="victories">Победы</string>
     <string name="you_lost">Вы проиграли!</string>
-    <string name="defeat">Поражение</string>
+    <string name="defeats">Поражения</string>
     <string name="game_over_desc_0">Удерживайте нажатие на квадрате для установки флага.</string>
     <string name="game_over_desc_1">Удачи в вашей следующий раз.</string>
     <string name="game_over_desc_2">Вы выполнили %1$d/%2$d за %3$d секунд.</string>
@@ -90,7 +90,6 @@
     <string name="settings_large_areas">Использовать большие области</string>
     <string name="settings_large_areas_desc">Увеличивает зону касания</string>
     <string name="rating">Обратная связь</string>
-    <string name="rating_menu">Обратная связь ❤</string>
     <string name="rating_message">Нравится игра? Оставьте отзыв, пожалуйста. Это нам очень поможет.</string>
     <string name="rating_button">Да ❤️️️</string>
     <string name="rating_button_no">Нет</string>
@@ -99,8 +98,8 @@
     <string name="average_time">Среднее время</string>
     <string name="performance">Производительность</string>
     <string name="ok">OK</string>
-    <string name="use_question_mark">Использовать флаги-вопросы</string>
-    <string name="control">Control</string>
+    <string name="use_question_mark">Использовать знак вопроса</string>
+    <string name="control">Управление</string>
     <string name="arrow">➞</string>
     <string name="flag_first">Отметить первым</string>
     <string name="single_click">Одно нажатие</string>

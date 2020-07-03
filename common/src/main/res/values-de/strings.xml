@@ -57,9 +57,9 @@
     <string name="empty">Leer</string>
     <string name="quit_confirm">Du wirst alle Züge im aktuellen Spiel verlieren.\n Doch du kannst auch das Spiel vor der Beendigung installieren.</string>
     <string name="you_won">Du hast gewonnen!</string>
-    <string name="victory">Sieg</string>
+    <string name="victories">Siege</string>
     <string name="you_lost">Du hast verloren!</string>
-    <string name="defeat">Niederlage</string>
+    <string name="defeats">Niederlagen</string>
     <string name="game_over_desc_0">Lang auf das Quadrat drücken, um eine Markierung zu setzen.</string>
     <string name="game_over_desc_1">Viel Glück bei deinem nächsten Spiel.</string>
     <string name="game_over_desc_2">Du hast %1$d/%2$d in %3$d Sekunden gemacht.</string>
@@ -90,7 +90,6 @@
     <string name="settings_large_areas">Große Flächen verwenden</string>
     <string name="settings_large_areas_desc">Vergrößert die Tastfläche</string>
     <string name="rating">Rückmeldung</string>
-    <string name="rating_menu">Rückmeldung ❤</string>
     <string name="rating_message">Wenn dir dieses Spiel gefällt, gib uns bitte eine Rückmeldung. Es wird uns sehr helfen.</string>
     <string name="rating_button">Ja ❤️️️</string>
     <string name="rating_button_no">Nein</string>
@@ -98,9 +97,9 @@
     <string name="total_time">Gesamtzeit</string>
     <string name="average_time">Durchschnittliche Zeit</string>
     <string name="performance">Erfolgsergebnis</string>
-    <string name="ok">OK</string>
-    <string name="use_question_mark">Fragen-Fahne zeigen</string>
-    <string name="control">Control</string>
+    <string name="ok">Ok</string>
+    <string name="use_question_mark">Fragezeichen benutzen</string>
+    <string name="control">Steuerung</string>
     <string name="arrow">➞</string>
     <string name="flag_first">Erste markieren</string>
     <string name="single_click">Einzelklick</string>

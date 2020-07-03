@@ -57,9 +57,9 @@
     <string name="empty">Prázdné</string>
     <string name="quit_confirm">Ztratíte všechny tahy v aktuální hře!\nAle také můžete hru nainstalovat před ukončením.</string>
     <string name="you_won">Vyhráli jste!</string>
-    <string name="victory">Vítězství</string>
+    <string name="victories">Vítězství</string>
     <string name="you_lost">Prohráli jste!</string>
-    <string name="defeat">Prohra</string>
+    <string name="defeats">Prohry</string>
     <string name="game_over_desc_0">Dlouhým stisknutím čtverce umístíte vlajku.</string>
     <string name="game_over_desc_1">Hodně štěstí při další hře.</string>
     <string name="game_over_desc_2">Dokončili jste %1$d/%2$d za %3$d sekund.</string>
@@ -90,7 +90,6 @@
     <string name="settings_large_areas">Použít velké oblasti</string>
     <string name="settings_large_areas_desc">Zvyšuje dotykovou oblast</string>
     <string name="rating">Komentář</string>
-    <string name="rating_menu">Komentář ❤</string>
     <string name="rating_message">Pokud se vám tato hra líbí, dejte nám prosím zpětnou vazbu. Hodně nám to pomůže.</string>
     <string name="rating_button">Ano ❤️️️</string>
     <string name="rating_button_no">Ne</string>
@@ -99,8 +98,8 @@
     <string name="average_time">Průměrný čas</string>
     <string name="performance">Výkon</string>
     <string name="ok">OK</string>
-    <string name="use_question_mark">Po užívat nejisté vlaječky</string>
-    <string name="control">Control</string>
+    <string name="use_question_mark">Použít otazníky</string>
+    <string name="control">Ovládání</string>
     <string name="arrow">➞</string>
     <string name="flag_first">Označit jako první</string>
     <string name="single_click">Jedno klepnutí</string>

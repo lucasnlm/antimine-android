@@ -14,7 +14,9 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-        resConfigs 'ar', 'en', 'cs', 'de', 'el', 'es', 'fr', 'ja', 'pt', 'ru', 'tr', 'uk', 'vi', 'zh'
+        resConfigs 'af', 'ar', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es', 'fi',
+                   'fr', 'he', 'hi', 'hu', 'it', 'ja', 'ko', 'nl', 'no', 'pl',
+                   'pt', 'ro', 'ru', 'sv', 'th', 'tr', 'uk', 'vi', 'zh'
     }
 
     compileOptions {
