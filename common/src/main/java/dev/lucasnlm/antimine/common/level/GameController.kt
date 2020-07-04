@@ -21,7 +21,6 @@ import kotlin.random.Random
  */
 class GameController {
     private val minefield: Minefield
-    private val randomGenerator: Random
     private val startTime = System.currentTimeMillis()
     private var saveId = 0
     private var firstOpen: FirstOpen = FirstOpen.Unknown
@@ -41,7 +40,6 @@ class GameController {
     constructor(minefield: Minefield, seed: Long, saveId: Int? = null) {
         this.minefieldCreator = MinefieldCreator(minefield, Random(seed))
         this.minefield = minefield
-        this.randomGenerator = Random(seed)
         this.seed = seed
         this.saveId = saveId ?: 0
 
@@ -51,7 +49,6 @@ class GameController {
     constructor(save: Save) {
         this.minefieldCreator = MinefieldCreator(save.minefield, Random(save.seed))
         this.minefield = save.minefield
-        this.randomGenerator = Random(save.seed)
         this.saveId = save.uid
         this.seed = save.seed
         this.firstOpen = save.firstOpen
@@ -64,10 +61,10 @@ class GameController {
     fun getArea(id: Int) = field.first { it.id == id }
 
     @Deprecated("Will be removed")
-    fun plantMinesExcept(safeId: Int) {
-        field = minefieldCreator.create(safeId)
+    fun plantMinesExcept(safeId: Int, includeSafeZone: Boolean = false) {
+        field = minefieldCreator.create(safeId, includeSafeZone)
         mines = field.filter { it.hasMine }.asSequence()
-        hasMines = true
+        hasMines = mines.count() != 0
     }
 
     /**
@@ -238,7 +235,7 @@ class GameController {
         val changed = when (actionResponse) {
             ActionResponse.OpenTile -> {
                 if (!hasMines) {
-                    plantMinesExcept(id)
+                    plantMinesExcept(id, true)
                 }
 
                 if (mark.isNotNone()) {
@@ -250,7 +247,7 @@ class GameController {
             }
             ActionResponse.SwitchMark -> {
                 if (!hasMines) {
-                    plantMinesExcept(id)
+                    plantMinesExcept(id, true)
                     openTile()
                 } else if (isCovered) {
                     switchMark()

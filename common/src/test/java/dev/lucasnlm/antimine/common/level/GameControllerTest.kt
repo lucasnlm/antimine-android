@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.common.level
 
+import dev.lucasnlm.antimine.common.level.logic.filterNeighborsOf
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.Minefield
@@ -374,7 +375,7 @@ class GameControllerTest {
                 field.map { if (it.isCovered) 1 else 0 }.toList()
             )
 
-            // It won't open any if the mines were not flagged.
+            // It won't open any if the mines were flagged.
             singleClick(14)
             getArea(14).openNeighbors()
             assertEquals(
@@ -389,7 +390,7 @@ class GameControllerTest {
             )
 
             // After flag its neighbors, it must open all clean neighbors.
-            getArea(14).findNeighbors().filter { it.hasMine }.forEach { it.mark = Mark.Flag }
+            field.filterNeighborsOf(getArea(14)).filter { it.hasMine }.forEach { it.mark = Mark.Flag }
             getArea(14).openNeighbors()
             assertEquals(
                 listOf(
@@ -683,7 +684,7 @@ class GameControllerTest {
             updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
             singleClick(3)
             assertFalse(at(3).isCovered)
-            at(3).findNeighbors().forEach {
+            field.filterNeighborsOf(at(3)).forEach {
                 assertTrue(it.isCovered)
             }
 
@@ -693,7 +694,7 @@ class GameControllerTest {
             }
 
             longPress(3)
-            at(3).findNeighbors().forEach {
+            field.filterNeighborsOf(at(3)).forEach {
                 if (it.hasMine) {
                     assertTrue(it.isCovered)
                 } else {
@@ -726,7 +727,7 @@ class GameControllerTest {
             updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
             longPress(3)
             assertFalse(at(3).isCovered)
-            at(3).findNeighbors().forEach {
+            field.filterNeighborsOf(at(3)).forEach {
                 assertTrue(it.isCovered)
             }
 
@@ -736,7 +737,7 @@ class GameControllerTest {
             }
 
             singleClick(3)
-            at(3).findNeighbors().forEach {
+            field.filterNeighborsOf(at(3)).forEach {
                 if (it.hasMine) {
                     assertTrue(it.isCovered)
                 } else {
@@ -802,7 +803,7 @@ class GameControllerTest {
             updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
             doubleClick(3)
             assertFalse(at(3).isCovered)
-            at(3).findNeighbors().forEach {
+            field.filterNeighborsOf(at(3)).forEach {
                 assertTrue(it.isCovered)
             }
 
@@ -812,7 +813,7 @@ class GameControllerTest {
             }
 
             doubleClick(3)
-            at(3).findNeighbors().forEach {
+            field.filterNeighborsOf(at(3)).forEach {
                 if (it.hasMine) {
                     assertTrue(it.isCovered)
                 } else {
@@ -830,7 +831,7 @@ class GameControllerTest {
             assertEquals(0, field.filterNot { it.isCovered }.count())
             singleClick(40)
             assertTrue(hasMines)
-            at(40).findNeighbors().forEach { assertFalse(it.isCovered) }
+            field.filterNeighborsOf(at(40)).forEach { assertFalse(it.isCovered) }
         }
     }
 
@@ -842,7 +843,7 @@ class GameControllerTest {
             assertEquals(0, field.filterNot { it.isCovered }.count())
             singleClick(40)
             assertTrue(hasMines)
-            at(40).findNeighbors().forEach { assertFalse(it.isCovered) }
+            field.filterNeighborsOf(at(40)).forEach { assertFalse(it.isCovered) }
         }
     }
 }
