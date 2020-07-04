@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ar">
+    <string name="app_name">Antimine</string>
+    <string name="app_description">يجب عليك مسح لوحة مستطيلة تحتوي على ألغام مخفية دون تفجير أي منها.</string>
+    <string name="games">ألعاب</string>
+    <string name="previous_games">الألعاب السابقة</string>
+    <string name="minefield">الصعوبة</string>
+    <string name="standard">اساسي</string>
+    <string name="beginner">مبتدئ</string>
+    <string name="intermediate">متوسط</string>
+    <string name="expert">خبير</string>
+    <string name="open">فتح</string>
+    <string name="settings">الإعدادات</string>
+    <string name="animations">الرسوم المتحركة</string>
+    <string name="vibration">تغذية راجعة باللمس</string>
+    <string name="about">حول</string>
+    <string name="events">إحصائيات</string>
+    <string name="custom">مخصص</string>
+    <string name="start">بدء</string>
+    <string name="width">العرض</string>
+    <string name="height">الارتفاع</string>
+    <string name="mines">الألغام</string>
+    <string name="retry_sure">إذا بدأت لعبة جديدة،\nىستفقد تقدمك الحالي.</string>
+    <string name="show_licenses">إظهار التراخيص</string>
+    <string name="new_game_request">هل تريد بدء لعبة جديدة؟</string>
+    <string name="mines_remaining">%d لغم</string>
+    <string name="game_time">وقت اللعب</string>
+    <string name="mine">لغم</string>
+    <string name="settings_general">عام</string>
+    <string name="settings_gameplay">أسلوب اللعبة</string>
+    <string name="settings_accessibility">إمكانية الوصول</string>
+    <string name="settings_large_areas">Use Large Areas</string>
+    <string name="rating">تعليقات</string>
+    <string name="rating_message">إذا أعجبتك هذه اللعبة، يرجى إعطائنا تعليقات. سوف يساعدنا كثيرا.</string>
+    <string name="used_software_text">تستخدم هذه اللعبة برمجيات طرف ثالث التالية:</string>
+    <string name="translators_text">تمت ترجمة هذه اللعبة من قبل الأشخاص التالين:</string>
+    <string name="sign_in_failed">فشل تسجيل الدخول. يرجى التحقق من اتصال الشبكة والمحاولة مرة أخرى.</string>
+    <string name="quit_confirm">ستفقد كل تقدمك في اللعبة الحالية.\nولكن يمكنك أيضًا تثبيت اللعبة قبل الخروج.</string>
+    <string name="you_won">لقد فزت!</string>
+    <string name="victories">الانتصارات</string>
+    <string name="you_lost">لقد خسرت!</string>
+    <string name="defeats">هزيمة</string>
+    <string name="game_over_desc_1">حظا موفقا في لعبتك القادمة.</string>
+    <string name="game_over_desc_4">انتهيت من حقل الألغام في %1$d ثانية.</string>
+    <string name="fail_to_share">فشل في مشاركة</string>
+    <string name="version_s">الإصدار %1$s</string>
+    <string name="sound_effects">مؤثرات صوتية</string>
+    <string name="quit">خروج</string>
+    <string name="are_you_sure">هل أنت متأكد؟</string>
+    <string name="enable_automatic_flags">Enable automatic placing of flags</string>
+    <string name="open_areas">فتح المناطق</string>
+    <string name="total_time">مجموع الوقت</string>
+    <string name="average_time">متوسط الوقت</string>
+    <string name="performance">أداء</string>
+    <string name="ok">حسناً</string>
+    <string name="use_question_mark">استخدام علامة السؤال</string>
+    <string name="control">التحكم</string>
+    <string name="arrow">🠨</string>
+    <string name="flag_first">Flag First</string>
+    <string name="single_click">نقرة واحدة</string>
+    <string name="double_click">انقر مرتين</string>
+    <string name="long_press">ضغط مطّول</string>
+    <string name="open_tile">فتح بلاط</string>
+    <string name="flag_tile">Flag Tile</string>
+    <string name="retry">إعادة المحاولة</string>
+    <string name="empty">فارغ</string>
+    <string name="unknown_error">خطأ غير معروف.</string>
+    <string name="leaderboards">المتصدرين</string>
+    <string name="cancel">الغاء</string>
+    <string name="resume">استأنف</string>
+    <string name="yes">نعم</string>
+    <string name="rating_button_no">لا</string>
+    <string name="general">عام</string>
+    <string name="source_code">رمز المصدر</string>
+    <string name="translation">الترجمة</string>
+    <string name="licenses">التراخيص</string>
+    <string name="google_play_games">ألعاب Google Play</string>
+    <string name="install">تثبيت</string>
+    <string name="connect">الاتصال</string>
+    <string name="connecting">جاري الاتصال…</string>
+    <string name="disconnect">قطع الاتصال</string>
+    <string name="disconnected">غير متصل</string>
+    <string name="new_game">لعبة جديدة</string>
+    <string name="share">مشاركة</string>
+    <string name="share_menu">مشاركة…</string>
+    <string name="no_network">لا يوجد اتصال بالإنترنت.</string>
+    <string name="open_menu">فتح القائمة</string>
+    <string name="close_menu">إغلاق القائمة</string>
+    <string name="all_mines_disabled">جميع الألغام معطلة.</string>
+    <string name="desc_convered_area">Covered area</string>
+    <string name="desc_marked_area">Marked area</string>
+    <string name="desc_question_area">Doubtful area</string>
+    <string name="desc_wrongly_marked_area">Wrongly marked area</string>
+    <string name="exploded_mine">انفجر لغم</string>
+    <string name="game_started">بدأت اللعبة</string>
+    <string name="you_exploded_a_mine">لقد فجرت لغم!</string>
+    <string name="flag_placed">وضع العلم!</string>
+    <string name="flag_removed">إزالة العلم!</string>
+</resources>

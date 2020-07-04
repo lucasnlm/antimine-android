@@ -10,9 +10,6 @@ android {
         versionName '7.2.3'
         minSdkVersion 16
         targetSdkVersion 30
-        resConfigs 'af', 'ar', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es', 'fi',
-                   'fr', 'he', 'hi', 'hu', 'it', 'ja', 'ko', 'nl', 'no', 'pl',
-                   'pt', 'ro', 'ru', 'sv', 'th', 'tr', 'uk', 'vi', 'zh'
     }
 
     buildTypes {
