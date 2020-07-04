@@ -9,7 +9,7 @@ class MinefieldCreatorTest {
     @Test
     fun testMinefieldCreation() {
         val creator = MinefieldCreator(Minefield(4, 4, 9), Random(200))
-        val map = creator.createMap(2)
+        val map = creator.create(2)
         assertEquals(
             listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
             map.map { it.id }.toList()
@@ -19,7 +19,7 @@ class MinefieldCreatorTest {
     @Test
     fun testMinefieldCreationMines() {
         val creator = MinefieldCreator(Minefield(5, 5, 99), Random(200))
-        val map = creator.createMap(12)
+        val map = creator.create(12)
         assertEquals(
             listOf(
                 1, 1, 1, 1, 1,
@@ -36,7 +36,7 @@ class MinefieldCreatorTest {
     @Test
     fun testMinefieldCreationMinesTips() {
         val creator = MinefieldCreator(Minefield(4, 4, 9), Random(200))
-        val map = creator.createMap(2)
+        val map = creator.create(2)
         assertEquals(
             listOf(
                 0, 2, 0, 0,
@@ -50,7 +50,7 @@ class MinefieldCreatorTest {
     @Test
     fun testMinefieldCreationPosition() {
         val creator = MinefieldCreator(Minefield(4, 4, 9), Random(200))
-        val map = creator.createMap(2)
+        val map = creator.create(2)
         assertEquals(
             listOf(
                 (0 to 0), (1 to 0), (2 to 0), (3 to 0),

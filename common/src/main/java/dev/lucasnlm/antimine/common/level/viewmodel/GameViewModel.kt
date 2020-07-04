@@ -50,7 +50,7 @@ class GameViewModel @ViewModelInject constructor(
     private var currentDifficulty: Difficulty = Difficulty.Standard
     private var initialized = false
 
-    val field = MutableLiveData<Sequence<Area>>()
+    val field = MutableLiveData<List<Area>>()
     val fieldRefresh = MutableLiveData<Int>()
     val elapsedTimeSeconds = MutableLiveData<Long>()
     val mineCount = MutableLiveData<Int>()
@@ -121,7 +121,7 @@ class GameViewModel @ViewModelInject constructor(
         val setup = save.minefield
         gameController = GameController(setup, save.seed, save.uid).apply {
             if (save.firstOpen is FirstOpen.Position) {
-                plantMinesExcept(save.firstOpen.value, true)
+                //plantMinesExcept(save.firstOpen.value, true)
                 singleClick(save.firstOpen.value)
             }
         }

@@ -4,6 +4,7 @@ import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.database.models.Stats
+import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Mark
@@ -33,86 +34,40 @@ class GameController {
 
     val seed: Long
 
-    lateinit var field: Sequence<Area>
+    private val minefieldCreator: MinefieldCreator
+    lateinit var field: List<Area>
         private set
 
     constructor(minefield: Minefield, seed: Long, saveId: Int? = null) {
+        this.minefieldCreator = MinefieldCreator(minefield, Random(seed))
         this.minefield = minefield
         this.randomGenerator = Random(seed)
         this.seed = seed
         this.saveId = saveId ?: 0
-        createEmptyField()
+
+        this.field = minefieldCreator.createEmpty()
     }
 
     constructor(save: Save) {
+        this.minefieldCreator = MinefieldCreator(save.minefield, Random(save.seed))
         this.minefield = save.minefield
         this.randomGenerator = Random(save.seed)
         this.saveId = save.uid
         this.seed = save.seed
         this.firstOpen = save.firstOpen
 
-        this.field = save.field.asSequence()
+        this.field = save.field
         this.mines = this.field.filter { it.hasMine }.asSequence()
         this.hasMines = this.mines.count() != 0
     }
 
-    private fun createEmptyField() {
-        val width = minefield.width
-        val height = minefield.height
-        val fieldSize = width * height
-
-        hasMines = false
-        mines = emptySequence()
-        field = (0 until fieldSize).map { index ->
-            val yPosition = floor((index / width).toDouble()).toInt()
-            val xPosition = (index % width)
-            Area(index, xPosition, yPosition)
-        }.asSequence()
-    }
-
     fun getArea(id: Int) = field.first { it.id == id }
 
-    fun plantMinesExcept(index: Int, includeSafeArea: Boolean = false) {
-        plantRandomMines(index, includeSafeArea)
-        putMinesTips()
-    }
-
-    private fun plantRandomMines(safeIndex: Int, includeSafeArea: Boolean) {
-        getArea(safeIndex).run {
-            safeZone = true
-
-            if (includeSafeArea) {
-                findNeighbors().forEach {
-                    it.safeZone = true
-                }
-
-                if (minefield.width > 9) {
-                    findCrossNeighbors().forEach { neighbor ->
-                        neighbor
-                            .findCrossNeighbors()
-                            .filterNot { it.safeZone }
-                            .forEach { it.safeZone = true }
-                    }
-                }
-            }
-        }
-
-        firstOpen = FirstOpen.Position(safeIndex)
-        field.filterNot { it.safeZone }
-            .toSet()
-            .shuffled(randomGenerator)
-            .take(minefield.mines)
-            .forEach { it.hasMine = true }
-        mines = field.filter { it.hasMine }
-        hasMines = mines.count() != 0
-    }
-
-    private fun putMinesTips() {
-        field.forEach {
-            it.minesAround = if (it.hasMine) 0 else it.findNeighbors().count { neighbor ->
-                neighbor.hasMine
-            }
-        }
+    @Deprecated("Will be removed")
+    fun plantMinesExcept(safeId: Int) {
+        field = minefieldCreator.create(safeId)
+        mines = field.filter { it.hasMine }.asSequence()
+        hasMines = true
     }
 
     /**
@@ -283,7 +238,7 @@ class GameController {
         val changed = when (actionResponse) {
             ActionResponse.OpenTile -> {
                 if (!hasMines) {
-                    plantMinesExcept(id, true)
+                    plantMinesExcept(id)
                 }
 
                 if (mark.isNotNone()) {
@@ -295,7 +250,7 @@ class GameController {
             }
             ActionResponse.SwitchMark -> {
                 if (!hasMines) {
-                    plantMinesExcept(id, true)
+                    plantMinesExcept(id)
                     openTile()
                 } else if (isCovered) {
                     switchMark()
