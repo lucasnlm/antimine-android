@@ -5,15 +5,15 @@ import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
+import dev.lucasnlm.antimine.common.level.logic.filterNeighborsOf
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Score
-import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.ActionFeedback
+import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.GameControl
-import kotlin.math.floor
 import kotlin.random.Random
 
 /**
@@ -35,7 +35,7 @@ class GameController {
     val seed: Long
 
     private val minefieldCreator: MinefieldCreator
-    lateinit var field: List<Area>
+    var field: List<Area>
         private set
 
     constructor(minefield: Minefield, seed: Long, saveId: Int? = null) {
@@ -104,18 +104,18 @@ class GameController {
         // a square that was previously unflagged by player.
         val assists = mutableListOf<Area>()
 
-        mines.filter { it.mark.isPureNone() }.forEach { field ->
-            val neighbors = field.findNeighbors()
+        mines.filter { it.mark.isPureNone() }.forEach { it ->
+            val neighbors = field.filterNeighborsOf(it)
             val neighborsCount = neighbors.count()
             val revealedNeighborsCount = neighbors.count { neighbor ->
                 !neighbor.isCovered || (neighbor.hasMine && neighbor.mark.isFlag())
             }
 
             if (revealedNeighborsCount == neighborsCount) {
-                assists.add(field)
-                field.mark = Mark.Flag
+                assists.add(it)
+                it.mark = Mark.Flag
             } else {
-                field.mark = Mark.None
+                it.mark = Mark.None
             }
         }
 
@@ -154,7 +154,7 @@ class GameController {
 
     fun hasIsolatedAllMines() =
         mines.map {
-            val neighbors = it.findNeighbors()
+            val neighbors = field.filterNeighborsOf(it)
             val neighborsCount = neighbors.count()
             val isolatedNeighborsCount = neighbors.count { neighbor ->
                 !neighbor.isCovered || neighbor.hasMine
@@ -299,7 +299,7 @@ class GameController {
                 if (hasMine) {
                     mistake = true
                 } else if (minesAround == 0) {
-                    findNeighbors()
+                    field.filterNeighborsOf(this)
                         .filter { it.isCovered }
                         .also {
                             changes += it.count()
@@ -324,7 +324,7 @@ class GameController {
         var changed = 1
         apply {
             highlighted = !highlighted
-            findNeighbors()
+            field.filterNeighborsOf(this)
                 .filter { it.mark.isNone() && it.isCovered }
                 .also { changed += it.count() }
                 .forEach { it.highlighted = !it.highlighted }
@@ -333,7 +333,7 @@ class GameController {
     }
 
     fun Area.openNeighbors(): Int {
-        val neighbors = findNeighbors()
+        val neighbors = field.filterNeighborsOf(this)
         val flaggedCount = neighbors.count { it.mark.isFlag() }
         return if (flaggedCount >= minesAround) {
             neighbors
@@ -345,17 +345,5 @@ class GameController {
         } else {
             0
         }
-    }
-
-    fun Area.findNeighbors() = sequenceOf(
-        1 to 0, 1 to 1, 0 to 1, -1 to 1, -1 to 0, -1 to -1, 0 to -1, 1 to -1
-    ).map { (x, y) -> getNeighbor(x, y) }.filterNotNull()
-
-    private fun Area.findCrossNeighbors() = sequenceOf(
-        1 to 0, 0 to 1, -1 to 0, 0 to -1
-    ).map { (x, y) -> getNeighbor(x, y) }.filterNotNull()
-
-    private fun Area.getNeighbor(x: Int, y: Int) = field.firstOrNull {
-        (it.posX == this.posX + x) && (it.posY == this.posY + y)
     }
 }
