@@ -8,7 +8,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dev.lucasnlm.antimine.common.level.models.Area
 import java.lang.reflect.Type
 
-class FieldConverter {
+class AreaConverter {
     private val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
     private val jsonAdapter: JsonAdapter<List<Area>>
 

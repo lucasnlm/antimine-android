@@ -82,16 +82,6 @@ class GameControllerTest {
     }
 
     @Test
-    fun testPlantMinesWithSafeArea() {
-        gameControllerOf(9, 9, 12, 200L).run {
-            plantMinesExcept(3)
-            field.filter { it.safeZone }.forEach {
-                assertFalse(it.hasMine)
-            }
-        }
-    }
-
-    @Test
     fun testLevelRandomness() {
         assertTrue(
             gameControllerOf(3, 3, 1, 200L).apply {

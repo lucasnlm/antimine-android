@@ -5,7 +5,6 @@ data class Area(
     val posX: Int,
     val posY: Int,
     var minesAround: Int = 0,
-    var safeZone: Boolean = false,
     var hasMine: Boolean = false,
     var mistake: Boolean = false,
     var isCovered: Boolean = true,

@@ -22,7 +22,6 @@ class MinefieldCreator(
                 xPosition,
                 yPosition,
                 0,
-                safeZone = false,
                 hasMine = false
             )
         }.toMutableList()

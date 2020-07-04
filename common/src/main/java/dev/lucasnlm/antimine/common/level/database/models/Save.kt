@@ -7,7 +7,7 @@ import androidx.room.TypeConverters
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
-import dev.lucasnlm.antimine.common.level.database.converters.FieldConverter
+import dev.lucasnlm.antimine.common.level.database.converters.AreaConverter
 import dev.lucasnlm.antimine.common.level.database.converters.FirstOpenConverter
 import dev.lucasnlm.antimine.common.level.database.converters.SaveStatusConverter
 
@@ -39,7 +39,7 @@ data class Save(
     @ColumnInfo(name = "status")
     val status: SaveStatus,
 
-    @TypeConverters(FieldConverter::class)
+    @TypeConverters(AreaConverter::class)
     @ColumnInfo(name = "field")
     val field: List<Area>
 )
