@@ -4,16 +4,21 @@ import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.database.models.Stats
+import dev.lucasnlm.antimine.common.level.logic.FlagAssistant
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
+import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
 import dev.lucasnlm.antimine.common.level.logic.filterNeighborsOf
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Score
-import dev.lucasnlm.antimine.core.control.ActionFeedback
+import dev.lucasnlm.antimine.common.level.models.StateUpdate
 import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.GameControl
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlin.random.Random
 
 /**
@@ -67,56 +72,84 @@ class GameController {
         hasMines = mines.count() != 0
     }
 
-    /**
-     * Disable all highlighted areas.
-     * @return the number of changed tiles.
-     */
-    fun turnOffAllHighlighted(): Int {
-        return field.filter { it.highlighted }.run {
-            forEach { it.highlighted = false }
-            count()
+    private fun handleAction(target: Area, actionResponse: ActionResponse?) = flow {
+        val mustPlantMines = !hasMines
+
+        val minefieldHandler: MinefieldHandler
+
+        if (mustPlantMines) {
+            plantMinesExcept(target.id, true)
+            minefieldHandler = MinefieldHandler(field.toMutableList(), useQuestionMark)
+            minefieldHandler.openAt(target.id)
+            emit(StateUpdate.Multiple)
+        } else {
+            minefieldHandler = MinefieldHandler(field.toMutableList(), useQuestionMark)
+            minefieldHandler.turnOffAllHighlighted()
+
+            when (actionResponse) {
+                ActionResponse.OpenTile -> {
+                    if (target.mark.isNotNone()) {
+                        minefieldHandler.removeMarkAt(target.id)
+                    } else {
+                        minefieldHandler.openAt(target.id)
+                    }
+                }
+                ActionResponse.SwitchMark -> {
+                    if (!hasMines) {
+                        if (target.mark.isNotNone()) {
+                            minefieldHandler.removeMarkAt(target.id)
+                        } else {
+                            minefieldHandler.openAt(target.id)
+                        }
+                    } else {
+                        minefieldHandler.switchMarkAt(target.id)
+                    }
+                }
+                ActionResponse.HighlightNeighbors -> {
+                    if (target.minesAround != 0) {
+                        minefieldHandler.highlightAt(target.id)
+                    }
+                }
+                ActionResponse.OpenNeighbors -> {
+                    minefieldHandler.openNeighborsOf(target.id)
+                }
+            }
+
+            field = minefieldHandler.result()
+            emit(minefieldHandler.getStateUpdate())
         }
     }
 
-    fun singleClick(index: Int): ActionFeedback = getArea(index).run {
-        return runActionOn(
-            if (isCovered) gameControl.onCovered.singleClick else gameControl.onOpen.singleClick
-        )
-    }
-
-    fun doubleClick(index: Int): ActionFeedback = getArea(index).run {
-        return runActionOn(
-            if (isCovered) gameControl.onCovered.doubleClick else gameControl.onOpen.doubleClick
-        )
-    }
-
-    fun longPress(index: Int): ActionFeedback = getArea(index).run {
-        return runActionOn(
-            if (isCovered) gameControl.onCovered.longPress else gameControl.onOpen.longPress
-        )
-    }
-
-    fun runFlagAssistant(): Sequence<Area> {
-        // Must not select Mark.PurposefulNone, only Mark.None. Otherwise, it will flag
-        // a square that was previously unflagged by player.
-        val assists = mutableListOf<Area>()
-
-        mines.filter { it.mark.isPureNone() }.forEach { it ->
-            val neighbors = field.filterNeighborsOf(it)
-            val neighborsCount = neighbors.count()
-            val revealedNeighborsCount = neighbors.count { neighbor ->
-                !neighbor.isCovered || (neighbor.hasMine && neighbor.mark.isFlag())
-            }
-
-            if (revealedNeighborsCount == neighborsCount) {
-                assists.add(it)
-                it.mark = Mark.Flag
-            } else {
-                it.mark = Mark.None
-            }
+    @ExperimentalCoroutinesApi
+    fun singleClick(index: Int) = flow {
+        val target = getArea(index)
+        val action = if (target.isCovered) gameControl.onCovered.singleClick else gameControl.onOpen.singleClick
+        action?.let {
+            emit(action to handleAction(target, action))
         }
+    }
 
-        return assists.asSequence()
+    @ExperimentalCoroutinesApi
+    fun doubleClick(index: Int) = flow {
+        val target = getArea(index)
+        val action = if (target.isCovered) gameControl.onCovered.doubleClick else gameControl.onOpen.doubleClick
+        action?.let {
+            emit(action to handleAction(target, action))
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    fun longPress(index: Int) = flow {
+        val target = getArea(index)
+        val action = if (target.isCovered) gameControl.onCovered.longPress else gameControl.onOpen.longPress
+        action?.let {
+            emit(action to handleAction(target, action))
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    fun runFlagAssistant(): Flow<Int> {
+        return FlagAssistant(field.toMutableList()).runFlagAssistant()
     }
 
     fun getScore() = Score(
@@ -223,124 +256,5 @@ class GameController {
 
     fun useQuestionMark(useQuestionMark: Boolean) {
         this.useQuestionMark = useQuestionMark
-    }
-
-    /**
-     * Run a game [actionResponse] on a given tile.
-     * @return The number of changed tiles.
-     */
-    private fun Area.runActionOn(actionResponse: ActionResponse?): ActionFeedback {
-        val highlightedChanged = turnOffAllHighlighted()
-
-        val changed = when (actionResponse) {
-            ActionResponse.OpenTile -> {
-                if (!hasMines) {
-                    plantMinesExcept(id, true)
-                }
-
-                if (mark.isNotNone()) {
-                    mark = Mark.PurposefulNone
-                    1
-                } else {
-                    openTile()
-                }
-            }
-            ActionResponse.SwitchMark -> {
-                if (!hasMines) {
-                    plantMinesExcept(id, true)
-                    openTile()
-                } else if (isCovered) {
-                    switchMark()
-                    1
-                } else 0
-            }
-            ActionResponse.HighlightNeighbors -> {
-                if (minesAround != 0) highlight() else 0
-            }
-            ActionResponse.OpenNeighbors -> {
-                openNeighbors()
-                8
-            }
-            else -> 0
-        }
-
-        return ActionFeedback(actionResponse, id, (changed + highlightedChanged) > 1)
-    }
-
-    fun Area.switchMark(): Area = apply {
-        if (isCovered) {
-            mark = when (mark) {
-                Mark.PurposefulNone, Mark.None -> Mark.Flag
-                Mark.Flag -> if (useQuestionMark) Mark.Question else Mark.None
-                Mark.Question -> Mark.None
-            }
-        }
-    }
-
-    fun Area.removeMark() =
-        this.apply {
-            mark = Mark.PurposefulNone
-        }
-
-    /**
-     * Run "Flood Fill algorithm" to open all empty neighbors of a target area.
-     */
-    fun Area.openTile(): Int {
-        var changes = 0
-        run {
-            if (isCovered) {
-                changes += 1
-                isCovered = false
-                mark = Mark.None
-
-                if (hasMine) {
-                    mistake = true
-                } else if (minesAround == 0) {
-                    field.filterNeighborsOf(this)
-                        .filter { it.isCovered }
-                        .also {
-                            changes += it.count()
-                        }
-                        .forEach { it.openTile() }
-                }
-            }
-        }
-        return changes
-    }
-
-    private fun Area.highlight(): Int = run {
-        return when {
-            minesAround != 0 -> {
-                this.toggleHighlight()
-            }
-            else -> 0
-        }
-    }
-
-    private fun Area.toggleHighlight(): Int {
-        var changed = 1
-        apply {
-            highlighted = !highlighted
-            field.filterNeighborsOf(this)
-                .filter { it.mark.isNone() && it.isCovered }
-                .also { changed += it.count() }
-                .forEach { it.highlighted = !it.highlighted }
-        }
-        return changed
-    }
-
-    fun Area.openNeighbors(): Int {
-        val neighbors = field.filterNeighborsOf(this)
-        val flaggedCount = neighbors.count { it.mark.isFlag() }
-        return if (flaggedCount >= minesAround) {
-            neighbors
-                .filter {
-                    it.mark.isNone() && it.isCovered
-                }.also {
-                    it.forEach { area -> area.openTile() }
-                }.count()
-        } else {
-            0
-        }
     }
 }

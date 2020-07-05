@@ -16,6 +16,10 @@ import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class AreaAdapter(
     context: Context,
@@ -52,6 +56,8 @@ class AreaAdapter(
 
     override fun getItemCount(): Int = field.size
 
+    @ExperimentalCoroutinesApi
+    @FlowPreview
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AreaViewHolder {
         val view = AreaView(parent.context)
         return AreaViewHolder(view).apply {
@@ -68,7 +74,9 @@ class AreaAdapter(
                             false
                         }
                         clickEnabled -> {
-                            viewModel.onDoubleClickArea(position)
+                            GlobalScope.launch {
+                                viewModel.onDoubleClickArea(position)
+                            }
                             true
                         }
                         else -> {
@@ -83,7 +91,9 @@ class AreaAdapter(
                         if (position == RecyclerView.NO_POSITION) {
                             Log.d(TAG, "Item no longer exists.")
                         } else if (clickEnabled) {
-                            viewModel.onSingleClick(position)
+                            GlobalScope.launch {
+                                viewModel.onSingleClick(position)
+                            }
                             return true
                         }
                     }
@@ -98,7 +108,9 @@ class AreaAdapter(
                 if (position == RecyclerView.NO_POSITION) {
                     Log.d(TAG, "Item no longer exists.")
                 } else if (clickEnabled) {
-                    viewModel.onLongClick(position)
+                    GlobalScope.launch {
+                        viewModel.onLongClick(position)
+                    }
                 }
 
                 true
@@ -110,7 +122,9 @@ class AreaAdapter(
                     if (position == RecyclerView.NO_POSITION) {
                         Log.d(TAG, "Item no longer exists.")
                     } else if (clickEnabled) {
-                        viewModel.onSingleClick(position)
+                        GlobalScope.launch {
+                            viewModel.onSingleClick(position)
+                        }
                     }
                 }
             }

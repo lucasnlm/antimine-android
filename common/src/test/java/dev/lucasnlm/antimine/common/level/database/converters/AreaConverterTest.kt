@@ -7,7 +7,8 @@ import org.junit.Test
 import org.junit.Assert.assertEquals
 
 class AreaConverterTest {
-    private val expectedJson = """
+    private val expectedJson =
+        """
         [
            {
               "id":1,
@@ -54,7 +55,7 @@ class AreaConverterTest {
               "highlighted":true
            }
         ]
-    """.trimIndent().replace(" ", "").replace("\n", "")
+        """.trimIndent().replace(" ", "").replace("\n", "")
 
     private val areaList =
         listOf(

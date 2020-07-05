@@ -1,17 +1,17 @@
 package dev.lucasnlm.antimine.common.level.viewmodel
 
-import android.os.Handler
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
+import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.models.Minefield
-import dev.lucasnlm.antimine.common.level.database.models.Save
+import dev.lucasnlm.antimine.common.level.models.StateUpdate
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
@@ -21,13 +21,16 @@ import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.control.ActionResponse
-import dev.lucasnlm.antimine.core.control.ActionFeedback
 import dev.lucasnlm.antimine.core.control.GameControl
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -121,7 +124,6 @@ class GameViewModel @ViewModelInject constructor(
         val setup = save.minefield
         gameController = GameController(setup, save.seed, save.uid).apply {
             if (save.firstOpen is FirstOpen.Position) {
-                //plantMinesExcept(save.firstOpen.value, true)
                 singleClick(save.firstOpen.value)
             }
         }
@@ -227,56 +229,85 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
-    fun onLongClick(index: Int) {
-        val feedback = gameController.longPress(index)
-        refreshIndex(index, feedback.multipleChanges)
-        onFeedbackAnalytics(feedback)
-        onPostAction()
-    }
-
-    fun onDoubleClickArea(index: Int) {
-        val feedback = gameController.doubleClick(index)
-        refreshIndex(index, feedback.multipleChanges)
-        onFeedbackAnalytics(feedback)
-        onPostAction()
-
-        if (preferencesRepository.useHapticFeedback()) {
-            hapticFeedbackManager.longPressFeedback()
+    @FlowPreview
+    @ExperimentalCoroutinesApi
+    suspend fun onLongClick(index: Int) {
+        gameController.longPress(index).flatMapConcat { (action, flow) ->
+            onFeedbackAnalytics(action, index)
+            flow
+        }.collect {
+            if (it is StateUpdate.Multiple) {
+                refreshAll()
+            } else if (it is StateUpdate.Single) {
+                refreshIndex(it.index, false)
+            }
+        }.also {
+            onPostAction()
         }
     }
 
-    fun onSingleClick(index: Int) {
-        val feedback = gameController.singleClick(index)
-        refreshIndex(index, feedback.multipleChanges)
-        onFeedbackAnalytics(feedback)
-        onPostAction()
+    @FlowPreview
+    @ExperimentalCoroutinesApi
+    suspend fun onDoubleClickArea(index: Int) {
+        gameController.doubleClick(index).flatMapConcat { (action, flow) ->
+            onFeedbackAnalytics(action, index)
+            flow
+        }.collect {
+            if (it is StateUpdate.Multiple) {
+                refreshAll()
+            } else if (it is StateUpdate.Single) {
+                refreshIndex(it.index, false)
+            }
+        }.also {
+            onPostAction()
+
+            if (preferencesRepository.useHapticFeedback()) {
+                hapticFeedbackManager.longPressFeedback()
+            }
+        }
     }
 
-    private fun onPostAction() {
+    @FlowPreview
+    @ExperimentalCoroutinesApi
+    suspend fun onSingleClick(index: Int) {
+        gameController.singleClick(index).flatMapConcat { (action, flow) ->
+            onFeedbackAnalytics(action, index)
+            flow
+        }.collect {
+            if (it is StateUpdate.Multiple) {
+                refreshAll()
+            } else if (it is StateUpdate.Single) {
+                refreshIndex(it.index, false)
+            }
+        }.also {
+            onPostAction()
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    private suspend fun onPostAction() {
         if (preferencesRepository.useFlagAssistant() && !gameController.hasAnyMineExploded()) {
-            gameController.runFlagAssistant().forEach {
-                Handler().post {
-                    refreshIndex(it.id)
-                }
+            gameController.runFlagAssistant().collect {
+                refreshIndex(it)
             }
         }
 
         updateGameState()
     }
 
-    private fun onFeedbackAnalytics(feedback: ActionFeedback) {
-        when (feedback.actionResponse) {
+    private fun onFeedbackAnalytics(action: ActionResponse, index: Int) {
+        when (action) {
             ActionResponse.OpenTile -> {
-                analyticsManager.sentEvent(Analytics.OpenTile(feedback.index))
+                analyticsManager.sentEvent(Analytics.OpenTile(index))
             }
             ActionResponse.SwitchMark -> {
-                analyticsManager.sentEvent(Analytics.SwitchMark(feedback.index))
+                analyticsManager.sentEvent(Analytics.SwitchMark(index))
             }
             ActionResponse.HighlightNeighbors -> {
-                analyticsManager.sentEvent(Analytics.HighlightNeighbors(feedback.index))
+                analyticsManager.sentEvent(Analytics.HighlightNeighbors(index))
             }
             ActionResponse.OpenNeighbors -> {
-                analyticsManager.sentEvent(Analytics.OpenNeighbors(feedback.index))
+                analyticsManager.sentEvent(Analytics.OpenNeighbors(index))
             }
         }
     }

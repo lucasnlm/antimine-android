@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.common.level.models.Minefield
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import kotlin.random.Random
 
@@ -42,7 +42,8 @@ class MinefieldCreatorTest {
                 0, 2, 0, 0,
                 0, 5, 3, 2,
                 0, 0, 0, 0,
-                0, 5, 0, 0),
+                0, 5, 0, 0
+            ),
             map.map { it.minesAround }.toList()
         )
     }
