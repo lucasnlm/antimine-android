@@ -32,7 +32,6 @@
             android:defaultValue="true"
             android:key="preference_vibration"
             android:title="@string/vibration"
-            android:summary="@string/settings_vibration_desc"
             app:iconSpaceReserved="false"/>
 
         <SwitchPreferenceCompat
@@ -40,7 +39,6 @@
             android:defaultValue="true"
             android:key="preference_sound"
             android:title="@string/sound_effects"
-            android:summary="@string/settings_sound_desc"
             app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
@@ -60,7 +58,6 @@
             android:defaultValue="false"
             android:key="preference_large_area"
             android:title="@string/settings_large_areas"
-            android:summary="@string/settings_large_areas_desc"
             app:iconSpaceReserved="false" />
 
     </PreferenceCategory>

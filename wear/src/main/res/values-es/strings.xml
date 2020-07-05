@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="new_game">Nuevo juego</string>
-    <string name="victory">Ganaste!&#xA0;😎</string>
-    <string name="game_over">Explotó!&#xA0;😢</string>
-</resources>

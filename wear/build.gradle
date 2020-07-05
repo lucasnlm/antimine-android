@@ -15,9 +15,10 @@ android {
         minSdkVersion 23
         targetSdkVersion 30
         vectorDrawables.useSupportLibrary true
-        resConfigs 'af', 'ar', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es', 'fi',
-                   'fr', 'he', 'hi', 'hu', 'it', 'ja', 'ko', 'nl', 'no', 'pl',
-                   'pt', 'ro', 'ru', 'sv', 'th', 'tr', 'uk', 'vi', 'zh'
+        resConfigs 'af-rZA', 'ar-rSA', 'ca-rES', 'cs-rCZ', 'da-rDK', 'de-rDE', 'el-rGR', 'en-rUS',
+                   'es-rES', 'fi-rFI', 'fr-rFR', 'hi-rIN', 'hu-rHU', 'it-rIT', 'iw-rIL', 'ja-rJP',
+                   'ko-rKR', 'nl-rNL', 'no-rNO', 'pl-rPL', 'pt-rBR', 'pt-rPT', 'ro-rRO', 'ru-rRU',
+                   'sv-rSE', 'th-rTH', 'tr-rTR', 'uk-rUA', 'vi-rVN', 'zh-rCN'
     }
 
     buildTypes {
