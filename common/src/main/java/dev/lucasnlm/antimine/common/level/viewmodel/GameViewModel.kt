@@ -124,8 +124,8 @@ class GameViewModel @ViewModelInject constructor(
                 plantMinesExcept(save.firstOpen.value, true)
                 singleClick(save.firstOpen.value)
             }
-            refreshUserPreferences()
         }
+        refreshUserPreferences()
 
         mineCount.postValue(setup.mines)
         difficulty.postValue(save.difficulty)
