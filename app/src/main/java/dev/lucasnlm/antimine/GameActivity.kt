@@ -516,6 +516,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
                 )
             }
             Event.GameOver -> {
+                val isResuming = (status == Status.PreGame)
                 val score = Score(
                     rightMines,
                     totalMines,
@@ -527,7 +528,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
                 viewModel.stopClock()
 
                 GlobalScope.launch(context = Dispatchers.Main) {
-                    viewModel.gameOver()
+                    viewModel.gameOver(isResuming)
                     waitAndShowEndGameDialog(
                         victory = false,
                         await = true

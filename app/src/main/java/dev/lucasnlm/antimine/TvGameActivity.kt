@@ -309,7 +309,7 @@ class TvGameActivity : AppCompatActivity() {
                 viewModel.stopClock()
 
                 GlobalScope.launch(context = Dispatchers.Main) {
-                    viewModel.gameOver()
+                    viewModel.gameOver(false)
                     waitAndShowGameOverConfirmNewGame()
                 }
             }

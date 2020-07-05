@@ -4,6 +4,7 @@ import android.os.Handler
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.models.Area
@@ -16,13 +17,14 @@ import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
-import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
+import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.ActionFeedback
 import dev.lucasnlm.antimine.core.control.GameControl
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.core.sound.ISoundManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -35,7 +37,8 @@ class GameViewModel @ViewModelInject constructor(
     private val statsRepository: IStatsRepository,
     private val dimensionRepository: IDimensionRepository,
     private val preferencesRepository: IPreferencesRepository,
-    private val hapticFeedbackInteractor: IHapticFeedbackInteractor,
+    private val hapticFeedbackManager: IHapticFeedbackManager,
+    private val soundManager: ISoundManager,
     private val minefieldRepository: IMinefieldRepository,
     private val analyticsManager: AnalyticsManager,
     private val clock: Clock
@@ -234,7 +237,9 @@ class GameViewModel @ViewModelInject constructor(
         onFeedbackAnalytics(feedback)
         onPostAction()
 
-        hapticFeedbackInteractor.longPressFeedback()
+        if (preferencesRepository.useHapticFeedback()) {
+            hapticFeedbackManager.longPressFeedback()
+        }
     }
 
     fun onSingleClick(index: Int) {
@@ -278,7 +283,6 @@ class GameViewModel @ViewModelInject constructor(
     private fun updateGameState() {
         when {
             gameController.hasAnyMineExploded() -> {
-                hapticFeedbackInteractor.explosionFeedback()
                 eventObserver.postValue(Event.GameOver)
             }
             else -> {
@@ -322,11 +326,21 @@ class GameViewModel @ViewModelInject constructor(
 
     fun explosionDelay() = if (preferencesRepository.useAnimations()) 750L else 0L
 
-    suspend fun gameOver() {
+    suspend fun gameOver(fromResumeGame: Boolean) {
         gameController.run {
             analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
             val explosionTime = (explosionDelay() / gameController.getMinesCount().coerceAtLeast(10))
             val delayMillis = explosionTime.coerceAtLeast(25L)
+
+            if (!fromResumeGame) {
+                if (preferencesRepository.useHapticFeedback()) {
+                    hapticFeedbackManager.explosionFeedback()
+                }
+
+                if (preferencesRepository.isSoundEffectsEnabled()) {
+                    soundManager.play(R.raw.mine_explosion_sound)
+                }
+            }
 
             findExplodedMine()?.let { exploded ->
                 takeExplosionRadius(exploded).forEach {

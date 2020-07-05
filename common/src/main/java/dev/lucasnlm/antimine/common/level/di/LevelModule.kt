@@ -21,8 +21,8 @@ import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
-import dev.lucasnlm.antimine.common.level.utils.HapticFeedbackInteractor
-import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
+import dev.lucasnlm.antimine.common.level.utils.HapticFeedbackManager
+import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 @Module
@@ -75,10 +75,8 @@ open class LevelModule {
 
     @Provides
     open fun provideHapticFeedbackInteractor(
-        @ApplicationContext context: Context,
-        preferencesRepository: IPreferencesRepository
-    ): IHapticFeedbackInteractor =
-        HapticFeedbackInteractor(context, preferencesRepository)
+        @ApplicationContext context: Context
+    ): IHapticFeedbackManager = HapticFeedbackManager(context)
 
     companion object {
         private const val DATA_BASE_NAME = "saves-db"

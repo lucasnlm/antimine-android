@@ -14,8 +14,7 @@ import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.repository.MemorySavesRepository
 import dev.lucasnlm.antimine.common.level.repository.MemoryStatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
-import dev.lucasnlm.antimine.common.level.utils.DisabledIHapticFeedbackInteractor
-import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
+import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
 
 @Module
 @InstallIn(ApplicationComponent::class)
@@ -39,5 +38,5 @@ class TestLevelModule {
     fun provideStatsRepository(): IStatsRepository = MemoryStatsRepository()
 
     @Provides
-    fun provideHapticFeedbackInteractor(): IHapticFeedbackInteractor = DisabledIHapticFeedbackInteractor()
+    fun provideHapticFeedbackInteractor(): IHapticFeedbackManager = DisabledIHapticFeedbackManager()
 }
