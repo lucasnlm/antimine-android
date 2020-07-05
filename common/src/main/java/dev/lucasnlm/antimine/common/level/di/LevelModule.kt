@@ -1,7 +1,6 @@
 package dev.lucasnlm.antimine.common.level.di
 
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
@@ -11,7 +10,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.lucasnlm.antimine.common.level.database.AppDataBase
 import dev.lucasnlm.antimine.common.level.database.dao.SaveDao
 import dev.lucasnlm.antimine.common.level.database.dao.StatsDao
-import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.repository.DimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
@@ -46,9 +44,6 @@ open class LevelModule {
     fun provideStatsDao(
         appDataBase: AppDataBase
     ): StatsDao = appDataBase.statsDao()
-
-    @Provides
-    open fun provideGameEventObserver(): MutableLiveData<Event> = MutableLiveData()
 
     @Provides
     open fun provideClock(): Clock = Clock()

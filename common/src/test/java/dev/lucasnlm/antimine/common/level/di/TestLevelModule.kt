@@ -38,5 +38,5 @@ class TestLevelModule {
     fun provideStatsRepository(): IStatsRepository = MemoryStatsRepository()
 
     @Provides
-    fun provideHapticFeedbackInteractor(): IHapticFeedbackManager = DisabledIHapticFeedbackManager()
+    fun provideHapticFeedbackInteractor(): IHapticFeedbackManager = DisabledHapticFeedbackManager()
 }

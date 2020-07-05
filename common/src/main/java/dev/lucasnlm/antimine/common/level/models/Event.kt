@@ -3,9 +3,9 @@ package dev.lucasnlm.antimine.common.level.models
 enum class Event {
     StartNewGame,
     ResumeGame,
-    @Deprecated( "Use GameOver")
+    @Deprecated("Use GameOver")
     ResumeGameOver,
-    @Deprecated( "Use Victory")
+    @Deprecated("Use Victory")
     ResumeVictory,
     Pause,
     Resume,

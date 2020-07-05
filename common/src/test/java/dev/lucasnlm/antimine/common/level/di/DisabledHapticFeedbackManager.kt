@@ -2,7 +2,7 @@ package dev.lucasnlm.antimine.common.level.di
 
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
 
-class DisabledIHapticFeedbackManager : IHapticFeedbackManager {
+class DisabledHapticFeedbackManager : IHapticFeedbackManager {
     override fun longPressFeedback() {
         // Empty
     }
@@ -11,4 +11,3 @@ class DisabledIHapticFeedbackManager : IHapticFeedbackManager {
         // Empty
     }
 }
-

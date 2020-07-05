@@ -32,7 +32,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class GameViewModel @ViewModelInject constructor(
-    val eventObserver: MutableLiveData<Event>,
     private val savesRepository: ISavesRepository,
     private val statsRepository: IStatsRepository,
     private val dimensionRepository: IDimensionRepository,
@@ -43,6 +42,10 @@ class GameViewModel @ViewModelInject constructor(
     private val analyticsManager: AnalyticsManager,
     private val clock: Clock
 ) : ViewModel() {
+    val eventObserver = MutableLiveData<Event>()
+    val retryObserver = MutableLiveData<Unit>()
+    val shareObserver = MutableLiveData<Unit>()
+
     private lateinit var gameController: GameController
     private var currentDifficulty: Difficulty = Difficulty.Standard
     private var initialized = false

@@ -13,7 +13,6 @@ import dev.lucasnlm.antimine.core.preferences.PreferencesManager
 import dev.lucasnlm.antimine.core.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
 import dev.lucasnlm.antimine.core.sound.SoundManager
-import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)

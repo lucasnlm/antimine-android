@@ -14,9 +14,6 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.instant.InstantAppManager
 import dev.lucasnlm.antimine.level.viewmodel.EngGameDialogViewModel
-import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -26,14 +23,12 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
 
     private val endGameViewModel by activityViewModels<EngGameDialogViewModel>()
     private val viewModel by activityViewModels<GameViewModel>()
-    private val shareViewModel by activityViewModels<ShareViewModel>()
 
     private var hasValidData = false
     private var isVictory: Boolean = false
     private var time: Long = 0L
     private var rightMines: Int = 0
     private var totalMines: Int = 0
-    private var saveId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +39,6 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
             rightMines = getInt(DIALOG_RIGHT_MINES, 0)
             totalMines = getInt(DIALOG_TOTAL_MINES, 0)
             hasValidData = (totalMines > 0)
-            saveId = getLong(DIALOG_SAVE_ID, 0L)
         }
     }
 
@@ -100,9 +94,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
             setView(view)
 
             setPositiveButton(R.string.new_game) { _, _ ->
-                GlobalScope.launch {
-                    viewModel.startNewGame()
-                }
+                viewModel.startNewGame()
             }
 
             when {
@@ -115,33 +107,25 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                 }
                 isVictory -> {
                     setNeutralButton(R.string.share) { _, _ ->
-                        val setup = viewModel.levelSetup.value
-                        val field = viewModel.field.value
-
-                        GlobalScope.launch {
-                            shareViewModel.share(setup, field)
-                        }
+                        viewModel.shareObserver.postValue(Unit)
                     }
                 }
                 else -> {
                     setNeutralButton(R.string.retry) { _, _ ->
-                        GlobalScope.launch {
-                            viewModel.retryGame(saveId.toInt())
-                        }
+                        viewModel.retryObserver.postValue(Unit)
                     }
                 }
             }
         }.create()
 
     companion object {
-        fun newInstance(victory: Boolean, rightMines: Int, totalMines: Int, time: Long, saveId: Long) =
+        fun newInstance(victory: Boolean, rightMines: Int, totalMines: Int, time: Long) =
             EndGameDialogFragment().apply {
                 arguments = Bundle().apply {
                     putBoolean(DIALOG_IS_VICTORY, victory)
                     putInt(DIALOG_RIGHT_MINES, rightMines)
                     putInt(DIALOG_TOTAL_MINES, totalMines)
                     putLong(DIALOG_TIME, time)
-                    putLong(DIALOG_SAVE_ID, saveId)
                 }
             }
 
@@ -149,7 +133,6 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
         private const val DIALOG_TIME = "dialog_time"
         private const val DIALOG_RIGHT_MINES = "dialog_right_mines"
         private const val DIALOG_TOTAL_MINES = "dialog_total_mines"
-        private const val DIALOG_SAVE_ID = "dialog_save_id"
 
         val TAG = EndGameDialogFragment::class.simpleName!!
     }

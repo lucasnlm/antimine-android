@@ -105,6 +105,22 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
             }
         )
 
+        retryObserver.observe(
+            this@GameActivity,
+            Observer {
+                GlobalScope.launch {
+                    viewModel.retryGame(currentSaveId.toInt())
+                }
+            }
+        )
+
+        shareObserver.observe(
+            this@GameActivity,
+            Observer {
+                shareCurrentGame()
+            }
+        )
+
         elapsedTimeSeconds.observe(
             this@GameActivity,
             Observer {
@@ -445,8 +461,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
                     victory,
                     score?.rightMines ?: 0,
                     score?.totalMines ?: 0,
-                    currentGameStatus.time,
-                    currentSaveId
+                    currentGameStatus.time
                 ).apply {
                     showAllowingStateLoss(supportFragmentManager, EndGameDialogFragment.TAG)
                 }
