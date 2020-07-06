@@ -43,10 +43,6 @@ class ControlViewModel @ViewModelInject constructor(
         )
     )
 
-    init {
-        controlTypeSelected.postValue(preferencesRepository.controlStyle())
-    }
-
     fun selectControlType(controlStyle: ControlStyle) {
         preferencesRepository.useControlStyle(controlStyle)
         controlTypeSelected.postValue(controlStyle)

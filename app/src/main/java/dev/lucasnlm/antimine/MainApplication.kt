@@ -15,7 +15,7 @@ open class MainApplication : MultiDexApplication() {
         super.onCreate()
         analyticsManager.apply {
             setup(applicationContext, mapOf())
-            sentEvent(Analytics.Open())
+            sentEvent(Analytics.Open)
         }
     }
 }
