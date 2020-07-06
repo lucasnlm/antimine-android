@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 702031
-        versionName '7.2.3'
+        versionCode 702041
+        versionName '7.2.4'
         minSdkVersion 16
         targetSdkVersion 30
         multiDexEnabled true
@@ -88,7 +88,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.activity:activity-ktx:1.1.0'
-    implementation "androidx.fragment:fragment-ktx:1.2.5"
+    implementation 'androidx.fragment:fragment-ktx:1.2.5'
 
     // Constraint
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

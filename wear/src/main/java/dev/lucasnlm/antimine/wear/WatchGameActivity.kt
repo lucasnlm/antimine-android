@@ -176,7 +176,7 @@ class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbac
                 viewModel.stopClock()
 
                 GlobalScope.launch(context = Dispatchers.Main) {
-                    viewModel.gameOver()
+                    viewModel.gameOver(false)
                     messageText.text = getString(R.string.game_over)
                     waitAndShowNewGameButton()
                 }

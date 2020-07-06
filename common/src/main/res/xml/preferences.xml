@@ -8,8 +8,8 @@
         app:iconSpaceReserved="false">
 
         <SwitchPreferenceCompat
-            android:checked="true"
-            android:defaultValue="true"
+            android:checked="false"
+            android:defaultValue="false"
             android:key="preference_use_question_mark"
             android:title="@string/use_question_mark"
             app:iconSpaceReserved="false" />
@@ -35,8 +35,8 @@
             app:iconSpaceReserved="false"/>
 
         <SwitchPreferenceCompat
-            android:checked="true"
-            android:defaultValue="true"
+            android:checked="false"
+            android:defaultValue="false"
             android:key="preference_sound"
             android:title="@string/sound_effects"
             app:iconSpaceReserved="false" />

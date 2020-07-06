@@ -13,8 +13,8 @@ import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.repository.MemorySavesRepository
 import dev.lucasnlm.antimine.common.level.repository.MemoryStatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
-import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackInteractor
-import dev.lucasnlm.antimine.mocks.DisabledHapticFeedbackInteractor
+import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
+import dev.lucasnlm.antimine.mocks.DisabledHapticFeedbackManager
 import dev.lucasnlm.antimine.mocks.FixedDimensionRepository
 import dev.lucasnlm.antimine.mocks.FixedMinefieldRepository
 
@@ -40,5 +40,5 @@ class TestLevelModule {
     fun provideMinefieldRepository(): IMinefieldRepository = FixedMinefieldRepository()
 
     @Provides
-    fun provideHapticFeedbackInteractor(): IHapticFeedbackInteractor = DisabledHapticFeedbackInteractor()
+    fun provideHapticFeedbackInteractor(): IHapticFeedbackManager = DisabledHapticFeedbackManager()
 }

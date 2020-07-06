@@ -20,6 +20,7 @@ interface IPreferencesRepository {
     fun useLargeAreas(): Boolean
     fun useAnimations(): Boolean
     fun useQuestionMark(): Boolean
+    fun isSoundEffectsEnabled(): Boolean
 }
 
 class PreferencesRepository(
@@ -68,7 +69,10 @@ class PreferencesRepository(
         getBoolean(PREFERENCE_ANIMATION, true)
 
     override fun useQuestionMark(): Boolean =
-        getBoolean(PREFERENCE_QUESTION_MARK, true)
+        getBoolean(PREFERENCE_QUESTION_MARK, false)
+
+    override fun isSoundEffectsEnabled(): Boolean =
+        getBoolean(PREFERENCE_SOUND_EFFECTS, false)
 
     override fun controlStyle(): ControlStyle {
         val index = getInt(PREFERENCE_CONTROL_STYLE, -1)
@@ -100,5 +104,6 @@ class PreferencesRepository(
         private const val PREFERENCE_CUSTOM_GAME_WIDTH = "preference_custom_game_width"
         private const val PREFERENCE_CUSTOM_GAME_HEIGHT = "preference_custom_game_height"
         private const val PREFERENCE_CUSTOM_GAME_MINES = "preference_custom_game_mines"
+        private const val PREFERENCE_SOUND_EFFECTS = "preference_sound"
     }
 }

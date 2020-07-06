@@ -42,12 +42,12 @@
     <string name="defeats">Défaites</string>
     <string name="game_over_desc_1">Bonne chance pour votre prochaine partie.</string>
     <string name="game_over_desc_4">Vous avez déminé le champ de mine en %1$d secondes.</string>
-    <string name="fail_to_share">Le partage a échoué</string>
+    <string name="fail_to_share">Échec du partage</string>
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Effets sonores</string>
     <string name="quit">Quitter</string>
     <string name="are_you_sure">Vraiment ?</string>
-    <string name="enable_automatic_flags">Activer le placement automatique des drapeaux</string>
+    <string name="enable_automatic_flags">Activer le placement automatique de drapeaux</string>
     <string name="open_areas">Zones ouvertes</string>
     <string name="total_time">Temps de jeu total</string>
     <string name="average_time">Temps de jeu moyen</string>
@@ -57,9 +57,9 @@
     <string name="control">Contrôles</string>
     <string name="arrow">➞</string>
     <string name="flag_first">Drapeau rapide</string>
-    <string name="single_click">Simple clic</string>
+    <string name="single_click">Clic simple</string>
     <string name="double_click">Double clic</string>
-    <string name="long_press">Appui Long</string>
+    <string name="long_press">Appui prolongé</string>
     <string name="open_tile">Ouvrir la tuile</string>
     <string name="flag_tile">Placer le drapeau</string>
     <string name="retry">Réessayer</string>

@@ -12,7 +12,8 @@ class AboutViewModel : ViewModel() {
 
     fun getTranslatorsList() = mapOf(
         "Arabic" to sequenceOf("Ahmad Alkurbi"),
-        "Chinese Simplified" to sequenceOf("linsui"),
+        "Chinese Simplified" to sequenceOf("linsui", "yilinzhao2020"),
+        "Catalan" to sequenceOf("dmanye", "Archison"),
         "Czech" to sequenceOf("novas78@xda"),
         "Dutch" to sequenceOf("Max Pietersma"),
         "English" to sequenceOf("miguelsouza2212"),
