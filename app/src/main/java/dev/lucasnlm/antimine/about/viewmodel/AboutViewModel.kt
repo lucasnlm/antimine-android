@@ -12,6 +12,7 @@ class AboutViewModel : ViewModel() {
 
     fun getTranslatorsList() = mapOf(
         "Arabic" to sequenceOf("Ahmad Alkurbi"),
+        "Bulgarian" to sequenceOf("Georgi Eftimov"),
         "Chinese Simplified" to sequenceOf("linsui", "yilinzhao2020"),
         "Catalan" to sequenceOf("dmanye", "Archison"),
         "Czech" to sequenceOf("novas78@xda"),
@@ -22,6 +23,7 @@ class AboutViewModel : ViewModel() {
         "Greek" to sequenceOf("Retrial"),
         "Italian" to sequenceOf("Mattia - MisterWeeMan", "Nicola Lorenzetti"),
         "Japanese" to sequenceOf("Ryota Hasegawa"),
+        "Norwegian" to sequenceOf("Eule Hecking"),
         "Polish" to sequenceOf("Sebastian Jasiński", "Sebastian Skibiński"),
         "Portuguese (BR)" to sequenceOf("Lucas Lima"),
         "Russian" to sequenceOf("gaich@xda", "ask45t", "Ekaterina543"),
