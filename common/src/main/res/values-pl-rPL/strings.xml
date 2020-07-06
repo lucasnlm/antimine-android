@@ -47,13 +47,13 @@
     <string name="sound_effects">Efekty dźwiękowe</string>
     <string name="quit">Wyjdź</string>
     <string name="are_you_sure">Na pewno?</string>
-    <string name="enable_automatic_flags">Włączenie automatycznego umieszczania flag</string>
+    <string name="enable_automatic_flags">Włącz automatyczne umieszczanie flag</string>
     <string name="open_areas">Odkryte pola</string>
     <string name="total_time">Całkowity czas gry</string>
     <string name="average_time">Średni czas gry</string>
     <string name="performance">Skuteczność</string>
     <string name="ok">OK</string>
-    <string name="use_question_mark">Flagi niepewności</string>
+    <string name="use_question_mark">Używaj Znaku zapytania</string>
     <string name="control">Sterowanie</string>
     <string name="arrow">➞</string>
     <string name="flag_first">Najpierw flaga</string>
