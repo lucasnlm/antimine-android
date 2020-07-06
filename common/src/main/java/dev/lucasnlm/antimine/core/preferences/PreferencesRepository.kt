@@ -69,7 +69,7 @@ class PreferencesRepository(
         getBoolean(PREFERENCE_ANIMATION, true)
 
     override fun useQuestionMark(): Boolean =
-        getBoolean(PREFERENCE_QUESTION_MARK, true)
+        getBoolean(PREFERENCE_QUESTION_MARK, false)
 
     override fun isSoundEffectsEnabled(): Boolean =
         getBoolean(PREFERENCE_SOUND_EFFECTS, false)
