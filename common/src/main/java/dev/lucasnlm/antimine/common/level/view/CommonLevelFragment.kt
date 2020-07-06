@@ -1,12 +1,10 @@
 package dev.lucasnlm.antimine.common.level.view
 
-import android.content.Context
 import android.os.Bundle
-import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +17,7 @@ import javax.inject.Inject
 abstract class CommonLevelFragment : Fragment() {
     @Inject
     lateinit var dimensionRepository: IDimensionRepository
+
     @Inject
     lateinit var preferencesRepository: IPreferencesRepository
 
@@ -40,9 +39,8 @@ abstract class CommonLevelFragment : Fragment() {
         }
 
     protected fun calcHorizontalPadding(boardWidth: Int): Int {
-        val windowManager = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val displayMetrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val context = requireContext()
+        val displayMetrics = context.resources.displayMetrics
 
         val width = displayMetrics.widthPixels
         val recyclerViewWidth = (dimensionRepository.areaSize() * boardWidth)
@@ -52,14 +50,25 @@ abstract class CommonLevelFragment : Fragment() {
 
     protected fun calcVerticalPadding(boardHeight: Int): Int {
         val context = requireContext()
-        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val displayMetrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val displayMetrics = context.resources.displayMetrics
 
-        val height = recyclerGrid.measuredHeight
+        val typedValue = TypedValue()
+        val actionBarHeight = if (context.theme.resolveAttribute(android.R.attr.actionBarSize, typedValue, true)) {
+            TypedValue.complexToDimensionPixelSize(typedValue.data, resources.displayMetrics)
+        } else {
+            0
+        }
+        val resourceId: Int = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+        val navigationHeight = if (resourceId > 0) {
+            resources.getDimensionPixelSize(resourceId)
+        } else 0
+
+        val height = displayMetrics.heightPixels
         val recyclerViewHeight = (dimensionRepository.areaSize() * boardHeight)
         val separatorsHeight = (2 * dimensionRepository.areaSeparator() * (boardHeight - 1))
 
-        return ((height - recyclerViewHeight - separatorsHeight) / 2).coerceAtLeast(0.0f).toInt()
+        val calculatedHeight = (height - actionBarHeight - navigationHeight - recyclerViewHeight - separatorsHeight)
+
+        return (calculatedHeight / 2).coerceAtLeast(0.0f).toInt()
     }
 }
