@@ -62,7 +62,7 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 
 ## Technical Details
 
-- [Android SDK 29](https://developer.android.com/about/versions/10)
+- [Android SDK 30](https://developer.android.com/about/versions/11)
 - [AndroidX](https://developer.android.com/jetpack/androidx)
 - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
 - [Dagger Hilt](https://dagger.dev/hilt/)
