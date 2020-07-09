@@ -15,6 +15,9 @@ interface IPreferencesRepository {
     fun controlStyle(): ControlStyle
     fun useControlStyle(controlStyle: ControlStyle)
 
+    fun updateStatsBase(statsBase: Int)
+    fun getStatsBase(): Int
+
     fun useFlagAssistant(): Boolean
     fun useHapticFeedback(): Boolean
     fun useLargeAreas(): Boolean
@@ -83,6 +86,13 @@ class PreferencesRepository(
         putInt(PREFERENCE_CONTROL_STYLE, controlStyle.ordinal)
     }
 
+    override fun updateStatsBase(statsBase: Int) {
+        putInt(PREFERENCE_STATS_BASE, statsBase)
+    }
+
+    override fun getStatsBase(): Int =
+        getInt(PREFERENCE_STATS_BASE, 0)
+
     private fun migrateOldPreferences() {
         if (preferencesManager.contains(PREFERENCE_OLD_DOUBLE_CLICK)) {
             if (getBoolean(PREFERENCE_OLD_DOUBLE_CLICK, false)) {
@@ -105,5 +115,6 @@ class PreferencesRepository(
         private const val PREFERENCE_CUSTOM_GAME_HEIGHT = "preference_custom_game_height"
         private const val PREFERENCE_CUSTOM_GAME_MINES = "preference_custom_game_mines"
         private const val PREFERENCE_SOUND_EFFECTS = "preference_sound"
+        private const val PREFERENCE_STATS_BASE = "preference_stats_base"
     }
 }

@@ -1,6 +1,8 @@
 package dev.lucasnlm.antimine.stats
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -33,11 +35,33 @@ class StatsActivity : AppCompatActivity(R.layout.activity_stats) {
                 openAreas.text = it.openArea.toString()
                 victory.text = it.victory.toString()
                 defeat.text = (it.totalGames - it.victory).toString()
+
+                invalidateOptionsMenu()
             }
         )
 
         GlobalScope.launch {
-            viewModel.loadStats(statsRepository)
+            viewModel.loadStats()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        viewModel.statsObserver.value?.let {
+            if (it.totalGames > 0) {
+                menuInflater.inflate(R.menu.stats_menu, menu)
+            }
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.delete) {
+            GlobalScope.launch {
+                viewModel.deleteAll()
+            }
+            true
+        } else {
+            super.onOptionsItemSelected(item)
         }
     }
 

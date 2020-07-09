@@ -86,6 +86,7 @@
     <string name="no_network">No internet connection.</string>
     <string name="open_menu">Open Menu</string>
     <string name="close_menu">Close Menu</string>
+    <string name="delete_all">Delete all</string>
     <string name="all_mines_disabled">All mines were disabled.</string>
     <string name="desc_convered_area">Covered area</string>
     <string name="desc_marked_area">Marked area</string>
