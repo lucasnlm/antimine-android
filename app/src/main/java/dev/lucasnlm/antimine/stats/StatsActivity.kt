@@ -96,7 +96,6 @@ class StatsActivity : AppCompatActivity(R.layout.activity_stats) {
             .show()
     }
 
-
     companion object {
         private fun formatPercentage(value: Double) =
             String.format("%.2f%%", value)
