@@ -54,6 +54,6 @@ class StatsViewModel @ViewModelInject constructor(
     }
 
     companion object {
-        private val emptyStats = StatsModel(0, 0, 0, 0, 0, 0)
+        val emptyStats = StatsModel(0, 0, 0, 0, 0, 0)
     }
 }

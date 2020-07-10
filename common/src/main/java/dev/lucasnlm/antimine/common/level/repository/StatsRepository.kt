@@ -23,7 +23,7 @@ class StatsRepository(
 class MemoryStatsRepository(
     private val memoryStats: MutableList<Stats> = mutableListOf()
 ) : IStatsRepository {
-    override suspend fun getAllStats(minId: Int): List<Stats> = memoryStats.toList()
+    override suspend fun getAllStats(minId: Int): List<Stats> = memoryStats.filter { it.uid >= minId }
 
     override suspend fun addStats(stats: Stats): Long? {
         memoryStats.add(stats)
