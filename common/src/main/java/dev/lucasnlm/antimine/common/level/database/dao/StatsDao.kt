@@ -8,8 +8,8 @@ import dev.lucasnlm.antimine.common.level.database.models.Stats
 
 @Dao
 interface StatsDao {
-    @Query("SELECT * FROM stats")
-    suspend fun getAll(): List<Stats>
+    @Query("SELECT * FROM stats WHERE stats.uid >= :minId")
+    suspend fun getAll(minId: Int = 0): List<Stats>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg stats: Stats): LongArray
