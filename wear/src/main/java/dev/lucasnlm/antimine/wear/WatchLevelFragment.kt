@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.wear
 
 import android.os.Bundle
 import android.text.format.DateUtils
+import android.view.DisplayCutout
 import android.view.View
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -10,6 +11,7 @@ import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
+import dev.lucasnlm.antimine.core.control.ControlStyle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -29,11 +31,9 @@ class WatchLevelFragment : CommonLevelFragment() {
 
             withContext(Dispatchers.Main) {
                 recyclerGrid.apply {
-                    val horizontalPadding = calcHorizontalPadding(levelSetup.width)
-                    val verticalPadding = calcVerticalPadding(levelSetup.height)
                     setHasFixedSize(true)
                     addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
-                    setPadding(horizontalPadding, verticalPadding, 0, 0)
+
                     layoutManager = makeNewLayoutManager(levelSetup.width)
                     adapter = areaAdapter
                     alpha = 0.0f
@@ -57,10 +57,7 @@ class WatchLevelFragment : CommonLevelFragment() {
                 viewLifecycleOwner,
                 Observer {
                     recyclerGrid.apply {
-                        val horizontalPadding = calcHorizontalPadding(it.width)
-                        val verticalPadding = calcVerticalPadding(it.height)
                         layoutManager = makeNewLayoutManager(it.width)
-                        setPadding(horizontalPadding, verticalPadding, 0, 0)
                     }
                 }
             )
@@ -74,12 +71,12 @@ class WatchLevelFragment : CommonLevelFragment() {
                 viewLifecycleOwner,
                 Observer {
                     if (it == Event.StartNewGame) {
+                        viewModel.useCustomPreferences(false, ControlStyle.FastFlag)
                         recyclerGrid.scrollToPosition(areaAdapter.itemCount / 2)
                     }
 
                     when (it) {
-                        Event.ResumeGameOver, Event.GameOver,
-                        Event.Victory, Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
+                        Event.GameOver, Event.Victory -> areaAdapter.setClickEnabled(false)
                         else -> areaAdapter.setClickEnabled(true)
                     }
                 }

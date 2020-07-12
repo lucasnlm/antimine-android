@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
+import androidx.lifecycle.Transformations
 import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.ambient.AmbientModeSupport.AmbientCallback
 import androidx.wear.ambient.AmbientModeSupport.EXTRA_LOWBIT_AMBIENT
@@ -27,15 +28,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider {
-
+class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientModeSupport.AmbientCallbackProvider {
     private val viewModel: GameViewModel by viewModels()
 
-    private val ambientController: AmbientModeSupport.AmbientController by lazy {
-        AmbientModeSupport.attach(this)
-    }
-
-    private var currentLevelFragment: WatchLevelFragment? = null
+    private lateinit var currentLevelFragment: WatchLevelFragment
 
     private val clock = Clock()
     private var lastShownTime: String? = null
@@ -44,7 +40,7 @@ class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbac
     private var ambientMode: AmbientCallback = object : AmbientCallback() {
         override fun onExitAmbient() {
             super.onExitAmbient()
-            currentLevelFragment?.setAmbientMode(
+            currentLevelFragment.setAmbientMode(
                 AmbientSettings(
                     isAmbientMode = false,
                     isLowBitAmbient = false
@@ -55,7 +51,7 @@ class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbac
         override fun onEnterAmbient(ambientDetails: Bundle?) {
             super.onEnterAmbient(ambientDetails)
             val lowBit = ambientDetails?.getBoolean(EXTRA_LOWBIT_AMBIENT) ?: true
-            currentLevelFragment?.setAmbientMode(
+            currentLevelFragment.setAmbientMode(
                 AmbientSettings(
                     true,
                     lowBit
@@ -67,7 +63,7 @@ class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbac
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_level)
+        AmbientModeSupport.attach(this)
 
         bindViewModel()
         loadGameFragment()
@@ -176,20 +172,10 @@ class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbac
                 viewModel.stopClock()
 
                 GlobalScope.launch(context = Dispatchers.Main) {
-                    viewModel.gameOver(false)
+                    //viewModel.gameOver(false)
                     messageText.text = getString(R.string.game_over)
                     waitAndShowNewGameButton()
                 }
-            }
-            Event.ResumeVictory -> {
-                status = Status.Over()
-                messageText.text = getString(R.string.victory)
-                waitAndShowNewGameButton(0L)
-            }
-            Event.ResumeGameOver -> {
-                status = Status.Over()
-                messageText.text = getString(R.string.game_over)
-                waitAndShowNewGameButton(0L)
             }
             else -> {
             }

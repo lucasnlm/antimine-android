@@ -341,7 +341,7 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
-    fun refreshUserPreferences() {
+    private fun refreshUserPreferences() {
         gameController.apply {
             val controlType = preferencesRepository.controlStyle()
             val gameControl = GameControl.fromControlType(controlType)
