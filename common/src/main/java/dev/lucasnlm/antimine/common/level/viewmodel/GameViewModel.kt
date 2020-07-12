@@ -58,8 +58,11 @@ class GameViewModel @ViewModelInject constructor(
     val elapsedTimeSeconds = MutableLiveData<Long>()
     val mineCount = MutableLiveData<Int>()
     val difficulty = MutableLiveData<Difficulty>()
-    val levelSetup = MutableLiveData<Minefield>()
     val saveId = MutableLiveData<Long>()
+
+    fun getMinefieldInfo(): Minefield {
+        return gameController.minefield
+    }
 
     fun startNewGame(newDifficulty: Difficulty = currentDifficulty): Minefield {
         clock.reset()
@@ -70,12 +73,15 @@ class GameViewModel @ViewModelInject constructor(
             newDifficulty, dimensionRepository, preferencesRepository
         )
 
-        gameController = GameController(minefield, minefieldRepository.randomSeed())
+        gameController = GameController(
+            minefield,
+            minefieldRepository.randomSeed(),
+            dimensionRepository.isRoundDevice()
+        )
         refreshUserPreferences()
 
         mineCount.postValue(minefield.mines)
         difficulty.postValue(newDifficulty)
-        levelSetup.postValue(minefield)
         refreshAll()
 
         eventObserver.postValue(Event.StartNewGame)
@@ -101,7 +107,6 @@ class GameViewModel @ViewModelInject constructor(
 
         mineCount.postValue(setup.mines)
         difficulty.postValue(save.difficulty)
-        levelSetup.postValue(setup)
         refreshAll()
         refreshMineCount()
 
@@ -120,21 +125,18 @@ class GameViewModel @ViewModelInject constructor(
         clock.reset()
         elapsedTimeSeconds.postValue(0L)
         currentDifficulty = save.difficulty
-
-        val setup = save.minefield
-        gameController = GameController(setup, save.seed, save.uid)
+        gameController = GameController(save)
         refreshUserPreferences()
 
-        mineCount.postValue(setup.mines)
+        mineCount.postValue(save.minefield.mines)
         difficulty.postValue(save.difficulty)
-        levelSetup.postValue(setup)
         refreshAll()
 
         eventObserver.postValue(Event.StartNewGame)
 
         analyticsManager.sentEvent(
             Analytics.RetryGame(
-                setup,
+                save.minefield,
                 currentDifficulty,
                 gameController.seed,
                 useAccessibilityMode(),
@@ -341,7 +343,7 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun refreshUserPreferences() {
+    fun refreshUserPreferences() {
         gameController.apply {
             val controlType = preferencesRepository.controlStyle()
             val gameControl = GameControl.fromControlType(controlType)

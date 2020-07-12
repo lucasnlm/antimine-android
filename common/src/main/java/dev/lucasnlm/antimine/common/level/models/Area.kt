@@ -9,5 +9,6 @@ data class Area(
     var mistake: Boolean = false,
     var isCovered: Boolean = true,
     var mark: Mark = Mark.None,
-    var highlighted: Boolean = false
+    var highlighted: Boolean = false,
+    val enabled: Boolean = true
 )

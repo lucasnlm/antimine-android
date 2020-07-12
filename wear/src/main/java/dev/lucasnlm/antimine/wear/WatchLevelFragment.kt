@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.wear
 
 import android.os.Bundle
 import android.text.format.DateUtils
-import android.view.DisplayCutout
 import android.view.View
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +37,10 @@ class WatchLevelFragment : CommonLevelFragment() {
                     adapter = areaAdapter
                     alpha = 0.0f
 
+                    val dy = calcVerticalScrollToCenter(levelSetup.height)
+                    val dx = calcHorizontalScrollToCenter(levelSetup.width)
+                    smoothScrollBy(dx, dy, null, 0)
+
                     animate().apply {
                         alpha(1.0f)
                         duration = DateUtils.SECOND_IN_MILLIS
@@ -51,14 +54,6 @@ class WatchLevelFragment : CommonLevelFragment() {
                 viewLifecycleOwner,
                 Observer {
                     areaAdapter.bindField(it)
-                }
-            )
-            levelSetup.observe(
-                viewLifecycleOwner,
-                Observer {
-                    recyclerGrid.apply {
-                        layoutManager = makeNewLayoutManager(it.width)
-                    }
                 }
             )
             fieldRefresh.observe(

@@ -192,7 +192,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
         if (!willReset) {
             if (status == Status.Running) {
                 viewModel.run {
-                    useUserPreferences()
+                    refreshUserPreferences()
                     resumeGame()
                 }
 
@@ -572,10 +572,8 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
     }
 
     private fun shareCurrentGame() {
-        val levelSetup = viewModel.levelSetup.value
-        val field = viewModel.field.value
         GlobalScope.launch {
-            shareViewModel.share(levelSetup, field)
+            shareViewModel.share(viewModel.getMinefieldInfo(), viewModel.field.value)
         }
     }
 
@@ -626,7 +624,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
 
     override fun onDismiss(dialog: DialogInterface?) {
         viewModel.run {
-            useUserPreferences()
+            refreshUserPreferences()
             resumeGame()
         }
     }

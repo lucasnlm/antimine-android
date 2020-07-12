@@ -42,19 +42,6 @@ open class LevelFragment : CommonLevelFragment() {
                 }
             )
 
-            levelSetup.observe(
-                viewLifecycleOwner,
-                Observer {
-                    recyclerGrid.apply {
-                        val horizontalPadding = calcHorizontalPadding(it.width)
-                        val verticalPadding = calcVerticalPadding(it.height)
-                        layoutManager = makeNewLayoutManager(it.width)
-                        setHasFixedSize(true)
-                        setPadding(horizontalPadding, verticalPadding, 0, 0)
-                    }
-                }
-            )
-
             fieldRefresh.observe(
                 viewLifecycleOwner,
                 Observer {

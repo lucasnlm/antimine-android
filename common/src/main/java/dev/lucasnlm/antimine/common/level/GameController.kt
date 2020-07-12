@@ -26,7 +26,7 @@ import kotlin.random.Random
  * Controls a minesweeper logic.
  */
 class GameController {
-    private val minefield: Minefield
+    val minefield: Minefield
     private val startTime = System.currentTimeMillis()
     private var saveId = 0
     private var firstOpen: FirstOpen = FirstOpen.Unknown
@@ -39,25 +39,32 @@ class GameController {
         private set
 
     val seed: Long
+    val roundedMap: Boolean
 
-    private val minefieldCreator: MinefieldCreator
+    private var minefieldCreator: MinefieldCreator? = null
     var field: List<Area>
         private set
 
-    constructor(minefield: Minefield, seed: Long, saveId: Int? = null) {
-        this.minefieldCreator = MinefieldCreator(minefield, Random(seed))
+    constructor(
+        minefield: Minefield,
+        seed: Long,
+        roundedMap: Boolean,
+        saveId: Int? = null
+    ) {
         this.minefield = minefield
         this.seed = seed
+        this.roundedMap = roundedMap
         this.saveId = saveId ?: 0
 
+        val minefieldCreator = MinefieldCreator(minefield, roundedMap, Random(seed))
         this.field = minefieldCreator.createEmpty()
     }
 
     constructor(save: Save) {
-        this.minefieldCreator = MinefieldCreator(save.minefield, Random(save.seed))
         this.minefield = save.minefield
         this.saveId = save.uid
         this.seed = save.seed
+        this.roundedMap = false
         this.firstOpen = save.firstOpen
 
         this.field = save.field
@@ -68,6 +75,7 @@ class GameController {
     private fun getArea(id: Int) = field.first { it.id == id }
 
     private fun plantMinesExcept(safeId: Int) {
+        val minefieldCreator = MinefieldCreator(minefield, roundedMap, Random(seed))
         if (useSolverAlgorithms) {
             do {
                 field = minefieldCreator.create(safeId, false)
