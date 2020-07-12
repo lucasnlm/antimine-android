@@ -67,13 +67,6 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
 
         bindViewModel()
         loadGameFragment()
-
-        swipe.addCallback(object : SwipeDismissFrameLayout.Callback() {
-            override fun onDismissed(layout: SwipeDismissFrameLayout) {
-                swipe.visibility = View.GONE
-                finish()
-            }
-        })
     }
 
     override fun onResume() {
@@ -172,7 +165,6 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
                 viewModel.stopClock()
 
                 GlobalScope.launch(context = Dispatchers.Main) {
-                    //viewModel.gameOver(false)
                     messageText.text = getString(R.string.game_over)
                     waitAndShowNewGameButton()
                 }
