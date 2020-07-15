@@ -44,4 +44,4 @@ jobs:
           java-version: 1.8
       - name: Build for F-Droid
         run: |
-          ./gradlew assembleFroidDebug
+          ./gradlew assembleFossDebug
