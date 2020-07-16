@@ -12,25 +12,55 @@ class FlagAssistantTest {
     @ExperimentalCoroutinesApi
     @Test
     fun testRunAssistant() = runBlockingTest {
-        repeat(10) { takeMines ->
-            val creator = MinefieldCreator(Minefield(4, 4, 10), Random(200))
+        repeat(20) { takeMines ->
+            val creator = MinefieldCreator(Minefield(8, 8, 25), Random(200))
             val map = creator.create(50, false)
-            val target = map
-                .filter { it.hasMine }
+
+            map.filter { it.hasMine }
                 .take(takeMines)
-                .onEach { map.filterNeighborsOf(it).forEach { neighbor -> neighbor.isCovered = false } }
-                .map { it.id }
+                .forEach { map.filterNeighborsOf(it).forEach { neighbor -> neighbor.isCovered = false } }
 
-            map.filter {
-                it.hasMine && map.filterNeighborsOf(it).filter { neighbor -> !neighbor.isCovered || neighbor.hasMine } == map.filterNeighborsOf(it)
-            }.map {
+            val actual = mutableListOf<Int>()
+            FlagAssistant(map.toMutableList()).runFlagAssistant().toCollection(actual)
 
-            }
+            val expected = map
+                .filter { it.hasMine }
+                .mapNotNull {
+                    val neighbors = map.filterNeighborsOf(it)
+                    val neighborsCount = neighbors.count()
+                    val revealedNeighborsCount = neighbors.count { neighbor ->
+                        !neighbor.isCovered || (neighbor.hasMine && neighbor.mark.isFlag())
+                    }
+                    if (neighborsCount == revealedNeighborsCount) it.id else null
+                }
 
-            val result = mutableListOf<Int>()
-            FlagAssistant(map.toMutableList()).runFlagAssistant().toCollection(result)
+            assertEquals("run assistant isolating $takeMines mine(s)", expected, actual)
+        }
 
-            assertEquals("run assistant isolating $takeMines mine(s)", target, result)
+        repeat(20) { takeMines ->
+            val seed = 10 * takeMines
+            val creator = MinefieldCreator(Minefield(8, 8, 25), Random(seed))
+            val map = creator.create(50, false)
+
+            map.filter { it.hasMine }
+                .take(takeMines)
+                .forEach { map.filterNeighborsOf(it).forEach { neighbor -> neighbor.isCovered = false } }
+
+            val actual = mutableListOf<Int>()
+            FlagAssistant(map.toMutableList()).runFlagAssistant().toCollection(actual)
+
+            val expected = map
+                .filter { it.hasMine }
+                .mapNotNull {
+                    val neighbors = map.filterNeighborsOf(it)
+                    val neighborsCount = neighbors.count()
+                    val revealedNeighborsCount = neighbors.count { neighbor ->
+                        !neighbor.isCovered || (neighbor.hasMine && neighbor.mark.isFlag())
+                    }
+                    if (neighborsCount == revealedNeighborsCount) it.id else null
+                }
+
+            assertEquals("run assistant isolating $takeMines mine(s) and seed $seed", expected, actual)
         }
     }
 }
