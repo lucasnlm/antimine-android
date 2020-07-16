@@ -30,6 +30,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flatMap
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -116,17 +117,13 @@ class GameViewModel @ViewModelInject constructor(
         return setup
     }
 
-    private fun retryGame(save: Save): Minefield {
+    private fun retryGame(save: Save) {
         clock.reset()
         elapsedTimeSeconds.postValue(0L)
         currentDifficulty = save.difficulty
 
         val setup = save.minefield
-        gameController = GameController(setup, save.seed, save.uid).apply {
-            if (save.firstOpen is FirstOpen.Position) {
-                singleClick(save.firstOpen.value)
-            }
-        }
+        gameController = GameController(setup, save.seed, save.uid)
         refreshUserPreferences()
 
         mineCount.postValue(setup.mines)
@@ -147,7 +144,6 @@ class GameViewModel @ViewModelInject constructor(
         )
 
         saveId.postValue(save.uid.toLong())
-        return setup
     }
 
     suspend fun loadGame(uid: Int): Minefield = withContext(Dispatchers.IO) {
@@ -165,6 +161,8 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
+    @FlowPreview
+    @ExperimentalCoroutinesApi
     suspend fun retryGame(uid: Int): Minefield = withContext(Dispatchers.IO) {
         val save = savesRepository.loadFromId(uid)
 
@@ -172,6 +170,16 @@ class GameViewModel @ViewModelInject constructor(
             saveId.postValue(uid.toLong())
             currentDifficulty = save.difficulty
             retryGame(save)
+
+            withContext(Dispatchers.Main) {
+                if (save.firstOpen is FirstOpen.Position) {
+                    gameController.singleClick(save.firstOpen.value).flatMapConcat { it.second }.collect {
+                        refreshAll()
+                    }
+                }
+            }
+
+            save.minefield
         } else {
             // Fail to load
             startNewGame()

@@ -65,10 +65,10 @@ class GameController {
 
     fun getArea(id: Int) = field.first { it.id == id }
 
-    @Deprecated("Will be removed")
     fun plantMinesExcept(safeId: Int, includeSafeZone: Boolean = false) {
         field = minefieldCreator.create(safeId, includeSafeZone)
         mines = field.filter { it.hasMine }.asSequence()
+        firstOpen = FirstOpen.Position(safeId)
         hasMines = mines.count() != 0
     }
 
