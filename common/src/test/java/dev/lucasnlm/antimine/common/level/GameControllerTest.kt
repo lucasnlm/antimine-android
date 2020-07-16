@@ -1,702 +1,484 @@
-//package dev.lucasnlm.antimine.common.level
-//
-//import dev.lucasnlm.antimine.common.level.logic.filterNeighborsOf
-//import dev.lucasnlm.antimine.common.level.models.Area
-//import dev.lucasnlm.antimine.common.level.models.Mark
-//import dev.lucasnlm.antimine.common.level.models.Minefield
-//import dev.lucasnlm.antimine.common.level.models.Score
-//import dev.lucasnlm.antimine.core.control.ControlStyle
-//import dev.lucasnlm.antimine.core.control.GameControl
-//import org.junit.Assert.assertEquals
-//import org.junit.Assert.assertFalse
-//import org.junit.Assert.assertNotEquals
-//import org.junit.Assert.assertTrue
-//import org.junit.Test
-//
+package dev.lucasnlm.antimine.common.level
+
+import dev.lucasnlm.antimine.common.level.logic.filterNeighborsOf
+import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.common.level.models.Score
+import dev.lucasnlm.antimine.core.control.ControlStyle
+import dev.lucasnlm.antimine.core.control.GameControl
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runBlockingTest
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+@InternalCoroutinesApi
+@ExperimentalCoroutinesApi
 class GameControllerTest {
+    private fun withGameController(
+        clickOnCreate: Boolean = true,
+        block: (GameController) -> Unit
+    ) {
+        val minefield = Minefield(10, 10, 20)
+        val gameController = GameController(minefield, 200L)
+        if (clickOnCreate) {
+            gameController.fakeSingleClick(10)
+        }
+        block(gameController)
+    }
 
+    @Test
+    fun testGetMinesCount() = runBlockingTest {
+        withGameController {
+            assertEquals(20, it.getMinesCount())
+        }
+    }
+
+    @Test
+    fun testGetScore() = runBlockingTest {
+        withGameController { controller ->
+            assertEquals(Score(0, 20, 100), controller.getScore())
+
+            repeat(20) { right ->
+                controller.field.filter { it.hasMine }.take(right).forEach { it.mark = Mark.Flag }
+                assertEquals(Score(right, 20, 100), controller.getScore())
+            }
+        }
+    }
+
+    @Test
+    fun testGetScoreWithQuestion() = runBlockingTest {
+        withGameController { controller ->
+            assertEquals(Score(0, 20, 100), controller.getScore())
+
+            controller.field.filter { it.hasMine }.take(5).forEach { it.mark = Mark.Question }
+            assertEquals(Score(0, 20, 100), controller.getScore())
+        }
+    }
+
+    @Test
+    fun testFlagAllMines() = runBlockingTest {
+        withGameController { controller ->
+            controller.flagAllMines()
+            val actual = controller.field.filter { it.hasMine }.count { it.isCovered && it.mark.isFlag() }
+            assertEquals(20, actual)
+        }
+    }
+
+    @Test
+    fun testFindExplodedMine() = runBlockingTest {
+        withGameController { controller ->
+            assertNull(controller.findExplodedMine())
+            val target = controller.field.first { it.hasMine }
+            launch {
+                controller.singleClick(target.id).collect { it.second.collect() }
+            }
+            assertEquals(target.id, controller.findExplodedMine()?.id ?: - 1)
+        }
+    }
+
+    @Test
+    fun testTakeExplosionRadius() = runBlockingTest {
+        withGameController { controller ->
+            val lastMine = controller.field.last { it.hasMine }
+            assertEquals(
+                listOf(92, 91, 81, 70, 86, 41, 87, 67, 33, 36, 13, 59, 38, 27, 49, 4, 39, 5, 29, 19),
+                controller.takeExplosionRadius(lastMine).map { it.id }.toList()
+            )
+
+            val firstMine = controller.field.first { it.hasMine }
+            assertEquals(
+                listOf(4, 5, 13, 33, 27, 36, 38, 41, 19, 29, 39, 49, 67, 59, 70, 86, 81, 87, 92, 91),
+                controller.takeExplosionRadius(firstMine).map { it.id }.toList()
+            )
+
+            val midMine = controller.field.filter { it.hasMine }.take(controller.getMinesCount() / 2).last()
+            assertEquals(
+                listOf(39, 29, 38, 49, 19, 59, 27, 36, 67, 5, 87, 4, 86, 33, 13, 41, 92, 81, 70, 91),
+                controller.takeExplosionRadius(midMine).map { it.id }.toList()
+            )
+        }
+    }
+
+    @Test
+    fun testShowAllMines() = runBlockingTest {
+        withGameController { controller ->
+            controller.showAllMines()
+            controller.field.filter { it.hasMine && it.mistake }.forEach {
+                assertEquals(it.isCovered, false)
+            }
+            controller.field.filter { it.hasMine && it.mark.isFlag() }.forEach {
+                assertEquals(it.isCovered, true)
+            }
+        }
+    }
+
+    @Test
+    fun testShowWrongFlags() = runBlockingTest {
+        withGameController { controller ->
+            val wrongFlag = controller.field.first { !it.hasMine }.apply {
+                mark = Mark.Flag
+            }
+            val rightFlag = controller.field.first { it.hasMine }.apply {
+                mark = Mark.Flag
+            }
+            controller.showWrongFlags()
+            assertTrue(wrongFlag.mistake)
+            assertFalse(rightFlag.mistake)
+        }
+    }
+
+    @Test
+    fun testRevealAllEmptyAreas() = runBlockingTest {
+        withGameController { controller ->
+            val covered = controller.field.filter { it.isCovered }
+            assertTrue(covered.isNotEmpty())
+            controller.revealAllEmptyAreas()
+            assertEquals(controller.field.filter { it.hasMine }, controller.field.filter { it.isCovered })
+        }
+    }
+
+    @Test
+    fun testFlaggedAllMines() = runBlockingTest {
+        withGameController { controller ->
+            assertFalse(controller.hasFlaggedAllMines())
+            controller.field.filter { it.hasMine }.take(10).forEach { it.mark = Mark.Flag }
+            assertFalse(controller.hasFlaggedAllMines())
+            controller.field.filter { it.hasMine }.forEach { it.mark = Mark.Flag }
+            assertTrue(controller.hasFlaggedAllMines())
+        }
+    }
+
+    @Test
+    fun testRemainingMines() = runBlockingTest {
+        withGameController { controller ->
+            assertEquals(20, controller.remainingMines())
+
+            repeat(20) { flagCount ->
+                controller.field.filter { it.hasMine }.take(flagCount).forEach { it.mark = Mark.Flag }
+                assertEquals("flagging $flagCount mines", 20 - flagCount, controller.remainingMines())
+            }
+        }
+    }
+
+    @Test
+    fun testHasIsolatedAllMines() = runBlockingTest {
+        withGameController { controller ->
+            assertFalse(controller.hasIsolatedAllMines())
+            assertFalse(controller.isGameOver())
+
+            controller.field.filter { !it.hasMine }.forEach {
+                it.isCovered = false
+            }
+
+            assertTrue(controller.hasIsolatedAllMines())
+            assertTrue(controller.isGameOver())
+        }
+    }
+
+    @Test
+    fun testHasAnyMineExploded() = runBlockingTest {
+        withGameController { controller ->
+            assertFalse(controller.hasAnyMineExploded())
+
+            controller.field.first { it.hasMine }.also {
+                it.isCovered = false
+                it.mistake = true
+            }
+
+            assertTrue(controller.hasAnyMineExploded())
+        }
+    }
+
+    @Test
+    fun testGameOverWithMineExploded() = runBlockingTest {
+        withGameController { controller ->
+            assertFalse(controller.isGameOver())
+
+            controller.field.first { it.hasMine }.also {
+                it.isCovered = false
+                it.mistake = true
+            }
+
+            assertTrue(controller.isGameOver())
+        }
+    }
+
+    @Test
+    fun testVictory() = runBlockingTest {
+        withGameController { controller ->
+            assertFalse(controller.checkVictory())
+
+            controller.field.filter { it.hasMine }.forEach { it.mark = Mark.Flag }
+            assertFalse(controller.checkVictory())
+
+            controller.field.filterNot { it.hasMine }.forEach { it.isCovered = false }
+            assertTrue(controller.checkVictory())
+
+            controller.field.first { it.hasMine }.mistake = true
+            assertFalse(controller.checkVictory())
+        }
+    }
+
+    @Test
+    fun testCantShowVictoryIfHasNoMines() = runBlockingTest {
+        withGameController { controller ->
+            assertFalse(controller.checkVictory())
+        }
+    }
+
+    @Test
+    fun testControlFirstActionWithStandard() = runBlockingTest {
+        withGameController { controller ->
+            controller.updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
+            assertTrue(controller.at(3).isCovered)
+            controller.fakeSingleClick(3)
+            assertFalse(controller.at(3).isCovered)
+        }
+    }
+
+    @Test
+    fun testControlSecondActionWithStandard() = runBlockingTest {
+        withGameController { controller ->
+            controller.run {
+                updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
+                useQuestionMark(true)
+
+                fakeLongPress(4)
+                assertTrue(at(4).mark.isFlag())
+                assertTrue(at(4).isCovered)
+                fakeLongPress(4)
+                assertTrue(at(4).mark.isQuestion())
+                assertTrue(at(4).isCovered)
+                fakeLongPress(4)
+                assertTrue(at(4).mark.isNone())
+                assertTrue(at(4).isCovered)
+
+                useQuestionMark(false)
+                fakeLongPress(4)
+                assertTrue(at(4).mark.isFlag())
+                assertTrue(at(4).isCovered)
+                fakeLongPress(4)
+                assertTrue(at(4).mark.isNone())
+                assertTrue(at(4).isCovered)
+            }
+        }
+    }
+
+    @Test
+    fun testControlStandardOpenMultiple() = runBlockingTest {
+        withGameController { controller ->
+            controller.run {
+                updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
+                fakeSingleClick(14)
+                assertFalse(at(14).isCovered)
+                field.filterNeighborsOf(at(14)).forEach {
+                    assertTrue(it.isCovered)
+                }
+
+                field.filter { it.hasMine }.forEach {
+                    fakeLongPress(it.id)
+                    assertTrue(it.mark.isFlag())
+                }
+
+                fakeLongPress(14)
+                field.filterNeighborsOf(at(14)).forEach {
+                    if (it.hasMine) {
+                        assertTrue(it.isCovered)
+                    } else {
+                        assertFalse(it.isCovered)
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun testControlFirstActionWithFastFlag() {
+        withGameController { controller ->
+            controller.run {
+                updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
+                fakeSingleClick(3)
+                assertTrue(at(3).isCovered)
+                assertTrue(at(3).mark.isFlag())
+                fakeLongPress(3)
+                assertFalse(at(3).mark.isFlag())
+                assertTrue(at(3).isCovered)
+                fakeLongPress(3)
+                assertFalse(at(3).isCovered)
+            }
+        }
+    }
+
+    @Test
+    fun testControlFastFlagOpenMultiple() {
+        withGameController { controller ->
+            controller.run {
+                updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
+                fakeLongPress(14)
+                assertFalse(at(14).isCovered)
+                field.filterNeighborsOf(at(14)).forEach {
+                    assertTrue(it.isCovered)
+                }
+
+                field.filter { it.hasMine }.forEach {
+                    fakeSingleClick(it.id)
+                    assertTrue(it.mark.isFlag())
+                }
+
+                fakeSingleClick(14)
+                field.filterNeighborsOf(at(14)).forEach {
+                    if (it.hasMine) {
+                        assertTrue(it.isCovered)
+                    } else {
+                        assertFalse(it.isCovered)
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun testControlFirstActionWithDoubleClick() {
+        withGameController { controller ->
+            controller.run {
+                updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
+                fakeSingleClick(3)
+                assertTrue(at(3).isCovered)
+                assertTrue(at(3).mark.isFlag())
+                fakeDoubleClick(3)
+                assertFalse(at(3).mark.isFlag())
+                assertTrue(at(3).isCovered)
+                fakeDoubleClick(3)
+                assertFalse(at(3).isCovered)
+            }
+        }
+    }
+
+    @Test
+    fun testControlFirstActionWithDoubleClickAndWithoutQuestionMark() {
+        withGameController { controller ->
+            controller.run {
+                updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
+
+                useQuestionMark(true)
+                var targetId = 4
+                fakeSingleClick(targetId)
+                assertTrue(at(targetId).isCovered)
+                assertTrue(at(targetId).mark.isFlag())
+                fakeSingleClick(targetId)
+                assertTrue(at(targetId).mark.isQuestion())
+                assertTrue(at(targetId).isCovered)
+                fakeSingleClick(targetId)
+                assertTrue(at(targetId).mark.isNone())
+                assertTrue(at(targetId).isCovered)
+                fakeDoubleClick(targetId)
+                assertFalse(at(targetId).isCovered)
+
+                useQuestionMark(false)
+                targetId = 3
+                fakeSingleClick(targetId)
+                assertTrue(at(targetId).isCovered)
+                assertTrue(at(targetId).mark.isFlag())
+                fakeSingleClick(targetId)
+                assertFalse(at(targetId).mark.isFlag())
+                assertTrue(at(targetId).isCovered)
+                fakeDoubleClick(targetId)
+                assertFalse(at(targetId).isCovered)
+            }
+        }
+    }
+
+    @Test
+    fun testControlDoubleClickOpenMultiple() {
+        withGameController { controller ->
+            controller.run {
+                updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
+                fakeDoubleClick(14)
+                assertFalse(at(14).isCovered)
+                field.filterNeighborsOf(at(14)).forEach {
+                    assertTrue(it.isCovered)
+                }
+
+                field.filter { it.hasMine }.forEach {
+                    fakeSingleClick(it.id)
+                    assertTrue(it.mark.isFlag())
+                }
+
+                fakeDoubleClick(14)
+                field.filterNeighborsOf(at(14)).forEach {
+                    if (it.hasMine) {
+                        assertTrue(it.isCovered)
+                    } else {
+                        assertFalse(it.isCovered)
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun testIfDoubleClickPlantMinesOnFirstClick() {
+        withGameController(clickOnCreate = false) { controller ->
+            controller.run {
+                updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
+                assertFalse(hasMines)
+                assertEquals(0, field.filterNot { it.isCovered }.count())
+                fakeSingleClick(40)
+                assertTrue(hasMines)
+                field.filterNeighborsOf(at(40)).forEach { assertFalse(it.isCovered) }
+            }
+        }
+    }
+
+    @Test
+    fun testIfFastFlagPlantMinesOnFirstClick() {
+        withGameController(clickOnCreate = false) { controller ->
+            controller.run {
+                updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
+                assertFalse(hasMines)
+                assertEquals(0, field.filterNot { it.isCovered }.count())
+                fakeSingleClick(40)
+                assertTrue(hasMines)
+                field.filterNeighborsOf(at(40)).forEach { assertFalse(it.isCovered) }
+            }
+        }
+    }
+
+    private fun GameController.at(index: Int): Area {
+        return this.field.first { it.id == index }
+    }
+
+    private fun GameController.fakeSingleClick(index: Int) {
+        runBlocking {
+            launch {
+                singleClick(index).collect {
+                    it.second.collect()
+                }
+            }
+        }
+    }
+
+    private fun GameController.fakeLongPress(index: Int) {
+        runBlocking {
+            launch {
+                longPress(index).collect { it.second.collect() }
+            }
+        }
+    }
+
+    private fun GameController.fakeDoubleClick(index: Int) {
+        runBlocking {
+            launch {
+                doubleClick(index).collect { it.second.collect() }
+            }
+        }
+    }
 }
-//
-//    private fun gameControllerOf(width: Int, height: Int, mines: Int, seed: Long = 0L) =
-//        GameController(Minefield(width, height, mines), seed)
-//
-//    private fun GameController.at(id: Int): Area = field.first { it.id == id }
-//
-//
-//
-//    @Test
-//    fun afterOpenATileItsMaskMustBeRemoved() {
-//        val mineCount = 3
-//        gameControllerOf(3, 3, mineCount).run {
-//            plantMinesExcept(3)
-//            at(3).mark = Mark.Flag
-//            singleClick(3)
-//            assertFalse(at(3).mark.isFlag())
-//            singleClick(3)
-//            assertTrue(at(3).mark.isNone())
-//            assertFalse(at(3).isCovered)
-//        }
-//    }
-//
-//
-//    @Test
-//    fun testGetMinesCount() {
-//        gameControllerOf(6, 6, 15, 200L).run {
-//            plantMinesExcept(3)
-//            assertEquals(15, getMinesCount())
-//        }
-//    }
-
-
-//
-//    @Test
-//    fun testFlagAssistant() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//            field.filterNot { it.hasMine }.forEach { it.openTile() }
-//            runFlagAssistant()
-//            field.filter { it.hasMine }.map { it.mark.isFlag() }.forEach(::assertTrue)
-//        }
-//
-//        gameControllerOf(3, 3, 2, 200L).run {
-//            plantMinesExcept(3)
-//            field.filterNot { it.hasMine }.forEach { it.openTile() }
-//            runFlagAssistant()
-//            field.filter { it.hasMine }.map { it.mark.isFlag() }.forEach(::assertTrue)
-//        }
-//
-//        gameControllerOf(3, 3, 8, 200L).run {
-//            plantMinesExcept(3)
-//            field.filterNot { it.hasMine }.forEach { it.openTile() }
-//            runFlagAssistant()
-//            field.filter { it.hasMine }.map { it.mark.isFlag() }.forEach(::assertFalse)
-//        }
-//    }
-//
-//    @Test
-//    fun testSwitchToFlag() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//
-//            with(getArea(7)) {
-//                switchMark()
-//                mark.isFlag()
-//
-//                field.forEach {
-//                    if (it.id == 7) {
-//                        assertTrue(it.mark.isFlag())
-//                    } else {
-//                        assertFalse(it.mark.isFlag())
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun testSwitchToQuestion() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//
-//            with(getArea(7)) {
-//                switchMark()
-//                switchMark()
-//                assertTrue(mark.isNotNone())
-//            }
-//
-//            field.forEach {
-//                if (it.id == 7) {
-//                    assertTrue(it.mark.isQuestion())
-//                } else {
-//                    assertFalse(it.mark.isQuestion())
-//                }
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun testSwitchToQuestionWithUseQuestionOff() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//            useQuestionMark(false)
-//
-//            with(getArea(7)) {
-//                switchMark()
-//                switchMark()
-//                assertTrue(mark.isNone())
-//            }
-//
-//            field.forEach { assertFalse(it.mark.isQuestion()) }
-//        }
-//    }
-//
-//    @Test
-//    fun testSwitchBackToEmpty() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//
-//            with(getArea(7)) {
-//                switchMark()
-//                switchMark()
-//                switchMark()
-//
-//                assertTrue(mark.isNone())
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun testRemoveMark() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//
-//            with(getArea(7)) {
-//                switchMark()
-//                assertTrue(mark.isFlag())
-//                removeMark()
-//                assertTrue(mark.isNone())
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun testTurnOffAllHighlighted() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//            getArea(7).highlighted = true
-//            getArea(8).highlighted = true
-//            assertEquals(field.count { it.highlighted }, 2)
-//            turnOffAllHighlighted()
-//            assertEquals(field.count { it.highlighted }, 0)
-//        }
-//    }
-//
-//    @Test
-//    fun testOpenField() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//            assertEquals(field.filter { it.isCovered }.count(), field.count())
-//            singleClick(3)
-//            assertFalse(at(3).isCovered)
-//        }
-//    }
-//
-//    @Test
-//    fun testOpenNeighborsWithoutFlag() {
-//        gameControllerOf(5, 5, 24, 200L).run {
-//            plantMinesExcept(12)
-//            singleClick(12)
-//            assertEquals(
-//                listOf(
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 0, 1, 1,
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 1, 1, 1
-//                ),
-//                field.map { if (it.isCovered) 1 else 0 }.toList()
-//            )
-//
-//            // It won't open any if the mines were not flagged.
-//            getArea(12).openNeighbors()
-//            assertEquals(
-//                listOf(
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 0, 1, 1,
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 1, 1, 1
-//                ),
-//                field.map { if (it.isCovered) 1 else 0 }.toList()
-//            )
-//        }
-//    }
-//
-//    @Test
-//    fun testOpenNeighbors() {
-//        gameControllerOf(5, 5, 15, 200L).run {
-//            plantMinesExcept(12)
-//            singleClick(12)
-//            assertEquals(
-//                listOf(
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 0, 1, 1,
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 1, 1, 1
-//                ),
-//                field.map { if (it.isCovered) 1 else 0 }.toList()
-//            )
-//
-//            // It won't open any if the mines were flagged.
-//            singleClick(14)
-//            getArea(14).openNeighbors()
-//            assertEquals(
-//                listOf(
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 0, 1, 0,
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 1, 1, 1
-//                ),
-//                field.map { if (it.isCovered) 1 else 0 }.toList()
-//            )
-//
-//            // After flag its neighbors, it must open all clean neighbors.
-//            field.filterNeighborsOf(getArea(14)).filter { it.hasMine }.forEach { it.mark = Mark.Flag }
-//            getArea(14).openNeighbors()
-//            assertEquals(
-//                listOf(
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 1, 1, 1,
-//                    1, 1, 0, 0, 0,
-//                    1, 1, 1, 1, 0,
-//                    1, 1, 1, 1, 1
-//                ),
-//                field.map { if (it.isCovered) 1 else 0 }.toList()
-//            )
-//        }
-//    }
-//
-//    @Test
-//    fun testOpenSafeZone() {
-//        gameControllerOf(3, 3, 1, 0).run {
-//            plantMinesExcept(3)
-//            assertEquals(field.filterNot { it.isCovered }.count(), 0)
-//            singleClick(1)
-//            assertEquals(field.filterNot { it.isCovered }.count(), 6)
-//            assertEquals(
-//                field.filterNot { it.isCovered }.map { it.id }.toList(),
-//                listOf(0, 1, 2, 3, 4, 5)
-//            )
-//        }
-//    }
-//
-//    @Test
-//    fun testShowAllMines() {
-//        gameControllerOf(3, 3, 5, 200L).run {
-//            plantMinesExcept(3)
-//            showAllMines()
-//            field.filter { it.hasMine && it.mistake }.forEach {
-//                assertEquals(it.isCovered, false)
-//            }
-//            field.filter { it.hasMine && it.mark.isFlag() }.forEach {
-//                assertEquals(it.isCovered, true)
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun testFlagAllMines() {
-//        gameControllerOf(3, 3, 5, 200L).run {
-//            plantMinesExcept(3)
-//            field.filter { it.hasMine }.forEach {
-//                assertFalse(it.mark.isFlag())
-//            }
-//            flagAllMines()
-//            field.filter { it.hasMine }.forEach {
-//                assertTrue(it.mark.isFlag())
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun testFindExplodedMine() {
-//        gameControllerOf(3, 3, 5, 200L).run {
-//            plantMinesExcept(3)
-//            val mine = field.first { it.hasMine }
-//            assertEquals(findExplodedMine(), null)
-//            mine.openTile()
-//            assertEquals(findExplodedMine(), mine)
-//        }
-//    }
-//
-//    @Test
-//    fun testTakeExplosionRadius() {
-//        gameControllerOf(6, 6, 10, 200L).run {
-//            plantMinesExcept(3)
-//            val mine = field.last { it.hasMine }
-//            assertEquals(
-//                listOf(33, 26, 28, 31, 19, 14, 18, 7, 6, 4),
-//                takeExplosionRadius(mine).map { it.id }.toList()
-//            )
-//        }
-//
-//        gameControllerOf(6, 6, 10, 200L).run {
-//            plantMinesExcept(3)
-//            val mine = field.first { it.hasMine }
-//            assertEquals(
-//                listOf(4, 14, 7, 28, 6, 19, 26, 18, 33, 31),
-//                takeExplosionRadius(mine).map { it.id }.toList()
-//            )
-//        }
-//
-//        gameControllerOf(6, 6, 10, 200L).run {
-//            plantMinesExcept(3)
-//            val mine = field.filter { it.hasMine }.elementAt(4)
-//            assertEquals(
-//                listOf(18, 19, 6, 7, 14, 26, 31, 33, 28, 4),
-//                takeExplosionRadius(mine).map { it.id }.toList()
-//            )
-//        }
-//    }
-//
-//    @Test
-//    fun testShowWrongFlags() {
-//        gameControllerOf(3, 3, 5, 200L).run {
-//            plantMinesExcept(3)
-//            val wrongFlag = field.first { !it.hasMine }.apply {
-//                mark = Mark.Flag
-//            }
-//            val rightFlag = field.first { it.hasMine }.apply {
-//                mark = Mark.Flag
-//            }
-//            showWrongFlags()
-//            assertTrue(wrongFlag.mistake)
-//            assertFalse(rightFlag.mistake)
-//        }
-//    }
-//
-//    @Test
-//    fun testRevealAllEmptyAreas() {
-//        gameControllerOf(3, 3, 5, 200L).run {
-//            plantMinesExcept(3)
-//            field.filter { it.id != 3 }.map { it.isCovered }.forEach(::assertTrue)
-//            revealAllEmptyAreas()
-//            field.filter { it.id != 3 && !it.hasMine }.map { it.isCovered }.forEach(::assertFalse)
-//            field.filter { it.hasMine }.map { it.isCovered }.forEach(::assertTrue)
-//        }
-//    }
-//
-//    @Test
-//    fun testGetScore() {
-//        gameControllerOf(3, 3, 5, 200L).run {
-//            assertEquals(getScore(), Score(0, 0, 9))
-//            plantMinesExcept(3)
-//            assertEquals(getScore(), Score(0, 5, 9))
-//            field.filter { it.hasMine }.forEach { it.mark = Mark.Flag }
-//            assertEquals(getScore(), Score(5, 5, 9))
-//            field.first { it.hasMine }.apply {
-//                isCovered = false
-//                mistake = true
-//            }
-//            assertEquals(getScore(), Score(4, 5, 9))
-//        }
-//    }
-//
-//    @Test
-//    fun testFlaggedAllMines() {
-//        gameControllerOf(3, 3, 5, 200L).run {
-//            plantMinesExcept(3)
-//            assertFalse(hasFlaggedAllMines())
-//            field.forEach {
-//                if (it.hasMine) {
-//                    it.mark = Mark.Flag
-//                }
-//            }
-//            assertTrue(hasFlaggedAllMines())
-//        }
-//    }
-//
-//    @Test
-//    fun testRemainingMines() {
-//        gameControllerOf(3, 3, 5, 200L).run {
-//            plantMinesExcept(3)
-//            assertEquals(remainingMines(), 5)
-//
-//            field.filter { it.hasMine }.take(2).forEach {
-//                it.mark = Mark.Flag
-//            }
-//            assertEquals(remainingMines(), 3)
-//
-//            field.filter { it.hasMine }.forEach {
-//                it.mark = Mark.Flag
-//            }
-//            assertEquals(remainingMines(), 0)
-//        }
-//    }
-//
-//    @Test
-//    fun testHasIsolatedAllMines() {
-//        val width = 12
-//        val height = 12
-//        val mines = 9
-//        gameControllerOf(width, height, mines, 150L).run {
-//            plantMinesExcept(3)
-//            field.filterNot { it.hasMine }.take(width * height - 1 - mines).forEach {
-//                singleClick(it.id)
-//                assertFalse(hasIsolatedAllMines())
-//                assertFalse(isGameOver())
-//            }
-//
-//            field.first { !it.hasMine && it.isCovered }.run {
-//                singleClick(id)
-//                assertTrue(hasIsolatedAllMines())
-//                assertTrue(isGameOver())
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun testHasAnyMineExploded() {
-//        gameControllerOf(3, 3, 5, 200L).run {
-//            plantMinesExcept(3)
-//            assertFalse(hasAnyMineExploded())
-//
-//            field.first { it.hasMine }.apply {
-//                isCovered = false
-//                mistake = true
-//            }
-//
-//            assertTrue(hasAnyMineExploded())
-//        }
-//    }
-//
-//    @Test
-//    fun testGameOverWithMineExploded() {
-//        gameControllerOf(3, 3, 5, 200L).run {
-//            plantMinesExcept(3)
-//            assertFalse(isGameOver())
-//
-//            field.first { it.hasMine }.apply {
-//                isCovered = false
-//                mistake = true
-//            }
-//
-//            assertTrue(isGameOver())
-//        }
-//    }
-//
-//    @Test
-//    fun testVictory() {
-//        gameControllerOf(3, 3, 5, 200L).run {
-//            plantMinesExcept(3)
-//            assertFalse(checkVictory())
-//
-//            field.filter { it.hasMine }.forEach { it.mark = Mark.Flag }
-//            assertFalse(checkVictory())
-//
-//            field.filterNot { it.hasMine }.forEach { it.isCovered = false }
-//            assertTrue(checkVictory())
-//
-//            field.first { it.hasMine }.mistake = true
-//            assertFalse(checkVictory())
-//        }
-//    }
-//
-//    @Test
-//    fun testCantShowVictoryIfHasNoMines() {
-//        gameControllerOf(3, 3, 0, 200L).run {
-//            plantMinesExcept(3)
-//            assertFalse(checkVictory())
-//        }
-//    }
-//
-//    @Test
-//    fun testControlFirstActionWithStandard() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//            updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
-//            assertTrue(at(3).isCovered)
-//            singleClick(3)
-//            assertFalse(at(3).isCovered)
-//        }
-//    }
-//
-//    @Test
-//    fun testControlSecondActionWithStandard() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//            updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
-//
-//            useQuestionMark(true)
-//            longPress(3)
-//            assertTrue(at(3).mark.isFlag())
-//            assertTrue(at(3).isCovered)
-//            longPress(3)
-//            assertTrue(at(3).mark.isQuestion())
-//            assertTrue(at(3).isCovered)
-//            longPress(3)
-//            assertTrue(at(3).mark.isNone())
-//            assertTrue(at(3).isCovered)
-//
-//            useQuestionMark(false)
-//            longPress(3)
-//            assertTrue(at(3).mark.isFlag())
-//            assertTrue(at(3).isCovered)
-//            longPress(3)
-//            assertTrue(at(3).mark.isNone())
-//            assertTrue(at(3).isCovered)
-//        }
-//    }
-//
-//    @Test
-//    fun testControlStandardOpenMultiple() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//            updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
-//            singleClick(3)
-//            assertFalse(at(3).isCovered)
-//            field.filterNeighborsOf(at(3)).forEach {
-//                assertTrue(it.isCovered)
-//            }
-//
-//            field.filter { it.hasMine }.forEach {
-//                longPress(it.id)
-//                assertTrue(it.mark.isFlag())
-//            }
-//
-//            longPress(3)
-//            field.filterNeighborsOf(at(3)).forEach {
-//                if (it.hasMine) {
-//                    assertTrue(it.isCovered)
-//                } else {
-//                    assertFalse(it.isCovered)
-//                }
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun testControlFirstActionWithFastFlag() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//            updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
-//            singleClick(3)
-//            assertTrue(at(3).isCovered)
-//            assertTrue(at(3).mark.isFlag())
-//            longPress(3)
-//            assertFalse(at(3).mark.isFlag())
-//            assertTrue(at(3).isCovered)
-//            longPress(3)
-//            assertFalse(at(3).isCovered)
-//        }
-//    }
-//
-//    @Test
-//    fun testControlFastFlagOpenMultiple() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//            updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
-//            longPress(3)
-//            assertFalse(at(3).isCovered)
-//            field.filterNeighborsOf(at(3)).forEach {
-//                assertTrue(it.isCovered)
-//            }
-//
-//            field.filter { it.hasMine }.forEach {
-//                singleClick(it.id)
-//                assertTrue(it.mark.isFlag())
-//            }
-//
-//            singleClick(3)
-//            field.filterNeighborsOf(at(3)).forEach {
-//                if (it.hasMine) {
-//                    assertTrue(it.isCovered)
-//                } else {
-//                    assertFalse(it.isCovered)
-//                }
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun testControlFirstActionWithDoubleClick() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//            updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
-//            singleClick(3)
-//            assertTrue(at(3).isCovered)
-//            assertTrue(at(3).mark.isFlag())
-//            doubleClick(3)
-//            assertFalse(at(3).mark.isFlag())
-//            assertTrue(at(3).isCovered)
-//            doubleClick(3)
-//            assertFalse(at(3).isCovered)
-//        }
-//    }
-//
-//    @Test
-//    fun testControlFirstActionWithDoubleClickAndWithoutQuestionMark() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//            updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
-//
-//            useQuestionMark(true)
-//            var targetId = 4
-//            singleClick(targetId)
-//            assertTrue(at(targetId).isCovered)
-//            assertTrue(at(targetId).mark.isFlag())
-//            singleClick(targetId)
-//            assertTrue(at(targetId).mark.isQuestion())
-//            assertTrue(at(targetId).isCovered)
-//            singleClick(targetId)
-//            assertTrue(at(targetId).mark.isNone())
-//            assertTrue(at(targetId).isCovered)
-//            doubleClick(targetId)
-//            assertFalse(at(targetId).isCovered)
-//
-//            useQuestionMark(false)
-//            targetId = 3
-//            singleClick(targetId)
-//            assertTrue(at(targetId).isCovered)
-//            assertTrue(at(targetId).mark.isFlag())
-//            singleClick(targetId)
-//            assertFalse(at(targetId).mark.isFlag())
-//            assertTrue(at(targetId).isCovered)
-//            doubleClick(targetId)
-//            assertFalse(at(targetId).isCovered)
-//        }
-//    }
-//
-//    @Test
-//    fun testControlDoubleClickOpenMultiple() {
-//        gameControllerOf(3, 3, 1, 200L).run {
-//            plantMinesExcept(3)
-//            updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
-//            doubleClick(3)
-//            assertFalse(at(3).isCovered)
-//            field.filterNeighborsOf(at(3)).forEach {
-//                assertTrue(it.isCovered)
-//            }
-//
-//            field.filter { it.hasMine }.forEach {
-//                singleClick(it.id)
-//                assertTrue(it.mark.isFlag())
-//            }
-//
-//            doubleClick(3)
-//            field.filterNeighborsOf(at(3)).forEach {
-//                if (it.hasMine) {
-//                    assertTrue(it.isCovered)
-//                } else {
-//                    assertFalse(it.isCovered)
-//                }
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun testIfDoubleClickPlantMinesOnFirstClick() {
-//        gameControllerOf(9, 9, 72, 200L).run {
-//            updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
-//            assertFalse(hasMines)
-//            assertEquals(0, field.filterNot { it.isCovered }.count())
-//            singleClick(40)
-//            assertTrue(hasMines)
-//            field.filterNeighborsOf(at(40)).forEach { assertFalse(it.isCovered) }
-//        }
-//    }
-//
-//    @Test
-//    fun testIfFastFlagPlantMinesOnFirstClick() {
-//        gameControllerOf(9, 9, 72, 200L).run {
-//            updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
-//            assertFalse(hasMines)
-//            assertEquals(0, field.filterNot { it.isCovered }.count())
-//            singleClick(40)
-//            assertTrue(hasMines)
-//            field.filterNeighborsOf(at(40)).forEach { assertFalse(it.isCovered) }
-//        }
-//    }
-//}

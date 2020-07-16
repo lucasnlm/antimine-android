@@ -78,23 +78,25 @@ class MinefieldHandler(
 
     fun openOrFlagNeighborsOf(index: Int) {
         field.getOrNull(index)?.run {
-            val neighbors = field.filterNeighborsOf(this)
-            val flaggedCount = neighbors.count { it.mark.isFlag() }
-            if (flaggedCount >= minesAround) {
-                changes++
-                changes += neighbors
-                    .filter { it.isCovered && it.mark.isNone() }
-                    .onEach { openAt(it.id) }
-                    .count()
-            } else {
-                val coveredNeighbors = neighbors.filter { it.isCovered }
-                if (coveredNeighbors.count() == minesAround) {
+            if (!isCovered) {
+                val neighbors = field.filterNeighborsOf(this)
+                val flaggedCount = neighbors.count { it.mark.isFlag() }
+                if (flaggedCount >= minesAround) {
                     changes++
-                    changes += coveredNeighbors.filter {
-                        it.mark.isNone()
-                    }.onEach {
-                        switchMarkAt(it.id)
-                    }.count()
+                    changes += neighbors
+                        .filter { it.isCovered && it.mark.isNone() }
+                        .onEach { openAt(it.id) }
+                        .count()
+                } else {
+                    val coveredNeighbors = neighbors.filter { it.isCovered }
+                    if (coveredNeighbors.count() == minesAround) {
+                        changes++
+                        changes += coveredNeighbors.filter {
+                            it.mark.isNone()
+                        }.onEach {
+                            switchMarkAt(it.id)
+                        }.count()
+                    }
                 }
             }
         }
