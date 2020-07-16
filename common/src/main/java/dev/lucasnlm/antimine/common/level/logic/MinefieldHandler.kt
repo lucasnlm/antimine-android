@@ -76,7 +76,7 @@ class MinefieldHandler(
         }
     }
 
-    fun openNeighborsOf(index: Int) {
+    fun openOrFlagNeighborsOf(index: Int) {
         field.getOrNull(index)?.run {
             val neighbors = field.filterNeighborsOf(this)
             val flaggedCount = neighbors.count { it.mark.isFlag() }

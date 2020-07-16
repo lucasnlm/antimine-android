@@ -111,7 +111,7 @@ class GameController {
                     }
                 }
                 ActionResponse.OpenNeighbors -> {
-                    minefieldHandler.openNeighborsOf(target.id)
+                    minefieldHandler.openOrFlagNeighborsOf(target.id)
                 }
             }
 
