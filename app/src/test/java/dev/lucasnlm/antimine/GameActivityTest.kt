@@ -40,9 +40,11 @@ class GameActivityTest {
 
             ShadowLooper.runUiThreadTasks()
 
+            val id = activity.viewModel.field.value!!.first { it.hasMine }.id.toLong()
+
             // Tap on a mine
             activity.findViewById<RecyclerView>(R.id.recyclerGrid)
-                .findViewHolderForItemId(26).itemView.performClick()
+                .findViewHolderForItemId(id).itemView.performClick()
 
             ShadowLooper.idleMainLooper(2, TimeUnit.SECONDS)
             ShadowLooper.runUiThreadTasks()
@@ -55,11 +57,11 @@ class GameActivityTest {
 
     @Test
     fun testShowVictoryWhenTapAllSafeAreas() {
-        val mines = sequenceOf(4, 9, 15, 26, 47, 53, 68, 71, 75)
-        val safeAreas = (0 until 81).filterNot { mines.contains(it) }.map { it.toLong() }
-
         launchActivity<GameActivity>().onActivity { activity ->
             ShadowLooper.runUiThreadTasks()
+
+            val mines = activity.viewModel.field.value!!.filter { it.hasMine }.map { it.id.toLong() }.toList()
+            val safeAreas = activity.viewModel.field.value!!.filter { !it.hasMine }.map { it.id.toLong() }.toList()
 
             // First tap
             activity.findViewById<RecyclerView>(R.id.recyclerGrid)
