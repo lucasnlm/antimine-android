@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.common.level
+package dev.lucasnlm.antimine.common.level.logic
 
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock

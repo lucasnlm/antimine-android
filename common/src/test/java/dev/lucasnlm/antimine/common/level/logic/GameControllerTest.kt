@@ -1,6 +1,6 @@
-package dev.lucasnlm.antimine.common.level
+package dev.lucasnlm.antimine.common.level.logic
 
-import dev.lucasnlm.antimine.common.level.logic.filterNeighborsOf
+import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.Minefield
