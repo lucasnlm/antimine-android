@@ -12,7 +12,7 @@ class MinefieldHandler(
     private var changes = 0
 
     fun turnOffAllHighlighted() {
-        changes = field.filter { it.highlighted }.onEach { it.highlighted = false }.count()
+        changes += field.filter { it.highlighted }.onEach { it.highlighted = false }.count()
     }
 
     fun removeMarkAt(index: Int) {
@@ -41,7 +41,7 @@ class MinefieldHandler(
         field.getOrNull(index)?.run {
             if (isCovered) {
                 changedIndex = index
-                changes += 1
+                changes++
                 isCovered = false
                 mark = Mark.None
 
@@ -81,10 +81,21 @@ class MinefieldHandler(
             val neighbors = field.filterNeighborsOf(this)
             val flaggedCount = neighbors.count { it.mark.isFlag() }
             if (flaggedCount >= minesAround) {
+                changes++
                 changes += neighbors
-                    .filter { it.mark.isNone() && it.isCovered }
+                    .filter { it.isCovered && it.mark.isNone() }
                     .onEach { openAt(it.id) }
                     .count()
+            } else {
+                val coveredNeighbors = neighbors.filter { it.isCovered }
+                if (coveredNeighbors.count() == minesAround) {
+                    changes++
+                    changes += coveredNeighbors.filter {
+                        it.mark.isNone()
+                    }.onEach {
+                        switchMarkAt(it.id)
+                    }.count()
+                }
             }
         }
     }
