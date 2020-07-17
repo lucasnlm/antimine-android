@@ -4,6 +4,7 @@ import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.database.models.Stats
+import dev.lucasnlm.antimine.common.level.logic.BruteForceSolver
 import dev.lucasnlm.antimine.common.level.logic.FlagAssistant
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
@@ -63,10 +64,16 @@ class GameController {
         this.hasMines = this.mines.count() != 0
     }
 
-    fun getArea(id: Int) = field.first { it.id == id }
+    private fun getArea(id: Int) = field.first { it.id == id }
 
-    fun plantMinesExcept(safeId: Int, includeSafeZone: Boolean = false) {
-        field = minefieldCreator.create(safeId, includeSafeZone)
+    private fun plantMinesExcept(safeId: Int) {
+        do {
+            field = minefieldCreator.create(safeId, false)
+            val fieldCopy = field.map { it.copy() }.toMutableList()
+            val minefieldHandler = MinefieldHandler(fieldCopy, false)
+            minefieldHandler.openAt(safeId)
+        } while (!BruteForceSolver(minefieldHandler.result().toMutableList()).isSolvable())
+
         mines = field.filter { it.hasMine }.asSequence()
         firstOpen = FirstOpen.Position(safeId)
         hasMines = mines.count() != 0
@@ -78,7 +85,7 @@ class GameController {
         val minefieldHandler: MinefieldHandler
 
         if (mustPlantMines) {
-            plantMinesExcept(target.id, true)
+            plantMinesExcept(target.id)
             minefieldHandler = MinefieldHandler(field.toMutableList(), useQuestionMark)
             minefieldHandler.openAt(target.id)
             emit(StateUpdate.Multiple)
