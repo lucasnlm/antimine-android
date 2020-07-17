@@ -4,9 +4,10 @@ import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Minefield
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
-import org.junit.Assert.*
 import kotlin.random.Random
 
 class BruteForceSolverTest {
