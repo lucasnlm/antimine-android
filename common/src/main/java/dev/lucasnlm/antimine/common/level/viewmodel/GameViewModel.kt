@@ -21,6 +21,7 @@ import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
 import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.control.ActionResponse
+import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.control.GameControl
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
@@ -340,6 +341,16 @@ class GameViewModel @ViewModelInject constructor(
         if (gameController.checkVictory()) {
             refreshAll()
             eventObserver.postValue(Event.Victory)
+        }
+    }
+
+    fun useCustomPreferences(useQuestionMark: Boolean, controlStyle: ControlStyle ) {
+        gameController.apply {
+            val gameControl = GameControl.fromControlType(controlStyle)
+
+            updateGameControl(gameControl)
+            useQuestionMark(useQuestionMark)
+            useSolverAlgorithms(true)
         }
     }
 

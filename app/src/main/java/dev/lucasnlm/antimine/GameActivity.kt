@@ -64,7 +64,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
     @Inject
     lateinit var savesRepository: ISavesRepository
 
-    val viewModel: GameViewModel by viewModels()
+    private val viewModel: GameViewModel by viewModels()
     private val shareViewModel: ShareViewModel by viewModels()
 
     private var status: Status = Status.PreGame
@@ -357,7 +357,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
         }
     }
 
-    private fun loadGameFragment() {
+    private fun loadGameFragment(newDifficulty: Difficulty? = null) {
         val fragmentManager = supportFragmentManager
 
         fragmentManager.popBackStack()
@@ -370,7 +370,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
         }
 
         fragmentManager.beginTransaction().apply {
-            replace(R.id.levelContainer, LevelFragment())
+            replace(R.id.levelContainer, LevelFragment.newInstance(newDifficulty?.ordinal))
             setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             commitAllowingStateLoss()
         }
@@ -490,13 +490,14 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
 
     private fun changeDifficulty(newDifficulty: Difficulty) {
         if (status == Status.PreGame) {
+            loadGameFragment()
             GlobalScope.launch {
-                viewModel.startNewGame(newDifficulty)
+                loadGameFragment(newDifficulty)
             }
         } else {
             newGameConfirmation {
                 GlobalScope.launch {
-                    viewModel.startNewGame(newDifficulty)
+                    loadGameFragment(newDifficulty)
                 }
             }
         }

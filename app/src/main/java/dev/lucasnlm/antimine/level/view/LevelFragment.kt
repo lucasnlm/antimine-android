@@ -14,14 +14,13 @@ import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
-open class LevelFragment : CommonLevelFragment() {
-    override val levelFragmentResId: Int = R.layout.fragment_level
-
+open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
     override fun onPause() {
         super.onPause()
         GlobalScope.launch {
@@ -67,6 +66,7 @@ open class LevelFragment : CommonLevelFragment() {
         }
     }
 
+    @FlowPreview
     @ExperimentalCoroutinesApi
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -75,8 +75,10 @@ open class LevelFragment : CommonLevelFragment() {
             val loadGameUid = checkLoadGameDeepLink()
             val newGameDeepLink = checkNewGameDeepLink()
             val retryDeepLink = checkRetryGameDeepLink()
+            val difficulty = arguments?.getInt(LEVEL_DIFFICULTY, -1) ?: -1
 
             val levelSetup = when {
+                difficulty > 0 -> viewModel.startNewGame(Difficulty.values()[difficulty])
                 loadGameUid != null -> viewModel.loadGame(loadGameUid)
                 newGameDeepLink != null -> viewModel.startNewGame(newGameDeepLink)
                 retryDeepLink != null -> viewModel.retryGame(retryDeepLink)
@@ -131,6 +133,18 @@ open class LevelFragment : CommonLevelFragment() {
             uri.pathSegments.firstOrNull()?.toIntOrNull()
         } else {
             null
+        }
+    }
+
+    companion object {
+        private const val LEVEL_DIFFICULTY = "level_difficulty"
+
+        fun newInstance(newDifficulty: Int?): LevelFragment {
+            return LevelFragment().apply {
+                arguments = Bundle().apply {
+                    newDifficulty?.let { putInt(LEVEL_DIFFICULTY, it) }
+                }
+            }
         }
     }
 }

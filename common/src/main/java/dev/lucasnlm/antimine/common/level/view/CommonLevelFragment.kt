@@ -1,10 +1,7 @@
 package dev.lucasnlm.antimine.common.level.view
 
-import android.os.Bundle
 import android.util.TypedValue
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +11,7 @@ import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import javax.inject.Inject
 
-abstract class CommonLevelFragment : Fragment() {
+abstract class CommonLevelFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentLayoutId) {
     @Inject
     lateinit var dimensionRepository: IDimensionRepository
 
@@ -24,14 +21,6 @@ abstract class CommonLevelFragment : Fragment() {
     protected val viewModel: GameViewModel by activityViewModels()
     protected val areaAdapter by lazy { AreaAdapter(requireContext(), viewModel, preferencesRepository) }
     protected lateinit var recyclerGrid: RecyclerView
-
-    abstract val levelFragmentResId: Int
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(levelFragmentResId, container, false)
 
     protected fun makeNewLayoutManager(boardWidth: Int) =
         FixedGridLayoutManager().apply {
