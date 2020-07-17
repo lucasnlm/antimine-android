@@ -43,6 +43,7 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 
 ## Features
 
+- No guessing algorithm
 - Game levels: begginner, intermediate, expert and custom
 - Game statistics
 - Android Wear OS support
