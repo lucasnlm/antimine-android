@@ -60,14 +60,13 @@ class GameActivityTest {
         launchActivity<GameActivity>().onActivity { activity ->
             ShadowLooper.runUiThreadTasks()
 
-            val mines = activity.viewModel.field.value!!.filter { it.hasMine }.map { it.id.toLong() }.toList()
-            val safeAreas = activity.viewModel.field.value!!.filter { !it.hasMine }.map { it.id.toLong() }.toList()
-
             // First tap
             activity.findViewById<RecyclerView>(R.id.recyclerGrid)
                 .findViewHolderForItemId(40).itemView.performClick()
 
             ShadowLooper.runUiThreadTasks()
+
+            val safeAreas = activity.viewModel.field.value!!.filter { !it.hasMine }.map { it.id.toLong() }.toList()
 
             // Tap on safe places
             safeAreas.forEach { safeArea ->
@@ -81,7 +80,7 @@ class GameActivityTest {
 
             val endGame = activity.supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG)
             assertNotNull(endGame)
-            assertEquals(endGame?.arguments?.get(EndGameDialogFragment.DIALOG_IS_VICTORY), true)
+            assertEquals(true, endGame?.arguments?.get(EndGameDialogFragment.DIALOG_IS_VICTORY))
         }
     }
 }
