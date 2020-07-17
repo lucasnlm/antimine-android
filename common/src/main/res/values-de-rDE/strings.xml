@@ -14,7 +14,7 @@
     <string name="animations">Animationen</string>
     <string name="vibration">Haptische Rückmeldung</string>
     <string name="about">Über</string>
-    <string name="events">Statisken</string>
+    <string name="events">Statistiken</string>
     <string name="custom">Benutzerdefiniert</string>
     <string name="start">Start</string>
     <string name="width">Breite</string>
@@ -48,6 +48,7 @@
     <string name="quit">Beenden</string>
     <string name="are_you_sure">Bist du sicher?</string>
     <string name="enable_automatic_flags">Automatische Markierungen aktivieren</string>
+    <string name="enable_no_guessing_maps">Lösbare Karten finden</string>
     <string name="open_areas">Offene Flächen</string>
     <string name="total_time">Gesamtzeit</string>
     <string name="average_time">Durchschnittliche Zeit</string>
@@ -86,6 +87,8 @@
     <string name="no_network">Keine Internetverbindung.</string>
     <string name="open_menu">Menü öffnen</string>
     <string name="close_menu">Menü schließen</string>
+    <string name="delete_all">Alles löschen</string>
+    <string name="delete_all_message">Alle Ereignisse dauerhaft löschen.</string>
     <string name="all_mines_disabled">Alle Minen wurden wirkungslos gemacht.</string>
     <string name="desc_convered_area">Abgedeckte Fläche</string>
     <string name="desc_marked_area">Markierte Fläche</string>

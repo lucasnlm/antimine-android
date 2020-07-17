@@ -48,6 +48,7 @@
     <string name="quit">خروج</string>
     <string name="are_you_sure">هل أنت متأكد؟</string>
     <string name="enable_automatic_flags">Enable automatic placing of flags</string>
+    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">فتح المناطق</string>
     <string name="total_time">مجموع الوقت</string>
     <string name="average_time">متوسط الوقت</string>
@@ -86,6 +87,8 @@
     <string name="no_network">لا يوجد اتصال بالإنترنت.</string>
     <string name="open_menu">فتح القائمة</string>
     <string name="close_menu">إغلاق القائمة</string>
+    <string name="delete_all">Delete all</string>
+    <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">جميع الألغام معطلة.</string>
     <string name="desc_convered_area">Covered area</string>
     <string name="desc_marked_area">Marked area</string>

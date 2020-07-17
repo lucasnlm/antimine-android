@@ -48,6 +48,7 @@
     <string name="quit">Verlaat</string>
     <string name="are_you_sure">Is jy seker?</string>
     <string name="enable_automatic_flags">Aktiveer outomatiese plasing van vlaggies</string>
+    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Open Areas</string>
     <string name="total_time">Total Time</string>
     <string name="average_time">Average Time</string>
@@ -86,6 +87,8 @@
     <string name="no_network">Geen internet konneksie.</string>
     <string name="open_menu">Maak Kieslys Oop</string>
     <string name="close_menu">Sluit Spyskaart</string>
+    <string name="delete_all">Delete all</string>
+    <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">All mines were disabled.</string>
     <string name="desc_convered_area">Covered area</string>
     <string name="desc_marked_area">Marked area</string>

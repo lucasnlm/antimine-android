@@ -37,7 +37,7 @@
     <string name="sign_in_failed">Oturum açılamadı. Lütfen ağ bağlantınızı kontrol edip tekrar deneyin.</string>
     <string name="quit_confirm">Mevcut oyundaki tüm hamleleri kaybedeceksiniz.\nAncak oyunu çıkmadan önce de yükleyebilirsiniz.</string>
     <string name="you_won">Kazandın!</string>
-    <string name="victories">Zaferler</string>
+    <string name="victories">Zafer</string>
     <string name="you_lost">Kaybettin!</string>
     <string name="defeats">Yenilgi</string>
     <string name="game_over_desc_1">Sonraki oyunda iyi şanslar.</string>
@@ -47,7 +47,8 @@
     <string name="sound_effects">Ses Efektleri</string>
     <string name="quit">Çık</string>
     <string name="are_you_sure">Emin misiniz?</string>
-    <string name="enable_automatic_flags">Bayrakları otomatik yerleştirmeyi etkinleştir</string>
+    <string name="enable_automatic_flags">Bayrakları Otomatik Yerleştir</string>
+    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Açık Alanlar</string>
     <string name="total_time">Toplam Süre</string>
     <string name="average_time">Ortalama Süre</string>
@@ -86,6 +87,8 @@
     <string name="no_network">İnternet bağlantısı yok.</string>
     <string name="open_menu">Menüyü Aç</string>
     <string name="close_menu">Menüyü Kapat</string>
+    <string name="delete_all">Tümünü sil</string>
+    <string name="delete_all_message">Tüm etkinlikleri kalıcı olarak silin.</string>
     <string name="all_mines_disabled">Tüm mayınlar devre dışı bırakıldı.</string>
     <string name="desc_convered_area">Kapalı alan</string>
     <string name="desc_marked_area">İşaretli alan</string>

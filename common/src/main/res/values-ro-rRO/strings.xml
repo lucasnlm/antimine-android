@@ -48,6 +48,7 @@
     <string name="quit">Quit</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="enable_automatic_flags">Enable automatic placing of flags</string>
+    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Open Areas</string>
     <string name="total_time">Total Time</string>
     <string name="average_time">Average Time</string>
@@ -86,6 +87,8 @@
     <string name="no_network">Lipseste conexiune la internet.</string>
     <string name="open_menu">Deschide meniul</string>
     <string name="close_menu">Închide meniul</string>
+    <string name="delete_all">Delete all</string>
+    <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">Toate minele au fost dezactivate.</string>
     <string name="desc_convered_area">Covered area</string>
     <string name="desc_marked_area">Marked area</string>

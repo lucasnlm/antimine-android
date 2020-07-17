@@ -18,6 +18,7 @@ class AboutViewModel : ViewModel() {
         "Czech" to sequenceOf("novas78@xda"),
         "Dutch" to sequenceOf("Max Pietersma"),
         "English" to sequenceOf("miguelsouza2212"),
+        "Finnish" to sequenceOf("Topusku"),
         "French" to sequenceOf("Just Humeau"),
         "German" to sequenceOf("Oswald Boelcke", "wlls_ftn", "Trafalgar-Square"),
         "Greek" to sequenceOf("Retrial"),

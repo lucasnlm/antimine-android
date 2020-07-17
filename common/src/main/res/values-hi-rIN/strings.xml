@@ -48,6 +48,7 @@
     <string name="quit">समाप्त करें</string>
     <string name="are_you_sure">क्या आपको यकीन है?</string>
     <string name="enable_automatic_flags">फ्लैग के स्वचालित रखे जाने को सक्रिय क</string>
+    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Open Areas</string>
     <string name="total_time">कुल समय</string>
     <string name="average_time">औसत समय</string>
@@ -86,6 +87,8 @@
     <string name="no_network">कोई इंटरनेट कनेक्शन नहीं</string>
     <string name="open_menu">मेन्यू खोलें</string>
     <string name="close_menu">मेनू बंद करें</string>
+    <string name="delete_all">Delete all</string>
+    <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">All mines were disabled.</string>
     <string name="desc_convered_area">Covered area</string>
     <string name="desc_marked_area">Marked area</string>

@@ -48,6 +48,7 @@
     <string name="quit">Ukončit</string>
     <string name="are_you_sure">Jste si jisti?</string>
     <string name="enable_automatic_flags">Povolit automatické umísťování vlajek</string>
+    <string name="enable_no_guessing_maps">Najít řešitelná minová pole</string>
     <string name="open_areas">Otevřené oblasti</string>
     <string name="total_time">Celkový čas</string>
     <string name="average_time">Průměrný čas</string>
@@ -86,6 +87,8 @@
     <string name="no_network">Bez připojení k Internetu.</string>
     <string name="open_menu">Otevřít nabídku</string>
     <string name="close_menu">Zavřít nabídku</string>
+    <string name="delete_all">Smazat vše</string>
+    <string name="delete_all_message">Trvale smazat všechny události.</string>
     <string name="all_mines_disabled">Všechny miny byly zakázány.</string>
     <string name="desc_convered_area">Pokrytá oblast</string>
     <string name="desc_marked_area">Označená oblast</string>
