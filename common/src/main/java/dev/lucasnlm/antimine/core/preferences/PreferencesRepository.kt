@@ -24,6 +24,7 @@ interface IPreferencesRepository {
     fun useAnimations(): Boolean
     fun useQuestionMark(): Boolean
     fun isSoundEffectsEnabled(): Boolean
+    fun useSolverAlgorithms(): Boolean
 }
 
 class PreferencesRepository(
@@ -77,6 +78,9 @@ class PreferencesRepository(
     override fun isSoundEffectsEnabled(): Boolean =
         getBoolean(PREFERENCE_SOUND_EFFECTS, false)
 
+    override fun useSolverAlgorithms(): Boolean =
+        getBoolean(PREFERENCE_USE_SOLVER_ALGORITHMS, false)
+
     override fun controlStyle(): ControlStyle {
         val index = getInt(PREFERENCE_CONTROL_STYLE, -1)
         return ControlStyle.values().getOrNull(index) ?: ControlStyle.Standard
@@ -116,5 +120,6 @@ class PreferencesRepository(
         private const val PREFERENCE_CUSTOM_GAME_MINES = "preference_custom_game_mines"
         private const val PREFERENCE_SOUND_EFFECTS = "preference_sound"
         private const val PREFERENCE_STATS_BASE = "preference_stats_base"
+        private const val PREFERENCE_USE_SOLVER_ALGORITHMS = "preference_use_solver_algorithms"
     }
 }

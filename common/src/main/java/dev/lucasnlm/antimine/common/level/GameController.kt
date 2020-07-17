@@ -33,6 +33,7 @@ class GameController {
     private var gameControl: GameControl = GameControl.Standard
     private var mines: Sequence<Area> = emptySequence()
     private var useQuestionMark = true
+    private var useSolverAlgorithms = false
 
     var hasMines = false
         private set
@@ -67,14 +68,16 @@ class GameController {
     private fun getArea(id: Int) = field.first { it.id == id }
 
     private fun plantMinesExcept(safeId: Int) {
-        do {
-            field = minefieldCreator.create(safeId, false)
-            val fieldCopy = field.map { it.copy() }.toMutableList()
-            val minefieldHandler = MinefieldHandler(fieldCopy, false)
-            minefieldHandler.openAt(safeId)
-        } while (!BruteForceSolver(
-                minefieldHandler.result().toMutableList()
-            ).isSolvable())
+        if (useSolverAlgorithms) {
+            do {
+                field = minefieldCreator.create(safeId, false)
+                val fieldCopy = field.map { it.copy() }.toMutableList()
+                val minefieldHandler = MinefieldHandler(fieldCopy, false)
+                minefieldHandler.openAt(safeId)
+            } while (!BruteForceSolver(minefieldHandler.result().toMutableList()).isSolvable())
+        } else {
+            field = minefieldCreator.create(safeId, true)
+        }
 
         mines = field.filter { it.hasMine }.asSequence()
         firstOpen = FirstOpen.Position(safeId)
@@ -265,5 +268,9 @@ class GameController {
 
     fun useQuestionMark(useQuestionMark: Boolean) {
         this.useQuestionMark = useQuestionMark
+    }
+
+    fun useSolverAlgorithms(useSolverAlgorithms: Boolean) {
+        this.useSolverAlgorithms = useSolverAlgorithms
     }
 }

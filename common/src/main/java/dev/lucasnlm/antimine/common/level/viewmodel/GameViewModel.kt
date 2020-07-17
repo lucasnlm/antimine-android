@@ -342,12 +342,13 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     fun refreshUserPreferences() {
-        val questionMark = preferencesRepository.useQuestionMark()
-        val controlType = preferencesRepository.controlStyle()
-        val gameControl = GameControl.fromControlType(controlType)
         gameController.apply {
+            val controlType = preferencesRepository.controlStyle()
+            val gameControl = GameControl.fromControlType(controlType)
+
             updateGameControl(gameControl)
-            useQuestionMark(questionMark)
+            useQuestionMark(preferencesRepository.useQuestionMark())
+            useSolverAlgorithms(preferencesRepository.useSolverAlgorithms())
         }
     }
 
