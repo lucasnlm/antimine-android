@@ -48,6 +48,7 @@
     <string name="quit">Salir</string>
     <string name="are_you_sure">¿Estás seguro?</string>
     <string name="enable_automatic_flags">Activar situación automática de banderas</string>
+    <string name="enable_no_guessing_maps">Encontrar mapas solubles</string>
     <string name="open_areas">Abrir Áreas</string>
     <string name="total_time">Tiempo total</string>
     <string name="average_time">Tiempo promedio</string>
@@ -86,6 +87,8 @@
     <string name="no_network">No hay conexión a Internet.</string>
     <string name="open_menu">Abra menú</string>
     <string name="close_menu">Cerrar menú</string>
+    <string name="delete_all">Borrar todo</string>
+    <string name="delete_all_message">Borrar todos los eventos permanentemente.</string>
     <string name="all_mines_disabled">Todas las minas fueron desactivadas.</string>
     <string name="desc_convered_area">Área cubierta</string>
     <string name="desc_marked_area">Área marcada</string>

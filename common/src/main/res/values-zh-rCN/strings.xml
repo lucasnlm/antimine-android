@@ -48,6 +48,7 @@
     <string name="quit">退出</string>
     <string name="are_you_sure">你确定吗？</string>
     <string name="enable_automatic_flags">启用旗标自动放置</string>
+    <string name="enable_no_guessing_maps">查找可解决的地图</string>
     <string name="open_areas">开放区域</string>
     <string name="total_time">总用时</string>
     <string name="average_time">平均用时</string>
@@ -86,6 +87,8 @@
     <string name="no_network">没有网络连接</string>
     <string name="open_menu">打开菜单</string>
     <string name="close_menu">关闭菜单</string>
+    <string name="delete_all">Delete all</string>
+    <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">所有地雷都已失效。</string>
     <string name="desc_convered_area">覆盖面积</string>
     <string name="desc_marked_area">标记区域</string>

@@ -48,6 +48,7 @@
     <string name="quit">Вийти</string>
     <string name="are_you_sure">Ви впевнені?</string>
     <string name="enable_automatic_flags">Увімкнути автоматичне розміщення прапорців</string>
+    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Відкриті області</string>
     <string name="total_time">Час перегляду</string>
     <string name="average_time">Середній час</string>
@@ -86,6 +87,8 @@
     <string name="no_network">Немає з’єднання з інтернетом.</string>
     <string name="open_menu">Відкрити меню</string>
     <string name="close_menu">Закрити меню</string>
+    <string name="delete_all">Delete all</string>
+    <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">Всі міни були вимкнуті.</string>
     <string name="desc_convered_area">Прихована зона</string>
     <string name="desc_marked_area">Позначена територія</string>

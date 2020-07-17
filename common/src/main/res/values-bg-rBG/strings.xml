@@ -3,7 +3,7 @@
     <string name="app_name">Antimine</string>
     <string name="app_description">Вие трябва да изчистите квадратна дъска която има скрити мини без да взривите нито една от тях.</string>
     <string name="games">Игри</string>
-    <string name="previous_games">Предишна Игри</string>
+    <string name="previous_games">Предишни Игри</string>
     <string name="minefield">Трудност</string>
     <string name="standard">Стандарно</string>
     <string name="beginner">Начинаещ</string>
@@ -48,6 +48,7 @@
     <string name="quit">Изход</string>
     <string name="are_you_sure">Сигурни ли сте?</string>
     <string name="enable_automatic_flags">Позволява автоматично слагане на флагове</string>
+    <string name="enable_no_guessing_maps">Намери решими карти</string>
     <string name="open_areas">Отворени площи</string>
     <string name="total_time">Общо време</string>
     <string name="average_time">Средно време</string>
@@ -86,6 +87,8 @@
     <string name="no_network">Няма връзка с интернет.</string>
     <string name="open_menu">Отвори менюто</string>
     <string name="close_menu">Затвори менюто</string>
+    <string name="delete_all">Изтрий всички</string>
+    <string name="delete_all_message">Изтрий всички завинаги.</string>
     <string name="all_mines_disabled">Всички мини бяха деактивирани.</string>
     <string name="desc_convered_area">Покрита площ</string>
     <string name="desc_marked_area">Маркирана площ</string>

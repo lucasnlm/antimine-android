@@ -48,6 +48,7 @@
     <string name="quit">Έξοδος</string>
     <string name="are_you_sure">Είσαι σίγουρος;</string>
     <string name="enable_automatic_flags">Ενεργοποίηση αυτόματης τοποθέτησης σημαιών</string>
+    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Ανοιχτές περιοχές</string>
     <string name="total_time">Συνολικός Χρόνος</string>
     <string name="average_time">Μέσος χρόνος</string>
@@ -86,6 +87,8 @@
     <string name="no_network">Δεν υπάρχει σύνδεση στο διαδίκτυο.</string>
     <string name="open_menu">Άνοιγμα Μενού</string>
     <string name="close_menu">Κλείσιμο Μενού</string>
+    <string name="delete_all">Διαγραφή όλων</string>
+    <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">Όλες οι νάρκες απενεργοποιήθηκαν.</string>
     <string name="desc_convered_area">Καλυμμένη περιοχή</string>
     <string name="desc_marked_area">Μαρκαρισμένη περιοχή</string>

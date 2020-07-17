@@ -48,6 +48,7 @@
     <string name="quit">Stoppen</string>
     <string name="are_you_sure">Weet je het zeker?</string>
     <string name="enable_automatic_flags">Schakel automatisch plaatsen van vlaggen in</string>
+    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Open gebieden</string>
     <string name="total_time">Totale Tijd</string>
     <string name="average_time">Gemiddelde Tijd</string>
@@ -86,6 +87,8 @@
     <string name="no_network">Geen internetverbinding.</string>
     <string name="open_menu">Menu openen</string>
     <string name="close_menu">Menu sluiten</string>
+    <string name="delete_all">Alles verwijderen</string>
+    <string name="delete_all_message">Verwijder alle gebeurtenissen permanent.</string>
     <string name="all_mines_disabled">Alle mijnen waren uitgeschakeld.</string>
     <string name="desc_convered_area">Gedekt gebied</string>
     <string name="desc_marked_area">Gemarkeerd gebied</string>
