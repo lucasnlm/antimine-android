@@ -344,7 +344,7 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
-    fun useCustomPreferences(useQuestionMark: Boolean, controlStyle: ControlStyle ) {
+    fun useCustomPreferences(useQuestionMark: Boolean, controlStyle: ControlStyle) {
         gameController.apply {
             val gameControl = GameControl.fromControlType(controlStyle)
 
