@@ -4,7 +4,7 @@ import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.database.models.Stats
-import dev.lucasnlm.antimine.common.level.logic.BruteForceSolver
+import dev.lucasnlm.antimine.common.level.solver.BruteForceSolver
 import dev.lucasnlm.antimine.common.level.logic.FlagAssistant
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
@@ -72,7 +72,9 @@ class GameController {
             val fieldCopy = field.map { it.copy() }.toMutableList()
             val minefieldHandler = MinefieldHandler(fieldCopy, false)
             minefieldHandler.openAt(safeId)
-        } while (!BruteForceSolver(minefieldHandler.result().toMutableList()).isSolvable())
+        } while (!BruteForceSolver(
+                minefieldHandler.result().toMutableList()
+            ).isSolvable())
 
         mines = field.filter { it.hasMine }.asSequence()
         firstOpen = FirstOpen.Position(safeId)
