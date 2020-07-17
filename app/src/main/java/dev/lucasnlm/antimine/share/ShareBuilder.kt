@@ -27,7 +27,7 @@ class ShareBuilder(
 ) {
     private val context: Context = context.applicationContext
 
-    suspend fun share(minefield: Minefield, field: Sequence<Area>): Boolean {
+    suspend fun share(minefield: Minefield, field: List<Area>): Boolean {
         val file = createImage(minefield, field)
 
         return if (file != null) {
@@ -37,7 +37,7 @@ class ShareBuilder(
         }
     }
 
-    private suspend fun createImage(minefield: Minefield, field: Sequence<Area>): File? = withContext(Dispatchers.IO) {
+    private suspend fun createImage(minefield: Minefield, field: List<Area>): File? = withContext(Dispatchers.IO) {
         val size = 38f
         val padding = 1f
         val radius = 2f

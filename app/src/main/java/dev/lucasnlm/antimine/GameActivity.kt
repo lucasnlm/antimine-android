@@ -44,12 +44,14 @@ import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
 import dev.lucasnlm.antimine.stats.StatsActivity
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
+class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
     @Inject
     lateinit var preferencesRepository: IPreferencesRepository
 
@@ -62,7 +64,7 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
     @Inject
     lateinit var savesRepository: ISavesRepository
 
-    private val viewModel: GameViewModel by viewModels()
+    val viewModel: GameViewModel by viewModels()
     private val shareViewModel: ShareViewModel by viewModels()
 
     private var status: Status = Status.PreGame
@@ -73,9 +75,10 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
     private var currentTime: Long = 0
     private var currentSaveId: Long = 0
 
+    @ExperimentalCoroutinesApi
+    @FlowPreview
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         bindViewModel()
@@ -92,6 +95,8 @@ class GameActivity : AppCompatActivity(), DialogInterface.OnDismissListener {
         }
     }
 
+    @ExperimentalCoroutinesApi
+    @FlowPreview
     private fun bindViewModel() = viewModel.apply {
         var lastEvent: Event? = null // TODO use distinctUntilChanged when available
 
