@@ -22,6 +22,7 @@ class AboutViewModel : ViewModel() {
         "French" to sequenceOf("Just Humeau"),
         "German" to sequenceOf("Oswald Boelcke", "wlls_ftn", "Trafalgar-Square"),
         "Greek" to sequenceOf("Retrial"),
+        "Hungarian" to sequenceOf("Hermann Márk"),
         "Italian" to sequenceOf("Mattia - MisterWeeMan", "Nicola Lorenzetti"),
         "Japanese" to sequenceOf("Ryota Hasegawa"),
         "Norwegian" to sequenceOf("Eule Hecking"),
