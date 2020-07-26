@@ -87,8 +87,8 @@
     <string name="no_network">لا يوجد اتصال بالإنترنت.</string>
     <string name="open_menu">فتح القائمة</string>
     <string name="close_menu">إغلاق القائمة</string>
-    <string name="delete_all">Delete all</string>
-    <string name="delete_all_message">Delete all events permanently.</string>
+    <string name="delete_all">حذف الكل</string>
+    <string name="delete_all_message">احذف جميع الأحداث نهائيًا.</string>
     <string name="all_mines_disabled">جميع الألغام معطلة.</string>
     <string name="desc_convered_area">Covered area</string>
     <string name="desc_marked_area">Marked area</string>
