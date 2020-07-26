@@ -2,8 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ja">
     <string name="app_name">Antimine</string>
     <string name="app_description">地雷が隠された長方形から1つも爆発させることなくクリアしましょう。</string>
-    <string name="games">ゲームの数</string>
-    <string name="previous_games">前回のゲーム</string>
+    <string name="games">ゲーム回数</string>
+    <string name="previous_games">前のゲーム</string>
     <string name="minefield">難易度</string>
     <string name="standard">普通</string>
     <string name="beginner">初級</string>
@@ -37,9 +37,9 @@
     <string name="sign_in_failed">サインインに失敗しました。インターネット接続を確認してからもう一度お試しください。</string>
     <string name="quit_confirm">現在のゲームでの進行はすべて失われますが、\n終了する前にゲームをインストールすることもできます。</string>
     <string name="you_won">あなたの勝ちです！</string>
-    <string name="victories">勝利数</string>
+    <string name="victories">勝利回数</string>
     <string name="you_lost">あなたの負けです！</string>
-    <string name="defeats">敗北数</string>
+    <string name="defeats">敗北回数</string>
     <string name="game_over_desc_1">次のゲームでも頑張りましょう。</string>
     <string name="game_over_desc_4">あなたは %1$d 秒でクリアしました。</string>
     <string name="fail_to_share">共有に失敗しました</string>
