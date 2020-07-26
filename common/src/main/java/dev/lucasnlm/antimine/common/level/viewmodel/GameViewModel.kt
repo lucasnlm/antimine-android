@@ -51,7 +51,6 @@ class GameViewModel @ViewModelInject constructor(
 
     private lateinit var gameController: GameController
     private var currentDifficulty: Difficulty = Difficulty.Standard
-    private var initialized = false
 
     val field = MutableLiveData<List<Area>>()
     val fieldRefresh = MutableLiveData<Int>()
@@ -155,8 +154,6 @@ class GameViewModel @ViewModelInject constructor(
         } else {
             // Fail to load
             startNewGame()
-        }.also {
-            initialized = true
         }
     }
 
@@ -182,8 +179,6 @@ class GameViewModel @ViewModelInject constructor(
         } else {
             // Fail to load
             startNewGame()
-        }.also {
-            initialized = true
         }
     }
 
@@ -197,22 +192,18 @@ class GameViewModel @ViewModelInject constructor(
         } else {
             // Fail to load
             startNewGame()
-        }.also {
-            initialized = true
         }
     }
 
     fun pauseGame() {
-        if (initialized) {
-            if (gameController.hasMines) {
-                eventObserver.postValue(Event.Pause)
-            }
-            clock.stop()
+        if (gameController.hasMines) {
+            eventObserver.postValue(Event.Pause)
         }
+        clock.stop()
     }
 
     suspend fun saveGame() {
-        if (initialized && gameController.hasMines) {
+        if (gameController.hasMines) {
             val id = savesRepository.saveGame(
                 gameController.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
             )
@@ -222,7 +213,7 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     private suspend fun saveStats() {
-        if (initialized && gameController.hasMines) {
+        if (gameController.hasMines) {
             gameController.getStats(elapsedTimeSeconds.value ?: 0L)?.let {
                 statsRepository.addStats(it)
             }
@@ -230,7 +221,7 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     fun resumeGame() {
-        if (initialized && gameController.hasMines && !gameController.isGameOver()) {
+        if (gameController.hasMines && !gameController.isGameOver()) {
             eventObserver.postValue(Event.Resume)
             runClock()
         }
