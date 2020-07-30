@@ -21,6 +21,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.about.AboutActivity
@@ -81,7 +82,10 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
-        bindViewModel()
+        lifecycleScope.launchWhenCreated {
+            bindViewModel()
+        }
+
         bindToolbar()
         bindDrawer()
         bindNavigationMenu()
