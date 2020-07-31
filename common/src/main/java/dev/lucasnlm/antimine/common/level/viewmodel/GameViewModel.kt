@@ -50,6 +50,7 @@ class GameViewModel @ViewModelInject constructor(
     val shareObserver = MutableLiveData<Unit>()
 
     private lateinit var gameController: GameController
+    private var initialized = false
     private var currentDifficulty: Difficulty = Difficulty.Standard
 
     val field = MutableLiveData<List<Area>>()
@@ -70,6 +71,7 @@ class GameViewModel @ViewModelInject constructor(
         )
 
         gameController = GameController(minefield, minefieldRepository.randomSeed())
+        initialized = true
         refreshUserPreferences()
 
         mineCount.postValue(minefield.mines)
@@ -96,6 +98,7 @@ class GameViewModel @ViewModelInject constructor(
 
         val setup = save.minefield
         gameController = GameController(save)
+        initialized = true
         refreshUserPreferences()
 
         mineCount.postValue(setup.mines)
@@ -122,6 +125,7 @@ class GameViewModel @ViewModelInject constructor(
 
         val setup = save.minefield
         gameController = GameController(setup, save.seed, save.uid)
+        initialized = true
         refreshUserPreferences()
 
         mineCount.postValue(setup.mines)
@@ -196,14 +200,16 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     fun pauseGame() {
-        if (gameController.hasMines) {
-            eventObserver.postValue(Event.Pause)
+        if (initialized) {
+            if (gameController.hasMines) {
+                eventObserver.postValue(Event.Pause)
+            }
+            clock.stop()
         }
-        clock.stop()
     }
 
     suspend fun saveGame() {
-        if (gameController.hasMines) {
+        if (initialized && gameController.hasMines) {
             val id = savesRepository.saveGame(
                 gameController.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
             )
@@ -213,7 +219,7 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     private suspend fun saveStats() {
-        if (gameController.hasMines) {
+        if (initialized && gameController.hasMines) {
             gameController.getStats(elapsedTimeSeconds.value ?: 0L)?.let {
                 statsRepository.addStats(it)
             }
@@ -221,7 +227,7 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     fun resumeGame() {
-        if (gameController.hasMines && !gameController.isGameOver()) {
+        if (initialized && gameController.hasMines && !gameController.isGameOver()) {
             eventObserver.postValue(Event.Resume)
             runClock()
         }
@@ -333,13 +339,15 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     fun refreshUserPreferences() {
-        gameController.apply {
-            val controlType = preferencesRepository.controlStyle()
-            val gameControl = GameControl.fromControlType(controlType)
+        if (initialized) {
+            gameController.apply {
+                val controlType = preferencesRepository.controlStyle()
+                val gameControl = GameControl.fromControlType(controlType)
 
-            updateGameControl(gameControl)
-            useQuestionMark(preferencesRepository.useQuestionMark())
-            useSolverAlgorithms(preferencesRepository.useSolverAlgorithms())
+                updateGameControl(gameControl)
+                useQuestionMark(preferencesRepository.useQuestionMark())
+                useSolverAlgorithms(preferencesRepository.useSolverAlgorithms())
+            }
         }
     }
 
