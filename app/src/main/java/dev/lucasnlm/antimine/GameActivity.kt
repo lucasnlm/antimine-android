@@ -65,7 +65,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
     @Inject
     lateinit var savesRepository: ISavesRepository
 
-    private val viewModel: GameViewModel by viewModels()
+    val viewModel: GameViewModel by viewModels()
     private val shareViewModel: ShareViewModel by viewModels()
 
     private var status: Status = Status.PreGame
