@@ -25,7 +25,7 @@ android {
 
     signingConfigs {
         release {
-            if (System.getenv('IS_CI')) {
+            if (System.getenv('IS_RELEASE_BUILD')) {
                 storeFile file(System.getenv('KEYSTORE'))
                 keyAlias System.getenv('KEY_ALIAS')
                 storePassword System.getenv('KEY_STORE_PASSWORD')
