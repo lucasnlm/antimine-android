@@ -1,10 +1,6 @@
 package dev.lucasnlm.antimine.common.level.models
 
-import android.content.Context
-import android.graphics.Color
 import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
-import dev.lucasnlm.antimine.common.R
 
 data class AreaPalette(
     @ColorInt val border: Int,
@@ -20,48 +16,4 @@ data class AreaPalette(
     @ColorInt val minesAround8: Int,
     @ColorInt val highlight: Int,
     @ColorInt val focus: Int
-) {
-    companion object {
-        private fun toArgb(color: Int): Int {
-            return Color.rgb(
-                Color.red(color),
-                Color.green(color),
-                Color.blue(color)
-            )
-        }
-
-        fun fromLightTheme() =
-            AreaPalette(
-                border = toArgb(0x424242),
-                covered = toArgb(0x424242),
-                uncovered = toArgb(0xd5d2cc),
-                minesAround1 = toArgb(0x527F8D),
-                minesAround2 = toArgb(0x2B8D43),
-                minesAround3 = toArgb(0xE65100),
-                minesAround4 = toArgb(0x20A5f7),
-                minesAround5 = toArgb(0xED1C24),
-                minesAround6 = toArgb(0xFFC107),
-                minesAround7 = toArgb(0x66126B),
-                minesAround8 = toArgb(0x000000),
-                highlight = toArgb(0x212121),
-                focus = toArgb(0xD32F2F)
-            )
-
-        fun fromContrast(context: Context) =
-            AreaPalette(
-                border = ContextCompat.getColor(context, android.R.color.white),
-                covered = ContextCompat.getColor(context, android.R.color.black),
-                uncovered = ContextCompat.getColor(context, android.R.color.black),
-                minesAround1 = ContextCompat.getColor(context, R.color.white),
-                minesAround2 = ContextCompat.getColor(context, R.color.white),
-                minesAround3 = ContextCompat.getColor(context, R.color.white),
-                minesAround4 = ContextCompat.getColor(context, R.color.white),
-                minesAround5 = ContextCompat.getColor(context, R.color.white),
-                minesAround6 = ContextCompat.getColor(context, R.color.white),
-                minesAround7 = ContextCompat.getColor(context, R.color.white),
-                minesAround8 = ContextCompat.getColor(context, R.color.white),
-                highlight = ContextCompat.getColor(context, R.color.white),
-                focus = ContextCompat.getColor(context, R.color.white)
-            )
-    }
-}
+)

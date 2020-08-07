@@ -63,12 +63,6 @@ class AreaView : View {
         ).firstOrNull { it } ?: false
 
         if (changed) {
-//            this.palette = if (isAmbientMode) {
-//                AreaPalette.fromContrast(context)
-//            } else {
-//                AreaPalette.fromDefault(context)
-//            }
-
             this.isAmbientMode = isAmbientMode
             this.isLowBitAmbient = isLowBitAmbient
             this.theme = theme
