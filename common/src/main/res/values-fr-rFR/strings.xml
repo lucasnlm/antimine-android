@@ -48,7 +48,6 @@
     <string name="quit">Quitter</string>
     <string name="are_you_sure">Vraiment ?</string>
     <string name="enable_automatic_flags">Activer le placement automatique de drapeaux</string>
-    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Zones ouvertes</string>
     <string name="total_time">Temps de jeu total</string>
     <string name="average_time">Temps de jeu moyen</string>

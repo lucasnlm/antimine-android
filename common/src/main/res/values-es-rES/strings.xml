@@ -48,7 +48,6 @@
     <string name="quit">Salir</string>
     <string name="are_you_sure">¿Estás seguro?</string>
     <string name="enable_automatic_flags">Activar situación automática de banderas</string>
-    <string name="enable_no_guessing_maps">Encontrar mapas solubles</string>
     <string name="open_areas">Abrir Áreas</string>
     <string name="total_time">Tiempo total</string>
     <string name="average_time">Tiempo promedio</string>

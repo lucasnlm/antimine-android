@@ -48,7 +48,6 @@
     <string name="quit">Sair</string>
     <string name="are_you_sure">Tem certeza?</string>
     <string name="enable_automatic_flags">Ativar colocação automática de bandeiras</string>
-    <string name="enable_no_guessing_maps">Calcular mapas solucionáveis</string>
     <string name="open_areas">Áreas abertas</string>
     <string name="total_time">Tempo total</string>
     <string name="average_time">Tempo médio</string>

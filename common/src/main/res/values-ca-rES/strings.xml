@@ -48,7 +48,6 @@
     <string name="quit">Surt</string>
     <string name="are_you_sure">Esteu segurs?</string>
     <string name="enable_automatic_flags">Activa la col·locació automàtica de banderes</string>
-    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Zones obertes</string>
     <string name="total_time">Temps total</string>
     <string name="average_time">Durada mitjana</string>

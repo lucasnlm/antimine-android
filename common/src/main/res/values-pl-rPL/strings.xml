@@ -48,7 +48,6 @@
     <string name="quit">Wyjdź</string>
     <string name="are_you_sure">Na pewno?</string>
     <string name="enable_automatic_flags">Włącz automatyczne umieszczanie flag</string>
-    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Odkryte pola</string>
     <string name="total_time">Całkowity czas gry</string>
     <string name="average_time">Średni czas gry</string>

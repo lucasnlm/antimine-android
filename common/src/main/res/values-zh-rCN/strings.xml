@@ -48,7 +48,6 @@
     <string name="quit">退出</string>
     <string name="are_you_sure">你确定吗？</string>
     <string name="enable_automatic_flags">启用旗标自动放置</string>
-    <string name="enable_no_guessing_maps">查找可解决的地图</string>
     <string name="open_areas">开放区域</string>
     <string name="total_time">总用时</string>
     <string name="average_time">平均用时</string>

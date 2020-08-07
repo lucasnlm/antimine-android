@@ -48,7 +48,6 @@
     <string name="quit">Kilépés</string>
     <string name="are_you_sure">Biztos vagy benne?</string>
     <string name="enable_automatic_flags">A zászlók automatikus elhelyezésének engedélyezése</string>
-    <string name="enable_no_guessing_maps">Megoldható térképek keresése</string>
     <string name="open_areas">Nyílt területek</string>
     <string name="total_time">Teljes játékidő</string>
     <string name="average_time">Átlagos játékidő</string>

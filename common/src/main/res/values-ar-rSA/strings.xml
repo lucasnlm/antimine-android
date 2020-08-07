@@ -48,7 +48,6 @@
     <string name="quit">خروج</string>
     <string name="are_you_sure">هل أنت متأكد؟</string>
     <string name="enable_automatic_flags">Enable automatic placing of flags</string>
-    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">فتح المناطق</string>
     <string name="total_time">مجموع الوقت</string>
     <string name="average_time">متوسط الوقت</string>

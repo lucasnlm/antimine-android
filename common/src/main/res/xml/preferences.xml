@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen
+<PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -19,13 +19,6 @@
             android:defaultValue="true"
             android:key="preference_assistant"
             android:title="@string/enable_automatic_flags"
-            app:iconSpaceReserved="false" />
-
-        <SwitchPreferenceCompat
-            android:checked="false"
-            android:defaultValue="false"
-            android:key="preference_use_solver_algorithms"
-            android:title="@string/enable_no_guessing_maps"
             app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
@@ -69,4 +62,4 @@
 
     </PreferenceCategory>
 
-</androidx.preference.PreferenceScreen>
+</PreferenceScreen>

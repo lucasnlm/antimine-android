@@ -18,7 +18,7 @@ import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
-import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
+import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.GameControl
@@ -42,7 +42,7 @@ class GameViewModel @ViewModelInject constructor(
     private val hapticFeedbackManager: IHapticFeedbackManager,
     private val soundManager: ISoundManager,
     private val minefieldRepository: IMinefieldRepository,
-    private val analyticsManager: AnalyticsManager,
+    private val analyticsManager: IAnalyticsManager,
     private val clock: Clock
 ) : ViewModel() {
     val eventObserver = MutableLiveData<Event>()
@@ -346,7 +346,6 @@ class GameViewModel @ViewModelInject constructor(
 
                 updateGameControl(gameControl)
                 useQuestionMark(preferencesRepository.useQuestionMark())
-                useSolverAlgorithms(preferencesRepository.useSolverAlgorithms())
             }
         }
     }

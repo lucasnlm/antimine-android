@@ -48,7 +48,6 @@
     <string name="quit">Beenden</string>
     <string name="are_you_sure">Bist du sicher?</string>
     <string name="enable_automatic_flags">Automatische Markierungen aktivieren</string>
-    <string name="enable_no_guessing_maps">Lösbare Karten finden</string>
     <string name="open_areas">Offene Flächen</string>
     <string name="total_time">Gesamtzeit</string>
     <string name="average_time">Durchschnittliche Zeit</string>

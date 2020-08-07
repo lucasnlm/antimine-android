@@ -48,7 +48,6 @@
     <string name="quit">Выход</string>
     <string name="are_you_sure">Вы уверены?</string>
     <string name="enable_automatic_flags">Включить авторазмещение флагов</string>
-    <string name="enable_no_guessing_maps">Найти беспроигрышные поля</string>
     <string name="open_areas">Открытые зоны</string>
     <string name="total_time">Общее время</string>
     <string name="average_time">Среднее время</string>

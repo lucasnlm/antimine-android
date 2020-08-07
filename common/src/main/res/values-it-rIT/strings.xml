@@ -48,7 +48,6 @@
     <string name="quit">Esci</string>
     <string name="are_you_sure">Sei sicuro?</string>
     <string name="enable_automatic_flags">Abilita il posizionamento automatico delle bandiere</string>
-    <string name="enable_no_guessing_maps">Trova le mappe risolvibili</string>
     <string name="open_areas">Aree Aperte</string>
     <string name="total_time">Tempo Totale</string>
     <string name="average_time">Durata Media</string>

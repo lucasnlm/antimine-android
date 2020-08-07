@@ -48,7 +48,6 @@
     <string name="quit">Lopeta</string>
     <string name="are_you_sure">Oletko varma?</string>
     <string name="enable_automatic_flags">Kytke lippujen automaattinen asettaminen päälle</string>
-    <string name="enable_no_guessing_maps">Etsi ratkaistavia karttoja</string>
     <string name="open_areas">Avaa alueita</string>
     <string name="total_time">Aika yhteensä</string>
     <string name="average_time">Keskimääräinen aika</string>

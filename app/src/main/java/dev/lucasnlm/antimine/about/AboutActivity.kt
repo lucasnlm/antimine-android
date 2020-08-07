@@ -12,7 +12,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.models.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import dev.lucasnlm.antimine.about.views.AboutInfoFragment
-import dev.lucasnlm.antimine.about.views.thirds.ThirdPartiesFragment
+import dev.lucasnlm.antimine.about.views.thirds.ThirdPartyFragment
 import dev.lucasnlm.antimine.about.views.translators.TranslatorsFragment
 
 class AboutActivity : AppCompatActivity(R.layout.activity_empty) {
@@ -25,7 +25,7 @@ class AboutActivity : AppCompatActivity(R.layout.activity_empty) {
             Observer { event ->
                 when (event) {
                     AboutEvent.ThirdPartyLicenses -> {
-                        replaceFragment(ThirdPartiesFragment(), ThirdPartiesFragment.TAG)
+                        replaceFragment(ThirdPartyFragment(), ThirdPartyFragment.TAG)
                     }
                     AboutEvent.SourceCode -> {
                         openSourceCode()

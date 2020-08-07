@@ -48,7 +48,6 @@
     <string name="quit">終了</string>
     <string name="are_you_sure">本当によろしいですか？</string>
     <string name="enable_automatic_flags">旗を自動で立てる</string>
-    <string name="enable_no_guessing_maps">解決可能なマップを検索</string>
     <string name="open_areas">開いたエリアの数</string>
     <string name="total_time">合計時間</string>
     <string name="average_time">平均時間</string>

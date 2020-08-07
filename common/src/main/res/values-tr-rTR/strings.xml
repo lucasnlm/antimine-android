@@ -48,7 +48,6 @@
     <string name="quit">Çık</string>
     <string name="are_you_sure">Emin misiniz?</string>
     <string name="enable_automatic_flags">Bayrakları Otomatik Yerleştir</string>
-    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Açık Alanlar</string>
     <string name="total_time">Toplam Süre</string>
     <string name="average_time">Ortalama Süre</string>

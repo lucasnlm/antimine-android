@@ -4,7 +4,6 @@ import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.database.models.Stats
-import dev.lucasnlm.antimine.common.level.solver.BruteForceSolver
 import dev.lucasnlm.antimine.common.level.logic.FlagAssistant
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
@@ -15,6 +14,7 @@ import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Score
 import dev.lucasnlm.antimine.common.level.models.StateUpdate
+import dev.lucasnlm.antimine.common.level.solver.LimitedBruteForceSolver
 import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.GameControl
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -22,9 +22,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlin.random.Random
 
-/**
- * Controls a minesweeper logic.
- */
 class GameController {
     private val minefield: Minefield
     private val startTime = System.currentTimeMillis()
@@ -33,7 +30,6 @@ class GameController {
     private var gameControl: GameControl = GameControl.Standard
     private var mines: Sequence<Area> = emptySequence()
     private var useQuestionMark = true
-    private var useSolverAlgorithms = false
 
     var hasMines = false
         private set
@@ -68,16 +64,14 @@ class GameController {
     private fun getArea(id: Int) = field.first { it.id == id }
 
     private fun plantMinesExcept(safeId: Int) {
-        if (useSolverAlgorithms) {
-            do {
-                field = minefieldCreator.create(safeId, false)
-                val fieldCopy = field.map { it.copy() }.toMutableList()
-                val minefieldHandler = MinefieldHandler(fieldCopy, false)
-                minefieldHandler.openAt(safeId)
-            } while (!BruteForceSolver(minefieldHandler.result().toMutableList()).isSolvable())
-        } else {
-            field = minefieldCreator.create(safeId, true)
-        }
+        val solver = LimitedBruteForceSolver()
+        do {
+            val useSafeZone = minefield.width > 9 && minefield.height > 9
+            field = minefieldCreator.create(safeId, useSafeZone)
+            val fieldCopy = field.map { it.copy() }.toMutableList()
+            val minefieldHandler = MinefieldHandler(fieldCopy, false)
+            minefieldHandler.openAt(safeId)
+        } while (solver.keepTrying() && !solver.trySolve(minefieldHandler.result().toMutableList()))
 
         mines = field.filter { it.hasMine }.asSequence()
         firstOpen = FirstOpen.Position(safeId)
@@ -268,9 +262,5 @@ class GameController {
 
     fun useQuestionMark(useQuestionMark: Boolean) {
         this.useQuestionMark = useQuestionMark
-    }
-
-    fun useSolverAlgorithms(useSolverAlgorithms: Boolean) {
-        this.useSolverAlgorithms = useSolverAlgorithms
     }
 }

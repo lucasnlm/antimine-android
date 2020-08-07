@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 
-class DebugAnalyticsManager : AnalyticsManager {
+class DebugAnalyticsManager : IAnalyticsManager {
     override fun setup(context: Context, userProperties: Map<String, String>) {
         Log.d(TAG, "Setup Analytics using $userProperties")
     }
