@@ -53,11 +53,16 @@
         android:title="@string/settings_accessibility"
         app:iconSpaceReserved="false">
 
-        <SwitchPreferenceCompat
-            android:checked="false"
-            android:defaultValue="false"
-            android:key="preference_large_area"
-            android:title="@string/settings_large_areas"
+        <SeekBarPreference
+            android:key="preference_area_size"
+            android:max="80"
+            android:min="40"
+            android:defaultValue="50"
+            android:title="@string/size"
+            app:adjustable="true"
+            app:min="40"
+            app:seekBarIncrement="5"
+            app:showSeekBarValue="true"
             app:iconSpaceReserved="false" />
 
     </PreferenceCategory>

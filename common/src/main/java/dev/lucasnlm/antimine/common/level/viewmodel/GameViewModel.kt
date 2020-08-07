@@ -85,7 +85,7 @@ class GameViewModel @ViewModelInject constructor(
             Analytics.NewGame(
                 minefield, newDifficulty,
                 gameController.seed,
-                useAccessibilityMode()
+                getAreaSizeMultiplier()
             )
         )
 
@@ -140,7 +140,7 @@ class GameViewModel @ViewModelInject constructor(
                 setup,
                 currentDifficulty,
                 gameController.seed,
-                useAccessibilityMode(),
+                getAreaSizeMultiplier(),
                 save.firstOpen.toInt()
             )
         )
@@ -420,7 +420,7 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
-    fun useAccessibilityMode() = preferencesRepository.useLargeAreas()
+    private fun getAreaSizeMultiplier() = preferencesRepository.areaSizeMultiplier()
 
     private fun refreshIndex(targetIndex: Int, multipleChanges: Boolean = false) {
         if (!preferencesRepository.useAnimations() || multipleChanges) {

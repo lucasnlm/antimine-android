@@ -22,7 +22,9 @@ abstract class CommonLevelFragment : Fragment() {
     lateinit var preferencesRepository: IPreferencesRepository
 
     protected val viewModel: GameViewModel by activityViewModels()
-    protected val areaAdapter by lazy { AreaAdapter(requireContext(), viewModel, preferencesRepository) }
+    protected val areaAdapter by lazy {
+        AreaAdapter(requireContext(), viewModel, preferencesRepository, dimensionRepository)
+    }
     protected lateinit var recyclerGrid: RecyclerView
 
     abstract val levelFragmentResId: Int
