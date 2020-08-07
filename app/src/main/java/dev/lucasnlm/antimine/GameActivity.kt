@@ -32,7 +32,7 @@ import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.ControlDialogFragment
-import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
+import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.history.HistoryActivity
@@ -57,7 +57,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
     lateinit var preferencesRepository: IPreferencesRepository
 
     @Inject
-    lateinit var analyticsManager: AnalyticsManager
+    lateinit var analyticsManager: IAnalyticsManager
 
     @Inject
     lateinit var instantAppManager: InstantAppManager
