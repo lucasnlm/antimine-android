@@ -2,13 +2,16 @@ package dev.lucasnlm.antimine.about.views.thirds
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import dev.lucasnlm.antimine.R
 
 import dev.lucasnlm.antimine.text.TextActivity
 import dev.lucasnlm.antimine.about.models.ThirdParty
+import kotlinx.android.synthetic.main.view_third_party.view.*
 
-class ThirdPartyAdapter(
+internal class ThirdPartyAdapter(
     private val thirdParties: List<ThirdParty>
 ) : RecyclerView.Adapter<ThirdPartyViewHolder>() {
 
@@ -31,4 +34,8 @@ class ThirdPartyAdapter(
             }
         }
     }
+}
+
+class ThirdPartyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    val title: TextView = view.third_name
 }

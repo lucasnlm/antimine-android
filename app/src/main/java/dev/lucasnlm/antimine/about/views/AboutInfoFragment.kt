@@ -24,15 +24,15 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
         version.text = getString(R.string.version_s, BuildConfig.VERSION_NAME)
 
         thirdsParties.setOnClickListener {
-            aboutViewModel.eventObserver.postValue(AboutEvent.ThirdPartyLicenses)
+            aboutViewModel.sendEvent(AboutEvent.ThirdPartyLicenses)
         }
 
         sourceCode.setOnClickListener {
-            aboutViewModel.eventObserver.postValue(AboutEvent.SourceCode)
+            aboutViewModel.sendEvent(AboutEvent.SourceCode)
         }
 
         translation.setOnClickListener {
-            aboutViewModel.eventObserver.postValue(AboutEvent.Translators)
+            aboutViewModel.sendEvent(AboutEvent.Translators)
         }
     }
 }

@@ -10,6 +10,10 @@ import dev.lucasnlm.antimine.about.models.TranslationInfo
 class AboutViewModel : ViewModel() {
     val eventObserver = MutableLiveData<AboutEvent>()
 
+    fun sendEvent(event: AboutEvent) {
+        eventObserver.postValue(event)
+    }
+
     fun getTranslatorsList() = mapOf(
         "Arabic" to sequenceOf("Ahmad Alkurbi"),
         "Bulgarian" to sequenceOf("Georgi Eftimov"),

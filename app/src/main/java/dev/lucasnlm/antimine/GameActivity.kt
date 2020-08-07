@@ -117,7 +117,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
         retryObserver.observe(
             this@GameActivity,
             Observer {
-                GlobalScope.launch {
+                lifecycleScope.launch {
                     viewModel.retryGame(currentSaveId.toInt())
                 }
             }
