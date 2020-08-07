@@ -19,7 +19,7 @@ fun Area.paintOnCanvas(
     isLowBitAmbient: Boolean,
     isFocused: Boolean,
     paintSettings: AreaPaintSettings,
-    appTheme: AppTheme,
+    theme: AppTheme,
     markPadding: Int? = null,
     minePadding: Int? = null
 ) {
@@ -30,14 +30,14 @@ fun Area.paintOnCanvas(
                     style = Paint.Style.STROKE
                     strokeWidth = 2.0f
                     isAntiAlias = !isLowBitAmbient
-                    color = appTheme.palette.border
+                    color = theme.palette.border
                     alpha = 0xff
                 }
             } else {
                 painter.apply {
                     style = Paint.Style.FILL
                     isAntiAlias = !isLowBitAmbient
-                    color = appTheme.palette.covered
+                    color = theme.palette.covered
                     alpha = if (highlighted) 155 else 255
                 }
             }
@@ -83,14 +83,14 @@ fun Area.paintOnCanvas(
                     style = Paint.Style.STROKE
                     strokeWidth = 0.5f
                     isAntiAlias = !isLowBitAmbient
-                    color = appTheme.palette.border
+                    color = theme.palette.border
                     alpha = 0xff
                 }
             } else {
                 painter.apply {
                     style = Paint.Style.FILL
                     isAntiAlias = !isLowBitAmbient
-                    color = appTheme.palette.uncovered
+                    color = theme.palette.uncovered
                     alpha = 0xff
                 }
             }
@@ -118,14 +118,14 @@ fun Area.paintOnCanvas(
             } else if (minesAround > 0) {
                 painter.apply {
                     color = when (minesAround) {
-                        1 -> appTheme.palette.minesAround1
-                        2 -> appTheme.palette.minesAround2
-                        3 -> appTheme.palette.minesAround3
-                        4 -> appTheme.palette.minesAround4
-                        5 -> appTheme.palette.minesAround5
-                        6 -> appTheme.palette.minesAround6
-                        7 -> appTheme.palette.minesAround7
-                        8 -> appTheme.palette.minesAround8
+                        1 -> theme.palette.minesAround1
+                        2 -> theme.palette.minesAround2
+                        3 -> theme.palette.minesAround3
+                        4 -> theme.palette.minesAround4
+                        5 -> theme.palette.minesAround5
+                        6 -> theme.palette.minesAround6
+                        7 -> theme.palette.minesAround7
+                        8 -> theme.palette.minesAround8
                         else -> 0x00
                     }
                     alpha = 0xff
@@ -141,7 +141,7 @@ fun Area.paintOnCanvas(
                     style = Paint.Style.STROKE
                     strokeWidth = highlightWidth
                     isAntiAlias = !isLowBitAmbient
-                    color = appTheme.palette.highlight
+                    color = theme.palette.highlight
                     alpha = 0xff
 
                     val rect = RectF(
@@ -164,7 +164,7 @@ fun Area.paintOnCanvas(
                 style = Paint.Style.STROKE
                 strokeWidth = highlightWidth
                 isAntiAlias = !isLowBitAmbient
-                color = appTheme.palette.focus
+                color = theme.palette.focus
                 alpha = 0xff
             }
 

@@ -64,10 +64,10 @@ class ThemeAdapter(
         }
     }
 
-    private fun AreaView.bindTheme(area: Area, appTheme: AppTheme, paintSettings: AreaPaintSettings) {
+    private fun AreaView.bindTheme(area: Area, theme: AppTheme, paintSettings: AreaPaintSettings) {
         bindField(
-            area,
-            appTheme,
+            area = area,
+            theme = theme,
             isAmbientMode = false,
             isLowBitAmbient = false,
             paintSettings = paintSettings

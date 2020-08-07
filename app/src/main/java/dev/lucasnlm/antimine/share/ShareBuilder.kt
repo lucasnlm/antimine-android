@@ -72,7 +72,7 @@ class ShareBuilder(
                 area.paintOnCanvas(
                     context,
                     canvas,
-                    appTheme = DarkTheme,
+                    theme = DarkTheme,
                     isAmbientMode = false,
                     isLowBitAmbient = false,
                     isFocused = false,

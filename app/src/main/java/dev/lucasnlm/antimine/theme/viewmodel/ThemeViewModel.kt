@@ -13,9 +13,9 @@ class ThemeViewModel @ViewModelInject constructor(
 
     fun getThemes(): List<AppTheme> = themeRepository.getAllThemes()
 
-    fun setTheme(appTheme: AppTheme) {
-        themeRepository.setTheme(appTheme)
-        theme.postValue(appTheme)
+    fun setTheme(theme: AppTheme) {
+        themeRepository.setTheme(theme)
+        this.theme.postValue(theme)
     }
 }
 

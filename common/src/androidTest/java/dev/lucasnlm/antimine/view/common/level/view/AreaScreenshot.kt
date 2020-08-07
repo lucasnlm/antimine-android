@@ -48,7 +48,7 @@ class AreaScreenshot {
             isLowBitAmbient = false,
             isFocused = false,
             paintSettings = paintSettings,
-            appTheme = LightTheme
+            theme = LightTheme
         )
         canvas.restore()
 
