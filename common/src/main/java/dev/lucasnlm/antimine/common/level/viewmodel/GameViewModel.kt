@@ -346,7 +346,6 @@ class GameViewModel @ViewModelInject constructor(
 
                 updateGameControl(gameControl)
                 useQuestionMark(preferencesRepository.useQuestionMark())
-                useSolverAlgorithms(preferencesRepository.useSolverAlgorithms())
             }
         }
     }

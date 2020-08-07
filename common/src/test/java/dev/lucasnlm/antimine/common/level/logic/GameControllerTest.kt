@@ -89,7 +89,7 @@ class GameControllerTest {
         withGameController { controller ->
             val lastMine = controller.field.last { it.hasMine }
             assertEquals(
-                listOf(92, 91, 81, 70, 86, 41, 87, 67, 33, 36, 13, 59, 38, 27, 49, 4, 39, 5, 29, 19),
+                listOf(95, 85, 74, 73, 65, 88, 55, 91, 45, 52, 90, 47, 59, 42, 36, 32, 39, 28, 4, 3),
                 controller.takeExplosionRadius(lastMine).map { it.id }.toList()
             )
 

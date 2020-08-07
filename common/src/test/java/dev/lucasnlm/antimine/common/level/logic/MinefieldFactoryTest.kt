@@ -83,7 +83,7 @@ class MinefieldFactoryTest {
             preferencesRepository
         ).run {
             assertEquals(49, width)
-            assertEquals(97, height)
+            assertEquals(96, height)
             assertEquals(950, mines)
         }
     }

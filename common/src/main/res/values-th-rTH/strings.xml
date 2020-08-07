@@ -48,7 +48,6 @@
     <string name="quit">Quit</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="enable_automatic_flags">Enable automatic placing of flags</string>
-    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Open Areas</string>
     <string name="total_time">Total Time</string>
     <string name="average_time">Average Time</string>

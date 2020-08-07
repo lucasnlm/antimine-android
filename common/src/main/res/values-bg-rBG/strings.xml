@@ -48,7 +48,6 @@
     <string name="quit">Изход</string>
     <string name="are_you_sure">Сигурни ли сте?</string>
     <string name="enable_automatic_flags">Позволява автоматично слагане на флагове</string>
-    <string name="enable_no_guessing_maps">Намери решими карти</string>
     <string name="open_areas">Отворени площи</string>
     <string name="total_time">Общо време</string>
     <string name="average_time">Средно време</string>

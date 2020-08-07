@@ -48,7 +48,6 @@
     <string name="quit">Έξοδος</string>
     <string name="are_you_sure">Είσαι σίγουρος;</string>
     <string name="enable_automatic_flags">Ενεργοποίηση αυτόματης τοποθέτησης σημαιών</string>
-    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Ανοιχτές περιοχές</string>
     <string name="total_time">Συνολικός Χρόνος</string>
     <string name="average_time">Μέσος χρόνος</string>

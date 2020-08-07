@@ -48,7 +48,6 @@
     <string name="quit">Avslutt</string>
     <string name="are_you_sure">Er du sikker?</string>
     <string name="enable_automatic_flags">Aktiver automatisk plassering av flagg</string>
-    <string name="enable_no_guessing_maps">Finn løsbare kart</string>
     <string name="open_areas">Åpne områder</string>
     <string name="total_time">Total Tid</string>
     <string name="average_time">Gjennomsnittlig Tid</string>

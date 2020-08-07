@@ -48,7 +48,6 @@
     <string name="quit">Ukončit</string>
     <string name="are_you_sure">Jste si jisti?</string>
     <string name="enable_automatic_flags">Povolit automatické umísťování vlajek</string>
-    <string name="enable_no_guessing_maps">Najít řešitelná minová pole</string>
     <string name="open_areas">Otevřené oblasti</string>
     <string name="total_time">Celkový čas</string>
     <string name="average_time">Průměrný čas</string>

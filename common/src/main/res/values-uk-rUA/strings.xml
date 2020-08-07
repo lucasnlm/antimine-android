@@ -48,7 +48,6 @@
     <string name="quit">Вийти</string>
     <string name="are_you_sure">Ви впевнені?</string>
     <string name="enable_automatic_flags">Увімкнути автоматичне розміщення прапорців</string>
-    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Відкриті області</string>
     <string name="total_time">Час перегляду</string>
     <string name="average_time">Середній час</string>
