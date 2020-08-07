@@ -15,6 +15,7 @@ import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Score
 import dev.lucasnlm.antimine.common.level.models.StateUpdate
+import dev.lucasnlm.antimine.common.level.solver.LimitedBruteForceSolver
 import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.GameControl
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -69,12 +70,14 @@ class GameController {
 
     private fun plantMinesExcept(safeId: Int) {
         if (useSolverAlgorithms) {
+            val solver = LimitedBruteForceSolver()
             do {
-                field = minefieldCreator.create(safeId, false)
+                val useSafeZone = minefield.width > 9 && minefield.height > 9
+                field = minefieldCreator.create(safeId, useSafeZone)
                 val fieldCopy = field.map { it.copy() }.toMutableList()
                 val minefieldHandler = MinefieldHandler(fieldCopy, false)
                 minefieldHandler.openAt(safeId)
-            } while (!BruteForceSolver(minefieldHandler.result().toMutableList()).isSolvable())
+            } while (solver.keepTrying() && !solver.trySolve(minefieldHandler.result().toMutableList()))
         } else {
             field = minefieldCreator.create(safeId, true)
         }
