@@ -12,8 +12,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
-            android:text="@string/games"
-            android:textColor="@color/text_color" />
+            android:text="@string/games" />
 
         <TextView
             android:id="@+id/totalGames"
@@ -26,8 +25,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
-            android:text="@string/mines"
-            android:textColor="@color/text_color" />
+            android:text="@string/mines" />
 
         <TextView
             android:id="@+id/minesCount"
@@ -40,8 +38,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
-            android:text="@string/total_time"
-            android:textColor="@color/text_color" />
+            android:text="@string/total_time" />
 
         <TextView
             android:id="@+id/totalTime"
@@ -54,8 +51,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
-            android:text="@string/average_time"
-            android:textColor="@color/text_color" />
+            android:text="@string/average_time" />
 
         <TextView
             android:id="@+id/averageTime"
@@ -68,8 +64,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
-            android:text="@string/open_areas"
-            android:textColor="@color/text_color" />
+            android:text="@string/open_areas" />
 
         <TextView
             android:id="@+id/openAreas"
@@ -82,8 +77,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
-            android:text="@string/performance"
-            android:textColor="@color/text_color" />
+            android:text="@string/performance" />
 
         <TextView
             android:id="@+id/performance"
@@ -96,8 +90,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
-            android:text="@string/victories"
-            android:textColor="@color/text_color" />
+            android:text="@string/victories" />
 
         <TextView
             android:id="@+id/victory"
@@ -110,8 +103,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
-            android:text="@string/defeats"
-            android:textColor="@color/text_color" />
+            android:text="@string/defeats" />
 
         <TextView
             android:id="@+id/defeat"

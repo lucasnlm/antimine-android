@@ -10,7 +10,7 @@ import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.models.Mark
-import dev.lucasnlm.antimine.common.level.models.AreaPalette
+import dev.lucasnlm.antimine.core.themes.model.AppTheme
 
 fun Area.paintOnCanvas(
     context: Context,
@@ -19,7 +19,7 @@ fun Area.paintOnCanvas(
     isLowBitAmbient: Boolean,
     isFocused: Boolean,
     paintSettings: AreaPaintSettings,
-    areaPalette: AreaPalette,
+    appTheme: AppTheme,
     markPadding: Int? = null,
     minePadding: Int? = null
 ) {
@@ -30,13 +30,14 @@ fun Area.paintOnCanvas(
                     style = Paint.Style.STROKE
                     strokeWidth = 2.0f
                     isAntiAlias = !isLowBitAmbient
-                    color = areaPalette.border
+                    color = appTheme.palette.border
+                    alpha = 0xff
                 }
             } else {
                 painter.apply {
                     style = Paint.Style.FILL
                     isAntiAlias = !isLowBitAmbient
-                    color = areaPalette.covered
+                    color = appTheme.palette.covered
                     alpha = if (highlighted) 155 else 255
                 }
             }
@@ -82,13 +83,15 @@ fun Area.paintOnCanvas(
                     style = Paint.Style.STROKE
                     strokeWidth = 0.5f
                     isAntiAlias = !isLowBitAmbient
-                    color = areaPalette.border
+                    color = appTheme.palette.border
+                    alpha = 0xff
                 }
             } else {
                 painter.apply {
                     style = Paint.Style.FILL
                     isAntiAlias = !isLowBitAmbient
-                    color = areaPalette.uncovered
+                    color = appTheme.palette.uncovered
+                    alpha = 0xff
                 }
             }
 
@@ -113,15 +116,19 @@ fun Area.paintOnCanvas(
                 )
                 mine?.draw(canvas)
             } else if (minesAround > 0) {
-                painter.color = when (minesAround) {
-                    1 -> areaPalette.minesAround1
-                    2 -> areaPalette.minesAround2
-                    3 -> areaPalette.minesAround3
-                    4 -> areaPalette.minesAround4
-                    5 -> areaPalette.minesAround5
-                    6 -> areaPalette.minesAround6
-                    7 -> areaPalette.minesAround7
-                    else -> areaPalette.minesAround8
+                painter.apply {
+                    color = when (minesAround) {
+                        1 -> appTheme.palette.minesAround1
+                        2 -> appTheme.palette.minesAround2
+                        3 -> appTheme.palette.minesAround3
+                        4 -> appTheme.palette.minesAround4
+                        5 -> appTheme.palette.minesAround5
+                        6 -> appTheme.palette.minesAround6
+                        7 -> appTheme.palette.minesAround7
+                        8 -> appTheme.palette.minesAround8
+                        else -> 0x00
+                    }
+                    alpha = 0xff
                 }
                 canvas.drawText(minesAround.toString(), paintSettings, painter)
             }
@@ -134,7 +141,8 @@ fun Area.paintOnCanvas(
                     style = Paint.Style.STROKE
                     strokeWidth = highlightWidth
                     isAntiAlias = !isLowBitAmbient
-                    color = areaPalette.highlight
+                    color = appTheme.palette.highlight
+                    alpha = 0xff
 
                     val rect = RectF(
                         rectF.left + halfWidth,
@@ -156,7 +164,8 @@ fun Area.paintOnCanvas(
                 style = Paint.Style.STROKE
                 strokeWidth = highlightWidth
                 isAntiAlias = !isLowBitAmbient
-                color = areaPalette.focus
+                color = appTheme.palette.focus
+                alpha = 0xff
             }
 
             val rect = RectF(

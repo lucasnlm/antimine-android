@@ -49,13 +49,6 @@ open class LevelModule {
     open fun provideClock(): Clock = Clock()
 
     @Provides
-    open fun provideDimensionRepository(
-        @ApplicationContext context: Context,
-        preferencesRepository: IPreferencesRepository
-    ): IDimensionRepository =
-        DimensionRepository(context, preferencesRepository)
-
-    @Provides
     open fun provideSavesRepository(
         savesDao: SaveDao
     ): ISavesRepository = SavesRepository(savesDao)

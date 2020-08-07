@@ -24,6 +24,8 @@ import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.GameControl
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
+import dev.lucasnlm.antimine.core.themes.model.AppTheme
+import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -40,6 +42,7 @@ class GameViewModel @ViewModelInject constructor(
     private val dimensionRepository: IDimensionRepository,
     private val preferencesRepository: IPreferencesRepository,
     private val hapticFeedbackManager: IHapticFeedbackManager,
+    private val themeRepository: IThemeRepository,
     private val soundManager: ISoundManager,
     private val minefieldRepository: IMinefieldRepository,
     private val analyticsManager: IAnalyticsManager,
@@ -419,6 +422,8 @@ class GameViewModel @ViewModelInject constructor(
             saveGame()
         }
     }
+
+    fun getAppTheme(): AppTheme = themeRepository.getTheme()
 
     private fun getAreaSizeMultiplier() = preferencesRepository.areaSizeMultiplier()
 

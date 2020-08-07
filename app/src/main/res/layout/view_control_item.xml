@@ -38,7 +38,6 @@
 
             <TextView
                 android:id="@+id/title"
-                android:textColor="@color/text_color"
                 android:textStyle="bold"
                 tools:text="Title" />
         </TableRow>
@@ -47,7 +46,6 @@
 
             <TextView
                 android:id="@+id/firstAction"
-                android:textColor="@color/text_color"
                 tools:text="First Action" />
 
             <TextView
@@ -67,7 +65,6 @@
 
             <TextView
                 android:id="@+id/secondAction"
-                android:textColor="@color/text_color"
                 tools:text="Long Tap" />
 
             <TextView

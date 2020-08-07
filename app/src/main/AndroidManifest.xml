@@ -149,6 +149,7 @@
         </activity>
 
         <activity
+            android:label="@string/themes"
             android:name="dev.lucasnlm.antimine.theme.ThemeActivity"
             android:theme="@style/AppTheme">
             <meta-data

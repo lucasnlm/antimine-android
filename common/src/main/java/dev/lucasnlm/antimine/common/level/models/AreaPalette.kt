@@ -47,23 +47,6 @@ data class AreaPalette(
                 focus = toArgb(0xD32F2F)
             )
 
-        fun fromDefault(context: Context) =
-            AreaPalette(
-                border = ContextCompat.getColor(context, R.color.view_cover),
-                covered = ContextCompat.getColor(context, R.color.view_cover),
-                uncovered = ContextCompat.getColor(context, R.color.view_clean),
-                minesAround1 = ContextCompat.getColor(context, R.color.mines_around_1),
-                minesAround2 = ContextCompat.getColor(context, R.color.mines_around_2),
-                minesAround3 = ContextCompat.getColor(context, R.color.mines_around_3),
-                minesAround4 = ContextCompat.getColor(context, R.color.mines_around_4),
-                minesAround5 = ContextCompat.getColor(context, R.color.mines_around_5),
-                minesAround6 = ContextCompat.getColor(context, R.color.mines_around_6),
-                minesAround7 = ContextCompat.getColor(context, R.color.mines_around_7),
-                minesAround8 = ContextCompat.getColor(context, R.color.mines_around_8),
-                highlight = ContextCompat.getColor(context, R.color.highlight),
-                focus = ContextCompat.getColor(context, R.color.accent)
-            )
-
         fun fromContrast(context: Context) =
             AreaPalette(
                 border = ContextCompat.getColor(context, android.R.color.white),

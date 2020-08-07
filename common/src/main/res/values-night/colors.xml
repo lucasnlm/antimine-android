@@ -6,10 +6,6 @@
     <color name="primary">#212121</color>
     <color name="primary_dark">#212121</color>
 
-    <color name="victory">#FFFFFF</color>
-    <color name="ongoing">#616161</color>
-    <color name="lose">#616161</color>
-
     <color name="mines_around_1">#d5d2cc</color>
     <color name="mines_around_2">#d5d2cc</color>
     <color name="mines_around_3">#d5d2cc</color>
@@ -23,10 +19,8 @@
 
     <color name="accent">#FFFFFF</color>
     <color name="install_button">#E65100</color>
-    <color name="text_color">#FFFFFF</color>
     <color name="highlight">#FFFFFF</color>
 
     <color name="view_cover">#171717</color>
     <color name="view_clean">#ff424242</color>
-
 </resources>

@@ -3,20 +3,15 @@ package dev.lucasnlm.antimine.share
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.RectF
-import android.graphics.Typeface
+import android.graphics.*
 import androidx.core.content.FileProvider
 import dev.lucasnlm.antimine.BuildConfig
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
-import dev.lucasnlm.antimine.common.level.models.AreaPalette
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.view.paintOnCanvas
+import dev.lucasnlm.antimine.core.themes.repository.Themes.DarkTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -42,8 +37,6 @@ class ShareBuilder(
         val padding = 1f
         val radius = 2f
 
-        val areaPalette = AreaPalette.fromLightTheme()
-
         val paintSettings = AreaPaintSettings(
             Paint().apply {
                 isAntiAlias = true
@@ -66,6 +59,7 @@ class ShareBuilder(
             0.0f, 0.0f, imageWidth.toFloat(), imageHeight.toFloat(),
             Paint().apply {
                 color = Color.WHITE
+                alpha = 0xff
                 style = Paint.Style.FILL
             }
         )
@@ -78,13 +72,13 @@ class ShareBuilder(
                 area.paintOnCanvas(
                     context,
                     canvas,
+                    appTheme = DarkTheme,
                     isAmbientMode = false,
                     isLowBitAmbient = false,
                     isFocused = false,
                     paintSettings = paintSettings,
                     markPadding = 6,
-                    minePadding = 1,
-                    areaPalette = areaPalette
+                    minePadding = 1
                 )
                 canvas.restore()
             }

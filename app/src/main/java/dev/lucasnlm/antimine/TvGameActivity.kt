@@ -161,7 +161,7 @@ class TvGameActivity : AppCompatActivity() {
     }
 
     private fun newGameConfirmation(action: () -> Unit) {
-        AlertDialog.Builder(this, R.style.MyDialog).apply {
+        AlertDialog.Builder(this).apply {
             setTitle(R.string.new_game)
             setMessage(R.string.retry_sure)
             setPositiveButton(R.string.resume) { _, _ -> action() }
@@ -171,7 +171,7 @@ class TvGameActivity : AppCompatActivity() {
     }
 
     private fun showQuitConfirmation(action: () -> Unit) {
-        AlertDialog.Builder(this, R.style.MyDialog)
+        AlertDialog.Builder(this)
             .setTitle(R.string.are_you_sure)
             .setMessage(R.string.quit_confirm)
             .setPositiveButton(R.string.quit) { _, _ -> action() }
@@ -198,7 +198,7 @@ class TvGameActivity : AppCompatActivity() {
     }
 
     private fun showVictory() {
-        AlertDialog.Builder(this, R.style.MyDialog).apply {
+        AlertDialog.Builder(this).apply {
             setTitle(R.string.you_won)
             setMessage(R.string.all_mines_disabled)
             setCancelable(false)
@@ -218,7 +218,7 @@ class TvGameActivity : AppCompatActivity() {
                 Handler(),
                 {
                     if (status is Status.Over && !isFinishing) {
-                        AlertDialog.Builder(this, R.style.MyDialog).apply {
+                        AlertDialog.Builder(this).apply {
                             setTitle(R.string.new_game)
                             setMessage(R.string.new_game_request)
                             setPositiveButton(R.string.yes) { _, _ ->
@@ -242,7 +242,7 @@ class TvGameActivity : AppCompatActivity() {
             Handler(),
             {
                 if (status is Status.Over && !isFinishing) {
-                    AlertDialog.Builder(this, R.style.MyDialog).apply {
+                    AlertDialog.Builder(this).apply {
                         setTitle(R.string.you_lost)
                         setMessage(R.string.new_game_request)
                         setPositiveButton(R.string.yes) { _, _ ->

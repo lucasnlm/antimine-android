@@ -33,10 +33,10 @@ class ControlDialogFragment : AppCompatDialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val currentControl = preferencesRepository.controlStyle().ordinal
 
-        return AlertDialog.Builder(requireContext(), R.style.MyDialog).apply {
+        return AlertDialog.Builder(requireContext()).apply {
             setTitle(R.string.control)
             setSingleChoiceItems(adapter, currentControl, null)
-            setPositiveButton(R.string.ok, null) // TODO OK
+            setPositiveButton(R.string.ok, null)
         }.create()
     }
 

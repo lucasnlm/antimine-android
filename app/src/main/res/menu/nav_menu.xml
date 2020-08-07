@@ -72,7 +72,7 @@
             android:id="@+id/themes"
             android:checkable="false"
             android:icon="@drawable/themes"
-            android:title="@string/install" />
+            android:title="@string/themes" />
     </group>
 
     <group

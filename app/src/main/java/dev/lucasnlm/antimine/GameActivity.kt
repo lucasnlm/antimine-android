@@ -14,7 +14,6 @@ import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -53,7 +52,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
+class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
     @Inject
     lateinit var preferencesRepository: IPreferencesRepository
 
@@ -68,6 +67,8 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
 
     val viewModel: GameViewModel by viewModels()
     private val shareViewModel: ShareViewModel by viewModels()
+
+    override val noActionBar: Boolean = true
 
     private var status: Status = Status.PreGame
     private val areaSizeMultiplier by lazy { preferencesRepository.areaSizeMultiplier() }
@@ -399,7 +400,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
     }
 
     private fun newGameConfirmation(action: () -> Unit) {
-        AlertDialog.Builder(this, R.style.MyDialog).apply {
+        AlertDialog.Builder(this).apply {
             setTitle(R.string.new_game)
             setMessage(R.string.retry_sure)
             setPositiveButton(R.string.resume) { _, _ -> action() }
@@ -409,7 +410,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
     }
 
     private fun showQuitConfirmation(action: () -> Unit) {
-        AlertDialog.Builder(this, R.style.MyDialog)
+        AlertDialog.Builder(this)
             .setTitle(R.string.are_you_sure)
             .setMessage(R.string.quit_confirm)
             .setPositiveButton(R.string.quit) { _, _ -> action() }

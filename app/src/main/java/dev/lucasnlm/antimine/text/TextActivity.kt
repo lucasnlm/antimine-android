@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.annotation.RawRes
 import androidx.lifecycle.Observer
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.text.viewmodel.TextViewModel
 
 import kotlinx.android.synthetic.main.activity_text.*
@@ -17,7 +18,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class TextActivity : AppCompatActivity(R.layout.activity_text) {
+class TextActivity : ThematicActivity(R.layout.activity_text) {
     private val viewModel: TextViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
