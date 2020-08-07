@@ -35,11 +35,14 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 adapter = ThemeAdapter(viewModel, areaSize)
             }
 
-            viewModel.theme.observe(this@ThemeActivity, Observer {
-                if (usingThemeId != it.id) {
-                    recreate()
+            viewModel.theme.observe(
+                this@ThemeActivity,
+                Observer {
+                    if (usingThemeId != it.id) {
+                        recreate()
+                    }
                 }
-            })
+            )
         }
     }
 }

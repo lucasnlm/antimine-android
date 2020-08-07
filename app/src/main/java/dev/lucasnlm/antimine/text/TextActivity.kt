@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.text
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.RawRes

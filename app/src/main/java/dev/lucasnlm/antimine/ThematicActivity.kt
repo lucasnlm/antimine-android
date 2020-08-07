@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
 import javax.inject.Inject
 

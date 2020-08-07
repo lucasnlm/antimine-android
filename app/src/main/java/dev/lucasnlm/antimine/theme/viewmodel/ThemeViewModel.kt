@@ -18,4 +18,3 @@ class ThemeViewModel @ViewModelInject constructor(
         this.theme.postValue(theme)
     }
 }
-

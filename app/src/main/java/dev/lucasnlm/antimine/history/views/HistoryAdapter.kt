@@ -1,14 +1,12 @@
 package dev.lucasnlm.antimine.history.views
 
 import android.content.Intent
-import android.graphics.PorterDuff
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.R
