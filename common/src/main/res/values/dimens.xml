@@ -2,8 +2,7 @@
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="toolbar_elevation">6dp</dimen>
 
-    <dimen name="field_size">38dp</dimen>
-    <dimen name="accessible_field_size">48dp</dimen>
+    <dimen name="field_size">76dp</dimen>
     <dimen name="field_radius">2dp</dimen>
     <dimen name="field_padding">1dp</dimen>
     <dimen name="highlight_stroke">2dp</dimen>

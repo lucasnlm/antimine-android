@@ -69,7 +69,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
     private val shareViewModel: ShareViewModel by viewModels()
 
     private var status: Status = Status.PreGame
-    private val usingLargeArea by lazy { preferencesRepository.useLargeAreas() }
+    private val areaSizeMultiplier by lazy { preferencesRepository.areaSizeMultiplier() }
     private var totalMines: Int = 0
     private var totalArea: Int = 0
     private var rightMines: Int = 0
@@ -568,7 +568,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
      * apply these changes.
      */
     private fun restartIfNeed(): Boolean {
-        return (usingLargeArea != preferencesRepository.useLargeAreas()).also {
+        return (areaSizeMultiplier != preferencesRepository.areaSizeMultiplier()).also {
             if (it) {
                 recreate()
             }

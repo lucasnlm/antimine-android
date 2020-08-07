@@ -10,6 +10,8 @@ class FixedDimensionRepository : IDimensionRepository {
         return areaSize() + 2 * areaSeparator()
     }
 
+    override fun defaultAreaSize(): Float = 50.0f
+
     override fun areaSeparator(): Float = 1.0f
 
     override fun displaySize(): Size = Size(50 * 15, 50 * 30)
