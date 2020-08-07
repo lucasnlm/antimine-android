@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
+import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
@@ -24,7 +25,8 @@ import kotlinx.coroutines.launch
 class AreaAdapter(
     context: Context,
     private val viewModel: GameViewModel,
-    private val preferencesRepository: IPreferencesRepository
+    private val preferencesRepository: IPreferencesRepository,
+    dimensionRepository: IDimensionRepository
 ) : RecyclerView.Adapter<AreaViewHolder>() {
 
     private var field = listOf<Area>()
@@ -37,7 +39,7 @@ class AreaAdapter(
 
     init {
         setHasStableIds(true)
-        paintSettings = createAreaPaintSettings(context.applicationContext, viewModel.useAccessibilityMode())
+        paintSettings = createAreaPaintSettings(context.applicationContext, dimensionRepository.areaSize())
     }
 
     fun setAmbientMode(isAmbientMode: Boolean, isLowBitAmbient: Boolean) {
@@ -174,13 +176,8 @@ class AreaAdapter(
     companion object {
         val TAG = AreaAdapter::class.simpleName!!
 
-        fun createAreaPaintSettings(context: Context, useLargeArea: Boolean): AreaPaintSettings {
+        fun createAreaPaintSettings(context: Context, size: Float): AreaPaintSettings {
             val resources = context.resources
-            val size = if (useLargeArea) {
-                resources.getDimension(R.dimen.accessible_field_size)
-            } else {
-                resources.getDimension(R.dimen.field_size)
-            }
             return AreaPaintSettings(
                 Paint().apply {
                     isAntiAlias = true

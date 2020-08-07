@@ -58,7 +58,7 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 - Share game
 - App shortcuts
 - Split screen
-- Assessability: large toachable area
+- Assessability: adjustable touch area
 - Assessability: screen reader
 
 ## Technical Details

@@ -20,11 +20,10 @@ interface IPreferencesRepository {
 
     fun useFlagAssistant(): Boolean
     fun useHapticFeedback(): Boolean
-    fun useLargeAreas(): Boolean
+    fun areaSizeMultiplier(): Int
     fun useAnimations(): Boolean
     fun useQuestionMark(): Boolean
     fun isSoundEffectsEnabled(): Boolean
-    fun useSolverAlgorithms(): Boolean
 }
 
 class PreferencesRepository(
@@ -66,8 +65,8 @@ class PreferencesRepository(
     override fun useHapticFeedback(): Boolean =
         getBoolean(PREFERENCE_VIBRATION, true)
 
-    override fun useLargeAreas(): Boolean =
-        getBoolean(PREFERENCE_USE_LARGE_TILE, false)
+    override fun areaSizeMultiplier(): Int =
+        getInt(PREFERENCE_AREA_SIZE, 50)
 
     override fun useAnimations(): Boolean =
         getBoolean(PREFERENCE_ANIMATION, true)
@@ -77,9 +76,6 @@ class PreferencesRepository(
 
     override fun isSoundEffectsEnabled(): Boolean =
         getBoolean(PREFERENCE_SOUND_EFFECTS, false)
-
-    override fun useSolverAlgorithms(): Boolean =
-        getBoolean(PREFERENCE_USE_SOLVER_ALGORITHMS, false)
 
     override fun controlStyle(): ControlStyle {
         val index = getInt(PREFERENCE_CONTROL_STYLE, -1)
@@ -105,13 +101,18 @@ class PreferencesRepository(
 
             preferencesManager.removeKey(PREFERENCE_OLD_DOUBLE_CLICK)
         }
+
+        if (preferencesManager.contains(PREFERENCE_OLD_LARGE_AREA)) {
+            preferencesManager.putInt(PREFERENCE_AREA_SIZE, 63)
+            preferencesManager.removeKey(PREFERENCE_OLD_LARGE_AREA)
+        }
     }
 
     private companion object {
         private const val PREFERENCE_VIBRATION = "preference_vibration"
         private const val PREFERENCE_ASSISTANT = "preference_assistant"
         private const val PREFERENCE_ANIMATION = "preference_animation"
-        private const val PREFERENCE_USE_LARGE_TILE = "preference_large_area"
+        private const val PREFERENCE_AREA_SIZE = "preference_area_size"
         private const val PREFERENCE_QUESTION_MARK = "preference_use_question_mark"
         private const val PREFERENCE_CONTROL_STYLE = "preference_control_style"
         private const val PREFERENCE_OLD_DOUBLE_CLICK = "preference_double_click_open"
@@ -120,6 +121,6 @@ class PreferencesRepository(
         private const val PREFERENCE_CUSTOM_GAME_MINES = "preference_custom_game_mines"
         private const val PREFERENCE_SOUND_EFFECTS = "preference_sound"
         private const val PREFERENCE_STATS_BASE = "preference_stats_base"
-        private const val PREFERENCE_USE_SOLVER_ALGORITHMS = "preference_use_solver_algorithms"
+        private const val PREFERENCE_OLD_LARGE_AREA = "preference_large_area"
     }
 }

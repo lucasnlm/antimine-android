@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="new_game">New Game</string>
-    <string name="victory">You won!&#xA0;😎</string>
-    <string name="game_over">Exploded!&#xA0;😢</string>
+    <string name="new_game">Permainan Baru</string>
+    <string name="victory">Kamu menang!&#xA0;😎</string>
+    <string name="game_over">Meledak&#xA0;😢</string>
 </resources>

@@ -86,6 +86,8 @@
     <string name="no_network">Geen internet konneksie.</string>
     <string name="open_menu">Maak Kieslys Oop</string>
     <string name="close_menu">Sluit Spyskaart</string>
+    <string name="delete_all">Delete all</string>
+    <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">All mines were disabled.</string>
     <string name="desc_convered_area">Covered area</string>
     <string name="desc_marked_area">Marked area</string>

@@ -86,6 +86,8 @@
     <string name="no_network">Không có kết nối mạng.</string>
     <string name="open_menu">Mở menu</string>
     <string name="close_menu">Đóng menu</string>
+    <string name="delete_all">Xóa tất cả</string>
+    <string name="delete_all_message">Xóa tất cả các sự kiện vĩnh viễn.</string>
     <string name="all_mines_disabled">Đã phá hết mìn.</string>
     <string name="desc_convered_area">Ô đã mở</string>
     <string name="desc_marked_area">Ô đã đánh dấu</string>

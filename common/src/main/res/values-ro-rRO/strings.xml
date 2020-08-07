@@ -86,6 +86,8 @@
     <string name="no_network">Lipseste conexiune la internet.</string>
     <string name="open_menu">Deschide meniul</string>
     <string name="close_menu">Închide meniul</string>
+    <string name="delete_all">Delete all</string>
+    <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">Toate minele au fost dezactivate.</string>
     <string name="desc_convered_area">Covered area</string>
     <string name="desc_marked_area">Marked area</string>

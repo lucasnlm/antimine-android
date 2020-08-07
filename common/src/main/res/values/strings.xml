@@ -30,6 +30,7 @@
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Accessibility</string>
     <string name="settings_large_areas">Use Large Areas</string>
+    <string name="size">Size</string>
     <string name="rating">Feedback</string>
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
     <string name="used_software_text">This game uses the following third parties software:</string>
@@ -48,7 +49,6 @@
     <string name="quit">Quit</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="enable_automatic_flags">Enable automatic placing of flags</string>
-    <string name="enable_no_guessing_maps">Find solvable maps</string>
     <string name="open_areas">Open Areas</string>
     <string name="total_time">Total Time</string>
     <string name="average_time">Average Time</string>

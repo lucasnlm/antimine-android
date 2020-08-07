@@ -6,7 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
+import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.preferences.PreferencesManager
@@ -28,7 +28,7 @@ class CommonModule {
     ): PreferencesManager = PreferencesManager(context)
 
     @Provides
-    fun provideAnalyticsManager(): AnalyticsManager = DebugAnalyticsManager()
+    fun provideAnalyticsManager(): IAnalyticsManager = DebugAnalyticsManager()
 
     @Provides
     fun provideSoundManager(

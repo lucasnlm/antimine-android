@@ -86,6 +86,8 @@
     <string name="no_network">Brak połączenia internetowego.</string>
     <string name="open_menu">Otwórz menu</string>
     <string name="close_menu">Zamknij menu</string>
+    <string name="delete_all">Usuń wszystkie</string>
+    <string name="delete_all_message">Usuń wszystkie zdarzenia na stałe.</string>
     <string name="all_mines_disabled">Wszystkie miny zostały rozbrojone.</string>
     <string name="desc_convered_area">Nieodkryte pole</string>
     <string name="desc_marked_area">Oznaczone pole</string>

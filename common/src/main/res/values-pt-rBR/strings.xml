@@ -86,6 +86,8 @@
     <string name="no_network">Sem conexão com a internet.</string>
     <string name="open_menu">Abrir Menu</string>
     <string name="close_menu">Fechar Menu</string>
+    <string name="delete_all">Apagar tudo</string>
+    <string name="delete_all_message">Apagar todos os eventos permanentemente.</string>
     <string name="all_mines_disabled">Todas as minas foram desativadas.</string>
     <string name="desc_convered_area">Área coberta</string>
     <string name="desc_marked_area">Área marcada</string>

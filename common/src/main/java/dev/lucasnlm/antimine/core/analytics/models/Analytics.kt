@@ -14,7 +14,7 @@ sealed class Analytics(
         minefield: Minefield,
         difficulty: Difficulty,
         seed: Long,
-        useAccessibilityMode: Boolean
+        areaSizeMultiplier: Int
     ) : Analytics(
         "New Game",
         mapOf(
@@ -23,7 +23,7 @@ sealed class Analytics(
             "Width" to minefield.width.toString(),
             "Height" to minefield.height.toString(),
             "Mines" to minefield.mines.toString(),
-            "Accessibility" to useAccessibilityMode.toString()
+            "Size Multiplier" to areaSizeMultiplier.toString()
         )
     )
 
@@ -31,7 +31,7 @@ sealed class Analytics(
         minefield: Minefield,
         difficulty: Difficulty,
         seed: Long,
-        useAccessibilityMode: Boolean,
+        areaSizeMultiplier: Int,
         firstOpen: Int
     ) : Analytics(
         "Retry Game",
@@ -41,7 +41,7 @@ sealed class Analytics(
             "Width" to minefield.width.toString(),
             "Height" to minefield.height.toString(),
             "Mines" to minefield.mines.toString(),
-            "Accessibility" to useAccessibilityMode.toString(),
+            "Size Multiplier" to areaSizeMultiplier.toString(),
             "First Open" to firstOpen.toString()
         )
     )

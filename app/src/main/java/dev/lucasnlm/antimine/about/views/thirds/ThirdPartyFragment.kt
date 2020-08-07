@@ -10,7 +10,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import kotlinx.android.synthetic.main.fragment_third_party.*
 
-class ThirdPartiesFragment : Fragment(R.layout.fragment_third_party) {
+class ThirdPartyFragment : Fragment(R.layout.fragment_third_party) {
     private val aboutViewModel: AboutViewModel by activityViewModels()
 
     override fun onResume() {
@@ -30,6 +30,6 @@ class ThirdPartiesFragment : Fragment(R.layout.fragment_third_party) {
     }
 
     companion object {
-        val TAG = ThirdPartiesFragment::class.simpleName!!
+        val TAG = ThirdPartyFragment::class.simpleName!!
     }
 }

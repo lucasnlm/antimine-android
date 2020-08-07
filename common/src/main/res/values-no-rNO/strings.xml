@@ -86,6 +86,8 @@
     <string name="no_network">Ingen Internett-forbindelse.</string>
     <string name="open_menu">Åpne Menyen</string>
     <string name="close_menu">Lukk Menyen</string>
+    <string name="delete_all">Slett alle</string>
+    <string name="delete_all_message">Slett alle hendelser permanent.</string>
     <string name="all_mines_disabled">Alle miner ble deaktivert.</string>
     <string name="desc_convered_area">Dekket område</string>
     <string name="desc_marked_area">Merket område</string>

@@ -34,7 +34,7 @@ class MinefieldRepository : IMinefieldRepository {
     private fun calculateStandardMode(
         dimensionRepository: IDimensionRepository
     ): Minefield {
-        val fieldSize = dimensionRepository.areaSize()
+        val fieldSize = dimensionRepository.defaultAreaSize()
         val verticalGap = if (dimensionRepository.navigationBarHeight() > 0)
             VERTICAL_STANDARD_GAP else VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM
 

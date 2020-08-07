@@ -19,7 +19,9 @@ abstract class CommonLevelFragment(@LayoutRes contentLayoutId: Int) : Fragment(c
     lateinit var preferencesRepository: IPreferencesRepository
 
     protected val viewModel: GameViewModel by activityViewModels()
-    protected val areaAdapter by lazy { AreaAdapter(requireContext(), viewModel, preferencesRepository) }
+    protected val areaAdapter by lazy {
+        AreaAdapter(requireContext(), viewModel, preferencesRepository, dimensionRepository)
+    }
     protected lateinit var recyclerGrid: RecyclerView
 
     protected fun makeNewLayoutManager(boardWidth: Int) =

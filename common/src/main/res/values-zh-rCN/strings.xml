@@ -86,6 +86,8 @@
     <string name="no_network">没有网络连接</string>
     <string name="open_menu">打开菜单</string>
     <string name="close_menu">关闭菜单</string>
+    <string name="delete_all">全部删除</string>
+    <string name="delete_all_message">永久删除全部事件</string>
     <string name="all_mines_disabled">所有地雷都已失效。</string>
     <string name="desc_convered_area">覆盖面积</string>
     <string name="desc_marked_area">标记区域</string>

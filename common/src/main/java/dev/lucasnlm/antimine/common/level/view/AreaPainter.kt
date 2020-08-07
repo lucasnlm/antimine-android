@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine.common.level.view
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Rect
 import android.graphics.RectF
 import androidx.core.content.ContextCompat
 import dev.lucasnlm.antimine.common.R
@@ -122,7 +123,7 @@ fun Area.paintOnCanvas(
                     7 -> areaPalette.minesAround7
                     else -> areaPalette.minesAround8
                 }
-                drawText(canvas, painter, minesAround.toString(), paintSettings)
+                canvas.drawText(minesAround.toString(), paintSettings, painter)
             }
 
             if (highlighted) {
@@ -170,15 +171,15 @@ fun Area.paintOnCanvas(
     }
 }
 
-private fun drawText(canvas: Canvas, paint: Paint, text: String, paintSettings: AreaPaintSettings) {
+private fun Canvas.drawText(text: String, paintSettings: AreaPaintSettings, paint: Paint) {
     paintSettings.run {
-        val bounds = RectF(rectF).apply {
-            right = paint.measureText(text, 0, text.length)
-            bottom = paint.descent() - paint.ascent()
-            left += (rectF.width() - right) / 2.0f
-            top += (rectF.height() - bottom) / 2.0f
-        }
+        val bounds = Rect()
+        paint.getTextBounds(text.toCharArray(), 0, 1, bounds)
+        paint.textSize = rectF.height() * 0.45f
 
-        canvas.drawText(text, rectF.width() * 0.5f, bounds.top - paint.ascent(), paint)
+        val xPos = rectF.width() * 0.5f
+        val yPos = (bounds.height() + rectF.height()) * 0.5f
+
+        drawText(text, xPos, yPos, paint)
     }
 }

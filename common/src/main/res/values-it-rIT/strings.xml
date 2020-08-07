@@ -42,7 +42,7 @@
     <string name="defeats">Sconfitte</string>
     <string name="game_over_desc_1">Buona fortuna nella prossima partita.</string>
     <string name="game_over_desc_4">Hai finito il campo minato in %1$d secondi.</string>
-    <string name="fail_to_share">Condivisione non riuscita</string>
+    <string name="fail_to_share">Condivisione fallita</string>
     <string name="version_s">Versione %1$s</string>
     <string name="sound_effects">Effetti Sonori</string>
     <string name="quit">Esci</string>
@@ -86,6 +86,8 @@
     <string name="no_network">Nessuna connessione internet.</string>
     <string name="open_menu">Apri menu</string>
     <string name="close_menu">Chiudi menu</string>
+    <string name="delete_all">Elimina tutti</string>
+    <string name="delete_all_message">Elimina tutti gli eventi permanentemente.</string>
     <string name="all_mines_disabled">Tutte le mine sono state disattivate.</string>
     <string name="desc_convered_area">Area coperta</string>
     <string name="desc_marked_area">Area segnata</string>

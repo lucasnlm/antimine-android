@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen
+<PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -19,13 +19,6 @@
             android:defaultValue="true"
             android:key="preference_assistant"
             android:title="@string/enable_automatic_flags"
-            app:iconSpaceReserved="false" />
-
-        <SwitchPreferenceCompat
-            android:checked="false"
-            android:defaultValue="false"
-            android:key="preference_use_solver_algorithms"
-            android:title="@string/enable_no_guessing_maps"
             app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
@@ -60,13 +53,18 @@
         android:title="@string/settings_accessibility"
         app:iconSpaceReserved="false">
 
-        <SwitchPreferenceCompat
-            android:checked="false"
-            android:defaultValue="false"
-            android:key="preference_large_area"
-            android:title="@string/settings_large_areas"
+        <SeekBarPreference
+            android:key="preference_area_size"
+            android:max="80"
+            android:min="40"
+            android:defaultValue="50"
+            android:title="@string/size"
+            app:adjustable="true"
+            app:min="40"
+            app:seekBarIncrement="5"
+            app:showSeekBarValue="true"
             app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
 
-</androidx.preference.PreferenceScreen>
+</PreferenceScreen>

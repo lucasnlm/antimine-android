@@ -86,6 +86,8 @@
     <string name="no_network">Отсутствует подключение к Интернету.</string>
     <string name="open_menu">Открыть меню</string>
     <string name="close_menu">Закрыть меню</string>
+    <string name="delete_all">Удалить все</string>
+    <string name="delete_all_message">Удалить все события навсегда.</string>
     <string name="all_mines_disabled">Все мины обезврежены.</string>
     <string name="desc_convered_area">Покрытая область</string>
     <string name="desc_marked_area">Отмеченная область</string>

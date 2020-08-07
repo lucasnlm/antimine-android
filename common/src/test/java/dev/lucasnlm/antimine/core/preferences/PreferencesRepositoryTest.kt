@@ -58,4 +58,25 @@ class PreferencesRepositoryTest {
         assertTrue(preferenceManager.values["preference_double_click_open"] == null)
         assertFalse(preferencesRepository.getBoolean("preference_double_click_open", false))
     }
+
+    @Test
+    fun testMigrationLargeArea() {
+        val preferenceManager = TestPreferenceManager()
+        preferenceManager.putBoolean("preference_large_area", true)
+        assertTrue(preferenceManager.values["preference_large_area"] as Boolean)
+
+        val preferencesRepository = PreferencesRepository(preferenceManager)
+
+        assertTrue(preferenceManager.values["preference_large_area"] == null)
+        assertEquals(63, preferencesRepository.getInt("preference_area_size", -1))
+    }
+
+    @Test
+    fun testMigrationLargeAreaOff() {
+        val preferenceManager = TestPreferenceManager()
+        val preferencesRepository = PreferencesRepository(preferenceManager)
+
+        assertTrue(preferenceManager.values["preference_large_area"] == null)
+        assertEquals(50, preferencesRepository.getInt("preference_area_size", 50))
+    }
 }

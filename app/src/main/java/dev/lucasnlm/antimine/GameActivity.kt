@@ -21,6 +21,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.about.AboutActivity
@@ -31,7 +32,7 @@ import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.ControlDialogFragment
-import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
+import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.history.HistoryActivity
@@ -56,7 +57,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
     lateinit var preferencesRepository: IPreferencesRepository
 
     @Inject
-    lateinit var analyticsManager: AnalyticsManager
+    lateinit var analyticsManager: IAnalyticsManager
 
     @Inject
     lateinit var instantAppManager: InstantAppManager
@@ -68,7 +69,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
     private val shareViewModel: ShareViewModel by viewModels()
 
     private var status: Status = Status.PreGame
-    private val usingLargeArea by lazy { preferencesRepository.useLargeAreas() }
+    private val areaSizeMultiplier by lazy { preferencesRepository.areaSizeMultiplier() }
     private var totalMines: Int = 0
     private var totalArea: Int = 0
     private var rightMines: Int = 0
@@ -81,7 +82,10 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
-        bindViewModel()
+        lifecycleScope.launchWhenCreated {
+            bindViewModel()
+        }
+
         bindToolbar()
         bindDrawer()
         bindNavigationMenu()
@@ -113,7 +117,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
         retryObserver.observe(
             this@GameActivity,
             Observer {
-                GlobalScope.launch {
+                lifecycleScope.launch {
                     viewModel.retryGame(currentSaveId.toInt())
                 }
             }
@@ -565,7 +569,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
      * apply these changes.
      */
     private fun restartIfNeed(): Boolean {
-        return (usingLargeArea != preferencesRepository.useLargeAreas()).also {
+        return (areaSizeMultiplier != preferencesRepository.areaSizeMultiplier()).also {
             if (it) {
                 recreate()
             }

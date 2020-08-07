@@ -18,7 +18,7 @@ import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
-import dev.lucasnlm.antimine.core.analytics.AnalyticsManager
+import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.ControlStyle
@@ -43,7 +43,7 @@ class GameViewModel @ViewModelInject constructor(
     private val hapticFeedbackManager: IHapticFeedbackManager,
     private val soundManager: ISoundManager,
     private val minefieldRepository: IMinefieldRepository,
-    private val analyticsManager: AnalyticsManager,
+    private val analyticsManager: IAnalyticsManager,
     private val clock: Clock
 ) : ViewModel() {
     val eventObserver = MutableLiveData<Event>()
@@ -51,8 +51,8 @@ class GameViewModel @ViewModelInject constructor(
     val shareObserver = MutableLiveData<Unit>()
 
     private lateinit var gameController: GameController
-    private var currentDifficulty: Difficulty = Difficulty.Standard
     private var initialized = false
+    private var currentDifficulty: Difficulty = Difficulty.Standard
 
     val field = MutableLiveData<List<Area>>()
     val fieldRefresh = MutableLiveData<Int>()
@@ -79,6 +79,8 @@ class GameViewModel @ViewModelInject constructor(
             minefieldRepository.randomSeed(),
             dimensionRepository.isRoundDevice()
         )
+        gameController = GameController(minefield, minefieldRepository.randomSeed())
+        initialized = true
         refreshUserPreferences()
 
         mineCount.postValue(minefield.mines)
@@ -91,7 +93,7 @@ class GameViewModel @ViewModelInject constructor(
             Analytics.NewGame(
                 minefield, newDifficulty,
                 gameController.seed,
-                useAccessibilityMode()
+                getAreaSizeMultiplier()
             )
         )
 
@@ -104,6 +106,7 @@ class GameViewModel @ViewModelInject constructor(
 
         val setup = save.minefield
         gameController = GameController(save)
+        initialized = true
         refreshUserPreferences()
 
         mineCount.postValue(setup.mines)
@@ -127,6 +130,7 @@ class GameViewModel @ViewModelInject constructor(
         elapsedTimeSeconds.postValue(0L)
         currentDifficulty = save.difficulty
         gameController = GameController(save)
+        initialized = true
         refreshUserPreferences()
 
         mineCount.postValue(save.minefield.mines)
@@ -140,7 +144,7 @@ class GameViewModel @ViewModelInject constructor(
                 save.minefield,
                 currentDifficulty,
                 gameController.seed,
-                useAccessibilityMode(),
+                getAreaSizeMultiplier(),
                 save.firstOpen.toInt()
             )
         )
@@ -158,8 +162,6 @@ class GameViewModel @ViewModelInject constructor(
         } else {
             // Fail to load
             startNewGame()
-        }.also {
-            initialized = true
         }
     }
 
@@ -185,8 +187,6 @@ class GameViewModel @ViewModelInject constructor(
         } else {
             // Fail to load
             startNewGame()
-        }.also {
-            initialized = true
         }
     }
 
@@ -200,8 +200,6 @@ class GameViewModel @ViewModelInject constructor(
         } else {
             // Fail to load
             startNewGame()
-        }.also {
-            initialized = true
         }
     }
 
@@ -355,13 +353,14 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     fun refreshUserPreferences() {
-        gameController.apply {
-            val controlType = preferencesRepository.controlStyle()
-            val gameControl = GameControl.fromControlType(controlType)
+        if (initialized) {
+            gameController.apply {
+                val controlType = preferencesRepository.controlStyle()
+                val gameControl = GameControl.fromControlType(controlType)
 
-            updateGameControl(gameControl)
-            useQuestionMark(preferencesRepository.useQuestionMark())
-            useSolverAlgorithms(preferencesRepository.useSolverAlgorithms())
+                updateGameControl(gameControl)
+                useQuestionMark(preferencesRepository.useQuestionMark())
+            }
         }
     }
 
@@ -435,7 +434,7 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
-    fun useAccessibilityMode() = preferencesRepository.useLargeAreas()
+    private fun getAreaSizeMultiplier() = preferencesRepository.areaSizeMultiplier()
 
     private fun refreshIndex(targetIndex: Int, multipleChanges: Boolean = false) {
         if (!preferencesRepository.useAnimations() || multipleChanges) {
