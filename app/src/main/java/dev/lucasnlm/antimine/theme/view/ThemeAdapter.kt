@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.theme.view
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Typeface
@@ -32,7 +33,7 @@ class ThemeAdapter(
         Area(4, 1, 1, 3, hasMine = false, mistake = false, mark = Mark.None, isCovered = false),
         Area(5, 2, 1, 3, hasMine = true, mistake = false, mark = Mark.Flag, isCovered = true),
         Area(6, 0, 2, 0, hasMine = true, mistake = false, mark = Mark.Question, isCovered = true),
-        Area(7, 1, 2, 0, hasMine = false, mistake = false, mark = Mark.None, isCovered = true),
+        Area(7, 1, 2, 4, hasMine = false, mistake = false, mark = Mark.None, isCovered = false),
         Area(8, 2, 2, 0, hasMine = false, mistake = false, mark = Mark.None, isCovered = true)
     )
 
@@ -56,15 +57,13 @@ class ThemeAdapter(
         val theme = themes[position]
         val paintSettings = createAreaPaintSettings(holder.itemView.context, areaSize)
         holder.itemView.run {
-            area0.bindTheme(minefield[0], theme, paintSettings)
-            area1.bindTheme(minefield[1], theme, paintSettings)
-            area2.bindTheme(minefield[2], theme, paintSettings)
-            area3.bindTheme(minefield[3], theme, paintSettings)
-            area4.bindTheme(minefield[4], theme, paintSettings)
-            area5.bindTheme(minefield[5], theme, paintSettings)
-            area6.bindTheme(minefield[6], theme, paintSettings)
-            area7.bindTheme(minefield[7], theme, paintSettings)
-            area8.bindTheme(minefield[8], theme, paintSettings)
+            arrayOf(area0, area1, area2, area3, area4, area5, area6, area7, area8)
+                .forEachIndexed { index, areaView -> areaView.bindTheme(minefield[index], theme, paintSettings) }
+
+            val color = with (theme.palette.background) {
+                Color.rgb(Color.red(this), Color.green(this), Color.blue(this))
+            }
+            parentGrid.setBackgroundColor(color)
 
             clickTheme.setOnClickListener {
                 themeViewModel.setTheme(theme)

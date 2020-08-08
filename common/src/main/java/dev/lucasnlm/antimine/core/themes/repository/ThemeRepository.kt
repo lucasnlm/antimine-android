@@ -48,6 +48,7 @@ class ThemeRepository(
     private fun fromDefaultPalette(context: Context) =
         AreaPalette(
             border = ContextCompat.getColor(context, R.color.view_cover),
+            background = ContextCompat.getColor(context, R.color.background),
             covered = ContextCompat.getColor(context, R.color.view_cover),
             uncovered = ContextCompat.getColor(context, R.color.view_clean),
             minesAround1 = ContextCompat.getColor(context, R.color.mines_around_1),

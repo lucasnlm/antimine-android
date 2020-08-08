@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#546E7A</color>
     <color name="white">#FFFFFF</color>
 
     <color name="primary">#212121</color>
     <color name="primary_dark">#212121</color>
+    <color name="background">#212121</color>
 
     <color name="mines_around_1">#d5d2cc</color>
     <color name="mines_around_2">#d5d2cc</color>

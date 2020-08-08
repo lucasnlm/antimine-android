@@ -11,6 +11,7 @@ object Themes {
         themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
         palette = AreaPalette(
             border = 0x424242,
+            background = 0xFFFFFF,
             covered = 0x424242,
             uncovered = 0xd5d2cc,
             minesAround1 = 0x527F8D,
@@ -32,6 +33,7 @@ object Themes {
         themeNoActionBar = R.style.CustomDarkTheme_NoActionBar,
         palette = AreaPalette(
             border = 0x171717,
+            background = 0x212121,
             covered = 0x171717,
             uncovered = 0x424242,
             minesAround1 = 0xd5d2cc,
