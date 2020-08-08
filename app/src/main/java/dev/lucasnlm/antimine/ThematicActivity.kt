@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
 import javax.inject.Inject
 
@@ -15,11 +16,11 @@ open class ThematicActivity : AppCompatActivity {
 
     protected open val noActionBar: Boolean = false
 
-    protected val usingThemeId: Long by lazy {
-        currentThemeId()
+    protected val usingTheme: AppTheme by lazy {
+        currentTheme()
     }
 
-    private fun currentThemeId(): Long = themeRepository.getTheme().id
+    private fun currentTheme() = themeRepository.getTheme()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         themeRepository.getCustomTheme()?.let {
@@ -35,7 +36,7 @@ open class ThematicActivity : AppCompatActivity {
     override fun onResume() {
         super.onResume()
 
-        if (usingThemeId != currentThemeId()) {
+        if (usingTheme.id != currentTheme().id) {
             recreate()
         }
     }

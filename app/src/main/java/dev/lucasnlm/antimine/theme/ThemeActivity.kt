@@ -38,7 +38,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
             viewModel.theme.observe(
                 this@ThemeActivity,
                 Observer {
-                    if (usingThemeId != it.id) {
+                    if (usingTheme.id != it.id) {
                         recreate()
                     }
                 }

@@ -25,7 +25,15 @@ class ThemeAdapter(
     private val themes: List<AppTheme> = themeViewModel.getThemes()
 
     private val minefield = listOf(
-        Area(0, 0, 0, 1, hasMine = false, mistake = false, mark = Mark.None, isCovered = false)
+        Area(0, 0, 0, 1, hasMine = false, mistake = false, mark = Mark.None, isCovered = false),
+        Area(1, 1, 0, 0, hasMine = true, mistake = false, mark = Mark.None, isCovered = false),
+        Area(2, 2, 0, 0, hasMine = true, mistake = false, mark = Mark.None, isCovered = true),
+        Area(3, 0, 1, 2, hasMine = false, mistake = false, mark = Mark.None, isCovered = false),
+        Area(4, 1, 1, 3, hasMine = false, mistake = false, mark = Mark.None, isCovered = false),
+        Area(5, 2, 1, 3, hasMine = true, mistake = false, mark = Mark.Flag, isCovered = true),
+        Area(6, 0, 2, 0, hasMine = true, mistake = false, mark = Mark.Question, isCovered = true),
+        Area(7, 1, 2, 0, hasMine = false, mistake = false, mark = Mark.None, isCovered = true),
+        Area(8, 2, 2, 0, hasMine = false, mistake = false, mark = Mark.None, isCovered = true)
     )
 
     init {
@@ -49,14 +57,14 @@ class ThemeAdapter(
         val paintSettings = createAreaPaintSettings(holder.itemView.context, areaSize)
         holder.itemView.run {
             area0.bindTheme(minefield[0], theme, paintSettings)
-            area1.bindTheme(minefield[0], theme, paintSettings)
-            area2.bindTheme(minefield[0], theme, paintSettings)
-            area3.bindTheme(minefield[0], theme, paintSettings)
-            area4.bindTheme(minefield[0], theme, paintSettings)
-            area5.bindTheme(minefield[0], theme, paintSettings)
-            area6.bindTheme(minefield[0], theme, paintSettings)
-            area7.bindTheme(minefield[0], theme, paintSettings)
-            area8.bindTheme(minefield[0], theme, paintSettings)
+            area1.bindTheme(minefield[1], theme, paintSettings)
+            area2.bindTheme(minefield[2], theme, paintSettings)
+            area3.bindTheme(minefield[3], theme, paintSettings)
+            area4.bindTheme(minefield[4], theme, paintSettings)
+            area5.bindTheme(minefield[5], theme, paintSettings)
+            area6.bindTheme(minefield[6], theme, paintSettings)
+            area7.bindTheme(minefield[7], theme, paintSettings)
+            area8.bindTheme(minefield[8], theme, paintSettings)
 
             clickTheme.setOnClickListener {
                 themeViewModel.setTheme(theme)
