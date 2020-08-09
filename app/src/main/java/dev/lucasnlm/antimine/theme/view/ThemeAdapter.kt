@@ -60,7 +60,7 @@ class ThemeAdapter(
             arrayOf(area0, area1, area2, area3, area4, area5, area6, area7, area8)
                 .forEachIndexed { index, areaView -> areaView.bindTheme(minefield[index], theme, paintSettings) }
 
-            val color = with (theme.palette.background) {
+            val color = with(theme.palette.background) {
                 Color.rgb(Color.red(this), Color.green(this), Color.blue(this))
             }
             parentGrid.setBackgroundColor(color)
