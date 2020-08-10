@@ -28,9 +28,6 @@ class TestLevelModule {
     fun provideClock(): Clock = Clock()
 
     @Provides
-    fun provideDimensionRepository(): IDimensionRepository = FixedDimensionRepository()
-
-    @Provides
     fun provideSavesRepository(): ISavesRepository = MemorySavesRepository()
 
     @Provides
