@@ -47,7 +47,7 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 - Game levels: begginner, intermediate, expert and custom
 - Game statistics
 - Android Wear OS support
-- Dark Theme support
+- Dark and custom themes support
 - Save/Resume state when quit/resume game
 - Resume previous games
 - Retry failed games
