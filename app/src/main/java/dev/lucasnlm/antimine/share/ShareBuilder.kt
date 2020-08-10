@@ -16,7 +16,6 @@ import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.view.paintOnCanvas
-import dev.lucasnlm.antimine.core.themes.repository.Themes.DarkTheme
 import dev.lucasnlm.antimine.core.themes.repository.Themes.LightTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

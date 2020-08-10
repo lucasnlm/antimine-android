@@ -65,16 +65,17 @@ class ThemeAdapter(
                 areas.forEach { it.alpha = 0.35f }
 
                 label.apply {
-                    setTextColor(with(theme.palette.background) {
-                        Color.rgb(255 - Color.red(this), 255 - Color.green(this), 255 - Color.blue(this))
-                    })
+                    setTextColor(
+                        with(theme.palette.background) {
+                            Color.rgb(255 - Color.red(this), 255 - Color.green(this), 255 - Color.blue(this))
+                        }
+                    )
                     setBackgroundResource(android.R.color.transparent)
                     visibility = View.VISIBLE
                 }
             } else {
                 label.visibility = View.GONE
             }
-
 
             val color = with(theme.palette.background) {
                 Color.rgb(Color.red(this), Color.green(this), Color.blue(this))
