@@ -55,24 +55,20 @@
         <item
             android:id="@+id/control"
             android:checkable="false"
-            android:icon="@drawable/control"
+            android:icon="@drawable/controls"
             android:title="@string/control" />
-
-        <item
-            android:id="@+id/settings"
-            android:checkable="false"
-            android:icon="@drawable/settings"
-            android:title="@string/settings" />
-    </group>
-
-    <group
-        android:id="@+id/theme_group">
 
         <item
             android:id="@+id/themes"
             android:checkable="false"
             android:icon="@drawable/themes"
             android:title="@string/themes" />
+
+        <item
+            android:id="@+id/settings"
+            android:checkable="false"
+            android:icon="@drawable/settings"
+            android:title="@string/settings" />
     </group>
 
     <group
@@ -87,7 +83,7 @@
             android:title="@string/install" />
     </group>
 
-    <group android:id="@+id/social_group">
+    <group android:id="@+id/other_group">
         <item
             android:id="@+id/share_now"
             android:checkable="false"
@@ -101,9 +97,7 @@
             android:icon="@drawable/hearth"
             android:checkable="false"
             android:title="@string/rating" />
-    </group>
 
-    <group android:id="@+id/about_group">
         <item
             android:id="@+id/about"
             android:icon="@drawable/info"
