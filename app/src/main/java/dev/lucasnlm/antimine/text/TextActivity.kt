@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.RawRes
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.text.viewmodel.TextViewModel
@@ -17,6 +18,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@AndroidEntryPoint
 class TextActivity : ThematicActivity(R.layout.activity_text) {
     private val viewModel: TextViewModel by viewModels()
 
