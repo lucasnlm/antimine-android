@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.common.level.models
+package dev.lucasnlm.antimine.core.themes.model
 
 import androidx.annotation.ColorInt
 

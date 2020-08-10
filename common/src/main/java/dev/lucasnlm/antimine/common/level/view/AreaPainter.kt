@@ -51,9 +51,9 @@ fun Area.paintOnCanvas(
                     val padding = markPadding ?: context.resources.getDimension(R.dimen.mark_padding).toInt()
 
                     val flag = if (mistake) {
-                        ContextCompat.getDrawable(context, R.drawable.red_flag)
+                        ContextCompat.getDrawable(context, theme.assets.wrongFlag)
                     } else {
-                        ContextCompat.getDrawable(context, R.drawable.flag)
+                        ContextCompat.getDrawable(context, theme.assets.flag)
                     }
 
                     flag?.setBounds(
@@ -65,7 +65,7 @@ fun Area.paintOnCanvas(
                     flag?.draw(canvas)
                 }
                 Mark.Question -> {
-                    val question = ContextCompat.getDrawable(context, R.drawable.question)
+                    val question = ContextCompat.getDrawable(context, theme.assets.questionMark)
 
                     question?.setBounds(
                         rectF.left.toInt(),
@@ -103,9 +103,9 @@ fun Area.paintOnCanvas(
                 val padding = minePadding ?: context.resources.getDimension(R.dimen.mine_padding).toInt()
 
                 val mine = when {
-                    isAmbientMode -> ContextCompat.getDrawable(context, R.drawable.mine_low)
-                    mistake -> ContextCompat.getDrawable(context, R.drawable.mine_exploded)
-                    else -> ContextCompat.getDrawable(context, R.drawable.mine)
+                    isAmbientMode -> ContextCompat.getDrawable(context, theme.assets.mineLow)
+                    mistake -> ContextCompat.getDrawable(context, theme.assets.mineExploded)
+                    else -> ContextCompat.getDrawable(context, theme.assets.mine)
                 }
 
                 mine?.setBounds(

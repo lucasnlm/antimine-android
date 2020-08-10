@@ -3,9 +3,10 @@ package dev.lucasnlm.antimine.core.themes.repository
 import android.content.Context
 import androidx.core.content.ContextCompat
 import dev.lucasnlm.antimine.common.R
-import dev.lucasnlm.antimine.common.level.models.AreaPalette
+import dev.lucasnlm.antimine.core.themes.model.AreaPalette
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
+import dev.lucasnlm.antimine.core.themes.model.Assets
 import dev.lucasnlm.antimine.core.themes.repository.Themes.DarkTheme
 import dev.lucasnlm.antimine.core.themes.repository.Themes.LightTheme
 
@@ -41,9 +42,20 @@ class ThemeRepository(
             id = 0L,
             theme = R.style.AppTheme,
             themeNoActionBar = R.style.AppTheme_NoActionBar,
-            palette = fromDefaultPalette(context)
+            palette = fromDefaultPalette(context),
+            assets = fromDefaultAssets()
         )
     }
+
+    private fun fromDefaultAssets() =
+        Assets(
+            wrongFlag = R.drawable.red_flag,
+            flag = R.drawable.flag,
+            questionMark = R.drawable.question,
+            mine = R.drawable.mine,
+            mineExploded = R.drawable.mine_exploded_red,
+            mineLow = R.drawable.mine_low
+        )
 
     private fun fromDefaultPalette(context: Context) =
         AreaPalette(

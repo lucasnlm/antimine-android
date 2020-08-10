@@ -1,8 +1,9 @@
 package dev.lucasnlm.antimine.core.themes.repository
 
 import dev.lucasnlm.antimine.common.R
-import dev.lucasnlm.antimine.common.level.models.AreaPalette
+import dev.lucasnlm.antimine.core.themes.model.AreaPalette
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
+import dev.lucasnlm.antimine.core.themes.model.Assets
 
 object Themes {
     val LightTheme = AppTheme(
@@ -24,6 +25,14 @@ object Themes {
             minesAround8 = 0x000000,
             highlight = 0x212121,
             focus = 0xD32F2F
+        ),
+        assets = Assets(
+            wrongFlag = R.drawable.red_flag,
+            flag = R.drawable.flag,
+            questionMark = R.drawable.question,
+            mine = R.drawable.mine,
+            mineExploded = R.drawable.mine_exploded_red,
+            mineLow = R.drawable.mine_low
         )
     )
 
@@ -46,6 +55,14 @@ object Themes {
             minesAround8 = 0xd5d2cc,
             highlight = 0xFFFFFF,
             focus = 0xFFFFFF
+        ),
+        assets = Assets(
+            wrongFlag = R.drawable.flag,
+            flag = R.drawable.flag,
+            questionMark = R.drawable.question,
+            mine = R.drawable.mine,
+            mineExploded = R.drawable.mine_exploded_white,
+            mineLow = R.drawable.mine_low
         )
     )
 }
