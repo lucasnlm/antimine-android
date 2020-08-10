@@ -50,7 +50,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
 
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
-        AlertDialog.Builder(requireContext(), R.style.MyDialog).apply {
+        AlertDialog.Builder(requireContext()).apply {
             val view = LayoutInflater
                 .from(context)
                 .inflate(R.layout.dialog_end_game, null, false)

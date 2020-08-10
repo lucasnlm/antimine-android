@@ -7,14 +7,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.text.format.DateUtils
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.TooltipCompat
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -35,15 +33,19 @@ import dev.lucasnlm.antimine.control.ControlDialogFragment
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.history.HistoryActivity
 import dev.lucasnlm.antimine.instant.InstantAppManager
-import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
 import dev.lucasnlm.antimine.stats.StatsActivity
+import dev.lucasnlm.antimine.theme.ThemeActivity
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.android.synthetic.main.activity_game.minesCount
+import kotlinx.android.synthetic.main.activity_game.timer
+import kotlinx.android.synthetic.main.activity_tv_game.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -52,7 +54,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
+class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
     @Inject
     lateinit var preferencesRepository: IPreferencesRepository
 
@@ -67,6 +69,8 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
 
     val viewModel: GameViewModel by viewModels()
     private val shareViewModel: ShareViewModel by viewModels()
+
+    override val noActionBar: Boolean = true
 
     private var status: Status = Status.PreGame
     private val areaSizeMultiplier by lazy { preferencesRepository.areaSizeMultiplier() }
@@ -215,46 +219,49 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
         analyticsManager.sentEvent(Analytics.Quit)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean =
-        when (status) {
-            is Status.Over, is Status.Running -> {
-                menuInflater.inflate(R.menu.top_menu_over, menu)
-                true
+    @ExperimentalCoroutinesApi
+    @FlowPreview
+    private fun bindToolbar() {
+        menu.apply {
+            TooltipCompat.setTooltipText(this, getString(R.string.open_menu))
+            setColorFilter(minesCount.currentTextColor)
+            setOnClickListener {
+                drawer.openDrawer(GravityCompat.START)
             }
-            else -> true
-        }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.reset) {
-
-            val confirmResign = status == Status.Running
-            analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
-
-            if (confirmResign) {
-                newGameConfirmation {
-                    GlobalScope.launch {
-                        viewModel.startNewGame()
-                    }
-                }
-            } else {
-                GlobalScope.launch {
-                    viewModel.startNewGame()
-                }
-            }
-            true
-        } else {
-            super.onOptionsItemSelected(item)
         }
     }
 
-    private fun bindToolbar() {
-        setSupportActionBar(toolbar)
-        toolbar.title = ""
+    private fun refreshNewGameButton() {
+        newGame.apply {
+            TooltipCompat.setTooltipText(this, getString(R.string.new_game))
+            setColorFilter(minesCount.currentTextColor)
+            setOnClickListener {
+                lifecycleScope.launch {
+                    val confirmResign = status == Status.Running
+                    analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
 
-        supportActionBar?.apply {
-            title = ""
-            setDisplayHomeAsUpEnabled(true)
-            setHomeButtonEnabled(true)
+                    if (confirmResign) {
+                        newGameConfirmation {
+                            GlobalScope.launch {
+                                viewModel.startNewGame()
+                            }
+                        }
+                    } else {
+                        GlobalScope.launch {
+                            viewModel.startNewGame()
+                        }
+                    }
+                }
+            }
+
+            visibility = when (status) {
+                is Status.Over, is Status.Running -> {
+                    View.VISIBLE
+                }
+                else -> {
+                    View.GONE
+                }
+            }
         }
     }
 
@@ -316,6 +323,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
                 R.id.about -> showAbout()
                 R.id.settings -> showSettings()
                 R.id.rate -> openRateUsLink("Drawer")
+                R.id.themes -> openThemes()
                 R.id.share_now -> shareCurrentGame()
                 R.id.previous_games -> openSaveHistory()
                 R.id.stats -> openStats()
@@ -397,7 +405,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
     }
 
     private fun newGameConfirmation(action: () -> Unit) {
-        AlertDialog.Builder(this, R.style.MyDialog).apply {
+        AlertDialog.Builder(this).apply {
             setTitle(R.string.new_game)
             setMessage(R.string.retry_sure)
             setPositiveButton(R.string.resume) { _, _ -> action() }
@@ -407,7 +415,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
     }
 
     private fun showQuitConfirmation(action: () -> Unit) {
-        AlertDialog.Builder(this, R.style.MyDialog)
+        AlertDialog.Builder(this)
             .setTitle(R.string.are_you_sure)
             .setMessage(R.string.quit_confirm)
             .setPositiveButton(R.string.quit) { _, _ -> action() }
@@ -436,6 +444,13 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
     private fun showAbout() {
         analyticsManager.sentEvent(Analytics.OpenAbout)
         Intent(this, AboutActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
+    private fun openThemes() {
+        analyticsManager.sentEvent(Analytics.OpenThemes)
+        Intent(this, ThemeActivity::class.java).apply {
             startActivity(this)
         }
     }
@@ -510,16 +525,16 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
         when (event) {
             Event.ResumeGame -> {
                 status = Status.Running
-                invalidateOptionsMenu()
+                refreshNewGameButton()
             }
             Event.StartNewGame -> {
                 status = Status.PreGame
-                invalidateOptionsMenu()
+                refreshNewGameButton()
             }
             Event.Resume, Event.Running -> {
                 status = Status.Running
                 viewModel.runClock()
-                invalidateOptionsMenu()
+                refreshNewGameButton()
                 keepScreenOn(true)
             }
             Event.Victory -> {
@@ -532,7 +547,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
                 viewModel.stopClock()
                 viewModel.revealAllEmptyAreas()
                 viewModel.victory()
-                invalidateOptionsMenu()
+                refreshNewGameButton()
                 keepScreenOn(false)
                 waitAndShowEndGameDialog(
                     victory = true,
@@ -547,7 +562,7 @@ class GameActivity : AppCompatActivity(R.layout.activity_game), DialogInterface.
                     totalArea
                 )
                 status = Status.Over(currentTime, score)
-                invalidateOptionsMenu()
+                refreshNewGameButton()
                 keepScreenOn(false)
                 viewModel.stopClock()
 

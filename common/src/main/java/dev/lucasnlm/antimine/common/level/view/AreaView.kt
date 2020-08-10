@@ -15,17 +15,17 @@ import androidx.core.view.ViewCompat
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
-import dev.lucasnlm.antimine.common.level.models.AreaPalette
 import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.core.themes.model.AppTheme
 
 class AreaView : View {
     // Used on Wear OS
-    private var isAmbientMode = false
-    private var isLowBitAmbient = false
+    private var isAmbientMode: Boolean = false
+    private var isLowBitAmbient: Boolean = false
 
     private var area: Area? = null
     private lateinit var paintSettings: AreaPaintSettings
-    private lateinit var palette: AreaPalette
+    private lateinit var theme: AppTheme
 
     private val gestureDetector: GestureDetector by lazy {
         GestureDetector(context, GestureDetector.SimpleOnGestureListener())
@@ -45,7 +45,13 @@ class AreaView : View {
         gestureDetector.setOnDoubleTapListener(listener)
     }
 
-    fun bindField(area: Area, isAmbientMode: Boolean, isLowBitAmbient: Boolean, paintSettings: AreaPaintSettings) {
+    fun bindField(
+        area: Area,
+        theme: AppTheme,
+        isAmbientMode: Boolean,
+        isLowBitAmbient: Boolean,
+        paintSettings: AreaPaintSettings
+    ) {
         this.paintSettings = paintSettings
 
         bindContentDescription(area)
@@ -57,15 +63,9 @@ class AreaView : View {
         ).firstOrNull { it } ?: false
 
         if (changed) {
-            this.palette = if (isAmbientMode) {
-                AreaPalette.fromContrast(context)
-            } else {
-                AreaPalette.fromDefault(context)
-            }
-
             this.isAmbientMode = isAmbientMode
             this.isLowBitAmbient = isLowBitAmbient
-
+            this.theme = theme
             this.paintSettings.painter.isAntiAlias = !isAmbientMode || isAmbientMode && !isLowBitAmbient
             this.area = area.copy()
 
@@ -130,7 +130,7 @@ class AreaView : View {
             isLowBitAmbient,
             isFocused,
             paintSettings,
-            palette
+            theme
         )
     }
 

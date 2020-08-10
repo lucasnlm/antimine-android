@@ -3,12 +3,13 @@ package dev.lucasnlm.antimine.text
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.RawRes
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.text.viewmodel.TextViewModel
 
 import kotlinx.android.synthetic.main.activity_text.*
@@ -17,7 +18,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class TextActivity : AppCompatActivity(R.layout.activity_text) {
+@AndroidEntryPoint
+class TextActivity : ThematicActivity(R.layout.activity_text) {
     private val viewModel: TextViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

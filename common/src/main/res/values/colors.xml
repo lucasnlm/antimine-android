@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
     <color name="primary">#FFFFFF</color>
     <color name="primary_dark">#9E9E9E</color>
-
-    <color name="victory">#4CAF50</color>
-    <color name="ongoing">#455a64</color>
-    <color name="lose">#F44336</color>
+    <color name="background">#FFFFFF</color>
 
     <color name="mines_around_1">#527F8D</color>
     <color name="mines_around_2">#2B8D43</color>
@@ -21,12 +17,10 @@
 
     <color name="launcher_background">#FCC216</color>
 
-    <color name="accent">#D32F2F</color>
+    <color name="accent">#FFD32F2F</color>
     <color name="install_button">#00C853</color>
-    <color name="text_color">#212121</color>
     <color name="highlight">#212121</color>
 
     <color name="view_cover">#424242</color>
     <color name="view_clean">#d5d2cc</color>
-
 </resources>

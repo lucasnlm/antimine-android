@@ -4,18 +4,20 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.about.models.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import dev.lucasnlm.antimine.about.views.AboutInfoFragment
 import dev.lucasnlm.antimine.about.views.thirds.ThirdPartyFragment
 import dev.lucasnlm.antimine.about.views.translators.TranslatorsFragment
 
-class AboutActivity : AppCompatActivity(R.layout.activity_empty) {
+@AndroidEntryPoint
+class AboutActivity : ThematicActivity(R.layout.activity_empty) {
     private val aboutViewModel: AboutViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

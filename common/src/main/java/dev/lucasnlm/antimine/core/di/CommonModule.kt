@@ -6,6 +6,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dev.lucasnlm.antimine.common.level.repository.DimensionRepository
+import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
@@ -13,10 +15,19 @@ import dev.lucasnlm.antimine.core.preferences.PreferencesManager
 import dev.lucasnlm.antimine.core.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
 import dev.lucasnlm.antimine.core.sound.SoundManager
+import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
+import dev.lucasnlm.antimine.core.themes.repository.ThemeRepository
 
 @Module
 @InstallIn(ApplicationComponent::class)
 class CommonModule {
+    @Provides
+    fun provideDimensionRepository(
+        @ApplicationContext context: Context,
+        preferencesRepository: IPreferencesRepository
+    ): IDimensionRepository =
+        DimensionRepository(context, preferencesRepository)
+
     @Provides
     fun providePreferencesRepository(
         preferencesManager: PreferencesManager
@@ -34,4 +45,10 @@ class CommonModule {
     fun provideSoundManager(
         @ApplicationContext context: Context
     ): ISoundManager = SoundManager(context)
+
+    @Provides
+    fun provideThemeRepository(
+        @ApplicationContext context: Context,
+        preferencesRepository: IPreferencesRepository
+    ): IThemeRepository = ThemeRepository(context, preferencesRepository)
 }

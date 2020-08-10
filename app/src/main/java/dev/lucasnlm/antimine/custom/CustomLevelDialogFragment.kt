@@ -46,7 +46,7 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(requireContext(), R.style.MyDialog).apply {
+        return AlertDialog.Builder(requireContext()).apply {
             setTitle(R.string.new_game)
             setView(R.layout.dialog_custom_game)
             setNegativeButton(R.string.cancel, null)

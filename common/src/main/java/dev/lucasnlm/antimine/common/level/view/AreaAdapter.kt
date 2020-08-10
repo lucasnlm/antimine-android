@@ -168,7 +168,7 @@ class AreaAdapter(
         val field = getItem(position)
         holder.run {
             if (itemView is AreaView) {
-                itemView.bindField(field, isAmbientMode, isLowBitAmbient, paintSettings)
+                itemView.bindField(field, viewModel.getAppTheme(), isAmbientMode, isLowBitAmbient, paintSettings)
             }
         }
     }

@@ -5,10 +5,10 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.stats.model.StatsModel
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class StatsActivity : AppCompatActivity(R.layout.activity_stats) {
+class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     @Inject
     lateinit var statsRepository: IStatsRepository
 

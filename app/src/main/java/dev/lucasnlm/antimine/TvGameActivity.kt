@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.text.format.DateUtils
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -113,34 +111,6 @@ class TvGameActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean =
-        when (status) {
-            is Status.Over, is Status.Running -> {
-                menuInflater.inflate(R.menu.top_menu_over, menu)
-                true
-            }
-            else -> true
-        }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.reset) {
-            if (status == Status.Running) {
-                newGameConfirmation {
-                    GlobalScope.launch {
-                        viewModel.startNewGame()
-                    }
-                }
-            } else {
-                GlobalScope.launch {
-                    viewModel.startNewGame()
-                }
-            }
-            true
-        } else {
-            super.onOptionsItemSelected(item)
-        }
-    }
-
     private fun loadGameFragment() {
         val fragmentManager = supportFragmentManager
 
@@ -161,7 +131,7 @@ class TvGameActivity : AppCompatActivity() {
     }
 
     private fun newGameConfirmation(action: () -> Unit) {
-        AlertDialog.Builder(this, R.style.MyDialog).apply {
+        AlertDialog.Builder(this).apply {
             setTitle(R.string.new_game)
             setMessage(R.string.retry_sure)
             setPositiveButton(R.string.resume) { _, _ -> action() }
@@ -171,7 +141,7 @@ class TvGameActivity : AppCompatActivity() {
     }
 
     private fun showQuitConfirmation(action: () -> Unit) {
-        AlertDialog.Builder(this, R.style.MyDialog)
+        AlertDialog.Builder(this)
             .setTitle(R.string.are_you_sure)
             .setMessage(R.string.quit_confirm)
             .setPositiveButton(R.string.quit) { _, _ -> action() }
@@ -198,7 +168,7 @@ class TvGameActivity : AppCompatActivity() {
     }
 
     private fun showVictory() {
-        AlertDialog.Builder(this, R.style.MyDialog).apply {
+        AlertDialog.Builder(this).apply {
             setTitle(R.string.you_won)
             setMessage(R.string.all_mines_disabled)
             setCancelable(false)
@@ -218,7 +188,7 @@ class TvGameActivity : AppCompatActivity() {
                 Handler(),
                 {
                     if (status is Status.Over && !isFinishing) {
-                        AlertDialog.Builder(this, R.style.MyDialog).apply {
+                        AlertDialog.Builder(this).apply {
                             setTitle(R.string.new_game)
                             setMessage(R.string.new_game_request)
                             setPositiveButton(R.string.yes) { _, _ ->
@@ -242,7 +212,7 @@ class TvGameActivity : AppCompatActivity() {
             Handler(),
             {
                 if (status is Status.Over && !isFinishing) {
-                    AlertDialog.Builder(this, R.style.MyDialog).apply {
+                    AlertDialog.Builder(this).apply {
                         setTitle(R.string.you_lost)
                         setMessage(R.string.new_game_request)
                         setPositiveButton(R.string.yes) { _, _ ->

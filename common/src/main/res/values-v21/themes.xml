@@ -4,11 +4,14 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
-        <item name="android:background">@color/primary</item>
+        <item name="android:background">@color/background</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.DayNight">
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -19,6 +22,51 @@
 
     <style name="Theme.Splash" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="CustomLightTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorPrimaryDark">#9E9E9E</item>
+        <item name="colorAccent">#D32F2F</item>
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="CustomLightTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorPrimaryDark">#9E9E9E</item>
+        <item name="colorAccent">#D32F2F</item>
+        <item name="android:background">#FFFFFF</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="CustomDarkTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">#212121</item>
+        <item name="colorPrimaryDark">#212121</item>
+        <item name="colorAccent">#FFFFFF</item>
+        <item name="android:background">#212121</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="CustomDarkTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">#212121</item>
+        <item name="colorPrimaryDark">#212121</item>
+        <item name="colorAccent">#FFFFFF</item>
+        <item name="android:background">#212121</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>

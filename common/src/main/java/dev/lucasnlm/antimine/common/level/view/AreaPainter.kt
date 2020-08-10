@@ -10,7 +10,7 @@ import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.models.Mark
-import dev.lucasnlm.antimine.common.level.models.AreaPalette
+import dev.lucasnlm.antimine.core.themes.model.AppTheme
 
 fun Area.paintOnCanvas(
     context: Context,
@@ -19,7 +19,7 @@ fun Area.paintOnCanvas(
     isLowBitAmbient: Boolean,
     isFocused: Boolean,
     paintSettings: AreaPaintSettings,
-    areaPalette: AreaPalette,
+    theme: AppTheme,
     markPadding: Int? = null,
     minePadding: Int? = null
 ) {
@@ -30,13 +30,14 @@ fun Area.paintOnCanvas(
                     style = Paint.Style.STROKE
                     strokeWidth = 2.0f
                     isAntiAlias = !isLowBitAmbient
-                    color = areaPalette.border
+                    color = theme.palette.border
+                    alpha = 0xff
                 }
             } else {
                 painter.apply {
                     style = Paint.Style.FILL
                     isAntiAlias = !isLowBitAmbient
-                    color = areaPalette.covered
+                    color = theme.palette.covered
                     alpha = if (highlighted) 155 else 255
                 }
             }
@@ -50,9 +51,9 @@ fun Area.paintOnCanvas(
                     val padding = markPadding ?: context.resources.getDimension(R.dimen.mark_padding).toInt()
 
                     val flag = if (mistake) {
-                        ContextCompat.getDrawable(context, R.drawable.red_flag)
+                        ContextCompat.getDrawable(context, theme.assets.wrongFlag)
                     } else {
-                        ContextCompat.getDrawable(context, R.drawable.flag)
+                        ContextCompat.getDrawable(context, theme.assets.flag)
                     }
 
                     flag?.setBounds(
@@ -64,7 +65,7 @@ fun Area.paintOnCanvas(
                     flag?.draw(canvas)
                 }
                 Mark.Question -> {
-                    val question = ContextCompat.getDrawable(context, R.drawable.question)
+                    val question = ContextCompat.getDrawable(context, theme.assets.questionMark)
 
                     question?.setBounds(
                         rectF.left.toInt(),
@@ -82,13 +83,15 @@ fun Area.paintOnCanvas(
                     style = Paint.Style.STROKE
                     strokeWidth = 0.5f
                     isAntiAlias = !isLowBitAmbient
-                    color = areaPalette.border
+                    color = theme.palette.border
+                    alpha = 0xff
                 }
             } else {
                 painter.apply {
                     style = Paint.Style.FILL
                     isAntiAlias = !isLowBitAmbient
-                    color = areaPalette.uncovered
+                    color = theme.palette.uncovered
+                    alpha = 0xff
                 }
             }
 
@@ -100,9 +103,9 @@ fun Area.paintOnCanvas(
                 val padding = minePadding ?: context.resources.getDimension(R.dimen.mine_padding).toInt()
 
                 val mine = when {
-                    isAmbientMode -> ContextCompat.getDrawable(context, R.drawable.mine_low)
-                    mistake -> ContextCompat.getDrawable(context, R.drawable.mine_exploded)
-                    else -> ContextCompat.getDrawable(context, R.drawable.mine)
+                    isAmbientMode -> ContextCompat.getDrawable(context, theme.assets.mineLow)
+                    mistake -> ContextCompat.getDrawable(context, theme.assets.mineExploded)
+                    else -> ContextCompat.getDrawable(context, theme.assets.mine)
                 }
 
                 mine?.setBounds(
@@ -113,15 +116,19 @@ fun Area.paintOnCanvas(
                 )
                 mine?.draw(canvas)
             } else if (minesAround > 0) {
-                painter.color = when (minesAround) {
-                    1 -> areaPalette.minesAround1
-                    2 -> areaPalette.minesAround2
-                    3 -> areaPalette.minesAround3
-                    4 -> areaPalette.minesAround4
-                    5 -> areaPalette.minesAround5
-                    6 -> areaPalette.minesAround6
-                    7 -> areaPalette.minesAround7
-                    else -> areaPalette.minesAround8
+                painter.apply {
+                    color = when (minesAround) {
+                        1 -> theme.palette.minesAround1
+                        2 -> theme.palette.minesAround2
+                        3 -> theme.palette.minesAround3
+                        4 -> theme.palette.minesAround4
+                        5 -> theme.palette.minesAround5
+                        6 -> theme.palette.minesAround6
+                        7 -> theme.palette.minesAround7
+                        8 -> theme.palette.minesAround8
+                        else -> 0x00
+                    }
+                    alpha = 0xff
                 }
                 canvas.drawText(minesAround.toString(), paintSettings, painter)
             }
@@ -134,7 +141,8 @@ fun Area.paintOnCanvas(
                     style = Paint.Style.STROKE
                     strokeWidth = highlightWidth
                     isAntiAlias = !isLowBitAmbient
-                    color = areaPalette.highlight
+                    color = theme.palette.highlight
+                    alpha = 0xff
 
                     val rect = RectF(
                         rectF.left + halfWidth,
@@ -156,7 +164,8 @@ fun Area.paintOnCanvas(
                 style = Paint.Style.STROKE
                 strokeWidth = highlightWidth
                 isAntiAlias = !isLowBitAmbient
-                color = areaPalette.focus
+                color = theme.palette.focus
+                alpha = 0xff
             }
 
             val rect = RectF(

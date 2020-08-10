@@ -15,6 +15,9 @@ interface IPreferencesRepository {
     fun controlStyle(): ControlStyle
     fun useControlStyle(controlStyle: ControlStyle)
 
+    fun themeId(): Long
+    fun useTheme(themeId: Long)
+
     fun updateStatsBase(statsBase: Int)
     fun getStatsBase(): Int
 
@@ -86,6 +89,13 @@ class PreferencesRepository(
         putInt(PREFERENCE_CONTROL_STYLE, controlStyle.ordinal)
     }
 
+    override fun themeId(): Long =
+        getInt(PREFERENCE_CUSTOM_THEME, 0).toLong()
+
+    override fun useTheme(themeId: Long) {
+        putInt(PREFERENCE_CUSTOM_THEME, themeId.toInt())
+    }
+
     override fun updateStatsBase(statsBase: Int) {
         putInt(PREFERENCE_STATS_BASE, statsBase)
     }
@@ -115,6 +125,7 @@ class PreferencesRepository(
         private const val PREFERENCE_AREA_SIZE = "preference_area_size"
         private const val PREFERENCE_QUESTION_MARK = "preference_use_question_mark"
         private const val PREFERENCE_CONTROL_STYLE = "preference_control_style"
+        private const val PREFERENCE_CUSTOM_THEME = "preference_custom_theme"
         private const val PREFERENCE_OLD_DOUBLE_CLICK = "preference_double_click_open"
         private const val PREFERENCE_CUSTOM_GAME_WIDTH = "preference_custom_game_width"
         private const val PREFERENCE_CUSTOM_GAME_HEIGHT = "preference_custom_game_height"

@@ -10,8 +10,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.lucasnlm.antimine.common.level.database.AppDataBase
 import dev.lucasnlm.antimine.common.level.database.dao.SaveDao
 import dev.lucasnlm.antimine.common.level.database.dao.StatsDao
-import dev.lucasnlm.antimine.common.level.repository.DimensionRepository
-import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
@@ -21,7 +19,6 @@ import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.HapticFeedbackManager
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 @Module
 @InstallIn(ActivityComponent::class)
@@ -47,13 +44,6 @@ open class LevelModule {
 
     @Provides
     open fun provideClock(): Clock = Clock()
-
-    @Provides
-    open fun provideDimensionRepository(
-        @ApplicationContext context: Context,
-        preferencesRepository: IPreferencesRepository
-    ): IDimensionRepository =
-        DimensionRepository(context, preferencesRepository)
 
     @Provides
     open fun provideSavesRepository(
