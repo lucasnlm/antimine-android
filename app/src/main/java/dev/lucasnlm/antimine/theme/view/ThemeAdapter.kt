@@ -57,8 +57,24 @@ class ThemeAdapter(
         val theme = themes[position]
         val paintSettings = createAreaPaintSettings(holder.itemView.context, areaSize)
         holder.itemView.run {
-            arrayOf(area0, area1, area2, area3, area4, area5, area6, area7, area8)
-                .forEachIndexed { index, areaView -> areaView.bindTheme(minefield[index], theme, paintSettings) }
+            val areas = listOf(area0, area1, area2, area3, area4, area5, area6, area7, area8)
+
+            areas.forEachIndexed { index, areaView -> areaView.bindTheme(minefield[index], theme, paintSettings) }
+
+            if (position == 0) {
+                areas.forEach { it.alpha = 0.35f }
+
+                label.apply {
+                    setTextColor(with(theme.palette.background) {
+                        Color.rgb(255 - Color.red(this), 255 - Color.green(this), 255 - Color.blue(this))
+                    })
+                    setBackgroundResource(android.R.color.transparent)
+                    visibility = View.VISIBLE
+                }
+            } else {
+                label.visibility = View.GONE
+            }
+
 
             val color = with(theme.palette.background) {
                 Color.rgb(Color.red(this), Color.green(this), Color.blue(this))
