@@ -12,6 +12,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
+            android:textStyle="bold"
             android:text="@string/games" />
 
         <TextView
@@ -25,6 +26,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
+            android:textStyle="bold"
             android:text="@string/mines" />
 
         <TextView
@@ -38,6 +40,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
+            android:textStyle="bold"
             android:text="@string/total_time" />
 
         <TextView
@@ -51,6 +54,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
+            android:textStyle="bold"
             android:text="@string/average_time" />
 
         <TextView
@@ -64,6 +68,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
+            android:textStyle="bold"
             android:text="@string/open_areas" />
 
         <TextView
@@ -77,6 +82,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
+            android:textStyle="bold"
             android:text="@string/performance" />
 
         <TextView
@@ -90,6 +96,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
+            android:textStyle="bold"
             android:text="@string/victories" />
 
         <TextView
@@ -103,6 +110,7 @@
     <TableRow>
         <TextView
             android:padding="16dp"
+            android:textStyle="bold"
             android:text="@string/defeats" />
 
         <TextView
