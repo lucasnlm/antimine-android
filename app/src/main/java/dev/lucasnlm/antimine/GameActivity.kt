@@ -14,6 +14,7 @@ import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.TooltipCompat
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -34,9 +35,9 @@ import dev.lucasnlm.antimine.control.ControlDialogFragment
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.history.HistoryActivity
 import dev.lucasnlm.antimine.instant.InstantAppManager
-import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
@@ -44,6 +45,9 @@ import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.theme.ThemeActivity
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.android.synthetic.main.activity_game.minesCount
+import kotlinx.android.synthetic.main.activity_game.timer
+import kotlinx.android.synthetic.main.activity_tv_game.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -249,14 +253,25 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
+    @ExperimentalCoroutinesApi
+    @FlowPreview
     private fun bindToolbar() {
-        setSupportActionBar(toolbar)
-        toolbar.title = ""
+        menu.apply {
+            TooltipCompat.setTooltipText(this, getString(R.string.open_menu))
+            setColorFilter(minesCount.currentTextColor)
+            setOnClickListener {
+                drawer.openDrawer(GravityCompat.START)
+            }
+        }
 
-        supportActionBar?.apply {
-            title = ""
-            setDisplayHomeAsUpEnabled(true)
-            setHomeButtonEnabled(true)
+        retry.apply {
+            TooltipCompat.setTooltipText(this, getString(R.string.new_game))
+            setColorFilter(minesCount.currentTextColor)
+            setOnClickListener {
+                lifecycleScope.launch {
+                    viewModel.startNewGame()
+                }
+            }
         }
     }
 
