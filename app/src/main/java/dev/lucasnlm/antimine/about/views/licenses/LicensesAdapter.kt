@@ -8,14 +8,14 @@ import android.widget.TextView
 import dev.lucasnlm.antimine.R
 
 import dev.lucasnlm.antimine.text.TextActivity
-import dev.lucasnlm.antimine.about.models.ThirdParty
+import dev.lucasnlm.antimine.about.models.License
 import kotlinx.android.synthetic.main.view_third_party.view.*
 
 internal class ThirdPartyAdapter(
-    private val thirdParties: List<ThirdParty>
+    private val licenses: List<License>
 ) : RecyclerView.Adapter<ThirdPartyViewHolder>() {
 
-    override fun getItemCount(): Int = thirdParties.size
+    override fun getItemCount(): Int = licenses.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThirdPartyViewHolder {
         val view = LayoutInflater
@@ -25,11 +25,11 @@ internal class ThirdPartyAdapter(
     }
 
     override fun onBindViewHolder(holder: ThirdPartyViewHolder, position: Int) {
-        val thirdParty = thirdParties[position]
+        val thirdParty = licenses[position]
         holder.apply {
             title.text = thirdParty.name
             itemView.setOnClickListener { view ->
-                val intent = TextActivity.getIntent(view.context, thirdParty.name, thirdParty.license)
+                val intent = TextActivity.getIntent(view.context, thirdParty.name, thirdParty.licenseFileRes)
                 view.context.startActivity(intent)
             }
         }
