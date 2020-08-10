@@ -1,20 +1,14 @@
 package dev.lucasnlm.antimine.about.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.about.models.AboutEvent
-import dev.lucasnlm.antimine.about.models.ThirdParty
+import dev.lucasnlm.antimine.about.models.AboutState
+import dev.lucasnlm.antimine.about.models.License
 import dev.lucasnlm.antimine.about.models.TranslationInfo
+import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 
-class AboutViewModel : ViewModel() {
-    val eventObserver = MutableLiveData<AboutEvent>()
+class AboutViewModel : IntentViewModel<AboutEvent, AboutState>() {
 
-    fun sendEvent(event: AboutEvent) {
-        eventObserver.postValue(event)
-    }
-
-    fun getTranslatorsList() = mapOf(
+    private fun getTranslatorsList() = mapOf(
         "Arabic" to sequenceOf("Ahmad Alkurbi"),
         "Bulgarian" to sequenceOf("Georgi Eftimov"),
         "Chinese Simplified" to sequenceOf("linsui", "yilinzhao2020"),
@@ -41,7 +35,7 @@ class AboutViewModel : ViewModel() {
         TranslationInfo(it.key, it.value)
     }.toList()
 
-    fun getLicensesList() = mapOf(
+    private fun getLicensesList() = mapOf(
         "Android SDK License" to R.raw.android_sdk,
         "Material Design Icons" to R.raw.apache2,
         "Dagger Hilt" to R.raw.apache2,
@@ -49,6 +43,11 @@ class AboutViewModel : ViewModel() {
         "Mockito" to R.raw.mockito,
         "Sounds" to R.raw.sounds
     ).map {
-        ThirdParty(it.key, it.value)
+        License(it.key, it.value)
     }.toList()
+
+    override fun initialState(): AboutState = AboutState(
+        translators = getTranslatorsList(),
+        licenses = getLicensesList()
+    )
 }

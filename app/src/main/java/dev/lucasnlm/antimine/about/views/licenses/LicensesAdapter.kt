@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.about.views.thirds
+package dev.lucasnlm.antimine.about.views.licenses
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import dev.lucasnlm.antimine.text.TextActivity
 import dev.lucasnlm.antimine.about.models.License
 import kotlinx.android.synthetic.main.view_third_party.view.*
 
-internal class ThirdPartyAdapter(
+internal class LicensesAdapter(
     private val licenses: List<License>
 ) : RecyclerView.Adapter<ThirdPartyViewHolder>() {
 

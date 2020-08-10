@@ -6,15 +6,16 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
-import dev.lucasnlm.antimine.about.models.AboutEvent
+import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import dev.lucasnlm.antimine.about.views.AboutInfoFragment
-import dev.lucasnlm.antimine.about.views.thirds.ThirdPartyFragment
+import dev.lucasnlm.antimine.about.views.licenses.LicensesFragment
 import dev.lucasnlm.antimine.about.views.translators.TranslatorsFragment
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AboutActivity : ThematicActivity(R.layout.activity_empty) {
@@ -22,12 +23,14 @@ class AboutActivity : ThematicActivity(R.layout.activity_empty) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        aboutViewModel.eventObserver.observe(
-            this,
-            Observer { event ->
+
+        replaceFragment(AboutInfoFragment(), null)
+
+        lifecycleScope.launchWhenCreated {
+            aboutViewModel.observeEvent().collect { event ->
                 when (event) {
                     AboutEvent.ThirdPartyLicenses -> {
-                        replaceFragment(ThirdPartyFragment(), ThirdPartyFragment.TAG)
+                        replaceFragment(LicensesFragment(), LicensesFragment.TAG)
                     }
                     AboutEvent.SourceCode -> {
                         openSourceCode()
@@ -35,14 +38,9 @@ class AboutActivity : ThematicActivity(R.layout.activity_empty) {
                     AboutEvent.Translators -> {
                         replaceFragment(TranslatorsFragment(), TranslatorsFragment.TAG)
                     }
-                    else -> {
-                        replaceFragment(AboutInfoFragment(), null)
-                    }
                 }
             }
-        )
-
-        replaceFragment(AboutInfoFragment(), null)
+        }
     }
 
     private fun replaceFragment(fragment: Fragment, stackName: String?) {

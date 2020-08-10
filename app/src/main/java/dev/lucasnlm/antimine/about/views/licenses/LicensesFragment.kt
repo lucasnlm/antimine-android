@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.about.views.thirds
+package dev.lucasnlm.antimine.about.views.licenses
 
 import android.os.Bundle
 import android.view.View
@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
-import kotlinx.android.synthetic.main.fragment_third_party.*
+import kotlinx.android.synthetic.main.fragment_licenses.*
 import kotlinx.coroutines.flow.collect
 
-class ThirdPartyFragment : Fragment(R.layout.fragment_third_party) {
+class LicensesFragment : Fragment(R.layout.fragment_licenses) {
     private val aboutViewModel: AboutViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,13 +28,13 @@ class ThirdPartyFragment : Fragment(R.layout.fragment_third_party) {
                         setHasFixedSize(true)
                         addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
                         layoutManager = LinearLayoutManager(context)
-                        adapter = ThirdPartyAdapter(it.licens)
+                        adapter = LicensesAdapter(it.licenses)
                     }
                 }
         }
     }
 
     companion object {
-        val TAG = ThirdPartyFragment::class.simpleName!!
+        val TAG = LicensesFragment::class.simpleName!!
     }
 }

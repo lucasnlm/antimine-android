@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import dev.lucasnlm.antimine.BuildConfig
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.about.models.AboutEvent
+import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import kotlinx.android.synthetic.main.fragment_about_info.*
 
