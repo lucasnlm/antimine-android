@@ -113,34 +113,6 @@ class TvGameActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean =
-        when (status) {
-            is Status.Over, is Status.Running -> {
-                menuInflater.inflate(R.menu.top_menu_over, menu)
-                true
-            }
-            else -> true
-        }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.reset) {
-            if (status == Status.Running) {
-                newGameConfirmation {
-                    GlobalScope.launch {
-                        viewModel.startNewGame()
-                    }
-                }
-            } else {
-                GlobalScope.launch {
-                    viewModel.startNewGame()
-                }
-            }
-            true
-        } else {
-            super.onOptionsItemSelected(item)
-        }
-    }
-
     private fun loadGameFragment() {
         val fragmentManager = supportFragmentManager
 

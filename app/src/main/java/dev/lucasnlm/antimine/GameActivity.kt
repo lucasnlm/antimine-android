@@ -221,38 +221,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         analyticsManager.sentEvent(Analytics.Quit)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean =
-        when (status) {
-            is Status.Over, is Status.Running -> {
-                menuInflater.inflate(R.menu.top_menu_over, menu)
-                true
-            }
-            else -> true
-        }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.reset) {
-
-            val confirmResign = status == Status.Running
-            analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
-
-            if (confirmResign) {
-                newGameConfirmation {
-                    GlobalScope.launch {
-                        viewModel.startNewGame()
-                    }
-                }
-            } else {
-                GlobalScope.launch {
-                    viewModel.startNewGame()
-                }
-            }
-            true
-        } else {
-            super.onOptionsItemSelected(item)
-        }
-    }
-
     @ExperimentalCoroutinesApi
     @FlowPreview
     private fun bindToolbar() {
@@ -263,13 +231,37 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 drawer.openDrawer(GravityCompat.START)
             }
         }
+    }
 
-        retry.apply {
+    private fun refreshNewGameButton() {
+        newGame.apply {
             TooltipCompat.setTooltipText(this, getString(R.string.new_game))
             setColorFilter(minesCount.currentTextColor)
             setOnClickListener {
                 lifecycleScope.launch {
-                    viewModel.startNewGame()
+                    val confirmResign = status == Status.Running
+                    analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
+
+                    if (confirmResign) {
+                        newGameConfirmation {
+                            GlobalScope.launch {
+                                viewModel.startNewGame()
+                            }
+                        }
+                    } else {
+                        GlobalScope.launch {
+                            viewModel.startNewGame()
+                        }
+                    }
+                }
+            }
+
+            visibility = when (status) {
+                is Status.Over, is Status.Running -> {
+                    View.VISIBLE
+                }
+                else -> {
+                    View.GONE
                 }
             }
         }
@@ -535,16 +527,16 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         when (event) {
             Event.ResumeGame -> {
                 status = Status.Running
-                invalidateOptionsMenu()
+                refreshNewGameButton()
             }
             Event.StartNewGame -> {
                 status = Status.PreGame
-                invalidateOptionsMenu()
+                refreshNewGameButton()
             }
             Event.Resume, Event.Running -> {
                 status = Status.Running
                 viewModel.runClock()
-                invalidateOptionsMenu()
+                refreshNewGameButton()
                 keepScreenOn(true)
             }
             Event.Victory -> {
@@ -557,7 +549,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 viewModel.stopClock()
                 viewModel.revealAllEmptyAreas()
                 viewModel.victory()
-                invalidateOptionsMenu()
+                refreshNewGameButton()
                 keepScreenOn(false)
                 waitAndShowEndGameDialog(
                     victory = true,
@@ -572,7 +564,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     totalArea
                 )
                 status = Status.Over(currentTime, score)
-                invalidateOptionsMenu()
+                refreshNewGameButton()
                 keepScreenOn(false)
                 viewModel.stopClock()
 
