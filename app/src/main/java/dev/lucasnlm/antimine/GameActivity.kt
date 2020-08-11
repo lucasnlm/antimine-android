@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.TooltipCompat
+import androidx.core.content.ContextCompat
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -229,6 +230,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 drawer.openDrawer(GravityCompat.START)
             }
         }
+
+        minesCount.setCompoundDrawablesWithIntrinsicBounds(
+            ContextCompat.getDrawable(this, usingTheme.assets.toolbarMine), null, null, null
+        )
     }
 
     private fun refreshNewGameButton() {
