@@ -30,6 +30,8 @@
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Toegankelijkheid</string>
     <string name="settings_large_areas">Gebruik grote gebieden</string>
+    <string name="size">Size</string>
+    <string name="system">Systeem</string>
     <string name="rating">Feedback</string>
     <string name="rating_message">Als dit spel je bevalt, geef ons dan alstublieft feedback. Dat zal ons veel helpen.</string>
     <string name="used_software_text">Dit spel gebruikt de volgende software van derden:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">Menu openen</string>
     <string name="close_menu">Menu sluiten</string>
     <string name="delete_all">Alles verwijderen</string>
+    <string name="themes">Themas</string>
     <string name="delete_all_message">Verwijder alle gebeurtenissen permanent.</string>
     <string name="all_mines_disabled">Alle mijnen waren uitgeschakeld.</string>
     <string name="desc_convered_area">Gedekt gebied</string>

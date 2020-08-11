@@ -30,6 +30,8 @@
     <string name="settings_gameplay">गेमप्ले</string>
     <string name="settings_accessibility">पहुँच-क्षमता</string>
     <string name="settings_large_areas">Use Large Areas</string>
+    <string name="size">आकार</string>
+    <string name="system">प्रणाली</string>
     <string name="rating">फीडबैक</string>
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
     <string name="used_software_text">This game uses the following third parties software:</string>
@@ -86,7 +88,8 @@
     <string name="no_network">कोई इंटरनेट कनेक्शन नहीं</string>
     <string name="open_menu">मेन्यू खोलें</string>
     <string name="close_menu">मेनू बंद करें</string>
-    <string name="delete_all">Delete all</string>
+    <string name="delete_all">सभी मिटाएँ</string>
+    <string name="themes">थीम्स</string>
     <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">All mines were disabled.</string>
     <string name="desc_convered_area">Covered area</string>

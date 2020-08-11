@@ -30,6 +30,8 @@
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Προσβασιμότητα</string>
     <string name="settings_large_areas">Χρησιμοποιήστε μεγάλες περιοχές</string>
+    <string name="size">Size</string>
+    <string name="system">System</string>
     <string name="rating">Αξιολόγηση</string>
     <string name="rating_message">Αν σας αρέσει αυτό το παιχνίδι, παρακαλούμε δώστε μας τα σχόλιά σας. Θα μας βοηθήσει πολύ.</string>
     <string name="used_software_text">Αυτό το παιχνίδι χρησιμοποιεί το ακόλουθο λογισμικό τρίτων:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">Άνοιγμα Μενού</string>
     <string name="close_menu">Κλείσιμο Μενού</string>
     <string name="delete_all">Διαγραφή όλων</string>
+    <string name="themes">Themes</string>
     <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">Όλες οι νάρκες απενεργοποιήθηκαν.</string>
     <string name="desc_convered_area">Καλυμμένη περιοχή</string>

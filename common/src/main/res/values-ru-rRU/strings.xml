@@ -30,6 +30,8 @@
     <string name="settings_gameplay">Геймплей</string>
     <string name="settings_accessibility">Специальные возможности</string>
     <string name="settings_large_areas">Использовать большие области</string>
+    <string name="size">Размер</string>
+    <string name="system">Система</string>
     <string name="rating">Обратная связь</string>
     <string name="rating_message">Нравится игра? Оставьте отзыв, пожалуйста. Это нам очень поможет.</string>
     <string name="used_software_text">Эта игра использует следующее программное обеспечение от третьих лиц:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">Открыть меню</string>
     <string name="close_menu">Закрыть меню</string>
     <string name="delete_all">Удалить все</string>
+    <string name="themes">Темы</string>
     <string name="delete_all_message">Удалить все события навсегда.</string>
     <string name="all_mines_disabled">Все мины обезврежены.</string>
     <string name="desc_convered_area">Покрытая область</string>

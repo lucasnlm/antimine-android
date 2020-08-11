@@ -30,6 +30,8 @@
     <string name="settings_gameplay">Játékmenet</string>
     <string name="settings_accessibility">Kisegítő lehetőségek</string>
     <string name="settings_large_areas">Nagy területek használata</string>
+    <string name="size">Size</string>
+    <string name="system">System</string>
     <string name="rating">Visszajelzés</string>
     <string name="rating_message">Ha tetszik ez a játék, kérlek jelezz vissza nekünk. Sokat segít.</string>
     <string name="used_software_text">Ez a játék a következő harmadik féltől származó programokat használja:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">Menü megnyitása</string>
     <string name="close_menu">Menü bezárása</string>
     <string name="delete_all">Az összes törlése</string>
+    <string name="themes">Themes</string>
     <string name="delete_all_message">Az összes esemény végleges törlése.</string>
     <string name="all_mines_disabled">Az összes akna hatástalanítva.</string>
     <string name="desc_convered_area">Fedett terület</string>

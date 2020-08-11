@@ -30,6 +30,8 @@
     <string name="settings_gameplay">Начин на игра</string>
     <string name="settings_accessibility">Достъпност</string>
     <string name="settings_large_areas">Използвай големи квадрати</string>
+    <string name="size">Размер</string>
+    <string name="system">Система</string>
     <string name="rating">Обратна връзка</string>
     <string name="rating_message">Ако харесвате играте, моля дайте ни отзив. Това ще ни помогне много.</string>
     <string name="used_software_text">Играта използва следния чуждестранен софтуер:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">Отвори менюто</string>
     <string name="close_menu">Затвори менюто</string>
     <string name="delete_all">Изтрий всички</string>
+    <string name="themes">Теми</string>
     <string name="delete_all_message">Изтрий всички завинаги.</string>
     <string name="all_mines_disabled">Всички мини бяха деактивирани.</string>
     <string name="desc_convered_area">Покрита площ</string>

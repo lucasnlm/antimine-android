@@ -30,6 +30,8 @@
     <string name="settings_gameplay">Oynanış</string>
     <string name="settings_accessibility">Erişilebilirlik</string>
     <string name="settings_large_areas">Geniş Alanlar Kullan</string>
+    <string name="size">Boyut</string>
+    <string name="system">Sistem</string>
     <string name="rating">Geri bildirim</string>
     <string name="rating_message">Bu oyunu beğendiyseniz, lütfen bize bir geri bildirim verin. Bize çok yardımcı olacak.</string>
     <string name="used_software_text">Bu oyun aşağıdaki üçüncü taraf yazılımlarını kullanır:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">Menüyü Aç</string>
     <string name="close_menu">Menüyü Kapat</string>
     <string name="delete_all">Tümünü sil</string>
+    <string name="themes">Temalar</string>
     <string name="delete_all_message">Tüm etkinlikleri kalıcı olarak silin.</string>
     <string name="all_mines_disabled">Tüm mayınlar devre dışı bırakıldı.</string>
     <string name="desc_convered_area">Kapalı alan</string>

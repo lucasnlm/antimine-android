@@ -30,6 +30,8 @@
     <string name="settings_gameplay">Геймплей</string>
     <string name="settings_accessibility">Спеціальні можливості</string>
     <string name="settings_large_areas">Використовувати збільшену територію</string>
+    <string name="size">Size</string>
+    <string name="system">System</string>
     <string name="rating">Відгук</string>
     <string name="rating_message">Якщо вам подобається ця гра, то залиште нам свій відгук. Це нам дуже допоможе.</string>
     <string name="used_software_text">Ця гра використовує наступне стороннє програмне забезпечення:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">Відкрити меню</string>
     <string name="close_menu">Закрити меню</string>
     <string name="delete_all">Delete all</string>
+    <string name="themes">Themes</string>
     <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">Всі міни були вимкнуті.</string>
     <string name="desc_convered_area">Прихована зона</string>

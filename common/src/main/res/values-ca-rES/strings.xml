@@ -30,6 +30,8 @@
     <string name="settings_gameplay">Joc</string>
     <string name="settings_accessibility">Accessibilitat</string>
     <string name="settings_large_areas">Usa grans àrees</string>
+    <string name="size">Mida</string>
+    <string name="system">Sistema</string>
     <string name="rating">Opina</string>
     <string name="rating_message">Si t\'agrada aquest joc, si us plau dona\'ns la teva opinió. Ens ajudarà molt.</string>
     <string name="used_software_text">Aquest joc usa el següent programari de tercers:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">Obrir menú</string>
     <string name="close_menu">Tancar menú</string>
     <string name="delete_all">Esborra-ho tot</string>
+    <string name="themes">Temes</string>
     <string name="delete_all_message">Esborra tots els esdeveniments permanentment.</string>
     <string name="all_mines_disabled">S\'han desactivat totes les mines.</string>
     <string name="desc_convered_area">Àrea tapada</string>

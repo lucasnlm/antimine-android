@@ -30,6 +30,8 @@
     <string name="settings_gameplay">Aspek permainan</string>
     <string name="settings_accessibility">Aksesibilitas</string>
     <string name="settings_large_areas">Gunakan Area Luas</string>
+    <string name="size">Size</string>
+    <string name="system">System</string>
     <string name="rating">Umpan Balik</string>
     <string name="rating_message">Jika Anda menyukai game ini, tolong beri kami umpan balik. Itu akan banyak membantu kita.</string>
     <string name="used_software_text">Game ini menggunakan software pihak ketiga berikut:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">Buka menu</string>
     <string name="close_menu">Tutup Menu</string>
     <string name="delete_all">Hapus semua</string>
+    <string name="themes">Themes</string>
     <string name="delete_all_message">Hapus permanen semua kejadian.</string>
     <string name="all_mines_disabled">Semua ranjau dimatikan.</string>
     <string name="desc_convered_area">Area tertutupi</string>

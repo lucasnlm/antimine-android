@@ -30,6 +30,8 @@
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Toeganklikheid</string>
     <string name="settings_large_areas">Use Large Areas</string>
+    <string name="size">Size</string>
+    <string name="system">System</string>
     <string name="rating">Terugvoer</string>
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
     <string name="used_software_text">This game uses the following third parties software:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">Maak Kieslys Oop</string>
     <string name="close_menu">Sluit Spyskaart</string>
     <string name="delete_all">Delete all</string>
+    <string name="themes">Themes</string>
     <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">All mines were disabled.</string>
     <string name="desc_convered_area">Covered area</string>
