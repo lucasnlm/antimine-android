@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <TextView
+    <androidx.emoji.widget.EmojiTextView
         android:id="@+id/title_emoji"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
