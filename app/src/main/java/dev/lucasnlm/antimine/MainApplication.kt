@@ -1,5 +1,7 @@
 package dev.lucasnlm.antimine
 
+import androidx.emoji.bundled.BundledEmojiCompatConfig
+import androidx.emoji.text.EmojiCompat
 import androidx.multidex.MultiDexApplication
 import dagger.hilt.android.HiltAndroidApp
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
@@ -17,5 +19,8 @@ open class MainApplication : MultiDexApplication() {
             setup(applicationContext, mapOf())
             sentEvent(Analytics.Open)
         }
+
+        val config: EmojiCompat.Config = BundledEmojiCompatConfig(this)
+        EmojiCompat.init(config)
     }
 }
