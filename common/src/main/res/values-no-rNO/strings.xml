@@ -30,6 +30,8 @@
     <string name="settings_gameplay">Spillopplevelse</string>
     <string name="settings_accessibility">Tilgjengelighet</string>
     <string name="settings_large_areas">Bruk store områder</string>
+    <string name="size">Størrelse</string>
+    <string name="system">System</string>
     <string name="rating">Ttilbakemelding</string>
     <string name="rating_message">Hvis du liker dette spillet, gi oss en tilbakemelding. Det vil hjelpe oss mye.</string>
     <string name="used_software_text">Dette spillet bruker følgende tredjeparter programvare:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">Åpne Menyen</string>
     <string name="close_menu">Lukk Menyen</string>
     <string name="delete_all">Slett alle</string>
+    <string name="themes">Temaer</string>
     <string name="delete_all_message">Slett alle hendelser permanent.</string>
     <string name="all_mines_disabled">Alle miner ble deaktivert.</string>
     <string name="desc_convered_area">Dekket område</string>

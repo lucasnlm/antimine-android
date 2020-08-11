@@ -30,6 +30,8 @@
     <string name="settings_gameplay">أسلوب اللعبة</string>
     <string name="settings_accessibility">إمكانية الوصول</string>
     <string name="settings_large_areas">Use Large Areas</string>
+    <string name="size">Size</string>
+    <string name="system">System</string>
     <string name="rating">تعليقات</string>
     <string name="rating_message">إذا أعجبتك هذه اللعبة، يرجى إعطائنا تعليقات. سوف يساعدنا كثيرا.</string>
     <string name="used_software_text">تستخدم هذه اللعبة برمجيات طرف ثالث التالية:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">فتح القائمة</string>
     <string name="close_menu">إغلاق القائمة</string>
     <string name="delete_all">حذف الكل</string>
+    <string name="themes">Themes</string>
     <string name="delete_all_message">احذف جميع الأحداث نهائيًا.</string>
     <string name="all_mines_disabled">جميع الألغام معطلة.</string>
     <string name="desc_convered_area">Covered area</string>

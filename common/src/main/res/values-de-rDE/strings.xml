@@ -30,6 +30,8 @@
     <string name="settings_gameplay">Spielablauf</string>
     <string name="settings_accessibility">Barrierefreiheit</string>
     <string name="settings_large_areas">Große Flächen verwenden</string>
+    <string name="size">Size</string>
+    <string name="system">System</string>
     <string name="rating">Rückmeldung</string>
     <string name="rating_message">Wenn dir dieses Spiel gefällt, gib uns bitte eine Rückmeldung. Es wird uns sehr helfen.</string>
     <string name="used_software_text">Dieses Spiel benutzt folgende Software von Drittanbietern:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">Menü öffnen</string>
     <string name="close_menu">Menü schließen</string>
     <string name="delete_all">Alles löschen</string>
+    <string name="themes">Themes</string>
     <string name="delete_all_message">Alle Ereignisse dauerhaft löschen.</string>
     <string name="all_mines_disabled">Alle Minen wurden wirkungslos gemacht.</string>
     <string name="desc_convered_area">Abgedeckte Fläche</string>

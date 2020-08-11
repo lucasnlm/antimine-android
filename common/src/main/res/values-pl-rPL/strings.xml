@@ -30,6 +30,8 @@
     <string name="settings_gameplay">Rozgrywka</string>
     <string name="settings_accessibility">Ułatwienia dostępu</string>
     <string name="settings_large_areas">Zwiększ rozmiar pól</string>
+    <string name="size">Rozmiar</string>
+    <string name="system">System</string>
     <string name="rating">Opinia</string>
     <string name="rating_message">Jeśli podoba Ci się ta gra, zachęcamy do przesłania opinii. Jest to bardzo pomocne.</string>
     <string name="used_software_text">Ta gra wykorzystuje następujące oprogramowanie stron trzecich:</string>
@@ -87,6 +89,7 @@
     <string name="open_menu">Otwórz menu</string>
     <string name="close_menu">Zamknij menu</string>
     <string name="delete_all">Usuń wszystkie</string>
+    <string name="themes">Motywy</string>
     <string name="delete_all_message">Usuń wszystkie zdarzenia na stałe.</string>
     <string name="all_mines_disabled">Wszystkie miny zostały rozbrojone.</string>
     <string name="desc_convered_area">Nieodkryte pole</string>
