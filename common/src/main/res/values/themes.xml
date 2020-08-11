@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
@@ -22,4 +22,35 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight.ActionBar" />
 
+    <style name="CustomLightTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorPrimaryDark">#9E9E9E</item>
+        <item name="colorAccent">#D32F2F</item>
+        <item name="android:background">#FFFFFF</item>
+    </style>
+
+    <style name="CustomLightTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorPrimaryDark">#9E9E9E</item>
+        <item name="colorAccent">#D32F2F</item>
+        <item name="android:background">#FFFFFF</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="CustomDarkTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">#212121</item>
+        <item name="colorPrimaryDark">#212121</item>
+        <item name="colorAccent">#FFFFFF</item>
+        <item name="android:background">#212121</item>
+    </style>
+
+    <style name="CustomDarkTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">#212121</item>
+        <item name="colorPrimaryDark">#212121</item>
+        <item name="colorAccent">#FFFFFF</item>
+        <item name="android:background">#212121</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

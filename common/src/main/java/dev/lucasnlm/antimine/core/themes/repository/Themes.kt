@@ -30,6 +30,7 @@ object Themes {
             wrongFlag = R.drawable.red_flag,
             flag = R.drawable.flag,
             questionMark = R.drawable.question,
+            toolbarMine = R.drawable.mine,
             mine = R.drawable.mine,
             mineExploded = R.drawable.mine_exploded_red,
             mineLow = R.drawable.mine_low
@@ -60,6 +61,7 @@ object Themes {
             wrongFlag = R.drawable.flag,
             flag = R.drawable.flag,
             questionMark = R.drawable.question,
+            toolbarMine = R.drawable.mine_low,
             mine = R.drawable.mine,
             mineExploded = R.drawable.mine_exploded_white,
             mineLow = R.drawable.mine_low

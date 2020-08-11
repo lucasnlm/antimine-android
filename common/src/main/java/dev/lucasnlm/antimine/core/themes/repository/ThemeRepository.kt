@@ -52,6 +52,7 @@ class ThemeRepository(
             wrongFlag = R.drawable.red_flag,
             flag = R.drawable.flag,
             questionMark = R.drawable.question,
+            toolbarMine = R.drawable.mine,
             mine = R.drawable.mine,
             mineExploded = R.drawable.mine_exploded_red,
             mineLow = R.drawable.mine_low
