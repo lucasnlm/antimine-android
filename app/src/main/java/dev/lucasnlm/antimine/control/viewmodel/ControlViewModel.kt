@@ -1,19 +1,19 @@
 package dev.lucasnlm.antimine.control.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.control.model.ControlDetails
+import dev.lucasnlm.antimine.control.models.ControlDetails
+import dev.lucasnlm.antimine.control.models.ControlState
 import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
+import kotlinx.coroutines.flow.flow
 
 class ControlViewModel @ViewModelInject constructor(
     private val preferencesRepository: IPreferencesRepository
-) : ViewModel() {
-    val controlTypeSelected = MutableLiveData(preferencesRepository.controlStyle())
+) : IntentViewModel<ControlEvent, ControlState>() {
 
-    val gameControlOptions = listOf(
+    private val gameControlOptions = listOf(
         ControlDetails(
             id = 0L,
             controlStyle = ControlStyle.Standard,
@@ -43,8 +43,16 @@ class ControlViewModel @ViewModelInject constructor(
         )
     )
 
-    fun selectControlType(controlStyle: ControlStyle) {
-        preferencesRepository.useControlStyle(controlStyle)
-        controlTypeSelected.postValue(controlStyle)
+    override fun initialState(): ControlState = ControlState(
+        selectedId = preferencesRepository.controlStyle().ordinal,
+        gameControls = gameControlOptions
+    )
+
+    override suspend fun mapEventToState(event: ControlEvent) = flow {
+        if (event is ControlEvent.SelectControlStyle) {
+            val controlStyle = event.controlStyle
+            preferencesRepository.useControlStyle(controlStyle)
+            emit(state.copy(selectedId = preferencesRepository.controlStyle().ordinal))
+        }
     }
 }

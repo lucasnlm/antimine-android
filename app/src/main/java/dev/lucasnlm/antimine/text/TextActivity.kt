@@ -6,16 +6,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.RawRes
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
+import dev.lucasnlm.antimine.text.viewmodel.TextEvent
 import dev.lucasnlm.antimine.text.viewmodel.TextViewModel
-
 import kotlinx.android.synthetic.main.activity_text.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
@@ -24,23 +23,25 @@ class TextActivity : ThematicActivity(R.layout.activity_text) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        title = intent.getStringExtra(TEXT_TITLE)
+        val bundle = intent.extras ?: Bundle()
 
-        viewModel.text.observe(
-            this,
-            Observer { loadedText ->
-                textView.text = loadedText
-                progressBar.visibility = View.GONE
-            }
-        )
+        title = bundle.getString(TEXT_TITLE)
 
-        GlobalScope.launch {
+        lifecycleScope.launchWhenCreated {
+            viewModel.sendEvent(
+                TextEvent.LoadText(
+                    title = bundle.getString(TEXT_TITLE, ""),
+                    rawFileRes = bundle.getInt(TEXT_PATH, -1)
+                )
+            )
+
             withContext(Dispatchers.Main) {
                 progressBar.visibility = View.VISIBLE
             }
 
-            withContext(Dispatchers.IO) {
-                viewModel.loadText(intent.getIntExtra(TEXT_PATH, -1))
+            viewModel.observeState().collect {
+                textView.text = it.body
+                progressBar.visibility = View.GONE
             }
         }
     }

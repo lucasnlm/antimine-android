@@ -27,4 +27,6 @@ abstract class IntentViewModel<Event, State> : StatelessViewModel<Event>() {
     protected open suspend fun handleEvent(event: Event) {}
 
     fun observeState(): StateFlow<State> = mutableState
+
+    fun singleState(): State = state
 }

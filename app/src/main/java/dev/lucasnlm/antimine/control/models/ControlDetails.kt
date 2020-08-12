@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.control.model
+package dev.lucasnlm.antimine.control.models
 
 import androidx.annotation.StringRes
 import dev.lucasnlm.antimine.core.control.ControlStyle
