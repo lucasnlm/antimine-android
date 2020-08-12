@@ -104,4 +104,37 @@ object Themes {
             mineLow = R.drawable.mine_low
         )
     )
+
+    val ChessTheme = AppTheme(
+        id = 4L,
+        theme = R.style.CustomLightTheme,
+        themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
+        palette = AreaPalette(
+            border = 0x424242,
+            background = 0xFFFFFF,
+            covered = 0x4a4a4a,
+            coveredOdd = 0x383838,
+            uncovered = 0xe2e1da,
+            uncoveredOdd = 0xd5d2cc,
+            minesAround1 = 0x527F8D,
+            minesAround2 = 0x2B8D43,
+            minesAround3 = 0xE65100,
+            minesAround4 = 0x20A5f7,
+            minesAround5 = 0xED1C24,
+            minesAround6 = 0xFFC107,
+            minesAround7 = 0x66126B,
+            minesAround8 = 0x000000,
+            highlight = 0x212121,
+            focus = 0xD32F2F
+        ),
+        assets = Assets(
+            wrongFlag = R.drawable.red_flag,
+            flag = R.drawable.flag,
+            questionMark = R.drawable.question,
+            toolbarMine = R.drawable.mine,
+            mine = R.drawable.mine,
+            mineExploded = R.drawable.mine_exploded_red,
+            mineLow = R.drawable.mine_low
+        )
+    )
 }
