@@ -1,12 +1,22 @@
 package dev.lucasnlm.antimine.about.viewmodel
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import androidx.hilt.lifecycle.ViewModelInject
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.about.models.AboutState
-import dev.lucasnlm.antimine.about.models.License
-import dev.lucasnlm.antimine.about.models.TranslationInfo
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 
-class AboutViewModel : IntentViewModel<AboutEvent, AboutState>() {
+class AboutViewModel @ViewModelInject constructor(
+    @ApplicationContext private val context: Context
+) : IntentViewModel<AboutEvent, AboutState>() {
+
+    override fun onEvent(event: AboutEvent) {
+        if (event == AboutEvent.SourceCode) {
+            openSourceCode()
+        }
+    }
 
     private fun getTranslatorsList() = mapOf(
         "Arabic" to sequenceOf("Ahmad Alkurbi"),
@@ -46,8 +56,20 @@ class AboutViewModel : IntentViewModel<AboutEvent, AboutState>() {
         License(it.key, it.value)
     }.toList()
 
-    override fun initialState(): AboutState = AboutState(
-        translators = getTranslatorsList(),
-        licenses = getLicensesList()
-    )
+    private fun openSourceCode() {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(SOURCE_CODE)).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        context.startActivity(intent)
+    }
+
+    override fun initialState(): AboutState =
+        AboutState(
+            translators = getTranslatorsList(),
+            licenses = getLicensesList()
+        )
+
+    companion object {
+        private const val SOURCE_CODE = "https://github.com/lucasnlm/antimine-android"
+    }
 }

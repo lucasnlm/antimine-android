@@ -13,7 +13,7 @@ abstract class IntentViewModel<Event, State> : StatelessViewModel<Event>() {
     init {
         viewModelScope.launch {
             observeEvent()
-                .onEach { handleEvent(it) }
+                .onEach { onEvent(it) }
                 .flatMapConcat(::mapEventToState)
                 .distinctUntilChanged()
                 .collect { mutableState.value = it }
@@ -23,8 +23,6 @@ abstract class IntentViewModel<Event, State> : StatelessViewModel<Event>() {
     protected abstract fun initialState(): State
 
     protected open suspend fun mapEventToState(event: Event): Flow<State> = flow { }
-
-    protected open suspend fun handleEvent(event: Event) {}
 
     fun observeState(): StateFlow<State> = mutableState
 

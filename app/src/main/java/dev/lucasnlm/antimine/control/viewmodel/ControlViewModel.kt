@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.control.viewmodel
 import androidx.hilt.lifecycle.ViewModelInject
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.control.models.ControlDetails
-import dev.lucasnlm.antimine.control.models.ControlState
 import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
@@ -43,10 +42,11 @@ class ControlViewModel @ViewModelInject constructor(
         )
     )
 
-    override fun initialState(): ControlState = ControlState(
-        selectedId = preferencesRepository.controlStyle().ordinal,
-        gameControls = gameControlOptions
-    )
+    override fun initialState(): ControlState =
+        ControlState(
+            selectedId = preferencesRepository.controlStyle().ordinal,
+            gameControls = gameControlOptions
+        )
 
     override suspend fun mapEventToState(event: ControlEvent) = flow {
         if (event is ControlEvent.SelectControlStyle) {

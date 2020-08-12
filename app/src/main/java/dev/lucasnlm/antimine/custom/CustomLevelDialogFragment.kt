@@ -14,6 +14,7 @@ import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.custom.viewmodel.CreateGameViewModel
+import dev.lucasnlm.antimine.custom.viewmodel.CustomEvent
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -52,7 +53,7 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
             setNegativeButton(R.string.cancel, null)
             setPositiveButton(R.string.start) { _, _ ->
                 val minefield = getSelectedMinefield()
-                createGameViewModel.updateCustomGameMode(minefield)
+                createGameViewModel.sendEvent(CustomEvent.UpdateCustomGameEvent(minefield))
                 viewModel.startNewGame(Difficulty.Custom)
             }
         }.create()

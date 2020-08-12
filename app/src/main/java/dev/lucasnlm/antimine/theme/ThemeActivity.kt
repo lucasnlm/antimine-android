@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.theme
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,6 +12,7 @@ import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import dev.lucasnlm.antimine.theme.view.ThemeAdapter
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
 import kotlinx.android.synthetic.main.activity_theme.*
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,14 +35,11 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 adapter = ThemeAdapter(viewModel, areaSize)
             }
 
-            viewModel.theme.observe(
-                this@ThemeActivity,
-                Observer {
-                    if (usingTheme.id != it.id) {
-                        recreate()
-                    }
+            viewModel.observeState().collect {
+                if (usingTheme.id != it.current.id) {
+                    recreate()
                 }
-            )
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ import android.widget.TextView
 import dev.lucasnlm.antimine.R
 
 import dev.lucasnlm.antimine.text.TextActivity
-import dev.lucasnlm.antimine.about.models.License
+import dev.lucasnlm.antimine.about.viewmodel.License
 import kotlinx.android.synthetic.main.view_third_party.view.*
 
 internal class LicensesAdapter(

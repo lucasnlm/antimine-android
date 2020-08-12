@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.about.models
+package dev.lucasnlm.antimine.about.viewmodel
 
 import androidx.annotation.RawRes
 
