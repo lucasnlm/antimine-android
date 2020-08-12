@@ -172,5 +172,4 @@ class GameFlowTests {
 
         onView(withText(R.string.themes)).check(matches(isDisplayed()))
     }
-
 }
