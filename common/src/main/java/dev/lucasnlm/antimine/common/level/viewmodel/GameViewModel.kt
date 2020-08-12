@@ -398,6 +398,10 @@ class GameViewModel @ViewModelInject constructor(
             updateGameState()
         }
 
+        if (!fromResumeGame && currentDifficulty == Difficulty.Standard) {
+            preferencesRepository.decrementProgressiveValue()
+        }
+
         GlobalScope.launch {
             saveStats()
             saveGame()
@@ -415,6 +419,10 @@ class GameViewModel @ViewModelInject constructor(
             )
             flagAllMines()
             showWrongFlags()
+        }
+
+        if (currentDifficulty == Difficulty.Standard) {
+            preferencesRepository.incrementProgressiveValue()
         }
 
         GlobalScope.launch {
