@@ -44,7 +44,9 @@ class ControlViewModel @ViewModelInject constructor(
 
     override fun initialState(): ControlState =
         ControlState(
-            selectedId = preferencesRepository.controlStyle().ordinal,
+            selectedId = gameControlOptions.firstOrNull {
+                it.controlStyle == preferencesRepository.controlStyle()
+            }?.id?.toInt() ?: 0,
             gameControls = gameControlOptions
         )
 
@@ -52,7 +54,12 @@ class ControlViewModel @ViewModelInject constructor(
         if (event is ControlEvent.SelectControlStyle) {
             val controlStyle = event.controlStyle
             preferencesRepository.useControlStyle(controlStyle)
-            emit(state.copy(selectedId = preferencesRepository.controlStyle().ordinal))
+
+            val newState = state.copy(
+                selectedId = state.gameControls.first { it.controlStyle == event.controlStyle }.id.toInt()
+            )
+
+            emit(newState)
         }
     }
 }
