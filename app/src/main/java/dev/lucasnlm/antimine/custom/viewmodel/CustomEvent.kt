@@ -7,4 +7,3 @@ sealed class CustomEvent {
         val minefield: Minefield
     ) : CustomEvent()
 }
-

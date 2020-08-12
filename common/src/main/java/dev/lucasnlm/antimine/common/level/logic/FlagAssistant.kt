@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Mark
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
@@ -10,8 +9,7 @@ import kotlinx.coroutines.flow.flow
 class FlagAssistant(
     private val field: MutableList<Area>
 ) {
-    @ExperimentalCoroutinesApi
-    fun runFlagAssistant() = flow<Int> {
+    fun runFlagAssistant() = flow {
         // Must not select Mark.PurposefulNone, only Mark.None. Otherwise, it will flag
         // a square that was previously unflagged by player.
         val flaggedIds = field

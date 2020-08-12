@@ -13,7 +13,6 @@ import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -81,7 +80,6 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
         }
     }
 
-    @ExperimentalCoroutinesApi
     override fun onAttach(context: Context) {
         super.onAttach(context)
 

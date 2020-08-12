@@ -5,13 +5,11 @@ import dev.lucasnlm.antimine.common.level.repository.MemoryStatsRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-@ExperimentalCoroutinesApi
 class StatsViewModelTest {
     private val listOfStats = listOf(
         Stats(0, 1000, 10, 1, 10, 10, 90),
