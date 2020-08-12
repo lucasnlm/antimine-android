@@ -160,4 +160,17 @@ class GameFlowTests {
 
         onView(isRoot()).perform(ViewActions.pressBack())
     }
+
+    @Test
+    fun testGoToThemes() {
+        onView(withId(R.id.drawer))
+            .check(matches(isClosed(Gravity.START)))
+            .perform(DrawerActions.open())
+
+        onView(withId(R.id.navigationView))
+            .perform(NavigationViewActions.navigateTo(R.id.themes))
+
+        onView(withText(R.string.themes)).check(matches(isDisplayed()))
+    }
+
 }
