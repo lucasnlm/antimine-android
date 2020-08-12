@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
         android:enabled="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_easy"
         android:shortcutId="play_beginner"
         android:shortcutShortLabel="@string/beginner"
         tools:targetApi="n_mr1">
@@ -16,7 +16,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_mid"
         android:shortcutId="play_intermediate"
         android:shortcutShortLabel="@string/intermediate"
         tools:targetApi="n_mr1">
@@ -28,7 +28,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_hard"
         android:shortcutId="play_expert"
         android:shortcutShortLabel="@string/expert"
         tools:targetApi="n_mr1">
@@ -40,7 +40,7 @@
 
     <shortcut
         android:enabled="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_progressive"
         android:shortcutId="play_standard"
         android:shortcutShortLabel="@string/standard"
         tools:targetApi="n_mr1">
