@@ -96,4 +96,28 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
+
+    <style name="CustomMarineTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">#01579b</item>
+        <item name="colorPrimaryDark">#002f6c</item>
+        <item name="colorAccent">#03a9f4</item>
+        <item name="android:background">#e1f5fe</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="CustomMarineTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">#01579b</item>
+        <item name="colorPrimaryDark">#002f6c</item>
+        <item name="colorAccent">#03a9f4</item>
+        <item name="android:background">#e1f5fe</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
 </resources>

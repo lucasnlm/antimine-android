@@ -137,4 +137,37 @@ object Themes {
             mineLow = R.drawable.mine_low
         )
     )
+
+    val MarineTheme = AppTheme(
+        id = 5L,
+        theme = R.style.CustomMarineTheme,
+        themeNoActionBar = R.style.CustomMarineTheme_NoActionBar,
+        palette = AreaPalette(
+            border = 0x424242,
+            background = 0xFFFFFF,
+            covered = 0x0277bd,
+            coveredOdd = 0x006aa8,
+            uncovered = 0xc0d2d9,
+            uncoveredOdd = 0xc0d2d9,
+            minesAround1 = 0x527F8D,
+            minesAround2 = 0x2B8D43,
+            minesAround3 = 0xE65100,
+            minesAround4 = 0x20A5f7,
+            minesAround5 = 0xED1C24,
+            minesAround6 = 0xFFC107,
+            minesAround7 = 0x66126B,
+            minesAround8 = 0x000000,
+            highlight = 0x212121,
+            focus = 0xD32F2F
+        ),
+        assets = Assets(
+            wrongFlag = R.drawable.red_flag,
+            flag = R.drawable.flag,
+            questionMark = R.drawable.question,
+            toolbarMine = R.drawable.mine,
+            mine = R.drawable.mine,
+            mineExploded = R.drawable.mine_exploded_red,
+            mineLow = R.drawable.mine_low
+        )
+    )
 }
