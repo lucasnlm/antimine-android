@@ -53,4 +53,18 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="CustomGardenTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">#19360d</item>
+        <item name="colorPrimaryDark">#001000</item>
+        <item name="colorAccent">#53b529</item>
+    </style>
+
+    <style name="CustomGardenTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">#19360d</item>
+        <item name="colorPrimaryDark">#001000</item>
+        <item name="colorAccent">#53b529</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

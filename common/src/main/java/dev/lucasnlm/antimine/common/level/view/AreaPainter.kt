@@ -37,7 +37,11 @@ fun Area.paintOnCanvas(
                 painter.apply {
                     style = Paint.Style.FILL
                     isAntiAlias = !isLowBitAmbient
-                    color = theme.palette.covered
+                    color = if (posY % 2 == 0) {
+                        if (posX % 2 == 0) theme.palette.covered else theme.palette.coveredOdd
+                    } else {
+                        if (posX % 2 == 0) theme.palette.coveredOdd else theme.palette.covered
+                    }
                     alpha = if (highlighted) 155 else 255
                 }
             }
@@ -91,6 +95,11 @@ fun Area.paintOnCanvas(
                     style = Paint.Style.FILL
                     isAntiAlias = !isLowBitAmbient
                     color = theme.palette.uncovered
+                    color = if (posY % 2 == 0) {
+                        if (posX % 2 == 0) theme.palette.uncovered else theme.palette.uncoveredOdd
+                    } else {
+                        if (posX % 2 == 0) theme.palette.uncoveredOdd else theme.palette.uncovered
+                    }
                     alpha = 0xff
                 }
             }

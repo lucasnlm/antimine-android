@@ -8,6 +8,7 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.core.themes.model.Assets
 import dev.lucasnlm.antimine.core.themes.repository.Themes.DarkTheme
+import dev.lucasnlm.antimine.core.themes.repository.Themes.GardenTheme
 import dev.lucasnlm.antimine.core.themes.repository.Themes.LightTheme
 
 interface IThemeRepository {
@@ -30,7 +31,7 @@ class ThemeRepository(
     }
 
     override fun getAllThemes(): List<AppTheme> = listOf(
-        buildSystemTheme(), LightTheme, DarkTheme
+        buildSystemTheme(), LightTheme, DarkTheme, GardenTheme
     )
 
     override fun setTheme(theme: AppTheme) {
@@ -63,7 +64,9 @@ class ThemeRepository(
             border = ContextCompat.getColor(context, R.color.view_cover),
             background = ContextCompat.getColor(context, R.color.background),
             covered = ContextCompat.getColor(context, R.color.view_cover),
+            coveredOdd = ContextCompat.getColor(context, R.color.view_cover),
             uncovered = ContextCompat.getColor(context, R.color.view_clean),
+            uncoveredOdd = ContextCompat.getColor(context, R.color.view_clean),
             minesAround1 = ContextCompat.getColor(context, R.color.mines_around_1),
             minesAround2 = ContextCompat.getColor(context, R.color.mines_around_2),
             minesAround3 = ContextCompat.getColor(context, R.color.mines_around_3),

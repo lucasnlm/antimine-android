@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine.common.level.view
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
@@ -120,7 +121,10 @@ class AreaView : View {
         if (isAmbientMode) {
             setBackgroundResource(android.R.color.black)
         } else {
-            setBackgroundResource(android.R.color.transparent)
+            val color = with(theme.palette.covered) {
+                Color.argb(255, Color.red(this), Color.green(this), Color.blue(this))
+            }
+            setBackgroundColor(color)
         }
 
         area?.paintOnCanvas(
