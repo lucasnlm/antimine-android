@@ -21,6 +21,10 @@ interface IPreferencesRepository {
     fun updateStatsBase(statsBase: Int)
     fun getStatsBase(): Int
 
+    fun incrementProgressiveValue()
+    fun decrementProgressiveValue()
+    fun getProgressiveValue(): Int
+
     fun useFlagAssistant(): Boolean
     fun useHapticFeedback(): Boolean
     fun areaSizeMultiplier(): Int
@@ -103,6 +107,19 @@ class PreferencesRepository(
     override fun getStatsBase(): Int =
         getInt(PREFERENCE_STATS_BASE, 0)
 
+    override fun incrementProgressiveValue() {
+        val value = getInt(PREFERENCE_PROGRESSIVE_VALUE, 0)
+        putInt(PREFERENCE_PROGRESSIVE_VALUE, value + 1)
+    }
+
+    override fun decrementProgressiveValue() {
+        val value = getInt(PREFERENCE_PROGRESSIVE_VALUE, 0)
+        putInt(PREFERENCE_PROGRESSIVE_VALUE, (value - 1).coerceAtLeast(0))
+    }
+
+    override fun getProgressiveValue(): Int =
+        getInt(PREFERENCE_PROGRESSIVE_VALUE, 0)
+
     private fun migrateOldPreferences() {
         if (preferencesManager.contains(PREFERENCE_OLD_DOUBLE_CLICK)) {
             if (getBoolean(PREFERENCE_OLD_DOUBLE_CLICK, false)) {
@@ -133,5 +150,6 @@ class PreferencesRepository(
         private const val PREFERENCE_SOUND_EFFECTS = "preference_sound"
         private const val PREFERENCE_STATS_BASE = "preference_stats_base"
         private const val PREFERENCE_OLD_LARGE_AREA = "preference_large_area"
+        private const val PREFERENCE_PROGRESSIVE_VALUE = "preference_progressive_value"
     }
 }

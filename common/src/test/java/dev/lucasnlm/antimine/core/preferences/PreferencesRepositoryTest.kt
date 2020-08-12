@@ -35,6 +35,29 @@ private class TestPreferenceManager : IPreferencesManager {
 
 class PreferencesRepositoryTest {
     @Test
+    fun testProgressValue() {
+        val preferenceManager = TestPreferenceManager()
+        val preferencesRepository = PreferencesRepository(preferenceManager)
+
+        assertEquals(0, preferencesRepository.getProgressiveValue())
+
+        preferencesRepository.incrementProgressiveValue()
+        assertEquals(1, preferencesRepository.getProgressiveValue())
+
+        preferencesRepository.incrementProgressiveValue()
+        assertEquals(2, preferencesRepository.getProgressiveValue())
+
+        preferencesRepository.decrementProgressiveValue()
+        assertEquals(1, preferencesRepository.getProgressiveValue())
+
+        preferencesRepository.decrementProgressiveValue()
+        assertEquals(0, preferencesRepository.getProgressiveValue())
+
+        preferencesRepository.decrementProgressiveValue()
+        assertEquals(0, preferencesRepository.getProgressiveValue())
+    }
+
+    @Test
     fun testMigrationWhenUsingDoubleClick() {
         val preferenceManager = TestPreferenceManager()
         preferenceManager.putBoolean("preference_double_click_open", true)

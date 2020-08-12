@@ -23,7 +23,8 @@ class MinefieldRepository : IMinefieldRepository {
     ): Minefield =
         when (difficulty) {
             Difficulty.Standard -> calculateStandardMode(
-                dimensionRepository
+                dimensionRepository,
+                preferencesRepository
             )
             Difficulty.Beginner -> beginnerMinefield
             Difficulty.Intermediate -> intermediateMinefield
@@ -32,18 +33,24 @@ class MinefieldRepository : IMinefieldRepository {
         }
 
     private fun calculateStandardMode(
-        dimensionRepository: IDimensionRepository
+        dimensionRepository: IDimensionRepository,
+        preferencesRepository: IPreferencesRepository
     ): Minefield {
         val fieldSize = dimensionRepository.defaultAreaSize()
         val verticalGap = if (dimensionRepository.navigationBarHeight() > 0)
             VERTICAL_STANDARD_GAP else VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM
+
+        val progressiveMines = preferencesRepository.getProgressiveValue()
 
         val display = dimensionRepository.displaySize()
         val calculatedWidth = ((display.width / fieldSize).toInt() - HORIZONTAL_STANDARD_GAP)
         val calculatedHeight = ((display.height / fieldSize).toInt() - verticalGap)
         val finalWidth = calculatedWidth.coerceAtLeast(MIN_STANDARD_WIDTH)
         val finalHeight = calculatedHeight.coerceAtLeast(MIN_STANDARD_HEIGHT)
-        val finalMines = (finalWidth * finalHeight * CUSTOM_LEVEL_RATIO).toInt()
+        val fieldArea = finalWidth * finalHeight
+        val finalMines =
+            ((fieldArea * CUSTOM_LEVEL_MINE_RATIO).toInt() + progressiveMines)
+                .coerceAtMost((fieldArea * MAX_LEVEL_MINE_RATIO).toInt())
 
         return Minefield(finalWidth, finalHeight, finalMines)
     }
@@ -55,7 +62,8 @@ class MinefieldRepository : IMinefieldRepository {
         private val intermediateMinefield = Minefield(16, 16, 40)
         private val expertMinefield = Minefield(24, 24, 99)
 
-        private const val CUSTOM_LEVEL_RATIO = 0.2
+        private const val CUSTOM_LEVEL_MINE_RATIO = 0.2
+        private const val MAX_LEVEL_MINE_RATIO = 0.45
         private const val HORIZONTAL_STANDARD_GAP = 1
         private const val VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM = 4
         private const val VERTICAL_STANDARD_GAP = 3

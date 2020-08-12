@@ -66,7 +66,7 @@ class GameController {
     private fun plantMinesExcept(safeId: Int) {
         val solver = LimitedBruteForceSolver()
         do {
-            val useSafeZone = minefield.width > 9 && minefield.height > 9
+            val useSafeZone = minefield.width > 7 && minefield.height > 7
             field = minefieldCreator.create(safeId, useSafeZone)
             val fieldCopy = field.map { it.copy() }.toMutableList()
             val minefieldHandler = MinefieldHandler(fieldCopy, false)

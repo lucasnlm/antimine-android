@@ -16,11 +16,14 @@ class MinefieldRepositoryTest {
     @Test
     fun testStandardSizeCalcWithoutNavigationBar() {
         val minefieldRepository = MinefieldRepository()
-        val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true)
+        val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true) {
+            every { getProgressiveValue() } returns 0
+        }
         val dimensionRepository = mockk<IDimensionRepository>(relaxed = true) {
             every { areaSize() } returns 10.0f
             every { navigationBarHeight() } returns 0
             every { displaySize() } returns Size(1000, 1000)
+            every { defaultAreaSize() } returns 10.0f
         }
 
         val minefield = minefieldRepository.fromDifficulty(
@@ -33,11 +36,14 @@ class MinefieldRepositoryTest {
     @Test
     fun testStandardSizeCalcWithNavigationBar() {
         val minefieldRepository = MinefieldRepository()
-        val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true)
+        val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true) {
+            every { getProgressiveValue() } returns 0
+        }
         val dimensionRepository = mockk<IDimensionRepository>(relaxed = true) {
             every { areaSize() } returns 10.0f
             every { navigationBarHeight() } returns 100
             every { displaySize() } returns Size(1000, 1000)
+            every { defaultAreaSize() } returns 10.0f
         }
 
         val minefield = minefieldRepository.fromDifficulty(
@@ -45,6 +51,46 @@ class MinefieldRepositoryTest {
         )
 
         assertEquals(Minefield(99, 97, 1920), minefield)
+    }
+
+    @Test
+    fun testStandardSizeCalcWithNavigationBarAndProgress() {
+        val minefieldRepository = MinefieldRepository()
+        val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true) {
+            every { getProgressiveValue() } returns 50
+        }
+        val dimensionRepository = mockk<IDimensionRepository>(relaxed = true) {
+            every { areaSize() } returns 10.0f
+            every { navigationBarHeight() } returns 100
+            every { displaySize() } returns Size(1000, 1000)
+            every { defaultAreaSize() } returns 10.0f
+        }
+
+        val minefield = minefieldRepository.fromDifficulty(
+            Difficulty.Standard, dimensionRepository, preferencesRepository
+        )
+
+        assertEquals(Minefield(99, 97, 1920 + 50), minefield)
+    }
+
+    @Test
+    fun testStandardSizeCalcWithNavigationBarAndHighProgress() {
+        val minefieldRepository = MinefieldRepository()
+        val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true) {
+            every { getProgressiveValue() } returns 10000
+        }
+        val dimensionRepository = mockk<IDimensionRepository>(relaxed = true) {
+            every { areaSize() } returns 10.0f
+            every { navigationBarHeight() } returns 100
+            every { displaySize() } returns Size(1000, 1000)
+            every { defaultAreaSize() } returns 10.0f
+        }
+
+        val minefield = minefieldRepository.fromDifficulty(
+            Difficulty.Standard, dimensionRepository, preferencesRepository
+        )
+
+        assertEquals(Minefield(99, 97, 4321), minefield)
     }
 
     @Test
