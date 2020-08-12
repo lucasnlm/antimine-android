@@ -11,7 +11,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class StatsViewModelTest : IntentViewModelTest(){
+class StatsViewModelTest : IntentViewModelTest() {
 
     private val listOfStats = listOf(
         Stats(0, 1000, 10, 1, 10, 10, 90),
