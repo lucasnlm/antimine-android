@@ -11,28 +11,17 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.control.model.ControlDetails
 import dev.lucasnlm.antimine.control.view.ControlItemView
+import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ControlDialogFragment : AppCompatDialogFragment() {
-    @Inject
-    lateinit var preferencesRepository: IPreferencesRepository
-
     private val controlViewModel by activityViewModels<ControlViewModel>()
     private val adapter by lazy { ControlListAdapter(controlViewModel) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        adapter.setList(controlViewModel.gameControlOptions)
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val currentControl = preferencesRepository.controlStyle().ordinal
-
+        val currentControl = controlViewModel.singleState().selectedId
         return AlertDialog.Builder(requireContext()).apply {
             setTitle(R.string.control)
             setSingleChoiceItems(adapter, currentControl, null)
@@ -50,12 +39,9 @@ class ControlDialogFragment : AppCompatDialogFragment() {
     private class ControlListAdapter(
         private val controlViewModel: ControlViewModel
     ) : BaseAdapter() {
-        private var selected = controlViewModel.controlTypeSelected.value
-        private var controlList = listOf<ControlDetails>()
+        private val controlList = controlViewModel.singleState().gameControls
 
-        fun setList(list: List<ControlDetails>) {
-            controlList = list
-        }
+        fun getSelectedId() = controlViewModel.singleState().selectedId
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val view = if (convertView == null) {
@@ -64,13 +50,14 @@ class ControlDialogFragment : AppCompatDialogFragment() {
                 (convertView as ControlItemView)
             }
 
+            val selectedId = getSelectedId()
+
             return view.apply {
                 val controlModel = controlList[position]
                 bind(controlModel)
-                setRadio(selected == controlModel.controlStyle)
+                setRadio(selectedId == controlModel.controlStyle.ordinal)
                 setOnClickListener {
-                    controlViewModel.selectControlType(controlModel.controlStyle)
-                    selected = controlModel.controlStyle
+                    controlViewModel.sendEvent(ControlEvent.SelectControlStyle(controlModel.controlStyle))
                     notifyDataSetChanged()
                 }
             }

@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 800011
-        versionName '8.0.1'
+        versionCode 800031
+        versionName '8.0.3'
         minSdkVersion 16
         targetSdkVersion 30
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -23,6 +23,9 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs += [
+                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi',
+                '-Xuse-experimental=kotlinx.coroutines.FlowPreview']
     }
 }
 
@@ -40,8 +43,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // AndroidX
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.activity:activity-ktx:1.1.0'
     implementation "androidx.fragment:fragment-ktx:1.2.5"
@@ -73,9 +76,9 @@ dependencies {
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.9.1'
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.5'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.8'
 
     // Kotlin Lib
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'

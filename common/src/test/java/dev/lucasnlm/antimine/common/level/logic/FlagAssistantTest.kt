@@ -1,7 +1,6 @@
 package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.common.level.models.Minefield
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.toCollection
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
@@ -9,7 +8,6 @@ import org.junit.Test
 import kotlin.random.Random
 
 class FlagAssistantTest {
-    @ExperimentalCoroutinesApi
     @Test
     fun testRunAssistant() = runBlockingTest {
         repeat(20) { takeMines ->

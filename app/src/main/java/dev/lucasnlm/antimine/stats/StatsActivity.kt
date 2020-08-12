@@ -5,42 +5,37 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
-import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.stats.model.StatsModel
+import dev.lucasnlm.antimine.stats.viewmodel.StatsEvent
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
 import kotlinx.android.synthetic.main.activity_stats.*
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class StatsActivity : ThematicActivity(R.layout.activity_stats) {
-    @Inject
-    lateinit var statsRepository: IStatsRepository
-
     private val viewModel: StatsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         refreshStats(StatsViewModel.emptyStats)
 
-        viewModel.statsObserver.observe(
-            this,
-            Observer {
+        lifecycleScope.launchWhenResumed {
+            viewModel.sendEvent(StatsEvent.LoadStats)
+
+            viewModel.observeState().collect {
                 refreshStats(it)
             }
-        )
-
-        GlobalScope.launch {
-            viewModel.loadStats()
         }
     }
 
     private fun refreshStats(stats: StatsModel) {
+        invalidateOptionsMenu()
         if (stats.totalGames > 0) {
             minesCount.text = stats.mines.toString()
             totalTime.text = formatTime(stats.duration)
@@ -66,7 +61,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        viewModel.statsObserver.value?.let {
+        viewModel.singleState().let {
             if (it.totalGames > 0) {
                 menuInflater.inflate(R.menu.stats_menu, menu)
             }
@@ -90,7 +85,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.delete_all) { _, _ ->
                 GlobalScope.launch {
-                    viewModel.deleteAll()
+                    viewModel.sendEvent(StatsEvent.DeleteStats)
                 }
             }
             .show()

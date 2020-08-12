@@ -8,7 +8,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatRadioButton
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.control.model.ControlDetails
+import dev.lucasnlm.antimine.control.models.ControlDetails
 
 class ControlItemView : FrameLayout {
     constructor(context: Context) : super(context)

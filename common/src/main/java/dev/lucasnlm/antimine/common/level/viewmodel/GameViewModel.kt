@@ -27,8 +27,6 @@ import dev.lucasnlm.antimine.core.sound.ISoundManager
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
@@ -164,8 +162,6 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
-    @FlowPreview
-    @ExperimentalCoroutinesApi
     suspend fun retryGame(uid: Int): Minefield = withContext(Dispatchers.IO) {
         val save = savesRepository.loadFromId(uid)
 
@@ -236,8 +232,6 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
-    @FlowPreview
-    @ExperimentalCoroutinesApi
     suspend fun onLongClick(index: Int) {
         gameController.longPress(index).flatMapConcat { (action, flow) ->
             onFeedbackAnalytics(action, index)
@@ -253,8 +247,6 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
-    @FlowPreview
-    @ExperimentalCoroutinesApi
     suspend fun onDoubleClickArea(index: Int) {
         gameController.doubleClick(index).flatMapConcat { (action, flow) ->
             onFeedbackAnalytics(action, index)
@@ -274,8 +266,6 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
-    @FlowPreview
-    @ExperimentalCoroutinesApi
     suspend fun onSingleClick(index: Int) {
         gameController.singleClick(index).flatMapConcat { (action, flow) ->
             onFeedbackAnalytics(action, index)
@@ -291,7 +281,6 @@ class GameViewModel @ViewModelInject constructor(
         }
     }
 
-    @ExperimentalCoroutinesApi
     private suspend fun onPostAction() {
         if (preferencesRepository.useFlagAssistant() && !gameController.hasAnyMineExploded()) {
             gameController.runFlagAssistant().collect {

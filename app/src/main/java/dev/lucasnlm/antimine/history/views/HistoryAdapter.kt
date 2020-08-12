@@ -1,22 +1,22 @@
 package dev.lucasnlm.antimine.history.views
 
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
-import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
+import dev.lucasnlm.antimine.history.viewmodel.HistoryEvent
 import kotlinx.android.synthetic.main.view_history_item.view.*
 
 class HistoryAdapter(
-    private val saveHistory: List<Save>
+    private val saveHistory: List<Save>,
+    private val statelessViewModel: StatelessViewModel<HistoryEvent>
 ) : RecyclerView.Adapter<HistoryViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         val view = LayoutInflater
@@ -48,38 +48,20 @@ class HistoryAdapter(
         if (status != SaveStatus.VICTORY) {
             holder.replay.setImageResource(R.drawable.replay)
             holder.replay.setColorFilter(holder.minesCount.currentTextColor)
-            holder.replay.setOnClickListener { replayGame(it, uid) }
+            holder.replay.setOnClickListener {
+                statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
+            }
         } else {
             holder.replay.setImageResource(R.drawable.play)
             holder.replay.setColorFilter(holder.minesCount.currentTextColor)
-            holder.replay.setOnClickListener { loadGame(it, uid) }
+            holder.replay.setOnClickListener {
+                statelessViewModel.sendEvent(HistoryEvent.LoadSave(uid))
+            }
         }
 
-        holder.itemView.setOnClickListener { loadGame(it, uid) }
-    }
-
-    private fun replayGame(view: View, uid: Int) {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-            data = Uri.Builder()
-                .scheme(DeepLink.SCHEME)
-                .authority(DeepLink.RETRY_HOST_AUTHORITY)
-                .appendPath(uid.toString())
-                .build()
+        holder.itemView.setOnClickListener {
+            statelessViewModel.sendEvent(HistoryEvent.LoadSave(uid))
         }
-        view.context.startActivity(intent)
-    }
-
-    private fun loadGame(view: View, uid: Int) {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-            data = Uri.Builder()
-                .scheme(DeepLink.SCHEME)
-                .authority(DeepLink.LOAD_GAME_AUTHORITY)
-                .appendPath(uid.toString())
-                .build()
-        }
-        view.context.startActivity(intent)
     }
 }
 

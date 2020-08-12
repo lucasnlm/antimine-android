@@ -7,8 +7,6 @@ import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Score
 import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.control.GameControl
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -19,8 +17,6 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-@InternalCoroutinesApi
-@ExperimentalCoroutinesApi
 class GameControllerTest {
     private fun withGameController(
         clickOnCreate: Boolean = true,

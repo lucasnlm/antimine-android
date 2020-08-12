@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.control.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import dev.lucasnlm.antimine.IntentViewModelTest
 import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import io.mockk.every
@@ -10,9 +11,13 @@ import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 
-class ControlViewModelTest {
+class ControlViewModelTest : IntentViewModelTest() {
     @get:Rule
     val rule = InstantTaskExecutorRule()
+
+    private fun ControlViewModel.selectedControlStyle() = singleState().let {
+        it.gameControls[it.selectedId].controlStyle
+    }
 
     @Test
     fun testInitialValue() {
@@ -21,7 +26,7 @@ class ControlViewModelTest {
         }
 
         val viewModel = ControlViewModel(preferenceRepository)
-        assertEquals(ControlStyle.DoubleClick, viewModel.controlTypeSelected.value)
+        assertEquals(ControlStyle.DoubleClick, viewModel.selectedControlStyle())
     }
 
     @Test
@@ -31,8 +36,8 @@ class ControlViewModelTest {
         }
 
         val viewModel = ControlViewModel(preferenceRepository)
-        viewModel.selectControlType(ControlStyle.FastFlag)
-        assertEquals(ControlStyle.FastFlag, viewModel.controlTypeSelected.value)
+        viewModel.sendEvent(ControlEvent.SelectControlStyle(ControlStyle.FastFlag))
+        assertEquals(ControlStyle.FastFlag, viewModel.selectedControlStyle())
         verify { preferenceRepository.useControlStyle(ControlStyle.FastFlag) }
     }
 }

@@ -48,8 +48,6 @@ import kotlinx.android.synthetic.main.activity_game.minesCount
 import kotlinx.android.synthetic.main.activity_game.timer
 import kotlinx.android.synthetic.main.activity_tv_game.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -81,8 +79,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private var currentTime: Long = 0
     private var currentSaveId: Long = 0
 
-    @ExperimentalCoroutinesApi
-    @FlowPreview
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
@@ -104,8 +100,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    @ExperimentalCoroutinesApi
-    @FlowPreview
     private fun bindViewModel() = viewModel.apply {
         var lastEvent: Event? = null // TODO use distinctUntilChanged when available
 
@@ -217,11 +211,11 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             viewModel.pauseGame()
         }
 
-        analyticsManager.sentEvent(Analytics.Quit)
+        if (isFinishing) {
+            analyticsManager.sentEvent(Analytics.Quit)
+        }
     }
 
-    @ExperimentalCoroutinesApi
-    @FlowPreview
     private fun bindToolbar() {
         menu.apply {
             TooltipCompat.setTooltipText(this, getString(R.string.open_menu))

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.about.models.TranslationInfo
+import dev.lucasnlm.antimine.about.viewmodel.TranslationInfo
 
 class TranslatorsAdapter(
     private val translators: List<TranslationInfo>

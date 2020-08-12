@@ -15,6 +15,7 @@ import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.view.AreaView
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
+import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
 import kotlinx.android.synthetic.main.view_theme.view.*
 
@@ -23,7 +24,7 @@ class ThemeAdapter(
     private val areaSize: Float
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
 
-    private val themes: List<AppTheme> = themeViewModel.getThemes()
+    private val themes: List<AppTheme> = themeViewModel.singleState().themes
 
     private val minefield = listOf(
         Area(0, 0, 0, 1, hasMine = false, mistake = false, mark = Mark.None, isCovered = false),
@@ -83,7 +84,7 @@ class ThemeAdapter(
             parentGrid.setBackgroundColor(color)
 
             clickTheme.setOnClickListener {
-                themeViewModel.setTheme(theme)
+                themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
             }
         }
     }

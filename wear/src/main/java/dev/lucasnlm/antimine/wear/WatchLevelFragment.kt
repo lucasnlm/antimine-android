@@ -16,8 +16,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
-class WatchLevelFragment : CommonLevelFragment() {
-    override val levelFragmentResId: Int = R.layout.fragment_level
+class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

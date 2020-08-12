@@ -1,19 +1,17 @@
 package dev.lucasnlm.antimine.stats.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.stats.model.StatsModel
+import kotlinx.coroutines.flow.flow
 
 class StatsViewModel @ViewModelInject constructor(
     private val statsRepository: IStatsRepository,
     private val preferenceRepository: IPreferencesRepository
-) : ViewModel() {
-    val statsObserver = MutableLiveData<StatsModel>()
-
-    suspend fun getStatsModel(): StatsModel? {
+) : IntentViewModel<StatsEvent, StatsModel>() {
+    private suspend fun loadStatsModel(): StatsModel {
         val minId = preferenceRepository.getStatsBase()
         val stats = statsRepository.getAllStats(minId)
         val statsCount = stats.count()
@@ -37,18 +35,22 @@ class StatsViewModel @ViewModelInject constructor(
         }
     }
 
-    suspend fun deleteAll() {
+    private suspend fun deleteAll() {
         statsRepository.getAllStats(0).lastOrNull()?.let {
             preferenceRepository.updateStatsBase(it.uid + 1)
         }
-
-        statsObserver.postValue(emptyStats)
     }
 
-    suspend fun loadStats() {
-        getStatsModel()?.let {
-            if (it.totalGames > 0) {
-                statsObserver.postValue(it)
+    override fun initialState(): StatsModel = emptyStats
+
+    override suspend fun mapEventToState(event: StatsEvent) = flow {
+        when (event) {
+            is StatsEvent.LoadStats -> {
+                emit(loadStatsModel())
+            }
+            is StatsEvent.DeleteStats -> {
+                deleteAll()
+                emit(emptyStats)
             }
         }
     }

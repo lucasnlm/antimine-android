@@ -17,7 +17,6 @@ import dev.lucasnlm.antimine.common.level.models.StateUpdate
 import dev.lucasnlm.antimine.common.level.solver.LimitedBruteForceSolver
 import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.GameControl
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlin.random.Random
@@ -126,7 +125,6 @@ class GameController {
         }
     }
 
-    @ExperimentalCoroutinesApi
     fun singleClick(index: Int) = flow {
         val target = getArea(index)
         val action = if (target.isCovered) gameControl.onCovered.singleClick else gameControl.onOpen.singleClick
@@ -135,7 +133,6 @@ class GameController {
         }
     }
 
-    @ExperimentalCoroutinesApi
     fun doubleClick(index: Int) = flow {
         val target = getArea(index)
         val action = if (target.isCovered) gameControl.onCovered.doubleClick else gameControl.onOpen.doubleClick
@@ -144,7 +141,6 @@ class GameController {
         }
     }
 
-    @ExperimentalCoroutinesApi
     fun longPress(index: Int) = flow {
         val target = getArea(index)
         val action = if (target.isCovered) gameControl.onCovered.longPress else gameControl.onOpen.longPress
@@ -153,7 +149,6 @@ class GameController {
         }
     }
 
-    @ExperimentalCoroutinesApi
     fun runFlagAssistant(): Flow<Int> {
         return FlagAssistant(field.toMutableList()).runFlagAssistant()
     }
