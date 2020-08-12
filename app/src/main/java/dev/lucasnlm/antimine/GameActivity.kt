@@ -211,7 +211,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             viewModel.pauseGame()
         }
 
-        analyticsManager.sentEvent(Analytics.Quit)
+        if (isFinishing) {
+            analyticsManager.sentEvent(Analytics.Quit)
+        }
     }
 
     private fun bindToolbar() {
