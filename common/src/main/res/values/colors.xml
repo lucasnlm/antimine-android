@@ -17,6 +17,11 @@
 
     <color name="launcher_background">#FCC216</color>
 
+    <color name="shortcut_level_0">#9ccc65</color>
+    <color name="shortcut_level_1">#42a5f5</color>
+    <color name="shortcut_level_2">#7e57c2</color>
+    <color name="shortcut_level_3">#ffca28</color>
+
     <color name="accent">#FFD32F2F</color>
     <color name="install_button">#00C853</color>
     <color name="highlight">#212121</color>
