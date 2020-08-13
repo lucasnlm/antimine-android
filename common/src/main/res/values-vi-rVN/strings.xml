@@ -30,8 +30,8 @@
     <string name="settings_gameplay">Cách thức chơi</string>
     <string name="settings_accessibility">Trợ năng</string>
     <string name="settings_large_areas">Vùng chạm lớn</string>
-    <string name="size">Size</string>
-    <string name="system">System</string>
+    <string name="size">Kích thước</string>
+    <string name="system">Hệ thống</string>
     <string name="rating">Phản hồi</string>
     <string name="rating_message">Nếu bạn thích trò chơi này, hãy gửi phản hồi cho chúng tôi. Nhận xét của bạn sẽ giúp chúng tôi rất nhiều.</string>
     <string name="used_software_text">Trò chơi này sử dụng các phần mềm bên thứ ba sau:</string>
@@ -89,7 +89,7 @@
     <string name="open_menu">Mở menu</string>
     <string name="close_menu">Đóng menu</string>
     <string name="delete_all">Xóa tất cả</string>
-    <string name="themes">Themes</string>
+    <string name="themes">Chủ đề</string>
     <string name="delete_all_message">Xóa tất cả các sự kiện vĩnh viễn.</string>
     <string name="all_mines_disabled">Đã phá hết mìn.</string>
     <string name="desc_convered_area">Ô đã mở</string>

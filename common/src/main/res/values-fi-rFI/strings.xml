@@ -30,8 +30,8 @@
     <string name="settings_gameplay">Pelattavuus</string>
     <string name="settings_accessibility">Esteettömyys</string>
     <string name="settings_large_areas">Käytä suuria alueita</string>
-    <string name="size">Size</string>
-    <string name="system">System</string>
+    <string name="size">Koko</string>
+    <string name="system">Järjestelmä</string>
     <string name="rating">Lähetä palautetta</string>
     <string name="rating_message">Mikäli pidät sovelluksesta, jätä siitä arvostelu. Tästä on meille paljon apua.</string>
     <string name="used_software_text">Tämä peli käyttää seuraavien kolmansien osapuolten ohjelmistoa:</string>
@@ -89,7 +89,7 @@
     <string name="open_menu">Avaa valikko</string>
     <string name="close_menu">Sulje valikko</string>
     <string name="delete_all">Poista kaikki</string>
-    <string name="themes">Themes</string>
+    <string name="themes">Teemat</string>
     <string name="delete_all_message">Poistetaanko kaikki tapahtumat pysyvästi.</string>
     <string name="all_mines_disabled">Kaikki miinat poistettiin käytöstä.</string>
     <string name="desc_convered_area">Peitetty alue</string>

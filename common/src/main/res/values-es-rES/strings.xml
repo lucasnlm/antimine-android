@@ -30,8 +30,8 @@
     <string name="settings_gameplay">Jugabilidad</string>
     <string name="settings_accessibility">Accesibilidad</string>
     <string name="settings_large_areas">Usar áreas grandes</string>
-    <string name="size">Size</string>
-    <string name="system">System</string>
+    <string name="size">Tamaño</string>
+    <string name="system">Sistema</string>
     <string name="rating">Comentarios</string>
     <string name="rating_message">Si te gusta este juego, por favor danos un comentario. Nos ayudará mucho.</string>
     <string name="used_software_text">Este juego utiliza el siguiente software de terceros:</string>
@@ -89,7 +89,7 @@
     <string name="open_menu">Abra menú</string>
     <string name="close_menu">Cerrar menú</string>
     <string name="delete_all">Borrar todo</string>
-    <string name="themes">Themes</string>
+    <string name="themes">Tema</string>
     <string name="delete_all_message">Borrar todos los eventos permanentemente.</string>
     <string name="all_mines_disabled">Todas las minas fueron desactivadas.</string>
     <string name="desc_convered_area">Área cubierta</string>

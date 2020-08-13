@@ -30,8 +30,8 @@
     <string name="settings_gameplay">ゲームプレイ</string>
     <string name="settings_accessibility">アクセシビリティ</string>
     <string name="settings_large_areas">範囲を広くする</string>
-    <string name="size">Size</string>
-    <string name="system">System</string>
+    <string name="size">サイズ</string>
+    <string name="system">システム</string>
     <string name="rating">フィードバック</string>
     <string name="rating_message">もしこのゲームを気に入ったなら、フィードバックをお願いします。私たちへの助けになるはずです。</string>
     <string name="used_software_text">このゲームは、以下のサードパーティーソフトウェアを使用しています:</string>
@@ -89,7 +89,7 @@
     <string name="open_menu">メニューを開く</string>
     <string name="close_menu">メニューを閉じる</string>
     <string name="delete_all">すべて削除</string>
-    <string name="themes">Themes</string>
+    <string name="themes">テーマ</string>
     <string name="delete_all_message">すべてのイベントを永久的に削除します。</string>
     <string name="all_mines_disabled">すべての地雷が無効になりました。</string>
     <string name="desc_convered_area">カバーされたエリア</string>
