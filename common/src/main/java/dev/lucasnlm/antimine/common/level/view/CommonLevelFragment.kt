@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.common.level.view
 
-import android.util.TypedValue
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -30,35 +29,18 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
         }
 
     protected fun calcHorizontalPadding(boardWidth: Int): Int {
-        val context = requireContext()
-        val displayMetrics = context.resources.displayMetrics
-
-        val width = displayMetrics.widthPixels
+        val width = requireView().measuredWidth
         val recyclerViewWidth = (dimensionRepository.areaSize() * boardWidth)
         val separatorsWidth = (dimensionRepository.areaSeparator() * (boardWidth - 1))
         return ((width - recyclerViewWidth - separatorsWidth) / 2).coerceAtLeast(0.0f).toInt()
     }
 
     protected fun calcVerticalPadding(boardHeight: Int): Int {
-        val context = requireContext()
-        val displayMetrics = context.resources.displayMetrics
-
-        val typedValue = TypedValue()
-        val actionBarHeight = if (context.theme.resolveAttribute(android.R.attr.actionBarSize, typedValue, true)) {
-            TypedValue.complexToDimensionPixelSize(typedValue.data, resources.displayMetrics)
-        } else {
-            0
-        }
-        val resourceId: Int = resources.getIdentifier("navigation_bar_height", "dimen", "android")
-        val navigationHeight = if (resourceId > 0) {
-            resources.getDimensionPixelSize(resourceId)
-        } else 0
-
-        val height = displayMetrics.heightPixels
+        val height = requireView().measuredHeight
         val recyclerViewHeight = (dimensionRepository.areaSize() * boardHeight)
         val separatorsHeight = (2 * dimensionRepository.areaSeparator() * (boardHeight - 1))
 
-        val calculatedHeight = (height - actionBarHeight - navigationHeight - recyclerViewHeight - separatorsHeight)
+        val calculatedHeight = (height - recyclerViewHeight - separatorsHeight)
 
         return (calculatedHeight / 2).coerceAtLeast(0.0f).toInt()
     }

@@ -83,7 +83,7 @@ class PreferencesRepositoryTest {
     }
 
     @Test
-    fun testMigrationLargeArea() {
+    fun testMigrationLargeAreaOn() {
         val preferenceManager = TestPreferenceManager()
         preferenceManager.putBoolean("preference_large_area", true)
         assertTrue(preferenceManager.values["preference_large_area"] as Boolean)
@@ -100,6 +100,18 @@ class PreferencesRepositoryTest {
         val preferencesRepository = PreferencesRepository(preferenceManager)
 
         assertTrue(preferenceManager.values["preference_large_area"] == null)
-        assertEquals(50, preferencesRepository.getInt("preference_area_size", 50))
+        assertEquals(50, preferencesRepository.getInt("preference_area_size", -1))
+    }
+
+    @Test
+    fun testMigrationLargeAreaFalse() {
+        val preferenceManager = TestPreferenceManager()
+        preferenceManager.putBoolean("preference_large_area", false)
+        assertEquals(false, preferenceManager.values["preference_large_area"] as Boolean)
+
+        val preferencesRepository = PreferencesRepository(preferenceManager)
+
+        assertTrue(preferenceManager.values["preference_large_area"] == null)
+        assertEquals(50, preferencesRepository.getInt("preference_area_size", -1))
     }
 }

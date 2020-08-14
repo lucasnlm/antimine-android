@@ -32,10 +32,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:drawableStart="@drawable/timer"
-            android:drawableLeft="@drawable/timer"
             android:drawablePadding="8dp"
-            android:drawableTint="?android:attr/textColorPrimary"
             android:gravity="center_vertical"
             android:includeFontPadding="false"
             android:minEms="2"
@@ -51,17 +48,17 @@
             ads:layout_constraintTop_toTopOf="@id/menu"
             tools:targetApi="m"
             tools:text="10:00"
-            tools:visibility="visible" />
+            tools:visibility="visible"
+            ads:drawableTint="?android:attr/textColorPrimary"
+            ads:drawableStartCompat="@drawable/timer"
+            ads:drawableLeftCompat="@drawable/timer" />
 
         <TextView
             android:id="@+id/minesCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:drawableStart="@drawable/mine"
-            android:drawableLeft="@drawable/mine"
             android:drawablePadding="8dp"
-            android:drawableTint="?android:attr/textColorPrimary"
             android:gravity="center_vertical"
             android:includeFontPadding="false"
             android:minEms="3"
@@ -76,7 +73,9 @@
             ads:layout_constraintTop_toTopOf="@id/menu"
             tools:targetApi="m"
             tools:text="99"
-            tools:visibility="visible" />
+            tools:visibility="visible"
+            ads:drawableStartCompat="@drawable/mine"
+            ads:drawableTint="?android:attr/textColorPrimary" />
 
         <ImageView
             android:id="@+id/newGame"
