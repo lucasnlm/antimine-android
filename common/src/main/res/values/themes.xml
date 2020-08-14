@@ -58,12 +58,14 @@
         <item name="colorPrimary">#19360d</item>
         <item name="colorPrimaryDark">#001000</item>
         <item name="colorAccent">#53b529</item>
+        <item name="android:background">#FFFFFF</item>
     </style>
 
     <style name="CustomGardenTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorPrimary">#19360d</item>
         <item name="colorPrimaryDark">#001000</item>
         <item name="colorAccent">#53b529</item>
+        <item name="android:background">#FFFFFF</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

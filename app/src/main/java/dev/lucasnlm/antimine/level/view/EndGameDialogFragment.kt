@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
@@ -55,7 +56,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                 .from(context)
                 .inflate(R.layout.dialog_end_game, null, false)
                 .apply {
-                    val titleEmoji: String
+                    val titleEmoji: Int
                     val title: String
                     val message: String
 
@@ -79,14 +80,14 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
 
                     findViewById<TextView>(R.id.title).text = title
                     findViewById<TextView>(R.id.subtitle).text = message
-                    findViewById<TextView>(R.id.title_emoji).apply {
-                        text = titleEmoji
+                    findViewById<ImageView>(R.id.title_emoji).apply {
+                        setImageResource(titleEmoji)
                         setOnClickListener {
-                            text = when {
-                                !hasValidData -> endGameViewModel.randomNeutralEmoji(text.toString())
-                                isVictory -> endGameViewModel.randomVictoryEmoji(text.toString())
-                                else -> endGameViewModel.randomGameOverEmoji(text.toString())
-                            }
+                            setImageResource(when {
+                                !hasValidData -> endGameViewModel.randomNeutralEmoji()
+                                isVictory -> endGameViewModel.randomVictoryEmoji()
+                                else -> endGameViewModel.randomGameOverEmoji()
+                            })
                         }
                     }
                 }

@@ -1,38 +1,55 @@
 package dev.lucasnlm.antimine.level.viewmodel
 
 import android.content.Context
-import android.graphics.Paint
-import android.os.Build
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.R
 
 class EngGameDialogViewModel : ViewModel() {
-    private val paint: Paint = Paint()
 
-    private fun checkGlyphAvailability(glyph: String): Boolean {
-        return if (Build.VERSION.SDK_INT >= 23) {
-            paint.hasGlyph(glyph)
-        } else {
-            true
-        }
-    }
-
-    private fun List<String>.safeRandomEmoji(except: String? = null, fallback: String = "\uD83D\uDCA3") =
-        this.filter { it != except && checkGlyphAvailability(it) }
+    private fun List<Int>.safeRandomEmoji(
+        except: Int? = null,
+        fallback: Int = R.drawable.emoji_smiling_face_with_sunglasses
+    ) = this.filter { it != except }
             .ifEmpty { listOf(fallback) }
             .random()
 
-    fun randomVictoryEmoji(except: String? = null) = listOf(
-        "\uD83D\uDE00", "\uD83D\uDE0E", "\uD83D\uDE1D", "\uD83E\uDD73", "\uD83D\uDE06"
+    fun randomVictoryEmoji(except: Int? = null) = listOf(
+        R.drawable.emoji_beaming_face_with_smiling_eyes,
+        R.drawable.emoji_astonished_face,
+        R.drawable.emoji_cowboy_hat_face,
+        R.drawable.emoji_face_with_tongue,
+        R.drawable.emoji_grimacing_face,
+        R.drawable.emoji_grinning_face,
+        R.drawable.emoji_grinning_squinting_face,
+        R.drawable.emoji_smiling_face_with_sunglasses,
+        R.drawable.emoji_squinting_face_with_tongue,
+        R.drawable.emoji_partying_face,
+        R.drawable.emoji_clapping_hands,
+        R.drawable.emoji_triangular_flag
     ).safeRandomEmoji(except)
 
-    fun randomNeutralEmoji(except: String? = null) = listOf(
-        "\uD83D\uDE01", "\uD83E\uDD14", "\uD83D\uDE42", "\uD83D\uDE09"
+    fun randomNeutralEmoji(except: Int? = null) = listOf(
+        R.drawable.emoji_grimacing_face,
+        R.drawable.emoji_smiling_face_with_sunglasses,
+        R.drawable.emoji_triangular_flag
     ).safeRandomEmoji(except)
 
-    fun randomGameOverEmoji(except: String? = null) = listOf(
-        "\uD83D\uDE10", "\uD83D\uDE44", "\uD83D\uDE25", "\uD83D\uDE13", "\uD83D\uDE31",
-        "\uD83E\uDD2C", "\uD83E\uDD15", "\uD83D\uDE16", "\uD83D\uDCA3", "\uD83D\uDE05"
+    fun randomGameOverEmoji(except: Int? = null) = listOf(
+        R.drawable.emoji_anguished_face,
+        R.drawable.emoji_astonished_face,
+        R.drawable.emoji_bomb,
+        R.drawable.emoji_confounded_face,
+        R.drawable.emoji_crying_face,
+        R.drawable.emoji_disappointed_face,
+        R.drawable.emoji_disguised_face,
+        R.drawable.emoji_dizzy_face,
+        R.drawable.emoji_downcast_face_with_sweat,
+        R.drawable.emoji_exploding_head,
+        R.drawable.emoji_face_with_head_bandage,
+        R.drawable.emoji_face_with_symbols_on_mouth,
+        R.drawable.emoji_collision,
+        R.drawable.emoji_sad_but_relieved_face
+
     ).safeRandomEmoji(except)
 
     fun messageTo(context: Context, time: Long, isVictory: Boolean): String =
