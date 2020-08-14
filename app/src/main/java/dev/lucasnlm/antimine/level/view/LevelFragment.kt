@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.common.R
@@ -83,7 +84,7 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        GlobalScope.launch {
+        lifecycleScope.launchWhenCreated {
             val loadGameUid = checkLoadGameDeepLink()
             val newGameDeepLink = checkNewGameDeepLink()
             val retryDeepLink = checkRetryGameDeepLink()

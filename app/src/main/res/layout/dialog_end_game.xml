@@ -7,20 +7,19 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <androidx.emoji.widget.EmojiTextView
+    <ImageView
         android:id="@+id/title_emoji"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FF000000"
-        android:textSize="52sp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:background="?selectableItemBackgroundBorderless"
         android:clickable="true"
         android:focusable="true"
         android:importantForAccessibility="no"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="😥" />
+        tools:src="@drawable/emoji_smiling_face_with_sunglasses" />
 
     <TextView
         android:id="@+id/title"
@@ -40,7 +39,7 @@
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="@string/you_lost"
         android:textSize="14sp"
         android:textAlignment="center"

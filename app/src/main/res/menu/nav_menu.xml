@@ -41,7 +41,7 @@
         <item
             android:id="@+id/previous_games"
             android:checkable="false"
-            android:icon="@drawable/calendar"
+            android:icon="@drawable/old_games"
             android:title="@string/previous_games" />
 
         <item
