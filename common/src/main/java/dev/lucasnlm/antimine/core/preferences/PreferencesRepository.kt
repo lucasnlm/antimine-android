@@ -121,6 +121,7 @@ class PreferencesRepository(
         getInt(PREFERENCE_PROGRESSIVE_VALUE, 0)
 
     private fun migrateOldPreferences() {
+        // Migrate Double Click to the new Control settings
         if (preferencesManager.contains(PREFERENCE_OLD_DOUBLE_CLICK)) {
             if (getBoolean(PREFERENCE_OLD_DOUBLE_CLICK, false)) {
                 useControlStyle(ControlStyle.DoubleClick)
@@ -129,9 +130,18 @@ class PreferencesRepository(
             preferencesManager.removeKey(PREFERENCE_OLD_DOUBLE_CLICK)
         }
 
+        // Migrate Large Area to Custom Area size
         if (preferencesManager.contains(PREFERENCE_OLD_LARGE_AREA)) {
-            preferencesManager.putInt(PREFERENCE_AREA_SIZE, 63)
+            if (getBoolean(PREFERENCE_OLD_LARGE_AREA, false)) {
+                preferencesManager.putInt(PREFERENCE_AREA_SIZE, 63)
+            } else {
+                preferencesManager.putInt(PREFERENCE_AREA_SIZE, 50)
+            }
             preferencesManager.removeKey(PREFERENCE_OLD_LARGE_AREA)
+        }
+
+        if (!preferencesManager.contains(PREFERENCE_AREA_SIZE)) {
+            preferencesManager.putInt(PREFERENCE_AREA_SIZE, 50)
         }
     }
 
