@@ -58,7 +58,6 @@ class ControlViewModel @ViewModelInject constructor(
         )
     }
 
-
     override suspend fun mapEventToState(event: ControlEvent) = flow {
         if (event is ControlEvent.SelectControlStyle) {
             val controlStyle = event.controlStyle

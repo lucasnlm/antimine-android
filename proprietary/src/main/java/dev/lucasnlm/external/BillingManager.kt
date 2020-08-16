@@ -14,7 +14,7 @@ class BillingManager(
 ) : IBillingManager {
     private val purchaseUpdateListener =
         PurchasesUpdatedListener { billingResult, purchases ->
-            if (billingResult.responseCode ==  BillingClient.BillingResponseCode.OK) {
+            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                 // The BillingClient is ready. You can query purchases here.
             }
         }
@@ -29,7 +29,7 @@ class BillingManager(
     override fun start() {
         billingClient.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(billingResult: BillingResult) {
-                if (billingResult.responseCode ==  BillingClient.BillingResponseCode.OK) {
+                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                     // The BillingClient is ready. You can query purchases here.
                 }
             }
@@ -48,9 +48,9 @@ class BillingManager(
 
         val details = billingClient.querySkuDetails(skuDetailsParams)
 
-print(details.toString())
+        print(details.toString())
 
-        //billingClient.launchBillingFlow(activity, flowParams)
+        // billingClient.launchBillingFlow(activity, flowParams)
     }
 
     companion object {

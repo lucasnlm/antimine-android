@@ -6,12 +6,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dev.lucasnlm.antimine.common.BuildConfig
 import dev.lucasnlm.antimine.common.level.repository.DimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
-import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
-import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
-import dev.lucasnlm.antimine.core.analytics.ProdAnalyticsManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.preferences.PreferencesManager
 import dev.lucasnlm.antimine.core.preferences.PreferencesRepository

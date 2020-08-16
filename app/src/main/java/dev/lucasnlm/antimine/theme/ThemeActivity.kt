@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.theme
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -10,7 +9,6 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
-import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.view.ThemeAdapter
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel

@@ -1,8 +1,5 @@
 package dev.lucasnlm.antimine.common.level.view
 
-import android.content.Context
-import android.os.Bundle
-import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels

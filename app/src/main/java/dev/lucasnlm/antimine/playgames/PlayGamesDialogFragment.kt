@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -20,7 +19,6 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesEvent
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesViewModel
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.filter
 
 @AndroidEntryPoint
 class PlayGamesDialogFragment : DialogFragment() {
