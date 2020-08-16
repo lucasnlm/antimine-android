@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 800041
-        versionName '8.0.4'
+        versionCode 800051
+        versionName '8.0.5'
         minSdkVersion 16
         targetSdkVersion 30
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -41,6 +41,7 @@ dependencies {
     // Dependencies must be hardcoded to support F-droid
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':external')
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -61,8 +62,8 @@ dependencies {
     kapt 'com.google.dagger:hilt-android-compiler:2.28.1-alpha'
     testImplementation 'com.google.dagger:hilt-android-testing:2.28.1-alpha'
     kaptTest 'com.google.dagger:hilt-android-compiler:2.28.1-alpha'
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01"
-    kapt "androidx.hilt:hilt-compiler:1.0.0-alpha01"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02"
+    kapt "androidx.hilt:hilt-compiler:1.0.0-alpha02"
 
     // Room
     api 'androidx.room:room-runtime:2.2.5'

@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 800041
-        versionName '8.0.4'
+        versionCode 800051
+        versionName '8.0.5'
         minSdkVersion 16
         targetSdkVersion 30
         multiDexEnabled true
@@ -93,6 +93,7 @@ dependencies {
     // Dependencies must be hardcoded to support F-droid
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':external')
     implementation project(':common')
 
     googleImplementation project(':proprietary')

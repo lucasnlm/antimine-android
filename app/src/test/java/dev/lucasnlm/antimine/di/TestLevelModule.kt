@@ -35,5 +35,5 @@ class TestLevelModule {
     fun provideMinefieldRepository(): IMinefieldRepository = FixedMinefieldRepository()
 
     @Provides
-    fun provideHapticFeedbackInteractor(): IHapticFeedbackManager = DisabledHapticFeedbackManager()
+    fun provideHapticFeedbackManager(): IHapticFeedbackManager = DisabledHapticFeedbackManager()
 }

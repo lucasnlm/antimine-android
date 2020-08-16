@@ -9,6 +9,7 @@ import android.os.Handler
 import android.text.format.DateUtils
 import android.view.View
 import android.view.WindowManager
+import android.widget.FrameLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
@@ -16,6 +17,7 @@ import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.view.GravityCompat
+import androidx.core.view.doOnLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
@@ -39,10 +41,12 @@ import dev.lucasnlm.antimine.history.HistoryActivity
 import dev.lucasnlm.antimine.instant.InstantAppManager
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
+import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.theme.ThemeActivity
+import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_game.minesCount
 import kotlinx.android.synthetic.main.activity_game.timer
@@ -65,6 +69,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     @Inject
     lateinit var savesRepository: ISavesRepository
+
+    @Inject
+    lateinit var playGamesManager: IPlayGamesManager
 
     val viewModel: GameViewModel by viewModels()
     private val shareViewModel: ShareViewModel by viewModels()
@@ -90,7 +97,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         bindToolbar()
         bindDrawer()
         bindNavigationMenu()
-        loadGameFragment()
+
+        findViewById<FrameLayout>(R.id.levelContainer).doOnLayout {
+            loadGameFragment()
+        }
 
         if (instantAppManager.isEnabled()) {
             bindInstantApp()
@@ -201,6 +211,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
                 analyticsManager.sentEvent(Analytics.Resume)
             }
+
+            silentGooglePlayLogin()
         }
     }
 
@@ -327,6 +339,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 R.id.previous_games -> openSaveHistory()
                 R.id.stats -> openStats()
                 R.id.install_new -> installFromInstantApp()
+                R.id.play_games -> googlePlay()
                 else -> handled = false
             }
 
@@ -338,6 +351,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
 
         navigationView.menu.findItem(R.id.share_now).isVisible = instantAppManager.isNotEnabled()
+
+        if (!playGamesManager.hasGooglePlayGames()) {
+            navigationView.menu.removeGroup(R.id.play_games_group)
+        }
     }
 
     private fun checkUseCount() {
@@ -369,21 +386,21 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun loadGameFragment() {
-        val fragmentManager = supportFragmentManager
+        supportFragmentManager.apply {
+            popBackStack()
 
-        fragmentManager.popBackStack()
+            findFragmentById(R.id.levelContainer)?.let { it ->
+                beginTransaction().apply {
+                    remove(it)
+                    commitAllowingStateLoss()
+                }
+            }
 
-        fragmentManager.findFragmentById(R.id.levelContainer)?.let { it ->
-            fragmentManager.beginTransaction().apply {
-                remove(it)
+            beginTransaction().apply {
+                replace(R.id.levelContainer, LevelFragment())
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 commitAllowingStateLoss()
             }
-        }
-
-        fragmentManager.beginTransaction().apply {
-            replace(R.id.levelContainer, LevelFragment())
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            commitAllowingStateLoss()
         }
     }
 
@@ -649,6 +666,32 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
+    private fun silentGooglePlayLogin() {
+        if (playGamesManager.hasGooglePlayGames()) {
+            playGamesManager.silentLogin(this)
+            invalidateOptionsMenu()
+        }
+    }
+
+    private fun googlePlay() {
+        if (playGamesManager.isLogged()) {
+            PlayGamesDialogFragment().show(supportFragmentManager, PlayGamesDialogFragment.TAG)
+        } else {
+            playGamesManager.getLoginIntent()?.let {
+                startActivityForResult(it, GOOGLE_PLAY_REQUEST_CODE)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == GOOGLE_PLAY_REQUEST_CODE) {
+            playGamesManager.handleLoginResult(data)
+            invalidateOptionsMenu()
+        }
+    }
+
     companion object {
         const val PREFERENCE_FIRST_USE = "preference_first_use"
         const val PREFERENCE_USE_COUNT = "preference_use_count"
@@ -656,6 +699,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
         const val IA_REFERRER = "InstallApiActivity"
         const val IA_REQUEST_CODE = 5
+        const val GOOGLE_PLAY_REQUEST_CODE = 6
 
         const val MIN_USAGES_TO_RATING = 4
     }

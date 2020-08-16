@@ -1,1 +1,2 @@
 include ':app', ':wear', ':common', ':proprietary', ':foss'
+include ':external'

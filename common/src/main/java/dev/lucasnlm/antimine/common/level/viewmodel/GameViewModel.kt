@@ -208,7 +208,7 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     suspend fun saveGame() {
-        if (initialized && gameController.hasMines) {
+        if (gameController.hasMines) {
             val id = savesRepository.saveGame(
                 gameController.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
             )

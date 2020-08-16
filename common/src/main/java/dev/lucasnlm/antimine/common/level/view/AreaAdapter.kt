@@ -61,10 +61,6 @@ class AreaAdapter(
         return AreaViewHolder(view).apply {
             view.setOnDoubleClickListener(object : GestureDetector.OnDoubleTapListener {
                 override fun onDoubleTap(e: MotionEvent?): Boolean {
-                    return false
-                }
-
-                override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
                     val position = adapterPosition
                     return when {
                         position == RecyclerView.NO_POSITION -> {
@@ -83,8 +79,13 @@ class AreaAdapter(
                     }
                 }
 
+                override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
+                    return false
+                }
+
                 override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-                    if (preferencesRepository.controlStyle() == ControlStyle.DoubleClick) {
+                    val style = preferencesRepository.controlStyle()
+                    if (style == ControlStyle.DoubleClick || style == ControlStyle.DoubleClickInverted) {
                         val position = adapterPosition
                         if (position == RecyclerView.NO_POSITION) {
                             Log.d(TAG, "Item no longer exists.")
@@ -115,7 +116,8 @@ class AreaAdapter(
             }
 
             itemView.setOnClickListener {
-                if (preferencesRepository.controlStyle() != ControlStyle.DoubleClick) {
+                val style = preferencesRepository.controlStyle()
+                if (style != ControlStyle.DoubleClick && style != ControlStyle.DoubleClickInverted) {
                     val position = adapterPosition
                     if (position == RecyclerView.NO_POSITION) {
                         Log.d(TAG, "Item no longer exists.")

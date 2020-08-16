@@ -91,13 +91,13 @@ class GameControllerTest {
 
             val firstMine = controller.field.first { it.hasMine }
             assertEquals(
-                listOf(4, 5, 13, 33, 27, 36, 38, 41, 19, 29, 39, 49, 67, 59, 70, 86, 81, 87, 92, 91),
+                listOf(3, 4, 32, 42, 36, 45, 52, 28, 55, 47, 65, 39, 73, 74, 59, 85, 91, 95, 88, 90),
                 controller.takeExplosionRadius(firstMine).map { it.id }.toList()
             )
 
             val midMine = controller.field.filter { it.hasMine }.take(controller.getMinesCount() / 2).last()
             assertEquals(
-                listOf(39, 29, 38, 49, 19, 59, 27, 36, 67, 5, 87, 4, 86, 33, 13, 41, 92, 81, 70, 91),
+                listOf(52, 42, 32, 73, 74, 55, 45, 65, 91, 85, 36, 90, 95, 3, 47, 4, 28, 88, 59, 39),
                 controller.takeExplosionRadius(midMine).map { it.id }.toList()
             )
         }
@@ -308,6 +308,34 @@ class GameControllerTest {
                 assertFalse(at(3).mark.isFlag())
                 assertTrue(at(3).isCovered)
                 fakeLongPress(3)
+                assertFalse(at(3).isCovered)
+            }
+        }
+    }
+
+    @Test
+    fun testControlFirstActionWithInvertedDoubleClick() {
+        withGameController { controller ->
+            controller.run {
+                updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClickInverted))
+                assertTrue(at(3).isCovered)
+                fakeDoubleClick(3)
+                assertTrue(at(3).isCovered)
+                assertTrue(at(3).mark.isFlag())
+                fakeDoubleClick(3)
+                assertFalse(at(3).mark.isFlag())
+                assertTrue(at(3).isCovered)
+            }
+        }
+    }
+
+    @Test
+    fun testControlSecondActionWithInvertedDoubleClick() {
+        withGameController { controller ->
+            controller.run {
+                updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClickInverted))
+                assertTrue(at(3).isCovered)
+                fakeSingleClick(3)
                 assertFalse(at(3).isCovered)
             }
         }

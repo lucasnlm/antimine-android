@@ -28,6 +28,7 @@ class EndGameDialogViewModel @ViewModelInject constructor(
         R.drawable.emoji_grinning_squinting_face,
         R.drawable.emoji_smiling_face_with_sunglasses,
         R.drawable.emoji_squinting_face_with_tongue,
+        R.drawable.emoji_hugging_face,
         R.drawable.emoji_partying_face,
         R.drawable.emoji_clapping_hands,
         R.drawable.emoji_triangular_flag

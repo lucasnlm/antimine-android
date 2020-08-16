@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.theme
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -9,6 +10,8 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
+import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
+import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.view.ThemeAdapter
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
 import kotlinx.android.synthetic.main.activity_theme.*
@@ -39,6 +42,16 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 if (usingTheme.id != it.current.id) {
                     recreate()
                 }
+            }
+        }
+
+        showUnlockDialog()
+    }
+
+    private fun showUnlockDialog() {
+        if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
+            SupportAppDialogFragment().apply {
+                show(supportFragmentManager, SupportAppDialogFragment.TAG)
             }
         }
     }

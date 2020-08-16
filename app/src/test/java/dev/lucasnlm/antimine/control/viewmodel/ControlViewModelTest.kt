@@ -16,7 +16,7 @@ class ControlViewModelTest : IntentViewModelTest() {
     val rule = InstantTaskExecutorRule()
 
     private fun ControlViewModel.selectedControlStyle() = singleState().let {
-        it.gameControls[it.selectedId].controlStyle
+        it.gameControls[it.selectedIndex].controlStyle
     }
 
     @Test

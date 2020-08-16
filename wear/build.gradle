@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 800041
-        versionName '8.0.4'
+        versionCode 800051
+        versionName '8.0.5'
         applicationId 'dev.lucasnlm.antimine'
         minSdkVersion 23
         targetSdkVersion 30
@@ -67,7 +67,7 @@ dependencies {
 
     // Dagger
     implementation 'com.google.dagger:hilt-android:2.28.1-alpha'
-    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01'
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
     kapt 'com.google.dagger:hilt-android-compiler:2.28.1-alpha'
     testImplementation 'com.google.dagger:hilt-android-testing:2.28.1-alpha'
     kaptTest 'com.google.dagger:hilt-android-compiler:2.28.1-alpha'

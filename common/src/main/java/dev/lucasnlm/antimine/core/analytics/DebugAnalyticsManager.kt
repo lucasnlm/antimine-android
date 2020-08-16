@@ -5,12 +5,18 @@ import android.util.Log
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 
 class DebugAnalyticsManager : IAnalyticsManager {
-    override fun setup(context: Context, userProperties: Map<String, String>) {
-        Log.d(TAG, "Setup Analytics using $userProperties")
+    override fun setup(context: Context, properties: Map<String, String>) {
+        if (properties.isNotEmpty()) {
+            Log.d(TAG, "Setup Analytics using $properties")
+        }
     }
 
     override fun sentEvent(event: Analytics) {
-        Log.d(TAG, "Sent event: '${event.title}' with ${event.extra}")
+        if (event.extra.isNotEmpty()) {
+            Log.d(TAG, "Sent event: '${event.name}' with ${event.extra}")
+        } else {
+            Log.d(TAG, "Sent event: '${event.name}'")
+        }
     }
 
     companion object {

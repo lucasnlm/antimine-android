@@ -1,5 +1,8 @@
 package dev.lucasnlm.antimine.common.level.view
 
+import android.content.Context
+import android.os.Bundle
+import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -39,9 +42,7 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
         val height = requireView().measuredHeight
         val recyclerViewHeight = (dimensionRepository.areaSize() * boardHeight)
         val separatorsHeight = (2 * dimensionRepository.areaSeparator() * (boardHeight - 1))
-
         val calculatedHeight = (height - recyclerViewHeight - separatorsHeight)
-
         return (calculatedHeight / 2).coerceAtLeast(0.0f).toInt()
     }
 }

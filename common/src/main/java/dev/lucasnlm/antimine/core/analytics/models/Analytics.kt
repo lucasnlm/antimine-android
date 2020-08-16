@@ -5,7 +5,7 @@ import dev.lucasnlm.antimine.common.level.models.Score
 import dev.lucasnlm.antimine.common.level.models.Minefield
 
 sealed class Analytics(
-    val title: String,
+    val name: String,
     val extra: Map<String, String> = mapOf()
 ) {
     object Open : Analytics("Open game")
