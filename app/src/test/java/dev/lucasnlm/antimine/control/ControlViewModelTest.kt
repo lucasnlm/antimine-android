@@ -1,20 +1,17 @@
-package dev.lucasnlm.antimine.control.viewmodel
+package dev.lucasnlm.antimine.control
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import dev.lucasnlm.antimine.IntentViewModelTest
+import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
+import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
 import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Assert.assertEquals
-import org.junit.Rule
 import org.junit.Test
 
 class ControlViewModelTest : IntentViewModelTest() {
-    @get:Rule
-    val rule = InstantTaskExecutorRule()
-
     private fun ControlViewModel.selectedControlStyle() = singleState().let {
         it.gameControls[it.selectedIndex].controlStyle
     }
@@ -36,7 +33,11 @@ class ControlViewModelTest : IntentViewModelTest() {
         }
 
         val viewModel = ControlViewModel(preferenceRepository)
-        viewModel.sendEvent(ControlEvent.SelectControlStyle(ControlStyle.FastFlag))
+        viewModel.sendEvent(
+            ControlEvent.SelectControlStyle(
+                ControlStyle.FastFlag
+            )
+        )
         assertEquals(ControlStyle.FastFlag, viewModel.selectedControlStyle())
         verify { preferenceRepository.useControlStyle(ControlStyle.FastFlag) }
     }
