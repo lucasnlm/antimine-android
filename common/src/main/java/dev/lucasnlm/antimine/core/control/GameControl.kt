@@ -106,12 +106,3 @@ sealed class GameControl(
         }
     }
 }
-
-/**
- * A data class used to make feedback or analytics to an user action.
- */
-data class ActionFeedback(
-    val actionResponse: ActionResponse?,
-    val index: Int,
-    val multipleChanges: Boolean
-)
