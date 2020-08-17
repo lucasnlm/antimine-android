@@ -1,7 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.google.gms.google-services'
+
+if (System.getenv('IS_GOOGLE_BUILD')) {
+    apply plugin: 'com.google.gms.google-services'
+}
 
 android {
     compileSdkVersion 30

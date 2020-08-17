@@ -16,10 +16,20 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class HistoryViewModelTest : IntentViewModelTest() {
+    private val fakeMinefield = Minefield(9, 9, 9)
     private val allSaves = listOf(
-        Save(0, 100, 0L, 100L, Minefield(9, 9, 9), Difficulty.Beginner, FirstOpen.Unknown, SaveStatus.ON_GOING, listOf()),
-        Save(1, 200, 0L, 100L, Minefield(9, 9, 9), Difficulty.Beginner, FirstOpen.Unknown, SaveStatus.ON_GOING, listOf()),
-        Save(2, 300, 0L, 100L, Minefield(9, 9, 9), Difficulty.Beginner, FirstOpen.Unknown, SaveStatus.ON_GOING, listOf())
+        Save(
+            0, 1, 0L, 100L, fakeMinefield,
+            Difficulty.Beginner, FirstOpen.Unknown, SaveStatus.ON_GOING, listOf()
+        ),
+        Save(
+            1, 2, 0L, 100L, fakeMinefield,
+            Difficulty.Beginner, FirstOpen.Unknown, SaveStatus.ON_GOING, listOf()
+        ),
+        Save(
+            2, 3, 0L, 100L, fakeMinefield,
+            Difficulty.Beginner, FirstOpen.Unknown, SaveStatus.ON_GOING, listOf()
+        )
     )
 
     @Test

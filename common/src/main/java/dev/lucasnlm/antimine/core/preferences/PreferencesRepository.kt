@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.core.preferences
 
+import android.view.ViewConfiguration
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.core.control.ControlStyle
 
@@ -14,6 +15,8 @@ interface IPreferencesRepository {
 
     fun controlStyle(): ControlStyle
     fun useControlStyle(controlStyle: ControlStyle)
+
+    fun customLongPressTimeout(): Long
 
     fun themeId(): Long
     fun useTheme(themeId: Long)
@@ -93,6 +96,9 @@ class PreferencesRepository(
         putInt(PREFERENCE_CONTROL_STYLE, controlStyle.ordinal)
     }
 
+    override fun customLongPressTimeout(): Long =
+        getInt(PREFERENCE_LONG_PRESS_TIMEOUT, ViewConfiguration.getLongPressTimeout()).toLong()
+
     override fun themeId(): Long =
         getInt(PREFERENCE_CUSTOM_THEME, 0).toLong()
 
@@ -143,6 +149,10 @@ class PreferencesRepository(
         if (!preferencesManager.contains(PREFERENCE_AREA_SIZE)) {
             preferencesManager.putInt(PREFERENCE_AREA_SIZE, 50)
         }
+
+        if (!preferencesManager.contains(PREFERENCE_LONG_PRESS_TIMEOUT)) {
+            preferencesManager.putInt(PREFERENCE_LONG_PRESS_TIMEOUT, ViewConfiguration.getLongPressTimeout())
+        }
     }
 
     private companion object {
@@ -161,5 +171,6 @@ class PreferencesRepository(
         private const val PREFERENCE_STATS_BASE = "preference_stats_base"
         private const val PREFERENCE_OLD_LARGE_AREA = "preference_large_area"
         private const val PREFERENCE_PROGRESSIVE_VALUE = "preference_progressive_value"
+        private const val PREFERENCE_LONG_PRESS_TIMEOUT = "preference_long_press_timeout"
     }
 }

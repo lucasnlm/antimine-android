@@ -28,7 +28,9 @@ class AreaView : View {
     private lateinit var theme: AppTheme
 
     private val gestureDetector: GestureDetector by lazy {
-        GestureDetector(context, GestureDetector.SimpleOnGestureListener())
+        GestureDetector(context, GestureDetector.SimpleOnGestureListener()).apply {
+            setIsLongpressEnabled(false)
+        }
     }
 
     constructor(context: Context) : super(context)
@@ -39,6 +41,7 @@ class AreaView : View {
 
     init {
         isHapticFeedbackEnabled = true
+        isClickable = true
     }
 
     fun setOnDoubleClickListener(listener: GestureDetector.OnDoubleTapListener) {

@@ -244,10 +244,14 @@ class GameViewModel @ViewModelInject constructor(
             }
         }.also {
             onPostAction()
+
+            if (preferencesRepository.useHapticFeedback()) {
+                hapticFeedbackManager.longPressFeedback()
+            }
         }
     }
 
-    suspend fun onDoubleClickArea(index: Int) {
+    suspend fun onDoubleClick(index: Int) {
         gameController.doubleClick(index).flatMapConcat { (action, flow) ->
             onFeedbackAnalytics(action, index)
             flow
