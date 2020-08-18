@@ -2,77 +2,79 @@ package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Mark
-import dev.lucasnlm.antimine.common.level.models.StateUpdate
 
 class MinefieldHandler(
     private val field: MutableList<Area>,
     private val useQuestionMark: Boolean
 ) {
-    private var changedIndex: Int? = null
-    private var changes = 0
+    fun showAllMines() {
+        field.filter { it.hasMine && it.mark != Mark.Flag}
+            .forEach { field[it.id] = it.copy(isCovered = false) }
+    }
+
+    fun flagAllMines() {
+        field.filter { it.hasMine }
+            .forEach { field[it.id] = it.copy(mark = Mark.Flag) }
+
+    }
+
+    fun revealAllEmptyAreas() {
+        field.filterNot { it.hasMine }
+            .forEach { field[it.id] = it.copy(isCovered = false) }
+    }
 
     fun turnOffAllHighlighted() {
-        changes += field.filter { it.highlighted }.onEach { it.highlighted = false }.count()
+        field.filter { it.highlighted }
+            .forEach { field[it.id] = it.copy(highlighted = false) }
     }
 
     fun removeMarkAt(index: Int) {
         field.getOrNull(index)?.let {
-            changes++
-            changedIndex = index
-            it.mark = Mark.PurposefulNone
+            field[it.id] = it.copy(mark = Mark.PurposefulNone)
         }
     }
 
     fun switchMarkAt(index: Int) {
-        field.getOrNull(index)?.run {
-            if (isCovered) {
-                changes++
-                changedIndex = index
-                mark = when (mark) {
+        field.getOrNull(index)?.let {
+            if (it.isCovered) {
+                field[index] = it.copy(mark = when (it.mark) {
                     Mark.PurposefulNone, Mark.None -> Mark.Flag
                     Mark.Flag -> if (useQuestionMark) Mark.Question else Mark.None
                     Mark.Question -> Mark.None
-                }
+                })
             }
         }
     }
 
-    fun openAt(index: Int) {
+    fun openAt(index: Int, passive: Boolean, openNeighbors: Boolean = true) {
         field.getOrNull(index)?.run {
             if (isCovered) {
-                changedIndex = index
-                changes++
-                isCovered = false
-                mark = Mark.None
+                field[index] = copy(
+                    isCovered = false,
+                    mark = Mark.None,
+                    mistake = (!passive && hasMine) || (!hasMine && mark.isFlag())
+                )
 
-                if (hasMine) {
-                    mistake = true
-                } else if (minesAround == 0) {
-                    changes +=
-                        field.filterNeighborsOf(this)
-                            .filter { it.isCovered }
-                            .onEach {
-                                openAt(it.id)
-                            }.count()
+                if (!hasMine && minesAround == 0 && openNeighbors) {
+                    field.filterNeighborsOf(this)
+                        .filter { it.isCovered }
+                        .onEach {
+                            openAt(it.id, openNeighbors = true, passive = true)
+                        }.count()
                 }
             }
         }
     }
 
     fun highlightAt(index: Int) {
-        field.getOrNull(index)?.run {
-            when {
-                minesAround != 0 -> {
-                    changes++
-                    changedIndex = index
-                    highlighted = !highlighted
-                    changes += field.filterNeighborsOf(this)
-                        .filter { it.mark.isNone() && it.isCovered }
-                        .onEach { it.highlighted = !it.highlighted }
-                        .count()
+        field.getOrNull(index)?.let {
+            field[index] = it.copy(highlighted = it.minesAround != 0 && !it.highlighted)
+        }.also {
+            field.filterNeighborsOf(field[index])
+                .filter { it.mark.isNone() && it.isCovered }
+                .onEach { neighbor ->
+                    field[neighbor.id] = neighbor.copy(highlighted = true)
                 }
-                else -> 0
-            }
         }
     }
 
@@ -82,16 +84,14 @@ class MinefieldHandler(
                 val neighbors = field.filterNeighborsOf(this)
                 val flaggedCount = neighbors.count { it.mark.isFlag() }
                 if (flaggedCount >= minesAround) {
-                    changes++
-                    changes += neighbors
+                    neighbors
                         .filter { it.isCovered && it.mark.isNone() }
-                        .onEach { openAt(it.id) }
+                        .onEach { openAt(it.id, passive = false, openNeighbors = true) }
                         .count()
                 } else {
                     val coveredNeighbors = neighbors.filter { it.isCovered }
                     if (coveredNeighbors.count() == minesAround) {
-                        changes++
-                        changes += coveredNeighbors.filter {
+                        coveredNeighbors.filter {
                             it.mark.isNone()
                         }.onEach {
                             switchMarkAt(it.id)
@@ -103,18 +103,4 @@ class MinefieldHandler(
     }
 
     fun result(): List<Area> = field.toList()
-
-    fun getStateUpdate(): StateUpdate {
-        return when (changes) {
-            0 -> {
-                StateUpdate.None
-            }
-            1 -> {
-                changedIndex?.let(StateUpdate::Single) ?: StateUpdate.Multiple
-            }
-            else -> {
-                StateUpdate.Multiple
-            }
-        }
-    }
 }

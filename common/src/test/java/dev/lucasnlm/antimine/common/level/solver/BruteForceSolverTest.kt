@@ -25,13 +25,13 @@ class BruteForceSolverTest {
     @Test
     fun isSolvable() {
         handleMinefield { handler, minefield ->
-            handler.openAt(40)
+            handler.openAt(40, passive = false, openNeighbors = false)
             val bruteForceSolver = BruteForceSolver()
             assertTrue(bruteForceSolver.trySolve(minefield.toMutableList()))
         }
 
         handleMinefield { handler, minefield ->
-            handler.openAt(0)
+            handler.openAt(0, passive = false, openNeighbors = false)
             val bruteForceSolver = BruteForceSolver()
             assertFalse(bruteForceSolver.trySolve(minefield.toMutableList()))
         }
