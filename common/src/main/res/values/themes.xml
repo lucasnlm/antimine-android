@@ -26,14 +26,12 @@
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#9E9E9E</item>
         <item name="colorAccent">#D32F2F</item>
-        <item name="android:background">#FFFFFF</item>
     </style>
 
     <style name="CustomLightTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#9E9E9E</item>
         <item name="colorAccent">#D32F2F</item>
-        <item name="android:background">#FFFFFF</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -42,14 +40,26 @@
         <item name="colorPrimary">#212121</item>
         <item name="colorPrimaryDark">#212121</item>
         <item name="colorAccent">#FFFFFF</item>
-        <item name="android:background">#212121</item>
     </style>
 
     <style name="CustomDarkTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Dark">
         <item name="colorPrimary">#212121</item>
         <item name="colorPrimaryDark">#212121</item>
         <item name="colorAccent">#FFFFFF</item>
-        <item name="android:background">#212121</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="CustomAmoledTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">#FFFFFF</item>
+    </style>
+
+    <style name="CustomAmoledTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">#FFFFFF</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -58,14 +68,12 @@
         <item name="colorPrimary">#19360d</item>
         <item name="colorPrimaryDark">#001000</item>
         <item name="colorAccent">#53b529</item>
-        <item name="android:background">#FFFFFF</item>
     </style>
 
     <style name="CustomGardenTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorPrimary">#19360d</item>
         <item name="colorPrimaryDark">#001000</item>
         <item name="colorAccent">#53b529</item>
-        <item name="android:background">#FFFFFF</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -75,14 +83,12 @@
         <item name="colorPrimary">#01579b</item>
         <item name="colorPrimaryDark">#002f6c</item>
         <item name="colorAccent">#03a9f4</item>
-        <item name="android:background">#e1f5fe</item>
     </style>
 
     <style name="CustomMarineTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorPrimary">#01579b</item>
         <item name="colorPrimaryDark">#002f6c</item>
         <item name="colorAccent">#03a9f4</item>
-        <item name="android:background">#e1f5fe</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

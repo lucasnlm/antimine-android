@@ -39,8 +39,41 @@ object Themes {
         )
     )
 
-    val DarkTheme = AppTheme(
+    val AmoledTheme = AppTheme(
         id = 2L,
+        theme = R.style.CustomAmoledTheme,
+        themeNoActionBar = R.style.CustomAmoledTheme_NoActionBar,
+        palette = AreaPalette(
+            border = 0xFFFFFF,
+            background = 0x000000,
+            covered = 0x212121,
+            coveredOdd = 0x212121,
+            uncovered = 0x000000,
+            uncoveredOdd = 0x050505,
+            minesAround1 = 0xCCCCCC,
+            minesAround2 = 0xCCCCCC,
+            minesAround3 = 0xCCCCCC,
+            minesAround4 = 0xCCCCCC,
+            minesAround5 = 0xCCCCCC,
+            minesAround6 = 0xCCCCCC,
+            minesAround7 = 0xCCCCCC,
+            minesAround8 = 0xCCCCCC,
+            highlight = 0x212121,
+            focus = 0xD32F2F
+        ),
+        assets = Assets(
+            wrongFlag = R.drawable.flag,
+            flag = R.drawable.flag,
+            questionMark = R.drawable.question,
+            toolbarMine = R.drawable.mine_low,
+            mine = R.drawable.mine_low,
+            mineExploded = R.drawable.mine_low,
+            mineLow = R.drawable.mine_low
+        )
+    )
+
+    val DarkTheme = AppTheme(
+        id = 3L,
         theme = R.style.CustomDarkTheme,
         themeNoActionBar = R.style.CustomDarkTheme_NoActionBar,
         palette = AreaPalette(
@@ -73,7 +106,7 @@ object Themes {
     )
 
     val GardenTheme = AppTheme(
-        id = 3L,
+        id = 4L,
         theme = R.style.CustomGardenTheme,
         themeNoActionBar = R.style.CustomGardenTheme_NoActionBar,
         palette = AreaPalette(
@@ -106,7 +139,7 @@ object Themes {
     )
 
     val ChessTheme = AppTheme(
-        id = 4L,
+        id = 5L,
         theme = R.style.CustomLightTheme,
         themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
         palette = AreaPalette(
@@ -139,7 +172,7 @@ object Themes {
     )
 
     val MarineTheme = AppTheme(
-        id = 5L,
+        id = 6L,
         theme = R.style.CustomMarineTheme,
         themeNoActionBar = R.style.CustomMarineTheme_NoActionBar,
         palette = AreaPalette(

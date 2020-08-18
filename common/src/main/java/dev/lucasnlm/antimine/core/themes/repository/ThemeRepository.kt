@@ -7,6 +7,7 @@ import dev.lucasnlm.antimine.core.themes.model.AreaPalette
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.core.themes.model.Assets
+import dev.lucasnlm.antimine.core.themes.repository.Themes.AmoledTheme
 import dev.lucasnlm.antimine.core.themes.repository.Themes.ChessTheme
 import dev.lucasnlm.antimine.core.themes.repository.Themes.DarkTheme
 import dev.lucasnlm.antimine.core.themes.repository.Themes.GardenTheme
@@ -33,7 +34,7 @@ class ThemeRepository(
     }
 
     override fun getAllThemes(): List<AppTheme> = listOf(
-        buildSystemTheme(), LightTheme, DarkTheme, GardenTheme, MarineTheme, ChessTheme
+        buildSystemTheme(), AmoledTheme, LightTheme, DarkTheme, GardenTheme, MarineTheme, ChessTheme
     )
 
     override fun setTheme(theme: AppTheme) {

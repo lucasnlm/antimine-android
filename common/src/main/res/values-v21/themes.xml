@@ -70,6 +70,30 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
+    <style name="CustomAmoledTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="android:windowBackground">#000000</item>
+        <item name="colorAccent">#FFFFFF</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="CustomAmoledTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="android:windowBackground">#000000</item>
+        <item name="colorAccent">#FFFFFF</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
     <style name="CustomGardenTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#FFFFFF</item>

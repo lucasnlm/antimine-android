@@ -62,10 +62,11 @@ class ThemeAdapter(
 
             areas.forEachIndexed { index, areaView -> areaView.bindTheme(minefield[index], theme, paintSettings) }
 
-            if (position == 0) {
+            if (position < 2) {
                 areas.forEach { it.alpha = 0.35f }
 
                 label.apply {
+                    text = if (position == 0) label.context.getString(R.string.system) else label.context.getString(R.string.amoled)
                     setTextColor(
                         with(theme.palette.background) {
                             Color.rgb(255 - Color.red(this), 255 - Color.green(this), 255 - Color.blue(this))
