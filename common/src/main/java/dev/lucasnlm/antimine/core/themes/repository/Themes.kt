@@ -203,4 +203,37 @@ object Themes {
             mineLow = R.drawable.mine_low
         )
     )
+
+    val BlueGreyTheme = AppTheme(
+        id = 7L,
+        theme = R.style.CustomBlueGreyTheme,
+        themeNoActionBar = R.style.CustomBlueGreyTheme_NoActionBar,
+        palette = AreaPalette(
+            border = 0x424242,
+            background = 0xFFFFFF,
+            covered = 0x37474f,
+            coveredOdd = 0x37474f,
+            uncovered = 0xcfd8dc,
+            uncoveredOdd = 0xcfd8dc,
+            minesAround1 = 0x527F8D,
+            minesAround2 = 0x2B8D43,
+            minesAround3 = 0x546e7a,
+            minesAround4 = 0x20A5f7,
+            minesAround5 = 0xED1C24,
+            minesAround6 = 0xFFC107,
+            minesAround7 = 0x66126B,
+            minesAround8 = 0x000000,
+            highlight = 0x212121,
+            focus = 0xD32F2F
+        ),
+        assets = Assets(
+            wrongFlag = R.drawable.red_flag,
+            flag = R.drawable.flag,
+            questionMark = R.drawable.question,
+            toolbarMine = R.drawable.mine,
+            mine = R.drawable.mine,
+            mineExploded = R.drawable.mine_exploded_red,
+            mineLow = R.drawable.mine_low
+        )
+    )
 }

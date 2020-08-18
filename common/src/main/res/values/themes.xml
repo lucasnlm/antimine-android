@@ -78,7 +78,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-
     <style name="CustomMarineTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorPrimary">#01579b</item>
         <item name="colorPrimaryDark">#002f6c</item>
@@ -89,6 +88,20 @@
         <item name="colorPrimary">#01579b</item>
         <item name="colorPrimaryDark">#002f6c</item>
         <item name="colorAccent">#03a9f4</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="CustomBlueGreyTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">#37474f</item>
+        <item name="colorPrimaryDark">#102027</item>
+        <item name="colorAccent">#42a5f5</item>
+    </style>
+
+    <style name="CustomBlueGreyTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">#37474f</item>
+        <item name="colorPrimaryDark">#102027</item>
+        <item name="colorAccent">#42a5f5</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
