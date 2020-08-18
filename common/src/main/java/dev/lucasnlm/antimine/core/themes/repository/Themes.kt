@@ -270,7 +270,6 @@ object Themes {
         )
     )
 
-
     val PinkTheme = AppTheme(
         id = 9L,
         theme = R.style.CustomPinkTheme,
@@ -291,6 +290,39 @@ object Themes {
             minesAround7 = 0x616161,
             minesAround8 = 0x000000,
             highlight = 0x212121,
+            focus = 0xD32F2F
+        ),
+        assets = Assets(
+            wrongFlag = R.drawable.flag,
+            flag = R.drawable.flag,
+            questionMark = R.drawable.question,
+            toolbarMine = R.drawable.mine_low,
+            mine = R.drawable.mine_pink,
+            mineExploded = R.drawable.mine_pink_exploded,
+            mineLow = R.drawable.mine_low
+        )
+    )
+
+    val PurpleTheme = AppTheme(
+        id = 10L,
+        theme = R.style.CustomPurpleTheme,
+        themeNoActionBar = R.style.CustomPurpleTheme_NoActionBar,
+        palette = AreaPalette(
+            border = 0x000000,
+            background = 0xFFFFFF,
+            covered = 0x6a1b9a,
+            coveredOdd = 0x6a1b9a,
+            uncovered = 0xd1c4e9,
+            uncoveredOdd = 0xd1c4e9,
+            minesAround1 = 0x616161,
+            minesAround2 = 0xe64a19,
+            minesAround3 = 0x8e24aa,
+            minesAround4 = 0x000000,
+            minesAround5 = 0x1e88e5,
+            minesAround6 = 0x424242,
+            minesAround7 = 0x616161,
+            minesAround8 = 0x000000,
+            highlight = 0xd1c4e9,
             focus = 0xD32F2F
         ),
         assets = Assets(
