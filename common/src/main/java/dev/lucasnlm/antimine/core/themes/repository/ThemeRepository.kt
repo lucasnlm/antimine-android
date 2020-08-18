@@ -15,6 +15,7 @@ import dev.lucasnlm.antimine.core.themes.repository.Themes.GardenTheme
 import dev.lucasnlm.antimine.core.themes.repository.Themes.LightTheme
 import dev.lucasnlm.antimine.core.themes.repository.Themes.MarineTheme
 import dev.lucasnlm.antimine.core.themes.repository.Themes.OrangeTheme
+import dev.lucasnlm.antimine.core.themes.repository.Themes.PinkTheme
 
 interface IThemeRepository {
     fun getCustomTheme(): AppTheme?
@@ -38,7 +39,8 @@ class ThemeRepository(
     override fun getAllThemes(): List<AppTheme> = listOf(
         buildSystemTheme(), AmoledTheme, LightTheme,
         DarkTheme, GardenTheme, MarineTheme,
-        ChessTheme, BlueGreyTheme, OrangeTheme
+        ChessTheme, BlueGreyTheme, OrangeTheme,
+        PinkTheme
     )
 
     override fun setTheme(theme: AppTheme) {

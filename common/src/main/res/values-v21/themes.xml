@@ -181,4 +181,26 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
+
+    <style name="CustomPinkTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorPrimaryDark">#9E9E9E</item>
+        <item name="colorAccent">#f48fb1</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="CustomPinkTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorPrimaryDark">#9E9E9E</item>
+        <item name="colorAccent">#f48fb1</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
 </resources>
