@@ -58,11 +58,18 @@ class ThemeAdapter(
         val theme = themes[position]
         val paintSettings = createAreaPaintSettings(holder.itemView.context, areaSize)
         holder.itemView.run {
+            val selected = (theme.id == themeViewModel.singleState().current.id)
             val areas = listOf(area0, area1, area2, area3, area4, area5, area6, area7, area8)
+
+            if (selected) {
+                areas.forEach { it.alpha = 0.25f }
+            } else {
+                areas.forEach { it.alpha = 1.0f }
+            }
 
             areas.forEachIndexed { index, areaView -> areaView.bindTheme(minefield[index], theme, paintSettings) }
 
-            if (position < 2) {
+            if (position < 2 && !selected) {
                 areas.forEach { it.alpha = 0.35f }
 
                 label.apply {
