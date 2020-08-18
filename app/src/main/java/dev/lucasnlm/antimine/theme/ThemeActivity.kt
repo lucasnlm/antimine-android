@@ -42,8 +42,6 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 }
             }
         }
-
-        showUnlockDialog()
     }
 
     private fun showUnlockDialog() {
