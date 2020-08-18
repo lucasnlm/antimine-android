@@ -335,4 +335,37 @@ object Themes {
             mineLow = R.drawable.mine_low
         )
     )
+
+    val BrownTheme = AppTheme(
+        id = 11L,
+        theme = R.style.CustomLightTheme,
+        themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
+        palette = AreaPalette(
+            border = 0x000000,
+            background = 0xFFFFFF,
+            covered = 0x3e2723,
+            coveredOdd = 0x4e342e,
+            uncovered = 0xd7ccc8,
+            uncoveredOdd = 0xefebe9,
+            minesAround1 = 0x616161,
+            minesAround2 = 0xe64a19,
+            minesAround3 = 0x8e24aa,
+            minesAround4 = 0x000000,
+            minesAround5 = 0x1e88e5,
+            minesAround6 = 0x424242,
+            minesAround7 = 0x616161,
+            minesAround8 = 0x000000,
+            highlight = 0xd1c4e9,
+            focus = 0xD32F2F
+        ),
+        assets = Assets(
+            wrongFlag = R.drawable.flag,
+            flag = R.drawable.flag,
+            questionMark = R.drawable.question,
+            toolbarMine = R.drawable.mine_low,
+            mine = R.drawable.mine,
+            mineExploded = R.drawable.mine_pink_exploded,
+            mineLow = R.drawable.mine_low
+        )
+    )
 }

@@ -9,6 +9,7 @@ import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.core.themes.model.Assets
 import dev.lucasnlm.antimine.core.themes.repository.Themes.AmoledTheme
 import dev.lucasnlm.antimine.core.themes.repository.Themes.BlueGreyTheme
+import dev.lucasnlm.antimine.core.themes.repository.Themes.BrownTheme
 import dev.lucasnlm.antimine.core.themes.repository.Themes.ChessTheme
 import dev.lucasnlm.antimine.core.themes.repository.Themes.DarkTheme
 import dev.lucasnlm.antimine.core.themes.repository.Themes.GardenTheme
@@ -41,7 +42,7 @@ class ThemeRepository(
         buildSystemTheme(), AmoledTheme, LightTheme,
         DarkTheme, GardenTheme, MarineTheme,
         ChessTheme, BlueGreyTheme, OrangeTheme,
-        PinkTheme, PurpleTheme
+        PinkTheme, PurpleTheme, BrownTheme
     )
 
     override fun setTheme(theme: AppTheme) {
