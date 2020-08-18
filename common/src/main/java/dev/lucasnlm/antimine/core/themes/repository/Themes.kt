@@ -236,4 +236,37 @@ object Themes {
             mineLow = R.drawable.mine_low
         )
     )
+
+    val OrangeTheme = AppTheme(
+        id = 8L,
+        theme = R.style.CustomOrangeTheme,
+        themeNoActionBar = R.style.CustomOrangeTheme_NoActionBar,
+        palette = AreaPalette(
+            border = 0x000000,
+            background = 0x212121,
+            covered = 0xfb8c00,
+            coveredOdd = 0xfb8c00,
+            uncovered = 0x303030,
+            uncoveredOdd = 0x252525,
+            minesAround1 = 0xDDDDDD,
+            minesAround2 = 0xEEEEEE,
+            minesAround3 = 0xCCCCCC,
+            minesAround4 = 0xBBBBBB,
+            minesAround5 = 0xAAAAAA,
+            minesAround6 = 0xFFFFFF,
+            minesAround7 = 0xBBBBBB,
+            minesAround8 = 0xEEEEEE,
+            highlight = 0x212121,
+            focus = 0xD32F2F
+        ),
+        assets = Assets(
+            wrongFlag = R.drawable.flag_black,
+            flag = R.drawable.flag_black,
+            questionMark = R.drawable.question_black,
+            toolbarMine = R.drawable.mine_low,
+            mine = R.drawable.mine_white,
+            mineExploded = R.drawable.mine_white,
+            mineLow = R.drawable.mine_low
+        )
+    )
 }
