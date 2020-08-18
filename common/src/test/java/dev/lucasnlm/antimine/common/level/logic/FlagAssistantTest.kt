@@ -1,7 +1,6 @@
 package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.common.level.models.Minefield
-import kotlinx.coroutines.flow.toCollection
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -12,14 +11,21 @@ class FlagAssistantTest {
     fun testRunAssistant() = runBlockingTest {
         repeat(20) { takeMines ->
             val creator = MinefieldCreator(Minefield(8, 8, 25), Random(200))
-            val map = creator.create(50, false)
+            val map = creator.create(50, false).toMutableList()
 
             map.filter { it.hasMine }
                 .take(takeMines)
-                .forEach { map.filterNeighborsOf(it).forEach { neighbor -> neighbor.isCovered = false } }
+                .forEach {
+                    map.filterNeighborsOf(it)
+                        .forEach { neighbor ->
+                            map[neighbor.id] = neighbor.copy(isCovered = false)
+                        }
+                }
 
-            val actual = mutableListOf<Int>()
-            FlagAssistant(map.toMutableList()).runFlagAssistant().toCollection(actual)
+            val actual = FlagAssistant(map.toMutableList()).run {
+                runFlagAssistant()
+                result()
+            }
 
             val expected = map
                 .filter { it.hasMine }
@@ -38,14 +44,21 @@ class FlagAssistantTest {
         repeat(20) { takeMines ->
             val seed = 10 * takeMines
             val creator = MinefieldCreator(Minefield(8, 8, 25), Random(seed))
-            val map = creator.create(50, false)
+            val map = creator.create(50, false).toMutableList()
 
             map.filter { it.hasMine }
                 .take(takeMines)
-                .forEach { map.filterNeighborsOf(it).forEach { neighbor -> neighbor.isCovered = false } }
+                .forEach {
+                    map.filterNeighborsOf(it)
+                        .forEach { neighbor ->
+                            map[neighbor.id] = neighbor.copy(isCovered = false)
+                        }
+                }
 
-            val actual = mutableListOf<Int>()
-            FlagAssistant(map.toMutableList()).runFlagAssistant().toCollection(actual)
+            val actual = FlagAssistant(map.toMutableList()).run {
+                runFlagAssistant()
+                result()
+            }
 
             val expected = map
                 .filter { it.hasMine }

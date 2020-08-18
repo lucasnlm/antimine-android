@@ -25,28 +25,28 @@ class LimitedBruteForceSolverTest {
     @Test
     fun isSolvable() {
         handleMinefield { handler, minefield ->
-            handler.openAt(40)
+            handler.openAt(40, passive = false, openNeighbors = false)
             val bruteForceSolver = LimitedBruteForceSolver()
             assertTrue(bruteForceSolver.trySolve(minefield.toMutableList()))
         }
 
         handleMinefield { handler, minefield ->
-            handler.openAt(0)
+            handler.openAt(0, passive = false, openNeighbors = false)
             val bruteForceSolver = LimitedBruteForceSolver()
             assertFalse(bruteForceSolver.trySolve(minefield.toMutableList()))
         }
     }
 
     @Test
-    fun shouldntKeepTryingAfterTimout() {
+    fun shouldntKeepTryingAfterTimeout() {
         handleMinefield { handler, _ ->
-            handler.openAt(40)
+            handler.openAt(40, passive = false, openNeighbors = false)
             val bruteForceSolver = LimitedBruteForceSolver(1000L)
             assertTrue(bruteForceSolver.keepTrying())
         }
 
         handleMinefield { handler, _ ->
-            handler.openAt(0)
+            handler.openAt(0, passive = false, openNeighbors = false)
             val bruteForceSolver = LimitedBruteForceSolver(50)
             sleep(100)
             assertFalse(bruteForceSolver.keepTrying())

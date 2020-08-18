@@ -25,7 +25,7 @@ class MinefieldHandlerTest {
     fun testOpenArea() {
         handleMinefield { handler, minefield ->
             assertTrue(minefield[3].isCovered)
-            handler.openAt(3)
+            handler.openAt(3, false, openNeighbors = false)
             assertFalse(minefield[3].isCovered)
             assertEquals(Mark.None, minefield[3].mark)
         }
@@ -35,7 +35,7 @@ class MinefieldHandlerTest {
     fun testOpenAreaWithSafeZone() {
         handleMinefield(useSafeZone = true) { handler, minefield ->
             assertTrue(minefield[3].isCovered)
-            handler.openAt(3)
+            handler.openAt(3, false, openNeighbors = false)
             assertFalse(minefield[3].isCovered)
             assertEquals(Mark.None, minefield[3].mark)
         }
@@ -94,7 +94,7 @@ class MinefieldHandlerTest {
             assertEquals(0, minefield.count { it.highlighted })
 
             // After Open
-            handler.openAt(5)
+            handler.openAt(5, false, openNeighbors = false)
             val target = minefield.first { it.minesAround != 0 }
             handler.highlightAt(target.id)
             assertEquals(5, minefield.count { it.highlighted })
@@ -113,7 +113,7 @@ class MinefieldHandlerTest {
     @Test
     fun testOpenNeighbors() {
         handleMinefield { handler, minefield ->
-            handler.openAt(5)
+            handler.openAt(5, false, openNeighbors = true)
             handler.openOrFlagNeighborsOf(5)
             assertEquals(9, minefield.count { !it.isCovered })
         }
@@ -122,9 +122,9 @@ class MinefieldHandlerTest {
     @Test
     fun testOpenNeighborsWithFlags() {
         handleMinefield { handler, minefield ->
-            handler.openAt(5)
+            handler.openAt(5, false, openNeighbors = true)
             val neighbors = minefield.filterNeighborsOf(minefield.first { it.id == 5 })
-            neighbors.filter { it.hasMine }.forEach { it.mark = Mark.Flag }
+            neighbors.filter { it.hasMine }.forEach { handler.switchMarkAt(it.id) }
             handler.openOrFlagNeighborsOf(5)
             assertEquals(4, minefield.count { !it.isCovered })
             assertEquals(3, neighbors.count { !it.isCovered })
@@ -133,10 +133,15 @@ class MinefieldHandlerTest {
 
     @Test
     fun testOpenNeighborsWithQuestionMarks() {
-        handleMinefield { handler, minefield ->
-            handler.openAt(5)
+        handleMinefield(useQuestionMark = true) { handler, minefield ->
+            handler.openAt(5, false, openNeighbors = true)
             val neighbors = minefield.filterNeighborsOf(minefield.first { it.id == 5 })
-            neighbors.filter { it.hasMine }.forEach { it.mark = Mark.Question }
+            neighbors
+                .filter { it.hasMine }
+                .forEach {
+                    handler.switchMarkAt(it.id)
+                    handler.switchMarkAt(it.id)
+                }
             handler.openOrFlagNeighborsOf(5)
             assertEquals(4, minefield.count { !it.isCovered })
             assertEquals(3, neighbors.count { !it.isCovered })

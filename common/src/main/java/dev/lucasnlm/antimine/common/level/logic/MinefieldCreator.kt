@@ -9,12 +9,12 @@ class MinefieldCreator(
     private val minefield: Minefield,
     private val randomGenerator: Random
 ) {
-    private fun createMutableEmpty(): MutableList<Area> {
+    private fun createMutableEmpty(): List<Area> {
         val width = minefield.width
         val height = minefield.height
-        val fieldSize = width * height
+        val fieldLength = width * height
 
-        return (0 until fieldSize).map { index ->
+        return (0 until fieldLength).map { index ->
             val yPosition = floor((index / width).toDouble()).toInt()
             val xPosition = (index % width)
             Area(
@@ -24,15 +24,15 @@ class MinefieldCreator(
                 0,
                 hasMine = false
             )
-        }.toMutableList()
+        }
     }
 
     fun createEmpty(): List<Area> {
-        return createMutableEmpty().toList()
+        return createMutableEmpty()
     }
 
     fun create(safeIndex: Int, safeZone: Boolean): List<Area> {
-        return createMutableEmpty().apply {
+        return createMutableEmpty().toMutableList().apply {
             // Plant mines and setup number tips
             if (safeZone) { filterNotNeighborsOf(safeIndex) } else { filterNot { it.id == safeIndex } }
                 .shuffled(randomGenerator)
