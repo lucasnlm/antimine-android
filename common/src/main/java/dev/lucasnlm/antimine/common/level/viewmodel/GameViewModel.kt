@@ -7,7 +7,6 @@ import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
-import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event

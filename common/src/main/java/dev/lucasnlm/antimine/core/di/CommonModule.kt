@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.core.di
 
 import android.content.Context
+import android.view.ViewConfiguration
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,7 +32,7 @@ class CommonModule {
     @Provides
     fun providePreferencesRepository(
         preferencesManager: PreferencesManager
-    ): IPreferencesRepository = PreferencesRepository(preferencesManager)
+    ): IPreferencesRepository = PreferencesRepository(preferencesManager, ViewConfiguration.getLongPressTimeout())
 
     @Provides
     fun providePreferencesInteractor(

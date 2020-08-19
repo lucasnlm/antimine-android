@@ -73,7 +73,12 @@ class ThemeAdapter(
                 areas.forEach { it.alpha = 0.35f }
 
                 label.apply {
-                    text = if (position == 0) label.context.getString(R.string.system) else label.context.getString(R.string.amoled)
+                    text = if (position == 0) {
+                        label.context.getString(R.string.system)
+                    } else {
+                        label.context.getString(R.string.amoled)
+                    }
+
                     setTextColor(
                         with(theme.palette.background) {
                             Color.rgb(255 - Color.red(this), 255 - Color.green(this), 255 - Color.blue(this))

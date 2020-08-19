@@ -8,14 +8,13 @@ class MinefieldHandler(
     private val useQuestionMark: Boolean
 ) {
     fun showAllMines() {
-        field.filter { it.hasMine && it.mark != Mark.Flag}
+        field.filter { it.hasMine && it.mark != Mark.Flag }
             .forEach { field[it.id] = it.copy(isCovered = false) }
     }
 
     fun flagAllMines() {
         field.filter { it.hasMine }
             .forEach { field[it.id] = it.copy(mark = Mark.Flag) }
-
     }
 
     fun revealAllEmptyAreas() {
@@ -86,16 +85,15 @@ class MinefieldHandler(
                 if (flaggedCount >= minesAround) {
                     neighbors
                         .filter { it.isCovered && it.mark.isNone() }
-                        .onEach { openAt(it.id, passive = false, openNeighbors = true) }
-                        .count()
+                        .forEach { openAt(it.id, passive = false, openNeighbors = true) }
                 } else {
                     val coveredNeighbors = neighbors.filter { it.isCovered }
                     if (coveredNeighbors.count() == minesAround) {
                         coveredNeighbors.filter {
                             it.mark.isNone()
-                        }.onEach {
+                        }.forEach {
                             switchMarkAt(it.id)
-                        }.count()
+                        }
                     }
                 }
             }
