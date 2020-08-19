@@ -54,6 +54,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
     private val preferencesRepository: IPreferencesRepository by inject()
@@ -68,7 +69,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private val shareViewModel: ShareManager by inject()
 
-    val gameViewModel: GameViewModel by inject()
+    val gameViewModel by viewModel<GameViewModel>()
 
     override val noActionBar: Boolean = true
 

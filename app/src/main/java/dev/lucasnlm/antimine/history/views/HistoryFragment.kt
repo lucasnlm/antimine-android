@@ -12,9 +12,10 @@ import dev.lucasnlm.antimine.history.viewmodel.HistoryViewModel
 import kotlinx.android.synthetic.main.fragment_history.*
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryFragment : Fragment(R.layout.fragment_history) {
-    private val historyViewModel: HistoryViewModel by inject()
+    private val historyViewModel by viewModel<HistoryViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

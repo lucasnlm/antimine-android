@@ -14,11 +14,12 @@ import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
 import kotlinx.android.synthetic.main.activity_theme.*
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
     private val dimensionRepository: IDimensionRepository by inject()
 
-    private val themeViewModel: ThemeViewModel by inject()
+    private val themeViewModel by viewModel<ThemeViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

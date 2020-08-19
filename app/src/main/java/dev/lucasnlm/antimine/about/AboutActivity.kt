@@ -8,14 +8,14 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
-import dev.lucasnlm.antimine.about.views.AboutInfoFragment
+import dev.lucasnlm.antimine.about.views.info.AboutInfoFragment
 import dev.lucasnlm.antimine.about.views.licenses.LicensesFragment
 import dev.lucasnlm.antimine.about.views.translators.TranslatorsFragment
 import kotlinx.coroutines.flow.collect
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AboutActivity : ThematicActivity(R.layout.activity_empty) {
-    private val aboutViewModel: AboutViewModel by inject()
+    private val aboutViewModel: AboutViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +23,6 @@ class AboutActivity : ThematicActivity(R.layout.activity_empty) {
         replaceFragment(AboutInfoFragment(), null)
 
         lifecycleScope.launchWhenCreated {
-            aboutViewModel.sendEvent(AboutEvent.Info)
-
             aboutViewModel.observeEvent().collect { event ->
                 when (event) {
                     AboutEvent.ThirdPartyLicenses -> {

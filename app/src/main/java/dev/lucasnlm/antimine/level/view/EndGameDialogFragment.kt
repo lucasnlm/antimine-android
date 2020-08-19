@@ -17,12 +17,14 @@ import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogViewModel
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EndGameDialogFragment : AppCompatDialogFragment() {
     private val instantAppManager: InstantAppManager by inject()
 
-    private val endGameViewModel: EndGameDialogViewModel by inject()
-    private val gameViewModel: GameViewModel by inject()
+    private val endGameViewModel by viewModel<EndGameDialogViewModel>()
+    private val gameViewModel by sharedViewModel<GameViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

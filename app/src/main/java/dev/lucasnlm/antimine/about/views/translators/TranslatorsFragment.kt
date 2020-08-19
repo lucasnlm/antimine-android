@@ -13,10 +13,10 @@ import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import kotlinx.android.synthetic.main.fragment_translators.*
 import kotlinx.android.synthetic.main.view_translator.view.*
 import kotlinx.coroutines.flow.collect
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 internal class TranslatorsFragment : Fragment(R.layout.fragment_translators) {
-    private val aboutViewModel: AboutViewModel by inject()
+    private val aboutViewModel: AboutViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

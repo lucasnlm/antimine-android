@@ -18,9 +18,10 @@ import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesEvent
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesViewModel
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PlayGamesDialogFragment : DialogFragment() {
-    private val playGamesViewModel: PlayGamesViewModel by inject()
+    private val playGamesViewModel by viewModel<PlayGamesViewModel>()
     private val adapter by lazy { PlayGamesAdapter(playGamesViewModel) }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

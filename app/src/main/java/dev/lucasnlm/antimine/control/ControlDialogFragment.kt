@@ -12,10 +12,10 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.control.view.ControlItemView
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ControlDialogFragment : AppCompatDialogFragment() {
-    private val controlViewModel: ControlViewModel by inject()
+    private val controlViewModel by viewModel<ControlViewModel>()
     private val adapter by lazy { ControlListAdapter(controlViewModel) }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

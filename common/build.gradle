@@ -54,6 +54,7 @@ dependencies {
 
     // Koin
     implementation 'org.koin:koin-android:2.1.6'
+    implementation 'org.koin:koin-androidx-viewmodel:2.1.6'
     testImplementation 'org.koin:koin-test:2.1.6'
 
     // Room

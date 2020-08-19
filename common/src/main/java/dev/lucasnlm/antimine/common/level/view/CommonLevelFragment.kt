@@ -8,11 +8,12 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragment(contentLayoutId) {
     private val dimensionRepository: IDimensionRepository by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
-    protected val gameViewModel: GameViewModel by inject()
+    protected val gameViewModel by sharedViewModel<GameViewModel>()
     protected val areaAdapter by lazy {
         AreaAdapter(requireContext(), gameViewModel, preferencesRepository, dimensionRepository)
     }

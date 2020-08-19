@@ -15,9 +15,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TextActivity : ThematicActivity(R.layout.activity_text) {
-    private val textViewModel: TextViewModel by inject()
+    private val textViewModel by viewModel<TextViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

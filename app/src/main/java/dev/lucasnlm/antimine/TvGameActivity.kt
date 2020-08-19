@@ -25,9 +25,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TvGameActivity : AppCompatActivity() {
-    private val gameViewModel: GameViewModel by inject()
+    private val gameViewModel by viewModel<GameViewModel>()
 
     private var status: Status = Status.PreGame
     private var totalMines: Int = 0
