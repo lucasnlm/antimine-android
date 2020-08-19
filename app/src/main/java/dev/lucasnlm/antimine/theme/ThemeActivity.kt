@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
@@ -14,14 +13,12 @@ import dev.lucasnlm.antimine.theme.view.ThemeAdapter
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
 import kotlinx.android.synthetic.main.activity_theme.*
 import kotlinx.coroutines.flow.collect
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
-@AndroidEntryPoint
 class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
-    @Inject
-    lateinit var dimensionRepository: IDimensionRepository
+    private val dimensionRepository: IDimensionRepository by inject()
 
-    private val viewModel by viewModels<ThemeViewModel>()
+    private val themeViewModel: ThemeViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +30,10 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
                 setHasFixedSize(true)
                 layoutManager = GridLayoutManager(context, 3)
-                adapter = ThemeAdapter(viewModel, areaSize)
+                adapter = ThemeAdapter(themeViewModel, areaSize)
             }
 
-            viewModel.observeState().collect {
+            themeViewModel.observeState().collect {
                 if (usingTheme.id != it.current.id) {
                     recreate()
                 }

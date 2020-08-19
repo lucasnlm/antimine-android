@@ -11,9 +11,10 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import kotlinx.android.synthetic.main.fragment_licenses.*
 import kotlinx.coroutines.flow.collect
+import org.koin.android.ext.android.inject
 
 class LicensesFragment : Fragment(R.layout.fragment_licenses) {
-    private val aboutViewModel: AboutViewModel by activityViewModels()
+    private val aboutViewModel: AboutViewModel by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

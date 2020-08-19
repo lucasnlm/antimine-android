@@ -1,14 +1,12 @@
 package dev.lucasnlm.antimine.level.viewmodel
 
 import android.content.Context
-import androidx.hilt.lifecycle.ViewModelInject
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 
-class EndGameDialogViewModel @ViewModelInject constructor(
-    @ApplicationContext private val context: Context
+class EndGameDialogViewModel(
+    private val context: Context
 ) : IntentViewModel<EndGameDialogEvent, EndGameDialogState>() {
 
     private fun List<Int>.safeRandomEmoji(

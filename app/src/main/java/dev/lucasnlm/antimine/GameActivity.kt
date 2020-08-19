@@ -24,7 +24,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
@@ -43,7 +42,7 @@ import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
-import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
+import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.theme.ThemeActivity
 import dev.lucasnlm.external.IPlayGamesManager
@@ -54,27 +53,22 @@ import kotlinx.android.synthetic.main.activity_tv_game.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
-@AndroidEntryPoint
 class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
-    @Inject
-    lateinit var preferencesRepository: IPreferencesRepository
+    private val preferencesRepository: IPreferencesRepository by inject()
 
-    @Inject
-    lateinit var analyticsManager: IAnalyticsManager
+    private val analyticsManager: IAnalyticsManager by inject()
 
-    @Inject
-    lateinit var instantAppManager: InstantAppManager
+    private val instantAppManager: InstantAppManager by inject()
 
-    @Inject
-    lateinit var savesRepository: ISavesRepository
+    private val savesRepository: ISavesRepository by inject()
 
-    @Inject
-    lateinit var playGamesManager: IPlayGamesManager
+    private val playGamesManager: IPlayGamesManager by inject()
 
-    val viewModel: GameViewModel by viewModels()
-    private val shareViewModel: ShareViewModel by viewModels()
+    private val shareViewModel: ShareManager by inject()
+
+    val gameViewModel: GameViewModel by inject()
 
     override val noActionBar: Boolean = true
 
@@ -110,7 +104,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun bindViewModel() = viewModel.apply {
+    private fun bindViewModel() = gameViewModel.apply {
         var lastEvent: Event? = null // TODO use distinctUntilChanged when available
 
         eventObserver.observe(
@@ -127,7 +121,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             this@GameActivity,
             Observer {
                 lifecycleScope.launch {
-                    viewModel.retryGame(currentSaveId.toInt())
+                    gameViewModel.retryGame(currentSaveId.toInt())
                 }
             }
         )
@@ -189,7 +183,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         when {
             drawer.isDrawerOpen(GravityCompat.START) -> {
                 drawer.closeDrawer(GravityCompat.START)
-                viewModel.resumeGame()
+                gameViewModel.resumeGame()
             }
             status == Status.Running && instantAppManager.isEnabled() -> showQuitConfirmation {
                 super.onBackPressed()
@@ -204,7 +198,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
         if (!willReset) {
             if (status == Status.Running) {
-                viewModel.run {
+                gameViewModel.run {
                     refreshUserPreferences()
                     resumeGame()
                 }
@@ -220,7 +214,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         super.onPause()
 
         if (status == Status.Running) {
-            viewModel.pauseGame()
+            gameViewModel.pauseGame()
         }
 
         if (isFinishing) {
@@ -254,12 +248,12 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     if (confirmResign) {
                         newGameConfirmation {
                             GlobalScope.launch {
-                                viewModel.startNewGame()
+                                gameViewModel.startNewGame()
                             }
                         }
                     } else {
                         GlobalScope.launch {
-                            viewModel.startNewGame()
+                            gameViewModel.startNewGame()
                         }
                     }
                 }
@@ -296,13 +290,13 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 }
 
                 override fun onDrawerOpened(drawerView: View) {
-                    viewModel.pauseGame()
+                    gameViewModel.pauseGame()
                     analyticsManager.sentEvent(Analytics.OpenDrawer)
                 }
 
                 override fun onDrawerClosed(drawerView: View) {
                     if (hasNoOtherFocusedDialog()) {
-                        viewModel.resumeGame()
+                        gameViewModel.resumeGame()
                     }
 
                     analyticsManager.sentEvent(Analytics.CloseDrawer)
@@ -448,7 +442,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun showControlDialog() {
-        viewModel.pauseGame()
+        gameViewModel.pauseGame()
 
         if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
             ControlDialogFragment().apply {
@@ -510,13 +504,13 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun waitAndShowEndGameDialog(victory: Boolean, await: Boolean) {
-        if (await && viewModel.explosionDelay() != 0L) {
+        if (await && gameViewModel.explosionDelay() != 0L) {
             postDelayed(
                 Handler(),
                 {
                     showEndGameDialog(victory)
                 },
-                null, (viewModel.explosionDelay() * 0.3).toLong()
+                null, (gameViewModel.explosionDelay() * 0.3).toLong()
             )
         } else {
             showEndGameDialog(victory)
@@ -526,12 +520,12 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private fun changeDifficulty(newDifficulty: Difficulty) {
         if (status == Status.PreGame) {
             GlobalScope.launch {
-                viewModel.startNewGame(newDifficulty)
+                gameViewModel.startNewGame(newDifficulty)
             }
         } else {
             newGameConfirmation {
                 GlobalScope.launch {
-                    viewModel.startNewGame(newDifficulty)
+                    gameViewModel.startNewGame(newDifficulty)
                 }
             }
         }
@@ -549,7 +543,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
             Event.Resume, Event.Running -> {
                 status = Status.Running
-                viewModel.runClock()
+                gameViewModel.runClock()
                 refreshNewGameButton()
                 keepScreenOn(true)
             }
@@ -560,9 +554,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     totalArea
                 )
                 status = Status.Over(currentTime, score)
-                viewModel.stopClock()
-                viewModel.revealAllEmptyAreas()
-                viewModel.victory()
+                gameViewModel.stopClock()
+                gameViewModel.revealAllEmptyAreas()
+                gameViewModel.victory()
                 refreshNewGameButton()
                 keepScreenOn(false)
                 waitAndShowEndGameDialog(
@@ -580,10 +574,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 status = Status.Over(currentTime, score)
                 refreshNewGameButton()
                 keepScreenOn(false)
-                viewModel.stopClock()
+                gameViewModel.stopClock()
 
                 GlobalScope.launch(context = Dispatchers.Main) {
-                    viewModel.gameOver(isResuming)
+                    gameViewModel.gameOver(isResuming)
                     waitAndShowEndGameDialog(
                         victory = false,
                         await = true
@@ -607,10 +601,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun shareCurrentGame() {
-        val levelSetup = viewModel.levelSetup.value
-        val field = viewModel.field.value
-        GlobalScope.launch {
-            shareViewModel.share(levelSetup, field)
+        val levelSetup = gameViewModel.levelSetup.value
+        val field = gameViewModel.field.value
+        lifecycleScope.launch {
+            shareViewModel.shareField(levelSetup, field)
         }
     }
 
@@ -660,7 +654,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     override fun onDismiss(dialog: DialogInterface?) {
-        viewModel.run {
+        gameViewModel.run {
             refreshUserPreferences()
             resumeGame()
         }

@@ -5,14 +5,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.format.DateUtils
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.preference.PreferenceManager
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
@@ -26,10 +24,10 @@ import kotlinx.android.synthetic.main.activity_tv_game.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
-@AndroidEntryPoint
 class TvGameActivity : AppCompatActivity() {
-    private val viewModel: GameViewModel by viewModels()
+    private val gameViewModel: GameViewModel by inject()
 
     private var status: Status = Status.PreGame
     private var totalMines: Int = 0
@@ -49,7 +47,7 @@ class TvGameActivity : AppCompatActivity() {
         loadGameFragment()
     }
 
-    private fun bindViewModel() = viewModel.apply {
+    private fun bindViewModel() = gameViewModel.apply {
         eventObserver.observe(
             this@TvGameActivity,
             Observer {
@@ -99,7 +97,7 @@ class TvGameActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (status == Status.Running) {
-            viewModel.resumeGame()
+            gameViewModel.resumeGame()
         }
     }
 
@@ -107,7 +105,7 @@ class TvGameActivity : AppCompatActivity() {
         super.onPause()
 
         if (status == Status.Running) {
-            viewModel.pauseGame()
+            gameViewModel.pauseGame()
         }
     }
 
@@ -174,7 +172,7 @@ class TvGameActivity : AppCompatActivity() {
             setCancelable(false)
             setPositiveButton(R.string.new_game) { _, _ ->
                 GlobalScope.launch {
-                    viewModel.startNewGame()
+                    gameViewModel.startNewGame()
                 }
             }
             setNegativeButton(R.string.cancel, null)
@@ -193,7 +191,7 @@ class TvGameActivity : AppCompatActivity() {
                             setMessage(R.string.new_game_request)
                             setPositiveButton(R.string.yes) { _, _ ->
                                 GlobalScope.launch {
-                                    viewModel.startNewGame()
+                                    gameViewModel.startNewGame()
                                 }
                             }
                             setNegativeButton(R.string.cancel, null)
@@ -217,7 +215,7 @@ class TvGameActivity : AppCompatActivity() {
                         setMessage(R.string.new_game_request)
                         setPositiveButton(R.string.yes) { _, _ ->
                             GlobalScope.launch {
-                                viewModel.startNewGame()
+                                gameViewModel.startNewGame()
                             }
                         }
                         setNegativeButton(R.string.cancel, null)
@@ -231,12 +229,12 @@ class TvGameActivity : AppCompatActivity() {
     private fun changeDifficulty(newDifficulty: Difficulty) {
         if (status == Status.PreGame) {
             GlobalScope.launch {
-                viewModel.startNewGame(newDifficulty)
+                gameViewModel.startNewGame(newDifficulty)
             }
         } else {
             newGameConfirmation {
                 GlobalScope.launch {
-                    viewModel.startNewGame(newDifficulty)
+                    gameViewModel.startNewGame(newDifficulty)
                 }
             }
         }
@@ -253,7 +251,7 @@ class TvGameActivity : AppCompatActivity() {
             }
             Event.Resume, Event.Running -> {
                 status = Status.Running
-                viewModel.runClock()
+                gameViewModel.runClock()
                 invalidateOptionsMenu()
             }
             Event.Victory -> {
@@ -263,8 +261,8 @@ class TvGameActivity : AppCompatActivity() {
                     totalArea
                 )
                 status = Status.Over(currentTime, score)
-                viewModel.stopClock()
-                viewModel.revealAllEmptyAreas()
+                gameViewModel.stopClock()
+                gameViewModel.revealAllEmptyAreas()
                 invalidateOptionsMenu()
                 showVictory()
             }
@@ -276,10 +274,10 @@ class TvGameActivity : AppCompatActivity() {
                 )
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
-                viewModel.stopClock()
+                gameViewModel.stopClock()
 
                 GlobalScope.launch(context = Dispatchers.Main) {
-                    viewModel.gameOver(false)
+                    gameViewModel.gameOver(false)
                     waitAndShowGameOverConfirmNewGame()
                 }
             }
@@ -291,7 +289,7 @@ class TvGameActivity : AppCompatActivity() {
                 )
                 status = Status.Over(currentTime, score)
                 invalidateOptionsMenu()
-                viewModel.stopClock()
+                gameViewModel.stopClock()
 
                 waitAndShowConfirmNewGame()
             }

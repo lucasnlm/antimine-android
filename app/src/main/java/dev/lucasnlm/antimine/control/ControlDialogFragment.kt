@@ -8,16 +8,14 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.fragment.app.activityViewModels
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.control.view.ControlItemView
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
+import org.koin.android.ext.android.inject
 
-@AndroidEntryPoint
 class ControlDialogFragment : AppCompatDialogFragment() {
-    private val controlViewModel by activityViewModels<ControlViewModel>()
+    private val controlViewModel: ControlViewModel by inject()
     private val adapter by lazy { ControlListAdapter(controlViewModel) }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

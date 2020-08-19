@@ -2,15 +2,13 @@ package dev.lucasnlm.antimine.playgames.viewmodel
 
 import android.app.Activity
 import android.content.Context
-import androidx.hilt.lifecycle.ViewModelInject
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.playgames.model.PlayGamesItem
 import dev.lucasnlm.external.IPlayGamesManager
 
-class PlayGamesViewModel @ViewModelInject constructor(
-    @ApplicationContext private val context: Context,
+class PlayGamesViewModel(
+    private val context: Context,
     private val playGamesManager: IPlayGamesManager
 ) : StatelessViewModel<PlayGamesEvent>() {
 

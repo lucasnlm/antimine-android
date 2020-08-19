@@ -1,12 +1,11 @@
 package dev.lucasnlm.antimine.theme.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 
-class ThemeViewModel @ViewModelInject constructor(
+class ThemeViewModel(
     private val themeRepository: IThemeRepository
 ) : IntentViewModel<ThemeEvent, ThemeState>() {
     private fun setTheme(theme: AppTheme) {

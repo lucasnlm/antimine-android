@@ -11,7 +11,6 @@ import dev.lucasnlm.antimine.common.level.di.LevelModule
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,7 +30,6 @@ class GameActivityTest {
     var rule = HiltAndroidRule(this)
 
     @Test
-    @Ignore("Dagger hilt issue")
     fun testShowGameOverWhenTapAMine() {
         launchActivity<GameActivity>().onActivity { activity ->
             ShadowLooper.runUiThreadTasks()
@@ -57,7 +55,6 @@ class GameActivityTest {
     }
 
     @Test
-    @Ignore("Dagger hilt issue")
     fun testShowVictoryWhenTapAllSafeAreas() {
         launchActivity<GameActivity>().onActivity { activity ->
             ShadowLooper.runUiThreadTasks()
@@ -70,7 +67,7 @@ class GameActivityTest {
             ShadowLooper.runUiThreadTasks()
 
             // Tap on safe places
-            activity.viewModel.field
+            activity.gameViewModel.field
                 .value!!
                 .filter { !it.hasMine && it.isCovered }
                 .forEach {

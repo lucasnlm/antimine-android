@@ -3,10 +3,8 @@ package dev.lucasnlm.antimine.stats
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.stats.model.StatsModel
@@ -16,19 +14,19 @@ import kotlinx.android.synthetic.main.activity_stats.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
-@AndroidEntryPoint
 class StatsActivity : ThematicActivity(R.layout.activity_stats) {
-    private val viewModel: StatsViewModel by viewModels()
+    private val statsViewModel: StatsViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         refreshStats(StatsViewModel.emptyStats)
 
         lifecycleScope.launchWhenResumed {
-            viewModel.sendEvent(StatsEvent.LoadStats)
+            statsViewModel.sendEvent(StatsEvent.LoadStats)
 
-            viewModel.observeState().collect {
+            statsViewModel.observeState().collect {
                 refreshStats(it)
             }
         }
@@ -61,7 +59,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        viewModel.singleState().let {
+        statsViewModel.singleState().let {
             if (it.totalGames > 0) {
                 menuInflater.inflate(R.menu.stats_menu, menu)
             }
@@ -85,7 +83,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.delete_all) { _, _ ->
                 GlobalScope.launch {
-                    viewModel.sendEvent(StatsEvent.DeleteStats)
+                    statsViewModel.sendEvent(StatsEvent.DeleteStats)
                 }
             }
             .show()

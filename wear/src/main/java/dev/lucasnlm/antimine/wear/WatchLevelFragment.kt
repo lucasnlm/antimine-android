@@ -24,7 +24,7 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
         recyclerGrid = view.findViewById(R.id.recyclerGrid)
 
         GlobalScope.launch {
-            val levelSetup = viewModel.loadLastGame()
+            val levelSetup = gameViewModel.loadLastGame()
 
             withContext(Dispatchers.Main) {
                 recyclerGrid.apply {
@@ -45,7 +45,7 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
             }
         }
 
-        viewModel.run {
+        gameViewModel.run {
             field.observe(
                 viewLifecycleOwner,
                 Observer {

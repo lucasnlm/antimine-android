@@ -1,13 +1,11 @@
 package dev.lucasnlm.antimine.common.level.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
-import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
@@ -34,7 +32,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class GameViewModel @ViewModelInject constructor(
+class GameViewModel(
     private val savesRepository: ISavesRepository,
     private val statsRepository: IStatsRepository,
     private val dimensionRepository: IDimensionRepository,

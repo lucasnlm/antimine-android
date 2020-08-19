@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 30
@@ -33,10 +32,6 @@ kapt {
     correctErrorTypes true
 }
 
-hilt {
-    enableTransformForLocalTests true
-}
-
 dependencies {
     // Dependencies must be hardcoded to support F-droid
 
@@ -57,13 +52,9 @@ dependencies {
     api 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'android.arch.lifecycle:viewmodel:1.1.1'
 
-    // Dagger
-    implementation 'com.google.dagger:hilt-android:2.28.1-alpha'
-    kapt 'com.google.dagger:hilt-android-compiler:2.28.1-alpha'
-    testImplementation 'com.google.dagger:hilt-android-testing:2.28.1-alpha'
-    kaptTest 'com.google.dagger:hilt-android-compiler:2.28.1-alpha'
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02"
-    kapt "androidx.hilt:hilt-compiler:1.0.0-alpha02"
+    // Koin
+    implementation 'org.koin:koin-android:2.1.6'
+    testImplementation 'org.koin:koin-test:2.1.6'
 
     // Room
     api 'androidx.room:room-runtime:2.2.5'

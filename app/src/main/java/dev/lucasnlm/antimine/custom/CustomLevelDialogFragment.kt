@@ -9,19 +9,17 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.fragment.app.activityViewModels
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.custom.viewmodel.CreateGameViewModel
 import dev.lucasnlm.antimine.custom.viewmodel.CustomEvent
+import org.koin.android.ext.android.inject
 
-@AndroidEntryPoint
 class CustomLevelDialogFragment : AppCompatDialogFragment() {
-    private val viewModel by activityViewModels<GameViewModel>()
-    private val createGameViewModel by activityViewModels<CreateGameViewModel>()
+    private val gameViewModel: GameViewModel by inject()
+    private val createGameViewModel: CreateGameViewModel by inject()
 
     private lateinit var mapWidth: TextView
     private lateinit var mapHeight: TextView
@@ -62,7 +60,7 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
             setPositiveButton(R.string.start) { _, _ ->
                 val minefield = getSelectedMinefield()
                 createGameViewModel.sendEvent(CustomEvent.UpdateCustomGameEvent(minefield))
-                viewModel.startNewGame(Difficulty.Custom)
+                gameViewModel.startNewGame(Difficulty.Custom)
             }
         }.create()
     }

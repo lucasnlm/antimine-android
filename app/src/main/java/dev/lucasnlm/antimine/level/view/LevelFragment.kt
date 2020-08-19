@@ -6,7 +6,6 @@ import android.view.View
 import androidx.core.view.doOnLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Difficulty
@@ -18,12 +17,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-@AndroidEntryPoint
 open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
     override fun onPause() {
         super.onPause()
         lifecycleScope.launch {
-            viewModel.saveGame()
+            gameViewModel.saveGame()
         }
     }
 
@@ -37,10 +35,10 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                 val retryDeepLink = checkRetryGameDeepLink()
 
                 val levelSetup = when {
-                    loadGameUid != null -> viewModel.loadGame(loadGameUid)
-                    newGameDeepLink != null -> viewModel.startNewGame(newGameDeepLink)
-                    retryDeepLink != null -> viewModel.retryGame(retryDeepLink)
-                    else -> viewModel.loadLastGame()
+                    loadGameUid != null -> gameViewModel.loadGame(loadGameUid)
+                    newGameDeepLink != null -> gameViewModel.startNewGame(newGameDeepLink)
+                    retryDeepLink != null -> gameViewModel.retryGame(retryDeepLink)
+                    else -> gameViewModel.loadLastGame()
                 }
 
                 withContext(Dispatchers.Main) {
@@ -53,7 +51,7 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
             }
         }
 
-        viewModel.run {
+        gameViewModel.run {
             field.observe(
                 viewLifecycleOwner,
                 Observer {

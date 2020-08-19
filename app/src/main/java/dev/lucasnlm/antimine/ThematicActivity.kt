@@ -5,14 +5,11 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
-open class ThematicActivity : AppCompatActivity {
-    constructor() : super()
-    constructor(@LayoutRes contentLayoutId: Int) : super(contentLayoutId)
+open class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
 
-    @Inject
-    lateinit var themeRepository: IThemeRepository
+    private val themeRepository: IThemeRepository by inject()
 
     protected open val noActionBar: Boolean = false
 

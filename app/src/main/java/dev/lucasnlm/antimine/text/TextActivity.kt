@@ -4,10 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.annotation.RawRes
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.text.viewmodel.TextEvent
@@ -16,10 +14,10 @@ import kotlinx.android.synthetic.main.activity_text.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
+import org.koin.android.ext.android.inject
 
-@AndroidEntryPoint
 class TextActivity : ThematicActivity(R.layout.activity_text) {
-    private val viewModel: TextViewModel by viewModels()
+    private val textViewModel: TextViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +26,7 @@ class TextActivity : ThematicActivity(R.layout.activity_text) {
         title = bundle.getString(TEXT_TITLE)
 
         lifecycleScope.launchWhenCreated {
-            viewModel.sendEvent(
+            textViewModel.sendEvent(
                 TextEvent.LoadText(
                     title = bundle.getString(TEXT_TITLE, ""),
                     rawFileRes = bundle.getInt(TEXT_PATH, -1)
@@ -39,7 +37,7 @@ class TextActivity : ThematicActivity(R.layout.activity_text) {
                 progressBar.visibility = View.VISIBLE
             }
 
-            viewModel.observeState().collect {
+            textViewModel.observeState().collect {
                 textView.text = it.body
                 progressBar.visibility = View.GONE
             }

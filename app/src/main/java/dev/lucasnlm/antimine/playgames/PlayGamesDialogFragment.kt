@@ -12,17 +12,15 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesEvent
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesViewModel
 import kotlinx.coroutines.flow.collect
+import org.koin.android.ext.android.inject
 
-@AndroidEntryPoint
 class PlayGamesDialogFragment : DialogFragment() {
-    private val playGamesViewModel by viewModels<PlayGamesViewModel>()
+    private val playGamesViewModel: PlayGamesViewModel by inject()
     private val adapter by lazy { PlayGamesAdapter(playGamesViewModel) }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

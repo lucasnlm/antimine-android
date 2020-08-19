@@ -5,16 +5,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.external.IBillingManager
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
-@AndroidEntryPoint
 class SupportAppDialogFragment : AppCompatDialogFragment() {
-    @Inject
-    lateinit var billingManager: IBillingManager
+    private val billingManager: IBillingManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

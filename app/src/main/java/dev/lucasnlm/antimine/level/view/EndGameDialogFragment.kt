@@ -9,24 +9,20 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.instant.InstantAppManager
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogViewModel
 import kotlinx.coroutines.flow.collect
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
-@AndroidEntryPoint
 class EndGameDialogFragment : AppCompatDialogFragment() {
-    @Inject
-    lateinit var instantAppManager: InstantAppManager
+    private val instantAppManager: InstantAppManager by inject()
 
-    private val endGameViewModel by activityViewModels<EndGameDialogViewModel>()
-    private val viewModel by activityViewModels<GameViewModel>()
+    private val endGameViewModel: EndGameDialogViewModel by inject()
+    private val gameViewModel: GameViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,12 +75,12 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                 }
                                 state.isVictory == true -> {
                                     setNeutralButton(R.string.share) { _, _ ->
-                                        viewModel.shareObserver.postValue(Unit)
+                                        gameViewModel.shareObserver.postValue(Unit)
                                     }
                                 }
                                 else -> {
                                     setNeutralButton(R.string.retry) { _, _ ->
-                                        viewModel.retryObserver.postValue(Unit)
+                                        gameViewModel.retryObserver.postValue(Unit)
                                     }
                                 }
                             }
@@ -95,7 +91,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
             setView(view)
 
             setPositiveButton(R.string.new_game) { _, _ ->
-                viewModel.startNewGame()
+                gameViewModel.startNewGame()
             }
         }.create()
 

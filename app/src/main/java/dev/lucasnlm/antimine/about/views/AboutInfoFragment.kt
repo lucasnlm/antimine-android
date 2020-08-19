@@ -3,15 +3,15 @@ package dev.lucasnlm.antimine.about.views
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import dev.lucasnlm.antimine.BuildConfig
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import kotlinx.android.synthetic.main.fragment_about_info.*
+import org.koin.android.ext.android.inject
 
 class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
-    private val aboutViewModel: AboutViewModel by activityViewModels()
+    private val aboutViewModel: AboutViewModel by inject()
 
     override fun onResume() {
         super.onResume()

@@ -3,15 +3,13 @@ package dev.lucasnlm.antimine.history.viewmodel
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.hilt.lifecycle.ViewModelInject
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 
-class HistoryViewModel @ViewModelInject constructor(
-    @ApplicationContext private val context: Context,
+class HistoryViewModel(
+    private val context: Context,
     private val savesRepository: ISavesRepository
 ) : IntentViewModel<HistoryEvent, HistoryState>() {
 

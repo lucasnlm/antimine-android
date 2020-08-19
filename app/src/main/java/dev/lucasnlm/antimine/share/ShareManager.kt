@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Typeface
+import android.widget.Toast
 import androidx.core.content.FileProvider
 import dev.lucasnlm.antimine.BuildConfig
 import dev.lucasnlm.antimine.R
@@ -22,12 +23,12 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 
-class ShareBuilder(
+class ShareManager(
     context: Context
 ) {
     private val context: Context = context.applicationContext
 
-    suspend fun share(minefield: Minefield, field: List<Area>): Boolean {
+    private suspend fun share(minefield: Minefield, field: List<Area>): Boolean {
         val file = createImage(minefield, field)
 
         return if (file != null) {
@@ -127,6 +128,18 @@ class ShareBuilder(
             true
         } catch (e: ActivityNotFoundException) {
             false
+        }
+    }
+
+    suspend fun shareField(minefield: Minefield?, field: List<Area>?) {
+        val result = if (minefield != null && field != null && field.count() != 0) {
+            share(minefield, field)
+        } else {
+            false
+        }
+
+        if (!result) {
+            Toast.makeText(context, context.getString(R.string.fail_to_share), Toast.LENGTH_SHORT).show()
         }
     }
 }

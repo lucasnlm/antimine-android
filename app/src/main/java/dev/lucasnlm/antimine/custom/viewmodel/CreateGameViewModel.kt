@@ -1,11 +1,10 @@
 package dev.lucasnlm.antimine.custom.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 
-class CreateGameViewModel @ViewModelInject constructor(
+class CreateGameViewModel(
     private val preferencesRepository: IPreferencesRepository
 ) : IntentViewModel<CustomEvent, CustomState>() {
 

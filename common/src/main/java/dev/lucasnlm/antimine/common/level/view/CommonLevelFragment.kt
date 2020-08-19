@@ -2,24 +2,19 @@ package dev.lucasnlm.antimine.common.level.view
 
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
 
 abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragment(contentLayoutId) {
-    @Inject
-    lateinit var dimensionRepository: IDimensionRepository
-
-    @Inject
-    lateinit var preferencesRepository: IPreferencesRepository
-
-    protected val viewModel: GameViewModel by activityViewModels()
+    private val dimensionRepository: IDimensionRepository by inject()
+    private val preferencesRepository: IPreferencesRepository by inject()
+    protected val gameViewModel: GameViewModel by inject()
     protected val areaAdapter by lazy {
-        AreaAdapter(requireContext(), viewModel, preferencesRepository, dimensionRepository)
+        AreaAdapter(requireContext(), gameViewModel, preferencesRepository, dimensionRepository)
     }
     protected lateinit var recyclerGrid: RecyclerView
 

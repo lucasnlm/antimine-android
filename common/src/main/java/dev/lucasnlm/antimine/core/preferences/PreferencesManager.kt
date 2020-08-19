@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.core.preferences
 
 import android.content.Context
 import androidx.preference.PreferenceManager
-import javax.inject.Inject
 
 interface IPreferencesManager {
     fun getBoolean(key: String, defaultValue: Boolean): Boolean
@@ -13,7 +12,7 @@ interface IPreferencesManager {
     fun contains(key: String): Boolean
 }
 
-class PreferencesManager @Inject constructor(
+class PreferencesManager(
     private val context: Context
 ) : IPreferencesManager {
     private val preferences by lazy {
