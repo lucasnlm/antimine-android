@@ -106,12 +106,7 @@ class AreaView : View {
                 area.hasMine -> IMPORTANT_FOR_ACCESSIBILITY_YES
                 area.mistake -> IMPORTANT_FOR_ACCESSIBILITY_YES
                 area.mark.isNotNone() -> IMPORTANT_FOR_ACCESSIBILITY_YES
-                !area.isCovered ->
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                        IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
-                    } else {
-                        IMPORTANT_FOR_ACCESSIBILITY_NO
-                    }
+                !area.isCovered -> IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
                 else -> IMPORTANT_FOR_ACCESSIBILITY_YES
             }
         )

@@ -167,7 +167,7 @@ class GameController {
         }
     }
 
-    fun findExplodedMine() = mines().filter { it.mistake }.firstOrNull()
+    fun findExplodedMine() = mines().firstOrNull { it.mistake }
 
     fun takeExplosionRadius(target: Area): List<Area> =
         mines().filter { it.isCovered && it.mark.isNone() }.sortedBy {

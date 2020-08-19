@@ -75,7 +75,7 @@ class EndGameDialogViewModel @ViewModelInject constructor(
         false
     )
 
-    override suspend fun mapEventToState(event: EndGameDialogEvent) = flow<EndGameDialogState> {
+    override suspend fun mapEventToState(event: EndGameDialogEvent) = flow {
         if (event is EndGameDialogEvent.BuildCustomEndGame) {
             val state = when (event.isVictory) {
                 true -> {

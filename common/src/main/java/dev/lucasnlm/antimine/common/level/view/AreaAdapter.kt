@@ -57,17 +57,19 @@ class AreaAdapter(
     override fun getItemCount(): Int = field.size
 
     private fun AreaView.onClickablePosition(position: Int, action: suspend (Int) -> Unit): Boolean {
-        return if (position == RecyclerView.NO_POSITION) {
-            Log.d(TAG, "Item no longer exists.")
-            false
-        } else if (clickEnabled) {
-            requestFocus()
-            GlobalScope.launch {
-                action(position)
+        return when {
+            position == RecyclerView.NO_POSITION -> {
+                Log.d(TAG, "Item no longer exists.")
+                false
             }
-            true
-        } else {
-            false
+            clickEnabled -> {
+                requestFocus()
+                GlobalScope.launch {
+                    action(position)
+                }
+                true
+            }
+            else -> false
         }
     }
 
