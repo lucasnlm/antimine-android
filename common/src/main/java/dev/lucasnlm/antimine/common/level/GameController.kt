@@ -10,13 +10,11 @@ import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
 import dev.lucasnlm.antimine.common.level.logic.filterNeighborsOf
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
-import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Score
 import dev.lucasnlm.antimine.common.level.solver.LimitedBruteForceSolver
 import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.GameControl
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlin.random.Random
 
@@ -52,6 +50,8 @@ class GameController {
     }
 
     fun field() = field
+
+    fun field(predicate: (Area) -> Boolean) = field.filter(predicate)
 
     fun mines() = field.filter { it.hasMine }
 
@@ -167,7 +167,7 @@ class GameController {
         }
     }
 
-    fun findExplodedMine() = mines().filter { it.mistake }.firstOrNull()
+    fun findExplodedMine() = mines().firstOrNull { it.mistake }
 
     fun takeExplosionRadius(target: Area): List<Area> =
         mines().filter { it.isCovered && it.mark.isNone() }.sortedBy {
@@ -192,7 +192,7 @@ class GameController {
 
     fun showWrongFlags() {
         field = field.map {
-            if (it.mark.isNotNone() && !it.hasMine) {
+            if (!it.hasMine && it.mark.isFlag()) {
                 it.copy(mistake = true)
             } else {
                 it

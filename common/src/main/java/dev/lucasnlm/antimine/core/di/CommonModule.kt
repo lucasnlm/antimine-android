@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.core.di
 
+import android.view.ViewConfiguration
 import dev.lucasnlm.antimine.common.level.repository.DimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesManager
@@ -18,7 +19,7 @@ val CommonModule = module {
 
     single { DimensionRepository(get(), get()) } bind IDimensionRepository::class
 
-    single { PreferencesRepository(get()) } bind IPreferencesRepository::class
+    single { PreferencesRepository(get(), ViewConfiguration.getLongPressTimeout()) } bind IPreferencesRepository::class
 
     single { SoundManager(get()) } bind ISoundManager::class
 

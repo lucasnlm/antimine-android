@@ -45,10 +45,11 @@ class AboutViewModel(
 
     private fun getLicensesList() = mapOf(
         "Android SDK License" to R.raw.android_sdk,
-        "Material Design Icons" to R.raw.apache2,
+        "Material Design" to R.raw.apache2,
         "Dagger Hilt" to R.raw.apache2,
         "Moshi" to R.raw.apache2,
         "Mockito" to R.raw.mockito,
+        "Noto Emoji" to R.raw.apache2,
         "Sounds" to R.raw.sounds
     ).map {
         License(it.key, it.value)

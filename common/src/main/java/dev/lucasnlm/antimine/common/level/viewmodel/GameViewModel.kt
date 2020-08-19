@@ -53,7 +53,6 @@ class GameViewModel(
     private var currentDifficulty: Difficulty = Difficulty.Standard
 
     val field = MutableLiveData<List<Area>>()
-    val fieldRefresh = MutableLiveData<Int>()
     val elapsedTimeSeconds = MutableLiveData<Long>()
     val mineCount = MutableLiveData<Int>()
     val difficulty = MutableLiveData<Difficulty>()

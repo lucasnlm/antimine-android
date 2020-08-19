@@ -63,12 +63,7 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                     }
                 }
             )
-            fieldRefresh.observe(
-                viewLifecycleOwner,
-                Observer {
-                    areaAdapter.notifyItemChanged(it)
-                }
-            )
+
             eventObserver.observe(
                 viewLifecycleOwner,
                 Observer {

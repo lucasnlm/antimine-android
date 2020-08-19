@@ -12,7 +12,7 @@ class ThemeViewModel(
         themeRepository.setTheme(theme)
     }
 
-    override suspend fun mapEventToState(event: ThemeEvent) = flow<ThemeState> {
+    override suspend fun mapEventToState(event: ThemeEvent) = flow {
         if (event is ThemeEvent.ChangeTheme) {
             setTheme(event.newTheme)
             emit(state.copy(current = event.newTheme))

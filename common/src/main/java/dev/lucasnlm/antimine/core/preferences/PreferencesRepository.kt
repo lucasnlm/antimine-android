@@ -37,7 +37,8 @@ interface IPreferencesRepository {
 }
 
 class PreferencesRepository(
-    private val preferencesManager: IPreferencesManager
+    private val preferencesManager: IPreferencesManager,
+    private val defaultLongPressTimeout: Int
 ) : IPreferencesRepository {
     init {
         migrateOldPreferences()
@@ -151,7 +152,7 @@ class PreferencesRepository(
         }
 
         if (!preferencesManager.contains(PREFERENCE_LONG_PRESS_TIMEOUT)) {
-            preferencesManager.putInt(PREFERENCE_LONG_PRESS_TIMEOUT, ViewConfiguration.getLongPressTimeout())
+            preferencesManager.putInt(PREFERENCE_LONG_PRESS_TIMEOUT, defaultLongPressTimeout)
         }
     }
 

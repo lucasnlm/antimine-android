@@ -29,7 +29,7 @@ class HistoryViewModel(
         }
     }
 
-    override suspend fun mapEventToState(event: HistoryEvent) = flow<HistoryState> {
+    override suspend fun mapEventToState(event: HistoryEvent) = flow {
         when (event) {
             is HistoryEvent.LoadAllSaves -> {
                 val newSaveList = savesRepository.getAllSaves().sortedByDescending { it.uid }

@@ -13,13 +13,14 @@
         android:layout_height="64dp"
         android:background="?selectableItemBackgroundBorderless"
         android:clickable="true"
-        android:focusable="true"
+        android:focusable="false"
         android:importantForAccessibility="no"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/emoji_smiling_face_with_sunglasses" />
+        tools:src="@drawable/emoji_smiling_face_with_sunglasses"
+        tools:ignore="KeyboardInaccessibleWidget" />
 
     <TextView
         android:id="@+id/title"

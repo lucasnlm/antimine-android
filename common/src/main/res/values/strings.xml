@@ -32,6 +32,7 @@
     <string name="settings_large_areas">Use Large Areas</string>
     <string name="size">Size</string>
     <string name="system">System</string>
+    <string name="amoled" translatable="false">AMOLED</string>
     <string name="rating">Feedback</string>
     <string name="support">Help supporting us!</string>
     <string name="support_description">It will allow us building new features and to keep our project active.</string>

@@ -27,7 +27,6 @@
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
         android:textStyle="bold"
-        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         tools:text="Text" />
 

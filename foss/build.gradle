@@ -8,7 +8,7 @@ android {
     defaultConfig {
         versionCode 800051 // MMmmPPv
         versionName '8.0.5'
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
     }
 
