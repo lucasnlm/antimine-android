@@ -3,31 +3,29 @@ package dev.lucasnlm.antimine
 import android.os.Build
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.launchActivity
-import dagger.hilt.android.testing.HiltAndroidRule
-import dagger.hilt.android.testing.HiltAndroidTest
-import dagger.hilt.android.testing.HiltTestApplication
-import dagger.hilt.android.testing.UninstallModules
-import dev.lucasnlm.antimine.common.level.di.LevelModule
+import dev.lucasnlm.antimine.di.TestCommonModule
+import dev.lucasnlm.antimine.di.TestLevelModule
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.test.KoinTestRule
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowLooper
 import java.util.concurrent.TimeUnit
 
-@HiltAndroidTest
-@UninstallModules(LevelModule::class)
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.P], application = HiltTestApplication::class)
+@Config(sdk = [Build.VERSION_CODES.P], application = TestApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class GameActivityTest {
     @get:Rule
-    var rule = HiltAndroidRule(this)
+    val koinTestRule = KoinTestRule.create {
+        modules(TestLevelModule, TestCommonModule)
+    }
 
     @Test
     fun testShowGameOverWhenTapAMine() {
