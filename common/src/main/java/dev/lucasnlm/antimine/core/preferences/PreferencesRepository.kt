@@ -5,16 +5,14 @@ import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.core.control.ControlStyle
 
 interface IPreferencesRepository {
-    fun getBoolean(key: String, defaultValue: Boolean): Boolean
-    fun getInt(key: String, defaultValue: Int): Int
-    fun putBoolean(key: String, value: Boolean)
-    fun putInt(key: String, value: Int)
-
     fun customGameMode(): Minefield
     fun updateCustomGameMode(minefield: Minefield)
 
     fun controlStyle(): ControlStyle
     fun useControlStyle(controlStyle: ControlStyle)
+
+    fun isFirstUse(): Boolean
+    fun completeFirstUse()
 
     fun customLongPressTimeout(): Long
 
@@ -24,9 +22,15 @@ interface IPreferencesRepository {
     fun updateStatsBase(statsBase: Int)
     fun getStatsBase(): Int
 
+    fun getUseCount(): Int
+    fun incrementUseCount()
+
     fun incrementProgressiveValue()
     fun decrementProgressiveValue()
     fun getProgressiveValue(): Int
+
+    fun isRequestRatingEnabled(): Boolean
+    fun disableRequestRating()
 
     fun useFlagAssistant(): Boolean
     fun useHapticFeedback(): Boolean
@@ -58,79 +62,89 @@ class PreferencesRepository(
         }
     }
 
-    override fun getBoolean(key: String, defaultValue: Boolean): Boolean =
-        preferencesManager.getBoolean(key, defaultValue)
-
-    override fun putBoolean(key: String, value: Boolean) =
-        preferencesManager.putBoolean(key, value)
-
-    override fun getInt(key: String, defaultValue: Int): Int =
-        preferencesManager.getInt(key, defaultValue)
-
-    override fun putInt(key: String, value: Int) =
-        preferencesManager.putInt(key, value)
-
     override fun useFlagAssistant(): Boolean =
-        getBoolean(PREFERENCE_ASSISTANT, true)
+        preferencesManager.getBoolean(PREFERENCE_ASSISTANT, true)
 
     override fun useHapticFeedback(): Boolean =
-        getBoolean(PREFERENCE_VIBRATION, true)
+        preferencesManager.getBoolean(PREFERENCE_VIBRATION, true)
 
     override fun areaSizeMultiplier(): Int =
-        getInt(PREFERENCE_AREA_SIZE, 50)
+        preferencesManager.getInt(PREFERENCE_AREA_SIZE, 50)
 
     override fun useAnimations(): Boolean =
-        getBoolean(PREFERENCE_ANIMATION, true)
+        preferencesManager.getBoolean(PREFERENCE_ANIMATION, true)
 
     override fun useQuestionMark(): Boolean =
-        getBoolean(PREFERENCE_QUESTION_MARK, false)
+        preferencesManager.getBoolean(PREFERENCE_QUESTION_MARK, false)
 
     override fun isSoundEffectsEnabled(): Boolean =
-        getBoolean(PREFERENCE_SOUND_EFFECTS, false)
+        preferencesManager.getBoolean(PREFERENCE_SOUND_EFFECTS, false)
 
     override fun controlStyle(): ControlStyle {
-        val index = getInt(PREFERENCE_CONTROL_STYLE, -1)
+        val index = preferencesManager.getInt(PREFERENCE_CONTROL_STYLE, -1)
         return ControlStyle.values().getOrNull(index) ?: ControlStyle.Standard
     }
 
     override fun useControlStyle(controlStyle: ControlStyle) {
-        putInt(PREFERENCE_CONTROL_STYLE, controlStyle.ordinal)
+        preferencesManager.putInt(PREFERENCE_CONTROL_STYLE, controlStyle.ordinal)
+    }
+
+    override fun isFirstUse(): Boolean =
+        preferencesManager.getBoolean(PREFERENCE_FIRST_USE, true)
+
+    override fun completeFirstUse() {
+        preferencesManager.putBoolean(PREFERENCE_FIRST_USE, false)
     }
 
     override fun customLongPressTimeout(): Long =
-        getInt(PREFERENCE_LONG_PRESS_TIMEOUT, ViewConfiguration.getLongPressTimeout()).toLong()
+        preferencesManager.getInt(PREFERENCE_LONG_PRESS_TIMEOUT, ViewConfiguration.getLongPressTimeout()).toLong()
 
     override fun themeId(): Long =
-        getInt(PREFERENCE_CUSTOM_THEME, 0).toLong()
+        preferencesManager.getInt(PREFERENCE_CUSTOM_THEME, 0).toLong()
 
     override fun useTheme(themeId: Long) {
-        putInt(PREFERENCE_CUSTOM_THEME, themeId.toInt())
+        preferencesManager.putInt(PREFERENCE_CUSTOM_THEME, themeId.toInt())
     }
 
     override fun updateStatsBase(statsBase: Int) {
-        putInt(PREFERENCE_STATS_BASE, statsBase)
+        preferencesManager.putInt(PREFERENCE_STATS_BASE, statsBase)
     }
 
     override fun getStatsBase(): Int =
-        getInt(PREFERENCE_STATS_BASE, 0)
+        preferencesManager.getInt(PREFERENCE_STATS_BASE, 0)
+
+    override fun getUseCount(): Int =
+        preferencesManager.getInt(PREFERENCE_USE_COUNT, 0)
+
+    override fun incrementUseCount() {
+        val current = preferencesManager.getInt(PREFERENCE_USE_COUNT, 0)
+        preferencesManager.putInt(PREFERENCE_USE_COUNT, current + 1)
+    }
 
     override fun incrementProgressiveValue() {
-        val value = getInt(PREFERENCE_PROGRESSIVE_VALUE, 0)
-        putInt(PREFERENCE_PROGRESSIVE_VALUE, value + 1)
+        val value = preferencesManager.getInt(PREFERENCE_PROGRESSIVE_VALUE, 0)
+        preferencesManager.putInt(PREFERENCE_PROGRESSIVE_VALUE, value + 1)
     }
 
     override fun decrementProgressiveValue() {
-        val value = getInt(PREFERENCE_PROGRESSIVE_VALUE, 0)
-        putInt(PREFERENCE_PROGRESSIVE_VALUE, (value - 1).coerceAtLeast(0))
+        val value = preferencesManager.getInt(PREFERENCE_PROGRESSIVE_VALUE, 0)
+        preferencesManager.putInt(PREFERENCE_PROGRESSIVE_VALUE, (value - 1).coerceAtLeast(0))
     }
 
     override fun getProgressiveValue(): Int =
-        getInt(PREFERENCE_PROGRESSIVE_VALUE, 0)
+        preferencesManager.getInt(PREFERENCE_PROGRESSIVE_VALUE, 0)
+
+    override fun isRequestRatingEnabled(): Boolean =
+        preferencesManager.getBoolean(PREFERENCE_REQUEST_RATING, true)
+
+    override fun disableRequestRating() {
+        preferencesManager.putBoolean(PREFERENCE_REQUEST_RATING, false)
+    }
 
     private fun migrateOldPreferences() {
         // Migrate Double Click to the new Control settings
         if (preferencesManager.contains(PREFERENCE_OLD_DOUBLE_CLICK)) {
-            if (getBoolean(PREFERENCE_OLD_DOUBLE_CLICK, false)) {
+            if (preferencesManager.getBoolean(PREFERENCE_OLD_DOUBLE_CLICK, false)) {
                 useControlStyle(ControlStyle.DoubleClick)
             }
 
@@ -139,7 +153,7 @@ class PreferencesRepository(
 
         // Migrate Large Area to Custom Area size
         if (preferencesManager.contains(PREFERENCE_OLD_LARGE_AREA)) {
-            if (getBoolean(PREFERENCE_OLD_LARGE_AREA, false)) {
+            if (preferencesManager.getBoolean(PREFERENCE_OLD_LARGE_AREA, false)) {
                 preferencesManager.putInt(PREFERENCE_AREA_SIZE, 63)
             } else {
                 preferencesManager.putInt(PREFERENCE_AREA_SIZE, 50)
@@ -173,5 +187,8 @@ class PreferencesRepository(
         private const val PREFERENCE_OLD_LARGE_AREA = "preference_large_area"
         private const val PREFERENCE_PROGRESSIVE_VALUE = "preference_progressive_value"
         private const val PREFERENCE_LONG_PRESS_TIMEOUT = "preference_long_press_timeout"
+        private const val PREFERENCE_FIRST_USE = "preference_first_use"
+        private const val PREFERENCE_USE_COUNT = "preference_use_count"
+        private const val PREFERENCE_REQUEST_RATING = "preference_request_rating"
     }
 }

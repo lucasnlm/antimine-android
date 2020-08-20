@@ -5,6 +5,10 @@ import android.content.Context
 import android.content.Intent
 
 class InstantAppManager : IInstantAppManager {
+    override fun isEnabled(): Boolean {
+        return false
+    }
+
     override fun isInstantAppSupported(context: Context): Boolean {
         return false
     }

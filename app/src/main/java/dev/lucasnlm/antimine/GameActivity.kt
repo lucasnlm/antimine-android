@@ -10,7 +10,6 @@ import android.text.format.DateUtils
 import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
-import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.TooltipCompat
@@ -37,7 +36,6 @@ import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.history.HistoryActivity
-import dev.lucasnlm.antimine.instant.InstantAppManager
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
@@ -45,6 +43,7 @@ import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.theme.ThemeActivity
+import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_game.minesCount
@@ -61,7 +60,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private val analyticsManager: IAnalyticsManager by inject()
 
-    private val instantAppManager: InstantAppManager by inject()
+    private val instantAppManager: IInstantAppManager by inject()
 
     private val savesRepository: ISavesRepository by inject()
 
@@ -308,9 +307,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 }
             })
 
-            if (preferencesRepository.getBoolean(PREFERENCE_FIRST_USE, false)) {
+            if (preferencesRepository.isFirstUse()) {
                 openDrawer(GravityCompat.START)
-                preferencesRepository.putBoolean(PREFERENCE_FIRST_USE, true)
+                preferencesRepository.completeFirstUse()
             }
         }
     }
@@ -345,7 +344,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             handled
         }
 
-        navigationView.menu.findItem(R.id.share_now).isVisible = instantAppManager.isNotEnabled()
+        navigationView.menu.findItem(R.id.share_now).isVisible = !instantAppManager.isEnabled()
 
         if (!playGamesManager.hasGooglePlayGames()) {
             navigationView.menu.removeGroup(R.id.play_games_group)
@@ -353,15 +352,15 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun checkUseCount() {
-        val current = preferencesRepository.getInt(PREFERENCE_USE_COUNT, 0)
-        val shouldRequestRating = preferencesRepository.getBoolean(PREFERENCE_REQUEST_RATING, true)
+        val current = preferencesRepository.getUseCount()
+        val shouldRequestRating = preferencesRepository.isRequestRatingEnabled()
 
         if (current >= MIN_USAGES_TO_RATING && shouldRequestRating) {
             analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
             showRequestRating()
         }
 
-        preferencesRepository.putInt(PREFERENCE_USE_COUNT, current + 1)
+        preferencesRepository.incrementUseCount()
     }
 
     private fun onChangeDifficulty(difficulty: Difficulty) {
@@ -409,7 +408,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     openRateUsLink("Dialog")
                 }
                 .setNegativeButton(R.string.rating_button_no) { _, _ ->
-                    preferencesRepository.putBoolean(PREFERENCE_REQUEST_RATING, false)
+                    preferencesRepository.disableRequestRating()
                 }
                 .show()
         }
@@ -637,7 +636,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
 
         analyticsManager.sentEvent(Analytics.TapRatingRequest(from))
-        preferencesRepository.putBoolean(PREFERENCE_REQUEST_RATING, false)
+        preferencesRepository.disableRequestRating()
     }
 
     private fun keepScreenOn(enabled: Boolean) {
@@ -688,10 +687,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     companion object {
-        const val PREFERENCE_FIRST_USE = "preference_first_use"
-        const val PREFERENCE_USE_COUNT = "preference_use_count"
-        const val PREFERENCE_REQUEST_RATING = "preference_request_rating"
-
         const val IA_REFERRER = "InstallApiActivity"
         const val IA_REQUEST_CODE = 5
         const val GOOGLE_PLAY_REQUEST_CODE = 6

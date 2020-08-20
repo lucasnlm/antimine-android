@@ -12,16 +12,16 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.instant.InstantAppManager
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogViewModel
+import dev.lucasnlm.external.IInstantAppManager
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EndGameDialogFragment : AppCompatDialogFragment() {
-    private val instantAppManager: InstantAppManager by inject()
+    private val instantAppManager: IInstantAppManager by inject()
 
     private val endGameViewModel by viewModel<EndGameDialogViewModel>()
     private val gameViewModel by sharedViewModel<GameViewModel>()
