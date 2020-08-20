@@ -96,7 +96,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             loadGameFragment()
         }
 
-        if (instantAppManager.isEnabled()) {
+        if (instantAppManager.isEnabled(applicationContext)) {
             bindInstantApp()
             savesRepository.setLimit(1)
         } else {
@@ -185,7 +185,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 drawer.closeDrawer(GravityCompat.START)
                 gameViewModel.resumeGame()
             }
-            status == Status.Running && instantAppManager.isEnabled() -> showQuitConfirmation {
+            status == Status.Running && instantAppManager.isEnabled(applicationContext) -> showQuitConfirmation {
                 super.onBackPressed()
             }
             else -> super.onBackPressed()
@@ -344,7 +344,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             handled
         }
 
-        navigationView.menu.findItem(R.id.share_now).isVisible = !instantAppManager.isEnabled()
+        navigationView.menu.findItem(R.id.share_now).isVisible = !instantAppManager.isEnabled(applicationContext)
 
         if (!playGamesManager.hasGooglePlayGames()) {
             navigationView.menu.removeGroup(R.id.play_games_group)

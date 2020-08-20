@@ -68,7 +68,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             }
 
                             when {
-                                instantAppManager.isEnabled() -> {
+                                instantAppManager.isEnabled(context) -> {
                                     setNeutralButton(R.string.install) { _, _ ->
                                         activity?.run {
                                             instantAppManager.showInstallPrompt(this, null, 0, null)

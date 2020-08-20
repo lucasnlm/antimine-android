@@ -15,11 +15,7 @@ import org.koin.dsl.module
 val AppModule = module {
     single {
         object : IInstantAppManager {
-            override fun isEnabled(): Boolean = false
-
-            override fun isInstantAppSupported(context: Context): Boolean = false
-
-            override fun isInAppPaymentsSupported(context: Context): Boolean = false
+            override fun isEnabled(context: Context): Boolean = false
 
             override fun showInstallPrompt(
                 activity: Activity,

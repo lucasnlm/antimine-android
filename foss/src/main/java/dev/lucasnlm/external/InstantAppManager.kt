@@ -5,15 +5,7 @@ import android.content.Context
 import android.content.Intent
 
 class InstantAppManager : IInstantAppManager {
-    override fun isEnabled(): Boolean {
-        return false
-    }
-
-    override fun isInstantAppSupported(context: Context): Boolean {
-        return false
-    }
-
-    override fun isInAppPaymentsSupported(context: Context): Boolean {
+    override fun isEnabled(context: Context): Boolean {
         return false
     }
 
