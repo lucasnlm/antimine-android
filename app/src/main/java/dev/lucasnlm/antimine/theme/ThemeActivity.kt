@@ -1,7 +1,6 @@
 package dev.lucasnlm.antimine.theme
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import dev.lucasnlm.antimine.R

@@ -17,7 +17,6 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesEvent
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesViewModel
 import kotlinx.coroutines.flow.collect
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PlayGamesDialogFragment : DialogFragment() {

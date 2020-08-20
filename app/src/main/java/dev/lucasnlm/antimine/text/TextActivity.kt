@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_text.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TextActivity : ThematicActivity(R.layout.activity_text) {

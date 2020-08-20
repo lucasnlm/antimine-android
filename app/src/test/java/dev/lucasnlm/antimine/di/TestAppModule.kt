@@ -3,17 +3,12 @@ package dev.lucasnlm.antimine.di
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import dev.lucasnlm.antimine.common.BuildConfig
 import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
-import dev.lucasnlm.antimine.core.analytics.ProdAnalyticsManager
 import dev.lucasnlm.antimine.share.ShareManager
-import dev.lucasnlm.external.BillingManager
-import dev.lucasnlm.external.ExternalAnalyticsWrapper
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
-import dev.lucasnlm.external.PlayGamesManager
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -57,7 +52,6 @@ val AppModule = module {
         override fun openAchievements(activity: Activity) { }
 
         override fun openLeaderboards(activity: Activity) { }
-
     } } bind IPlayGamesManager::class
 
     single { ShareManager(get()) }

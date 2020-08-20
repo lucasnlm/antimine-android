@@ -1,13 +1,8 @@
 package dev.lucasnlm.antimine
 
 import android.os.Build
-import android.os.SystemClock
-import android.view.MotionEvent
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.launchActivity
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.matcher.ViewMatchers.withTagKey
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import dev.lucasnlm.antimine.di.AppModule
 import dev.lucasnlm.antimine.di.TestCommonModule
 import dev.lucasnlm.antimine.di.TestLevelModule

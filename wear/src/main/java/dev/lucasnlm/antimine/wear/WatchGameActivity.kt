@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 
 class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider {
 
-    private val viewModel  by viewModels<GameViewModel>()
+    private val viewModel by viewModels<GameViewModel>()
 
     private val ambientController: AmbientModeSupport.AmbientController by lazy {
         AmbientModeSupport.attach(this)

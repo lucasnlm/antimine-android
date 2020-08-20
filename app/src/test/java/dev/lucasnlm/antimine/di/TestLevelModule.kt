@@ -33,4 +33,3 @@ val TestLevelModule = module {
         DisabledHapticFeedbackManager()
     } bind IHapticFeedbackManager::class
 }
-
