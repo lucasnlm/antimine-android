@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.common.level.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.common.R
@@ -11,7 +10,6 @@ import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.models.Minefield
-import dev.lucasnlm.antimine.common.level.models.StateUpdate
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
@@ -30,11 +28,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class GameViewModel @ViewModelInject constructor(
+class GameViewModel(
     private val savesRepository: ISavesRepository,
     private val statsRepository: IStatsRepository,
     private val dimensionRepository: IDimensionRepository,
@@ -55,7 +53,6 @@ class GameViewModel @ViewModelInject constructor(
     private var currentDifficulty: Difficulty = Difficulty.Standard
 
     val field = MutableLiveData<List<Area>>()
-    val fieldRefresh = MutableLiveData<Int>()
     val elapsedTimeSeconds = MutableLiveData<Long>()
     val mineCount = MutableLiveData<Int>()
     val difficulty = MutableLiveData<Difficulty>()
@@ -78,7 +75,7 @@ class GameViewModel @ViewModelInject constructor(
         mineCount.postValue(minefield.mines)
         difficulty.postValue(newDifficulty)
         levelSetup.postValue(minefield)
-        refreshAll()
+        refreshField()
 
         eventObserver.postValue(Event.StartNewGame)
 
@@ -105,7 +102,7 @@ class GameViewModel @ViewModelInject constructor(
         mineCount.postValue(setup.mines)
         difficulty.postValue(save.difficulty)
         levelSetup.postValue(setup)
-        refreshAll()
+        refreshField()
         refreshMineCount()
 
         when {
@@ -132,7 +129,7 @@ class GameViewModel @ViewModelInject constructor(
         mineCount.postValue(setup.mines)
         difficulty.postValue(save.difficulty)
         levelSetup.postValue(setup)
-        refreshAll()
+        refreshField()
 
         eventObserver.postValue(Event.StartNewGame)
 
@@ -172,9 +169,10 @@ class GameViewModel @ViewModelInject constructor(
 
             withContext(Dispatchers.Main) {
                 if (save.firstOpen is FirstOpen.Position) {
-                    gameController.singleClick(save.firstOpen.value).flatMapConcat { it.second }.collect {
-                        refreshAll()
-                    }
+                    gameController
+                        .singleClick(save.firstOpen.value)
+                        .filterNotNull()
+                        .collect { refreshField() }
                 }
             }
 
@@ -200,7 +198,7 @@ class GameViewModel @ViewModelInject constructor(
 
     fun pauseGame() {
         if (initialized) {
-            if (gameController.hasMines) {
+            if (gameController.hasMines()) {
                 eventObserver.postValue(Event.Pause)
             }
             clock.stop()
@@ -208,7 +206,7 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     suspend fun saveGame() {
-        if (initialized && gameController.hasMines) {
+        if (gameController.hasMines()) {
             val id = savesRepository.saveGame(
                 gameController.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
             )
@@ -218,7 +216,7 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     private suspend fun saveStats() {
-        if (initialized && gameController.hasMines) {
+        if (initialized && gameController.hasMines()) {
             gameController.getStats(elapsedTimeSeconds.value ?: 0L)?.let {
                 statsRepository.addStats(it)
             }
@@ -226,66 +224,57 @@ class GameViewModel @ViewModelInject constructor(
     }
 
     fun resumeGame() {
-        if (initialized && gameController.hasMines && !gameController.isGameOver()) {
+        if (initialized && gameController.hasMines() && !gameController.isGameOver()) {
             eventObserver.postValue(Event.Resume)
             runClock()
         }
     }
 
     suspend fun onLongClick(index: Int) {
-        gameController.longPress(index).flatMapConcat { (action, flow) ->
-            onFeedbackAnalytics(action, index)
-            flow
-        }.collect {
-            if (it is StateUpdate.Multiple) {
-                refreshAll()
-            } else if (it is StateUpdate.Single) {
-                refreshIndex(it.index, false)
+        gameController
+            .longPress(index)
+            .filterNotNull()
+            .collect { action ->
+                onFeedbackAnalytics(action, index)
+                refreshField()
+                onPostAction()
+
+                if (preferencesRepository.useHapticFeedback()) {
+                    hapticFeedbackManager.longPressFeedback()
+                }
             }
-        }.also {
-            onPostAction()
-        }
     }
 
-    suspend fun onDoubleClickArea(index: Int) {
-        gameController.doubleClick(index).flatMapConcat { (action, flow) ->
-            onFeedbackAnalytics(action, index)
-            flow
-        }.collect {
-            if (it is StateUpdate.Multiple) {
-                refreshAll()
-            } else if (it is StateUpdate.Single) {
-                refreshIndex(it.index, false)
-            }
-        }.also {
-            onPostAction()
+    suspend fun onDoubleClick(index: Int) {
+        gameController
+            .doubleClick(index)
+            .filterNotNull()
+            .collect { action ->
+                onFeedbackAnalytics(action, index)
+                refreshField()
+                onPostAction()
 
-            if (preferencesRepository.useHapticFeedback()) {
-                hapticFeedbackManager.longPressFeedback()
+                if (preferencesRepository.useHapticFeedback()) {
+                    hapticFeedbackManager.longPressFeedback()
+                }
             }
-        }
     }
 
     suspend fun onSingleClick(index: Int) {
-        gameController.singleClick(index).flatMapConcat { (action, flow) ->
-            onFeedbackAnalytics(action, index)
-            flow
-        }.collect {
-            if (it is StateUpdate.Multiple) {
-                refreshAll()
-            } else if (it is StateUpdate.Single) {
-                refreshIndex(it.index, false)
+        gameController
+            .singleClick(index)
+            .filterNotNull()
+            .collect { action ->
+                onFeedbackAnalytics(action, index)
+                refreshField()
+                onPostAction()
             }
-        }.also {
-            onPostAction()
-        }
     }
 
-    private suspend fun onPostAction() {
+    private fun onPostAction() {
         if (preferencesRepository.useFlagAssistant() && !gameController.hasAnyMineExploded()) {
-            gameController.runFlagAssistant().collect {
-                refreshIndex(it)
-            }
+            gameController.runFlagAssistant()
+            refreshField()
         }
 
         updateGameState()
@@ -320,12 +309,12 @@ class GameViewModel @ViewModelInject constructor(
             }
         }
 
-        if (gameController.hasMines) {
+        if (gameController.hasMines()) {
             refreshMineCount()
         }
 
         if (gameController.checkVictory()) {
-            refreshAll()
+            refreshField()
             eventObserver.postValue(Event.Victory)
         }
     }
@@ -374,16 +363,18 @@ class GameViewModel @ViewModelInject constructor(
                 }
             }
 
+            showWrongFlags()
+            refreshField()
+
             findExplodedMine()?.let { exploded ->
                 takeExplosionRadius(exploded).forEach {
-                    it.isCovered = false
-                    refreshIndex(it.id)
+                    revealArea(it.id)
+                    refreshField()
                     delay(delayMillis)
                 }
             }
 
-            showWrongFlags()
-            refreshAll()
+            refreshField()
             updateGameState()
         }
 
@@ -408,6 +399,7 @@ class GameViewModel @ViewModelInject constructor(
             )
             flagAllMines()
             showWrongFlags()
+            refreshField()
         }
 
         if (currentDifficulty == Difficulty.Standard) {
@@ -424,15 +416,7 @@ class GameViewModel @ViewModelInject constructor(
 
     private fun getAreaSizeMultiplier() = preferencesRepository.areaSizeMultiplier()
 
-    private fun refreshIndex(targetIndex: Int, multipleChanges: Boolean = false) {
-        if (!preferencesRepository.useAnimations() || multipleChanges) {
-            field.postValue(gameController.field)
-        } else {
-            fieldRefresh.postValue(targetIndex)
-        }
-    }
-
-    private fun refreshAll() {
-        field.postValue(gameController.field)
+    private fun refreshField() {
+        field.postValue(gameController.field())
     }
 }

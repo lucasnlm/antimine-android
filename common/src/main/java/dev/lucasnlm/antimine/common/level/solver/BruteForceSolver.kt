@@ -9,9 +9,7 @@ open class BruteForceSolver : GameSolver() {
 
         do {
             val initialMap = minefield.filter { !it.isCovered && it.minesAround != 0 }
-            initialMap.forEach {
-                minefieldHandler.openOrFlagNeighborsOf(it.id)
-            }
+            initialMap.forEach { minefieldHandler.openOrFlagNeighborsOf(it.id) }
         } while (initialMap != minefield.filter { !it.isCovered && it.minesAround != 0 })
 
         return minefield.count { it.hasMine && !it.mark.isFlag() } == 0

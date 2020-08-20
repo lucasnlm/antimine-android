@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -9,9 +8,9 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 800041
-        versionName '8.0.4'
-        minSdkVersion 16
+        versionCode 800051
+        versionName '8.0.5'
+        minSdkVersion 21
         targetSdkVersion 30
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true
@@ -85,14 +84,11 @@ kapt {
     correctErrorTypes true
 }
 
-hilt {
-    enableTransformForLocalTests true
-}
-
 dependencies {
     // Dependencies must be hardcoded to support F-droid
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':external')
     implementation project(':common')
 
     googleImplementation project(':proprietary')
@@ -119,15 +115,10 @@ dependencies {
     // Google
     implementation 'com.google.android.material:material:1.2.0'
 
-    // Dagger
-    implementation 'com.google.dagger:hilt-android:2.28.1-alpha'
-    kapt 'com.google.dagger:hilt-android-compiler:2.28.1-alpha'
-    testImplementation 'com.google.dagger:hilt-android-testing:2.28.1-alpha'
-    kaptTest 'com.google.dagger:hilt-android-compiler:2.28.1-alpha'
-    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.28.1-alpha'
-    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.28.1-alpha'
-    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
-    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
+    // Koin
+    implementation 'org.koin:koin-android:2.1.6'
+    implementation 'org.koin:koin-androidx-viewmodel:2.1.6'
+    testImplementation 'org.koin:koin-test:2.1.6'
 
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8'

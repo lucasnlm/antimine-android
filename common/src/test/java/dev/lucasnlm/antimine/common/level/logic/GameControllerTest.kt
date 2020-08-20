@@ -2,17 +2,17 @@ package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.common.level.models.Area
-import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Score
 import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.control.GameControl
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -42,9 +42,17 @@ class GameControllerTest {
         withGameController { controller ->
             assertEquals(Score(0, 20, 100), controller.getScore())
 
-            repeat(20) { right ->
-                controller.field.filter { it.hasMine }.take(right).forEach { it.mark = Mark.Flag }
-                assertEquals(Score(right, 20, 100), controller.getScore())
+            repeat(20) { markedMines ->
+                controller
+                    .mines()
+                    .take(markedMines)
+                    .filter { it.mark.isNone() }
+                    .forEach {
+                        // Put a flag.
+                        controller.fakeLongPress(it.id)
+                    }
+
+                assertEquals(Score(markedMines, 20, 100), controller.getScore())
             }
         }
     }
@@ -53,8 +61,17 @@ class GameControllerTest {
     fun testGetScoreWithQuestion() = runBlockingTest {
         withGameController { controller ->
             assertEquals(Score(0, 20, 100), controller.getScore())
+            controller.useQuestionMark(true)
 
-            controller.field.filter { it.hasMine }.take(5).forEach { it.mark = Mark.Question }
+            controller
+                .mines()
+                .take(5)
+                .forEach {
+                    // Put Question Mark
+                    controller.fakeLongPress(it.id)
+                    controller.fakeLongPress(it.id)
+                }
+
             assertEquals(Score(0, 20, 100), controller.getScore())
         }
     }
@@ -62,9 +79,12 @@ class GameControllerTest {
     @Test
     fun testFlagAllMines() = runBlockingTest {
         withGameController { controller ->
+            val minesCount = controller.mines().count()
+
             controller.flagAllMines()
-            val actual = controller.field.filter { it.hasMine }.count { it.isCovered && it.mark.isFlag() }
-            assertEquals(20, actual)
+            val actualFlaggedMines = controller.mines().count { it.isCovered && it.mark.isFlag() }
+
+            assertEquals(minesCount, actualFlaggedMines)
         }
     }
 
@@ -72,32 +92,31 @@ class GameControllerTest {
     fun testFindExplodedMine() = runBlockingTest {
         withGameController { controller ->
             assertNull(controller.findExplodedMine())
-            val target = controller.field.first { it.hasMine }
-            launch {
-                controller.singleClick(target.id).collect { it.second.collect() }
-            }
-            assertEquals(target.id, controller.findExplodedMine()?.id ?: - 1)
+            val target = controller.mines().first()
+            controller.fakeSingleClick(target.id)
+            assertNotNull(controller.findExplodedMine())
+            assertEquals(target.id, controller.findExplodedMine()!!.id)
         }
     }
 
     @Test
     fun testTakeExplosionRadius() = runBlockingTest {
         withGameController { controller ->
-            val lastMine = controller.field.last { it.hasMine }
+            val lastMine = controller.mines().last()
             assertEquals(
                 listOf(95, 85, 74, 73, 65, 88, 55, 91, 45, 52, 90, 47, 59, 42, 36, 32, 39, 28, 4, 3),
                 controller.takeExplosionRadius(lastMine).map { it.id }.toList()
             )
 
-            val firstMine = controller.field.first { it.hasMine }
+            val firstMine = controller.mines().first()
             assertEquals(
-                listOf(4, 5, 13, 33, 27, 36, 38, 41, 19, 29, 39, 49, 67, 59, 70, 86, 81, 87, 92, 91),
+                listOf(3, 4, 32, 42, 36, 45, 52, 28, 55, 47, 65, 39, 73, 74, 59, 85, 91, 95, 88, 90),
                 controller.takeExplosionRadius(firstMine).map { it.id }.toList()
             )
 
-            val midMine = controller.field.filter { it.hasMine }.take(controller.getMinesCount() / 2).last()
+            val midMine = controller.mines().take(controller.getMinesCount() / 2).last()
             assertEquals(
-                listOf(39, 29, 38, 49, 19, 59, 27, 36, 67, 5, 87, 4, 86, 33, 13, 41, 92, 81, 70, 91),
+                listOf(52, 42, 32, 73, 74, 55, 45, 65, 91, 85, 36, 90, 95, 3, 47, 4, 28, 88, 59, 39),
                 controller.takeExplosionRadius(midMine).map { it.id }.toList()
             )
         }
@@ -107,10 +126,10 @@ class GameControllerTest {
     fun testShowAllMines() = runBlockingTest {
         withGameController { controller ->
             controller.showAllMines()
-            controller.field.filter { it.hasMine && it.mistake }.forEach {
+            controller.mines().filter { it.mistake }.forEach {
                 assertEquals(it.isCovered, false)
             }
-            controller.field.filter { it.hasMine && it.mark.isFlag() }.forEach {
+            controller.mines().filter { it.mark.isFlag() }.forEach {
                 assertEquals(it.isCovered, true)
             }
         }
@@ -119,13 +138,19 @@ class GameControllerTest {
     @Test
     fun testShowWrongFlags() = runBlockingTest {
         withGameController { controller ->
-            val wrongFlag = controller.field.first { !it.hasMine }.apply {
-                mark = Mark.Flag
+            controller.field().first { !it.hasMine && it.isCovered }.run {
+                controller.fakeLongPress(id)
             }
-            val rightFlag = controller.field.first { it.hasMine }.apply {
-                mark = Mark.Flag
+
+            controller.mines().first().run {
+                controller.fakeLongPress(id)
             }
+
             controller.showWrongFlags()
+
+            val wrongFlag = controller.field().first { !it.hasMine && it.isCovered }
+            val rightFlag = controller.mines().first()
+
             assertTrue(wrongFlag.mistake)
             assertFalse(rightFlag.mistake)
         }
@@ -134,10 +159,10 @@ class GameControllerTest {
     @Test
     fun testRevealAllEmptyAreas() = runBlockingTest {
         withGameController { controller ->
-            val covered = controller.field.filter { it.isCovered }
+            val covered = controller.field { it.isCovered }
             assertTrue(covered.isNotEmpty())
             controller.revealAllEmptyAreas()
-            assertEquals(controller.field.filter { it.hasMine }, controller.field.filter { it.isCovered })
+            assertEquals(controller.mines(), controller.field { it.isCovered })
         }
     }
 
@@ -145,9 +170,19 @@ class GameControllerTest {
     fun testFlaggedAllMines() = runBlockingTest {
         withGameController { controller ->
             assertFalse(controller.hasFlaggedAllMines())
-            controller.field.filter { it.hasMine }.take(10).forEach { it.mark = Mark.Flag }
+
+            controller.field()
+                .filter { it.hasMine }
+                .take(10)
+                .forEach { controller.fakeLongPress(it.id) }
+
             assertFalse(controller.hasFlaggedAllMines())
-            controller.field.filter { it.hasMine }.forEach { it.mark = Mark.Flag }
+
+            controller.field()
+                .filter { it.hasMine }
+                .filter { it.mark.isNone() }
+                .forEach { controller.fakeLongPress(it.id) }
+
             assertTrue(controller.hasFlaggedAllMines())
         }
     }
@@ -158,7 +193,14 @@ class GameControllerTest {
             assertEquals(20, controller.remainingMines())
 
             repeat(20) { flagCount ->
-                controller.field.filter { it.hasMine }.take(flagCount).forEach { it.mark = Mark.Flag }
+                controller.field()
+                    .filter { it.hasMine }
+                    .take(flagCount)
+                    .forEach {
+                        if (!it.mark.isFlag()) {
+                            controller.fakeLongPress(it.id)
+                        }
+                    }
                 assertEquals("flagging $flagCount mines", 20 - flagCount, controller.remainingMines())
             }
         }
@@ -170,9 +212,9 @@ class GameControllerTest {
             assertFalse(controller.hasIsolatedAllMines())
             assertFalse(controller.isGameOver())
 
-            controller.field.filter { !it.hasMine }.forEach {
-                it.isCovered = false
-            }
+            controller.field()
+                .filter { !it.hasMine }
+                .forEach { controller.fakeSingleClick(it.id) }
 
             assertTrue(controller.hasIsolatedAllMines())
             assertTrue(controller.isGameOver())
@@ -184,10 +226,7 @@ class GameControllerTest {
         withGameController { controller ->
             assertFalse(controller.hasAnyMineExploded())
 
-            controller.field.first { it.hasMine }.also {
-                it.isCovered = false
-                it.mistake = true
-            }
+            controller.field().first { it.hasMine }.also { controller.fakeSingleClick(it.id) }
 
             assertTrue(controller.hasAnyMineExploded())
         }
@@ -198,10 +237,7 @@ class GameControllerTest {
         withGameController { controller ->
             assertFalse(controller.isGameOver())
 
-            controller.field.first { it.hasMine }.also {
-                it.isCovered = false
-                it.mistake = true
-            }
+            controller.field().first { it.hasMine }.also { controller.fakeSingleClick(it.id) }
 
             assertTrue(controller.isGameOver())
         }
@@ -212,13 +248,16 @@ class GameControllerTest {
         withGameController { controller ->
             assertFalse(controller.checkVictory())
 
-            controller.field.filter { it.hasMine }.forEach { it.mark = Mark.Flag }
+            controller.mines().forEach { controller.fakeLongPress(it.id) }
             assertFalse(controller.checkVictory())
 
-            controller.field.filterNot { it.hasMine }.forEach { it.isCovered = false }
+            controller.field { !it.hasMine }.forEach { controller.fakeSingleClick(it.id) }
             assertTrue(controller.checkVictory())
 
-            controller.field.first { it.hasMine }.mistake = true
+            controller.mines().first().run {
+                controller.fakeSingleClick(id)
+                controller.fakeSingleClick(id)
+            }
             assertFalse(controller.checkVictory())
         }
     }
@@ -275,17 +314,18 @@ class GameControllerTest {
                 updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
                 fakeSingleClick(14)
                 assertFalse(at(14).isCovered)
-                field.filterNeighborsOf(at(14)).forEach {
+
+                field().filterNeighborsOf(at(14)).forEach {
                     assertTrue(it.isCovered)
                 }
 
-                field.filter { it.hasMine }.forEach {
-                    fakeLongPress(it.id)
-                    assertTrue(it.mark.isFlag())
-                }
+                mines().forEach { fakeLongPress(it.id) }
+
+                mines().forEach { assertTrue(it.mark.isFlag()) }
 
                 fakeLongPress(14)
-                field.filterNeighborsOf(at(14)).forEach {
+
+                field().filterNeighborsOf(at(14)).forEach {
                     if (it.hasMine) {
                         assertTrue(it.isCovered)
                     } else {
@@ -314,23 +354,55 @@ class GameControllerTest {
     }
 
     @Test
+    fun testControlFirstActionWithInvertedDoubleClick() {
+        withGameController { controller ->
+            controller.run {
+                updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClickInverted))
+                assertTrue(at(3).isCovered)
+                fakeDoubleClick(3)
+                assertTrue(at(3).isCovered)
+                assertTrue(at(3).mark.isFlag())
+                fakeDoubleClick(3)
+                assertFalse(at(3).mark.isFlag())
+                assertTrue(at(3).isCovered)
+            }
+        }
+    }
+
+    @Test
+    fun testControlSecondActionWithInvertedDoubleClick() {
+        withGameController { controller ->
+            controller.run {
+                updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClickInverted))
+                assertTrue(at(3).isCovered)
+                fakeSingleClick(3)
+                assertFalse(at(3).isCovered)
+            }
+        }
+    }
+
+    @Test
     fun testControlFastFlagOpenMultiple() {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
                 fakeLongPress(14)
                 assertFalse(at(14).isCovered)
-                field.filterNeighborsOf(at(14)).forEach {
+
+                field().filterNeighborsOf(at(14)).forEach {
                     assertTrue(it.isCovered)
                 }
 
-                field.filter { it.hasMine }.forEach {
+                mines().forEach {
                     fakeSingleClick(it.id)
+                }
+
+                mines().forEach {
                     assertTrue(it.mark.isFlag())
                 }
 
                 fakeSingleClick(14)
-                field.filterNeighborsOf(at(14)).forEach {
+                field().filterNeighborsOf(at(14)).forEach {
                     if (it.hasMine) {
                         assertTrue(it.isCovered)
                     } else {
@@ -399,17 +471,16 @@ class GameControllerTest {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
                 fakeDoubleClick(14)
                 assertFalse(at(14).isCovered)
-                field.filterNeighborsOf(at(14)).forEach {
+                field().filterNeighborsOf(at(14)).forEach {
                     assertTrue(it.isCovered)
                 }
 
-                field.filter { it.hasMine }.forEach {
-                    fakeSingleClick(it.id)
-                    assertTrue(it.mark.isFlag())
-                }
+                mines().forEach { fakeSingleClick(it.id) }
+
+                mines().forEach { assertTrue(it.mark.isFlag()) }
 
                 fakeDoubleClick(14)
-                field.filterNeighborsOf(at(14)).forEach {
+                field().filterNeighborsOf(at(14)).forEach {
                     if (it.hasMine) {
                         assertTrue(it.isCovered)
                     } else {
@@ -425,11 +496,11 @@ class GameControllerTest {
         withGameController(clickOnCreate = false) { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
-                assertFalse(hasMines)
-                assertEquals(0, field.filterNot { it.isCovered }.count())
+                assertFalse(hasMines())
+                assertEquals(0, field().filterNot { it.isCovered }.count())
                 fakeSingleClick(40)
-                assertTrue(hasMines)
-                field.filterNeighborsOf(at(40)).forEach { assertFalse(it.isCovered) }
+                assertTrue(hasMines())
+                field().filterNeighborsOf(at(40)).forEach { assertFalse(it.isCovered) }
             }
         }
     }
@@ -439,25 +510,23 @@ class GameControllerTest {
         withGameController(clickOnCreate = false) { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
-                assertFalse(hasMines)
-                assertEquals(0, field.filterNot { it.isCovered }.count())
+                assertFalse(hasMines())
+                assertEquals(0, field().filterNot { it.isCovered }.count())
                 fakeSingleClick(40)
-                assertTrue(hasMines)
-                field.filterNeighborsOf(at(40)).forEach { assertFalse(it.isCovered) }
+                assertTrue(hasMines())
+                field().filterNeighborsOf(at(40)).forEach { assertFalse(it.isCovered) }
             }
         }
     }
 
     private fun GameController.at(index: Int): Area {
-        return this.field.first { it.id == index }
+        return this.field().first { it.id == index }
     }
 
     private fun GameController.fakeSingleClick(index: Int) {
         runBlocking {
             launch {
-                singleClick(index).collect {
-                    it.second.collect()
-                }
+                singleClick(index).single()
             }
         }
     }
@@ -465,7 +534,7 @@ class GameControllerTest {
     private fun GameController.fakeLongPress(index: Int) {
         runBlocking {
             launch {
-                longPress(index).collect { it.second.collect() }
+                longPress(index).single()
             }
         }
     }
@@ -473,7 +542,7 @@ class GameControllerTest {
     private fun GameController.fakeDoubleClick(index: Int) {
         runBlocking {
             launch {
-                doubleClick(index).collect { it.second.collect() }
+                doubleClick(index).single()
             }
         }
     }

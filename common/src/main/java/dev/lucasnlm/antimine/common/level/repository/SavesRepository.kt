@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.common.level.repository
 
 import dev.lucasnlm.antimine.common.level.database.dao.SaveDao
 import dev.lucasnlm.antimine.common.level.database.models.Save
-import javax.inject.Inject
 
 interface ISavesRepository {
     suspend fun getAllSaves(): List<Save>
@@ -12,7 +11,7 @@ interface ISavesRepository {
     fun setLimit(maxSavesStorage: Int)
 }
 
-class SavesRepository @Inject constructor(
+class SavesRepository(
     private val savesDao: SaveDao,
     private var maxSavesStorage: Int = MAX_STORAGE
 ) : ISavesRepository {

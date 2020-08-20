@@ -66,7 +66,7 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 - [Android SDK 30](https://developer.android.com/about/versions/11)
 - [AndroidX](https://developer.android.com/jetpack/androidx)
 - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
-- [Dagger Hilt](https://dagger.dev/hilt/)
+- [Koin Kotlin](https://github.com/InsertKoinIO/koin)
 - [Room](https://developer.android.com/training/data-storage/room)
 - [Robolectric](http://robolectric.org/)
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)

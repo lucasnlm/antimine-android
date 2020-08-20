@@ -1,39 +1,57 @@
 package dev.lucasnlm.antimine.level.view
 
-import android.content.Context
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
+import androidx.core.view.doOnLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
+import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-@AndroidEntryPoint
 open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
-
     override fun onPause() {
         super.onPause()
-        GlobalScope.launch {
-            viewModel.saveGame()
+        lifecycleScope.launch {
+            gameViewModel.saveGame()
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         recyclerGrid = view.findViewById(R.id.recyclerGrid)
+        recyclerGrid.doOnLayout {
+            lifecycleScope.launch {
+                val loadGameUid = checkLoadGameDeepLink()
+                val newGameDeepLink = checkNewGameDeepLink()
+                val retryDeepLink = checkRetryGameDeepLink()
 
-        viewModel.run {
+                val levelSetup = when {
+                    loadGameUid != null -> gameViewModel.loadGame(loadGameUid)
+                    newGameDeepLink != null -> gameViewModel.startNewGame(newGameDeepLink)
+                    retryDeepLink != null -> gameViewModel.retryGame(retryDeepLink)
+                    else -> gameViewModel.loadLastGame()
+                }
+
+                withContext(Dispatchers.Main) {
+                    recyclerGrid.apply {
+                        addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
+                        setHasFixedSize(true)
+                    }
+                    setupRecyclerViewSize(levelSetup)
+                }
+            }
+        }
+
+        gameViewModel.run {
             field.observe(
                 viewLifecycleOwner,
                 Observer {
@@ -44,20 +62,7 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
             levelSetup.observe(
                 viewLifecycleOwner,
                 Observer {
-                    recyclerGrid.apply {
-                        val horizontalPadding = calcHorizontalPadding(it.width)
-                        val verticalPadding = calcVerticalPadding(it.height)
-                        layoutManager = makeNewLayoutManager(it.width)
-                        setHasFixedSize(true)
-                        setPadding(horizontalPadding, verticalPadding, 0, 0)
-                    }
-                }
-            )
-
-            fieldRefresh.observe(
-                viewLifecycleOwner,
-                Observer {
-                    areaAdapter.notifyItemChanged(it)
+                    setupRecyclerViewSize(it)
                 }
             )
 
@@ -81,38 +86,19 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
         }
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    private fun setupRecyclerViewSize(levelSetup: Minefield) {
+        recyclerGrid.apply {
+            val horizontalPadding = calcHorizontalPadding(levelSetup.width)
+            val verticalPadding = calcVerticalPadding(levelSetup.height)
+            setPadding(horizontalPadding, verticalPadding, 0, 0)
+            layoutManager = makeNewLayoutManager(levelSetup.width)
+            adapter = areaAdapter
+            alpha = 0.0f
 
-        lifecycleScope.launchWhenCreated {
-            val loadGameUid = checkLoadGameDeepLink()
-            val newGameDeepLink = checkNewGameDeepLink()
-            val retryDeepLink = checkRetryGameDeepLink()
-
-            val levelSetup = when {
-                loadGameUid != null -> viewModel.loadGame(loadGameUid)
-                newGameDeepLink != null -> viewModel.startNewGame(newGameDeepLink)
-                retryDeepLink != null -> viewModel.retryGame(retryDeepLink)
-                else -> viewModel.loadLastGame()
-            }
-
-            withContext(Dispatchers.Main) {
-                recyclerGrid.apply {
-                    val horizontalPadding = calcHorizontalPadding(levelSetup.width)
-                    val verticalPadding = calcVerticalPadding(levelSetup.height)
-                    addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
-                    setPadding(horizontalPadding, verticalPadding, 0, 0)
-                    layoutManager = makeNewLayoutManager(levelSetup.width)
-                    setHasFixedSize(true)
-                    adapter = areaAdapter
-                    alpha = 0.0f
-
-                    animate().apply {
-                        alpha(1.0f)
-                        duration = DateUtils.SECOND_IN_MILLIS
-                    }.start()
-                }
-            }
+            animate().apply {
+                alpha(1.0f)
+                duration = DateUtils.SECOND_IN_MILLIS
+            }.start()
         }
     }
 

@@ -2,24 +2,20 @@ package dev.lucasnlm.antimine.common.level.view
 
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragment(contentLayoutId) {
-    @Inject
-    lateinit var dimensionRepository: IDimensionRepository
-
-    @Inject
-    lateinit var preferencesRepository: IPreferencesRepository
-
-    protected val viewModel: GameViewModel by activityViewModels()
+    private val dimensionRepository: IDimensionRepository by inject()
+    private val preferencesRepository: IPreferencesRepository by inject()
+    protected val gameViewModel by sharedViewModel<GameViewModel>()
     protected val areaAdapter by lazy {
-        AreaAdapter(requireContext(), viewModel, preferencesRepository, dimensionRepository)
+        AreaAdapter(requireContext(), gameViewModel, preferencesRepository, dimensionRepository)
     }
     protected lateinit var recyclerGrid: RecyclerView
 
@@ -39,9 +35,7 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
         val height = requireView().measuredHeight
         val recyclerViewHeight = (dimensionRepository.areaSize() * boardHeight)
         val separatorsHeight = (2 * dimensionRepository.areaSeparator() * (boardHeight - 1))
-
         val calculatedHeight = (height - recyclerViewHeight - separatorsHeight)
-
         return (calculatedHeight / 2).coerceAtLeast(0.0f).toInt()
     }
 }

@@ -3,13 +3,11 @@ package dev.lucasnlm.antimine.about.viewmodel
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.hilt.lifecycle.ViewModelInject
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 
-class AboutViewModel @ViewModelInject constructor(
-    @ApplicationContext private val context: Context
+class AboutViewModel(
+    private val context: Context
 ) : IntentViewModel<AboutEvent, AboutState>() {
 
     override fun onEvent(event: AboutEvent) {
@@ -47,10 +45,11 @@ class AboutViewModel @ViewModelInject constructor(
 
     private fun getLicensesList() = mapOf(
         "Android SDK License" to R.raw.android_sdk,
-        "Material Design Icons" to R.raw.apache2,
-        "Dagger Hilt" to R.raw.apache2,
+        "Material Design" to R.raw.apache2,
+        "Koin" to R.raw.apache2,
         "Moshi" to R.raw.apache2,
         "Mockito" to R.raw.mockito,
+        "Noto Emoji" to R.raw.apache2,
         "Sounds" to R.raw.sounds
     ).map {
         License(it.key, it.value)

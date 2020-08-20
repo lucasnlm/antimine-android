@@ -32,7 +32,10 @@
     <string name="settings_large_areas">Use Large Areas</string>
     <string name="size">Size</string>
     <string name="system">System</string>
+    <string name="amoled" translatable="false">AMOLED</string>
     <string name="rating">Feedback</string>
+    <string name="support">Help supporting us!</string>
+    <string name="support_description">It will allow us building new features and to keep our project active.</string>
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
     <string name="used_software_text">This game uses the following third parties software:</string>
     <string name="translators_text">This game was translated by the following people:</string>
@@ -58,7 +61,6 @@
     <string name="use_question_mark">Use Question Mark</string>
     <string name="control">Controls</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Flag First</string>
     <string name="single_click">Single Click</string>
     <string name="double_click">Double Click</string>
     <string name="long_press">Long Press</string>
@@ -71,6 +73,8 @@
     <string name="cancel">Cancel</string>
     <string name="resume">Resume</string>
     <string name="yes">Yes</string>
+    <string name="unlock">Unlock</string>
+    <string name="achievements">Achievements</string>
     <string name="rating_button_no">No</string>
     <string name="general">General</string>
     <string name="source_code">Source Code</string>

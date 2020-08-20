@@ -10,14 +10,11 @@ import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
 import dev.lucasnlm.antimine.common.level.logic.filterNeighborsOf
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
-import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Score
-import dev.lucasnlm.antimine.common.level.models.StateUpdate
 import dev.lucasnlm.antimine.common.level.solver.LimitedBruteForceSolver
 import dev.lucasnlm.antimine.core.control.ActionResponse
 import dev.lucasnlm.antimine.core.control.GameControl
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlin.random.Random
 
@@ -27,17 +24,12 @@ class GameController {
     private var saveId = 0
     private var firstOpen: FirstOpen = FirstOpen.Unknown
     private var gameControl: GameControl = GameControl.Standard
-    private var mines: Sequence<Area> = emptySequence()
     private var useQuestionMark = true
-
-    var hasMines = false
-        private set
 
     val seed: Long
 
     private val minefieldCreator: MinefieldCreator
-    var field: List<Area>
-        private set
+    private var field: List<Area>
 
     constructor(minefield: Minefield, seed: Long, saveId: Int? = null) {
         this.minefieldCreator = MinefieldCreator(minefield, Random(seed))
@@ -54,11 +46,16 @@ class GameController {
         this.saveId = save.uid
         this.seed = save.seed
         this.firstOpen = save.firstOpen
-
         this.field = save.field
-        this.mines = this.field.filter { it.hasMine }.asSequence()
-        this.hasMines = this.mines.count() != 0
     }
+
+    fun field() = field
+
+    fun field(predicate: (Area) -> Boolean) = field.filter(predicate)
+
+    fun mines() = field.filter { it.hasMine }
+
+    fun hasMines() = field.firstOrNull { it.hasMine } != null
 
     private fun getArea(id: Int) = field.first { it.id == id }
 
@@ -69,24 +66,21 @@ class GameController {
             field = minefieldCreator.create(safeId, useSafeZone)
             val fieldCopy = field.map { it.copy() }.toMutableList()
             val minefieldHandler = MinefieldHandler(fieldCopy, false)
-            minefieldHandler.openAt(safeId)
+            minefieldHandler.openAt(safeId, false)
         } while (solver.keepTrying() && !solver.trySolve(minefieldHandler.result().toMutableList()))
 
-        mines = field.filter { it.hasMine }.asSequence()
         firstOpen = FirstOpen.Position(safeId)
-        hasMines = mines.count() != 0
     }
 
-    private fun handleAction(target: Area, actionResponse: ActionResponse?) = flow {
-        val mustPlantMines = !hasMines
+    private fun handleAction(target: Area, actionResponse: ActionResponse?) {
+        val mustPlantMines = !hasMines()
 
         val minefieldHandler: MinefieldHandler
 
         if (mustPlantMines) {
             plantMinesExcept(target.id)
             minefieldHandler = MinefieldHandler(field.toMutableList(), useQuestionMark)
-            minefieldHandler.openAt(target.id)
-            emit(StateUpdate.Multiple)
+            minefieldHandler.openAt(target.id, false)
         } else {
             minefieldHandler = MinefieldHandler(field.toMutableList(), useQuestionMark)
             minefieldHandler.turnOffAllHighlighted()
@@ -96,15 +90,15 @@ class GameController {
                     if (target.mark.isNotNone()) {
                         minefieldHandler.removeMarkAt(target.id)
                     } else {
-                        minefieldHandler.openAt(target.id)
+                        minefieldHandler.openAt(target.id, false)
                     }
                 }
                 ActionResponse.SwitchMark -> {
-                    if (!hasMines) {
+                    if (!hasMines()) {
                         if (target.mark.isNotNone()) {
                             minefieldHandler.removeMarkAt(target.id)
                         } else {
-                            minefieldHandler.openAt(target.id)
+                            minefieldHandler.openAt(target.id, false)
                         }
                     } else {
                         minefieldHandler.switchMarkAt(target.id)
@@ -119,17 +113,17 @@ class GameController {
                     minefieldHandler.openOrFlagNeighborsOf(target.id)
                 }
             }
-
-            field = minefieldHandler.result()
-            emit(minefieldHandler.getStateUpdate())
         }
+
+        field = minefieldHandler.result()
     }
 
     fun singleClick(index: Int) = flow {
         val target = getArea(index)
         val action = if (target.isCovered) gameControl.onCovered.singleClick else gameControl.onOpen.singleClick
         action?.let {
-            emit(action to handleAction(target, action))
+            handleAction(target, action)
+            emit(action)
         }
     }
 
@@ -137,7 +131,8 @@ class GameController {
         val target = getArea(index)
         val action = if (target.isCovered) gameControl.onCovered.doubleClick else gameControl.onOpen.doubleClick
         action?.let {
-            emit(action to handleAction(target, action))
+            handleAction(target, action)
+            emit(action)
         }
     }
 
@@ -145,46 +140,79 @@ class GameController {
         val target = getArea(index)
         val action = if (target.isCovered) gameControl.onCovered.longPress else gameControl.onOpen.longPress
         action?.let {
-            emit(action to handleAction(target, action))
+            handleAction(target, action)
+            emit(action)
         }
     }
 
-    fun runFlagAssistant(): Flow<Int> {
-        return FlagAssistant(field.toMutableList()).runFlagAssistant()
+    fun runFlagAssistant() {
+        field = FlagAssistant(field.toMutableList()).run {
+            runFlagAssistant()
+            result()
+        }
     }
 
     fun getScore() = Score(
-        mines.count { !it.mistake && it.mark.isFlag() },
-        mines.count(),
+        mines().count { !it.mistake && it.mark.isFlag() },
+        getMinesCount(),
         field.count()
     )
 
-    fun getMinesCount() = mines.count()
+    fun getMinesCount() = mines().count()
 
-    fun showAllMines() =
-        mines.filter { it.mark != Mark.Flag }.forEach { it.isCovered = false }
+    fun showAllMines() {
+        field = MinefieldHandler(field.toMutableList(), false).run {
+            showAllMines()
+            result()
+        }
+    }
 
-    fun findExplodedMine() = mines.filter { it.mistake }.firstOrNull()
+    fun findExplodedMine() = mines().firstOrNull { it.mistake }
 
-    fun takeExplosionRadius(target: Area): Sequence<Area> =
-        mines.filter { it.isCovered && it.mark.isNone() }.sortedBy {
+    fun takeExplosionRadius(target: Area): List<Area> =
+        mines().filter { it.isCovered && it.mark.isNone() }.sortedBy {
             val dx1 = (it.posX - target.posX)
             val dy1 = (it.posY - target.posY)
             dx1 * dx1 + dy1 * dy1
         }
 
-    fun flagAllMines() = mines.forEach { it.mark = Mark.Flag }
+    fun revealArea(id: Int) {
+        field = MinefieldHandler(field.toMutableList(), false).run {
+            openAt(id, passive = true, openNeighbors = false)
+            result()
+        }
+    }
 
-    fun showWrongFlags() = field.filter { it.mark.isNotNone() && !it.hasMine }.forEach { it.mistake = true }
+    fun flagAllMines() {
+        field = MinefieldHandler(field.toMutableList(), false).run {
+            flagAllMines()
+            result()
+        }
+    }
 
-    fun revealAllEmptyAreas() = field.filterNot { it.hasMine }.forEach { it.isCovered = false }
+    fun showWrongFlags() {
+        field = field.map {
+            if (!it.hasMine && it.mark.isFlag()) {
+                it.copy(mistake = true)
+            } else {
+                it
+            }
+        }
+    }
 
-    fun hasAnyMineExploded(): Boolean = mines.firstOrNull { it.mistake } != null
+    fun revealAllEmptyAreas() {
+        field = MinefieldHandler(field.toMutableList(), false).run {
+            revealAllEmptyAreas()
+            result()
+        }
+    }
+
+    fun hasAnyMineExploded(): Boolean = mines().firstOrNull { it.mistake } != null
 
     fun hasFlaggedAllMines(): Boolean = rightFlags() == minefield.mines
 
     fun hasIsolatedAllMines() =
-        mines.map {
+        mines().map {
             val neighbors = field.filterNeighborsOf(it)
             val neighborsCount = neighbors.count()
             val isolatedNeighborsCount = neighbors.count { neighbor ->
@@ -193,17 +221,17 @@ class GameController {
             neighborsCount != isolatedNeighborsCount
         }.count { it } == 0
 
-    private fun rightFlags() = mines.count { it.mark.isFlag() }
+    private fun rightFlags() = mines().count { it.mark.isFlag() }
 
     fun checkVictory(): Boolean =
-        hasMines && hasIsolatedAllMines() && !hasAnyMineExploded()
+        hasMines() && hasIsolatedAllMines() && !hasAnyMineExploded()
 
     fun isGameOver(): Boolean =
         checkVictory() || hasAnyMineExploded()
 
     fun remainingMines(): Int {
         val flagsCount = field.count { it.mark.isFlag() }
-        val minesCount = mines.count()
+        val minesCount = mines().count()
         return (minesCount - flagsCount).coerceAtLeast(0)
     }
 
@@ -238,11 +266,11 @@ class GameController {
             Stats(
                 0,
                 duration,
-                mines.count(),
+                getMinesCount(),
                 if (gameStatus == SaveStatus.VICTORY) 1 else 0,
                 minefield.width,
                 minefield.height,
-                mines.count { !it.isCovered }
+                mines().count { !it.isCovered }
             )
         }
     }

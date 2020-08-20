@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.common.level.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
 import android.graphics.RectF
@@ -33,7 +34,6 @@ class AreaAdapter(
     private val paintSettings: AreaPaintSettings
 
     private var clickEnabled: Boolean = false
-    private var longPressAt: Long = 0L
 
     init {
         setHasStableIds(true)
@@ -56,101 +56,97 @@ class AreaAdapter(
 
     override fun getItemCount(): Int = field.size
 
+    private fun AreaView.onClickablePosition(position: Int, action: suspend (Int) -> Unit): Boolean {
+        return when {
+            position == RecyclerView.NO_POSITION -> {
+                Log.d(TAG, "Item no longer exists.")
+                false
+            }
+            clickEnabled -> {
+                requestFocus()
+                GlobalScope.launch {
+                    action(position)
+                }
+                true
+            }
+            else -> false
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AreaViewHolder {
         val view = AreaView(parent.context)
         return AreaViewHolder(view).apply {
-            view.setOnDoubleClickListener(object : GestureDetector.OnDoubleTapListener {
-                override fun onDoubleTap(e: MotionEvent?): Boolean {
-                    return false
-                }
-
-                override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
-                    val position = adapterPosition
-                    return when {
-                        position == RecyclerView.NO_POSITION -> {
-                            Log.d(TAG, "Item no longer exists.")
-                            false
+            val style = preferencesRepository.controlStyle()
+            if (style == ControlStyle.DoubleClick || style == ControlStyle.DoubleClickInverted) {
+                view.isClickable = true
+                view.setOnDoubleClickListener(object : GestureDetector.OnDoubleTapListener {
+                    override fun onDoubleTap(e: MotionEvent?): Boolean {
+                        return view.onClickablePosition(adapterPosition) {
+                            viewModel.onDoubleClick(it)
                         }
-                        clickEnabled -> {
-                            GlobalScope.launch {
-                                viewModel.onDoubleClickArea(position)
-                            }
+                    }
+
+                    override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
+                        return false
+                    }
+
+                    override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+                        return view.onClickablePosition(adapterPosition) {
+                            viewModel.onSingleClick(it)
+                        }
+                    }
+                })
+            } else {
+                view.setOnTouchListener { _, motionEvent ->
+                    when (motionEvent.action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            view.isPressed = true
                             true
                         }
-                        else -> {
-                            false
-                        }
-                    }
-                }
+                        MotionEvent.ACTION_UP -> {
+                            view.isPressed = false
+                            val dt = motionEvent.eventTime - motionEvent.downTime
 
-                override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-                    if (preferencesRepository.controlStyle() == ControlStyle.DoubleClick) {
-                        val position = adapterPosition
-                        if (position == RecyclerView.NO_POSITION) {
-                            Log.d(TAG, "Item no longer exists.")
-                        } else if (clickEnabled) {
-                            GlobalScope.launch {
-                                viewModel.onSingleClick(position)
+                            if (dt > preferencesRepository.customLongPressTimeout()) {
+                                view.onClickablePosition(adapterPosition) {
+                                    viewModel.onLongClick(it)
+                                }
+                            } else {
+                                view.onClickablePosition(adapterPosition) {
+                                    viewModel.onSingleClick(it)
+                                }
                             }
-                            return true
                         }
-                    }
-                    return false
-                }
-            })
-
-            itemView.setOnLongClickListener { target ->
-                target.requestFocus()
-
-                val position = adapterPosition
-                if (position == RecyclerView.NO_POSITION) {
-                    Log.d(TAG, "Item no longer exists.")
-                } else if (clickEnabled) {
-                    GlobalScope.launch {
-                        viewModel.onLongClick(position)
-                    }
-                }
-
-                true
-            }
-
-            itemView.setOnClickListener {
-                if (preferencesRepository.controlStyle() != ControlStyle.DoubleClick) {
-                    val position = adapterPosition
-                    if (position == RecyclerView.NO_POSITION) {
-                        Log.d(TAG, "Item no longer exists.")
-                    } else if (clickEnabled) {
-                        GlobalScope.launch {
-                            viewModel.onSingleClick(position)
-                        }
+                        else -> false
                     }
                 }
             }
 
-            itemView.setOnKeyListener { _, keyCode, keyEvent ->
+            view.setOnKeyListener { _, keyCode, keyEvent ->
                 var handled = false
-
                 if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
                     when (keyEvent.action) {
                         KeyEvent.ACTION_DOWN -> {
-                            longPressAt = System.currentTimeMillis()
                             handled = true
+                            view.isPressed = true
                         }
                         KeyEvent.ACTION_UP -> {
-                            if (clickEnabled) {
-                                val value = System.currentTimeMillis() - longPressAt
-                                if (value > 300L) {
-                                    view.performLongClick()
-                                } else {
-                                    view.callOnClick()
+                            handled = true
+                            view.isPressed = false
+                            val dt = keyEvent.eventTime - keyEvent.downTime
+                            if (dt > preferencesRepository.customLongPressTimeout()) {
+                                view.onClickablePosition(adapterPosition) {
+                                    viewModel.onLongClick(it)
+                                }
+                            } else {
+                                view.onClickablePosition(adapterPosition) {
+                                    viewModel.onSingleClick(it)
                                 }
                             }
-                            longPressAt = System.currentTimeMillis()
-                            handled = true
                         }
                     }
                 }
-
                 handled
             }
         }

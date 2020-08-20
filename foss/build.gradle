@@ -6,9 +6,9 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        versionCode 800041 // MMmmPPv
-        versionName '8.0.4'
-        minSdkVersion 16
+        versionCode 800051 // MMmmPPv
+        versionName '8.0.5'
+        minSdkVersion 21
         targetSdkVersion 30
     }
 
@@ -24,4 +24,5 @@ dependencies {
     // Dependencies must be hardcoded to support F-droid
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':external')
 }

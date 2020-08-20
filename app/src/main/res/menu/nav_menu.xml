@@ -71,6 +71,14 @@
             android:title="@string/settings" />
     </group>
 
+    <group android:id="@+id/play_games_group">
+        <item
+            android:id="@+id/play_games"
+            android:checkable="false"
+            android:icon="@drawable/games_controller"
+            android:title="@string/google_play_games" />
+    </group>
+
     <group
         android:id="@+id/install_group"
         android:visible="false"

@@ -12,3 +12,5 @@ app/local.properties
 app/release/
 app/standalone/
 app/google/
+app/google-services.json
+proprietary/google-services.json

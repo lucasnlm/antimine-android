@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
 import androidx.lifecycle.Observer
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
@@ -15,7 +14,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-@AndroidEntryPoint
 class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -24,7 +22,7 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
         recyclerGrid = view.findViewById(R.id.recyclerGrid)
 
         GlobalScope.launch {
-            val levelSetup = viewModel.loadLastGame()
+            val levelSetup = gameViewModel.loadLastGame()
 
             withContext(Dispatchers.Main) {
                 recyclerGrid.apply {
@@ -45,7 +43,7 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
             }
         }
 
-        viewModel.run {
+        gameViewModel.run {
             field.observe(
                 viewLifecycleOwner,
                 Observer {
@@ -63,12 +61,7 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                     }
                 }
             )
-            fieldRefresh.observe(
-                viewLifecycleOwner,
-                Observer {
-                    areaAdapter.notifyItemChanged(it)
-                }
-            )
+
             eventObserver.observe(
                 viewLifecycleOwner,
                 Observer {

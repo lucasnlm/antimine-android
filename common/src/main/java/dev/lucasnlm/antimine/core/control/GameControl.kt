@@ -26,7 +26,8 @@ data class Actions(
 enum class ControlStyle {
     Standard,
     DoubleClick,
-    FastFlag
+    FastFlag,
+    DoubleClickInverted,
 }
 
 /**
@@ -80,22 +81,28 @@ sealed class GameControl(
         )
     )
 
+    object DoubleClickInverted : GameControl(
+        id = ControlStyle.DoubleClickInverted,
+        onCovered = Actions(
+            singleClick = ActionResponse.OpenTile,
+            longPress = null,
+            doubleClick = ActionResponse.SwitchMark
+        ),
+        onOpen = Actions(
+            singleClick = ActionResponse.HighlightNeighbors,
+            longPress = null,
+            doubleClick = ActionResponse.OpenNeighbors
+        )
+    )
+
     companion object {
         fun fromControlType(controlStyle: ControlStyle): GameControl {
             return when (controlStyle) {
                 ControlStyle.Standard -> Standard
                 ControlStyle.DoubleClick -> DoubleClick
                 ControlStyle.FastFlag -> FastFlag
+                ControlStyle.DoubleClickInverted -> DoubleClickInverted
             }
         }
     }
 }
-
-/**
- * A data class used to make feedback or analytics to an user action.
- */
-data class ActionFeedback(
-    val actionResponse: ActionResponse?,
-    val index: Int,
-    val multipleChanges: Boolean
-)

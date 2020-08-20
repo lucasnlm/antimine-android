@@ -1,13 +1,12 @@
 package dev.lucasnlm.antimine.stats.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.stats.model.StatsModel
 import kotlinx.coroutines.flow.flow
 
-class StatsViewModel @ViewModelInject constructor(
+class StatsViewModel(
     private val statsRepository: IStatsRepository,
     private val preferenceRepository: IPreferencesRepository
 ) : IntentViewModel<StatsEvent, StatsModel>() {

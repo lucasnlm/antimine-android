@@ -14,7 +14,6 @@ import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.ambient.AmbientModeSupport.AmbientCallback
 import androidx.wear.ambient.AmbientModeSupport.EXTRA_LOWBIT_AMBIENT
 import androidx.wear.widget.SwipeDismissFrameLayout
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
@@ -26,10 +25,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider {
 
-    private val viewModel: GameViewModel by viewModels()
+    private val viewModel by viewModels<GameViewModel>()
 
     private val ambientController: AmbientModeSupport.AmbientController by lazy {
         AmbientModeSupport.attach(this)

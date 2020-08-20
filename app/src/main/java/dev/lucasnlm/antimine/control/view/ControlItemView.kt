@@ -17,7 +17,6 @@ class ControlItemView : FrameLayout {
 
     private val radio: AppCompatRadioButton
     private val root: View
-    private val title: TextView
     private val firstAction: TextView
     private val firstActionResponse: TextView
     private val secondAction: TextView
@@ -30,7 +29,6 @@ class ControlItemView : FrameLayout {
 
         radio = findViewById(R.id.radio)
         root = findViewById(R.id.root)
-        title = findViewById(R.id.title)
         firstAction = findViewById(R.id.firstAction)
         firstActionResponse = findViewById(R.id.firstActionResponse)
         secondAction = findViewById(R.id.secondAction)
@@ -38,7 +36,6 @@ class ControlItemView : FrameLayout {
     }
 
     fun bind(controlDetails: ControlDetails) {
-        title.text = context.getString(controlDetails.titleId)
         firstAction.text = context.getString(controlDetails.firstActionId)
         firstActionResponse.text = context.getString(controlDetails.firstActionResponseId)
         secondAction.text = context.getString(controlDetails.secondActionId)

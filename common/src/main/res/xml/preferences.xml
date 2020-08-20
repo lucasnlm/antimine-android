@@ -65,6 +65,18 @@
             app:showSeekBarValue="true"
             app:iconSpaceReserved="false" />
 
+        <SeekBarPreference
+            android:key="preference_long_press_timeout"
+            android:max="2000"
+            android:min="100"
+            android:defaultValue="500"
+            android:title="@string/long_press"
+            app:adjustable="true"
+            app:min="100"
+            app:seekBarIncrement="5"
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

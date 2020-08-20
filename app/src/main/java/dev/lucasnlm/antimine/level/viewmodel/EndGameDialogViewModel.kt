@@ -1,14 +1,12 @@
 package dev.lucasnlm.antimine.level.viewmodel
 
 import android.content.Context
-import androidx.hilt.lifecycle.ViewModelInject
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 
-class EndGameDialogViewModel @ViewModelInject constructor(
-    @ApplicationContext private val context: Context
+class EndGameDialogViewModel(
+    private val context: Context
 ) : IntentViewModel<EndGameDialogEvent, EndGameDialogState>() {
 
     private fun List<Int>.safeRandomEmoji(
@@ -28,6 +26,7 @@ class EndGameDialogViewModel @ViewModelInject constructor(
         R.drawable.emoji_grinning_squinting_face,
         R.drawable.emoji_smiling_face_with_sunglasses,
         R.drawable.emoji_squinting_face_with_tongue,
+        R.drawable.emoji_hugging_face,
         R.drawable.emoji_partying_face,
         R.drawable.emoji_clapping_hands,
         R.drawable.emoji_triangular_flag
@@ -74,7 +73,7 @@ class EndGameDialogViewModel @ViewModelInject constructor(
         false
     )
 
-    override suspend fun mapEventToState(event: EndGameDialogEvent) = flow<EndGameDialogState> {
+    override suspend fun mapEventToState(event: EndGameDialogEvent) = flow {
         if (event is EndGameDialogEvent.BuildCustomEndGame) {
             val state = when (event.isVictory) {
                 true -> {

@@ -12,6 +12,4 @@ object DeepLink {
     const val EXPERT_PATH = "expert"
     const val STANDARD_PATH = "standard"
     const val CUSTOM_PATH = "custom"
-
-    const val CUSTOM_NEW_GAME = "antimine://new-game/custom"
 }

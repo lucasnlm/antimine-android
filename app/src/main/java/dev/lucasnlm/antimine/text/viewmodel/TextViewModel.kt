@@ -2,16 +2,14 @@ package dev.lucasnlm.antimine.text.viewmodel
 
 import android.content.Context
 import androidx.annotation.RawRes
-import androidx.hilt.lifecycle.ViewModelInject
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.text.models.TextState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
-class TextViewModel @ViewModelInject constructor(
-    @ApplicationContext private val context: Context
+class TextViewModel(
+    private val context: Context
 ) : IntentViewModel<TextEvent, TextState>() {
 
     private suspend fun loadText(@RawRes rawFile: Int): String {

@@ -106,7 +106,6 @@ class GameFlowTests {
             .perform(NavigationViewActions.navigateTo(R.id.control))
 
         onView(withText(R.string.standard)).perform(click())
-        onView(withText(R.string.flag_first)).perform(click())
 
         onView(withText(R.string.ok)).perform(click())
     }

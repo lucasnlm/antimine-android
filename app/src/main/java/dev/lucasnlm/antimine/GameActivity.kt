@@ -9,20 +9,20 @@ import android.os.Handler
 import android.text.format.DateUtils
 import android.view.View
 import android.view.WindowManager
-import androidx.activity.viewModels
+import android.widget.FrameLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.view.GravityCompat
+import androidx.core.view.doOnLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
-import dagger.hilt.android.AndroidEntryPoint
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
@@ -36,13 +36,15 @@ import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.history.HistoryActivity
-import dev.lucasnlm.antimine.instant.InstantAppManager
 import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
+import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
-import dev.lucasnlm.antimine.share.viewmodel.ShareViewModel
+import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.theme.ThemeActivity
+import dev.lucasnlm.external.IInstantAppManager
+import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_game.minesCount
 import kotlinx.android.synthetic.main.activity_game.timer
@@ -50,24 +52,23 @@ import kotlinx.android.synthetic.main.activity_tv_game.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
-    @Inject
-    lateinit var preferencesRepository: IPreferencesRepository
+    private val preferencesRepository: IPreferencesRepository by inject()
 
-    @Inject
-    lateinit var analyticsManager: IAnalyticsManager
+    private val analyticsManager: IAnalyticsManager by inject()
 
-    @Inject
-    lateinit var instantAppManager: InstantAppManager
+    private val instantAppManager: IInstantAppManager by inject()
 
-    @Inject
-    lateinit var savesRepository: ISavesRepository
+    private val savesRepository: ISavesRepository by inject()
 
-    val viewModel: GameViewModel by viewModels()
-    private val shareViewModel: ShareViewModel by viewModels()
+    private val playGamesManager: IPlayGamesManager by inject()
+
+    private val shareViewModel: ShareManager by inject()
+
+    val gameViewModel by viewModel<GameViewModel>()
 
     override val noActionBar: Boolean = true
 
@@ -90,9 +91,12 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         bindToolbar()
         bindDrawer()
         bindNavigationMenu()
-        loadGameFragment()
 
-        if (instantAppManager.isEnabled()) {
+        findViewById<FrameLayout>(R.id.levelContainer).doOnLayout {
+            loadGameFragment()
+        }
+
+        if (instantAppManager.isEnabled(applicationContext)) {
             bindInstantApp()
             savesRepository.setLimit(1)
         } else {
@@ -100,7 +104,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun bindViewModel() = viewModel.apply {
+    private fun bindViewModel() = gameViewModel.apply {
         var lastEvent: Event? = null // TODO use distinctUntilChanged when available
 
         eventObserver.observe(
@@ -117,7 +121,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             this@GameActivity,
             Observer {
                 lifecycleScope.launch {
-                    viewModel.retryGame(currentSaveId.toInt())
+                    gameViewModel.retryGame(currentSaveId.toInt())
                 }
             }
         )
@@ -179,9 +183,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         when {
             drawer.isDrawerOpen(GravityCompat.START) -> {
                 drawer.closeDrawer(GravityCompat.START)
-                viewModel.resumeGame()
+                gameViewModel.resumeGame()
             }
-            status == Status.Running && instantAppManager.isEnabled() -> showQuitConfirmation {
+            status == Status.Running && instantAppManager.isEnabled(applicationContext) -> showQuitConfirmation {
                 super.onBackPressed()
             }
             else -> super.onBackPressed()
@@ -194,13 +198,15 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
         if (!willReset) {
             if (status == Status.Running) {
-                viewModel.run {
+                gameViewModel.run {
                     refreshUserPreferences()
                     resumeGame()
                 }
 
                 analyticsManager.sentEvent(Analytics.Resume)
             }
+
+            silentGooglePlayLogin()
         }
     }
 
@@ -208,7 +214,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         super.onPause()
 
         if (status == Status.Running) {
-            viewModel.pauseGame()
+            gameViewModel.pauseGame()
         }
 
         if (isFinishing) {
@@ -242,12 +248,12 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     if (confirmResign) {
                         newGameConfirmation {
                             GlobalScope.launch {
-                                viewModel.startNewGame()
+                                gameViewModel.startNewGame()
                             }
                         }
                     } else {
                         GlobalScope.launch {
-                            viewModel.startNewGame()
+                            gameViewModel.startNewGame()
                         }
                     }
                 }
@@ -284,13 +290,13 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 }
 
                 override fun onDrawerOpened(drawerView: View) {
-                    viewModel.pauseGame()
+                    gameViewModel.pauseGame()
                     analyticsManager.sentEvent(Analytics.OpenDrawer)
                 }
 
                 override fun onDrawerClosed(drawerView: View) {
                     if (hasNoOtherFocusedDialog()) {
-                        viewModel.resumeGame()
+                        gameViewModel.resumeGame()
                     }
 
                     analyticsManager.sentEvent(Analytics.CloseDrawer)
@@ -301,9 +307,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 }
             })
 
-            if (preferencesRepository.getBoolean(PREFERENCE_FIRST_USE, false)) {
+            if (preferencesRepository.isFirstUse()) {
                 openDrawer(GravityCompat.START)
-                preferencesRepository.putBoolean(PREFERENCE_FIRST_USE, true)
+                preferencesRepository.completeFirstUse()
             }
         }
     }
@@ -327,6 +333,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 R.id.previous_games -> openSaveHistory()
                 R.id.stats -> openStats()
                 R.id.install_new -> installFromInstantApp()
+                R.id.play_games -> googlePlay()
                 else -> handled = false
             }
 
@@ -337,19 +344,23 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             handled
         }
 
-        navigationView.menu.findItem(R.id.share_now).isVisible = instantAppManager.isNotEnabled()
+        navigationView.menu.findItem(R.id.share_now).isVisible = !instantAppManager.isEnabled(applicationContext)
+
+        if (!playGamesManager.hasGooglePlayGames()) {
+            navigationView.menu.removeGroup(R.id.play_games_group)
+        }
     }
 
     private fun checkUseCount() {
-        val current = preferencesRepository.getInt(PREFERENCE_USE_COUNT, 0)
-        val shouldRequestRating = preferencesRepository.getBoolean(PREFERENCE_REQUEST_RATING, true)
+        val current = preferencesRepository.getUseCount()
+        val shouldRequestRating = preferencesRepository.isRequestRatingEnabled()
 
         if (current >= MIN_USAGES_TO_RATING && shouldRequestRating) {
             analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
             showRequestRating()
         }
 
-        preferencesRepository.putInt(PREFERENCE_USE_COUNT, current + 1)
+        preferencesRepository.incrementUseCount()
     }
 
     private fun onChangeDifficulty(difficulty: Difficulty) {
@@ -369,21 +380,21 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun loadGameFragment() {
-        val fragmentManager = supportFragmentManager
+        supportFragmentManager.apply {
+            popBackStack()
 
-        fragmentManager.popBackStack()
+            findFragmentById(R.id.levelContainer)?.let { it ->
+                beginTransaction().apply {
+                    remove(it)
+                    commitAllowingStateLoss()
+                }
+            }
 
-        fragmentManager.findFragmentById(R.id.levelContainer)?.let { it ->
-            fragmentManager.beginTransaction().apply {
-                remove(it)
+            beginTransaction().apply {
+                replace(R.id.levelContainer, LevelFragment())
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 commitAllowingStateLoss()
             }
-        }
-
-        fragmentManager.beginTransaction().apply {
-            replace(R.id.levelContainer, LevelFragment())
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            commitAllowingStateLoss()
         }
     }
 
@@ -397,7 +408,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     openRateUsLink("Dialog")
                 }
                 .setNegativeButton(R.string.rating_button_no) { _, _ ->
-                    preferencesRepository.putBoolean(PREFERENCE_REQUEST_RATING, false)
+                    preferencesRepository.disableRequestRating()
                 }
                 .show()
         }
@@ -431,7 +442,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun showControlDialog() {
-        viewModel.pauseGame()
+        gameViewModel.pauseGame()
 
         if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
             ControlDialogFragment().apply {
@@ -493,13 +504,13 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun waitAndShowEndGameDialog(victory: Boolean, await: Boolean) {
-        if (await && viewModel.explosionDelay() != 0L) {
+        if (await && gameViewModel.explosionDelay() != 0L) {
             postDelayed(
                 Handler(),
                 {
                     showEndGameDialog(victory)
                 },
-                null, (viewModel.explosionDelay() * 0.3).toLong()
+                null, (gameViewModel.explosionDelay() * 0.3).toLong()
             )
         } else {
             showEndGameDialog(victory)
@@ -509,12 +520,12 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private fun changeDifficulty(newDifficulty: Difficulty) {
         if (status == Status.PreGame) {
             GlobalScope.launch {
-                viewModel.startNewGame(newDifficulty)
+                gameViewModel.startNewGame(newDifficulty)
             }
         } else {
             newGameConfirmation {
                 GlobalScope.launch {
-                    viewModel.startNewGame(newDifficulty)
+                    gameViewModel.startNewGame(newDifficulty)
                 }
             }
         }
@@ -532,7 +543,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
             Event.Resume, Event.Running -> {
                 status = Status.Running
-                viewModel.runClock()
+                gameViewModel.runClock()
                 refreshNewGameButton()
                 keepScreenOn(true)
             }
@@ -543,9 +554,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     totalArea
                 )
                 status = Status.Over(currentTime, score)
-                viewModel.stopClock()
-                viewModel.revealAllEmptyAreas()
-                viewModel.victory()
+                gameViewModel.stopClock()
+                gameViewModel.revealAllEmptyAreas()
+                gameViewModel.victory()
                 refreshNewGameButton()
                 keepScreenOn(false)
                 waitAndShowEndGameDialog(
@@ -563,10 +574,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 status = Status.Over(currentTime, score)
                 refreshNewGameButton()
                 keepScreenOn(false)
-                viewModel.stopClock()
+                gameViewModel.stopClock()
 
                 GlobalScope.launch(context = Dispatchers.Main) {
-                    viewModel.gameOver(isResuming)
+                    gameViewModel.gameOver(isResuming)
                     waitAndShowEndGameDialog(
                         victory = false,
                         await = true
@@ -590,10 +601,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun shareCurrentGame() {
-        val levelSetup = viewModel.levelSetup.value
-        val field = viewModel.field.value
-        GlobalScope.launch {
-            shareViewModel.share(levelSetup, field)
+        val levelSetup = gameViewModel.levelSetup.value
+        val field = gameViewModel.field.value
+        lifecycleScope.launch {
+            shareViewModel.shareField(levelSetup, field)
         }
     }
 
@@ -625,7 +636,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
 
         analyticsManager.sentEvent(Analytics.TapRatingRequest(from))
-        preferencesRepository.putBoolean(PREFERENCE_REQUEST_RATING, false)
+        preferencesRepository.disableRequestRating()
     }
 
     private fun keepScreenOn(enabled: Boolean) {
@@ -643,19 +654,42 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     override fun onDismiss(dialog: DialogInterface?) {
-        viewModel.run {
+        gameViewModel.run {
             refreshUserPreferences()
             resumeGame()
         }
     }
 
-    companion object {
-        const val PREFERENCE_FIRST_USE = "preference_first_use"
-        const val PREFERENCE_USE_COUNT = "preference_use_count"
-        const val PREFERENCE_REQUEST_RATING = "preference_request_rating"
+    private fun silentGooglePlayLogin() {
+        if (playGamesManager.hasGooglePlayGames()) {
+            playGamesManager.silentLogin(this)
+            invalidateOptionsMenu()
+        }
+    }
 
+    private fun googlePlay() {
+        if (playGamesManager.isLogged()) {
+            PlayGamesDialogFragment().show(supportFragmentManager, PlayGamesDialogFragment.TAG)
+        } else {
+            playGamesManager.getLoginIntent()?.let {
+                startActivityForResult(it, GOOGLE_PLAY_REQUEST_CODE)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == GOOGLE_PLAY_REQUEST_CODE) {
+            playGamesManager.handleLoginResult(data)
+            invalidateOptionsMenu()
+        }
+    }
+
+    companion object {
         const val IA_REFERRER = "InstallApiActivity"
         const val IA_REQUEST_CODE = 5
+        const val GOOGLE_PLAY_REQUEST_CODE = 6
 
         const val MIN_USAGES_TO_RATING = 4
     }

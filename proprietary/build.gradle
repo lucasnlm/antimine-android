@@ -2,13 +2,17 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+if (System.getenv('IS_GOOGLE_BUILD')) {
+    apply plugin: 'com.google.gms.google-services'
+}
+
 android {
     compileSdkVersion 30
 
     defaultConfig {
-        versionCode 800041 // MMmmPPv
-        versionName '8.0.4'
-        minSdkVersion 16
+        versionCode 800051
+        versionName '8.0.5'
+        minSdkVersion 21
         targetSdkVersion 30
     }
 
@@ -24,7 +28,17 @@ dependencies {
     // Dependencies must be hardcoded to support F-droid
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':external')
 
     // Google
+    implementation 'com.android.billingclient:billing-ktx:3.0.0'
     implementation 'com.google.android.gms:play-services-instantapps:17.0.0'
+    implementation 'com.google.android.gms:play-services-games:19.0.0'
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+
+    // Kotlin Lib
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
 }
