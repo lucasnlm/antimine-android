@@ -46,7 +46,7 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                         addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
                         setHasFixedSize(true)
                     }
-                    setupRecyclerViewSize(levelSetup)
+                    setupRecyclerViewSize(view, levelSetup)
                 }
             }
         }
@@ -62,7 +62,9 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
             levelSetup.observe(
                 viewLifecycleOwner,
                 Observer {
-                    setupRecyclerViewSize(it)
+                    getView()?.let {  view ->
+                        setupRecyclerViewSize(view, it)
+                    }
                 }
             )
 
@@ -86,10 +88,10 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
         }
     }
 
-    private fun setupRecyclerViewSize(levelSetup: Minefield) {
+    private fun setupRecyclerViewSize(view: View, levelSetup: Minefield) {
         recyclerGrid.apply {
-            val horizontalPadding = calcHorizontalPadding(levelSetup.width)
-            val verticalPadding = calcVerticalPadding(levelSetup.height)
+            val horizontalPadding = calcHorizontalPadding(view, levelSetup.width)
+            val verticalPadding = calcVerticalPadding(view, levelSetup.height)
             setPadding(horizontalPadding, verticalPadding, 0, 0)
             layoutManager = makeNewLayoutManager(levelSetup.width)
             adapter = areaAdapter

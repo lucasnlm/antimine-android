@@ -1,5 +1,7 @@
 package dev.lucasnlm.antimine.common.level.view
 
+import android.os.Bundle
+import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -24,15 +26,15 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
             setTotalColumnCount(boardWidth)
         }
 
-    protected fun calcHorizontalPadding(boardWidth: Int): Int {
-        val width = requireView().measuredWidth
+    protected fun calcHorizontalPadding(view: View, boardWidth: Int): Int {
+        val width = view.measuredWidth
         val recyclerViewWidth = (dimensionRepository.areaSize() * boardWidth)
         val separatorsWidth = (dimensionRepository.areaSeparator() * (boardWidth - 1))
         return ((width - recyclerViewWidth - separatorsWidth) / 2).coerceAtLeast(0.0f).toInt()
     }
 
-    protected fun calcVerticalPadding(boardHeight: Int): Int {
-        val height = requireView().measuredHeight
+    protected fun calcVerticalPadding(view: View, boardHeight: Int): Int {
+        val height = view.measuredHeight
         val recyclerViewHeight = (dimensionRepository.areaSize() * boardHeight)
         val separatorsHeight = (2 * dimensionRepository.areaSeparator() * (boardHeight - 1))
         val calculatedHeight = (height - recyclerViewHeight - separatorsHeight)
