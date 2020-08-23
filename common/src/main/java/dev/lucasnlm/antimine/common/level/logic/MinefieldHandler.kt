@@ -36,11 +36,13 @@ class MinefieldHandler(
     fun switchMarkAt(index: Int) {
         field.getOrNull(index)?.let {
             if (it.isCovered) {
-                field[index] = it.copy(mark = when (it.mark) {
-                    Mark.PurposefulNone, Mark.None -> Mark.Flag
-                    Mark.Flag -> if (useQuestionMark) Mark.Question else Mark.None
-                    Mark.Question -> Mark.None
-                })
+                field[index] = it.copy(
+                    mark = when (it.mark) {
+                        Mark.PurposefulNone, Mark.None -> Mark.Flag
+                        Mark.Flag -> if (useQuestionMark) Mark.Question else Mark.None
+                        Mark.Question -> Mark.None
+                    }
+                )
             }
         }
     }

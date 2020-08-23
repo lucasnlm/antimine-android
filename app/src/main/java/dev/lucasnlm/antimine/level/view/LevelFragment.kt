@@ -62,7 +62,7 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
             levelSetup.observe(
                 viewLifecycleOwner,
                 Observer {
-                    getView()?.let {  view ->
+                    getView()?.let { view ->
                         setupRecyclerViewSize(view, it)
                     }
                 }

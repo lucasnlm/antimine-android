@@ -37,27 +37,29 @@ val AppModule = module {
         }
     } bind IBillingManager::class
 
-    single { object : IPlayGamesManager {
-        override fun hasGooglePlayGames(): Boolean = false
+    single {
+        object : IPlayGamesManager {
+            override fun hasGooglePlayGames(): Boolean = false
 
-        override fun silentLogin(activity: Activity) { }
+            override fun silentLogin(activity: Activity) { }
 
-        override fun getLoginIntent(): Intent? = null
+            override fun getLoginIntent(): Intent? = null
 
-        override fun handleLoginResult(data: Intent?) { }
+            override fun handleLoginResult(data: Intent?) { }
 
-        override fun isLogged(): Boolean = false
+            override fun isLogged(): Boolean = false
 
-        override fun openAchievements(activity: Activity) { }
+            override fun openAchievements(activity: Activity) { }
 
-        override fun openLeaderboards(activity: Activity) { }
+            override fun openLeaderboards(activity: Activity) { }
 
-        override fun unlockAchievement(achievement: Achievement) { }
+            override fun unlockAchievement(achievement: Achievement) { }
 
-        override fun incrementAchievement(achievement: Achievement) { }
+            override fun incrementAchievement(achievement: Achievement) { }
 
-        override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) { }
-    } } bind IPlayGamesManager::class
+            override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) { }
+        }
+    } bind IPlayGamesManager::class
 
     single { ShareManager(get()) }
 

@@ -15,9 +15,11 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val LevelModule = module {
-    single { Room.databaseBuilder(get(), AppDataBase::class.java, AppDataBase.DATA_BASE_NAME)
-        .fallbackToDestructiveMigration()
-        .build() }
+    single {
+        Room.databaseBuilder(get(), AppDataBase::class.java, AppDataBase.DATA_BASE_NAME)
+            .fallbackToDestructiveMigration()
+            .build()
+    }
 
     single {
         get<AppDataBase>(AppDataBase::class).saveDao()

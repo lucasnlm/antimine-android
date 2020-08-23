@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.common.level.view
 
-import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment

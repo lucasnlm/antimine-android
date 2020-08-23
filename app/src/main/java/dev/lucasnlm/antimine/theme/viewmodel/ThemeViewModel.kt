@@ -32,7 +32,7 @@ class ThemeViewModel(
                 } else {
                     it
                 }
-              }
+            }
     }
 
     override suspend fun mapEventToState(event: ThemeEvent) = flow {

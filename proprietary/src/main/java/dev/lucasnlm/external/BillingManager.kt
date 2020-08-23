@@ -2,7 +2,6 @@ package dev.lucasnlm.external
 
 import android.app.Activity
 import android.content.Context
-import android.widget.Toast
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingFlowParams
