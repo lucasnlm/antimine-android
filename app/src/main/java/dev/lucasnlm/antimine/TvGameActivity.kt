@@ -281,18 +281,6 @@ class TvGameActivity : AppCompatActivity() {
                     waitAndShowGameOverConfirmNewGame()
                 }
             }
-            Event.ResumeVictory, Event.ResumeGameOver -> {
-                val score = Score(
-                    rightMines,
-                    totalMines,
-                    totalArea
-                )
-                status = Status.Over(currentTime, score)
-                invalidateOptionsMenu()
-                gameViewModel.stopClock()
-
-                waitAndShowConfirmNewGame()
-            }
             else -> { }
         }
     }

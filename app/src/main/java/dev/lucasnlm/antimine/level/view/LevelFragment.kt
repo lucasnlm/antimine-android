@@ -73,10 +73,8 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                 Observer {
                     when (it) {
                         Event.Pause,
-                        Event.ResumeGameOver,
                         Event.GameOver,
-                        Event.Victory,
-                        Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
+                        Event.Victory -> areaAdapter.setClickEnabled(false)
                         Event.Running,
                         Event.Resume,
                         Event.ResumeGame,
@@ -85,22 +83,6 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                     }
                 }
             )
-        }
-    }
-
-    private fun setupRecyclerViewSize(view: View, levelSetup: Minefield) {
-        recyclerGrid.apply {
-            val horizontalPadding = calcHorizontalPadding(view, levelSetup.width)
-            val verticalPadding = calcVerticalPadding(view, levelSetup.height)
-            setPadding(horizontalPadding, verticalPadding, 0, 0)
-            layoutManager = makeNewLayoutManager(levelSetup.width)
-            adapter = areaAdapter
-            alpha = 0.0f
-
-            animate().apply {
-                alpha(1.0f)
-                duration = DateUtils.SECOND_IN_MILLIS
-            }.start()
         }
     }
 
