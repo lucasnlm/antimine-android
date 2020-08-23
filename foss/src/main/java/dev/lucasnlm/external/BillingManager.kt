@@ -11,10 +11,6 @@ class BillingManager(
         // Empty
     }
 
-    override fun stop() {
-        // Empty
-    }
-
     override suspend fun charge(activity: Activity) {
         // Void
     }
