@@ -6,8 +6,13 @@ import android.content.Context
 class BillingManager(
     private val context: Context
 ) : IBillingManager {
-    override fun start() {
-        // Void
+
+    override fun start(unlockAppListener: UnlockAppListener) {
+        // Empty
+    }
+
+    override fun stop() {
+        // Empty
     }
 
     override suspend fun charge(activity: Activity) {

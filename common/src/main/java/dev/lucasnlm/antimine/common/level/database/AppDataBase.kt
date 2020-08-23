@@ -18,7 +18,7 @@ import dev.lucasnlm.antimine.common.level.database.models.Stats
         Save::class,
         Stats::class
     ],
-    version = 5, exportSchema = false
+    version = 6, exportSchema = false
 )
 @TypeConverters(
     AreaConverter::class,

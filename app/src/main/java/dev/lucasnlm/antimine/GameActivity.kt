@@ -42,6 +42,7 @@ import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.stats.StatsActivity
+import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.ThemeActivity
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
@@ -96,12 +97,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             loadGameFragment()
         }
 
-        if (instantAppManager.isEnabled(applicationContext)) {
-            bindInstantApp()
-            savesRepository.setLimit(1)
-        } else {
-            checkUseCount()
-        }
+        onOpenAppActions()
     }
 
     private fun bindViewModel() = gameViewModel.apply {
@@ -351,16 +347,26 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun checkUseCount() {
-        val current = preferencesRepository.getUseCount()
-        val shouldRequestRating = preferencesRepository.isRequestRatingEnabled()
+    private fun onOpenAppActions() {
+        if (instantAppManager.isEnabled(applicationContext)) {
+            // Instant App does nothing.
+            bindInstantApp()
+            savesRepository.setLimit(1)
+        } else {
+            val current = preferencesRepository.getUseCount()
+            val shouldRequestRating = preferencesRepository.isRequestRatingEnabled()
+            val shouldRequestSupport = preferencesRepository.areExtrasUnlocked()
 
-        if (current >= MIN_USAGES_TO_RATING && shouldRequestRating) {
-            analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
-            showRequestRating()
+            if (current >= MIN_USAGES_TO_IAP && !shouldRequestSupport) {
+                analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
+                showSupportAppDialog()
+            } else if (current >= MIN_USAGES_TO_RATING && shouldRequestRating) {
+                analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
+                showRequestRating()
+            }
+
+            preferencesRepository.incrementUseCount()
         }
-
-        preferencesRepository.incrementUseCount()
     }
 
     private fun onChangeDifficulty(difficulty: Difficulty) {
@@ -677,6 +683,13 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
+    private fun showSupportAppDialog() {
+        if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
+            SupportAppDialogFragment.newInstance(false)
+                .show(supportFragmentManager, SupportAppDialogFragment.TAG)
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -691,6 +704,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         const val IA_REQUEST_CODE = 5
         const val GOOGLE_PLAY_REQUEST_CODE = 6
 
-        const val MIN_USAGES_TO_RATING = 4
+        const val MIN_USAGES_TO_IAP = 5
+        const val MIN_USAGES_TO_RATING = 10
     }
 }

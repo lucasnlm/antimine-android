@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.common.level.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
@@ -24,8 +25,10 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
+import dev.lucasnlm.external.Achievement
+import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.external.Leaderboard
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
@@ -42,6 +45,7 @@ class GameViewModel(
     private val soundManager: ISoundManager,
     private val minefieldRepository: IMinefieldRepository,
     private val analyticsManager: IAnalyticsManager,
+    private val playGamesManager: IPlayGamesManager,
     private val clock: Clock
 ) : ViewModel() {
     val eventObserver = MutableLiveData<Event>()
@@ -382,9 +386,11 @@ class GameViewModel(
             preferencesRepository.decrementProgressiveValue()
         }
 
-        GlobalScope.launch {
+        viewModelScope.launch {
             saveStats()
             saveGame()
+
+            checkGameOverAchievements()
         }
     }
 
@@ -406,9 +412,78 @@ class GameViewModel(
             preferencesRepository.incrementProgressiveValue()
         }
 
-        GlobalScope.launch {
+        if (clock.time() < 30) {
+            playGamesManager.unlockAchievement(Achievement.ThirtySeconds)
+        }
+
+        viewModelScope.launch {
             saveStats()
             saveGame()
+
+            checkVictoryAchievements()
+        }
+    }
+
+    private suspend fun checkVictoryAchievements() = with(gameController) {
+        field.value?.count { it.mark.isFlag() }?.also {
+            if (it > 0) {
+                playGamesManager.unlockAchievement(Achievement.Flags)
+            }
+        }
+
+        val time = clock.time()
+        if (time > 1L && gameController.getActionsCount() > 7) {
+            when (currentDifficulty) {
+                Difficulty.Beginner -> {
+                    playGamesManager.submitLeaderboard(Leaderboard.BestTimeBeginner, clock.time())
+                }
+                Difficulty.Intermediate -> {
+                    playGamesManager.submitLeaderboard(Leaderboard.BestTimeIntermediate, clock.time())
+                }
+                Difficulty.Expert -> {
+                    playGamesManager.submitLeaderboard(Leaderboard.BestTimeExpert, clock.time())
+                }
+                else -> {
+                }
+            }
+
+            statsRepository.getAllStats(0).count {
+                it.victory == 1
+            }.also {
+                if (it >= 20) {
+                    playGamesManager.incrementAchievement(Achievement.Beginner)
+                }
+
+                if (it >= 50) {
+                    playGamesManager.incrementAchievement(Achievement.Intermediate)
+                }
+
+                if (it >= 100) {
+                    playGamesManager.incrementAchievement(Achievement.Expert)
+                }
+            }
+        }
+    }
+
+    private fun checkGameOverAchievements() = with(gameController) {
+        if (getActionsCount() < 3) {
+            playGamesManager.unlockAchievement(Achievement.NoLuck)
+        }
+
+        if (almostAchievement()) {
+            playGamesManager.unlockAchievement(Achievement.Almost)
+        }
+
+        field.value?.count { it.mark.isFlag() }?.also {
+            if (it > 0) {
+                playGamesManager.incrementAchievement(Achievement.Flags)
+            }
+        }
+
+        field.value?.count { it.hasMine && it.mistake }?.also {
+            if (it > 0) {
+                playGamesManager.incrementAchievement(Achievement.Boom)
+            }
         }
     }
 

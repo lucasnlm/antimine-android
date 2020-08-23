@@ -2,42 +2,67 @@ package dev.lucasnlm.external
 
 import android.app.Activity
 import android.content.Context
+import android.widget.Toast
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
+import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.SkuDetailsParams
 import com.android.billingclient.api.querySkuDetails
 
 class BillingManager(
     private val context: Context
-) : IBillingManager {
-    private val purchaseUpdateListener =
-        PurchasesUpdatedListener { billingResult, purchases ->
-            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                // The BillingClient is ready. You can query purchases here.
-            }
-        }
+) : IBillingManager, BillingClientStateListener, PurchasesUpdatedListener {
+    private var unlockAppListener: UnlockAppListener? = null
 
     private val billingClient by lazy {
         BillingClient.newBuilder(context)
-            .setListener(purchaseUpdateListener)
+            .setListener(this)
             .enablePendingPurchases()
             .build()
     }
 
-    override fun start() {
-        billingClient.startConnection(object : BillingClientStateListener {
-            override fun onBillingSetupFinished(billingResult: BillingResult) {
-                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                    // The BillingClient is ready. You can query purchases here.
-                }
+    private fun handlePurchases(purchases: List<Purchase>) {
+        purchases.firstOrNull {
+            it.sku == BASIC_SUPPORT
+        }?.let {
+            if (it.purchaseState == Purchase.PurchaseState.PURCHASED) {
+                unlockAppListener?.onLockStatusChanged(true)
             }
-            override fun onBillingServiceDisconnected() {
-                // Try to restart the connection on the next request to
-                // Google Play by calling the startConnection() method.
+        }
+    }
+
+    override fun onBillingServiceDisconnected() {
+        // Try to restart the connection on the next request to
+        // Google Play by calling the startConnection() method.
+    }
+
+    override fun onBillingSetupFinished(billingResult: BillingResult) {
+        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+            // The BillingClient is ready. You can query purchases here.
+
+            billingClient.queryPurchases(BillingClient.SkuType.INAPP).purchasesList?.let {
+                handlePurchases(it.toList())
             }
-        })
+        }
+    }
+
+    override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
+        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+            // The BillingClient is ready. You can query purchases here.
+            purchases?.let {
+                handlePurchases(it.toList())
+            }
+        } else {
+            unlockAppListener?.onLockStatusChanged(false)
+        }
+    }
+
+    override fun start(unlockAppListener: UnlockAppListener) {
+        this.unlockAppListener = unlockAppListener
+        billingClient.startConnection(this)
     }
 
     override suspend fun charge(activity: Activity) {
@@ -46,11 +71,18 @@ class BillingManager(
             .setType(BillingClient.SkuType.INAPP)
             .build()
 
-        val details = billingClient.querySkuDetails(skuDetailsParams)
+        if (billingClient.isReady) {
+            val details = billingClient.querySkuDetails(skuDetailsParams)
+            details.skuDetailsList?.firstOrNull()?.let {
+                val flowParams = BillingFlowParams.newBuilder()
+                    .setSkuDetails(it)
+                    .build()
 
-        print(details.toString())
-
-        // billingClient.launchBillingFlow(activity, flowParams)
+                billingClient.launchBillingFlow(activity, flowParams)
+            }
+        } else {
+            unlockAppListener?.showFailToConnectFeedback()
+        }
     }
 
     companion object {

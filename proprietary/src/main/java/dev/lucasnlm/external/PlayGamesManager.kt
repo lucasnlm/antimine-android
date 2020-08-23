@@ -81,4 +81,22 @@ class PlayGamesManager(
                 }
         }
     }
+
+    override fun unlockAchievement(achievement: Achievement) {
+        account?.let {
+            Games.getAchievementsClient(context, it).unlock(achievement.value)
+        }
+    }
+
+    override fun incrementAchievement(achievement: Achievement) {
+        account?.let {
+            Games.getAchievementsClient(context, it).increment(achievement.value, 1)
+        }
+    }
+
+    override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) {
+        account?.let {
+            Games.getLeaderboardsClient(context, it).submitScore(leaderboard.value, value)
+        }
+    }
 }

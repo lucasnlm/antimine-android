@@ -91,9 +91,19 @@ sealed class Analytics(
 
     object OpenThemes : Analytics("Open Themes")
 
+    data class ClickTheme(
+        private val themeId: Long
+    ) : Analytics("Click Theme", mapOf("id" to themeId.toString()))
+
     object OpenSettings : Analytics("Open Settings")
 
     object OpenSaveHistory : Analytics("Open Save History")
+
+    object ShowIapDialog : Analytics("Shown IAP Dialog")
+
+    object DenyIapDialog : Analytics("IAP Dialog Deny")
+
+    object UnlockIapDialog : Analytics("IAP Dialog Unlock")
 
     class ShowRatingRequest(usages: Int) : Analytics("Shown Rating Request", mapOf("Usages" to usages.toString()))
 

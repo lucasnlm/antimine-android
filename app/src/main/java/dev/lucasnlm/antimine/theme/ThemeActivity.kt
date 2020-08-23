@@ -9,6 +9,7 @@ import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.view.ThemeAdapter
+import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
 import kotlinx.android.synthetic.main.activity_theme.*
 import kotlinx.coroutines.flow.collect
@@ -33,6 +34,12 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 adapter = ThemeAdapter(themeViewModel, areaSize)
             }
 
+            themeViewModel.observeEvent().collect {
+                if (it is ThemeEvent.Unlock) {
+                    showUnlockDialog()
+                }
+            }
+
             themeViewModel.observeState().collect {
                 if (usingTheme.id != it.current.id) {
                     recreate()
@@ -43,7 +50,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
 
     private fun showUnlockDialog() {
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
-            SupportAppDialogFragment().apply {
+            SupportAppDialogFragment.newInstance(true).apply {
                 show(supportFragmentManager, SupportAppDialogFragment.TAG)
             }
         }

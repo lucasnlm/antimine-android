@@ -19,11 +19,11 @@ val ViewModelModule = module {
     viewModel { CreateGameViewModel(get()) }
     viewModel { HistoryViewModel(get(), get()) }
     viewModel { EndGameDialogViewModel(get()) }
-    viewModel { PlayGamesViewModel(get(), get()) }
+    viewModel { PlayGamesViewModel(get()) }
     viewModel { StatsViewModel(get(), get()) }
     viewModel { TextViewModel(get()) }
-    viewModel { ThemeViewModel(get()) }
+    viewModel { ThemeViewModel(get(), get(), get()) }
     viewModel {
-        GameViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
+        GameViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
 }
