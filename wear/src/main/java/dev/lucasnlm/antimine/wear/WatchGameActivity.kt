@@ -165,7 +165,6 @@ class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbac
             }
             Event.Victory -> {
                 status = Status.Over()
-
                 messageText.text = getString(R.string.victory)
                 waitAndShowNewGameButton()
             }
@@ -178,16 +177,6 @@ class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbac
                     messageText.text = getString(R.string.game_over)
                     waitAndShowNewGameButton()
                 }
-            }
-            Event.ResumeVictory -> {
-                status = Status.Over()
-                messageText.text = getString(R.string.victory)
-                waitAndShowNewGameButton(0L)
-            }
-            Event.ResumeGameOver -> {
-                status = Status.Over()
-                messageText.text = getString(R.string.game_over)
-                waitAndShowNewGameButton(0L)
             }
             else -> {
             }
