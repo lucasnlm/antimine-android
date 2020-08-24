@@ -64,6 +64,10 @@ class BillingManager(
         billingClient.startConnection(this)
     }
 
+    override fun isEnabled(): Boolean {
+        return true
+    }
+
     override suspend fun charge(activity: Activity) {
         val skuDetailsParams = SkuDetailsParams.newBuilder()
             .setSkusList(listOf(BASIC_SUPPORT))

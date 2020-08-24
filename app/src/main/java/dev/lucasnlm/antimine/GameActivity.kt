@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.text.format.DateUtils
 import android.view.View
 import android.view.WindowManager
@@ -14,7 +13,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
-import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.view.GravityCompat
 import androidx.core.view.doOnLayout
 import androidx.drawerlayout.widget.DrawerLayout
@@ -52,6 +50,7 @@ import kotlinx.android.synthetic.main.activity_game.timer
 import kotlinx.android.synthetic.main.activity_tv_game.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -495,7 +494,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private fun showEndGameDialog(victory: Boolean) {
         val currentGameStatus = status
         if (currentGameStatus is Status.Over && !isFinishing && !drawer.isDrawerOpen(GravityCompat.START)) {
-            if (supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG) == null) {
+            if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
+                supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG) == null) {
                 val score = currentGameStatus.score
                 EndGameDialogFragment.newInstance(
                     victory,
@@ -511,13 +511,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun waitAndShowEndGameDialog(victory: Boolean, await: Boolean) {
         if (await && gameViewModel.explosionDelay() != 0L) {
-            postDelayed(
-                Handler(),
-                {
-                    showEndGameDialog(victory)
-                },
-                null, (gameViewModel.explosionDelay() * 0.3).toLong()
-            )
+            lifecycleScope.launch {
+                delay((gameViewModel.explosionDelay() * 0.3).toLong())
+                showEndGameDialog(victory)
+            }
         } else {
             showEndGameDialog(victory)
         }

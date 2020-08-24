@@ -13,6 +13,7 @@ import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
 import kotlinx.android.synthetic.main.activity_theme.*
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -34,15 +35,19 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 adapter = ThemeAdapter(themeViewModel, areaSize)
             }
 
-            themeViewModel.observeEvent().collect {
-                if (it is ThemeEvent.Unlock) {
-                    showUnlockDialog()
+            launch {
+                themeViewModel.observeEvent().collect {
+                    if (it is ThemeEvent.Unlock) {
+                        showUnlockDialog()
+                    }
                 }
             }
 
-            themeViewModel.observeState().collect {
-                if (usingTheme.id != it.current.id) {
-                    recreate()
+            launch {
+                themeViewModel.observeState().collect {
+                    if (usingTheme.id != it.current.id) {
+                        recreate()
+                    }
                 }
             }
         }

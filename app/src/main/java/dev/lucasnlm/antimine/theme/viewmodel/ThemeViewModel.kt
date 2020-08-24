@@ -6,6 +6,7 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
+import dev.lucasnlm.external.IBillingManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -13,6 +14,7 @@ import kotlinx.coroutines.flow.onEach
 
 class ThemeViewModel(
     private val themeRepository: IThemeRepository,
+    private val billingManager: IBillingManager,
     private val preferencesRepository: IPreferencesRepository,
     private val analyticsManager: IAnalyticsManager
 ) : IntentViewModel<ThemeEvent, ThemeState>() {
@@ -27,7 +29,9 @@ class ThemeViewModel(
                     analyticsManager.sentEvent(Analytics.ClickTheme(it.newTheme.id))
                 }
             }.map {
-                if (it is ThemeEvent.ChangeTheme && !preferencesRepository.areExtrasUnlocked()) {
+                if (it is ThemeEvent.ChangeTheme &&
+                    billingManager.isEnabled() &&
+                    !preferencesRepository.areExtrasUnlocked()) {
                     ThemeEvent.Unlock
                 } else {
                     it

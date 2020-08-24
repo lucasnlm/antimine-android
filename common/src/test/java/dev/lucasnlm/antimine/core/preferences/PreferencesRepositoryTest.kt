@@ -67,7 +67,7 @@ class PreferencesRepositoryTest {
 
         assertTrue(preferenceManager.values["preference_double_click_open"] == null)
         assertEquals(1, preferenceManager.values["preference_control_style"])
-        assertFalse(preferencesRepository.getBoolean("preference_double_click_open", false))
+        assertFalse(preferenceManager.getBoolean("preference_double_click_open", false))
     }
 
     @Test
@@ -79,7 +79,7 @@ class PreferencesRepositoryTest {
         val preferencesRepository = PreferencesRepository(preferenceManager, 400)
 
         assertTrue(preferenceManager.values["preference_double_click_open"] == null)
-        assertFalse(preferencesRepository.getBoolean("preference_double_click_open", false))
+        assertFalse(preferenceManager.getBoolean("preference_double_click_open", false))
     }
 
     @Test
@@ -91,16 +91,16 @@ class PreferencesRepositoryTest {
         val preferencesRepository = PreferencesRepository(preferenceManager, 400)
 
         assertTrue(preferenceManager.values["preference_large_area"] == null)
-        assertEquals(63, preferencesRepository.getInt("preference_area_size", -1))
+        assertEquals(63, preferenceManager.getInt("preference_area_size", -1))
     }
 
     @Test
     fun testMigrationLargeAreaOff() {
         val preferenceManager = TestPreferenceManager()
-        val preferencesRepository = PreferencesRepository(preferenceManager, 400)
+        PreferencesRepository(preferenceManager, 400)
 
         assertTrue(preferenceManager.values["preference_large_area"] == null)
-        assertEquals(50, preferencesRepository.getInt("preference_area_size", -1))
+        assertEquals(50, preferenceManager.getInt("preference_area_size", -1))
     }
 
     @Test
@@ -109,9 +109,9 @@ class PreferencesRepositoryTest {
         preferenceManager.putBoolean("preference_large_area", false)
         assertEquals(false, preferenceManager.values["preference_large_area"] as Boolean)
 
-        val preferencesRepository = PreferencesRepository(preferenceManager, 400)
+        PreferencesRepository(preferenceManager, 400)
 
         assertTrue(preferenceManager.values["preference_large_area"] == null)
-        assertEquals(50, preferencesRepository.getInt("preference_area_size", -1))
+        assertEquals(50, preferenceManager.getInt("preference_area_size", -1))
     }
 }

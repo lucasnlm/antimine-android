@@ -22,7 +22,7 @@ val ViewModelModule = module {
     viewModel { PlayGamesViewModel(get()) }
     viewModel { StatsViewModel(get(), get()) }
     viewModel { TextViewModel(get()) }
-    viewModel { ThemeViewModel(get(), get(), get()) }
+    viewModel { ThemeViewModel(get(), get(), get(), get()) }
     viewModel {
         GameViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
     }

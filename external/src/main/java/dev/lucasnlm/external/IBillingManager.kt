@@ -4,6 +4,7 @@ import android.app.Activity
 
 interface IBillingManager {
     fun start(unlockAppListener: UnlockAppListener)
+    fun isEnabled(): Boolean
     suspend fun charge(activity: Activity)
 }
 

@@ -23,6 +23,10 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
 
         version.text = getString(R.string.version_s, BuildConfig.VERSION_NAME)
 
+        supportUs.setOnClickListener {
+            aboutViewModel.sendEvent(AboutEvent.SupportUs)
+        }
+
         thirdsParties.setOnClickListener {
             aboutViewModel.sendEvent(AboutEvent.ThirdPartyLicenses)
         }

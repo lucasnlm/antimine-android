@@ -7,17 +7,6 @@ import dev.lucasnlm.antimine.core.themes.model.AreaPalette
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.core.themes.model.Assets
-import dev.lucasnlm.antimine.core.themes.repository.Themes.AmoledTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.BlueGreyTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.BrownTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.ChessTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.DarkTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.GardenTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.LightTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.MarineTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.OrangeTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.PinkTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.PurpleTheme
 
 interface IThemeRepository {
     fun getCustomTheme(): AppTheme?
@@ -38,12 +27,8 @@ class ThemeRepository(
         return getCustomTheme() ?: buildSystemTheme()
     }
 
-    override fun getAllThemes(): List<AppTheme> = listOf(
-        buildSystemTheme(), AmoledTheme, LightTheme,
-        DarkTheme, GardenTheme, MarineTheme,
-        ChessTheme, BlueGreyTheme, OrangeTheme,
-        PinkTheme, PurpleTheme, BrownTheme
-    )
+    override fun getAllThemes(): List<AppTheme> =
+        listOf(buildSystemTheme()) + Themes.getAllCustom()
 
     override fun setTheme(theme: AppTheme) {
         preferenceRepository.useTheme(theme.id)
