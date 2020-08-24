@@ -68,14 +68,16 @@ class MinefieldHandler(
     }
 
     fun highlightAt(index: Int) {
-        field.getOrNull(index)?.let {
-            field[index] = it.copy(highlighted = it.minesAround != 0 && !it.highlighted)
-        }.also {
-            field.filterNeighborsOf(field[index])
-                .filter { it.mark.isNone() && it.isCovered }
-                .onEach { neighbor ->
-                    field[neighbor.id] = neighbor.copy(highlighted = true)
-                }
+        field.getOrNull(index)?.let { target ->
+            if (!target.isCovered) {
+                field[index] = target.copy(highlighted = target.minesAround != 0 && !target.highlighted)
+
+                field.filterNeighborsOf(target)
+                    .filter { it.mark.isNone() && it.isCovered }
+                    .onEach { neighbor ->
+                        field[neighbor.id] = neighbor.copy(highlighted = true)
+                    }
+            }
         }
     }
 

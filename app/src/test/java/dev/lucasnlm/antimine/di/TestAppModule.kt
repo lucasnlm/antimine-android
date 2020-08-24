@@ -33,6 +33,8 @@ val AppModule = module {
         object : IBillingManager {
             override fun start(unlockAppListener: UnlockAppListener) { }
 
+            override fun isEnabled(): Boolean = false
+
             override suspend fun charge(activity: Activity) { }
         }
     } bind IBillingManager::class

@@ -100,10 +100,9 @@ class MinefieldHandlerTest {
 
             // After Open
             handler.openAt(5, false, openNeighbors = false)
-            val target = handler.result().first { it.minesAround != 0 }
-            handler.highlightAt(target.id)
-            assertEquals(5, handler.result().count { it.highlighted })
-            assertEquals(listOf(0, 1, 4, 8, 9), handler.result().filter { it.highlighted }.map { it.id }.toList())
+            handler.highlightAt(5)
+            assertEquals(8, handler.result().count { it.highlighted })
+            assertEquals(listOf(0, 1, 2, 4, 6, 8, 9, 10), handler.result().filter { it.highlighted }.map { it.id }.toList())
         }
     }
 
