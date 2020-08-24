@@ -5,7 +5,7 @@ import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 
 class MockPreferencesRepository : IPreferencesRepository {
-    var customMinefield = Minefield(9, 9, 9)
+    private var customMinefield = Minefield(9, 9, 9)
 
     override fun customGameMode(): Minefield = customMinefield
 
@@ -44,6 +44,10 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun isRequestRatingEnabled(): Boolean = false
 
     override fun disableRequestRating() { }
+
+    override fun unlockExtras() { }
+
+    override fun areExtrasUnlocked(): Boolean = false
 
     override fun useFlagAssistant(): Boolean = false
 
