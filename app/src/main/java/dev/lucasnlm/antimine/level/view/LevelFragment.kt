@@ -1,7 +1,6 @@
 package dev.lucasnlm.antimine.level.view
 
 import android.os.Bundle
-import android.text.format.DateUtils
 import android.view.View
 import androidx.core.view.doOnLayout
 import androidx.lifecycle.Observer
@@ -10,7 +9,6 @@ import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
-import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import kotlinx.coroutines.Dispatchers

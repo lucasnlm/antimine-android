@@ -3,6 +3,7 @@ package dev.lucasnlm.external
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.view.Gravity
 import android.widget.Toast
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -17,6 +18,7 @@ class PlayGamesManager(
 
     private fun setupPopUp(activity: Activity, account: GoogleSignInAccount) {
         Games.getGamesClient(context, account).setViewForPopups(activity.findViewById(android.R.id.content))
+        Games.getGamesClient(context, account).setGravityForPopups(Gravity.TOP or Gravity.END)
     }
 
     override fun hasGooglePlayGames(): Boolean = true

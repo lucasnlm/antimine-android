@@ -675,7 +675,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun googlePlay() {
         if (playGamesManager.isLogged()) {
-            PlayGamesDialogFragment().show(supportFragmentManager, PlayGamesDialogFragment.TAG)
+            if (supportFragmentManager.findFragmentByTag(PlayGamesDialogFragment.TAG) == null) {
+                PlayGamesDialogFragment().show(supportFragmentManager, PlayGamesDialogFragment.TAG)
+            }
         } else {
             playGamesManager.getLoginIntent()?.let {
                 startActivityForResult(it, GOOGLE_PLAY_REQUEST_CODE)

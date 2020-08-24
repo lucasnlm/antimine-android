@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesEvent
@@ -19,7 +19,7 @@ import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesViewModel
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PlayGamesDialogFragment : DialogFragment() {
+class PlayGamesDialogFragment : AppCompatDialogFragment() {
     private val playGamesViewModel by viewModel<PlayGamesViewModel>()
     private val adapter by lazy { PlayGamesAdapter(playGamesViewModel) }
 
