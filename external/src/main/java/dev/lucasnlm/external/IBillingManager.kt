@@ -9,7 +9,7 @@ interface IBillingManager {
 }
 
 interface UnlockAppListener {
-    fun onLockStatusChanged(status: Boolean)
+    fun onLockStatusChanged(isFreeUnlock: Boolean, status: Boolean)
 
     fun showFailToConnectFeedback()
 }

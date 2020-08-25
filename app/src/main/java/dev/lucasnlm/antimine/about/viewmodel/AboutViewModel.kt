@@ -36,7 +36,7 @@ class AboutViewModel(
         "Portuguese (BR)" to sequenceOf("Lucas Lima"),
         "Russian" to sequenceOf("gaich@xda", "ask45t", "Ekaterina543"),
         "Spanish" to sequenceOf("Alfredo Jara", "Aldo Rodriguez", "Inail"),
-        "Turkish" to sequenceOf("Fatih Fırıncı"),
+        "Turkish" to sequenceOf("creuzwagen", "Fatih Fırıncı"),
         "Ukrainian" to sequenceOf("Dmitry Shuba"),
         "Vietnamese" to sequenceOf("pnhpnh")
     ).map {

@@ -28,7 +28,7 @@ class BillingManager(
             it.sku == BASIC_SUPPORT
         }?.let {
             if (it.purchaseState == Purchase.PurchaseState.PURCHASED) {
-                unlockAppListener?.onLockStatusChanged(true)
+                unlockAppListener?.onLockStatusChanged(isFreeUnlock = false, status = true)
             }
         }
     }
@@ -55,7 +55,7 @@ class BillingManager(
                 handlePurchases(it.toList())
             }
         } else {
-            unlockAppListener?.onLockStatusChanged(false)
+            unlockAppListener?.onLockStatusChanged(isFreeUnlock = false, status = false)
         }
     }
 

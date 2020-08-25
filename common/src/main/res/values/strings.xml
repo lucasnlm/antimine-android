@@ -29,7 +29,6 @@
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Accessibility</string>
-    <string name="settings_large_areas">Use Large Areas</string>
     <string name="size">Size</string>
     <string name="system">System</string>
     <string name="amoled" translatable="false">AMOLED</string>

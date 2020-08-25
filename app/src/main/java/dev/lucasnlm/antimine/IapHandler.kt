@@ -9,8 +9,8 @@ class IapHandler(
     private val context: Context,
     private val preferencesManager: IPreferencesRepository
 ) : UnlockAppListener {
-    override fun onLockStatusChanged(status: Boolean) {
-        preferencesManager.unlockExtras()
+    override fun onLockStatusChanged(isFreeUnlock: Boolean, status: Boolean) {
+        preferencesManager.setLockExtras(status, isFreeUnlock)
     }
 
     override fun showFailToConnectFeedback() {

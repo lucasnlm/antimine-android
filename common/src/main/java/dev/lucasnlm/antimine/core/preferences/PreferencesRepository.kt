@@ -32,8 +32,9 @@ interface IPreferencesRepository {
     fun isRequestRatingEnabled(): Boolean
     fun disableRequestRating()
 
-    fun unlockExtras()
+    fun setLockExtras(lock: Boolean, keepShowingSupportButton: Boolean)
     fun areExtrasUnlocked(): Boolean
+    fun showSupport(): Boolean
 
     fun useFlagAssistant(): Boolean
     fun useHapticFeedback(): Boolean
@@ -173,12 +174,17 @@ class PreferencesRepository(
         }
     }
 
-    override fun unlockExtras() {
-        preferencesManager.putBoolean(PREFERENCE_UNLOCK_EXTRAS, true)
+    override fun setLockExtras(lock: Boolean, keepShowingSupportButton: Boolean) {
+        preferencesManager.putBoolean(PREFERENCE_UNLOCK_EXTRAS, !lock)
+        preferencesManager.putBoolean(PREFERENCE_SHOW_SUPPORT, !lock || keepShowingSupportButton)
     }
 
     override fun areExtrasUnlocked(): Boolean =
         preferencesManager.getBoolean(PREFERENCE_UNLOCK_EXTRAS, false)
+
+    override fun showSupport(): Boolean {
+        return preferencesManager.getBoolean(PREFERENCE_SHOW_SUPPORT, true)
+    }
 
     private companion object {
         private const val PREFERENCE_VIBRATION = "preference_vibration"
@@ -201,5 +207,6 @@ class PreferencesRepository(
         private const val PREFERENCE_USE_COUNT = "preference_use_count"
         private const val PREFERENCE_REQUEST_RATING = "preference_request_rating"
         private const val PREFERENCE_UNLOCK_EXTRAS = "preference_unlock_extras"
+        private const val PREFERENCE_SHOW_SUPPORT = "preference_show_support"
     }
 }
