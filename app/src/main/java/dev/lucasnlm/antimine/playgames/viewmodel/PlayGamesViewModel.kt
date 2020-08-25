@@ -2,12 +2,15 @@ package dev.lucasnlm.antimine.playgames.viewmodel
 
 import android.app.Activity
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
+import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.playgames.model.PlayGamesItem
 import dev.lucasnlm.external.IPlayGamesManager
 
 class PlayGamesViewModel(
-    private val playGamesManager: IPlayGamesManager
+    private val playGamesManager: IPlayGamesManager,
+    private val analyticsManager: IAnalyticsManager
 ) : StatelessViewModel<PlayGamesEvent>() {
 
     val playGamesItems = listOf(
@@ -16,10 +19,12 @@ class PlayGamesViewModel(
     )
 
     fun openAchievements(activity: Activity) {
+        analyticsManager.sentEvent(Analytics.OpenAchievements)
         playGamesManager.openAchievements(activity)
     }
 
     fun openLeaderboards(activity: Activity) {
+        analyticsManager.sentEvent(Analytics.OpenLeaderboards)
         playGamesManager.openLeaderboards(activity)
     }
 }

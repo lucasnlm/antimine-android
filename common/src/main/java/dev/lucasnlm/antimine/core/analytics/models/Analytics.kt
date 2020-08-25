@@ -91,6 +91,10 @@ sealed class Analytics(
 
     object OpenThemes : Analytics("Open Themes")
 
+    object OpenAchievements : Analytics("Open Achievements")
+
+    object OpenLeaderboards : Analytics("Open Leaderboards")
+
     data class ClickTheme(
         private val themeId: Long
     ) : Analytics("Click Theme", mapOf("id" to themeId.toString()))
