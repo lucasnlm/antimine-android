@@ -7,6 +7,10 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 class MockPreferencesRepository : IPreferencesRepository {
     private var customMinefield = Minefield(9, 9, 9)
 
+    override fun hasCustomizations(): Boolean = true
+
+    override fun reset() { }
+
     override fun customGameMode(): Minefield = customMinefield
 
     override fun updateCustomGameMode(minefield: Minefield) {

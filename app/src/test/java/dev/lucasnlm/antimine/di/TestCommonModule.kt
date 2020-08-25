@@ -31,6 +31,8 @@ val TestCommonModule = module {
             override fun getAllThemes(): List<AppTheme> = listOf(LightTheme)
 
             override fun setTheme(theme: AppTheme) { }
+
+            override fun reset(): AppTheme = LightTheme
         }
     } bind IThemeRepository::class
 }
