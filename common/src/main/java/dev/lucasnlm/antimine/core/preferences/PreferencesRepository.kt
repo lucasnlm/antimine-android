@@ -35,7 +35,7 @@ interface IPreferencesRepository {
     fun isRequestRatingEnabled(): Boolean
     fun disableRequestRating()
 
-    fun setPremiumFeatures(status: Boolean, keepShowingSupportButton: Boolean)
+    fun setPremiumFeatures(status: Boolean, keepShowingSupportButton: Boolean?)
     fun isPremiumEnabled(): Boolean
     fun showSupport(): Boolean
 
@@ -193,10 +193,13 @@ class PreferencesRepository(
         }
     }
 
-    override fun setPremiumFeatures(status: Boolean, keepShowingSupportButton: Boolean) {
+    override fun setPremiumFeatures(status: Boolean, keepShowingSupportButton: Boolean?) {
         if (!preferencesManager.getBoolean(PREFERENCE_PREMIUM_FEATURES, false)) {
             preferencesManager.putBoolean(PREFERENCE_PREMIUM_FEATURES, status)
-            preferencesManager.putBoolean(PREFERENCE_SHOW_SUPPORT, keepShowingSupportButton)
+
+            keepShowingSupportButton?.let {
+                preferencesManager.putBoolean(PREFERENCE_SHOW_SUPPORT, it)
+            }
         }
     }
 
