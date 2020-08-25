@@ -11,7 +11,8 @@ import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import org.koin.android.ext.android.inject
 
-class PreferencesActivity : ThematicActivity(R.layout.activity_empty),
+class PreferencesActivity :
+    ThematicActivity(R.layout.activity_empty),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val preferenceRepository: IPreferencesRepository by inject()

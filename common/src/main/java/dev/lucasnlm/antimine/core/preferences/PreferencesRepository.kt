@@ -57,8 +57,8 @@ class PreferencesRepository(
 
     override fun hasCustomizations(): Boolean {
         return preferencesManager.getInt(PREFERENCE_AREA_SIZE, 50) != 50 ||
-            preferencesManager.getInt(PREFERENCE_LONG_PRESS_TIMEOUT,
-                ViewConfiguration.getLongPressTimeout()) != ViewConfiguration.getLongPressTimeout()
+            preferencesManager.getInt(PREFERENCE_LONG_PRESS_TIMEOUT, ViewConfiguration.getLongPressTimeout()) !=
+            ViewConfiguration.getLongPressTimeout()
     }
 
     override fun reset() {

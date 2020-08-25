@@ -37,7 +37,8 @@ open class Clock {
                         onTick(elapsedTimeSeconds)
                     }
                 },
-                1000L, 1000L
+                1000L,
+                1000L
             )
         }
     }

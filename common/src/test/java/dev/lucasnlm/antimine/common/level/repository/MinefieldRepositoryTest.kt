@@ -27,7 +27,9 @@ class MinefieldRepositoryTest {
         }
 
         val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Standard, dimensionRepository, preferencesRepository
+            Difficulty.Standard,
+            dimensionRepository,
+            preferencesRepository
         )
 
         assertEquals(Minefield(99, 96, 1900), minefield)
@@ -47,7 +49,9 @@ class MinefieldRepositoryTest {
         }
 
         val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Standard, dimensionRepository, preferencesRepository
+            Difficulty.Standard,
+            dimensionRepository,
+            preferencesRepository
         )
 
         assertEquals(Minefield(99, 97, 1920), minefield)
@@ -67,7 +71,9 @@ class MinefieldRepositoryTest {
         }
 
         val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Standard, dimensionRepository, preferencesRepository
+            Difficulty.Standard,
+            dimensionRepository,
+            preferencesRepository
         )
 
         assertEquals(Minefield(99, 97, 1920 + 50), minefield)
@@ -87,7 +93,9 @@ class MinefieldRepositoryTest {
         }
 
         val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Standard, dimensionRepository, preferencesRepository
+            Difficulty.Standard,
+            dimensionRepository,
+            preferencesRepository
         )
 
         assertEquals(Minefield(99, 97, 4321), minefield)
@@ -100,7 +108,9 @@ class MinefieldRepositoryTest {
         val dimensionRepository = mockk<IDimensionRepository>(relaxed = true)
 
         val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Beginner, dimensionRepository, preferencesRepository
+            Difficulty.Beginner,
+            dimensionRepository,
+            preferencesRepository
         )
         assertEquals(beginnerMinefield, minefield)
     }
@@ -112,7 +122,9 @@ class MinefieldRepositoryTest {
         val dimensionRepository = mockk<IDimensionRepository>(relaxed = true)
 
         val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Intermediate, dimensionRepository, preferencesRepository
+            Difficulty.Intermediate,
+            dimensionRepository,
+            preferencesRepository
         )
         assertEquals(intermediateMinefield, minefield)
     }
@@ -124,7 +136,9 @@ class MinefieldRepositoryTest {
         val dimensionRepository = mockk<IDimensionRepository>(relaxed = true)
 
         val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Expert, dimensionRepository, preferencesRepository
+            Difficulty.Expert,
+            dimensionRepository,
+            preferencesRepository
         )
         assertEquals(expertMinefield, minefield)
     }
@@ -138,7 +152,9 @@ class MinefieldRepositoryTest {
         val dimensionRepository = mockk<IDimensionRepository>(relaxed = true)
 
         val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Custom, dimensionRepository, preferencesRepository
+            Difficulty.Custom,
+            dimensionRepository,
+            preferencesRepository
         )
         assertEquals(Minefield(25, 20, 12), minefield)
     }

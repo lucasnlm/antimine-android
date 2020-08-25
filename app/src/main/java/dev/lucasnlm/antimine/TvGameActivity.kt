@@ -200,7 +200,8 @@ class TvGameActivity : AppCompatActivity() {
                         keepConfirmingNewGame = false
                     }
                 },
-                null, DateUtils.SECOND_IN_MILLIS
+                null,
+                DateUtils.SECOND_IN_MILLIS
             )
         }
     }
@@ -222,7 +223,8 @@ class TvGameActivity : AppCompatActivity() {
                     }.show()
                 }
             },
-            null, DateUtils.SECOND_IN_MILLIS
+            null,
+            DateUtils.SECOND_IN_MILLIS
         )
     }
 

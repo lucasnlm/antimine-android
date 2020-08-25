@@ -119,7 +119,9 @@ class ThemeViewModelTest : IntentViewModelTest() {
     )
 
     private val allThemes = listOf(
-        lightTheme, darkTheme, gardenTheme
+        lightTheme,
+        darkTheme,
+        gardenTheme
     )
 
     @Test

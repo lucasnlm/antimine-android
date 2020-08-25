@@ -227,7 +227,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
 
         minesCount.setCompoundDrawablesWithIntrinsicBounds(
-            ContextCompat.getDrawable(this, usingTheme.assets.toolbarMine), null, null, null
+            ContextCompat.getDrawable(this, usingTheme.assets.toolbarMine),
+            null,
+            null,
+            null
         )
     }
 
@@ -279,28 +282,30 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 }
             )
 
-            addDrawerListener(object : DrawerLayout.DrawerListener {
-                override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-                    // Empty
-                }
-
-                override fun onDrawerOpened(drawerView: View) {
-                    gameViewModel.pauseGame()
-                    analyticsManager.sentEvent(Analytics.OpenDrawer)
-                }
-
-                override fun onDrawerClosed(drawerView: View) {
-                    if (hasNoOtherFocusedDialog()) {
-                        gameViewModel.resumeGame()
+            addDrawerListener(
+                object : DrawerLayout.DrawerListener {
+                    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                        // Empty
                     }
 
-                    analyticsManager.sentEvent(Analytics.CloseDrawer)
-                }
+                    override fun onDrawerOpened(drawerView: View) {
+                        gameViewModel.pauseGame()
+                        analyticsManager.sentEvent(Analytics.OpenDrawer)
+                    }
 
-                override fun onDrawerStateChanged(newState: Int) {
-                    // Empty
+                    override fun onDrawerClosed(drawerView: View) {
+                        if (hasNoOtherFocusedDialog()) {
+                            gameViewModel.resumeGame()
+                        }
+
+                        analyticsManager.sentEvent(Analytics.CloseDrawer)
+                    }
+
+                    override fun onDrawerStateChanged(newState: Int) {
+                        // Empty
+                    }
                 }
-            })
+            )
 
             if (preferencesRepository.isFirstUse()) {
                 openDrawer(GravityCompat.START)
@@ -495,7 +500,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         val currentGameStatus = status
         if (currentGameStatus is Status.Over && !isFinishing && !drawer.isDrawerOpen(GravityCompat.START)) {
             if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
-                supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG) == null) {
+                supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG) == null
+            ) {
                 val score = currentGameStatus.score
                 EndGameDialogFragment.newInstance(
                     victory,

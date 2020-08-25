@@ -31,7 +31,8 @@ class ThemeViewModel(
             }.map {
                 if (it is ThemeEvent.ChangeTheme &&
                     billingManager.isEnabled() &&
-                    !preferencesRepository.areExtrasUnlocked()) {
+                    !preferencesRepository.areExtrasUnlocked()
+                ) {
                     ThemeEvent.Unlock
                 } else {
                     it

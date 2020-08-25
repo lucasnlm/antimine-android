@@ -60,7 +60,10 @@ class ShareManager(
         val canvas = Canvas(bitmap)
 
         canvas.drawRect(
-            0.0f, 0.0f, imageWidth.toFloat(), imageHeight.toFloat(),
+            0.0f,
+            0.0f,
+            imageWidth.toFloat(),
+            imageHeight.toFloat(),
             Paint().apply {
                 color = Color.WHITE
                 alpha = 0xff

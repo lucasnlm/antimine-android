@@ -70,12 +70,14 @@ class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbac
         bindViewModel()
         loadGameFragment()
 
-        swipe.addCallback(object : SwipeDismissFrameLayout.Callback() {
-            override fun onDismissed(layout: SwipeDismissFrameLayout) {
-                swipe.visibility = View.GONE
-                finish()
+        swipe.addCallback(
+            object : SwipeDismissFrameLayout.Callback() {
+                override fun onDismissed(layout: SwipeDismissFrameLayout) {
+                    swipe.visibility = View.GONE
+                    finish()
+                }
             }
-        })
+        )
     }
 
     override fun onResume() {
@@ -197,7 +199,8 @@ class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbac
                     }
                 }
             },
-            null, wait
+            null,
+            wait
         )
     }
 

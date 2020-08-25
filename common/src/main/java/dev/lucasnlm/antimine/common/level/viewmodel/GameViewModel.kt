@@ -69,7 +69,9 @@ class GameViewModel(
         currentDifficulty = newDifficulty
 
         val minefield = minefieldRepository.fromDifficulty(
-            newDifficulty, dimensionRepository, preferencesRepository
+            newDifficulty,
+            dimensionRepository,
+            preferencesRepository
         )
 
         gameController = GameController(minefield, minefieldRepository.randomSeed())
@@ -85,7 +87,8 @@ class GameViewModel(
 
         analyticsManager.sentEvent(
             Analytics.NewGame(
-                minefield, newDifficulty,
+                minefield,
+                newDifficulty,
                 gameController.seed,
                 getAreaSizeMultiplier()
             )
