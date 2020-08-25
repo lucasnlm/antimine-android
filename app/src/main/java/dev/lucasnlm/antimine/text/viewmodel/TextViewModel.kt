@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
 class TextViewModel(
-    private val context: Context
+    private val context: Context,
 ) : IntentViewModel<TextEvent, TextState>() {
 
     private suspend fun loadText(@RawRes rawFile: Int): String {

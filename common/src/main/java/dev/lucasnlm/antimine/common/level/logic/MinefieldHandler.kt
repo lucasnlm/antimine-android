@@ -5,7 +5,7 @@ import dev.lucasnlm.antimine.common.level.models.Mark
 
 class MinefieldHandler(
     private val field: MutableList<Area>,
-    private val useQuestionMark: Boolean
+    private val useQuestionMark: Boolean,
 ) {
     fun showAllMines() {
         field.filter { it.hasMine && it.mark != Mark.Flag }

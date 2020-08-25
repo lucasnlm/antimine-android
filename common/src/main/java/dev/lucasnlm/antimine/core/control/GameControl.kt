@@ -16,7 +16,7 @@ enum class ActionResponse {
 data class Actions(
     val singleClick: ActionResponse?,
     val doubleClick: ActionResponse?,
-    val longPress: ActionResponse?
+    val longPress: ActionResponse?,
 )
 
 /**
@@ -37,7 +37,7 @@ enum class ControlStyle {
 sealed class GameControl(
     val id: ControlStyle,
     val onCovered: Actions,
-    val onOpen: Actions
+    val onOpen: Actions,
 ) {
     object Standard : GameControl(
         id = ControlStyle.Standard,

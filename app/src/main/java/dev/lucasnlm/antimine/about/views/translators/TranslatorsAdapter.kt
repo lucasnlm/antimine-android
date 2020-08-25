@@ -7,7 +7,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.viewmodel.TranslationInfo
 
 class TranslatorsAdapter(
-    private val translators: List<TranslationInfo>
+    private val translators: List<TranslationInfo>,
 ) : RecyclerView.Adapter<TranslatorsViewHolder>() {
 
     override fun getItemCount(): Int = translators.size

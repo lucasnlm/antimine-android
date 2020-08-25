@@ -7,5 +7,5 @@ data class AppTheme(
     @StyleRes val theme: Int,
     @StyleRes val themeNoActionBar: Int,
     val assets: Assets,
-    val palette: AreaPalette
+    val palette: AreaPalette,
 )

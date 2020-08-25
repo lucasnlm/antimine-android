@@ -18,7 +18,7 @@ interface IThemeRepository {
 
 class ThemeRepository(
     private val context: Context,
-    private val preferenceRepository: IPreferencesRepository
+    private val preferenceRepository: IPreferencesRepository,
 ) : IThemeRepository {
     override fun getCustomTheme(): AppTheme? {
         return getAllThemes().firstOrNull { it.id == preferenceRepository.themeId() }

@@ -4,5 +4,5 @@ enum class AboutEvent {
     SupportUs,
     ThirdPartyLicenses,
     SourceCode,
-    Translators
+    Translators,
 }

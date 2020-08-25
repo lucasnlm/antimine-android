@@ -6,7 +6,7 @@ sealed class ThemeEvent {
     object Unlock : ThemeEvent()
 
     data class ChangeTheme(
-        val newTheme: AppTheme
+        val newTheme: AppTheme,
     ) : ThemeEvent()
 
     object ResetTheme : ThemeEvent()

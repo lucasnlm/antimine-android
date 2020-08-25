@@ -4,7 +4,7 @@ import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Mark
 
 class FlagAssistant(
-    private val field: MutableList<Area>
+    private val field: MutableList<Area>,
 ) {
     fun runFlagAssistant() {
         // Must not select Mark.PurposefulNone, only Mark.None. Otherwise, it will flag

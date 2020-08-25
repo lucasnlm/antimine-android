@@ -6,7 +6,7 @@ import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 
 class EndGameDialogViewModel(
-    private val context: Context
+    private val context: Context,
 ) : IntentViewModel<EndGameDialogEvent, EndGameDialogState>() {
 
     private fun List<Int>.safeRandomEmoji(
@@ -29,13 +29,13 @@ class EndGameDialogViewModel(
         R.drawable.emoji_hugging_face,
         R.drawable.emoji_partying_face,
         R.drawable.emoji_clapping_hands,
-        R.drawable.emoji_triangular_flag
+        R.drawable.emoji_triangular_flag,
     ).safeRandomEmoji(except)
 
     private fun randomNeutralEmoji(except: Int? = null) = listOf(
         R.drawable.emoji_grimacing_face,
         R.drawable.emoji_smiling_face_with_sunglasses,
-        R.drawable.emoji_triangular_flag
+        R.drawable.emoji_triangular_flag,
     ).safeRandomEmoji(except)
 
     private fun randomGameOverEmoji(except: Int? = null) = listOf(
@@ -52,7 +52,7 @@ class EndGameDialogViewModel(
         R.drawable.emoji_face_with_head_bandage,
         R.drawable.emoji_face_with_symbols_on_mouth,
         R.drawable.emoji_collision,
-        R.drawable.emoji_sad_but_relieved_face
+        R.drawable.emoji_sad_but_relieved_face,
 
     ).safeRandomEmoji(except)
 
@@ -70,7 +70,7 @@ class EndGameDialogViewModel(
         R.drawable.emoji_triangular_flag,
         "",
         "",
-        false
+        false,
     )
 
     override suspend fun mapEventToState(event: EndGameDialogEvent) = flow {

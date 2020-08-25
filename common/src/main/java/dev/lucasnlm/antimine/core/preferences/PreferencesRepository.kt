@@ -49,7 +49,7 @@ interface IPreferencesRepository {
 
 class PreferencesRepository(
     private val preferencesManager: IPreferencesManager,
-    private val defaultLongPressTimeout: Int
+    private val defaultLongPressTimeout: Int,
 ) : IPreferencesRepository {
     init {
         migrateOldPreferences()

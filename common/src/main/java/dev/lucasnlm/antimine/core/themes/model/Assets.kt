@@ -9,5 +9,5 @@ data class Assets(
     @DrawableRes val toolbarMine: Int,
     @DrawableRes val mine: Int,
     @DrawableRes val mineExploded: Int,
-    @DrawableRes val mineLow: Int
+    @DrawableRes val mineLow: Int,
 )

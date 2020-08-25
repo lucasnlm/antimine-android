@@ -7,7 +7,7 @@ import kotlin.random.Random
 
 class MinefieldCreator(
     private val minefield: Minefield,
-    private val randomGenerator: Random
+    private val randomGenerator: Random,
 ) {
     private fun createMutableEmpty(): List<Area> {
         val width = minefield.width

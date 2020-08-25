@@ -10,12 +10,12 @@ import dev.lucasnlm.external.IPlayGamesManager
 
 class PlayGamesViewModel(
     private val playGamesManager: IPlayGamesManager,
-    private val analyticsManager: IAnalyticsManager
+    private val analyticsManager: IAnalyticsManager,
 ) : StatelessViewModel<PlayGamesEvent>() {
 
     val playGamesItems = listOf(
         PlayGamesItem(0, R.drawable.games_achievements, R.string.achievements, PlayGamesEvent.OpenAchievements),
-        PlayGamesItem(1, R.drawable.games_leaderboards, R.string.leaderboards, PlayGamesEvent.OpenLeaderboards)
+        PlayGamesItem(1, R.drawable.games_leaderboards, R.string.leaderboards, PlayGamesEvent.OpenLeaderboards),
     )
 
     fun openAchievements(activity: Activity) {

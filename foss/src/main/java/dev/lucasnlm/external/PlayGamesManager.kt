@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 
 class PlayGamesManager(
-    context: Context
+    context: Context,
 ) : IPlayGamesManager {
     override fun hasGooglePlayGames(): Boolean = false
 

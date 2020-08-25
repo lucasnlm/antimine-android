@@ -25,7 +25,7 @@ class AreaAdapter(
     context: Context,
     private val viewModel: GameViewModel,
     private val preferencesRepository: IPreferencesRepository,
-    dimensionRepository: IDimensionRepository
+    dimensionRepository: IDimensionRepository,
 ) : RecyclerView.Adapter<AreaViewHolder>() {
 
     private var field = listOf<Area>()

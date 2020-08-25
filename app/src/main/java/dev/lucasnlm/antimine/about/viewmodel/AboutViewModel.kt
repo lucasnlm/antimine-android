@@ -7,7 +7,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 
 class AboutViewModel(
-    private val context: Context
+    private val context: Context,
 ) : IntentViewModel<AboutEvent, AboutState>() {
 
     override fun onEvent(event: AboutEvent) {
@@ -38,7 +38,7 @@ class AboutViewModel(
         "Spanish" to sequenceOf("Alfredo Jara", "Aldo Rodriguez", "Inail"),
         "Turkish" to sequenceOf("creuzwagen", "Fatih Fırıncı"),
         "Ukrainian" to sequenceOf("Dmitry Shuba"),
-        "Vietnamese" to sequenceOf("pnhpnh")
+        "Vietnamese" to sequenceOf("pnhpnh"),
     ).map {
         TranslationInfo(it.key, it.value)
     }.toList()
@@ -50,7 +50,7 @@ class AboutViewModel(
         "Moshi" to R.raw.apache2,
         "Mockito" to R.raw.mockito,
         "Noto Emoji" to R.raw.apache2,
-        "Sounds" to R.raw.sounds
+        "Sounds" to R.raw.sounds,
     ).map {
         License(it.key, it.value)
     }.toList()

@@ -12,7 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.games.Games
 
 class PlayGamesManager(
-    private val context: Context
+    private val context: Context,
 ) : IPlayGamesManager {
     private var account: GoogleSignInAccount? = null
 

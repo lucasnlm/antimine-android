@@ -46,7 +46,7 @@ class GameViewModel(
     private val minefieldRepository: IMinefieldRepository,
     private val analyticsManager: IAnalyticsManager,
     private val playGamesManager: IPlayGamesManager,
-    private val clock: Clock
+    private val clock: Clock,
 ) : ViewModel() {
     val eventObserver = MutableLiveData<Event>()
     val retryObserver = MutableLiveData<Unit>()

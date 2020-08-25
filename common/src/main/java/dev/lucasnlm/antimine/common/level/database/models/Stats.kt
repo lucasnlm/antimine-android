@@ -25,5 +25,5 @@ data class Stats(
     val height: Int,
 
     @ColumnInfo(name = "openArea")
-    val openArea: Int
+    val openArea: Int,
 )

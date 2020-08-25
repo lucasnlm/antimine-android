@@ -9,5 +9,5 @@ data class Area(
     val mistake: Boolean = false,
     val isCovered: Boolean = true,
     val mark: Mark = Mark.None,
-    val highlighted: Boolean = false
+    val highlighted: Boolean = false,
 )

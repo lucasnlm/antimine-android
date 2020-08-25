@@ -24,7 +24,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 class ShareManager(
-    private val context: Context
+    private val context: Context,
 ) {
     private suspend fun share(minefield: Minefield, field: List<Area>): Boolean {
         val file = createImage(minefield, field)

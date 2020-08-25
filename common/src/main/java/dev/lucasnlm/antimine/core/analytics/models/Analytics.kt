@@ -6,7 +6,7 @@ import dev.lucasnlm.antimine.common.level.models.Minefield
 
 sealed class Analytics(
     val name: String,
-    val extra: Map<String, String> = mapOf()
+    val extra: Map<String, String> = mapOf(),
 ) {
     object Open : Analytics("Open game")
 
@@ -14,7 +14,7 @@ sealed class Analytics(
         minefield: Minefield,
         difficulty: Difficulty,
         seed: Long,
-        areaSizeMultiplier: Int
+        areaSizeMultiplier: Int,
     ) : Analytics(
         "New Game",
         mapOf(
@@ -32,7 +32,7 @@ sealed class Analytics(
         difficulty: Difficulty,
         seed: Long,
         areaSizeMultiplier: Int,
-        firstOpen: Int
+        firstOpen: Int,
     ) : Analytics(
         "Retry Game",
         mapOf(
@@ -96,7 +96,7 @@ sealed class Analytics(
     object OpenLeaderboards : Analytics("Open Leaderboards")
 
     data class ClickTheme(
-        private val themeId: Long
+        private val themeId: Long,
     ) : Analytics("Click Theme", mapOf("id" to themeId.toString()))
 
     object OpenSettings : Analytics("Open Settings")

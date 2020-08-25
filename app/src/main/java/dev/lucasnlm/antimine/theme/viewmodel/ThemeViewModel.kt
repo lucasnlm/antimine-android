@@ -16,7 +16,7 @@ class ThemeViewModel(
     private val themeRepository: IThemeRepository,
     private val billingManager: IBillingManager,
     private val preferencesRepository: IPreferencesRepository,
-    private val analyticsManager: IAnalyticsManager
+    private val analyticsManager: IAnalyticsManager,
 ) : IntentViewModel<ThemeEvent, ThemeState>() {
     private fun setTheme(theme: AppTheme) {
         themeRepository.setTheme(theme)

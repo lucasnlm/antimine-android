@@ -7,7 +7,7 @@ import dev.lucasnlm.external.UnlockAppListener
 
 class IapHandler(
     private val context: Context,
-    private val preferencesManager: IPreferencesRepository
+    private val preferencesManager: IPreferencesRepository,
 ) : UnlockAppListener {
     override fun onLockStatusChanged(isFreeUnlock: Boolean, status: Boolean) {
         preferencesManager.setLockExtras(status, isFreeUnlock)

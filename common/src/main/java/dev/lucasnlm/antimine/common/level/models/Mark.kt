@@ -4,7 +4,8 @@ enum class Mark {
     None,
     Flag,
     Question,
-    PurposefulNone;
+    PurposefulNone,
+    ;
 
     fun isFlag(): Boolean = this == Flag
 

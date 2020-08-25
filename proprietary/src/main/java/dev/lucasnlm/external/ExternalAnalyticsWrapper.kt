@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
 
 class ExternalAnalyticsWrapper(
-    private val context: Context
+    private val context: Context,
 ) : IExternalAnalyticsWrapper {
     private val firebaseAnalytics by lazy {
         FirebaseAnalytics.getInstance(context)

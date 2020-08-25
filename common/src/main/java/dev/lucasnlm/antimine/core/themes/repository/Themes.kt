@@ -26,7 +26,7 @@ object Themes {
             minesAround7 = 0x66126B,
             minesAround8 = 0x000000,
             highlight = 0x212121,
-            focus = 0xD32F2F
+            focus = 0xD32F2F,
         ),
         assets = Assets(
             wrongFlag = R.drawable.red_flag,
@@ -35,7 +35,7 @@ object Themes {
             toolbarMine = R.drawable.mine,
             mine = R.drawable.mine,
             mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low
+            mineLow = R.drawable.mine_low,
         )
     )
 
@@ -60,7 +60,7 @@ object Themes {
                 minesAround7 = 0xCCCCCC,
                 minesAround8 = 0xCCCCCC,
                 highlight = 0x212121,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.flag,
@@ -69,7 +69,7 @@ object Themes {
                 toolbarMine = R.drawable.mine_low,
                 mine = R.drawable.mine_low,
                 mineExploded = R.drawable.mine_low,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
             )
         ),
         LightTheme,
@@ -93,7 +93,7 @@ object Themes {
                 minesAround7 = 0xd5d2cc,
                 minesAround8 = 0xd5d2cc,
                 highlight = 0xFFFFFF,
-                focus = 0xFFFFFF
+                focus = 0xFFFFFF,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.flag,
@@ -102,7 +102,7 @@ object Themes {
                 toolbarMine = R.drawable.mine_low,
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_exploded_white,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
             )
         ),
         AppTheme(
@@ -125,7 +125,7 @@ object Themes {
                 minesAround7 = 0x66126B,
                 minesAround8 = 0x000000,
                 highlight = 0xFFFFFF,
-                focus = 0xFFFFFF
+                focus = 0xFFFFFF,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.flag,
@@ -134,7 +134,7 @@ object Themes {
                 toolbarMine = R.drawable.mine_low,
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_exploded_white,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
             )
         ),
         AppTheme(
@@ -157,7 +157,7 @@ object Themes {
                 minesAround7 = 0x66126B,
                 minesAround8 = 0x000000,
                 highlight = 0x212121,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.red_flag,
@@ -166,7 +166,7 @@ object Themes {
                 toolbarMine = R.drawable.mine,
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_exploded_red,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
             )
         ),
         AppTheme(
@@ -189,7 +189,7 @@ object Themes {
                 minesAround7 = 0x66126B,
                 minesAround8 = 0x000000,
                 highlight = 0x212121,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.red_flag,
@@ -198,7 +198,7 @@ object Themes {
                 toolbarMine = R.drawable.mine,
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_exploded_red,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
             )
         ),
         AppTheme(
@@ -221,7 +221,7 @@ object Themes {
                 minesAround7 = 0x66126B,
                 minesAround8 = 0x000000,
                 highlight = 0x212121,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.red_flag,
@@ -230,7 +230,7 @@ object Themes {
                 toolbarMine = R.drawable.mine,
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_exploded_red,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
             )
         ),
         AppTheme(
@@ -253,7 +253,7 @@ object Themes {
                 minesAround7 = 0xBBBBBB,
                 minesAround8 = 0xEEEEEE,
                 highlight = 0x212121,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.flag_black,
@@ -262,7 +262,7 @@ object Themes {
                 toolbarMine = R.drawable.mine_low,
                 mine = R.drawable.mine_white,
                 mineExploded = R.drawable.mine_white,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
             )
         ),
         AppTheme(
@@ -285,7 +285,7 @@ object Themes {
                 minesAround7 = 0x616161,
                 minesAround8 = 0x000000,
                 highlight = 0x212121,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.flag,
@@ -294,7 +294,7 @@ object Themes {
                 toolbarMine = R.drawable.mine_low,
                 mine = R.drawable.mine_pink,
                 mineExploded = R.drawable.mine_pink_exploded,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
             )
         ),
         AppTheme(
@@ -317,7 +317,7 @@ object Themes {
                 minesAround7 = 0x616161,
                 minesAround8 = 0x000000,
                 highlight = 0xd1c4e9,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.flag,
@@ -326,7 +326,7 @@ object Themes {
                 toolbarMine = R.drawable.mine_low,
                 mine = R.drawable.mine_pink,
                 mineExploded = R.drawable.mine_pink_exploded,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
             )
         ),
         AppTheme(
@@ -349,7 +349,7 @@ object Themes {
                 minesAround7 = 0x616161,
                 minesAround8 = 0x000000,
                 highlight = 0xd1c4e9,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.flag,
@@ -381,7 +381,7 @@ object Themes {
                 minesAround7 = 0x616161,
                 minesAround8 = 0x000000,
                 highlight = 0xd1c4e9,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.flag,
@@ -413,7 +413,7 @@ object Themes {
                 minesAround7 = 0x616161,
                 minesAround8 = 0x000000,
                 highlight = 0xd1c4e9,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.flag,
@@ -422,7 +422,7 @@ object Themes {
                 toolbarMine = R.drawable.mine_low,
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_pink_exploded,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
             )
         ),
         AppTheme(
@@ -445,7 +445,7 @@ object Themes {
                 minesAround7 = 0x616161,
                 minesAround8 = 0x000000,
                 highlight = 0xd1c4e9,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.flag,
@@ -477,7 +477,7 @@ object Themes {
                 minesAround7 = 0xFF0000,
                 minesAround8 = 0xFF0000,
                 highlight = 0xd1c4e9,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.flag_black,
@@ -486,7 +486,7 @@ object Themes {
                 toolbarMine = R.drawable.mine_low,
                 mine = R.drawable.mine_white,
                 mineExploded = R.drawable.mine_white,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
             )
         ),
         AppTheme(
@@ -509,7 +509,7 @@ object Themes {
                 minesAround7 = 0xFF0000,
                 minesAround8 = 0xFF0000,
                 highlight = 0xd1c4e9,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.flag_black,
@@ -541,7 +541,7 @@ object Themes {
                 minesAround7 = 0xFF0000,
                 minesAround8 = 0xFF0000,
                 highlight = 0xd1c4e9,
-                focus = 0xD32F2F
+                focus = 0xD32F2F,
             ),
             assets = Assets(
                 wrongFlag = R.drawable.flag_black,
@@ -550,7 +550,7 @@ object Themes {
                 toolbarMine = R.drawable.mine_low,
                 mine = R.drawable.mine_white,
                 mineExploded = R.drawable.mine_white,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
             )
         )
     )

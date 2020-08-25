@@ -6,7 +6,7 @@ import android.content.Intent
 import android.net.Uri
 
 class BillingManager(
-    private val context: Context
+    private val context: Context,
 ) : IBillingManager {
 
     override fun start(unlockAppListener: UnlockAppListener) {

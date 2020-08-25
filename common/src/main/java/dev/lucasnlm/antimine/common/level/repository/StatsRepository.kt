@@ -9,7 +9,7 @@ interface IStatsRepository {
 }
 
 class StatsRepository(
-    private val statsDao: StatsDao
+    private val statsDao: StatsDao,
 ) : IStatsRepository {
     override suspend fun getAllStats(minId: Int): List<Stats> {
         return statsDao.getAll(minId)
@@ -21,7 +21,7 @@ class StatsRepository(
 }
 
 class MemoryStatsRepository(
-    private val memoryStats: MutableList<Stats> = mutableListOf()
+    private val memoryStats: MutableList<Stats> = mutableListOf(),
 ) : IStatsRepository {
     override suspend fun getAllStats(minId: Int): List<Stats> = memoryStats.filter { it.uid >= minId }
 

@@ -14,5 +14,5 @@ enum class SaveStatus(
     VICTORY(1),
 
     // Finished game with game over.
-    DEFEAT(2)
+    DEFEAT(2),
 }

@@ -5,7 +5,7 @@ import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 
 class CreateGameViewModel(
-    private val preferencesRepository: IPreferencesRepository
+    private val preferencesRepository: IPreferencesRepository,
 ) : IntentViewModel<CustomEvent, CustomState>() {
 
     override suspend fun mapEventToState(event: CustomEvent) = flow {

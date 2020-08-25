@@ -9,5 +9,5 @@ data class ControlDetails(
     @StringRes val firstActionId: Int,
     @StringRes val firstActionResponseId: Int,
     @StringRes val secondActionId: Int,
-    @StringRes val secondActionResponseId: Int
+    @StringRes val secondActionResponseId: Int,
 )

@@ -7,5 +7,5 @@ enum class Event {
     Resume,
     Running,
     Victory,
-    GameOver
+    GameOver,
 }

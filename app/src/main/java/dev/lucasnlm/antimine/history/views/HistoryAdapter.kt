@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.view_history_item.view.*
 
 class HistoryAdapter(
     private val saveHistory: List<Save>,
-    private val statelessViewModel: StatelessViewModel<HistoryEvent>
+    private val statelessViewModel: StatelessViewModel<HistoryEvent>,
 ) : RecyclerView.Adapter<HistoryViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         val view = LayoutInflater

@@ -6,5 +6,5 @@ import dev.lucasnlm.antimine.core.control.ControlStyle
 data class ControlState(
     val selectedIndex: Int,
     val selected: ControlStyle,
-    val gameControls: List<ControlDetails>
+    val gameControls: List<ControlDetails>,
 )

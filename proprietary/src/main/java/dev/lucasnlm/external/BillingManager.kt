@@ -12,7 +12,7 @@ import com.android.billingclient.api.SkuDetailsParams
 import com.android.billingclient.api.querySkuDetails
 
 class BillingManager(
-    private val context: Context
+    private val context: Context,
 ) : IBillingManager, BillingClientStateListener, PurchasesUpdatedListener {
     private var unlockAppListener: UnlockAppListener? = null
 

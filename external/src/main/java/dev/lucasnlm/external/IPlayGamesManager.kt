@@ -13,7 +13,7 @@ enum class Achievement(
     Expert(""),
     ThirtySeconds(""),
     Flags(""),
-    Boom("")
+    Boom(""),
 }
 
 enum class Leaderboard(
@@ -21,7 +21,7 @@ enum class Leaderboard(
 ) {
     BestTimeBeginner(""),
     BestTimeIntermediate(""),
-    BestTimeExpert("")
+    BestTimeExpert(""),
 }
 
 interface IPlayGamesManager {
