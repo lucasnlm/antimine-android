@@ -29,10 +29,12 @@
     <string name="settings_general">Obecné</string>
     <string name="settings_gameplay">Hra</string>
     <string name="settings_accessibility">Přístupnost</string>
-    <string name="settings_large_areas">Použít velké oblasti</string>
     <string name="size">Velikost</string>
     <string name="system">Systém</string>
     <string name="rating">Zpětná vazba</string>
+    <string name="support_title">Podpořte nás!</string>
+    <string name="support_description">S vaší pomocí budeme moci implementovat nové funkce a udržet náš projekt aktivní.</string>
+    <string name="support_action">Podporovat</string>
     <string name="rating_message">Pokud se vám tato hra líbí, dejte nám prosím zpětnou vazbu. Hodně nám to pomůže.</string>
     <string name="used_software_text">Tato hra používá následující software třetích stran:</string>
     <string name="translators_text">Tato hra byla přeložena těmito lidmi:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Použít otazníky</string>
     <string name="control">Ovládání</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Označit jako první</string>
     <string name="single_click">Jedno klepnutí</string>
     <string name="double_click">Dvojí klepnutí</string>
     <string name="long_press">Dlouhý stisk</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Zrušit</string>
     <string name="resume">Pokračovat</string>
     <string name="yes">Ano</string>
+    <string name="unlock">Odemknout</string>
+    <string name="achievements">Úspěchy</string>
     <string name="rating_button_no">Ne</string>
     <string name="general">Obecné</string>
     <string name="source_code">Zdrojový kód</string>

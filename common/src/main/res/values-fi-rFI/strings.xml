@@ -29,10 +29,12 @@
     <string name="settings_general">Yleiset</string>
     <string name="settings_gameplay">Pelattavuus</string>
     <string name="settings_accessibility">Esteettömyys</string>
-    <string name="settings_large_areas">Käytä suuria alueita</string>
     <string name="size">Koko</string>
     <string name="system">Järjestelmä</string>
     <string name="rating">Lähetä palautetta</string>
+    <string name="support_title">Tue meitä!</string>
+    <string name="support_description">Sinun avullasi pystymme toteuttamaan uusia ominaisuuksia ja pitämään projektimme aktiivisena.</string>
+    <string name="support_action">Tukea</string>
     <string name="rating_message">Mikäli pidät sovelluksesta, jätä siitä arvostelu. Tästä on meille paljon apua.</string>
     <string name="used_software_text">Tämä peli käyttää seuraavien kolmansien osapuolten ohjelmistoa:</string>
     <string name="translators_text">Tämän pelin ovat kääntäneet seuraavat henkilöt:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Käytä kysymysmerkkiä</string>
     <string name="control">Kontrollit</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Merkitse ensimmäinen</string>
     <string name="single_click">Napautus</string>
     <string name="double_click">Kaksoisnapsautus</string>
     <string name="long_press">Pitkä painallus</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Peruuta</string>
     <string name="resume">Jatka</string>
     <string name="yes">Kyllä</string>
+    <string name="unlock">Avaa</string>
+    <string name="achievements">Saavutukset</string>
     <string name="rating_button_no">No</string>
     <string name="general">Yleiset</string>
     <string name="source_code">Lähdekoodi</string>

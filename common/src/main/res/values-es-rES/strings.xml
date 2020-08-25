@@ -29,10 +29,12 @@
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Jugabilidad</string>
     <string name="settings_accessibility">Accesibilidad</string>
-    <string name="settings_large_areas">Usar áreas grandes</string>
     <string name="size">Tamaño</string>
     <string name="system">Sistema</string>
     <string name="rating">Comentarios</string>
+    <string name="support_title">¡Ayúdenos!</string>
+    <string name="support_description">Con tu ayuda, seremos capaces de implementar nuevas características y mantener nuestro proyecto activo.</string>
+    <string name="support_action">Apoyar</string>
     <string name="rating_message">Si te gusta este juego, por favor danos un comentario. Nos ayudará mucho.</string>
     <string name="used_software_text">Este juego utiliza el siguiente software de terceros:</string>
     <string name="translators_text">Este juego fue traducido por las siguientes personas:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Usar banderas de interrogación</string>
     <string name="control">Controles</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Marcar primero</string>
     <string name="single_click">Un clic</string>
     <string name="double_click">Doble clic</string>
     <string name="long_press">Mantenga pulsado</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Cancelar</string>
     <string name="resume">Continuar</string>
     <string name="yes">Sí</string>
+    <string name="unlock">Desbloquear</string>
+    <string name="achievements">Logros</string>
     <string name="rating_button_no">No</string>
     <string name="general">General</string>
     <string name="source_code">Código Fuente</string>

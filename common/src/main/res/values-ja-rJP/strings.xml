@@ -29,10 +29,12 @@
     <string name="settings_general">全般</string>
     <string name="settings_gameplay">ゲームプレイ</string>
     <string name="settings_accessibility">アクセシビリティ</string>
-    <string name="settings_large_areas">範囲を広くする</string>
     <string name="size">サイズ</string>
     <string name="system">システム</string>
     <string name="rating">フィードバック</string>
+    <string name="support_title">私達を支援する！</string>
+    <string name="support_description">あなたの助けを借りて、私たちは新しい機能を実装し、私たちのプロジェクトをアクティブに保つことができます。</string>
+    <string name="support_action">私達を支援する</string>
     <string name="rating_message">もしこのゲームを気に入ったなら、フィードバックをお願いします。私たちへの助けになるはずです。</string>
     <string name="used_software_text">このゲームは、以下のサードパーティーソフトウェアを使用しています:</string>
     <string name="translators_text">このゲームは、以下の人々によって翻訳されています:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">クエスチョンマークを使う</string>
     <string name="control">コントロール</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">旗を優先</string>
     <string name="single_click">タップ</string>
     <string name="double_click">ダブルタップ</string>
     <string name="long_press">長押し</string>
@@ -71,6 +72,8 @@
     <string name="cancel">キャンセル</string>
     <string name="resume">続ける</string>
     <string name="yes">はい</string>
+    <string name="unlock">ロック解除</string>
+    <string name="achievements">達成</string>
     <string name="rating_button_no">いいえ</string>
     <string name="general">全般</string>
     <string name="source_code">ソースコード</string>

@@ -29,10 +29,12 @@
     <string name="settings_general">Generale</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Accessibilità</string>
-    <string name="settings_large_areas">Usa grandi aree</string>
     <string name="size">Dimensione</string>
     <string name="system">Sistema</string>
     <string name="rating">Suggerimenti</string>
+    <string name="support_title">Supportaci!</string>
+    <string name="support_description">Grazie al tuo aiuto, avremo la possibilità di implementare nuove funzionalità e mantenere attivo il progetto.</string>
+    <string name="support_action">Per assistenza</string>
     <string name="rating_message">Se ti piace questo gioco, per favore inviaci suggerimenti. Puoi aiutare a migliorarlo.</string>
     <string name="used_software_text">Questo gioco utilizza il seguente software di terze parti:</string>
     <string name="translators_text">Questo gioco è stato tradotto dalle seguenti persone:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Usa il Punto Interrogativo</string>
     <string name="control">Comandi</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Prima Bandiera</string>
     <string name="single_click">Singolo click</string>
     <string name="double_click">Doppio click</string>
     <string name="long_press">Premi a lungo</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Annulla</string>
     <string name="resume">Riprendi</string>
     <string name="yes">Sì</string>
+    <string name="unlock">Sblocca</string>
+    <string name="achievements">Progressi</string>
     <string name="rating_button_no">No</string>
     <string name="general">Generale</string>
     <string name="source_code">Codice sorgente</string>
@@ -89,7 +92,7 @@
     <string name="open_menu">Apri menu</string>
     <string name="close_menu">Chiudi menu</string>
     <string name="delete_all">Elimina tutti</string>
-    <string name="themes">Tema</string>
+    <string name="themes">Temi</string>
     <string name="delete_all_message">Elimina tutti gli eventi permanentemente.</string>
     <string name="all_mines_disabled">Tutte le mine sono state disattivate.</string>
     <string name="desc_convered_area">Area coperta</string>

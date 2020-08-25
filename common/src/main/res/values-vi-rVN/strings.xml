@@ -29,10 +29,12 @@
     <string name="settings_general">Tổng quan</string>
     <string name="settings_gameplay">Cách thức chơi</string>
     <string name="settings_accessibility">Trợ năng</string>
-    <string name="settings_large_areas">Vùng chạm lớn</string>
     <string name="size">Kích thước</string>
     <string name="system">Hệ thống</string>
     <string name="rating">Phản hồi</string>
+    <string name="support_title">Hỗ trợ chúng tôi!</string>
+    <string name="support_description">Với sự giúp đỡ của bạn, chúng tôi sẽ có thể triển khai các tính năng mới và giữ cho dự án của chúng tôi hoạt động.</string>
+    <string name="support_action">Ủng hộ chúng tôi</string>
     <string name="rating_message">Nếu bạn thích trò chơi này, hãy gửi phản hồi cho chúng tôi. Nhận xét của bạn sẽ giúp chúng tôi rất nhiều.</string>
     <string name="used_software_text">Trò chơi này sử dụng các phần mềm bên thứ ba sau:</string>
     <string name="translators_text">Trò chơi này đã được dịch bởi những người này:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Dùng cờ câu hỏi</string>
     <string name="control">Điều khiển</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Cờ</string>
     <string name="single_click">Một lần bấm</string>
     <string name="double_click">Nháy kép</string>
     <string name="long_press">Bấm giữ</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Huỷ</string>
     <string name="resume">Tiếp tục</string>
     <string name="yes">Có</string>
+    <string name="unlock">Mở khoá</string>
+    <string name="achievements">Thành tựu</string>
     <string name="rating_button_no">Không</string>
     <string name="general">Tổng quan</string>
     <string name="source_code">Mã nguồn</string>

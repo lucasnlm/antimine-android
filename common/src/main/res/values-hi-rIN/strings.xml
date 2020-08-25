@@ -29,10 +29,12 @@
     <string name="settings_general">सामान्य</string>
     <string name="settings_gameplay">गेमप्ले</string>
     <string name="settings_accessibility">पहुँच-क्षमता</string>
-    <string name="settings_large_areas">Use Large Areas</string>
     <string name="size">आकार</string>
     <string name="system">प्रणाली</string>
     <string name="rating">फीडबैक</string>
+    <string name="support_title">हमें सपॉर्ट कीजिये!</string>
+    <string name="support_description">With your help, we\'ll be able to implement new features and keep our project active.</string>
+    <string name="support_action">To support</string>
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
     <string name="used_software_text">This game uses the following third parties software:</string>
     <string name="translators_text">This game was translated by the following people:</string>
@@ -53,12 +55,11 @@
     <string name="open_areas">Open Areas</string>
     <string name="total_time">कुल समय</string>
     <string name="average_time">औसत समय</string>
-    <string name="performance">Performance</string>
+    <string name="performance">प्रदर्शन</string>
     <string name="ok">ओके</string>
     <string name="use_question_mark">\"मैं सुनिश्चित नहीं हूं\" झंडे का उपयोग करें</string>
     <string name="control">नियंत्रण</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">झंडा</string>
     <string name="single_click">सिंगल क्लिक</string>
     <string name="double_click">दुबारा क्लिक</string>
     <string name="long_press">लंबे समय दबाए</string>
@@ -71,6 +72,8 @@
     <string name="cancel">रद्द करें</string>
     <string name="resume">जारी रखें</string>
     <string name="yes">हाँ</string>
+    <string name="unlock">अनलॉक करें</string>
+    <string name="achievements">उपलब्धियां</string>
     <string name="rating_button_no">नहीं</string>
     <string name="general">सामान्य</string>
     <string name="source_code">सोर्स कोड</string>
@@ -90,7 +93,7 @@
     <string name="close_menu">मेनू बंद करें</string>
     <string name="delete_all">सभी मिटाएँ</string>
     <string name="themes">थीम्स</string>
-    <string name="delete_all_message">Delete all events permanently.</string>
+    <string name="delete_all_message">पुष्टि करें</string>
     <string name="all_mines_disabled">All mines were disabled.</string>
     <string name="desc_convered_area">Covered area</string>
     <string name="desc_marked_area">Marked area</string>

@@ -29,10 +29,12 @@
     <string name="settings_general">Ogólne</string>
     <string name="settings_gameplay">Rozgrywka</string>
     <string name="settings_accessibility">Ułatwienia dostępu</string>
-    <string name="settings_large_areas">Zwiększ rozmiar pól</string>
     <string name="size">Rozmiar</string>
     <string name="system">System</string>
     <string name="rating">Opinia</string>
+    <string name="support_title">Możesz nam pomóc!</string>
+    <string name="support_description">Dzięki Twojemu wsparciu będziemy mogli dodawać nowe funkcje i kontynuować prace nad naszym projektem.</string>
+    <string name="support_action">Wesprzyj</string>
     <string name="rating_message">Jeśli podoba Ci się ta gra, zachęcamy do przesłania opinii. Jest to bardzo pomocne.</string>
     <string name="used_software_text">Ta gra wykorzystuje następujące oprogramowanie stron trzecich:</string>
     <string name="translators_text">Ta gra została przetłumaczona przez następujące osoby:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Używaj Znaku zapytania</string>
     <string name="control">Sterowanie</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Najpierw flaga</string>
     <string name="single_click">Pojedyncze kliknięcie</string>
     <string name="double_click">Podwójne kliknięcie</string>
     <string name="long_press">Długie naciśnięcie</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Anuluj</string>
     <string name="resume">Kontynuuj</string>
     <string name="yes">Tak</string>
+    <string name="unlock">Odblokuj</string>
+    <string name="achievements">Osiągnięcia</string>
     <string name="rating_button_no">Nie</string>
     <string name="general">Ogólne</string>
     <string name="source_code">Kod źródłowy</string>

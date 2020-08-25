@@ -29,10 +29,12 @@
     <string name="settings_general">Allgemein</string>
     <string name="settings_gameplay">Spielablauf</string>
     <string name="settings_accessibility">Barrierefreiheit</string>
-    <string name="settings_large_areas">Große Flächen verwenden</string>
     <string name="size">Größe</string>
     <string name="system">System</string>
     <string name="rating">Rückmeldung</string>
+    <string name="support_title">Ünterstütze uns!</string>
+    <string name="support_description">Mit Ihrer Hilfe können wir neue Funktionen implementieren und unser Projekt aktiv halten.</string>
+    <string name="support_action">Hilfestellung</string>
     <string name="rating_message">Wenn dir dieses Spiel gefällt, gib uns bitte eine Rückmeldung. Es wird uns sehr helfen.</string>
     <string name="used_software_text">Dieses Spiel benutzt folgende Software von Drittanbietern:</string>
     <string name="translators_text">Dieses Spiel wurde von den folgenden Personen übersetzt:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Fragezeichen benutzen</string>
     <string name="control">Steuerung</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Erste markieren</string>
     <string name="single_click">Einzelklick</string>
     <string name="double_click">Doppelklick</string>
     <string name="long_press">Lange Drücken</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Abbrechen</string>
     <string name="resume">Fortfahren</string>
     <string name="yes">Ja</string>
+    <string name="unlock">Entsperren</string>
+    <string name="achievements">Erfolge</string>
     <string name="rating_button_no">Nein</string>
     <string name="general">Allgemein</string>
     <string name="source_code">Quellcode</string>
@@ -89,7 +92,7 @@
     <string name="open_menu">Menü öffnen</string>
     <string name="close_menu">Menü schließen</string>
     <string name="delete_all">Alles löschen</string>
-    <string name="themes">Erscheinungsbild</string>
+    <string name="themes">Themen</string>
     <string name="delete_all_message">Alle Ereignisse dauerhaft löschen.</string>
     <string name="all_mines_disabled">Alle Minen wurden wirkungslos gemacht.</string>
     <string name="desc_convered_area">Abgedeckte Fläche</string>

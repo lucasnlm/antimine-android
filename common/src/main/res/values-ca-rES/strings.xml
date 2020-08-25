@@ -29,10 +29,12 @@
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Joc</string>
     <string name="settings_accessibility">Accessibilitat</string>
-    <string name="settings_large_areas">Usa grans àrees</string>
     <string name="size">Mida</string>
     <string name="system">Sistema</string>
     <string name="rating">Opina</string>
+    <string name="support_title">Doneu-nos suport!</string>
+    <string name="support_description">Amb la vostra ajuda, podrem implementar noves funcions i mantenir actiu el nostre projecte.</string>
+    <string name="support_action">Suport</string>
     <string name="rating_message">Si t\'agrada aquest joc, si us plau dona\'ns la teva opinió. Ens ajudarà molt.</string>
     <string name="used_software_text">Aquest joc usa el següent programari de tercers:</string>
     <string name="translators_text">Aquest joc ha estat traduït per aquestes persones:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Utilitza l\'interrogant</string>
     <string name="control">Controls</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Primer posa banderes</string>
     <string name="single_click">Un sol clic</string>
     <string name="double_click">Doble clic</string>
     <string name="long_press">Pulsació llarga</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Cancel•lar</string>
     <string name="resume">Continuar</string>
     <string name="yes">Sí</string>
+    <string name="unlock">Desbloqueja</string>
+    <string name="achievements">Assoliments</string>
     <string name="rating_button_no">No</string>
     <string name="general">General</string>
     <string name="source_code">Codi font</string>

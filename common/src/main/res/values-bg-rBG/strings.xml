@@ -29,10 +29,12 @@
     <string name="settings_general">Основни</string>
     <string name="settings_gameplay">Начин на игра</string>
     <string name="settings_accessibility">Достъпност</string>
-    <string name="settings_large_areas">Използвай големи квадрати</string>
     <string name="size">Размер</string>
     <string name="system">Система</string>
     <string name="rating">Обратна връзка</string>
+    <string name="support_title">Support us!</string>
+    <string name="support_description">With your help, we\'ll be able to implement new features and keep our project active.</string>
+    <string name="support_action">To support</string>
     <string name="rating_message">Ако харесвате играте, моля дайте ни отзив. Това ще ни помогне много.</string>
     <string name="used_software_text">Играта използва следния чуждестранен софтуер:</string>
     <string name="translators_text">Играта е преведена от следните хора:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Въпросителен знак</string>
     <string name="control">Управление</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Флаг първо</string>
     <string name="single_click">Едно натискане</string>
     <string name="double_click">Двукратно щракване</string>
     <string name="long_press">Задържане</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Отказ</string>
     <string name="resume">Продължи</string>
     <string name="yes">Да</string>
+    <string name="unlock">Unlock</string>
+    <string name="achievements">Achievements</string>
     <string name="rating_button_no">Не</string>
     <string name="general">Основни</string>
     <string name="source_code">Програмен Код</string>
