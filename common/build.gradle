@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 800051
-        versionName '8.0.5'
+        versionCode 800061
+        versionName '8.0.6'
         minSdkVersion 21
         targetSdkVersion 30
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
