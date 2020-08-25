@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: ktlint
-        uses: lucasnlm/ktlint-action@v1.0.0
+        uses: lucasnlm/ktlint-action@master
 
   test:
     name: Run Unit Tests
