@@ -82,12 +82,12 @@
     <string name="google_play_games">Google Play ゲーム</string>
     <string name="install">インストール</string>
     <string name="connect">接続</string>
-    <string name="connecting">接続しています…</string>
+    <string name="connecting">接続しています...</string>
     <string name="disconnect">切断</string>
     <string name="disconnected">切断済み</string>
     <string name="new_game">新しいゲーム</string>
     <string name="share">共有</string>
-    <string name="share_menu">共有…</string>
+    <string name="share_menu">共有...</string>
     <string name="no_network">インターネット接続がありません。</string>
     <string name="open_menu">メニューを開く</string>
     <string name="close_menu">メニューを閉じる</string>
