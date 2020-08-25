@@ -45,9 +45,11 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun disableRequestRating() { }
 
-    override fun unlockExtras() { }
+    override fun setLockExtras(lock: Boolean, keepShowingSupportButton: Boolean) { }
 
     override fun areExtrasUnlocked(): Boolean = false
+
+    override fun showSupport(): Boolean = true
 
     override fun useFlagAssistant(): Boolean = false
 

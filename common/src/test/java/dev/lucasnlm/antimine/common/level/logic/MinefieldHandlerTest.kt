@@ -102,7 +102,13 @@ class MinefieldHandlerTest {
             handler.openAt(5, false, openNeighbors = false)
             handler.highlightAt(5)
             assertEquals(8, handler.result().count { it.highlighted })
-            assertEquals(listOf(0, 1, 2, 4, 6, 8, 9, 10), handler.result().filter { it.highlighted }.map { it.id }.toList())
+            assertEquals(
+                listOf(0, 1, 2, 4, 6, 8, 9, 10),
+                handler.result()
+                    .filter { it.highlighted }
+                    .map { it.id }
+                    .toList()
+            )
         }
     }
 
