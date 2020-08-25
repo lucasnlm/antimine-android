@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.preferences
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,14 +11,26 @@ import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import org.koin.android.ext.android.inject
 
-class PreferencesActivity : ThematicActivity(R.layout.activity_empty) {
+class PreferencesActivity : ThematicActivity(R.layout.activity_empty),
+    SharedPreferences.OnSharedPreferenceChangeListener {
+
     private val preferenceRepository: IPreferencesRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
+        PreferenceManager.getDefaultSharedPreferences(this)
+            .registerOnSharedPreferenceChangeListener(this)
+
         placePreferenceFragment()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        PreferenceManager.getDefaultSharedPreferences(this)
+            .unregisterOnSharedPreferenceChangeListener(this)
     }
 
     private fun placePreferenceFragment() {
@@ -38,15 +51,24 @@ class PreferencesActivity : ThematicActivity(R.layout.activity_empty) {
         }
     }
 
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        invalidateOptionsMenu()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.delete_icon_menu, menu)
+        if (preferenceRepository.hasCustomizations()) {
+            menuInflater.inflate(R.menu.delete_icon_menu, menu)
+        }
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.delete) {
-            preferenceRepository.reset()
-            placePreferenceFragment()
+            if (preferenceRepository.hasCustomizations()) {
+                preferenceRepository.reset()
+                placePreferenceFragment()
+                invalidateOptionsMenu()
+            }
             true
         } else {
             super.onOptionsItemSelected(item)
