@@ -359,10 +359,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         } else {
             val current = preferencesRepository.getUseCount()
             val shouldRequestRating = preferencesRepository.isRequestRatingEnabled()
-            val shouldRequestSupport = preferencesRepository.areExtrasUnlocked()
+            val shouldRequestSupport = preferencesRepository.isPremiumEnabled()
 
             if (current >= MIN_USAGES_TO_IAP && !shouldRequestSupport) {
-                analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
+                analyticsManager.sentEvent(Analytics.UnlockIapDialog)
                 showSupportAppDialog()
             } else if (current >= MIN_USAGES_TO_RATING && shouldRequestRating) {
                 analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))

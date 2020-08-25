@@ -1,7 +1,8 @@
-package dev.lucasnlm.antimine
+package dev.lucasnlm.antimine.support
 
 import android.content.Context
 import android.widget.Toast
+import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.external.UnlockAppListener
 
@@ -10,7 +11,7 @@ class IapHandler(
     private val preferencesManager: IPreferencesRepository,
 ) : UnlockAppListener {
     override fun onLockStatusChanged(isFreeUnlock: Boolean, status: Boolean) {
-        preferencesManager.setLockExtras(status, isFreeUnlock)
+        preferencesManager.setPremiumFeatures(status, isFreeUnlock)
     }
 
     override fun showFailToConnectFeedback() {

@@ -154,7 +154,7 @@ class ThemeViewModelTest : IntentViewModelTest() {
         }
 
         val preferencesRepository = mockk<IPreferencesRepository> {
-            every { areExtrasUnlocked() } returns true
+            every { isPremiumEnabled() } returns true
         }
 
         val analyticsManager = mockk<IAnalyticsManager> {
@@ -181,7 +181,7 @@ class ThemeViewModelTest : IntentViewModelTest() {
         val billingManager = mockk<IBillingManager>()
 
         val preferencesRepository = mockk<IPreferencesRepository> {
-            every { areExtrasUnlocked() } returns false
+            every { isPremiumEnabled() } returns false
         }
 
         val analyticsManager = mockk<IAnalyticsManager> {
