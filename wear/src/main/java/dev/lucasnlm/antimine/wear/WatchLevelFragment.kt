@@ -1,16 +1,16 @@
 package dev.lucasnlm.antimine.wear
 
 import android.os.Bundle
-import android.text.format.DateUtils
 import android.view.View
+import androidx.core.view.doOnLayout
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -20,25 +20,18 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerGrid = view.findViewById(R.id.recyclerGrid)
+        recyclerGrid.doOnLayout {
+            lifecycleScope.launch {
+                val levelSetup = gameViewModel.loadLastGame()
 
-        GlobalScope.launch {
-            val levelSetup = gameViewModel.loadLastGame()
-
-            withContext(Dispatchers.Main) {
-                recyclerGrid.apply {
-                    val horizontalPadding = calcHorizontalPadding(levelSetup.width)
-                    val verticalPadding = calcVerticalPadding(levelSetup.height)
-                    setHasFixedSize(true)
-                    addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
-                    setPadding(horizontalPadding, verticalPadding, 0, 0)
-                    layoutManager = makeNewLayoutManager(levelSetup.width)
-                    adapter = areaAdapter
-                    alpha = 0.0f
-
-                    animate().apply {
-                        alpha(1.0f)
-                        duration = DateUtils.SECOND_IN_MILLIS
-                    }.start()
+                withContext(Dispatchers.Main) {
+                    recyclerGrid.apply {
+                        recyclerGrid.apply {
+                            addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
+                            setHasFixedSize(true)
+                        }
+                        setupRecyclerViewSize(view, levelSetup)
+                    }
                 }
             }
         }
@@ -50,14 +43,12 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                     areaAdapter.bindField(it)
                 }
             )
+
             levelSetup.observe(
                 viewLifecycleOwner,
                 Observer {
-                    recyclerGrid.apply {
-                        val horizontalPadding = calcHorizontalPadding(it.width)
-                        val verticalPadding = calcVerticalPadding(it.height)
-                        layoutManager = makeNewLayoutManager(it.width)
-                        setPadding(horizontalPadding, verticalPadding, 0, 0)
+                    getView()?.let { view ->
+                        setupRecyclerViewSize(view, it)
                     }
                 }
             )
@@ -70,8 +61,8 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                     }
 
                     when (it) {
-                        Event.ResumeGameOver, Event.GameOver,
-                        Event.Victory, Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
+                        Event.GameOver,
+                        Event.Victory -> areaAdapter.setClickEnabled(false)
                         else -> areaAdapter.setClickEnabled(true)
                     }
                 }

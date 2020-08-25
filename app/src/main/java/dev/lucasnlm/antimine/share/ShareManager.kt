@@ -24,7 +24,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 class ShareManager(
-    private val context: Context
+    private val context: Context,
 ) {
     private suspend fun share(minefield: Minefield, field: List<Area>): Boolean {
         val file = createImage(minefield, field)
@@ -60,7 +60,10 @@ class ShareManager(
         val canvas = Canvas(bitmap)
 
         canvas.drawRect(
-            0.0f, 0.0f, imageWidth.toFloat(), imageHeight.toFloat(),
+            0.0f,
+            0.0f,
+            imageWidth.toFloat(),
+            imageHeight.toFloat(),
             Paint().apply {
                 color = Color.WHITE
                 alpha = 0xff

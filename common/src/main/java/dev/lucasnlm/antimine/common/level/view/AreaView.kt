@@ -140,7 +140,9 @@ class AreaView : View {
     private fun getRippleEffect(context: Context): Drawable? {
         val outValue = TypedValue()
         context.theme.resolveAttribute(
-            android.R.attr.selectableItemBackground, outValue, true
+            android.R.attr.selectableItemBackground,
+            outValue,
+            true
         )
         return ContextCompat.getDrawable(context, outValue.resourceId)
     }

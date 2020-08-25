@@ -70,12 +70,14 @@ class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbac
         bindViewModel()
         loadGameFragment()
 
-        swipe.addCallback(object : SwipeDismissFrameLayout.Callback() {
-            override fun onDismissed(layout: SwipeDismissFrameLayout) {
-                swipe.visibility = View.GONE
-                finish()
+        swipe.addCallback(
+            object : SwipeDismissFrameLayout.Callback() {
+                override fun onDismissed(layout: SwipeDismissFrameLayout) {
+                    swipe.visibility = View.GONE
+                    finish()
+                }
             }
-        })
+        )
     }
 
     override fun onResume() {
@@ -165,7 +167,6 @@ class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbac
             }
             Event.Victory -> {
                 status = Status.Over()
-
                 messageText.text = getString(R.string.victory)
                 waitAndShowNewGameButton()
             }
@@ -178,16 +179,6 @@ class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbac
                     messageText.text = getString(R.string.game_over)
                     waitAndShowNewGameButton()
                 }
-            }
-            Event.ResumeVictory -> {
-                status = Status.Over()
-                messageText.text = getString(R.string.victory)
-                waitAndShowNewGameButton(0L)
-            }
-            Event.ResumeGameOver -> {
-                status = Status.Over()
-                messageText.text = getString(R.string.game_over)
-                waitAndShowNewGameButton(0L)
             }
             else -> {
             }
@@ -208,7 +199,8 @@ class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbac
                     }
                 }
             },
-            null, wait
+            null,
+            wait
         )
     }
 

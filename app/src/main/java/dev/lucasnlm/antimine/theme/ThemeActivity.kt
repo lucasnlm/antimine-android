@@ -1,6 +1,8 @@
 package dev.lucasnlm.antimine.theme
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import dev.lucasnlm.antimine.R
@@ -9,9 +11,11 @@ import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.view.ThemeAdapter
+import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
 import kotlinx.android.synthetic.main.activity_theme.*
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,17 +37,43 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 adapter = ThemeAdapter(themeViewModel, areaSize)
             }
 
-            themeViewModel.observeState().collect {
-                if (usingTheme.id != it.current.id) {
-                    recreate()
+            launch {
+                themeViewModel.observeEvent().collect {
+                    if (it is ThemeEvent.Unlock) {
+                        showUnlockDialog()
+                    }
+                }
+            }
+
+            launch {
+                themeViewModel.observeState().collect {
+                    if (usingTheme.id != it.current.id) {
+                        recreate()
+                    }
                 }
             }
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        if (themeViewModel.singleState().current.id != 0L) {
+            menuInflater.inflate(R.menu.delete_icon_menu, menu)
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.delete) {
+            themeViewModel.sendEvent(ThemeEvent.ResetTheme)
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun showUnlockDialog() {
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
-            SupportAppDialogFragment().apply {
+            SupportAppDialogFragment.newInstance(true).apply {
                 show(supportFragmentManager, SupportAppDialogFragment.TAG)
             }
         }

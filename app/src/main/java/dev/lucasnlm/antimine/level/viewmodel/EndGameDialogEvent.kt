@@ -7,11 +7,11 @@ sealed class EndGameDialogEvent {
         val isVictory: Boolean?,
         val time: Long,
         val rightMines: Int,
-        val totalMines: Int
+        val totalMines: Int,
     ) : EndGameDialogEvent()
 
     data class ChangeEmoji(
         val isVictory: Boolean?,
-        @DrawableRes val titleEmoji: Int
+        @DrawableRes val titleEmoji: Int,
     ) : EndGameDialogEvent()
 }

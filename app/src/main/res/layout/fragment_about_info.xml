@@ -23,9 +23,9 @@
             android:id="@+id/logo"
             android:layout_width="115dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/app_name"
-            android:layout_marginBottom="24dp"
             android:importantForAccessibility="no"
             app:srcCompat="@drawable/title" />
 
@@ -59,15 +59,23 @@
         app:layout_constraintTop_toBottomOf="@+id/version_layout">
 
         <Button
+            android:id="@+id/supportUs"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/support_title"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <Button
             android:id="@+id/thirdsParties"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/show_licenses" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="4dp" />
 
         <Button
             android:id="@+id/translation"
@@ -75,10 +83,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/translation" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="4dp" />
 
         <Button
             android:id="@+id/sourceCode"

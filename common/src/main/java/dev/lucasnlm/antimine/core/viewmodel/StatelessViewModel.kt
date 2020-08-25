@@ -30,5 +30,5 @@ open class StatelessViewModel<Event> : ViewModel() {
         eventBroadcast.close()
     }
 
-    fun observeEvent(): Flow<Event> = eventBroadcast.asFlow()
+    open fun observeEvent(): Flow<Event> = eventBroadcast.asFlow()
 }

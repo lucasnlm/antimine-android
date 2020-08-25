@@ -1,7 +1,6 @@
 package dev.lucasnlm.antimine.level.view
 
 import android.os.Bundle
-import android.text.format.DateUtils
 import android.view.View
 import androidx.core.view.doOnLayout
 import androidx.lifecycle.Observer
@@ -10,7 +9,6 @@ import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
-import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import kotlinx.coroutines.Dispatchers
@@ -46,7 +44,7 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                         addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
                         setHasFixedSize(true)
                     }
-                    setupRecyclerViewSize(levelSetup)
+                    setupRecyclerViewSize(view, levelSetup)
                 }
             }
         }
@@ -62,7 +60,9 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
             levelSetup.observe(
                 viewLifecycleOwner,
                 Observer {
-                    setupRecyclerViewSize(it)
+                    getView()?.let { view ->
+                        setupRecyclerViewSize(view, it)
+                    }
                 }
             )
 
@@ -71,10 +71,8 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                 Observer {
                     when (it) {
                         Event.Pause,
-                        Event.ResumeGameOver,
                         Event.GameOver,
-                        Event.Victory,
-                        Event.ResumeVictory -> areaAdapter.setClickEnabled(false)
+                        Event.Victory -> areaAdapter.setClickEnabled(false)
                         Event.Running,
                         Event.Resume,
                         Event.ResumeGame,
@@ -83,22 +81,6 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                     }
                 }
             )
-        }
-    }
-
-    private fun setupRecyclerViewSize(levelSetup: Minefield) {
-        recyclerGrid.apply {
-            val horizontalPadding = calcHorizontalPadding(levelSetup.width)
-            val verticalPadding = calcVerticalPadding(levelSetup.height)
-            setPadding(horizontalPadding, verticalPadding, 0, 0)
-            layoutManager = makeNewLayoutManager(levelSetup.width)
-            adapter = areaAdapter
-            alpha = 0.0f
-
-            animate().apply {
-                alpha(1.0f)
-                duration = DateUtils.SECOND_IN_MILLIS
-            }.start()
         }
     }
 

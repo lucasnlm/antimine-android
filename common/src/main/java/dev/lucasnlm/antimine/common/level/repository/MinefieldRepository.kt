@@ -9,7 +9,7 @@ interface IMinefieldRepository {
     fun fromDifficulty(
         difficulty: Difficulty,
         dimensionRepository: IDimensionRepository,
-        preferencesRepository: IPreferencesRepository
+        preferencesRepository: IPreferencesRepository,
     ): Minefield
 
     fun randomSeed(): Long
@@ -19,7 +19,7 @@ class MinefieldRepository : IMinefieldRepository {
     override fun fromDifficulty(
         difficulty: Difficulty,
         dimensionRepository: IDimensionRepository,
-        preferencesRepository: IPreferencesRepository
+        preferencesRepository: IPreferencesRepository,
     ): Minefield =
         when (difficulty) {
             Difficulty.Standard -> calculateStandardMode(
@@ -34,7 +34,7 @@ class MinefieldRepository : IMinefieldRepository {
 
     private fun calculateStandardMode(
         dimensionRepository: IDimensionRepository,
-        preferencesRepository: IPreferencesRepository
+        preferencesRepository: IPreferencesRepository,
     ): Minefield {
         val fieldSize = dimensionRepository.defaultAreaSize()
         val verticalGap = if (dimensionRepository.navigationBarHeight() > 0)

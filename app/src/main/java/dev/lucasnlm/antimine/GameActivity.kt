@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.text.format.DateUtils
 import android.view.View
 import android.view.WindowManager
@@ -14,7 +13,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
-import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.view.GravityCompat
 import androidx.core.view.doOnLayout
 import androidx.drawerlayout.widget.DrawerLayout
@@ -42,6 +40,7 @@ import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.stats.StatsActivity
+import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.ThemeActivity
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
@@ -51,6 +50,7 @@ import kotlinx.android.synthetic.main.activity_game.timer
 import kotlinx.android.synthetic.main.activity_tv_game.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -96,12 +96,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             loadGameFragment()
         }
 
-        if (instantAppManager.isEnabled(applicationContext)) {
-            bindInstantApp()
-            savesRepository.setLimit(1)
-        } else {
-            checkUseCount()
-        }
+        onOpenAppActions()
     }
 
     private fun bindViewModel() = gameViewModel.apply {
@@ -232,7 +227,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
 
         minesCount.setCompoundDrawablesWithIntrinsicBounds(
-            ContextCompat.getDrawable(this, usingTheme.assets.toolbarMine), null, null, null
+            ContextCompat.getDrawable(this, usingTheme.assets.toolbarMine),
+            null,
+            null,
+            null
         )
     }
 
@@ -284,28 +282,30 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 }
             )
 
-            addDrawerListener(object : DrawerLayout.DrawerListener {
-                override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-                    // Empty
-                }
-
-                override fun onDrawerOpened(drawerView: View) {
-                    gameViewModel.pauseGame()
-                    analyticsManager.sentEvent(Analytics.OpenDrawer)
-                }
-
-                override fun onDrawerClosed(drawerView: View) {
-                    if (hasNoOtherFocusedDialog()) {
-                        gameViewModel.resumeGame()
+            addDrawerListener(
+                object : DrawerLayout.DrawerListener {
+                    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                        // Empty
                     }
 
-                    analyticsManager.sentEvent(Analytics.CloseDrawer)
-                }
+                    override fun onDrawerOpened(drawerView: View) {
+                        gameViewModel.pauseGame()
+                        analyticsManager.sentEvent(Analytics.OpenDrawer)
+                    }
 
-                override fun onDrawerStateChanged(newState: Int) {
-                    // Empty
+                    override fun onDrawerClosed(drawerView: View) {
+                        if (hasNoOtherFocusedDialog()) {
+                            gameViewModel.resumeGame()
+                        }
+
+                        analyticsManager.sentEvent(Analytics.CloseDrawer)
+                    }
+
+                    override fun onDrawerStateChanged(newState: Int) {
+                        // Empty
+                    }
                 }
-            })
+            )
 
             if (preferencesRepository.isFirstUse()) {
                 openDrawer(GravityCompat.START)
@@ -351,16 +351,26 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun checkUseCount() {
-        val current = preferencesRepository.getUseCount()
-        val shouldRequestRating = preferencesRepository.isRequestRatingEnabled()
+    private fun onOpenAppActions() {
+        if (instantAppManager.isEnabled(applicationContext)) {
+            // Instant App does nothing.
+            bindInstantApp()
+            savesRepository.setLimit(1)
+        } else {
+            val current = preferencesRepository.getUseCount()
+            val shouldRequestRating = preferencesRepository.isRequestRatingEnabled()
+            val shouldRequestSupport = preferencesRepository.areExtrasUnlocked()
 
-        if (current >= MIN_USAGES_TO_RATING && shouldRequestRating) {
-            analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
-            showRequestRating()
+            if (current >= MIN_USAGES_TO_IAP && !shouldRequestSupport) {
+                analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
+                showSupportAppDialog()
+            } else if (current >= MIN_USAGES_TO_RATING && shouldRequestRating) {
+                analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
+                showRequestRating()
+            }
+
+            preferencesRepository.incrementUseCount()
         }
-
-        preferencesRepository.incrementUseCount()
     }
 
     private fun onChangeDifficulty(difficulty: Difficulty) {
@@ -489,7 +499,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private fun showEndGameDialog(victory: Boolean) {
         val currentGameStatus = status
         if (currentGameStatus is Status.Over && !isFinishing && !drawer.isDrawerOpen(GravityCompat.START)) {
-            if (supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG) == null) {
+            if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
+                supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG) == null
+            ) {
                 val score = currentGameStatus.score
                 EndGameDialogFragment.newInstance(
                     victory,
@@ -505,13 +517,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun waitAndShowEndGameDialog(victory: Boolean, await: Boolean) {
         if (await && gameViewModel.explosionDelay() != 0L) {
-            postDelayed(
-                Handler(),
-                {
-                    showEndGameDialog(victory)
-                },
-                null, (gameViewModel.explosionDelay() * 0.3).toLong()
-            )
+            lifecycleScope.launch {
+                delay((gameViewModel.explosionDelay() * 0.3).toLong())
+                showEndGameDialog(victory)
+            }
         } else {
             showEndGameDialog(victory)
         }
@@ -669,11 +678,20 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun googlePlay() {
         if (playGamesManager.isLogged()) {
-            PlayGamesDialogFragment().show(supportFragmentManager, PlayGamesDialogFragment.TAG)
+            if (supportFragmentManager.findFragmentByTag(PlayGamesDialogFragment.TAG) == null) {
+                PlayGamesDialogFragment().show(supportFragmentManager, PlayGamesDialogFragment.TAG)
+            }
         } else {
             playGamesManager.getLoginIntent()?.let {
                 startActivityForResult(it, GOOGLE_PLAY_REQUEST_CODE)
             }
+        }
+    }
+
+    private fun showSupportAppDialog() {
+        if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
+            SupportAppDialogFragment.newInstance(false)
+                .show(supportFragmentManager, SupportAppDialogFragment.TAG)
         }
     }
 
@@ -691,6 +709,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         const val IA_REQUEST_CODE = 5
         const val GOOGLE_PLAY_REQUEST_CODE = 6
 
-        const val MIN_USAGES_TO_RATING = 4
+        const val MIN_USAGES_TO_IAP = 5
+        const val MIN_USAGES_TO_RATING = 10
     }
 }

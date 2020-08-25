@@ -55,7 +55,10 @@ class AreaConverterTest {
               "highlighted":true
            }
         ]
-        """.trimIndent().replace(" ", "").replace("\n", "")
+        """.trimIndent().replace(
+            " ",
+            ""
+        ).replace("\n", "")
 
     private val areaList =
         listOf(
@@ -98,7 +101,8 @@ class AreaConverterTest {
         val fieldConverter = AreaConverter()
         val list = fieldConverter.toAreaList(expectedJson)
         assertEquals(
-            areaList, list
+            areaList,
+            list
         )
     }
 

@@ -21,7 +21,7 @@ fun Area.paintOnCanvas(
     paintSettings: AreaPaintSettings,
     theme: AppTheme,
     markPadding: Int? = null,
-    minePadding: Int? = null
+    minePadding: Int? = null,
 ) {
     paintSettings.run {
         if (isCovered) {

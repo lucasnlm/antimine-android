@@ -8,7 +8,7 @@ import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 
 class ControlViewModel(
-    private val preferencesRepository: IPreferencesRepository
+    private val preferencesRepository: IPreferencesRepository,
 ) : IntentViewModel<ControlEvent, ControlState>() {
 
     private val gameControlOptions = listOf(

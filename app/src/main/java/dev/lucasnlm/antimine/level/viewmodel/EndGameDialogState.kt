@@ -6,5 +6,5 @@ data class EndGameDialogState(
     @DrawableRes val titleEmoji: Int,
     val title: String,
     val message: String,
-    val isVictory: Boolean?
+    val isVictory: Boolean?,
 )

@@ -41,5 +41,8 @@ data class Save(
 
     @TypeConverters(AreaConverter::class)
     @ColumnInfo(name = "field")
-    val field: List<Area>
+    val field: List<Area>,
+
+    @ColumnInfo(name = "actions")
+    val actions: Int,
 )

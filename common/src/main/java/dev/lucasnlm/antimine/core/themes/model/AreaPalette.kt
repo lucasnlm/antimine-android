@@ -18,5 +18,5 @@ data class AreaPalette(
     @ColorInt val minesAround7: Int,
     @ColorInt val minesAround8: Int,
     @ColorInt val highlight: Int,
-    @ColorInt val focus: Int
+    @ColorInt val focus: Int,
 )

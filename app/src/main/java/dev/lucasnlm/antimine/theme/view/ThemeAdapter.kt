@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.view_theme.view.*
 
 class ThemeAdapter(
     private val themeViewModel: ThemeViewModel,
-    private val areaSize: Float
+    private val areaSize: Float,
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
 
     private val themes: List<AppTheme> = themeViewModel.singleState().themes
@@ -35,7 +35,7 @@ class ThemeAdapter(
         Area(5, 2, 1, 3, hasMine = true, mistake = false, mark = Mark.Flag, isCovered = true),
         Area(6, 0, 2, 0, hasMine = true, mistake = false, mark = Mark.Question, isCovered = true),
         Area(7, 1, 2, 4, hasMine = false, mistake = false, mark = Mark.None, isCovered = false),
-        Area(8, 2, 2, 0, hasMine = false, mistake = false, mark = Mark.None, isCovered = true)
+        Area(8, 2, 2, 0, hasMine = false, mistake = false, mark = Mark.None, isCovered = true),
     )
 
     init {

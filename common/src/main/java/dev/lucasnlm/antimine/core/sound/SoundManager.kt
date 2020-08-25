@@ -9,7 +9,7 @@ interface ISoundManager {
 }
 
 class SoundManager(
-    private val context: Context
+    private val context: Context,
 ) : ISoundManager {
 
     override fun play(@RawRes soundId: Int) {

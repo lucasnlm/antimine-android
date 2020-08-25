@@ -29,13 +29,13 @@
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Accessibility</string>
-    <string name="settings_large_areas">Use Large Areas</string>
     <string name="size">Size</string>
     <string name="system">System</string>
     <string name="amoled" translatable="false">AMOLED</string>
     <string name="rating">Feedback</string>
-    <string name="support">Help supporting us!</string>
-    <string name="support_description">It will allow us building new features and to keep our project active.</string>
+    <string name="support_title">Support us!</string>
+    <string name="support_description">With your help, we\'ll be able to implement new features and keep our project active.</string>
+    <string name="support_action">To support</string>
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
     <string name="used_software_text">This game uses the following third parties software:</string>
     <string name="translators_text">This game was translated by the following people:</string>

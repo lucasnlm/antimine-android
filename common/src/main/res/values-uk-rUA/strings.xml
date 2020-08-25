@@ -29,10 +29,12 @@
     <string name="settings_general">Загальне</string>
     <string name="settings_gameplay">Геймплей</string>
     <string name="settings_accessibility">Спеціальні можливості</string>
-    <string name="settings_large_areas">Використовувати збільшену територію</string>
     <string name="size">Розмір</string>
     <string name="system">Система</string>
     <string name="rating">Відгук</string>
+    <string name="support_title">Підтримай нас!</string>
+    <string name="support_description">З вашою допомогою ми зможемо реалізувати нові функції і залишити наш проект активним.</string>
+    <string name="support_action">Підтримати</string>
     <string name="rating_message">Якщо вам подобається ця гра, то залиште нам свій відгук. Це нам дуже допоможе.</string>
     <string name="used_software_text">Ця гра використовує наступне стороннє програмне забезпечення:</string>
     <string name="translators_text">Цю гру переклали такі люди:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Використовувати прапорці «?»</string>
     <string name="control">Елементи керування</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Прапор</string>
     <string name="single_click">Одинарний клік</string>
     <string name="double_click">Подвійний клік</string>
     <string name="long_press">Довге натискання</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Відмінити</string>
     <string name="resume">Відновити</string>
     <string name="yes">Так</string>
+    <string name="unlock">Розблокування</string>
+    <string name="achievements">Досягнення</string>
     <string name="rating_button_no">Ні</string>
     <string name="general">Загальне</string>
     <string name="source_code">Вихідний код</string>

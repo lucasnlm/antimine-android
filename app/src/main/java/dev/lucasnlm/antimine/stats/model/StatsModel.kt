@@ -6,5 +6,5 @@ data class StatsModel(
     val averageDuration: Long,
     val mines: Int,
     val victory: Int,
-    val openArea: Int
+    val openArea: Int,
 )

@@ -13,7 +13,7 @@ sealed class FirstOpen {
      * Describes the [value] of the first step.
      */
     class Position(
-        val value: Int
+        val value: Int,
     ) : FirstOpen()
 
     override fun toString(): String = when (this) {

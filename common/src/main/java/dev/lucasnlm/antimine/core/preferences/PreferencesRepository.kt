@@ -5,6 +5,9 @@ import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.core.control.ControlStyle
 
 interface IPreferencesRepository {
+    fun hasCustomizations(): Boolean
+    fun reset()
+
     fun customGameMode(): Minefield
     fun updateCustomGameMode(minefield: Minefield)
 
@@ -32,6 +35,10 @@ interface IPreferencesRepository {
     fun isRequestRatingEnabled(): Boolean
     fun disableRequestRating()
 
+    fun setLockExtras(lock: Boolean, keepShowingSupportButton: Boolean)
+    fun areExtrasUnlocked(): Boolean
+    fun showSupport(): Boolean
+
     fun useFlagAssistant(): Boolean
     fun useHapticFeedback(): Boolean
     fun areaSizeMultiplier(): Int
@@ -42,10 +49,26 @@ interface IPreferencesRepository {
 
 class PreferencesRepository(
     private val preferencesManager: IPreferencesManager,
-    private val defaultLongPressTimeout: Int
+    private val defaultLongPressTimeout: Int,
 ) : IPreferencesRepository {
     init {
         migrateOldPreferences()
+    }
+
+    override fun hasCustomizations(): Boolean {
+        return preferencesManager.getInt(PREFERENCE_AREA_SIZE, 50) != 50 ||
+            preferencesManager.getInt(PREFERENCE_LONG_PRESS_TIMEOUT, ViewConfiguration.getLongPressTimeout()) !=
+            ViewConfiguration.getLongPressTimeout()
+    }
+
+    override fun reset() {
+        preferencesManager.putBoolean(PREFERENCE_ASSISTANT, true)
+        preferencesManager.putBoolean(PREFERENCE_VIBRATION, true)
+        preferencesManager.putBoolean(PREFERENCE_ANIMATION, true)
+        preferencesManager.putBoolean(PREFERENCE_QUESTION_MARK, false)
+        preferencesManager.putBoolean(PREFERENCE_SOUND_EFFECTS, false)
+        preferencesManager.putInt(PREFERENCE_AREA_SIZE, 50)
+        preferencesManager.putInt(PREFERENCE_LONG_PRESS_TIMEOUT, ViewConfiguration.getLongPressTimeout())
     }
 
     override fun customGameMode(): Minefield = Minefield(
@@ -170,6 +193,18 @@ class PreferencesRepository(
         }
     }
 
+    override fun setLockExtras(lock: Boolean, keepShowingSupportButton: Boolean) {
+        preferencesManager.putBoolean(PREFERENCE_UNLOCK_EXTRAS, !lock)
+        preferencesManager.putBoolean(PREFERENCE_SHOW_SUPPORT, !lock || keepShowingSupportButton)
+    }
+
+    override fun areExtrasUnlocked(): Boolean =
+        preferencesManager.getBoolean(PREFERENCE_UNLOCK_EXTRAS, false)
+
+    override fun showSupport(): Boolean {
+        return preferencesManager.getBoolean(PREFERENCE_SHOW_SUPPORT, true)
+    }
+
     private companion object {
         private const val PREFERENCE_VIBRATION = "preference_vibration"
         private const val PREFERENCE_ASSISTANT = "preference_assistant"
@@ -190,5 +225,7 @@ class PreferencesRepository(
         private const val PREFERENCE_FIRST_USE = "preference_first_use"
         private const val PREFERENCE_USE_COUNT = "preference_use_count"
         private const val PREFERENCE_REQUEST_RATING = "preference_request_rating"
+        private const val PREFERENCE_UNLOCK_EXTRAS = "preference_unlock_extras"
+        private const val PREFERENCE_SHOW_SUPPORT = "preference_show_support"
     }
 }

@@ -13,7 +13,7 @@ interface IPreferencesManager {
 }
 
 class PreferencesManager(
-    private val context: Context
+    private val context: Context,
 ) : IPreferencesManager {
     private val preferences by lazy {
         PreferenceManager.getDefaultSharedPreferences(context)

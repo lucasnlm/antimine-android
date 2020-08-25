@@ -29,10 +29,12 @@
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Accessibility</string>
-    <string name="settings_large_areas">Use Large Areas</string>
     <string name="size">Size</string>
     <string name="system">System</string>
     <string name="rating">Feedback</string>
+    <string name="support_title">Support us!</string>
+    <string name="support_description">With your help, we\'ll be able to implement new features and keep our project active.</string>
+    <string name="support_action">To support</string>
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
     <string name="used_software_text">This game uses the following third parties software:</string>
     <string name="translators_text">This game was translated by the following people:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Use Question Mark</string>
     <string name="control">Controls</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Flag First</string>
     <string name="single_click">Single Click</string>
     <string name="double_click">Double Click</string>
     <string name="long_press">Long Press</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Anulează</string>
     <string name="resume">Continuă</string>
     <string name="yes">Da</string>
+    <string name="unlock">Unlock</string>
+    <string name="achievements">Achievements</string>
     <string name="rating_button_no">No</string>
     <string name="general">General</string>
     <string name="source_code">Cod sursă</string>

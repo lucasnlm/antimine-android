@@ -18,7 +18,9 @@ class MinefieldFactoryTest {
     @Test
     fun testFromDifficultyPresetBeginner() {
         MinefieldRepository().fromDifficulty(
-            Difficulty.Beginner, dimensionRepository, preferencesRepository
+            Difficulty.Beginner,
+            dimensionRepository,
+            preferencesRepository
         ).run {
             assertEquals(9, width)
             assertEquals(9, height)
@@ -29,7 +31,9 @@ class MinefieldFactoryTest {
     @Test
     fun testFromDifficultyPresetIntermediate() {
         MinefieldRepository().fromDifficulty(
-            Difficulty.Intermediate, dimensionRepository, preferencesRepository
+            Difficulty.Intermediate,
+            dimensionRepository,
+            preferencesRepository
         ).run {
             assertEquals(16, width)
             assertEquals(16, height)
@@ -40,7 +44,9 @@ class MinefieldFactoryTest {
     @Test
     fun testFromDifficultyPresetExpert() {
         MinefieldRepository().fromDifficulty(
-            Difficulty.Expert, dimensionRepository, preferencesRepository
+            Difficulty.Expert,
+            dimensionRepository,
+            preferencesRepository
         ).run {
             assertEquals(24, width)
             assertEquals(24, height)

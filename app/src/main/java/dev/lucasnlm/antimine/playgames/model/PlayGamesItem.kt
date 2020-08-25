@@ -8,5 +8,5 @@ data class PlayGamesItem(
     val id: Int,
     @DrawableRes val iconRes: Int,
     @StringRes val stringRes: Int,
-    val triggerEvent: PlayGamesEvent
+    val triggerEvent: PlayGamesEvent,
 )

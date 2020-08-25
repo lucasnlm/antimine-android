@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flow
 
 class HistoryViewModel(
     private val context: Context,
-    private val savesRepository: ISavesRepository
+    private val savesRepository: ISavesRepository,
 ) : IntentViewModel<HistoryEvent, HistoryState>() {
 
     override fun initialState() = HistoryState(

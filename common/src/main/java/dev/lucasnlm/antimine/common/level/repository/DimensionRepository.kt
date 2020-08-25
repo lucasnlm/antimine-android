@@ -18,12 +18,12 @@ interface IDimensionRepository {
 
 data class Size(
     val width: Int,
-    val height: Int
+    val height: Int,
 )
 
 class DimensionRepository(
     private val context: Context,
-    private val preferencesRepository: IPreferencesRepository
+    private val preferencesRepository: IPreferencesRepository,
 ) : IDimensionRepository {
 
     override fun areaSize(): Float {

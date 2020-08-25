@@ -29,10 +29,12 @@
     <string name="settings_general">Generelt</string>
     <string name="settings_gameplay">Spillopplevelse</string>
     <string name="settings_accessibility">Tilgjengelighet</string>
-    <string name="settings_large_areas">Bruk store områder</string>
     <string name="size">Størrelse</string>
     <string name="system">System</string>
     <string name="rating">Ttilbakemelding</string>
+    <string name="support_title">Støtt oss!</string>
+    <string name="support_description">Med din hjelp kan vi implementere nye funksjoner og holde prosjektet vårt aktivt.</string>
+    <string name="support_action">Støtte</string>
     <string name="rating_message">Hvis du liker dette spillet, gi oss en tilbakemelding. Det vil hjelpe oss mye.</string>
     <string name="used_software_text">Dette spillet bruker følgende tredjeparter programvare:</string>
     <string name="translators_text">Dette spillet ble oversatt av følgende personer:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Bruk Spørsmålstegn</string>
     <string name="control">Styring</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Flagg først</string>
     <string name="single_click">Enkeltklikk</string>
     <string name="double_click">Dobbeltklikk</string>
     <string name="long_press">Lang Trykk</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Avbryt</string>
     <string name="resume">Fortsett</string>
     <string name="yes">Ja</string>
+    <string name="unlock">Lås opp</string>
+    <string name="achievements">Prestasjoner</string>
     <string name="rating_button_no">Nei</string>
     <string name="general">Generelt</string>
     <string name="source_code">Kildekode</string>

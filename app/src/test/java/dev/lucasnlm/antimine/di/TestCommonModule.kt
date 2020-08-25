@@ -16,17 +16,23 @@ val TestCommonModule = module {
 
     single { MockPreferencesRepository() } bind IPreferencesRepository::class
 
-    single { object : ISoundManager {
-        override fun play(soundId: Int) { }
-    } } bind ISoundManager::class
+    single {
+        object : ISoundManager {
+            override fun play(soundId: Int) { }
+        }
+    } bind ISoundManager::class
 
-    single { object : IThemeRepository {
-        override fun getCustomTheme(): AppTheme? = null
+    single {
+        object : IThemeRepository {
+            override fun getCustomTheme(): AppTheme? = null
 
-        override fun getTheme(): AppTheme = LightTheme
+            override fun getTheme(): AppTheme = LightTheme
 
-        override fun getAllThemes(): List<AppTheme> = listOf(LightTheme)
+            override fun getAllThemes(): List<AppTheme> = listOf(LightTheme)
 
-        override fun setTheme(theme: AppTheme) { }
-    } } bind IThemeRepository::class
+            override fun setTheme(theme: AppTheme) { }
+
+            override fun reset(): AppTheme = LightTheme
+        }
+    } bind IThemeRepository::class
 }

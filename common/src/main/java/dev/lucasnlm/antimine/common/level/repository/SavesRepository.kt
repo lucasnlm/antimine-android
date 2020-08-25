@@ -13,7 +13,7 @@ interface ISavesRepository {
 
 class SavesRepository(
     private val savesDao: SaveDao,
-    private var maxSavesStorage: Int = MAX_STORAGE
+    private var maxSavesStorage: Int = MAX_STORAGE,
 ) : ISavesRepository {
     override suspend fun getAllSaves(): List<Save> = savesDao.getAll()
 

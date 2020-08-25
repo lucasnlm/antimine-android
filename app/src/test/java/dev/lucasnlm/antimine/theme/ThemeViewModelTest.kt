@@ -2,6 +2,8 @@ package dev.lucasnlm.antimine.theme
 
 import dev.lucasnlm.antimine.IntentViewModelTest
 import dev.lucasnlm.antimine.common.R
+import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
+import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.core.themes.model.AreaPalette
 import dev.lucasnlm.antimine.core.themes.model.Assets
@@ -9,6 +11,7 @@ import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeState
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
+import dev.lucasnlm.external.IBillingManager
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -116,7 +119,9 @@ class ThemeViewModelTest : IntentViewModelTest() {
     )
 
     private val allThemes = listOf(
-        lightTheme, darkTheme, gardenTheme
+        lightTheme,
+        darkTheme,
+        gardenTheme
     )
 
     @Test
@@ -126,7 +131,13 @@ class ThemeViewModelTest : IntentViewModelTest() {
             every { getTheme() } returns gardenTheme
         }
 
-        val viewModel = ThemeViewModel(themeRepository)
+        val billingManager = mockk<IBillingManager>()
+
+        val preferencesRepository = mockk<IPreferencesRepository> { }
+
+        val analyticsManager = mockk<IAnalyticsManager> { }
+
+        val viewModel = ThemeViewModel(themeRepository, billingManager, preferencesRepository, analyticsManager)
         assertEquals(ThemeState(gardenTheme, allThemes), viewModel.singleState())
     }
 
@@ -138,12 +149,49 @@ class ThemeViewModelTest : IntentViewModelTest() {
             every { setTheme(any()) } returns Unit
         }
 
-        val state = ThemeViewModel(themeRepository).run {
+        val billingManager = mockk<IBillingManager> {
+            every { isEnabled() } returns false
+        }
+
+        val preferencesRepository = mockk<IPreferencesRepository> {
+            every { areExtrasUnlocked() } returns true
+        }
+
+        val analyticsManager = mockk<IAnalyticsManager> {
+            every { sentEvent(any()) } returns Unit
+        }
+
+        val state = ThemeViewModel(themeRepository, billingManager, preferencesRepository, analyticsManager).run {
             sendEvent(ThemeEvent.ChangeTheme(darkTheme))
             singleState()
         }
         assertEquals(ThemeState(darkTheme, allThemes), state)
 
         verify { themeRepository.setTheme(darkTheme) }
+    }
+
+    @Test
+    fun testChangeValueWithoutExtras() {
+        val themeRepository = mockk<IThemeRepository> {
+            every { getAllThemes() } returns allThemes
+            every { getTheme() } returns gardenTheme
+            every { setTheme(any()) } returns Unit
+        }
+
+        val billingManager = mockk<IBillingManager>()
+
+        val preferencesRepository = mockk<IPreferencesRepository> {
+            every { areExtrasUnlocked() } returns false
+        }
+
+        val analyticsManager = mockk<IAnalyticsManager> {
+            every { sentEvent(any()) } returns Unit
+        }
+
+        val state = ThemeViewModel(themeRepository, billingManager, preferencesRepository, analyticsManager).run {
+            sendEvent(ThemeEvent.ChangeTheme(darkTheme))
+            singleState()
+        }
+        assertEquals(ThemeState(gardenTheme, allThemes), state)
     }
 }

@@ -29,10 +29,12 @@
     <string name="settings_general">عام</string>
     <string name="settings_gameplay">أسلوب اللعبة</string>
     <string name="settings_accessibility">إمكانية الوصول</string>
-    <string name="settings_large_areas">استخدام مناطق كبيرة</string>
     <string name="size">الحجم</string>
     <string name="system">النظام</string>
     <string name="rating">تعليقات</string>
+    <string name="support_title">ادعمنا!</string>
+    <string name="support_description">بمساعدتك، سنكون قادرين على تنفيذ ميزات جديدة وإبقاء مشروعنا نشط.</string>
+    <string name="support_action">ادعمنا</string>
     <string name="rating_message">إذا أعجبتك هذه اللعبة، يرجى إعطائنا تعليقات. سوف يساعدنا كثيرا.</string>
     <string name="used_software_text">تستخدم هذه اللعبة برمجيات طرف ثالث التالية:</string>
     <string name="translators_text">تمت ترجمة هذه اللعبة من قبل الأشخاص التالين:</string>
@@ -49,7 +51,7 @@
     <string name="sound_effects">مؤثرات صوتية</string>
     <string name="quit">خروج</string>
     <string name="are_you_sure">هل أنت متأكد؟</string>
-    <string name="enable_automatic_flags">Enable automatic placing of flags</string>
+    <string name="enable_automatic_flags">تمكين وضع الأعلام تلقائياً</string>
     <string name="open_areas">فتح المناطق</string>
     <string name="total_time">مجموع الوقت</string>
     <string name="average_time">متوسط الوقت</string>
@@ -58,12 +60,11 @@
     <string name="use_question_mark">استخدام علامة السؤال</string>
     <string name="control">التحكم</string>
     <string name="arrow">🠨</string>
-    <string name="flag_first">Flag First</string>
     <string name="single_click">نقرة واحدة</string>
     <string name="double_click">انقر مرتين</string>
     <string name="long_press">ضغط مطّول</string>
     <string name="open_tile">فتح بلاط</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="flag_tile">مربع العلم</string>
     <string name="retry">إعادة المحاولة</string>
     <string name="empty">فارغ</string>
     <string name="unknown_error">خطأ غير معروف.</string>
@@ -71,6 +72,8 @@
     <string name="cancel">الغاء</string>
     <string name="resume">استأنف</string>
     <string name="yes">نعم</string>
+    <string name="unlock">فتح القفل</string>
+    <string name="achievements">الإنجازات</string>
     <string name="rating_button_no">لا</string>
     <string name="general">عام</string>
     <string name="source_code">رمز المصدر</string>

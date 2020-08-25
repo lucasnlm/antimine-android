@@ -12,7 +12,7 @@ import dev.lucasnlm.antimine.about.viewmodel.License
 import kotlinx.android.synthetic.main.view_third_party.view.*
 
 internal class LicensesAdapter(
-    private val licenses: List<License>
+    private val licenses: List<License>,
 ) : RecyclerView.Adapter<ThirdPartyViewHolder>() {
 
     override fun getItemCount(): Int = licenses.size

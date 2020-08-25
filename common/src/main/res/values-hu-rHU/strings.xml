@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="hu">
     <string name="app_name">Antimine</string>
-    <string name="app_description">Meg kell tisztítanod egy rejtett aknákkal teli, téglalap alakú pályát anélkül, hogy akár egyet is felrobbantanál.</string>
+    <string name="app_description">Meg kell tisztítanod egy rejtett aknákkal teli, négyszögletes pályát anélkül, hogy akár egyet is felrobbantanál.</string>
     <string name="games">Játékok</string>
     <string name="previous_games">Előző játékok</string>
     <string name="minefield">Nehézség</string>
@@ -29,10 +29,12 @@
     <string name="settings_general">Általános</string>
     <string name="settings_gameplay">Játékmenet</string>
     <string name="settings_accessibility">Kisegítő lehetőségek</string>
-    <string name="settings_large_areas">Nagy területek használata</string>
-    <string name="size">Size</string>
+    <string name="size">Méret</string>
     <string name="system">Rendszer</string>
     <string name="rating">Visszajelzés</string>
+    <string name="support_title">Support us!</string>
+    <string name="support_description">With your help, we\'ll be able to implement new features and keep our project active.</string>
+    <string name="support_action">To support</string>
     <string name="rating_message">Ha tetszik ez a játék, kérlek jelezz vissza nekünk. Sokat segít.</string>
     <string name="used_software_text">Ez a játék a következő harmadik féltől származó programokat használja:</string>
     <string name="translators_text">Ez a játék a következő emberek által lett lefordítva:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Kérdőjel használata</string>
     <string name="control">Irányítások</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Jelzés először</string>
     <string name="single_click">Egyszeri kattintás</string>
     <string name="double_click">Dupla kattintás</string>
     <string name="long_press">Hosszú nyomva tartás</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Mégse</string>
     <string name="resume">Folytatás</string>
     <string name="yes">Igen</string>
+    <string name="unlock">Unlock</string>
+    <string name="achievements">Achievements</string>
     <string name="rating_button_no">Nem</string>
     <string name="general">Általános</string>
     <string name="source_code">Forráskód</string>

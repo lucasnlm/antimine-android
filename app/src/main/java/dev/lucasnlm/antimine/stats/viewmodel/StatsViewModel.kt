@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 
 class StatsViewModel(
     private val statsRepository: IStatsRepository,
-    private val preferenceRepository: IPreferencesRepository
+    private val preferenceRepository: IPreferencesRepository,
 ) : IntentViewModel<StatsEvent, StatsModel>() {
     private suspend fun loadStatsModel(): StatsModel {
         val minId = preferenceRepository.getStatsBase()

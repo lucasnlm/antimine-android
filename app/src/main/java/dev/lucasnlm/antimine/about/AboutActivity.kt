@@ -11,6 +11,7 @@ import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import dev.lucasnlm.antimine.about.views.info.AboutInfoFragment
 import dev.lucasnlm.antimine.about.views.licenses.LicensesFragment
 import dev.lucasnlm.antimine.about.views.translators.TranslatorsFragment
+import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,6 +26,9 @@ class AboutActivity : ThematicActivity(R.layout.activity_empty) {
         lifecycleScope.launchWhenCreated {
             aboutViewModel.observeEvent().collect { event ->
                 when (event) {
+                    AboutEvent.SupportUs -> {
+                        showSupportAppDialog()
+                    }
                     AboutEvent.ThirdPartyLicenses -> {
                         replaceFragment(LicensesFragment(), LicensesFragment.TAG)
                     }
@@ -45,5 +49,12 @@ class AboutActivity : ThematicActivity(R.layout.activity_empty) {
             }
             replace(R.id.content, fragment)
         }.commitAllowingStateLoss()
+    }
+
+    private fun showSupportAppDialog() {
+        if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
+            SupportAppDialogFragment.newInstance(false)
+                .show(supportFragmentManager, SupportAppDialogFragment.TAG)
+        }
     }
 }

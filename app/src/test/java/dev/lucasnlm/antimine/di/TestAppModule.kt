@@ -6,9 +6,12 @@ import android.content.Intent
 import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.share.ShareManager
+import dev.lucasnlm.external.Achievement
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.external.Leaderboard
+import dev.lucasnlm.external.UnlockAppListener
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -28,27 +31,37 @@ val AppModule = module {
 
     single {
         object : IBillingManager {
-            override fun start() { }
+            override fun start(unlockAppListener: UnlockAppListener) { }
+
+            override fun isEnabled(): Boolean = false
 
             override suspend fun charge(activity: Activity) { }
         }
     } bind IBillingManager::class
 
-    single { object : IPlayGamesManager {
-        override fun hasGooglePlayGames(): Boolean = false
+    single {
+        object : IPlayGamesManager {
+            override fun hasGooglePlayGames(): Boolean = false
 
-        override fun silentLogin(activity: Activity) { }
+            override fun silentLogin(activity: Activity) { }
 
-        override fun getLoginIntent(): Intent? = null
+            override fun getLoginIntent(): Intent? = null
 
-        override fun handleLoginResult(data: Intent?) { }
+            override fun handleLoginResult(data: Intent?) { }
 
-        override fun isLogged(): Boolean = false
+            override fun isLogged(): Boolean = false
 
-        override fun openAchievements(activity: Activity) { }
+            override fun openAchievements(activity: Activity) { }
 
-        override fun openLeaderboards(activity: Activity) { }
-    } } bind IPlayGamesManager::class
+            override fun openLeaderboards(activity: Activity) { }
+
+            override fun unlockAchievement(achievement: Achievement) { }
+
+            override fun incrementAchievement(achievement: Achievement) { }
+
+            override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) { }
+        }
+    } bind IPlayGamesManager::class
 
     single { ShareManager(get()) }
 

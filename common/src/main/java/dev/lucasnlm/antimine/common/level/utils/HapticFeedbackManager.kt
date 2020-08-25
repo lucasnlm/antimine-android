@@ -12,7 +12,7 @@ interface IHapticFeedbackManager {
 }
 
 class HapticFeedbackManager(
-    context: Context
+    context: Context,
 ) : IHapticFeedbackManager {
 
     private val vibrator by lazy { context.getSystemService(VIBRATOR_SERVICE) as Vibrator }

@@ -29,10 +29,12 @@
     <string name="settings_general">Algemeen</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Toegankelijkheid</string>
-    <string name="settings_large_areas">Gebruik grote gebieden</string>
     <string name="size">Grootte</string>
     <string name="system">Systeem</string>
     <string name="rating">Feedback</string>
+    <string name="support_title">Steun ons!</string>
+    <string name="support_description">Met uw hulp kunnen we nieuwe functies implementeren en ons project actief houden.</string>
+    <string name="support_action">Om te steunen</string>
     <string name="rating_message">Als dit spel je bevalt, geef ons dan alstublieft feedback. Dat zal ons veel helpen.</string>
     <string name="used_software_text">Dit spel gebruikt de volgende software van derden:</string>
     <string name="translators_text">Dit spel is vertaald door de volgende mensen:</string>
@@ -58,7 +60,6 @@
     <string name="use_question_mark">Gebruik vraagteken</string>
     <string name="control">Besturing</string>
     <string name="arrow">➞</string>
-    <string name="flag_first">Markeer eerst</string>
     <string name="single_click">Enkele klik</string>
     <string name="double_click">Dubbele Klik</string>
     <string name="long_press">Lang indrukken</string>
@@ -71,6 +72,8 @@
     <string name="cancel">Anneleren</string>
     <string name="resume">Doorgaan</string>
     <string name="yes">Ja</string>
+    <string name="unlock">Ontgrendelen</string>
+    <string name="achievements">Achievements</string>
     <string name="rating_button_no">Nee</string>
     <string name="general">Algemeen</string>
     <string name="source_code">Bron code</string>

@@ -5,7 +5,7 @@ import dev.lucasnlm.antimine.common.level.models.Mark
 
 class MinefieldHandler(
     private val field: MutableList<Area>,
-    private val useQuestionMark: Boolean
+    private val useQuestionMark: Boolean,
 ) {
     fun showAllMines() {
         field.filter { it.hasMine && it.mark != Mark.Flag }
@@ -36,11 +36,13 @@ class MinefieldHandler(
     fun switchMarkAt(index: Int) {
         field.getOrNull(index)?.let {
             if (it.isCovered) {
-                field[index] = it.copy(mark = when (it.mark) {
-                    Mark.PurposefulNone, Mark.None -> Mark.Flag
-                    Mark.Flag -> if (useQuestionMark) Mark.Question else Mark.None
-                    Mark.Question -> Mark.None
-                })
+                field[index] = it.copy(
+                    mark = when (it.mark) {
+                        Mark.PurposefulNone, Mark.None -> Mark.Flag
+                        Mark.Flag -> if (useQuestionMark) Mark.Question else Mark.None
+                        Mark.Question -> Mark.None
+                    }
+                )
             }
         }
     }
@@ -66,14 +68,16 @@ class MinefieldHandler(
     }
 
     fun highlightAt(index: Int) {
-        field.getOrNull(index)?.let {
-            field[index] = it.copy(highlighted = it.minesAround != 0 && !it.highlighted)
-        }.also {
-            field.filterNeighborsOf(field[index])
-                .filter { it.mark.isNone() && it.isCovered }
-                .onEach { neighbor ->
-                    field[neighbor.id] = neighbor.copy(highlighted = true)
-                }
+        field.getOrNull(index)?.let { target ->
+            if (!target.isCovered) {
+                field[index] = target.copy(highlighted = target.minesAround != 0 && !target.highlighted)
+
+                field.filterNeighborsOf(target)
+                    .filter { it.mark.isNone() && it.isCovered }
+                    .onEach { neighbor ->
+                        field[neighbor.id] = neighbor.copy(highlighted = true)
+                    }
+            }
         }
     }
 

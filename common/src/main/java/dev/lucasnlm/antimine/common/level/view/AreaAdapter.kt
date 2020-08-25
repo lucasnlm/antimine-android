@@ -25,7 +25,7 @@ class AreaAdapter(
     context: Context,
     private val viewModel: GameViewModel,
     private val preferencesRepository: IPreferencesRepository,
-    dimensionRepository: IDimensionRepository
+    dimensionRepository: IDimensionRepository,
 ) : RecyclerView.Adapter<AreaViewHolder>() {
 
     private var field = listOf<Area>()
@@ -80,23 +80,25 @@ class AreaAdapter(
             val style = preferencesRepository.controlStyle()
             if (style == ControlStyle.DoubleClick || style == ControlStyle.DoubleClickInverted) {
                 view.isClickable = true
-                view.setOnDoubleClickListener(object : GestureDetector.OnDoubleTapListener {
-                    override fun onDoubleTap(e: MotionEvent?): Boolean {
-                        return view.onClickablePosition(adapterPosition) {
-                            viewModel.onDoubleClick(it)
+                view.setOnDoubleClickListener(
+                    object : GestureDetector.OnDoubleTapListener {
+                        override fun onDoubleTap(e: MotionEvent?): Boolean {
+                            return view.onClickablePosition(adapterPosition) {
+                                viewModel.onDoubleClick(it)
+                            }
+                        }
+
+                        override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
+                            return false
+                        }
+
+                        override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+                            return view.onClickablePosition(adapterPosition) {
+                                viewModel.onSingleClick(it)
+                            }
                         }
                     }
-
-                    override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
-                        return false
-                    }
-
-                    override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-                        return view.onClickablePosition(adapterPosition) {
-                            viewModel.onSingleClick(it)
-                        }
-                    }
-                })
+                )
             } else {
                 view.setOnTouchListener { _, motionEvent ->
                     when (motionEvent.action) {

@@ -7,28 +7,18 @@ import dev.lucasnlm.antimine.core.themes.model.AreaPalette
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.core.themes.model.Assets
-import dev.lucasnlm.antimine.core.themes.repository.Themes.AmoledTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.BlueGreyTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.BrownTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.ChessTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.DarkTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.GardenTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.LightTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.MarineTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.OrangeTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.PinkTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes.PurpleTheme
 
 interface IThemeRepository {
     fun getCustomTheme(): AppTheme?
     fun getTheme(): AppTheme
     fun getAllThemes(): List<AppTheme>
     fun setTheme(theme: AppTheme)
+    fun reset(): AppTheme
 }
 
 class ThemeRepository(
     private val context: Context,
-    private val preferenceRepository: IPreferencesRepository
+    private val preferenceRepository: IPreferencesRepository,
 ) : IThemeRepository {
     override fun getCustomTheme(): AppTheme? {
         return getAllThemes().firstOrNull { it.id == preferenceRepository.themeId() }
@@ -38,15 +28,16 @@ class ThemeRepository(
         return getCustomTheme() ?: buildSystemTheme()
     }
 
-    override fun getAllThemes(): List<AppTheme> = listOf(
-        buildSystemTheme(), AmoledTheme, LightTheme,
-        DarkTheme, GardenTheme, MarineTheme,
-        ChessTheme, BlueGreyTheme, OrangeTheme,
-        PinkTheme, PurpleTheme, BrownTheme
-    )
+    override fun getAllThemes(): List<AppTheme> =
+        listOf(buildSystemTheme()) + Themes.getAllCustom()
 
     override fun setTheme(theme: AppTheme) {
         preferenceRepository.useTheme(theme.id)
+    }
+
+    override fun reset(): AppTheme {
+        preferenceRepository.useTheme(0L)
+        return buildSystemTheme()
     }
 
     private fun buildSystemTheme(): AppTheme {

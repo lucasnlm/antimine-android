@@ -3,6 +3,7 @@ package dev.lucasnlm.external
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.view.Gravity
 import android.widget.Toast
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -11,12 +12,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.games.Games
 
 class PlayGamesManager(
-    private val context: Context
+    private val context: Context,
 ) : IPlayGamesManager {
     private var account: GoogleSignInAccount? = null
 
     private fun setupPopUp(activity: Activity, account: GoogleSignInAccount) {
         Games.getGamesClient(context, account).setViewForPopups(activity.findViewById(android.R.id.content))
+        Games.getGamesClient(context, account).setGravityForPopups(Gravity.TOP or Gravity.END)
     }
 
     override fun hasGooglePlayGames(): Boolean = true
@@ -79,6 +81,24 @@ class PlayGamesManager(
                 .addOnSuccessListener { intent ->
                     activity.startActivityForResult(intent, 0)
                 }
+        }
+    }
+
+    override fun unlockAchievement(achievement: Achievement) {
+        account?.let {
+            Games.getAchievementsClient(context, it).unlock(achievement.value)
+        }
+    }
+
+    override fun incrementAchievement(achievement: Achievement) {
+        account?.let {
+            Games.getAchievementsClient(context, it).increment(achievement.value, 1)
+        }
+    }
+
+    override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) {
+        account?.let {
+            Games.getLeaderboardsClient(context, it).submitScore(leaderboard.value, value)
         }
     }
 }

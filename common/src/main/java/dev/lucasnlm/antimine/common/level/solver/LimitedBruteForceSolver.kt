@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.level.solver
 
 class LimitedBruteForceSolver(
-    private val maxAttemptTime: Long = DEFAULT_BRUTE_FORCE_TIMEOUT
+    private val maxAttemptTime: Long = DEFAULT_BRUTE_FORCE_TIMEOUT,
 ) : BruteForceSolver() {
 
     private val initialTime = System.currentTimeMillis()

@@ -200,7 +200,8 @@ class TvGameActivity : AppCompatActivity() {
                         keepConfirmingNewGame = false
                     }
                 },
-                null, DateUtils.SECOND_IN_MILLIS
+                null,
+                DateUtils.SECOND_IN_MILLIS
             )
         }
     }
@@ -222,7 +223,8 @@ class TvGameActivity : AppCompatActivity() {
                     }.show()
                 }
             },
-            null, DateUtils.SECOND_IN_MILLIS
+            null,
+            DateUtils.SECOND_IN_MILLIS
         )
     }
 
@@ -280,18 +282,6 @@ class TvGameActivity : AppCompatActivity() {
                     gameViewModel.gameOver(false)
                     waitAndShowGameOverConfirmNewGame()
                 }
-            }
-            Event.ResumeVictory, Event.ResumeGameOver -> {
-                val score = Score(
-                    rightMines,
-                    totalMines,
-                    totalArea
-                )
-                status = Status.Over(currentTime, score)
-                invalidateOptionsMenu()
-                gameViewModel.stopClock()
-
-                waitAndShowConfirmNewGame()
             }
             else -> { }
         }

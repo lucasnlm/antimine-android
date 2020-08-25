@@ -22,6 +22,7 @@ class GameController {
     private val minefield: Minefield
     private val startTime = System.currentTimeMillis()
     private var saveId = 0
+    private var actions = 0
     private var firstOpen: FirstOpen = FirstOpen.Unknown
     private var gameControl: GameControl = GameControl.Standard
     private var useQuestionMark = true
@@ -36,6 +37,7 @@ class GameController {
         this.minefield = minefield
         this.seed = seed
         this.saveId = saveId ?: 0
+        this.actions = 0
 
         this.field = minefieldCreator.createEmpty()
     }
@@ -47,6 +49,7 @@ class GameController {
         this.seed = save.seed
         this.firstOpen = save.firstOpen
         this.field = save.field
+        this.actions = save.actions
     }
 
     fun field() = field
@@ -90,6 +93,7 @@ class GameController {
                     if (target.mark.isNotNone()) {
                         minefieldHandler.removeMarkAt(target.id)
                     } else {
+                        this.actions++
                         minefieldHandler.openAt(target.id, false)
                     }
                 }
@@ -110,6 +114,7 @@ class GameController {
                     }
                 }
                 ActionResponse.OpenNeighbors -> {
+                    this.actions++
                     minefieldHandler.openOrFlagNeighborsOf(target.id)
                 }
             }
@@ -250,9 +255,16 @@ class GameController {
             difficulty,
             firstOpen,
             saveStatus,
-            field.toList()
+            field.toList(),
+            actions
         )
     }
+
+    fun almostAchievement(): Boolean {
+        return mines().count() - mines().count { it.isCovered && it.mark.isFlag() } == 1
+    }
+
+    fun getActionsCount() = actions
 
     fun getStats(duration: Long): Stats? {
         val gameStatus: SaveStatus = when {

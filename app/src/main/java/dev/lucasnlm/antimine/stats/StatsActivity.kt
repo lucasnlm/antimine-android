@@ -61,7 +61,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         statsViewModel.singleState().let {
             if (it.totalGames > 0) {
-                menuInflater.inflate(R.menu.stats_menu, menu)
+                menuInflater.inflate(R.menu.delete_icon_menu, menu)
             }
         }
         return true
