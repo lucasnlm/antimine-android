@@ -456,6 +456,38 @@ object Themes {
                 mineExploded = R.drawable.mine_pink_exploded,
                 mineLow = R.drawable.mine_low
             )
+        ),
+        AppTheme(
+            id = 15L,
+            theme = R.style.CustomDarkTheme,
+            themeNoActionBar = R.style.CustomDarkTheme_NoActionBar,
+            palette = AreaPalette(
+                border = 0x000000,
+                background = 0xFFFFFF,
+                covered = 0xedf1f2,
+                coveredOdd = 0xdcdee0,
+                uncovered = 0x212121,
+                uncoveredOdd = 0x212121,
+                minesAround1 = 0xFFFFFF,
+                minesAround2 = 0xCCCCCC,
+                minesAround3 = 0xAAAAAA,
+                minesAround4 = 0xDDDDDD,
+                minesAround5 = 0xFFFFFF,
+                minesAround6 = 0xFF0000,
+                minesAround7 = 0xFF0000,
+                minesAround8 = 0xFF0000,
+                highlight = 0xd1c4e9,
+                focus = 0xD32F2F
+            ),
+            assets = Assets(
+                wrongFlag = R.drawable.flag_black,
+                flag = R.drawable.flag_black,
+                questionMark = R.drawable.question_black,
+                toolbarMine = R.drawable.mine_low,
+                mine = R.drawable.mine_white,
+                mineExploded = R.drawable.mine_white,
+                mineLow = R.drawable.mine_low
+            )
         )
     )
 }
