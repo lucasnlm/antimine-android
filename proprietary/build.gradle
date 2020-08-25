@@ -33,7 +33,7 @@ dependencies {
     // Google
     implementation 'com.android.billingclient:billing-ktx:3.0.0'
     implementation 'com.google.android.gms:play-services-instantapps:17.0.0'
-    implementation 'com.google.android.gms:play-services-games:19.0.0'
+    implementation 'com.google.android.gms:play-services-games:20.0.0'
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
 
     // Firebase

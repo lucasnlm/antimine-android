@@ -43,14 +43,14 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
         }
     }
 
-    protected fun calcHorizontalPadding(view: View, boardWidth: Int): Int {
+    private fun calcHorizontalPadding(view: View, boardWidth: Int): Int {
         val width = view.measuredWidth
         val recyclerViewWidth = (dimensionRepository.areaSize() * boardWidth)
         val separatorsWidth = (dimensionRepository.areaSeparator() * (boardWidth - 1))
         return ((width - recyclerViewWidth - separatorsWidth) / 2).coerceAtLeast(0.0f).toInt()
     }
 
-    protected fun calcVerticalPadding(view: View, boardHeight: Int): Int {
+    private fun calcVerticalPadding(view: View, boardHeight: Int): Int {
         val height = view.measuredHeight
         val recyclerViewHeight = (dimensionRepository.areaSize() * boardHeight)
         val separatorsHeight = (2 * dimensionRepository.areaSeparator() * (boardHeight - 1))
