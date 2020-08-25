@@ -1,6 +1,8 @@
 package dev.lucasnlm.antimine.theme
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import dev.lucasnlm.antimine.R
@@ -50,6 +52,22 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                     }
                 }
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        if (themeViewModel.singleState().current.id != 0L) {
+            menuInflater.inflate(R.menu.delete_icon_menu, menu)
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.delete) {
+            themeViewModel.sendEvent(ThemeEvent.ResetTheme)
+            true
+        } else {
+            super.onOptionsItemSelected(item)
         }
     }
 

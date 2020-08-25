@@ -5,6 +5,8 @@ import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.core.control.ControlStyle
 
 interface IPreferencesRepository {
+    fun reset()
+
     fun customGameMode(): Minefield
     fun updateCustomGameMode(minefield: Minefield)
 
@@ -50,6 +52,16 @@ class PreferencesRepository(
 ) : IPreferencesRepository {
     init {
         migrateOldPreferences()
+    }
+
+    override fun reset() {
+        preferencesManager.putBoolean(PREFERENCE_ASSISTANT, true)
+        preferencesManager.putBoolean(PREFERENCE_VIBRATION, true)
+        preferencesManager.putBoolean(PREFERENCE_ANIMATION, true)
+        preferencesManager.putBoolean(PREFERENCE_QUESTION_MARK, false)
+        preferencesManager.putBoolean(PREFERENCE_SOUND_EFFECTS, false)
+        preferencesManager.putInt(PREFERENCE_AREA_SIZE, 50)
+        preferencesManager.putInt(PREFERENCE_LONG_PRESS_TIMEOUT, ViewConfiguration.getLongPressTimeout())
     }
 
     override fun customGameMode(): Minefield = Minefield(

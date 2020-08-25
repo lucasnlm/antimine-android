@@ -8,4 +8,6 @@ sealed class ThemeEvent {
     data class ChangeTheme(
         val newTheme: AppTheme
     ) : ThemeEvent()
+
+    object ResetTheme : ThemeEvent()
 }

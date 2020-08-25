@@ -40,7 +40,10 @@ class ThemeViewModel(
     }
 
     override suspend fun mapEventToState(event: ThemeEvent) = flow {
-        if (event is ThemeEvent.ChangeTheme) {
+        if (event is ThemeEvent.ResetTheme) {
+            val defaultTheme = themeRepository.reset()
+            emit(state.copy(current = defaultTheme))
+        } else if (event is ThemeEvent.ChangeTheme) {
             setTheme(event.newTheme)
             emit(state.copy(current = event.newTheme))
         }
