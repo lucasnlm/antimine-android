@@ -44,16 +44,18 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 ## Features
 
 - No guessing algorithm
-- Game levels: begginner, intermediate, expert and custom
-- Game statistics
+- Multiple Themes (including AMOLED)
+- System Theme: Dark or Light
+- Game Levels: Begginner, Intermediate, Expert, and Custom
+- Game Statistics
 - Android Wear OS support
-- Dark and custom themes support
-- Save/Resume state when quit/resume game
+- Save/Resume state when Quit/Resume game
 - Resume previous games
 - Retry failed games
-- Put flag on long press or double click
-- Put question mark on double long press
-- Open multiple areas by long pressing the numbers
+- 4 different control styles
+- Custom long press duration
+- Optional Question mark
+- Open multiple areas by pressing numbers
 - Game assistant to auto-flag discovered mines
 - Share game
 - App shortcuts
@@ -66,7 +68,8 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 - [Android SDK 30](https://developer.android.com/about/versions/11)
 - [AndroidX](https://developer.android.com/jetpack/androidx)
 - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
-- [Koin Kotlin](https://github.com/InsertKoinIO/koin)
+- [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
+- [Koin](https://github.com/InsertKoinIO/koin)
 - [Room](https://developer.android.com/training/data-storage/room)
 - [Robolectric](http://robolectric.org/)
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
