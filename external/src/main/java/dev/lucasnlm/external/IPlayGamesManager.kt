@@ -19,9 +19,9 @@ enum class Achievement(
 enum class Leaderboard(
     val value: String
 ) {
-    BestTimeBeginner(""),
-    BestTimeIntermediate(""),
-    BestTimeExpert(""),
+    BeginnerBestTime(""),
+    IntermediateBestTime(""),
+    ExpertBestTime(""),
 }
 
 interface IPlayGamesManager {

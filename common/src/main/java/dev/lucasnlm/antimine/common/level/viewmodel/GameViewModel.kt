@@ -438,13 +438,13 @@ class GameViewModel(
         if (time > 1L && gameController.getActionsCount() > 7) {
             when (currentDifficulty) {
                 Difficulty.Beginner -> {
-                    playGamesManager.submitLeaderboard(Leaderboard.BestTimeBeginner, clock.time())
+                    playGamesManager.submitLeaderboard(Leaderboard.BeginnerBestTime, clock.time())
                 }
                 Difficulty.Intermediate -> {
-                    playGamesManager.submitLeaderboard(Leaderboard.BestTimeIntermediate, clock.time())
+                    playGamesManager.submitLeaderboard(Leaderboard.IntermediateBestTime, clock.time())
                 }
                 Difficulty.Expert -> {
-                    playGamesManager.submitLeaderboard(Leaderboard.BestTimeExpert, clock.time())
+                    playGamesManager.submitLeaderboard(Leaderboard.ExpertBestTime, clock.time())
                 }
                 else -> {
                 }

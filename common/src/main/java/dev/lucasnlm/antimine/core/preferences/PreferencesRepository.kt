@@ -4,49 +4,6 @@ import android.view.ViewConfiguration
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.core.control.ControlStyle
 
-interface IPreferencesRepository {
-    fun hasCustomizations(): Boolean
-    fun reset()
-
-    fun customGameMode(): Minefield
-    fun updateCustomGameMode(minefield: Minefield)
-
-    fun controlStyle(): ControlStyle
-    fun useControlStyle(controlStyle: ControlStyle)
-
-    fun isFirstUse(): Boolean
-    fun completeFirstUse()
-
-    fun customLongPressTimeout(): Long
-
-    fun themeId(): Long
-    fun useTheme(themeId: Long)
-
-    fun updateStatsBase(statsBase: Int)
-    fun getStatsBase(): Int
-
-    fun getUseCount(): Int
-    fun incrementUseCount()
-
-    fun incrementProgressiveValue()
-    fun decrementProgressiveValue()
-    fun getProgressiveValue(): Int
-
-    fun isRequestRatingEnabled(): Boolean
-    fun disableRequestRating()
-
-    fun setLockExtras(lock: Boolean, keepShowingSupportButton: Boolean)
-    fun areExtrasUnlocked(): Boolean
-    fun showSupport(): Boolean
-
-    fun useFlagAssistant(): Boolean
-    fun useHapticFeedback(): Boolean
-    fun areaSizeMultiplier(): Int
-    fun useAnimations(): Boolean
-    fun useQuestionMark(): Boolean
-    fun isSoundEffectsEnabled(): Boolean
-}
-
 class PreferencesRepository(
     private val preferencesManager: IPreferencesManager,
     private val defaultLongPressTimeout: Int,
@@ -193,13 +150,18 @@ class PreferencesRepository(
         }
     }
 
-    override fun setLockExtras(lock: Boolean, keepShowingSupportButton: Boolean) {
-        preferencesManager.putBoolean(PREFERENCE_UNLOCK_EXTRAS, !lock)
-        preferencesManager.putBoolean(PREFERENCE_SHOW_SUPPORT, !lock || keepShowingSupportButton)
+    override fun setPremiumFeatures(status: Boolean, keepShowingSupportButton: Boolean?) {
+        if (!preferencesManager.getBoolean(PREFERENCE_PREMIUM_FEATURES, false)) {
+            preferencesManager.putBoolean(PREFERENCE_PREMIUM_FEATURES, status)
+
+            keepShowingSupportButton?.let {
+                preferencesManager.putBoolean(PREFERENCE_SHOW_SUPPORT, it)
+            }
+        }
     }
 
-    override fun areExtrasUnlocked(): Boolean =
-        preferencesManager.getBoolean(PREFERENCE_UNLOCK_EXTRAS, false)
+    override fun isPremiumEnabled(): Boolean =
+        preferencesManager.getBoolean(PREFERENCE_PREMIUM_FEATURES, false)
 
     override fun showSupport(): Boolean {
         return preferencesManager.getBoolean(PREFERENCE_SHOW_SUPPORT, true)
@@ -225,7 +187,7 @@ class PreferencesRepository(
         private const val PREFERENCE_FIRST_USE = "preference_first_use"
         private const val PREFERENCE_USE_COUNT = "preference_use_count"
         private const val PREFERENCE_REQUEST_RATING = "preference_request_rating"
-        private const val PREFERENCE_UNLOCK_EXTRAS = "preference_unlock_extras"
+        private const val PREFERENCE_PREMIUM_FEATURES = "preference_premium_features"
         private const val PREFERENCE_SHOW_SUPPORT = "preference_show_support"
     }
 }

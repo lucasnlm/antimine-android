@@ -55,7 +55,7 @@ class BillingManager(
                 handlePurchases(it.toList())
             }
         } else {
-            unlockAppListener?.onLockStatusChanged(isFreeUnlock = false, status = false)
+            unlockAppListener?.onLockStatusChanged(status = false)
         }
     }
 
