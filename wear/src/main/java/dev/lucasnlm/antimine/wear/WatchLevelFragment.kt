@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.wear
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.doOnLayout
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.AmbientSettings
@@ -39,14 +38,14 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
         gameViewModel.run {
             field.observe(
                 viewLifecycleOwner,
-                Observer {
+                {
                     areaAdapter.bindField(it)
                 }
             )
 
             levelSetup.observe(
                 viewLifecycleOwner,
-                Observer {
+                {
                     getView()?.let { view ->
                         setupRecyclerViewSize(view, it)
                     }
@@ -55,7 +54,7 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
 
             eventObserver.observe(
                 viewLifecycleOwner,
-                Observer {
+                {
                     if (it == Event.StartNewGame) {
                         recyclerGrid.scrollToPosition(areaAdapter.itemCount / 2)
                     }

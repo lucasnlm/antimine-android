@@ -28,12 +28,22 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launchWhenCreated {
             val gaps = resources.getDimension(R.dimen.theme_divider) * 6
-            val areaSize = (dimensionRepository.displaySize().width - gaps) / 9f
+            val size = dimensionRepository.displaySize()
+            val areaSize: Float
+            val columns: Int
+
+            if (size.width > size.height) {
+                areaSize = (size.width - gaps) / 15f
+                columns = 5
+            } else {
+                areaSize = (size.width - gaps) / 9f
+                columns = 3
+            }
 
             recyclerView.apply {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
                 setHasFixedSize(true)
-                layoutManager = GridLayoutManager(context, 3)
+                layoutManager = GridLayoutManager(context, columns)
                 adapter = ThemeAdapter(themeViewModel, areaSize)
             }
 

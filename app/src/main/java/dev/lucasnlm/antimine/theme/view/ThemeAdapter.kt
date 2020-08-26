@@ -46,6 +46,8 @@ class ThemeAdapter(
 
     override fun getItemCount(): Int = themes.size
 
+    override fun getItemViewType(position: Int): Int = themes[position].id.toInt()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeViewHolder {
         val view = LayoutInflater
             .from(parent.context)

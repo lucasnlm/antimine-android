@@ -9,7 +9,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.HandlerCompat
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.models.Difficulty
@@ -50,14 +49,14 @@ class TvGameActivity : AppCompatActivity() {
     private fun bindViewModel() = gameViewModel.apply {
         eventObserver.observe(
             this@TvGameActivity,
-            Observer {
+            {
                 onGameEvent(it)
             }
         )
 
         elapsedTimeSeconds.observe(
             this@TvGameActivity,
-            Observer {
+            {
                 timer.apply {
                     visibility = if (it == 0L) View.GONE else View.VISIBLE
                     text = DateUtils.formatElapsedTime(it)
@@ -68,7 +67,7 @@ class TvGameActivity : AppCompatActivity() {
 
         mineCount.observe(
             this@TvGameActivity,
-            Observer {
+            {
                 minesCount.apply {
                     visibility = View.VISIBLE
                     text = it.toString()
@@ -78,14 +77,14 @@ class TvGameActivity : AppCompatActivity() {
 
         difficulty.observe(
             this@TvGameActivity,
-            Observer {
+            {
                 // onChangeDifficulty(it)
             }
         )
 
         field.observe(
             this@TvGameActivity,
-            Observer { area ->
+            { area ->
                 val mines = area.filter { it.hasMine }
                 totalArea = area.count()
                 totalMines = mines.count()

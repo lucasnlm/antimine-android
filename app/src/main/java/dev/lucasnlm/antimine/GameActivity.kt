@@ -18,7 +18,6 @@ import androidx.core.view.doOnLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.about.AboutActivity
@@ -104,7 +103,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
         eventObserver.observe(
             this@GameActivity,
-            Observer {
+            {
                 if (lastEvent != it) {
                     onGameEvent(it)
                     lastEvent = it
@@ -114,7 +113,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
         retryObserver.observe(
             this@GameActivity,
-            Observer {
+            {
                 lifecycleScope.launch {
                     gameViewModel.retryGame(currentSaveId.toInt())
                 }
@@ -123,14 +122,14 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
         shareObserver.observe(
             this@GameActivity,
-            Observer {
+            {
                 shareCurrentGame()
             }
         )
 
         elapsedTimeSeconds.observe(
             this@GameActivity,
-            Observer {
+            {
                 timer.apply {
                     visibility = if (it == 0L) View.GONE else View.VISIBLE
                     text = DateUtils.formatElapsedTime(it)
@@ -141,7 +140,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
         mineCount.observe(
             this@GameActivity,
-            Observer {
+            {
                 minesCount.apply {
                     visibility = View.VISIBLE
                     text = it.toString()
@@ -151,14 +150,14 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
         difficulty.observe(
             this@GameActivity,
-            Observer {
+            {
                 onChangeDifficulty(it)
             }
         )
 
         field.observe(
             this@GameActivity,
-            Observer { area ->
+            { area ->
                 val mines = area.filter { it.hasMine }
                 totalArea = area.count()
                 totalMines = mines.count()
@@ -168,7 +167,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
         saveId.observe(
             this@GameActivity,
-            Observer {
+            {
                 currentSaveId = it
             }
         )
