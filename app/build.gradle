@@ -3,6 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+if (System.getenv('IS_GOOGLE_BUILD')) {
+    apply plugin: 'com.google.firebase.crashlytics'
+}
+
 android {
     compileSdkVersion 30
 
