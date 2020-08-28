@@ -111,7 +111,7 @@ sealed class Analytics(
 
     class ShowRatingRequest(usages: Int) : Analytics("Shown Rating Request", mapOf("Usages" to usages.toString()))
 
-    class TapRatingRequest(from: String) : Analytics("Rating Request", mapOf("From" to from))
+    object TapRatingRequest : Analytics("Rating Request")
 
     class TapGameReset(resign: Boolean) : Analytics("Game reset", mapOf("Resign" to resign.toString()))
 }

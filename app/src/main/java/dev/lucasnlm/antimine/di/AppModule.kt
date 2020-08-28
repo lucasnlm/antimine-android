@@ -11,8 +11,10 @@ import dev.lucasnlm.external.ExternalAnalyticsWrapper
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.external.IReviewWrapper
 import dev.lucasnlm.external.InstantAppManager
 import dev.lucasnlm.external.PlayGamesManager
+import dev.lucasnlm.external.ReviewWrapper
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -22,6 +24,8 @@ val AppModule = module {
     single { BillingManager(get()) } bind IBillingManager::class
 
     single { PlayGamesManager(get()) } bind IPlayGamesManager::class
+
+    single { ReviewWrapper() } bind IReviewWrapper::class
 
     single { ShareManager(get()) }
 

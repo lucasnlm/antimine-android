@@ -31,7 +31,6 @@
     <string name="settings_accessibility">Accessibility</string>
     <string name="size">Size</string>
     <string name="system">System</string>
-    <string name="amoled" translatable="false">AMOLED</string>
     <string name="rating">Feedback</string>
     <string name="support_title">Support us!</string>
     <string name="support_description">With your help, we\'ll be able to implement new features and keep our project active.</string>
