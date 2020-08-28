@@ -15,6 +15,7 @@ import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.view.AreaView
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
+import dev.lucasnlm.antimine.core.themes.repository.Themes
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
 import kotlinx.android.synthetic.main.view_theme.view.*
@@ -24,6 +25,7 @@ class ThemeAdapter(
     private val areaSize: Float,
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
 
+    private val amoledId = Themes.AmoledTheme.id
     private val themes: List<AppTheme> = themeViewModel.singleState().themes
 
     private val minefield = listOf(
@@ -71,15 +73,11 @@ class ThemeAdapter(
 
             areas.forEachIndexed { index, areaView -> areaView.bindTheme(minefield[index], theme, paintSettings) }
 
-            if (position < 2 && !selected) {
+            if (position == 0) {
                 areas.forEach { it.alpha = 0.35f }
 
                 label.apply {
-                    text = if (position == 0) {
-                        label.context.getString(R.string.system)
-                    } else {
-                        label.context.getString(R.string.amoled)
-                    }
+                    text = label.context.getString(R.string.system)
 
                     setTextColor(
                         with(theme.palette.background) {

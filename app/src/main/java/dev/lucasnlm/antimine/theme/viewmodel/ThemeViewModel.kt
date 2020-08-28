@@ -5,6 +5,7 @@ import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
+import dev.lucasnlm.antimine.core.themes.repository.Themes
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.external.IBillingManager
 import kotlinx.coroutines.flow.Flow
@@ -30,6 +31,7 @@ class ThemeViewModel(
                 }
             }.map {
                 if (it is ThemeEvent.ChangeTheme &&
+                    isPaid(it.newTheme) &&
                     billingManager.isEnabled() &&
                     !preferencesRepository.isPremiumEnabled()
                 ) {
@@ -38,6 +40,13 @@ class ThemeViewModel(
                     it
                 }
             }
+    }
+
+    private fun isPaid(theme: AppTheme): Boolean {
+        return when (theme.id) {
+            0L, Themes.LightTheme.id, Themes.DarkTheme.id -> false
+            else -> true
+        }
     }
 
     override suspend fun mapEventToState(event: ThemeEvent) = flow {
