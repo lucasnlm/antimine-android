@@ -1,9 +1,7 @@
 package dev.lucasnlm.antimine
 
-import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
@@ -43,6 +41,7 @@ import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.ThemeActivity
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_game.minesCount
 import kotlinx.android.synthetic.main.activity_game.timer
@@ -66,6 +65,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private val playGamesManager: IPlayGamesManager by inject()
 
     private val shareViewModel: ShareManager by inject()
+
+    private val reviewWrapper: ReviewWrapper by inject()
 
     val gameViewModel by viewModel<GameViewModel>()
 
@@ -632,17 +633,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun openRateUsLink(from: String) {
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
-        } catch (e: ActivityNotFoundException) {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
-                )
-            )
-        }
-
+        reviewWrapper.startReview(this)
         analyticsManager.sentEvent(Analytics.TapRatingRequest(from))
         preferencesRepository.disableRequestRating()
     }
