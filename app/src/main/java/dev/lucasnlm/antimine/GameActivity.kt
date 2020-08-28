@@ -180,9 +180,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 drawer.closeDrawer(GravityCompat.START)
                 gameViewModel.resumeGame()
             }
-            status == Status.Running && instantAppManager.isEnabled(applicationContext) -> showQuitConfirmation {
-                super.onBackPressed()
-            }
             else -> super.onBackPressed()
         }
     }
@@ -332,7 +329,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 R.id.share_now -> shareCurrentGame()
                 R.id.previous_games -> openSaveHistory()
                 R.id.stats -> openStats()
-                R.id.install_new -> installFromInstantApp()
                 R.id.play_games -> googlePlay()
                 else -> handled = false
             }
@@ -354,7 +350,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private fun onOpenAppActions() {
         if (instantAppManager.isEnabled(applicationContext)) {
             // Instant App does nothing.
-            bindInstantApp()
             savesRepository.setLimit(1)
         } else {
             val current = preferencesRepository.getUseCount()
@@ -416,15 +411,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             setNegativeButton(R.string.cancel, null)
             show()
         }
-    }
-
-    private fun showQuitConfirmation(action: () -> Unit) {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.are_you_sure)
-            .setMessage(R.string.quit_confirm)
-            .setPositiveButton(R.string.quit) { _, _ -> action() }
-            .setNeutralButton(R.string.install) { _, _ -> installFromInstantApp() }
-            .show()
     }
 
     private fun showCustomLevelDialog() {
@@ -601,21 +587,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun bindInstantApp() {
-        findViewById<View>(R.id.install).apply {
-            visibility = View.VISIBLE
-            setOnClickListener {
-                installFromInstantApp()
-            }
-        }
-
-        navigationView.menu.setGroupVisible(R.id.install_group, true)
-    }
-
-    private fun installFromInstantApp() {
-        instantAppManager.showInstallPrompt(this@GameActivity, null, IA_REQUEST_CODE, IA_REFERRER)
-    }
-
     private fun openRateUsLink() {
         reviewWrapper.startReviewPage(this, BuildConfig.VERSION_NAME)
         analyticsManager.sentEvent(Analytics.TapRatingRequest)
@@ -679,8 +650,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     companion object {
-        const val IA_REFERRER = "InstallApiActivity"
-        const val IA_REQUEST_CODE = 5
         const val GOOGLE_PLAY_REQUEST_CODE = 6
 
         const val MIN_USAGES_TO_IAP = 5

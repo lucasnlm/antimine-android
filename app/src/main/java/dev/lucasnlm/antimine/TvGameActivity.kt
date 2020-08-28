@@ -137,15 +137,6 @@ class TvGameActivity : AppCompatActivity() {
         }
     }
 
-    private fun showQuitConfirmation(action: () -> Unit) {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.are_you_sure)
-            .setMessage(R.string.quit_confirm)
-            .setPositiveButton(R.string.quit) { _, _ -> action() }
-            .setNegativeButton(R.string.cancel, null)
-            .show()
-    }
-
     private fun showCustomLevelDialog() {
         CustomLevelDialogFragment().apply {
             show(supportFragmentManager, "custom_level_fragment")

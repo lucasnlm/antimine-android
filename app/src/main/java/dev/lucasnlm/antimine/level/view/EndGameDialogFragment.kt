@@ -67,23 +67,15 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                 }
                             }
 
-                            when {
-                                instantAppManager.isEnabled(context) -> {
-                                    setNeutralButton(R.string.install) { _, _ ->
-                                        activity?.run {
-                                            instantAppManager.showInstallPrompt(this, null, 0, null)
-                                        }
-                                    }
-                                }
-                                state.isVictory == true -> {
+                            if (state.isVictory == true) {
+                                if (!instantAppManager.isEnabled(context)) {
                                     setNeutralButton(R.string.share) { _, _ ->
                                         gameViewModel.shareObserver.postValue(Unit)
                                     }
                                 }
-                                else -> {
-                                    setNeutralButton(R.string.retry) { _, _ ->
-                                        gameViewModel.retryObserver.postValue(Unit)
-                                    }
+                            } else {
+                                setNeutralButton(R.string.retry) { _, _ ->
+                                    gameViewModel.retryObserver.postValue(Unit)
                                 }
                             }
                         }

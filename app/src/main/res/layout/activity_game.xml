@@ -97,22 +97,6 @@
             ads:layout_constraintLeft_toLeftOf="parent"
             ads:layout_constraintRight_toRightOf="parent"
             ads:layout_constraintTop_toBottomOf="@id/menu" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/install"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:contentDescription="@string/install"
-            android:visibility="gone"
-            ads:layout_constraintBottom_toBottomOf="parent"
-            ads:layout_constraintRight_toRightOf="parent"
-            app:backgroundTint="@color/install_button"
-            app:elevation="10dp"
-            app:pressedTranslationZ="6dp"
-            app:srcCompat="@drawable/install"
-            tools:visibility="visible" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
