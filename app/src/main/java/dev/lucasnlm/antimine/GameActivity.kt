@@ -633,7 +633,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun openRateUsLink(from: String) {
-        reviewWrapper.startReview(this)
+        reviewWrapper.startReview(this, BuildConfig.VERSION_NAME)
         analyticsManager.sentEvent(Analytics.TapRatingRequest(from))
         preferencesRepository.disableRequestRating()
     }

@@ -5,10 +5,11 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import com.google.android.play.core.review.ReviewManagerFactory
-import dev.lucasnlm.antimine.BuildConfig
 
 class ReviewWrapper : IReviewWrapper {
-    override fun startReview(activity: Activity) {
+    override fun startReview(activity: Activity, appPackage: String) {
+        val playStoreUri = "market://details?id=$appPackage"
+        val playStorePage = "https://play.google.com/store/apps/details?id=$appPackage"
         val manager = ReviewManagerFactory.create(activity)
         manager
             .requestReviewFlow()
@@ -19,22 +20,16 @@ class ReviewWrapper : IReviewWrapper {
                     }
                 } else if (!activity.isFinishing) {
                     try {
-                        activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PLAY_STORE_URI)))
+                        activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(playStoreUri)))
                     } catch (e: ActivityNotFoundException) {
                         activity.startActivity(
                             Intent(
                                 Intent.ACTION_VIEW,
-                                Uri.parse(PLAY_STORE_PAGE)
+                                Uri.parse(playStorePage)
                             )
                         )
                     }
                 }
             }
-    }
-
-    companion object {
-        private const val PACKAGE_NAME = BuildConfig.LIBRARY_PACKAGE_NAME
-        private const val PLAY_STORE_URI = "market://details?id=$PACKAGE_NAME"
-        private const val PLAY_STORE_PAGE = "https://play.google.com/store/apps/details?id=$PACKAGE_NAME"
     }
 }
