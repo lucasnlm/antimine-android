@@ -90,6 +90,7 @@
     <string name="close_menu">Close Menu</string>
     <string name="delete_all">Delete all</string>
     <string name="themes">Themes</string>
+    <string name="try_it">Try It</string>
     <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">All mines were disabled.</string>
     <string name="desc_convered_area">Covered area</string>

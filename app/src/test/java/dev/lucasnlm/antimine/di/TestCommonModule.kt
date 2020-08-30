@@ -30,7 +30,7 @@ val TestCommonModule = module {
 
             override fun getAllThemes(): List<AppTheme> = listOf(LightTheme)
 
-            override fun setTheme(theme: AppTheme) { }
+            override fun setTheme(themeId: Long) { }
 
             override fun reset(): AppTheme = LightTheme
         }

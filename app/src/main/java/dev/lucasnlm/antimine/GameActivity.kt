@@ -574,7 +574,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private fun restartIfNeed(): Boolean {
         return (areaSizeMultiplier != preferencesRepository.areaSizeMultiplier()).also {
             if (it) {
-                recreate()
+                finish()
+                startActivity(intent)
+                overridePendingTransition(0, 0)
             }
         }
     }
@@ -635,7 +637,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun showSupportAppDialog() {
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
-            SupportAppDialogFragment.newInstance(false)
+            SupportAppDialogFragment.newRequestSupportDialog()
                 .show(supportFragmentManager, SupportAppDialogFragment.TAG)
         }
     }

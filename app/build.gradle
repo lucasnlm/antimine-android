@@ -76,6 +76,11 @@ android {
             applicationId 'dev.lucasnlm.antimine'
         }
 
+        googleInstant {
+            dimension 'version'
+            applicationId 'dev.lucasnlm.antimine'
+        }
+
         foss {
             dimension 'version'
             // There's a typo on F-Droid release :(
@@ -96,6 +101,7 @@ dependencies {
     implementation project(':common')
 
     googleImplementation project(':proprietary')
+    googleInstantImplementation project(':proprietary')
     fossImplementation project(':foss')
 
     // AndroidX
@@ -115,7 +121,7 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.2.5'
 
     // Constraint
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
     // Google
     implementation 'com.google.android.material:material:1.2.0'
@@ -142,7 +148,7 @@ dependencies {
     testImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
     testImplementation 'androidx.fragment:fragment-testing:1.2.5'
     testImplementation 'org.robolectric:robolectric:4.3.1'
-    testImplementation 'androidx.test.ext:junit:1.1.1'
+    testImplementation 'androidx.test.ext:junit:1.1.2'
     testImplementation 'io.mockk:mockk:1.10.0'
 
     // Core library

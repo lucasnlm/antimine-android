@@ -34,7 +34,9 @@ open class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity
         super.onResume()
 
         if (usingTheme.id != currentTheme().id) {
-            recreate()
+            finish()
+            startActivity(intent)
+            overridePendingTransition(0, 0)
         }
     }
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="dev.lucasnlm.antimine.instant"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <meta-data android:name="com.google.android.gms.instant.flavor" android:value="1337"/>
+    </application>
+</manifest>
