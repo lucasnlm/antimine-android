@@ -23,7 +23,7 @@ class AdsManager : IAdsManager {
 
     private fun loadRewardedAd(context: Context): RewardedAd {
         return RewardedAd(context, "ca-app-pub-3940256099942544/5224354917").apply {
-            val adLoadCallback = object: RewardedAdLoadCallback() {
+            val adLoadCallback = object : RewardedAdLoadCallback() {
                 override fun onRewardedAdLoaded() {
                     // Loaded
                 }

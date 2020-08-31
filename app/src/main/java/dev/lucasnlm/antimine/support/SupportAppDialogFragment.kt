@@ -30,8 +30,10 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
         billingManager.start(iapHandler)
         analyticsManager.sentEvent(Analytics.ShowIapDialog)
 
-        showUnlockMessage = (arguments?.getBoolean(UNLOCK_LABEL) ?: savedInstanceState?.getBoolean(UNLOCK_LABEL)) ?: false
-        targetThemeId = (arguments?.getLong(TARGET_THEME_ID, -1L)) ?: -1L
+        showUnlockMessage =
+            (arguments?.getBoolean(UNLOCK_LABEL) ?: savedInstanceState?.getBoolean(UNLOCK_LABEL)) ?: false
+        targetThemeId =
+            (arguments?.getLong(TARGET_THEME_ID, -1L)) ?: -1L
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
