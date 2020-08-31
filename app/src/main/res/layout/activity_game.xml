@@ -77,11 +77,10 @@
             ads:drawableTint="?android:attr/textColorPrimary" />
 
         <ImageView
-            android:id="@+id/newGame"
+            android:id="@+id/shortcutIcon"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
             android:background="?selectableItemBackgroundBorderless"
-            android:visibility="gone"
             android:contentDescription="@string/new_game"
             android:padding="14dp"
             ads:layout_constraintRight_toRightOf="parent"
