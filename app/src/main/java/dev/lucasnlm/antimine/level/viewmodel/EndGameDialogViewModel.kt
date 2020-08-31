@@ -50,7 +50,6 @@ class EndGameDialogViewModel(
         R.drawable.emoji_downcast_face_with_sweat,
         R.drawable.emoji_exploding_head,
         R.drawable.emoji_face_with_head_bandage,
-        R.drawable.emoji_face_with_symbols_on_mouth,
         R.drawable.emoji_collision,
         R.drawable.emoji_sad_but_relieved_face,
 
