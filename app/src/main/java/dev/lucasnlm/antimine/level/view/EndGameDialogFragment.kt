@@ -12,8 +12,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogViewModel
+import dev.lucasnlm.external.Ads
+import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IInstantAppManager
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
@@ -22,6 +25,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EndGameDialogFragment : AppCompatDialogFragment() {
     private val instantAppManager: IInstantAppManager by inject()
+    private val adsManager: IAdsManager by inject()
+    private val preferencesRepository: IPreferencesRepository by inject()
 
     private val endGameViewModel by viewModel<EndGameDialogViewModel>()
     private val gameViewModel by sharedViewModel<GameViewModel>()
@@ -76,6 +81,12 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             } else {
                                 setNeutralButton(R.string.retry) { _, _ ->
                                     gameViewModel.retryObserver.postValue(Unit)
+
+                                    activity?.let {
+                                        if (!preferencesRepository.isPremiumEnabled()) {
+                                            adsManager.requestRewarded(it, Ads.RewardsAds)
+                                        }
+                                    }
                                 }
                             }
                         }

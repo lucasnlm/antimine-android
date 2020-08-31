@@ -527,6 +527,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 keepScreenOn(true)
             }
             Event.Victory -> {
+                val isResuming = (status == Status.PreGame)
                 val score = Score(
                     rightMines,
                     totalMines,
@@ -538,10 +539,13 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 gameViewModel.victory()
                 refreshNewGameButton()
                 keepScreenOn(false)
-                waitAndShowEndGameDialog(
-                    victory = true,
-                    await = false
-                )
+
+                if (!isResuming) {
+                    waitAndShowEndGameDialog(
+                        victory = true,
+                        await = false
+                    )
+                }
             }
             Event.GameOver -> {
                 val isResuming = (status == Status.PreGame)
@@ -555,12 +559,14 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 keepScreenOn(false)
                 gameViewModel.stopClock()
 
-                GlobalScope.launch(context = Dispatchers.Main) {
-                    gameViewModel.gameOver(isResuming)
-                    waitAndShowEndGameDialog(
-                        victory = false,
-                        await = true
-                    )
+                if (!isResuming) {
+                    GlobalScope.launch(context = Dispatchers.Main) {
+                        gameViewModel.gameOver(isResuming)
+                        waitAndShowEndGameDialog(
+                            victory = false,
+                            await = true
+                        )
+                    }
                 }
             }
             else -> { }

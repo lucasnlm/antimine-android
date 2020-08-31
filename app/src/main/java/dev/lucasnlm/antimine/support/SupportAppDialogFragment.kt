@@ -9,6 +9,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
+import dev.lucasnlm.external.Ads
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IBillingManager
 import kotlinx.coroutines.launch
@@ -43,7 +44,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
             if (showUnlockMessage) {
                 setNeutralButton(R.string.try_it) { _, _ ->
                     analyticsManager.sentEvent(Analytics.UnlockRewardedDialog)
-                    adsManager.requestRewarded(requireActivity(), "ca-app-pub-3940256099942544/5224354917") {
+                    adsManager.requestRewarded(requireActivity(), Ads.RewardsAds) {
                         if (targetThemeId > 0) {
                             themeRepository.setTheme(targetThemeId)
                             requireActivity().recreate()

@@ -24,13 +24,16 @@ class BillingManager(
     }
 
     private fun handlePurchases(purchases: List<Purchase>) {
-        purchases.firstOrNull {
+        val status: Boolean = purchases.firstOrNull {
             it.sku == BASIC_SUPPORT
-        }?.let {
-            if (it.purchaseState == Purchase.PurchaseState.PURCHASED) {
-                unlockAppListener?.onLockStatusChanged(isFreeUnlock = false, status = true)
+        }.let {
+            when (it?.purchaseState) {
+                Purchase.PurchaseState.PURCHASED, Purchase.PurchaseState.PENDING -> true
+                else -> false
             }
         }
+
+        unlockAppListener?.onLockStatusChanged(isFreeUnlock = false, status = status)
     }
 
     override fun onBillingServiceDisconnected() {
@@ -39,24 +42,28 @@ class BillingManager(
     }
 
     override fun onBillingSetupFinished(billingResult: BillingResult) {
-        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+        val purchasesList: List<Purchase> = if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
             // The BillingClient is ready. You can query purchases here.
 
-            billingClient.queryPurchases(BillingClient.SkuType.INAPP).purchasesList?.let {
-                handlePurchases(it.toList())
+            billingClient.queryPurchases(BillingClient.SkuType.INAPP).purchasesList.let {
+                it?.toList() ?: listOf()
             }
+        } else {
+            listOf()
         }
+
+        handlePurchases(purchasesList)
     }
 
     override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
-        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+        val purchasesList: List<Purchase> = if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
             // The BillingClient is ready. You can query purchases here.
-            purchases?.let {
-                handlePurchases(it.toList())
-            }
+            purchases?.toList() ?: listOf()
         } else {
-            unlockAppListener?.onLockStatusChanged(status = false)
+            listOf()
         }
+
+        handlePurchases(purchasesList)
     }
 
     override fun start(unlockAppListener: UnlockAppListener) {

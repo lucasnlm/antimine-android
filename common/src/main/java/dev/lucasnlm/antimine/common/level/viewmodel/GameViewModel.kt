@@ -141,7 +141,7 @@ class GameViewModel(
         levelSetup.postValue(setup)
         refreshField()
 
-        eventObserver.postValue(Event.StartNewGame)
+        eventObserver.postValue(Event.ResumeGame)
 
         analyticsManager.sentEvent(
             Analytics.RetryGame(

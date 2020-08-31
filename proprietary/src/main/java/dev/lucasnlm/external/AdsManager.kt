@@ -14,6 +14,7 @@ import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 
 class AdsManager : IAdsManager {
     private var unlockTheme: RewardedAd? = null
+    private val rewardedAdId = Ads.RewardsAds
 
     override fun start(context: Context) {
         MobileAds.initialize(context) {
@@ -22,7 +23,7 @@ class AdsManager : IAdsManager {
     }
 
     private fun loadRewardedAd(context: Context): RewardedAd {
-        return RewardedAd(context, "ca-app-pub-3940256099942544/5224354917").apply {
+        return RewardedAd(context, rewardedAdId).apply {
             val adLoadCallback = object : RewardedAdLoadCallback() {
                 override fun onRewardedAdLoaded() {
                     // Loaded
@@ -41,7 +42,7 @@ class AdsManager : IAdsManager {
         return unlockTheme != null
     }
 
-    override fun requestRewarded(activity: Activity, adUnitId: String, onRewarded: () -> Unit) {
+    override fun requestRewarded(activity: Activity, adUnitId: String, onRewarded: (() -> Unit)?) {
         if (isReady()) {
             val context = activity.applicationContext
 
@@ -56,7 +57,7 @@ class AdsManager : IAdsManager {
                     }
 
                     override fun onUserEarnedReward(@NonNull reward: RewardItem) {
-                        onRewarded()
+                        onRewarded?.invoke()
                     }
 
                     override fun onRewardedAdFailedToShow(adError: AdError) {
