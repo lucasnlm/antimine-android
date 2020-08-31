@@ -39,7 +39,6 @@
     <string name="used_software_text">This game uses the following third parties software:</string>
     <string name="translators_text">This game was translated by the following people:</string>
     <string name="sign_in_failed">लोड करने में विफल, कृपया अपना नेटवर्क कनेक्शन जांचें और पुनः प्रयास करें।</string>
-    <string name="quit_confirm">यदि आप कोई नया खेल आरंभ करना चाहते हैं, आपके मौजूदा प्रगति खो जाएँगे.</string>
     <string name="you_won">आप जीत गए!</string>
     <string name="victories">विजय</string>
     <string name="you_lost">तुम हार गए!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">शेअर करने में असफ़ल</string>
     <string name="version_s">संस्करण %1$s</string>
     <string name="sound_effects">ध्वनि प्रभाव</string>
-    <string name="quit">समाप्त करें</string>
     <string name="are_you_sure">क्या आपको यकीन है?</string>
     <string name="enable_automatic_flags">फ्लैग के स्वचालित रखे जाने को सक्रिय क</string>
     <string name="open_areas">Open Areas</string>
@@ -80,7 +78,6 @@
     <string name="translation">अनुवाद</string>
     <string name="licenses">लाइसेंस</string>
     <string name="google_play_games">Google Play Games</string>
-    <string name="install">इंस्टॉल करें</string>
     <string name="connect">कनेक्ट करें</string>
     <string name="connecting">संपर्क बना रहा है...</string>
     <string name="disconnect">संपर्क तोड़ें</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">मेनू बंद करें</string>
     <string name="delete_all">सभी मिटाएँ</string>
     <string name="themes">थीम्स</string>
+    <string name="try_it">Try It</string>
     <string name="delete_all_message">पुष्टि करें</string>
     <string name="all_mines_disabled">All mines were disabled.</string>
     <string name="desc_convered_area">Covered area</string>

@@ -39,7 +39,6 @@
     <string name="used_software_text">Dieses Spiel benutzt folgende Software von Drittanbietern:</string>
     <string name="translators_text">Dieses Spiel wurde von den folgenden Personen übersetzt:</string>
     <string name="sign_in_failed">Login fehlgeschlagen. Überprüfe Deine Netzwerkverbindung und versuche es erneut.</string>
-    <string name="quit_confirm">Du wirst alle Züge im aktuellen Spiel verlieren.\n Doch du kannst auch das Spiel vor der Beendigung installieren.</string>
     <string name="you_won">Du hast gewonnen!</string>
     <string name="victories">Siege</string>
     <string name="you_lost">Du hast verloren!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">Fehler beim Teilen</string>
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Toneffekte</string>
-    <string name="quit">Beenden</string>
     <string name="are_you_sure">Bist du sicher?</string>
     <string name="enable_automatic_flags">Automatische Markierungen aktivieren</string>
     <string name="open_areas">Offene Flächen</string>
@@ -80,7 +78,6 @@
     <string name="translation">Übersetzung</string>
     <string name="licenses">Lizenzen</string>
     <string name="google_play_games">Google Play Games</string>
-    <string name="install">Installieren</string>
     <string name="connect">Verbinden</string>
     <string name="connecting">Verbindung wird hergestellt…</string>
     <string name="disconnect">Trennen</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">Menü schließen</string>
     <string name="delete_all">Alles löschen</string>
     <string name="themes">Themen</string>
+    <string name="try_it">Ausprobieren</string>
     <string name="delete_all_message">Alle Ereignisse dauerhaft löschen.</string>
     <string name="all_mines_disabled">Alle Minen wurden wirkungslos gemacht.</string>
     <string name="desc_convered_area">Abgedeckte Fläche</string>

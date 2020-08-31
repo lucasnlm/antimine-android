@@ -39,7 +39,6 @@
     <string name="used_software_text">Ta gra wykorzystuje następujące oprogramowanie stron trzecich:</string>
     <string name="translators_text">Ta gra została przetłumaczona przez następujące osoby:</string>
     <string name="sign_in_failed">Błąd logowania. Sprawdź swoje połączenie internetowe i spróbuj ponownie.</string>
-    <string name="quit_confirm">Utracisz cały postęp w bieżącej rozgrywce.\nMożesz również zainstalować grę przed wyjściem.</string>
     <string name="you_won">Udało się!</string>
     <string name="victories">Zwycięstwa</string>
     <string name="you_lost">Nie udało się!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">Nie udało się udostępnić</string>
     <string name="version_s">Wersja %1$s</string>
     <string name="sound_effects">Efekty dźwiękowe</string>
-    <string name="quit">Wyjdź</string>
     <string name="are_you_sure">Na pewno?</string>
     <string name="enable_automatic_flags">Włącz automatyczne umieszczanie flag</string>
     <string name="open_areas">Odkryte pola</string>
@@ -80,7 +78,6 @@
     <string name="translation">Tłumaczenie</string>
     <string name="licenses">Licencje</string>
     <string name="google_play_games">Gry Google Play</string>
-    <string name="install">Zainstaluj</string>
     <string name="connect">Połącz</string>
     <string name="connecting">Łączenie…</string>
     <string name="disconnect">Rozłącz</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">Zamknij menu</string>
     <string name="delete_all">Usuń wszystkie</string>
     <string name="themes">Motywy</string>
+    <string name="try_it">Spróbuj</string>
     <string name="delete_all_message">Usuń wszystkie zdarzenia na stałe.</string>
     <string name="all_mines_disabled">Wszystkie miny zostały rozbrojone.</string>
     <string name="desc_convered_area">Nieodkryte pole</string>

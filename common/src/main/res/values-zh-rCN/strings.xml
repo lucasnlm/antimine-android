@@ -39,7 +39,6 @@
     <string name="used_software_text">该游戏使用以下第三方软件：</string>
     <string name="translators_text">这场游戏被以下人员翻译：</string>
     <string name="sign_in_failed">登录失败。请检查你的网络连接，然后重试。</string>
-    <string name="quit_confirm">您将失去当前游戏中的所有进度，但也可以在退出之前安装游戏。</string>
     <string name="you_won">你获胜了！</string>
     <string name="victories">胜利</string>
     <string name="you_lost">你输了！</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">分享失败</string>
     <string name="version_s">版本 %1$s</string>
     <string name="sound_effects">音效</string>
-    <string name="quit">退出</string>
     <string name="are_you_sure">你确定吗？</string>
     <string name="enable_automatic_flags">启用旗标自动放置</string>
     <string name="open_areas">开放区域</string>
@@ -80,7 +78,6 @@
     <string name="translation">翻译</string>
     <string name="licenses">许可证</string>
     <string name="google_play_games">Google Play 游戏</string>
-    <string name="install">安装</string>
     <string name="connect">连接</string>
     <string name="connecting">正在连接…</string>
     <string name="disconnect">断开</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">关闭菜单</string>
     <string name="delete_all">全部删除</string>
     <string name="themes">主题</string>
+    <string name="try_it">试一下</string>
     <string name="delete_all_message">永久删除全部事件</string>
     <string name="all_mines_disabled">所有地雷都已失效。</string>
     <string name="desc_convered_area">覆盖面积</string>

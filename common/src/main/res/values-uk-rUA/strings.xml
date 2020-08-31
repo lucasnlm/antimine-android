@@ -39,7 +39,6 @@
     <string name="used_software_text">Ця гра використовує наступне стороннє програмне забезпечення:</string>
     <string name="translators_text">Цю гру переклали такі люди:</string>
     <string name="sign_in_failed">Не вдається увійти. Перевірте підключення до Інтернету і повторіть спробу.</string>
-    <string name="quit_confirm">Ви втратите всі ходи на поточну гру.\nАле ви також можете встановити гру перед виходом.</string>
     <string name="you_won">Ви перемогли!</string>
     <string name="victories">Перемог</string>
     <string name="you_lost">Програш!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">Не вдалося поділитись</string>
     <string name="version_s">Версія: %1$s</string>
     <string name="sound_effects">Звукові ефекти</string>
-    <string name="quit">Вийти</string>
     <string name="are_you_sure">Ви впевнені?</string>
     <string name="enable_automatic_flags">Увімкнути автоматичне розміщення прапорців</string>
     <string name="open_areas">Відкриті області</string>
@@ -80,7 +78,6 @@
     <string name="translation">Переклад</string>
     <string name="licenses">Ліцензії</string>
     <string name="google_play_games">Google Play Games</string>
-    <string name="install">Встановити</string>
     <string name="connect">Під’єднатись</string>
     <string name="connecting">Підключення…</string>
     <string name="disconnect">Відключитись</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">Закрити меню</string>
     <string name="delete_all">Видалити все</string>
     <string name="themes">Тема</string>
+    <string name="try_it">Спробувати</string>
     <string name="delete_all_message">Видалити всі події назавжди.</string>
     <string name="all_mines_disabled">Всі міни були вимкнуті.</string>
     <string name="desc_convered_area">Прихована зона</string>

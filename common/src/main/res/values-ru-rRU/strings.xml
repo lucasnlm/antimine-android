@@ -39,7 +39,6 @@
     <string name="used_software_text">Эта игра использует следующее программное обеспечение от третьих лиц:</string>
     <string name="translators_text">Эта игра была переведена следующими людьми:</string>
     <string name="sign_in_failed">Подключение невозможно. Проверьте интернет-подключение и повторите попытку.</string>
-    <string name="quit_confirm">Все ходы будут потеряны в текущей игре.\nНо вы также можете установить игру перед выходом.</string>
     <string name="you_won">Вы победили!</string>
     <string name="victories">Победы</string>
     <string name="you_lost">Вы проиграли!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">Не удалось поделиться</string>
     <string name="version_s">Версия %1$s</string>
     <string name="sound_effects">Звуковые эффекты</string>
-    <string name="quit">Выход</string>
     <string name="are_you_sure">Вы уверены?</string>
     <string name="enable_automatic_flags">Включить авторазмещение флагов</string>
     <string name="open_areas">Открытые зоны</string>
@@ -80,7 +78,6 @@
     <string name="translation">Перевод</string>
     <string name="licenses">Лицензии</string>
     <string name="google_play_games">Google Play Games</string>
-    <string name="install">Установить</string>
     <string name="connect">Подключиться</string>
     <string name="connecting">Подключение…</string>
     <string name="disconnect">Отключиться</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">Закрыть меню</string>
     <string name="delete_all">Удалить все</string>
     <string name="themes">Темы</string>
+    <string name="try_it">Попробуйте It</string>
     <string name="delete_all_message">Удалить все события навсегда.</string>
     <string name="all_mines_disabled">Все мины обезврежены.</string>
     <string name="desc_convered_area">Покрытая область</string>
