@@ -45,7 +45,9 @@ dependencies {
     // Dependencies must be hardcoded to support F-droid
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':external')
     implementation project(':common')
+    implementation project(':foss')
 
     // Constraint
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -62,6 +64,7 @@ dependencies {
 
     // Koin
     implementation 'org.koin:koin-android:2.1.6'
+    implementation 'org.koin:koin-androidx-viewmodel:2.1.6'
     testImplementation 'org.koin:koin-test:2.1.6'
 
     // Kotlin

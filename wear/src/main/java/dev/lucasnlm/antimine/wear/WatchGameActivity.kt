@@ -24,10 +24,11 @@ import kotlinx.android.synthetic.main.activity_level.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WatchGameActivity : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider {
 
-    private val viewModel by viewModels<GameViewModel>()
+    private val viewModel by viewModel<GameViewModel>()
 
     private val ambientController: AmbientModeSupport.AmbientController by lazy {
         AmbientModeSupport.attach(this)
