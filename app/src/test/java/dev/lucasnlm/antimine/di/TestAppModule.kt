@@ -19,13 +19,6 @@ val AppModule = module {
     single {
         object : IInstantAppManager {
             override fun isEnabled(context: Context): Boolean = false
-
-            override fun showInstallPrompt(
-                activity: Activity,
-                intent: Intent?,
-                requestCode: Int,
-                referrer: String?
-            ): Boolean = false
         }
     } bind IInstantAppManager::class
 
