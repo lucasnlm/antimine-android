@@ -1,9 +1,7 @@
 package dev.lucasnlm.antimine
 
-import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
@@ -43,6 +41,7 @@ import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.ThemeActivity
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_game.minesCount
 import kotlinx.android.synthetic.main.activity_game.timer
@@ -66,6 +65,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private val playGamesManager: IPlayGamesManager by inject()
 
     private val shareViewModel: ShareManager by inject()
+
+    private val reviewWrapper: ReviewWrapper by inject()
 
     val gameViewModel by viewModel<GameViewModel>()
 
@@ -326,7 +327,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 R.id.control -> showControlDialog()
                 R.id.about -> showAbout()
                 R.id.settings -> showSettings()
-                R.id.rate -> openRateUsLink("Drawer")
+                R.id.rate -> openRateUsLink()
                 R.id.themes -> openThemes()
                 R.id.share_now -> shareCurrentGame()
                 R.id.previous_games -> openSaveHistory()
@@ -365,7 +366,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 showSupportAppDialog()
             } else if (current >= MIN_USAGES_TO_RATING && shouldRequestRating) {
                 analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
-                showRequestRating()
+                reviewWrapper.startInAppReview(this)
             }
 
             preferencesRepository.incrementUseCount()
@@ -404,22 +405,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 commitAllowingStateLoss()
             }
-        }
-    }
-
-    private fun showRequestRating() {
-        if (getString(R.string.rating_message).isNotEmpty()) {
-
-            AlertDialog.Builder(this)
-                .setTitle(R.string.rating)
-                .setMessage(R.string.rating_message)
-                .setPositiveButton(R.string.yes) { _, _ ->
-                    openRateUsLink("Dialog")
-                }
-                .setNegativeButton(R.string.rating_button_no) { _, _ ->
-                    preferencesRepository.disableRequestRating()
-                }
-                .show()
         }
     }
 
@@ -631,19 +616,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         instantAppManager.showInstallPrompt(this@GameActivity, null, IA_REQUEST_CODE, IA_REFERRER)
     }
 
-    private fun openRateUsLink(from: String) {
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
-        } catch (e: ActivityNotFoundException) {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
-                )
-            )
-        }
-
-        analyticsManager.sentEvent(Analytics.TapRatingRequest(from))
+    private fun openRateUsLink() {
+        reviewWrapper.startReviewPage(this, BuildConfig.VERSION_NAME)
+        analyticsManager.sentEvent(Analytics.TapRatingRequest)
         preferencesRepository.disableRequestRating()
     }
 

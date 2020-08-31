@@ -1,5 +1,6 @@
 # Antimine - Minesweeper
 ![Android CI](https://github.com/lucasnlm/antimine-android/workflows/Android%20CI/badge.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![GitHub release](https://img.shields.io/github/release/lucasnlm/antimine-android.svg?maxAge=60)](https://github.com/lucasnlm/antimine-android/releases) [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/) [![crowdin](https://badges.crowdin.net/antimine-android/localized.svg)](https://crowdin.com/project/antimine-android) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flucasnlm%2Fantimine-android.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Flucasnlm%2Fantimine-android?ref=badge_shield) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=lucasnunesk%40gmail.com&currency_code=BRL&source=url)
+[![BTC](https://img.shields.io/badge/crypto-donate-yellow.svg)](https://live.blockcypher.com/btc/address/1CG9cyRHkVMW3onjDmXVNzDawnX1ydSWiM)
 
 ### Description
 
@@ -44,16 +45,18 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 ## Features
 
 - No guessing algorithm
-- Game levels: begginner, intermediate, expert and custom
-- Game statistics
+- Multiple Themes (including AMOLED)
+- System Theme: Dark or Light
+- Game Levels: Begginner, Intermediate, Expert, and Custom
+- Game Statistics
 - Android Wear OS support
-- Dark and custom themes support
-- Save/Resume state when quit/resume game
+- Save/Resume state when Quit/Resume game
 - Resume previous games
 - Retry failed games
-- Put flag on long press or double click
-- Put question mark on double long press
-- Open multiple areas by long pressing the numbers
+- 4 different control styles
+- Custom long press duration
+- Optional Question mark
+- Open multiple areas by pressing numbers
 - Game assistant to auto-flag discovered mines
 - Share game
 - App shortcuts
@@ -66,7 +69,8 @@ Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
 - [Android SDK 30](https://developer.android.com/about/versions/11)
 - [AndroidX](https://developer.android.com/jetpack/androidx)
 - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
-- [Koin Kotlin](https://github.com/InsertKoinIO/koin)
+- [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
+- [Koin](https://github.com/InsertKoinIO/koin)
 - [Room](https://developer.android.com/training/data-storage/room)
 - [Robolectric](http://robolectric.org/)
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
