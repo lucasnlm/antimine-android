@@ -50,7 +50,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
             launch {
                 themeViewModel.observeEvent().collect {
                     if (it is ThemeEvent.Unlock) {
-                        showUnlockDialog()
+                        showUnlockDialog(it.themeId)
                     }
                 }
             }
@@ -58,7 +58,9 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
             launch {
                 themeViewModel.observeState().collect {
                     if (usingTheme.id != it.current.id) {
-                        recreate()
+                        finish()
+                        startActivity(intent)
+                        overridePendingTransition(0, 0)
                     }
                 }
             }
@@ -81,9 +83,9 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
         }
     }
 
-    private fun showUnlockDialog() {
+    private fun showUnlockDialog(themeId: Long) {
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
-            SupportAppDialogFragment.newInstance(true).apply {
+            SupportAppDialogFragment.newChangeThemeDialog(themeId).apply {
                 show(supportFragmentManager, SupportAppDialogFragment.TAG)
             }
         }

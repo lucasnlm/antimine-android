@@ -39,7 +39,6 @@
     <string name="used_software_text">Dette spillet bruker følgende tredjeparter programvare:</string>
     <string name="translators_text">Dette spillet ble oversatt av følgende personer:</string>
     <string name="sign_in_failed">Feilet med å logge på. Vennligst sjekk nettverkstilkoblingen din og prøv igjen.</string>
-    <string name="quit_confirm">Du skal miste alle trekkene dine i nåværende spillet. \nMen du kan installere spillet før du avslutter.</string>
     <string name="you_won">Du vant!</string>
     <string name="victories">Seire</string>
     <string name="you_lost">Du tapte!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">Feilet med å dele</string>
     <string name="version_s">Versjon %1$s</string>
     <string name="sound_effects">Lydeffekter</string>
-    <string name="quit">Avslutt</string>
     <string name="are_you_sure">Er du sikker?</string>
     <string name="enable_automatic_flags">Aktiver automatisk plassering av flagg</string>
     <string name="open_areas">Åpne områder</string>
@@ -80,7 +78,6 @@
     <string name="translation">Oversettelse</string>
     <string name="licenses">Lisenser</string>
     <string name="google_play_games">Google Play Spill</string>
-    <string name="install">Installer</string>
     <string name="connect">Koble til</string>
     <string name="connecting">Kobler til…</string>
     <string name="disconnect">Koble fra</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">Lukk Menyen</string>
     <string name="delete_all">Slett alle</string>
     <string name="themes">Temaer</string>
+    <string name="try_it">Prøv det</string>
     <string name="delete_all_message">Slett alle hendelser permanent.</string>
     <string name="all_mines_disabled">Alle miner ble deaktivert.</string>
     <string name="desc_convered_area">Dekket område</string>

@@ -39,7 +39,6 @@
     <string name="used_software_text">Tämä peli käyttää seuraavien kolmansien osapuolten ohjelmistoa:</string>
     <string name="translators_text">Tämän pelin ovat kääntäneet seuraavat henkilöt:</string>
     <string name="sign_in_failed">Virhe kirjautuessa sisään. Tarkista verkkoyhteytesi ja yritä uudelleen.</string>
-    <string name="quit_confirm">Menetät kaikki siirtosi nykyisessä pelissäsi.\nMutta voit asentaa pelin ennen kuin lähdet.</string>
     <string name="you_won">Sinä voitit!</string>
     <string name="victories">Voittoja</string>
     <string name="you_lost">Hävisit!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">Jakaminen epäonnistui</string>
     <string name="version_s">Versio %1$s</string>
     <string name="sound_effects">Äänitehosteet</string>
-    <string name="quit">Lopeta</string>
     <string name="are_you_sure">Oletko varma?</string>
     <string name="enable_automatic_flags">Kytke lippujen automaattinen asettaminen päälle</string>
     <string name="open_areas">Avaa alueita</string>
@@ -80,7 +78,6 @@
     <string name="translation">Käännökset</string>
     <string name="licenses">Lisenssit</string>
     <string name="google_play_games">Google Play Pelit</string>
-    <string name="install">Asenna</string>
     <string name="connect">Yhdistä</string>
     <string name="connecting">Yhdistetään…</string>
     <string name="disconnect">Katkaise yhteys</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">Sulje valikko</string>
     <string name="delete_all">Poista kaikki</string>
     <string name="themes">Teemat</string>
+    <string name="try_it">Kokeile Sitä</string>
     <string name="delete_all_message">Poistetaanko kaikki tapahtumat pysyvästi.</string>
     <string name="all_mines_disabled">Kaikki miinat poistettiin käytöstä.</string>
     <string name="desc_convered_area">Peitetty alue</string>

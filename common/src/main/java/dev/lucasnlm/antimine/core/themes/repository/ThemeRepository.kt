@@ -12,7 +12,7 @@ interface IThemeRepository {
     fun getCustomTheme(): AppTheme?
     fun getTheme(): AppTheme
     fun getAllThemes(): List<AppTheme>
-    fun setTheme(theme: AppTheme)
+    fun setTheme(themeId: Long)
     fun reset(): AppTheme
 }
 
@@ -31,8 +31,8 @@ class ThemeRepository(
     override fun getAllThemes(): List<AppTheme> =
         listOf(buildSystemTheme()) + Themes.getAllCustom()
 
-    override fun setTheme(theme: AppTheme) {
-        preferenceRepository.useTheme(theme.id)
+    override fun setTheme(themeId: Long) {
+        preferenceRepository.useTheme(themeId)
     }
 
     override fun reset(): AppTheme {

@@ -79,18 +79,6 @@
             android:title="@string/google_play_games" />
     </group>
 
-    <group
-        android:id="@+id/install_group"
-        android:visible="false"
-        tools:visible="true">
-
-        <item
-            android:id="@+id/install_new"
-            android:checkable="false"
-            android:icon="@drawable/install"
-            android:title="@string/install" />
-    </group>
-
     <group android:id="@+id/other_group">
         <item
             android:id="@+id/share_now"

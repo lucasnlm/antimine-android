@@ -39,7 +39,6 @@
     <string name="used_software_text">This game uses the following third parties software:</string>
     <string name="translators_text">This game was translated by the following people:</string>
     <string name="sign_in_failed">Nu se poate conecta. Te rugăm să îți verifici conexiunea la rețea și să încerci din nou.</string>
-    <string name="quit_confirm">You\'ll lose all moves on current game.\nBut you can also install the game before quit.</string>
     <string name="you_won">You won!</string>
     <string name="victories">Victories</string>
     <string name="you_lost">You lost!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">Failed to share</string>
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Sound Effects</string>
-    <string name="quit">Quit</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="enable_automatic_flags">Enable automatic placing of flags</string>
     <string name="open_areas">Open Areas</string>
@@ -80,7 +78,6 @@
     <string name="translation">Translation</string>
     <string name="licenses">Licenţe</string>
     <string name="google_play_games">Jocurile Google Play</string>
-    <string name="install">Instalează</string>
     <string name="connect">Conectează-te</string>
     <string name="connecting">Se conectează…</string>
     <string name="disconnect">Deconectează</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">Închide meniul</string>
     <string name="delete_all">Delete all</string>
     <string name="themes">Themes</string>
+    <string name="try_it">Try It</string>
     <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">Toate minele au fost dezactivate.</string>
     <string name="desc_convered_area">Covered area</string>

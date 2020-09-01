@@ -20,7 +20,7 @@ class ThemeViewModel(
     private val analyticsManager: IAnalyticsManager,
 ) : IntentViewModel<ThemeEvent, ThemeState>() {
     private fun setTheme(theme: AppTheme) {
-        themeRepository.setTheme(theme)
+        themeRepository.setTheme(theme.id)
     }
 
     override fun observeEvent(): Flow<ThemeEvent> {
@@ -35,7 +35,7 @@ class ThemeViewModel(
                     billingManager.isEnabled() &&
                     !preferencesRepository.isPremiumEnabled()
                 ) {
-                    ThemeEvent.Unlock
+                    ThemeEvent.Unlock(it.newTheme.id)
                 } else {
                     it
                 }

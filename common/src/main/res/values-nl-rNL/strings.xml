@@ -39,7 +39,6 @@
     <string name="used_software_text">Dit spel gebruikt de volgende software van derden:</string>
     <string name="translators_text">Dit spel is vertaald door de volgende mensen:</string>
     <string name="sign_in_failed">Aanmelden mislukt. Controleer uw netwerkverbinding en probeer het opnieuw.</string>
-    <string name="quit_confirm">Je zult alle zetten verliezen in het huidige spel.\nMaar je kunt het spel ook installeren voordat je afsluit.</string>
     <string name="you_won">Je hebt gewonnen!</string>
     <string name="victories">Overwinningen</string>
     <string name="you_lost">Je hebt verloren!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">Delen mislukt</string>
     <string name="version_s">Versie %1$s</string>
     <string name="sound_effects">Geluids Effecten</string>
-    <string name="quit">Stoppen</string>
     <string name="are_you_sure">Weet je het zeker?</string>
     <string name="enable_automatic_flags">Schakel automatisch plaatsen van vlaggen in</string>
     <string name="open_areas">Open gebieden</string>
@@ -80,7 +78,6 @@
     <string name="translation">Vertaling</string>
     <string name="licenses">Licenties</string>
     <string name="google_play_games">Google Play Games</string>
-    <string name="install">Installeren</string>
     <string name="connect">Verbinden</string>
     <string name="connecting">Verbinden…</string>
     <string name="disconnect">Verbinding verbreken</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">Menu sluiten</string>
     <string name="delete_all">Alles verwijderen</string>
     <string name="themes">Themas</string>
+    <string name="try_it">Probeer het</string>
     <string name="delete_all_message">Verwijder alle gebeurtenissen permanent.</string>
     <string name="all_mines_disabled">Alle mijnen waren uitgeschakeld.</string>
     <string name="desc_convered_area">Gedekt gebied</string>

@@ -6,8 +6,10 @@ import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.ProdAnalyticsManager
 import dev.lucasnlm.antimine.share.ShareManager
+import dev.lucasnlm.external.AdsManager
 import dev.lucasnlm.external.BillingManager
 import dev.lucasnlm.external.ExternalAnalyticsWrapper
+import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
@@ -22,6 +24,8 @@ val AppModule = module {
     single { InstantAppManager() } bind IInstantAppManager::class
 
     single { BillingManager(get()) } bind IBillingManager::class
+
+    single { AdsManager() } bind IAdsManager::class
 
     single { PlayGamesManager(get()) } bind IPlayGamesManager::class
 

@@ -39,7 +39,6 @@
     <string name="used_software_text">Game ini menggunakan software pihak ketiga berikut:</string>
     <string name="translators_text">Game ini diterjemahkan oleh orang-orang berikut:</string>
     <string name="sign_in_failed">Tidak dapat tersambung. Silakan periksa koneksi jaringan anda dan coba lagi.</string>
-    <string name="quit_confirm"> Kemajuan Anda kini akan hilang.</string>
     <string name="you_won">Anda menang!</string>
     <string name="victories">Kemenangan</string>
     <string name="you_lost">Anda Kalah!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">Gagal berbagi</string>
     <string name="version_s">Versi %1$s</string>
     <string name="sound_effects">Efek suara</string>
-    <string name="quit">Keluar</string>
     <string name="are_you_sure">Anda yakin?</string>
     <string name="enable_automatic_flags">Aktifkan penempatan bendera otomatis</string>
     <string name="open_areas">Buka</string>
@@ -80,7 +78,6 @@
     <string name="translation">Alih Bahasa</string>
     <string name="licenses">Licenses</string>
     <string name="google_play_games">Google Play Games</string>
-    <string name="install">Pasang</string>
     <string name="connect">Menyambungkan</string>
     <string name="connecting">Menghubungkan…</string>
     <string name="disconnect">Terputus</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">Tutup Menu</string>
     <string name="delete_all">Hapus semua</string>
     <string name="themes">Tema</string>
+    <string name="try_it">Cobalah</string>
     <string name="delete_all_message">Hapus permanen semua kejadian.</string>
     <string name="all_mines_disabled">Semua ranjau dimatikan.</string>
     <string name="desc_convered_area">Area tertutupi</string>

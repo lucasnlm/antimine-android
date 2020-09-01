@@ -39,7 +39,6 @@
     <string name="used_software_text">Trò chơi này sử dụng các phần mềm bên thứ ba sau:</string>
     <string name="translators_text">Trò chơi này đã được dịch bởi những người này:</string>
     <string name="sign_in_failed">Không đăng nhập được. Hãy kiểm tra lại kết nối mạng và thử lại.</string>
-    <string name="quit_confirm">Trò chơi bạn đang chơi sẽ bị mất.\nNhưng bạn có thể cài đặt trò chơi trước khi thoát.</string>
     <string name="you_won">Thắng rồi!</string>
     <string name="victories">Đã thắng</string>
     <string name="you_lost">Thua rồi!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">Chia sẻ thất bại</string>
     <string name="version_s">Phiên bản %1$s</string>
     <string name="sound_effects">Hiệu ứng âm thanh</string>
-    <string name="quit">Thoát</string>
     <string name="are_you_sure">Bạn chắc chứ?</string>
     <string name="enable_automatic_flags">Bật tự động để cờ</string>
     <string name="open_areas">Khu vực mở</string>
@@ -80,7 +78,6 @@
     <string name="translation">Dịch thuật</string>
     <string name="licenses">Giấy phép</string>
     <string name="google_play_games">Google Play Trò chơi</string>
-    <string name="install">Cài đặt</string>
     <string name="connect">Kết nối</string>
     <string name="connecting">Đang kết nối…</string>
     <string name="disconnect">Ngừng kết nối</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">Đóng menu</string>
     <string name="delete_all">Xóa tất cả</string>
     <string name="themes">Chủ đề</string>
+    <string name="try_it">Hãy dùng thử</string>
     <string name="delete_all_message">Xóa tất cả các sự kiện vĩnh viễn.</string>
     <string name="all_mines_disabled">Đã phá hết mìn.</string>
     <string name="desc_convered_area">Ô đã mở</string>

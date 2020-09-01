@@ -180,9 +180,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 drawer.closeDrawer(GravityCompat.START)
                 gameViewModel.resumeGame()
             }
-            status == Status.Running && instantAppManager.isEnabled(applicationContext) -> showQuitConfirmation {
-                super.onBackPressed()
-            }
             else -> super.onBackPressed()
         }
     }
@@ -234,35 +231,51 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         )
     }
 
-    private fun refreshNewGameButton() {
-        newGame.apply {
-            TooltipCompat.setTooltipText(this, getString(R.string.new_game))
-            setColorFilter(minesCount.currentTextColor)
-            setOnClickListener {
-                lifecycleScope.launch {
-                    val confirmResign = status == Status.Running
-                    analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
+    private fun refreshShortcutIcon(isEndGame: Boolean = false) {
+        if (isEndGame || instantAppManager.isEnabled(this)) {
+            shortcutIcon.apply {
+                TooltipCompat.setTooltipText(this, getString(R.string.new_game))
+                setImageResource(R.drawable.retry)
+                setColorFilter(minesCount.currentTextColor)
+                setOnClickListener {
+                    lifecycleScope.launch {
+                        val confirmResign = status == Status.Running
+                        analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
 
-                    if (confirmResign) {
-                        newGameConfirmation {
+                        if (confirmResign) {
+                            newGameConfirmation {
+                                GlobalScope.launch {
+                                    gameViewModel.startNewGame()
+                                }
+                            }
+                        } else {
                             GlobalScope.launch {
                                 gameViewModel.startNewGame()
                             }
                         }
-                    } else {
-                        GlobalScope.launch {
-                            gameViewModel.startNewGame()
-                        }
                     }
                 }
             }
+        } else {
+            shortcutIcon.apply {
+                TooltipCompat.setTooltipText(this, getString(R.string.share))
+                setImageResource(R.drawable.share)
+                setColorFilter(minesCount.currentTextColor)
+                setOnClickListener {
+                    shareCurrentGame()
+                }
+            }
+        }
 
-            visibility = when (status) {
+        shortcutIcon.apply {
+            when (status) {
                 is Status.Over, is Status.Running -> {
-                    View.VISIBLE
+                    isClickable = true
+                    animate().alpha(1.0f).start()
                 }
                 else -> {
-                    View.GONE
+                    isClickable = false
+                    animate().alpha(0.3f).start()
                 }
             }
         }
@@ -332,7 +345,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 R.id.share_now -> shareCurrentGame()
                 R.id.previous_games -> openSaveHistory()
                 R.id.stats -> openStats()
-                R.id.install_new -> installFromInstantApp()
                 R.id.play_games -> googlePlay()
                 else -> handled = false
             }
@@ -354,7 +366,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private fun onOpenAppActions() {
         if (instantAppManager.isEnabled(applicationContext)) {
             // Instant App does nothing.
-            bindInstantApp()
             savesRepository.setLimit(1)
         } else {
             val current = preferencesRepository.getUseCount()
@@ -416,15 +427,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             setNegativeButton(R.string.cancel, null)
             show()
         }
-    }
-
-    private fun showQuitConfirmation(action: () -> Unit) {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.are_you_sure)
-            .setMessage(R.string.quit_confirm)
-            .setPositiveButton(R.string.quit) { _, _ -> action() }
-            .setNeutralButton(R.string.install) { _, _ -> installFromInstantApp() }
-            .show()
     }
 
     private fun showCustomLevelDialog() {
@@ -528,19 +530,20 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         when (event) {
             Event.ResumeGame -> {
                 status = Status.Running
-                refreshNewGameButton()
+                refreshShortcutIcon()
             }
             Event.StartNewGame -> {
                 status = Status.PreGame
-                refreshNewGameButton()
+                refreshShortcutIcon()
             }
             Event.Resume, Event.Running -> {
                 status = Status.Running
                 gameViewModel.runClock()
-                refreshNewGameButton()
+                refreshShortcutIcon()
                 keepScreenOn(true)
             }
             Event.Victory -> {
+                val isResuming = (status == Status.PreGame)
                 val score = Score(
                     rightMines,
                     totalMines,
@@ -550,12 +553,15 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 gameViewModel.stopClock()
                 gameViewModel.revealAllEmptyAreas()
                 gameViewModel.victory()
-                refreshNewGameButton()
+                refreshShortcutIcon(true)
                 keepScreenOn(false)
-                waitAndShowEndGameDialog(
-                    victory = true,
-                    await = false
-                )
+
+                if (!isResuming) {
+                    waitAndShowEndGameDialog(
+                        victory = true,
+                        await = false
+                    )
+                }
             }
             Event.GameOver -> {
                 val isResuming = (status == Status.PreGame)
@@ -565,16 +571,18 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     totalArea
                 )
                 status = Status.Over(currentTime, score)
-                refreshNewGameButton()
+                refreshShortcutIcon(true)
                 keepScreenOn(false)
                 gameViewModel.stopClock()
 
-                GlobalScope.launch(context = Dispatchers.Main) {
-                    gameViewModel.gameOver(isResuming)
-                    waitAndShowEndGameDialog(
-                        victory = false,
-                        await = true
-                    )
+                if (!isResuming) {
+                    GlobalScope.launch(context = Dispatchers.Main) {
+                        gameViewModel.gameOver(isResuming)
+                        waitAndShowEndGameDialog(
+                            victory = false,
+                            await = true
+                        )
+                    }
                 }
             }
             else -> { }
@@ -588,7 +596,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private fun restartIfNeed(): Boolean {
         return (areaSizeMultiplier != preferencesRepository.areaSizeMultiplier()).also {
             if (it) {
-                recreate()
+                finish()
+                startActivity(intent)
+                overridePendingTransition(0, 0)
             }
         }
     }
@@ -599,21 +609,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         lifecycleScope.launch {
             shareViewModel.shareField(levelSetup, field)
         }
-    }
-
-    private fun bindInstantApp() {
-        findViewById<View>(R.id.install).apply {
-            visibility = View.VISIBLE
-            setOnClickListener {
-                installFromInstantApp()
-            }
-        }
-
-        navigationView.menu.setGroupVisible(R.id.install_group, true)
-    }
-
-    private fun installFromInstantApp() {
-        instantAppManager.showInstallPrompt(this@GameActivity, null, IA_REQUEST_CODE, IA_REFERRER)
     }
 
     private fun openRateUsLink() {
@@ -664,7 +659,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun showSupportAppDialog() {
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
-            SupportAppDialogFragment.newInstance(false)
+            SupportAppDialogFragment.newRequestSupportDialog()
                 .show(supportFragmentManager, SupportAppDialogFragment.TAG)
         }
     }
@@ -679,8 +674,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     companion object {
-        const val IA_REFERRER = "InstallApiActivity"
-        const val IA_REQUEST_CODE = 5
         const val GOOGLE_PLAY_REQUEST_CODE = 6
 
         const val MIN_USAGES_TO_IAP = 5

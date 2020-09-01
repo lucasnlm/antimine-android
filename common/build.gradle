@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 800061
-        versionName '8.0.6'
+        versionCode 800081
+        versionName '8.0.8'
         minSdkVersion 21
         targetSdkVersion 30
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -46,7 +46,7 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.2.5"
 
     // Constraint
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
     // Lifecycle
     api 'android.arch.lifecycle:extensions:1.1.1'

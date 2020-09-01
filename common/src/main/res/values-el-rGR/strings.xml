@@ -39,7 +39,6 @@
     <string name="used_software_text">Αυτό το παιχνίδι χρησιμοποιεί το ακόλουθο λογισμικό τρίτων:</string>
     <string name="translators_text">Αυτό το παιχνίδι μεταφράστηκε από τα ακόλουθα άτομα:</string>
     <string name="sign_in_failed">Αποτυχία σύνδεσης. Ελέγξτε τη σύνδεση δικτύου σας και δοκιμάστε ξανά.</string>
-    <string name="quit_confirm">Θα χάσετε όλες τις κινήσεις στο τρέχον παιχνίδι.\nΑλλά μπορείτε επίσης να εγκαταστήσετε το παιχνίδι πριν το κλείσετε.</string>
     <string name="you_won">Κέρδισες!</string>
     <string name="victories">Νίκες</string>
     <string name="you_lost">Έχασες!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">Αποτυχία κοινοποίησης</string>
     <string name="version_s">Έκδοση %1$s</string>
     <string name="sound_effects">Ηχητικά εφέ</string>
-    <string name="quit">Έξοδος</string>
     <string name="are_you_sure">Είσαι σίγουρος;</string>
     <string name="enable_automatic_flags">Ενεργοποίηση αυτόματης τοποθέτησης σημαιών</string>
     <string name="open_areas">Ανοιχτές περιοχές</string>
@@ -80,7 +78,6 @@
     <string name="translation">Μετάφραση</string>
     <string name="licenses">Άδειες</string>
     <string name="google_play_games">Google Play Games</string>
-    <string name="install">Εγκατάσταση</string>
     <string name="connect">Σύνδεση</string>
     <string name="connecting">Σύνδεση…</string>
     <string name="disconnect">Αποσύνδεση</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">Κλείσιμο Μενού</string>
     <string name="delete_all">Διαγραφή όλων</string>
     <string name="themes">Θέμα</string>
+    <string name="try_it">Δοκιμάστε το</string>
     <string name="delete_all_message">Μόνιμη διαγραφή επιλεγμένων.</string>
     <string name="all_mines_disabled">Όλες οι νάρκες απενεργοποιήθηκαν.</string>
     <string name="desc_convered_area">Καλυμμένη περιοχή</string>

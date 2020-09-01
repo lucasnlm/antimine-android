@@ -7,12 +7,15 @@ import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.di.CommonModule
 import dev.lucasnlm.antimine.di.AppModule
 import dev.lucasnlm.antimine.di.ViewModelModule
+import dev.lucasnlm.external.IAdsManager
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 open class MainApplication : MultiDexApplication() {
     private val analyticsManager: IAnalyticsManager by inject()
+
+    private val adsManager: IAdsManager by inject()
 
     override fun onCreate() {
         super.onCreate()
@@ -25,5 +28,7 @@ open class MainApplication : MultiDexApplication() {
             setup(applicationContext, mapOf())
             sentEvent(Analytics.Open)
         }
+
+        adsManager.start(applicationContext)
     }
 }

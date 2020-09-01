@@ -167,7 +167,7 @@ class ThemeViewModelTest : IntentViewModelTest() {
         }
         assertEquals(ThemeState(darkTheme, allThemes), state)
 
-        verify { themeRepository.setTheme(darkTheme) }
+        verify { themeRepository.setTheme(darkTheme.id) }
     }
 
     @Test

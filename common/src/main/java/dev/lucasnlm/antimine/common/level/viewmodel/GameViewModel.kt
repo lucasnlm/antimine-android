@@ -141,7 +141,7 @@ class GameViewModel(
         levelSetup.postValue(setup)
         refreshField()
 
-        eventObserver.postValue(Event.StartNewGame)
+        eventObserver.postValue(Event.ResumeGame)
 
         analyticsManager.sentEvent(
             Analytics.RetryGame(
@@ -216,7 +216,7 @@ class GameViewModel(
     }
 
     suspend fun saveGame() {
-        if (gameController.hasMines()) {
+        if (initialized && gameController.hasMines()) {
             val id = savesRepository.saveGame(
                 gameController.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
             )

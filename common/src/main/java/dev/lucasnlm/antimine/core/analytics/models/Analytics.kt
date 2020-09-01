@@ -109,6 +109,8 @@ sealed class Analytics(
 
     object UnlockIapDialog : Analytics("IAP Dialog Unlock")
 
+    object UnlockRewardedDialog : Analytics("Rewarded Dialog Unlock")
+
     class ShowRatingRequest(usages: Int) : Analytics("Shown Rating Request", mapOf("Usages" to usages.toString()))
 
     object TapRatingRequest : Analytics("Rating Request")

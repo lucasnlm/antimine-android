@@ -39,7 +39,6 @@
     <string name="used_software_text">Esse jogo usa os seguintes softwares de terceiros:</string>
     <string name="translators_text">Este jogo foi traduzido pelas seguintes pessoas:</string>
     <string name="sign_in_failed">Não foi possível conectar. Favor verificar sua conexão de rede e tente novamente.</string>
-    <string name="quit_confirm">Você vai perder todos os movimentos no jogo atual.\nMas também pode instalar o jogo antes de sair.</string>
     <string name="you_won">Você venceu!</string>
     <string name="victories">Vitórias</string>
     <string name="you_lost">Você perdeu!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">Falha ao compartilhar</string>
     <string name="version_s">Versão %1$s</string>
     <string name="sound_effects">Efeitos sonoros</string>
-    <string name="quit">Sair</string>
     <string name="are_you_sure">Tem certeza?</string>
     <string name="enable_automatic_flags">Ativar colocação automática de bandeiras</string>
     <string name="open_areas">Áreas abertas</string>
@@ -80,7 +78,6 @@
     <string name="translation">Tradução</string>
     <string name="licenses">Licenças</string>
     <string name="google_play_games">Google Play Jogos</string>
-    <string name="install">Instalar</string>
     <string name="connect">Conectar</string>
     <string name="connecting">Conectando…</string>
     <string name="disconnect">Desconectar</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">Fechar Menu</string>
     <string name="delete_all">Apagar tudo</string>
     <string name="themes">Temas</string>
+    <string name="try_it">Experimente</string>
     <string name="delete_all_message">Apagar todos os eventos permanentemente.</string>
     <string name="all_mines_disabled">Todas as minas foram desativadas.</string>
     <string name="desc_convered_area">Área coberta</string>

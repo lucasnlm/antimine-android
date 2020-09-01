@@ -39,7 +39,6 @@
     <string name="used_software_text">このゲームは、以下のサードパーティーソフトウェアを使用しています:</string>
     <string name="translators_text">このゲームは、以下の人々によって翻訳されています:</string>
     <string name="sign_in_failed">サインインに失敗しました。インターネット接続を確認してからもう一度お試しください。</string>
-    <string name="quit_confirm">現在のゲームでの進行はすべて失われますが、\n終了する前にゲームをインストールすることもできます。</string>
     <string name="you_won">あなたの勝ちです！</string>
     <string name="victories">勝利回数</string>
     <string name="you_lost">あなたの負けです！</string>
@@ -49,14 +48,13 @@
     <string name="fail_to_share">共有に失敗しました</string>
     <string name="version_s">バージョン %1$s</string>
     <string name="sound_effects">サウンドエフェクト</string>
-    <string name="quit">終了</string>
     <string name="are_you_sure">本当によろしいですか？</string>
     <string name="enable_automatic_flags">旗を自動で立てる</string>
     <string name="open_areas">開いたエリアの数</string>
     <string name="total_time">合計時間</string>
     <string name="average_time">平均時間</string>
     <string name="performance">パフォーマンス</string>
-    <string name="ok">OKです</string>
+    <string name="ok">OK</string>
     <string name="use_question_mark">クエスチョンマークを使う</string>
     <string name="control">コントロール</string>
     <string name="arrow">➞</string>
@@ -80,7 +78,6 @@
     <string name="translation">翻訳</string>
     <string name="licenses">ライセンス</string>
     <string name="google_play_games">Google Play ゲーム</string>
-    <string name="install">インストール</string>
     <string name="connect">接続</string>
     <string name="connecting">接続しています...</string>
     <string name="disconnect">切断</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">メニューを閉じる</string>
     <string name="delete_all">すべて削除</string>
     <string name="themes">テーマ</string>
+    <string name="try_it">試す</string>
     <string name="delete_all_message">すべてのイベントを永久的に削除します。</string>
     <string name="all_mines_disabled">すべての地雷が無効になりました。</string>
     <string name="desc_convered_area">カバーされたエリア</string>

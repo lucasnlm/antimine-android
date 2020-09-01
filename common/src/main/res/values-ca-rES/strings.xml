@@ -39,7 +39,6 @@
     <string name="used_software_text">Aquest joc usa el següent programari de tercers:</string>
     <string name="translators_text">Aquest joc ha estat traduït per aquestes persones:</string>
     <string name="sign_in_failed">No s\'ha pogut connectar. Si us plau verifica la teva connexió de xarxa i intenta-ho de nou.</string>
-    <string name="quit_confirm">Perdràs tots els moviments de la partida actual.\nPerò pots instal·lar-te el joc abans de sortir.</string>
     <string name="you_won">Has guanyat!</string>
     <string name="victories">Victòries</string>
     <string name="you_lost">Has perdut!</string>
@@ -49,7 +48,6 @@
     <string name="fail_to_share">No s\'ha pogut compartir</string>
     <string name="version_s">Versió %1$s</string>
     <string name="sound_effects">Efecte de so</string>
-    <string name="quit">Surt</string>
     <string name="are_you_sure">Esteu segurs?</string>
     <string name="enable_automatic_flags">Activa la col·locació automàtica de banderes</string>
     <string name="open_areas">Zones obertes</string>
@@ -80,7 +78,6 @@
     <string name="translation">Traduccions</string>
     <string name="licenses">Llicències</string>
     <string name="google_play_games">Google Play Jocs</string>
-    <string name="install">Instal·lar</string>
     <string name="connect">Connectar</string>
     <string name="connecting">Connectant…</string>
     <string name="disconnect">Desconnectar</string>
@@ -93,6 +90,7 @@
     <string name="close_menu">Tancar menú</string>
     <string name="delete_all">Esborra-ho tot</string>
     <string name="themes">Temes</string>
+    <string name="try_it">Prova-ho</string>
     <string name="delete_all_message">Esborra tots els esdeveniments permanentment.</string>
     <string name="all_mines_disabled">S\'han desactivat totes les mines.</string>
     <string name="desc_convered_area">Àrea tapada</string>
