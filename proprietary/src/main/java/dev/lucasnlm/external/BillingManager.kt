@@ -12,7 +12,6 @@ import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.SkuDetailsParams
 import com.android.billingclient.api.querySkuDetails
 
-
 class BillingManager(
     private val context: Context,
 ) : IBillingManager, BillingClientStateListener, PurchasesUpdatedListener {
