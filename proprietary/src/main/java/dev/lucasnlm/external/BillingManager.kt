@@ -2,6 +2,7 @@ package dev.lucasnlm.external
 
 import android.app.Activity
 import android.content.Context
+import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingFlowParams
@@ -30,6 +31,17 @@ class BillingManager(
             when (it?.purchaseState) {
                 Purchase.PurchaseState.PURCHASED, Purchase.PurchaseState.PENDING -> true
                 else -> false
+            }.also { purchased ->
+                if (purchased && it?.isAcknowledged == false) {
+                    val acknowledgePurchaseParams =
+                        AcknowledgePurchaseParams.newBuilder()
+                            .setPurchaseToken(it.purchaseToken)
+                            .build()
+
+                    billingClient.acknowledgePurchase(acknowledgePurchaseParams) {
+                        // Purchase acknowledged
+                    }
+                }
             }
         }
 
