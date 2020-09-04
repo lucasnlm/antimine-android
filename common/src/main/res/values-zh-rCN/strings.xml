@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">你引爆了一个地雷！</string>
     <string name="flag_placed">标记已放置！</string>
     <string name="flag_removed">标记已移除！</string>
+    <string name="remove_ad">去除广告</string>
 </resources>

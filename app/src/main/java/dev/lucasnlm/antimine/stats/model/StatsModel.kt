@@ -7,4 +7,5 @@ data class StatsModel(
     val mines: Int,
     val victory: Int,
     val openArea: Int,
+    val showAds: Boolean,
 )

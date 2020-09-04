@@ -32,8 +32,8 @@
     <string name="size">Méret</string>
     <string name="system">Rendszer</string>
     <string name="rating">Visszajelzés</string>
-    <string name="support_title">Támogasson bennünket!</string>
-    <string name="support_description">With your help, we\'ll be able to implement new features and keep our project active.</string>
+    <string name="support_title">Támogass minket!</string>
+    <string name="support_description">Segítségével képesek leszünk új funkciók bevezetésére és projektünk aktív működésére.</string>
     <string name="support_action">Támogasson bennünket</string>
     <string name="rating_message">Ha tetszik ez a játék, kérlek jelezz vissza nekünk. Sokat segít.</string>
     <string name="used_software_text">Ez a játék a következő harmadik féltől származó programokat használja:</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Felrobbantottál egy aknát!</string>
     <string name="flag_placed">Zászló elhelyezve!</string>
     <string name="flag_removed">Zászló eltávolítva!</string>
+    <string name="remove_ad">Reklámok eltávolítása</string>
 </resources>

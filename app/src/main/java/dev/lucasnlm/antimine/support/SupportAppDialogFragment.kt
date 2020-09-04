@@ -1,7 +1,9 @@
 package dev.lucasnlm.antimine.support
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.lifecycle.lifecycleScope
@@ -44,12 +46,19 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
             if (showUnlockMessage) {
                 setNeutralButton(R.string.try_it) { _, _ ->
                     analyticsManager.sentEvent(Analytics.UnlockRewardedDialog)
-                    adsManager.requestRewarded(requireActivity(), Ads.RewardsAds) {
-                        if (targetThemeId > 0) {
-                            themeRepository.setTheme(targetThemeId)
-                            requireActivity().recreate()
+                    adsManager.requestRewarded(
+                        requireActivity(),
+                        Ads.RewardsAds,
+                        onRewarded = {
+                            if (targetThemeId > 0) {
+                                themeRepository.setTheme(targetThemeId)
+                                requireActivity().recreate()
+                            }
+                        },
+                        onFail = {
+                            Toast.makeText(context, R.string.sign_in_failed, Toast.LENGTH_SHORT).show()
                         }
-                    }
+                    )
                 }
             } else {
                 setNeutralButton(R.string.rating_button_no) { _, _ ->
@@ -64,6 +73,13 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
                 }
             }
         }.create()
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        if (activity is DialogInterface.OnDismissListener) {
+            (activity as DialogInterface.OnDismissListener).onDismiss(dialog)
+        }
+        super.onDismiss(dialog)
     }
 
     companion object {

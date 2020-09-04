@@ -1,123 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:stretchColumns="1"
     android:fitsSystemWindows="true"
-    android:divider="?android:listDivider"
-    android:showDividers="middle"
-    tools:context=".stats.StatsActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TableRow>
-        <TextView
-            android:padding="16dp"
-            android:textStyle="bold"
-            android:text="@string/games" />
+    <dev.lucasnlm.external.view.AdPlaceHolderView
+        android:id="@+id/ad_placeholder"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible"/>
 
-        <TextView
-            android:id="@+id/totalGames"
-            android:gravity="end"
-            android:padding="16dp"
-            android:text="0"
-            tools:ignore="HardcodedText" />
-    </TableRow>
+    <TableLayout
+        android:id="@+id/stats"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:stretchColumns="1"
+        android:fitsSystemWindows="true"
+        android:divider="?android:listDivider"
+        android:showDividers="middle"
+        app:layout_constraintTop_toBottomOf="@id/ad_placeholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:context=".stats.StatsActivity">
 
-    <TableRow>
-        <TextView
-            android:padding="16dp"
-            android:textStyle="bold"
-            android:text="@string/mines" />
+        <TableRow>
+            <TextView
+                android:padding="16dp"
+                android:textStyle="bold"
+                android:text="@string/games" />
 
-        <TextView
-            android:id="@+id/minesCount"
-            android:gravity="end"
-            android:padding="16dp"
-            android:text="-"
-            tools:ignore="HardcodedText" />
-    </TableRow>
+            <TextView
+                android:id="@+id/totalGames"
+                android:gravity="end"
+                android:padding="16dp"
+                android:text="0"
+                tools:ignore="HardcodedText" />
+        </TableRow>
 
-    <TableRow>
-        <TextView
-            android:padding="16dp"
-            android:textStyle="bold"
-            android:text="@string/total_time" />
+        <TableRow>
+            <TextView
+                android:padding="16dp"
+                android:textStyle="bold"
+                android:text="@string/mines" />
 
-        <TextView
-            android:id="@+id/totalTime"
-            android:gravity="end"
-            android:padding="16dp"
-            android:text="-"
-            tools:ignore="HardcodedText" />
-    </TableRow>
+            <TextView
+                android:id="@+id/minesCount"
+                android:gravity="end"
+                android:padding="16dp"
+                android:text="-"
+                tools:ignore="HardcodedText" />
+        </TableRow>
 
-    <TableRow>
-        <TextView
-            android:padding="16dp"
-            android:textStyle="bold"
-            android:text="@string/average_time" />
+        <TableRow>
+            <TextView
+                android:padding="16dp"
+                android:textStyle="bold"
+                android:text="@string/total_time" />
 
-        <TextView
-            android:id="@+id/averageTime"
-            android:gravity="end"
-            android:padding="16dp"
-            android:text="-"
-            tools:ignore="HardcodedText" />
-    </TableRow>
+            <TextView
+                android:id="@+id/totalTime"
+                android:gravity="end"
+                android:padding="16dp"
+                android:text="-"
+                tools:ignore="HardcodedText" />
+        </TableRow>
 
-    <TableRow>
-        <TextView
-            android:padding="16dp"
-            android:textStyle="bold"
-            android:text="@string/open_areas" />
+        <TableRow>
+            <TextView
+                android:padding="16dp"
+                android:textStyle="bold"
+                android:text="@string/average_time" />
 
-        <TextView
-            android:id="@+id/openAreas"
-            android:gravity="end"
-            android:padding="16dp"
-            android:text="-"
-            tools:ignore="HardcodedText" />
-    </TableRow>
+            <TextView
+                android:id="@+id/averageTime"
+                android:gravity="end"
+                android:padding="16dp"
+                android:text="-"
+                tools:ignore="HardcodedText" />
+        </TableRow>
 
-    <TableRow>
-        <TextView
-            android:padding="16dp"
-            android:textStyle="bold"
-            android:text="@string/performance" />
+        <TableRow>
+            <TextView
+                android:padding="16dp"
+                android:textStyle="bold"
+                android:text="@string/open_areas" />
 
-        <TextView
-            android:id="@+id/performance"
-            android:gravity="end"
-            android:padding="16dp"
-            android:text="-"
-            tools:ignore="HardcodedText" />
-    </TableRow>
+            <TextView
+                android:id="@+id/openAreas"
+                android:gravity="end"
+                android:padding="16dp"
+                android:text="-"
+                tools:ignore="HardcodedText" />
+        </TableRow>
 
-    <TableRow>
-        <TextView
-            android:padding="16dp"
-            android:textStyle="bold"
-            android:text="@string/victories" />
+        <TableRow>
+            <TextView
+                android:padding="16dp"
+                android:textStyle="bold"
+                android:text="@string/performance" />
 
-        <TextView
-            android:id="@+id/victory"
-            android:gravity="end"
-            android:padding="16dp"
-            android:text="-"
-            tools:ignore="HardcodedText" />
-    </TableRow>
+            <TextView
+                android:id="@+id/performance"
+                android:gravity="end"
+                android:padding="16dp"
+                android:text="-"
+                tools:ignore="HardcodedText" />
+        </TableRow>
 
-    <TableRow>
-        <TextView
-            android:padding="16dp"
-            android:textStyle="bold"
-            android:text="@string/defeats" />
+        <TableRow>
+            <TextView
+                android:padding="16dp"
+                android:textStyle="bold"
+                android:text="@string/victories" />
 
-        <TextView
-            android:id="@+id/defeat"
-            android:gravity="end"
-            android:padding="16dp"
-            android:text="-"
-            tools:ignore="HardcodedText" />
-    </TableRow>
-</TableLayout>
+            <TextView
+                android:id="@+id/victory"
+                android:gravity="end"
+                android:padding="16dp"
+                android:text="-"
+                tools:ignore="HardcodedText" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:padding="16dp"
+                android:textStyle="bold"
+                android:text="@string/defeats" />
+
+            <TextView
+                android:id="@+id/defeat"
+                android:gravity="end"
+                android:padding="16dp"
+                android:text="-"
+                tools:ignore="HardcodedText" />
+        </TableRow>
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

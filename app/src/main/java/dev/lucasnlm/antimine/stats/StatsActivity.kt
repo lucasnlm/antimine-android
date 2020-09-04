@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine.stats
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.R
@@ -21,13 +22,17 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        refreshStats(StatsViewModel.emptyStats)
 
         lifecycleScope.launchWhenResumed {
             statsViewModel.sendEvent(StatsEvent.LoadStats)
 
             statsViewModel.observeState().collect {
                 refreshStats(it)
+
+                if (it.showAds) {
+                    ad_placeholder.visibility = View.VISIBLE
+                    ad_placeholder.loadAd()
+                }
             }
         }
     }

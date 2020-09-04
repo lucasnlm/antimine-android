@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Ανατίναξες μια νάρκη!</string>
     <string name="flag_placed">Η Σημαία τοποθετήθηκε!</string>
     <string name="flag_removed">Η σημαία αφαιρέθηκε!</string>
+    <string name="remove_ad">Κατάργηση διαφημίσεων</string>
 </resources>

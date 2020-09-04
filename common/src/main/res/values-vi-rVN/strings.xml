@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Bạn làm nổ mìn rồi!</string>
     <string name="flag_placed">Đã cắm cờ!</string>
     <string name="flag_removed">Đã tháo cờ hiệu!</string>
+    <string name="remove_ad">Loại bỏ quảng cáo</string>
 </resources>

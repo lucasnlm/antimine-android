@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">You exploded a mine!</string>
     <string name="flag_placed">Flag placed!</string>
     <string name="flag_removed">Flag removed!</string>
+    <string name="remove_ad">Remove Ads</string>
 </resources>

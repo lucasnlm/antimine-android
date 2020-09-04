@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Je hebt een mijn ontploft!</string>
     <string name="flag_placed">Vlag geplaatst!</string>
     <string name="flag_removed">Vlag verwijderd!</string>
+    <string name="remove_ad">Verwijder advertenties</string>
 </resources>

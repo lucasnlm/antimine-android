@@ -29,11 +29,9 @@ import dev.lucasnlm.external.Achievement
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.Leaderboard
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -57,7 +55,6 @@ class GameViewModel(
     private lateinit var gameController: GameController
     private var initialized = false
     private var currentDifficulty: Difficulty = Difficulty.Standard
-    private var longPressFeedback: Job? = null
 
     val field = MutableLiveData<List<Area>>()
     val elapsedTimeSeconds = MutableLiveData<Long>()
@@ -238,24 +235,6 @@ class GameViewModel(
             eventObserver.postValue(Event.Resume)
             runClock()
         }
-    }
-
-    fun startLongPressFeedback() {
-        if (preferencesRepository.useHapticFeedback()) {
-            longPressFeedback = viewModelScope.launch {
-                delay(preferencesRepository.customLongPressTimeout())
-
-                if (isActive) {
-                    hapticFeedbackManager.longPressFeedback()
-                    longPressFeedback = null
-                }
-            }
-        }
-    }
-
-    fun cancelLongPressFeedback() {
-        longPressFeedback?.cancel()
-        longPressFeedback = null
     }
 
     suspend fun onLongClick(index: Int) {

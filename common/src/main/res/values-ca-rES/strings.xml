@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Has explotat una mina!</string>
     <string name="flag_placed">Bandera col·locada!</string>
     <string name="flag_removed">Has tret la bandera!</string>
+    <string name="remove_ad">Elimina els anuncis</string>
 </resources>

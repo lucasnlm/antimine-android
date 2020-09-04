@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Ви натрапили на міну!</string>
     <string name="flag_placed">Прапор розміщено!</string>
     <string name="flag_removed">Прапор вилучено!</string>
+    <string name="remove_ad">Прибрати рекламу</string>
 </resources>

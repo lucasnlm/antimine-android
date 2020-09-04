@@ -90,7 +90,7 @@
     <string name="close_menu">Затвори менюто</string>
     <string name="delete_all">Изтрий всички</string>
     <string name="themes">Теми</string>
-    <string name="try_it">Опитайте</string>
+    <string name="try_it">Ще опитам</string>
     <string name="delete_all_message">Изтрий всички завинаги.</string>
     <string name="all_mines_disabled">Всички мини бяха деактивирани.</string>
     <string name="desc_convered_area">Покрита площ</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Ти взриви мина!</string>
     <string name="flag_placed">Флагът е сложен!</string>
     <string name="flag_removed">Глагът е премахнат!</string>
+    <string name="remove_ad">Премахване на реклами</string>
 </resources>

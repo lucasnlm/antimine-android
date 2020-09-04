@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Odpálili jste minu!</string>
     <string name="flag_placed">Vlajka umístěna!</string>
     <string name="flag_removed">Vlajka odstraněna!</string>
+    <string name="remove_ad">Odstranit reklamy</string>
 </resources>

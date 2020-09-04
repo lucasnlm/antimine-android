@@ -39,10 +39,12 @@ import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.ThemeActivity
+import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.android.synthetic.main.activity_game.ad_placeholder
 import kotlinx.android.synthetic.main.activity_game.minesCount
 import kotlinx.android.synthetic.main.activity_game.timer
 import kotlinx.android.synthetic.main.activity_tv_game.*
@@ -54,6 +56,8 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
+    private val billingManager: IBillingManager by inject()
+
     private val preferencesRepository: IPreferencesRepository by inject()
 
     private val analyticsManager: IAnalyticsManager by inject()
@@ -91,6 +95,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         bindToolbar()
         bindDrawer()
         bindNavigationMenu()
+        showAds()
 
         findViewById<FrameLayout>(R.id.levelContainer).doOnLayout {
             loadGameFragment()
@@ -346,6 +351,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 R.id.previous_games -> openSaveHistory()
                 R.id.stats -> openStats()
                 R.id.play_games -> googlePlay()
+                R.id.remove_ads -> showSupportAppDialog()
                 else -> handled = false
             }
 
@@ -356,10 +362,16 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             handled
         }
 
-        navigationView.menu.findItem(R.id.share_now).isVisible = !instantAppManager.isEnabled(applicationContext)
+        navigationView.menu.apply {
+            findItem(R.id.share_now).isVisible = !instantAppManager.isEnabled(applicationContext)
+            findItem(R.id.remove_ads).isVisible = !preferencesRepository.isPremiumEnabled()
 
-        if (!playGamesManager.hasGooglePlayGames()) {
-            navigationView.menu.removeGroup(R.id.play_games_group)
+            if (!playGamesManager.hasGooglePlayGames()) {
+                removeGroup(R.id.play_games_group)
+            }
+
+            // New Features
+            findItem(R.id.themes).setActionView(R.layout.new_icon)
         }
     }
 
@@ -370,7 +382,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         } else {
             val current = preferencesRepository.getUseCount()
             val shouldRequestRating = preferencesRepository.isRequestRatingEnabled()
-            val shouldRequestSupport = preferencesRepository.isPremiumEnabled()
+            val shouldRequestSupport = !preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()
 
             if (current >= MIN_USAGES_TO_IAP && !shouldRequestSupport) {
                 analyticsManager.sentEvent(Analytics.UnlockIapDialog)
@@ -535,6 +547,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             Event.StartNewGame -> {
                 status = Status.PreGame
                 refreshShortcutIcon()
+                showAds()
             }
             Event.Resume, Event.Running -> {
                 status = Status.Running
@@ -636,6 +649,22 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             refreshUserPreferences()
             resumeGame()
         }
+
+        if (preferencesRepository.isPremiumEnabled()) {
+            disableAds()
+        }
+    }
+
+    private fun showAds() {
+        if (!preferencesRepository.isPremiumEnabled()) {
+            ad_placeholder.visibility = View.VISIBLE
+            ad_placeholder.loadAd()
+        }
+    }
+
+    private fun disableAds() {
+        navigationView.menu.findItem(R.id.remove_ads).isVisible = false
+        ad_placeholder.visibility = View.GONE
     }
 
     private fun silentGooglePlayLogin() {

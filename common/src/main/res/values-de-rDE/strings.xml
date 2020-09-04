@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Du hast eine Mine zur Explosion gebracht!</string>
     <string name="flag_placed">Markierung platziert!</string>
     <string name="flag_removed">Markierung entfernt!</string>
+    <string name="remove_ad">Werbung entfernen</string>
 </resources>

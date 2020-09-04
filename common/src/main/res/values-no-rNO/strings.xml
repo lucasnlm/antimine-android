@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Du detonerte en mine!</string>
     <string name="flag_placed">Flagg plassert!</string>
     <string name="flag_removed">Flagg fjernet!</string>
+    <string name="remove_ad">Fjern Reklame</string>
 </resources>

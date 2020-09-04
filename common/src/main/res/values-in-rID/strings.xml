@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Kamu meledakkan ranjau!</string>
     <string name="flag_placed">Bendera diletakkan!</string>
     <string name="flag_removed">Bendera dihapus!</string>
+    <string name="remove_ad">Hapus Iklan</string>
 </resources>

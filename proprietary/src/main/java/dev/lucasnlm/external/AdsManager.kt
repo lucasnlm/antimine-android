@@ -42,7 +42,12 @@ class AdsManager : IAdsManager {
         return unlockTheme != null
     }
 
-    override fun requestRewarded(activity: Activity, adUnitId: String, onRewarded: (() -> Unit)?) {
+    override fun requestRewarded(
+        activity: Activity,
+        adUnitId: String,
+        onRewarded: (() -> Unit)?,
+        onFail: (() -> Unit)?
+    ) {
         if (isReady()) {
             val context = activity.applicationContext
 
@@ -61,7 +66,7 @@ class AdsManager : IAdsManager {
                     }
 
                     override fun onRewardedAdFailedToShow(adError: AdError) {
-                        // Ad failed
+                        onFail?.invoke()
                     }
                 }
 

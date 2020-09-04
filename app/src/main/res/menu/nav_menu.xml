@@ -69,6 +69,13 @@
             android:checkable="false"
             android:icon="@drawable/settings"
             android:title="@string/settings" />
+
+        <item
+            android:id="@+id/remove_ads"
+            android:checkable="false"
+            android:visible="false"
+            android:icon="@drawable/remove_ads"
+            android:title="@string/remove_ads" />
     </group>
 
     <group android:id="@+id/play_games_group">

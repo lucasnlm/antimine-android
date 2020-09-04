@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">لقد فجرت لغم!</string>
     <string name="flag_placed">وضع العلم!</string>
     <string name="flag_removed">إزالة العلم!</string>
+    <string name="remove_ad">إزالة الإعلانات</string>
 </resources>

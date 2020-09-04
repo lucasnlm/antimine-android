@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Você explodiu uma mina!</string>
     <string name="flag_placed">Bandeira colocada!</string>
     <string name="flag_removed">Bandeira removida!</string>
+    <string name="remove_ad">Remover Propagandas</string>
 </resources>
