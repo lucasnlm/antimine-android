@@ -83,7 +83,7 @@ class AreaAdapter(
                 view.setOnDoubleClickListener(
                     object : GestureDetector.OnDoubleTapListener {
                         override fun onDoubleTap(e: MotionEvent?): Boolean {
-                            return view.onClickablePosition(adapterPosition) {
+                            return view.onClickablePosition(absoluteAdapterPosition) {
                                 viewModel.onDoubleClick(it)
                             }
                         }
@@ -93,7 +93,7 @@ class AreaAdapter(
                         }
 
                         override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-                            return view.onClickablePosition(adapterPosition) {
+                            return view.onClickablePosition(absoluteAdapterPosition) {
                                 viewModel.onSingleClick(it)
                             }
                         }
@@ -113,11 +113,11 @@ class AreaAdapter(
                             val dt = motionEvent.eventTime - motionEvent.downTime
 
                             if (dt > preferencesRepository.customLongPressTimeout()) {
-                                view.onClickablePosition(adapterPosition) {
+                                view.onClickablePosition(absoluteAdapterPosition) {
                                     viewModel.onLongClick(it)
                                 }
                             } else {
-                                view.onClickablePosition(adapterPosition) {
+                                view.onClickablePosition(absoluteAdapterPosition) {
                                     viewModel.onSingleClick(it)
                                 }
                             }
@@ -140,11 +140,11 @@ class AreaAdapter(
                             view.isPressed = false
                             val dt = keyEvent.eventTime - keyEvent.downTime
                             if (dt > preferencesRepository.customLongPressTimeout()) {
-                                view.onClickablePosition(adapterPosition) {
+                                view.onClickablePosition(absoluteAdapterPosition) {
                                     viewModel.onLongClick(it)
                                 }
                             } else {
-                                view.onClickablePosition(adapterPosition) {
+                                view.onClickablePosition(absoluteAdapterPosition) {
                                     viewModel.onSingleClick(it)
                                 }
                             }

@@ -15,7 +15,6 @@ import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.view.AreaView
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
-import dev.lucasnlm.antimine.core.themes.repository.Themes
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
 import kotlinx.android.synthetic.main.view_theme.view.*
@@ -25,7 +24,6 @@ class ThemeAdapter(
     private val areaSize: Float,
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
 
-    private val amoledId = Themes.AmoledTheme.id
     private val themes: List<AppTheme> = themeViewModel.singleState().themes
 
     private val minefield = listOf(
@@ -42,6 +40,7 @@ class ThemeAdapter(
 
     init {
         setHasStableIds(true)
+        stateRestorationPolicy = StateRestorationPolicy.ALLOW
     }
 
     override fun getItemId(position: Int): Long = themes[position].id
