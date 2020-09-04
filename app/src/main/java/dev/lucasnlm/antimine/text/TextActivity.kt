@@ -38,6 +38,11 @@ class TextActivity : ThematicActivity(R.layout.activity_text) {
             }
 
             textViewModel.observeState().collect {
+                if (it.body == null) {
+                    // The target resource doesn't exist.
+                    finish()
+                }
+
                 textView.text = it.body
                 progressBar.visibility = View.GONE
             }
