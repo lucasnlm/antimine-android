@@ -354,7 +354,7 @@ class GameViewModel(
         gameController.run {
             analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
             val explosionTime = (explosionDelay() / gameController.getMinesCount().coerceAtLeast(10))
-            val delayMillis = explosionTime.coerceAtLeast(25L)
+            val delayMillis = explosionTime.coerceAtMost(25L)
 
             if (!fromResumeGame) {
                 if (preferencesRepository.useHapticFeedback()) {
@@ -370,12 +370,14 @@ class GameViewModel(
             refreshField()
 
             findExplodedMine()?.let { exploded ->
-                takeExplosionRadius(exploded).forEach {
+                takeExplosionRadius(exploded).take(20).forEach {
                     revealArea(it.id)
                     refreshField()
                     delay(delayMillis)
                 }
             }
+
+            showAllMines()
 
             refreshField()
             updateGameState()
