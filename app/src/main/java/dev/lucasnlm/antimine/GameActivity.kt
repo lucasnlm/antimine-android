@@ -663,7 +663,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun disableAds() {
-        navigationView.menu.findItem(R.id.remove_ads).isVisible = false
+        navigationView.menu.removeGroup(R.id.remove_ads_group)
         ad_placeholder.visibility = View.GONE
     }
 
