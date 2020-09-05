@@ -61,8 +61,8 @@
     <string name="single_click">Clique único</string>
     <string name="double_click">Duplo Clique</string>
     <string name="long_press">Toque longo</string>
-    <string name="open_tile">Abrir bloco</string>
-    <string name="flag_tile">Sinalizar bloco</string>
+    <string name="open_tile">Abrir</string>
+    <string name="flag_tile">Bandeira</string>
     <string name="retry">Tentar Novamente</string>
     <string name="empty">Vazio</string>
     <string name="unknown_error">Erro desconhecido.</string>

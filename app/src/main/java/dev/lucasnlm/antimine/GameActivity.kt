@@ -95,7 +95,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         bindToolbar()
         bindDrawer()
         bindNavigationMenu()
-        showAds()
+        bindAds()
 
         findViewById<FrameLayout>(R.id.levelContainer).doOnLayout {
             loadGameFragment()
@@ -204,6 +204,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
 
             silentGooglePlayLogin()
+            bindAds()
         }
     }
 
@@ -547,7 +548,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             Event.StartNewGame -> {
                 status = Status.PreGame
                 refreshShortcutIcon()
-                showAds()
+                bindAds()
             }
             Event.Resume, Event.Running -> {
                 status = Status.Running
@@ -651,20 +652,18 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
 
         if (preferencesRepository.isPremiumEnabled()) {
-            disableAds()
+            bindAds()
         }
     }
 
-    private fun showAds() {
+    private fun bindAds() {
         if (!preferencesRepository.isPremiumEnabled()) {
             ad_placeholder.visibility = View.VISIBLE
             ad_placeholder.loadAd()
+        } else {
+            navigationView.menu.removeGroup(R.id.remove_ads_group)
+            ad_placeholder.visibility = View.GONE
         }
-    }
-
-    private fun disableAds() {
-        navigationView.menu.removeGroup(R.id.remove_ads_group)
-        ad_placeholder.visibility = View.GONE
     }
 
     private fun silentGooglePlayLogin() {
@@ -688,7 +687,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun showSupportAppDialog() {
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
-            SupportAppDialogFragment.newRequestSupportDialog()
+            SupportAppDialogFragment.newRemoveAdsSupportDialog()
                 .show(supportFragmentManager, SupportAppDialogFragment.TAG)
         }
     }

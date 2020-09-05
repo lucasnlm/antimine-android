@@ -61,8 +61,8 @@
     <string name="single_click">Single Click</string>
     <string name="double_click">Double Click</string>
     <string name="long_press">Long Press</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="open_tile">Open</string>
+    <string name="flag_tile">Flag</string>
     <string name="retry">Retry</string>
     <string name="empty">Empty</string>
     <string name="unknown_error">Unknown error.</string>
@@ -102,5 +102,5 @@
     <string name="you_exploded_a_mine">You exploded a mine!</string>
     <string name="flag_placed">Flag placed!</string>
     <string name="flag_removed">Flag removed!</string>
-    <string name="remove_ads">Remove Ads</string>
+    <string name="remove_ad">Remove Ads</string>
 </resources>

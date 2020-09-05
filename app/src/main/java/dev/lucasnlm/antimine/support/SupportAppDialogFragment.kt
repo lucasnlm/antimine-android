@@ -24,7 +24,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
     private val adsManager: IAdsManager by inject()
     private val iapHandler: IapHandler by inject()
 
-    private var showUnlockMessage: Boolean = false
+    private var unlockMessage: Int = R.string.support_action
     private var targetThemeId: Long = -1L
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +33,8 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
         billingManager.start(iapHandler)
         analyticsManager.sentEvent(Analytics.ShowIapDialog)
 
-        showUnlockMessage =
-            (arguments?.getBoolean(UNLOCK_LABEL) ?: savedInstanceState?.getBoolean(UNLOCK_LABEL)) ?: false
+        unlockMessage =
+            (arguments?.getInt(UNLOCK_LABEL) ?: savedInstanceState?.getInt(UNLOCK_LABEL)) ?: R.string.support_action
         targetThemeId =
             (arguments?.getLong(TARGET_THEME_ID, -1L)) ?: -1L
     }
@@ -43,7 +43,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
         return AlertDialog.Builder(requireContext()).apply {
             setView(R.layout.dialog_payments)
 
-            if (showUnlockMessage) {
+            if (targetThemeId != -1L) {
                 setNeutralButton(R.string.try_it) { _, _ ->
                     analyticsManager.sentEvent(Analytics.UnlockRewardedDialog)
                     adsManager.requestRewarded(
@@ -66,7 +66,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
                 }
             }
 
-            setPositiveButton(if (showUnlockMessage) R.string.unlock else R.string.support_action) { _, _ ->
+            setPositiveButton(unlockMessage) { _, _ ->
                 lifecycleScope.launch {
                     analyticsManager.sentEvent(Analytics.UnlockIapDialog)
                     billingManager.charge(requireActivity())
@@ -91,7 +91,15 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
         fun newRequestSupportDialog(): SupportAppDialogFragment {
             return SupportAppDialogFragment().apply {
                 arguments = Bundle().apply {
-                    putBoolean(UNLOCK_LABEL, false)
+                    putInt(UNLOCK_LABEL, R.string.support_action)
+                }
+            }
+        }
+
+        fun newRemoveAdsSupportDialog(): SupportAppDialogFragment {
+            return SupportAppDialogFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(UNLOCK_LABEL, R.string.remove_ad)
                 }
             }
         }
@@ -99,7 +107,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
         fun newChangeThemeDialog(targetThemeId: Long): SupportAppDialogFragment {
             return SupportAppDialogFragment().apply {
                 arguments = Bundle().apply {
-                    putBoolean(UNLOCK_LABEL, true)
+                    putInt(UNLOCK_LABEL, R.string.unlock)
                     putLong(TARGET_THEME_ID, targetThemeId)
                 }
             }

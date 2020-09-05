@@ -61,8 +61,8 @@
     <string name="single_click">Одно нажатие</string>
     <string name="double_click">Двойное нажатие</string>
     <string name="long_press">Удержание нажатия</string>
-    <string name="open_tile">Открыть плитку</string>
-    <string name="flag_tile">Отметить плитку</string>
+    <string name="open_tile">Открыть</string>
+    <string name="flag_tile">Флаг</string>
     <string name="retry">Повторить</string>
     <string name="empty">Пусто</string>
     <string name="unknown_error">Неизвестная ошибка.</string>

@@ -61,8 +61,8 @@
     <string name="single_click">Single Click</string>
     <string name="double_click">Double Click</string>
     <string name="long_press">Long Press</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="open_tile">Open</string>
+    <string name="flag_tile">Flag</string>
     <string name="retry">Încearcă din nou</string>
     <string name="empty">Empty</string>
     <string name="unknown_error">Eroare necunoscută.</string>

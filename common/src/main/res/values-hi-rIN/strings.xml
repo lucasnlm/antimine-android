@@ -61,8 +61,8 @@
     <string name="single_click">सिंगल क्लिक</string>
     <string name="double_click">दुबारा क्लिक</string>
     <string name="long_press">लंबे समय दबाए</string>
-    <string name="open_tile">खुला हुआ</string>
-    <string name="flag_tile">झंडा</string>
+    <string name="open_tile">खुला</string>
+    <string name="flag_tile">ध्वज</string>
     <string name="retry">फिर प्रयास करें</string>
     <string name="empty">खाली</string>
     <string name="unknown_error">अज्ञात त्रुटि।</string>

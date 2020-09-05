@@ -61,8 +61,8 @@
     <string name="single_click">Pojedyncze kliknięcie</string>
     <string name="double_click">Podwójne kliknięcie</string>
     <string name="long_press">Długie naciśnięcie</string>
-    <string name="open_tile">Odkryj pole</string>
-    <string name="flag_tile">Oznacz pole</string>
+    <string name="open_tile">Otwórz</string>
+    <string name="flag_tile">Oznacz</string>
     <string name="retry">Jeszcze raz</string>
     <string name="empty">Puste</string>
     <string name="unknown_error">Nieznany błąd.</string>

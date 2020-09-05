@@ -61,8 +61,8 @@
     <string name="single_click">Jedno klepnutí</string>
     <string name="double_click">Dvojí klepnutí</string>
     <string name="long_press">Dlouhý stisk</string>
-    <string name="open_tile">Otevřít dlaždici</string>
-    <string name="flag_tile">Název vlajky</string>
+    <string name="open_tile">Otevřít</string>
+    <string name="flag_tile">Vlajka</string>
     <string name="retry">Opakovat</string>
     <string name="empty">Prázdné</string>
     <string name="unknown_error">Neznámá chyba.</string>

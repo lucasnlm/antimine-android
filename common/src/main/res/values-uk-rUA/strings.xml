@@ -61,8 +61,8 @@
     <string name="single_click">Одинарний клік</string>
     <string name="double_click">Подвійний клік</string>
     <string name="long_press">Довге натискання</string>
-    <string name="open_tile">Відкрити плитку</string>
-    <string name="flag_tile">Прапорець</string>
+    <string name="open_tile">Відкрити</string>
+    <string name="flag_tile">Прапор</string>
     <string name="retry">Повторити</string>
     <string name="empty">Пусто</string>
     <string name="unknown_error">Невідома помилка.</string>

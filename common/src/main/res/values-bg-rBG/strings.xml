@@ -61,8 +61,8 @@
     <string name="single_click">Едно натискане</string>
     <string name="double_click">Двукратно щракване</string>
     <string name="long_press">Задържане</string>
-    <string name="open_tile">Отворена Плочка</string>
-    <string name="flag_tile">Флаг Плочка</string>
+    <string name="open_tile">Отвори</string>
+    <string name="flag_tile">Флаг</string>
     <string name="retry">Опитайте отново</string>
     <string name="empty">Празно</string>
     <string name="unknown_error">Неизвестна грешка.</string>

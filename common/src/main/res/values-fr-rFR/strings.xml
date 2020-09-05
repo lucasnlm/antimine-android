@@ -61,8 +61,8 @@
     <string name="single_click">Clic simple</string>
     <string name="double_click">Double clic</string>
     <string name="long_press">Appui prolongé</string>
-    <string name="open_tile">Ouvrir la tuile</string>
-    <string name="flag_tile">Placer le drapeau</string>
+    <string name="open_tile">Ouvrir</string>
+    <string name="flag_tile">Drapeau</string>
     <string name="retry">Réessayer</string>
     <string name="empty">Vide</string>
     <string name="unknown_error">Erreur inconnue.</string>

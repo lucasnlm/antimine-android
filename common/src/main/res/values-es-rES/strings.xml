@@ -61,8 +61,8 @@
     <string name="single_click">Un clic</string>
     <string name="double_click">Doble clic</string>
     <string name="long_press">Mantenga pulsado</string>
-    <string name="open_tile">Open área</string>
-    <string name="flag_tile">Marcar área</string>
+    <string name="open_tile">Abrir</string>
+    <string name="flag_tile">Bandera</string>
     <string name="retry">Reintentar</string>
     <string name="empty">Vacío</string>
     <string name="unknown_error">Error desconocido.</string>

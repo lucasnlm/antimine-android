@@ -61,8 +61,8 @@
     <string name="single_click">Enkeltklikk</string>
     <string name="double_click">Dobbeltklikk</string>
     <string name="long_press">Lang Trykk</string>
-    <string name="open_tile">Åpne Flis</string>
-    <string name="flag_tile">Flagg Flis</string>
+    <string name="open_tile">Åpne</string>
+    <string name="flag_tile">Flagg</string>
     <string name="retry">Prøv på nytt</string>
     <string name="empty">Tom</string>
     <string name="unknown_error">Ukjent feil.</string>

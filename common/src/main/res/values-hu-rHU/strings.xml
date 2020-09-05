@@ -61,8 +61,8 @@
     <string name="single_click">Egyszeri kattintás</string>
     <string name="double_click">Dupla kattintás</string>
     <string name="long_press">Hosszú nyomva tartás</string>
-    <string name="open_tile">Mező megnyitása</string>
-    <string name="flag_tile">Mező megjelölése</string>
+    <string name="open_tile">Megnyitás</string>
+    <string name="flag_tile">Zászló</string>
     <string name="retry">Újra</string>
     <string name="empty">Üres</string>
     <string name="unknown_error">Ismeretlen hiba.</string>

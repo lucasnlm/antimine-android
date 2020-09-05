@@ -61,8 +61,8 @@
     <string name="single_click">Single Click</string>
     <string name="double_click">Double Click</string>
     <string name="long_press">Lang-druk</string>
-    <string name="open_tile">Open Tile</string>
-    <string name="flag_tile">Flag Tile</string>
+    <string name="open_tile">Maak oop</string>
+    <string name="flag_tile">Merk</string>
     <string name="retry">Weer probeer</string>
     <string name="empty">Leeg</string>
     <string name="unknown_error">Onbekende fout.</string>

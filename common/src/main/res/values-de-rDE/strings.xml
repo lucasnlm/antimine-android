@@ -61,8 +61,8 @@
     <string name="single_click">Einzelklick</string>
     <string name="double_click">Doppelklick</string>
     <string name="long_press">Lange Drücken</string>
-    <string name="open_tile">Kachel öffnen</string>
-    <string name="flag_tile">Kachel markieren</string>
+    <string name="open_tile">Öffnen</string>
+    <string name="flag_tile">Flagge</string>
     <string name="retry">Erneut versuchen</string>
     <string name="empty">Leer</string>
     <string name="unknown_error">Unbekannter Fehler.</string>
