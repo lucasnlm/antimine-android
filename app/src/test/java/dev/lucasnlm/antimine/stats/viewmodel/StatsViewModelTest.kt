@@ -4,7 +4,6 @@ import dev.lucasnlm.antimine.IntentViewModelTest
 import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.repository.MemoryStatsRepository
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.mocks.MockPreferencesRepository
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.test.runBlockingTest
