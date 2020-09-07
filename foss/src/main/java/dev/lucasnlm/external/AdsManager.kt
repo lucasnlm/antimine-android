@@ -8,5 +8,10 @@ class AdsManager : IAdsManager {
 
     override fun isReady(): Boolean = false
 
-    override fun requestRewarded(activity: Activity, adUnitId: String, onRewarded: (() -> Unit)?) { }
+    override fun requestRewarded(
+        activity: Activity,
+        adUnitId: String,
+        onRewarded: (() -> Unit)?,
+        onFail: (() -> Unit)?
+    ) {}
 }

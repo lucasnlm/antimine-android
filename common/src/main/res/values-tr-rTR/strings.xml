@@ -61,8 +61,8 @@
     <string name="single_click">Tek Tıklama</string>
     <string name="double_click">Çift Tıklama</string>
     <string name="long_press">Uzun Basma</string>
-    <string name="open_tile">Karoyu Aç</string>
-    <string name="flag_tile">Karoyu İşaretle</string>
+    <string name="open_tile">Aç</string>
+    <string name="flag_tile">Bayrak</string>
     <string name="retry">Yeniden dene</string>
     <string name="empty">Boş</string>
     <string name="unknown_error">Bilinmeyen hata.</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Bir mayını patlattın!</string>
     <string name="flag_placed">Bayrak yerleştirildi!</string>
     <string name="flag_removed">Bayrak kaldırıldı!</string>
+    <string name="remove_ad">Reklamları kaldır</string>
 </resources>

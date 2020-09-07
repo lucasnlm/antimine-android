@@ -61,8 +61,8 @@
     <string name="single_click">Napautus</string>
     <string name="double_click">Kaksoisnapsautus</string>
     <string name="long_press">Pitkä painallus</string>
-    <string name="open_tile">Avaa laatta</string>
-    <string name="flag_tile">Merkitse laatta</string>
+    <string name="open_tile">Avaa</string>
+    <string name="flag_tile">Lippu</string>
     <string name="retry">Yritä uudelleen</string>
     <string name="empty">Tyhjä</string>
     <string name="unknown_error">Tuntematon virhe.</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Räjäytit miinan!</string>
     <string name="flag_placed">Lippu asetettu!</string>
     <string name="flag_removed">Lippu poistettu!</string>
+    <string name="remove_ad">Poista Mainokset</string>
 </resources>

@@ -11,7 +11,9 @@ import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.Leaderboard
-import dev.lucasnlm.external.UnlockAppListener
+import dev.lucasnlm.external.model.PurchaseInfo
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -24,11 +26,13 @@ val AppModule = module {
 
     single {
         object : IBillingManager {
-            override fun start(unlockAppListener: UnlockAppListener) { }
+            override fun start() { }
 
             override fun isEnabled(): Boolean = false
 
             override suspend fun charge(activity: Activity) { }
+
+            override fun listenPurchases(): Flow<PurchaseInfo> = flowOf()
         }
     } bind IBillingManager::class
 
@@ -56,7 +60,7 @@ val AppModule = module {
         }
     } bind IPlayGamesManager::class
 
-    single { ShareManager(get()) }
+    single { ShareManager(get(), get()) }
 
     single {
         DebugAnalyticsManager()

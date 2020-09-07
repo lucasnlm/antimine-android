@@ -61,8 +61,8 @@
     <string name="single_click">Un sol clic</string>
     <string name="double_click">Doble clic</string>
     <string name="long_press">Pulsació llarga</string>
-    <string name="open_tile">Destapa la rajola</string>
-    <string name="flag_tile">Marca la rajola</string>
+    <string name="open_tile">Obert</string>
+    <string name="flag_tile">Bandera</string>
     <string name="retry">Reintenta</string>
     <string name="empty">Buida</string>
     <string name="unknown_error">Error desconegut.</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Has explotat una mina!</string>
     <string name="flag_placed">Bandera col·locada!</string>
     <string name="flag_removed">Has tret la bandera!</string>
+    <string name="remove_ad">Elimina els anuncis</string>
 </resources>

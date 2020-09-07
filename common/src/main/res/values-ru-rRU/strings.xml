@@ -61,8 +61,8 @@
     <string name="single_click">Одно нажатие</string>
     <string name="double_click">Двойное нажатие</string>
     <string name="long_press">Удержание нажатия</string>
-    <string name="open_tile">Открыть плитку</string>
-    <string name="flag_tile">Отметить плитку</string>
+    <string name="open_tile">Открыть</string>
+    <string name="flag_tile">Флаг</string>
     <string name="retry">Повторить</string>
     <string name="empty">Пусто</string>
     <string name="unknown_error">Неизвестная ошибка.</string>
@@ -90,7 +90,7 @@
     <string name="close_menu">Закрыть меню</string>
     <string name="delete_all">Удалить все</string>
     <string name="themes">Темы</string>
-    <string name="try_it">Попробуйте It</string>
+    <string name="try_it">Попробуйте</string>
     <string name="delete_all_message">Удалить все события навсегда.</string>
     <string name="all_mines_disabled">Все мины обезврежены.</string>
     <string name="desc_convered_area">Покрытая область</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Вы подорвали мину!</string>
     <string name="flag_placed">Флаг установлен!</string>
     <string name="flag_removed">Флаг снят!</string>
+    <string name="remove_ad">Удалить рекламу</string>
 </resources>

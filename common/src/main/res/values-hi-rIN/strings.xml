@@ -61,8 +61,8 @@
     <string name="single_click">सिंगल क्लिक</string>
     <string name="double_click">दुबारा क्लिक</string>
     <string name="long_press">लंबे समय दबाए</string>
-    <string name="open_tile">खुला हुआ</string>
-    <string name="flag_tile">झंडा</string>
+    <string name="open_tile">खुला</string>
+    <string name="flag_tile">ध्वज</string>
     <string name="retry">फिर प्रयास करें</string>
     <string name="empty">खाली</string>
     <string name="unknown_error">अज्ञात त्रुटि।</string>
@@ -90,7 +90,7 @@
     <string name="close_menu">मेनू बंद करें</string>
     <string name="delete_all">सभी मिटाएँ</string>
     <string name="themes">थीम्स</string>
-    <string name="try_it">Try It</string>
+    <string name="try_it">इसे आज़माएँ</string>
     <string name="delete_all_message">पुष्टि करें</string>
     <string name="all_mines_disabled">All mines were disabled.</string>
     <string name="desc_convered_area">Covered area</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">You exploded a mine!</string>
     <string name="flag_placed">Flag placed!</string>
     <string name="flag_removed">Flag removed!</string>
+    <string name="remove_ad">विज्ञापन निकालें</string>
 </resources>

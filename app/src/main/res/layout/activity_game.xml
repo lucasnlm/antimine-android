@@ -92,10 +92,20 @@
             android:id="@+id/levelContainer"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintBottom_toTopOf="@+id/ad_placeholder"
             ads:layout_constraintLeft_toLeftOf="parent"
             ads:layout_constraintRight_toRightOf="parent"
             ads:layout_constraintTop_toBottomOf="@id/menu" />
+
+        <dev.lucasnlm.external.view.AdPlaceHolderView
+            android:id="@+id/ad_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="visible"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

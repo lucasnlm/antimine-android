@@ -11,11 +11,16 @@ import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.SkuDetailsParams
 import com.android.billingclient.api.querySkuDetails
+import dev.lucasnlm.external.model.PurchaseInfo
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 
 class BillingManager(
     private val context: Context,
 ) : IBillingManager, BillingClientStateListener, PurchasesUpdatedListener {
-    private var unlockAppListener: UnlockAppListener? = null
+
+    private val purchaseBroadcaster = ConflatedBroadcastChannel<PurchaseInfo>()
 
     private val billingClient by lazy {
         BillingClient.newBuilder(context)
@@ -23,6 +28,8 @@ class BillingManager(
             .enablePendingPurchases()
             .build()
     }
+
+    override fun listenPurchases(): Flow<PurchaseInfo> = purchaseBroadcaster.asFlow()
 
     private fun handlePurchases(purchases: List<Purchase>) {
         val status: Boolean = purchases.firstOrNull {
@@ -45,7 +52,7 @@ class BillingManager(
             }
         }
 
-        unlockAppListener?.onLockStatusChanged(isFreeUnlock = false, status = status)
+        purchaseBroadcaster.offer(PurchaseInfo.PurchaseResult(isFreeUnlock = false, unlockStatus = status))
     }
 
     override fun onBillingServiceDisconnected() {
@@ -78,8 +85,7 @@ class BillingManager(
         handlePurchases(purchasesList)
     }
 
-    override fun start(unlockAppListener: UnlockAppListener) {
-        this.unlockAppListener = unlockAppListener
+    override fun start() {
         billingClient.startConnection(this)
     }
 
@@ -103,7 +109,7 @@ class BillingManager(
                 billingClient.launchBillingFlow(activity, flowParams)
             }
         } else {
-            unlockAppListener?.showFailToConnectFeedback()
+            purchaseBroadcaster.offer(PurchaseInfo.PurchaseFail)
         }
     }
 

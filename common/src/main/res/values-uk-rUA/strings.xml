@@ -61,8 +61,8 @@
     <string name="single_click">Одинарний клік</string>
     <string name="double_click">Подвійний клік</string>
     <string name="long_press">Довге натискання</string>
-    <string name="open_tile">Відкрити плитку</string>
-    <string name="flag_tile">Прапорець</string>
+    <string name="open_tile">Відкрити</string>
+    <string name="flag_tile">Прапор</string>
     <string name="retry">Повторити</string>
     <string name="empty">Пусто</string>
     <string name="unknown_error">Невідома помилка.</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Ви натрапили на міну!</string>
     <string name="flag_placed">Прапор розміщено!</string>
     <string name="flag_removed">Прапор вилучено!</string>
+    <string name="remove_ad">Прибрати рекламу</string>
 </resources>

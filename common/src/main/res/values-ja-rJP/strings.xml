@@ -61,8 +61,8 @@
     <string name="single_click">タップ</string>
     <string name="double_click">ダブルタップ</string>
     <string name="long_press">長押し</string>
-    <string name="open_tile">マスを開ける</string>
-    <string name="flag_tile">旗を立てる</string>
+    <string name="open_tile">開く</string>
+    <string name="flag_tile">旗</string>
     <string name="retry">リトライ</string>
     <string name="empty">空</string>
     <string name="unknown_error">不明なエラーです。</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">地雷を爆発させました！</string>
     <string name="flag_placed">フラグを立てました！</string>
     <string name="flag_removed">フラグを消しました！</string>
+    <string name="remove_ad">広告を削除</string>
 </resources>

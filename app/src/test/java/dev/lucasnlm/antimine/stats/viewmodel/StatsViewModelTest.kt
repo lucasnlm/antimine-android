@@ -24,6 +24,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     override fun setup() {
         super.setup()
         every { prefsRepository.getStatsBase() } returns 0
+        every { prefsRepository.isPremiumEnabled() } returns false
     }
 
     @Test

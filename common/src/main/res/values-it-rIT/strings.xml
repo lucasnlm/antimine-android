@@ -61,8 +61,8 @@
     <string name="single_click">Singolo click</string>
     <string name="double_click">Doppio click</string>
     <string name="long_press">Premi a lungo</string>
-    <string name="open_tile">Quadrato aperto</string>
-    <string name="flag_tile">Quadrato con bandiera</string>
+    <string name="open_tile">Apri</string>
+    <string name="flag_tile">Bandiera</string>
     <string name="retry">Riprova</string>
     <string name="empty">Vuoto</string>
     <string name="unknown_error">Errore sconosciuto.</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Hai esploso una mina!</string>
     <string name="flag_placed">Bandiera piazzata!</string>
     <string name="flag_removed">Bandiera rimossa!</string>
+    <string name="remove_ad">Rimuovi gli Annunci</string>
 </resources>

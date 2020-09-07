@@ -49,9 +49,11 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun disableRequestRating() { }
 
-    override fun setPremiumFeatures(status: Boolean, keepShowingSupportButton: Boolean?) { }
+    override fun setPremiumFeatures(status: Boolean) { }
 
     override fun isPremiumEnabled(): Boolean = false
+
+    override fun setShowSupport(show: Boolean) { }
 
     override fun showSupport(): Boolean = true
 

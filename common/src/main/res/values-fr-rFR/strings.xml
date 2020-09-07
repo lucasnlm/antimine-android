@@ -32,7 +32,7 @@
     <string name="size">Taille</string>
     <string name="system">Système</string>
     <string name="rating">Retour d\'expérience</string>
-    <string name="support_title">Supporte nous !</string>
+    <string name="support_title">Soutenez-nous !</string>
     <string name="support_description">Avec votre aide, nous serons en mesure de implémenter de nouvelles fonctionnalités et de maintenir notre projet actif.</string>
     <string name="support_action">Assistance</string>
     <string name="rating_message">Si vous aimez ce jeu, n\'hésitez pas à jour donner un retour. Ça nous serait très utile.</string>
@@ -61,8 +61,8 @@
     <string name="single_click">Clic simple</string>
     <string name="double_click">Double clic</string>
     <string name="long_press">Appui prolongé</string>
-    <string name="open_tile">Ouvrir la tuile</string>
-    <string name="flag_tile">Placer le drapeau</string>
+    <string name="open_tile">Ouvrir</string>
+    <string name="flag_tile">Drapeau</string>
     <string name="retry">Réessayer</string>
     <string name="empty">Vide</string>
     <string name="unknown_error">Erreur inconnue.</string>
@@ -71,7 +71,7 @@
     <string name="resume">Nouv. partie</string>
     <string name="yes">Oui</string>
     <string name="unlock">Déverrouiller</string>
-    <string name="achievements">Réalisations</string>
+    <string name="achievements">Succès</string>
     <string name="rating_button_no">Non</string>
     <string name="general">Général</string>
     <string name="source_code">Code source</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Vous avez touché une mine !</string>
     <string name="flag_placed">Drapeau placé !</string>
     <string name="flag_removed">Drapeau retiré !</string>
+    <string name="remove_ad">Supprimer les publicités</string>
 </resources>

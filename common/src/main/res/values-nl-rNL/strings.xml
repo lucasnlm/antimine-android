@@ -61,8 +61,8 @@
     <string name="single_click">Enkele klik</string>
     <string name="double_click">Dubbele Klik</string>
     <string name="long_press">Lang indrukken</string>
-    <string name="open_tile">Open Tegel</string>
-    <string name="flag_tile">Vlag tegel</string>
+    <string name="open_tile">Open</string>
+    <string name="flag_tile">Vlag</string>
     <string name="retry">Opnieuw</string>
     <string name="empty">Leeg</string>
     <string name="unknown_error">Onbekende fout.</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Je hebt een mijn ontploft!</string>
     <string name="flag_placed">Vlag geplaatst!</string>
     <string name="flag_removed">Vlag verwijderd!</string>
+    <string name="remove_ad">Verwijder advertenties</string>
 </resources>

@@ -61,8 +61,8 @@
     <string name="single_click">نقرة واحدة</string>
     <string name="double_click">انقر مرتين</string>
     <string name="long_press">ضغط مطّول</string>
-    <string name="open_tile">فتح بلاط</string>
-    <string name="flag_tile">مربع العلم</string>
+    <string name="open_tile">فتح</string>
+    <string name="flag_tile">علم</string>
     <string name="retry">إعادة المحاولة</string>
     <string name="empty">فارغ</string>
     <string name="unknown_error">خطأ غير معروف.</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">لقد فجرت لغم!</string>
     <string name="flag_placed">وضع العلم!</string>
     <string name="flag_removed">إزالة العلم!</string>
+    <string name="remove_ad">إزالة الإعلانات</string>
 </resources>

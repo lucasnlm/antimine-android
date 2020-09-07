@@ -34,8 +34,10 @@ interface IPreferencesRepository {
     fun isRequestRatingEnabled(): Boolean
     fun disableRequestRating()
 
-    fun setPremiumFeatures(status: Boolean, keepShowingSupportButton: Boolean?)
+    fun setPremiumFeatures(status: Boolean)
     fun isPremiumEnabled(): Boolean
+
+    fun setShowSupport(show: Boolean)
     fun showSupport(): Boolean
 
     fun useFlagAssistant(): Boolean

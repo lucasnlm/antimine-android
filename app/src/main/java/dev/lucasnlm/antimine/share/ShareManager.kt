@@ -17,7 +17,7 @@ import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.view.paintOnCanvas
-import dev.lucasnlm.antimine.core.themes.repository.Themes.LightTheme
+import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -25,6 +25,7 @@ import java.io.FileOutputStream
 
 class ShareManager(
     private val context: Context,
+    private val themeRepository: IThemeRepository,
 ) {
     private suspend fun share(minefield: Minefield, field: List<Area>): Boolean {
         val file = createImage(minefield, field)
@@ -79,7 +80,7 @@ class ShareManager(
                 area.paintOnCanvas(
                     context,
                     canvas,
-                    theme = LightTheme,
+                    theme = themeRepository.getTheme(),
                     isAmbientMode = false,
                     isLowBitAmbient = false,
                     isFocused = false,

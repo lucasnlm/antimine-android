@@ -61,8 +61,8 @@
     <string name="single_click">Einzelklick</string>
     <string name="double_click">Doppelklick</string>
     <string name="long_press">Lange Drücken</string>
-    <string name="open_tile">Kachel öffnen</string>
-    <string name="flag_tile">Kachel markieren</string>
+    <string name="open_tile">Öffnen</string>
+    <string name="flag_tile">Flagge</string>
     <string name="retry">Erneut versuchen</string>
     <string name="empty">Leer</string>
     <string name="unknown_error">Unbekannter Fehler.</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Du hast eine Mine zur Explosion gebracht!</string>
     <string name="flag_placed">Markierung platziert!</string>
     <string name="flag_removed">Markierung entfernt!</string>
+    <string name="remove_ad">Werbung entfernen</string>
 </resources>

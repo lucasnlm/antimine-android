@@ -6,7 +6,12 @@ import android.content.Context
 interface IAdsManager {
     fun start(context: Context)
     fun isReady(): Boolean
-    fun requestRewarded(activity: Activity, adUnitId: String, onRewarded: (() -> Unit)? = null)
+    fun requestRewarded(
+        activity: Activity,
+        adUnitId: String,
+        onRewarded: (() -> Unit)? = null,
+        onFail: (() -> Unit)? = null,
+    )
 }
 
 object Ads {

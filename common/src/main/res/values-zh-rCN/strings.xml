@@ -61,8 +61,8 @@
     <string name="single_click">单击</string>
     <string name="double_click">双击</string>
     <string name="long_press">长按</string>
-    <string name="open_tile">打开图块</string>
-    <string name="flag_tile">旗帜图块</string>
+    <string name="open_tile">打开</string>
+    <string name="flag_tile">标志</string>
     <string name="retry">重试</string>
     <string name="empty">空</string>
     <string name="unknown_error">未知错误。</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">你引爆了一个地雷！</string>
     <string name="flag_placed">标记已放置！</string>
     <string name="flag_removed">标记已移除！</string>
+    <string name="remove_ad">去除广告</string>
 </resources>

@@ -17,7 +17,15 @@ class StatsViewModel(
 
         return if (statsCount > 0) {
             val result = stats.fold(
-                StatsModel(statsCount, 0L, 0L, 0, 0, 0)
+                StatsModel(
+                    totalGames = statsCount,
+                    duration = 0,
+                    averageDuration = 0,
+                    mines = 0,
+                    victory = 0,
+                    openArea = 0,
+                    showAds = !preferenceRepository.isPremiumEnabled(),
+                )
             ) { acc, value ->
                 StatsModel(
                     acc.totalGames,
@@ -25,12 +33,21 @@ class StatsViewModel(
                     0,
                     acc.mines + value.mines,
                     acc.victory + value.victory,
-                    acc.openArea + value.openArea
+                    acc.openArea + value.openArea,
+                    showAds = !preferenceRepository.isPremiumEnabled(),
                 )
             }
             result.copy(averageDuration = result.duration / result.totalGames)
         } else {
-            emptyStats
+            StatsModel(
+                totalGames = 0,
+                duration = 0,
+                averageDuration = 0,
+                mines = 0,
+                victory = 0,
+                openArea = 0,
+                showAds = !preferenceRepository.isPremiumEnabled()
+            )
         }
     }
 
@@ -40,7 +57,15 @@ class StatsViewModel(
         }
     }
 
-    override fun initialState(): StatsModel = emptyStats
+    override fun initialState() = StatsModel(
+        totalGames = 0,
+        duration = 0,
+        averageDuration = 0,
+        mines = 0,
+        victory = 0,
+        openArea = 0,
+        showAds = !preferenceRepository.isPremiumEnabled()
+    )
 
     override suspend fun mapEventToState(event: StatsEvent) = flow {
         when (event) {
@@ -49,12 +74,17 @@ class StatsViewModel(
             }
             is StatsEvent.DeleteStats -> {
                 deleteAll()
-                emit(emptyStats)
+                emit(
+                    state.copy(
+                        totalGames = 0,
+                        duration = 0,
+                        averageDuration = 0,
+                        mines = 0,
+                        victory = 0,
+                        openArea = 0,
+                    )
+                )
             }
         }
-    }
-
-    companion object {
-        val emptyStats = StatsModel(0, 0, 0, 0, 0, 0)
     }
 }

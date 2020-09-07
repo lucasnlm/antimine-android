@@ -104,12 +104,10 @@ class AreaAdapter(
                     when (motionEvent.action) {
                         MotionEvent.ACTION_DOWN -> {
                             view.isPressed = true
-                            viewModel.startLongPressFeedback()
                             true
                         }
                         MotionEvent.ACTION_UP -> {
                             view.isPressed = false
-                            viewModel.cancelLongPressFeedback()
                             val dt = motionEvent.eventTime - motionEvent.downTime
 
                             if (dt > preferencesRepository.customLongPressTimeout()) {

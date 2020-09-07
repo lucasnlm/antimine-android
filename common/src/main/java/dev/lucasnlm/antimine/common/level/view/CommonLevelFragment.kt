@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.common.level.view
 
+import android.content.Context
 import android.text.format.DateUtils
 import android.view.View
 import androidx.annotation.LayoutRes
@@ -52,9 +53,16 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
 
     private fun calcVerticalPadding(view: View, boardHeight: Int): Int {
         val height = view.measuredHeight
+        val hasAds = !preferencesRepository.isPremiumEnabled()
+        val adsHeight = if (hasAds) dpFromPx(view.context, 60.0f) else 0
+
         val recyclerViewHeight = (dimensionRepository.areaSize() * boardHeight)
         val separatorsHeight = (2 * dimensionRepository.areaSeparator() * (boardHeight - 1))
-        val calculatedHeight = (height - recyclerViewHeight - separatorsHeight)
-        return (calculatedHeight / 2).coerceAtLeast(0.0f).toInt()
+        val calculatedHeight = (height - recyclerViewHeight - separatorsHeight - adsHeight)
+        return ((calculatedHeight / 2) - adsHeight).coerceAtLeast(0.0f).toInt()
+    }
+
+    open fun dpFromPx(context: Context, px: Float): Int {
+        return (px / context.resources.displayMetrics.density).toInt()
     }
 }

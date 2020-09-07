@@ -157,14 +157,14 @@ class PreferencesRepository(
         }
     }
 
-    override fun setPremiumFeatures(status: Boolean, keepShowingSupportButton: Boolean?) {
+    override fun setPremiumFeatures(status: Boolean) {
         if (!preferencesManager.getBoolean(PREFERENCE_PREMIUM_FEATURES, false)) {
             preferencesManager.putBoolean(PREFERENCE_PREMIUM_FEATURES, status)
-
-            keepShowingSupportButton?.let {
-                preferencesManager.putBoolean(PREFERENCE_SHOW_SUPPORT, it)
-            }
         }
+    }
+
+    override fun setShowSupport(show: Boolean) {
+        preferencesManager.putBoolean(PREFERENCE_SHOW_SUPPORT, show)
     }
 
     override fun isPremiumEnabled(): Boolean =

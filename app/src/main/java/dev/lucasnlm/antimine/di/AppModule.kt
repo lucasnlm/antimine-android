@@ -31,9 +31,9 @@ val AppModule = module {
 
     single { ReviewWrapper() } bind IReviewWrapper::class
 
-    single { ShareManager(get()) }
+    single { ShareManager(get(), get()) }
 
-    single { IapHandler(get(), get()) }
+    single { IapHandler(get(), get(), get()) }
 
     single {
         if (BuildConfig.DEBUG) {

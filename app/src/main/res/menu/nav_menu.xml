@@ -37,6 +37,15 @@
         </menu>
     </item>
 
+    <group android:id="@+id/remove_ads_group" android:visible="false">
+        <item
+            android:id="@+id/remove_ads"
+            android:checkable="false"
+            android:visible="false"
+            android:icon="@drawable/remove_ads"
+            android:title="@string/remove_ad" />
+    </group>
+
     <group android:id="@+id/history_group">
         <item
             android:id="@+id/previous_games"

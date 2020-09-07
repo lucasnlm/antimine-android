@@ -61,8 +61,8 @@
     <string name="single_click">Pojedyncze kliknięcie</string>
     <string name="double_click">Podwójne kliknięcie</string>
     <string name="long_press">Długie naciśnięcie</string>
-    <string name="open_tile">Odkryj pole</string>
-    <string name="flag_tile">Oznacz pole</string>
+    <string name="open_tile">Otwórz</string>
+    <string name="flag_tile">Oznacz</string>
     <string name="retry">Jeszcze raz</string>
     <string name="empty">Puste</string>
     <string name="unknown_error">Nieznany błąd.</string>
@@ -90,7 +90,7 @@
     <string name="close_menu">Zamknij menu</string>
     <string name="delete_all">Usuń wszystkie</string>
     <string name="themes">Motywy</string>
-    <string name="try_it">Spróbuj</string>
+    <string name="try_it">Wypróbuj</string>
     <string name="delete_all_message">Usuń wszystkie zdarzenia na stałe.</string>
     <string name="all_mines_disabled">Wszystkie miny zostały rozbrojone.</string>
     <string name="desc_convered_area">Nieodkryte pole</string>
@@ -102,4 +102,5 @@
     <string name="you_exploded_a_mine">Zdetonowano minę!</string>
     <string name="flag_placed">Umieszczono flagę!</string>
     <string name="flag_removed">Usunięto flagę!</string>
+    <string name="remove_ad">Usunąć reklamy</string>
 </resources>

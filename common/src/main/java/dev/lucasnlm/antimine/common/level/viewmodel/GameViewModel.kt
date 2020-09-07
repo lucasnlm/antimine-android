@@ -29,11 +29,9 @@ import dev.lucasnlm.external.Achievement
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.Leaderboard
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -57,7 +55,6 @@ class GameViewModel(
     private lateinit var gameController: GameController
     private var initialized = false
     private var currentDifficulty: Difficulty = Difficulty.Standard
-    private var longPressFeedback: Job? = null
 
     val field = MutableLiveData<List<Area>>()
     val elapsedTimeSeconds = MutableLiveData<Long>()
@@ -216,19 +213,27 @@ class GameViewModel(
     }
 
     suspend fun saveGame() {
-        if (initialized && gameController.hasMines()) {
-            val id = savesRepository.saveGame(
-                gameController.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
-            )
-            gameController.setCurrentSaveId(id?.toInt() ?: 0)
-            saveId.postValue(id)
+        if (initialized) {
+            gameController.let {
+                if (it.hasMines()) {
+                    val id = savesRepository.saveGame(
+                        it.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
+                    )
+                    it.setCurrentSaveId(id?.toInt() ?: 0)
+                    saveId.postValue(id)
+                }
+            }
         }
     }
 
     private suspend fun saveStats() {
-        if (initialized && gameController.hasMines()) {
-            gameController.getStats(elapsedTimeSeconds.value ?: 0L)?.let {
-                statsRepository.addStats(it)
+        if (initialized) {
+            gameController.let {
+                if (it.hasMines()) {
+                    it.getStats(elapsedTimeSeconds.value ?: 0L)?.let { stats ->
+                        statsRepository.addStats(stats)
+                    }
+                }
             }
         }
     }
@@ -238,24 +243,6 @@ class GameViewModel(
             eventObserver.postValue(Event.Resume)
             runClock()
         }
-    }
-
-    fun startLongPressFeedback() {
-        if (preferencesRepository.useHapticFeedback()) {
-            longPressFeedback = viewModelScope.launch {
-                delay(preferencesRepository.customLongPressTimeout())
-
-                if (isActive) {
-                    hapticFeedbackManager.longPressFeedback()
-                    longPressFeedback = null
-                }
-            }
-        }
-    }
-
-    fun cancelLongPressFeedback() {
-        longPressFeedback?.cancel()
-        longPressFeedback = null
     }
 
     suspend fun onLongClick(index: Int) {
@@ -375,7 +362,7 @@ class GameViewModel(
         gameController.run {
             analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
             val explosionTime = (explosionDelay() / gameController.getMinesCount().coerceAtLeast(10))
-            val delayMillis = explosionTime.coerceAtLeast(25L)
+            val delayMillis = explosionTime.coerceAtMost(25L)
 
             if (!fromResumeGame) {
                 if (preferencesRepository.useHapticFeedback()) {
@@ -391,12 +378,14 @@ class GameViewModel(
             refreshField()
 
             findExplodedMine()?.let { exploded ->
-                takeExplosionRadius(exploded).forEach {
+                takeExplosionRadius(exploded).take(20).forEach {
                     revealArea(it.id)
                     refreshField()
                     delay(delayMillis)
                 }
             }
+
+            showAllMines()
 
             refreshField()
             updateGameState()

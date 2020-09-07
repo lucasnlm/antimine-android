@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.text.viewmodel
 
 import android.content.Context
+import android.content.res.Resources
 import androidx.annotation.RawRes
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.text.models.TextState
@@ -12,12 +13,16 @@ class TextViewModel(
     private val context: Context,
 ) : IntentViewModel<TextEvent, TextState>() {
 
-    private suspend fun loadText(@RawRes rawFile: Int): String {
-        return withContext(Dispatchers.IO) {
-            context.resources.openRawResource(rawFile)
-                .bufferedReader()
-                .readLines()
-                .joinToString("\n")
+    private suspend fun loadText(@RawRes rawFile: Int): String? {
+        return try {
+            withContext(Dispatchers.IO) {
+                context.resources.openRawResource(rawFile)
+                    .bufferedReader()
+                    .readLines()
+                    .joinToString("\n")
+            }
+        } catch (e: Resources.NotFoundException) {
+            ""
         }
     }
 
