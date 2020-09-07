@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine.theme
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import dev.lucasnlm.antimine.R
@@ -58,7 +59,8 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
             launch {
                 themeViewModel.observeState().collect {
                     if (usingTheme.id != it.current.id) {
-                        recreate()
+                        finish()
+                        startActivity(intent)
                         overridePendingTransition(0, 0)
                     }
                 }

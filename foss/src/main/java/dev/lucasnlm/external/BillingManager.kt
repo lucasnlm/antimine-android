@@ -4,12 +4,15 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import dev.lucasnlm.external.model.PurchaseInfo
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 class BillingManager(
     private val context: Context,
 ) : IBillingManager {
 
-    override fun start(unlockAppListener: UnlockAppListener) {
+    override fun start() {
         // Empty
     }
 
@@ -19,6 +22,8 @@ class BillingManager(
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(DONATE_LINK))
         activity.startActivity(intent)
     }
+
+    override fun listenPurchases(): Flow<PurchaseInfo> = flowOf()
 
     companion object {
         const val DONATE_LINK =

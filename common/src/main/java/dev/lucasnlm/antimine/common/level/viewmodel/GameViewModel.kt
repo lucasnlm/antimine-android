@@ -213,19 +213,27 @@ class GameViewModel(
     }
 
     suspend fun saveGame() {
-        if (initialized && gameController.hasMines()) {
-            val id = savesRepository.saveGame(
-                gameController.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
-            )
-            gameController.setCurrentSaveId(id?.toInt() ?: 0)
-            saveId.postValue(id)
+        if (initialized) {
+            gameController.let {
+                if (it.hasMines()) {
+                    val id = savesRepository.saveGame(
+                        it.getSaveState(elapsedTimeSeconds.value ?: 0L, currentDifficulty)
+                    )
+                    it.setCurrentSaveId(id?.toInt() ?: 0)
+                    saveId.postValue(id)
+                }
+            }
         }
     }
 
     private suspend fun saveStats() {
-        if (initialized && gameController.hasMines()) {
-            gameController.getStats(elapsedTimeSeconds.value ?: 0L)?.let {
-                statsRepository.addStats(it)
+        if (initialized) {
+            gameController.let {
+                if (it.hasMines()) {
+                    it.getStats(elapsedTimeSeconds.value ?: 0L)?.let { stats ->
+                        statsRepository.addStats(stats)
+                    }
+                }
             }
         }
     }

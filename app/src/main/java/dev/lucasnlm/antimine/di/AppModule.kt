@@ -33,7 +33,7 @@ val AppModule = module {
 
     single { ShareManager(get(), get()) }
 
-    single { IapHandler(get(), get()) }
+    single { IapHandler(get(), get(), get()) }
 
     single {
         if (BuildConfig.DEBUG) {

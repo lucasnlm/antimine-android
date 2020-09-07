@@ -49,6 +49,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
     implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
 
-    // Kotlin Lib
+    // Kotlin
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.0'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9'
 }

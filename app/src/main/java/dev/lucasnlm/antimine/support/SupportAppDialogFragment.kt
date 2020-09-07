@@ -3,26 +3,19 @@ package dev.lucasnlm.antimine.support
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
-import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
-import dev.lucasnlm.external.Ads
-import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IBillingManager
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class SupportAppDialogFragment : AppCompatDialogFragment() {
     private val billingManager: IBillingManager by inject()
-    private val themeRepository: IThemeRepository by inject()
     private val analyticsManager: IAnalyticsManager by inject()
-    private val adsManager: IAdsManager by inject()
-    private val iapHandler: IapHandler by inject()
 
     private var unlockMessage: Int = R.string.support_action
     private var targetThemeId: Long = -1L
@@ -30,7 +23,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        billingManager.start(iapHandler)
+        billingManager.start()
         analyticsManager.sentEvent(Analytics.ShowIapDialog)
 
         unlockMessage =
@@ -43,27 +36,8 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
         return AlertDialog.Builder(requireContext()).apply {
             setView(R.layout.dialog_payments)
 
-            if (targetThemeId != -1L) {
-                setNeutralButton(R.string.try_it) { _, _ ->
-                    analyticsManager.sentEvent(Analytics.UnlockRewardedDialog)
-                    adsManager.requestRewarded(
-                        requireActivity(),
-                        Ads.RewardsAds,
-                        onRewarded = {
-                            if (targetThemeId > 0) {
-                                themeRepository.setTheme(targetThemeId)
-                                requireActivity().recreate()
-                            }
-                        },
-                        onFail = {
-                            Toast.makeText(context, R.string.sign_in_failed, Toast.LENGTH_SHORT).show()
-                        }
-                    )
-                }
-            } else {
-                setNeutralButton(R.string.rating_button_no) { _, _ ->
-                    analyticsManager.sentEvent(Analytics.DenyIapDialog)
-                }
+            setNeutralButton(R.string.rating_button_no) { _, _ ->
+                analyticsManager.sentEvent(Analytics.DenyIapDialog)
             }
 
             setPositiveButton(unlockMessage) { _, _ ->

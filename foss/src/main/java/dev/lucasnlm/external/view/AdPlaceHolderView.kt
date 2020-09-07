@@ -8,4 +8,6 @@ class AdPlaceHolderView(context: Context, attrs: AttributeSet?) : FrameLayout(co
     init {
         visibility = GONE
     }
+
+    fun loadAd() { }
 }

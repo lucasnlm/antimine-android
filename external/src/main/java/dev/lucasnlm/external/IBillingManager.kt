@@ -1,15 +1,12 @@
 package dev.lucasnlm.external
 
 import android.app.Activity
+import dev.lucasnlm.external.model.PurchaseInfo
+import kotlinx.coroutines.flow.Flow
 
 interface IBillingManager {
-    fun start(unlockAppListener: UnlockAppListener)
+    fun start()
     fun isEnabled(): Boolean
     suspend fun charge(activity: Activity)
-}
-
-interface UnlockAppListener {
-    fun onLockStatusChanged(status: Boolean, isFreeUnlock: Boolean? = null)
-
-    fun showFailToConnectFeedback()
+    fun listenPurchases(): Flow<PurchaseInfo>
 }

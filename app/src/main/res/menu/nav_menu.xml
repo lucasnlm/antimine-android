@@ -37,7 +37,7 @@
         </menu>
     </item>
 
-    <group android:id="@+id/remove_ads_group">
+    <group android:id="@+id/remove_ads_group" android:visible="false">
         <item
             android:id="@+id/remove_ads"
             android:checkable="false"
