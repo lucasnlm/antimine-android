@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.theme
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import dev.lucasnlm.antimine.R

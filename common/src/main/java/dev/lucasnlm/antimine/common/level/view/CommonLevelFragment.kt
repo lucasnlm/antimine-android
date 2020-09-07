@@ -65,5 +65,4 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
     open fun dpFromPx(context: Context, px: Float): Int {
         return (px / context.resources.displayMetrics.density).toInt()
     }
-
 }
