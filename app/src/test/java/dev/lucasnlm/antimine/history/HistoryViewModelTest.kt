@@ -10,12 +10,14 @@ import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.history.viewmodel.HistoryEvent
 import dev.lucasnlm.antimine.history.viewmodel.HistoryState
 import dev.lucasnlm.antimine.history.viewmodel.HistoryViewModel
+import dev.lucasnlm.antimine.mocks.MockPreferencesRepository
 import io.mockk.coEvery
 import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class HistoryViewModelTest : IntentViewModelTest() {
+    private val mockPreferences = MockPreferencesRepository()
     private val fakeMinefield = Minefield(9, 9, 9)
     private val allSaves = listOf(
         Save(
@@ -37,8 +39,8 @@ class HistoryViewModelTest : IntentViewModelTest() {
 
     @Test
     fun testInitialValue() {
-        val viewModel = HistoryViewModel(mockk(), mockk())
-        assertEquals(HistoryState(listOf()), viewModel.singleState())
+        val viewModel = HistoryViewModel(mockk(), mockk(), mockPreferences)
+        assertEquals(HistoryState(listOf(), true), viewModel.singleState())
     }
 
     @Test
@@ -47,10 +49,10 @@ class HistoryViewModelTest : IntentViewModelTest() {
             coEvery { getAllSaves() } returns allSaves
         }
 
-        val state = HistoryViewModel(mockk(), savesRepository).run {
+        val state = HistoryViewModel(mockk(), savesRepository, mockPreferences).run {
             sendEvent(HistoryEvent.LoadAllSaves)
             singleState()
         }
-        assertEquals(HistoryState(allSaves.sortedByDescending { it.uid }), state)
+        assertEquals(HistoryState(allSaves.sortedByDescending { it.uid }, true), state)
     }
 }
