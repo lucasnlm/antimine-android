@@ -21,7 +21,7 @@ class IapHandler(
         GlobalScope.launch {
             billingManager.listenPurchases().collect {
                 if (it is PurchaseInfo.PurchaseResult) {
-                    onLockStatusChanged(it.unlockStatus, it.isFreeUnlock)
+                    onLockStatusChanged(it.unlockStatus)
                 } else {
                     showFailToConnectFeedback()
                 }
@@ -29,8 +29,8 @@ class IapHandler(
         }
     }
 
-    private fun onLockStatusChanged(status: Boolean, isFreeUnlock: Boolean?) {
-        preferencesManager.setPremiumFeatures(status, isFreeUnlock)
+    private fun onLockStatusChanged(status: Boolean) {
+        preferencesManager.setPremiumFeatures(status)
     }
 
     private suspend fun showFailToConnectFeedback() {

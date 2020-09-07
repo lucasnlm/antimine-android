@@ -387,7 +387,11 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         } else {
             val current = preferencesRepository.getUseCount()
             val shouldRequestRating = preferencesRepository.isRequestRatingEnabled()
-            val shouldRequestSupport = !preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()
+            val shouldRequestSupport = if (billingManager.isEnabled()) {
+                !preferencesRepository.isPremiumEnabled()
+            } else {
+                preferencesRepository.showSupport()
+            }
 
             if (current >= MIN_USAGES_TO_IAP && shouldRequestSupport) {
                 analyticsManager.sentEvent(Analytics.UnlockIapDialog)

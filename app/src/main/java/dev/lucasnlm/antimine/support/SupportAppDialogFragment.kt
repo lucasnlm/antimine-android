@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
+import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.external.IBillingManager
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -16,6 +17,7 @@ import org.koin.android.ext.android.inject
 class SupportAppDialogFragment : AppCompatDialogFragment() {
     private val billingManager: IBillingManager by inject()
     private val analyticsManager: IAnalyticsManager by inject()
+    private val preferenceRepository: IPreferencesRepository by inject()
 
     private var unlockMessage: Int = R.string.support_action
     private var targetThemeId: Long = -1L
@@ -42,6 +44,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
 
             setPositiveButton(unlockMessage) { _, _ ->
                 lifecycleScope.launch {
+                    preferenceRepository.setShowSupport(false)
                     analyticsManager.sentEvent(Analytics.UnlockIapDialog)
                     billingManager.charge(requireActivity())
                 }
