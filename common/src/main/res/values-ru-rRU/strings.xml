@@ -72,7 +72,7 @@
     <string name="yes">Да</string>
     <string name="unlock">Разблокировать</string>
     <string name="achievements">Достижения</string>
-    <string name="rating_button_no">Нет</string>
+    <string name="no">Нет</string>
     <string name="general">Общее</string>
     <string name="source_code">Исходный код</string>
     <string name="translation">Перевод</string>
