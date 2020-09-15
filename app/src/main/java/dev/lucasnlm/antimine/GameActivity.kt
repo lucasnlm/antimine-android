@@ -56,7 +56,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -385,6 +384,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
             // New Features
             findItem(R.id.themes).setActionView(R.layout.new_icon)
+            findItem(R.id.tutorial).setActionView(R.layout.new_icon)
         }
     }
 

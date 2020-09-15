@@ -78,7 +78,6 @@ class TutorialViewModel(
     }
 
     override suspend fun onDoubleClick(index: Int) {
-
     }
 
     override suspend fun onSingleClick(index: Int) {
