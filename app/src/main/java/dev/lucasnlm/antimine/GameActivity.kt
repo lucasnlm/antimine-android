@@ -58,7 +58,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
+import java.util.Locale
 
 class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
     private val billingManager: IBillingManager by inject()
@@ -338,7 +338,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             )
 
             if (preferencesRepository.isFirstUse() &&
-                (preferencesRepository.isTutorialCompleted() || !hasTranslatedTutorial())) {
+                (preferencesRepository.isTutorialCompleted() || !hasTranslatedTutorial())
+            ) {
                 openDrawer(GravityCompat.START)
                 preferencesRepository.completeFirstUse()
             }
