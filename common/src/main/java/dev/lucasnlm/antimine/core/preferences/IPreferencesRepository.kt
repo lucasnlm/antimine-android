@@ -16,6 +16,9 @@ interface IPreferencesRepository {
     fun isFirstUse(): Boolean
     fun completeFirstUse()
 
+    fun isTutorialCompleted(): Boolean
+    fun completeTutorial()
+
     fun customLongPressTimeout(): Long
 
     fun themeId(): Long

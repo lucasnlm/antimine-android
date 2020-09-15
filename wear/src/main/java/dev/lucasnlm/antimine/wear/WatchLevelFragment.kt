@@ -17,8 +17,6 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        recyclerGrid = view.findViewById(R.id.recyclerGrid)
         recyclerGrid.doOnLayout {
             lifecycleScope.launch {
                 val levelSetup = gameViewModel.loadLastGame()

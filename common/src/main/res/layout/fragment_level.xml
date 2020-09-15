@@ -15,7 +15,6 @@
         android:fadeScrollbars="true"
         android:importantForAccessibility="no"
         android:overScrollMode="never"
-        android:scrollbars="none"
-        android:alpha="0" />
+        android:scrollbars="none" />
 
 </FrameLayout>

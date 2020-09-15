@@ -83,6 +83,7 @@
             android:background="?selectableItemBackgroundBorderless"
             android:contentDescription="@string/new_game"
             android:padding="14dp"
+            android:visibility="gone"
             ads:layout_constraintRight_toRightOf="parent"
             ads:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/retry"

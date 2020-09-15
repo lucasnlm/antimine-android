@@ -74,7 +74,15 @@ class PreferencesRepository(
         preferencesManager.getBoolean(PREFERENCE_FIRST_USE, true)
 
     override fun completeFirstUse() {
-        preferencesManager.putBoolean(PREFERENCE_FIRST_USE, false)
+        preferencesManager.putBoolean(PREFERENCE_TUTORIAL_COMPLETED, false)
+    }
+
+    override fun isTutorialCompleted(): Boolean {
+        return preferencesManager.getBoolean(PREFERENCE_TUTORIAL_COMPLETED, false)
+    }
+
+    override fun completeTutorial() {
+        preferencesManager.putBoolean(PREFERENCE_TUTORIAL_COMPLETED, true)
     }
 
     override fun customLongPressTimeout(): Long =
@@ -155,6 +163,10 @@ class PreferencesRepository(
         if (!preferencesManager.contains(PREFERENCE_LONG_PRESS_TIMEOUT)) {
             preferencesManager.putInt(PREFERENCE_LONG_PRESS_TIMEOUT, defaultLongPressTimeout)
         }
+
+        if (!isFirstUse()) {
+            preferencesManager.putBoolean(PREFERENCE_TUTORIAL_COMPLETED, true)
+        }
     }
 
     override fun setPremiumFeatures(status: Boolean) {
@@ -192,6 +204,7 @@ class PreferencesRepository(
         private const val PREFERENCE_PROGRESSIVE_VALUE = "preference_progressive_value"
         private const val PREFERENCE_LONG_PRESS_TIMEOUT = "preference_long_press_timeout"
         private const val PREFERENCE_FIRST_USE = "preference_first_use"
+        private const val PREFERENCE_TUTORIAL_COMPLETED = "preference_tutorial_completed"
         private const val PREFERENCE_USE_COUNT = "preference_use_count"
         private const val PREFERENCE_REQUEST_RATING = "preference_request_rating"
         private const val PREFERENCE_PREMIUM_FEATURES = "preference_premium_features"

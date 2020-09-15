@@ -40,6 +40,8 @@ import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.ThemeActivity
 import dev.lucasnlm.external.IBillingManager
+import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
+import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
@@ -54,6 +56,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -101,7 +104,11 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
         findViewById<FrameLayout>(R.id.levelContainer).doOnLayout {
             if (!isFinishing) {
-                loadGameFragment()
+                if (!preferencesRepository.isTutorialCompleted()) {
+                    loadGameFragment()
+                } else {
+                    loadGameTutorial()
+                }
             }
         }
 
@@ -330,7 +337,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 }
             )
 
-            if (preferencesRepository.isFirstUse()) {
+            if (preferencesRepository.isFirstUse() && preferencesRepository.isTutorialCompleted()) {
                 openDrawer(GravityCompat.START)
                 preferencesRepository.completeFirstUse()
             }
@@ -357,6 +364,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 R.id.stats -> openStats()
                 R.id.play_games -> googlePlay()
                 R.id.remove_ads -> showSupportAppDialog()
+                R.id.tutorial -> loadGameTutorial()
                 else -> handled = false
             }
 
@@ -423,8 +431,32 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun loadGameFragment() {
         supportFragmentManager.apply {
-            popBackStack()
+            findFragmentByTag(LevelFragment.TAG)?.let { it ->
+                beginTransaction().apply {
+                    remove(it)
+                    commitAllowingStateLoss()
+                }
+            }
 
+            findFragmentByTag(TutorialLevelFragment.TAG)?.let { it ->
+                beginTransaction().apply {
+                    remove(it)
+                    commitAllowingStateLoss()
+                }
+            }
+
+            if (findFragmentByTag(LevelFragment.TAG) == null) {
+                beginTransaction().apply {
+                    replace(R.id.levelContainer, LevelFragment())
+                    setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    commitAllowingStateLoss()
+                }
+            }
+        }
+    }
+
+    private fun loadGameTutorial() {
+        supportFragmentManager.apply {
             findFragmentById(R.id.levelContainer)?.let { it ->
                 beginTransaction().apply {
                     remove(it)
@@ -433,8 +465,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
 
             beginTransaction().apply {
-                replace(R.id.levelContainer, LevelFragment())
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                replace(R.id.levelContainer, TutorialLevelFragment(), TutorialLevelFragment.TAG)
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 commitAllowingStateLoss()
             }
         }
@@ -503,6 +535,12 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
+    private fun showCompletedTutorialDialog() {
+        TutorialCompleteDialogFragment().run {
+            showAllowingStateLoss(supportFragmentManager, TutorialCompleteDialogFragment.TAG)
+        }
+    }
+
     private fun showEndGameDialog(victory: Boolean) {
         val currentGameStatus = status
         if (currentGameStatus is Status.Over && !isFinishing && !drawer.isDrawerOpen(GravityCompat.START)) {
@@ -534,13 +572,17 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun changeDifficulty(newDifficulty: Difficulty) {
+        preferencesRepository.completeTutorial()
+
         if (status == Status.PreGame) {
-            GlobalScope.launch {
+            loadGameFragment()
+            lifecycleScope.launch {
                 gameViewModel.startNewGame(newDifficulty)
             }
         } else {
             newGameConfirmation {
-                GlobalScope.launch {
+                loadGameFragment()
+                lifecycleScope.launch {
                     gameViewModel.startNewGame(newDifficulty)
                 }
             }
@@ -563,6 +605,18 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 gameViewModel.runClock()
                 refreshShortcutIcon()
                 keepScreenOn(true)
+            }
+            Event.StartTutorial -> {
+                status = Status.PreGame
+                loadGameTutorial()
+            }
+            Event.FinishTutorial -> {
+                gameViewModel.startNewGame(Difficulty.Beginner)
+                loadGameFragment()
+                status = Status.Over(0, Score(4, 4, 25))
+                analyticsManager.sentEvent(Analytics.TutorialCompleted)
+                preferencesRepository.completeTutorial()
+                showCompletedTutorialDialog()
             }
             Event.Victory -> {
                 val isResuming = (status == Status.PreGame)

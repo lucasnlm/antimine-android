@@ -1,11 +1,12 @@
 package dev.lucasnlm.antimine.common.level.view
 
 import android.content.Context
-import android.text.format.DateUtils
+import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -23,6 +24,11 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
     }
     protected lateinit var recyclerGrid: RecyclerView
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        recyclerGrid = view.findViewById(R.id.recyclerGrid)
+    }
+
     private fun makeNewLayoutManager(boardWidth: Int) =
         FixedGridLayoutManager().apply {
             setTotalColumnCount(boardWidth)
@@ -35,12 +41,6 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
             setPadding(horizontalPadding, verticalPadding, 0, 0)
             layoutManager = makeNewLayoutManager(levelSetup.width)
             adapter = areaAdapter
-            alpha = 0.0f
-
-            animate().apply {
-                alpha(1.0f)
-                duration = DateUtils.SECOND_IN_MILLIS
-            }.start()
         }
     }
 

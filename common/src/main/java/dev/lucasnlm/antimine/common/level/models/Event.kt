@@ -8,4 +8,6 @@ enum class Event {
     Running,
     Victory,
     GameOver,
+    StartTutorial,
+    FinishTutorial,
 }

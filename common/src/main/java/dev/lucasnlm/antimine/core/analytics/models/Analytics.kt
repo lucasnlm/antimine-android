@@ -91,6 +91,10 @@ sealed class Analytics(
 
     object OpenThemes : Analytics("Open Themes")
 
+    object TutorialStarted : Analytics("Tutorial Started")
+
+    object TutorialCompleted : Analytics("Tutorial Completed")
+
     object OpenAchievements : Analytics("Open Achievements")
 
     object OpenLeaderboards : Analytics("Open Leaderboards")

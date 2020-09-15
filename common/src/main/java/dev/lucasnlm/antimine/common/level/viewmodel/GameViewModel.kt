@@ -35,7 +35,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class GameViewModel(
+open class GameViewModel(
     private val savesRepository: ISavesRepository,
     private val statsRepository: IStatsRepository,
     private val dimensionRepository: IDimensionRepository,
@@ -203,6 +203,11 @@ class GameViewModel(
         }
     }
 
+    suspend fun loadGame(): Minefield {
+        val currentLevelSetup = levelSetup.value
+        return currentLevelSetup ?: loadLastGame()
+    }
+
     fun pauseGame() {
         if (initialized) {
             if (gameController.hasMines()) {
@@ -245,7 +250,7 @@ class GameViewModel(
         }
     }
 
-    suspend fun onLongClick(index: Int) {
+    open suspend fun onLongClick(index: Int) {
         gameController
             .longPress(index)
             .filterNotNull()
@@ -260,7 +265,7 @@ class GameViewModel(
             }
     }
 
-    suspend fun onDoubleClick(index: Int) {
+    open suspend fun onDoubleClick(index: Int) {
         gameController
             .doubleClick(index)
             .filterNotNull()
@@ -271,7 +276,7 @@ class GameViewModel(
             }
     }
 
-    suspend fun onSingleClick(index: Int) {
+    open suspend fun onSingleClick(index: Int) {
         gameController
             .singleClick(index)
             .filterNotNull()

@@ -78,6 +78,12 @@
             android:checkable="false"
             android:icon="@drawable/settings"
             android:title="@string/settings" />
+
+        <item
+            android:id="@+id/tutorial"
+            android:checkable="false"
+            android:icon="@drawable/tutorial"
+            android:title="@string/tutorial" />
     </group>
 
     <group android:id="@+id/play_games_group">

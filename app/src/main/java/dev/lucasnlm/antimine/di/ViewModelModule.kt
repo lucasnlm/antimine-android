@@ -10,6 +10,7 @@ import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesViewModel
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
 import dev.lucasnlm.antimine.text.viewmodel.TextViewModel
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
+import dev.lucasnlm.antimine.tutorial.viewmodel.TutorialViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -25,5 +26,8 @@ val ViewModelModule = module {
     viewModel { ThemeViewModel(get(), get(), get(), get()) }
     viewModel {
         GameViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
+    }
+    viewModel {
+        TutorialViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
 }

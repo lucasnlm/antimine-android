@@ -1,0 +1,179 @@
+package dev.lucasnlm.antimine.tutorial.viewmodel
+
+import android.content.Context
+import dev.lucasnlm.antimine.common.R
+import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
+import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
+import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
+import dev.lucasnlm.antimine.common.level.utils.Clock
+import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
+import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
+import dev.lucasnlm.antimine.core.analytics.models.Analytics
+import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.core.sound.ISoundManager
+import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
+import dev.lucasnlm.antimine.tutorial.view.TutorialField
+import dev.lucasnlm.external.IPlayGamesManager
+import kotlinx.coroutines.flow.MutableStateFlow
+
+class TutorialViewModel(
+    savesRepository: ISavesRepository,
+    statsRepository: IStatsRepository,
+    dimensionRepository: IDimensionRepository,
+    preferencesRepository: IPreferencesRepository,
+    themeRepository: IThemeRepository,
+    soundManager: ISoundManager,
+    minefieldRepository: IMinefieldRepository,
+    analyticsManager: IAnalyticsManager,
+    playGamesManager: IPlayGamesManager,
+    clock: Clock,
+    private val context: Context,
+    private val hapticFeedbackManager: IHapticFeedbackManager,
+) : GameViewModel(
+    savesRepository,
+    statsRepository,
+    dimensionRepository,
+    preferencesRepository,
+    hapticFeedbackManager,
+    themeRepository,
+    soundManager,
+    minefieldRepository,
+    analyticsManager,
+    playGamesManager,
+    clock,
+) {
+    val tutorialState = MutableStateFlow(
+        TutorialState(
+            0,
+            context.getString(R.string.tutorial),
+            context.getString(R.string.tutorial_0_bottom, openActionLabel()),
+            completed = false,
+        )
+    )
+
+    init {
+        field.postValue(TutorialField.getStep0())
+        analyticsManager.sentEvent(Analytics.TutorialStarted)
+    }
+
+    private fun currentStep(): Int {
+        return tutorialState.value.step
+    }
+
+    private fun openActionLabel(): String = context.getString(R.string.single_click)
+
+    private fun flagActionLabel(): String = context.getString(R.string.long_press)
+
+    private fun postStep(step: List<Area>, top: String, bottom: String, completed: Boolean = false) {
+        field.postValue(step)
+        tutorialState.value = tutorialState.value.copy(
+            completed = completed,
+            step = currentStep() + 1,
+            topMessage = top,
+            bottomMessage = bottom,
+        )
+    }
+
+    override suspend fun onDoubleClick(index: Int) {
+
+    }
+
+    override suspend fun onSingleClick(index: Int) {
+        when (currentStep()) {
+            0 -> {
+                postStep(
+                    TutorialField.getStep1(),
+                    context.getString(R.string.tutorial_1_top),
+                    context.getString(R.string.tutorial_1_bottom, openActionLabel()),
+                )
+            }
+            2 -> {
+                if (index == 15) {
+                    postStep(
+                        TutorialField.getStep3(),
+                        context.getString(R.string.tutorial_3_top),
+                        context.getString(R.string.tutorial_3_bottom),
+                    )
+                }
+            }
+            3 -> {
+                if (index == 20 || index == 21) {
+                    postStep(
+                        TutorialField.getStep4(),
+                        context.getString(R.string.tutorial_4_top),
+                        context.getString(R.string.tutorial_4_bottom, flagActionLabel()),
+                    )
+                }
+            }
+            5 -> {
+                if (index == 23) {
+                    postStep(
+                        TutorialField.getStep6(),
+                        context.getString(R.string.tutorial_5_top),
+                        context.getString(R.string.tutorial_5_bottom, openActionLabel(), flagActionLabel()),
+                    )
+                }
+            }
+            6 -> {
+                if (index == 24 || index == 19 || index == 14) {
+                    postStep(
+                        TutorialField.getStep7(),
+                        context.getString(R.string.tutorial_5_top),
+                        context.getString(R.string.tutorial_5_bottom, openActionLabel(), flagActionLabel()),
+                    )
+                }
+            }
+            else -> {
+                hapticFeedbackManager.explosionFeedback()
+            }
+        }
+    }
+
+    override suspend fun onLongClick(index: Int) {
+        when (currentStep()) {
+            1 -> {
+                if (index == 10) {
+                    postStep(
+                        TutorialField.getStep2(),
+                        context.getString(R.string.tutorial_2_top),
+                        context.getString(R.string.tutorial_2_bottom, openActionLabel()),
+                    )
+                }
+            }
+            4 -> {
+                if (index == 22) {
+                    postStep(
+                        TutorialField.getStep5(),
+                        context.getString(R.string.tutorial_5_top),
+                        context.getString(R.string.tutorial_5_bottom, openActionLabel(), flagActionLabel()),
+                    )
+                }
+            }
+            7 -> {
+                if (index == 9) {
+                    postStep(
+                        TutorialField.getStep8(),
+                        context.getString(R.string.tutorial_5_top),
+                        context.getString(R.string.tutorial_5_bottom, openActionLabel(), flagActionLabel()),
+                    )
+                }
+            }
+            8 -> {
+                if (index == 4) {
+                    postStep(
+                        TutorialField.getStep9(),
+                        context.getString(R.string.tutorial_5_top),
+                        context.getString(R.string.tutorial_5_bottom, openActionLabel(), flagActionLabel()),
+                        completed = true
+                    )
+                }
+            }
+            else -> {
+                hapticFeedbackManager.explosionFeedback()
+            }
+        }
+    }
+}
