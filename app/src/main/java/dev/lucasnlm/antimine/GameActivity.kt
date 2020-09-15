@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
@@ -39,15 +40,14 @@ import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.ThemeActivity
-import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
+import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.android.synthetic.main.activity_game.*
-import kotlinx.android.synthetic.main.activity_game.ad_placeholder
 import kotlinx.android.synthetic.main.activity_game.minesCount
 import kotlinx.android.synthetic.main.activity_game.timer
 import kotlinx.android.synthetic.main.activity_tv_game.*
@@ -58,6 +58,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
     private val billingManager: IBillingManager by inject()
@@ -103,10 +104,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
         findViewById<FrameLayout>(R.id.levelContainer).doOnLayout {
             if (!isFinishing) {
-                if (!preferencesRepository.isTutorialCompleted()) {
-                    loadGameFragment()
-                } else {
+                if (!preferencesRepository.isTutorialCompleted() && hasTranslatedTutorial()) {
                     loadGameTutorial()
+                } else {
+                    loadGameFragment()
                 }
             }
         }
@@ -336,7 +337,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 }
             )
 
-            if (preferencesRepository.isFirstUse() && preferencesRepository.isTutorialCompleted()) {
+            if (preferencesRepository.isFirstUse() &&
+                (preferencesRepository.isTutorialCompleted() || !hasTranslatedTutorial())) {
                 openDrawer(GravityCompat.START)
                 preferencesRepository.completeFirstUse()
             }
@@ -362,6 +364,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 R.id.previous_games -> openSaveHistory()
                 R.id.stats -> openStats()
                 R.id.play_games -> googlePlay()
+                R.id.translation -> openCrowdin()
                 R.id.remove_ads -> showSupportAppDialog()
                 R.id.tutorial -> loadGameTutorial()
                 else -> handled = false
@@ -762,6 +765,12 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
+    private fun openCrowdin() {
+        Intent(Intent.ACTION_VIEW, Uri.parse("https://crowdin.com/project/antimine-android")).let {
+            startActivity(it)
+        }
+    }
+
     private fun showSupportAppDialog() {
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
             !instantAppManager.isEnabled(this)
@@ -783,6 +792,11 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             playGamesManager.handleLoginResult(data)
             invalidateOptionsMenu()
         }
+    }
+
+    private fun hasTranslatedTutorial(): Boolean {
+        // Check if we have a translated Tutorial to the current language on a naive way. :/
+        return arrayOf("en", "es", "pt").contains(Locale.getDefault().language)
     }
 
     companion object {

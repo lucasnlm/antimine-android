@@ -110,6 +110,12 @@
             android:title="@string/rating" />
 
         <item
+            android:id="@+id/translation"
+            android:icon="@drawable/translate"
+            android:checkable="false"
+            android:title="@string/translation" />
+
+        <item
             android:id="@+id/about"
             android:icon="@drawable/info"
             android:checkable="false"
