@@ -365,7 +365,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 R.id.previous_games -> openSaveHistory()
                 R.id.stats -> openStats()
                 R.id.play_games -> googlePlay()
-                R.id.translation -> openCrowdin()
+                R.id.translation -> openCrowdIn()
                 R.id.remove_ads -> showSupportAppDialog()
                 R.id.tutorial -> loadGameTutorial()
                 else -> handled = false
@@ -766,7 +766,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun openCrowdin() {
+    private fun openCrowdIn() {
         Intent(Intent.ACTION_VIEW, Uri.parse("https://crowdin.com/project/antimine-android")).let {
             startActivity(it)
         }
