@@ -104,7 +104,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
         findViewById<FrameLayout>(R.id.levelContainer).doOnLayout {
             if (!isFinishing) {
-                if (!preferencesRepository.isTutorialCompleted() && hasTranslatedTutorial()) {
+                if (!preferencesRepository.isTutorialCompleted()) {
                     loadGameTutorial()
                 } else {
                     loadGameFragment()
@@ -338,7 +338,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             )
 
             if (preferencesRepository.isFirstUse() &&
-                (preferencesRepository.isTutorialCompleted() || !hasTranslatedTutorial())
+                (preferencesRepository.isTutorialCompleted())
             ) {
                 openDrawer(GravityCompat.START)
                 preferencesRepository.completeFirstUse()
@@ -793,11 +793,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             playGamesManager.handleLoginResult(data)
             invalidateOptionsMenu()
         }
-    }
-
-    private fun hasTranslatedTutorial(): Boolean {
-        // Check if we have a translated Tutorial to the current language on a naive way. :/
-        return arrayOf("en", "es", "pt", "zh").contains(Locale.getDefault().language)
     }
 
     companion object {

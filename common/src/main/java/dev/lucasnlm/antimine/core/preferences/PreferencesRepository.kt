@@ -74,7 +74,7 @@ class PreferencesRepository(
         preferencesManager.getBoolean(PREFERENCE_FIRST_USE, true)
 
     override fun completeFirstUse() {
-        preferencesManager.putBoolean(PREFERENCE_TUTORIAL_COMPLETED, false)
+        preferencesManager.putBoolean(PREFERENCE_FIRST_USE, false)
     }
 
     override fun isTutorialCompleted(): Boolean {
@@ -164,7 +164,7 @@ class PreferencesRepository(
             preferencesManager.putInt(PREFERENCE_LONG_PRESS_TIMEOUT, defaultLongPressTimeout)
         }
 
-        if (!isFirstUse()) {
+        if (preferencesManager.contains(PREFERENCE_FIRST_USE)) {
             preferencesManager.putBoolean(PREFERENCE_TUTORIAL_COMPLETED, true)
         }
     }

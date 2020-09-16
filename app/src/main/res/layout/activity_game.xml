@@ -83,11 +83,12 @@
             android:background="?selectableItemBackgroundBorderless"
             android:contentDescription="@string/new_game"
             android:padding="14dp"
-            android:visibility="gone"
+            android:alpha="0.0"
+            android:clickable="false"
             ads:layout_constraintRight_toRightOf="parent"
             ads:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/retry"
-            tools:visibility="visible"/>
+            tools:alpha="1.0"/>
 
         <FrameLayout
             android:id="@+id/levelContainer"
