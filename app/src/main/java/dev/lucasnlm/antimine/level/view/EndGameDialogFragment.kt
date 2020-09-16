@@ -81,12 +81,6 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             } else {
                                 setNeutralButton(R.string.retry) { _, _ ->
                                     gameViewModel.retryObserver.postValue(Unit)
-
-                                    activity?.let {
-                                        if (!preferencesRepository.isPremiumEnabled()) {
-                                            adsManager.requestRewarded(it, Ads.RewardsAds)
-                                        }
-                                    }
                                 }
                             }
                         }
