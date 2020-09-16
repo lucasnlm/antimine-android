@@ -84,7 +84,6 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
                                     else -> append(it)
                                 }
                             }
-
                     }
                     setTextColor(
                         Color.argb(
@@ -107,7 +106,6 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
                                     else -> append(it)
                                 }
                             }
-
                     }
                     setTextColor(
                         Color.argb(
@@ -123,13 +121,13 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
     }
 
     private fun String.splitKeeping(str: String): List<String> {
-        return this.split(str).flatMap {listOf(it, str)}.dropLast(1).filterNot {it.isEmpty()}
+        return this.split(str).flatMap { listOf(it, str) }.dropLast(1).filterNot { it.isEmpty() }
     }
 
     private fun String.splitKeeping(vararg targetStrings: String): List<String> {
         var res = listOf(this)
         targetStrings.forEach { str ->
-            res = res.flatMap {it.splitKeeping(str)}
+            res = res.flatMap { it.splitKeeping(str) }
         }
         return res
     }
