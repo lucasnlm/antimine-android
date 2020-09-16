@@ -8,6 +8,7 @@ import android.text.format.DateUtils
 import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.TooltipCompat
@@ -58,7 +59,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.Locale
 
 class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
     private val billingManager: IBillingManager by inject()
@@ -188,6 +188,13 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 currentSaveId = it
             }
         )
+
+        tips.observe(
+            this@GameActivity,
+            {
+                tipsCounter.text = it.toString()
+            }
+        )
     }
 
     override fun onBackPressed() {
@@ -248,8 +255,47 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         )
     }
 
-    private fun refreshShortcutIcon(isEndGame: Boolean = false) {
-        if (isEndGame || instantAppManager.isEnabled(this)) {
+    private fun disableShortcutIcon(hide: Boolean = false) {
+        tipsCounter.visibility = View.GONE
+        shortcutIcon.apply {
+            visibility = if (hide) View.GONE else View.VISIBLE
+            isClickable = false
+            animate().alpha(0.3f).start()
+        }
+    }
+
+    private fun refreshTipShortcutIcon() {
+        val tipsAmount = gameViewModel.getTips()
+
+        tipsCounter.apply {
+            visibility = View.VISIBLE
+            text = tipsAmount.toString()
+        }
+
+        shortcutIcon.apply {
+            TooltipCompat.setTooltipText(this, getString(R.string.help))
+            setImageResource(R.drawable.tip)
+            setColorFilter(minesCount.currentTextColor)
+            visibility = View.VISIBLE
+            animate().alpha(1.0f).start()
+            setOnClickListener {
+                lifecycleScope.launch {
+                    analyticsManager.sentEvent(Analytics.UseTip)
+
+                    if (tipsAmount > 0) {
+                        if (!gameViewModel.revealRandomMine()) {
+                            Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun refreshEndGameShortcutIcon(victory: Boolean = false, isOldGame: Boolean) {
+        if ((isOldGame || !victory) && !instantAppManager.isEnabled(this)) {
             shortcutIcon.apply {
                 TooltipCompat.setTooltipText(this, getString(R.string.new_game))
                 setImageResource(R.drawable.retry)
@@ -284,6 +330,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
         }
 
+        tipsCounter.visibility = View.GONE
         shortcutIcon.apply {
             when (status) {
                 is Status.Over, is Status.Running -> {
@@ -324,7 +371,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     }
 
                     override fun onDrawerClosed(drawerView: View) {
-                        if (hasNoOtherFocusedDialog()) {
+                        if (hasNoOtherFocusedDialog() && hasActiveGameFragment()) {
                             gameViewModel.resumeGame()
                         }
 
@@ -435,13 +482,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun loadGameFragment() {
         supportFragmentManager.apply {
-            findFragmentByTag(LevelFragment.TAG)?.let { it ->
-                beginTransaction().apply {
-                    remove(it)
-                    commitAllowingStateLoss()
-                }
-            }
-
             findFragmentByTag(TutorialLevelFragment.TAG)?.let { it ->
                 beginTransaction().apply {
                     remove(it)
@@ -451,7 +491,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
             if (findFragmentByTag(LevelFragment.TAG) == null) {
                 beginTransaction().apply {
-                    replace(R.id.levelContainer, LevelFragment())
+                    replace(R.id.levelContainer, LevelFragment(), LevelFragment.TAG)
                     setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     commitAllowingStateLoss()
                 }
@@ -460,6 +500,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun loadGameTutorial() {
+        disableShortcutIcon(true)
+
         supportFragmentManager.apply {
             findFragmentById(R.id.levelContainer)?.let { it ->
                 beginTransaction().apply {
@@ -556,7 +598,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     victory,
                     score?.rightMines ?: 0,
                     score?.totalMines ?: 0,
-                    currentGameStatus.time
+                    currentGameStatus.time,
+                    if (victory) 1 else 0
                 ).apply {
                     showAllowingStateLoss(supportFragmentManager, EndGameDialogFragment.TAG)
                 }
@@ -597,25 +640,28 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         when (event) {
             Event.ResumeGame -> {
                 status = Status.Running
-                refreshShortcutIcon()
+                refreshTipShortcutIcon()
             }
             Event.StartNewGame -> {
                 status = Status.PreGame
-                refreshShortcutIcon()
+                disableShortcutIcon()
                 refreshAds()
             }
             Event.Resume, Event.Running -> {
                 status = Status.Running
                 gameViewModel.runClock()
-                refreshShortcutIcon()
+                refreshTipShortcutIcon()
                 keepScreenOn(true)
             }
             Event.StartTutorial -> {
                 status = Status.PreGame
+                gameViewModel.stopClock()
+                disableShortcutIcon(true)
                 loadGameTutorial()
             }
             Event.FinishTutorial -> {
                 gameViewModel.startNewGame(Difficulty.Beginner)
+                disableShortcutIcon()
                 loadGameFragment()
                 status = Status.Over(0, Score(4, 4, 25))
                 analyticsManager.sentEvent(Analytics.TutorialCompleted)
@@ -631,12 +677,14 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 )
                 status = Status.Over(currentTime, score)
                 gameViewModel.stopClock()
-                gameViewModel.revealAllEmptyAreas()
+                gameViewModel.showAllEmptyAreas()
                 gameViewModel.victory()
-                refreshShortcutIcon(true)
+                refreshEndGameShortcutIcon(true, isResuming)
                 keepScreenOn(false)
 
                 if (!isResuming) {
+                    gameViewModel.addNewTip()
+
                     waitAndShowEndGameDialog(
                         victory = true,
                         await = false
@@ -651,7 +699,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     totalArea
                 )
                 status = Status.Over(currentTime, score)
-                refreshShortcutIcon(true)
+                refreshEndGameShortcutIcon(false, isResuming)
                 keepScreenOn(false)
                 gameViewModel.stopClock()
 
@@ -709,6 +757,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         return supportFragmentManager.fragments.count {
             it !is LevelFragment && it is DialogFragment
         } == 0
+    }
+
+    private fun hasActiveGameFragment(): Boolean {
+        return supportFragmentManager.findFragmentByTag(LevelFragment.TAG) != null
     }
 
     override fun onDismiss(dialog: DialogInterface?) {

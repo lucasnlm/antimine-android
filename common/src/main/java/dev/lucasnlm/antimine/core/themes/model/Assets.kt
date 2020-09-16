@@ -10,4 +10,5 @@ data class Assets(
     @DrawableRes val mine: Int,
     @DrawableRes val mineExploded: Int,
     @DrawableRes val mineLow: Int,
+    @DrawableRes val revealed: Int,
 )

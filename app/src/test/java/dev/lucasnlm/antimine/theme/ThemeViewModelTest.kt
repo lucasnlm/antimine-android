@@ -48,7 +48,8 @@ class ThemeViewModelTest : IntentViewModelTest() {
             toolbarMine = R.drawable.mine,
             mine = R.drawable.mine,
             mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low
+            mineLow = R.drawable.mine_low,
+            revealed = R.drawable.mine_revealed,
         )
     )
 
@@ -81,7 +82,8 @@ class ThemeViewModelTest : IntentViewModelTest() {
             toolbarMine = R.drawable.mine_low,
             mine = R.drawable.mine,
             mineExploded = R.drawable.mine_exploded_white,
-            mineLow = R.drawable.mine_low
+            mineLow = R.drawable.mine_low,
+            revealed = R.drawable.mine_revealed,
         )
     )
 
@@ -114,7 +116,8 @@ class ThemeViewModelTest : IntentViewModelTest() {
             toolbarMine = R.drawable.mine_low,
             mine = R.drawable.mine,
             mineExploded = R.drawable.mine_exploded_white,
-            mineLow = R.drawable.mine_low
+            mineLow = R.drawable.mine_low,
+            revealed = R.drawable.mine_revealed,
         )
     )
 

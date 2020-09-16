@@ -186,6 +186,22 @@ class PreferencesRepository(
         return preferencesManager.getBoolean(PREFERENCE_SHOW_SUPPORT, true)
     }
 
+    override fun getTips(): Int {
+        return preferencesManager.getInt(PREFERENCE_TIPS, 5)
+    }
+
+    override fun setTips(tips: Int) {
+        preferencesManager.putInt(PREFERENCE_TIPS, tips)
+    }
+
+    override fun getExtraTips(): Int {
+        return preferencesManager.getInt(PREFERENCE_EXTRA_TIPS, 0)
+    }
+
+    override fun setExtraTips(tips: Int) {
+        preferencesManager.putInt(PREFERENCE_EXTRA_TIPS, tips)
+    }
+
     private companion object {
         private const val PREFERENCE_VIBRATION = "preference_vibration"
         private const val PREFERENCE_ASSISTANT = "preference_assistant"
@@ -209,5 +225,7 @@ class PreferencesRepository(
         private const val PREFERENCE_REQUEST_RATING = "preference_request_rating"
         private const val PREFERENCE_PREMIUM_FEATURES = "preference_premium_features"
         private const val PREFERENCE_SHOW_SUPPORT = "preference_show_support"
+        private const val PREFERENCE_TIPS = "preference_current_tips"
+        private const val PREFERENCE_EXTRA_TIPS = "preference_extra_tips"
     }
 }

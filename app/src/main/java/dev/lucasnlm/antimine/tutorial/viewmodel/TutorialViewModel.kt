@@ -7,6 +7,7 @@ import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
+import dev.lucasnlm.antimine.common.level.repository.ITipRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -29,6 +30,7 @@ class TutorialViewModel(
     minefieldRepository: IMinefieldRepository,
     analyticsManager: IAnalyticsManager,
     playGamesManager: IPlayGamesManager,
+    tipRepository: ITipRepository,
     private val clock: Clock,
     private val context: Context,
     private val hapticFeedbackManager: IHapticFeedbackManager,
@@ -44,6 +46,7 @@ class TutorialViewModel(
     minefieldRepository,
     analyticsManager,
     playGamesManager,
+    tipRepository,
     clock,
 ) {
     val tutorialState = MutableStateFlow(

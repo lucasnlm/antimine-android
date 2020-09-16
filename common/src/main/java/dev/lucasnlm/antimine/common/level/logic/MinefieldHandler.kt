@@ -22,6 +22,13 @@ class MinefieldHandler(
             .forEach { field[it.id] = it.copy(isCovered = false) }
     }
 
+    fun revealRandomMine(): Boolean {
+        return field.filter { it.hasMine && it.mark.isNone() && !it.revealed }.shuffled().firstOrNull()?.run {
+            field[this.id] = this.copy(revealed = true)
+            true
+        } ?: false
+    }
+
     fun turnOffAllHighlighted() {
         field.filter { it.highlighted }
             .forEach { field[it.id] = it.copy(highlighted = false) }

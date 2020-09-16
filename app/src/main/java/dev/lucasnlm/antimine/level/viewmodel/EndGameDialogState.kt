@@ -7,4 +7,5 @@ data class EndGameDialogState(
     val title: String,
     val message: String,
     val isVictory: Boolean?,
+    val received: Int
 )

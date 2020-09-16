@@ -43,6 +43,11 @@ interface IPreferencesRepository {
     fun setShowSupport(show: Boolean)
     fun showSupport(): Boolean
 
+    fun getTips(): Int
+    fun setTips(tips: Int)
+    fun getExtraTips(): Int
+    fun setExtraTips(tips: Int)
+
     fun useFlagAssistant(): Boolean
     fun useHapticFeedback(): Boolean
     fun areaSizeMultiplier(): Int

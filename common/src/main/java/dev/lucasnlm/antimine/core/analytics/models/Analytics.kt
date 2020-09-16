@@ -119,5 +119,7 @@ sealed class Analytics(
 
     object TapRatingRequest : Analytics("Rating Request")
 
+    object UseTip : Analytics("Use Tip")
+
     class TapGameReset(resign: Boolean) : Analytics("Game reset", mapOf("Resign" to resign.toString()))
 }

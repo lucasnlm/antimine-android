@@ -212,6 +212,15 @@ class GameController {
         }
     }
 
+    fun revealRandomMine(): Boolean {
+        val result: Boolean
+        field = MinefieldHandler(field.toMutableList(), false).run {
+            result = revealRandomMine()
+            result()
+        }
+        return result
+    }
+
     fun hasAnyMineExploded(): Boolean = mines().firstOrNull { it.mistake } != null
 
     fun hasFlaggedAllMines(): Boolean = rightFlags() == minefield.mines

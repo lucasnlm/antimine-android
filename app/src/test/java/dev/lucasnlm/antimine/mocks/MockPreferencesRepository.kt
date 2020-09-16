@@ -61,6 +61,14 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun showSupport(): Boolean = true
 
+    override fun getTips(): Int = 0
+
+    override fun setTips(tips: Int) { }
+
+    override fun getExtraTips(): Int = 5
+
+    override fun setExtraTips(tips: Int) { }
+
     override fun useFlagAssistant(): Boolean = false
 
     override fun useHapticFeedback(): Boolean = true

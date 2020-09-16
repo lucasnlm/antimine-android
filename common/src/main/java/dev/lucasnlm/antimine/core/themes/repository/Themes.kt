@@ -36,6 +36,7 @@ object Themes {
             mine = R.drawable.mine,
             mineExploded = R.drawable.mine_exploded_red,
             mineLow = R.drawable.mine_low,
+            revealed = R.drawable.mine_revealed_white,
         )
     )
 
@@ -69,6 +70,7 @@ object Themes {
             mine = R.drawable.mine,
             mineExploded = R.drawable.mine_exploded_white,
             mineLow = R.drawable.mine_low,
+            revealed = R.drawable.mine_revealed_white,
         )
     )
 
@@ -102,6 +104,7 @@ object Themes {
             mine = R.drawable.mine_low,
             mineExploded = R.drawable.mine_low,
             mineLow = R.drawable.mine_low,
+            revealed = R.drawable.mine_revealed_white,
         )
     )
 
@@ -139,6 +142,7 @@ object Themes {
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_exploded_white,
                 mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_white,
             )
         ),
         AppTheme(
@@ -171,6 +175,7 @@ object Themes {
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_exploded_red,
                 mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_white,
             )
         ),
         AppTheme(
@@ -203,6 +208,7 @@ object Themes {
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_exploded_red,
                 mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_white,
             )
         ),
         AppTheme(
@@ -235,6 +241,7 @@ object Themes {
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_exploded_red,
                 mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_white,
             )
         ),
         AppTheme(
@@ -267,6 +274,7 @@ object Themes {
                 mine = R.drawable.mine_white,
                 mineExploded = R.drawable.mine_white,
                 mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_black,
             )
         ),
         AppTheme(
@@ -299,6 +307,7 @@ object Themes {
                 mine = R.drawable.mine_pink,
                 mineExploded = R.drawable.mine_pink_exploded,
                 mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_white,
             )
         ),
         AppTheme(
@@ -331,6 +340,7 @@ object Themes {
                 mine = R.drawable.mine_pink,
                 mineExploded = R.drawable.mine_pink_exploded,
                 mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_white,
             )
         ),
         AppTheme(
@@ -362,7 +372,8 @@ object Themes {
                 toolbarMine = R.drawable.mine_low,
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_pink_exploded,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_white,
             )
         ),
         AppTheme(
@@ -394,7 +405,8 @@ object Themes {
                 toolbarMine = R.drawable.mine_low,
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_pink_exploded,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_white,
             )
         ),
         AppTheme(
@@ -427,6 +439,7 @@ object Themes {
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_pink_exploded,
                 mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_white,
             )
         ),
         AppTheme(
@@ -458,7 +471,8 @@ object Themes {
                 toolbarMine = R.drawable.mine_low,
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_pink_exploded,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_white,
             )
         ),
         AppTheme(
@@ -491,6 +505,7 @@ object Themes {
                 mine = R.drawable.mine_white,
                 mineExploded = R.drawable.mine_white,
                 mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_black,
             )
         ),
         AppTheme(
@@ -522,7 +537,8 @@ object Themes {
                 toolbarMine = R.drawable.mine_low,
                 mine = R.drawable.mine_white,
                 mineExploded = R.drawable.mine_white,
-                mineLow = R.drawable.mine_low
+                mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_black,
             )
         ),
         AppTheme(
@@ -555,6 +571,7 @@ object Themes {
                 mine = R.drawable.mine_white,
                 mineExploded = R.drawable.mine_white,
                 mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_black,
             )
         ),
         AppTheme(
@@ -587,6 +604,7 @@ object Themes {
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_exploded_red,
                 mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_black,
             )
         ),
         AppTheme(
@@ -619,6 +637,7 @@ object Themes {
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_exploded_red,
                 mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_black,
             )
         ),
         AppTheme(
@@ -645,12 +664,13 @@ object Themes {
             ),
             assets = Assets(
                 wrongFlag = R.drawable.red_flag,
-                flag = R.drawable.flag,
+                flag = R.drawable.flag_black,
                 questionMark = R.drawable.question,
                 toolbarMine = R.drawable.mine,
                 mine = R.drawable.mine,
                 mineExploded = R.drawable.mine_exploded_red,
                 mineLow = R.drawable.mine_low,
+                revealed = R.drawable.mine_revealed_black,
             )
         )
     )
