@@ -12,6 +12,7 @@ import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
+import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
 import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
@@ -23,15 +24,15 @@ class TutorialViewModel(
     savesRepository: ISavesRepository,
     statsRepository: IStatsRepository,
     dimensionRepository: IDimensionRepository,
-    preferencesRepository: IPreferencesRepository,
     themeRepository: IThemeRepository,
     soundManager: ISoundManager,
     minefieldRepository: IMinefieldRepository,
     analyticsManager: IAnalyticsManager,
     playGamesManager: IPlayGamesManager,
-    clock: Clock,
+    private val clock: Clock,
     private val context: Context,
     private val hapticFeedbackManager: IHapticFeedbackManager,
+    private val preferencesRepository: IPreferencesRepository,
 ) : GameViewModel(
     savesRepository,
     statsRepository,
@@ -63,14 +64,25 @@ class TutorialViewModel(
         return tutorialState.value.step
     }
 
-    private fun wrapAction(action: String) = "\'$action\'"
+    fun openActionLabel(): String =
+        when (preferencesRepository.controlStyle()) {
+            ControlStyle.Standard -> context.getString(R.string.single_click)
+            ControlStyle.FastFlag -> context.getString(R.string.long_press)
+            ControlStyle.DoubleClick -> context.getString(R.string.double_click)
+            ControlStyle.DoubleClickInverted -> context.getString(R.string.single_click)
+        }
 
-    private fun openActionLabel(): String = wrapAction(context.getString(R.string.single_click))
-
-    private fun flagActionLabel(): String = wrapAction(context.getString(R.string.long_press))
+    fun flagActionLabel(): String =
+        when (preferencesRepository.controlStyle()) {
+            ControlStyle.Standard -> context.getString(R.string.long_press)
+            ControlStyle.FastFlag -> context.getString(R.string.single_click)
+            ControlStyle.DoubleClick -> context.getString(R.string.single_click)
+            ControlStyle.DoubleClickInverted -> context.getString(R.string.double_click)
+        }
 
     private fun postStep(step: List<Area>, top: String, bottom: String, completed: Boolean = false) {
         field.postValue(step)
+        clock.stop()
         tutorialState.value = tutorialState.value.copy(
             completed = completed,
             step = currentStep() + 1,
@@ -79,16 +91,13 @@ class TutorialViewModel(
         )
     }
 
-    override suspend fun onDoubleClick(index: Int) {
-    }
-
-    override suspend fun onSingleClick(index: Int) {
+    private fun openTileAction(index: Int) {
         when (currentStep()) {
             0 -> {
                 postStep(
                     TutorialField.getStep1(),
                     context.getString(R.string.tutorial_1_top),
-                    context.getString(R.string.tutorial_1_bottom, openActionLabel()),
+                    context.getString(R.string.tutorial_1_bottom, flagActionLabel()),
                 )
             }
             2 -> {
@@ -133,7 +142,7 @@ class TutorialViewModel(
         }
     }
 
-    override suspend fun onLongClick(index: Int) {
+    private fun longTileAction(index: Int) {
         when (currentStep()) {
             1 -> {
                 if (index == 10) {
@@ -175,6 +184,34 @@ class TutorialViewModel(
             else -> {
                 hapticFeedbackManager.explosionFeedback()
             }
+        }
+    }
+
+    override suspend fun onDoubleClick(index: Int) {
+        clock.stop()
+        when (preferencesRepository.controlStyle()) {
+            ControlStyle.DoubleClick -> openTileAction(index)
+            ControlStyle.DoubleClickInverted -> longTileAction(index)
+            else -> {}
+        }
+    }
+
+    override suspend fun onSingleClick(index: Int) {
+        clock.stop()
+        when (preferencesRepository.controlStyle()) {
+            ControlStyle.Standard -> openTileAction(index)
+            ControlStyle.FastFlag -> longTileAction(index)
+            ControlStyle.DoubleClick -> longTileAction(index)
+            ControlStyle.DoubleClickInverted -> openTileAction(index)
+        }
+    }
+
+    override suspend fun onLongClick(index: Int) {
+        clock.stop()
+        when (preferencesRepository.controlStyle()) {
+            ControlStyle.Standard -> longTileAction(index)
+            ControlStyle.FastFlag -> openTileAction(index)
+            else -> {}
         }
     }
 }

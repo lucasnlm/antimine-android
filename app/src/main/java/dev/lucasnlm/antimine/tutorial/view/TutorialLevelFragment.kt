@@ -3,6 +3,10 @@ package dev.lucasnlm.antimine.tutorial.view
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
+import androidx.core.text.bold
+import androidx.core.text.buildSpannedString
+import androidx.core.text.color
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -65,8 +69,23 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
 
         lifecycleScope.launchWhenCreated {
             tutorialViewModel.tutorialState.collect {
+                val flagAction = tutorialViewModel.flagActionLabel()
+                val openAction = tutorialViewModel.openActionLabel()
+
                 tutorial_top.apply {
-                    text = it.topMessage
+                    text = buildSpannedString {
+                        it.topMessage
+                            .splitKeeping(flagAction, openAction)
+                            .forEach {
+                                when (it) {
+                                    flagAction, openAction -> {
+                                        bold { color(ContextCompat.getColor(context, R.color.accent)) { append(it) } }
+                                    }
+                                    else -> append(it)
+                                }
+                            }
+
+                    }
                     setTextColor(
                         Color.argb(
                             255,
@@ -77,7 +96,19 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
                     )
                 }
                 tutorial_bottom.apply {
-                    text = it.bottomMessage
+                    text = buildSpannedString {
+                        it.bottomMessage
+                            .splitKeeping(flagAction, openAction)
+                            .forEach {
+                                when (it) {
+                                    flagAction, openAction -> {
+                                        bold { color(ContextCompat.getColor(context, R.color.accent)) { append(it) } }
+                                    }
+                                    else -> append(it)
+                                }
+                            }
+
+                    }
                     setTextColor(
                         Color.argb(
                             255,
@@ -89,6 +120,18 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
                 }
             }
         }
+    }
+
+    private fun String.splitKeeping(str: String): List<String> {
+        return this.split(str).flatMap {listOf(it, str)}.dropLast(1).filterNot {it.isEmpty()}
+    }
+
+    private fun String.splitKeeping(vararg targetStrings: String): List<String> {
+        var res = listOf(this)
+        targetStrings.forEach { str ->
+            res = res.flatMap {it.splitKeeping(str)}
+        }
+        return res
     }
 
     companion object {

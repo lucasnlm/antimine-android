@@ -196,6 +196,10 @@ object TutorialField {
             this[23] = this[23].copy(isCovered = false)
             this[22] = this[22].copy(mark = Mark.Flag)
             this[18] = this[18].copy(highlighted = true)
+
+            this[24] = this[24].copy(highlighted = true)
+            this[19] = this[19].copy(highlighted = true)
+            this[14] = this[14].copy(highlighted = true)
         }
     }
 
