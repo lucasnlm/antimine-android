@@ -63,9 +63,11 @@ class TutorialViewModel(
         return tutorialState.value.step
     }
 
-    private fun openActionLabel(): String = context.getString(R.string.single_click)
+    private fun wrapAction(action: String) = "\'$action\'"
 
-    private fun flagActionLabel(): String = context.getString(R.string.long_press)
+    private fun openActionLabel(): String = wrapAction(context.getString(R.string.single_click))
+
+    private fun flagActionLabel(): String = wrapAction(context.getString(R.string.long_press))
 
     private fun postStep(step: List<Area>, top: String, bottom: String, completed: Boolean = false) {
         field.postValue(step)
