@@ -797,7 +797,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun hasTranslatedTutorial(): Boolean {
         // Check if we have a translated Tutorial to the current language on a naive way. :/
-        return arrayOf("en", "es", "pt").contains(Locale.getDefault().language)
+        return arrayOf("en", "es", "pt", "zh").contains(Locale.getDefault().language)
     }
 
     companion object {
