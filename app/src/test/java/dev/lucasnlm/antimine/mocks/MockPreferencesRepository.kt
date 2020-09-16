@@ -25,6 +25,10 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun completeFirstUse() { }
 
+    override fun isTutorialCompleted(): Boolean = true
+
+    override fun completeTutorial() { }
+
     override fun customLongPressTimeout(): Long = 400L
 
     override fun themeId(): Long = 1L
