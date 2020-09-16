@@ -287,7 +287,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                             Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, R.string.help_win_a_game, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
