@@ -39,6 +39,7 @@ class TutorialCompleteDialogFragment : AppCompatDialogFragment() {
                 .apply {
                     findViewById<TextView>(R.id.title).text = getString(R.string.tutorial_completed)
                     findViewById<TextView>(R.id.subtitle).visibility = View.GONE
+                    findViewById<TextView>(R.id.received_message).visibility = View.GONE
                     findViewById<ImageView>(R.id.title_emoji)
                         .setImageResource(R.drawable.emoji_beaming_face_with_smiling_eyes)
                 }

@@ -45,6 +45,6 @@ class TipRepository(
     }
 
     companion object {
-        const val MAX_TIPS = 5
+        const val MAX_TIPS = 15
     }
 }

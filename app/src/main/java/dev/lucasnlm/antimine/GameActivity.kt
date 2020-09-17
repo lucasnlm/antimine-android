@@ -265,11 +265,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun refreshTipShortcutIcon() {
-        val tipsAmount = gameViewModel.getTips()
-
         tipsCounter.apply {
             visibility = View.VISIBLE
-            text = tipsAmount.toString()
+            text = gameViewModel.getTips().toString()
         }
 
         shortcutIcon.apply {
@@ -282,7 +280,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 lifecycleScope.launch {
                     analyticsManager.sentEvent(Analytics.UseTip)
 
-                    if (tipsAmount > 0) {
+                    if (gameViewModel.getTips() > 0) {
                         if (!gameViewModel.revealRandomMine()) {
                             Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
                         }
