@@ -24,7 +24,6 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerGrid = view.findViewById(R.id.recyclerGrid)
         recyclerGrid.doOnLayout {
             lifecycleScope.launch {
                 val loadGameUid = checkLoadGameDeepLink()
@@ -35,7 +34,7 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                     loadGameUid != null -> gameViewModel.loadGame(loadGameUid)
                     newGameDeepLink != null -> gameViewModel.startNewGame(newGameDeepLink)
                     retryDeepLink != null -> gameViewModel.retryGame(retryDeepLink)
-                    else -> gameViewModel.loadLastGame()
+                    else -> gameViewModel.loadGame()
                 }
 
                 withContext(Dispatchers.Main) {
@@ -58,9 +57,9 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
 
             levelSetup.observe(
                 viewLifecycleOwner,
-                {
-                    getView()?.let { view ->
-                        setupRecyclerViewSize(view, it)
+                { minefield ->
+                    getView()?.doOnLayout { view ->
+                        setupRecyclerViewSize(view, minefield)
                     }
                 }
             )
@@ -76,7 +75,7 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                         Event.Resume,
                         Event.ResumeGame,
                         Event.StartNewGame -> areaAdapter.setClickEnabled(true)
-                        null -> { }
+                        else -> { }
                     }
                 }
             )
@@ -112,5 +111,9 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
         } else {
             null
         }
+    }
+
+    companion object {
+        val TAG = LevelFragment::class.simpleName
     }
 }

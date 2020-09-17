@@ -79,7 +79,21 @@ fun Area.paintOnCanvas(
                     )
                     question?.draw(canvas)
                 }
-                else -> {}
+                else -> {
+                    if (revealed) {
+                        val padding = minePadding ?: context.resources.getDimension(R.dimen.mine_padding).toInt()
+
+                        val revealedDrawable = ContextCompat.getDrawable(context, theme.assets.revealed)
+
+                        revealedDrawable?.setBounds(
+                            rectF.left.toInt() + padding,
+                            rectF.top.toInt() + padding,
+                            rectF.right.toInt() - padding,
+                            rectF.bottom.toInt() - padding
+                        )
+                        revealedDrawable?.draw(canvas)
+                    }
+                }
             }
         } else {
             if (isAmbientMode) {

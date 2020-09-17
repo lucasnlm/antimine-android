@@ -70,6 +70,7 @@ class EndGameDialogViewModel(
         "",
         "",
         false,
+        0
     )
 
     override suspend fun mapEventToState(event: EndGameDialogEvent) = flow {
@@ -80,7 +81,8 @@ class EndGameDialogViewModel(
                         titleEmoji = randomVictoryEmoji(),
                         title = context.getString(R.string.you_won),
                         message = messageTo(event.time, event.isVictory),
-                        isVictory = true
+                        isVictory = true,
+                        received = event.received
                     )
                 }
                 false -> {
@@ -88,7 +90,8 @@ class EndGameDialogViewModel(
                         titleEmoji = randomGameOverEmoji(),
                         title = context.getString(R.string.you_lost),
                         message = messageTo(event.time, event.isVictory),
-                        isVictory = false
+                        isVictory = false,
+                        received = event.received
                     )
                 }
                 null -> {
@@ -96,7 +99,8 @@ class EndGameDialogViewModel(
                         titleEmoji = randomNeutralEmoji(),
                         title = context.getString(R.string.new_game),
                         message = context.getString(R.string.new_game_request),
-                        isVictory = false
+                        isVictory = false,
+                        received = event.received
                     )
                 }
             }

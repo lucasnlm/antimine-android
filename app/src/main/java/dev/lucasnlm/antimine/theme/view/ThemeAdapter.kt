@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
-import dev.lucasnlm.antimine.common.level.models.Mark
 import dev.lucasnlm.antimine.common.level.view.AreaView
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
@@ -25,18 +24,7 @@ class ThemeAdapter(
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
 
     private val themes: List<AppTheme> = themeViewModel.singleState().themes
-
-    private val minefield = listOf(
-        Area(0, 0, 0, 1, hasMine = false, mistake = false, mark = Mark.None, isCovered = false),
-        Area(1, 1, 0, 0, hasMine = true, mistake = false, mark = Mark.None, isCovered = false),
-        Area(2, 2, 0, 0, hasMine = true, mistake = false, mark = Mark.None, isCovered = true),
-        Area(3, 0, 1, 2, hasMine = false, mistake = false, mark = Mark.None, isCovered = false),
-        Area(4, 1, 1, 3, hasMine = false, mistake = false, mark = Mark.None, isCovered = false),
-        Area(5, 2, 1, 3, hasMine = true, mistake = false, mark = Mark.Flag, isCovered = true),
-        Area(6, 0, 2, 0, hasMine = true, mistake = false, mark = Mark.Question, isCovered = true),
-        Area(7, 1, 2, 4, hasMine = false, mistake = false, mark = Mark.None, isCovered = false),
-        Area(8, 2, 2, 0, hasMine = false, mistake = false, mark = Mark.None, isCovered = true),
-    )
+    private val minefield = ExampleField.getField()
 
     init {
         setHasStableIds(true)

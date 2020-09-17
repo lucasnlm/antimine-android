@@ -83,10 +83,26 @@
             android:background="?selectableItemBackgroundBorderless"
             android:contentDescription="@string/new_game"
             android:padding="14dp"
+            android:alpha="0.0"
+            android:clickable="false"
             ads:layout_constraintRight_toRightOf="parent"
             ads:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/retry"
-            tools:visibility="visible"/>
+            tools:alpha="1.0"/>
+
+        <TextView
+            android:id="@+id/tipsCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="41dp"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:text="100"
+            tools:visibility="visible"
+            ads:layout_constraintBottom_toBottomOf="@+id/shortcutIcon"
+            ads:layout_constraintEnd_toEndOf="@+id/shortcutIcon"
+            ads:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
             android:id="@+id/levelContainer"

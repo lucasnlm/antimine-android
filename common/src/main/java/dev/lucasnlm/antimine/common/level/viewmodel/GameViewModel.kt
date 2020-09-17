@@ -15,6 +15,7 @@ import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
+import dev.lucasnlm.antimine.common.level.repository.ITipRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
@@ -35,7 +36,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class GameViewModel(
+open class GameViewModel(
     private val savesRepository: ISavesRepository,
     private val statsRepository: IStatsRepository,
     private val dimensionRepository: IDimensionRepository,
@@ -46,6 +47,7 @@ class GameViewModel(
     private val minefieldRepository: IMinefieldRepository,
     private val analyticsManager: IAnalyticsManager,
     private val playGamesManager: IPlayGamesManager,
+    private val tipRepository: ITipRepository,
     private val clock: Clock,
 ) : ViewModel() {
     val eventObserver = MutableLiveData<Event>()
@@ -62,6 +64,7 @@ class GameViewModel(
     val difficulty = MutableLiveData<Difficulty>()
     val levelSetup = MutableLiveData<Minefield>()
     val saveId = MutableLiveData<Long>()
+    val tips = MutableLiveData(tipRepository.getTotalTips())
 
     fun startNewGame(newDifficulty: Difficulty = currentDifficulty): Minefield {
         clock.reset()
@@ -203,6 +206,11 @@ class GameViewModel(
         }
     }
 
+    suspend fun loadGame(): Minefield {
+        val currentLevelSetup = levelSetup.value
+        return currentLevelSetup ?: loadLastGame()
+    }
+
     fun pauseGame() {
         if (initialized) {
             if (gameController.hasMines()) {
@@ -245,7 +253,7 @@ class GameViewModel(
         }
     }
 
-    suspend fun onLongClick(index: Int) {
+    open suspend fun onLongClick(index: Int) {
         gameController
             .longPress(index)
             .filterNotNull()
@@ -260,7 +268,7 @@ class GameViewModel(
             }
     }
 
-    suspend fun onDoubleClick(index: Int) {
+    open suspend fun onDoubleClick(index: Int) {
         gameController
             .doubleClick(index)
             .filterNotNull()
@@ -271,7 +279,7 @@ class GameViewModel(
             }
     }
 
-    suspend fun onSingleClick(index: Int) {
+    open suspend fun onSingleClick(index: Int) {
         gameController
             .singleClick(index)
             .filterNotNull()
@@ -354,7 +362,22 @@ class GameViewModel(
         clock.stop()
     }
 
-    fun revealAllEmptyAreas() = gameController.revealAllEmptyAreas()
+    fun showAllEmptyAreas() {
+        gameController.revealAllEmptyAreas()
+    }
+
+    fun revealRandomMine(): Boolean {
+        return if (gameController.revealRandomMine()) {
+            if (tipRepository.removeTip()) {
+                refreshField()
+            }
+
+            tips.postValue(tipRepository.getTotalTips())
+            true
+        } else {
+            false
+        }
+    }
 
     fun explosionDelay() = if (preferencesRepository.useAnimations()) 750L else 0L
 
@@ -401,6 +424,14 @@ class GameViewModel(
 
             checkGameOverAchievements()
         }
+    }
+
+    fun addNewTip() {
+        tipRepository.increaseTip()
+    }
+
+    fun getTips(): Int {
+        return tipRepository.getTotalTips()
     }
 
     fun victory() {

@@ -8,6 +8,7 @@ sealed class EndGameDialogEvent {
         val time: Long,
         val rightMines: Int,
         val totalMines: Int,
+        val received: Int,
     ) : EndGameDialogEvent()
 
     data class ChangeEmoji(

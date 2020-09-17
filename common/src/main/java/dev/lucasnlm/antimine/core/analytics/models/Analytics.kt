@@ -91,6 +91,10 @@ sealed class Analytics(
 
     object OpenThemes : Analytics("Open Themes")
 
+    object TutorialStarted : Analytics("Tutorial Started")
+
+    object TutorialCompleted : Analytics("Tutorial Completed")
+
     object OpenAchievements : Analytics("Open Achievements")
 
     object OpenLeaderboards : Analytics("Open Leaderboards")
@@ -114,6 +118,8 @@ sealed class Analytics(
     class ShowRatingRequest(usages: Int) : Analytics("Shown Rating Request", mapOf("Usages" to usages.toString()))
 
     object TapRatingRequest : Analytics("Rating Request")
+
+    object UseTip : Analytics("Use Tip")
 
     class TapGameReset(resign: Boolean) : Analytics("Game reset", mapOf("Resign" to resign.toString()))
 }

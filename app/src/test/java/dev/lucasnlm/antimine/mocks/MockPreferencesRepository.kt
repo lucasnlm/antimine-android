@@ -25,6 +25,10 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun completeFirstUse() { }
 
+    override fun isTutorialCompleted(): Boolean = true
+
+    override fun completeTutorial() { }
+
     override fun customLongPressTimeout(): Long = 400L
 
     override fun themeId(): Long = 1L
@@ -56,6 +60,14 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun setShowSupport(show: Boolean) { }
 
     override fun showSupport(): Boolean = true
+
+    override fun getTips(): Int = 0
+
+    override fun setTips(tips: Int) { }
+
+    override fun getExtraTips(): Int = 5
+
+    override fun setExtraTips(tips: Int) { }
 
     override fun useFlagAssistant(): Boolean = false
 

@@ -10,4 +10,5 @@ data class Area(
     val isCovered: Boolean = true,
     val mark: Mark = Mark.None,
     val highlighted: Boolean = false,
+    val revealed: Boolean = false,
 )

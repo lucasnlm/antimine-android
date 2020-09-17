@@ -5,9 +5,11 @@ import dev.lucasnlm.antimine.common.level.database.AppDataBase
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
+import dev.lucasnlm.antimine.common.level.repository.ITipRepository
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
+import dev.lucasnlm.antimine.common.level.repository.TipRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.HapticFeedbackManager
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
@@ -48,4 +50,8 @@ val LevelModule = module {
     single {
         HapticFeedbackManager(get())
     } bind IHapticFeedbackManager::class
+
+    single {
+        TipRepository(get())
+    } bind ITipRepository::class
 }

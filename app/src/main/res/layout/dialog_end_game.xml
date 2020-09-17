@@ -50,4 +50,19 @@
         app:layout_constraintTop_toBottomOf="@+id/title"
         tools:text="You did 5/12 in 34 seconds." />
 
+    <TextView
+        android:id="@+id/received_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/you_have_received"
+        android:layout_marginTop="4dp"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        app:drawableEndCompat="@drawable/tip"
+        app:drawableTint="@color/accent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subtitle"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

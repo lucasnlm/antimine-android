@@ -38,7 +38,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
         return AlertDialog.Builder(requireContext()).apply {
             setView(R.layout.dialog_payments)
 
-            setNeutralButton(R.string.rating_button_no) { _, _ ->
+            setNeutralButton(R.string.no) { _, _ ->
                 analyticsManager.sentEvent(Analytics.DenyIapDialog)
             }
 

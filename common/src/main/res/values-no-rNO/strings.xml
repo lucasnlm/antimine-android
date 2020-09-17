@@ -2,6 +2,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="no">
     <string name="app_name">Antimine</string>
     <string name="app_description">Du må fjerne en rektangulær plate med skjulte miner uten å løsne noen av dem.</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="tutorial_completed">Tutorial Completed</string>
+    <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
+    <string name="tutorial_1_top">The numbers indicates how many mines are adjacent to the highlighted square.</string>
+    <string name="tutorial_1_bottom">Therefore, if the corner 1️⃣  has only one adjacent square, it must be a mine. %1$s to flag it.</string>
+    <string name="tutorial_2_top">The next unopened square doesn\'t have a mine because the number is 1️⃣ , not 2️⃣ .</string>
+    <string name="tutorial_2_bottom">You can open it by %1$s.</string>
+    <string name="tutorial_3_top">The same happens on this 1️⃣ . You know where its adjacent mine is.</string>
+    <string name="tutorial_3_bottom">You can open all other unopened squares adjacent to 1️⃣ .</string>
+    <string name="tutorial_4_top">We know where one of the mines are. So, there\'s only one possibility to the other one.</string>
+    <string name="tutorial_4_bottom">%1$s to flag the mine adjacent to 2️⃣ .</string>
+    <string name="tutorial_5_top">Check the highlighted number.</string>
+    <string name="tutorial_5_bottom">%1$s to open or %2$s to mark.</string>
     <string name="games">Spill</string>
     <string name="previous_games">Tidligere Spill</string>
     <string name="minefield">Vanskelighet</string>
@@ -33,8 +46,8 @@
     <string name="system">System</string>
     <string name="rating">Ttilbakemelding</string>
     <string name="support_title">Støtt oss!</string>
-    <string name="support_description">Med din hjelp kan vi implementere nye funksjoner og holde prosjektet vårt aktivt.</string>
-    <string name="support_action">Støtte</string>
+    <string name="support_description">Med hjelpen din kan vi implementere nye funksjoner og holde prosjektet aktivt.</string>
+    <string name="support_action">For å støtte</string>
     <string name="rating_message">Hvis du liker dette spillet, gi oss en tilbakemelding. Det vil hjelpe oss mye.</string>
     <string name="used_software_text">Dette spillet bruker følgende tredjeparter programvare:</string>
     <string name="translators_text">Dette spillet ble oversatt av følgende personer:</string>
@@ -65,6 +78,9 @@
     <string name="flag_tile">Flagg</string>
     <string name="retry">Prøv på nytt</string>
     <string name="empty">Tom</string>
+    <string name="cant_do_it_now">Umulig å gjøre det nå</string>
+    <string name="you_have_received">Du har mottatt: +%1$d</string>
+    <string name="help_win_a_game">For mer hjelp, må du vinne et spill.</string>
     <string name="unknown_error">Ukjent feil.</string>
     <string name="leaderboards">Leaderboards</string>
     <string name="cancel">Avbryt</string>
@@ -72,7 +88,7 @@
     <string name="yes">Ja</string>
     <string name="unlock">Lås opp</string>
     <string name="achievements">Prestasjoner</string>
-    <string name="rating_button_no">Nei</string>
+    <string name="no">Nei</string>
     <string name="general">Generelt</string>
     <string name="source_code">Kildekode</string>
     <string name="translation">Oversettelse</string>
@@ -103,4 +119,5 @@
     <string name="flag_placed">Flagg plassert!</string>
     <string name="flag_removed">Flagg fjernet!</string>
     <string name="remove_ad">Fjern Reklame</string>
+    <string name="help">Hjelp</string>
 </resources>

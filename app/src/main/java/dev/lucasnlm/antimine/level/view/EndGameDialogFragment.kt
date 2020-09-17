@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -12,11 +13,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogViewModel
-import dev.lucasnlm.external.Ads
-import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IInstantAppManager
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
@@ -25,9 +23,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EndGameDialogFragment : AppCompatDialogFragment() {
     private val instantAppManager: IInstantAppManager by inject()
-    private val adsManager: IAdsManager by inject()
-    private val preferencesRepository: IPreferencesRepository by inject()
-
     private val endGameViewModel by viewModel<EndGameDialogViewModel>()
     private val gameViewModel by sharedViewModel<GameViewModel>()
 
@@ -40,7 +35,8 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                     isVictory = if (getInt(DIALOG_TOTAL_MINES, 0) > 0) getBoolean(DIALOG_IS_VICTORY) else null,
                     time = getLong(DIALOG_TIME, 0L),
                     rightMines = getInt(DIALOG_RIGHT_MINES, 0),
-                    totalMines = getInt(DIALOG_TOTAL_MINES, 0)
+                    totalMines = getInt(DIALOG_TOTAL_MINES, 0),
+                    received = getInt(DIALOG_RECEIVED, -1)
                 )
             )
         }
@@ -72,6 +68,15 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                 }
                             }
 
+                            findViewById<TextView>(R.id.received_message).apply {
+                                if (state.received > 0 && state.isVictory == true) {
+                                    visibility = View.VISIBLE
+                                    text = getString(R.string.you_have_received, state.received)
+                                } else {
+                                    visibility = View.GONE
+                                }
+                            }
+
                             if (state.isVictory == true) {
                                 if (!instantAppManager.isEnabled(context)) {
                                     setNeutralButton(R.string.share) { _, _ ->
@@ -81,12 +86,6 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             } else {
                                 setNeutralButton(R.string.retry) { _, _ ->
                                     gameViewModel.retryObserver.postValue(Unit)
-
-                                    activity?.let {
-                                        if (!preferencesRepository.isPremiumEnabled()) {
-                                            adsManager.requestRewarded(it, Ads.RewardsAds)
-                                        }
-                                    }
                                 }
                             }
                         }
@@ -101,20 +100,27 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
         }.create()
 
     companion object {
-        fun newInstance(victory: Boolean, rightMines: Int, totalMines: Int, time: Long) =
-            EndGameDialogFragment().apply {
-                arguments = Bundle().apply {
-                    putBoolean(DIALOG_IS_VICTORY, victory)
-                    putInt(DIALOG_RIGHT_MINES, rightMines)
-                    putInt(DIALOG_TOTAL_MINES, totalMines)
-                    putLong(DIALOG_TIME, time)
-                }
+        fun newInstance(
+            victory: Boolean,
+            rightMines: Int,
+            totalMines: Int,
+            time: Long,
+            received: Int,
+        ) = EndGameDialogFragment().apply {
+            arguments = Bundle().apply {
+                putBoolean(DIALOG_IS_VICTORY, victory)
+                putInt(DIALOG_RIGHT_MINES, rightMines)
+                putInt(DIALOG_TOTAL_MINES, totalMines)
+                putInt(DIALOG_RECEIVED, received)
+                putLong(DIALOG_TIME, time)
             }
+        }
 
         const val DIALOG_IS_VICTORY = "dialog_state"
         private const val DIALOG_TIME = "dialog_time"
         private const val DIALOG_RIGHT_MINES = "dialog_right_mines"
         private const val DIALOG_TOTAL_MINES = "dialog_total_mines"
+        private const val DIALOG_RECEIVED = "dialog_received"
 
         val TAG = EndGameDialogFragment::class.simpleName!!
     }

@@ -5,6 +5,7 @@ import dev.lucasnlm.antimine.common.level.di.LevelModule
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
 import dev.lucasnlm.antimine.core.di.CommonModule
+import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.di.AppModule
 import dev.lucasnlm.antimine.di.ViewModelModule
 import dev.lucasnlm.external.IAdsManager
@@ -14,6 +15,7 @@ import org.koin.core.context.startKoin
 
 open class MainApplication : MultiDexApplication() {
     private val analyticsManager: IAnalyticsManager by inject()
+    private val preferencesRepository: IPreferencesRepository by inject()
 
     private val adsManager: IAdsManager by inject()
 
@@ -27,6 +29,10 @@ open class MainApplication : MultiDexApplication() {
         analyticsManager.apply {
             setup(applicationContext, mapOf())
             sentEvent(Analytics.Open)
+        }
+
+        if (BuildConfig.FLAVOR == "foss") {
+            preferencesRepository.setPremiumFeatures(true)
         }
 
         adsManager.start(applicationContext)

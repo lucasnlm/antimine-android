@@ -2,6 +2,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pl">
     <string name="app_name">Antimine</string>
     <string name="app_description">Znajdź wszystkie ukryte miny znajdujące się na kwadratowej planszy unikając ich detonacji.</string>
+    <string name="tutorial">Samouczek</string>
+    <string name="tutorial_completed">Samouczek ukończony</string>
+    <string name="tutorial_0_bottom">%1$s na dowolnym polu, aby rozpocząć.</string>
+    <string name="tutorial_1_top">Liczby wskazują, jaka ilość min przylega do podświetlonego pola.</string>
+    <string name="tutorial_1_bottom">Z tego wynika, że jeśli do narożnika 1️⃣  przylega tylko jedno pole, musi znajdować się tam mina. %1$s, aby ją oznaczyć.</string>
+    <string name="tutorial_2_top">Na kolejnym nieodkrytym polu nie znajduje się mina, ponieważ posiada ono liczbę 1️⃣ , a nie 2️⃣ .</string>
+    <string name="tutorial_2_bottom">Możesz je odkryć przez %1$s.</string>
+    <string name="tutorial_3_top">To samo dzieje się w przypadku tego 1️⃣ . Z pewnością wiesz, gdzie jest przylegająca mina.</string>
+    <string name="tutorial_3_bottom">Możesz odkryć wszystkie pozostałe pola przylegające do 1️⃣ .</string>
+    <string name="tutorial_4_top">Wiemy już, gdzie jest jedna z min. Istnieje więc tylko jedna możliwa pozycja dla drugiej.</string>
+    <string name="tutorial_4_bottom">%1$s, aby oznaczyć minę przylegającą do 2️⃣ .</string>
+    <string name="tutorial_5_top">Sprawdź podświetlony numer.</string>
+    <string name="tutorial_5_bottom">%1$s, aby odkryć lub %2$s, aby oznaczyć.</string>
     <string name="games">Rozgrywki</string>
     <string name="previous_games">Poprzednie rozgrywki</string>
     <string name="minefield">Rozgrywki</string>
@@ -61,10 +74,13 @@
     <string name="single_click">Pojedyncze kliknięcie</string>
     <string name="double_click">Podwójne kliknięcie</string>
     <string name="long_press">Długie naciśnięcie</string>
-    <string name="open_tile">Otwórz</string>
+    <string name="open_tile">Odkryj</string>
     <string name="flag_tile">Oznacz</string>
     <string name="retry">Jeszcze raz</string>
     <string name="empty">Puste</string>
+    <string name="cant_do_it_now">Nie można tego teraz zrobić</string>
+    <string name="you_have_received">Otrzymałeś: +%1$d</string>
+    <string name="help_win_a_game">Aby uzyskać więcej pomocy, musisz wygrać grę.</string>
     <string name="unknown_error">Nieznany błąd.</string>
     <string name="leaderboards">Tablica wyników</string>
     <string name="cancel">Anuluj</string>
@@ -72,7 +88,7 @@
     <string name="yes">Tak</string>
     <string name="unlock">Odblokuj</string>
     <string name="achievements">Osiągnięcia</string>
-    <string name="rating_button_no">Nie</string>
+    <string name="no">Nie</string>
     <string name="general">Ogólne</string>
     <string name="source_code">Kod źródłowy</string>
     <string name="translation">Tłumaczenie</string>
@@ -102,5 +118,6 @@
     <string name="you_exploded_a_mine">Zdetonowano minę!</string>
     <string name="flag_placed">Umieszczono flagę!</string>
     <string name="flag_removed">Usunięto flagę!</string>
-    <string name="remove_ad">Usunąć reklamy</string>
+    <string name="remove_ad">Usuń reklamy</string>
+    <string name="help">Pomoc</string>
 </resources>
