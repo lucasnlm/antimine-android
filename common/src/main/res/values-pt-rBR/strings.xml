@@ -2,6 +2,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pt-rBR">
     <string name="app_name">Antimine</string>
     <string name="app_description">Você deve limpar um campo cheio de mines escondidas sem detonar nenhumas delas.</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="tutorial_completed">Tutorial Concluído</string>
+    <string name="tutorial_0_bottom">Para começar dê um %1$s em qualquer quadrado aleatório.</string>
+    <string name="tutorial_1_top">Os números indicam quantas minas existem adjacentes ao quadrado destacado.</string>
+    <string name="tutorial_1_bottom">Portanto, se o canto 1️⃣ tem apenas um quadrado adjacente, ele deve ter uma minha. Use %1$s para sinalizá-lo.</string>
+    <string name="tutorial_2_top">O próximo quadrado fechado não tem uma mina porque o número é 1️⃣ , não 2️⃣ .</string>
+    <string name="tutorial_2_bottom">Você pode abri-lo com %1$s.</string>
+    <string name="tutorial_3_top">O mesmo acontece nesse 1️⃣ . Você sabe onde está a mina adjacente.</string>
+    <string name="tutorial_3_bottom">Você pode abrir todos os outros quadrados fechados adjacentes a 1️⃣ .</string>
+    <string name="tutorial_4_top">Sabemos onde está uma das minas. Então, há apenas uma possibilidade para a outra.</string>
+    <string name="tutorial_4_bottom">%1$s para sinalizar a mina adjacente a 2️⃣ .</string>
+    <string name="tutorial_5_top">Verifique o número destacado.</string>
+    <string name="tutorial_5_bottom">%1$s para abrir ou %2$s para sinalizar.</string>
     <string name="games">Jogos</string>
     <string name="previous_games">Jogos anteriores</string>
     <string name="minefield">Dificuldade</string>
@@ -65,6 +78,9 @@
     <string name="flag_tile">Bandeira</string>
     <string name="retry">Tentar de novo</string>
     <string name="empty">Vazio</string>
+    <string name="cant_do_it_now">Impossível fazer isso agora</string>
+    <string name="you_have_received">Você recebeu: +%1$d</string>
+    <string name="help_win_a_game">Para mais Ajuda, você deve ganhar um jogo.</string>
     <string name="unknown_error">Erro Desconhecido.</string>
     <string name="leaderboards">Classificações</string>
     <string name="cancel">Cancelar</string>
@@ -103,4 +119,5 @@
     <string name="flag_placed">Bandeira colocada!</string>
     <string name="flag_removed">Bandeira removida!</string>
     <string name="remove_ad">Remover Propagandas</string>
+    <string name="help">Ajuda</string>
 </resources>

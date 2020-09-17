@@ -2,6 +2,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="bg">
     <string name="app_name">Antimine</string>
     <string name="app_description">Вие трябва да изчистите квадратна дъска която има скрити мини без да взривите нито една от тях.</string>
+    <string name="tutorial">Туториал</string>
+    <string name="tutorial_completed">Tutorial Completed</string>
+    <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
+    <string name="tutorial_1_top">The numbers indicates how many mines are adjacent to the highlighted square.</string>
+    <string name="tutorial_1_bottom">Therefore, if the corner 1️⃣  has only one adjacent square, it must be a mine. %1$s to flag it.</string>
+    <string name="tutorial_2_top">The next unopened square doesn\'t have a mine because the number is 1️⃣ , not 2️⃣ .</string>
+    <string name="tutorial_2_bottom">You can open it by %1$s.</string>
+    <string name="tutorial_3_top">The same happens on this 1️⃣ . You know where its adjacent mine is.</string>
+    <string name="tutorial_3_bottom">You can open all other unopened squares adjacent to 1️⃣ .</string>
+    <string name="tutorial_4_top">We know where one of the mines are. So, there\'s only one possibility to the other one.</string>
+    <string name="tutorial_4_bottom">%1$s to flag the mine adjacent to 2️⃣ .</string>
+    <string name="tutorial_5_top">Check the highlighted number.</string>
+    <string name="tutorial_5_bottom">%1$s to open or %2$s to mark.</string>
     <string name="games">Игри</string>
     <string name="previous_games">Предишни Игри</string>
     <string name="minefield">Трудност</string>
@@ -65,6 +78,9 @@
     <string name="flag_tile">Флаг</string>
     <string name="retry">Опитайте отново</string>
     <string name="empty">Празно</string>
+    <string name="cant_do_it_now">Невъзможно е да се направи това сега</string>
+    <string name="you_have_received">Получихте: +%1$d</string>
+    <string name="help_win_a_game">За повече помощ трябва да спечелите игра.</string>
     <string name="unknown_error">Неизвестна грешка.</string>
     <string name="leaderboards">Класиране</string>
     <string name="cancel">Отказ</string>
@@ -103,4 +119,5 @@
     <string name="flag_placed">Флагът е сложен!</string>
     <string name="flag_removed">Глагът е премахнат!</string>
     <string name="remove_ad">Премахване на реклами</string>
+    <string name="help">Помощ</string>
 </resources>

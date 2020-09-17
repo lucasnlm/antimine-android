@@ -2,6 +2,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh-rCN">
     <string name="app_name">Antimine - 扫雷</string>
     <string name="app_description">你需要清除一个隐藏着地雷的矩形面板，不能使任何地雷爆炸。</string>
+    <string name="tutorial">教学模式</string>
+    <string name="tutorial_completed">已完成的教程</string>
+    <string name="tutorial_0_bottom">你可以在任意的正方形开始 %1$s.</string>
+    <string name="tutorial_1_top">数字表明有多少地雷与高亮的正方形相邻。</string>
+    <string name="tutorial_1_bottom">因此，如果角 1️⃣ 只有一个相邻的正方形，它必须是一个地雷。 %1$s 来标记它。</string>
+    <string name="tutorial_2_top">下一个未打开的方块没有地雷，因为数字是 1️⃣ , 而不是 2️⃣ 。</string>
+    <string name="tutorial_2_bottom">您可以通过 %1$s 打开它。</string>
+    <string name="tutorial_3_top">此 1️⃣ 发生同样的情况。您知道其相邻的矿藏在哪里。</string>
+    <string name="tutorial_3_bottom">您可以在 1️⃣ 旁打开所有其他未打开的方块</string>
+    <string name="tutorial_4_top">我们知道其中一枚地雷在哪里，因此，另一枚地雷只有一种可能性。</string>
+    <string name="tutorial_4_bottom">%1$s 标记附近的 2️⃣ 的矿。</string>
+    <string name="tutorial_5_top">检查高亮的数字。</string>
+    <string name="tutorial_5_bottom">%1$s 打开或 %2$s 标记。</string>
     <string name="games">游戏</string>
     <string name="previous_games">上一局</string>
     <string name="minefield">难度</string>
@@ -65,6 +78,9 @@
     <string name="flag_tile">标志</string>
     <string name="retry">重试</string>
     <string name="empty">空</string>
+    <string name="cant_do_it_now">现在无法做到这一点。</string>
+    <string name="you_have_received">您已收到: +%1$d</string>
+    <string name="help_win_a_game">为了获得更多帮助，你必须赢得一场游戏。</string>
     <string name="unknown_error">未知错误。</string>
     <string name="leaderboards">排行榜</string>
     <string name="cancel">取消</string>
@@ -103,4 +119,5 @@
     <string name="flag_placed">标记已放置！</string>
     <string name="flag_removed">标记已移除！</string>
     <string name="remove_ad">去除广告</string>
+    <string name="help">帮助</string>
 </resources>

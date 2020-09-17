@@ -78,10 +78,17 @@
     <string name="flag_tile">Flag</string>
     <string name="retry">Retry</string>
     <string name="empty">Empty</string>
+    <string name="cant_do_it_now">Impossible to do that now</string>
+    <string name="you_have_received">You have received: %1$d</string>
+    <string name="help_win_a_game">For more Help, you must win a game.</string>
     <string name="unknown_error">Unknown error.</string>
     <string name="leaderboards">Leaderboards</string>
+    <string name="cancel">Cancel</string>
+    <string name="resume">Resume</string>
+    <string name="yes">Yes</string>
     <string name="unlock">Unlock</string>
     <string name="achievements">Achievements</string>
+    <string name="no">No</string>
     <string name="general">General</string>
     <string name="source_code">Source Code</string>
     <string name="translation">Translation</string>
@@ -112,8 +119,5 @@
     <string name="flag_placed">Flag placed!</string>
     <string name="flag_removed">Flag removed!</string>
     <string name="remove_ad">Remove Ads</string>
-    <string name="cancel">Cancel</string>
-    <string name="resume">Resume</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
+    <string name="help">Help</string>
 </resources>

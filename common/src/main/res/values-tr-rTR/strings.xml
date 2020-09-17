@@ -2,6 +2,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="tr">
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Hiçbirini patlatmadan gizli mayın içeren dikdörtgen bir tahtayı temizlemelisiniz.</string>
+    <string name="tutorial">Eğitim</string>
+    <string name="tutorial_completed">Eğitim tamamlandı</string>
+    <string name="tutorial_0_bottom">Rastgele karede %1$s ile başlayabilirsiniz.</string>
+    <string name="tutorial_1_top">Numaralar vurgulanan kareye kaç tane bitişik mayın olduğuna işaret eder.</string>
+    <string name="tutorial_1_bottom">Bu nedenle, köşe 1 sadece bir bitişik kareye sahipse, bu bir mayın olmalıdır. İşaretlemek için %1$s.</string>
+    <string name="tutorial_2_top">Bir sonraki açılmamış karede mayın yok çünkü sayı 2️⃣değil, 1️⃣.</string>
+    <string name="tutorial_2_bottom">%1$s ile açabilirsin.</string>
+    <string name="tutorial_3_top">Bu 1️⃣\'de de aynı şey. Bitişik mayının nerede olduğunu biliyorsun.</string>
+    <string name="tutorial_3_bottom">1️⃣\'e bitişik bütün açılmamış mayınları açabilirsin.</string>
+    <string name="tutorial_4_top">Mayınların bir tanesinin nerede olduğunu biliyoruz. Böylece diğer mayın için sadece bir olasılık var.</string>
+    <string name="tutorial_4_bottom">2️⃣\'ye komşu olan mayını işaretlemek için %1$s.</string>
+    <string name="tutorial_5_top">Vurgulanan numarayı kontrol edin.</string>
+    <string name="tutorial_5_bottom">Açmak için %1$s ya da işaretlemek için %2$s.</string>
     <string name="games">Oyunlar</string>
     <string name="previous_games">Önceki Oyunlar</string>
     <string name="minefield">Zorluk</string>
@@ -65,6 +78,9 @@
     <string name="flag_tile">Bayrak</string>
     <string name="retry">Yeniden dene</string>
     <string name="empty">Boş</string>
+    <string name="cant_do_it_now">Bunu şimdi yapmak imkansız</string>
+    <string name="you_have_received">Aldın: +%1$d</string>
+    <string name="help_win_a_game">Daha fazla Yardım için bir oyun kazanmalısınız.</string>
     <string name="unknown_error">Bilinmeyen hata.</string>
     <string name="leaderboards">Liderlik Tablosu</string>
     <string name="cancel">İptal</string>
@@ -103,4 +119,5 @@
     <string name="flag_placed">Bayrak yerleştirildi!</string>
     <string name="flag_removed">Bayrak kaldırıldı!</string>
     <string name="remove_ad">Reklamları kaldır</string>
+    <string name="help">Yardım</string>
 </resources>

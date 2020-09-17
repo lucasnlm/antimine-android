@@ -2,6 +2,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pt-rPT">
     <string name="app_name">Antimine</string>
     <string name="app_description">Você deve limpar um campo contendo minas escondidas sem detonar nenhuma delas.</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="tutorial_completed">Tutorial Completo</string>
+    <string name="tutorial_0_bottom">Você pode começar por %1$s em qualquer quadrado aleatório.</string>
+    <string name="tutorial_1_top">Os números indicam quantas minas estão adjacentes ao quadrado em destaque.</string>
+    <string name="tutorial_1_bottom">Portanto, se o canto 1️⃣ tem apenas um quadrado adjacente, ele deve ter uma mina. %1$s para sinalizá-lo.</string>
+    <string name="tutorial_2_top">O próximo quadrado não aberto não tem uma mina, porque o número é 1️⃣ , não 2️⃣ .</string>
+    <string name="tutorial_2_bottom">Você pode abri-lo com %1$s.</string>
+    <string name="tutorial_3_top">O mesmo acontece neste 1️⃣ . Você sabe onde está a sua mina adjacente.</string>
+    <string name="tutorial_3_bottom">Você pode abrir todos os outros lugares não abertos adjacentes a 1️⃣ .</string>
+    <string name="tutorial_4_top">Sabemos onde está uma das minas. Então, há apenas uma possibilidade para a outra.</string>
+    <string name="tutorial_4_bottom">%1$s para sinalizar a mina adjacente a 2️⃣ .</string>
+    <string name="tutorial_5_top">Verifique o número destacado.</string>
+    <string name="tutorial_5_bottom">%1$s para abrir ou %2$s para marcar.</string>
     <string name="games">Jogos</string>
     <string name="previous_games">Jogos anteriores</string>
     <string name="minefield">Dificuldade</string>
@@ -58,13 +71,16 @@
     <string name="use_question_mark">Usar Ponto de Interrogação</string>
     <string name="control">Controlos</string>
     <string name="arrow">➞</string>
-    <string name="single_click">Clique único</string>
-    <string name="double_click">Duplo Clique</string>
-    <string name="long_press">Toque longo</string>
+    <string name="single_click">Toque Único</string>
+    <string name="double_click">Toque Duplo</string>
+    <string name="long_press">Toque Longo</string>
     <string name="open_tile">Abrir</string>
     <string name="flag_tile">Bandeira</string>
     <string name="retry">Tentar Novamente</string>
     <string name="empty">Vazio</string>
+    <string name="cant_do_it_now">Impossível fazer isso agora</string>
+    <string name="you_have_received">Você recebeu: +%1$d</string>
+    <string name="help_win_a_game">Para mais Ajuda, você deve ganhar um jogo.</string>
     <string name="unknown_error">Erro desconhecido.</string>
     <string name="leaderboards">Líderes</string>
     <string name="cancel">Cancelar</string>
@@ -85,7 +101,7 @@
     <string name="new_game">Novo Jogo</string>
     <string name="share">Compartilhar</string>
     <string name="share_menu">Compartilhar…</string>
-    <string name="no_network">Sem ligação à internet.</string>
+    <string name="no_network">Sem ligação à Internet.</string>
     <string name="open_menu">Abrir o Menu</string>
     <string name="close_menu">Fechar menu</string>
     <string name="delete_all">Apagar tudo</string>
@@ -103,4 +119,5 @@
     <string name="flag_placed">Bandeira colocada!</string>
     <string name="flag_removed">Bandeira removida!</string>
     <string name="remove_ad">Remover Anúncios</string>
+    <string name="help">Ajuda</string>
 </resources>

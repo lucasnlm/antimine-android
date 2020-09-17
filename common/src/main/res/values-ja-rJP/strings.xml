@@ -2,6 +2,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ja">
     <string name="app_name">Antimine</string>
     <string name="app_description">地雷が隠された長方形から1つも爆発させることなくクリアしましょう。</string>
+    <string name="tutorial">チュートリアル</string>
+    <string name="tutorial_completed">チュートリアル完了</string>
+    <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
+    <string name="tutorial_1_top">The numbers indicates how many mines are adjacent to the highlighted square.</string>
+    <string name="tutorial_1_bottom">Therefore, if the corner 1️⃣  has only one adjacent square, it must be a mine. %1$s to flag it.</string>
+    <string name="tutorial_2_top">The next unopened square doesn\'t have a mine because the number is 1️⃣ , not 2️⃣ .</string>
+    <string name="tutorial_2_bottom">You can open it by %1$s.</string>
+    <string name="tutorial_3_top">The same happens on this 1️⃣ . You know where its adjacent mine is.</string>
+    <string name="tutorial_3_bottom">You can open all other unopened squares adjacent to 1️⃣ .</string>
+    <string name="tutorial_4_top">We know where one of the mines are. So, there\'s only one possibility to the other one.</string>
+    <string name="tutorial_4_bottom">%1$s to flag the mine adjacent to 2️⃣ .</string>
+    <string name="tutorial_5_top">Check the highlighted number.</string>
+    <string name="tutorial_5_bottom">%1$s to open or %2$s to mark.</string>
     <string name="games">ゲーム回数</string>
     <string name="previous_games">前のゲーム</string>
     <string name="minefield">難易度</string>
@@ -65,6 +78,9 @@
     <string name="flag_tile">旗</string>
     <string name="retry">リトライ</string>
     <string name="empty">空</string>
+    <string name="cant_do_it_now">今それを行うことは不可能です</string>
+    <string name="you_have_received">受け取りました: +%1$d</string>
+    <string name="help_win_a_game">ヘルプを増やすには、ゲームに勝つ必要があります。</string>
     <string name="unknown_error">不明なエラーです。</string>
     <string name="leaderboards">リーダーボード</string>
     <string name="cancel">キャンセル</string>
@@ -103,4 +119,5 @@
     <string name="flag_placed">フラグを立てました！</string>
     <string name="flag_removed">フラグを消しました！</string>
     <string name="remove_ad">広告を削除</string>
+    <string name="help">ヘルプ</string>
 </resources>

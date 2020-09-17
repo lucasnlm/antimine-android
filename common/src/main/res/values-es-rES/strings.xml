@@ -2,6 +2,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="es-rES">
     <string name="app_name">Anti-Mina</string>
     <string name="app_description">Usted tiene que limpiar un tablero cuadrado que contiene minas escondidas sin detonarlas.</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="tutorial_completed">¡Tutorial Completado!</string>
+    <string name="tutorial_0_bottom">Puedes empezar por %1$s en cualquier cuadrado aleatorio.</string>
+    <string name="tutorial_1_top">Los números indican cuántas minas están adyacentes al cuadrado destacado.</string>
+    <string name="tutorial_1_bottom">Por lo tanto, si la esquina 1️⃣ tiene sólo un cuadrado adyacente, debe ser una mina. %1$s para marcarlo.</string>
+    <string name="tutorial_2_top">El siguiente cuadrado sin abrir no tiene una mina porque el número es 1️⃣ , no 2️⃣ .</string>
+    <string name="tutorial_2_bottom">Puedes abrirlo com %1$s.</string>
+    <string name="tutorial_3_top">Puedes abrir todos los demás lugares sin abrir adyacentes a 1️⃣ . Sabes dónde está la mina adyacente.</string>
+    <string name="tutorial_3_bottom">Puede abrir todos los otros cuadrados cerrados y adyacentes a 1️⃣ .</string>
+    <string name="tutorial_4_top">Sabemos dónde está una de las minas, así que sólo hay una posibilidad para la otra.</string>
+    <string name="tutorial_4_bottom">%1$s para marcar la mina adyacente a 2️⃣ .</string>
+    <string name="tutorial_5_top">Verifique el número resaltado.</string>
+    <string name="tutorial_5_bottom">%1$s para abrir o %2$s para marcar.</string>
     <string name="games">Juegos</string>
     <string name="previous_games">Juegos anteriores</string>
     <string name="minefield">Dificultad</string>
@@ -65,6 +78,9 @@
     <string name="flag_tile">Bandera</string>
     <string name="retry">Reintentar</string>
     <string name="empty">Vacío</string>
+    <string name="cant_do_it_now">Imposible hacer eso ahora</string>
+    <string name="you_have_received">Has recibido: +%1$d</string>
+    <string name="help_win_a_game">Para obtener más Ayuda, debes ganar una partida.</string>
     <string name="unknown_error">Error desconocido.</string>
     <string name="leaderboards">Ránking</string>
     <string name="cancel">Cancelar</string>
@@ -103,4 +119,5 @@
     <string name="flag_placed">¡Bandera colocada!</string>
     <string name="flag_removed">¡Bandera eliminada!</string>
     <string name="remove_ad">Eliminar anuncios</string>
+    <string name="help">Ayuda</string>
 </resources>
