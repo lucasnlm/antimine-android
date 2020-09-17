@@ -2,8 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="cs">
     <string name="app_name">Anti-Mine</string>
     <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté miny, aniž by kterákoliv z nich vybuchla.</string>
-    <string name="tutorial">Tutoriál</string>
-    <string name="tutorial_completed">Tutoriál dokončen</string>
+    <string name="tutorial">Průvodce</string>
+    <string name="tutorial_completed">Průvodce dokončen</string>
     <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
     <string name="tutorial_1_top">The numbers indicates how many mines are adjacent to the highlighted square.</string>
     <string name="tutorial_1_bottom">Therefore, if the corner 1️⃣  has only one adjacent square, it must be a mine. %1$s to flag it.</string>
@@ -80,7 +80,7 @@
     <string name="empty">Prázdné</string>
     <string name="cant_do_it_now">Není možné to nyní udělat</string>
     <string name="you_have_received">Obdrželi jste: +%1$d</string>
-    <string name="help_win_a_game">Pro další pomoc musíte vyhrát hru.</string>
+    <string name="help_win_a_game">Pro další nápovědu musíte vyhrát hru.</string>
     <string name="unknown_error">Neznámá chyba.</string>
     <string name="leaderboards">Žebříčky</string>
     <string name="cancel">Zrušit</string>
