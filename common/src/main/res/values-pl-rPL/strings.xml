@@ -79,8 +79,8 @@
     <string name="retry">Jeszcze raz</string>
     <string name="empty">Puste</string>
     <string name="cant_do_it_now">Nie można tego teraz zrobić</string>
-    <string name="you_have_received">Otrzymałeś: +%1$d</string>
-    <string name="help_win_a_game">Aby uzyskać więcej pomocy, musisz wygrać grę.</string>
+    <string name="you_have_received">Otrzymano: +%1$d</string>
+    <string name="help_win_a_game">Aby uzyskać więcej pomocy, należy wygrać rozgrywkę.</string>
     <string name="unknown_error">Nieznany błąd.</string>
     <string name="leaderboards">Tablica wyników</string>
     <string name="cancel">Anuluj</string>

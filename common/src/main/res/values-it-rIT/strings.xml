@@ -80,7 +80,7 @@
     <string name="empty">Vuoto</string>
     <string name="cant_do_it_now">Impossibile farlo ora</string>
     <string name="you_have_received">Hai ricevuto: +%1$d</string>
-    <string name="help_win_a_game">Per ulteriori aiuti, devi vincere una partita.</string>
+    <string name="help_win_a_game">Per ricevere altri suggerimenti, devi prima vincere una partita.</string>
     <string name="unknown_error">Errore sconosciuto.</string>
     <string name="leaderboards">Classifiche</string>
     <string name="cancel">Annulla</string>
@@ -119,5 +119,5 @@
     <string name="flag_placed">Bandiera piazzata!</string>
     <string name="flag_removed">Bandiera rimossa!</string>
     <string name="remove_ad">Rimuovi gli Annunci</string>
-    <string name="help">Help</string>
+    <string name="help">Assistenza</string>
 </resources>
