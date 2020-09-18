@@ -11,14 +11,18 @@ import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.stats.model.StatsModel
 import dev.lucasnlm.antimine.stats.viewmodel.StatsEvent
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
+import dev.lucasnlm.external.IInstantAppManager
 import kotlinx.android.synthetic.main.activity_stats.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     private val statsViewModel by viewModel<StatsViewModel>()
+
+    private val instantAppManager: IInstantAppManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +33,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
             statsViewModel.observeState().collect {
                 refreshStats(it)
 
-                if (it.showAds) {
+                if (it.showAds && !instantAppManager.isEnabled(applicationContext)) {
                     ad_placeholder.visibility = View.VISIBLE
                     ad_placeholder.loadAd()
                 }

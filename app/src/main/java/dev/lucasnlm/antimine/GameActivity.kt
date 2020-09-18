@@ -788,9 +788,11 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun refreshAds() {
         if (!preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
-            navigationView.menu.setGroupVisible(R.id.remove_ads_group, true)
-            ad_placeholder.visibility = View.VISIBLE
-            ad_placeholder.loadAd()
+            if (!instantAppManager.isEnabled(this)) {
+                navigationView.menu.setGroupVisible(R.id.remove_ads_group, true)
+                ad_placeholder.visibility = View.VISIBLE
+                ad_placeholder.loadAd()
+            }
         } else {
             navigationView.menu.setGroupVisible(R.id.remove_ads_group, false)
             ad_placeholder.visibility = View.GONE

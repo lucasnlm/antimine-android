@@ -19,6 +19,7 @@ import dev.lucasnlm.antimine.core.sound.ISoundManager
 import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
 import dev.lucasnlm.antimine.tutorial.view.TutorialField
 import dev.lucasnlm.external.IPlayGamesManager
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class TutorialViewModel(
@@ -57,6 +58,8 @@ class TutorialViewModel(
             completed = false,
         )
     )
+
+    val shake = ConflatedBroadcastChannel<Unit>()
 
     init {
         field.postValue(TutorialField.getStep0())
@@ -140,7 +143,8 @@ class TutorialViewModel(
                 }
             }
             else -> {
-                hapticFeedbackManager.explosionFeedback()
+                hapticFeedbackManager.tutorialErrorFeedback()
+                shake.offer(Unit)
             }
         }
     }
@@ -185,7 +189,8 @@ class TutorialViewModel(
                 }
             }
             else -> {
-                hapticFeedbackManager.explosionFeedback()
+                hapticFeedbackManager.tutorialErrorFeedback()
+                shake.offer(Unit)
             }
         }
     }
