@@ -422,8 +422,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
 
         navigationView.menu.apply {
-            findItem(R.id.share_now).isVisible = !instantAppManager.isEnabled(applicationContext)
-            findItem(R.id.remove_ads).isVisible = !preferencesRepository.isPremiumEnabled()
+            val isNotInstant = !instantAppManager.isEnabled(applicationContext)
+            findItem(R.id.share_now).isVisible = isNotInstant
+            findItem(R.id.remove_ads).isVisible = !preferencesRepository.isPremiumEnabled() && isNotInstant
 
             if (!playGamesManager.hasGooglePlayGames()) {
                 removeGroup(R.id.play_games_group)
