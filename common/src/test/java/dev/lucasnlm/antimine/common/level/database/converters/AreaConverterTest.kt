@@ -19,7 +19,8 @@ class AreaConverterTest {
               "mistake":false,
               "isCovered":true,
               "mark":"None",
-              "highlighted":true
+              "highlighted":true,
+              "revealed":false
            },
            {
               "id":2,
@@ -30,7 +31,8 @@ class AreaConverterTest {
               "mistake":true,
               "isCovered":false,
               "mark":"PurposefulNone",
-              "highlighted":false
+              "highlighted":false,
+              "revealed":false
            },
            {
               "id":3,
@@ -41,7 +43,8 @@ class AreaConverterTest {
               "mistake":false,
               "isCovered":true,
               "mark":"Flag",
-              "highlighted":true
+              "highlighted":true,
+              "revealed":false
            },
            {
               "id":4,
@@ -52,7 +55,8 @@ class AreaConverterTest {
               "mistake":false,
               "isCovered":true,
               "mark":"Question",
-              "highlighted":true
+              "highlighted":true,
+              "revealed":true
            }
         ]
         """.trimIndent().replace(
@@ -68,7 +72,8 @@ class AreaConverterTest {
                 mistake = false,
                 isCovered = true,
                 mark = Mark.None,
-                highlighted = true
+                highlighted = true,
+                revealed = false,
             ),
             Area(
                 2, 5, 3, 0,
@@ -76,7 +81,8 @@ class AreaConverterTest {
                 mistake = true,
                 isCovered = false,
                 mark = Mark.PurposefulNone,
-                highlighted = false
+                highlighted = false,
+                revealed = false,
             ),
             Area(
                 3, 1, 1, 3,
@@ -84,7 +90,8 @@ class AreaConverterTest {
                 mistake = false,
                 isCovered = true,
                 mark = Mark.Flag,
-                highlighted = true
+                highlighted = true,
+                revealed = false,
             ),
             Area(
                 4, 0, 0, 6,
@@ -92,7 +99,8 @@ class AreaConverterTest {
                 mistake = false,
                 isCovered = true,
                 mark = Mark.Question,
-                highlighted = true
+                highlighted = true,
+                revealed = true,
             )
         )
 
