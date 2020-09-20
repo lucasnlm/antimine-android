@@ -264,6 +264,14 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
+    private fun refreshInGameShortcut() {
+        if (preferencesRepository.useHelp()) {
+            refreshTipShortcutIcon()
+        } else {
+            refreshRetryShortcut()
+        }
+    }
+
     private fun refreshTipShortcutIcon() {
         tipsCounter.apply {
             visibility = View.VISIBLE
@@ -292,38 +300,27 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun refreshEndGameShortcutIcon(victory: Boolean = false, isOldGame: Boolean) {
-        if ((isOldGame || !victory) && !instantAppManager.isEnabled(this)) {
-            shortcutIcon.apply {
-                TooltipCompat.setTooltipText(this, getString(R.string.new_game))
-                setImageResource(R.drawable.retry)
-                setColorFilter(minesCount.currentTextColor)
-                setOnClickListener {
-                    lifecycleScope.launch {
-                        val confirmResign = status == Status.Running
-                        analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
+    private fun refreshRetryShortcut() {
+        shortcutIcon.apply {
+            TooltipCompat.setTooltipText(this, getString(R.string.new_game))
+            setImageResource(R.drawable.retry)
+            setColorFilter(minesCount.currentTextColor)
+            setOnClickListener {
+                lifecycleScope.launch {
+                    val confirmResign = status == Status.Running
+                    analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
 
-                        if (confirmResign) {
-                            newGameConfirmation {
-                                GlobalScope.launch {
-                                    gameViewModel.startNewGame()
-                                }
-                            }
-                        } else {
+                    if (confirmResign) {
+                        newGameConfirmation {
                             GlobalScope.launch {
                                 gameViewModel.startNewGame()
                             }
                         }
+                    } else {
+                        GlobalScope.launch {
+                            gameViewModel.startNewGame()
+                        }
                     }
-                }
-            }
-        } else {
-            shortcutIcon.apply {
-                TooltipCompat.setTooltipText(this, getString(R.string.share))
-                setImageResource(R.drawable.share)
-                setColorFilter(minesCount.currentTextColor)
-                setOnClickListener {
-                    shareCurrentGame()
                 }
             }
         }
@@ -638,7 +635,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         when (event) {
             Event.ResumeGame -> {
                 status = Status.Running
-                refreshTipShortcutIcon()
+                refreshInGameShortcut()
             }
             Event.StartNewGame -> {
                 status = Status.PreGame
@@ -648,7 +645,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             Event.Resume, Event.Running -> {
                 status = Status.Running
                 gameViewModel.runClock()
-                refreshTipShortcutIcon()
+                refreshInGameShortcut()
                 keepScreenOn(true)
             }
             Event.StartTutorial -> {
@@ -677,7 +674,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 gameViewModel.stopClock()
                 gameViewModel.showAllEmptyAreas()
                 gameViewModel.victory()
-                refreshEndGameShortcutIcon(true, isResuming)
+                refreshRetryShortcut()
                 keepScreenOn(false)
 
                 if (!isResuming) {
@@ -697,7 +694,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     totalArea
                 )
                 status = Status.Over(currentTime, score)
-                refreshEndGameShortcutIcon(false, isResuming)
+                refreshRetryShortcut()
                 keepScreenOn(false)
                 gameViewModel.stopClock()
 

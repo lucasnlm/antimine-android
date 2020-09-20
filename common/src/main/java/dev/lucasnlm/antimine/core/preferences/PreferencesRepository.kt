@@ -186,6 +186,10 @@ class PreferencesRepository(
         return preferencesManager.getBoolean(PREFERENCE_SHOW_SUPPORT, true)
     }
 
+    override fun useHelp(): Boolean {
+        return preferencesManager.getBoolean(PREFERENCE_USE_HELP, false)
+    }
+
     override fun getTips(): Int {
         return preferencesManager.getInt(PREFERENCE_TIPS, 5)
     }
@@ -208,6 +212,7 @@ class PreferencesRepository(
         private const val PREFERENCE_ANIMATION = "preference_animation"
         private const val PREFERENCE_AREA_SIZE = "preference_area_size"
         private const val PREFERENCE_QUESTION_MARK = "preference_use_question_mark"
+        private const val PREFERENCE_USE_HELP = "preference_use_help"
         private const val PREFERENCE_CONTROL_STYLE = "preference_control_style"
         private const val PREFERENCE_CUSTOM_THEME = "preference_custom_theme"
         private const val PREFERENCE_OLD_DOUBLE_CLICK = "preference_double_click_open"

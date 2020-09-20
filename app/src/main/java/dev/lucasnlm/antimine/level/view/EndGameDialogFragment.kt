@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogViewModel
 import dev.lucasnlm.external.IInstantAppManager
@@ -25,6 +26,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
     private val instantAppManager: IInstantAppManager by inject()
     private val endGameViewModel by viewModel<EndGameDialogViewModel>()
     private val gameViewModel by sharedViewModel<GameViewModel>()
+    private val preferencesRepository: IPreferencesRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +71,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             }
 
                             findViewById<TextView>(R.id.received_message).apply {
-                                if (state.received > 0 && state.isVictory == true) {
+                                if (state.received > 0 && state.isVictory == true && preferencesRepository.useHelp()) {
                                     visibility = View.VISIBLE
                                     text = getString(R.string.you_have_received, state.received)
                                 } else {

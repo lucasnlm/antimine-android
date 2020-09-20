@@ -43,6 +43,8 @@ interface IPreferencesRepository {
     fun setShowSupport(show: Boolean)
     fun showSupport(): Boolean
 
+    fun useHelp(): Boolean
+
     fun getTips(): Int
     fun setTips(tips: Int)
     fun getExtraTips(): Int
