@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine.tutorial.view
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
@@ -19,6 +20,7 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.tutorial.viewmodel.TutorialViewModel
 import kotlinx.android.synthetic.main.fragment_tutorial_level.*
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -64,6 +66,12 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
                         }
                     }
                 )
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            tutorialViewModel.shake.asFlow().collect {
+                tutorial_bottom.startAnimation(AnimationUtils.loadAnimation(context, R.anim.shake))
             }
         }
 

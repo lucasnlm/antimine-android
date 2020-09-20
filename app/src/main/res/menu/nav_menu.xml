@@ -46,20 +46,6 @@
             android:title="@string/remove_ad" />
     </group>
 
-    <group android:id="@+id/history_group">
-        <item
-            android:id="@+id/previous_games"
-            android:checkable="false"
-            android:icon="@drawable/old_games"
-            android:title="@string/previous_games" />
-
-        <item
-            android:id="@+id/stats"
-            android:checkable="false"
-            android:icon="@drawable/stats"
-            android:title="@string/events" />
-    </group>
-
     <group android:id="@+id/options_group">
         <item
             android:id="@+id/control"
@@ -84,6 +70,20 @@
             android:checkable="false"
             android:icon="@drawable/tutorial"
             android:title="@string/tutorial" />
+    </group>
+
+    <group android:id="@+id/history_group">
+        <item
+            android:id="@+id/previous_games"
+            android:checkable="false"
+            android:icon="@drawable/old_games"
+            android:title="@string/previous_games" />
+
+        <item
+            android:id="@+id/stats"
+            android:checkable="false"
+            android:icon="@drawable/stats"
+            android:title="@string/events" />
     </group>
 
     <group android:id="@+id/play_games_group">
