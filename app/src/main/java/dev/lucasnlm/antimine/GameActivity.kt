@@ -82,13 +82,15 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     override val noActionBar: Boolean = true
 
     private var status: Status = Status.PreGame
-    private val areaSizeMultiplier by lazy { preferencesRepository.areaSizeMultiplier() }
-    private val currentRadius by lazy { preferencesRepository.squareRadius() }
     private var totalMines: Int = 0
     private var totalArea: Int = 0
     private var rightMines: Int = 0
     private var currentTime: Long = 0
     private var currentSaveId: Long = 0
+
+    private val areaSizeMultiplier by lazy { preferencesRepository.areaSizeMultiplier() }
+    private val currentRadius by lazy { preferencesRepository.squareRadius() }
+    private val useHelp by lazy { preferencesRepository.useHelp() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -723,7 +725,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private fun restartIfNeed(): Boolean {
         return (
             areaSizeMultiplier != preferencesRepository.areaSizeMultiplier() ||
-                currentRadius != preferencesRepository.squareRadius()
+                currentRadius != preferencesRepository.squareRadius() ||
+            useHelp != preferencesRepository.useHelp()
             ).also {
             if (it) {
                 finish()
