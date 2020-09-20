@@ -16,7 +16,8 @@ class PreferencesRepository(
     override fun hasCustomizations(): Boolean {
         return preferencesManager.getInt(PREFERENCE_AREA_SIZE, 50) != 50 ||
             preferencesManager.getInt(PREFERENCE_LONG_PRESS_TIMEOUT, ViewConfiguration.getLongPressTimeout()) !=
-            ViewConfiguration.getLongPressTimeout()
+            ViewConfiguration.getLongPressTimeout() ||
+            preferencesManager.getInt(PREFERENCE_SQUARE_RADIUS, 2) != 2
     }
 
     override fun reset() {
@@ -25,6 +26,7 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PREFERENCE_ANIMATION, true)
         preferencesManager.putBoolean(PREFERENCE_QUESTION_MARK, false)
         preferencesManager.putBoolean(PREFERENCE_SOUND_EFFECTS, false)
+        preferencesManager.putInt(PREFERENCE_SQUARE_RADIUS, 2)
         preferencesManager.putInt(PREFERENCE_AREA_SIZE, 50)
         preferencesManager.putInt(PREFERENCE_LONG_PRESS_TIMEOUT, ViewConfiguration.getLongPressTimeout())
     }
@@ -190,6 +192,10 @@ class PreferencesRepository(
         return preferencesManager.getBoolean(PREFERENCE_USE_HELP, false)
     }
 
+    override fun squareRadius(): Int {
+        return preferencesManager.getInt(PREFERENCE_SQUARE_RADIUS, 2)
+    }
+
     override fun getTips(): Int {
         return preferencesManager.getInt(PREFERENCE_TIPS, 5)
     }
@@ -222,6 +228,7 @@ class PreferencesRepository(
         private const val PREFERENCE_SOUND_EFFECTS = "preference_sound"
         private const val PREFERENCE_STATS_BASE = "preference_stats_base"
         private const val PREFERENCE_OLD_LARGE_AREA = "preference_large_area"
+        private const val PREFERENCE_SQUARE_RADIUS = "preference_square_radius"
         private const val PREFERENCE_PROGRESSIVE_VALUE = "preference_progressive_value"
         private const val PREFERENCE_LONG_PRESS_TIMEOUT = "preference_long_press_timeout"
         private const val PREFERENCE_FIRST_USE = "preference_first_use"

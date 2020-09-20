@@ -83,6 +83,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private var status: Status = Status.PreGame
     private val areaSizeMultiplier by lazy { preferencesRepository.areaSizeMultiplier() }
+    private val currentRadius by lazy { preferencesRepository.squareRadius() }
     private var totalMines: Int = 0
     private var totalArea: Int = 0
     private var rightMines: Int = 0
@@ -636,6 +637,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             Event.ResumeGame -> {
                 status = Status.Running
                 refreshInGameShortcut()
+                refreshAds()
             }
             Event.StartNewGame -> {
                 status = Status.PreGame
@@ -652,6 +654,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 status = Status.PreGame
                 gameViewModel.stopClock()
                 disableShortcutIcon(true)
+                refreshAds(true)
                 loadGameTutorial()
             }
             Event.FinishTutorial -> {
@@ -717,7 +720,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
      * apply these changes.
      */
     private fun restartIfNeed(): Boolean {
-        return (areaSizeMultiplier != preferencesRepository.areaSizeMultiplier()).also {
+        return (
+            areaSizeMultiplier != preferencesRepository.areaSizeMultiplier() ||
+                currentRadius != preferencesRepository.squareRadius()
+            ).also {
             if (it) {
                 finish()
                 startActivity(intent)
@@ -783,8 +789,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun refreshAds() {
-        if (!preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
+    private fun refreshAds(forceHide: Boolean = false) {
+        if (!forceHide && !preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
             if (!instantAppManager.isEnabled(this)) {
                 navigationView.menu.setGroupVisible(R.id.remove_ads_group, true)
                 ad_placeholder.visibility = View.VISIBLE

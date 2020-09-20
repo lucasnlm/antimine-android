@@ -9,6 +9,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
+import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.view.ThemeAdapter
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
@@ -23,6 +24,8 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
     private val dimensionRepository: IDimensionRepository by inject()
 
     private val themeViewModel by viewModel<ThemeViewModel>()
+
+    private val preferencesRepository: IPreferencesRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +47,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
                 setHasFixedSize(true)
                 layoutManager = GridLayoutManager(context, columns)
-                adapter = ThemeAdapter(themeViewModel, areaSize)
+                adapter = ThemeAdapter(themeViewModel, areaSize, preferencesRepository.squareRadius())
             }
 
             launch {

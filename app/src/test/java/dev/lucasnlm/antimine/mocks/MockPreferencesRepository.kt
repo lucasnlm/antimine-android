@@ -61,6 +61,10 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun showSupport(): Boolean = true
 
+    override fun useHelp(): Boolean = false
+
+    override fun squareRadius(): Int = 2
+
     override fun getTips(): Int = 0
 
     override fun setTips(tips: Int) { }
