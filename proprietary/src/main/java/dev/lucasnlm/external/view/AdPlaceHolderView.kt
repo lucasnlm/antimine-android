@@ -2,13 +2,11 @@ package dev.lucasnlm.external.view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.View
 import android.widget.FrameLayout
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
-import dev.lucasnlm.antimine.BuildConfig
 
 class AdPlaceHolderView : FrameLayout {
     constructor(context: Context) : super(context)
@@ -22,20 +20,6 @@ class AdPlaceHolderView : FrameLayout {
 
     init {
         addView(adView)
-
-        if (BuildConfig.DEBUG) {
-            addView(View(context).apply {
-                setBackgroundResource(android.R.color.holo_blue_bright)
-                layoutParams = LayoutParams(
-                    LayoutParams.MATCH_PARENT,
-                    TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP,
-                        50f,
-                        context.resources.displayMetrics
-                    ).toInt()
-                )
-            })
-        }
 
         setOnClickListener {
             adView.performClick()
