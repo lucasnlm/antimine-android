@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pl">
-    <string name="app_name">Antimine</string>
-    <string name="app_description">Znajdź wszystkie ukryte miny znajdujące się na kwadratowej planszy unikając ich detonacji.</string>
     <string name="tutorial">Samouczek</string>
     <string name="tutorial_completed">Samouczek ukończony</string>
     <string name="tutorial_0_bottom">%1$s na dowolnym polu, aby rozpocząć.</string>
@@ -22,6 +20,7 @@
     <string name="beginner">Łatwa</string>
     <string name="intermediate">Średnia</string>
     <string name="expert">Ekspert</string>
+    <string name="support_description">Dzięki Twojemu wsparciu będziemy mogli dodawać nowe funkcje i kontynuować prace nad naszym projektem.</string>
     <string name="open">Otwórz</string>
     <string name="settings">Ustawienia</string>
     <string name="animations">Animacje</string>
@@ -43,10 +42,10 @@
     <string name="settings_gameplay">Rozgrywka</string>
     <string name="settings_accessibility">Ułatwienia dostępu</string>
     <string name="size">Rozmiar</string>
+    <string name="rounded_square">Zaokraglony kwadrat</string>
     <string name="system">System</string>
     <string name="rating">Opinia</string>
     <string name="support_title">Możesz nam pomóc!</string>
-    <string name="support_description">Dzięki Twojemu wsparciu będziemy mogli dodawać nowe funkcje i kontynuować prace nad naszym projektem.</string>
     <string name="support_action">Wesprzyj</string>
     <string name="rating_message">Jeśli podoba Ci się ta gra, zachęcamy do przesłania opinii. Jest to bardzo pomocne.</string>
     <string name="used_software_text">Ta gra wykorzystuje następujące oprogramowanie stron trzecich:</string>
@@ -87,6 +86,7 @@
     <string name="resume">Kontynuuj</string>
     <string name="yes">Tak</string>
     <string name="unlock">Odblokuj</string>
+    <string name="unlock_all">Odblokuj wszystko</string>
     <string name="achievements">Osiągnięcia</string>
     <string name="no">Nie</string>
     <string name="general">Ogólne</string>
@@ -120,4 +120,6 @@
     <string name="flag_removed">Usunięto flagę!</string>
     <string name="remove_ad">Usuń reklamy</string>
     <string name="help">Pomoc</string>
+    <string name="app_description">Znajdź wszystkie ukryte miny znajdujące się na kwadratowej planszy unikając ich detonacji.</string>
+    <string name="app_name">Antimine</string>
 </resources>

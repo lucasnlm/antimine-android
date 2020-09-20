@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ja">
-    <string name="app_name">Antimine</string>
-    <string name="app_description">地雷が隠された長方形から1つも爆発させることなくクリアしましょう。</string>
     <string name="tutorial">チュートリアル</string>
     <string name="tutorial_completed">チュートリアル完了</string>
     <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
@@ -22,6 +20,7 @@
     <string name="beginner">初級</string>
     <string name="intermediate">中級</string>
     <string name="expert">上級</string>
+    <string name="support_description">あなたの助けを借りて、私たちは新しい機能を実装し、私たちのプロジェクトをアクティブに保つことができます。</string>
     <string name="open">開く</string>
     <string name="settings">設定</string>
     <string name="animations">アニメーション</string>
@@ -43,10 +42,10 @@
     <string name="settings_gameplay">ゲームプレイ</string>
     <string name="settings_accessibility">アクセシビリティ</string>
     <string name="size">サイズ</string>
+    <string name="rounded_square">丸い長方形</string>
     <string name="system">システム</string>
     <string name="rating">フィードバック</string>
     <string name="support_title">私達を支援する！</string>
-    <string name="support_description">あなたの助けを借りて、私たちは新しい機能を実装し、私たちのプロジェクトをアクティブに保つことができます。</string>
     <string name="support_action">私達を支援する</string>
     <string name="rating_message">もしこのゲームを気に入ったなら、フィードバックをお願いします。私たちへの助けになるはずです。</string>
     <string name="used_software_text">このゲームは、以下のサードパーティーソフトウェアを使用しています:</string>
@@ -87,6 +86,7 @@
     <string name="resume">続ける</string>
     <string name="yes">はい</string>
     <string name="unlock">ロック解除</string>
+    <string name="unlock_all">全てアンロック</string>
     <string name="achievements">達成</string>
     <string name="no">いいえ</string>
     <string name="general">全般</string>
@@ -120,4 +120,6 @@
     <string name="flag_removed">フラグを消しました！</string>
     <string name="remove_ad">広告を削除</string>
     <string name="help">ヘルプ</string>
+    <string name="app_description">地雷が隠された長方形から1つも爆発させることなくクリアしましょう。</string>
+    <string name="app_name">Antimine</string>
 </resources>

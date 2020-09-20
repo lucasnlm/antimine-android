@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ro">
-    <string name="app_name">Antimine</string>
-    <string name="app_description">You have to clear a rectangular board containing hidden mines without detonating any of them.</string>
     <string name="tutorial">Tutorial</string>
     <string name="tutorial_completed">Tutorial completat</string>
     <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
@@ -15,21 +13,22 @@
     <string name="tutorial_4_bottom">%1$s to flag the mine adjacent to 2️⃣ .</string>
     <string name="tutorial_5_top">Check the highlighted number.</string>
     <string name="tutorial_5_bottom">%1$s to open or %2$s to mark.</string>
-    <string name="games">Games</string>
-    <string name="previous_games">Previous Games</string>
+    <string name="games">Jocuri</string>
+    <string name="previous_games">Jocuri anterioare</string>
     <string name="minefield">Dificultate</string>
     <string name="standard">Standard</string>
     <string name="beginner">Începător</string>
     <string name="intermediate">Mediu</string>
     <string name="expert">Expert</string>
-    <string name="open">Open</string>
+    <string name="support_description">Cu ajutorul tău, vom fi capabili să implementăm noi funcții și să menținem proiectul nostru activ.</string>
+    <string name="open">Deschide</string>
     <string name="settings">Setări</string>
     <string name="animations">Animații</string>
     <string name="vibration">Feedback haptic</string>
     <string name="about">Despre</string>
     <string name="events">Statistici</string>
-    <string name="custom">Custom</string>
-    <string name="start">Start</string>
+    <string name="custom">Personalizat</string>
+    <string name="start">Începe</string>
     <string name="width">Width</string>
     <string name="height">Height</string>
     <string name="mines">Mines</string>
@@ -43,10 +42,10 @@
     <string name="settings_gameplay">Joc</string>
     <string name="settings_accessibility">Accesibilitate</string>
     <string name="size">Dimensiune</string>
+    <string name="rounded_square">Pătrat rotunjit</string>
     <string name="system">Sistem</string>
     <string name="rating">Opinii</string>
     <string name="support_title">Susțineți-ne!</string>
-    <string name="support_description">Cu ajutorul tău, vom fi capabili să implementăm noi funcții și să menținem proiectul nostru activ.</string>
     <string name="support_action">Suport</string>
     <string name="rating_message">Dacă vă place acest joc, vă rugăm să ne dați un feedback. Ne va ajuta foarte mult.</string>
     <string name="used_software_text">This game uses the following third parties software:</string>
@@ -87,6 +86,7 @@
     <string name="resume">Continuă</string>
     <string name="yes">Da</string>
     <string name="unlock">Deblochează</string>
+    <string name="unlock_all">Deblochează toate</string>
     <string name="achievements">Achievements</string>
     <string name="no">Nu</string>
     <string name="general">General</string>
@@ -120,4 +120,6 @@
     <string name="flag_removed">Steagul a fost eliminat!</string>
     <string name="remove_ad">Eliminați Reclamele</string>
     <string name="help">Ajutor</string>
+    <string name="app_description">You have to clear a rectangular board containing hidden mines without detonating any of them.</string>
+    <string name="app_name">Antimine</string>
 </resources>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="bg">
-    <string name="app_name">Antimine</string>
-    <string name="app_description">Вие трябва да изчистите квадратна дъска която има скрити мини без да взривите нито една от тях.</string>
     <string name="tutorial">Туториал</string>
     <string name="tutorial_completed">Tutorial Completed</string>
     <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
@@ -22,6 +20,7 @@
     <string name="beginner">Начинаещ</string>
     <string name="intermediate">Напреднал</string>
     <string name="expert">Експерт</string>
+    <string name="support_description">С вашата помощ, ще ни бъде възможно да добавим нови функционалности и да поддържаме проекта жив.</string>
     <string name="open">Отвори</string>
     <string name="settings">Настройки</string>
     <string name="animations">Анимации</string>
@@ -43,10 +42,10 @@
     <string name="settings_gameplay">Начин на игра</string>
     <string name="settings_accessibility">Достъпност</string>
     <string name="size">Размер</string>
+    <string name="rounded_square">Заоблен квадрат</string>
     <string name="system">Система</string>
     <string name="rating">Обратна връзка</string>
     <string name="support_title">Подкрепете ни!</string>
-    <string name="support_description">С вашата помощ, ще ни бъде възможно да добавим нови функционалности и да поддържаме проекта жив.</string>
     <string name="support_action">За помощ</string>
     <string name="rating_message">Ако харесвате играте, моля дайте ни отзив. Това ще ни помогне много.</string>
     <string name="used_software_text">Играта използва следния чуждестранен софтуер:</string>
@@ -87,6 +86,7 @@
     <string name="resume">Продължи</string>
     <string name="yes">Да</string>
     <string name="unlock">Отключи</string>
+    <string name="unlock_all">Отключи Всички</string>
     <string name="achievements">Постижения</string>
     <string name="no">Не</string>
     <string name="general">Основни</string>
@@ -120,4 +120,6 @@
     <string name="flag_removed">Глагът е премахнат!</string>
     <string name="remove_ad">Премахване на реклами</string>
     <string name="help">Помощ</string>
+    <string name="app_description">Вие трябва да изчистите квадратна дъска която има скрити мини без да взривите нито една от тях.</string>
+    <string name="app_name">Antimine</string>
 </resources>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="vi">
-    <string name="app_name">Dò mìn</string>
-    <string name="app_description">Bạn phải mở tất cả các ô trên một bãi mìn mà không làm nổ cục mìn nào.</string>
     <string name="tutorial">Hướng dẫn</string>
     <string name="tutorial_completed">Tutorial Completed</string>
     <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
@@ -22,6 +20,7 @@
     <string name="beginner">Dễ</string>
     <string name="intermediate">Trung bình</string>
     <string name="expert">Khó</string>
+    <string name="support_description">Với sự giúp đỡ của bạn, chúng tôi sẽ có thể triển khai các tính năng mới và giữ cho dự án của chúng tôi hoạt động.</string>
     <string name="open">Mở</string>
     <string name="settings">Cài đặt</string>
     <string name="animations">Hiệu ứng động</string>
@@ -43,10 +42,10 @@
     <string name="settings_gameplay">Cách thức chơi</string>
     <string name="settings_accessibility">Trợ năng</string>
     <string name="size">Kích thước</string>
+    <string name="rounded_square">Hình vuông bo góc</string>
     <string name="system">Hệ thống</string>
     <string name="rating">Phản hồi</string>
     <string name="support_title">Hỗ trợ chúng tôi!</string>
-    <string name="support_description">Với sự giúp đỡ của bạn, chúng tôi sẽ có thể triển khai các tính năng mới và giữ cho dự án của chúng tôi hoạt động.</string>
     <string name="support_action">Ủng hộ chúng tôi</string>
     <string name="rating_message">Nếu bạn thích trò chơi này, hãy gửi phản hồi cho chúng tôi. Nhận xét của bạn sẽ giúp chúng tôi rất nhiều.</string>
     <string name="used_software_text">Trò chơi này sử dụng các phần mềm bên thứ ba sau:</string>
@@ -87,6 +86,7 @@
     <string name="resume">Tiếp tục</string>
     <string name="yes">Có</string>
     <string name="unlock">Mở khoá</string>
+    <string name="unlock_all">Mở khóa tất cả</string>
     <string name="achievements">Thành tựu</string>
     <string name="no">Không</string>
     <string name="general">Tổng quan</string>
@@ -120,4 +120,6 @@
     <string name="flag_removed">Đã tháo cờ hiệu!</string>
     <string name="remove_ad">Loại bỏ quảng cáo</string>
     <string name="help">Trợ Giúp</string>
+    <string name="app_description">Bạn phải mở tất cả các ô trên một bãi mìn mà không làm nổ cục mìn nào.</string>
+    <string name="app_name">Dò mìn</string>
 </resources>
