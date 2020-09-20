@@ -85,8 +85,11 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
                                         it.recreate()
                                     },
                                     onFail = {
-                                        Toast.makeText(it.applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT)
-                                            .show()
+                                        Toast.makeText(
+                                            it.applicationContext,
+                                            R.string.unknown_error,
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
                                 )
                             }

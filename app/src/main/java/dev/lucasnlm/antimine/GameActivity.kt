@@ -726,7 +726,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         return (
             areaSizeMultiplier != preferencesRepository.areaSizeMultiplier() ||
                 currentRadius != preferencesRepository.squareRadius() ||
-            useHelp != preferencesRepository.useHelp()
+                useHelp != preferencesRepository.useHelp()
             ).also {
             if (it) {
                 finish()
