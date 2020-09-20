@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="no">
-    <string name="app_name">Antimine</string>
-    <string name="app_description">Du må fjerne en rektangulær plate med skjulte miner uten å løsne noen av dem.</string>
     <string name="tutorial">Tutorial</string>
     <string name="tutorial_completed">Tutorial fullført</string>
     <string name="tutorial_0_bottom">Du kan starte med %1$s på et tilfeldig kvadrat.</string>
@@ -22,6 +20,7 @@
     <string name="beginner">Nybegynner</string>
     <string name="intermediate">Mellomliggende</string>
     <string name="expert">Ekspert</string>
+    <string name="support_description">Med hjelpen din kan vi implementere nye funksjoner og holde prosjektet aktivt.</string>
     <string name="open">Åpne</string>
     <string name="settings">Innstillinger</string>
     <string name="animations">Animasjoner</string>
@@ -43,10 +42,10 @@
     <string name="settings_gameplay">Spillopplevelse</string>
     <string name="settings_accessibility">Tilgjengelighet</string>
     <string name="size">Størrelse</string>
+    <string name="rounded_square">Avrundet kvadrat</string>
     <string name="system">System</string>
     <string name="rating">Ttilbakemelding</string>
     <string name="support_title">Støtt oss!</string>
-    <string name="support_description">Med hjelpen din kan vi implementere nye funksjoner og holde prosjektet aktivt.</string>
     <string name="support_action">For å støtte</string>
     <string name="rating_message">Hvis du liker dette spillet, gi oss en tilbakemelding. Det vil hjelpe oss mye.</string>
     <string name="used_software_text">Dette spillet bruker følgende tredjeparter programvare:</string>
@@ -87,6 +86,7 @@
     <string name="resume">Fortsett</string>
     <string name="yes">Ja</string>
     <string name="unlock">Lås opp</string>
+    <string name="unlock_all">Lås opp alle</string>
     <string name="achievements">Prestasjoner</string>
     <string name="no">Nei</string>
     <string name="general">Generelt</string>
@@ -120,4 +120,6 @@
     <string name="flag_removed">Flagg fjernet!</string>
     <string name="remove_ad">Fjern Reklame</string>
     <string name="help">Hjelp</string>
+    <string name="app_description">Du må fjerne en rektangulær plate med skjulte miner uten å løsne noen av dem.</string>
+    <string name="app_name">Antimine</string>
 </resources>

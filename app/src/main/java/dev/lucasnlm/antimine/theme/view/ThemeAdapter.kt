@@ -1,10 +1,6 @@
 package dev.lucasnlm.antimine.theme.view
 
-import android.content.Context
 import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.RectF
-import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
+import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.view.AreaView
 import dev.lucasnlm.antimine.core.themes.model.AppTheme
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
@@ -21,6 +18,7 @@ import kotlinx.android.synthetic.main.view_theme.view.*
 class ThemeAdapter(
     private val themeViewModel: ThemeViewModel,
     private val areaSize: Float,
+    private val squareRadius: Int,
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
 
     private val themes: List<AppTheme> = themeViewModel.singleState().themes
@@ -47,7 +45,11 @@ class ThemeAdapter(
 
     override fun onBindViewHolder(holder: ThemeViewHolder, position: Int) {
         val theme = themes[position]
-        val paintSettings = createAreaPaintSettings(holder.itemView.context, areaSize)
+        val paintSettings = AreaAdapter.createAreaPaintSettings(
+            holder.itemView.context,
+            areaSize,
+            squareRadius
+        )
         holder.itemView.run {
             val selected = (theme.id == themeViewModel.singleState().current.id)
             val areas = listOf(area0, area1, area2, area3, area4, area5, area6, area7, area8)
@@ -97,24 +99,6 @@ class ThemeAdapter(
             isLowBitAmbient = false,
             paintSettings = paintSettings
         )
-    }
-
-    companion object {
-        fun createAreaPaintSettings(context: Context, size: Float): AreaPaintSettings {
-            val resources = context.resources
-            return AreaPaintSettings(
-                Paint().apply {
-                    isAntiAlias = true
-                    isDither = true
-                    style = Paint.Style.FILL
-                    textSize = 18.0f * context.resources.displayMetrics.density
-                    typeface = Typeface.DEFAULT_BOLD
-                    textAlign = Paint.Align.CENTER
-                },
-                RectF(0.0f, 0.0f, size, size),
-                resources.getDimension(dev.lucasnlm.antimine.common.R.dimen.field_radius)
-            )
-        }
     }
 }
 

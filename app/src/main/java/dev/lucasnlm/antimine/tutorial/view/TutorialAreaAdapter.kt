@@ -36,7 +36,11 @@ class TutorialAreaAdapter(
 
     init {
         setHasStableIds(false)
-        paintSettings = AreaAdapter.createAreaPaintSettings(context.applicationContext, dimensionRepository.areaSize())
+        paintSettings = AreaAdapter.createAreaPaintSettings(
+            context.applicationContext,
+            dimensionRepository.areaSize(),
+            preferencesRepository.squareRadius(),
+        )
     }
 
     fun setAmbientMode(isAmbientMode: Boolean, isLowBitAmbient: Boolean) {

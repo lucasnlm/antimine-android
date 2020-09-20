@@ -533,11 +533,5 @@ open class GameViewModel(
 
     private fun refreshField() {
         field.postValue(gameController.field())
-
-        if (gameController.hasMines()) {
-            viewModelScope.launch {
-                saveGame()
-            }
-        }
     }
 }

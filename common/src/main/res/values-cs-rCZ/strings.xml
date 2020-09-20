@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="cs">
-    <string name="app_name">Anti-Mine</string>
-    <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté miny, aniž by kterákoliv z nich vybuchla.</string>
     <string name="tutorial">Průvodce</string>
     <string name="tutorial_completed">Průvodce dokončen</string>
     <string name="tutorial_0_bottom">%1$s můžete začít na libovolném náhodném čtverci.</string>
@@ -22,6 +20,7 @@
     <string name="beginner">Začátečník</string>
     <string name="intermediate">Středně pokročilý</string>
     <string name="expert">Expert</string>
+    <string name="support_description">S vaší pomocí budeme moci implementovat nové funkce a udržet náš projekt aktivní.</string>
     <string name="open">Otevřít</string>
     <string name="settings">Nastavení</string>
     <string name="animations">Animace</string>
@@ -43,10 +42,10 @@
     <string name="settings_gameplay">Hra</string>
     <string name="settings_accessibility">Přístupnost</string>
     <string name="size">Velikost</string>
+    <string name="rounded_square">Zaoblený čtverec</string>
     <string name="system">Systém</string>
     <string name="rating">Zpětná vazba</string>
     <string name="support_title">Podpořte nás!</string>
-    <string name="support_description">S vaší pomocí budeme moci implementovat nové funkce a udržet náš projekt aktivní.</string>
     <string name="support_action">Podporovat</string>
     <string name="rating_message">Pokud se vám tato hra líbí, dejte nám prosím zpětnou vazbu. Hodně nám to pomůže.</string>
     <string name="used_software_text">Tato hra používá následující software třetích stran:</string>
@@ -87,6 +86,7 @@
     <string name="resume">Pokračovat</string>
     <string name="yes">Ano</string>
     <string name="unlock">Odemknout</string>
+    <string name="unlock_all">Odemkni vše</string>
     <string name="achievements">Úspěchy</string>
     <string name="no">Ne</string>
     <string name="general">Obecné</string>
@@ -120,4 +120,6 @@
     <string name="flag_removed">Vlajka odstraněna!</string>
     <string name="remove_ad">Odstranit reklamy</string>
     <string name="help">Nápověda</string>
+    <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté miny, aniž by kterákoliv z nich vybuchla.</string>
+    <string name="app_name">Anti-Mine</string>
 </resources>

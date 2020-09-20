@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="tr">
-    <string name="app_name">Anti-Mine</string>
-    <string name="app_description">Hiçbirini patlatmadan gizli mayın içeren dikdörtgen bir tahtayı temizlemelisiniz.</string>
     <string name="tutorial">Eğitim</string>
     <string name="tutorial_completed">Eğitim tamamlandı</string>
     <string name="tutorial_0_bottom">Rastgele karede %1$s ile başlayabilirsiniz.</string>
@@ -22,6 +20,7 @@
     <string name="beginner">Başlangıç</string>
     <string name="intermediate">Orta düzey</string>
     <string name="expert">Uzman</string>
+    <string name="support_description">Sizin yardımınızla, yeni özellikler ekleyebilir ve projemizi etkin tutabiliriz.</string>
     <string name="open">Aç</string>
     <string name="settings">Ayarlar</string>
     <string name="animations">Animasyonlar</string>
@@ -43,10 +42,10 @@
     <string name="settings_gameplay">Oynanış</string>
     <string name="settings_accessibility">Erişilebilirlik</string>
     <string name="size">Boyut</string>
+    <string name="rounded_square">Yuvarlak kare</string>
     <string name="system">Sistem</string>
     <string name="rating">Geri bildirim</string>
     <string name="support_title">Bizi destekleyin!</string>
-    <string name="support_description">Sizin yardımınızla, yeni özellikler ekleyebilir ve projemizi etkin tutabiliriz.</string>
     <string name="support_action">Destek için</string>
     <string name="rating_message">Bu oyunu beğendiyseniz, lütfen bize bir geri bildirim verin. Bize çok yardımcı olacak.</string>
     <string name="used_software_text">Bu oyun aşağıdaki üçüncü taraf yazılımlarını kullanır:</string>
@@ -87,6 +86,7 @@
     <string name="resume">Devam et</string>
     <string name="yes">Evet</string>
     <string name="unlock">Kilidini Aç</string>
+    <string name="unlock_all">Tümünü aç</string>
     <string name="achievements">Başarımlar</string>
     <string name="no">Hayır</string>
     <string name="general">Genel</string>
@@ -120,4 +120,6 @@
     <string name="flag_removed">Bayrak kaldırıldı!</string>
     <string name="remove_ad">Reklamları kaldır</string>
     <string name="help">Yardım</string>
+    <string name="app_description">Hiçbirini patlatmadan gizli mayın içeren dikdörtgen bir tahtayı temizlemelisiniz.</string>
+    <string name="app_name">Anti-Mine</string>
 </resources>

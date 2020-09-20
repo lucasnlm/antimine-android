@@ -82,12 +82,15 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     override val noActionBar: Boolean = true
 
     private var status: Status = Status.PreGame
-    private val areaSizeMultiplier by lazy { preferencesRepository.areaSizeMultiplier() }
     private var totalMines: Int = 0
     private var totalArea: Int = 0
     private var rightMines: Int = 0
     private var currentTime: Long = 0
     private var currentSaveId: Long = 0
+
+    private val areaSizeMultiplier by lazy { preferencesRepository.areaSizeMultiplier() }
+    private val currentRadius by lazy { preferencesRepository.squareRadius() }
+    private val useHelp by lazy { preferencesRepository.useHelp() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -264,6 +267,14 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
+    private fun refreshInGameShortcut() {
+        if (preferencesRepository.useHelp()) {
+            refreshTipShortcutIcon()
+        } else {
+            refreshRetryShortcut()
+        }
+    }
+
     private fun refreshTipShortcutIcon() {
         tipsCounter.apply {
             visibility = View.VISIBLE
@@ -292,38 +303,27 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun refreshEndGameShortcutIcon(victory: Boolean = false, isOldGame: Boolean) {
-        if ((isOldGame || !victory) && !instantAppManager.isEnabled(this)) {
-            shortcutIcon.apply {
-                TooltipCompat.setTooltipText(this, getString(R.string.new_game))
-                setImageResource(R.drawable.retry)
-                setColorFilter(minesCount.currentTextColor)
-                setOnClickListener {
-                    lifecycleScope.launch {
-                        val confirmResign = status == Status.Running
-                        analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
+    private fun refreshRetryShortcut() {
+        shortcutIcon.apply {
+            TooltipCompat.setTooltipText(this, getString(R.string.new_game))
+            setImageResource(R.drawable.retry)
+            setColorFilter(minesCount.currentTextColor)
+            setOnClickListener {
+                lifecycleScope.launch {
+                    val confirmResign = status == Status.Running
+                    analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
 
-                        if (confirmResign) {
-                            newGameConfirmation {
-                                GlobalScope.launch {
-                                    gameViewModel.startNewGame()
-                                }
-                            }
-                        } else {
+                    if (confirmResign) {
+                        newGameConfirmation {
                             GlobalScope.launch {
                                 gameViewModel.startNewGame()
                             }
                         }
+                    } else {
+                        GlobalScope.launch {
+                            gameViewModel.startNewGame()
+                        }
                     }
-                }
-            }
-        } else {
-            shortcutIcon.apply {
-                TooltipCompat.setTooltipText(this, getString(R.string.share))
-                setImageResource(R.drawable.share)
-                setColorFilter(minesCount.currentTextColor)
-                setOnClickListener {
-                    shareCurrentGame()
                 }
             }
         }
@@ -424,8 +424,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
 
         navigationView.menu.apply {
-            findItem(R.id.share_now).isVisible = !instantAppManager.isEnabled(applicationContext)
-            findItem(R.id.remove_ads).isVisible = !preferencesRepository.isPremiumEnabled()
+            val isNotInstant = !instantAppManager.isEnabled(applicationContext)
+            findItem(R.id.share_now).isVisible = isNotInstant
+            findItem(R.id.remove_ads).isVisible = !preferencesRepository.isPremiumEnabled() && isNotInstant
 
             if (!playGamesManager.hasGooglePlayGames()) {
                 removeGroup(R.id.play_games_group)
@@ -638,7 +639,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         when (event) {
             Event.ResumeGame -> {
                 status = Status.Running
-                refreshTipShortcutIcon()
+                refreshInGameShortcut()
+                refreshAds()
             }
             Event.StartNewGame -> {
                 status = Status.PreGame
@@ -648,13 +650,14 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             Event.Resume, Event.Running -> {
                 status = Status.Running
                 gameViewModel.runClock()
-                refreshTipShortcutIcon()
+                refreshInGameShortcut()
                 keepScreenOn(true)
             }
             Event.StartTutorial -> {
                 status = Status.PreGame
                 gameViewModel.stopClock()
                 disableShortcutIcon(true)
+                refreshAds(true)
                 loadGameTutorial()
             }
             Event.FinishTutorial -> {
@@ -677,7 +680,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 gameViewModel.stopClock()
                 gameViewModel.showAllEmptyAreas()
                 gameViewModel.victory()
-                refreshEndGameShortcutIcon(true, isResuming)
+                refreshRetryShortcut()
                 keepScreenOn(false)
 
                 if (!isResuming) {
@@ -697,7 +700,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     totalArea
                 )
                 status = Status.Over(currentTime, score)
-                refreshEndGameShortcutIcon(false, isResuming)
+                refreshRetryShortcut()
                 keepScreenOn(false)
                 gameViewModel.stopClock()
 
@@ -720,7 +723,11 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
      * apply these changes.
      */
     private fun restartIfNeed(): Boolean {
-        return (areaSizeMultiplier != preferencesRepository.areaSizeMultiplier()).also {
+        return (
+            areaSizeMultiplier != preferencesRepository.areaSizeMultiplier() ||
+                currentRadius != preferencesRepository.squareRadius() ||
+                useHelp != preferencesRepository.useHelp()
+            ).also {
             if (it) {
                 finish()
                 startActivity(intent)
@@ -786,8 +793,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun refreshAds() {
-        if (!preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
+    private fun refreshAds(forceHide: Boolean = false) {
+        if (!forceHide && !preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
             if (!instantAppManager.isEnabled(this)) {
                 navigationView.menu.setGroupVisible(R.id.remove_ads_group, true)
                 ad_placeholder.visibility = View.VISIBLE

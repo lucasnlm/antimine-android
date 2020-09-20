@@ -10,4 +10,8 @@ class DisabledHapticFeedbackManager : IHapticFeedbackManager {
     override fun explosionFeedback() {
         // Empty
     }
+
+    override fun tutorialErrorFeedback() {
+        // Empty
+    }
 }

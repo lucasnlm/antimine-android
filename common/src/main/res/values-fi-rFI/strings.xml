@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fi">
-    <string name="app_name">Antimine</string>
-    <string name="app_description">Sinun täytyy tyhjentää piileskeleviä miinoja sisältävä suorakulmainen taulu räjäyttämättä miinoja kertaakaan.</string>
     <string name="tutorial">Opetusohjelma</string>
     <string name="tutorial_completed">Opetuspeli Suoritettu</string>
     <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
@@ -22,6 +20,7 @@
     <string name="beginner">Aloittelija</string>
     <string name="intermediate">Keskitaso</string>
     <string name="expert">Edistynyt</string>
+    <string name="support_description">Sinun avullasi pystymme toteuttamaan uusia ominaisuuksia ja pitämään projektimme aktiivisena.</string>
     <string name="open">Avaa</string>
     <string name="settings">Asetukset</string>
     <string name="animations">Animaatiot</string>
@@ -43,10 +42,10 @@
     <string name="settings_gameplay">Pelattavuus</string>
     <string name="settings_accessibility">Esteettömyys</string>
     <string name="size">Koko</string>
+    <string name="rounded_square">Pyöristetty neliö</string>
     <string name="system">Järjestelmä</string>
     <string name="rating">Lähetä palautetta</string>
     <string name="support_title">Tue meitä!</string>
-    <string name="support_description">Sinun avullasi pystymme toteuttamaan uusia ominaisuuksia ja pitämään projektimme aktiivisena.</string>
     <string name="support_action">Tukea</string>
     <string name="rating_message">Mikäli pidät sovelluksesta, jätä siitä arvostelu. Tästä on meille paljon apua.</string>
     <string name="used_software_text">Tämä peli käyttää seuraavien kolmansien osapuolten ohjelmistoa:</string>
@@ -87,6 +86,7 @@
     <string name="resume">Jatka</string>
     <string name="yes">Kyllä</string>
     <string name="unlock">Avaa</string>
+    <string name="unlock_all">Avaa kaikki</string>
     <string name="achievements">Saavutukset</string>
     <string name="no">Ei</string>
     <string name="general">Yleiset</string>
@@ -120,4 +120,6 @@
     <string name="flag_removed">Lippu poistettu!</string>
     <string name="remove_ad">Poista Mainokset</string>
     <string name="help">Apua</string>
+    <string name="app_description">Sinun täytyy tyhjentää piileskeleviä miinoja sisältävä suorakulmainen taulu räjäyttämättä miinoja kertaakaan.</string>
+    <string name="app_name">Antimine</string>
 </resources>

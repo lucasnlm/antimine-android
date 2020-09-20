@@ -37,7 +37,11 @@ class AreaAdapter(
 
     init {
         setHasStableIds(true)
-        paintSettings = createAreaPaintSettings(context.applicationContext, dimensionRepository.areaSize())
+        paintSettings = createAreaPaintSettings(
+            context.applicationContext,
+            dimensionRepository.areaSize(),
+            preferencesRepository.squareRadius(),
+        )
     }
 
     fun setAmbientMode(isAmbientMode: Boolean, isLowBitAmbient: Boolean) {
@@ -170,7 +174,7 @@ class AreaAdapter(
     companion object {
         val TAG = AreaAdapter::class.simpleName!!
 
-        fun createAreaPaintSettings(context: Context, size: Float): AreaPaintSettings {
+        fun createAreaPaintSettings(context: Context, size: Float, squareRadius: Int): AreaPaintSettings {
             val resources = context.resources
             return AreaPaintSettings(
                 Paint().apply {
@@ -182,7 +186,7 @@ class AreaAdapter(
                     textAlign = Paint.Align.CENTER
                 },
                 RectF(0.0f, 0.0f, size, size),
-                resources.getDimension(R.dimen.field_radius)
+                resources.getDimension(R.dimen.field_radius) * squareRadius
             )
         }
     }

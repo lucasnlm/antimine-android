@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="id">
-    <string name="app_name">Antimine</string>
-    <string name="app_description">Kosongkan ranjau tersembunyi dari medan ranjau</string>
     <string name="tutorial">Tutorial</string>
     <string name="tutorial_completed">Tutorial selesai</string>
     <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
@@ -22,6 +20,7 @@
     <string name="beginner">Pemula</string>
     <string name="intermediate">Menengah</string>
     <string name="expert">Ahli</string>
+    <string name="support_description">Dengan bantuan Anda, kami akan dapat menerapkan fitur baru dan menjaga proyek kami tetap aktif.</string>
     <string name="open">Buka</string>
     <string name="settings">Pengaturan</string>
     <string name="animations">Animasi</string>
@@ -43,10 +42,10 @@
     <string name="settings_gameplay">Aspek permainan</string>
     <string name="settings_accessibility">Aksesibilitas</string>
     <string name="size">Ukuran</string>
+    <string name="rounded_square">Kotak bulat</string>
     <string name="system">Sistem</string>
     <string name="rating">Umpan Balik</string>
     <string name="support_title">Dukung kami!</string>
-    <string name="support_description">Dengan bantuan Anda, kami akan dapat menerapkan fitur baru dan menjaga proyek kami tetap aktif.</string>
     <string name="support_action">Dukung kami</string>
     <string name="rating_message">Jika Anda menyukai game ini, tolong beri kami umpan balik. Itu akan banyak membantu kita.</string>
     <string name="used_software_text">Game ini menggunakan software pihak ketiga berikut:</string>
@@ -87,6 +86,7 @@
     <string name="resume">Lanjutkan</string>
     <string name="yes">Ya</string>
     <string name="unlock">Buka</string>
+    <string name="unlock_all">Buka semua</string>
     <string name="achievements">Prestasi</string>
     <string name="no">Tidak</string>
     <string name="general">Umum</string>
@@ -120,4 +120,6 @@
     <string name="flag_removed">Bendera dihapus!</string>
     <string name="remove_ad">Hapus Iklan</string>
     <string name="help">Bantuan</string>
+    <string name="app_description">Kosongkan ranjau tersembunyi dari medan ranjau</string>
+    <string name="app_name">Antimine</string>
 </resources>

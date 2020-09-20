@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="de">
-    <string name="app_name">Antimine</string>
-    <string name="app_description">Du musst ein rechteckiges Spielfeld, das versteckte Minen enthält, räumen, ohne irgendeine davon zur Explosion zu bringen.</string>
     <string name="tutorial">Anleitung</string>
     <string name="tutorial_completed">Anleitung Abgeschlossen</string>
     <string name="tutorial_0_bottom">Du kannst von %1$s aus an jedem beliebigen zufälligen Quadrat beginnen.</string>
@@ -22,6 +20,7 @@
     <string name="beginner">Anfänger</string>
     <string name="intermediate">Mittleres Niveau</string>
     <string name="expert">Experte</string>
+    <string name="support_description">Mit Ihrer Hilfe können wir neue Funktionen implementieren und unser Projekt aktiv halten.</string>
     <string name="open">Öffnen</string>
     <string name="settings">Einstellungen</string>
     <string name="animations">Animationen</string>
@@ -43,10 +42,10 @@
     <string name="settings_gameplay">Spielablauf</string>
     <string name="settings_accessibility">Barrierefreiheit</string>
     <string name="size">Größe</string>
+    <string name="rounded_square">Abgerundetes Quadrat</string>
     <string name="system">System</string>
     <string name="rating">Rückmeldung</string>
     <string name="support_title">Ünterstütze uns!</string>
-    <string name="support_description">Mit Ihrer Hilfe können wir neue Funktionen implementieren und unser Projekt aktiv halten.</string>
     <string name="support_action">Hilfestellung</string>
     <string name="rating_message">Wenn dir dieses Spiel gefällt, gib uns bitte eine Rückmeldung. Es wird uns sehr helfen.</string>
     <string name="used_software_text">Dieses Spiel benutzt folgende Software von Drittanbietern:</string>
@@ -87,6 +86,7 @@
     <string name="resume">Fortfahren</string>
     <string name="yes">Ja</string>
     <string name="unlock">Entsperren</string>
+    <string name="unlock_all">Alle entsperren</string>
     <string name="achievements">Erfolge</string>
     <string name="no">Nein</string>
     <string name="general">Allgemein</string>
@@ -120,4 +120,6 @@
     <string name="flag_removed">Markierung entfernt!</string>
     <string name="remove_ad">Werbung entfernen</string>
     <string name="help">Hilfe</string>
+    <string name="app_description">Du musst ein rechteckiges Spielfeld, das versteckte Minen enthält, räumen, ohne irgendeine davon zur Explosion zu bringen.</string>
+    <string name="app_name">Antimine</string>
 </resources>

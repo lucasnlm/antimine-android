@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="hi">
-    <string name="app_name">Antimine</string>
-    <string name="app_description">लोकप्रिय लॉजिक पजल माइन्सवीपर. बोर्ड से माइंस साफ करता है वर्ग से संकेत को प्रयोग करते हुए जिसे आपने पहले से खोला है.</string>
     <string name="tutorial">ट्यूटोरियल</string>
     <string name="tutorial_completed">ट्यूटोरियल पूरा हुआ</string>
     <string name="tutorial_0_bottom">आप किसी भी यादृच्छिक क्षेत्र पर %1$s द्वारा शुरू कर सकते हैं।</string>
@@ -22,6 +20,7 @@
     <string name="beginner">छोटा</string>
     <string name="intermediate">मध्यम</string>
     <string name="expert">बड़ा</string>
+    <string name="support_description">आपकी मदद से, हम नई सुविधाओं को लागू करने और अपनी परियोजना को सक्रिय रखने में सक्षम होंगे।</string>
     <string name="open">खुला</string>
     <string name="settings">सेटिंग्स</string>
     <string name="animations">एनिमेशन</string>
@@ -43,10 +42,10 @@
     <string name="settings_gameplay">गेमप्ले</string>
     <string name="settings_accessibility">पहुँच-क्षमता</string>
     <string name="size">आकार</string>
+    <string name="rounded_square">गोल कोण चोकोण</string>
     <string name="system">प्रणाली</string>
     <string name="rating">फीडबैक</string>
     <string name="support_title">हमें सहयोग दीजिये!</string>
-    <string name="support_description">आपकी मदद से, हम नई सुविधाओं को लागू करने और अपनी परियोजना को सक्रिय रखने में सक्षम होंगे।</string>
     <string name="support_action">हमें सहयोग दीजिये</string>
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
     <string name="used_software_text">This game uses the following third parties software:</string>
@@ -87,6 +86,7 @@
     <string name="resume">जारी रखें</string>
     <string name="yes">हाँ</string>
     <string name="unlock">अनलॉक करें</string>
+    <string name="unlock_all">सभी अनलॉक करें</string>
     <string name="achievements">उपलब्धियां</string>
     <string name="no">नहीं</string>
     <string name="general">सामान्य</string>
@@ -120,4 +120,6 @@
     <string name="flag_removed">Flag removed!</string>
     <string name="remove_ad">विज्ञापन निकालें</string>
     <string name="help">मदद</string>
+    <string name="app_description">लोकप्रिय लॉजिक पजल माइन्सवीपर. बोर्ड से माइंस साफ करता है वर्ग से संकेत को प्रयोग करते हुए जिसे आपने पहले से खोला है.</string>
+    <string name="app_name">Antimine</string>
 </resources>

@@ -28,6 +28,10 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
             historyViewModel.sendEvent(HistoryEvent.LoadAllSaves)
 
             historyViewModel.observeState().collect {
+                if (it.saveList.isEmpty()) {
+                    empty.visibility = View.GONE
+                }
+
                 saveHistory.apply {
                     addItemDecoration(DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL))
                     layoutManager = LinearLayoutManager(view.context)

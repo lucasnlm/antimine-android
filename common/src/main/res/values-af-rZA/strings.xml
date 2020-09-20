@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="af">
-    <string name="app_name">Antimine</string>
-    <string name="app_description">Verwyder versteekte myne van \'n mynveld.</string>
     <string name="tutorial">Handleiding</string>
     <string name="tutorial_completed">Tutorial Completed</string>
     <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
@@ -22,6 +20,7 @@
     <string name="beginner">Beginner</string>
     <string name="intermediate">Intermediêr</string>
     <string name="expert">Deskundig</string>
+    <string name="support_description">Met u hulp kan ons nuwe funksies implementeer en ons projek aktief hou.</string>
     <string name="open">Maak oop</string>
     <string name="settings">Verstellings</string>
     <string name="animations">Animasie</string>
@@ -43,10 +42,10 @@
     <string name="settings_gameplay">Spel</string>
     <string name="settings_accessibility">Toeganklikheid</string>
     <string name="size">Grootte</string>
+    <string name="rounded_square">Afgeronde vierkant</string>
     <string name="system">Stelsel</string>
     <string name="rating">Terugvoer</string>
     <string name="support_title">Ondersteun ons!</string>
-    <string name="support_description">Met u hulp kan ons nuwe funksies implementeer en ons projek aktief hou.</string>
     <string name="support_action">Ondersteuning</string>
     <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
     <string name="used_software_text">This game uses the following third parties software:</string>
@@ -87,6 +86,7 @@
     <string name="resume">Hervat</string>
     <string name="yes">Ja</string>
     <string name="unlock">Ontsluit</string>
+    <string name="unlock_all">Ontsluit almal</string>
     <string name="achievements">Prestasies</string>
     <string name="no">Nee</string>
     <string name="general">Algemeen</string>
@@ -120,4 +120,6 @@
     <string name="flag_removed">Flag removed!</string>
     <string name="remove_ad">Verwyder Advertensies</string>
     <string name="help">Help</string>
+    <string name="app_description">Verwyder versteekte myne van \'n mynveld.</string>
+    <string name="app_name">Antimine</string>
 </resources>
