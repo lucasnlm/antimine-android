@@ -26,6 +26,7 @@ class GameController {
     private var firstOpen: FirstOpen = FirstOpen.Unknown
     private var gameControl: GameControl = GameControl.Standard
     private var useQuestionMark = true
+    private var useOpenOnSwitchControl = true
 
     val seed: Long
 
@@ -116,6 +117,22 @@ class GameController {
                 ActionResponse.OpenNeighbors -> {
                     this.actions++
                     minefieldHandler.openOrFlagNeighborsOf(target.id)
+                }
+                ActionResponse.OpenOrMark -> {
+                    if (!hasMines()) {
+                        if (target.mark.isNotNone()) {
+                            minefieldHandler.removeMarkAt(target.id)
+                        } else {
+                            minefieldHandler.openAt(target.id, false)
+                        }
+                    } else {
+                        this.actions++
+                        if (useOpenOnSwitchControl) {
+                            minefieldHandler.openAt(target.id, false)
+                        } else {
+                            minefieldHandler.switchMarkAt(target.id)
+                        }
+                    }
                 }
             }
         }
@@ -306,5 +323,9 @@ class GameController {
 
     fun useQuestionMark(useQuestionMark: Boolean) {
         this.useQuestionMark = useQuestionMark
+    }
+
+    fun useOpenOnSwitchControl(useOpen: Boolean) {
+        this.useOpenOnSwitchControl = useOpen
     }
 }

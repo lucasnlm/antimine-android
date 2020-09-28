@@ -106,6 +106,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         bindToolbar()
         bindDrawer()
         bindNavigationMenu()
+        bindSwitchControlButton()
         bindAds()
 
         findViewById<FrameLayout>(R.id.levelContainer).doOnLayout {
@@ -267,6 +268,26 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             visibility = if (hide) View.GONE else View.VISIBLE
             isClickable = false
             animate().alpha(0.3f).start()
+        }
+    }
+
+    private fun bindSwitchControlButton() {
+        switchFlag.apply {
+            visibility = if (false) View.GONE else View.VISIBLE
+            TooltipCompat.setTooltipText(this, getString(R.string.switch_control))
+            setImageResource(R.drawable.touch)
+            setColorFilter(minesCount.currentTextColor)
+            setOnClickListener {
+                if (preferencesRepository.openUsingSwitchControl()) {
+                    gameViewModel.refreshUseOpenOnSwitchControl(false)
+                    preferencesRepository.setSwitchControl(false)
+                    setImageResource(R.drawable.flag_black)
+                } else {
+                    gameViewModel.refreshUseOpenOnSwitchControl(true)
+                    preferencesRepository.setSwitchControl(true)
+                    setImageResource(R.drawable.touch)
+                }
+            }
         }
     }
 

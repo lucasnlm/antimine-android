@@ -12,6 +12,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.control.view.ControlItemView
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
+import dev.lucasnlm.antimine.core.control.ControlStyle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ControlDialogFragment : AppCompatDialogFragment() {
@@ -66,6 +67,16 @@ class ControlDialogFragment : AppCompatDialogFragment() {
         override fun getItemId(position: Int): Long = controlList[position].id
 
         override fun getCount(): Int = controlList.count()
+
+        override fun getItemViewType(position: Int): Int {
+            return if (controlList[position].controlStyle == ControlStyle.SwitchMarkOpen) {
+                1
+            } else {
+                0
+            }
+        }
+
+        override fun getViewTypeCount(): Int = 2
     }
 
     companion object {

@@ -350,6 +350,12 @@ open class GameViewModel(
         }
     }
 
+    fun refreshUseOpenOnSwitchControl(useOpen: Boolean) {
+        if (initialized) {
+            gameController.useQuestionMark(useOpen)
+        }
+    }
+
     fun runClock() {
         clock.run {
             if (isStopped) start {

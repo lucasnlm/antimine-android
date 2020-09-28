@@ -8,6 +8,7 @@ enum class ActionResponse {
     SwitchMark,
     HighlightNeighbors,
     OpenNeighbors,
+    OpenOrMark,
 }
 
 /**
@@ -28,6 +29,7 @@ enum class ControlStyle {
     DoubleClick,
     FastFlag,
     DoubleClickInverted,
+    SwitchMarkOpen
 }
 
 /**
@@ -44,12 +46,12 @@ sealed class GameControl(
         onCovered = Actions(
             singleClick = ActionResponse.OpenTile,
             longPress = ActionResponse.SwitchMark,
-            doubleClick = null
+            doubleClick = null,
         ),
         onOpen = Actions(
             singleClick = ActionResponse.HighlightNeighbors,
             longPress = ActionResponse.OpenNeighbors,
-            doubleClick = null
+            doubleClick = null,
         )
     )
 
@@ -58,12 +60,12 @@ sealed class GameControl(
         onCovered = Actions(
             singleClick = ActionResponse.SwitchMark,
             longPress = ActionResponse.OpenTile,
-            doubleClick = null
+            doubleClick = null,
         ),
         onOpen = Actions(
             singleClick = ActionResponse.OpenNeighbors,
             longPress = ActionResponse.HighlightNeighbors,
-            doubleClick = null
+            doubleClick = null,
         )
     )
 
@@ -72,12 +74,12 @@ sealed class GameControl(
         onCovered = Actions(
             singleClick = ActionResponse.SwitchMark,
             longPress = null,
-            doubleClick = ActionResponse.OpenTile
+            doubleClick = ActionResponse.OpenTile,
         ),
         onOpen = Actions(
             singleClick = ActionResponse.HighlightNeighbors,
             longPress = null,
-            doubleClick = ActionResponse.OpenNeighbors
+            doubleClick = ActionResponse.OpenNeighbors,
         )
     )
 
@@ -86,12 +88,26 @@ sealed class GameControl(
         onCovered = Actions(
             singleClick = ActionResponse.OpenTile,
             longPress = null,
-            doubleClick = ActionResponse.SwitchMark
+            doubleClick = ActionResponse.SwitchMark,
         ),
         onOpen = Actions(
             singleClick = ActionResponse.HighlightNeighbors,
             longPress = null,
-            doubleClick = ActionResponse.OpenNeighbors
+            doubleClick = ActionResponse.OpenNeighbors,
+        )
+    )
+
+    object SwitchMarkOpen : GameControl(
+        id = ControlStyle.SwitchMarkOpen,
+        onCovered = Actions(
+            singleClick = ActionResponse.OpenOrMark,
+            longPress = null,
+            doubleClick = null,
+        ),
+        onOpen = Actions(
+            singleClick = ActionResponse.HighlightNeighbors,
+            longPress = null,
+            doubleClick = null,
         )
     )
 
@@ -102,6 +118,7 @@ sealed class GameControl(
                 ControlStyle.DoubleClick -> DoubleClick
                 ControlStyle.FastFlag -> FastFlag
                 ControlStyle.DoubleClickInverted -> DoubleClickInverted
+                ControlStyle.SwitchMarkOpen -> SwitchMarkOpen
             }
         }
     }

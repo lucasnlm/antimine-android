@@ -73,6 +73,7 @@ class TutorialViewModel(
     fun openActionLabel(): String =
         when (preferencesRepository.controlStyle()) {
             ControlStyle.Standard -> context.getString(R.string.single_click)
+            ControlStyle.SwitchMarkOpen -> context.getString(R.string.single_click)
             ControlStyle.FastFlag -> context.getString(R.string.long_press)
             ControlStyle.DoubleClick -> context.getString(R.string.double_click)
             ControlStyle.DoubleClickInverted -> context.getString(R.string.single_click)
@@ -81,6 +82,7 @@ class TutorialViewModel(
     fun flagActionLabel(): String =
         when (preferencesRepository.controlStyle()) {
             ControlStyle.Standard -> context.getString(R.string.long_press)
+            ControlStyle.SwitchMarkOpen -> context.getString(R.string.long_press)
             ControlStyle.FastFlag -> context.getString(R.string.single_click)
             ControlStyle.DoubleClick -> context.getString(R.string.single_click)
             ControlStyle.DoubleClickInverted -> context.getString(R.string.double_click)

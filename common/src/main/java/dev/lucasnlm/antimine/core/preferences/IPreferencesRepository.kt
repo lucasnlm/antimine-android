@@ -51,6 +51,9 @@ interface IPreferencesRepository {
     fun getExtraTips(): Int
     fun setExtraTips(tips: Int)
 
+    fun openUsingSwitchControl(): Boolean
+    fun setSwitchControl(useOpen: Boolean)
+
     fun useFlagAssistant(): Boolean
     fun useHapticFeedback(): Boolean
     fun areaSizeMultiplier(): Int
