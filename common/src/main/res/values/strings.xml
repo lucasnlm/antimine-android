@@ -120,6 +120,7 @@
     <string name="flag_removed">Flag removed!</string>
     <string name="remove_ad">Remove Ads</string>
     <string name="help">Help</string>
+    <string name="show_windows">Show windows</string>
     <string name="app_description">You have to clear a rectangular board containing hidden mines without detonating any of them.</string>
     <string name="app_name">Antimine</string>
 </resources>

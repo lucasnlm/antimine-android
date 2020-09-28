@@ -57,4 +57,5 @@ interface IPreferencesRepository {
     fun useAnimations(): Boolean
     fun useQuestionMark(): Boolean
     fun isSoundEffectsEnabled(): Boolean
+    fun showWindowsWhenFinishGame(): Boolean
 }

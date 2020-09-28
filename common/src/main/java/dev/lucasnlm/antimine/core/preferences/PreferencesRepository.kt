@@ -63,6 +63,9 @@ class PreferencesRepository(
     override fun isSoundEffectsEnabled(): Boolean =
         preferencesManager.getBoolean(PREFERENCE_SOUND_EFFECTS, false)
 
+    override fun showWindowsWhenFinishGame(): Boolean =
+        preferencesManager.getBoolean(PREFERENCE_SHOW_WINDOWS, true)
+
     override fun controlStyle(): ControlStyle {
         val index = preferencesManager.getInt(PREFERENCE_CONTROL_STYLE, -1)
         return ControlStyle.values().getOrNull(index) ?: ControlStyle.Standard
@@ -239,5 +242,6 @@ class PreferencesRepository(
         private const val PREFERENCE_SHOW_SUPPORT = "preference_show_support"
         private const val PREFERENCE_TIPS = "preference_current_tips"
         private const val PREFERENCE_EXTRA_TIPS = "preference_extra_tips"
+        private const val PREFERENCE_SHOW_WINDOWS = "preference_show_windows"
     }
 }
