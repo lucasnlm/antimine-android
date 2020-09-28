@@ -22,7 +22,7 @@ class SimpleControlItemView : FrameLayout {
     init {
         LayoutInflater
             .from(context)
-            .inflate(R.layout.view_control_item, this, true)
+            .inflate(R.layout.view_control_item_simple, this, true)
 
         radio = findViewById(R.id.radio)
         root = findViewById(R.id.root)

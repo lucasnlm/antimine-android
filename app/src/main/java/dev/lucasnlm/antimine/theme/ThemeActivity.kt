@@ -61,9 +61,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
             launch {
                 themeViewModel.observeState().collect {
                     if (usingTheme.id != it.current.id) {
-                        finish()
-                        startActivity(intent)
-                        overridePendingTransition(0, 0)
+                        recreate()
                     }
                 }
             }

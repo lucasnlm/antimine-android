@@ -352,7 +352,7 @@ open class GameViewModel(
 
     fun refreshUseOpenOnSwitchControl(useOpen: Boolean) {
         if (initialized) {
-            gameController.useQuestionMark(useOpen)
+            gameController.useOpenOnSwitchControl(useOpen)
         }
     }
 

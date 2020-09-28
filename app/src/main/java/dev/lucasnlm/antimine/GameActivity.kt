@@ -31,6 +31,7 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.ControlDialogFragment
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
+import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.history.HistoryActivity
@@ -273,7 +274,11 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun bindSwitchControlButton() {
         switchFlag.apply {
-            visibility = if (false) View.GONE else View.VISIBLE
+            visibility = if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
             TooltipCompat.setTooltipText(this, getString(R.string.switch_control))
             setImageResource(R.drawable.touch)
             setColorFilter(minesCount.currentTextColor)
@@ -822,6 +827,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             resumeGame()
         }
 
+        bindSwitchControlButton()
         refreshAds()
     }
 

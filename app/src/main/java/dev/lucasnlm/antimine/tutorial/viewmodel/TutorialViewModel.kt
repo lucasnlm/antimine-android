@@ -209,6 +209,7 @@ class TutorialViewModel(
     override suspend fun onSingleClick(index: Int) {
         clock.stop()
         when (preferencesRepository.controlStyle()) {
+            ControlStyle.SwitchMarkOpen -> openTileAction(index)
             ControlStyle.Standard -> openTileAction(index)
             ControlStyle.FastFlag -> longTileAction(index)
             ControlStyle.DoubleClick -> longTileAction(index)
@@ -219,6 +220,7 @@ class TutorialViewModel(
     override suspend fun onLongClick(index: Int) {
         clock.stop()
         when (preferencesRepository.controlStyle()) {
+            ControlStyle.SwitchMarkOpen -> longTileAction(index)
             ControlStyle.Standard -> longTileAction(index)
             ControlStyle.FastFlag -> openTileAction(index)
             else -> {}
