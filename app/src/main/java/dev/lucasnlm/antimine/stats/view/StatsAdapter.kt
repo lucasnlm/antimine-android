@@ -1,16 +1,20 @@
 package dev.lucasnlm.antimine.stats.view
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
 import dev.lucasnlm.antimine.stats.model.StatsModel
 import kotlinx.android.synthetic.main.view_stats.view.*
 
 class StatsAdapter(
-    private val statsList: List<StatsModel>
+    private val statsList: List<StatsModel>,
+    private val themeRepository: IThemeRepository,
 ) : RecyclerView.Adapter<StatsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatsViewHolder {
@@ -23,7 +27,18 @@ class StatsAdapter(
     override fun onBindViewHolder(holder: StatsViewHolder, position: Int) {
         val stats = statsList[position]
         holder.apply {
+            val color = with(themeRepository.getTheme().palette.background) {
+                Color.rgb(Color.red(this), Color.green(this), Color.blue(this))
+            }
+            card.setCardBackgroundColor(color)
+
+            val textColor = with(themeRepository.getTheme().palette.covered) {
+                Color.rgb(Color.red(this), Color.green(this), Color.blue(this))
+            }
+            statsLabel.setTextColor(textColor)
+
             if (stats.totalGames > 0) {
+                val emptyText = "-"
                 if (stats.title != 0) {
                     statsLabel.text = holder.itemView.context.getString(stats.title)
                     statsLabel.visibility = View.VISIBLE
@@ -31,8 +46,9 @@ class StatsAdapter(
                     statsLabel.visibility = View.GONE
                 }
                 minesCount.text = stats.mines.toString()
-                totalTime.text = formatTime(stats.duration)
-                averageTime.text = formatTime(stats.averageDuration)
+                totalTime.text = formatTime(stats.totalTime)
+                averageTime.text = formatTime(stats.averageTime)
+                shortestTime.text = if (stats.shortestTime == 0L) emptyText else formatTime(stats.shortestTime)
                 totalGames.text = stats.totalGames.toString()
                 performance.text = formatPercentage(100.0 * stats.victory / stats.totalGames)
                 openAreas.text = stats.openArea.toString()
@@ -45,6 +61,7 @@ class StatsAdapter(
                 minesCount.text = emptyText
                 totalTime.text = emptyText
                 averageTime.text = emptyText
+                shortestTime.text = emptyText
                 performance.text = emptyText
                 openAreas.text = emptyText
                 victory.text = emptyText
@@ -65,11 +82,13 @@ class StatsAdapter(
 }
 
 class StatsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val card: CardView = itemView.card
     val statsLabel: TextView = itemView.statsLabel
     val totalGames: TextView = itemView.totalGames
     val minesCount: TextView = itemView.minesCount
     val totalTime: TextView = itemView.totalTime
     val averageTime: TextView = itemView.averageTime
+    val shortestTime: TextView = itemView.shortestTime
     val openAreas: TextView = itemView.openAreas
     val performance: TextView = itemView.performance
     val victory: TextView = itemView.victory

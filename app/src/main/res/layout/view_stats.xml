@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     
     <androidx.cardview.widget.CardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -89,6 +90,20 @@
 
                     <TextView
                         android:id="@+id/averageTime"
+                        android:gravity="end"
+                        android:padding="8dp"
+                        android:text="-"
+                        tools:ignore="HardcodedText" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:padding="8dp"
+                        android:textStyle="bold"
+                        android:text="@string/shortest_time" />
+
+                    <TextView
+                        android:id="@+id/shortestTime"
                         android:gravity="end"
                         android:padding="8dp"
                         android:text="-"

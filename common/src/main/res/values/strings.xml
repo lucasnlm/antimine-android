@@ -65,6 +65,7 @@
     <string name="open_areas">Open Areas</string>
     <string name="total_time">Total Time</string>
     <string name="average_time">Average Time</string>
+    <string name="shortest_time">Shortest Time</string>
     <string name="performance">Performance</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Use Question Mark</string>

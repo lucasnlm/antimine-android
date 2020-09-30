@@ -4,7 +4,7 @@
 
     <color name="primary">#212121</color>
     <color name="primary_dark">#212121</color>
-    <color name="background">#00212121</color>
+    <color name="background">#FF212121</color>
 
     <color name="mines_around_1">#d5d2cc</color>
     <color name="mines_around_2">#d5d2cc</color>

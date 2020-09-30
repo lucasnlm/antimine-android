@@ -73,6 +73,10 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setExtraTips(tips: Int) { }
 
+    override fun openUsingSwitchControl(): Boolean = true
+
+    override fun setSwitchControl(useOpen: Boolean) { }
+
     override fun useFlagAssistant(): Boolean = false
 
     override fun useHapticFeedback(): Boolean = true
@@ -84,4 +88,6 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun useQuestionMark(): Boolean = false
 
     override fun isSoundEffectsEnabled(): Boolean = false
+
+    override fun showWindowsWhenFinishGame(): Boolean { }
 }
