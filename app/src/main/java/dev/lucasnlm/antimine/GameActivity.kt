@@ -638,7 +638,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private fun showEndGameToast(victory: Boolean) {
         gameToast?.cancel()
 
-        val message = if (victory) { R.string.you_won } else { R.string.you_won }
+        val message = if (victory) { R.string.you_won } else { R.string.you_lost }
 
         gameToast = Toast.makeText(this, message, Toast.LENGTH_LONG).apply {
             setGravity(Gravity.CENTER, 0, 0)
