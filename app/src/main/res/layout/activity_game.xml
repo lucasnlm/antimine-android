@@ -25,6 +25,19 @@
             ads:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/menu" />
 
+        <ImageView
+            android:id="@+id/switchFlag"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/switch_control_border"
+            android:contentDescription="@string/switch_control"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="14dp"
+            ads:layout_constraintLeft_toRightOf="@id/menu"
+            ads:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/flag_black" />
+
         <TextView
             android:id="@+id/timer"
             android:layout_width="wrap_content"
@@ -42,7 +55,7 @@
             android:visibility="gone"
             ads:layout_constraintBottom_toBottomOf="@id/menu"
             ads:layout_constraintHorizontal_chainStyle="packed"
-            ads:layout_constraintLeft_toLeftOf="parent"
+            ads:layout_constraintLeft_toRightOf="@id/switchFlag"
             ads:layout_constraintRight_toLeftOf="@id/minesCount"
             ads:layout_constraintTop_toTopOf="@id/menu"
             tools:targetApi="m"
@@ -68,7 +81,7 @@
             ads:layout_constraintBottom_toBottomOf="@id/menu"
             ads:layout_constraintHorizontal_chainStyle="packed"
             ads:layout_constraintLeft_toRightOf="@id/timer"
-            ads:layout_constraintRight_toRightOf="parent"
+            ads:layout_constraintRight_toLeftOf="@id/shortcutIcon"
             ads:layout_constraintTop_toTopOf="@id/menu"
             tools:targetApi="m"
             tools:text="99"

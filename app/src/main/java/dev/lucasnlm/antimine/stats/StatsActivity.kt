@@ -6,14 +6,15 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
-import dev.lucasnlm.antimine.stats.model.StatsModel
+import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
+import dev.lucasnlm.antimine.stats.view.StatsAdapter
 import dev.lucasnlm.antimine.stats.viewmodel.StatsEvent
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
 import dev.lucasnlm.external.IInstantAppManager
 import kotlinx.android.synthetic.main.activity_stats.*
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -21,17 +22,23 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     private val statsViewModel by viewModel<StatsViewModel>()
-
     private val instantAppManager: IInstantAppManager by inject()
+    private val themeRepository: IThemeRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+        }
 
         lifecycleScope.launchWhenResumed {
             statsViewModel.sendEvent(StatsEvent.LoadStats)
 
             statsViewModel.observeState().collect {
-                refreshStats(it)
+                recyclerView.adapter = StatsAdapter(it.stats, themeRepository)
+                empty.visibility = if (it.stats.isEmpty()) View.VISIBLE else View.GONE
 
                 if (it.showAds && !instantAppManager.isEnabled(applicationContext)) {
                     ad_placeholder.visibility = View.VISIBLE
@@ -41,35 +48,9 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
         }
     }
 
-    private fun refreshStats(stats: StatsModel) {
-        invalidateOptionsMenu()
-        if (stats.totalGames > 0) {
-            minesCount.text = stats.mines.toString()
-            totalTime.text = formatTime(stats.duration)
-            averageTime.text = formatTime(stats.averageDuration)
-            totalGames.text = stats.totalGames.toString()
-            performance.text = formatPercentage(100.0 * stats.victory / stats.totalGames)
-            openAreas.text = stats.openArea.toString()
-            victory.text = stats.victory.toString()
-            defeat.text = (stats.totalGames - stats.victory).toString()
-        } else {
-            val emptyText = "-"
-            totalGames.text = "0"
-            minesCount.text = emptyText
-            totalTime.text = emptyText
-            averageTime.text = emptyText
-            performance.text = emptyText
-            openAreas.text = emptyText
-            victory.text = emptyText
-            defeat.text = emptyText
-        }
-
-        invalidateOptionsMenu()
-    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         statsViewModel.singleState().let {
-            if (it.totalGames > 0) {
+            if (it.stats.isNotEmpty()) {
                 menuInflater.inflate(R.menu.delete_icon_menu, menu)
             }
         }
@@ -91,18 +72,10 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
             .setMessage(R.string.delete_all_message)
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.delete_all) { _, _ ->
-                GlobalScope.launch {
+                lifecycleScope.launch {
                     statsViewModel.sendEvent(StatsEvent.DeleteStats)
                 }
             }
             .show()
-    }
-
-    companion object {
-        private fun formatPercentage(value: Double) =
-            String.format("%.2f%%", value)
-
-        private fun formatTime(durationSecs: Long) =
-            String.format("%02d:%02d:%02d", durationSecs / 3600, durationSecs % 3600 / 60, durationSecs % 60)
     }
 }

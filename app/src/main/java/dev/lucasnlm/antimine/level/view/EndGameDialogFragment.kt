@@ -79,6 +79,10 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                 }
                             }
 
+                            findViewById<View>(R.id.close).setOnClickListener {
+                                dismissAllowingStateLoss()
+                            }
+
                             if (state.isVictory == true) {
                                 if (!instantAppManager.isEnabled(context)) {
                                     setNeutralButton(R.string.share) { _, _ ->

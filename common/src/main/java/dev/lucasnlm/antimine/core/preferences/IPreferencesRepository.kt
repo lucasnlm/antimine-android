@@ -51,10 +51,14 @@ interface IPreferencesRepository {
     fun getExtraTips(): Int
     fun setExtraTips(tips: Int)
 
+    fun openUsingSwitchControl(): Boolean
+    fun setSwitchControl(useOpen: Boolean)
+
     fun useFlagAssistant(): Boolean
     fun useHapticFeedback(): Boolean
     fun areaSizeMultiplier(): Int
     fun useAnimations(): Boolean
     fun useQuestionMark(): Boolean
     fun isSoundEffectsEnabled(): Boolean
+    fun showWindowsWhenFinishGame(): Boolean
 }

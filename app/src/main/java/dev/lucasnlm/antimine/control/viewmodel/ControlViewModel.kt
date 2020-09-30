@@ -18,7 +18,7 @@ class ControlViewModel(
             firstActionId = R.string.single_click,
             firstActionResponseId = R.string.open_tile,
             secondActionId = R.string.long_press,
-            secondActionResponseId = R.string.flag_tile
+            secondActionResponseId = R.string.flag_tile,
         ),
         ControlDetails(
             id = 1L,
@@ -26,7 +26,7 @@ class ControlViewModel(
             firstActionId = R.string.single_click,
             firstActionResponseId = R.string.flag_tile,
             secondActionId = R.string.long_press,
-            secondActionResponseId = R.string.open_tile
+            secondActionResponseId = R.string.open_tile,
         ),
         ControlDetails(
             id = 2L,
@@ -34,7 +34,7 @@ class ControlViewModel(
             firstActionId = R.string.single_click,
             firstActionResponseId = R.string.flag_tile,
             secondActionId = R.string.double_click,
-            secondActionResponseId = R.string.open_tile
+            secondActionResponseId = R.string.open_tile,
         ),
         ControlDetails(
             id = 3L,
@@ -42,7 +42,15 @@ class ControlViewModel(
             firstActionId = R.string.single_click,
             firstActionResponseId = R.string.open_tile,
             secondActionId = R.string.double_click,
-            secondActionResponseId = R.string.flag_tile
+            secondActionResponseId = R.string.flag_tile,
+        ),
+        ControlDetails(
+            id = 4L,
+            controlStyle = ControlStyle.SwitchMarkOpen,
+            firstActionId = R.string.switch_control_desc,
+            firstActionResponseId = 0,
+            secondActionId = 0,
+            secondActionResponseId = 0,
         )
     )
 

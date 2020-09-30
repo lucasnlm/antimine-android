@@ -3,6 +3,8 @@ package dev.lucasnlm.antimine.support
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
@@ -45,7 +47,16 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(requireContext()).apply {
-            setView(R.layout.dialog_payments)
+            val view = LayoutInflater
+                .from(context)
+                .inflate(R.layout.dialog_payments, null, false)
+                .apply {
+                    findViewById<View>(R.id.close).setOnClickListener {
+                        dismissAllowingStateLoss()
+                    }
+                }
+
+            setView(view)
 
             if (isInstantMode) {
                 setNeutralButton(R.string.no) { _, _ ->

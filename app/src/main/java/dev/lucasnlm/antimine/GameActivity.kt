@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.format.DateUtils
+import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
@@ -30,6 +31,7 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.ControlDialogFragment
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
+import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.history.HistoryActivity
@@ -92,6 +94,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private val currentRadius by lazy { preferencesRepository.squareRadius() }
     private val useHelp by lazy { preferencesRepository.useHelp() }
 
+    private var gameToast: Toast? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
@@ -103,6 +107,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         bindToolbar()
         bindDrawer()
         bindNavigationMenu()
+        bindSwitchControlButton()
         bindAds()
 
         findViewById<FrameLayout>(R.id.levelContainer).doOnLayout {
@@ -264,6 +269,30 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             visibility = if (hide) View.GONE else View.VISIBLE
             isClickable = false
             animate().alpha(0.3f).start()
+        }
+    }
+
+    private fun bindSwitchControlButton() {
+        switchFlag.apply {
+            visibility = if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            TooltipCompat.setTooltipText(this, getString(R.string.switch_control))
+            setImageResource(R.drawable.touch)
+            setColorFilter(minesCount.currentTextColor)
+            setOnClickListener {
+                if (preferencesRepository.openUsingSwitchControl()) {
+                    gameViewModel.refreshUseOpenOnSwitchControl(false)
+                    preferencesRepository.setSwitchControl(false)
+                    setImageResource(R.drawable.flag_black)
+                } else {
+                    gameViewModel.refreshUseOpenOnSwitchControl(true)
+                    preferencesRepository.setSwitchControl(true)
+                    setImageResource(R.drawable.touch)
+                }
+            }
         }
     }
 
@@ -606,14 +635,37 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun waitAndShowEndGameDialog(victory: Boolean, await: Boolean) {
+    private fun showEndGameToast(victory: Boolean) {
+        gameToast?.cancel()
+
+        val message = if (victory) { R.string.you_won } else { R.string.you_won }
+
+        gameToast = Toast.makeText(this, message, Toast.LENGTH_LONG).apply {
+            setGravity(Gravity.CENTER, 0, 0)
+            show()
+        }
+    }
+
+    private fun showEndGameAlert(victory: Boolean) {
+        val canShowWindow = preferencesRepository.showWindowsWhenFinishGame()
+        if (!isFinishing) {
+            if (canShowWindow) {
+                showEndGameDialog(victory)
+            } else {
+                showEndGameToast(victory)
+            }
+        }
+    }
+
+    private fun waitAndShowEndGameAlert(victory: Boolean, await: Boolean) {
+
         if (await && gameViewModel.explosionDelay() != 0L) {
             lifecycleScope.launch {
                 delay((gameViewModel.explosionDelay() * 0.3).toLong())
-                showEndGameDialog(victory)
+                showEndGameAlert(victory)
             }
         } else {
-            showEndGameDialog(victory)
+            showEndGameAlert(victory)
         }
     }
 
@@ -643,6 +695,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 refreshAds()
             }
             Event.StartNewGame -> {
+                gameToast?.cancel()
                 status = Status.PreGame
                 disableShortcutIcon()
                 refreshAds()
@@ -686,7 +739,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 if (!isResuming) {
                     gameViewModel.addNewTip()
 
-                    waitAndShowEndGameDialog(
+                    waitAndShowEndGameAlert(
                         victory = true,
                         await = false
                     )
@@ -707,7 +760,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 if (!isResuming) {
                     GlobalScope.launch(context = Dispatchers.Main) {
                         gameViewModel.gameOver(isResuming)
-                        waitAndShowEndGameDialog(
+                        waitAndShowEndGameAlert(
                             victory = false,
                             await = true
                         )
@@ -774,6 +827,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             resumeGame()
         }
 
+        bindSwitchControlButton()
         refreshAds()
     }
 
