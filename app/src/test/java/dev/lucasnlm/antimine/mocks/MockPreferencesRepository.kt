@@ -89,5 +89,5 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun isSoundEffectsEnabled(): Boolean = false
 
-    override fun showWindowsWhenFinishGame(): Boolean { }
+    override fun showWindowsWhenFinishGame(): Boolean = true
 }
