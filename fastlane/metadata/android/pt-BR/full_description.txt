@@ -1,30 +1,56 @@
-Anti-Mine é um quebra-cabeça estilo campo minado.
-O objetivo é simples: encontre todas as minas escondidas e limpe o campo minado sem explodir nenhuma delas.
+Teste seu poder de raciocínio em um jogo desafiante em que você precisa resolver um campo minado sem explodir nenhuma mina.
+Esta é uma versão minimalista e moderna do clássico Campo Minado.
 
-Você pode marcar com bandeiras os espaços com minas para tornar o tabuleiro mais seguro.
-Você vence se encontra todas as minas no campo. Tome cuidado para não pisar em nenhuma!
+Você consegue resolver um campo minado? Vamos lá!
 
+OBJETIVO
+É como o Campo Minado. Você vence o jogo quando sinaliza todas as minas no campo. Tenha cuidado para não ativar uma!
 
-<b>Funcionalidades</b>
+SEM ADIVINHAÇÃO
+Esse jogo tem um algoritmo que sempre cria jogos solúveis. Você não precisará adivinhar onde a última mina está!
 
-<ul>
-<li>Ocupa pouco espaço de armazenamento</li>
-<li>Pode ser jogado sem internet</li>
-<li>4 níveis de dificuldade</li>
-<li>Crie seu próprio nível</li>
-<li>Modo noturno</li>
-<li>Salva o jogo automaticamente</li>
-<li>Posicione bandeiras para marcar minas</li>
-<li>Posicione interrogações para áreas duvidosas</li>
-<li>Abra múltiplos quadrados ao pressionar os números</li>
-<li>Marca bandeiras automaticamente quando necessário</li>
-<li>Compartilhe seu jogo</li>
-<li>Jogue com janela em tela dividida</li>
-<li>Acessibilidade: aumente a área do quadrado</li>
-<li>Acessibilidade: leitor de tela</li>
-</ul>
+NÍVEIS DO JOGO
+Assim como o Campo Minado, este jogo tem níveis diferentes: Principiante, Intermediário e Especialista. Mas também tem um modo progressivo único que fica mais difícil quando você vence.
 
-<b>Código-fonte</b>
+NÍVEL PERSONALIZADO
+Se os modos padrão não forem suficientes, você pode criar seu próprio nível de dificuldade!
 
-O código-fonte desse jogo está disponível em: <a href="https://github.com/lucasnlm/antimine-android">GitHub</a>
+TEMAS
+O Antimine tem mais de 15 temas (incluindo claro, escuro e AMOLED). E em breve mais serão adicionados!
 
+MINIMALISTA
+Uma aparência limpa: um visual minimalista e também um tamanho leve para o aplicativo (menos de 9MB).
+
+TUTORIAL
+Você não sabe jogar Campo Minado? Sem problemas, você pode tocar o nível do nosso tutorial e habilitar Dicas nas configurações.
+
+ESTATÍSTICAS
+Verifique seus resultados e desenvolvimento.
+
+ASSISTANTE DE JOGO
+O jogo irá automaticamente sinalizar os quadrados que você isolou. 
+
+PERSONALIZAÇÃO
+Você pode mudar o jogo para fazê-lo como quiser. 
+Exemplo: Ajuda, animações, feedback tátil e ponto de interrogação.
+
+CONTROLES
+Suporte a quatro esquemas de controlo diferentes. Exemplo: bandeira usando toque longo ou toque.
+
+CONQUISTAS E TABELAS 
+Você tem oito conquistas para desbloquear e diferentes placares de classificação para compartilhar com seus amigos.
+
+ACESSIBILIDADE
+Você pode personalizar este jogo para suas necessidades: altere o tamanho dos quadrados, o raio, o tempo de toque e o suporte ao leitor de tela.
+Estamos sempre tentando melhorar nossas configurações de acessibilidade. Se você sentir falta de algo, nos dê sua opnião!
+
+APP FOCADO EM ANDROID
+Ele oferece suporte a recursos legais do Android, como tela dividida, atalhos, compartilhamento, tema do sistema e sempre suporta a última versão.
+
+ONLINE OU OFFLINE
+Você não precisa estar online para jogar o jogo!
+
+AUTO-SALVE
+Você pode iniciar um jogo e continuar mais tarde! Isso salvará seu jogo automaticamente.
+
+Divirta-se!

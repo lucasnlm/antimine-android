@@ -1,0 +1,56 @@
+Toets u redenasie in 'n uitdagende puzzelspel waar u 'n mynveld moet oplos sonder om enige myn te ontplof.
+Dit is 'n minimalistiese en moderne weergawe van die klassieke Minesweeper.
+
+Kan u 'n mynveld skoonmaak? Kom ons gaan!
+
+DOEL
+Dit is soos Minesweeper. U wen die wedstryd as u elke myn in die mynveld aangemeld het. Wees versigtig om nie een te aktiveer nie!
+
+GEEN RAAI NIE
+Hierdie speletjie het 'n algoritme wat altyd oplosbare mynvelde skep. You won't have to guess where the last mine is!
+
+GAME LEVELS
+Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
+
+CUSTOM LEVEL
+If the standard modes aren't enough, you can create your level difficulty!
+
+THEMES
+Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+
+MINIMALIST
+Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+
+TUTORIAL
+Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+
+STATISTICS
+Check your results and development.
+
+GAME ASSISTANT
+The game will automatically flag the squares you isolated. 
+
+CUSTOMIZATION
+You can change the game to make it like you want to. 
+Example: Help, animations, haptic feedback, question mark.
+
+CONTROLS
+It supports four different control schemes. Example: flag using tap or long press.
+
+ACHIEVEMENTS AND LEADERBOARDS 
+You have eight achievements to unlock and different leaderboards to share with your friends.
+
+ACCESSIBILITY
+You can customize this game to your needs: change the squares size, radius, touch timing, and screen reader support.
+We are always trying to improve our accessibility settings. If you miss something give us feedback!
+
+ANDROID FOCUSED APP
+It supports cool Android features like split-screen, shortcuts, sharing, system theme, and always supporting the last version.
+
+ONLINE OR OFFLINE
+You don't need to be online to play the game!
+
+AUTO-SAVE
+You can start a game and continue it later! It will auto-save your game.
+
+Enjoy.

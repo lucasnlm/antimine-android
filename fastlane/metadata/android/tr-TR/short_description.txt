@@ -1,1 +1,1 @@
-Tüm gizli mayınları aradığınız bir bulmaca oyunu.
+Gizlenmiş haldeki mayınları aradığınız bir bulmaca oyunu. 

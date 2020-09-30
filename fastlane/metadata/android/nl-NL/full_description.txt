@@ -1,0 +1,56 @@
+Test je redeneringskrachtinp een uitdagend puzzelspel waar je een mijnenveld moet oplossen zonder een mijn te laten exploderen.
+Dit is een minimalistische en moderne versie van de klassieker Mijnenveger.
+
+Kan je een mijnenveld opruimen? Aan de slag!
+
+DOEL
+Het is zoals Mijnenveger. Je wint het spel wanneer je elke mijn in het mijnenveld hebt gemarkeerd. Pas op dat je er geen activeert!
+
+NIET GOKKEN
+Dit spel heeft een algoritme dat altijd oplosbare mijnenvelden creëert. Dus je hoeft niet te raden waar de laatste mijn is!
+
+SPELNIVEAUS
+Net als Mijnenveger, heeft dit spel verschillende niveaus: Beginner, Gemiddeld en Expert. Maar het heeft ook een unieke progressieve modus die moeilijker wordt als je wint.
+
+AANGEPAST NIVEAU
+Als de standaard modi niet genoeg zijn, kan je je eigen moeilijkheid creëren!
+
+THEMA'S
+Antimine heeft meer dan 15 thema's (inclusief licht, donker en AMOLED). En binnenkort worden er nog meer toegevoegd!
+
+MINIMALIST
+Strakke look en feel: een minimalistische visuele en ook lichtgewichte app (minder dan 9MB).
+
+TUTORIAL
+Weet je niet hoe je Mijnenveger moet spelen? Geen probleem, je kan ons tutorial level spelen en Tips inschakelen in de instellingen.
+
+STATISTIEKEN
+Bekijk je resultaten en ontwikkeling.
+
+GAME ASSISTENT
+Het spel markeert automatisch de vakjes die je geïsoleerd hebt. 
+
+ALLES OP MAAT
+Je kunt het spel veranderen om het te maken zoals je wilt. 
+Bijvoorbeeld: Help, animaties, haptische feedback, vraagtekens.
+
+BEDIENING
+Er worden vier verschillende controlesystemen ondersteunt. Bijvoorbeeld: een vlag zetten met een tik of door lang in te drukken.
+
+PRESTATIES EN SCOREBORDEN 
+Er zijn acht prestaties te ontgrendelen en verschillende scoreborden om met je vrienden te delen.
+
+TOEGANG
+Je kunt dit spel aanpassen aan je eigen behoeften: verander de grootte van de vakjes, radius, aanraaktijd en ondersteuning voor een schermlezer.
+We proberen steeds onze toegankelijkheidsinstellingen te verbeteren. Als je iets mist geef ons feedback!
+
+ANDROID-GERICHTE APP
+Het ondersteunt coole Android-functies zoals split-screen, snelkoppelingen, delen, systeemthema en altijd het ondersteunen van de laatste versie.
+
+ONLINE OF OFFLINE
+Je hoeft niet online te zijn om het spel te spelen!
+
+AUTO-SAVE
+Je kan een spel starten en er later mee doorgaan! Je spel wordt automatisch opgeslaan.
+
+Veel plezier.

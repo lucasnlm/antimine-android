@@ -65,6 +65,7 @@
     <string name="open_areas">Avaa alueita</string>
     <string name="total_time">Aika yhteensä</string>
     <string name="average_time">Keskimääräinen aika</string>
+    <string name="shortest_time">Lyhin aika</string>
     <string name="performance">Suorituskyky</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Käytä kysymysmerkkiä</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Lippu poistettu!</string>
     <string name="remove_ad">Poista Mainokset</string>
     <string name="help">Apua</string>
+    <string name="show_windows">Show windows</string>
+    <string name="switch_control">Switch: Flag and Open</string>
+    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">Sinun täytyy tyhjentää piileskeleviä miinoja sisältävä suorakulmainen taulu räjäyttämättä miinoja kertaakaan.</string>
     <string name="app_name">Antimine</string>
 </resources>

@@ -1,28 +1,56 @@
-Antimine ist ein Minesweeper ähnliches Puzzle-Spiel.
-Ziel ist es, die Lücken mit den Minen zu kennzeichnen, um das Feld zu einem sicheren Ort zu machen, ohne sie zum Explodieren zu bringen.
+Teste dein logisches Denkvermögen bei einem herausfordernden Puzzle-Spiel, bei dem du ein Minenfeld zu räumen hast, ohne dass irgendeine Mine explodiert.
+Dies ist eine minimalistische, moderne Version des klassischen Minesweeper.
 
-Du gewinnst das Spiel, wenn du jede Mine auf dem Minenfeld markiert hast.
-Sei vorsichtig, nicht eine auszulösen!
+Kannst du ein Minenfeld räumen? Auf geht's!
 
-<b>Eigenschaften</b>
+ZIELSETZUNG
+Es ist wie Minesweeper. Du gewinnst das Spiel, wenn du jede Mine im Minenfeld markiert hast. Sei vorsichtig, nicht eine auszulösen!
 
-<ul>
-<li>Belegt wenig Speicherplatz</li>
-<li>Es kann ohne Internetverbindung gespielt werden</li>
-<li>4 Schwierigkeitsgrade</li>
-<li>Erstelle dein eigenes Level</li>
-<li>Nachtmodus</li>
-<li>Speichert das Spiel automatisch</li>
-<li>Platziere Fahnen, um Minen zu markieren</li>
-<li>Platziere Fragezeichen, um fragwürdige Orte zu markieren</li>
-<li>Öffne mehrere Orte durch Drücken der Zahlen</li>
-<li>Markierungen bei Bedarf automatisch platzieren</li>
-<li>Teile das Spiel</li>
-<li>Mit geteiltem Bildschirm spielen</li>
-<li>Zugänglichkeit: Erhöhe die Fläche des Quadrats</li>
-<li>Bedienbarkeit: Bildschirmleser</li>
-</ul>
+KEIN RÄTSELRATEN
+Dieses Spiel nutzt einen Algorithmus, der immer lösbare Minenfelder erzeugt. Du wirst nicht raten müssen, wo die letzte Mine ist!
 
-<b>Quellcode</b>
+SPIEL-LEVEL
+Genau wie Minesweeper hat dieses Spiel unterschiedliche Schwierigkeitsstufen: Anfänger, Fortgeschrittener und Experte. Aber es hat auch einen einzigartigen progressiven Modus, der, jedesmal wenn du gewinnst, schwieriger wird.
 
-Der Quellcode dieses Spiels ist verfügbar auf: <a href="https://github.com/lucasnlm/antimine-android">GitHub</a>
+BENUTZERDEFINIERTER LEVEL
+Falls die Standardmodi nicht ausreichen, kannst du deine eigene Schwierigkeitsstufe entwerfen!
+
+THEMEN
+Antimine hat mehr als 15 Themen (darunter hell, dunkel und AMOLED). Und bald werden noch mehr hinzugefügt!
+
+MINIMALISTISCH
+Aufgeräumtes Erscheinungsbild: Minimalistische Optik und geringer Speicherbedarf (weniger als 9 MB).
+
+ANLEITUNG
+Du weißt nicht, wie man Minesweeper spielt? Kein Problem, du kannst unsere Übungslevel spielen und in den Einstellungen Tipps aktivieren.
+
+STATISTIKEN
+Prüfe deine Ergebnisse und Fortschritte.
+
+SPIELASSISTENT
+Das Spiel wird automatisch die Quadrate markieren, die du isoliert hast. 
+
+NUTZERANPASSUNG
+Du kannst das Spiel so ändern, wie du es haben möchtest. 
+Beispiel: Hilfe, Animationen, haptisches Feedback, Fragezeichen.
+
+STEUERUNG
+Es unterstützt vier verschiedene Kontrollschemata. Beispiel: Markieren durch Tippen oder langes Drücken.
+
+ERFOLGE UND BESTENLISTE 
+Es gilt acht Erfolgsstufen zu entsperren, und du hast verschiedene Bestenlisten, die du mit deinen Freunden teilen kannst.
+
+BARRIEREFREIHEIT
+Du kannst dieses Spiel deinen Bedürfnissen anpassen: Ändere Quadratgröße, Radius, Reaktionszeit und Leseunterstützung.
+Wir bemühen uns stets, unsere Einstellungen der Barrierefreiheit zu verbessern. Falls du etwas vermisst, gib uns eine Rückmeldung!
+
+ANDROID FOCUSIERTE APP
+Sie unterstützt coole Androidfunktionalitäten wie Splitscreen, Verknüpfung, Teilen, Systemthemen und immer die Unterstützung der letzten Version.
+
+ONLINE ODER OFFLINE
+Du musst nicht online sein, um das Spiel zu spielen!
+
+AUTOM. SPEICHERUNG
+Du kannst ein Spiel beginnen und es später fortsetzen! Es wird dein Spiel automatisch speichern.
+
+Viel Spaß.

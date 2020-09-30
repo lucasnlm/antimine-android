@@ -24,7 +24,7 @@
     <string name="open">오픈</string>
     <string name="settings">설정</string>
     <string name="animations">애니메이션</string>
-    <string name="vibration">햅틱 피드백</string>
+    <string name="vibration">터치 시 진동</string>
     <string name="about">정보</string>
     <string name="events">통계</string>
     <string name="custom">사용자 지정</string>
@@ -65,6 +65,7 @@
     <string name="open_areas">칸 열기</string>
     <string name="total_time">총 시간</string>
     <string name="average_time">평균 시간</string>
+    <string name="shortest_time">더 짧은 시간</string>
     <string name="performance">퍼포먼스</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">물음표 깃발 사용</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">깃발 제거 완료!</string>
     <string name="remove_ad">광고 제거</string>
     <string name="help">도움말</string>
+    <string name="show_windows">Show windows</string>
+    <string name="switch_control">Switch: Flag and Open</string>
+    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">당신은 이 사각형 게임판에 숨겨진 지뢰를 하나도 터뜨리지 않고 게임을 끝내야 합니다.</string>
     <string name="app_name">Antimine</string>
 </resources>

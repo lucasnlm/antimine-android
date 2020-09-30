@@ -65,6 +65,7 @@
     <string name="open_areas">Aree Aperte</string>
     <string name="total_time">Tempo Totale</string>
     <string name="average_time">Durata Media</string>
+    <string name="shortest_time">Tempo più breve</string>
     <string name="performance">Prestazione</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Usa il Punto Interrogativo</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Bandiera rimossa!</string>
     <string name="remove_ad">Rimuovi gli Annunci</string>
     <string name="help">Assistenza</string>
+    <string name="show_windows">Visualizza finestre</string>
+    <string name="switch_control">Pulsante: Bandiera e Aperto</string>
+    <string name="switch_control_desc">Usa il bottone per passare da Bandiera ad Aperto</string>
     <string name="app_description">L\'obbiettivo del gioco è ripulire un campo rettangolare che contiene mine nascoste senza detonarne nessuna.</string>
     <string name="app_name">Antimine</string>
 </resources>

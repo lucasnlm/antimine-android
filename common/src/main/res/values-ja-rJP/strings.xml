@@ -65,6 +65,7 @@
     <string name="open_areas">開いたエリアの数</string>
     <string name="total_time">合計時間</string>
     <string name="average_time">平均時間</string>
+    <string name="shortest_time">最短時間</string>
     <string name="performance">パフォーマンス</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">クエスチョンマークを使う</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">フラグを消しました！</string>
     <string name="remove_ad">広告を削除</string>
     <string name="help">ヘルプ</string>
+    <string name="show_windows">Show windows</string>
+    <string name="switch_control">Switch: Flag and Open</string>
+    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">地雷が隠された長方形から1つも爆発させることなくクリアしましょう。</string>
     <string name="app_name">Antimine</string>
 </resources>

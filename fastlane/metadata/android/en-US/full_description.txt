@@ -1,28 +1,56 @@
-Antimine is a minesweeper-like puzzle game.
-The objective is to flag the spaces with mines to make the field a safer place without exploding any of them.
+Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
+This is a minimalist and modern version of the classic Minesweeper.
 
-You win the game when you've flagged every mine in the minefield.
-Be careful not to trigger one! 
+Are you able to clear a minefield? Let’s go!
 
-<b>Features</b>
+OBJECTIVE
+It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
 
-<ul>
-<li>Takes up little storage space</li>
-<li>It can be played without an Internet connection</li>
-<li>4 difficulty levels</li>
-<li>Make your own level</li>
-<li>Night mode</li>
-<li>Saves the game automatically</li>
-<li>Place flags to mark mines</li>
-<li>Place question marks to flag questionable places</li>
-<li>Open multiple places by pressing the numbers</li>
-<li>Place flags automatically when needed</li>
-<li>Share the game</li>
-<li>Play with split-screen</li>
-<li>Accessibility: increase the area of ​​the square</li>
-<li>Accessibility: screen reader</li>
-</ul>
+NO NEED TO GUESS
+This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
 
-<b>Source Code</b>
+GAME LEVELS
+Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
 
-This game source code is available <a href="https://github.com/lucasnlm/antimine-android">GitHub</a>.
+CUSTOM LEVEL
+If the standard modes aren't enough, you can create your level difficulty!
+
+THEMES
+Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+
+MINIMALIST
+Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+
+TUTORIAL
+Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+
+STATISTICS
+Check your results and development.
+
+GAME ASSISTANT
+The game will automatically flag the squares you isolated. 
+
+CUSTOMIZATION
+You can change the game to make it like you want to. 
+Example: Help, animations, haptic feedback, question mark.
+
+CONTROLS
+It supports four different control schemes. Example: flag using tap or long press.
+
+ACHIEVEMENTS AND LEADERBOARDS 
+You have eight achievements to unlock and different leaderboards to share with your friends.
+
+ACCESSIBILITY
+You can customize this game to your needs: change the squares size, radius, touch timing, and screen reader support.
+We are always trying to improve our accessibility settings. If something is missing, give us feedback!
+
+ANDROID FOCUSED APP
+It supports cool Android features like split-screen, shortcuts, sharing, system theme, and always supporting the latest version.
+
+ONLINE OR OFFLINE
+You don't need to be online to play the game!
+
+AUTO-SAVE
+You can start a game and continue it later! It will auto-save your game.
+
+Enjoy.

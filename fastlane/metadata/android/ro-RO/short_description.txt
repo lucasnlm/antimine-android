@@ -1,0 +1,1 @@
+Găsește minele de pe un câmp minat. 

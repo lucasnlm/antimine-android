@@ -2,17 +2,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
     <string name="tutorial">Tutoriel</string>
     <string name="tutorial_completed">Tutoriel Terminé</string>
-    <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
-    <string name="tutorial_1_top">The numbers indicates how many mines are adjacent to the highlighted square.</string>
-    <string name="tutorial_1_bottom">Therefore, if the corner 1️⃣  has only one adjacent square, it must be a mine. %1$s to flag it.</string>
-    <string name="tutorial_2_top">The next unopened square doesn\'t have a mine because the number is 1️⃣ , not 2️⃣ .</string>
-    <string name="tutorial_2_bottom">You can open it by %1$s.</string>
-    <string name="tutorial_3_top">The same happens on this 1️⃣ . You know where its adjacent mine is.</string>
-    <string name="tutorial_3_bottom">You can open all other unopened squares adjacent to 1️⃣ .</string>
-    <string name="tutorial_4_top">We know where one of the mines are. So, there\'s only one possibility to the other one.</string>
-    <string name="tutorial_4_bottom">%1$s to flag the mine adjacent to 2️⃣ .</string>
-    <string name="tutorial_5_top">Check the highlighted number.</string>
-    <string name="tutorial_5_bottom">%1$s to open or %2$s to mark.</string>
+    <string name="tutorial_0_bottom">Vous pouvez commencer par %1$s à n\'importe quel carré aléatoire.</string>
+    <string name="tutorial_1_top">Les chiffres indiquent combien de mines sont adjacentes au carré surligné.</string>
+    <string name="tutorial_1_bottom">Par conséquent, si le coin 1️⃣ n\'a qu\'un carré adjacent, il doit s\'agir d\'une mine. %1$s pour le signaler.</string>
+    <string name="tutorial_2_top">Le prochain carré non ouvert n\'a pas de mine car le nombre est 1️⃣ , pas 2️⃣ .</string>
+    <string name="tutorial_2_bottom">Vous pouvez l\'ouvrir par %1$s.</string>
+    <string name="tutorial_3_top">Il en va de même pour 1️⃣ . Vous savez où se trouve la mine adjacente.</string>
+    <string name="tutorial_3_bottom">Vous pouvez ouvrir tous les autres carrés non ouverts adjacents à 1️⃣ .</string>
+    <string name="tutorial_4_top">Nous savons où se trouve l\'une des mines, donc il n\'y a qu\'une seule possibilité pour l\'autre.</string>
+    <string name="tutorial_4_bottom">%1$s pour marquer la mine adjacente à 2️⃣ .</string>
+    <string name="tutorial_5_top">Vérifier le nombre en surbrillance.</string>
+    <string name="tutorial_5_bottom">%1$s pour ouvrir ou %2$s pour marquer.</string>
     <string name="games">Jeux</string>
     <string name="previous_games">Parties précédentes</string>
     <string name="minefield">Difficulté</string>
@@ -64,7 +64,8 @@
     <string name="enable_automatic_flags">Activer le placement automatique de drapeaux</string>
     <string name="open_areas">Zones ouvertes</string>
     <string name="total_time">Temps de jeu total</string>
-    <string name="average_time">Temps de jeu moyen</string>
+    <string name="average_time">Temps moyen</string>
+    <string name="shortest_time">Temps le plus court</string>
     <string name="performance">Performance</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Utiliser des drapeaux points d’interrogation</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Drapeau retiré !</string>
     <string name="remove_ad">Supprimer les publicités</string>
     <string name="help">Aide</string>
+    <string name="show_windows">Show windows</string>
+    <string name="switch_control">Switch: Flag and Open</string>
+    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">Vous devez vider un tableau rectangulaire contenant des mines cachées sans en détonner.</string>
     <string name="app_name">Anti-Mine</string>
 </resources>

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ar">
     <string name="tutorial">الدورة التعليمية</string>
-    <string name="tutorial_completed">Tutorial Completed</string>
-    <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
-    <string name="tutorial_1_top">The numbers indicates how many mines are adjacent to the highlighted square.</string>
-    <string name="tutorial_1_bottom">Therefore, if the corner 1️⃣  has only one adjacent square, it must be a mine. %1$s to flag it.</string>
-    <string name="tutorial_2_top">The next unopened square doesn\'t have a mine because the number is 1️⃣ , not 2️⃣ .</string>
-    <string name="tutorial_2_bottom">You can open it by %1$s.</string>
-    <string name="tutorial_3_top">The same happens on this 1️⃣ . You know where its adjacent mine is.</string>
-    <string name="tutorial_3_bottom">You can open all other unopened squares adjacent to 1️⃣ .</string>
-    <string name="tutorial_4_top">We know where one of the mines are. So, there\'s only one possibility to the other one.</string>
-    <string name="tutorial_4_bottom">%1$s to flag the mine adjacent to 2️⃣ .</string>
-    <string name="tutorial_5_top">Check the highlighted number.</string>
-    <string name="tutorial_5_bottom">%1$s to open or %2$s to mark.</string>
+    <string name="tutorial_completed">اكتمل البرنامج التعليمي</string>
+    <string name="tutorial_0_bottom">يمكنك البدء ب %1$s في أي مربع عشوائي.</string>
+    <string name="tutorial_1_top">وتشير الأرقام إلى عدد الألغام المتاخمة للمربع المشار إليه.</string>
+    <string name="tutorial_1_bottom">لذلك، إذا كان الزاوية 1️⃣ يحتوي على مربع واحد مجاور، يجب أن يكون لغما. %1$s لإعلامه.</string>
+    <string name="tutorial_2_top">المربع التالي غير المفتوح ليس لديه لغم لأن الرقم هو 1️⃣ ليس 2️⃣ .</string>
+    <string name="tutorial_2_bottom">يمكنك فتحه ب %1$s.</string>
+    <string name="tutorial_3_top">ويحدث نفس الشيء في هذا 1️⃣ . تعرفون أين هو المنجم المجاور.</string>
+    <string name="tutorial_3_bottom">يمكنك فتح جميع المربعات الأخرى غير المفتوحة المجاورة لـ 1️⃣ .</string>
+    <string name="tutorial_4_top">نحن نعرف أين أحد الألغام. إذن، هناك إمكانية واحدة فقط للآخر.</string>
+    <string name="tutorial_4_bottom">%1$s لعلم اللغم المجاور لـ 2️⃣ .</string>
+    <string name="tutorial_5_top">تحقق من الرقم المُبرز.</string>
+    <string name="tutorial_5_bottom">%1$s لفتح أو %2$s للعلام.</string>
     <string name="games">ألعاب</string>
     <string name="previous_games">الألعاب السابقة</string>
     <string name="minefield">الصعوبة</string>
@@ -64,7 +64,8 @@
     <string name="enable_automatic_flags">تمكين وضع الأعلام تلقائياً</string>
     <string name="open_areas">فتح المناطق</string>
     <string name="total_time">مجموع الوقت</string>
-    <string name="average_time">متوسط الوقت</string>
+    <string name="average_time">معدل الزمن</string>
+    <string name="shortest_time">اقرب وقت</string>
     <string name="performance">أداء</string>
     <string name="ok">حسناً</string>
     <string name="use_question_mark">استخدام علامة السؤال</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">إزالة العلم!</string>
     <string name="remove_ad">إزالة الإعلانات</string>
     <string name="help">مساعدة</string>
+    <string name="show_windows">إظهار النوافذ</string>
+    <string name="switch_control">التبديل: العلم وفتح</string>
+    <string name="switch_control_desc">استخدم الزر للتبديل بين العلم وفتح</string>
     <string name="app_description">يجب عليك مسح لوحة مستطيلة تحتوي على ألغام مخفية دون تفجير أي منها.</string>
     <string name="app_name">Antimine</string>
 </resources>

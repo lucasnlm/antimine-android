@@ -1,28 +1,56 @@
-Antimine je logická hra, ve které hledáte skryté miny.
-Cílem hry je označit vlajkami oblasti s minami, aby se pole stalo bezpečnějším místem bez výbuchu miny.
+Otestujte si své schopnosti v náročné logické hře, kde musíte vyřešit minové pole, aniž by jakákoli mina explodovala.
+Jedná se o minimalistickou a moderní verzi klasické aplikace Minesweeper.
 
-Vyhrajete hru, pokud jste označil každou minu v minovém poli.
-Dávejte pozor, aby žádná mina nevybouchla!
+Dokážete vyčistit minové pole? Pojďme na to!
 
-<b>Funkce</b>
+CÍL
+Je to jako Minesweeper. Vyhrajete hru, jestliže jste označil každou minu v minovém poli. Dávejte pozor, aby žádná mina nevybouchla!
 
-<ul>
-<li>Zabírá málo úložného prostoru</li>
-<li>Lze hrát bez připojení k internetu</li>
-<li>4 rozdílné úrovně</li>
-<li>Tvorba vlastních úrovní</li>
-<li>Noční režim</li>
-<li>Automatické uložení hry</li>
-<li>Umístění vlajek k označení min</li>
-<li>Umístění otazníků k označení pochybných míst</li>
-<li>Stisknutím čísel otevřete více míst</li>
-<li>Automatické umístění vlajek pokud je potřeba</li>
-<li>Sdílení hry</li>
-<li>Hra na rozdělené obrazovce</li>
-<li>Přístupnost: zvětšení plochy čtverce</li>
-<li>Přístupnost: čtečka obrazovky</li>
-</ul>
+BEZ HÁDÁNÍ
+Tato hra obsahuje algoritmus, který vždy vytváří řešitelná minová pole. Nebudete muset hádat, kde je poslední mina!
 
-<b>Zdrojový kód</b>
+ÚROVNĚ HRY
+Stejně jako aplikace Minesweeper, má i tato hra různé úrovně: začátečník, pokročilý a expert. Má ale také jedinečný progresivní režim, který se při výhře ztěžuje.
 
-Zdrojový kód této hry je k dispozici na: <a href="https://github.com/lucasnlm/antimine-android">GitHub</a>.
+VLASTNÍ ÚROVEŇ
+Pokud standardní režimy nestačí, můžete si vytvořit obtížnější úrovně!
+
+MOTIVY
+Antimine má více než 15 motivů (včetně světlého, tmavého a AMOLED). A brzy jich bude přidáno více!
+
+MINIMALISTICKÝ VZHLED
+Čistý vzhled a dojem: minimalistický vzhled a také malá velikost aplikace (méně než 9MB).
+
+NÁVOD
+Nevíte, jak hrát Minesweeper? Žádný problém, můžete si zahrát naši ukázkovou úroveň a povolit Tipy v nastavení.
+
+STATISTIKY
+Zkontrolujte své výsledky a pokrok.
+
+POMOCNÍK HRY
+Hra automaticky označí čtverce, které jste izolovali. 
+
+PŘIZPŮSOBENÍ
+Hru můžete změnit tak, aby vám vyhovovala. 
+Příklad: Pomoc, animace, hmatová odezva, otazník.
+
+OVLÁDACÍ PRVKY
+Podporuje čtyři různá schémata ovládání. Příklad: označení pomocí klepnutí nebo dlouhého stisku.
+
+ÚSPĚCHY A ŽEBŘÍČKY 
+Máte k dispozici osm úspěchů k odemčení a různé žebříčky, které můžete sdílet se svými přáteli.
+
+PŘÍSTUPNOST
+Tuto hru si můžete přizpůsobit podle svých potřeb: změňte velikost čtverců, poloměr, načasování dotyků a podporu čtečky obrazovky.
+Vždy se snažíme vylepšit naše nastavení přístupnosti. Pokud vám něco chybí, dejte nám zpětnou vazbu!
+
+APLIKACE ZAMĚŘENÁ NA ANDROID
+Podporuje skvělé funkce systému Android, jako je rozdělená obrazovka, klávesové zkratky, sdílení, systémové motivy a vždy podporuje poslední verzi.
+
+ONLINE NEBO OFFLINE
+K hraní hry nemusíte být online!
+
+AUTOM. UKLÁDÁNÍ
+Můžete začít hru a pokračovat v ní později! Automaticky uloží vaši hru.
+
+Užijte si to.

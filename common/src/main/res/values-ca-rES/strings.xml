@@ -64,7 +64,8 @@
     <string name="enable_automatic_flags">Activa la col·locació automàtica de banderes</string>
     <string name="open_areas">Zones obertes</string>
     <string name="total_time">Temps total</string>
-    <string name="average_time">Durada mitjana</string>
+    <string name="average_time">Temps mitjà</string>
+    <string name="shortest_time">Temps més curt</string>
     <string name="performance">Rendiment</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Utilitza l\'interrogant</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Has tret la bandera!</string>
     <string name="remove_ad">Elimina els anuncis</string>
     <string name="help">Ajuda</string>
+    <string name="show_windows">Show windows</string>
+    <string name="switch_control">Switch: Flag and Open</string>
+    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">Has de netejar un tauler rectangular amb mines amagades sense detonar-ne cap.</string>
     <string name="app_name">Antimines</string>
 </resources>

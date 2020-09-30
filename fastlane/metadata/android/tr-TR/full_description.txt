@@ -1,29 +1,56 @@
-Antimine mayın tarlası gibi bir bulmaca oyunudur.
-Amaç, herhangi bir alanı patlatmadan alanı daha güvenli bir yer haline getirmek için mayınlı alanları işaretlemektir.
+Hiçbir mayını patlatmadan, mayın tarlasını çözmeniz gereken zorlu yapboz oyununda, muhakeme gücünüzü test edin.
+Klasik Mayın Tarlası'nın minimal ve modern bir versiyonu karşınızda.
 
-Mayın tarlasındaki her mayını işaretlediğinizde oyunu kazanırsınız.
-Birini bile tetiklememeye dikkat edin!
+Bir mayın tarlasını temizlemeyi başarabilir misiniz? Hadi bakalım!
 
-<b>Özellikler</b>
+AMAÇ
+Tıpkı Mayın Tarlası gibi. Mayın Tarlasındaki her bir mayını bayrakladığınızda oyunu kazanırsınız. Birisini tetiklememeye dikkat edin!
 
-<ul>
-<li>Az yer kaplar</li>
-<li>İnternet bağlantısı olmadan oynanabilir</li>
-<li>4 zorluk seviyesi</li>
-<li>Kendi seviyeni yap</li>
-<li>Gece modu</li>
-<li>Oyunu otomatik olarak kaydeder</li>
-<li>Mayınları işaretlemek için bayraklar yerleştir</li>
-<li>Şüpheli yerleri işaretlemek için soru işaretleri yerleştir</li>
-<li>Sayılara basarak birden fazla yer aç</li>
-<li>Gerektiğinde bayrakları otomatik olarak yerleştir</li>
-<li>Oyunu paylaş</li>
-<li>Bölünmüş ekranda oyna</li>
-<li>Erişilebilirlik: karenin alanını artır</li>
-<li>Erişilebilirlik: ekran okuyucu</li>
-</ul>
+TAHMİN ETMEK YOK
+Bu oyun, daima çözülebilir mayın tarlaları yaratan bir algoritmaya sahiptir. Son mayının nerede bulunduğunu tahmin etmek zorunda değilsiniz!
 
-<b>Kaynak Kodu</b>
+OYUN SEVİYELERİ
+Tıpkı Mayın Tarlası gibi, bu oyun farklı seviyelere sahip: Acemi, Orta ve Uzman. Ama aynı zamanda siz kazandıkça zorlaşan eşsiz bir aşamalı modu mevcut.
 
-Bu oyunun kaynak kodu şu adreste mevcuttur: <a href="https://github.com/lucasnlm/antimine-android">GitHub</a>
+ÖZEL SEVİYE
+Eğer standart modlar yeterli değilse, kendi seviye zorluğunuzu yaratabilirsiniz!
 
+TEMALAR
+Antimayın 15'ten fazla temaya sahip (parlak, karanlık, ve AMOLED). Ve yakında daha fazlası eklenecek!
+
+MİNİMAL
+Sade görünüm ve his: minimal bir görsellik ve aynı zamanda hafif uygulama boyutu (9MB'den az).
+
+ÖĞRETİCİ İPUÇLARI
+Mayın Tarlası'nı nasıl oynayacağını bilmiyor musunuz? Problem değil, öğretici bölümümüzü oynayabilir ve ayarlardan ipuçlarını etkinleştirebilirsiniz.
+
+İSTATİSTİKLER
+Sonuçlarınızı ve gelişiminizi kontrol edebilirsiniz.
+
+OYUN ASİSTANI
+Oyun otomatik bir şekilde, izole ettiğiniz kareleri bayraklayacaktır. 
+
+ÖZELLEŞTİRME
+Oyunu istediğiniz hale getirebilmek adına değiştirebilirsiniz. 
+Örneğin: Yardım, animasyonlar, dokunsal geribildirim, soru işareti.
+
+KONTROLLER
+Dört farklı kontrol şemasını desteklemektedir. Örneğin: dokunarak bayrak kullanımı veya uzun basma.
+
+BAŞARIMLAR VE LİDERLİK TABLOLARI 
+Kilidini açabileceğiniz 8 başarıma ve arkadaşlarınızla paylaşabileceğiniz farklı liderlik tablolarına sahipsiniz.
+
+ERİŞİLEBİLİRLİK
+Bu oyunu ihtiyaçlarınıza göre özelleştirebilirsiniz: karelerin boyutunu değiştirmek, yarıçap, dokunma süresi, ve ekran okuyucusu desteği.
+Bizler daima erişilebilirlik ayarlarımızı geliştirmeye çalışıyoruz. Eksik bir şey varsa bize geri bildirimde bulunun!
+
+ANDROID ODAKLI UYGULAMA
+Bölünmüş ekran, kısayollar, paylaşım, sistem teması, ve daima son sürümü desteklemek gibi harika Android özelliklerini destekler.
+
+ÇEVRİMİÇİ VEYA ÇEVRİMDIŞI
+Oyunu oynamak için çevrimiçi olmanıza gerek yok!
+
+OTOMATİK KAYIT
+Bir oyuna başlayabilir ve daha sonra kaldığınız yerden devam edebilirsiniz! Oyununuz otomatik olarak kaydedilecektir.
+
+Tadını çıkartın.

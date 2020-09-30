@@ -1,0 +1,1 @@
+Gra logiczna, w której należy znaleźć wszystkie ukryte miny. 

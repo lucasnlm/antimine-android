@@ -1,27 +1,56 @@
-Antimine est un jeu de réflexion similaire au Démineur.
-L'objectif est de poser un drapeau sur les espaces minés pour sécuriser le terrain sans exploser la moindre mine.
+Testez votre puissance de raisonnement sur un jeu de puzzle difficile où vous devez résoudre un champ de mines sans exploser aucune mine.
+Il s'agit d'une version minimaliste et moderne du Minesweeper classique.
 
-Vous gagner la partie quand vous posez un drapeau sur chaque mine sur le champ de mine. Attention de ne pas en activer !
+Êtes-vous en mesure de nettoyer un champ de mines ? C'est parti !
 
-<b>Fonctionnalités</b>
+OBJECTIF
+C'est comme le Démineur. Vous gagnez la partie quand vous posez un drapeau sur chaque mine sur le champ de mine. Attention de ne pas en activer !
 
-<ul>
-<li>Ne prend que peu d'espace de stockage</li>
-<li>Peut être joué sans connection Internet</li>
-<li>4 niveaux de difficulté</li>
-<li>Créez votre propre niveau</li>
-<li>Mode Nuit</li>
-<li>Sauvegarde automatique de la partie</li>
-<li>Placez des drapeaux pour marquer les cases minées</li>
-<li>Placez des points d'interrogation sur des espaces incertains</li>
-<li>Ouvrez plusieurs cases en appuyant sur les nombres</li>
-<li>Placez automatiquement des drapeaux quand nécessaire</li>
-<li>Partagez la partie</li>
-<li>Jouez en écran partagé</li>
-<li>Accessibilité : augmentez la taille du carré</li>
-<li>Accessibilité : lecture de l'écran</li>
-</ul>
+PAS BESOIN DE DEVINER
+Ce jeu a un algorithme qui crée toujours des champs de mines solvables. Vous n'aurez pas à deviner où se trouve la dernière mine !
 
-<b>Code Source</b>
+NIVEAUX DE JEU
+Tout comme Minesweeper, ce jeu a différents niveaux: débutant, intermédiaire et expert. Mais il a aussi un mode progressif unique qui devient plus difficile quand vous gagnez.
 
-Le code source est disponible à cette adresse : <a href="https://github.com/lucasnlm/antimine-android">GitHub</a>
+NIVEAU PERSONNEL
+Si les modes standards ne suffisent pas, vous pouvez créer votre niveau de difficulté !
+
+THÉMES
+Antimine a plus de 15 thèmes (lumière, sombre et AMOLED). Et bientôt d'autres seront ajoutés!
+
+MINIMALISTE
+Une apparence et une sensation de netteté : une taille visuelle minimaliste et aussi légère (moins de 9 Mo).
+
+TUTORIEL
+Vous ne savez pas jouer au Démineur ? Pas de problème, vous pouvez jouer notre niveau de tutoriel et activer les conseils dans les paramètres.
+
+STATISTIQUES
+Vérifiez vos résultats et votre développement.
+
+ASSISTANT DU JEU
+Le jeu marquera automatiquement les carrés que vous avez isolés. 
+
+PERSONNALISATION
+Vous pouvez changer le jeu pour le faire comme vous le souhaitez. 
+Exemple: aide, animations, retours haptiques, point d'interrogation.
+
+CONTRÔLES
+Il supporte quatre systèmes de contrôle différents. Exemple: drapeau en appuyant sur appui ou appui long.
+
+ACHIEVEMENTS 
+Vous avez huit réalisations à débloquer et différents classements à partager avec vos amis.
+
+ACCESSIBILITÉ
+Vous pouvez personnaliser ce jeu en fonction de vos besoins: changer la taille des carrés, le rayon, le minutage tactile et le support du lecteur d'écran.
+Nous essayons toujours d'améliorer nos paramètres d'accessibilité. Si vous manquez quelque chose, faites-nous part de vos commentaires !
+
+ANDROID
+Il prend en charge les fonctionnalités cool d'Android comme l'écran partagé, les raccourcis, le partage, le thème du système et toujours le support de la dernière version.
+
+EN LIGNE OU HORS LIGNE
+Vous n'avez pas besoin d'être en ligne pour jouer au jeu!
+
+SAUVEGARDE AUTO
+Vous pouvez commencer une partie et continuer plus tard! Il sauvegarder automatiquement votre partie.
+
+Profitez-en !
