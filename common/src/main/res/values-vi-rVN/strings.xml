@@ -65,6 +65,7 @@
     <string name="open_areas">Khu vực mở</string>
     <string name="total_time">Tổng thời gian</string>
     <string name="average_time">Thời gian bình quân</string>
+    <string name="shortest_time">Thời gian ngắn nhất</string>
     <string name="performance">Hiệu năng</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Dùng cờ câu hỏi</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Đã tháo cờ hiệu!</string>
     <string name="remove_ad">Loại bỏ quảng cáo</string>
     <string name="help">Trợ Giúp</string>
+    <string name="show_windows">Show windows</string>
+    <string name="switch_control">Switch: Flag and Open</string>
+    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">Bạn phải mở tất cả các ô trên một bãi mìn mà không làm nổ cục mìn nào.</string>
     <string name="app_name">Dò mìn</string>
 </resources>

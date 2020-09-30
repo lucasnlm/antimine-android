@@ -65,6 +65,7 @@
     <string name="open_areas">Açık Alanlar</string>
     <string name="total_time">Toplam Süre</string>
     <string name="average_time">Ortalama Süre</string>
+    <string name="shortest_time">En Kısa Zaman</string>
     <string name="performance">Performans</string>
     <string name="ok">Tamam</string>
     <string name="use_question_mark">Soru İşareti Kullan</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Bayrak kaldırıldı!</string>
     <string name="remove_ad">Reklamları kaldır</string>
     <string name="help">Yardım</string>
+    <string name="show_windows">Pencereleri göster</string>
+    <string name="switch_control">Değiştir: Bayrak ve Açık</string>
+    <string name="switch_control_desc">Bayrak ile Açık arasında geçiş yapmak için butonu kullanınız</string>
     <string name="app_description">Hiçbirini patlatmadan gizli mayın içeren dikdörtgen bir tahtayı temizlemelisiniz.</string>
     <string name="app_name">Anti-Mine</string>
 </resources>

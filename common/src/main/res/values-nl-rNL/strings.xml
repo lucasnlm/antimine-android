@@ -2,17 +2,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="nl">
     <string name="tutorial">Tutorial</string>
     <string name="tutorial_completed">Tutorial Voltooid</string>
-    <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
-    <string name="tutorial_1_top">The numbers indicates how many mines are adjacent to the highlighted square.</string>
-    <string name="tutorial_1_bottom">Therefore, if the corner 1️⃣  has only one adjacent square, it must be a mine. %1$s to flag it.</string>
-    <string name="tutorial_2_top">The next unopened square doesn\'t have a mine because the number is 1️⃣ , not 2️⃣ .</string>
-    <string name="tutorial_2_bottom">You can open it by %1$s.</string>
-    <string name="tutorial_3_top">The same happens on this 1️⃣ . You know where its adjacent mine is.</string>
-    <string name="tutorial_3_bottom">You can open all other unopened squares adjacent to 1️⃣ .</string>
-    <string name="tutorial_4_top">We know where one of the mines are. So, there\'s only one possibility to the other one.</string>
-    <string name="tutorial_4_bottom">%1$s to flag the mine adjacent to 2️⃣ .</string>
-    <string name="tutorial_5_top">Check the highlighted number.</string>
-    <string name="tutorial_5_bottom">%1$s to open or %2$s to mark.</string>
+    <string name="tutorial_0_bottom">Je kunt beginnen door %1$s op elk willekeurig vakje.</string>
+    <string name="tutorial_1_top">De cijfers geven aan hoeveel mijnen aan het gemarkeerde vakje grenzen.</string>
+    <string name="tutorial_1_bottom">Dus als de hoek 1️⃣ slechts één aangrenzend vierkant heeft, moet het een mijn zijn. %1$s om het te markeren.</string>
+    <string name="tutorial_2_top">Het volgende ongeopende vakje heeft geen mijn omdat het nummer 1️⃣ , is, niet 2️⃣ .</string>
+    <string name="tutorial_2_bottom">Je kan het openen door %1$s.</string>
+    <string name="tutorial_3_top">Hetzelfde gebeurt op deze 1️⃣ . Je weet waar de aangrenzende mijn is.</string>
+    <string name="tutorial_3_bottom">Je kan alle andere ongeopende vakjes naast 1️⃣ . openen.</string>
+    <string name="tutorial_4_top">We weten waar een van de mijnen ligt, dus er is maar één mogelijkheid voor de andere.</string>
+    <string name="tutorial_4_bottom">%1$s om de mijn naast 2️⃣ te markeren.</string>
+    <string name="tutorial_5_top">Controleer het gemarkeerde cijfer.</string>
+    <string name="tutorial_5_bottom">%1$s om te openen of %2$s om te markeren.</string>
     <string name="games">Games</string>
     <string name="previous_games">Vorige games</string>
     <string name="minefield">Moeilijkheidsgraad</string>
@@ -65,6 +65,7 @@
     <string name="open_areas">Open gebieden</string>
     <string name="total_time">Totale Tijd</string>
     <string name="average_time">Gemiddelde Tijd</string>
+    <string name="shortest_time">Kortste Eerst</string>
     <string name="performance">Prestatie</string>
     <string name="ok">Oké</string>
     <string name="use_question_mark">Gebruik vraagteken</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Vlag verwijderd!</string>
     <string name="remove_ad">Verwijder advertenties</string>
     <string name="help">Help</string>
+    <string name="show_windows">Show windows</string>
+    <string name="switch_control">Switch: Flag and Open</string>
+    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">Je moet een rechthoekig bord met verborgen mijnen verwijderen zonder er een te ontploffen.</string>
     <string name="app_name">Antimijn</string>
 </resources>

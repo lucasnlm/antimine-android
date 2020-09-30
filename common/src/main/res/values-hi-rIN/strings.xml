@@ -55,16 +55,17 @@
     <string name="victories">विजय</string>
     <string name="you_lost">तुम हार गए!</string>
     <string name="defeats">पराजय</string>
-    <string name="game_over_desc_1">Good luck on your next game.</string>
-    <string name="game_over_desc_4">You finished the minefield in %1$d seconds.</string>
+    <string name="game_over_desc_1">अपने अगले खेल पर शुभकामनाएँ।</string>
+    <string name="game_over_desc_4">आपने %1$d सेकंड में खेल समाप्त किया।</string>
     <string name="fail_to_share">शेअर करने में असफ़ल</string>
     <string name="version_s">संस्करण %1$s</string>
     <string name="sound_effects">ध्वनि प्रभाव</string>
     <string name="are_you_sure">क्या आपको यकीन है?</string>
     <string name="enable_automatic_flags">फ्लैग के स्वचालित रखे जाने को सक्रिय क</string>
-    <string name="open_areas">Open Areas</string>
+    <string name="open_areas">खुले वर्ग</string>
     <string name="total_time">कुल समय</string>
     <string name="average_time">औसत समय</string>
+    <string name="shortest_time">सबसे कम समय</string>
     <string name="performance">प्रदर्शन</string>
     <string name="ok">ओके</string>
     <string name="use_question_mark">\"मैं सुनिश्चित नहीं हूं\" झंडे का उपयोग करें</string>
@@ -77,9 +78,9 @@
     <string name="flag_tile">ध्वज</string>
     <string name="retry">फिर प्रयास करें</string>
     <string name="empty">खाली</string>
-    <string name="cant_do_it_now">Impossible to do that now</string>
-    <string name="you_have_received">You have received: +%1$d</string>
-    <string name="help_win_a_game">For more Help, you must win a game.</string>
+    <string name="cant_do_it_now">अब ऐसा होना असंभव है</string>
+    <string name="you_have_received">आपने प्राप्त किया है: +%1$d</string>
+    <string name="help_win_a_game">अधिक सहायता के लिए, आपको एक गेम जीतना होगा।</string>
     <string name="unknown_error">अज्ञात त्रुटि।</string>
     <string name="leaderboards">लीडरबोर्ड</string>
     <string name="cancel">रद्द करें</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Flag removed!</string>
     <string name="remove_ad">विज्ञापन निकालें</string>
     <string name="help">मदद</string>
+    <string name="show_windows">खिड़कियां दिखाओ</string>
+    <string name="switch_control">स्विच: फ्लैग और ओपन</string>
+    <string name="switch_control_desc">ध्वज और खुले के बीच स्विच करने के लिए बटन का उपयोग करें</string>
     <string name="app_description">लोकप्रिय लॉजिक पजल माइन्सवीपर. बोर्ड से माइंस साफ करता है वर्ग से संकेत को प्रयोग करते हुए जिसे आपने पहले से खोला है.</string>
     <string name="app_name">Antimine</string>
 </resources>

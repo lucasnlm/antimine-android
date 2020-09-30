@@ -20,7 +20,7 @@
     <string name="beginner">Anfänger</string>
     <string name="intermediate">Mittleres Niveau</string>
     <string name="expert">Experte</string>
-    <string name="support_description">Mit Ihrer Hilfe können wir neue Funktionen implementieren und unser Projekt aktiv halten.</string>
+    <string name="support_description">Mit deiner Hilfe werden wir in der Lage sein, neue Funktionen zu implementieren und unser Projekt aktiv zu halten.</string>
     <string name="open">Öffnen</string>
     <string name="settings">Einstellungen</string>
     <string name="animations">Animationen</string>
@@ -45,7 +45,7 @@
     <string name="rounded_square">Abgerundetes Quadrat</string>
     <string name="system">System</string>
     <string name="rating">Rückmeldung</string>
-    <string name="support_title">Ünterstütze uns!</string>
+    <string name="support_title">Unterstütze uns!</string>
     <string name="support_action">Hilfestellung</string>
     <string name="rating_message">Wenn dir dieses Spiel gefällt, gib uns bitte eine Rückmeldung. Es wird uns sehr helfen.</string>
     <string name="used_software_text">Dieses Spiel benutzt folgende Software von Drittanbietern:</string>
@@ -65,6 +65,7 @@
     <string name="open_areas">Offene Flächen</string>
     <string name="total_time">Gesamtzeit</string>
     <string name="average_time">Durchschnittliche Zeit</string>
+    <string name="shortest_time">Kürzeste Zeit</string>
     <string name="performance">Erfolgsergebnis</string>
     <string name="ok">Ok</string>
     <string name="use_question_mark">Fragezeichen benutzen</string>
@@ -77,16 +78,16 @@
     <string name="flag_tile">Flagge</string>
     <string name="retry">Erneut versuchen</string>
     <string name="empty">Leer</string>
-    <string name="cant_do_it_now">Das kann jetzt nicht gemacht werden</string>
-    <string name="you_have_received">Du hast erhalten: +%1$d</string>
-    <string name="help_win_a_game">Für mehr Hilfe musst du ein Spiel gewinnen.</string>
+    <string name="cant_do_it_now">Dies jetzt nicht möglich</string>
+    <string name="you_have_received">Du hast +%1$d erhalten</string>
+    <string name="help_win_a_game">Für weitere Hilfe musst du ein Spiel gewinnen.</string>
     <string name="unknown_error">Unbekannter Fehler.</string>
     <string name="leaderboards">Ranglisten</string>
     <string name="cancel">Abbrechen</string>
     <string name="resume">Fortfahren</string>
     <string name="yes">Ja</string>
     <string name="unlock">Entsperren</string>
-    <string name="unlock_all">Alle entsperren</string>
+    <string name="unlock_all">Alles entsperren</string>
     <string name="achievements">Erfolge</string>
     <string name="no">Nein</string>
     <string name="general">Allgemein</string>
@@ -106,7 +107,7 @@
     <string name="close_menu">Menü schließen</string>
     <string name="delete_all">Alles löschen</string>
     <string name="themes">Themen</string>
-    <string name="try_it">Ausprobieren</string>
+    <string name="try_it">Versuche es</string>
     <string name="delete_all_message">Alle Ereignisse dauerhaft löschen.</string>
     <string name="all_mines_disabled">Alle Minen wurden wirkungslos gemacht.</string>
     <string name="desc_convered_area">Abgedeckte Fläche</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Markierung entfernt!</string>
     <string name="remove_ad">Werbung entfernen</string>
     <string name="help">Hilfe</string>
+    <string name="show_windows">Show windows</string>
+    <string name="switch_control">Switch: Flag and Open</string>
+    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">Du musst ein rechteckiges Spielfeld, das versteckte Minen enthält, räumen, ohne irgendeine davon zur Explosion zu bringen.</string>
     <string name="app_name">Antimine</string>
 </resources>

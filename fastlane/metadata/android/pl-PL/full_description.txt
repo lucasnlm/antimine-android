@@ -1,0 +1,56 @@
+Sprawdź swoją umiejętność rozumowania w wymagającej grze logicznej, w której celem jest oczyszczenie pola minowego bez wywołania żadnej eksplozji.
+Nowoczesna i minimalistyczna wersja klasycznego Sapera.
+
+Czy zdołasz oczyścić pole minowe? Do dzieła!
+
+TWÓJ CEL
+Ta gra jest jak Saper. Aby wygrać rozgrywkę, należy oznaczyć każdą minę na polu minowym. Uważaj, aby żadnej nie zdetonować!
+
+BEZ ZGADYWANIA
+Ta gra posiada algorytm, który zawsze tworzy pole minowe możliwe do rozwiązania. Nie trzeba zgadywać gdzie jest ostatnia mina!
+
+POZIOMY GRY
+Tak jak Saper, ta gra posiada różne tryby gry: Łatwy, Średni oraz Ekspert. Ale oprócz tego, gra posiada unikalny tryb progresywny, którego poziom trudności wzrasta wraz z wygrywaniem.
+
+TRYB NIESTANDARDOWY
+Jeśli standardowe tryby to za mało, możesz utworzyć własny poziom trudności!
+
+MOTYWY
+Antimine zawiera ponad 15 motywów (w tym jasny, ciemny oraz AMOLED). A kolejne są już w drodze!
+
+MINIMALIZM
+Piękno w prostocie: minimalistyczna wizualnie oraz mało zajmująca aplikacja (mniej niż 9MB).
+
+SAMOUCZEK
+Nie wiesz jak grać w Sapera? Żaden problem, możesz zagrać w nasz tryb samouczka oraz włączyć wskazówki w ustawieniach.
+
+STATYSTYKI
+Sprawdź swoje wyniki oraz postępy.
+
+POMOCNIK W GRZE
+Gra automatycznie oznacza odizolowane pola. 
+
+DOSTOSOWYWANIE
+Możesz dobrowolnie dostosować grę. 
+Na przykład: Pomoc, animacje, wibracje przy dotknięciu, znak zapytania.
+
+STEROWANIE
+Dostępne są cztery systemy sterowania. Na przykład: oznaczanie pola przez dotknięcie lub długie naciśnięcie.
+
+OSIĄGNIĘCIA I TABLICE WYNIKÓW 
+Do zdobycia jest osiem osiągnięć oraz różne tablice wyników do udostępnienia znajomym.
+
+UŁATWIENIA DOSTĘPU
+Możesz dowolnie dostosować swoją rozgrywkę: zmienić rozmiar pól, ich promień, czas długiego naciśnięcia oraz włączyć obsługę czytania ekranu.
+Ciągle staramy się ulepszać nasze ustawienia ułatwień dostępu. Jeśli czegoś tu brakuje, prześlij nam opinię!
+
+APLIKACJA DEDYKOWANA DLA ANDROIDA
+Obsługuje fajne funkcje Androida, takie jak podzielony ekran, skróty, udostępnianie, motyw systemowy oraz ciągłe wsparcie dla najnowszych wersji.
+
+Z SIECIĄ LUB BEZ
+Nie musisz mieć połączenia, aby zagrać!
+
+AUTOMATYCZNY ZAPIS
+Możesz zacząć rozgrywkę i kontynuować ją później! Rozgrywka zapisuje się automatycznie.
+
+Powodzenia.

@@ -65,6 +65,7 @@
     <string name="open_areas">Otevřené oblasti</string>
     <string name="total_time">Celkový čas</string>
     <string name="average_time">Průměrný čas</string>
+    <string name="shortest_time">Nejkratší čas</string>
     <string name="performance">Výkon</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Použít otazníky</string>
@@ -86,7 +87,7 @@
     <string name="resume">Pokračovat</string>
     <string name="yes">Ano</string>
     <string name="unlock">Odemknout</string>
-    <string name="unlock_all">Odemkni vše</string>
+    <string name="unlock_all">Odemknout vše</string>
     <string name="achievements">Úspěchy</string>
     <string name="no">Ne</string>
     <string name="general">Obecné</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Vlajka odstraněna!</string>
     <string name="remove_ad">Odstranit reklamy</string>
     <string name="help">Nápověda</string>
+    <string name="show_windows">Zobrazit okna</string>
+    <string name="switch_control">Přepnout: označit a otevřít</string>
+    <string name="switch_control_desc">Pomocí tlačítka můžete přepínat mezi označením a otevřením</string>
     <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté miny, aniž by kterákoliv z nich vybuchla.</string>
     <string name="app_name">Anti-Mine</string>
 </resources>

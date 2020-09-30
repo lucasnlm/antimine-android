@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="bg">
     <string name="tutorial">Туториал</string>
-    <string name="tutorial_completed">Tutorial Completed</string>
-    <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
-    <string name="tutorial_1_top">The numbers indicates how many mines are adjacent to the highlighted square.</string>
-    <string name="tutorial_1_bottom">Therefore, if the corner 1️⃣  has only one adjacent square, it must be a mine. %1$s to flag it.</string>
-    <string name="tutorial_2_top">The next unopened square doesn\'t have a mine because the number is 1️⃣ , not 2️⃣ .</string>
-    <string name="tutorial_2_bottom">You can open it by %1$s.</string>
-    <string name="tutorial_3_top">The same happens on this 1️⃣ . You know where its adjacent mine is.</string>
-    <string name="tutorial_3_bottom">You can open all other unopened squares adjacent to 1️⃣ .</string>
-    <string name="tutorial_4_top">We know where one of the mines are. So, there\'s only one possibility to the other one.</string>
-    <string name="tutorial_4_bottom">%1$s to flag the mine adjacent to 2️⃣ .</string>
-    <string name="tutorial_5_top">Check the highlighted number.</string>
-    <string name="tutorial_5_bottom">%1$s to open or %2$s to mark.</string>
+    <string name="tutorial_completed">Туториалът приключи</string>
+    <string name="tutorial_0_bottom">Може да започнеш с %1$s на всяко случайно квадратче.</string>
+    <string name="tutorial_1_top">Номерата показват колко мини са в близост до селектираното квадратче.</string>
+    <string name="tutorial_1_bottom">Затова, ако ъгълът 1️⃣  има само едно променящо се квадратче, то трябва да е мина. %1$s за да го отбележиш.</string>
+    <string name="tutorial_2_top">Следващия неотворен квадрат няма мина защото номера е 1️⃣ , а не 2️⃣ .</string>
+    <string name="tutorial_2_bottom">Ти можеш да го отвориш само с %1$s.</string>
+    <string name="tutorial_3_top">Същото става на това 1️⃣ . Ти знаеш къде е намерената мина.</string>
+    <string name="tutorial_3_bottom">Ти можеш да отвориш всички други неотворени квадрати в близост до 1️⃣ .</string>
+    <string name="tutorial_4_top">Ние знаем къде една от мините е. Затова, има само една възможност за другата.</string>
+    <string name="tutorial_4_bottom">%1$s за да отбележиш до 2️⃣ .</string>
+    <string name="tutorial_5_top">Провери селектирания номер.</string>
+    <string name="tutorial_5_bottom">%1$s за да отвориш и %2$s за да маркираш.</string>
     <string name="games">Игри</string>
     <string name="previous_games">Предишни Игри</string>
     <string name="minefield">Трудност</string>
@@ -65,6 +65,7 @@
     <string name="open_areas">Отворени площи</string>
     <string name="total_time">Общо време</string>
     <string name="average_time">Средно време</string>
+    <string name="shortest_time">Най-бързото време</string>
     <string name="performance">Изпълнение</string>
     <string name="ok">ОК</string>
     <string name="use_question_mark">Въпросителен знак</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Глагът е премахнат!</string>
     <string name="remove_ad">Премахване на реклами</string>
     <string name="help">Помощ</string>
+    <string name="show_windows">Показване на всички прозорци</string>
+    <string name="switch_control">Промени: Флаг и Отворен</string>
+    <string name="switch_control_desc">Използвай бутонът за да превключиш между Флаг и Отворен</string>
     <string name="app_description">Вие трябва да изчистите квадратна дъска която има скрити мини без да взривите нито една от тях.</string>
     <string name="app_name">Antimine</string>
 </resources>

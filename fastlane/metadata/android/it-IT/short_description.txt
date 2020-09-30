@@ -1,0 +1,1 @@
+Un gioco di puzzle dove si cerca tutte le miniere nascoste. 

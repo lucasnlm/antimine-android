@@ -1,0 +1,1 @@
+Elrejtett aknák eltávolítása az aknamezőről. 

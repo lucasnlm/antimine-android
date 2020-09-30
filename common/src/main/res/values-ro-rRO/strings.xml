@@ -29,9 +29,9 @@
     <string name="events">Statistici</string>
     <string name="custom">Personalizat</string>
     <string name="start">Începe</string>
-    <string name="width">Width</string>
-    <string name="height">Height</string>
-    <string name="mines">Mines</string>
+    <string name="width">Latime</string>
+    <string name="height">Înălţime</string>
+    <string name="mines">Mină</string>
     <string name="retry_sure">Dacă începi un joc nou,\nprogresul tău curent va fi pierdut.</string>
     <string name="show_licenses">Afişează licenţa</string>
     <string name="new_game_request">Vrei să începi un joc nou?</string>
@@ -65,6 +65,7 @@
     <string name="open_areas">Open Areas</string>
     <string name="total_time">Timp total</string>
     <string name="average_time">Timp mediu</string>
+    <string name="shortest_time">Cel mai scurt timp</string>
     <string name="performance">Performanță</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Folosește Semn de Întrebare</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Steagul a fost eliminat!</string>
     <string name="remove_ad">Eliminați Reclamele</string>
     <string name="help">Ajutor</string>
+    <string name="show_windows">Show windows</string>
+    <string name="switch_control">Switch: Flag and Open</string>
+    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">You have to clear a rectangular board containing hidden mines without detonating any of them.</string>
     <string name="app_name">Antimine</string>
 </resources>

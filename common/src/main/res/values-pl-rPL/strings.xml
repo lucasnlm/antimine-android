@@ -42,7 +42,7 @@
     <string name="settings_gameplay">Rozgrywka</string>
     <string name="settings_accessibility">Ułatwienia dostępu</string>
     <string name="size">Rozmiar</string>
-    <string name="rounded_square">Zaokraglony kwadrat</string>
+    <string name="rounded_square">Zaokrąglony kwadrat</string>
     <string name="system">System</string>
     <string name="rating">Opinia</string>
     <string name="support_title">Możesz nam pomóc!</string>
@@ -65,6 +65,7 @@
     <string name="open_areas">Odkryte pola</string>
     <string name="total_time">Całkowity czas gry</string>
     <string name="average_time">Średni czas gry</string>
+    <string name="shortest_time">Najkrótszy czas gry</string>
     <string name="performance">Skuteczność</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Używaj Znaku zapytania</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Usunięto flagę!</string>
     <string name="remove_ad">Usuń reklamy</string>
     <string name="help">Pomoc</string>
+    <string name="show_windows">Pokaż okna</string>
+    <string name="switch_control">Przełączanie: Oznacz i odkryj</string>
+    <string name="switch_control_desc">Użyj przycisku do przełączania się pomiędzy oznaczaniem i odkrywaniem</string>
     <string name="app_description">Znajdź wszystkie ukryte miny znajdujące się na kwadratowej planszy unikając ich detonacji.</string>
     <string name="app_name">Antimine</string>
 </resources>

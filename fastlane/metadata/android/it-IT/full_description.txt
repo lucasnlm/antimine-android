@@ -1,0 +1,56 @@
+Prova il tuo potere di ragionamento su un gioco di puzzle impegnativo in cui devi risolvere un campo minato senza esplodere alcuna miniera.
+Questa è una versione minimalista e moderna del classico Minesweeper.
+
+Siete in grado di liberare un campo minato? Iniziamo!
+
+OBIETTIVO
+È come il Minesweeper. Vinci la partita quando hai contrassegnato ogni miniera nel campo minato. Fai attenzione a non attivarne uno!
+
+NON C'È BISOGNO DI INDOVINARE
+Questo gioco ha un algoritmo che crea sempre campi minati risolvibili. Non dovrai indovinare dov'è l'ultima miniera!
+
+LIVELLI DI GIOCO
+Proprio come Minesweeper, questo gioco ha diversi livelli: Principiante, Intermedio e Esperto. Ma ha anche una modalità progressiva unica che diventa più difficile quando si vince.
+
+LIVELLO CUSTOM
+Se le modalità standard non sono sufficienti, puoi creare la tua difficoltà di livello!
+
+TEMI
+Antimina ha più di 15 temi (tra cui luce, buio e AMOLED). E presto sarà aggiunto di più!
+
+MINIMALISTA
+Aspetto pulito e sentimento: un minimalista visivo e anche leggero dimensioni dell'app (meno di 9MB).
+
+TUTORIAL
+Non sai come giocare a Campo Minato? Nessun problema, puoi giocare il nostro livello tutorial e abilitare i suggerimenti sulle impostazioni.
+
+STATISTICHE
+Controllare i risultati e lo sviluppo.
+
+ASSISTENZA DEL GIOCO
+Il gioco contrassegnare automaticamente i quadrati che hai isolato. 
+
+PERSONALIZZAZIONE
+È possibile modificare il gioco per renderlo come si desidera. 
+Esempio: Aiuto, animazioni, feedback aptico, punto interrogativo.
+
+CONTROLLI
+Esso sostiene quattro diversi sistemi di controllo. Esempio: contrassegno utilizzando tap o pressione prolungata.
+
+RISULTATI E LEADERBOARD 
+Hai otto risultati da sbloccare e diverse classifiche da condividere con i tuoi amici.
+
+ACCESSIBILITÀ
+Puoi personalizzare questo gioco in base alle tue esigenze: cambiare la dimensione dei quadrati, il raggio, il tempo di tocco, e il supporto del lettore dello schermo.
+Stiamo sempre cercando di migliorare le nostre impostazioni di accessibilità. Se ti manca qualcosa ci danno un feedback!
+
+ANDROID
+Supporta caratteristiche interessanti di Android come split-screen, scorciatoie, condivisione, tema di sistema, e sempre supportando l'ultima versione.
+
+ONLINE O OFFLINE
+Non è necessario essere online per giocare al gioco!
+
+AUTO-SALVA
+Puoi iniziare una partita e continuare più tardi! Salvare automaticamente la partita.
+
+Buon divertimento!

@@ -65,6 +65,7 @@
     <string name="open_areas">Åbne Områder</string>
     <string name="total_time">Total Tid</string>
     <string name="average_time">Gennemsnitlig Tid</string>
+    <string name="shortest_time">Korteste Tid</string>
     <string name="performance">Ydeevne</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Brug flag med spørgsmålstegn</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Flag removed!</string>
     <string name="remove_ad">Fjern annoncer</string>
     <string name="help">Hjælp</string>
-    <string name="app_description">You have to clear a rectangular board containing hidden mines without detonating any of them.</string>
-    <string name="app_name">Antimine</string>
+    <string name="show_windows">Show windows</string>
+    <string name="switch_control">Switch: Flag and Open</string>
+    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
+    <string name="app_description">Ryd skjulte miner fra et minefelt.</string>
+    <string name="app_name">Antimine - Minestryger</string>
 </resources>

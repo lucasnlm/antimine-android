@@ -65,6 +65,7 @@
     <string name="open_areas">Áreas abertas</string>
     <string name="total_time">Tempo Total</string>
     <string name="average_time">Tempo médio</string>
+    <string name="shortest_time">Menor Tempo</string>
     <string name="performance">Desempenho</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Usar Ponto de Interrogação</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">Bandeira removida!</string>
     <string name="remove_ad">Remover Anúncios</string>
     <string name="help">Ajuda</string>
+    <string name="show_windows">Show windows</string>
+    <string name="switch_control">Switch: Flag and Open</string>
+    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">Você deve limpar um campo contendo minas escondidas sem detonar nenhuma delas.</string>
     <string name="app_name">Antimine</string>
 </resources>

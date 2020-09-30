@@ -1,0 +1,1 @@
+Un juego de rompecabezas en que buscas todas las minas ocultas. 

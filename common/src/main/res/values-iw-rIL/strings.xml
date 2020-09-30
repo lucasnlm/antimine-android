@@ -62,9 +62,10 @@
     <string name="sound_effects">אפקטי צליל</string>
     <string name="are_you_sure">את/ה בטוח/ה?</string>
     <string name="enable_automatic_flags">מיקום דגלים אוטומטי</string>
-    <string name="open_areas">Open Areas</string>
+    <string name="open_areas">ריבועים פתוחים</string>
     <string name="total_time">זמן כולל</string>
     <string name="average_time">זמן ממוצע</string>
+    <string name="shortest_time">הזמן הקצר ביותר</string>
     <string name="performance">ביצועים</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">סימן שאלה</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">דגל הוסר!</string>
     <string name="remove_ad">הסרת פרסומות</string>
     <string name="help">עזרה</string>
+    <string name="show_windows">Show windows</string>
+    <string name="switch_control">Switch: Flag and Open</string>
+    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">צריך לנקות את הלוח הריבועי המכיל מוקשים נסתרים מבלי לפוצץ אף אחד מהם.</string>
     <string name="app_name">Antimine</string>
 </resources>

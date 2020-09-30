@@ -65,6 +65,7 @@
     <string name="open_areas">Abrir Áreas</string>
     <string name="total_time">Tiempo total</string>
     <string name="average_time">Tiempo promedio</string>
+    <string name="shortest_time">Tiempo Más Corto</string>
     <string name="performance">Desempeño</string>
     <string name="ok">Vale</string>
     <string name="use_question_mark">Usar banderas de interrogación</string>
@@ -120,6 +121,9 @@
     <string name="flag_removed">¡Bandera eliminada!</string>
     <string name="remove_ad">Eliminar anuncios</string>
     <string name="help">Ayuda</string>
+    <string name="show_windows">Show windows</string>
+    <string name="switch_control">Switch: Flag and Open</string>
+    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">Usted tiene que limpiar un tablero cuadrado que contiene minas escondidas sin detonarlas.</string>
     <string name="app_name">Anti-Mina</string>
 </resources>
