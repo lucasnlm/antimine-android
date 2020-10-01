@@ -14,6 +14,7 @@ import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import kotlin.math.nextDown
 
 abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragment(contentLayoutId) {
     private val dimensionRepository: IDimensionRepository by inject()
@@ -47,8 +48,8 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
     private fun calcHorizontalPadding(view: View, boardWidth: Int): Int {
         val width = view.measuredWidth
         val recyclerViewWidth = (dimensionRepository.areaSize() * boardWidth)
-        val separatorsWidth = (dimensionRepository.areaSeparator() * (boardWidth - 1))
-        return ((width - recyclerViewWidth - separatorsWidth) / 2).coerceAtLeast(0.0f).toInt()
+        val separatorsWidth = (dimensionRepository.areaSeparator() * (boardWidth + 2))
+        return ((width - recyclerViewWidth - separatorsWidth) / 2).coerceAtLeast(0.0f).nextDown().toInt()
     }
 
     private fun calcVerticalPadding(view: View, boardHeight: Int): Int {

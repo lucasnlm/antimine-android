@@ -28,8 +28,8 @@ class DimensionRepository(
 
     override fun areaSize(): Float {
         val multiplier = preferencesRepository.areaSizeMultiplier() / 100.0f
-        val maxArea = context.resources.getDimension(R.dimen.field_size)
-        return maxArea * multiplier
+        val regularSize = context.resources.getDimension(R.dimen.field_size)
+        return regularSize * multiplier
     }
 
     override fun areaSeparator(): Float {
