@@ -15,7 +15,6 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.math.nextDown
-import kotlin.math.nextUp
 
 abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragment(contentLayoutId) {
     private val dimensionRepository: IDimensionRepository by inject()
