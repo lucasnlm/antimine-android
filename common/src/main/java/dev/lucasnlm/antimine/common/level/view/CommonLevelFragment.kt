@@ -30,7 +30,7 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
         recyclerGrid = view.findViewById(R.id.recyclerGrid)
     }
 
-    private fun makeNewLayoutManager(boardWidth: Int) =
+    protected  open fun makeNewLayoutManager(boardWidth: Int): RecyclerView.LayoutManager =
         FixedGridLayoutManager().apply {
             setTotalColumnCount(boardWidth)
         }
