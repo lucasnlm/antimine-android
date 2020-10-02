@@ -15,12 +15,13 @@
     <color name="mines_around_7">#66126B</color>
     <color name="mines_around_8">#000000</color>
 
-    <color name="launcher_background">#FCC216</color>
-
     <color name="shortcut_level_0">#9ccc65</color>
     <color name="shortcut_level_1">#42a5f5</color>
     <color name="shortcut_level_2">#7e57c2</color>
     <color name="shortcut_level_3">#ffca28</color>
+
+    <color name="launcher_background_start">#FCC216</color>
+    <color name="launcher_background_end">#FF8C3A</color>
 
     <color name="accent">#FFD32F2F</color>
     <color name="install_button">#00C853</color>
