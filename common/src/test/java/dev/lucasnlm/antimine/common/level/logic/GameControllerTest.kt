@@ -212,12 +212,22 @@ class GameControllerTest {
             assertFalse(controller.hasIsolatedAllMines())
             assertFalse(controller.isGameOver())
 
+            val lastArea = controller.field()
+                .last { !it.hasMine }.id
+
             controller.field()
                 .filter { !it.hasMine }
-                .forEach { controller.fakeSingleClick(it.id) }
+                .onEach {
+                    controller.fakeSingleClick(it.id)
 
-            assertTrue(controller.hasIsolatedAllMines())
-            assertTrue(controller.isGameOver())
+                    if (it.id != lastArea) {
+                        assertFalse(controller.hasIsolatedAllMines())
+                        assertFalse(controller.isGameOver())
+                    } else {
+                        assertTrue(controller.hasIsolatedAllMines())
+                        assertTrue(controller.isGameOver())
+                    }
+                }
         }
     }
 

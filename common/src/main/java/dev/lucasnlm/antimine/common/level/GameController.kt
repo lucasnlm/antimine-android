@@ -7,7 +7,6 @@ import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.logic.FlagAssistant
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
-import dev.lucasnlm.antimine.common.level.logic.filterNeighborsOf
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
@@ -242,15 +241,13 @@ class GameController {
 
     fun hasFlaggedAllMines(): Boolean = rightFlags() == minefield.mines
 
-    fun hasIsolatedAllMines() =
-        mines().map {
-            val neighbors = field.filterNeighborsOf(it)
-            val neighborsCount = neighbors.count()
-            val isolatedNeighborsCount = neighbors.count { neighbor ->
-                !neighbor.isCovered || neighbor.hasMine
-            }
-            neighborsCount != isolatedNeighborsCount
-        }.count { it } == 0
+    fun hasIsolatedAllMines(): Boolean {
+        return field.let {
+            val openSquares = it.count { area -> !area.isCovered }
+            val mines = it.count { area -> area.hasMine }
+            (openSquares + mines) == it.size
+        }
+    }
 
     private fun rightFlags() = mines().count { it.mark.isFlag() }
 
