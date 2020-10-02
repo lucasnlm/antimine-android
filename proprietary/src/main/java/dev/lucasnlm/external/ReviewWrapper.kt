@@ -29,10 +29,8 @@ class ReviewWrapper : IReviewWrapper {
         ReviewManagerFactory.create(activity).run {
             requestReviewFlow()
                 .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        if (!activity.isFinishing) {
-                            launchReviewFlow(activity, it.result)
-                        }
+                    if (it.isSuccessful && !activity.isFinishing) {
+                        launchReviewFlow(activity, it.result)
                     }
                 }
         }
