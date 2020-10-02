@@ -140,17 +140,22 @@ fun Area.paintOnCanvas(
                 mine?.draw(canvas)
             } else if (minesAround > 0) {
                 painter.apply {
-                    color = when (minesAround) {
-                        1 -> theme.palette.minesAround1
-                        2 -> theme.palette.minesAround2
-                        3 -> theme.palette.minesAround3
-                        4 -> theme.palette.minesAround4
-                        5 -> theme.palette.minesAround5
-                        6 -> theme.palette.minesAround6
-                        7 -> theme.palette.minesAround7
-                        8 -> theme.palette.minesAround8
-                        else -> 0x00
+                    color = if (isAmbientMode) {
+                        0xFFFFFF
+                    } else {
+                        when (minesAround) {
+                            1 -> theme.palette.minesAround1
+                            2 -> theme.palette.minesAround2
+                            3 -> theme.palette.minesAround3
+                            4 -> theme.palette.minesAround4
+                            5 -> theme.palette.minesAround5
+                            6 -> theme.palette.minesAround6
+                            7 -> theme.palette.minesAround7
+                            8 -> theme.palette.minesAround8
+                            else -> 0x00
+                        }
                     }
+                    isAntiAlias = !isAmbientMode
                     alpha = 0xff
                 }
                 canvas.drawText(minesAround.toString(), paintSettings, painter)

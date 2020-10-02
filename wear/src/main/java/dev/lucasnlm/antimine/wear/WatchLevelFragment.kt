@@ -9,11 +9,16 @@ import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
+import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
+    override fun makeNewLayoutManager(boardWidth: Int) =
+        FixedGridLayoutManager().apply {
+            setTotalColumnCount(boardWidth)
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
