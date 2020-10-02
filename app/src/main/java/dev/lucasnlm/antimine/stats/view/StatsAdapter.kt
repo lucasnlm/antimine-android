@@ -32,8 +32,8 @@ class StatsAdapter(
             }
             card.setCardBackgroundColor(color)
 
-            val textColor = with(themeRepository.getTheme().palette.covered) {
-                Color.rgb(Color.red(this), Color.green(this), Color.blue(this))
+            val textColor = with(themeRepository.getTheme().palette.background) {
+                Color.rgb(255 - Color.red(this), 255 - Color.green(this), 255 - Color.blue(this))
             }
             statsLabel.setTextColor(textColor)
 
