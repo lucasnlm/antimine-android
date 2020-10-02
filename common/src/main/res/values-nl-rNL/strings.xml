@@ -121,9 +121,9 @@
     <string name="flag_removed">Vlag verwijderd!</string>
     <string name="remove_ad">Verwijder advertenties</string>
     <string name="help">Help</string>
-    <string name="show_windows">Show windows</string>
-    <string name="switch_control">Switch: Flag and Open</string>
-    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
+    <string name="show_windows">Vensters weergeven</string>
+    <string name="switch_control">Switch: Vlag en Open</string>
+    <string name="switch_control_desc">Gebruik de knop om te wisselen tussen vlag en open</string>
     <string name="app_description">Je moet een rechthoekig bord met verborgen mijnen verwijderen zonder er een te ontploffen.</string>
     <string name="app_name">Antimijn</string>
 </resources>
