@@ -473,7 +473,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             savesRepository.setLimit(1)
         } else {
             val current = preferencesRepository.getUseCount()
-            val shouldRequestRating = preferencesRepository.isRequestRatingEnabled()
             val shouldRequestSupport = if (billingManager.isEnabled()) {
                 !preferencesRepository.isPremiumEnabled()
             } else {
@@ -483,11 +482,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             if (current >= MIN_USAGES_TO_IAP && shouldRequestSupport) {
                 analyticsManager.sentEvent(Analytics.UnlockIapDialog)
                 showSupportAppDialog()
-            } else if (current >= MIN_USAGES_TO_RATING && shouldRequestRating) {
-                analyticsManager.sentEvent(Analytics.ShowRatingRequest(current))
-                reviewWrapper.startInAppReview(this)
             }
 
+            reviewWrapper.startInAppReview(this)
             preferencesRepository.incrementUseCount()
         }
     }
@@ -912,6 +909,5 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         const val GOOGLE_PLAY_REQUEST_CODE = 6
 
         const val MIN_USAGES_TO_IAP = 5
-        const val MIN_USAGES_TO_RATING = 10
     }
 }
