@@ -7,7 +7,6 @@ import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.logic.FlagAssistant
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
-import dev.lucasnlm.antimine.common.level.logic.filterNeighborsOf
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Minefield
