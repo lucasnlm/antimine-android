@@ -519,7 +519,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun loadGameTutorial() {
-        disableShortcutIcon(true)
+        disableShortcutIcon(false)
 
         supportFragmentManager.apply {
             findFragmentById(R.id.levelContainer)?.let { it ->
@@ -700,7 +700,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             Event.StartTutorial -> {
                 status = Status.PreGame
                 gameViewModel.stopClock()
-                disableShortcutIcon(true)
+                disableShortcutIcon(false)
                 loadGameTutorial()
             }
             Event.FinishTutorial -> {
