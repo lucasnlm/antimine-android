@@ -72,7 +72,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
                                 Ads.RewardsAds,
                                 onRewarded = {
                                     preferenceRepository.useTheme(targetThemeId)
-                                    it.recreate()
+                                    recreateActivity()
                                 },
                                 onFail = {
                                     Toast.makeText(it.applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT)
@@ -93,7 +93,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
                                     Ads.RewardsAds,
                                     onRewarded = {
                                         preferenceRepository.useTheme(targetThemeId)
-                                        it.recreate()
+                                        recreateActivity()
                                     },
                                     onFail = {
                                         Toast.makeText(
@@ -121,6 +121,14 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
                 }
             }
         }.create()
+    }
+
+    private fun recreateActivity() {
+        activity?.let {
+            it.finish()
+            it.startActivity(it.intent)
+            it.overridePendingTransition(0, 0)
+        }
     }
 
     override fun onDismiss(dialog: DialogInterface) {

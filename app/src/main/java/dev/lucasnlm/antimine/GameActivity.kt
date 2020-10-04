@@ -19,6 +19,7 @@ import androidx.core.view.doOnLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.about.AboutActivity
@@ -100,10 +101,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
-        lifecycleScope.launchWhenCreated {
-            bindViewModel()
-        }
-
+        bindViewModel()
         bindToolbar()
         bindDrawer()
         bindNavigationMenu()
@@ -124,17 +122,12 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun bindViewModel() = gameViewModel.apply {
-        var lastEvent: Event? = null // TODO use distinctUntilChanged when available
-
-        eventObserver.observe(
-            this@GameActivity,
-            {
-                if (lastEvent != it) {
-                    onGameEvent(it)
-                    lastEvent = it
-                }
-            }
-        )
+        Transformations
+            .distinctUntilChanged(eventObserver)
+            .observe(
+                this@GameActivity,
+                ::onGameEvent,
+            )
 
         retryObserver.observe(
             this@GameActivity,
@@ -490,6 +483,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun onChangeDifficulty(difficulty: Difficulty) {
+        loadGameFragment()
         navigationView.menu.apply {
             arrayOf(
                 Difficulty.Standard to findItem(R.id.standard),
@@ -554,6 +548,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun showCustomLevelDialog() {
+        preferencesRepository.completeTutorial()
         if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
             CustomLevelDialogFragment().apply {
                 show(supportFragmentManager, CustomLevelDialogFragment.TAG)
@@ -670,13 +665,11 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         preferencesRepository.completeTutorial()
 
         if (status == Status.PreGame) {
-            loadGameFragment()
             lifecycleScope.launch {
                 gameViewModel.startNewGame(newDifficulty)
             }
         } else {
             newGameConfirmation {
-                loadGameFragment()
                 lifecycleScope.launch {
                     gameViewModel.startNewGame(newDifficulty)
                 }
@@ -693,6 +686,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
             Event.StartNewGame -> {
                 gameToast?.cancel()
+                loadGameFragment()
                 status = Status.PreGame
                 disableShortcutIcon()
                 refreshAds()
@@ -707,7 +701,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 status = Status.PreGame
                 gameViewModel.stopClock()
                 disableShortcutIcon(true)
-                refreshAds(true)
                 loadGameTutorial()
             }
             Event.FinishTutorial -> {
@@ -844,8 +837,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun refreshAds(forceHide: Boolean = false) {
-        if (!forceHide && !preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
+    private fun refreshAds() {
+        val isTutorialComplete = preferencesRepository.isTutorialCompleted()
+        if (isTutorialComplete && !preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
             if (!instantAppManager.isEnabled(this)) {
                 navigationView.menu.setGroupVisible(R.id.remove_ads_group, true)
                 ad_placeholder.visibility = View.VISIBLE
