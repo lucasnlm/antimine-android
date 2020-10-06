@@ -218,7 +218,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
 
                 // If the shift overscrolls the column max, back it off
                 if (mFirstVisiblePosition + mVisibleColumnCount > state.itemCount) {
-                    mFirstVisiblePosition = Math.max(state.itemCount - mVisibleColumnCount, 0)
+                    mFirstVisiblePosition = (state.itemCount - mVisibleColumnCount).coerceAtLeast(0)
                     childLeft = paddingLeft
                 }
             }
@@ -244,10 +244,10 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
                 // Correct cases where shifting to the bottom-right overscrolls the top-left
                 //  This happens on data sets too small to scroll in a direction.
                 if (firstVisibleRow == 0) {
-                    childTop = Math.min(childTop, paddingTop)
+                    childTop = childTop.coerceAtMost(paddingTop)
                 }
                 if (firstVisibleColumn == 0) {
-                    childLeft = Math.min(childLeft, paddingLeft)
+                    childLeft = childLeft.coerceAtMost(paddingLeft)
                 }
             }
         }
@@ -557,7 +557,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
                 if (rightBoundReached) {
                     // If we've reached the last column, enforce limits
                     val rightOffset = horizontalSpace - getDecoratedRight(bottomView) + paddingRight
-                    Math.max(-dx, rightOffset)
+                    (-dx).coerceAtLeast(rightOffset)
                 } else {
                     // No limits while the last column isn't visible
                     -dx
@@ -566,7 +566,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
                 // Check left bound
                 if (leftBoundReached) {
                     val leftOffset = -getDecoratedLeft(topView) + paddingLeft
-                    Math.min(-dx, leftOffset)
+                    (-dx).coerceAtMost(leftOffset)
                 } else {
                     -dx
                 }
@@ -650,7 +650,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
                         verticalSpace - (getDecoratedBottom(bottomView)
                             + mDecoratedChildHeight) + paddingBottom
                     }
-                delta = Math.max(-dy, bottomOffset)
+                delta = (-dy).coerceAtLeast(bottomOffset)
             } else {
                 // No limits while the last row isn't visible
                 delta = -dy
@@ -660,7 +660,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
             delta =
                 if (topBoundReached) {
                     val topOffset = -getDecoratedTop(topView) + paddingTop
-                    Math.min(-dy, topOffset)
+                    (-dy).coerceAtMost(topOffset)
                 } else {
                     -dy
                 }
