@@ -69,9 +69,8 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
     private var mChangedPositionCount = 0
 
     /**
-     * Set the number of columns the layout manager will use. This will
-     * trigger a layout update.
-     * @param count Number of columns.
+     * Number of columns the layout manager uses.
+     * Setting it will trigger layout update.
      */
     var totalColumnCount: Int
         get() = if (itemCount < mTotalColumnCount) itemCount else mTotalColumnCount
