@@ -256,7 +256,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
         detachAndScrapAttachedViews(recycler)
 
         // Fill the grid for the initial layout of views
-        fillGrid(DIRECTION_NONE, childLeft, childTop, recycler, state, removedCache)
+        fillGrid(DIRECTION_NONE, recycler, state, childLeft, childTop, removedCache)
 
         // Evaluate any disappearing views that may exist
         if (!state.isPreLayout && recycler.scrapList.isNotEmpty()) {
@@ -308,14 +308,8 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
         }
     }
 
-    private fun fillGrid(direction: Int, recycler: Recycler, state: RecyclerView.State) {
-        fillGrid(direction, 0, 0, recycler, state, null)
-    }
-
-    private fun fillGrid(direction: Int, emptyLeft: Int, emptyTop: Int,
-        recycler: Recycler,
-        state: RecyclerView.State,
-        removedPositions: SparseIntArray?
+    private fun fillGrid(direction: Int, recycler: Recycler, state: RecyclerView.State,
+        emptyLeft: Int=0, emptyTop: Int=0, removedPositions: SparseIntArray?=null
     ) {
         if (mFirstVisiblePosition < 0) mFirstVisiblePosition = 0
         if (mFirstVisiblePosition >= itemCount) mFirstVisiblePosition = (itemCount - 1)
