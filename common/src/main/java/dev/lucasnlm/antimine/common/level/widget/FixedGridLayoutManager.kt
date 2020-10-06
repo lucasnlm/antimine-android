@@ -33,6 +33,24 @@ import java.util.*
  *
  */
 class FixedGridLayoutManager : RecyclerView.LayoutManager() {
+
+    companion object {
+        private val TAG = FixedGridLayoutManager::class.java.simpleName
+
+        private const val DEFAULT_COUNT = 1
+
+        /* View Removal Constants */
+        private const val REMOVE_VISIBLE = 0
+        private const val REMOVE_INVISIBLE = 1
+
+        /* Fill Direction Constants */
+        private const val DIRECTION_NONE = -1
+        private const val DIRECTION_START = 0
+        private const val DIRECTION_END = 1
+        private const val DIRECTION_UP = 2
+        private const val DIRECTION_DOWN = 3
+    }
+
     /* First (top-left) position visible at any point */
     private var mFirstVisiblePosition = 0
 
@@ -50,6 +68,19 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
     /* Used for tracking off-screen change events */
     private var mFirstChangedPosition = 0
     private var mChangedPositionCount = 0
+
+    /**
+     * Set the number of columns the layout manager will use. This will
+     * trigger a layout update.
+     * @param count Number of columns.
+     */
+    private var totalColumnCount: Int
+        private get() = if(itemCount < mTotalColumnCount) itemCount else mTotalColumnCount
+        set(count) {
+            mTotalColumnCount = count
+            requestLayout()
+        }
+
     override fun isAutoMeasureEnabled(): Boolean {
         return false
     }
@@ -104,9 +135,10 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
 
         // Clear change tracking state when a real layout occurs
         if (!state.isPreLayout) {
+            mFirstChangedPosition = 0
             mChangedPositionCount = 0
-            mFirstChangedPosition = mChangedPositionCount
         }
+
         if (childCount == 0) { // First or empty layout
             // Scrap measure one child
             val scrap = recycler.getViewForPosition(0)
@@ -118,18 +150,22 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
              * view being the same size (i.e. a uniform grid). This allows
              * us to compute the following values up front because they
              * won't change.
-             */mDecoratedChildWidth = getDecoratedMeasuredWidth(scrap)
+             */
+            mDecoratedChildWidth = getDecoratedMeasuredWidth(scrap)
             mDecoratedChildHeight = getDecoratedMeasuredHeight(scrap)
+
             detachAndScrapView(scrap, recycler)
         }
 
         // Always update the visible row/column counts
         updateWindowSizing()
+
         var removedCache: SparseIntArray? = null
         /*
          * During pre-layout, we need to take note of any views that are
          * being removed in order to handle predictive animations
-         */if (state.isPreLayout) {
+         */
+        if (state.isPreLayout) {
             removedCache = SparseIntArray(childCount)
             for (i in 0 until childCount) {
                 val view = getChildAt(i)
@@ -149,6 +185,8 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
                 }
             }
         }
+
+
         var childLeft: Int
         var childTop: Int
         if (childCount == 0) { // First or empty layout
@@ -156,9 +194,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
             mFirstVisiblePosition = 0
             childLeft = paddingLeft
             childTop = paddingTop
-        } else if (!state.isPreLayout
-            && visibleChildCount >= state.itemCount
-        ) {
+        } else if (!state.isPreLayout && visibleChildCount >= state.itemCount) {
             // Data set is too small to scroll fully, just reset position
             mFirstVisiblePosition = 0
             childLeft = paddingLeft
@@ -169,14 +205,15 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
              * the current scrolled offset.
              */
             val topChild = getChildAt(0)
-            childLeft = topChild?.let { getDecoratedLeft(it) } ?: 0
-            childTop = topChild?.let { getDecoratedTop(it) } ?: 0
+            childLeft = if(topChild == null) 0 else getDecoratedLeft(topChild)
+            childTop = if(topChild == null) 0 else getDecoratedTop(topChild)
 
             /*
              * When data set is too small to scroll vertically, adjust vertical offset
              * and shift position to the first row, preserving current column
-             */if (!state.isPreLayout && verticalSpace > totalRowCount * mDecoratedChildHeight) {
-                mFirstVisiblePosition = mFirstVisiblePosition % totalColumnCount
+             */
+            if (!state.isPreLayout && verticalSpace > (totalRowCount * mDecoratedChildHeight)) {
+                mFirstVisiblePosition %= totalColumnCount
                 childTop = paddingTop
 
                 // If the shift overscrolls the column max, back it off
@@ -192,26 +229,17 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
              * is much smaller than it was before, and you are scrolled to
              * a location where no items would exist.
              */
-            val maxFirstRow = totalRowCount - (mVisibleRowCount - 1)
-            val maxFirstCol = totalColumnCount - (mVisibleColumnCount - 1)
+            val maxFirstRow = totalRowCount - (mVisibleRowCount-1)
+            val maxFirstCol = totalColumnCount - (mVisibleColumnCount-1)
             val isOutOfRowBounds = firstVisibleRow > maxFirstRow
             val isOutOfColBounds = firstVisibleColumn > maxFirstCol
             if (isOutOfRowBounds || isOutOfColBounds) {
-                val firstRow: Int
-                firstRow = if (isOutOfRowBounds) {
-                    maxFirstRow
-                } else {
-                    firstVisibleRow
-                }
-                val firstCol: Int
-                firstCol = if (isOutOfColBounds) {
-                    maxFirstCol
-                } else {
-                    firstVisibleColumn
-                }
+                val firstRow: Int = if (isOutOfRowBounds) maxFirstRow else firstVisibleRow
+                val firstCol: Int = if (isOutOfColBounds) maxFirstCol else firstVisibleColumn
                 mFirstVisiblePosition = firstRow * totalColumnCount + firstCol
-                childLeft = horizontalSpace - mDecoratedChildWidth * mVisibleColumnCount
-                childTop = verticalSpace - mDecoratedChildHeight * mVisibleRowCount
+
+                childLeft = horizontalSpace - (mDecoratedChildWidth * mVisibleColumnCount)
+                childTop = verticalSpace - (mDecoratedChildHeight * mVisibleRowCount)
 
                 // Correct cases where shifting to the bottom-right overscrolls the top-left
                 //  This happens on data sets too small to scroll in a direction.
@@ -231,9 +259,10 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
         fillGrid(DIRECTION_NONE, childLeft, childTop, recycler, state, removedCache)
 
         // Evaluate any disappearing views that may exist
-        if (!state.isPreLayout && !recycler.scrapList.isEmpty()) {
+        if (!state.isPreLayout && recycler.scrapList.isNotEmpty()) {
             val scrapList = recycler.scrapList
-            val disappearingViews: HashSet<View?> = HashSet<Any?>(scrapList.size)
+            val disappearingViews = HashSet<View>(scrapList.size)
+
             for (holder in scrapList) {
                 val child = holder.itemView
                 val lp = child.layoutParams as LayoutParams
@@ -241,6 +270,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
                     disappearingViews.add(child)
                 }
             }
+
             for (child in disappearingViews) {
                 layoutDisappearingView(child)
             }
@@ -258,7 +288,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
      * visible grid as what will initially fit on screen, plus one.
      */
     private fun updateWindowSizing() {
-        mVisibleColumnCount = horizontalSpace / mDecoratedChildWidth + 1
+        mVisibleColumnCount = (horizontalSpace / mDecoratedChildWidth) + 1
         if (horizontalSpace % mDecoratedChildWidth > 0) {
             mVisibleColumnCount++
         }
@@ -267,10 +297,12 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
         if (mVisibleColumnCount > totalColumnCount) {
             mVisibleColumnCount = totalColumnCount
         }
-        mVisibleRowCount = verticalSpace / mDecoratedChildHeight + 1
+
+        mVisibleRowCount = (verticalSpace / mDecoratedChildHeight) + 1
         if (verticalSpace % mDecoratedChildHeight > 0) {
             mVisibleRowCount++
         }
+
         if (mVisibleRowCount > totalRowCount) {
             mVisibleRowCount = totalRowCount
         }
@@ -280,27 +312,26 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
         fillGrid(direction, 0, 0, recycler, state, null)
     }
 
-    private fun fillGrid(
-        direction: Int, emptyLeft: Int, emptyTop: Int,
+    private fun fillGrid(direction: Int, emptyLeft: Int, emptyTop: Int,
         recycler: Recycler,
         state: RecyclerView.State,
         removedPositions: SparseIntArray?
     ) {
         if (mFirstVisiblePosition < 0) mFirstVisiblePosition = 0
-        if (mFirstVisiblePosition >= itemCount) mFirstVisiblePosition = itemCount - 1
+        if (mFirstVisiblePosition >= itemCount) mFirstVisiblePosition = (itemCount - 1)
 
         /*
          * First, we will detach all existing views from the layout.
          * detachView() is a lightweight operation that we can use to
          * quickly reorder views without a full add/remove.
          */
-        val viewCache = SparseArray<View?>(childCount)
+        val viewCache = SparseArray<View>(childCount)
         var startLeftOffset = emptyLeft
         var startTopOffset = emptyTop
         if (childCount != 0) {
             val topView = getChildAt(0)
-            startLeftOffset = topView?.let { getDecoratedLeft(it) } ?: 0
-            startTopOffset = topView?.let { getDecoratedTop(it) } ?: 0
+            startLeftOffset = if(topView ==null) 0 else getDecoratedLeft(topView)
+            startTopOffset = if(topView == null) 0 else getDecoratedTop(topView)
             when (direction) {
                 DIRECTION_START -> startLeftOffset -= mDecoratedChildWidth
                 DIRECTION_END -> startLeftOffset += mDecoratedChildWidth
@@ -321,6 +352,11 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
                 detachView(viewCache.valueAt(i)!!)
             }
         }
+
+        /*
+         * Next, we advance the visible position based on the fill direction.
+         * DIRECTION_NONE doesn't advance the position in any direction.
+         */
         when (direction) {
             DIRECTION_START -> mFirstVisiblePosition--
             DIRECTION_END -> mFirstVisiblePosition++
@@ -361,6 +397,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
                 offsetPositionDelta = nextPosition - offsetPosition
                 nextPosition = offsetPosition
             }
+
             if (nextPosition < 0 || nextPosition >= state.itemCount) {
                 // Item space beyond the data set, don't attempt to add a view
                 continue
@@ -381,7 +418,8 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
                 /*
                  * Update the new view's metadata, but only when this is a real
                  * layout pass.
-                 */if (!state.isPreLayout) {
+                 */
+                if (!state.isPreLayout) {
                     val lp = view.layoutParams as LayoutParams
                     lp.row = getGlobalRowOfPosition(nextPosition)
                     lp.column = getGlobalColumnOfPosition(nextPosition)
@@ -391,18 +429,18 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
                  * It is prudent to measure/layout each new view we
                  * receive from the Recycler. We don't have to do
                  * this for views we are just re-arranging.
-                 */measureChildWithMargins(view, 0, 0)
-                layoutDecorated(
-                    view, leftOffset, topOffset,
+                 */
+                measureChildWithMargins(view, 0, 0)
+                layoutDecorated(view, leftOffset, topOffset,
                     leftOffset + mDecoratedChildWidth,
-                    topOffset + mDecoratedChildHeight
-                )
+                    topOffset + mDecoratedChildHeight)
             } else {
                 // Re-attach the cached view at its new index
                 attachView(view)
                 viewCache.remove(nextPosition)
             }
-            if (i % mVisibleColumnCount == mVisibleColumnCount - 1) {
+
+            if (i % mVisibleColumnCount == (mVisibleColumnCount - 1)) {
                 leftOffset = startLeftOffset
                 topOffset += mDecoratedChildHeight
 
@@ -419,7 +457,8 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
          * Finally, we ask the Recycler to scrap and store any views
          * that we did not re-attach. These are views that are not currently
          * necessary because they are no longer visible.
-         */for (i in 0 until viewCache.size()) {
+         */
+        for (i in 0 until viewCache.size()) {
             val removingView = viewCache.valueAt(i)
             recycler.recycleView(removingView!!)
         }
@@ -470,14 +509,11 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
              * to the target.
              */
             override fun computeScrollVectorForPosition(targetPosition: Int): PointF? {
-                val rowOffset = (getGlobalRowOfPosition(targetPosition)
-                    - getGlobalRowOfPosition(mFirstVisiblePosition))
-                val columnOffset = (getGlobalColumnOfPosition(targetPosition)
-                    - getGlobalColumnOfPosition(mFirstVisiblePosition))
-                return PointF(
-                    (columnOffset * mDecoratedChildWidth).toFloat(),
-                    (rowOffset * mDecoratedChildHeight).toFloat()
-                )
+                val rowOffset = getGlobalRowOfPosition(targetPosition) -
+                    getGlobalRowOfPosition(mFirstVisiblePosition)
+                val columnOffset = getGlobalColumnOfPosition(targetPosition) -
+                    getGlobalColumnOfPosition(mFirstVisiblePosition)
+                return PointF(columnOffset * mDecoratedChildWidth.toFloat(), rowOffset * mDecoratedChildHeight.toFloat())
             }
         }
         scroller.targetPosition = position
@@ -506,7 +542,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
         // Take leftmost measurements from the top-left child
         val topView = getChildAt(0)
         // Take rightmost measurements from the top-right child
-        val bottomView = getChildAt(mVisibleColumnCount - 1)
+        val bottomView = getChildAt(mVisibleColumnCount-1)
 
         // Optimize the case where the entire data set is too small to scroll
         val viewSpan = getDecoratedRight(bottomView!!) - getDecoratedLeft(topView!!)
@@ -514,29 +550,32 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
             // We cannot scroll in either direction
             return 0
         }
-        val delta: Int
+
         val leftBoundReached = firstVisibleColumn == 0
         val rightBoundReached = lastVisibleColumn >= totalColumnCount
-        delta = if (dx > 0) { //  Contents are scrolling left
-            // Check right bound
-            if (rightBoundReached) {
-                // If we've reached the last column, enforce limits
-                val rightOffset = horizontalSpace - getDecoratedRight(bottomView) + paddingRight
-                Math.max(-dx, rightOffset)
-            } else {
-                // No limits while the last column isn't visible
-                -dx
+        val delta: Int =
+            if (dx > 0) { //  Contents are scrolling left
+                // Check right bound
+                if (rightBoundReached) {
+                    // If we've reached the last column, enforce limits
+                    val rightOffset = horizontalSpace - getDecoratedRight(bottomView) + paddingRight
+                    Math.max(-dx, rightOffset)
+                } else {
+                    // No limits while the last column isn't visible
+                    -dx
+                }
+            } else { //  Contents are scrolling right
+                // Check left bound
+                if (leftBoundReached) {
+                    val leftOffset = -getDecoratedLeft(topView) + paddingLeft
+                    Math.min(-dx, leftOffset)
+                } else {
+                    -dx
+                }
             }
-        } else { //  Contents are scrolling right
-            // Check left bound
-            if (leftBoundReached) {
-                val leftOffset = -getDecoratedLeft(topView) + paddingLeft
-                Math.min(-dx, leftOffset)
-            } else {
-                -dx
-            }
-        }
+
         offsetChildrenHorizontal(delta)
+
         if (dx > 0) {
             if (getDecoratedRight(topView) < 0 && !rightBoundReached) {
                 fillGrid(DIRECTION_END, recycler, state)
@@ -556,7 +595,8 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
          * (for edge effects and flings). If returned value does not
          * match original delta (passed in), RecyclerView will draw
          * an edge effect.
-         */return -delta
+         */
+        return -delta
     }
 
     /*
@@ -581,7 +621,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
         // Take top measurements from the top-left child
         val topView = getChildAt(0)
         // Take bottom measurements from the bottom-right child.
-        val bottomView = getChildAt(childCount - 1)
+        val bottomView = getChildAt(childCount-1)
 
         // Optimize the case where the entire data set is too small to scroll
         val viewSpan = getDecoratedBottom(bottomView!!) - getDecoratedTop(topView!!)
@@ -589,6 +629,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
             // We cannot scroll in either direction
             return 0
         }
+
         val delta: Int
         val maxRowCount = totalRowCount
         val topBoundReached = firstVisibleRow == 0
@@ -597,20 +638,20 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
             // Check against bottom bound
             if (bottomBoundReached) {
                 // If we've reached the last row, enforce limits
-                val bottomOffset: Int
-                bottomOffset = if (rowOfIndex(childCount - 1) >= maxRowCount - 1) {
-                    // We are truly at the bottom, determine how far
-                    (verticalSpace - getDecoratedBottom(bottomView)
-                        + paddingBottom)
-                } else {
-                    /*
-                     * Extra space added to account for allowing bottom space in the grid.
-                     * This occurs when the overlap in the last row is not large enough to
-                     * ensure that at least one element in that row isn't fully recycled.
-                     */
-                    verticalSpace - (getDecoratedBottom(bottomView)
-                        + mDecoratedChildHeight) + paddingBottom
-                }
+                val bottomOffset: Int =
+                    if (rowOfIndex(childCount - 1) >= maxRowCount - 1) {
+                        // We are truly at the bottom, determine how far
+                        (verticalSpace - getDecoratedBottom(bottomView)
+                            + paddingBottom)
+                    } else {
+                        /*
+                         * Extra space added to account for allowing bottom space in the grid.
+                         * This occurs when the overlap in the last row is not large enough to
+                         * ensure that at least one element in that row isn't fully recycled.
+                         */
+                        verticalSpace - (getDecoratedBottom(bottomView)
+                            + mDecoratedChildHeight) + paddingBottom
+                    }
                 delta = Math.max(-dy, bottomOffset)
             } else {
                 // No limits while the last row isn't visible
@@ -618,14 +659,17 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
             }
         } else { //  Contents are scrolling down
             // Check against top bound
-            delta = if (topBoundReached) {
-                val topOffset = -getDecoratedTop(topView) + paddingTop
-                Math.min(-dy, topOffset)
-            } else {
-                -dy
-            }
+            delta =
+                if (topBoundReached) {
+                    val topOffset = -getDecoratedTop(topView) + paddingTop
+                    Math.min(-dy, topOffset)
+                } else {
+                    -dy
+                }
         }
+
         offsetChildrenVertical(delta)
+
         if (dy > 0) {
             if (getDecoratedBottom(topView) < 0 && !bottomBoundReached) {
                 fillGrid(DIRECTION_DOWN, recycler, state)
@@ -645,7 +689,8 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
          * (for edge effects and flings). If returned value does not
          * match original delta (passed in), RecyclerView will draw
          * an edge effect.
-         */return -delta
+         */
+        return -delta
     }
 
     /*
@@ -661,7 +706,9 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
         return null
     }
 
-    /** Boilerplate to extend LayoutParams for tracking row/column of attached views  */ /*
+    /** Boilerplate to extend LayoutParams for tracking row/column of attached views  */
+
+    /*
      * Even without extending LayoutParams, we must override this method
      * to provide the default layout parameters that each child view
      * will receive when added.
@@ -690,20 +737,22 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
     }
 
     class LayoutParams : RecyclerView.LayoutParams {
+
         // Current row in the grid
         var row = 0
-
         // Current column in the grid
         var column = 0
 
-        constructor(c: Context?, attrs: AttributeSet?) : super(c, attrs) {}
-        constructor(width: Int, height: Int) : super(width, height) {}
-        constructor(source: MarginLayoutParams?) : super(source) {}
-        constructor(source: ViewGroup.LayoutParams?) : super(source) {}
-        constructor(source: RecyclerView.LayoutParams?) : super(source) {}
+        constructor(c: Context?, attrs: AttributeSet?) : super(c, attrs)
+        constructor(width: Int, height: Int) : super(width, height)
+        constructor(source: MarginLayoutParams?) : super(source)
+        constructor(source: ViewGroup.LayoutParams?) : super(source)
+        constructor(source: RecyclerView.LayoutParams?) : super(source)
     }
 
-    /** Animation Layout Helpers  */ /* Helper to obtain and place extra appearing views */
+    /** Animation Layout Helpers  */
+
+    /* Helper to obtain and place extra appearing views */
     private fun layoutAppearingViews(
         recycler: Recycler,
         referenceView: View,
@@ -735,12 +784,13 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
             val rowDelta = newRow - getGlobalRowOfPosition(referencePosition + offset)
             val newCol = getGlobalColumnOfPosition(extraPosition + offset)
             val colDelta = newCol - getGlobalColumnOfPosition(referencePosition + offset)
+
             layoutTempChildView(appearing, rowDelta, colDelta, referenceView)
         }
     }
 
     /* Helper to place a disappearing view */
-    private fun layoutDisappearingView(disappearingChild: View?) {
+    private fun layoutDisappearingView(disappearingChild: View) {
         /*
          * LayoutManager has a special method for attaching views that
          * will only be around long enough to animate.
@@ -748,28 +798,31 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
         addDisappearingView(disappearingChild)
 
         // Adjust each disappearing view to its proper place
-        val lp = disappearingChild!!.layoutParams as LayoutParams
+        val lp = disappearingChild.layoutParams as LayoutParams
+
         val newRow = getGlobalRowOfPosition(lp.viewAdapterPosition)
         val rowDelta = newRow - lp.row
         val newCol = getGlobalColumnOfPosition(lp.viewAdapterPosition)
         val colDelta = newCol - lp.column
+
         layoutTempChildView(disappearingChild, rowDelta, colDelta, disappearingChild)
     }
 
     /* Helper to lay out appearing/disappearing children */
-    private fun layoutTempChildView(child: View?, rowDelta: Int, colDelta: Int, referenceView: View?) {
+    private fun layoutTempChildView(child: View, rowDelta: Int, colDelta: Int, referenceView: View) {
         // Set the layout position to the global row/column difference from the reference view
-        val layoutTop = getDecoratedTop(referenceView!!) + rowDelta * mDecoratedChildHeight
+        val layoutTop = getDecoratedTop(referenceView) + rowDelta * mDecoratedChildHeight
         val layoutLeft = getDecoratedLeft(referenceView) + colDelta * mDecoratedChildWidth
-        measureChildWithMargins(child!!, 0, 0)
-        layoutDecorated(
-            child, layoutLeft, layoutTop,
+
+        measureChildWithMargins(child, 0, 0)
+        layoutDecorated(child, layoutLeft, layoutTop,
             layoutLeft + mDecoratedChildWidth,
-            layoutTop + mDecoratedChildHeight
-        )
+            layoutTop + mDecoratedChildHeight)
     }
 
-    /** Private Helpers and Metrics Accessors  */ /* Return the overall column index of this position in the global layout */
+    /** Private Helpers and Metrics Accessors  */
+
+    /* Return the overall column index of this position in the global layout */
     private fun getGlobalColumnOfPosition(position: Int): Int {
         return position % mTotalColumnCount
     }
@@ -786,7 +839,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
     private fun positionOfIndex(childIndex: Int): Int {
         val row = childIndex / mVisibleColumnCount
         val column = childIndex % mVisibleColumnCount
-        return mFirstVisiblePosition + row * totalColumnCount + column
+        return mFirstVisiblePosition + (row * totalColumnCount) + column
     }
 
     private fun rowOfIndex(childIndex: Int): Int {
@@ -794,34 +847,16 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
         return position / totalColumnCount
     }
 
-    private val firstVisibleColumn: Int
-        private get() = mFirstVisiblePosition % totalColumnCount
-    private val lastVisibleColumn: Int
-        private get() = firstVisibleColumn + mVisibleColumnCount
-    private val firstVisibleRow: Int
-        private get() = mFirstVisiblePosition / totalColumnCount
-    private val lastVisibleRow: Int
-        private get() = firstVisibleRow + mVisibleRowCount
-    private val visibleChildCount: Int
-        private get() = mVisibleColumnCount * mVisibleRowCount
+    private val horizontalSpace: Int get() = width
+    private val verticalSpace: Int get() = height
+    private val firstVisibleColumn: Int get() = mFirstVisiblePosition % totalColumnCount
+    private val lastVisibleColumn: Int get() = firstVisibleColumn + mVisibleColumnCount
+    private val firstVisibleRow: Int get() = mFirstVisiblePosition / totalColumnCount
+    private val lastVisibleRow: Int get() = firstVisibleRow + mVisibleRowCount
+    private val visibleChildCount: Int get() = mVisibleColumnCount * mVisibleRowCount
 
-    /**
-     * Set the number of columns the layout manager will use. This will
-     * trigger a layout update.
-     * @param count Number of columns.
-     */
-    private var totalColumnCount: Int
-        private get() = if (itemCount < mTotalColumnCount) {
-            itemCount
-        } else mTotalColumnCount
-        set(count) {
-            mTotalColumnCount = count
-            requestLayout()
-        }
-
-    // Bump the row count if it's not exactly even
     private val totalRowCount: Int
-        private get() {
+        get() {
             if (itemCount == 0 || mTotalColumnCount == 0) {
                 return 0
             }
@@ -832,24 +867,5 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
             }
             return maxRow
         }
-    private val horizontalSpace: Int
-        private get() = width
-    private val verticalSpace: Int
-        private get() = height
 
-    companion object {
-        private val TAG = FixedGridLayoutManager::class.java.simpleName
-        private const val DEFAULT_COUNT = 1
-
-        /* View Removal Constants */
-        private const val REMOVE_VISIBLE = 0
-        private const val REMOVE_INVISIBLE = 1
-
-        /* Fill Direction Constants */
-        private const val DIRECTION_NONE = -1
-        private const val DIRECTION_START = 0
-        private const val DIRECTION_END = 1
-        private const val DIRECTION_UP = 2
-        private const val DIRECTION_DOWN = 3
-    }
 }
