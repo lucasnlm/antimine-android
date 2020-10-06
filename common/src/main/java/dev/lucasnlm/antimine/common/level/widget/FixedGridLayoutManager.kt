@@ -379,13 +379,16 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
             var offsetPositionDelta = 0
             if (state.isPreLayout) {
                 var offsetPosition = nextPosition
-                for (offset in 0 until removedPositions!!.size()) {
-                    // Look for off-screen removals that are less-than this
-                    if (removedPositions.valueAt(offset) == REMOVE_INVISIBLE
-                        && removedPositions.keyAt(offset) < nextPosition
-                    ) {
-                        // Offset position to match
-                        offsetPosition--
+
+                if(removedPositions != null) {
+                    for (offset in 0 until removedPositions.size()) {
+                        // Look for off-screen removals that are less-than this
+                        if (removedPositions.valueAt(offset) == REMOVE_INVISIBLE
+                            && removedPositions.keyAt(offset) < nextPosition
+                        ) {
+                            // Offset position to match
+                            offsetPosition--
+                        }
                     }
                 }
                 offsetPositionDelta = nextPosition - offsetPosition
@@ -440,7 +443,8 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
 
                 // During pre-layout, on each column end, apply any additional appearing views
                 if (state.isPreLayout) {
-                    layoutAppearingViews(recycler, view, nextPosition, removedPositions!!.size(), offsetPositionDelta)
+                    val extraCount = removedPositions?.size() ?: 0
+                    layoutAppearingViews(recycler, view, nextPosition, extraCount, offsetPositionDelta)
                 }
             } else {
                 leftOffset += mDecoratedChildWidth
