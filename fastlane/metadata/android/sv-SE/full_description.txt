@@ -1,56 +1,56 @@
-Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
-This is a minimalist and modern version of the classic Minesweeper.
+Testa din slutledningsförmåga på ett utmanande pussel där du måste röja ett minfält utan att någon mina exploderar.
+Det här är en minimalistisk och mordern version av det klassiska spelet MS Röj.
 
-Are you able to clear a minefield? Let’s go!
+Klarar du av att röja ett minfält? Nu kör vi!
 
-OBJECTIVE
-It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
+MÅL
+Det är som MS Röj. Du vinner spelet när du flaggat varje mina i minfältet. Varförsiktig så ingen exploderar!
 
-NO GUESSING
-This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
+INGA GISSNINGAR
+Spelet har en algoritm som alltid skapar lösningsbara minfält. Du. behöver inte gissa var den sista minan är!
 
-GAME LEVELS
-Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
+SPELNIVÅER
+Precis som i MS Röj har spelet olika nivåer: Nybörjare, Medelsvår och Expert. Men det finns även ett progresivt läge som blir svårare när du vinner.r when you win.
 
-CUSTOM LEVEL
-If the standard modes aren't enough, you can create your level difficulty!
+ANPASSNINGSBARA NIVÅER
+Om standardnivåerna inte är nog kan du skapa egna svårighetsnivåer!
 
-THEMES
-Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+TEMAN
+Antimine har mer än 15 teman inkluderande ljust, mörkt och AMOLED. Fler teman kommer!
 
-MINIMALIST
-Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+MINIMALISTISKT
+Rent användargränssnitt. Visuelt minimalistiskt. Appen är även liten i filstorlek, mindre än 9MB.
 
-TUTORIAL
-Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+GUIDE
+Vet du inte hur man spelar MS RÖJ? Inga problem, spela igenom guiden och slå på Tips i inställningarna.
 
-STATISTICS
-Check your results and development.
+STATISTIK
+Håll koll på dina resultat och din utveckling.
 
-GAME ASSISTANT
-The game will automatically flag the squares you isolated. 
+HJÄLPANDE HAND
+Spelet kommer automatiskt flagga rutor som är isolerade.
 
-CUSTOMIZATION
-You can change the game to make it like you want to. 
-Example: Help, animations, haptic feedback, question mark.
+ANPASSNINGSBART
+Du kan ändra spelet så det blir som du vill ha det.
+Exempel: Hjälp, animeringar, haptiskåterkoppling, frågetecken.
 
-CONTROLS
-It supports four different control schemes. Example: flag using tap or long press.
+KONTROLLER
+Fyra olika kontrollscheman stöds. Exempel: flagga genom att trycka kort eller hålla i.
 
-ACHIEVEMENTS AND LEADERBOARDS 
-You have eight achievements to unlock and different leaderboards to share with your friends.
+UTMÄRKELSER OCH TOPLISTA
+Det finns åtta utmärkelser du kan låsa upp och olika toplistor att dela med dina vänner.
 
-ACCESSIBILITY
-You can customize this game to your needs: change the squares size, radius, touch timing, and screen reader support.
-We are always trying to improve our accessibility settings. If you miss something give us feedback!
+TILLGÄNGLIGHET
+Du kan anpassa spelet efter dina behov: ändra rutornas storlek, radie, berörings tid och skärmläsar stöd.
+Vi försöker hela tiden förbättra våra tillgänglighetsinställningar. Saknar du något? Hör av dig!
 
-ANDROID FOCUSED APP
-It supports cool Android features like split-screen, shortcuts, sharing, system theme, and always supporting the last version.
+ANDROIDFOKUSERAD APP
+Fräna funktioner i Android stöds. Som delad skärm, genvägar, delning, systemtema och den senaste versionen stöds alltid.
 
-ONLINE OR OFFLINE
-You don't need to be online to play the game!
+ONLINE ELLER OFFLINE
+Du behöver inte vara online för att kunna spela!
 
-AUTO-SAVE
-You can start a game and continue it later! It will auto-save your game.
+AUTOSPARNING
+Du kan starta ett spel och fortsätta senare! Ditt spel autosparas.
 
-Enjoy.
+Ha kul!
