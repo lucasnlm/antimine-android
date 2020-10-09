@@ -29,9 +29,11 @@ class CloudStorage : ICloudStorage {
             }
     }
 
-    suspend fun getSave(playId: String): CloudSave {
-        try {
-            GlobalScope.launch {
+    @Suppress("BlockingMethodInNonBlockingContext")
+    suspend fun getSave(playId: String): CloudSave? {
+        var cloudSave: CloudSave? = null
+        GlobalScope.launch {
+            try {
                 withContext(Dispatchers.IO) {
                     val result = Tasks.await(
                         db.collection(SAVES)
@@ -40,13 +42,14 @@ class CloudStorage : ICloudStorage {
                     )
 
                     result.data?.let {
-                        cloudSaveOf(playId, it.toMap())
+                        cloudSave = cloudSaveOf(playId, it.toMap())
                     }
                 }
+            } catch (e: Exception) {
+                Log.e(TAG, "Fail to load save on cloud", e)
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "Fail to load save on cloud", e)
         }
+        return cloudSave
     }
 
     companion object {
