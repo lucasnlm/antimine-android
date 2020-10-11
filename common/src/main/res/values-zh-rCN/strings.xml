@@ -95,6 +95,7 @@
     <string name="translation">翻译</string>
     <string name="licenses">许可证</string>
     <string name="google_play_games">Google Play 游戏</string>
+    <string name="loading">启动中…</string>
     <string name="connect">连接</string>
     <string name="connecting">正在连接…</string>
     <string name="disconnect">断开</string>

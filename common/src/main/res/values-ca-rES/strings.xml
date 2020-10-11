@@ -95,6 +95,7 @@
     <string name="translation">Traduccions</string>
     <string name="licenses">Llicències</string>
     <string name="google_play_games">Google Play Jocs</string>
+    <string name="loading">Carregant…</string>
     <string name="connect">Connectar</string>
     <string name="connecting">Connectant…</string>
     <string name="disconnect">Desconnectar</string>

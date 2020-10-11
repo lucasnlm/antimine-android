@@ -2,9 +2,6 @@ package dev.lucasnlm.external.model
 
 data class CloudSave(
     val playId: String,
-    val lastWidth: Int,
-    val lastHeight: Int,
-    val lastMines: Int,
     val completeTutorial: Int,
     val selectedTheme: Int,
     val squareRadius: Int,
@@ -15,13 +12,12 @@ data class CloudSave(
     val help: Int,
     val hapticFeedback: Int,
     val soundEffects: Int,
-    val stats: List<Map<String, String>>
+    val stats: List<HashMap<String, String>>,
+    val premiumFeatures: Int,
+    val controlStyle: Int,
 )
 
 fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
-    "lastWidth" to lastWidth,
-    "lastHeight" to lastHeight,
-    "lastMines" to lastMines,
     "completeTutorial" to completeTutorial,
     "selectedTheme" to selectedTheme,
     "squareRadius" to squareRadius,
@@ -33,15 +29,14 @@ fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
     "hapticFeedback" to hapticFeedback,
     "soundEffects" to soundEffects,
     "stats" to stats,
+    "premiumFeatures" to premiumFeatures,
+    "controlStyle" to controlStyle,
 )
 
 @Suppress("UNCHECKED_CAST")
 fun cloudSaveOf(id: String, data: Map<String, Any>) =
     CloudSave(
         id,
-        data["lastWidth"].toString().toInt(),
-        data["lastHeight"].toString().toInt(),
-        data["lastMines"].toString().toInt(),
         data["completeTutorial"].toString().toInt(),
         data["selectedTheme"].toString().toInt(),
         data["squareRadius"].toString().toInt(),
@@ -52,6 +47,8 @@ fun cloudSaveOf(id: String, data: Map<String, Any>) =
         data["help"].toString().toInt(),
         data["hapticFeedback"].toString().toInt(),
         data["soundEffects"].toString().toInt(),
-        data["stats"] as List<Map<String, String>>,
+        data["stats"] as List<HashMap<String, String>>,
+        data["premiumFeatures"].toString().toInt(),
+        data["controlStyle"].toString().toInt(),
 )
 

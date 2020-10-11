@@ -95,6 +95,7 @@
     <string name="translation">Terjemahan</string>
     <string name="licenses">Lisensi</string>
     <string name="google_play_games">Google Play Games</string>
+    <string name="loading">Memuat…</string>
     <string name="connect">Menyambungkan</string>
     <string name="connecting">Menghubungkan…</string>
     <string name="disconnect">Terputus</string>

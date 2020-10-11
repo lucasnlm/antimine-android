@@ -25,8 +25,10 @@ enum class Leaderboard(
 }
 
 interface IPlayGamesManager {
+    fun playerId(): String?
     fun hasGooglePlayGames(): Boolean
-    fun silentLogin(activity: Activity)
+    fun silentLogin()
+    fun showPlayPopUp(activity: Activity)
     fun getLoginIntent(): Intent?
     fun handleLoginResult(data: Intent?)
     fun isLogged(): Boolean

@@ -95,6 +95,7 @@
     <string name="translation">Oversættelser</string>
     <string name="licenses">Licenser</string>
     <string name="google_play_games">Google Play Spil</string>
+    <string name="loading">Indlæser…</string>
     <string name="connect">Tilslut</string>
     <string name="connecting">Tilslutter…</string>
     <string name="disconnect">Afbryd</string>

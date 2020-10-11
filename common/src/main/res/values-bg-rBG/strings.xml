@@ -95,6 +95,7 @@
     <string name="translation">Превод</string>
     <string name="licenses">Лицензи</string>
     <string name="google_play_games">Google Play Games</string>
+    <string name="loading">Зареждане…</string>
     <string name="connect">Свързване</string>
     <string name="connecting">Свързване…</string>
     <string name="disconnect">Прекъсване</string>

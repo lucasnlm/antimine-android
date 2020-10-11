@@ -95,6 +95,7 @@
     <string name="translation">Dịch thuật</string>
     <string name="licenses">Giấy phép</string>
     <string name="google_play_games">Google Play Trò chơi</string>
+    <string name="loading">Đang tải…</string>
     <string name="connect">Kết nối</string>
     <string name="connecting">Đang kết nối…</string>
     <string name="disconnect">Ngừng kết nối</string>

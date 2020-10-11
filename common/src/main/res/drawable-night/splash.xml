@@ -2,12 +2,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#ff212121" />
+            <solid android:color="@color/launcher_background_night" />
         </shape>
     </item>
-    <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@drawable/splash_image" />
-    </item>
+    <item android:gravity="center" android:drawable="@drawable/new_splash"/>
 </layer-list>

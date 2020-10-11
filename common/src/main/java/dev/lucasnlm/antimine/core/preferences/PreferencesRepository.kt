@@ -48,11 +48,23 @@ class PreferencesRepository(
     override fun useFlagAssistant(): Boolean =
         preferencesManager.getBoolean(PREFERENCE_ASSISTANT, true)
 
+    override fun setFlagAssistant(value: Boolean) {
+        preferencesManager.putBoolean(PREFERENCE_ASSISTANT, value)
+    }
+
     override fun useHapticFeedback(): Boolean =
         preferencesManager.getBoolean(PREFERENCE_VIBRATION, true)
 
-    override fun areaSizeMultiplier(): Int =
+    override fun setHapticFeedback(value: Boolean) {
+        preferencesManager.putBoolean(PREFERENCE_VIBRATION, value)
+    }
+
+    override fun squareSizeMultiplier(): Int =
         preferencesManager.getInt(PREFERENCE_AREA_SIZE, 50)
+
+    override fun setSquareMultiplier(value: Int) {
+        preferencesManager.putInt(PREFERENCE_AREA_SIZE, value)
+    }
 
     override fun useAnimations(): Boolean =
         preferencesManager.getBoolean(PREFERENCE_ANIMATION, true)
@@ -60,8 +72,23 @@ class PreferencesRepository(
     override fun useQuestionMark(): Boolean =
         preferencesManager.getBoolean(PREFERENCE_QUESTION_MARK, false)
 
+    override fun setQuestionMark(value: Boolean) {
+        preferencesManager.putBoolean(PREFERENCE_QUESTION_MARK, value)
+    }
+
     override fun isSoundEffectsEnabled(): Boolean =
         preferencesManager.getBoolean(PREFERENCE_SOUND_EFFECTS, false)
+
+    override fun setSoundEffectsEnabled(value: Boolean) {
+        preferencesManager.putBoolean(PREFERENCE_SOUND_EFFECTS, value)
+    }
+
+    override fun shouldMigrateFromCloud(): Boolean =
+        preferencesManager.getBoolean(PREFERENCE_SHOULD_MIGRATE_FROM_CLOUD, true)
+
+    override fun setMigrateFromCloud(value: Boolean) {
+        preferencesManager.putBoolean(PREFERENCE_SHOULD_MIGRATE_FROM_CLOUD, value)
+    }
 
     override fun showWindowsWhenFinishGame(): Boolean =
         preferencesManager.getBoolean(PREFERENCE_SHOW_WINDOWS, true)
@@ -92,6 +119,10 @@ class PreferencesRepository(
 
     override fun customLongPressTimeout(): Long =
         preferencesManager.getInt(PREFERENCE_LONG_PRESS_TIMEOUT, ViewConfiguration.getLongPressTimeout()).toLong()
+
+    override fun setCustomLongPressTimeout(value: Long) {
+        preferencesManager.putInt(PREFERENCE_LONG_PRESS_TIMEOUT, value.toInt())
+    }
 
     override fun themeId(): Long =
         preferencesManager.getInt(PREFERENCE_CUSTOM_THEME, 0).toLong()
@@ -195,8 +226,16 @@ class PreferencesRepository(
         return preferencesManager.getBoolean(PREFERENCE_USE_HELP, false)
     }
 
+    override fun setHelp(value: Boolean) {
+        preferencesManager.putBoolean(PREFERENCE_USE_HELP, value)
+    }
+
     override fun squareRadius(): Int {
         return preferencesManager.getInt(PREFERENCE_SQUARE_RADIUS, 2)
+    }
+
+    override fun setSquareRadius(value: Int) {
+        preferencesManager.putInt(PREFERENCE_SQUARE_RADIUS, value)
     }
 
     override fun getTips(): Int {
@@ -252,5 +291,6 @@ class PreferencesRepository(
         private const val PREFERENCE_EXTRA_TIPS = "preference_extra_tips"
         private const val PREFERENCE_SHOW_WINDOWS = "preference_show_windows"
         private const val PREFERENCE_USE_OPEN_SWITCH_CONTROL = "preference_use_open_switch_control"
+        private const val PREFERENCE_SHOULD_MIGRATE_FROM_CLOUD = "preference_should_migrate_from_cloud"
     }
 }

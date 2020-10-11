@@ -7,9 +7,15 @@ import android.content.Intent
 class PlayGamesManager(
     context: Context,
 ) : IPlayGamesManager {
+    override fun playerId(): String? = null
+
     override fun hasGooglePlayGames(): Boolean = false
 
-    override fun silentLogin(activity: Activity) {
+    override fun silentLogin() {
+        // F-droid build doesn't have Google Play Games
+    }
+
+    override fun showPlayPopUp(activity: Activity) {
         // F-droid build doesn't have Google Play Games
     }
 

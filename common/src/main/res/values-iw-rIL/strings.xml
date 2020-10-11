@@ -95,6 +95,7 @@
     <string name="translation">תרגומים</string>
     <string name="licenses">רשיונות</string>
     <string name="google_play_games">Google Play Games</string>
+    <string name="loading">טוען…</string>
     <string name="connect">התחבר</string>
     <string name="connecting">מתחבר…</string>
     <string name="disconnect">נתק</string>

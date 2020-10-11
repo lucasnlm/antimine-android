@@ -65,7 +65,7 @@
     <string name="open_areas">Odkryte pola</string>
     <string name="total_time">Całkowity czas gry</string>
     <string name="average_time">Średni czas gry</string>
-    <string name="shortest_time">Najkrótszy czas gry</string>
+    <string name="shortest_time">Najlepszy czas gry</string>
     <string name="performance">Skuteczność</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Używaj Znaku zapytania</string>
@@ -95,6 +95,7 @@
     <string name="translation">Tłumaczenie</string>
     <string name="licenses">Licencje</string>
     <string name="google_play_games">Gry Google Play</string>
+    <string name="loading">Wczytywanie…</string>
     <string name="connect">Połącz</string>
     <string name="connecting">Łączenie…</string>
     <string name="disconnect">Rozłącz</string>

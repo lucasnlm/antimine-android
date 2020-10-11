@@ -95,6 +95,7 @@
     <string name="translation">Çeviri</string>
     <string name="licenses">Lisanslar</string>
     <string name="google_play_games">Google Play Oyunlar</string>
+    <string name="loading">Yükleniyor…</string>
     <string name="connect">Bağlan</string>
     <string name="connecting">Bağlanıyor…</string>
     <string name="disconnect">Bağlantıyı kes</string>

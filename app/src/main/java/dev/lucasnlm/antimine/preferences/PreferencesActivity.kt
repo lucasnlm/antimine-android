@@ -8,6 +8,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
+import dev.lucasnlm.antimine.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import org.koin.android.ext.android.inject
 
@@ -16,6 +17,8 @@ class PreferencesActivity :
     SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val preferenceRepository: IPreferencesRepository by inject()
+
+    private val cloudSaveManager by inject<CloudSaveManager>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,8 @@ class PreferencesActivity :
 
     override fun onDestroy() {
         super.onDestroy()
+
+        cloudSaveManager.uploadSave()
 
         PreferenceManager.getDefaultSharedPreferences(this)
             .unregisterOnSharedPreferenceChangeListener(this)

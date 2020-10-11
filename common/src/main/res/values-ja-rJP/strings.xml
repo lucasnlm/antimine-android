@@ -95,6 +95,7 @@
     <string name="translation">翻訳</string>
     <string name="licenses">ライセンス</string>
     <string name="google_play_games">Google Play ゲーム</string>
+    <string name="loading">読み込み中…</string>
     <string name="connect">接続</string>
     <string name="connecting">接続しています...</string>
     <string name="disconnect">切断</string>

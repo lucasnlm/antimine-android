@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine.common.level.database.models
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import dev.lucasnlm.external.model.CloudSave
 
 @Entity
 data class Stats(
@@ -26,4 +27,14 @@ data class Stats(
 
     @ColumnInfo(name = "openArea")
     val openArea: Int,
+)
+
+fun Stats.toHashMap(): HashMap<String, String> = hashMapOf(
+    "uid" to uid.toString(),
+    "duration" to duration.toString(),
+    "mines" to mines.toString(),
+    "victory" to victory.toString(),
+    "width" to width.toString(),
+    "height" to height.toString(),
+    "openArea" to openArea.toString(),
 )

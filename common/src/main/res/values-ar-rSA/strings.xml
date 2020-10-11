@@ -95,6 +95,7 @@
     <string name="translation">الترجمة</string>
     <string name="licenses">التراخيص</string>
     <string name="google_play_games">ألعاب Google Play</string>
+    <string name="loading">جاري التحميل…</string>
     <string name="connect">الاتصال</string>
     <string name="connecting">جاري الاتصال…</string>
     <string name="disconnect">قطع الاتصال</string>

@@ -95,6 +95,7 @@
     <string name="translation">Fordítás</string>
     <string name="licenses">Licencek</string>
     <string name="google_play_games">Google Play Játékok</string>
+    <string name="loading">Betöltés…</string>
     <string name="connect">Csatlakozás</string>
     <string name="connecting">Csatlakozás…</string>
     <string name="disconnect">Lecsatlakozás</string>

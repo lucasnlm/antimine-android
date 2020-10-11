@@ -10,6 +10,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.games.Games
+import com.google.android.gms.tasks.Tasks
 
 class PlayGamesManager(
     private val context: Context,
@@ -17,28 +18,33 @@ class PlayGamesManager(
     private var account: GoogleSignInAccount? = null
 
     private fun setupPopUp(activity: Activity, account: GoogleSignInAccount) {
-        Games.getGamesClient(context, account).setViewForPopups(activity.findViewById(android.R.id.content))
-        Games.getGamesClient(context, account).setGravityForPopups(Gravity.TOP or Gravity.END)
+        Games.getGamesClient(context, account)
+            .setViewForPopups(activity.findViewById(android.R.id.content))
+        Games.getGamesClient(context, account)
+            .setGravityForPopups(Gravity.TOP or Gravity.END)
+    }
+
+    override fun playerId(): String? {
+        return account?.let {
+            Tasks.await(Games.getPlayersClient(context, it).currentPlayerId)
+        }
+    }
+
+    override fun showPlayPopUp(activity: Activity) {
+        if (!activity.isFinishing) {
+            account?.let {
+                setupPopUp(activity, it)
+            }
+        }
     }
 
     override fun hasGooglePlayGames(): Boolean = true
 
-    override fun silentLogin(activity: Activity) {
+    override fun silentLogin() {
         val signInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build()
         val lastAccount: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(context)
 
-        if (lastAccount != null) {
-            account = lastAccount.also { setupPopUp(activity, it) }
-        } else {
-            GoogleSignIn
-                .getClient(context, signInOptions)
-                .silentSignIn()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        account = task.result?.also { setupPopUp(activity, it) }
-                    }
-                }
-        }
+        account = lastAccount ?: Tasks.await(GoogleSignIn.getClient(context, signInOptions).silentSignIn())
     }
 
     override fun getLoginIntent(): Intent? {
