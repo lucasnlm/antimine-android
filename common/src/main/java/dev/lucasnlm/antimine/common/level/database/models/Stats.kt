@@ -27,3 +27,13 @@ data class Stats(
     @ColumnInfo(name = "openArea")
     val openArea: Int,
 )
+
+fun Stats.toHashMap(): HashMap<String, String> = hashMapOf(
+    "uid" to uid.toString(),
+    "duration" to duration.toString(),
+    "mines" to mines.toString(),
+    "victory" to victory.toString(),
+    "width" to width.toString(),
+    "height" to height.toString(),
+    "openArea" to openArea.toString(),
+)

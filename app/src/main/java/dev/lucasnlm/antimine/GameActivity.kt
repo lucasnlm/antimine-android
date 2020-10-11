@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
@@ -23,6 +24,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.about.AboutActivity
+import dev.lucasnlm.antimine.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.models.Score
@@ -58,10 +60,12 @@ import kotlinx.android.synthetic.main.activity_tv_game.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.lang.Exception
 
 class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
     private val billingManager: IBillingManager by inject()
@@ -82,6 +86,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     val gameViewModel by viewModel<GameViewModel>()
 
+    private val cloudSaveManager by inject<CloudSaveManager>()
+
     override val noActionBar: Boolean = true
 
     private var status: Status = Status.PreGame
@@ -91,7 +97,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private var currentTime: Long = 0
     private var currentSaveId: Long = 0
 
-    private val areaSizeMultiplier by lazy { preferencesRepository.areaSizeMultiplier() }
+    private val areaSizeMultiplier by lazy { preferencesRepository.squareSizeMultiplier() }
     private val currentRadius by lazy { preferencesRepository.squareRadius() }
     private val useHelp by lazy { preferencesRepository.useHelp() }
 
@@ -102,6 +108,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         bindViewModel()
+        bindPlayGames()
         bindToolbar()
         bindDrawer()
         bindNavigationMenu()
@@ -119,6 +126,22 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
 
         onOpenAppActions()
+    }
+
+    private fun bindPlayGames() {
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                silentGooglePlayLogin()
+            }
+
+            withContext(Dispatchers.Main) {
+                if (!isFinishing) {
+                    invalidateOptionsMenu()
+                }
+            }
+
+            playGamesManager.showPlayPopUp(this@GameActivity)
+        }
     }
 
     private fun bindViewModel() = gameViewModel.apply {
@@ -222,7 +245,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 analyticsManager.sentEvent(Analytics.Resume)
             }
 
-            silentGooglePlayLogin()
             refreshAds()
         }
     }
@@ -711,6 +733,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 analyticsManager.sentEvent(Analytics.TutorialCompleted)
                 preferencesRepository.completeTutorial()
                 showCompletedTutorialDialog()
+                cloudSaveManager.uploadSave()
             }
             Event.Victory -> {
                 val isResuming = (status == Status.PreGame)
@@ -727,6 +750,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 keepScreenOn(false)
 
                 if (!isResuming) {
+                    cloudSaveManager.uploadSave()
                     gameViewModel.addNewTip()
 
                     waitAndShowEndGameAlert(
@@ -748,6 +772,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 gameViewModel.stopClock()
 
                 if (!isResuming) {
+                    cloudSaveManager.uploadSave()
                     GlobalScope.launch(context = Dispatchers.Main) {
                         gameViewModel.gameOver(isResuming)
                         waitAndShowEndGameAlert(
@@ -767,7 +792,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
      */
     private fun restartIfNeed(): Boolean {
         return (
-            areaSizeMultiplier != preferencesRepository.areaSizeMultiplier() ||
+            areaSizeMultiplier != preferencesRepository.squareSizeMultiplier() ||
                 currentRadius != preferencesRepository.squareRadius() ||
                 useHelp != preferencesRepository.useHelp()
             ).also {
@@ -853,8 +878,11 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun silentGooglePlayLogin() {
         if (playGamesManager.hasGooglePlayGames()) {
-            playGamesManager.silentLogin(this)
-            invalidateOptionsMenu()
+            try {
+                playGamesManager.silentLogin()
+            } catch (e: Exception) {
+                Log.e(TAG, "User not logged in Play Games")
+            }
         }
     }
 
@@ -871,9 +899,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun openCrowdIn() {
-        Intent(Intent.ACTION_VIEW, Uri.parse("https://crowdin.com/project/antimine-android")).let {
-            startActivity(it)
-        }
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://crowdin.com/project/antimine-android")))
     }
 
     private fun showSupportAppDialog() {
@@ -900,6 +926,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     companion object {
+        val TAG = GameActivity::class.simpleName
         const val GOOGLE_PLAY_REQUEST_CODE = 6
 
         const val MIN_USAGES_TO_IAP = 5

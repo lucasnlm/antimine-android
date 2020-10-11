@@ -21,4 +21,6 @@
 
     <color name="view_cover">#171717</color>
     <color name="view_clean">#ff424242</color>
+
+    <color name="splash_text_color">#FFFFFF</color>
 </resources>

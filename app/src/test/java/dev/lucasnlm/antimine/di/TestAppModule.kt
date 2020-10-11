@@ -38,9 +38,13 @@ val AppModule = module {
 
     single {
         object : IPlayGamesManager {
+            override fun playerId(): String? = null
+
             override fun hasGooglePlayGames(): Boolean = false
 
-            override fun silentLogin(activity: Activity) { }
+            override fun silentLogin() { }
+
+            override fun showPlayPopUp(activity: Activity) { }
 
             override fun getLoginIntent(): Intent? = null
 

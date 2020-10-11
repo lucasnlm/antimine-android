@@ -95,6 +95,7 @@
     <string name="translation">Käännökset</string>
     <string name="licenses">Lisenssit</string>
     <string name="google_play_games">Google Play Pelit</string>
+    <string name="loading">Ladataan…</string>
     <string name="connect">Yhdistä</string>
     <string name="connecting">Yhdistetään…</string>
     <string name="disconnect">Katkaise yhteys</string>

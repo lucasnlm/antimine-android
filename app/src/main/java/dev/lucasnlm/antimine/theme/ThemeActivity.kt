@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ThematicActivity
+import dev.lucasnlm.antimine.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
@@ -24,6 +25,8 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
     private val dimensionRepository: IDimensionRepository by inject()
 
     private val themeViewModel by viewModel<ThemeViewModel>()
+
+    private val cloudSaveManager by inject<CloudSaveManager>()
 
     private val preferencesRepository: IPreferencesRepository by inject()
 
@@ -62,6 +65,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 themeViewModel.observeState().collect {
                     if (usingTheme.id != it.current.id) {
                         recreate()
+                        cloudSaveManager.uploadSave()
                     }
                 }
             }

@@ -95,6 +95,7 @@
     <string name="translation">Μετάφραση</string>
     <string name="licenses">Άδειες</string>
     <string name="google_play_games">Google Play Games</string>
+    <string name="loading">Φόρτωση…</string>
     <string name="connect">Σύνδεση</string>
     <string name="connecting">Σύνδεση…</string>
     <string name="disconnect">Αποσύνδεση</string>

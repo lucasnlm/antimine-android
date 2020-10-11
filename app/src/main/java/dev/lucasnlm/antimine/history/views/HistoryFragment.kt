@@ -28,8 +28,10 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
             historyViewModel.sendEvent(HistoryEvent.LoadAllSaves)
 
             historyViewModel.observeState().collect {
-                if (it.saveList.isEmpty()) {
-                    empty.visibility = View.GONE
+                empty.visibility = if (it.saveList.isEmpty()) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
                 }
 
                 saveHistory.apply {

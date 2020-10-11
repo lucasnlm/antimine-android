@@ -313,6 +313,9 @@ open class GameViewModel(
             ActionResponse.OpenNeighbors -> {
                 analyticsManager.sentEvent(Analytics.OpenNeighbors(index))
             }
+            ActionResponse.OpenOrMark -> {
+                analyticsManager.sentEvent(Analytics.OpenOrFlagTile(index))
+            }
         }
     }
 
@@ -535,7 +538,7 @@ open class GameViewModel(
 
     fun getAppTheme(): AppTheme = themeRepository.getTheme()
 
-    private fun getAreaSizeMultiplier() = preferencesRepository.areaSizeMultiplier()
+    private fun getAreaSizeMultiplier() = preferencesRepository.squareSizeMultiplier()
 
     private fun refreshField() {
         field.postValue(gameController.field())

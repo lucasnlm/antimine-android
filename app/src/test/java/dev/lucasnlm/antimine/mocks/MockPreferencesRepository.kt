@@ -31,6 +31,8 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun customLongPressTimeout(): Long = 400L
 
+    override fun setCustomLongPressTimeout(value: Long) { }
+
     override fun themeId(): Long = 1L
 
     override fun useTheme(themeId: Long) { }
@@ -63,7 +65,11 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun useHelp(): Boolean = false
 
+    override fun setHelp(value: Boolean) { }
+
     override fun squareRadius(): Int = 2
+
+    override fun setSquareRadius(value: Int) { }
 
     override fun getTips(): Int = 0
 
@@ -79,15 +85,29 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun useFlagAssistant(): Boolean = false
 
+    override fun setFlagAssistant(value: Boolean) { }
+
     override fun useHapticFeedback(): Boolean = true
 
-    override fun areaSizeMultiplier(): Int = 50
+    override fun setHapticFeedback(value: Boolean) { }
+
+    override fun squareSizeMultiplier(): Int = 50
+
+    override fun setSquareMultiplier(value: Int) { }
 
     override fun useAnimations(): Boolean = false
 
     override fun useQuestionMark(): Boolean = false
 
+    override fun setQuestionMark(value: Boolean) { }
+
     override fun isSoundEffectsEnabled(): Boolean = false
+
+    override fun setSoundEffectsEnabled(value: Boolean) { }
+
+    override fun shouldMigrateFromCloud(): Boolean = false
+
+    override fun setMigrateFromCloud(value: Boolean) { }
 
     override fun showWindowsWhenFinishGame(): Boolean = true
 }
