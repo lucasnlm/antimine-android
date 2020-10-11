@@ -4,10 +4,8 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
-import androidx.core.content.ContextCompat
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
-import androidx.core.text.color
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager

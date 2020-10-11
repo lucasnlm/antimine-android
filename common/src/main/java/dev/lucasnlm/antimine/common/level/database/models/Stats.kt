@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.common.level.database.models
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import dev.lucasnlm.external.model.CloudSave
 
 @Entity
 data class Stats(

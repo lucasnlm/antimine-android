@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.core.preferences
 
 import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.core.control.ControlStyle
-import dev.lucasnlm.external.model.CloudSave
 
 interface IPreferencesRepository {
     fun hasCustomizations(): Boolean

@@ -50,5 +50,4 @@ fun cloudSaveOf(id: String, data: Map<String, Any>) =
         data["stats"] as List<HashMap<String, String>>,
         data["premiumFeatures"].toString().toInt(),
         data["controlStyle"].toString().toInt(),
-)
-
+    )
