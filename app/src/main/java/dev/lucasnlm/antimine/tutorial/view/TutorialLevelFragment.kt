@@ -87,7 +87,7 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
                             .forEach {
                                 when (it) {
                                     flagAction, openAction -> {
-                                        bold { color(ContextCompat.getColor(context, R.color.accent)) { append(it) } }
+                                        bold { append(it) }
                                     }
                                     else -> append(it)
                                 }
@@ -109,7 +109,7 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
                             .forEach {
                                 when (it) {
                                     flagAction, openAction -> {
-                                        bold { color(ContextCompat.getColor(context, R.color.accent)) { append(it) } }
+                                        bold { append(it) }
                                     }
                                     else -> append(it)
                                 }
