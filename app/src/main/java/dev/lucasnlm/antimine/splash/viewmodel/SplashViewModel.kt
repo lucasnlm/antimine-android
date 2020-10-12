@@ -73,6 +73,8 @@ class SplashViewModel(
             } catch (e: Exception) {
                 null
             }
+        }.distinctBy {
+            it.uid
         }.forEach {
             statsRepository.addStats(it)
         }
