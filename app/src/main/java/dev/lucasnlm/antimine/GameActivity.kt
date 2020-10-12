@@ -750,7 +750,13 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 keepScreenOn(false)
 
                 if (!isResuming) {
+                    lifecycleScope.launch {
+                        gameViewModel.saveGame()
+                        gameViewModel.saveStats()
+                    }
+
                     cloudSaveManager.uploadSave()
+
                     gameViewModel.addNewTip()
 
                     waitAndShowEndGameAlert(
@@ -773,8 +779,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
                 if (!isResuming) {
                     cloudSaveManager.uploadSave()
-                    GlobalScope.launch(context = Dispatchers.Main) {
+                    lifecycleScope.launch {
                         gameViewModel.gameOver(isResuming)
+                        gameViewModel.saveGame()
+                        gameViewModel.saveStats()
                         waitAndShowEndGameAlert(
                             victory = false,
                             await = true

@@ -234,7 +234,7 @@ open class GameViewModel(
         }
     }
 
-    private suspend fun saveStats() {
+    suspend fun saveStats() {
         if (initialized) {
             gameController.let {
                 if (it.hasMines()) {
@@ -466,9 +466,6 @@ open class GameViewModel(
         }
 
         viewModelScope.launch {
-            saveStats()
-            saveGame()
-
             checkVictoryAchievements()
         }
     }
