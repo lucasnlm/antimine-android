@@ -64,7 +64,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
                 }
 
                 val unlockMessage = context.getString(R.string.try_it)
-                setNeutralButton("$unlockMessage \uD83C\uDF9E️") { _, _ ->
+                setPositiveButton("$unlockMessage \uD83C\uDF9E️") { _, _ ->
                     activity?.let {
                         if (!it.isFinishing) {
                             adsManager.requestRewarded(
