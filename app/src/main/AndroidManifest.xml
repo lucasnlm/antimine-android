@@ -44,24 +44,6 @@
             android:name="dev.lucasnlm.antimine.splash.SplashActivity"
             android:theme="@style/Theme.Splash">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
-        </activity>
-
-        <activity
-            android:name="dev.lucasnlm.antimine.GameActivity"
-            android:launchMode="singleTop"
-            android:saveEnabled="false"
-            android:icon="@mipmap/ic_launcher"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:theme="@style/AppTheme.NoActionBar">
-
             <tools:validation testUrl="https://www.lucasnlm.dev/antimine" />
             <tools:validation testUrl="http://www.lucasnlm.dev/antimine" />
             <tools:validation testUrl="https://www.lucasnlm.dev/" />
@@ -71,23 +53,10 @@
                 android:name="default-url"
                 android:value="https://www.lucasnlm.dev/antimine" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="new-game"
-                    android:scheme="antimine" />
-
-                <data
-                    android:host="load-game"
-                    android:scheme="antimine" />
-
-                <data
-                    android:host="retry-game"
-                    android:scheme="antimine" />
+            <intent-filter
+                android:order="0">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
             <intent-filter
@@ -113,6 +82,38 @@
                 <data
                     android:host="www.lucasnlm.dev"
                     android:path="/antimine" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+
+        <activity
+            android:name="dev.lucasnlm.antimine.GameActivity"
+            android:launchMode="singleTop"
+            android:saveEnabled="false"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="new-game"
+                    android:scheme="antimine" />
+
+                <data
+                    android:host="load-game"
+                    android:scheme="antimine" />
+
+                <data
+                    android:host="retry-game"
+                    android:scheme="antimine" />
             </intent-filter>
         </activity>
 
