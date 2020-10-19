@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.splash.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
@@ -42,22 +43,24 @@ class SplashViewModel(
     }
 
     private suspend fun loadCloudSave(cloudSave: CloudSave) = with(cloudSave) {
-        if (cloudSave.completeTutorial == 1) {
-            preferencesRepository.completeTutorial()
-        }
+        preferencesRepository.apply {
+            if (cloudSave.completeTutorial == 1) {
+                completeTutorial()
+            }
 
-        preferencesRepository.completeFirstUse()
-        preferencesRepository.useTheme(cloudSave.selectedTheme.toLong())
-        preferencesRepository.setSquareRadius(cloudSave.squareRadius)
-        preferencesRepository.setSquareMultiplier(cloudSave.squareSize)
-        preferencesRepository.setCustomLongPressTimeout(cloudSave.touchTiming.toLong())
-        preferencesRepository.setQuestionMark(cloudSave.questionMark != 0)
-        preferencesRepository.setFlagAssistant(gameAssistance != 0)
-        preferencesRepository.setHapticFeedback(hapticFeedback != 0)
-        preferencesRepository.setHelp(help != 0)
-        preferencesRepository.setSoundEffectsEnabled(soundEffects != 0)
-        preferencesRepository.setPremiumFeatures(cloudSave.premiumFeatures != 0)
-        preferencesRepository.useControlStyle(ControlStyle.values()[cloudSave.controlStyle])
+            completeFirstUse()
+            useTheme(cloudSave.selectedTheme.toLong())
+            setSquareRadius(cloudSave.squareRadius)
+            setSquareMultiplier(cloudSave.squareSize)
+            setCustomLongPressTimeout(cloudSave.touchTiming.toLong())
+            setQuestionMark(cloudSave.questionMark != 0)
+            setFlagAssistant(gameAssistance != 0)
+            setHapticFeedback(hapticFeedback != 0)
+            setHelp(help != 0)
+            setSoundEffectsEnabled(soundEffects != 0)
+            setPremiumFeatures(cloudSave.premiumFeatures != 0)
+            useControlStyle(ControlStyle.values()[cloudSave.controlStyle])
+        }
 
         cloudSave.stats.mapNotNull {
             try {
@@ -75,10 +78,18 @@ class SplashViewModel(
             }
         }.distinctBy {
             it.uid
-        }.forEach {
-            statsRepository.addStats(it)
+        }.also {
+            try {
+                statsRepository.addAllStats(it)
+            } catch (e: Exception) {
+                Log.e(TAG, "Fail to insert stats on DB")
+            }
         }
 
         preferencesRepository.setMigrateFromCloud(false)
+    }
+
+    companion object {
+        val TAG = SplashViewModel::class.simpleName
     }
 }
