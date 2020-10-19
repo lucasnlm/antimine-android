@@ -28,27 +28,30 @@ class CloudSaveManager(
     }
 
     private suspend fun getCloudSave(): CloudSave? {
-        val minId = preferencesRepository.getStatsBase()
-
-        return playGamesManager.playerId()?.let { playerId ->
-            CloudSave(
-                playId = playerId,
-                completeTutorial = if (preferencesRepository.isTutorialCompleted()) 1 else 0,
-                selectedTheme = if (preferencesRepository.isPremiumEnabled()) 3.coerceAtLeast(
-                    preferencesRepository.themeId().toInt()
-                ) else 0,
-                squareRadius = preferencesRepository.squareRadius(),
-                squareSize = preferencesRepository.squareSizeMultiplier(),
-                touchTiming = preferencesRepository.customLongPressTimeout().toInt(),
-                questionMark = if (preferencesRepository.useQuestionMark()) 1 else 0,
-                gameAssistance = if (preferencesRepository.useFlagAssistant()) 1 else 0,
-                help = if (preferencesRepository.useHelp()) 1 else 0,
-                hapticFeedback = if (preferencesRepository.useHapticFeedback()) 1 else 0,
-                soundEffects = if (preferencesRepository.isSoundEffectsEnabled()) 1 else 0,
-                stats = statsRepository.getAllStats(minId).map { it.toHashMap() },
-                premiumFeatures = if (preferencesRepository.isPremiumEnabled()) 1 else 0,
-                controlStyle = preferencesRepository.controlStyle().ordinal,
-            )
+        try {
+            val minId = preferencesRepository.getStatsBase()
+            return playGamesManager.playerId()?.let { playerId ->
+                CloudSave(
+                    playId = playerId,
+                    completeTutorial = if (preferencesRepository.isTutorialCompleted()) 1 else 0,
+                    selectedTheme = if (preferencesRepository.isPremiumEnabled()) 3.coerceAtLeast(
+                        preferencesRepository.themeId().toInt()
+                    ) else 0,
+                    squareRadius = preferencesRepository.squareRadius(),
+                    squareSize = preferencesRepository.squareSizeMultiplier(),
+                    touchTiming = preferencesRepository.customLongPressTimeout().toInt(),
+                    questionMark = if (preferencesRepository.useQuestionMark()) 1 else 0,
+                    gameAssistance = if (preferencesRepository.useFlagAssistant()) 1 else 0,
+                    help = if (preferencesRepository.useHelp()) 1 else 0,
+                    hapticFeedback = if (preferencesRepository.useHapticFeedback()) 1 else 0,
+                    soundEffects = if (preferencesRepository.isSoundEffectsEnabled()) 1 else 0,
+                    stats = statsRepository.getAllStats(minId).map { it.toHashMap() },
+                    premiumFeatures = if (preferencesRepository.isPremiumEnabled()) 1 else 0,
+                    controlStyle = preferencesRepository.controlStyle().ordinal,
+                )
+            }
+        } catch (e: Exception) {
+            return null
         }
     }
 }

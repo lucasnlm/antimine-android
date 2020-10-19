@@ -782,7 +782,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     lifecycleScope.launch {
                         gameViewModel.gameOver(isResuming)
                         gameViewModel.saveGame()
-                        gameViewModel.saveStats()
                         waitAndShowEndGameAlert(
                             victory = false,
                             await = true

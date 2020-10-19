@@ -58,6 +58,8 @@ class StatsViewModel(
                 it.mines == 40 && it.width == 16 && it.height == 16
             }.filterNot {
                 it.mines == 10 && it.width == 9 && it.height == 9
+            }.filterNot {
+                it.width == standardSize.width && it.height == standardSize.height
             }.fold().copy(title = R.string.custom),
         ).filter {
             it.totalGames > 0
