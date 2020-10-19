@@ -59,12 +59,8 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
             setView(view)
 
             if (isInstantMode) {
-                setNeutralButton(R.string.no) { _, _ ->
-                    analyticsManager.sentEvent(Analytics.DenyIapDialog)
-                }
-
                 val unlockMessage = context.getString(R.string.try_it)
-                setPositiveButton("$unlockMessage \uD83C\uDF9E️") { _, _ ->
+                setNeutralButton("$unlockMessage \uD83C\uDF9E️") { _, _ ->
                     activity?.let {
                         if (!it.isFinishing) {
                             adsManager.requestRewarded(
@@ -80,6 +76,14 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
                                 }
                             )
                         }
+                    }
+                }
+
+                setPositiveButton(R.string.unlock_all) { _, _ ->
+                    lifecycleScope.launch {
+                        preferenceRepository.setShowSupport(false)
+                        analyticsManager.sentEvent(Analytics.UnlockIapDialog)
+                        billingManager.charge(requireActivity())
                     }
                 }
             } else {
