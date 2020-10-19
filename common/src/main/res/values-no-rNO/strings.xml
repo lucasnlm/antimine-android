@@ -75,7 +75,7 @@
     <string name="double_click">Dobbeltklikk</string>
     <string name="long_press">Lang Trykk</string>
     <string name="open_tile">Åpne</string>
-    <string name="flag_tile">Flagg</string>
+    <string name="flag_tile">Flagge</string>
     <string name="retry">Prøv på nytt</string>
     <string name="empty">Tom</string>
     <string name="cant_do_it_now">Umulig å gjøre det nå</string>
@@ -95,7 +95,7 @@
     <string name="translation">Oversettelse</string>
     <string name="licenses">Lisenser</string>
     <string name="google_play_games">Google Play Spill</string>
-    <string name="loading">Laster…</string>
+    <string name="loading">Laster inn…</string>
     <string name="connect">Koble til</string>
     <string name="connecting">Kobler til…</string>
     <string name="disconnect">Koble fra</string>

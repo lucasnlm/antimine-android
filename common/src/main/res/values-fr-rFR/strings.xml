@@ -122,7 +122,7 @@
     <string name="flag_removed">Drapeau retiré !</string>
     <string name="remove_ad">Supprimer les publicités</string>
     <string name="help">Aide</string>
-    <string name="show_windows">Show windows</string>
+    <string name="show_windows">Afficher les fenêtres</string>
     <string name="switch_control">Switch: Flag and Open</string>
     <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">Vous devez vider un tableau rectangulaire contenant des mines cachées sans en détonner.</string>
