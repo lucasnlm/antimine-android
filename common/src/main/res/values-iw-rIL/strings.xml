@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="he">
     <string name="tutorial">הדרכה</string>
-    <string name="tutorial_completed">Tutorial Completed</string>
-    <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
-    <string name="tutorial_1_top">The numbers indicates how many mines are adjacent to the highlighted square.</string>
+    <string name="tutorial_completed">תדריך הושלם</string>
+    <string name="tutorial_0_bottom">אתה יכול להתחיל ע״י %1$s בכל ריבוע רנדומלי.</string>
+    <string name="tutorial_1_top">המספרים מציינים כמה מוקשים צמודים לריבוע המודגש.</string>
     <string name="tutorial_1_bottom">Therefore, if the corner 1️⃣  has only one adjacent square, it must be a mine. %1$s to flag it.</string>
     <string name="tutorial_2_top">The next unopened square doesn\'t have a mine because the number is 1️⃣ , not 2️⃣ .</string>
     <string name="tutorial_2_bottom">You can open it by %1$s.</string>
