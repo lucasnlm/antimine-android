@@ -67,8 +67,8 @@
     <string name="average_time">Tiempo promedio</string>
     <string name="shortest_time">Tiempo Más Corto</string>
     <string name="performance">Desempeño</string>
-    <string name="ok">Vale</string>
-    <string name="use_question_mark">Usar banderas de interrogación</string>
+    <string name="ok">OK</string>
+    <string name="use_question_mark">Usar signo de interrogación</string>
     <string name="control">Controles</string>
     <string name="arrow">➞</string>
     <string name="single_click">Un clic</string>
@@ -107,7 +107,7 @@
     <string name="open_menu">Abra menú</string>
     <string name="close_menu">Cerrar menú</string>
     <string name="delete_all">Borrar todo</string>
-    <string name="themes">Tema</string>
+    <string name="themes">Temas</string>
     <string name="try_it">Pruébalo</string>
     <string name="delete_all_message">Borrar todos los eventos permanentemente.</string>
     <string name="all_mines_disabled">Todas las minas fueron desactivadas.</string>
