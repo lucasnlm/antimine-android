@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh-rCN">
     <string name="tutorial">教学模式</string>
-    <string name="tutorial_completed">已完成的教程</string>
+    <string name="tutorial_completed">教学已完成</string>
     <string name="tutorial_0_bottom">你可以在任意的正方形开始 %1$s.</string>
     <string name="tutorial_1_top">数字表明有多少地雷与高亮的正方形相邻。</string>
     <string name="tutorial_1_bottom">因此，如果角 1️⃣ 只有一个相邻的正方形，它必须是一个地雷。 %1$s 来标记它。</string>
@@ -49,7 +49,7 @@
     <string name="support_action">支持我们</string>
     <string name="rating_message">如果你喜欢这个游戏，请给我们反馈。这将对我们有很多帮助。</string>
     <string name="used_software_text">该游戏使用以下第三方软件：</string>
-    <string name="translators_text">这场游戏被以下人员翻译：</string>
+    <string name="translators_text">该游戏由以下人员翻译：</string>
     <string name="sign_in_failed">登录失败。请检查你的网络连接，然后重试。</string>
     <string name="you_won">你获胜了！</string>
     <string name="victories">胜利</string>
