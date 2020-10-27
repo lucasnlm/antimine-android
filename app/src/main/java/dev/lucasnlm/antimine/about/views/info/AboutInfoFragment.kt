@@ -1,7 +1,9 @@
 package dev.lucasnlm.antimine.about.views.info
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import dev.lucasnlm.antimine.BuildConfig
 import dev.lucasnlm.antimine.R
@@ -25,6 +27,16 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
         super.onViewCreated(view, savedInstanceState)
 
         version.text = getString(R.string.version_s, BuildConfig.VERSION_NAME)
+        instant.isVisible = view.context.run {
+            try {
+                val info = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
+                val bundle: Bundle = info.metaData
+                val appId = bundle.getInt(INSTANT_BUILD_FLAVOR, 0)
+                appId > 0
+            } catch (e: Exception) {
+                false
+            }
+        }
 
         if (preferencesRepository.showSupport()) {
             supportUs.setOnClickListener {
@@ -45,5 +57,9 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
         translation.setOnClickListener {
             aboutViewModel.sendEvent(AboutEvent.Translators)
         }
+    }
+
+    companion object {
+        private const val INSTANT_BUILD_FLAVOR = "com.google.android.gms.instant.flavor"
     }
 }
