@@ -1,56 +1,56 @@
-Testa din slutledningsförmåga på ett utmanande pussel där du måste röja ett minfält utan att någon mina exploderar.
-Det här är en minimalistisk och mordern version av det klassiska spelet MS Röj.
+Testa din resonemangskraft på ett utmanande pusselspel där du måste lösa ett minfält utan att explodera någon mina.
+Detta är en minimalistisk och modern version av det klassiska spelet Minesweeper.
 
-Klarar du av att röja ett minfält? Nu kör vi!
+Kan du rensa ett minfält? Nu kör vi!
 
 MÅL
-Det är som MS Röj. Du vinner spelet när du flaggat varje mina i minfältet. Varförsiktig så ingen exploderar!
+Det är som Minesweeper. Du vinner spelet när du har markerat varje mina i fältet med flaggor. Var noga med att inte utlöser en!
 
-INGA GISSNINGAR
-Spelet har en algoritm som alltid skapar lösningsbara minfält. Du. behöver inte gissa var den sista minan är!
+INGEN GISSNING
+Detta spel har en algoritm som alltid skapar lösbara minfält. Du behöver inte gissa var den sista minan är!
 
 SPELNIVÅER
-Precis som i MS Röj har spelet olika nivåer: Nybörjare, Medelsvår och Expert. Men det finns även ett progresivt läge som blir svårare när du vinner.r when you win.
+Precis som Minesweeper har detta spel olika svårighetsgrader: Nybörjare, Mellanliggande och Avancerat. Men det har också ett unikt progressivt läge som blir tuffare när du vinner.
 
-ANPASSNINGSBARA NIVÅER
-Om standardnivåerna inte är nog kan du skapa egna svårighetsnivåer!
+ANPASSAD NIVÅ
+Om standardlägena inte räcker, kan du skapa dina egna nivåer!
 
 TEMAN
-Antimine har mer än 15 teman inkluderande ljust, mörkt och AMOLED. Fler teman kommer!
+Antimine har mer än 15 teman (inklusive ljus, mörk och AMOLED). Och snart kommer fler att läggas till!
 
-MINIMALISTISKT
-Rent användargränssnitt. Visuelt minimalistiskt. Appen är även liten i filstorlek, mindre än 9MB.
+MINIMALIST
+Ren utseende och känsla: visuellt minimalistisk och lättviktig appstorlek (mindre än 9MB).
 
 GUIDE
-Vet du inte hur man spelar MS RÖJ? Inga problem, spela igenom guiden och slå på Tips i inställningarna.
+Vet du inte hur man spelar Minesweeper? Inga problem, du kan spela vår guidenivå och aktivera Tips i inställningarna.
 
 STATISTIK
-Håll koll på dina resultat och din utveckling.
+Se dina resultat och utveckling.
 
-HJÄLPANDE HAND
-Spelet kommer automatiskt flagga rutor som är isolerade.
+SPELASSISTENT
+Spelet kommer automatiskt att flagga rutorna du isolerade. 
 
-ANPASSNINGSBART
-Du kan ändra spelet så det blir som du vill ha det.
-Exempel: Hjälp, animeringar, haptiskåterkoppling, frågetecken.
+ANPASSNING
+Du kan ändra spelet så att det blir som du vill. 
+Exempel: Hjälp, animationer, haptik-feedback, frågetecken.
 
 KONTROLLER
-Fyra olika kontrollscheman stöds. Exempel: flagga genom att trycka kort eller hålla i.
+Den stödjer fyra olika kontrollsystem. Exempel: flagga med tryck eller långtryck.
 
-UTMÄRKELSER OCH TOPLISTA
-Det finns åtta utmärkelser du kan låsa upp och olika toplistor att dela med dina vänner.
+PRESTATIONER OCH TOPPLISTOR 
+Du har åtta prestationer att låsa upp och olika topplistor att dela med dina vänner.
 
 TILLGÄNGLIGHET
-Du kan anpassa spelet efter dina behov: ändra rutornas storlek, radie, berörings tid och skärmläsar stöd.
-Vi försöker hela tiden förbättra våra tillgänglighetsinställningar. Saknar du något? Hör av dig!
+Du kan anpassa detta spel till dina behov: ändra rutstorlek, radie, trycktiming och stöd för skärmläsare.
+Vi försöker alltid förbättra våra tillgänglighetsinställningar. Om du saknar något ge oss feedback!
 
-ANDROIDFOKUSERAD APP
-Fräna funktioner i Android stöds. Som delad skärm, genvägar, delning, systemtema och den senaste versionen stöds alltid.
+ANDROID FOKUSERAD APP
+Den stöder coola Android-funktioner som delad skärm, genvägar, delning, systemtema, och stödjer alltid den senaste versionen.
 
 ONLINE ELLER OFFLINE
-Du behöver inte vara online för att kunna spela!
+Du behöver inte vara online för att spela spelet!
 
-AUTOSPARNING
-Du kan starta ett spel och fortsätta senare! Ditt spel autosparas.
+AUTO-SPARNING
+Du kan starta ett spel och fortsätta det senare! Det kommer automatiskt spara ditt spel.
 
-Ha kul!
+Njut!

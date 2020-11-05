@@ -12,7 +12,7 @@ Ce jeu a un algorithme qui crée toujours des champs de mines solvables. Vous n'
 NIVEAUX DE JEU
 Tout comme Minesweeper, ce jeu a différents niveaux: débutant, intermédiaire et expert. Mais il a aussi un mode progressif unique qui devient plus difficile quand vous gagnez.
 
-NIVEAU PERSONNEL
+NIVEAU PERSONNALISÉ
 Si les modes standards ne suffisent pas, vous pouvez créer votre niveau de difficulté !
 
 THÉMES

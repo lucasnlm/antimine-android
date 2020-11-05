@@ -1,56 +1,56 @@
-Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
-This is a minimalist and modern version of the classic Minesweeper.
+Testaa päättelykykyäsi haastavassa pulmapelissä, jossa sinun täytyy ratkaista miinakenttä räjäyttämättä yhtään miinaa.
+Tämä on minimalistinen ja moderni versio klassisesta Miinaharavasta.
 
-Are you able to clear a minefield? Let’s go!
+Pystytkö tyhjentämään miinakenttän? Aloitetaan!
 
-OBJECTIVE
-It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
+TAVOITE
+Se on kuin Miinaharava. Sinä voitat pelin, kun olet merkinnyt jokaisen miinan miinakenttään. Varo, ettet laukaise yhtään!
 
-NO GUESSING
-This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
+EI ARVATTAVAA
+Tässä pelissä on algoritmi, joka luo aina ratkaistavissa olevan miinakentän. Sinun ei tarvitse arvata missä viimeinen miina on!
 
-GAME LEVELS
-Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
+PELITASOT
+Aivan kuten Miinaharava, Tässä pelissä on eri tasoja: Aloittelija, Keskitaso, ja Edistynyt. Mutta siinä on myös ainutlaatuinen progressiivinen tila, joka vaikeutuu, kun voitaaissasi.
 
-CUSTOM LEVEL
-If the standard modes aren't enough, you can create your level difficulty!
+MUKAUTETTU TASO
+Jos standardit tilat eivät riitä, voit luoda oman vaikeustason!
 
-THEMES
-Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+TEEMAT
+Antimiinassa on yli 15 teemaa (mukaan lukien kevyt, tumma ja AMOLED). Ja pian lisää!
 
-MINIMALIST
-Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+MINIMALISTINEN
+Puhdas ulkoasu ja tuntuma, minimalistiset visuaalit ja myös kevyt sovelluskoko (alle 9Mt).
 
-TUTORIAL
-Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+OPETUS
+Etkö tiedä miten pelata Miinaharavaa? Ei hätää, voit pelata meidän opetustason ja ottaa käyttöön vinkit asetuksista.
 
-STATISTICS
-Check your results and development.
+TILASTOT
+Tarkista tuloksesi ja kehityksesi.
 
-GAME ASSISTANT
-The game will automatically flag the squares you isolated. 
+PELIAVUSTAJA
+Peli automaattisesti merkkaa neliöt, jotka on eristetty. 
 
-CUSTOMIZATION
-You can change the game to make it like you want to. 
-Example: Help, animations, haptic feedback, question mark.
+MUKAUTUS
+Voit muuttaa peliä tekemään siitä haluamasi. 
+Esimerkiksi: Apu, animaatiot, haptinen palaute, kysymysmerkki.
 
-CONTROLS
-It supports four different control schemes. Example: flag using tap or long press.
+KONTROLLIT
+Se tukee neljää eri ohjaustapaa. Esimerkiksi: merkitse napautuksella tai pitkällä painalluksella.
 
-ACHIEVEMENTS AND LEADERBOARDS 
-You have eight achievements to unlock and different leaderboards to share with your friends.
+SAAVUTUKSET JA TULOSTAULUT 
+Sinulla on kahdeksan saavutusta avattavaksi ja eri pistetaulukoita jakaa ystäviesi kanssa.
 
-ACCESSIBILITY
-You can customize this game to your needs: change the squares size, radius, touch timing, and screen reader support.
-We are always trying to improve our accessibility settings. If you miss something give us feedback!
+ESTEETTÖMYYS
+Voit muokata tätä peliä tarpeisiisi: muuta neliöiden kokoa, sädettä, kosketuksen ajoitus ja näytön lukijan tuki.
+Yritämme aina parantaa esteettömyysasetuksiamme. Jos kaipaat jotain anna meille palautetta!
 
-ANDROID FOCUSED APP
-It supports cool Android features like split-screen, shortcuts, sharing, system theme, and always supporting the last version.
+ANDROID FOCUSED APLIKAATIO
+Se tukee cooleja Android ominaisuuksia, kuten jaetu näytö, pikanäppäimet, jakaminen, järjestelmän teema, ja tukee aina viimeisintä versiota.
 
-ONLINE OR OFFLINE
-You don't need to be online to play the game!
+ONLINE TAI OFFLINE
+Sinun ei tarvitse olla verkossa pelataksesi peliä!
 
 AUTO-SAVE
-You can start a game and continue it later! It will auto-save your game.
+Voit aloittaa pelin ja jatkaa sitä myöhemmin! Se tallentaa pelisi automaattisesti.
 
-Enjoy.
+Nauti.

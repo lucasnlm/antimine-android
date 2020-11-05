@@ -1,1 +1,1 @@
-Un rompicapo in cui devi cercare tutte le mine nascoste. 
+Un gioco di puzzle dove si cerca tutte le miniere nascoste. 
