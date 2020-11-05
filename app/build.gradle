@@ -12,8 +12,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 803051
-        versionName '8.3.5'
+        versionCode 803071
+        versionName '8.3.7'
         minSdkVersion 21
         targetSdkVersion 30
         multiDexEnabled true
@@ -23,7 +23,7 @@ android {
         resConfigs 'af-rZA', 'ar-rSA', 'ca-rES', 'cs-rCZ', 'da-rDK', 'de-rDE', 'el-rGR', 'en-rUS',
                    'es-rES', 'fi-rFI', 'fr-rFR', 'hi-rIN', 'hu-rHU', 'it-rIT', 'iw-rIL', 'ja-rJP',
                    'ko-rKR', 'nl-rNL', 'no-rNO', 'pl-rPL', 'pt-rBR', 'pt-rPT', 'ro-rRO', 'ru-rRU',
-                   'sv-rSE', 'th-rTH', 'tr-rTR', 'uk-rUA', 'vi-rVN', 'zh-rCN', 'bg-rBG'
+                   'sv-rSE', 'th-rTH', 'tr-rTR', 'uk-rUA', 'vi-rVN', 'zh-rCN', 'bg-rBG', 'in-rID'
     }
 
     signingConfigs {

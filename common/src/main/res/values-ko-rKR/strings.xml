@@ -122,7 +122,7 @@
     <string name="flag_removed">깃발 제거 완료!</string>
     <string name="remove_ad">광고 제거</string>
     <string name="help">도움말</string>
-    <string name="show_windows">Show windows</string>
+    <string name="show_windows">진행상황 게이지 활성화</string>
     <string name="switch_control">Switch: Flag and Open</string>
     <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">당신은 이 사각형 게임판에 숨겨진 지뢰를 하나도 터뜨리지 않고 게임을 끝내야 합니다.</string>

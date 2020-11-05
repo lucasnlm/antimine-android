@@ -1,1 +1,1 @@
-Puhdista piilotetut miinat miinakentältä. 
+Pulmapeli, jossa etsit kaikki piilotetut miinat. 

@@ -1,4 +1,4 @@
-Prueba tu poder de razonamiento en un desafiante juego de rompecabezas donde tienes que resolver un campo de minas sin explotar ninguna mina.
+Prueba tu poder de razonamiento en un desafiante juego de rompecabezas donde tienes que resolver un campo de minas sin explotar ninguna de ellas.
 Esta es una versión minimalista y moderna del clásico Buscaminas.
 
 ¿Eres capaz de resolver un campo minado? ¡Vamos!
@@ -6,14 +6,14 @@ Esta es una versión minimalista y moderna del clásico Buscaminas.
 OBJETIVO
 Es como Buscaminas. Ganas la partida cuando has marcado todas las minas en el campo de minas. ¡Ten cuidado de no activar una!
 
-SIN NECESIDAD DE ADIVINAR
-Este juego tiene un algoritmo que siempre crea campos de minas resolubles. ¡No tendrás que adivinar dónde está la última mina!
+SIN ADIVINAR
+Este juego tiene un algoritmo que siempre crea campos de minas solventables. ¡No tendrás que adivinar dónde está la última mina!
 
 NIVELES DE JUEGO
 Al igual que Buscaminas, este juego tiene diferentes niveles: principiante, intermedio y experto. Pero también tiene un modo progresivo único que se hace más difícil cuando ganas.
 
 NIVEL PERSONALIZADO
-Si los modos estándar no son suficientes, ¡puedes crear tu propio nivel de dificultad!
+Si los modos estándar no son suficientes, puedes crear tu nivel de dificultad!
 
 TEMAS
 Antimine tiene más de 15 temas (incluyendo luz, oscuridad y AMOLED). ¡Y pronto se añadirán más!
@@ -22,35 +22,35 @@ MINIMALISTA
 Un aspecto limpio: minimalista, ligero y también un tamaño de menos de 9MB.
 
 TUTORIAL
-¿No sabes cómo jugar a Buscaminas? No hay problema, puedes jugar nuestro tutorial y activar 'Consejos' en la configuración.
+¿No sabes cómo jugar a Buscaminas? No hay problema, puedes jugar nuestro nivel de tutorial y activar Consejos en la configuración.
 
 ESTADÍSTICAS
-Compruebe sus resultados y progreso.
+Compruebe sus resultados y desarrollo.
 
-ASISTENTE DEL JUEGO
+ASISTANTE DEL JUEGO
 El juego marcará automáticamente los cuadrados que has aislado. 
 
 PERSONALIZACIÓN
 Puedes cambiar el juego para hacerlo como quieras. 
-Ejemplo: Ayuda, animaciones, respuesta háptica, signo de interrogación.
+Ejemplo: Ayuda, animaciones, comentarios hápticos, signo de interrogación.
 
 CONTROLES
 Soporta cuatro sistemas de control diferentes. Ejemplo: bandera usando tap o pulsación larga.
 
-LOGROS Y MARCADORES 
+ACHIEVEMENTES Y MARCADORES 
 Tienes ocho logros para desbloquear y diferentes tablas de clasificación para compartir con tus amigos.
 
 ACCESIBILIDAD
-Puedes personalizar este juego a tus necesidades: cambiar el tamaño de los cuadrados, el radio, respuesta táctil y el soporte para lectores de pantalla.
-Siempre estamos tratando de mejorar nuestros ajustes de accesibilidad. Si echas algo de menos, ¡danos tus comentarios!
+Puedes personalizar este juego a tus necesidades: cambiar el tamaño de los cuadrados, el radio, la hora táctil y el soporte para lectores de pantalla.
+Siempre estamos tratando de mejorar nuestros ajustes de accesibilidad. Si te pierdes algo, danos tus comentarios!
 
 ANDROID
-Soporta características interesantes de Android como pantalla dividida, accesos directos, compartir, tema del sistema, y siempre soportando la última versión.
+Soporta características interesantes de Android como pantalla dividida, acceso directo, compartir, tema del sistema, y siempre soportando la última versión.
 
-EN LÍNEA O SIN CONEXIÓN
-¡No necesitas estar conectado a internet para jugar al juego!
+EN LÍNEA O DESARROLLO
+¡No necesitas estar conectado para jugar al juego!
 
-AUTO-GUARDADO
-¡Puedes empezar una partida y continuar más tarde! Tu partida se guardará automáticamente.
+AUTO-GUARDAR
+¡Puedes empezar un juego y continuar más tarde! Guardará automáticamente tu juego.
 
 ¡Disfruta!

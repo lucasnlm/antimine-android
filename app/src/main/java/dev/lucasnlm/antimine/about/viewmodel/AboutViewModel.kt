@@ -30,6 +30,7 @@ class AboutViewModel(
         "Greek" to sequenceOf("Retrial"),
         "Hungarian" to sequenceOf("Hermann Márk"),
         "Italian" to sequenceOf("Mattia - MisterWeeMan", "Nicola Lorenzetti"),
+        "Indonesian" to sequenceOf("Ockly Rajab"),
         "Japanese" to sequenceOf("Ryota Hasegawa"),
         "Korean" to sequenceOf("Forever_"),
         "Norwegian" to sequenceOf("Eule Hecking"),
