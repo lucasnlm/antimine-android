@@ -69,6 +69,13 @@ class PreferencesRepository(
     override fun useAnimations(): Boolean =
         preferencesManager.getBoolean(PREFERENCE_ANIMATION, true)
 
+    override fun setNoGuessingAlgorithm(value: Boolean) {
+        preferencesManager.putBoolean(PREFERENCE_NO_GUESSING, value)
+    }
+
+    override fun useNoGuessingAlgorithm(): Boolean =
+        preferencesManager.getBoolean(PREFERENCE_NO_GUESSING, true)
+
     override fun useQuestionMark(): Boolean =
         preferencesManager.getBoolean(PREFERENCE_QUESTION_MARK, false)
 
@@ -266,6 +273,7 @@ class PreferencesRepository(
         private const val PREFERENCE_VIBRATION = "preference_vibration"
         private const val PREFERENCE_ASSISTANT = "preference_assistant"
         private const val PREFERENCE_ANIMATION = "preference_animation"
+        private const val PREFERENCE_NO_GUESSING = "preference_no_guessing"
         private const val PREFERENCE_AREA_SIZE = "preference_area_size"
         private const val PREFERENCE_QUESTION_MARK = "preference_use_question_mark"
         private const val PREFERENCE_USE_HELP = "preference_use_help"

@@ -26,6 +26,7 @@ class GameController {
     private var gameControl: GameControl = GameControl.Standard
     private var useQuestionMark = true
     private var useOpenOnSwitchControl = true
+    private var useNoGuessing = true
 
     val seed: Long
 
@@ -70,7 +71,7 @@ class GameController {
             val fieldCopy = field.map { it.copy() }.toMutableList()
             val minefieldHandler = MinefieldHandler(fieldCopy, false)
             minefieldHandler.openAt(safeId, false)
-        } while (solver.keepTrying() && !solver.trySolve(minefieldHandler.result().toMutableList()))
+        } while (useNoGuessing && solver.keepTrying() && !solver.trySolve(minefieldHandler.result().toMutableList()))
 
         firstOpen = FirstOpen.Position(safeId)
     }
@@ -320,6 +321,10 @@ class GameController {
 
     fun useQuestionMark(useQuestionMark: Boolean) {
         this.useQuestionMark = useQuestionMark
+    }
+
+    fun useNoGuessing(noGuessing: Boolean) {
+        this.useNoGuessing = noGuessing
     }
 
     fun useOpenOnSwitchControl(useOpen: Boolean) {

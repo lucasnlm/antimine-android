@@ -23,6 +23,13 @@
 
         <SwitchPreferenceCompat
             android:checked="true"
+            android:defaultValue="true"
+            android:key="preference_no_guessing"
+            android:title="@string/no_guessing_mode"
+            app:iconSpaceReserved="false"/>
+
+        <SwitchPreferenceCompat
+            android:checked="true"
             android:defaultValue="false"
             android:key="preference_use_help"
             android:title="@string/help"

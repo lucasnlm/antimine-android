@@ -349,6 +349,7 @@ open class GameViewModel(
 
                 updateGameControl(gameControl)
                 useQuestionMark(preferencesRepository.useQuestionMark())
+                useNoGuessing(preferencesRepository.useNoGuessingAlgorithm())
             }
         }
     }
