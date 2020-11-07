@@ -46,7 +46,7 @@
     <string name="system">System</string>
     <string name="rating">Rückmeldung</string>
     <string name="support_title">Unterstütze uns!</string>
-    <string name="support_action">Unterstützung</string>
+    <string name="support_action">Zum Support</string>
     <string name="rating_message">Wenn dir dieses Spiel gefällt, gib uns bitte eine Rückmeldung. Es wird uns sehr helfen.</string>
     <string name="used_software_text">Dieses Spiel benutzt folgende Software von Drittanbietern:</string>
     <string name="translators_text">Dieses Spiel wurde von den folgenden Personen übersetzt:</string>
@@ -69,7 +69,7 @@
     <string name="performance">Erfolgsergebnis</string>
     <string name="ok">Ok</string>
     <string name="use_question_mark">Fragezeichen benutzen</string>
-    <string name="no_guessing_mode">\'No guessing\' mode</string>
+    <string name="no_guessing_mode">\"Kein Erraten\"-Modus</string>
     <string name="control">Steuerung</string>
     <string name="arrow">➞</string>
     <string name="single_click">Einzelklick</string>
