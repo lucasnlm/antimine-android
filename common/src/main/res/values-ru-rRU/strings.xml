@@ -69,6 +69,7 @@
     <string name="performance">Производительность</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Использовать знак вопроса</string>
+    <string name="no_guessing_mode">\'No guessing\' mode</string>
     <string name="control">Управление</string>
     <string name="arrow">➞</string>
     <string name="single_click">Одно нажатие</string>

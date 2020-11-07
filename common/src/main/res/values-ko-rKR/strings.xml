@@ -69,6 +69,7 @@
     <string name="performance">퍼포먼스</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">물음표 깃발 사용</string>
+    <string name="no_guessing_mode">\'No guessing\' mode</string>
     <string name="control">컨트롤</string>
     <string name="arrow">➞</string>
     <string name="single_click">단일 클릭</string>

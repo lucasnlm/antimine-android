@@ -69,6 +69,7 @@
     <string name="performance">ประสิทธิภาพ</string>
     <string name="ok">ตกลง</string>
     <string name="use_question_mark">เครื่องหมายคำถาม</string>
+    <string name="no_guessing_mode">\'No guessing\' mode</string>
     <string name="control">การควบคุม</string>
     <string name="arrow">➞</string>
     <string name="single_click">แตะครั้งเดียว</string>
