@@ -77,9 +77,9 @@ sealed class GameControl(
             doubleClick = ActionResponse.OpenTile,
         ),
         onOpen = Actions(
-            singleClick = ActionResponse.HighlightNeighbors,
+            singleClick = ActionResponse.OpenNeighbors,
             longPress = null,
-            doubleClick = ActionResponse.OpenNeighbors,
+            doubleClick = ActionResponse.HighlightNeighbors,
         )
     )
 
@@ -91,9 +91,9 @@ sealed class GameControl(
             doubleClick = ActionResponse.SwitchMark,
         ),
         onOpen = Actions(
-            singleClick = ActionResponse.HighlightNeighbors,
+            singleClick = ActionResponse.OpenNeighbors,
             longPress = null,
-            doubleClick = ActionResponse.OpenNeighbors,
+            doubleClick = ActionResponse.HighlightNeighbors,
         )
     )
 
