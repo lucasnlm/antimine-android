@@ -69,10 +69,11 @@
     </style>
 
     <style name="CustomAmoledTheme" parent="ThemeOverlay.AppCompat.Dark">
-        <item name="colorPrimary">#000000</item>
-        <item name="colorPrimaryDark">#000000</item>
-        <item name="android:windowBackground">#000000</item>
-        <item name="colorAccent">#FFFFFF</item>
+        <item name="colorPrimary">#FF000000</item>
+        <item name="colorPrimaryDark">#FF000000</item>
+        <item name="android:windowBackground">#FF000000</item>
+        <item name="android:background">#FF000000</item>
+        <item name="colorAccent">#FFFFFFFF</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
@@ -80,10 +81,11 @@
     </style>
 
     <style name="CustomAmoledTheme.NoActionBar" parent="ThemeOverlay.AppCompat.Dark">
-        <item name="colorPrimary">#000000</item>
-        <item name="colorPrimaryDark">#000000</item>
-        <item name="android:windowBackground">#000000</item>
-        <item name="colorAccent">#FFFFFF</item>
+        <item name="colorPrimary">#FF000000</item>
+        <item name="colorPrimaryDark">#FF000000</item>
+        <item name="android:windowBackground">#FF000000</item>
+        <item name="android:background">#FF000000</item>
+        <item name="colorAccent">#FFFFFFFF</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>

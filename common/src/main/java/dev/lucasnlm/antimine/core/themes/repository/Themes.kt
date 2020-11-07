@@ -74,7 +74,7 @@ object Themes {
         )
     )
 
-    val AmoledTheme = AppTheme(
+    private val AmoledTheme = AppTheme(
         id = 2L,
         theme = R.style.CustomAmoledTheme,
         themeNoActionBar = R.style.CustomAmoledTheme_NoActionBar,
