@@ -431,7 +431,9 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
                  */
                 measureChildWithMargins(view, 0, 0)
                 layoutDecorated(
-                    view, leftOffset, topOffset,
+                    view,
+                    leftOffset,
+                    topOffset,
                     leftOffset + mDecoratedChildWidth,
                     topOffset + mDecoratedChildHeight
                 )
@@ -821,7 +823,9 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
 
         measureChildWithMargins(child, 0, 0)
         layoutDecorated(
-            child, layoutLeft, layoutTop,
+            child,
+            layoutLeft,
+            layoutTop,
             layoutLeft + mDecoratedChildWidth,
             layoutTop + mDecoratedChildHeight
         )
