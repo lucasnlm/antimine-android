@@ -936,6 +936,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         val TAG = GameActivity::class.simpleName
         const val GOOGLE_PLAY_REQUEST_CODE = 6
 
-        const val MIN_USAGES_TO_IAP = 5
+        const val MIN_USAGES_TO_IAP = 2
     }
 }

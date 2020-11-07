@@ -3,14 +3,9 @@ package dev.lucasnlm.antimine.splash
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.GameActivity
-import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
 import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.coroutines.Dispatchers
@@ -25,25 +20,6 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val layout = LinearLayout(this).apply {
-            fitsSystemWindows = true
-            gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
-            orientation = LinearLayout.VERTICAL
-
-            val params = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply { setMargins(0, 0, 0, 200) }
-
-            val loadingMessage = TextView(context).apply {
-                text = context.getString(R.string.loading)
-                setTextColor(ContextCompat.getColor(context, R.color.splash_text_color))
-            }
-
-            addView(loadingMessage, params)
-        }
-        setContentView(layout)
 
         splashViewMode.startIap()
 
