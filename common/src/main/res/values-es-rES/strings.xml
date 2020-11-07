@@ -69,6 +69,7 @@
     <string name="performance">Desempeño</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Usar signo de interrogación</string>
+    <string name="no_guessing_mode">Modo \'Sin adivinación\'</string>
     <string name="control">Controles</string>
     <string name="arrow">➞</string>
     <string name="single_click">Un clic</string>

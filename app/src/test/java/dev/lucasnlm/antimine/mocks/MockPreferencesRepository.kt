@@ -97,6 +97,10 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun useAnimations(): Boolean = false
 
+    override fun setNoGuessingAlgorithm(value: Boolean) { }
+
+    override fun useNoGuessingAlgorithm(): Boolean = true
+
     override fun useQuestionMark(): Boolean = false
 
     override fun setQuestionMark(value: Boolean) { }

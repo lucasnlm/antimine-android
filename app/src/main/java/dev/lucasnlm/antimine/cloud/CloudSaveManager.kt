@@ -40,18 +40,21 @@ class CloudSaveManager(
                     squareRadius = preferencesRepository.squareRadius(),
                     squareSize = preferencesRepository.squareSizeMultiplier(),
                     touchTiming = preferencesRepository.customLongPressTimeout().toInt(),
-                    questionMark = if (preferencesRepository.useQuestionMark()) 1 else 0,
-                    gameAssistance = if (preferencesRepository.useFlagAssistant()) 1 else 0,
-                    help = if (preferencesRepository.useHelp()) 1 else 0,
-                    hapticFeedback = if (preferencesRepository.useHapticFeedback()) 1 else 0,
-                    soundEffects = if (preferencesRepository.isSoundEffectsEnabled()) 1 else 0,
+                    questionMark = preferencesRepository.useQuestionMark().toInt(),
+                    gameAssistance = preferencesRepository.useFlagAssistant().toInt(),
+                    help = preferencesRepository.useHelp().toInt(),
+                    hapticFeedback = preferencesRepository.useHapticFeedback().toInt(),
+                    soundEffects = preferencesRepository.isSoundEffectsEnabled().toInt(),
                     stats = statsRepository.getAllStats(minId).map { it.toHashMap() },
-                    premiumFeatures = if (preferencesRepository.isPremiumEnabled()) 1 else 0,
+                    premiumFeatures = preferencesRepository.isPremiumEnabled().toInt(),
                     controlStyle = preferencesRepository.controlStyle().ordinal,
+                    noGuessing = preferencesRepository.useNoGuessingAlgorithm().toInt(),
                 )
             }
         } catch (e: Exception) {
             return null
         }
     }
+
+    private fun Boolean.toInt() = if (this) 1 else 0
 }

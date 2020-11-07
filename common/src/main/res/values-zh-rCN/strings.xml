@@ -69,6 +69,7 @@
     <string name="performance">性能</string>
     <string name="ok">确定</string>
     <string name="use_question_mark">使用问号标记</string>
+    <string name="no_guessing_mode">“没有猜测”模式</string>
     <string name="control">控制</string>
     <string name="arrow">➞</string>
     <string name="single_click">单击</string>
@@ -122,9 +123,9 @@
     <string name="flag_removed">标记已移除！</string>
     <string name="remove_ad">去除广告</string>
     <string name="help">帮助</string>
-    <string name="show_windows">Show windows</string>
-    <string name="switch_control">Switch: Flag and Open</string>
-    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
+    <string name="show_windows">显示窗口</string>
+    <string name="switch_control">切换：标记并打开</string>
+    <string name="switch_control_desc">使用按钮在标记和打开之间切换</string>
     <string name="app_description">你需要清除一个隐藏着地雷的矩形面板，不能使任何地雷爆炸。</string>
     <string name="app_name">扫雷 (踩地雷) - Antimine</string>
 </resources>

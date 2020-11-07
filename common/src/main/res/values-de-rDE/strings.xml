@@ -69,6 +69,7 @@
     <string name="performance">Erfolgsergebnis</string>
     <string name="ok">Ok</string>
     <string name="use_question_mark">Fragezeichen benutzen</string>
+    <string name="no_guessing_mode">\'No guessing\' mode</string>
     <string name="control">Steuerung</string>
     <string name="arrow">➞</string>
     <string name="single_click">Einzelklick</string>

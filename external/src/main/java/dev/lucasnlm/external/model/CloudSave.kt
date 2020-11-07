@@ -15,6 +15,7 @@ data class CloudSave(
     val stats: List<HashMap<String, String>>,
     val premiumFeatures: Int,
     val controlStyle: Int,
+    val noGuessing: Int,
 )
 
 fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
@@ -31,6 +32,7 @@ fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
     "stats" to stats,
     "premiumFeatures" to premiumFeatures,
     "controlStyle" to controlStyle,
+    "noGuessing" to noGuessing,
 )
 
 @Suppress("UNCHECKED_CAST")
@@ -50,4 +52,5 @@ fun cloudSaveOf(id: String, data: Map<String, Any>) =
         data["stats"] as List<HashMap<String, String>>,
         data["premiumFeatures"].toString().toInt(),
         data["controlStyle"].toString().toInt(),
+        (data["noGuessing"] ?: 1).toString().toInt(),
     )
