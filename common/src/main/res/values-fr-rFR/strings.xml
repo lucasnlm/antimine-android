@@ -69,7 +69,7 @@
     <string name="performance">Performance</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Utiliser des drapeaux points d’interrogation</string>
-    <string name="no_guessing_mode">\'No guessing\' mode</string>
+    <string name="no_guessing_mode">Mode sans prédiction</string>
     <string name="control">Contrôles</string>
     <string name="arrow">➞</string>
     <string name="single_click">Clic simple</string>
@@ -124,8 +124,8 @@
     <string name="remove_ad">Supprimer les publicités</string>
     <string name="help">Aide</string>
     <string name="show_windows">Afficher les fenêtres</string>
-    <string name="switch_control">Switch: Flag and Open</string>
-    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
+    <string name="switch_control">Commutateur : Drapeau et Ouvrir</string>
+    <string name="switch_control_desc">Utiliser le bouton pour basculer entre Drapeau et Ouvrir</string>
     <string name="app_description">Vous devez vider un tableau rectangulaire contenant des mines cachées sans en détonner.</string>
     <string name="app_name">Anti-Mine</string>
 </resources>
