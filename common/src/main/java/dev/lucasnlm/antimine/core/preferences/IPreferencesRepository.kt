@@ -78,8 +78,5 @@ interface IPreferencesRepository {
     fun isSoundEffectsEnabled(): Boolean
     fun setSoundEffectsEnabled(value: Boolean)
 
-    fun shouldMigrateFromCloud(): Boolean
-    fun setMigrateFromCloud(value: Boolean)
-
     fun showWindowsWhenFinishGame(): Boolean
 }

@@ -1,56 +1,56 @@
-Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
-This is a minimalist and modern version of the classic Minesweeper.
+Poseu a prova la vostra capacitat de raonament en un joc de trencaclosques difícil on heu de resoldre un camp de mines sense fer-ne explotar cap.
+Aquesta és una versió minimalista i moderna del clàssic Buscamines.
 
-Are you able to clear a minefield? Let’s go!
+Sou capaç de netejar un camp de mines? Vinga!
 
-OBJECTIVE
-It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
+OBJECTIU
+És com el buscamines. Guanyeu quan heu marcat totes les mines del camp. Aneu en compte de no detonar-ne cap!
 
-NO GUESSING
-This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
+SENSE ENDEVINAR
+Aquest joc té un algorisme que sempre crea camps de mines resolubles. No haureu d'endevinar on es troba la darrera mina!
 
-GAME LEVELS
-Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
+NIVELLS DE JOC
+Igual que al buscamines, aquest joc té diferents nivells: Principiant, Intermig, i Expert. Però també té un mode progressiu únic que es complica a mida que guanyes.
 
-CUSTOM LEVEL
-If the standard modes aren't enough, you can create your level difficulty!
+NIVELL PERSONALITZAT
+Si els modes estàndars no són prou, podeu crear el vostre nivell de dificultat!
 
-THEMES
-Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+TEMES
+L'Antimines té més de 15 temes (incloent el clar, el fosc i l'AMOLED). I aviat en seran afegits més!
 
-MINIMALIST
-Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+MINIMALISTA
+Aparença neta: una visualització minimalista i també una app lleugera (menys de 9MB).
 
 TUTORIAL
-Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+No sabeu com jugar al buscamines? Cap problema, podeu jugar amb el nostre nivell de tutorial i activar els Consells a la configuració.
 
-STATISTICS
-Check your results and development.
+ESTADÍSTIQUES
+Comprova els teus resultats i progressió.
 
-GAME ASSISTANT
-The game will automatically flag the squares you isolated. 
+ASSISTENT DE JOC
+El joc marcarà automàticament els quadres que quedin aïllats. 
 
-CUSTOMIZATION
-You can change the game to make it like you want to. 
-Example: Help, animations, haptic feedback, question mark.
+PERSONALITZACIÓ
+Podeu canviar el joc per fer-lo com vulgueu. 
+Exemple: ajuda, animacions, resposta hàptica, interrogant.
 
 CONTROLS
-It supports four different control schemes. Example: flag using tap or long press.
+Suporta quatre esquemes de control diferents. Exemple: marca fent 'tap' o prement una estona.
 
-ACHIEVEMENTS AND LEADERBOARDS 
-You have eight achievements to unlock and different leaderboards to share with your friends.
+ASSOLIMENTS I CLASSIFICACIONS 
+Tens vuit assoliments per a desbloquejar i diferents classificacions per compartir amb els amics.
 
-ACCESSIBILITY
-You can customize this game to your needs: change the squares size, radius, touch timing, and screen reader support.
-We are always trying to improve our accessibility settings. If you miss something give us feedback!
+ACCESSIBILITAT
+Podeu personalitzar el joc a les vostres necessitats: canviar la mida dels quadres, el radi, el temps per marcar, i el suport per al lector de pantalla.
+Sempre estem mirant de millorar la configuració de l'accessibilitat. Si trobeu res a faltar, dieu-nos-ho!
 
-ANDROID FOCUSED APP
-It supports cool Android features like split-screen, shortcuts, sharing, system theme, and always supporting the last version.
+APP FOCALITZADA PER A ANDROID
+Suporta diferents característiques xules de l'Android com la pantalla dividida, dreceres, compartir, tema del sistema, i sempre adaptada a la darrera versió.
 
-ONLINE OR OFFLINE
-You don't need to be online to play the game!
+ONLINE O DESCONNECTAT
+No cal estar connectat per poder jugar!
 
-AUTO-SAVE
-You can start a game and continue it later! It will auto-save your game.
+AUTO-DESAT
+Podeu començar una partida i continuar més tard! La partida quedarà desada automàticament.
 
-Enjoy.
+Gaudiu-ne.

@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.GameActivity
+import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
 import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +29,10 @@ class SplashActivity : AppCompatActivity() {
                 withContext(Dispatchers.IO) {
                     try {
                         playGamesManager.silentLogin()
-                        splashViewMode.migrateCloudSave()
+
+                        playGamesManager.playerId()?.let {
+                            splashViewMode.migrateCloudSave(it)
+                        }
                     } catch (e: Exception) {
                         Log.e(TAG, "User not logged in Play Games")
                     }

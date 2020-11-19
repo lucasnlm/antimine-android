@@ -1,1 +1,1 @@
-Rensa dolda minor från ett minfält. 
+Ett pusselspel där du letar efter alla gömda minfält. 
