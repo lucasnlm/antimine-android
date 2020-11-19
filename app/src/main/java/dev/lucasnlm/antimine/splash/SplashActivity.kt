@@ -28,7 +28,10 @@ class SplashActivity : AppCompatActivity() {
                 withContext(Dispatchers.IO) {
                     try {
                         playGamesManager.silentLogin()
-                        splashViewMode.migrateCloudSave()
+
+                        playGamesManager.playerId()?.let {
+                            splashViewMode.migrateCloudSave(it)
+                        }
                     } catch (e: Exception) {
                         Log.e(TAG, "User not logged in Play Games")
                     }

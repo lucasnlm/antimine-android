@@ -90,13 +90,6 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PREFERENCE_SOUND_EFFECTS, value)
     }
 
-    override fun shouldMigrateFromCloud(): Boolean =
-        preferencesManager.getBoolean(PREFERENCE_SHOULD_MIGRATE_FROM_CLOUD, true)
-
-    override fun setMigrateFromCloud(value: Boolean) {
-        preferencesManager.putBoolean(PREFERENCE_SHOULD_MIGRATE_FROM_CLOUD, value)
-    }
-
     override fun showWindowsWhenFinishGame(): Boolean =
         preferencesManager.getBoolean(PREFERENCE_SHOW_WINDOWS, true)
 
@@ -299,6 +292,5 @@ class PreferencesRepository(
         private const val PREFERENCE_EXTRA_TIPS = "preference_extra_tips"
         private const val PREFERENCE_SHOW_WINDOWS = "preference_show_windows"
         private const val PREFERENCE_USE_OPEN_SWITCH_CONTROL = "preference_use_open_switch_control"
-        private const val PREFERENCE_SHOULD_MIGRATE_FROM_CLOUD = "preference_should_migrate_from_cloud"
     }
 }

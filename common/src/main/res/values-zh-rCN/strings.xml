@@ -20,7 +20,7 @@
     <string name="beginner">初级</string>
     <string name="intermediate">中级</string>
     <string name="expert">专家</string>
-    <string name="support_description">在您的帮助下，我们将能够实现新的功能并保持我们的项目活跃。</string>
+    <string name="support_description">在您的帮助下，我们将能实现新的功能并使我们的项目保持活跃。</string>
     <string name="open">打开</string>
     <string name="settings">设置</string>
     <string name="animations">动画</string>
@@ -55,7 +55,7 @@
     <string name="victories">胜利</string>
     <string name="you_lost">你输了！</string>
     <string name="defeats">失败</string>
-    <string name="game_over_desc_1">下次游戏祝您好运。</string>
+    <string name="game_over_desc_1">祝您下次游戏好运。</string>
     <string name="game_over_desc_4">你在 %1$d 秒内清空了雷场.</string>
     <string name="fail_to_share">分享失败</string>
     <string name="version_s">版本 %1$s</string>
@@ -76,7 +76,7 @@
     <string name="double_click">双击</string>
     <string name="long_press">长按</string>
     <string name="open_tile">打开</string>
-    <string name="flag_tile">标志</string>
+    <string name="flag_tile">标记</string>
     <string name="retry">重试</string>
     <string name="empty">空</string>
     <string name="cant_do_it_now">现在无法做到这一点。</string>
@@ -124,7 +124,7 @@
     <string name="remove_ad">去除广告</string>
     <string name="help">帮助</string>
     <string name="show_windows">显示窗口</string>
-    <string name="switch_control">切换：标记并打开</string>
+    <string name="switch_control">开关：（切换）标记与打开</string>
     <string name="switch_control_desc">使用按钮在标记和打开之间切换</string>
     <string name="app_description">你需要清除一个隐藏着地雷的矩形面板，不能使任何地雷爆炸。</string>
     <string name="app_name">扫雷 (踩地雷) - Antimine</string>

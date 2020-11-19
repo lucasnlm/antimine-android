@@ -109,9 +109,5 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setSoundEffectsEnabled(value: Boolean) { }
 
-    override fun shouldMigrateFromCloud(): Boolean = false
-
-    override fun setMigrateFromCloud(value: Boolean) { }
-
     override fun showWindowsWhenFinishGame(): Boolean = true
 }

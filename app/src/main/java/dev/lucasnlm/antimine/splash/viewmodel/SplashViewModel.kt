@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.splash.viewmodel
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.common.level.database.models.Stats
@@ -9,36 +8,21 @@ import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.support.IapHandler
 import dev.lucasnlm.external.ICloudStorageManager
-import dev.lucasnlm.external.IInstantAppManager
-import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.model.CloudSave
 
 class SplashViewModel(
-    private val context: Context,
     private val preferencesRepository: IPreferencesRepository,
     private val statsRepository: IStatsRepository,
     private val saveCloudStorageManager: ICloudStorageManager,
-    private val playGamesManager: IPlayGamesManager,
-    private val instantAppManager: IInstantAppManager,
     private val iapHandler: IapHandler,
 ) : ViewModel() {
     fun startIap() {
         iapHandler.start()
     }
 
-    suspend fun migrateCloudSave() {
-        if (instantAppManager.isEnabled(context) || preferencesRepository.shouldMigrateFromCloud()) {
-            val userId = playGamesManager.playerId()
-
-            userId?.let {
-                saveCloudStorageManager.getSave(it)?.let { cloudSave ->
-                    loadCloudSave(cloudSave)
-                }
-            }
-        }
-
-        if (instantAppManager.isEnabled(context)) {
-            preferencesRepository.setMigrateFromCloud(true)
+    suspend fun migrateCloudSave(playGamesId: String) {
+        saveCloudStorageManager.getSave(playGamesId)?.let { cloudSave ->
+            loadCloudSave(cloudSave)
         }
     }
 
@@ -86,8 +70,6 @@ class SplashViewModel(
                 Log.e(TAG, "Fail to insert stats on DB")
             }
         }
-
-        preferencesRepository.setMigrateFromCloud(false)
     }
 
     companion object {
