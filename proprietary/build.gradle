@@ -10,8 +10,8 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        versionCode 804011
-        versionName '8.4.1'
+        versionCode 804031
+        versionName '8.4.3'
         minSdkVersion 21
         targetSdkVersion 30
     }
