@@ -807,9 +807,9 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
         // Adjust each disappearing view to its proper place
         val lp = disappearingChild.layoutParams as LayoutParams
 
-        val newRow = getGlobalRowOfPosition(lp.viewAdapterPosition)
+        val newRow = getGlobalRowOfPosition(lp.absoluteAdapterPosition)
         val rowDelta = newRow - lp.row
-        val newCol = getGlobalColumnOfPosition(lp.viewAdapterPosition)
+        val newCol = getGlobalColumnOfPosition(lp.absoluteAdapterPosition)
         val colDelta = newCol - lp.column
 
         layoutTempChildView(disappearingChild, rowDelta, colDelta, disappearingChild)
