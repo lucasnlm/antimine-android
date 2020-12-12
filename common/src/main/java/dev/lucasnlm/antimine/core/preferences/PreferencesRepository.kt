@@ -10,7 +10,6 @@ class PreferencesRepository(
 ) : IPreferencesRepository {
     init {
         migrateOldPreferences()
-        revertTestTheme()
     }
 
     override fun hasCustomizations(): Boolean {
@@ -164,12 +163,6 @@ class PreferencesRepository(
 
     override fun disableRequestRating() {
         preferencesManager.putBoolean(PREFERENCE_REQUEST_RATING, false)
-    }
-
-    private fun revertTestTheme() {
-        if (!isPremiumEnabled()) {
-            useTheme(0L)
-        }
     }
 
     private fun migrateOldPreferences() {

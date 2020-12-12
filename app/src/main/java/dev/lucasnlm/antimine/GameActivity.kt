@@ -50,6 +50,7 @@ import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
+import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
 import dev.lucasnlm.external.model.PurchaseInfo
@@ -71,6 +72,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private val billingManager: IBillingManager by inject()
 
     private val preferencesRepository: IPreferencesRepository by inject()
+
+    private val featureFlagManager: IFeatureFlagManager by inject()
 
     private val analyticsManager: IAnalyticsManager by inject()
 
@@ -137,10 +140,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             withContext(Dispatchers.Main) {
                 if (!isFinishing) {
                     invalidateOptionsMenu()
+                    playGamesManager.showPlayPopUp(this@GameActivity)
                 }
             }
-
-            playGamesManager.showPlayPopUp(this@GameActivity)
         }
     }
 
@@ -471,6 +473,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             val isNotInstant = !instantAppManager.isEnabled(applicationContext)
             findItem(R.id.share_now).isVisible = isNotInstant
             findItem(R.id.remove_ads).isVisible = !preferencesRepository.isPremiumEnabled() && isNotInstant
+            findItem(R.id.previous_games).isVisible = featureFlagManager.isGameHistoryEnabled()
 
             if (!playGamesManager.hasGooglePlayGames()) {
                 removeGroup(R.id.play_games_group)
