@@ -22,6 +22,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.cloud.CloudSaveManager
@@ -680,6 +681,12 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             if (canShowWindow) {
                 showEndGameDialog(victory, !victory && canContinue)
             } else {
+                if (!victory) {
+                    gameViewModel.viewModelScope.launch {
+                        gameViewModel.revealMines()
+                    }
+                }
+
                 showEndGameToast(victory)
             }
         }
