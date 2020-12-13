@@ -78,6 +78,7 @@
     <string name="open_tile">Open</string>
     <string name="flag_tile">Flag</string>
     <string name="retry">Retry</string>
+    <string name="continue_game">Continue</string>
     <string name="empty">Empty</string>
     <string name="cant_do_it_now">Impossible to do that now</string>
     <string name="you_have_received">You have received: +%1$d</string>

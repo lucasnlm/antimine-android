@@ -35,6 +35,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
             endGameViewModel.sendEvent(
                 EndGameDialogEvent.BuildCustomEndGame(
                     isVictory = if (getInt(DIALOG_TOTAL_MINES, 0) > 0) getBoolean(DIALOG_IS_VICTORY) else null,
+                    showContinueButton = getBoolean(DIALOG_SHOW_CONTINUE),
                     time = getLong(DIALOG_TIME, 0L),
                     rightMines = getInt(DIALOG_RIGHT_MINES, 0),
                     totalMines = getInt(DIALOG_TOTAL_MINES, 0),
@@ -90,8 +91,18 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                     }
                                 }
                             } else {
-                                setNeutralButton(R.string.retry) { _, _ ->
-                                    gameViewModel.retryObserver.postValue(Unit)
+                                if (state.showContinueButton) {
+                                    setNegativeButton(R.string.retry) { _, _ ->
+                                        gameViewModel.retryObserver.postValue(Unit)
+                                    }
+
+                                    setNeutralButton(R.string.continue_game) { _, _ ->
+                                        gameViewModel.continueObserver.postValue(Unit)
+                                    }
+                                } else {
+                                    setNeutralButton(R.string.retry) { _, _ ->
+                                        gameViewModel.retryObserver.postValue(Unit)
+                                    }
                                 }
                             }
                         }
@@ -108,6 +119,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
     companion object {
         fun newInstance(
             victory: Boolean,
+            showContinueButton: Boolean,
             rightMines: Int,
             totalMines: Int,
             time: Long,
@@ -115,6 +127,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
         ) = EndGameDialogFragment().apply {
             arguments = Bundle().apply {
                 putBoolean(DIALOG_IS_VICTORY, victory)
+                putBoolean(DIALOG_SHOW_CONTINUE, showContinueButton)
                 putInt(DIALOG_RIGHT_MINES, rightMines)
                 putInt(DIALOG_TOTAL_MINES, totalMines)
                 putInt(DIALOG_RECEIVED, received)
@@ -123,6 +136,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
         }
 
         const val DIALOG_IS_VICTORY = "dialog_state"
+        private const val DIALOG_SHOW_CONTINUE = "dialog_show_continue"
         private const val DIALOG_TIME = "dialog_time"
         private const val DIALOG_RIGHT_MINES = "dialog_right_mines"
         private const val DIALOG_TOTAL_MINES = "dialog_total_mines"

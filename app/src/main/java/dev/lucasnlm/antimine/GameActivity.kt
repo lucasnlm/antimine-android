@@ -163,6 +163,16 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
         )
 
+        continueObserver.observe(
+            this@GameActivity,
+            {
+                lifecycleScope.launch {
+                    gameViewModel.increaseErrorTolerance()
+                    eventObserver.postValue(Event.ResumeGame)
+                }
+            }
+        )
+
         shareObserver.observe(
             this@GameActivity,
             {
@@ -632,7 +642,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun showEndGameDialog(victory: Boolean) {
+    private fun showEndGameDialog(victory: Boolean, canContinue: Boolean) {
         val currentGameStatus = status
         if (currentGameStatus is Status.Over && !isFinishing && !drawer.isDrawerOpen(GravityCompat.START)) {
             if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
@@ -641,6 +651,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 val score = currentGameStatus.score
                 EndGameDialogFragment.newInstance(
                     victory,
+                    canContinue,
                     score?.rightMines ?: 0,
                     score?.totalMines ?: 0,
                     currentGameStatus.time,
@@ -663,26 +674,25 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun showEndGameAlert(victory: Boolean) {
+    private fun showEndGameAlert(victory: Boolean, canContinue: Boolean) {
         val canShowWindow = preferencesRepository.showWindowsWhenFinishGame()
         if (!isFinishing) {
             if (canShowWindow) {
-                showEndGameDialog(victory)
+                showEndGameDialog(victory, !victory && canContinue)
             } else {
                 showEndGameToast(victory)
             }
         }
     }
 
-    private fun waitAndShowEndGameAlert(victory: Boolean, await: Boolean) {
-
+    private fun waitAndShowEndGameAlert(victory: Boolean, await: Boolean, canContinue: Boolean) {
         if (await && gameViewModel.explosionDelay() != 0L) {
             lifecycleScope.launch {
                 delay((gameViewModel.explosionDelay() * 0.3).toLong())
-                showEndGameAlert(victory)
+                showEndGameAlert(victory, canContinue)
             }
         } else {
-            showEndGameAlert(victory)
+            showEndGameAlert(victory, canContinue)
         }
     }
 
@@ -764,7 +774,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
                     waitAndShowEndGameAlert(
                         victory = true,
-                        await = false
+                        await = false,
+                        canContinue = false,
                     )
                 }
             }
@@ -787,7 +798,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                         gameViewModel.saveGame()
                         waitAndShowEndGameAlert(
                             victory = false,
-                            await = true
+                            await = true,
+                            canContinue = gameViewModel.hasUnknownMines(),
                         )
                     }
                 }

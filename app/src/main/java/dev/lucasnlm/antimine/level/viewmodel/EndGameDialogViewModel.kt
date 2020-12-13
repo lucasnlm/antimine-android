@@ -69,8 +69,9 @@ class EndGameDialogViewModel(
         R.drawable.emoji_triangular_flag,
         "",
         "",
-        false,
-        0
+        isVictory = false,
+        showContinueButton = false,
+        received = 0
     )
 
     override suspend fun mapEventToState(event: EndGameDialogEvent) = flow {
@@ -82,6 +83,7 @@ class EndGameDialogViewModel(
                         title = context.getString(R.string.you_won),
                         message = messageTo(event.time, event.isVictory),
                         isVictory = true,
+                        showContinueButton = false,
                         received = event.received
                     )
                 }
@@ -91,6 +93,7 @@ class EndGameDialogViewModel(
                         title = context.getString(R.string.you_lost),
                         message = messageTo(event.time, event.isVictory),
                         isVictory = false,
+                        showContinueButton = event.showContinueButton,
                         received = event.received
                     )
                 }
@@ -100,6 +103,7 @@ class EndGameDialogViewModel(
                         title = context.getString(R.string.new_game),
                         message = context.getString(R.string.new_game_request),
                         isVictory = false,
+                        showContinueButton = event.showContinueButton,
                         received = event.received
                     )
                 }

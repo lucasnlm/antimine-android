@@ -5,6 +5,7 @@ import androidx.annotation.DrawableRes
 sealed class EndGameDialogEvent {
     data class BuildCustomEndGame(
         val isVictory: Boolean?,
+        val showContinueButton: Boolean,
         val time: Long,
         val rightMines: Int,
         val totalMines: Int,
