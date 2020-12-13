@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.level.view
+package dev.lucasnlm.antimine.gameover
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -16,8 +16,9 @@ import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogEvent
-import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogViewModel
+import dev.lucasnlm.antimine.gameover.model.GameResult
+import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
+import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
 import dev.lucasnlm.external.IInstantAppManager
 import kotlinx.android.synthetic.main.view_stats.*
 import kotlinx.coroutines.flow.collect
@@ -39,7 +40,9 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
         arguments?.run {
             endGameViewModel.sendEvent(
                 EndGameDialogEvent.BuildCustomEndGame(
-                    isVictory = if (getInt(DIALOG_TOTAL_MINES, 0) > 0) getBoolean(DIALOG_IS_VICTORY) else null,
+                    gameResult = if (getInt(DIALOG_TOTAL_MINES, 0) > 0) {
+                        GameResult.values()[getInt(DIALOG_GAME_RESULT)]
+                    } else GameResult.GameOver,
                     showContinueButton = getBoolean(DIALOG_SHOW_CONTINUE),
                     time = getLong(DIALOG_TIME, 0L),
                     rightMines = getInt(DIALOG_RIGHT_MINES, 0),
@@ -136,7 +139,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
 
     companion object {
         fun newInstance(
-            victory: Boolean,
+            gameResult: GameResult,
             showContinueButton: Boolean,
             rightMines: Int,
             totalMines: Int,
@@ -144,7 +147,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
             received: Int,
         ) = EndGameDialogFragment().apply {
             arguments = Bundle().apply {
-                putBoolean(DIALOG_IS_VICTORY, victory)
+                putInt(DIALOG_GAME_RESULT, gameResult.ordinal)
                 putBoolean(DIALOG_SHOW_CONTINUE, showContinueButton)
                 putInt(DIALOG_RIGHT_MINES, rightMines)
                 putInt(DIALOG_TOTAL_MINES, totalMines)
@@ -153,7 +156,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
             }
         }
 
-        const val DIALOG_IS_VICTORY = "dialog_state"
+        const val DIALOG_GAME_RESULT = "dialog_game_result"
         private const val DIALOG_SHOW_CONTINUE = "dialog_show_continue"
         private const val DIALOG_TIME = "dialog_time"
         private const val DIALOG_RIGHT_MINES = "dialog_right_mines"

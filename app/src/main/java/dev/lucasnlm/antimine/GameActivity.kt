@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.TooltipCompat
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.doOnLayout
@@ -39,7 +40,8 @@ import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.history.HistoryActivity
-import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
+import dev.lucasnlm.antimine.gameover.EndGameDialogFragment
+import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
@@ -643,7 +645,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun showEndGameDialog(victory: Boolean, canContinue: Boolean) {
+    private fun showEndGameDialog(gameResult: GameResult, canContinue: Boolean) {
         val currentGameStatus = status
         if (currentGameStatus is Status.Over && !isFinishing && !drawer.isDrawerOpen(GravityCompat.START)) {
             if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
@@ -651,12 +653,12 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             ) {
                 val score = currentGameStatus.score
                 EndGameDialogFragment.newInstance(
-                    victory,
+                    gameResult,
                     canContinue,
                     score?.rightMines ?: 0,
                     score?.totalMines ?: 0,
                     currentGameStatus.time,
-                    if (victory) 1 else 0
+                    if (gameResult == GameResult.Victory) 1 else 0
                 ).apply {
                     showAllowingStateLoss(supportFragmentManager, EndGameDialogFragment.TAG)
                 }
@@ -664,10 +666,14 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun showEndGameToast(victory: Boolean) {
+    private fun showEndGameToast(gameResult: GameResult) {
         gameToast?.cancel()
 
-        val message = if (victory) { R.string.you_won } else { R.string.you_lost }
+        val message = when (gameResult) {
+            GameResult.GameOver -> R.string.you_lost
+            GameResult.Victory -> R.string.you_won
+            GameResult.Completed -> R.string.you_finished
+        }
 
         gameToast = Toast.makeText(this, message, Toast.LENGTH_LONG).apply {
             setGravity(Gravity.CENTER, 0, 0)
@@ -675,31 +681,31 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun showEndGameAlert(victory: Boolean, canContinue: Boolean) {
+    private fun showEndGameAlert(gameResult: GameResult, canContinue: Boolean) {
         val canShowWindow = preferencesRepository.showWindowsWhenFinishGame()
         if (!isFinishing) {
             if (canShowWindow) {
-                showEndGameDialog(victory, !victory && canContinue)
+                showEndGameDialog(gameResult, gameResult == GameResult.GameOver && canContinue)
             } else {
-                if (!victory) {
+                if (gameResult != GameResult.Victory) {
                     gameViewModel.viewModelScope.launch {
                         gameViewModel.revealMines()
                     }
                 }
 
-                showEndGameToast(victory)
+                showEndGameToast(gameResult)
             }
         }
     }
 
-    private fun waitAndShowEndGameAlert(victory: Boolean, await: Boolean, canContinue: Boolean) {
+    private fun waitAndShowEndGameAlert(gameResult: GameResult, await: Boolean, canContinue: Boolean) {
         if (await && gameViewModel.explosionDelay() != 0L) {
             lifecycleScope.launch {
                 delay((gameViewModel.explosionDelay() * 0.3).toLong())
-                showEndGameAlert(victory, canContinue)
+                showEndGameAlert(gameResult, canContinue)
             }
         } else {
-            showEndGameAlert(victory, canContinue)
+            showEndGameAlert(gameResult, canContinue)
         }
     }
 
@@ -780,7 +786,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     gameViewModel.addNewTip()
 
                     waitAndShowEndGameAlert(
-                        victory = true,
+                        gameResult = GameResult.Victory,
                         await = false,
                         canContinue = false,
                     )
@@ -804,7 +810,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                         gameViewModel.gameOver(isResuming)
                         gameViewModel.saveGame()
                         waitAndShowEndGameAlert(
-                            victory = false,
+                            gameResult = if (gameViewModel.hadMistakes()) GameResult.Completed else GameResult.GameOver,
                             await = true,
                             canContinue = gameViewModel.hasUnknownMines(),
                         )
@@ -922,7 +928,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
         } else {
             playGamesManager.getLoginIntent()?.let {
-                startActivityForResult(it, GOOGLE_PLAY_REQUEST_CODE)
+                ActivityCompat.startActivityForResult(this, it, GOOGLE_PLAY_REQUEST_CODE, null)
             }
         }
     }

@@ -293,6 +293,10 @@ class GameController {
         errorTolerance++
     }
 
+    fun hadMistakes(): Boolean {
+        return errorTolerance != 0
+    }
+
     fun getStats(duration: Long): Stats? {
         val gameStatus: SaveStatus = when {
             isVictory() -> SaveStatus.VICTORY

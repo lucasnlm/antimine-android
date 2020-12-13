@@ -54,6 +54,7 @@
     <string name="you_won">You won!</string>
     <string name="victories">Victories</string>
     <string name="you_lost">You lost!</string>
+    <string name="you_finished">You have finished!</string>
     <string name="defeats">Defeats</string>
     <string name="game_over_desc_1">Good luck on your next game.</string>
     <string name="game_over_desc_4">You finished the minefield in %1$d seconds.</string>

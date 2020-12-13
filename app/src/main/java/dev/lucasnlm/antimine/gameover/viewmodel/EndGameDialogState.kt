@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.level.viewmodel
+package dev.lucasnlm.antimine.gameover.viewmodel
 
 import androidx.annotation.DrawableRes
 

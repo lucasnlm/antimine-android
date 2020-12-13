@@ -5,7 +5,7 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
 import dev.lucasnlm.antimine.custom.viewmodel.CreateGameViewModel
 import dev.lucasnlm.antimine.history.viewmodel.HistoryViewModel
-import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogViewModel
+import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesViewModel
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel

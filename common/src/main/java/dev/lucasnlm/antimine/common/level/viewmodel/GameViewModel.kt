@@ -173,6 +173,10 @@ open class GameViewModel(
         gameController.increaseErrorTolerance()
     }
 
+    fun hadMistakes(): Boolean {
+        return gameController.hadMistakes()
+    }
+
     suspend fun retryGame(uid: Int): Minefield = withContext(Dispatchers.IO) {
         val save = savesRepository.loadFromId(uid)
 
