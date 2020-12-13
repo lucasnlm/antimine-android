@@ -140,7 +140,6 @@ open class GameViewModel(
         mineCount.postValue(setup.mines)
         difficulty.postValue(save.difficulty)
         levelSetup.postValue(setup)
-        refreshField()
 
         eventObserver.postValue(Event.ResumeGame)
 
