@@ -71,7 +71,7 @@ class EndGameDialogViewModel(
         R.drawable.emoji_triangular_flag,
         "",
         "",
-        isVictory = false,
+        gameResult = GameResult.Completed,
         showContinueButton = false,
         received = 0
     )
@@ -84,7 +84,7 @@ class EndGameDialogViewModel(
                         titleEmoji = randomVictoryEmoji(),
                         title = context.getString(R.string.you_won),
                         message = messageTo(event.time, event.gameResult),
-                        isVictory = true,
+                        gameResult = event.gameResult,
                         showContinueButton = false,
                         received = event.received
                     )
@@ -94,7 +94,7 @@ class EndGameDialogViewModel(
                         titleEmoji = randomGameOverEmoji(),
                         title = context.getString(R.string.you_lost),
                         message = messageTo(event.time, event.gameResult),
-                        isVictory = false,
+                        gameResult = event.gameResult,
                         showContinueButton = event.showContinueButton,
                         received = event.received
                     )
@@ -104,7 +104,7 @@ class EndGameDialogViewModel(
                         titleEmoji = randomNeutralEmoji(),
                         title = context.getString(R.string.you_finished),
                         message = context.getString(R.string.new_game_request),
-                        isVictory = false,
+                        gameResult = event.gameResult,
                         showContinueButton = false,
                         received = event.received
                     )
@@ -113,14 +113,14 @@ class EndGameDialogViewModel(
 
             emit(state)
         } else if (event is EndGameDialogEvent.ChangeEmoji) {
-            when (event.isVictory) {
-                true -> {
+            when (event.gameResult) {
+                GameResult.Victory -> {
                     emit(state.copy(titleEmoji = randomVictoryEmoji(event.titleEmoji)))
                 }
-                false -> {
+                GameResult.GameOver -> {
                     emit(state.copy(titleEmoji = randomGameOverEmoji(event.titleEmoji)))
                 }
-                null -> {
+                GameResult.Completed -> {
                     emit(state.copy(titleEmoji = randomNeutralEmoji(event.titleEmoji)))
                 }
             }

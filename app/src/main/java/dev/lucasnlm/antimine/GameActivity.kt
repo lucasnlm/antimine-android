@@ -810,7 +810,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                         gameViewModel.gameOver(isResuming)
                         gameViewModel.saveGame()
                         waitAndShowEndGameAlert(
-                            gameResult = if (gameViewModel.hadMistakes()) GameResult.Completed else GameResult.GameOver,
+                            gameResult = if (gameViewModel.isCompletedWithMistakes())
+                                GameResult.Completed else GameResult.GameOver,
                             await = true,
                             canContinue = gameViewModel.hasUnknownMines(),
                         )

@@ -83,13 +83,16 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                 setImageResource(state.titleEmoji)
                                 setOnClickListener {
                                     endGameViewModel.sendEvent(
-                                        EndGameDialogEvent.ChangeEmoji(state.isVictory, state.titleEmoji)
+                                        EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji)
                                     )
                                 }
                             }
 
                             findViewById<TextView>(R.id.received_message).apply {
-                                if (state.received > 0 && state.isVictory == true && preferencesRepository.useHelp()) {
+                                if (state.received > 0 &&
+                                    state.gameResult == GameResult.Victory &&
+                                    preferencesRepository.useHelp()
+                                ) {
                                     visibility = View.VISIBLE
                                     text = getString(R.string.you_have_received, state.received)
                                 } else {
@@ -101,7 +104,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                 dismissAllowingStateLoss()
                             }
 
-                            if (state.isVictory == true) {
+                            if (state.gameResult == GameResult.Victory) {
                                 revealMinesOnDismiss = false
                                 if (!instantAppManager.isEnabled(context)) {
                                     setNeutralButton(R.string.share) { _, _ ->

@@ -14,7 +14,7 @@ sealed class EndGameDialogEvent {
     ) : EndGameDialogEvent()
 
     data class ChangeEmoji(
-        val isVictory: Boolean?,
+        val gameResult: GameResult,
         @DrawableRes val titleEmoji: Int,
     ) : EndGameDialogEvent()
 }

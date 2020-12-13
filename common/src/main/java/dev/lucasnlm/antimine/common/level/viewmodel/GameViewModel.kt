@@ -173,8 +173,8 @@ open class GameViewModel(
         gameController.increaseErrorTolerance()
     }
 
-    fun hadMistakes(): Boolean {
-        return gameController.hadMistakes()
+    fun isCompletedWithMistakes(): Boolean {
+        return gameController.hadMistakes() && gameController.hasIsolatedAllMines()
     }
 
     suspend fun retryGame(uid: Int): Minefield = withContext(Dispatchers.IO) {
