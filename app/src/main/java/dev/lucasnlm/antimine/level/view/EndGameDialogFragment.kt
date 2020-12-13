@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.level.view
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogViewModel
 import dev.lucasnlm.external.IInstantAppManager
+import kotlinx.android.synthetic.main.view_stats.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -29,6 +31,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
     private val endGameViewModel by viewModel<EndGameDialogViewModel>()
     private val gameViewModel by sharedViewModel<GameViewModel>()
     private val preferencesRepository: IPreferencesRepository by inject()
+    private var revealMinesOnDismiss = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +54,15 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
         val fragmentTransaction = manager.beginTransaction()
         fragmentTransaction.add(this, tag)
         fragmentTransaction.commitAllowingStateLoss()
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        if (revealMinesOnDismiss) {
+            gameViewModel.viewModelScope.launch {
+                gameViewModel.revealMines()
+            }
+        }
+        super.onDismiss(dialog)
     }
 
     @SuppressLint("InflateParams")
@@ -83,13 +95,11 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             }
 
                             findViewById<View>(R.id.close).setOnClickListener {
-                                gameViewModel.viewModelScope.launch {
-                                    gameViewModel.revealMines()
-                                }
                                 dismissAllowingStateLoss()
                             }
 
                             if (state.isVictory == true) {
+                                revealMinesOnDismiss = false
                                 if (!instantAppManager.isEnabled(context)) {
                                     setNeutralButton(R.string.share) { _, _ ->
                                         gameViewModel.shareObserver.postValue(Unit)
@@ -98,14 +108,17 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             } else {
                                 if (state.showContinueButton) {
                                     setNegativeButton(R.string.retry) { _, _ ->
+                                        revealMinesOnDismiss = false
                                         gameViewModel.retryObserver.postValue(Unit)
                                     }
 
                                     setNeutralButton(R.string.continue_game) { _, _ ->
+                                        revealMinesOnDismiss = false
                                         gameViewModel.continueObserver.postValue(Unit)
                                     }
                                 } else {
                                     setNeutralButton(R.string.retry) { _, _ ->
+                                        revealMinesOnDismiss = false
                                         gameViewModel.retryObserver.postValue(Unit)
                                     }
                                 }
