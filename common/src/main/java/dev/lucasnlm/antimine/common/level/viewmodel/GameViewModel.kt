@@ -417,6 +417,7 @@ open class GameViewModel(
             }
 
             showAllMines()
+            refreshField()
         }
     }
 

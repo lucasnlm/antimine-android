@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
@@ -18,6 +19,7 @@ import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.level.viewmodel.EndGameDialogViewModel
 import dev.lucasnlm.external.IInstantAppManager
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -81,6 +83,9 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             }
 
                             findViewById<View>(R.id.close).setOnClickListener {
+                                gameViewModel.viewModelScope.launch {
+                                    gameViewModel.revealMines()
+                                }
                                 dismissAllowingStateLoss()
                             }
 
