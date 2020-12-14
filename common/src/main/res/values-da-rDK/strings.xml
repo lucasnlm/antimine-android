@@ -54,6 +54,7 @@
     <string name="you_won">Du vandt!</string>
     <string name="victories">Sejre</string>
     <string name="you_lost">Du tabte!</string>
+    <string name="you_finished">You finished!</string>
     <string name="defeats">Nederlag</string>
     <string name="game_over_desc_1">Held og lykke med dit næste spil.</string>
     <string name="game_over_desc_4">Du færdiggjorde minefeltet om %1$d sekunder.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Åbn</string>
     <string name="flag_tile">Flag</string>
     <string name="retry">Forsøg igen</string>
+    <string name="continue_game">Continue</string>
     <string name="empty">Tomt</string>
     <string name="cant_do_it_now">Umuligt at gøre det nu</string>
     <string name="you_have_received">Du har modtaget: +%1$d</string>

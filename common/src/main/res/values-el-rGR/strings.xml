@@ -54,6 +54,7 @@
     <string name="you_won">Κέρδισες!</string>
     <string name="victories">Νίκες</string>
     <string name="you_lost">Έχασες!</string>
+    <string name="you_finished">You finished!</string>
     <string name="defeats">Ήττες</string>
     <string name="game_over_desc_1">Καλή τύχη στο επόμενο παιχνίδι σας.</string>
     <string name="game_over_desc_4">Ολοκληρώσατε το ναρκοπέδιο σε %1$d δευτερόλεπτα.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Άνοιγμα</string>
     <string name="flag_tile">Σημαία</string>
     <string name="retry">Ξαναδοκιμάστε</string>
+    <string name="continue_game">Συνέχεια</string>
     <string name="empty">Κενό</string>
     <string name="cant_do_it_now">Αδύνατο να το κάνουμε τώρα</string>
     <string name="you_have_received">Εχεις λάβει: +%1$d</string>

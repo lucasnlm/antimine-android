@@ -54,6 +54,7 @@
     <string name="you_won">你获胜了！</string>
     <string name="victories">胜利</string>
     <string name="you_lost">你输了！</string>
+    <string name="you_finished">您已看完！</string>
     <string name="defeats">失败</string>
     <string name="game_over_desc_1">祝您下次游戏好运。</string>
     <string name="game_over_desc_4">你在 %1$d 秒内清空了雷场.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">打开</string>
     <string name="flag_tile">标记</string>
     <string name="retry">重试</string>
+    <string name="continue_game">继续</string>
     <string name="empty">空</string>
     <string name="cant_do_it_now">现在无法做到这一点。</string>
     <string name="you_have_received">您已收到: +%1$d</string>

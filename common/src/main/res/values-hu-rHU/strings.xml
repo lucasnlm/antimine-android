@@ -54,6 +54,7 @@
     <string name="you_won">Győztél!</string>
     <string name="victories">Győzelmek</string>
     <string name="you_lost">Vesztettél!</string>
+    <string name="you_finished">You finished!</string>
     <string name="defeats">Vereségek</string>
     <string name="game_over_desc_1">Sok szerencsét a következő játékhoz.</string>
     <string name="game_over_desc_4">%1$d másodperc alatt tisztítottad meg az aknamezőt.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Megnyitás</string>
     <string name="flag_tile">Zászló</string>
     <string name="retry">Újra</string>
+    <string name="continue_game">Continue</string>
     <string name="empty">Üres</string>
     <string name="cant_do_it_now">Most lehetetlen ezt megtenni</string>
     <string name="you_have_received">Kapott összeg: +%1$d</string>

@@ -54,6 +54,7 @@
     <string name="you_won">Has guanyat!</string>
     <string name="victories">Victòries</string>
     <string name="you_lost">Has perdut!</string>
+    <string name="you_finished">Has acabat!</string>
     <string name="defeats">Derrotes</string>
     <string name="game_over_desc_1">Que tinguis sort en el proper joc.</string>
     <string name="game_over_desc_4">Has completat el camp de mines en %1$d segons.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Obert</string>
     <string name="flag_tile">Bandera</string>
     <string name="retry">Reintenta</string>
+    <string name="continue_game">Continua</string>
     <string name="empty">Buida</string>
     <string name="cant_do_it_now">És impossible fer-ho ara</string>
     <string name="you_have_received">Heu rebut: +%1$d</string>

@@ -54,6 +54,7 @@
     <string name="you_won">Ganhou!</string>
     <string name="victories">Vitórias</string>
     <string name="you_lost">Perdeu!</string>
+    <string name="you_finished">Você terminou!</string>
     <string name="defeats">Derrotas</string>
     <string name="game_over_desc_1">Boa sorte no seu próximo jogo.</string>
     <string name="game_over_desc_4">Você finalizou o campo minado em %1$d segundos.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Abrir</string>
     <string name="flag_tile">Bandeira</string>
     <string name="retry">Tentar Novamente</string>
+    <string name="continue_game">Continuar</string>
     <string name="empty">Vazio</string>
     <string name="cant_do_it_now">Impossível fazer isso agora</string>
     <string name="you_have_received">Você recebeu: +%1$d</string>
@@ -123,9 +125,9 @@
     <string name="flag_removed">Bandeira removida!</string>
     <string name="remove_ad">Remover Anúncios</string>
     <string name="help">Ajuda</string>
-    <string name="show_windows">Show windows</string>
-    <string name="switch_control">Switch: Flag and Open</string>
-    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
+    <string name="show_windows">Mostrar janelas</string>
+    <string name="switch_control">Alternador: sinalizar e abrir</string>
+    <string name="switch_control_desc">Use o botão para alternar entre a Bandeira e Abrir</string>
     <string name="app_description">Você deve limpar um campo contendo minas escondidas sem detonar nenhuma delas.</string>
     <string name="app_name">Antimine</string>
 </resources>

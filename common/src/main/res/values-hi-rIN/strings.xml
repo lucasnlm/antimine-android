@@ -54,6 +54,7 @@
     <string name="you_won">आप जीत गए!</string>
     <string name="victories">विजय</string>
     <string name="you_lost">तुम हार गए!</string>
+    <string name="you_finished">You finished!</string>
     <string name="defeats">पराजय</string>
     <string name="game_over_desc_1">अपने अगले खेल पर शुभकामनाएँ।</string>
     <string name="game_over_desc_4">आपने %1$d सेकंड में खेल समाप्त किया।</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">खुला</string>
     <string name="flag_tile">ध्वज</string>
     <string name="retry">फिर प्रयास करें</string>
+    <string name="continue_game">Continue</string>
     <string name="empty">खाली</string>
     <string name="cant_do_it_now">अब ऐसा होना असंभव है</string>
     <string name="you_have_received">आपने प्राप्त किया है: +%1$d</string>

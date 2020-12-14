@@ -54,6 +54,7 @@
     <string name="you_won">Jy het Gewen!</string>
     <string name="victories">Oorwinnings</string>
     <string name="you_lost">Jy het verloor!</string>
+    <string name="you_finished">You finished!</string>
     <string name="defeats">Nederlae</string>
     <string name="game_over_desc_1">Sterkte met u volgende wedstryd.</string>
     <string name="game_over_desc_4">U het die wedstryd binne %1$d sekondes voltooi.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Maak oop</string>
     <string name="flag_tile">Merk</string>
     <string name="retry">Weer probeer</string>
+    <string name="continue_game">Continue</string>
     <string name="empty">Leeg</string>
     <string name="cant_do_it_now">Onmoontlik om dit nou te doen</string>
     <string name="you_have_received">U het ontvang: +%1$d</string>

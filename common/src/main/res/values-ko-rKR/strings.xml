@@ -54,6 +54,7 @@
     <string name="you_won">성공!</string>
     <string name="victories">성공 횟수</string>
     <string name="you_lost">실패!</string>
+    <string name="you_finished">끝났어!</string>
     <string name="defeats">실패 횟수</string>
     <string name="game_over_desc_1">다음 판에서는 잘하시길 빕니다.</string>
     <string name="game_over_desc_4">%1$d초만에 이번 판을 끝내셨습니다.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">칸 열기</string>
     <string name="flag_tile">깃발 세우기</string>
     <string name="retry">재시도</string>
+    <string name="continue_game">계속</string>
     <string name="empty">비어있음</string>
     <string name="cant_do_it_now">지금은 불가능 해</string>
     <string name="you_have_received">당신은 받았습니다: +%1$d</string>

@@ -54,6 +54,7 @@
     <string name="you_won">Anda menang!</string>
     <string name="victories">Kemenangan</string>
     <string name="you_lost">Anda Kalah!</string>
+    <string name="you_finished">You finished!</string>
     <string name="defeats">Kalah</string>
     <string name="game_over_desc_1">Semoga sukses di game berikutnya.</string>
     <string name="game_over_desc_4">Anda menyelesaikan permainan dalam %1$d detik.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Buka</string>
     <string name="flag_tile">Bendera</string>
     <string name="retry">Ulangi</string>
+    <string name="continue_game">Melanjutkan</string>
     <string name="empty">Kosong</string>
     <string name="cant_do_it_now">Tidak mungkin melakukan itu sekarang</string>
     <string name="you_have_received">Anda telah menerima: +%1$d</string>

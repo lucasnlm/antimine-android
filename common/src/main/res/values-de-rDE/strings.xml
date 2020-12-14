@@ -54,6 +54,7 @@
     <string name="you_won">Du hast gewonnen!</string>
     <string name="victories">Siege</string>
     <string name="you_lost">Du hast verloren!</string>
+    <string name="you_finished">Du bist fertig!</string>
     <string name="defeats">Niederlagen</string>
     <string name="game_over_desc_1">Viel Glück bei deinem nächsten Spiel.</string>
     <string name="game_over_desc_4">Du hast das Minenfeld in %1$d Sekunden abgearbeitet.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Öffnen</string>
     <string name="flag_tile">Flagge</string>
     <string name="retry">Erneut versuchen</string>
+    <string name="continue_game">Fortsetzen</string>
     <string name="empty">Leer</string>
     <string name="cant_do_it_now">Dies jetzt nicht möglich</string>
     <string name="you_have_received">Du hast +%1$d erhalten</string>
