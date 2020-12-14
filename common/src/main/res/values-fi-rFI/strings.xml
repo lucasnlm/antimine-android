@@ -54,6 +54,7 @@
     <string name="you_won">Sinä voitit!</string>
     <string name="victories">Voittoja</string>
     <string name="you_lost">Hävisit!</string>
+    <string name="you_finished">Olet valmis!</string>
     <string name="defeats">Tappioita</string>
     <string name="game_over_desc_1">Onnea seuraavaan peliisi.</string>
     <string name="game_over_desc_4">Läpäisit miinakentän %1$d sekunnissa.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Avaa</string>
     <string name="flag_tile">Lippu</string>
     <string name="retry">Yritä uudelleen</string>
+    <string name="continue_game">Jatka</string>
     <string name="empty">Tyhjä</string>
     <string name="cant_do_it_now">Ei mahdollista tehdä sitä nyt</string>
     <string name="you_have_received">Olet saanut: +%1$d</string>

@@ -54,6 +54,7 @@
     <string name="you_won">あなたの勝ちです！</string>
     <string name="victories">勝利回数</string>
     <string name="you_lost">あなたの負けです！</string>
+    <string name="you_finished">完了しました！</string>
     <string name="defeats">敗北回数</string>
     <string name="game_over_desc_1">次のゲームでも頑張りましょう。</string>
     <string name="game_over_desc_4">あなたは %1$d 秒でクリアしました。</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">開く</string>
     <string name="flag_tile">旗</string>
     <string name="retry">リトライ</string>
+    <string name="continue_game">続行</string>
     <string name="empty">空</string>
     <string name="cant_do_it_now">今それを行うことは不可能です</string>
     <string name="you_have_received">受け取りました: +%1$d</string>
@@ -123,9 +125,9 @@
     <string name="flag_removed">フラグを消しました！</string>
     <string name="remove_ad">広告を削除</string>
     <string name="help">ヘルプ</string>
-    <string name="show_windows">Show windows</string>
-    <string name="switch_control">Switch: Flag and Open</string>
-    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
+    <string name="show_windows">ウィンドウの表示</string>
+    <string name="switch_control">スイッチ: フラグと開く</string>
+    <string name="switch_control_desc">旗と開くを切り替えるにはボタンを使用します</string>
     <string name="app_description">地雷が隠された長方形から1つも爆発させることなくクリアしましょう。</string>
     <string name="app_name">Antimine</string>
 </resources>

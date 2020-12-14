@@ -54,6 +54,7 @@
     <string name="you_won">Aţi câștigat!</string>
     <string name="victories">Victorii</string>
     <string name="you_lost">Aţi pierdut!</string>
+    <string name="you_finished">You finished!</string>
     <string name="defeats">Înfrângeri</string>
     <string name="game_over_desc_1">Mult noroc la următorul joc.</string>
     <string name="game_over_desc_4">Ai terminat câmpul minat în %1$d secunde.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Deschide</string>
     <string name="flag_tile">Steag</string>
     <string name="retry">Încearcă din nou</string>
+    <string name="continue_game">Continue</string>
     <string name="empty">Gol</string>
     <string name="cant_do_it_now">Nu se poate face acest lucru acum</string>
     <string name="you_have_received">Ați primit: +%1$d</string>

@@ -54,6 +54,7 @@
     <string name="you_won">ניצחת!</string>
     <string name="victories">נצחונות</string>
     <string name="you_lost">הפסדת!</string>
+    <string name="you_finished">You finished!</string>
     <string name="defeats">הפסדים</string>
     <string name="game_over_desc_1">בהצלחה במשחק הבא.</string>
     <string name="game_over_desc_4">סיימת את שדה המוקשים ב%1$d שניות.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">פתוח</string>
     <string name="flag_tile">דגל</string>
     <string name="retry">נסה שנית</string>
+    <string name="continue_game">Continue</string>
     <string name="empty">ריק</string>
     <string name="cant_do_it_now">אי אפשר לעשות את זה עכשיו</string>
     <string name="you_have_received">קיבלת: +%1$d</string>

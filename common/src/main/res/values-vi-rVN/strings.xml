@@ -54,6 +54,7 @@
     <string name="you_won">Thắng rồi!</string>
     <string name="victories">Đã thắng</string>
     <string name="you_lost">Thua rồi!</string>
+    <string name="you_finished">Bạn đã hoàn thành!</string>
     <string name="defeats">Thua</string>
     <string name="game_over_desc_1">Chúc bạn may mắn lần sau.</string>
     <string name="game_over_desc_4">Bạn giải xong trò chơi trong vòng %1$d giây.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Mở</string>
     <string name="flag_tile">Cờ</string>
     <string name="retry">Thử lại</string>
+    <string name="continue_game">Tiếp tục</string>
     <string name="empty">Trống</string>
     <string name="cant_do_it_now">Không thể làm điều đó bây giờ</string>
     <string name="you_have_received">Bạn đã nhận được: +%1$d</string>
@@ -123,7 +125,7 @@
     <string name="flag_removed">Đã tháo cờ hiệu!</string>
     <string name="remove_ad">Loại bỏ quảng cáo</string>
     <string name="help">Trợ Giúp</string>
-    <string name="show_windows">Show windows</string>
+    <string name="show_windows">Hiện cửa sổ</string>
     <string name="switch_control">Switch: Flag and Open</string>
     <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">Bạn phải mở tất cả các ô trên một bãi mìn mà không làm nổ cục mìn nào.</string>

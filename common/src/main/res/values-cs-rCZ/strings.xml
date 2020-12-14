@@ -54,6 +54,7 @@
     <string name="you_won">Vyhráli jste!</string>
     <string name="victories">Vítězství</string>
     <string name="you_lost">Prohráli jste!</string>
+    <string name="you_finished">Skončili jste!</string>
     <string name="defeats">Prohry</string>
     <string name="game_over_desc_1">Hodně štěstí při další hře.</string>
     <string name="game_over_desc_4">Dokončili jste minové pole za %1$d sekund.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Otevřít</string>
     <string name="flag_tile">Vlajka</string>
     <string name="retry">Opakovat</string>
+    <string name="continue_game">Pokračovat</string>
     <string name="empty">Prázdné</string>
     <string name="cant_do_it_now">Není možné to nyní udělat</string>
     <string name="you_have_received">Obdrželi jste: +%1$d</string>

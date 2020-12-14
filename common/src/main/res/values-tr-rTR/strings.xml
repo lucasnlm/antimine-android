@@ -54,6 +54,7 @@
     <string name="you_won">Kazandın!</string>
     <string name="victories">Zaferler</string>
     <string name="you_lost">Kaybettin!</string>
+    <string name="you_finished">Bitirdin!</string>
     <string name="defeats">Yenilgi</string>
     <string name="game_over_desc_1">Sonraki oyunda iyi şanslar.</string>
     <string name="game_over_desc_4">Mayın tarlasını %1$d saniyede bitirdin.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Aç</string>
     <string name="flag_tile">Bayrak</string>
     <string name="retry">Yeniden dene</string>
+    <string name="continue_game">Devam Et</string>
     <string name="empty">Boş</string>
     <string name="cant_do_it_now">Bunu şimdi yapmak imkansız</string>
     <string name="you_have_received">Aldın: +%1$d</string>

@@ -54,6 +54,7 @@
     <string name="you_won">Ви перемогли!</string>
     <string name="victories">Перемог</string>
     <string name="you_lost">Програш!</string>
+    <string name="you_finished">Ви закінчили!</string>
     <string name="defeats">Поразок</string>
     <string name="game_over_desc_1">Удачі у наступній грі.</string>
     <string name="game_over_desc_4">Ви розмінували поле за %1$d секунд.</string>
@@ -69,7 +70,7 @@
     <string name="performance">Ефективність</string>
     <string name="ok">Гаразд</string>
     <string name="use_question_mark">Використовувати прапорці «?»</string>
-    <string name="no_guessing_mode">\'No guessing\' mode</string>
+    <string name="no_guessing_mode">Режим \'Без вгадування\'</string>
     <string name="control">Елементи керування</string>
     <string name="arrow">➞</string>
     <string name="single_click">Одинарний клік</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Відкрити</string>
     <string name="flag_tile">Прапор</string>
     <string name="retry">Повторити</string>
+    <string name="continue_game">Продовжити</string>
     <string name="empty">Пусто</string>
     <string name="cant_do_it_now">Неможливо зробити це зараз</string>
     <string name="you_have_received">Ви отримали: +%1$d</string>

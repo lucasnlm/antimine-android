@@ -54,6 +54,7 @@
     <string name="you_won">Вы победили!</string>
     <string name="victories">Победы</string>
     <string name="you_lost">Вы проиграли!</string>
+    <string name="you_finished">Вы закончили!</string>
     <string name="defeats">Поражения</string>
     <string name="game_over_desc_1">Удачи в вашей следующий раз.</string>
     <string name="game_over_desc_4">Вы завершили минное поле за %1$d секунд.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Открыть</string>
     <string name="flag_tile">Флаг</string>
     <string name="retry">Повторить</string>
+    <string name="continue_game">Продолжить</string>
     <string name="empty">Пусто</string>
     <string name="cant_do_it_now">Невозможно сделать это сейчас</string>
     <string name="you_have_received">Вы получили: +%1$d</string>

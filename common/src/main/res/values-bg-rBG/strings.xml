@@ -54,6 +54,7 @@
     <string name="you_won">Вие победихте!</string>
     <string name="victories">Победи</string>
     <string name="you_lost">Вие загубихте!</string>
+    <string name="you_finished">Вие свършихте!</string>
     <string name="defeats">Загуби</string>
     <string name="game_over_desc_1">Успех при следващата игра.</string>
     <string name="game_over_desc_4">Вие свършихте полето за %1$d секунди.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">Отвори</string>
     <string name="flag_tile">Флаг</string>
     <string name="retry">Опитайте отново</string>
+    <string name="continue_game">Продължи</string>
     <string name="empty">Празно</string>
     <string name="cant_do_it_now">Невъзможно е да се направи това сега</string>
     <string name="you_have_received">Получихте: +%1$d</string>

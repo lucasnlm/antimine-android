@@ -54,6 +54,7 @@
     <string name="you_won">لقد فزت!</string>
     <string name="victories">الانتصارات</string>
     <string name="you_lost">لقد خسرت!</string>
+    <string name="you_finished">انتهيت منها!</string>
     <string name="defeats">الهزائم</string>
     <string name="game_over_desc_1">حظا موفقا في لعبتك القادمة.</string>
     <string name="game_over_desc_4">انتهيت من حقل الألغام في %1$d ثانية.</string>
@@ -78,6 +79,7 @@
     <string name="open_tile">فتح</string>
     <string name="flag_tile">علم</string>
     <string name="retry">إعادة المحاولة</string>
+    <string name="continue_game">إستمر</string>
     <string name="empty">فارغ</string>
     <string name="cant_do_it_now">من المستحيل القيام بذلك الآن</string>
     <string name="you_have_received">لقد استملت مبلغ: +%1$d</string>
