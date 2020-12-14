@@ -154,7 +154,7 @@ dependencies {
     testImplementation 'androidx.fragment:fragment-testing:1.2.5'
     testImplementation 'org.robolectric:robolectric:4.3.1'
     testImplementation 'androidx.test.ext:junit:1.1.2'
-    testImplementation 'io.mockk:mockk:1.10.3'
+    testImplementation 'io.mockk:mockk:1.10.0'
 
     // Core library
     androidTestImplementation 'androidx.test:core:1.2.0'

@@ -50,7 +50,7 @@ class AboutViewModel(
         "Material Design" to R.raw.apache2,
         "Koin" to R.raw.apache2,
         "Moshi" to R.raw.apache2,
-        "Mockito" to R.raw.mockito,
+        "Mockk" to R.raw.apache2,
         "Noto Emoji" to R.raw.apache2,
         "Sounds" to R.raw.sounds,
     ).map {
