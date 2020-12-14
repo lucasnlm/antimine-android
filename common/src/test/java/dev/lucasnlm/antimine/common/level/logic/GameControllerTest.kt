@@ -256,26 +256,26 @@ class GameControllerTest {
     @Test
     fun testVictory() = runBlockingTest {
         withGameController { controller ->
-            assertFalse(controller.checkVictory())
+            assertFalse(controller.isVictory())
 
             controller.mines().forEach { controller.fakeLongPress(it.id) }
-            assertFalse(controller.checkVictory())
+            assertFalse(controller.isVictory())
 
             controller.field { !it.hasMine }.forEach { controller.fakeSingleClick(it.id) }
-            assertTrue(controller.checkVictory())
+            assertTrue(controller.isVictory())
 
             controller.mines().first().run {
                 controller.fakeSingleClick(id)
                 controller.fakeSingleClick(id)
             }
-            assertFalse(controller.checkVictory())
+            assertFalse(controller.isVictory())
         }
     }
 
     @Test
     fun testCantShowVictoryIfHasNoMines() = runBlockingTest {
         withGameController { controller ->
-            assertFalse(controller.checkVictory())
+            assertFalse(controller.isVictory())
         }
     }
 

@@ -35,6 +35,8 @@ class AreaAdapter(
 
     private var clickEnabled: Boolean = false
 
+    private val theme = viewModel.getAppTheme()
+
     init {
         setHasStableIds(true)
         paintSettings = createAreaPaintSettings(
@@ -166,7 +168,7 @@ class AreaAdapter(
         val field = getItem(position)
         holder.run {
             if (itemView is AreaView) {
-                itemView.bindField(field, viewModel.getAppTheme(), isAmbientMode, isLowBitAmbient, paintSettings)
+                itemView.bindField(field, theme, isAmbientMode, isLowBitAmbient, paintSettings)
             }
         }
     }

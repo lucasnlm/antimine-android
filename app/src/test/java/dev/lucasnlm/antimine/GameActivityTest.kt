@@ -7,7 +7,7 @@ import dev.lucasnlm.antimine.di.AppModule
 import dev.lucasnlm.antimine.di.TestCommonModule
 import dev.lucasnlm.antimine.di.TestLevelModule
 import dev.lucasnlm.antimine.di.ViewModelModule
-import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
+import dev.lucasnlm.antimine.gameover.EndGameDialogFragment
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Ignore
@@ -52,7 +52,7 @@ class GameActivityTest {
 
             val endGame = activity.supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG)
             assertNotNull(endGame)
-            assertEquals(false, endGame?.arguments?.get(EndGameDialogFragment.DIALOG_IS_VICTORY))
+            assertEquals(false, endGame?.arguments?.get(EndGameDialogFragment.DIALOG_GAME_RESULT))
         }
     }
 
@@ -89,7 +89,7 @@ class GameActivityTest {
 
             val endGame = activity.supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG)
             assertNotNull(endGame)
-            assertEquals(true, endGame?.arguments?.get(EndGameDialogFragment.DIALOG_IS_VICTORY))
+            assertEquals(true, endGame?.arguments?.get(EndGameDialogFragment.DIALOG_GAME_RESULT))
         }
     }
 }

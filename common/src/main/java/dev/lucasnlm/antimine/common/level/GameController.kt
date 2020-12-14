@@ -27,6 +27,7 @@ class GameController {
     private var useQuestionMark = true
     private var useOpenOnSwitchControl = true
     private var useNoGuessing = true
+    private var errorTolerance = 0
 
     val seed: Long
 
@@ -238,25 +239,23 @@ class GameController {
         return result
     }
 
-    fun hasAnyMineExploded(): Boolean = mines().firstOrNull { it.mistake } != null
+    private fun hasAnyMineExploded(): Boolean = mines().firstOrNull { it.mistake } != null
+
+    private fun explodedMinesCount(): Int = mines().count { it.mistake }
 
     fun hasFlaggedAllMines(): Boolean = rightFlags() == minefield.mines
 
     fun hasIsolatedAllMines(): Boolean {
-        return field.let {
-            val openSquares = it.count { area -> !area.isCovered }
-            val mines = it.count { area -> area.hasMine }
-            (openSquares + mines) == it.size
-        }
+        return field.count { area -> !area.hasMine && area.isCovered } == 0
     }
 
     private fun rightFlags() = mines().count { it.mark.isFlag() }
 
-    fun checkVictory(): Boolean =
+    fun isVictory(): Boolean =
         hasMines() && hasIsolatedAllMines() && !hasAnyMineExploded()
 
     fun isGameOver(): Boolean =
-        checkVictory() || hasAnyMineExploded()
+        hasIsolatedAllMines() || (explodedMinesCount() > errorTolerance)
 
     fun remainingMines(): Int {
         val flagsCount = field.count { it.mark.isFlag() }
@@ -266,8 +265,8 @@ class GameController {
 
     fun getSaveState(duration: Long, difficulty: Difficulty): Save {
         val saveStatus: SaveStatus = when {
-            checkVictory() -> SaveStatus.VICTORY
-            hasAnyMineExploded() -> SaveStatus.DEFEAT
+            isVictory() -> SaveStatus.VICTORY
+            isGameOver() -> SaveStatus.DEFEAT
             else -> SaveStatus.ON_GOING
         }
         return Save(
@@ -290,10 +289,18 @@ class GameController {
 
     fun getActionsCount() = actions
 
+    fun increaseErrorTolerance() {
+        errorTolerance++
+    }
+
+    fun hadMistakes(): Boolean {
+        return errorTolerance != 0
+    }
+
     fun getStats(duration: Long): Stats? {
         val gameStatus: SaveStatus = when {
-            checkVictory() -> SaveStatus.VICTORY
-            hasAnyMineExploded() -> SaveStatus.DEFEAT
+            isVictory() -> SaveStatus.VICTORY
+            isGameOver() -> SaveStatus.DEFEAT
             else -> SaveStatus.ON_GOING
         }
         return if (gameStatus == SaveStatus.ON_GOING) {

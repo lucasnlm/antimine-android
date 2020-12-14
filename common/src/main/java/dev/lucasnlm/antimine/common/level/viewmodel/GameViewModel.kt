@@ -52,6 +52,7 @@ open class GameViewModel(
 ) : ViewModel() {
     val eventObserver = MutableLiveData<Event>()
     val retryObserver = MutableLiveData<Unit>()
+    val continueObserver = MutableLiveData<Unit>()
     val shareObserver = MutableLiveData<Unit>()
 
     private lateinit var gameController: GameController
@@ -116,8 +117,8 @@ open class GameViewModel(
         refreshMineCount()
 
         when {
-            gameController.hasAnyMineExploded() -> eventObserver.postValue(Event.GameOver)
-            gameController.checkVictory() -> eventObserver.postValue(Event.Victory)
+            gameController.isGameOver() -> eventObserver.postValue(Event.GameOver)
+            gameController.isVictory() -> eventObserver.postValue(Event.Victory)
             else -> eventObserver.postValue(Event.ResumeGame)
         }
 
@@ -139,7 +140,6 @@ open class GameViewModel(
         mineCount.postValue(setup.mines)
         difficulty.postValue(save.difficulty)
         levelSetup.postValue(setup)
-        refreshField()
 
         eventObserver.postValue(Event.ResumeGame)
 
@@ -167,6 +167,14 @@ open class GameViewModel(
             // Fail to load
             startNewGame()
         }
+    }
+
+    fun increaseErrorTolerance() {
+        gameController.increaseErrorTolerance()
+    }
+
+    fun isCompletedWithMistakes(): Boolean {
+        return gameController.hadMistakes() && gameController.hasIsolatedAllMines()
     }
 
     suspend fun retryGame(uid: Int): Minefield = withContext(Dispatchers.IO) {
@@ -291,7 +299,7 @@ open class GameViewModel(
     }
 
     private fun onPostAction() {
-        if (preferencesRepository.useFlagAssistant() && !gameController.hasAnyMineExploded()) {
+        if (preferencesRepository.useFlagAssistant() && !gameController.isGameOver()) {
             gameController.runFlagAssistant()
             refreshField()
         }
@@ -323,7 +331,7 @@ open class GameViewModel(
 
     private fun updateGameState() {
         when {
-            gameController.hasAnyMineExploded() -> {
+            gameController.isGameOver() -> {
                 eventObserver.postValue(Event.GameOver)
             }
             else -> {
@@ -335,7 +343,7 @@ open class GameViewModel(
             refreshMineCount()
         }
 
-        if (gameController.checkVictory()) {
+        if (gameController.isVictory()) {
             refreshField()
             eventObserver.postValue(Event.Victory)
         }
@@ -391,22 +399,15 @@ open class GameViewModel(
 
     fun explosionDelay() = if (preferencesRepository.useAnimations()) 750L else 0L
 
-    suspend fun gameOver(fromResumeGame: Boolean) {
+    fun hasUnknownMines(): Boolean {
+        return !gameController.hasIsolatedAllMines()
+    }
+
+    suspend fun revealMines() {
+        val explosionTime = (explosionDelay() / gameController.getMinesCount().coerceAtLeast(10))
+        val delayMillis = explosionTime.coerceAtMost(25L)
+
         gameController.run {
-            analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
-            val explosionTime = (explosionDelay() / gameController.getMinesCount().coerceAtLeast(10))
-            val delayMillis = explosionTime.coerceAtMost(25L)
-
-            if (!fromResumeGame) {
-                if (preferencesRepository.useHapticFeedback()) {
-                    hapticFeedbackManager.explosionFeedback()
-                }
-
-                if (preferencesRepository.isSoundEffectsEnabled()) {
-                    soundManager.play(R.raw.mine_explosion_sound)
-                }
-            }
-
             showWrongFlags()
             refreshField()
 
@@ -419,6 +420,27 @@ open class GameViewModel(
             }
 
             showAllMines()
+            refreshField()
+        }
+    }
+
+    suspend fun gameOver(fromResumeGame: Boolean) {
+        gameController.run {
+            analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
+
+            if (!fromResumeGame) {
+                if (preferencesRepository.useHapticFeedback()) {
+                    hapticFeedbackManager.explosionFeedback()
+                }
+
+                if (preferencesRepository.isSoundEffectsEnabled()) {
+                    soundManager.play(R.raw.mine_explosion_sound)
+                }
+            }
+
+            if (gameController.hasIsolatedAllMines()) {
+                gameController.revealAllEmptyAreas()
+            }
 
             refreshField()
             updateGameState()
@@ -462,7 +484,7 @@ open class GameViewModel(
             preferencesRepository.incrementProgressiveValue()
         }
 
-        if (clock.time() < 30) {
+        if (clock.time() < 30L) {
             playGamesManager.unlockAchievement(Achievement.ThirtySeconds)
         }
 

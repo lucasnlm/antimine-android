@@ -10,10 +10,12 @@ import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.external.AdsManager
 import dev.lucasnlm.external.BillingManager
 import dev.lucasnlm.external.CloudStorageManager
+import dev.lucasnlm.external.FeatureFlagManager
 import dev.lucasnlm.external.ExternalAnalyticsWrapper
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.ICloudStorageManager
+import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.IReviewWrapper
@@ -41,6 +43,8 @@ val AppModule = module {
     single { IapHandler(get(), get(), get()) }
 
     single { CloudSaveManager(get(), get(), get(), get()) }
+
+    single { FeatureFlagManager() } bind IFeatureFlagManager::class
 
     single {
         if (BuildConfig.DEBUG) {

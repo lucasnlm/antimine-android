@@ -1,8 +1,9 @@
-package dev.lucasnlm.antimine.level.viewmodel
+package dev.lucasnlm.antimine.gameover.viewmodel
 
 import android.content.Context
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
+import dev.lucasnlm.antimine.gameover.model.GameResult
 import kotlinx.coroutines.flow.flow
 
 class EndGameDialogViewModel(
@@ -55,10 +56,11 @@ class EndGameDialogViewModel(
 
     ).safeRandomEmoji(except)
 
-    private fun messageTo(time: Long, isVictory: Boolean): String =
+    private fun messageTo(time: Long, gameResult: GameResult): String =
         if (time != 0L) {
-            when {
-                isVictory -> context.getString(R.string.game_over_desc_4, time)
+            when (gameResult) {
+                GameResult.Victory -> context.getString(R.string.game_over_desc_4, time)
+                GameResult.GameOver -> context.getString(R.string.game_over_desc_1)
                 else -> context.getString(R.string.game_over_desc_1)
             }
         } else {
@@ -69,37 +71,41 @@ class EndGameDialogViewModel(
         R.drawable.emoji_triangular_flag,
         "",
         "",
-        false,
-        0
+        gameResult = GameResult.Completed,
+        showContinueButton = false,
+        received = 0
     )
 
     override suspend fun mapEventToState(event: EndGameDialogEvent) = flow {
         if (event is EndGameDialogEvent.BuildCustomEndGame) {
-            val state = when (event.isVictory) {
-                true -> {
+            val state = when (event.gameResult) {
+                GameResult.Victory -> {
                     EndGameDialogState(
                         titleEmoji = randomVictoryEmoji(),
                         title = context.getString(R.string.you_won),
-                        message = messageTo(event.time, event.isVictory),
-                        isVictory = true,
+                        message = messageTo(event.time, event.gameResult),
+                        gameResult = event.gameResult,
+                        showContinueButton = false,
                         received = event.received
                     )
                 }
-                false -> {
+                GameResult.GameOver -> {
                     EndGameDialogState(
                         titleEmoji = randomGameOverEmoji(),
                         title = context.getString(R.string.you_lost),
-                        message = messageTo(event.time, event.isVictory),
-                        isVictory = false,
+                        message = messageTo(event.time, event.gameResult),
+                        gameResult = event.gameResult,
+                        showContinueButton = event.showContinueButton,
                         received = event.received
                     )
                 }
-                null -> {
+                GameResult.Completed -> {
                     EndGameDialogState(
                         titleEmoji = randomNeutralEmoji(),
-                        title = context.getString(R.string.new_game),
+                        title = context.getString(R.string.you_finished),
                         message = context.getString(R.string.new_game_request),
-                        isVictory = false,
+                        gameResult = event.gameResult,
+                        showContinueButton = false,
                         received = event.received
                     )
                 }
@@ -107,14 +113,14 @@ class EndGameDialogViewModel(
 
             emit(state)
         } else if (event is EndGameDialogEvent.ChangeEmoji) {
-            when (event.isVictory) {
-                true -> {
+            when (event.gameResult) {
+                GameResult.Victory -> {
                     emit(state.copy(titleEmoji = randomVictoryEmoji(event.titleEmoji)))
                 }
-                false -> {
+                GameResult.GameOver -> {
                     emit(state.copy(titleEmoji = randomGameOverEmoji(event.titleEmoji)))
                 }
-                null -> {
+                GameResult.Completed -> {
                     emit(state.copy(titleEmoji = randomNeutralEmoji(event.titleEmoji)))
                 }
             }

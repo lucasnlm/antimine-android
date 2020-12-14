@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.TooltipCompat
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.doOnLayout
@@ -22,6 +23,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.cloud.CloudSaveManager
@@ -38,7 +40,8 @@ import dev.lucasnlm.antimine.core.control.ControlStyle
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.history.HistoryActivity
-import dev.lucasnlm.antimine.level.view.EndGameDialogFragment
+import dev.lucasnlm.antimine.gameover.EndGameDialogFragment
+import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
@@ -50,6 +53,7 @@ import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
+import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
 import dev.lucasnlm.external.model.PurchaseInfo
@@ -71,6 +75,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private val billingManager: IBillingManager by inject()
 
     private val preferencesRepository: IPreferencesRepository by inject()
+
+    private val featureFlagManager: IFeatureFlagManager by inject()
 
     private val analyticsManager: IAnalyticsManager by inject()
 
@@ -137,10 +143,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             withContext(Dispatchers.Main) {
                 if (!isFinishing) {
                     invalidateOptionsMenu()
+                    playGamesManager.showPlayPopUp(this@GameActivity)
                 }
             }
-
-            playGamesManager.showPlayPopUp(this@GameActivity)
         }
     }
 
@@ -157,6 +162,16 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             {
                 lifecycleScope.launch {
                     gameViewModel.retryGame(currentSaveId.toInt())
+                }
+            }
+        )
+
+        continueObserver.observe(
+            this@GameActivity,
+            {
+                lifecycleScope.launch {
+                    gameViewModel.increaseErrorTolerance()
+                    eventObserver.postValue(Event.ResumeGame)
                 }
             }
         )
@@ -471,6 +486,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             val isNotInstant = !instantAppManager.isEnabled(applicationContext)
             findItem(R.id.share_now).isVisible = isNotInstant
             findItem(R.id.remove_ads).isVisible = !preferencesRepository.isPremiumEnabled() && isNotInstant
+            findItem(R.id.previous_games).isVisible = featureFlagManager.isGameHistoryEnabled()
 
             if (!playGamesManager.hasGooglePlayGames()) {
                 removeGroup(R.id.play_games_group)
@@ -629,7 +645,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun showEndGameDialog(victory: Boolean) {
+    private fun showEndGameDialog(gameResult: GameResult, canContinue: Boolean) {
         val currentGameStatus = status
         if (currentGameStatus is Status.Over && !isFinishing && !drawer.isDrawerOpen(GravityCompat.START)) {
             if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
@@ -637,11 +653,12 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             ) {
                 val score = currentGameStatus.score
                 EndGameDialogFragment.newInstance(
-                    victory,
+                    gameResult,
+                    canContinue,
                     score?.rightMines ?: 0,
                     score?.totalMines ?: 0,
                     currentGameStatus.time,
-                    if (victory) 1 else 0
+                    if (gameResult == GameResult.Victory) 1 else 0
                 ).apply {
                     showAllowingStateLoss(supportFragmentManager, EndGameDialogFragment.TAG)
                 }
@@ -649,10 +666,14 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun showEndGameToast(victory: Boolean) {
+    private fun showEndGameToast(gameResult: GameResult) {
         gameToast?.cancel()
 
-        val message = if (victory) { R.string.you_won } else { R.string.you_lost }
+        val message = when (gameResult) {
+            GameResult.GameOver -> R.string.you_lost
+            GameResult.Victory -> R.string.you_won
+            GameResult.Completed -> R.string.you_finished
+        }
 
         gameToast = Toast.makeText(this, message, Toast.LENGTH_LONG).apply {
             setGravity(Gravity.CENTER, 0, 0)
@@ -660,26 +681,31 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun showEndGameAlert(victory: Boolean) {
+    private fun showEndGameAlert(gameResult: GameResult, canContinue: Boolean) {
         val canShowWindow = preferencesRepository.showWindowsWhenFinishGame()
         if (!isFinishing) {
             if (canShowWindow) {
-                showEndGameDialog(victory)
+                showEndGameDialog(gameResult, gameResult == GameResult.GameOver && canContinue)
             } else {
-                showEndGameToast(victory)
+                if (gameResult != GameResult.Victory) {
+                    gameViewModel.viewModelScope.launch {
+                        gameViewModel.revealMines()
+                    }
+                }
+
+                showEndGameToast(gameResult)
             }
         }
     }
 
-    private fun waitAndShowEndGameAlert(victory: Boolean, await: Boolean) {
-
+    private fun waitAndShowEndGameAlert(gameResult: GameResult, await: Boolean, canContinue: Boolean) {
         if (await && gameViewModel.explosionDelay() != 0L) {
             lifecycleScope.launch {
                 delay((gameViewModel.explosionDelay() * 0.3).toLong())
-                showEndGameAlert(victory)
+                showEndGameAlert(gameResult, canContinue)
             }
         } else {
-            showEndGameAlert(victory)
+            showEndGameAlert(gameResult, canContinue)
         }
     }
 
@@ -760,8 +786,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     gameViewModel.addNewTip()
 
                     waitAndShowEndGameAlert(
-                        victory = true,
-                        await = false
+                        gameResult = GameResult.Victory,
+                        await = false,
+                        canContinue = false,
                     )
                 }
             }
@@ -783,8 +810,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                         gameViewModel.gameOver(isResuming)
                         gameViewModel.saveGame()
                         waitAndShowEndGameAlert(
-                            victory = false,
-                            await = true
+                            gameResult = if (gameViewModel.isCompletedWithMistakes())
+                                GameResult.Completed else GameResult.GameOver,
+                            await = true,
+                            canContinue = gameViewModel.hasUnknownMines(),
                         )
                     }
                 }
@@ -900,7 +929,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
         } else {
             playGamesManager.getLoginIntent()?.let {
-                startActivityForResult(it, GOOGLE_PLAY_REQUEST_CODE)
+                ActivityCompat.startActivityForResult(this, it, GOOGLE_PLAY_REQUEST_CODE, null)
             }
         }
     }
