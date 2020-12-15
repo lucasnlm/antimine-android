@@ -11,8 +11,9 @@ class PlayGamesManager(
 
     override fun hasGooglePlayGames(): Boolean = false
 
-    override fun silentLogin() {
+    override fun silentLogin(): Boolean {
         // F-droid build doesn't have Google Play Games
+        return false
     }
 
     override fun showPlayPopUp(activity: Activity) {

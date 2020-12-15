@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
@@ -25,31 +26,66 @@ class SplashActivity : AppCompatActivity() {
 
         lifecycleScope.launchWhenCreated {
             if (playGamesManager.hasGooglePlayGames()) {
-                withContext(Dispatchers.IO) {
-                    try {
-                        playGamesManager.silentLogin()
+                var logged: Boolean
 
-                        playGamesManager.playerId()?.let {
-                            splashViewMode.migrateCloudSave(it)
-                        }
-                    } catch (e: Exception) {
-                        Log.e(TAG, "User not logged in Play Games")
+                try {
+                    withContext(Dispatchers.IO) {
+                        logged = playGamesManager.silentLogin()
                     }
+                } catch (e: Exception) {
+                    logged = false
+                    Log.e(TAG, "Failed silent login", e)
                 }
-            }
 
-            withContext(Dispatchers.Main) {
-                if (!isFinishing) {
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                    Intent(this@SplashActivity, GameActivity::class.java)
-                        .run { startActivity(this) }
-                    finish()
+                try {
+                    if (logged) {
+                        migrateDateAndGoToGameActivity()
+                    } else {
+                        playGamesManager.getLoginIntent()?.let {
+                            ActivityCompat.startActivityForResult(
+                                this@SplashActivity, it,
+                                GOOGLE_PLAY_REQUEST_CODE, null
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG, "User not logged or doesn't have Play Games", e)
                 }
             }
         }
     }
 
+    private fun migrateDateAndGoToGameActivity() {
+        lifecycleScope.launchWhenCreated {
+            if (!isFinishing) {
+                withContext(Dispatchers.IO) {
+                    playGamesManager.playerId()?.let {
+                        splashViewMode.migrateCloudSave(it)
+                    }
+                }
+
+                goToGameActivity()
+            }
+        }
+    }
+
+    private fun goToGameActivity() {
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        Intent(this, GameActivity::class.java).run { startActivity(this) }
+        finish()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == GameActivity.GOOGLE_PLAY_REQUEST_CODE) {
+            playGamesManager.handleLoginResult(data)
+            migrateDateAndGoToGameActivity()
+        }
+    }
+
     companion object {
         val TAG = SplashActivity::class.simpleName
+        private const val GOOGLE_PLAY_REQUEST_CODE = 6
     }
 }
