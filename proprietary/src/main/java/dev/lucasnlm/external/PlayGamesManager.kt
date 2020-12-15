@@ -40,12 +40,6 @@ class PlayGamesManager(
 
     override fun hasGooglePlayGames(): Boolean = true
 
-    override fun signOut() {
-        val signInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build()
-        val client = GoogleSignIn.getClient(context, signInOptions)
-        Tasks.await(client.signOut())
-    }
-
     override fun silentLogin(): Boolean {
         val signInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build()
         val lastAccount: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(context)
