@@ -46,6 +46,7 @@ import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.share.ShareManager
+import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.ThemeActivity
@@ -912,13 +913,16 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun silentGooglePlayLogin() {
-        if (playGamesManager.hasGooglePlayGames()) {
+    private fun silentGooglePlayLogin(): Boolean {
+        return if (playGamesManager.hasGooglePlayGames()) {
             try {
                 playGamesManager.silentLogin()
             } catch (e: Exception) {
                 Log.e(TAG, "User not logged in Play Games")
+                false
             }
+        } else {
+            false
         }
     }
 
@@ -957,8 +961,15 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
         if (requestCode == GOOGLE_PLAY_REQUEST_CODE) {
             playGamesManager.handleLoginResult(data)
-            invalidateOptionsMenu()
+            goToSplashScreen()
         }
+    }
+
+    private fun goToSplashScreen() {
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        Intent(this, SplashActivity::class.java)
+            .run { startActivity(this) }
+        finish()
     }
 
     companion object {

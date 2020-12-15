@@ -18,10 +18,10 @@ class PlayGamesManager(
     private var account: GoogleSignInAccount? = null
 
     private fun setupPopUp(activity: Activity, account: GoogleSignInAccount) {
-        Games.getGamesClient(context, account)
-            .setViewForPopups(activity.findViewById(android.R.id.content))
-        Games.getGamesClient(context, account)
-            .setGravityForPopups(Gravity.TOP or Gravity.END)
+        Games.getGamesClient(context, account).apply {
+            setViewForPopups(activity.findViewById(android.R.id.content))
+            setGravityForPopups(Gravity.TOP or Gravity.END)
+        }
     }
 
     override fun playerId(): String? {
@@ -40,11 +40,12 @@ class PlayGamesManager(
 
     override fun hasGooglePlayGames(): Boolean = true
 
-    override fun silentLogin() {
+    override fun silentLogin(): Boolean {
         val signInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build()
         val lastAccount: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(context)
-
-        account = lastAccount ?: Tasks.await(GoogleSignIn.getClient(context, signInOptions).silentSignIn())
+        val client = GoogleSignIn.getClient(context, signInOptions)
+        account = lastAccount ?: Tasks.await(client.silentSignIn())
+        return account != null
     }
 
     override fun getLoginIntent(): Intent? {

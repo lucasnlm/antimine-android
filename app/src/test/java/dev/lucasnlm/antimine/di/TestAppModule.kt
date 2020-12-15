@@ -42,7 +42,7 @@ val AppModule = module {
 
             override fun hasGooglePlayGames(): Boolean = false
 
-            override fun silentLogin() { }
+            override fun silentLogin(): Boolean = false
 
             override fun showPlayPopUp(activity: Activity) { }
 
