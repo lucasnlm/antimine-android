@@ -565,7 +565,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
                 // Check right bound
                 if (rightBoundReached) {
                     // If we've reached the last column, enforce limits
-                    val rightOffset = horizontalSpace - getDecoratedRight(bottomView) + paddingRight
+                    val rightOffset = horizontalSpace - getDecoratedRight(bottomView) - paddingRight
                     (-dx).coerceAtLeast(rightOffset)
                 } else {
                     // No limits while the last column isn't visible
@@ -648,7 +648,7 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
                 val bottomOffset: Int =
                     if (rowOfIndex(childCount - 1) >= maxRowCount - 1) {
                         // We are truly at the bottom, determine how far
-                        verticalSpace - getDecoratedBottom(bottomView) +
+                        verticalSpace - getDecoratedBottom(bottomView) -
                             paddingBottom
                     } else {
                         /*
