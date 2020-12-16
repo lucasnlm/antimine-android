@@ -65,7 +65,7 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
         val recyclerViewHeight = (dimensionRepository.areaSize() * boardHeight)
         val separatorsHeight = (2 * dimensionRepository.areaSeparator() * (boardHeight - 1))
         val calculatedHeight = (height - recyclerViewHeight - separatorsHeight - adsHeight)
-        return ((calculatedHeight / 2) - adsHeight).coerceAtLeast(0f).toInt()
+        return ((calculatedHeight / 2) - adsHeight).coerceAtLeast(0.0f).toInt()
     }
 
     open fun dpFromPx(context: Context, px: Float): Int {
