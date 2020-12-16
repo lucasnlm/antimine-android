@@ -17,8 +17,8 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.math.nextDown
 
 abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragment(contentLayoutId) {
-    private val dimensionRepository: IDimensionRepository by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
+    protected val dimensionRepository: IDimensionRepository by inject()
     protected val gameViewModel by sharedViewModel<GameViewModel>()
     protected val areaAdapter by lazy {
         AreaAdapter(requireContext(), gameViewModel, preferencesRepository, dimensionRepository)
