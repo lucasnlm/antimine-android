@@ -53,7 +53,7 @@ class AboutActivity : ThematicActivity(R.layout.activity_empty) {
 
     private fun showSupportAppDialog() {
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
-            SupportAppDialogFragment.newRequestSupportDialog()
+            SupportAppDialogFragment.newRequestSupportDialog(applicationContext)
                 .show(supportFragmentManager, SupportAppDialogFragment.TAG)
         }
     }

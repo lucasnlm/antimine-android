@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
@@ -68,6 +69,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.singleOrNull
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.Exception
@@ -121,6 +123,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         bindNavigationMenu()
         bindSwitchControlButton()
         bindAds()
+        bindPrice()
 
         findViewById<FrameLayout>(R.id.levelContainer).doOnLayout {
             if (!isFinishing) {
@@ -488,14 +491,11 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             findItem(R.id.share_now).isVisible = isNotInstant
             findItem(R.id.remove_ads).isVisible = !preferencesRepository.isPremiumEnabled() && isNotInstant
             findItem(R.id.previous_games).isVisible = featureFlagManager.isGameHistoryEnabled()
+            findItem(R.id.rate).isVisible = featureFlagManager.isRateUsEnabled()
 
             if (!playGamesManager.hasGooglePlayGames()) {
                 removeGroup(R.id.play_games_group)
             }
-
-            // New Features
-            findItem(R.id.themes).setActionView(R.layout.new_icon)
-            findItem(R.id.tutorial).setActionView(R.layout.new_icon)
         }
     }
 
@@ -899,6 +899,36 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
+    private fun bindPrice() {
+        if (billingManager.isEnabled() && !preferencesRepository.isPremiumEnabled()) {
+            billingManager.start()
+
+            lifecycleScope.launchWhenResumed {
+                billingManager.getPrice().collect { price ->
+                    if (price.isNotBlank()) {
+                        try {
+                            navigationView.menu.findItem(R.id.remove_ads).apply {
+                                actionView = TextView(baseContext).apply {
+                                    text = price
+                                    gravity = Gravity.CENTER_VERTICAL
+                                    setTextColor(ContextCompat.getColor(context, R.color.mines_around_2))
+                                    layoutParams = FrameLayout.LayoutParams(
+                                        FrameLayout.LayoutParams.WRAP_CONTENT,
+                                        FrameLayout.LayoutParams.WRAP_CONTENT,
+                                    ).apply {
+                                        gravity = Gravity.CENTER
+                                    }
+                                }
+                            }
+                        } catch (e: Exception) {
+                            Log.e(TAG, "Fail to create price text")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private fun refreshAds() {
         val isTutorialComplete = preferencesRepository.isTutorialCompleted()
         if (isTutorialComplete && !preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
@@ -946,12 +976,16 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
             !instantAppManager.isEnabled(this)
         ) {
-            if (billingManager.isEnabled()) {
-                SupportAppDialogFragment.newRemoveAdsSupportDialog()
-                    .show(supportFragmentManager, SupportAppDialogFragment.TAG)
-            } else {
-                SupportAppDialogFragment.newRequestSupportDialog()
-                    .show(supportFragmentManager, SupportAppDialogFragment.TAG)
+            lifecycleScope.launch {
+                if (billingManager.isEnabled()) {
+                    SupportAppDialogFragment.newRemoveAdsSupportDialog(
+                        applicationContext,
+                        billingManager.getPrice().singleOrNull()
+                    ).show(supportFragmentManager, SupportAppDialogFragment.TAG)
+                } else {
+                    SupportAppDialogFragment.newRequestSupportDialog(applicationContext)
+                        .show(supportFragmentManager, SupportAppDialogFragment.TAG)
+                }
             }
         }
     }

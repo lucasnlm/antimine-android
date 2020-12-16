@@ -1,6 +1,8 @@
 package dev.lucasnlm.antimine.support
 
+import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,7 +29,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
     private val adsManager: IAdsManager by inject()
     private val instantAppManager: InstantAppManager by inject()
 
-    private var unlockMessage: Int = R.string.support_action
+    private lateinit var unlockMessage: String
     private var targetThemeId: Long = -1L
 
     private var isInstantMode: Boolean = true
@@ -40,11 +42,13 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
         analyticsManager.sentEvent(Analytics.ShowIapDialog)
 
         unlockMessage =
-            (arguments?.getInt(UNLOCK_LABEL) ?: savedInstanceState?.getInt(UNLOCK_LABEL)) ?: R.string.support_action
+            (arguments?.getString(UNLOCK_LABEL) ?: savedInstanceState?.getString(UNLOCK_LABEL))
+            ?: getString(R.string.support_action)
         targetThemeId =
             (arguments?.getLong(TARGET_THEME_ID, -1L)) ?: -1L
     }
 
+    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(requireContext()).apply {
             val view = LayoutInflater
@@ -148,26 +152,30 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
         private const val UNLOCK_LABEL = "support_unlock_label"
         private const val TARGET_THEME_ID = "target_theme_id"
 
-        fun newRequestSupportDialog(): SupportAppDialogFragment {
+        fun newRequestSupportDialog(context: Context): SupportAppDialogFragment {
             return SupportAppDialogFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(UNLOCK_LABEL, R.string.support_action)
+                    putString(UNLOCK_LABEL, context.getString(R.string.support_action))
                 }
             }
         }
 
-        fun newRemoveAdsSupportDialog(): SupportAppDialogFragment {
+        fun newRemoveAdsSupportDialog(context: Context, price: String?): SupportAppDialogFragment {
             return SupportAppDialogFragment().apply {
+                val label = context.getString(R.string.remove_ad)
+                val unlockLabel = price?.let { "$label - $it" } ?: label
                 arguments = Bundle().apply {
-                    putInt(UNLOCK_LABEL, R.string.remove_ad)
+                    putString(UNLOCK_LABEL, unlockLabel)
                 }
             }
         }
 
-        fun newChangeThemeDialog(targetThemeId: Long): SupportAppDialogFragment {
+        fun newChangeThemeDialog(context: Context, targetThemeId: Long, price: String?): SupportAppDialogFragment {
             return SupportAppDialogFragment().apply {
+                val label = context.getString(R.string.unlock_all)
+                val unlockLabel = price?.let { "$label - $it" } ?: label
                 arguments = Bundle().apply {
-                    putInt(UNLOCK_LABEL, R.string.unlock_all)
+                    putString(UNLOCK_LABEL, unlockLabel)
                     putLong(TARGET_THEME_ID, targetThemeId)
                 }
             }

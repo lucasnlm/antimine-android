@@ -4,7 +4,7 @@
     <string name="tutorial_completed">Tutorial Concluído</string>
     <string name="tutorial_0_bottom">Para começar dê um %1$s em qualquer quadrado aleatório.</string>
     <string name="tutorial_1_top">Os números indicam quantas minas existem adjacentes ao quadrado destacado.</string>
-    <string name="tutorial_1_bottom">Portanto, se o canto 1️⃣ tem apenas um quadrado adjacente, ele deve ter uma minha. Use %1$s para sinalizá-lo.</string>
+    <string name="tutorial_1_bottom">Portanto, se o canto 1️⃣ tem apenas um quadrado adjacente, ele deve ter uma mina. Use %1$s para sinalizá-lo.</string>
     <string name="tutorial_2_top">O próximo quadrado fechado não tem uma mina porque o número é 1️⃣ , não 2️⃣ .</string>
     <string name="tutorial_2_bottom">Você pode abri-lo com %1$s.</string>
     <string name="tutorial_3_top">O mesmo acontece nesse 1️⃣ . Você sabe onde está a mina adjacente.</string>

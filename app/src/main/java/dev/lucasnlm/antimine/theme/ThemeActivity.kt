@@ -15,8 +15,11 @@ import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.view.ThemeAdapter
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
+import dev.lucasnlm.external.IBillingManager
+import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_theme.*
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.singleOrNull
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,6 +32,8 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
     private val cloudSaveManager by inject<CloudSaveManager>()
 
     private val preferencesRepository: IPreferencesRepository by inject()
+
+    private val billingManager: IBillingManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,8 +95,14 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
 
     private fun showUnlockDialog(themeId: Long) {
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
-            SupportAppDialogFragment.newChangeThemeDialog(themeId).apply {
-                show(supportFragmentManager, SupportAppDialogFragment.TAG)
+            lifecycleScope.launch {
+                SupportAppDialogFragment.newChangeThemeDialog(
+                    applicationContext,
+                    themeId,
+                    billingManager.getPrice().singleOrNull()
+                ).apply {
+                    show(supportFragmentManager, SupportAppDialogFragment.TAG)
+                }
             }
         }
     }
