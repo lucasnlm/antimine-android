@@ -54,7 +54,7 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
         val width = view.measuredWidth
         val recyclerViewWidth = (dimensionRepository.areaSize() * boardWidth)
         val separatorsWidth = (dimensionRepository.areaSeparator() * (boardWidth + 2))
-        return ((width - recyclerViewWidth - separatorsWidth) / 2).coerceAtLeast(0f).nextDown().toInt()
+        return ((width - recyclerViewWidth - separatorsWidth) / 2).coerceAtLeast(0.0f).nextDown().toInt()
     }
 
     private fun calcVerticalPadding(view: View, boardHeight: Int): Int {
