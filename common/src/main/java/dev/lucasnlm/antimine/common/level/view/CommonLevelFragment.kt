@@ -39,7 +39,12 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
         recyclerGrid.apply {
             val horizontalPadding = calcHorizontalPadding(view, levelSetup.width)
             val verticalPadding = calcVerticalPadding(view, levelSetup.height)
-            setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding)
+            if (horizontalPadding == 0 && verticalPadding == 0) {
+                val minPadding = dimensionRepository.areaSize().toInt()
+                setPadding(minPadding, minPadding, minPadding, minPadding)
+            } else {
+                setPadding(horizontalPadding, verticalPadding, 0, 0)
+            }
             layoutManager = makeNewLayoutManager(levelSetup.width)
             adapter = areaAdapter
         }
@@ -49,7 +54,7 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
         val width = view.measuredWidth
         val recyclerViewWidth = (dimensionRepository.areaSize() * boardWidth)
         val separatorsWidth = (dimensionRepository.areaSeparator() * (boardWidth + 2))
-        return ((width - recyclerViewWidth - separatorsWidth) / 2).coerceAtLeast(dimensionRepository.areaSize()).nextDown().toInt()
+        return ((width - recyclerViewWidth - separatorsWidth) / 2).coerceAtLeast(0f).nextDown().toInt()
     }
 
     private fun calcVerticalPadding(view: View, boardHeight: Int): Int {
@@ -60,7 +65,7 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
         val recyclerViewHeight = (dimensionRepository.areaSize() * boardHeight)
         val separatorsHeight = (2 * dimensionRepository.areaSeparator() * (boardHeight - 1))
         val calculatedHeight = (height - recyclerViewHeight - separatorsHeight - adsHeight)
-        return ((calculatedHeight / 2) - adsHeight).coerceAtLeast(dimensionRepository.areaSize()).toInt()
+        return ((calculatedHeight / 2) - adsHeight).coerceAtLeast(0f).toInt()
     }
 
     open fun dpFromPx(context: Context, px: Float): Int {
