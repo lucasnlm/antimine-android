@@ -51,6 +51,8 @@ class SplashActivity : AppCompatActivity() {
                 } catch (e: Exception) {
                     Log.e(TAG, "User not logged or doesn't have Play Games", e)
                 }
+            } else {
+                goToGameActivity()
             }
         }
     }
