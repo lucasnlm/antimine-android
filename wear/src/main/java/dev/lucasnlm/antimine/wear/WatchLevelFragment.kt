@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.wear
 
-import android.graphics.Point
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.doOnLayout
