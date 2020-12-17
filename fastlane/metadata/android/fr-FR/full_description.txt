@@ -1,5 +1,5 @@
-Testez votre puissance de raisonnement sur un jeu de puzzle difficile où vous devez résoudre un champ de mines sans exploser aucune mine.
-Il s'agit d'une version minimaliste et moderne du Minesweeper classique.
+Testez votre puissance de raisonnement dans un jeu de puzzle difficile où vous devez nettoyer un champ de mines sans faire exploser aucune mine.
+Il s'agit d'une version minimaliste et moderne du Démineur classique.
 
 Êtes-vous en mesure de nettoyer un champ de mines ? C'est parti !
 
@@ -7,50 +7,50 @@ OBJECTIF
 C'est comme le Démineur. Vous gagnez la partie quand vous posez un drapeau sur chaque mine sur le champ de mine. Attention de ne pas en activer !
 
 PAS BESOIN DE DEVINER
-Ce jeu a un algorithme qui crée toujours des champs de mines solvables. Vous n'aurez pas à deviner où se trouve la dernière mine !
+Ce jeu a un algorithme qui crée toujours des champs de mines résolubles. Vous n'aurez pas à deviner où se trouve la dernière mine !
 
 NIVEAUX DE JEU
-Tout comme Minesweeper, ce jeu a différents niveaux: débutant, intermédiaire et expert. Mais il a aussi un mode progressif unique qui devient plus difficile quand vous gagnez.
+Tout comme le Démineur, ce jeu a différents niveaux : débutant, intermédiaire et expert. Mais il a aussi un mode progressif unique qui devient plus difficile quand vous gagnez.
 
 NIVEAU PERSONNALISÉ
 Si les modes standards ne suffisent pas, vous pouvez créer votre niveau de difficulté !
 
-THÉMES
-Antimine a plus de 15 thèmes (lumière, sombre et AMOLED). Et bientôt d'autres seront ajoutés!
+THÈMES
+Antimine a plus de 15 thèmes (incluant la lumière, l'obscurité et l'AMOLED). Et bientôt d'autres seront ajoutés !
 
 MINIMALISTE
 Une apparence et une sensation de netteté : une taille visuelle minimaliste et aussi légère (moins de 9 Mo).
 
-TUTORIEL
-Vous ne savez pas jouer au Démineur ? Pas de problème, vous pouvez jouer notre niveau de tutoriel et activer les conseils dans les paramètres.
+DIDACTICIEL
+Vous ne savez pas jouer au Démineur ? Pas de problème, vous pouvez jouer à notre niveau de didacticiel et activer les conseils dans les paramètres.
 
 STATISTIQUES
-Vérifiez vos résultats et votre développement.
+Vérifiez vos résultats et votre progression.
 
 ASSISTANT DU JEU
 Le jeu marquera automatiquement les carrés que vous avez isolés. 
 
 PERSONNALISATION
-Vous pouvez changer le jeu pour le faire comme vous le souhaitez. 
-Exemple: aide, animations, retours haptiques, point d'interrogation.
+Vous pouvez modifier le jeu pour en faire ce que vous souhaitez. 
+Exemple : aide, animations, retour tactile, point d'interrogation.
 
 CONTRÔLES
-Il supporte quatre systèmes de contrôle différents. Exemple: drapeau en appuyant sur appui ou appui long.
+Il supporte quatre systèmes de contrôle différents. Exemple : drapeau en cliquant ou avec un clic prolongé.
 
-ACHIEVEMENTS 
-Vous avez huit réalisations à débloquer et différents classements à partager avec vos amis.
+SUCCÈS ET CLASSEMENTS 
+Vous avez huit succès à débloquer et différents classements à partager avec vos amis.
 
 ACCESSIBILITÉ
-Vous pouvez personnaliser ce jeu en fonction de vos besoins: changer la taille des carrés, le rayon, le minutage tactile et le support du lecteur d'écran.
+Vous pouvez personnaliser ce jeu en fonction de vos besoins : changer la taille des carrés, leur rayon, le minutage tactile et le support du lecteur d'écran.
 Nous essayons toujours d'améliorer nos paramètres d'accessibilité. Si vous manquez quelque chose, faites-nous part de vos commentaires !
 
 ANDROID
-Il prend en charge les fonctionnalités cool d'Android comme l'écran partagé, les raccourcis, le partage, le thème du système et toujours le support de la dernière version.
+Il prend en charge les fonctionnalités cool d'Android comme l'écran partagé, les raccourcis, le partage, le thème du système et supporte toujours la dernière version.
 
 EN LIGNE OU HORS LIGNE
-Vous n'avez pas besoin d'être en ligne pour jouer au jeu!
+Vous n'avez pas besoin d'être en ligne pour jouer au jeu !
 
-SAUVEGARDE AUTO
-Vous pouvez commencer une partie et continuer plus tard! Il sauvegarder automatiquement votre partie.
+SAUVEGARDE AUTOMATIQUE
+Vous pouvez commencer une partie et la continuer plus tard ! Il sauvegardera automatiquement votre partie.
 
 Profitez-en !

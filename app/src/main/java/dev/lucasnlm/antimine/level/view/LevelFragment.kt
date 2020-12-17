@@ -67,6 +67,19 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
             eventObserver.observe(
                 viewLifecycleOwner,
                 {
+                    if (!gameViewModel.hasPlantedMines()) {
+                        recyclerGrid.post {
+                            levelSetup.value?.let { minefield ->
+                                val size = dimensionRepository.areaSizeWithPadding()
+                                val actionBarSize = dimensionRepository.actionBarSize()
+                                val dx = minefield.width * size * 0.25f
+                                val dy = (minefield.height * size + actionBarSize) * 0.25f - size * 3
+
+                                recyclerGrid.smoothScrollBy(dx.toInt(), dy.toInt(), null, 200)
+                            }
+                        }
+                    }
+
                     when (it) {
                         Event.Pause,
                         Event.GameOver,

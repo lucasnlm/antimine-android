@@ -17,8 +17,8 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.math.nextDown
 
 abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragment(contentLayoutId) {
-    private val dimensionRepository: IDimensionRepository by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
+    protected val dimensionRepository: IDimensionRepository by inject()
     protected val gameViewModel by sharedViewModel<GameViewModel>()
     protected val areaAdapter by lazy {
         AreaAdapter(requireContext(), gameViewModel, preferencesRepository, dimensionRepository)
@@ -39,7 +39,12 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
         recyclerGrid.apply {
             val horizontalPadding = calcHorizontalPadding(view, levelSetup.width)
             val verticalPadding = calcVerticalPadding(view, levelSetup.height)
-            setPadding(horizontalPadding, verticalPadding, 0, 0)
+            if (horizontalPadding == 0 && verticalPadding == 0) {
+                val minPadding = dimensionRepository.areaSize().toInt()
+                setPadding(minPadding, minPadding, minPadding, minPadding)
+            } else {
+                setPadding(horizontalPadding, verticalPadding, 0, 0)
+            }
             layoutManager = makeNewLayoutManager(levelSetup.width)
             adapter = areaAdapter
         }

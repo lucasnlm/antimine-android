@@ -7,9 +7,7 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class IapHandler(
@@ -17,14 +15,12 @@ class IapHandler(
     private val preferencesManager: IPreferencesRepository,
     private val billingManager: IBillingManager,
 ) {
-    fun start() {
-        GlobalScope.launch {
-            billingManager.listenPurchases().collect {
-                if (it is PurchaseInfo.PurchaseResult) {
-                    onLockStatusChanged(it.unlockStatus)
-                } else {
-                    showFailToConnectFeedback()
-                }
+    suspend fun start() {
+        billingManager.listenPurchases().collect {
+            if (it is PurchaseInfo.PurchaseResult) {
+                onLockStatusChanged(it.unlockStatus)
+            } else {
+                showFailToConnectFeedback()
             }
         }
     }

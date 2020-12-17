@@ -14,7 +14,10 @@ import com.android.billingclient.api.querySkuDetails
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.filterNotNull
 
 class BillingManager(
     private val context: Context,
@@ -22,12 +25,16 @@ class BillingManager(
 
     private val purchaseBroadcaster = ConflatedBroadcastChannel<PurchaseInfo>()
 
+    private var unlockPrice = MutableStateFlow<String?>(null)
+
     private val billingClient by lazy {
         BillingClient.newBuilder(context)
             .setListener(this)
             .enablePendingPurchases()
             .build()
     }
+
+    override fun getPrice(): Flow<String> = unlockPrice.asSharedFlow().filterNotNull()
 
     override fun listenPurchases(): Flow<PurchaseInfo> = purchaseBroadcaster.asFlow()
 
@@ -61,17 +68,23 @@ class BillingManager(
     }
 
     override fun onBillingSetupFinished(billingResult: BillingResult) {
-        val purchasesList: List<Purchase> = if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-            // The BillingClient is ready. You can query purchases here.
+        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+            val skuDetailsParams = SkuDetailsParams.newBuilder()
+                .setSkusList(listOf(BASIC_SUPPORT))
+                .setType(BillingClient.SkuType.INAPP)
+                .build()
 
-            billingClient.queryPurchases(BillingClient.SkuType.INAPP).purchasesList.let {
-                it?.toList() ?: listOf()
-            }
-        } else {
-            listOf()
+            billingClient
+                .querySkuDetailsAsync(skuDetailsParams) { _, list ->
+                    unlockPrice.tryEmit(list?.firstOrNull()?.price)
+                }
+
+            val purchasesList: List<Purchase> = billingClient
+                .queryPurchases(BillingClient.SkuType.INAPP)
+                .purchasesList.let { it?.toList() ?: listOf() }
+
+            handlePurchases(purchasesList)
         }
-
-        handlePurchases(purchasesList)
     }
 
     override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
@@ -94,12 +107,12 @@ class BillingManager(
     }
 
     override suspend fun charge(activity: Activity) {
-        val skuDetailsParams = SkuDetailsParams.newBuilder()
-            .setSkusList(listOf(BASIC_SUPPORT))
-            .setType(BillingClient.SkuType.INAPP)
-            .build()
-
         if (billingClient.isReady) {
+            val skuDetailsParams = SkuDetailsParams.newBuilder()
+                .setSkusList(listOf(BASIC_SUPPORT))
+                .setType(BillingClient.SkuType.INAPP)
+                .build()
+
             val details = billingClient.querySkuDetails(skuDetailsParams)
             details.skuDetailsList?.firstOrNull()?.let {
                 val flowParams = BillingFlowParams.newBuilder()

@@ -10,6 +10,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.external.IBillingManager
 import kotlinx.android.synthetic.main.fragment_about_info.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -17,6 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
     private val aboutViewModel: AboutViewModel by sharedViewModel()
     private val preferencesRepository: IPreferencesRepository by inject()
+    private val billingManager: IBillingManager by inject()
 
     override fun onResume() {
         super.onResume()
@@ -38,12 +40,12 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
             }
         }
 
-        if (preferencesRepository.showSupport()) {
+        if (preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
+            supportUs.visibility = View.GONE
+        } else {
             supportUs.setOnClickListener {
                 aboutViewModel.sendEvent(AboutEvent.SupportUs)
             }
-        } else {
-            supportUs.visibility = View.GONE
         }
 
         thirdsParties.setOnClickListener {

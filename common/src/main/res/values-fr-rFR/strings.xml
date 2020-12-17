@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
-    <string name="tutorial">Tutoriel</string>
-    <string name="tutorial_completed">Tutoriel Terminé</string>
+    <string name="tutorial">Didacticiel</string>
+    <string name="tutorial_completed">Didacticiel terminé</string>
     <string name="tutorial_0_bottom">Vous pouvez commencer par %1$s à n\'importe quel carré aléatoire.</string>
     <string name="tutorial_1_top">Les chiffres indiquent combien de mines sont adjacentes au carré surligné.</string>
     <string name="tutorial_1_bottom">Par conséquent, si le coin 1️⃣ n\'a qu\'un carré adjacent, il doit s\'agir d\'une mine. %1$s pour le signaler.</string>
@@ -9,7 +9,7 @@
     <string name="tutorial_2_bottom">Vous pouvez l\'ouvrir par %1$s.</string>
     <string name="tutorial_3_top">Il en va de même pour 1️⃣ . Vous savez où se trouve la mine adjacente.</string>
     <string name="tutorial_3_bottom">Vous pouvez ouvrir tous les autres carrés non ouverts adjacents à 1️⃣ .</string>
-    <string name="tutorial_4_top">Nous savons où se trouve l\'une des mines, donc il n\'y a qu\'une seule possibilité pour l\'autre.</string>
+    <string name="tutorial_4_top">Nous savons où se trouve l\'une des mines. Il n\'y a donc qu\'une seule possibilité pour l\'autre.</string>
     <string name="tutorial_4_bottom">%1$s pour marquer la mine adjacente à 2️⃣ .</string>
     <string name="tutorial_5_top">Vérifier le nombre en surbrillance.</string>
     <string name="tutorial_5_bottom">%1$s pour ouvrir ou %2$s pour marquer.</string>
@@ -20,7 +20,7 @@
     <string name="beginner">Facile</string>
     <string name="intermediate">Intermédiaire</string>
     <string name="expert">Difficile</string>
-    <string name="support_description">Avec votre aide, nous serons en mesure de implémenter de nouvelles fonctionnalités et de maintenir notre projet actif.</string>
+    <string name="support_description">Avec votre aide, nous serons en mesure de mettre en place de nouvelles fonctionnalités et de maintenir notre projet actif.</string>
     <string name="open">Ouvrir</string>
     <string name="settings">Réglages</string>
     <string name="animations">Animations</string>
@@ -81,9 +81,9 @@
     <string name="retry">Réessayer</string>
     <string name="continue_game">Continuer</string>
     <string name="empty">Vide</string>
-    <string name="cant_do_it_now">Impossible de faire cela maintenant</string>
+    <string name="cant_do_it_now">Impossible de faire ça maintenant</string>
     <string name="you_have_received">Vous avez reçu : +%1$d</string>
-    <string name="help_win_a_game">Pour plus d\'Aide, vous devez gagner une partie.</string>
+    <string name="help_win_a_game">Pour plus d\'aide, vous devez gagner une partie.</string>
     <string name="unknown_error">Erreur inconnue.</string>
     <string name="leaderboards">Classements</string>
     <string name="cancel">Annuler</string>
