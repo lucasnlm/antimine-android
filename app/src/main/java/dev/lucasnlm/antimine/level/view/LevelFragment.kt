@@ -67,9 +67,7 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
             eventObserver.observe(
                 viewLifecycleOwner,
                 {
-                    if ((it == Event.StartNewGame || it == Event.ResumeGame) &&
-                        recyclerGrid.scrollY == 0 &&
-                        recyclerGrid.scrollX == 0) {
+                    if (!gameViewModel.hasPlantedMines()) {
                         recyclerGrid.post {
                             levelSetup.value?.let { minefield ->
                                 val size = dimensionRepository.areaSizeWithPadding()

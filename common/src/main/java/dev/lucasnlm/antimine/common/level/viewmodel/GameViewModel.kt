@@ -384,6 +384,10 @@ open class GameViewModel(
         gameController.revealAllEmptyAreas()
     }
 
+    fun hasPlantedMines(): Boolean {
+        return gameController.mines().isNotEmpty()
+    }
+
     fun revealRandomMine(): Boolean {
         return if (gameController.revealRandomMine()) {
             if (tipRepository.removeTip()) {
