@@ -67,13 +67,16 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
             eventObserver.observe(
                 viewLifecycleOwner,
                 {
-                    if (it == Event.StartNewGame || it == Event.ResumeGame) {
+                    if ((it == Event.StartNewGame || it == Event.ResumeGame) &&
+                        recyclerGrid.scrollY == 0 &&
+                        recyclerGrid.scrollX == 0) {
                         recyclerGrid.post {
                             levelSetup.value?.let { minefield ->
                                 val size = dimensionRepository.areaSizeWithPadding()
                                 val actionBarSize = dimensionRepository.actionBarSize()
                                 val dx = minefield.width * size * 0.25f
                                 val dy = (minefield.height * size + actionBarSize) * 0.25f - size * 3
+
                                 recyclerGrid.smoothScrollBy(dx.toInt(), dy.toInt(), null, 200)
                             }
                         }
