@@ -2,7 +2,6 @@ package dev.lucasnlm.external.view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import android.widget.FrameLayout
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
@@ -21,17 +20,19 @@ class AdPlaceHolderView : FrameLayout {
     init {
         addView(adView)
 
-        setOnClickListener {
-            adView.performClick()
-            this.visibility = View.GONE
-        }
+//        setOnClickListener {
+//            adView.performClick()
+//            this.visibility = View.GONE
+//        }
+
+        loadAd()
     }
 
     fun loadAd() {
         adView.loadAd(AdRequest.Builder().build())
 
-        if (!adView.isLoading) {
-            this.visibility = View.GONE
-        }
+//        if (!adView.isLoading) {
+//            this.visibility = View.GONE
+//        }
     }
 }

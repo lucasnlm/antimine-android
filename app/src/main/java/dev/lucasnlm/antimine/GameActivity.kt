@@ -659,7 +659,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     score?.rightMines ?: 0,
                     score?.totalMines ?: 0,
                     currentGameStatus.time,
-                    if (gameResult == GameResult.Victory) 1 else 0
+                    if (gameResult == GameResult.Victory) 2 else 1
                 ).apply {
                     showAllowingStateLoss(supportFragmentManager, EndGameDialogFragment.TAG)
                 }

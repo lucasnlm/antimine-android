@@ -31,6 +31,7 @@
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:textAllCaps="true"
+        android:textColor="@color/accent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_emoji"
@@ -54,14 +55,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/you_have_received"
-        android:layout_marginTop="4dp"
+        android:layout_marginVertical="4dp"
         android:textAlignment="center"
         android:gravity="center"
+        android:visibility="gone"
         app:drawableEndCompat="@drawable/tip"
         app:drawableTint="@color/accent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle"/>
+        app:layout_constraintTop_toBottomOf="@+id/subtitle"
+        tools:visibility="visible"/>
 
     <ImageView
         android:id="@+id/close"
@@ -69,9 +72,82 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?selectableItemBackgroundBorderless"
+        android:contentDescription="@string/cancel"
         android:src="@drawable/close"
         android:padding="8dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/settings"
+        android:importantForAccessibility="no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/settings"
+        android:contentDescription="@string/settings"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <dev.lucasnlm.external.view.AdPlaceHolderView
+        android:id="@+id/ads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:minHeight="66dp"
+        app:layout_constraintTop_toBottomOf="@+id/received_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/actions"/>
+
+    <LinearLayout
+        android:id="@+id/actions"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ads"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:id="@+id/new_game"
+            android:textAllCaps="true"
+            android:text="@string/new_game"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <requestFocus/>
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:id="@+id/continue_game"
+            android:textAllCaps="true"
+            android:text="@string/continue_game"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:id="@+id/share"
+            android:textAllCaps="true"
+            android:text="@string/share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:id="@+id/remove_ads"
+            android:textAllCaps="true"
+            android:text="@string/remove_ad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,13 +3,16 @@ package dev.lucasnlm.antimine.gameover
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
@@ -19,23 +22,35 @@ import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
+import dev.lucasnlm.antimine.preferences.PreferencesActivity
+import dev.lucasnlm.external.Ads
+import dev.lucasnlm.external.IAdsManager
+import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
+import kotlinx.android.synthetic.main.view_play_games_button.view.*
 import kotlinx.android.synthetic.main.view_stats.*
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.singleOrNull
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EndGameDialogFragment : AppCompatDialogFragment() {
+    private val adsManager: IAdsManager by inject()
     private val instantAppManager: IInstantAppManager by inject()
     private val endGameViewModel by viewModel<EndGameDialogViewModel>()
     private val gameViewModel by sharedViewModel<GameViewModel>()
     private val preferencesRepository: IPreferencesRepository by inject()
+    private val billingManager: IBillingManager by inject()
     private var revealMinesOnDismiss = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (!preferencesRepository.isPremiumEnabled()) {
+            billingManager.start()
+        }
 
         arguments?.run {
             endGameViewModel.sendEvent(
@@ -61,8 +76,12 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
 
     override fun onDismiss(dialog: DialogInterface) {
         if (revealMinesOnDismiss) {
-            gameViewModel.viewModelScope.launch {
-                gameViewModel.revealMines()
+            activity?.let {
+                if (!it.isFinishing) {
+                    gameViewModel.viewModelScope.launch {
+                        gameViewModel.revealMines()
+                    }
+                }
             }
         }
         super.onDismiss(dialog)
@@ -88,7 +107,83 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                 }
                             }
 
-                            findViewById<TextView>(R.id.received_message).apply {
+                            val shareButton: AppCompatButton = findViewById(R.id.share)
+                            val newGameButton: AppCompatButton = findViewById(R.id.new_game)
+                            val continueButton: AppCompatButton = findViewById(R.id.continue_game)
+                            val removeAdsButton: AppCompatButton = findViewById(R.id.remove_ads)
+                            val settingsButton: View = findViewById(R.id.settings)
+                            val closeButton: View = findViewById(R.id.close)
+                            val receivedMessage: TextView = findViewById(R.id.received_message)
+
+                            shareButton.setOnClickListener {
+                                revealMinesOnDismiss = false
+                                gameViewModel.shareObserver.postValue(Unit)
+                                dismissAllowingStateLoss()
+                            }
+
+                            newGameButton.setOnClickListener {
+                                revealMinesOnDismiss = false
+                                gameViewModel.startNewGame()
+                                dismissAllowingStateLoss()
+                            }
+
+                            continueButton.setOnClickListener {
+                                revealMinesOnDismiss = false
+
+                                if (preferencesRepository.isPremiumEnabled()) {
+                                    gameViewModel.continueObserver.postValue(Unit)
+                                } else {
+                                    showAdsAndContinue()
+                                }
+                            }
+
+                            settingsButton.setOnClickListener {
+                                showSettings()
+                            }
+
+                            closeButton.setOnClickListener {
+                                dismissAllowingStateLoss()
+                            }
+
+                            if (state.gameResult == GameResult.Victory) {
+                                if (!instantAppManager.isEnabled(context)) {
+                                    shareButton.visibility = View.GONE
+                                }
+                                shareButton.visibility = View.VISIBLE
+                                continueButton.visibility = View.GONE
+                            } else {
+                                shareButton.visibility = View.GONE
+
+                                if (state.showContinueButton) {
+                                    continueButton.visibility = View.VISIBLE
+                                    if (!preferencesRepository.isPremiumEnabled()) {
+                                        continueButton.compoundDrawablePadding = 0
+                                        continueButton.setCompoundDrawablesWithIntrinsicBounds(
+                                            R.drawable.watch_ads_icon, 0, 0, 0
+                                        )
+                                    }
+                                } else {
+                                    continueButton.visibility = View.GONE
+                                }
+                            }
+
+                            if (!preferencesRepository.isPremiumEnabled()) {
+                                activity?.let { activity ->
+                                    removeAdsButton.visibility = View.VISIBLE
+                                    val label = context.getString(R.string.remove_ad)
+                                    val price = billingManager.getPrice().singleOrNull()
+                                    val unlockLabel = price?.let { "$label - $it" } ?: label
+                                    removeAdsButton.text = unlockLabel
+                                    removeAdsButton.setOnClickListener {
+                                        lifecycleScope.launch {
+                                            billingManager.charge(activity)
+                                        }
+                                        dismissAllowingStateLoss()
+                                    }
+                                }
+                            }
+
+                            receivedMessage.apply {
                                 if (state.received > 0 &&
                                     state.gameResult == GameResult.Victory &&
                                     preferencesRepository.useHelp()
@@ -99,46 +194,38 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                     visibility = View.GONE
                                 }
                             }
-
-                            findViewById<View>(R.id.close).setOnClickListener {
-                                dismissAllowingStateLoss()
-                            }
-
-                            if (state.gameResult == GameResult.Victory) {
-                                revealMinesOnDismiss = false
-                                if (!instantAppManager.isEnabled(context)) {
-                                    setNeutralButton(R.string.share) { _, _ ->
-                                        gameViewModel.shareObserver.postValue(Unit)
-                                    }
-                                }
-                            } else {
-                                if (state.showContinueButton) {
-                                    setNegativeButton(R.string.retry) { _, _ ->
-                                        revealMinesOnDismiss = false
-                                        gameViewModel.retryObserver.postValue(Unit)
-                                    }
-
-                                    setNeutralButton(R.string.continue_game) { _, _ ->
-                                        revealMinesOnDismiss = false
-                                        gameViewModel.continueObserver.postValue(Unit)
-                                    }
-                                } else {
-                                    setNeutralButton(R.string.retry) { _, _ ->
-                                        revealMinesOnDismiss = false
-                                        gameViewModel.retryObserver.postValue(Unit)
-                                    }
-                                }
-                            }
                         }
                     }
                 }
 
             setView(view)
-
-            setPositiveButton(R.string.new_game) { _, _ ->
-                gameViewModel.startNewGame()
-            }
         }.create()
+
+    private fun showSettings() {
+        startActivity(Intent(requireContext(), PreferencesActivity::class.java))
+    }
+
+    private fun showAdsAndContinue() {
+        activity?.let {
+            if (!it.isFinishing) {
+                adsManager.requestRewarded(
+                    it,
+                    Ads.RewardsAds,
+                    onRewarded = {
+                        gameViewModel.continueObserver.postValue(Unit)
+                        dismissAllowingStateLoss()
+                    },
+                    onFail = {
+                        Toast.makeText(
+                            it.applicationContext,
+                            R.string.unknown_error,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                )
+            }
+        }
+    }
 
     companion object {
         fun newInstance(
