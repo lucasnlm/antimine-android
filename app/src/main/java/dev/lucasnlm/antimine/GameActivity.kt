@@ -930,15 +930,19 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun refreshAds() {
-        val isTutorialComplete = preferencesRepository.isTutorialCompleted()
-        if (isTutorialComplete && !preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
-            if (!instantAppManager.isEnabled(this)) {
-                navigationView.menu.setGroupVisible(R.id.remove_ads_group, true)
-                ad_placeholder.visibility = View.VISIBLE
-                ad_placeholder.loadAd()
+        if (featureFlagManager.isInAppAdsEnabled()) {
+            val isTutorialComplete = preferencesRepository.isTutorialCompleted()
+            if (isTutorialComplete && !preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
+                if (!instantAppManager.isEnabled(this)) {
+                    navigationView.menu.setGroupVisible(R.id.remove_ads_group, true)
+                    ad_placeholder.visibility = View.VISIBLE
+                    ad_placeholder.loadAd()
+                }
+            } else {
+                navigationView.menu.setGroupVisible(R.id.remove_ads_group, false)
+                ad_placeholder.visibility = View.GONE
             }
         } else {
-            navigationView.menu.setGroupVisible(R.id.remove_ads_group, false)
             ad_placeholder.visibility = View.GONE
         }
     }
