@@ -79,6 +79,7 @@ class StatsViewModel(
                     title = 0,
                     totalGames = size,
                     totalTime = 0,
+                    victoryTime = 0,
                     averageTime = 0,
                     shortestTime = 0,
                     mines = 0,
@@ -90,7 +91,16 @@ class StatsViewModel(
                     0,
                     acc.totalGames,
                     acc.totalTime + value.duration,
-                    0,
+                    victoryTime = if (value.victory != 0){
+                        if (acc.victoryTime == 0L) {
+                            value.duration
+                        } else {
+                            acc.victoryTime + value.duration
+                        }
+                    } else {
+                        acc.victoryTime
+                    },
+                    averageTime = 0,
                     shortestTime = if (value.victory != 0) {
                         if (acc.shortestTime == 0L) {
                             value.duration
@@ -105,12 +115,13 @@ class StatsViewModel(
                     acc.openArea + value.openArea,
                 )
             }
-            result.copy(averageTime = result.totalTime / result.totalGames)
+            result.copy(averageTime = result.victoryTime / result.victory)
         } else {
             StatsModel(
                 title = 0,
                 totalGames = 0,
                 totalTime = 0,
+                victoryTime = 0,
                 averageTime = 0,
                 shortestTime = 0,
                 mines = 0,
