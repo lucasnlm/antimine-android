@@ -91,7 +91,7 @@ class StatsViewModel(
                     0,
                     acc.totalGames,
                     acc.totalTime + value.duration,
-                    victoryTime = if (value.victory != 0){
+                    victoryTime = if (value.victory != 0) {
                         if (acc.victoryTime == 0L) {
                             value.duration
                         } else {
