@@ -27,6 +27,7 @@ import dev.lucasnlm.external.Ads
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
+import dev.lucasnlm.external.view.AdPlaceHolderView
 import kotlinx.android.synthetic.main.view_play_games_button.view.*
 import kotlinx.android.synthetic.main.view_stats.*
 import kotlinx.coroutines.flow.collect
@@ -107,6 +108,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                 }
                             }
 
+                            val adsView: AdPlaceHolderView = findViewById(R.id.ads)
                             val shareButton: AppCompatButton = findViewById(R.id.share)
                             val newGameButton: AppCompatButton = findViewById(R.id.new_game)
                             val continueButton: AppCompatButton = findViewById(R.id.continue_game)
@@ -118,7 +120,6 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             shareButton.setOnClickListener {
                                 revealMinesOnDismiss = false
                                 gameViewModel.shareObserver.postValue(Unit)
-                                dismissAllowingStateLoss()
                             }
 
                             newGameButton.setOnClickListener {
@@ -132,6 +133,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
 
                                 if (preferencesRepository.isPremiumEnabled()) {
                                     gameViewModel.continueObserver.postValue(Unit)
+                                    dismissAllowingStateLoss()
                                 } else {
                                     showAdsAndContinue()
                                 }
@@ -167,8 +169,9 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                 }
                             }
 
-                            if (!preferencesRepository.isPremiumEnabled()) {
+                            if (!preferencesRepository.isPremiumEnabled() && !instantAppManager.isEnabled(context)) {
                                 activity?.let { activity ->
+                                    adsView.visibility = View.VISIBLE
                                     removeAdsButton.visibility = View.VISIBLE
                                     val label = context.getString(R.string.remove_ad)
                                     val price = billingManager.getPrice().singleOrNull()
@@ -177,8 +180,8 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                     removeAdsButton.setOnClickListener {
                                         lifecycleScope.launch {
                                             billingManager.charge(activity)
+                                            adsView.visibility = View.GONE
                                         }
-                                        dismissAllowingStateLoss()
                                     }
                                 }
                             }
