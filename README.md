@@ -28,19 +28,6 @@ Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-andro
     <img src="https://raw.githubusercontent.com/lucasnlm/antimine-android/master/.github/google_play.png" alt="Get it on Google Play" height="80"/>
 </a>
 
-## Building
-
-You can build from source code by running:
-
-```bash
-git clone git@github.com:lucasnlm/antimine-android.git
-cd antimine-android
-
-./gradlew assembleRelease -Dorg.gradle.java.home=$ANDROID_JRE
-```
-
-Where `ANDROID_JRE` is the Java runtime provided by Android Studio.
-
 ## Features
 
 - No guessing algorithm
