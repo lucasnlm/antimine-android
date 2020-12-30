@@ -74,7 +74,7 @@ class StatsViewModel(
 
     private fun List<Stats>.fold(): StatsModel {
         return if (size > 0) {
-            val result = fold(
+            fold(
                 StatsModel(
                     title = 0,
                     totalGames = size,
@@ -91,15 +91,7 @@ class StatsViewModel(
                     0,
                     acc.totalGames,
                     acc.totalTime + value.duration,
-                    victoryTime = if (value.victory != 0) {
-                        if (acc.victoryTime == 0L) {
-                            value.duration
-                        } else {
-                            acc.victoryTime + value.duration
-                        }
-                    } else {
-                        acc.victoryTime
-                    },
+                    victoryTime = acc.victoryTime + if (value.victory != 0) { value.duration } else { 0 },
                     averageTime = 0,
                     shortestTime = if (value.victory != 0) {
                         if (acc.shortestTime == 0L) {
@@ -114,8 +106,13 @@ class StatsViewModel(
                     acc.victory + value.victory,
                     acc.openArea + value.openArea,
                 )
+            }.run {
+                if (victory > 0) {
+                    copy(averageTime = victoryTime / victory)
+                } else {
+                    this
+                }
             }
-            result.copy(averageTime = result.victoryTime / result.victory)
         } else {
             StatsModel(
                 title = 0,
