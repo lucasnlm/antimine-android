@@ -24,11 +24,11 @@ val LevelModule = module {
     }
 
     single {
-        get<AppDataBase>(AppDataBase::class).saveDao()
+        get(AppDataBase::class).saveDao()
     }
 
     single {
-        get<AppDataBase>(AppDataBase::class).statsDao()
+        get(AppDataBase::class).statsDao()
     }
 
     single {
