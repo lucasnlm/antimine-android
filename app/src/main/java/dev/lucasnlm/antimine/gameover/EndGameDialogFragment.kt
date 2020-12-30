@@ -172,15 +172,17 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             if (!preferencesRepository.isPremiumEnabled() && !instantAppManager.isEnabled(context)) {
                                 activity?.let { activity ->
                                     adsView.visibility = View.VISIBLE
-                                    removeAdsButton.visibility = View.VISIBLE
                                     val label = context.getString(R.string.remove_ad)
                                     val price = billingManager.getPrice().singleOrNull()
                                     val unlockLabel = price?.let { "$label - $it" } ?: label
-                                    removeAdsButton.text = unlockLabel
-                                    removeAdsButton.setOnClickListener {
-                                        lifecycleScope.launch {
-                                            billingManager.charge(activity)
-                                            adsView.visibility = View.GONE
+                                    removeAdsButton.apply {
+                                        visibility = View.VISIBLE
+                                        text = unlockLabel
+                                        setOnClickListener {
+                                            lifecycleScope.launch {
+                                                billingManager.charge(activity)
+                                                adsView.visibility = View.GONE
+                                            }
                                         }
                                     }
                                 }
