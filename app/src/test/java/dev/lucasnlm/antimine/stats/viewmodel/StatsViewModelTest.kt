@@ -62,7 +62,6 @@ class StatsViewModelTest : IntentViewModelTest() {
         assertEquals(2, statsModel.stats[3].totalGames)
         assertEquals(2, statsModel.stats[4].totalGames)
         assertEquals(2, statsModel.stats[5].totalGames)
-
     }
 
     @Test
@@ -97,7 +96,6 @@ class StatsViewModelTest : IntentViewModelTest() {
         // General, Standard, Beginner, Intermediate, Expert, Custom
         assertEquals(6, statsModel.stats.count())
     }
-
 
     @Test
     fun testStatsTotalTime() = runBlockingTest {
