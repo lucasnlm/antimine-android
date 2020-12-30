@@ -21,7 +21,7 @@ class AreaScreenshot {
     private lateinit var context: Context
 
     private fun saveImage(area: Area, fileName: String, ambientMode: Boolean): File {
-        val paintSettings = AreaAdapter.createAreaPaintSettings(context, 128.0f)
+        val paintSettings = AreaAdapter.createAreaPaintSettings(context, 128.0f, 3)
         val size = paintSettings.rectF.width().toInt()
         val testPadding = 4
         val bitmap = Bitmap.createBitmap(size + testPadding, size + testPadding, Bitmap.Config.ARGB_8888)
