@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine.stats.viewmodel
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.common.level.models.Minefield
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
@@ -27,42 +28,33 @@ class StatsViewModel(
             preferenceRepository,
         )
 
-        return listOf(
-            // General
-            stats.fold().copy(title = R.string.general),
+        return with(stats) {
+            listOf(
+                // General
+                fold().copy(title = R.string.general),
 
-            // Standard
-            stats.filter {
-                it.width == standardSize.width && it.height == standardSize.height
-            }.fold().copy(title = R.string.standard),
+                // Standard
+                filterStandard(standardSize).fold().copy(title = R.string.standard),
 
-            // Expert
-            stats.filter {
-                it.mines == 99 && it.width == 24 && it.height == 24
-            }.fold().copy(title = R.string.expert),
+                // Expert
+                filter(::isExpert).fold().copy(title = R.string.expert),
 
-            // Intermediate
-            stats.filter {
-                it.mines == 40 && it.width == 16 && it.height == 16
-            }.fold().copy(title = R.string.intermediate),
+                // Intermediate
+                filter(::isIntermediate).fold().copy(title = R.string.intermediate),
 
-            // Beginner
-            stats.filter {
-                it.mines == 10 && it.width == 9 && it.height == 9
-            }.fold().copy(title = R.string.beginner),
+                // Beginner
+                filter(::isBeginner).fold().copy(title = R.string.beginner),
 
-            // Custom
-            stats.filterNot {
-                it.mines == 99 && it.width == 24 && it.height == 24
-            }.filterNot {
-                it.mines == 40 && it.width == 16 && it.height == 16
-            }.filterNot {
-                it.mines == 10 && it.width == 9 && it.height == 9
-            }.filterNot {
-                it.width == standardSize.width && it.height == standardSize.height
-            }.fold().copy(title = R.string.custom),
-        ).filter {
-            it.totalGames > 0
+                // Custom
+                filterNot(::isExpert)
+                    .filterNot(::isIntermediate)
+                    .filterNot(::isBeginner)
+                    .filterNotStandard(standardSize)
+                    .fold()
+                    .copy(title = R.string.custom),
+            ).filter {
+                it.totalGames > 0
+            }
         }
     }
 
@@ -142,6 +134,28 @@ class StatsViewModel(
                 deleteAll()
                 emit(state.copy(stats = loadStatsModel()))
             }
+        }
+    }
+
+    companion object {
+        private fun isExpert(stats: Stats): Boolean {
+            return stats.mines == 99 && stats.width == 24 && stats.height == 24
+        }
+
+        private fun isIntermediate(stats: Stats): Boolean {
+            return stats.mines == 40 && stats.width == 16 && stats.height == 16
+        }
+
+        private fun isBeginner(stats: Stats): Boolean {
+            return stats.mines == 10 && stats.width == 9 && stats.height == 9
+        }
+
+        private fun List<Stats>.filterStandard(standardSize: Minefield) = filter {
+            it.width == standardSize.width && it.height == standardSize.height
+        }
+
+        private fun List<Stats>.filterNotStandard(standardSize: Minefield) = filterNot {
+            it.width == standardSize.width && it.height == standardSize.height
         }
     }
 }
