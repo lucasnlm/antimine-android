@@ -1,11 +1,10 @@
 package dev.lucasnlm.antimine.custom
 
 import dev.lucasnlm.antimine.IntentViewModelTest
-import dev.lucasnlm.antimine.common.level.models.Minefield
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.Minefield
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.custom.viewmodel.CreateGameViewModel
 import dev.lucasnlm.antimine.custom.viewmodel.CustomEvent
-import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -26,7 +25,7 @@ class CreateGameViewModelTest : IntentViewModelTest() {
 
     @Test
     fun testSetNewCustomValues() {
-        val preferenceRepository: IPreferencesRepository = mockk {
+        val preferenceRepository: dev.lucasnlm.antimine.preferences.IPreferencesRepository = mockk {
             every { customGameMode() } returns Minefield(10, 12, 9)
             every { updateCustomGameMode(any()) } returns Unit
         }

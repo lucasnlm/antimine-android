@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.content.res.TypedArray
 import dev.lucasnlm.antimine.common.R
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 
 interface IDimensionRepository {
     fun areaSize(): Float

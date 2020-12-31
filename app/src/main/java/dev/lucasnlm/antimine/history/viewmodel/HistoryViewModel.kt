@@ -5,7 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 

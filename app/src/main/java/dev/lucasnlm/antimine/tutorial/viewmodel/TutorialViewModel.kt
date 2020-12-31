@@ -13,10 +13,10 @@ import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
-import dev.lucasnlm.antimine.core.control.ControlStyle
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
-import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
+import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.tutorial.view.TutorialField
 import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -26,7 +26,7 @@ class TutorialViewModel(
     savesRepository: ISavesRepository,
     statsRepository: IStatsRepository,
     dimensionRepository: IDimensionRepository,
-    themeRepository: IThemeRepository,
+    themeRepository: dev.lucasnlm.antimine.ui.repository.IThemeRepository,
     soundManager: ISoundManager,
     minefieldRepository: IMinefieldRepository,
     analyticsManager: IAnalyticsManager,

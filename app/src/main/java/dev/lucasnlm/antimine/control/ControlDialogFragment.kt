@@ -14,7 +14,7 @@ import dev.lucasnlm.antimine.control.view.ControlItemView
 import dev.lucasnlm.antimine.control.view.SimpleControlItemView
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
-import dev.lucasnlm.antimine.core.control.ControlStyle
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

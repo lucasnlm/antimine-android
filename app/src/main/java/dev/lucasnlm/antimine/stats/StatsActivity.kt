@@ -8,8 +8,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.ThematicActivity
-import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
+import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.stats.view.StatsAdapter
 import dev.lucasnlm.antimine.stats.viewmodel.StatsEvent
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
@@ -23,7 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     private val statsViewModel by viewModel<StatsViewModel>()
     private val instantAppManager: IInstantAppManager by inject()
-    private val themeRepository: IThemeRepository by inject()
+    private val themeRepository: dev.lucasnlm.antimine.ui.repository.IThemeRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

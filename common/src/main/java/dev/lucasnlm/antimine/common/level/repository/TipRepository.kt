@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.level.repository
 
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 
 interface ITipRepository {
     fun setExtraTips(amount: Int)

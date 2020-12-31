@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.theme.viewmodel
 
-import dev.lucasnlm.antimine.core.themes.model.AppTheme
+import dev.lucasnlm.antimine.ui.model.AppTheme
 
 sealed class ThemeEvent {
     data class Unlock(

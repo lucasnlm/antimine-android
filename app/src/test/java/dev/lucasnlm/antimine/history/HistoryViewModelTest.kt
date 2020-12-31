@@ -5,7 +5,7 @@ import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.models.Difficulty
-import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.history.viewmodel.HistoryEvent
 import dev.lucasnlm.antimine.history.viewmodel.HistoryState

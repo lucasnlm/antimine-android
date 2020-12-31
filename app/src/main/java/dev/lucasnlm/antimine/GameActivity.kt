@@ -37,8 +37,8 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.ControlDialogFragment
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.models.Analytics
-import dev.lucasnlm.antimine.core.control.ControlStyle
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.history.HistoryActivity
 import dev.lucasnlm.antimine.gameover.EndGameDialogFragment
@@ -53,6 +53,7 @@ import dev.lucasnlm.antimine.support.SupportAppDialogFragment
 import dev.lucasnlm.antimine.theme.ThemeActivity
 import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
+import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IFeatureFlagManager
@@ -60,9 +61,6 @@ import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.android.synthetic.main.activity_game.*
-import kotlinx.android.synthetic.main.activity_game.minesCount
-import kotlinx.android.synthetic.main.activity_game.timer
-import kotlinx.android.synthetic.main.activity_tv_game.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -412,7 +410,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 ActionBarDrawerToggle(
                     this@GameActivity,
                     drawer,
-                    toolbar,
+                    null,
                     R.string.open_menu,
                     R.string.close_menu
                 ).apply {
@@ -607,7 +605,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun showAbout() {
         analyticsManager.sentEvent(Analytics.OpenAbout)
-        Intent(this, AboutActivity::class.java).apply {
+        Intent(this, dev.lucasnlm.antimine.about.AboutActivity::class.java).apply {
             startActivity(this)
         }
     }

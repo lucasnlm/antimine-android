@@ -18,7 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
@@ -42,7 +42,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
     private val instantAppManager: IInstantAppManager by inject()
     private val endGameViewModel by viewModel<EndGameDialogViewModel>()
     private val gameViewModel by sharedViewModel<GameViewModel>()
-    private val preferencesRepository: IPreferencesRepository by inject()
+    private val preferencesRepository: dev.lucasnlm.antimine.preferences.IPreferencesRepository by inject()
     private val billingManager: IBillingManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {

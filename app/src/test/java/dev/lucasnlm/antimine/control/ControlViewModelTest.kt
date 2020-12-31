@@ -3,9 +3,8 @@ package dev.lucasnlm.antimine.control
 import dev.lucasnlm.antimine.IntentViewModelTest
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
-import dev.lucasnlm.antimine.core.control.ControlStyle
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
-import io.mockk.every
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Assert.assertEquals

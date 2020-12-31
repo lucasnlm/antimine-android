@@ -3,11 +3,11 @@ package dev.lucasnlm.antimine.common.level.logic
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import dev.lucasnlm.antimine.common.level.models.Difficulty
-import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.Size
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

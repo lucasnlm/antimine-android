@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.level.database.converters
 
-import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import org.junit.Test
 
 import org.junit.Assert.assertEquals

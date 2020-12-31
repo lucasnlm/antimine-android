@@ -13,24 +13,6 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 
-/**
- * A [RecyclerView.LayoutManager] implementation
- * that places children in a two-dimensional grid, sized to a fixed column count
- * value. User scrolling is possible in both horizontal and vertical directions
- * to view the data set.
- *
- *
- * The column count is controllable via [.setTotalColumnCount]. The layout manager
- * will generate the number of rows necessary to accommodate the data set based on
- * the fixed column count.
- *
- *
- * This manager does make some assumptions to simplify the implementation:
- *
- *  * All child views are assumed to be the same size
- *  * The window of visible views is a constant
- *
- */
 class FixedGridLayoutManager : RecyclerView.LayoutManager() {
 
     companion object {

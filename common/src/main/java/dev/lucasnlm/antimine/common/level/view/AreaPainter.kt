@@ -10,7 +10,7 @@ import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.models.Mark
-import dev.lucasnlm.antimine.core.themes.model.AppTheme
+import dev.lucasnlm.antimine.ui.model.AppTheme
 
 fun Area.paintOnCanvas(
     context: Context,

@@ -2,8 +2,8 @@ package dev.lucasnlm.antimine.control.viewmodel
 
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.control.models.ControlDetails
-import dev.lucasnlm.antimine.core.control.ControlStyle
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 

@@ -14,8 +14,8 @@ import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.view.AreaView
 import dev.lucasnlm.antimine.common.level.view.AreaViewHolder
-import dev.lucasnlm.antimine.core.control.ControlStyle
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.tutorial.viewmodel.TutorialViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
