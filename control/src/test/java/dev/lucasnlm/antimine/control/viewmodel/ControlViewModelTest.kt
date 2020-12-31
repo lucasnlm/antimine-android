@@ -1,16 +1,34 @@
-package dev.lucasnlm.antimine.control
+package dev.lucasnlm.antimine.control.viewmodel
 
-import dev.lucasnlm.antimine.IntentViewModelTest
-import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
-import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
-import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
 
-class ControlViewModelTest : IntentViewModelTest() {
+@ExperimentalCoroutinesApi
+class ControlViewModelTest {
+    private val dispatcher = TestCoroutineDispatcher()
+
+    @Before
+    fun setup() {
+        Dispatchers.setMain(dispatcher)
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
+    }
+
     private fun ControlViewModel.selectedControlStyle() = singleState().let {
         it.gameControls[it.selectedIndex].controlStyle
     }

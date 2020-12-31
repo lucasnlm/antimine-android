@@ -12,13 +12,13 @@ import dev.lucasnlm.antimine.control.view.ControlItemView
 import dev.lucasnlm.antimine.control.view.SimpleControlItemView
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
-import dev.lucasnlm.antimine.core.cloud.ICloudSaveManager
+import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ControlDialogFragment : AppCompatDialogFragment() {
-    private val cloudSaveManager by inject<ICloudSaveManager>()
+    private val cloudSaveManager by inject<CloudSaveManager>()
     private val controlViewModel by viewModel<ControlViewModel>()
     private val adapter by lazy { ControlListAdapter(controlViewModel) }
 

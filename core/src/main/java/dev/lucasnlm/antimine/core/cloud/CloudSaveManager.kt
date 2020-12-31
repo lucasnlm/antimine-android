@@ -1,5 +1,5 @@
 package dev.lucasnlm.antimine.core.cloud
 
-interface ICloudSaveManager {
+interface CloudSaveManager {
     fun uploadSave()
 }
