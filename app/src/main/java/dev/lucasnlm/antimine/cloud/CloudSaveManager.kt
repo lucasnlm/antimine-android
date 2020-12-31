@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.cloud
 
 import dev.lucasnlm.antimine.common.level.database.models.toHashMap
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
+import dev.lucasnlm.antimine.core.cloud.ICloudSaveManager
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.external.ICloudStorageManager
 import dev.lucasnlm.external.IPlayGamesManager
@@ -16,8 +17,8 @@ class CloudSaveManager(
     private val preferencesRepository: IPreferencesRepository,
     private val statsRepository: IStatsRepository,
     private val cloudStorageManager: ICloudStorageManager,
-) {
-    fun uploadSave() {
+) : ICloudSaveManager {
+    override fun uploadSave() {
         GlobalScope.launch {
             withContext(Dispatchers.IO) {
                 getCloudSave()?.let {
