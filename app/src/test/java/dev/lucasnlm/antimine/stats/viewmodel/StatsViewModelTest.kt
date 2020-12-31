@@ -47,11 +47,7 @@ class StatsViewModelTest : IntentViewModelTest() {
         super.setup()
         every { prefsRepository.getStatsBase() } returns 0
         every { prefsRepository.isPremiumEnabled() } returns false
-        every { minefieldRepository.fromDifficulty(any(), any(), any()) } returns Minefield(
-            6,
-            12,
-            9
-        )
+        every { minefieldRepository.fromDifficulty(any(), any(), any()) } returns Minefield(6, 12, 9)
     }
 
     @Test

@@ -22,7 +22,7 @@ val CommonModule = module {
     single {
         PreferencesRepository(
             get(),
-            ViewConfiguration.getLongPressTimeout()
+            ViewConfiguration.getLongPressTimeout(),
         )
     } bind IPreferencesRepository::class
 

@@ -26,7 +26,7 @@ class TutorialViewModel(
     savesRepository: ISavesRepository,
     statsRepository: IStatsRepository,
     dimensionRepository: IDimensionRepository,
-    themeRepository: dev.lucasnlm.antimine.ui.repository.IThemeRepository,
+    themeRepository: IThemeRepository,
     soundManager: ISoundManager,
     minefieldRepository: IMinefieldRepository,
     analyticsManager: IAnalyticsManager,

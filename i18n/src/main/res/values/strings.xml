@@ -54,10 +54,10 @@
     <string name="you_won">You won!</string>
     <string name="victories">Victories</string>
     <string name="you_lost">You lost!</string>
-    <string name="you_finished">You have finished!</string>
+    <string name="you_finished">You finished!</string>
     <string name="defeats">Defeats</string>
     <string name="generic_game_over">Good luck on your next game.</string>
-    <string name="generic_win">You finished the minefield in %1$d seconds.</string>
+    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
     <string name="fail_to_share">Failed to share</string>
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Sound Effects</string>

@@ -23,7 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     private val statsViewModel by viewModel<StatsViewModel>()
     private val instantAppManager: IInstantAppManager by inject()
-    private val themeRepository: dev.lucasnlm.antimine.ui.repository.IThemeRepository by inject()
+    private val themeRepository: IThemeRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
