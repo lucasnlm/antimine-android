@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.control.models
 
 import androidx.annotation.StringRes
-import dev.lucasnlm.antimine.core.control.ControlStyle
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
 
 data class ControlDetails(
     val id: Long,

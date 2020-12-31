@@ -9,11 +9,11 @@ import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
-import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.common.level.models.Score
 import dev.lucasnlm.antimine.common.level.solver.LimitedBruteForceSolver
-import dev.lucasnlm.antimine.core.control.ActionResponse
-import dev.lucasnlm.antimine.core.control.GameControl
+import dev.lucasnlm.antimine.preferences.models.ActionResponse
+import dev.lucasnlm.antimine.preferences.models.GameControl
 import kotlinx.coroutines.flow.flow
 import kotlin.random.Random
 

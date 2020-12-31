@@ -40,6 +40,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':external')
     implementation project(':i18n')
+    implementation project(':preferences')
+    implementation project(':ui')
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.2.0'

@@ -1,11 +1,11 @@
 package dev.lucasnlm.antimine.di
 
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
-import dev.lucasnlm.antimine.core.themes.model.AppTheme
-import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
-import dev.lucasnlm.antimine.core.themes.repository.Themes.LightTheme
+import dev.lucasnlm.antimine.ui.model.AppTheme
+import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import dev.lucasnlm.antimine.ui.repository.Themes.LightTheme
 import dev.lucasnlm.antimine.mocks.FixedDimensionRepository
 import dev.lucasnlm.antimine.mocks.MockPreferencesRepository
 import org.koin.dsl.bind
@@ -23,7 +23,7 @@ val TestCommonModule = module {
     } bind ISoundManager::class
 
     single {
-        object : IThemeRepository {
+        object : dev.lucasnlm.antimine.ui.repository.IThemeRepository {
             override fun getCustomTheme(): AppTheme? = null
 
             override fun getTheme(): AppTheme = LightTheme
@@ -34,5 +34,5 @@ val TestCommonModule = module {
 
             override fun reset(): AppTheme = LightTheme
         }
-    } bind IThemeRepository::class
+    } bind dev.lucasnlm.antimine.ui.repository.IThemeRepository::class
 }

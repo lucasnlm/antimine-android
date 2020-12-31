@@ -3,11 +3,11 @@ package dev.lucasnlm.antimine.theme
 import dev.lucasnlm.antimine.IntentViewModelTest
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.core.themes.model.AppTheme
-import dev.lucasnlm.antimine.core.themes.model.AreaPalette
-import dev.lucasnlm.antimine.core.themes.model.Assets
-import dev.lucasnlm.antimine.core.themes.repository.IThemeRepository
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.ui.model.AppTheme
+import dev.lucasnlm.antimine.ui.model.AreaPalette
+import dev.lucasnlm.antimine.ui.model.Assets
+import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeState
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
@@ -129,7 +129,7 @@ class ThemeViewModelTest : IntentViewModelTest() {
 
     @Test
     fun testInitialValue() {
-        val themeRepository = mockk<IThemeRepository> {
+        val themeRepository = mockk<dev.lucasnlm.antimine.ui.repository.IThemeRepository> {
             every { getAllThemes() } returns allThemes
             every { getTheme() } returns gardenTheme
         }
@@ -146,7 +146,7 @@ class ThemeViewModelTest : IntentViewModelTest() {
 
     @Test
     fun testChangeValue() {
-        val themeRepository = mockk<IThemeRepository> {
+        val themeRepository = mockk<dev.lucasnlm.antimine.ui.repository.IThemeRepository> {
             every { getAllThemes() } returns allThemes
             every { getTheme() } returns gardenTheme
             every { setTheme(any()) } returns Unit
@@ -175,7 +175,7 @@ class ThemeViewModelTest : IntentViewModelTest() {
 
     @Test
     fun testChangeValueWithoutExtras() {
-        val themeRepository = mockk<IThemeRepository> {
+        val themeRepository = mockk<dev.lucasnlm.antimine.ui.repository.IThemeRepository> {
             every { getAllThemes() } returns allThemes
             every { getTheme() } returns gardenTheme
             every { setTheme(any()) } returns Unit

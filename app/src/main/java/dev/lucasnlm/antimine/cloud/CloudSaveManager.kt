@@ -2,7 +2,7 @@ package dev.lucasnlm.antimine.cloud
 
 import dev.lucasnlm.antimine.common.level.database.models.toHashMap
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.external.ICloudStorageManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.model.CloudSave

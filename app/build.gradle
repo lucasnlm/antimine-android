@@ -5,7 +5,6 @@ plugins {
     id 'kotlin-kapt'
 }
 
-
 if (System.getenv('IS_GOOGLE_BUILD')) {
     apply plugin: 'com.google.firebase.crashlytics'
 }
@@ -102,6 +101,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':external')
     implementation project(':common')
+    implementation project(':about')
+    implementation project(':ui')
+    implementation project(':preferences')
+    implementation project(':core')
 
     googleImplementation project(':proprietary')
     googleInstantImplementation project(':proprietary')

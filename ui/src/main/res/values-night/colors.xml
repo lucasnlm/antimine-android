@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+
+    <color name="primary">#212121</color>
+    <color name="primary_dark">#212121</color>
+    <color name="background">#FF212121</color>
+
+    <color name="mines_around_1">#d5d2cc</color>
+    <color name="mines_around_2">#d5d2cc</color>
+    <color name="mines_around_3">#d5d2cc</color>
+    <color name="mines_around_4">#d5d2cc</color>
+    <color name="mines_around_5">#d5d2cc</color>
+    <color name="mines_around_6">#d5d2cc</color>
+    <color name="mines_around_7">#d5d2cc</color>
+    <color name="mines_around_8">#d5d2cc</color>
+
+    <color name="accent">#FFFFFF</color>
+    <color name="install_button">#E65100</color>
+    <color name="highlight">#FFFFFF</color>
+
+    <color name="view_cover">#171717</color>
+    <color name="view_clean">#ff424242</color>
+
+    <color name="splash_text_color">#FFFFFF</color>
+</resources>

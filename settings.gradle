@@ -1,4 +1,8 @@
 include ':app', ':wear', ':common', ':proprietary', ':foss'
+include ':about'
 include ':external'
 include ':instant'
 include ':i18n'
+include ':ui'
+include ':preferences'
+include ':core'

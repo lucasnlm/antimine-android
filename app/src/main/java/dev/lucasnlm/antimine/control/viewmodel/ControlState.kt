@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.control.viewmodel
 
 import dev.lucasnlm.antimine.control.models.ControlDetails
-import dev.lucasnlm.antimine.core.control.ControlStyle
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
 
 data class ControlState(
     val selectedIndex: Int,

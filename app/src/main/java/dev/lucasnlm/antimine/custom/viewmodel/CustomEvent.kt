@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.custom.viewmodel
 
-import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.preferences.models.Minefield
 
 sealed class CustomEvent {
     data class UpdateCustomGameEvent(

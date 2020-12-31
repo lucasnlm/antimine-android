@@ -2,11 +2,11 @@ package dev.lucasnlm.antimine.stats.viewmodel
 
 import dev.lucasnlm.antimine.IntentViewModelTest
 import dev.lucasnlm.antimine.common.level.database.models.Stats
-import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.MemoryStatsRepository
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.test.runBlockingTest
@@ -47,7 +47,11 @@ class StatsViewModelTest : IntentViewModelTest() {
         super.setup()
         every { prefsRepository.getStatsBase() } returns 0
         every { prefsRepository.isPremiumEnabled() } returns false
-        every { minefieldRepository.fromDifficulty(any(), any(), any()) } returns Minefield(6, 12, 9)
+        every { minefieldRepository.fromDifficulty(any(), any(), any()) } returns Minefield(
+            6,
+            12,
+            9
+        )
     }
 
     @Test

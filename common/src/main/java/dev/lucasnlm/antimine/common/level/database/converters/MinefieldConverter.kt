@@ -4,7 +4,7 @@ import androidx.room.TypeConverter
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.preferences.models.Minefield
 
 class MinefieldConverter {
     private val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
@@ -14,7 +14,11 @@ class MinefieldConverter {
 
     @TypeConverter
     fun toMinefield(jsonInput: String): Minefield =
-        jsonAdapter.fromJson(jsonInput) ?: Minefield(9, 9, 9)
+        jsonAdapter.fromJson(jsonInput) ?: Minefield(
+            9,
+            9,
+            9
+        )
 
     @TypeConverter
     fun toJsonString(field: Minefield): String = jsonAdapter.toJson(field)

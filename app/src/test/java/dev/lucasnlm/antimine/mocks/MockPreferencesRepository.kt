@@ -1,8 +1,8 @@
 package dev.lucasnlm.antimine.mocks
 
-import dev.lucasnlm.antimine.common.level.models.Minefield
-import dev.lucasnlm.antimine.core.control.ControlStyle
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.Minefield
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 
 class MockPreferencesRepository : IPreferencesRepository {
     private var customMinefield = Minefield(9, 9, 9)

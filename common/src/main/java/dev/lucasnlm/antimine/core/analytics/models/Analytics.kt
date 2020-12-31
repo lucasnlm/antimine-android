@@ -2,7 +2,7 @@ package dev.lucasnlm.antimine.core.analytics.models
 
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Score
-import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.preferences.models.Minefield
 
 sealed class Analytics(
     val name: String,

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="dev.lucasnlm.antimine.about">
+
+    <application>
+        <activity
+            android:name="dev.lucasnlm.antimine.text.TextActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.lucasnlm.antimine.about.AboutActivity" />
+        </activity>
+
+        <activity
+            android:name="dev.lucasnlm.antimine.about.AboutActivity"
+            android:label="@string/about"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.lucasnlm.antimine.GameActivity" />
+        </activity>
+    </application>
+
+</manifest>

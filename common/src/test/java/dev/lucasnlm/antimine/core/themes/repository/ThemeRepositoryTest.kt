@@ -6,7 +6,7 @@ import org.junit.Test
 class ThemeRepositoryTest {
     @Test
     fun getAllThemesMustNotHaveDuplicatedIds() {
-        val customThemes = Themes.getAllCustom()
+        val customThemes = dev.lucasnlm.antimine.ui.repository.Themes.getAllCustom()
         customThemes.distinctBy { it.id }.count()
         assertEquals(customThemes.size, customThemes.distinctBy { it.id }.count())
     }

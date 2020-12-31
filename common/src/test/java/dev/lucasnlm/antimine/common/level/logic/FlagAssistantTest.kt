@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.level.logic
 
-import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -10,7 +10,14 @@ class FlagAssistantTest {
     @Test
     fun testRunAssistant() = runBlockingTest {
         repeat(20) { takeMines ->
-            val creator = MinefieldCreator(Minefield(8, 8, 25), Random(200))
+            val creator = MinefieldCreator(
+                Minefield(
+                    8,
+                    8,
+                    25
+                ),
+                Random(200)
+            )
             val map = creator.create(50, false).toMutableList()
 
             map.filter { it.hasMine }
@@ -43,7 +50,14 @@ class FlagAssistantTest {
 
         repeat(20) { takeMines ->
             val seed = 10 * takeMines
-            val creator = MinefieldCreator(Minefield(8, 8, 25), Random(seed))
+            val creator = MinefieldCreator(
+                Minefield(
+                    8,
+                    8,
+                    25
+                ),
+                Random(seed)
+            )
             val map = creator.create(50, false).toMutableList()
 
             map.filter { it.hasMine }

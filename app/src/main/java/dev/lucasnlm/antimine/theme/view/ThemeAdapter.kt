@@ -10,7 +10,7 @@ import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
 import dev.lucasnlm.antimine.common.level.view.AreaView
-import dev.lucasnlm.antimine.core.themes.model.AppTheme
+import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
 import kotlinx.android.synthetic.main.view_theme.view.*

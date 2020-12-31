@@ -7,9 +7,8 @@ import android.view.MenuItem
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.ThematicActivity
+import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.cloud.CloudSaveManager
-import dev.lucasnlm.antimine.core.preferences.IPreferencesRepository
 import org.koin.android.ext.android.inject
 
 class PreferencesActivity :

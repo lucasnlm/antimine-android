@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import dev.lucasnlm.antimine.common.level.models.Area
 import dev.lucasnlm.antimine.common.level.models.Difficulty
-import dev.lucasnlm.antimine.common.level.models.Minefield
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.common.level.database.converters.AreaConverter
 import dev.lucasnlm.antimine.common.level.database.converters.FirstOpenConverter
 import dev.lucasnlm.antimine.common.level.database.converters.SaveStatusConverter
