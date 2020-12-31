@@ -1,24 +1,42 @@
-package dev.lucasnlm.antimine.theme
+package dev.lucasnlm.antimine.themes
 
-import dev.lucasnlm.antimine.IntentViewModelTest
-import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
+import dev.lucasnlm.antimine.themes.viewmodel.ThemeState
+import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette
 import dev.lucasnlm.antimine.ui.model.Assets
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
-import dev.lucasnlm.antimine.theme.viewmodel.ThemeEvent
-import dev.lucasnlm.antimine.theme.viewmodel.ThemeState
-import dev.lucasnlm.antimine.theme.viewmodel.ThemeViewModel
 import dev.lucasnlm.external.IBillingManager
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
 
-class ThemeViewModelTest : IntentViewModelTest() {
+@ExperimentalCoroutinesApi
+class ThemeViewModelTest {
+    private val dispatcher = TestCoroutineDispatcher()
+
+    @Before
+    fun setup() {
+        Dispatchers.setMain(dispatcher)
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
+    }
+
     private val lightTheme = AppTheme(
         id = 1L,
         theme = R.style.CustomLightTheme,
