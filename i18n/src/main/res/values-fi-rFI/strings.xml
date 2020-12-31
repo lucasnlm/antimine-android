@@ -56,8 +56,8 @@
     <string name="you_lost">Hävisit!</string>
     <string name="you_finished">Olet valmis!</string>
     <string name="defeats">Tappioita</string>
-    <string name="generic_game_over">Onnea seuraavaan peliisi.</string>
-    <string name="generic_win">Läpäisit miinakentän %1$d sekunnissa.</string>
+    <string name="generic_game_over">Good luck on your next game.</string>
+    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
     <string name="fail_to_share">Jakaminen epäonnistui</string>
     <string name="version_s">Versio %1$s</string>
     <string name="sound_effects">Äänitehosteet</string>

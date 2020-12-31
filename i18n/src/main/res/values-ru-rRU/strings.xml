@@ -56,8 +56,8 @@
     <string name="you_lost">Вы проиграли!</string>
     <string name="you_finished">Вы закончили!</string>
     <string name="defeats">Поражения</string>
-    <string name="generic_game_over">Удачи в вашей следующий раз.</string>
-    <string name="generic_win">Вы завершили минное поле за %1$d секунд.</string>
+    <string name="generic_game_over">Удачи в следующей игре.</string>
+    <string name="generic_win">Вы обнаружили %1$d мин за %1$d секунд.</string>
     <string name="fail_to_share">Не удалось поделиться</string>
     <string name="version_s">Версия %1$s</string>
     <string name="sound_effects">Звуковые эффекты</string>

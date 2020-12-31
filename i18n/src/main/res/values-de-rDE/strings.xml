@@ -56,8 +56,8 @@
     <string name="you_lost">Du hast verloren!</string>
     <string name="you_finished">Du bist fertig!</string>
     <string name="defeats">Niederlagen</string>
-    <string name="generic_game_over">Viel Glück bei deinem nächsten Spiel.</string>
-    <string name="generic_win">Du hast das Minenfeld in %1$d Sekunden abgearbeitet.</string>
+    <string name="generic_game_over">Good luck on your next game.</string>
+    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
     <string name="fail_to_share">Fehler beim Teilen</string>
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Toneffekte</string>

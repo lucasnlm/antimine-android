@@ -56,8 +56,8 @@
     <string name="you_lost">Thua rồi!</string>
     <string name="you_finished">Bạn đã hoàn thành!</string>
     <string name="defeats">Thua</string>
-    <string name="generic_game_over">Chúc bạn may mắn lần sau.</string>
-    <string name="generic_win">Bạn giải xong trò chơi trong vòng %1$d giây.</string>
+    <string name="generic_game_over">Good luck on your next game.</string>
+    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
     <string name="fail_to_share">Chia sẻ thất bại</string>
     <string name="version_s">Phiên bản %1$s</string>
     <string name="sound_effects">Hiệu ứng âm thanh</string>

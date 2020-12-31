@@ -56,8 +56,8 @@
     <string name="you_lost">Програш!</string>
     <string name="you_finished">Ви закінчили!</string>
     <string name="defeats">Поразок</string>
-    <string name="generic_game_over">Удачі у наступній грі.</string>
-    <string name="generic_win">Ви розмінували поле за %1$d секунд.</string>
+    <string name="generic_game_over">Good luck on your next game.</string>
+    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
     <string name="fail_to_share">Не вдалося поділитись</string>
     <string name="version_s">Версія: %1$s</string>
     <string name="sound_effects">Звукові ефекти</string>

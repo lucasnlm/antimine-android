@@ -56,8 +56,8 @@
     <string name="you_lost">Kaybettin!</string>
     <string name="you_finished">Bitirdin!</string>
     <string name="defeats">Yenilgi</string>
-    <string name="generic_game_over">Sonraki oyunda iyi şanslar.</string>
-    <string name="generic_win">Mayın tarlasını %1$d saniyede bitirdin.</string>
+    <string name="generic_game_over">Good luck on your next game.</string>
+    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
     <string name="fail_to_share">Paylaşılamıyor</string>
     <string name="version_s">Sürüm: %1$s</string>
     <string name="sound_effects">Ses Efektleri</string>

@@ -56,8 +56,8 @@
     <string name="you_lost">你输了！</string>
     <string name="you_finished">您已看完！</string>
     <string name="defeats">失败</string>
-    <string name="generic_game_over">祝您下次游戏好运。</string>
-    <string name="generic_win">你在 %1$d 秒内清空了雷场.</string>
+    <string name="generic_game_over">Good luck on your next game.</string>
+    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
     <string name="fail_to_share">分享失败</string>
     <string name="version_s">版本 %1$s</string>
     <string name="sound_effects">音效</string>

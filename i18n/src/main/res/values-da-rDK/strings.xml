@@ -56,8 +56,8 @@
     <string name="you_lost">Du tabte!</string>
     <string name="you_finished">You finished!</string>
     <string name="defeats">Nederlag</string>
-    <string name="generic_game_over">Held og lykke med dit næste spil.</string>
-    <string name="generic_win">Du færdiggjorde minefeltet om %1$d sekunder.</string>
+    <string name="generic_game_over">Good luck on your next game.</string>
+    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
     <string name="fail_to_share">Mislykkedes at dele</string>
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Lyd effekter</string>
