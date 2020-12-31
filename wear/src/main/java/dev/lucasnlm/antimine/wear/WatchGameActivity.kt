@@ -17,17 +17,20 @@ import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.android.synthetic.main.activity_level.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientModeSupport.AmbientCallbackProvider {
     private val viewModel by viewModel<GameViewModel>()
+    private val preferencesRepository: IPreferencesRepository by inject()
 
     private var currentLevelFragment: WatchLevelFragment? = null
-
     private val clock = Clock()
     private var lastShownTime: String? = null
     private var status: Status = Status.PreGame
@@ -61,8 +64,10 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
         AmbientModeSupport.attach(this)
 
         bindViewModel()
+        preferencesRepository.updateCustomGameMode(Minefield(12, 12, 25))
+
         loadGameFragment()
-        viewModel.startNewGame(Difficulty.Intermediate)
+        viewModel.startNewGame(Difficulty.Custom)
 
         swipe.isSwipeable = false
     }
@@ -180,7 +185,7 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
                     setOnClickListener {
                         it.visibility = View.GONE
 
-                        viewModel.startNewGame(Difficulty.Beginner)
+                        viewModel.startNewGame(Difficulty.Custom)
                     }
                 }
             }
