@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.control.viewmodel
 
-import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.control.R
 import dev.lucasnlm.antimine.control.models.ControlDetails
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
