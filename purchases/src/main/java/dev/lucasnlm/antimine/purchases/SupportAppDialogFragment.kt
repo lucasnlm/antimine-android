@@ -42,7 +42,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
 
         unlockMessage =
             (arguments?.getString(UNLOCK_LABEL) ?: savedInstanceState?.getString(UNLOCK_LABEL))
-                ?: getString(R.string.support_action)
+            ?: getString(R.string.support_action)
         targetThemeId =
             (arguments?.getLong(TARGET_THEME_ID, -1L)) ?: -1L
     }
