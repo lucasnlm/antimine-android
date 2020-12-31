@@ -34,6 +34,8 @@ android {
 }
 
 dependencies {
+    // Dependencies must be hardcoded to support F-droid
+
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.preference:preference-ktx:1.1.1'
