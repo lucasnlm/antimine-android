@@ -56,8 +56,8 @@
     <string name="you_lost">คุณแพ้!</string>
     <string name="you_finished">You finished!</string>
     <string name="defeats">ปราชัย</string>
-    <string name="game_over_desc_1">ขอให้โชคดีในเกมถัดไป</string>
-    <string name="game_over_desc_4">คุณเล่นเกมเสร็จใน %1$d วินาที</string>
+    <string name="generic_game_over">ขอให้โชคดีในเกมถัดไป</string>
+    <string name="generic_win">คุณเล่นเกมเสร็จใน %1$d วินาที</string>
     <string name="fail_to_share">ไม่สามารถแชร์ได้</string>
     <string name="version_s">เวอร์ชั่น: %1$s</string>
     <string name="sound_effects">เสียงประกอบ</string>

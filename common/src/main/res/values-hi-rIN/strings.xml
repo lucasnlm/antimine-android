@@ -56,8 +56,8 @@
     <string name="you_lost">तुम हार गए!</string>
     <string name="you_finished">You finished!</string>
     <string name="defeats">पराजय</string>
-    <string name="game_over_desc_1">अपने अगले खेल पर शुभकामनाएँ।</string>
-    <string name="game_over_desc_4">आपने %1$d सेकंड में खेल समाप्त किया।</string>
+    <string name="generic_game_over">अपने अगले खेल पर शुभकामनाएँ।</string>
+    <string name="generic_win">आपने %1$d सेकंड में खेल समाप्त किया।</string>
     <string name="fail_to_share">शेअर करने में असफ़ल</string>
     <string name="version_s">संस्करण %1$s</string>
     <string name="sound_effects">ध्वनि प्रभाव</string>

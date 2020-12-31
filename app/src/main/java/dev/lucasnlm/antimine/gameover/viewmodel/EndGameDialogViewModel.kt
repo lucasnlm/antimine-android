@@ -56,15 +56,15 @@ class EndGameDialogViewModel(
         R.drawable.emoji_sad_but_relieved_face,
     ).safeRandomEmoji(except)
 
-    private fun messageTo(time: Long, gameResult: GameResult): String =
+    private fun messageTo(minesCount: Int, time: Long, gameResult: GameResult): String =
         if (time != 0L) {
             when (gameResult) {
-                GameResult.Victory -> context.getString(R.string.game_over_desc_4, time)
-                GameResult.GameOver -> context.getString(R.string.game_over_desc_1)
-                else -> context.getString(R.string.game_over_desc_1)
+                GameResult.Victory -> context.getString(R.string.generic_win, minesCount, time)
+                GameResult.GameOver -> context.getString(R.string.generic_game_over)
+                else -> context.getString(R.string.generic_game_over)
             }
         } else {
-            context.getString(R.string.game_over_desc_1)
+            context.getString(R.string.generic_game_over)
         }
 
     override fun initialState() = EndGameDialogState(
@@ -83,7 +83,7 @@ class EndGameDialogViewModel(
                     EndGameDialogState(
                         titleEmoji = randomVictoryEmoji(0),
                         title = context.getString(R.string.you_won),
-                        message = messageTo(event.time, event.gameResult),
+                        message = messageTo(event.rightMines, event.time, event.gameResult),
                         gameResult = event.gameResult,
                         showContinueButton = false,
                         received = event.received
@@ -93,7 +93,7 @@ class EndGameDialogViewModel(
                     EndGameDialogState(
                         titleEmoji = randomGameOverEmoji(0),
                         title = context.getString(R.string.you_lost),
-                        message = messageTo(event.time, event.gameResult),
+                        message = messageTo(event.rightMines, event.time, event.gameResult),
                         gameResult = event.gameResult,
                         showContinueButton = event.showContinueButton,
                         received = event.received

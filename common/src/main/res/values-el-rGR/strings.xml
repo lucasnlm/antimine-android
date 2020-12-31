@@ -56,8 +56,8 @@
     <string name="you_lost">Έχασες!</string>
     <string name="you_finished">You finished!</string>
     <string name="defeats">Ήττες</string>
-    <string name="game_over_desc_1">Καλή τύχη στο επόμενο παιχνίδι σας.</string>
-    <string name="game_over_desc_4">Ολοκληρώσατε το ναρκοπέδιο σε %1$d δευτερόλεπτα.</string>
+    <string name="generic_game_over">Καλή τύχη στο επόμενο παιχνίδι σας.</string>
+    <string name="generic_win">Ολοκληρώσατε το ναρκοπέδιο σε %1$d δευτερόλεπτα.</string>
     <string name="fail_to_share">Αποτυχία κοινοποίησης</string>
     <string name="version_s">Έκδοση %1$s</string>
     <string name="sound_effects">Ηχητικά εφέ</string>
