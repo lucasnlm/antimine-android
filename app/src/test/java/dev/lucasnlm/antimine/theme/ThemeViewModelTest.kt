@@ -129,7 +129,7 @@ class ThemeViewModelTest : IntentViewModelTest() {
 
     @Test
     fun testInitialValue() {
-        val themeRepository = mockk<dev.lucasnlm.antimine.ui.repository.IThemeRepository> {
+        val themeRepository = mockk<IThemeRepository> {
             every { getAllThemes() } returns allThemes
             every { getTheme() } returns gardenTheme
         }
@@ -146,7 +146,7 @@ class ThemeViewModelTest : IntentViewModelTest() {
 
     @Test
     fun testChangeValue() {
-        val themeRepository = mockk<dev.lucasnlm.antimine.ui.repository.IThemeRepository> {
+        val themeRepository = mockk<IThemeRepository> {
             every { getAllThemes() } returns allThemes
             every { getTheme() } returns gardenTheme
             every { setTheme(any()) } returns Unit
@@ -175,7 +175,7 @@ class ThemeViewModelTest : IntentViewModelTest() {
 
     @Test
     fun testChangeValueWithoutExtras() {
-        val themeRepository = mockk<dev.lucasnlm.antimine.ui.repository.IThemeRepository> {
+        val themeRepository = mockk<IThemeRepository> {
             every { getAllThemes() } returns allThemes
             every { getTheme() } returns gardenTheme
             every { setTheme(any()) } returns Unit

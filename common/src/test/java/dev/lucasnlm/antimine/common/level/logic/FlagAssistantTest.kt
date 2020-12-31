@@ -11,11 +11,7 @@ class FlagAssistantTest {
     fun testRunAssistant() = runBlockingTest {
         repeat(20) { takeMines ->
             val creator = MinefieldCreator(
-                Minefield(
-                    8,
-                    8,
-                    25
-                ),
+                Minefield(8, 8, 25),
                 Random(200)
             )
             val map = creator.create(50, false).toMutableList()
@@ -51,11 +47,7 @@ class FlagAssistantTest {
         repeat(20) { takeMines ->
             val seed = 10 * takeMines
             val creator = MinefieldCreator(
-                Minefield(
-                    8,
-                    8,
-                    25
-                ),
+                Minefield(8, 8, 25),
                 Random(seed)
             )
             val map = creator.create(50, false).toMutableList()

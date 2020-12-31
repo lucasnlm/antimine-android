@@ -34,5 +34,5 @@ val TestCommonModule = module {
 
             override fun reset(): AppTheme = LightTheme
         }
-    } bind dev.lucasnlm.antimine.ui.repository.IThemeRepository::class
+    } bind IThemeRepository::class
 }
