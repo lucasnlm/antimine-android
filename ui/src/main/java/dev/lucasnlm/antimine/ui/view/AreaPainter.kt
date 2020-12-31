@@ -30,8 +30,8 @@ fun Area.paintOnCanvas(
                     style = Paint.Style.STROKE
                     strokeWidth = 2.0f
                     isAntiAlias = !isLowBitAmbient
-                    color = theme.palette.border
-                    alpha = 0xff
+                    color = 0xFFFFFF
+                    alpha = 0x66
                 }
             } else {
                 painter.apply {
@@ -156,7 +156,8 @@ fun Area.paintOnCanvas(
                         }
                     }
                     isAntiAlias = !isAmbientMode
-                    alpha = 0xff
+                    style = Paint.Style.FILL
+                    alpha = 0xFF
                 }
                 canvas.drawText(minesAround.toString(), paintSettings, painter)
             }
