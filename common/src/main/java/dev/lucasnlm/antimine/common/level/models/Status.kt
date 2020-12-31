@@ -1,5 +1,7 @@
 package dev.lucasnlm.antimine.common.level.models
 
+import dev.lucasnlm.antimine.core.models.Score
+
 sealed class Status {
     object PreGame : Status()
 
