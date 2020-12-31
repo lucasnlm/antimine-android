@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.level.solver
 
-import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.core.models.Area
 
 abstract class GameSolver {
     /**
@@ -12,5 +12,5 @@ abstract class GameSolver {
      * Try solve the given [minefield].
      * Returns true if it's solvable or false otherwise.
      */
-    abstract fun trySolve(minefield: MutableList<Area>): Boolean
+    abstract fun trySolve(minefield: MutableList<dev.lucasnlm.antimine.core.models.Area>): Boolean
 }

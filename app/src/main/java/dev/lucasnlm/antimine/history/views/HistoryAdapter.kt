@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
-import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.history.viewmodel.HistoryEvent
 import kotlinx.android.synthetic.main.view_history_item.view.*

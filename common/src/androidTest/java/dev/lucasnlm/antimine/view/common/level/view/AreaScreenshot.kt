@@ -6,10 +6,9 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.lucasnlm.antimine.common.level.models.Area
-import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.core.models.Area
+import dev.lucasnlm.antimine.core.models.Mark
 import dev.lucasnlm.antimine.common.level.view.AreaAdapter
-import dev.lucasnlm.antimine.common.level.view.paintOnCanvas
 import dev.lucasnlm.antimine.ui.repository.Themes.LightTheme
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -20,7 +19,7 @@ import java.io.FileOutputStream
 class AreaScreenshot {
     private lateinit var context: Context
 
-    private fun saveImage(area: Area, fileName: String, ambientMode: Boolean): File {
+    private fun saveImage(area: dev.lucasnlm.antimine.core.models.Area, fileName: String, ambientMode: Boolean): File {
         val paintSettings = AreaAdapter.createAreaPaintSettings(context, 128.0f, 3)
         val size = paintSettings.rectF.width().toInt()
         val testPadding = 4
@@ -73,7 +72,7 @@ class AreaScreenshot {
         return result
     }
 
-    private fun screenshotTest(area: Area, fileName: String, ambientMode: Boolean = false) {
+    private fun screenshotTest(area: dev.lucasnlm.antimine.core.models.Area, fileName: String, ambientMode: Boolean = false) {
         val current = saveImage(area, fileName, ambientMode)
         assertTrue("$fileName doesn't match the reference", compareScreenshot(current, fileName))
     }
@@ -85,25 +84,25 @@ class AreaScreenshot {
 
     @Test
     fun testCoveredArea() {
-        val area = Area(0, 0, 0, isCovered = true)
+        val area = dev.lucasnlm.antimine.core.models.Area(0, 0, 0, isCovered = true)
         screenshotTest(area, "covered.png")
     }
 
     @Test
     fun testCoveredAreaAmbientMode() {
-        val area = Area(0, 0, 0, isCovered = true)
+        val area = dev.lucasnlm.antimine.core.models.Area(0, 0, 0, isCovered = true)
         screenshotTest(area, "covered_ambient.png", true)
     }
 
     @Test
     fun testUncoveredArea() {
-        val area = Area(0, 0, 0, isCovered = false)
+        val area = dev.lucasnlm.antimine.core.models.Area(0, 0, 0, isCovered = false)
         screenshotTest(area, "uncovered.png")
     }
 
     @Test
     fun testUncoveredAreaAmbientMode() {
-        val area = Area(0, 0, 0, isCovered = false)
+        val area = dev.lucasnlm.antimine.core.models.Area(0, 0, 0, isCovered = false)
         screenshotTest(area, "uncovered_ambient.png", ambientMode = true)
     }
 
@@ -112,7 +111,7 @@ class AreaScreenshot {
         repeat(8) {
             val id = it + 1
             screenshotTest(
-                Area(
+                dev.lucasnlm.antimine.core.models.Area(
                     0,
                     0,
                     0,
@@ -129,7 +128,7 @@ class AreaScreenshot {
         repeat(8) {
             val id = it + 1
             screenshotTest(
-                Area(
+                dev.lucasnlm.antimine.core.models.Area(
                     0,
                     0,
                     0,
@@ -144,55 +143,55 @@ class AreaScreenshot {
 
     @Test
     fun testCoveredAreaWithFlag() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
             isCovered = true,
-            mark = Mark.Flag
+            mark = dev.lucasnlm.antimine.core.models.Mark.Flag
         )
         screenshotTest(area, "covered_flag.png")
     }
 
     @Test
     fun testCoveredAreaWithFlagAmbient() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
             isCovered = true,
-            mark = Mark.Flag
+            mark = dev.lucasnlm.antimine.core.models.Mark.Flag
         )
         screenshotTest(area, "covered_flag_ambient.png", true)
     }
 
     @Test
     fun testCoveredAreaWithQuestion() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
             isCovered = true,
-            mark = Mark.Question
+            mark = dev.lucasnlm.antimine.core.models.Mark.Question
         )
         screenshotTest(area, "covered_question.png")
     }
 
     @Test
     fun testCoveredAreaWithQuestionAmbient() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
             isCovered = true,
-            mark = Mark.Question
+            mark = dev.lucasnlm.antimine.core.models.Mark.Question
         )
         screenshotTest(area, "covered_question_ambient.png", true)
     }
 
     @Test
     fun testCoveredAreaHighlighted() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
@@ -204,7 +203,7 @@ class AreaScreenshot {
 
     @Test
     fun testCoveredAreaHighlightedAmbient() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
@@ -216,7 +215,7 @@ class AreaScreenshot {
 
     @Test
     fun testCoveredAreaWithMine() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
@@ -228,7 +227,7 @@ class AreaScreenshot {
 
     @Test
     fun testCoveredAreaWithMineAmbient() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
@@ -240,7 +239,7 @@ class AreaScreenshot {
 
     @Test
     fun testUncoveredAreaWithMine() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
@@ -252,7 +251,7 @@ class AreaScreenshot {
 
     @Test
     fun testUncoveredAreaWithMineAmbient() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
@@ -264,7 +263,7 @@ class AreaScreenshot {
 
     @Test
     fun testUncoveredAreaHighlighted() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
@@ -277,7 +276,7 @@ class AreaScreenshot {
 
     @Test
     fun testUncoveredAreaHighlightedAmbient() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
@@ -290,7 +289,7 @@ class AreaScreenshot {
 
     @Test
     fun testUncoveredAreaWithMineExploded() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
@@ -303,7 +302,7 @@ class AreaScreenshot {
 
     @Test
     fun testUncoveredAreaWithMineExplodedAmbient() {
-        val area = Area(
+        val area = dev.lucasnlm.antimine.core.models.Area(
             0,
             0,
             0,
@@ -319,7 +318,7 @@ class AreaScreenshot {
         repeat(8) {
             val id = it + 1
             screenshotTest(
-                Area(
+                dev.lucasnlm.antimine.core.models.Area(
                     0,
                     0,
                     0,
@@ -337,7 +336,7 @@ class AreaScreenshot {
         repeat(8) {
             val id = it + 1
             screenshotTest(
-                Area(
+                dev.lucasnlm.antimine.core.models.Area(
                     0,
                     0,
                     0,

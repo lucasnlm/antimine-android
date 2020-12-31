@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.level.database.converters
 
 import androidx.room.TypeConverter
-import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.core.models.Difficulty
 
 class DifficultyConverter {
     @TypeConverter

@@ -2,7 +2,7 @@ package dev.lucasnlm.antimine.wear.di
 
 import dev.lucasnlm.antimine.common.BuildConfig
 import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
-import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.ProdAnalyticsManager
 import dev.lucasnlm.external.AdsManager
 import dev.lucasnlm.external.BillingManager

@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
+import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -21,7 +22,7 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
     protected val dimensionRepository: IDimensionRepository by inject()
     protected val gameViewModel by sharedViewModel<GameViewModel>()
     protected val areaAdapter by lazy {
-        AreaAdapter(requireContext(), gameViewModel, preferencesRepository, dimensionRepository)
+        AreaAdapter(requireContext(), gameViewModel, preferencesRepository, dimensionRepository, lifecycleScope)
     }
     protected lateinit var recyclerGrid: RecyclerView
 

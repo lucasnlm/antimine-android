@@ -6,10 +6,10 @@ import androidx.core.view.doOnLayout
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.common.R
-import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
-import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
+import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

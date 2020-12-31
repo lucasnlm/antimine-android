@@ -4,7 +4,7 @@ import dev.lucasnlm.antimine.cloud.CloudSaveManagerImpl
 import dev.lucasnlm.antimine.support.IapHandler
 import dev.lucasnlm.antimine.common.BuildConfig
 import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
-import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.ProdAnalyticsManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.share.ShareManager

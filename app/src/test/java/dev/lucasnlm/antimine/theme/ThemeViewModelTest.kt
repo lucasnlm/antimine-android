@@ -2,7 +2,7 @@ package dev.lucasnlm.antimine.theme
 
 import dev.lucasnlm.antimine.IntentViewModelTest
 import dev.lucasnlm.antimine.common.R
-import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette

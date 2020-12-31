@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.level.logic
 
-import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.core.models.Mark
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -26,7 +26,7 @@ class MinefieldHandlerTest {
             assertTrue(handler.result()[3].isCovered)
             handler.openAt(3, false, openNeighbors = false)
             assertFalse(handler.result()[3].isCovered)
-            assertEquals(Mark.None, handler.result()[3].mark)
+            assertEquals(dev.lucasnlm.antimine.core.models.Mark.None, handler.result()[3].mark)
         }
     }
 
@@ -36,7 +36,7 @@ class MinefieldHandlerTest {
             assertTrue(handler.result()[3].isCovered)
             handler.openAt(3, false, openNeighbors = false)
             assertFalse(handler.result()[3].isCovered)
-            assertEquals(Mark.None, handler.result()[3].mark)
+            assertEquals(dev.lucasnlm.antimine.core.models.Mark.None, handler.result()[3].mark)
         }
     }
 
@@ -55,7 +55,7 @@ class MinefieldHandlerTest {
             handler.switchMarkAt(3)
 
             handler.removeMarkAt(3)
-            assertTrue(handler.result()[3].mark == Mark.PurposefulNone)
+            assertTrue(handler.result()[3].mark == dev.lucasnlm.antimine.core.models.Mark.PurposefulNone)
             assertTrue(handler.result()[3].mark.isNone())
         }
     }

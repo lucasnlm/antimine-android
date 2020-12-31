@@ -1,7 +1,8 @@
 package dev.lucasnlm.antimine.core.analytics
 
 import android.content.Context
-import dev.lucasnlm.antimine.core.analytics.models.Analytics
+import dev.lucasnlm.antimine.core.models.Analytics
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IExternalAnalyticsWrapper
 
 class ProdAnalyticsManager(
@@ -11,7 +12,7 @@ class ProdAnalyticsManager(
         analyticsWrapper.setup(context, properties)
     }
 
-    override fun sentEvent(event: Analytics) {
+    override fun sentEvent(event: dev.lucasnlm.antimine.core.models.Analytics) {
         analyticsWrapper.sendEvent(event.name, event.extra)
     }
 }

@@ -8,15 +8,15 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import dev.lucasnlm.antimine.common.level.models.Area
-import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
-import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
-import dev.lucasnlm.antimine.common.level.view.AreaAdapter
-import dev.lucasnlm.antimine.common.level.view.AreaView
+import dev.lucasnlm.antimine.core.models.Area
+import dev.lucasnlm.antimine.core.models.AreaPaintSettings
+import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.ui.view.AreaView
 import dev.lucasnlm.antimine.common.level.view.AreaViewHolder
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.tutorial.viewmodel.TutorialViewModel
+import dev.lucasnlm.antimine.ui.view.createAreaPaintSettings
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -36,7 +36,7 @@ class TutorialAreaAdapter(
 
     init {
         setHasStableIds(false)
-        paintSettings = AreaAdapter.createAreaPaintSettings(
+        paintSettings = createAreaPaintSettings(
             context.applicationContext,
             dimensionRepository.areaSize(),
             preferencesRepository.squareRadius(),
