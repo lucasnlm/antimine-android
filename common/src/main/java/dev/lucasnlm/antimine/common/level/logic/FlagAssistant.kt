@@ -4,7 +4,7 @@ import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Mark
 
 class FlagAssistant(
-    private val field: MutableList<dev.lucasnlm.antimine.core.models.Area>,
+    private val field: MutableList<Area>,
 ) {
     fun runFlagAssistant() {
         // Must not select Mark.PurposefulNone, only Mark.None. Otherwise, it will flag
@@ -14,9 +14,9 @@ class FlagAssistant(
             .forEach(::putFlagIfIsolated)
     }
 
-    fun result(): List<dev.lucasnlm.antimine.core.models.Area> = field.toList()
+    fun result(): List<Area> = field.toList()
 
-    private fun putFlagIfIsolated(it: dev.lucasnlm.antimine.core.models.Area) {
+    private fun putFlagIfIsolated(it: Area) {
         val neighbors = field.filterNeighborsOf(it)
         val neighborsCount = neighbors.count()
         val revealedNeighborsCount = neighbors.count { neighbor ->
@@ -24,7 +24,7 @@ class FlagAssistant(
         }
 
         if (revealedNeighborsCount == neighborsCount) {
-            field[it.id] = it.copy(mark = dev.lucasnlm.antimine.core.models.Mark.Flag)
+            field[it.id] = it.copy(mark = Mark.Flag)
         }
     }
 }

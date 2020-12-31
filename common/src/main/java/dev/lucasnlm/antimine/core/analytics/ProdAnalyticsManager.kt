@@ -12,7 +12,7 @@ class ProdAnalyticsManager(
         analyticsWrapper.setup(context, properties)
     }
 
-    override fun sentEvent(event: dev.lucasnlm.antimine.core.models.Analytics) {
+    override fun sentEvent(event: Analytics) {
         analyticsWrapper.sendEvent(event.name, event.extra)
     }
 }

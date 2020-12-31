@@ -12,6 +12,9 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import dev.lucasnlm.antimine.core.models.Area
+import dev.lucasnlm.antimine.core.models.AreaPaintSettings
+import dev.lucasnlm.antimine.core.models.Mark
 import dev.lucasnlm.antimine.ui.R
 import dev.lucasnlm.antimine.ui.model.AppTheme
 
@@ -20,8 +23,8 @@ class AreaView : View {
     private var isAmbientMode: Boolean = false
     private var isLowBitAmbient: Boolean = false
 
-    private var area: dev.lucasnlm.antimine.core.models.Area? = null
-    private lateinit var paintSettings: dev.lucasnlm.antimine.core.models.AreaPaintSettings
+    private var area: Area? = null
+    private lateinit var paintSettings: AreaPaintSettings
     private lateinit var theme: AppTheme
 
     private val gestureDetector: GestureDetector by lazy {
@@ -46,11 +49,11 @@ class AreaView : View {
     }
 
     fun bindField(
-        area: dev.lucasnlm.antimine.core.models.Area,
+        area: Area,
         theme: AppTheme,
         isAmbientMode: Boolean,
         isLowBitAmbient: Boolean,
-        paintSettings: dev.lucasnlm.antimine.core.models.AreaPaintSettings
+        paintSettings: AreaPaintSettings
     ) {
         this.paintSettings = paintSettings
 
@@ -84,12 +87,12 @@ class AreaView : View {
     override fun onTouchEvent(event: MotionEvent?): Boolean =
         gestureDetector.onTouchEvent(event) || super.onTouchEvent(event)
 
-    private fun bindContentDescription(area: dev.lucasnlm.antimine.core.models.Area) {
+    private fun bindContentDescription(area: Area) {
         contentDescription = when {
-            area.mark == dev.lucasnlm.antimine.core.models.Mark.Flag -> {
+            area.mark == Mark.Flag -> {
                 context.getString(if (area.mistake) R.string.desc_wrongly_marked_area else R.string.desc_marked_area)
             }
-            area.mark == dev.lucasnlm.antimine.core.models.Mark.Question -> context.getString(R.string.desc_marked_area)
+            area.mark == Mark.Question -> context.getString(R.string.desc_marked_area)
             area.isCovered -> context.getString(R.string.desc_convered_area)
             !area.isCovered && area.minesAround > 0 -> area.minesAround.toString()
             !area.isCovered && area.hasMine -> context.getString(R.string.exploded_mine)

@@ -12,7 +12,7 @@ class DebugAnalyticsManager : IAnalyticsManager {
         }
     }
 
-    override fun sentEvent(event: dev.lucasnlm.antimine.core.models.Analytics) {
+    override fun sentEvent(event: Analytics) {
         val message = if (event.extra.isNotEmpty()) {
             "Sent event: '${event.name}' with ${event.extra}"
         } else {

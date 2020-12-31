@@ -66,39 +66,39 @@ class AreaConverterTest {
 
     private val areaList =
         listOf(
-            dev.lucasnlm.antimine.core.models.Area(
+            Area(
                 1, 2, 3, 5,
                 hasMine = false,
                 mistake = false,
                 isCovered = true,
-                mark = dev.lucasnlm.antimine.core.models.Mark.None,
+                mark = Mark.None,
                 highlighted = true,
                 revealed = false,
             ),
-            dev.lucasnlm.antimine.core.models.Area(
+            Area(
                 2, 5, 3, 0,
                 hasMine = true,
                 mistake = true,
                 isCovered = false,
-                mark = dev.lucasnlm.antimine.core.models.Mark.PurposefulNone,
+                mark = Mark.PurposefulNone,
                 highlighted = false,
                 revealed = false,
             ),
-            dev.lucasnlm.antimine.core.models.Area(
+            Area(
                 3, 1, 1, 3,
                 hasMine = true,
                 mistake = false,
                 isCovered = true,
-                mark = dev.lucasnlm.antimine.core.models.Mark.Flag,
+                mark = Mark.Flag,
                 highlighted = true,
                 revealed = false,
             ),
-            dev.lucasnlm.antimine.core.models.Area(
+            Area(
                 4, 0, 0, 6,
                 hasMine = false,
                 mistake = false,
                 isCovered = true,
-                mark = dev.lucasnlm.antimine.core.models.Mark.Question,
+                mark = Mark.Question,
                 highlighted = true,
                 revealed = true,
             )

@@ -59,7 +59,7 @@ open class GameViewModel(
     private var initialized = false
     private var currentDifficulty: Difficulty = Difficulty.Standard
 
-    val field = MutableLiveData<List<dev.lucasnlm.antimine.core.models.Area>>()
+    val field = MutableLiveData<List<Area>>()
     val elapsedTimeSeconds = MutableLiveData<Long>()
     val mineCount = MutableLiveData<Int>()
     val difficulty = MutableLiveData<Difficulty>()
@@ -90,7 +90,7 @@ open class GameViewModel(
         eventObserver.postValue(Event.StartNewGame)
 
         analyticsManager.sentEvent(
-            dev.lucasnlm.antimine.core.models.Analytics.NewGame(
+            Analytics.NewGame(
                 minefield,
                 newDifficulty,
                 gameController.seed,
@@ -123,7 +123,7 @@ open class GameViewModel(
         }
 
         saveId.postValue(save.uid.toLong())
-        analyticsManager.sentEvent(dev.lucasnlm.antimine.core.models.Analytics.ResumePreviousGame)
+        analyticsManager.sentEvent(Analytics.ResumePreviousGame)
         return setup
     }
 
@@ -144,7 +144,7 @@ open class GameViewModel(
         eventObserver.postValue(Event.ResumeGame)
 
         analyticsManager.sentEvent(
-            dev.lucasnlm.antimine.core.models.Analytics.RetryGame(
+            Analytics.RetryGame(
                 setup,
                 currentDifficulty,
                 gameController.seed,
@@ -310,19 +310,19 @@ open class GameViewModel(
     private fun onFeedbackAnalytics(action: ActionResponse, index: Int) {
         when (action) {
             ActionResponse.OpenTile -> {
-                analyticsManager.sentEvent(dev.lucasnlm.antimine.core.models.Analytics.OpenTile(index))
+                analyticsManager.sentEvent(Analytics.OpenTile(index))
             }
             ActionResponse.SwitchMark -> {
-                analyticsManager.sentEvent(dev.lucasnlm.antimine.core.models.Analytics.SwitchMark(index))
+                analyticsManager.sentEvent(Analytics.SwitchMark(index))
             }
             ActionResponse.HighlightNeighbors -> {
-                analyticsManager.sentEvent(dev.lucasnlm.antimine.core.models.Analytics.HighlightNeighbors(index))
+                analyticsManager.sentEvent(Analytics.HighlightNeighbors(index))
             }
             ActionResponse.OpenNeighbors -> {
-                analyticsManager.sentEvent(dev.lucasnlm.antimine.core.models.Analytics.OpenNeighbors(index))
+                analyticsManager.sentEvent(Analytics.OpenNeighbors(index))
             }
             ActionResponse.OpenOrMark -> {
-                analyticsManager.sentEvent(dev.lucasnlm.antimine.core.models.Analytics.OpenOrFlagTile(index))
+                analyticsManager.sentEvent(Analytics.OpenOrFlagTile(index))
             }
         }
     }
@@ -430,7 +430,7 @@ open class GameViewModel(
 
     suspend fun gameOver(fromResumeGame: Boolean) {
         gameController.run {
-            analyticsManager.sentEvent(dev.lucasnlm.antimine.core.models.Analytics.GameOver(clock.time(), getScore()))
+            analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
 
             if (!fromResumeGame) {
                 if (preferencesRepository.useHapticFeedback()) {
@@ -473,7 +473,7 @@ open class GameViewModel(
     fun victory() {
         gameController.run {
             analyticsManager.sentEvent(
-                dev.lucasnlm.antimine.core.models.Analytics.Victory(
+                Analytics.Victory(
                     clock.time(),
                     getScore(),
                     currentDifficulty

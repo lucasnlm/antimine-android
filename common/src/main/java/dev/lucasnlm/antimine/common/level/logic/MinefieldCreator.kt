@@ -9,7 +9,7 @@ class MinefieldCreator(
     private val minefield: Minefield,
     private val randomGenerator: Random,
 ) {
-    private fun createMutableEmpty(): List<dev.lucasnlm.antimine.core.models.Area> {
+    private fun createMutableEmpty(): List<Area> {
         val width = minefield.width
         val height = minefield.height
         val fieldLength = width * height
@@ -17,7 +17,7 @@ class MinefieldCreator(
         return (0 until fieldLength).map { index ->
             val yPosition = floor((index / width).toDouble()).toInt()
             val xPosition = (index % width)
-            dev.lucasnlm.antimine.core.models.Area(
+            Area(
                 index,
                 xPosition,
                 yPosition,
@@ -27,11 +27,11 @@ class MinefieldCreator(
         }
     }
 
-    fun createEmpty(): List<dev.lucasnlm.antimine.core.models.Area> {
+    fun createEmpty(): List<Area> {
         return createMutableEmpty()
     }
 
-    fun create(safeIndex: Int, safeZone: Boolean): List<dev.lucasnlm.antimine.core.models.Area> {
+    fun create(safeIndex: Int, safeZone: Boolean): List<Area> {
         return createMutableEmpty().toMutableList().apply {
             // Plant mines and setup number tips
             if (safeZone) { filterNotNeighborsOf(safeIndex) } else { filterNot { it.id == safeIndex } }

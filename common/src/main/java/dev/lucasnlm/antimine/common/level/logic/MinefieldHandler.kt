@@ -4,17 +4,17 @@ import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Mark
 
 class MinefieldHandler(
-    private val field: MutableList<dev.lucasnlm.antimine.core.models.Area>,
+    private val field: MutableList<Area>,
     private val useQuestionMark: Boolean,
 ) {
     fun showAllMines() {
-        field.filter { it.hasMine && it.mark != dev.lucasnlm.antimine.core.models.Mark.Flag }
+        field.filter { it.hasMine && it.mark != Mark.Flag }
             .forEach { field[it.id] = it.copy(isCovered = false) }
     }
 
     fun flagAllMines() {
         field.filter { it.hasMine }
-            .forEach { field[it.id] = it.copy(mark = dev.lucasnlm.antimine.core.models.Mark.Flag) }
+            .forEach { field[it.id] = it.copy(mark = Mark.Flag) }
     }
 
     fun revealAllEmptyAreas() {
@@ -36,7 +36,7 @@ class MinefieldHandler(
 
     fun removeMarkAt(index: Int) {
         field.getOrNull(index)?.let {
-            field[it.id] = it.copy(mark = dev.lucasnlm.antimine.core.models.Mark.PurposefulNone)
+            field[it.id] = it.copy(mark = Mark.PurposefulNone)
         }
     }
 
@@ -45,9 +45,9 @@ class MinefieldHandler(
             if (it.isCovered) {
                 field[index] = it.copy(
                     mark = when (it.mark) {
-                        dev.lucasnlm.antimine.core.models.Mark.PurposefulNone, dev.lucasnlm.antimine.core.models.Mark.None -> dev.lucasnlm.antimine.core.models.Mark.Flag
-                        dev.lucasnlm.antimine.core.models.Mark.Flag -> if (useQuestionMark) dev.lucasnlm.antimine.core.models.Mark.Question else dev.lucasnlm.antimine.core.models.Mark.None
-                        dev.lucasnlm.antimine.core.models.Mark.Question -> dev.lucasnlm.antimine.core.models.Mark.None
+                        Mark.PurposefulNone, Mark.None -> Mark.Flag
+                        Mark.Flag -> if (useQuestionMark) Mark.Question else Mark.None
+                        Mark.Question -> Mark.None
                     }
                 )
             }
@@ -59,7 +59,7 @@ class MinefieldHandler(
             if (isCovered) {
                 field[index] = copy(
                     isCovered = false,
-                    mark = dev.lucasnlm.antimine.core.models.Mark.None,
+                    mark = Mark.None,
                     mistake = (!passive && hasMine) || (!hasMine && mark.isFlag())
                 )
 
@@ -111,5 +111,5 @@ class MinefieldHandler(
         }
     }
 
-    fun result(): List<dev.lucasnlm.antimine.core.models.Area> = field.toList()
+    fun result(): List<Area> = field.toList()
 }

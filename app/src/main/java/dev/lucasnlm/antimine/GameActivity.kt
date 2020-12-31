@@ -26,6 +26,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
+import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.core.models.Score
@@ -604,7 +605,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun showAbout() {
         analyticsManager.sentEvent(Analytics.OpenAbout)
-        Intent(this, dev.lucasnlm.antimine.about.AboutActivity::class.java).apply {
+        Intent(this, AboutActivity::class.java).apply {
             startActivity(this)
         }
     }
