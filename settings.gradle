@@ -1,3 +1,4 @@
 include ':app', ':wear', ':common', ':proprietary', ':foss'
 include ':external'
 include ':instant'
+include ':i18n'
