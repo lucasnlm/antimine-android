@@ -48,6 +48,7 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':external')
+    implementation project(':foss')
     implementation project(':common')
     implementation project(':ui')
     implementation project(':preferences')
