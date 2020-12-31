@@ -23,7 +23,7 @@ val TestCommonModule = module {
     } bind ISoundManager::class
 
     single {
-        object : dev.lucasnlm.antimine.ui.repository.IThemeRepository {
+        object : IThemeRepository {
             override fun getCustomTheme(): AppTheme? = null
 
             override fun getTheme(): AppTheme = LightTheme

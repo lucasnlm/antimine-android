@@ -42,7 +42,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
     private val instantAppManager: IInstantAppManager by inject()
     private val endGameViewModel by viewModel<EndGameDialogViewModel>()
     private val gameViewModel by sharedViewModel<GameViewModel>()
-    private val preferencesRepository: dev.lucasnlm.antimine.preferences.IPreferencesRepository by inject()
+    private val preferencesRepository: IPreferencesRepository by inject()
     private val billingManager: IBillingManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -8,6 +8,7 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.common.level.database.converters.AreaConverter
 import dev.lucasnlm.antimine.common.level.database.converters.FirstOpenConverter
 import dev.lucasnlm.antimine.common.level.database.converters.SaveStatusConverter
+import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
 
 @Entity
@@ -40,7 +41,7 @@ data class Save(
 
     @TypeConverters(AreaConverter::class)
     @ColumnInfo(name = "field")
-    val field: List<dev.lucasnlm.antimine.core.models.Area>,
+    val field: List<Area>,
 
     @ColumnInfo(name = "actions")
     val actions: Int,

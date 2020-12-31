@@ -25,7 +25,7 @@ class CreateGameViewModelTest : IntentViewModelTest() {
 
     @Test
     fun testSetNewCustomValues() {
-        val preferenceRepository: dev.lucasnlm.antimine.preferences.IPreferencesRepository = mockk {
+        val preferenceRepository: IPreferencesRepository = mockk {
             every { customGameMode() } returns Minefield(10, 12, 9)
             every { updateCustomGameMode(any()) } returns Unit
         }

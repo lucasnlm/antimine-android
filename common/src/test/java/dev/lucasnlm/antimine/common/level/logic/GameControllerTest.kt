@@ -39,7 +39,7 @@ class GameControllerTest {
     @Test
     fun testGetScore() = runBlockingTest {
         withGameController { controller ->
-            assertEquals(dev.lucasnlm.antimine.core.models.Score(0, 20, 100), controller.getScore())
+            assertEquals(Score(0, 20, 100), controller.getScore())
 
             repeat(20) { markedMines ->
                 controller
@@ -51,7 +51,7 @@ class GameControllerTest {
                         controller.fakeLongPress(it.id)
                     }
 
-                assertEquals(dev.lucasnlm.antimine.core.models.Score(markedMines, 20, 100), controller.getScore())
+                assertEquals(Score(markedMines, 20, 100), controller.getScore())
             }
         }
     }
@@ -59,7 +59,7 @@ class GameControllerTest {
     @Test
     fun testGetScoreWithQuestion() = runBlockingTest {
         withGameController { controller ->
-            assertEquals(dev.lucasnlm.antimine.core.models.Score(0, 20, 100), controller.getScore())
+            assertEquals(Score(0, 20, 100), controller.getScore())
             controller.useQuestionMark(true)
 
             controller
@@ -71,7 +71,7 @@ class GameControllerTest {
                     controller.fakeLongPress(it.id)
                 }
 
-            assertEquals(dev.lucasnlm.antimine.core.models.Score(0, 20, 100), controller.getScore())
+            assertEquals(Score(0, 20, 100), controller.getScore())
         }
     }
 
@@ -528,7 +528,7 @@ class GameControllerTest {
         }
     }
 
-    private fun GameController.at(index: Int): dev.lucasnlm.antimine.core.models.Area {
+    private fun GameController.at(index: Int): Area {
         return this.field().first { it.id == index }
     }
 

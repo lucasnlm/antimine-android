@@ -56,7 +56,7 @@ class GameController {
 
     fun field() = field
 
-    fun field(predicate: (dev.lucasnlm.antimine.core.models.Area) -> Boolean) = field.filter(predicate)
+    fun field(predicate: (Area) -> Boolean) = field.filter(predicate)
 
     fun mines() = field.filter { it.hasMine }
 
@@ -77,7 +77,7 @@ class GameController {
         firstOpen = FirstOpen.Position(safeId)
     }
 
-    private fun handleAction(target: dev.lucasnlm.antimine.core.models.Area, actionResponse: ActionResponse?) {
+    private fun handleAction(target: Area, actionResponse: ActionResponse?) {
         val mustPlantMines = !hasMines()
 
         val minefieldHandler: MinefieldHandler
@@ -175,7 +175,7 @@ class GameController {
         }
     }
 
-    fun getScore() = dev.lucasnlm.antimine.core.models.Score(
+    fun getScore() = Score(
         mines().count { !it.mistake && it.mark.isFlag() },
         getMinesCount(),
         field.count()
@@ -192,7 +192,7 @@ class GameController {
 
     fun findExplodedMine() = mines().firstOrNull { it.mistake }
 
-    fun takeExplosionRadius(target: dev.lucasnlm.antimine.core.models.Area): List<dev.lucasnlm.antimine.core.models.Area> =
+    fun takeExplosionRadius(target: Area): List<Area> =
         mines().filter { it.isCovered && it.mark.isNone() }.sortedBy {
             val dx1 = (it.posX - target.posX)
             val dy1 = (it.posY - target.posY)
