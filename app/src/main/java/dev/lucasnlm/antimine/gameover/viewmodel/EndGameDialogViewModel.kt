@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.gameover.viewmodel
 
 import android.content.Context
+import androidx.annotation.DrawableRes
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.gameover.model.GameResult
@@ -11,13 +12,13 @@ class EndGameDialogViewModel(
 ) : IntentViewModel<EndGameDialogEvent, EndGameDialogState>() {
 
     private fun List<Int>.safeRandomEmoji(
-        except: Int? = null,
+        @DrawableRes except: Int,
         fallback: Int = R.drawable.emoji_smiling_face_with_sunglasses
-    ) = this.filter { it != except }
+    ) = filter { it != except }
         .ifEmpty { listOf(fallback) }
         .random()
 
-    private fun randomVictoryEmoji(except: Int? = null) = listOf(
+    private fun randomVictoryEmoji(except: Int) = listOf(
         R.drawable.emoji_beaming_face_with_smiling_eyes,
         R.drawable.emoji_astonished_face,
         R.drawable.emoji_cowboy_hat_face,
@@ -33,13 +34,13 @@ class EndGameDialogViewModel(
         R.drawable.emoji_triangular_flag,
     ).safeRandomEmoji(except)
 
-    private fun randomNeutralEmoji(except: Int? = null) = listOf(
+    private fun randomNeutralEmoji(@DrawableRes except: Int) = listOf(
         R.drawable.emoji_grimacing_face,
         R.drawable.emoji_smiling_face_with_sunglasses,
         R.drawable.emoji_triangular_flag,
     ).safeRandomEmoji(except)
 
-    private fun randomGameOverEmoji(except: Int? = null) = listOf(
+    private fun randomGameOverEmoji(@DrawableRes except: Int) = listOf(
         R.drawable.emoji_anguished_face,
         R.drawable.emoji_astonished_face,
         R.drawable.emoji_bomb,
@@ -53,7 +54,6 @@ class EndGameDialogViewModel(
         R.drawable.emoji_face_with_head_bandage,
         R.drawable.emoji_collision,
         R.drawable.emoji_sad_but_relieved_face,
-
     ).safeRandomEmoji(except)
 
     private fun messageTo(time: Long, gameResult: GameResult): String =
@@ -81,7 +81,7 @@ class EndGameDialogViewModel(
             val state = when (event.gameResult) {
                 GameResult.Victory -> {
                     EndGameDialogState(
-                        titleEmoji = randomVictoryEmoji(),
+                        titleEmoji = randomVictoryEmoji(0),
                         title = context.getString(R.string.you_won),
                         message = messageTo(event.time, event.gameResult),
                         gameResult = event.gameResult,
@@ -91,7 +91,7 @@ class EndGameDialogViewModel(
                 }
                 GameResult.GameOver -> {
                     EndGameDialogState(
-                        titleEmoji = randomGameOverEmoji(),
+                        titleEmoji = randomGameOverEmoji(0),
                         title = context.getString(R.string.you_lost),
                         message = messageTo(event.time, event.gameResult),
                         gameResult = event.gameResult,
@@ -101,7 +101,7 @@ class EndGameDialogViewModel(
                 }
                 GameResult.Completed -> {
                     EndGameDialogState(
-                        titleEmoji = randomNeutralEmoji(),
+                        titleEmoji = randomNeutralEmoji(0),
                         title = context.getString(R.string.you_finished),
                         message = context.getString(R.string.new_game_request),
                         gameResult = event.gameResult,
