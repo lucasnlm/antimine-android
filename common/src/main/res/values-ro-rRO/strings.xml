@@ -56,8 +56,8 @@
     <string name="you_lost">Aţi pierdut!</string>
     <string name="you_finished">You finished!</string>
     <string name="defeats">Înfrângeri</string>
-    <string name="game_over_desc_1">Mult noroc la următorul joc.</string>
-    <string name="game_over_desc_4">Ai terminat câmpul minat în %1$d secunde.</string>
+    <string name="generic_game_over">Mult noroc la următorul joc.</string>
+    <string name="generic_win">Ai terminat câmpul minat în %1$d secunde.</string>
     <string name="fail_to_share">Share-uirea imaginii a eșuat</string>
     <string name="version_s">Versiunea %1$s</string>
     <string name="sound_effects">Efecte sonore</string>

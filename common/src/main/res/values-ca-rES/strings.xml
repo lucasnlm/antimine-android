@@ -56,8 +56,8 @@
     <string name="you_lost">Has perdut!</string>
     <string name="you_finished">Has acabat!</string>
     <string name="defeats">Derrotes</string>
-    <string name="game_over_desc_1">Que tinguis sort en el proper joc.</string>
-    <string name="game_over_desc_4">Has completat el camp de mines en %1$d segons.</string>
+    <string name="generic_game_over">Que tinguis sort en el proper joc.</string>
+    <string name="generic_win">Has completat el camp de mines en %1$d segons.</string>
     <string name="fail_to_share">No s\'ha pogut compartir</string>
     <string name="version_s">Versió %1$s</string>
     <string name="sound_effects">Efecte de so</string>

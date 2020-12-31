@@ -56,8 +56,8 @@
     <string name="you_lost">あなたの負けです！</string>
     <string name="you_finished">完了しました！</string>
     <string name="defeats">敗北回数</string>
-    <string name="game_over_desc_1">次のゲームでも頑張りましょう。</string>
-    <string name="game_over_desc_4">あなたは %1$d 秒でクリアしました。</string>
+    <string name="generic_game_over">次のゲームでも頑張りましょう。</string>
+    <string name="generic_win">あなたは %1$d 秒でクリアしました。</string>
     <string name="fail_to_share">共有に失敗しました</string>
     <string name="version_s">バージョン %1$s</string>
     <string name="sound_effects">サウンドエフェクト</string>
