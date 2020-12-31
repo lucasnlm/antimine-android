@@ -8,7 +8,6 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ui.ThematicActivity
-import dev.lucasnlm.antimine.cloud.CloudSaveManager
 import org.koin.android.ext.android.inject
 
 class PreferencesActivity :

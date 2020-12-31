@@ -66,4 +66,10 @@ dependencies {
 
     // Kotlin Lib
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10'
+
+    // Unit Tests
+    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'org.mockito:mockito-core:2.24.0'
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
+    testImplementation "io.mockk:mockk:1.10.3"
 }

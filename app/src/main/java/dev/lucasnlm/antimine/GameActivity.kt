@@ -26,7 +26,6 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
-import dev.lucasnlm.antimine.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.common.level.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.models.Score

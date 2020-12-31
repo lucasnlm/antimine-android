@@ -1,12 +1,11 @@
-package dev.lucasnlm.antimine.core.preferences
+package dev.lucasnlm.antimine.preferences
 
-import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-private class TestPreferenceManager : dev.lucasnlm.antimine.preferences.IPreferencesManager {
+private class TestPreferenceManager : IPreferencesManager {
     val values = mutableMapOf<String, Any>()
 
     override fun getBoolean(key: String, defaultValue: Boolean): Boolean {

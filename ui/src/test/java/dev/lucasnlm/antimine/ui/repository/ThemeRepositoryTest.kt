@@ -1,6 +1,5 @@
-package dev.lucasnlm.antimine.core.themes.repository
+package dev.lucasnlm.antimine.ui.repository
 
-import dev.lucasnlm.antimine.ui.repository.Themes
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
