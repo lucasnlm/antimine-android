@@ -2,9 +2,9 @@ package dev.lucasnlm.antimine.gameover
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -44,7 +44,6 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
     private val gameViewModel by sharedViewModel<GameViewModel>()
     private val preferencesRepository: IPreferencesRepository by inject()
     private val billingManager: IBillingManager by inject()
-    private var revealMinesOnDismiss = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,19 +74,6 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
         fragmentTransaction.commitAllowingStateLoss()
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        if (revealMinesOnDismiss) {
-            activity?.let {
-                if (!it.isFinishing) {
-                    gameViewModel.viewModelScope.launch {
-                        gameViewModel.revealMines()
-                    }
-                }
-            }
-        }
-        super.onDismiss(dialog)
-    }
-
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext()).apply {
@@ -97,17 +83,6 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                 .apply {
                     lifecycleScope.launchWhenCreated {
                         endGameViewModel.observeState().collect { state ->
-                            findViewById<TextView>(R.id.title).text = state.title
-                            findViewById<TextView>(R.id.subtitle).text = state.message
-                            findViewById<ImageView>(R.id.title_emoji).apply {
-                                setImageResource(state.titleEmoji)
-                                setOnClickListener {
-                                    endGameViewModel.sendEvent(
-                                        EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji)
-                                    )
-                                }
-                            }
-
                             val adsView: AdPlaceHolderView = findViewById(R.id.ads)
                             val shareButton: AppCompatButton = findViewById(R.id.share)
                             val newGameButton: AppCompatButton = findViewById(R.id.new_game)
@@ -116,21 +91,32 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             val settingsButton: View = findViewById(R.id.settings)
                             val closeButton: View = findViewById(R.id.close)
                             val receivedMessage: TextView = findViewById(R.id.received_message)
+                            val title: TextView = findViewById(R.id.title)
+                            val subtitle: TextView = findViewById(R.id.subtitle)
+                            val emoji: ImageView = findViewById(R.id.title_emoji)
+
+                            title.text = state.title
+                            subtitle.text = state.message
+
+                            emoji.apply {
+                                setImageResource(state.titleEmoji)
+                                setOnClickListener {
+                                    endGameViewModel.sendEvent(
+                                        EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji)
+                                    )
+                                }
+                            }
 
                             shareButton.setOnClickListener {
-                                revealMinesOnDismiss = false
                                 gameViewModel.shareObserver.postValue(Unit)
                             }
 
                             newGameButton.setOnClickListener {
-                                revealMinesOnDismiss = false
                                 gameViewModel.startNewGame()
                                 dismissAllowingStateLoss()
                             }
 
                             continueButton.setOnClickListener {
-                                revealMinesOnDismiss = false
-
                                 if (preferencesRepository.isPremiumEnabled()) {
                                     gameViewModel.continueObserver.postValue(Unit)
                                     dismissAllowingStateLoss()
@@ -144,6 +130,14 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             }
 
                             closeButton.setOnClickListener {
+                                activity?.let {
+                                    if (!it.isFinishing) {
+                                        gameViewModel.viewModelScope.launch {
+                                            gameViewModel.revealMines()
+                                        }
+                                    }
+                                }
+
                                 dismissAllowingStateLoss()
                             }
 
@@ -203,8 +197,26 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                     }
                 }
 
+            setOnKeyListener { _, _, keyEvent ->
+                if (keyEvent.keyCode == KeyEvent.KEYCODE_BACK) {
+                    activity?.let {
+                        if (!it.isFinishing) {
+                            gameViewModel.viewModelScope.launch {
+                                gameViewModel.revealMines()
+                            }
+                        }
+                    }
+                    dismissAllowingStateLoss()
+                    true
+                } else {
+                    false
+                }
+            }
+
             setView(view)
-        }.create()
+        }.create().apply {
+            setCanceledOnTouchOutside(false)
+        }
 
     private fun showSettings() {
         startActivity(Intent(requireContext(), PreferencesActivity::class.java))
