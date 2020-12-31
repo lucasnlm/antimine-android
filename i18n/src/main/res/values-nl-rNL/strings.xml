@@ -56,8 +56,8 @@
     <string name="you_lost">Je hebt verloren!</string>
     <string name="you_finished">Je bent klaar!</string>
     <string name="defeats">Nederlagen</string>
-    <string name="generic_game_over">Veel succes bij je volgende spel.</string>
-    <string name="generic_win">Je hebt het mijnenveld voltooid in %1$d seconden.</string>
+    <string name="generic_game_over">Good luck on your next game.</string>
+    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
     <string name="fail_to_share">Delen mislukt</string>
     <string name="version_s">Versie %1$s</string>
     <string name="sound_effects">Geluids Effecten</string>

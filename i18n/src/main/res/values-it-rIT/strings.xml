@@ -56,8 +56,8 @@
     <string name="you_lost">Hai perso!</string>
     <string name="you_finished">Hai finito!</string>
     <string name="defeats">Sconfitte</string>
-    <string name="generic_game_over">Buona fortuna nella prossima partita.</string>
-    <string name="generic_win">Hai finito il campo minato in %1$d secondi.</string>
+    <string name="generic_game_over">Good luck on your next game.</string>
+    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
     <string name="fail_to_share">Condivisione fallita</string>
     <string name="version_s">Versione %1$s</string>
     <string name="sound_effects">Effetti Sonori</string>

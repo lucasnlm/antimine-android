@@ -57,7 +57,7 @@
     <string name="you_finished">Skončili jste!</string>
     <string name="defeats">Prohry</string>
     <string name="generic_game_over">Hodně štěstí při další hře.</string>
-    <string name="generic_win">Dokončili jste minové pole za %1$d sekund.</string>
+    <string name="generic_win">Našli jste %1$d min za %1$d sekund.</string>
     <string name="fail_to_share">Sdílení se nezdařilo</string>
     <string name="version_s">Verze %1$s</string>
     <string name="sound_effects">Zvukové efekty</string>

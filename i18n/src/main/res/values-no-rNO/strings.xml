@@ -56,8 +56,8 @@
     <string name="you_lost">Du tapte!</string>
     <string name="you_finished">Du er ferdig!</string>
     <string name="defeats">Nederlag</string>
-    <string name="generic_game_over">Lykke til på det neste spillet.</string>
-    <string name="generic_win">Du har avjobbet minefeltet i %1$d sekunder.</string>
+    <string name="generic_game_over">Good luck on your next game.</string>
+    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
     <string name="fail_to_share">Feilet med å dele</string>
     <string name="version_s">Versjon %1$s</string>
     <string name="sound_effects">Lydeffekter</string>
@@ -77,7 +77,7 @@
     <string name="double_click">Dobbeltklikk</string>
     <string name="long_press">Lang Trykk</string>
     <string name="open_tile">Åpne</string>
-    <string name="flag_tile">Flagge</string>
+    <string name="flag_tile">Flagg</string>
     <string name="retry">Prøv på nytt</string>
     <string name="continue_game">Fortsett</string>
     <string name="empty">Tom</string>
@@ -98,7 +98,7 @@
     <string name="translation">Oversettelse</string>
     <string name="licenses">Lisenser</string>
     <string name="google_play_games">Google Play Spill</string>
-    <string name="loading">Laster inn…</string>
+    <string name="loading">Laster…</string>
     <string name="connect">Koble til</string>
     <string name="connecting">Kobler til…</string>
     <string name="disconnect">Koble fra</string>

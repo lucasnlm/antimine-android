@@ -56,8 +56,8 @@
     <string name="you_lost">Du förlorade!</string>
     <string name="you_finished">Du är färdig!</string>
     <string name="defeats">Förluster</string>
-    <string name="generic_game_over">Lycka till på ditt nästa spel.</string>
-    <string name="generic_win">Du avslutade minfältet på %1$d sekunder.</string>
+    <string name="generic_game_over">Good luck on your next game.</string>
+    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
     <string name="fail_to_share">Misslyckades att dela</string>
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Ljudeffekter</string>
