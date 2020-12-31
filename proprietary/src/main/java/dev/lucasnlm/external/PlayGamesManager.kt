@@ -3,12 +3,14 @@ package dev.lucasnlm.external
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.games.Games
 import com.google.android.gms.tasks.Tasks
 
@@ -26,7 +28,13 @@ class PlayGamesManager(
 
     override fun playerId(): String? {
         return account?.let {
-            Tasks.await(Games.getPlayersClient(context, it).currentPlayerId)
+            try {
+                Tasks.await(Games.getPlayersClient(context, it).currentPlayerId)
+            } catch (e: ApiException) {
+                Log.e(TAG, "Fail to request current player id")
+                account = null
+                null
+            }
         }
     }
 
@@ -43,14 +51,18 @@ class PlayGamesManager(
     override fun silentLogin(): Boolean {
         val signInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build()
         val lastAccount: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(context)
-        val client = GoogleSignIn.getClient(context, signInOptions)
-        account = lastAccount ?: Tasks.await(client.silentSignIn())
-        return account != null
+        return try {
+            val client = GoogleSignIn.getClient(context, signInOptions)
+            account = lastAccount ?: Tasks.await(client.silentSignIn())
+            account != null
+        } catch (e: ApiException) {
+            account = null
+            false
+        }
     }
 
     override fun getLoginIntent(): Intent? {
-        val signInClient = GoogleSignIn.getClient(context, GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
-        return signInClient.signInIntent
+        return GoogleSignIn.getClient(context, GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).signInIntent
     }
 
     override fun handleLoginResult(data: Intent?) {
@@ -107,5 +119,9 @@ class PlayGamesManager(
         account?.let {
             Games.getLeaderboardsClient(context, it).submitScore(leaderboard.value, value)
         }
+    }
+
+    companion object {
+        val TAG = PlayGamesManager::class.simpleName
     }
 }
