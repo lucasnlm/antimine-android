@@ -33,7 +33,7 @@ android {
 dependencies {
     // Dependencies must be hardcoded to support F-droid
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':core')
 
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'

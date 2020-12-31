@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.level.database.converters
 
-import dev.lucasnlm.antimine.common.level.models.Area
-import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.core.models.Area
+import dev.lucasnlm.antimine.core.models.Mark
 import org.junit.Test
 
 import org.junit.Assert.assertEquals
@@ -66,39 +66,39 @@ class AreaConverterTest {
 
     private val areaList =
         listOf(
-            Area(
+            dev.lucasnlm.antimine.core.models.Area(
                 1, 2, 3, 5,
                 hasMine = false,
                 mistake = false,
                 isCovered = true,
-                mark = Mark.None,
+                mark = dev.lucasnlm.antimine.core.models.Mark.None,
                 highlighted = true,
                 revealed = false,
             ),
-            Area(
+            dev.lucasnlm.antimine.core.models.Area(
                 2, 5, 3, 0,
                 hasMine = true,
                 mistake = true,
                 isCovered = false,
-                mark = Mark.PurposefulNone,
+                mark = dev.lucasnlm.antimine.core.models.Mark.PurposefulNone,
                 highlighted = false,
                 revealed = false,
             ),
-            Area(
+            dev.lucasnlm.antimine.core.models.Area(
                 3, 1, 1, 3,
                 hasMine = true,
                 mistake = false,
                 isCovered = true,
-                mark = Mark.Flag,
+                mark = dev.lucasnlm.antimine.core.models.Mark.Flag,
                 highlighted = true,
                 revealed = false,
             ),
-            Area(
+            dev.lucasnlm.antimine.core.models.Area(
                 4, 0, 0, 6,
                 hasMine = false,
                 mistake = false,
                 isCovered = true,
-                mark = Mark.Question,
+                mark = dev.lucasnlm.antimine.core.models.Mark.Question,
                 highlighted = true,
                 revealed = true,
             )

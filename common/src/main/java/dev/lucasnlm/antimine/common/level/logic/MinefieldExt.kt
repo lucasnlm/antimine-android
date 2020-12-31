@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.level.logic
 
-import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.core.models.Area
 import kotlin.math.absoluteValue
 
 fun List<Area>.withId(id: Int) = this.first { it.id == id }

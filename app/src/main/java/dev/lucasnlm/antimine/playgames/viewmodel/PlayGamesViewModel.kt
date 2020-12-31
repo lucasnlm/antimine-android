@@ -2,8 +2,8 @@ package dev.lucasnlm.antimine.playgames.viewmodel
 
 import android.app.Activity
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
-import dev.lucasnlm.antimine.core.analytics.models.Analytics
+import dev.lucasnlm.external.IAnalyticsManager
+import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.playgames.model.PlayGamesItem
 import dev.lucasnlm.external.IPlayGamesManager

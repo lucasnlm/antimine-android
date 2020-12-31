@@ -2,8 +2,8 @@ package dev.lucasnlm.antimine.tutorial.viewmodel
 
 import android.content.Context
 import dev.lucasnlm.antimine.common.R
-import dev.lucasnlm.antimine.common.level.models.Area
-import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
+import dev.lucasnlm.antimine.core.models.Area
+import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
@@ -11,8 +11,8 @@ import dev.lucasnlm.antimine.common.level.repository.ITipRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
-import dev.lucasnlm.antimine.core.analytics.models.Analytics
+import dev.lucasnlm.external.IAnalyticsManager
+import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager

@@ -2,23 +2,21 @@ package dev.lucasnlm.antimine.common.level.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Paint
-import android.graphics.RectF
-import android.graphics.Typeface
 import android.util.Log
 import android.view.GestureDetector
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import dev.lucasnlm.antimine.common.R
-import dev.lucasnlm.antimine.common.level.models.Area
-import dev.lucasnlm.antimine.common.level.models.AreaPaintSettings
-import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.core.models.Area
+import dev.lucasnlm.antimine.core.models.AreaPaintSettings
+import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import kotlinx.coroutines.GlobalScope
+import dev.lucasnlm.antimine.ui.view.AreaView
+import dev.lucasnlm.antimine.ui.view.createAreaPaintSettings
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class AreaAdapter(
@@ -26,6 +24,7 @@ class AreaAdapter(
     private val viewModel: GameViewModel,
     private val preferencesRepository: IPreferencesRepository,
     dimensionRepository: IDimensionRepository,
+    private val coroutineScope: CoroutineScope,
 ) : RecyclerView.Adapter<AreaViewHolder>() {
 
     private var field = listOf<Area>()
@@ -70,7 +69,7 @@ class AreaAdapter(
             }
             clickEnabled -> {
                 requestFocus()
-                GlobalScope.launch {
+                coroutineScope.launch {
                     action(position)
                 }
                 true
@@ -175,21 +174,5 @@ class AreaAdapter(
 
     companion object {
         val TAG = AreaAdapter::class.simpleName!!
-
-        fun createAreaPaintSettings(context: Context, size: Float, squareRadius: Int): AreaPaintSettings {
-            val resources = context.resources
-            return AreaPaintSettings(
-                Paint().apply {
-                    isAntiAlias = true
-                    isDither = true
-                    style = Paint.Style.FILL
-                    textSize = 18.0f * context.resources.displayMetrics.density
-                    typeface = Typeface.DEFAULT_BOLD
-                    textAlign = Paint.Align.CENTER
-                },
-                RectF(0.0f, 0.0f, size, size),
-                resources.getDimension(R.dimen.field_radius) * squareRadius
-            )
-        }
     }
 }

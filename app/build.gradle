@@ -105,6 +105,8 @@ dependencies {
     implementation project(':about')
     implementation project(':ui')
     implementation project(':preferences')
+    implementation project(':themes')
+    implementation project(':purchases')
     implementation project(':core')
 
     googleImplementation project(':proprietary')

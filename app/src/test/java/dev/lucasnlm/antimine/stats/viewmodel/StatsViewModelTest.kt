@@ -3,7 +3,7 @@ package dev.lucasnlm.antimine.stats.viewmodel
 import dev.lucasnlm.antimine.IntentViewModelTest
 import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.common.level.repository.IDimensionRepository
+import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.MemoryStatsRepository
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository

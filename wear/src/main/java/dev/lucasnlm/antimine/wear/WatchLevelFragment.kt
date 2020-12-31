@@ -8,7 +8,7 @@ import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
-import dev.lucasnlm.antimine.common.level.view.SpaceItemDecoration
+import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

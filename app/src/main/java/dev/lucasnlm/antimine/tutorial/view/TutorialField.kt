@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.tutorial.view
 
-import dev.lucasnlm.antimine.common.level.models.Area
-import dev.lucasnlm.antimine.common.level.models.Mark
+import dev.lucasnlm.antimine.core.models.Area
+import dev.lucasnlm.antimine.core.models.Mark
 
 object TutorialField {
     fun getStep0(): List<Area> {

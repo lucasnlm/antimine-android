@@ -1,10 +1,10 @@
 package dev.lucasnlm.antimine.common.level.solver
 
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
-import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.core.models.Area
 
 open class BruteForceSolver : GameSolver() {
-    override fun trySolve(minefield: MutableList<Area>): Boolean {
+    override fun trySolve(minefield: MutableList<dev.lucasnlm.antimine.core.models.Area>): Boolean {
         val minefieldHandler = MinefieldHandler(minefield, false)
 
         do {

@@ -2,7 +2,8 @@ package dev.lucasnlm.antimine.core.analytics
 
 import android.content.Context
 import android.util.Log
-import dev.lucasnlm.antimine.core.analytics.models.Analytics
+import dev.lucasnlm.antimine.core.models.Analytics
+import dev.lucasnlm.external.IAnalyticsManager
 
 class DebugAnalyticsManager : IAnalyticsManager {
     override fun setup(context: Context, properties: Map<String, String>) {
@@ -11,7 +12,7 @@ class DebugAnalyticsManager : IAnalyticsManager {
         }
     }
 
-    override fun sentEvent(event: Analytics) {
+    override fun sentEvent(event: dev.lucasnlm.antimine.core.models.Analytics) {
         val message = if (event.extra.isNotEmpty()) {
             "Sent event: '${event.name}' with ${event.extra}"
         } else {

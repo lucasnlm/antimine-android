@@ -2,8 +2,8 @@ package dev.lucasnlm.antimine.wear
 
 import android.app.Application
 import dev.lucasnlm.antimine.common.level.di.LevelModule
-import dev.lucasnlm.antimine.core.analytics.IAnalyticsManager
-import dev.lucasnlm.antimine.core.analytics.models.Analytics
+import dev.lucasnlm.external.IAnalyticsManager
+import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.di.CommonModule
 import dev.lucasnlm.antimine.wear.di.AppModule
 import dev.lucasnlm.antimine.wear.di.ViewModelModule

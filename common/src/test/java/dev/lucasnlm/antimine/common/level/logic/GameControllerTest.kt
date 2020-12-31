@@ -1,9 +1,9 @@
 package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.common.level.GameController
-import dev.lucasnlm.antimine.common.level.models.Area
+import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.common.level.models.Score
+import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.core.control.GameControl
 import kotlinx.coroutines.launch
@@ -39,7 +39,7 @@ class GameControllerTest {
     @Test
     fun testGetScore() = runBlockingTest {
         withGameController { controller ->
-            assertEquals(Score(0, 20, 100), controller.getScore())
+            assertEquals(dev.lucasnlm.antimine.core.models.Score(0, 20, 100), controller.getScore())
 
             repeat(20) { markedMines ->
                 controller
@@ -51,7 +51,7 @@ class GameControllerTest {
                         controller.fakeLongPress(it.id)
                     }
 
-                assertEquals(Score(markedMines, 20, 100), controller.getScore())
+                assertEquals(dev.lucasnlm.antimine.core.models.Score(markedMines, 20, 100), controller.getScore())
             }
         }
     }
@@ -59,7 +59,7 @@ class GameControllerTest {
     @Test
     fun testGetScoreWithQuestion() = runBlockingTest {
         withGameController { controller ->
-            assertEquals(Score(0, 20, 100), controller.getScore())
+            assertEquals(dev.lucasnlm.antimine.core.models.Score(0, 20, 100), controller.getScore())
             controller.useQuestionMark(true)
 
             controller
@@ -71,7 +71,7 @@ class GameControllerTest {
                     controller.fakeLongPress(it.id)
                 }
 
-            assertEquals(Score(0, 20, 100), controller.getScore())
+            assertEquals(dev.lucasnlm.antimine.core.models.Score(0, 20, 100), controller.getScore())
         }
     }
 
@@ -528,7 +528,7 @@ class GameControllerTest {
         }
     }
 
-    private fun GameController.at(index: Int): Area {
+    private fun GameController.at(index: Int): dev.lucasnlm.antimine.core.models.Area {
         return this.field().first { it.id == index }
     }
 

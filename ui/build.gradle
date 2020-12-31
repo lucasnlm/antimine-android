@@ -34,12 +34,17 @@ android {
 }
 
 dependencies {
+    implementation project(':core')
+    implementation project(':i18n')
     implementation project(':preferences')
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.activity:activity-ktx:1.1.0'
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
+
+    // RecyclerView
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-beta01'
 
     // Constraint
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'

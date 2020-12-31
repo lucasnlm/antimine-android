@@ -7,6 +7,6 @@ sealed class Status {
 
     class Over(
         val time: Long = 0L,
-        val score: Score? = null,
+        val score: dev.lucasnlm.antimine.core.models.Score? = null,
     ) : Status()
 }

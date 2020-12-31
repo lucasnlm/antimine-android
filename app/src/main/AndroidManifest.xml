@@ -86,16 +86,6 @@
         </activity>
 
         <activity
-            android:label="@string/themes"
-            android:name="dev.lucasnlm.antimine.theme.ThemeActivity"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.lucasnlm.antimine.GameActivity" />
-        </activity>
-
-        <activity
             android:name="dev.lucasnlm.antimine.stats.StatsActivity"
             android:label="@string/events"
             android:theme="@style/AppTheme">
