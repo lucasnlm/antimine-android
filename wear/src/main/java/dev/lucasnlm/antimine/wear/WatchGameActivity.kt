@@ -24,7 +24,6 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientModeSupport.AmbientCallbackProvider {
-
     private val viewModel by viewModel<GameViewModel>()
 
     private var currentLevelFragment: WatchLevelFragment? = null
@@ -63,6 +62,7 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
 
         bindViewModel()
         loadGameFragment()
+        viewModel.startNewGame(Difficulty.Intermediate)
 
         swipe.isSwipeable = false
     }
