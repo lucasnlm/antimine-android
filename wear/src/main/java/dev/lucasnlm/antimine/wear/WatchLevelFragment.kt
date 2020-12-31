@@ -28,10 +28,8 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
 
                 withContext(Dispatchers.Main) {
                     recyclerGrid.apply {
-                        recyclerGrid.apply {
-                            addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
-                            setHasFixedSize(true)
-                        }
+                        addItemDecoration(SpaceItemDecoration(R.dimen.field_padding))
+                        setHasFixedSize(true)
                         setupRecyclerViewSize(view, levelSetup)
                     }
                 }

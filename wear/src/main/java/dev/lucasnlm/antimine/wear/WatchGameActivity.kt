@@ -10,16 +10,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.ambient.AmbientModeSupport.AmbientCallback
 import androidx.wear.ambient.AmbientModeSupport.EXTRA_LOWBIT_AMBIENT
-import androidx.wear.widget.SwipeDismissFrameLayout
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.core.models.Difficulty
 import kotlinx.android.synthetic.main.activity_level.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,7 +39,7 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
             currentLevelFragment?.setAmbientMode(
                 AmbientSettings(
                     isAmbientMode = false,
-                    isLowBitAmbient = false
+                    isLowBitAmbient = false,
                 )
             )
         }
@@ -51,7 +50,7 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
             currentLevelFragment?.setAmbientMode(
                 AmbientSettings(
                     true,
-                    lowBit
+                    lowBit,
                 )
             )
             updateClockText(true)
@@ -65,20 +64,13 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
         bindViewModel()
         loadGameFragment()
 
-        swipe.addCallback(
-            object : SwipeDismissFrameLayout.Callback() {
-                override fun onDismissed(layout: SwipeDismissFrameLayout) {
-                    swipe.visibility = View.GONE
-                    finish()
-                }
-            }
-        )
+        swipe.isSwipeable = false
     }
 
     override fun onResume() {
         super.onResume()
         clock.start {
-            GlobalScope.launch(Dispatchers.Main) {
+            lifecycleScope.launchWhenResumed {
                 updateClockText()
             }
         }
@@ -183,11 +175,12 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
         lifecycleScope.launch {
             delay(wait)
             if (status is Status.Over && !isFinishing) {
-                newGame.visibility = View.VISIBLE
-                newGame.setOnClickListener {
-                    it.visibility = View.GONE
-                    GlobalScope.launch {
-                        viewModel.startNewGame()
+                newGame.apply {
+                    visibility = View.VISIBLE
+                    setOnClickListener {
+                        it.visibility = View.GONE
+
+                        viewModel.startNewGame(Difficulty.Beginner)
                     }
                 }
             }
