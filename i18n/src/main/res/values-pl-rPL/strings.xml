@@ -57,7 +57,7 @@
     <string name="you_finished">Udało się!</string>
     <string name="defeats">Porażki</string>
     <string name="generic_game_over">Powodzenia następnym razem.</string>
-    <string name="generic_win">Znaleziono %1$d min w ciągu %1$d sekund.</string>
+    <string name="generic_win">Znaleziono %1$d min w ciągu %2$d sekund.</string>
     <string name="fail_to_share">Nie udało się udostępnić</string>
     <string name="version_s">Wersja %1$s</string>
     <string name="sound_effects">Efekty dźwiękowe</string>

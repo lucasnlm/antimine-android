@@ -54,10 +54,10 @@
     <string name="you_won">आप जीत गए!</string>
     <string name="victories">विजय</string>
     <string name="you_lost">तुम हार गए!</string>
-    <string name="you_finished">You finished!</string>
+    <string name="you_finished">आप खेल समाप्त</string>
     <string name="defeats">पराजय</string>
-    <string name="generic_game_over">Good luck on your next game.</string>
-    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
+    <string name="generic_game_over">अपने अगले खेल पर शुभकामनाएँ।</string>
+    <string name="generic_win">आपने %2$d सेकंड में %1$d खान पाया।</string>
     <string name="fail_to_share">शेअर करने में असफ़ल</string>
     <string name="version_s">संस्करण %1$s</string>
     <string name="sound_effects">ध्वनि प्रभाव</string>
@@ -70,7 +70,7 @@
     <string name="performance">प्रदर्शन</string>
     <string name="ok">ओके</string>
     <string name="use_question_mark">\"मैं सुनिश्चित नहीं हूं\" झंडे का उपयोग करें</string>
-    <string name="no_guessing_mode">\'No guessing\' mode</string>
+    <string name="no_guessing_mode">\'कोई अनुमान नहीं\' मोड</string>
     <string name="control">नियंत्रण</string>
     <string name="arrow">➞</string>
     <string name="single_click">सिंगल क्लिक</string>
@@ -79,7 +79,7 @@
     <string name="open_tile">खुला</string>
     <string name="flag_tile">ध्वज</string>
     <string name="retry">फिर प्रयास करें</string>
-    <string name="continue_game">Continue</string>
+    <string name="continue_game">जारी रखें</string>
     <string name="empty">खाली</string>
     <string name="cant_do_it_now">अब ऐसा होना असंभव है</string>
     <string name="you_have_received">आपने प्राप्त किया है: +%1$d</string>

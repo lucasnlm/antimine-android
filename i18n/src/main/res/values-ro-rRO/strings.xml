@@ -54,10 +54,10 @@
     <string name="you_won">Aţi câștigat!</string>
     <string name="victories">Victorii</string>
     <string name="you_lost">Aţi pierdut!</string>
-    <string name="you_finished">You finished!</string>
+    <string name="you_finished">Ai terminat!</string>
     <string name="defeats">Înfrângeri</string>
-    <string name="generic_game_over">Good luck on your next game.</string>
-    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
+    <string name="generic_game_over">Mult noroc la următorul joc.</string>
+    <string name="generic_win">Ai găsit %1$d mine în %2$d secunde.</string>
     <string name="fail_to_share">Share-uirea imaginii a eșuat</string>
     <string name="version_s">Versiunea %1$s</string>
     <string name="sound_effects">Efecte sonore</string>
@@ -79,7 +79,7 @@
     <string name="open_tile">Deschide</string>
     <string name="flag_tile">Steag</string>
     <string name="retry">Încearcă din nou</string>
-    <string name="continue_game">Continue</string>
+    <string name="continue_game">Continuare</string>
     <string name="empty">Gol</string>
     <string name="cant_do_it_now">Nu se poate face acest lucru acum</string>
     <string name="you_have_received">Ați primit: +%1$d</string>

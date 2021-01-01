@@ -56,8 +56,8 @@
     <string name="you_lost">لقد خسرت!</string>
     <string name="you_finished">انتهيت منها!</string>
     <string name="defeats">الهزائم</string>
-    <string name="generic_game_over">Good luck on your next game.</string>
-    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
+    <string name="generic_game_over">حظا موفقا في لعبتك القادمة.</string>
+    <string name="generic_win">عثرت على %1$d ألغام في %2$d ثانية.</string>
     <string name="fail_to_share">فشل المشاركة</string>
     <string name="version_s">الإصدار %1$s</string>
     <string name="sound_effects">مؤثرات صوتية</string>
