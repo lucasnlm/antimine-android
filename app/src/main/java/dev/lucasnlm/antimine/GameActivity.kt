@@ -804,13 +804,13 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 gameViewModel.stopClock()
 
                 if (!isResuming) {
+                    val isGameCompleted = gameViewModel.isCompletedWithMistakes()
                     cloudSaveManager.uploadSave()
                     lifecycleScope.launch {
-                        gameViewModel.gameOver(isResuming)
+                        gameViewModel.gameOver(isResuming, !isGameCompleted)
                         gameViewModel.saveGame()
                         waitAndShowEndGameAlert(
-                            gameResult = if (gameViewModel.isCompletedWithMistakes())
-                                GameResult.Completed else GameResult.GameOver,
+                            gameResult = if (isGameCompleted) GameResult.Completed else GameResult.GameOver,
                             await = true,
                             canContinue = gameViewModel.hasUnknownMines(),
                         )

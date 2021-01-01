@@ -428,11 +428,11 @@ open class GameViewModel(
         }
     }
 
-    suspend fun gameOver(fromResumeGame: Boolean) {
+    suspend fun gameOver(fromResumeGame: Boolean, useGameOverFeedback: Boolean) {
         gameController.run {
             analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
 
-            if (!fromResumeGame) {
+            if (!fromResumeGame && useGameOverFeedback) {
                 if (preferencesRepository.useHapticFeedback()) {
                     hapticFeedbackManager.explosionFeedback()
                 }
