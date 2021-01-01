@@ -57,7 +57,7 @@
     <string name="you_finished">You finished!</string>
     <string name="defeats">Nederlae</string>
     <string name="generic_game_over">Good luck on your next game.</string>
-    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
+    <string name="generic_win">You found %1$d mines in %2$d seconds.</string>
     <string name="fail_to_share">Kon nie deel nie</string>
     <string name="version_s">Weergawe %1$s</string>
     <string name="sound_effects">Byklanke</string>

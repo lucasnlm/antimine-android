@@ -56,8 +56,8 @@
     <string name="you_lost">הפסדת!</string>
     <string name="you_finished">You finished!</string>
     <string name="defeats">הפסדים</string>
-    <string name="generic_game_over">Good luck on your next game.</string>
-    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
+    <string name="generic_game_over">בהצלחה במשחק הבא.</string>
+    <string name="generic_win">מצאת%1$d מוקשים ב-%2$d שניות.</string>
     <string name="fail_to_share">השיתוף נכשל</string>
     <string name="version_s">גרסה %1$s</string>
     <string name="sound_effects">אפקטי צליל</string>
@@ -79,7 +79,7 @@
     <string name="open_tile">פתוח</string>
     <string name="flag_tile">דגל</string>
     <string name="retry">נסה שנית</string>
-    <string name="continue_game">Continue</string>
+    <string name="continue_game">המשך</string>
     <string name="empty">ריק</string>
     <string name="cant_do_it_now">אי אפשר לעשות את זה עכשיו</string>
     <string name="you_have_received">קיבלת: +%1$d</string>

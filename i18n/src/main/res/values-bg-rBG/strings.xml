@@ -57,7 +57,7 @@
     <string name="you_finished">Вие свършихте!</string>
     <string name="defeats">Загуби</string>
     <string name="generic_game_over">Успех на следващата ви игра.</string>
-    <string name="generic_win">Вие намерихте %1$d мини в %1$d секунди.</string>
+    <string name="generic_win">Вие намерихте %1$d мини в %2$d секунди.</string>
     <string name="fail_to_share">Неуспешно споделяне</string>
     <string name="version_s">Версия %1$s</string>
     <string name="sound_effects">Звукови ефекти</string>

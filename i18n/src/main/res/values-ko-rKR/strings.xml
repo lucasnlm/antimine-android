@@ -56,8 +56,8 @@
     <string name="you_lost">실패!</string>
     <string name="you_finished">끝났어!</string>
     <string name="defeats">실패 횟수</string>
-    <string name="generic_game_over">Good luck on your next game.</string>
-    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
+    <string name="generic_game_over">다음 판에서는 잘하시길 빕니다.</string>
+    <string name="generic_win">%2$d 초 만에 %1$d 개의 광산을 찾았습니다.</string>
     <string name="fail_to_share">공유 실패</string>
     <string name="version_s">버전: %1$s</string>
     <string name="sound_effects">효과음</string>
@@ -70,7 +70,7 @@
     <string name="performance">퍼포먼스</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">물음표 깃발 사용</string>
-    <string name="no_guessing_mode">\'No guessing\' mode</string>
+    <string name="no_guessing_mode">\'추측 없음\'모드</string>
     <string name="control">컨트롤</string>
     <string name="arrow">➞</string>
     <string name="single_click">단일 클릭</string>
@@ -126,8 +126,8 @@
     <string name="remove_ad">광고 제거</string>
     <string name="help">도움말</string>
     <string name="show_windows">진행상황 게이지 활성화</string>
-    <string name="switch_control">Switch: Flag and Open</string>
-    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
+    <string name="switch_control">스위치: 플래그 및 열기</string>
+    <string name="switch_control_desc">버튼을 사용하여 플래그와 열기 간 전환</string>
     <string name="app_description">당신은 이 사각형 게임판에 숨겨진 지뢰를 하나도 터뜨리지 않고 게임을 끝내야 합니다.</string>
     <string name="app_name">Antimine</string>
 </resources>

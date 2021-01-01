@@ -54,10 +54,10 @@
     <string name="you_won">Győztél!</string>
     <string name="victories">Győzelmek</string>
     <string name="you_lost">Vesztettél!</string>
-    <string name="you_finished">You finished!</string>
+    <string name="you_finished">Befejezted!</string>
     <string name="defeats">Vereségek</string>
-    <string name="generic_game_over">Good luck on your next game.</string>
-    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
+    <string name="generic_game_over">Sok szerencsét a következő játékhoz.</string>
+    <string name="generic_win">%1$d aknát talált %2$d másodperc alatt.</string>
     <string name="fail_to_share">Sikertelen megosztás</string>
     <string name="version_s">%1$s verzió</string>
     <string name="sound_effects">Hangeffektek</string>
@@ -79,7 +79,7 @@
     <string name="open_tile">Megnyitás</string>
     <string name="flag_tile">Zászló</string>
     <string name="retry">Újra</string>
-    <string name="continue_game">Continue</string>
+    <string name="continue_game">Folytatás</string>
     <string name="empty">Üres</string>
     <string name="cant_do_it_now">Most lehetetlen ezt megtenni</string>
     <string name="you_have_received">Kapott összeg: +%1$d</string>

@@ -7,7 +7,7 @@ TWÓJ CEL
 Ta gra jest jak Saper. Aby wygrać rozgrywkę, należy oznaczyć każdą minę na polu minowym. Uważaj, aby żadnej nie zdetonować!
 
 BEZ ZGADYWANIA
-Ta gra posiada algorytm, który zawsze tworzy pole minowe możliwe do rozwiązania. Nie trzeba zgadywać gdzie jest ostatnia mina!
+Gra wykorzystuje algorytm, który zawsze tworzy pola minowe, które są możliwe do rozwiązania. Nie trzeba zgadywać gdzie jest ostatnia mina!
 
 POZIOMY GRY
 Tak jak Saper, ta gra posiada różne tryby gry: Łatwy, Średni oraz Ekspert. Ale oprócz tego, gra posiada unikalny tryb progresywny, którego poziom trudności wzrasta wraz z wygrywaniem.
@@ -19,20 +19,20 @@ MOTYWY
 Antimine zawiera ponad 15 motywów (w tym jasny, ciemny oraz AMOLED). A kolejne są już w drodze!
 
 MINIMALIZM
-Piękno w prostocie: minimalistyczna wizualnie oraz mało zajmująca aplikacja (mniej niż 9MB).
+Piękno w prostocie: minimalistyczna wizualnie oraz rozmiarowo aplikacja (mniej niż 9MB).
 
 SAMOUCZEK
-Nie wiesz jak grać w Sapera? Żaden problem, możesz zagrać w nasz tryb samouczka oraz włączyć wskazówki w ustawieniach.
+Nie wiesz jak grać w Sapera? Żaden problem, ponieważ możesz zagrać w nasz tryb samouczka oraz włączyć wskazówki w ustawieniach.
 
 STATYSTYKI
-Sprawdź swoje wyniki oraz postępy.
+Sprawdzaj swoje wyniki oraz postępy.
 
 POMOCNIK W GRZE
 Gra automatycznie oznacza odizolowane pola. 
 
 DOSTOSOWYWANIE
 Możesz dobrowolnie dostosować grę. 
-Na przykład: Pomoc, animacje, wibracje przy dotknięciu, znak zapytania.
+Na przykład: włączyć pomoc, animacje, wibracje przy dotknięciu lub aktywować użycie znaku zapytania.
 
 STEROWANIE
 Dostępne są cztery systemy sterowania. Na przykład: oznaczanie pola przez dotknięcie lub długie naciśnięcie.
@@ -48,9 +48,9 @@ APLIKACJA DEDYKOWANA DLA ANDROIDA
 Obsługuje fajne funkcje Androida, takie jak podzielony ekran, skróty, udostępnianie, motyw systemowy oraz ciągłe wsparcie dla najnowszych wersji.
 
 Z SIECIĄ LUB BEZ
-Nie musisz mieć połączenia, aby zagrać!
+Nie musisz mieć połączenia z Internetem, aby zagrać!
 
 AUTOMATYCZNY ZAPIS
 Możesz zacząć rozgrywkę i kontynuować ją później! Rozgrywka zapisuje się automatycznie.
 
-Powodzenia.
+Dobrej zabawy.

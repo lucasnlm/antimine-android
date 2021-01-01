@@ -54,10 +54,10 @@
     <string name="you_won">คุณชนะแล้ว!</string>
     <string name="victories">ชัยชนะ</string>
     <string name="you_lost">คุณแพ้!</string>
-    <string name="you_finished">You finished!</string>
+    <string name="you_finished">คุณเสร็จ!</string>
     <string name="defeats">ปราชัย</string>
-    <string name="generic_game_over">Good luck on your next game.</string>
-    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
+    <string name="generic_game_over">ขอให้โชคดีในเกมถัดไป</string>
+    <string name="generic_win">คุณพบ %1$d เหมืองใน %2$d วินาที</string>
     <string name="fail_to_share">ไม่สามารถแชร์ได้</string>
     <string name="version_s">เวอร์ชั่น: %1$s</string>
     <string name="sound_effects">เสียงประกอบ</string>
@@ -79,7 +79,7 @@
     <string name="open_tile">เปิด</string>
     <string name="flag_tile">ธง</string>
     <string name="retry">ลองอีกครั้ง</string>
-    <string name="continue_game">Continue</string>
+    <string name="continue_game">ดำเนินการต่อ</string>
     <string name="empty">ว่างเปล่า</string>
     <string name="cant_do_it_now">ตอนนี้ทำไม่ได้</string>
     <string name="you_have_received">คุณได้รับ: +%1$d</string>

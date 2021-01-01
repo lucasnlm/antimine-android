@@ -54,10 +54,10 @@
     <string name="you_won">Κέρδισες!</string>
     <string name="victories">Νίκες</string>
     <string name="you_lost">Έχασες!</string>
-    <string name="you_finished">You finished!</string>
+    <string name="you_finished">Ολοκληρώσατε!</string>
     <string name="defeats">Ήττες</string>
-    <string name="generic_game_over">Good luck on your next game.</string>
-    <string name="generic_win">You found %1$d mines in %1$d seconds.</string>
+    <string name="generic_game_over">Καλή τύχη στο επόμενο παιχνίδι σας.</string>
+    <string name="generic_win">Βρήκατε %1$d νάρκες σε %2$d δευτερόλεπτα.</string>
     <string name="fail_to_share">Αποτυχία κοινοποίησης</string>
     <string name="version_s">Έκδοση %1$s</string>
     <string name="sound_effects">Ηχητικά εφέ</string>
