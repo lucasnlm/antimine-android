@@ -26,6 +26,7 @@ import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.external.Ads
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IBillingManager
+import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.view.AdPlaceHolderView
 import kotlinx.android.synthetic.main.view_play_games_button.view.*
@@ -44,6 +45,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
     private val gameViewModel by sharedViewModel<GameViewModel>()
     private val preferencesRepository: IPreferencesRepository by inject()
     private val billingManager: IBillingManager by inject()
+    private val featureFlagManager: IFeatureFlagManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,11 +119,12 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             }
 
                             continueButton.setOnClickListener {
-                                if (preferencesRepository.isPremiumEnabled()) {
+                                if (featureFlagManager.isAdsOnContinueEnabled &&
+                                    !preferencesRepository.isPremiumEnabled()) {
+                                    showAdsAndContinue()
+                                } else {
                                     gameViewModel.continueObserver.postValue(Unit)
                                     dismissAllowingStateLoss()
-                                } else {
-                                    showAdsAndContinue()
                                 }
                             }
 
@@ -150,7 +153,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             } else {
                                 shareButton.visibility = View.GONE
 
-                                if (state.showContinueButton) {
+                                if (state.showContinueButton && featureFlagManager.isAdsOnContinueEnabled) {
                                     continueButton.visibility = View.VISIBLE
                                     if (!preferencesRepository.isPremiumEnabled()) {
                                         continueButton.compoundDrawablePadding = 0
@@ -163,7 +166,9 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                 }
                             }
 
-                            if (!preferencesRepository.isPremiumEnabled() && !instantAppManager.isEnabled(context)) {
+                            if (!preferencesRepository.isPremiumEnabled() &&
+                                !instantAppManager.isEnabled(context) &&
+                                featureFlagManager.isGameOverAdEnabled) {
                                 activity?.let { activity ->
                                     adsView.visibility = View.VISIBLE
                                     val label = context.getString(R.string.remove_ad)

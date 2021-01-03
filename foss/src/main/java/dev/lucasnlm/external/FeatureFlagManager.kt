@@ -5,6 +5,8 @@ class FeatureFlagManager : IFeatureFlagManager() {
     override val isRateUsEnabled: Boolean = false
     override val isInAppAdsEnabled: Boolean = false
     override val isGameplayAnalyticsEnabled: Boolean = false
+    override val isGameOverAdEnabled: Boolean = false
+    override val isAdsOnContinueEnabled: Boolean = false
 
     override suspend fun refresh() {
         // No Feature Flags on FOSS
