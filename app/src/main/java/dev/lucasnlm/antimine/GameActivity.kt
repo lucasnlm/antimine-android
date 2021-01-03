@@ -488,8 +488,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             val isNotInstant = !instantAppManager.isEnabled(applicationContext)
             findItem(R.id.share_now).isVisible = isNotInstant
             findItem(R.id.remove_ads).isVisible = !preferencesRepository.isPremiumEnabled() && isNotInstant
-            findItem(R.id.previous_games).isVisible = featureFlagManager.isGameHistoryEnabled()
-            findItem(R.id.rate).isVisible = featureFlagManager.isRateUsEnabled()
+            findItem(R.id.previous_games).isVisible = featureFlagManager.isGameHistoryEnabled
+            findItem(R.id.rate).isVisible = featureFlagManager.isRateUsEnabled
 
             if (!playGamesManager.hasGooglePlayGames()) {
                 removeGroup(R.id.play_games_group)
@@ -928,7 +928,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun refreshAds() {
-        if (featureFlagManager.isInAppAdsEnabled()) {
+        if (featureFlagManager.isInAppAdsEnabled) {
             val isTutorialComplete = preferencesRepository.isTutorialCompleted()
             if (isTutorialComplete && !preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
                 if (!instantAppManager.isEnabled(this)) {

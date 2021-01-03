@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val ViewModelModule = module {
     viewModel {
-        GameViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
+        GameViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
 }

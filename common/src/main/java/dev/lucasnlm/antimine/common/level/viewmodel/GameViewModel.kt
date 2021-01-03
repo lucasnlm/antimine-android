@@ -27,6 +27,7 @@ import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.Achievement
+import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.Leaderboard
 import kotlinx.coroutines.Dispatchers
@@ -48,6 +49,7 @@ open class GameViewModel(
     private val analyticsManager: IAnalyticsManager,
     private val playGamesManager: IPlayGamesManager,
     private val tipRepository: ITipRepository,
+    private val featureFlagManager: IFeatureFlagManager,
     private val clock: Clock,
 ) : ViewModel() {
     val eventObserver = MutableLiveData<Event>()
@@ -308,21 +310,23 @@ open class GameViewModel(
     }
 
     private fun onFeedbackAnalytics(action: ActionResponse, index: Int) {
-        when (action) {
-            ActionResponse.OpenTile -> {
-                analyticsManager.sentEvent(Analytics.OpenTile(index))
-            }
-            ActionResponse.SwitchMark -> {
-                analyticsManager.sentEvent(Analytics.SwitchMark(index))
-            }
-            ActionResponse.HighlightNeighbors -> {
-                analyticsManager.sentEvent(Analytics.HighlightNeighbors(index))
-            }
-            ActionResponse.OpenNeighbors -> {
-                analyticsManager.sentEvent(Analytics.OpenNeighbors(index))
-            }
-            ActionResponse.OpenOrMark -> {
-                analyticsManager.sentEvent(Analytics.OpenOrFlagTile(index))
+        if (featureFlagManager.isGameplayAnalyticsEnabled) {
+            when (action) {
+                ActionResponse.OpenTile -> {
+                    analyticsManager.sentEvent(Analytics.OpenTile(index))
+                }
+                ActionResponse.SwitchMark -> {
+                    analyticsManager.sentEvent(Analytics.SwitchMark(index))
+                }
+                ActionResponse.HighlightNeighbors -> {
+                    analyticsManager.sentEvent(Analytics.HighlightNeighbors(index))
+                }
+                ActionResponse.OpenNeighbors -> {
+                    analyticsManager.sentEvent(Analytics.OpenNeighbors(index))
+                }
+                ActionResponse.OpenOrMark -> {
+                    analyticsManager.sentEvent(Analytics.OpenOrFlagTile(index))
+                }
             }
         }
     }

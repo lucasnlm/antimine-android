@@ -1,7 +1,10 @@
 package dev.lucasnlm.external
 
-interface IFeatureFlagManager {
-    fun isGameHistoryEnabled(): Boolean
-    fun isRateUsEnabled(): Boolean
-    fun isInAppAdsEnabled(): Boolean
+abstract class IFeatureFlagManager {
+    abstract val isGameHistoryEnabled: Boolean
+    abstract val isRateUsEnabled: Boolean
+    abstract val isInAppAdsEnabled: Boolean
+    abstract val isGameplayAnalyticsEnabled: Boolean
+
+    abstract suspend fun refresh()
 }

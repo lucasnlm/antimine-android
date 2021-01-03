@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
+import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -16,6 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashActivity : AppCompatActivity() {
     private val playGamesManager: IPlayGamesManager by inject()
+    private val featureFlagManager: IFeatureFlagManager by inject()
 
     private val splashViewMode: SplashViewModel by viewModel()
 
@@ -23,6 +25,10 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         splashViewMode.startIap()
+
+        lifecycleScope.launchWhenCreated {
+            featureFlagManager.refresh()
+        }
 
         lifecycleScope.launchWhenCreated {
             if (playGamesManager.hasGooglePlayGames()) {
