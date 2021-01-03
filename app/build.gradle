@@ -129,7 +129,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
 
     // Room
-    implementation 'androidx.room:room-ktx:2.2.5'
+    implementation 'androidx.room:room-ktx:2.2.6'
 
     // Constraint
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
