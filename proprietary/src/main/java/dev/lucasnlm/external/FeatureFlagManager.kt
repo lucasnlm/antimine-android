@@ -8,12 +8,14 @@ import kotlinx.coroutines.withContext
 class FeatureFlagManager : IFeatureFlagManager() {
     private val remoteConfig: FirebaseRemoteConfig by lazy {
         FirebaseRemoteConfig.getInstance().apply {
-            setDefaultsAsync(mapOf(
-                HISTORY_ENABLED to false,
-                RATE_US_ENABLED to true,
-                IN_APP_ADS_ENABLED to false,
-                GAMEPLAY_EVENTS_ENABLED to false,
-            ))
+            setDefaultsAsync(
+                mapOf(
+                    HISTORY_ENABLED to false,
+                    RATE_US_ENABLED to true,
+                    IN_APP_ADS_ENABLED to false,
+                    GAMEPLAY_EVENTS_ENABLED to false,
+                )
+            )
         }
     }
 
