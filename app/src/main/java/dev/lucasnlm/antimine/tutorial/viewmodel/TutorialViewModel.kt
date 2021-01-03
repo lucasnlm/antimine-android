@@ -18,6 +18,7 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.tutorial.view.TutorialField
+import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,6 +32,7 @@ class TutorialViewModel(
     minefieldRepository: IMinefieldRepository,
     analyticsManager: IAnalyticsManager,
     playGamesManager: IPlayGamesManager,
+    featureFlagManager: IFeatureFlagManager,
     tipRepository: ITipRepository,
     private val clock: Clock,
     private val context: Context,
@@ -48,6 +50,7 @@ class TutorialViewModel(
     analyticsManager,
     playGamesManager,
     tipRepository,
+    featureFlagManager,
     clock,
 ) {
     val tutorialState = MutableStateFlow(

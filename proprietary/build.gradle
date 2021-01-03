@@ -50,7 +50,8 @@ dependencies {
     // Firebase
     implementation 'com.google.firebase:firebase-analytics-ktx:18.0.0'
     implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
-    implementation 'com.google.firebase:firebase-firestore-ktx:22.0.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:22.0.1'
+    implementation 'com.google.firebase:firebase-config-ktx:20.0.2'
 
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'

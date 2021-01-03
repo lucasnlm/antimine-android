@@ -29,6 +29,30 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            if (System.getenv('IS_RELEASE_BUILD')) {
+                storeFile file(System.getenv('KEYSTORE'))
+                keyAlias System.getenv('KEY_ALIAS')
+                storePassword System.getenv('KEY_STORE_PASSWORD')
+                keyPassword System.getenv('KEY_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
