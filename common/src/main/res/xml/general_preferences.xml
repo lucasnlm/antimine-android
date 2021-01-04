@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:title="@string/settings_general"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            android:checked="true"
+            android:defaultValue="true"
+            android:key="preference_vibration"
+            android:title="@string/vibration"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:checked="false"
+            android:defaultValue="false"
+            android:key="preference_sound"
+            android:title="@string/sound_effects"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:checked="true"
+            android:defaultValue="true"
+            android:key="preference_animation"
+            android:title="@string/animations"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:checked="true"
+            android:defaultValue="true"
+            android:key="preference_show_windows"
+            android:title="@string/show_windows"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

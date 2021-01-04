@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/gameplay"
+        android:icon="@drawable/controls"
+        android:title="@string/settings_gameplay" />
+
+    <item
+        android:id="@+id/appearance"
+        android:icon="@drawable/themes"
+        android:title="@string/appearance" />
+
+    <item
+        android:id="@+id/general"
+        android:icon="@drawable/settings"
+        android:title="@string/general" />
+
+</menu>
