@@ -89,6 +89,40 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
         mChangedPositionCount = itemCount
     }
 
+    override fun computeVerticalScrollRange(state: RecyclerView.State): Int {
+        return totalRowCount * mDecoratedChildHeight
+    }
+
+    override fun computeHorizontalScrollRange(state: RecyclerView.State): Int {
+        return totalColumnCount * mDecoratedChildHeight
+    }
+
+    override fun computeVerticalScrollOffset(state: RecyclerView.State): Int {
+        val max = totalRowCount.toFloat()
+        val min = totalRowCount.toFloat() * 0.4
+
+        val extentOffset = (totalRowCount - (lastVisibleRow - firstVisibleRow))
+        val result = ((lastVisibleRow.toFloat() - min) / max) * extentOffset * mDecoratedChildHeight
+        return result.toInt()
+    }
+
+    override fun computeHorizontalScrollOffset(state: RecyclerView.State): Int {
+        val max = totalColumnCount.toFloat()
+        val min = totalColumnCount.toFloat() * 0.25
+
+        val extentOffset = (totalColumnCount - (lastVisibleColumn - firstVisibleColumn))
+        val result = ((lastVisibleColumn.toFloat() - min) / max) * extentOffset * mDecoratedChildHeight
+        return result.toInt()
+    }
+
+    override fun computeVerticalScrollExtent(state: RecyclerView.State): Int {
+        return (lastVisibleRow - firstVisibleRow) * mDecoratedChildHeight
+    }
+
+    override fun computeHorizontalScrollExtent(state: RecyclerView.State): Int {
+        return (lastVisibleColumn - firstVisibleColumn) * mDecoratedChildHeight
+    }
+
     /*
      * This method is your initial call from the framework. You will receive it when you
      * need to start laying out the initial set of views. This method will not be called
