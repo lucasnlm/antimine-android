@@ -19,5 +19,4 @@
         android:fadeScrollbars="false">
         <requestFocus/>
     </androidx.recyclerview.widget.RecyclerView>
-
 </FrameLayout>
