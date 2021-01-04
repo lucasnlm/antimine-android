@@ -1,23 +1,35 @@
 package dev.lucasnlm.antimine.preferences
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.XmlRes
+import androidx.core.content.ContextCompat
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
+import dev.lucasnlm.antimine.core.models.Analytics
+import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import dev.lucasnlm.external.IAnalyticsManager
+import kotlinx.android.synthetic.main.activity_preferences.*
 import org.koin.android.ext.android.inject
 
 class PreferencesActivity :
-    ThematicActivity(R.layout.activity_empty),
+    ThematicActivity(R.layout.activity_preferences),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val preferenceRepository: IPreferencesRepository by inject()
-
+    private val themeRepository: IThemeRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
+
+    @XmlRes
+    private var currentTabXml: Int = R.xml.gameplay_preferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +38,23 @@ class PreferencesActivity :
         PreferenceManager.getDefaultSharedPreferences(this)
             .registerOnSharedPreferenceChangeListener(this)
 
-        placePreferenceFragment()
+        navView.apply {
+            setBackgroundColor(themeRepository.getTheme().palette.background)
+            val colorList = ContextCompat.getColorStateList(context, R.drawable.preferences_nav_color)
+            itemIconTintList = colorList
+            itemTextColor = colorList
+            setOnNavigationItemSelectedListener {
+                currentTabXml = R.xml.gameplay_preferences
+                when (it.itemId) {
+                    R.id.gameplay -> placePreferenceFragment(R.xml.gameplay_preferences)
+                    R.id.appearance -> placePreferenceFragment(R.xml.appearance_preferences)
+                    R.id.general -> placePreferenceFragment(R.xml.general_preferences)
+                }
+                true
+            }
+        }
+
+        placePreferenceFragment(R.xml.gameplay_preferences)
     }
 
     override fun onDestroy() {
@@ -38,7 +66,7 @@ class PreferencesActivity :
             .unregisterOnSharedPreferenceChangeListener(this)
     }
 
-    private fun placePreferenceFragment() {
+    private fun placePreferenceFragment(@XmlRes targetPreferences: Int) {
         supportFragmentManager.apply {
             popBackStack()
 
@@ -50,7 +78,7 @@ class PreferencesActivity :
             }
 
             beginTransaction().apply {
-                replace(R.id.content, PrefsFragment(), PrefsFragment.TAG)
+                replace(R.id.preference_fragment, PrefsFragment.newInstance(targetPreferences), PrefsFragment.TAG)
                 commitAllowingStateLoss()
             }
         }
@@ -71,7 +99,7 @@ class PreferencesActivity :
         return if (item.itemId == R.id.delete) {
             if (preferenceRepository.hasCustomizations()) {
                 preferenceRepository.reset()
-                placePreferenceFragment()
+                placePreferenceFragment(currentTabXml)
                 invalidateOptionsMenu()
             }
             true
@@ -81,13 +109,41 @@ class PreferencesActivity :
     }
 
     class PrefsFragment : PreferenceFragmentCompat() {
+        private val analyticsManager: IAnalyticsManager by inject()
+
+        private var targetPreferences: Int = 0
+
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             // Load the preferences from an XML resource
-            addPreferencesFromResource(R.xml.preferences)
+            targetPreferences = arguments?.getInt(TARGET_PREFS, 0) ?: 0
+            if (targetPreferences != 0) {
+                addPreferencesFromResource(targetPreferences)
+            }
+
+            findPreference<Preference>(SELECT_THEME_PREFS)?.setOnPreferenceClickListener {
+                analyticsManager.sentEvent(Analytics.OpenSettings)
+                Intent(context, ThemeActivity::class.java).apply {
+                    startActivity(this)
+                }
+                true
+            }
         }
 
         companion object {
             val TAG = PrefsFragment::class.simpleName
+
+            private const val TARGET_PREFS = "target_prefs"
+            private const val SELECT_THEME_PREFS = "preference_select_key"
+
+            fun newInstance(targetPreferences: Int): PrefsFragment {
+                val args = Bundle().apply {
+                    putInt(TARGET_PREFS, targetPreferences)
+                }
+
+                return PrefsFragment().apply {
+                    arguments = args
+                }
+            }
         }
     }
 }

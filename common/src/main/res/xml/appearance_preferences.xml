@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:title="@string/appearance"
+        app:iconSpaceReserved="false">
+
+        <Preference
+            android:key="preference_select_key"
+            android:title="@string/themes"
+            app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:key="preference_area_size"
+            android:max="80"
+            android:min="40"
+            android:defaultValue="50"
+            android:title="@string/size"
+            app:adjustable="true"
+            app:min="40"
+            app:seekBarIncrement="5"
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:key="preference_square_radius"
+            android:max="10"
+            android:min="0"
+            android:defaultValue="2"
+            android:title="@string/rounded_square"
+            app:adjustable="true"
+            app:min="0"
+            app:seekBarIncrement="1"
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

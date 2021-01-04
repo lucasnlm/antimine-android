@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:title="@string/settings_gameplay"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            android:checked="false"
+            android:defaultValue="false"
+            android:key="preference_use_question_mark"
+            android:title="@string/use_question_mark"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:checked="true"
+            android:defaultValue="true"
+            android:key="preference_assistant"
+            android:title="@string/enable_automatic_flags"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:checked="true"
+            android:defaultValue="true"
+            android:key="preference_no_guessing"
+            android:title="@string/no_guessing_mode"
+            app:iconSpaceReserved="false"/>
+
+        <SwitchPreferenceCompat
+            android:checked="true"
+            android:defaultValue="false"
+            android:key="preference_use_help"
+            android:title="@string/help"
+            app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:key="preference_long_press_timeout"
+            android:max="2000"
+            android:min="100"
+            android:defaultValue="500"
+            android:title="@string/long_press"
+            app:adjustable="true"
+            app:min="100"
+            app:seekBarIncrement="5"
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>
