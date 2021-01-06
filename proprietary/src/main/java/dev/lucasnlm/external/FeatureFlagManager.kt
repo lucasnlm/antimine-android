@@ -13,6 +13,8 @@ class FeatureFlagManager : IFeatureFlagManager() {
         GAMEPLAY_EVENTS_ENABLED to false,
         GAME_OVER_AD_ENABLED to true,
         SHOW_ADS_ON_CONTINUE_ENABLED to true,
+        CONTINUE_ENABLED to true,
+        RECYCLER_SCROLL_ENABLED to true,
     )
 
     private val remoteConfig: FirebaseRemoteConfig by lazy {
@@ -52,6 +54,15 @@ class FeatureFlagManager : IFeatureFlagManager() {
     override val isAdsOnContinueEnabled: Boolean by lazy {
         getBoolean(SHOW_ADS_ON_CONTINUE_ENABLED)
     }
+
+    override val isContinueGameEnabled: Boolean by lazy {
+        getBoolean(CONTINUE_ENABLED)
+    }
+
+    override val isRecyclerScrollEnabled: Boolean by lazy {
+        getBoolean(RECYCLER_SCROLL_ENABLED)
+    }
+
     override suspend fun refresh() {
         if (!BuildConfig.DEBUG) {
             withContext(Dispatchers.IO) {
@@ -67,5 +78,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         private const val GAMEPLAY_EVENTS_ENABLED = "gameplay_events_enabled"
         private const val GAME_OVER_AD_ENABLED = "game_over_ad_enabled"
         private const val SHOW_ADS_ON_CONTINUE_ENABLED = "ad_on_continue_enabled"
+        private const val CONTINUE_ENABLED = "continue_enabled"
+        private const val RECYCLER_SCROLL_ENABLED = "recycler_scroll_enabled"
     }
 }

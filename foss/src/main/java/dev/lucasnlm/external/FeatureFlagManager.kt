@@ -7,6 +7,8 @@ class FeatureFlagManager : IFeatureFlagManager() {
     override val isGameplayAnalyticsEnabled: Boolean = false
     override val isGameOverAdEnabled: Boolean = false
     override val isAdsOnContinueEnabled: Boolean = false
+    override val isContinueGameEnabled: Boolean = true
+    override val isRecyclerScrollEnabled: Boolean = true
 
     override suspend fun refresh() {
         // No Feature Flags on FOSS

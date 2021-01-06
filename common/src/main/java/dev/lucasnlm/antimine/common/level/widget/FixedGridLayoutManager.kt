@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 
-class FixedGridLayoutManager : RecyclerView.LayoutManager() {
+class FixedGridLayoutManager(
+    private val scrollBarEnabled: Boolean,
+) : RecyclerView.LayoutManager() {
 
     companion object {
         private val TAG = FixedGridLayoutManager::class.java.simpleName
@@ -90,37 +92,45 @@ class FixedGridLayoutManager : RecyclerView.LayoutManager() {
     }
 
     override fun computeVerticalScrollRange(state: RecyclerView.State): Int {
-        return totalRowCount * mDecoratedChildHeight
+        return if (scrollBarEnabled) totalRowCount * mDecoratedChildHeight else 0
     }
 
     override fun computeHorizontalScrollRange(state: RecyclerView.State): Int {
-        return totalColumnCount * mDecoratedChildHeight
+        return if (scrollBarEnabled) totalColumnCount * mDecoratedChildHeight else 0
     }
 
     override fun computeVerticalScrollOffset(state: RecyclerView.State): Int {
-        val max = totalRowCount.toFloat()
-        val min = totalRowCount.toFloat() * 0.4
+        return if (scrollBarEnabled) {
+            val max = totalRowCount.toFloat()
+            val min = totalRowCount.toFloat() * 0.4
 
-        val extentOffset = (totalRowCount - (lastVisibleRow - firstVisibleRow))
-        val result = ((lastVisibleRow.toFloat() - min) / max) * extentOffset * mDecoratedChildHeight
-        return result.toInt()
+            val extentOffset = (totalRowCount - (lastVisibleRow - firstVisibleRow))
+            val result = ((lastVisibleRow.toFloat() - min) / max) * extentOffset * mDecoratedChildHeight
+            result.toInt()
+        } else {
+            0
+        }
     }
 
     override fun computeHorizontalScrollOffset(state: RecyclerView.State): Int {
-        val max = totalColumnCount.toFloat()
-        val min = totalColumnCount.toFloat() * 0.25
+        return if (scrollBarEnabled) {
+            val max = totalColumnCount.toFloat()
+            val min = totalColumnCount.toFloat() * 0.25
 
-        val extentOffset = (totalColumnCount - (lastVisibleColumn - firstVisibleColumn))
-        val result = ((lastVisibleColumn.toFloat() - min) / max) * extentOffset * mDecoratedChildHeight
-        return result.toInt()
+            val extentOffset = (totalColumnCount - (lastVisibleColumn - firstVisibleColumn))
+            val result = ((lastVisibleColumn.toFloat() - min) / max) * extentOffset * mDecoratedChildHeight
+            result.toInt()
+        } else {
+            0
+        }
     }
 
     override fun computeVerticalScrollExtent(state: RecyclerView.State): Int {
-        return (lastVisibleRow - firstVisibleRow) * mDecoratedChildHeight
+        return if (scrollBarEnabled) (lastVisibleRow - firstVisibleRow) * mDecoratedChildHeight else 0
     }
 
     override fun computeHorizontalScrollExtent(state: RecyclerView.State): Int {
-        return (lastVisibleColumn - firstVisibleColumn) * mDecoratedChildHeight
+        return if (scrollBarEnabled) (lastVisibleColumn - firstVisibleColumn) * mDecoratedChildHeight else 0
     }
 
     /*

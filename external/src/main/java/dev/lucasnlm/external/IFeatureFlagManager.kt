@@ -7,6 +7,8 @@ abstract class IFeatureFlagManager {
     abstract val isGameplayAnalyticsEnabled: Boolean
     abstract val isGameOverAdEnabled: Boolean
     abstract val isAdsOnContinueEnabled: Boolean
+    abstract val isContinueGameEnabled: Boolean
+    abstract val isRecyclerScrollEnabled: Boolean
 
     abstract suspend fun refresh()
 }
