@@ -17,6 +17,8 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.view.AreaView
 import dev.lucasnlm.antimine.ui.view.createAreaPaintSettings
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class AreaAdapter(
@@ -105,31 +107,36 @@ class AreaAdapter(
                     }
                 )
             } else {
+                var longClickJob: Job? = null
                 view.setOnTouchListener { _, motionEvent ->
                     when (motionEvent.action) {
                         MotionEvent.ACTION_DOWN -> {
                             view.isPressed = true
+                            longClickJob = coroutineScope.launch {
+                                delay(preferencesRepository.customLongPressTimeout())
+                                view.onClickablePosition(absoluteAdapterPosition) {
+                                    viewModel.onLongClick(it)
+                                }
+                                longClickJob = null
+                            }
                             true
                         }
                         MotionEvent.ACTION_UP -> {
                             view.isPressed = false
-                            val dt = motionEvent.eventTime - motionEvent.downTime
-
-                            if (dt > preferencesRepository.customLongPressTimeout()) {
-                                view.onClickablePosition(absoluteAdapterPosition) {
-                                    viewModel.onLongClick(it)
-                                }
-                            } else {
+                            longClickJob?.let { job ->
+                                job.cancel()
+                                longClickJob = null
                                 view.onClickablePosition(absoluteAdapterPosition) {
                                     viewModel.onSingleClick(it)
                                 }
-                            }
+                            } ?: false
                         }
                         else -> false
                     }
                 }
             }
 
+            var longClickJob: Job? = null
             view.setOnKeyListener { _, keyCode, keyEvent ->
                 var handled = false
                 if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
@@ -137,16 +144,20 @@ class AreaAdapter(
                         KeyEvent.ACTION_DOWN -> {
                             handled = true
                             view.isPressed = true
+                            longClickJob = coroutineScope.launch {
+                                delay(preferencesRepository.customLongPressTimeout())
+                                view.onClickablePosition(absoluteAdapterPosition) {
+                                    viewModel.onLongClick(it)
+                                }
+                                longClickJob = null
+                            }
                         }
                         KeyEvent.ACTION_UP -> {
                             handled = true
                             view.isPressed = false
-                            val dt = keyEvent.eventTime - keyEvent.downTime
-                            if (dt > preferencesRepository.customLongPressTimeout()) {
-                                view.onClickablePosition(absoluteAdapterPosition) {
-                                    viewModel.onLongClick(it)
-                                }
-                            } else {
+                            longClickJob?.let { job ->
+                                job.cancel()
+                                longClickJob = null
                                 view.onClickablePosition(absoluteAdapterPosition) {
                                     viewModel.onSingleClick(it)
                                 }
