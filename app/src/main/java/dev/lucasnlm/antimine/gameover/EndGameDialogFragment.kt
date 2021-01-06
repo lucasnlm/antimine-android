@@ -29,8 +29,6 @@ import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.view.AdPlaceHolderView
-import kotlinx.android.synthetic.main.view_play_games_button.view.*
-import kotlinx.android.synthetic.main.view_stats.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.singleOrNull
 import kotlinx.coroutines.launch
@@ -120,7 +118,8 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
 
                             continueButton.setOnClickListener {
                                 if (featureFlagManager.isAdsOnContinueEnabled &&
-                                    !preferencesRepository.isPremiumEnabled()) {
+                                    !preferencesRepository.isPremiumEnabled()
+                                ) {
                                     showAdsAndContinue()
                                 } else {
                                     gameViewModel.continueObserver.postValue(Unit)
@@ -153,9 +152,11 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             } else {
                                 shareButton.visibility = View.GONE
 
-                                if (state.showContinueButton && featureFlagManager.isAdsOnContinueEnabled) {
+                                if (state.showContinueButton && featureFlagManager.isContinueGameEnabled) {
                                     continueButton.visibility = View.VISIBLE
-                                    if (!preferencesRepository.isPremiumEnabled()) {
+                                    if (!preferencesRepository.isPremiumEnabled() &&
+                                        featureFlagManager.isAdsOnContinueEnabled
+                                    ) {
                                         continueButton.compoundDrawablePadding = 0
                                         continueButton.setCompoundDrawablesWithIntrinsicBounds(
                                             R.drawable.watch_ads_icon, 0, 0, 0
@@ -168,7 +169,8 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
 
                             if (!preferencesRepository.isPremiumEnabled() &&
                                 !instantAppManager.isEnabled(context) &&
-                                featureFlagManager.isGameOverAdEnabled) {
+                                featureFlagManager.isGameOverAdEnabled
+                            ) {
                                 activity?.let { activity ->
                                     adsView.visibility = View.VISIBLE
                                     val label = context.getString(R.string.remove_ad)
