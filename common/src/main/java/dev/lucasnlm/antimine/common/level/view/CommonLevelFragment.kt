@@ -13,11 +13,13 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.external.IFeatureFlagManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.math.nextDown
 
 abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragment(contentLayoutId) {
+    private val featureFlagManager: IFeatureFlagManager by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
     protected val dimensionRepository: IDimensionRepository by inject()
     protected val gameViewModel by sharedViewModel<GameViewModel>()
@@ -32,7 +34,7 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
     }
 
     protected open fun makeNewLayoutManager(boardWidth: Int): RecyclerView.LayoutManager =
-        FixedGridLayoutManager().apply {
+        FixedGridLayoutManager(featureFlagManager.isRecyclerScrollEnabled).apply {
             totalColumnCount = boardWidth
         }
 
