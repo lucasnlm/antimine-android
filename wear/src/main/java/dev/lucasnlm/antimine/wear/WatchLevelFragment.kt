@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 
 class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
     override fun makeNewLayoutManager(boardWidth: Int) =
-        FixedGridLayoutManager().apply {
+        FixedGridLayoutManager(false).apply {
             totalColumnCount = boardWidth
         }
 
