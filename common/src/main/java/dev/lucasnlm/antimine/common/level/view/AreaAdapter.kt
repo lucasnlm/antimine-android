@@ -110,6 +110,13 @@ class AreaAdapter(
                 var longClickJob: Job? = null
                 view.setOnTouchListener { _, motionEvent ->
                     when (motionEvent.action) {
+                        MotionEvent.ACTION_MOVE -> {
+                            longClickJob?.let { job ->
+                                job.cancel()
+                                longClickJob = null
+                            }
+                            true
+                        }
                         MotionEvent.ACTION_DOWN -> {
                             view.isPressed = true
                             longClickJob = coroutineScope.launch {
@@ -163,6 +170,11 @@ class AreaAdapter(
                                 }
                             }
                         }
+                    }
+                } else {
+                    longClickJob?.let { job ->
+                        job.cancel()
+                        longClickJob = null
                     }
                 }
                 handled
