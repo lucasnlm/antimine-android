@@ -3,8 +3,10 @@ package dev.lucasnlm.antimine.about.viewmodel
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 import dev.lucasnlm.antimine.about.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
+import java.lang.Exception
 
 class AboutViewModel(
     private val context: Context,
@@ -58,10 +60,14 @@ class AboutViewModel(
     }.toList()
 
     private fun openSourceCode() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(SOURCE_CODE)).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(SOURCE_CODE)).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(context.applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT)
         }
-        context.startActivity(intent)
     }
 
     override fun initialState(): AboutState =
