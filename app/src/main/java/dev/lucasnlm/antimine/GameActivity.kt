@@ -27,6 +27,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.about.AboutActivity
+import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.core.models.Score
@@ -971,7 +972,11 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun openCrowdIn() {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://crowdin.com/project/antimine-android")))
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://crowdin.com/project/antimine-android")))
+        } catch (e: Exception) {
+            Toast.makeText(applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun showSupportAppDialog() {
