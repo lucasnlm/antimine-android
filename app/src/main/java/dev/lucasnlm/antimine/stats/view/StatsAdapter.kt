@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.stats.view
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.stats.model.StatsModel
+import dev.lucasnlm.antimine.ui.ext.toAndroidColor
+import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import kotlinx.android.synthetic.main.view_stats.view.*
 
 class StatsAdapter(
@@ -27,14 +28,10 @@ class StatsAdapter(
     override fun onBindViewHolder(holder: StatsViewHolder, position: Int) {
         val stats = statsList[position]
         holder.apply {
-            val color = with(themeRepository.getTheme().palette.background) {
-                Color.rgb(Color.red(this), Color.green(this), Color.blue(this))
-            }
+            val color = themeRepository.getTheme().palette.background.toAndroidColor()
             card.setCardBackgroundColor(color)
 
-            val textColor = with(themeRepository.getTheme().palette.background) {
-                Color.rgb(255 - Color.red(this), 255 - Color.green(this), 255 - Color.blue(this))
-            }
+            val textColor = themeRepository.getTheme().palette.background.toInvertedAndroidColor()
             statsLabel.setTextColor(textColor)
 
             if (stats.totalGames > 0) {

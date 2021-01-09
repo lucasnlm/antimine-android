@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.themes.view
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,8 @@ import dev.lucasnlm.antimine.themes.R
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
+import dev.lucasnlm.antimine.ui.ext.toAndroidColor
+import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.view.AreaView
 import kotlinx.android.synthetic.main.view_theme.view.*
 
@@ -68,11 +69,7 @@ class ThemeAdapter(
                 label.apply {
                     text = label.context.getString(R.string.system)
 
-                    setTextColor(
-                        with(theme.palette.background) {
-                            Color.rgb(255 - Color.red(this), 255 - Color.green(this), 255 - Color.blue(this))
-                        }
-                    )
+                    setTextColor(theme.palette.background.toInvertedAndroidColor())
                     setBackgroundResource(android.R.color.transparent)
                     visibility = View.VISIBLE
                 }
@@ -80,9 +77,7 @@ class ThemeAdapter(
                 label.visibility = View.GONE
             }
 
-            val color = with(theme.palette.background) {
-                Color.rgb(Color.red(this), Color.green(this), Color.blue(this))
-            }
+            val color = theme.palette.background.toAndroidColor()
             parentGrid.setBackgroundColor(color)
 
             clickTheme.setOnClickListener {

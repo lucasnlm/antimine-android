@@ -2,11 +2,12 @@ package dev.lucasnlm.antimine.preferences
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import androidx.annotation.XmlRes
-import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
@@ -15,6 +16,8 @@ import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.toAndroidColor
+import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IAnalyticsManager
 import kotlinx.android.synthetic.main.activity_preferences.*
@@ -31,6 +34,23 @@ class PreferencesActivity :
     @XmlRes
     private var currentTabXml: Int = R.xml.gameplay_preferences
 
+    private fun getColorListCompat(): ColorStateList {
+        val states = arrayOf(
+            intArrayOf(android.R.attr.state_checked),
+            intArrayOf(-android.R.attr.state_checked),
+        )
+
+        val typedValue = TypedValue()
+        theme.resolveAttribute(android.R.attr.colorAccent, typedValue, true)
+
+        val colors = intArrayOf(
+            typedValue.data.toAndroidColor(),
+            themeRepository.getTheme().palette.background.toInvertedAndroidColor(160)
+        )
+
+        return ColorStateList(states, colors)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
@@ -40,7 +60,7 @@ class PreferencesActivity :
 
         navView.apply {
             setBackgroundColor(themeRepository.getTheme().palette.background)
-            val colorList = ContextCompat.getColorStateList(context, R.drawable.preferences_nav_color)
+            val colorList = getColorListCompat()
             itemIconTintList = colorList
             itemTextColor = colorList
             setOnNavigationItemSelectedListener {
