@@ -14,6 +14,10 @@
         android:overScrollMode="never"
         android:scrollbars="vertical|horizontal"
         android:scrollbarStyle="outsideInset"
-        android:fadeScrollbars="false" />
+        android:focusable="true"
+        android:descendantFocusability="afterDescendants"
+        android:fadeScrollbars="false">
+        <requestFocus/>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

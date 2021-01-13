@@ -63,7 +63,11 @@ class AreaAdapter(
 
     override fun getItemCount(): Int = field.size
 
-    private fun AreaView.onClickablePosition(position: Int, action: suspend (Int) -> Unit): Boolean {
+    private fun AreaView.onClickablePosition(
+        position: Int,
+        action: suspend (Int) -> Unit,
+        actionOnDisabled: (suspend (Int) -> Unit)? = null
+    ): Boolean {
         return when {
             position == RecyclerView.NO_POSITION -> {
                 Log.d(TAG, "Item no longer exists.")
@@ -73,6 +77,14 @@ class AreaAdapter(
                 requestFocus()
                 coroutineScope.launch {
                     action(position)
+                }
+                true
+            }
+            !clickEnabled -> {
+                actionOnDisabled?.let {
+                    coroutineScope.launch {
+                        it(position)
+                    }
                 }
                 true
             }
@@ -90,9 +102,15 @@ class AreaAdapter(
                 view.setOnDoubleClickListener(
                     object : GestureDetector.OnDoubleTapListener {
                         override fun onDoubleTap(e: MotionEvent?): Boolean {
-                            return view.onClickablePosition(absoluteAdapterPosition) {
-                                viewModel.onDoubleClick(it)
-                            }
+                            return view.onClickablePosition(
+                                position = absoluteAdapterPosition,
+                                action = {
+                                    viewModel.onDoubleClick(it)
+                                },
+                                actionOnDisabled = {
+                                    viewModel.onInteractOnDisabled()
+                                }
+                            )
                         }
 
                         override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
@@ -100,9 +118,15 @@ class AreaAdapter(
                         }
 
                         override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-                            return view.onClickablePosition(absoluteAdapterPosition) {
-                                viewModel.onSingleClick(it)
-                            }
+                            return view.onClickablePosition(
+                                position = absoluteAdapterPosition,
+                                action = {
+                                    viewModel.onSingleClick(it)
+                                },
+                                actionOnDisabled = {
+                                    viewModel.onInteractOnDisabled()
+                                }
+                            )
                         }
                     }
                 )
@@ -121,21 +145,34 @@ class AreaAdapter(
                             view.isPressed = true
                             longClickJob = coroutineScope.launch {
                                 delay(preferencesRepository.customLongPressTimeout())
-                                view.onClickablePosition(absoluteAdapterPosition) {
-                                    viewModel.onLongClick(it)
-                                }
+                                view.onClickablePosition(
+                                    position = absoluteAdapterPosition,
+                                    action = {
+                                        viewModel.onLongClick(it)
+                                    },
+                                    actionOnDisabled = {
+                                        viewModel.onInteractOnDisabled()
+                                    }
+                                )
                                 longClickJob = null
                             }
                             true
                         }
                         MotionEvent.ACTION_UP -> {
                             view.isPressed = false
+
                             longClickJob?.let { job ->
                                 job.cancel()
                                 longClickJob = null
-                                view.onClickablePosition(absoluteAdapterPosition) {
-                                    viewModel.onSingleClick(it)
-                                }
+                                view.onClickablePosition(
+                                    position = absoluteAdapterPosition,
+                                    action = {
+                                        viewModel.onSingleClick(it)
+                                    },
+                                    actionOnDisabled = {
+                                        viewModel.onInteractOnDisabled()
+                                    }
+                                )
                             } ?: false
                         }
                         else -> false
@@ -153,9 +190,15 @@ class AreaAdapter(
                             view.isPressed = true
                             longClickJob = coroutineScope.launch {
                                 delay(preferencesRepository.customLongPressTimeout())
-                                view.onClickablePosition(absoluteAdapterPosition) {
-                                    viewModel.onLongClick(it)
-                                }
+                                view.onClickablePosition(
+                                    position = absoluteAdapterPosition,
+                                    action = {
+                                        viewModel.onLongClick(it)
+                                    },
+                                    actionOnDisabled = {
+                                        viewModel.onInteractOnDisabled()
+                                    }
+                                )
                                 longClickJob = null
                             }
                         }
@@ -165,9 +208,15 @@ class AreaAdapter(
                             longClickJob?.let { job ->
                                 job.cancel()
                                 longClickJob = null
-                                view.onClickablePosition(absoluteAdapterPosition) {
-                                    viewModel.onSingleClick(it)
-                                }
+                                view.onClickablePosition(
+                                    position = absoluteAdapterPosition,
+                                    action = {
+                                        viewModel.onSingleClick(it)
+                                    },
+                                    actionOnDisabled = {
+                                        viewModel.onInteractOnDisabled()
+                                    }
+                                )
                             }
                         }
                     }

@@ -56,6 +56,7 @@ open class GameViewModel(
     val retryObserver = MutableLiveData<Unit>()
     val continueObserver = MutableLiveData<Unit>()
     val shareObserver = MutableLiveData<Unit>()
+    val showNewGame = MutableLiveData<Unit>()
 
     private lateinit var gameController: GameController
     private var initialized = false
@@ -300,6 +301,10 @@ open class GameViewModel(
             }
     }
 
+    open suspend fun onInteractOnDisabled() {
+        showNewGame.postValue(Unit)
+    }
+
     private fun onPostAction() {
         if (preferencesRepository.useFlagAssistant() && !gameController.isGameOver()) {
             gameController.runFlagAssistant()
@@ -428,6 +433,13 @@ open class GameViewModel(
             }
 
             showAllMines()
+            refreshField()
+        }
+    }
+
+    fun flagAllMines() {
+        gameController.run {
+            flagAllMines()
             refreshField()
         }
     }

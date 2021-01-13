@@ -27,7 +27,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.about.AboutActivity
-import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.core.models.Score
@@ -687,9 +686,13 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             if (canShowWindow) {
                 showEndGameDialog(gameResult, gameResult == GameResult.GameOver && canContinue)
             } else {
-                if (gameResult != GameResult.Victory) {
+                if (gameResult == GameResult.GameOver) {
                     gameViewModel.viewModelScope.launch {
                         gameViewModel.revealMines()
+                    }
+                } else {
+                    gameViewModel.viewModelScope.launch {
+                        gameViewModel.flagAllMines()
                     }
                 }
 
