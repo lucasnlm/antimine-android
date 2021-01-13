@@ -13,7 +13,7 @@ class MinefieldHandler(
     }
 
     fun flagAllMines() {
-        field.filter { it.hasMine }
+        field.filter { it.hasMine && it.isCovered }
             .forEach { field[it.id] = it.copy(mark = Mark.Flag) }
     }
 
@@ -92,13 +92,14 @@ class MinefieldHandler(
         field.getOrNull(index)?.run {
             if (!isCovered) {
                 val neighbors = field.filterNeighborsOf(this)
-                val flaggedCount = neighbors.count { it.mark.isFlag() }
+                val flaggedCount = neighbors.count { it.mark.isFlag() || (!it.isCovered && it.hasMine) }
                 if (flaggedCount >= minesAround) {
                     neighbors
                         .filter { it.isCovered && it.mark.isNone() }
                         .forEach { openAt(it.id, passive = false, openNeighbors = true) }
                 } else {
                     val coveredNeighbors = neighbors.filter { it.isCovered }
+                    val minesAround = neighbors.count { it.hasMine && it.isCovered }
                     if (coveredNeighbors.count() == minesAround) {
                         coveredNeighbors.filter {
                             it.mark.isNone()

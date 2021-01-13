@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.GameActivity
+import dev.lucasnlm.antimine.TvGameActivity
+import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IPlayGamesManager
@@ -79,7 +81,13 @@ class SplashActivity : AppCompatActivity() {
 
     private fun goToGameActivity() {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-        Intent(this, GameActivity::class.java).run { startActivity(this) }
+
+        if (applicationContext.isAndroidTv()) {
+            Intent(this, TvGameActivity::class.java).run { startActivity(this) }
+        } else {
+            Intent(this, GameActivity::class.java).run { startActivity(this) }
+        }
+
         finish()
     }
 

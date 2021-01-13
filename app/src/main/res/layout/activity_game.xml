@@ -125,7 +125,9 @@
             ads:layout_constraintBottom_toTopOf="@+id/ad_placeholder"
             ads:layout_constraintLeft_toLeftOf="parent"
             ads:layout_constraintRight_toRightOf="parent"
-            ads:layout_constraintTop_toBottomOf="@id/menu" />
+            ads:layout_constraintTop_toBottomOf="@id/menu">
+            <requestFocus/>
+        </FrameLayout>
 
         <dev.lucasnlm.external.view.AdPlaceHolderView
             android:id="@+id/ad_placeholder"

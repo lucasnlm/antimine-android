@@ -18,10 +18,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
+import dev.lucasnlm.antimine.level.view.NewGameFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.external.Ads
 import dev.lucasnlm.external.IAdsManager
@@ -112,7 +114,11 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             }
 
                             newGameButton.setOnClickListener {
-                                gameViewModel.startNewGame()
+                                if (context.isAndroidTv()) {
+                                    NewGameFragment().show(parentFragmentManager, NewGameFragment.TAG)
+                                } else {
+                                    gameViewModel.startNewGame()
+                                }
                                 dismissAllowingStateLoss()
                             }
 
