@@ -56,10 +56,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
         </activity>
 
         <activity
@@ -68,27 +64,7 @@
             android:saveEnabled="false"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="new-game"
-                    android:scheme="antimine" />
-
-                <data
-                    android:host="load-game"
-                    android:scheme="antimine" />
-
-                <data
-                    android:host="retry-game"
-                    android:scheme="antimine" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
             android:name="dev.lucasnlm.antimine.TvGameActivity"
