@@ -45,7 +45,6 @@ Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-andro
 - Open multiple areas by pressing numbers
 - Game assistant to auto-flag discovered mines
 - Share game
-- App shortcuts
 - Split screen
 - Accessibility: adjustable touch area
 - Accessibility: screen reader
