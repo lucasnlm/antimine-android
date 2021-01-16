@@ -36,14 +36,11 @@ class TutorialCompleteDialogFragment : AppCompatDialogFragment() {
         AlertDialog.Builder(requireContext()).apply {
             val view = LayoutInflater
                 .from(context)
-                .inflate(R.layout.dialog_end_game, null, false)
+                .inflate(R.layout.dialog_tutorial_completed, null, false)
                 .apply {
                     findViewById<TextView>(R.id.title).text = getString(R.string.tutorial_completed)
-                    findViewById<TextView>(R.id.subtitle).visibility = View.GONE
-                    findViewById<TextView>(R.id.received_message).visibility = View.GONE
                     findViewById<ImageView>(R.id.title_emoji)
                         .setImageResource(R.drawable.emoji_beaming_face_with_smiling_eyes)
-                    findViewById<View>(R.id.new_game).visibility = View.GONE
 
                     findViewById<View>(R.id.settings).setOnClickListener {
                         showSettings()
