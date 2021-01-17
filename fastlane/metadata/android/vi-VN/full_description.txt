@@ -1,56 +1,56 @@
-Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
-This is a minimalist and modern version of the classic Minesweeper.
+Thử sức mạnh suy đoán của bạn trong trò chơi giải đố đầy thách thức nơi bạn phải giải một bãi mìn mà không làm nổ quả mìn nào.
+Đây là một phiên bản tối giản và hiện đại của trò Minesweeper cổ điển.
 
-Are you able to clear a minefield? Let’s go!
+Bạn có thể quét sạch một bãi mìn không? Đi nào!
 
-OBJECTIVE
-It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
+MỤC TIÊU
+Giống như Minesweeper. Bạn thắng khi bạn đã gắn cờ mọi quả mìn trong bãi mìn. Hãy cẩn thận đừng kích hoạt quả nào!
 
-NO GUESSING
-This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
+KHÔNG ĐOÁN
+Trò chơi này có một thuật toán luôn luôn tạo những bãi mìn có thể giải. Bạn sẽ không phải đoán quả mìn cuối cùng ở đâu!
 
-GAME LEVELS
-Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
+CẤP ĐỘ CHƠI
+Giống như Minesweeper, trò chơi này có những cấp độ khác nhau: Bắt đầu, Trung cấp, và Chuyên gia. Nhưng nó cũng có một chế độ cấp tiến độc nhất mà nó trở nên khó hơn khi bạn thắng.
 
-CUSTOM LEVEL
-If the standard modes aren't enough, you can create your level difficulty!
+CẤP ĐỘ TUỲ CHỈNH
+Nếu những chế độ tiêu chuẩn không đủ, bạn có thể tạo độ khó của bạn!
 
-THEMES
-Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+CHỦ ĐỀ
+Antimine có hơn 15 chủ đề (bao gồm sáng, tối, và AMOLED). Và nhiều hơn nữa sẽ được thêm sớm thôi!
 
-MINIMALIST
-Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+TỐI GIẢN
+Ngoại hình sạch sẽ: trực quan tối giản và kích cỡ ứng dụng nhẹ (ít hơn 9MB).
 
-TUTORIAL
-Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+HƯỚNG DẪN
+Bạn không biết chơi Minesweeper à? Không thành vấn đề, bạn có thể chơi cấp độ hướng dẫn và bật Lời khuyên ở cài đặt.
 
-STATISTICS
-Check your results and development.
+THỐNG KÊ
+Kiểm tra kết quả và sự phát triển của bạn.
 
-GAME ASSISTANT
-The game will automatically flag the squares you isolated. 
+TRỢ LÝ TRÒ CHƠI
+Trò chơi sẽ tự động gắn cờ các ô vuông bạn cô lập. 
 
-CUSTOMIZATION
-You can change the game to make it like you want to. 
-Example: Help, animations, haptic feedback, question mark.
+TUỲ CHỈNH
+Bạn có thể thay đổi trò chơi để làm cho nó giống như bạn muốn. 
+Ví dụ: Trợ giúp, hoạt ảnh, phản hồi xúc giác, dấu hỏi.
 
-CONTROLS
-It supports four different control schemes. Example: flag using tap or long press.
+ĐIỀU KHIỂN
+Nó hỗ trợ bốn sự sắp đặt điều khiển khác nhau. Ví dụ: gắn cờ bằng cách nhấn hoặc nhấn giữ.
 
-ACHIEVEMENTS AND LEADERBOARDS 
-You have eight achievements to unlock and different leaderboards to share with your friends.
+THÀNH TÍCH VÀ BẢNG XẾP HẠNG 
+Bạn có tám thành tích để mở khoá và các bảng xếp hạng khác nhau để chia sẻ với các bạn của bạn.
 
-ACCESSIBILITY
-You can customize this game to your needs: change the squares size, radius, touch timing, and screen reader support.
-We are always trying to improve our accessibility settings. If you miss something give us feedback!
+HỖ TRƠ TIẾP CẬN
+Bạn có thể tuỳ chỉnh trò chơi này khi cần: thay đổi kích cỡ ô vuông, bán kính, căn giờ chạm, và hỗ trợ trình đọc màn hình.
+Chúng tôi luôn cố gắng cải thiện cài đặt hỗ trợ tiếp cận. Nếu bạn nhớ thứ gì đó hãy cho chúng tôi phản hồi!
 
-ANDROID FOCUSED APP
-It supports cool Android features like split-screen, shortcuts, sharing, system theme, and always supporting the last version.
+ỨNG DỤNG TẬP TRUNG VÀO ANDROID
+Nó hỗ trợ các tính năng tuyệt vời của Android như chia màn hình, lối tắt, chia sẻ, chủ đề hệ thống, và luôn hỗ trợ phiên bản mới nhất.
 
-ONLINE OR OFFLINE
-You don't need to be online to play the game!
+TRỰC TUYẾN HOẶC NGOẠI TUYẾN
+Bạn không cần trực tuyến để chơi trò này!
 
-AUTO-SAVE
-You can start a game and continue it later! It will auto-save your game.
+TỰ ĐỘNG LƯU
+Bạn có thể bắt đầu trò chơi và tiếp tục vào lúc sau! Trò chơi của bạn sẽ tự động lưu.
 
-Enjoy.
+Hãy tận hưởng.

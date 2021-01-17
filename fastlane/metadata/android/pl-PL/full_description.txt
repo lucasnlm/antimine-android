@@ -32,7 +32,7 @@ Gra automatycznie oznacza odizolowane pola.
 
 DOSTOSOWYWANIE
 Możesz dobrowolnie dostosować grę. 
-Na przykład: włączyć pomoc, animacje, wibracje przy dotknięciu lub aktywować użycie znaku zapytania.
+Na przykład: włączyć podpowiedzi, animacje, wibracje przy dotknięciu lub aktywować użycie znaku zapytania.
 
 STEROWANIE
 Dostępne są cztery systemy sterowania. Na przykład: oznaczanie pola przez dotknięcie lub długie naciśnięcie.
