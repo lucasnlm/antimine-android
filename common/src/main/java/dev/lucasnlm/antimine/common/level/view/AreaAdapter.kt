@@ -153,6 +153,7 @@ class AreaAdapter(
                                         job.cancel()
                                         longClickJob = null
                                     }
+                                    view.isPressed = false
                                 }
                             }
                             true
@@ -181,6 +182,7 @@ class AreaAdapter(
                         MotionEvent.ACTION_CANCEL -> {
                             velocityTracker?.recycle()
                             velocityTracker = null
+                            view.isPressed = false
                             true
                         }
                         MotionEvent.ACTION_UP -> {
@@ -273,6 +275,6 @@ class AreaAdapter(
 
     companion object {
         val TAG = AreaAdapter::class.simpleName!!
-        private val LIMIT_SPEED_THRESHOLD = 50
+        private const val LIMIT_SPEED_THRESHOLD = 35
     }
 }
