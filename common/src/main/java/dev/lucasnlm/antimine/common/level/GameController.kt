@@ -161,10 +161,12 @@ class GameController {
 
     fun longPress(index: Int) = flow {
         val target = getArea(index)
-        val action = if (target.isCovered) gameControl.onCovered.longPress else gameControl.onOpen.longPress
-        action?.let {
-            handleAction(target, action)
-            emit(action)
+        if (target.isCovered || target.minesAround != 0) {
+            val action = if (target.isCovered) gameControl.onCovered.longPress else gameControl.onOpen.longPress
+            action?.let {
+                handleAction(target, action)
+                emit(action)
+            }
         }
     }
 
