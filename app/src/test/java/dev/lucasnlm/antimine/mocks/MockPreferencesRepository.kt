@@ -109,5 +109,9 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setSoundEffectsEnabled(value: Boolean) { }
 
+    override fun touchSensibility(): Int = 35
+
+    override fun setTouchSensibility(sensibility: Int) { }
+
     override fun showWindowsWhenFinishGame(): Boolean = true
 }

@@ -6,7 +6,6 @@ import android.net.Uri
 import android.widget.Toast
 import dev.lucasnlm.antimine.about.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
-import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class AboutViewModel(
