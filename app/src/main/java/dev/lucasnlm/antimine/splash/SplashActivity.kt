@@ -96,7 +96,12 @@ class SplashActivity : AppCompatActivity() {
 
         if (requestCode == GameActivity.GOOGLE_PLAY_REQUEST_CODE) {
             playGamesManager.handleLoginResult(data)
-            migrateDateAndGoToGameActivity()
+
+            try {
+                migrateDateAndGoToGameActivity()
+            } catch (e: Exception) {
+                Log.e(TAG, "User not logged or doesn't have Play Games", e)
+            }
         }
     }
 
