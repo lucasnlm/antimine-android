@@ -10,9 +10,10 @@ You win the game when you've flagged every mine in the minefield. Be careful not
 ### Screeshots
 
 <p align="center">
-    <img src="https://github.com/lucasnlm/antimine-android/blob/master/fastlane/metadata/android/image_1.png" width="275px"/>
-    <img src="https://github.com/lucasnlm/antimine-android/blob/master/fastlane/metadata/android/image_5.png" width="275px"/>
-    <img src="https://github.com/lucasnlm/antimine-android/blob/master/fastlane/metadata/android/image_3.png" width="275px"/>
+    <img src="https://github.com/lucasnlm/antimine-android/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="200px"/>
+    <img src="https://github.com/lucasnlm/antimine-android/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="200px"/>
+    <img src="https://github.com/lucasnlm/antimine-android/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" width="200px"/>
+    <img src="https://github.com/lucasnlm/antimine-android/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="200px"/>
 </p>
 
 ## Contributing
