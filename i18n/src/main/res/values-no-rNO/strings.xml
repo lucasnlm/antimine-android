@@ -4,13 +4,13 @@
     <string name="tutorial_completed">Tutorial fullført</string>
     <string name="tutorial_0_bottom">Du kan starte med %1$s på et tilfeldig kvadrat.</string>
     <string name="tutorial_1_top">Tallene viser hvor mange miner som grenser til det fremhevede kvadratet.</string>
-    <string name="tutorial_1_bottom">Derfor, hvis hjørnet 1️⃣ har bare én tilstøtende kvadrat, må det være en min. %1$s å flagge den.</string>
-    <string name="tutorial_2_top">Det neste uåpnedt kvadratet har ingen mine fordi tallet er 1️⃣ , ikke 2️⃣ .</string>
+    <string name="tutorial_1_bottom">Derfor, hvis hjørnet 1 har bare én tilstøtende kvadrat, må det være en min. %1$s å flagge den.</string>
+    <string name="tutorial_2_top">Det neste uåpnedt kvadratet har ingen mine fordi tallet er 1, ikke 2.</string>
     <string name="tutorial_2_bottom">Du kan åpne det med %1$s.</string>
-    <string name="tutorial_3_top">Det samme skjer på dette 1️⃣ . Du vet hvor min tilgrensende mine ligger.</string>
-    <string name="tutorial_3_bottom">Ved siden av 1️⃣ , kan du åpne alle uåpnede kvadrater.</string>
+    <string name="tutorial_3_top">Det samme skjer på dette 1. Du vet hvor min tilgrensende mine ligger.</string>
+    <string name="tutorial_3_bottom">Ved siden av 1 kan du åpne alle uåpnede kvadrater.</string>
     <string name="tutorial_4_top">Vi vet hvor en av minene ligger. Så, det er bare én mulighet for den andre.</string>
-    <string name="tutorial_4_bottom">%1$s for å flagge minen ved siden av 2️⃣ .</string>
+    <string name="tutorial_4_bottom">%1$s for å flagge minen ved siden av 2.</string>
     <string name="tutorial_5_top">Sjekk det markerte tallet.</string>
     <string name="tutorial_5_bottom">%1$s for å åpne eller %2$s for å merke.</string>
     <string name="games">Spill</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Enkeltklikk</string>
     <string name="double_click">Dobbeltklikk</string>
     <string name="long_press">Lang Trykk</string>
+    <string name="touch_sensibility">Touch følsomhet</string>
     <string name="open_tile">Åpne</string>
     <string name="flag_tile">Flagg</string>
     <string name="retry">Prøv på nytt</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Åpne Menyen</string>
     <string name="close_menu">Lukk Menyen</string>
     <string name="delete_all">Slett alle</string>
+    <string name="appearance">Utseende</string>
     <string name="themes">Temaer</string>
     <string name="try_it">Prøv det</string>
     <string name="delete_all_message">Slett alle hendelser permanent.</string>

@@ -4,13 +4,13 @@
     <string name="tutorial_completed">Vejledningspil gennemført</string>
     <string name="tutorial_0_bottom">Du kan starte med %1$s på et vilkårligt kvadrat.</string>
     <string name="tutorial_1_top">Tallene angiver, hvor mange miner der støder op til det markerede felt.</string>
-    <string name="tutorial_1_bottom">Derfor, hvis hjørnet 1️⃣ har kun et tilstødende kvadrat, skal det være en mine. %1$s for at markere det.</string>
-    <string name="tutorial_2_top">Den næste uåbnede firkant har ikke en mine, fordi nummeret er 1️⃣ , ikke 2️⃣ .</string>
+    <string name="tutorial_1_bottom">Derfor, hvis hjørnet 1 har kun et tilstødende kvadrat, skal det være en mine. %1$s for at markere det.</string>
+    <string name="tutorial_2_top">Den næste uåbnede firkant har ikke en mine, fordi nummeret er 1, ikke 2.</string>
     <string name="tutorial_2_bottom">Du kan åbne den af %1$s.</string>
-    <string name="tutorial_3_top">Det samme sker på denne1️⃣ . Du ved, hvor dens tilstødende mine er.</string>
-    <string name="tutorial_3_bottom">Du kan åbne alle andre uåbnede felter ved siden af 1️⃣ .</string>
+    <string name="tutorial_3_top">Det samme sker på denne 1. Du ved, hvor dens tilstødende mine er.</string>
+    <string name="tutorial_3_bottom">Du kan åbne alle andre uåbnede felter ved siden af 1.</string>
     <string name="tutorial_4_top">Vi ved, hvor en af minerne er. Så der er kun én mulighed for den anden.</string>
-    <string name="tutorial_4_bottom">%1$s for at markere minen ved siden af 2️⃣ .</string>
+    <string name="tutorial_4_bottom">%1$s for at markere minen ved siden af 2.</string>
     <string name="tutorial_5_top">Tjek det markerede nummer.</string>
     <string name="tutorial_5_bottom">%1$s for at åbne eller %2$s for at markere.</string>
     <string name="games">Spil</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Enkelt tryk</string>
     <string name="double_click">Dobbeltklik</string>
     <string name="long_press">Langt tryk</string>
+    <string name="touch_sensibility">Berøringsfølsomhed</string>
     <string name="open_tile">Åbn</string>
     <string name="flag_tile">Flag</string>
     <string name="retry">Forsøg igen</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Åbn Menu</string>
     <string name="close_menu">Luk Menu</string>
     <string name="delete_all">Slet alle</string>
+    <string name="appearance">Udseende</string>
     <string name="themes">Temaer</string>
     <string name="try_it">Prøv det</string>
     <string name="delete_all_message">Slet alle begivenheder permanent.</string>

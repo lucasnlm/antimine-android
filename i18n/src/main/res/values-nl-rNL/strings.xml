@@ -4,13 +4,13 @@
     <string name="tutorial_completed">Tutorial Voltooid</string>
     <string name="tutorial_0_bottom">Je kunt beginnen door %1$s op elk willekeurig vakje.</string>
     <string name="tutorial_1_top">De cijfers geven aan hoeveel mijnen aan het gemarkeerde vakje grenzen.</string>
-    <string name="tutorial_1_bottom">Dus als de hoek 1️⃣ slechts één aangrenzend vierkant heeft, moet het een mijn zijn. %1$s om het te markeren.</string>
-    <string name="tutorial_2_top">Het volgende ongeopende vakje heeft geen mijn omdat het nummer 1️⃣ , is, niet 2️⃣ .</string>
+    <string name="tutorial_1_bottom">Dus als de hoek 1 slechts één aangrenzend vierkant heeft, moet het een mijn zijn. %1$s om het te markeren.</string>
+    <string name="tutorial_2_top">Het volgende ongeopende vakje heeft geen mijn omdat het nummer 1, is, niet 2.</string>
     <string name="tutorial_2_bottom">Je kan het openen door %1$s.</string>
-    <string name="tutorial_3_top">Hetzelfde gebeurt op deze 1️⃣ . Je weet waar de aangrenzende mijn is.</string>
-    <string name="tutorial_3_bottom">Je kan alle andere ongeopende vakjes naast 1️⃣ . openen.</string>
+    <string name="tutorial_3_top">Hetzelfde gebeurt op deze 1. Je weet waar de aangrenzende mijn is.</string>
+    <string name="tutorial_3_bottom">Je kan alle andere ongeopende vakjes naast 1. openen.</string>
     <string name="tutorial_4_top">We weten waar een van de mijnen ligt, dus er is maar één mogelijkheid voor de andere.</string>
-    <string name="tutorial_4_bottom">%1$s om de mijn naast 2️⃣ te markeren.</string>
+    <string name="tutorial_4_bottom">%1$s om de mijn naast 2 te markeren.</string>
     <string name="tutorial_5_top">Controleer het gemarkeerde cijfer.</string>
     <string name="tutorial_5_bottom">%1$s om te openen of %2$s om te markeren.</string>
     <string name="games">Games</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Enkele klik</string>
     <string name="double_click">Dubbele Klik</string>
     <string name="long_press">Lang indrukken</string>
+    <string name="touch_sensibility">Aanraakgevoeligheid</string>
     <string name="open_tile">Open</string>
     <string name="flag_tile">Vlag</string>
     <string name="retry">Opnieuw</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Menu openen</string>
     <string name="close_menu">Menu sluiten</string>
     <string name="delete_all">Alles verwijderen</string>
+    <string name="appearance">Uiterlijk</string>
     <string name="themes">Themas</string>
     <string name="try_it">Probeer het</string>
     <string name="delete_all_message">Verwijder alle gebeurtenissen permanent.</string>

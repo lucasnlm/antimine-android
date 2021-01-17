@@ -4,13 +4,13 @@
     <string name="tutorial_completed">チュートリアル完了</string>
     <string name="tutorial_0_bottom">任意のランダムな正方形から %1$s までに開始できます。</string>
     <string name="tutorial_1_top">ハイライトされた正方形に隣接している鉱山数を示します。</string>
-    <string name="tutorial_1_bottom">したがって、1️⃣ コーナーに隣接する正方形が1つしかない場合、それは鉱山でなければなりません。フラグを立てるには %1$s</string>
-    <string name="tutorial_2_top">2️⃣ ではなく、1️⃣ の数であるため、次の未開封の正方形には鉱山がありません。</string>
+    <string name="tutorial_1_bottom">したがって、1 コーナーに隣接する正方形が1つしかない場合、それは鉱山でなければなりません。フラグを立てるには %1$s</string>
+    <string name="tutorial_2_top">2 ではなく、1 の数であるため、次の未開封の正方形には鉱山がありません。</string>
     <string name="tutorial_2_bottom">%1$s で開けます。</string>
-    <string name="tutorial_3_top">同じことがこの 1️⃣ でも起こります。隣接する鉱山がどこにあるか知っています。</string>
-    <string name="tutorial_3_bottom">1️⃣ に隣接する他の未開封の正方形をすべて開くことができます。</string>
+    <string name="tutorial_3_top">同じことがこの 1 でも起こります。隣接する鉱山がどこにあるか知っています。</string>
+    <string name="tutorial_3_bottom">1 に隣接する他の未開封の正方形をすべて開くことができます。</string>
     <string name="tutorial_4_top">１つの鉱山がどこにあるか分かっています。もう１つの鉱山には可能性があるのは１つだけです</string>
-    <string name="tutorial_4_bottom">%1$s で 2️⃣ に隣接する鉱山にフラグを立てます。</string>
+    <string name="tutorial_4_bottom">%1$s で 2 に隣接する鉱山にフラグを立てます。</string>
     <string name="tutorial_5_top">ハイライトされた番号を確認します。</string>
     <string name="tutorial_5_bottom">%1$s を開くか、 %2$s をマークします。</string>
     <string name="games">ゲーム回数</string>
@@ -76,6 +76,7 @@
     <string name="single_click">タップ</string>
     <string name="double_click">ダブルタップ</string>
     <string name="long_press">長押し</string>
+    <string name="touch_sensibility">タッチ感度</string>
     <string name="open_tile">開く</string>
     <string name="flag_tile">旗</string>
     <string name="retry">リトライ</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">メニューを開く</string>
     <string name="close_menu">メニューを閉じる</string>
     <string name="delete_all">すべて削除</string>
+    <string name="appearance">外観</string>
     <string name="themes">テーマ</string>
     <string name="try_it">試す</string>
     <string name="delete_all_message">すべてのイベントを永久的に削除します。</string>

@@ -4,13 +4,13 @@
     <string name="tutorial_completed">Навчання пройдено</string>
     <string name="tutorial_0_bottom">Ви можете почати з %1$s на будь-якому випадковому квадраті.</string>
     <string name="tutorial_1_top">Числа вказують, скільки хв примикають до виділеного квадрату.</string>
-    <string name="tutorial_1_bottom">Таким чином, якщо у кута 1️⃣ є тільки один суміжний квадрат, то це повинна бути міна. %1$s щоб відзначити її.</string>
-    <string name="tutorial_2_top">У наступному невідкритому квадраті немає міни, тому що стоїть цифра 1️⃣, а не 2️⃣.</string>
+    <string name="tutorial_1_bottom">Таким чином, якщо у кута 1 є тільки один суміжний квадрат, то це повинна бути міна. %1$s щоб відзначити її.</string>
+    <string name="tutorial_2_top">У наступному невідкритому квадраті немає міни, тому що стоїть цифра 1, а не 2.</string>
     <string name="tutorial_2_bottom">Ви можете відкрити його через %1$s.</string>
-    <string name="tutorial_3_top">Те ж саме відбувається на цьому 1️⃣. Ви знаєте, де знаходиться сусідня міна.</string>
-    <string name="tutorial_3_bottom">Ви можете відкрити всі інші невідкриті квадрати, прилеглі до 1️⃣.</string>
+    <string name="tutorial_3_top">Те ж саме відбувається на цьому 1. Ви знаєте, де знаходиться сусідня міна.</string>
+    <string name="tutorial_3_bottom">Ви можете відкрити всі інші невідкриті квадрати, прилеглі до 1.</string>
     <string name="tutorial_4_top">Ми знаємо, де знаходиться одна з мін, так що є тільки один варіант для іншої.</string>
-    <string name="tutorial_4_bottom">%1$s , щоб відзначити міну, прилеглу до 2️⃣ .</string>
+    <string name="tutorial_4_bottom">%1$s, щоб відзначити міну, прилеглу до 2.</string>
     <string name="tutorial_5_top">Відзначте виділений номер.</string>
     <string name="tutorial_5_bottom">%1$s, щоб відкрити або %2$s для позначки.</string>
     <string name="games">Ігри</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Одинарний клік</string>
     <string name="double_click">Подвійний клік</string>
     <string name="long_press">Довге натискання</string>
+    <string name="touch_sensibility">Чутливість сенсора панелі</string>
     <string name="open_tile">Відкрити</string>
     <string name="flag_tile">Прапор</string>
     <string name="retry">Повторити</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Відкрити меню</string>
     <string name="close_menu">Закрити меню</string>
     <string name="delete_all">Видалити все</string>
+    <string name="appearance">Зовнішній вигляд</string>
     <string name="themes">Тема</string>
     <string name="try_it">Спробувати</string>
     <string name="delete_all_message">Видалити всі події назавжди.</string>

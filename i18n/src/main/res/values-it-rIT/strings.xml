@@ -4,13 +4,13 @@
     <string name="tutorial_completed">Tutorial Completato</string>
     <string name="tutorial_0_bottom">Puoi iniziare da %1$s in qualsiasi quadrato casuale.</string>
     <string name="tutorial_1_top">I numeri indicano quante mine sono adiacenti al quadrato evidenziato.</string>
-    <string name="tutorial_1_bottom">Pertanto, se l\'angolo 1️⃣ ha un solo quadrato adiacente, deve essere una mina. Premi %1$s per contrassegnarlo.</string>
-    <string name="tutorial_2_top">Il prossimo quadrato non aperto non ha una mina perché il numero è 1️⃣ , non 2️⃣ .</string>
+    <string name="tutorial_1_bottom">Pertanto, se l\'angolo 1 ha un solo quadrato adiacente, deve essere una mina. Premi %1$s per contrassegnarlo.</string>
+    <string name="tutorial_2_top">Il prossimo quadrato non aperto non ha una mina perché il numero è 1, non 2.</string>
     <string name="tutorial_2_bottom">È possibile aprirlo da %1$s.</string>
-    <string name="tutorial_3_top">Lo stesso accade su questo 1️⃣ . Sai dove è la mina adiacente.</string>
-    <string name="tutorial_3_bottom">È possibile aprire tutti gli altri quadrati non aperti adiacenti a 1️⃣ .</string>
+    <string name="tutorial_3_top">Lo stesso accade su questo 1. Sai dove è la mina adiacente.</string>
+    <string name="tutorial_3_bottom">È possibile aprire tutti gli altri quadrati non aperti adiacenti a 1.</string>
     <string name="tutorial_4_top">Sapendo dove è una delle mine, c\'è solo un\'altra possibilità per l\'altra.</string>
-    <string name="tutorial_4_bottom">%1$s per contrassegnare la miniera adiacente a 2️⃣ .</string>
+    <string name="tutorial_4_bottom">%1$s per contrassegnare la miniera adiacente a 2.</string>
     <string name="tutorial_5_top">Metti la spunta sul numero evidenziato.</string>
     <string name="tutorial_5_bottom">%1$s da aprire o %2$s da contrassegnare.</string>
     <string name="games">Giochi</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Singolo click</string>
     <string name="double_click">Doppio click</string>
     <string name="long_press">Premi a lungo</string>
+    <string name="touch_sensibility">Sensibilità tocco</string>
     <string name="open_tile">Apri</string>
     <string name="flag_tile">Bandiera</string>
     <string name="retry">Riprova</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Apri menu</string>
     <string name="close_menu">Chiudi menu</string>
     <string name="delete_all">Elimina tutti</string>
+    <string name="appearance">Apparenza</string>
     <string name="themes">Temi</string>
     <string name="try_it">Provalo</string>
     <string name="delete_all_message">Elimina tutti gli eventi permanentemente.</string>

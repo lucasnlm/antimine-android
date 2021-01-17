@@ -4,13 +4,13 @@
     <string name="tutorial_completed">Туториалът приключи</string>
     <string name="tutorial_0_bottom">Може да започнеш с %1$s на всяко случайно квадратче.</string>
     <string name="tutorial_1_top">Номерата показват колко мини са в близост до селектираното квадратче.</string>
-    <string name="tutorial_1_bottom">Затова, ако ъгълът 1️⃣  има само едно променящо се квадратче, то трябва да е мина. %1$s за да го отбележиш.</string>
-    <string name="tutorial_2_top">Следващия неотворен квадрат няма мина защото номера е 1️⃣ , а не 2️⃣ .</string>
+    <string name="tutorial_1_bottom">Затова, ако ъгълът 1 има само едно променящо се квадратче, то трябва да е мина. %1$s за да го отбележиш.</string>
+    <string name="tutorial_2_top">Следващия неотворен квадрат няма мина защото номера е 1, а не 2.</string>
     <string name="tutorial_2_bottom">Ти можеш да го отвориш само с %1$s.</string>
-    <string name="tutorial_3_top">Същото става на това 1️⃣ . Ти знаеш къде е намерената мина.</string>
-    <string name="tutorial_3_bottom">Ти можеш да отвориш всички други неотворени квадрати в близост до 1️⃣ .</string>
+    <string name="tutorial_3_top">Същото става на това 1. Ти знаеш къде е намерената мина.</string>
+    <string name="tutorial_3_bottom">Ти можеш да отвориш всички други неотворени квадрати в близост до 1.</string>
     <string name="tutorial_4_top">Ние знаем къде една от мините е. Затова, има само една възможност за другата.</string>
-    <string name="tutorial_4_bottom">%1$s за да отбележиш до 2️⃣ .</string>
+    <string name="tutorial_4_bottom">%1$s за да отбележиш до 2.</string>
     <string name="tutorial_5_top">Провери селектирания номер.</string>
     <string name="tutorial_5_bottom">%1$s за да отвориш и %2$s за да маркираш.</string>
     <string name="games">Игри</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Едно натискане</string>
     <string name="double_click">Двукратно щракване</string>
     <string name="long_press">Задържане</string>
+    <string name="touch_sensibility">Чувствителност при докосване</string>
     <string name="open_tile">Отвори</string>
     <string name="flag_tile">Флаг</string>
     <string name="retry">Опитайте отново</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Отвори менюто</string>
     <string name="close_menu">Затвори менюто</string>
     <string name="delete_all">Изтрий всички</string>
+    <string name="appearance">Външен вид</string>
     <string name="themes">Теми</string>
     <string name="try_it">Ще опитам</string>
     <string name="delete_all_message">Изтрий всички завинаги.</string>

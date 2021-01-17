@@ -4,13 +4,13 @@
     <string name="tutorial_completed">Tutorial Completo</string>
     <string name="tutorial_0_bottom">Você pode começar por %1$s em qualquer quadrado aleatório.</string>
     <string name="tutorial_1_top">Os números indicam quantas minas estão adjacentes ao quadrado em destaque.</string>
-    <string name="tutorial_1_bottom">Portanto, se o canto 1️⃣ tem apenas um quadrado adjacente, ele deve ter uma mina. %1$s para sinalizá-lo.</string>
-    <string name="tutorial_2_top">O próximo quadrado não aberto não tem uma mina, porque o número é 1️⃣ , não 2️⃣ .</string>
+    <string name="tutorial_1_bottom">Portanto, se o canto com 1 tem apenas um quadrado adjacente, deve ser uma minha. %1$s para marcá-lo.</string>
+    <string name="tutorial_2_top">O próximo quadrado não aberto não tem uma mina, porque há um número 1, não 2.</string>
     <string name="tutorial_2_bottom">Você pode abri-lo com %1$s.</string>
-    <string name="tutorial_3_top">O mesmo acontece neste 1️⃣ . Você sabe onde está a sua mina adjacente.</string>
-    <string name="tutorial_3_bottom">Você pode abrir todos os outros lugares não abertos adjacentes a 1️⃣ .</string>
+    <string name="tutorial_3_top">O mesmo acontece nesse 1. Você sabe onde está a sua mina adjacente.</string>
+    <string name="tutorial_3_bottom">Você pode abrir todos os outros lugares não abertos adjacentes a 1.</string>
     <string name="tutorial_4_top">Sabemos onde está uma das minas. Então, há apenas uma possibilidade para a outra.</string>
-    <string name="tutorial_4_bottom">%1$s para sinalizar a mina adjacente a 2️⃣ .</string>
+    <string name="tutorial_4_bottom">%1$s para sinalizar a mina adjacente a 2.</string>
     <string name="tutorial_5_top">Verifique o número destacado.</string>
     <string name="tutorial_5_bottom">%1$s para abrir ou %2$s para marcar.</string>
     <string name="games">Jogos</string>
@@ -57,7 +57,7 @@
     <string name="you_finished">Você terminou!</string>
     <string name="defeats">Derrotas</string>
     <string name="generic_game_over">Boa sorte no seu próximo jogo.</string>
-    <string name="generic_win">Você encontrou %1$d minas em %1$d segundos.</string>
+    <string name="generic_win">You found %1$d mines in %2$d seconds.</string>
     <string name="fail_to_share">Falha ao compartilhar</string>
     <string name="version_s">Versão %1$s</string>
     <string name="sound_effects">Efeitos Sonoros</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Toque Único</string>
     <string name="double_click">Toque Duplo</string>
     <string name="long_press">Toque Longo</string>
+    <string name="touch_sensibility">Sensibilidade tátil</string>
     <string name="open_tile">Abrir</string>
     <string name="flag_tile">Bandeira</string>
     <string name="retry">Tentar Novamente</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Abrir o Menu</string>
     <string name="close_menu">Fechar menu</string>
     <string name="delete_all">Apagar tudo</string>
+    <string name="appearance">Aparência</string>
     <string name="themes">Temas</string>
     <string name="try_it">Experimente</string>
     <string name="delete_all_message">Excluir todos os eventos permanentemente.</string>

@@ -2,17 +2,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pl">
     <string name="tutorial">Samouczek</string>
     <string name="tutorial_completed">Samouczek ukończony</string>
-    <string name="tutorial_0_bottom">%1$s dowolnego pola spowoduje rozpoczęcie rozgrywki.</string>
+    <string name="tutorial_0_bottom">Rozpocznij rozgrywkę poprzez %1$s na dowolnym polu.</string>
     <string name="tutorial_1_top">Cyfry wskazują, jaka ilość min przylega do podświetlonego pola.</string>
-    <string name="tutorial_1_bottom">Z tego wynika, że jeśli do narożnika 1️⃣  przylega tylko jedno pole, to musi znajdować się tam mina. %1$s spowoduje jej oznaczenie.</string>
-    <string name="tutorial_2_top">Na kolejnym nieodkrytym polu nie znajduje się mina, ponieważ widnieje na nim cyfra 1️⃣ , a nie 2️⃣ .</string>
+    <string name="tutorial_1_bottom">Z tego wynika, że jeśli do pola z cyfrą 1 przylega tylko jedno pole, to musi znajdować się tam mina. Oznacz ją poprzez %1$s.</string>
+    <string name="tutorial_2_top">Na kolejnym nieodkrytym polu nie znajduje się mina, ponieważ widnieje na nim cyfra 1, a nie 2.</string>
     <string name="tutorial_2_bottom">Możesz je odkryć poprzez %1$s.</string>
-    <string name="tutorial_3_top">To samo dzieje się w przypadku tego pola 1️⃣ . Z pewnością wiesz, gdzie jest przylegająca mina.</string>
-    <string name="tutorial_3_bottom">Możesz odkryć wszystkie pozostałe pola przylegające do tego pola 1️⃣ .</string>
+    <string name="tutorial_3_top">To samo dzieje się w przypadku tego pola 1. Z pewnością wiesz, gdzie jest przylegająca mina.</string>
+    <string name="tutorial_3_bottom">Możesz odkryć wszystkie pozostałe pola przylegające do tego pola 1.</string>
     <string name="tutorial_4_top">Wiemy już, gdzie jest jedna z min. Istnieje więc tylko jedno możliwe położenie dla drugiej miny.</string>
-    <string name="tutorial_4_bottom">%1$s spowoduje oznaczenie miny przylegającej do pola 2️⃣ .</string>
+    <string name="tutorial_4_bottom">Oznacz minę przylegająca do pola z cyfrą 2 poprzez %1$s.</string>
     <string name="tutorial_5_top">Sprawdź cyfrę na podświetlonym polu.</string>
-    <string name="tutorial_5_bottom">Możesz odkryć pole poprzez %1$s lub oznaczyć je poprzez %2$s.</string>
+    <string name="tutorial_5_bottom">Odkryj pole poprzez %1$s lub oznacz je poprzez %2$s.</string>
     <string name="games">Rozgrywki</string>
     <string name="previous_games">Poprzednie rozgrywki</string>
     <string name="minefield">Poziom rozgrywki</string>
@@ -50,7 +50,7 @@
     <string name="rating_message">Jeśli podoba Ci się ta gra, zachęcamy do przesłania opinii. Jest to bardzo pomocne.</string>
     <string name="used_software_text">Ta gra wykorzystuje następujące oprogramowanie stron trzecich:</string>
     <string name="translators_text">Ta gra została przetłumaczona przez następujące osoby:</string>
-    <string name="sign_in_failed">Błąd logowania. Sprawdź swoje połączenie internetowe i spróbuj ponownie.</string>
+    <string name="sign_in_failed">Błąd logowania. Sprawdź swoje połączenie z Internetem i spróbuj ponownie.</string>
     <string name="you_won">Udało się!</string>
     <string name="victories">Zwycięstwa</string>
     <string name="you_lost">Nie udało się!</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Pojedyncze kliknięcie</string>
     <string name="double_click">Podwójne kliknięcie</string>
     <string name="long_press">Długie naciśnięcie</string>
+    <string name="touch_sensibility">Czułość ekranu dotyku</string>
     <string name="open_tile">Odkryj</string>
     <string name="flag_tile">Oznacz</string>
     <string name="retry">Jeszcze raz</string>
@@ -83,7 +84,7 @@
     <string name="empty">Puste</string>
     <string name="cant_do_it_now">Nie można tego teraz zrobić</string>
     <string name="you_have_received">Otrzymano: +%1$d</string>
-    <string name="help_win_a_game">Aby uzyskać więcej pomocy, należy wygrać rozgrywkę.</string>
+    <string name="help_win_a_game">Wygraj rozgrywkę, aby uzyskać więcej podpowiedzi.</string>
     <string name="unknown_error">Nieznany błąd.</string>
     <string name="leaderboards">Tablica wyników</string>
     <string name="cancel">Anuluj</string>
@@ -106,10 +107,11 @@
     <string name="new_game">Nowa rozgrywka</string>
     <string name="share">Udostępnij</string>
     <string name="share_menu">Udostępnij przez…</string>
-    <string name="no_network">Brak połączenia internetowego.</string>
+    <string name="no_network">Brak połączenia z Internetem.</string>
     <string name="open_menu">Otwórz menu</string>
     <string name="close_menu">Zamknij menu</string>
     <string name="delete_all">Usuń wszystkie</string>
+    <string name="appearance">Wygląd</string>
     <string name="themes">Motywy</string>
     <string name="try_it">Wypróbuj</string>
     <string name="delete_all_message">Spowoduje to nieodwracalne usunięcie wszystkich statystyk.</string>
@@ -124,7 +126,7 @@
     <string name="flag_placed">Umieszczono flagę!</string>
     <string name="flag_removed">Usunięto flagę!</string>
     <string name="remove_ad">Usuń reklamy</string>
-    <string name="help">Pomoc</string>
+    <string name="help">Podpowiedzi</string>
     <string name="show_windows">Pokaż okna</string>
     <string name="switch_control">Przełączanie: Oznacz i odkryj</string>
     <string name="switch_control_desc">Użyj przycisku do przełączania się pomiędzy oznaczaniem i odkrywaniem</string>

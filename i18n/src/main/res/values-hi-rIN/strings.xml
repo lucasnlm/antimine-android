@@ -4,13 +4,13 @@
     <string name="tutorial_completed">ट्यूटोरियल पूरा हुआ</string>
     <string name="tutorial_0_bottom">आप किसी भी यादृच्छिक क्षेत्र पर %1$s द्वारा शुरू कर सकते हैं।</string>
     <string name="tutorial_1_top">संख्या इंगित करती है कि कितने खदान हाइलाइट किए गए क्षेत्र से सटे हैं।</string>
-    <string name="tutorial_1_bottom">इसलिए, यदि कोने 1️⃣, में केवल एक निकट क्षेत्र है, तो यह एक खदान होना चाहिए। इसे चिह्नित करने के लिए %1$s</string>
-    <string name="tutorial_2_top">अगले बंद वर्ग में एक खदान नहीं है क्योंकि संख्या 1️⃣ है, 2️⃣ नहीं।</string>
+    <string name="tutorial_1_bottom">इसलिए, यदि कोने 1, में केवल एक निकट क्षेत्र है, तो यह एक खदान होना चाहिए। इसे चिह्नित करने के लिए %1$s</string>
+    <string name="tutorial_2_top">अगले बंद वर्ग में एक खदान नहीं है क्योंकि संख्या 1 है, 2 नहीं।</string>
     <string name="tutorial_2_bottom">आप इसे %1$s से खोल सकते हैं।</string>
-    <string name="tutorial_3_top">वही इस 1️⃣ पर होता है। तुम्हें पता है कि इसकी आसन्न खान कहाँ है।</string>
-    <string name="tutorial_3_bottom">आप 1️⃣ to से सटे अन्य सभी खुले हुए वर्गों को खोल सकते हैं।</string>
+    <string name="tutorial_3_top">वही इस 1 पर होता है। तुम्हें पता है कि इसकी आसन्न खान कहाँ है।</string>
+    <string name="tutorial_3_bottom">आप 1 to से सटे अन्य सभी खुले हुए वर्गों को खोल सकते हैं।</string>
     <string name="tutorial_4_top">हम जानते हैं कि खानों में से एक कहां है। इसलिए, अन्य एक के लिए केवल एक संभावना है।</string>
-    <string name="tutorial_4_bottom">2️⃣ से सटे खदान को चिह्नित करने के लिए %1$s।</string>
+    <string name="tutorial_4_bottom">2 से सटे खदान को चिह्नित करने के लिए %1$s।</string>
     <string name="tutorial_5_top">हाइलाइट की गई संख्या की जाँच करें।</string>
     <string name="tutorial_5_bottom">चिह्नित करने के लिए खोलने या %2$s के लिए %1$s।</string>
     <string name="games">गेम्स</string>
@@ -76,6 +76,7 @@
     <string name="single_click">सिंगल क्लिक</string>
     <string name="double_click">दुबारा क्लिक</string>
     <string name="long_press">लंबे समय दबाए</string>
+    <string name="touch_sensibility">स्पर्श संवेदनशीलता</string>
     <string name="open_tile">खुला</string>
     <string name="flag_tile">ध्वज</string>
     <string name="retry">फिर प्रयास करें</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">मेन्यू खोलें</string>
     <string name="close_menu">मेनू बंद करें</string>
     <string name="delete_all">सभी मिटाएँ</string>
+    <string name="appearance">स्वरूप</string>
     <string name="themes">थीम्स</string>
     <string name="try_it">इसे आज़माएँ</string>
     <string name="delete_all_message">पुष्टि करें</string>

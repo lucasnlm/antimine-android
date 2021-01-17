@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="de">
     <string name="tutorial">Anleitung</string>
-    <string name="tutorial_completed">Anleitung Abgeschlossen</string>
+    <string name="tutorial_completed">Tutorial Abgeschlossen</string>
     <string name="tutorial_0_bottom">Du kannst von %1$s aus an jedem beliebigen zufälligen Quadrat beginnen.</string>
     <string name="tutorial_1_top">Die Zahlen geben an, wie viele Minen neben dem markierten Quadrat liegen.</string>
-    <string name="tutorial_1_bottom">Falls die Ecke 1️⃣ nur ein angrenzendes Quadrat hat, muss es daher eine Mine sein. %1$s um sie zu markieren.</string>
-    <string name="tutorial_2_top">Das nächste ungeöffnete Quadrat hat keine Mine, da die Zahl 1️⃣ ist, nicht 2️⃣ .</string>
+    <string name="tutorial_1_bottom">Falls die Ecke 1 nur ein angrenzendes Quadrat hat, muss es daher eine Mine sein. %1$s um sie zu markieren.</string>
+    <string name="tutorial_2_top">Das nächste ungeöffnete Quadrat hat keine Mine, da die Zahl 1 ist, nicht 2.</string>
     <string name="tutorial_2_bottom">Du kannst es durch %1$s öffnen.</string>
-    <string name="tutorial_3_top">Das Gleiche passiert auf dieser 1️⃣ Du weißt, wo die angrenzende Mine ist.</string>
-    <string name="tutorial_3_bottom">Du kannst alle ungeöffneten, an 1️⃣ angrenzende Quadrate öffnen.</string>
+    <string name="tutorial_3_top">Das Gleiche passiert auf dieser 1 Du weißt, wo die angrenzende Mine ist.</string>
+    <string name="tutorial_3_bottom">Du kannst alle ungeöffneten, an 1 angrenzende Quadrate öffnen.</string>
     <string name="tutorial_4_top">Wir wissen, wo sich eine der Minen befindet. Daher gibt es nur noch eine einzige Möglichkeit für die andere.</string>
-    <string name="tutorial_4_bottom">%1$s um die an 2️⃣ angrenzende Mine zu markieren.</string>
+    <string name="tutorial_4_bottom">%1$s um die an 2 angrenzende Mine zu markieren.</string>
     <string name="tutorial_5_top">Prüfe die hervorgehobene Nummer.</string>
     <string name="tutorial_5_bottom">%1$s zum Öffnen oder %2$s zum Markieren.</string>
     <string name="games">Spiele</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Einzelklick</string>
     <string name="double_click">Doppelklick</string>
     <string name="long_press">Lange Drücken</string>
+    <string name="touch_sensibility">Empfindlichkeit</string>
     <string name="open_tile">Öffnen</string>
     <string name="flag_tile">Flagge</string>
     <string name="retry">Erneut versuchen</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Menü öffnen</string>
     <string name="close_menu">Menü schließen</string>
     <string name="delete_all">Alles löschen</string>
+    <string name="appearance">Darstellung</string>
     <string name="themes">Themen</string>
     <string name="try_it">Versuche es</string>
     <string name="delete_all_message">Alle Ereignisse dauerhaft löschen.</string>
