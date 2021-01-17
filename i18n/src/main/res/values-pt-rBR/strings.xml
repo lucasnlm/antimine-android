@@ -76,6 +76,7 @@
     <string name="single_click">Unico Clique</string>
     <string name="double_click">Duplo clique</string>
     <string name="long_press">Toque longo</string>
+    <string name="touch_sensibility">Sensibilidade ao Toque</string>
     <string name="open_tile">Abrir</string>
     <string name="flag_tile">Bandeira</string>
     <string name="retry">Tentar de novo</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Abrir Menu</string>
     <string name="close_menu">Fechar Menu</string>
     <string name="delete_all">Apagar tudo</string>
+    <string name="appearance">Aparência</string>
     <string name="themes">Temas</string>
     <string name="try_it">Experimente</string>
     <string name="delete_all_message">Apagar todos os eventos permanentemente.</string>

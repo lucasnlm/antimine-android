@@ -4,13 +4,13 @@
     <string name="tutorial_completed">Didacticiel terminé</string>
     <string name="tutorial_0_bottom">Vous pouvez commencer par %1$s à n\'importe quel carré aléatoire.</string>
     <string name="tutorial_1_top">Les chiffres indiquent combien de mines sont adjacentes au carré surligné.</string>
-    <string name="tutorial_1_bottom">Par conséquent, si le coin 1️⃣ n\'a qu\'un carré adjacent, il doit s\'agir d\'une mine. %1$s pour le signaler.</string>
-    <string name="tutorial_2_top">Le prochain carré non ouvert n\'a pas de mine car le nombre est 1️⃣ , pas 2️⃣ .</string>
+    <string name="tutorial_1_bottom">Par conséquent, si le coin 1 n\'a qu\'un carré adjacent, il doit s\'agir d\'une mine. %1$s pour le signaler.</string>
+    <string name="tutorial_2_top">Le prochain carré non ouvert n\'a pas de mine car le nombre est 1 , pas 2 .</string>
     <string name="tutorial_2_bottom">Vous pouvez l\'ouvrir par %1$s.</string>
-    <string name="tutorial_3_top">Il en va de même pour 1️⃣ . Vous savez où se trouve la mine adjacente.</string>
-    <string name="tutorial_3_bottom">Vous pouvez ouvrir tous les autres carrés non ouverts adjacents à 1️⃣ .</string>
+    <string name="tutorial_3_top">Il en va de même pour 1. Vous savez où se trouve la mine adjacente.</string>
+    <string name="tutorial_3_bottom">Vous pouvez ouvrir tous les autres carrés non ouverts adjacents à 1.</string>
     <string name="tutorial_4_top">Nous savons où se trouve l\'une des mines. Il n\'y a donc qu\'une seule possibilité pour l\'autre.</string>
-    <string name="tutorial_4_bottom">%1$s pour marquer la mine adjacente à 2️⃣ .</string>
+    <string name="tutorial_4_bottom">%1$s pour marquer la mine adjacente à 2.</string>
     <string name="tutorial_5_top">Vérifier le nombre en surbrillance.</string>
     <string name="tutorial_5_bottom">%1$s pour ouvrir ou %2$s pour marquer.</string>
     <string name="games">Jeux</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Clic simple</string>
     <string name="double_click">Double clic</string>
     <string name="long_press">Appui prolongé</string>
+    <string name="touch_sensibility">Sensibilité tactile</string>
     <string name="open_tile">Ouvrir</string>
     <string name="flag_tile">Drapeau</string>
     <string name="retry">Réessayer</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Ouvrir le menu</string>
     <string name="close_menu">Fermer le menu</string>
     <string name="delete_all">Supprimer tout</string>
+    <string name="appearance">Apparence</string>
     <string name="themes">Thèmes</string>
     <string name="try_it">Essayez-le</string>
     <string name="delete_all_message">Supprimer définitivement tous les événements.</string>

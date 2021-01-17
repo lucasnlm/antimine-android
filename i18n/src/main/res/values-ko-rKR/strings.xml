@@ -4,13 +4,13 @@
     <string name="tutorial_completed">튜토리얼 완료</string>
     <string name="tutorial_0_bottom">아무 곳에나 %1$s해서 게임을 시작하세요.</string>
     <string name="tutorial_1_top">이 숫자는 선택한 곳의 인접한 구간에 얼마나 많은 지뢰가 있는지 나타냅니다.</string>
-    <string name="tutorial_1_bottom">따라서, 1️⃣ 으로 표시된 부분에 인접한 구역이 한 군데밖에 없다면, 그것은 지뢰일 것입니다. %1$s해서 깃발을 세우세요.</string>
-    <string name="tutorial_2_top">그 다음 열리지 않은 구역은 숫자가 2️⃣ 가 아닌 1️⃣ 이기에, 지뢰를 가지고 있지 않습니다.</string>
+    <string name="tutorial_1_bottom">따라서, 1 으로 표시된 부분에 인접한 구역이 한 군데밖에 없다면, 그것은 지뢰일 것입니다. %1$s해서 깃발을 세우세요.</string>
+    <string name="tutorial_2_top">그 다음 열리지 않은 구역은 숫자가 2 가 아닌 1 이기에, 지뢰를 가지고 있지 않습니다.</string>
     <string name="tutorial_2_bottom">%1$s해서 그 칸을 여세요.</string>
-    <string name="tutorial_3_top">이 1️⃣ 이라 표시된 구역에 똑같은 상황이 나왔습니다. 인접한 지뢰가 어디 있는지 확인할 수 있을겁니다.</string>
-    <string name="tutorial_3_bottom">1️⃣ 근처의 모든 칸을 열어도 됩니다.</string>
+    <string name="tutorial_3_top">이 1 이라 표시된 구역에 똑같은 상황이 나왔습니다. 인접한 지뢰가 어디 있는지 확인할 수 있을겁니다.</string>
+    <string name="tutorial_3_bottom">1 근처의 모든 칸을 열어도 됩니다.</string>
     <string name="tutorial_4_top">이미 지뢰 하나는 어디 있는지 알고 있습니다. 그러니 나머지 하나가 있을 경우의 수는 단 한가지입니다.</string>
-    <string name="tutorial_4_bottom">%1$s해서 2️⃣ 에 인접한 칸에 있는 지뢰에 깃발을 세우세요.</string>
+    <string name="tutorial_4_bottom">%1$s해서 2 에 인접한 칸에 있는 지뢰에 깃발을 세우세요.</string>
     <string name="tutorial_5_top">표시된 숫자를 확인하세요.</string>
     <string name="tutorial_5_bottom">해당 구역이 안전하다고 생각하면 %1$s하고, 해당 구역에 지뢰가 있다고 생각하면 %2$s하세요.</string>
     <string name="games">게임</string>
@@ -76,6 +76,7 @@
     <string name="single_click">단일 클릭</string>
     <string name="double_click">더블 클릭</string>
     <string name="long_press">길게 누르기</string>
+    <string name="touch_sensibility">터치 감성</string>
     <string name="open_tile">칸 열기</string>
     <string name="flag_tile">깃발 세우기</string>
     <string name="retry">재시도</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">메뉴 열기</string>
     <string name="close_menu">메뉴 닫기</string>
     <string name="delete_all">모두 삭제</string>
+    <string name="appearance">모양새</string>
     <string name="themes">테마 선택</string>
     <string name="try_it">사용해보세요</string>
     <string name="delete_all_message">모든 이벤트 알림을 영구히 삭제합니다.</string>

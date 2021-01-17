@@ -4,8 +4,8 @@
     <string name="tutorial_completed">اكتمل البرنامج التعليمي</string>
     <string name="tutorial_0_bottom">يمكنك البدء ب %1$s في أي مربع عشوائي.</string>
     <string name="tutorial_1_top">وتشير الأرقام إلى عدد الألغام المتاخمة للمربع المشار إليه.</string>
-    <string name="tutorial_1_bottom">لذلك، إذا كان الزاوية 1️⃣ يحتوي على مربع واحد مجاور، يجب أن يكون لغما. %1$s لإعلامه.</string>
-    <string name="tutorial_2_top">المربع التالي غير المفتوح ليس لديه لغم لأن الرقم هو 1️⃣ ليس 2️⃣ .</string>
+    <string name="tutorial_1_bottom">لذلك، إذا كان الزاوية 1 يحتوي على مربع واحد مجاور، يجب أن يكون لغما. %1$s لإعلامه.</string>
+    <string name="tutorial_2_top">المربع التالي غير المفتوح ليس لديه لغم لأن الرقم هو 1 ليس 2.</string>
     <string name="tutorial_2_bottom">يمكنك فتحه ب %1$s.</string>
     <string name="tutorial_3_top">ويحدث نفس الشيء في هذا 1️⃣ . تعرفون أين هو المنجم المجاور.</string>
     <string name="tutorial_3_bottom">يمكنك فتح جميع المربعات الأخرى غير المفتوحة المجاورة لـ 1️⃣ .</string>
@@ -76,6 +76,7 @@
     <string name="single_click">نقرة واحدة</string>
     <string name="double_click">انقر مرتين</string>
     <string name="long_press">ضغط مطّول</string>
+    <string name="touch_sensibility">حساسية اللمس</string>
     <string name="open_tile">فتح</string>
     <string name="flag_tile">علم</string>
     <string name="retry">إعادة المحاولة</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">فتح القائمة</string>
     <string name="close_menu">إغلاق القائمة</string>
     <string name="delete_all">حذف الكل</string>
+    <string name="appearance">المظهر</string>
     <string name="themes">المظهر</string>
     <string name="try_it">جربها</string>
     <string name="delete_all_message">احذف جميع الأحداث نهائيًا.</string>

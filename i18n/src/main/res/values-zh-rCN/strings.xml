@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh-rCN">
-    <string name="tutorial">教学模式</string>
+    <string name="tutorial">教程</string>
     <string name="tutorial_completed">教学已完成</string>
-    <string name="tutorial_0_bottom">你可以在任意的正方形开始 %1$s.</string>
+    <string name="tutorial_0_bottom">你可以从任意的方格开始 %1$s.</string>
     <string name="tutorial_1_top">数字表明有多少地雷与高亮的正方形相邻。</string>
-    <string name="tutorial_1_bottom">因此，如果角 1️⃣ 只有一个相邻的正方形，它必须是一个地雷。 %1$s 来标记它。</string>
+    <string name="tutorial_1_bottom">因此，如果角 1 只有一个相邻的正方形，它肯定是地雷。 %1$s 来标记它。</string>
     <string name="tutorial_2_top">下一个未打开的方块没有地雷，因为数字是 1️⃣ , 而不是 2️⃣ 。</string>
     <string name="tutorial_2_bottom">您可以通过 %1$s 打开它。</string>
-    <string name="tutorial_3_top">此 1️⃣ 发生同样的情况。您知道其相邻的矿藏在哪里。</string>
-    <string name="tutorial_3_bottom">您可以在 1️⃣ 旁打开所有其他未打开的方块</string>
+    <string name="tutorial_3_top">此 1 发生同样的情况。您知道其相邻的地雷在哪里。</string>
+    <string name="tutorial_3_bottom">您可以在 1 旁打开所有其他未打开的方块</string>
     <string name="tutorial_4_top">我们知道其中一枚地雷在哪里，因此，另一枚地雷只有一种可能性。</string>
-    <string name="tutorial_4_bottom">%1$s 标记附近的 2️⃣ 的矿。</string>
+    <string name="tutorial_4_bottom">%1$s 标记附近的 2 的矿。</string>
     <string name="tutorial_5_top">检查高亮的数字。</string>
     <string name="tutorial_5_bottom">%1$s 打开或 %2$s 标记。</string>
     <string name="games">游戏</string>
@@ -67,7 +67,7 @@
     <string name="total_time">总用时</string>
     <string name="average_time">平均用时</string>
     <string name="shortest_time">最短时间</string>
-    <string name="performance">性能</string>
+    <string name="performance">胜率</string>
     <string name="ok">确定</string>
     <string name="use_question_mark">使用问号标记</string>
     <string name="no_guessing_mode">“没有猜测”模式</string>
@@ -76,6 +76,7 @@
     <string name="single_click">单击</string>
     <string name="double_click">双击</string>
     <string name="long_press">长按</string>
+    <string name="touch_sensibility">触摸屏灵敏度</string>
     <string name="open_tile">打开</string>
     <string name="flag_tile">标记</string>
     <string name="retry">重试</string>
@@ -106,13 +107,14 @@
     <string name="new_game">新游戏</string>
     <string name="share">分享</string>
     <string name="share_menu">分享…</string>
-    <string name="no_network">没有网络连接</string>
+    <string name="no_network">没有连接网络。</string>
     <string name="open_menu">打开菜单</string>
     <string name="close_menu">关闭菜单</string>
     <string name="delete_all">全部删除</string>
+    <string name="appearance">外貌</string>
     <string name="themes">主题</string>
     <string name="try_it">试一下</string>
-    <string name="delete_all_message">永久删除全部事件</string>
+    <string name="delete_all_message">永久删除全部记录。</string>
     <string name="all_mines_disabled">所有地雷都已失效。</string>
     <string name="desc_convered_area">覆盖面积</string>
     <string name="desc_marked_area">标记区域</string>

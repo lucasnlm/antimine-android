@@ -4,13 +4,13 @@
     <string name="tutorial_completed">Ολοκλήρωση εκμάθησης</string>
     <string name="tutorial_0_bottom">Μπορείτε να ξεκινήσετε με %1$s σε οποιοδήποτε τυχαίο τετράγωνο.</string>
     <string name="tutorial_1_top">Οι αριθμοί υποδεικνύουν πόσες νάρκες βρίσκονται δίπλα στο επισημασμένο τετράγωνο.</string>
-    <string name="tutorial_1_bottom">Επομένως, εάν η γωνία 1️⃣ έχει μόνο ένα παρακείμενο τετράγωνο, πρέπει να είναι νάρκη. %1$s για να το επισημάνετε.</string>
-    <string name="tutorial_2_top">Το επόμενο κλειστό τετράγωνο δεν έχει νάρκη επειδή ο αριθμός είναι 1️⃣ και όχι 2️⃣.</string>
+    <string name="tutorial_1_bottom">Επομένως, εάν η γωνία 1 έχει μόνο ένα παρακείμενο τετράγωνο, πρέπει να είναι νάρκη. %1$s για να το επισημάνετε.</string>
+    <string name="tutorial_2_top">Το επόμενο κλειστό τετράγωνο δεν έχει νάρκη επειδή ο αριθμός είναι 1 και όχι 2.</string>
     <string name="tutorial_2_bottom">Μπορείτε να το ανοίξετε από %1$s.</string>
-    <string name="tutorial_3_top">Το ίδιο συμβαίνει σε αυτό το 1️⃣. Ξέρεις πού είναι η διπλανή νάρκη.</string>
-    <string name="tutorial_3_bottom">Μπορείτε να ανοίξετε όλα τα άλλα κλειστά τετράγωνα δίπλα στο 1️⃣.</string>
+    <string name="tutorial_3_top">Το ίδιο συμβαίνει σε αυτό το 1. Ξέρεις πού είναι η διπλανή νάρκη.</string>
+    <string name="tutorial_3_bottom">Μπορείτε να ανοίξετε όλα τα άλλα κλειστά τετράγωνα δίπλα στο 1.</string>
     <string name="tutorial_4_top">Γνωρίζουμε πού είναι μια από τις νάρκες. Έτσι, υπάρχει μόνο μία πιθανότητα με την άλλη.</string>
-    <string name="tutorial_4_bottom">%1$s για να επισημάνετε τη νάρκη δίπλα στο 2️⃣.</string>
+    <string name="tutorial_4_bottom">%1$s για να επισημάνετε τη νάρκη δίπλα στο 2.</string>
     <string name="tutorial_5_top">Ελέγξτε τον επισημασμένο αριθμό.</string>
     <string name="tutorial_5_bottom">%1$s για να ανοίξετε ή %2$s για επισήμανση.</string>
     <string name="games">Παιχνίδια</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Με ένα κλικ</string>
     <string name="double_click">Διπλό κλικ</string>
     <string name="long_press">Πιέστε και κρατήστε</string>
+    <string name="touch_sensibility">Ευαισθησία αφής</string>
     <string name="open_tile">Άνοιγμα</string>
     <string name="flag_tile">Σημαία</string>
     <string name="retry">Ξαναδοκιμάστε</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Άνοιγμα Μενού</string>
     <string name="close_menu">Κλείσιμο Μενού</string>
     <string name="delete_all">Διαγραφή όλων</string>
+    <string name="appearance">Εμφάνιση</string>
     <string name="themes">Θέμα</string>
     <string name="try_it">Δοκιμάστε το</string>
     <string name="delete_all_message">Μόνιμη διαγραφή επιλεγμένων.</string>

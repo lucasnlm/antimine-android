@@ -4,13 +4,13 @@
     <string name="tutorial_completed">Tutorial finalitzat</string>
     <string name="tutorial_0_bottom">Pots començar amb %1$s a qualsevol quadrat.</string>
     <string name="tutorial_1_top">Els números indiquen quantes mines són adjacents al quadrat seleccionat.</string>
-    <string name="tutorial_1_bottom">Així doncs, si la cantonada 1️⃣  només té un quadrat adjacent, ha de ser una mina. %1$s per marcar-la.</string>
-    <string name="tutorial_2_top">El següent quadrat sense destapar no té una mina perquè el número és 1️⃣ , no 2️⃣ .</string>
+    <string name="tutorial_1_bottom">Així doncs, si la cantonada 1 només té un quadrat adjacent, ha de ser una mina. %1$s per marcar-la.</string>
+    <string name="tutorial_2_top">El següent quadrat sense destapar no té una mina perquè el número és 1, no 2.</string>
     <string name="tutorial_2_bottom">Pots destapar %1$s.</string>
-    <string name="tutorial_3_top">El mateix passa en aquest 1️⃣. Tu saps on està la seva mina adjacent.</string>
-    <string name="tutorial_3_bottom">Pots destapar tots els quadrats adjacents de 1️⃣.</string>
+    <string name="tutorial_3_top">El mateix passa en aquest 1. Tu saps on està la seva mina adjacent.</string>
+    <string name="tutorial_3_bottom">Pots destapar tots els quadrats adjacents de 1.</string>
     <string name="tutorial_4_top">Sabem on hi ha una de les mines. Així, només hi ha una possibilitat per a l\'altra.</string>
-    <string name="tutorial_4_bottom">%1$s per marcar la mina adjacent a 2️⃣ .</string>
+    <string name="tutorial_4_bottom">%1$s per marcar la mina adjacent a 2.</string>
     <string name="tutorial_5_top">Verifica el número seleccionat.</string>
     <string name="tutorial_5_bottom">%1$s per destapar o %2$s per marcar.</string>
     <string name="games">Jocs</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Un sol clic</string>
     <string name="double_click">Doble clic</string>
     <string name="long_press">Pulsació llarga</string>
+    <string name="touch_sensibility">Sensibilitat al tacte</string>
     <string name="open_tile">Obert</string>
     <string name="flag_tile">Bandera</string>
     <string name="retry">Reintenta</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Obrir menú</string>
     <string name="close_menu">Tancar menú</string>
     <string name="delete_all">Esborra-ho tot</string>
+    <string name="appearance">Aparença</string>
     <string name="themes">Temes</string>
     <string name="try_it">Prova-ho</string>
     <string name="delete_all_message">Esborra tots els esdeveniments permanentment.</string>

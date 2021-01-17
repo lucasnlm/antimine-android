@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="es-rES">
     <string name="tutorial">Tutorial</string>
-    <string name="tutorial_completed">¡Tutorial Completado!</string>
+    <string name="tutorial_completed">Tutorial Completado</string>
     <string name="tutorial_0_bottom">Puedes empezar por %1$s en cualquier cuadrado aleatorio.</string>
     <string name="tutorial_1_top">Los números indican cuántas minas están adyacentes al cuadrado destacado.</string>
-    <string name="tutorial_1_bottom">Por lo tanto, si la esquina 1️⃣ tiene sólo un cuadrado adyacente, debe ser una mina. %1$s para marcarlo.</string>
-    <string name="tutorial_2_top">El siguiente cuadrado sin abrir no tiene una mina porque el número es 1️⃣ , no 2️⃣ .</string>
+    <string name="tutorial_1_bottom">Por lo tanto, si la esquina 1 tiene sólo un cuadrado adyacente, debe ser una mina. %1$s para marcarlo.</string>
+    <string name="tutorial_2_top">El siguiente cuadrado sin abrir no tiene una mina porque el número es 1, no 2.</string>
     <string name="tutorial_2_bottom">Puedes abrirlo com %1$s.</string>
-    <string name="tutorial_3_top">Puedes abrir todos los demás lugares sin abrir adyacentes a 1️⃣ . Sabes dónde está la mina adyacente.</string>
-    <string name="tutorial_3_bottom">Puede abrir todos los otros cuadrados cerrados y adyacentes a 1️⃣ .</string>
+    <string name="tutorial_3_top">Puedes abrir todos los demás lugares sin abrir adyacentes a 1. Sabes dónde está la mina adyacente.</string>
+    <string name="tutorial_3_bottom">Puede abrir todos los otros cuadrados cerrados y adyacentes a 1.</string>
     <string name="tutorial_4_top">Sabemos dónde está una de las minas, así que sólo hay una posibilidad para la otra.</string>
-    <string name="tutorial_4_bottom">%1$s para marcar la mina adyacente a 2️⃣ .</string>
+    <string name="tutorial_4_bottom">%1$s para marcar la mina adyacente a 2.</string>
     <string name="tutorial_5_top">Verifique el número resaltado.</string>
     <string name="tutorial_5_bottom">%1$s para abrir o %2$s para marcar.</string>
     <string name="games">Juegos</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Un clic</string>
     <string name="double_click">Doble clic</string>
     <string name="long_press">Mantenga pulsado</string>
+    <string name="touch_sensibility">Sensibilidad táctil</string>
     <string name="open_tile">Abrir</string>
     <string name="flag_tile">Bandera</string>
     <string name="retry">Reintentar</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Abra menú</string>
     <string name="close_menu">Cerrar menú</string>
     <string name="delete_all">Borrar todo</string>
+    <string name="appearance">Aspecto</string>
     <string name="themes">Temas</string>
     <string name="try_it">Pruébalo</string>
     <string name="delete_all_message">Borrar todos los eventos permanentemente.</string>

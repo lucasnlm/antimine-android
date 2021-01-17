@@ -4,13 +4,13 @@
     <string name="tutorial_completed">Opetuspeli Suoritettu</string>
     <string name="tutorial_0_bottom">Voit aloittaa %1$s millä tahansa satunnaisella neliöllä.</string>
     <string name="tutorial_1_top">Numerot osoittavat, kuinka monta miinaa on korostetun neliön ympärillä.</string>
-    <string name="tutorial_1_bottom">Siksi, jos kulmassa 1️⃣ on vain yksi viereinen neliö, sen on oltava minun. %1$s lippua se.</string>
-    <string name="tutorial_2_top">Seuraava avaamaton neliö ei ole miina, koska numero on 1️⃣ , eikä 2️⃣ .</string>
+    <string name="tutorial_1_bottom">Siksi, jos kulmassa 1 on vain yksi viereinen neliö, sen on oltava minun. %1$s lippua se.</string>
+    <string name="tutorial_2_top">Seuraava avaamaton neliö ei ole miina, koska numero on 1, eikä 2.</string>
     <string name="tutorial_2_bottom">Voit avata sen %1$s toimesta.</string>
-    <string name="tutorial_3_top">Sama tapahtuu tällä 1️⃣ . Tiedät missä sen viereinen miina on.</string>
-    <string name="tutorial_3_bottom">Voit avata kaikki muut avaamattomat neliöt 1️⃣ ympäriltä.</string>
+    <string name="tutorial_3_top">Sama tapahtuu tällä 1. Tiedät missä sen viereinen miina on.</string>
+    <string name="tutorial_3_bottom">Voit avata kaikki muut avaamattomat neliöt 1 ympäriltä.</string>
     <string name="tutorial_4_top">Tiedämme, missä yksi miinoista on. Joten on vain yksi mahdollisuus toiselle.</string>
-    <string name="tutorial_4_bottom">%1$s liputtaa kaivoksen 2️⃣ n vieressä: .</string>
+    <string name="tutorial_4_bottom">%1$s liputtaa kaivoksen 2 n vieressä.</string>
     <string name="tutorial_5_top">Tarkista korostettu numero.</string>
     <string name="tutorial_5_bottom">%1$s avataksesi tai %2$s merkitä.</string>
     <string name="games">Pelit</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Napautus</string>
     <string name="double_click">Kaksoisnapsautus</string>
     <string name="long_press">Pitkä painallus</string>
+    <string name="touch_sensibility">Kosketuksen herkkyys</string>
     <string name="open_tile">Avaa</string>
     <string name="flag_tile">Lippu</string>
     <string name="retry">Yritä uudelleen</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Avaa valikko</string>
     <string name="close_menu">Sulje valikko</string>
     <string name="delete_all">Poista kaikki</string>
+    <string name="appearance">Ulkoasu</string>
     <string name="themes">Teemat</string>
     <string name="try_it">Kokeile Sitä</string>
     <string name="delete_all_message">Poistetaanko kaikki tapahtumat pysyvästi.</string>

@@ -5,12 +5,12 @@
     <string name="tutorial_0_bottom">Rastgele karede %1$s ile başlayabilirsiniz.</string>
     <string name="tutorial_1_top">Numaralar vurgulanan kareye kaç tane bitişik mayın olduğuna işaret eder.</string>
     <string name="tutorial_1_bottom">Bu nedenle, köşe 1 sadece bir bitişik kareye sahipse, bu bir mayın olmalıdır. İşaretlemek için %1$s.</string>
-    <string name="tutorial_2_top">Bir sonraki açılmamış karede mayın yok çünkü sayı 2️⃣değil, 1️⃣.</string>
+    <string name="tutorial_2_top">Bir sonraki açılmamış karede mayın yok çünkü sayı 2 değil, 1.</string>
     <string name="tutorial_2_bottom">%1$s ile açabilirsin.</string>
-    <string name="tutorial_3_top">Bu 1️⃣\'de de aynı şey. Bitişik mayının nerede olduğunu biliyorsun.</string>
-    <string name="tutorial_3_bottom">1️⃣\'e bitişik bütün açılmamış mayınları açabilirsin.</string>
+    <string name="tutorial_3_top">Bu 1\'de de aynı şey. Bitişik mayının nerede olduğunu biliyorsun.</string>
+    <string name="tutorial_3_bottom">1\'e bitişik bütün açılmamış mayınları açabilirsin.</string>
     <string name="tutorial_4_top">Mayınların bir tanesinin nerede olduğunu biliyoruz. Böylece diğer mayın için sadece bir olasılık var.</string>
-    <string name="tutorial_4_bottom">2️⃣\'ye komşu olan mayını işaretlemek için %1$s.</string>
+    <string name="tutorial_4_bottom">2\'ye komşu olan mayını işaretlemek için %1$s.</string>
     <string name="tutorial_5_top">Vurgulanan numarayı kontrol edin.</string>
     <string name="tutorial_5_bottom">Açmak için %1$s ya da işaretlemek için %2$s.</string>
     <string name="games">Oyunlar</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Tek Tıklama</string>
     <string name="double_click">Çift Tıklama</string>
     <string name="long_press">Uzun Basma</string>
+    <string name="touch_sensibility">Dokunmatik hassasiyeti</string>
     <string name="open_tile">Aç</string>
     <string name="flag_tile">Bayrak</string>
     <string name="retry">Yeniden dene</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Menüyü Aç</string>
     <string name="close_menu">Menüyü Kapat</string>
     <string name="delete_all">Tümünü sil</string>
+    <string name="appearance">Görünüm</string>
     <string name="themes">Temalar</string>
     <string name="try_it">Deneyin</string>
     <string name="delete_all_message">Tüm etkinlikleri kalıcı olarak silin.</string>

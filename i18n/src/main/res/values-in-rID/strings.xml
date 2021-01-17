@@ -4,13 +4,13 @@
     <string name="tutorial_completed">Tutorial selesai</string>
     <string name="tutorial_0_bottom">Anda bisa memulai dengan %1$s di kotak mana saja.</string>
     <string name="tutorial_1_top">Nomor mengindikasi berapa banyak ranjau yang berdekatan kepada kotak yang disorot.</string>
-    <string name="tutorial_1_bottom">Oleh karena itu, jika pojok 1️⃣   hanya mempunyai satu kotak yang berdekatan, maka dipastikan itu ranjau. %1$s untuk menandainya.</string>
-    <string name="tutorial_2_top">Kotak selanjutnya yang belum dibuka tidak mempunyai ranjau karena nomornya adalah 1️⃣ bukan 2️⃣ .</string>
+    <string name="tutorial_1_bottom">Oleh karena itu, jika pojok 1 hanya mempunyai satu kotak yang berdekatan, maka dipastikan itu ranjau. %1$s untuk menandainya.</string>
+    <string name="tutorial_2_top">Kotak selanjutnya yang belum dibuka tidak mempunyai ranjau karena nomornya adalah 1 bukan 2.</string>
     <string name="tutorial_2_bottom">Anda bisa membukanya dengan %1$s.</string>
-    <string name="tutorial_3_top">Hal sama juga terjadi di 1️⃣ . Anda tahu dimana ranjau berdekatan berada.</string>
-    <string name="tutorial_3_bottom">Anda bisa membuka kotak berdekatan lainnya yang belum dibuka pada 1️⃣ .</string>
+    <string name="tutorial_3_top">Hal sama juga terjadi di 1. Anda tahu dimana ranjau berdekatan berada.</string>
+    <string name="tutorial_3_bottom">Anda bisa membuka kotak berdekatan lainnya yang belum dibuka pada 1.</string>
     <string name="tutorial_4_top">Kami tahu dimana letak ranjau satunya. Jadi, hanya ada satu kemungkinan untuk yang lainnya.</string>
-    <string name="tutorial_4_bottom">%1$s menandai ranjau yang berdekatan pada 2️⃣ .</string>
+    <string name="tutorial_4_bottom">%1$s menandai ranjau yang berdekatan pada 2.</string>
     <string name="tutorial_5_top">Cek nomor yang disorot.</string>
     <string name="tutorial_5_bottom">%1$s untuk membuka atau %2$s untuk menandai.</string>
     <string name="games">Permainan</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Satu klik</string>
     <string name="double_click">Klik dua kali</string>
     <string name="long_press">Tekan Lama</string>
+    <string name="touch_sensibility">Sensitifitas Sentuh</string>
     <string name="open_tile">Buka</string>
     <string name="flag_tile">Bendera</string>
     <string name="retry">Ulangi</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Buka menu</string>
     <string name="close_menu">Tutup Menu</string>
     <string name="delete_all">Hapus semua</string>
+    <string name="appearance">Penampilan</string>
     <string name="themes">Tema</string>
     <string name="try_it">Cobalah</string>
     <string name="delete_all_message">Hapus permanen semua kejadian.</string>

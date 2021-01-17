@@ -4,13 +4,13 @@
     <string name="tutorial_completed">Průvodce dokončen</string>
     <string name="tutorial_0_bottom">%1$s můžete začít na libovolném náhodném čtverci.</string>
     <string name="tutorial_1_top">Čísla označují, kolik min sousedí se zvýrazněným čtvercem.</string>
-    <string name="tutorial_1_bottom">Pokud má tedy roh 1️⃣ pouze jeden sousední čtverec, musí to být mina. K označení %1$s.</string>
-    <string name="tutorial_2_top">Další neotevřený čtverec neobsahuje minu, protože číslo je 1️⃣, ne 2️⃣.</string>
+    <string name="tutorial_1_bottom">Pokud má tedy roh 1 pouze jeden sousední čtverec, musí to být mina. K označení %1$s.</string>
+    <string name="tutorial_2_top">Další neotevřený čtverec neobsahuje minu, protože číslo je 1, ne 2.</string>
     <string name="tutorial_2_bottom">Můžete jej otevřít prostřednictvím %1$s.</string>
-    <string name="tutorial_3_top">Totéž se děje na tomto 1️⃣. Víte, kde je jeho sousední mina.</string>
-    <string name="tutorial_3_bottom">Můžete otevřít všechny ostatní neotevřené čtverce sousedící s 1️⃣.</string>
+    <string name="tutorial_3_top">Totéž se děje na tomto 1. Víte, kde je jeho sousední mina.</string>
+    <string name="tutorial_3_bottom">Můžete otevřít všechny ostatní neotevřené čtverce sousedící s 1.</string>
     <string name="tutorial_4_top">Víme, kde je jedna z min. Existuje tedy jen jedna možnost pro druhou.</string>
-    <string name="tutorial_4_bottom">%1$s k označení dolu sousedícího s 2️⃣.</string>
+    <string name="tutorial_4_bottom">%1$s k označení dolu sousedícího s 2.</string>
     <string name="tutorial_5_top">Zkontrolujte zvýrazněná čísla.</string>
     <string name="tutorial_5_bottom">%1$s pro otevření nebo %2$s pro označení.</string>
     <string name="games">Hry</string>
@@ -76,6 +76,7 @@
     <string name="single_click">Jedno klepnutí</string>
     <string name="double_click">Dvojí klepnutí</string>
     <string name="long_press">Dlouhý stisk</string>
+    <string name="touch_sensibility">Citlivost dotyků</string>
     <string name="open_tile">Otevřít</string>
     <string name="flag_tile">Vlajka</string>
     <string name="retry">Opakovat</string>
@@ -110,6 +111,7 @@
     <string name="open_menu">Otevřít nabídku</string>
     <string name="close_menu">Zavřít nabídku</string>
     <string name="delete_all">Smazat vše</string>
+    <string name="appearance">Vzhled</string>
     <string name="themes">Motivy</string>
     <string name="try_it">Zkuste to</string>
     <string name="delete_all_message">Trvale smazat všechny události.</string>
