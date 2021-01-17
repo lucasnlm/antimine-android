@@ -52,11 +52,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.Exception
 
 class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterface.OnDismissListener {
-    private val billingManager: IBillingManager by inject()
-
     private val preferencesRepository: IPreferencesRepository by inject()
-
-    private val featureFlagManager: IFeatureFlagManager by inject()
 
     private val analyticsManager: IAnalyticsManager by inject()
 
@@ -270,7 +266,7 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
         }
     }
 
-    private fun onChangeDifficulty(difficulty: Difficulty) {
+    private fun onChangeDifficulty() {
         loadGameFragment()
     }
 
@@ -410,7 +406,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
                 cloudSaveManager.uploadSave()
             }
             Event.Victory -> {
-                val isResuming = (status == Status.PreGame)
                 val score = Score(
                     rightMines,
                     totalMines,
@@ -537,7 +532,5 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
     companion object {
         val TAG = TvGameActivity::class.simpleName
         const val GOOGLE_PLAY_REQUEST_CODE = 6
-
-        const val MIN_USAGES_TO_IAP = 2
     }
 }
