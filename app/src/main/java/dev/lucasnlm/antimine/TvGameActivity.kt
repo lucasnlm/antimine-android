@@ -178,7 +178,7 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
         difficulty.observe(
             this@TvGameActivity,
             {
-                onChangeDifficulty(it)
+                onChangeDifficulty()
             }
         )
 
@@ -531,6 +531,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
 
     companion object {
         val TAG = TvGameActivity::class.simpleName
-        const val GOOGLE_PLAY_REQUEST_CODE = 6
+        private const val GOOGLE_PLAY_REQUEST_CODE = 6
     }
 }
