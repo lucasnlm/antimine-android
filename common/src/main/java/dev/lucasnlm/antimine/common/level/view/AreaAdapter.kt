@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.GestureDetector
 import android.view.KeyEvent
 import android.view.MotionEvent
+import android.view.VelocityTracker
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -20,6 +21,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.absoluteValue
 
 class AreaAdapter(
     context: Context,
@@ -37,6 +39,8 @@ class AreaAdapter(
     private var clickEnabled: Boolean = false
 
     private val theme = viewModel.getAppTheme()
+
+    private var velocityTracker: VelocityTracker? = null
 
     init {
         setHasStableIds(true)
@@ -135,14 +139,30 @@ class AreaAdapter(
                 view.setOnTouchListener { _, motionEvent ->
                     when (motionEvent.action) {
                         MotionEvent.ACTION_MOVE -> {
-                            longClickJob?.let { job ->
-                                job.cancel()
-                                longClickJob = null
+                            velocityTracker?.apply {
+                                val pointerId: Int = motionEvent.getPointerId(motionEvent.actionIndex)
+                                addMovement(motionEvent)
+                                computeCurrentVelocity(100)
+
+                                val velX = getXVelocity(pointerId).absoluteValue
+                                val velY = getYVelocity(pointerId).absoluteValue
+                                val pow2threshold = LIMIT_SPEED_THRESHOLD * LIMIT_SPEED_THRESHOLD
+
+                                if ((velX * velX + velY * velY) > pow2threshold) {
+                                    longClickJob?.let { job ->
+                                        job.cancel()
+                                        longClickJob = null
+                                    }
+                                }
                             }
                             true
                         }
                         MotionEvent.ACTION_DOWN -> {
                             view.isPressed = true
+                            velocityTracker?.clear()
+                            velocityTracker = velocityTracker ?: VelocityTracker.obtain()
+                            velocityTracker?.addMovement(motionEvent)
+
                             longClickJob = coroutineScope.launch {
                                 delay(preferencesRepository.customLongPressTimeout())
                                 view.onClickablePosition(
@@ -158,7 +178,14 @@ class AreaAdapter(
                             }
                             true
                         }
+                        MotionEvent.ACTION_CANCEL -> {
+                            velocityTracker?.recycle()
+                            velocityTracker = null
+                            true
+                        }
                         MotionEvent.ACTION_UP -> {
+                            velocityTracker?.recycle()
+                            velocityTracker = null
                             view.isPressed = false
 
                             longClickJob?.let { job ->
@@ -246,5 +273,6 @@ class AreaAdapter(
 
     companion object {
         val TAG = AreaAdapter::class.simpleName!!
+        private val LIMIT_SPEED_THRESHOLD = 50
     }
 }
