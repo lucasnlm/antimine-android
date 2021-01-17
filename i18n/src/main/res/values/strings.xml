@@ -76,6 +76,7 @@
     <string name="single_click">Single Click</string>
     <string name="double_click">Double Click</string>
     <string name="long_press">Long Press</string>
+    <string name="touch_sensibility">Touch Sensibility</string>
     <string name="open_tile">Open</string>
     <string name="flag_tile">Flag</string>
     <string name="retry">Retry</string>

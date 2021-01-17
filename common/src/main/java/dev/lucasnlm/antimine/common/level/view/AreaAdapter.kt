@@ -146,7 +146,8 @@ class AreaAdapter(
 
                                 val velX = getXVelocity(pointerId).absoluteValue
                                 val velY = getYVelocity(pointerId).absoluteValue
-                                val pow2threshold = LIMIT_SPEED_THRESHOLD * LIMIT_SPEED_THRESHOLD
+                                val touchSensibility = preferencesRepository.touchSensibility()
+                                val pow2threshold = touchSensibility * touchSensibility
 
                                 if ((velX * velX + velY * velY) > pow2threshold) {
                                     longClickJob?.let { job ->
@@ -275,6 +276,5 @@ class AreaAdapter(
 
     companion object {
         val TAG = AreaAdapter::class.simpleName!!
-        private const val LIMIT_SPEED_THRESHOLD = 35
     }
 }

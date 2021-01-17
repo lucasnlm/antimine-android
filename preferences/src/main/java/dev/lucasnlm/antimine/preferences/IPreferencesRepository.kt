@@ -78,5 +78,8 @@ interface IPreferencesRepository {
     fun isSoundEffectsEnabled(): Boolean
     fun setSoundEffectsEnabled(value: Boolean)
 
+    fun touchSensibility(): Int
+    fun setTouchSensibility(sensibility: Int)
+
     fun showWindowsWhenFinishGame(): Boolean
 }

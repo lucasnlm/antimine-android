@@ -45,5 +45,17 @@
             app:seekBarIncrement="5"
             app:showSeekBarValue="true"
             app:iconSpaceReserved="false" />
+
+        <SeekBarPreference
+            android:key="preference_touch_sensibility"
+            android:max="100"
+            android:min="10"
+            android:defaultValue="35"
+            android:title="@string/touch_sensibility"
+            app:adjustable="true"
+            app:min="10"
+            app:seekBarIncrement="1"
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

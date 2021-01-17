@@ -27,6 +27,7 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PREFERENCE_SOUND_EFFECTS, false)
         preferencesManager.putInt(PREFERENCE_SQUARE_RADIUS, 2)
         preferencesManager.putInt(PREFERENCE_AREA_SIZE, 50)
+        preferencesManager.putInt(PREFERENCE_TOUCH_SENSIBILITY, 35)
         preferencesManager.putInt(PREFERENCE_LONG_PRESS_TIMEOUT, ViewConfiguration.getLongPressTimeout())
     }
 
@@ -87,6 +88,13 @@ class PreferencesRepository(
 
     override fun setSoundEffectsEnabled(value: Boolean) {
         preferencesManager.putBoolean(PREFERENCE_SOUND_EFFECTS, value)
+    }
+
+    override fun touchSensibility(): Int =
+        preferencesManager.getInt(PREFERENCE_TOUCH_SENSIBILITY, 35)
+
+    override fun setTouchSensibility(sensibility: Int) {
+        preferencesManager.putInt(PREFERENCE_TOUCH_SENSIBILITY, sensibility)
     }
 
     override fun showWindowsWhenFinishGame(): Boolean =
@@ -285,5 +293,6 @@ class PreferencesRepository(
         private const val PREFERENCE_EXTRA_TIPS = "preference_extra_tips"
         private const val PREFERENCE_SHOW_WINDOWS = "preference_show_windows"
         private const val PREFERENCE_USE_OPEN_SWITCH_CONTROL = "preference_use_open_switch_control"
+        private const val PREFERENCE_TOUCH_SENSIBILITY = "preference_touch_sensibility"
     }
 }
