@@ -183,6 +183,12 @@ class AreaAdapter(
                         MotionEvent.ACTION_CANCEL -> {
                             velocityTracker?.recycle()
                             velocityTracker = null
+
+                            longClickJob?.let { job ->
+                                job.cancel()
+                                longClickJob = null
+                            }
+
                             view.isPressed = false
                             true
                         }
