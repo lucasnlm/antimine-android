@@ -27,7 +27,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         return if (BuildConfig.DEBUG) {
             defaultMap[key] as Boolean
         } else {
-            remoteConfig.getBoolean(HISTORY_ENABLED)
+            remoteConfig.getBoolean(key)
         }
     }
 
