@@ -1,5 +1,6 @@
 package dev.lucasnlm.external
 
+import android.util.Log
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import kotlinx.coroutines.Dispatchers
@@ -66,12 +67,18 @@ class FeatureFlagManager : IFeatureFlagManager() {
     override suspend fun refresh() {
         if (!BuildConfig.DEBUG) {
             withContext(Dispatchers.IO) {
-                Tasks.await(remoteConfig.fetchAndActivate())
+                try {
+                    Tasks.await(remoteConfig.fetchAndActivate())
+                } catch (e: Exception) {
+                    Log.e(TAG, "Fail to fetch flags", e)
+                }
             }
         }
     }
 
     companion object {
+        private val TAG = FeatureFlagManager::class.simpleName
+
         private const val HISTORY_ENABLED = "history_enabled"
         private const val RATE_US_ENABLED = "rate_us_enabled"
         private const val IN_APP_ADS_ENABLED = "in_app_ads_enabled"

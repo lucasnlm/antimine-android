@@ -68,10 +68,14 @@ class SplashActivity : AppCompatActivity() {
     private fun migrateDateAndGoToGameActivity() {
         lifecycleScope.launchWhenCreated {
             if (!isFinishing) {
-                withContext(Dispatchers.IO) {
-                    playGamesManager.playerId()?.let {
-                        splashViewMode.migrateCloudSave(it)
+                try {
+                    withContext(Dispatchers.IO) {
+                        playGamesManager.playerId()?.let {
+                            splashViewMode.migrateCloudSave(it)
+                        }
                     }
+                } catch (e: Exception) {
+                    Log.e(TAG, "Play Games login was canceled", e)
                 }
 
                 goToGameActivity()
