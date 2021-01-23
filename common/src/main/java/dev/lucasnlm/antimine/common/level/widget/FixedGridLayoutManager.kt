@@ -92,15 +92,15 @@ class FixedGridLayoutManager(
     }
 
     override fun computeVerticalScrollRange(state: RecyclerView.State): Int {
-        return if (scrollBarEnabled) totalRowCount * mDecoratedChildHeight else 0
+        return if (scrollBarEnabled && totalRowCount > 0) totalRowCount * mDecoratedChildHeight else 0
     }
 
     override fun computeHorizontalScrollRange(state: RecyclerView.State): Int {
-        return if (scrollBarEnabled) totalColumnCount * mDecoratedChildHeight else 0
+        return if (scrollBarEnabled && totalColumnCount > 0) totalColumnCount * mDecoratedChildHeight else 0
     }
 
     override fun computeVerticalScrollOffset(state: RecyclerView.State): Int {
-        return if (scrollBarEnabled) {
+        return if (scrollBarEnabled && totalRowCount > 0) {
             val max = totalRowCount.toFloat()
             val min = totalRowCount.toFloat() * 0.4
 
@@ -113,7 +113,7 @@ class FixedGridLayoutManager(
     }
 
     override fun computeHorizontalScrollOffset(state: RecyclerView.State): Int {
-        return if (scrollBarEnabled) {
+        return if (scrollBarEnabled && totalColumnCount > 0) {
             val max = totalColumnCount.toFloat()
             val min = totalColumnCount.toFloat() * 0.25
 
@@ -126,11 +126,11 @@ class FixedGridLayoutManager(
     }
 
     override fun computeVerticalScrollExtent(state: RecyclerView.State): Int {
-        return if (scrollBarEnabled) (lastVisibleRow - firstVisibleRow) * mDecoratedChildHeight else 0
+        return if (scrollBarEnabled && totalRowCount > 0) (lastVisibleRow - firstVisibleRow) * mDecoratedChildHeight else 0
     }
 
     override fun computeHorizontalScrollExtent(state: RecyclerView.State): Int {
-        return if (scrollBarEnabled) (lastVisibleColumn - firstVisibleColumn) * mDecoratedChildHeight else 0
+        return if (scrollBarEnabled && totalColumnCount > 0) (lastVisibleColumn - firstVisibleColumn) * mDecoratedChildHeight else 0
     }
 
     /*
