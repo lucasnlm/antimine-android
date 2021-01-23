@@ -91,7 +91,7 @@ class PreferencesRepository(
     }
 
     override fun touchSensibility(): Int =
-        preferencesManager.getInt(PREFERENCE_TOUCH_SENSIBILITY, 35)
+        preferencesManager.getInt(PREFERENCE_TOUCH_SENSIBILITY, 30)
 
     override fun setTouchSensibility(sensibility: Int) {
         preferencesManager.putInt(PREFERENCE_TOUCH_SENSIBILITY, sensibility)
