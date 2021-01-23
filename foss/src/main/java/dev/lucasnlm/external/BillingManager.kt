@@ -23,7 +23,7 @@ class BillingManager(
         activity.startActivity(intent)
     }
 
-    override fun getPrice(): Flow<String> = flowOf()
+    override suspend fun getPrice(): String? = null
 
     override fun listenPurchases(): Flow<PurchaseInfo> = flowOf()
 

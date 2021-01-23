@@ -906,7 +906,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             billingManager.start()
 
             lifecycleScope.launchWhenResumed {
-                billingManager.getPrice().collect { price ->
+                billingManager.getPrice()?.let { price ->
                     if (price.isNotBlank()) {
                         try {
                             navigationView.menu.findItem(R.id.remove_ads).apply {
@@ -991,7 +991,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 if (billingManager.isEnabled()) {
                     SupportAppDialogFragment.newRemoveAdsSupportDialog(
                         applicationContext,
-                        billingManager.getPrice().singleOrNull()
+                        billingManager.getPrice()
                     ).show(supportFragmentManager, SupportAppDialogFragment.TAG)
                 } else {
                     SupportAppDialogFragment.newRequestSupportDialog(applicationContext)

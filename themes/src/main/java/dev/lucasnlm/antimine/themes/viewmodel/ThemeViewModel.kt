@@ -31,9 +31,9 @@ class ThemeViewModel(
                 }
             }.map {
                 if (it is ThemeEvent.ChangeTheme &&
-                    isPaid(it.newTheme) &&
                     billingManager.isEnabled() &&
-                    !preferencesRepository.isPremiumEnabled()
+                    !preferencesRepository.isPremiumEnabled() &&
+                    isPaid(it.newTheme)
                 ) {
                     ThemeEvent.Unlock(it.newTheme.id)
                 } else {
