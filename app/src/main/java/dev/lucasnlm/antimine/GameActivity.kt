@@ -984,7 +984,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun showSupportAppDialog() {
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
-            !instantAppManager.isEnabled(this)
+            !instantAppManager.isEnabled(this) &&
+            !isFinishing
         ) {
             lifecycleScope.launch {
                 if (billingManager.isEnabled()) {
