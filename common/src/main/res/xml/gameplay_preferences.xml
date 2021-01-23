@@ -50,7 +50,7 @@
             android:key="preference_touch_sensibility"
             android:max="100"
             android:min="10"
-            android:defaultValue="35"
+            android:defaultValue="30"
             android:title="@string/touch_sensibility"
             app:adjustable="true"
             app:min="10"
