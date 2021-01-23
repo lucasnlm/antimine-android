@@ -180,7 +180,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                 activity?.let { activity ->
                                     adsView.visibility = View.VISIBLE
                                     val label = context.getString(R.string.remove_ad)
-                                    val price = billingManager.getPrice().singleOrNull()
+                                    val price = billingManager.getPrice()
                                     val unlockLabel = price?.let { "$label - $it" } ?: label
                                     removeAdsButton.apply {
                                         visibility = View.VISIBLE

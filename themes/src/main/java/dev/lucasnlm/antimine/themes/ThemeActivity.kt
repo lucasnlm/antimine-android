@@ -16,9 +16,11 @@ import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import dev.lucasnlm.external.IBillingManager
 import kotlinx.android.synthetic.main.activity_theme.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.singleOrNull
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -91,16 +93,13 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
         }
     }
 
-    private fun showUnlockDialog(themeId: Long) {
+    private suspend fun showUnlockDialog(themeId: Long) {
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
-            lifecycleScope.launch {
-                SupportAppDialogFragment.newChangeThemeDialog(
-                    applicationContext,
-                    themeId,
-                    billingManager.getPrice().singleOrNull()
-                ).apply {
-                    show(supportFragmentManager, SupportAppDialogFragment.TAG)
-                }
+            val price = billingManager.getPrice()
+            withContext(Dispatchers.Main) {
+                SupportAppDialogFragment
+                    .newChangeThemeDialog(applicationContext, themeId, price)
+                    .show(supportFragmentManager, SupportAppDialogFragment.TAG)
             }
         }
     }
