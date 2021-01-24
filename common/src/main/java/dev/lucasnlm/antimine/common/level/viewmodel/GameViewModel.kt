@@ -172,8 +172,9 @@ open class GameViewModel(
         }
     }
 
-    fun increaseErrorTolerance() {
+    suspend fun onContinueFromGameOver() {
         gameController.increaseErrorTolerance()
+        statsRepository.deleteLastStats()
     }
 
     fun isCompletedWithMistakes(): Boolean {
