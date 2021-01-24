@@ -18,7 +18,6 @@ import dev.lucasnlm.external.IBillingManager
 import kotlinx.android.synthetic.main.activity_theme.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.singleOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject

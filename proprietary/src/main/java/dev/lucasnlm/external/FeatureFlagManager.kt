@@ -14,6 +14,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         GAMEPLAY_EVENTS_ENABLED to false,
         GAME_OVER_AD_ENABLED to true,
         SHOW_ADS_ON_CONTINUE_ENABLED to true,
+        SHOW_ADS_ON_NEW_GAME_ENABLED to true,
         CONTINUE_ENABLED to true,
         RECYCLER_SCROLL_ENABLED to true,
     )
@@ -56,6 +57,10 @@ class FeatureFlagManager : IFeatureFlagManager() {
         getBoolean(SHOW_ADS_ON_CONTINUE_ENABLED)
     }
 
+    override val isAdsOnNewGameEnabled: Boolean by lazy {
+        getBoolean(SHOW_ADS_ON_NEW_GAME_ENABLED)
+    }
+
     override val isContinueGameEnabled: Boolean by lazy {
         getBoolean(CONTINUE_ENABLED)
     }
@@ -85,6 +90,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         private const val GAMEPLAY_EVENTS_ENABLED = "gameplay_events_enabled"
         private const val GAME_OVER_AD_ENABLED = "game_over_ad_enabled"
         private const val SHOW_ADS_ON_CONTINUE_ENABLED = "ad_on_continue_enabled"
+        private const val SHOW_ADS_ON_NEW_GAME_ENABLED = "ad_on_new_game_enabled"
         private const val CONTINUE_ENABLED = "continue_enabled"
         private const val RECYCLER_SCROLL_ENABLED = "recycler_scroll_enabled"
     }

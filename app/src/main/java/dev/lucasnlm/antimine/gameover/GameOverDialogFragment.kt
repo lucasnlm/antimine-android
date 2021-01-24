@@ -18,7 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.core.isAndroidTv
+import dev.lucasnlm.antimine.isAndroidTv
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.gameover.model.GameResult

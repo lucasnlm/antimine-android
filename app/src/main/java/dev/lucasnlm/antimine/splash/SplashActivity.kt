@@ -8,7 +8,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.TvGameActivity
-import dev.lucasnlm.antimine.core.isAndroidTv
+import dev.lucasnlm.antimine.isAndroidTv
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IPlayGamesManager
