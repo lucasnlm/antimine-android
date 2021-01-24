@@ -76,7 +76,7 @@
     <string name="single_click">Einzelklick</string>
     <string name="double_click">Doppelklick</string>
     <string name="long_press">Lange Drücken</string>
-    <string name="touch_sensibility">Empfindlichkeit</string>
+    <string name="touch_sensibility">Berührungsempfindlichkeit</string>
     <string name="open_tile">Öffnen</string>
     <string name="flag_tile">Flagge</string>
     <string name="retry">Erneut versuchen</string>
@@ -111,7 +111,7 @@
     <string name="open_menu">Menü öffnen</string>
     <string name="close_menu">Menü schließen</string>
     <string name="delete_all">Alles löschen</string>
-    <string name="appearance">Darstellung</string>
+    <string name="appearance">Erscheinungsbild</string>
     <string name="themes">Themen</string>
     <string name="try_it">Versuche es</string>
     <string name="delete_all_message">Alle Ereignisse dauerhaft löschen.</string>
