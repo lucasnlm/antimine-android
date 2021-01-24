@@ -7,6 +7,7 @@ interface IStatsRepository {
     suspend fun getAllStats(minId: Int): List<Stats>
     suspend fun addAllStats(stats: List<Stats>): Long?
     suspend fun addStats(stats: Stats): Long?
+    suspend fun deleteLastStats()
 }
 
 class StatsRepository(
@@ -23,6 +24,10 @@ class StatsRepository(
     override suspend fun addStats(stats: Stats): Long? {
         return statsDao.insert(stats)
     }
+
+    override suspend fun deleteLastStats() {
+        statsDao.deleteLast()
+    }
 }
 
 class MemoryStatsRepository(
@@ -38,5 +43,11 @@ class MemoryStatsRepository(
     override suspend fun addStats(stats: Stats): Long? {
         memoryStats.add(stats)
         return memoryStats.count().toLong()
+    }
+
+    override suspend fun deleteLastStats() {
+        if (memoryStats.isNotEmpty()) {
+            memoryStats.removeLast()
+        }
     }
 }

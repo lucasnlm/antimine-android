@@ -67,7 +67,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.singleOrNull
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.Exception
@@ -172,7 +171,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             this@GameActivity,
             {
                 lifecycleScope.launch {
-                    gameViewModel.increaseErrorTolerance()
+                    gameViewModel.onContinueFromGameOver()
                     eventObserver.postValue(Event.ResumeGame)
                 }
             }

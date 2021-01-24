@@ -139,7 +139,7 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
             this@TvGameActivity,
             {
                 lifecycleScope.launch {
-                    gameViewModel.increaseErrorTolerance()
+                    gameViewModel.onContinueFromGameOver()
                     eventObserver.postValue(Event.ResumeGame)
                 }
             }
