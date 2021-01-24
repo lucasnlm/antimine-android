@@ -126,11 +126,19 @@ class FixedGridLayoutManager(
     }
 
     override fun computeVerticalScrollExtent(state: RecyclerView.State): Int {
-        return if (scrollBarEnabled && totalRowCount > 0) (lastVisibleRow - firstVisibleRow) * mDecoratedChildHeight else 0
+        return if (scrollBarEnabled && totalRowCount > 0) {
+            (lastVisibleRow - firstVisibleRow) * mDecoratedChildHeight
+        } else {
+            0
+        }
     }
 
     override fun computeHorizontalScrollExtent(state: RecyclerView.State): Int {
-        return if (scrollBarEnabled && totalColumnCount > 0) (lastVisibleColumn - firstVisibleColumn) * mDecoratedChildHeight else 0
+        return if (scrollBarEnabled && totalColumnCount > 0) {
+            (lastVisibleColumn - firstVisibleColumn) * mDecoratedChildHeight
+        } else {
+            0
+        }
     }
 
     /*
