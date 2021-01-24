@@ -85,11 +85,19 @@ sealed class Analytics(
 
     object CloseDrawer : Analytics("Closed Drawer")
 
+    object CloseEndGameScreen : Analytics("Closed End Game Screen")
+
     object OpenAbout : Analytics("Open About")
 
     object OpenStats : Analytics("Open Stats")
 
     object OpenThemes : Analytics("Open Themes")
+
+    object ShareGame : Analytics("Share Game")
+
+    object ClickEmoji : Analytics("Click Emoji")
+
+    object ContinueGame : Analytics("Continue Game")
 
     object TutorialStarted : Analytics("Tutorial Started")
 
@@ -112,6 +120,8 @@ sealed class Analytics(
     object DenyIapDialog : Analytics("IAP Dialog Deny")
 
     object UnlockIapDialog : Analytics("IAP Dialog Unlock")
+
+    object RemoveAds : Analytics("Remove Ads")
 
     object TapRatingRequest : Analytics("Rating Request")
 
