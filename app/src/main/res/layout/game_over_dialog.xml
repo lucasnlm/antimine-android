@@ -50,22 +50,6 @@
         app:layout_constraintTop_toBottomOf="@+id/title"
         tools:text="You did 5/12 in 34 seconds." />
 
-    <TextView
-        android:id="@+id/received_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/you_have_received"
-        android:layout_marginVertical="8dp"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:visibility="gone"
-        app:drawableEndCompat="@drawable/tip"
-        app:drawableTint="@color/accent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle"
-        tools:visibility="visible"/>
-
     <ImageView
         android:id="@+id/close"
         android:importantForAccessibility="no"
@@ -99,7 +83,7 @@
         android:minHeight="50dp"
         tools:visibility="visible"
         tools:background="@color/accent"
-        app:layout_constraintTop_toBottomOf="@+id/received_message"
+        app:layout_constraintTop_toBottomOf="@+id/subtitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/actions"/>
@@ -131,16 +115,6 @@
             android:text="@string/continue_game"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:id="@+id/share"
-            android:textAllCaps="true"
-            android:text="@string/share"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            tools:visibility="visible"/>
 
         <androidx.appcompat.widget.AppCompatButton
             style="@style/Widget.AppCompat.Button.Borderless.Colored"

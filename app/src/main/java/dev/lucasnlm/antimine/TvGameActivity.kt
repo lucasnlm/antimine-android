@@ -28,7 +28,8 @@ import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.gameover.EndGameDialogFragment
+import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
+import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
@@ -314,18 +315,33 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
         val currentGameStatus = status
         if (currentGameStatus is Status.Over && !isFinishing) {
             if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
-                supportFragmentManager.findFragmentByTag(EndGameDialogFragment.TAG) == null
+                supportFragmentManager.findFragmentByTag(GameOverDialogFragment.TAG) == null &&
+                supportFragmentManager.findFragmentByTag(WinGameDialogFragment.TAG) == null
             ) {
                 val score = currentGameStatus.score
-                EndGameDialogFragment.newInstance(
-                    gameResult,
-                    canContinue,
-                    score?.rightMines ?: 0,
-                    score?.totalMines ?: 0,
-                    currentGameStatus.time,
-                    if (gameResult == GameResult.Victory) 2 else 1
-                ).apply {
-                    showAllowingStateLoss(supportFragmentManager, EndGameDialogFragment.TAG)
+
+                if (gameResult == GameResult.Victory) {
+                    WinGameDialogFragment.newInstance(
+                        gameResult,
+                        canContinue,
+                        score?.rightMines ?: 0,
+                        score?.totalMines ?: 0,
+                        currentGameStatus.time,
+                        2
+                    ).apply {
+                        showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
+                    }
+                } else {
+                    GameOverDialogFragment.newInstance(
+                        gameResult,
+                        canContinue,
+                        score?.rightMines ?: 0,
+                        score?.totalMines ?: 0,
+                        currentGameStatus.time,
+                        1
+                    ).apply {
+                        showAllowingStateLoss(supportFragmentManager, GameOverDialogFragment.TAG)
+                    }
                 }
             }
         }

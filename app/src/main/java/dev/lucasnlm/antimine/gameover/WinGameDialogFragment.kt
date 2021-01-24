@@ -19,14 +19,17 @@ import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.isAndroidTv
+import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
 import dev.lucasnlm.antimine.level.view.NewGameFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
+import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.external.Ads
 import dev.lucasnlm.external.IAdsManager
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
@@ -37,7 +40,8 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class EndGameDialogFragment : AppCompatDialogFragment() {
+class WinGameDialogFragment : AppCompatDialogFragment() {
+    private val analyticsManager: IAnalyticsManager by inject()
     private val adsManager: IAdsManager by inject()
     private val instantAppManager: IInstantAppManager by inject()
     private val endGameViewModel by viewModel<EndGameDialogViewModel>()
@@ -80,17 +84,16 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
         AlertDialog.Builder(requireContext()).apply {
             val view = LayoutInflater
                 .from(context)
-                .inflate(R.layout.dialog_end_game, null, false)
+                .inflate(R.layout.win_dialog, null, false)
                 .apply {
                     lifecycleScope.launchWhenCreated {
                         endGameViewModel.observeState().collect { state ->
                             val adsView: AdPlaceHolderView = findViewById(R.id.ads)
-                            val shareButton: AppCompatButton = findViewById(R.id.share)
+                            val shareButton: View = findViewById(R.id.share)
+                            val statsButton: AppCompatButton = findViewById(R.id.stats)
                             val newGameButton: AppCompatButton = findViewById(R.id.new_game)
-                            val continueButton: AppCompatButton = findViewById(R.id.continue_game)
                             val removeAdsButton: AppCompatButton = findViewById(R.id.remove_ads)
                             val settingsButton: View = findViewById(R.id.settings)
-                            val closeButton: View = findViewById(R.id.close)
                             val receivedMessage: TextView = findViewById(R.id.received_message)
                             val title: TextView = findViewById(R.id.title)
                             val subtitle: TextView = findViewById(R.id.subtitle)
@@ -100,6 +103,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             subtitle.text = state.message
 
                             emoji.apply {
+                                analyticsManager.sentEvent(Analytics.ClickEmoji)
                                 setImageResource(state.titleEmoji)
                                 setOnClickListener {
                                     endGameViewModel.sendEvent(
@@ -109,7 +113,15 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                             }
 
                             shareButton.setOnClickListener {
+                                analyticsManager.sentEvent(Analytics.ShareGame)
                                 gameViewModel.shareObserver.postValue(Unit)
+                            }
+
+                            statsButton.setOnClickListener {
+                                analyticsManager.sentEvent(Analytics.OpenStats)
+                                Intent(context, StatsActivity::class.java).apply {
+                                    startActivity(this)
+                                }
                             }
 
                             newGameButton.setOnClickListener {
@@ -121,56 +133,17 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                 dismissAllowingStateLoss()
                             }
 
-                            continueButton.setOnClickListener {
-                                if (featureFlagManager.isAdsOnContinueEnabled &&
-                                    !preferencesRepository.isPremiumEnabled()
-                                ) {
-                                    showAdsAndContinue()
-                                } else {
-                                    gameViewModel.continueObserver.postValue(Unit)
-                                    dismissAllowingStateLoss()
-                                }
-                            }
-
                             settingsButton.setOnClickListener {
+                                analyticsManager.sentEvent(Analytics.OpenSettings)
                                 showSettings()
-                            }
-
-                            closeButton.setOnClickListener {
-                                activity?.let {
-                                    if (!it.isFinishing) {
-                                        gameViewModel.viewModelScope.launch {
-                                            gameViewModel.revealMines()
-                                        }
-                                    }
-                                }
-
-                                dismissAllowingStateLoss()
                             }
 
                             if (state.gameResult == GameResult.Victory || state.gameResult == GameResult.Completed) {
                                 if (!instantAppManager.isEnabled(context)) {
                                     shareButton.visibility = View.GONE
                                 }
-
+                                statsButton.visibility = View.VISIBLE
                                 shareButton.visibility = View.VISIBLE
-                                continueButton.visibility = View.GONE
-                            } else {
-                                shareButton.visibility = View.GONE
-
-                                if (state.showContinueButton && featureFlagManager.isContinueGameEnabled) {
-                                    continueButton.visibility = View.VISIBLE
-                                    if (!preferencesRepository.isPremiumEnabled() &&
-                                        featureFlagManager.isAdsOnContinueEnabled
-                                    ) {
-                                        continueButton.compoundDrawablePadding = 0
-                                        continueButton.setCompoundDrawablesWithIntrinsicBounds(
-                                            R.drawable.watch_ads_icon, 0, 0, 0
-                                        )
-                                    }
-                                } else {
-                                    continueButton.visibility = View.GONE
-                                }
                             }
 
                             if (!preferencesRepository.isPremiumEnabled() &&
@@ -183,6 +156,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                     val price = billingManager.getPrice()
                                     val unlockLabel = price?.let { "$label - $it" } ?: label
                                     removeAdsButton.apply {
+                                        analyticsManager.sentEvent(Analytics.RemoveAds)
                                         visibility = View.VISIBLE
                                         text = unlockLabel
                                         setOnClickListener {
@@ -265,7 +239,7 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
             totalMines: Int,
             time: Long,
             received: Int,
-        ) = EndGameDialogFragment().apply {
+        ) = WinGameDialogFragment().apply {
             arguments = Bundle().apply {
                 putInt(DIALOG_GAME_RESULT, gameResult.ordinal)
                 putBoolean(DIALOG_SHOW_CONTINUE, showContinueButton)
@@ -283,6 +257,6 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
         private const val DIALOG_TOTAL_MINES = "dialog_total_mines"
         private const val DIALOG_RECEIVED = "dialog_received"
 
-        val TAG = EndGameDialogFragment::class.simpleName!!
+        val TAG = WinGameDialogFragment::class.simpleName!!
     }
 }
