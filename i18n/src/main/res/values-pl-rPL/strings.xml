@@ -76,7 +76,7 @@
     <string name="single_click">Pojedyncze kliknięcie</string>
     <string name="double_click">Podwójne kliknięcie</string>
     <string name="long_press">Długie naciśnięcie</string>
-    <string name="touch_sensibility">Czułość ekranu dotyku</string>
+    <string name="touch_sensibility">Czułość dotyku</string>
     <string name="open_tile">Odkryj</string>
     <string name="flag_tile">Oznacz</string>
     <string name="retry">Jeszcze raz</string>
