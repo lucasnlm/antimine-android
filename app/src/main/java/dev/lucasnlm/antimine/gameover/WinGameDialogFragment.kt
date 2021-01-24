@@ -18,7 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.core.isAndroidTv
+import dev.lucasnlm.antimine.isAndroidTv
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.gameover.model.GameResult
@@ -125,12 +125,27 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             }
 
                             newGameButton.setOnClickListener {
-                                if (context.isAndroidTv()) {
-                                    NewGameFragment().show(parentFragmentManager, NewGameFragment.TAG)
+                                if (featureFlagManager.isAdsOnContinueEnabled &&
+                                    !preferencesRepository.isPremiumEnabled()
+                                ) {
+                                    showAdsAndNewGame()
                                 } else {
-                                    gameViewModel.startNewGame()
+                                    if (context.isAndroidTv()) {
+                                        NewGameFragment().show(parentFragmentManager, NewGameFragment.TAG)
+                                    } else {
+                                        gameViewModel.startNewGame()
+                                    }
+                                    dismissAllowingStateLoss()
                                 }
-                                dismissAllowingStateLoss()
+                            }
+
+                            if (!preferencesRepository.isPremiumEnabled() &&
+                                featureFlagManager.isAdsOnContinueEnabled
+                            ) {
+                                newGameButton.compoundDrawablePadding = 0
+                                newGameButton.setCompoundDrawablesWithIntrinsicBounds(
+                                    R.drawable.watch_ads_icon, 0, 0, 0
+                                )
                             }
 
                             settingsButton.setOnClickListener {
@@ -209,14 +224,18 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
         startActivity(Intent(requireContext(), PreferencesActivity::class.java))
     }
 
-    private fun showAdsAndContinue() {
+    private fun showAdsAndNewGame() {
         activity?.let {
             if (!it.isFinishing) {
                 adsManager.requestRewarded(
                     it,
                     Ads.RewardsAds,
                     onRewarded = {
-                        gameViewModel.continueObserver.postValue(Unit)
+                        if (it.isAndroidTv()) {
+                            NewGameFragment().show(parentFragmentManager, NewGameFragment.TAG)
+                        } else {
+                            gameViewModel.startNewGame()
+                        }
                         dismissAllowingStateLoss()
                     },
                     onFail = {
