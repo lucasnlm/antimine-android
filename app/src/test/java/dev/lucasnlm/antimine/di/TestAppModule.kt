@@ -32,7 +32,7 @@ val AppModule = module {
 
             override suspend fun charge(activity: Activity) { }
 
-            override fun getPrice(): Flow<String> = flowOf()
+            override suspend fun getPrice(): String? = null
 
             override fun listenPurchases(): Flow<PurchaseInfo> = flowOf()
         }
