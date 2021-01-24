@@ -32,7 +32,6 @@ import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.view.AdPlaceHolderView
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.singleOrNull
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -149,10 +148,11 @@ class EndGameDialogFragment : AppCompatDialogFragment() {
                                 dismissAllowingStateLoss()
                             }
 
-                            if (state.gameResult == GameResult.Victory) {
+                            if (state.gameResult == GameResult.Victory || state.gameResult == GameResult.Completed) {
                                 if (!instantAppManager.isEnabled(context)) {
                                     shareButton.visibility = View.GONE
                                 }
+
                                 shareButton.visibility = View.VISIBLE
                                 continueButton.visibility = View.GONE
                             } else {
