@@ -44,11 +44,11 @@ dependencies {
     implementation 'com.google.android.gms:play-services-instantapps:17.0.0'
     implementation 'com.google.android.gms:play-services-games:21.0.0'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
-    implementation 'com.google.android.gms:play-services-ads:19.6.0'
+    implementation 'com.google.android.gms:play-services-ads:19.7.0'
     implementation 'com.google.android.play:core-ktx:1.8.1'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-analytics-ktx:18.0.0'
+    implementation 'com.google.firebase:firebase-analytics-ktx:18.0.1'
     implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:22.0.1'
     implementation 'com.google.firebase:firebase-config-ktx:20.0.2'
