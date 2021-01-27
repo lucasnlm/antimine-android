@@ -22,16 +22,19 @@ class AdsManager(
 
     private fun preloadAds(context: Context) {
         val adRequest = AdRequest.Builder().build()
-        RewardedAd.load(context, Ads.RewardsAds, adRequest, object : RewardedAdLoadCallback() {
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                failErrorCause = adError.message
-                rewardedAd = null
-            }
+        RewardedAd.load(
+            context, Ads.RewardsAds, adRequest,
+            object : RewardedAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    failErrorCause = adError.message
+                    rewardedAd = null
+                }
 
-            override fun onAdLoaded(result: RewardedAd) {
-                rewardedAd = result
+                override fun onAdLoaded(result: RewardedAd) {
+                    rewardedAd = result
+                }
             }
-        })
+        )
     }
 
     override fun requestRewardedAd(
