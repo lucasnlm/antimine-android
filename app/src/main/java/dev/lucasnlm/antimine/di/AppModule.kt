@@ -33,8 +33,6 @@ val AppModule = module {
 
     single { BillingManager(get()) } bind IBillingManager::class
 
-    single { AdsManager(get()) } bind IAdsManager::class
-
     single { PlayGamesManager(get()) } bind IPlayGamesManager::class
 
     single { ReviewWrapper() } bind IReviewWrapper::class
@@ -60,4 +58,6 @@ val AppModule = module {
     single {
         CrashReporter()
     } bind ICrashReporter::class
+
+    single { AdsManager(get()) } bind IAdsManager::class
 }
