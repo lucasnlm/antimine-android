@@ -2,80 +2,55 @@ package dev.lucasnlm.external
 
 import android.app.Activity
 import android.content.Context
-import androidx.annotation.NonNull
-import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.gms.ads.rewarded.RewardedAd
-import com.google.android.gms.ads.rewarded.RewardedAdCallback
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 
-class AdsManager : IAdsManager {
-    private var unlockTheme: RewardedAd? = null
-    private val rewardedAdId = Ads.RewardsAds
+class AdsManager(
+    private val crashReporter: ICrashReporter,
+) : IAdsManager {
+    private var rewardedAd: RewardedAd? = null
+    private var failErrorCause: String? = null
 
     override fun start(context: Context) {
         MobileAds.initialize(context) {
-            unlockTheme = loadRewardedAd(context)
+            preloadAds(context)
         }
     }
 
-    private fun loadRewardedAd(context: Context): RewardedAd {
-        return RewardedAd(context, rewardedAdId).apply {
-            val adLoadCallback = object : RewardedAdLoadCallback() {
-                override fun onRewardedAdLoaded() {
-                    // Loaded
-                }
-
-                override fun onRewardedAdFailedToLoad(adError: LoadAdError) {
-                    // Ad failed to load.
-                }
+    private fun preloadAds(context: Context) {
+        val adRequest = AdRequest.Builder().build()
+        RewardedAd.load(context, Ads.RewardsAds, adRequest, object : RewardedAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                failErrorCause = adError.message
+                rewardedAd = null
             }
 
-            loadAd(AdRequest.Builder().build(), adLoadCallback)
-        }
+            override fun onAdLoaded(result: RewardedAd) {
+                rewardedAd = result
+            }
+        })
     }
 
-    override fun isReady(): Boolean {
-        return unlockTheme != null
-    }
-
-    override fun requestRewarded(
+    override fun requestRewardedAd(
         activity: Activity,
-        adUnitId: String,
         onRewarded: (() -> Unit)?,
         onFail: (() -> Unit)?
     ) {
-        if (isReady()) {
-            val context = activity.applicationContext
-
-            unlockTheme?.let {
-                val adCallback = object : RewardedAdCallback() {
-                    override fun onRewardedAdOpened() {
-                        // Ad opened
-                    }
-
-                    override fun onRewardedAdClosed() {
-                        // Ad closed
-                    }
-
-                    override fun onUserEarnedReward(@NonNull reward: RewardItem) {
-                        onRewarded?.invoke()
-                    }
-
-                    override fun onRewardedAdFailedToShow(adError: AdError) {
-                        onFail?.invoke()
-                    }
-                }
-
-                unlockTheme = loadRewardedAd(context)
-
+        val rewardedAd = this.rewardedAd
+        if (rewardedAd != null) {
+            rewardedAd.show(activity) {
                 if (!activity.isFinishing) {
-                    it.show(activity, adCallback)
+                    onRewarded?.invoke()
+                    preloadAds(activity)
                 }
             }
+        } else {
+            val message = failErrorCause?.let { "Fail to load Ad\n$it" } ?: "Fail to load Ad"
+            crashReporter.sendError(message)
+            onFail?.invoke()
         }
     }
 }

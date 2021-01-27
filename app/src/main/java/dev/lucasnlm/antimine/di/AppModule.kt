@@ -11,11 +11,13 @@ import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.external.AdsManager
 import dev.lucasnlm.external.BillingManager
 import dev.lucasnlm.external.CloudStorageManager
+import dev.lucasnlm.external.CrashReporter
 import dev.lucasnlm.external.FeatureFlagManager
 import dev.lucasnlm.external.ExternalAnalyticsWrapper
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.ICloudStorageManager
+import dev.lucasnlm.external.ICrashReporter
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
@@ -31,7 +33,7 @@ val AppModule = module {
 
     single { BillingManager(get()) } bind IBillingManager::class
 
-    single { AdsManager() } bind IAdsManager::class
+    single { AdsManager(get()) } bind IAdsManager::class
 
     single { PlayGamesManager(get()) } bind IPlayGamesManager::class
 
@@ -54,4 +56,8 @@ val AppModule = module {
             ProdAnalyticsManager(ExternalAnalyticsWrapper(get()))
         }
     } bind IAnalyticsManager::class
+
+    single {
+        CrashReporter()
+    } bind ICrashReporter::class
 }

@@ -35,6 +35,8 @@ open class MainApplication : MultiDexApplication() {
             preferencesRepository.setPremiumFeatures(true)
         }
 
-        adsManager.start(applicationContext)
+        if (!preferencesRepository.isPremiumEnabled()) {
+            adsManager.start(applicationContext)
+        }
     }
 }

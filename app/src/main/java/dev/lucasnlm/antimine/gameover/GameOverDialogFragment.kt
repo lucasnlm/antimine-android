@@ -18,15 +18,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.isAndroidTv
 import dev.lucasnlm.antimine.core.models.Analytics
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
+import dev.lucasnlm.antimine.isAndroidTv
 import dev.lucasnlm.antimine.level.view.NewGameFragment
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
-import dev.lucasnlm.external.Ads
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
@@ -214,22 +213,22 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
         startActivity(Intent(requireContext(), PreferencesActivity::class.java))
     }
 
+    private fun continueGame() {
+        gameViewModel.continueObserver.postValue(Unit)
+        dismissAllowingStateLoss()
+    }
+
+
     private fun showAdsAndContinue() {
-        activity?.let {
-            if (!it.isFinishing) {
-                adsManager.requestRewarded(
-                    it,
-                    Ads.RewardsAds,
+        activity?.let { activity ->
+            if (!activity.isFinishing) {
+                adsManager.requestRewardedAd(
+                    activity,
                     onRewarded = {
-                        gameViewModel.continueObserver.postValue(Unit)
-                        dismissAllowingStateLoss()
+                        continueGame()
                     },
                     onFail = {
-                        Toast.makeText(
-                            it.applicationContext,
-                            R.string.unknown_error,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        continueGame()
                     }
                 )
             }
