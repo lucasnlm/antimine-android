@@ -6,11 +6,8 @@ import android.content.Context
 class AdsManager : IAdsManager {
     override fun start(context: Context) { }
 
-    override fun isReady(): Boolean = false
-
-    override fun requestRewarded(
+    override fun requestRewardedAd(
         activity: Activity,
-        adUnitId: String,
         onRewarded: (() -> Unit)?,
         onFail: (() -> Unit)?
     ) {}

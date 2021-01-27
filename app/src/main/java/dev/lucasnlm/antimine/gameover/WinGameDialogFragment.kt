@@ -27,7 +27,6 @@ import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
 import dev.lucasnlm.antimine.level.view.NewGameFragment
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.stats.StatsActivity
-import dev.lucasnlm.external.Ads
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
@@ -224,26 +223,27 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
         startActivity(Intent(requireContext(), PreferencesActivity::class.java))
     }
 
+    private fun startNewGameAndDismiss() {
+        activity?.let { activity ->
+            if (activity.isAndroidTv()) {
+                NewGameFragment().show(parentFragmentManager, NewGameFragment.TAG)
+            } else {
+                gameViewModel.startNewGame()
+            }
+            dismissAllowingStateLoss()
+        }
+    }
+
     private fun showAdsAndNewGame() {
-        activity?.let {
-            if (!it.isFinishing) {
-                adsManager.requestRewarded(
-                    it,
-                    Ads.RewardsAds,
+        activity?.let { activity ->
+            if (!activity.isFinishing) {
+                adsManager.requestRewardedAd(
+                    activity,
                     onRewarded = {
-                        if (it.isAndroidTv()) {
-                            NewGameFragment().show(parentFragmentManager, NewGameFragment.TAG)
-                        } else {
-                            gameViewModel.startNewGame()
-                        }
-                        dismissAllowingStateLoss()
+                        startNewGameAndDismiss()
                     },
                     onFail = {
-                        Toast.makeText(
-                            it.applicationContext,
-                            R.string.unknown_error,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        startNewGameAndDismiss()
                     }
                 )
             }

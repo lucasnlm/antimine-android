@@ -14,7 +14,6 @@ import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.external.Ads
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
@@ -64,18 +63,19 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
             if (isInstantMode) {
                 val unlockMessage = context.getString(R.string.try_it)
                 setNeutralButton("$unlockMessage \uD83C\uDF9E️") { _, _ ->
-                    activity?.let {
-                        if (!it.isFinishing) {
-                            adsManager.requestRewarded(
-                                it,
-                                Ads.RewardsAds,
+                    activity?.let { activity ->
+                        if (!activity.isFinishing) {
+                            adsManager.requestRewardedAd(
+                                activity,
                                 onRewarded = {
                                     preferenceRepository.useTheme(targetThemeId)
                                     recreateActivity()
                                 },
                                 onFail = {
-                                    Toast.makeText(it.applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT)
-                                        .show()
+                                    Toast.makeText(
+                                        activity.applicationContext,
+                                        R.string.unknown_error, Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                             )
                         }
@@ -93,18 +93,17 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
                 if (targetThemeId != -1L) {
                     val unlockMessage = context.getString(R.string.try_it)
                     setNeutralButton("$unlockMessage \uD83C\uDF9E️") { _, _ ->
-                        activity?.let {
-                            if (!it.isFinishing) {
-                                adsManager.requestRewarded(
-                                    it,
-                                    Ads.RewardsAds,
+                        activity?.let { activity ->
+                            if (!activity.isFinishing) {
+                                adsManager.requestRewardedAd(
+                                    activity,
                                     onRewarded = {
                                         preferenceRepository.useTheme(targetThemeId)
                                         recreateActivity()
                                     },
                                     onFail = {
                                         Toast.makeText(
-                                            it.applicationContext,
+                                            activity.applicationContext,
                                             R.string.unknown_error,
                                             Toast.LENGTH_SHORT
                                         ).show()
