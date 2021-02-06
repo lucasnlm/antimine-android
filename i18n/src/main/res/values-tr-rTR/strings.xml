@@ -128,6 +128,7 @@
     <string name="remove_ad">Reklamları kaldır</string>
     <string name="help">Yardım</string>
     <string name="show_windows">Pencereleri göster</string>
+    <string name="select_language">Dil Seç</string>
     <string name="switch_control">Değiştir: Bayrak ve Açık</string>
     <string name="switch_control_desc">Bayrak ile Açık arasında geçiş yapmak için butonu kullanınız</string>
     <string name="app_description">Hiçbirini patlatmadan gizli mayın içeren dikdörtgen bir tahtayı temizlemelisiniz.</string>

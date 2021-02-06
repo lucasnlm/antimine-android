@@ -14,6 +14,7 @@ import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.models.Analytics
+import dev.lucasnlm.antimine.language.LanguageSelectorActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
@@ -54,6 +55,7 @@ class PreferencesActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
+        setTitle(R.string.settings)
 
         PreferenceManager.getDefaultSharedPreferences(this)
             .registerOnSharedPreferenceChangeListener(this)
@@ -147,6 +149,14 @@ class PreferencesActivity :
                 }
                 true
             }
+
+            findPreference<Preference>(SELECT_LANGUAGE)?.setOnPreferenceClickListener {
+                analyticsManager.sentEvent(Analytics.OpenSelectLanguage)
+                Intent(context, LanguageSelectorActivity::class.java).apply {
+                    startActivity(this)
+                }
+                true
+            }
         }
 
         companion object {
@@ -154,6 +164,7 @@ class PreferencesActivity :
 
             private const val TARGET_PREFS = "target_prefs"
             private const val SELECT_THEME_PREFS = "preference_select_key"
+            private const val SELECT_LANGUAGE = "preference_select_language"
 
             fun newInstance(targetPreferences: Int): PrefsFragment {
                 val args = Bundle().apply {

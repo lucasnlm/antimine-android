@@ -81,5 +81,8 @@ interface IPreferencesRepository {
     fun touchSensibility(): Int
     fun setTouchSensibility(sensibility: Int)
 
+    fun setPreferredLocale(locale: String)
+    fun getPreferredLocale(): String?
+
     fun showWindowsWhenFinishGame(): Boolean
 }

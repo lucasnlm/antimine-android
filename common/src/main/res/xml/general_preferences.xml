@@ -33,4 +33,15 @@
             android:title="@string/show_windows"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/translation"
+        app:iconSpaceReserved="false">
+
+        <Preference
+            android:key="preference_select_language"
+            android:title="@string/select_language"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
 </PreferenceScreen>

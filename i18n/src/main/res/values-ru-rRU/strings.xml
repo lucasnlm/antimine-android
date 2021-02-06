@@ -128,6 +128,7 @@
     <string name="remove_ad">Удалить рекламу</string>
     <string name="help">Помощь</string>
     <string name="show_windows">Показать окна</string>
+    <string name="select_language">Выберите язык</string>
     <string name="switch_control">Переключатель: флаг и открыть</string>
     <string name="switch_control_desc">Используйте кнопку, чтобы переключиться между установкой флага и открытием</string>
     <string name="app_description">Вам необходимо расчистить прямоугольную площадь со спрятанными минами, не взорвав ни одну из них.</string>

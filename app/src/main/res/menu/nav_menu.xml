@@ -104,12 +104,6 @@
             tools:visible="true" />
 
         <item
-            android:id="@+id/rate"
-            android:icon="@drawable/hearth"
-            android:checkable="false"
-            android:title="@string/rating" />
-
-        <item
             android:id="@+id/translation"
             android:icon="@drawable/translate"
             android:checkable="false"

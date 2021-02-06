@@ -128,6 +128,7 @@
     <string name="remove_ad">Премахване на реклами</string>
     <string name="help">Помощ</string>
     <string name="show_windows">Показване на всички прозорци</string>
+    <string name="select_language">Избери език</string>
     <string name="switch_control">Промени: Флаг и Отворен</string>
     <string name="switch_control_desc">Използвай бутонът за да превключиш между Флаг и Отворен</string>
     <string name="app_description">Вие трябва да изчистите квадратна дъска която има скрити мини без да взривите нито една от тях.</string>

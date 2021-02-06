@@ -128,6 +128,7 @@
     <string name="remove_ad">إزالة الإعلانات</string>
     <string name="help">مساعدة</string>
     <string name="show_windows">إظهار النوافذ</string>
+    <string name="select_language">اختر الللغة</string>
     <string name="switch_control">التبديل: العلم وفتح</string>
     <string name="switch_control_desc">استخدم الزر للتبديل بين العلم وفتح</string>
     <string name="app_description">يجب عليك مسح لوحة مستطيلة تحتوي على ألغام مخفية دون تفجير أي منها.</string>

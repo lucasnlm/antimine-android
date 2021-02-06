@@ -128,6 +128,7 @@
     <string name="remove_ad">הסרת פרסומות</string>
     <string name="help">עזרה</string>
     <string name="show_windows">Show windows</string>
+    <string name="select_language">בחר שפה</string>
     <string name="switch_control">Switch: Flag and Open</string>
     <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">צריך לנקות את הלוח הריבועי המכיל מוקשים נסתרים מבלי לפוצץ אף אחד מהם.</string>

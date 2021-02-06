@@ -43,6 +43,7 @@ class SplashViewModel(
             setCustomLongPressTimeout(cloudSave.touchTiming.toLong())
             setQuestionMark(cloudSave.questionMark != 0)
             setNoGuessingAlgorithm(cloudSave.noGuessing != 0)
+            setPreferredLocale(cloudSave.language)
             setFlagAssistant(gameAssistance != 0)
             setHapticFeedback(hapticFeedback != 0)
             setHelp(help != 0)
