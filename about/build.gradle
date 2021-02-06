@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 807051
-        versionName '8.7.5'
+        versionCode 808001
+        versionName '8.8.0'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
