@@ -113,6 +113,8 @@ sealed class Analytics(
 
     object OpenSettings : Analytics("Open Settings")
 
+    object OpenSelectLanguage : Analytics("Open Languages")
+
     object OpenSaveHistory : Analytics("Open Save History")
 
     object ShowIapDialog : Analytics("Shown IAP Dialog")
@@ -122,8 +124,6 @@ sealed class Analytics(
     object UnlockIapDialog : Analytics("IAP Dialog Unlock")
 
     object RemoveAds : Analytics("Remove Ads")
-
-    object TapRatingRequest : Analytics("Rating Request")
 
     object UseTip : Analytics("Use Tip")
 

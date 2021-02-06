@@ -128,6 +128,7 @@
     <string name="remove_ad">Remover Anúncios</string>
     <string name="help">Ajuda</string>
     <string name="show_windows">Mostrar janelas</string>
+    <string name="select_language">Selecionar idioma</string>
     <string name="switch_control">Alternador: sinalizar e abrir</string>
     <string name="switch_control_desc">Use o botão para alternar entre a Bandeira e Abrir</string>
     <string name="app_description">Você deve limpar um campo contendo minas escondidas sem detonar nenhuma delas.</string>

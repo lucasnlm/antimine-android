@@ -128,6 +128,7 @@
     <string name="remove_ad">Supprimer les publicités</string>
     <string name="help">Aide</string>
     <string name="show_windows">Afficher les fenêtres</string>
+    <string name="select_language">Sélectionner la langue</string>
     <string name="switch_control">Commutateur : Drapeau et Ouvrir</string>
     <string name="switch_control_desc">Utiliser le bouton pour basculer entre Drapeau et Ouvrir</string>
     <string name="app_description">Vous devez vider un tableau rectangulaire contenant des mines cachées sans en détonner.</string>

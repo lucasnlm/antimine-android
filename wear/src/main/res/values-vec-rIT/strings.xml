@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_game">Nova Partìa</string>
+    <string name="victory">Te ghè vinto!&#xA0;😎</string>
+    <string name="game_over">Sciopà!&#xA0;😢</string>
+</resources>

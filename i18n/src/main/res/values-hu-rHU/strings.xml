@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="hu">
-    <string name="tutorial">Tutorial</string>
-    <string name="tutorial_completed">Tutorial Completed</string>
+    <string name="tutorial">Ismertető</string>
+    <string name="tutorial_completed">Oktatás befejezve</string>
     <string name="tutorial_0_bottom">You can start by %1$s at any random square.</string>
     <string name="tutorial_1_top">The numbers indicates how many mines are adjacent to the highlighted square.</string>
     <string name="tutorial_1_bottom">Therefore, if the corner with 1 has only one adjacent square, it must be a mine. %1$s to flag it.</string>
@@ -90,9 +90,9 @@
     <string name="cancel">Mégse</string>
     <string name="resume">Folytatás</string>
     <string name="yes">Igen</string>
-    <string name="unlock">Zárolás feloldása</string>
-    <string name="unlock_all">Mind Feloldása</string>
-    <string name="achievements">Trófeák</string>
+    <string name="unlock">Feloldás</string>
+    <string name="unlock_all">Összes feloldása</string>
+    <string name="achievements">Teljesítmények</string>
     <string name="no">Nem</string>
     <string name="general">Általános</string>
     <string name="source_code">Forráskód</string>
@@ -127,7 +127,8 @@
     <string name="flag_removed">Zászló eltávolítva!</string>
     <string name="remove_ad">Reklámok eltávolítása</string>
     <string name="help">Segítség</string>
-    <string name="show_windows">Show windows</string>
+    <string name="show_windows">Ablakok megjelenítése</string>
+    <string name="select_language">Válassz nyelvet</string>
     <string name="switch_control">Kapcsoló: Jelölés és megnyitás</string>
     <string name="switch_control_desc">A gombbal válthat a Flag és a Open között</string>
     <string name="app_description">Meg kell tisztítanod egy rejtett aknákkal teli, négyszögletes pályát anélkül, hogy akár egyet is felrobbantanál.</string>

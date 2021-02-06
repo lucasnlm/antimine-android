@@ -465,7 +465,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 R.id.control -> showControlDialog()
                 R.id.about -> showAbout()
                 R.id.settings -> showSettings()
-                R.id.rate -> openRateUsLink()
                 R.id.themes -> openThemes()
                 R.id.share_now -> shareCurrentGame()
                 R.id.previous_games -> openSaveHistory()
@@ -489,7 +488,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             findItem(R.id.share_now).isVisible = isNotInstant
             findItem(R.id.remove_ads).isVisible = !preferencesRepository.isPremiumEnabled() && isNotInstant
             findItem(R.id.previous_games).isVisible = featureFlagManager.isGameHistoryEnabled
-            findItem(R.id.rate).isVisible = featureFlagManager.isRateUsEnabled
 
             if (!playGamesManager.hasGooglePlayGames()) {
                 removeGroup(R.id.play_games_group)
@@ -864,12 +862,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         lifecycleScope.launch {
             shareViewModel.shareField(levelSetup, field)
         }
-    }
-
-    private fun openRateUsLink() {
-        reviewWrapper.startReviewPage(this, BuildConfig.VERSION_NAME)
-        analyticsManager.sentEvent(Analytics.TapRatingRequest)
-        preferencesRepository.disableRequestRating()
     }
 
     private fun keepScreenOn(enabled: Boolean) {

@@ -98,6 +98,16 @@
                 android:value="dev.lucasnlm.antimine.GameActivity" />
         </activity>
 
+        <activity
+            android:name=".language.LanguageSelectorActivity"
+            android:label="@string/select_language"
+            android:parentActivityName="dev.lucasnlm.antimine.preferences.PreferencesActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.lucasnlm.antimine.preferences.PreferencesActivity" />
+        </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

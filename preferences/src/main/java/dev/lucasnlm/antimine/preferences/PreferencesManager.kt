@@ -18,6 +18,10 @@ class PreferencesManager(
 
     override fun putInt(key: String, value: Int) = preferences.edit().putInt(key, value).apply()
 
+    override fun getString(key: String): String? = preferences.getString(key, null)
+
+    override fun putString(key: String, value: String) = preferences.edit().putString(key, value).apply()
+
     override fun contains(key: String): Boolean = preferences.contains(key)
 
     override fun removeKey(key: String) = preferences.edit().remove(key).apply()

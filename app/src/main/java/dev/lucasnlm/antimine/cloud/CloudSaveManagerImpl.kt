@@ -48,6 +48,7 @@ class CloudSaveManagerImpl(
                     premiumFeatures = preferencesRepository.isPremiumEnabled().toInt(),
                     controlStyle = preferencesRepository.controlStyle().ordinal,
                     noGuessing = preferencesRepository.useNoGuessingAlgorithm().toInt(),
+                    language = preferencesRepository.getPreferredLocale() ?: "",
                 )
             }
         } catch (e: Exception) {

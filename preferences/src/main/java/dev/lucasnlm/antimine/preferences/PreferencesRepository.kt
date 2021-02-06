@@ -97,6 +97,18 @@ class PreferencesRepository(
         preferencesManager.putInt(PREFERENCE_TOUCH_SENSIBILITY, sensibility)
     }
 
+    override fun setPreferredLocale(locale: String) {
+        if (locale.isBlank()) {
+            preferencesManager.removeKey(PREFERENCE_LOCALE)
+        } else {
+            preferencesManager.putString(PREFERENCE_LOCALE, locale)
+        }
+    }
+
+    override fun getPreferredLocale(): String? {
+        return preferencesManager.getString(PREFERENCE_LOCALE)
+    }
+
     override fun showWindowsWhenFinishGame(): Boolean =
         preferencesManager.getBoolean(PREFERENCE_SHOW_WINDOWS, true)
 
@@ -294,5 +306,6 @@ class PreferencesRepository(
         private const val PREFERENCE_SHOW_WINDOWS = "preference_show_windows"
         private const val PREFERENCE_USE_OPEN_SWITCH_CONTROL = "preference_use_open_switch_control"
         private const val PREFERENCE_TOUCH_SENSIBILITY = "preference_touch_sensibility"
+        private const val PREFERENCE_LOCALE = "preference_locale"
     }
 }
