@@ -8,7 +8,7 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 
-class AdsManager(
+class GoogleAdsManager(
     private val crashReporter: ICrashReporter,
 ) : IAdsManager {
     private var rewardedAd: RewardedAd? = null

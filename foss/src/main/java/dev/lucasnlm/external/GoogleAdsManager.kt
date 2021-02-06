@@ -3,7 +3,7 @@ package dev.lucasnlm.external
 import android.app.Activity
 import android.content.Context
 
-class AdsManager(
+class GoogleAdsManager(
     private val crashReporter: ICrashReporter,
 ) : IAdsManager {
     override fun start(context: Context) { }
