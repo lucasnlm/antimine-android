@@ -57,4 +57,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
+
+    // Unity
+    implementation 'com.unity3d.ads:unity-ads:3.6.0'
 }

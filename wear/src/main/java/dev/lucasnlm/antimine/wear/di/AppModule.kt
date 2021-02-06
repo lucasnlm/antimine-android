@@ -3,7 +3,7 @@ package dev.lucasnlm.antimine.wear.di
 import dev.lucasnlm.antimine.common.BuildConfig
 import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.ProdAnalyticsManager
-import dev.lucasnlm.external.AdsManager
+import dev.lucasnlm.external.GoogleAdsManager
 import dev.lucasnlm.external.BillingManager
 import dev.lucasnlm.external.ExternalAnalyticsWrapper
 import dev.lucasnlm.external.IAdsManager
@@ -23,7 +23,7 @@ val AppModule = module {
 
     single { BillingManager(get()) } bind IBillingManager::class
 
-    single { AdsManager() } bind IAdsManager::class
+    single { GoogleAdsManager() } bind IAdsManager::class
 
     single { PlayGamesManager(get()) } bind IPlayGamesManager::class
 

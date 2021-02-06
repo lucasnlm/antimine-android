@@ -8,7 +8,6 @@ import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.ProdAnalyticsManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.share.ShareManager
-import dev.lucasnlm.external.AdsManager
 import dev.lucasnlm.external.BillingManager
 import dev.lucasnlm.external.CloudStorageManager
 import dev.lucasnlm.external.CrashReporter
@@ -25,6 +24,7 @@ import dev.lucasnlm.external.IReviewWrapper
 import dev.lucasnlm.external.InstantAppManager
 import dev.lucasnlm.external.PlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
+import dev.lucasnlm.external.UnityAdsManager
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -59,5 +59,5 @@ val AppModule = module {
         CrashReporter()
     } bind ICrashReporter::class
 
-    single { AdsManager(get()) } bind IAdsManager::class
+    single { UnityAdsManager() } bind IAdsManager::class
 }
