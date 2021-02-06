@@ -5,10 +5,12 @@ import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.ProdAnalyticsManager
 import dev.lucasnlm.external.GoogleAdsManager
 import dev.lucasnlm.external.BillingManager
+import dev.lucasnlm.external.CrashReporter
 import dev.lucasnlm.external.ExternalAnalyticsWrapper
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
+import dev.lucasnlm.external.ICrashReporter
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.IReviewWrapper
@@ -23,11 +25,13 @@ val AppModule = module {
 
     single { BillingManager(get()) } bind IBillingManager::class
 
-    single { GoogleAdsManager() } bind IAdsManager::class
+    single { GoogleAdsManager(get()) } bind IAdsManager::class
 
     single { PlayGamesManager(get()) } bind IPlayGamesManager::class
 
     single { ReviewWrapper() } bind IReviewWrapper::class
+
+    single { CrashReporter() } bind ICrashReporter::class
 
     single {
         if (BuildConfig.DEBUG) {
