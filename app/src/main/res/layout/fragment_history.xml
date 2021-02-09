@@ -8,23 +8,13 @@
     android:fitsSystemWindows="false"
     tools:context="dev.lucasnlm.antimine.history.views.HistoryFragment">
 
-    <dev.lucasnlm.external.view.AdPlaceHolderView
-        android:id="@+id/ad_placeholder"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/saveHistory"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:overScrollMode="never"
-        app:layout_constraintTop_toBottomOf="@id/ad_placeholder"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

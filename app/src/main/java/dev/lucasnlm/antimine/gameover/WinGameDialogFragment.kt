@@ -33,7 +33,6 @@ import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.ReviewWrapper
-import dev.lucasnlm.external.view.AdPlaceHolderView
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -99,7 +98,6 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                 .apply {
                     lifecycleScope.launchWhenCreated {
                         endGameViewModel.observeState().collect { state ->
-                            val adsView: AdPlaceHolderView = findViewById(R.id.ads)
                             val shareButton: View = findViewById(R.id.share)
                             val statsButton: AppCompatButton = findViewById(R.id.stats)
                             val newGameButton: AppCompatButton = findViewById(R.id.new_game)
@@ -177,7 +175,6 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                 featureFlagManager.isGameOverAdEnabled
                             ) {
                                 activity?.let { activity ->
-                                    adsView.visibility = View.VISIBLE
                                     val label = context.getString(R.string.remove_ad)
                                     val price = billingManager.getPrice()
                                     val unlockLabel = price?.let { "$label - $it" } ?: label
@@ -188,7 +185,6 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                         setOnClickListener {
                                             lifecycleScope.launch {
                                                 billingManager.charge(activity)
-                                                adsView.visibility = View.GONE
                                             }
                                         }
                                     }

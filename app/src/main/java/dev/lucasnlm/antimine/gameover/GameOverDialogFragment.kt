@@ -30,7 +30,6 @@ import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
-import dev.lucasnlm.external.view.AdPlaceHolderView
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -85,7 +84,6 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                 .apply {
                     lifecycleScope.launchWhenCreated {
                         endGameViewModel.observeState().collect { state ->
-                            val adsView: AdPlaceHolderView = findViewById(R.id.ads)
                             val newGameButton: AppCompatButton = findViewById(R.id.new_game)
                             val continueButton: AppCompatButton = findViewById(R.id.continue_game)
                             val removeAdsButton: AppCompatButton = findViewById(R.id.remove_ads)
@@ -166,7 +164,6 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 featureFlagManager.isGameOverAdEnabled
                             ) {
                                 activity?.let { activity ->
-                                    adsView.visibility = View.VISIBLE
                                     val label = context.getString(R.string.remove_ad)
                                     val price = billingManager.getPrice()
                                     val unlockLabel = price?.let { "$label - $it" } ?: label
@@ -177,7 +174,6 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                         setOnClickListener {
                                             lifecycleScope.launch {
                                                 billingManager.charge(activity)
-                                                adsView.visibility = View.GONE
                                             }
                                         }
                                     }
