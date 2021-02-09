@@ -44,6 +44,6 @@ class UnityAdsManager : IAdsManager, IUnityAdsListener {
     }
 
     companion object {
-        const val UNITY_ID = "3406763"
+        const val UNITY_ID = "1234567"
     }
 }

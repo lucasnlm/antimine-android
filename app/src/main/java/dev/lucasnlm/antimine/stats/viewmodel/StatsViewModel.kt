@@ -122,7 +122,6 @@ class StatsViewModel(
 
     override fun initialState() = StatsState(
         stats = listOf(),
-        showAds = !preferenceRepository.isPremiumEnabled()
     )
 
     override suspend fun mapEventToState(event: StatsEvent) = flow {

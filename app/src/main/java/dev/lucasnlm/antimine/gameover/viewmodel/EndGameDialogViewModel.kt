@@ -5,11 +5,19 @@ import androidx.annotation.DrawableRes
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.gameover.model.GameResult
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.updateLanguage
 import kotlinx.coroutines.flow.flow
 
 class EndGameDialogViewModel(
     private val context: Context,
+    preferencesRepository: IPreferencesRepository,
 ) : IntentViewModel<EndGameDialogEvent, EndGameDialogState>() {
+    init {
+        preferencesRepository.getPreferredLocale()?.let {
+            context.updateLanguage(it)
+        }
+    }
 
     private fun List<Int>.safeRandomEmoji(
         @DrawableRes except: Int,

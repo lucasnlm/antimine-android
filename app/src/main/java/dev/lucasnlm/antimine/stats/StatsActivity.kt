@@ -13,7 +13,6 @@ import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.stats.view.StatsAdapter
 import dev.lucasnlm.antimine.stats.viewmodel.StatsEvent
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
-import dev.lucasnlm.external.IInstantAppManager
 import kotlinx.android.synthetic.main.activity_stats.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -22,7 +21,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     private val statsViewModel by viewModel<StatsViewModel>()
-    private val instantAppManager: IInstantAppManager by inject()
     private val themeRepository: IThemeRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,11 +37,6 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
             statsViewModel.observeState().collect {
                 recyclerView.adapter = StatsAdapter(it.stats, themeRepository)
                 empty.visibility = if (it.stats.isEmpty()) View.VISIBLE else View.GONE
-
-                if (it.showAds && !instantAppManager.isEnabled(applicationContext)) {
-                    ad_placeholder.visibility = View.VISIBLE
-                    ad_placeholder.loadAd()
-                }
             }
         }
     }

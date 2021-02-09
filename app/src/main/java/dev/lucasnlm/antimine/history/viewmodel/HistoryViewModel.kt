@@ -5,19 +5,16 @@ import android.content.Intent
 import android.net.Uri
 import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 
 class HistoryViewModel(
     private val context: Context,
     private val savesRepository: ISavesRepository,
-    private val preferencesRepository: IPreferencesRepository,
 ) : IntentViewModel<HistoryEvent, HistoryState>() {
 
     override fun initialState() = HistoryState(
         saveList = listOf(),
-        showAds = !preferencesRepository.isPremiumEnabled(),
     )
 
     override fun onEvent(event: HistoryEvent) {

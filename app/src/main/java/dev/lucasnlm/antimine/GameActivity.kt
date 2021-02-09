@@ -59,7 +59,6 @@ import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IPlayGamesManager
-import dev.lucasnlm.external.ReviewWrapper
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.Dispatchers
@@ -941,15 +940,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             if (isTutorialComplete && !preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
                 if (!instantAppManager.isEnabled(this)) {
                     navigationView.menu.setGroupVisible(R.id.remove_ads_group, true)
-                    ad_placeholder.visibility = View.VISIBLE
-                    ad_placeholder.loadAd()
                 }
             } else {
                 navigationView.menu.setGroupVisible(R.id.remove_ads_group, false)
-                ad_placeholder.visibility = View.GONE
             }
-        } else {
-            ad_placeholder.visibility = View.GONE
         }
     }
 

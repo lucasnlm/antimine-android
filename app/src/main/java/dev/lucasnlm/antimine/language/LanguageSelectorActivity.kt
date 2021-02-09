@@ -10,7 +10,7 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import org.koin.android.ext.android.inject
-import java.util.*
+import java.util.Locale
 
 class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
     override fun onCreate(savedInstanceState: Bundle?) {
