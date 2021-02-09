@@ -89,8 +89,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private val shareViewModel: ShareManager by inject()
 
-    private val reviewWrapper: ReviewWrapper by inject()
-
     val gameViewModel by viewModel<GameViewModel>()
 
     private val cloudSaveManager by inject<CloudSaveManager>()
@@ -512,7 +510,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 showSupportAppDialog()
             }
 
-            reviewWrapper.startInAppReview(this)
             preferencesRepository.incrementUseCount()
         }
     }
