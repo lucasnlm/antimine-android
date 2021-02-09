@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer"
@@ -22,8 +21,8 @@
             android:background="?selectableItemBackgroundBorderless"
             android:contentDescription="@string/open_menu"
             android:padding="14dp"
-            ads:layout_constraintLeft_toLeftOf="parent"
-            ads:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/menu" />
 
         <ImageView
@@ -35,8 +34,8 @@
             android:clickable="true"
             android:focusable="true"
             android:padding="14dp"
-            ads:layout_constraintLeft_toRightOf="@id/menu"
-            ads:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/menu"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/flag_black" />
 
         <TextView
@@ -54,17 +53,17 @@
             android:textSize="@dimen/text_size"
             android:textStyle="bold"
             android:visibility="gone"
-            ads:layout_constraintBottom_toBottomOf="@id/menu"
-            ads:layout_constraintHorizontal_chainStyle="packed"
-            ads:layout_constraintLeft_toRightOf="@id/switchFlag"
-            ads:layout_constraintRight_toLeftOf="@id/minesCount"
-            ads:layout_constraintTop_toTopOf="@id/menu"
+            app:layout_constraintBottom_toBottomOf="@id/menu"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toRightOf="@id/switchFlag"
+            app:layout_constraintRight_toLeftOf="@id/minesCount"
+            app:layout_constraintTop_toTopOf="@id/menu"
             tools:targetApi="m"
             tools:text="10:00"
             tools:visibility="visible"
-            ads:drawableTint="?android:attr/textColorPrimary"
-            ads:drawableStartCompat="@drawable/timer"
-            ads:drawableLeftCompat="@drawable/timer" />
+            app:drawableTint="?android:attr/textColorPrimary"
+            app:drawableStartCompat="@drawable/timer"
+            app:drawableLeftCompat="@drawable/timer" />
 
         <TextView
             android:id="@+id/minesCount"
@@ -79,16 +78,16 @@
             android:textSize="@dimen/text_size"
             android:textStyle="bold"
             android:visibility="gone"
-            ads:layout_constraintBottom_toBottomOf="@id/menu"
-            ads:layout_constraintHorizontal_chainStyle="packed"
-            ads:layout_constraintLeft_toRightOf="@id/timer"
-            ads:layout_constraintRight_toLeftOf="@id/shortcutIcon"
-            ads:layout_constraintTop_toTopOf="@id/menu"
+            app:layout_constraintBottom_toBottomOf="@id/menu"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toRightOf="@id/timer"
+            app:layout_constraintRight_toLeftOf="@id/shortcutIcon"
+            app:layout_constraintTop_toTopOf="@id/menu"
             tools:targetApi="m"
             tools:text="99"
             tools:visibility="visible"
-            ads:drawableStartCompat="@drawable/mine"
-            ads:drawableTint="?android:attr/textColorPrimary" />
+            app:drawableStartCompat="@drawable/mine"
+            app:drawableTint="?android:attr/textColorPrimary" />
 
         <ImageView
             android:id="@+id/shortcutIcon"
@@ -99,8 +98,8 @@
             android:padding="14dp"
             android:alpha="0.0"
             android:clickable="false"
-            ads:layout_constraintRight_toRightOf="parent"
-            ads:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/retry"
             tools:alpha="1.0"/>
 
@@ -114,30 +113,20 @@
             android:visibility="gone"
             tools:text="100"
             tools:visibility="visible"
-            ads:layout_constraintBottom_toBottomOf="@+id/shortcutIcon"
-            ads:layout_constraintEnd_toEndOf="@+id/shortcutIcon"
-            ads:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/shortcutIcon"
+            app:layout_constraintEnd_toEndOf="@+id/shortcutIcon"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
             android:id="@+id/levelContainer"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            ads:layout_constraintBottom_toTopOf="@+id/ad_placeholder"
-            ads:layout_constraintLeft_toLeftOf="parent"
-            ads:layout_constraintRight_toRightOf="parent"
-            ads:layout_constraintTop_toBottomOf="@id/menu">
-            <requestFocus/>
-        </FrameLayout>
-
-        <dev.lucasnlm.external.view.AdPlaceHolderView
-            android:id="@+id/ad_placeholder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:visibility="visible"/>
+            app:layout_constraintTop_toBottomOf="@id/menu">
+            <requestFocus/>
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -147,6 +136,6 @@
         android:layout_gravity="start"
         android:clipToPadding="true"
         android:fitsSystemWindows="true"
-        ads:menu="@menu/nav_menu" />
+        app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
