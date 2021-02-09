@@ -113,5 +113,9 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setTouchSensibility(sensibility: Int) { }
 
+    override fun setPreferredLocale(locale: String) { }
+
+    override fun getPreferredLocale(): String? = null
+
     override fun showWindowsWhenFinishGame(): Boolean = true
 }
