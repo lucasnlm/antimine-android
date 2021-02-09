@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.gameover
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
@@ -31,6 +32,7 @@ import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
+import dev.lucasnlm.external.ReviewWrapper
 import dev.lucasnlm.external.view.AdPlaceHolderView
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -47,6 +49,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
     private val preferencesRepository: IPreferencesRepository by inject()
     private val billingManager: IBillingManager by inject()
     private val featureFlagManager: IFeatureFlagManager by inject()
+    private val reviewWrapper: ReviewWrapper by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +71,16 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                     received = getInt(DIALOG_RECEIVED, -1)
                 )
             )
+        }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+
+        activity?.let {
+            if (!it.isFinishing) {
+                reviewWrapper.startInAppReview(it)
+            }
         }
     }
 
