@@ -108,8 +108,6 @@
     <string name="share">Share</string>
     <string name="share_menu">Share…</string>
     <string name="no_network">No internet connection.</string>
-    <string name="open_menu">Open Menu</string>
-    <string name="close_menu">Close Menu</string>
     <string name="delete_all">Delete all</string>
     <string name="appearance">Appearance</string>
     <string name="themes">Themes</string>
@@ -127,6 +125,7 @@
     <string name="flag_removed">Flag removed!</string>
     <string name="remove_ad">Remove Ads</string>
     <string name="help">Help</string>
+    <string name="back">Back</string>
     <string name="show_windows">Show windows</string>
     <string name="select_language">Select Language</string>
     <string name="switch_control">Switch: Flag and Open</string>

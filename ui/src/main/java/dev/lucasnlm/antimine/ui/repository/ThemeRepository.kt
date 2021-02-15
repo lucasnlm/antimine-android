@@ -65,6 +65,7 @@ class ThemeRepository(
 
     private fun fromDefaultPalette(context: Context) =
         AreaPalette(
+            accent = ContextCompat.getColor(context, R.color.accent),
             border = ContextCompat.getColor(context, R.color.view_cover),
             background = ContextCompat.getColor(context, R.color.background),
             covered = ContextCompat.getColor(context, R.color.view_cover),

@@ -11,6 +11,7 @@ object Themes {
         theme = R.style.CustomLightTheme,
         themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
         palette = AreaPalette(
+            accent = 0xD32F2F,
             border = 0x424242,
             background = 0xFFFFFF,
             covered = 0x424242,
@@ -45,6 +46,7 @@ object Themes {
         theme = R.style.CustomDarkTheme,
         themeNoActionBar = R.style.CustomDarkTheme_NoActionBar,
         palette = AreaPalette(
+            accent = 0xFFFFFF,
             border = 0x171717,
             background = 0x212121,
             covered = 0x171717,
@@ -79,6 +81,7 @@ object Themes {
         theme = R.style.CustomAmoledTheme,
         themeNoActionBar = R.style.CustomAmoledTheme_NoActionBar,
         palette = AreaPalette(
+            accent = 0xFFFFFF,
             border = 0xFFFFFF,
             background = 0x000000,
             covered = 0x212121,
@@ -117,6 +120,7 @@ object Themes {
             theme = R.style.CustomGardenTheme,
             themeNoActionBar = R.style.CustomGardenTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x689f38,
                 border = 0x171717,
                 background = 0xefebe9,
                 covered = 0x689f38,
@@ -150,6 +154,7 @@ object Themes {
             theme = R.style.CustomLightTheme,
             themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x37474f,
                 border = 0x424242,
                 background = 0xFFFFFF,
                 covered = 0x4a4a4a,
@@ -183,6 +188,7 @@ object Themes {
             theme = R.style.CustomMarineTheme,
             themeNoActionBar = R.style.CustomMarineTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x0277bd,
                 border = 0x424242,
                 background = 0xFFFFFF,
                 covered = 0x0277bd,
@@ -216,6 +222,7 @@ object Themes {
             theme = R.style.CustomBlueGreyTheme,
             themeNoActionBar = R.style.CustomBlueGreyTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x37474f,
                 border = 0x424242,
                 background = 0xFFFFFF,
                 covered = 0x37474f,
@@ -249,6 +256,7 @@ object Themes {
             theme = R.style.CustomOrangeTheme,
             themeNoActionBar = R.style.CustomOrangeTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0xfb8c00,
                 border = 0x000000,
                 background = 0x212121,
                 covered = 0xfb8c00,
@@ -263,7 +271,7 @@ object Themes {
                 minesAround6 = 0xFFFFFF,
                 minesAround7 = 0xBBBBBB,
                 minesAround8 = 0xEEEEEE,
-                highlight = 0x212121,
+                highlight = 0xfb8c00,
                 focus = 0xD32F2F,
             ),
             assets = Assets(
@@ -282,6 +290,7 @@ object Themes {
             theme = R.style.CustomPinkTheme,
             themeNoActionBar = R.style.CustomPinkTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0xf48fb1,
                 border = 0x000000,
                 background = 0xFFFFFF,
                 covered = 0xf48fb1,
@@ -315,6 +324,7 @@ object Themes {
             theme = R.style.CustomPurpleTheme,
             themeNoActionBar = R.style.CustomPurpleTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x6a1b9a,
                 border = 0x000000,
                 background = 0xFFFFFF,
                 covered = 0x6a1b9a,
@@ -348,6 +358,7 @@ object Themes {
             theme = R.style.CustomLightTheme,
             themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x3e2723,
                 border = 0x000000,
                 background = 0xFFFFFF,
                 covered = 0x3e2723,
@@ -381,6 +392,7 @@ object Themes {
             theme = R.style.CustomLightTheme,
             themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0xc62828,
                 border = 0x000000,
                 background = 0xFFFFFF,
                 covered = 0xc62828,
@@ -414,6 +426,7 @@ object Themes {
             theme = R.style.CustomLightTheme,
             themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x880e4f,
                 border = 0x000000,
                 background = 0xFFFFFF,
                 covered = 0x880e4f,
@@ -447,6 +460,7 @@ object Themes {
             theme = R.style.CustomLightTheme,
             themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x0d47a1,
                 border = 0x000000,
                 background = 0xFFFFFF,
                 covered = 0x0d47a1,
@@ -480,6 +494,7 @@ object Themes {
             theme = R.style.CustomDarkTheme,
             themeNoActionBar = R.style.CustomDarkTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0xedf1f2,
                 border = 0x000000,
                 background = 0x212121,
                 covered = 0xedf1f2,
@@ -513,6 +528,7 @@ object Themes {
             theme = R.style.CustomLimeTheme,
             themeNoActionBar = R.style.CustomLimeTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0xcddc39,
                 border = 0x000000,
                 background = 0x212121,
                 covered = 0xcddc39,
@@ -546,6 +562,7 @@ object Themes {
             theme = R.style.BananaTheme,
             themeNoActionBar = R.style.BananaTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0xffeb3b,
                 border = 0x000000,
                 background = 0x212121,
                 covered = 0xffeb3b,
@@ -579,6 +596,7 @@ object Themes {
             theme = R.style.BananaThemeLight,
             themeNoActionBar = R.style.BananaThemeLight_NoActionBar,
             palette = AreaPalette(
+                accent = 0xfbc02d,
                 border = 0x000000,
                 background = 0xe0e0e0,
                 covered = 0xfbc02d,
@@ -612,6 +630,7 @@ object Themes {
             theme = R.style.BananaThemeLight,
             themeNoActionBar = R.style.BananaThemeLight_NoActionBar,
             palette = AreaPalette(
+                accent = 0xf57c00,
                 border = 0x000000,
                 background = 0xe0e0e0,
                 covered = 0xf57c00,
@@ -645,6 +664,7 @@ object Themes {
             theme = R.style.BananaThemeLight,
             themeNoActionBar = R.style.BananaThemeLight_NoActionBar,
             palette = AreaPalette(
+                accent = 0x827717,
                 border = 0x000000,
                 background = 0xe0e0e0,
                 covered = 0x827717,

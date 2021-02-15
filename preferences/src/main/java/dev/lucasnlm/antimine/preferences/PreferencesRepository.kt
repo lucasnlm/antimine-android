@@ -112,6 +112,14 @@ class PreferencesRepository(
     override fun showWindowsWhenFinishGame(): Boolean =
         preferencesManager.getBoolean(PREFERENCE_SHOW_WINDOWS, true)
 
+    override fun userId(): String? {
+        return preferencesManager.getString(PREFERENCE_USER_ID)
+    }
+
+    override fun setUserId(userId: String) {
+        preferencesManager.putString(PREFERENCE_USER_ID, userId)
+    }
+
     override fun controlStyle(): ControlStyle {
         val index = preferencesManager.getInt(PREFERENCE_CONTROL_STYLE, -1)
         return ControlStyle.values().getOrNull(index) ?: ControlStyle.Standard
@@ -132,8 +140,8 @@ class PreferencesRepository(
         return preferencesManager.getBoolean(PREFERENCE_TUTORIAL_COMPLETED, false)
     }
 
-    override fun completeTutorial() {
-        preferencesManager.putBoolean(PREFERENCE_TUTORIAL_COMPLETED, true)
+    override fun setCompleteTutorial(value: Boolean) {
+        preferencesManager.putBoolean(PREFERENCE_TUTORIAL_COMPLETED, value)
     }
 
     override fun customLongPressTimeout(): Long =
@@ -304,6 +312,7 @@ class PreferencesRepository(
         private const val PREFERENCE_TIPS = "preference_current_tips"
         private const val PREFERENCE_EXTRA_TIPS = "preference_extra_tips"
         private const val PREFERENCE_SHOW_WINDOWS = "preference_show_windows"
+        private const val PREFERENCE_USER_ID = "preference_user_id"
         private const val PREFERENCE_USE_OPEN_SWITCH_CONTROL = "preference_use_open_switch_control"
         private const val PREFERENCE_TOUCH_SENSIBILITY = "preference_touch_sensibility"
         private const val PREFERENCE_LOCALE = "preference_locale"

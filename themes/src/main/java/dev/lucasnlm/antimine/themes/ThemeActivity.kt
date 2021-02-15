@@ -24,14 +24,11 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
-    private val dimensionRepository: IDimensionRepository by inject()
-
     private val themeViewModel by viewModel<ThemeViewModel>()
 
+    private val dimensionRepository: IDimensionRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
-
     private val preferencesRepository: IPreferencesRepository by inject()
-
     private val billingManager: IBillingManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -61,14 +61,20 @@ class ThemeAdapter(
                 areas.forEach { it.alpha = 1.0f }
             }
 
-            areas.forEachIndexed { index, areaView -> areaView.bindTheme(minefield[index], theme, paintSettings) }
+            areas.forEachIndexed { index, areaView ->
+                areaView.apply {
+                    bindTheme(minefield[index], theme, paintSettings)
+                    isClickable = false
+                    isFocusable = false
+                    isPressed = false
+                }
+            }
 
             if (position == 0) {
                 areas.forEach { it.alpha = 0.35f }
 
                 label.apply {
                     text = label.context.getString(R.string.system)
-
                     setTextColor(theme.palette.background.toInvertedAndroidColor())
                     setBackgroundResource(android.R.color.transparent)
                     visibility = View.VISIBLE
@@ -77,11 +83,15 @@ class ThemeAdapter(
                 label.visibility = View.GONE
             }
 
-            val color = theme.palette.background.toAndroidColor()
-            parentGrid.setBackgroundColor(color)
-
-            clickTheme.setOnClickListener {
-                themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+            card_theme.apply {
+                setOnClickListener {
+                    themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+                }
+                strokeColor = if (selected) {
+                    theme.palette.accent.toAndroidColor()
+                } else {
+                    0
+                }
             }
         }
     }

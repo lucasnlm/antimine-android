@@ -17,7 +17,7 @@ interface IPreferencesRepository {
     fun completeFirstUse()
 
     fun isTutorialCompleted(): Boolean
-    fun completeTutorial()
+    fun setCompleteTutorial(value: Boolean)
 
     fun customLongPressTimeout(): Long
     fun setCustomLongPressTimeout(value: Long)
@@ -85,4 +85,7 @@ interface IPreferencesRepository {
     fun getPreferredLocale(): String?
 
     fun showWindowsWhenFinishGame(): Boolean
+
+    fun userId(): String?
+    fun setUserId(userId: String)
 }

@@ -174,13 +174,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
             }
         )
 
-        difficulty.observe(
-            this@TvGameActivity,
-            {
-                onChangeDifficulty()
-            }
-        )
-
         field.observe(
             this@TvGameActivity,
             { area ->
@@ -215,16 +208,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
             event.toString()
         }
         return super.onKeyDown(keyCode, event)
-    }
-
-    override fun onBackPressed() {
-        when {
-            drawer.isDrawerOpen(GravityCompat.START) -> {
-                drawer.closeDrawer(GravityCompat.START)
-                gameViewModel.resumeGame()
-            }
-            else -> super.onBackPressed()
-        }
     }
 
     override fun onResume() {
@@ -415,7 +398,7 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
                 loadGameFragment()
                 status = Status.Over(0, Score(4, 4, 25))
                 analyticsManager.sentEvent(Analytics.TutorialCompleted)
-                preferencesRepository.completeTutorial()
+                preferencesRepository.setCompleteTutorial(true)
                 showCompletedTutorialDialog()
                 cloudSaveManager.uploadSave()
             }

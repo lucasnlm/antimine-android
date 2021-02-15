@@ -1,6 +1,5 @@
 <resources>
-    <dimen name="app_bar_height">180dp</dimen>
-    <dimen name="toolbar_elevation">6dp</dimen>
+    <dimen name="main_activity_padding">16dp</dimen>
 
     <dimen name="field_size">76dp</dimen>
     <dimen name="field_radius">1.5dp</dimen>

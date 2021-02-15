@@ -10,7 +10,6 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.stats.model.StatsModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
-import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import kotlinx.android.synthetic.main.view_stats.view.*
 
 class StatsAdapter(
@@ -30,9 +29,6 @@ class StatsAdapter(
         holder.apply {
             val color = themeRepository.getTheme().palette.background.toAndroidColor()
             card.setCardBackgroundColor(color)
-
-            val textColor = themeRepository.getTheme().palette.background.toInvertedAndroidColor()
-            statsLabel.setTextColor(textColor)
 
             if (stats.totalGames > 0) {
                 val emptyText = "-"

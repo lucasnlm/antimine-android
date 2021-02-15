@@ -32,10 +32,7 @@ class SplashViewModel(
 
     private suspend fun loadCloudSave(cloudSave: CloudSave) = with(cloudSave) {
         preferencesRepository.apply {
-            if (cloudSave.completeTutorial == 1) {
-                completeTutorial()
-            }
-
+            setCompleteTutorial(cloudSave.completeTutorial == 1)
             completeFirstUse()
             useTheme(cloudSave.selectedTheme.toLong())
             setSquareRadius(cloudSave.squareRadius)

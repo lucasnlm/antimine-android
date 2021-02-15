@@ -60,6 +60,21 @@
 
         <activity
             android:name="dev.lucasnlm.antimine.GameActivity"
+            android:launchMode="singleInstance"
+            android:saveEnabled="false"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".main.MainActivity" />
+
+        </activity>
+
+        <activity
+            android:name=".main.MainActivity"
+            android:label="@string/app_name"
             android:launchMode="singleTop"
             android:saveEnabled="false"
             android:icon="@mipmap/ic_launcher"
@@ -67,7 +82,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
-            android:name="dev.lucasnlm.antimine.TvGameActivity"
+            android:name=".TvGameActivity"
             android:launchMode="singleTop"
             android:saveEnabled="false"
             android:icon="@mipmap/ic_launcher"

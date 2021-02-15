@@ -65,7 +65,6 @@ open class GameViewModel(
     val field = MutableLiveData<List<Area>>()
     val elapsedTimeSeconds = MutableLiveData<Long>()
     val mineCount = MutableLiveData<Int>()
-    val difficulty = MutableLiveData<Difficulty>()
     val levelSetup = MutableLiveData<Minefield>()
     val saveId = MutableLiveData<Long>()
     val tips = MutableLiveData(tipRepository.getTotalTips())
@@ -86,7 +85,6 @@ open class GameViewModel(
         refreshUserPreferences()
 
         mineCount.postValue(minefield.mines)
-        difficulty.postValue(newDifficulty)
         levelSetup.postValue(minefield)
         refreshField()
 
@@ -114,7 +112,6 @@ open class GameViewModel(
         refreshUserPreferences()
 
         mineCount.postValue(setup.mines)
-        difficulty.postValue(save.difficulty)
         levelSetup.postValue(setup)
         refreshField()
         refreshMineCount()
@@ -141,7 +138,6 @@ open class GameViewModel(
         refreshUserPreferences()
 
         mineCount.postValue(setup.mines)
-        difficulty.postValue(save.difficulty)
         levelSetup.postValue(setup)
 
         eventObserver.postValue(Event.ResumeGame)

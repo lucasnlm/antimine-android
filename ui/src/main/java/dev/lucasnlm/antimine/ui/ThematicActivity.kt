@@ -11,7 +11,6 @@ import org.koin.android.ext.android.inject
 import java.util.Locale
 
 abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
-
     private val themeRepository: IThemeRepository by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
 

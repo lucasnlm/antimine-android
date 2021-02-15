@@ -27,7 +27,7 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun isTutorialCompleted(): Boolean = true
 
-    override fun completeTutorial() { }
+    override fun setCompleteTutorial(value: Boolean) { }
 
     override fun customLongPressTimeout(): Long = 400L
 
