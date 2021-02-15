@@ -22,8 +22,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.drop
-import kotlinx.coroutines.flow.startWith
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.relex.circleindicator.CircleIndicator3
