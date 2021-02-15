@@ -662,7 +662,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
             !instantAppManager.isEnabled(this) &&
             !isFinishing &&
-            (extras == false || extras == null)
+            (extras == false || extras == null) &&
+            preferencesRepository.isTutorialCompleted()
         ) {
             lifecycleScope.launch {
                 if (billingManager.isEnabled()) {
