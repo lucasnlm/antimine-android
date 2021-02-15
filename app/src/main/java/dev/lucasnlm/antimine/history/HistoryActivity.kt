@@ -11,5 +11,12 @@ class HistoryActivity : ThematicActivity(R.layout.activity_empty) {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.content, HistoryFragment())
         }.commitAllowingStateLoss()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

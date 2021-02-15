@@ -77,6 +77,13 @@ class PreferencesActivity :
         }
 
         placePreferenceFragment(R.xml.gameplay_preferences)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     override fun onDestroy() {
