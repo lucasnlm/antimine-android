@@ -8,9 +8,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
@@ -48,7 +48,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
 
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(requireContext()).apply {
+        return MaterialAlertDialogBuilder(requireContext()).apply {
             val view = LayoutInflater
                 .from(context)
                 .inflate(R.layout.dialog_payments, null, false)

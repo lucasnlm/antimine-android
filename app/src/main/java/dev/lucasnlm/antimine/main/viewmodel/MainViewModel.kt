@@ -11,7 +11,7 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 class MainViewModel(
     private val context: Context,
     private val preferencesRepository: IPreferencesRepository,
-) : StatelessViewModel<MainEvent>(){
+) : StatelessViewModel<MainEvent>() {
     override fun onEvent(event: MainEvent) {
         when (event) {
             is MainEvent.ContinueGameEvent -> continueGame()

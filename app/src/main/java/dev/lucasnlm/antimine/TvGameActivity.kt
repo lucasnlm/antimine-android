@@ -11,7 +11,6 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.core.view.GravityCompat
 import androidx.core.view.doOnLayout
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Transformations

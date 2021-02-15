@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesEvent
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesViewModel
@@ -24,7 +24,7 @@ class PlayGamesDialogFragment : AppCompatDialogFragment() {
     private val adapter by lazy { PlayGamesAdapter(playGamesViewModel) }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(requireContext()).apply {
+        return MaterialAlertDialogBuilder(requireContext()).apply {
             setTitle(R.string.google_play_games)
             setAdapter(adapter, null)
             setPositiveButton(R.string.ok, null)

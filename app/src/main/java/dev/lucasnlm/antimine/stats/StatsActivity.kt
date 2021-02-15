@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
@@ -60,7 +60,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     }
 
     private fun confirmAndDelete() {
-        AlertDialog.Builder(this)
+        MaterialAlertDialogBuilder(this)
             .setTitle(R.string.are_you_sure)
             .setMessage(R.string.delete_all_message)
             .setNegativeButton(R.string.cancel, null)

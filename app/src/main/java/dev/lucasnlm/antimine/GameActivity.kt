@@ -8,7 +8,6 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.doOnLayout
@@ -17,6 +16,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
@@ -421,7 +421,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun newGameConfirmation(action: () -> Unit) {
-        AlertDialog.Builder(this).apply {
+        MaterialAlertDialogBuilder(this).apply {
             setTitle(R.string.new_game)
             setMessage(R.string.retry_sure)
             setPositiveButton(R.string.resume) { _, _ -> action() }
