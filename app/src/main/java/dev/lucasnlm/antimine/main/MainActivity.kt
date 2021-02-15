@@ -21,6 +21,10 @@ import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.startWith
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.relex.circleindicator.CircleIndicator3
 import org.koin.android.ext.android.inject
@@ -55,26 +59,36 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
 
         lifecycleScope.launchWhenCreated {
-            viewModel.observeSideEffects().collect {
-                when (it) {
-                    is MainEvent.ShowCustomDifficultyDialogEvent -> {
-                        showCustomLevelDialog()
-                    }
-                    is MainEvent.GoToSettingsPageEvent -> {
-                        viewPager.setCurrentItem(1, true)
-                    }
-                    is MainEvent.ShowControlsEvent -> {
-                        showControlDialog()
-                    }
-                    is MainEvent.ShowGooglePlayGamesEvent -> {
-                        showGooglePlayGames()
-                    }
-                    else -> {}
-                }
-            }
+            viewModel
+                .observeSideEffects()
+                .distinctUntilChanged()
+                .collect(::handleSideEffects)
         }
 
         launchGooglePlayGames()
+    }
+
+    private fun handleSideEffects(event: MainEvent) {
+        when (event) {
+            is MainEvent.ShowCustomDifficultyDialogEvent -> {
+                showCustomLevelDialog()
+            }
+            is MainEvent.GoToSettingsPageEvent -> {
+                viewPager.setCurrentItem(1, true)
+            }
+            is MainEvent.ShowControlsEvent -> {
+                showControlDialog()
+            }
+            is MainEvent.ShowGooglePlayGamesEvent -> {
+                showGooglePlayGames()
+            }
+            is MainEvent.Recreate -> {
+                finish()
+                startActivity(Intent(this, SplashActivity::class.java))
+                overridePendingTransition(0, 0)
+            }
+            else -> {}
+        }
     }
 
     private fun showCustomLevelDialog() {
@@ -107,8 +121,6 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
 
     private fun launchGooglePlayGames() {
         if (playGamesManager.hasGooglePlayGames()) {
-            playGamesManager.showPlayPopUp(this)
-
             lifecycleScope.launchWhenCreated {
                 var logged: Boolean
 
@@ -116,6 +128,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                     withContext(Dispatchers.IO) {
                         logged = playGamesManager.silentLogin()
                         if (logged) { refreshUserId() }
+                        playGamesManager.showPlayPopUp(this@MainActivity)
                     }
                 } catch (e: Exception) {
                     logged = false
@@ -143,18 +156,34 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
 
         if (requestCode == RC_GOOGLE_PLAY) {
             playGamesManager.handleLoginResult(data)
-            refreshUserId()
+            lifecycleScope.launch {
+                refreshUserId()
+            }
         }
     }
 
-    private fun refreshUserId() {
-        val lastId = preferencesRepository.userId()
-        val newId = playGamesManager.playerId()
+    private suspend fun refreshUserId() {
+        withContext(Dispatchers.Default) {
+            val lastId = preferencesRepository.userId()
+            val newId = playGamesManager.playerId()
 
-        if (lastId != newId && newId != null) {
-            preferencesRepository.setUserId(newId)
-            startActivity(Intent(this, SplashActivity::class.java))
-            finish()
+            if (lastId != newId && newId != null) {
+                preferencesRepository.setUserId(newId)
+
+                withContext(Dispatchers.Main) {
+                    migrateDateAndRecreate()
+                }
+            }
+        }
+    }
+
+    private fun migrateDateAndRecreate() {
+        lifecycleScope.launchWhenCreated {
+            if (!isFinishing) {
+                preferencesRepository.userId()?.let {
+                    viewModel.sendEvent(MainEvent.FetchCloudSave(it))
+                }
+            }
         }
     }
 

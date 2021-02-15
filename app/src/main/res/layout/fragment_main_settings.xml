@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -10,7 +9,7 @@
         android:id="@+id/settings_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/settings"
+        android:text="@string/more"
         android:layout_margin="24dp"
         android:textStyle="bold"
         android:textAllCaps="true"

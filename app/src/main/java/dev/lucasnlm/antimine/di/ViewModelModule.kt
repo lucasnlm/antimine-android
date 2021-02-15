@@ -27,7 +27,7 @@ val ViewModelModule = module {
     viewModel { TextViewModel(get()) }
     viewModel { ThemeViewModel(get(), get(), get(), get()) }
     viewModel { SplashViewModel(get(), get(), get(), get()) }
-    viewModel { MainViewModel(get(), get()) }
+    viewModel { MainViewModel(get(), get(), get(), get()) }
     viewModel {
         GameViewModel(
             get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()

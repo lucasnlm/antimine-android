@@ -25,6 +25,8 @@ class BillingManager(
 
     override suspend fun getPrice(): String? = null
 
+    override suspend fun getPriceFlow(): Flow<String> = flowOf()
+
     override fun listenPurchases(): Flow<PurchaseInfo> = flowOf()
 
     companion object {

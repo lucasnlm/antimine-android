@@ -17,5 +17,11 @@ sealed class MainEvent {
 
     object ShowControlsEvent : MainEvent()
 
+    object Recreate : MainEvent()
+
     object ShowGooglePlayGamesEvent : MainEvent()
+
+    data class FetchCloudSave(
+        val playGamesId: String,
+    ) : MainEvent()
 }

@@ -83,6 +83,10 @@ class ThemeAdapter(
                 label.visibility = View.GONE
             }
 
+            clickable.setOnClickListener {
+                themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+            }
+
             card_theme.apply {
                 setOnClickListener {
                     themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))

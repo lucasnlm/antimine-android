@@ -16,6 +16,7 @@ import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IBillingManager
 import kotlinx.android.synthetic.main.fragment_main_new_game.*
+import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -128,23 +129,32 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
             billingManager.start()
 
             lifecycleScope.launchWhenResumed {
-                val price = billingManager.getPrice()
-                remove_ads.apply {
-                    visibility = View.VISIBLE
-                    bind(
-                        theme = usingTheme,
-                        text = getString(R.string.remove_ad),
-                        startIcon = R.drawable.remove_ads,
-                        extra = price,
-                        onAction = {
-                            SupportAppDialogFragment.newRemoveAdsSupportDialog(
-                                context,
-                                price,
-                            ).show(parentFragmentManager, SupportAppDialogFragment.TAG)
-                        }
-                    )
+                bindRemoveAds()
+
+                billingManager.getPriceFlow().collect {
+                    bindRemoveAds(it)
                 }
             }
+        }
+    }
+
+    private fun bindRemoveAds(price: String? = null) {
+        val usingTheme = themeRepository.getTheme()
+
+        remove_ads.apply {
+            visibility = View.VISIBLE
+            bind(
+                theme = usingTheme,
+                text = getString(R.string.remove_ad),
+                startIcon = R.drawable.remove_ads,
+                extra = price,
+                onAction = {
+                    SupportAppDialogFragment.newRemoveAdsSupportDialog(
+                        context,
+                        price,
+                    ).show(parentFragmentManager, SupportAppDialogFragment.TAG)
+                }
+            )
         }
     }
 }

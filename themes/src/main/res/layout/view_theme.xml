@@ -110,6 +110,12 @@
                 android:textAllCaps="true"
                 android:textStyle="bold" />
 
+            <FrameLayout
+                android:id="@+id/clickable"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
         </FrameLayout>
     </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

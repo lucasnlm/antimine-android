@@ -252,7 +252,7 @@ class PreferencesRepository(
     }
 
     override fun squareRadius(): Int {
-        return preferencesManager.getInt(PREFERENCE_SQUARE_RADIUS, 2)
+        return preferencesManager.getInt(PREFERENCE_SQUARE_RADIUS, 1)
     }
 
     override fun setSquareRadius(value: Int) {
