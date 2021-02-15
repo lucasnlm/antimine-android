@@ -10,8 +10,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 808010
-        versionName '8.8.2'
+        versionCode 900000
+        versionName '9.0.0'
         applicationId 'dev.lucasnlm.antimine'
         minSdkVersion 23
         targetSdkVersion 30
