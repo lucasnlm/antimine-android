@@ -21,7 +21,6 @@ class MainViewModel(
             is MainEvent.GoToSettingsPageEvent -> goToSettingsPageEvent()
             is MainEvent.ShowControlsEvent -> showControlsEvent()
             is MainEvent.ShowGooglePlayGamesEvent -> showGooglePlayGames()
-            else -> {}
         }
     }
 
