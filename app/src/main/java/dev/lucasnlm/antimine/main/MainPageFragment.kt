@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
+import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
@@ -21,6 +22,7 @@ import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import kotlinx.android.synthetic.main.fragment_main_new_game.*
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -32,6 +34,7 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
     private val dimensionRepository: IDimensionRepository by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
     private val billingManager: IBillingManager by inject()
+    private val savesRepository: ISavesRepository by inject()
 
     private fun getDifficultyExtra(difficulty: Difficulty): String {
         return minefieldRepository.fromDifficulty(
@@ -65,11 +68,24 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
         continue_game.bind(
             theme = usingTheme,
             invert = true,
-            text = R.string.continue_game,
+            text = R.string.start,
             onAction = {
                 viewModel.sendEvent(MainEvent.ContinueGameEvent)
             }
         )
+
+        lifecycleScope.launch {
+            savesRepository.fetchCurrentSave()?.let {
+                continue_game.bind(
+                    theme = usingTheme,
+                    invert = true,
+                    text = R.string.continue_game,
+                    onAction = {
+                        viewModel.sendEvent(MainEvent.ContinueGameEvent)
+                    }
+                )
+            }
+        }
 
         standard.bind(
             theme = usingTheme,
