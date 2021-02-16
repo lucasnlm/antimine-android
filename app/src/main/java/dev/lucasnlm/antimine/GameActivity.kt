@@ -62,9 +62,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private val cloudSaveManager by inject<CloudSaveManager>()
 
     private var status: Status = Status.PreGame
-    private var totalMines: Int = 0
-    private var totalArea: Int = 0
-    private var rightMines: Int = 0
     private var currentTime: Long = 0
     private var currentSaveId: Long = 0
 
@@ -170,16 +167,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     visibility = View.VISIBLE
                     text = it.toString()
                 }
-            }
-        )
-
-        field.observe(
-            this@GameActivity,
-            { area ->
-                val mines = area.filter { it.hasMine }
-                totalArea = area.count()
-                totalMines = mines.count()
-                rightMines = mines.count { it.mark.isFlag() }
             }
         )
 
@@ -564,11 +551,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
             Event.Victory -> {
                 val isResuming = (status == Status.PreGame)
-                val score = Score(
-                    rightMines,
-                    totalMines,
-                    totalArea
-                )
+                val score = gameViewModel.getScore()
                 status = Status.Over(currentTime, score)
                 gameViewModel.stopClock()
                 gameViewModel.showAllEmptyAreas()
@@ -595,11 +578,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
             Event.GameOver -> {
                 val isResuming = (status == Status.PreGame)
-                val score = Score(
-                    rightMines,
-                    totalMines,
-                    totalArea
-                )
+                val score = gameViewModel.getScore()
                 status = Status.Over(currentTime, score)
                 refreshRetryShortcut()
                 keepScreenOn(false)

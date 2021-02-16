@@ -178,7 +178,7 @@ class GameController {
     }
 
     fun getScore() = Score(
-        mines().count { !it.mistake && it.mark.isFlag() },
+        mines().count { !it.mistake },
         getMinesCount(),
         field.count()
     )

@@ -439,6 +439,8 @@ open class GameViewModel(
         }
     }
 
+    fun getScore() = gameController.getScore()
+
     suspend fun gameOver(fromResumeGame: Boolean, useGameOverFeedback: Boolean) {
         gameController.run {
             analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
