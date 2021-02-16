@@ -2,9 +2,8 @@ package dev.lucasnlm.antimine.common.level.database.converters
 
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Mark
-import org.junit.Test
-
 import org.junit.Assert.assertEquals
+import org.junit.Test
 
 class AreaConverterTest {
     private val expectedJson =

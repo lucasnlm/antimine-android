@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,12 +10,13 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         android:contentDescription="@null"
-        android:overScrollMode="never"
-        android:scrollbars="vertical|horizontal"
-        android:scrollbarStyle="outsideInset"
-        android:focusable="true"
         android:descendantFocusability="afterDescendants"
-        android:fadeScrollbars="false">
-        <requestFocus/>
+        android:fadeScrollbars="false"
+        android:focusable="true"
+        android:overScrollMode="never"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="vertical|horizontal">
+
+        <requestFocus />
     </androidx.recyclerview.widget.RecyclerView>
 </FrameLayout>

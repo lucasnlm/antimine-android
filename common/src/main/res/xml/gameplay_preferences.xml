@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
         android:title="@string/settings_gameplay"
@@ -25,7 +24,7 @@
             android:defaultValue="true"
             android:key="preference_no_guessing"
             android:title="@string/no_guessing_mode"
-            app:iconSpaceReserved="false"/>
+            app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
             android:checked="true"
@@ -35,27 +34,27 @@
             app:iconSpaceReserved="false" />
 
         <SeekBarPreference
+            android:defaultValue="500"
             android:key="preference_long_press_timeout"
             android:max="2000"
             android:min="100"
-            android:defaultValue="500"
             android:title="@string/long_press"
             app:adjustable="true"
+            app:iconSpaceReserved="false"
             app:min="100"
             app:seekBarIncrement="5"
-            app:showSeekBarValue="true"
-            app:iconSpaceReserved="false" />
+            app:showSeekBarValue="true" />
 
         <SeekBarPreference
+            android:defaultValue="30"
             android:key="preference_touch_sensibility"
             android:max="100"
             android:min="10"
-            android:defaultValue="30"
             android:title="@string/touch_sensibility"
             app:adjustable="true"
+            app:iconSpaceReserved="false"
             app:min="10"
             app:seekBarIncrement="1"
-            app:showSeekBarValue="true"
-            app:iconSpaceReserved="false" />
+            app:showSeekBarValue="true" />
     </PreferenceCategory>
 </PreferenceScreen>

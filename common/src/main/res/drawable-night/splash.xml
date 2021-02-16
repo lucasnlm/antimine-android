@@ -5,5 +5,7 @@
             <solid android:color="@color/launcher_background_night" />
         </shape>
     </item>
-    <item android:gravity="center" android:drawable="@drawable/new_splash"/>
+    <item
+        android:drawable="@drawable/new_splash"
+        android:gravity="center" />
 </layer-list>

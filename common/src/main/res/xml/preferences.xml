@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
@@ -26,7 +25,7 @@
             android:defaultValue="true"
             android:key="preference_no_guessing"
             android:title="@string/no_guessing_mode"
-            app:iconSpaceReserved="false"/>
+            app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
             android:checked="true"
@@ -42,40 +41,40 @@
         app:iconSpaceReserved="false">
 
         <SeekBarPreference
+            android:defaultValue="50"
             android:key="preference_area_size"
             android:max="80"
             android:min="40"
-            android:defaultValue="50"
             android:title="@string/size"
             app:adjustable="true"
+            app:iconSpaceReserved="false"
             app:min="40"
             app:seekBarIncrement="5"
-            app:showSeekBarValue="true"
-            app:iconSpaceReserved="false" />
+            app:showSeekBarValue="true" />
 
         <SeekBarPreference
+            android:defaultValue="1"
             android:key="preference_square_radius"
             android:max="10"
             android:min="0"
-            android:defaultValue="1"
             android:title="@string/rounded_square"
             app:adjustable="true"
+            app:iconSpaceReserved="false"
             app:min="0"
             app:seekBarIncrement="1"
-            app:showSeekBarValue="true"
-            app:iconSpaceReserved="false" />
+            app:showSeekBarValue="true" />
 
         <SeekBarPreference
+            android:defaultValue="500"
             android:key="preference_long_press_timeout"
             android:max="2000"
             android:min="100"
-            android:defaultValue="500"
             android:title="@string/long_press"
             app:adjustable="true"
+            app:iconSpaceReserved="false"
             app:min="100"
             app:seekBarIncrement="5"
-            app:showSeekBarValue="true"
-            app:iconSpaceReserved="false" />
+            app:showSeekBarValue="true" />
 
     </PreferenceCategory>
 
@@ -88,7 +87,7 @@
             android:defaultValue="true"
             android:key="preference_vibration"
             android:title="@string/vibration"
-            app:iconSpaceReserved="false"/>
+            app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
             android:checked="false"
