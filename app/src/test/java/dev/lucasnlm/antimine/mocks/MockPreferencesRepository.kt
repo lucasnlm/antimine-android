@@ -118,4 +118,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun getPreferredLocale(): String? = null
 
     override fun showWindowsWhenFinishGame(): Boolean = true
+
+    override fun userId(): String? = null
+
+    override fun setUserId(userId: String) {}
 }
