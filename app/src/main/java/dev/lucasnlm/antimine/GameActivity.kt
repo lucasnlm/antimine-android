@@ -227,10 +227,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun backToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        }
-
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
