@@ -90,26 +90,20 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     }
 
     private fun showCustomLevelDialog() {
-        if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
-            CustomLevelDialogFragment().apply {
-                show(supportFragmentManager, CustomLevelDialogFragment.TAG)
-            }
+        CustomLevelDialogFragment().apply {
+            show(supportFragmentManager, CustomLevelDialogFragment.TAG)
         }
     }
 
     private fun showControlDialog() {
-        if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
-            ControlDialogFragment().apply {
-                show(supportFragmentManager, ControlDialogFragment.TAG)
-            }
+        ControlDialogFragment().apply {
+            show(supportFragmentManager, ControlDialogFragment.TAG)
         }
     }
 
     private fun showGooglePlayGames() {
         if (playGamesManager.isLogged()) {
-            if (supportFragmentManager.findFragmentByTag(PlayGamesDialogFragment.TAG) == null) {
-                PlayGamesDialogFragment().show(supportFragmentManager, PlayGamesDialogFragment.TAG)
-            }
+            PlayGamesDialogFragment().show(supportFragmentManager, PlayGamesDialogFragment.TAG)
         } else {
             playGamesManager.getLoginIntent()?.let {
                 ActivityCompat.startActivityForResult(this, it, RC_GOOGLE_PLAY, null)
