@@ -675,6 +675,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         const val START_TUTORIAL = "start_tutorial"
         const val START_GAME = "start_game"
         const val RETRY_GAME = "retry_game"
-        const val MIN_USAGES_TO_IAP = 2
+        const val MIN_USAGES_TO_IAP = 4
     }
 }
