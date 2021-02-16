@@ -83,6 +83,8 @@ class ThemeAdapter(
                 label.visibility = View.GONE
             }
 
+            theme_background.setBackgroundColor(theme.palette.background.toAndroidColor())
+
             clickable.setOnClickListener {
                 themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
             }

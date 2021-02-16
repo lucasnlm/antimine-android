@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="20dp"
     android:fitsSystemWindows="true"
     tools:context="dev.lucasnlm.antimine.about.AboutActivity">
 
@@ -69,23 +70,26 @@
 
         <Button
             android:id="@+id/thirdsParties"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="12dp"
             android:text="@string/show_licenses" />
 
         <Button
             android:id="@+id/translation"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="12dp"
             android:text="@string/translation" />
 
         <Button
             android:id="@+id/sourceCode"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="12dp"
             android:text="@string/source_code" />
 
     </LinearLayout>

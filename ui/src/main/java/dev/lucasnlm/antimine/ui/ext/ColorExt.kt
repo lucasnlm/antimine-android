@@ -13,7 +13,7 @@ fun Int.toAndroidColor(alpha: Int? = null): Int {
         )
     } else {
         Color.argb(
-            160,
+            alpha,
             Color.red(this),
             Color.green(this),
             Color.blue(this)

@@ -23,6 +23,32 @@ class SectionView : FrameLayout {
             .inflate(R.layout.view_section, this, true)
     }
 
+    fun bindText(@StringRes text: Int) {
+        findViewById<TextView>(R.id.text).apply {
+            this.text = context.getString(text)
+        }
+    }
+
+    fun bind(
+        text: String,
+        @DrawableRes startButton: Int? = null,
+        startAction: ((View) -> Unit)? = null,
+        startDescription: String? = null,
+        @DrawableRes endButton: Int? = null,
+        endAction: ((View) -> Unit)? = null,
+        endDescription: String? = null,
+    ) {
+        bindView(
+            text = text,
+            startButton = startButton,
+            startAction = startAction,
+            startDescription = startDescription,
+            endButton = endButton,
+            endAction = endAction,
+            endDescription = endDescription,
+        )
+    }
+
     fun bind(
         @StringRes text: Int,
         @DrawableRes startButton: Int? = null,
@@ -32,16 +58,35 @@ class SectionView : FrameLayout {
         endAction: ((View) -> Unit)? = null,
         @StringRes endDescription: Int? = null,
     ) {
+        bindView(
+            text = context.getString(text),
+            startButton = startButton,
+            startAction = startAction,
+            startDescription = startDescription?.let { context.getString(it) },
+            endButton = endButton,
+            endAction = endAction,
+            endDescription = endDescription?.let { context.getString(it) },
+        )
+    }
+
+    private fun bindView(
+        text: String,
+        @DrawableRes startButton: Int? = null,
+        startAction: ((View) -> Unit)? = null,
+        startDescription: String? = null,
+        @DrawableRes endButton: Int? = null,
+        endAction: ((View) -> Unit)? = null,
+        endDescription: String? = null,
+    ) {
         findViewById<TextView>(R.id.text).apply {
-            this.text = context.getString(text)
+            this.text = text
         }
 
         startButton?.let { button ->
             findViewById<ImageView>(R.id.startButton).apply {
                 visibility = View.VISIBLE
                 setImageResource(button)
-                startDescription?.let {
-                    val label = context.getString(startDescription)
+                startDescription?.let { label ->
                     contentDescription = label
                     TooltipCompat.setTooltipText(this, label)
                 }
@@ -54,9 +99,8 @@ class SectionView : FrameLayout {
             findViewById<ImageView>(R.id.endButton).apply {
                 visibility = View.VISIBLE
                 setImageResource(button)
-                endDescription?.let {
-                    val label = context.getString(endDescription)
-                    contentDescription = context.getString(endDescription)
+                endDescription?.let { label ->
+                    contentDescription = label
                     TooltipCompat.setTooltipText(this, label)
                 }
                 importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES

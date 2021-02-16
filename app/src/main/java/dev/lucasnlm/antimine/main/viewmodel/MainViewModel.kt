@@ -30,6 +30,7 @@ class MainViewModel(
             is MainEvent.ShowCustomDifficultyDialogEvent -> showCustomDifficultyDialogEvent()
             is MainEvent.StartTutorialEvent -> startTutorial()
             is MainEvent.GoToSettingsPageEvent -> goToSettingsPageEvent()
+            is MainEvent.GoToMainPageEvent -> goToMainPageEvent()
             is MainEvent.ShowControlsEvent -> showControlsEvent()
             is MainEvent.ShowGooglePlayGamesEvent -> showGooglePlayGames()
             is MainEvent.FetchCloudSave -> fetchCloudSave(event.playGamesId)
@@ -43,6 +44,10 @@ class MainViewModel(
 
     private fun goToSettingsPageEvent() {
         sendSideEffect(MainEvent.GoToSettingsPageEvent)
+    }
+
+    private fun goToMainPageEvent() {
+        sendSideEffect(MainEvent.GoToMainPageEvent)
     }
 
     private fun showControlsEvent() {
@@ -123,7 +128,7 @@ class MainViewModel(
 
     private fun startTutorial() {
         val intent = Intent(context, GameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             val bundle = Bundle().apply {
                 putBoolean(GameActivity.START_TUTORIAL, true)
             }

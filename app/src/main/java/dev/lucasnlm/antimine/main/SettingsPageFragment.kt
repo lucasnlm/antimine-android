@@ -38,6 +38,10 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
 
         settings_menu.bind(
             text = R.string.more,
+            startButton = R.drawable.back_arrow,
+            startAction = {
+                viewModel.sendEvent(MainEvent.GoToMainPageEvent)
+            }
         )
 
         about_menu_text.bind(

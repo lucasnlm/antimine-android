@@ -81,8 +81,6 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 }
             }
         }
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -14,6 +14,8 @@ import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.activity_stats.*
+import kotlinx.android.synthetic.main.activity_stats.recyclerView
+import kotlinx.android.synthetic.main.activity_stats.section
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -25,6 +27,15 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        section.bind(
+            text = R.string.events,
+            startButton = R.drawable.back_arrow,
+            startDescription = R.string.back,
+            startAction = {
+                finish()
+            }
+        )
 
         recyclerView.apply {
             setHasFixedSize(true)
@@ -39,8 +50,6 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
                 empty.visibility = if (it.stats.isEmpty()) View.VISIBLE else View.GONE
             }
         }
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

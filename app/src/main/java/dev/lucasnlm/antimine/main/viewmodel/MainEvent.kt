@@ -13,6 +13,8 @@ sealed class MainEvent {
 
     object StartTutorialEvent : MainEvent()
 
+    object GoToMainPageEvent : MainEvent()
+
     object GoToSettingsPageEvent : MainEvent()
 
     object ShowControlsEvent : MainEvent()

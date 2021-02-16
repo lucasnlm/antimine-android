@@ -37,8 +37,6 @@ abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActi
 
         super.onCreate(savedInstanceState)
 
-        supportActionBar?.elevation = 0.0f
-
         window.decorView.setBackgroundColor(
             themeRepository.getTheme().palette.background.toAndroidColor()
         )

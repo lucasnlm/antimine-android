@@ -11,6 +11,7 @@ import dev.lucasnlm.antimine.text.viewmodel.TextEvent
 import dev.lucasnlm.antimine.text.viewmodel.TextViewModel
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import kotlinx.android.synthetic.main.activity_text.*
+import kotlinx.android.synthetic.main.activity_text.section
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
@@ -23,7 +24,15 @@ class TextActivity : ThematicActivity(R.layout.activity_text) {
         super.onCreate(savedInstanceState)
         val bundle = intent.extras ?: Bundle()
 
-        title = bundle.getString(TEXT_TITLE)
+        section.bind(
+            text = bundle.getString(TEXT_TITLE) ?: "",
+            startButton = R.drawable.close,
+            startDescription = getString(R.string.back),
+            startAction = {
+                section.bindText(R.string.about)
+                onBackPressed()
+            }
+        )
 
         lifecycleScope.launchWhenCreated {
             textViewModel.sendEvent(

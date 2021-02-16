@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.Gravity
@@ -29,6 +30,7 @@ import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.level.view.LevelFragment
+import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
@@ -224,12 +226,24 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
+    private fun backToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+
+        startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        backToMainActivity()
+    }
+
     private fun bindToolbar() {
         back.apply {
             TooltipCompat.setTooltipText(this, getString(R.string.back))
             setColorFilter(minesCount.currentTextColor)
             setOnClickListener {
-                finish()
+                backToMainActivity()
             }
         }
 

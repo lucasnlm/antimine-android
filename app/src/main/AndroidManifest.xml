@@ -65,13 +65,7 @@
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:theme="@style/AppTheme"
-            android:parentActivityName=".main.MainActivity">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".main.MainActivity" />
-
-        </activity>
+            android:parentActivityName=".main.MainActivity"/>
 
         <activity
             android:name=".main.MainActivity"
@@ -105,13 +99,7 @@
 
         <activity
             android:name=".language.LanguageSelectorActivity"
-            android:label="@string/select_language"
-            android:parentActivityName="dev.lucasnlm.antimine.preferences.PreferencesActivity">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.lucasnlm.antimine.preferences.PreferencesActivity" />
-        </activity>
+            android:label="@string/select_language"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

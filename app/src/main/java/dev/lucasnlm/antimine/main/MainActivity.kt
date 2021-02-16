@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.main
 
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -21,12 +22,12 @@ import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.relex.circleindicator.CircleIndicator3
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class MainActivity : ThematicActivity(R.layout.activity_main) {
     private val viewModel: MainViewModel by viewModel()
@@ -34,6 +35,25 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     private val preferencesRepository: IPreferencesRepository by inject()
 
     private lateinit var viewPager: ViewPager2
+    private var currentBackgroundColor: Int =
+        usingTheme.palette.background.toAndroidColor()
+
+    private val pageListener = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            val fromColor = currentBackgroundColor
+            val toColor = usingTheme.palette.accent.toAndroidColor((position + 1) * 64)
+
+            ValueAnimator.ofArgb(fromColor, toColor).apply {
+                duration = 250L
+                addUpdateListener {
+                    currentBackgroundColor = it.animatedValue as Int
+                    root.background.setTint(currentBackgroundColor)
+                }
+                start()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +67,11 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                 )
             )
             currentItem = 0
+            registerOnPageChangeCallback(pageListener)
         }
+
+        currentBackgroundColor =
+            usingTheme.palette.accent.toAndroidColor((1 + viewPager.currentItem) * 64)
 
         findViewById<CircleIndicator3>(R.id.circle_indicator).apply {
             setViewPager(pager)
@@ -63,10 +87,18 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         launchGooglePlayGames()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewPager.unregisterOnPageChangeCallback(pageListener)
+    }
+
     private fun handleSideEffects(event: MainEvent) {
         when (event) {
             is MainEvent.ShowCustomDifficultyDialogEvent -> {
                 showCustomLevelDialog()
+            }
+            is MainEvent.GoToMainPageEvent -> {
+                viewPager.setCurrentItem(0, true)
             }
             is MainEvent.GoToSettingsPageEvent -> {
                 viewPager.setCurrentItem(1, true)

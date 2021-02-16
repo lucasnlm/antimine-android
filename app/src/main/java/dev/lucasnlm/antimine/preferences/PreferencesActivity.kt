@@ -22,6 +22,8 @@ import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IAnalyticsManager
 import kotlinx.android.synthetic.main.activity_preferences.*
+import kotlinx.android.synthetic.main.activity_preferences.section
+import kotlinx.android.synthetic.main.activity_stats.*
 import org.koin.android.ext.android.inject
 
 class PreferencesActivity :
@@ -55,7 +57,15 @@ class PreferencesActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
-        setTitle(R.string.settings)
+
+        section.bind(
+            text = R.string.settings,
+            startButton = R.drawable.back_arrow,
+            startDescription = R.string.back,
+            startAction = {
+                finish()
+            }
+        )
 
         PreferenceManager.getDefaultSharedPreferences(this)
             .registerOnSharedPreferenceChangeListener(this)
@@ -77,8 +87,6 @@ class PreferencesActivity :
         }
 
         placePreferenceFragment(R.xml.gameplay_preferences)
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onSupportNavigateUp(): Boolean {
