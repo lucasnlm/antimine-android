@@ -11,7 +11,7 @@ class HistoryActivity : ThematicActivity(R.layout.activity_history) {
         super.onCreate(savedInstanceState)
 
         section.bind(
-            text = R.string.events,
+            text = R.string.previous_games,
             startButton = R.drawable.back_arrow,
             startDescription = R.string.back,
             startAction = {

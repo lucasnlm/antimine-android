@@ -105,6 +105,10 @@ sealed class Analytics(
 
     object ContinueGame : Analytics("Continue Game")
 
+    object OpenTutorial : Analytics("Open Tutorial")
+
+    object OpenCustom : Analytics("Open Custom")
+
     object TutorialStarted : Analytics("Tutorial Started")
 
     object TutorialCompleted : Analytics("Tutorial Completed")

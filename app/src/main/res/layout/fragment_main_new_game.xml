@@ -92,4 +92,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <dev.lucasnlm.antimine.main.view.CardButtonView
+        android:id="@+id/themes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/remove_ads"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

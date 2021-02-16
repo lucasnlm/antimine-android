@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import com.google.android.material.card.MaterialCardView
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
@@ -29,6 +30,46 @@ class CardButtonView : FrameLayout {
     }
 
     fun bind(
+        theme: AppTheme,
+        invert: Boolean = false,
+        @StringRes text: Int,
+        @StringRes extra: Int? = null,
+        onAction: (View) -> Unit,
+        @DrawableRes startIcon: Int? = null,
+        @DrawableRes endIcon: Int? = null,
+    ) {
+        bindView(
+            theme = theme,
+            invert = invert,
+            text = context.getString(text),
+            extra = extra?.let { context.getString(it) },
+            onAction = onAction,
+            startIcon = startIcon,
+            endIcon = endIcon
+        )
+    }
+
+    fun bind(
+        theme: AppTheme,
+        invert: Boolean = false,
+        text: String,
+        extra: String? = null,
+        onAction: (View) -> Unit,
+        @DrawableRes startIcon: Int? = null,
+        @DrawableRes endIcon: Int? = null,
+    ) {
+        bindView(
+            theme = theme,
+            invert = invert,
+            text = text,
+            extra = extra,
+            onAction = onAction,
+            startIcon = startIcon,
+            endIcon = endIcon
+        )
+    }
+
+    private fun bindView(
         theme: AppTheme,
         invert: Boolean = false,
         text: String,

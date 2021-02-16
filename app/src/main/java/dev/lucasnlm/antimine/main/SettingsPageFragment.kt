@@ -50,7 +50,7 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
 
         settings.bind(
             theme = usingTheme,
-            text = getString(R.string.settings),
+            text = R.string.settings,
             startIcon = R.drawable.settings,
             onAction = {
                 analyticsManager.sentEvent(Analytics.OpenSettings)
@@ -61,7 +61,7 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
 
         controls.bind(
             theme = usingTheme,
-            text = getString(R.string.control),
+            text = R.string.control,
             startIcon = R.drawable.controls,
             onAction = {
                 analyticsManager.sentEvent(Analytics.OpenControls)
@@ -71,7 +71,7 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
 
         themes.bind(
             theme = usingTheme,
-            text = getString(R.string.themes),
+            text = R.string.themes,
             startIcon = R.drawable.themes,
             onAction = {
                 analyticsManager.sentEvent(Analytics.OpenThemes)
@@ -83,7 +83,7 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
         if (featureFlagManager.isGameHistoryEnabled) {
             previous_games.bind(
                 theme = usingTheme,
-                text = getString(R.string.previous_games),
+                text = R.string.previous_games,
                 startIcon = R.drawable.old_games,
                 onAction = {
                     analyticsManager.sentEvent(Analytics.OpenSaveHistory)
@@ -97,7 +97,7 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
 
         stats.bind(
             theme = usingTheme,
-            text = getString(R.string.events),
+            text = R.string.events,
             startIcon = R.drawable.stats,
             onAction = {
                 analyticsManager.sentEvent(Analytics.OpenStats)
@@ -108,7 +108,7 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
 
         about.bind(
             theme = usingTheme,
-            text = getString(R.string.about),
+            text = R.string.about,
             startIcon = R.drawable.info,
             onAction = {
                 analyticsManager.sentEvent(Analytics.OpenAbout)
@@ -119,7 +119,7 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
 
         translation.bind(
             theme = usingTheme,
-            text = getString(R.string.translation),
+            text = R.string.translation,
             startIcon = R.drawable.translate,
             onAction = {
                 analyticsManager.sentEvent(Analytics.OpenTranslations)
@@ -135,7 +135,7 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
         if (playGamesManager.hasGooglePlayGames()) {
             play_games.bind(
                 theme = usingTheme,
-                text = getString(R.string.google_play_games),
+                text = R.string.google_play_games,
                 startIcon = R.drawable.games_controller,
                 onAction = {
                     analyticsManager.sentEvent(Analytics.OpenGooglePlayGames)

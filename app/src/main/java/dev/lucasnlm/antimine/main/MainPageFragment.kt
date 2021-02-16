@@ -1,11 +1,13 @@
 package dev.lucasnlm.antimine.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
+import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
@@ -13,7 +15,9 @@ import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
+import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import kotlinx.android.synthetic.main.fragment_main_new_game.*
 import kotlinx.coroutines.flow.collect
@@ -22,6 +26,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
     private val viewModel: MainViewModel by sharedViewModel()
+    private val analyticsManager: IAnalyticsManager by inject()
     private val themeRepository: IThemeRepository by inject()
     private val minefieldRepository: IMinefieldRepository by inject()
     private val dimensionRepository: IDimensionRepository by inject()
@@ -60,7 +65,7 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
         continue_game.bind(
             theme = usingTheme,
             invert = true,
-            text = getString(R.string.continue_game),
+            text = R.string.continue_game,
             onAction = {
                 viewModel.sendEvent(MainEvent.ContinueGameEvent)
             }
@@ -112,27 +117,40 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
 
         custom.bind(
             theme = usingTheme,
-            text = getString(R.string.custom),
+            text = R.string.custom,
             onAction = {
+                analyticsManager.sentEvent(Analytics.OpenCustom)
                 viewModel.sendEvent(MainEvent.ShowCustomDifficultyDialogEvent)
             }
         )
 
         tutorial.bind(
             theme = usingTheme,
-            text = getString(R.string.tutorial),
+            text = R.string.tutorial,
             startIcon = R.drawable.tutorial,
             onAction = {
+                analyticsManager.sentEvent(Analytics.OpenTutorial)
                 viewModel.sendEvent(MainEvent.StartTutorialEvent)
             }
         )
 
         settings.bind(
             theme = usingTheme,
-            text = getString(R.string.settings),
+            text = R.string.settings,
             endIcon = R.drawable.arrow_right,
             onAction = {
                 viewModel.sendEvent(MainEvent.GoToSettingsPageEvent)
+            }
+        )
+
+        themes.bind(
+            theme = usingTheme,
+            text = R.string.themes,
+            startIcon = R.drawable.themes,
+            onAction = {
+                analyticsManager.sentEvent(Analytics.OpenThemes)
+                val intent = Intent(context, ThemeActivity::class.java)
+                startActivity(intent)
             }
         )
 
