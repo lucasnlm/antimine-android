@@ -24,7 +24,8 @@ class HistoryViewModel(
             is HistoryEvent.ReplaySave -> {
                 replayGame(event.id)
             }
-            else -> { }
+            else -> {
+            }
         }
     }
 
@@ -34,7 +35,8 @@ class HistoryViewModel(
                 val newSaveList = savesRepository.getAllSaves().sortedByDescending { it.uid }
                 emit(state.copy(saveList = newSaveList))
             }
-            else -> { }
+            else -> {
+            }
         }
     }
 

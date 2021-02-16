@@ -23,10 +23,10 @@ android {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         testInstrumentationRunnerArguments clearPackageData: 'true'
         resConfigs 'af-rZA', 'ar-rSA', 'ca-rES', 'cs-rCZ', 'da-rDK', 'de-rDE', 'el-rGR', 'en-rUS',
-                   'es-rES', 'fi-rFI', 'fr-rFR', 'hi-rIN', 'hu-rHU', 'it-rIT', 'iw-rIL', 'ja-rJP',
-                   'ko-rKR', 'nl-rNL', 'no-rNO', 'pl-rPL', 'pt-rBR', 'pt-rPT', 'ro-rRO', 'ru-rRU',
-                   'sv-rSE', 'th-rTH', 'tr-rTR', 'uk-rUA', 'vi-rVN', 'zh-rCN', 'bg-rBG', 'in-rID',
-                   'vec-rIT', 'ku-rTR'
+                'es-rES', 'fi-rFI', 'fr-rFR', 'hi-rIN', 'hu-rHU', 'it-rIT', 'iw-rIL', 'ja-rJP',
+                'ko-rKR', 'nl-rNL', 'no-rNO', 'pl-rPL', 'pt-rBR', 'pt-rPT', 'ro-rRO', 'ru-rRU',
+                'sv-rSE', 'th-rTH', 'tr-rTR', 'uk-rUA', 'vi-rVN', 'zh-rCN', 'bg-rBG', 'in-rID',
+                'vec-rIT', 'ku-rTR'
     }
 
     bundle {

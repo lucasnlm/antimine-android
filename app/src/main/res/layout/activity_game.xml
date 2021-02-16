@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,10 +21,10 @@
         android:id="@+id/switchFlag"
         android:layout_width="?attr/actionBarSize"
         android:layout_height="?attr/actionBarSize"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:contentDescription="@string/switch_control"
         android:clickable="true"
+        android:contentDescription="@string/switch_control"
         android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardUseCompatPadding="true"
         app:layout_constraintLeft_toRightOf="@id/back"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,8 +34,8 @@
             android:id="@+id/switchFlagImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp"
             android:importantForAccessibility="no"
+            android:padding="8dp"
             app:srcCompat="@drawable/flag_black" />
 
     </com.google.android.material.card.MaterialCardView>
@@ -56,6 +55,9 @@
         android:textSize="@dimen/text_size"
         android:textStyle="bold"
         android:visibility="gone"
+        app:drawableLeftCompat="@drawable/timer"
+        app:drawableStartCompat="@drawable/timer"
+        app:drawableTint="?android:attr/textColorPrimary"
         app:layout_constraintBottom_toBottomOf="@id/back"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintLeft_toRightOf="@id/switchFlag"
@@ -63,10 +65,7 @@
         app:layout_constraintTop_toTopOf="@id/back"
         tools:targetApi="m"
         tools:text="10:00"
-        tools:visibility="visible"
-        app:drawableTint="?android:attr/textColorPrimary"
-        app:drawableStartCompat="@drawable/timer"
-        app:drawableLeftCompat="@drawable/timer" />
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/minesCount"
@@ -81,6 +80,8 @@
         android:textSize="@dimen/text_size"
         android:textStyle="bold"
         android:visibility="gone"
+        app:drawableStartCompat="@drawable/mine"
+        app:drawableTint="?android:attr/textColorPrimary"
         app:layout_constraintBottom_toBottomOf="@id/back"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintLeft_toRightOf="@id/timer"
@@ -88,23 +89,21 @@
         app:layout_constraintTop_toTopOf="@id/back"
         tools:targetApi="m"
         tools:text="99"
-        tools:visibility="visible"
-        app:drawableStartCompat="@drawable/mine"
-        app:drawableTint="?android:attr/textColorPrimary" />
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/shortcutIcon"
         android:layout_width="?attr/actionBarSize"
         android:layout_height="?attr/actionBarSize"
+        android:alpha="0.0"
         android:background="?selectableItemBackgroundBorderless"
+        android:clickable="false"
         android:contentDescription="@string/new_game"
         android:padding="14dp"
-        android:alpha="0.0"
-        android:clickable="false"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/retry"
-        tools:alpha="1.0"/>
+        tools:alpha="1.0" />
 
     <TextView
         android:id="@+id/tipsCounter"
@@ -114,11 +113,11 @@
         android:textSize="12sp"
         android:textStyle="bold"
         android:visibility="gone"
-        tools:text="100"
-        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/shortcutIcon"
         app:layout_constraintEnd_toEndOf="@+id/shortcutIcon"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="100"
+        tools:visibility="visible" />
 
     <FrameLayout
         android:id="@+id/levelContainer"
@@ -128,6 +127,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/back">
-        <requestFocus/>
+
+        <requestFocus />
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

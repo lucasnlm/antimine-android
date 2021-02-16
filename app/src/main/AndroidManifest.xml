@@ -12,10 +12,10 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
-    <uses-permission
-        android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
-    <uses-feature android:name="android.software.leanback"
+    <uses-feature
+        android:name="android.software.leanback"
         android:required="false" />
 
     <uses-feature
@@ -29,16 +29,16 @@
 
     <application
         android:name="dev.lucasnlm.antimine.MainApplication"
-        android:description="@string/app_description"
         android:allowBackup="false"
         android:allowClearUserData="true"
+        android:banner="@mipmap/ic_banner"
+        android:description="@string/app_description"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:isGame="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:banner="@mipmap/ic_banner"
         android:theme="@style/AppTheme"
         tools:targetApi="lollipop">
 
@@ -53,6 +53,7 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
@@ -60,46 +61,46 @@
 
         <activity
             android:name="dev.lucasnlm.antimine.GameActivity"
-            android:launchMode="singleTop"
-            android:saveEnabled="false"
             android:icon="@mipmap/ic_launcher"
+            android:launchMode="singleTop"
+            android:parentActivityName=".main.MainActivity"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".main.MainActivity"/>
+            android:saveEnabled="false"
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".main.MainActivity"
+            android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:saveEnabled="false"
-            android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:theme="@style/AppTheme"/>
+            android:saveEnabled="false"
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".TvGameActivity"
-            android:launchMode="singleTop"
-            android:saveEnabled="false"
             android:icon="@mipmap/ic_launcher"
+            android:launchMode="singleTop"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:theme="@style/AppTheme"/>
+            android:saveEnabled="false"
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name="dev.lucasnlm.antimine.stats.StatsActivity"
             android:label="@string/events"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name="dev.lucasnlm.antimine.history.HistoryActivity"
-            android:label="@string/previous_games"/>
+            android:label="@string/previous_games" />
 
         <activity
             android:name="dev.lucasnlm.antimine.preferences.PreferencesActivity"
-            android:label="@string/settings"/>
+            android:label="@string/settings" />
 
         <activity
             android:name=".language.LanguageSelectorActivity"
-            android:label="@string/select_language"/>
+            android:label="@string/select_language" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

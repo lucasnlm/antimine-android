@@ -4,9 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
-import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.external.Achievement
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
@@ -26,11 +26,11 @@ val AppModule = module {
 
     single {
         object : IBillingManager {
-            override fun start() { }
+            override fun start() {}
 
             override fun isEnabled(): Boolean = false
 
-            override suspend fun charge(activity: Activity) { }
+            override suspend fun charge(activity: Activity) {}
 
             override suspend fun getPrice(): String? = null
 
@@ -46,23 +46,23 @@ val AppModule = module {
 
             override fun silentLogin(): Boolean = false
 
-            override fun showPlayPopUp(activity: Activity) { }
+            override fun showPlayPopUp(activity: Activity) {}
 
             override fun getLoginIntent(): Intent? = null
 
-            override fun handleLoginResult(data: Intent?) { }
+            override fun handleLoginResult(data: Intent?) {}
 
             override fun isLogged(): Boolean = false
 
-            override fun openAchievements(activity: Activity) { }
+            override fun openAchievements(activity: Activity) {}
 
-            override fun openLeaderboards(activity: Activity) { }
+            override fun openLeaderboards(activity: Activity) {}
 
-            override fun unlockAchievement(achievement: Achievement) { }
+            override fun unlockAchievement(achievement: Achievement) {}
 
-            override fun incrementAchievement(achievement: Achievement) { }
+            override fun incrementAchievement(achievement: Achievement) {}
 
-            override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) { }
+            override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) {}
         }
     } bind IPlayGamesManager::class
 

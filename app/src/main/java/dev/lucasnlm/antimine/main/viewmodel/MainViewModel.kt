@@ -34,7 +34,8 @@ class MainViewModel(
             is MainEvent.ShowControlsEvent -> showControlsEvent()
             is MainEvent.ShowGooglePlayGamesEvent -> showGooglePlayGames()
             is MainEvent.FetchCloudSave -> fetchCloudSave(event.playGamesId)
-            else -> {}
+            else -> {
+            }
         }
     }
 

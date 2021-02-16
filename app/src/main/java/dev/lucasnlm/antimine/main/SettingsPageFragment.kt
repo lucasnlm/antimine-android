@@ -22,7 +22,6 @@ import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.android.synthetic.main.fragment_main_settings.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import java.lang.Exception
 
 class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
     private val viewModel: MainViewModel by sharedViewModel()

@@ -22,8 +22,6 @@ import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IAnalyticsManager
 import kotlinx.android.synthetic.main.activity_preferences.*
-import kotlinx.android.synthetic.main.activity_preferences.section
-import kotlinx.android.synthetic.main.activity_stats.*
 import org.koin.android.ext.android.inject
 
 class PreferencesActivity :

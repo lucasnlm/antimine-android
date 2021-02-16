@@ -19,11 +19,11 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"
+        android:animateLayoutChanges="true"
         android:background="@drawable/round_background"
         android:orientation="vertical"
-        android:layout_gravity="bottom|start"
-        android:animateLayoutChanges="true"
-        android:layout_margin="16dp"
         android:padding="12dp">
 
         <TextView

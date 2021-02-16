@@ -7,9 +7,9 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.stats.model.StatsModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
+import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.view_stats.view.*
 
 class StatsAdapter(

@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.themes.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.AreaPaintSettings

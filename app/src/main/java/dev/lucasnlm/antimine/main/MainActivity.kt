@@ -28,7 +28,6 @@ import me.relex.circleindicator.CircleIndicator3
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class MainActivity : ThematicActivity(R.layout.activity_main) {
     private val viewModel: MainViewModel by viewModel()
     private val playGamesManager: IPlayGamesManager by inject()
@@ -114,7 +113,8 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                 startActivity(Intent(this, SplashActivity::class.java))
                 overridePendingTransition(0, 0)
             }
-            else -> {}
+            else -> {
+            }
         }
     }
 
@@ -154,7 +154,9 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                 try {
                     withContext(Dispatchers.IO) {
                         logged = playGamesManager.silentLogin()
-                        if (logged) { refreshUserId() }
+                        if (logged) {
+                            refreshUserId()
+                        }
                         playGamesManager.showPlayPopUp(this@MainActivity)
                     }
                 } catch (e: Exception) {

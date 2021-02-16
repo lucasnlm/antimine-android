@@ -2,8 +2,8 @@ package dev.lucasnlm.antimine.history
 
 import android.os.Bundle
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.history.views.HistoryFragment
+import dev.lucasnlm.antimine.ui.ThematicActivity
 import kotlinx.android.synthetic.main.activity_stats.*
 
 class HistoryActivity : ThematicActivity(R.layout.activity_history) {

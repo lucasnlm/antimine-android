@@ -598,7 +598,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     }
                 }
             }
-            else -> { }
+            else -> {
+            }
         }
     }
 

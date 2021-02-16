@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center">
 
     <TextView
         android:id="@+id/tutorial_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:paddingHorizontal="24dp"
         android:gravity="center_horizontal"
+        android:paddingHorizontal="24dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerGrid"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerGrid"
-        tools:text="Tutorial"/>
+        tools:text="Tutorial" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -32,11 +31,11 @@
         android:fadeScrollbars="true"
         android:importantForAccessibility="no"
         android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:scrollbars="none" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tutorial_bottom"
@@ -44,11 +43,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
         android:gravity="center_horizontal"
-        android:textSize="16sp"
         android:paddingHorizontal="24dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerGrid"
         tools:text="You can start by clicking at any random place." />
 

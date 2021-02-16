@@ -14,8 +14,6 @@ import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.activity_stats.*
-import kotlinx.android.synthetic.main.activity_stats.recyclerView
-import kotlinx.android.synthetic.main.activity_stats.section
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject

@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
