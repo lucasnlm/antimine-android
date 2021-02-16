@@ -72,7 +72,6 @@
     <string name="use_question_mark">Käytä kysymysmerkkiä</string>
     <string name="no_guessing_mode">\'Ei arvausta\' -tilaa</string>
     <string name="control">Kontrollit</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Napautus</string>
     <string name="double_click">Kaksoisnapsautus</string>
     <string name="long_press">Pitkä painallus</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Saavutukset</string>
     <string name="no">Ei</string>
     <string name="general">Yleiset</string>
+    <string name="more">Lisää</string>
     <string name="source_code">Lähdekoodi</string>
     <string name="translation">Käännökset</string>
     <string name="licenses">Lisenssit</string>
@@ -108,8 +108,6 @@
     <string name="share">Jaa</string>
     <string name="share_menu">Jaa…</string>
     <string name="no_network">Ei Internet-yhteyttä.</string>
-    <string name="open_menu">Avaa valikko</string>
-    <string name="close_menu">Sulje valikko</string>
     <string name="delete_all">Poista kaikki</string>
     <string name="appearance">Ulkoasu</string>
     <string name="themes">Teemat</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Lippu poistettu!</string>
     <string name="remove_ad">Poista Mainokset</string>
     <string name="help">Apua</string>
+    <string name="back">Takaisin</string>
+    <string name="donation">Lahjoitus</string>
     <string name="show_windows">Näytä ikkunoita</string>
     <string name="select_language">Valitse Kieli</string>
     <string name="switch_control">Vaihda: lippu ja avaa</string>

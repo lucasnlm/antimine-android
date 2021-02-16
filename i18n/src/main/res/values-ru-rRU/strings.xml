@@ -57,7 +57,7 @@
     <string name="you_finished">Вы закончили!</string>
     <string name="defeats">Поражения</string>
     <string name="generic_game_over">Удачи в следующей игре.</string>
-    <string name="generic_win">Вы обнаружили %1$d мин за %2$d секунд.</string>
+    <string name="generic_win">Вы обнаружили %1$d мин за %1$d секунд.</string>
     <string name="fail_to_share">Не удалось поделиться</string>
     <string name="version_s">Версия %1$s</string>
     <string name="sound_effects">Звуковые эффекты</string>
@@ -72,7 +72,6 @@
     <string name="use_question_mark">Использовать знак вопроса</string>
     <string name="no_guessing_mode">Режим \'Без угадывания\'</string>
     <string name="control">Управление</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Одно нажатие</string>
     <string name="double_click">Двойное нажатие</string>
     <string name="long_press">Удержание нажатия</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Достижения</string>
     <string name="no">Нет</string>
     <string name="general">Общее</string>
+    <string name="more">Более</string>
     <string name="source_code">Исходный код</string>
     <string name="translation">Перевод</string>
     <string name="licenses">Лицензии</string>
@@ -108,8 +108,6 @@
     <string name="share">Поделиться</string>
     <string name="share_menu">Делимся…</string>
     <string name="no_network">Отсутствует подключение к Интернету.</string>
-    <string name="open_menu">Открыть меню</string>
-    <string name="close_menu">Закрыть меню</string>
     <string name="delete_all">Удалить все</string>
     <string name="appearance">Оформление</string>
     <string name="themes">Темы</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Флаг снят!</string>
     <string name="remove_ad">Удалить рекламу</string>
     <string name="help">Помощь</string>
+    <string name="back">Назад</string>
+    <string name="donation">Пожертвование</string>
     <string name="show_windows">Показать окна</string>
     <string name="select_language">Выберите язык</string>
     <string name="switch_control">Переключатель: флаг и открыть</string>

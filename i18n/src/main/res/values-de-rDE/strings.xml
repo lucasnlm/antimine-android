@@ -72,7 +72,6 @@
     <string name="use_question_mark">Fragezeichen benutzen</string>
     <string name="no_guessing_mode">\"Kein Erraten\"-Modus</string>
     <string name="control">Steuerung</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Einzelklick</string>
     <string name="double_click">Doppelklick</string>
     <string name="long_press">Lange Drücken</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Erfolge</string>
     <string name="no">Nein</string>
     <string name="general">Allgemein</string>
+    <string name="more">Mehr</string>
     <string name="source_code">Quellcode</string>
     <string name="translation">Übersetzung</string>
     <string name="licenses">Lizenzen</string>
@@ -108,8 +108,6 @@
     <string name="share">Teilen</string>
     <string name="share_menu">Teilen…</string>
     <string name="no_network">Keine Internetverbindung.</string>
-    <string name="open_menu">Menü öffnen</string>
-    <string name="close_menu">Menü schließen</string>
     <string name="delete_all">Alles löschen</string>
     <string name="appearance">Erscheinungsbild</string>
     <string name="themes">Themen</string>
@@ -127,8 +125,10 @@
     <string name="flag_removed">Markierung entfernt!</string>
     <string name="remove_ad">Werbung entfernen</string>
     <string name="help">Hilfe</string>
+    <string name="back">Zurück</string>
+    <string name="donation">Spende</string>
     <string name="show_windows">Fenster anzeigen</string>
-    <string name="select_language">Sprache Auswählen</string>
+    <string name="select_language">Sprache auswählen</string>
     <string name="switch_control">Umschalter: Markieren und Öffnen</string>
     <string name="switch_control_desc">Benutze den Knopf, um zwischen Markierung und Öffnen zu wechseln</string>
     <string name="app_description">Du musst ein rechteckiges Spielfeld, das versteckte Minen enthält, räumen, ohne irgendeine davon zur Explosion zu bringen.</string>

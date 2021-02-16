@@ -57,7 +57,7 @@
     <string name="you_finished">¡Has terminado!</string>
     <string name="defeats">Derrotas</string>
     <string name="generic_game_over">Buena suerte en tu próxima partida.</string>
-    <string name="generic_win">Encontraste %1$d minas en %2$d segundos.</string>
+    <string name="generic_win">Encontraste %1$d minas en %1$d segundos.</string>
     <string name="fail_to_share">Error al compartir</string>
     <string name="version_s">Versión %1$s</string>
     <string name="sound_effects">Efectos Sonoros</string>
@@ -72,7 +72,6 @@
     <string name="use_question_mark">Usar signo de interrogación</string>
     <string name="no_guessing_mode">Modo \"Sin adivinación\"</string>
     <string name="control">Controles</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Un clic</string>
     <string name="double_click">Doble clic</string>
     <string name="long_press">Mantenga pulsado</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Logros</string>
     <string name="no">No</string>
     <string name="general">General</string>
+    <string name="more">Más</string>
     <string name="source_code">Código Fuente</string>
     <string name="translation">Traducción</string>
     <string name="licenses">Licencias</string>
@@ -108,8 +108,6 @@
     <string name="share">Compartir</string>
     <string name="share_menu">Compartir…</string>
     <string name="no_network">No hay conexión a Internet.</string>
-    <string name="open_menu">Abra menú</string>
-    <string name="close_menu">Cerrar menú</string>
     <string name="delete_all">Borrar todo</string>
     <string name="appearance">Aspecto</string>
     <string name="themes">Temas</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">¡Bandera eliminada!</string>
     <string name="remove_ad">Eliminar anuncios</string>
     <string name="help">Ayuda</string>
+    <string name="back">Volver</string>
+    <string name="donation">Donación</string>
     <string name="show_windows">Mostrar ventanas</string>
     <string name="select_language">Seleccionar Idioma</string>
     <string name="switch_control">Cambiar: Bandera y Abrir</string>

@@ -72,7 +72,6 @@
     <string name="use_question_mark">Soru İşareti Kullan</string>
     <string name="no_guessing_mode">\"Tahmin yok\" modu</string>
     <string name="control">Kontroller</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Tek Tıklama</string>
     <string name="double_click">Çift Tıklama</string>
     <string name="long_press">Uzun Basma</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Başarımlar</string>
     <string name="no">Hayır</string>
     <string name="general">Genel</string>
+    <string name="more">Daha Fazla</string>
     <string name="source_code">Kaynak Kodu</string>
     <string name="translation">Çeviri</string>
     <string name="licenses">Lisanslar</string>
@@ -108,8 +108,6 @@
     <string name="share">Paylaş</string>
     <string name="share_menu">Paylaş…</string>
     <string name="no_network">İnternet bağlantısı yok.</string>
-    <string name="open_menu">Menüyü Aç</string>
-    <string name="close_menu">Menüyü Kapat</string>
     <string name="delete_all">Tümünü sil</string>
     <string name="appearance">Görünüm</string>
     <string name="themes">Temalar</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Bayrak kaldırıldı!</string>
     <string name="remove_ad">Reklamları kaldır</string>
     <string name="help">Yardım</string>
+    <string name="back">Geri</string>
+    <string name="donation">Bağış</string>
     <string name="show_windows">Pencereleri göster</string>
     <string name="select_language">Dil Seç</string>
     <string name="switch_control">Değiştir: Bayrak ve Açık</string>

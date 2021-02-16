@@ -72,7 +72,6 @@
     <string name="use_question_mark">Gebruik vraagteken</string>
     <string name="no_guessing_mode">\'Niet raadgen\' modus</string>
     <string name="control">Besturing</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Enkele klik</string>
     <string name="double_click">Dubbele Klik</string>
     <string name="long_press">Lang indrukken</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Achievements</string>
     <string name="no">Nee</string>
     <string name="general">Algemeen</string>
+    <string name="more">Meer</string>
     <string name="source_code">Bron code</string>
     <string name="translation">Vertaling</string>
     <string name="licenses">Licenties</string>
@@ -108,8 +108,6 @@
     <string name="share">Delen</string>
     <string name="share_menu">Delen…</string>
     <string name="no_network">Geen internetverbinding.</string>
-    <string name="open_menu">Menu openen</string>
-    <string name="close_menu">Menu sluiten</string>
     <string name="delete_all">Alles verwijderen</string>
     <string name="appearance">Uiterlijk</string>
     <string name="themes">Themas</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Vlag verwijderd!</string>
     <string name="remove_ad">Verwijder advertenties</string>
     <string name="help">Help</string>
+    <string name="back">Vorige</string>
+    <string name="donation">Doneren</string>
     <string name="show_windows">Vensters weergeven</string>
     <string name="select_language">Kies taal</string>
     <string name="switch_control">Switch: Vlag en Open</string>

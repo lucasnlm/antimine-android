@@ -72,7 +72,6 @@
     <string name="use_question_mark">Kérdőjel használata</string>
     <string name="no_guessing_mode">\'No guessing\' mode</string>
     <string name="control">Irányítások</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Egyszeri kattintás</string>
     <string name="double_click">Dupla kattintás</string>
     <string name="long_press">Hosszú nyomva tartás</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Teljesítmények</string>
     <string name="no">Nem</string>
     <string name="general">Általános</string>
+    <string name="more">Több</string>
     <string name="source_code">Forráskód</string>
     <string name="translation">Fordítás</string>
     <string name="licenses">Licencek</string>
@@ -108,8 +108,6 @@
     <string name="share">Megosztás</string>
     <string name="share_menu">Megosztás…</string>
     <string name="no_network">Nincs internetkapcsolat.</string>
-    <string name="open_menu">Menü megnyitása</string>
-    <string name="close_menu">Menü bezárása</string>
     <string name="delete_all">Az összes törlése</string>
     <string name="appearance">Megjelenés</string>
     <string name="themes">Témák</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Zászló eltávolítva!</string>
     <string name="remove_ad">Reklámok eltávolítása</string>
     <string name="help">Segítség</string>
+    <string name="back">Vissza</string>
+    <string name="donation">Adomány</string>
     <string name="show_windows">Ablakok megjelenítése</string>
     <string name="select_language">Válassz nyelvet</string>
     <string name="switch_control">Kapcsoló: Jelölés és megnyitás</string>

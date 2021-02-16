@@ -72,7 +72,6 @@
     <string name="use_question_mark">Въпросителен знак</string>
     <string name="no_guessing_mode">\'Без налучкване\' режим</string>
     <string name="control">Управление</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Едно натискане</string>
     <string name="double_click">Двукратно щракване</string>
     <string name="long_press">Задържане</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Постижения</string>
     <string name="no">Не</string>
     <string name="general">Основни</string>
+    <string name="more">Повече</string>
     <string name="source_code">Програмен Код</string>
     <string name="translation">Превод</string>
     <string name="licenses">Лицензи</string>
@@ -108,8 +108,6 @@
     <string name="share">Сподели</string>
     <string name="share_menu">Сподели…</string>
     <string name="no_network">Няма връзка с интернет.</string>
-    <string name="open_menu">Отвори менюто</string>
-    <string name="close_menu">Затвори менюто</string>
     <string name="delete_all">Изтрий всички</string>
     <string name="appearance">Външен вид</string>
     <string name="themes">Теми</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Глагът е премахнат!</string>
     <string name="remove_ad">Премахване на реклами</string>
     <string name="help">Помощ</string>
+    <string name="back">Назад</string>
+    <string name="donation">Дарение</string>
     <string name="show_windows">Показване на всички прозорци</string>
     <string name="select_language">Избери език</string>
     <string name="switch_control">Промени: Флаг и Отворен</string>

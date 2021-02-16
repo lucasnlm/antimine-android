@@ -19,7 +19,7 @@
     <string name="standard">Звичайна</string>
     <string name="beginner">Новачок</string>
     <string name="intermediate">Середній</string>
-    <string name="expert">Експрет</string>
+    <string name="expert">Експерт</string>
     <string name="support_description">З вашою допомогою ми зможемо реалізувати нові функції і залишити наш проект активним.</string>
     <string name="open">Відкрити</string>
     <string name="settings">Налаштування</string>
@@ -72,7 +72,6 @@
     <string name="use_question_mark">Використовувати прапорці «?»</string>
     <string name="no_guessing_mode">Режим \'Без вгадування\'</string>
     <string name="control">Елементи керування</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Одинарний клік</string>
     <string name="double_click">Подвійний клік</string>
     <string name="long_press">Довге натискання</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Досягнення</string>
     <string name="no">Ні</string>
     <string name="general">Загальне</string>
+    <string name="more">Більше</string>
     <string name="source_code">Вихідний код</string>
     <string name="translation">Переклад</string>
     <string name="licenses">Ліцензії</string>
@@ -108,8 +108,6 @@
     <string name="share">Поділитися</string>
     <string name="share_menu">Поділитися…</string>
     <string name="no_network">Немає з’єднання з інтернетом.</string>
-    <string name="open_menu">Відкрити меню</string>
-    <string name="close_menu">Закрити меню</string>
     <string name="delete_all">Видалити все</string>
     <string name="appearance">Зовнішній вигляд</string>
     <string name="themes">Тема</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Прапор вилучено!</string>
     <string name="remove_ad">Прибрати рекламу</string>
     <string name="help">Допомога</string>
+    <string name="back">Назад</string>
+    <string name="donation">Грошева підтримка</string>
     <string name="show_windows">Показати вікна</string>
     <string name="select_language">Вибір мови</string>
     <string name="switch_control">Перемикач: Прапор і Відкрити</string>

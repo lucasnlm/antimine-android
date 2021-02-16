@@ -72,7 +72,6 @@
     <string name="use_question_mark">Pakai Bendera Tanda Tanya</string>
     <string name="no_guessing_mode">Mode \'sekali coba\'</string>
     <string name="control">Kontrol</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Satu klik</string>
     <string name="double_click">Klik dua kali</string>
     <string name="long_press">Tekan Lama</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Prestasi</string>
     <string name="no">Tidak</string>
     <string name="general">Umum</string>
+    <string name="more">Lainnya</string>
     <string name="source_code">Sumber Kode</string>
     <string name="translation">Terjemahan</string>
     <string name="licenses">Lisensi</string>
@@ -108,8 +108,6 @@
     <string name="share">Bagikan</string>
     <string name="share_menu">Bagikan…</string>
     <string name="no_network">Tidak ada koneksi Internet.</string>
-    <string name="open_menu">Buka menu</string>
-    <string name="close_menu">Tutup Menu</string>
     <string name="delete_all">Hapus semua</string>
     <string name="appearance">Penampilan</string>
     <string name="themes">Tema</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Bendera dihapus!</string>
     <string name="remove_ad">Hapus Iklan</string>
     <string name="help">Bantuan</string>
+    <string name="back">Kembali</string>
+    <string name="donation">Donasi</string>
     <string name="show_windows">Tampilkan jendela</string>
     <string name="select_language">Pilih Bahasa</string>
     <string name="switch_control">Beralih: Bendera dan Bukaan</string>

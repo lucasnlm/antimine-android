@@ -72,7 +72,6 @@
     <string name="use_question_mark">เครื่องหมายคำถาม</string>
     <string name="no_guessing_mode">\'No guessing\' mode</string>
     <string name="control">การควบคุม</string>
-    <string name="arrow">➞</string>
     <string name="single_click">แตะครั้งเดียว</string>
     <string name="double_click">แตะสองครั้ง</string>
     <string name="long_press">กดแบบยาว</string>
@@ -95,6 +94,7 @@
     <string name="achievements">ความสำเร็จ</string>
     <string name="no">ไม่ใช่</string>
     <string name="general">ทั่วไป</string>
+    <string name="more">มากขึ้น</string>
     <string name="source_code">ซอร์สโค้ด</string>
     <string name="translation">แปลภาษา</string>
     <string name="licenses">ใบอนุญาต</string>
@@ -108,8 +108,6 @@
     <string name="share">แชร์</string>
     <string name="share_menu">แชร์…</string>
     <string name="no_network">ไม่มีการเชื่อมต่ออินเทอร์เน็ต</string>
-    <string name="open_menu">เปิดเมนู</string>
-    <string name="close_menu">ปิดเมนู</string>
     <string name="delete_all">ลบทั้งหมด</string>
     <string name="appearance">ลักษณะที่ปรากฏ</string>
     <string name="themes">ธีมส์</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">ลบธงแล้ว!</string>
     <string name="remove_ad">ลบโฆษณา</string>
     <string name="help">ช่วยเหลือ</string>
+    <string name="back">กลับ</string>
+    <string name="donation">บริจาค</string>
     <string name="show_windows">แสดงหน้าต่าง</string>
     <string name="select_language">เลือกภาษา</string>
     <string name="switch_control">สวิตซ์: ตั้งค่าสถานะและเปิด</string>

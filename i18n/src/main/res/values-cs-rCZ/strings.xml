@@ -72,7 +72,6 @@
     <string name="use_question_mark">Použít otazníky</string>
     <string name="no_guessing_mode">Režim \"bez hádání\"</string>
     <string name="control">Ovládání</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Jedno klepnutí</string>
     <string name="double_click">Dvojí klepnutí</string>
     <string name="long_press">Dlouhý stisk</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Úspěchy</string>
     <string name="no">Ne</string>
     <string name="general">Obecné</string>
+    <string name="more">Více</string>
     <string name="source_code">Zdrojový kód</string>
     <string name="translation">Překlad</string>
     <string name="licenses">Licence</string>
@@ -108,8 +108,6 @@
     <string name="share">Sdílet</string>
     <string name="share_menu">Sdílet…</string>
     <string name="no_network">Bez připojení k Internetu.</string>
-    <string name="open_menu">Otevřít nabídku</string>
-    <string name="close_menu">Zavřít nabídku</string>
     <string name="delete_all">Smazat vše</string>
     <string name="appearance">Vzhled</string>
     <string name="themes">Motivy</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Vlajka odstraněna!</string>
     <string name="remove_ad">Odstranit reklamy</string>
     <string name="help">Nápověda</string>
+    <string name="back">Zpět</string>
+    <string name="donation">Příspěvek</string>
     <string name="show_windows">Zobrazit okna</string>
     <string name="select_language">Vybrat jazyk</string>
     <string name="switch_control">Přepnout: označit a otevřít</string>

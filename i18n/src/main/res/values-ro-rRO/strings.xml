@@ -72,7 +72,6 @@
     <string name="use_question_mark">Folosește Semn de Întrebare</string>
     <string name="no_guessing_mode">\'No guessing\' mode</string>
     <string name="control">Controale</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Atingere simplă</string>
     <string name="double_click">Apasare dubla</string>
     <string name="long_press">Atingeți lung</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Achievements</string>
     <string name="no">Nu</string>
     <string name="general">General</string>
+    <string name="more">Mai mult</string>
     <string name="source_code">Cod sursă</string>
     <string name="translation">Translare</string>
     <string name="licenses">Licenţe</string>
@@ -108,10 +108,8 @@
     <string name="share">Distribuie</string>
     <string name="share_menu">Distribuie…</string>
     <string name="no_network">Lipseste conexiune la internet.</string>
-    <string name="open_menu">Deschide meniul</string>
-    <string name="close_menu">Închide meniul</string>
     <string name="delete_all">Șterge tot</string>
-    <string name="appearance">Appearance</string>
+    <string name="appearance">Aspect</string>
     <string name="themes">Teme</string>
     <string name="try_it">Încearcă-l</string>
     <string name="delete_all_message">Delete all events permanently.</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Steagul a fost eliminat!</string>
     <string name="remove_ad">Eliminați Reclamele</string>
     <string name="help">Ajutor</string>
+    <string name="back">Înapoi</string>
+    <string name="donation">Donație</string>
     <string name="show_windows">Show windows</string>
     <string name="select_language">Selectare limbă</string>
     <string name="switch_control">Switch: Flag and Open</string>

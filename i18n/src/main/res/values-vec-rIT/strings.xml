@@ -72,7 +72,6 @@
     <string name="use_question_mark">Dòpara el Ponto de Domanda</string>
     <string name="no_guessing_mode">Modałità sensa predision</string>
     <string name="control">Comandi</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Clic Ùnjoło</string>
     <string name="double_click">Clic Dupio</string>
     <string name="long_press">Tien Strucà</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Conchiste</string>
     <string name="no">Nò</string>
     <string name="general">Zenarałe</string>
+    <string name="more">Altro</string>
     <string name="source_code">Còdeze Sortiva</string>
     <string name="translation">Tradusion</string>
     <string name="licenses">Łisensa</string>
@@ -108,8 +108,6 @@
     <string name="share">Sconpartisi</string>
     <string name="share_menu">Sconpartisi co…</string>
     <string name="no_network">Nisuna conesion a internet.</string>
-    <string name="open_menu">Verzi Menù</string>
-    <string name="close_menu">Sara su el Menù</string>
     <string name="delete_all">Scanseła tuto</string>
     <string name="appearance">Siera</string>
     <string name="themes">Temi</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Pavion cavà!</string>
     <string name="remove_ad">Cava i Anunsi</string>
     <string name="help">Juto</string>
+    <string name="back">Back</string>
+    <string name="donation">Donation</string>
     <string name="show_windows">Mostra fenestre</string>
     <string name="select_language">Select Language</string>
     <string name="switch_control">Scanbia: Marca e Verzi</string>

@@ -72,7 +72,6 @@
     <string name="use_question_mark">Dùng dấu hỏi</string>
     <string name="no_guessing_mode">Chế độ \'không đoán\'</string>
     <string name="control">Điều khiển</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Nhấn một lần</string>
     <string name="double_click">Nhấn đúp</string>
     <string name="long_press">Nhấn giữ</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Thành tựu</string>
     <string name="no">Không</string>
     <string name="general">Tổng quan</string>
+    <string name="more">Nhiều hơn</string>
     <string name="source_code">Mã nguồn</string>
     <string name="translation">Dịch thuật</string>
     <string name="licenses">Giấy phép</string>
@@ -108,8 +108,6 @@
     <string name="share">Chia sẻ</string>
     <string name="share_menu">Chia sẻ…</string>
     <string name="no_network">Không có kết nối mạng.</string>
-    <string name="open_menu">Mở menu</string>
-    <string name="close_menu">Đóng menu</string>
     <string name="delete_all">Xóa tất cả</string>
     <string name="appearance">Ngoại hình</string>
     <string name="themes">Chủ đề</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Đã tháo cờ hiệu!</string>
     <string name="remove_ad">Loại bỏ quảng cáo</string>
     <string name="help">Trợ Giúp</string>
+    <string name="back">Trở lại</string>
+    <string name="donation">Quyên góp</string>
     <string name="show_windows">Hiện cửa sổ</string>
     <string name="select_language">Chọn ngôn ngữ</string>
     <string name="switch_control">Chuyển: Gắn cờ và Mở</string>
