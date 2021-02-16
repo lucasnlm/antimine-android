@@ -3,7 +3,7 @@
     <color name="white">#FFFFFF</color>
 
     <color name="primary">#212121</color>
-    <color name="primary_dark">#212121</color>
+    <color name="primary_dark">#000000</color>
     <color name="background">#FF212121</color>
 
     <color name="mines_around_1">#d5d2cc</color>

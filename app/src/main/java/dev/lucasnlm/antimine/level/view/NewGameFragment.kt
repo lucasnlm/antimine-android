@@ -1,11 +1,11 @@
 package dev.lucasnlm.antimine.level.view
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatDialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Difficulty
@@ -15,7 +15,7 @@ class NewGameFragment : AppCompatDialogFragment() {
     private val gameViewModel by sharedViewModel<GameViewModel>()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(requireContext()).apply {
+        return MaterialAlertDialogBuilder(requireContext()).apply {
             val view: View = LayoutInflater
                 .from(context)
                 .inflate(R.layout.fragment_new_game, null, false)

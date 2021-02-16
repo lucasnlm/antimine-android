@@ -72,7 +72,6 @@
     <string name="use_question_mark">Używaj Znaku zapytania</string>
     <string name="no_guessing_mode">Tryb \'Bez zgadywania\'</string>
     <string name="control">Sterowanie</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Pojedyncze kliknięcie</string>
     <string name="double_click">Podwójne kliknięcie</string>
     <string name="long_press">Długie naciśnięcie</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Osiągnięcia</string>
     <string name="no">Nie</string>
     <string name="general">Ogólne</string>
+    <string name="more">Więcej</string>
     <string name="source_code">Kod źródłowy</string>
     <string name="translation">Tłumaczenie</string>
     <string name="licenses">Licencje</string>
@@ -108,8 +108,6 @@
     <string name="share">Udostępnij</string>
     <string name="share_menu">Udostępnij przez…</string>
     <string name="no_network">Brak połączenia z Internetem.</string>
-    <string name="open_menu">Otwórz menu</string>
-    <string name="close_menu">Zamknij menu</string>
     <string name="delete_all">Usuń wszystkie</string>
     <string name="appearance">Wygląd</string>
     <string name="themes">Motywy</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Usunięto flagę!</string>
     <string name="remove_ad">Usuń reklamy</string>
     <string name="help">Podpowiedzi</string>
+    <string name="back">Wstecz</string>
+    <string name="donation">Darowizna</string>
     <string name="show_windows">Pokaż okna</string>
     <string name="select_language">Wybierz język</string>
     <string name="switch_control">Przełączanie: Oznacz i odkryj</string>

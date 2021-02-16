@@ -63,7 +63,9 @@ class DimensionRepository(
     override fun navigationBarHeight(): Int {
         val resources = context.resources
         val resourceId: Int = resources.getIdentifier(NAVIGATION_BAR_HEIGHT, DEF_TYPE_DIMEN, DEF_PACKAGE)
-        return if (resourceId > 0) { resources.getDimensionPixelSize(resourceId) } else 0
+        return if (resourceId > 0) {
+            resources.getDimensionPixelSize(resourceId)
+        } else 0
     }
 
     companion object {

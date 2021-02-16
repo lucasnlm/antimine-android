@@ -7,13 +7,13 @@ import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.logic.FlagAssistant
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
-import dev.lucasnlm.antimine.core.models.Area
-import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.common.level.solver.LimitedBruteForceSolver
+import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.preferences.models.ActionResponse
 import dev.lucasnlm.antimine.preferences.models.GameControl
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.coroutines.flow.flow
 import kotlin.random.Random
 
@@ -178,7 +178,7 @@ class GameController {
     }
 
     fun getScore() = Score(
-        mines().count { !it.mistake && it.mark.isFlag() },
+        mines().count { !it.mistake },
         getMinesCount(),
         field.count()
     )

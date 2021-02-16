@@ -1,16 +1,16 @@
 package dev.lucasnlm.antimine.ui.repository
 
 import dev.lucasnlm.antimine.ui.R
-import dev.lucasnlm.antimine.ui.model.AreaPalette
 import dev.lucasnlm.antimine.ui.model.AppTheme
+import dev.lucasnlm.antimine.ui.model.AreaPalette
 import dev.lucasnlm.antimine.ui.model.Assets
 
 object Themes {
     val LightTheme = AppTheme(
         id = 1L,
         theme = R.style.CustomLightTheme,
-        themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
         palette = AreaPalette(
+            accent = 0xD32F2F,
             border = 0x424242,
             background = 0xFFFFFF,
             covered = 0x424242,
@@ -37,14 +37,15 @@ object Themes {
             mineExploded = R.drawable.mine_exploded_red,
             mineLow = R.drawable.mine_low,
             revealed = R.drawable.mine_revealed_white,
-        )
+        ),
+        isPaid = false,
     )
 
-    val DarkTheme = AppTheme(
+    private val DarkTheme = AppTheme(
         id = 3L,
         theme = R.style.CustomDarkTheme,
-        themeNoActionBar = R.style.CustomDarkTheme_NoActionBar,
         palette = AreaPalette(
+            accent = 0xFFFFFF,
             border = 0x171717,
             background = 0x212121,
             covered = 0x171717,
@@ -71,14 +72,15 @@ object Themes {
             mineExploded = R.drawable.mine_exploded_white,
             mineLow = R.drawable.mine_low,
             revealed = R.drawable.mine_revealed_white,
-        )
+        ),
+        isPaid = false,
     )
 
     private val AmoledTheme = AppTheme(
         id = 2L,
         theme = R.style.CustomAmoledTheme,
-        themeNoActionBar = R.style.CustomAmoledTheme_NoActionBar,
         palette = AreaPalette(
+            accent = 0xFFFFFF,
             border = 0xFFFFFF,
             background = 0x000000,
             covered = 0x212121,
@@ -105,7 +107,8 @@ object Themes {
             mineExploded = R.drawable.mine_low,
             mineLow = R.drawable.mine_low,
             revealed = R.drawable.mine_revealed_white,
-        )
+        ),
+        isPaid = false,
     )
 
     fun getAllCustom() = listOf(
@@ -115,8 +118,8 @@ object Themes {
         AppTheme(
             id = 4L,
             theme = R.style.CustomGardenTheme,
-            themeNoActionBar = R.style.CustomGardenTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x689f38,
                 border = 0x171717,
                 background = 0xefebe9,
                 covered = 0x689f38,
@@ -143,13 +146,13 @@ object Themes {
                 mineExploded = R.drawable.mine_exploded_white,
                 mineLow = R.drawable.mine_low,
                 revealed = R.drawable.mine_revealed_white,
-            )
+            ),
         ),
         AppTheme(
             id = 5L,
             theme = R.style.CustomLightTheme,
-            themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x37474f,
                 border = 0x424242,
                 background = 0xFFFFFF,
                 covered = 0x4a4a4a,
@@ -181,8 +184,8 @@ object Themes {
         AppTheme(
             id = 6L,
             theme = R.style.CustomMarineTheme,
-            themeNoActionBar = R.style.CustomMarineTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x0277bd,
                 border = 0x424242,
                 background = 0xFFFFFF,
                 covered = 0x0277bd,
@@ -214,8 +217,8 @@ object Themes {
         AppTheme(
             id = 7L,
             theme = R.style.CustomBlueGreyTheme,
-            themeNoActionBar = R.style.CustomBlueGreyTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x37474f,
                 border = 0x424242,
                 background = 0xFFFFFF,
                 covered = 0x37474f,
@@ -247,8 +250,8 @@ object Themes {
         AppTheme(
             id = 8L,
             theme = R.style.CustomOrangeTheme,
-            themeNoActionBar = R.style.CustomOrangeTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0xfb8c00,
                 border = 0x000000,
                 background = 0x212121,
                 covered = 0xfb8c00,
@@ -263,7 +266,7 @@ object Themes {
                 minesAround6 = 0xFFFFFF,
                 minesAround7 = 0xBBBBBB,
                 minesAround8 = 0xEEEEEE,
-                highlight = 0x212121,
+                highlight = 0xfb8c00,
                 focus = 0xD32F2F,
             ),
             assets = Assets(
@@ -280,8 +283,8 @@ object Themes {
         AppTheme(
             id = 9L,
             theme = R.style.CustomPinkTheme,
-            themeNoActionBar = R.style.CustomPinkTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0xf48fb1,
                 border = 0x000000,
                 background = 0xFFFFFF,
                 covered = 0xf48fb1,
@@ -313,8 +316,8 @@ object Themes {
         AppTheme(
             id = 10L,
             theme = R.style.CustomPurpleTheme,
-            themeNoActionBar = R.style.CustomPurpleTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x6a1b9a,
                 border = 0x000000,
                 background = 0xFFFFFF,
                 covered = 0x6a1b9a,
@@ -346,8 +349,8 @@ object Themes {
         AppTheme(
             id = 11L,
             theme = R.style.CustomLightTheme,
-            themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x3e2723,
                 border = 0x000000,
                 background = 0xFFFFFF,
                 covered = 0x3e2723,
@@ -379,8 +382,8 @@ object Themes {
         AppTheme(
             id = 12L,
             theme = R.style.CustomLightTheme,
-            themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0xc62828,
                 border = 0x000000,
                 background = 0xFFFFFF,
                 covered = 0xc62828,
@@ -412,8 +415,8 @@ object Themes {
         AppTheme(
             id = 13L,
             theme = R.style.CustomLightTheme,
-            themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x880e4f,
                 border = 0x000000,
                 background = 0xFFFFFF,
                 covered = 0x880e4f,
@@ -445,8 +448,8 @@ object Themes {
         AppTheme(
             id = 14L,
             theme = R.style.CustomLightTheme,
-            themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0x0d47a1,
                 border = 0x000000,
                 background = 0xFFFFFF,
                 covered = 0x0d47a1,
@@ -478,14 +481,14 @@ object Themes {
         AppTheme(
             id = 15L,
             theme = R.style.CustomDarkTheme,
-            themeNoActionBar = R.style.CustomDarkTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0xedf1f2,
                 border = 0x000000,
                 background = 0x212121,
                 covered = 0xedf1f2,
                 coveredOdd = 0xdcdee0,
                 uncovered = 0x212121,
-                uncoveredOdd = 0x212121,
+                uncoveredOdd = 0x1c1c1c,
                 minesAround1 = 0xFFFFFF,
                 minesAround2 = 0xCCCCCC,
                 minesAround3 = 0xAAAAAA,
@@ -511,14 +514,14 @@ object Themes {
         AppTheme(
             id = 16L,
             theme = R.style.CustomLimeTheme,
-            themeNoActionBar = R.style.CustomLimeTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0xcddc39,
                 border = 0x000000,
                 background = 0x212121,
                 covered = 0xcddc39,
                 coveredOdd = 0x99aa00,
                 uncovered = 0x212121,
-                uncoveredOdd = 0x212121,
+                uncoveredOdd = 0x1c1c1c,
                 minesAround1 = 0xFFFFFF,
                 minesAround2 = 0xCCCCCC,
                 minesAround3 = 0xAAAAAA,
@@ -544,14 +547,14 @@ object Themes {
         AppTheme(
             id = 18L,
             theme = R.style.BananaTheme,
-            themeNoActionBar = R.style.BananaTheme_NoActionBar,
             palette = AreaPalette(
+                accent = 0xffeb3b,
                 border = 0x000000,
                 background = 0x212121,
                 covered = 0xffeb3b,
                 coveredOdd = 0xe6d335,
                 uncovered = 0x212121,
-                uncoveredOdd = 0x212121,
+                uncoveredOdd = 0x1c1c1c,
                 minesAround1 = 0xFFFFFF,
                 minesAround2 = 0xCCCCCC,
                 minesAround3 = 0xAAAAAA,
@@ -577,8 +580,8 @@ object Themes {
         AppTheme(
             id = 19L,
             theme = R.style.BananaThemeLight,
-            themeNoActionBar = R.style.BananaThemeLight_NoActionBar,
             palette = AreaPalette(
+                accent = 0xfbc02d,
                 border = 0x000000,
                 background = 0xe0e0e0,
                 covered = 0xfbc02d,
@@ -610,8 +613,8 @@ object Themes {
         AppTheme(
             id = 20L,
             theme = R.style.BananaThemeLight,
-            themeNoActionBar = R.style.BananaThemeLight_NoActionBar,
             palette = AreaPalette(
+                accent = 0xf57c00,
                 border = 0x000000,
                 background = 0xe0e0e0,
                 covered = 0xf57c00,
@@ -643,8 +646,8 @@ object Themes {
         AppTheme(
             id = 21L,
             theme = R.style.BananaThemeLight,
-            themeNoActionBar = R.style.BananaThemeLight_NoActionBar,
             palette = AreaPalette(
+                accent = 0x827717,
                 border = 0x000000,
                 background = 0xe0e0e0,
                 covered = 0x827717,

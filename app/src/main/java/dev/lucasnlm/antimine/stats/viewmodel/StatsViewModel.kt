@@ -2,13 +2,13 @@ package dev.lucasnlm.antimine.stats.viewmodel
 
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.database.models.Stats
-import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.stats.model.StatsModel
 import dev.lucasnlm.antimine.stats.model.StatsState
 import kotlinx.coroutines.flow.flow
@@ -83,7 +83,11 @@ class StatsViewModel(
                     0,
                     acc.totalGames,
                     acc.totalTime + value.duration,
-                    victoryTime = acc.victoryTime + if (value.victory != 0) { value.duration } else { 0 },
+                    victoryTime = acc.victoryTime + if (value.victory != 0) {
+                        value.duration
+                    } else {
+                        0
+                    },
                     averageTime = 0,
                     shortestTime = if (value.victory != 0) {
                         if (acc.shortestTime == 0L) {

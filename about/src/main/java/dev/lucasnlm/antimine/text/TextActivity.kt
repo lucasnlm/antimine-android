@@ -23,7 +23,15 @@ class TextActivity : ThematicActivity(R.layout.activity_text) {
         super.onCreate(savedInstanceState)
         val bundle = intent.extras ?: Bundle()
 
-        title = bundle.getString(TEXT_TITLE)
+        section.bind(
+            text = bundle.getString(TEXT_TITLE) ?: "",
+            startButton = R.drawable.close,
+            startDescription = getString(R.string.back),
+            startAction = {
+                section.bindText(R.string.about)
+                onBackPressed()
+            }
+        )
 
         lifecycleScope.launchWhenCreated {
             textViewModel.sendEvent(

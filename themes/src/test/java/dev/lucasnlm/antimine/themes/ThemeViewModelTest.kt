@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.themes
 
-import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeState
@@ -9,6 +8,7 @@ import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette
 import dev.lucasnlm.antimine.ui.model.Assets
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import io.mockk.every
 import io.mockk.mockk
@@ -42,6 +42,7 @@ class ThemeViewModelTest {
         theme = R.style.CustomLightTheme,
         themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
         palette = AreaPalette(
+            accent = 0xD32F2F,
             border = 0x424242,
             background = 0xFFFFFF,
             covered = 0x424242,
@@ -76,6 +77,7 @@ class ThemeViewModelTest {
         theme = R.style.CustomDarkTheme,
         themeNoActionBar = R.style.CustomDarkTheme_NoActionBar,
         palette = AreaPalette(
+            accent = 0xFFFFFF,
             border = 0x171717,
             background = 0x212121,
             covered = 0x171717,
@@ -110,6 +112,7 @@ class ThemeViewModelTest {
         theme = R.style.CustomGardenTheme,
         themeNoActionBar = R.style.CustomGardenTheme_NoActionBar,
         palette = AreaPalette(
+            accent = 0x689f38,
             border = 0x171717,
             background = 0xefebe9,
             covered = 0x689f38,

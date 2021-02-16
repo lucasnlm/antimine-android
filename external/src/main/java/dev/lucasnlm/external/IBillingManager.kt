@@ -9,5 +9,6 @@ interface IBillingManager {
     fun isEnabled(): Boolean
     suspend fun charge(activity: Activity)
     suspend fun getPrice(): String?
+    suspend fun getPriceFlow(): Flow<String>
     fun listenPurchases(): Flow<PurchaseInfo>
 }

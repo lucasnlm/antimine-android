@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 
 open class StatelessViewModel<Event> : ViewModel() {
     private val eventBroadcast = ConflatedBroadcastChannel<Event>()
+    private val sideEffectBroadcast = ConflatedBroadcastChannel<Event>()
 
     init {
         viewModelScope.launch {
@@ -23,12 +24,19 @@ open class StatelessViewModel<Event> : ViewModel() {
         eventBroadcast.offer(event)
     }
 
-    protected open fun onEvent(event: Event) { }
+    protected fun sendSideEffect(event: Event) {
+        sideEffectBroadcast.offer(event)
+    }
+
+    protected open fun onEvent(event: Event) {}
 
     override fun onCleared() {
         super.onCleared()
         eventBroadcast.close()
+        sideEffectBroadcast.close()
     }
 
     open fun observeEvent(): Flow<Event> = eventBroadcast.asFlow()
+
+    open fun observeSideEffects(): Flow<Event> = sideEffectBroadcast.asFlow()
 }

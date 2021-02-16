@@ -11,44 +11,42 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.core.view.GravityCompat
 import androidx.core.view.doOnLayout
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
-import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.common.level.models.Event
-import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
-import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.core.models.Analytics
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.level.view.LevelFragment
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
 import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
 import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.Exception
 
 class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterface.OnDismissListener {
     private val preferencesRepository: IPreferencesRepository by inject()
@@ -68,8 +66,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
     val gameViewModel by viewModel<GameViewModel>()
 
     private val cloudSaveManager by inject<CloudSaveManager>()
-
-    override val noActionBar: Boolean = true
 
     private var status: Status = Status.PreGame
     private var totalMines: Int = 0
@@ -174,13 +170,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
             }
         )
 
-        difficulty.observe(
-            this@TvGameActivity,
-            {
-                onChangeDifficulty()
-            }
-        )
-
         field.observe(
             this@TvGameActivity,
             { area ->
@@ -215,16 +204,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
             event.toString()
         }
         return super.onKeyDown(keyCode, event)
-    }
-
-    override fun onBackPressed() {
-        when {
-            drawer.isDrawerOpen(GravityCompat.START) -> {
-                drawer.closeDrawer(GravityCompat.START)
-                gameViewModel.resumeGame()
-            }
-            else -> super.onBackPressed()
-        }
     }
 
     override fun onResume() {
@@ -415,7 +394,7 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
                 loadGameFragment()
                 status = Status.Over(0, Score(4, 4, 25))
                 analyticsManager.sentEvent(Analytics.TutorialCompleted)
-                preferencesRepository.completeTutorial()
+                preferencesRepository.setCompleteTutorial(true)
                 showCompletedTutorialDialog()
                 cloudSaveManager.uploadSave()
             }
@@ -469,7 +448,8 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
                     )
                 }
             }
-            else -> { }
+            else -> {
+            }
         }
     }
 

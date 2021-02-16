@@ -72,7 +72,6 @@
     <string name="use_question_mark">Utiliser des drapeaux points d’interrogation</string>
     <string name="no_guessing_mode">Mode sans prédiction</string>
     <string name="control">Contrôles</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Clic simple</string>
     <string name="double_click">Double clic</string>
     <string name="long_press">Appui prolongé</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Succès</string>
     <string name="no">Non</string>
     <string name="general">Général</string>
+    <string name="more">Plus</string>
     <string name="source_code">Code source</string>
     <string name="translation">Traduction</string>
     <string name="licenses">Licences</string>
@@ -108,8 +108,6 @@
     <string name="share">Partager</string>
     <string name="share_menu">Partager…</string>
     <string name="no_network">Pas de connexion Internet.</string>
-    <string name="open_menu">Ouvrir le menu</string>
-    <string name="close_menu">Fermer le menu</string>
     <string name="delete_all">Supprimer tout</string>
     <string name="appearance">Apparence</string>
     <string name="themes">Thèmes</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Drapeau retiré !</string>
     <string name="remove_ad">Supprimer les publicités</string>
     <string name="help">Aide</string>
+    <string name="back">Précédent</string>
+    <string name="donation">Don</string>
     <string name="show_windows">Afficher les fenêtres</string>
     <string name="select_language">Sélectionner la langue</string>
     <string name="switch_control">Commutateur : Drapeau et Ouvrir</string>

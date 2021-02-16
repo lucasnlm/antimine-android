@@ -5,6 +5,7 @@ import androidx.annotation.ColorInt
 data class AreaPalette(
     @ColorInt val border: Int,
     @ColorInt val background: Int,
+    @ColorInt val accent: Int,
     @ColorInt val covered: Int,
     @ColorInt val coveredOdd: Int,
     @ColorInt val uncovered: Int,

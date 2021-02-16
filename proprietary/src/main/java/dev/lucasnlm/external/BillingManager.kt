@@ -16,6 +16,8 @@ import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.filterNotNull
 
 class BillingManager(
     private val context: Context,
@@ -33,6 +35,10 @@ class BillingManager(
     }
 
     override suspend fun getPrice(): String? = unlockPrice.value
+
+    override suspend fun getPriceFlow(): Flow<String> {
+        return unlockPrice.asSharedFlow().filterNotNull()
+    }
 
     override fun listenPurchases(): Flow<PurchaseInfo> = purchaseBroadcaster.asFlow()
 

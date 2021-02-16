@@ -13,7 +13,7 @@ fun Int.toAndroidColor(alpha: Int? = null): Int {
         )
     } else {
         Color.argb(
-            160,
+            alpha,
             Color.red(this),
             Color.green(this),
             Color.blue(this)
@@ -31,7 +31,7 @@ fun Int.toInvertedAndroidColor(alpha: Int? = null): Int {
         )
     } else {
         Color.argb(
-            160,
+            alpha,
             255 - Color.red(this),
             255 - Color.green(this),
             255 - Color.blue(this)

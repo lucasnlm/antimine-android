@@ -5,14 +5,14 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:layout_gravity="center_vertical"
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:paddingStart="32dp"
-    android:paddingEnd="48dp"
-    android:paddingVertical="12dp">
+    android:orientation="horizontal"
+    android:paddingVertical="8dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="32dp">
 
     <androidx.appcompat.widget.AppCompatRadioButton
         android:id="@+id/radio"

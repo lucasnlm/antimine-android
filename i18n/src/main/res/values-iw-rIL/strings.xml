@@ -72,7 +72,6 @@
     <string name="use_question_mark">סימן שאלה</string>
     <string name="no_guessing_mode">\'No guessing\' mode</string>
     <string name="control">פקדים</string>
-    <string name="arrow">🠨</string>
     <string name="single_click">לחיצה בודדת</string>
     <string name="double_click">לחיצה כפולה</string>
     <string name="long_press">לחץ לחיצה ארוכה</string>
@@ -95,6 +94,7 @@
     <string name="achievements">הישגים</string>
     <string name="no">לא</string>
     <string name="general">כללי</string>
+    <string name="more">עוד</string>
     <string name="source_code">קוד מקור</string>
     <string name="translation">תרגומים</string>
     <string name="licenses">רשיונות</string>
@@ -108,8 +108,6 @@
     <string name="share">שותף</string>
     <string name="share_menu">שותף…</string>
     <string name="no_network">אין חיבור לאינטרנט.</string>
-    <string name="open_menu">פתח תפריט</string>
-    <string name="close_menu">סגור תפריט</string>
     <string name="delete_all">מחק הכל</string>
     <string name="appearance">מראה</string>
     <string name="themes">ערכות נושא</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">דגל הוסר!</string>
     <string name="remove_ad">הסרת פרסומות</string>
     <string name="help">עזרה</string>
+    <string name="back">חזור</string>
+    <string name="donation">תרומה</string>
     <string name="show_windows">Show windows</string>
     <string name="select_language">בחר שפה</string>
     <string name="switch_control">Switch: Flag and Open</string>

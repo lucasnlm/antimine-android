@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.R
-import dev.lucasnlm.antimine.ui.model.AreaPalette
 import dev.lucasnlm.antimine.ui.model.AppTheme
+import dev.lucasnlm.antimine.ui.model.AreaPalette
 import dev.lucasnlm.antimine.ui.model.Assets
 
 interface IThemeRepository {
@@ -45,9 +45,9 @@ class ThemeRepository(
         return AppTheme(
             id = 0L,
             theme = R.style.AppTheme,
-            themeNoActionBar = R.style.AppTheme_NoActionBar,
             palette = fromDefaultPalette(context),
-            assets = fromDefaultAssets()
+            assets = fromDefaultAssets(),
+            isPaid = false,
         )
     }
 
@@ -65,6 +65,7 @@ class ThemeRepository(
 
     private fun fromDefaultPalette(context: Context) =
         AreaPalette(
+            accent = ContextCompat.getColor(context, R.color.accent),
             border = ContextCompat.getColor(context, R.color.view_cover),
             background = ContextCompat.getColor(context, R.color.background),
             covered = ContextCompat.getColor(context, R.color.view_cover),

@@ -72,7 +72,6 @@
     <string name="use_question_mark">Brug flag med spørgsmålstegn</string>
     <string name="no_guessing_mode">\'Ingen gætning\' tilstand</string>
     <string name="control">Controls</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Enkelt tryk</string>
     <string name="double_click">Dobbeltklik</string>
     <string name="long_press">Langt tryk</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Achievements</string>
     <string name="no">Nej</string>
     <string name="general">Generelt</string>
+    <string name="more">More</string>
     <string name="source_code">Kildekode</string>
     <string name="translation">Oversættelser</string>
     <string name="licenses">Licenser</string>
@@ -108,8 +108,6 @@
     <string name="share">Del</string>
     <string name="share_menu">Del…</string>
     <string name="no_network">Ingen internetforbindelse.</string>
-    <string name="open_menu">Åbn Menu</string>
-    <string name="close_menu">Luk Menu</string>
     <string name="delete_all">Slet alle</string>
     <string name="appearance">Udseende</string>
     <string name="themes">Temaer</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Flag fjernet!</string>
     <string name="remove_ad">Fjern annoncer</string>
     <string name="help">Hjælp</string>
+    <string name="back">Tilbage</string>
+    <string name="donation">Donation</string>
     <string name="show_windows">Vis vinduer</string>
     <string name="select_language">Vælg sprog</string>
     <string name="switch_control">Skifter: Flag og Åbn</string>

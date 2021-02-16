@@ -19,11 +19,11 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"
+        android:animateLayoutChanges="true"
         android:background="@drawable/round_background"
         android:orientation="vertical"
-        android:layout_gravity="bottom|start"
-        android:animateLayoutChanges="true"
-        android:layout_margin="16dp"
         android:padding="12dp">
 
         <TextView
@@ -44,11 +44,11 @@
             app:drawableLeftCompat="@drawable/timer"
             app:drawableStartCompat="@drawable/timer"
             app:drawableTint="?android:attr/textColorPrimary"
-            app:layout_constraintBottom_toBottomOf="@id/menu"
+            app:layout_constraintBottom_toBottomOf="@id/back"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toRightOf="@id/switchFlag"
             app:layout_constraintRight_toLeftOf="@id/minesCount"
-            app:layout_constraintTop_toTopOf="@id/menu"
+            app:layout_constraintTop_toTopOf="@id/back"
             tools:targetApi="m"
             tools:text="10:00"
             tools:visibility="visible" />
@@ -69,11 +69,11 @@
             android:visibility="gone"
             app:drawableStartCompat="@drawable/mine"
             app:drawableTint="?android:attr/textColorPrimary"
-            app:layout_constraintBottom_toBottomOf="@id/menu"
+            app:layout_constraintBottom_toBottomOf="@id/back"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toRightOf="@id/timer"
             app:layout_constraintRight_toLeftOf="@id/shortcutIcon"
-            app:layout_constraintTop_toTopOf="@id/menu"
+            app:layout_constraintTop_toTopOf="@id/back"
             tools:targetApi="m"
             tools:text="99"
             tools:visibility="visible" />

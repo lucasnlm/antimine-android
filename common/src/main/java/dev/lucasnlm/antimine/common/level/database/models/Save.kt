@@ -4,12 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.common.level.database.converters.AreaConverter
 import dev.lucasnlm.antimine.common.level.database.converters.FirstOpenConverter
 import dev.lucasnlm.antimine.common.level.database.converters.SaveStatusConverter
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.preferences.models.Minefield
 
 @Entity
 data class Save(

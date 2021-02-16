@@ -7,21 +7,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.custom.viewmodel.CreateGameViewModel
 import dev.lucasnlm.antimine.custom.viewmodel.CustomEvent
+import dev.lucasnlm.antimine.main.viewmodel.MainEvent
+import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CustomLevelDialogFragment : AppCompatDialogFragment() {
-    private val gameViewModel by sharedViewModel<GameViewModel>()
+    private val gameViewModel by sharedViewModel<MainViewModel>()
     private val createGameViewModel by viewModel<CreateGameViewModel>()
     private val preferencesRepository: IPreferencesRepository by inject()
 
@@ -57,15 +58,15 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(requireContext()).apply {
+        return MaterialAlertDialogBuilder(requireContext()).apply {
             setTitle(R.string.new_game)
             setView(createView())
             setNegativeButton(R.string.cancel, null)
             setPositiveButton(R.string.start) { _, _ ->
                 val minefield = getSelectedMinefield()
-                preferencesRepository.completeTutorial()
+                preferencesRepository.setCompleteTutorial(true)
                 createGameViewModel.sendEvent(CustomEvent.UpdateCustomGameEvent(minefield))
-                gameViewModel.startNewGame(Difficulty.Custom)
+                gameViewModel.sendEvent(MainEvent.StartNewGameEvent(Difficulty.Custom))
             }
         }.create()
     }

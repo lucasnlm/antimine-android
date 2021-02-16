@@ -781,6 +781,7 @@ class FixedGridLayoutManager(
 
         // Current row in the grid
         var row = 0
+
         // Current column in the grid
         var column = 0
 

@@ -1,11 +1,11 @@
 package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.common.level.GameController
+import dev.lucasnlm.antimine.core.control.GameControl
 import dev.lucasnlm.antimine.core.models.Area
-import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import dev.lucasnlm.antimine.core.control.GameControl
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest

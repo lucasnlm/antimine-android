@@ -2,8 +2,7 @@ package dev.lucasnlm.antimine.history.viewmodel
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import dev.lucasnlm.antimine.DeepLink
+import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
@@ -25,7 +24,8 @@ class HistoryViewModel(
             is HistoryEvent.ReplaySave -> {
                 replayGame(event.id)
             }
-            else -> { }
+            else -> {
+            }
         }
     }
 
@@ -35,30 +35,23 @@ class HistoryViewModel(
                 val newSaveList = savesRepository.getAllSaves().sortedByDescending { it.uid }
                 emit(state.copy(saveList = newSaveList))
             }
-            else -> { }
+            else -> {
+            }
         }
     }
 
     private fun replayGame(uid: Int) {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            data = Uri.Builder()
-                .scheme(DeepLink.SCHEME)
-                .authority(DeepLink.RETRY_HOST_AUTHORITY)
-                .appendPath(uid.toString())
-                .build()
+        val intent = Intent(context, GameActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            putExtra(GameActivity.RETRY_GAME, uid)
         }
         context.startActivity(intent)
     }
 
     private fun loadGame(uid: Int) {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            data = Uri.Builder()
-                .scheme(DeepLink.SCHEME)
-                .authority(DeepLink.LOAD_GAME_AUTHORITY)
-                .appendPath(uid.toString())
-                .build()
+        val intent = Intent(context, GameActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            putExtra(GameActivity.START_GAME, uid)
         }
         context.startActivity(intent)
     }

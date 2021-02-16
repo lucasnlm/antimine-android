@@ -25,12 +25,12 @@ class BillingManager(
 
     override suspend fun getPrice(): String? = null
 
+    override suspend fun getPriceFlow(): Flow<String> = flowOf()
+
     override fun listenPurchases(): Flow<PurchaseInfo> = flowOf()
 
     companion object {
         const val DONATE_LINK =
-            "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=lucasnunesk%40gmail.com&item_name=" +
-                "With+your+help,+we%5C%27ll+be+able+to+implement+new+features+and+keep+our+" +
-                "project+active.&currency_code=USD&source=url"
+            "https://www.paypal.com/donate?hosted_button_id=49XX9XDNUV4SW"
     }
 }

@@ -72,7 +72,6 @@
     <string name="use_question_mark">استخدام علامة السؤال</string>
     <string name="no_guessing_mode">وضع \"لا تخمين\"</string>
     <string name="control">التحكم</string>
-    <string name="arrow">🠨</string>
     <string name="single_click">نقرة واحدة</string>
     <string name="double_click">انقر مرتين</string>
     <string name="long_press">ضغط مطّول</string>
@@ -95,6 +94,7 @@
     <string name="achievements">الإنجازات</string>
     <string name="no">لا</string>
     <string name="general">عام</string>
+    <string name="more">أكثر</string>
     <string name="source_code">رمز المصدر</string>
     <string name="translation">الترجمة</string>
     <string name="licenses">التراخيص</string>
@@ -108,8 +108,6 @@
     <string name="share">مشاركة</string>
     <string name="share_menu">مشاركة…</string>
     <string name="no_network">لا يوجد اتصال بالإنترنت.</string>
-    <string name="open_menu">فتح القائمة</string>
-    <string name="close_menu">إغلاق القائمة</string>
     <string name="delete_all">حذف الكل</string>
     <string name="appearance">المظهر</string>
     <string name="themes">المظهر</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">إزالة العلم!</string>
     <string name="remove_ad">إزالة الإعلانات</string>
     <string name="help">مساعدة</string>
+    <string name="back">رجوع</string>
+    <string name="donation">التبرع</string>
     <string name="show_windows">إظهار النوافذ</string>
     <string name="select_language">اختر الللغة</string>
     <string name="switch_control">التبديل: العلم وفتح</string>

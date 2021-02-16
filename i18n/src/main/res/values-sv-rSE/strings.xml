@@ -72,7 +72,6 @@
     <string name="use_question_mark">Använd frågetecken</string>
     <string name="no_guessing_mode">‘Ingen gissning’ läge</string>
     <string name="control">Kontroller</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Enkel klick</string>
     <string name="double_click">Dubbel Klick</string>
     <string name="long_press">Långtryck</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Prestationer</string>
     <string name="no">Nej</string>
     <string name="general">Allmänt</string>
+    <string name="more">Mera</string>
     <string name="source_code">Källkod</string>
     <string name="translation">Översättning</string>
     <string name="licenses">Licenser</string>
@@ -108,8 +108,6 @@
     <string name="share">Dela</string>
     <string name="share_menu">Dela…</string>
     <string name="no_network">Ingen internetuppkoppling.</string>
-    <string name="open_menu">Öppna menyn</string>
-    <string name="close_menu">Stäng menyn</string>
     <string name="delete_all">Ta bort allt</string>
     <string name="appearance">Utseende</string>
     <string name="themes">Teman</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Flagga borttagen!</string>
     <string name="remove_ad">Ta bort annonser</string>
     <string name="help">Hjälp</string>
+    <string name="back">Tillbaka</string>
+    <string name="donation">Donationer</string>
     <string name="show_windows">Visa fönster</string>
     <string name="select_language">Välj språk</string>
     <string name="switch_control">Växel: Flagga och öppna</string>

@@ -72,7 +72,6 @@
     <string name="use_question_mark">Utilitza l\'interrogant</string>
     <string name="no_guessing_mode">mode \'sense endevinar\'</string>
     <string name="control">Controls</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Un sol clic</string>
     <string name="double_click">Doble clic</string>
     <string name="long_press">Pulsació llarga</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Assoliments</string>
     <string name="no">No</string>
     <string name="general">General</string>
+    <string name="more">Més</string>
     <string name="source_code">Codi font</string>
     <string name="translation">Traduccions</string>
     <string name="licenses">Llicències</string>
@@ -108,8 +108,6 @@
     <string name="share">Compartir</string>
     <string name="share_menu">Compartir…</string>
     <string name="no_network">No hi ha connexió a Internet.</string>
-    <string name="open_menu">Obrir menú</string>
-    <string name="close_menu">Tancar menú</string>
     <string name="delete_all">Esborra-ho tot</string>
     <string name="appearance">Aparença</string>
     <string name="themes">Temes</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Has tret la bandera!</string>
     <string name="remove_ad">Elimina els anuncis</string>
     <string name="help">Ajuda</string>
+    <string name="back">Tornar</string>
+    <string name="donation">Donacions</string>
     <string name="show_windows">Mostrar finestres</string>
     <string name="select_language">Seleccioni Idioma</string>
     <string name="switch_control">Alternativa: Marca i Destapa</string>

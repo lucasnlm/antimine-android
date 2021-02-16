@@ -16,8 +16,8 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.AreaPaintSettings
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.ui.view.paintOnCanvas
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import dev.lucasnlm.antimine.ui.view.paintOnCanvas
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File

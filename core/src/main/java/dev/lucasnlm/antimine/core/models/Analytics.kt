@@ -91,6 +91,12 @@ sealed class Analytics(
 
     object OpenStats : Analytics("Open Stats")
 
+    object OpenTranslations : Analytics("Open Translations")
+
+    object OpenGooglePlayGames : Analytics("Open Google Play Games")
+
+    object OpenControls : Analytics("Open Controls")
+
     object OpenThemes : Analytics("Open Themes")
 
     object ShareGame : Analytics("Share Game")
@@ -98,6 +104,10 @@ sealed class Analytics(
     object ClickEmoji : Analytics("Click Emoji")
 
     object ContinueGame : Analytics("Continue Game")
+
+    object OpenTutorial : Analytics("Open Tutorial")
+
+    object OpenCustom : Analytics("Open Custom")
 
     object TutorialStarted : Analytics("Tutorial Started")
 

@@ -3,8 +3,8 @@ package dev.lucasnlm.antimine.common.level.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import dev.lucasnlm.antimine.common.level.database.converters.DifficultyConverter
 import dev.lucasnlm.antimine.common.level.database.converters.AreaConverter
+import dev.lucasnlm.antimine.common.level.database.converters.DifficultyConverter
 import dev.lucasnlm.antimine.common.level.database.converters.FirstOpenConverter
 import dev.lucasnlm.antimine.common.level.database.converters.MinefieldConverter
 import dev.lucasnlm.antimine.common.level.database.converters.SaveStatusConverter

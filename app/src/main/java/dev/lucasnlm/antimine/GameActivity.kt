@@ -2,102 +2,66 @@ package dev.lucasnlm.antimine
 
 import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.TooltipCompat
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.GravityCompat
 import androidx.core.view.doOnLayout
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
-import dev.lucasnlm.antimine.about.AboutActivity
-import dev.lucasnlm.antimine.core.models.Difficulty
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.common.level.models.Event
-import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.control.ControlDialogFragment
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
-import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.core.models.Analytics
-import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
-import dev.lucasnlm.antimine.history.HistoryActivity
+import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.level.view.LevelFragment
-import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
-import dev.lucasnlm.antimine.preferences.PreferencesActivity
+import dev.lucasnlm.antimine.main.MainActivity
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
 import dev.lucasnlm.antimine.share.ShareManager
-import dev.lucasnlm.antimine.splash.SplashActivity
-import dev.lucasnlm.antimine.stats.StatsActivity
-import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
 import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.toAndroidColor
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
-import dev.lucasnlm.external.IFeatureFlagManager
-import dev.lucasnlm.external.IPlayGamesManager
-import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.android.synthetic.main.activity_game.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.Exception
 
 class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
     private val billingManager: IBillingManager by inject()
-
     private val preferencesRepository: IPreferencesRepository by inject()
-
-    private val featureFlagManager: IFeatureFlagManager by inject()
-
     private val analyticsManager: IAnalyticsManager by inject()
-
     private val instantAppManager: IInstantAppManager by inject()
-
     private val savesRepository: ISavesRepository by inject()
-
-    private val playGamesManager: IPlayGamesManager by inject()
-
     private val shareViewModel: ShareManager by inject()
 
     val gameViewModel by viewModel<GameViewModel>()
 
     private val cloudSaveManager by inject<CloudSaveManager>()
 
-    override val noActionBar: Boolean = true
-
     private var status: Status = Status.PreGame
-    private var totalMines: Int = 0
-    private var totalArea: Int = 0
-    private var rightMines: Int = 0
     private var currentTime: Long = 0
     private var currentSaveId: Long = 0
 
@@ -112,13 +76,31 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         bindViewModel()
-        bindPlayGames()
         bindToolbar()
-        bindDrawer()
-        bindNavigationMenu()
         bindSwitchControlButton()
-        bindAds()
-        bindPrice()
+
+        lifecycleScope.launchWhenCreated {
+            intent.extras?.let {
+                when {
+                    it.containsKey(DIFFICULTY) -> {
+                        val difficulty = it.getSerializable(DIFFICULTY) as Difficulty
+                        gameViewModel.startNewGame(difficulty)
+                    }
+                    it.containsKey(START_TUTORIAL) -> {
+                        gameViewModel.startNewGame(Difficulty.Standard)
+                        gameViewModel.eventObserver.postValue(Event.StartTutorial)
+                    }
+                    it.containsKey(RETRY_GAME) -> {
+                        val uid = it.getInt(RETRY_GAME)
+                        gameViewModel.retryGame(uid)
+                    }
+                    it.containsKey(START_GAME) -> {
+                        val uid = it.getInt(START_GAME)
+                        gameViewModel.loadGame(uid)
+                    }
+                }
+            }
+        }
 
         findViewById<FrameLayout>(R.id.levelContainer).doOnLayout {
             if (!isFinishing) {
@@ -131,21 +113,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
 
         onOpenAppActions()
-    }
-
-    private fun bindPlayGames() {
-        lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                silentGooglePlayLogin()
-            }
-
-            withContext(Dispatchers.Main) {
-                if (!isFinishing) {
-                    invalidateOptionsMenu()
-                    playGamesManager.showPlayPopUp(this@GameActivity)
-                }
-            }
-        }
     }
 
     private fun bindViewModel() = gameViewModel.apply {
@@ -203,23 +170,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
         )
 
-        difficulty.observe(
-            this@GameActivity,
-            {
-                onChangeDifficulty(it)
-            }
-        )
-
-        field.observe(
-            this@GameActivity,
-            { area ->
-                val mines = area.filter { it.hasMine }
-                totalArea = area.count()
-                totalMines = mines.count()
-                rightMines = mines.count { it.mark.isFlag() }
-            }
-        )
-
         saveId.observe(
             this@GameActivity,
             {
@@ -235,16 +185,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         )
     }
 
-    override fun onBackPressed() {
-        when {
-            drawer.isDrawerOpen(GravityCompat.START) -> {
-                drawer.closeDrawer(GravityCompat.START)
-                gameViewModel.resumeGame()
-            }
-            else -> super.onBackPressed()
-        }
-    }
-
     override fun onResume() {
         super.onResume()
         val willReset = restartIfNeed()
@@ -258,8 +198,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
                 analyticsManager.sentEvent(Analytics.Resume)
             }
-
-            refreshAds()
         }
     }
 
@@ -275,12 +213,21 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
+    private fun backToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        backToMainActivity()
+    }
+
     private fun bindToolbar() {
-        menu.apply {
-            TooltipCompat.setTooltipText(this, getString(R.string.open_menu))
+        back.apply {
+            TooltipCompat.setTooltipText(this, getString(R.string.back))
             setColorFilter(minesCount.currentTextColor)
             setOnClickListener {
-                drawer.openDrawer(GravityCompat.START)
+                backToMainActivity()
             }
         }
 
@@ -308,20 +255,29 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             } else {
                 View.GONE
             }
+            strokeColor = usingTheme.palette.border.toAndroidColor()
             TooltipCompat.setTooltipText(this, getString(R.string.switch_control))
-            setImageResource(R.drawable.touch)
-            setColorFilter(minesCount.currentTextColor)
             setOnClickListener {
                 if (preferencesRepository.openUsingSwitchControl()) {
                     gameViewModel.refreshUseOpenOnSwitchControl(false)
                     preferencesRepository.setSwitchControl(false)
-                    setImageResource(R.drawable.flag_black)
+                    switchFlagImage.setImageResource(R.drawable.flag_black)
                 } else {
                     gameViewModel.refreshUseOpenOnSwitchControl(true)
                     preferencesRepository.setSwitchControl(true)
-                    setImageResource(R.drawable.touch)
+                    switchFlagImage.setImageResource(R.drawable.touch)
                 }
             }
+        }
+
+        switchFlagImage.apply {
+            visibility = if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            setImageResource(R.drawable.touch)
+            setColorFilter(minesCount.currentTextColor)
         }
     }
 
@@ -401,97 +357,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun bindDrawer() {
-        drawer.apply {
-            addDrawerListener(
-                ActionBarDrawerToggle(
-                    this@GameActivity,
-                    drawer,
-                    null,
-                    R.string.open_menu,
-                    R.string.close_menu
-                ).apply {
-                    syncState()
-                }
-            )
-
-            addDrawerListener(
-                object : DrawerLayout.DrawerListener {
-                    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-                        // Empty
-                    }
-
-                    override fun onDrawerOpened(drawerView: View) {
-                        gameViewModel.pauseGame()
-                        analyticsManager.sentEvent(Analytics.OpenDrawer)
-                    }
-
-                    override fun onDrawerClosed(drawerView: View) {
-                        if (hasNoOtherFocusedDialog() && hasActiveGameFragment()) {
-                            gameViewModel.resumeGame()
-                        }
-
-                        analyticsManager.sentEvent(Analytics.CloseDrawer)
-                    }
-
-                    override fun onDrawerStateChanged(newState: Int) {
-                        // Empty
-                    }
-                }
-            )
-
-            if (preferencesRepository.isFirstUse() &&
-                (preferencesRepository.isTutorialCompleted())
-            ) {
-                openDrawer(GravityCompat.START)
-                preferencesRepository.completeFirstUse()
-            }
-        }
-    }
-
-    private fun bindNavigationMenu() {
-        navigationView.setNavigationItemSelectedListener { item ->
-            var handled = true
-
-            when (item.itemId) {
-                R.id.standard -> changeDifficulty(Difficulty.Standard)
-                R.id.beginner -> changeDifficulty(Difficulty.Beginner)
-                R.id.intermediate -> changeDifficulty(Difficulty.Intermediate)
-                R.id.expert -> changeDifficulty(Difficulty.Expert)
-                R.id.custom -> showCustomLevelDialog()
-                R.id.control -> showControlDialog()
-                R.id.about -> showAbout()
-                R.id.settings -> showSettings()
-                R.id.themes -> openThemes()
-                R.id.share_now -> shareCurrentGame()
-                R.id.previous_games -> openSaveHistory()
-                R.id.stats -> openStats()
-                R.id.play_games -> googlePlay()
-                R.id.translation -> openCrowdIn()
-                R.id.remove_ads -> showSupportAppDialog()
-                R.id.tutorial -> loadGameTutorial()
-                else -> handled = false
-            }
-
-            if (handled) {
-                drawer.closeDrawer(GravityCompat.START)
-            }
-
-            handled
-        }
-
-        navigationView.menu.apply {
-            val isNotInstant = !instantAppManager.isEnabled(applicationContext)
-            findItem(R.id.share_now).isVisible = isNotInstant
-            findItem(R.id.remove_ads).isVisible = !preferencesRepository.isPremiumEnabled() && isNotInstant
-            findItem(R.id.previous_games).isVisible = featureFlagManager.isGameHistoryEnabled
-
-            if (!playGamesManager.hasGooglePlayGames()) {
-                removeGroup(R.id.play_games_group)
-            }
-        }
-    }
-
     private fun onOpenAppActions() {
         if (instantAppManager.isEnabled(applicationContext)) {
             // Instant App does nothing.
@@ -510,23 +375,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
 
             preferencesRepository.incrementUseCount()
-        }
-    }
-
-    private fun onChangeDifficulty(difficulty: Difficulty) {
-        loadGameFragment()
-        navigationView.menu.apply {
-            arrayOf(
-                Difficulty.Standard to findItem(R.id.standard),
-                Difficulty.Beginner to findItem(R.id.beginner),
-                Difficulty.Intermediate to findItem(R.id.intermediate),
-                Difficulty.Expert to findItem(R.id.expert),
-                Difficulty.Custom to findItem(R.id.custom)
-            ).map {
-                it.second to (if (it.first == difficulty) R.drawable.checked else R.drawable.unchecked)
-            }.forEach { (menuItem, icon) ->
-                menuItem.setIcon(icon)
-            }
         }
     }
 
@@ -569,66 +417,12 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     }
 
     private fun newGameConfirmation(action: () -> Unit) {
-        AlertDialog.Builder(this).apply {
+        MaterialAlertDialogBuilder(this).apply {
             setTitle(R.string.new_game)
             setMessage(R.string.retry_sure)
             setPositiveButton(R.string.resume) { _, _ -> action() }
             setNegativeButton(R.string.cancel, null)
             show()
-        }
-    }
-
-    private fun showCustomLevelDialog() {
-        preferencesRepository.completeTutorial()
-        if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
-            CustomLevelDialogFragment().apply {
-                show(supportFragmentManager, CustomLevelDialogFragment.TAG)
-            }
-        }
-    }
-
-    private fun showControlDialog() {
-        gameViewModel.pauseGame()
-
-        if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
-            ControlDialogFragment().apply {
-                show(supportFragmentManager, ControlDialogFragment.TAG)
-            }
-        }
-    }
-
-    private fun showAbout() {
-        analyticsManager.sentEvent(Analytics.OpenAbout)
-        Intent(this, AboutActivity::class.java).apply {
-            startActivity(this)
-        }
-    }
-
-    private fun openThemes() {
-        analyticsManager.sentEvent(Analytics.OpenThemes)
-        Intent(this, ThemeActivity::class.java).apply {
-            startActivity(this)
-        }
-    }
-
-    private fun openSaveHistory() {
-        analyticsManager.sentEvent(Analytics.OpenSaveHistory)
-        Intent(this, HistoryActivity::class.java).apply {
-            startActivity(this)
-        }
-    }
-
-    private fun openStats() {
-        analyticsManager.sentEvent(Analytics.OpenStats)
-        Intent(this, StatsActivity::class.java).apply {
-            startActivity(this)
-        }
-    }
-
-    private fun showSettings() {
-        analyticsManager.sentEvent(Analytics.OpenSettings)
-        Intent(this, PreferencesActivity::class.java).apply {
-            startActivity(this)
         }
     }
 
@@ -640,7 +434,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun showEndGameDialog(gameResult: GameResult, canContinue: Boolean) {
         val currentGameStatus = status
-        if (currentGameStatus is Status.Over && !isFinishing && !drawer.isDrawerOpen(GravityCompat.START)) {
+        if (currentGameStatus is Status.Over && !isFinishing) {
             if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
                 supportFragmentManager.findFragmentByTag(GameOverDialogFragment.TAG) == null &&
                 supportFragmentManager.findFragmentByTag(WinGameDialogFragment.TAG) == null
@@ -721,35 +515,17 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun changeDifficulty(newDifficulty: Difficulty) {
-        preferencesRepository.completeTutorial()
-
-        if (status == Status.PreGame) {
-            lifecycleScope.launch {
-                gameViewModel.startNewGame(newDifficulty)
-            }
-        } else {
-            newGameConfirmation {
-                lifecycleScope.launch {
-                    gameViewModel.startNewGame(newDifficulty)
-                }
-            }
-        }
-    }
-
     private fun onGameEvent(event: Event) {
         when (event) {
             Event.ResumeGame -> {
                 status = Status.Running
                 refreshInGameShortcut()
-                refreshAds()
             }
             Event.StartNewGame -> {
                 gameToast?.cancel()
                 loadGameFragment()
                 status = Status.PreGame
                 disableShortcutIcon()
-                refreshAds()
             }
             Event.Resume, Event.Running -> {
                 status = Status.Running
@@ -769,17 +545,13 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 loadGameFragment()
                 status = Status.Over(0, Score(4, 4, 25))
                 analyticsManager.sentEvent(Analytics.TutorialCompleted)
-                preferencesRepository.completeTutorial()
+                preferencesRepository.setCompleteTutorial(true)
                 showCompletedTutorialDialog()
                 cloudSaveManager.uploadSave()
             }
             Event.Victory -> {
                 val isResuming = (status == Status.PreGame)
-                val score = Score(
-                    rightMines,
-                    totalMines,
-                    totalArea
-                )
+                val score = gameViewModel.getScore()
                 status = Status.Over(currentTime, score)
                 gameViewModel.stopClock()
                 gameViewModel.showAllEmptyAreas()
@@ -806,11 +578,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
             Event.GameOver -> {
                 val isResuming = (status == Status.PreGame)
-                val score = Score(
-                    rightMines,
-                    totalMines,
-                    totalArea
-                )
+                val score = gameViewModel.getScore()
                 status = Status.Over(currentTime, score)
                 refreshRetryShortcut()
                 keepScreenOn(false)
@@ -830,7 +598,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                     }
                 }
             }
-            else -> { }
+            else -> {
+            }
         }
     }
 
@@ -868,16 +637,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    private fun hasNoOtherFocusedDialog(): Boolean {
-        return supportFragmentManager.fragments.count {
-            it !is LevelFragment && it is DialogFragment
-        } == 0
-    }
-
-    private fun hasActiveGameFragment(): Boolean {
-        return supportFragmentManager.findFragmentByTag(LevelFragment.TAG) != null
-    }
-
     override fun onDismiss(dialog: DialogInterface?) {
         gameViewModel.run {
             refreshUserPreferences()
@@ -885,105 +644,15 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
 
         bindSwitchControlButton()
-        refreshAds()
-    }
-
-    private fun bindAds() {
-        refreshAds()
-
-        if (!preferencesRepository.isPremiumEnabled()) {
-            lifecycleScope.launchWhenCreated {
-                billingManager.listenPurchases().collect {
-                    if (it is PurchaseInfo.PurchaseResult) {
-                        if (it.unlockStatus && !isFinishing) {
-                            refreshAds()
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private fun bindPrice() {
-        if (billingManager.isEnabled() && !preferencesRepository.isPremiumEnabled()) {
-            billingManager.start()
-
-            lifecycleScope.launchWhenResumed {
-                billingManager.getPrice()?.let { price ->
-                    if (price.isNotBlank()) {
-                        try {
-                            navigationView.menu.findItem(R.id.remove_ads).apply {
-                                actionView = TextView(baseContext).apply {
-                                    text = price
-                                    gravity = Gravity.CENTER_VERTICAL
-                                    setTextColor(ContextCompat.getColor(context, R.color.mines_around_2))
-                                    layoutParams = FrameLayout.LayoutParams(
-                                        FrameLayout.LayoutParams.WRAP_CONTENT,
-                                        FrameLayout.LayoutParams.WRAP_CONTENT,
-                                    ).apply {
-                                        gravity = Gravity.CENTER
-                                    }
-                                }
-                            }
-                        } catch (e: Exception) {
-                            Log.e(TAG, "Fail to create price text")
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private fun refreshAds() {
-        if (featureFlagManager.isInAppAdsEnabled) {
-            val isTutorialComplete = preferencesRepository.isTutorialCompleted()
-            if (isTutorialComplete && !preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
-                if (!instantAppManager.isEnabled(this)) {
-                    navigationView.menu.setGroupVisible(R.id.remove_ads_group, true)
-                }
-            } else {
-                navigationView.menu.setGroupVisible(R.id.remove_ads_group, false)
-            }
-        }
-    }
-
-    private fun silentGooglePlayLogin(): Boolean {
-        return if (playGamesManager.hasGooglePlayGames()) {
-            try {
-                playGamesManager.silentLogin()
-            } catch (e: Exception) {
-                Log.e(TAG, "User not logged in Play Games")
-                false
-            }
-        } else {
-            false
-        }
-    }
-
-    private fun googlePlay() {
-        if (playGamesManager.isLogged()) {
-            if (supportFragmentManager.findFragmentByTag(PlayGamesDialogFragment.TAG) == null) {
-                PlayGamesDialogFragment().show(supportFragmentManager, PlayGamesDialogFragment.TAG)
-            }
-        } else {
-            playGamesManager.getLoginIntent()?.let {
-                ActivityCompat.startActivityForResult(this, it, GOOGLE_PLAY_REQUEST_CODE, null)
-            }
-        }
-    }
-
-    private fun openCrowdIn() {
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://crowdin.com/project/antimine-android")))
-        } catch (e: Exception) {
-            Toast.makeText(applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun showSupportAppDialog() {
+        val extras = intent.extras?.containsKey(START_TUTORIAL)
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
             !instantAppManager.isEnabled(this) &&
-            !isFinishing
+            !isFinishing &&
+            (extras == false || extras == null) &&
+            preferencesRepository.isTutorialCompleted()
         ) {
             lifecycleScope.launch {
                 if (billingManager.isEnabled()) {
@@ -999,26 +668,13 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == GOOGLE_PLAY_REQUEST_CODE) {
-            playGamesManager.handleLoginResult(data)
-            goToSplashScreen()
-        }
-    }
-
-    private fun goToSplashScreen() {
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-        Intent(this, SplashActivity::class.java)
-            .run { startActivity(this) }
-        finish()
-    }
-
     companion object {
         val TAG = GameActivity::class.simpleName
-        const val GOOGLE_PLAY_REQUEST_CODE = 6
 
-        const val MIN_USAGES_TO_IAP = 2
+        const val DIFFICULTY = "difficulty"
+        const val START_TUTORIAL = "start_tutorial"
+        const val START_GAME = "start_game"
+        const val RETRY_GAME = "retry_game"
+        const val MIN_USAGES_TO_IAP = 4
     }
 }

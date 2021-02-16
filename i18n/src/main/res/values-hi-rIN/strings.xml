@@ -72,7 +72,6 @@
     <string name="use_question_mark">\"मैं सुनिश्चित नहीं हूं\" झंडे का उपयोग करें</string>
     <string name="no_guessing_mode">\'कोई अनुमान नहीं\' मोड</string>
     <string name="control">नियंत्रण</string>
-    <string name="arrow">➞</string>
     <string name="single_click">सिंगल क्लिक</string>
     <string name="double_click">दुबारा क्लिक</string>
     <string name="long_press">लंबे समय दबाए</string>
@@ -95,6 +94,7 @@
     <string name="achievements">उपलब्धियां</string>
     <string name="no">नहीं</string>
     <string name="general">सामान्य</string>
+    <string name="more">ज़्यादा</string>
     <string name="source_code">सोर्स कोड</string>
     <string name="translation">अनुवाद</string>
     <string name="licenses">लाइसेंस</string>
@@ -108,8 +108,6 @@
     <string name="share">शेयर करें</string>
     <string name="share_menu">शेयर करें…</string>
     <string name="no_network">कोई इंटरनेट कनेक्शन नहीं</string>
-    <string name="open_menu">मेन्यू खोलें</string>
-    <string name="close_menu">मेनू बंद करें</string>
     <string name="delete_all">सभी मिटाएँ</string>
     <string name="appearance">स्वरूप</string>
     <string name="themes">थीम्स</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Flag removed!</string>
     <string name="remove_ad">विज्ञापन निकालें</string>
     <string name="help">मदद</string>
+    <string name="back">पिछला</string>
+    <string name="donation">दान</string>
     <string name="show_windows">खिड़कियां दिखाओ</string>
     <string name="select_language">भाषा चुनें</string>
     <string name="switch_control">स्विच: फ्लैग और ओपन</string>

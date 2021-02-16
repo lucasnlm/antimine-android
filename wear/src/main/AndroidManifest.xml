@@ -8,8 +8,8 @@
 
     <application
         android:name="dev.lucasnlm.antimine.wear.MainApplication"
-        android:description="@string/app_description"
         android:allowBackup="false"
+        android:description="@string/app_description"
         android:icon="@mipmap/ic_launcher"
         android:isGame="true"
         android:label="@string/app_name"
@@ -31,8 +31,9 @@
             android:launchMode="singleTop"
             android:theme="@style/WearAppTheme">
 
-            <intent-filter android:label="@string/app_name"
-                android:autoVerify="true">
+            <intent-filter
+                android:autoVerify="true"
+                android:label="@string/app_name">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />

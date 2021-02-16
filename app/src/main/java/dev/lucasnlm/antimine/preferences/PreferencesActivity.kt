@@ -55,7 +55,15 @@ class PreferencesActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
-        setTitle(R.string.settings)
+
+        section.bind(
+            text = R.string.settings,
+            startButton = R.drawable.back_arrow,
+            startDescription = R.string.back,
+            startAction = {
+                finish()
+            }
+        )
 
         PreferenceManager.getDefaultSharedPreferences(this)
             .registerOnSharedPreferenceChangeListener(this)
@@ -77,6 +85,11 @@ class PreferencesActivity :
         }
 
         placePreferenceFragment(R.xml.gameplay_preferences)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     override fun onDestroy() {

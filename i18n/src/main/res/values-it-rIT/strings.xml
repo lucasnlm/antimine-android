@@ -72,7 +72,6 @@
     <string name="use_question_mark">Usa il Punto Interrogativo</string>
     <string name="no_guessing_mode">Modalità \"Senza predizione\"</string>
     <string name="control">Comandi</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Singolo click</string>
     <string name="double_click">Doppio click</string>
     <string name="long_press">Premi a lungo</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Progressi</string>
     <string name="no">No</string>
     <string name="general">Generale</string>
+    <string name="more">Altro</string>
     <string name="source_code">Codice sorgente</string>
     <string name="translation">Traduzione</string>
     <string name="licenses">Licenze</string>
@@ -108,8 +108,6 @@
     <string name="share">Condividi</string>
     <string name="share_menu">Condividi…</string>
     <string name="no_network">Nessuna connessione internet.</string>
-    <string name="open_menu">Apri menu</string>
-    <string name="close_menu">Chiudi menu</string>
     <string name="delete_all">Elimina tutti</string>
     <string name="appearance">Aspetto</string>
     <string name="themes">Temi</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Bandiera rimossa!</string>
     <string name="remove_ad">Rimuovi gli Annunci</string>
     <string name="help">Assistenza</string>
+    <string name="back">Indietro</string>
+    <string name="donation">Donazione</string>
     <string name="show_windows">Visualizza finestre</string>
     <string name="select_language">Seleziona Lingua</string>
     <string name="switch_control">Pulsante: Bandiera e Aperto</string>

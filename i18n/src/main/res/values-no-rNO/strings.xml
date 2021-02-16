@@ -72,7 +72,6 @@
     <string name="use_question_mark">Bruk Spørsmålstegn</string>
     <string name="no_guessing_mode">\'Ingen gjetting\'-modus</string>
     <string name="control">Styring</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Enkeltklikk</string>
     <string name="double_click">Dobbeltklikk</string>
     <string name="long_press">Lang Trykk</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Prestasjoner</string>
     <string name="no">Nei</string>
     <string name="general">Generelt</string>
+    <string name="more">Mer</string>
     <string name="source_code">Kildekode</string>
     <string name="translation">Oversettelse</string>
     <string name="licenses">Lisenser</string>
@@ -108,8 +108,6 @@
     <string name="share">Del</string>
     <string name="share_menu">Del med…</string>
     <string name="no_network">Ingen Internett-forbindelse.</string>
-    <string name="open_menu">Åpne Menyen</string>
-    <string name="close_menu">Lukk Menyen</string>
     <string name="delete_all">Slett alle</string>
     <string name="appearance">Utseende</string>
     <string name="themes">Temaer</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Flagg fjernet!</string>
     <string name="remove_ad">Fjern Reklame</string>
     <string name="help">Hjelp</string>
+    <string name="back">Tilbake</string>
+    <string name="donation">Donasjon</string>
     <string name="show_windows">Vis vinduer</string>
     <string name="select_language">Velg språk</string>
     <string name="switch_control">Bytte: Flagg og Åpne</string>

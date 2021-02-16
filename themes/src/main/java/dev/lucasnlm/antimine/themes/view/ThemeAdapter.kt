@@ -6,24 +6,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.AreaPaintSettings
-import dev.lucasnlm.antimine.ui.view.createAreaPaintSettings
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.R
-import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
+import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.view.AreaView
+import dev.lucasnlm.antimine.ui.view.createAreaPaintSettings
 import kotlinx.android.synthetic.main.view_theme.view.*
 
 class ThemeAdapter(
     private val themeViewModel: ThemeViewModel,
     private val areaSize: Float,
-    private val squareRadius: Int,
+    private val preferencesRepository: IPreferencesRepository,
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
 
     private val themes: List<AppTheme> = themeViewModel.singleState().themes
     private val minefield = ExampleField.getField()
+    private val squareRadius: Int = preferencesRepository.squareRadius()
 
     init {
         setHasStableIds(true)
@@ -51,6 +53,7 @@ class ThemeAdapter(
             areaSize,
             squareRadius
         )
+
         holder.itemView.run {
             val selected = (theme.id == themeViewModel.singleState().current.id)
             val areas = listOf(area0, area1, area2, area3, area4, area5, area6, area7, area8)
@@ -61,27 +64,57 @@ class ThemeAdapter(
                 areas.forEach { it.alpha = 1.0f }
             }
 
-            areas.forEachIndexed { index, areaView -> areaView.bindTheme(minefield[index], theme, paintSettings) }
+            areas.forEachIndexed { index, areaView ->
+                areaView.apply {
+                    bindTheme(minefield[index], theme, paintSettings)
+                    isClickable = false
+                    isFocusable = false
+                    isPressed = false
+                }
+            }
 
             if (position == 0) {
-                areas.forEach { it.alpha = 0.35f }
+                areas.forEach { it.alpha = 0.30f }
 
                 label.apply {
                     text = label.context.getString(R.string.system)
-
-                    setTextColor(theme.palette.background.toInvertedAndroidColor())
+                    setTextColor(theme.palette.background.toInvertedAndroidColor(200))
                     setBackgroundResource(android.R.color.transparent)
+                    setCompoundDrawables(null, null, null, null)
+                    visibility = View.VISIBLE
+                }
+            } else if (theme.isPaid && !preferencesRepository.isPremiumEnabled()) {
+                areas.forEach { it.alpha = 0.30f }
+
+                label.apply {
+                    text = label.context.getString(R.string.unlock)
+                    setTextColor(theme.palette.background.toInvertedAndroidColor(200))
+                    setBackgroundResource(android.R.color.transparent)
+                    compoundDrawables.forEach {
+                        it?.setTint(theme.palette.background.toInvertedAndroidColor(200))
+                    }
                     visibility = View.VISIBLE
                 }
             } else {
+                label.setCompoundDrawables(null, null, null, null)
                 label.visibility = View.GONE
             }
 
-            val color = theme.palette.background.toAndroidColor()
-            parentGrid.setBackgroundColor(color)
+            theme_background.setBackgroundColor(theme.palette.background.toAndroidColor())
 
-            clickTheme.setOnClickListener {
+            clickable.setOnClickListener {
                 themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+            }
+
+            card_theme.apply {
+                setOnClickListener {
+                    themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+                }
+                strokeColor = if (selected) {
+                    theme.palette.accent.toAndroidColor()
+                } else {
+                    0
+                }
             }
         }
     }

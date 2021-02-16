@@ -11,11 +11,8 @@ import org.koin.android.ext.android.inject
 import java.util.Locale
 
 abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
-
     private val themeRepository: IThemeRepository by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
-
-    protected open val noActionBar: Boolean = false
 
     protected val usingTheme: AppTheme by lazy {
         currentTheme()
@@ -31,11 +28,7 @@ abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         themeRepository.getCustomTheme()?.let {
-            if (noActionBar) {
-                setTheme(it.themeNoActionBar)
-            } else {
-                setTheme(it.theme)
-            }
+            setTheme(it.theme)
         }
 
         preferencesRepository.getPreferredLocale()?.let {
@@ -43,8 +36,6 @@ abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActi
         }
 
         super.onCreate(savedInstanceState)
-
-        supportActionBar?.elevation = 0.0f
 
         window.decorView.setBackgroundColor(
             themeRepository.getTheme().palette.background.toAndroidColor()

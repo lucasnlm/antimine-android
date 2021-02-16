@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.ui.ThematicActivity
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.stats.view.StatsAdapter
 import dev.lucasnlm.antimine.stats.viewmodel.StatsEvent
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
+import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.activity_stats.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -25,6 +25,15 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        section.bind(
+            text = R.string.events,
+            startButton = R.drawable.back_arrow,
+            startDescription = R.string.back,
+            startAction = {
+                finish()
+            }
+        )
 
         recyclerView.apply {
             setHasFixedSize(true)
@@ -60,7 +69,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     }
 
     private fun confirmAndDelete() {
-        AlertDialog.Builder(this)
+        MaterialAlertDialogBuilder(this)
             .setTitle(R.string.are_you_sure)
             .setMessage(R.string.delete_all_message)
             .setNegativeButton(R.string.cancel, null)
@@ -70,5 +79,10 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
                 }
             }
             .show()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }

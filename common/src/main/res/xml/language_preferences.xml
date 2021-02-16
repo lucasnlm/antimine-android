@@ -3,6 +3,5 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
         android:key="language_list"
-        app:iconSpaceReserved="false">
-    </PreferenceCategory>
+        app:iconSpaceReserved="false"></PreferenceCategory>
 </PreferenceScreen>

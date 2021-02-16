@@ -7,26 +7,26 @@ import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
-import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.common.level.models.Event
-import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.repository.ITipRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
-import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.core.models.Analytics
+import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ActionResponse
 import dev.lucasnlm.antimine.preferences.models.GameControl
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.Achievement
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.Leaderboard
@@ -65,7 +65,6 @@ open class GameViewModel(
     val field = MutableLiveData<List<Area>>()
     val elapsedTimeSeconds = MutableLiveData<Long>()
     val mineCount = MutableLiveData<Int>()
-    val difficulty = MutableLiveData<Difficulty>()
     val levelSetup = MutableLiveData<Minefield>()
     val saveId = MutableLiveData<Long>()
     val tips = MutableLiveData(tipRepository.getTotalTips())
@@ -86,7 +85,6 @@ open class GameViewModel(
         refreshUserPreferences()
 
         mineCount.postValue(minefield.mines)
-        difficulty.postValue(newDifficulty)
         levelSetup.postValue(minefield)
         refreshField()
 
@@ -114,7 +112,6 @@ open class GameViewModel(
         refreshUserPreferences()
 
         mineCount.postValue(setup.mines)
-        difficulty.postValue(save.difficulty)
         levelSetup.postValue(setup)
         refreshField()
         refreshMineCount()
@@ -141,7 +138,6 @@ open class GameViewModel(
         refreshUserPreferences()
 
         mineCount.postValue(setup.mines)
-        difficulty.postValue(save.difficulty)
         levelSetup.postValue(setup)
 
         eventObserver.postValue(Event.ResumeGame)
@@ -271,8 +267,8 @@ open class GameViewModel(
             .filterNotNull()
             .collect { action ->
                 onFeedbackAnalytics(action, index)
-                refreshField()
                 onPostAction()
+                refreshField()
 
                 if (preferencesRepository.useHapticFeedback()) {
                     hapticFeedbackManager.longPressFeedback()
@@ -286,8 +282,8 @@ open class GameViewModel(
             .filterNotNull()
             .collect { action ->
                 onFeedbackAnalytics(action, index)
-                refreshField()
                 onPostAction()
+                refreshField()
             }
     }
 
@@ -297,8 +293,8 @@ open class GameViewModel(
             .filterNotNull()
             .collect { action ->
                 onFeedbackAnalytics(action, index)
-                refreshField()
                 onPostAction()
+                refreshField()
             }
     }
 
@@ -309,7 +305,6 @@ open class GameViewModel(
     private fun onPostAction() {
         if (preferencesRepository.useFlagAssistant() && !gameController.isGameOver()) {
             gameController.runFlagAssistant()
-            refreshField()
         }
 
         updateGameState()
@@ -354,7 +349,6 @@ open class GameViewModel(
         }
 
         if (gameController.isVictory()) {
-            refreshField()
             eventObserver.postValue(Event.Victory)
         }
     }
@@ -444,6 +438,8 @@ open class GameViewModel(
             refreshField()
         }
     }
+
+    fun getScore() = gameController.getScore()
 
     suspend fun gameOver(fromResumeGame: Boolean, useGameOverFeedback: Boolean) {
         gameController.run {

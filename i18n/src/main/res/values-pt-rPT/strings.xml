@@ -72,7 +72,6 @@
     <string name="use_question_mark">Usar Ponto de Interrogação</string>
     <string name="no_guessing_mode">Modo \"Sem adivinhação\"</string>
     <string name="control">Controlos</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Toque Único</string>
     <string name="double_click">Toque Duplo</string>
     <string name="long_press">Toque Longo</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Conquistas</string>
     <string name="no">Não</string>
     <string name="general">Geral</string>
+    <string name="more">Mais</string>
     <string name="source_code">Código Fonte</string>
     <string name="translation">Tradução</string>
     <string name="licenses">Licenças</string>
@@ -108,8 +108,6 @@
     <string name="share">Compartilhar</string>
     <string name="share_menu">Compartilhar…</string>
     <string name="no_network">Sem ligação à Internet.</string>
-    <string name="open_menu">Abrir o Menu</string>
-    <string name="close_menu">Fechar menu</string>
     <string name="delete_all">Apagar tudo</string>
     <string name="appearance">Aparência</string>
     <string name="themes">Temas</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Bandeira removida!</string>
     <string name="remove_ad">Remover Anúncios</string>
     <string name="help">Ajuda</string>
+    <string name="back">Voltar</string>
+    <string name="donation">Doação</string>
     <string name="show_windows">Mostrar janelas</string>
     <string name="select_language">Selecionar idioma</string>
     <string name="switch_control">Alternador: sinalizar e abrir</string>

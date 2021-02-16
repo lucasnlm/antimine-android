@@ -72,7 +72,6 @@
     <string name="use_question_mark">Χρήση ερωτηματικών</string>
     <string name="no_guessing_mode">Λειτουργία «Χωρίς μαντέψεις»</string>
     <string name="control">Ελεγχος</string>
-    <string name="arrow">➞</string>
     <string name="single_click">Με ένα κλικ</string>
     <string name="double_click">Διπλό κλικ</string>
     <string name="long_press">Πιέστε και κρατήστε</string>
@@ -95,6 +94,7 @@
     <string name="achievements">Επιτεύγματα</string>
     <string name="no">Όχι</string>
     <string name="general">Γενικά</string>
+    <string name="more">Περισσότερα</string>
     <string name="source_code">Πηγαίος Κώδικας</string>
     <string name="translation">Μετάφραση</string>
     <string name="licenses">Άδειες</string>
@@ -108,8 +108,6 @@
     <string name="share">Κοινοποίηση</string>
     <string name="share_menu">Κοινοποίηση με…</string>
     <string name="no_network">Δεν υπάρχει σύνδεση στο διαδίκτυο.</string>
-    <string name="open_menu">Άνοιγμα Μενού</string>
-    <string name="close_menu">Κλείσιμο Μενού</string>
     <string name="delete_all">Διαγραφή όλων</string>
     <string name="appearance">Εμφάνιση</string>
     <string name="themes">Θέμα</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">Η σημαία αφαιρέθηκε!</string>
     <string name="remove_ad">Κατάργηση διαφημίσεων</string>
     <string name="help">Βοήθεια</string>
+    <string name="back">Πίσω</string>
+    <string name="donation">Δωρεά</string>
     <string name="show_windows">Εμφάνιση παραθύρων</string>
     <string name="select_language">Επιλέξτε γλώσσα</string>
     <string name="switch_control">Διακόπτης: Σημαία και Άνοιγμα</string>

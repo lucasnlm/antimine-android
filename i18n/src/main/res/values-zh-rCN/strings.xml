@@ -72,7 +72,6 @@
     <string name="use_question_mark">使用问号标记</string>
     <string name="no_guessing_mode">“无需猜测”模式</string>
     <string name="control">控制</string>
-    <string name="arrow">➞</string>
     <string name="single_click">单击</string>
     <string name="double_click">双击</string>
     <string name="long_press">长按</string>
@@ -95,6 +94,7 @@
     <string name="achievements">成就</string>
     <string name="no">否</string>
     <string name="general">通用</string>
+    <string name="more">更多</string>
     <string name="source_code">源代码</string>
     <string name="translation">翻译</string>
     <string name="licenses">许可证</string>
@@ -108,8 +108,6 @@
     <string name="share">分享</string>
     <string name="share_menu">分享……</string>
     <string name="no_network">没有连接网络。</string>
-    <string name="open_menu">打开菜单</string>
-    <string name="close_menu">关闭菜单</string>
     <string name="delete_all">全部删除</string>
     <string name="appearance">界面外观</string>
     <string name="themes">主题</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">标记已移除！</string>
     <string name="remove_ad">去除广告</string>
     <string name="help">帮助</string>
+    <string name="back">后退</string>
+    <string name="donation">捐赠</string>
     <string name="show_windows">显示窗口</string>
     <string name="select_language">选择语言</string>
     <string name="switch_control">开关：（切换）标记与打开</string>

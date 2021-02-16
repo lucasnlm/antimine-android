@@ -72,7 +72,6 @@
     <string name="use_question_mark">물음표 깃발 사용</string>
     <string name="no_guessing_mode">\'추측 없음\'모드</string>
     <string name="control">컨트롤</string>
-    <string name="arrow">➞</string>
     <string name="single_click">단일 클릭</string>
     <string name="double_click">더블 클릭</string>
     <string name="long_press">길게 누르기</string>
@@ -95,6 +94,7 @@
     <string name="achievements">도전 과제</string>
     <string name="no">아니오</string>
     <string name="general">기본설정</string>
+    <string name="more">더보기</string>
     <string name="source_code">소스 코드</string>
     <string name="translation">번역</string>
     <string name="licenses">라이선스</string>
@@ -108,8 +108,6 @@
     <string name="share">공유하기</string>
     <string name="share_menu">…을 통해 공유하기</string>
     <string name="no_network">인터넷에 연결되어 있지 않습니다.</string>
-    <string name="open_menu">메뉴 열기</string>
-    <string name="close_menu">메뉴 닫기</string>
     <string name="delete_all">모두 삭제</string>
     <string name="appearance">모양새</string>
     <string name="themes">테마 선택</string>
@@ -127,6 +125,8 @@
     <string name="flag_removed">깃발 제거 완료!</string>
     <string name="remove_ad">광고 제거</string>
     <string name="help">도움말</string>
+    <string name="back">뒤로</string>
+    <string name="donation">공헌</string>
     <string name="show_windows">진행상황 게이지 활성화</string>
     <string name="select_language">언어 선택</string>
     <string name="switch_control">스위치: 플래그 및 열기</string>

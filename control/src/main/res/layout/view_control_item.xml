@@ -1,71 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical"
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:paddingStart="32dp"
-    android:paddingEnd="48dp"
-    android:paddingVertical="12dp">
+    android:paddingVertical="8dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="32dp">
 
-    <androidx.appcompat.widget.AppCompatRadioButton
+    <com.google.android.material.radiobutton.MaterialRadioButton
         android:id="@+id/radio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/standard_details"
-        app:layout_constraintEnd_toStartOf="@id/standard_details"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TableLayout
-        android:id="@+id/standard_details"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/firstAction"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/standard"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/radio"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="">
+        tools:text="First Action" />
 
-        <TableRow>
-            <TextView
-                android:id="@+id/firstAction"
-                tools:text="First Action" />
+    <TextView
+        android:id="@+id/firstActionResponse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/firstAction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/firstAction"
+        tools:text="Open Area" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/arrow" />
+    <TextView
+        android:id="@+id/secondAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/radio"
+        app:layout_constraintTop_toBottomOf="@id/firstAction"
+        tools:text="First Action" />
 
-            <TextView
-                android:id="@+id/firstActionResponse"
-                android:gravity="end"
-                tools:text="Open Area" />
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:id="@+id/secondAction"
-                tools:text="Long Tap" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/arrow" />
-
-            <TextView
-                android:id="@+id/secondActionResponse"
-                android:gravity="end"
-                tools:text="Put Flag" />
-        </TableRow>
-    </TableLayout>
-</LinearLayout>
+    <TextView
+        android:id="@+id/secondActionResponse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/secondAction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/secondAction"
+        tools:text="Open Area" />
+</androidx.constraintlayout.widget.ConstraintLayout>

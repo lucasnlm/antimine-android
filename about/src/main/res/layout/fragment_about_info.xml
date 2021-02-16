@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:paddingHorizontal="20dp"
     tools:context="dev.lucasnlm.antimine.about.AboutActivity">
 
     <LinearLayout
@@ -51,8 +52,8 @@
             android:id="@+id/instant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="?android:attr/textColorSecondary"
             android:text="Instant Build"
+            android:textColor="?android:attr/textColorSecondary"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
@@ -68,23 +69,26 @@
 
         <Button
             android:id="@+id/thirdsParties"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="12dp"
             android:text="@string/show_licenses" />
 
         <Button
             android:id="@+id/translation"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="12dp"
             android:text="@string/translation" />
 
         <Button
             android:id="@+id/sourceCode"
-            style="?android:attr/borderlessButtonStyle"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="12dp"
             android:text="@string/source_code" />
 
     </LinearLayout>

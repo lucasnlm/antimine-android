@@ -24,18 +24,25 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
-    private val dimensionRepository: IDimensionRepository by inject()
-
     private val themeViewModel by viewModel<ThemeViewModel>()
 
+    private val dimensionRepository: IDimensionRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
-
     private val preferencesRepository: IPreferencesRepository by inject()
-
     private val billingManager: IBillingManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        section.bind(
+            text = R.string.themes,
+            startButton = R.drawable.back_arrow,
+            startDescription = R.string.back,
+            startAction = {
+                finish()
+            }
+        )
+
         lifecycleScope.launchWhenCreated {
             val gaps = resources.getDimension(R.dimen.theme_divider) * 6
             val size = dimensionRepository.displaySize()
@@ -54,7 +61,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
                 setHasFixedSize(true)
                 layoutManager = GridLayoutManager(context, columns)
-                adapter = ThemeAdapter(themeViewModel, areaSize, preferencesRepository.squareRadius())
+                adapter = ThemeAdapter(themeViewModel, areaSize, preferencesRepository)
             }
 
             launch {
@@ -74,6 +81,11 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 }
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

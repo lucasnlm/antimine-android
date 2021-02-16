@@ -125,24 +125,20 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
                 onGameEvent(it)
             }
         )
+
         elapsedTimeSeconds.observe(
             this@WatchGameActivity,
             {
                 // Nothing
             }
         )
+
         mineCount.observe(
             this@WatchGameActivity,
             {
                 if (it > 0) {
                     messageText.text = applicationContext.getString(R.string.mines_remaining, it)
                 }
-            }
-        )
-        difficulty.observe(
-            this@WatchGameActivity,
-            {
-                // Nothing
             }
         )
     }

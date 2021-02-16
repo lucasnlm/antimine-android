@@ -1,10 +1,10 @@
 package dev.lucasnlm.antimine.custom
 
 import dev.lucasnlm.antimine.IntentViewModelTest
-import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.custom.viewmodel.CreateGameViewModel
 import dev.lucasnlm.antimine.custom.viewmodel.CustomEvent
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Assert.assertEquals

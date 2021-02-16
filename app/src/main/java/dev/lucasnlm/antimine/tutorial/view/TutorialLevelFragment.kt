@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.Event
-import dev.lucasnlm.antimine.core.repository.IDimensionRepository
-import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.tutorial.viewmodel.TutorialViewModel
+import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_tutorial_level.*
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
