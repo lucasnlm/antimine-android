@@ -61,7 +61,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
                 setHasFixedSize(true)
                 layoutManager = GridLayoutManager(context, columns)
-                adapter = ThemeAdapter(themeViewModel, areaSize, preferencesRepository.squareRadius())
+                adapter = ThemeAdapter(themeViewModel, areaSize, preferencesRepository)
             }
 
             launch {

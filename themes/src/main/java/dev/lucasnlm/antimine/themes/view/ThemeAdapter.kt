@@ -3,9 +3,11 @@ package dev.lucasnlm.antimine.themes.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.AreaPaintSettings
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.view.createAreaPaintSettings
 import dev.lucasnlm.antimine.themes.R
 import dev.lucasnlm.antimine.ui.model.AppTheme
@@ -19,11 +21,12 @@ import kotlinx.android.synthetic.main.view_theme.view.*
 class ThemeAdapter(
     private val themeViewModel: ThemeViewModel,
     private val areaSize: Float,
-    private val squareRadius: Int,
+    private val preferencesRepository: IPreferencesRepository,
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
 
     private val themes: List<AppTheme> = themeViewModel.singleState().themes
     private val minefield = ExampleField.getField()
+    private val squareRadius: Int = preferencesRepository.squareRadius()
 
     init {
         setHasStableIds(true)
@@ -51,6 +54,7 @@ class ThemeAdapter(
             areaSize,
             squareRadius
         )
+
         holder.itemView.run {
             val selected = (theme.id == themeViewModel.singleState().current.id)
             val areas = listOf(area0, area1, area2, area3, area4, area5, area6, area7, area8)
@@ -71,15 +75,29 @@ class ThemeAdapter(
             }
 
             if (position == 0) {
-                areas.forEach { it.alpha = 0.35f }
+                areas.forEach { it.alpha = 0.30f }
 
                 label.apply {
                     text = label.context.getString(R.string.system)
-                    setTextColor(theme.palette.background.toInvertedAndroidColor())
+                    setTextColor(theme.palette.background.toInvertedAndroidColor(200))
                     setBackgroundResource(android.R.color.transparent)
+                    setCompoundDrawables(null, null, null, null)
+                    visibility = View.VISIBLE
+                }
+            } else if (theme.isPaid && !preferencesRepository.isPremiumEnabled()) {
+                areas.forEach { it.alpha = 0.30f }
+
+                label.apply {
+                    text = label.context.getString(R.string.unlock)
+                    setTextColor(theme.palette.background.toInvertedAndroidColor(200))
+                    setBackgroundResource(android.R.color.transparent)
+                    compoundDrawables.forEach {
+                        it?.setTint(theme.palette.background.toInvertedAndroidColor(200))
+                    }
                     visibility = View.VISIBLE
                 }
             } else {
+                label.setCompoundDrawables(null, null, null, null)
                 label.visibility = View.GONE
             }
 

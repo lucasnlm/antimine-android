@@ -33,20 +33,13 @@ class ThemeViewModel(
                 if (it is ThemeEvent.ChangeTheme &&
                     billingManager.isEnabled() &&
                     !preferencesRepository.isPremiumEnabled() &&
-                    isPaid(it.newTheme)
+                    it.newTheme.isPaid
                 ) {
                     ThemeEvent.Unlock(it.newTheme.id)
                 } else {
                     it
                 }
             }
-    }
-
-    private fun isPaid(theme: AppTheme): Boolean {
-        return when (theme.id) {
-            0L, Themes.LightTheme.id, Themes.DarkTheme.id -> false
-            else -> true
-        }
     }
 
     override suspend fun mapEventToState(event: ThemeEvent) = flow {

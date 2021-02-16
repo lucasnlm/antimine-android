@@ -15,7 +15,7 @@
     <style name="CustomLightTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">#757575</item>
         <item name="colorPrimaryDark">#494949</item>
-        <item name="colorAccent">#D32F2F</item>
+        <item name="colorAccent">#ff6f00</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>

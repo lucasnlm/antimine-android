@@ -37,10 +37,11 @@ object Themes {
             mineExploded = R.drawable.mine_exploded_red,
             mineLow = R.drawable.mine_low,
             revealed = R.drawable.mine_revealed_white,
-        )
+        ),
+        isPaid = false,
     )
 
-    val DarkTheme = AppTheme(
+    private val DarkTheme = AppTheme(
         id = 3L,
         theme = R.style.CustomDarkTheme,
         palette = AreaPalette(
@@ -71,7 +72,8 @@ object Themes {
             mineExploded = R.drawable.mine_exploded_white,
             mineLow = R.drawable.mine_low,
             revealed = R.drawable.mine_revealed_white,
-        )
+        ),
+        isPaid = false,
     )
 
     private val AmoledTheme = AppTheme(
@@ -105,7 +107,8 @@ object Themes {
             mineExploded = R.drawable.mine_low,
             mineLow = R.drawable.mine_low,
             revealed = R.drawable.mine_revealed_white,
-        )
+        ),
+        isPaid = false,
     )
 
     fun getAllCustom() = listOf(
@@ -143,7 +146,7 @@ object Themes {
                 mineExploded = R.drawable.mine_exploded_white,
                 mineLow = R.drawable.mine_low,
                 revealed = R.drawable.mine_revealed_white,
-            )
+            ),
         ),
         AppTheme(
             id = 5L,

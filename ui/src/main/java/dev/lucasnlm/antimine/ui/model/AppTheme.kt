@@ -7,4 +7,5 @@ data class AppTheme(
     @StyleRes val theme: Int,
     val assets: Assets,
     val palette: AreaPalette,
+    val isPaid: Boolean = true,
 )

@@ -19,7 +19,7 @@
         android:id="@+id/circle_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="32dp"
+        android:layout_margin="24dp"
         app:ci_width="7dp"
         app:ci_height="7dp"
         app:ci_animator="@anim/indicator_animator"
