@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_theme"
@@ -23,19 +23,19 @@
             android:id="@+id/theme_background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_width="196dp"
-            tools:layout_height="196dp"
             android:clipChildren="false"
-            android:clipToPadding="false">
+            android:clipToPadding="false"
+            tools:layout_height="196dp"
+            tools:layout_width="196dp">
 
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:translationX="-2dp"
                 android:columnCount="3"
                 android:descendantFocusability="blocksDescendants"
-                android:focusable="false">
+                android:focusable="false"
+                android:translationX="-2dp">
 
                 <dev.lucasnlm.antimine.ui.view.AreaView
                     android:id="@+id/area0"
@@ -116,9 +116,9 @@
 
             <FrameLayout
                 android:id="@+id/clickable"
-                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:foreground="?android:attr/selectableItemBackground" />
 
         </FrameLayout>
     </com.google.android.material.card.MaterialCardView>

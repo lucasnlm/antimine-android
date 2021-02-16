@@ -1,8 +1,8 @@
 package dev.lucasnlm.antimine.ui.repository
 
 import dev.lucasnlm.antimine.ui.R
-import dev.lucasnlm.antimine.ui.model.AreaPalette
 import dev.lucasnlm.antimine.ui.model.AppTheme
+import dev.lucasnlm.antimine.ui.model.AreaPalette
 import dev.lucasnlm.antimine.ui.model.Assets
 
 object Themes {

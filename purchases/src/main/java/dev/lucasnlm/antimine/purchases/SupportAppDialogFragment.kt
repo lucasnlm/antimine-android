@@ -11,10 +11,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.external.IAdsManager
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
 import kotlinx.coroutines.launch

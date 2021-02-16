@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.themes
 
-import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeState
@@ -9,6 +8,7 @@ import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette
 import dev.lucasnlm.antimine.ui.model.Assets
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import io.mockk.every
 import io.mockk.mockk

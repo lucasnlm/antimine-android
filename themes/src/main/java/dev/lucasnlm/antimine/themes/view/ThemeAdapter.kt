@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.AreaPaintSettings
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.ui.view.createAreaPaintSettings
 import dev.lucasnlm.antimine.themes.R
-import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
+import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.view.AreaView
+import dev.lucasnlm.antimine.ui.view.createAreaPaintSettings
 import kotlinx.android.synthetic.main.view_theme.view.*
 
 class ThemeAdapter(

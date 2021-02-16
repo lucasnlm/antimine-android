@@ -1,10 +1,10 @@
 package dev.lucasnlm.antimine.themes.viewmodel
 
 import dev.lucasnlm.antimine.core.models.Analytics
+import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
-import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import kotlinx.coroutines.flow.Flow

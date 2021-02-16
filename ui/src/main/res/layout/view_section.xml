@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    tools:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:paddingBottom="12dp">
+    android:paddingBottom="12dp"
+    tools:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/startButton"
         android:layout_width="?attr/actionBarSize"
         android:layout_height="?attr/actionBarSize"
-        tools:layout_width="32dp"
-        tools:layout_height="32dp"
-        android:padding="16dp"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="?selectableItemBackgroundBorderless"
-        android:visibility="gone"
         android:importantForAccessibility="no"
-        tools:visibility="visible"
+        android:padding="16dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        tools:layout_height="32dp"
+        tools:layout_width="32dp"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="8dp"
-        android:translationX="-8dp"
+        android:layout_marginTop="24dp"
         android:textAllCaps="true"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:text="Section Name"
-        app:layout_constraintStart_toEndOf="@+id/startButton"
+        android:translationX="-8dp"
         app:layout_constraintEnd_toStartOf="@+id/endButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/startButton"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Section Name" />
 
     <ImageView
         android:id="@+id/endButton"
@@ -46,8 +46,8 @@
         android:background="?selectableItemBackgroundBorderless"
         android:importantForAccessibility="no"
         android:visibility="gone"
-        tools:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
