@@ -60,11 +60,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp" />
 
-        <dev.lucasnlm.antimine.main.view.CardButtonView
-            android:id="@+id/tutorial"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
     </LinearLayout>
 
     <dev.lucasnlm.antimine.ui.view.SectionView

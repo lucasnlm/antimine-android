@@ -34,6 +34,8 @@ val AppModule = module {
 
             override suspend fun getPrice(): String? = null
 
+            override suspend fun getPriceFlow(): Flow<String> = flowOf()
+
             override fun listenPurchases(): Flow<PurchaseInfo> = flowOf()
         }
     } bind IBillingManager::class

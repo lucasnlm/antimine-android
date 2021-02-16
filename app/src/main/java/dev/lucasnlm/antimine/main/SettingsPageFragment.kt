@@ -79,6 +79,16 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
             }
         )
 
+        tutorial.bind(
+            theme = usingTheme,
+            text = R.string.tutorial,
+            startIcon = R.drawable.tutorial,
+            onAction = {
+                analyticsManager.sentEvent(Analytics.OpenTutorial)
+                viewModel.sendEvent(MainEvent.StartTutorialEvent)
+            }
+        )
+
         if (featureFlagManager.isGameHistoryEnabled) {
             previous_games.bind(
                 theme = usingTheme,

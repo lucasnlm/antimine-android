@@ -38,10 +38,15 @@
             android:layout_height="wrap_content" />
 
         <dev.lucasnlm.antimine.main.view.CardButtonView
-            android:id="@+id/previous_games"
+            android:id="@+id/tutorial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="24dp"/>
+
+        <dev.lucasnlm.antimine.main.view.CardButtonView
+            android:id="@+id/previous_games"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <dev.lucasnlm.antimine.main.view.CardButtonView
             android:id="@+id/stats"

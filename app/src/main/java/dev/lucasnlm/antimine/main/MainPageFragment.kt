@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import dev.lucasnlm.antimine.BuildConfig
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
@@ -140,16 +141,6 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
             }
         )
 
-        tutorial.bind(
-            theme = usingTheme,
-            text = R.string.tutorial,
-            startIcon = R.drawable.tutorial,
-            onAction = {
-                analyticsManager.sentEvent(Analytics.OpenTutorial)
-                viewModel.sendEvent(MainEvent.StartTutorialEvent)
-            }
-        )
-
         settings.bind(
             theme = usingTheme,
             text = R.string.settings,
@@ -171,14 +162,32 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
         )
 
         remove_ads.visibility = View.GONE
-        if (!preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
-            billingManager.start()
+        if (BuildConfig.FLAVOR == "foss") {
+            remove_ads.apply {
+                visibility = View.VISIBLE
+                bind(
+                    theme = usingTheme,
+                    text = getString(R.string.donation),
+                    startIcon = R.drawable.remove_ads,
+                    onAction = {
+                        lifecycleScope.launch {
+                            activity?.let {
+                                billingManager.charge(it)
+                            }
+                        }
+                    }
+                )
+            }
+        } else {
+            if (!preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
+                billingManager.start()
 
-            lifecycleScope.launchWhenResumed {
-                bindRemoveAds()
+                lifecycleScope.launchWhenResumed {
+                    bindRemoveAds()
 
-                billingManager.getPriceFlow().collect {
-                    bindRemoveAds(it)
+                    billingManager.getPriceFlow().collect {
+                        bindRemoveAds(it)
+                    }
                 }
             }
         }
