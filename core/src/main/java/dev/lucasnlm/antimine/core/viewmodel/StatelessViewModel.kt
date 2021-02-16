@@ -28,7 +28,7 @@ open class StatelessViewModel<Event> : ViewModel() {
         sideEffectBroadcast.offer(event)
     }
 
-    protected open fun onEvent(event: Event) { }
+    protected open fun onEvent(event: Event) {}
 
     override fun onCleared() {
         super.onCleared()
