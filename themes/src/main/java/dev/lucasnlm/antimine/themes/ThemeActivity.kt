@@ -33,6 +33,16 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        section.bind(
+            text = R.string.themes,
+            startButton = R.drawable.back_arrow,
+            startDescription = R.string.back,
+            startAction = {
+                finish()
+            }
+        )
+
         lifecycleScope.launchWhenCreated {
             val gaps = resources.getDimension(R.dimen.theme_divider) * 6
             val size = dimensionRepository.displaySize()

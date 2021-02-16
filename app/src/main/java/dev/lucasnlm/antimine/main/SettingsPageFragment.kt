@@ -36,6 +36,14 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
 
         val usingTheme = themeRepository.getTheme()
 
+        settings_menu.bind(
+            text = R.string.more,
+        )
+
+        about_menu_text.bind(
+            text = R.string.about,
+        )
+
         settings.bind(
             theme = usingTheme,
             text = getString(R.string.settings),

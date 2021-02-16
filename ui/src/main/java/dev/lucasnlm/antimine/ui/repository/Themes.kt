@@ -9,7 +9,6 @@ object Themes {
     val LightTheme = AppTheme(
         id = 1L,
         theme = R.style.CustomLightTheme,
-        themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
         palette = AreaPalette(
             accent = 0xD32F2F,
             border = 0x424242,
@@ -44,7 +43,6 @@ object Themes {
     val DarkTheme = AppTheme(
         id = 3L,
         theme = R.style.CustomDarkTheme,
-        themeNoActionBar = R.style.CustomDarkTheme_NoActionBar,
         palette = AreaPalette(
             accent = 0xFFFFFF,
             border = 0x171717,
@@ -79,7 +77,6 @@ object Themes {
     private val AmoledTheme = AppTheme(
         id = 2L,
         theme = R.style.CustomAmoledTheme,
-        themeNoActionBar = R.style.CustomAmoledTheme_NoActionBar,
         palette = AreaPalette(
             accent = 0xFFFFFF,
             border = 0xFFFFFF,
@@ -118,7 +115,6 @@ object Themes {
         AppTheme(
             id = 4L,
             theme = R.style.CustomGardenTheme,
-            themeNoActionBar = R.style.CustomGardenTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0x689f38,
                 border = 0x171717,
@@ -152,7 +148,6 @@ object Themes {
         AppTheme(
             id = 5L,
             theme = R.style.CustomLightTheme,
-            themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0x37474f,
                 border = 0x424242,
@@ -186,7 +181,6 @@ object Themes {
         AppTheme(
             id = 6L,
             theme = R.style.CustomMarineTheme,
-            themeNoActionBar = R.style.CustomMarineTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0x0277bd,
                 border = 0x424242,
@@ -220,7 +214,6 @@ object Themes {
         AppTheme(
             id = 7L,
             theme = R.style.CustomBlueGreyTheme,
-            themeNoActionBar = R.style.CustomBlueGreyTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0x37474f,
                 border = 0x424242,
@@ -254,7 +247,6 @@ object Themes {
         AppTheme(
             id = 8L,
             theme = R.style.CustomOrangeTheme,
-            themeNoActionBar = R.style.CustomOrangeTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0xfb8c00,
                 border = 0x000000,
@@ -288,7 +280,6 @@ object Themes {
         AppTheme(
             id = 9L,
             theme = R.style.CustomPinkTheme,
-            themeNoActionBar = R.style.CustomPinkTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0xf48fb1,
                 border = 0x000000,
@@ -322,7 +313,6 @@ object Themes {
         AppTheme(
             id = 10L,
             theme = R.style.CustomPurpleTheme,
-            themeNoActionBar = R.style.CustomPurpleTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0x6a1b9a,
                 border = 0x000000,
@@ -356,7 +346,6 @@ object Themes {
         AppTheme(
             id = 11L,
             theme = R.style.CustomLightTheme,
-            themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0x3e2723,
                 border = 0x000000,
@@ -390,7 +379,6 @@ object Themes {
         AppTheme(
             id = 12L,
             theme = R.style.CustomLightTheme,
-            themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0xc62828,
                 border = 0x000000,
@@ -424,7 +412,6 @@ object Themes {
         AppTheme(
             id = 13L,
             theme = R.style.CustomLightTheme,
-            themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0x880e4f,
                 border = 0x000000,
@@ -458,7 +445,6 @@ object Themes {
         AppTheme(
             id = 14L,
             theme = R.style.CustomLightTheme,
-            themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0x0d47a1,
                 border = 0x000000,
@@ -492,7 +478,6 @@ object Themes {
         AppTheme(
             id = 15L,
             theme = R.style.CustomDarkTheme,
-            themeNoActionBar = R.style.CustomDarkTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0xedf1f2,
                 border = 0x000000,
@@ -526,7 +511,6 @@ object Themes {
         AppTheme(
             id = 16L,
             theme = R.style.CustomLimeTheme,
-            themeNoActionBar = R.style.CustomLimeTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0xcddc39,
                 border = 0x000000,
@@ -560,7 +544,6 @@ object Themes {
         AppTheme(
             id = 18L,
             theme = R.style.BananaTheme,
-            themeNoActionBar = R.style.BananaTheme_NoActionBar,
             palette = AreaPalette(
                 accent = 0xffeb3b,
                 border = 0x000000,
@@ -594,7 +577,6 @@ object Themes {
         AppTheme(
             id = 19L,
             theme = R.style.BananaThemeLight,
-            themeNoActionBar = R.style.BananaThemeLight_NoActionBar,
             palette = AreaPalette(
                 accent = 0xfbc02d,
                 border = 0x000000,
@@ -628,7 +610,6 @@ object Themes {
         AppTheme(
             id = 20L,
             theme = R.style.BananaThemeLight,
-            themeNoActionBar = R.style.BananaThemeLight_NoActionBar,
             palette = AreaPalette(
                 accent = 0xf57c00,
                 border = 0x000000,
@@ -662,7 +643,6 @@ object Themes {
         AppTheme(
             id = 21L,
             theme = R.style.BananaThemeLight,
-            themeNoActionBar = R.style.BananaThemeLight_NoActionBar,
             palette = AreaPalette(
                 accent = 0x827717,
                 border = 0x000000,

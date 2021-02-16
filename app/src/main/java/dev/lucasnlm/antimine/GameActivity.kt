@@ -59,8 +59,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private val cloudSaveManager by inject<CloudSaveManager>()
 
-    override val noActionBar: Boolean = true
-
     private var status: Status = Status.PreGame
     private var totalMines: Int = 0
     private var totalArea: Int = 0

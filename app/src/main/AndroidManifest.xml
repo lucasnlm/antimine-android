@@ -64,7 +64,7 @@
             android:saveEnabled="false"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme"
             android:parentActivityName=".main.MainActivity">
 
             <meta-data
@@ -80,7 +80,7 @@
             android:saveEnabled="false"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme"/>
 
         <activity
             android:name=".TvGameActivity"
@@ -88,7 +88,7 @@
             android:saveEnabled="false"
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme"/>
 
         <activity
             android:name="dev.lucasnlm.antimine.stats.StatsActivity"

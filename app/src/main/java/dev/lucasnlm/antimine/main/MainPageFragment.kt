@@ -37,13 +37,25 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
     }
 
     private fun Minefield.toExtraString(): String {
-        return "${this.width}x${this.height}  ${this.mines}"
+        return "${this.width}x${this.height} - ${this.mines}"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val usingTheme = themeRepository.getTheme()
+
+        main.bind(
+            text = R.string.app_name,
+        )
+
+        new_game.bind(
+            text = R.string.new_game,
+        )
+
+        general.bind(
+            text = R.string.general,
+        )
 
         continue_game.bind(
             theme = usingTheme,

@@ -267,8 +267,8 @@ open class GameViewModel(
             .filterNotNull()
             .collect { action ->
                 onFeedbackAnalytics(action, index)
-                refreshField()
                 onPostAction()
+                refreshField()
 
                 if (preferencesRepository.useHapticFeedback()) {
                     hapticFeedbackManager.longPressFeedback()
@@ -282,8 +282,8 @@ open class GameViewModel(
             .filterNotNull()
             .collect { action ->
                 onFeedbackAnalytics(action, index)
-                refreshField()
                 onPostAction()
+                refreshField()
             }
     }
 
@@ -293,8 +293,8 @@ open class GameViewModel(
             .filterNotNull()
             .collect { action ->
                 onFeedbackAnalytics(action, index)
-                refreshField()
                 onPostAction()
+                refreshField()
             }
     }
 
@@ -305,7 +305,6 @@ open class GameViewModel(
     private fun onPostAction() {
         if (preferencesRepository.useFlagAssistant() && !gameController.isGameOver()) {
             gameController.runFlagAssistant()
-            refreshField()
         }
 
         updateGameState()
@@ -350,7 +349,6 @@ open class GameViewModel(
         }
 
         if (gameController.isVictory()) {
-            refreshField()
             eventObserver.postValue(Event.Victory)
         }
     }

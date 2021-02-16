@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:paddingHorizontal="20dp"
+    android:fitsSystemWindows="true">
 
-    <TextView
+    <dev.lucasnlm.antimine.ui.view.SectionView
         android:id="@+id/settings_menu"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/more"
-        android:layout_margin="24dp"
-        android:textStyle="bold"
-        android:textAllCaps="true"
-        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,9 +17,9 @@
         android:id="@+id/new_game_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:dividerPadding="8dp"
         android:layout_marginTop="12dp"
+        android:dividerPadding="8dp"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/settings_menu">
 
         <dev.lucasnlm.antimine.main.view.CardButtonView
@@ -34,7 +30,7 @@
         <dev.lucasnlm.antimine.main.view.CardButtonView
             android:id="@+id/controls"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <dev.lucasnlm.antimine.main.view.CardButtonView
             android:id="@+id/themes"
@@ -43,9 +39,9 @@
 
         <dev.lucasnlm.antimine.main.view.CardButtonView
             android:id="@+id/previous_games"
-            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" />
 
         <dev.lucasnlm.antimine.main.view.CardButtonView
             android:id="@+id/stats"
@@ -53,31 +49,26 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <TextView
+    <dev.lucasnlm.antimine.ui.view.SectionView
         android:id="@+id/about_menu_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/about"
-        android:layout_margin="24dp"
-        android:textStyle="bold"
-        android:textAllCaps="true"
-        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_game_buttons"/>
+        app:layout_constraintTop_toBottomOf="@+id/new_game_buttons" />
 
     <LinearLayout
         android:id="@+id/about_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:dividerPadding="8dp"
         android:layout_marginTop="12dp"
+        android:dividerPadding="8dp"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/about_menu_text">
 
         <dev.lucasnlm.antimine.main.view.CardButtonView
             android:id="@+id/translation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <dev.lucasnlm.antimine.main.view.CardButtonView
             android:id="@+id/play_games"

@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -17,14 +12,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomLightTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <item name="colorPrimary">#757575</item>
-        <item name="colorPrimaryDark">#494949</item>
-        <item name="colorAccent">#D32F2F</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="CustomLightTheme.NoActionBar" parent="Theme.MaterialComponents.Light">
+    <style name="CustomLightTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">#757575</item>
         <item name="colorPrimaryDark">#494949</item>
         <item name="colorAccent">#D32F2F</item>
@@ -36,14 +24,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomDarkTheme" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
-        <item name="colorPrimary">#212121</item>
-        <item name="colorPrimaryDark">#000000</item>
-        <item name="colorAccent">#FFFFFF</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="CustomDarkTheme.NoActionBar" parent="ThemeOverlay.MaterialComponents.Dark">
+    <style name="CustomDarkTheme" parent="ThemeOverlay.MaterialComponents.Dark">
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#FFFFFF</item>
         <item name="colorAccent">#FFFFFF</item>
@@ -55,14 +36,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomAmoledTheme" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
-        <item name="colorPrimary">#FF000000</item>
-        <item name="colorPrimaryDark">#FF000000</item>
-        <item name="colorAccent">#FFFFFFFF</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="CustomAmoledTheme.NoActionBar" parent="ThemeOverlay.MaterialComponents.Dark">
+    <style name="CustomAmoledTheme" parent="ThemeOverlay.MaterialComponents.Dark">
         <item name="colorPrimary">#FF000000</item>
         <item name="colorPrimaryDark">#FF000000</item>
         <item name="colorAccent">#FFFFFFFF</item>
@@ -74,14 +48,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomGardenTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <item name="colorPrimary">#5d4037</item>
-        <item name="colorPrimaryDark">#321911</item>
-        <item name="colorAccent">#53b529</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="CustomGardenTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="CustomGardenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">#5d4037</item>
         <item name="colorPrimaryDark">#321911</item>
         <item name="colorAccent">#53b529</item>
@@ -93,14 +60,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomMarineTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <item name="colorPrimary">#1565c0</item>
-        <item name="colorPrimaryDark">#003c8f</item>
-        <item name="colorAccent">#03a9f4</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="CustomMarineTheme.NoActionBar" parent="Theme.MaterialComponents.Light">
+    <style name="CustomMarineTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">#1565c0</item>
         <item name="colorPrimaryDark">#003c8f</item>
         <item name="colorAccent">#03a9f4</item>
@@ -112,14 +72,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomBlueGreyTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <item name="colorPrimary">#37474f</item>
-        <item name="colorPrimaryDark">#102027</item>
-        <item name="colorAccent">#42a5f5</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="CustomBlueGreyTheme.NoActionBar" parent="Theme.MaterialComponents.Light">
+    <style name="CustomBlueGreyTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">#37474f</item>
         <item name="colorPrimaryDark">#102027</item>
         <item name="colorAccent">#42a5f5</item>
@@ -131,14 +84,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomOrangeTheme" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
-        <item name="colorPrimary">#212121</item>
-        <item name="colorPrimaryDark">#000000</item>
-        <item name="colorAccent">#fb8c00</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="CustomOrangeTheme.NoActionBar" parent="ThemeOverlay.MaterialComponents.Dark">
+    <style name="CustomOrangeTheme" parent="ThemeOverlay.MaterialComponents.Dark">
         <item name="colorPrimary">#fb8c00</item>
         <item name="colorPrimaryDark">#fb8c00</item>
         <item name="colorAccent">#fb8c00</item>
@@ -154,13 +100,6 @@
         <item name="colorPrimary">#f8bbd0</item>
         <item name="colorPrimaryDark">#c48b9f</item>
         <item name="colorAccent">#f48fb1</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="CustomPinkTheme.NoActionBar" parent="Theme.MaterialComponents.Light">
-        <item name="colorPrimary">#f8bbd0</item>
-        <item name="colorPrimaryDark">#c48b9f</item>
-        <item name="colorAccent">#f48fb1</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -169,14 +108,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomPurpleTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <item name="colorPrimary">#5e35b1</item>
-        <item name="colorPrimaryDark">#280680</item>
-        <item name="colorAccent">#9c27b0</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="CustomPurpleTheme.NoActionBar" parent="Theme.MaterialComponents.Light">
+    <style name="CustomPurpleTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">#5e35b1</item>
         <item name="colorPrimaryDark">#280680</item>
         <item name="colorAccent">#9c27b0</item>
@@ -188,14 +120,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomLimeTheme" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
-        <item name="colorPrimary">#ffcddc39</item>
-        <item name="colorPrimaryDark">#ff99aa00</item>
-        <item name="colorAccent">#ffcddc39</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="CustomLimeTheme.NoActionBar" parent="ThemeOverlay.MaterialComponents.Dark">
+    <style name="CustomLimeTheme" parent="ThemeOverlay.MaterialComponents.Dark">
         <item name="colorPrimary">#cddc39</item>
         <item name="colorPrimaryDark">#99aa00</item>
         <item name="colorAccent">#cddc39</item>
@@ -211,13 +136,6 @@
         <item name="colorPrimary">#fdd835</item>
         <item name="colorPrimaryDark">#c6a700</item>
         <item name="colorAccent">#ffeb3b</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="BananaTheme.NoActionBar" parent="ThemeOverlay.MaterialComponents.Dark">
-        <item name="colorPrimary">#fdd835</item>
-        <item name="colorPrimaryDark">#c6a700</item>
-        <item name="colorAccent">#ffeb3b</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -227,13 +145,6 @@
     </style>
 
     <style name="BananaThemeLight" parent="Theme.MaterialComponents.Light">
-        <item name="colorPrimary">#f57f17</item>
-        <item name="colorPrimaryDark">#bc5100</item>
-        <item name="colorAccent">#f9a825</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
-    <style name="BananaThemeLight.NoActionBar" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">#f57f17</item>
         <item name="colorPrimaryDark">#bc5100</item>
         <item name="colorAccent">#f9a825</item>

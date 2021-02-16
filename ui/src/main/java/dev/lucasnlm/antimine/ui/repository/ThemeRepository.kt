@@ -45,7 +45,6 @@ class ThemeRepository(
         return AppTheme(
             id = 0L,
             theme = R.style.AppTheme,
-            themeNoActionBar = R.style.AppTheme_NoActionBar,
             palette = fromDefaultPalette(context),
             assets = fromDefaultAssets()
         )

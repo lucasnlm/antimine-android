@@ -14,8 +14,6 @@ abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActi
     private val themeRepository: IThemeRepository by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
 
-    protected open val noActionBar: Boolean = false
-
     protected val usingTheme: AppTheme by lazy {
         currentTheme()
     }
@@ -30,11 +28,7 @@ abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         themeRepository.getCustomTheme()?.let {
-            if (noActionBar) {
-                setTheme(it.themeNoActionBar)
-            } else {
-                setTheme(it.theme)
-            }
+            setTheme(it.theme)
         }
 
         preferencesRepository.getPreferredLocale()?.let {

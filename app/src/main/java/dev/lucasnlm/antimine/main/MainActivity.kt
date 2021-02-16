@@ -33,8 +33,6 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     private val playGamesManager: IPlayGamesManager by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
 
-    override val noActionBar: Boolean = true
-
     private lateinit var viewPager: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +57,6 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         lifecycleScope.launchWhenCreated {
             viewModel
                 .observeSideEffects()
-                .distinctUntilChanged()
                 .collect(::handleSideEffects)
         }
 
@@ -90,20 +87,26 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     }
 
     private fun showCustomLevelDialog() {
-        CustomLevelDialogFragment().apply {
-            show(supportFragmentManager, CustomLevelDialogFragment.TAG)
+        if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
+            CustomLevelDialogFragment().apply {
+                show(supportFragmentManager, CustomLevelDialogFragment.TAG)
+            }
         }
     }
 
     private fun showControlDialog() {
-        ControlDialogFragment().apply {
-            show(supportFragmentManager, ControlDialogFragment.TAG)
+        if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
+            ControlDialogFragment().apply {
+                show(supportFragmentManager, ControlDialogFragment.TAG)
+            }
         }
     }
 
     private fun showGooglePlayGames() {
         if (playGamesManager.isLogged()) {
-            PlayGamesDialogFragment().show(supportFragmentManager, PlayGamesDialogFragment.TAG)
+            if (supportFragmentManager.findFragmentByTag(PlayGamesDialogFragment.TAG) == null) {
+                PlayGamesDialogFragment().show(supportFragmentManager, PlayGamesDialogFragment.TAG)
+            }
         } else {
             playGamesManager.getLoginIntent()?.let {
                 ActivityCompat.startActivityForResult(this, it, RC_GOOGLE_PLAY, null)
