@@ -1,14 +1,13 @@
 package dev.lucasnlm.antimine.about.views.licenses
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.about.R
-
-import dev.lucasnlm.antimine.text.TextActivity
 import dev.lucasnlm.antimine.about.viewmodel.License
+import dev.lucasnlm.antimine.text.TextActivity
 import kotlinx.android.synthetic.main.view_third_party.view.*
 
 internal class LicensesAdapter(

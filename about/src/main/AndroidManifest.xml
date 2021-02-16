@@ -5,12 +5,12 @@
     <application>
         <activity
             android:name="dev.lucasnlm.antimine.text.TextActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name="dev.lucasnlm.antimine.about.AboutActivity"
             android:label="@string/about"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

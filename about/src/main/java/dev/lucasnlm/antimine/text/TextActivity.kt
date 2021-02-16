@@ -11,7 +11,6 @@ import dev.lucasnlm.antimine.text.viewmodel.TextEvent
 import dev.lucasnlm.antimine.text.viewmodel.TextViewModel
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import kotlinx.android.synthetic.main.activity_text.*
-import kotlinx.android.synthetic.main.activity_text.section
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
