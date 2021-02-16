@@ -214,6 +214,10 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
     }
 
+    override fun onBackPressed() {
+        finishAffinity()
+    }
+
     companion object {
         private const val RC_GOOGLE_PLAY = 6
     }
