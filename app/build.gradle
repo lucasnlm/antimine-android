@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 900011
+        versionCode 900021
         versionName '9.0.1'
         minSdkVersion 21
         targetSdkVersion 30

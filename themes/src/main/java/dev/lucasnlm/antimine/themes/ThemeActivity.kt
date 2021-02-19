@@ -14,6 +14,7 @@ import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
+import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IBillingManager
 import kotlinx.android.synthetic.main.activity_theme.*
 import kotlinx.coroutines.Dispatchers
@@ -30,9 +31,14 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
     private val cloudSaveManager by inject<CloudSaveManager>()
     private val preferencesRepository: IPreferencesRepository by inject()
     private val billingManager: IBillingManager by inject()
+    private val adsManager: IAdsManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (!preferencesRepository.isPremiumEnabled()) {
+            adsManager.start(this)
+        }
 
         section.bind(
             text = R.string.themes,

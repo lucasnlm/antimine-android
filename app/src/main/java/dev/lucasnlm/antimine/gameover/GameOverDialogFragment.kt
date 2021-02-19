@@ -216,7 +216,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
     private fun showAdsAndContinue() {
         activity?.let { activity ->
             if (!activity.isFinishing) {
-                adsManager.requestRewardedAd(
+                adsManager.showRewardedAd(
                     activity,
                     onRewarded = {
                         continueGame()

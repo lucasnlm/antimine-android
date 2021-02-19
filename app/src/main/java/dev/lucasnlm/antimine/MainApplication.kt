@@ -9,6 +9,8 @@ import dev.lucasnlm.antimine.di.ViewModelModule
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IAnalyticsManager
+import dev.lucasnlm.external.IFeatureFlagManager
+import dev.lucasnlm.external.di.ExternalModule
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -16,14 +18,14 @@ import org.koin.core.context.startKoin
 open class MainApplication : MultiDexApplication() {
     private val analyticsManager: IAnalyticsManager by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
-
+    private val featureFlagManager: IFeatureFlagManager by inject()
     private val adsManager: IAdsManager by inject()
 
     override fun onCreate() {
         super.onCreate()
         startKoin {
             androidContext(applicationContext)
-            modules(AppModule, CommonModule, LevelModule, ViewModelModule)
+            modules(AppModule, CommonModule, ExternalModule, LevelModule, ViewModelModule)
         }
 
         analyticsManager.apply {
@@ -31,12 +33,10 @@ open class MainApplication : MultiDexApplication() {
             sentEvent(Analytics.Open)
         }
 
-        if (BuildConfig.FLAVOR == "foss") {
+        if (featureFlagManager.isFoos) {
             preferencesRepository.setPremiumFeatures(true)
-        }
-
-        if (!preferencesRepository.isPremiumEnabled()) {
-            adsManager.start(applicationContext)
+        } else {
+            adsManager.start(this)
         }
     }
 }

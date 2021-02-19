@@ -10,6 +10,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
     override val isAdsOnContinueEnabled: Boolean = false
     override val isContinueGameEnabled: Boolean = true
     override val isRecyclerScrollEnabled: Boolean = true
+    override val isFoos: Boolean = true
 
     override suspend fun refresh() {
         // No Feature Flags on FOSS
