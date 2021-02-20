@@ -35,7 +35,7 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
         val usingTheme = themeRepository.getTheme()
 
         settings_menu.bind(
-            text = R.string.more,
+            text = R.string.settings,
             startButton = R.drawable.back_arrow,
             startAction = {
                 viewModel.sendEvent(MainEvent.GoToMainPageEvent)
@@ -43,7 +43,7 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
         )
 
         about_menu_text.bind(
-            text = R.string.about,
+            text = R.string.more,
         )
 
         settings.bind(
