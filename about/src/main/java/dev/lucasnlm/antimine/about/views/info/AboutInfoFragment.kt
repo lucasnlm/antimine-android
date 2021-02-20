@@ -23,7 +23,10 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        version.text = getString(R.string.version_s, BuildConfig.VERSION_NAME)
+        val versionName = requireContext().run {
+            packageManager.getPackageInfo(packageName, 0).versionName
+        }
+        version.text = getString(R.string.version_s, versionName)
         instant.isVisible = view.context.run {
             try {
                 val info = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
