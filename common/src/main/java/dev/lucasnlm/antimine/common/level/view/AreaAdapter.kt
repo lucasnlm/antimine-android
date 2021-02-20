@@ -60,9 +60,24 @@ class AreaAdapter(
         clickEnabled = value
     }
 
-    fun bindField(field: List<Area>) {
-        this.field = field
-        notifyDataSetChanged()
+    fun bindField(newField: List<Area>) {
+        if (field.isEmpty()) {
+            field = newField
+            notifyDataSetChanged()
+        } else {
+            val changes = newField.filter {
+                val index = it.id
+                field[index] != newField[index]
+            }
+
+            field = newField
+
+            if (changes.size == newField.size) {
+                changes.map { it.id }.forEach(::notifyItemChanged)
+            } else {
+                notifyDataSetChanged()
+            }
+        }
     }
 
     override fun getItemCount(): Int = field.size
