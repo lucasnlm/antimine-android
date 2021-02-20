@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import dev.lucasnlm.antimine.BuildConfig
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
@@ -21,6 +20,7 @@ import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
+import dev.lucasnlm.external.IFeatureFlagManager
 import kotlinx.android.synthetic.main.fragment_main_new_game.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -36,6 +36,7 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
     private val preferencesRepository: IPreferencesRepository by inject()
     private val billingManager: IBillingManager by inject()
     private val savesRepository: ISavesRepository by inject()
+    private val featureFlagManager: IFeatureFlagManager by inject()
 
     private fun getDifficultyExtra(difficulty: Difficulty): String {
         return minefieldRepository.fromDifficulty(
@@ -162,7 +163,7 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
         )
 
         remove_ads.visibility = View.GONE
-        if (BuildConfig.FLAVOR == "foss") {
+        if (featureFlagManager.isFoos) {
             remove_ads.apply {
                 visibility = View.VISIBLE
                 bind(

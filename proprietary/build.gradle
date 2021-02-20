@@ -12,8 +12,6 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        versionCode 900011
-        versionName '9.0.1'
         minSdkVersion 21
         targetSdkVersion 30
     }
@@ -58,6 +56,8 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
 
-    // Unity
-    implementation 'com.unity3d.ads:unity-ads:3.6.0'
+    // Koin
+    implementation 'org.koin:koin-android:2.2.1'
+    implementation 'org.koin:koin-androidx-viewmodel:2.2.1'
+    testImplementation 'org.koin:koin-test:2.2.1'
 }

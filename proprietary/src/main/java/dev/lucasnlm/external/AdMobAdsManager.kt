@@ -8,7 +8,8 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 
-class GoogleAdsManager(
+class AdMobAdsManager(
+    private val context: Context,
     private val crashReporter: ICrashReporter,
 ) : IAdsManager {
     private var rewardedAd: RewardedAd? = null
@@ -20,6 +21,11 @@ class GoogleAdsManager(
         }
     }
 
+    override fun loadAd() {
+        this.rewardedAd = null
+        preloadAds(context)
+    }
+
     private fun preloadAds(context: Context) {
         val adRequest = AdRequest.Builder().build()
         RewardedAd.load(
@@ -28,6 +34,7 @@ class GoogleAdsManager(
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     failErrorCause = adError.message
                     rewardedAd = null
+                    loadAd()
                 }
 
                 override fun onAdLoaded(result: RewardedAd) {
@@ -37,7 +44,7 @@ class GoogleAdsManager(
         )
     }
 
-    override fun requestRewardedAd(
+    override fun showRewardedAd(
         activity: Activity,
         onRewarded: (() -> Unit)?,
         onFail: (() -> Unit)?
@@ -50,6 +57,7 @@ class GoogleAdsManager(
                     preloadAds(activity)
                 }
             }
+            loadAd()
         } else {
             val message = failErrorCause?.let { "Fail to load Ad\n$it" } ?: "Fail to load Ad"
             crashReporter.sendError(message)

@@ -126,6 +126,11 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        preferencesRepository.setCompleteTutorial(true)
+    }
+
     private fun String.splitKeeping(str: String): List<String> {
         return this.split(str).flatMap { listOf(it, str) }.dropLast(1).filterNot { it.isEmpty() }
     }

@@ -5,7 +5,8 @@ import android.content.Context
 
 interface IAdsManager {
     fun start(context: Context)
-    fun requestRewardedAd(
+    fun loadAd()
+    fun showRewardedAd(
         activity: Activity,
         onRewarded: (() -> Unit)? = null,
         onFail: (() -> Unit)? = null,

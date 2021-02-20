@@ -65,7 +65,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
                 setNeutralButton("$unlockMessage \uD83C\uDF9E️") { _, _ ->
                     activity?.let { activity ->
                         if (!activity.isFinishing) {
-                            adsManager.requestRewardedAd(
+                            adsManager.showRewardedAd(
                                 activity,
                                 onRewarded = {
                                     preferenceRepository.useTheme(targetThemeId)
@@ -95,7 +95,7 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
                     setNeutralButton("$unlockMessage \uD83C\uDF9E️") { _, _ ->
                         activity?.let { activity ->
                             if (!activity.isFinishing) {
-                                adsManager.requestRewardedAd(
+                                adsManager.showRewardedAd(
                                     activity,
                                     onRewarded = {
                                         preferenceRepository.useTheme(targetThemeId)

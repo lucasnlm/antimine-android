@@ -40,7 +40,6 @@ import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.GlobalScope
@@ -50,7 +49,6 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
-    private val billingManager: IBillingManager by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
     private val analyticsManager: IAnalyticsManager by inject()
     private val instantAppManager: IInstantAppManager by inject()
@@ -362,18 +360,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             // Instant App does nothing.
             savesRepository.setLimit(1)
         } else {
-            val current = preferencesRepository.getUseCount()
-            val shouldRequestSupport = if (billingManager.isEnabled()) {
-                !preferencesRepository.isPremiumEnabled()
-            } else {
-                preferencesRepository.showSupport()
-            }
-
-            if (current >= MIN_USAGES_TO_IAP && shouldRequestSupport) {
-                analyticsManager.sentEvent(Analytics.UnlockIapDialog)
-                showSupportAppDialog()
-            }
-
             preferencesRepository.incrementUseCount()
         }
     }
@@ -646,28 +632,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         bindSwitchControlButton()
     }
 
-    private fun showSupportAppDialog() {
-        val extras = intent.extras?.containsKey(START_TUTORIAL)
-        if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
-            !instantAppManager.isEnabled(this) &&
-            !isFinishing &&
-            (extras == false || extras == null) &&
-            preferencesRepository.isTutorialCompleted()
-        ) {
-            lifecycleScope.launch {
-                if (billingManager.isEnabled()) {
-                    SupportAppDialogFragment.newRemoveAdsSupportDialog(
-                        applicationContext,
-                        billingManager.getPrice()
-                    ).show(supportFragmentManager, SupportAppDialogFragment.TAG)
-                } else {
-                    SupportAppDialogFragment.newRequestSupportDialog(applicationContext)
-                        .show(supportFragmentManager, SupportAppDialogFragment.TAG)
-                }
-            }
-        }
-    }
-
     companion object {
         val TAG = GameActivity::class.simpleName
 
@@ -675,6 +639,5 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         const val START_TUTORIAL = "start_tutorial"
         const val START_GAME = "start_game"
         const val RETRY_GAME = "retry_game"
-        const val MIN_USAGES_TO_IAP = 4
     }
 }

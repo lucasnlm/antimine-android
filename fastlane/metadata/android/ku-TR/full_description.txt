@@ -1,56 +1,56 @@
-Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
-This is a minimalist and modern version of the classic Minesweeper.
+هێزی دروستکەر تاقی بکەوە لەسەر یاریەکی مەتەڵی بەرەنگاری کە دەبێت کێڵگەیەکی مین چارەسەر بکەیت بەبێ تەقاندنەوەی هیچ مینێک.
+ئەمە ڤێرژنی مینیمالیستی و هاوچەرخی مینسوارە کلاسیکە.
 
-Are you able to clear a minefield? Let’s go!
+ئایا تۆ دەتوانی تشکانی مینە کە پاک کەی؟ !با بڕۆین
 
-OBJECTIVE
-It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
+ئامانج
+وەکMinesweeper وایە. تۆ یاریەکە دەبەیتەوە کاتێک هەموو مینت لە کێڵگەی مین دا. ئاگاداربە دانەیەکی لێنەپێکیت!
 
-NO GUESSING
-This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
+هیچ پێشبینییەک نیە
+ئەم یارییە لۆگاریتمی هەیە کە هەمیشە کێڵگەی مینەکانی چارەسەرنەکراو دروست دەکات. پێویست ناکات پێشبینی ئەوە بکەن کە دوا هەمین مین لە!کوێیە
 
-GAME LEVELS
-Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
+ئاستەکانی یاری
+وەک مین Minesweeper ئەم یارییە ئاستی جیاوازی هەیە :سەرەتاو ناوەندی و شارەزا بەڵام هەروەها دۆخی پێشکەوتووی بێ هاوتای هەیە کە کاتێک دەیبەیتەوە قورستر دەبێت.
 
-CUSTOM LEVEL
-If the standard modes aren't enough, you can create your level difficulty!
+ئاستی ئاسایی
+ئەگەر شێوازە ستانداردەکان بەس نین، دەتوانیت ئاستی خۆت قورس بکەیت!
 
-THEMES
-Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+ڕووکارەکان
+Antimine زیاتر لە 15 تەوەری هەیە (لەوانە ڕووناکی، تاریک، و AMOLED) وە بەم زووانە زیاتریش زیاد دەکرێت! 
 
-MINIMALIST
-Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+کەمترین
+سەیرکردن و هەستی خاوێن: بینراوێکی کەموێنە و هەروەها قەبارەی کاربەرنامەی کێشکێش (کەمتر لە 9MB)
 
-TUTORIAL
-Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+فێرکاری
+نازانیت چۆن یاری بە Minesweeper بکەیت؟ کێشە نیە، دەتوانیت ئاستی فێرکاریمان لێبدەی و ئامۆژگاریەکان چالاک بکەیت لەسەر ڕێکخستنەکان.
 
-STATISTICS
-Check your results and development.
+ئامار
+پشکنین بۆ ئەنجامەکان و پێشکەوتنەکانت.
 
-GAME ASSISTANT
-The game will automatically flag the squares you isolated. 
+یاری یاریدەدەر
+یاریەکە بە ئۆتۆماتیکی ئەو چوارگۆشەی کە گۆشت کردووە، نیشان دەکات. 
 
-CUSTOMIZATION
-You can change the game to make it like you want to. 
-Example: Help, animations, haptic feedback, question mark.
+تایبەتمەندکردن
+دەتوانیت یاریەکە بگۆڕیت بۆ ئەوەی وەک ئەوەی دەتەوێت بیکەیت. 
+نموونە: یارمەتی، ئەنیمەیشن، فیدباکی هاپتیک، نیشانەی پرسیار.
 
-CONTROLS
-It supports four different control schemes. Example: flag using tap or long press.
+کۆنتڕۆڵەکان
+پشتگیری چوار پلانی جیاوازی کۆنترۆڵ دەکات. نموونە: نیشانکردن بە بەکارهێنانی نەرم لێدان یان داگرتنی درێژ.
 
-ACHIEVEMENTS AND LEADERBOARDS 
-You have eight achievements to unlock and different leaderboards to share with your friends.
+دەستکەوتەکان و ڕابەرەکان 
+هەشت دەسکەوتت هەیە بۆ کردنەوەی قوفڵ و تەختەی جیاواز بۆ هاوبەشکردن لەگەڵ هاوڕێکانت.
 
-ACCESSIBILITY
-You can customize this game to your needs: change the squares size, radius, touch timing, and screen reader support.
-We are always trying to improve our accessibility settings. If you miss something give us feedback!
+توانای گەیشتن
+دەتوانیت ئەم یارییە تایبەتمەند بکەیت بۆ پێویستیەکانت: گۆڕینی قەبارەی چوارگۆشەکان، تیشک، کاتبەندی لەمسی، و پشتگیری خوێنەرەکانی شاشە.
+ئێمە هەمیشە لە هەوڵی باشترکردنی ڕێکبەندەکانی توانای چوونەژوورەوەداین. ئەگەر شتێکت لەدەست دا ڕاوبۆچونمان بۆبنێرە!
 
-ANDROID FOCUSED APP
-It supports cool Android features like split-screen, shortcuts, sharing, system theme, and always supporting the last version.
+کاربەرنامەی چاودێری ئەندرۆید
+ئەمە پشتگیری تایبەتمەندیەکانی ساردی ئەندرۆید دەکات وەک سکرینی بەشکردن، کورتەڕێکان، هاوبەشکردن، تێمی سیستەم، و هەمیشە پشتگیری دوا وەشان دەکات.
 
-ONLINE OR OFFLINE
-You don't need to be online to play the game!
+ئۆنلاین یان ئۆفلاین
+پێویست ناکات لەسەر هێڵ بیت بۆ ئەوەی یاری بکەیت!
 
-AUTO-SAVE
-You can start a game and continue it later! It will auto-save your game.
+خودکار-پاشەکەوتکردن
+دەتوانیت یارییەک دەست پێبکەیت و دواتر بەردەوام بیت! یاریەکەت بە خۆکار پاشەکەوت دەکات.
 
-Enjoy.
+چێژ وەرگرە.

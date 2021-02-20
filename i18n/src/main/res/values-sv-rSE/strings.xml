@@ -94,7 +94,7 @@
     <string name="achievements">Prestationer</string>
     <string name="no">Nej</string>
     <string name="general">Allmänt</string>
-    <string name="more">Mera</string>
+    <string name="more">Mer</string>
     <string name="source_code">Källkod</string>
     <string name="translation">Översättning</string>
     <string name="licenses">Licenser</string>
@@ -126,7 +126,7 @@
     <string name="remove_ad">Ta bort annonser</string>
     <string name="help">Hjälp</string>
     <string name="back">Tillbaka</string>
-    <string name="donation">Donationer</string>
+    <string name="donation">Donation</string>
     <string name="show_windows">Visa fönster</string>
     <string name="select_language">Välj språk</string>
     <string name="switch_control">Växel: Flagga och öppna</string>

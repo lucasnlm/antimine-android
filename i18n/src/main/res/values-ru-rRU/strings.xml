@@ -51,7 +51,7 @@
     <string name="used_software_text">Эта игра использует следующее программное обеспечение от третьих лиц:</string>
     <string name="translators_text">Эта игра была переведена следующими людьми:</string>
     <string name="sign_in_failed">Подключение невозможно. Проверьте интернет-подключение и повторите попытку.</string>
-    <string name="you_won">Вы победили!</string>
+    <string name="you_won">Вы выиграли!</string>
     <string name="victories">Победы</string>
     <string name="you_lost">Вы проиграли!</string>
     <string name="you_finished">Вы закончили!</string>
@@ -94,7 +94,7 @@
     <string name="achievements">Достижения</string>
     <string name="no">Нет</string>
     <string name="general">Общее</string>
-    <string name="more">Более</string>
+    <string name="more">Подробнее</string>
     <string name="source_code">Исходный код</string>
     <string name="translation">Перевод</string>
     <string name="licenses">Лицензии</string>
