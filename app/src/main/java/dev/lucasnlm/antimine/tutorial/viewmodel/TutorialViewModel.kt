@@ -17,6 +17,7 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.tutorial.view.TutorialField
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import dev.lucasnlm.antimine.updateLanguage
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IPlayGamesManager
@@ -53,6 +54,12 @@ class TutorialViewModel(
     featureFlagManager,
     clock,
 ) {
+    init {
+        preferencesRepository.getPreferredLocale()?.let {
+            context.updateLanguage(it)
+        }
+    }
+
     val tutorialState = MutableStateFlow(
         TutorialState(
             0,
