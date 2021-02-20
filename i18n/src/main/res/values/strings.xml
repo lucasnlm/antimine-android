@@ -133,4 +133,5 @@
     <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">You have to clear a rectangular board containing hidden mines without detonating any of them.</string>
     <string name="app_name">Antimine</string>
+    <string name="crowdin" translatable="false">Crowdin</string>
 </resources>

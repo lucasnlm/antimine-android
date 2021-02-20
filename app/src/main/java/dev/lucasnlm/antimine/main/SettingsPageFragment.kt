@@ -1,15 +1,14 @@
 package dev.lucasnlm.antimine.main
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.history.HistoryActivity
+import dev.lucasnlm.antimine.language.LanguageSelectorActivity
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
@@ -132,12 +131,7 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
             startIcon = R.drawable.translate,
             onAction = {
                 analyticsManager.sentEvent(Analytics.OpenTranslations)
-                try {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(CROWD_IN_URL))
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    Toast.makeText(context, R.string.unknown_error, Toast.LENGTH_SHORT).show()
-                }
+                startActivity(Intent(requireContext(), LanguageSelectorActivity::class.java))
             }
         )
 
@@ -154,9 +148,5 @@ class SettingsPageFragment : Fragment(R.layout.fragment_main_settings) {
         } else {
             play_games.visibility = View.GONE
         }
-    }
-
-    companion object {
-        private const val CROWD_IN_URL = "https://crowdin.com/project/antimine-android"
     }
 }

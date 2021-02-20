@@ -1,6 +1,9 @@
 package dev.lucasnlm.antimine.language
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
@@ -9,6 +12,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
+import kotlinx.android.synthetic.main.activity_language.*
 import org.koin.android.ext.android.inject
 import java.util.Locale
 
@@ -16,6 +20,28 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
+
+        section.bind(
+            text = R.string.select_language,
+            startButton = R.drawable.back_arrow,
+            startAction = {
+                finish()
+            }
+        )
+
+        open_crowdin.bind(
+            theme = usingTheme,
+            text = R.string.crowdin,
+            startIcon = R.drawable.translate,
+            onAction = {
+                try {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(CROWDIN_URL))
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    Toast.makeText(applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
 
         placePreferenceFragment()
     }
@@ -115,5 +141,9 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
             val TAG = LanguageListFragment::class.simpleName
             private const val LANGUAGE_LIST = "language_list"
         }
+    }
+
+    companion object {
+        private const val CROWDIN_URL = "https://crowdin.com/project/antimine-android"
     }
 }
