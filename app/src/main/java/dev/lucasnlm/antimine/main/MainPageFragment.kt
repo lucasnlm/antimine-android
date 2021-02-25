@@ -16,6 +16,7 @@ import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
+import dev.lucasnlm.antimine.support.IapHandler
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IAnalyticsManager
@@ -37,6 +38,7 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
     private val billingManager: IBillingManager by inject()
     private val savesRepository: ISavesRepository by inject()
     private val featureFlagManager: IFeatureFlagManager by inject()
+    private val iapHandler: IapHandler by inject()
 
     private fun getDifficultyExtra(difficulty: Difficulty): String {
         return minefieldRepository.fromDifficulty(
@@ -193,6 +195,16 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
 
                     billingManager.getPriceFlow().collect {
                         bindRemoveAds(it)
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenResumed {
+            if (iapHandler.isEnabled()) {
+                iapHandler.listenPurchase().collect {
+                    if (it) {
+                        remove_ads.visibility = View.GONE
                     }
                 }
             }

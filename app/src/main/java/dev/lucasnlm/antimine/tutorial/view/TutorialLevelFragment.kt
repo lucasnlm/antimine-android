@@ -18,7 +18,6 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.tutorial.viewmodel.TutorialViewModel
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.fragment_tutorial_level.*
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -30,7 +29,12 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
     private val tutorialViewModel by viewModel<TutorialViewModel>()
     private val gameViewModel by sharedViewModel<GameViewModel>()
     private val areaAdapter by lazy {
-        TutorialAreaAdapter(requireContext(), tutorialViewModel, preferencesRepository, dimensionRepository).apply {
+        TutorialAreaAdapter(
+            requireContext(),
+            tutorialViewModel,
+            preferencesRepository,
+            dimensionRepository
+        ).apply {
             setClickEnabled(true)
         }
     }
@@ -57,7 +61,12 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
                         gameViewModel.mineCount.postValue(
                             list.count { it.hasMine }.coerceAtLeast(4) - list.count { it.mark.isFlag() }
                         )
+
+                        val wasEmpty = areaAdapter.itemCount == 0
                         areaAdapter.bindField(list)
+                        if (wasEmpty) {
+                            focusOn(12)
+                        }
 
                         if (tutorialState.value.completed) {
                             gameViewModel.eventObserver.postValue(Event.FinishTutorial)
@@ -67,8 +76,12 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
             }
         }
 
+        lifecycleScope.launchWhenResumed {
+            tutorialViewModel.observeFocusChangeRequests().collect(::focusOn)
+        }
+
         lifecycleScope.launchWhenCreated {
-            tutorialViewModel.shake.asFlow().collect {
+            tutorialViewModel.observeShakes().collect {
                 tutorial_bottom.startAnimation(AnimationUtils.loadAnimation(context, R.anim.shake))
             }
         }
@@ -129,6 +142,12 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
     override fun onPause() {
         super.onPause()
         preferencesRepository.setCompleteTutorial(true)
+    }
+
+    private fun focusOn(index: Int) {
+        view?.post {
+            recyclerGrid.getChildAt(index)?.requestFocus()
+        }
     }
 
     private fun String.splitKeeping(str: String): List<String> {

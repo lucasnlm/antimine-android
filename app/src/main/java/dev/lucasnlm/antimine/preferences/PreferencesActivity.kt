@@ -12,6 +12,7 @@ import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.models.Analytics
+import dev.lucasnlm.antimine.isAndroidTv
 import dev.lucasnlm.antimine.language.LanguageSelectorActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
@@ -155,6 +156,20 @@ class PreferencesActivity :
                 addPreferencesFromResource(targetPreferences)
             }
 
+            if (requireContext().isAndroidTv()) {
+                listOf(
+                    PreferenceKeys.PREFERENCE_USE_HELP,
+                    PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT,
+                    PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY,
+                    PreferenceKeys.PREFERENCE_VIBRATION,
+                    PreferenceKeys.PREFERENCE_SHOW_WINDOWS,
+                    PreferenceKeys.PREFERENCE_OPEN_DIRECTLY,
+                    SELECT_THEME_PREFS
+                ).forEach {
+                    findPreference<Preference>(it)?.isVisible = false
+                }
+            }
+
             findPreference<Preference>(SELECT_THEME_PREFS)?.setOnPreferenceClickListener {
                 analyticsManager.sentEvent(Analytics.OpenSettings)
                 Intent(context, ThemeActivity::class.java).apply {
@@ -176,7 +191,7 @@ class PreferencesActivity :
             val TAG = PrefsFragment::class.simpleName
 
             private const val TARGET_PREFS = "target_prefs"
-            private const val SELECT_THEME_PREFS = "preference_select_key"
+            private const val SELECT_THEME_PREFS = "preference_select_theme"
             private const val SELECT_LANGUAGE = "preference_select_language"
 
             fun newInstance(targetPreferences: Int): PrefsFragment {

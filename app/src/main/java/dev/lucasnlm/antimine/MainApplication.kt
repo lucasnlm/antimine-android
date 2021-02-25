@@ -38,5 +38,9 @@ open class MainApplication : MultiDexApplication() {
         } else {
             adsManager.start(this)
         }
+
+        if (applicationContext.isAndroidTv()) {
+            preferencesRepository.useTheme(16L)
+        }
     }
 }

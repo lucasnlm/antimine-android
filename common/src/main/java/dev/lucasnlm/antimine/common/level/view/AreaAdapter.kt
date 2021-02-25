@@ -61,7 +61,7 @@ class AreaAdapter(
     }
 
     fun bindField(newField: List<Area>) {
-        if (field.isEmpty()) {
+        if (field.isEmpty() || field.size != newField.size) {
             field = newField
             notifyDataSetChanged()
         } else {

@@ -7,6 +7,9 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
 
@@ -15,6 +18,8 @@ class IapHandler(
     private val preferencesManager: IPreferencesRepository,
     private val billingManager: IBillingManager,
 ) {
+    private val billingListener = MutableStateFlow(false)
+
     suspend fun start() {
         billingManager.listenPurchases().collect {
             if (it is PurchaseInfo.PurchaseResult) {
@@ -24,6 +29,10 @@ class IapHandler(
             }
         }
     }
+
+    fun isEnabled() = billingManager.isEnabled()
+
+    fun listenPurchase(): Flow<Boolean> = billingListener.asStateFlow()
 
     private fun onLockStatusChanged(status: Boolean) {
         preferencesManager.setPremiumFeatures(status)

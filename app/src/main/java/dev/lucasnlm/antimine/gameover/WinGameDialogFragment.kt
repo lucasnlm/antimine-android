@@ -33,6 +33,7 @@ import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.ReviewWrapper
+import kotlinx.android.synthetic.main.view_play_games_button.view.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -98,7 +99,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                 .apply {
                     lifecycleScope.launchWhenCreated {
                         endGameViewModel.observeState().collect { state ->
-                            val shareButton: View = findViewById(R.id.share)
+                            val shareButton: ImageView = findViewById(R.id.share)
                             val statsButton: AppCompatButton = findViewById(R.id.stats)
                             val newGameButton: AppCompatButton = findViewById(R.id.new_game)
                             val removeAdsButton: AppCompatButton = findViewById(R.id.remove_ads)
@@ -119,11 +120,6 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                         EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji)
                                     )
                                 }
-                            }
-
-                            shareButton.setOnClickListener {
-                                analyticsManager.sentEvent(Analytics.ShareGame)
-                                gameViewModel.shareObserver.postValue(Unit)
                             }
 
                             statsButton.setOnClickListener {
@@ -163,11 +159,24 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             }
 
                             if (state.gameResult == GameResult.Victory || state.gameResult == GameResult.Completed) {
-                                if (!instantAppManager.isEnabled(context)) {
-                                    shareButton.visibility = View.GONE
+                                if (instantAppManager.isEnabled(context) || context.isAndroidTv()) {
+                                    shareButton.apply {
+                                        contentDescription = getString(R.string.cancel)
+                                        setImageResource(R.drawable.close)
+                                        setOnClickListener {
+                                            dismissAllowingStateLoss()
+                                        }
+                                    }
+                                } else {
+                                    shareButton.apply {
+                                        setOnClickListener {
+                                            analyticsManager.sentEvent(Analytics.ShareGame)
+                                            gameViewModel.shareObserver.postValue(Unit)
+                                        }
+                                    }
                                 }
+
                                 statsButton.visibility = View.VISIBLE
-                                shareButton.visibility = View.VISIBLE
                             }
 
                             if (!preferencesRepository.isPremiumEnabled() &&

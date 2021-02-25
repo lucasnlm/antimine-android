@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.level.view
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.View
 import androidx.core.view.doOnLayout
 import androidx.core.view.isNotEmpty
@@ -11,6 +12,7 @@ import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.isAndroidTv
+import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -70,17 +72,8 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
             eventObserver.observe(
                 viewLifecycleOwner,
                 {
-                    if (!gameViewModel.hasPlantedMines()) {
-                        recyclerGrid.post {
-                            levelSetup.value?.let { minefield ->
-                                val size = dimensionRepository.areaSizeWithPadding()
-                                val actionBarSize = dimensionRepository.actionBarSize()
-                                val dx = minefield.width * size * 0.25f
-                                val dy = (minefield.height * size + actionBarSize) * 0.25f - size * 3
-
-                                recyclerGrid.smoothScrollBy(dx.toInt(), dy.toInt(), null, 200)
-                            }
-                        }
+                    if (!gameViewModel.hasPlantedMines() && activity?.isFinishing == false) {
+                        levelSetup.value?.let(::centerMinefield)
                     }
 
                     when (it) {
@@ -99,11 +92,46 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
         }
     }
 
+    private fun centerMinefield(minefield: Minefield) = with(recyclerGrid) {
+        post {
+            val singleAreaSize = dimensionRepository.areaSizeWithPadding()
+            val actionBarSize = dimensionRepository.actionBarSize()
+            val displayMetrics = DisplayMetrics()
+            requireActivity().windowManager.defaultDisplay.getRealMetrics(displayMetrics)
+            val screenHeight = if (context.isAndroidTv()) {
+                displayMetrics.heightPixels
+            } else {
+                displayMetrics.heightPixels - actionBarSize
+            }
+
+            val screenWidth = displayMetrics.widthPixels
+            val boardWidth = singleAreaSize * minefield.width
+            val boardHeight = singleAreaSize * minefield.height
+
+            val multiplierY = if (boardHeight > screenHeight) {
+                (boardHeight / screenHeight - 1) * 0.5
+            } else {
+                0.0
+            }
+
+            val multiplierX = if (boardWidth > screenWidth) {
+                (boardWidth / screenWidth - 1) * 0.5
+            } else {
+                0.0
+            }
+
+            val dx = ((boardWidth - screenWidth).coerceAtLeast(0.0f)) * multiplierX
+            val dy = ((boardHeight - screenHeight).coerceAtLeast(0.0f)) * multiplierY
+
+            smoothScrollBy(dx.toInt(), dy.toInt())
+        }
+    }
+
     private fun focusOnCenterIfNeeded() {
         if (context?.isAndroidTv() == true) {
             view?.post {
                 gameViewModel.levelSetup.value?.let { minefield ->
-                    recyclerGrid?.let {
+                    recyclerGrid.let {
                         if (!gameViewModel.hasPlantedMines() && it.isNotEmpty()) {
                             val index = minefield.width * (minefield.height / 2) + (minefield.width / 2)
                             it.getChildAt(index)?.requestFocus()
