@@ -127,6 +127,7 @@
     <string name="help">도움말</string>
     <string name="back">뒤로</string>
     <string name="donation">공헌</string>
+    <string name="open_on_game">Open on game screen</string>
     <string name="show_windows">진행상황 게이지 활성화</string>
     <string name="select_language">언어 선택</string>
     <string name="switch_control">스위치: 플래그 및 열기</string>

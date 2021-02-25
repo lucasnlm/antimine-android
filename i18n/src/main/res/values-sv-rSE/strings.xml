@@ -127,6 +127,7 @@
     <string name="help">Hjälp</string>
     <string name="back">Tillbaka</string>
     <string name="donation">Donation</string>
+    <string name="open_on_game">Open on game screen</string>
     <string name="show_windows">Visa fönster</string>
     <string name="select_language">Välj språk</string>
     <string name="switch_control">Växel: Flagga och öppna</string>

@@ -127,6 +127,7 @@
     <string name="help">Ayuda</string>
     <string name="back">Volver</string>
     <string name="donation">Donación</string>
+    <string name="open_on_game">Abrir en la pantalla del juego</string>
     <string name="show_windows">Mostrar ventanas</string>
     <string name="select_language">Seleccionar Idioma</string>
     <string name="switch_control">Cambiar: Bandera y Abrir</string>

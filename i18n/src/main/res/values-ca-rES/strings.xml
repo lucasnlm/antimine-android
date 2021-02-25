@@ -127,6 +127,7 @@
     <string name="help">Ajuda</string>
     <string name="back">Tornar</string>
     <string name="donation">Donacions</string>
+    <string name="open_on_game">Open on game screen</string>
     <string name="show_windows">Mostrar finestres</string>
     <string name="select_language">Seleccioni Idioma</string>
     <string name="switch_control">Alternativa: Marca i Destapa</string>

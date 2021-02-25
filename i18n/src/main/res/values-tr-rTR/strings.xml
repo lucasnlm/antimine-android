@@ -127,6 +127,7 @@
     <string name="help">Yardım</string>
     <string name="back">Geri</string>
     <string name="donation">Bağış</string>
+    <string name="open_on_game">Open on game screen</string>
     <string name="show_windows">Pencereleri göster</string>
     <string name="select_language">Dil Seç</string>
     <string name="switch_control">Değiştir: Bayrak ve Açık</string>

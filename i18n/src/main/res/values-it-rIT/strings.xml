@@ -127,6 +127,7 @@
     <string name="help">Assistenza</string>
     <string name="back">Indietro</string>
     <string name="donation">Donazione</string>
+    <string name="open_on_game">Apri schermata di gioco</string>
     <string name="show_windows">Visualizza finestre</string>
     <string name="select_language">Seleziona Lingua</string>
     <string name="switch_control">Pulsante: Bandiera e Aperto</string>

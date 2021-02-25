@@ -127,6 +127,7 @@
     <string name="help">Βοήθεια</string>
     <string name="back">Πίσω</string>
     <string name="donation">Δωρεά</string>
+    <string name="open_on_game">Open on game screen</string>
     <string name="show_windows">Εμφάνιση παραθύρων</string>
     <string name="select_language">Επιλέξτε γλώσσα</string>
     <string name="switch_control">Διακόπτης: Σημαία και Άνοιγμα</string>

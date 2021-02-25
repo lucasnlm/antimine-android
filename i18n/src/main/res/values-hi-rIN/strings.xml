@@ -127,6 +127,7 @@
     <string name="help">मदद</string>
     <string name="back">पिछला</string>
     <string name="donation">दान</string>
+    <string name="open_on_game">Open on game screen</string>
     <string name="show_windows">खिड़कियां दिखाओ</string>
     <string name="select_language">भाषा चुनें</string>
     <string name="switch_control">स्विच: फ्लैग और ओपन</string>

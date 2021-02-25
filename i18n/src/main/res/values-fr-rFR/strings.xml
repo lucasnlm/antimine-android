@@ -127,6 +127,7 @@
     <string name="help">Aide</string>
     <string name="back">Retour</string>
     <string name="donation">Faire un don</string>
+    <string name="open_on_game">Open on game screen</string>
     <string name="show_windows">Afficher les fenêtres</string>
     <string name="select_language">Sélectionner la langue</string>
     <string name="switch_control">Commutateur : Drapeau et Ouvrir</string>

@@ -127,6 +127,7 @@
     <string name="help">Допомога</string>
     <string name="back">Назад</string>
     <string name="donation">Грошева підтримка</string>
+    <string name="open_on_game">Відкрити на екрані гри</string>
     <string name="show_windows">Показати вікна</string>
     <string name="select_language">Вибір мови</string>
     <string name="switch_control">Перемикач: Прапор і Відкрити</string>
