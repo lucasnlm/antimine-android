@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Tasks
 
 class PlayGamesManager(
     private val context: Context,
+    private val crashReporter: CrashReporter,
 ) : IPlayGamesManager {
     private var account: GoogleSignInAccount? = null
 
@@ -30,8 +31,12 @@ class PlayGamesManager(
         return account?.let {
             try {
                 Tasks.await(Games.getPlayersClient(context, it).currentPlayerId)
-            } catch (e: ApiException) {
-                Log.e(TAG, "Fail to request current player id")
+            } catch (exception: Exception) {
+                exception.message?.let { message ->
+                    crashReporter.sendError(message)
+                }
+
+                Log.e(TAG, "Fail to request current player id", exception)
                 account = null
                 null
             }

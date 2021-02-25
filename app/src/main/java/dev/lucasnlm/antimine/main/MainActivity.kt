@@ -4,12 +4,14 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.control.ControlDialogFragment
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
+import dev.lucasnlm.antimine.isAndroidTv
 import dev.lucasnlm.antimine.main.view.MainPageAdapter
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
@@ -60,10 +62,16 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         viewPager = findViewById<ViewPager2>(R.id.pager).apply {
             adapter = MainPageAdapter(
                 fragmentActivity = this@MainActivity,
-                fragments = listOf(
-                    MainPageFragment(),
-                    SettingsPageFragment(),
-                )
+                fragments = if (context.isAndroidTv()) {
+                    listOf(
+                        SinglePageFragment()
+                    )
+                } else {
+                    listOf(
+                        MainPageFragment(),
+                        SettingsPageFragment(),
+                    )
+                }
             )
             currentItem = 0
             registerOnPageChangeCallback(pageListener)
@@ -75,6 +83,11 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         findViewById<CircleIndicator3>(R.id.circle_indicator).apply {
             setViewPager(pager)
             tintIndicator(usingTheme.palette.accent.toAndroidColor())
+            visibility = if (context.isAndroidTv()) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
         }
 
         lifecycleScope.launchWhenCreated {
@@ -200,13 +213,13 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                 preferencesRepository.setUserId(newId)
 
                 withContext(Dispatchers.Main) {
-                    migrateDateAndRecreate()
+                    migrateDataAndRecreate()
                 }
             }
         }
     }
 
-    private fun migrateDateAndRecreate() {
+    private fun migrateDataAndRecreate() {
         lifecycleScope.launchWhenCreated {
             if (!isFinishing) {
                 preferencesRepository.userId()?.let {

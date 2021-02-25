@@ -17,6 +17,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         SHOW_ADS_ON_NEW_GAME_ENABLED to true,
         CONTINUE_ENABLED to true,
         RECYCLER_SCROLL_ENABLED to true,
+        THEME_TASTING_ENABLED to true,
     )
 
     private val remoteConfig: FirebaseRemoteConfig by lazy {
@@ -71,6 +72,10 @@ class FeatureFlagManager : IFeatureFlagManager() {
         getBoolean(RECYCLER_SCROLL_ENABLED)
     }
 
+    override val isThemeTastingEnabled: Boolean by lazy {
+        getBoolean(THEME_TASTING_ENABLED)
+    }
+
     override suspend fun refresh() {
         if (!BuildConfig.DEBUG) {
             withContext(Dispatchers.IO) {
@@ -95,5 +100,6 @@ class FeatureFlagManager : IFeatureFlagManager() {
         private const val SHOW_ADS_ON_NEW_GAME_ENABLED = "ad_on_new_game_enabled"
         private const val CONTINUE_ENABLED = "continue_enabled"
         private const val RECYCLER_SCROLL_ENABLED = "recycler_scroll_enabled"
+        private const val THEME_TASTING_ENABLED = "theme_tasting_enabled"
     }
 }

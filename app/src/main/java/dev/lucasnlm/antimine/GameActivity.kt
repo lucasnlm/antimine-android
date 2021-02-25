@@ -55,7 +55,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private val savesRepository: ISavesRepository by inject()
     private val shareViewModel: ShareManager by inject()
 
-    val gameViewModel by viewModel<GameViewModel>()
+    private val gameViewModel by viewModel<GameViewModel>()
 
     private val cloudSaveManager by inject<CloudSaveManager>()
 

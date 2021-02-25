@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.TvGameActivity
 import dev.lucasnlm.antimine.isAndroidTv
 import dev.lucasnlm.antimine.main.MainActivity
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
 import dev.lucasnlm.external.IFeatureFlagManager
 import org.koin.android.ext.android.inject
@@ -14,6 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashActivity : AppCompatActivity() {
     private val featureFlagManager: IFeatureFlagManager by inject()
+    private val preferencesRepository: IPreferencesRepository by inject()
     private val splashViewModel: SplashViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +37,11 @@ class SplashActivity : AppCompatActivity() {
         if (applicationContext.isAndroidTv()) {
             Intent(this, TvGameActivity::class.java).run { startActivity(this) }
         } else {
-            Intent(this, MainActivity::class.java).run { startActivity(this) }
+            if (preferencesRepository.userId() != null && preferencesRepository.openGameDirectly()) {
+                Intent(this, GameActivity::class.java).run { startActivity(this) }
+            } else {
+                Intent(this, MainActivity::class.java).run { startActivity(this) }
+            }
         }
 
         finish()

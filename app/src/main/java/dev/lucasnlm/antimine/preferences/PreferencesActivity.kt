@@ -5,8 +5,6 @@ import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.TypedValue
-import android.view.Menu
-import android.view.MenuItem
 import androidx.annotation.XmlRes
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -56,14 +54,7 @@ class PreferencesActivity :
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
-        section.bind(
-            text = R.string.settings,
-            startButton = R.drawable.back_arrow,
-            startDescription = R.string.back,
-            startAction = {
-                finish()
-            }
-        )
+        bindToolbar(preferenceRepository.hasCustomizations())
 
         PreferenceManager.getDefaultSharedPreferences(this)
             .registerOnSharedPreferenceChangeListener(this)
@@ -119,28 +110,37 @@ class PreferencesActivity :
         }
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        invalidateOptionsMenu()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        if (preferenceRepository.hasCustomizations()) {
-            menuInflater.inflate(R.menu.delete_icon_menu, menu)
-        }
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.delete) {
-            if (preferenceRepository.hasCustomizations()) {
-                preferenceRepository.reset()
-                placePreferenceFragment(currentTabXml)
-                invalidateOptionsMenu()
-            }
-            true
+    private fun bindToolbar(hasCustomizations: Boolean) {
+        if (hasCustomizations) {
+            section.bind(
+                text = R.string.settings,
+                startButton = R.drawable.back_arrow,
+                startDescription = R.string.back,
+                startAction = {
+                    finish()
+                },
+                endButton = R.drawable.delete,
+                endDescription = R.string.delete_all,
+                endAction = {
+                    preferenceRepository.reset()
+                    placePreferenceFragment(currentTabXml)
+                    bindToolbar(false)
+                }
+            )
         } else {
-            super.onOptionsItemSelected(item)
+            section.bind(
+                text = R.string.settings,
+                startButton = R.drawable.back_arrow,
+                startDescription = R.string.back,
+                startAction = {
+                    finish()
+                }
+            )
         }
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        bindToolbar(preferenceRepository.hasCustomizations())
     }
 
     class PrefsFragment : PreferenceFragmentCompat() {

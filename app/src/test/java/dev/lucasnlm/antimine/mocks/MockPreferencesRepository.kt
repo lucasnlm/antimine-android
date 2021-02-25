@@ -119,6 +119,8 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun showWindowsWhenFinishGame(): Boolean = true
 
+    override fun openGameDirectly(): Boolean = false
+
     override fun userId(): String? = null
 
     override fun setUserId(userId: String) {}

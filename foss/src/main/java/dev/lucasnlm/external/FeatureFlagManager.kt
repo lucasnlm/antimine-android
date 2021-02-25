@@ -11,6 +11,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
     override val isContinueGameEnabled: Boolean = true
     override val isRecyclerScrollEnabled: Boolean = true
     override val isFoos: Boolean = true
+    override val isThemeTastingEnabled: Boolean = true
 
     override suspend fun refresh() {
         // No Feature Flags on FOSS

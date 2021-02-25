@@ -20,13 +20,9 @@ class CardButtonView : FrameLayout {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     init {
-        init()
-    }
-
-    private fun init() {
         LayoutInflater
             .from(context)
-            .inflate(R.layout.view_new_game, this, true)
+            .inflate(R.layout.view_card_button, this, true)
     }
 
     fun bind(
@@ -78,24 +74,24 @@ class CardButtonView : FrameLayout {
         @DrawableRes startIcon: Int? = null,
         @DrawableRes endIcon: Int? = null,
     ) {
-        val color = if (invert) {
+        val color = if (invert || isFocused) {
             theme.palette.background.toAndroidColor()
         } else {
             theme.palette.accent.toAndroidColor()
         }
 
-        val backgroundColor = if (invert) {
+        val backgroundColor = if (invert || isFocused) {
             theme.palette.accent.toAndroidColor()
         } else {
             theme.palette.background.toAndroidColor()
         }
 
-        findViewById<TextView>(R.id.label).apply {
+        val label = findViewById<TextView>(R.id.label).apply {
             this.text = text
             setTextColor(color)
         }
 
-        findViewById<TextView>(R.id.size).apply {
+        val size = findViewById<TextView>(R.id.size).apply {
             if (extra == null) {
                 visibility = View.GONE
             } else {
@@ -105,7 +101,7 @@ class CardButtonView : FrameLayout {
             }
         }
 
-        findViewById<ImageView>(R.id.icon).apply {
+        val iconView = findViewById<ImageView>(R.id.icon).apply {
             if (startIcon == null) {
                 visibility = View.GONE
             } else {
@@ -115,7 +111,7 @@ class CardButtonView : FrameLayout {
             setColorFilter(color)
         }
 
-        findViewById<ImageView>(R.id.endIcon).apply {
+        val endIconView = findViewById<ImageView>(R.id.endIcon).apply {
             if (endIcon == null) {
                 setImageResource(0)
             } else {
@@ -132,6 +128,26 @@ class CardButtonView : FrameLayout {
                 backgroundColor
             }
             setCardBackgroundColor(backgroundColor)
+
+            setOnFocusChangeListener { _, focused ->
+                val focusedBackgroundColor = if (focused) {
+                    theme.palette.accent.toAndroidColor()
+                } else {
+                    theme.palette.background.toAndroidColor()
+                }
+
+                val inverted = if (focused) {
+                    theme.palette.background.toAndroidColor()
+                } else {
+                    theme.palette.accent.toAndroidColor()
+                }
+
+                label.setTextColor(inverted)
+                size.setTextColor(inverted)
+                iconView.setColorFilter(inverted)
+                endIconView.setColorFilter(inverted)
+                setCardBackgroundColor(focusedBackgroundColor)
+            }
         }
     }
 }

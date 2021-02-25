@@ -3,12 +3,14 @@ package dev.lucasnlm.antimine.level.view
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.doOnLayout
+import androidx.core.view.isNotEmpty
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
 import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.isAndroidTv
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -52,6 +54,7 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                 viewLifecycleOwner,
                 {
                     areaAdapter.bindField(it)
+                    focusOnCenterIfNeeded()
                 }
             )
 
@@ -93,6 +96,21 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                     }
                 }
             )
+        }
+    }
+
+    private fun focusOnCenterIfNeeded() {
+        if (context?.isAndroidTv() == true) {
+            view?.post {
+                gameViewModel.levelSetup.value?.let { minefield ->
+                    recyclerGrid?.let {
+                        if (!gameViewModel.hasPlantedMines() && it.isNotEmpty()) {
+                            val index = minefield.width * (minefield.height / 2) + (minefield.width / 2)
+                            it.getChildAt(index)?.requestFocus()
+                        }
+                    }
+                }
+            }
         }
     }
 

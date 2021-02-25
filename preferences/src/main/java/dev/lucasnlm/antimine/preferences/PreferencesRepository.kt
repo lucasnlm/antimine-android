@@ -5,6 +5,7 @@ import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
 class PreferencesRepository(
+    private val isAndroidTv: Boolean,
     private val preferencesManager: IPreferencesManager,
     private val defaultLongPressTimeout: Int,
 ) : IPreferencesRepository {
@@ -121,8 +122,12 @@ class PreferencesRepository(
     }
 
     override fun controlStyle(): ControlStyle {
-        val index = preferencesManager.getInt(PREFERENCE_CONTROL_STYLE, -1)
-        return ControlStyle.values().getOrNull(index) ?: ControlStyle.Standard
+        return if (isAndroidTv) {
+            ControlStyle.FastFlag
+        } else {
+            val index = preferencesManager.getInt(PREFERENCE_CONTROL_STYLE, -1)
+            ControlStyle.values().getOrNull(index) ?: ControlStyle.Standard
+        }
     }
 
     override fun useControlStyle(controlStyle: ControlStyle) {
@@ -283,6 +288,10 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PREFERENCE_USE_OPEN_SWITCH_CONTROL, useOpen)
     }
 
+    override fun openGameDirectly(): Boolean {
+        return preferencesManager.getBoolean(PREFERENCE_OPEN_DIRECTLY, false)
+    }
+
     private companion object {
         private const val PREFERENCE_VIBRATION = "preference_vibration"
         private const val PREFERENCE_ASSISTANT = "preference_assistant"
@@ -316,5 +325,6 @@ class PreferencesRepository(
         private const val PREFERENCE_USE_OPEN_SWITCH_CONTROL = "preference_use_open_switch_control"
         private const val PREFERENCE_TOUCH_SENSIBILITY = "preference_touch_sensibility"
         private const val PREFERENCE_LOCALE = "preference_locale"
+        private const val PREFERENCE_OPEN_DIRECTLY = "preference_open_directly"
     }
 }

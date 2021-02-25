@@ -86,6 +86,8 @@ interface IPreferencesRepository {
 
     fun showWindowsWhenFinishGame(): Boolean
 
+    fun openGameDirectly(): Boolean
+
     fun userId(): String?
     fun setUserId(userId: String)
 }

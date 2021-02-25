@@ -150,14 +150,6 @@ class SupportAppDialogFragment : AppCompatDialogFragment() {
         private const val UNLOCK_LABEL = "support_unlock_label"
         private const val TARGET_THEME_ID = "target_theme_id"
 
-        fun newRequestSupportDialog(context: Context): SupportAppDialogFragment {
-            return SupportAppDialogFragment().apply {
-                arguments = Bundle().apply {
-                    putString(UNLOCK_LABEL, context.getString(R.string.support_action))
-                }
-            }
-        }
-
         fun newRemoveAdsSupportDialog(context: Context, price: String?): SupportAppDialogFragment {
             return SupportAppDialogFragment().apply {
                 val label = context.getString(R.string.remove_ad)
