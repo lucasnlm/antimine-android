@@ -271,7 +271,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 null
             )
         }
-
     }
 
     private fun disableShortcutIcon(hide: Boolean = false) {

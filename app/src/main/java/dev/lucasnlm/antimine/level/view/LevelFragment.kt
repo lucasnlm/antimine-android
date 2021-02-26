@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
 import androidx.core.view.doOnLayout
-import androidx.core.view.doOnNextLayout
 import androidx.core.view.isNotEmpty
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.DeepLink

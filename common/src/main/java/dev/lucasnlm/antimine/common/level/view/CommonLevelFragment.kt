@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.common.level.view
 
 import android.content.Context
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
@@ -19,7 +18,6 @@ import dev.lucasnlm.external.IFeatureFlagManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.math.nextDown
-
 
 abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragment(contentLayoutId) {
     private val featureFlagManager: IFeatureFlagManager by inject()

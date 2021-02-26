@@ -2,30 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="16dp"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatButton
+    <dev.lucasnlm.antimine.main.view.CardButtonView
         android:id="@+id/beginner"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/beginner" />
+        android:layout_height="wrap_content" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <dev.lucasnlm.antimine.main.view.CardButtonView
         android:id="@+id/intermediate"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/intermediate" />
+        android:layout_height="wrap_content" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <dev.lucasnlm.antimine.main.view.CardButtonView
         android:id="@+id/expert"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/expert" />
+        android:layout_height="wrap_content" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+
+    <dev.lucasnlm.antimine.main.view.CardButtonView
+        android:id="@+id/tutorial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
