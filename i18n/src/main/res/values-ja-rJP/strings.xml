@@ -127,7 +127,7 @@
     <string name="help">ヘルプ</string>
     <string name="back">戻る</string>
     <string name="donation">寄付</string>
-    <string name="open_on_game">Open on game screen</string>
+    <string name="open_on_game">ゲーム画面で開く</string>
     <string name="show_windows">ウィンドウの表示</string>
     <string name="select_language">言語の選択</string>
     <string name="switch_control">スイッチ: フラグと開く</string>
