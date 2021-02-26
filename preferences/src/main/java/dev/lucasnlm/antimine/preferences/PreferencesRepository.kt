@@ -303,4 +303,8 @@ class PreferencesRepository(
     override fun openGameDirectly(): Boolean {
         return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_OPEN_DIRECTLY, false)
     }
+
+    override fun setOpenGameDirectly(value: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_OPEN_DIRECTLY, value)
+    }
 }

@@ -121,6 +121,8 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun openGameDirectly(): Boolean = false
 
+    override fun setOpenGameDirectly(value: Boolean) {}
+
     override fun userId(): String? = null
 
     override fun setUserId(userId: String) {}

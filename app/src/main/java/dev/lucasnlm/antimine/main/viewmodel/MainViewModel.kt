@@ -69,7 +69,7 @@ class MainViewModel(
     }
 
     private suspend fun loadCloudSave(cloudSave: CloudSave) = with(cloudSave) {
-        preferencesRepository.apply {
+        with(preferencesRepository) {
             setCompleteTutorial(cloudSave.completeTutorial == 1)
             completeFirstUse()
             useTheme(cloudSave.selectedTheme.toLong())
@@ -85,6 +85,7 @@ class MainViewModel(
             setSoundEffectsEnabled(soundEffects != 0)
             setPremiumFeatures(cloudSave.premiumFeatures != 0)
             useControlStyle(ControlStyle.values()[cloudSave.controlStyle])
+            setOpenGameDirectly(cloudSave.openDirectly != 0)
         }
 
         cloudSave.stats.mapNotNull {
