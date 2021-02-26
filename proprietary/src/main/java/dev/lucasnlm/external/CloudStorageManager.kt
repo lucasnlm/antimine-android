@@ -18,7 +18,7 @@ class CloudStorageManager : ICloudStorageManager {
     private var lastSync: Long = 0L
 
     override fun uploadSave(cloudSave: CloudSave) {
-        FirebaseFirestore.setLoggingEnabled(true)
+        FirebaseFirestore.setLoggingEnabled(BuildConfig.DEBUG)
         val data = cloudSave.toHashMap()
         Tasks.await(
             db.collection(SAVES)

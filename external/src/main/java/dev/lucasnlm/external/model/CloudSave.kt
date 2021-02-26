@@ -23,6 +23,7 @@ data class CloudSave(
 )
 
 fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
+    "uid" to playId,
     "completeTutorial" to completeTutorial,
     "selectedTheme" to selectedTheme,
     "squareRadius" to squareRadius,
