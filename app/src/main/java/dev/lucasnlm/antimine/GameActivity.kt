@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
@@ -35,16 +36,20 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
 import dev.lucasnlm.antimine.share.ShareManager
+import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IInstantAppManager
+import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -54,6 +59,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private val instantAppManager: IInstantAppManager by inject()
     private val savesRepository: ISavesRepository by inject()
     private val shareViewModel: ShareManager by inject()
+    private val playGamesManager: IPlayGamesManager by inject()
 
     private val gameViewModel by viewModel<GameViewModel>()
 
@@ -76,6 +82,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         bindViewModel()
         bindToolbar()
         bindSwitchControlButton()
+
+        playGamesManager.showPlayPopUp(this)
 
         lifecycleScope.launchWhenCreated {
             intent.extras?.let {
@@ -111,6 +119,25 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
 
         onOpenAppActions()
+        playGamesStartUp()
+    }
+
+    private fun playGamesStartUp() {
+        if (playGamesManager.hasGooglePlayGames()) {
+            lifecycleScope.launchWhenCreated {
+                try {
+                    withContext(Dispatchers.IO) {
+                        val logged = playGamesManager.silentLogin()
+                        if (!logged) {
+                            preferencesRepository.setUserId("")
+                        }
+                        playGamesManager.showPlayPopUp(this@GameActivity)
+                    }
+                } catch (e: Exception) {
+                    Log.e(SplashActivity.TAG, "Failed silent login", e)
+                }
+            }
+        }
     }
 
     private fun bindViewModel() = gameViewModel.apply {

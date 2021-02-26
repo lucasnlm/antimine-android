@@ -125,7 +125,11 @@ class PreferencesRepository(
     }
 
     override fun setUserId(userId: String) {
-        preferencesManager.putString(PreferenceKeys.PREFERENCE_USER_ID, userId)
+        if (userId.isBlank()) {
+            preferencesManager.removeKey(userId)
+        } else {
+            preferencesManager.putString(PreferenceKeys.PREFERENCE_USER_ID, userId)
+        }
     }
 
     override fun controlStyle(): ControlStyle {
