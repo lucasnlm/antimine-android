@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
 import androidx.core.view.doOnLayout
+import androidx.core.view.doOnNextLayout
 import androidx.core.view.isNotEmpty
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.DeepLink
@@ -120,10 +121,14 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                 0.0
             }
 
-            val dx = ((boardWidth - screenWidth).coerceAtLeast(0.0f)) * multiplierX
-            val dy = ((boardHeight - screenHeight).coerceAtLeast(0.0f)) * multiplierY
+            val dx = (boardWidth - screenWidth).coerceAtLeast(0.0f) * multiplierX
+            val dy = (boardHeight - screenHeight).coerceAtLeast(0.0f) * multiplierY
 
-            smoothScrollBy(dx.toInt(), dy.toInt())
+            smoothScrollBy(dx.toInt(), dy.toInt(), null, 300)
+            post {
+                requestLayout()
+                focusOnCenterIfNeeded()
+            }
         }
     }
 

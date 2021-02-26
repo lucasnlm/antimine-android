@@ -546,7 +546,7 @@ class FixedGridLayoutManager(
              * (x/y distance) to travel in order to get from the current positioning
              * to the target.
              */
-            override fun computeScrollVectorForPosition(targetPosition: Int): PointF? {
+            override fun computeScrollVectorForPosition(targetPosition: Int): PointF {
                 val rowOffset = getGlobalRowOfPosition(targetPosition) -
                     getGlobalRowOfPosition(mFirstVisiblePosition)
                 val columnOffset = getGlobalColumnOfPosition(targetPosition) -

@@ -256,12 +256,22 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
         }
 
-        minesCount.setCompoundDrawablesWithIntrinsicBounds(
-            ContextCompat.getDrawable(this, usingTheme.assets.toolbarMine),
-            null,
-            null,
-            null
-        )
+        if (applicationContext.isPortrait()) {
+            minesCount.setCompoundDrawablesWithIntrinsicBounds(
+                ContextCompat.getDrawable(this, usingTheme.assets.toolbarMine),
+                null,
+                null,
+                null
+            )
+        } else {
+            minesCount.setCompoundDrawablesWithIntrinsicBounds(
+                null,
+                ContextCompat.getDrawable(this, usingTheme.assets.toolbarMine),
+                null,
+                null
+            )
+        }
+
     }
 
     private fun disableShortcutIcon(hide: Boolean = false) {
