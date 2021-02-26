@@ -3,7 +3,14 @@ package dev.lucasnlm.antimine.common.level.solver
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
 import dev.lucasnlm.antimine.core.models.Area
 
-open class BruteForceSolver : GameSolver() {
+/**
+ * Brute force solver that try solve a minefield checking
+ * all neighbors.
+ *
+ * Bad point:
+ *  - Solves only easy minefields.
+ */
+open class CheckNeighborsSolver : GameSolver() {
     override fun trySolve(minefield: MutableList<Area>): Boolean {
         val minefieldHandler = MinefieldHandler(minefield, false)
 

@@ -6,17 +6,18 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import java.lang.Thread.sleep
+
 import kotlin.random.Random
 
-class LimitedBruteForceSolverTest {
+class CheckNeighborsSolverTest {
     private fun handleMinefield(block: (MinefieldHandler) -> Unit) {
         val creator = MinefieldCreator(
             Minefield(9, 9, 12),
             Random(200)
         )
         val minefield = creator.create(40, true).toMutableList()
-        val minefieldHandler = MinefieldHandler(minefield, false)
+        val minefieldHandler =
+            MinefieldHandler(minefield, false)
         block(minefieldHandler)
     }
 
@@ -24,30 +25,14 @@ class LimitedBruteForceSolverTest {
     fun isSolvable() {
         handleMinefield { handler ->
             handler.openAt(40, passive = false, openNeighbors = true)
-            val bruteForceSolver = LimitedBruteForceSolver()
+            val bruteForceSolver = CheckNeighborsSolver()
             assertTrue(bruteForceSolver.trySolve(handler.result().toMutableList()))
         }
 
         handleMinefield { handler ->
-            handler.openAt(0, passive = false, openNeighbors = true)
-            val bruteForceSolver = LimitedBruteForceSolver()
-            assertFalse(bruteForceSolver.trySolve(handler.result().toMutableList()))
-        }
-    }
-
-    @Test
-    fun shouldntKeepTryingAfterTimeout() {
-        handleMinefield { handler ->
-            handler.openAt(40, passive = false, openNeighbors = false)
-            val bruteForceSolver = LimitedBruteForceSolver(1000L)
-            assertTrue(bruteForceSolver.keepTrying())
-        }
-
-        handleMinefield { handler ->
             handler.openAt(0, passive = false, openNeighbors = false)
-            val bruteForceSolver = LimitedBruteForceSolver(50)
-            sleep(100)
-            assertFalse(bruteForceSolver.keepTrying())
+            val bruteForceSolver = CheckNeighborsSolver()
+            assertFalse(bruteForceSolver.trySolve(handler.result().toMutableList()))
         }
     }
 }

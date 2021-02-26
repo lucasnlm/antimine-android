@@ -1,8 +1,15 @@
 package dev.lucasnlm.antimine.common.level.solver
 
-class LimitedBruteForceSolver(
+/**
+ * Brute force solver that try solve a minefield checking
+ * all neighbors with time limit.
+ *
+ * Bad point:
+ *  - Solves only easy minefields.
+ */
+class LimitedCheckNeighborsSolver(
     private val maxAttemptTime: Long = DEFAULT_BRUTE_FORCE_TIMEOUT,
-) : BruteForceSolver() {
+) : CheckNeighborsSolver() {
 
     private val initialTime = System.currentTimeMillis()
 
