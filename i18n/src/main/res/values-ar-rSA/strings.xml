@@ -127,6 +127,7 @@
     <string name="help">مساعدة</string>
     <string name="back">رجوع</string>
     <string name="donation">التبرع</string>
+    <string name="open_on_game">Open on game screen</string>
     <string name="show_windows">إظهار النوافذ</string>
     <string name="select_language">اختر الللغة</string>
     <string name="switch_control">التبديل: العلم وفتح</string>

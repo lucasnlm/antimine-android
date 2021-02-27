@@ -1,14 +1,11 @@
 package dev.lucasnlm.antimine
 
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
-import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.view.doOnLayout
@@ -31,20 +28,15 @@ import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
-import dev.lucasnlm.antimine.share.ShareManager
-import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IInstantAppManager
-import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -56,10 +48,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
     private val instantAppManager: IInstantAppManager by inject()
 
     private val savesRepository: ISavesRepository by inject()
-
-    private val playGamesManager: IPlayGamesManager by inject()
-
-    private val shareViewModel: ShareManager by inject()
 
     private val reviewWrapper: ReviewWrapper by inject()
 
@@ -85,7 +73,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         bindViewModel()
-        bindPlayGames()
 
         findViewById<FrameLayout>(R.id.levelContainer).doOnLayout {
             if (!isFinishing) {
@@ -98,21 +85,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
         }
 
         onOpenAppActions()
-    }
-
-    private fun bindPlayGames() {
-        lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                silentGooglePlayLogin()
-            }
-
-            withContext(Dispatchers.Main) {
-                if (!isFinishing) {
-                    invalidateOptionsMenu()
-                    playGamesManager.showPlayPopUp(this@TvGameActivity)
-                }
-            }
-        }
     }
 
     private fun bindViewModel() = gameViewModel.apply {
@@ -139,13 +111,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
                     gameViewModel.onContinueFromGameOver()
                     eventObserver.postValue(Event.ResumeGame)
                 }
-            }
-        )
-
-        shareObserver.observe(
-            this@TvGameActivity,
-            {
-                shareCurrentGame()
             }
         )
 
@@ -242,10 +207,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
             reviewWrapper.startInAppReview(this)
             preferencesRepository.incrementUseCount()
         }
-    }
-
-    private fun onChangeDifficulty() {
-        loadGameFragment()
     }
 
     private fun loadGameFragment() {
@@ -382,7 +343,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
             Event.Resume, Event.Running -> {
                 status = Status.Running
                 gameViewModel.runClock()
-                keepScreenOn(true)
             }
             Event.StartTutorial -> {
                 status = Status.PreGame
@@ -408,7 +368,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
                 gameViewModel.stopClock()
                 gameViewModel.showAllEmptyAreas()
                 gameViewModel.victory()
-                keepScreenOn(false)
 
                 lifecycleScope.launch {
                     gameViewModel.saveGame()
@@ -433,7 +392,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
                     totalArea
                 )
                 status = Status.Over(currentTime, score)
-                keepScreenOn(false)
                 gameViewModel.stopClock()
 
                 val isGameCompleted = gameViewModel.isCompletedWithMistakes()
@@ -471,22 +429,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
         }
     }
 
-    private fun shareCurrentGame() {
-        val levelSetup = gameViewModel.levelSetup.value
-        val field = gameViewModel.field.value
-        lifecycleScope.launch {
-            shareViewModel.shareField(levelSetup, field)
-        }
-    }
-
-    private fun keepScreenOn(enabled: Boolean) {
-        if (enabled) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        } else {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        }
-    }
-
     override fun onDismiss(dialog: DialogInterface?) {
         gameViewModel.run {
             refreshUserPreferences()
@@ -494,37 +436,7 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
         }
     }
 
-    private fun silentGooglePlayLogin(): Boolean {
-        return if (playGamesManager.hasGooglePlayGames()) {
-            try {
-                playGamesManager.silentLogin()
-            } catch (e: Exception) {
-                Log.e(TAG, "User not logged in Play Games")
-                false
-            }
-        } else {
-            false
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == GOOGLE_PLAY_REQUEST_CODE) {
-            playGamesManager.handleLoginResult(data)
-            goToSplashScreen()
-        }
-    }
-
-    private fun goToSplashScreen() {
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-        Intent(this, SplashActivity::class.java)
-            .run { startActivity(this) }
-        finish()
-    }
-
     companion object {
         val TAG = TvGameActivity::class.simpleName
-        private const val GOOGLE_PLAY_REQUEST_CODE = 6
     }
 }

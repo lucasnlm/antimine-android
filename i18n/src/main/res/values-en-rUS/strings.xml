@@ -127,6 +127,7 @@
     <string name="help">Help</string>
     <string name="back">Back</string>
     <string name="donation">Donation</string>
+    <string name="open_on_game">Open on game screen</string>
     <string name="show_windows">Show windows</string>
     <string name="select_language">Select Language</string>
     <string name="switch_control">Switch: Flag and Open</string>

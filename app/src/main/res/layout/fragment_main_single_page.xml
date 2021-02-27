@@ -33,7 +33,7 @@
             <dev.lucasnlm.antimine.main.view.CardButtonView
                 android:id="@+id/continue_game"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"/>
 
             <dev.lucasnlm.antimine.ui.view.SectionView
                 android:id="@+id/new_game"
@@ -68,6 +68,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp" />
 
+            <dev.lucasnlm.antimine.main.view.CardButtonView
+                android:id="@+id/tutorial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
         <dev.lucasnlm.antimine.ui.view.SectionView
@@ -77,30 +82,44 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/new_game_buttons" />
 
-        <dev.lucasnlm.antimine.main.view.CardButtonView
-            android:id="@+id/settings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/general_list"
+            android:orientation="vertical"
             android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/general" />
-
-        <dev.lucasnlm.antimine.main.view.CardButtonView
-            android:id="@+id/remove_ads"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings" />
+            app:layout_constraintTop_toBottomOf="@+id/general">
 
-        <dev.lucasnlm.antimine.main.view.CardButtonView
-            android:id="@+id/themes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/remove_ads" />
+            <dev.lucasnlm.antimine.main.view.CardButtonView
+                android:id="@+id/settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <dev.lucasnlm.antimine.main.view.CardButtonView
+                android:id="@+id/themes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <dev.lucasnlm.antimine.main.view.CardButtonView
+                android:id="@+id/remove_ads"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <dev.lucasnlm.antimine.main.view.CardButtonView
+                android:id="@+id/previous_games"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <dev.lucasnlm.antimine.main.view.CardButtonView
+                android:id="@+id/stats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <dev.lucasnlm.antimine.main.view.CardButtonView
+                android:id="@+id/translation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

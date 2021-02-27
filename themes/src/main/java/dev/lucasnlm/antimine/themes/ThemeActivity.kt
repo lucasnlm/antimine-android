@@ -1,8 +1,6 @@
 package dev.lucasnlm.antimine.themes
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
@@ -16,6 +14,7 @@ import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IBillingManager
+import dev.lucasnlm.external.IFeatureFlagManager
 import kotlinx.android.synthetic.main.activity_theme.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -31,6 +30,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
     private val cloudSaveManager by inject<CloudSaveManager>()
     private val preferencesRepository: IPreferencesRepository by inject()
     private val billingManager: IBillingManager by inject()
+    private val featureFlagManager: IFeatureFlagManager by inject()
     private val adsManager: IAdsManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,14 +40,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
             adsManager.start(this)
         }
 
-        section.bind(
-            text = R.string.themes,
-            startButton = R.drawable.back_arrow,
-            startDescription = R.string.back,
-            startAction = {
-                finish()
-            }
-        )
+        bindToolbar(themeViewModel.singleState().current.id != 0L)
 
         lifecycleScope.launchWhenCreated {
             val gaps = resources.getDimension(R.dimen.theme_divider) * 6
@@ -89,35 +82,43 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        if (themeViewModel.singleState().current.id != 0L) {
-            menuInflater.inflate(R.menu.delete_icon_menu, menu)
-        }
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.delete) {
-            themeViewModel.sendEvent(ThemeEvent.ResetTheme)
-            true
-        } else {
-            super.onOptionsItemSelected(item)
-        }
-    }
-
     private suspend fun showUnlockDialog(themeId: Long) {
         if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null) {
+            val filterTheme = if (featureFlagManager.isThemeTastingEnabled) themeId else -1L
             val price = billingManager.getPrice()
             withContext(Dispatchers.Main) {
                 SupportAppDialogFragment
-                    .newChangeThemeDialog(applicationContext, themeId, price)
+                    .newChangeThemeDialog(applicationContext, filterTheme, price)
                     .show(supportFragmentManager, SupportAppDialogFragment.TAG)
             }
+        }
+    }
+
+    private fun bindToolbar(hasDefinedTheme: Boolean) {
+        if (hasDefinedTheme) {
+            section.bind(
+                text = R.string.themes,
+                startButton = R.drawable.back_arrow,
+                startDescription = R.string.back,
+                startAction = {
+                    finish()
+                },
+                endButton = R.drawable.delete,
+                endDescription = R.string.delete_all,
+                endAction = {
+                    themeViewModel.sendEvent(ThemeEvent.ResetTheme)
+                    bindToolbar(false)
+                }
+            )
+        } else {
+            section.bind(
+                text = R.string.themes,
+                startButton = R.drawable.back_arrow,
+                startDescription = R.string.back,
+                startAction = {
+                    finish()
+                }
+            )
         }
     }
 }

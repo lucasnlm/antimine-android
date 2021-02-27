@@ -1,5 +1,6 @@
 package dev.lucasnlm.external
 
+import android.text.format.DateUtils
 import android.util.Log
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
@@ -14,9 +15,10 @@ import kotlinx.coroutines.withContext
 
 class CloudStorageManager : ICloudStorageManager {
     private val db by lazy { Firebase.firestore }
+    private var lastSync: Long = 0L
 
     override fun uploadSave(cloudSave: CloudSave) {
-        FirebaseFirestore.setLoggingEnabled(true)
+        FirebaseFirestore.setLoggingEnabled(BuildConfig.DEBUG)
         val data = cloudSave.toHashMap()
         Tasks.await(
             db.collection(SAVES)
@@ -39,23 +41,29 @@ class CloudStorageManager : ICloudStorageManager {
 
     @Suppress("BlockingMethodInNonBlockingContext")
     override suspend fun getSave(playId: String): CloudSave? {
-        return runBlocking {
-            try {
-                withContext(Dispatchers.IO) {
-                    val result = Tasks.await(
-                        db.collection(SAVES)
-                            .document(playId)
-                            .get()
-                    )
+        return if (System.currentTimeMillis() - lastSync > DateUtils.MINUTE_IN_MILLIS) {
+            lastSync = System.currentTimeMillis()
 
-                    result.data?.let {
-                        cloudSaveOf(playId, it.toMap())
+            runBlocking {
+                try {
+                    withContext(Dispatchers.IO) {
+                        val result = Tasks.await(
+                            db.collection(SAVES)
+                                .document(playId)
+                                .get()
+                        )
+
+                        result.data?.let {
+                            cloudSaveOf(playId, it.toMap())
+                        }
                     }
+                } catch (e: Exception) {
+                    Log.e(TAG, "Fail to load save on cloud", e)
+                    null
                 }
-            } catch (e: Exception) {
-                Log.e(TAG, "Fail to load save on cloud", e)
-                null
             }
+        } else {
+            null
         }
     }
 

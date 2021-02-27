@@ -49,6 +49,7 @@ class CloudSaveManagerImpl(
                     controlStyle = preferencesRepository.controlStyle().ordinal,
                     noGuessing = preferencesRepository.useNoGuessingAlgorithm().toInt(),
                     language = preferencesRepository.getPreferredLocale() ?: "",
+                    openDirectly = preferencesRepository.openGameDirectly().toInt(),
                 )
             }
         } catch (e: Exception) {

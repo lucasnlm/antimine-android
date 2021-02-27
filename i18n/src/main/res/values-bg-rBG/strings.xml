@@ -127,6 +127,7 @@
     <string name="help">Помощ</string>
     <string name="back">Назад</string>
     <string name="donation">Дарение</string>
+    <string name="open_on_game">Отвори на игралния екран</string>
     <string name="show_windows">Показване на всички прозорци</string>
     <string name="select_language">Избери език</string>
     <string name="switch_control">Промени: Флаг и Отворен</string>

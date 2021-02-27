@@ -61,7 +61,7 @@ class AreaAdapter(
     }
 
     fun bindField(newField: List<Area>) {
-        if (field.isEmpty()) {
+        if (field.isEmpty() || field.size != newField.size) {
             field = newField
             notifyDataSetChanged()
         } else {
@@ -70,12 +70,14 @@ class AreaAdapter(
                 field[index] != newField[index]
             }
 
+            val firstBind = field.firstOrNull { !it.isCovered } == null
+
             field = newField
 
-            if (changes.size == newField.size) {
-                changes.map { it.id }.forEach(::notifyItemChanged)
-            } else {
+            if (changes.size == newField.size || firstBind) {
                 notifyDataSetChanged()
+            } else {
+                changes.map { it.id }.forEach(::notifyItemChanged)
             }
         }
     }

@@ -23,3 +23,7 @@ fun Context.updateLanguage(localeName: String) {
         updateConfiguration(config, displayMetrics)
     }
 }
+
+fun Context.isPortrait(): Boolean {
+    return resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+}

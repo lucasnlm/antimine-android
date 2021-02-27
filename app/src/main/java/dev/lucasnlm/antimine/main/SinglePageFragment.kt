@@ -11,24 +11,30 @@ import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.history.HistoryActivity
+import dev.lucasnlm.antimine.language.LanguageSelectorActivity
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
-import dev.lucasnlm.antimine.support.IapHandler
+import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager
 import kotlinx.android.synthetic.main.fragment_main_new_game.*
+import kotlinx.android.synthetic.main.fragment_main_new_game.settings
+import kotlinx.android.synthetic.main.fragment_main_new_game.themes
+import kotlinx.android.synthetic.main.fragment_main_settings.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
+class SinglePageFragment : Fragment(R.layout.fragment_main_single_page) {
     private val viewModel: MainViewModel by sharedViewModel()
     private val analyticsManager: IAnalyticsManager by inject()
     private val themeRepository: IThemeRepository by inject()
@@ -38,7 +44,6 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
     private val billingManager: IBillingManager by inject()
     private val savesRepository: ISavesRepository by inject()
     private val featureFlagManager: IFeatureFlagManager by inject()
-    private val iapHandler: IapHandler by inject()
 
     private fun getDifficultyExtra(difficulty: Difficulty): String {
         return minefieldRepository.fromDifficulty(
@@ -152,9 +157,11 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
         settings.bind(
             theme = usingTheme,
             text = R.string.settings,
-            endIcon = R.drawable.arrow_right,
+            startIcon = R.drawable.settings,
             onAction = {
-                viewModel.sendEvent(MainEvent.GoToSettingsPageEvent)
+                analyticsManager.sentEvent(Analytics.OpenSettings)
+                val intent = Intent(context, PreferencesActivity::class.java)
+                startActivity(intent)
             }
         )
 
@@ -166,6 +173,16 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
                 analyticsManager.sentEvent(Analytics.OpenThemes)
                 val intent = Intent(context, ThemeActivity::class.java)
                 startActivity(intent)
+            }
+        )
+
+        tutorial.bind(
+            theme = usingTheme,
+            text = R.string.tutorial,
+            startIcon = R.drawable.tutorial,
+            onAction = {
+                analyticsManager.sentEvent(Analytics.OpenTutorial)
+                viewModel.sendEvent(MainEvent.StartTutorialEvent)
             }
         )
 
@@ -200,15 +217,41 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
             }
         }
 
-        lifecycleScope.launchWhenResumed {
-            if (iapHandler.isEnabled()) {
-                iapHandler.listenPurchase().collect {
-                    if (it) {
-                        remove_ads.visibility = View.GONE
-                    }
+        if (featureFlagManager.isGameHistoryEnabled) {
+            previous_games.bind(
+                theme = usingTheme,
+                text = R.string.previous_games,
+                startIcon = R.drawable.old_games,
+                onAction = {
+                    analyticsManager.sentEvent(Analytics.OpenSaveHistory)
+                    val intent = Intent(context, HistoryActivity::class.java)
+                    startActivity(intent)
                 }
-            }
+            )
+        } else {
+            previous_games.visibility = View.GONE
         }
+
+        stats.bind(
+            theme = usingTheme,
+            text = R.string.events,
+            startIcon = R.drawable.stats,
+            onAction = {
+                analyticsManager.sentEvent(Analytics.OpenStats)
+                val intent = Intent(context, StatsActivity::class.java)
+                startActivity(intent)
+            }
+        )
+
+        translation.bind(
+            theme = usingTheme,
+            text = R.string.translation,
+            startIcon = R.drawable.translate,
+            onAction = {
+                analyticsManager.sentEvent(Analytics.OpenTranslations)
+                startActivity(Intent(requireContext(), LanguageSelectorActivity::class.java))
+            }
+        )
     }
 
     private fun bindRemoveAds(price: String? = null) {

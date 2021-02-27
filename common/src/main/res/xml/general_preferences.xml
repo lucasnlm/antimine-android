@@ -32,6 +32,13 @@
             android:key="preference_show_windows"
             android:title="@string/show_windows"
             app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:checked="false"
+            android:defaultValue="false"
+            android:key="preference_open_directly"
+            android:title="@string/open_on_game"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

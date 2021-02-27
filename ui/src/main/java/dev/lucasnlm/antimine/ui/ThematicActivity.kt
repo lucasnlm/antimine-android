@@ -59,6 +59,7 @@ abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActi
         resources?.apply {
             val config = resources.configuration.apply {
                 setLocale(locale)
+                setLayoutDirection(locale)
             }
 
             updateConfiguration(config, displayMetrics)

@@ -127,6 +127,7 @@
     <string name="help">ช่วยเหลือ</string>
     <string name="back">กลับ</string>
     <string name="donation">บริจาค</string>
+    <string name="open_on_game">Open on game screen</string>
     <string name="show_windows">แสดงหน้าต่าง</string>
     <string name="select_language">เลือกภาษา</string>
     <string name="switch_control">สวิตซ์: ตั้งค่าสถานะและเปิด</string>

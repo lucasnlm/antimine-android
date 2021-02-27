@@ -1,7 +1,9 @@
 package dev.lucasnlm.antimine.common.level.repository
 
+import android.content.Context
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.isPortrait
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlin.random.Random
@@ -16,7 +18,9 @@ interface IMinefieldRepository {
     fun randomSeed(): Long
 }
 
-class MinefieldRepository : IMinefieldRepository {
+class MinefieldRepository(
+    private val context: Context,
+) : IMinefieldRepository {
     override fun fromDifficulty(
         difficulty: Difficulty,
         dimensionRepository: IDimensionRepository,
@@ -40,6 +44,7 @@ class MinefieldRepository : IMinefieldRepository {
         val fieldSize = dimensionRepository.defaultAreaSize()
         val verticalGap = if (dimensionRepository.navigationBarHeight() > 0)
             VERTICAL_STANDARD_GAP else VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM
+        val startBar = if (context.isPortrait()) 0 else 1
 
         val progressiveMines = preferencesRepository.getProgressiveValue()
 
@@ -53,7 +58,7 @@ class MinefieldRepository : IMinefieldRepository {
             ((fieldArea * CUSTOM_LEVEL_MINE_RATIO).toInt() + progressiveMines)
                 .coerceAtMost((fieldArea * MAX_LEVEL_MINE_RATIO).toInt())
 
-        return Minefield(finalWidth, finalHeight, finalMines)
+        return Minefield(finalWidth - startBar, finalHeight, finalMines)
     }
 
     override fun randomSeed(): Long = Random.nextLong()

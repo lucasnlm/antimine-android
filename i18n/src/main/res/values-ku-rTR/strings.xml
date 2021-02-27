@@ -12,7 +12,8 @@
     <string name="tutorial_4_top">دەزانین یەکێک لە مینەکان لە کوێیە کەواتە، تەنها یەک ئەگەر هەیە بۆ ئەوی تر.</string>
     <string name="tutorial_4_bottom">%1$s بۆ ئاڵای مین نزیک بە 2.</string>
     <string name="tutorial_5_top">پشکنینی ژمارەی بەرجەستەکراو.</string>
-    <string name="tutorial_5_bottom">%1$بۆکردنەوە %2$بۆنیشانەکردن.</string>
+    <string name="tutorial_5_bottom">%1$s بۆکردنەوە یان
+%2$sبۆ نیشانەکردن.</string>
     <string name="games">یارییەکان</string>
     <string name="previous_games">یارییەکانی پێشوو</string>
     <string name="minefield">قورس</string>
@@ -127,6 +128,7 @@
     <string name="help">یارمەتی</string>
     <string name="back">گەڕانەوە</string>
     <string name="donation">بەخشین</string>
+    <string name="open_on_game">کردنەوە لەسەر شاشەی یاری</string>
     <string name="show_windows">پیشاندانی پەنجەرەکان</string>
     <string name="select_language">زمان دیاریبکە</string>
     <string name="switch_control">گۆڕین: ئاڵا و کردنەوە</string>

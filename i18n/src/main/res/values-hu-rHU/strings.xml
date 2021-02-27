@@ -127,6 +127,7 @@
     <string name="help">Segítség</string>
     <string name="back">Vissza</string>
     <string name="donation">Adomány</string>
+    <string name="open_on_game">Open on game screen</string>
     <string name="show_windows">Ablakok megjelenítése</string>
     <string name="select_language">Válassz nyelvet</string>
     <string name="switch_control">Kapcsoló: Jelölés és megnyitás</string>

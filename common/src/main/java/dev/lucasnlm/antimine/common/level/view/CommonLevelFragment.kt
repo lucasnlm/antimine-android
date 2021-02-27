@@ -11,6 +11,7 @@ import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.isAndroidTv
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.external.IFeatureFlagManager
@@ -38,19 +39,49 @@ abstract class CommonLevelFragment(@LayoutRes val contentLayoutId: Int) : Fragme
             totalColumnCount = boardWidth
         }
 
-    protected fun setupRecyclerViewSize(view: View, levelSetup: Minefield) {
+    protected fun setupRecyclerViewSize(view: View, minefield: Minefield) {
         recyclerGrid.apply {
-            val horizontalPadding = calcHorizontalPadding(view, levelSetup.width)
-            val verticalPadding = calcVerticalPadding(view, levelSetup.height)
-            if (horizontalPadding == 0 && verticalPadding == 0) {
-                val minPadding = dimensionRepository.areaSize().toInt()
-                setPadding(minPadding, minPadding, minPadding, minPadding)
+            val minPadding = if (context.isAndroidTv()) {
+                dimensionRepository.areaSize().toInt() * 3
             } else {
-                setPadding(horizontalPadding, verticalPadding, 0, 0)
+                dimensionRepository.areaSize().toInt()
             }
-            layoutManager = makeNewLayoutManager(levelSetup.width)
+
+            val horizontalPadding = if (needsHorizontalScroll(view, minefield.width)) {
+                calcHorizontalPadding(view, minefield.width).coerceAtLeast(minPadding)
+            } else {
+                calcHorizontalPadding(view, minefield.width)
+            }
+
+            val verticalPadding = if (needsVerticalScroll(view, minefield.height)) {
+                calcVerticalPadding(view, minefield.height).coerceAtLeast(minPadding)
+            } else {
+                calcVerticalPadding(view, minefield.height)
+            }
+
+            setPadding(
+                horizontalPadding,
+                verticalPadding,
+                horizontalPadding,
+                verticalPadding
+            )
+            layoutManager = makeNewLayoutManager(minefield.width)
             adapter = areaAdapter
         }
+    }
+
+    private fun needsHorizontalScroll(view: View, boardWidth: Int): Boolean {
+        val width = view.measuredWidth
+        val recyclerViewWidth = (dimensionRepository.areaSize() * boardWidth)
+        val separatorsWidth = (dimensionRepository.areaSeparator() * (boardWidth + 2))
+        return (recyclerViewWidth + separatorsWidth) > width
+    }
+
+    private fun needsVerticalScroll(view: View, boardHeight: Int): Boolean {
+        val height = view.measuredHeight
+        val recyclerViewWidth = (dimensionRepository.areaSize() * boardHeight)
+        val separatorsWidth = (dimensionRepository.areaSeparator() * (boardHeight + 2))
+        return (recyclerViewWidth + separatorsWidth) > height
     }
 
     private fun calcHorizontalPadding(view: View, boardWidth: Int): Int {

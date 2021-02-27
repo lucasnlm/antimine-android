@@ -1,8 +1,6 @@
 package dev.lucasnlm.antimine.stats
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,14 +24,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        section.bind(
-            text = R.string.events,
-            startButton = R.drawable.back_arrow,
-            startDescription = R.string.back,
-            startAction = {
-                finish()
-            }
-        )
+        bindToolbar(statsViewModel.singleState().stats.isEmpty())
 
         recyclerView.apply {
             setHasFixedSize(true)
@@ -46,25 +37,35 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
             statsViewModel.observeState().collect {
                 recyclerView.adapter = StatsAdapter(it.stats, themeRepository)
                 empty.visibility = if (it.stats.isEmpty()) View.VISIBLE else View.GONE
+                bindToolbar(it.stats.isEmpty())
             }
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        statsViewModel.singleState().let {
-            if (it.stats.isNotEmpty()) {
-                menuInflater.inflate(R.menu.delete_icon_menu, menu)
-            }
-        }
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.delete) {
-            confirmAndDelete()
-            true
+    private fun bindToolbar(emptyStats: Boolean) {
+        if (emptyStats) {
+            section.bind(
+                text = R.string.events,
+                startButton = R.drawable.back_arrow,
+                startDescription = R.string.back,
+                startAction = {
+                    finish()
+                }
+            )
         } else {
-            super.onOptionsItemSelected(item)
+            section.bind(
+                text = R.string.events,
+                startButton = R.drawable.back_arrow,
+                startDescription = R.string.back,
+                startAction = {
+                    finish()
+                },
+                endButton = R.drawable.delete,
+                endDescription = R.string.delete_all,
+                endAction = {
+                    confirmAndDelete()
+                }
+            )
         }
     }
 
@@ -77,12 +78,8 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
                 lifecycleScope.launch {
                     statsViewModel.sendEvent(StatsEvent.DeleteStats)
                 }
+                bindToolbar(true)
             }
             .show()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return true
     }
 }

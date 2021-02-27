@@ -23,6 +23,7 @@ import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asFlow
 
 class TutorialViewModel(
     savesRepository: ISavesRepository,
@@ -69,7 +70,8 @@ class TutorialViewModel(
         )
     )
 
-    val shake = ConflatedBroadcastChannel<Unit>()
+    private val shake = ConflatedBroadcastChannel<Unit>()
+    private val focusSideEffect = ConflatedBroadcastChannel(12)
 
     init {
         field.postValue(TutorialField.getStep0())
@@ -79,6 +81,10 @@ class TutorialViewModel(
     private fun currentStep(): Int {
         return tutorialState.value.step
     }
+
+    fun observeShakes() = shake.asFlow()
+
+    fun observeFocusChangeRequests() = focusSideEffect.asFlow()
 
     fun openActionLabel(): String =
         when (preferencesRepository.controlStyle()) {
@@ -98,7 +104,13 @@ class TutorialViewModel(
             ControlStyle.DoubleClickInverted -> context.getString(R.string.double_click)
         }
 
-    private fun postStep(step: List<Area>, top: String, bottom: String, completed: Boolean = false) {
+    private fun postStep(
+        step: List<Area>,
+        top: String,
+        bottom: String,
+        completed: Boolean = false,
+        focusOn: Int
+    ) {
         field.postValue(step)
         clock.stop()
         tutorialState.value = tutorialState.value.copy(
@@ -107,6 +119,7 @@ class TutorialViewModel(
             topMessage = top,
             bottomMessage = bottom,
         )
+        focusSideEffect.offer(focusOn)
     }
 
     private fun openTileAction(index: Int) {
@@ -116,6 +129,7 @@ class TutorialViewModel(
                     TutorialField.getStep1(),
                     context.getString(R.string.tutorial_1_top),
                     context.getString(R.string.tutorial_1_bottom, flagActionLabel()),
+                    focusOn = 10,
                 )
             }
             2 -> {
@@ -124,6 +138,7 @@ class TutorialViewModel(
                         TutorialField.getStep3(),
                         context.getString(R.string.tutorial_3_top),
                         context.getString(R.string.tutorial_3_bottom),
+                        focusOn = 20,
                     )
                 }
             }
@@ -133,6 +148,7 @@ class TutorialViewModel(
                         TutorialField.getStep4(),
                         context.getString(R.string.tutorial_4_top),
                         context.getString(R.string.tutorial_4_bottom, flagActionLabel()),
+                        focusOn = 22,
                     )
                 }
             }
@@ -142,6 +158,7 @@ class TutorialViewModel(
                         TutorialField.getStep6(),
                         context.getString(R.string.tutorial_5_top),
                         context.getString(R.string.tutorial_5_bottom, openActionLabel(), flagActionLabel()),
+                        focusOn = 14,
                     )
                 }
             }
@@ -151,6 +168,7 @@ class TutorialViewModel(
                         TutorialField.getStep7(),
                         context.getString(R.string.tutorial_5_top),
                         context.getString(R.string.tutorial_5_bottom, openActionLabel(), flagActionLabel()),
+                        focusOn = 9,
                     )
                 }
             }
@@ -169,6 +187,7 @@ class TutorialViewModel(
                         TutorialField.getStep2(),
                         context.getString(R.string.tutorial_2_top),
                         context.getString(R.string.tutorial_2_bottom, openActionLabel()),
+                        focusOn = 15,
                     )
                 }
             }
@@ -178,6 +197,7 @@ class TutorialViewModel(
                         TutorialField.getStep5(),
                         context.getString(R.string.tutorial_5_top),
                         context.getString(R.string.tutorial_5_bottom, openActionLabel(), flagActionLabel()),
+                        focusOn = 23,
                     )
                 }
             }
@@ -187,6 +207,7 @@ class TutorialViewModel(
                         TutorialField.getStep8(),
                         context.getString(R.string.tutorial_5_top),
                         context.getString(R.string.tutorial_5_bottom, openActionLabel(), flagActionLabel()),
+                        focusOn = 4,
                     )
                 }
             }
@@ -196,7 +217,8 @@ class TutorialViewModel(
                         TutorialField.getStep9(),
                         context.getString(R.string.tutorial_5_top),
                         context.getString(R.string.tutorial_5_bottom, openActionLabel(), flagActionLabel()),
-                        completed = true
+                        completed = true,
+                        focusOn = 12,
                     )
                 }
             }

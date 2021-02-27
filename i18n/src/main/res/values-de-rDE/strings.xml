@@ -127,6 +127,7 @@
     <string name="help">Hilfe</string>
     <string name="back">Zurück</string>
     <string name="donation">Spende</string>
+    <string name="open_on_game">Im Spiel-Bildschirm öffnen</string>
     <string name="show_windows">Fenster anzeigen</string>
     <string name="select_language">Sprache auswählen</string>
     <string name="switch_control">Umschalter: Markieren und Öffnen</string>

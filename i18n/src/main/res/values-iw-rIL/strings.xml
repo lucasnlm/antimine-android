@@ -127,6 +127,7 @@
     <string name="help">עזרה</string>
     <string name="back">חזור</string>
     <string name="donation">תרומה</string>
+    <string name="open_on_game">Open on game screen</string>
     <string name="show_windows">Show windows</string>
     <string name="select_language">בחר שפה</string>
     <string name="switch_control">Switch: Flag and Open</string>

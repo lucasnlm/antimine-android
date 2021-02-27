@@ -127,6 +127,7 @@
     <string name="help">Nápověda</string>
     <string name="back">Zpět</string>
     <string name="donation">Darovat</string>
+    <string name="open_on_game">Otevřít na obrazovce hry</string>
     <string name="show_windows">Zobrazit okna</string>
     <string name="select_language">Vybrat jazyk</string>
     <string name="switch_control">Přepnout: označit a otevřít</string>

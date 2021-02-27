@@ -6,7 +6,7 @@
         app:iconSpaceReserved="false">
 
         <Preference
-            android:key="preference_select_key"
+            android:key="preference_select_theme"
             android:title="@string/themes"
             app:iconSpaceReserved="false" />
 

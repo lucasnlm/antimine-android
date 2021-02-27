@@ -127,6 +127,7 @@
     <string name="help">Help</string>
     <string name="back">Vorige</string>
     <string name="donation">Doneren</string>
+    <string name="open_on_game">Open op spelscherm</string>
     <string name="show_windows">Vensters weergeven</string>
     <string name="select_language">Kies taal</string>
     <string name="switch_control">Switch: Vlag en Open</string>

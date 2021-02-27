@@ -1,5 +1,7 @@
 package dev.lucasnlm.external.model
 
+import java.lang.Exception
+
 data class CloudSave(
     val playId: String,
     val completeTutorial: Int,
@@ -17,9 +19,11 @@ data class CloudSave(
     val controlStyle: Int,
     val noGuessing: Int,
     val language: String,
+    val openDirectly: Int,
 )
 
 fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
+    "uid" to playId,
     "completeTutorial" to completeTutorial,
     "selectedTheme" to selectedTheme,
     "squareRadius" to squareRadius,
@@ -35,25 +39,31 @@ fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
     "controlStyle" to controlStyle,
     "noGuessing" to noGuessing,
     "language" to language,
+    "openDirectly" to openDirectly,
 )
+
+private fun Any?.parseInt(): Int = this?.toString()?.toInt() ?: throw Exception("Fail to parse Int")
+private fun Any?.parseInt(default: Int): Int = this?.toString()?.toInt() ?: default
+private fun Any?.parseString(default: String): String = this?.toString() ?: default
 
 @Suppress("UNCHECKED_CAST")
 fun cloudSaveOf(id: String, data: Map<String, Any>) =
     CloudSave(
         id,
-        data["completeTutorial"].toString().toInt(),
-        data["selectedTheme"].toString().toInt(),
-        data["squareRadius"].toString().toInt(),
-        data["squareSize"].toString().toInt(),
-        data["touchTiming"].toString().toInt(),
-        data["questionMark"].toString().toInt(),
-        data["gameAssistance"].toString().toInt(),
-        data["help"].toString().toInt(),
-        data["hapticFeedback"].toString().toInt(),
-        data["soundEffects"].toString().toInt(),
+        data["completeTutorial"].parseInt(),
+        data["selectedTheme"].parseInt(),
+        data["squareRadius"].parseInt(),
+        data["squareSize"].parseInt(),
+        data["touchTiming"].parseInt(),
+        data["questionMark"].parseInt(),
+        data["gameAssistance"].parseInt(),
+        data["help"].parseInt(),
+        data["hapticFeedback"].parseInt(),
+        data["soundEffects"].parseInt(),
         data["stats"] as List<HashMap<String, String>>,
-        data["premiumFeatures"].toString().toInt(),
-        data["controlStyle"].toString().toInt(),
-        (data["noGuessing"] ?: 1).toString().toInt(),
-        (data["language"] ?: "").toString()
+        data["premiumFeatures"].parseInt(),
+        data["controlStyle"].parseInt(),
+        (data["noGuessing"] ?: 1).parseInt(),
+        data["language"].parseString(""),
+        data["openDirectly"].parseInt(0),
     )

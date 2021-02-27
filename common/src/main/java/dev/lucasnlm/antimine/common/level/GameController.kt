@@ -7,7 +7,7 @@ import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.logic.FlagAssistant
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
-import dev.lucasnlm.antimine.common.level.solver.LimitedBruteForceSolver
+import dev.lucasnlm.antimine.common.level.solver.LimitedCheckNeighborsSolver
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.models.Score
@@ -65,7 +65,7 @@ class GameController {
     private fun getArea(id: Int) = field.first { it.id == id }
 
     private fun plantMinesExcept(safeId: Int) {
-        val solver = LimitedBruteForceSolver()
+        val solver = LimitedCheckNeighborsSolver()
         do {
             val useSafeZone = minefield.width > 7 && minefield.height > 9
             field = minefieldCreator.create(safeId, useSafeZone)

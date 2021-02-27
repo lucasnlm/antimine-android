@@ -38,8 +38,8 @@
     </style>
 
     <style name="CustomAmoledTheme" parent="ThemeOverlay.MaterialComponents.Dark">
-        <item name="colorPrimary">#FF000000</item>
-        <item name="colorPrimaryDark">#FF000000</item>
+        <item name="colorPrimary">#FFFFFFFF</item>
+        <item name="colorPrimaryDark">#FFFFFFFF</item>
         <item name="colorAccent">#FFFFFFFF</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

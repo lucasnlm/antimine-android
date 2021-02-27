@@ -127,6 +127,7 @@
     <string name="help">Помощь</string>
     <string name="back">Назад</string>
     <string name="donation">Пожертвование</string>
+    <string name="open_on_game">Открыть на экране игры</string>
     <string name="show_windows">Показать окна</string>
     <string name="select_language">Выберите язык</string>
     <string name="switch_control">Переключатель: флаг и открыть</string>
