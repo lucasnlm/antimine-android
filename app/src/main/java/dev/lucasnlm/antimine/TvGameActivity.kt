@@ -32,6 +32,7 @@ import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.external.IAnalyticsManager
+import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
@@ -42,14 +43,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterface.OnDismissListener {
     private val preferencesRepository: IPreferencesRepository by inject()
-
     private val analyticsManager: IAnalyticsManager by inject()
-
     private val instantAppManager: IInstantAppManager by inject()
-
     private val savesRepository: ISavesRepository by inject()
-
     private val reviewWrapper: ReviewWrapper by inject()
+    private val featureFlagManager: IFeatureFlagManager by inject()
 
     val gameViewModel by viewModel<GameViewModel>()
 
@@ -204,8 +202,11 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
             // Instant App does nothing.
             savesRepository.setLimit(1)
         } else {
-            reviewWrapper.startInAppReview(this)
             preferencesRepository.incrementUseCount()
+
+            if (preferencesRepository.getUseCount() > featureFlagManager.minUsageToReview) {
+                reviewWrapper.startInAppReview(this)
+            }
         }
     }
 

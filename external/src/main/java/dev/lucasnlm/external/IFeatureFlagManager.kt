@@ -12,6 +12,7 @@ abstract class IFeatureFlagManager {
     abstract val isRecyclerScrollEnabled: Boolean
     abstract val isFoos: Boolean
     abstract val isThemeTastingEnabled: Boolean
+    abstract val minUsageToReview: Int
 
     abstract suspend fun refresh()
 }

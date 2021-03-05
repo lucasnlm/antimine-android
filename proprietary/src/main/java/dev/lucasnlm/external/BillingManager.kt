@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.filterNotNull
 
 class BillingManager(
     private val context: Context,
+    private val crashReporter: CrashReporter,
 ) : IBillingManager, BillingClientStateListener, PurchasesUpdatedListener {
 
     private val purchaseBroadcaster = ConflatedBroadcastChannel<PurchaseInfo>()
@@ -88,6 +89,8 @@ class BillingManager(
                 .purchasesList.let { it?.toList() ?: listOf() }
 
             handlePurchases(purchasesList)
+        } else {
+            crashReporter.sendError("Charge failed due to response ${billingResult.responseCode}")
         }
     }
 
@@ -96,6 +99,7 @@ class BillingManager(
             // The BillingClient is ready. You can query purchases here.
             purchases?.toList() ?: listOf()
         } else {
+            crashReporter.sendError("Charge update failed due to response ${billingResult.responseCode}")
             listOf()
         }
 
@@ -126,6 +130,7 @@ class BillingManager(
                 billingClient.launchBillingFlow(activity, flowParams)
             }
         } else {
+            crashReporter.sendError("Fail to charge due to unready status")
             purchaseBroadcaster.offer(PurchaseInfo.PurchaseFail)
         }
     }

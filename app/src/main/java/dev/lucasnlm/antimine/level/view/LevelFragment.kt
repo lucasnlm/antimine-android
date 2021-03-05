@@ -94,39 +94,41 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
 
     private fun centerMinefield(minefield: Minefield) = with(recyclerGrid) {
         post {
-            val singleAreaSize = dimensionRepository.areaSizeWithPadding()
-            val actionBarSize = dimensionRepository.actionBarSize()
-            val displayMetrics = DisplayMetrics()
-            requireActivity().windowManager.defaultDisplay.getRealMetrics(displayMetrics)
-            val screenHeight = if (context.isAndroidTv()) {
-                displayMetrics.heightPixels
-            } else {
-                displayMetrics.heightPixels - actionBarSize
-            }
+            activity?.let {
+                val singleAreaSize = dimensionRepository.areaSizeWithPadding()
+                val actionBarSize = dimensionRepository.actionBarSize()
+                val displayMetrics = DisplayMetrics()
+                it.windowManager.defaultDisplay.getRealMetrics(displayMetrics)
+                val screenHeight = if (context.isAndroidTv()) {
+                    displayMetrics.heightPixels
+                } else {
+                    displayMetrics.heightPixels - actionBarSize
+                }
 
-            val screenWidth = displayMetrics.widthPixels
-            val boardWidth = singleAreaSize * minefield.width
-            val boardHeight = singleAreaSize * minefield.height
+                val screenWidth = displayMetrics.widthPixels
+                val boardWidth = singleAreaSize * minefield.width
+                val boardHeight = singleAreaSize * minefield.height
 
-            val multiplierY = if (boardHeight > screenHeight) {
-                (boardHeight / screenHeight - 1) * 0.5
-            } else {
-                0.0
-            }
+                val multiplierY = if (boardHeight > screenHeight) {
+                    (boardHeight / screenHeight - 1) * 0.5
+                } else {
+                    0.0
+                }
 
-            val multiplierX = if (boardWidth > screenWidth) {
-                (boardWidth / screenWidth - 1) * 0.5
-            } else {
-                0.0
-            }
+                val multiplierX = if (boardWidth > screenWidth) {
+                    (boardWidth / screenWidth - 1) * 0.5
+                } else {
+                    0.0
+                }
 
-            val dx = (boardWidth - screenWidth).coerceAtLeast(0.0f) * multiplierX
-            val dy = (boardHeight - screenHeight).coerceAtLeast(0.0f) * multiplierY
+                val dx = (boardWidth - screenWidth).coerceAtLeast(0.0f) * multiplierX
+                val dy = (boardHeight - screenHeight).coerceAtLeast(0.0f) * multiplierY
 
-            smoothScrollBy(dx.toInt(), dy.toInt(), null, 300)
-            post {
-                requestLayout()
-                focusOnCenterIfNeeded()
+                smoothScrollBy(dx.toInt(), dy.toInt(), null, 300)
+                post {
+                    requestLayout()
+                    focusOnCenterIfNeeded()
+                }
             }
         }
     }

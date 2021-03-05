@@ -16,7 +16,11 @@ class AdMobAdsManager(
     private var failErrorCause: String? = null
 
     override fun start(context: Context) {
-        MobileAds.initialize(context) {
+        if (rewardedAd == null) {
+            MobileAds.initialize(context) {
+                preloadAds(context)
+            }
+        } else {
             preloadAds(context)
         }
     }

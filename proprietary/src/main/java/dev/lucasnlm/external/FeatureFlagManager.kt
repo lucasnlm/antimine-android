@@ -18,6 +18,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         CONTINUE_ENABLED to true,
         RECYCLER_SCROLL_ENABLED to true,
         THEME_TASTING_ENABLED to true,
+        MIN_USAGE_TO_REVIEW to 5,
     )
 
     private val remoteConfig: FirebaseRemoteConfig by lazy {
@@ -31,6 +32,14 @@ class FeatureFlagManager : IFeatureFlagManager() {
             defaultMap[key] as Boolean
         } else {
             remoteConfig.getBoolean(key)
+        }
+    }
+
+    private fun getInt(key: String): Int {
+        return if (BuildConfig.DEBUG) {
+            defaultMap[key] as Int
+        } else {
+            remoteConfig.getLong(key).toInt()
         }
     }
 
@@ -76,6 +85,10 @@ class FeatureFlagManager : IFeatureFlagManager() {
         getBoolean(THEME_TASTING_ENABLED)
     }
 
+    override val minUsageToReview: Int by lazy {
+        getInt(MIN_USAGE_TO_REVIEW)
+    }
+
     override suspend fun refresh() {
         if (!BuildConfig.DEBUG) {
             withContext(Dispatchers.IO) {
@@ -101,5 +114,6 @@ class FeatureFlagManager : IFeatureFlagManager() {
         private const val CONTINUE_ENABLED = "continue_enabled"
         private const val RECYCLER_SCROLL_ENABLED = "recycler_scroll_enabled"
         private const val THEME_TASTING_ENABLED = "theme_tasting_enabled"
+        private const val MIN_USAGE_TO_REVIEW = "min_usage_to_review"
     }
 }

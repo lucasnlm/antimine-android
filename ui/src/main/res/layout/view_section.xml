@@ -36,6 +36,7 @@
         app:layout_constraintEnd_toStartOf="@+id/endButton"
         app:layout_constraintStart_toEndOf="@+id/startButton"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:text="Section Name" />
 
     <ImageView
