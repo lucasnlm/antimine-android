@@ -22,7 +22,7 @@ import org.koin.dsl.module
 val ExternalModule = module {
     single { InstantAppManager() } bind IInstantAppManager::class
 
-    single { BillingManager(get()) } bind IBillingManager::class
+    single { BillingManager() } bind IBillingManager::class
 
     single { PlayGamesManager(get()) } bind IPlayGamesManager::class
 

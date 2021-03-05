@@ -136,12 +136,11 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 analyticsManager.sentEvent(Analytics.CloseEndGameScreen)
                                 activity?.let {
                                     if (!it.isFinishing) {
-                                        gameViewModel.viewModelScope.launch {
+                                        lifecycleScope.launch {
                                             gameViewModel.revealMines()
                                         }
                                     }
                                 }
-
                                 dismissAllowingStateLoss()
                             }
 

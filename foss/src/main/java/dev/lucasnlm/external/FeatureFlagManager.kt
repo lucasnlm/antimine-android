@@ -12,6 +12,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
     override val isRecyclerScrollEnabled: Boolean = true
     override val isFoos: Boolean = true
     override val isThemeTastingEnabled: Boolean = true
+    override val minUsageToReview: Int = Int.MAX_VALUE
 
     override suspend fun refresh() {
         // No Feature Flags on FOSS

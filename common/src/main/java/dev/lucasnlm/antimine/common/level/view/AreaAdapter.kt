@@ -179,6 +179,7 @@ class AreaAdapter(
                         MotionEvent.ACTION_DOWN -> {
                             view.isPressed = true
                             velocityTracker?.clear()
+                            velocityTracker?.recycle()
                             velocityTracker = velocityTracker ?: VelocityTracker.obtain()
                             velocityTracker?.addMovement(motionEvent)
 

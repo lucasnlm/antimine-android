@@ -412,23 +412,25 @@ open class GameViewModel(
     }
 
     suspend fun revealMines() {
-        val explosionTime = (explosionDelay() / gameController.getMinesCount().coerceAtLeast(10))
-        val delayMillis = explosionTime.coerceAtMost(25L)
+        if (initialized) {
+            val explosionTime = (explosionDelay() / gameController.getMinesCount().coerceAtLeast(10))
+            val delayMillis = explosionTime.coerceAtMost(25L)
 
-        gameController.run {
-            showWrongFlags()
-            refreshField()
+            gameController.run {
+                showWrongFlags()
+                refreshField()
 
-            findExplodedMine()?.let { exploded ->
-                takeExplosionRadius(exploded).take(20).forEach {
-                    revealArea(it.id)
-                    refreshField()
-                    delay(delayMillis)
+                findExplodedMine()?.let { exploded ->
+                    takeExplosionRadius(exploded).take(20).forEach {
+                        revealArea(it.id)
+                        refreshField()
+                        delay(delayMillis)
+                    }
                 }
-            }
 
-            showAllMines()
-            refreshField()
+                showAllMines()
+                refreshField()
+            }
         }
     }
 

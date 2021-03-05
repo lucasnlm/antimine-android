@@ -1,17 +1,13 @@
 package dev.lucasnlm.external
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class BillingManager(
-    private val context: Context,
-) : IBillingManager {
-
+class BillingManager : IBillingManager {
     override fun start() {
         // Empty
     }

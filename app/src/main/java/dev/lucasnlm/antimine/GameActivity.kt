@@ -41,12 +41,14 @@ import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
+import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IAnalyticsManager
+import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -60,6 +62,9 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private val savesRepository: ISavesRepository by inject()
     private val shareViewModel: ShareManager by inject()
     private val playGamesManager: IPlayGamesManager by inject()
+    private val adsManager: IAdsManager by inject()
+    private val reviewWrapper: ReviewWrapper by inject()
+    private val featureFlagManager: IFeatureFlagManager by inject()
 
     private val gameViewModel by viewModel<GameViewModel>()
 
@@ -78,6 +83,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
+
+        if (!preferencesRepository.isPremiumEnabled()) {
+            adsManager.start(this)
+        }
 
         bindViewModel()
         bindToolbar()
@@ -351,6 +360,16 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
+    private fun startNewGameWithAds() {
+        if (!preferencesRepository.isPremiumEnabled() && featureFlagManager.isAdsOnNewGameEnabled) {
+            adsManager.showRewardedAd(this) {
+                gameViewModel.startNewGame()
+            }
+        } else {
+            gameViewModel.startNewGame()
+        }
+    }
+
     private fun refreshRetryShortcut() {
         shortcutIcon.apply {
             TooltipCompat.setTooltipText(this, getString(R.string.new_game))
@@ -363,14 +382,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
                     if (confirmResign) {
                         newGameConfirmation {
-                            GlobalScope.launch {
-                                gameViewModel.startNewGame()
-                            }
+                            startNewGameWithAds()
                         }
                     } else {
-                        GlobalScope.launch {
-                            gameViewModel.startNewGame()
-                        }
+                        startNewGameWithAds()
                     }
                 }
             }
@@ -397,6 +412,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             savesRepository.setLimit(1)
         } else {
             preferencesRepository.incrementUseCount()
+
+            if (preferencesRepository.getUseCount() > featureFlagManager.minUsageToReview) {
+                reviewWrapper.startInAppReview(this)
+            }
         }
     }
 

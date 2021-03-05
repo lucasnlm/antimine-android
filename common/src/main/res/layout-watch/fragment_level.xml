@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <dev.lucasnlm.antimine.common.level.view.CustomRecyclerView
         android:id="@+id/recyclerGrid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
