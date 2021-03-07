@@ -20,7 +20,6 @@
     <string name="beginner">Začátečník</string>
     <string name="intermediate">Středně pokročilý</string>
     <string name="expert">Expert</string>
-    <string name="support_description">S vaší pomocí budeme moci implementovat nové funkce a udržet náš projekt aktivní.</string>
     <string name="open">Otevřít</string>
     <string name="settings">Nastavení</string>
     <string name="animations">Animace</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Zaoblený čtverec</string>
     <string name="system">Systém</string>
     <string name="rating">Zpětná vazba</string>
-    <string name="support_title">Podpořte nás!</string>
-    <string name="support_action">Podporovat</string>
-    <string name="rating_message">Pokud se vám tato hra líbí, dejte nám prosím zpětnou vazbu. Hodně nám to pomůže.</string>
-    <string name="used_software_text">Tato hra používá následující software třetích stran:</string>
-    <string name="translators_text">Tato hra byla přeložena těmito lidmi:</string>
     <string name="sign_in_failed">Nelze se přihlásit. Zkontrolujte síťové připojení a akci opakujte.</string>
     <string name="you_won">Vyhráli jste!</string>
     <string name="victories">Vítězství</string>
@@ -90,7 +84,6 @@
     <string name="resume">Pokračovat</string>
     <string name="yes">Ano</string>
     <string name="unlock">Odemknout</string>
-    <string name="unlock_all">Odemknout vše</string>
     <string name="achievements">Úspěchy</string>
     <string name="no">Ne</string>
     <string name="general">Obecné</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Smazat vše</string>
     <string name="appearance">Vzhled</string>
     <string name="themes">Motivy</string>
-    <string name="try_it">Zkuste to</string>
     <string name="delete_all_message">Trvale smazat všechny události.</string>
     <string name="all_mines_disabled">Všechny miny byly zakázány.</string>
     <string name="desc_convered_area">Pokrytá oblast</string>

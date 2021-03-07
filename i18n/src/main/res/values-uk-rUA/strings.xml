@@ -20,7 +20,6 @@
     <string name="beginner">Новачок</string>
     <string name="intermediate">Середній</string>
     <string name="expert">Експерт</string>
-    <string name="support_description">З вашою допомогою ми зможемо реалізувати нові функції і залишити наш проект активним.</string>
     <string name="open">Відкрити</string>
     <string name="settings">Налаштування</string>
     <string name="animations">Анімації</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Округлі квадрати</string>
     <string name="system">Система</string>
     <string name="rating">Відгук</string>
-    <string name="support_title">Підтримай нас!</string>
-    <string name="support_action">Підтримати</string>
-    <string name="rating_message">Якщо вам подобається ця гра, то залиште нам свій відгук. Це нам дуже допоможе.</string>
-    <string name="used_software_text">Ця гра використовує наступне стороннє програмне забезпечення:</string>
-    <string name="translators_text">Цю гру переклали такі люди:</string>
     <string name="sign_in_failed">Не вдається увійти. Перевірте підключення до Інтернету і повторіть спробу.</string>
     <string name="you_won">Ви перемогли!</string>
     <string name="victories">Перемог</string>
@@ -90,7 +84,6 @@
     <string name="resume">Відновити</string>
     <string name="yes">Так</string>
     <string name="unlock">Розблокування</string>
-    <string name="unlock_all">Розблокувати все</string>
     <string name="achievements">Досягнення</string>
     <string name="no">Ні</string>
     <string name="general">Загальне</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Видалити все</string>
     <string name="appearance">Зовнішній вигляд</string>
     <string name="themes">Тема</string>
-    <string name="try_it">Спробувати</string>
     <string name="delete_all_message">Видалити всі події назавжди.</string>
     <string name="all_mines_disabled">Всі міни були вимкнуті.</string>
     <string name="desc_convered_area">Прихована зона</string>

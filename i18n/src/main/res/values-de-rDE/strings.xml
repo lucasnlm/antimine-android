@@ -20,7 +20,6 @@
     <string name="beginner">Anfänger</string>
     <string name="intermediate">Mittleres Niveau</string>
     <string name="expert">Experte</string>
-    <string name="support_description">Mit deiner Hilfe werden wir in der Lage sein, neue Funktionen zu implementieren und unser Projekt aktiv zu halten.</string>
     <string name="open">Öffnen</string>
     <string name="settings">Einstellungen</string>
     <string name="animations">Animationen</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Abgerundetes Quadrat</string>
     <string name="system">System</string>
     <string name="rating">Rückmeldung</string>
-    <string name="support_title">Unterstütze uns!</string>
-    <string name="support_action">Zum Support</string>
-    <string name="rating_message">Wenn dir dieses Spiel gefällt, gib uns bitte eine Rückmeldung. Es wird uns sehr helfen.</string>
-    <string name="used_software_text">Dieses Spiel benutzt folgende Software von Drittanbietern:</string>
-    <string name="translators_text">Dieses Spiel wurde von den folgenden Personen übersetzt:</string>
     <string name="sign_in_failed">Login fehlgeschlagen. Überprüfe Deine Netzwerkverbindung und versuche es erneut.</string>
     <string name="you_won">Du hast gewonnen!</string>
     <string name="victories">Siege</string>
@@ -90,7 +84,6 @@
     <string name="resume">Fortfahren</string>
     <string name="yes">Ja</string>
     <string name="unlock">Entsperren</string>
-    <string name="unlock_all">Alles entsperren</string>
     <string name="achievements">Erfolge</string>
     <string name="no">Nein</string>
     <string name="general">Allgemein</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Alles löschen</string>
     <string name="appearance">Erscheinungsbild</string>
     <string name="themes">Themen</string>
-    <string name="try_it">Versuche es</string>
     <string name="delete_all_message">Alle Ereignisse dauerhaft löschen.</string>
     <string name="all_mines_disabled">Alle Minen wurden wirkungslos gemacht.</string>
     <string name="desc_convered_area">Abgedeckte Fläche</string>

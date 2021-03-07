@@ -20,7 +20,6 @@
     <string name="beginner">Prinsipiante</string>
     <string name="intermediate">Mezan</string>
     <string name="expert">Mestro</string>
-    <string name="support_description">Co el to juto, A podaremo inplementar nove caraterìsteghe e mantenjir ativo el nostro projeto.</string>
     <string name="open">Verzi</string>
     <string name="settings">Inpostasion</string>
     <string name="animations">Animasion</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Cuadrati Stondài</string>
     <string name="system">Sistema</string>
     <string name="rating">Vałutasion</string>
-    <string name="support_title">Dene na man!</string>
-    <string name="support_action">Par jutarne</string>
-    <string name="rating_message">Se el zogo el te piaze, par piaser dane na vałutasion. Ła ne jutarà un pasto.</string>
-    <string name="used_software_text">Sto zogo el dòpara el software de terse parti drioman:</string>
-    <string name="translators_text">Sto zogo el ze stà traduzesto da łe parsone drioman:</string>
     <string name="sign_in_failed">Aceso mìa riusìo. Controła ła conesion e prova da novo.</string>
     <string name="you_won">Te ghè vinto!</string>
     <string name="victories">Vitorie</string>
@@ -90,7 +84,6 @@
     <string name="resume">Taca da novo</string>
     <string name="yes">Sì</string>
     <string name="unlock">Dezbroca</string>
-    <string name="unlock_all">Dezbroca Tuto</string>
     <string name="achievements">Conchiste</string>
     <string name="no">Nò</string>
     <string name="general">Zenarałe</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Scanseła tuto</string>
     <string name="appearance">Siera</string>
     <string name="themes">Temi</string>
-    <string name="try_it">Pròvało</string>
     <string name="delete_all_message">Scanseła tuti i eventi permanentemente.</string>
     <string name="all_mines_disabled">Tute łe mine łe ze stà dezativà.</string>
     <string name="desc_convered_area">Aree coverte</string>

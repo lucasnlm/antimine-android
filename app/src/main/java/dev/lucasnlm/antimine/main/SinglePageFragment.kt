@@ -18,7 +18,6 @@ import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
@@ -265,10 +264,9 @@ class SinglePageFragment : Fragment(R.layout.fragment_main_single_page) {
                 startIcon = R.drawable.remove_ads,
                 extra = price,
                 onAction = {
-                    SupportAppDialogFragment.newRemoveAdsSupportDialog(
-                        context,
-                        price,
-                    ).show(parentFragmentManager, SupportAppDialogFragment.TAG)
+                    lifecycleScope.launch {
+                        activity?.let { billingManager.charge(it) }
+                    }
                 }
             )
         }

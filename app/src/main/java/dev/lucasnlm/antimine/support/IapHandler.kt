@@ -35,6 +35,7 @@ class IapHandler(
     fun listenPurchase(): Flow<Boolean> = billingListener.asStateFlow()
 
     private fun onLockStatusChanged(status: Boolean) {
+        billingListener.tryEmit(status)
         preferencesManager.setPremiumFeatures(status)
     }
 

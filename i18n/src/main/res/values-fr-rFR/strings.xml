@@ -20,7 +20,6 @@
     <string name="beginner">Facile</string>
     <string name="intermediate">Intermédiaire</string>
     <string name="expert">Difficile</string>
-    <string name="support_description">Avec votre aide, nous serons en mesure de mettre en place de nouvelles fonctionnalités et de maintenir notre projet actif.</string>
     <string name="open">Ouvrir</string>
     <string name="settings">Réglages</string>
     <string name="animations">Animations</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Carré arrondi</string>
     <string name="system">Système</string>
     <string name="rating">Retour d\'expérience</string>
-    <string name="support_title">Soutenez-nous !</string>
-    <string name="support_action">Assistance</string>
-    <string name="rating_message">Si vous aimez ce jeu, n\'hésitez pas à jour donner un retour. Ça nous serait très utile.</string>
-    <string name="used_software_text">Ce jeu utilise ces logiciels tiers suivants :</string>
-    <string name="translators_text">Ce jeu a été traduit par les personnes suivantes :</string>
     <string name="sign_in_failed">Erreur lors de la connexion. Vérifiez l\'état de votre connexion Internet et réessayez.</string>
     <string name="you_won">Victoire !</string>
     <string name="victories">Victoires</string>
@@ -90,7 +84,6 @@
     <string name="resume">Nouv. partie</string>
     <string name="yes">Oui</string>
     <string name="unlock">Déverrouiller</string>
-    <string name="unlock_all">Tout débloquer</string>
     <string name="achievements">Succès</string>
     <string name="no">Non</string>
     <string name="general">Général</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Supprimer tout</string>
     <string name="appearance">Apparence</string>
     <string name="themes">Thèmes</string>
-    <string name="try_it">Essayez-le</string>
     <string name="delete_all_message">Supprimer définitivement tous les événements.</string>
     <string name="all_mines_disabled">Toutes les mines ont été désamorcées.</string>
     <string name="desc_convered_area">Terrain couvert</string>

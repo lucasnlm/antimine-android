@@ -20,7 +20,6 @@
     <string name="beginner">Başlangıç</string>
     <string name="intermediate">Orta düzey</string>
     <string name="expert">Uzman</string>
-    <string name="support_description">Sizin yardımınızla, yeni özellikler ekleyebilir ve projemizi etkin tutabiliriz.</string>
     <string name="open">Aç</string>
     <string name="settings">Ayarlar</string>
     <string name="animations">Animasyonlar</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Yuvarlak kare</string>
     <string name="system">Sistem</string>
     <string name="rating">Geri bildirim</string>
-    <string name="support_title">Bizi destekleyin!</string>
-    <string name="support_action">Destek için</string>
-    <string name="rating_message">Bu oyunu beğendiyseniz, lütfen bize bir geri bildirim verin. Bize çok yardımcı olacak.</string>
-    <string name="used_software_text">Bu oyun aşağıdaki üçüncü taraf yazılımlarını kullanır:</string>
-    <string name="translators_text">Bu oyun aşağıdaki kişiler tarafından çevrilmiştir: </string>
     <string name="sign_in_failed">Oturum açılamadı. Lütfen ağ bağlantınızı kontrol edip tekrar deneyin.</string>
     <string name="you_won">Kazandın!</string>
     <string name="victories">Zaferler</string>
@@ -90,7 +84,6 @@
     <string name="resume">Devam et</string>
     <string name="yes">Evet</string>
     <string name="unlock">Kilidini Aç</string>
-    <string name="unlock_all">Tümünü aç</string>
     <string name="achievements">Başarımlar</string>
     <string name="no">Hayır</string>
     <string name="general">Genel</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Tümünü sil</string>
     <string name="appearance">Görünüm</string>
     <string name="themes">Temalar</string>
-    <string name="try_it">Deneyin</string>
     <string name="delete_all_message">Tüm etkinlikleri kalıcı olarak silin.</string>
     <string name="all_mines_disabled">Tüm mayınlar devre dışı bırakıldı.</string>
     <string name="desc_convered_area">Kapalı alan</string>
@@ -127,7 +119,7 @@
     <string name="help">Yardım</string>
     <string name="back">Geri</string>
     <string name="donation">Bağış</string>
-    <string name="open_on_game">Open on game screen</string>
+    <string name="open_on_game">Oyun ekranına aç</string>
     <string name="show_windows">Pencereleri göster</string>
     <string name="select_language">Dil Seç</string>
     <string name="switch_control">Değiştir: Bayrak ve Açık</string>

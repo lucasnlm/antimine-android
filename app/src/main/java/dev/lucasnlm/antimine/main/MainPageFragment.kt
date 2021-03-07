@@ -15,7 +15,6 @@ import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
 import dev.lucasnlm.antimine.support.IapHandler
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
@@ -222,10 +221,9 @@ class MainPageFragment : Fragment(R.layout.fragment_main_new_game) {
                 startIcon = R.drawable.remove_ads,
                 extra = price,
                 onAction = {
-                    SupportAppDialogFragment.newRemoveAdsSupportDialog(
-                        context,
-                        price,
-                    ).show(parentFragmentManager, SupportAppDialogFragment.TAG)
+                    lifecycleScope.launch {
+                        activity?.let { billingManager.charge(it) }
+                    }
                 }
             )
         }

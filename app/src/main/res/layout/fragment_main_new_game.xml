@@ -6,7 +6,8 @@
     android:fadeScrollbars="false"
     android:scrollbarThumbVertical="?attr/colorAccent"
     android:scrollbarSize="4dp"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:animateLayoutChanges="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

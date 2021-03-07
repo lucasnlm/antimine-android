@@ -20,7 +20,6 @@
     <string name="beginner">초급</string>
     <string name="intermediate">중급</string>
     <string name="expert">고급</string>
-    <string name="support_description">새로운 기능을 구현하고 프로젝트가 계속 진행될 수 있게 도와주세요.</string>
     <string name="open">오픈</string>
     <string name="settings">설정</string>
     <string name="animations">애니메이션</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">모서리가 둥근 사각형</string>
     <string name="system">시스템</string>
     <string name="rating">피드백</string>
-    <string name="support_title">우리를 지원해주세요!</string>
-    <string name="support_action">지원</string>
-    <string name="rating_message">이 게임이 좋으시다면, 피드백을 남겨주세요. 저희에게 많은 도움이 됩니다.</string>
-    <string name="used_software_text">이 게임은 해당 서드파티 소프트웨어를 사용합니다:</string>
-    <string name="translators_text">이 게임은 다음 사람들에 의해 번역되었습니다:</string>
     <string name="sign_in_failed">게임에 접속할 수 없습니다. 네트워크 환경을 확인해고 다시 접속해주세요.</string>
     <string name="you_won">성공!</string>
     <string name="victories">성공 횟수</string>
@@ -90,7 +84,6 @@
     <string name="resume">계속하기</string>
     <string name="yes">네</string>
     <string name="unlock">잠금 해제</string>
-    <string name="unlock_all">모두 잠금 해제</string>
     <string name="achievements">도전 과제</string>
     <string name="no">아니오</string>
     <string name="general">기본설정</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">모두 삭제</string>
     <string name="appearance">모양새</string>
     <string name="themes">테마 선택</string>
-    <string name="try_it">사용해보세요</string>
     <string name="delete_all_message">모든 이벤트 알림을 영구히 삭제합니다.</string>
     <string name="all_mines_disabled">모든 지뢰를 찾았습니다.</string>
     <string name="desc_convered_area">연 칸</string>

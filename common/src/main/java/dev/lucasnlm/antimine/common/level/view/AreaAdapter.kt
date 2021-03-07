@@ -40,8 +40,6 @@ class AreaAdapter(
 
     private val theme = viewModel.getAppTheme()
 
-    private var velocityTracker: VelocityTracker? = null
-
     init {
         setHasStableIds(true)
         paintSettings = createAreaPaintSettings(
@@ -153,6 +151,7 @@ class AreaAdapter(
                 )
             } else {
                 var longClickJob: Job? = null
+                var velocityTracker: VelocityTracker? = null
                 view.setOnTouchListener { _, motionEvent ->
                     when (motionEvent.action) {
                         MotionEvent.ACTION_MOVE -> {
@@ -178,9 +177,8 @@ class AreaAdapter(
                         }
                         MotionEvent.ACTION_DOWN -> {
                             view.isPressed = true
-                            velocityTracker?.clear()
                             velocityTracker?.recycle()
-                            velocityTracker = velocityTracker ?: VelocityTracker.obtain()
+                            velocityTracker = VelocityTracker.obtain()
                             velocityTracker?.addMovement(motionEvent)
 
                             longClickJob = coroutineScope.launch {

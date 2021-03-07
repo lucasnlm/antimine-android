@@ -8,7 +8,6 @@ import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import dev.lucasnlm.antimine.about.views.info.AboutInfoFragment
 import dev.lucasnlm.antimine.about.views.licenses.LicensesFragment
-import dev.lucasnlm.antimine.about.views.translators.TranslatorsFragment
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.coroutines.flow.collect
@@ -38,10 +37,6 @@ class AboutActivity : ThematicActivity(R.layout.activity_about) {
                     AboutEvent.ThirdPartyLicenses -> {
                         section.bindText(R.string.licenses)
                         replaceFragment(LicensesFragment(), LicensesFragment.TAG)
-                    }
-                    AboutEvent.Translators -> {
-                        section.bindText(R.string.translation)
-                        replaceFragment(TranslatorsFragment(), TranslatorsFragment.TAG)
                     }
                     else -> {
                     }

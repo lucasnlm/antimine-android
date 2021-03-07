@@ -20,7 +20,6 @@
     <string name="beginner">Iniciante</string>
     <string name="intermediate">Intermediário</string>
     <string name="expert">Especialista</string>
-    <string name="support_description">Com a sua ajuda, poderemos implementar novos recursos e manter o nosso projeto ativo.</string>
     <string name="open">Abrir</string>
     <string name="settings">Configurações</string>
     <string name="animations">Animações</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Quadrado arredondado</string>
     <string name="system">Sistema</string>
     <string name="rating">Opinião</string>
-    <string name="support_title">Apoia-nos!</string>
-    <string name="support_action">Apoiar</string>
-    <string name="rating_message">Se gostou deste jogo, por favor deixe o seu feedback. Irá ser muito útil.</string>
-    <string name="used_software_text">Este jogo usa o seguinte software de terceiros:</string>
-    <string name="translators_text">Este jogo foi traduzido pelas seguintes pessoas:</string>
     <string name="sign_in_failed">Não foi possível fazer o sign in. Por favor verifique a sua conexão à Internet e tente de novo.</string>
     <string name="you_won">Ganhou!</string>
     <string name="victories">Vitórias</string>
@@ -90,7 +84,6 @@
     <string name="resume">Continuar</string>
     <string name="yes">Sim</string>
     <string name="unlock">Desbloquear</string>
-    <string name="unlock_all">Desbloquear tudo</string>
     <string name="achievements">Conquistas</string>
     <string name="no">Não</string>
     <string name="general">Geral</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Apagar tudo</string>
     <string name="appearance">Aparência</string>
     <string name="themes">Temas</string>
-    <string name="try_it">Experimente</string>
     <string name="delete_all_message">Excluir todos os eventos permanentemente.</string>
     <string name="all_mines_disabled">Todas as minas foram desativadas.</string>
     <string name="desc_convered_area">Área coberta</string>

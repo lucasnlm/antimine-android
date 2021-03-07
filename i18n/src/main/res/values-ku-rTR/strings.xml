@@ -21,7 +21,6 @@
     <string name="beginner">تازەکار</string>
     <string name="intermediate">ناوەندی</string>
     <string name="expert">پسپۆر</string>
-    <string name="support_description">بە یارمەتی ئێوە، دەتوانین تایبەتمەندی نوێ جێبەجێ بکەین و پرۆژەکەمان بە چالاکی بهێڵین.</string>
     <string name="open">کردنەوە</string>
     <string name="settings">ڕێکخستنەکان</string>
     <string name="animations">ئەنیمەیشنەکان</string>
@@ -46,11 +45,6 @@
     <string name="rounded_square">چوارگۆشەی چەماو</string>
     <string name="system">سیستەم</string>
     <string name="rating">پێڕاگه‌یاندنه‌وه‌</string>
-    <string name="support_title">پشتگیریمان بکە!</string>
-    <string name="support_action">بۆ پشتیوانی</string>
-    <string name="rating_message">ئەگەر حەزت لەم یارییە هەیە، تکایە کاردانەوەمان پێبدە. زۆر یارمەتیمان دەدات.</string>
-    <string name="used_software_text">ئەم یارییە نەرمامرازی لایەنی سێیەم بەکاردێنێت:</string>
-    <string name="translators_text">ئەم یارییە لەلایەن ئەم کەسانەوە وەرگێڕدرا:</string>
     <string name="sign_in_failed">چوونە ژوورەوە سەرکەوتوو نەبوو. تکایە گرێدانی تۆڕەکەت بپشکنە و دووبارە هەوڵ بدەرەوە.</string>
     <string name="you_won">تۆبردتەوە!</string>
     <string name="victories">سەرکەوتنەکان</string>
@@ -91,7 +85,6 @@
     <string name="resume">دەستپێکردنەوەی</string>
     <string name="yes">بەڵێ</string>
     <string name="unlock">کردنەوەی قفل</string>
-    <string name="unlock_all">کردنەوەی قفلی هەمووی</string>
     <string name="achievements">دەستکەوتەکان</string>
     <string name="no">نەخێر</string>
     <string name="general">گشتی</string>
@@ -112,7 +105,6 @@
     <string name="delete_all">سڕینەوەی هەمووی</string>
     <string name="appearance">دەرکەوتن</string>
     <string name="themes">ڕووکارەکان</string>
-    <string name="try_it">تاقی بکەرەوە</string>
     <string name="delete_all_message">سڕینەوەی هەموو ڕووداوەکان بە هەمیشەیی.</string>
     <string name="all_mines_disabled">هەموو مینەکان لە کارخرابوون.</string>
     <string name="desc_convered_area">ڕووبەری داپۆشراو</string>

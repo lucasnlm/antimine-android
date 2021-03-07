@@ -20,7 +20,6 @@
     <string name="beginner">Pemula</string>
     <string name="intermediate">Menengah</string>
     <string name="expert">Ahli</string>
-    <string name="support_description">Dengan bantuan Anda, kami bisa menerapkan fitur baru dan menjaga proyek kami tetap aktif.</string>
     <string name="open">Buka</string>
     <string name="settings">Pengaturan</string>
     <string name="animations">Animasi</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Persegi Bulat</string>
     <string name="system">Sistem</string>
     <string name="rating">Umpan Balik</string>
-    <string name="support_title">Dukung kami!</string>
-    <string name="support_action">Untuk mendukung</string>
-    <string name="rating_message">Jika Anda menyukai game ini, tolong beri kami umpan balik. ini akan banyak membantu kami.</string>
-    <string name="used_software_text">Game ini menggunakan software pihak ketiga berikut:</string>
-    <string name="translators_text">Game ini diterjemahkan oleh orang-orang berikut:</string>
     <string name="sign_in_failed">Gagal untuk masuk. Silakan periksa koneksi jaringan anda dan coba lagi.</string>
     <string name="you_won">Anda menang!</string>
     <string name="victories">Kemenangan</string>
@@ -90,7 +84,6 @@
     <string name="resume">Lanjutkan</string>
     <string name="yes">Ya</string>
     <string name="unlock">Buka</string>
-    <string name="unlock_all">Buka semua</string>
     <string name="achievements">Prestasi</string>
     <string name="no">Tidak</string>
     <string name="general">Umum</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Hapus semua</string>
     <string name="appearance">Penampilan</string>
     <string name="themes">Tema</string>
-    <string name="try_it">Cobalah</string>
     <string name="delete_all_message">Hapus permanen semua kejadian.</string>
     <string name="all_mines_disabled">Semua ranjau dimatikan.</string>
     <string name="desc_convered_area">Area tertutupi</string>

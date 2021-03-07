@@ -20,7 +20,6 @@
     <string name="beginner">Αρχάριος</string>
     <string name="intermediate">Ενδιάμεση</string>
     <string name="expert">Εξπέρ</string>
-    <string name="support_description">Με τη βοήθειά σας, θα μπορέσουμε να εφαρμόσουμε νέες δυνατότητες και να διατηρήσουμε το έργο μας ενεργό.</string>
     <string name="open">Άνοιγμα</string>
     <string name="settings">Ρυθμίσεις</string>
     <string name="animations">Εφέ Κίνησης</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Στρογγυλεμένο τετράγωνο</string>
     <string name="system">Σύστημα</string>
     <string name="rating">Αξιολόγηση</string>
-    <string name="support_title">Στηρίξτε μας!</string>
-    <string name="support_action">Στηρίξτε μας</string>
-    <string name="rating_message">Αν σας αρέσει αυτό το παιχνίδι, παρακαλούμε δώστε μας τα σχόλιά σας. Θα μας βοηθήσει πολύ.</string>
-    <string name="used_software_text">Αυτό το παιχνίδι χρησιμοποιεί το ακόλουθο λογισμικό τρίτων:</string>
-    <string name="translators_text">Αυτό το παιχνίδι μεταφράστηκε από τα ακόλουθα άτομα:</string>
     <string name="sign_in_failed">Αποτυχία σύνδεσης. Ελέγξτε τη σύνδεση δικτύου σας και δοκιμάστε ξανά.</string>
     <string name="you_won">Κέρδισες!</string>
     <string name="victories">Νίκες</string>
@@ -90,7 +84,6 @@
     <string name="resume">Συνέχεια</string>
     <string name="yes">Ναι</string>
     <string name="unlock">Ξεκλείδωμα</string>
-    <string name="unlock_all">Ξεκλείδωμα όλων</string>
     <string name="achievements">Επιτεύγματα</string>
     <string name="no">Όχι</string>
     <string name="general">Γενικά</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Διαγραφή όλων</string>
     <string name="appearance">Εμφάνιση</string>
     <string name="themes">Θέμα</string>
-    <string name="try_it">Δοκιμάστε το</string>
     <string name="delete_all_message">Μόνιμη διαγραφή επιλεγμένων.</string>
     <string name="all_mines_disabled">Όλες οι νάρκες απενεργοποιήθηκαν.</string>
     <string name="desc_convered_area">Καλυμμένη περιοχή</string>
@@ -127,7 +119,7 @@
     <string name="help">Βοήθεια</string>
     <string name="back">Πίσω</string>
     <string name="donation">Δωρεά</string>
-    <string name="open_on_game">Open on game screen</string>
+    <string name="open_on_game">Άνοιγμα στην οθόνη του παιχνιδιού</string>
     <string name="show_windows">Εμφάνιση παραθύρων</string>
     <string name="select_language">Επιλέξτε γλώσσα</string>
     <string name="switch_control">Διακόπτης: Σημαία και Άνοιγμα</string>

@@ -20,7 +20,6 @@
     <string name="beginner">Nybörjare</string>
     <string name="intermediate">Mellanliggande</string>
     <string name="expert">Avancerat</string>
-    <string name="support_description">Med din hjälp kan vi implementera nya funktioner och hålla vårt projekt aktivt.</string>
     <string name="open">Öppna</string>
     <string name="settings">Inställningar</string>
     <string name="animations">Animationer</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Avrundad kvadrat</string>
     <string name="system">System</string>
     <string name="rating">Feedback</string>
-    <string name="support_title">Stöd oss!</string>
-    <string name="support_action">Till support</string>
-    <string name="rating_message">Om du gillar detta spel, vänligen ge oss feedback. Det hjälper oss mycket.</string>
-    <string name="used_software_text">Detta spel använder följande tredje partiers programvaror:</string>
-    <string name="translators_text">Detta spel översattes av följande personer:</string>
     <string name="sign_in_failed">Det gick inte att logga in. Kontrollera nätverksanslutningen och försök igen.</string>
     <string name="you_won">Du vann!</string>
     <string name="victories">Vinster</string>
@@ -90,7 +84,6 @@
     <string name="resume">Återuppta</string>
     <string name="yes">Ja</string>
     <string name="unlock">Lås upp</string>
-    <string name="unlock_all">Lås upp allt</string>
     <string name="achievements">Prestationer</string>
     <string name="no">Nej</string>
     <string name="general">Allmänt</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Ta bort allt</string>
     <string name="appearance">Utseende</string>
     <string name="themes">Teman</string>
-    <string name="try_it">Pröva</string>
     <string name="delete_all_message">Ta bort alla händelser permanent.</string>
     <string name="all_mines_disabled">Alla minor har inaktiverats.</string>
     <string name="desc_convered_area">Täckt område</string>

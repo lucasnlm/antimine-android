@@ -20,7 +20,6 @@
     <string name="beginner">Beginner</string>
     <string name="intermediate">Gevorderd</string>
     <string name="expert">Expert</string>
-    <string name="support_description">Met uw hulp kunnen we nieuwe functies implementeren en ons project actief houden.</string>
     <string name="open">Open</string>
     <string name="settings">Instellingen</string>
     <string name="animations">Animaties</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Afgerond vierkant</string>
     <string name="system">Systeem</string>
     <string name="rating">Feedback</string>
-    <string name="support_title">Steun ons!</string>
-    <string name="support_action">Om te steunen</string>
-    <string name="rating_message">Als dit spel je bevalt, geef ons dan alstublieft feedback. Dat zal ons veel helpen.</string>
-    <string name="used_software_text">Dit spel gebruikt de volgende software van derden:</string>
-    <string name="translators_text">Dit spel is vertaald door de volgende mensen:</string>
     <string name="sign_in_failed">Aanmelden mislukt. Controleer uw netwerkverbinding en probeer het opnieuw.</string>
     <string name="you_won">Je hebt gewonnen!</string>
     <string name="victories">Overwinningen</string>
@@ -90,7 +84,6 @@
     <string name="resume">Doorgaan</string>
     <string name="yes">Ja</string>
     <string name="unlock">Ontgrendelen</string>
-    <string name="unlock_all">Ontgrendel alles</string>
     <string name="achievements">Achievements</string>
     <string name="no">Nee</string>
     <string name="general">Algemeen</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Alles verwijderen</string>
     <string name="appearance">Uiterlijk</string>
     <string name="themes">Themas</string>
-    <string name="try_it">Probeer het</string>
     <string name="delete_all_message">Verwijder alle gebeurtenissen permanent.</string>
     <string name="all_mines_disabled">Alle mijnen waren uitgeschakeld.</string>
     <string name="desc_convered_area">Gedekt gebied</string>

@@ -20,7 +20,6 @@
     <string name="beginner">Beginner</string>
     <string name="intermediate">Intermediêr</string>
     <string name="expert">Deskundig</string>
-    <string name="support_description">Met u hulp kan ons nuwe funksies implementeer en ons projek aktief hou.</string>
     <string name="open">Maak oop</string>
     <string name="settings">Verstellings</string>
     <string name="animations">Animasie</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Afgeronde vierkant</string>
     <string name="system">Stelsel</string>
     <string name="rating">Terugvoer</string>
-    <string name="support_title">Ondersteun ons!</string>
-    <string name="support_action">Ondersteuning</string>
-    <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
-    <string name="used_software_text">This game uses the following third parties software:</string>
-    <string name="translators_text">This game was translated by the following people:</string>
     <string name="sign_in_failed">Kan nie koppel nie. Gaan asseblief jou netwerkverbinding na en probeer weer.</string>
     <string name="you_won">Jy het Gewen!</string>
     <string name="victories">Oorwinnings</string>
@@ -90,7 +84,6 @@
     <string name="resume">Hervat</string>
     <string name="yes">Ja</string>
     <string name="unlock">Ontsluit</string>
-    <string name="unlock_all">Ontsluit almal</string>
     <string name="achievements">Prestasies</string>
     <string name="no">Nee</string>
     <string name="general">Algemeen</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Verwyder alles</string>
     <string name="appearance">Voorkoms</string>
     <string name="themes">Temas</string>
-    <string name="try_it">Încearcă</string>
     <string name="delete_all_message">Vee alle gebeure permanent uit.</string>
     <string name="all_mines_disabled">All mines were disabled.</string>
     <string name="desc_convered_area">Covered area</string>
