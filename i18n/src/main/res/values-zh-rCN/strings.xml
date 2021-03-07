@@ -20,7 +20,6 @@
     <string name="beginner">新手</string>
     <string name="intermediate">中等</string>
     <string name="expert">专家</string>
-    <string name="support_description">在你的帮助下，我们将能实现新的功能并使我们的项目保持活跃。</string>
     <string name="open">打开</string>
     <string name="settings">设置</string>
     <string name="animations">动画</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">圆角方块</string>
     <string name="system">系统</string>
     <string name="rating">反馈</string>
-    <string name="support_title">支持我们 ！</string>
-    <string name="support_action">支持</string>
-    <string name="rating_message">如果你喜欢这个游戏，请给我们反馈。这将对我们有很多帮助。</string>
-    <string name="used_software_text">该游戏使用以下第三方软件：</string>
-    <string name="translators_text">该游戏由以下人员翻译：</string>
     <string name="sign_in_failed">登录失败。请检查你的网络连接，然后重试。</string>
     <string name="you_won">你获胜了！</string>
     <string name="victories">胜利</string>
@@ -90,7 +84,6 @@
     <string name="resume">继续</string>
     <string name="yes">是</string>
     <string name="unlock">解锁​​​​</string>
-    <string name="unlock_all">全部解锁</string>
     <string name="achievements">成就</string>
     <string name="no">否</string>
     <string name="general">通用</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">全部删除</string>
     <string name="appearance">界面外观</string>
     <string name="themes">主题</string>
-    <string name="try_it">试一下</string>
     <string name="delete_all_message">永久删除全部记录。</string>
     <string name="all_mines_disabled">所有地雷都已失效。</string>
     <string name="desc_convered_area">覆盖面积</string>

@@ -20,7 +20,6 @@
     <string name="beginner">مبتدئ</string>
     <string name="intermediate">متوسط</string>
     <string name="expert">خبير</string>
-    <string name="support_description">بمساعدتك، سنكون قادرين على تنفيذ ميزات جديدة وإبقاء مشروعنا نشط.</string>
     <string name="open">فتح</string>
     <string name="settings">الإعدادات</string>
     <string name="animations">الرسوم المتحركة</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">مربع مدور</string>
     <string name="system">النظام</string>
     <string name="rating">تعليقات</string>
-    <string name="support_title">ادعمنا!</string>
-    <string name="support_action">ادعمنا</string>
-    <string name="rating_message">إذا أعجبتك هذه اللعبة، يرجى إعطائنا تعليقات. سوف يساعدنا كثيرا.</string>
-    <string name="used_software_text">تستخدم هذه اللعبة برمجيات طرف ثالث التالية:</string>
-    <string name="translators_text">تمت ترجمة هذه اللعبة من قبل الأشخاص التالين:</string>
     <string name="sign_in_failed">فشل تسجيل الدخول. يرجى التحقق من اتصال الشبكة والمحاولة مرة أخرى.</string>
     <string name="you_won">لقد فزت!</string>
     <string name="victories">الانتصارات</string>
@@ -90,7 +84,6 @@
     <string name="resume">استأنف</string>
     <string name="yes">نعم</string>
     <string name="unlock">فتح القفل</string>
-    <string name="unlock_all">فتح الكل</string>
     <string name="achievements">الإنجازات</string>
     <string name="no">لا</string>
     <string name="general">عام</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">حذف الكل</string>
     <string name="appearance">المظهر</string>
     <string name="themes">المظهر</string>
-    <string name="try_it">جربها</string>
     <string name="delete_all_message">احذف جميع الأحداث نهائيًا.</string>
     <string name="all_mines_disabled">جميع الألغام معطلة.</string>
     <string name="desc_convered_area">منطقة مغطاة</string>

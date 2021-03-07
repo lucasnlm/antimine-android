@@ -14,8 +14,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 901011
-        versionName '9.1.1'
+        versionCode 901031
+        versionName '9.1.3'
         minSdkVersion 21
         targetSdkVersion 30
         multiDexEnabled true
@@ -115,7 +115,6 @@ dependencies {
     implementation project(':ui')
     implementation project(':preferences')
     implementation project(':themes')
-    implementation project(':purchases')
     implementation project(':core')
 
     googleImplementation project(':proprietary')

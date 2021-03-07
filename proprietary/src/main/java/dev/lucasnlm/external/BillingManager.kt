@@ -25,9 +25,7 @@ class BillingManager(
 ) : IBillingManager, BillingClientStateListener, PurchasesUpdatedListener {
 
     private val purchaseBroadcaster = ConflatedBroadcastChannel<PurchaseInfo>()
-
     private val unlockPrice = MutableStateFlow<String?>(null)
-
     private val billingClient by lazy {
         BillingClient.newBuilder(context)
             .setListener(this)
@@ -90,7 +88,9 @@ class BillingManager(
 
             handlePurchases(purchasesList)
         } else {
-            crashReporter.sendError("Charge failed due to response ${billingResult.responseCode}")
+            val code = billingResult.responseCode
+            val message = billingResult.debugMessage
+            crashReporter.sendError("Charge failed due to response $code\n$message")
         }
     }
 
@@ -107,7 +107,9 @@ class BillingManager(
     }
 
     override fun start() {
-        billingClient.startConnection(this)
+        if (!billingClient.isReady) {
+            billingClient.startConnection(this)
+        }
     }
 
     override fun isEnabled(): Boolean {

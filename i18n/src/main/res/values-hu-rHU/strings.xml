@@ -20,7 +20,6 @@
     <string name="beginner">Kezdő</string>
     <string name="intermediate">Haladó</string>
     <string name="expert">Szakértő</string>
-    <string name="support_description">Segítségével képesek leszünk új funkciók bevezetésére és projektünk aktív működésére.</string>
     <string name="open">Megnyitás</string>
     <string name="settings">Beállítások</string>
     <string name="animations">Animációk</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Lekerekített négyzet</string>
     <string name="system">Rendszer</string>
     <string name="rating">Visszajelzés</string>
-    <string name="support_title">Támogass minket!</string>
-    <string name="support_action">Támogasson bennünket</string>
-    <string name="rating_message">Ha tetszik ez a játék, kérlek jelezz vissza nekünk. Sokat segít.</string>
-    <string name="used_software_text">Ez a játék a következő harmadik féltől származó programokat használja:</string>
-    <string name="translators_text">Ez a játék a következő emberek által lett lefordítva:</string>
     <string name="sign_in_failed">Sikertelen bejelentkezés. Kérlek ellenőrizd a hálózati csatlakozást és próbáld újra.</string>
     <string name="you_won">Győztél!</string>
     <string name="victories">Győzelmek</string>
@@ -90,7 +84,6 @@
     <string name="resume">Folytatás</string>
     <string name="yes">Igen</string>
     <string name="unlock">Feloldás</string>
-    <string name="unlock_all">Összes feloldása</string>
     <string name="achievements">Teljesítmények</string>
     <string name="no">Nem</string>
     <string name="general">Általános</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Az összes törlése</string>
     <string name="appearance">Megjelenés</string>
     <string name="themes">Témák</string>
-    <string name="try_it">Próbáld ki</string>
     <string name="delete_all_message">Az összes esemény végleges törlése.</string>
     <string name="all_mines_disabled">Az összes akna hatástalanítva.</string>
     <string name="desc_convered_area">Fedett terület</string>

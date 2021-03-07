@@ -20,7 +20,6 @@
     <string name="beginner">Początkujący</string>
     <string name="intermediate">Średniozaawansowany</string>
     <string name="expert">Ekspert</string>
-    <string name="support_description">Dzięki Twojemu wsparciu będziemy mogli dodawać nowe funkcje i kontynuować prace nad naszym projektem.</string>
     <string name="open">Otwórz</string>
     <string name="settings">Ustawienia</string>
     <string name="animations">Animacje</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Zaokrąglenie pól</string>
     <string name="system">Systemowy</string>
     <string name="rating">Opinia</string>
-    <string name="support_title">Wesprzyj nas!</string>
-    <string name="support_action">Wesprzyj</string>
-    <string name="rating_message">Jeśli podoba Ci się ta gra, zachęcamy do przesłania opinii. Jest to bardzo pomocne.</string>
-    <string name="used_software_text">Ta gra wykorzystuje następujące oprogramowanie stron trzecich:</string>
-    <string name="translators_text">Ta gra została przetłumaczona przez następujące osoby:</string>
     <string name="sign_in_failed">Błąd logowania. Sprawdź swoje połączenie z Internetem i spróbuj ponownie.</string>
     <string name="you_won">Udało się!</string>
     <string name="victories">Zwycięstwa</string>
@@ -90,7 +84,6 @@
     <string name="resume">Kontynuuj</string>
     <string name="yes">Tak</string>
     <string name="unlock">Odblokuj</string>
-    <string name="unlock_all">Odblokuj wszystko</string>
     <string name="achievements">Osiągnięcia</string>
     <string name="no">Nie</string>
     <string name="general">Ogólne</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Usuń wszystkie</string>
     <string name="appearance">Wygląd</string>
     <string name="themes">Motywy</string>
-    <string name="try_it">Wypróbuj</string>
     <string name="delete_all_message">Spowoduje to nieodwracalne usunięcie wszystkich statystyk.</string>
     <string name="all_mines_disabled">Wszystkie miny zostały rozbrojone.</string>
     <string name="desc_convered_area">Nieodkryte pole</string>

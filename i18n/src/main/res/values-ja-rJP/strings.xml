@@ -20,7 +20,6 @@
     <string name="beginner">初級</string>
     <string name="intermediate">中級</string>
     <string name="expert">上級</string>
-    <string name="support_description">あなたの助けを借りて、私たちは新しい機能を実装し、私たちのプロジェクトをアクティブに保つことができます。</string>
     <string name="open">開く</string>
     <string name="settings">設定</string>
     <string name="animations">アニメーション</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">丸い長方形</string>
     <string name="system">システム</string>
     <string name="rating">フィードバック</string>
-    <string name="support_title">私達を支援する！</string>
-    <string name="support_action">私達を支援する</string>
-    <string name="rating_message">もしこのゲームを気に入ったなら、フィードバックをお願いします。私たちへの助けになるはずです。</string>
-    <string name="used_software_text">このゲームは、以下のサードパーティーソフトウェアを使用しています:</string>
-    <string name="translators_text">このゲームは、以下の人々によって翻訳されています:</string>
     <string name="sign_in_failed">サインインに失敗しました。インターネット接続を確認してからもう一度お試しください。</string>
     <string name="you_won">あなたの勝ちです！</string>
     <string name="victories">勝利回数</string>
@@ -90,7 +84,6 @@
     <string name="resume">続ける</string>
     <string name="yes">はい</string>
     <string name="unlock">ロック解除</string>
-    <string name="unlock_all">全てアンロック</string>
     <string name="achievements">達成</string>
     <string name="no">いいえ</string>
     <string name="general">全般</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">すべて削除</string>
     <string name="appearance">外観</string>
     <string name="themes">テーマ</string>
-    <string name="try_it">試す</string>
     <string name="delete_all_message">すべてのイベントを永久的に削除します。</string>
     <string name="all_mines_disabled">すべての地雷が無効になりました。</string>
     <string name="desc_convered_area">カバーされたエリア</string>

@@ -20,7 +20,6 @@
     <string name="beginner">Новичок</string>
     <string name="intermediate">Средний</string>
     <string name="expert">Эксперт</string>
-    <string name="support_description">С Вашей помощью мы сможем добавить новые функции и сохранить наш проект активным.</string>
     <string name="open">Открыть</string>
     <string name="settings">Настройки</string>
     <string name="animations">Анимации</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Скругленный квадрат</string>
     <string name="system">Система</string>
     <string name="rating">Обратная связь</string>
-    <string name="support_title">Поддержите нас!</string>
-    <string name="support_action">Поддержать</string>
-    <string name="rating_message">Нравится игра? Оставьте отзыв, пожалуйста. Это нам очень поможет.</string>
-    <string name="used_software_text">Эта игра использует следующее программное обеспечение от третьих лиц:</string>
-    <string name="translators_text">Эта игра была переведена следующими людьми:</string>
     <string name="sign_in_failed">Подключение невозможно. Проверьте интернет-подключение и повторите попытку.</string>
     <string name="you_won">Вы выиграли!</string>
     <string name="victories">Победы</string>
@@ -90,7 +84,6 @@
     <string name="resume">Продолжить</string>
     <string name="yes">Да</string>
     <string name="unlock">Разблокировать</string>
-    <string name="unlock_all">Разблокировать все</string>
     <string name="achievements">Достижения</string>
     <string name="no">Нет</string>
     <string name="general">Общее</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Удалить все</string>
     <string name="appearance">Оформление</string>
     <string name="themes">Темы</string>
-    <string name="try_it">Попробуйте</string>
     <string name="delete_all_message">Удалить все события навсегда.</string>
     <string name="all_mines_disabled">Все мины обезврежены.</string>
     <string name="desc_convered_area">Покрытая область</string>

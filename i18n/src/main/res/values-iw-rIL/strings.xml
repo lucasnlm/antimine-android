@@ -20,7 +20,6 @@
     <string name="beginner">רמת התחלה</string>
     <string name="intermediate">רמה בינונית</string>
     <string name="expert">רמה גבוהה</string>
-    <string name="support_description">עם עזרתך, נוכל להוסיף דברים חדשים ולשמור על הפרויקט שלנו פעיל.</string>
     <string name="open">פתיחה</string>
     <string name="settings">הגדרות</string>
     <string name="animations">אנימציות</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">ריבוע בעל פינות עגולות</string>
     <string name="system">מערכת</string>
     <string name="rating">משוב</string>
-    <string name="support_title">תמכו בנו!</string>
-    <string name="support_action">לתמוך</string>
-    <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
-    <string name="used_software_text">This game uses the following third parties software:</string>
-    <string name="translators_text">This game was translated by the following people:</string>
     <string name="sign_in_failed">אין אפשרות להתחבר. בדוק את חיבור הרשת ונסה שוב.</string>
     <string name="you_won">ניצחת!</string>
     <string name="victories">נצחונות</string>
@@ -70,7 +64,7 @@
     <string name="performance">ביצועים</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">סימן שאלה</string>
-    <string name="no_guessing_mode">\'No guessing\' mode</string>
+    <string name="no_guessing_mode">מצב \'ללא ניחושים\'</string>
     <string name="control">פקדים</string>
     <string name="single_click">לחיצה בודדת</string>
     <string name="double_click">לחיצה כפולה</string>
@@ -90,7 +84,6 @@
     <string name="resume">לְהַמשִׁיך</string>
     <string name="yes"> כן</string>
     <string name="unlock">בטל את הנעילה</string>
-    <string name="unlock_all">שחרור הכול</string>
     <string name="achievements">הישגים</string>
     <string name="no">לא</string>
     <string name="general">כללי</string>
@@ -111,13 +104,12 @@
     <string name="delete_all">מחק הכל</string>
     <string name="appearance">מראה</string>
     <string name="themes">ערכות נושא</string>
-    <string name="try_it">נסה את זה</string>
-    <string name="delete_all_message">Delete all events permanently.</string>
+    <string name="delete_all_message">מחיקה לצמיתות של כל האירועים.</string>
     <string name="all_mines_disabled">All mines were disabled.</string>
     <string name="desc_convered_area">Covered area</string>
-    <string name="desc_marked_area">Marked area</string>
+    <string name="desc_marked_area">אזור מסומן</string>
     <string name="desc_question_area">Doubtful area</string>
-    <string name="desc_wrongly_marked_area">Wrongly marked area</string>
+    <string name="desc_wrongly_marked_area">אזור מסומן בטעות</string>
     <string name="exploded_mine">מוקש מפוצץ</string>
     <string name="game_started">המשחק החל</string>
     <string name="you_exploded_a_mine">פוצצת מוקש!</string>
@@ -127,11 +119,11 @@
     <string name="help">עזרה</string>
     <string name="back">חזור</string>
     <string name="donation">תרומה</string>
-    <string name="open_on_game">Open on game screen</string>
-    <string name="show_windows">Show windows</string>
+    <string name="open_on_game">פתיחה על מסך משחק</string>
+    <string name="show_windows">הצגת חלונות</string>
     <string name="select_language">בחר שפה</string>
-    <string name="switch_control">Switch: Flag and Open</string>
-    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
+    <string name="switch_control">החלפה: סימון ופתיחה</string>
+    <string name="switch_control_desc">השמתשו בלחצן כדי להחליף בין סימון ופתיחה</string>
     <string name="app_description">צריך לנקות את הלוח הריבועי המכיל מוקשים נסתרים מבלי לפוצץ אף אחד מהם.</string>
     <string name="app_name">Antimine</string>
 </resources>

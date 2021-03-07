@@ -34,7 +34,6 @@ import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
 import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
@@ -241,6 +240,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         if (status == Status.Running) {
             gameViewModel.pauseGame()
         }
+
+        cloudSaveManager.uploadSave()
 
         if (isFinishing) {
             analyticsManager.sentEvent(Analytics.Quit)
@@ -476,8 +477,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
     private fun showEndGameDialog(gameResult: GameResult, canContinue: Boolean) {
         val currentGameStatus = status
         if (currentGameStatus is Status.Over && !isFinishing) {
-            if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
-                supportFragmentManager.findFragmentByTag(GameOverDialogFragment.TAG) == null &&
+            if (supportFragmentManager.findFragmentByTag(GameOverDialogFragment.TAG) == null &&
                 supportFragmentManager.findFragmentByTag(WinGameDialogFragment.TAG) == null
             ) {
                 val score = currentGameStatus.score
@@ -588,7 +588,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 analyticsManager.sentEvent(Analytics.TutorialCompleted)
                 preferencesRepository.setCompleteTutorial(true)
                 showCompletedTutorialDialog()
-                cloudSaveManager.uploadSave()
             }
             Event.Victory -> {
                 val isResuming = (status == Status.PreGame)
@@ -605,8 +604,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                         gameViewModel.saveGame()
                         gameViewModel.saveStats()
                     }
-
-                    cloudSaveManager.uploadSave()
 
                     gameViewModel.addNewTip()
 
@@ -627,7 +624,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
                 if (!isResuming) {
                     val isGameCompleted = gameViewModel.isCompletedWithMistakes()
-                    cloudSaveManager.uploadSave()
                     lifecycleScope.launch {
                         gameViewModel.gameOver(isResuming, !isGameCompleted)
                         gameViewModel.saveGame()

@@ -20,7 +20,6 @@
     <string name="beginner">Principiant</string>
     <string name="intermediate">Intermedi</string>
     <string name="expert">Expert</string>
-    <string name="support_description">Amb la vostra ajuda, podrem implementar noves funcions i mantenir actiu el nostre projecte.</string>
     <string name="open">Obert</string>
     <string name="settings">Configuració</string>
     <string name="animations">Animacions</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Quadrat arrodonit</string>
     <string name="system">Sistema</string>
     <string name="rating">Opina</string>
-    <string name="support_title">Doneu-nos suport!</string>
-    <string name="support_action">Suport</string>
-    <string name="rating_message">Si t\'agrada aquest joc, si us plau dona\'ns la teva opinió. Ens ajudarà molt.</string>
-    <string name="used_software_text">Aquest joc usa el següent programari de tercers:</string>
-    <string name="translators_text">Aquest joc ha estat traduït per aquestes persones:</string>
     <string name="sign_in_failed">No s\'ha pogut connectar. Si us plau verifica la teva connexió de xarxa i intenta-ho de nou.</string>
     <string name="you_won">Has guanyat!</string>
     <string name="victories">Victòries</string>
@@ -90,7 +84,6 @@
     <string name="resume">Continuar</string>
     <string name="yes">Sí</string>
     <string name="unlock">Desbloqueja</string>
-    <string name="unlock_all">Desbloqueja-ho tot</string>
     <string name="achievements">Assoliments</string>
     <string name="no">No</string>
     <string name="general">General</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Esborra-ho tot</string>
     <string name="appearance">Aparença</string>
     <string name="themes">Temes</string>
-    <string name="try_it">Prova-ho</string>
     <string name="delete_all_message">Esborra tots els esdeveniments permanentment.</string>
     <string name="all_mines_disabled">S\'han desactivat totes les mines.</string>
     <string name="desc_convered_area">Àrea tapada</string>

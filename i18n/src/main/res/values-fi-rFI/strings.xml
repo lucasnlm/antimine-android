@@ -20,7 +20,6 @@
     <string name="beginner">Aloittelija</string>
     <string name="intermediate">Keskitaso</string>
     <string name="expert">Edistynyt</string>
-    <string name="support_description">Sinun avullasi pystymme toteuttamaan uusia ominaisuuksia ja pitämään projektimme aktiivisena.</string>
     <string name="open">Avaa</string>
     <string name="settings">Asetukset</string>
     <string name="animations">Animaatiot</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Pyöristetty neliö</string>
     <string name="system">Järjestelmä</string>
     <string name="rating">Lähetä palautetta</string>
-    <string name="support_title">Tue meitä!</string>
-    <string name="support_action">Tue</string>
-    <string name="rating_message">Mikäli pidät sovelluksesta, jätä siitä arvostelu. Tästä on meille paljon apua.</string>
-    <string name="used_software_text">Tämä peli käyttää seuraavien kolmansien osapuolten ohjelmistoa:</string>
-    <string name="translators_text">Tämän pelin ovat kääntäneet seuraavat henkilöt:</string>
     <string name="sign_in_failed">Virhe kirjautuessa sisään. Tarkista verkkoyhteytesi ja yritä uudelleen.</string>
     <string name="you_won">Sinä voitit!</string>
     <string name="victories">Voittoja</string>
@@ -90,7 +84,6 @@
     <string name="resume">Jatka</string>
     <string name="yes">Kyllä</string>
     <string name="unlock">Avaa</string>
-    <string name="unlock_all">Avaa kaikki</string>
     <string name="achievements">Saavutukset</string>
     <string name="no">Ei</string>
     <string name="general">Yleiset</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Poista kaikki</string>
     <string name="appearance">Ulkoasu</string>
     <string name="themes">Teemat</string>
-    <string name="try_it">Kokeile Sitä</string>
     <string name="delete_all_message">Poistetaanko kaikki tapahtumat pysyvästi.</string>
     <string name="all_mines_disabled">Kaikki miinat poistettiin käytöstä.</string>
     <string name="desc_convered_area">Peitetty alue</string>

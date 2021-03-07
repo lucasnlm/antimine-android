@@ -39,7 +39,6 @@ dependencies {
     implementation project(':external')
     implementation project(':i18n')
     implementation project(':preferences')
-    implementation project(':purchases')
     implementation project(':ui')
 
     // AndroidX

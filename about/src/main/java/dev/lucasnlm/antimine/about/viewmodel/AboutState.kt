@@ -7,12 +7,6 @@ data class License(
     @RawRes val licenseFileRes: Int,
 )
 
-data class TranslationInfo(
-    val language: String,
-    val translators: Sequence<String>,
-)
-
 data class AboutState(
-    val translators: List<TranslationInfo>,
     val licenses: List<License>,
 )

@@ -20,7 +20,6 @@
     <string name="beginner">Dễ</string>
     <string name="intermediate">Trung bình</string>
     <string name="expert">Khó</string>
-    <string name="support_description">Với sự giúp đỡ của bạn, chúng tôi sẽ có thể triển khai các tính năng mới và giữ cho dự án của chúng tôi hoạt động.</string>
     <string name="open">Mở</string>
     <string name="settings">Cài đặt</string>
     <string name="animations">Hiệu ứng động</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Hình vuông bo góc</string>
     <string name="system">Hệ thống</string>
     <string name="rating">Phản hồi</string>
-    <string name="support_title">Hỗ trợ chúng tôi!</string>
-    <string name="support_action">Đi đến hỗ trợ</string>
-    <string name="rating_message">Nếu bạn thích trò chơi này, hãy gửi phản hồi cho chúng tôi. Nhận xét của bạn sẽ giúp chúng tôi rất nhiều.</string>
-    <string name="used_software_text">Trò chơi này sử dụng các phần mềm bên thứ ba sau:</string>
-    <string name="translators_text">Trò chơi này đã được dịch bởi những người này:</string>
     <string name="sign_in_failed">Không đăng nhập được. Hãy kiểm tra lại kết nối mạng và thử lại.</string>
     <string name="you_won">Thắng rồi!</string>
     <string name="victories">Thắng</string>
@@ -90,7 +84,6 @@
     <string name="resume">Tiếp tục</string>
     <string name="yes">Có</string>
     <string name="unlock">Mở khoá</string>
-    <string name="unlock_all">Mở khóa tất cả</string>
     <string name="achievements">Thành tựu</string>
     <string name="no">Không</string>
     <string name="general">Tổng quan</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Xóa tất cả</string>
     <string name="appearance">Ngoại hình</string>
     <string name="themes">Chủ đề</string>
-    <string name="try_it">Hãy dùng thử</string>
     <string name="delete_all_message">Xóa tất cả các sự kiện vĩnh viễn.</string>
     <string name="all_mines_disabled">Đã phá hết mìn.</string>
     <string name="desc_convered_area">Ô đã mở</string>
@@ -127,7 +119,7 @@
     <string name="help">Trợ Giúp</string>
     <string name="back">Trở lại</string>
     <string name="donation">Quyên góp</string>
-    <string name="open_on_game">Open on game screen</string>
+    <string name="open_on_game">Mở màn hình chơi</string>
     <string name="show_windows">Hiện cửa sổ</string>
     <string name="select_language">Chọn ngôn ngữ</string>
     <string name="switch_control">Chuyển: Gắn cờ và Mở</string>

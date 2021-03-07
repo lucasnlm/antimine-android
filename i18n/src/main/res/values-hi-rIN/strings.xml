@@ -20,7 +20,6 @@
     <string name="beginner">छोटा</string>
     <string name="intermediate">मध्यम</string>
     <string name="expert">बड़ा</string>
-    <string name="support_description">आपकी मदद से, हम नई सुविधाओं को लागू करने और अपनी परियोजना को सक्रिय रखने में सक्षम होंगे।</string>
     <string name="open">खुला</string>
     <string name="settings">सेटिंग्स</string>
     <string name="animations">एनिमेशन</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">गोल कोण चोकोण</string>
     <string name="system">प्रणाली</string>
     <string name="rating">फीडबैक</string>
-    <string name="support_title">हमें सहयोग दीजिये!</string>
-    <string name="support_action">हमें सहयोग दीजिये</string>
-    <string name="rating_message">If you like this game, please give us a feedback. It will help us a lot.</string>
-    <string name="used_software_text">This game uses the following third parties software:</string>
-    <string name="translators_text">This game was translated by the following people:</string>
     <string name="sign_in_failed">लोड करने में विफल, कृपया अपना नेटवर्क कनेक्शन जांचें और पुनः प्रयास करें।</string>
     <string name="you_won">आप जीत गए!</string>
     <string name="victories">विजय</string>
@@ -90,7 +84,6 @@
     <string name="resume">जारी रखें</string>
     <string name="yes">हाँ</string>
     <string name="unlock">अनलॉक करें</string>
-    <string name="unlock_all">सभी अनलॉक करें</string>
     <string name="achievements">उपलब्धियां</string>
     <string name="no">नहीं</string>
     <string name="general">सामान्य</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">सभी मिटाएँ</string>
     <string name="appearance">स्वरूप</string>
     <string name="themes">थीम्स</string>
-    <string name="try_it">इसे आज़माएँ</string>
     <string name="delete_all_message">पुष्टि करें</string>
     <string name="all_mines_disabled">All mines were disabled.</string>
     <string name="desc_convered_area">Covered area</string>

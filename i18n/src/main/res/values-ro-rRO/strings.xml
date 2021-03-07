@@ -20,7 +20,6 @@
     <string name="beginner">Începător</string>
     <string name="intermediate">Mediu</string>
     <string name="expert">Expert</string>
-    <string name="support_description">Cu ajutorul tău, vom fi capabili să implementăm noi funcții și să menținem proiectul nostru activ.</string>
     <string name="open">Deschide</string>
     <string name="settings">Setări</string>
     <string name="animations">Animații</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Pătrat rotunjit</string>
     <string name="system">Sistem</string>
     <string name="rating">Opinii</string>
-    <string name="support_title">Susțineți-ne!</string>
-    <string name="support_action">Suport</string>
-    <string name="rating_message">Dacă vă place acest joc, vă rugăm să ne dați un feedback. Ne va ajuta foarte mult.</string>
-    <string name="used_software_text">This game uses the following third parties software:</string>
-    <string name="translators_text">This game was translated by the following people:</string>
     <string name="sign_in_failed">Nu se poate conecta. Te rugăm să îți verifici conexiunea la rețea și să încerci din nou.</string>
     <string name="you_won">Aţi câștigat!</string>
     <string name="victories">Victorii</string>
@@ -90,7 +84,6 @@
     <string name="resume">Continuă</string>
     <string name="yes">Da</string>
     <string name="unlock">Deblochează</string>
-    <string name="unlock_all">Deblochează toate</string>
     <string name="achievements">Achievements</string>
     <string name="no">Nu</string>
     <string name="general">General</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Șterge tot</string>
     <string name="appearance">Aspect</string>
     <string name="themes">Teme</string>
-    <string name="try_it">Încearcă-l</string>
     <string name="delete_all_message">Delete all events permanently.</string>
     <string name="all_mines_disabled">Toate minele au fost dezactivate.</string>
     <string name="desc_convered_area">Covered area</string>

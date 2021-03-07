@@ -20,7 +20,6 @@
     <string name="beginner">Начинаещ</string>
     <string name="intermediate">Напреднал</string>
     <string name="expert">Експерт</string>
-    <string name="support_description">С вашата помощ, ще ни бъде възможно да добавим нови функционалности и да поддържаме проекта жив.</string>
     <string name="open">Отвори</string>
     <string name="settings">Настройки</string>
     <string name="animations">Анимации</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Заоблен квадрат</string>
     <string name="system">Система</string>
     <string name="rating">Обратна връзка</string>
-    <string name="support_title">Подкрепете ни!</string>
-    <string name="support_action">За помощ</string>
-    <string name="rating_message">Ако харесвате играте, моля дайте ни отзив. Това ще ни помогне много.</string>
-    <string name="used_software_text">Играта използва следния чуждестранен софтуер:</string>
-    <string name="translators_text">Играта е преведена от следните хора:</string>
     <string name="sign_in_failed">Неуспешно влизане. Моля проверете връзката си с интернет и опитайте отново.</string>
     <string name="you_won">Вие победихте!</string>
     <string name="victories">Победи</string>
@@ -90,7 +84,6 @@
     <string name="resume">Продължи</string>
     <string name="yes">Да</string>
     <string name="unlock">Отключи</string>
-    <string name="unlock_all">Отключи Всички</string>
     <string name="achievements">Постижения</string>
     <string name="no">Не</string>
     <string name="general">Основни</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Изтрий всички</string>
     <string name="appearance">Външен вид</string>
     <string name="themes">Теми</string>
-    <string name="try_it">Ще опитам</string>
     <string name="delete_all_message">Изтрий всички завинаги.</string>
     <string name="all_mines_disabled">Всички мини бяха деактивирани.</string>
     <string name="desc_convered_area">Покрита площ</string>

@@ -20,7 +20,6 @@
     <string name="beginner">Principiante</string>
     <string name="intermediate">Normale</string>
     <string name="expert">Esperto</string>
-    <string name="support_description">Grazie al tuo aiuto, avremo la possibilità di implementare nuove funzionalità e mantenere attivo il progetto.</string>
     <string name="open">Apri</string>
     <string name="settings">Impostazioni</string>
     <string name="animations">Animazioni</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Quadrato arrotondato</string>
     <string name="system">Sistema</string>
     <string name="rating">Suggerimenti</string>
-    <string name="support_title">Supportaci!</string>
-    <string name="support_action">Per assistenza</string>
-    <string name="rating_message">Se ti piace questo gioco, per favore inviaci suggerimenti. Puoi aiutare a migliorarlo.</string>
-    <string name="used_software_text">Questo gioco utilizza il seguente software di terze parti:</string>
-    <string name="translators_text">Questo gioco è stato tradotto dalle seguenti persone:</string>
     <string name="sign_in_failed">Impossibile accedere. Controllare la connessione di rete e riprovare.</string>
     <string name="you_won">Hai vinto!</string>
     <string name="victories">Vittorie</string>
@@ -90,7 +84,6 @@
     <string name="resume">Riprendi</string>
     <string name="yes">Sì</string>
     <string name="unlock">Sblocca</string>
-    <string name="unlock_all">Sblocca tutto</string>
     <string name="achievements">Progressi</string>
     <string name="no">No</string>
     <string name="general">Generale</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Elimina tutti</string>
     <string name="appearance">Aspetto</string>
     <string name="themes">Temi</string>
-    <string name="try_it">Provalo</string>
     <string name="delete_all_message">Elimina tutti gli eventi permanentemente.</string>
     <string name="all_mines_disabled">Tutte le mine sono state disattivate.</string>
     <string name="desc_convered_area">Area coperta</string>

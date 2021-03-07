@@ -20,7 +20,6 @@
     <string name="beginner">Nybegynner</string>
     <string name="intermediate">Mellomliggende</string>
     <string name="expert">Ekspert</string>
-    <string name="support_description">Med hjelpen din kan vi implementere nye funksjoner og holde prosjektet aktivt.</string>
     <string name="open">Åpne</string>
     <string name="settings">Innstillinger</string>
     <string name="animations">Animasjoner</string>
@@ -45,11 +44,6 @@
     <string name="rounded_square">Avrundet kvadrat</string>
     <string name="system">System</string>
     <string name="rating">Ttilbakemelding</string>
-    <string name="support_title">Støtt oss!</string>
-    <string name="support_action">For å støtte</string>
-    <string name="rating_message">Hvis du liker dette spillet, gi oss en tilbakemelding. Det vil hjelpe oss mye.</string>
-    <string name="used_software_text">Dette spillet bruker følgende tredjeparter programvare:</string>
-    <string name="translators_text">Dette spillet ble oversatt av følgende personer:</string>
     <string name="sign_in_failed">Feilet med å logge på. Vennligst sjekk nettverkstilkoblingen din og prøv igjen.</string>
     <string name="you_won">Du vant!</string>
     <string name="victories">Seire</string>
@@ -90,7 +84,6 @@
     <string name="resume">Fortsett</string>
     <string name="yes">Ja</string>
     <string name="unlock">Lås opp</string>
-    <string name="unlock_all">Lås opp alle</string>
     <string name="achievements">Prestasjoner</string>
     <string name="no">Nei</string>
     <string name="general">Generelt</string>
@@ -111,7 +104,6 @@
     <string name="delete_all">Slett alle</string>
     <string name="appearance">Utseende</string>
     <string name="themes">Temaer</string>
-    <string name="try_it">Prøv det</string>
     <string name="delete_all_message">Slett alle hendelser permanent.</string>
     <string name="all_mines_disabled">Alle miner ble deaktivert.</string>
     <string name="desc_convered_area">Dekket område</string>

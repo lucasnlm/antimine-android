@@ -27,7 +27,6 @@ import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.purchases.SupportAppDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
 import dev.lucasnlm.antimine.ui.ThematicActivity
@@ -255,8 +254,7 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
     private fun showEndGameDialog(gameResult: GameResult, canContinue: Boolean) {
         val currentGameStatus = status
         if (currentGameStatus is Status.Over && !isFinishing) {
-            if (supportFragmentManager.findFragmentByTag(SupportAppDialogFragment.TAG) == null &&
-                supportFragmentManager.findFragmentByTag(GameOverDialogFragment.TAG) == null &&
+            if (supportFragmentManager.findFragmentByTag(GameOverDialogFragment.TAG) == null &&
                 supportFragmentManager.findFragmentByTag(WinGameDialogFragment.TAG) == null
             ) {
                 val score = currentGameStatus.score
