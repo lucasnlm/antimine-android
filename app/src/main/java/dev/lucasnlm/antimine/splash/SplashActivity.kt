@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.badlogic.gdx.backends.android.surfaceview.GdxEglConfigChooser
+import com.badlogic.gdx.utils.GdxNativesLoader
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.TvGameActivity
 import dev.lucasnlm.antimine.isAndroidTv
@@ -20,6 +22,8 @@ class SplashActivity : AppCompatActivity() {
     private val splashViewModel: SplashViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        GdxNativesLoader.load()
+
         super.onCreate(savedInstanceState)
 
         splashViewModel.startIap()

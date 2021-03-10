@@ -18,6 +18,10 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.backends.android.AndroidFragmentApplication
+import com.badlogic.gdx.utils.GdxNativesLoader
+import com.badlogic.gdx.utils.GdxRuntimeException
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.models.Status
@@ -30,6 +34,7 @@ import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
+import dev.lucasnlm.antimine.gdx.GdxLevelFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
@@ -54,7 +59,11 @@ import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.OnDismissListener {
+class GameActivity :
+    ThematicActivity(R.layout.activity_game),
+    DialogInterface.OnDismissListener,
+    AndroidFragmentApplication.Callbacks {
+
     private val preferencesRepository: IPreferencesRepository by inject()
     private val analyticsManager: IAnalyticsManager by inject()
     private val instantAppManager: IInstantAppManager by inject()
@@ -114,16 +123,6 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 }
                 else -> {
                     gameViewModel.loadLastGame()
-                }
-            }
-        }
-
-        findViewById<FrameLayout>(R.id.levelContainer).doOnLayout {
-            if (!isFinishing) {
-                if (!preferencesRepository.isTutorialCompleted()) {
-                    loadGameTutorial()
-                } else {
-                    loadGameFragment()
                 }
             }
         }
@@ -426,6 +425,16 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
     }
 
+    private fun loadGameOrTutorial() {
+        if (!isFinishing) {
+            if (!preferencesRepository.isTutorialCompleted()) {
+                loadGameTutorial()
+            } else {
+                loadGameFragment()
+            }
+        }
+    }
+
     private fun loadGameFragment() {
         supportFragmentManager.apply {
             findFragmentByTag(TutorialLevelFragment.TAG)?.let { it ->
@@ -436,8 +445,8 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
 
             beginTransaction().apply {
-                replace(R.id.levelContainer, LevelFragment(), LevelFragment.TAG)
-                setTransition(FragmentTransaction.TRANSIT_NONE)
+                replace(R.id.levelContainer, GdxLevelFragment(), LevelFragment.TAG)
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 commitAllowingStateLoss()
             }
         }
@@ -568,7 +577,7 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
             }
             Event.StartNewGame -> {
                 gameToast?.cancel()
-                loadGameFragment()
+                loadGameOrTutorial()
                 status = Status.PreGame
                 disableShortcutIcon()
             }
@@ -585,12 +594,11 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 loadGameTutorial()
             }
             Event.FinishTutorial -> {
+                preferencesRepository.setCompleteTutorial(true)
                 gameViewModel.startNewGame(Difficulty.Beginner)
                 disableShortcutIcon()
-                loadGameFragment()
                 status = Status.Over(0, Score(4, 4, 25))
                 analyticsManager.sentEvent(Analytics.TutorialCompleted)
-                preferencesRepository.setCompleteTutorial(true)
                 showCompletedTutorialDialog()
             }
             Event.Victory -> {
@@ -685,6 +693,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         }
 
         bindSwitchControlButton()
+    }
+
+    override fun exit() {
+        // LibGDX exit callback
     }
 
     companion object {
