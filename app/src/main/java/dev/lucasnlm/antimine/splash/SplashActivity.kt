@@ -4,11 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.badlogic.gdx.backends.android.surfaceview.GdxEglConfigChooser
 import com.badlogic.gdx.utils.GdxNativesLoader
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.TvGameActivity
-import dev.lucasnlm.antimine.isAndroidTv
+import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel

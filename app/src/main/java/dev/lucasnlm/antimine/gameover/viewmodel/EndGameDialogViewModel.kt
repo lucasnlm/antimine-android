@@ -6,7 +6,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.updateLanguage
+import dev.lucasnlm.antimine.core.updateLanguage
 import kotlinx.coroutines.flow.flow
 
 class EndGameDialogViewModel(

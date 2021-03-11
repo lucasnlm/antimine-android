@@ -7,7 +7,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.repository.Size
-import dev.lucasnlm.antimine.isPortrait
+import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import io.mockk.every

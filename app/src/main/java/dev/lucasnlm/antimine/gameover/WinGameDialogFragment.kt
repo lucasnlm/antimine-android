@@ -21,7 +21,7 @@ import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
-import dev.lucasnlm.antimine.isAndroidTv
+import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.level.view.NewGameFragment
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity

@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine
+package dev.lucasnlm.antimine.core
 
 import android.app.UiModeManager
 import android.content.Context

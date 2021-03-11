@@ -3,6 +3,11 @@ package dev.lucasnlm.antimine.ui.ext
 import android.graphics.Color
 import androidx.annotation.ColorInt
 
+fun Int.red(): Float = Color.red(this) / 255f
+fun Int.green(): Float = Color.green(this) / 255f
+fun Int.blue(): Float = Color.blue(this) / 255f
+fun Int.alpha(): Float = Color.alpha(this) / 255f
+
 @ColorInt
 fun Int.toAndroidColor(alpha: Int? = null): Int {
     return if (alpha == null) {

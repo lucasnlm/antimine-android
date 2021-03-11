@@ -39,10 +39,19 @@ android {
 configurations { natives }
 
 dependencies {
+    implementation project(':core')
+    implementation project(':preferences')
+    implementation project(':ui')
+
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.activity:activity-ktx:1.1.0'
     implementation "androidx.fragment:fragment-ktx:1.2.5"
+
+    // Koin
+    implementation 'org.koin:koin-android:2.2.1'
+    implementation 'org.koin:koin-androidx-viewmodel:2.2.1'
+    testImplementation 'org.koin:koin-test:2.2.1'
 
     // LibGDX
     api "com.badlogicgames.gdx:gdx-backend-android:1.9.14"

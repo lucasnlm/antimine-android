@@ -6,7 +6,7 @@ import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
 import dev.lucasnlm.antimine.core.sound.SoundManager
-import dev.lucasnlm.antimine.isAndroidTv
+import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.preferences.IPreferencesManager
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesManager

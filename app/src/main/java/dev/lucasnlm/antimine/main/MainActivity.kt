@@ -11,7 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.control.ControlDialogFragment
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
-import dev.lucasnlm.antimine.isAndroidTv
+import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.main.view.MainPageAdapter
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel

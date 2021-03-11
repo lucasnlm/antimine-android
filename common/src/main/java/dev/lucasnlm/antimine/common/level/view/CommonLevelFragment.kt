@@ -11,7 +11,7 @@ import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.common.level.widget.FixedGridLayoutManager
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
-import dev.lucasnlm.antimine.isAndroidTv
+import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.external.IFeatureFlagManager

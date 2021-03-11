@@ -11,7 +11,7 @@ import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.view.CommonLevelFragment
 import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.isAndroidTv
+import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import kotlinx.coroutines.Dispatchers

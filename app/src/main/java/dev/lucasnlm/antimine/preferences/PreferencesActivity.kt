@@ -12,7 +12,7 @@ import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.models.Analytics
-import dev.lucasnlm.antimine.isAndroidTv
+import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.language.LanguageSelectorActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
