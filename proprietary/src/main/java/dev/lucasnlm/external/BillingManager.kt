@@ -23,7 +23,7 @@ class BillingManager(
     private val context: Context,
     private val crashReporter: CrashReporter,
 ) : IBillingManager, BillingClientStateListener, PurchasesUpdatedListener {
-
+    private var retry = 0
     private val purchaseBroadcaster = ConflatedBroadcastChannel<PurchaseInfo>()
     private val unlockPrice = MutableStateFlow<String?>(null)
     private val billingClient by lazy {
@@ -66,12 +66,18 @@ class BillingManager(
     }
 
     override fun onBillingServiceDisconnected() {
-        // Try to restart the connection on the next request to
-        // Google Play by calling the startConnection() method.
+        crashReporter.sendError("Billing service disconnected $retry")
+
+        if (retry < 3) {
+            start()
+            retry++
+        }
     }
 
     override fun onBillingSetupFinished(billingResult: BillingResult) {
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+            retry = 0
+
             val skuDetailsParams = SkuDetailsParams.newBuilder()
                 .setSkusList(listOf(BASIC_SUPPORT))
                 .setType(BillingClient.SkuType.INAPP)
@@ -90,7 +96,7 @@ class BillingManager(
         } else {
             val code = billingResult.responseCode
             val message = billingResult.debugMessage
-            crashReporter.sendError("Charge failed due to response $code\n$message")
+            crashReporter.sendError("Billing setup failed due to response $code. $message")
         }
     }
 
