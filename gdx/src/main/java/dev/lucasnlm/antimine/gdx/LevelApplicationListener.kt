@@ -3,7 +3,10 @@ package dev.lucasnlm.antimine.gdx
 import android.content.Context
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.graphics.GL20
+import com.badlogic.gdx.input.GestureDetector
+import com.badlogic.gdx.math.Vector2
 import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Area
@@ -22,7 +25,7 @@ class LevelApplicationListener(
     private val context: Context,
     private val dimensionRepository: IDimensionRepository,
     private val theme: AppTheme,
-) : ApplicationAdapter() {
+) : ApplicationAdapter(), GestureDetector.GestureListener {
 
     private var minefieldScreen: MinefieldScreen? = null
     private val areaSize = dimensionRepository.areaSize()
@@ -40,8 +43,9 @@ class LevelApplicationListener(
         ).apply {
             boundAreas?.forEach(::addActor)
             boundMinefield?.let(::bindMinefield)
-            Gdx.input.inputProcessor = this
         }
+
+        Gdx.input.inputProcessor = InputMultiplexer(GestureDetector(this), minefieldScreen)
     }
 
     override fun dispose() {
@@ -60,10 +64,6 @@ class LevelApplicationListener(
 
 
         minefieldScreen?.run {
-            camera.update()
-            //camera.position.set(10f, camera.viewportWidth * 0.05f, 0.0f)
-//            camera.position.set(10f, 10f, 0f)
-//            camera.update()
             draw()
         }
     }
@@ -118,5 +118,49 @@ class LevelApplicationListener(
 
     fun setActionsEnabled(enabled: Boolean) {
 
+    }
+
+    override fun touchDown(x: Float, y: Float, pointer: Int, button: Int): Boolean {
+        print("zoom = 2")
+        return false
+    }
+
+    override fun tap(x: Float, y: Float, count: Int, button: Int): Boolean {
+        return false
+    }
+
+    override fun longPress(x: Float, y: Float): Boolean {
+        return false
+    }
+
+    override fun fling(velocityX: Float, velocityY: Float, button: Int): Boolean {
+        return false
+    }
+
+    override fun pan(x: Float, y: Float, deltaX: Float, deltaY: Float): Boolean {
+        return false
+    }
+
+    override fun panStop(x: Float, y: Float, pointer: Int, button: Int): Boolean {
+        return false
+    }
+
+    override fun zoom(initialDistance: Float, distance: Float): Boolean {
+        minefieldScreen?.changeZoom(initialDistance/distance)
+        return true
+    }
+
+    override fun pinch(
+        initialPointer1: Vector2?,
+        initialPointer2: Vector2?,
+        pointer1: Vector2?,
+        pointer2: Vector2?
+    ): Boolean {
+        print("zoom = 1")
+        return false
+    }
+
+    override fun pinchStop() {
+        // Empty
     }
 }
