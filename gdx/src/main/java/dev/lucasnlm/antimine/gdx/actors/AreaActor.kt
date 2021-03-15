@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine.gdx.actors
 import android.view.ViewConfiguration
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Actor
@@ -21,12 +22,14 @@ import dev.lucasnlm.antimine.gdx.use
 import dev.lucasnlm.antimine.gdx.useColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.minesAround
+import java.lang.Exception
 
 class AreaActor(
     size: Float,
     private var area: Area,
+    private var areaForm: AreaForm,
     private val theme: AppTheme,
-    private val internalPadding: Float = Gdx.graphics.density * 1.5f,
+    private val internalPadding: Float = 0f,
     private val onSingleTouch: (Area) -> Unit,
     private val onLongTouch: (Area) -> Unit,
 ) : Actor() {
@@ -70,8 +73,9 @@ class AreaActor(
         })
     }
 
-    fun bindArea(area: Area) {
+    fun bindArea(area: Area, areaForm: AreaForm) {
         this.area = area
+        this.areaForm = areaForm
     }
 
     override fun act(delta: Float) {
@@ -106,24 +110,12 @@ class AreaActor(
 
         unsafeBatch?.scope { batch, textures ->
             val quality = GdxLocal.qualityZoomLevel
-            val isOdd: Boolean
+            val isOdd: Boolean = if (area.posY % 2 == 0) { area.posX % 2 != 0 } else { area.posX % 2 == 0 }
 
-            val areaTexture = if (area.isCovered) {
-                isOdd = if (area.posY % 2 == 0) {
-                    area.posX % 2 != 0
-                } else {
-                    area.posX % 2 == 0
-                }
-
-                if (isOdd) textures.areaCoveredOdd[quality] else textures.areaCovered[quality]
+            val areaTexture: Texture? = if (area.isCovered) {
+                textures.areaTextures[areaForm]
             } else {
-                isOdd = if (area.posY % 2 == 0) {
-                    area.posX % 2 != 0
-                } else {
-                    area.posX % 2 == 0
-                }
-
-                if (isOdd) textures.areaUncoveredOdd[quality] else textures.areaUncovered[quality]
+                null
             }
 
             if (isCurrentTouch && area.isCovered && quality < 2 && GdxLocal.focusResizeLevel > 1.0f) {
@@ -145,8 +137,20 @@ class AreaActor(
                     )
                 }
 
+                areaTexture?.let {
+                    batch.drawArea(
+                        texture = it,
+                        x = x + internalPadding,
+                        y = y + internalPadding,
+                        width = width - internalPadding * 2,
+                        height = height - internalPadding * 2,
+                        color = Color(1f, 1f, 1f, areaAlpha),
+                        blend = quality < 2,
+                    )
+                }
+
                 batch.drawArea(
-                    texture = if (isOdd) textures.detailedAreaOdd else textures.detailedArea,
+                    texture = textures.detailedAreaOdd,
                     x = x - width * (resize - 1.0f) * 0.5f,
                     y = y - height * (resize - 1.0f) * 0.5f,
                     width = width * resize,
@@ -157,15 +161,42 @@ class AreaActor(
             } else {
                 toBack()
 
-                batch.drawArea(
-                    texture = areaTexture,
-                    x = x + internalPadding,
-                    y = y + internalPadding,
-                    width = width - internalPadding * 2,
-                    height = height - internalPadding * 2,
-                    color = Color(1f, 1f, 1f, areaAlpha),
-                    blend = quality < 2,
-                )
+                if (!area.isCovered) {
+                    batch.drawArea(
+                        texture = if (isOdd) textures.areaUncoveredOdd[quality] else textures.areaUncovered[quality],
+                        x = x + internalPadding,
+                        y = y + internalPadding,
+                        width = width - internalPadding * 2,
+                        height = height - internalPadding * 2,
+                        color = Color(1f, 1f, 1f, 0.25f),
+                        blend = quality < 2,
+                    )
+                }
+
+
+                areaTexture?.let {
+                    batch.drawArea(
+                        texture = it,
+                        x = x + internalPadding,
+                        y = y + internalPadding,
+                        width = width - internalPadding * 2,
+                        height = height - internalPadding * 2,
+                        color = Color(1f, 1f, 1f, areaAlpha),
+                        blend = quality < 2,
+                    )
+                }
+
+                if (area.isCovered && isOdd) {
+                    batch.drawArea(
+                        texture = textures.areaCoveredOdd[quality],
+                        x = x + internalPadding,
+                        y = y + internalPadding,
+                        width = width - internalPadding * 2,
+                        height = height - internalPadding * 2,
+                        color = Color(1f, 1f, 1f, 0.25f),
+                        blend = quality < 2,
+                    )
+                }
             }
 
             GdxLocal.gameTextures?.let {

@@ -19,8 +19,6 @@ class MinefieldScreen(
     private var minefieldWidth: Float? = null
     private var minefieldHeight: Float? = null
     private var currentZoom: Float = 1.0f
-
-    // Visibility references
     private var lastCameraPosition: Vector3? = null
 
     init {
@@ -68,8 +66,10 @@ class MinefieldScreen(
             val top = minefieldHeight - 0.5f * virtualHeight + renderSettings.internalPadding.top + renderSettings.appBarHeight
             val bottom = 0.5f * virtualHeight - renderSettings.internalPadding.bottom - renderSettings.navigationBarHeight
 
-            camera.position.set((start + end) * 0.5f, (top + bottom) * 0.5f, 0f)
-            camera.update(true)
+            camera.run {
+                position.set((start + end) * 0.5f, (top + bottom) * 0.5f, 0f)
+                update(true)
+            }
         }
         refreshVisibleActorsIfNeeded()
         Gdx.graphics.requestRendering()
@@ -83,7 +83,7 @@ class MinefieldScreen(
 
         if (GdxLocal.hasHighlightAreas) {
             GdxLocal.globalAlpha -= delta
-            GdxLocal.globalAlpha = GdxLocal.globalAlpha.coerceAtLeast(0.45f)
+            GdxLocal.globalAlpha = GdxLocal.globalAlpha.coerceAtLeast(0.6f)
         } else {
             GdxLocal.globalAlpha += delta * 2.0f
             GdxLocal.globalAlpha = GdxLocal.globalAlpha.coerceAtMost(1.0f)
@@ -128,18 +128,20 @@ class MinefieldScreen(
                 GdxLocal.pressedArea = it.copy(consumed = true)
             }
 
-            val virtualWidth = Gdx.graphics.width
-            val virtualHeight = Gdx.graphics.height
+            val screenWidth = Gdx.graphics.width
+            val screenHeight = Gdx.graphics.height
+
+            val virtualHeight = screenHeight - renderSettings.appBarHeight - renderSettings.navigationBarHeight
 
             camera?.run {
                 val newX = (position.x - dx)
                 val newY = (position.y + dy)
-                val start = 0.5f * virtualWidth - renderSettings.internalPadding.start
-                val end = minefieldWidth - 0.5f * virtualWidth + renderSettings.internalPadding.end
-                val top = minefieldHeight - 0.5f * virtualHeight + renderSettings.internalPadding.top + renderSettings.appBarHeight
-                val bottom = 0.5f * virtualHeight - renderSettings.internalPadding.bottom - renderSettings.navigationBarHeight
+                val start = 0.5f * screenWidth - renderSettings.internalPadding.start
+                val end = minefieldWidth - 0.5f * screenWidth + renderSettings.internalPadding.end
+                val top = minefieldHeight - 0.5f * screenHeight + renderSettings.internalPadding.top + renderSettings.appBarHeight
+                val bottom = 0.5f * screenHeight - renderSettings.internalPadding.bottom - renderSettings.navigationBarHeight
 
-                if (virtualWidth > minefieldWidth) {
+                if (screenWidth > minefieldWidth) {
                     dx = 0f
                 } else {
                     if (newX < start) {

@@ -13,11 +13,13 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.input.GestureDetector
 import com.badlogic.gdx.math.Vector2
+import dev.lucasnlm.antimine.core.getPos
 import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
+import dev.lucasnlm.antimine.gdx.actors.AreaForm
 import dev.lucasnlm.antimine.gdx.models.GameTextures
 import dev.lucasnlm.antimine.gdx.models.InternalPadding
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
@@ -101,7 +103,8 @@ class LevelApplicationListener(
                         radiusLevel = radiusLevel,
                         qualityLevel = it,
                         backgroundColor = theme.palette.background,
-                        color = theme.palette.covered
+                        color = theme.palette.covered,
+                        alphaEnabled = true,
                     )
                 },
                 areaCoveredOdd = listOf(0, 1, 2).map {
@@ -110,13 +113,14 @@ class LevelApplicationListener(
                         radiusLevel = radiusLevel,
                         qualityLevel = it,
                         backgroundColor = theme.palette.background,
-                        color = theme.palette.coveredOdd
+                        color = theme.palette.coveredOdd,
+                        alphaEnabled = true,
                     )
                 },
                 areaUncovered = listOf(0, 1, 2).map {
                     AreaAssetBuilder.getAreaTexture(
                         expectedSize = expectedSize,
-                        radiusLevel = radiusLevel,
+                        radiusLevel = 1,
                         qualityLevel = it,
                         backgroundColor = theme.palette.background,
                         color = theme.palette.uncovered
@@ -125,7 +129,7 @@ class LevelApplicationListener(
                 areaUncoveredOdd = listOf(0, 1, 2).map {
                     AreaAssetBuilder.getAreaTexture(
                         expectedSize = expectedSize,
-                        radiusLevel = radiusLevel,
+                        radiusLevel = 1,
                         qualityLevel = it,
                         backgroundColor = theme.palette.background,
                         color = theme.palette.uncoveredOdd
@@ -160,6 +164,16 @@ class LevelApplicationListener(
                     color = theme.palette.coveredOdd,
                     alphaEnabled = true,
                 ),
+                areaTextures = AreaForm.values().map {
+                    it to AreaAssetBuilder.getAreaTextureForm(
+                        areaForm = it,
+                        expectedSize = expectedSize,
+                        radiusLevel = radiusLevel,
+                        qualityLevel = 0,
+                        backgroundColor = theme.palette.background,
+                        color = theme.palette.covered
+                    )
+                }.toMap(),
             )
         }
 
@@ -182,6 +196,7 @@ class LevelApplicationListener(
                 areaCoveredOdd.forEach { it.dispose() }
                 areaUncovered.forEach { it.dispose() }
                 areaUncoveredOdd.forEach { it.dispose() }
+                areaTextures.forEach { (_, texture) -> texture.dispose() }
             }
             textureAtlas?.dispose()
             textureAtlas = null
@@ -296,6 +311,7 @@ class LevelApplicationListener(
                     theme = theme,
                     size = areaSize,
                     area = it,
+                    areaForm = if (it.isCovered) getForm(it, field) else AreaForm.None,
                     onSingleTouch = onSingleTouch,
                     onLongTouch = onLongTouch,
                 )
@@ -304,12 +320,51 @@ class LevelApplicationListener(
             }
         } else {
             boundAreas.forEachIndexed { index, areaActor ->
-                areaActor.bindArea(field[index])
+                val area = field[index]
+                areaActor.bindArea(
+                    area = area,
+                    areaForm = if (area.isCovered) getForm(area, field) else AreaForm.None,
+                )
             }
         }
 
         GdxLocal.hasHighlightAreas = field.firstOrNull { it.highlighted } != null
         Gdx.graphics.requestRendering()
+    }
+
+    private fun getForm(area: Area, field: List<Area>): AreaForm {
+        val top = field.getPos(area.posX, area.posY + 1)?.run { !isCovered } ?: true
+        val bottom = field.getPos(area.posX, area.posY - 1)?.run { !isCovered } ?: true
+        val left = field.getPos(area.posX - 1, area.posY)?.run { !isCovered } ?: true
+        val right = field.getPos(area.posX + 1, area.posY)?.run { !isCovered } ?: true
+
+        var roundCorners = 0b0000
+
+        if (top && left) {
+            roundCorners = roundCorners or 0b1000
+        }
+        if (top && right) {
+            roundCorners = roundCorners or 0b0100
+        }
+        if (bottom && left) {
+            roundCorners = roundCorners or 0b0010
+        }
+        if (bottom && right) {
+            roundCorners = roundCorners or 0b0001
+        }
+
+        return when (roundCorners) {
+            0b1000 -> AreaForm.LeftTop
+            0b0100 -> AreaForm.RightTop
+            0b0101 -> AreaForm.FullRight
+            0b1100 -> AreaForm.FullTop
+            0b1010 -> AreaForm.FullLeft
+            0b0010 -> AreaForm.LeftBottom
+            0b0001 -> AreaForm.RightBottom
+            0b0011 -> AreaForm.FullBottom
+            0b1111 -> AreaForm.Full
+            else -> AreaForm.None
+        }
     }
 
     fun setActionsEnabled(enabled: Boolean) {
