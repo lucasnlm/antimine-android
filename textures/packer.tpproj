@@ -1,6 +1,6 @@
 name=antimine
 filename=
-output=../../../../Desktop
+output=../gdx/src/main/assets
 
 alias=true
 alphaThreshold=0
