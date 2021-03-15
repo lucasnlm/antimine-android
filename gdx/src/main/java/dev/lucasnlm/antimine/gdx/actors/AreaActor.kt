@@ -43,18 +43,17 @@ class AreaActor(
             override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int) {
                 super.touchUp(event, x, y, pointer, button)
                 GdxLocal.pressedArea?.let {
-                    if (!it.consumed) {
+                    if (!it.consumed && it.area.id == area.id) {
                         val dt = System.currentTimeMillis() - it.pressedAt
 
                         if (dt <= ViewConfiguration.getLongPressTimeout()) {
                             onSingleTouch(area)
                         }
-                    }
 
-                    GdxLocal.pressedArea = it.copy(consumed = true)
+                        GdxLocal.pressedArea = it.copy(consumed = true)
+                    }
                 }
                 toBack()
-                Gdx.graphics.requestRendering()
             }
 
             override fun touchDown(event: InputEvent, x: Float, y: Float, pointer: Int, button: Int): Boolean {

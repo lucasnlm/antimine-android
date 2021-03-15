@@ -125,12 +125,9 @@ class MinefieldScreen(
         return if (minefieldWidth != null && minefieldHeight != null) {
             var dx = Gdx.input.deltaX.toFloat()
             var dy = Gdx.input.deltaY.toFloat()
-            val deltaLength = dx * dx + dy * dy
 
-            if (deltaLength > 4) {
-                GdxLocal.pressedArea?.let {
-                    GdxLocal.pressedArea = it.copy(consumed = true)
-                }
+            GdxLocal.pressedArea?.let {
+                GdxLocal.pressedArea = it.copy(consumed = true)
             }
 
             val virtualWidth = Gdx.graphics.width

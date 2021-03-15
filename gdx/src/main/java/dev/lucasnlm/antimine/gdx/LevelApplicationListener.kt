@@ -7,7 +7,6 @@ import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.Pixmap
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
@@ -30,9 +29,6 @@ import dev.lucasnlm.antimine.ui.ext.blue
 import dev.lucasnlm.antimine.ui.ext.green
 import dev.lucasnlm.antimine.ui.ext.red
 import dev.lucasnlm.antimine.ui.model.AppTheme
-import kotlin.math.ceil
-import kotlin.math.ln
-import kotlin.math.pow
 
 class LevelApplicationListener(
     private val context: Context,
