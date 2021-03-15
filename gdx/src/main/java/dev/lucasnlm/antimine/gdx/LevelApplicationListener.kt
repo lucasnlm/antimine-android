@@ -336,10 +336,10 @@ class LevelApplicationListener(
     }
 
     private fun getForm(area: Area, field: List<Area>): AreaForm {
-        val top = field.getPos(area.posX, area.posY + 1)?.run { !isCovered } ?: true
-        val bottom = field.getPos(area.posX, area.posY - 1)?.run { !isCovered } ?: true
-        val left = field.getPos(area.posX - 1, area.posY)?.run { !isCovered } ?: true
-        val right = field.getPos(area.posX + 1, area.posY)?.run { !isCovered } ?: true
+        val top = field.getPos(area.posX, area.posY + 1)?.run { !isCovered || mark != area.mark } ?: true
+        val bottom = field.getPos(area.posX, area.posY - 1)?.run { !isCovered || mark != area.mark } ?: true
+        val left = field.getPos(area.posX - 1, area.posY)?.run { !isCovered || mark != area.mark } ?: true
+        val right = field.getPos(area.posX + 1, area.posY)?.run { !isCovered || mark != area.mark } ?: true
 
         var roundCorners = 0b0000
 
