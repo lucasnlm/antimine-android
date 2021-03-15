@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
+import dev.lucasnlm.antimine.gdx.BuildConfig
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
 import dev.lucasnlm.antimine.preferences.models.Minefield
@@ -101,6 +102,10 @@ class MinefieldScreen(
                 Gdx.graphics.requestRendering()
             }
         }
+
+        if (BuildConfig.DEBUG) {
+            Gdx.app.log("GDX", "GDX Fps = ${Gdx.graphics.framesPerSecond}")
+        }
     }
 
     private fun refreshVisibleActorsIfNeeded(forceRefresh: Boolean = false) {
@@ -111,11 +116,6 @@ class MinefieldScreen(
                 it.isVisible = camera.frustum.boundsInFrustum(it.x, it.y, 0f, it.width, it.height, 0.0f)
             }
         }
-
-        val vis = actors.count {
-            it.isVisible
-        }
-        Gdx.app.log("lucasnlm", "lucasnl vis $vis, fps ${Gdx.graphics.getFramesPerSecond()}")
     }
 
     override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean {
