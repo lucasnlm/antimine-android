@@ -55,9 +55,18 @@ class DimensionRepository(
             context.theme.obtainStyledAttributes(
                 IntArray(1) { android.R.attr.actionBarSize }
             )
+
+        val resourceId: Int = context.resources.getIdentifier("status_bar_height", "dimen", "android")
+        val statusBar = if (resourceId > 0) {
+            context.resources.getDimensionPixelSize(resourceId)
+        } else {
+            0
+        }
+
         val actionBarSize: Int = styledAttributes.getDimension(0, 0.0f).toInt()
         styledAttributes.recycle()
-        return actionBarSize
+
+        return actionBarSize + statusBar
     }
 
     override fun navigationBarHeight(): Int {

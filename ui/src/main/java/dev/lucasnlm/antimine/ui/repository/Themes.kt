@@ -134,7 +134,7 @@ object Themes {
                 minesAround6 = 0xFFC107,
                 minesAround7 = 0x66126B,
                 minesAround8 = 0x000000,
-                highlight = 0xFFFFFF,
+                highlight = 0x689f38,
                 focus = 0xFFFFFF,
             ),
             assets = Assets(

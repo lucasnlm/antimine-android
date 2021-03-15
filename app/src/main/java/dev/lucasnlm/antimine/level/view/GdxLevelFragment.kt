@@ -13,7 +13,9 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.gdx.LevelApplicationListener
+import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.repository.ThemeRepository
+import dev.lucasnlm.external.CrashReporter
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -22,12 +24,28 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     protected val gameViewModel by sharedViewModel<GameViewModel>()
     private val themeRepository: ThemeRepository by inject()
     private val dimensionRepository: IDimensionRepository by inject()
+    private val preferencesRepository: IPreferencesRepository by inject()
+    private val crashReporter: CrashReporter by inject()
 
     private val levelApplicationListener by lazy {
         LevelApplicationListener(
             context = requireContext(),
             theme = themeRepository.getTheme(),
-            dimensionRepository = dimensionRepository
+            preferencesRepository = preferencesRepository,
+            dimensionRepository = dimensionRepository,
+            crashLogger = {
+                crashReporter.sendError(it)
+            },
+            onSingleTouch = {
+                lifecycleScope.launch {
+                    gameViewModel.onSingleClick(it.id)
+                }
+            },
+            onLongTouch = {
+                lifecycleScope.launch {
+                    gameViewModel.onLongClick(it.id)
+                }
+            }
         )
     }
 
@@ -78,16 +96,16 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 viewLifecycleOwner,
                 {
                     levelApplicationListener.bindField(it)
-                    //focusOnCenterIfNeeded()
+                    // focusOnCenterIfNeeded()
                 }
             )
 
             eventObserver.observe(
                 viewLifecycleOwner,
                 {
-                    //if (!gameViewModel.hasPlantedMines() && activity?.isFinishing == false) {
+                    // if (!gameViewModel.hasPlantedMines() && activity?.isFinishing == false) {
                     //    levelSetup.value?.let(::centerMinefield)
-                    //}
+                    // }
 
                     when (it) {
                         Event.Pause,

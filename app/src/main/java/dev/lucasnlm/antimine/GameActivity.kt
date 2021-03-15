@@ -48,6 +48,7 @@ import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -261,6 +262,10 @@ class GameActivity :
             setOnClickListener {
                 backToMainActivity()
             }
+        }
+
+        app_bar?.apply {
+            setBackgroundColor(usingTheme.palette.background.toAndroidColor(200))
         }
 
         if (applicationContext.isPortrait()) {
