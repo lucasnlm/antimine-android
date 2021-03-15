@@ -93,13 +93,11 @@ class MinefieldScreen(
             if (!it.consumed && GdxLocal.focusResizeLevel < GdxLocal.maxFocusResizeLevel) {
                 GdxLocal.focusResizeLevel =
                     (GdxLocal.focusResizeLevel + delta).coerceAtMost(GdxLocal.maxFocusResizeLevel)
-                Gdx.graphics.requestRendering()
             }
 
             if (it.consumed && GdxLocal.focusResizeLevel >= 1.0f) {
                 GdxLocal.focusResizeLevel =
                     (GdxLocal.focusResizeLevel - delta * 0.2f).coerceAtLeast(1.0f)
-                Gdx.graphics.requestRendering()
             }
         }
 
