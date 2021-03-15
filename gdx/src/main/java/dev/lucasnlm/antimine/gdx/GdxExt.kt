@@ -37,7 +37,10 @@ fun ShapeRenderer.useColor(color: Int, alpha: Float? = 1f) {
     setColor(color.red(), color.green(), color.blue(), alpha ?: 1.0f)
 }
 
-fun ShapeRenderer.scope(type: ShapeRenderer.ShapeType = ShapeRenderer.ShapeType.Filled, block: ShapeRenderer.() -> Unit) {
+fun ShapeRenderer.scope(
+    type: ShapeRenderer.ShapeType = ShapeRenderer.ShapeType.Filled,
+    block: ShapeRenderer.() -> Unit,
+) {
     begin(type)
     block()
     end()

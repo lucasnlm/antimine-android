@@ -59,12 +59,13 @@ class MinefieldScreen(
         val minefieldHeight = this.minefieldHeight
         if (minefieldWidth != null && minefieldHeight != null) {
             val virtualWidth = Gdx.graphics.width
-            val virtualHeight = Gdx.graphics.height - renderSettings.navigationBarHeight
+            val virtualHeight = Gdx.graphics.height
+            val padding = renderSettings.internalPadding
 
-            val start = 0.5f * virtualWidth - renderSettings.internalPadding.start
-            val end = minefieldWidth - 0.5f * virtualWidth + renderSettings.internalPadding.end
-            val top = minefieldHeight - 0.5f * virtualHeight + renderSettings.internalPadding.top + renderSettings.appBarHeight
-            val bottom = 0.5f * virtualHeight - renderSettings.internalPadding.bottom - renderSettings.navigationBarHeight
+            val start = 0.5f * virtualWidth - padding.start
+            val end = minefieldWidth - 0.5f * virtualWidth + padding.end
+            val top = minefieldHeight - 0.5f * virtualHeight + padding.top + renderSettings.appBarHeight
+            val bottom = 0.5f * virtualHeight + padding.bottom - renderSettings.navigationBarHeight
 
             camera.run {
                 position.set((start + end) * 0.5f, (top + bottom) * 0.5f, 0f)
@@ -130,16 +131,16 @@ class MinefieldScreen(
 
             val screenWidth = Gdx.graphics.width
             val screenHeight = Gdx.graphics.height
-
+            val padding = renderSettings.internalPadding
             val virtualHeight = screenHeight - renderSettings.appBarHeight - renderSettings.navigationBarHeight
 
             camera?.run {
                 val newX = (position.x - dx)
                 val newY = (position.y + dy)
-                val start = 0.5f * screenWidth - renderSettings.internalPadding.start
-                val end = minefieldWidth - 0.5f * screenWidth + renderSettings.internalPadding.end
-                val top = minefieldHeight - 0.5f * screenHeight + renderSettings.internalPadding.top + renderSettings.appBarHeight
-                val bottom = 0.5f * screenHeight - renderSettings.internalPadding.bottom - renderSettings.navigationBarHeight
+                val start = 0.5f * screenWidth - padding.start
+                val end = minefieldWidth - 0.5f * screenWidth + padding.end
+                val top = minefieldHeight - 0.5f * screenHeight + padding.top + renderSettings.appBarHeight
+                val bottom = 0.5f * screenHeight - padding.bottom - renderSettings.navigationBarHeight
 
                 if (screenWidth > minefieldWidth) {
                     dx = 0f

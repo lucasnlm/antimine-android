@@ -1,7 +1,5 @@
 package dev.lucasnlm.antimine.gdx
 
-import android.graphics.Color
-import com.badlogic.gdx.graphics.Color.CLEAR
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
 import dev.lucasnlm.antimine.gdx.actors.AreaForm
@@ -84,15 +82,14 @@ object AreaAssetBuilder {
                     AreaForm.LeftTop -> {
                         fillCircle(radius, radius, radius)
                         fillRectangle(radius, -radius, realRadius - radius, realRadius)
-                        fillRectangle(0,  radius, realRadius, realRadius - radius)
-                        fillRectangle(0,  size - realRadius, width, realRadius)
-                        fillRectangle(size - realRadius,  0, realRadius, height)
+                        fillRectangle(0, radius, realRadius, realRadius - radius)
+                        fillRectangle(0, size - realRadius, width, realRadius)
+                        fillRectangle(size - realRadius, 0, realRadius, height)
                     }
                     AreaForm.RightTop -> {
                         fillCircle(size - radius, radius, radius)
                         fillRectangle(0, 0, size - radius, size)
                         fillRectangle(realRadius, radius, size - radius, size)
-
                     }
                     AreaForm.FullTop -> {
                         fillRectangle(0, radius, size, size - radius * 2)
@@ -100,7 +97,6 @@ object AreaAssetBuilder {
                         fillCircle(radius, radius, radius)
                         fillCircle(size - radius, radius, radius)
                         fillRectangle(0, realRadius, size, realRadius)
-
                     }
                     AreaForm.Full -> {
                         fillRectangle(0, radius, size, size - radius * 2)

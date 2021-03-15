@@ -22,7 +22,6 @@ import dev.lucasnlm.antimine.gdx.use
 import dev.lucasnlm.antimine.gdx.useColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.minesAround
-import java.lang.Exception
 
 class AreaActor(
     size: Float,
@@ -172,7 +171,6 @@ class AreaActor(
                         blend = quality < 2,
                     )
                 }
-
 
                 areaTexture?.let {
                     batch.drawArea(
