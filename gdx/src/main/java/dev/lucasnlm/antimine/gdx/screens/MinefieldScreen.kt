@@ -62,10 +62,10 @@ class MinefieldScreen(
             val virtualWidth = Gdx.graphics.width
             val virtualHeight = Gdx.graphics.height - renderSettings.navigationBarHeight
 
-            val start = 0.5f * virtualWidth
-            val end = minefieldWidth - 0.5f * virtualWidth
-            val top = minefieldHeight - 0.5f * virtualHeight
-            val bottom = 0.5f * virtualHeight - renderSettings.navigationBarHeight
+            val start = 0.5f * virtualWidth - renderSettings.internalPadding.start
+            val end = minefieldWidth - 0.5f * virtualWidth + renderSettings.internalPadding.end
+            val top = minefieldHeight - 0.5f * virtualHeight + renderSettings.internalPadding.top + renderSettings.appBarHeight
+            val bottom = 0.5f * virtualHeight - renderSettings.internalPadding.bottom - renderSettings.navigationBarHeight
 
             camera.position.set((start + end) * 0.5f, (top + bottom) * 0.5f, 0f)
             camera.update(true)
@@ -134,15 +134,15 @@ class MinefieldScreen(
             }
 
             val virtualWidth = Gdx.graphics.width
-            val virtualHeight = Gdx.graphics.height - renderSettings.navigationBarHeight
+            val virtualHeight = Gdx.graphics.height
 
             camera?.run {
                 val newX = (position.x - dx)
                 val newY = (position.y + dy)
                 val start = 0.5f * virtualWidth - renderSettings.internalPadding.start
                 val end = minefieldWidth - 0.5f * virtualWidth + renderSettings.internalPadding.end
-                val top = minefieldHeight - 0.5f * virtualHeight + renderSettings.internalPadding.top
-                val bottom = 0.5f * virtualHeight - renderSettings.internalPadding.bottom
+                val top = minefieldHeight - 0.5f * virtualHeight + renderSettings.internalPadding.top + renderSettings.appBarHeight
+                val bottom = 0.5f * virtualHeight - renderSettings.internalPadding.bottom - renderSettings.navigationBarHeight
 
                 if (virtualWidth > minefieldWidth) {
                     dx = 0f
