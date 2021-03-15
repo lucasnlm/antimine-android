@@ -64,7 +64,7 @@ class MinefieldScreen(
 
             val start = 0.5f * virtualWidth - padding.start
             val end = minefieldWidth - 0.5f * virtualWidth + padding.end
-            val top = minefieldHeight - 0.5f * virtualHeight + padding.top + renderSettings.appBarHeight
+            val top = minefieldHeight - 0.5f * (virtualHeight + padding.top - renderSettings.appBarHeight)
             val bottom = 0.5f * virtualHeight + padding.bottom - renderSettings.navigationBarHeight
 
             camera.run {
@@ -82,13 +82,10 @@ class MinefieldScreen(
 
         val delta = Gdx.graphics.deltaTime
 
-        if (GdxLocal.hasHighlightAreas) {
-            GdxLocal.globalAlpha -= delta
-            GdxLocal.globalAlpha = GdxLocal.globalAlpha.coerceAtLeast(0.6f)
-        } else {
-            GdxLocal.globalAlpha += delta * 2.0f
-            GdxLocal.globalAlpha = GdxLocal.globalAlpha.coerceAtMost(1.0f)
-        }
+//        if (GdxLocal.globalAlpha != 1.0f) {
+//            GdxLocal.globalAlpha += delta
+//            GdxLocal.globalAlpha = GdxLocal.globalAlpha.coerceAtMost(1.0f)
+//        }
 
         GdxLocal.pressedArea?.let {
             if (!it.consumed && GdxLocal.focusResizeLevel < GdxLocal.maxFocusResizeLevel) {
@@ -125,8 +122,8 @@ class MinefieldScreen(
             var dx = Gdx.input.deltaX.toFloat()
             var dy = Gdx.input.deltaY.toFloat()
 
-            GdxLocal.pressedArea?.let {
-                GdxLocal.pressedArea = it.copy(consumed = true)
+            if (dx*dx + dy*dy > 16f) {
+                GdxLocal.pressedArea = null
             }
 
             val screenWidth = Gdx.graphics.width

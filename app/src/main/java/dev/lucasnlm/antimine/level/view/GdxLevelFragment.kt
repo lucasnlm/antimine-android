@@ -114,7 +114,12 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                         Event.Running,
                         Event.Resume,
                         Event.ResumeGame,
-                        Event.StartNewGame -> levelApplicationListener.setActionsEnabled(true)
+                        Event.StartNewGame -> {
+                            levelApplicationListener.run {
+                                setActionsEnabled(true)
+                            }
+
+                        }
                         else -> {
                             // Nothing
                         }

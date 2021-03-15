@@ -46,12 +46,7 @@ class AreaActor(
                 super.touchUp(event, x, y, pointer, button)
                 GdxLocal.pressedArea?.let {
                     if (!it.consumed && it.area.id == area.id) {
-                        val dt = System.currentTimeMillis() - it.pressedAt
-
-                        if (dt <= ViewConfiguration.getLongPressTimeout()) {
-                            onSingleTouch(area)
-                        }
-
+                        onSingleTouch(it.area)
                         GdxLocal.pressedArea = it.copy(consumed = true)
                     }
                 }
@@ -95,9 +90,7 @@ class AreaActor(
     }
 
     private fun isCurrentlyPressed(): Boolean {
-        return GdxLocal.pressedArea?.let {
-            it.area.id == area.id
-        } == true
+        return GdxLocal.pressedArea?.let { it.area.id == area.id } == true
     }
 
     override fun draw(unsafeBatch: Batch?, parentAlpha: Float) {
@@ -108,7 +101,7 @@ class AreaActor(
         val areaAlpha = if (area.highlighted) 1.0f else GdxLocal.globalAlpha
 
         unsafeBatch?.scope { batch, textures ->
-            val quality = GdxLocal.qualityZoomLevel
+            val quality = 0
             val isOdd: Boolean = if (area.posY % 2 == 0) { area.posX % 2 != 0 } else { area.posX % 2 == 0 }
 
             val areaTexture: Texture? = if (area.isCovered) {

@@ -189,6 +189,8 @@ class LevelApplicationListener(
         batch.dispose()
 
         GdxLocal.run {
+            qualityZoomLevel = 0
+            focusResizeLevel = 1.15f
             gameTextures?.run {
                 detailedArea.dispose()
                 detailedAreaOdd.dispose()
@@ -210,6 +212,7 @@ class LevelApplicationListener(
 
     override fun render() {
         super.render()
+
         val width = Gdx.graphics.width
         val height = Gdx.graphics.height
 
