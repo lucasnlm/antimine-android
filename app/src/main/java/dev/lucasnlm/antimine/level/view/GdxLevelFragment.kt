@@ -118,7 +118,6 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                             levelApplicationListener.run {
                                 setActionsEnabled(true)
                             }
-
                         }
                         else -> {
                             // Nothing

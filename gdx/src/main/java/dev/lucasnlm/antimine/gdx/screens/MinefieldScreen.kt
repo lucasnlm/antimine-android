@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.gdx.screens
 
+import android.util.SizeF
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector3
@@ -8,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import dev.lucasnlm.antimine.gdx.BuildConfig
+import dev.lucasnlm.antimine.gdx.CameraController
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
 import dev.lucasnlm.antimine.preferences.models.Minefield
@@ -16,10 +18,11 @@ class MinefieldScreen(
     private val renderSettings: RenderSettings,
 ) : Stage() {
     private var minefield: Minefield? = null
-    private var minefieldWidth: Float? = null
-    private var minefieldHeight: Float? = null
+    private var minefieldSize: SizeF? = null
     private var currentZoom: Float = 1.0f
     private var lastCameraPosition: Vector3? = null
+
+    private val cameraController: CameraController
 
     init {
         actionsRequestRendering = true
@@ -35,11 +38,13 @@ class MinefieldScreen(
                 }
             }
         })
+
+        cameraController = CameraController(camera = camera, renderSettings = renderSettings)
     }
 
     fun changeZoom(zoomMultiplier: Float) {
         (camera as OrthographicCamera).apply {
-            zoom = (zoom * zoomMultiplier).coerceIn(1.0f, 4.0f)
+            zoom = (zoom * zoomMultiplier).coerceIn(0.5f, 4.0f)
             update(true)
 
             GdxLocal.qualityZoomLevel = (zoom.toInt() - 1).coerceAtLeast(0).coerceAtMost(2)
@@ -49,22 +54,22 @@ class MinefieldScreen(
 
     fun bindMinefield(minefield: Minefield) {
         this.minefield = minefield
-        minefieldWidth = minefield.width * renderSettings.areaSize
-        minefieldHeight = minefield.height * renderSettings.areaSize
+        minefieldSize = SizeF(
+            minefield.width * renderSettings.areaSize,
+            minefield.height * renderSettings.areaSize
+        )
         centerCamera()
     }
 
     private fun centerCamera() {
-        val minefieldWidth = this.minefieldWidth
-        val minefieldHeight = this.minefieldHeight
-        if (minefieldWidth != null && minefieldHeight != null) {
+        this.minefieldSize?.let {
             val virtualWidth = Gdx.graphics.width
             val virtualHeight = Gdx.graphics.height
             val padding = renderSettings.internalPadding
 
             val start = 0.5f * virtualWidth - padding.start
-            val end = minefieldWidth - 0.5f * virtualWidth + padding.end
-            val top = minefieldHeight - 0.5f * (virtualHeight + padding.top - renderSettings.appBarHeight)
+            val end = it.width - 0.5f * virtualWidth + padding.end
+            val top = it.height - 0.5f * (virtualHeight + padding.top - renderSettings.appBarHeight)
             val bottom = 0.5f * virtualHeight + padding.bottom - renderSettings.navigationBarHeight
 
             camera.run {
@@ -78,6 +83,10 @@ class MinefieldScreen(
 
     override fun act() {
         super.act()
+
+        // Handle camera movement
+        minefieldSize?.let { cameraController.act(it) }
+
         refreshVisibleActorsIfNeeded()
 
         val delta = Gdx.graphics.deltaTime
@@ -114,64 +123,32 @@ class MinefieldScreen(
         }
     }
 
+    override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
+        cameraController.setLockSpeed(false)
+        return super.touchUp(screenX, screenY, pointer, button)
+    }
+
     override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean {
-        val minefieldWidth = this.minefieldWidth
-        val minefieldHeight = this.minefieldHeight
+        return minefieldSize?.let {
+            val dx = Gdx.input.deltaX.toFloat()
+            val dy = Gdx.input.deltaY.toFloat()
 
-        return if (minefieldWidth != null && minefieldHeight != null) {
-            var dx = Gdx.input.deltaX.toFloat()
-            var dy = Gdx.input.deltaY.toFloat()
-
-            if (dx*dx + dy*dy > 16f) {
+            if (dx * dx + dy * dy > 16f) {
                 GdxLocal.pressedArea = null
             }
 
-            val screenWidth = Gdx.graphics.width
-            val screenHeight = Gdx.graphics.height
-            val padding = renderSettings.internalPadding
-            val virtualHeight = screenHeight - renderSettings.appBarHeight - renderSettings.navigationBarHeight
+            cameraController.addVelocity(
+                -dx * currentZoom,
+                dy * currentZoom,
+            )
 
-            camera?.run {
-                val newX = (position.x - dx)
-                val newY = (position.y + dy)
-                val start = 0.5f * screenWidth - padding.start
-                val end = minefieldWidth - 0.5f * screenWidth + padding.end
-                val top = minefieldHeight - 0.5f * screenHeight + padding.top + renderSettings.appBarHeight
-                val bottom = 0.5f * screenHeight - padding.bottom - renderSettings.navigationBarHeight
+            cameraController.setLockSpeed(true)
 
-                if (screenWidth > minefieldWidth) {
-                    dx = 0f
-                } else {
-                    if (newX < start) {
-                        dx = 0f
-                        position.set(start, position.y, 0f)
-                    }
-                    if (newX > end) {
-                        dx = 0f
-                        position.set(end, position.y, 0f)
-                    }
-                }
-
-                if (virtualHeight > minefieldHeight) {
-                    dy = 0f
-                } else {
-                    if (newY > top) {
-                        dy = 0f
-                        position.set(position.x, top, 0f)
-                    }
-
-                    if (newY < bottom) {
-                        dy = 0f
-                        position.set(position.x, bottom, 0f)
-                    }
-                }
-
-                translate(-dx * currentZoom, dy * currentZoom, 0f)
-                update(true)
-                refreshVisibleActorsIfNeeded()
-            } != null
-        } else {
-            false
-        }
+            cameraController.translate(
+                -dx * currentZoom,
+                dy * currentZoom,
+            )
+            true
+        } != null
     }
 }

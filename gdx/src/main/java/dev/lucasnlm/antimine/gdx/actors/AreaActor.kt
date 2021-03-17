@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Touchable
+import dev.lucasnlm.antimine.core.getPos
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.drawArea
@@ -96,6 +97,10 @@ class AreaActor(
     override fun draw(unsafeBatch: Batch?, parentAlpha: Float) {
         super.draw(unsafeBatch, parentAlpha)
         val internalPadding = this.internalPadding
+
+        if (GdxLocal.qualityZoomLevel > 0 && !area.isCovered) {
+            return
+        }
 
         val isCurrentTouch = isCurrentlyPressed()
         val areaAlpha = if (area.highlighted) 1.0f else GdxLocal.globalAlpha
@@ -188,6 +193,18 @@ class AreaActor(
                         blend = quality < 2,
                     )
                 }
+
+                if (area.hasMine && !area.isCovered) {
+                    batch.drawArea(
+                        texture = textures.areaCoveredOdd[quality],
+                        x = x + internalPadding,
+                        y = y + internalPadding,
+                        width = width - internalPadding * 2,
+                        height = height - internalPadding * 2,
+                        color = Color(1f, 1f, 1f, 0.25f),
+                        blend = quality < 2,
+                    )
+                }
             }
 
             GdxLocal.gameTextures?.let {
@@ -245,6 +262,43 @@ class AreaActor(
                         height - internalPadding * 8,
                     )
                 }
+            }
+        }
+    }
+
+    companion object {
+        fun getForm(area: Area, field: List<Area>): AreaForm {
+            val top = field.getPos(area.posX, area.posY + 1)?.run { !isCovered || mark != area.mark } ?: true
+            val bottom = field.getPos(area.posX, area.posY - 1)?.run { !isCovered || mark != area.mark } ?: true
+            val left = field.getPos(area.posX - 1, area.posY)?.run { !isCovered || mark != area.mark } ?: true
+            val right = field.getPos(area.posX + 1, area.posY)?.run { !isCovered || mark != area.mark } ?: true
+
+            var roundCorners = 0b0000
+
+            if (top && left) {
+                roundCorners = roundCorners or 0b1000
+            }
+            if (top && right) {
+                roundCorners = roundCorners or 0b0100
+            }
+            if (bottom && left) {
+                roundCorners = roundCorners or 0b0010
+            }
+            if (bottom && right) {
+                roundCorners = roundCorners or 0b0001
+            }
+
+            return when (roundCorners) {
+                0b1000 -> AreaForm.LeftTop
+                0b0100 -> AreaForm.RightTop
+                0b0101 -> AreaForm.FullRight
+                0b1100 -> AreaForm.FullTop
+                0b1010 -> AreaForm.FullLeft
+                0b0010 -> AreaForm.LeftBottom
+                0b0001 -> AreaForm.RightBottom
+                0b0011 -> AreaForm.FullBottom
+                0b1111 -> AreaForm.Full
+                else -> AreaForm.None
             }
         }
     }
