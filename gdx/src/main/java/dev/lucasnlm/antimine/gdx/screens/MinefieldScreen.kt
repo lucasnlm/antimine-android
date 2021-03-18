@@ -8,14 +8,19 @@ import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
+import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.BuildConfig
 import dev.lucasnlm.antimine.gdx.CameraController
 import dev.lucasnlm.antimine.gdx.GdxLocal
+import dev.lucasnlm.antimine.gdx.actors.AreaActor
+import dev.lucasnlm.antimine.gdx.actors.AreaForm
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
 class MinefieldScreen(
     private val renderSettings: RenderSettings,
+    private val onSingleTouch: (Area) -> Unit,
+    private val onLongTouch: (Area) -> Unit,
 ) : Stage() {
     private var minefield: Minefield? = null
     private var minefieldSize: SizeF? = null
@@ -23,6 +28,9 @@ class MinefieldScreen(
     private var lastCameraPosition: Vector3? = null
 
     private val cameraController: CameraController
+
+    private var boundHashCode: Int? = null
+    private var boundAreas = listOf<Area>()
 
     init {
         actionsRequestRendering = true
@@ -52,12 +60,51 @@ class MinefieldScreen(
         refreshVisibleActorsIfNeeded(true)
     }
 
-    fun bindMinefield(minefield: Minefield) {
-        this.minefield = minefield
-        minefieldSize = SizeF(
-            minefield.width * renderSettings.areaSize,
-            minefield.height * renderSettings.areaSize
-        )
+    fun bindField(field: List<Area>) {
+        boundAreas = field
+    }
+
+    private fun refreshAreas() {
+        val currentHashCode = boundAreas.hashCode()
+        if (boundAreas.hashCode() != boundHashCode) {
+            boundHashCode = currentHashCode
+
+            boundAreas.let { field ->
+                if (actors.size != field.size) {
+                    clear()
+                    field.map {
+                        AreaActor(
+                            theme = renderSettings.theme,
+                            size = renderSettings.areaSize,
+                            area = it,
+                            areaForm = if (it.isCovered) AreaActor.getForm(it, field) else AreaForm.None,
+                            onSingleTouch = onSingleTouch,
+                            onLongTouch = onLongTouch,
+                        )
+                    }.forEach {
+                        addActor(it)
+                    }
+                } else {
+                    actors.forEach {
+                        val areaActor = (it as AreaActor)
+                        val area = field[areaActor.boundAreaId()]
+                        areaActor.bindArea(area, AreaActor.getForm(area, field))
+                    }
+                }
+            }
+
+            Gdx.graphics.requestRendering()
+        }
+    }
+
+    fun bindSize(newMinefield: Minefield?) {
+        minefield = newMinefield
+        minefieldSize = newMinefield?.let {
+            SizeF(
+                it.width * renderSettings.areaSize,
+                it.height * renderSettings.areaSize,
+            )
+        }
         centerCamera()
     }
 
@@ -87,14 +134,10 @@ class MinefieldScreen(
         // Handle camera movement
         minefieldSize?.let { cameraController.act(it) }
 
+        refreshAreas()
         refreshVisibleActorsIfNeeded()
 
         val delta = Gdx.graphics.deltaTime
-
-//        if (GdxLocal.globalAlpha != 1.0f) {
-//            GdxLocal.globalAlpha += delta
-//            GdxLocal.globalAlpha = GdxLocal.globalAlpha.coerceAtMost(1.0f)
-//        }
 
         GdxLocal.pressedArea?.let {
             if (!it.consumed && GdxLocal.focusResizeLevel < GdxLocal.maxFocusResizeLevel) {

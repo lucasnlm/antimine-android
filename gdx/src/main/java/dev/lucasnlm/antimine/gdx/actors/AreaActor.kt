@@ -35,8 +35,8 @@ class AreaActor(
 ) : Actor() {
 
     init {
-        width = size * Gdx.graphics.density
-        height = size * Gdx.graphics.density
+        width = size
+        height = size
         x = area.posX * width
         y = area.posY * height
 
@@ -67,6 +67,8 @@ class AreaActor(
             }
         })
     }
+
+    fun boundAreaId() = area.id
 
     fun bindArea(area: Area, areaForm: AreaForm) {
         this.area = area

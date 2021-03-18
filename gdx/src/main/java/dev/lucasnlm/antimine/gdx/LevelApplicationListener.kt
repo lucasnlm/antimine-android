@@ -17,7 +17,6 @@ import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
-import dev.lucasnlm.antimine.gdx.actors.AreaActor
 import dev.lucasnlm.antimine.gdx.actors.AreaForm
 import dev.lucasnlm.antimine.gdx.models.GameTextures
 import dev.lucasnlm.antimine.gdx.models.InternalPadding
@@ -42,10 +41,9 @@ class LevelApplicationListener(
 ) : ApplicationAdapter(), GestureDetector.GestureListener {
 
     private val assetManager = AssetManager()
-    private val areaSize = dimensionRepository.areaSize()
 
     private var minefieldScreen: MinefieldScreen? = null
-    private var boundAreas: Iterable<AreaActor>? = null
+    private var boundAreas: List<Area> = listOf()
     private var boundMinefield: Minefield? = null
 
     private lateinit var batch: SpriteBatch
@@ -54,6 +52,7 @@ class LevelApplicationListener(
     private lateinit var blurShader: ShaderProgram
 
     private val renderSettings = RenderSettings(
+        theme = theme,
         internalPadding = getInternalPadding(),
         areaSize = dimensionRepository.areaSize(),
         navigationBarHeight = dimensionRepository.navigationBarHeight().toFloat(),
@@ -84,9 +83,11 @@ class LevelApplicationListener(
 
         minefieldScreen = MinefieldScreen(
             renderSettings = renderSettings,
+            onSingleTouch = onSingleTouch,
+            onLongTouch = onLongTouch,
         ).apply {
-            boundAreas?.forEach(::addActor)
-            boundMinefield?.let(::bindMinefield)
+            bindField(boundAreas)
+            bindSize(boundMinefield)
         }
 
         GdxLocal.run {
@@ -204,7 +205,6 @@ class LevelApplicationListener(
         }
 
         Gdx.input.inputProcessor = null
-        boundAreas = null
         boundMinefield = null
         assetManager.dispose()
     }
@@ -298,39 +298,13 @@ class LevelApplicationListener(
 
     fun bindMinefield(minefield: Minefield) {
         boundMinefield = minefield
-        minefieldScreen?.run {
-            bindMinefield(minefield)
-        }
+        minefieldScreen?.bindSize(minefield)
+        Gdx.graphics.requestRendering()
     }
 
     fun bindField(field: List<Area>) {
-        val boundAreas = this.boundAreas
-        val minefieldScreen = this.minefieldScreen
-        if (boundAreas == null || boundAreas.count() != field.size) {
-            minefieldScreen?.clear()
-            this.boundAreas = field.map {
-                AreaActor(
-                    theme = theme,
-                    size = areaSize,
-                    area = it,
-                    areaForm = if (it.isCovered) AreaActor.getForm(it, field) else AreaForm.None,
-                    onSingleTouch = onSingleTouch,
-                    onLongTouch = onLongTouch,
-                )
-            }.onEach {
-                minefieldScreen?.addActor(it)
-            }
-        } else {
-            boundAreas.forEachIndexed { index, areaActor ->
-                val area = field[index]
-                areaActor.bindArea(
-                    area = area,
-                    areaForm = if (area.isCovered) AreaActor.getForm(area, field) else AreaForm.None,
-                )
-            }
-        }
-
-        GdxLocal.hasHighlightAreas = field.firstOrNull { it.highlighted } != null
+        boundAreas = field
+        minefieldScreen?.bindField(field)
         Gdx.graphics.requestRendering()
     }
 
