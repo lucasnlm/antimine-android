@@ -3,8 +3,13 @@ package dev.lucasnlm.antimine.core.repository
 import android.content.Context
 import android.content.res.Resources
 import android.content.res.TypedArray
+import android.os.Build
+import android.view.KeyCharacterMap
+import android.view.KeyEvent
+import android.view.ViewConfiguration
 import dev.lucasnlm.antimine.core.R
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+
 
 interface IDimensionRepository {
     fun areaSize(): Float
@@ -25,6 +30,18 @@ class DimensionRepository(
     private val context: Context,
     private val preferencesRepository: IPreferencesRepository,
 ) : IDimensionRepository {
+
+    private val hasNavBar: Boolean by lazy {
+        val resources = context.resources
+        val id = resources.getIdentifier(NAVIGATION_BAR_CONFIG, "bool", "android")
+        if (id > 0) {
+            isEmulator() || resources.getBoolean(id)
+        } else {
+            val hasMenuKey = ViewConfiguration.get(context).hasPermanentMenuKey()
+            val hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK)
+            !hasMenuKey && !hasBackKey
+        }
+    }
 
     override fun areaSize(): Float {
         val multiplier = preferencesRepository.squareSizeMultiplier() / 100.0f
@@ -70,14 +87,42 @@ class DimensionRepository(
     }
 
     override fun navigationBarHeight(): Int {
-        val resources = context.resources
-        val resourceId: Int = resources.getIdentifier(NAVIGATION_BAR_HEIGHT, DEF_TYPE_DIMEN, DEF_PACKAGE)
-        return if (resourceId > 0) {
-            resources.getDimensionPixelSize(resourceId)
-        } else 0
+        var navHeight = 0
+        if (hasNavBar()) {
+            val resources = context.resources
+            val resourceId: Int = resources.getIdentifier(NAVIGATION_BAR_HEIGHT, DEF_TYPE_DIMEN, DEF_PACKAGE)
+            if (resourceId > 0) {
+                navHeight = resources.getDimensionPixelSize(resourceId)
+            }
+        }
+        return navHeight
+    }
+
+    private fun hasNavBar(): Boolean = hasNavBar
+
+    private fun isEmulator(): Boolean {
+        return (
+            Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic") ||
+            Build.FINGERPRINT.startsWith("generic") ||
+            Build.FINGERPRINT.startsWith("unknown") ||
+            Build.HARDWARE.contains("goldfish") ||
+            Build.HARDWARE.contains("ranchu") ||
+            Build.MODEL.contains("google_sdk") ||
+            Build.MODEL.contains("Emulator") ||
+            Build.MODEL.contains("Android SDK built for x86") ||
+            Build.MANUFACTURER.contains("Genymotion") ||
+            Build.PRODUCT.contains("sdk_google") ||
+            Build.PRODUCT.contains("google_sdk") ||
+            Build.PRODUCT.contains("sdk") ||
+            Build.PRODUCT.contains("sdk_x86") ||
+            Build.PRODUCT.contains("vbox86p") ||
+            Build.PRODUCT.contains("emulator") ||
+            Build.PRODUCT.contains("simulator")
+        )
     }
 
     companion object {
+        private const val NAVIGATION_BAR_CONFIG = "config_showNavigationBar"
         private const val NAVIGATION_BAR_HEIGHT = "navigation_bar_height"
         private const val DEF_TYPE_DIMEN = "dimen"
         private const val DEF_PACKAGE = "android"
