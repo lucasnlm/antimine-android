@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.gdx
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
 import dev.lucasnlm.antimine.gdx.actors.AreaForm
@@ -21,7 +22,7 @@ object AreaAssetBuilder {
             2.0.pow(ceil(ln(this) / ln(2.0)))
         }.toInt()
 
-        val radius = ((size * 0.5) * (radiusLevel * 0.1)).toInt()
+        val radius = (size * 0.5 * radiusLevel * Gdx.graphics.density * 0.1f).toInt()
         val format = if (alphaEnabled) Pixmap.Format.RGBA8888 else Pixmap.Format.RGB888
 
         val pixmap = Pixmap(size, size, format).apply {
@@ -60,7 +61,7 @@ object AreaAssetBuilder {
             2.0.pow(ceil(ln(this) / ln(2.0)))
         }.toInt()
 
-        val radius = (size * radiusLevel / 20)
+        val radius = (size * 0.5 * radiusLevel * Gdx.graphics.density * 0.1f).toInt()
         val format = if (alphaEnabled) Pixmap.Format.RGBA8888 else Pixmap.Format.RGB888
 
         val pixmap = Pixmap(size, size, format).apply {

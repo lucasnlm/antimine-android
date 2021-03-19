@@ -160,9 +160,9 @@ class AreaActor(
             } else {
                 toBack()
 
-                if (!area.isCovered) {
+                if (!area.isCovered && isOdd) {
                     batch.drawArea(
-                        texture = if (isOdd) textures.areaUncoveredOdd[quality] else textures.areaUncovered[quality],
+                        texture = textures.areaUncoveredOdd[quality],
                         x = x + internalPadding,
                         y = y + internalPadding,
                         width = width - internalPadding * 2,
