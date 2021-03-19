@@ -166,11 +166,6 @@ class MinefieldScreen(
         }
     }
 
-    override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
-        cameraController.setLockSpeed(false)
-        return super.touchUp(screenX, screenY, pointer, button)
-    }
-
     override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean {
         return minefieldSize?.let {
             val dx = Gdx.input.deltaX.toFloat()
@@ -181,13 +176,6 @@ class MinefieldScreen(
             }
 
             cameraController.addVelocity(
-                -dx * currentZoom,
-                dy * currentZoom,
-            )
-
-            cameraController.setLockSpeed(true)
-
-            cameraController.translate(
                 -dx * currentZoom,
                 dy * currentZoom,
             )
