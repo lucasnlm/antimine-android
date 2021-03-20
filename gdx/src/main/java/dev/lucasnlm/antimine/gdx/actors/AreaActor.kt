@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.gdx.actors
 import android.view.ViewConfiguration
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Actor
@@ -32,6 +31,7 @@ class AreaActor(
     private val internalPadding: Float = 0f,
     private val onSingleTouch: (Area) -> Unit,
     private val onLongTouch: (Area) -> Unit,
+    private var coverAlpha: Float = 1.0f,
 ) : Actor() {
 
     init {
@@ -72,11 +72,20 @@ class AreaActor(
 
     fun bindArea(area: Area, areaForm: AreaForm) {
         this.area = area
-        this.areaForm = areaForm
+
+        if (area.isCovered) {
+            this.areaForm = areaForm
+            this.coverAlpha = 1.0f
+        }
     }
 
     override fun act(delta: Float) {
         super.act(delta)
+
+        if (!area.isCovered && coverAlpha > 0.0f) {
+            coverAlpha -= 0.2f
+            Gdx.graphics.requestRendering()
+        }
 
         GdxLocal.pressedArea?.let {
             if (it.area.id == area.id) {
@@ -105,17 +114,10 @@ class AreaActor(
         }
 
         val isCurrentTouch = isCurrentlyPressed()
-        val areaAlpha = if (area.highlighted) 1.0f else GdxLocal.globalAlpha
 
         unsafeBatch?.scope { batch, textures ->
             val quality = 0
             val isOdd: Boolean = if (area.posY % 2 == 0) { area.posX % 2 != 0 } else { area.posX % 2 == 0 }
-
-            val areaTexture: Texture? = if (area.isCovered) {
-                textures.areaTextures[areaForm]
-            } else {
-                null
-            }
 
             if (isCurrentTouch && area.isCovered && quality < 2 && GdxLocal.focusResizeLevel > 1.0f) {
                 toFront()
@@ -136,16 +138,18 @@ class AreaActor(
                     )
                 }
 
-                areaTexture?.let {
-                    batch.drawArea(
-                        texture = it,
-                        x = x + internalPadding,
-                        y = y + internalPadding,
-                        width = width - internalPadding * 2,
-                        height = height - internalPadding * 2,
-                        color = Color(1f, 1f, 1f, areaAlpha),
-                        blend = quality < 2,
-                    )
+                if (area.isCovered) {
+                    textures.areaTextures[areaForm]?.let {
+                        batch.drawArea(
+                            texture = it,
+                            x = x + internalPadding,
+                            y = y + internalPadding,
+                            width = width - internalPadding * 2,
+                            height = height - internalPadding * 2,
+                            color = Color(1f, 1f, 1f, coverAlpha),
+                            blend = quality < 2,
+                        )
+                    }
                 }
 
                 batch.drawArea(
@@ -154,7 +158,7 @@ class AreaActor(
                     y = y - height * (resize - 1.0f) * 0.5f,
                     width = width * resize,
                     height = height * resize,
-                    color = Color(1f, 1f, 1f, 1.0f),
+                    color = Color(1f, 1f, 1f, coverAlpha),
                     blend = quality < 2,
                 )
             } else {
@@ -172,28 +176,30 @@ class AreaActor(
                     )
                 }
 
-                areaTexture?.let {
-                    batch.drawArea(
-                        texture = it,
-                        x = x + internalPadding,
-                        y = y + internalPadding,
-                        width = width - internalPadding * 2,
-                        height = height - internalPadding * 2,
-                        color = Color(1f, 1f, 1f, areaAlpha),
-                        blend = quality < 2,
-                    )
-                }
+                if (coverAlpha > 0.0f) {
+                    textures.areaTextures[areaForm]?.let {
+                        batch.drawArea(
+                            texture = it,
+                            x = x + internalPadding,
+                            y = y + internalPadding,
+                            width = width - internalPadding * 2,
+                            height = height - internalPadding * 2,
+                            color = Color(1f, 1f, 1f, coverAlpha),
+                            blend = quality < 2,
+                        )
+                    }
 
-                if (area.isCovered && isOdd) {
-                    batch.drawArea(
-                        texture = textures.areaCoveredOdd[quality],
-                        x = x + internalPadding,
-                        y = y + internalPadding,
-                        width = width - internalPadding * 2,
-                        height = height - internalPadding * 2,
-                        color = Color(1f, 1f, 1f, 0.25f),
-                        blend = quality < 2,
-                    )
+                    if (isOdd) {
+                        batch.drawArea(
+                            texture = textures.areaCoveredOdd[quality],
+                            x = x + internalPadding,
+                            y = y + internalPadding,
+                            width = width - internalPadding * 2,
+                            height = height - internalPadding * 2,
+                            color = Color(1f, 1f, 1f, coverAlpha * 0.25f),
+                            blend = quality < 2,
+                        )
+                    }
                 }
 
                 if (area.hasMine && !area.isCovered) {
@@ -213,7 +219,7 @@ class AreaActor(
                 if (area.isCovered) {
                     when {
                         area.mark.isFlag() -> {
-                            val color = theme.palette.covered.toOppositeMax(areaAlpha)
+                            val color = theme.palette.covered.toOppositeMax(1.0f)
                             drawAsset(
                                 batch = batch,
                                 texture = it.flag,
@@ -222,7 +228,7 @@ class AreaActor(
                             )
                         }
                         area.mark.isQuestion() -> {
-                            val color = theme.palette.covered.toOppositeMax(areaAlpha)
+                            val color = theme.palette.covered.toOppositeMax(1.0f)
                             drawAsset(
                                 batch = batch,
                                 texture = it.question,
@@ -236,7 +242,7 @@ class AreaActor(
                         drawAsset(
                             batch = batch,
                             texture = it.aroundMines[area.minesAround - 1],
-                            color = theme.palette.minesAround(area.minesAround - 1).toGdxColor(areaAlpha),
+                            color = theme.palette.minesAround(area.minesAround - 1).toGdxColor(1.0f),
                         )
                     }
 
@@ -245,7 +251,7 @@ class AreaActor(
                         drawAsset(
                             batch = batch,
                             texture = it.mine,
-                            color = color.toOppositeMax(areaAlpha),
+                            color = color.toOppositeMax(1.0f),
                         )
                     }
                 }
