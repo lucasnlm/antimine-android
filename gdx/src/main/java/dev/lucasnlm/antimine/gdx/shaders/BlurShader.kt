@@ -6,6 +6,8 @@ object BlurShader {
     const val radius = "radius"
     const val blurTop = "blurTop"
     const val blurBottom = "blurBottom"
+    const val blurStart = "blurStart"
+    const val blurEnd = "blurEnd"
 
     fun vert(): String {
         return """
@@ -44,13 +46,15 @@ object BlurShader {
             uniform float radius;
             uniform float blurTop;
             uniform float blurBottom;
+            uniform float blurStart;
+            uniform float blurEnd;
             uniform vec2 dir;
             
             void main() {
                 vec4 sum = vec4(0.0);
                 vec2 tc = v_texCoord;
                 
-                if (tc.y > blurBottom && tc.y < blurTop && blurTop > 0.0) {
+                if (tc.y > blurBottom && tc.y < blurTop && blurTop > 0.0 && tc.x > blurStart && tc.x < blurEnd) {
                     gl_FragColor = texture2D(u_texture, vec2(tc.x, tc.y));
                     return;
                 }

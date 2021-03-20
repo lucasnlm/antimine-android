@@ -17,6 +17,7 @@ interface IDimensionRepository {
     fun defaultAreaSize(): Float
     fun areaSeparator(): Float
     fun displaySize(): Size
+    fun actionBarSizeWithStatus(): Int
     fun actionBarSize(): Int
     fun navigationBarHeight(): Int
 }
@@ -67,7 +68,7 @@ class DimensionRepository(
         return Size(this.widthPixels, this.heightPixels)
     }
 
-    override fun actionBarSize(): Int {
+    override fun actionBarSizeWithStatus(): Int {
         val styledAttributes: TypedArray =
             context.theme.obtainStyledAttributes(
                 IntArray(1) { android.R.attr.actionBarSize }
@@ -84,6 +85,18 @@ class DimensionRepository(
         styledAttributes.recycle()
 
         return actionBarSize + statusBar
+    }
+
+    override fun actionBarSize(): Int {
+        val styledAttributes: TypedArray =
+            context.theme.obtainStyledAttributes(
+                IntArray(1) { android.R.attr.actionBarSize }
+            )
+
+        val actionBarSize: Int = styledAttributes.getDimension(0, 0.0f).toInt()
+        styledAttributes.recycle()
+
+        return actionBarSize
     }
 
     override fun navigationBarHeight(): Int {

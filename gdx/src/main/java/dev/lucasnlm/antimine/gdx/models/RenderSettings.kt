@@ -7,5 +7,6 @@ data class RenderSettings(
     val areaSize: Float,
     val internalPadding: InternalPadding,
     val navigationBarHeight: Float,
+    val appBarWithStatusHeight: Float,
     val appBarHeight: Float,
 )

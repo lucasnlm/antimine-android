@@ -43,6 +43,7 @@ class LevelApplicationListener(
 
     private val assetManager = AssetManager()
 
+    private val isPortrait = context.isPortrait()
     private var minefieldScreen: MinefieldScreen? = null
     private var boundAreas: List<Area> = listOf()
     private var boundMinefield: Minefield? = null
@@ -57,6 +58,7 @@ class LevelApplicationListener(
         internalPadding = getInternalPadding(),
         areaSize = dimensionRepository.areaSize(),
         navigationBarHeight = dimensionRepository.navigationBarHeight().toFloat(),
+        appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
         appBarHeight = dimensionRepository.actionBarSize().toFloat(),
     )
 
@@ -240,8 +242,18 @@ class LevelApplicationListener(
             shader = blurShader.apply {
                 setUniformf(BlurShader.direction, 1.0f, 1.0f)
                 setUniformf(BlurShader.radius, 2.0f)
-                setUniformf(BlurShader.blurTop, (1.0f - (renderSettings.appBarHeight / height)))
-                setUniformf(BlurShader.blurBottom, (renderSettings.navigationBarHeight / height))
+
+                if (isPortrait) {
+                    setUniformf(BlurShader.blurTop, (1.0f - (renderSettings.appBarWithStatusHeight / height)))
+                    setUniformf(BlurShader.blurBottom, (renderSettings.navigationBarHeight / height))
+                    setUniformf(BlurShader.blurStart, 0.0f)
+                    setUniformf(BlurShader.blurEnd, 1.0f)
+                } else {
+                    setUniformf(BlurShader.blurTop, 1.0f)
+                    setUniformf(BlurShader.blurBottom, 0.0f)
+                    setUniformf(BlurShader.blurStart, (renderSettings.appBarHeight / width))
+                    setUniformf(BlurShader.blurEnd, 1.0f - (renderSettings.navigationBarHeight / width))
+                }
             }
 
             draw(

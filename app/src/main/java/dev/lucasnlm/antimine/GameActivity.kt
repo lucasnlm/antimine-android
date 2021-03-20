@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
@@ -94,6 +95,12 @@ class GameActivity :
 
         bindViewModel()
         bindToolbar()
+
+        if (!isPortrait()) {
+            val decorView = window.decorView
+            val uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
+            decorView.systemUiVisibility = uiOptions
+        }
 
         playGamesManager.showPlayPopUp(this)
 

@@ -121,7 +121,7 @@ class MinefieldScreen(
 
             val start = 0.5f * virtualWidth - padding.start
             val end = it.width - 0.5f * virtualWidth + padding.end
-            val top = it.height - 0.5f * (virtualHeight + padding.top - renderSettings.appBarHeight)
+            val top = it.height - 0.5f * (virtualHeight + padding.top - renderSettings.appBarWithStatusHeight)
             val bottom = 0.5f * virtualHeight + padding.bottom - renderSettings.navigationBarHeight
 
             camera.run {

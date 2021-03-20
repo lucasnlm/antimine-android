@@ -96,7 +96,7 @@ open class LevelFragment : CommonLevelFragment(R.layout.fragment_level) {
         post {
             activity?.let {
                 val singleAreaSize = dimensionRepository.areaSizeWithPadding()
-                val actionBarSize = dimensionRepository.actionBarSize()
+                val actionBarSize = dimensionRepository.actionBarSizeWithStatus()
                 val displayMetrics = DisplayMetrics()
                 it.windowManager.defaultDisplay.getRealMetrics(displayMetrics)
                 val screenHeight = if (context.isAndroidTv()) {

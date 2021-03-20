@@ -86,7 +86,7 @@ class MinefieldFactoryTest {
         val dimensionRepository: IDimensionRepository = mock {
             on { areaSize() } doReturn 10.0f
             on { defaultAreaSize() } doReturn 10.0f
-            on { actionBarSize() } doReturn 10
+            on { actionBarSizeWithStatus() } doReturn 10
             on { displaySize() } doReturn Size(500, 1000)
         }
 

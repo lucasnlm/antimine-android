@@ -16,7 +16,7 @@ class FixedDimensionRepository : IDimensionRepository {
 
     override fun displaySize(): Size = Size(50 * 15, 50 * 30)
 
-    override fun actionBarSize(): Int = 50
+    override fun actionBarSizeWithStatus(): Int = 50
 
     override fun navigationBarHeight(): Int = 0
 }

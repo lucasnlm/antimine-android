@@ -18,7 +18,7 @@ class CameraController(
         val screenWidth = Gdx.graphics.width
         val screenHeight = Gdx.graphics.height
         val padding = renderSettings.internalPadding
-        val virtualHeight = screenHeight - renderSettings.appBarHeight - renderSettings.navigationBarHeight
+        val virtualHeight = screenHeight - renderSettings.appBarWithStatusHeight - renderSettings.navigationBarHeight
         val invZoom = 1.0f / (camera as OrthographicCamera).zoom
 
         camera.run {
