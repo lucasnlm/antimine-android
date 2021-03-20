@@ -83,7 +83,7 @@ class AreaActor(
         super.act(delta)
 
         if (!area.isCovered && coverAlpha > 0.0f) {
-            coverAlpha -= 0.2f
+            coverAlpha = (coverAlpha - delta * 3.0f).coerceAtLeast(0.0f)
             Gdx.graphics.requestRendering()
         }
 
@@ -184,12 +184,16 @@ class AreaActor(
                             y = y + internalPadding,
                             width = width - internalPadding * 2,
                             height = height - internalPadding * 2,
-                            color = Color(1f, 1f, 1f, coverAlpha),
+                            color = if (area.mark.isNotNone()) {
+                                Color(0.5f, 0.5f, 0.5f, coverAlpha)
+                            } else {
+                                Color(1.0f, 1.0f, 1.0f, coverAlpha)
+                            },
                             blend = quality < 2,
                         )
                     }
 
-                    if (isOdd) {
+                    if (isOdd && area.mark.isNone()) {
                         batch.drawArea(
                             texture = textures.areaCoveredOdd[quality],
                             x = x + internalPadding,
@@ -209,7 +213,7 @@ class AreaActor(
                         y = y + internalPadding,
                         width = width - internalPadding * 2,
                         height = height - internalPadding * 2,
-                        color = Color(1f, 1f, 1f, 0.25f),
+                        color = Color(1f, 0f, 0f, 0.45f),
                         blend = quality < 2,
                     )
                 }

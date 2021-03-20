@@ -106,9 +106,7 @@ class LevelApplicationListener(
                         expectedSize = expectedSize,
                         radiusLevel = radiusLevel,
                         qualityLevel = it,
-                        backgroundColor = theme.palette.background,
                         color = theme.palette.covered,
-                        alphaEnabled = true,
                     )
                 },
                 areaCoveredOdd = listOf(0, 1, 2).map {
@@ -116,9 +114,7 @@ class LevelApplicationListener(
                         expectedSize = expectedSize,
                         radiusLevel = radiusLevel,
                         qualityLevel = it,
-                        backgroundColor = theme.palette.background,
                         color = theme.palette.coveredOdd,
-                        alphaEnabled = true,
                     )
                 },
                 areaUncovered = listOf(0, 1, 2).map {
@@ -126,8 +122,7 @@ class LevelApplicationListener(
                         expectedSize = expectedSize,
                         radiusLevel = 1,
                         qualityLevel = it,
-                        backgroundColor = theme.palette.background,
-                        color = theme.palette.uncovered
+                        color = theme.palette.uncovered,
                     )
                 },
                 areaUncoveredOdd = listOf(0, 1, 2).map {
@@ -135,8 +130,7 @@ class LevelApplicationListener(
                         expectedSize = expectedSize,
                         radiusLevel = 1,
                         qualityLevel = it,
-                        backgroundColor = theme.palette.background,
-                        color = theme.palette.uncoveredOdd
+                        color = theme.palette.uncoveredOdd,
                     )
                 },
                 aroundMines = listOf(
@@ -156,17 +150,13 @@ class LevelApplicationListener(
                     expectedSize = expectedSize,
                     radiusLevel = radiusLevel,
                     qualityLevel = 0,
-                    backgroundColor = theme.palette.background,
                     color = theme.palette.covered,
-                    alphaEnabled = true,
                 ),
                 detailedAreaOdd = AreaAssetBuilder.getAreaTexture(
                     expectedSize = expectedSize,
                     radiusLevel = radiusLevel,
                     qualityLevel = 0,
-                    backgroundColor = theme.palette.background,
                     color = theme.palette.coveredOdd,
-                    alphaEnabled = true,
                 ),
                 areaTextures = AreaForm.values().map {
                     it to AreaAssetBuilder.getAreaTextureForm(
@@ -174,7 +164,6 @@ class LevelApplicationListener(
                         expectedSize = expectedSize,
                         radiusLevel = radiusLevel,
                         qualityLevel = 0,
-                        backgroundColor = theme.palette.background,
                         color = theme.palette.covered
                     )
                 }.toMap(),

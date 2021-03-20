@@ -13,9 +13,7 @@ object AreaAssetBuilder {
         expectedSize: Float,
         radiusLevel: Int,
         qualityLevel: Int,
-        backgroundColor: Int,
         color: Int,
-        alphaEnabled: Boolean = false
     ): Texture {
         val initialSize = expectedSize.toDouble() / (qualityLevel.coerceAtLeast(0) * 2 + 1)
         val size = initialSize.run {
@@ -23,15 +21,10 @@ object AreaAssetBuilder {
         }.toInt()
 
         val radius = (size * 0.5 * radiusLevel * Gdx.graphics.density * 0.1f).toInt()
-        val format = if (alphaEnabled) Pixmap.Format.RGBA8888 else Pixmap.Format.RGB888
 
-        val pixmap = Pixmap(size, size, format).apply {
+        val pixmap = Pixmap(size, size, Pixmap.Format.RGBA8888).apply {
             blending = Pixmap.Blending.SourceOver
             filter = Pixmap.Filter.BiLinear
-            if (!alphaEnabled) {
-                setColor(backgroundColor.toGdxColor())
-                fillRectangle(0, 0, size, size)
-            }
             setColor(color.toGdxColor())
             fillRectangle(0, radius, size, size - radius * 2)
             fillRectangle(radius, 0, size - radius * 2, size)
@@ -52,9 +45,7 @@ object AreaAssetBuilder {
         expectedSize: Float,
         radiusLevel: Int,
         qualityLevel: Int,
-        backgroundColor: Int,
         color: Int,
-        alphaEnabled: Boolean = false
     ): Texture {
         val initialSize = expectedSize.toDouble() / (qualityLevel.coerceAtLeast(0) * 2 + 1)
         val size = initialSize.run {
@@ -62,15 +53,10 @@ object AreaAssetBuilder {
         }.toInt()
 
         val radius = (size * 0.5 * radiusLevel * Gdx.graphics.density * 0.1f).toInt()
-        val format = if (alphaEnabled) Pixmap.Format.RGBA8888 else Pixmap.Format.RGB888
 
-        val pixmap = Pixmap(size, size, format).apply {
+        val pixmap = Pixmap(size, size, Pixmap.Format.RGBA8888).apply {
             blending = Pixmap.Blending.SourceOver
             filter = Pixmap.Filter.BiLinear
-            if (!alphaEnabled) {
-                setColor(backgroundColor.toGdxColor())
-                fillRectangle(0, 0, size, size)
-            }
             setColor(color.toGdxColor())
 
             if (areaForm == AreaForm.None) {
