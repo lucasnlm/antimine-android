@@ -64,7 +64,8 @@ class CameraController(
     }
 
     fun addVelocity(dx: Float, dy: Float) {
-        velocity.add(dx, dy)
+        val zoom = (camera as OrthographicCamera).zoom
+        velocity.add(dx * zoom, dy * zoom)
         camera.update(true)
     }
 

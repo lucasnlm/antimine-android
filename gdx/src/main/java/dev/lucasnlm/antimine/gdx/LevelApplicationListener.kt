@@ -12,12 +12,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.input.GestureDetector
-import com.badlogic.gdx.math.Vector2
 import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.gdx.actors.AreaForm
+import dev.lucasnlm.antimine.gdx.controller.MinefieldInputController
 import dev.lucasnlm.antimine.gdx.models.GameTextures
 import dev.lucasnlm.antimine.gdx.models.InternalPadding
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
@@ -39,7 +39,7 @@ class LevelApplicationListener(
     private val onLongTouch: (Area) -> Unit,
     private val crashLogger: (String) -> Unit,
     private val forceFreeScroll: Boolean,
-) : ApplicationAdapter(), GestureDetector.GestureListener {
+) : ApplicationAdapter() {
 
     private val assetManager = AssetManager()
 
@@ -60,6 +60,12 @@ class LevelApplicationListener(
         navigationBarHeight = dimensionRepository.navigationBarHeight().toFloat(),
         appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
         appBarHeight = dimensionRepository.actionBarSize().toFloat(),
+    )
+
+    private val minefieldInputController = MinefieldInputController(
+        onChangeZoom = {
+            minefieldScreen?.changeZoom(it)
+        }
     )
 
     override fun create() {
@@ -170,7 +176,7 @@ class LevelApplicationListener(
             )
         }
 
-        Gdx.input.inputProcessor = InputMultiplexer(GestureDetector(this), minefieldScreen)
+        Gdx.input.inputProcessor = InputMultiplexer(GestureDetector(minefieldInputController), minefieldScreen)
         Gdx.graphics.isContinuousRendering = false
     }
 
@@ -193,6 +199,7 @@ class LevelApplicationListener(
                 areaUncoveredOdd.forEach { it.dispose() }
                 areaTextures.forEach { (_, texture) -> texture.dispose() }
             }
+            pressedArea = null
             textureAtlas?.dispose()
             textureAtlas = null
         }
@@ -312,57 +319,5 @@ class LevelApplicationListener(
     }
 
     fun setActionsEnabled(enabled: Boolean) {
-    }
-
-    override fun touchDown(x: Float, y: Float, pointer: Int, button: Int): Boolean {
-        return false
-    }
-
-    override fun tap(x: Float, y: Float, count: Int, button: Int): Boolean {
-        return false
-    }
-
-    override fun longPress(x: Float, y: Float): Boolean {
-        return false
-    }
-
-    override fun fling(velocityX: Float, velocityY: Float, button: Int): Boolean {
-        return false
-    }
-
-    override fun pan(x: Float, y: Float, deltaX: Float, deltaY: Float): Boolean {
-        return false
-    }
-
-    override fun panStop(x: Float, y: Float, pointer: Int, button: Int): Boolean {
-        return false
-    }
-
-    override fun zoom(initialDistance: Float, distance: Float): Boolean {
-        GdxLocal.pressedArea = GdxLocal.pressedArea?.copy(consumed = true)
-        minefieldScreen?.changeZoom(initialDistance / distance)
-        return true
-    }
-
-    override fun pinch(
-        initialPointer1: Vector2?,
-        initialPointer2: Vector2?,
-        pointer1: Vector2?,
-        pointer2: Vector2?
-    ): Boolean {
-        if (pointer1 != null && pointer2 != null && initialPointer1 != null && initialPointer2 != null) {
-            minefieldScreen?.let {
-                val mid1 = pointer1.cpy().add(pointer2).scl(0.5f)
-                val mid2 = initialPointer1.cpy().add(initialPointer2).scl(0.5f)
-                val delta = mid1.sub(mid2)
-
-                it.camera.position.set(mid1.x, mid1.y, 0f)
-            }
-        }
-        return false
-    }
-
-    override fun pinchStop() {
-        // Empty
     }
 }
