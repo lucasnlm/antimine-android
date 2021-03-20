@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="false">
 
     <FrameLayout
         android:id="@+id/levelContainer"
@@ -24,33 +24,11 @@
         android:layout_width="?attr/actionBarSize"
         android:layout_height="?attr/actionBarSize"
         android:background="?selectableItemBackgroundBorderless"
+        android:contentDescription="@string/back"
         android:padding="14dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/arrow_left" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/switchFlag"
-        android:layout_width="?attr/actionBarSize"
-        android:layout_height="?attr/actionBarSize"
-        android:clickable="true"
-        android:contentDescription="@string/switch_control"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back"
-        app:strokeWidth="1.5dp">
-
-        <ImageView
-            android:id="@+id/switchFlagImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:importantForAccessibility="no"
-            android:padding="8dp"
-            app:srcCompat="@drawable/flag_black" />
-
-    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/timer"
@@ -71,7 +49,7 @@
         app:layout_constraintBottom_toTopOf="@+id/minesCount"
         app:layout_constraintEnd_toEndOf="@+id/back"
         app:layout_constraintStart_toStartOf="@+id/back"
-        app:layout_constraintTop_toBottomOf="@+id/switchFlag"
+        app:layout_constraintTop_toBottomOf="@+id/back"
         app:layout_constraintVertical_chainStyle="packed"
         tools:targetApi="m"
         tools:text="10:00"

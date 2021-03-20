@@ -3,12 +3,14 @@ package dev.lucasnlm.antimine.gdx
 import android.util.SizeF
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Camera
+import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector2
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
 
 class CameraController(
     private val renderSettings: RenderSettings,
     private val camera: Camera,
+    private val forceFreeScroll: Boolean,
 ) {
     private val velocity: Vector2 = Vector2.Zero.cpy()
 
@@ -17,16 +19,17 @@ class CameraController(
         val screenHeight = Gdx.graphics.height
         val padding = renderSettings.internalPadding
         val virtualHeight = screenHeight - renderSettings.appBarHeight - renderSettings.navigationBarHeight
+        val invZoom = 1.0f / (camera as OrthographicCamera).zoom
 
         camera.run {
             val newX = (position.x - velocity.x)
             val newY = (position.y + velocity.y)
-            val start = 0.5f * screenWidth - padding.start
-            val end = minefieldSize.width - 0.5f * screenWidth + padding.end
-            val top = minefieldSize.height - 0.25f * screenHeight + padding.top
-            val bottom = 0.5f * screenHeight - 0.25f * screenHeight - padding.bottom - renderSettings.navigationBarHeight
+            val start = 0.5f * screenWidth - padding.start * invZoom
+            val end = minefieldSize.width - 0.5f * screenWidth + padding.end * invZoom
+            val top = minefieldSize.height - 0.25f * screenHeight + padding.top * invZoom
+            val bottom = 0.5f * screenHeight - 0.25f * screenHeight - padding.bottom * invZoom - renderSettings.navigationBarHeight
 
-            if (screenWidth > minefieldSize.width) {
+            if (screenWidth > minefieldSize.width && !forceFreeScroll) {
                 velocity.x = 0f
             } else {
                 if ((newX < start && velocity.x < 0.0) || (newX > end && velocity.x > 0.0)) {
@@ -36,7 +39,7 @@ class CameraController(
                 }
             }
 
-            if (virtualHeight > minefieldSize.height) {
+            if (virtualHeight > minefieldSize.height && !forceFreeScroll) {
                 velocity.y = 0f
             } else {
                 if ((newY > top && velocity.y > 0.0) || newY < bottom && velocity.y < 0.0) {

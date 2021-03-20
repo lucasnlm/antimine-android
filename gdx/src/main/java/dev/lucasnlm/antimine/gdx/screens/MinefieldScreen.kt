@@ -21,6 +21,7 @@ class MinefieldScreen(
     private val renderSettings: RenderSettings,
     private val onSingleTouch: (Area) -> Unit,
     private val onLongTouch: (Area) -> Unit,
+    forceFreeScroll: Boolean,
 ) : Stage() {
     private var minefield: Minefield? = null
     private var minefieldSize: SizeF? = null
@@ -47,7 +48,11 @@ class MinefieldScreen(
             }
         })
 
-        cameraController = CameraController(camera = camera, renderSettings = renderSettings)
+        cameraController = CameraController(
+            camera = camera,
+            renderSettings = renderSettings,
+            forceFreeScroll = forceFreeScroll,
+        )
     }
 
     fun changeZoom(zoomMultiplier: Float) {

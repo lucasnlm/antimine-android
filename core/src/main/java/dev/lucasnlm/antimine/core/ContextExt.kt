@@ -27,3 +27,11 @@ fun Context.updateLanguage(localeName: String) {
 fun Context.isPortrait(): Boolean {
     return resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 }
+
+fun Context.dpToPx(dp: Int): Int {
+    return (dp * resources.displayMetrics.density).toInt()
+}
+
+fun Context.pxToDp(px: Int): Int {
+    return (px / resources.displayMetrics.density).toInt()
+}

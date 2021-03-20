@@ -38,6 +38,7 @@ class LevelApplicationListener(
     private val onSingleTouch: (Area) -> Unit,
     private val onLongTouch: (Area) -> Unit,
     private val crashLogger: (String) -> Unit,
+    private val forceFreeScroll: Boolean,
 ) : ApplicationAdapter(), GestureDetector.GestureListener {
 
     private val assetManager = AssetManager()
@@ -85,6 +86,7 @@ class LevelApplicationListener(
             renderSettings = renderSettings,
             onSingleTouch = onSingleTouch,
             onLongTouch = onLongTouch,
+            forceFreeScroll = forceFreeScroll,
         ).apply {
             bindField(boundAreas)
             bindSize(boundMinefield)
@@ -347,7 +349,15 @@ class LevelApplicationListener(
         pointer1: Vector2?,
         pointer2: Vector2?
     ): Boolean {
-        print("zoom = 1")
+        if (pointer1 != null && pointer2 != null && initialPointer1 != null && initialPointer2 != null) {
+            minefieldScreen?.let {
+                val mid1 = pointer1.cpy().add(pointer2).scl(0.5f)
+                val mid2 = initialPointer1.cpy().add(initialPointer2).scl(0.5f)
+                val delta = mid1.sub(mid2)
+
+                it.camera.position.set(mid1.x, mid1.y, 0f)
+            }
+        }
         return false
     }
 

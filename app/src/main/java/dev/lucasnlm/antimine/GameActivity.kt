@@ -34,7 +34,6 @@ import dev.lucasnlm.antimine.level.view.GdxLevelFragment
 import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
@@ -95,7 +94,6 @@ class GameActivity :
 
         bindViewModel()
         bindToolbar()
-        bindSwitchControlButton()
 
         playGamesManager.showPlayPopUp(this)
 
@@ -291,39 +289,6 @@ class GameActivity :
             visibility = if (hide) View.GONE else View.VISIBLE
             isClickable = false
             animate().alpha(0.3f).start()
-        }
-    }
-
-    private fun bindSwitchControlButton() {
-        switchFlag.apply {
-            visibility = if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
-            strokeColor = usingTheme.palette.border.toAndroidColor()
-            TooltipCompat.setTooltipText(this, getString(R.string.switch_control))
-            setOnClickListener {
-                if (preferencesRepository.openUsingSwitchControl()) {
-                    gameViewModel.refreshUseOpenOnSwitchControl(false)
-                    preferencesRepository.setSwitchControl(false)
-                    switchFlagImage.setImageResource(R.drawable.flag_black)
-                } else {
-                    gameViewModel.refreshUseOpenOnSwitchControl(true)
-                    preferencesRepository.setSwitchControl(true)
-                    switchFlagImage.setImageResource(R.drawable.touch)
-                }
-            }
-        }
-
-        switchFlagImage.apply {
-            visibility = if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
-            setImageResource(R.drawable.touch)
-            setColorFilter(minesCount.currentTextColor)
         }
     }
 
@@ -692,8 +657,6 @@ class GameActivity :
             refreshUserPreferences()
             resumeGame()
         }
-
-        bindSwitchControlButton()
     }
 
     override fun exit() {
