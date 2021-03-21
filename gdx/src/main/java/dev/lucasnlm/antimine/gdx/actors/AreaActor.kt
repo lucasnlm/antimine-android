@@ -113,7 +113,7 @@ class AreaActor(
             val quality = 0
             val isOdd: Boolean = if (area.posY % 2 == 0) { area.posX % 2 != 0 } else { area.posX % 2 == 0 }
 
-            if (isOdd) {
+            if (isOdd && GdxLocal.qualityZoomLevel < 2) {
                 textures.areaTextures[AreaForm.Full]?.let {
                     batch.drawArea(
                         texture = it,
@@ -243,7 +243,7 @@ class AreaActor(
                         }
                     }
                 } else {
-                    if (area.minesAround > 0) {
+                    if (area.minesAround > 0 && GdxLocal.qualityZoomLevel < 2) {
                         drawAsset(
                             batch = batch,
                             texture = it.aroundMines[area.minesAround - 1],

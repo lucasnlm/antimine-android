@@ -62,7 +62,7 @@ class MinefieldScreen(
             } else {
                 zoom - 3.0f * zoomMultiplier * Gdx.graphics.deltaTime
             }
-            zoom = newZoom.coerceIn(0.5f, 4.0f)
+            zoom = newZoom.coerceIn(0.8f, 4.0f)
             update(true)
 
             GdxLocal.qualityZoomLevel = (zoom.toInt() - 1).coerceAtLeast(0).coerceAtMost(2)
