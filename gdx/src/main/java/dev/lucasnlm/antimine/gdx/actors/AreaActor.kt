@@ -4,7 +4,6 @@ import android.view.ViewConfiguration
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
@@ -15,13 +14,9 @@ import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.drawArea
 import dev.lucasnlm.antimine.gdx.drawAsset
 import dev.lucasnlm.antimine.gdx.models.TouchAreaAction
-import dev.lucasnlm.antimine.gdx.roundedRect
 import dev.lucasnlm.antimine.gdx.scope
 import dev.lucasnlm.antimine.gdx.toGdxColor
 import dev.lucasnlm.antimine.gdx.toOppositeMax
-import dev.lucasnlm.antimine.gdx.use
-import dev.lucasnlm.antimine.gdx.useColor
-import dev.lucasnlm.antimine.ui.ext.red
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.minesAround
 
@@ -85,6 +80,12 @@ class AreaActor(
     override fun act(delta: Float) {
         super.act(delta)
 
+        if (isCurrentlyPressed()) {
+            toFront()
+        } else if (zIndex != 0) {
+            toBack()
+        }
+
         if (!area.isCovered && coverAlpha > 0.0f) {
             coverAlpha = (coverAlpha - delta * 3.0f).coerceAtLeast(0.0f)
             Gdx.graphics.requestRendering()
@@ -122,24 +123,22 @@ class AreaActor(
             val quality = 0
             val isOdd: Boolean = if (area.posY % 2 == 0) { area.posX % 2 != 0 } else { area.posX % 2 == 0 }
 
-            if (isCurrentTouch && area.isCovered && quality < 2 && GdxLocal.focusResizeLevel > 1.0f) {
-                toFront()
-
-                val resize = GdxLocal.focusResizeLevel
-                val resizeShadow = GdxLocal.focusResizeLevel * 1.05f
-
-                if (GdxLocal.focusResizeLevel > 1.0f) {
-                    val alpha = (GdxLocal.focusResizeLevel - 1.0f).coerceAtLeast(0.0f)
+            if (isOdd) {
+                textures.areaTextures[AreaForm.Full]?.let {
                     batch.drawArea(
-                        texture = if (isOdd) textures.detailedAreaOdd else textures.detailedArea,
-                        x = x - width * (resizeShadow - 1.0f) * 0.5f,
-                        y = y - height * (resizeShadow - 1.0f) * 0.5f,
-                        width = width * resizeShadow,
-                        height = height * resizeShadow,
-                        color = Color(0f, 0f, 0f, alpha),
-                        blend = true,
+                        texture = it,
+                        x = x + internalPadding,
+                        y = y + internalPadding,
+                        width = width - internalPadding * 2,
+                        height = height - internalPadding * 2,
+                        color = Color(1.0f, 1.0f, 1.0f, 0.25f),
+                        blend = quality < 2,
                     )
                 }
+            }
+
+            if (isCurrentTouch && area.isCovered && quality < 2 && GdxLocal.focusResizeLevel > 1.0f) {
+                val resize = GdxLocal.focusResizeLevel
 
                 if (area.isCovered) {
                     textures.areaTextures[areaForm]?.let {
@@ -155,30 +154,20 @@ class AreaActor(
                     }
                 }
 
-                batch.drawArea(
-                    texture = textures.detailedAreaOdd,
-                    x = x - width * (resize - 1.0f) * 0.5f,
-                    y = y - height * (resize - 1.0f) * 0.5f,
-                    width = width * resize,
-                    height = height * resize,
-                    color = Color(1.0f, 1.0f, 1.0f, coverAlpha),
-                    blend = quality < 2,
-                )
-            } else {
-                toBack()
-
-                if (!area.isCovered && isOdd) {
+                textures.areaTextures[AreaForm.Full]?.let {
+                    val touchColor =
+                        (if (isOdd) theme.palette.coveredOdd else theme.palette.covered).toOppositeMax(coverAlpha).mul(0.8f, 0.8f, 0.8f, 1.0f)
                     batch.drawArea(
-                        texture = textures.areaUncoveredOdd[quality],
-                        x = x + internalPadding,
-                        y = y + internalPadding,
-                        width = width - internalPadding * 2,
-                        height = height - internalPadding * 2,
-                        color = Color(1.0f, 1.0f, 1.0f, 0.25f),
+                        texture = it,
+                        x = x - width * (resize - 1.0f) * 0.5f,
+                        y = y - height * (resize - 1.0f) * 0.5f,
+                        width = width * resize,
+                        height = height * resize,
+                        color = touchColor,
                         blend = quality < 2,
                     )
                 }
-
+            } else {
                 if (coverAlpha > 0.0f) {
                     textures.areaTextures[areaForm]?.let {
                         batch.drawArea(
@@ -195,30 +184,32 @@ class AreaActor(
                             blend = quality < 2,
                         )
                     }
+                }
 
-                    if (isOdd && area.mark.isNone()) {
+                if (area.hasMine && !area.isCovered) {
+                    textures.areaTextures[AreaForm.Full]?.let {
                         batch.drawArea(
-                            texture = textures.areaCoveredOdd[quality],
+                            texture = it,
                             x = x + internalPadding,
                             y = y + internalPadding,
                             width = width - internalPadding * 2,
                             height = height - internalPadding * 2,
-                            color = Color(1.0f, 1.0f, 1.0f, coverAlpha * 0.25f),
+                            color = Color(1.0f, 0f, 0f, 0.45f),
                             blend = quality < 2,
                         )
                     }
-                }
-
-                if (area.hasMine && !area.isCovered) {
-                    batch.drawArea(
-                        texture = textures.areaCoveredOdd[quality],
-                        x = x + internalPadding,
-                        y = y + internalPadding,
-                        width = width - internalPadding * 2,
-                        height = height - internalPadding * 2,
-                        color = Color(1.0f, 0f, 0f, 0.45f),
-                        blend = quality < 2,
-                    )
+                } else if (area.isCovered && isOdd && theme.palette.covered != theme.palette.coveredOdd && area.mark.isNone()) {
+                    textures.areaTextures[AreaForm.Full]?.let {
+                        batch.drawArea(
+                            texture = it,
+                            x = x + internalPadding,
+                            y = y + internalPadding,
+                            width = width - internalPadding * 2,
+                            height = height - internalPadding * 2,
+                            color = theme.palette.coveredOdd.toGdxColor(),
+                            blend = quality < 2,
+                        )
+                    }
                 }
             }
 
@@ -282,11 +273,15 @@ class AreaActor(
     }
 
     companion object {
+        private fun Area.canMargeWith(area: Area): Boolean {
+            return !isCovered || mark.mergeId != area.mark.mergeId
+        }
+
         fun getForm(area: Area, field: List<Area>): AreaForm {
-            val top = field.getPos(area.posX, area.posY + 1)?.run { !isCovered || mark != area.mark } ?: true
-            val bottom = field.getPos(area.posX, area.posY - 1)?.run { !isCovered || mark != area.mark } ?: true
-            val left = field.getPos(area.posX - 1, area.posY)?.run { !isCovered || mark != area.mark } ?: true
-            val right = field.getPos(area.posX + 1, area.posY)?.run { !isCovered || mark != area.mark } ?: true
+            val top = field.getPos(area.posX, area.posY + 1)?.run { canMargeWith(area) } ?: true
+            val bottom = field.getPos(area.posX, area.posY - 1)?.run { canMargeWith(area) } ?: true
+            val left = field.getPos(area.posX - 1, area.posY)?.run { canMargeWith(area) } ?: true
+            val right = field.getPos(area.posX + 1, area.posY)?.run { canMargeWith(area) } ?: true
 
             var roundCorners = 0b0000
 
