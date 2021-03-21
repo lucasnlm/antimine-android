@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.gdx
+package dev.lucasnlm.antimine.gdx.controller
 
 import android.util.SizeF
 import com.badlogic.gdx.Gdx

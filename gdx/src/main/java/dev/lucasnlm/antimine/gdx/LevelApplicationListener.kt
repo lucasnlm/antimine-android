@@ -60,6 +60,7 @@ class LevelApplicationListener(
         navigationBarHeight = dimensionRepository.navigationBarHeight().toFloat(),
         appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
         appBarHeight = dimensionRepository.actionBarSize().toFloat(),
+        radius = preferencesRepository.squareRadius().toFloat(),
     )
 
     private val minefieldInputController = MinefieldInputController(
@@ -316,6 +317,7 @@ class LevelApplicationListener(
         boundAreas = field
         minefieldScreen?.bindField(field)
         Gdx.graphics.requestRendering()
+        GdxLocal.hasHighlightAreas = field.firstOrNull { it.highlighted } != null
     }
 
     fun setActionsEnabled(enabled: Boolean) {

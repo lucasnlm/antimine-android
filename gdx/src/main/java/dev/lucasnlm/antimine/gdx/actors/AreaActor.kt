@@ -15,6 +15,7 @@ import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.drawArea
 import dev.lucasnlm.antimine.gdx.drawAsset
 import dev.lucasnlm.antimine.gdx.models.TouchAreaAction
+import dev.lucasnlm.antimine.gdx.roundedRect
 import dev.lucasnlm.antimine.gdx.scope
 import dev.lucasnlm.antimine.gdx.toGdxColor
 import dev.lucasnlm.antimine.gdx.toOppositeMax
@@ -27,6 +28,7 @@ class AreaActor(
     size: Float,
     private var area: Area,
     private var areaForm: AreaForm,
+    private val radiusLevel: Float,
     private val theme: AppTheme,
     private val internalPadding: Float = 0f,
     private val onSingleTouch: (Area) -> Unit,
@@ -146,7 +148,7 @@ class AreaActor(
                             y = y + internalPadding,
                             width = width - internalPadding * 2,
                             height = height - internalPadding * 2,
-                            color = Color(1f, 1f, 1f, coverAlpha),
+                            color = Color(1.0f, 1.0f, 1.0f, coverAlpha),
                             blend = quality < 2,
                         )
                     }
@@ -158,7 +160,7 @@ class AreaActor(
                     y = y - height * (resize - 1.0f) * 0.5f,
                     width = width * resize,
                     height = height * resize,
-                    color = Color(1f, 1f, 1f, coverAlpha),
+                    color = Color(1.0f, 1.0f, 1.0f, coverAlpha),
                     blend = quality < 2,
                 )
             } else {
@@ -171,7 +173,7 @@ class AreaActor(
                         y = y + internalPadding,
                         width = width - internalPadding * 2,
                         height = height - internalPadding * 2,
-                        color = Color(1f, 1f, 1f, 0.25f),
+                        color = Color(1.0f, 1.0f, 1.0f, 0.25f),
                         blend = quality < 2,
                     )
                 }
@@ -200,7 +202,7 @@ class AreaActor(
                             y = y + internalPadding,
                             width = width - internalPadding * 2,
                             height = height - internalPadding * 2,
-                            color = Color(1f, 1f, 1f, coverAlpha * 0.25f),
+                            color = Color(1.0f, 1.0f, 1.0f, coverAlpha * 0.25f),
                             blend = quality < 2,
                         )
                     }
@@ -213,8 +215,26 @@ class AreaActor(
                         y = y + internalPadding,
                         width = width - internalPadding * 2,
                         height = height - internalPadding * 2,
-                        color = Color(1f, 0f, 0f, 0.45f),
+                        color = Color(1.0f, 0f, 0f, 0.45f),
                         blend = quality < 2,
+                    )
+                }
+            }
+
+            if (area.highlighted && !area.isCovered) {
+                ShapeRenderer(64).use(ShapeRenderer.ShapeType.Filled) {
+                    val density = Gdx.graphics.density
+                    val radius = (width * 0.5f * radiusLevel * Gdx.graphics.density * 0.1f)
+                    projectionMatrix = batch.projectionMatrix
+                    transformMatrix = batch.transformMatrix
+                    useColor(theme.palette.highlight, 0.5f)
+                    Gdx.gl.glLineWidth( density * 2.0f)
+                    roundedRect(
+                        x = x + density * 2,
+                        y = y + density * 2,
+                        width = width - density * 4,
+                        height = height - density * 4,
+                        radius = radius,
                     )
                 }
             }
@@ -258,21 +278,6 @@ class AreaActor(
                             color = color.toOppositeMax(1.0f),
                         )
                     }
-                }
-            }
-
-            if (area.highlighted && !area.isCovered) {
-                ShapeRenderer(64).use(ShapeRenderer.ShapeType.Line) {
-                    projectionMatrix = batch.projectionMatrix
-                    transformMatrix = batch.transformMatrix
-                    useColor(theme.palette.highlight, 0.5f)
-                    Gdx.gl.glLineWidth(Gdx.graphics.density * 2.0f)
-                    rect(
-                        x + internalPadding * 4,
-                        y + internalPadding * 4,
-                        width - internalPadding * 8,
-                        height - internalPadding * 8,
-                    )
                 }
             }
         }

@@ -9,4 +9,5 @@ data class RenderSettings(
     val navigationBarHeight: Float,
     val appBarWithStatusHeight: Float,
     val appBarHeight: Float,
+    val radius: Float,
 )

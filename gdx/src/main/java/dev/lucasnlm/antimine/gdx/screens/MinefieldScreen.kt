@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.BuildConfig
-import dev.lucasnlm.antimine.gdx.CameraController
+import dev.lucasnlm.antimine.gdx.controller.CameraController
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
 import dev.lucasnlm.antimine.gdx.actors.AreaForm
@@ -85,6 +85,7 @@ class MinefieldScreen(
                             areaForm = if (it.isCovered) AreaActor.getForm(it, field) else AreaForm.None,
                             onSingleTouch = onSingleTouch,
                             onLongTouch = onLongTouch,
+                            radiusLevel = renderSettings.radius,
                         )
                     }.forEach {
                         addActor(it)
