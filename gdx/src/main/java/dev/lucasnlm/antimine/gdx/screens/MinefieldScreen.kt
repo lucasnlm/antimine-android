@@ -57,7 +57,12 @@ class MinefieldScreen(
 
     fun changeZoom(zoomMultiplier: Float) {
         (camera as OrthographicCamera).apply {
-            zoom = (zoom * zoomMultiplier).coerceIn(0.5f, 4.0f)
+            val newZoom = if (zoomMultiplier > 1.0) {
+                zoom + 3.0f * (1.0f / zoomMultiplier) * Gdx.graphics.deltaTime
+            } else {
+                zoom - 3.0f * zoomMultiplier * Gdx.graphics.deltaTime
+            }
+            zoom = newZoom.coerceIn(0.5f, 4.0f)
             update(true)
 
             GdxLocal.qualityZoomLevel = (zoom.toInt() - 1).coerceAtLeast(0).coerceAtMost(2)
@@ -141,7 +146,7 @@ class MinefieldScreen(
         minefieldSize?.let { cameraController.act(it) }
 
         refreshAreas()
-        refreshVisibleActorsIfNeeded()
+        refreshVisibleActorsIfNeeded(true)
 
         val delta = Gdx.graphics.deltaTime
 
@@ -170,6 +175,9 @@ class MinefieldScreen(
                 it.isVisible = camera.frustum.boundsInFrustum(it.x, it.y, 0f, it.width, it.height, 0.0f)
             }
         }
+
+        val visibleCount = actors.count { it.isVisible }
+        Gdx.app.log("GDX", "GDX count = $visibleCount")
     }
 
     override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean {

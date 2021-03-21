@@ -80,12 +80,6 @@ class AreaActor(
     override fun act(delta: Float) {
         super.act(delta)
 
-        if (isCurrentlyPressed()) {
-            toFront()
-        } else if (zIndex != 0) {
-            toBack()
-        }
-
         if (!area.isCovered && coverAlpha > 0.0f) {
             coverAlpha = (coverAlpha - delta * 3.0f).coerceAtLeast(0.0f)
             Gdx.graphics.requestRendering()
@@ -111,12 +105,8 @@ class AreaActor(
 
     override fun draw(unsafeBatch: Batch?, parentAlpha: Float) {
         super.draw(unsafeBatch, parentAlpha)
+
         val internalPadding = this.internalPadding
-
-        if (GdxLocal.qualityZoomLevel > 0 && !area.isCovered) {
-            return
-        }
-
         val isCurrentTouch = isCurrentlyPressed()
 
         unsafeBatch?.scope { batch, textures ->
@@ -131,7 +121,7 @@ class AreaActor(
                         y = y + internalPadding,
                         width = width - internalPadding * 2,
                         height = height - internalPadding * 2,
-                        color = Color(1.0f, 1.0f, 1.0f, 0.25f),
+                        color = Color(1.0f, 1.0f, 1.0f, 0.1f),
                         blend = quality < 2,
                     )
                 }
@@ -155,8 +145,8 @@ class AreaActor(
                 }
 
                 textures.areaTextures[AreaForm.Full]?.let {
-                    val touchColor =
-                        (if (isOdd) theme.palette.coveredOdd else theme.palette.covered).toOppositeMax(coverAlpha).mul(0.8f, 0.8f, 0.8f, 1.0f)
+                    val baseColor = if (isOdd) theme.palette.coveredOdd else theme.palette.covered
+                    val touchColor = baseColor.toOppositeMax(coverAlpha).mul(0.8f, 0.8f, 0.8f, 1.0f)
                     batch.drawArea(
                         texture = it,
                         x = x - width * (resize - 1.0f) * 0.5f,
@@ -199,16 +189,18 @@ class AreaActor(
                         )
                     }
                 } else if (area.isCovered && isOdd && theme.palette.covered != theme.palette.coveredOdd && area.mark.isNone()) {
-                    textures.areaTextures[AreaForm.Full]?.let {
-                        batch.drawArea(
-                            texture = it,
-                            x = x + internalPadding,
-                            y = y + internalPadding,
-                            width = width - internalPadding * 2,
-                            height = height - internalPadding * 2,
-                            color = theme.palette.coveredOdd.toGdxColor(),
-                            blend = quality < 2,
-                        )
+                    if (GdxLocal.qualityZoomLevel < 2) {
+                        textures.areaTextures[AreaForm.Full]?.let {
+                            batch.drawArea(
+                                texture = it,
+                                x = x + internalPadding,
+                                y = y + internalPadding,
+                                width = width - internalPadding * 2,
+                                height = height - internalPadding * 2,
+                                color = theme.palette.coveredOdd.toGdxColor(0.1f),
+                                blend = quality < 2,
+                            )
+                        }
                     }
                 }
             }
