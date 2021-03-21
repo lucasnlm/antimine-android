@@ -54,13 +54,16 @@ class AreaActor(
 
             override fun touchDown(event: InputEvent, x: Float, y: Float, pointer: Int, button: Int): Boolean {
                 toFront()
-                GdxLocal.pressedArea = TouchAreaAction(
-                    area = area.copy(),
-                    pressedAt = System.currentTimeMillis(),
-                    consumed = false,
-                    x = x,
-                    y = y,
-                )
+                GdxLocal.apply {
+                    highlightAlpha = 0.45f
+                    pressedArea = TouchAreaAction(
+                        area = area.copy(),
+                        pressedAt = System.currentTimeMillis(),
+                        consumed = false,
+                        x = x,
+                        y = y,
+                    )
+                }
                 return true
             }
         })
@@ -205,7 +208,7 @@ class AreaActor(
                 }
             }
 
-            if (area.highlighted && !area.isCovered) {
+            if (!area.isCovered && GdxLocal.pressedArea?.area?.id == area.id) {
                 textures.areaTextures[AreaForm.Full]?.let {
                     val density = Gdx.graphics.density
                     batch.drawArea(
@@ -214,7 +217,7 @@ class AreaActor(
                         y = y + internalPadding + density * 2f,
                         width = width - internalPadding * 2f - density * 4f,
                         height = height - internalPadding * 2f - density * 4f,
-                        color = theme.palette.highlight.toGdxColor(0.45f),
+                        color = theme.palette.highlight.toGdxColor(GdxLocal.highlightAlpha),
                         blend = quality < 2,
                     )
                 }

@@ -106,6 +106,7 @@ class LevelApplicationListener(
             val radiusLevel = preferencesRepository.squareRadius()
             val atlas = assetManager.get<TextureAtlas>(TextureConstants.atlasName)
 
+            pressedArea = null
             textureAtlas = atlas
             gameTextures = GameTextures(
                 areaCovered = listOf(0, 1, 2).map {

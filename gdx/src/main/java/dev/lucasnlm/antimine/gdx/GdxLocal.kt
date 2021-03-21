@@ -17,4 +17,5 @@ object GdxLocal {
     var focusResizeLevel = 1.15f
     const val maxFocusResizeLevel = 1.15f
     var hasHighlightAreas = false
+    var highlightAlpha = 0.0f
 }

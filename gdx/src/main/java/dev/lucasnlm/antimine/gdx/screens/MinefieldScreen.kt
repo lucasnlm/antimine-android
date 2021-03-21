@@ -39,7 +39,10 @@ class MinefieldScreen(
         addListener(object : InputListener() {
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
                 return if (event?.target is Group) {
-                    GdxLocal.hasHighlightAreas = false
+                    GdxLocal.apply {
+                        hasHighlightAreas = false
+                        highlightAlpha = 0.0f
+                    }
                     event.cancel()
                     true
                 } else {
@@ -58,9 +61,9 @@ class MinefieldScreen(
     fun changeZoom(zoomMultiplier: Float) {
         (camera as OrthographicCamera).apply {
             val newZoom = if (zoomMultiplier > 1.0) {
-                zoom + 3.0f * (1.0f / zoomMultiplier) * Gdx.graphics.deltaTime
+                zoom + 3.0f * zoomMultiplier * Gdx.graphics.deltaTime
             } else {
-                zoom - 3.0f * zoomMultiplier * Gdx.graphics.deltaTime
+                zoom - 3.0f * (1.0f / zoomMultiplier)  * Gdx.graphics.deltaTime
             }
             zoom = newZoom.coerceIn(0.8f, 4.0f)
             update(true)
@@ -162,6 +165,13 @@ class MinefieldScreen(
             }
         }
 
+        GdxLocal.run {
+            if (highlightAlpha > 0.0f) {
+                highlightAlpha = (highlightAlpha - 0.25f * Gdx.graphics.deltaTime).coerceAtLeast(0.0f)
+                Gdx.graphics.requestRendering()
+            }
+        }
+
         if (BuildConfig.DEBUG) {
             Gdx.app.log("GDX", "GDX Fps = ${Gdx.graphics.framesPerSecond}")
         }
@@ -176,8 +186,10 @@ class MinefieldScreen(
             }
         }
 
-        val visibleCount = actors.count { it.isVisible }
-        Gdx.app.log("GDX", "GDX count = $visibleCount")
+        if (BuildConfig.DEBUG) {
+            val visibleCount = actors.count { it.isVisible }
+            Gdx.app.log("GDX", "GDX count = $visibleCount")
+        }
     }
 
     override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean {
