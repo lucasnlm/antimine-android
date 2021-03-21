@@ -21,6 +21,7 @@ import dev.lucasnlm.antimine.gdx.toGdxColor
 import dev.lucasnlm.antimine.gdx.toOppositeMax
 import dev.lucasnlm.antimine.gdx.use
 import dev.lucasnlm.antimine.gdx.useColor
+import dev.lucasnlm.antimine.ui.ext.red
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.minesAround
 
@@ -222,19 +223,16 @@ class AreaActor(
             }
 
             if (area.highlighted && !area.isCovered) {
-                ShapeRenderer(64).use(ShapeRenderer.ShapeType.Filled) {
+                textures.areaTextures[AreaForm.Full]?.let {
                     val density = Gdx.graphics.density
-                    val radius = (width * 0.5f * radiusLevel * Gdx.graphics.density * 0.1f)
-                    projectionMatrix = batch.projectionMatrix
-                    transformMatrix = batch.transformMatrix
-                    useColor(theme.palette.highlight, 0.5f)
-                    Gdx.gl.glLineWidth( density * 2.0f)
-                    roundedRect(
-                        x = x + density * 2,
-                        y = y + density * 2,
-                        width = width - density * 4,
-                        height = height - density * 4,
-                        radius = radius,
+                    batch.drawArea(
+                        texture = it,
+                        x = x + internalPadding + density * 2f,
+                        y = y + internalPadding + density * 2f,
+                        width = width - internalPadding * 2f - density * 4f,
+                        height = height - internalPadding * 2f - density * 4f,
+                        color = theme.palette.highlight.toGdxColor(0.45f),
+                        blend = quality < 2,
                     )
                 }
             }

@@ -52,7 +52,7 @@ object AreaAssetBuilder {
             2.0.pow(ceil(ln(this) / ln(2.0)))
         }.toInt()
 
-        val radius = (size * 0.5 * radiusLevel * Gdx.graphics.density * 0.1f).toInt()
+        val radius = (size * 0.5 * radiusLevel * 0.1f).toInt()
 
         val pixmap = Pixmap(size, size, Pixmap.Format.RGBA8888).apply {
             blending = Pixmap.Blending.SourceOver
