@@ -27,6 +27,7 @@ class MinefieldScreen(
     private var minefieldSize: SizeF? = null
     private var currentZoom: Float = 1.0f
     private var lastCameraPosition: Vector3? = null
+    private var lastZoom: Float? = null
 
     private val cameraController: CameraController
 
@@ -70,7 +71,6 @@ class MinefieldScreen(
 
             GdxLocal.qualityZoomLevel = (zoom.toInt() - 1).coerceAtLeast(0).coerceAtMost(2)
         }
-        refreshVisibleActorsIfNeeded(true)
     }
 
     fun bindField(field: List<Area>) {
@@ -138,7 +138,6 @@ class MinefieldScreen(
                 update(true)
             }
         }
-        refreshVisibleActorsIfNeeded()
         Gdx.graphics.requestRendering()
     }
 
@@ -149,7 +148,6 @@ class MinefieldScreen(
         minefieldSize?.let { cameraController.act(it) }
 
         refreshAreas()
-        refreshVisibleActorsIfNeeded(true)
 
         val delta = Gdx.graphics.deltaTime
 
@@ -165,6 +163,8 @@ class MinefieldScreen(
             }
         }
 
+        refreshVisibleActorsIfNeeded()
+
         GdxLocal.run {
             if (highlightAlpha > 0.0f) {
                 highlightAlpha = (highlightAlpha - 0.25f * Gdx.graphics.deltaTime).coerceAtLeast(0.0f)
@@ -173,13 +173,15 @@ class MinefieldScreen(
         }
 
         if (BuildConfig.DEBUG) {
-            Gdx.app.log("GDX", "GDX Fps = ${Gdx.graphics.framesPerSecond}")
+            Gdx.app.log("GDX", "GDX FPS = ${Gdx.graphics.framesPerSecond}")
         }
     }
 
-    private fun refreshVisibleActorsIfNeeded(forceRefresh: Boolean = false) {
-        if (!camera.position.epsilonEquals(lastCameraPosition) || forceRefresh) {
+    private fun refreshVisibleActorsIfNeeded() {
+        val camera = camera as OrthographicCamera
+        if (!camera.position.epsilonEquals(lastCameraPosition) || lastZoom != camera.zoom) {
             lastCameraPosition = camera.position.cpy()
+            lastZoom = camera.zoom
 
             actors.forEach {
                 it.isVisible = camera.frustum.boundsInFrustum(it.x, it.y, 0f, it.width, it.height, 0.0f)

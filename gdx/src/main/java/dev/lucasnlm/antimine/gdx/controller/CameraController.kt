@@ -52,7 +52,7 @@ class CameraController(
     }
 
     fun act(minefieldSize: SizeF) {
-        if (!velocity.isZero) {
+        if (velocity.len2() > 0.01f) {
             limitSpeed(minefieldSize)
 
             camera.run {
