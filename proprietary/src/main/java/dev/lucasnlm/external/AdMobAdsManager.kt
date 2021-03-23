@@ -14,6 +14,7 @@ class AdMobAdsManager(
 ) : IAdsManager {
     private var rewardedAd: RewardedAd? = null
     private var failErrorCause: String? = null
+    private var lastShownAd = 0L
 
     override fun start(context: Context) {
         if (rewardedAd == null) {
@@ -50,22 +51,28 @@ class AdMobAdsManager(
 
     override fun showRewardedAd(
         activity: Activity,
+        skipIfFrequent: Boolean,
         onRewarded: (() -> Unit)?,
         onFail: (() -> Unit)?
     ) {
-        val rewardedAd = this.rewardedAd
-        if (rewardedAd != null) {
-            rewardedAd.show(activity) {
-                if (!activity.isFinishing) {
-                    onRewarded?.invoke()
-                    preloadAds(activity)
-                }
-            }
-            loadAd()
+        if (System.currentTimeMillis() - lastShownAd < Ads.MIN_FREQUENCY) {
+            onRewarded?.invoke()
         } else {
-            val message = failErrorCause?.let { "Fail to load Ad\n$it" } ?: "Fail to load Ad"
-            crashReporter.sendError(message)
-            onFail?.invoke()
+            val rewardedAd = this.rewardedAd
+            if (rewardedAd != null) {
+                rewardedAd.show(activity) {
+                    if (!activity.isFinishing) {
+                        lastShownAd = System.currentTimeMillis()
+                        onRewarded?.invoke()
+                        preloadAds(activity)
+                    }
+                }
+                loadAd()
+            } else {
+                val message = failErrorCause?.let { "Fail to load Ad\n$it" } ?: "Fail to load Ad"
+                crashReporter.sendError(message)
+                onFail?.invoke()
+            }
         }
     }
 }

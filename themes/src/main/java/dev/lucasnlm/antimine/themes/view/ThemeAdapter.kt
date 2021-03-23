@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.themes.view
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,17 +16,21 @@ import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.view.AreaView
 import dev.lucasnlm.antimine.ui.view.createAreaPaintSettings
+import dev.lucasnlm.external.IAdsManager
 import kotlinx.android.synthetic.main.view_theme.view.*
 
 class ThemeAdapter(
+    private val activity: Activity,
     private val themeViewModel: ThemeViewModel,
     private val areaSize: Float,
     private val preferencesRepository: IPreferencesRepository,
+    private val adsManager: IAdsManager,
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
 
     private val themes: List<AppTheme> = themeViewModel.singleState().themes
     private val minefield = ExampleField.getField()
     private val squareRadius: Int = preferencesRepository.squareRadius()
+    private val unlockedThemes = preferencesRepository.getUnlockedThemes()
 
     init {
         setHasStableIds(true)
@@ -83,7 +88,11 @@ class ThemeAdapter(
                     setCompoundDrawables(null, null, null, null)
                     visibility = View.VISIBLE
                 }
-            } else if (theme.isPaid && !preferencesRepository.isPremiumEnabled()) {
+            } else if (
+                theme.isPaid &&
+                !preferencesRepository.isPremiumEnabled() &&
+                !unlockedThemes.contains(theme.id.toInt())
+            ) {
                 areas.forEach { it.alpha = 0.30f }
 
                 label.apply {
@@ -103,12 +112,12 @@ class ThemeAdapter(
             theme_background.setBackgroundColor(theme.palette.background.toAndroidColor())
 
             clickable.setOnClickListener {
-                themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+                unlockThemeIfNeeded(theme)
             }
 
             card_theme.apply {
                 setOnClickListener {
-                    themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+                    unlockThemeIfNeeded(theme)
                 }
                 strokeColor = if (selected) {
                     theme.palette.accent.toAndroidColor()
@@ -116,6 +125,25 @@ class ThemeAdapter(
                     0
                 }
             }
+        }
+    }
+
+    private fun unlockThemeIfNeeded(theme: AppTheme) {
+        if (!theme.isPaid ||
+            preferencesRepository.isPremiumEnabled() ||
+            unlockedThemes.contains(theme.id.toInt())) {
+            themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+        } else {
+            adsManager.showRewardedAd(
+                activity,
+                skipIfFrequent = false,
+                onRewarded = {
+                    themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+                },
+                onFail = {
+                    themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+                }
+            )
         }
     }
 

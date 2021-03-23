@@ -132,6 +132,27 @@ class PreferencesRepository(
         }
     }
 
+    override fun addUnlockedTheme(id: Int) {
+        val themes = preferencesManager.getString(PreferenceKeys.PREFERENCE_UNLOCKED_THEMES) ?: ""
+        val themesIt = themes.split(" ").mapNotNull { it.toIntOrNull() }
+        if (!themesIt.contains(id)) {
+            val newState = themesIt.toMutableList().run {
+                add(id)
+                joinToString(" ")
+            }
+            preferencesManager.putString(PreferenceKeys.PREFERENCE_UNLOCKED_THEMES, newState)
+        }
+    }
+
+    override fun setUnlockedThemes(themes: String) {
+        preferencesManager.putString(PreferenceKeys.PREFERENCE_UNLOCKED_THEMES, themes)
+    }
+
+    override fun getUnlockedThemes(): List<Int> {
+        val themes = preferencesManager.getString(PreferenceKeys.PREFERENCE_UNLOCKED_THEMES) ?: ""
+        return themes.split(" ").mapNotNull { it.toIntOrNull() }
+    }
+
     override fun controlStyle(): ControlStyle {
         return if (isAndroidTv) {
             ControlStyle.FastFlag
@@ -253,7 +274,7 @@ class PreferencesRepository(
     }
 
     override fun isPremiumEnabled(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_PREMIUM_FEATURES, false)
+        return false
     }
 
     override fun showSupport(): Boolean {
