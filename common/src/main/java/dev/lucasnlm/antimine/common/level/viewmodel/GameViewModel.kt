@@ -119,7 +119,7 @@ open class GameViewModel(
         when {
             gameController.isGameOver() -> eventObserver.postValue(Event.GameOver)
             gameController.isVictory() -> eventObserver.postValue(Event.Victory)
-            else -> eventObserver.postValue(Event.ResumeGame)
+            else -> eventObserver.postValue(Event.Resume)
         }
 
         saveId.postValue(save.uid.toLong())
@@ -140,7 +140,7 @@ open class GameViewModel(
         mineCount.postValue(setup.mines)
         levelSetup.postValue(setup)
 
-        eventObserver.postValue(Event.ResumeGame)
+        eventObserver.postValue(Event.Resume)
 
         analyticsManager.sentEvent(
             Analytics.RetryGame(

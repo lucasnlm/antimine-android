@@ -99,7 +99,10 @@ class GameActivity :
 
         if (!isPortrait()) {
             val decorView = window.decorView
+            @Suppress("DEPRECATION")
             val uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
+
+            @Suppress("DEPRECATION")
             decorView.systemUiVisibility = uiOptions
         }
 
@@ -237,7 +240,6 @@ class GameActivity :
     override fun onResume() {
         super.onResume()
         val willReset = restartIfNeed()
-
         if (!willReset) {
             if (status == Status.Running) {
                 gameViewModel.run {
@@ -248,10 +250,14 @@ class GameActivity :
                 analyticsManager.sentEvent(Analytics.Resume)
             }
         }
+
+        keepScreenOn(true)
     }
 
     override fun onPause() {
         super.onPause()
+
+        keepScreenOn(false)
 
         if (status == Status.Running) {
             gameViewModel.pauseGame()
@@ -571,6 +577,7 @@ class GameActivity :
                 disableShortcutIcon()
             }
             Event.Resume, Event.Running -> {
+                loadGameOrTutorial()
                 status = Status.Running
                 gameViewModel.runClock()
                 refreshInGameShortcut()
