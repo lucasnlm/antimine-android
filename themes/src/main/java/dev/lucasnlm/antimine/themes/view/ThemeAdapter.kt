@@ -131,7 +131,8 @@ class ThemeAdapter(
     private fun unlockThemeIfNeeded(theme: AppTheme) {
         if (!theme.isPaid ||
             preferencesRepository.isPremiumEnabled() ||
-            unlockedThemes.contains(theme.id.toInt())) {
+            unlockedThemes.contains(theme.id.toInt())
+        ) {
             themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
         } else {
             adsManager.showRewardedAd(

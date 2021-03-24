@@ -6,10 +6,8 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IBillingManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
 class ThemeViewModel(
