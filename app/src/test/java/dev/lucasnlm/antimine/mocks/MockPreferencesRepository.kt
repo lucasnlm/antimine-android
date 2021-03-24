@@ -127,7 +127,9 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setUserId(userId: String) {}
 
-    override fun addUnlockedTheme(id: Long) {}
+    override fun addUnlockedTheme(id: Int) { }
 
-    override fun isThemeUnlocked(id: Long): Boolean = true
+    override fun setUnlockedThemes(themes: String) { }
+
+    override fun getUnlockedThemes(): List<Int> = listOf()
 }
