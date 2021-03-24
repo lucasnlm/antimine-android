@@ -24,6 +24,7 @@ class AreaActor(
     size: Float,
     private var area: Area,
     private var areaForm: AreaForm,
+    private var previousForm: AreaForm? = null,
     private val radiusLevel: Float,
     private val theme: AppTheme,
     private val internalPadding: Float = 0f,
@@ -75,6 +76,10 @@ class AreaActor(
         this.area = area
 
         if (area.isCovered) {
+            if (areaForm != previousForm) {
+                previousForm = this.areaForm
+            }
+
             this.areaForm = areaForm
             this.coverAlpha = 1.0f
         }
@@ -86,6 +91,14 @@ class AreaActor(
         if (!area.isCovered && coverAlpha > 0.0f) {
             coverAlpha = (coverAlpha - delta * 3.0f).coerceAtLeast(0.0f)
             Gdx.graphics.requestRendering()
+        } else if (previousForm != null) {
+            coverAlpha = (coverAlpha - delta * 3.0f).coerceAtLeast(0.0f)
+            Gdx.graphics.requestRendering()
+
+            if (coverAlpha == 0.0f) {
+                previousForm = null
+                coverAlpha = 1.0f
+            }
         }
 
         GdxLocal.pressedArea?.let {
@@ -162,6 +175,25 @@ class AreaActor(
                 }
             } else {
                 if (coverAlpha > 0.0f) {
+                    previousForm?.let {  areaForm ->
+                        textures.areaTextures[areaForm]?.let {
+                            batch.drawArea(
+                                texture = it,
+                                x = x + internalPadding,
+                                y = y + internalPadding,
+                                width = width - internalPadding * 2,
+                                height = height - internalPadding * 2,
+                                color = if (area.mark.isNotNone()) {
+                                    Color(0.5f, 0.5f, 0.5f, coverAlpha)
+                                } else {
+                                    Color(1.0f, 1.0f, 1.0f, coverAlpha)
+                                },
+                                blend = quality < 2,
+                            )
+                        }
+                    }
+
+                    val coverAlpha = if (previousForm != null) 1.0f else coverAlpha
                     textures.areaTextures[areaForm]?.let {
                         batch.drawArea(
                             texture = it,
