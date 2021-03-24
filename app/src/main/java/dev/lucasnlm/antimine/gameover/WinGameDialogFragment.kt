@@ -242,6 +242,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
             if (!activity.isFinishing) {
                 adsManager.showRewardedAd(
                     activity,
+                    true,
                     onRewarded = {
                         startNewGameAndDismiss()
                     },

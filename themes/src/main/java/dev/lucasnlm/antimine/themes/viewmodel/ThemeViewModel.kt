@@ -6,15 +6,12 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IBillingManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
 class ThemeViewModel(
     private val themeRepository: IThemeRepository,
-    private val billingManager: IBillingManager,
     private val preferencesRepository: IPreferencesRepository,
     private val analyticsManager: IAnalyticsManager,
 ) : IntentViewModel<ThemeEvent, ThemeState>() {
@@ -28,16 +25,6 @@ class ThemeViewModel(
                 if (it is ThemeEvent.ChangeTheme) {
                     analyticsManager.sentEvent(Analytics.ClickTheme(it.newTheme.id))
                 }
-            }.map {
-                if (it is ThemeEvent.ChangeTheme &&
-                    billingManager.isEnabled() &&
-                    !preferencesRepository.isPremiumEnabled() &&
-                    it.newTheme.isPaid
-                ) {
-                    ThemeEvent.Unlock(it.newTheme.id)
-                } else {
-                    it
-                }
             }
     }
 
@@ -48,6 +35,7 @@ class ThemeViewModel(
         } else if (event is ThemeEvent.ChangeTheme) {
             setTheme(event.newTheme)
             emit(state.copy(current = event.newTheme))
+            preferencesRepository.addUnlockedTheme(event.newTheme.id.toInt())
         }
     }
 

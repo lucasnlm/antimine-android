@@ -20,6 +20,7 @@ data class CloudSave(
     val noGuessing: Int,
     val language: String,
     val openDirectly: Int,
+    val unlockedThemes: String,
 )
 
 fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
@@ -40,6 +41,7 @@ fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
     "noGuessing" to noGuessing,
     "language" to language,
     "openDirectly" to openDirectly,
+    "unlockedThemes" to unlockedThemes,
 )
 
 private fun Any?.parseInt(): Int = this?.toString()?.toInt() ?: throw Exception("Fail to parse Int")
@@ -66,4 +68,5 @@ fun cloudSaveOf(id: String, data: Map<String, Any>) =
         (data["noGuessing"] ?: 1).parseInt(),
         data["language"].parseString(""),
         data["openDirectly"].parseInt(0),
+        data["unlockedThemes"].parseString(""),
     )

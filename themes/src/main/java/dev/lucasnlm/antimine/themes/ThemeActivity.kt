@@ -52,7 +52,13 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 columns = 3
             }
 
-            val themeAdapter = ThemeAdapter(themeViewModel, areaSize, preferencesRepository)
+            val themeAdapter = ThemeAdapter(
+                activity = this@ThemeActivity,
+                themeViewModel = themeViewModel,
+                areaSize = areaSize,
+                preferencesRepository = preferencesRepository,
+                adsManager = adsManager
+            )
 
             recyclerView.apply {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))

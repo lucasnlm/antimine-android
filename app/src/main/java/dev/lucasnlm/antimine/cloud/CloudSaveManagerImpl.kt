@@ -50,6 +50,7 @@ class CloudSaveManagerImpl(
                     noGuessing = preferencesRepository.useNoGuessingAlgorithm().toInt(),
                     language = preferencesRepository.getPreferredLocale() ?: "",
                     openDirectly = preferencesRepository.openGameDirectly().toInt(),
+                    unlockedThemes = preferencesRepository.getUnlockedThemes().joinToString(" "),
                 )
             }
         } catch (e: Exception) {
