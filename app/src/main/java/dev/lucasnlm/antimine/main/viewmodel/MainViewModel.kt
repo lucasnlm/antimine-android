@@ -70,22 +70,23 @@ class MainViewModel(
 
     private suspend fun loadCloudSave(cloudSave: CloudSave) = with(cloudSave) {
         with(preferencesRepository) {
-            setCompleteTutorial(cloudSave.completeTutorial == 1)
+            setCompleteTutorial(completeTutorial == 1)
             completeFirstUse()
-            useTheme(cloudSave.selectedTheme.toLong())
-            setSquareRadius(cloudSave.squareRadius)
-            setSquareMultiplier(cloudSave.squareSize)
-            setCustomLongPressTimeout(cloudSave.touchTiming.toLong())
-            setQuestionMark(cloudSave.questionMark != 0)
-            setNoGuessingAlgorithm(cloudSave.noGuessing != 0)
-            setPreferredLocale(cloudSave.language)
+            useTheme(selectedTheme.toLong())
+            setSquareRadius(squareRadius)
+            setSquareMultiplier(squareSize)
+            setCustomLongPressTimeout(touchTiming.toLong())
+            setQuestionMark(questionMark != 0)
+            setNoGuessingAlgorithm(noGuessing != 0)
+            setPreferredLocale(language)
             setFlagAssistant(gameAssistance != 0)
             setHapticFeedback(hapticFeedback != 0)
             setHelp(help != 0)
             setSoundEffectsEnabled(soundEffects != 0)
-            setPremiumFeatures(cloudSave.premiumFeatures != 0)
-            useControlStyle(ControlStyle.values()[cloudSave.controlStyle])
-            setOpenGameDirectly(cloudSave.openDirectly != 0)
+            setPremiumFeatures(premiumFeatures != 0)
+            useControlStyle(ControlStyle.values()[controlStyle])
+            setOpenGameDirectly(openDirectly != 0)
+            setUnlockedThemes(unlockedThemes)
         }
 
         cloudSave.stats.mapNotNull {

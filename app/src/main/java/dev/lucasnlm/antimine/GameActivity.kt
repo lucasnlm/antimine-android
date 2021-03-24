@@ -94,24 +94,26 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
         playGamesManager.showPlayPopUp(this)
 
         lifecycleScope.launchWhenCreated {
-            intent.extras?.let {
-                when {
-                    it.containsKey(DIFFICULTY) -> {
-                        val difficulty = it.getSerializable(DIFFICULTY) as Difficulty
-                        gameViewModel.startNewGame(difficulty)
-                    }
-                    it.containsKey(START_TUTORIAL) -> {
-                        gameViewModel.startNewGame(Difficulty.Standard)
-                        gameViewModel.eventObserver.postValue(Event.StartTutorial)
-                    }
-                    it.containsKey(RETRY_GAME) -> {
-                        val uid = it.getInt(RETRY_GAME)
-                        gameViewModel.retryGame(uid)
-                    }
-                    it.containsKey(START_GAME) -> {
-                        val uid = it.getInt(START_GAME)
-                        gameViewModel.loadGame(uid)
-                    }
+            val extras = intent.extras ?: Bundle()
+            when {
+                extras.containsKey(DIFFICULTY) -> {
+                    val difficulty = extras.getSerializable(DIFFICULTY) as Difficulty
+                    gameViewModel.startNewGame(difficulty)
+                }
+                extras.containsKey(START_TUTORIAL) -> {
+                    gameViewModel.startNewGame(Difficulty.Standard)
+                    gameViewModel.eventObserver.postValue(Event.StartTutorial)
+                }
+                extras.containsKey(RETRY_GAME) -> {
+                    val uid = extras.getInt(RETRY_GAME)
+                    gameViewModel.retryGame(uid)
+                }
+                extras.containsKey(START_GAME) -> {
+                    val uid = extras.getInt(START_GAME)
+                    gameViewModel.loadGame(uid)
+                }
+                else -> {
+                    gameViewModel.loadLastGame()
                 }
             }
         }
@@ -363,9 +365,13 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
 
     private fun startNewGameWithAds() {
         if (!preferencesRepository.isPremiumEnabled() && featureFlagManager.isAdsOnNewGameEnabled) {
-            adsManager.showRewardedAd(this) {
-                gameViewModel.startNewGame()
-            }
+            adsManager.showRewardedAd(
+                activity = this,
+                skipIfFrequent = true,
+                onRewarded = {
+                    gameViewModel.startNewGame()
+                }
+            )
         } else {
             gameViewModel.startNewGame()
         }
@@ -429,12 +435,10 @@ class GameActivity : ThematicActivity(R.layout.activity_game), DialogInterface.O
                 }
             }
 
-            if (findFragmentByTag(LevelFragment.TAG) == null) {
-                beginTransaction().apply {
-                    replace(R.id.levelContainer, LevelFragment(), LevelFragment.TAG)
-                    setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    commitAllowingStateLoss()
-                }
+            beginTransaction().apply {
+                replace(R.id.levelContainer, LevelFragment(), LevelFragment.TAG)
+                setTransition(FragmentTransaction.TRANSIT_NONE)
+                commitAllowingStateLoss()
             }
         }
     }

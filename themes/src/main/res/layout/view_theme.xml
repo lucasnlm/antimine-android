@@ -112,7 +112,7 @@
                 android:text="@string/system"
                 android:textAllCaps="true"
                 android:textStyle="bold"
-                app:drawableTopCompat="@drawable/lock" />
+                app:drawableTopCompat="@drawable/movie" />
 
             <FrameLayout
                 android:id="@+id/clickable"

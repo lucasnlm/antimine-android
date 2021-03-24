@@ -91,4 +91,8 @@ interface IPreferencesRepository {
 
     fun userId(): String?
     fun setUserId(userId: String)
+
+    fun addUnlockedTheme(id: Int)
+    fun setUnlockedThemes(themes: String)
+    fun getUnlockedThemes(): List<Int>
 }
