@@ -27,7 +27,7 @@ class AreaActor(
     private var previousForm: AreaForm? = null,
     private var coverAlpha: Float = 1.0f,
     private val theme: AppTheme,
-    private val internalPadding: Float = 0f,
+    private val squareDivider: Float = 0f,
     private val onSingleTouch: (Area) -> Unit,
     private val onLongTouch: (Area) -> Unit,
 ) : Actor() {
@@ -132,7 +132,7 @@ class AreaActor(
     override fun draw(unsafeBatch: Batch?, parentAlpha: Float) {
         super.draw(unsafeBatch, parentAlpha)
 
-        val internalPadding = this.internalPadding
+        val internalPadding = squareDivider
         val isCurrentTouch = isCurrentlyPressed()
 
         unsafeBatch?.scope { batch, textures ->

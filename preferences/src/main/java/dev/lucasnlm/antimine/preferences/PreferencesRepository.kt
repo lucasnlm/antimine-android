@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.preferences
 
 import android.view.ViewConfiguration
+import dev.lucasnlm.antimine.preferences.PreferenceKeys.PREFERENCE_SQUARE_DIVIDER
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
@@ -151,6 +152,14 @@ class PreferencesRepository(
     override fun getUnlockedThemes(): List<Int> {
         val themes = preferencesManager.getString(PreferenceKeys.PREFERENCE_UNLOCKED_THEMES) ?: ""
         return themes.split(" ").mapNotNull { it.toIntOrNull() }
+    }
+
+    override fun allowJoinAreas(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_ALLOW_JOIN_SQUARES, true)
+    }
+
+    override fun setJoinAreas(joinAreas: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_ALLOW_JOIN_SQUARES, joinAreas)
     }
 
     override fun controlStyle(): ControlStyle {
@@ -327,5 +336,13 @@ class PreferencesRepository(
 
     override fun setOpenGameDirectly(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_OPEN_DIRECTLY, value)
+    }
+
+    override fun squareDivider(): Int {
+        return if (allowJoinAreas()) 0 else preferencesManager.getInt(PREFERENCE_SQUARE_DIVIDER, 10)
+    }
+
+    override fun setSquareDivider(value: Int) {
+        preferencesManager.putInt(PREFERENCE_SQUARE_DIVIDER, value.coerceIn(0, 50))
     }
 }

@@ -90,9 +90,14 @@ class MinefieldScreen(
                             theme = renderSettings.theme,
                             size = renderSettings.areaSize,
                             area = it,
-                            areaForm = if (it.isCovered) AreaActor.getForm(it, field) else AreaForm.None,
+                            areaForm = when {
+                                renderSettings.joinAreas ->
+                                    if (it.isCovered) AreaActor.getForm(it, field) else AreaForm.None
+                                else -> AreaForm.Full
+                            },
                             onSingleTouch = onSingleTouch,
                             onLongTouch = onLongTouch,
+                            squareDivider = renderSettings.squareDivider,
                         )
                     }.forEach {
                         addActor(it)
@@ -103,7 +108,8 @@ class MinefieldScreen(
                     actors.forEach {
                         val areaActor = (it as AreaActor)
                         val area = field[areaActor.boundAreaId()]
-                        areaActor.bindArea(reset, area, AreaActor.getForm(area, field))
+                        val areaForm = if (renderSettings.joinAreas) AreaActor.getForm(area, field) else AreaForm.Full
+                        areaActor.bindArea(reset, area, areaForm)
                     }
                 }
             }
