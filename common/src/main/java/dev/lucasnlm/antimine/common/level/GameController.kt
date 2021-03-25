@@ -262,7 +262,8 @@ class GameController {
     fun remainingMines(): Int {
         val flagsCount = field.count { it.mark.isFlag() }
         val minesCount = mines().count()
-        return (minesCount - flagsCount).coerceAtLeast(0)
+        val openMinesCount = mines().count { !it.isCovered && it.mistake }
+        return (minesCount - flagsCount - openMinesCount)
     }
 
     fun getSaveState(duration: Long, difficulty: Difficulty): Save {

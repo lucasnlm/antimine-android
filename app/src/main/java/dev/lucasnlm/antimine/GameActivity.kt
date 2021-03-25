@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
@@ -9,6 +10,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
@@ -49,6 +51,7 @@ import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_tutorial_level.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -200,6 +203,18 @@ class GameActivity :
             this@GameActivity,
             {
                 minesCount.apply {
+                    if (it < 0) {
+                        setTypeface(null, Typeface.BOLD)
+
+                        text.toString().toIntOrNull()?.let { oldValue ->
+                            if (oldValue > it) {
+                                startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+                            }
+                        }
+                    } else {
+                        setTypeface(null, Typeface.NORMAL)
+                    }
+
                     visibility = View.VISIBLE
                     text = it.toString()
                 }
