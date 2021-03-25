@@ -13,9 +13,9 @@ object GdxLocal {
     var textureAtlas: TextureAtlas? = null
     var gameTextures: GameTextures? = null
     var qualityZoomLevel: Int = 0
-    var globalAlpha = 1.0f
     var focusResizeLevel = 1.15f
     const val maxFocusResizeLevel = 1.15f
     var hasHighlightAreas = false
     var highlightAlpha = 0.0f
+    var animationScale: Float = 1.0f
 }

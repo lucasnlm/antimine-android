@@ -25,11 +25,11 @@ class AreaActor(
     private var area: Area,
     private var areaForm: AreaForm,
     private var previousForm: AreaForm? = null,
+    private var coverAlpha: Float = 1.0f,
     private val theme: AppTheme,
     private val internalPadding: Float = 0f,
     private val onSingleTouch: (Area) -> Unit,
     private val onLongTouch: (Area) -> Unit,
-    private var coverAlpha: Float = 1.0f,
 ) : Actor() {
 
     init {
@@ -96,16 +96,19 @@ class AreaActor(
         super.act(delta)
 
         if (!area.isCovered && coverAlpha > 0.0f) {
-            coverAlpha = (coverAlpha - delta * 4.0f).coerceAtLeast(0.0f)
+            val revealDelta = delta * 4.0f * GdxLocal.animationScale
+            coverAlpha = (coverAlpha - revealDelta).coerceAtLeast(0.0f)
             Gdx.graphics.requestRendering()
         } else if (previousForm != null && coverAlpha > 0.0f) {
-            coverAlpha = (coverAlpha - delta * 4.0f).coerceAtLeast(0.0f)
-            Gdx.graphics.requestRendering()
+            val revealDelta = delta * 4.0f * GdxLocal.animationScale
+            coverAlpha = (coverAlpha - revealDelta).coerceAtLeast(0.0f)
 
             if (coverAlpha == 0.0f) {
                 previousForm = null
                 coverAlpha = 1.0f
             }
+
+            Gdx.graphics.requestRendering()
         }
 
         GdxLocal.pressedArea?.let {

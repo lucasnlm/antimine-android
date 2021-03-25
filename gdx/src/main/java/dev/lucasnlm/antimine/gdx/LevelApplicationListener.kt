@@ -106,6 +106,8 @@ class LevelApplicationListener(
             val radiusLevel = preferencesRepository.squareRadius()
             val atlas = assetManager.get<TextureAtlas>(TextureConstants.atlasName)
 
+            animationScale = if (preferencesRepository.useAnimations()) 1f else 100.0f
+
             pressedArea = null
             textureAtlas = atlas
             gameTextures = GameTextures(
