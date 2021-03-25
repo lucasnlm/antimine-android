@@ -34,7 +34,6 @@ import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.level.view.GdxLevelFragment
-import dev.lucasnlm.antimine.level.view.LevelFragment
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.share.ShareManager
@@ -432,10 +431,12 @@ class GameActivity :
                 }
             }
 
-            beginTransaction().apply {
-                replace(R.id.levelContainer, GdxLevelFragment(), LevelFragment.TAG)
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                commitAllowingStateLoss()
+            if (findFragmentByTag(GdxLevelFragment.TAG) == null) {
+                beginTransaction().apply {
+                    replace(R.id.levelContainer, GdxLevelFragment(), GdxLevelFragment.TAG)
+                    setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    commitAllowingStateLoss()
+                }
             }
         }
     }
