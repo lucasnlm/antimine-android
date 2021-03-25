@@ -93,16 +93,17 @@ class MinefieldScreen(
                             areaForm = if (it.isCovered) AreaActor.getForm(it, field) else AreaForm.None,
                             onSingleTouch = onSingleTouch,
                             onLongTouch = onLongTouch,
-                            radiusLevel = renderSettings.radius,
                         )
                     }.forEach {
                         addActor(it)
                     }
                 } else {
+                    val reset = field.count { it.hasMine } == 0
+
                     actors.forEach {
                         val areaActor = (it as AreaActor)
                         val area = field[areaActor.boundAreaId()]
-                        areaActor.bindArea(area, AreaActor.getForm(area, field))
+                        areaActor.bindArea(reset, area, AreaActor.getForm(area, field))
                     }
                 }
             }

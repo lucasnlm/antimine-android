@@ -25,7 +25,6 @@ class AreaActor(
     private var area: Area,
     private var areaForm: AreaForm,
     private var previousForm: AreaForm? = null,
-    private val radiusLevel: Float,
     private val theme: AppTheme,
     private val internalPadding: Float = 0f,
     private val onSingleTouch: (Area) -> Unit,
@@ -72,16 +71,22 @@ class AreaActor(
 
     fun boundAreaId() = area.id
 
-    fun bindArea(area: Area, areaForm: AreaForm) {
-        if (area.isCovered) {
-            if (areaForm != previousForm && area.mark == this.area.mark) {
-                previousForm = this.areaForm
-            }
-
+    fun bindArea(reset: Boolean, area: Area, areaForm: AreaForm) {
+        if (reset) {
             this.areaForm = areaForm
+            this.previousForm = null
             this.coverAlpha = 1.0f
-        } else if (area.isCovered != this.area.isCovered) {
-            this.coverAlpha = 1.0f
+        } else {
+            if (area.isCovered) {
+                if (areaForm != previousForm && area.mark == this.area.mark) {
+                    previousForm = this.areaForm
+                }
+
+                this.areaForm = areaForm
+                this.coverAlpha = 1.0f
+            } else if (area.isCovered != this.area.isCovered) {
+                this.coverAlpha = 1.0f
+            }
         }
 
         this.area = area
@@ -91,10 +96,10 @@ class AreaActor(
         super.act(delta)
 
         if (!area.isCovered && coverAlpha > 0.0f) {
-            coverAlpha = (coverAlpha - delta * 3.0f).coerceAtLeast(0.0f)
+            coverAlpha = (coverAlpha - delta * 4.0f).coerceAtLeast(0.0f)
             Gdx.graphics.requestRendering()
         } else if (previousForm != null && coverAlpha > 0.0f) {
-            coverAlpha = (coverAlpha - delta * 3.0f).coerceAtLeast(0.0f)
+            coverAlpha = (coverAlpha - delta * 4.0f).coerceAtLeast(0.0f)
             Gdx.graphics.requestRendering()
 
             if (coverAlpha == 0.0f) {

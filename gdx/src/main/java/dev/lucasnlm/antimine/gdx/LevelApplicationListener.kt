@@ -270,7 +270,7 @@ class LevelApplicationListener(
                 width,
                 height,
                 false,
-                true
+                true,
             )
 
             flush()
