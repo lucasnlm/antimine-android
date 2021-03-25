@@ -73,16 +73,18 @@ class AreaActor(
     fun boundAreaId() = area.id
 
     fun bindArea(area: Area, areaForm: AreaForm) {
-        this.area = area
-
         if (area.isCovered) {
-            if (areaForm != previousForm) {
+            if (areaForm != previousForm && area.mark == this.area.mark) {
                 previousForm = this.areaForm
             }
 
             this.areaForm = areaForm
             this.coverAlpha = 1.0f
+        } else if (area.isCovered != this.area.isCovered) {
+            this.coverAlpha = 1.0f
         }
+
+        this.area = area
     }
 
     override fun act(delta: Float) {
@@ -91,7 +93,7 @@ class AreaActor(
         if (!area.isCovered && coverAlpha > 0.0f) {
             coverAlpha = (coverAlpha - delta * 3.0f).coerceAtLeast(0.0f)
             Gdx.graphics.requestRendering()
-        } else if (previousForm != null) {
+        } else if (previousForm != null && coverAlpha > 0.0f) {
             coverAlpha = (coverAlpha - delta * 3.0f).coerceAtLeast(0.0f)
             Gdx.graphics.requestRendering()
 
