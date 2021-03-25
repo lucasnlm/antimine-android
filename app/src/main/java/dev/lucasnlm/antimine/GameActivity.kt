@@ -590,7 +590,11 @@ class GameActivity :
                         gameViewModel.saveStats()
                     }
 
-                    gameViewModel.addNewTip()
+                    if (gameViewModel.isCompletedWithMistakes()) {
+                        gameViewModel.addNewTip(1)
+                    } else {
+                        gameViewModel.addNewTip(2)
+                    }
 
                     waitAndShowEndGameAlert(
                         gameResult = GameResult.Victory,

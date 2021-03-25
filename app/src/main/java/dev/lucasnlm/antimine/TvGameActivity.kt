@@ -375,7 +375,11 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
 
                 cloudSaveManager.uploadSave()
 
-                gameViewModel.addNewTip()
+                if (gameViewModel.isCompletedWithMistakes()) {
+                    gameViewModel.addNewTip(1)
+                } else {
+                    gameViewModel.addNewTip(2)
+                }
 
                 waitAndShowEndGameAlert(
                     gameResult = GameResult.Victory,

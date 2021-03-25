@@ -477,8 +477,8 @@ open class GameViewModel(
         }
     }
 
-    fun addNewTip() {
-        tipRepository.increaseTip()
+    fun addNewTip(amount: Int) {
+        tipRepository.increaseTip(amount.coerceAtLeast(0))
     }
 
     fun getTips(): Int {
