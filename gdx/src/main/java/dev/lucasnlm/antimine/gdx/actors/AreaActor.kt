@@ -278,6 +278,14 @@ class AreaActor(
                                 scale = if (isCurrentTouch) GdxLocal.focusResizeLevel else 1.0f
                             )
                         }
+                        area.revealed -> {
+                            val color = if (isOdd) { theme.palette.uncoveredOdd } else { theme.palette.uncovered }
+                            drawAsset(
+                                batch = batch,
+                                texture = it.mine,
+                                color = color.toGdxColor(0.65f),
+                            )
+                        }
                     }
                 } else {
                     if (area.minesAround > 0 && GdxLocal.qualityZoomLevel < 2) {
