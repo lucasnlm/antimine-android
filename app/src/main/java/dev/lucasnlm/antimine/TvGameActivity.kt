@@ -25,7 +25,7 @@ import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
-import dev.lucasnlm.antimine.level.view.LevelFragment
+import dev.lucasnlm.antimine.level.view.GdxLevelFragment
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
@@ -218,9 +218,9 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
                 }
             }
 
-            if (findFragmentByTag(LevelFragment.TAG) == null) {
+            if (findFragmentByTag(GdxLevelFragment.TAG) == null) {
                 beginTransaction().apply {
-                    replace(R.id.levelContainer, LevelFragment(), LevelFragment.TAG)
+                    replace(R.id.levelContainer, GdxLevelFragment(), GdxLevelFragment.TAG)
                     setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     commitAllowingStateLoss()
                 }
