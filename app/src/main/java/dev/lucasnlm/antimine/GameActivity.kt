@@ -268,6 +268,7 @@ class GameActivity :
     private fun backToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     override fun onBackPressed() {
