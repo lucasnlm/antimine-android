@@ -86,19 +86,6 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        lifecycleScope.launch {
-//            val loadGameUid = checkLoadGameDeepLink()
-//            val newGameDeepLink = checkNewGameDeepLink()
-//            val retryDeepLink = checkRetryGameDeepLink()
-//
-//            when {
-//                loadGameUid != null -> gameViewModel.loadGame(loadGameUid)
-//                newGameDeepLink != null -> gameViewModel.startNewGame(newGameDeepLink)
-//                retryDeepLink != null -> gameViewModel.retryGame(retryDeepLink)
-//                else -> gameViewModel.loadGame()
-//            }
-//        }
-
         gameViewModel.run {
             levelSetup.observe(
                 viewLifecycleOwner,
