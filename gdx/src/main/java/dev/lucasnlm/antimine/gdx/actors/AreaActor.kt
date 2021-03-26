@@ -36,7 +36,6 @@ class AreaActor(
         height = size
         x = area.posX * width
         y = area.posY * height
-        touchable = if (area.isCovered || area.minesAround > 0) Touchable.enabled else Touchable.disabled
 
         addListener(object : InputListener() {
             override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int) {
@@ -80,6 +79,7 @@ class AreaActor(
         }
 
         this.area = area
+        touchable = if (area.isCovered || area.minesAround > 0) Touchable.enabled else Touchable.disabled
     }
 
     override fun act(delta: Float) {

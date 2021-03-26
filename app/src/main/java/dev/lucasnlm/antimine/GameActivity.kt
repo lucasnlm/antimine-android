@@ -94,6 +94,7 @@ class GameActivity :
 
         bindViewModel()
         bindToolbar()
+        loadGameOrTutorial()
 
         if (!isPortrait()) {
             val decorView = window.decorView
@@ -203,15 +204,11 @@ class GameActivity :
             {
                 minesCount.apply {
                     if (it < 0) {
-                        setTypeface(null, Typeface.BOLD)
-
                         text.toString().toIntOrNull()?.let { oldValue ->
                             if (oldValue > it) {
                                 startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
                             }
                         }
-                    } else {
-                        setTypeface(null, Typeface.NORMAL)
                     }
 
                     visibility = View.VISIBLE
@@ -569,12 +566,10 @@ class GameActivity :
             }
             Event.StartNewGame -> {
                 gameToast?.cancel()
-                loadGameOrTutorial()
                 status = Status.PreGame
                 disableShortcutIcon()
             }
             Event.Resume, Event.Running -> {
-                loadGameOrTutorial()
                 status = Status.Running
                 gameViewModel.runClock()
                 refreshInGameShortcut()
