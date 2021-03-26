@@ -127,6 +127,8 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                         Event.Resume,
                         Event.ResumeGame,
                         Event.StartNewGame -> {
+                            bindControlSwitcherIfNeeded(view, false)
+
                             levelApplicationListener.run {
                                 setActionsEnabled(true)
                             }
@@ -142,8 +144,8 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
         bindControlSwitcherIfNeeded(view)
     }
 
-    private fun bindControlSwitcherIfNeeded(view: View) {
-        view.postDelayed(200L) {
+    private fun bindControlSwitcherIfNeeded(view: View, delayed: Boolean = true) {
+        view.postDelayed(if (delayed) 200L else 0L) {
             if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
                 (view.parent as FrameLayout).apply {
                     val floatingView = FloatingActionButton(context).apply {
