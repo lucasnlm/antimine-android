@@ -78,6 +78,8 @@ class MinefieldStage(
 
             GdxLocal.qualityZoomLevel = (zoom.toInt() - 1).coerceAtLeast(0).coerceAtMost(2)
         }
+
+        inputEvents.clear()
     }
 
     fun bindField(field: List<Area>) {
@@ -231,22 +233,6 @@ class MinefieldStage(
 
         refreshAreas()
 
-        val delta = Gdx.graphics.deltaTime
-
-        GdxLocal.pressedArea?.let {
-            if (!it.consumed && GdxLocal.focusResizeLevel < GdxLocal.maxFocusResizeLevel) {
-                GdxLocal.focusResizeLevel =
-                    (GdxLocal.focusResizeLevel + delta * GdxLocal.animationScale)
-                        .coerceAtMost(GdxLocal.maxFocusResizeLevel)
-            }
-
-            if (it.consumed && GdxLocal.focusResizeLevel >= 1.0f) {
-                GdxLocal.focusResizeLevel =
-                    (GdxLocal.focusResizeLevel - delta * 0.2f * GdxLocal.animationScale)
-                        .coerceAtLeast(1.0f)
-            }
-        }
-
         refreshVisibleActorsIfNeeded()
 
         GdxLocal.run {
@@ -284,10 +270,8 @@ class MinefieldStage(
             val dy = Gdx.input.deltaY.toFloat()
 
             if (dx * dx + dy * dy > 16f) {
-                GdxLocal.pressedArea = null
+                inputEvents.clear()
             }
-
-            inputEvents.clear()
 
             cameraController.addVelocity(
                 -dx * currentZoom,

@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.gdx.controller
 
 import com.badlogic.gdx.input.GestureDetector
 import com.badlogic.gdx.math.Vector2
-import dev.lucasnlm.antimine.gdx.GdxLocal
 
 class GameInputController(
     private val onChangeZoom: (Float) -> Unit,
@@ -33,7 +32,6 @@ class GameInputController(
     }
 
     override fun zoom(initialDistance: Float, distance: Float): Boolean {
-        GdxLocal.pressedArea = GdxLocal.pressedArea?.copy(consumed = true)
         onChangeZoom(initialDistance / distance)
         return true
     }

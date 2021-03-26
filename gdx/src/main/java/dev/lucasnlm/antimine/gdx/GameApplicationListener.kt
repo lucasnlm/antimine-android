@@ -125,7 +125,6 @@ class GameApplicationListener(
 
             animationScale = if (preferencesRepository.useAnimations()) 1f else 100.0f
 
-            pressedArea = null
             textureAtlas = atlas
             gameTextures = GameTextures(
                 areaCovered = listOf(0, 1, 2).map {
@@ -220,7 +219,6 @@ class GameApplicationListener(
                 areaUncoveredOdd.forEach { it.dispose() }
                 areaTextures.forEach { (_, texture) -> texture.dispose() }
             }
-            pressedArea = null
             textureAtlas?.dispose()
             textureAtlas = null
         }
