@@ -204,8 +204,8 @@ class AreaActor(
                             blend = quality < 2,
                         )
                     }
-                } else if (area.isCovered && isOdd && theme.palette.covered != theme.palette.coveredOdd && area.mark.isNone()) {
-                    if (GdxLocal.qualityZoomLevel < 2) {
+                } else if (theme.palette.covered != theme.palette.coveredOdd) {
+                    if (GdxLocal.qualityZoomLevel < 2 && area.isCovered && isOdd && area.mark.isNone()) {
                         textures.areaTextures[AreaForm.Full]?.let {
                             batch.drawArea(
                                 texture = it,
