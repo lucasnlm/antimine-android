@@ -30,7 +30,7 @@ import dev.lucasnlm.antimine.ui.ext.green
 import dev.lucasnlm.antimine.ui.ext.red
 import dev.lucasnlm.antimine.ui.model.AppTheme
 
-class LevelApplicationListener(
+class GameApplicationListener(
     private val context: Context,
     private val preferencesRepository: IPreferencesRepository,
     private val dimensionRepository: IDimensionRepository,

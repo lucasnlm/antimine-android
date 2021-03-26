@@ -22,7 +22,7 @@ import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
-import dev.lucasnlm.antimine.gdx.LevelApplicationListener
+import dev.lucasnlm.antimine.gdx.GameApplicationListener
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
@@ -40,7 +40,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     private val crashReporter: CrashReporter by inject()
 
     private val levelApplicationListener by lazy {
-        LevelApplicationListener(
+        GameApplicationListener(
             context = requireContext(),
             theme = themeRepository.getTheme(),
             preferencesRepository = preferencesRepository,
