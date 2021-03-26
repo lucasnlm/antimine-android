@@ -62,6 +62,7 @@ class GameActivity :
     DialogInterface.OnDismissListener,
     AndroidFragmentApplication.Callbacks {
 
+    private val gameViewModel by viewModel<GameViewModel>()
     private val preferencesRepository: IPreferencesRepository by inject()
     private val analyticsManager: IAnalyticsManager by inject()
     private val instantAppManager: IInstantAppManager by inject()
@@ -71,9 +72,6 @@ class GameActivity :
     private val adsManager: IAdsManager by inject()
     private val reviewWrapper: ReviewWrapper by inject()
     private val featureFlagManager: IFeatureFlagManager by inject()
-
-    private val gameViewModel by viewModel<GameViewModel>()
-
     private val cloudSaveManager by inject<CloudSaveManager>()
 
     private var status: Status = Status.PreGame
@@ -273,7 +271,6 @@ class GameActivity :
     private fun backToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish()
     }
 
     override fun onBackPressed() {
