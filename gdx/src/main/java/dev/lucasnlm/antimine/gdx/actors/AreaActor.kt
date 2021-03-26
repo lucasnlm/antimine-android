@@ -120,7 +120,7 @@ class AreaActor(
                         y = y + internalPadding,
                         width = width - internalPadding * 2,
                         height = height - internalPadding * 2,
-                        color = theme.palette.covered.toGdxColor(0.05f),
+                        color = theme.palette.background.toGdxColor().mul(0.5f, 0.5f, 0.5f, 0.1f),
                         blend = true,
                     )
                 }
