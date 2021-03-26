@@ -144,16 +144,14 @@ class AreaActor(
                 }
 
                 textures.areaTextures[AreaForm.Full]?.let {
-                    val baseColor = if (isOdd) theme.palette.coveredOdd else theme.palette.covered
-                    val touchColor = baseColor.toOppositeMax(coverAlpha).mul(0.8f, 0.8f, 0.8f, 1.0f)
                     batch.drawArea(
                         texture = it,
                         x = x - width * (resize - 1.0f) * 0.5f,
                         y = y - height * (resize - 1.0f) * 0.5f,
                         width = width * resize,
                         height = height * resize,
-                        color = touchColor,
-                        blend = quality < 2,
+                        color = Color(0.65f, 0.65f, 0.65f, 1.0f),
+                        blend = true,
                     )
                 }
             } else {
