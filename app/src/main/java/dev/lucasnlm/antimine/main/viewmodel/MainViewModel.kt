@@ -117,7 +117,7 @@ class MainViewModel(
 
     private fun continueGame(difficulty: Difficulty? = null) {
         val intent = Intent(context, GameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
             difficulty?.let {
                 val bundle = Bundle().apply {

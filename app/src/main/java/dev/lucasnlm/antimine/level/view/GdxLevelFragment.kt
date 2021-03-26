@@ -14,13 +14,11 @@ import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import dev.lucasnlm.antimine.DeepLink
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.isPortrait
-import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
@@ -88,18 +86,18 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch {
-            val loadGameUid = checkLoadGameDeepLink()
-            val newGameDeepLink = checkNewGameDeepLink()
-            val retryDeepLink = checkRetryGameDeepLink()
-
-            when {
-                loadGameUid != null -> gameViewModel.loadGame(loadGameUid)
-                newGameDeepLink != null -> gameViewModel.startNewGame(newGameDeepLink)
-                retryDeepLink != null -> gameViewModel.retryGame(retryDeepLink)
-                else -> gameViewModel.loadGame()
-            }
-        }
+//        lifecycleScope.launch {
+//            val loadGameUid = checkLoadGameDeepLink()
+//            val newGameDeepLink = checkNewGameDeepLink()
+//            val retryDeepLink = checkRetryGameDeepLink()
+//
+//            when {
+//                loadGameUid != null -> gameViewModel.loadGame(loadGameUid)
+//                newGameDeepLink != null -> gameViewModel.startNewGame(newGameDeepLink)
+//                retryDeepLink != null -> gameViewModel.retryGame(retryDeepLink)
+//                else -> gameViewModel.loadGame()
+//            }
+//        }
 
         gameViewModel.run {
             levelSetup.observe(
@@ -201,37 +199,6 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                     addView(floatingView, layoutParams)
                 }
             }
-        }
-    }
-
-    private fun checkNewGameDeepLink(): Difficulty? = activity?.intent?.data?.let { uri ->
-        if (uri.scheme == DeepLink.SCHEME && uri.authority == DeepLink.NEW_GAME_AUTHORITY) {
-            when (uri.pathSegments.firstOrNull()) {
-                DeepLink.BEGINNER_PATH -> Difficulty.Beginner
-                DeepLink.INTERMEDIATE_PATH -> Difficulty.Intermediate
-                DeepLink.EXPERT_PATH -> Difficulty.Expert
-                DeepLink.STANDARD_PATH -> Difficulty.Standard
-                DeepLink.CUSTOM_PATH -> Difficulty.Custom
-                else -> null
-            }
-        } else {
-            null
-        }
-    }
-
-    private fun checkLoadGameDeepLink(): Int? = activity?.intent?.data?.let { uri ->
-        if (uri.scheme == DeepLink.SCHEME && uri.authority == DeepLink.LOAD_GAME_AUTHORITY) {
-            uri.pathSegments.firstOrNull()?.toIntOrNull()
-        } else {
-            null
-        }
-    }
-
-    private fun checkRetryGameDeepLink(): Int? = activity?.intent?.data?.let { uri ->
-        if (uri.scheme == DeepLink.SCHEME && uri.authority == DeepLink.RETRY_HOST_AUTHORITY) {
-            uri.pathSegments.firstOrNull()?.toIntOrNull()
-        } else {
-            null
         }
     }
 
