@@ -70,6 +70,6 @@ class CameraController(
     }
 
     companion object {
-        const val RESISTANCE = 0.6f
+        const val RESISTANCE = 0.65f
     }
 }
