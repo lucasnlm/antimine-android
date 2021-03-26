@@ -49,14 +49,19 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
             crashLogger = {
                 crashReporter.sendError(it)
             },
-            onSingleTouch = {
+            onSingleTap = {
                 lifecycleScope.launch {
-                    gameViewModel.onSingleClick(it.id)
+                    gameViewModel.onSingleClick(it)
                 }
             },
-            onLongTouch = {
+            onDoubleTap = {
                 lifecycleScope.launch {
-                    gameViewModel.onLongClick(it.id)
+                    gameViewModel.onDoubleClick(it)
+                }
+            },
+            onLongTap = {
+                lifecycleScope.launch {
+                    gameViewModel.onLongClick(it)
                 }
             }
         )

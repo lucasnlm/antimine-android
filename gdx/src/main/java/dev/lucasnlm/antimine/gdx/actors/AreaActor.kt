@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.gdx.actors
 
-import android.view.ViewConfiguration
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
@@ -13,7 +12,7 @@ import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.drawArea
 import dev.lucasnlm.antimine.gdx.drawAsset
-import dev.lucasnlm.antimine.gdx.models.TouchAreaAction
+import dev.lucasnlm.antimine.gdx.events.GameEvent
 import dev.lucasnlm.antimine.gdx.scope
 import dev.lucasnlm.antimine.gdx.toGdxColor
 import dev.lucasnlm.antimine.gdx.toOppositeMax
@@ -26,10 +25,10 @@ class AreaActor(
     private var areaForm: AreaForm,
     private var previousForm: AreaForm? = null,
     private var coverAlpha: Float = 1.0f,
+    private var isPressed: Boolean = false,
     private val theme: AppTheme,
     private val squareDivider: Float = 0f,
-    private val onSingleTouch: (Area) -> Unit,
-    private val onLongTouch: (Area) -> Unit,
+    private val onInputEvent: (GameEvent) -> Unit,
 ) : Actor() {
 
     init {
@@ -37,33 +36,23 @@ class AreaActor(
         height = size
         x = area.posX * width
         y = area.posY * height
-
         touchable = if (area.isCovered || area.minesAround > 0) Touchable.enabled else Touchable.disabled
 
         addListener(object : InputListener() {
             override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int) {
                 super.touchUp(event, x, y, pointer, button)
-                GdxLocal.pressedArea?.let {
-                    if (!it.consumed && it.area.id == area.id) {
-                        onSingleTouch(it.area)
-                        GdxLocal.pressedArea = it.copy(consumed = true)
-                    }
-                }
+                onInputEvent(GameEvent.TouchUpEvent(area.id))
+                isPressed = false
                 toBack()
+                Gdx.graphics.requestRendering()
             }
 
             override fun touchDown(event: InputEvent, x: Float, y: Float, pointer: Int, button: Int): Boolean {
                 toFront()
-                GdxLocal.apply {
-                    highlightAlpha = 0.45f
-                    pressedArea = TouchAreaAction(
-                        area = area.copy(),
-                        pressedAt = System.currentTimeMillis(),
-                        consumed = false,
-                        x = x,
-                        y = y,
-                    )
-                }
+                GdxLocal.highlightAlpha = 0.45f
+                isPressed = true
+                onInputEvent(GameEvent.TouchDownEvent(area.id))
+                Gdx.graphics.requestRendering()
                 return true
             }
         })
@@ -73,6 +62,7 @@ class AreaActor(
 
     fun bindArea(reset: Boolean, area: Area, areaForm: AreaForm) {
         if (reset) {
+            this.isPressed = false
             this.areaForm = areaForm
             this.previousForm = null
             this.coverAlpha = 1.0f
@@ -110,30 +100,13 @@ class AreaActor(
 
             Gdx.graphics.requestRendering()
         }
-
-        GdxLocal.pressedArea?.let {
-            if (it.area.id == area.id) {
-                val dt = System.currentTimeMillis() - it.pressedAt
-
-                if (!it.consumed) {
-                    if (dt > ViewConfiguration.getLongPressTimeout()) {
-                        onLongTouch(it.area)
-                        GdxLocal.pressedArea = it.copy(consumed = true)
-                    }
-                }
-            }
-        }
-    }
-
-    private fun isCurrentlyPressed(): Boolean {
-        return GdxLocal.pressedArea?.let { it.area.id == area.id } == true
     }
 
     override fun draw(unsafeBatch: Batch?, parentAlpha: Float) {
         super.draw(unsafeBatch, parentAlpha)
 
         val internalPadding = squareDivider
-        val isCurrentTouch = isCurrentlyPressed()
+        val isAboveOthers = isPressed
 
         unsafeBatch?.scope { batch, textures ->
             val quality = 0
@@ -153,7 +126,7 @@ class AreaActor(
                 }
             }
 
-            if (isCurrentTouch && area.isCovered && quality < 2 && GdxLocal.focusResizeLevel > 1.0f) {
+            if (isAboveOthers && area.isCovered && quality < 2 && GdxLocal.focusResizeLevel > 1.0f) {
                 val resize = GdxLocal.focusResizeLevel
 
                 if (area.isCovered) {
@@ -185,7 +158,7 @@ class AreaActor(
                 }
             } else {
                 if (coverAlpha > 0.0f) {
-                    previousForm?.let {  areaForm ->
+                    previousForm?.let { areaForm ->
                         textures.areaTextures[areaForm]?.let {
                             batch.drawArea(
                                 texture = it,
@@ -274,7 +247,7 @@ class AreaActor(
                                 batch = batch,
                                 texture = it.flag,
                                 color = color,
-                                scale = if (isCurrentTouch) GdxLocal.focusResizeLevel else 1.0f
+                                scale = if (isAboveOthers) GdxLocal.focusResizeLevel else 1.0f
                             )
                         }
                         area.mark.isQuestion() -> {
@@ -283,7 +256,7 @@ class AreaActor(
                                 batch = batch,
                                 texture = it.question,
                                 color = color,
-                                scale = if (isCurrentTouch) GdxLocal.focusResizeLevel else 1.0f
+                                scale = if (isAboveOthers) GdxLocal.focusResizeLevel else 1.0f
                             )
                         }
                         area.revealed -> {

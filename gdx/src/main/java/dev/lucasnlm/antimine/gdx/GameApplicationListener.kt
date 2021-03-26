@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.gdx
 
 import android.content.Context
+import android.view.ViewConfiguration
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
@@ -17,13 +18,15 @@ import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.gdx.actors.AreaForm
-import dev.lucasnlm.antimine.gdx.controller.MinefieldInputController
+import dev.lucasnlm.antimine.gdx.controller.GameInputController
+import dev.lucasnlm.antimine.gdx.models.ActionSettings
 import dev.lucasnlm.antimine.gdx.models.GameTextures
 import dev.lucasnlm.antimine.gdx.models.InternalPadding
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
-import dev.lucasnlm.antimine.gdx.screens.MinefieldScreen
+import dev.lucasnlm.antimine.gdx.stages.MinefieldStage
 import dev.lucasnlm.antimine.gdx.shaders.BlurShader
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.ui.ext.blue
 import dev.lucasnlm.antimine.ui.ext.green
@@ -35,8 +38,9 @@ class GameApplicationListener(
     private val preferencesRepository: IPreferencesRepository,
     private val dimensionRepository: IDimensionRepository,
     private val theme: AppTheme,
-    private val onSingleTouch: (Area) -> Unit,
-    private val onLongTouch: (Area) -> Unit,
+    private val onSingleTap: (Int) -> Unit,
+    private val onDoubleTap: (Int) -> Unit,
+    private val onLongTap: (Int) -> Unit,
     private val crashLogger: (String) -> Unit,
     private val forceFreeScroll: Boolean,
 ) : ApplicationAdapter() {
@@ -44,7 +48,7 @@ class GameApplicationListener(
     private val assetManager = AssetManager()
 
     private val isPortrait = context.isPortrait()
-    private var minefieldScreen: MinefieldScreen? = null
+    private var minefieldStage: MinefieldStage? = null
     private var boundAreas: List<Area> = listOf()
     private var boundMinefield: Minefield? = null
 
@@ -65,9 +69,18 @@ class GameApplicationListener(
         joinAreas = preferencesRepository.squareDivider() == 0,
     )
 
-    private val minefieldInputController = MinefieldInputController(
+    private val actionSettings = with(preferencesRepository) {
+        val control = controlStyle()
+        ActionSettings(
+            handleDoubleTaps = control == ControlStyle.DoubleClick || control == ControlStyle.DoubleClickInverted,
+            longTapTimeout = preferencesRepository.customLongPressTimeout(),
+            doubleTapTimeout = ViewConfiguration.getDoubleTapTimeout().toLong(),
+        )
+    }
+
+    private val minefieldInputController = GameInputController(
         onChangeZoom = {
-            minefieldScreen?.changeZoom(it)
+            minefieldStage?.changeZoom(it)
         }
     )
 
@@ -93,10 +106,12 @@ class GameApplicationListener(
         assetManager.load(TextureConstants.atlasName, TextureAtlas::class.java)
         assetManager.finishLoading()
 
-        minefieldScreen = MinefieldScreen(
+        minefieldStage = MinefieldStage(
             renderSettings = renderSettings,
-            onSingleTouch = onSingleTouch,
-            onLongTouch = onLongTouch,
+            actionSettings = actionSettings,
+            onSingleTap = onSingleTap,
+            onDoubleTap = onDoubleTap,
+            onLongTouch = onLongTap,
             forceFreeScroll = forceFreeScroll,
         ).apply {
             bindField(boundAreas)
@@ -182,7 +197,7 @@ class GameApplicationListener(
             )
         }
 
-        Gdx.input.inputProcessor = InputMultiplexer(GestureDetector(minefieldInputController), minefieldScreen)
+        Gdx.input.inputProcessor = InputMultiplexer(GestureDetector(minefieldInputController), minefieldStage)
         Gdx.graphics.isContinuousRendering = false
     }
 
@@ -222,7 +237,7 @@ class GameApplicationListener(
         val height = Gdx.graphics.height
 
         mainFrameBuffer.begin()
-        minefieldScreen?.run {
+        minefieldStage?.run {
             theme.palette.background.run {
                 Gdx.gl.glClearColor(red(), green(), blue(), 1f)
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
@@ -314,13 +329,13 @@ class GameApplicationListener(
 
     fun bindMinefield(minefield: Minefield) {
         boundMinefield = minefield
-        minefieldScreen?.bindSize(minefield)
+        minefieldStage?.bindSize(minefield)
         Gdx.graphics.requestRendering()
     }
 
     fun bindField(field: List<Area>) {
         boundAreas = field
-        minefieldScreen?.bindField(field)
+        minefieldStage?.bindField(field)
         Gdx.graphics.requestRendering()
         GdxLocal.hasHighlightAreas = field.firstOrNull { it.highlighted } != null
     }

@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.gdx
 
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
 import dev.lucasnlm.antimine.gdx.actors.AreaForm

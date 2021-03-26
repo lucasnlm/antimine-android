@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.gdx.screens
+package dev.lucasnlm.antimine.gdx.stages
 
 import android.util.SizeF
 import com.badlogic.gdx.Gdx
@@ -14,13 +14,17 @@ import dev.lucasnlm.antimine.gdx.controller.CameraController
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
 import dev.lucasnlm.antimine.gdx.actors.AreaForm
+import dev.lucasnlm.antimine.gdx.events.GameEvent
+import dev.lucasnlm.antimine.gdx.models.ActionSettings
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
-class MinefieldScreen(
+class MinefieldStage(
+    private val actionSettings: ActionSettings,
     private val renderSettings: RenderSettings,
-    private val onSingleTouch: (Area) -> Unit,
-    private val onLongTouch: (Area) -> Unit,
+    private val onSingleTap: (Int) -> Unit,
+    private val onDoubleTap: (Int) -> Unit,
+    private val onLongTouch: (Int) -> Unit,
     forceFreeScroll: Boolean,
 ) : Stage() {
     private var minefield: Minefield? = null
@@ -33,6 +37,9 @@ class MinefieldScreen(
 
     private var boundHashCode: Int? = null
     private var boundAreas = listOf<Area>()
+
+    private var inputInit: Long = 0L
+    private val inputEvents: MutableList<GameEvent> = mutableListOf()
 
     init {
         actionsRequestRendering = true
@@ -64,7 +71,7 @@ class MinefieldScreen(
             val newZoom = if (zoomMultiplier > 1.0) {
                 zoom + 3.0f * zoomMultiplier * Gdx.graphics.deltaTime
             } else {
-                zoom - 3.0f * (1.0f / zoomMultiplier)  * Gdx.graphics.deltaTime
+                zoom - 3.0f * (1.0f / zoomMultiplier) * Gdx.graphics.deltaTime
             }
             zoom = newZoom.coerceIn(0.8f, 4.0f)
             update(true)
@@ -95,8 +102,7 @@ class MinefieldScreen(
                                     if (it.isCovered) AreaActor.getForm(it, field) else AreaForm.None
                                 else -> AreaForm.Full
                             },
-                            onSingleTouch = onSingleTouch,
-                            onLongTouch = onLongTouch,
+                            onInputEvent = ::handleGameEvent,
                             squareDivider = renderSettings.squareDivider,
                         )
                     }.forEach {
@@ -148,8 +154,77 @@ class MinefieldScreen(
         Gdx.graphics.requestRendering()
     }
 
+    private fun handleGameEvent(gameEvent: GameEvent) {
+        if (inputEvents.firstOrNull { it.id != gameEvent.id } != null) {
+            inputEvents.clear()
+        }
+
+        if (inputEvents.firstOrNull { it is GameEvent.TouchUpEvent } == null) {
+            inputInit = System.currentTimeMillis()
+        }
+
+        if (gameEvent is GameEvent.TouchUpEvent && inputEvents.firstOrNull { it is GameEvent.TouchDownEvent } == null) {
+            // Ignore unpaired up event
+            return
+        }
+
+        inputEvents.add(gameEvent)
+    }
+
+    private fun checkGameInput(now: Long) {
+        if (inputEvents.isNotEmpty()) {
+            val dt = now - inputInit
+
+            val touchUpEvents = inputEvents.filterIsInstance<GameEvent.TouchUpEvent>()
+            val touchDownEvents = inputEvents.filterIsInstance<GameEvent.TouchDownEvent>()
+
+            if (touchUpEvents.isNotEmpty()) {
+                if (touchUpEvents.size == touchDownEvents.size) {
+                    if (actionSettings.handleDoubleTaps) {
+                        if (dt > actionSettings.doubleTapTimeout) {
+                            touchUpEvents.groupBy { it.id }
+                                .entries
+                                .first()
+                                .let {
+                                    when (it.value.count()) {
+                                        1 -> onSingleTap(it.key)
+                                        2 -> onDoubleTap(it.key)
+                                        else -> {
+                                        }
+                                    }
+                                }.also {
+                                    inputEvents.clear()
+                                    Gdx.graphics.requestRendering()
+                                }
+                        }
+                    } else {
+                        touchUpEvents.map { it.id }
+                            .first()
+                            .run(onSingleTap)
+                            .also {
+                                inputEvents.clear()
+                                Gdx.graphics.requestRendering()
+                            }
+                    }
+                }
+            } else if (touchDownEvents.isNotEmpty()) {
+                if (dt > actionSettings.longTapTimeout) {
+                    touchDownEvents.map { it.id }
+                        .first()
+                        .run(onLongTouch)
+                        .also {
+                            inputEvents.clear()
+                            Gdx.graphics.requestRendering()
+                        }
+                }
+            }
+        }
+    }
+
     override fun act() {
         super.act()
+
+        checkGameInput(System.currentTimeMillis())
 
         // Handle camera movement
         minefieldSize?.let { cameraController.act(it) }
@@ -211,6 +286,8 @@ class MinefieldScreen(
             if (dx * dx + dy * dy > 16f) {
                 GdxLocal.pressedArea = null
             }
+
+            inputEvents.clear()
 
             cameraController.addVelocity(
                 -dx * currentZoom,

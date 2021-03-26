@@ -56,7 +56,7 @@ class CameraController(
             limitSpeed(minefieldSize)
 
             camera.run {
-                translate(velocity.x , velocity.y , 0f)
+                translate(velocity.x, velocity.y, 0f)
                 update(true)
                 Gdx.graphics.requestRendering()
             }

@@ -4,7 +4,7 @@ import com.badlogic.gdx.input.GestureDetector
 import com.badlogic.gdx.math.Vector2
 import dev.lucasnlm.antimine.gdx.GdxLocal
 
-class MinefieldInputController(
+class GameInputController(
     private val onChangeZoom: (Float) -> Unit,
 ) : GestureDetector.GestureListener {
 
