@@ -154,14 +154,6 @@ class PreferencesRepository(
         return themes.split(" ").mapNotNull { it.toIntOrNull() }
     }
 
-    override fun allowJoinAreas(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_ALLOW_JOIN_SQUARES, true)
-    }
-
-    override fun setJoinAreas(joinAreas: Boolean) {
-        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_ALLOW_JOIN_SQUARES, joinAreas)
-    }
-
     override fun controlStyle(): ControlStyle {
         return if (isAndroidTv) {
             ControlStyle.FastFlag
@@ -299,7 +291,7 @@ class PreferencesRepository(
     }
 
     override fun squareRadius(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 1)
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 3)
     }
 
     override fun setSquareRadius(value: Int) {
@@ -339,7 +331,7 @@ class PreferencesRepository(
     }
 
     override fun squareDivider(): Int {
-        return if (allowJoinAreas()) 0 else preferencesManager.getInt(PREFERENCE_SQUARE_DIVIDER, 10)
+        return preferencesManager.getInt(PREFERENCE_SQUARE_DIVIDER, 0)
     }
 
     override fun setSquareDivider(value: Int) {

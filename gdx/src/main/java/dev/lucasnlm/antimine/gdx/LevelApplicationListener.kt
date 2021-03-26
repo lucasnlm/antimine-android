@@ -61,8 +61,8 @@ class LevelApplicationListener(
         appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
         appBarHeight = dimensionRepository.actionBarSize().toFloat(),
         radius = preferencesRepository.squareRadius().toFloat(),
-        joinAreas = preferencesRepository.allowJoinAreas(),
         squareDivider = preferencesRepository.squareDivider() * 0.1f,
+        joinAreas = preferencesRepository.squareDivider() == 0,
     )
 
     private val minefieldInputController = MinefieldInputController(

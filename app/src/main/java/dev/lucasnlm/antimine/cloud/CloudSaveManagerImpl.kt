@@ -51,7 +51,6 @@ class CloudSaveManagerImpl(
                     language = preferencesRepository.getPreferredLocale() ?: "",
                     openDirectly = preferencesRepository.openGameDirectly().toInt(),
                     unlockedThemes = preferencesRepository.getUnlockedThemes().joinToString(" "),
-                    joinSquares = preferencesRepository.allowJoinAreas().toInt(),
                     squareDivider = preferencesRepository.squareDivider(),
                 )
             }

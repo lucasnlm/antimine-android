@@ -87,7 +87,6 @@ class MainViewModel(
             useControlStyle(ControlStyle.values()[controlStyle])
             setOpenGameDirectly(openDirectly != 0)
             setUnlockedThemes(unlockedThemes)
-            setJoinAreas(joinSquares != 0)
             setSquareDivider(squareDivider)
         }
 

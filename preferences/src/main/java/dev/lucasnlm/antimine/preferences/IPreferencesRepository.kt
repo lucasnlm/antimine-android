@@ -96,9 +96,6 @@ interface IPreferencesRepository {
     fun setUnlockedThemes(themes: String)
     fun getUnlockedThemes(): List<Int>
 
-    fun allowJoinAreas(): Boolean
-    fun setJoinAreas(joinAreas: Boolean)
-
     fun squareDivider(): Int
     fun setSquareDivider(value: Int)
 }
