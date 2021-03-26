@@ -122,13 +122,14 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                     when (it) {
                         Event.Pause,
                         Event.GameOver,
-                        Event.Victory -> levelApplicationListener.setActionsEnabled(false)
+                        Event.Victory -> {
+                            bindControlSwitcherIfNeeded(view, false)
+                            levelApplicationListener.setActionsEnabled(false)
+                        }
                         Event.Running,
                         Event.Resume,
                         Event.ResumeGame,
                         Event.StartNewGame -> {
-                            bindControlSwitcherIfNeeded(view, false)
-
                             levelApplicationListener.run {
                                 setActionsEnabled(true)
                             }
