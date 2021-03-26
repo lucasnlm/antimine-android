@@ -251,7 +251,6 @@ class GameActivity :
 
     override fun onPause() {
         super.onPause()
-
         keepScreenOn(false)
 
         if (status == Status.Running) {
@@ -266,7 +265,9 @@ class GameActivity :
     }
 
     private fun backToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
         startActivity(intent)
     }
 
@@ -292,14 +293,14 @@ class GameActivity :
                 ContextCompat.getDrawable(this, usingTheme.assets.toolbarMine),
                 null,
                 null,
-                null
+                null,
             )
         } else {
             minesCount.setCompoundDrawablesWithIntrinsicBounds(
                 null,
                 ContextCompat.getDrawable(this, usingTheme.assets.toolbarMine),
                 null,
-                null
+                null,
             )
         }
     }
