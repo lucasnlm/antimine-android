@@ -112,16 +112,16 @@ class AreaActor(
             val quality = 0
             val isOdd: Boolean = if (area.posY % 2 == 0) { area.posX % 2 != 0 } else { area.posX % 2 == 0 }
 
-            if (isOdd && GdxLocal.qualityZoomLevel < 2) {
-                textures.areaTextures[AreaForm.Full]?.let {
+            if (!isOdd && !area.isCovered && GdxLocal.qualityZoomLevel < 2) {
+                textures.areaTextures[AreaForm.None]?.let {
                     batch.drawArea(
                         texture = it,
                         x = x + internalPadding,
                         y = y + internalPadding,
                         width = width - internalPadding * 2,
                         height = height - internalPadding * 2,
-                        color = Color(1.0f, 1.0f, 1.0f, 0.1f),
-                        blend = quality < 2,
+                        color = theme.palette.covered.toGdxColor(0.05f),
+                        blend = true,
                     )
                 }
             }
@@ -223,7 +223,7 @@ class AreaActor(
                 }
             }
 
-            if (!area.isCovered && GdxLocal.pressedArea?.area?.id == area.id) {
+            if (!area.isCovered && isPressed) {
                 textures.areaTextures[AreaForm.Full]?.let {
                     val density = Gdx.graphics.density
                     batch.drawArea(
