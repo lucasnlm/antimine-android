@@ -24,10 +24,10 @@ class CameraController(
         camera.run {
             val newX = (position.x - velocity.x)
             val newY = (position.y + velocity.y)
-            val start = 0.5f * screenWidth - padding.start * invZoom
-            val end = minefieldSize.width - 0.5f * screenWidth + padding.end * invZoom
-            val top = minefieldSize.height - 0.25f * screenHeight + padding.top * invZoom
-            val bottom = 0.5f * screenHeight - 0.25f * screenHeight - padding.bottom * invZoom - renderSettings.navigationBarHeight
+            val start = 0.25f * screenWidth - padding.start * invZoom
+            val end = minefieldSize.width - 0.25f * screenWidth + padding.end * invZoom
+            val top = 0.75f * minefieldSize.height + padding.top * invZoom
+            val bottom = 0.25f * minefieldSize.height - padding.bottom * invZoom - renderSettings.navigationBarHeight
 
             if (screenWidth > minefieldSize.width && !forceFreeScroll) {
                 velocity.x = 0f
