@@ -135,7 +135,6 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         startCustom.bind(
             theme = usingTheme,
             text = getString(R.string.custom),
-            extra = getDifficultyExtra(Difficulty.Custom),
             onAction = {
                 analyticsManager.sentEvent(Analytics.OpenCustom)
                 viewModel.sendEvent(MainEvent.ShowCustomDifficultyDialogEvent)
