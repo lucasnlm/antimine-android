@@ -24,7 +24,7 @@
         app:layout_constraintBottom_toTopOf="@+id/open_crowdin"
         app:layout_constraintTop_toBottomOf="@id/section" />
 
-    <dev.lucasnlm.antimine.main.view.CardButtonView
+    <dev.lucasnlm.antimine.ui.view.CardButtonView
         android:id="@+id/open_crowdin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

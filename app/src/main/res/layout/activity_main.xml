@@ -43,13 +43,13 @@
                 tools:text="@string/app_name"
                 app:drawableStartCompat="@drawable/mine" />
 
-            <dev.lucasnlm.antimine.main.view.CardButtonView
+            <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/continueGame"
                 android:layout_marginTop="32dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <dev.lucasnlm.antimine.main.view.CardButtonView
+            <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/newGame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,83 +64,83 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <dev.lucasnlm.antimine.main.view.CardButtonView
+                <dev.lucasnlm.antimine.ui.view.CardButtonView
                     android:id="@+id/startBeginner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <dev.lucasnlm.antimine.main.view.CardButtonView
+                <dev.lucasnlm.antimine.ui.view.CardButtonView
                     android:id="@+id/startIntermediate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <dev.lucasnlm.antimine.main.view.CardButtonView
+                <dev.lucasnlm.antimine.ui.view.CardButtonView
                     android:id="@+id/startExpert"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <dev.lucasnlm.antimine.main.view.CardButtonView
+                <dev.lucasnlm.antimine.ui.view.CardButtonView
                     android:id="@+id/startCustom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
 
-            <dev.lucasnlm.antimine.main.view.CardButtonView
+            <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/tutorial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="16dp"/>
 
-            <dev.lucasnlm.antimine.main.view.CardButtonView
+            <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/themes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp" />
 
-            <dev.lucasnlm.antimine.main.view.CardButtonView
+            <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <dev.lucasnlm.antimine.main.view.CardButtonView
+            <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/controls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"/>
 
-            <dev.lucasnlm.antimine.main.view.CardButtonView
+            <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/removeAds"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"/>
 
-            <dev.lucasnlm.antimine.main.view.CardButtonView
+            <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/stats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"/>
 
-            <dev.lucasnlm.antimine.main.view.CardButtonView
+            <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/previousGames"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"/>
 
-            <dev.lucasnlm.antimine.main.view.CardButtonView
+            <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/translation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"/>
 
-            <dev.lucasnlm.antimine.main.view.CardButtonView
+            <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/play_games"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"/>
 
-            <dev.lucasnlm.antimine.main.view.CardButtonView
+            <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.main.view
+package dev.lucasnlm.antimine.ui.view
 
 import android.content.Context
 import android.util.AttributeSet
@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.google.android.material.card.MaterialCardView
-import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.ui.R
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 

@@ -67,29 +67,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/version_layout">
 
-        <Button
+        <dev.lucasnlm.antimine.ui.view.CardButtonView
             android:id="@+id/thirdsParties"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginVertical="4dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/show_licenses" />
+            android:layout_height="wrap_content"/>
 
-        <Button
+        <dev.lucasnlm.antimine.ui.view.CardButtonView
             android:id="@+id/translation"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginVertical="4dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/translation" />
+            android:layout_height="wrap_content"/>
 
-        <Button
+        <dev.lucasnlm.antimine.ui.view.CardButtonView
             android:id="@+id/sourceCode"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginVertical="4dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/source_code" />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

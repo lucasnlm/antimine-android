@@ -13,7 +13,7 @@ import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.main.view.CardButtonView
+import dev.lucasnlm.antimine.ui.view.CardButtonView
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
