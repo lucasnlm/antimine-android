@@ -81,10 +81,6 @@ sealed class Analytics(
 
     object Quit : Analytics("Quit game")
 
-    object OpenDrawer : Analytics("Opened Drawer")
-
-    object CloseDrawer : Analytics("Closed Drawer")
-
     object CloseEndGameScreen : Analytics("Closed End Game Screen")
 
     object OpenAbout : Analytics("Open About")
@@ -126,12 +122,6 @@ sealed class Analytics(
     object OpenSelectLanguage : Analytics("Open Languages")
 
     object OpenSaveHistory : Analytics("Open Save History")
-
-    object ShowIapDialog : Analytics("Shown IAP Dialog")
-
-    object DenyIapDialog : Analytics("IAP Dialog Deny")
-
-    object UnlockIapDialog : Analytics("IAP Dialog Unlock")
 
     object RemoveAds : Analytics("Remove Ads")
 

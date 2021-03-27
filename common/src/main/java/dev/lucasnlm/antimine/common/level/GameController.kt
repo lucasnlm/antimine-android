@@ -201,13 +201,6 @@ class GameController {
             dx1 * dx1 + dy1 * dy1
         }
 
-    fun revealArea(id: Int) {
-        field = MinefieldHandler(field.toMutableList(), false).run {
-            openAt(id, passive = true, openNeighbors = false)
-            result()
-        }
-    }
-
     fun flagAllMines() {
         field = MinefieldHandler(field.toMutableList(), false).run {
             flagAllMines()

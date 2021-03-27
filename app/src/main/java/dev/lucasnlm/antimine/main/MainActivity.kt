@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.main
 
-import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,16 +11,13 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
-import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.control.ControlDialogFragment
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
-import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.history.HistoryActivity
 import dev.lucasnlm.antimine.language.LanguageSelectorActivity
-import dev.lucasnlm.antimine.main.view.MainPageAdapter
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
@@ -32,8 +28,6 @@ import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
-import dev.lucasnlm.antimine.ui.ext.toAndroidColor
-import dev.lucasnlm.external.BillingManager
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager

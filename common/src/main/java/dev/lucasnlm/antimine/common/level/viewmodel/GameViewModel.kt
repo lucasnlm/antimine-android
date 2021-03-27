@@ -31,7 +31,6 @@ import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.Leaderboard
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
@@ -411,23 +410,10 @@ open class GameViewModel(
         return !gameController.hasIsolatedAllMines()
     }
 
-    suspend fun revealMines() {
+    fun revealMines() {
         if (initialized) {
-            val explosionTime = (explosionDelay() / gameController.getMinesCount().coerceAtLeast(10))
-            val delayMillis = explosionTime.coerceAtMost(25L)
-
             gameController.run {
                 showWrongFlags()
-                refreshField()
-
-                findExplodedMine()?.let { exploded ->
-                    takeExplosionRadius(exploded).take(20).forEach {
-                        revealArea(it.id)
-                        refreshField()
-                        delay(delayMillis)
-                    }
-                }
-
                 showAllMines()
                 refreshField()
             }
