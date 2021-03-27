@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
+import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.control.ControlDialogFragment
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
@@ -54,6 +55,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     private val analyticsManager: IAnalyticsManager by inject()
     private val featureFlagManager: IFeatureFlagManager by inject()
     private val billingManager: IBillingManager by inject()
+    private val savesRepository: ISavesRepository by inject()
 
     private lateinit var viewPager: ViewPager2
 
@@ -68,6 +70,19 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                 viewModel.sendEvent(MainEvent.ContinueGameEvent)
             }
         )
+
+        lifecycleScope.launch {
+            savesRepository.fetchCurrentSave()?.let {
+                continueGame.bind(
+                    theme = usingTheme,
+                    invert = true,
+                    text = R.string.continue_game,
+                    onAction = {
+                        viewModel.sendEvent(MainEvent.ContinueGameEvent)
+                    }
+                )
+            }
+        }
 
         newGame.bind(
             theme = usingTheme,
