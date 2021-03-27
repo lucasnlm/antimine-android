@@ -128,7 +128,7 @@ class AreaActor(
                         height = height - internalPadding * 2,
                         blend = true,
                         color = theme.palette.background.toGdxColor(GdxLocal.zoomLevelAlpha)
-                                                    .mul(0.5f, 0.5f, 0.5f, 0.05f),
+                            .mul(0.5f, 0.5f, 0.5f, 0.05f),
                     )
                 }
             }
@@ -280,7 +280,7 @@ class AreaActor(
                             texture = it.aroundMines[area.minesAround - 1],
                             color =
                                 theme.palette.minesAround(area.minesAround - 1)
-                                             .toGdxColor(GdxLocal.zoomLevelAlpha),
+                                    .toGdxColor(GdxLocal.zoomLevelAlpha),
                         )
                     }
 
