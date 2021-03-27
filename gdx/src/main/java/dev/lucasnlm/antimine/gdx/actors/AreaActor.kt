@@ -83,8 +83,13 @@ class AreaActor(
 
     override fun act(delta: Float) {
         super.act(delta)
+        val area = this.area
 
-        touchable = if ((area.isCovered || area.minesAround > 0) && GdxLocal.qualityZoomLevel < 2) Touchable.enabled else Touchable.disabled
+        touchable = if (
+            (area.isCovered || area.minesAround > 0) &&
+            GdxLocal.qualityZoomLevel < 2 &&
+            GdxLocal.actionsEnabled
+        ) Touchable.enabled else Touchable.disabled
 
         if (!area.isCovered && coverAlpha > 0.0f) {
             val revealDelta = delta * 4.0f * GdxLocal.animationScale

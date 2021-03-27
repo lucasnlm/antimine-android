@@ -338,5 +338,6 @@ class GameApplicationListener(
     }
 
     fun setActionsEnabled(enabled: Boolean) {
+        GdxLocal.actionsEnabled = enabled
     }
 }

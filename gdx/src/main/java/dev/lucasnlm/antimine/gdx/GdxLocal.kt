@@ -19,5 +19,9 @@ object GdxLocal {
     // Global animation scale, it defines how fast/slow all animations must be executed.
     var animationScale: Float = 1.0f
 
+    // Global alpha used to relate minefield zoom to things that shouldn't be render when zoom out.
     var zoomLevelAlpha: Float = 1.0f
+
+    // Enables / Disables actions according to external logic.
+    var actionsEnabled: Boolean = false
 }
