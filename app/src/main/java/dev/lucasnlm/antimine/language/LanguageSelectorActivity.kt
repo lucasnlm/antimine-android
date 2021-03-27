@@ -32,6 +32,7 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
         open_crowdin.bind(
             theme = usingTheme,
             text = R.string.crowdin,
+            invert = true,
             startIcon = R.drawable.translate,
             onAction = {
                 try {
@@ -124,7 +125,7 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
                     .forEach { (language, locale) ->
                         addPreference(
                             Preference(context).apply {
-                                title = language
+                                title = language.toUpperCase(Locale.getDefault())
                                 isIconSpaceReserved = false
                                 setOnPreferenceClickListener {
                                     preferenceRepository.setPreferredLocale("${locale.language}-${locale.country}")
