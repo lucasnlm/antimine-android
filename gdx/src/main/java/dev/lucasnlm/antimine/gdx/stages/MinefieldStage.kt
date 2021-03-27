@@ -25,11 +25,11 @@ class MinefieldStage(
     private val onSingleTap: (Int) -> Unit,
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTouch: (Int) -> Unit,
-    forceFreeScroll: Boolean,
 ) : Stage() {
     private var minefield: Minefield? = null
     private var minefieldSize: SizeF? = null
     private var currentZoom: Float = 1.0f
+
     private var lastCameraPosition: Vector3? = null
     private var lastZoom: Float? = null
 
@@ -62,18 +62,17 @@ class MinefieldStage(
         cameraController = CameraController(
             camera = camera,
             renderSettings = renderSettings,
-            forceFreeScroll = forceFreeScroll,
         )
     }
 
     fun changeZoom(zoomMultiplier: Float) {
         (camera as OrthographicCamera).apply {
             val newZoom = if (zoomMultiplier > 1.0) {
-                zoom + 3.0f * zoomMultiplier * Gdx.graphics.deltaTime
+                zoom + 2.0f * zoomMultiplier * Gdx.graphics.deltaTime
             } else {
                 zoom - 3.0f * (1.0f / zoomMultiplier) * Gdx.graphics.deltaTime
             }
-            zoom = newZoom.coerceIn(0.8f, 4.0f)
+            zoom = newZoom.coerceIn(0.9f, 4.0f)
             update(true)
 
             GdxLocal.qualityZoomLevel = (zoom.toInt() - 1).coerceAtLeast(0).coerceAtMost(2)
@@ -269,7 +268,7 @@ class MinefieldStage(
             val dx = Gdx.input.deltaX.toFloat()
             val dy = Gdx.input.deltaY.toFloat()
 
-            if (dx * dx + dy * dy > 16f) {
+            if (dx * dx + dy * dy > 100f) {
                 inputEvents.clear()
             }
 

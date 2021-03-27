@@ -43,7 +43,6 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
             theme = themeRepository.getTheme(),
             preferencesRepository = preferencesRepository,
             dimensionRepository = dimensionRepository,
-            forceFreeScroll = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen,
             crashLogger = {
                 crashReporter.sendError(it)
             },

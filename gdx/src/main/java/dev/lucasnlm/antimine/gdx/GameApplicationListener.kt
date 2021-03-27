@@ -42,7 +42,6 @@ class GameApplicationListener(
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTap: (Int) -> Unit,
     private val crashLogger: (String) -> Unit,
-    private val forceFreeScroll: Boolean,
 ) : ApplicationAdapter() {
 
     private val assetManager = AssetManager()
@@ -112,7 +111,6 @@ class GameApplicationListener(
             onSingleTap = onSingleTap,
             onDoubleTap = onDoubleTap,
             onLongTouch = onLongTap,
-            forceFreeScroll = forceFreeScroll,
         ).apply {
             bindField(boundAreas)
             bindSize(boundMinefield)
