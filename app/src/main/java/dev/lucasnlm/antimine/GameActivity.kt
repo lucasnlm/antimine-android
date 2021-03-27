@@ -83,6 +83,11 @@ class GameActivity :
 
     private var gameToast: Toast? = null
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        intent?.run(::handleIntent)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
@@ -94,6 +99,7 @@ class GameActivity :
         bindViewModel()
         bindToolbar()
         loadGameOrTutorial()
+        handleIntent(intent)
 
         if (!isPortrait()) {
             val decorView = window.decorView
@@ -106,7 +112,12 @@ class GameActivity :
 
         playGamesManager.showPlayPopUp(this)
 
-        lifecycleScope.launchWhenCreated {
+        onOpenAppActions()
+        playGamesStartUp()
+    }
+
+    private fun handleIntent(intent: Intent) {
+        lifecycleScope.launch {
             val extras = intent.extras ?: Bundle()
             when {
                 extras.containsKey(DIFFICULTY) -> {
@@ -130,9 +141,6 @@ class GameActivity :
                 }
             }
         }
-
-        onOpenAppActions()
-        playGamesStartUp()
     }
 
     private fun playGamesStartUp() {
@@ -264,9 +272,7 @@ class GameActivity :
     }
 
     private fun backToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 

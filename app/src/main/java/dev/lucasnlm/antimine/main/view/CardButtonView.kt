@@ -65,6 +65,13 @@ class CardButtonView : FrameLayout {
         )
     }
 
+    fun bindStartIcon(@DrawableRes startIcon: Int) {
+        findViewById<ImageView>(R.id.icon).apply {
+            visibility = View.VISIBLE
+            setImageResource(startIcon)
+        }
+    }
+
     private fun bindView(
         theme: AppTheme,
         invert: Boolean = false,
@@ -77,11 +84,11 @@ class CardButtonView : FrameLayout {
         val color = if (invert || isFocused) {
             theme.palette.background.toAndroidColor()
         } else {
-            theme.palette.accent.toAndroidColor()
+            theme.palette.covered.toAndroidColor()
         }
 
         val backgroundColor = if (invert || isFocused) {
-            theme.palette.accent.toAndroidColor()
+            theme.palette.covered.toAndroidColor()
         } else {
             theme.palette.background.toAndroidColor()
         }
