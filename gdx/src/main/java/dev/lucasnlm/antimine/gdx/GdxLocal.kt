@@ -10,9 +10,14 @@ import dev.lucasnlm.antimine.gdx.models.GameTextures
 object GdxLocal {
     var textureAtlas: TextureAtlas? = null
     var gameTextures: GameTextures? = null
-    var qualityZoomLevel: Int = 0
     var focusResizeLevel = 1.15f
     var hasHighlightAreas = false
     var highlightAlpha = 0.0f
+
+    const val qualityZoomLevel = 0
+
+    // Global animation scale, it defines how fast/slow all animations must be executed.
     var animationScale: Float = 1.0f
+
+    var zoomLevelAlpha: Float = 1.0f
 }

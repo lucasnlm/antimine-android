@@ -206,8 +206,9 @@ class GameApplicationListener(
         batch.dispose()
 
         GdxLocal.run {
-            qualityZoomLevel = 0
             focusResizeLevel = 1.15f
+            zoomLevelAlpha = 1.0f
+            animationScale = 1.0f
             gameTextures?.run {
                 detailedArea.dispose()
                 detailedAreaOdd.dispose()

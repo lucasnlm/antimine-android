@@ -75,7 +75,17 @@ class MinefieldStage(
             zoom = newZoom.coerceIn(0.9f, 4.0f)
             update(true)
 
-            GdxLocal.qualityZoomLevel = (zoom.toInt() - 1).coerceAtLeast(0).coerceAtMost(2)
+            GdxLocal.zoomLevelAlpha = when {
+                zoom < 3.0f -> {
+                    1.0f
+                }
+                zoom > 4.0f -> {
+                    0.0f
+                }
+                else -> {
+                    (3.0f - zoom)
+                }
+            }
         }
 
         inputEvents.clear()

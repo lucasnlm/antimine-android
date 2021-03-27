@@ -79,11 +79,12 @@ class AreaActor(
         }
 
         this.area = area
-        touchable = if (area.isCovered || area.minesAround > 0) Touchable.enabled else Touchable.disabled
     }
 
     override fun act(delta: Float) {
         super.act(delta)
+
+        touchable = if ((area.isCovered || area.minesAround > 0) && GdxLocal.qualityZoomLevel < 2) Touchable.enabled else Touchable.disabled
 
         if (!area.isCovered && coverAlpha > 0.0f) {
             val revealDelta = delta * 4.0f * GdxLocal.animationScale
@@ -112,7 +113,7 @@ class AreaActor(
             val quality = 0
             val isOdd: Boolean = if (area.posY % 2 == 0) { area.posX % 2 != 0 } else { area.posX % 2 == 0 }
 
-            if (!isOdd && !area.isCovered && GdxLocal.qualityZoomLevel < 2) {
+            if (!isOdd && !area.isCovered) {
                 textures.areaTextures[AreaForm.None]?.let {
                     batch.drawArea(
                         texture = it,
@@ -120,8 +121,9 @@ class AreaActor(
                         y = y + internalPadding,
                         width = width - internalPadding * 2,
                         height = height - internalPadding * 2,
-                        color = theme.palette.background.toGdxColor().mul(0.5f, 0.5f, 0.5f, 0.1f),
                         blend = true,
+                        color = theme.palette.background.toGdxColor(GdxLocal.zoomLevelAlpha)
+                                                    .mul(0.5f, 0.5f, 0.5f, 0.05f),
                     )
                 }
             }
@@ -183,7 +185,7 @@ class AreaActor(
                             width = width - internalPadding * 2,
                             height = height - internalPadding * 2,
                             color = if (area.mark.isNotNone()) {
-                                Color(0.5f, 0.5f, 0.5f, coverAlpha)
+                                theme.palette.background.toOppositeMax(coverAlpha).mul(0.8f, 0.8f, 0.8f, 1.0f)
                             } else {
                                 Color(1.0f, 1.0f, 1.0f, coverAlpha)
                             },
@@ -240,7 +242,7 @@ class AreaActor(
                 if (area.isCovered) {
                     when {
                         area.mark.isFlag() -> {
-                            val color = theme.palette.covered.toOppositeMax(1.0f)
+                            val color = theme.palette.covered.toOppositeMax(0.8f)
                             drawAsset(
                                 batch = batch,
                                 texture = it.flag,
@@ -267,11 +269,13 @@ class AreaActor(
                         }
                     }
                 } else {
-                    if (area.minesAround > 0 && GdxLocal.qualityZoomLevel < 2) {
+                    if (area.minesAround > 0) {
                         drawAsset(
                             batch = batch,
                             texture = it.aroundMines[area.minesAround - 1],
-                            color = theme.palette.minesAround(area.minesAround - 1).toGdxColor(1.0f),
+                            color =
+                                theme.palette.minesAround(area.minesAround - 1)
+                                             .toGdxColor(GdxLocal.zoomLevelAlpha),
                         )
                     }
 
