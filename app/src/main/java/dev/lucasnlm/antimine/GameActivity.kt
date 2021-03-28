@@ -276,7 +276,6 @@ class GameActivity :
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         startActivity(intent)
-    //    finish()
     }
 
     override fun onBackPressed() {
