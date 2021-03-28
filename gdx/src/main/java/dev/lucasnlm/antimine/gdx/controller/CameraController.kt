@@ -15,6 +15,7 @@ class CameraController(
 
     private fun limitSpeed(minefieldSize: SizeF) {
         val screenWidth = Gdx.graphics.width
+        val screenHeight = Gdx.graphics.height
         val padding = renderSettings.internalPadding
         val invZoom = 1.0f / (camera as OrthographicCamera).zoom
 
@@ -26,13 +27,20 @@ class CameraController(
             val top = 0.75f * minefieldSize.height + padding.top * invZoom
             val bottom = 0.25f * minefieldSize.height - padding.bottom * invZoom - renderSettings.navigationBarHeight
 
-            if ((newX < start && velocity.x < 0.0) || (newX > end && velocity.x > 0.0)) {
+            val virtualHeight =
+                screenHeight - renderSettings.appBarWithStatusHeight - renderSettings.navigationBarHeight
+
+            if (screenWidth > minefieldSize.width) {
+                velocity.x = 0.0f
+            } else if ((newX < start && velocity.x < 0.0) || (newX > end && velocity.x > 0.0)) {
                 velocity.x = 0.0f
             } else {
                 velocity.x *= RESISTANCE
             }
 
-            if ((newY > top && velocity.y > 0.0) || newY < bottom && velocity.y < 0.0) {
+            if (virtualHeight > minefieldSize.height) {
+                velocity.y = 0.0f
+            } else if ((newY > top && velocity.y > 0.0) || newY < bottom && velocity.y < 0.0) {
                 velocity.y = 0.0f
             } else {
                 velocity.y *= RESISTANCE
