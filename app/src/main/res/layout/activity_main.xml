@@ -51,41 +51,54 @@
                 android:layout_height="wrap_content"/>
 
             <dev.lucasnlm.antimine.ui.view.CardButtonView
-                android:id="@+id/newGame"
+                android:id="@+id/newGameShow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"/>
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/difficulties"
-                android:visibility="gone"
-                android:orientation="vertical"
-                android:layout_marginVertical="4dp"
-                android:layout_marginHorizontal="4dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:contentPadding="0dp"
+                app:cardUseCompatPadding="false"
+                app:strokeColor="?attr/colorOnBackground"
+                app:cardPreventCornerOverlap="true"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp">
 
-                <dev.lucasnlm.antimine.ui.view.CardButtonView
-                    android:id="@+id/startBeginner"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
 
-                <dev.lucasnlm.antimine.ui.view.CardButtonView
-                    android:id="@+id/startIntermediate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <dev.lucasnlm.antimine.ui.view.CardButtonView
+                        android:id="@+id/startBeginner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-                <dev.lucasnlm.antimine.ui.view.CardButtonView
-                    android:id="@+id/startExpert"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <dev.lucasnlm.antimine.ui.view.CardButtonView
+                        android:id="@+id/startIntermediate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-                <dev.lucasnlm.antimine.ui.view.CardButtonView
-                    android:id="@+id/startCustom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <dev.lucasnlm.antimine.ui.view.CardButtonView
+                        android:id="@+id/startExpert"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-            </LinearLayout>
+                    <dev.lucasnlm.antimine.ui.view.CardButtonView
+                        android:id="@+id/startCustom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/tutorial"

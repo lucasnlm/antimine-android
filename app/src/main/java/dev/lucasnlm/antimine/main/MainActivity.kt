@@ -28,6 +28,7 @@ import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager
@@ -78,20 +79,17 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
         }
 
-        newGame.bind(
+        newGameShow.bind(
             theme = usingTheme,
             text = getString(R.string.new_game),
             startIcon = R.drawable.more,
             onAction = {
-                if (difficulties.visibility == View.VISIBLE) {
-                    difficulties.visibility = View.GONE
-                    newGame.bindStartIcon(R.drawable.more)
-                } else {
-                    difficulties.visibility = View.VISIBLE
-                    newGame.bindStartIcon(R.drawable.remove)
-                }
+                newGameShow.visibility = View.GONE
+                difficulties.visibility = View.VISIBLE
             }
         )
+
+        difficulties.strokeColor = usingTheme.palette.covered.toAndroidColor()
 
         startBeginner.bind(
             theme = usingTheme,
@@ -431,7 +429,12 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     }
 
     override fun onBackPressed() {
-        finishAffinity()
+        if (newGameShow.visibility == View.GONE) {
+            newGameShow.visibility = View.VISIBLE
+            difficulties.visibility = View.GONE
+        } else {
+            finishAffinity()
+        }
     }
 
     companion object {
