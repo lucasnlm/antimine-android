@@ -282,10 +282,13 @@ class MinefieldStage(
                 inputEvents.clear()
             }
 
-            cameraController.addVelocity(
-                -dx * currentZoom,
-                dy * currentZoom,
-            )
+            if (dx * dx + dy * dy > 16f) {
+                cameraController.addVelocity(
+                    -dx * currentZoom,
+                    dy * currentZoom,
+                )
+            }
+
             true
         } != null
     }
