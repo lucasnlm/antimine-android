@@ -20,7 +20,7 @@ class PreferencesRepository(
         return preferencesManager.run {
             getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50) != 50 ||
                 getInt(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT, longPressTimeout()) != longPressTimeout() ||
-                getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 1) != 1
+                getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 3) != 3
         }
     }
 
@@ -31,7 +31,7 @@ class PreferencesRepository(
             putBoolean(PreferenceKeys.PREFERENCE_ANIMATION, true)
             putBoolean(PreferenceKeys.PREFERENCE_QUESTION_MARK, false)
             putBoolean(PreferenceKeys.PREFERENCE_SOUND_EFFECTS, false)
-            putInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 1)
+            putInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 3)
             putInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50)
             putInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, 35)
             putInt(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT, longPressTimeout())
