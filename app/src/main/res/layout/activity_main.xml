@@ -11,10 +11,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:clipChildren="false"
         android:clipToPadding="false"
+        android:layout_centerVertical="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -33,7 +34,7 @@
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:text="@string/app_name"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:layout_marginStart="4dp"
                 android:textColor="?attr/colorOnBackground"
                 android:drawablePadding="8dp"
