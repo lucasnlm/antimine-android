@@ -1,6 +1,8 @@
 package dev.lucasnlm.antimine.themes
 
 import android.os.Bundle
+import android.view.View
+import android.widget.SeekBar
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
@@ -38,24 +40,62 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
 
         bindToolbar(themeViewModel.singleState().current.id != 0L)
 
-        lifecycleScope.launchWhenCreated {
-            val gaps = resources.getDimension(R.dimen.theme_divider) * 6
-            val size = dimensionRepository.displaySize()
-            val areaSize: Float
-            val columns: Int
+        if (preferencesRepository.isPremiumEnabled()) {
+            unlockAll.visibility = View.GONE
+        } else {
+            unlockAll.bind(
+                theme = usingTheme,
+                invert = true,
+                text = R.string.remove_ad,
+                onAction = {
+                    lifecycleScope.launch {
+                        billingManager.charge(this@ThemeActivity)
+                    }
+                }
+            )
+        }
 
-            if (size.width > size.height) {
-                areaSize = (size.width - gaps) / 15f
-                columns = 5
-            } else {
-                areaSize = (size.width - gaps) / 9f
-                columns = 3
+        squareDivider.progress = preferencesRepository.squareDivider()
+        squareDivider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    preferencesRepository.setSquareDivider(progress)
+                }
             }
+
+            override fun onStartTrackingTouch(seekbar: SeekBar?) {
+                // Empty
+            }
+
+            override fun onStopTrackingTouch(seekbar: SeekBar?) {
+                // Empty
+            }
+        })
+
+        squareRadius.progress = preferencesRepository.squareRadius()
+        squareRadius.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    preferencesRepository.setSquareRadius(progress)
+                }
+            }
+
+            override fun onStartTrackingTouch(seekbar: SeekBar?) {
+                // Empty
+            }
+
+            override fun onStopTrackingTouch(seekbar: SeekBar?) {
+                // Empty
+            }
+        })
+
+        lifecycleScope.launchWhenCreated {
+            val size = dimensionRepository.displaySize()
+            val columns = if (size.width > size.height) { 5 } else { 3 }
 
             val themeAdapter = ThemeAdapter(
                 activity = this@ThemeActivity,
                 themeViewModel = themeViewModel,
-                areaSize = areaSize,
                 preferencesRepository = preferencesRepository,
                 adsManager = adsManager
             )

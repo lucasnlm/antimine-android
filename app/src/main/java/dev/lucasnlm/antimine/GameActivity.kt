@@ -285,7 +285,7 @@ class GameActivity :
 
     private fun backToMainActivity() {
         val intent = Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         startActivity(intent)
     }

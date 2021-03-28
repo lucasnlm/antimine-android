@@ -64,7 +64,7 @@ class GameApplicationListener(
         appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
         appBarHeight = dimensionRepository.actionBarSize().toFloat(),
         radius = preferencesRepository.squareRadius().toFloat(),
-        squareDivider = preferencesRepository.squareDivider() * 0.1f,
+        squareDivider = preferencesRepository.squareDivider() * 0.5f,
         joinAreas = preferencesRepository.squareDivider() == 0,
     )
 
