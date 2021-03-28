@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable
 import dev.lucasnlm.antimine.core.getPos
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.GdxLocal
-import dev.lucasnlm.antimine.gdx.drawArea
+import dev.lucasnlm.antimine.gdx.drawTexture
 import dev.lucasnlm.antimine.gdx.drawAsset
 import dev.lucasnlm.antimine.gdx.events.GameEvent
 import dev.lucasnlm.antimine.gdx.scope
@@ -120,7 +120,7 @@ class AreaActor(
 
             if (!isOdd && !area.isCovered) {
                 textures.areaTextures[AreaForm.None]?.let {
-                    batch.drawArea(
+                    batch.drawTexture(
                         texture = it,
                         x = x + internalPadding,
                         y = y + internalPadding,
@@ -138,7 +138,7 @@ class AreaActor(
 
                 if (area.isCovered) {
                     textures.areaTextures[areaForm]?.let {
-                        batch.drawArea(
+                        batch.drawTexture(
                             texture = it,
                             x = x + internalPadding,
                             y = y + internalPadding,
@@ -151,7 +151,7 @@ class AreaActor(
                 }
 
                 textures.areaTextures[AreaForm.Full]?.let {
-                    batch.drawArea(
+                    batch.drawTexture(
                         texture = it,
                         x = x - width * (resize - 1.0f) * 0.5f,
                         y = y - height * (resize - 1.0f) * 0.5f,
@@ -165,7 +165,7 @@ class AreaActor(
                 if (coverAlpha > 0.0f) {
                     previousForm?.let { areaForm ->
                         textures.areaTextures[areaForm]?.let {
-                            batch.drawArea(
+                            batch.drawTexture(
                                 texture = it,
                                 x = x + internalPadding,
                                 y = y + internalPadding,
@@ -183,7 +183,7 @@ class AreaActor(
 
                     val coverAlpha = if (previousForm != null) 1.0f else coverAlpha
                     textures.areaTextures[areaForm]?.let {
-                        batch.drawArea(
+                        batch.drawTexture(
                             texture = it,
                             x = x + internalPadding,
                             y = y + internalPadding,
@@ -201,7 +201,7 @@ class AreaActor(
 
                 if (area.hasMine && !area.isCovered) {
                     textures.areaTextures[AreaForm.Full]?.let {
-                        batch.drawArea(
+                        batch.drawTexture(
                             texture = it,
                             x = x + internalPadding,
                             y = y + internalPadding,
@@ -214,7 +214,7 @@ class AreaActor(
                 } else if (theme.palette.covered != theme.palette.coveredOdd) {
                     if (GdxLocal.qualityZoomLevel < 2 && area.isCovered && isOdd && area.mark.isNone()) {
                         textures.areaTextures[AreaForm.Full]?.let {
-                            batch.drawArea(
+                            batch.drawTexture(
                                 texture = it,
                                 x = x + internalPadding,
                                 y = y + internalPadding,
@@ -231,7 +231,7 @@ class AreaActor(
             if (!area.isCovered && isPressed) {
                 textures.areaTextures[AreaForm.Full]?.let {
                     val density = Gdx.graphics.density
-                    batch.drawArea(
+                    batch.drawTexture(
                         texture = it,
                         x = x + internalPadding + density * 2f,
                         y = y + internalPadding + density * 2f,

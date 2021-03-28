@@ -6,34 +6,16 @@ import com.badlogic.gdx.graphics.Color.argb8888ToColor
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.Actor
 import dev.lucasnlm.antimine.gdx.models.GameTextures
 
-fun ShapeRenderer.scope(
-    type: ShapeRenderer.ShapeType = ShapeRenderer.ShapeType.Filled,
-    block: ShapeRenderer.() -> Unit,
-) {
-    begin(type)
-    block()
-    end()
-}
-
 fun Batch.scope(block: (Batch, GameTextures) -> Unit) {
     GdxLocal.gameTextures?.let {
-        end()
         block(this, it)
-        begin()
     }
 }
 
-fun Batch.drawScope(block: Batch.() -> Unit) {
-    begin()
-    block()
-    end()
-}
-
-fun Batch.drawArea(
+fun Batch.drawTexture(
     texture: Texture,
     x: Float,
     y: Float,
@@ -42,18 +24,12 @@ fun Batch.drawArea(
     blend: Boolean,
     color: Color? = null
 ) {
-    if (blend) {
+    if (blend && !isBlendingEnabled) {
         enableBlending()
     }
 
-    begin()
     setColor(color ?: WHITE)
     draw(texture, x, y, width, height)
-    end()
-
-    if (blend) {
-        disableBlending()
-    }
 }
 
 fun Actor.drawAsset(
@@ -63,11 +39,11 @@ fun Actor.drawAsset(
     blend: Boolean = true,
     scale: Float = 1.0f
 ) {
-    if (blend) {
+    if (blend && !batch.isBlendingEnabled) {
         batch.enableBlending()
     }
 
-    batch.drawScope {
+    batch.run {
         setColor(color ?: WHITE)
         draw(
             texture,
@@ -76,10 +52,6 @@ fun Actor.drawAsset(
             width * scale,
             height * scale
         )
-    }
-
-    if (blend) {
-        batch.disableBlending()
     }
 }
 
