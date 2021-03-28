@@ -100,6 +100,7 @@ class GameActivity :
         bindToolbar()
         loadGameOrTutorial()
         handleIntent(intent)
+        bindTapToBegin()
 
         if (!isPortrait()) {
             val decorView = window.decorView
@@ -168,6 +169,17 @@ class GameActivity :
                 this@GameActivity,
                 ::onGameEvent,
             )
+
+        field.observe(
+            this@GameActivity,
+            { list ->
+                if (list.find { it.hasMine } != null) {
+                    tapToBegin.visibility = View.GONE
+                } else {
+                    tapToBegin.visibility = View.VISIBLE
+                }
+            }
+        )
 
         retryObserver.observe(
             this@GameActivity,
@@ -280,6 +292,12 @@ class GameActivity :
 
     override fun onBackPressed() {
         backToMainActivity()
+    }
+
+    private fun bindTapToBegin() {
+        tapToBegin.apply {
+            setTextColor(usingTheme.palette.background.toAndroidColor(255))
+        }
     }
 
     private fun bindToolbar() {
