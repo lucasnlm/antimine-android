@@ -414,7 +414,7 @@ open class GameViewModel(
         if (initialized) {
             gameController.run {
                 showWrongFlags()
-                showAllMines()
+                showAllMistakes()
                 refreshField()
             }
         }

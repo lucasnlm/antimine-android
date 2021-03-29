@@ -185,9 +185,10 @@ class GameController {
 
     fun getMinesCount() = mines().count()
 
-    fun showAllMines() {
+    fun showAllMistakes() {
         field = MinefieldHandler(field.toMutableList(), false).run {
             showAllMines()
+            showAllWrongFlags()
             result()
         }
     }

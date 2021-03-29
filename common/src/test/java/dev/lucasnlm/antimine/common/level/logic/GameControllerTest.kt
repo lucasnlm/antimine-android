@@ -124,7 +124,7 @@ class GameControllerTest {
     @Test
     fun testShowAllMines() = runBlockingTest {
         withGameController { controller ->
-            controller.showAllMines()
+            controller.showAllMistakes()
             controller.mines().filter { it.mistake }.forEach {
                 assertEquals(it.isCovered, false)
             }

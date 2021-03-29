@@ -247,7 +247,12 @@ class AreaActor(
                 if (area.isCovered) {
                     when {
                         area.mark.isFlag() -> {
-                            val color = theme.palette.covered.toOppositeMax(0.8f)
+                            val color = if (area.mistake) {
+                                theme.palette.covered.toOppositeMax(0.8f).mul(1.0f, 0.5f, 0.5f, 1.0f)
+                            } else {
+                                theme.palette.covered.toOppositeMax(0.8f)
+                            }
+
                             drawAsset(
                                 batch = batch,
                                 texture = it.flag,

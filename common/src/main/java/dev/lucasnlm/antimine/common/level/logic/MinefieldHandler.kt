@@ -12,6 +12,11 @@ class MinefieldHandler(
             .forEach { field[it.id] = it.copy(isCovered = false) }
     }
 
+    fun showAllWrongFlags() {
+        field.filter { !it.hasMine && it.mark.isNotNone() }
+            .forEach { field[it.id] = it.copy(mistake = true) }
+    }
+
     fun flagAllMines() {
         field.filter { it.hasMine && it.isCovered }
             .forEach { field[it.id] = it.copy(mark = Mark.Flag) }
