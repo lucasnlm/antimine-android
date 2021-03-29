@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
@@ -176,7 +177,10 @@ class GameActivity :
                 if (list.find { it.hasMine } != null) {
                     tapToBegin.visibility = View.GONE
                 } else {
+                    val color = usingTheme.palette.covered.toAndroidColor()
+                    val tint = ColorStateList.valueOf(color)
                     tapToBegin.visibility = View.VISIBLE
+                    tapToBegin.backgroundTintList = tint
                 }
             }
         )
