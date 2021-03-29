@@ -44,6 +44,7 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
             theme = themeRepository.getTheme(),
             invert = true,
             text = R.string.show_licenses,
+            centralize = true,
             onAction = {
                 aboutViewModel.sendEvent(AboutEvent.ThirdPartyLicenses)
             }
@@ -53,6 +54,7 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
             theme = themeRepository.getTheme(),
             invert = true,
             text = R.string.translation,
+            centralize = true,
             onAction = {
                 aboutViewModel.sendEvent(AboutEvent.Translators)
             }
@@ -62,6 +64,7 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
             theme = themeRepository.getTheme(),
             invert = true,
             text = R.string.source_code,
+            centralize = true,
             onAction = {
                 aboutViewModel.sendEvent(AboutEvent.SourceCode)
             }
