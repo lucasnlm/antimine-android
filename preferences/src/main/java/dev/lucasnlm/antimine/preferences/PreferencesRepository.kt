@@ -68,11 +68,15 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_VIBRATION, value)
     }
 
-    override fun squareSizeMultiplier(): Int =
+    override fun squareSize(): Int =
         preferencesManager.getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50)
 
-    override fun setSquareMultiplier(value: Int) {
-        preferencesManager.putInt(PreferenceKeys.PREFERENCE_AREA_SIZE, value)
+    override fun setSquareSize(value: Int?) {
+        if (value == null) {
+            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_AREA_SIZE)
+        } else {
+            preferencesManager.putInt(PreferenceKeys.PREFERENCE_AREA_SIZE, value)
+        }
     }
 
     override fun useAnimations(): Boolean =
@@ -294,8 +298,12 @@ class PreferencesRepository(
         return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 3)
     }
 
-    override fun setSquareRadius(value: Int) {
-        preferencesManager.putInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, value)
+    override fun setSquareRadius(value: Int?) {
+        if (value == null) {
+            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_RADIUS)
+        } else {
+            preferencesManager.putInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, value)
+        }
     }
 
     override fun getTips(): Int {
@@ -334,7 +342,11 @@ class PreferencesRepository(
         return preferencesManager.getInt(PREFERENCE_SQUARE_DIVIDER, 0)
     }
 
-    override fun setSquareDivider(value: Int) {
-        preferencesManager.putInt(PREFERENCE_SQUARE_DIVIDER, value.coerceIn(0, 50))
+    override fun setSquareDivider(value: Int?) {
+        if (value == null) {
+            preferencesManager.removeKey(PREFERENCE_SQUARE_DIVIDER)
+        } else {
+            preferencesManager.putInt(PREFERENCE_SQUARE_DIVIDER, value.coerceIn(0, 50))
+        }
     }
 }

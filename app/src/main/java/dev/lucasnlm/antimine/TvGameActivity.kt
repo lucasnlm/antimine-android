@@ -59,7 +59,7 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
     private var currentTime: Long = 0
     private var currentSaveId: Long = 0
 
-    private val areaSizeMultiplier by lazy { preferencesRepository.squareSizeMultiplier() }
+    private val areaSizeMultiplier by lazy { preferencesRepository.squareSize() }
     private val currentRadius by lazy { preferencesRepository.squareRadius() }
     private val useHelp by lazy { preferencesRepository.useHelp() }
 
@@ -420,7 +420,7 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
      */
     private fun restartIfNeed(): Boolean {
         return (
-            areaSizeMultiplier != preferencesRepository.squareSizeMultiplier() ||
+            areaSizeMultiplier != preferencesRepository.squareSize() ||
                 currentRadius != preferencesRepository.squareRadius() ||
                 useHelp != preferencesRepository.useHelp()
             ).also {

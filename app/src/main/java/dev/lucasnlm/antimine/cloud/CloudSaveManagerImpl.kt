@@ -37,7 +37,7 @@ class CloudSaveManagerImpl(
                     completeTutorial = if (preferencesRepository.isTutorialCompleted()) 1 else 0,
                     selectedTheme = preferencesRepository.themeId().toInt(),
                     squareRadius = preferencesRepository.squareRadius(),
-                    squareSize = preferencesRepository.squareSizeMultiplier(),
+                    squareSize = preferencesRepository.squareSize(),
                     touchTiming = preferencesRepository.customLongPressTimeout().toInt(),
                     questionMark = preferencesRepository.useQuestionMark().toInt(),
                     gameAssistance = preferencesRepository.useFlagAssistant().toInt(),

@@ -74,7 +74,7 @@ class MainViewModel(
             completeFirstUse()
             useTheme(selectedTheme.toLong())
             setSquareRadius(squareRadius)
-            setSquareMultiplier(squareSize)
+            setSquareSize(squareSize)
             setCustomLongPressTimeout(touchTiming.toLong())
             setQuestionMark(questionMark != 0)
             setNoGuessingAlgorithm(noGuessing != 0)

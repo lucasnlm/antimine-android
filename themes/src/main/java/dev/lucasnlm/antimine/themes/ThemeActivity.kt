@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
+class ThemeActivity : ThematicActivity(R.layout.activity_theme), SeekBar.OnSeekBarChangeListener {
     private val themeViewModel by viewModel<ThemeViewModel>()
 
     private val dimensionRepository: IDimensionRepository by inject()
@@ -55,39 +55,9 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
             )
         }
 
-        squareDivider.progress = preferencesRepository.squareDivider()
-        squareDivider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    preferencesRepository.setSquareDivider(progress)
-                }
-            }
-
-            override fun onStartTrackingTouch(seekbar: SeekBar?) {
-                // Empty
-            }
-
-            override fun onStopTrackingTouch(seekbar: SeekBar?) {
-                // Empty
-            }
-        })
-
-        squareRadius.progress = preferencesRepository.squareRadius()
-        squareRadius.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    preferencesRepository.setSquareRadius(progress)
-                }
-            }
-
-            override fun onStartTrackingTouch(seekbar: SeekBar?) {
-                // Empty
-            }
-
-            override fun onStopTrackingTouch(seekbar: SeekBar?) {
-                // Empty
-            }
-        })
+        squareSize.setOnSeekBarChangeListener(this)
+        squareDivider.setOnSeekBarChangeListener(this)
+        squareRadius.setOnSeekBarChangeListener(this)
 
         lifecycleScope.launchWhenCreated {
             val size = dimensionRepository.displaySize()
@@ -131,6 +101,10 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                         recreate()
                         cloudSaveManager.uploadSave()
                     }
+
+                    squareSize.progress = it.squareSize
+                    squareDivider.progress = it.squareDivider
+                    squareRadius.progress = it.squareRadius
                 }
             }
         }
@@ -162,5 +136,29 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 }
             )
         }
+    }
+
+    override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
+        if (fromUser) {
+            when (seekbar) {
+                squareSize -> {
+                    themeViewModel.sendEvent(ThemeEvent.SetSquareSize(progress))
+                }
+                squareDivider -> {
+                    themeViewModel.sendEvent(ThemeEvent.SetSquareDivider(progress))
+                }
+                squareRadius -> {
+                    themeViewModel.sendEvent(ThemeEvent.SetSquareRadius(progress))
+                }
+            }
+        }
+    }
+
+    override fun onStartTrackingTouch(seekbar: SeekBar?) {
+        // Empty
+    }
+
+    override fun onStopTrackingTouch(seekbar: SeekBar?) {
+        // Empty
     }
 }

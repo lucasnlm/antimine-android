@@ -68,7 +68,7 @@
                 app:cardUseCompatPadding="false"
                 app:strokeColor="?attr/colorOnBackground"
                 app:cardPreventCornerOverlap="true"
-                app:cardCornerRadius="25dp"
+                app:cardCornerRadius="15dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="1dp">
 

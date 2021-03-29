@@ -48,7 +48,7 @@ interface IPreferencesRepository {
     fun setHelp(value: Boolean)
 
     fun squareRadius(): Int
-    fun setSquareRadius(value: Int)
+    fun setSquareRadius(value: Int?)
 
     fun getTips(): Int
     fun setTips(tips: Int)
@@ -64,8 +64,8 @@ interface IPreferencesRepository {
     fun useHapticFeedback(): Boolean
     fun setHapticFeedback(value: Boolean)
 
-    fun squareSizeMultiplier(): Int
-    fun setSquareMultiplier(value: Int)
+    fun squareSize(): Int
+    fun setSquareSize(value: Int?)
 
     fun useAnimations(): Boolean
 
@@ -97,5 +97,5 @@ interface IPreferencesRepository {
     fun getUnlockedThemes(): List<Int>
 
     fun squareDivider(): Int
-    fun setSquareDivider(value: Int)
+    fun setSquareDivider(value: Int?)
 }

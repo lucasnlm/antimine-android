@@ -91,9 +91,9 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setHapticFeedback(value: Boolean) {}
 
-    override fun squareSizeMultiplier(): Int = 50
+    override fun squareSize(): Int = 50
 
-    override fun setSquareMultiplier(value: Int) {}
+    override fun setSquareSize(value: Int) {}
 
     override fun useAnimations(): Boolean = false
 

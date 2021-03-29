@@ -563,7 +563,7 @@ open class GameViewModel(
 
     fun getAppTheme(): AppTheme = themeRepository.getTheme()
 
-    private fun getAreaSizeMultiplier() = preferencesRepository.squareSizeMultiplier()
+    private fun getAreaSizeMultiplier() = preferencesRepository.squareSize()
 
     private fun refreshField() {
         field.postValue(gameController.field())

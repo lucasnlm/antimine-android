@@ -44,7 +44,7 @@ class DimensionRepository(
     }
 
     override fun areaSize(): Float {
-        val multiplier = preferencesRepository.squareSizeMultiplier() / 100.0f
+        val multiplier = preferencesRepository.squareSize() / 100.0f
         val maxArea = context.resources.getDimension(R.dimen.field_size)
         return maxArea * multiplier
     }
