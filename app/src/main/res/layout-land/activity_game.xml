@@ -29,7 +29,7 @@
         android:background="@drawable/round_background"
         android:paddingVertical="8dp"
         android:paddingHorizontal="12dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/app_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
