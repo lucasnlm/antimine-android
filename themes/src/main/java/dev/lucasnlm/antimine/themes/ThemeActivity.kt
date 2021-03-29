@@ -38,7 +38,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), SeekBar.OnSeekB
             adsManager.start(this)
         }
 
-        bindToolbar(themeViewModel.singleState().current.id != 0L)
+        bindToolbar()
 
         if (preferencesRepository.isPremiumEnabled()) {
             unlockAll.visibility = View.GONE
@@ -110,32 +110,21 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), SeekBar.OnSeekB
         }
     }
 
-    private fun bindToolbar(hasDefinedTheme: Boolean) {
-        if (hasDefinedTheme) {
-            section.bind(
-                text = R.string.themes,
-                startButton = R.drawable.back_arrow,
-                startDescription = R.string.back,
-                startAction = {
-                    finish()
-                },
-                endButton = R.drawable.delete,
-                endDescription = R.string.delete_all,
-                endAction = {
-                    themeViewModel.sendEvent(ThemeEvent.ResetTheme)
-                    bindToolbar(false)
-                }
-            )
-        } else {
-            section.bind(
-                text = R.string.themes,
-                startButton = R.drawable.back_arrow,
-                startDescription = R.string.back,
-                startAction = {
-                    finish()
-                }
-            )
-        }
+    private fun bindToolbar() {
+        section.bind(
+            text = R.string.themes,
+            startButton = R.drawable.back_arrow,
+            startDescription = R.string.back,
+            startAction = {
+                finish()
+            },
+            endButton = R.drawable.delete,
+            endDescription = R.string.delete_all,
+            endAction = {
+                themeViewModel.sendEvent(ThemeEvent.ResetTheme)
+                bindToolbar()
+            }
+        )
     }
 
     override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
