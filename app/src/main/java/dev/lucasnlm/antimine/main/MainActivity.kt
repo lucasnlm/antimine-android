@@ -91,6 +91,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
 
         difficulties.strokeColor = usingTheme.palette.covered.toAndroidColor()
 
+        startBeginner.setRadius(5f)
         startBeginner.bind(
             theme = usingTheme,
             text = getString(R.string.beginner),
@@ -102,6 +103,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
         )
 
+        startIntermediate.setRadius(5f)
         startIntermediate.bind(
             theme = usingTheme,
             text = getString(R.string.intermediate),
@@ -113,6 +115,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
         )
 
+        startExpert.setRadius(5f)
         startExpert.bind(
             theme = usingTheme,
             text = getString(R.string.expert),
@@ -124,6 +127,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
         )
 
+        startCustom.setRadius(5f)
         startCustom.bind(
             theme = usingTheme,
             text = getString(R.string.custom),
@@ -283,7 +287,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     }
 
     private fun Minefield.toExtraString(): String {
-        return "${this.width}x${this.height} - ${this.mines}"
+        return "${this.width} × ${this.height} - ${this.mines}"
     }
 
     private fun handleSideEffects(event: MainEvent) {

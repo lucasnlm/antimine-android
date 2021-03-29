@@ -70,6 +70,10 @@ class CardButtonView : FrameLayout {
         )
     }
 
+    fun setRadius(radius: Float) {
+        findViewById<MaterialCardView>(R.id.card_view).radius = radius
+    }
+
     private fun bindView(
         theme: AppTheme,
         invert: Boolean = false,
