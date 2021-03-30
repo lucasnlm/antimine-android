@@ -68,6 +68,7 @@ interface IPreferencesRepository {
     fun setSquareSize(value: Int?)
 
     fun useAnimations(): Boolean
+    fun setAnimations(enabled: Boolean)
 
     fun setNoGuessingAlgorithm(value: Boolean)
     fun useNoGuessingAlgorithm(): Boolean
@@ -85,6 +86,7 @@ interface IPreferencesRepository {
     fun getPreferredLocale(): String?
 
     fun showWindowsWhenFinishGame(): Boolean
+    fun mustShowWindowsWhenFinishGame(enabled: Boolean)
 
     fun openGameDirectly(): Boolean
     fun setOpenGameDirectly(value: Boolean)

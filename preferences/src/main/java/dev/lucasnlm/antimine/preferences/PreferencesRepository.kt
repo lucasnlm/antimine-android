@@ -79,8 +79,13 @@ class PreferencesRepository(
         }
     }
 
-    override fun useAnimations(): Boolean =
-        preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_ANIMATION, true)
+    override fun useAnimations(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_ANIMATION, true)
+    }
+
+    override fun setAnimations(enabled: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_ANIMATION, enabled)
+    }
 
     override fun setNoGuessingAlgorithm(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_NO_GUESSING, value)
@@ -122,8 +127,13 @@ class PreferencesRepository(
         return preferencesManager.getString(PreferenceKeys.PREFERENCE_LOCALE)
     }
 
-    override fun showWindowsWhenFinishGame(): Boolean =
-        preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_WINDOWS, true)
+    override fun showWindowsWhenFinishGame(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_WINDOWS, true)
+    }
+
+    override fun mustShowWindowsWhenFinishGame(enabled: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_WINDOWS, enabled)
+    }
 
     override fun userId(): String? {
         return preferencesManager.getString(PreferenceKeys.PREFERENCE_USER_ID)

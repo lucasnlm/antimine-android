@@ -10,7 +10,6 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import kotlinx.android.synthetic.main.activity_language.*
 import org.koin.android.ext.android.inject
@@ -50,13 +49,6 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
     private fun placePreferenceFragment() {
         supportFragmentManager.apply {
             popBackStack()
-
-            findFragmentByTag(PreferencesActivity.PrefsFragment.TAG)?.let { it ->
-                beginTransaction().apply {
-                    remove(it)
-                    commitAllowingStateLoss()
-                }
-            }
 
             beginTransaction().apply {
                 replace(
