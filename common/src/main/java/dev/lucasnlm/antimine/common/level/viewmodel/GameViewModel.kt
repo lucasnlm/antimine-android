@@ -64,7 +64,7 @@ open class GameViewModel(
         return GameState(
             turn = 0,
             field = listOf(),
-            timestamp = System.currentTimeMillis(),
+            duration = System.currentTimeMillis(),
             difficulty = Difficulty.Standard,
             mineCount = 9,
             minefield = Minefield(9, 9, 9),
@@ -112,7 +112,7 @@ open class GameViewModel(
                 runClock()
             }
             is GameEvent.UpdateTime -> {
-                val newState = state.copy(timestamp = event.time)
+                val newState = state.copy(duration = event.time)
                 emit(newState)
             }
             is GameEvent.UpdateMinefield -> {
@@ -146,7 +146,7 @@ open class GameViewModel(
                                 delayToShow = 0L,
                                 totalMines = totalMines,
                                 rightMines = totalMines,
-                                timestamp = state.timestamp,
+                                timestamp = state.duration,
                                 receivedTips = 2,
                             )
                             sendSideEffect(sideEffect)
@@ -158,7 +158,7 @@ open class GameViewModel(
                                 delayToShow = explosionDelay(),
                                 totalMines = gameController.mines().count(),
                                 rightMines = gameController.mines().count { it.mark.isNotNone() },
-                                timestamp = state.timestamp,
+                                timestamp = state.duration,
                                 receivedTips = 0,
                             )
                             sendSideEffect(sideEffect)
@@ -170,7 +170,7 @@ open class GameViewModel(
                                 delayToShow = 0L,
                                 totalMines = gameController.mines().count(),
                                 rightMines = gameController.mines().count { it.mark.isNotNone() },
-                                timestamp = state.timestamp,
+                                timestamp = state.duration,
                                 receivedTips = 1,
                             )
                             sendSideEffect(sideEffect)
@@ -200,7 +200,7 @@ open class GameViewModel(
         gameController = GameController(minefield, seed)
 
         val newGameState = GameState(
-            timestamp = 0L,
+            duration = 0L,
             seed = seed,
             difficulty = newDifficulty,
             minefield = minefield,
@@ -240,7 +240,7 @@ open class GameViewModel(
 
         val newGameState = GameState(
             saveId = save.uid.toLong(),
-            timestamp = save.duration,
+            duration = save.duration,
             seed = save.seed,
             difficulty = save.difficulty,
             minefield = save.minefield,
@@ -278,7 +278,7 @@ open class GameViewModel(
 
         val newGameState = GameState(
             saveId = save.uid.toLong(),
-            timestamp = save.duration,
+            duration = save.duration,
             seed = save.seed,
             difficulty = save.difficulty,
             minefield = save.minefield,
@@ -375,7 +375,7 @@ open class GameViewModel(
             gameController.let {
                 if (it.hasMines()) {
                     savesRepository.saveGame(
-                        it.getSaveState(state.timestamp, state.difficulty)
+                        it.getSaveState(state.duration, state.difficulty)
                     )?.let { id ->
                         it.setCurrentSaveId(id.toInt())
                         sendEvent(GameEvent.UpdateSave(id))
@@ -389,7 +389,7 @@ open class GameViewModel(
         if (initialized) {
             gameController.let {
                 if (it.hasMines()) {
-                    it.getStats(state.timestamp)?.let { stats ->
+                    it.getStats(state.duration)?.let { stats ->
                         statsRepository.addStats(stats)
                     }
                 }

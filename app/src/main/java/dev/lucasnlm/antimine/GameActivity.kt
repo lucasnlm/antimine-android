@@ -172,8 +172,8 @@ class GameActivity :
                 }
 
                 timer.apply {
-                    visibility = if (it.timestamp == 0L) View.GONE else View.VISIBLE
-                    text = DateUtils.formatElapsedTime(it.timestamp)
+                    visibility = if (it.duration == 0L) View.GONE else View.VISIBLE
+                    text = DateUtils.formatElapsedTime(it.duration)
                 }
 
                 minesCount.apply {
@@ -218,7 +218,7 @@ class GameActivity :
                                 showContinueButton = gameViewModel.hasUnknownMines(),
                                 rightMines = 0,
                                 totalMines = 0,
-                                time = singleState().timestamp,
+                                time = singleState().duration,
                                 received = 0,
                             ).run {
                                 showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
