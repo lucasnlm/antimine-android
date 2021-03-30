@@ -1,5 +1,9 @@
 package dev.lucasnlm.antimine.common.level.viewmodel
 
+import android.content.Context
+import android.text.SpannedString
+import androidx.core.text.bold
+import androidx.core.text.buildSpannedString
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -21,6 +25,7 @@ import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ActionResponse
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.ui.model.AppTheme
@@ -560,6 +565,72 @@ open class GameViewModel(
             }
         }
     }
+
+    fun getControlDescription(context: Context): SpannedString? {
+        return when (preferencesRepository.controlStyle()) {
+            ControlStyle.Standard -> {
+                val base = context.getString(R.string.control_description)
+                val openAction = context.getString(R.string.single_click)
+                val openReaction = context.getString(R.string.open)
+                val flagAction = context.getString(R.string.long_press)
+                val flagReaction = context.getString(R.string.flag_tile)
+                val keywords = listOf(
+                    openAction,
+                    openReaction,
+                    flagAction,
+                    flagReaction,
+                )
+
+                val first = buildSpannedString {
+                    base.replace("%ACTION", openAction)
+                        .replace("%REACTION", openReaction)
+                        .splitKeeping(keywords)
+                        .forEach {
+                            when {
+                                keywords.contains(it) -> {
+                                    bold { append(it) }
+                                }
+                                else -> append(it)
+                            }
+                        }
+                }
+
+                val second = buildSpannedString {
+                    base.replace("%ACTION", flagAction)
+                        .replace("%REACTION", flagReaction)
+                        .splitKeeping(keywords)
+                        .forEach {
+                            when {
+                                keywords.contains(it) -> {
+                                    bold { append(it) }
+                                }
+                                else -> append(it)
+                            }
+                        }
+                }
+
+                buildSpannedString {
+                    append(first)
+                    append("\n")
+                    append(second)
+                }
+            }
+            else -> null
+        }
+    }
+
+    private fun String.splitKeeping(str: String): List<String> {
+        return this.split(str).flatMap { listOf(it, str) }.dropLast(1).filterNot { it.isEmpty() }
+    }
+
+    private fun String.splitKeeping(targetStrings: List<String>): List<String> {
+        var res = listOf(this)
+        targetStrings.forEach { str ->
+            res = res.flatMap { it.splitKeeping(str) }
+        }
+        return res
+    }
+
 
     fun getAppTheme(): AppTheme = themeRepository.getTheme()
 

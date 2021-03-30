@@ -13,6 +13,8 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
+import androidx.core.text.bold
+import androidx.core.text.buildSpannedString
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.lifecycleScope
@@ -176,11 +178,21 @@ class GameActivity :
             { list ->
                 if (list.find { it.hasMine } != null) {
                     tapToBegin.visibility = View.GONE
+                    controlsToast.visibility = View.GONE
                 } else {
-                    val color = usingTheme.palette.covered.toAndroidColor()
+                    val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
                     tapToBegin.visibility = View.VISIBLE
                     tapToBegin.backgroundTintList = tint
+
+                    gameViewModel.getControlDescription(applicationContext)?.let {
+
+
+
+                        controlsToast.visibility = View.VISIBLE
+                        controlsToast.backgroundTintList = tint
+                        controlsToast.text = it
+                    }
                 }
             }
         )
@@ -300,6 +312,9 @@ class GameActivity :
 
     private fun bindTapToBegin() {
         tapToBegin.apply {
+            setTextColor(usingTheme.palette.background.toAndroidColor(255))
+        }
+        controlsToast.apply {
             setTextColor(usingTheme.palette.background.toAndroidColor(255))
         }
     }

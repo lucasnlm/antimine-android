@@ -71,6 +71,7 @@
     <string name="single_click">Single Tap</string>
     <string name="double_click">Double Tap</string>
     <string name="long_press">Long Tap</string>
+    <string name="control_description">%ACTION to %REACTION</string>
     <string name="touch_sensibility">Touch Sensibility</string>
     <string name="open_tile">Open</string>
     <string name="flag_tile">Flag</string>
