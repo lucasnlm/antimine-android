@@ -69,8 +69,8 @@ class NewGameFragment : AppCompatDialogFragment() {
                             text = R.string.tutorial,
                             startIcon = R.drawable.tutorial,
                             onAction = {
-                                gameViewModel.eventObserver.postValue(Event.StartTutorial)
-                                dismissAllowingStateLoss()
+//                                gameViewModel.eventObserver.postValue(Event.StartTutorial)
+//                                dismissAllowingStateLoss()
                             }
                         )
                     }

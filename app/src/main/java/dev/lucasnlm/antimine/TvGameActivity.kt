@@ -85,80 +85,66 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
     }
 
     private fun bindViewModel() = gameViewModel.apply {
-        Transformations
-            .distinctUntilChanged(eventObserver)
-            .observe(
-                this@TvGameActivity,
-                ::onGameEvent,
-            )
+//        Transformations
+//            .distinctUntilChanged(eventObserver)
+//            .observe(
+//                this@TvGameActivity,
+//                ::onGameEvent,
+//            )
 
-        retryObserver.observe(
-            this@TvGameActivity,
-            {
-                lifecycleScope.launch {
-                    gameViewModel.retryGame(currentSaveId.toInt())
-                }
-            }
-        )
+//        continueObserver.observe(
+//            this@TvGameActivity,
+//            {
+//                lifecycleScope.launch {
+//
+//                }
+//            }
+//        )
 
-        continueObserver.observe(
-            this@TvGameActivity,
-            {
-                lifecycleScope.launch {
-                    gameViewModel.onContinueFromGameOver()
-                    eventObserver.postValue(Event.ResumeGame)
-                }
-            }
-        )
+//        elapsedTimeSeconds.observe(
+//            this@TvGameActivity,
+//            {
+//                timer.apply {
+//                    visibility = if (it == 0L) View.GONE else View.VISIBLE
+//                    text = DateUtils.formatElapsedTime(it)
+//                }
+//                currentTime = it
+//            }
+//        )
 
-        elapsedTimeSeconds.observe(
-            this@TvGameActivity,
-            {
-                timer.apply {
-                    visibility = if (it == 0L) View.GONE else View.VISIBLE
-                    text = DateUtils.formatElapsedTime(it)
-                }
-                currentTime = it
-            }
-        )
+//        mineCount.observe(
+//            this@TvGameActivity,
+//            {
+//                minesCount.apply {
+//                    visibility = View.VISIBLE
+//                    text = it.toString()
+//                }
+//            }
+//        )
 
-        mineCount.observe(
-            this@TvGameActivity,
-            {
-                minesCount.apply {
-                    visibility = View.VISIBLE
-                    text = it.toString()
-                }
-            }
-        )
+//        field.observe(
+//            this@TvGameActivity,
+//            { area ->
+//                val mines = area.filter { it.hasMine }
+//                totalArea = area.count()
+//                totalMines = mines.count()
+//                rightMines = mines.count { it.mark.isFlag() }
+//            }
+//        )
 
-        field.observe(
-            this@TvGameActivity,
-            { area ->
-                val mines = area.filter { it.hasMine }
-                totalArea = area.count()
-                totalMines = mines.count()
-                rightMines = mines.count { it.mark.isFlag() }
-            }
-        )
+//        saveId.observe(
+//            this@TvGameActivity,
+//            {
+//                currentSaveId = it
+//            }
+//        )
 
-        saveId.observe(
-            this@TvGameActivity,
-            {
-                currentSaveId = it
-            }
-        )
-
-        showNewGame.observe(
-            this@TvGameActivity,
-            {
-                waitAndShowEndGameAlert(
-                    gameResult = GameResult.Completed,
-                    await = false,
-                    canContinue = false,
-                )
-            }
-        )
+//        showNewGame.observe(
+//            this@TvGameActivity,
+//            {
+//
+//            }
+//        )
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -319,14 +305,14 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
     }
 
     private fun waitAndShowEndGameAlert(gameResult: GameResult, await: Boolean, canContinue: Boolean) {
-        if (await && gameViewModel.explosionDelay() != 0L) {
-            lifecycleScope.launch {
-                delay((gameViewModel.explosionDelay() * 0.3).toLong())
-                showEndGameAlert(gameResult, canContinue)
-            }
-        } else {
-            showEndGameAlert(gameResult, canContinue)
-        }
+//        if (await && gameViewModel.explosionDelay() != 0L) {
+//            lifecycleScope.launch {
+//                delay((gameViewModel.explosionDelay() * 0.3).toLong())
+//                showEndGameAlert(gameResult, canContinue)
+//            }
+//        } else {
+//            showEndGameAlert(gameResult, canContinue)
+//        }
     }
 
     private fun onGameEvent(event: Event) {
@@ -341,7 +327,6 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
             }
             Event.Resume, Event.Running -> {
                 status = Status.Running
-                gameViewModel.runClock()
             }
             Event.StartTutorial -> {
                 status = Status.PreGame
@@ -366,7 +351,7 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
                 status = Status.Over(currentTime, score)
                 gameViewModel.stopClock()
                 gameViewModel.showAllEmptyAreas()
-                gameViewModel.victory()
+//                gameViewModel.victory()
 
                 lifecycleScope.launch {
                     gameViewModel.saveGame()
@@ -400,7 +385,7 @@ class TvGameActivity : ThematicActivity(R.layout.activity_game_tv), DialogInterf
                 val isGameCompleted = gameViewModel.isCompletedWithMistakes()
                 cloudSaveManager.uploadSave()
                 lifecycleScope.launch {
-                    gameViewModel.gameOver(isResuming, !isGameCompleted)
+//                    gameViewModel.gameOver(isResuming, !isGameCompleted)
                     gameViewModel.saveGame()
                     waitAndShowEndGameAlert(
                         gameResult = if (isGameCompleted) GameResult.Completed else GameResult.GameOver,

@@ -15,7 +15,6 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.isPortrait
@@ -26,6 +25,9 @@ import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.repository.ThemeRepository
 import dev.lucasnlm.external.CrashReporter
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -85,46 +87,67 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        gameViewModel.run {
-            levelSetup.observe(
-                viewLifecycleOwner,
-                { minefield ->
-                    levelApplicationListener.bindMinefield(minefield)
-                }
-            )
+        lifecycleScope.launchWhenCreated {
+            gameViewModel.observeState().collect {
+                levelApplicationListener.bindField(it.field)
 
-            field.observe(
-                viewLifecycleOwner,
-                {
-                    levelApplicationListener.bindField(it)
+                if (it.isActive && !it.isGameCompleted) {
+                    levelApplicationListener.setActionsEnabled(true)
+                } else {
+                    bindControlSwitcherIfNeeded(view, false)
+                    levelApplicationListener.setActionsEnabled(false)
                 }
-            )
-
-            eventObserver.observe(
-                viewLifecycleOwner,
-                {
-                    when (it) {
-                        Event.Pause,
-                        Event.GameOver,
-                        Event.Victory -> {
-                            bindControlSwitcherIfNeeded(view, false)
-                            levelApplicationListener.setActionsEnabled(false)
-                        }
-                        Event.Running,
-                        Event.Resume,
-                        Event.ResumeGame,
-                        Event.StartNewGame -> {
-                            levelApplicationListener.run {
-                                setActionsEnabled(true)
-                            }
-                        }
-                        else -> {
-                            // Nothing
-                        }
-                    }
-                }
-            )
+            }
         }
+
+        lifecycleScope.launchWhenCreated {
+            gameViewModel
+                .observeState()
+                .map { it.minefield }
+                .distinctUntilChanged()
+                .collect {
+                    levelApplicationListener.bindMinefield(it)
+                }
+        }
+
+//        gameViewModel.run {
+////            levelSetup.observe(
+////                viewLifecycleOwner,
+////                { minefield ->
+////                    levelApplicationListener.bindMinefield(minefield)
+////                }
+////            )
+////
+////            field.observe(
+////                viewLifecycleOwner,
+////                {
+////                    levelApplicationListener.bindField(it)
+////                }
+////            )
+//
+////            eventObserver.observe(
+////                viewLifecycleOwner,
+////                {
+////                    when (it) {
+////                        Event.Pause,
+////                        Event.GameOver,
+////                        Event.Victory -> {
+////                            bindControlSwitcherIfNeeded(view, false)
+////                            levelApplicationListener.setActionsEnabled(false)
+////                        }
+////                        Event.Running,
+////                        Event.Resume,
+////                        Event.ResumeGame,
+////                        Event.StartNewGame -> {
+////
+////                        }
+////                        else -> {
+////                            // Nothing
+////                        }
+////                    }
+////                }
+////            )
+//        }
 
         bindControlSwitcherIfNeeded(view)
     }

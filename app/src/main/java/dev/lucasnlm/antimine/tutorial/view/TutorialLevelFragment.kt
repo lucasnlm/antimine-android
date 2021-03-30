@@ -53,26 +53,26 @@ class TutorialLevelFragment : Fragment(R.layout.fragment_tutorial_level) {
 
         lifecycleScope.launchWhenCreated {
             tutorialViewModel.run {
-                field.observe(
-                    viewLifecycleOwner,
-                    { list ->
-                        gameViewModel.stopClock()
-                        gameViewModel.elapsedTimeSeconds.postValue(0L)
-                        gameViewModel.mineCount.postValue(
-                            list.count { it.hasMine }.coerceAtLeast(4) - list.count { it.mark.isFlag() }
-                        )
-
-                        val wasEmpty = areaAdapter.itemCount == 0
-                        areaAdapter.bindField(list)
-                        if (wasEmpty) {
-                            focusOn(12)
-                        }
-
-                        if (tutorialState.value.completed) {
-                            gameViewModel.eventObserver.postValue(Event.FinishTutorial)
-                        }
-                    }
-                )
+//                field.observe(
+//                    viewLifecycleOwner,
+//                    { list ->
+//                        gameViewModel.stopClock()
+//                        gameViewModel.elapsedTimeSeconds.postValue(0L)
+//                        gameViewModel.mineCount.postValue(
+//                            list.count { it.hasMine }.coerceAtLeast(4) - list.count { it.mark.isFlag() }
+//                        )
+//
+//                        val wasEmpty = areaAdapter.itemCount == 0
+//                        areaAdapter.bindField(list)
+//                        if (wasEmpty) {
+//                            focusOn(12)
+//                        }
+//
+//                        if (tutorialState.value.completed) {
+//                            gameViewModel.eventObserver.postValue(Event.FinishTutorial)
+//                        }
+//                    }
+//                )
             }
         }
 

@@ -1,13 +1,13 @@
 package dev.lucasnlm.antimine.gdx.events
 
-sealed class GameEvent(
+sealed class GdxEvent(
     val id: Int,
 ) {
     class TouchUpEvent(
         id: Int,
-    ) : GameEvent(id)
+    ) : GdxEvent(id)
 
     class TouchDownEvent(
         id: Int,
-    ) : GameEvent(id)
+    ) : GdxEvent(id)
 }

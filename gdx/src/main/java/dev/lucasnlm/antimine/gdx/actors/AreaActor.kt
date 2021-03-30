@@ -12,7 +12,7 @@ import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.drawTexture
 import dev.lucasnlm.antimine.gdx.drawAsset
-import dev.lucasnlm.antimine.gdx.events.GameEvent
+import dev.lucasnlm.antimine.gdx.events.GdxEvent
 import dev.lucasnlm.antimine.gdx.scope
 import dev.lucasnlm.antimine.gdx.toGdxColor
 import dev.lucasnlm.antimine.gdx.toOppositeMax
@@ -28,7 +28,7 @@ class AreaActor(
     private var isPressed: Boolean = false,
     private val theme: AppTheme,
     private val squareDivider: Float = 0f,
-    private val onInputEvent: (GameEvent) -> Unit,
+    private val onInputEvent: (GdxEvent) -> Unit,
 ) : Actor() {
 
     init {
@@ -40,7 +40,7 @@ class AreaActor(
         addListener(object : InputListener() {
             override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int) {
                 super.touchUp(event, x, y, pointer, button)
-                onInputEvent(GameEvent.TouchUpEvent(area.id))
+                onInputEvent(GdxEvent.TouchUpEvent(area.id))
                 isPressed = false
                 toBack()
                 Gdx.graphics.requestRendering()
@@ -50,7 +50,7 @@ class AreaActor(
                 toFront()
                 GdxLocal.highlightAlpha = 0.45f
                 isPressed = true
-                onInputEvent(GameEvent.TouchDownEvent(area.id))
+                onInputEvent(GdxEvent.TouchDownEvent(area.id))
                 Gdx.graphics.requestRendering()
                 return true
             }

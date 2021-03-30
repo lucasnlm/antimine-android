@@ -14,7 +14,7 @@ import dev.lucasnlm.antimine.gdx.controller.CameraController
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
 import dev.lucasnlm.antimine.gdx.actors.AreaForm
-import dev.lucasnlm.antimine.gdx.events.GameEvent
+import dev.lucasnlm.antimine.gdx.events.GdxEvent
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
 import dev.lucasnlm.antimine.preferences.models.Minefield
@@ -39,7 +39,7 @@ class MinefieldStage(
     private var boundAreas = listOf<Area>()
 
     private var inputInit: Long = 0L
-    private val inputEvents: MutableList<GameEvent> = mutableListOf()
+    private val inputEvents: MutableList<GdxEvent> = mutableListOf()
 
     init {
         actionsRequestRendering = true
@@ -165,29 +165,29 @@ class MinefieldStage(
         Gdx.graphics.requestRendering()
     }
 
-    private fun handleGameEvent(gameEvent: GameEvent) {
-        if (inputEvents.firstOrNull { it.id != gameEvent.id } != null) {
+    private fun handleGameEvent(gdxEvent: GdxEvent) {
+        if (inputEvents.firstOrNull { it.id != gdxEvent.id } != null) {
             inputEvents.clear()
         }
 
-        if (inputEvents.firstOrNull { it is GameEvent.TouchUpEvent } == null) {
+        if (inputEvents.firstOrNull { it is GdxEvent.TouchUpEvent } == null) {
             inputInit = System.currentTimeMillis()
         }
 
-        if (gameEvent is GameEvent.TouchUpEvent && inputEvents.firstOrNull { it is GameEvent.TouchDownEvent } == null) {
+        if (gdxEvent is GdxEvent.TouchUpEvent && inputEvents.firstOrNull { it is GdxEvent.TouchDownEvent } == null) {
             // Ignore unpaired up event
             return
         }
 
-        inputEvents.add(gameEvent)
+        inputEvents.add(gdxEvent)
     }
 
     private fun checkGameInput(now: Long) {
         if (inputEvents.isNotEmpty()) {
             val dt = now - inputInit
 
-            val touchUpEvents = inputEvents.filterIsInstance<GameEvent.TouchUpEvent>()
-            val touchDownEvents = inputEvents.filterIsInstance<GameEvent.TouchDownEvent>()
+            val touchUpEvents = inputEvents.filterIsInstance<GdxEvent.TouchUpEvent>()
+            val touchDownEvents = inputEvents.filterIsInstance<GdxEvent.TouchDownEvent>()
 
             if (touchUpEvents.isNotEmpty()) {
                 if (touchUpEvents.size == touchDownEvents.size) {

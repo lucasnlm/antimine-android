@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -13,24 +12,18 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
-import androidx.core.text.bold
-import androidx.core.text.buildSpannedString
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import dev.lucasnlm.antimine.common.level.models.Event
-import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
@@ -39,7 +32,6 @@ import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.splash.SplashActivity
-import dev.lucasnlm.antimine.tutorial.view.TutorialCompleteDialogFragment
 import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
@@ -54,6 +46,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_tutorial_level.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
@@ -61,7 +54,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GameActivity :
     ThematicActivity(R.layout.activity_game),
-    DialogInterface.OnDismissListener,
     AndroidFragmentApplication.Callbacks {
 
     private val gameViewModel by viewModel<GameViewModel>()
@@ -75,15 +67,6 @@ class GameActivity :
     private val reviewWrapper: ReviewWrapper by inject()
     private val featureFlagManager: IFeatureFlagManager by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
-
-    private var status: Status = Status.PreGame
-    private var currentTime: Long = 0
-    private var currentSaveId: Long = 0
-
-    private val areaSizeMultiplier by lazy { preferencesRepository.squareSize() }
-    private val currentRadius by lazy { preferencesRepository.squareRadius() }
-    private val useHelp by lazy { preferencesRepository.useHelp() }
-
     private var gameToast: Toast? = null
 
     override fun onNewIntent(intent: Intent?) {
@@ -107,6 +90,7 @@ class GameActivity :
 
         if (!isPortrait()) {
             val decorView = window.decorView
+
             @Suppress("DEPRECATION")
             val uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
 
@@ -127,10 +111,6 @@ class GameActivity :
                 extras.containsKey(DIFFICULTY) -> {
                     val difficulty = extras.getSerializable(DIFFICULTY) as Difficulty
                     gameViewModel.startNewGame(difficulty)
-                }
-                extras.containsKey(START_TUTORIAL) -> {
-                    gameViewModel.startNewGame(Difficulty.Standard)
-                    gameViewModel.eventObserver.postValue(Event.StartTutorial)
                 }
                 extras.containsKey(RETRY_GAME) -> {
                     val uid = extras.getInt(RETRY_GAME)
@@ -166,136 +146,167 @@ class GameActivity :
     }
 
     private fun bindViewModel() = gameViewModel.apply {
-        Transformations
-            .distinctUntilChanged(eventObserver)
-            .observe(
-                this@GameActivity,
-                ::onGameEvent,
-            )
-
-        field.observe(
-            this@GameActivity,
-            { list ->
-                if (list.find { it.hasMine } != null) {
-                    tapToBegin.visibility = View.GONE
-                    controlsToast.visibility = View.GONE
-                } else {
+        lifecycleScope.launchWhenCreated {
+            observeState().collect {
+                if (it.turn == 0 && it.saveId == 0L) {
                     val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
-                    tapToBegin.visibility = View.VISIBLE
-                    tapToBegin.backgroundTintList = tint
+                    tapToBegin.apply {
+                        visibility = View.VISIBLE
+                        backgroundTintList = tint
+                    }
+                } else {
+                    tapToBegin.visibility = View.GONE
+                }
 
-                    gameViewModel.getControlDescription(applicationContext)?.let {
-
-
-
+                if (it.turn < 3 && it.saveId == 0L) {
+                    val color = usingTheme.palette.covered.toAndroidColor(168)
+                    val tint = ColorStateList.valueOf(color)
+                    gameViewModel.getControlDescription(applicationContext)?.let { text ->
                         controlsToast.visibility = View.VISIBLE
                         controlsToast.backgroundTintList = tint
-                        controlsToast.text = it
+                        controlsToast.text = text
                     }
+                } else {
+                    controlsToast.visibility = View.GONE
                 }
-            }
-        )
 
-        retryObserver.observe(
-            this@GameActivity,
-            {
-                lifecycleScope.launch {
-                    gameViewModel.retryGame(currentSaveId.toInt())
-                }
-            }
-        )
-
-        continueObserver.observe(
-            this@GameActivity,
-            {
-                lifecycleScope.launch {
-                    gameViewModel.onContinueFromGameOver()
-                    eventObserver.postValue(Event.ResumeGame)
-                }
-            }
-        )
-
-        shareObserver.observe(
-            this@GameActivity,
-            {
-                shareCurrentGame()
-            }
-        )
-
-        elapsedTimeSeconds.observe(
-            this@GameActivity,
-            {
                 timer.apply {
-                    visibility = if (it == 0L) View.GONE else View.VISIBLE
-                    text = DateUtils.formatElapsedTime(it)
+                    visibility = if (it.timestamp == 0L) View.GONE else View.VISIBLE
+                    text = DateUtils.formatElapsedTime(it.timestamp)
                 }
-                currentTime = it
-            }
-        )
 
-        mineCount.observe(
-            this@GameActivity,
-            {
                 minesCount.apply {
-                    if (it < 0) {
+                    if (it.mineCount < 0) {
                         text.toString().toIntOrNull()?.let { oldValue ->
-                            if (oldValue > it) {
+                            if (oldValue > it.mineCount) {
                                 startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
                             }
                         }
                     }
 
                     visibility = View.VISIBLE
-                    text = it.toString()
+                    text = it.mineCount.toString()
+                }
+
+                tipsCounter.text = it.tips.toString()
+
+                if (!it.isGameCompleted && it.useHelp) {
+                    refreshTipShortcutIcon()
+                } else {
+                    refreshRetryShortcut(it.hasMines)
+                }
+
+                if (it.isActive) {
+                    gameToast?.cancel()
+                }
+
+                keepScreenOn(it.isActive)
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            gameViewModel.observeSideEffects().collect {
+                when (it) {
+                    is GameEvent.ShareGame -> {
+                        shareCurrentGame()
+                    }
+                    is GameEvent.ShowNewGameDialog -> {
+                        lifecycleScope.launch {
+                            GameOverDialogFragment.newInstance(
+                                gameResult = GameResult.Completed,
+                                showContinueButton = gameViewModel.hasUnknownMines(),
+                                rightMines = 0,
+                                totalMines = 0,
+                                time = singleState().timestamp,
+                                received = 0,
+                            ).run {
+                                showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
+                            }
+                        }
+                    }
+                    is GameEvent.VictoryDialog -> {
+                        if (preferencesRepository.showWindowsWhenFinishGame()) {
+                            lifecycleScope.launch {
+                                delay(it.delayToShow)
+                                WinGameDialogFragment.newInstance(
+                                    gameResult = GameResult.Victory,
+                                    showContinueButton = false,
+                                    rightMines = it.rightMines,
+                                    totalMines = it.totalMines,
+                                    time = it.timestamp,
+                                    received = it.receivedTips,
+                                ).run {
+                                    showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
+                                }
+                            }
+                        } else {
+                            showEndGameToast(GameResult.Victory)
+                        }
+                    }
+                    is GameEvent.GameOverDialog -> {
+                        if (preferencesRepository.showWindowsWhenFinishGame()) {
+                            lifecycleScope.launch {
+                                delay(it.delayToShow)
+                                GameOverDialogFragment.newInstance(
+                                    gameResult = GameResult.GameOver,
+                                    showContinueButton = true,
+                                    rightMines = it.rightMines,
+                                    totalMines = it.totalMines,
+                                    time = it.timestamp,
+                                    received = it.receivedTips,
+                                ).run {
+                                    showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
+                                }
+                            }
+                        } else {
+                            showEndGameToast(GameResult.GameOver)
+                        }
+                    }
+                    is GameEvent.GameCompleteDialog -> {
+                        if (preferencesRepository.showWindowsWhenFinishGame()) {
+                            lifecycleScope.launch {
+                                delay(it.delayToShow)
+                                GameOverDialogFragment.newInstance(
+                                    gameResult = GameResult.Completed,
+                                    showContinueButton = false,
+                                    rightMines = it.rightMines,
+                                    totalMines = it.totalMines,
+                                    time = it.timestamp,
+                                    received = it.receivedTips,
+                                ).run {
+                                    showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
+                                }
+                            }
+                        } else {
+                            showEndGameToast(GameResult.Completed)
+                        }
+                    }
+                    else -> {
+                        // Empty
+                    }
                 }
             }
-        )
-
-        saveId.observe(
-            this@GameActivity,
-            {
-                currentSaveId = it
-            }
-        )
-
-        tips.observe(
-            this@GameActivity,
-            {
-                tipsCounter.text = it.toString()
-            }
-        )
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        val willReset = restartIfNeed()
-        if (!willReset) {
-            if (status == Status.Running) {
-                gameViewModel.run {
-                    refreshUserPreferences()
-                    resumeGame()
-                }
-
-                analyticsManager.sentEvent(Analytics.Resume)
-            }
-        }
-
+        analyticsManager.sentEvent(Analytics.Resume)
         keepScreenOn(true)
+        gameViewModel.resumeGame()
     }
 
     override fun onPause() {
         super.onPause()
         keepScreenOn(false)
 
-        if (status == Status.Running) {
-            gameViewModel.pauseGame()
-        }
-
         cloudSaveManager.uploadSave()
 
         if (isFinishing) {
             analyticsManager.sentEvent(Analytics.Quit)
+        } else if (gameViewModel.singleState().isActive) {
+            gameViewModel.pauseGame()
         }
     }
 
@@ -349,23 +360,6 @@ class GameActivity :
         }
     }
 
-    private fun disableShortcutIcon(hide: Boolean = false) {
-        tipsCounter.visibility = View.GONE
-        shortcutIcon.apply {
-            visibility = if (hide) View.GONE else View.VISIBLE
-            isClickable = false
-            animate().alpha(0.3f).start()
-        }
-    }
-
-    private fun refreshInGameShortcut() {
-        if (preferencesRepository.useHelp()) {
-            refreshTipShortcutIcon()
-        } else {
-            refreshRetryShortcut()
-        }
-    }
-
     private fun refreshTipShortcutIcon() {
         tipsCounter.apply {
             visibility = View.VISIBLE
@@ -408,14 +402,14 @@ class GameActivity :
         }
     }
 
-    private fun refreshRetryShortcut() {
+    private fun refreshRetryShortcut(enabled: Boolean) {
         shortcutIcon.apply {
             TooltipCompat.setTooltipText(this, getString(R.string.new_game))
             setImageResource(R.drawable.retry)
             setColorFilter(minesCount.currentTextColor)
             setOnClickListener {
                 lifecycleScope.launch {
-                    val confirmResign = status == Status.Running
+                    val confirmResign = gameViewModel.singleState().isActive
                     analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
 
                     if (confirmResign) {
@@ -431,15 +425,12 @@ class GameActivity :
 
         tipsCounter.visibility = View.GONE
         shortcutIcon.apply {
-            when (status) {
-                is Status.Over, is Status.Running -> {
-                    isClickable = true
-                    animate().alpha(1.0f).start()
-                }
-                else -> {
-                    isClickable = false
-                    animate().alpha(0.3f).start()
-                }
+            if (enabled) {
+                isClickable = true
+                animate().alpha(1.0f).start()
+            } else {
+                isClickable = false
+                animate().alpha(0.3f).start()
             }
         }
     }
@@ -459,11 +450,7 @@ class GameActivity :
 
     private fun loadGameOrTutorial() {
         if (!isFinishing) {
-            if (!preferencesRepository.isTutorialCompleted()) {
-                loadGameTutorial()
-            } else {
-                loadGameFragment()
-            }
+            loadGameFragment()
         }
     }
 
@@ -486,25 +473,6 @@ class GameActivity :
         }
     }
 
-    private fun loadGameTutorial() {
-        disableShortcutIcon(false)
-
-        supportFragmentManager.apply {
-            findFragmentById(R.id.levelContainer)?.let { it ->
-                beginTransaction().apply {
-                    remove(it)
-                    commitAllowingStateLoss()
-                }
-            }
-
-            beginTransaction().apply {
-                replace(R.id.levelContainer, TutorialLevelFragment(), TutorialLevelFragment.TAG)
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                commitAllowingStateLoss()
-            }
-        }
-    }
-
     private fun newGameConfirmation(action: () -> Unit) {
         MaterialAlertDialogBuilder(this).apply {
             setTitle(R.string.new_game)
@@ -512,47 +480,6 @@ class GameActivity :
             setPositiveButton(R.string.resume) { _, _ -> action() }
             setNegativeButton(R.string.cancel, null)
             show()
-        }
-    }
-
-    private fun showCompletedTutorialDialog() {
-        TutorialCompleteDialogFragment().run {
-            showAllowingStateLoss(supportFragmentManager, TutorialCompleteDialogFragment.TAG)
-        }
-    }
-
-    private fun showEndGameDialog(gameResult: GameResult, canContinue: Boolean) {
-        val currentGameStatus = status
-        if (currentGameStatus is Status.Over && !isFinishing) {
-            if (supportFragmentManager.findFragmentByTag(GameOverDialogFragment.TAG) == null &&
-                supportFragmentManager.findFragmentByTag(WinGameDialogFragment.TAG) == null
-            ) {
-                val score = currentGameStatus.score
-
-                if (gameResult == GameResult.Victory) {
-                    WinGameDialogFragment.newInstance(
-                        gameResult,
-                        canContinue,
-                        score?.rightMines ?: 0,
-                        score?.totalMines ?: 0,
-                        currentGameStatus.time,
-                        2
-                    ).apply {
-                        showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
-                    }
-                } else {
-                    GameOverDialogFragment.newInstance(
-                        gameResult,
-                        canContinue,
-                        score?.rightMines ?: 0,
-                        score?.totalMines ?: 0,
-                        currentGameStatus.time,
-                        1
-                    ).apply {
-                        showAllowingStateLoss(supportFragmentManager, GameOverDialogFragment.TAG)
-                    }
-                }
-            }
         }
     }
 
@@ -571,145 +498,9 @@ class GameActivity :
         }
     }
 
-    private fun showEndGameAlert(gameResult: GameResult, canContinue: Boolean) {
-        val canShowWindow = preferencesRepository.showWindowsWhenFinishGame()
-        if (!isFinishing) {
-            if (canShowWindow) {
-                showEndGameDialog(gameResult, gameResult == GameResult.GameOver && canContinue)
-            } else {
-                if (gameResult == GameResult.GameOver) {
-                    gameViewModel.viewModelScope.launch {
-                        gameViewModel.revealMines()
-                    }
-                } else {
-                    gameViewModel.viewModelScope.launch {
-                        gameViewModel.flagAllMines()
-                    }
-                }
-
-                showEndGameToast(gameResult)
-            }
-        }
-    }
-
-    private fun waitAndShowEndGameAlert(gameResult: GameResult, await: Boolean, canContinue: Boolean) {
-        if (await && gameViewModel.explosionDelay() != 0L) {
-            lifecycleScope.launch {
-                delay((gameViewModel.explosionDelay() * 0.3).toLong())
-                showEndGameAlert(gameResult, canContinue)
-            }
-        } else {
-            showEndGameAlert(gameResult, canContinue)
-        }
-    }
-
-    private fun onGameEvent(event: Event) {
-        when (event) {
-            Event.ResumeGame -> {
-                status = Status.Running
-                refreshInGameShortcut()
-            }
-            Event.StartNewGame -> {
-                gameToast?.cancel()
-                status = Status.PreGame
-                disableShortcutIcon()
-            }
-            Event.Resume, Event.Running -> {
-                status = Status.Running
-                gameViewModel.runClock()
-                refreshInGameShortcut()
-                keepScreenOn(true)
-            }
-            Event.StartTutorial -> {
-                status = Status.PreGame
-                gameViewModel.stopClock()
-                disableShortcutIcon(false)
-                loadGameTutorial()
-            }
-            Event.FinishTutorial -> {
-                preferencesRepository.setCompleteTutorial(true)
-                gameViewModel.startNewGame(Difficulty.Beginner)
-                disableShortcutIcon()
-                status = Status.Over(0, Score(4, 4, 25))
-                analyticsManager.sentEvent(Analytics.TutorialCompleted)
-                showCompletedTutorialDialog()
-            }
-            Event.Victory -> {
-                val isResuming = (status == Status.PreGame)
-                val score = gameViewModel.getScore()
-                status = Status.Over(currentTime, score)
-                gameViewModel.stopClock()
-                gameViewModel.showAllEmptyAreas()
-                gameViewModel.victory()
-                refreshRetryShortcut()
-                keepScreenOn(false)
-
-                if (!isResuming) {
-                    lifecycleScope.launch {
-                        gameViewModel.saveGame()
-                        gameViewModel.saveStats()
-                    }
-
-                    if (gameViewModel.isCompletedWithMistakes()) {
-                        gameViewModel.addNewTip(1)
-                    } else {
-                        gameViewModel.addNewTip(2)
-                    }
-
-                    waitAndShowEndGameAlert(
-                        gameResult = GameResult.Victory,
-                        await = false,
-                        canContinue = false,
-                    )
-                }
-            }
-            Event.GameOver -> {
-                val isResuming = (status == Status.PreGame)
-                val score = gameViewModel.getScore()
-                status = Status.Over(currentTime, score)
-                refreshRetryShortcut()
-                keepScreenOn(false)
-                gameViewModel.stopClock()
-
-                if (!isResuming) {
-                    val isGameCompleted = gameViewModel.isCompletedWithMistakes()
-                    lifecycleScope.launch {
-                        gameViewModel.gameOver(isResuming, !isGameCompleted)
-                        gameViewModel.saveGame()
-                        waitAndShowEndGameAlert(
-                            gameResult = if (isGameCompleted) GameResult.Completed else GameResult.GameOver,
-                            await = true,
-                            canContinue = gameViewModel.hasUnknownMines(),
-                        )
-                    }
-                }
-            }
-            else -> {
-            }
-        }
-    }
-
-    /**
-     * If user change any accessibility preference, the game will restart the activity to
-     * apply these changes.
-     */
-    private fun restartIfNeed(): Boolean {
-        return (
-            areaSizeMultiplier != preferencesRepository.squareSize() ||
-                currentRadius != preferencesRepository.squareRadius() ||
-                useHelp != preferencesRepository.useHelp()
-            ).also {
-            if (it) {
-                finish()
-                startActivity(intent)
-                overridePendingTransition(0, 0)
-            }
-        }
-    }
-
     private fun shareCurrentGame() {
-        val levelSetup = gameViewModel.levelSetup.value
-        val field = gameViewModel.field.value
+        val levelSetup = gameViewModel.singleState().minefield
+        val field = gameViewModel.singleState().field
         lifecycleScope.launch {
             shareViewModel.shareField(levelSetup, field)
         }
@@ -723,13 +514,6 @@ class GameActivity :
         }
     }
 
-    override fun onDismiss(dialog: DialogInterface?) {
-        gameViewModel.run {
-            refreshUserPreferences()
-            resumeGame()
-        }
-    }
-
     override fun exit() {
         // LibGDX exit callback
     }
@@ -738,7 +522,6 @@ class GameActivity :
         val TAG = GameActivity::class.simpleName
 
         const val DIFFICULTY = "difficulty"
-        const val START_TUTORIAL = "start_tutorial"
         const val START_GAME = "start_game"
         const val RETRY_GAME = "retry_game"
     }

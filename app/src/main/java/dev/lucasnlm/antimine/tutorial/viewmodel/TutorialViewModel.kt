@@ -74,7 +74,7 @@ class TutorialViewModel(
     private val focusSideEffect = ConflatedBroadcastChannel(12)
 
     init {
-        field.postValue(TutorialField.getStep0())
+        //field.postValue(TutorialField.getStep0())
         analyticsManager.sentEvent(Analytics.TutorialStarted)
     }
 
@@ -111,7 +111,7 @@ class TutorialViewModel(
         completed: Boolean = false,
         focusOn: Int
     ) {
-        field.postValue(step)
+        //field.postValue(step)
         clock.stop()
         tutorialState.value = tutorialState.value.copy(
             completed = completed,

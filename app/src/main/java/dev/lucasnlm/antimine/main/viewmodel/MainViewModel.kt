@@ -129,14 +129,6 @@ class MainViewModel(
     }
 
     private fun startTutorial() {
-        val intent = Intent(context, GameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            val bundle = Bundle().apply {
-                putBoolean(GameActivity.START_TUTORIAL, true)
-            }
 
-            putExtras(bundle)
-        }
-        context.startActivity(intent)
     }
 }

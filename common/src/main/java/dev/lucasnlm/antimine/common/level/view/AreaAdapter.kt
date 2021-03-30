@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.VelocityTracker
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.AreaPaintSettings
@@ -127,7 +128,7 @@ class AreaAdapter(
                                     viewModel.onDoubleClick(it)
                                 },
                                 actionOnDisabled = {
-                                    viewModel.onInteractOnDisabled()
+                                    viewModel.sendEvent(GameEvent.ShowNewGameDialog)
                                 }
                             )
                         }
@@ -143,7 +144,7 @@ class AreaAdapter(
                                     viewModel.onSingleClick(it)
                                 },
                                 actionOnDisabled = {
-                                    viewModel.onInteractOnDisabled()
+                                    viewModel.sendEvent(GameEvent.ShowNewGameDialog)
                                 }
                             )
                         }
@@ -189,7 +190,7 @@ class AreaAdapter(
                                         viewModel.onLongClick(it)
                                     },
                                     actionOnDisabled = {
-                                        viewModel.onInteractOnDisabled()
+                                        viewModel.sendEvent(GameEvent.ShowNewGameDialog)
                                     }
                                 )
                                 longClickJob = null
@@ -222,7 +223,7 @@ class AreaAdapter(
                                         viewModel.onSingleClick(it)
                                     },
                                     actionOnDisabled = {
-                                        viewModel.onInteractOnDisabled()
+                                        viewModel.sendEvent(GameEvent.ShowNewGameDialog)
                                     }
                                 )
                             } ?: false
@@ -248,7 +249,7 @@ class AreaAdapter(
                                         viewModel.onLongClick(it)
                                     },
                                     actionOnDisabled = {
-                                        viewModel.onInteractOnDisabled()
+                                        viewModel.sendEvent(GameEvent.ShowNewGameDialog)
                                     }
                                 )
                                 longClickJob = null
@@ -266,7 +267,7 @@ class AreaAdapter(
                                         viewModel.onSingleClick(it)
                                     },
                                     actionOnDisabled = {
-                                        viewModel.onInteractOnDisabled()
+                                        viewModel.sendEvent(GameEvent.ShowNewGameDialog)
                                     }
                                 )
                             }

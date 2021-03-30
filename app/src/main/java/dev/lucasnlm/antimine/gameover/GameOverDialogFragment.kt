@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.gameover.model.GameResult
@@ -122,7 +123,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 ) {
                                     showAdsAndContinue()
                                 } else {
-                                    gameViewModel.continueObserver.postValue(Unit)
+                                    gameViewModel.sendEvent(GameEvent.ContinueGame)
                                     dismissAllowingStateLoss()
                                 }
                             }
@@ -208,7 +209,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
     }
 
     private fun continueGame() {
-        gameViewModel.continueObserver.postValue(Unit)
+        gameViewModel.sendEvent(GameEvent.ContinueGame)
         dismissAllowingStateLoss()
     }
 

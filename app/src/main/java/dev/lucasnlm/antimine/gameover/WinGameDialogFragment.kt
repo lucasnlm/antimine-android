@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.gameover.model.GameResult
@@ -156,8 +157,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                 } else {
                                     shareButton.apply {
                                         setOnClickListener {
-                                            analyticsManager.sentEvent(Analytics.ShareGame)
-                                            gameViewModel.shareObserver.postValue(Unit)
+                                            gameViewModel.sendEvent(GameEvent.ShareGame)
                                         }
                                     }
                                 }
