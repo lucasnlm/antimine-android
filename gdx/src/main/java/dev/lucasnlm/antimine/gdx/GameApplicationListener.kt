@@ -79,6 +79,7 @@ class GameApplicationListener(
 
     private val minefieldInputController = GameInputController(
         onChangeZoom = {
+            GdxLocal.zoom = it
             minefieldStage?.changeZoom(it)
         }
     )

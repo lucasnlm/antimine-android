@@ -111,7 +111,7 @@ class AreaActor(
     override fun draw(unsafeBatch: Batch?, parentAlpha: Float) {
         super.draw(unsafeBatch, parentAlpha)
 
-        val internalPadding = squareDivider
+        val internalPadding = squareDivider / GdxLocal.zoom
         val isAboveOthers = isPressed
 
         unsafeBatch?.scope { batch, textures ->

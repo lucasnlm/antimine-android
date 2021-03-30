@@ -11,7 +11,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
-import dev.lucasnlm.antimine.control.ControlDialogFragment
+import dev.lucasnlm.antimine.control.ControlActivity
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
@@ -326,11 +326,8 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     }
 
     private fun showControlDialog() {
-        if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
-            ControlDialogFragment().apply {
-                show(supportFragmentManager, ControlDialogFragment.TAG)
-            }
-        }
+        val intent = Intent(this, ControlActivity::class.java)
+        startActivity(intent)
     }
 
     private fun showGooglePlayGames() {

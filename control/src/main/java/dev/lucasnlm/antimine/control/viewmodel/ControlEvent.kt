@@ -6,4 +6,14 @@ sealed class ControlEvent {
     data class SelectControlStyle(
         val controlStyle: ControlStyle,
     ) : ControlEvent()
+
+    object Reset : ControlEvent()
+
+    data class UpdateTouchSensibility(
+        val value: Int,
+    ) : ControlEvent()
+
+    data class UpdateLongPress(
+        val value: Int,
+    ) : ControlEvent()
 }

@@ -24,17 +24,22 @@ class PreferencesRepository(
         }
     }
 
+    override fun resetControls() {
+        preferencesManager.apply {
+            removeKey(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY)
+            removeKey(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT)
+        }
+    }
+
     override fun reset() {
         preferencesManager.apply {
-            putBoolean(PreferenceKeys.PREFERENCE_ASSISTANT, true)
-            putBoolean(PreferenceKeys.PREFERENCE_VIBRATION, true)
-            putBoolean(PreferenceKeys.PREFERENCE_ANIMATION, true)
-            putBoolean(PreferenceKeys.PREFERENCE_QUESTION_MARK, false)
-            putBoolean(PreferenceKeys.PREFERENCE_SOUND_EFFECTS, false)
-            putInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 3)
-            putInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50)
-            putInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, 35)
-            putInt(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT, longPressTimeout())
+            removeKey(PreferenceKeys.PREFERENCE_ASSISTANT)
+            removeKey(PreferenceKeys.PREFERENCE_VIBRATION)
+            removeKey(PreferenceKeys.PREFERENCE_ANIMATION)
+            removeKey(PreferenceKeys.PREFERENCE_QUESTION_MARK)
+            removeKey(PreferenceKeys.PREFERENCE_SOUND_EFFECTS)
+            removeKey(PreferenceKeys.PREFERENCE_SQUARE_RADIUS)
+            removeKey(PreferenceKeys.PREFERENCE_AREA_SIZE)
         }
     }
 

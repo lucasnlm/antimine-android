@@ -30,7 +30,7 @@ class ControlViewModelTest {
     }
 
     private fun ControlViewModel.selectedControlStyle() = singleState().let {
-        it.gameControls[it.selectedIndex].controlStyle
+        it.controls[it.selectedIndex].controlStyle
     }
 
     @Test

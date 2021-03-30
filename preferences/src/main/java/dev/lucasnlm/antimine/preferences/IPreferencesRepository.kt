@@ -6,6 +6,7 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 interface IPreferencesRepository {
     fun hasCustomizations(): Boolean
     fun reset()
+    fun resetControls()
 
     fun customGameMode(): Minefield
     fun updateCustomGameMode(minefield: Minefield)
