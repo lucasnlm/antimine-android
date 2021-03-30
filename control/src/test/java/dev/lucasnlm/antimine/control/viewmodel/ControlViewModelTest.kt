@@ -29,18 +29,16 @@ class ControlViewModelTest {
         Dispatchers.resetMain()
     }
 
-    private fun ControlViewModel.selectedControlStyle() = singleState().let {
-        it.controls[it.selectedIndex].controlStyle
-    }
-
     @Test
     fun testInitialValue() {
         val preferenceRepository: IPreferencesRepository = mockk {
             every { controlStyle() } returns ControlStyle.DoubleClick
+            every { touchSensibility() } returns 10
+            every { customLongPressTimeout() } returns 500L
         }
 
         val viewModel = ControlViewModel(preferenceRepository)
-        assertEquals(ControlStyle.DoubleClick, viewModel.selectedControlStyle())
+        assertEquals(ControlStyle.DoubleClick, viewModel.singleState().selected)
     }
 
     @Test
@@ -55,7 +53,7 @@ class ControlViewModelTest {
                 ControlStyle.FastFlag
             )
         )
-        assertEquals(ControlStyle.FastFlag, viewModel.selectedControlStyle())
+        assertEquals(ControlStyle.FastFlag, viewModel.singleState().selected)
         verify { preferenceRepository.useControlStyle(ControlStyle.FastFlag) }
     }
 }
