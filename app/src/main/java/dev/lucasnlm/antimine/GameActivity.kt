@@ -27,7 +27,7 @@ import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
-import dev.lucasnlm.antimine.level.view.GdxLevelFragment
+import dev.lucasnlm.antimine.common.level.view.GdxLevelFragment
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.share.ShareManager

@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.gdx.stages
 
 import android.util.SizeF
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.scenes.scene2d.Group
@@ -25,6 +26,7 @@ class MinefieldStage(
     private val onSingleTap: (Int) -> Unit,
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTouch: (Int) -> Unit,
+    private val forceFocus: Boolean,
 ) : Stage() {
     private var minefield: Minefield? = null
     private var minefieldSize: SizeF? = null
@@ -182,7 +184,56 @@ class MinefieldStage(
         inputEvents.add(gdxEvent)
     }
 
-    private fun checkGameInput(now: Long) {
+    private fun checkGameInput() {
+        val minefield = this.minefield
+        val boundAreas = this.boundAreas
+        val currentFocus = GdxLocal.currentFocus
+
+        if (currentFocus != null && currentFocus.id >= boundAreas.size) {
+            GdxLocal.currentFocus = null
+        }
+
+        if (minefield != null && currentFocus == null && forceFocus) {
+            val id = minefield.width * (minefield.height / 2) + minefield.width / 2
+            GdxLocal.currentFocus = boundAreas[id]
+        } else if (minefield != null && currentFocus != null) {
+            var next: Area? = null
+
+            val up = Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.DPAD_UP)
+            val down = Gdx.input.isKeyJustPressed(Input.Keys.DOWN) || Gdx.input.isKeyJustPressed(Input.Keys.DPAD_DOWN)
+            val left = Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) || Gdx.input.isKeyJustPressed(Input.Keys.DPAD_RIGHT)
+            val right = Gdx.input.isKeyJustPressed(Input.Keys.LEFT) || Gdx.input.isKeyJustPressed(Input.Keys.DPAD_LEFT)
+
+            when {
+                down -> {
+                    next = boundAreas.firstOrNull {
+                        it.posX == currentFocus.posX && it.posY == (currentFocus.posY - 1)
+                    }
+                }
+                up -> {
+                    next = boundAreas.firstOrNull {
+                        it.posX == currentFocus.posX && it.posY == (currentFocus.posY + 1)
+                    }
+                }
+                left -> {
+                    next = boundAreas.firstOrNull {
+                        it.posX == (currentFocus.posX + 1) && it.posY == currentFocus.posY
+                    }
+                }
+                right -> {
+                    next = boundAreas.firstOrNull {
+                        it.posX == (currentFocus.posX - 1) && it.posY == currentFocus.posY
+                    }
+                }
+            }
+
+            if (next != null) {
+                GdxLocal.currentFocus = next
+            }
+        }
+    }
+
+    private fun checkGameTouchInput(now: Long) {
         if (inputEvents.isNotEmpty()) {
             val dt = now - inputInit
 
@@ -235,7 +286,9 @@ class MinefieldStage(
     override fun act() {
         super.act()
 
-        checkGameInput(System.currentTimeMillis())
+        checkGameInput()
+
+        checkGameTouchInput(System.currentTimeMillis())
 
         // Handle camera movement
         minefieldSize?.let { cameraController.act(it) }

@@ -10,11 +10,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.wear.ambient.AmbientModeSupport
 import androidx.wear.ambient.AmbientModeSupport.AmbientCallback
 import androidx.wear.ambient.AmbientModeSupport.EXTRA_LOWBIT_AMBIENT
+import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.models.AmbientSettings
 import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.utils.Clock
+import dev.lucasnlm.antimine.common.level.view.GdxLevelFragment
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
@@ -26,11 +28,14 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientModeSupport.AmbientCallbackProvider {
+class WatchGameActivity :
+    AppCompatActivity(R.layout.activity_level),
+    AmbientModeSupport.AmbientCallbackProvider,
+    AndroidFragmentApplication.Callbacks {
+
     private val viewModel by viewModel<GameViewModel>()
     private val preferencesRepository: IPreferencesRepository by inject()
 
-    private var currentLevelFragment: WatchLevelFragment? = null
     private val clock = Clock()
     private var lastShownTime: String? = null
     private var status: Status = Status.PreGame
@@ -38,23 +43,23 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
     private var ambientMode: AmbientCallback = object : AmbientCallback() {
         override fun onExitAmbient() {
             super.onExitAmbient()
-            currentLevelFragment?.setAmbientMode(
-                AmbientSettings(
-                    isAmbientMode = false,
-                    isLowBitAmbient = false,
-                )
-            )
+//            currentLevelFragment?.setAmbientMode(
+//                AmbientSettings(
+//                    isAmbientMode = false,
+//                    isLowBitAmbient = false,
+//                )
+//            )
         }
 
         override fun onEnterAmbient(ambientDetails: Bundle?) {
             super.onEnterAmbient(ambientDetails)
             val lowBit = ambientDetails?.getBoolean(EXTRA_LOWBIT_AMBIENT) ?: true
-            currentLevelFragment?.setAmbientMode(
-                AmbientSettings(
-                    true,
-                    lowBit,
-                )
-            )
+//            currentLevelFragment?.setAmbientMode(
+//                AmbientSettings(
+//                    true,
+//                    lowBit,
+//                )
+//            )
             updateClockText(true)
         }
     }
@@ -63,9 +68,8 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
         super.onCreate(savedInstanceState)
         AmbientModeSupport.attach(this)
 
-        bindViewModel()
         preferencesRepository.updateCustomGameMode(Minefield(12, 12, 25))
-
+        bindViewModel()
         loadGameFragment()
         viewModel.startNewGame(Difficulty.Custom)
 
@@ -96,51 +100,35 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
     }
 
     private fun loadGameFragment() {
-        val fragmentManager = supportFragmentManager
-
-        fragmentManager.popBackStack()
-
-        fragmentManager.findFragmentById(R.id.level_container)?.let { it ->
-            fragmentManager.beginTransaction().apply {
-                remove(it)
-                commitAllowingStateLoss()
-            }
-        }
-
-        val levelFragment = WatchLevelFragment()
-
-        fragmentManager.beginTransaction().apply {
-            replace(R.id.level_container, levelFragment)
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.level_container, GdxLevelFragment())
             commitAllowingStateLoss()
         }
-
-        currentLevelFragment = levelFragment
     }
 
     private fun bindViewModel() = viewModel.apply {
-        eventObserver.observe(
-            this@WatchGameActivity,
-            {
-                onGameEvent(it)
-            }
-        )
-
-        elapsedTimeSeconds.observe(
-            this@WatchGameActivity,
-            {
-                // Nothing
-            }
-        )
-
-        mineCount.observe(
-            this@WatchGameActivity,
-            {
-                if (it > 0) {
-                    messageText.text = applicationContext.getString(R.string.mines_remaining, it)
-                }
-            }
-        )
+//        eventObserver.observe(
+//            this@WatchGameActivity,
+//            {
+//                onGameEvent(it)
+//            }
+//        )
+//
+//        elapsedTimeSeconds.observe(
+//            this@WatchGameActivity,
+//            {
+//                // Nothing
+//            }
+//        )
+//
+//        mineCount.observe(
+//            this@WatchGameActivity,
+//            {
+//                if (it > 0) {
+//                    messageText.text = applicationContext.getString(R.string.mines_remaining, it)
+//                }
+//            }
+//        )
     }
 
     private fun onGameEvent(event: Event) {
@@ -189,4 +177,8 @@ class WatchGameActivity : AppCompatActivity(R.layout.activity_level), AmbientMod
     }
 
     override fun getAmbientCallback(): AmbientCallback = ambientMode
+
+    override fun exit() {
+        // LibGDX exit callback
+    }
 }

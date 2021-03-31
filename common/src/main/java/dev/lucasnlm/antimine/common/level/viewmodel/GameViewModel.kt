@@ -4,12 +4,10 @@ import android.content.Context
 import android.text.SpannedString
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
-import androidx.lifecycle.MutableLiveData
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
-import dev.lucasnlm.antimine.common.level.models.Event
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository

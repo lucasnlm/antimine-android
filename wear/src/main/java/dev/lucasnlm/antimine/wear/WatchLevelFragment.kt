@@ -35,46 +35,46 @@ class WatchLevelFragment : CommonLevelFragment(R.layout.fragment_level) {
                 }
             }
         }
-
-        gameViewModel.run {
-            field.observe(
-                viewLifecycleOwner,
-                {
-                    areaAdapter.bindField(it)
-                }
-            )
-
-            levelSetup.observe(
-                viewLifecycleOwner,
-                {
-                    getView()?.let { view ->
-                        setupRecyclerViewSize(view, it)
-                    }
-                }
-            )
-
-            eventObserver.observe(
-                viewLifecycleOwner,
-                {
-                    if (!gameViewModel.hasPlantedMines()) {
-                        recyclerGrid.post {
-                            levelSetup.value?.let { minefield ->
-                                val size = dimensionRepository.areaSizeWithPadding()
-                                val dx = minefield.width * size * 0.25f
-                                val dy = minefield.height * size * 0.25f
-                                recyclerGrid.smoothScrollBy(dx.toInt(), dy.toInt(), null, 200)
-                            }
-                        }
-                    }
-
-                    when (it) {
-                        Event.GameOver,
-                        Event.Victory -> areaAdapter.setClickEnabled(false)
-                        else -> areaAdapter.setClickEnabled(true)
-                    }
-                }
-            )
-        }
+//
+//        gameViewModel.run {
+////            field.observe(
+////                viewLifecycleOwner,
+////                {
+////                    areaAdapter.bindField(it)
+////                }
+////            )
+////
+////            levelSetup.observe(
+////                viewLifecycleOwner,
+////                {
+////                    getView()?.let { view ->
+////                        setupRecyclerViewSize(view, it)
+////                    }
+////                }
+////            )
+////
+////            eventObserver.observe(
+////                viewLifecycleOwner,
+////                {
+////                    if (!gameViewModel.hasPlantedMines()) {
+////                        recyclerGrid.post {
+////                            levelSetup.value?.let { minefield ->
+////                                val size = dimensionRepository.areaSizeWithPadding()
+////                                val dx = minefield.width * size * 0.25f
+////                                val dy = minefield.height * size * 0.25f
+////                                recyclerGrid.smoothScrollBy(dx.toInt(), dy.toInt(), null, 200)
+////                            }
+////                        }
+////                    }
+////
+////                    when (it) {
+////                        Event.GameOver,
+////                        Event.Victory -> areaAdapter.setClickEnabled(false)
+////                        else -> areaAdapter.setClickEnabled(true)
+////                    }
+////                }
+////            )
+//        }
     }
 
     fun setAmbientMode(ambientSettings: AmbientSettings) {

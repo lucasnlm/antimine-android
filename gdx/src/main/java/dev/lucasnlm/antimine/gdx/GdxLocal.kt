@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.gdx
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
+import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.models.GameTextures
 
 // The references are held in public static fields which allows static access to all sub systems. Do not
@@ -10,12 +11,13 @@ import dev.lucasnlm.antimine.gdx.models.GameTextures
 object GdxLocal {
     var textureAtlas: TextureAtlas? = null
     var gameTextures: GameTextures? = null
-    var focusResizeLevel = 1.15f
     var hasHighlightAreas = false
     var highlightAlpha = 0.0f
     var zoom = 1.0f
 
     const val qualityZoomLevel = 0
+
+    var currentFocus: Area? = null
 
     // Global animation scale, it defines how fast/slow all animations must be executed.
     var animationScale: Float = 1.0f

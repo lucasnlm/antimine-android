@@ -1,5 +1,7 @@
 package dev.lucasnlm.antimine.gdx
 
+import android.graphics.Color
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
 import dev.lucasnlm.antimine.gdx.actors.AreaForm
@@ -11,20 +13,21 @@ object AreaAssetBuilder {
     fun getAreaTexture(
         expectedSize: Float,
         radiusLevel: Int,
-        qualityLevel: Int,
-        color: Int,
     ): Texture {
-        val initialSize = expectedSize.toDouble() / (qualityLevel.coerceAtLeast(0) * 2 + 1)
-        val size = initialSize.run {
+        val size = expectedSize.toDouble().run {
             2.0.pow(ceil(ln(this) / ln(2.0)))
         }.toInt()
 
         val radius = (size * 0.5 * radiusLevel * 0.1f).toInt()
 
         val pixmap = Pixmap(size, size, Pixmap.Format.RGBA8888).apply {
-            blending = Pixmap.Blending.SourceOver
+            blending = Pixmap.Blending.None
             filter = Pixmap.Filter.BiLinear
-            setColor(color.toGdxColor())
+
+            setColor(Color.WHITE.toGdxColor(0.0f))
+            fillRectangle(0, 0, size, size)
+
+            setColor(Color.WHITE.toGdxColor(1.0f))
             fillRectangle(0, radius, size, size - radius * 2)
             fillRectangle(radius, 0, size - radius * 2, size)
             fillCircle(radius, radius, radius)
@@ -39,24 +42,69 @@ object AreaAssetBuilder {
         }
     }
 
+    fun getAreaBorderTexture(
+        expectedSize: Float,
+        radiusLevel: Int,
+    ): Texture {
+        val size = expectedSize.toDouble().run {
+            2.0.pow(ceil(ln(this) / ln(2.0)))
+        }.toInt()
+
+        val radius = (size * 0.5 * radiusLevel * 0.1f).toInt()
+        val border = (3 * Gdx.graphics.density).toInt()
+
+        val pixmap = Pixmap(size, size, Pixmap.Format.RGBA8888).apply {
+            blending = Pixmap.Blending.None
+            filter = Pixmap.Filter.BiLinear
+
+            setColor(Color.WHITE.toGdxColor(0.0f))
+            fillRectangle(0, 0, size, size)
+
+            setColor(Color.WHITE)
+            fillRectangle(0, radius, size, size - radius * 2)
+            fillRectangle(radius, 0, size - radius * 2, size)
+            fillCircle(radius, radius, radius)
+            fillCircle(radius, size - radius, radius)
+            fillCircle(size - radius, radius, radius)
+            fillCircle(size - radius, size - radius, radius)
+
+            val newSize = size - border * 2
+            val newRadius = (newSize * 0.5 * radiusLevel * 0.1f).toInt()
+
+            setColor(Color.WHITE.toGdxColor(0.0f))
+            fillRectangle(border, border + newRadius, newSize, newSize - newRadius * 2)
+            fillRectangle(border + newRadius, border, newSize - newRadius * 2, newSize)
+            fillCircle(border + newRadius, border + newRadius, newRadius)
+            fillCircle(border + newRadius, border + newSize - newRadius, newRadius)
+            fillCircle(border + newSize - newRadius, border + newRadius, newRadius)
+            fillCircle(border + newSize - newRadius, border + newSize - newRadius, newRadius)
+        }
+
+        return Texture(pixmap).also {
+            pixmap.dispose()
+            it.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear)
+        }
+    }
+
     fun getAreaTextureForm(
         areaForm: AreaForm,
         expectedSize: Float,
         radiusLevel: Int,
-        qualityLevel: Int,
-        color: Int,
     ): Texture {
-        val initialSize = expectedSize.toDouble() / (qualityLevel.coerceAtLeast(0) * 2 + 1)
-        val size = initialSize.run {
+        val size = expectedSize.toDouble().run {
             2.0.pow(ceil(ln(this) / ln(2.0)))
         }.toInt()
 
         val radius = (size * 0.5 * radiusLevel * 0.1f).toInt()
 
         val pixmap = Pixmap(size, size, Pixmap.Format.RGBA8888).apply {
-            blending = Pixmap.Blending.SourceOver
+            blending = Pixmap.Blending.None
             filter = Pixmap.Filter.BiLinear
-            setColor(color.toGdxColor())
+
+            setColor(Color.WHITE.toGdxColor(0.0f))
+            fillRectangle(0, 0, size, size)
+
+            setColor(Color.WHITE.toGdxColor(1.0f))
 
             if (areaForm == AreaForm.None) {
                 fillRectangle(0, 0, size, size)

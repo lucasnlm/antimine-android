@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.gdx.actors
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Actor
@@ -10,8 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.Touchable
 import dev.lucasnlm.antimine.core.getPos
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.GdxLocal
-import dev.lucasnlm.antimine.gdx.drawTexture
+import dev.lucasnlm.antimine.gdx.alpha
+import dev.lucasnlm.antimine.gdx.dim
 import dev.lucasnlm.antimine.gdx.drawAsset
+import dev.lucasnlm.antimine.gdx.drawTexture
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
 import dev.lucasnlm.antimine.gdx.scope
 import dev.lucasnlm.antimine.gdx.toGdxColor
@@ -25,6 +28,7 @@ class AreaActor(
     private var areaForm: AreaForm,
     private var previousForm: AreaForm? = null,
     private var coverAlpha: Float = 1.0f,
+    private var focusScale: Float = 1.0f,
     private var isPressed: Boolean = false,
     private val theme: AppTheme,
     private val squareDivider: Float = 0f,
@@ -91,6 +95,27 @@ class AreaActor(
             GdxLocal.actionsEnabled
         ) Touchable.enabled else Touchable.disabled
 
+        val isCurrentFocus = GdxLocal.currentFocus?.id == area.id
+        val isEnterPressed = Gdx.input.isKeyPressed(Input.Keys.ENTER)
+
+        if (isCurrentFocus && touchable == Touchable.enabled) {
+            if (zIndex != Int.MAX_VALUE && isEnterPressed && !isPressed) {
+                toFront()
+                onInputEvent(GdxEvent.TouchDownEvent(area.id))
+                isPressed = true
+            } else if (!isEnterPressed && isPressed) {
+                toBack()
+                onInputEvent(GdxEvent.TouchUpEvent(area.id))
+                isPressed = false
+            }
+        }
+
+        focusScale = if (isPressed) {
+            (focusScale + Gdx.graphics.deltaTime).coerceAtMost(1.15f)
+        } else {
+            (focusScale - Gdx.graphics.deltaTime).coerceAtLeast(1.0f)
+        }
+
         if (!area.isCovered && coverAlpha > 0.0f) {
             val revealDelta = delta * 4.0f * GdxLocal.animationScale
             coverAlpha = (coverAlpha - revealDelta).coerceAtLeast(0.0f)
@@ -113,10 +138,12 @@ class AreaActor(
 
         val internalPadding = squareDivider / GdxLocal.zoom
         val isAboveOthers = isPressed
+        val isOdd: Boolean = if (area.posY % 2 == 0) { area.posX % 2 != 0 } else { area.posX % 2 == 0 }
+        val coverColor = if (isOdd) { theme.palette.coveredOdd } else { theme.palette.covered }
+        val markColor = theme.palette.covered
 
         unsafeBatch?.scope { batch, textures ->
             val quality = 0
-            val isOdd: Boolean = if (area.posY % 2 == 0) { area.posX % 2 != 0 } else { area.posX % 2 == 0 }
 
             if (!isOdd && !area.isCovered) {
                 textures.areaTextures[AreaForm.None]?.let {
@@ -127,15 +154,12 @@ class AreaActor(
                         width = width - internalPadding * 2,
                         height = height - internalPadding * 2,
                         blend = true,
-                        color = theme.palette.background.toGdxColor(GdxLocal.zoomLevelAlpha)
-                            .mul(0.5f, 0.5f, 0.5f, 0.05f),
+                        color = theme.palette.background.toOppositeMax(GdxLocal.zoomLevelAlpha).alpha(0.025f)
                     )
                 }
             }
 
-            if (isAboveOthers && area.isCovered && quality < 2 && GdxLocal.focusResizeLevel > 1.0f) {
-                val resize = GdxLocal.focusResizeLevel
-
+            if (isAboveOthers && area.isCovered && quality < 2 && focusScale > 1.0f) {
                 if (area.isCovered) {
                     textures.areaTextures[areaForm]?.let {
                         batch.drawTexture(
@@ -144,7 +168,7 @@ class AreaActor(
                             y = y + internalPadding,
                             width = width - internalPadding * 2,
                             height = height - internalPadding * 2,
-                            color = Color(1.0f, 1.0f, 1.0f, coverAlpha),
+                            color = coverColor.toGdxColor(coverAlpha),
                             blend = quality < 2,
                         )
                     }
@@ -153,11 +177,11 @@ class AreaActor(
                 textures.areaTextures[AreaForm.Full]?.let {
                     batch.drawTexture(
                         texture = it,
-                        x = x - width * (resize - 1.0f) * 0.5f,
-                        y = y - height * (resize - 1.0f) * 0.5f,
-                        width = width * resize,
-                        height = height * resize,
-                        color = Color(0.65f, 0.65f, 0.65f, 1.0f),
+                        x = x - width * (focusScale - 1.0f) * 0.5f,
+                        y = y - height * (focusScale - 1.0f) * 0.5f,
+                        width = width * focusScale,
+                        height = height * focusScale,
+                        color = coverColor.toGdxColor(coverAlpha),
                         blend = true,
                     )
                 }
@@ -172,9 +196,9 @@ class AreaActor(
                                 width = width - internalPadding * 2,
                                 height = height - internalPadding * 2,
                                 color = if (area.mark.isNotNone()) {
-                                    Color(0.5f, 0.5f, 0.5f, coverAlpha)
+                                    markColor.toGdxColor(coverAlpha).dim(0.5f)
                                 } else {
-                                    Color(1.0f, 1.0f, 1.0f, coverAlpha)
+                                    coverColor.toGdxColor(coverAlpha).dim(1.0f)
                                 },
                                 blend = quality < 2,
                             )
@@ -190,9 +214,9 @@ class AreaActor(
                             width = width - internalPadding * 2,
                             height = height - internalPadding * 2,
                             color = if (area.mark.isNotNone()) {
-                                theme.palette.background.toOppositeMax(coverAlpha).mul(0.8f, 0.8f, 0.8f, 1.0f)
+                                markColor.toGdxColor(coverAlpha).dim(0.8f)
                             } else {
-                                Color(1.0f, 1.0f, 1.0f, coverAlpha)
+                                coverColor.toGdxColor(coverAlpha)
                             },
                             blend = quality < 2,
                         )
@@ -207,7 +231,7 @@ class AreaActor(
                             y = y + internalPadding,
                             width = width - internalPadding * 2,
                             height = height - internalPadding * 2,
-                            color = Color(1.0f, 0f, 0f, 0.45f),
+                            color = Color(1.0f, 0f, 0f, 0.5f),
                             blend = quality < 2,
                         )
                     }
@@ -257,7 +281,7 @@ class AreaActor(
                                 batch = batch,
                                 texture = it.flag,
                                 color = color,
-                                scale = if (isAboveOthers) GdxLocal.focusResizeLevel else 1.0f
+                                scale = if (isAboveOthers) focusScale else 1.0f
                             )
                         }
                         area.mark.isQuestion() -> {
@@ -266,7 +290,7 @@ class AreaActor(
                                 batch = batch,
                                 texture = it.question,
                                 color = color,
-                                scale = if (isAboveOthers) GdxLocal.focusResizeLevel else 1.0f
+                                scale = if (isAboveOthers) focusScale else 1.0f
                             )
                         }
                         area.revealed -> {
@@ -297,6 +321,18 @@ class AreaActor(
                             color = color.toOppositeMax(1.0f),
                         )
                     }
+                }
+
+                if (GdxLocal.currentFocus?.id == area.id) {
+                    batch.drawTexture(
+                        texture = textures.areaHighlight,
+                        x = x - width * (focusScale - 1.0f) * 0.5f,
+                        y = y - height * (focusScale - 1.0f) * 0.5f,
+                        width = width * focusScale,
+                        height = height * focusScale,
+                        color = theme.palette.highlight.toGdxColor(1.0f),
+                        blend = true,
+                    )
                 }
             }
         }

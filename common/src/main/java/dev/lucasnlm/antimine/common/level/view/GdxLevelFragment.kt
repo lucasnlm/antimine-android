@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.level.view
+package dev.lucasnlm.antimine.common.level.view
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -14,17 +14,18 @@ import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
+import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
-import dev.lucasnlm.antimine.ui.repository.ThemeRepository
-import dev.lucasnlm.external.CrashReporter
+import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import dev.lucasnlm.external.ICrashReporter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
@@ -34,10 +35,10 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 open class GdxLevelFragment : AndroidFragmentApplication() {
     private val gameViewModel by sharedViewModel<GameViewModel>()
-    private val themeRepository: ThemeRepository by inject()
+    private val themeRepository: IThemeRepository by inject()
     private val dimensionRepository: IDimensionRepository by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
-    private val crashReporter: CrashReporter by inject()
+    private val crashReporter: ICrashReporter by inject()
 
     private val levelApplicationListener by lazy {
         GameApplicationListener(
@@ -68,7 +69,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val config = AndroidApplicationConfiguration().apply {
-            numSamples = 2
+            numSamples = 0
             useAccelerometer = false
             useCompass = false
             useGyroscope = false
@@ -98,6 +99,15 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                     levelApplicationListener.setActionsEnabled(false)
                 }
             }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            gameViewModel.observeState()
+                .map { it.seed }
+                .distinctUntilChanged()
+                .collect {
+                    GdxLocal.currentFocus = null
+                }
         }
 
         lifecycleScope.launchWhenCreated {

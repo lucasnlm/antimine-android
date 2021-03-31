@@ -50,11 +50,12 @@ class GameApplicationListener(
     private var minefieldStage: MinefieldStage? = null
     private var boundAreas: List<Area> = listOf()
     private var boundMinefield: Minefield? = null
+    private val useBlur = !context.isAndroidTv()
 
-    private lateinit var batch: SpriteBatch
-    private lateinit var mainFrameBuffer: FrameBuffer
-    private lateinit var blurFrameBuffer: FrameBuffer
-    private lateinit var blurShader: ShaderProgram
+    private var batch: SpriteBatch? = null
+    private var mainFrameBuffer: FrameBuffer? = null
+    private var blurFrameBuffer: FrameBuffer? = null
+    private var blurShader: ShaderProgram? = null
 
     private val renderSettings = RenderSettings(
         theme = theme,
@@ -90,17 +91,19 @@ class GameApplicationListener(
         val width = Gdx.graphics.width
         val height = Gdx.graphics.height
 
-        batch = SpriteBatch()
-        mainFrameBuffer = FrameBuffer(Pixmap.Format.RGB888, width, height, false)
-        blurFrameBuffer = FrameBuffer(Pixmap.Format.RGBA8888, width, height, false)
+        if (useBlur) {
+            batch = SpriteBatch()
+            mainFrameBuffer = FrameBuffer(Pixmap.Format.RGB888, width, height, false)
+            blurFrameBuffer = FrameBuffer(Pixmap.Format.RGBA8888, width, height, false)
 
-        blurShader = ShaderProgram(BlurShader.vert(), BlurShader.frag()).apply {
-            bind()
-            if (log.isNotBlank()) {
-                crashLogger("Fail to compile shader. Error: $log")
+            blurShader = ShaderProgram(BlurShader.vert(), BlurShader.frag()).apply {
+                bind()
+                if (log.isNotBlank()) {
+                    crashLogger("Fail to compile shader. Error: $log")
+                }
+
+                setUniformf(BlurShader.resolution, width.toFloat())
             }
-
-            setUniformf(BlurShader.resolution, width.toFloat())
         }
 
         assetManager.load(TextureConstants.atlasName, TextureAtlas::class.java)
@@ -112,6 +115,7 @@ class GameApplicationListener(
             onSingleTap = onSingleTap,
             onDoubleTap = onDoubleTap,
             onLongTouch = onLongTap,
+            forceFocus = context.isAndroidTv(),
         ).apply {
             bindField(boundAreas)
             bindSize(boundMinefield)
@@ -126,38 +130,26 @@ class GameApplicationListener(
 
             textureAtlas = atlas
             gameTextures = GameTextures(
-                areaCovered = listOf(0, 1, 2).map {
-                    AreaAssetBuilder.getAreaTexture(
-                        expectedSize = expectedSize,
-                        radiusLevel = radiusLevel,
-                        qualityLevel = it,
-                        color = theme.palette.covered,
-                    )
-                },
-                areaCoveredOdd = listOf(0, 1, 2).map {
-                    AreaAssetBuilder.getAreaTexture(
-                        expectedSize = expectedSize,
-                        radiusLevel = radiusLevel,
-                        qualityLevel = it,
-                        color = theme.palette.coveredOdd,
-                    )
-                },
-                areaUncovered = listOf(0, 1, 2).map {
-                    AreaAssetBuilder.getAreaTexture(
-                        expectedSize = expectedSize,
-                        radiusLevel = 1,
-                        qualityLevel = it,
-                        color = theme.palette.uncovered,
-                    )
-                },
-                areaUncoveredOdd = listOf(0, 1, 2).map {
-                    AreaAssetBuilder.getAreaTexture(
-                        expectedSize = expectedSize,
-                        radiusLevel = 1,
-                        qualityLevel = it,
-                        color = theme.palette.uncoveredOdd,
-                    )
-                },
+                areaHighlight = AreaAssetBuilder.getAreaBorderTexture(
+                    expectedSize = expectedSize,
+                    radiusLevel = radiusLevel,
+                ),
+                areaCovered = AreaAssetBuilder.getAreaTexture(
+                    expectedSize = expectedSize,
+                    radiusLevel = radiusLevel,
+                ),
+                areaCoveredOdd = AreaAssetBuilder.getAreaTexture(
+                    expectedSize = expectedSize,
+                    radiusLevel = radiusLevel,
+                ),
+                areaUncovered = AreaAssetBuilder.getAreaTexture(
+                    expectedSize = expectedSize,
+                    radiusLevel = 1,
+                ),
+                areaUncoveredOdd = AreaAssetBuilder.getAreaTexture(
+                    expectedSize = expectedSize,
+                    radiusLevel = 1,
+                ),
                 aroundMines = listOf(
                     atlas.findRegion(TextureConstants.around1),
                     atlas.findRegion(TextureConstants.around2),
@@ -174,49 +166,43 @@ class GameApplicationListener(
                 detailedArea = AreaAssetBuilder.getAreaTexture(
                     expectedSize = expectedSize,
                     radiusLevel = radiusLevel,
-                    qualityLevel = 0,
-                    color = theme.palette.covered,
                 ),
                 detailedAreaOdd = AreaAssetBuilder.getAreaTexture(
                     expectedSize = expectedSize,
                     radiusLevel = radiusLevel,
-                    qualityLevel = 0,
-                    color = theme.palette.coveredOdd,
                 ),
                 areaTextures = AreaForm.values().map {
                     it to AreaAssetBuilder.getAreaTextureForm(
                         areaForm = it,
                         expectedSize = expectedSize,
                         radiusLevel = radiusLevel,
-                        qualityLevel = 0,
-                        color = theme.palette.covered
                     )
                 }.toMap(),
             )
         }
 
         Gdx.input.inputProcessor = InputMultiplexer(GestureDetector(minefieldInputController), minefieldStage)
-        Gdx.graphics.isContinuousRendering = false
+        Gdx.graphics.isContinuousRendering = true
     }
 
     override fun dispose() {
         super.dispose()
-        blurShader.dispose()
-        mainFrameBuffer.dispose()
-        blurFrameBuffer.dispose()
-        batch.dispose()
+        blurShader?.dispose()
+        mainFrameBuffer?.dispose()
+        blurFrameBuffer?.dispose()
+        batch?.dispose()
 
         GdxLocal.run {
-            focusResizeLevel = 1.15f
             zoomLevelAlpha = 1.0f
             animationScale = 1.0f
             gameTextures?.run {
+                areaHighlight.dispose()
                 detailedArea.dispose()
                 detailedAreaOdd.dispose()
-                areaCovered.forEach { it.dispose() }
-                areaCoveredOdd.forEach { it.dispose() }
-                areaUncovered.forEach { it.dispose() }
-                areaUncoveredOdd.forEach { it.dispose() }
+                areaCovered.dispose()
+                areaCoveredOdd.dispose()
+                areaUncovered.dispose()
+                areaUncoveredOdd.dispose()
                 areaTextures.forEach { (_, texture) -> texture.dispose() }
             }
             textureAtlas?.dispose()
@@ -230,68 +216,86 @@ class GameApplicationListener(
 
     override fun render() {
         super.render()
+        val mainFrameBuffer = this.mainFrameBuffer
+        val minefieldStage = this.minefieldStage
+        val batch = this.batch
+        val blurShader = this.blurShader
 
-        val width = Gdx.graphics.width
-        val height = Gdx.graphics.height
+        if (useBlur) {
+            val width = Gdx.graphics.width
+            val height = Gdx.graphics.height
 
-        mainFrameBuffer.begin()
-        minefieldStage?.run {
-            theme.palette.background.run {
-                Gdx.gl.glClearColor(red(), green(), blue(), 1f)
-                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
-            }
-
-            act()
-            draw()
-        }
-        mainFrameBuffer.end()
-
-        batch.run {
-            begin()
-
-            theme.palette.background.run {
-                Gdx.gl.glClearColor(red(), green(), blue(), 1f)
-                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
-            }
-
-            shader = blurShader.apply {
-                setUniformf(BlurShader.direction, 1.0f, 1.0f)
-                setUniformf(BlurShader.radius, 2.0f)
-
-                if (isPortrait) {
-                    setUniformf(BlurShader.blurTop, (1.0f - (renderSettings.appBarWithStatusHeight / height)))
-                    setUniformf(BlurShader.blurBottom, (renderSettings.navigationBarHeight / height))
-                    setUniformf(BlurShader.blurStart, 0.0f)
-                    setUniformf(BlurShader.blurEnd, 1.0f)
-                } else {
-                    setUniformf(BlurShader.blurTop, 1.0f)
-                    setUniformf(BlurShader.blurBottom, 0.0f)
-                    setUniformf(BlurShader.blurStart, (renderSettings.appBarHeight / width))
-                    setUniformf(BlurShader.blurEnd, 1.0f - (renderSettings.navigationBarHeight / width))
+            mainFrameBuffer?.begin()
+            minefieldStage?.run {
+                theme.palette.background.run {
+                    Gdx.gl.glClearColor(red(), green(), blue(), 1f)
+                    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
                 }
+
+                act()
+                draw()
             }
+            mainFrameBuffer?.end()
 
-            draw(
-                mainFrameBuffer.colorBufferTexture,
-                0.0f,
-                0.0f,
-                0.0f,
-                0.0f,
-                width.toFloat(),
-                height.toFloat(),
-                1.0f,
-                1.0f,
-                0.0f,
-                0,
-                0,
-                width,
-                height,
-                false,
-                true,
-            )
+            batch?.run {
+                begin()
 
-            flush()
-            end()
+                theme.palette.background.run {
+                    Gdx.gl.glClearColor(red(), 0f, blue(), 1f)
+                    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
+                }
+
+                shader = blurShader?.apply {
+                    setUniformf(BlurShader.direction, 1.0f, 1.0f)
+                    setUniformf(BlurShader.radius, 2.0f)
+
+                    if (isPortrait) {
+                        setUniformf(BlurShader.blurTop, (1.0f - (renderSettings.appBarWithStatusHeight / height)))
+                        setUniformf(BlurShader.blurBottom, (renderSettings.navigationBarHeight / height))
+                        setUniformf(BlurShader.blurStart, 0.0f)
+                        setUniformf(BlurShader.blurEnd, 1.0f)
+                    } else {
+                        setUniformf(BlurShader.blurTop, 1.0f)
+                        setUniformf(BlurShader.blurBottom, 0.0f)
+                        setUniformf(BlurShader.blurStart, (renderSettings.appBarHeight / width))
+                        setUniformf(BlurShader.blurEnd, 1.0f - (renderSettings.navigationBarHeight / width))
+                    }
+                }
+
+                mainFrameBuffer?.let {
+                    draw(
+                        it.colorBufferTexture,
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        width.toFloat(),
+                        height.toFloat(),
+                        1.0f,
+                        1.0f,
+                        0.0f,
+                        0,
+                        0,
+                        width,
+                        height,
+                        false,
+                        true,
+                    )
+                }
+
+                flush()
+                end()
+            }
+        } else {
+            minefieldStage?.run {
+                theme.palette.background.run {
+                    Gdx.gl.glClearColor(red(), green(), blue(), 1f)
+                    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
+                }
+
+                act()
+                draw()
+            }
         }
     }
 

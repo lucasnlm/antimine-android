@@ -77,3 +77,15 @@ fun Int.toOppositeMax(alpha: Float? = 1.0f): Color {
 
     return Color(value, value, value, alpha ?: 1.0f)
 }
+
+fun Color.alpha(newAlpha: Float): Color {
+    a = newAlpha
+    return this
+}
+
+fun Color.dim(value: Float): Color {
+    r *= value
+    g *= value
+    b *= value
+    return this
+}
