@@ -148,7 +148,7 @@ class MinefieldStage(
         centerCamera()
     }
 
-    private fun centerCamera() {
+    fun centerCamera() {
         this.minefieldSize?.let {
             val virtualWidth = Gdx.graphics.width
             val virtualHeight = Gdx.graphics.height

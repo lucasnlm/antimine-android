@@ -107,6 +107,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 .distinctUntilChanged()
                 .collect {
                     GdxLocal.currentFocus = null
+                    levelApplicationListener.recenter()
                 }
         }
 

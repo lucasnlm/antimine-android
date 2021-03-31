@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.input.GestureDetector
 import dev.lucasnlm.antimine.core.isAndroidTv
+import dev.lucasnlm.antimine.core.isAndroidWearOs
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
@@ -50,7 +51,7 @@ class GameApplicationListener(
     private var minefieldStage: MinefieldStage? = null
     private var boundAreas: List<Area> = listOf()
     private var boundMinefield: Minefield? = null
-    private val useBlur = !context.isAndroidTv()
+    private val useBlur = !context.isAndroidTv() && !context.isAndroidWearOs()
 
     private var batch: SpriteBatch? = null
     private var mainFrameBuffer: FrameBuffer? = null
@@ -344,5 +345,9 @@ class GameApplicationListener(
 
     fun setActionsEnabled(enabled: Boolean) {
         GdxLocal.actionsEnabled = enabled
+    }
+
+    fun recenter() {
+        minefieldStage?.centerCamera()
     }
 }

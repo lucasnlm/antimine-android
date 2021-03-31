@@ -11,6 +11,11 @@ fun Context.isAndroidTv(): Boolean {
     return (uiModeManager.currentModeType == Configuration.UI_MODE_TYPE_TELEVISION)
 }
 
+fun Context.isAndroidWearOs(): Boolean {
+    val uiModeManager = getSystemService(AppCompatActivity.UI_MODE_SERVICE) as UiModeManager
+    return (uiModeManager.currentModeType == Configuration.UI_MODE_TYPE_WATCH)
+}
+
 fun Context.updateLanguage(localeName: String) {
     val localeStrList = localeName.split("-")
     val locale = Locale(localeStrList.first(), localeStrList.last())
