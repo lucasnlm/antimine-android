@@ -111,9 +111,9 @@ class AreaActor(
         }
 
         focusScale = if (isPressed) {
-            (focusScale + Gdx.graphics.deltaTime).coerceAtMost(1.15f)
+            (focusScale + Gdx.graphics.deltaTime).coerceAtMost(MAX_SCALE)
         } else {
-            (focusScale - Gdx.graphics.deltaTime).coerceAtLeast(1.0f)
+            (focusScale - Gdx.graphics.deltaTime).coerceAtLeast(MIN_SCALE)
         }
 
         if (!area.isCovered && coverAlpha > 0.0f) {
@@ -181,7 +181,7 @@ class AreaActor(
                         y = y - height * (focusScale - 1.0f) * 0.5f,
                         width = width * focusScale,
                         height = height * focusScale,
-                        color = coverColor.toGdxColor(coverAlpha),
+                        color = coverColor.toGdxColor(coverAlpha).dim(0.8f - (focusScale - 1.0f)),
                         blend = true,
                     )
                 }
@@ -339,6 +339,9 @@ class AreaActor(
     }
 
     companion object {
+        const val MIN_SCALE = 1.0f
+        const val MAX_SCALE = 1.15f
+
         private fun Area.canMargeWith(area: Area): Boolean {
             return !isCovered || mark.mergeId != area.mark.mergeId
         }
