@@ -110,45 +110,6 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 }
         }
 
-//        gameViewModel.run {
-////            levelSetup.observe(
-////                viewLifecycleOwner,
-////                { minefield ->
-////                    levelApplicationListener.bindMinefield(minefield)
-////                }
-////            )
-////
-////            field.observe(
-////                viewLifecycleOwner,
-////                {
-////                    levelApplicationListener.bindField(it)
-////                }
-////            )
-//
-////            eventObserver.observe(
-////                viewLifecycleOwner,
-////                {
-////                    when (it) {
-////                        Event.Pause,
-////                        Event.GameOver,
-////                        Event.Victory -> {
-////                            bindControlSwitcherIfNeeded(view, false)
-////                            levelApplicationListener.setActionsEnabled(false)
-////                        }
-////                        Event.Running,
-////                        Event.Resume,
-////                        Event.ResumeGame,
-////                        Event.StartNewGame -> {
-////
-////                        }
-////                        else -> {
-////                            // Nothing
-////                        }
-////                    }
-////                }
-////            )
-//        }
-
         bindControlSwitcherIfNeeded(view)
     }
 

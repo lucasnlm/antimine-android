@@ -2,15 +2,14 @@ package dev.lucasnlm.antimine.core.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 open class StatelessViewModel<Event> : ViewModel() {
-    private val eventBroadcast = ConflatedBroadcastChannel<Event>()
-    private val sideEffectBroadcast = ConflatedBroadcastChannel<Event>()
+    private val eventBroadcast = MutableSharedFlow<Event>()
+    private val sideEffectBroadcast = MutableSharedFlow<Event>()
 
     init {
         viewModelScope.launch {
@@ -21,22 +20,20 @@ open class StatelessViewModel<Event> : ViewModel() {
     }
 
     fun sendEvent(event: Event) {
-        eventBroadcast.offer(event)
+        viewModelScope.launch {
+            eventBroadcast.emit(event)
+        }
     }
 
     protected fun sendSideEffect(event: Event) {
-        sideEffectBroadcast.offer(event)
+        viewModelScope.launch {
+            sideEffectBroadcast.emit(event)
+        }
     }
 
     protected open fun onEvent(event: Event) {}
 
-    override fun onCleared() {
-        super.onCleared()
-        eventBroadcast.close()
-        sideEffectBroadcast.close()
-    }
+    open fun observeEvent(): Flow<Event> = eventBroadcast
 
-    open fun observeEvent(): Flow<Event> = eventBroadcast.asFlow()
-
-    open fun observeSideEffects(): Flow<Event> = sideEffectBroadcast.asFlow()
+    open fun observeSideEffects(): Flow<Event> = sideEffectBroadcast
 }

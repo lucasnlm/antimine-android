@@ -55,8 +55,6 @@ open class GameViewModel(
     private val featureFlagManager: IFeatureFlagManager,
     private val clock: Clock,
 ) : IntentViewModel<GameEvent, GameState>() {
-    private val eventObserver = MutableLiveData<Event>()
-
     private lateinit var gameController: GameController
     private var initialized = false
 
@@ -108,8 +106,12 @@ open class GameViewModel(
             }
             is GameEvent.ContinueGame -> {
                 onContinueFromGameOver()
-                sendEvent(GameEvent.SetGameActivation(true))
                 runClock()
+                val newState = state.copy(
+                    isActive = true,
+                    isGameCompleted = false
+                )
+                emit(newState)
             }
             is GameEvent.UpdateTime -> {
                 val newState = state.copy(duration = event.time)
@@ -151,18 +153,6 @@ open class GameViewModel(
                             )
                             sendSideEffect(sideEffect)
                         }
-                        isGameOver -> {
-                            onGameOver(true)
-                            newState = newState.copy(field = gameController.field())
-                            val sideEffect = GameEvent.GameOverDialog(
-                                delayToShow = explosionDelay(),
-                                totalMines = gameController.mines().count(),
-                                rightMines = gameController.mines().count { it.mark.isNotNone() },
-                                timestamp = state.duration,
-                                receivedTips = 0,
-                            )
-                            sendSideEffect(sideEffect)
-                        }
                         isComplete -> {
                             onGameOver(false)
                             newState = newState.copy(field = gameController.field())
@@ -172,6 +162,18 @@ open class GameViewModel(
                                 rightMines = gameController.mines().count { it.mark.isNotNone() },
                                 timestamp = state.duration,
                                 receivedTips = 1,
+                            )
+                            sendSideEffect(sideEffect)
+                        }
+                        isGameOver -> {
+                            onGameOver(true)
+                            newState = newState.copy(field = gameController.field())
+                            val sideEffect = GameEvent.GameOverDialog(
+                                delayToShow = explosionDelay(),
+                                totalMines = gameController.mines().count(),
+                                rightMines = gameController.mines().count { it.mark.isNotNone() },
+                                timestamp = state.duration,
+                                receivedTips = 0,
                             )
                             sendSideEffect(sideEffect)
                         }
@@ -247,7 +249,7 @@ open class GameViewModel(
             mineCount = gameController.remainingMines(),
             field = gameController.field(),
             tips = tipRepository.getTotalTips(),
-            isGameCompleted = gameController.isVictory() || gameController.isGameOver() || isCompletedWithMistakes(),
+            isGameCompleted = isCompletedWithMistakes(),
             isActive = true,
             hasMines = true,
             useHelp = preferencesRepository.useHelp(),
@@ -259,11 +261,7 @@ open class GameViewModel(
             runClock()
         }
 
-        when {
-            gameController.isGameOver() -> sendEvent(GameEvent.SetGameActivation(false))
-            gameController.isVictory() -> sendEvent(GameEvent.SetGameActivation(false))
-            else -> sendEvent(GameEvent.SetGameActivation(true))
-        }
+        gameController.increaseErrorToleranceByWrongMines()
 
         analyticsManager.sentEvent(Analytics.ResumePreviousGame)
         return newGameState.minefield

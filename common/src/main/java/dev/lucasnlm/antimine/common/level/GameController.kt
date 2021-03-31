@@ -254,9 +254,9 @@ class GameController {
         hasIsolatedAllMines() || (explodedMinesCount() > errorTolerance)
 
     fun remainingMines(): Int {
-        val flagsCount = field.count { it.mark.isFlag() }
+        val flagsCount = field.count { it.isCovered && it.mark.isFlag() }
         val minesCount = mines().count()
-        val openMinesCount = mines().count { !it.isCovered && it.mistake }
+        val openMinesCount = mines().count { !it.isCovered }
         return (minesCount - flagsCount - openMinesCount)
     }
 
@@ -286,8 +286,13 @@ class GameController {
 
     fun getActionsCount() = actions
 
-    fun increaseErrorTolerance() {
-        errorTolerance++
+    fun increaseErrorToleranceByWrongMines() {
+        val value = mines().count { !it.isCovered }
+        increaseErrorTolerance(value)
+    }
+
+    fun increaseErrorTolerance(value: Int = 1) {
+        errorTolerance += value
     }
 
     fun hadMistakes(): Boolean {
