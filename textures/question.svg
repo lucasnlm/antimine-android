@@ -14,7 +14,7 @@
    id="svg8"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="question.svg"
-   inkscape:export-filename="/home/lucasnlm/flag.png"
+   inkscape:export-filename="/home/lucasnlm/dev/lucasnlm/antimine-android/textures/question.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <defs
@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="-23.095818"
-     inkscape:cy="259.88932"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="-46.03895"
+     inkscape:cy="174.08851"
      inkscape:document-units="mm"
      inkscape:current-layer="g1013"
      inkscape:document-rotation="0"
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -58,20 +58,11 @@
     <g
        id="g1013"
        transform="matrix(0.26458333,0,0,0.26458333,-359.17801,-67.854226)">
-      <text
-         xml:space="preserve"
-         style="font-size:206.004px;line-height:1.25;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';fill:#ffffff;stroke-width:5.96432;"
-         x="1415.4321"
-         y="463.77002"
-         id="text835"
-         inkscape:transform-center-x="-125.54995"
-         inkscape:transform-center-y="5.1441754e-05"
-         transform="scale(1.0158111,0.984435)"><tspan
-           sodipodi:role="line"
-           id="tspan833"
-           x="1415.4321"
-           y="463.77002"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:206.004px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans Bold';fill:#ffffff;stroke-width:5.96432;">?</tspan></text>
+      <path
+         d="m 1483.8358,451.93266 c -7.8722,0 -14.1699,-6.29774 -14.1699,-14.1699 0,-7.98464 6.2977,-14.05745 14.1699,-14.05745 7.9846,0 14.0574,6.07281 14.0574,14.05745 -0.1127,7.75971 -6.0728,14.1699 -14.0574,14.1699 z m 33.8503,-83.22007 c -8.5468,12.48301 -16.644,16.41909 -21.0299,24.40372 -1.1247,2.02428 -1.7993,3.5987 -2.1367,7.08495 -0.5624,5.06069 -5.0607,8.77185 -10.1215,8.77185 h -0.6746 c -5.8479,0 -10.4587,-4.94823 -9.8964,-10.79612 0.3373,-3.82363 1.237,-7.75971 3.3737,-11.58334 5.5105,-9.78398 15.9693,-15.63187 22.0421,-24.29127 6.4102,-9.10922 2.8114,-26.20308 -15.407,-26.20308 -7.9847,0 -13.2702,4.04855 -16.5316,8.88432 -2.8115,4.04854 -7.7596,5.96035 -12.3705,4.04854 v 0 c -5.9603,-2.36165 -8.097,-9.55907 -4.4984,-14.7322 6.8601,-10.00891 18.331,-17.31878 33.1756,-17.31878 16.644,0 28.0024,7.53479 33.8503,17.09386 4.9482,8.09709 7.8722,23.27913 0.2249,34.63755 z"
+         id="path4"
+         style="fill:#ffffff;stroke-width:11.2459"
+         sodipodi:nodetypes="ssscscccsscccscsscscc" />
     </g>
   </g>
 </svg>
