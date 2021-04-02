@@ -53,7 +53,7 @@ class ThemeAdapter(
             cardTheme.alpha = if (selected) 0.5f else 1.0f
 
             covered.setBackgroundColor(theme.palette.covered.toAndroidColor(alpha))
-            uncovered.setBackgroundColor(theme.palette.uncovered.toAndroidColor(alpha))
+            uncovered.setBackgroundColor(theme.palette.background.toAndroidColor(alpha))
 
             if (position == 0) {
                 label.apply {
@@ -84,8 +84,11 @@ class ThemeAdapter(
                 }
             }
 
-            cardTheme.setOnClickListener {
-                unlockThemeIfNeeded(theme)
+            cardTheme.apply {
+                strokeColor = theme.palette.covered.toAndroidColor(alpha)
+                setOnClickListener {
+                    unlockThemeIfNeeded(theme)
+                }
             }
         }
     }

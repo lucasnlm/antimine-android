@@ -8,7 +8,7 @@ import android.graphics.Paint
 import androidx.test.platform.app.InstrumentationRegistry
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Mark
-import dev.lucasnlm.antimine.ui.repository.Themes.LightTheme
+import dev.lucasnlm.antimine.ui.repository.Themes
 import dev.lucasnlm.antimine.ui.view.createAreaPaintSettings
 import dev.lucasnlm.antimine.ui.view.paintOnCanvas
 import org.junit.Assert.assertTrue
@@ -48,7 +48,7 @@ class AreaScreenshot {
             isLowBitAmbient = false,
             isFocused = false,
             paintSettings = paintSettings,
-            theme = LightTheme
+            theme = Themes.lightTheme()
         )
         canvas.restore()
 

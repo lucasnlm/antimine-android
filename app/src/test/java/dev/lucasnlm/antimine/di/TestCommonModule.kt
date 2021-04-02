@@ -7,7 +7,7 @@ import dev.lucasnlm.antimine.mocks.MockPreferencesRepository
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
-import dev.lucasnlm.antimine.ui.repository.Themes.LightTheme
+import dev.lucasnlm.antimine.ui.repository.Themes.lightTheme
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -26,13 +26,13 @@ val TestCommonModule = module {
         object : IThemeRepository {
             override fun getCustomTheme(): AppTheme? = null
 
-            override fun getTheme(): AppTheme = LightTheme
+            override fun getTheme(): AppTheme = lightTheme()
 
-            override fun getAllThemes(): List<AppTheme> = listOf(LightTheme)
+            override fun getAllThemes(): List<AppTheme> = listOf(lightTheme())
 
             override fun setTheme(themeId: Long) {}
 
-            override fun reset(): AppTheme = LightTheme
+            override fun reset(): AppTheme = lightTheme()
         }
     } bind IThemeRepository::class
 }
