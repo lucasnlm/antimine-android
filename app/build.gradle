@@ -115,6 +115,7 @@ dependencies {
     implementation project(':ui')
     implementation project(':preferences')
     implementation project(':themes')
+    implementation project(':tutorial')
     implementation project(':core')
     implementation project(':gdx')
 

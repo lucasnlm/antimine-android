@@ -15,6 +15,7 @@ import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
 import dev.lucasnlm.external.ICloudStorageManager
 import dev.lucasnlm.external.model.CloudSave
+import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -129,5 +130,9 @@ class MainViewModel(
     }
 
     private fun startTutorial() {
+        val intent = Intent(context, TutorialActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        context.startActivity(intent)
     }
 }
