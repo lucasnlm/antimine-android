@@ -105,11 +105,8 @@ class AreaActor(
         super.act(delta)
         val area = this.area
 
-        touchable = if (
-            (area.isCovered || area.minesAround > 0) &&
-            GdxLocal.qualityZoomLevel < 2 &&
-            GdxLocal.actionsEnabled
-        ) Touchable.enabled else Touchable.disabled
+        touchable = if ((area.isCovered || area.minesAround > 0) && GdxLocal.actionsEnabled)
+            Touchable.enabled else Touchable.disabled
 
         val isCurrentFocus = GdxLocal.currentFocus?.id == area.id
         val isEnterPressed = Gdx.input.isKeyPressed(Input.Keys.ENTER)
@@ -136,7 +133,7 @@ class AreaActor(
     private fun drawBackground(batch: Batch, isOdd: Boolean) {
         val internalPadding = squareDivider / GdxLocal.zoom
 
-        if (!isOdd && !area.isCovered) {
+        if (!isOdd && !area.isCovered && GdxLocal.zoomLevelAlpha > 0.0f) {
             GdxLocal.gameTextures?.areaCovered?.let {
                 batch.drawTexture(
                     texture = it,
@@ -153,7 +150,11 @@ class AreaActor(
 
     private fun drawCovered(batch: Batch, isOdd: Boolean) {
         val internalPadding = squareDivider / GdxLocal.zoom
-        val coverColor = if (isOdd) { theme.palette.coveredOdd } else { theme.palette.covered }
+        val coverColor = when {
+            area.mark.isNotNone() -> theme.palette.covered
+            isOdd -> theme.palette.coveredOdd
+            else -> theme.palette.covered
+        }
 
         GdxLocal.areaAtlas?.let { atlas ->
             pieces.forEach { piece ->
@@ -163,7 +164,11 @@ class AreaActor(
                     y = y + internalPadding - 1,
                     width = width - internalPadding * 2 + 2,
                     height = height - internalPadding * 2 + 2,
-                    color = coverColor.toGdxColor(1.0f),
+                    color = if (area.mark.isNotNone()) {
+                        coverColor.toGdxColor(1.0f).dim(0.6f)
+                    } else {
+                        coverColor.toGdxColor(1.0f)
+                    },
                     blend = false,
                 )
             }

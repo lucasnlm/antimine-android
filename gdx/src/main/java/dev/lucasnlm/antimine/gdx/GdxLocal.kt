@@ -16,8 +16,6 @@ object GdxLocal {
     var highlightAlpha = 0.0f
     var zoom = 1.0f
 
-    const val qualityZoomLevel = 0
-
     var currentFocus: Area? = null
 
     // Global animation scale, it defines how fast/slow all animations must be executed.

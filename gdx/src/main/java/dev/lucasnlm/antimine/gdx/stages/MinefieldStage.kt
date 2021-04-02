@@ -72,20 +72,20 @@ class MinefieldStage(
             val newZoom = if (zoomMultiplier > 1.0) {
                 zoom + 2.0f * zoomMultiplier * Gdx.graphics.deltaTime
             } else {
-                zoom - 3.0f * (1.0f / zoomMultiplier) * Gdx.graphics.deltaTime
+                zoom - 2.0f * (1.0f / zoomMultiplier) * Gdx.graphics.deltaTime
             }
             zoom = newZoom.coerceIn(0.7f, 4.0f)
             update(true)
 
             GdxLocal.zoomLevelAlpha = when {
-                zoom < 3.0f -> {
+                zoom < 3.5f -> {
                     1.0f
                 }
                 zoom > 4.0f -> {
                     0.0f
                 }
                 else -> {
-                    (3.0f - zoom)
+                    (3.5f - zoom)
                 }
             }
         }
