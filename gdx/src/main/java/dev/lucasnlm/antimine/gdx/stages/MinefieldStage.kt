@@ -14,8 +14,6 @@ import dev.lucasnlm.antimine.gdx.BuildConfig
 import dev.lucasnlm.antimine.gdx.controller.CameraController
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
-import dev.lucasnlm.antimine.gdx.actors.AreaForm
-import dev.lucasnlm.antimine.gdx.actors.areaFullForm
 import dev.lucasnlm.antimine.gdx.actors.areaNoForm
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
@@ -112,10 +110,8 @@ class MinefieldStage(
                             theme = renderSettings.theme,
                             size = renderSettings.areaSize,
                             area = it,
-                            initialAreaForm = when {
-                                renderSettings.joinAreas -> AreaActor.getForm(it, field)
-                                else -> areaFullForm
-                            },
+                            initialAreaForm =
+                                if (renderSettings.joinAreas) AreaActor.getForm(it, field) else areaNoForm,
                             onInputEvent = ::handleGameEvent,
                             squareDivider = renderSettings.squareDivider,
                         )
@@ -128,7 +124,7 @@ class MinefieldStage(
                     actors.forEach {
                         val areaActor = (it as AreaActor)
                         val area = field[areaActor.boundAreaId()]
-                        val areaForm = if (renderSettings.joinAreas) AreaActor.getForm(area, field) else areaFullForm
+                        val areaForm = if (renderSettings.joinAreas) AreaActor.getForm(area, field) else areaNoForm
                         areaActor.bindArea(reset, area, areaForm)
                     }
                 }

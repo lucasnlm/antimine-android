@@ -66,7 +66,7 @@ class GameApplicationListener(
         appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
         appBarHeight = dimensionRepository.actionBarSize().toFloat(),
         radius = preferencesRepository.squareRadius().toFloat(),
-        squareDivider = preferencesRepository.squareDivider() * 0.5f,
+        squareDivider = preferencesRepository.squareDivider().toFloat(),
         joinAreas = preferencesRepository.squareDivider() == 0,
     )
 
@@ -131,6 +131,7 @@ class GameApplicationListener(
 
             areaAtlas = AreaAssetBuilder.getAreaTextureAtlas(
                 radiusLevel = radiusLevel,
+                squareDivider = renderSettings.squareDivider,
             )
             textureAtlas = atlas
             gameTextures = GameTextures(
@@ -163,7 +164,7 @@ class GameApplicationListener(
         }
 
         Gdx.input.inputProcessor = InputMultiplexer(GestureDetector(minefieldInputController), minefieldStage)
-        Gdx.graphics.isContinuousRendering = true
+        Gdx.graphics.isContinuousRendering = false
     }
 
     override fun dispose() {

@@ -11,8 +11,6 @@ data class AreaForm(
     val bottomRight: Boolean = false,
 )
 
-val areaFullForm = AreaForm(top = true, bottom = true, left = true, right = true)
-
 val areaNoForm = AreaForm(top = false, bottom = false, left = false, right = false)
 
 fun allAreaForms() = (0..15).map {

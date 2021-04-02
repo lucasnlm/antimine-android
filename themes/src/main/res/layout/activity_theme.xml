@@ -87,7 +87,7 @@
                 android:id="@+id/squareDivider"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:max="10"
+                android:max="5"
                 android:progress="0"
                 app:layout_constraintBottom_toBottomOf="@+id/square_divider_text"
                 app:layout_constraintEnd_toEndOf="parent"

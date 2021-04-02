@@ -91,13 +91,18 @@ object AreaAssetBuilder {
 
     fun getAreaTextureAtlas(
         radiusLevel: Int,
+        squareDivider: Float,
     ): TextureAtlas {
         val pixMapSize = 2048
         val textureSize = pixMapSize / 8
         val coverColor = Color.WHITE.toGdxColor(1.0f)
         val transparent = Color.WHITE.toGdxColor(0.0f)
 
-        val border = (textureSize * 0.08f).toInt()
+        val border = if (squareDivider == 0.0f) {
+            (textureSize * 0.5 * radiusLevel * 0.05f).toInt()
+        } else {
+            (squareDivider * Gdx.graphics.density).toInt()
+        }
         val square = textureSize - border * 2
         val radius = (square * 0.5 * radiusLevel * 0.1f).toInt()
 
