@@ -11,6 +11,19 @@ You win the game when you've flagged every mine in the minefield. Be careful not
 
 [![Donate with Bitcoin](https://en.cryptobadges.io/badge/micro/1CG9cyRHkVMW3onjDmXVNzDawnX1ydSWiM)](https://en.cryptobadges.io/donate/1CG9cyRHkVMW3onjDmXVNzDawnX1ydSWiM) [![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0x8982aA55e7CEB31691854A8f2CD8F2203dC5543c)](https://en.cryptobadges.io/donate/0x8982aA55e7CEB31691854A8f2CD8F2203dC5543c) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=49XX9XDNUV4SW)
 
+### Contributing
+
+Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-android/issues), [feature requests](https://github.com/lucasnlm/antimine-android/issues), [pull requests](https://github.com/lucasnlm/antimine-android/pulls), or [translating](https://crowdin.com/project/antimine-android).
+
+### Download
+
+<a href="https://f-droid.org/packages/dev.lucanlm.antimine/">
+    <img src="https://raw.githubusercontent.com/lucasnlm/antimine-android/master/.github/fdroid.png" alt="Get it on F-Droid" height="80"/>
+</a>
+<a href="https://play.google.com/store/apps/details?id=com.logical.minato">
+    <img src="https://raw.githubusercontent.com/lucasnlm/antimine-android/master/.github/google_play.png" alt="Get it on Google Play" height="80"/>
+</a>
+
 ### Screeshots
 
 <p align="center">
@@ -20,39 +33,25 @@ You win the game when you've flagged every mine in the minefield. Be careful not
     <img src="https://github.com/lucasnlm/antimine-android/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="200px"/>
 </p>
 
-## Contributing
-
-Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-android/issues), [feature requests](https://github.com/lucasnlm/antimine-android/issues), [pull requests](https://github.com/lucasnlm/antimine-android/pulls), or [translating](https://crowdin.com/project/antimine-android).
-
-## Download
-
-<a href="https://f-droid.org/packages/dev.lucanlm.antimine/">
-    <img src="https://raw.githubusercontent.com/lucasnlm/antimine-android/master/.github/fdroid.png" alt="Get it on F-Droid" height="80"/>
-</a>
-<a href="https://play.google.com/store/apps/details?id=com.logical.minato">
-    <img src="https://raw.githubusercontent.com/lucasnlm/antimine-android/master/.github/google_play.png" alt="Get it on Google Play" height="80"/>
-</a>
-
 ## Features
 
 - No guessing algorithm
-- Multiple Themes (including AMOLED)
-- System Theme: Dark or Light
+- Multiple Themes (including System and AMOLED)
 - Game Levels: Begginner, Intermediate, Expert, and Custom
 - Game Statistics
 - Android Wear OS support
 - Save/Resume state when Quit/Resume game
-- Resume previous games
+- Resume previous saved games
 - Retry failed games
+- Continue after click on a mine
 - 4 different control styles
 - Custom long press duration
 - Optional Question mark
 - Open multiple areas by pressing numbers
 - Game assistant to auto-flag discovered mines
-- Share game
 - Split screen
-- Accessibility: adjustable touch area
-- Accessibility: screen reader
+- Zoom out
+- Custom appearance (square roundedness, size and divider)
 
 ## Technical Details
 
