@@ -32,6 +32,23 @@ fun Batch.drawTexture(
     draw(texture, x, y, width, height)
 }
 
+fun Batch.drawRegion(
+    texture: TextureRegion,
+    x: Float,
+    y: Float,
+    width: Float,
+    height: Float,
+    blend: Boolean,
+    color: Color? = null
+) {
+    if (blend && !isBlendingEnabled) {
+        enableBlending()
+    }
+
+    setColor(color ?: WHITE)
+    draw(texture, x, y, width, height)
+}
+
 fun Actor.drawAsset(
     batch: Batch,
     texture: TextureRegion,

@@ -18,7 +18,7 @@ import dev.lucasnlm.antimine.core.isAndroidWearOs
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
-import dev.lucasnlm.antimine.gdx.actors.AreaForm
+import dev.lucasnlm.antimine.gdx.actors.allAreaForms
 import dev.lucasnlm.antimine.gdx.controller.GameInputController
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
 import dev.lucasnlm.antimine.gdx.models.GameTextures
@@ -129,6 +129,9 @@ class GameApplicationListener(
 
             animationScale = if (preferencesRepository.useAnimations()) 1f else 100.0f
 
+            areaAtlas = AreaAssetBuilder.getAreaTextureAtlas(
+                radiusLevel = radiusLevel,
+            )
             textureAtlas = atlas
             gameTextures = GameTextures(
                 areaHighlight = AreaAssetBuilder.getAreaBorderTexture(
@@ -172,7 +175,7 @@ class GameApplicationListener(
                     expectedSize = expectedSize,
                     radiusLevel = radiusLevel,
                 ),
-                areaTextures = AreaForm.values().map {
+                areaTextures = allAreaForms().map {
                     it to AreaAssetBuilder.getAreaTextureForm(
                         areaForm = it,
                         expectedSize = expectedSize,
@@ -207,6 +210,8 @@ class GameApplicationListener(
                 areaTextures.forEach { (_, texture) -> texture.dispose() }
             }
             textureAtlas?.dispose()
+            areaAtlas?.dispose()
+            areaAtlas = null
             textureAtlas = null
         }
 

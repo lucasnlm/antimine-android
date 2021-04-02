@@ -10,6 +10,7 @@ import dev.lucasnlm.antimine.gdx.models.GameTextures
 // This is normally a design faux pas but in this case is better than the alternatives.
 object GdxLocal {
     var textureAtlas: TextureAtlas? = null
+    var areaAtlas: TextureAtlas? = null
     var gameTextures: GameTextures? = null
     var hasHighlightAreas = false
     var highlightAlpha = 0.0f

@@ -15,6 +15,8 @@ import dev.lucasnlm.antimine.gdx.controller.CameraController
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
 import dev.lucasnlm.antimine.gdx.actors.AreaForm
+import dev.lucasnlm.antimine.gdx.actors.areaFullForm
+import dev.lucasnlm.antimine.gdx.actors.areaNoForm
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
@@ -74,7 +76,7 @@ class MinefieldStage(
             } else {
                 zoom - 3.0f * (1.0f / zoomMultiplier) * Gdx.graphics.deltaTime
             }
-            zoom = newZoom.coerceIn(0.9f, 4.0f)
+            zoom = newZoom.coerceIn(0.1f, 4.0f)
             update(true)
 
             GdxLocal.zoomLevelAlpha = when {
@@ -110,10 +112,9 @@ class MinefieldStage(
                             theme = renderSettings.theme,
                             size = renderSettings.areaSize,
                             area = it,
-                            areaForm = when {
-                                renderSettings.joinAreas ->
-                                    if (it.isCovered) AreaActor.getForm(it, field) else AreaForm.None
-                                else -> AreaForm.Full
+                            initialAreaForm = when {
+                                renderSettings.joinAreas -> AreaActor.getForm(it, field)
+                                else -> areaFullForm
                             },
                             onInputEvent = ::handleGameEvent,
                             squareDivider = renderSettings.squareDivider,
@@ -127,7 +128,7 @@ class MinefieldStage(
                     actors.forEach {
                         val areaActor = (it as AreaActor)
                         val area = field[areaActor.boundAreaId()]
-                        val areaForm = if (renderSettings.joinAreas) AreaActor.getForm(area, field) else AreaForm.Full
+                        val areaForm = if (renderSettings.joinAreas) AreaActor.getForm(area, field) else areaFullForm
                         areaActor.bindArea(reset, area, areaForm)
                     }
                 }

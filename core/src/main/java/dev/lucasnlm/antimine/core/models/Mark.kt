@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.core.models
 
 enum class Mark(
-    val mergeId: Int,
+    val ligatureId: Int,
 ) {
     None(0),
     Flag(1),

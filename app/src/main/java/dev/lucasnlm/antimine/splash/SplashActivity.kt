@@ -12,13 +12,16 @@ import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
 import dev.lucasnlm.external.IFeatureFlagManager
+import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.external.PlayGamesManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashActivity : AppCompatActivity() {
+    private val splashViewModel: SplashViewModel by viewModel()
     private val featureFlagManager: IFeatureFlagManager by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
-    private val splashViewModel: SplashViewModel by viewModel()
+    private val playGamesManager: IPlayGamesManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         GdxNativesLoader.load()
@@ -40,7 +43,9 @@ class SplashActivity : AppCompatActivity() {
         if (applicationContext.isAndroidTv()) {
             Intent(this, TvGameActivity::class.java).run { startActivity(this) }
         } else {
-            if (preferencesRepository.userId() != null && preferencesRepository.openGameDirectly()) {
+            val playGames = playGamesManager.hasGooglePlayGames()
+            if ((playGames && preferencesRepository.userId() != null || !playGames) &&
+                preferencesRepository.openGameDirectly()) {
                 Intent(this, GameActivity::class.java).run { startActivity(this) }
             } else {
                 Intent(this, MainActivity::class.java).run { startActivity(this) }
