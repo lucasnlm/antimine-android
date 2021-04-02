@@ -78,9 +78,9 @@ object AreaAssetBuilder {
             fillRectangle(border, border + newRadius, newSize, newSize - newRadius * 2)
             fillRectangle(border + newRadius, border, newSize - newRadius * 2, newSize)
             fillCircle(border + newRadius, border + newRadius, newRadius)
-            fillCircle(border + newRadius, border + newSize - newRadius, newRadius)
-            fillCircle(border + newSize - newRadius, border + newRadius, newRadius)
-            fillCircle(border + newSize - newRadius, border + newSize - newRadius, newRadius)
+            fillCircle(border + newRadius, border + newSize - newRadius - 1, newRadius)
+            fillCircle(border + newSize - newRadius - 1, border + newRadius, newRadius)
+            fillCircle(border + newSize - newRadius - 1, border + newSize - newRadius - 1, newRadius)
         }
 
         return Texture(pixmap).also {

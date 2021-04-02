@@ -298,6 +298,21 @@ class AreaActor(
         }
     }
 
+    private fun drawFocusMarker(batch: Batch) {
+        GdxLocal.gameTextures?.areaHighlight?.let {
+            val color = theme.palette.highlight
+            batch.drawTexture(
+                texture = it,
+                x = x - width * (focusScale - 1.0f) * 0.5f,
+                y = y - height * (focusScale - 1.0f) * 0.5f,
+                width = width * focusScale,
+                height = height * focusScale,
+                color = color.toGdxColor().dim(0.8f - (focusScale - 1.0f)),
+                blend = true,
+            )
+        }
+    }
+
     override fun draw(batch: Batch?, parentAlpha: Float) {
         super.draw(batch, parentAlpha)
 
@@ -316,6 +331,10 @@ class AreaActor(
                 }
                 drawPressed(this, isOdd)
                 drawUncoveredIcons(this)
+            }
+
+            if (GdxLocal.currentFocus?.id == area.id) {
+                drawFocusMarker(this)
             }
         }
     }
