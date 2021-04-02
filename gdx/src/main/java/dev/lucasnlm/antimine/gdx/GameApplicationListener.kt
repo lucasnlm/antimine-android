@@ -24,8 +24,8 @@ import dev.lucasnlm.antimine.gdx.models.GameTextures
 import dev.lucasnlm.antimine.gdx.models.InternalPadding
 import dev.lucasnlm.antimine.gdx.models.RenderQuality
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
-import dev.lucasnlm.antimine.gdx.stages.MinefieldStage
 import dev.lucasnlm.antimine.gdx.shaders.BlurShader
+import dev.lucasnlm.antimine.gdx.stages.MinefieldStage
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
@@ -52,7 +52,8 @@ class GameApplicationListener(
     private var minefieldStage: MinefieldStage? = null
     private var boundAreas: List<Area> = listOf()
     private var boundMinefield: Minefield? = null
-    private val useBlur = !context.isAndroidTv() && !context.isAndroidWearOs() && quality != RenderQuality.Low
+    private val useBlur =
+        !context.isAndroidTv() && !context.isAndroidWearOs() && quality != RenderQuality.Low && context.isPortrait()
 
     private var batch: SpriteBatch? = null
     private var mainFrameBuffer: FrameBuffer? = null
@@ -78,7 +79,7 @@ class GameApplicationListener(
             handleDoubleTaps = control == ControlStyle.DoubleClick || control == ControlStyle.DoubleClickInverted,
             longTapTimeout = preferencesRepository.customLongPressTimeout(),
             doubleTapTimeout = ViewConfiguration.getDoubleTapTimeout().toLong(),
-            freeControl = context.isAndroidWearOs(),
+            freeControl = context.isAndroidWearOs() || !context.isPortrait(),
         )
     }
 
@@ -301,7 +302,7 @@ class GameApplicationListener(
             }
             else -> {
                 InternalPadding(
-                    start = 0f,
+                    start = padding,
                     end = padding,
                     bottom = padding,
                     top = padding,
