@@ -91,6 +91,18 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
 
         difficulties.strokeColor = usingTheme.palette.covered.toAndroidColor()
 
+        startStandard.setRadius(5f)
+        startStandard.bind(
+            theme = usingTheme,
+            text = getString(R.string.standard),
+            extra = getDifficultyExtra(Difficulty.Standard),
+            onAction = {
+                viewModel.sendEvent(
+                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Standard)
+                )
+            }
+        )
+
         startBeginner.setRadius(5f)
         startBeginner.bind(
             theme = usingTheme,

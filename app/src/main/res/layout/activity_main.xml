@@ -77,6 +77,11 @@
                     android:layout_height="wrap_content">
 
                     <dev.lucasnlm.antimine.ui.view.CardButtonView
+                        android:id="@+id/startStandard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <dev.lucasnlm.antimine.ui.view.CardButtonView
                         android:id="@+id/startBeginner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
