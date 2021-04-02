@@ -154,8 +154,8 @@ class MinefieldStage(
 
             val start = 0.5f * virtualWidth - padding.start
             val end = it.width - 0.5f * virtualWidth + padding.end
-            val top = it.height - 0.5f * (virtualHeight + padding.top)
-            val bottom = 0.5f * virtualHeight + padding.bottom - renderSettings.navigationBarHeight
+            val top = it.height - 0.5f * virtualHeight - padding.top
+            val bottom = 0.5f * virtualHeight + padding.bottom
 
             camera.run {
                 position.set((start + end) * 0.5f, (top + bottom) * 0.5f, 0f)
