@@ -23,3 +23,23 @@ fun allAreaForms() = (0..15).map {
         right = it and 0b0001 != 0x00,
     )
 }.toList()
+
+object FormNames {
+    const val core = "core"
+    const val bottom = "b"
+    const val top = "t"
+    const val right = "r"
+    const val left = "l"
+    const val cornerTopLeft = "c-t-l"
+    const val cornerTopRight = "c-t-r"
+    const val cornerBottomRight = "c-b-r"
+    const val cornerBottomLeft = "c-b-l"
+    const val borderCornerTopRight = "bc-t-r"
+    const val borderCornerTopLeft = "bc-t-l"
+    const val borderCornerBottomRight = "bc-b-r"
+    const val borderCornerBottomLeft = "bc-b-l"
+    const val fillTopLeft = "t-l-tl"
+    const val fillTopRight = "t-r-tr"
+    const val fillBottomRight = "b-r-br"
+    const val fillBottomLeft = "b-l-bl"
+}

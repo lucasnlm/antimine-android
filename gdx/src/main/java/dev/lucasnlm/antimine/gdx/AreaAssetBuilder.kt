@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.GridPoint2
 import com.badlogic.gdx.math.Vector
 import com.badlogic.gdx.math.Vector2
 import dev.lucasnlm.antimine.gdx.actors.AreaForm
+import dev.lucasnlm.antimine.gdx.actors.FormNames
 import dev.lucasnlm.antimine.gdx.actors.areaNoForm
 import dev.lucasnlm.antimine.ui.ext.alpha
 import kotlin.math.ceil
@@ -228,7 +229,7 @@ object AreaAssetBuilder {
             // core
             x = 0
             y = 0
-            textureRegions["core"] = GridPoint2(0, 0)
+            textureRegions[FormNames.core] = GridPoint2(0, 0)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -238,7 +239,7 @@ object AreaAssetBuilder {
             // bottom
             x = textureSize
             y = 0
-            textureRegions["bottom"] = GridPoint2(x, y)
+            textureRegions[FormNames.bottom] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -247,7 +248,7 @@ object AreaAssetBuilder {
             // top
             x = textureSize * 2
             y = 0
-            textureRegions["top"] = GridPoint2(x, y)
+            textureRegions[FormNames.top] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -256,7 +257,7 @@ object AreaAssetBuilder {
             // right
             x = textureSize * 3
             y = 0
-            textureRegions["right"] = GridPoint2(x, y)
+            textureRegions[FormNames.right] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -265,7 +266,7 @@ object AreaAssetBuilder {
             // left
             x = textureSize * 4
             y = 0
-            textureRegions["left"] = GridPoint2(x, y)
+            textureRegions[FormNames.left] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -274,7 +275,7 @@ object AreaAssetBuilder {
             // corner top left
             x = textureSize * 5
             y = 0
-            textureRegions["corner-top-left"] = GridPoint2(x, y)
+            textureRegions[FormNames.cornerTopLeft] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -283,7 +284,7 @@ object AreaAssetBuilder {
             // corner top right
             x = textureSize * 6
             y = 0
-            textureRegions["corner-top-right"] = GridPoint2(x, y)
+            textureRegions[FormNames.cornerTopRight] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -292,7 +293,7 @@ object AreaAssetBuilder {
             // corner bottom right
             x = textureSize * 7
             y = 0
-            textureRegions["corner-bottom-right"] = GridPoint2(x, y)
+            textureRegions[FormNames.cornerBottomRight] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -301,7 +302,7 @@ object AreaAssetBuilder {
             // corner bottom left
             x = 0
             y = textureSize
-            textureRegions["corner-bottom-left"] = GridPoint2(x, y)
+            textureRegions[FormNames.cornerBottomLeft] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -310,7 +311,7 @@ object AreaAssetBuilder {
             // border corner top right
             x = textureSize
             y = textureSize
-            textureRegions["bc-top-right"] = GridPoint2(x, y)
+            textureRegions[FormNames.borderCornerTopRight] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -321,7 +322,7 @@ object AreaAssetBuilder {
             // border corner top left
             x = textureSize * 2
             y = textureSize
-            textureRegions["bc-top-left"] = GridPoint2(x, y)
+            textureRegions[FormNames.borderCornerTopLeft] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -332,7 +333,7 @@ object AreaAssetBuilder {
             // border corner bottom right
             x = textureSize * 3
             y = textureSize
-            textureRegions["bc-bottom-right"] = GridPoint2(x, y)
+            textureRegions[FormNames.borderCornerBottomRight] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -343,7 +344,7 @@ object AreaAssetBuilder {
             // border corner bottom left
             x = textureSize * 4
             y = textureSize
-            textureRegions["bc-bottom-left"] = GridPoint2(x, y)
+            textureRegions[FormNames.borderCornerBottomLeft] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -356,7 +357,7 @@ object AreaAssetBuilder {
             // top, top-left, left
             x = textureSize * 7
             y = textureSize
-            textureRegions["t-l-tl"] = GridPoint2(x, y)
+            textureRegions[FormNames.fillTopLeft] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -365,7 +366,7 @@ object AreaAssetBuilder {
             // top, top-right, right
             x = textureSize * 6
             y = textureSize
-            textureRegions["t-r-tr"] = GridPoint2(x, y)
+            textureRegions[FormNames.fillTopRight] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -374,7 +375,7 @@ object AreaAssetBuilder {
             // bottom, bottom-right, right
             x = 0
             y = textureSize * 2
-            textureRegions["b-r-br"] = GridPoint2(x, y)
+            textureRegions[FormNames.fillBottomRight] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
@@ -383,7 +384,7 @@ object AreaAssetBuilder {
             // bottom, bottom-left, left
             x = textureSize
             y = textureSize * 2
-            textureRegions["b-l-bl"] = GridPoint2(x, y)
+            textureRegions[FormNames.fillBottomLeft] = GridPoint2(x, y)
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
