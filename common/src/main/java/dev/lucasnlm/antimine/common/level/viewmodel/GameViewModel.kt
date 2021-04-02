@@ -530,7 +530,7 @@ open class GameViewModel(
         }
     }
 
-    private fun explosionDelay() = if (preferencesRepository.useAnimations()) 750L else 0L
+    private fun explosionDelay() = if (preferencesRepository.useAnimations()) 400L else 0L
 
     fun hasUnknownMines(): Boolean {
         return !gameController.hasIsolatedAllMines()
