@@ -137,7 +137,7 @@ class AreaActor(
         val internalPadding = squareDivider / GdxLocal.zoom
 
         if (!isOdd && !area.isCovered) {
-            GdxLocal.gameTextures?.areaTextures?.get(areaNoForm)?.let {
+            GdxLocal.gameTextures?.areaCovered?.let {
                 batch.drawTexture(
                     texture = it,
                     x = x + internalPadding,
@@ -170,7 +170,7 @@ class AreaActor(
         }
     }
 
-    private fun drawMineBackground(batch: Batch, isOdd: Boolean) {
+    private fun drawMineBackground(batch: Batch) {
         val internalPadding = squareDivider / GdxLocal.zoom
         val coverColor = theme.palette.covered.toOppositeMax().mul(0.8f, 0.3f, 0.3f, 1.0f)
 
@@ -298,7 +298,7 @@ class AreaActor(
                 drawCoveredIcons(this)
             } else {
                 if (area.hasMine) {
-                    drawMineBackground(this, isOdd)
+                    drawMineBackground(this)
                 }
 
                 drawUncoveredIcons(this)

@@ -1,21 +1,13 @@
 package dev.lucasnlm.antimine.gdx
 
 import android.graphics.Color
-import android.util.Size
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.assets.loaders.TextureAtlasLoader
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
-import com.badlogic.gdx.maps.ImageResolver
 import com.badlogic.gdx.math.GridPoint2
-import com.badlogic.gdx.math.Vector
-import com.badlogic.gdx.math.Vector2
-import dev.lucasnlm.antimine.gdx.actors.AreaForm
 import dev.lucasnlm.antimine.gdx.actors.FormNames
-import dev.lucasnlm.antimine.gdx.actors.areaNoForm
-import dev.lucasnlm.antimine.ui.ext.alpha
 import kotlin.math.ceil
 import kotlin.math.ln
 import kotlin.math.pow
@@ -97,125 +89,20 @@ object AreaAssetBuilder {
         }
     }
 
-    fun getAreaTextureForm(
-        areaForm: AreaForm,
-        expectedSize: Float,
-        radiusLevel: Int,
-    ): Texture {
-        val size = expectedSize.toDouble().run {
-            2.0.pow(ceil(ln(this) / ln(2.0)))
-        }.toInt()
-
-        val border = (Gdx.graphics.density * 10f).toInt()
-        val square = size - border * 2
-        val radius = (square * 0.5 * radiusLevel * 0.1f).toInt()
-
-        val pixmap = Pixmap(size, size, Pixmap.Format.RGBA8888).apply {
-            blending = Pixmap.Blending.None
-            filter = Pixmap.Filter.BiLinear
-
-            setColor(Color.WHITE.toGdxColor(0.0f))
-            fillRectangle(0, 0, size, size)
-
-            setColor(Color.WHITE.toGdxColor(1.0f))
-
-            if (areaForm == areaNoForm) {
-                fillRectangle(0, 0, size, size)
-            } else {
-                val realRadius = (size * 0.5f).toInt()
-                //fillCircle(realRadius, realRadius, realRadius)
-
-                fillRectangle(border, border + radius, square + 1, square - (radius * 2) + 1)
-                fillRectangle(border + radius, border, square - (radius * 2), square + 1)
-
-                areaForm.run {
-                    if (!top && !left) {
-                        fillCircle(border + radius, border + radius, radius)
-                    }
-
-                    if (!top && !right) {
-                        fillCircle(border + square - radius, border + radius, radius)
-                    }
-
-                    if (!bottom && !right) {
-                        fillCircle(border + square - radius, border + square - radius, radius)
-                    }
-
-                    if (!bottom && !left) {
-                        fillCircle(border + radius, border + square - radius, radius)
-                    }
-
-                    if (top && right) {
-                        setColor(Color.WHITE.toGdxColor(1.0f))
-                        fillRectangle(border + square, 0, border, border)
-                        setColor(Color.WHITE.toGdxColor(0.0f))
-                        fillCircle(border + square + border, 0, border)
-                    }
-
-                    if (top && left) {
-                        setColor(Color.WHITE.toGdxColor(1.0f))
-                        fillRectangle(0, 0, border, border)
-                        setColor(Color.WHITE.toGdxColor(0.0f))
-                        fillCircle(0, 0, border)
-                    }
-
-                    if (bottom && right) {
-                        setColor(Color.WHITE.toGdxColor(1.0f))
-                        fillRectangle(border + square, border + square, border, border)
-                        setColor(Color.WHITE.toGdxColor(0.0f))
-                        fillCircle(border + square + border, border + square + border, border)
-                    }
-
-                    if (bottom && left) {
-                        setColor(Color.WHITE.toGdxColor(1.0f))
-                        fillRectangle(0, border + square, border, border)
-                        setColor(Color.WHITE.toGdxColor(0.0f))
-                        fillCircle(0, border + square + border, border)
-                    }
-
-                    if (bottom) {
-                        setColor(Color.RED.toGdxColor(1.0f))
-                        fillRectangle(border, border + square / 2, square + 1, square / 2 + border)
-                    }
-
-                    if (top) {
-                        setColor(Color.GREEN.toGdxColor(1.0f))
-                        fillRectangle(border, 0, square + 1, size / 2 + border)
-                    }
-
-                    if (right) {
-                        setColor(Color.YELLOW.toGdxColor(1.0f))
-                        fillRectangle(square / 2 + border, border, square / 2 + border, square + 1)
-                    }
-
-                    if (left) {
-                        setColor(Color.BLUE.toGdxColor(1.0f))
-                        fillRectangle(0, border, square / 2 + border, square + 1)
-                    }
-                }
-            }
-        }
-
-        return Texture(pixmap).also {
-            pixmap.dispose()
-            it.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear)
-        }
-    }
-
     fun getAreaTextureAtlas(
         radiusLevel: Int,
     ): TextureAtlas {
         val pixMapSize = 2048
-        val textureSize = 2048 / 8
+        val textureSize = pixMapSize / 8
         val coverColor = Color.WHITE.toGdxColor(1.0f)
         val transparent = Color.WHITE.toGdxColor(0.0f)
 
-        val border = (textureSize * 0.075f).toInt()
+        val border = (textureSize * 0.08f).toInt()
         val square = textureSize - border * 2
         val radius = (square * 0.5 * radiusLevel * 0.1f).toInt()
 
-        var x = 0
-        var y = 0
+        var x: Int
+        var y: Int
 
         val textureRegions = mutableMapOf<String, GridPoint2>()
 

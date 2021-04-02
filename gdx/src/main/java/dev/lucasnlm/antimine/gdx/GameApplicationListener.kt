@@ -142,18 +142,6 @@ class GameApplicationListener(
                     expectedSize = expectedSize,
                     radiusLevel = radiusLevel,
                 ),
-                areaCoveredOdd = AreaAssetBuilder.getAreaTexture(
-                    expectedSize = expectedSize,
-                    radiusLevel = radiusLevel,
-                ),
-                areaUncovered = AreaAssetBuilder.getAreaTexture(
-                    expectedSize = expectedSize,
-                    radiusLevel = 1,
-                ),
-                areaUncoveredOdd = AreaAssetBuilder.getAreaTexture(
-                    expectedSize = expectedSize,
-                    radiusLevel = 1,
-                ),
                 aroundMines = listOf(
                     atlas.findRegion(TextureConstants.around1),
                     atlas.findRegion(TextureConstants.around2),
@@ -171,17 +159,6 @@ class GameApplicationListener(
                     expectedSize = expectedSize,
                     radiusLevel = radiusLevel,
                 ),
-                detailedAreaOdd = AreaAssetBuilder.getAreaTexture(
-                    expectedSize = expectedSize,
-                    radiusLevel = radiusLevel,
-                ),
-                areaTextures = allAreaForms().map {
-                    it to AreaAssetBuilder.getAreaTextureForm(
-                        areaForm = it,
-                        expectedSize = expectedSize,
-                        radiusLevel = radiusLevel,
-                    )
-                }.toMap(),
             )
         }
 
@@ -202,12 +179,6 @@ class GameApplicationListener(
             gameTextures?.run {
                 areaHighlight.dispose()
                 detailedArea.dispose()
-                detailedAreaOdd.dispose()
-                areaCovered.dispose()
-                areaCoveredOdd.dispose()
-                areaUncovered.dispose()
-                areaUncoveredOdd.dispose()
-                areaTextures.forEach { (_, texture) -> texture.dispose() }
             }
             textureAtlas?.dispose()
             areaAtlas?.dispose()
