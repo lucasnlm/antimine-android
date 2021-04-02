@@ -28,7 +28,6 @@
             android:animateLayoutChanges="true">
 
             <TextView
-                android:id="@+id/game_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAllCaps="true"
