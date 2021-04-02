@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="false"
-        android:layout_marginVertical="64dp"
+        android:layout_marginVertical="100dp"
         android:paddingVertical="8dp"
         android:paddingHorizontal="12dp"
         android:background="@drawable/round_background"
