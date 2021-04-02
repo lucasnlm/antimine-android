@@ -11,6 +11,8 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun reset() {}
 
+    override fun resetControls() {}
+
     override fun customGameMode(): Minefield = customMinefield
 
     override fun updateCustomGameMode(minefield: Minefield) {
@@ -69,7 +71,7 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun squareRadius(): Int = 2
 
-    override fun setSquareRadius(value: Int) {}
+    override fun setSquareRadius(value: Int?) {}
 
     override fun getTips(): Int = 0
 
@@ -93,9 +95,11 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun squareSize(): Int = 50
 
-    override fun setSquareSize(value: Int) {}
+    override fun setSquareSize(value: Int?) {}
 
     override fun useAnimations(): Boolean = false
+
+    override fun setAnimations(enabled: Boolean) {}
 
     override fun setNoGuessingAlgorithm(value: Boolean) {}
 
@@ -119,6 +123,8 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun showWindowsWhenFinishGame(): Boolean = true
 
+    override fun mustShowWindowsWhenFinishGame(enabled: Boolean) {}
+
     override fun openGameDirectly(): Boolean = false
 
     override fun setOpenGameDirectly(value: Boolean) {}
@@ -132,4 +138,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun setUnlockedThemes(themes: String) { }
 
     override fun getUnlockedThemes(): List<Int> = listOf()
+
+    override fun squareDivider(): Int = 0
+
+    override fun setSquareDivider(value: Int?) {}
 }
