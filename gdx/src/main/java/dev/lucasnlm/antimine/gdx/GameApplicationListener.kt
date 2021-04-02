@@ -289,7 +289,6 @@ class GameApplicationListener(
                     )
                 }
 
-                flush()
                 end()
             }
         } else {
