@@ -1,7 +1,9 @@
 package dev.lucasnlm.antimine.common.level.view
 
 import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import androidx.appcompat.widget.TooltipCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.postDelayed
 import androidx.lifecycle.lifecycleScope
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -21,6 +24,7 @@ import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
 import dev.lucasnlm.antimine.gdx.GdxLocal
+import dev.lucasnlm.antimine.gdx.models.RenderQuality
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
@@ -32,6 +36,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+
 
 open class GdxLevelFragment : AndroidFragmentApplication() {
     private val gameViewModel by sharedViewModel<GameViewModel>()
@@ -63,7 +68,8 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 lifecycleScope.launch {
                     gameViewModel.onLongClick(it)
                 }
-            }
+            },
+            quality = getQuality(),
         )
     }
 
@@ -122,6 +128,21 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
         }
 
         bindControlSwitcherIfNeeded(view)
+    }
+
+    private fun getQuality(): RenderQuality {
+        val width = Resources.getSystem().displayMetrics.widthPixels
+        return when {
+            width < 900 -> {
+                RenderQuality.Low
+            }
+            width < 1080 -> {
+                RenderQuality.Mid
+            }
+            else -> {
+                RenderQuality.High
+            }
+        }
     }
 
     private fun bindControlSwitcherIfNeeded(view: View, delayed: Boolean = true) {

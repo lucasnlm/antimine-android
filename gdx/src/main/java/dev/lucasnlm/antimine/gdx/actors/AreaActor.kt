@@ -160,10 +160,10 @@ class AreaActor(
             pieces.forEach { piece ->
                 batch.drawRegion(
                     texture = atlas.findRegion(piece),
-                    x = x + internalPadding - 1,
-                    y = y + internalPadding - 1,
-                    width = width - internalPadding * 2 + 2,
-                    height = height - internalPadding * 2 + 2,
+                    x = x + internalPadding - Gdx.graphics.density * 2,
+                    y = y + internalPadding - Gdx.graphics.density * 2,
+                    width = width - internalPadding * 2 + 4 * Gdx.graphics.density,
+                    height = height - internalPadding * 2 + 4 * Gdx.graphics.density,
                     color = if (area.mark.isNotNone()) {
                         coverColor.toGdxColor(1.0f).dim(0.6f)
                     } else {
@@ -183,10 +183,10 @@ class AreaActor(
             pieces.forEach { piece ->
                 batch.drawRegion(
                     texture = atlas.findRegion(piece),
-                    x = x + internalPadding - 1,
-                    y = y + internalPadding - 1,
-                    width = width - internalPadding * 2 + 2,
-                    height = height - internalPadding * 2 + 2,
+                    x = x + internalPadding - Gdx.graphics.density * 2,
+                    y = y + internalPadding - Gdx.graphics.density * 2,
+                    width = width - internalPadding * 2 + 4 * Gdx.graphics.density,
+                    height = height - internalPadding * 2 + 4 * Gdx.graphics.density,
                     color = coverColor,
                     blend = false,
                 )

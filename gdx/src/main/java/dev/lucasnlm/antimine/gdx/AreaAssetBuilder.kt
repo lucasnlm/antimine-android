@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.GridPoint2
 import dev.lucasnlm.antimine.gdx.actors.FormNames
+import dev.lucasnlm.antimine.gdx.models.RenderQuality
 import kotlin.math.ceil
 import kotlin.math.ln
 import kotlin.math.pow
@@ -92,8 +93,13 @@ object AreaAssetBuilder {
     fun getAreaTextureAtlas(
         radiusLevel: Int,
         squareDivider: Float,
+        quality: RenderQuality,
     ): TextureAtlas {
-        val pixMapSize = 2048
+        val pixMapSize = when (quality) {
+            RenderQuality.Low -> 512
+            RenderQuality.Mid -> 1024
+            RenderQuality.High -> 2048
+        }
         val textureSize = pixMapSize / 8
         val coverColor = Color.WHITE.toGdxColor(1.0f)
         val transparent = Color.WHITE.toGdxColor(0.0f)

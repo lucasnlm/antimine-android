@@ -64,6 +64,7 @@ class MinefieldStage(
         cameraController = CameraController(
             camera = camera,
             renderSettings = renderSettings,
+            freeControl = actionSettings.freeControl,
         )
     }
 

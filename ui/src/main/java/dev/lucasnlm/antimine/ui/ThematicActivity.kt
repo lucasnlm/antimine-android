@@ -46,8 +46,7 @@ abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActi
         super.onResume()
 
         if (usingTheme.id != currentTheme().id || usingPreferredLanguage != currentPreferredLanguage()) {
-            finish()
-            startActivity(intent)
+            recreate()
             overridePendingTransition(0, 0)
         }
     }

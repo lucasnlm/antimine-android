@@ -12,4 +12,5 @@ data class RenderSettings(
     val radius: Float,
     val joinAreas: Boolean,
     val squareDivider: Float,
+    val quality: RenderQuality,
 )

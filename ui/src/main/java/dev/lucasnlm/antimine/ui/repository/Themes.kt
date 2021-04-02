@@ -76,7 +76,7 @@ object Themes {
         isPaid = false,
     )
 
-    private fun amoledTheme() = AppTheme(
+    fun amoledTheme() = AppTheme(
         id = 2L,
         theme = R.style.CustomAmoledTheme,
         palette = AreaPalette(
@@ -418,7 +418,7 @@ object Themes {
         )
     )
 
-    private fun darkLimeTheme() = AppTheme(
+    fun darkLimeTheme() = AppTheme(
         id = 16L,
         theme = R.style.CustomLimeTheme,
         palette = AreaPalette(
@@ -426,7 +426,7 @@ object Themes {
             border = 0x000000,
             background = 0x212121,
             covered = 0xcddc39,
-            coveredOdd = 0x99aa00,
+            coveredOdd = 0xcddc39,
             uncovered = 0x212121,
             uncoveredOdd = 0x1c1c1c,
             minesAround1 = 0xFFFFFF,

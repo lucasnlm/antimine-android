@@ -10,14 +10,15 @@ import dev.lucasnlm.antimine.gdx.models.RenderSettings
 class CameraController(
     private val renderSettings: RenderSettings,
     private val camera: Camera,
+    private val freeControl: Boolean,
 ) {
     private val velocity: Vector2 = Vector2.Zero.cpy()
 
     private fun limitSpeed(minefieldSize: SizeF) {
         val padding = renderSettings.internalPadding
         val zoom =  (camera as OrthographicCamera).zoom
-        val screenWidth = Gdx.graphics.width * zoom
-        val screenHeight = Gdx.graphics.height * zoom
+        val screenWidth = if (zoom < 1.0f) Gdx.graphics.width * zoom else Gdx.graphics.width.toFloat()
+        val screenHeight = if (zoom < 1.0f) Gdx.graphics.height * zoom else Gdx.graphics.height.toFloat()
         val invZoom = 1.0f / zoom
 
         camera.run {
@@ -31,7 +32,7 @@ class CameraController(
             val virtualHeight =
                 screenHeight - renderSettings.appBarWithStatusHeight - renderSettings.navigationBarHeight
 
-            if (screenWidth > minefieldSize.width) {
+            if (screenWidth > minefieldSize.width && !freeControl) {
                 velocity.x = 0.0f
             } else if ((newX < start && velocity.x < 0.0) || (newX > end && velocity.x > 0.0)) {
                 velocity.x = 0.0f
@@ -39,7 +40,7 @@ class CameraController(
                 velocity.x *= RESISTANCE
             }
 
-            if (virtualHeight > minefieldSize.height) {
+            if (virtualHeight > minefieldSize.height && !freeControl) {
                 velocity.y = 0.0f
             } else if ((newY > top && velocity.y > 0.0) || newY < bottom && velocity.y < 0.0) {
                 velocity.y = 0.0f

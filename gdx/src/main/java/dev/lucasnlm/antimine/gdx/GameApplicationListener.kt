@@ -18,11 +18,11 @@ import dev.lucasnlm.antimine.core.isAndroidWearOs
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
-import dev.lucasnlm.antimine.gdx.actors.allAreaForms
 import dev.lucasnlm.antimine.gdx.controller.GameInputController
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
 import dev.lucasnlm.antimine.gdx.models.GameTextures
 import dev.lucasnlm.antimine.gdx.models.InternalPadding
+import dev.lucasnlm.antimine.gdx.models.RenderQuality
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
 import dev.lucasnlm.antimine.gdx.stages.MinefieldStage
 import dev.lucasnlm.antimine.gdx.shaders.BlurShader
@@ -38,6 +38,7 @@ class GameApplicationListener(
     private val context: Context,
     private val preferencesRepository: IPreferencesRepository,
     private val dimensionRepository: IDimensionRepository,
+    private val quality: RenderQuality,
     private val theme: AppTheme,
     private val onSingleTap: (Int) -> Unit,
     private val onDoubleTap: (Int) -> Unit,
@@ -51,7 +52,7 @@ class GameApplicationListener(
     private var minefieldStage: MinefieldStage? = null
     private var boundAreas: List<Area> = listOf()
     private var boundMinefield: Minefield? = null
-    private val useBlur = !context.isAndroidTv() && !context.isAndroidWearOs()
+    private val useBlur = !context.isAndroidTv() && !context.isAndroidWearOs() && quality != RenderQuality.Low
 
     private var batch: SpriteBatch? = null
     private var mainFrameBuffer: FrameBuffer? = null
@@ -68,6 +69,7 @@ class GameApplicationListener(
         radius = preferencesRepository.squareRadius().toFloat(),
         squareDivider = preferencesRepository.squareDivider().toFloat(),
         joinAreas = preferencesRepository.squareDivider() == 0,
+        quality = quality,
     )
 
     private val actionSettings = with(preferencesRepository) {
@@ -76,6 +78,7 @@ class GameApplicationListener(
             handleDoubleTaps = control == ControlStyle.DoubleClick || control == ControlStyle.DoubleClickInverted,
             longTapTimeout = preferencesRepository.customLongPressTimeout(),
             doubleTapTimeout = ViewConfiguration.getDoubleTapTimeout().toLong(),
+            freeControl = context.isAndroidWearOs(),
         )
     }
 
@@ -132,6 +135,7 @@ class GameApplicationListener(
             areaAtlas = AreaAssetBuilder.getAreaTextureAtlas(
                 radiusLevel = radiusLevel,
                 squareDivider = renderSettings.squareDivider,
+                quality = quality,
             )
             textureAtlas = atlas
             gameTextures = GameTextures(
