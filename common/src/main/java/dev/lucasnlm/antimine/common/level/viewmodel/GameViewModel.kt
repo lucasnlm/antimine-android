@@ -752,7 +752,6 @@ open class GameViewModel(
         return res
     }
 
-
     fun getAppTheme(): AppTheme = themeRepository.getTheme()
 
     private fun getAreaSizeMultiplier() = preferencesRepository.squareSize()

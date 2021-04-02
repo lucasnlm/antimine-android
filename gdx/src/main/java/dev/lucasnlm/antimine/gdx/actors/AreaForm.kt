@@ -6,7 +6,7 @@ data class AreaForm(
     val left: Boolean,
     val right: Boolean,
     val topLeft: Boolean = false,
-    val topRight: Boolean  = false,
+    val topRight: Boolean = false,
     val bottomLeft: Boolean = false,
     val bottomRight: Boolean = false,
 )

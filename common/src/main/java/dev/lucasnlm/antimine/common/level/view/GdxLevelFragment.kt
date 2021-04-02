@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.common.level.view
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import androidx.appcompat.widget.TooltipCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.postDelayed
 import androidx.lifecycle.lifecycleScope
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -36,7 +34,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-
 
 open class GdxLevelFragment : AndroidFragmentApplication() {
     private val gameViewModel by sharedViewModel<GameViewModel>()

@@ -14,7 +14,6 @@ import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.PreferenceManager
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
@@ -32,7 +31,6 @@ import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.splash.SplashActivity
-import dev.lucasnlm.antimine.tutorial.view.TutorialLevelFragment
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.external.IAdsManager
@@ -43,7 +41,6 @@ import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_tutorial_level.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
@@ -76,7 +73,6 @@ class GameActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         if (!preferencesRepository.isPremiumEnabled()) {
             adsManager.start(this)
@@ -458,13 +454,6 @@ class GameActivity :
 
     private fun loadGameFragment() {
         supportFragmentManager.apply {
-            findFragmentByTag(TutorialLevelFragment.TAG)?.let { it ->
-                beginTransaction().apply {
-                    remove(it)
-                    commitAllowingStateLoss()
-                }
-            }
-
             if (findFragmentByTag(GdxLevelFragment.TAG) == null) {
                 beginTransaction().apply {
                     replace(R.id.levelContainer, GdxLevelFragment(), GdxLevelFragment.TAG)

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import androidx.preference.PreferenceManager
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import dev.lucasnlm.antimine.common.level.models.Status
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
@@ -53,7 +52,6 @@ class TvGameActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         bindViewModel()
         loadGameFragment()

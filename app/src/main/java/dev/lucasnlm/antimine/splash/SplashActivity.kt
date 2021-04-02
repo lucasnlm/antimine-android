@@ -13,7 +13,6 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IPlayGamesManager
-import dev.lucasnlm.external.PlayGamesManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -45,7 +44,8 @@ class SplashActivity : AppCompatActivity() {
         } else {
             val playGames = playGamesManager.hasGooglePlayGames()
             if ((playGames && preferencesRepository.userId() != null || !playGames) &&
-                preferencesRepository.openGameDirectly()) {
+                preferencesRepository.openGameDirectly()
+            ) {
                 Intent(this, GameActivity::class.java).run { startActivity(this) }
             } else {
                 Intent(this, MainActivity::class.java).run { startActivity(this) }

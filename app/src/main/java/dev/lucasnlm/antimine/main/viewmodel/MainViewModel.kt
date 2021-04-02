@@ -129,6 +129,5 @@ class MainViewModel(
     }
 
     private fun startTutorial() {
-
     }
 }

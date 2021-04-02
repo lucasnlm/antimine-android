@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.ThematicActivity
@@ -18,7 +17,6 @@ import java.util.Locale
 class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         section.bind(
             text = R.string.select_language,

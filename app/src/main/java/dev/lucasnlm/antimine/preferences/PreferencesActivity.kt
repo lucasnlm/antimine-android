@@ -26,7 +26,8 @@ class PreferencesActivity :
         switch: SwitchMaterial,
         checked: Boolean,
         supportTv: Boolean,
-        action: (Boolean) -> Unit) {
+        action: (Boolean) -> Unit
+    ) {
         if (isAndroidTv && supportTv || !isAndroidTv) {
             label.setOnClickListener {
                 switch.apply {
@@ -50,7 +51,7 @@ class PreferencesActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
+
         bindToolbar(preferenceRepository.hasCustomizations())
 
         bindItem(

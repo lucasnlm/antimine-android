@@ -16,7 +16,7 @@ class CameraController(
 
     private fun limitSpeed(minefieldSize: SizeF) {
         val padding = renderSettings.internalPadding
-        val zoom =  (camera as OrthographicCamera).zoom
+        val zoom = (camera as OrthographicCamera).zoom
         val screenWidth = if (zoom < 1.0f) Gdx.graphics.width * zoom else Gdx.graphics.width.toFloat()
         val screenHeight = if (zoom < 1.0f) Gdx.graphics.height * zoom else Gdx.graphics.height.toFloat()
         val invZoom = 1.0f / zoom

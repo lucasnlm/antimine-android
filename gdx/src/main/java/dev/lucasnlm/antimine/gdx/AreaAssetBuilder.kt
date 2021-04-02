@@ -195,7 +195,7 @@ object AreaAssetBuilder {
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
-            fillCircle(x + textureSize - radius - border - 1,  y + textureSize - radius - border - 1, radius)
+            fillCircle(x + textureSize - radius - border - 1, y + textureSize - radius - border - 1, radius)
 
             // corner bottom left
             x = 0
@@ -204,7 +204,7 @@ object AreaAssetBuilder {
             setColor(transparent)
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
-            fillCircle(x + border + radius,  y + textureSize - radius - border - 1, radius)
+            fillCircle(x + border + radius, y + textureSize - radius - border - 1, radius)
 
             // border corner top right
             x = textureSize
