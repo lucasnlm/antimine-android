@@ -62,6 +62,3 @@ Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-andro
 - [Koin](https://github.com/InsertKoinIO/koin)
 - [Room](https://developer.android.com/training/data-storage/room)
 - [Robolectric](http://robolectric.org/)
-
-## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flucasnlm%2Fantimine-android.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Flucasnlm%2Fantimine-android?ref=badge_large)
