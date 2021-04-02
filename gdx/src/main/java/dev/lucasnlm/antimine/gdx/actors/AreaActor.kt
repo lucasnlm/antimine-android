@@ -255,10 +255,11 @@ class AreaActor(
 
     private fun drawPressed(batch: Batch, isOdd: Boolean) {
         val internalPadding = squareDivider / GdxLocal.zoom
-        val coverColor = if (isOdd) { theme.palette.coveredOdd } else { theme.palette.covered }
 
-        if ((isPressed || focusScale > 1.0f) && area.isCovered) {
+        if ((isPressed || focusScale > 1.0f)) {
             if (area.isCovered) {
+                val coverColor = if (isOdd) { theme.palette.coveredOdd } else { theme.palette.covered }
+
                 GdxLocal.gameTextures?.detailedArea?.let {
                     batch.drawTexture(
                         texture = it,
@@ -277,6 +278,19 @@ class AreaActor(
                         width = width * focusScale,
                         height = height * focusScale,
                         color = coverColor.toGdxColor(1.0f).dim(0.8f - (focusScale - 1.0f)),
+                        blend = true,
+                    )
+                }
+            } else {
+                GdxLocal.gameTextures?.detailedArea?.let {
+                    val color = theme.palette.background
+                    batch.drawTexture(
+                        texture = it,
+                        x = x - width * (focusScale - 1.0f) * 0.5f,
+                        y = y - height * (focusScale - 1.0f) * 0.5f,
+                        width = width * focusScale,
+                        height = height * focusScale,
+                        color = color.toOppositeMax(0.25f).dim(0.8f - (focusScale - 1.0f)),
                         blend = true,
                     )
                 }
@@ -300,7 +314,7 @@ class AreaActor(
                 if (area.hasMine) {
                     drawMineBackground(this)
                 }
-
+                drawPressed(this, isOdd)
                 drawUncoveredIcons(this)
             }
         }
