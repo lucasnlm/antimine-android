@@ -240,9 +240,7 @@ class AreaActor(
                 drawAsset(
                     batch = batch,
                     texture = it.aroundMines[area.minesAround - 1],
-                    color =
-                        theme.palette.minesAround(area.minesAround - 1)
-                            .toGdxColor(GdxLocal.zoomLevelAlpha),
+                    color = theme.palette.minesAround(area.minesAround - 1).toGdxColor(GdxLocal.zoomLevelAlpha),
                 )
             }
 

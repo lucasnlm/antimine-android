@@ -111,8 +111,11 @@ class MinefieldStage(
                             theme = renderSettings.theme,
                             size = renderSettings.areaSize,
                             area = it,
-                            initialAreaForm =
-                                if (renderSettings.joinAreas) AreaActor.getForm(it, field) else areaNoForm,
+                            initialAreaForm = if (renderSettings.joinAreas) {
+                                AreaActor.getForm(it, field)
+                            } else {
+                                areaNoForm
+                            },
                             onInputEvent = ::handleGameEvent,
                             squareDivider = renderSettings.squareDivider,
                         )
