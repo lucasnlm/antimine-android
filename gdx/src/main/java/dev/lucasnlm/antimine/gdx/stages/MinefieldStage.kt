@@ -76,7 +76,7 @@ class MinefieldStage(
             } else {
                 zoom - 3.0f * (1.0f / zoomMultiplier) * Gdx.graphics.deltaTime
             }
-            zoom = newZoom.coerceIn(0.1f, 4.0f)
+            zoom = newZoom.coerceIn(0.7f, 4.0f)
             update(true)
 
             GdxLocal.zoomLevelAlpha = when {

@@ -14,10 +14,11 @@ class CameraController(
     private val velocity: Vector2 = Vector2.Zero.cpy()
 
     private fun limitSpeed(minefieldSize: SizeF) {
-        val screenWidth = Gdx.graphics.width
-        val screenHeight = Gdx.graphics.height
         val padding = renderSettings.internalPadding
-        val invZoom = 1.0f / (camera as OrthographicCamera).zoom
+        val zoom =  (camera as OrthographicCamera).zoom
+        val screenWidth = Gdx.graphics.width * zoom
+        val screenHeight = Gdx.graphics.height * zoom
+        val invZoom = 1.0f / zoom
 
         camera.run {
             val newX = (position.x - velocity.x)
