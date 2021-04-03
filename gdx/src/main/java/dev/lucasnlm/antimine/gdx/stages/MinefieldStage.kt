@@ -64,7 +64,6 @@ class MinefieldStage(
         cameraController = CameraController(
             camera = camera,
             renderSettings = renderSettings,
-            freeControl = actionSettings.freeControl,
         )
     }
 
@@ -157,7 +156,7 @@ class MinefieldStage(
 
             val start = 0.5f * virtualWidth - padding.start
             val end = it.width - 0.5f * virtualWidth + padding.end
-            val top = it.height - 0.5f * virtualHeight - padding.top
+            val top = it.height - 0.5f * virtualHeight - padding.top + renderSettings.appBarHeight
             val bottom = 0.5f * virtualHeight + padding.bottom
 
             camera.run {

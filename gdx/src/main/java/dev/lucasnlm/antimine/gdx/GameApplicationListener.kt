@@ -66,7 +66,7 @@ class GameApplicationListener(
         areaSize = dimensionRepository.areaSize(),
         navigationBarHeight = dimensionRepository.navigationBarHeight().toFloat(),
         appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
-        appBarHeight = dimensionRepository.actionBarSize().toFloat(),
+        appBarHeight = if (context.isPortrait()) { dimensionRepository.actionBarSize().toFloat() } else { 0f },
         radius = preferencesRepository.squareRadius().toFloat(),
         squareDivider = preferencesRepository.squareDivider().toFloat(),
         joinAreas = preferencesRepository.squareDivider() == 0,
@@ -79,7 +79,6 @@ class GameApplicationListener(
             handleDoubleTaps = control == ControlStyle.DoubleClick || control == ControlStyle.DoubleClickInverted,
             longTapTimeout = preferencesRepository.customLongPressTimeout(),
             doubleTapTimeout = ViewConfiguration.getDoubleTapTimeout().toLong(),
-            freeControl = context.isAndroidWearOs() || !context.isPortrait(),
         )
     }
 

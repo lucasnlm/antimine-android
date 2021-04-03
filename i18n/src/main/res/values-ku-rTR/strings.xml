@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ku">
     <string name="tutorial">فێرکاری</string>
-    <string name="tutorial_completed">فێرکاری تەواوبوو</string>
-    <string name="tutorial_0_bottom">دەتوانی ت بە %1$s دەست پێبکەیت لە هەر چوارگۆشەیەکی هەڕەمەکی.</string>
-    <string name="tutorial_1_top">ژمارەکان ئاماژە بەوە دەکەن کە چەند مین لە تەنیشت چوارگۆشەی. تیشکداکێشراون.</string>
-    <string name="tutorial_1_bottom">لەبەر ئەوە ئەگەر گۆشەکە 1 ی لەگەڵ بێت، ئەوا دەبێت مینێک بێت. %1$s بۆ ئاڵای کردنی.</string>
-    <string name="tutorial_2_top">چوارگۆشەی نەکراوەی داهاتوو مینێکی نییە چونکە ژمارە 1 هەیە نەک 2.</string>
-    <string name="tutorial_2_bottom">دەتوانیت بیکەیتەوە بە %1$s.</string>
-    <string name="tutorial_3_top">هەمان شت لە 1 دا ڕوودەدات دەزانیت کە من لە کوێیە.</string>
-    <string name="tutorial_3_bottom">‎دەتوانی هەموو چوارگۆشە نەکراوەکانی تر بکەیتەوە لە نزیک 1.‎.</string>
-    <string name="tutorial_4_top">دەزانین یەکێک لە مینەکان لە کوێیە کەواتە، تەنها یەک ئەگەر هەیە بۆ ئەوی تر.</string>
-    <string name="tutorial_4_bottom">%1$s بۆ ئاڵای مین نزیک بە 2.</string>
-    <string name="tutorial_5_top">پشکنینی ژمارەی بەرجەستەکراو.</string>
-    <string name="tutorial_5_bottom">%1$s بۆکردنەوە یان
-%2$sبۆ نیشانەکردن.</string>
+    <string name="tutorial_basic">یاسای یارییەکە سادەیە ژمارەی سەر گۆڕەپانێک ژمارەی مینەکانی هاوسێی نیشان دەدات و دەبێت هەموو مینەکان ئاڵا بکەیت.</string>
+    <string name="tutorial_text_1">ئەگەر ژمارەیەک دەست بۆ هەمان ژمارەی چوارگۆشەکان بردبێت ، ئەوا گۆڕەپانەکان هەموو مینن.</string>
+    <string name="tutorial_text_2">دوای ئەوەی یەکەم ئاڵات نیشان کرد، پێداچوونەوەبە ژمارەکان بکە و چوارگۆشەی داهاتوو شیبکەرەوە.</string>
+    <string name="tutorial_text_3">ئەگەر گۆڕەپانێک هەمان ژمارەی ئاڵای تێدا بێت ، هەموو چوارگۆشە ماوەکانی تری تەنیشتی مین نین (تیری سەوز).</string>
+    <string name="tutorial_text_4">پێداچوونەوەی ژمارەکان و بەردەوامبوون لە کردنەوەی چوارگۆشەکان.</string>
     <string name="games">یارییەکان</string>
+    <string name="tap_to_begin">دوو کلیک بکە بۆ دەستپێکردن</string>
     <string name="previous_games">یارییەکانی پێشوو</string>
     <string name="minefield">قورس</string>
     <string name="standard">ئاسایی</string>
@@ -43,6 +36,7 @@
     <string name="settings_accessibility">توانای گەیشتن</string>
     <string name="size">قه‌باره‌</string>
     <string name="rounded_square">چوارگۆشەی چەماو</string>
+    <string name="space_between_squares">بۆشایی نێوان چوارگۆشەکان</string>
     <string name="system">سیستەم</string>
     <string name="rating">پێڕاگه‌یاندنه‌وه‌</string>
     <string name="sign_in_failed">چوونە ژوورەوە سەرکەوتوو نەبوو. تکایە گرێدانی تۆڕەکەت بپشکنە و دووبارە هەوڵ بدەرەوە.</string>
@@ -67,9 +61,10 @@
     <string name="use_question_mark">نیشانەی پرسیار بەکاربهێنە</string>
     <string name="no_guessing_mode">دۆخی پێشبینی نەکردن</string>
     <string name="control">کۆنترۆڵەکان</string>
-    <string name="single_click">یەک گرتە</string>
-    <string name="double_click">دوو گرتە</string>
-    <string name="long_press">پەستانا درێژخایەن</string>
+    <string name="single_click">یەک کلیک</string>
+    <string name="double_click">دوو کلیک</string>
+    <string name="long_press">کلیکی درێژ</string>
+    <string name="control_description">%ACTION to %REACTION</string>
     <string name="touch_sensibility">هەستپێکردنی لەمسی</string>
     <string name="open_tile">کردنەوە</string>
     <string name="flag_tile">ئاڵا</string>
@@ -106,16 +101,6 @@
     <string name="appearance">دەرکەوتن</string>
     <string name="themes">ڕووکارەکان</string>
     <string name="delete_all_message">سڕینەوەی هەموو ڕووداوەکان بە هەمیشەیی.</string>
-    <string name="all_mines_disabled">هەموو مینەکان لە کارخرابوون.</string>
-    <string name="desc_convered_area">ڕووبەری داپۆشراو</string>
-    <string name="desc_marked_area">ناوچەی دیاریکراو</string>
-    <string name="desc_question_area">ناوچەی گومانلێکەر</string>
-    <string name="desc_wrongly_marked_area">ناوچەی هێماکردی هەڵە</string>
-    <string name="exploded_mine">مینی تەقێنراوە</string>
-    <string name="game_started">یاری دەستی پێکرد</string>
-    <string name="you_exploded_a_mine">تۆ مینت تەقاندەوە!</string>
-    <string name="flag_placed">ئاڵا دانرا!</string>
-    <string name="flag_removed">ئاڵا لابرا!</string>
     <string name="remove_ad">لابردنی ڕیکڵامەکان</string>
     <string name="help">یارمەتی</string>
     <string name="back">گەڕانەوە</string>

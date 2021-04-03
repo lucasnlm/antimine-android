@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh-rCN">
     <string name="tutorial">教程</string>
-    <string name="tutorial_completed">教程已完成</string>
-    <string name="tutorial_0_bottom">你可以通过%1$s任意一个方块开始。</string>
-    <string name="tutorial_1_top">数字表示在高亮的方块旁边有多少地雷。</string>
-    <string name="tutorial_1_bottom">因此，如果有1的角落旁边只有一个方块，它肯定是地雷。 %1$s来标记它。</string>
-    <string name="tutorial_2_top">下一个未打开的方块没有地雷，因为数字是 1️⃣ , 而不是 2️⃣ 。</string>
-    <string name="tutorial_2_bottom">你可以通过 %1$s 打开它。</string>
-    <string name="tutorial_3_top">这个 1 也是一样的。你知道邻近它的地雷在哪里。</string>
-    <string name="tutorial_3_bottom">您可以在 1 旁打开所有其他未打开的方块</string>
-    <string name="tutorial_4_top">我们知道其中一枚地雷在哪里，因此，另一枚地雷只有一种可能性。</string>
-    <string name="tutorial_4_bottom">%1$s标记2旁边的地雷。</string>
-    <string name="tutorial_5_top">检查高亮的数字。</string>
-    <string name="tutorial_5_bottom">%1$s 打开或 %2$s 标记。</string>
+    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
+    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
+    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
+    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">游戏</string>
+    <string name="tap_to_begin">点击开始</string>
     <string name="previous_games">之前的游戏</string>
     <string name="minefield">难度</string>
     <string name="standard">标准</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">无障碍</string>
     <string name="size">大小</string>
     <string name="rounded_square">圆角方块</string>
+    <string name="space_between_squares">正方形之間的空間</string>
     <string name="system">系统</string>
     <string name="rating">反馈</string>
     <string name="sign_in_failed">登录失败。请检查你的网络连接，然后重试。</string>
@@ -68,7 +63,8 @@
     <string name="control">控制</string>
     <string name="single_click">单击</string>
     <string name="double_click">双击</string>
-    <string name="long_press">长按</string>
+    <string name="long_press">触摸维持</string>
+    <string name="control_description">%ACTION到%REACTION</string>
     <string name="touch_sensibility">触摸屏灵敏度</string>
     <string name="open_tile">打开</string>
     <string name="flag_tile">标记</string>
@@ -105,16 +101,6 @@
     <string name="appearance">界面外观</string>
     <string name="themes">主题</string>
     <string name="delete_all_message">永久删除全部记录。</string>
-    <string name="all_mines_disabled">所有地雷都已失效。</string>
-    <string name="desc_convered_area">覆盖面积</string>
-    <string name="desc_marked_area">标记区域</string>
-    <string name="desc_question_area">可疑区域</string>
-    <string name="desc_wrongly_marked_area">错误标记区域</string>
-    <string name="exploded_mine">爆炸的地雷</string>
-    <string name="game_started">游戏已开始</string>
-    <string name="you_exploded_a_mine">你引爆了一个地雷！</string>
-    <string name="flag_placed">标记已放置！</string>
-    <string name="flag_removed">标记已移除！</string>
     <string name="remove_ad">去除广告</string>
     <string name="help">帮助</string>
     <string name="back">后退</string>

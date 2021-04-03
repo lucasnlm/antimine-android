@@ -330,7 +330,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     }
 
     private fun showCustomLevelDialog() {
-        if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null) {
+        if (supportFragmentManager.findFragmentByTag(CustomLevelDialogFragment.TAG) == null && !isFinishing) {
             CustomLevelDialogFragment().apply {
                 show(supportFragmentManager, CustomLevelDialogFragment.TAG)
             }
@@ -344,7 +344,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
 
     private fun showGooglePlayGames() {
         if (playGamesManager.isLogged()) {
-            if (supportFragmentManager.findFragmentByTag(PlayGamesDialogFragment.TAG) == null) {
+            if (supportFragmentManager.findFragmentByTag(PlayGamesDialogFragment.TAG) == null && !isFinishing) {
                 PlayGamesDialogFragment().show(supportFragmentManager, PlayGamesDialogFragment.TAG)
             }
         } else {

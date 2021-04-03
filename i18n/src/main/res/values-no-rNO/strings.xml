@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="no">
     <string name="tutorial">Tutorial</string>
-    <string name="tutorial_completed">Tutorial fullført</string>
-    <string name="tutorial_0_bottom">Du kan starte med %1$s på et tilfeldig kvadrat.</string>
-    <string name="tutorial_1_top">Tallene viser hvor mange miner som grenser til det fremhevede kvadratet.</string>
-    <string name="tutorial_1_bottom">Derfor, hvis hjørnet 1 har bare én tilstøtende kvadrat, må det være en min. %1$s å flagge den.</string>
-    <string name="tutorial_2_top">Det neste uåpnedt kvadratet har ingen mine fordi tallet er 1, ikke 2.</string>
-    <string name="tutorial_2_bottom">Du kan åpne det med %1$s.</string>
-    <string name="tutorial_3_top">Det samme skjer på dette 1. Du vet hvor min tilgrensende mine ligger.</string>
-    <string name="tutorial_3_bottom">Ved siden av 1 kan du åpne alle uåpnede kvadrater.</string>
-    <string name="tutorial_4_top">Vi vet hvor en av minene ligger. Så, det er bare én mulighet for den andre.</string>
-    <string name="tutorial_4_bottom">%1$s for å flagge minen ved siden av 2.</string>
-    <string name="tutorial_5_top">Sjekk det markerte tallet.</string>
-    <string name="tutorial_5_bottom">%1$s for å åpne eller %2$s for å merke.</string>
+    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
+    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
+    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
+    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">Spill</string>
+    <string name="tap_to_begin">Trykk for å begynne</string>
     <string name="previous_games">Tidligere Spill</string>
     <string name="minefield">Vanskelighet</string>
     <string name="standard">Standard</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">Tilgjengelighet</string>
     <string name="size">Størrelse</string>
     <string name="rounded_square">Avrundet kvadrat</string>
+    <string name="space_between_squares">Mellomrom mellom firkanter</string>
     <string name="system">System</string>
     <string name="rating">Ttilbakemelding</string>
     <string name="sign_in_failed">Feilet med å logge på. Vennligst sjekk nettverkstilkoblingen din og prøv igjen.</string>
@@ -66,9 +61,10 @@
     <string name="use_question_mark">Bruk Spørsmålstegn</string>
     <string name="no_guessing_mode">\'Ingen gjetting\'-modus</string>
     <string name="control">Styring</string>
-    <string name="single_click">Enkeltklikk</string>
-    <string name="double_click">Dobbeltklikk</string>
-    <string name="long_press">Lang Trykk</string>
+    <string name="single_click">Ett trykk</string>
+    <string name="double_click">Dobbeltrykk</string>
+    <string name="long_press">Langt trykk</string>
+    <string name="control_description">%ACTION til %REACTION</string>
     <string name="touch_sensibility">Touch følsomhet</string>
     <string name="open_tile">Åpne</string>
     <string name="flag_tile">Flagg</string>
@@ -105,16 +101,6 @@
     <string name="appearance">Utseende</string>
     <string name="themes">Temaer</string>
     <string name="delete_all_message">Slett alle hendelser permanent.</string>
-    <string name="all_mines_disabled">Alle miner ble deaktivert.</string>
-    <string name="desc_convered_area">Dekket område</string>
-    <string name="desc_marked_area">Merket område</string>
-    <string name="desc_question_area">Tvilsomt område</string>
-    <string name="desc_wrongly_marked_area">Feil markert område</string>
-    <string name="exploded_mine">Detonerte Mine</string>
-    <string name="game_started">Spill Startet</string>
-    <string name="you_exploded_a_mine">Du detonerte en mine!</string>
-    <string name="flag_placed">Flagg plassert!</string>
-    <string name="flag_removed">Flagg fjernet!</string>
     <string name="remove_ad">Fjern Reklame</string>
     <string name="help">Hjelp</string>
     <string name="back">Tilbake</string>

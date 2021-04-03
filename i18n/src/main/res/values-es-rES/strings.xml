@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="es-rES">
     <string name="tutorial">Tutorial</string>
-    <string name="tutorial_completed">Tutorial Completado</string>
-    <string name="tutorial_0_bottom">Puedes empezar por %1$s en cualquier cuadrado aleatorio.</string>
-    <string name="tutorial_1_top">Los números indican cuántas minas están adyacentes al cuadrado destacado.</string>
-    <string name="tutorial_1_bottom">Por lo tanto, si la esquina 1 tiene sólo un cuadrado adyacente, debe ser una mina. %1$s para marcarlo.</string>
-    <string name="tutorial_2_top">El siguiente cuadrado sin abrir no tiene una mina porque el número es 1, no 2.</string>
-    <string name="tutorial_2_bottom">Puedes abrirlo com %1$s.</string>
-    <string name="tutorial_3_top">Puedes abrir todos los demás lugares sin abrir adyacentes a 1. Sabes dónde está la mina adyacente.</string>
-    <string name="tutorial_3_bottom">Puede abrir todos los otros cuadrados cerrados y adyacentes a 1.</string>
-    <string name="tutorial_4_top">Sabemos dónde está una de las minas, así que sólo hay una posibilidad para la otra.</string>
-    <string name="tutorial_4_bottom">%1$s para marcar la mina adyacente a 2.</string>
-    <string name="tutorial_5_top">Verifique el número resaltado.</string>
-    <string name="tutorial_5_bottom">%1$s para abrir o %2$s para marcar.</string>
+    <string name="tutorial_basic">Las reglas de este juego son sencillas. El número de un cuadrado te muestra la cantidad de minas adyacentes. Deberás colocar una bandera sobre cada mina.</string>
+    <string name="tutorial_text_1">Si el número que aparece es el mismo número de cuadrados adyacentes, entonces todos esos cuadrados serán minas.</string>
+    <string name="tutorial_text_2">Después de colocar tu primera bandera, revisa los números y analiza el siguiente cuadrado.</string>
+    <string name="tutorial_text_3">Si un cuadrado tiene el mismo número de banderas, todos los cuadrados adyacentes restantes no son minas (flecha verde).</string>
+    <string name="tutorial_text_4">Revisa los números y sigue abriendo los cuadrados.</string>
     <string name="games">Juegos</string>
+    <string name="tap_to_begin">Pulsa para comenzar</string>
     <string name="previous_games">Juegos anteriores</string>
     <string name="minefield">Dificultad</string>
     <string name="standard">Patrón</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">Accesibilidad</string>
     <string name="size">Tamaño</string>
     <string name="rounded_square">Cuadrado redondeado</string>
+    <string name="space_between_squares">Espacio entre cuadrados</string>
     <string name="system">Sistema</string>
     <string name="rating">Comentarios</string>
     <string name="sign_in_failed">Imposible conectar. Por favor, revisa tu conexión de datos e inténtalo nuevamente.</string>
@@ -66,9 +61,10 @@
     <string name="use_question_mark">Usar signo de interrogación</string>
     <string name="no_guessing_mode">Modo \"Sin adivinación\"</string>
     <string name="control">Controles</string>
-    <string name="single_click">Un clic</string>
-    <string name="double_click">Doble clic</string>
-    <string name="long_press">Mantenga pulsado</string>
+    <string name="single_click">Un toque</string>
+    <string name="double_click">Dos toques</string>
+    <string name="long_press">Toque largo</string>
+    <string name="control_description">%ACTION para %REACTION</string>
     <string name="touch_sensibility">Sensibilidad táctil</string>
     <string name="open_tile">Abrir</string>
     <string name="flag_tile">Bandera</string>
@@ -105,16 +101,6 @@
     <string name="appearance">Aspecto</string>
     <string name="themes">Temas</string>
     <string name="delete_all_message">Borrar todos los eventos permanentemente.</string>
-    <string name="all_mines_disabled">Todas las minas fueron desactivadas.</string>
-    <string name="desc_convered_area">Área cubierta</string>
-    <string name="desc_marked_area">Área marcada</string>
-    <string name="desc_question_area">Área dudosa</string>
-    <string name="desc_wrongly_marked_area">Área marcada incorrectamente</string>
-    <string name="exploded_mine">Mina Explotada</string>
-    <string name="game_started">Inicio de Juego</string>
-    <string name="you_exploded_a_mine">¡Has explotado una mina!</string>
-    <string name="flag_placed">¡Bandera colocada!</string>
-    <string name="flag_removed">¡Bandera eliminada!</string>
     <string name="remove_ad">Eliminar anuncios</string>
     <string name="help">Ayuda</string>
     <string name="back">Volver</string>

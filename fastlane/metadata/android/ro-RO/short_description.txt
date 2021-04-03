@@ -1,1 +1,1 @@
-Găsește minele de pe un câmp minat. 
+Un joc puzzle unde în care cauți minele ascunse. 

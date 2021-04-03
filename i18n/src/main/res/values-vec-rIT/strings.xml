@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="vec">
     <string name="tutorial">Tutorial</string>
-    <string name="tutorial_completed">Tutorial Conpletà</string>
-    <string name="tutorial_0_bottom">Te połi tacar co un %1$s inte un cuadrato a ocio.</string>
-    <string name="tutorial_1_top">I nùmari i ìndica cuante mine che łe ze tacà a\'l cuadrato evidensià.</string>
-    <string name="tutorial_1_bottom">Donca, se el canton co 1 el ga soło che un cuadrato tacà, el ga da èsar na mina. %1$s par marcarla.</string>
-    <string name="tutorial_2_top">El cuadrato mìa verto che vien no\'l ga na mina parché ghe ze un nùmaro 1, mìa 2.</string>
-    <string name="tutorial_2_bottom">Te połi vèrzarlo co %1$s.</string>
-    <string name="tutorial_3_top">Ła stesa roba ła càpita su \'sto 1. Te sè dove che ła ze ła só mina.</string>
-    <string name="tutorial_3_bottom">Te połi vèrzar tuti i altri cuadrati mìa verti tacà a un 1.</string>
-    <string name="tutorial_4_top">Savemo dove che una de łe mine ła ze, ghe ze soło n\'altra posibiłità par chel\'altra.</string>
-    <string name="tutorial_4_bottom">%1$s par marcar ła mina tacà a\'l 2.</string>
-    <string name="tutorial_5_top">Controła el nùmaro evidensià.</string>
-    <string name="tutorial_5_bottom">%1$s par vèrzar o %2$s par marcar.</string>
+    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
+    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
+    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
+    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">Partìe</string>
+    <string name="tap_to_begin">Tap to begin</string>
     <string name="previous_games">Partìe Pasàe</string>
     <string name="minefield">Dificoltà</string>
     <string name="standard">Standard</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">Acesibiłità</string>
     <string name="size">Dimension</string>
     <string name="rounded_square">Cuadrati Stondài</string>
+    <string name="space_between_squares">Space Between Squares</string>
     <string name="system">Sistema</string>
     <string name="rating">Vałutasion</string>
     <string name="sign_in_failed">Aceso mìa riusìo. Controła ła conesion e prova da novo.</string>
@@ -66,9 +61,10 @@
     <string name="use_question_mark">Dòpara el Ponto de Domanda</string>
     <string name="no_guessing_mode">Modałità sensa predision</string>
     <string name="control">Comandi</string>
-    <string name="single_click">Clic Ùnjoło</string>
-    <string name="double_click">Clic Dupio</string>
-    <string name="long_press">Tien Strucà</string>
+    <string name="single_click">Single Tap</string>
+    <string name="double_click">Double Tap</string>
+    <string name="long_press">Long Tap</string>
+    <string name="control_description">%ACTION to %REACTION</string>
     <string name="touch_sensibility">Sensibiłità de Toco</string>
     <string name="open_tile">Verzi</string>
     <string name="flag_tile">Pavion</string>
@@ -105,16 +101,6 @@
     <string name="appearance">Siera</string>
     <string name="themes">Temi</string>
     <string name="delete_all_message">Scanseła tuti i eventi permanentemente.</string>
-    <string name="all_mines_disabled">Tute łe mine łe ze stà dezativà.</string>
-    <string name="desc_convered_area">Aree coverte</string>
-    <string name="desc_marked_area">Aree marcàe</string>
-    <string name="desc_question_area">Aree inserte</string>
-    <string name="desc_wrongly_marked_area">Aree marcà małamente</string>
-    <string name="exploded_mine">Mine sciopà</string>
-    <string name="game_started">Partìa Scuminsià</string>
-    <string name="you_exploded_a_mine">Te ghè fato sciopar na mina!</string>
-    <string name="flag_placed">Pavion łogà!</string>
-    <string name="flag_removed">Pavion cavà!</string>
     <string name="remove_ad">Cava i Anunsi</string>
     <string name="help">Juto</string>
     <string name="back">Indrìo</string>

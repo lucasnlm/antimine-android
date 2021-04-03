@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="vi">
     <string name="tutorial">Hướng dẫn</string>
-    <string name="tutorial_completed">Hướng dẫn đã hoàn thành</string>
-    <string name="tutorial_0_bottom">Bạn có thể bắt đầu bằng cách %1$s ở bất kỳ ô vuông ngẫu nhiên nào.</string>
-    <string name="tutorial_1_top">Những con số cho biết có bao nhiêu mìn liền kề với ô vuông nổi bật lên.</string>
-    <string name="tutorial_1_bottom">Do đó, nếu góc với 1 chỉ có một ô vuông liền kề, nó chắc hẳn là mìn. %1$s để gắn cờ nó.</string>
-    <string name="tutorial_2_top">Ô vuông chưa mở tiếp theo không có mìn vì ở đó có số 1, không phải 2.</string>
-    <string name="tutorial_2_bottom">Bạn có thể mở nó bằng cách %1$s.</string>
-    <string name="tutorial_3_top">Điều đó cũng xảy ra với số 1 này. Bạn biết quả mìn liền kề với nó ở đâu rồi.</string>
-    <string name="tutorial_3_bottom">Bạn có thể mở tất cả các ô vuông khác chưa mở liền kề với 1.</string>
-    <string name="tutorial_4_top">Chúng ta biết một trong số những quả mìn ở đâu rồi. Vậy, chỉ có một khả năng cho quả còn lại.</string>
-    <string name="tutorial_4_bottom">%1$s để gắn cờ quả mìn liền kề với 2.</string>
-    <string name="tutorial_5_top">Hãy kiểm tra con số nổi bật lên.</string>
-    <string name="tutorial_5_bottom">%1$s để mở hoặc %2$s để đánh dấu.</string>
+    <string name="tutorial_basic">Quy tắc trò chơi rất đơn giản, con số trên một ô vuông cho thấy số mìn liền kề với nó và bạn phải gắn cờ tất cả mìn.</string>
+    <string name="tutorial_text_1">Nếu một con số đang chạm số các ô vuông đó, thì tất cả các ô vuông đó đều là mìn.</string>
+    <string name="tutorial_text_2">Sau khi đánh dấu cờ đầu tiên, hãy xem xét các con số và phân tích ô vuông tiếp theo.</string>
+    <string name="tutorial_text_3">Nếu một ô vuông có số cờ như nhau, tất cả ô vuông còn lại liền kề với nó không phải mìn (mũi tên xanh lá).</string>
+    <string name="tutorial_text_4">Hãy xem xét các con số và tiếp tục mở các ô vuông.</string>
     <string name="games">Trò chơi</string>
+    <string name="tap_to_begin">Nhấn để bắt đầu</string>
     <string name="previous_games">Trò chơi Trước</string>
     <string name="minefield">Độ khó</string>
     <string name="standard">Tiêu chuẩn</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">Trợ năng</string>
     <string name="size">Kích thước</string>
     <string name="rounded_square">Hình vuông bo góc</string>
+    <string name="space_between_squares">Khoảng cách giữa các ô vuông</string>
     <string name="system">Hệ thống</string>
     <string name="rating">Phản hồi</string>
     <string name="sign_in_failed">Không đăng nhập được. Hãy kiểm tra lại kết nối mạng và thử lại.</string>
@@ -66,9 +61,10 @@
     <string name="use_question_mark">Dùng dấu hỏi</string>
     <string name="no_guessing_mode">Chế độ \'không đoán\'</string>
     <string name="control">Điều khiển</string>
-    <string name="single_click">Nhấn một lần</string>
+    <string name="single_click">Nhấn 1 lần</string>
     <string name="double_click">Nhấn đúp</string>
     <string name="long_press">Nhấn giữ</string>
+    <string name="control_description">%ACTION để %REACTION</string>
     <string name="touch_sensibility">Độ nhạy cảm ứng</string>
     <string name="open_tile">Mở</string>
     <string name="flag_tile">Cờ</string>
@@ -105,16 +101,6 @@
     <string name="appearance">Ngoại hình</string>
     <string name="themes">Chủ đề</string>
     <string name="delete_all_message">Xóa tất cả các sự kiện vĩnh viễn.</string>
-    <string name="all_mines_disabled">Đã phá hết mìn.</string>
-    <string name="desc_convered_area">Ô đã mở</string>
-    <string name="desc_marked_area">Ô đã đánh dấu</string>
-    <string name="desc_question_area">Ô còn nghi ngờ</string>
-    <string name="desc_wrongly_marked_area">Ô đánh dấu sai</string>
-    <string name="exploded_mine">Mìn đã nổ</string>
-    <string name="game_started">Trò chơi bắt đầu</string>
-    <string name="you_exploded_a_mine">Bạn làm nổ mìn rồi!</string>
-    <string name="flag_placed">Đã cắm cờ!</string>
-    <string name="flag_removed">Đã tháo cờ hiệu!</string>
     <string name="remove_ad">Loại bỏ quảng cáo</string>
     <string name="help">Trợ Giúp</string>
     <string name="back">Trở lại</string>

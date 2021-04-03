@@ -158,12 +158,16 @@ class GameActivity :
                 if (it.turn < 3 && it.saveId == 0L) {
                     val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
-                    gameViewModel.getControlDescription(applicationContext)?.let { text ->
+                    val controlText = gameViewModel.getControlDescription(applicationContext)
+
+                    if (controlText != null && controlText.isNotBlank()) {
                         controlsToast.apply {
                             visibility = View.VISIBLE
                             backgroundTintList = tint
                             this.text = text
                         }
+                    } else {
+                        controlsToast.visibility = View.GONE
                     }
                 } else {
                     controlsToast.visibility = View.GONE

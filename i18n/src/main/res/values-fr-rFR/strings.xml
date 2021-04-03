@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
     <string name="tutorial">Didacticiel</string>
-    <string name="tutorial_completed">Didacticiel terminé</string>
-    <string name="tutorial_0_bottom">Vous pouvez commencer par %1$s à n\'importe quel carré aléatoire.</string>
-    <string name="tutorial_1_top">Les chiffres indiquent combien de mines sont adjacentes au carré surligné.</string>
-    <string name="tutorial_1_bottom">Par conséquent, si le coin 1 n\'a qu\'un carré adjacent, il doit s\'agir d\'une mine. %1$s pour le signaler.</string>
-    <string name="tutorial_2_top">Le prochain carré non ouvert n\'a pas de mine car le nombre est 1 , pas 2 .</string>
-    <string name="tutorial_2_bottom">Vous pouvez l\'ouvrir par %1$s.</string>
-    <string name="tutorial_3_top">Il en va de même pour 1. Vous savez où se trouve la mine adjacente.</string>
-    <string name="tutorial_3_bottom">Vous pouvez ouvrir tous les autres carrés non ouverts adjacents à 1.</string>
-    <string name="tutorial_4_top">Nous savons où se trouve l\'une des mines. Il n\'y a donc qu\'une seule possibilité pour l\'autre.</string>
-    <string name="tutorial_4_bottom">%1$s pour marquer la mine adjacente à 2.</string>
-    <string name="tutorial_5_top">Vérifier le nombre en surbrillance.</string>
-    <string name="tutorial_5_bottom">%1$s pour ouvrir ou %2$s pour marquer.</string>
+    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
+    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
+    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
+    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">Jeux</string>
+    <string name="tap_to_begin">Toucher pour commencer</string>
     <string name="previous_games">Parties précédentes</string>
     <string name="minefield">Difficulté</string>
     <string name="standard">Standard</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">Accessibilité</string>
     <string name="size">Taille</string>
     <string name="rounded_square">Carré arrondi</string>
+    <string name="space_between_squares">Espace entre les carrés</string>
     <string name="system">Système</string>
     <string name="rating">Retour d\'expérience</string>
     <string name="sign_in_failed">Erreur lors de la connexion. Vérifiez l\'état de votre connexion Internet et réessayez.</string>
@@ -66,9 +61,10 @@
     <string name="use_question_mark">Utiliser des drapeaux points d’interrogation</string>
     <string name="no_guessing_mode">Mode sans prédiction</string>
     <string name="control">Contrôles</string>
-    <string name="single_click">Clic simple</string>
-    <string name="double_click">Double clic</string>
-    <string name="long_press">Appui prolongé</string>
+    <string name="single_click">Appui court</string>
+    <string name="double_click">Appui Double</string>
+    <string name="long_press">Appui Long</string>
+    <string name="control_description">%ACTION pour %REACTION</string>
     <string name="touch_sensibility">Sensibilité tactile</string>
     <string name="open_tile">Ouvrir</string>
     <string name="flag_tile">Drapeau</string>
@@ -105,16 +101,6 @@
     <string name="appearance">Apparence</string>
     <string name="themes">Thèmes</string>
     <string name="delete_all_message">Supprimer définitivement tous les événements.</string>
-    <string name="all_mines_disabled">Toutes les mines ont été désamorcées.</string>
-    <string name="desc_convered_area">Terrain couvert</string>
-    <string name="desc_marked_area">Terrain marqué</string>
-    <string name="desc_question_area">Zone d\'incertitude</string>
-    <string name="desc_wrongly_marked_area">Terrain mal marqué</string>
-    <string name="exploded_mine">Mine explosée</string>
-    <string name="game_started">La partie a commencé</string>
-    <string name="you_exploded_a_mine">Vous avez touché une mine !</string>
-    <string name="flag_placed">Drapeau placé !</string>
-    <string name="flag_removed">Drapeau retiré !</string>
     <string name="remove_ad">Supprimer les publicités</string>
     <string name="help">Aide</string>
     <string name="back">Retour</string>

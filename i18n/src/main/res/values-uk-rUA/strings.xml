@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="uk">
     <string name="tutorial">Навчальний посібник</string>
-    <string name="tutorial_completed">Навчання пройдено</string>
-    <string name="tutorial_0_bottom">Ви можете почати з %1$s на будь-якому випадковому квадраті.</string>
-    <string name="tutorial_1_top">Числа вказують, скільки хв примикають до виділеного квадрату.</string>
-    <string name="tutorial_1_bottom">Таким чином, якщо у кута 1 є тільки один суміжний квадрат, то це повинна бути міна. %1$s щоб відзначити її.</string>
-    <string name="tutorial_2_top">У наступному невідкритому квадраті немає міни, тому що стоїть цифра 1, а не 2.</string>
-    <string name="tutorial_2_bottom">Ви можете відкрити його через %1$s.</string>
-    <string name="tutorial_3_top">Те ж саме відбувається на цьому 1. Ви знаєте, де знаходиться сусідня міна.</string>
-    <string name="tutorial_3_bottom">Ви можете відкрити всі інші невідкриті квадрати, прилеглі до 1.</string>
-    <string name="tutorial_4_top">Ми знаємо, де знаходиться одна з мін, так що є тільки один варіант для іншої.</string>
-    <string name="tutorial_4_bottom">%1$s, щоб відзначити міну, прилеглу до 2.</string>
-    <string name="tutorial_5_top">Відзначте виділений номер.</string>
-    <string name="tutorial_5_bottom">%1$s, щоб відкрити або %2$s для позначки.</string>
+    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
+    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
+    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
+    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">Ігри</string>
+    <string name="tap_to_begin">Натисніть, щоб почати</string>
     <string name="previous_games">Попередня гра</string>
     <string name="minefield">Складність</string>
     <string name="standard">Звичайна</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">Спеціальні можливості</string>
     <string name="size">Розмір</string>
     <string name="rounded_square">Округлі квадрати</string>
+    <string name="space_between_squares">Простір між квадратами</string>
     <string name="system">Система</string>
     <string name="rating">Відгук</string>
     <string name="sign_in_failed">Не вдається увійти. Перевірте підключення до Інтернету і повторіть спробу.</string>
@@ -66,9 +61,10 @@
     <string name="use_question_mark">Використовувати прапорці «?»</string>
     <string name="no_guessing_mode">Режим \'Без вгадування\'</string>
     <string name="control">Елементи керування</string>
-    <string name="single_click">Одинарний клік</string>
-    <string name="double_click">Подвійний клік</string>
-    <string name="long_press">Довге натискання</string>
+    <string name="single_click">Один дотик</string>
+    <string name="double_click">Подвійний тиць</string>
+    <string name="long_press">Довгий дотик</string>
+    <string name="control_description">%ACTION - %REACTION</string>
     <string name="touch_sensibility">Чутливість сенсора панелі</string>
     <string name="open_tile">Відкрити</string>
     <string name="flag_tile">Прапор</string>
@@ -105,16 +101,6 @@
     <string name="appearance">Зовнішній вигляд</string>
     <string name="themes">Тема</string>
     <string name="delete_all_message">Видалити всі події назавжди.</string>
-    <string name="all_mines_disabled">Всі міни були вимкнуті.</string>
-    <string name="desc_convered_area">Прихована зона</string>
-    <string name="desc_marked_area">Позначена територія</string>
-    <string name="desc_question_area">Сумнівна територія</string>
-    <string name="desc_wrongly_marked_area">Помилково позначена територія</string>
-    <string name="exploded_mine">Здетонована міна</string>
-    <string name="game_started">Гра почалася</string>
-    <string name="you_exploded_a_mine">Ви натрапили на міну!</string>
-    <string name="flag_placed">Прапор розміщено!</string>
-    <string name="flag_removed">Прапор вилучено!</string>
     <string name="remove_ad">Прибрати рекламу</string>
     <string name="help">Допомога</string>
     <string name="back">Назад</string>

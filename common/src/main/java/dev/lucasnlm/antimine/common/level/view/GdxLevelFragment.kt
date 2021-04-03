@@ -25,6 +25,7 @@ import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.models.RenderQuality
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
+import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.ICrashReporter
@@ -145,15 +146,14 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     private fun bindControlSwitcherIfNeeded(view: View, delayed: Boolean = true) {
         view.postDelayed(if (delayed) 200L else 0L) {
             if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
-                (view.parent as FrameLayout).apply {
+                (view.parent as? FrameLayout)?.apply {
                     val floatingView = FloatingActionButton(context).apply {
                         val palette = themeRepository.getTheme().palette
                         contentDescription = getString(R.string.open)
                         TooltipCompat.setTooltipText(this, getString(R.string.open))
                         gameViewModel.refreshUseOpenOnSwitchControl(true)
                         preferencesRepository.setSwitchControl(true)
-                        backgroundTintList = ColorStateList.valueOf(palette.accent.toInvertedAndroidColor(255))
-                        setColorFilter(palette.accent.toInvertedAndroidColor(255))
+                        backgroundTintList = ColorStateList.valueOf(palette.accent.toAndroidColor(255))
                         setImageResource(R.drawable.touch)
 
                         compatElevation = 0f
@@ -167,7 +167,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                         setOnClickListener {
                             if (preferencesRepository.openUsingSwitchControl()) {
                                 contentDescription = getString(R.string.flag_tile)
-                                TooltipCompat.setTooltipText(this, getString(R.string.switch_control))
+                                TooltipCompat.setTooltipText(this, getString(R.string.flag_tile))
                                 gameViewModel.refreshUseOpenOnSwitchControl(false)
                                 preferencesRepository.setSwitchControl(false)
                                 setImageResource(R.drawable.flag_black)

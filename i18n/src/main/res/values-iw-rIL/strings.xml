@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="he">
     <string name="tutorial">הדרכה</string>
-    <string name="tutorial_completed">תדריך הושלם</string>
-    <string name="tutorial_0_bottom">אתה יכול להתחיל ע״י %1$s בכל ריבוע רנדומלי.</string>
-    <string name="tutorial_1_top">המספרים מציינים כמה מוקשים צמודים למשבצת המודגשת.</string>
-    <string name="tutorial_1_bottom">לכן, אם לפינה 1 יש רק משבצת צמודה אחת, זה חייב להיות מוקש. %1$s כדי לסמן.</string>
-    <string name="tutorial_2_top">המשבצת הלא פתוחה הבאה לא חייבת להיות מוקש בגלל שהמספר הוא 1, לא 2.</string>
-    <string name="tutorial_2_bottom">ניתן לפתוח באמצעות %1$s.</string>
-    <string name="tutorial_3_top">כך גם קורה על ה-1 הזה. אפשר לדעת איפה המוקש הצמוד נמצא.</string>
-    <string name="tutorial_3_bottom">אפשר לפתוח את כל המשבצות הלא-פתוחות הצמודות ל-1.</string>
-    <string name="tutorial_4_top">אפשר לדעת איפה נמצא אחד מהמוקשים. אז, יש רק אפשרות אחת לשני.</string>
-    <string name="tutorial_4_bottom">%1$s כדי לסמן את המוקש הצמוד ל 2.</string>
-    <string name="tutorial_5_top">בדקו את המספר המודגש.</string>
-    <string name="tutorial_5_bottom">%1$s כדי לפתוח או %2$s כדי לסמן.</string>
+    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
+    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
+    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
+    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">משחקים</string>
+    <string name="tap_to_begin">לחץ כדי להתחיל</string>
     <string name="previous_games">משחקים קודמים</string>
     <string name="minefield">רמת קושי</string>
     <string name="standard">רגיל</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">נגישות</string>
     <string name="size">גודל</string>
     <string name="rounded_square">ריבוע בעל פינות עגולות</string>
+    <string name="space_between_squares">רווח בין ריבועים</string>
     <string name="system">מערכת</string>
     <string name="rating">משוב</string>
     <string name="sign_in_failed">אין אפשרות להתחבר. בדוק את חיבור הרשת ונסה שוב.</string>
@@ -66,9 +61,10 @@
     <string name="use_question_mark">סימן שאלה</string>
     <string name="no_guessing_mode">מצב \'ללא ניחושים\'</string>
     <string name="control">פקדים</string>
-    <string name="single_click">לחיצה בודדת</string>
+    <string name="single_click">לחיצה יחידה</string>
     <string name="double_click">לחיצה כפולה</string>
-    <string name="long_press">לחץ לחיצה ארוכה</string>
+    <string name="long_press">לחיצה ארוכה</string>
+    <string name="control_description">%ACTION ל- REACTION%</string>
     <string name="touch_sensibility">רגישות למגע</string>
     <string name="open_tile">פתוח</string>
     <string name="flag_tile">דגל</string>
@@ -105,16 +101,6 @@
     <string name="appearance">מראה</string>
     <string name="themes">ערכות נושא</string>
     <string name="delete_all_message">מחיקה לצמיתות של כל האירועים.</string>
-    <string name="all_mines_disabled">All mines were disabled.</string>
-    <string name="desc_convered_area">Covered area</string>
-    <string name="desc_marked_area">אזור מסומן</string>
-    <string name="desc_question_area">Doubtful area</string>
-    <string name="desc_wrongly_marked_area">אזור מסומן בטעות</string>
-    <string name="exploded_mine">מוקש מפוצץ</string>
-    <string name="game_started">המשחק החל</string>
-    <string name="you_exploded_a_mine">פוצצת מוקש!</string>
-    <string name="flag_placed">דגל הונח!</string>
-    <string name="flag_removed">דגל הוסר!</string>
     <string name="remove_ad">הסרת פרסומות</string>
     <string name="help">עזרה</string>
     <string name="back">חזור</string>
