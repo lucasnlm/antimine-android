@@ -10,13 +10,13 @@
     <FrameLayout
         android:id="@+id/levelContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:layout_height="match_parent">
 
         <requestFocus />
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/gameToast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
@@ -47,7 +47,6 @@
             app:drawableTint="?attr/colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="@id/back"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintLeft_toRightOf="@id/switchFlag"
             app:layout_constraintRight_toLeftOf="@id/minesCount"
             app:layout_constraintTop_toTopOf="@id/back"
             tools:targetApi="m"

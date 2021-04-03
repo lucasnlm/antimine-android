@@ -15,6 +15,7 @@ import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
 import dev.lucasnlm.external.ICloudStorageManager
 import dev.lucasnlm.external.model.CloudSave
+import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -74,7 +75,7 @@ class MainViewModel(
             completeFirstUse()
             useTheme(selectedTheme.toLong())
             setSquareRadius(squareRadius)
-            setSquareMultiplier(squareSize)
+            setSquareSize(squareSize)
             setCustomLongPressTimeout(touchTiming.toLong())
             setQuestionMark(questionMark != 0)
             setNoGuessingAlgorithm(noGuessing != 0)
@@ -87,6 +88,7 @@ class MainViewModel(
             useControlStyle(ControlStyle.values()[controlStyle])
             setOpenGameDirectly(openDirectly != 0)
             setUnlockedThemes(unlockedThemes)
+            setSquareDivider(squareDivider)
         }
 
         cloudSave.stats.mapNotNull {
@@ -116,8 +118,7 @@ class MainViewModel(
 
     private fun continueGame(difficulty: Difficulty? = null) {
         val intent = Intent(context, GameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             difficulty?.let {
                 val bundle = Bundle().apply {
                     putSerializable(GameActivity.DIFFICULTY, it)
@@ -125,18 +126,12 @@ class MainViewModel(
                 putExtras(bundle)
             }
         }
-
         context.startActivity(intent)
     }
 
     private fun startTutorial() {
-        val intent = Intent(context, GameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            val bundle = Bundle().apply {
-                putBoolean(GameActivity.START_TUTORIAL, true)
-            }
-
-            putExtras(bundle)
+        val intent = Intent(context, TutorialActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         context.startActivity(intent)
     }

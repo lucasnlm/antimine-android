@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="tr">
     <string name="tutorial">Eğitim</string>
-    <string name="tutorial_completed">Eğitim tamamlandı</string>
-    <string name="tutorial_0_bottom">Rastgele karede %1$s ile başlayabilirsiniz.</string>
-    <string name="tutorial_1_top">Numaralar vurgulanan kareye kaç tane bitişik mayın olduğuna işaret eder.</string>
-    <string name="tutorial_1_bottom">Bu nedenle, köşe 1 sadece bir bitişik kareye sahipse, bu bir mayın olmalıdır. İşaretlemek için %1$s.</string>
-    <string name="tutorial_2_top">Bir sonraki açılmamış karede mayın yok çünkü sayı 2 değil, 1.</string>
-    <string name="tutorial_2_bottom">%1$s ile açabilirsin.</string>
-    <string name="tutorial_3_top">Bu 1\'de de aynı şey. Bitişik mayının nerede olduğunu biliyorsun.</string>
-    <string name="tutorial_3_bottom">1\'e bitişik bütün açılmamış mayınları açabilirsin.</string>
-    <string name="tutorial_4_top">Mayınların bir tanesinin nerede olduğunu biliyoruz. Böylece diğer mayın için sadece bir olasılık var.</string>
-    <string name="tutorial_4_bottom">2\'ye komşu olan mayını işaretlemek için %1$s.</string>
-    <string name="tutorial_5_top">Vurgulanan numarayı kontrol edin.</string>
-    <string name="tutorial_5_bottom">Açmak için %1$s ya da işaretlemek için %2$s.</string>
+    <string name="tutorial_basic">Oyunun kuralı basit, bir karenin üzerindeki sayı ona bitişik olan mayınların sayısını gösterir ve tüm mayınları işaretlemeniz gerekir.</string>
+    <string name="tutorial_text_1">Eğer bir sayı aynı sayıda kareye dokunuyorsa, karelerin hepsi mayınlıdır.</string>
+    <string name="tutorial_text_2">İlk bayrağınızı işaretledikten sonra sayıları gözden geçirin ve bir sonraki kareyi inceleyin.</string>
+    <string name="tutorial_text_3">Eğer bir kare aynı sayıdaki bayrağa sahipse ona bitişik olan diğer hiçbir kare mayınlı değildir (yeşil ok).</string>
+    <string name="tutorial_text_4">Numaraları gözden geçirin ve kareleri açmaya devam edin.</string>
     <string name="games">Oyunlar</string>
+    <string name="tap_to_begin">Başlamak için dokunun</string>
     <string name="previous_games">Önceki Oyunlar</string>
     <string name="minefield">Zorluk</string>
     <string name="standard">Standart</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">Erişilebilirlik</string>
     <string name="size">Boyut</string>
     <string name="rounded_square">Yuvarlak kare</string>
+    <string name="space_between_squares">Kareler Arası Boşluk</string>
     <string name="system">Sistem</string>
     <string name="rating">Geri bildirim</string>
     <string name="sign_in_failed">Oturum açılamadı. Lütfen ağ bağlantınızı kontrol edip tekrar deneyin.</string>
@@ -68,7 +63,8 @@
     <string name="control">Kontroller</string>
     <string name="single_click">Tek Tıklama</string>
     <string name="double_click">Çift Tıklama</string>
-    <string name="long_press">Uzun Basma</string>
+    <string name="long_press">Uzun Basış</string>
+    <string name="control_description">%FAALİYET ve %TEPKİME</string>
     <string name="touch_sensibility">Dokunmatik hassasiyeti</string>
     <string name="open_tile">Aç</string>
     <string name="flag_tile">Bayrak</string>
@@ -105,16 +101,6 @@
     <string name="appearance">Görünüm</string>
     <string name="themes">Temalar</string>
     <string name="delete_all_message">Tüm etkinlikleri kalıcı olarak silin.</string>
-    <string name="all_mines_disabled">Tüm mayınlar devre dışı bırakıldı.</string>
-    <string name="desc_convered_area">Kapalı alan</string>
-    <string name="desc_marked_area">İşaretli alan</string>
-    <string name="desc_question_area">Şüpheli alan</string>
-    <string name="desc_wrongly_marked_area">Yanlış işaretlenmiş alan</string>
-    <string name="exploded_mine">Patlamış Mayın</string>
-    <string name="game_started">Oyun Başladı</string>
-    <string name="you_exploded_a_mine">Bir mayını patlattın!</string>
-    <string name="flag_placed">Bayrak yerleştirildi!</string>
-    <string name="flag_removed">Bayrak kaldırıldı!</string>
     <string name="remove_ad">Reklamları kaldır</string>
     <string name="help">Yardım</string>
     <string name="back">Geri</string>

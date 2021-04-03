@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fi">
     <string name="tutorial">Opetusohjelma</string>
-    <string name="tutorial_completed">Opetuspeli Suoritettu</string>
-    <string name="tutorial_0_bottom">Voit aloittaa %1$s millä tahansa satunnaisella neliöllä.</string>
-    <string name="tutorial_1_top">Numerot osoittavat, kuinka monta miinaa on korostetun neliön ympärillä.</string>
-    <string name="tutorial_1_bottom">Siksi, jos kulmassa 1 on vain yksi viereinen neliö, sen on oltava minun. %1$s lippua se.</string>
-    <string name="tutorial_2_top">Seuraava avaamaton neliö ei ole miina, koska numero on 1, eikä 2.</string>
-    <string name="tutorial_2_bottom">Voit avata sen %1$s toimesta.</string>
-    <string name="tutorial_3_top">Sama tapahtuu tällä 1. Tiedät missä sen viereinen miina on.</string>
-    <string name="tutorial_3_bottom">Voit avata kaikki muut avaamattomat neliöt 1 ympäriltä.</string>
-    <string name="tutorial_4_top">Tiedämme, missä yksi miinoista on. Joten on vain yksi mahdollisuus toiselle.</string>
-    <string name="tutorial_4_bottom">%1$s liputtaa kaivoksen 2 n vieressä.</string>
-    <string name="tutorial_5_top">Tarkista korostettu numero.</string>
-    <string name="tutorial_5_bottom">%1$s avataksesi tai %2$s merkitä.</string>
+    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
+    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
+    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
+    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">Pelit</string>
+    <string name="tap_to_begin">Aloita napauttamalla</string>
     <string name="previous_games">Edelliset pelit</string>
     <string name="minefield">Vaikeustaso</string>
     <string name="standard">Normaali</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">Esteettömyys</string>
     <string name="size">Koko</string>
     <string name="rounded_square">Pyöristetty neliö</string>
+    <string name="space_between_squares">Tila Neliöiden Välillä</string>
     <string name="system">Järjestelmä</string>
     <string name="rating">Lähetä palautetta</string>
     <string name="sign_in_failed">Virhe kirjautuessa sisään. Tarkista verkkoyhteytesi ja yritä uudelleen.</string>
@@ -66,9 +61,10 @@
     <string name="use_question_mark">Käytä kysymysmerkkiä</string>
     <string name="no_guessing_mode">\'Ei arvausta\' -tilaa</string>
     <string name="control">Kontrollit</string>
-    <string name="single_click">Napautus</string>
-    <string name="double_click">Kaksoisnapsautus</string>
+    <string name="single_click">Yksi napautus</string>
+    <string name="double_click">Kaksoisnapautus</string>
     <string name="long_press">Pitkä painallus</string>
+    <string name="control_description">%ACTION - %REACTION</string>
     <string name="touch_sensibility">Kosketuksen herkkyys</string>
     <string name="open_tile">Avaa</string>
     <string name="flag_tile">Lippu</string>
@@ -105,16 +101,6 @@
     <string name="appearance">Ulkoasu</string>
     <string name="themes">Teemat</string>
     <string name="delete_all_message">Poistetaanko kaikki tapahtumat pysyvästi.</string>
-    <string name="all_mines_disabled">Kaikki miinat poistettiin käytöstä.</string>
-    <string name="desc_convered_area">Peitetty alue</string>
-    <string name="desc_marked_area">Merkitty alue</string>
-    <string name="desc_question_area">Epäilyttävä alue</string>
-    <string name="desc_wrongly_marked_area">Väärin merkitty alue</string>
-    <string name="exploded_mine">Räjähtänyt miina</string>
-    <string name="game_started">Peli aloitettu</string>
-    <string name="you_exploded_a_mine">Räjäytit miinan!</string>
-    <string name="flag_placed">Lippu asetettu!</string>
-    <string name="flag_removed">Lippu poistettu!</string>
     <string name="remove_ad">Poista Mainokset</string>
     <string name="help">Apua</string>
     <string name="back">Takaisin</string>

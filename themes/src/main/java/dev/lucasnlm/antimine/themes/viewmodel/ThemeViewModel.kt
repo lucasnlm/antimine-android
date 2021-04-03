@@ -6,9 +6,7 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IAnalyticsManager
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onEach
 
 class ThemeViewModel(
     private val themeRepository: IThemeRepository,
@@ -19,28 +17,50 @@ class ThemeViewModel(
         themeRepository.setTheme(theme.id)
     }
 
-    override fun observeEvent(): Flow<ThemeEvent> {
-        return super.observeEvent()
-            .onEach {
-                if (it is ThemeEvent.ChangeTheme) {
-                    analyticsManager.sentEvent(Analytics.ClickTheme(it.newTheme.id))
-                }
-            }
-    }
-
     override suspend fun mapEventToState(event: ThemeEvent) = flow {
-        if (event is ThemeEvent.ResetTheme) {
-            val defaultTheme = themeRepository.reset()
-            emit(state.copy(current = defaultTheme))
-        } else if (event is ThemeEvent.ChangeTheme) {
-            setTheme(event.newTheme)
-            emit(state.copy(current = event.newTheme))
-            preferencesRepository.addUnlockedTheme(event.newTheme.id.toInt())
+        when (event) {
+            is ThemeEvent.SetSquareSize -> {
+                preferencesRepository.setSquareSize(event.size + 40)
+                emit(state.copy(squareSize = event.size))
+            }
+            is ThemeEvent.SetSquareRadius -> {
+                preferencesRepository.setSquareRadius(event.radius)
+                emit(state.copy(squareRadius = event.radius))
+            }
+            is ThemeEvent.SetSquareDivider -> {
+                preferencesRepository.setSquareDivider(event.divider)
+                emit(state.copy(squareDivider = event.divider))
+            }
+            is ThemeEvent.ResetTheme -> {
+                preferencesRepository.setSquareRadius(null)
+                preferencesRepository.setSquareDivider(null)
+                preferencesRepository.setSquareSize(null)
+
+                val newState = state.copy(
+                    squareRadius = preferencesRepository.squareRadius(),
+                    squareDivider = preferencesRepository.squareDivider(),
+                    squareSize = preferencesRepository.squareSize() - 40,
+                )
+
+                emit(newState)
+            }
+            is ThemeEvent.ChangeTheme -> {
+                setTheme(event.newTheme)
+                analyticsManager.sentEvent(Analytics.ClickTheme(event.newTheme.id))
+                emit(state.copy(current = event.newTheme))
+                preferencesRepository.addUnlockedTheme(event.newTheme.id.toInt())
+            }
+            else -> {
+                // Ignore
+            }
         }
     }
 
     override fun initialState() = ThemeState(
         current = themeRepository.getTheme(),
-        themes = themeRepository.getAllThemes()
+        themes = themeRepository.getAllThemes(),
+        squareSize = preferencesRepository.squareSize() - 40,
+        squareDivider = preferencesRepository.squareDivider(),
+        squareRadius = preferencesRepository.squareRadius(),
     )
 }

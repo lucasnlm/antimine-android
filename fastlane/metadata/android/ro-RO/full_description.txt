@@ -1,56 +1,56 @@
-Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
-This is a minimalist and modern version of the classic Minesweeper.
+Testează-ți raționamentul pe un joc de puzzle provocator, unde trebuie să rezolvi un câmp minat fără să explodezi nicio mină.
+Aceasta este o versiune minimalistă și modernă a clasicului joc Minesweeper.
 
-Are you able to clear a minefield? Let’s go!
+Ești în stare să rezolvi un câmp minat? Să începem!
 
-OBJECTIVE
-It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
+OBIECTIVE
+Ca și în Minesweeper. Câștigi jocul când ai marcat fiecare mină din câmp. Fii atent să nu declanșezi una!
 
-NO GUESSING
-This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
+FĂRĂ GHICIT
+Jocul are un algoritm care crează numai câmpuri minate rezolvabile. Nu va trebui să ghicești unde este ultima mină!
 
-GAME LEVELS
-Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
+NIVELURILE JOCULUI
+La fel ca Minesweeper, acest joc are diferite nivele: începător, intermediar și expert. Dar are și un mod progresiv care devine dificil atunci când câștigi.
 
-CUSTOM LEVEL
-If the standard modes aren't enough, you can create your level difficulty!
+NIVEL PERSONALIZAT
+Dacă modurile standard nu sunt suficiente, îți poți crea propria dificultate!
 
-THEMES
-Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+INTERFAȚĂ
+Antimine are mai mult de 15 interfețe ( inclusiv luminat, întuneric, și AMOLED). Iar în curând se vor adăuga mai multe!
 
 MINIMALIST
-Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+Un aspect curat și minimalist iar aplicația are o mărime mică ( mai puțin de 9MB).
 
 TUTORIAL
-Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+Nu ai încercat niciodată să joci Minesweeper? Nici o problemă, poți să încerci tutorialul și să activezi Ajutor în setări.
 
-STATISTICS
-Check your results and development.
+STATISTICI
+Verifică-ți rezultate și progresul.
 
-GAME ASSISTANT
-The game will automatically flag the squares you isolated. 
+ASISTENȚĂ JOC
+Jocul va marca automat pătratele pe care le-ați izolat. 
 
-CUSTOMIZATION
-You can change the game to make it like you want to. 
-Example: Help, animations, haptic feedback, question mark.
+PERSONALIZARE
+Poți schimba jocul pentru a-l face așa cum dorești. 
+Exemplu: Ajutor, animații, feedback haptic, semn de întrebare.
 
-CONTROLS
-It supports four different control schemes. Example: flag using tap or long press.
+CONTROALE
+Acest joc suportă 4 scheme diferite de controale. Exemplu: marcaj folosind apăsare scurtă sau apăsare lungă.
 
-ACHIEVEMENTS AND LEADERBOARDS 
-You have eight achievements to unlock and different leaderboards to share with your friends.
+ÎNDEPLINIRI ȘI REZULTATE TOP 
+Ai opt îndepliniri pentru a le debloca și diferite rezultate top pe care le poți împărtășii cu prieteni.
 
-ACCESSIBILITY
-You can customize this game to your needs: change the squares size, radius, touch timing, and screen reader support.
-We are always trying to improve our accessibility settings. If you miss something give us feedback!
+ACCESIBILITATE
+Poți personaliza acest joc în funcție de nevoi: schimbă dimensiunea pătratelor, raza, timpul de tastare și sportul cititorului de ecran.
+Încercăm întotdeauna să îmbunătățim setările noastre de accesibilitate. Dacă ceva lipsește, trimite-ne un feedback!
 
-ANDROID FOCUSED APP
-It supports cool Android features like split-screen, shortcuts, sharing, system theme, and always supporting the last version.
+APP ORIGINAL ANDROID
+Suportă caracteristici interesante Android precum ecran împărțit, scurtături, partajare, interfața sistemului și asistență pentru ultima versiune.
 
-ONLINE OR OFFLINE
-You don't need to be online to play the game!
+ONLINE SAU OFFLINE
+Nu trebuie să fii online pentru a juca jocul acesta!
 
-AUTO-SAVE
-You can start a game and continue it later! It will auto-save your game.
+SALVARE AUTOMATĂ
+Poți începe un joc și îl poți continua mai târziu! Se va salva automat jocul.
 
-Enjoy.
+Bucurați-vă de el.

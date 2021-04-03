@@ -40,7 +40,6 @@ class ThemeViewModelTest {
     private val lightTheme = AppTheme(
         id = 1L,
         theme = R.style.CustomLightTheme,
-        themeNoActionBar = R.style.CustomLightTheme_NoActionBar,
         palette = AreaPalette(
             accent = 0xD32F2F,
             border = 0x424242,
@@ -75,7 +74,6 @@ class ThemeViewModelTest {
     private val darkTheme = AppTheme(
         id = 2L,
         theme = R.style.CustomDarkTheme,
-        themeNoActionBar = R.style.CustomDarkTheme_NoActionBar,
         palette = AreaPalette(
             accent = 0xFFFFFF,
             border = 0x171717,
@@ -110,7 +108,6 @@ class ThemeViewModelTest {
     private val gardenTheme = AppTheme(
         id = 3L,
         theme = R.style.CustomGardenTheme,
-        themeNoActionBar = R.style.CustomGardenTheme_NoActionBar,
         palette = AreaPalette(
             accent = 0x689f38,
             border = 0x171717,

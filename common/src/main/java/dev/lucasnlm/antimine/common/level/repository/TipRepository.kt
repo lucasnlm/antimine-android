@@ -5,7 +5,7 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 interface ITipRepository {
     fun setExtraTips(amount: Int)
     fun removeTip(): Boolean
-    fun increaseTip()
+    fun increaseTip(amount: Int)
     fun getTotalTips(): Int
 }
 
@@ -35,8 +35,8 @@ class TipRepository(
         }
     }
 
-    override fun increaseTip() {
-        val newValue = (preferencesRepository.getTips() + 1).coerceAtMost(MAX_TIPS).coerceAtLeast(0)
+    override fun increaseTip(amount: Int) {
+        val newValue = (preferencesRepository.getTips() + amount).coerceAtMost(MAX_TIPS).coerceAtLeast(0)
         preferencesRepository.setTips(newValue)
     }
 

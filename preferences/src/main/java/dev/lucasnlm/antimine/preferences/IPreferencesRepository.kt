@@ -6,6 +6,7 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 interface IPreferencesRepository {
     fun hasCustomizations(): Boolean
     fun reset()
+    fun resetControls()
 
     fun customGameMode(): Minefield
     fun updateCustomGameMode(minefield: Minefield)
@@ -48,7 +49,7 @@ interface IPreferencesRepository {
     fun setHelp(value: Boolean)
 
     fun squareRadius(): Int
-    fun setSquareRadius(value: Int)
+    fun setSquareRadius(value: Int?)
 
     fun getTips(): Int
     fun setTips(tips: Int)
@@ -64,10 +65,11 @@ interface IPreferencesRepository {
     fun useHapticFeedback(): Boolean
     fun setHapticFeedback(value: Boolean)
 
-    fun squareSizeMultiplier(): Int
-    fun setSquareMultiplier(value: Int)
+    fun squareSize(): Int
+    fun setSquareSize(value: Int?)
 
     fun useAnimations(): Boolean
+    fun setAnimations(enabled: Boolean)
 
     fun setNoGuessingAlgorithm(value: Boolean)
     fun useNoGuessingAlgorithm(): Boolean
@@ -85,6 +87,7 @@ interface IPreferencesRepository {
     fun getPreferredLocale(): String?
 
     fun showWindowsWhenFinishGame(): Boolean
+    fun mustShowWindowsWhenFinishGame(enabled: Boolean)
 
     fun openGameDirectly(): Boolean
     fun setOpenGameDirectly(value: Boolean)
@@ -95,4 +98,7 @@ interface IPreferencesRepository {
     fun addUnlockedTheme(id: Int)
     fun setUnlockedThemes(themes: String)
     fun getUnlockedThemes(): List<Int>
+
+    fun squareDivider(): Int
+    fun setSquareDivider(value: Int?)
 }

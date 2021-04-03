@@ -1,10 +1,12 @@
 package dev.lucasnlm.antimine.core.models
 
-enum class Mark {
-    None,
-    Flag,
-    Question,
-    PurposefulNone,
+enum class Mark(
+    val ligatureId: Int,
+) {
+    None(0),
+    Flag(1),
+    Question(1),
+    PurposefulNone(0),
     ;
 
     fun isFlag(): Boolean = this == Flag

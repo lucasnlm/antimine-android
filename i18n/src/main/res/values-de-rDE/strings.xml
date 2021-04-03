@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="de">
     <string name="tutorial">Anleitung</string>
-    <string name="tutorial_completed">Tutorial Abgeschlossen</string>
-    <string name="tutorial_0_bottom">Du kannst von %1$s aus an jedem beliebigen zufälligen Quadrat beginnen.</string>
-    <string name="tutorial_1_top">Die Zahlen geben an, wie viele Minen neben dem markierten Quadrat liegen.</string>
-    <string name="tutorial_1_bottom">Falls die Ecke 1 nur ein angrenzendes Quadrat hat, muss es daher eine Mine sein. %1$s um sie zu markieren.</string>
-    <string name="tutorial_2_top">Das nächste ungeöffnete Quadrat hat keine Mine, da die Zahl 1 ist, nicht 2.</string>
-    <string name="tutorial_2_bottom">Du kannst es durch %1$s öffnen.</string>
-    <string name="tutorial_3_top">Das Gleiche passiert auf dieser 1 Du weißt, wo die angrenzende Mine ist.</string>
-    <string name="tutorial_3_bottom">Du kannst alle ungeöffneten, an 1 angrenzende Quadrate öffnen.</string>
-    <string name="tutorial_4_top">Wir wissen, wo sich eine der Minen befindet. Daher gibt es nur noch eine einzige Möglichkeit für die andere.</string>
-    <string name="tutorial_4_bottom">%1$s um die an 2 angrenzende Mine zu markieren.</string>
-    <string name="tutorial_5_top">Prüfe die hervorgehobene Nummer.</string>
-    <string name="tutorial_5_bottom">%1$s zum Öffnen oder %2$s zum Markieren.</string>
+    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
+    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
+    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
+    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">Spiele</string>
+    <string name="tap_to_begin">Tippen um zu beginnen</string>
     <string name="previous_games">Vorherige Spiele</string>
     <string name="minefield">Schwierigkeitsgrad</string>
     <string name="standard">Voreinstellung</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">Barrierefreiheit</string>
     <string name="size">Größe</string>
     <string name="rounded_square">Abgerundetes Quadrat</string>
+    <string name="space_between_squares">Platz zwischen Quadrate</string>
     <string name="system">System</string>
     <string name="rating">Rückmeldung</string>
     <string name="sign_in_failed">Login fehlgeschlagen. Überprüfe Deine Netzwerkverbindung und versuche es erneut.</string>
@@ -66,9 +61,10 @@
     <string name="use_question_mark">Fragezeichen benutzen</string>
     <string name="no_guessing_mode">\"Kein Erraten\"-Modus</string>
     <string name="control">Steuerung</string>
-    <string name="single_click">Einzelklick</string>
-    <string name="double_click">Doppelklick</string>
-    <string name="long_press">Lange Drücken</string>
+    <string name="single_click">Einfaches Tippe</string>
+    <string name="double_click">Doppeltes Tippen</string>
+    <string name="long_press">Lange Tippe</string>
+    <string name="control_description">%ACTION macht %REACTION</string>
     <string name="touch_sensibility">Berührungsempfindlichkeit</string>
     <string name="open_tile">Öffnen</string>
     <string name="flag_tile">Flagge</string>
@@ -105,16 +101,6 @@
     <string name="appearance">Erscheinungsbild</string>
     <string name="themes">Themen</string>
     <string name="delete_all_message">Alle Ereignisse dauerhaft löschen.</string>
-    <string name="all_mines_disabled">Alle Minen wurden wirkungslos gemacht.</string>
-    <string name="desc_convered_area">Abgedeckte Fläche</string>
-    <string name="desc_marked_area">Markierte Fläche</string>
-    <string name="desc_question_area">Zweifelhafte Fläche</string>
-    <string name="desc_wrongly_marked_area">Falsch markierte Fläche</string>
-    <string name="exploded_mine">Explodierte Mine</string>
-    <string name="game_started">Spiel wurde gestartet</string>
-    <string name="you_exploded_a_mine">Du hast eine Mine zur Explosion gebracht!</string>
-    <string name="flag_placed">Markierung platziert!</string>
-    <string name="flag_removed">Markierung entfernt!</string>
     <string name="remove_ad">Werbung entfernen</string>
     <string name="help">Hilfe</string>
     <string name="back">Zurück</string>

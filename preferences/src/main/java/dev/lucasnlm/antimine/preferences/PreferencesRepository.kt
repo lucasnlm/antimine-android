@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.preferences
 
 import android.view.ViewConfiguration
+import dev.lucasnlm.antimine.preferences.PreferenceKeys.PREFERENCE_SQUARE_DIVIDER
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
@@ -19,21 +20,26 @@ class PreferencesRepository(
         return preferencesManager.run {
             getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50) != 50 ||
                 getInt(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT, longPressTimeout()) != longPressTimeout() ||
-                getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 1) != 1
+                getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 3) != 3
+        }
+    }
+
+    override fun resetControls() {
+        preferencesManager.apply {
+            removeKey(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY)
+            removeKey(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT)
         }
     }
 
     override fun reset() {
         preferencesManager.apply {
-            putBoolean(PreferenceKeys.PREFERENCE_ASSISTANT, true)
-            putBoolean(PreferenceKeys.PREFERENCE_VIBRATION, true)
-            putBoolean(PreferenceKeys.PREFERENCE_ANIMATION, true)
-            putBoolean(PreferenceKeys.PREFERENCE_QUESTION_MARK, false)
-            putBoolean(PreferenceKeys.PREFERENCE_SOUND_EFFECTS, false)
-            putInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 1)
-            putInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50)
-            putInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, 35)
-            putInt(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT, longPressTimeout())
+            removeKey(PreferenceKeys.PREFERENCE_ASSISTANT)
+            removeKey(PreferenceKeys.PREFERENCE_VIBRATION)
+            removeKey(PreferenceKeys.PREFERENCE_ANIMATION)
+            removeKey(PreferenceKeys.PREFERENCE_QUESTION_MARK)
+            removeKey(PreferenceKeys.PREFERENCE_SOUND_EFFECTS)
+            removeKey(PreferenceKeys.PREFERENCE_SQUARE_RADIUS)
+            removeKey(PreferenceKeys.PREFERENCE_AREA_SIZE)
         }
     }
 
@@ -67,15 +73,24 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_VIBRATION, value)
     }
 
-    override fun squareSizeMultiplier(): Int =
+    override fun squareSize(): Int =
         preferencesManager.getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50)
 
-    override fun setSquareMultiplier(value: Int) {
-        preferencesManager.putInt(PreferenceKeys.PREFERENCE_AREA_SIZE, value)
+    override fun setSquareSize(value: Int?) {
+        if (value == null) {
+            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_AREA_SIZE)
+        } else {
+            preferencesManager.putInt(PreferenceKeys.PREFERENCE_AREA_SIZE, value)
+        }
     }
 
-    override fun useAnimations(): Boolean =
-        preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_ANIMATION, true)
+    override fun useAnimations(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_ANIMATION, true)
+    }
+
+    override fun setAnimations(enabled: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_ANIMATION, enabled)
+    }
 
     override fun setNoGuessingAlgorithm(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_NO_GUESSING, value)
@@ -117,8 +132,13 @@ class PreferencesRepository(
         return preferencesManager.getString(PreferenceKeys.PREFERENCE_LOCALE)
     }
 
-    override fun showWindowsWhenFinishGame(): Boolean =
-        preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_WINDOWS, true)
+    override fun showWindowsWhenFinishGame(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_WINDOWS, true)
+    }
+
+    override fun mustShowWindowsWhenFinishGame(enabled: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_WINDOWS, enabled)
+    }
 
     override fun userId(): String? {
         return preferencesManager.getString(PreferenceKeys.PREFERENCE_USER_ID)
@@ -290,11 +310,15 @@ class PreferencesRepository(
     }
 
     override fun squareRadius(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 1)
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 3)
     }
 
-    override fun setSquareRadius(value: Int) {
-        preferencesManager.putInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, value)
+    override fun setSquareRadius(value: Int?) {
+        if (value == null) {
+            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_RADIUS)
+        } else {
+            preferencesManager.putInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, value)
+        }
     }
 
     override fun getTips(): Int {
@@ -327,5 +351,17 @@ class PreferencesRepository(
 
     override fun setOpenGameDirectly(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_OPEN_DIRECTLY, value)
+    }
+
+    override fun squareDivider(): Int {
+        return preferencesManager.getInt(PREFERENCE_SQUARE_DIVIDER, 0)
+    }
+
+    override fun setSquareDivider(value: Int?) {
+        if (value == null) {
+            preferencesManager.removeKey(PREFERENCE_SQUARE_DIVIDER)
+        } else {
+            preferencesManager.putInt(PREFERENCE_SQUARE_DIVIDER, value.coerceIn(0, 50))
+        }
     }
 }

@@ -1,9 +1,9 @@
 package dev.lucasnlm.antimine.common.level.repository
 
 import android.content.Context
+import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
-import dev.lucasnlm.antimine.isPortrait
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlin.random.Random
@@ -71,8 +71,8 @@ class MinefieldRepository(
         private const val CUSTOM_LEVEL_MINE_RATIO = 0.2
         private const val MAX_LEVEL_MINE_RATIO = 0.45
         private const val HORIZONTAL_STANDARD_GAP = 1
-        private const val VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM = 4
-        private const val VERTICAL_STANDARD_GAP = 3
+        private const val VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM = 3
+        private const val VERTICAL_STANDARD_GAP = 2
         private const val MIN_STANDARD_WIDTH = 6
         private const val MIN_STANDARD_HEIGHT = 9
     }

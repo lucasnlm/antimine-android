@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="el">
     <string name="tutorial">Οδηγίες</string>
-    <string name="tutorial_completed">Ολοκλήρωση εκμάθησης</string>
-    <string name="tutorial_0_bottom">Μπορείτε να ξεκινήσετε με %1$s σε οποιοδήποτε τυχαίο τετράγωνο.</string>
-    <string name="tutorial_1_top">Οι αριθμοί υποδεικνύουν πόσες νάρκες βρίσκονται δίπλα στο επισημασμένο τετράγωνο.</string>
-    <string name="tutorial_1_bottom">Επομένως, εάν η γωνία 1 έχει μόνο ένα παρακείμενο τετράγωνο, πρέπει να είναι νάρκη. %1$s για να το επισημάνετε.</string>
-    <string name="tutorial_2_top">Το επόμενο κλειστό τετράγωνο δεν έχει νάρκη επειδή ο αριθμός είναι 1 και όχι 2.</string>
-    <string name="tutorial_2_bottom">Μπορείτε να το ανοίξετε από %1$s.</string>
-    <string name="tutorial_3_top">Το ίδιο συμβαίνει σε αυτό το 1. Ξέρεις πού είναι η διπλανή νάρκη.</string>
-    <string name="tutorial_3_bottom">Μπορείτε να ανοίξετε όλα τα άλλα κλειστά τετράγωνα δίπλα στο 1.</string>
-    <string name="tutorial_4_top">Γνωρίζουμε πού είναι μια από τις νάρκες. Έτσι, υπάρχει μόνο μία πιθανότητα με την άλλη.</string>
-    <string name="tutorial_4_bottom">%1$s για να επισημάνετε τη νάρκη δίπλα στο 2.</string>
-    <string name="tutorial_5_top">Ελέγξτε τον επισημασμένο αριθμό.</string>
-    <string name="tutorial_5_bottom">%1$s για να ανοίξετε ή %2$s για επισήμανση.</string>
+    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
+    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
+    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
+    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">Παιχνίδια</string>
+    <string name="tap_to_begin">Πατήστε για έναρξη</string>
     <string name="previous_games">Προηγούμενα Παιχνίδια</string>
     <string name="minefield">Δυσκολία</string>
     <string name="standard">Κανονική</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">Προσβασιμότητα</string>
     <string name="size">Μέγεθος</string>
     <string name="rounded_square">Στρογγυλεμένο τετράγωνο</string>
+    <string name="space_between_squares">Διάστημα Μεταξύ Τετραγώνων</string>
     <string name="system">Σύστημα</string>
     <string name="rating">Αξιολόγηση</string>
     <string name="sign_in_failed">Αποτυχία σύνδεσης. Ελέγξτε τη σύνδεση δικτύου σας και δοκιμάστε ξανά.</string>
@@ -66,9 +61,10 @@
     <string name="use_question_mark">Χρήση ερωτηματικών</string>
     <string name="no_guessing_mode">Λειτουργία «Χωρίς μαντέψεις»</string>
     <string name="control">Ελεγχος</string>
-    <string name="single_click">Με ένα κλικ</string>
-    <string name="double_click">Διπλό κλικ</string>
-    <string name="long_press">Πιέστε και κρατήστε</string>
+    <string name="single_click">Απλό χτύπημα</string>
+    <string name="double_click">Διπλό κτύπημα</string>
+    <string name="long_press">Παρατεταμένο πάτημα</string>
+    <string name="control_description">%ACTION έως %REACTION</string>
     <string name="touch_sensibility">Ευαισθησία αφής</string>
     <string name="open_tile">Άνοιγμα</string>
     <string name="flag_tile">Σημαία</string>
@@ -105,16 +101,6 @@
     <string name="appearance">Εμφάνιση</string>
     <string name="themes">Θέμα</string>
     <string name="delete_all_message">Μόνιμη διαγραφή επιλεγμένων.</string>
-    <string name="all_mines_disabled">Όλες οι νάρκες απενεργοποιήθηκαν.</string>
-    <string name="desc_convered_area">Καλυμμένη περιοχή</string>
-    <string name="desc_marked_area">Μαρκαρισμένη περιοχή</string>
-    <string name="desc_question_area">Αμφισβητήσιμη περιοχή</string>
-    <string name="desc_wrongly_marked_area">Εσφαλμένο μαρκάρισμα περιοχής</string>
-    <string name="exploded_mine">\'Έκρηξη Νάρκης</string>
-    <string name="game_started">Το Παιχνίδι Ξεκίνησε</string>
-    <string name="you_exploded_a_mine">Ανατίναξες μια νάρκη!</string>
-    <string name="flag_placed">Η Σημαία τοποθετήθηκε!</string>
-    <string name="flag_removed">Η σημαία αφαιρέθηκε!</string>
     <string name="remove_ad">Κατάργηση διαφημίσεων</string>
     <string name="help">Βοήθεια</string>
     <string name="back">Πίσω</string>

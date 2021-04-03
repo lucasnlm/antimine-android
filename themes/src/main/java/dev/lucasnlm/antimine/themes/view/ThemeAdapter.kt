@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import dev.lucasnlm.antimine.core.models.Area
-import dev.lucasnlm.antimine.core.models.AreaPaintSettings
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.R
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
@@ -14,22 +12,17 @@ import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
-import dev.lucasnlm.antimine.ui.view.AreaView
-import dev.lucasnlm.antimine.ui.view.createAreaPaintSettings
 import dev.lucasnlm.external.IAdsManager
 import kotlinx.android.synthetic.main.view_theme.view.*
 
 class ThemeAdapter(
     private val activity: Activity,
     private val themeViewModel: ThemeViewModel,
-    private val areaSize: Float,
     private val preferencesRepository: IPreferencesRepository,
     private val adsManager: IAdsManager,
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
 
     private val themes: List<AppTheme> = themeViewModel.singleState().themes
-    private val minefield = ExampleField.getField()
-    private val squareRadius: Int = preferencesRepository.squareRadius()
     private val unlockedThemes = preferencesRepository.getUnlockedThemes()
 
     init {
@@ -53,34 +46,16 @@ class ThemeAdapter(
 
     override fun onBindViewHolder(holder: ThemeViewHolder, position: Int) {
         val theme = themes[position]
-        val paintSettings = createAreaPaintSettings(
-            holder.itemView.context,
-            areaSize,
-            squareRadius
-        )
 
-        holder.itemView.run {
+        holder.itemView.apply {
             val selected = (theme.id == themeViewModel.singleState().current.id)
-            val areas = listOf(area0, area1, area2, area3, area4, area5, area6, area7, area8)
+            val alpha = if (selected) 127 else 255
+            cardTheme.alpha = if (selected) 0.5f else 1.0f
 
-            if (selected) {
-                areas.forEach { it.alpha = 0.25f }
-            } else {
-                areas.forEach { it.alpha = 1.0f }
-            }
-
-            areas.forEachIndexed { index, areaView ->
-                areaView.apply {
-                    bindTheme(minefield[index], theme, paintSettings)
-                    isClickable = false
-                    isFocusable = false
-                    isPressed = false
-                }
-            }
+            covered.setBackgroundColor(theme.palette.covered.toAndroidColor(alpha))
+            uncovered.setBackgroundColor(theme.palette.background.toAndroidColor(alpha))
 
             if (position == 0) {
-                areas.forEach { it.alpha = 0.30f }
-
                 label.apply {
                     text = label.context.getString(R.string.system)
                     setTextColor(theme.palette.background.toInvertedAndroidColor(200))
@@ -93,8 +68,6 @@ class ThemeAdapter(
                 !preferencesRepository.isPremiumEnabled() &&
                 !unlockedThemes.contains(theme.id.toInt())
             ) {
-                areas.forEach { it.alpha = 0.30f }
-
                 label.apply {
                     text = label.context.getString(R.string.unlock)
                     setTextColor(theme.palette.background.toInvertedAndroidColor(200))
@@ -105,24 +78,16 @@ class ThemeAdapter(
                     visibility = View.VISIBLE
                 }
             } else {
-                label.setCompoundDrawables(null, null, null, null)
-                label.visibility = View.GONE
+                label.apply {
+                    setCompoundDrawables(null, null, null, null)
+                    visibility = View.GONE
+                }
             }
 
-            theme_background.setBackgroundColor(theme.palette.background.toAndroidColor())
-
-            clickable.setOnClickListener {
-                unlockThemeIfNeeded(theme)
-            }
-
-            card_theme.apply {
+            cardTheme.apply {
+                strokeColor = theme.palette.covered.toAndroidColor(alpha)
                 setOnClickListener {
                     unlockThemeIfNeeded(theme)
-                }
-                strokeColor = if (selected) {
-                    theme.palette.accent.toAndroidColor()
-                } else {
-                    0
                 }
             }
         }
@@ -146,16 +111,6 @@ class ThemeAdapter(
                 }
             )
         }
-    }
-
-    private fun AreaView.bindTheme(area: Area, theme: AppTheme, paintSettings: AreaPaintSettings) {
-        bindField(
-            area = area,
-            theme = theme,
-            isAmbientMode = false,
-            isLowBitAmbient = false,
-            paintSettings = paintSettings
-        )
     }
 }
 

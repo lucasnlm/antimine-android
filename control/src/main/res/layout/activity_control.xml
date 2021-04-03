@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true">
+
+    <dev.lucasnlm.antimine.ui.view.SectionView
+        android:id="@+id/section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fadeScrollbars="false"
+        app:layout_constraintTop_toBottomOf="@id/section"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:layout_marginHorizontal="12dp"
+                android:requiresFadingEdge="vertical"
+                android:fadingEdge="vertical"
+                android:fadingEdgeLength="24dp"
+                android:fadeScrollbars="false"
+                android:scrollbarStyle="outsideInset"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/longPressLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:paddingVertical="12dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/long_press"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/longPress"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:max="2000"
+                android:progress="500"
+                app:layout_constraintBottom_toBottomOf="@+id/longPressLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/longPressLabel"
+                app:layout_constraintTop_toTopOf="@+id/longPressLabel" />
+
+            <TextView
+                android:id="@+id/touch_sensibility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:paddingVertical="12dp"
+                android:text="@string/touch_sensibility"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/longPressLabel" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/touchSensibility"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:max="90"
+                android:progress="0"
+                app:layout_constraintBottom_toBottomOf="@+id/touch_sensibility"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/touch_sensibility"
+                app:layout_constraintTop_toTopOf="@+id/touch_sensibility" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

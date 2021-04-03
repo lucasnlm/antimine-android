@@ -7,10 +7,8 @@ import android.widget.Toast
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import kotlinx.android.synthetic.main.activity_language.*
 import org.koin.android.ext.android.inject
@@ -19,7 +17,6 @@ import java.util.Locale
 class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         section.bind(
             text = R.string.select_language,
@@ -32,6 +29,7 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
         open_crowdin.bind(
             theme = usingTheme,
             text = R.string.crowdin,
+            invert = true,
             startIcon = R.drawable.translate,
             onAction = {
                 try {
@@ -49,13 +47,6 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
     private fun placePreferenceFragment() {
         supportFragmentManager.apply {
             popBackStack()
-
-            findFragmentByTag(PreferencesActivity.PrefsFragment.TAG)?.let { it ->
-                beginTransaction().apply {
-                    remove(it)
-                    commitAllowingStateLoss()
-                }
-            }
 
             beginTransaction().apply {
                 replace(
@@ -124,7 +115,7 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
                     .forEach { (language, locale) ->
                         addPreference(
                             Preference(context).apply {
-                                title = language
+                                title = language.toUpperCase(Locale.getDefault())
                                 isIconSpaceReserved = false
                                 setOnPreferenceClickListener {
                                     preferenceRepository.setPreferredLocale("${locale.language}-${locale.country}")

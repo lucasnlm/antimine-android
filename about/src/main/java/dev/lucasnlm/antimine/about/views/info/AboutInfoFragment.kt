@@ -8,11 +8,14 @@ import androidx.fragment.app.Fragment
 import dev.lucasnlm.antimine.about.R
 import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
+import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.fragment_about_info.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
     private val aboutViewModel: AboutViewModel by sharedViewModel()
+    private val themeRepository: IThemeRepository by inject()
 
     override fun onResume() {
         super.onResume()
@@ -37,17 +40,35 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
             }
         }
 
-        thirdsParties.setOnClickListener {
-            aboutViewModel.sendEvent(AboutEvent.ThirdPartyLicenses)
-        }
+        thirdsParties.bind(
+            theme = themeRepository.getTheme(),
+            invert = true,
+            text = R.string.show_licenses,
+            centralize = true,
+            onAction = {
+                aboutViewModel.sendEvent(AboutEvent.ThirdPartyLicenses)
+            }
+        )
 
-        sourceCode.setOnClickListener {
-            aboutViewModel.sendEvent(AboutEvent.SourceCode)
-        }
+        translation.bind(
+            theme = themeRepository.getTheme(),
+            invert = true,
+            text = R.string.translation,
+            centralize = true,
+            onAction = {
+                aboutViewModel.sendEvent(AboutEvent.Translators)
+            }
+        )
 
-        translation.setOnClickListener {
-            aboutViewModel.sendEvent(AboutEvent.Translators)
-        }
+        sourceCode.bind(
+            theme = themeRepository.getTheme(),
+            invert = true,
+            text = R.string.source_code,
+            centralize = true,
+            onAction = {
+                aboutViewModel.sendEvent(AboutEvent.SourceCode)
+            }
+        )
     }
 
     companion object {

@@ -13,22 +13,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <dev.lucasnlm.antimine.main.view.CardButtonView
-        android:id="@+id/open_crowdin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/section" />
-
     <FrameLayout
         android:id="@+id/preference_fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:elevation="0.0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/open_crowdin" />
+        app:layout_constraintBottom_toTopOf="@+id/open_crowdin"
+        app:layout_constraintTop_toBottomOf="@id/section" />
+
+    <dev.lucasnlm.antimine.ui.view.CardButtonView
+        android:id="@+id/open_crowdin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

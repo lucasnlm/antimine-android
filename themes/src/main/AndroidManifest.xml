@@ -5,7 +5,6 @@
     <application>
         <activity
             android:name=".ThemeActivity"
-            android:configChanges="orientation|screenSize"
             android:label="@string/themes"
             android:theme="@style/AppTheme" />
     </application>

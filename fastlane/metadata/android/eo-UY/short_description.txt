@@ -1,0 +1,1 @@
+A puzzle game where you search for all hidden mines. 

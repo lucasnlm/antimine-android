@@ -185,9 +185,10 @@ class GameController {
 
     fun getMinesCount() = mines().count()
 
-    fun showAllMines() {
+    fun showAllMistakes() {
         field = MinefieldHandler(field.toMutableList(), false).run {
             showAllMines()
+            showAllWrongFlags()
             result()
         }
     }
@@ -200,13 +201,6 @@ class GameController {
             val dy1 = (it.posY - target.posY)
             dx1 * dx1 + dy1 * dy1
         }
-
-    fun revealArea(id: Int) {
-        field = MinefieldHandler(field.toMutableList(), false).run {
-            openAt(id, passive = true, openNeighbors = false)
-            result()
-        }
-    }
 
     fun flagAllMines() {
         field = MinefieldHandler(field.toMutableList(), false).run {
@@ -260,9 +254,10 @@ class GameController {
         hasIsolatedAllMines() || (explodedMinesCount() > errorTolerance)
 
     fun remainingMines(): Int {
-        val flagsCount = field.count { it.mark.isFlag() }
+        val flagsCount = field.count { it.isCovered && it.mark.isFlag() }
         val minesCount = mines().count()
-        return (minesCount - flagsCount).coerceAtLeast(0)
+        val openMinesCount = mines().count { !it.isCovered }
+        return (minesCount - flagsCount - openMinesCount)
     }
 
     fun getSaveState(duration: Long, difficulty: Difficulty): Save {
@@ -291,8 +286,13 @@ class GameController {
 
     fun getActionsCount() = actions
 
-    fun increaseErrorTolerance() {
-        errorTolerance++
+    fun increaseErrorToleranceByWrongMines() {
+        val value = mines().count { !it.isCovered }
+        increaseErrorTolerance(value)
+    }
+
+    fun increaseErrorTolerance(value: Int = 1) {
+        errorTolerance += value
     }
 
     fun hadMistakes(): Boolean {

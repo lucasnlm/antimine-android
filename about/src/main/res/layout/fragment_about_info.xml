@@ -22,9 +22,8 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="115dp"
+            android:layout_width="76dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/app_name"
             android:importantForAccessibility="no"
@@ -34,8 +33,9 @@
             android:id="@+id/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/app_name"
+            android:textAllCaps="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold" />
@@ -67,29 +67,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/version_layout">
 
-        <Button
+        <dev.lucasnlm.antimine.ui.view.CardButtonView
             android:id="@+id/thirdsParties"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginVertical="4dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/show_licenses" />
+            android:layout_height="wrap_content"/>
 
-        <Button
+        <dev.lucasnlm.antimine.ui.view.CardButtonView
             android:id="@+id/translation"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginVertical="4dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/translation" />
+            android:layout_height="wrap_content"/>
 
-        <Button
+        <dev.lucasnlm.antimine.ui.view.CardButtonView
             android:id="@+id/sourceCode"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginVertical="4dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/source_code" />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

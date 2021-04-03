@@ -1,56 +1,56 @@
-Prova il tuo potere di ragionamento su un gioco di puzzle impegnativo in cui devi risolvere un campo minato senza esplodere alcuna miniera.
+Metti alla prova la tua capacità di ragionamento in un puzzle game in cui devi risolvere un campo minato senza far esplodere nessuna mina.
 Questa è una versione minimalista e moderna del classico Minesweeper.
 
-Siete in grado di liberare un campo minato? Iniziamo!
+Sarai in grado di sgombrare un campo minato? Iniziamo!
 
 OBIETTIVO
-È come il Minesweeper. Vinci la partita quando hai contrassegnato ogni miniera nel campo minato. Fai attenzione a non attivarne uno!
+È come il Minesweeper. Vinci la partita quando hai contrassegnato ogni mina nel campo minato. Stai attento a non farle esplodere!
 
 NON C'È BISOGNO DI INDOVINARE
-Questo gioco ha un algoritmo che crea sempre campi minati risolvibili. Non dovrai indovinare dov'è l'ultima miniera!
+Questo gioco ha un algoritmo che crea sempre campi minati risolvibili. Non dovrai indovinare dov'è l'ultima mina!
 
 LIVELLI DI GIOCO
-Proprio come Minesweeper, questo gioco ha diversi livelli: Principiante, Intermedio e Esperto. Ma ha anche una modalità progressiva unica che diventa più difficile quando si vince.
+Proprio come Minesweeper, questo gioco ha diversi livelli: Principiante, Intermedio e Esperto. Ha anche una modalità progressiva che diventa più difficile dopo ogni vittoria.
 
 LIVELLO CUSTOM
-Se le modalità standard non sono sufficienti, puoi creare la tua difficoltà di livello!
+Se le modalità standard non ti soddisfano, puoi creare il tuo livello di difficoltà!
 
 TEMI
-Antimina ha più di 15 temi (tra cui luce, buio e AMOLED). E presto sarà aggiunto di più!
+Antimine contiene più di 15 temi (tra cui chiaro, scuro e AMOLED). Presto ne verranno aggiunti di nuovi!
 
 MINIMALISTA
-Aspetto pulito e sentimento: un minimalista visivo e anche leggero dimensioni dell'app (meno di 9MB).
+Aspetto e feeling semplici: una grafica minimalista in un'app molto leggera (meno di 9MB).
 
 TUTORIAL
 Non sai come giocare a Campo Minato? Nessun problema, puoi giocare il nostro livello tutorial e abilitare i suggerimenti sulle impostazioni.
 
 STATISTICHE
-Controllare i risultati e lo sviluppo.
+Controlla i tuoi risultati e il tuo sviluppo.
 
 ASSISTENZA DEL GIOCO
-Il gioco contrassegnare automaticamente i quadrati che hai isolato. 
+Il gioco contrassegna automaticamente le caselle che hai isolato. 
 
 PERSONALIZZAZIONE
 È possibile modificare il gioco per renderlo come si desidera. 
 Esempio: Aiuto, animazioni, feedback aptico, punto interrogativo.
 
 CONTROLLI
-Esso sostiene quattro diversi sistemi di controllo. Esempio: contrassegno utilizzando tap o pressione prolungata.
+Il gioco sostiene quattro diversi sistemi di controllo. Esempio: contrassegno utilizzando tap o pressione prolungata.
 
 RISULTATI E LEADERBOARD 
-Hai otto risultati da sbloccare e diverse classifiche da condividere con i tuoi amici.
+Puoi sbloccare fino a otto obiettivi e condividere diverse classifiche con i tuoi amici.
 
 ACCESSIBILITÀ
-Puoi personalizzare questo gioco in base alle tue esigenze: cambiare la dimensione dei quadrati, il raggio, il tempo di tocco, e il supporto del lettore dello schermo.
-Stiamo sempre cercando di migliorare le nostre impostazioni di accessibilità. Se ti manca qualcosa ci danno un feedback!
+Puoi personalizzare il gioco in base alle tue esigenze: cambiare la dimensione delle caselle, il raggio, il tempo di tocco, e il supporto per i lettori di schermo.
+Cerchiamo sempre di migliorare le nostre impostazioni di accessibilità. Se ti manca qualcosa ci danno un feedback!
 
 ANDROID
-Supporta caratteristiche interessanti di Android come split-screen, scorciatoie, condivisione, tema di sistema, e sempre supportando l'ultima versione.
+Supporta caratteristiche interessanti di Android come split-screen, scorciatoie, condivisione, tema di sistema, e sempre supportando la versione più recente.
 
 ONLINE O OFFLINE
 Non è necessario essere online per giocare al gioco!
 
-AUTO-SALVA
-Puoi iniziare una partita e continuare più tardi! Salvare automaticamente la partita.
+AUTO-SALVATAGGIO
+Puoi iniziare una partita e riprenderla più tardi! La partita verrà salvata automaticamente.
 
 Buon divertimento!

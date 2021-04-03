@@ -3,7 +3,7 @@ package dev.lucasnlm.antimine.ui.model
 import androidx.annotation.ColorInt
 
 data class AreaPalette(
-    @ColorInt val border: Int,
+    @ColorInt val border: Int, // REMOVE
     @ColorInt val background: Int,
     @ColorInt val accent: Int,
     @ColorInt val covered: Int,
@@ -21,3 +21,16 @@ data class AreaPalette(
     @ColorInt val highlight: Int,
     @ColorInt val focus: Int,
 )
+
+fun AreaPalette.minesAround(index: Int): Int {
+    return listOf(
+        minesAround1,
+        minesAround2,
+        minesAround3,
+        minesAround4,
+        minesAround5,
+        minesAround6,
+        minesAround7,
+        minesAround8
+    )[index]
+}

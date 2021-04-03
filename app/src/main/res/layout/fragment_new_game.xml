@@ -5,17 +5,17 @@
     android:padding="16dp"
     android:orientation="vertical">
 
-    <dev.lucasnlm.antimine.main.view.CardButtonView
+    <dev.lucasnlm.antimine.ui.view.CardButtonView
         android:id="@+id/beginner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <dev.lucasnlm.antimine.main.view.CardButtonView
+    <dev.lucasnlm.antimine.ui.view.CardButtonView
         android:id="@+id/intermediate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <dev.lucasnlm.antimine.main.view.CardButtonView
+    <dev.lucasnlm.antimine.ui.view.CardButtonView
         android:id="@+id/expert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"/>
 
-    <dev.lucasnlm.antimine.main.view.CardButtonView
+    <dev.lucasnlm.antimine.ui.view.CardButtonView
         android:id="@+id/tutorial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

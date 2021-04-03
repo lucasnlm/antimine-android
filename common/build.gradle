@@ -16,15 +16,12 @@ android {
     }
 
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-        freeCompilerArgs += [
-                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi',
-                '-Xuse-experimental=kotlinx.coroutines.FlowPreview']
+        jvmTarget = "1.8"
     }
 }
 
@@ -41,6 +38,7 @@ dependencies {
     implementation project(':i18n')
     implementation project(':preferences')
     implementation project(':ui')
+    implementation project(':gdx')
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.2.0'

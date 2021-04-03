@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_theme"
+        android:id="@+id/cardTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
@@ -17,92 +16,31 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeWidth="2dp">
+        app:strokeWidth="1dp">
 
-        <FrameLayout
-            android:id="@+id/theme_background"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            tools:layout_height="196dp"
-            tools:layout_width="196dp">
+            android:layout_height="wrap_content">
 
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:columnCount="3"
-                android:descendantFocusability="blocksDescendants"
-                android:focusable="false"
-                android:translationX="-2dp">
+            <View
+                android:id="@+id/uncovered"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:clickable="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/covered"/>
 
-                <dev.lucasnlm.antimine.ui.view.AreaView
-                    android:id="@+id/area0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="0.5dp"
-                    android:layout_marginBottom="0.5dp" />
-
-                <dev.lucasnlm.antimine.ui.view.AreaView
-                    android:id="@+id/area1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0.5dp"
-                    android:layout_marginEnd="0.5dp"
-                    android:layout_marginBottom="0.5dp" />
-
-                <dev.lucasnlm.antimine.ui.view.AreaView
-                    android:id="@+id/area2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0.5dp"
-                    android:layout_marginBottom="0.5dp" />
-
-                <dev.lucasnlm.antimine.ui.view.AreaView
-                    android:id="@+id/area3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0.5dp"
-                    android:layout_marginEnd="0.5dp"
-                    android:layout_marginBottom="0.5dp" />
-
-                <dev.lucasnlm.antimine.ui.view.AreaView
-                    android:id="@+id/area4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0.5dp" />
-
-                <dev.lucasnlm.antimine.ui.view.AreaView
-                    android:id="@+id/area5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0.5dp"
-                    android:layout_marginTop="0.5dp"
-                    android:layout_marginBottom="0.5dp" />
-
-                <dev.lucasnlm.antimine.ui.view.AreaView
-                    android:id="@+id/area6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0.5dp"
-                    android:layout_marginEnd="0.5dp" />
-
-                <dev.lucasnlm.antimine.ui.view.AreaView
-                    android:id="@+id/area7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0.5dp"
-                    android:layout_marginTop="0.5dp"
-                    android:layout_marginEnd="0.5dp" />
-
-                <dev.lucasnlm.antimine.ui.view.AreaView
-                    android:id="@+id/area8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0.5dp"
-                    android:layout_marginTop="0.5dp" />
-            </GridLayout>
+            <View
+                android:id="@+id/covered"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:clickable="false"
+                app:layout_constraintStart_toEndOf="@+id/uncovered"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:id="@+id/label"
@@ -112,14 +50,13 @@
                 android:text="@string/system"
                 android:textAllCaps="true"
                 android:textStyle="bold"
-                app:drawableTopCompat="@drawable/movie" />
+                android:clickable="false"
+                app:drawableTopCompat="@drawable/movie"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <FrameLayout
-                android:id="@+id/clickable"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:foreground="?android:attr/selectableItemBackground" />
-
-        </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

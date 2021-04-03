@@ -14,8 +14,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 901051
-        versionName '9.1.5'
+        versionCode 1000001
+        versionName '10.0.0'
         minSdkVersion 21
         targetSdkVersion 30
         multiDexEnabled true
@@ -115,13 +115,13 @@ dependencies {
     implementation project(':ui')
     implementation project(':preferences')
     implementation project(':themes')
+    implementation project(':tutorial')
     implementation project(':core')
+    implementation project(':gdx')
 
     googleImplementation project(':proprietary')
     googleInstantImplementation project(':proprietary')
     fossImplementation project(':foss')
-
-    implementation 'me.relex:circleindicator:2.1.6'
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.2.0'

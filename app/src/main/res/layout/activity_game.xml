@@ -4,120 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:fitsSystemWindows="true">
-
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="?attr/actionBarSize"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?selectableItemBackgroundBorderless"
-        android:padding="14dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/arrow_left" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/switchFlag"
-        android:layout_width="?attr/actionBarSize"
-        android:layout_height="?attr/actionBarSize"
-        android:clickable="true"
-        android:contentDescription="@string/switch_control"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintLeft_toRightOf="@id/back"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeWidth="1.5dp">
-
-        <ImageView
-            android:id="@+id/switchFlagImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:importantForAccessibility="no"
-            android:padding="8dp"
-            app:srcCompat="@drawable/flag_black" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <TextView
-        android:id="@+id/timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="10dp"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
-        android:includeFontPadding="false"
-        android:minEms="2"
-        android:text="@string/default_time_value"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:drawableLeftCompat="@drawable/timer"
-        app:drawableStartCompat="@drawable/timer"
-        app:drawableTint="?android:attr/textColorPrimary"
-        app:layout_constraintBottom_toBottomOf="@id/back"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintLeft_toRightOf="@id/switchFlag"
-        app:layout_constraintRight_toLeftOf="@id/minesCount"
-        app:layout_constraintTop_toTopOf="@id/back"
-        tools:targetApi="m"
-        tools:text="10:00"
-        tools:visibility="visible" />
-
-    <TextView
-        android:id="@+id/minesCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
-        android:includeFontPadding="false"
-        android:minEms="3"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:drawableStartCompat="@drawable/mine"
-        app:drawableTint="?android:attr/textColorPrimary"
-        app:layout_constraintBottom_toBottomOf="@id/back"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintLeft_toRightOf="@id/timer"
-        app:layout_constraintRight_toLeftOf="@id/shortcutIcon"
-        app:layout_constraintTop_toTopOf="@id/back"
-        tools:targetApi="m"
-        tools:text="99"
-        tools:visibility="visible" />
-
-    <ImageView
-        android:id="@+id/shortcutIcon"
-        android:layout_width="?attr/actionBarSize"
-        android:layout_height="?attr/actionBarSize"
-        android:alpha="0.0"
-        android:background="?selectableItemBackgroundBorderless"
-        android:clickable="false"
-        android:contentDescription="@string/new_game"
-        android:padding="14dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/retry"
-        tools:alpha="1.0" />
-
-    <TextView
-        android:id="@+id/tipsCounter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="41dp"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/shortcutIcon"
-        app:layout_constraintEnd_toEndOf="@+id/shortcutIcon"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="100"
-        tools:visibility="visible" />
+    android:fitsSystemWindows="false">
 
     <FrameLayout
         android:id="@+id/levelContainer"
@@ -126,8 +13,153 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/back">
+        app:layout_constraintTop_toTopOf="parent">
 
         <requestFocus />
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/tapToBegin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:text="@string/tap_to_begin"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="12dp"
+        android:background="@drawable/round_background"
+        android:includeFontPadding="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/controlsToast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:layout_marginVertical="100dp"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="12dp"
+        android:background="@drawable/round_background"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="8dp"
+        tools:text="Action to Reaction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:elevation="0dp"
+        android:fitsSystemWindows="true"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/back"
+                android:padding="14dp"
+                app:srcCompat="@drawable/arrow_left" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="10dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:minEms="2"
+                    android:text="@string/default_time_value"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:drawableLeftCompat="@drawable/timer"
+                    app:drawableStartCompat="@drawable/timer"
+                    app:drawableTint="?android:attr/textColorPrimary"
+                    tools:targetApi="m"
+                    tools:text="10:00"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/minesCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:minEms="3"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:drawableStartCompat="@drawable/mine"
+                    app:drawableTint="?android:attr/textColorPrimary"
+                    tools:targetApi="m"
+                    tools:text="99"
+                    tools:visibility="visible" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/shortcutIcon"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:alpha="0.0"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="false"
+                    android:contentDescription="@string/new_game"
+                    android:padding="14dp"
+                    app:srcCompat="@drawable/retry"
+                    tools:alpha="1.0" />
+
+                <TextView
+                    android:id="@+id/tipsCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="24dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    tools:text="100"
+                    tools:visibility="visible" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

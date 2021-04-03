@@ -12,4 +12,16 @@ sealed class ThemeEvent {
     ) : ThemeEvent()
 
     object ResetTheme : ThemeEvent()
+
+    data class SetSquareSize(
+        val size: Int,
+    ) : ThemeEvent()
+
+    data class SetSquareRadius(
+        val radius: Int,
+    ) : ThemeEvent()
+
+    data class SetSquareDivider(
+        val divider: Int,
+    ) : ThemeEvent()
 }

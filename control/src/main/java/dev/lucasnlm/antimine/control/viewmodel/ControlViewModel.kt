@@ -59,25 +59,51 @@ class ControlViewModel(
             it.controlStyle == preferencesRepository.controlStyle()
         }
         return ControlState(
-            selectedIndex = controlDetails?.id?.toInt() ?: 0,
+            touchSensibility = preferencesRepository.touchSensibility() - 10,
+            longPress = preferencesRepository.customLongPressTimeout().toInt(),
             selected = controlDetails?.controlStyle ?: ControlStyle.Standard,
-            gameControls = gameControlOptions
+            controls = gameControlOptions
         )
     }
 
     override suspend fun mapEventToState(event: ControlEvent) = flow {
-        if (event is ControlEvent.SelectControlStyle) {
-            val controlStyle = event.controlStyle
-            preferencesRepository.useControlStyle(controlStyle)
+        when (event) {
+            is ControlEvent.UpdateLongPress -> {
+                preferencesRepository.setCustomLongPressTimeout(event.value.toLong())
 
-            val selected = state.gameControls.first { it.controlStyle == event.controlStyle }
+                val newState = state.copy(
+                    longPress = event.value,
+                )
+                emit(newState)
+            }
+            is ControlEvent.UpdateTouchSensibility -> {
+                preferencesRepository.setTouchSensibility(event.value + 10)
+                val newState = state.copy(
+                    touchSensibility = event.value,
+                )
+                emit(newState)
+            }
+            is ControlEvent.Reset -> {
+                preferencesRepository.resetControls()
 
-            val newState = state.copy(
-                selectedIndex = selected.id.toInt(),
-                selected = selected.controlStyle
-            )
+                val newState = state.copy(
+                    longPress = preferencesRepository.customLongPressTimeout().toInt(),
+                    touchSensibility = preferencesRepository.touchSensibility() - 10,
+                )
+                emit(newState)
+            }
+            is ControlEvent.SelectControlStyle -> {
+                val controlStyle = event.controlStyle
+                preferencesRepository.useControlStyle(controlStyle)
 
-            emit(newState)
+                val selected = state.controls.first { it.controlStyle == event.controlStyle }
+
+                val newState = state.copy(
+                    selected = selected.controlStyle
+                )
+
+                emit(newState)
+            }
         }
     }
 }

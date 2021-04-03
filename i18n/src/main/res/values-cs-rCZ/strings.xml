@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="cs">
     <string name="tutorial">Průvodce</string>
-    <string name="tutorial_completed">Průvodce dokončen</string>
-    <string name="tutorial_0_bottom">%1$s můžete začít na libovolném náhodném čtverci.</string>
-    <string name="tutorial_1_top">Čísla označují, kolik min sousedí se zvýrazněným čtvercem.</string>
-    <string name="tutorial_1_bottom">Pokud má tedy roh 1 pouze jeden sousední čtverec, musí to být mina. K označení %1$s.</string>
-    <string name="tutorial_2_top">Další neotevřený čtverec neobsahuje minu, protože číslo je 1, ne 2.</string>
-    <string name="tutorial_2_bottom">Můžete jej otevřít prostřednictvím %1$s.</string>
-    <string name="tutorial_3_top">Totéž se děje na tomto 1. Víte, kde je jeho sousední mina.</string>
-    <string name="tutorial_3_bottom">Můžete otevřít všechny ostatní neotevřené čtverce sousedící s 1.</string>
-    <string name="tutorial_4_top">Víme, kde je jedna z min. Existuje tedy jen jedna možnost pro druhou.</string>
-    <string name="tutorial_4_bottom">%1$s k označení dolu sousedícího s 2.</string>
-    <string name="tutorial_5_top">Zkontrolujte zvýrazněná čísla.</string>
-    <string name="tutorial_5_bottom">%1$s pro otevření nebo %2$s pro označení.</string>
+    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
+    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
+    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
+    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">Hry</string>
+    <string name="tap_to_begin">Začněte klepnutím</string>
     <string name="previous_games">Předchozí hry</string>
     <string name="minefield">Obtížnost</string>
     <string name="standard">Standardní</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">Přístupnost</string>
     <string name="size">Velikost</string>
     <string name="rounded_square">Zaoblený čtverec</string>
+    <string name="space_between_squares">Prostor mezi čtverci</string>
     <string name="system">Systém</string>
     <string name="rating">Zpětná vazba</string>
     <string name="sign_in_failed">Nelze se přihlásit. Zkontrolujte síťové připojení a akci opakujte.</string>
@@ -67,8 +62,9 @@
     <string name="no_guessing_mode">Režim \"bez hádání\"</string>
     <string name="control">Ovládání</string>
     <string name="single_click">Jedno klepnutí</string>
-    <string name="double_click">Dvojí klepnutí</string>
-    <string name="long_press">Dlouhý stisk</string>
+    <string name="double_click">Dvojité klepnutí</string>
+    <string name="long_press">Dlouhým klepnutím</string>
+    <string name="control_description">%ACTION na %REACTION</string>
     <string name="touch_sensibility">Citlivost dotyků</string>
     <string name="open_tile">Otevřít</string>
     <string name="flag_tile">Vlajka</string>
@@ -105,16 +101,6 @@
     <string name="appearance">Vzhled</string>
     <string name="themes">Motivy</string>
     <string name="delete_all_message">Trvale smazat všechny události.</string>
-    <string name="all_mines_disabled">Všechny miny byly zakázány.</string>
-    <string name="desc_convered_area">Pokrytá oblast</string>
-    <string name="desc_marked_area">Označená oblast</string>
-    <string name="desc_question_area">Pochybná oblast</string>
-    <string name="desc_wrongly_marked_area">Špatně označená oblast</string>
-    <string name="exploded_mine">Vybouchnutá mina</string>
-    <string name="game_started">Hra začala</string>
-    <string name="you_exploded_a_mine">Odpálili jste minu!</string>
-    <string name="flag_placed">Vlajka umístěna!</string>
-    <string name="flag_removed">Vlajka odstraněna!</string>
     <string name="remove_ad">Odstranit reklamy</string>
     <string name="help">Nápověda</string>
     <string name="back">Zpět</string>

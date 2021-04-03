@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ru">
     <string name="tutorial">Обучение</string>
-    <string name="tutorial_completed">Обучение завершено</string>
-    <string name="tutorial_0_bottom">Вы можете начать с %1$s на любом случайном квадрате.</string>
-    <string name="tutorial_1_top">Числа указывают, сколько мин примыкают к выделенному квадрату.</string>
-    <string name="tutorial_1_bottom">Таким образом, если у угла 1 есть только один смежный квадрат, то это должна быть мина. %1$s чтобы отметить ее.</string>
-    <string name="tutorial_2_top">В следующем неоткрытом квадрате нет мины, потому что стоит цифра 1, а не 2.</string>
-    <string name="tutorial_2_bottom">Вы можете открыть его через %1$s.</string>
-    <string name="tutorial_3_top">То же самое происходит на этом 1. Вы знаете, где находится соседняя мина.</string>
-    <string name="tutorial_3_bottom">Вы можете открыть все остальные неоткрытые квадраты, прилегающие к 1.</string>
-    <string name="tutorial_4_top">Мы знаем, где находится одна из мин, так что есть только один вариант для другой.</string>
-    <string name="tutorial_4_bottom">%1$s, чтобы отметить мину, прилегающую к 2.</string>
-    <string name="tutorial_5_top">Отметьте выделенный номер.</string>
-    <string name="tutorial_5_bottom">%1$s, чтобы открыть или %2$s для отметки.</string>
+    <string name="tutorial_basic">Правило игры простое, число на квадрате показывает количество мин вокруг него, и Вы должны отметить все мины.</string>
+    <string name="tutorial_text_1">Если число отображает количество всех квадратов, то во всех квадратах мины.</string>
+    <string name="tutorial_text_2">После отметки Вашего первого флага, просмотрите цифры и проанализируйте следующий квадрат.</string>
+    <string name="tutorial_text_3">Если в квадрате одинаковое количество флагов, то все остальные рядом с ним квадраты не содержат мин (зеленая стрелка).</string>
+    <string name="tutorial_text_4">Посмотрите на числа и продолжайте открывать квадраты.</string>
     <string name="games">Игры</string>
+    <string name="tap_to_begin">Нажмите, чтобы начать</string>
     <string name="previous_games">Предыдущие игры</string>
     <string name="minefield">Сложность</string>
     <string name="standard">Стандарт</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">Специальные возможности</string>
     <string name="size">Размер</string>
     <string name="rounded_square">Скругленный квадрат</string>
+    <string name="space_between_squares">Расстояние между квадратами</string>
     <string name="system">Система</string>
     <string name="rating">Обратная связь</string>
     <string name="sign_in_failed">Подключение невозможно. Проверьте интернет-подключение и повторите попытку.</string>
@@ -66,9 +61,10 @@
     <string name="use_question_mark">Использовать знак вопроса</string>
     <string name="no_guessing_mode">Режим \'Без угадывания\'</string>
     <string name="control">Управление</string>
-    <string name="single_click">Одно нажатие</string>
+    <string name="single_click">Одиночное нажатие</string>
     <string name="double_click">Двойное нажатие</string>
-    <string name="long_press">Удержание нажатия</string>
+    <string name="long_press">Длительное нажатие</string>
+    <string name="control_description">%ACTION для %REACTION</string>
     <string name="touch_sensibility">Чувствительность нажатия</string>
     <string name="open_tile">Открыть</string>
     <string name="flag_tile">Флаг</string>
@@ -105,16 +101,6 @@
     <string name="appearance">Оформление</string>
     <string name="themes">Темы</string>
     <string name="delete_all_message">Удалить все события навсегда.</string>
-    <string name="all_mines_disabled">Все мины обезврежены.</string>
-    <string name="desc_convered_area">Покрытая область</string>
-    <string name="desc_marked_area">Отмеченная область</string>
-    <string name="desc_question_area">Сомнительная область</string>
-    <string name="desc_wrongly_marked_area">Неверно отмеченная область</string>
-    <string name="exploded_mine">Взорвавшаяся мина</string>
-    <string name="game_started">Игра началась!</string>
-    <string name="you_exploded_a_mine">Вы подорвали мину!</string>
-    <string name="flag_placed">Флаг установлен!</string>
-    <string name="flag_removed">Флаг снят!</string>
     <string name="remove_ad">Удалить рекламу</string>
     <string name="help">Помощь</string>
     <string name="back">Назад</string>

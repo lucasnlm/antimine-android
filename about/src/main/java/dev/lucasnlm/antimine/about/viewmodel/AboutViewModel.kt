@@ -21,8 +21,9 @@ class AboutViewModel(
 
     private fun getLicensesList() = mapOf(
         "Android SDK License" to R.raw.android_sdk,
-        "Material Design" to R.raw.apache2,
         "Koin" to R.raw.apache2,
+        "LibGDX" to R.raw.apache2,
+        "Material Design" to R.raw.apache2,
         "Moshi" to R.raw.apache2,
         "Mockk" to R.raw.apache2,
         "Noto Emoji" to R.raw.apache2,

@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="sv-rSE">
     <string name="tutorial">Guide</string>
-    <string name="tutorial_completed">Guide Slutförd</string>
-    <string name="tutorial_0_bottom">Du kan börja med %1$s på valfri slumpmässig ruta.</string>
-    <string name="tutorial_1_top">Siffrorna visar hur många minor som ligger intill den markerade rutan.</string>
-    <string name="tutorial_1_bottom">Därför, om hörnet 1 har bara en intilliggande ruta, måste det vara en mina. %1$s för att markera den med en flagga.</string>
-    <string name="tutorial_2_top">Nästa oöppnade ruta har ingen mina eftersom siffran är 1, inte 2.</string>
-    <string name="tutorial_2_bottom">Du kan öppna den med %1$s.</string>
-    <string name="tutorial_3_top">Samma sak händer på denna 1. Du vet var dess intilliggande mina är.</string>
-    <string name="tutorial_3_bottom">Du kan öppna alla andra oöppnade rutor intill 1.</string>
-    <string name="tutorial_4_top">Vi vet var en av minorna finns. Så det finns bara en möjlighet till den andra.</string>
-    <string name="tutorial_4_bottom">%1$s för att markera minan intill 2 med en flagga.</string>
-    <string name="tutorial_5_top">Kontrollera det markerade numret.</string>
-    <string name="tutorial_5_bottom">%1$s för att öppna eller %2$s för att märka.</string>
+    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
+    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
+    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
+    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">Spel</string>
+    <string name="tap_to_begin">Tryck för att börja</string>
     <string name="previous_games">Tidigare spel</string>
     <string name="minefield">Svårighetsgrad</string>
     <string name="standard">Standard</string>
@@ -42,6 +36,7 @@
     <string name="settings_accessibility">Tillgänglighet</string>
     <string name="size">Storlek</string>
     <string name="rounded_square">Avrundad kvadrat</string>
+    <string name="space_between_squares">Mellanrum mellan rutor</string>
     <string name="system">System</string>
     <string name="rating">Feedback</string>
     <string name="sign_in_failed">Det gick inte att logga in. Kontrollera nätverksanslutningen och försök igen.</string>
@@ -66,9 +61,10 @@
     <string name="use_question_mark">Använd frågetecken</string>
     <string name="no_guessing_mode">‘Ingen gissning’ läge</string>
     <string name="control">Kontroller</string>
-    <string name="single_click">Enkel klick</string>
-    <string name="double_click">Dubbel Klick</string>
+    <string name="single_click">Enkeltryck</string>
+    <string name="double_click">Dubbeltryck</string>
     <string name="long_press">Långtryck</string>
+    <string name="control_description">%ACTION - %REACTION</string>
     <string name="touch_sensibility">Anslagskänslighet</string>
     <string name="open_tile">Öppna</string>
     <string name="flag_tile">Flagga</string>
@@ -105,16 +101,6 @@
     <string name="appearance">Utseende</string>
     <string name="themes">Teman</string>
     <string name="delete_all_message">Ta bort alla händelser permanent.</string>
-    <string name="all_mines_disabled">Alla minor har inaktiverats.</string>
-    <string name="desc_convered_area">Täckt område</string>
-    <string name="desc_marked_area">Markerat område</string>
-    <string name="desc_question_area">Tvivelaktigt område</string>
-    <string name="desc_wrongly_marked_area">Felaktigt markerat område</string>
-    <string name="exploded_mine">Exploderad mina</string>
-    <string name="game_started">Spel Startat</string>
-    <string name="you_exploded_a_mine">Du exploderade en mina!</string>
-    <string name="flag_placed">Flagga placerad!</string>
-    <string name="flag_removed">Flagga borttagen!</string>
     <string name="remove_ad">Ta bort annonser</string>
     <string name="help">Hjälp</string>
     <string name="back">Tillbaka</string>
