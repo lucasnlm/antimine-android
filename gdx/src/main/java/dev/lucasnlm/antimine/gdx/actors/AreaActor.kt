@@ -109,7 +109,7 @@ class AreaActor(
             Touchable.enabled else Touchable.disabled
 
         val isCurrentFocus = GdxLocal.currentFocus?.id == area.id
-        val isEnterPressed = Gdx.input.isKeyPressed(Input.Keys.ENTER)
+        val isEnterPressed = Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.isKeyPressed(Input.Keys.DPAD_CENTER)
 
         if (isCurrentFocus && touchable == Touchable.enabled) {
             if (zIndex != Int.MAX_VALUE) {
