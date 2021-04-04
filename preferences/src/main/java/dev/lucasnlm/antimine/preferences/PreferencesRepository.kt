@@ -1,7 +1,6 @@
 package dev.lucasnlm.antimine.preferences
 
 import android.view.ViewConfiguration
-import dev.lucasnlm.antimine.preferences.PreferenceKeys.PREFERENCE_SQUARE_DIVIDER
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
@@ -289,6 +288,14 @@ class PreferencesRepository(
         if (preferencesManager.contains(PreferenceKeys.PREFERENCE_FIRST_USE)) {
             preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_TUTORIAL_COMPLETED, true)
         }
+
+        // Remove old sizes
+        if (preferencesManager.contains(PreferenceKeys.PREFERENCE_OLD_AREA_SIZES)) {
+            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_AREA_SIZE)
+            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_RADIUS)
+            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER)
+            preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_OLD_AREA_SIZES, true)
+        }
     }
 
     override fun setPremiumFeatures(status: Boolean) {
@@ -362,14 +369,14 @@ class PreferencesRepository(
     }
 
     override fun squareDivider(): Int {
-        return preferencesManager.getInt(PREFERENCE_SQUARE_DIVIDER, 0)
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER, 0)
     }
 
     override fun setSquareDivider(value: Int?) {
         if (value == null) {
-            preferencesManager.removeKey(PREFERENCE_SQUARE_DIVIDER)
+            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER)
         } else {
-            preferencesManager.putInt(PREFERENCE_SQUARE_DIVIDER, value.coerceIn(0, 50))
+            preferencesManager.putInt(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER, value.coerceIn(0, 50))
         }
     }
 }

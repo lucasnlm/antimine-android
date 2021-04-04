@@ -39,6 +39,7 @@ dependencies {
 
     // Amplitude
     implementation 'com.amplitude:android-sdk:2.25.2'
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
 
     // Google
     implementation 'com.android.billingclient:billing-ktx:3.0.2'
