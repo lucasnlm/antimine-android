@@ -89,6 +89,7 @@ class MainViewModel(
             setOpenGameDirectly(openDirectly != 0)
             setUnlockedThemes(unlockedThemes)
             setSquareDivider(squareDivider)
+            setDoubleClickTimeout(doubleClickTimeout.toLong())
         }
 
         cloudSave.stats.mapNotNull {

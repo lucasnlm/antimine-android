@@ -59,8 +59,9 @@ class ControlViewModel(
             it.controlStyle == preferencesRepository.controlStyle()
         }
         return ControlState(
-            touchSensibility = preferencesRepository.touchSensibility() - 10,
+            touchSensibility = preferencesRepository.touchSensibility(),
             longPress = preferencesRepository.customLongPressTimeout().toInt(),
+            doubleClick = preferencesRepository.getDoubleClickTimeout().toInt(),
             selected = controlDetails?.controlStyle ?: ControlStyle.Standard,
             controls = gameControlOptions
         )
@@ -68,6 +69,14 @@ class ControlViewModel(
 
     override suspend fun mapEventToState(event: ControlEvent) = flow {
         when (event) {
+            is ControlEvent.UpdateDoubleClick -> {
+                preferencesRepository.setDoubleClickTimeout(event.value.toLong())
+
+                val newState = state.copy(
+                    doubleClick = event.value,
+                )
+                emit(newState)
+            }
             is ControlEvent.UpdateLongPress -> {
                 preferencesRepository.setCustomLongPressTimeout(event.value.toLong())
 
@@ -77,7 +86,7 @@ class ControlViewModel(
                 emit(newState)
             }
             is ControlEvent.UpdateTouchSensibility -> {
-                preferencesRepository.setTouchSensibility(event.value + 10)
+                preferencesRepository.setTouchSensibility(event.value)
                 val newState = state.copy(
                     touchSensibility = event.value,
                 )
@@ -88,7 +97,7 @@ class ControlViewModel(
 
                 val newState = state.copy(
                     longPress = preferencesRepository.customLongPressTimeout().toInt(),
-                    touchSensibility = preferencesRepository.touchSensibility() - 10,
+                    touchSensibility = preferencesRepository.touchSensibility(),
                 )
                 emit(newState)
             }

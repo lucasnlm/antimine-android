@@ -16,4 +16,8 @@ sealed class ControlEvent {
     data class UpdateLongPress(
         val value: Int,
     ) : ControlEvent()
+
+    data class UpdateDoubleClick(
+        val value: Int,
+    ) : ControlEvent()
 }

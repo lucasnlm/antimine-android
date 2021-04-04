@@ -23,9 +23,11 @@ import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.ReviewWrapper
+import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_game.minesCount
 import kotlinx.android.synthetic.main.activity_game.timer
 import kotlinx.android.synthetic.main.activity_game_tv.*
+import kotlinx.android.synthetic.main.activity_game_tv.controlsToast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
@@ -43,8 +45,6 @@ class TvGameActivity :
     private val savesRepository: ISavesRepository by inject()
     private val reviewWrapper: ReviewWrapper by inject()
     private val featureFlagManager: IFeatureFlagManager by inject()
-
-    private var status: Status = Status.PreGame
 
     private val areaSizeMultiplier by lazy { preferencesRepository.squareSize() }
     private val currentRadius by lazy { preferencesRepository.squareRadius() }
@@ -82,6 +82,24 @@ class TvGameActivity :
                 minesCount.apply {
                     visibility = View.VISIBLE
                     text = it.mineCount.toString()
+                }
+
+                if (it.turn < 3 && it.saveId == 0L) {
+                    val color = usingTheme.palette.background.toAndroidColor(168)
+                    val tint = ColorStateList.valueOf(color)
+                    val controlText = gameViewModel.getControlDescription(applicationContext)
+
+                    if (controlText != null && controlText.isNotBlank()) {
+                        controlsToast.apply {
+                            visibility = View.VISIBLE
+                            backgroundTintList = tint
+                            this.text = controlText
+                        }
+                    } else {
+                        controlsToast.visibility = View.GONE
+                    }
+                } else {
+                    controlsToast.visibility = View.GONE
                 }
             }
         }
@@ -155,23 +173,19 @@ class TvGameActivity :
         val willReset = restartIfNeed()
 
         if (!willReset) {
-            if (status == Status.Running) {
-                gameViewModel.run {
-                    refreshUserPreferences()
-                    resumeGame()
-                }
-
-                analyticsManager.sentEvent(Analytics.Resume)
+            gameViewModel.run {
+                refreshUserPreferences()
+                resumeGame()
             }
+
+            analyticsManager.sentEvent(Analytics.Resume)
         }
     }
 
     override fun onPause() {
         super.onPause()
 
-        if (status == Status.Running) {
-            gameViewModel.pauseGame()
-        }
+        gameViewModel.pauseGame()
 
         if (isFinishing) {
             analyticsManager.sentEvent(Analytics.Quit)

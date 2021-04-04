@@ -12,6 +12,7 @@ import dev.lucasnlm.antimine.themes.view.ThemeAdapter
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IBillingManager
@@ -25,6 +26,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ThemeActivity : ThematicActivity(R.layout.activity_theme), SeekBar.OnSeekBarChangeListener {
     private val themeViewModel by viewModel<ThemeViewModel>()
 
+    private val themeRepository: IThemeRepository by inject()
     private val dimensionRepository: IDimensionRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
     private val preferencesRepository: IPreferencesRepository by inject()
@@ -64,6 +66,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), SeekBar.OnSeekB
             val columns = if (size.width > size.height) { 5 } else { 3 }
 
             val themeAdapter = ThemeAdapter(
+                themeRepository = themeRepository,
                 activity = this@ThemeActivity,
                 themeViewModel = themeViewModel,
                 preferencesRepository = preferencesRepository,

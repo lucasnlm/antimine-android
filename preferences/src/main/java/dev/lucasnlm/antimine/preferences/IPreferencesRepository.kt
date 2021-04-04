@@ -23,6 +23,9 @@ interface IPreferencesRepository {
     fun customLongPressTimeout(): Long
     fun setCustomLongPressTimeout(value: Long)
 
+    fun getDoubleClickTimeout(): Long
+    fun setDoubleClickTimeout(value: Long)
+
     fun themeId(): Long
     fun useTheme(themeId: Long)
 

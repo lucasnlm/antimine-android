@@ -66,6 +66,10 @@ class GameActivity :
     private val cloudSaveManager by inject<CloudSaveManager>()
     private var gameToast: Toast? = null
 
+    private val renderSquareRadius = preferencesRepository.squareRadius()
+    private val renderSquareDivider = preferencesRepository.squareDivider()
+    private val renderSquareSize = preferencesRepository.squareSize()
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         intent?.run(::handleIntent)
@@ -294,6 +298,15 @@ class GameActivity :
 
     override fun onResume() {
         super.onResume()
+        if (renderSquareRadius != preferencesRepository.squareRadius() ||
+            renderSquareDivider != preferencesRepository.squareDivider() ||
+            renderSquareSize != preferencesRepository.squareSize()) {
+            // If used changed any currently rendered settings, we
+            // must recreate the activity to force all sprites are updated.
+            recreate()
+            return
+        }
+
         analyticsManager.sentEvent(Analytics.Resume)
         keepScreenOn(true)
         gameViewModel.resumeGame()

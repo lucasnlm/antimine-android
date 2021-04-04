@@ -112,8 +112,11 @@ class AreaActor(
         val isEnterPressed = Gdx.input.isKeyPressed(Input.Keys.ENTER)
 
         if (isCurrentFocus && touchable == Touchable.enabled) {
-            if (zIndex != Int.MAX_VALUE && isEnterPressed && !isPressed) {
+            if (zIndex != Int.MAX_VALUE) {
                 toFront()
+            }
+
+            if (isEnterPressed && !isPressed) {
                 onInputEvent(GdxEvent.TouchDownEvent(area.id))
                 isPressed = true
             } else if (!isEnterPressed && isPressed) {

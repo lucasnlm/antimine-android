@@ -58,7 +58,7 @@ open class GameViewModel(
             turn = 0,
             field = listOf(),
             duration = System.currentTimeMillis(),
-            difficulty = Difficulty.Standard,
+            difficulty = Difficulty.Beginner,
             mineCount = 9,
             minefield = Minefield(9, 9, 9),
             seed = 0L,

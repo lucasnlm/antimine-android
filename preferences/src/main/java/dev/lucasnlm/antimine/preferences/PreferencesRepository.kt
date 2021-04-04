@@ -114,7 +114,7 @@ class PreferencesRepository(
     }
 
     override fun touchSensibility(): Int =
-        preferencesManager.getInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, 30)
+        preferencesManager.getInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, 5)
 
     override fun setTouchSensibility(sensibility: Int) {
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, sensibility)
@@ -206,6 +206,14 @@ class PreferencesRepository(
 
     override fun setCustomLongPressTimeout(value: Long) {
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT, value.toInt())
+    }
+
+    override fun getDoubleClickTimeout(): Long {
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT, 400).toLong()
+    }
+
+    override fun setDoubleClickTimeout(value: Long) {
+        preferencesManager.putInt(PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT, value.toInt())
     }
 
     override fun themeId(): Long =

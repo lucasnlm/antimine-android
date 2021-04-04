@@ -6,6 +6,7 @@ import dev.lucasnlm.antimine.preferences.models.ControlStyle
 data class ControlState(
     val longPress: Int,
     val touchSensibility: Int,
+    val doubleClick: Int,
     val selected: ControlStyle,
     val controls: List<ControlDetails>,
 )
