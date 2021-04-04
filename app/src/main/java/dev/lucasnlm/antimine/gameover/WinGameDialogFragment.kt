@@ -16,7 +16,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.gameover.model.GameResult
@@ -65,7 +64,8 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                     time = getLong(DIALOG_TIME, 0L),
                     rightMines = getInt(DIALOG_RIGHT_MINES, 0),
                     totalMines = getInt(DIALOG_TOTAL_MINES, 0),
-                    received = getInt(DIALOG_RECEIVED, -1)
+                    received = getInt(DIALOG_RECEIVED, -1),
+                    turn = -1,
                 )
             )
         }

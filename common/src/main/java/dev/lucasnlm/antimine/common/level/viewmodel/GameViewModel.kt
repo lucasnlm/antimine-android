@@ -153,6 +153,7 @@ open class GameViewModel(
                                 rightMines = gameController.mines().count { it.mark.isNotNone() },
                                 timestamp = state.duration,
                                 receivedTips = 1,
+                                turn = state.turn,
                             )
                             sendSideEffect(sideEffect)
                         }
@@ -165,6 +166,7 @@ open class GameViewModel(
                                 rightMines = gameController.mines().count { it.mark.isNotNone() },
                                 timestamp = state.duration,
                                 receivedTips = 0,
+                                turn = state.turn,
                             )
                             sendSideEffect(sideEffect)
                         }

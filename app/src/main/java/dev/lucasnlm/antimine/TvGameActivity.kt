@@ -116,6 +116,7 @@ class TvGameActivity :
                                 totalMines = 0,
                                 time = singleState().duration,
                                 received = 0,
+                                turn = -1,
                             ).run {
                                 showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
                             }
@@ -142,6 +143,7 @@ class TvGameActivity :
                                 totalMines = it.totalMines,
                                 time = it.timestamp,
                                 received = it.receivedTips,
+                                turn = -1,
                             ).run {
                                 showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
                             }
@@ -155,6 +157,7 @@ class TvGameActivity :
                                 totalMines = it.totalMines,
                                 time = it.timestamp,
                                 received = it.receivedTips,
+                                turn = -1,
                             ).run {
                                 showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
                             }

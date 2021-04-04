@@ -43,6 +43,7 @@ sealed class GameEvent {
         val rightMines: Int,
         val timestamp: Long,
         val receivedTips: Int,
+        val turn: Int,
     ) : GameEvent()
 
     data class GameCompleteDialog(
@@ -51,5 +52,6 @@ sealed class GameEvent {
         val rightMines: Int,
         val timestamp: Long,
         val receivedTips: Int,
+        val turn: Int,
     ) : GameEvent()
 }

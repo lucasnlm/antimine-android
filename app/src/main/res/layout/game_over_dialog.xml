@@ -111,5 +111,15 @@
             android:textAllCaps="true"
             android:visibility="gone"
             tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tutorial"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tutorial"
+            android:textAllCaps="true"
+            android:visibility="gone"
+            tools:visibility="visible" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
