@@ -86,7 +86,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                 .apply {
                     lifecycleScope.launchWhenCreated {
                         endGameViewModel.observeState().collect { state ->
-                            val shareButton: ImageView = findViewById(R.id.share)
+                            val close: View = findViewById(R.id.close)
                             val statsButton: AppCompatButton = findViewById(R.id.stats)
                             val newGameButton: AppCompatButton = findViewById(R.id.new_game)
                             val removeAdsButton: AppCompatButton = findViewById(R.id.remove_ads)
@@ -146,22 +146,9 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             }
 
                             if (state.gameResult == GameResult.Victory || state.gameResult == GameResult.Completed) {
-                                if (instantAppManager.isEnabled(context) || context.isAndroidTv()) {
-                                    shareButton.apply {
-                                        contentDescription = getString(R.string.cancel)
-                                        setImageResource(R.drawable.close)
-                                        setOnClickListener {
-                                            dismissAllowingStateLoss()
-                                        }
-                                    }
-                                } else {
-                                    shareButton.apply {
-                                        setOnClickListener {
-                                            gameViewModel.sendEvent(GameEvent.ShareGame)
-                                        }
-                                    }
+                                close.setOnClickListener {
+                                    dismissAllowingStateLoss()
                                 }
-
                                 statsButton.visibility = View.VISIBLE
                             }
 

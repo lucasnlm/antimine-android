@@ -79,10 +79,6 @@ open class GameViewModel(
             is GameEvent.ShowNewGameDialog -> {
                 sendSideEffect(GameEvent.ShowNewGameDialog)
             }
-            is GameEvent.ShareGame -> {
-                analyticsManager.sentEvent(Analytics.ShareGame)
-                sendSideEffect(GameEvent.ShareGame)
-            }
             is GameEvent.ConsumeTip -> {
                 if (tipRepository.removeTip()) {
                     val newState = state.copy(

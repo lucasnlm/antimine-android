@@ -95,8 +95,6 @@ sealed class Analytics(
 
     object OpenThemes : Analytics("Open Themes")
 
-    object ShareGame : Analytics("Share Game")
-
     object ClickEmoji : Analytics("Click Emoji")
 
     object ContinueGame : Analytics("Continue Game")

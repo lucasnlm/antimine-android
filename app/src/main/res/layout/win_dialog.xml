@@ -66,14 +66,14 @@
         tools:visibility="visible" />
 
     <ImageView
-        android:id="@+id/share"
+        android:id="@+id/close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?selectableItemBackgroundBorderless"
-        android:contentDescription="@string/share"
+        android:contentDescription="@string/cancel"
         android:importantForAccessibility="no"
         android:padding="8dp"
-        android:src="@drawable/share"
+        android:src="@drawable/close"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

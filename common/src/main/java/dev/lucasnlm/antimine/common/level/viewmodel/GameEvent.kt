@@ -27,8 +27,6 @@ sealed class GameEvent {
 
     object ContinueGame : GameEvent()
 
-    object ShareGame : GameEvent()
-
     object ShowNewGameDialog : GameEvent()
 
     data class VictoryDialog(

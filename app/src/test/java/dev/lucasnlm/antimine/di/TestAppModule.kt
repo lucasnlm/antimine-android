@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
-import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.external.Achievement
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
@@ -67,8 +66,6 @@ val AppModule = module {
             override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) {}
         }
     } bind IPlayGamesManager::class
-
-    single { ShareManager(get(), get()) }
 
     single {
         DebugAnalyticsManager()

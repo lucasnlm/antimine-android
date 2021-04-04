@@ -29,7 +29,6 @@ import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.common.level.view.GdxLevelFragment
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
@@ -58,7 +57,6 @@ class GameActivity :
     private val analyticsManager: IAnalyticsManager by inject()
     private val instantAppManager: IInstantAppManager by inject()
     private val savesRepository: ISavesRepository by inject()
-    private val shareViewModel: ShareManager by inject()
     private val playGamesManager: IPlayGamesManager by inject()
     private val adsManager: IAdsManager by inject()
     private val reviewWrapper: ReviewWrapper by inject()
@@ -214,9 +212,6 @@ class GameActivity :
         lifecycleScope.launchWhenCreated {
             gameViewModel.observeSideEffects().collect {
                 when (it) {
-                    is GameEvent.ShareGame -> {
-                        shareCurrentGame()
-                    }
                     is GameEvent.ShowNewGameDialog -> {
                         lifecycleScope.launch {
                             GameOverDialogFragment.newInstance(
@@ -503,14 +498,6 @@ class GameActivity :
         gameToast = Toast.makeText(this, message, Toast.LENGTH_LONG).apply {
             setGravity(Gravity.CENTER, 0, 0)
             show()
-        }
-    }
-
-    private fun shareCurrentGame() {
-        val levelSetup = gameViewModel.singleState().minefield
-        val field = gameViewModel.singleState().field
-        lifecycleScope.launch {
-            shareViewModel.shareField(levelSetup, field)
         }
     }
 
