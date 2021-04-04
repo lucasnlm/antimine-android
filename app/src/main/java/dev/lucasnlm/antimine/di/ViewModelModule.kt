@@ -29,7 +29,7 @@ val ViewModelModule = module {
     viewModel { MainViewModel(get(), get(), get(), get()) }
     viewModel {
         GameViewModel(
-            get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()
+            get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()
         )
     }
 }

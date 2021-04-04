@@ -156,7 +156,7 @@ class MinefieldStage(
 
             val start = 0.5f * virtualWidth - padding.start
             val end = it.width - 0.5f * virtualWidth + padding.end
-            val top = it.height - 0.5f * virtualHeight - padding.top + renderSettings.appBarHeight
+            val top = it.height - 0.5f * (virtualHeight - renderSettings.appBarHeight) - padding.top
             val bottom = 0.5f * virtualHeight + padding.bottom
 
             camera.run {
@@ -335,7 +335,7 @@ class MinefieldStage(
                 inputEvents.clear()
             }
 
-            if (dx * dx + dy * dy > 16f) {
+            if (dx * dx + dy * dy > 25f) {
                 cameraController.addVelocity(
                     -dx * currentZoom,
                     dy * currentZoom,

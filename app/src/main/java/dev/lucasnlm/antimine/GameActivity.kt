@@ -164,7 +164,7 @@ class GameActivity :
                         controlsToast.apply {
                             visibility = View.VISIBLE
                             backgroundTintList = tint
-                            this.text = text
+                            this.text = controlText
                         }
                     } else {
                         controlsToast.visibility = View.GONE
