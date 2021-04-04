@@ -22,6 +22,7 @@ data class CloudSave(
     val openDirectly: Int,
     val unlockedThemes: String,
     val squareDivider: Int,
+    val doubleClickTimeout: Int,
 )
 
 fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
@@ -44,6 +45,7 @@ fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
     "openDirectly" to openDirectly,
     "unlockedThemes" to unlockedThemes,
     "squareDivider" to squareDivider,
+    "doubleClickTimeout" to doubleClickTimeout,
 )
 
 private fun Any?.parseInt(): Int = this?.toString()?.toInt() ?: throw Exception("Fail to parse Int")
@@ -53,23 +55,24 @@ private fun Any?.parseString(default: String): String = this?.toString() ?: defa
 @Suppress("UNCHECKED_CAST")
 fun cloudSaveOf(id: String, data: Map<String, Any>) =
     CloudSave(
-        id,
-        data["completeTutorial"].parseInt(),
-        data["selectedTheme"].parseInt(),
-        data["squareRadius"].parseInt(),
-        data["squareSize"].parseInt(),
-        data["touchTiming"].parseInt(),
-        data["questionMark"].parseInt(),
-        data["gameAssistance"].parseInt(),
-        data["help"].parseInt(),
-        data["hapticFeedback"].parseInt(),
-        data["soundEffects"].parseInt(),
-        data["stats"] as List<HashMap<String, String>>,
-        data["premiumFeatures"].parseInt(),
-        data["controlStyle"].parseInt(),
-        data["noGuessing"].parseInt(1),
-        data["language"].parseString(""),
-        data["openDirectly"].parseInt(0),
-        data["unlockedThemes"].parseString(""),
-        data["squareDivider"].parseInt(10),
+        playId = id,
+        completeTutorial = data["completeTutorial"].parseInt(),
+        selectedTheme = data["selectedTheme"].parseInt(),
+        squareRadius = data["squareRadius"].parseInt(),
+        squareSize = data["squareSize"].parseInt(),
+        touchTiming = data["touchTiming"].parseInt(),
+        questionMark = data["questionMark"].parseInt(),
+        gameAssistance = data["gameAssistance"].parseInt(),
+        help = data["help"].parseInt(),
+        hapticFeedback = data["hapticFeedback"].parseInt(),
+        soundEffects = data["soundEffects"].parseInt(),
+        stats = data["stats"] as List<HashMap<String, String>>,
+        premiumFeatures = data["premiumFeatures"].parseInt(),
+        controlStyle = data["controlStyle"].parseInt(),
+        noGuessing = data["noGuessing"].parseInt(1),
+        language = data["language"].parseString(""),
+        openDirectly = data["openDirectly"].parseInt(0),
+        unlockedThemes = data["unlockedThemes"].parseString(""),
+        squareDivider = data["squareDivider"].parseInt(10),
+        doubleClickTimeout = data["doubleClickTimeout"].parseInt(400),
     )

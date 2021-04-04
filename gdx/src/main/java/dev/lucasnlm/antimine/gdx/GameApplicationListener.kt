@@ -1,7 +1,6 @@
 package dev.lucasnlm.antimine.gdx
 
 import android.content.Context
-import android.view.ViewConfiguration
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
@@ -68,17 +67,18 @@ class GameApplicationListener(
         appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
         appBarHeight = if (context.isPortrait()) { dimensionRepository.actionBarSize().toFloat() } else { 0f },
         radius = preferencesRepository.squareRadius().toFloat(),
-        squareDivider = preferencesRepository.squareDivider().toFloat(),
+        squareDivider = preferencesRepository.squareDivider().toFloat() * 2,
         joinAreas = preferencesRepository.squareDivider() == 0,
         quality = quality,
     )
 
-    private val actionSettings = with(preferencesRepository) {
+    private var actionSettings = with(preferencesRepository) {
         val control = controlStyle()
         ActionSettings(
             handleDoubleTaps = control == ControlStyle.DoubleClick || control == ControlStyle.DoubleClickInverted,
             longTapTimeout = preferencesRepository.customLongPressTimeout(),
-            doubleTapTimeout = ViewConfiguration.getDoubleTapTimeout().toLong(),
+            doubleTapTimeout = preferencesRepository.getDoubleClickTimeout(),
+            touchSensibility = preferencesRepository.touchSensibility() * preferencesRepository.touchSensibility(),
         )
     }
 
@@ -296,7 +296,7 @@ class GameApplicationListener(
                     start = padding,
                     end = padding,
                     bottom = padding,
-                    top = padding,
+                    top = 0f,
                 )
             }
             else -> {
@@ -329,5 +329,19 @@ class GameApplicationListener(
 
     fun recenter() {
         minefieldStage?.centerCamera()
+    }
+
+    fun refreshSettings() {
+        actionSettings = with(preferencesRepository) {
+            val control = controlStyle()
+            ActionSettings(
+                handleDoubleTaps = control == ControlStyle.DoubleClick || control == ControlStyle.DoubleClickInverted,
+                longTapTimeout = preferencesRepository.customLongPressTimeout(),
+                doubleTapTimeout = preferencesRepository.getDoubleClickTimeout(),
+                touchSensibility = preferencesRepository.touchSensibility() * preferencesRepository.touchSensibility(),
+            )
+        }
+
+        minefieldStage?.updateActionSettings(actionSettings)
     }
 }

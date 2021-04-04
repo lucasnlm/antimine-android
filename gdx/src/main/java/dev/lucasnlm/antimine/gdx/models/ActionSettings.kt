@@ -4,4 +4,5 @@ data class ActionSettings(
     val handleDoubleTaps: Boolean,
     val longTapTimeout: Long,
     val doubleTapTimeout: Long,
+    val touchSensibility: Int,
 )

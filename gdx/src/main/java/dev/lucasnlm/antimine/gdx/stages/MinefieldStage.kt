@@ -21,7 +21,7 @@ import dev.lucasnlm.antimine.gdx.models.RenderSettings
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
 class MinefieldStage(
-    private val actionSettings: ActionSettings,
+    private var actionSettings: ActionSettings,
     private val renderSettings: RenderSettings,
     private val onSingleTap: (Int) -> Unit,
     private val onDoubleTap: (Int) -> Unit,
@@ -156,15 +156,16 @@ class MinefieldStage(
 
             val start = 0.5f * virtualWidth - padding.start
             val end = it.width - 0.5f * virtualWidth + padding.end
-            val top = it.height - 0.5f * virtualHeight - padding.top + renderSettings.appBarHeight
-            val bottom = 0.5f * virtualHeight + padding.bottom
+            val top = it.height - 0.5f * (virtualHeight - renderSettings.appBarHeight) - padding.top
+            val bottom = 0.5f * virtualHeight + padding.bottom - renderSettings.navigationBarHeight
 
             camera.run {
                 position.set((start + end) * 0.5f, (top + bottom) * 0.5f, 0f)
                 update(true)
             }
+
+            Gdx.graphics.requestRendering()
         }
-        Gdx.graphics.requestRendering()
     }
 
     private fun handleGameEvent(gdxEvent: GdxEvent) {
@@ -331,11 +332,11 @@ class MinefieldStage(
             val dx = Gdx.input.deltaX.toFloat()
             val dy = Gdx.input.deltaY.toFloat()
 
-            if (dx * dx + dy * dy > 100f) {
+            if (dx * dx + dy * dy > actionSettings.touchSensibility * 4) {
                 inputEvents.clear()
             }
 
-            if (dx * dx + dy * dy > 16f) {
+            if (dx * dx + dy * dy > actionSettings.touchSensibility) {
                 cameraController.addVelocity(
                     -dx * currentZoom,
                     dy * currentZoom,
@@ -344,5 +345,9 @@ class MinefieldStage(
 
             true
         } != null
+    }
+
+    fun updateActionSettings(actionSettings: ActionSettings) {
+        this.actionSettings = actionSettings
     }
 }

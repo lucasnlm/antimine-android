@@ -295,6 +295,8 @@ class GameController {
         errorTolerance += value
     }
 
+    fun getErrorTolerance(): Int = errorTolerance
+
     fun hadMistakes(): Boolean {
         return errorTolerance != 0
     }

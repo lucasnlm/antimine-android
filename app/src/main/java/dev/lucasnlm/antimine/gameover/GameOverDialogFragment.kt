@@ -26,6 +26,7 @@ import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.level.view.NewGameFragment
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
+import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
@@ -64,7 +65,8 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                     time = getLong(DIALOG_TIME, 0L),
                     rightMines = getInt(DIALOG_RIGHT_MINES, 0),
                     totalMines = getInt(DIALOG_TOTAL_MINES, 0),
-                    received = getInt(DIALOG_RECEIVED, -1)
+                    received = getInt(DIALOG_RECEIVED, -1),
+                    turn = getInt(DIALOG_TURN, 0),
                 )
             )
         }
@@ -88,6 +90,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                             val newGameButton: AppCompatButton = findViewById(R.id.new_game)
                             val continueButton: AppCompatButton = findViewById(R.id.continue_game)
                             val removeAdsButton: AppCompatButton = findViewById(R.id.remove_ads)
+                            val tutorialButton: AppCompatButton = findViewById(R.id.tutorial)
                             val settingsButton: View = findViewById(R.id.settings)
                             val closeButton: View = findViewById(R.id.close)
                             val title: TextView = findViewById(R.id.title)
@@ -145,7 +148,11 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 dismissAllowingStateLoss()
                             }
 
-                            if (state.showContinueButton && featureFlagManager.isContinueGameEnabled) {
+                            if (
+                                !state.showTutorial &&
+                                state.showContinueButton &&
+                                featureFlagManager.isContinueGameEnabled
+                            ) {
                                 continueButton.visibility = View.VISIBLE
                                 if (!preferencesRepository.isPremiumEnabled() &&
                                     featureFlagManager.isAdsOnContinueEnabled
@@ -159,7 +166,14 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 continueButton.visibility = View.GONE
                             }
 
-                            if (!preferencesRepository.isPremiumEnabled() &&
+                            if (state.showTutorial) {
+                                tutorialButton.visibility = View.VISIBLE
+                                tutorialButton.setOnClickListener {
+                                    val intent = Intent(context, TutorialActivity::class.java)
+                                    context.startActivity(intent)
+                                }
+                            } else if (
+                                !preferencesRepository.isPremiumEnabled() &&
                                 !instantAppManager.isEnabled(context) &&
                                 featureFlagManager.isGameOverAdEnabled
                             ) {
@@ -238,6 +252,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
             totalMines: Int,
             time: Long,
             received: Int,
+            turn: Int,
         ) = GameOverDialogFragment().apply {
             arguments = Bundle().apply {
                 putInt(DIALOG_GAME_RESULT, gameResult.ordinal)
@@ -246,6 +261,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                 putInt(DIALOG_TOTAL_MINES, totalMines)
                 putInt(DIALOG_RECEIVED, received)
                 putLong(DIALOG_TIME, time)
+                putInt(DIALOG_TURN, turn)
             }
         }
 
@@ -255,6 +271,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
         private const val DIALOG_RIGHT_MINES = "dialog_right_mines"
         private const val DIALOG_TOTAL_MINES = "dialog_total_mines"
         private const val DIALOG_RECEIVED = "dialog_received"
+        private const val DIALOG_TURN = "dialog_turn"
 
         val TAG = GameOverDialogFragment::class.simpleName!!
     }

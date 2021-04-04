@@ -16,7 +16,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.gameover.model.GameResult
@@ -65,7 +64,8 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                     time = getLong(DIALOG_TIME, 0L),
                     rightMines = getInt(DIALOG_RIGHT_MINES, 0),
                     totalMines = getInt(DIALOG_TOTAL_MINES, 0),
-                    received = getInt(DIALOG_RECEIVED, -1)
+                    received = getInt(DIALOG_RECEIVED, -1),
+                    turn = -1,
                 )
             )
         }
@@ -86,7 +86,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                 .apply {
                     lifecycleScope.launchWhenCreated {
                         endGameViewModel.observeState().collect { state ->
-                            val shareButton: ImageView = findViewById(R.id.share)
+                            val close: View = findViewById(R.id.close)
                             val statsButton: AppCompatButton = findViewById(R.id.stats)
                             val newGameButton: AppCompatButton = findViewById(R.id.new_game)
                             val removeAdsButton: AppCompatButton = findViewById(R.id.remove_ads)
@@ -146,22 +146,9 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             }
 
                             if (state.gameResult == GameResult.Victory || state.gameResult == GameResult.Completed) {
-                                if (instantAppManager.isEnabled(context) || context.isAndroidTv()) {
-                                    shareButton.apply {
-                                        contentDescription = getString(R.string.cancel)
-                                        setImageResource(R.drawable.close)
-                                        setOnClickListener {
-                                            dismissAllowingStateLoss()
-                                        }
-                                    }
-                                } else {
-                                    shareButton.apply {
-                                        setOnClickListener {
-                                            gameViewModel.sendEvent(GameEvent.ShareGame)
-                                        }
-                                    }
+                                close.setOnClickListener {
+                                    dismissAllowingStateLoss()
                                 }
-
                                 statsButton.visibility = View.VISIBLE
                             }
 

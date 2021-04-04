@@ -42,6 +42,7 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), SeekBar.OnS
 
         touchSensibility.setOnSeekBarChangeListener(this)
         longPress.setOnSeekBarChangeListener(this)
+        doubleClick.setOnSeekBarChangeListener(this)
 
         lifecycleScope.launchWhenCreated {
             viewModel.observeState().collect {
@@ -54,10 +55,16 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), SeekBar.OnS
 
     override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
         if (fromUser) {
-            if (seekbar == touchSensibility) {
-                viewModel.sendEvent(ControlEvent.UpdateTouchSensibility(progress))
-            } else if (seekbar == longPress) {
-                viewModel.sendEvent(ControlEvent.UpdateLongPress(progress))
+            when (seekbar) {
+                touchSensibility -> {
+                    viewModel.sendEvent(ControlEvent.UpdateTouchSensibility(progress))
+                }
+                longPress -> {
+                    viewModel.sendEvent(ControlEvent.UpdateLongPress(progress))
+                }
+                doubleClick -> {
+                    viewModel.sendEvent(ControlEvent.UpdateDoubleClick(progress))
+                }
             }
         }
     }

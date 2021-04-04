@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="cs">
     <string name="tutorial">Průvodce</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_basic">Pravidlo hry je jednoduché, číslo na čtverci ukazuje počet min, které s ním sousedí a Vy musíte označit všechny miny.</string>
+    <string name="tutorial_text_1">Pokud se číslo dotýká stejného počtu čtverců, jsou ve čtvercích miny.</string>
+    <string name="tutorial_text_2">Po označení první vlajky zkontrolujte čísla a analyzujte další čtverec.</string>
+    <string name="tutorial_text_3">Pokud má čtverec stejný počet vlajek, nejsou všechny ostatní zbývající čtverce vedle něj miny (zelená šipka).</string>
+    <string name="tutorial_text_4">Zkontrolujte čísla a stále otevírejte čtverce.</string>
     <string name="games">Hry</string>
     <string name="tap_to_begin">Začněte klepnutím</string>
     <string name="previous_games">Předchozí hry</string>
@@ -63,7 +63,7 @@
     <string name="control">Ovládání</string>
     <string name="single_click">Jedno klepnutí</string>
     <string name="double_click">Dvojité klepnutí</string>
-    <string name="long_press">Dlouhým klepnutím</string>
+    <string name="long_press">Dlouhý stisk</string>
     <string name="control_description">%ACTION na %REACTION</string>
     <string name="touch_sensibility">Citlivost dotyků</string>
     <string name="open_tile">Otevřít</string>

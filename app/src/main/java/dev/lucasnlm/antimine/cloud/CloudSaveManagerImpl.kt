@@ -52,6 +52,7 @@ class CloudSaveManagerImpl(
                     openDirectly = preferencesRepository.openGameDirectly().toInt(),
                     unlockedThemes = preferencesRepository.getUnlockedThemes().joinToString(" "),
                     squareDivider = preferencesRepository.squareDivider(),
+                    doubleClickTimeout = preferencesRepository.getDoubleClickTimeout().toInt(),
                 )
             }
         } catch (e: Exception) {

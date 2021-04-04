@@ -62,18 +62,6 @@ class NewGameFragment : AppCompatDialogFragment() {
                         )
                     }
 
-                    findViewById<CardButtonView>(R.id.tutorial).apply {
-                        bind(
-                            theme = themeRepository.getTheme(),
-                            text = R.string.tutorial,
-                            startIcon = R.drawable.tutorial,
-                            onAction = {
-//                                gameViewModel.eventObserver.postValue(Event.StartTutorial)
-//                                dismissAllowingStateLoss()
-                            }
-                        )
-                    }
-
                     lifecycleScope.launchWhenResumed {
                         when (savesRepository.fetchCurrentSave()?.difficulty ?: Difficulty.Beginner) {
                             Difficulty.Standard, Difficulty.Beginner, Difficulty.Custom -> {

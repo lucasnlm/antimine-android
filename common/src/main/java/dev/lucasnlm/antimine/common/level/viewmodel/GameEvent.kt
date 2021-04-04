@@ -27,8 +27,6 @@ sealed class GameEvent {
 
     object ContinueGame : GameEvent()
 
-    object ShareGame : GameEvent()
-
     object ShowNewGameDialog : GameEvent()
 
     data class VictoryDialog(
@@ -45,6 +43,7 @@ sealed class GameEvent {
         val rightMines: Int,
         val timestamp: Long,
         val receivedTips: Int,
+        val turn: Int,
     ) : GameEvent()
 
     data class GameCompleteDialog(
@@ -53,5 +52,6 @@ sealed class GameEvent {
         val rightMines: Int,
         val timestamp: Long,
         val receivedTips: Int,
+        val turn: Int,
     ) : GameEvent()
 }

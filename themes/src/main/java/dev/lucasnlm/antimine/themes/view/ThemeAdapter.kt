@@ -12,10 +12,12 @@ import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
+import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IAdsManager
 import kotlinx.android.synthetic.main.view_theme.view.*
 
 class ThemeAdapter(
+    themeRepository: IThemeRepository,
     private val activity: Activity,
     private val themeViewModel: ThemeViewModel,
     private val preferencesRepository: IPreferencesRepository,
@@ -24,6 +26,7 @@ class ThemeAdapter(
 
     private val themes: List<AppTheme> = themeViewModel.singleState().themes
     private val unlockedThemes = preferencesRepository.getUnlockedThemes()
+    private val currentTheme = themeRepository.getTheme()
 
     init {
         setHasStableIds(true)
@@ -85,7 +88,7 @@ class ThemeAdapter(
             }
 
             cardTheme.apply {
-                strokeColor = theme.palette.covered.toAndroidColor(alpha)
+                strokeColor = currentTheme.palette.background.toInvertedAndroidColor(alpha)
                 setOnClickListener {
                     unlockThemeIfNeeded(theme)
                 }

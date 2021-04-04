@@ -35,6 +35,10 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setCustomLongPressTimeout(value: Long) {}
 
+    override fun getDoubleClickTimeout(): Long = 400L
+
+    override fun setDoubleClickTimeout(value: Long) {}
+
     override fun themeId(): Long = 1L
 
     override fun useTheme(themeId: Long) {}

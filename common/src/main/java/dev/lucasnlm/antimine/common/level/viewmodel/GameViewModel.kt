@@ -24,8 +24,6 @@ import dev.lucasnlm.antimine.preferences.models.ActionResponse
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.ui.model.AppTheme
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.Achievement
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IFeatureFlagManager
@@ -44,7 +42,6 @@ open class GameViewModel(
     private val dimensionRepository: IDimensionRepository,
     private val preferencesRepository: IPreferencesRepository,
     private val hapticFeedbackManager: IHapticFeedbackManager,
-    private val themeRepository: IThemeRepository,
     private val soundManager: ISoundManager,
     private val minefieldRepository: IMinefieldRepository,
     private val analyticsManager: IAnalyticsManager,
@@ -61,7 +58,7 @@ open class GameViewModel(
             turn = 0,
             field = listOf(),
             duration = System.currentTimeMillis(),
-            difficulty = Difficulty.Standard,
+            difficulty = Difficulty.Beginner,
             mineCount = 9,
             minefield = Minefield(9, 9, 9),
             seed = 0L,
@@ -81,10 +78,6 @@ open class GameViewModel(
             }
             is GameEvent.ShowNewGameDialog -> {
                 sendSideEffect(GameEvent.ShowNewGameDialog)
-            }
-            is GameEvent.ShareGame -> {
-                analyticsManager.sentEvent(Analytics.ShareGame)
-                sendSideEffect(GameEvent.ShareGame)
             }
             is GameEvent.ConsumeTip -> {
                 if (tipRepository.removeTip()) {
@@ -160,6 +153,7 @@ open class GameViewModel(
                                 rightMines = gameController.mines().count { it.mark.isNotNone() },
                                 timestamp = state.duration,
                                 receivedTips = 1,
+                                turn = state.turn,
                             )
                             sendSideEffect(sideEffect)
                         }
@@ -172,6 +166,7 @@ open class GameViewModel(
                                 rightMines = gameController.mines().count { it.mark.isNotNone() },
                                 timestamp = state.duration,
                                 receivedTips = 0,
+                                turn = state.turn,
                             )
                             sendSideEffect(sideEffect)
                         }
@@ -223,7 +218,6 @@ open class GameViewModel(
                 minefield,
                 newDifficulty,
                 gameController.seed,
-                getAreaSizeMultiplier()
             )
         )
 
@@ -294,7 +288,6 @@ open class GameViewModel(
                 newGameState.minefield,
                 newGameState.difficulty,
                 newGameState.seed,
-                getAreaSizeMultiplier(),
                 save.firstOpen.toInt()
             )
         )
@@ -314,9 +307,12 @@ open class GameViewModel(
     suspend fun onContinueFromGameOver() {
         gameController.increaseErrorTolerance()
         statsRepository.deleteLastStats()
+        analyticsManager.sentEvent(
+            Analytics.ContinueGameAfterGameOver(gameController.getErrorTolerance())
+        )
     }
 
-    fun isCompletedWithMistakes(): Boolean {
+    private fun isCompletedWithMistakes(): Boolean {
         return gameController.hadMistakes() && gameController.hasIsolatedAllMines()
     }
 
@@ -381,7 +377,7 @@ open class GameViewModel(
         }
     }
 
-    suspend fun saveStats() {
+    private suspend fun saveStats() {
         if (initialized) {
             gameController.let {
                 if (it.hasMines()) {
@@ -509,16 +505,12 @@ open class GameViewModel(
         }
     }
 
-    fun stopClock() {
+    private fun stopClock() {
         clock.stop()
     }
 
-    fun showAllEmptyAreas() {
+    private fun showAllEmptyAreas() {
         gameController.revealAllEmptyAreas()
-    }
-
-    fun hasPlantedMines(): Boolean {
-        return gameController.mines().isNotEmpty()
     }
 
     fun revealRandomMine(): Boolean {
@@ -580,7 +572,7 @@ open class GameViewModel(
         checkGameOverAchievements()
     }
 
-    fun addNewTip(amount: Int) {
+    private fun addNewTip(amount: Int) {
         tipRepository.increaseTip(amount.coerceAtLeast(0))
     }
 
@@ -688,56 +680,87 @@ open class GameViewModel(
     }
 
     fun getControlDescription(context: Context): SpannedString? {
-        return when (preferencesRepository.controlStyle()) {
+        var openAction: String? = null
+        var openReaction: String? = null
+        var flagAction: String? = null
+        var flagReaction: String? = null
+        var result: SpannedString? = null
+
+        when (preferencesRepository.controlStyle()) {
             ControlStyle.Standard -> {
-                val base = context.getString(R.string.control_description)
-                val openAction = context.getString(R.string.single_click)
-                val openReaction = context.getString(R.string.open)
-                val flagAction = context.getString(R.string.long_press)
-                val flagReaction = context.getString(R.string.flag_tile)
-                val keywords = listOf(
-                    openAction,
-                    openReaction,
-                    flagAction,
-                    flagReaction,
-                )
-
-                val first = buildSpannedString {
-                    base.replace("%ACTION", openAction)
-                        .replace("%REACTION", openReaction)
-                        .splitKeeping(keywords)
-                        .forEach {
-                            when {
-                                keywords.contains(it) -> {
-                                    bold { append(it) }
-                                }
-                                else -> append(it)
-                            }
-                        }
-                }
-
-                val second = buildSpannedString {
-                    base.replace("%ACTION", flagAction)
-                        .replace("%REACTION", flagReaction)
-                        .splitKeeping(keywords)
-                        .forEach {
-                            when {
-                                keywords.contains(it) -> {
-                                    bold { append(it) }
-                                }
-                                else -> append(it)
-                            }
-                        }
-                }
-
-                buildSpannedString {
-                    append(first)
-                    append("\n")
-                    append(second)
-                }
+                openAction = context.getString(R.string.single_click)
+                openReaction = context.getString(R.string.open)
+                flagAction = context.getString(R.string.long_press)
+                flagReaction = context.getString(R.string.flag_tile)
             }
-            else -> null
+            ControlStyle.FastFlag -> {
+                openAction = context.getString(R.string.single_click)
+                openReaction = context.getString(R.string.flag_tile)
+                flagAction = context.getString(R.string.long_press)
+                flagReaction = context.getString(R.string.open)
+            }
+            ControlStyle.DoubleClick -> {
+                openAction = context.getString(R.string.single_click)
+                openReaction = context.getString(R.string.flag_tile)
+                flagAction = context.getString(R.string.double_click)
+                flagReaction = context.getString(R.string.open)
+            }
+            ControlStyle.DoubleClickInverted -> {
+                openAction = context.getString(R.string.single_click)
+                openReaction = context.getString(R.string.open)
+                flagAction = context.getString(R.string.double_click)
+                flagReaction = context.getString(R.string.flag_tile)
+            }
+            else -> {
+                // With switch button, it doesn't require toast
+            }
         }
+
+        if (openAction != null && openReaction != null && flagAction != null && flagReaction != null) {
+            val keywords = listOf(
+                openAction,
+                openReaction,
+                flagAction,
+                flagReaction,
+            )
+
+            val base = context.getString(R.string.control_description)
+            val first = buildSpannedString {
+                base.replace("%ACTION", openAction)
+                    .replace("%REACTION", openReaction)
+                    .splitKeeping(keywords)
+                    .forEach {
+                        when {
+                            keywords.contains(it) -> {
+                                bold { append(it) }
+                            }
+                            else -> append(it)
+                        }
+                    }
+            }
+
+            val second = buildSpannedString {
+                base.replace("%ACTION", flagAction)
+                    .replace("%REACTION", flagReaction)
+                    .splitKeeping(keywords)
+                    .forEach {
+                        when {
+                            keywords.contains(it) -> {
+                                bold { append(it) }
+                            }
+                            else -> append(it)
+                        }
+                    }
+            }
+
+            result = buildSpannedString {
+                append(first)
+                append("\n")
+                append(second)
+            }
+        }
+
+        return result
     }
 
     private fun String.splitKeeping(str: String): List<String> {
@@ -751,10 +774,6 @@ open class GameViewModel(
         }
         return res
     }
-
-    fun getAppTheme(): AppTheme = themeRepository.getTheme()
-
-    private fun getAreaSizeMultiplier() = preferencesRepository.squareSize()
 
     private fun refreshField() {
         sendEvent(GameEvent.UpdateMinefield(gameController.field()))

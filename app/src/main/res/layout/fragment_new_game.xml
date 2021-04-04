@@ -10,22 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="4dp"/>
+
     <dev.lucasnlm.antimine.ui.view.CardButtonView
         android:id="@+id/intermediate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <dev.lucasnlm.antimine.ui.view.CardButtonView
-        android:id="@+id/expert"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <Space
         android:layout_width="match_parent"
-        android:layout_height="8dp"/>
+        android:layout_height="4dp"/>
 
     <dev.lucasnlm.antimine.ui.view.CardButtonView
-        android:id="@+id/tutorial"
+        android:id="@+id/expert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

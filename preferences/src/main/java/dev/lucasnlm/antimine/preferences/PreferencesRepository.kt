@@ -1,7 +1,6 @@
 package dev.lucasnlm.antimine.preferences
 
 import android.view.ViewConfiguration
-import dev.lucasnlm.antimine.preferences.PreferenceKeys.PREFERENCE_SQUARE_DIVIDER
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
@@ -114,7 +113,7 @@ class PreferencesRepository(
     }
 
     override fun touchSensibility(): Int =
-        preferencesManager.getInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, 30)
+        preferencesManager.getInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, 5)
 
     override fun setTouchSensibility(sensibility: Int) {
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, sensibility)
@@ -208,6 +207,14 @@ class PreferencesRepository(
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT, value.toInt())
     }
 
+    override fun getDoubleClickTimeout(): Long {
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT, 400).toLong()
+    }
+
+    override fun setDoubleClickTimeout(value: Long) {
+        preferencesManager.putInt(PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT, value.toInt())
+    }
+
     override fun themeId(): Long =
         preferencesManager.getInt(PreferenceKeys.PREFERENCE_CUSTOM_THEME, 0).toLong()
 
@@ -280,6 +287,14 @@ class PreferencesRepository(
 
         if (preferencesManager.contains(PreferenceKeys.PREFERENCE_FIRST_USE)) {
             preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_TUTORIAL_COMPLETED, true)
+        }
+
+        // Remove old sizes
+        if (preferencesManager.contains(PreferenceKeys.PREFERENCE_OLD_AREA_SIZES)) {
+            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_AREA_SIZE)
+            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_RADIUS)
+            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER)
+            preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_OLD_AREA_SIZES, true)
         }
     }
 
@@ -354,14 +369,14 @@ class PreferencesRepository(
     }
 
     override fun squareDivider(): Int {
-        return preferencesManager.getInt(PREFERENCE_SQUARE_DIVIDER, 0)
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER, 0)
     }
 
     override fun setSquareDivider(value: Int?) {
         if (value == null) {
-            preferencesManager.removeKey(PREFERENCE_SQUARE_DIVIDER)
+            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER)
         } else {
-            preferencesManager.putInt(PREFERENCE_SQUARE_DIVIDER, value.coerceIn(0, 50))
+            preferencesManager.putInt(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER, value.coerceIn(0, 50))
         }
     }
 }

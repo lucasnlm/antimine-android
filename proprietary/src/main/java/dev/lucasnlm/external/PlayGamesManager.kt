@@ -10,7 +10,6 @@ import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.games.Games
 import com.google.android.gms.tasks.Tasks
 
@@ -60,7 +59,7 @@ class PlayGamesManager(
             val client = GoogleSignIn.getClient(context, signInOptions)
             account = lastAccount ?: Tasks.await(client.silentSignIn())
             account != null
-        } catch (e: ApiException) {
+        } catch (e: Exception) {
             account = null
             false
         }

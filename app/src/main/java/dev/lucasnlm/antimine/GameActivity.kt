@@ -29,7 +29,6 @@ import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.common.level.view.GdxLevelFragment
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.share.ShareManager
 import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
@@ -58,13 +57,16 @@ class GameActivity :
     private val analyticsManager: IAnalyticsManager by inject()
     private val instantAppManager: IInstantAppManager by inject()
     private val savesRepository: ISavesRepository by inject()
-    private val shareViewModel: ShareManager by inject()
     private val playGamesManager: IPlayGamesManager by inject()
     private val adsManager: IAdsManager by inject()
     private val reviewWrapper: ReviewWrapper by inject()
     private val featureFlagManager: IFeatureFlagManager by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
     private var gameToast: Toast? = null
+
+    private val renderSquareRadius = preferencesRepository.squareRadius()
+    private val renderSquareDivider = preferencesRepository.squareDivider()
+    private val renderSquareSize = preferencesRepository.squareSize()
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
@@ -164,7 +166,7 @@ class GameActivity :
                         controlsToast.apply {
                             visibility = View.VISIBLE
                             backgroundTintList = tint
-                            this.text = text
+                            this.text = controlText
                         }
                     } else {
                         controlsToast.visibility = View.GONE
@@ -210,9 +212,6 @@ class GameActivity :
         lifecycleScope.launchWhenCreated {
             gameViewModel.observeSideEffects().collect {
                 when (it) {
-                    is GameEvent.ShareGame -> {
-                        shareCurrentGame()
-                    }
                     is GameEvent.ShowNewGameDialog -> {
                         lifecycleScope.launch {
                             GameOverDialogFragment.newInstance(
@@ -222,6 +221,7 @@ class GameActivity :
                                 totalMines = 0,
                                 time = singleState().duration,
                                 received = 0,
+                                turn = -1,
                             ).run {
                                 showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
                             }
@@ -257,6 +257,7 @@ class GameActivity :
                                     totalMines = it.totalMines,
                                     time = it.timestamp,
                                     received = it.receivedTips,
+                                    turn = it.turn,
                                 ).run {
                                     showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
                                 }
@@ -276,6 +277,7 @@ class GameActivity :
                                     totalMines = it.totalMines,
                                     time = it.timestamp,
                                     received = it.receivedTips,
+                                    turn = it.turn,
                                 ).run {
                                     showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
                                 }
@@ -294,6 +296,16 @@ class GameActivity :
 
     override fun onResume() {
         super.onResume()
+        if (renderSquareRadius != preferencesRepository.squareRadius() ||
+            renderSquareDivider != preferencesRepository.squareDivider() ||
+            renderSquareSize != preferencesRepository.squareSize()
+        ) {
+            // If used changed any currently rendered settings, we
+            // must recreate the activity to force all sprites are updated.
+            recreate()
+            return
+        }
+
         analyticsManager.sentEvent(Analytics.Resume)
         keepScreenOn(true)
         gameViewModel.resumeGame()
@@ -490,14 +502,6 @@ class GameActivity :
         gameToast = Toast.makeText(this, message, Toast.LENGTH_LONG).apply {
             setGravity(Gravity.CENTER, 0, 0)
             show()
-        }
-    }
-
-    private fun shareCurrentGame() {
-        val levelSetup = gameViewModel.singleState().minefield
-        val field = gameViewModel.singleState().field
-        lifecycleScope.launch {
-            shareViewModel.shareField(levelSetup, field)
         }
     }
 

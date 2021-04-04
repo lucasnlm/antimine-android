@@ -81,7 +81,8 @@ class EndGameDialogViewModel(
         "",
         gameResult = GameResult.Completed,
         showContinueButton = false,
-        received = 0
+        received = 0,
+        showTutorial = true,
     )
 
     override suspend fun mapEventToState(event: EndGameDialogEvent) = flow {
@@ -94,7 +95,8 @@ class EndGameDialogViewModel(
                         message = messageTo(event.rightMines, event.time, event.gameResult),
                         gameResult = event.gameResult,
                         showContinueButton = false,
-                        received = event.received
+                        received = event.received,
+                        showTutorial = false,
                     )
                 }
                 GameResult.GameOver -> {
@@ -104,7 +106,8 @@ class EndGameDialogViewModel(
                         message = messageTo(event.rightMines, event.time, event.gameResult),
                         gameResult = event.gameResult,
                         showContinueButton = event.showContinueButton,
-                        received = event.received
+                        received = event.received,
+                        showTutorial = event.turn in 0..4,
                     )
                 }
                 GameResult.Completed -> {
@@ -114,7 +117,8 @@ class EndGameDialogViewModel(
                         message = context.getString(R.string.new_game_request),
                         gameResult = event.gameResult,
                         showContinueButton = false,
-                        received = event.received
+                        received = event.received,
+                        showTutorial = false,
                     )
                 }
             }

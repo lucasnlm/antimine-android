@@ -12,7 +12,6 @@ sealed class Analytics(
         minefield: Minefield,
         difficulty: Difficulty,
         seed: Long,
-        areaSizeMultiplier: Int,
     ) : Analytics(
         "New Game",
         mapOf(
@@ -21,7 +20,6 @@ sealed class Analytics(
             "Width" to minefield.width.toString(),
             "Height" to minefield.height.toString(),
             "Mines" to minefield.mines.toString(),
-            "Size Multiplier" to areaSizeMultiplier.toString()
         )
     )
 
@@ -29,7 +27,6 @@ sealed class Analytics(
         minefield: Minefield,
         difficulty: Difficulty,
         seed: Long,
-        areaSizeMultiplier: Int,
         firstOpen: Int,
     ) : Analytics(
         "Retry Game",
@@ -39,10 +36,13 @@ sealed class Analytics(
             "Width" to minefield.width.toString(),
             "Height" to minefield.height.toString(),
             "Mines" to minefield.mines.toString(),
-            "Size Multiplier" to areaSizeMultiplier.toString(),
             "First Open" to firstOpen.toString()
         )
     )
+
+    data class ContinueGameAfterGameOver(
+        val error: Int,
+    ) : Analytics("Continue after game over", mapOf("error" to error.toString()))
 
     object ResumePreviousGame : Analytics("Resume previous game")
 
@@ -95,8 +95,6 @@ sealed class Analytics(
 
     object OpenThemes : Analytics("Open Themes")
 
-    object ShareGame : Analytics("Share Game")
-
     object ClickEmoji : Analytics("Click Emoji")
 
     object ContinueGame : Analytics("Continue Game")
@@ -104,10 +102,6 @@ sealed class Analytics(
     object OpenTutorial : Analytics("Open Tutorial")
 
     object OpenCustom : Analytics("Open Custom")
-
-    object TutorialStarted : Analytics("Tutorial Started")
-
-    object TutorialCompleted : Analytics("Tutorial Completed")
 
     object OpenAchievements : Analytics("Open Achievements")
 
@@ -118,8 +112,6 @@ sealed class Analytics(
     ) : Analytics("Click Theme", mapOf("id" to themeId.toString()))
 
     object OpenSettings : Analytics("Open Settings")
-
-    object OpenSelectLanguage : Analytics("Open Languages")
 
     object OpenSaveHistory : Analytics("Open Save History")
 
