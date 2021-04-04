@@ -166,7 +166,6 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 continueButton.visibility = View.GONE
                             }
 
-
                             if (state.showTutorial) {
                                 tutorialButton.visibility = View.VISIBLE
                                 tutorialButton.setOnClickListener {

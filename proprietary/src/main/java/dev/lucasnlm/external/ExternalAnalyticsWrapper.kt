@@ -16,7 +16,7 @@ class ExternalAnalyticsWrapper(
         Amplitude
             .getInstance()
             .enableCoppaControl()
-            .initialize(context, "AMPLITUDE_API_KEY");
+            .initialize(context, "AMPLITUDE_API_KEY")
     }
 
     override fun setup(context: Context, properties: Map<String, String>) {
