@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginBottom
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
