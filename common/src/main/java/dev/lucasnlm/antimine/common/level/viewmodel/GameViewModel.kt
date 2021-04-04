@@ -216,7 +216,6 @@ open class GameViewModel(
                 minefield,
                 newDifficulty,
                 gameController.seed,
-                getAreaSizeMultiplier()
             )
         )
 
@@ -287,7 +286,6 @@ open class GameViewModel(
                 newGameState.minefield,
                 newGameState.difficulty,
                 newGameState.seed,
-                getAreaSizeMultiplier(),
                 save.firstOpen.toInt()
             )
         )
@@ -307,6 +305,9 @@ open class GameViewModel(
     suspend fun onContinueFromGameOver() {
         gameController.increaseErrorTolerance()
         statsRepository.deleteLastStats()
+        analyticsManager.sentEvent(
+            Analytics.ContinueGameAfterGameOver(gameController.getErrorTolerance())
+        )
     }
 
     private fun isCompletedWithMistakes(): Boolean {
@@ -771,8 +772,6 @@ open class GameViewModel(
         }
         return res
     }
-
-    private fun getAreaSizeMultiplier() = preferencesRepository.squareSize()
 
     private fun refreshField() {
         sendEvent(GameEvent.UpdateMinefield(gameController.field()))
