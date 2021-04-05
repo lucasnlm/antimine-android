@@ -240,6 +240,12 @@ class GameActivity :
                                     received = it.receivedTips,
                                 ).run {
                                     showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
+
+                                    dialog?.setOnDismissListener {
+                                        if (!isFinishing) {
+                                            reviewWrapper.startInAppReview(this@GameActivity)
+                                        }
+                                    }
                                 }
                             }
                         } else {
@@ -280,6 +286,12 @@ class GameActivity :
                                     turn = it.turn,
                                 ).run {
                                     showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
+
+                                    dialog?.setOnDismissListener {
+                                        if (!isFinishing) {
+                                            reviewWrapper.startInAppReview(this@GameActivity)
+                                        }
+                                    }
                                 }
                             }
                         } else {
