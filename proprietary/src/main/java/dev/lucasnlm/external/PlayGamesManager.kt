@@ -18,6 +18,7 @@ class PlayGamesManager(
     private val crashReporter: CrashReporter,
 ) : IPlayGamesManager {
     private var account: GoogleSignInAccount? = null
+    private var requestLogin: Boolean = true
 
     private fun setupPopUp(activity: Activity, account: GoogleSignInAccount) {
         Games.getGamesClient(context, account).apply {
@@ -123,6 +124,14 @@ class PlayGamesManager(
         account?.let {
             Games.getLeaderboardsClient(context, it).submitScore(leaderboard.value, value)
         }
+    }
+
+    override fun keepRequestingLogin(status: Boolean) {
+        requestLogin = status
+    }
+
+    override fun shouldRequestLogin(): Boolean {
+        return requestLogin
     }
 
     companion object {

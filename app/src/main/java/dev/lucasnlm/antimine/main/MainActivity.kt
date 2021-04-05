@@ -355,7 +355,9 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     }
 
     private fun launchGooglePlayGames() {
-        if (playGamesManager.hasGooglePlayGames()) {
+        if (playGamesManager.hasGooglePlayGames() && playGamesManager.shouldRequestLogin()) {
+            playGamesManager.keepRequestingLogin(false)
+
             lifecycleScope.launchWhenCreated {
                 var logged: Boolean
 

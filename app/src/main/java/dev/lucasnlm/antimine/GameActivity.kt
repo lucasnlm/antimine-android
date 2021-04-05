@@ -126,7 +126,8 @@ class GameActivity :
     }
 
     private fun playGamesStartUp() {
-        if (playGamesManager.hasGooglePlayGames()) {
+        if (playGamesManager.hasGooglePlayGames() && playGamesManager.shouldRequestLogin()) {
+            playGamesManager.keepRequestingLogin(false)
             lifecycleScope.launchWhenCreated {
                 try {
                     withContext(Dispatchers.IO) {
