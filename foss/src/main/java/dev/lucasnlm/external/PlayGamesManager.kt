@@ -47,4 +47,12 @@ class PlayGamesManager(
     override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) {
         // F-droid build doesn't have Google Play Games
     }
+
+    override fun keepRequestingLogin(status: Boolean) {
+        // F-droid build doesn't have Google Play Games
+    }
+
+    override fun shouldRequestLogin(): Boolean {
+        return false
+    }
 }

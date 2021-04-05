@@ -64,6 +64,10 @@ val AppModule = module {
             override fun incrementAchievement(achievement: Achievement) {}
 
             override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) {}
+
+            override fun keepRequestingLogin(status: Boolean) {}
+
+            override fun shouldRequestLogin(): Boolean = false
         }
     } bind IPlayGamesManager::class
 
