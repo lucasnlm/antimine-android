@@ -16,7 +16,7 @@ class NoAdsManager : IAdsManager {
         // Empty
     }
 
-    override fun showInterstitialAd(activity: Activity, onDismiss: () -> Unit, onError: () -> Unit) {
+    override fun showInterstitialAd(activity: Activity, onDismiss: () -> Unit, onError: (() -> Unit)?) {
         // Empty
     }
 
