@@ -404,13 +404,25 @@ class GameActivity :
 
     private fun startNewGameWithAds() {
         if (!preferencesRepository.isPremiumEnabled() && featureFlagManager.isAdsOnNewGameEnabled) {
-            adsManager.showRewardedAd(
-                activity = this,
-                skipIfFrequent = true,
-                onRewarded = {
-                    gameViewModel.startNewGame()
-                }
-            )
+            if (featureFlagManager.useInterstitialAd) {
+                adsManager.showInterstitialAd(
+                    activity = this,
+                    onDismiss = {
+                        gameViewModel.startNewGame()
+                    }
+                )
+            } else {
+                adsManager.showRewardedAd(
+                    activity = this,
+                    skipIfFrequent = true,
+                    onRewarded = {
+                        gameViewModel.startNewGame()
+                    },
+                    onFail = {
+                        gameViewModel.startNewGame()
+                    }
+                )
+            }
         } else {
             gameViewModel.startNewGame()
         }

@@ -19,6 +19,8 @@ class FeatureFlagManager : IFeatureFlagManager() {
         RECYCLER_SCROLL_ENABLED to true,
         THEME_TASTING_ENABLED to true,
         MIN_USAGE_TO_REVIEW to 5,
+        USE_INTERSTITIAL_AD to true,
+        BANNER_AD_ENABLED to true,
     )
 
     private val remoteConfig: FirebaseRemoteConfig by lazy {
@@ -89,6 +91,14 @@ class FeatureFlagManager : IFeatureFlagManager() {
         getInt(MIN_USAGE_TO_REVIEW)
     }
 
+    override val useInterstitialAd: Boolean by lazy {
+        getBoolean(USE_INTERSTITIAL_AD)
+    }
+
+    override val isBannerAdEnabled: Boolean by lazy {
+        getBoolean(BANNER_AD_ENABLED)
+    }
+
     override suspend fun refresh() {
         if (!BuildConfig.DEBUG) {
             withContext(Dispatchers.IO) {
@@ -115,5 +125,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         private const val RECYCLER_SCROLL_ENABLED = "recycler_scroll_enabled"
         private const val THEME_TASTING_ENABLED = "theme_tasting_enabled"
         private const val MIN_USAGE_TO_REVIEW = "min_usage_to_review"
+        private const val USE_INTERSTITIAL_AD = "use_interstitial_ad"
+        private const val BANNER_AD_ENABLED = "banner_ad_enabled"
     }
 }
