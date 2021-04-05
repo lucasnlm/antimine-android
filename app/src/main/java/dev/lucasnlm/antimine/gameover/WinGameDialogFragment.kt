@@ -60,7 +60,6 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
 
     private lateinit var usingTheme: AppTheme
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -165,7 +164,8 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             }
 
                             if (!preferencesRepository.isPremiumEnabled() &&
-                                featureFlagManager.isBannerAdEnabled) {
+                                featureFlagManager.isBannerAdEnabled
+                            ) {
                                 adFrame.visibility = View.VISIBLE
 
                                 adFrame.addView(

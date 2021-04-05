@@ -173,7 +173,8 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                             }
 
                             if (!preferencesRepository.isPremiumEnabled() &&
-                                featureFlagManager.isBannerAdEnabled) {
+                                featureFlagManager.isBannerAdEnabled
+                            ) {
                                 adFrame.visibility = View.VISIBLE
 
                                 adFrame.addView(

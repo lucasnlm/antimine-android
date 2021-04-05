@@ -63,7 +63,8 @@ class AdMobAdsManager(
 
     private fun loadInterstitialAd() {
         val adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(context, Ads.InterstitialAd, adRequest,
+        InterstitialAd.load(
+            context, Ads.InterstitialAd, adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     failErrorCause = adError.message
@@ -120,7 +121,7 @@ class AdMobAdsManager(
         onDismiss: (() -> Unit),
         onError: (() -> Unit)?,
     ) {
-        interstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+        interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
                 // Dismiss
                 loadInterstitialAd()
