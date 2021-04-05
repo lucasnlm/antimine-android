@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
     <string name="tutorial">Didacticiel</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_basic">La règle du jeu est simple, le nombre sur un carré indique le nombre de mines adjacentes et vous devez marquer toutes les mines.</string>
+    <string name="tutorial_text_1">Si un nombre touche le même nombre de carrés, alors les carrés sont tous des mines.</string>
+    <string name="tutorial_text_2">Après avoir marqué votre premier drapeau, passez en revue les chiffres et analysez le carré suivant.</string>
+    <string name="tutorial_text_3">Si un carré a le même nombre de drapeaux, tous les autres carrés restants adjacents ne sont pas des mines (la flèche verte).</string>
+    <string name="tutorial_text_4">Examinez les chiffres et gardez les cases ouvertes.</string>
     <string name="games">Jeux</string>
-    <string name="tap_to_begin">Toucher pour commencer</string>
+    <string name="tap_to_begin">Cliquer pour commencer</string>
     <string name="previous_games">Parties précédentes</string>
     <string name="minefield">Difficulté</string>
     <string name="standard">Standard</string>
@@ -36,7 +36,7 @@
     <string name="settings_accessibility">Accessibilité</string>
     <string name="size">Taille</string>
     <string name="rounded_square">Carré arrondi</string>
-    <string name="space_between_squares">Espace entre les carrés</string>
+    <string name="space_between_squares">Espace entre les cases</string>
     <string name="system">Système</string>
     <string name="rating">Retour d\'expérience</string>
     <string name="sign_in_failed">Erreur lors de la connexion. Vérifiez l\'état de votre connexion Internet et réessayez.</string>
