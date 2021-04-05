@@ -13,6 +13,8 @@ class FeatureFlagManager : IFeatureFlagManager() {
     override val isFoos: Boolean = true
     override val isThemeTastingEnabled: Boolean = true
     override val minUsageToReview: Int = Int.MAX_VALUE
+    override val useInterstitialAd: Boolean = false
+    override val isBannerAdEnabled: Boolean = false
 
     override suspend fun refresh() {
         // No Feature Flags on FOSS

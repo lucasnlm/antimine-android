@@ -110,7 +110,12 @@ class ThemeAdapter(
                     themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
                 },
                 onFail = {
-                    themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+                    adsManager.showInterstitialAd(
+                        activity,
+                        onDismiss = {
+                            themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+                        }
+                    )
                 }
             )
         }

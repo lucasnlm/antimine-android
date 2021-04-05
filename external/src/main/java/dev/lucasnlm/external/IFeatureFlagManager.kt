@@ -8,11 +8,13 @@ abstract class IFeatureFlagManager {
     abstract val isGameOverAdEnabled: Boolean
     abstract val isAdsOnContinueEnabled: Boolean
     abstract val isAdsOnNewGameEnabled: Boolean
+    abstract val useInterstitialAd: Boolean
     abstract val isContinueGameEnabled: Boolean
     abstract val isRecyclerScrollEnabled: Boolean
     abstract val isFoos: Boolean
     abstract val isThemeTastingEnabled: Boolean
     abstract val minUsageToReview: Int
+    abstract val isBannerAdEnabled: Boolean
 
     abstract suspend fun refresh()
 }
