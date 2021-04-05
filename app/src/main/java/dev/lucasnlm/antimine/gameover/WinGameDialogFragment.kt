@@ -245,9 +245,9 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
             setView(view)
         }.create().apply {
             setCanceledOnTouchOutside(false)
-            window?.let {
-                it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                it.requestFeature(Window.FEATURE_NO_TITLE)
+            window?.apply {
+                setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                requestFeature(Window.FEATURE_NO_TITLE)
             }
         }
 
