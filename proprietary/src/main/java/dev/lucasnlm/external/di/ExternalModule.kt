@@ -10,9 +10,11 @@ import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.ICloudStorageManager
 import dev.lucasnlm.external.ICrashReporter
 import dev.lucasnlm.external.IFeatureFlagManager
+import dev.lucasnlm.external.IInAppUpdateManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.IReviewWrapper
+import dev.lucasnlm.external.InAppUpdateManager
 import dev.lucasnlm.external.InstantAppManager
 import dev.lucasnlm.external.PlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
@@ -35,4 +37,6 @@ val ExternalModule = module {
     single { CrashReporter() } bind ICrashReporter::class
 
     single { AdMobAdsManager(get(), get()) } bind IAdsManager::class
+
+    single { InAppUpdateManager() } bind IInAppUpdateManager::class
 }
