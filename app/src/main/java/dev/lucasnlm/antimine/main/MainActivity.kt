@@ -32,6 +32,7 @@ import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager
+import dev.lucasnlm.external.IInAppUpdateManager
 import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
@@ -51,6 +52,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     private val featureFlagManager: IFeatureFlagManager by inject()
     private val billingManager: IBillingManager by inject()
     private val savesRepository: ISavesRepository by inject()
+    private val inAppUpdateManager: IInAppUpdateManager by inject()
 
     private lateinit var viewPager: ViewPager2
 
@@ -354,6 +356,10 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
     }
 
+    private fun afterGooglePlayGames() {
+        inAppUpdateManager.checkUpdate(this)
+    }
+
     private fun launchGooglePlayGames() {
         if (playGamesManager.hasGooglePlayGames() && playGamesManager.shouldRequestLogin()) {
             playGamesManager.keepRequestingLogin(false)
@@ -385,8 +391,12 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                     } catch (e: Exception) {
                         Log.e(SplashActivity.TAG, "User not logged or doesn't have Play Games", e)
                     }
+                } else {
+                    afterGooglePlayGames()
                 }
             }
+        } else {
+            afterGooglePlayGames()
         }
     }
 
