@@ -29,8 +29,8 @@ fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
     "uid" to playId,
     "completeTutorial" to completeTutorial,
     "selectedTheme" to selectedTheme,
-    "squareRadius" to squareRadius,
-    "squareSize" to squareSize,
+    "newSquareRadius" to squareRadius,
+    "newSquareSize" to squareSize,
     "touchTiming" to touchTiming,
     "questionMark" to questionMark,
     "gameAssistance" to gameAssistance,
@@ -44,7 +44,7 @@ fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
     "language" to language,
     "openDirectly" to openDirectly,
     "unlockedThemes" to unlockedThemes,
-    "squareDivider" to squareDivider,
+    "newSquareDivider" to squareDivider,
     "doubleClickTimeout" to doubleClickTimeout,
 )
 
@@ -58,8 +58,8 @@ fun cloudSaveOf(id: String, data: Map<String, Any>) =
         playId = id,
         completeTutorial = data["completeTutorial"].parseInt(),
         selectedTheme = data["selectedTheme"].parseInt(),
-        squareRadius = data["squareRadius"].parseInt(),
-        squareSize = data["squareSize"].parseInt(),
+        squareRadius = data["newSquareRadius"].parseInt(3),
+        squareSize = data["newSquareSize"].parseInt(50),
         touchTiming = data["touchTiming"].parseInt(),
         questionMark = data["questionMark"].parseInt(),
         gameAssistance = data["gameAssistance"].parseInt(),
@@ -73,6 +73,6 @@ fun cloudSaveOf(id: String, data: Map<String, Any>) =
         language = data["language"].parseString(""),
         openDirectly = data["openDirectly"].parseInt(0),
         unlockedThemes = data["unlockedThemes"].parseString(""),
-        squareDivider = data["squareDivider"].parseInt(10),
+        squareDivider = data["newSquareDivider"].parseInt(0),
         doubleClickTimeout = data["doubleClickTimeout"].parseInt(400),
     )
