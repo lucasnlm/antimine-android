@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="de">
     <string name="tutorial">Anleitung</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_basic">Die Regel des Spiels ist einfach, die Zahl auf einem Quadrat zeigt die Anzahl an benachbarten Minen, und du musst alle Minen markieren.</string>
+    <string name="tutorial_text_1">Falls eine Zahl gleich der Anzahl an berührenden Quadraten ist, dann sind diese Quadrate alle vermint.</string>
+    <string name="tutorial_text_2">Nachdem dem Setzen deiner ersten Markierung, überprüfe die Anzahl und analysiere das nächste Quadrat.</string>
+    <string name="tutorial_text_3">Falls ein Quadrat die gleiche Zahl an Markierungen hat wie ein benachbartes Quadrat, dann sind alle anderen verbleibenden, angrenzenden Quadrate minenfrei (der grüne Pfeil).</string>
+    <string name="tutorial_text_4">Überprüfe die Zahlen, und mache weiter mit dem Öffnen von Quadraten.</string>
     <string name="games">Spiele</string>
-    <string name="tap_to_begin">Tippen um zu beginnen</string>
+    <string name="tap_to_begin">Tippen um anzufangen</string>
     <string name="previous_games">Vorherige Spiele</string>
     <string name="minefield">Schwierigkeitsgrad</string>
     <string name="standard">Voreinstellung</string>
@@ -36,7 +36,7 @@
     <string name="settings_accessibility">Barrierefreiheit</string>
     <string name="size">Größe</string>
     <string name="rounded_square">Abgerundetes Quadrat</string>
-    <string name="space_between_squares">Platz zwischen Quadrate</string>
+    <string name="space_between_squares">Platz zwischen Quadraten</string>
     <string name="system">System</string>
     <string name="rating">Rückmeldung</string>
     <string name="sign_in_failed">Login fehlgeschlagen. Überprüfe Deine Netzwerkverbindung und versuche es erneut.</string>
@@ -61,10 +61,10 @@
     <string name="use_question_mark">Fragezeichen benutzen</string>
     <string name="no_guessing_mode">\"Kein Erraten\"-Modus</string>
     <string name="control">Steuerung</string>
-    <string name="single_click">Einfaches Tippe</string>
+    <string name="single_click">Einfaches Tippen</string>
     <string name="double_click">Doppeltes Tippen</string>
-    <string name="long_press">Lange Tippe</string>
-    <string name="control_description">%ACTION macht %REACTION</string>
+    <string name="long_press">Langes Tippen</string>
+    <string name="control_description">%ACTION zum %REACTION</string>
     <string name="touch_sensibility">Berührungsempfindlichkeit</string>
     <string name="open_tile">Öffnen</string>
     <string name="flag_tile">Flagge</string>

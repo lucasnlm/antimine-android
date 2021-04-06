@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="vec">
     <string name="tutorial">Tutorial</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_basic">Ła règoła de\'l zogo ła ze sénplise, el nùmaro sora de un cuadrato el mostra el nùmaro de mine tacà de łu e te ghè da marcar tute łe mine.</string>
+    <string name="tutorial_text_1">Se un nùmaro el ze tacà a el steso nùmaro de cuadrài, łora i cuadrài i ze tuti mine.</string>
+    <string name="tutorial_text_2">Dopo ver marcà el to primo pavion, controła el nùmaro e nałeza el cuadrato che vien.</string>
+    <string name="tutorial_text_3">Se un cuadrato el ga el steso nùmaro de pavioni, tuti i cuadrài tacà de łu no i ze mìa mine (ła fresa verde).</string>
+    <string name="tutorial_text_4">Controła i nùmari e sèita vérzar i cuadrài.</string>
     <string name="games">Partìe</string>
-    <string name="tap_to_begin">Tap to begin</string>
+    <string name="tap_to_begin">Toca par tacar</string>
     <string name="previous_games">Partìe Pasàe</string>
     <string name="minefield">Dificoltà</string>
     <string name="standard">Standard</string>
@@ -36,7 +36,7 @@
     <string name="settings_accessibility">Acesibiłità</string>
     <string name="size">Dimension</string>
     <string name="rounded_square">Cuadrati Stondài</string>
-    <string name="space_between_squares">Space Between Squares</string>
+    <string name="space_between_squares">Spasio infra i cuadrài</string>
     <string name="system">Sistema</string>
     <string name="rating">Vałutasion</string>
     <string name="sign_in_failed">Aceso mìa riusìo. Controła ła conesion e prova da novo.</string>
@@ -61,10 +61,10 @@
     <string name="use_question_mark">Dòpara el Ponto de Domanda</string>
     <string name="no_guessing_mode">Modałità sensa predision</string>
     <string name="control">Comandi</string>
-    <string name="single_click">Single Tap</string>
-    <string name="double_click">Double Tap</string>
-    <string name="long_press">Long Tap</string>
-    <string name="control_description">%ACTION to %REACTION</string>
+    <string name="single_click">Toca na volta</string>
+    <string name="double_click">Toca do volte</string>
+    <string name="long_press">Tien strucà</string>
+    <string name="control_description">%ACTION par %REACTION</string>
     <string name="touch_sensibility">Sensibiłità de Toco</string>
     <string name="open_tile">Verzi</string>
     <string name="flag_tile">Pavion</string>
@@ -105,7 +105,7 @@
     <string name="help">Juto</string>
     <string name="back">Indrìo</string>
     <string name="donation">Donasion</string>
-    <string name="open_on_game">Open on game screen</string>
+    <string name="open_on_game">Verzi \'te ła schermada de zogo</string>
     <string name="show_windows">Mostra fenestre</string>
     <string name="select_language">Sernisi Łengua</string>
     <string name="switch_control">Scanbia: Marca e Verzi</string>

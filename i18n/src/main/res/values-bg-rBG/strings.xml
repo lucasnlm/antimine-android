@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="bg">
     <string name="tutorial">Туториал</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_basic">Правилата на играта са прости, номерът в квадрата показва броя на мините в него и вие трябва да сложите флаг на всички мини.</string>
+    <string name="tutorial_text_1">Ако цифрата е в близост до същия брой квадрати, тогава във всички квадрати има мини.</string>
+    <string name="tutorial_text_2">След като сложите първия си флаг, вижте и анализирайте следващия квадрат.</string>
+    <string name="tutorial_text_3">Ако квадрат има същия брой флагове, тогава всички квадрати в близост до него не са мини (вижте зелената стрелка).</string>
+    <string name="tutorial_text_4">Вижте цифрите и продължете да отваряте квадрати.</string>
     <string name="games">Игри</string>
     <string name="tap_to_begin">Натисни за започване</string>
     <string name="previous_games">Предишни Игри</string>
