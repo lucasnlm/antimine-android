@@ -255,10 +255,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
             setView(view)
         }.create().apply {
             setCanceledOnTouchOutside(false)
-            window?.apply {
-                setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                requestFeature(Window.FEATURE_NO_TITLE)
-            }
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
     }
 
