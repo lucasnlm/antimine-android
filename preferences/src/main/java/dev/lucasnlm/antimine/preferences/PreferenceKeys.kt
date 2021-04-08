@@ -38,4 +38,5 @@ object PreferenceKeys {
     const val PREFERENCE_UNLOCKED_THEMES = "preference_unlocked_themes"
     const val PREFERENCE_SQUARE_DIVIDER = "preference_new_square_divider"
     const val PREFERENCE_OLD_AREA_SIZES = "preference_migration_old_sizes"
+    const val PREFERENCE_TUTORIAL_DIALOG = "preference_show_tutorial_dialog"
 }

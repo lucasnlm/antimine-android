@@ -83,8 +83,8 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
         const val MIN_HEIGHT = 5
         const val MIN_MINES = 3
 
-        const val MAX_WIDTH = 100
-        const val MAX_HEIGHT = 100
+        const val MAX_WIDTH = 50
+        const val MAX_HEIGHT = 50
 
         private fun filterInput(target: String, min: Int): Int {
             var result = min

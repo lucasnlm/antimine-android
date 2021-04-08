@@ -123,9 +123,9 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             subtitle.text = state.message
 
                             emoji.apply {
-                                analyticsManager.sentEvent(Analytics.ClickEmoji)
                                 setImageResource(state.titleEmoji)
                                 setOnClickListener {
+                                    analyticsManager.sentEvent(Analytics.ClickEmoji)
                                     endGameViewModel.sendEvent(
                                         EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji)
                                     )

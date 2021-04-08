@@ -146,4 +146,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun squareDivider(): Int = 0
 
     override fun setSquareDivider(value: Int?) {}
+
+    override fun showTutorialDialog(): Boolean = false
+
+    override fun setTutorialDialog(show: Boolean) { }
 }

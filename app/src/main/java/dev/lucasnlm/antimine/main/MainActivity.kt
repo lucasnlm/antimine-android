@@ -167,7 +167,6 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             text = R.string.themes,
             startIcon = R.drawable.themes,
             onAction = {
-                analyticsManager.sentEvent(Analytics.OpenThemes)
                 val intent = Intent(this, ThemeActivity::class.java)
                 startActivity(intent)
             }
