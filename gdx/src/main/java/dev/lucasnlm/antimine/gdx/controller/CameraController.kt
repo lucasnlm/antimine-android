@@ -25,7 +25,7 @@ class CameraController(
             val start = 0.25f * screenWidth - padding.start * invZoom
             val end = minefieldSize.width - 0.25f * screenWidth + padding.end * invZoom
             val top = minefieldSize.height + padding.top * invZoom
-            val bottom =  padding.bottom * invZoom - renderSettings.navigationBarHeight
+            val bottom = padding.bottom * invZoom - renderSettings.navigationBarHeight
 
             if ((newX < start && velocity.x < 0.0) || (newX > end && velocity.x > 0.0)) {
                 velocity.x = 0.0f

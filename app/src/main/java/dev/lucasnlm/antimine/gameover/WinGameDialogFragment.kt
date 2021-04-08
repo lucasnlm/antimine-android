@@ -11,7 +11,6 @@ import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.Window
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
