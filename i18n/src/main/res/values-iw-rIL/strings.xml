@@ -112,4 +112,7 @@
     <string name="switch_control_desc">השמתשו בלחצן כדי להחליף בין סימון ופתיחה</string>
     <string name="app_description">צריך לנקות את הלוח הריבועי המכיל מוקשים נסתרים מבלי לפוצץ אף אחד מהם.</string>
     <string name="app_name">Antimine</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
+    <string name="close">Close</string>
+    <string name="open_tutorial">Open Tutorial</string>
 </resources>

@@ -101,6 +101,10 @@ sealed class Analytics(
 
     object OpenTutorial : Analytics("Open Tutorial")
 
+    data class KnowHowToPlay(
+        private val known: Boolean,
+    ) : Analytics("Know How To Play", mapOf("Known" to known.toString()))
+
     object OpenCustom : Analytics("Open Custom")
 
     object OpenAchievements : Analytics("Open Achievements")

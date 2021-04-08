@@ -62,7 +62,7 @@ class GameController {
 
     fun hasMines() = field.firstOrNull { it.hasMine } != null
 
-    private fun getArea(id: Int) = field.first { it.id == id }
+    private fun getArea(id: Int) = field.firstOrNull { it.id == id }
 
     private fun plantMinesExcept(safeId: Int) {
         val solver = LimitedCheckNeighborsSolver()
@@ -142,30 +142,33 @@ class GameController {
     }
 
     fun singleClick(index: Int) = flow {
-        val target = getArea(index)
-        val action = if (target.isCovered) gameControl.onCovered.singleClick else gameControl.onOpen.singleClick
-        action?.let {
-            handleAction(target, action)
-            emit(action)
+        getArea(index)?.let { target ->
+            val action = if (target.isCovered) gameControl.onCovered.singleClick else gameControl.onOpen.singleClick
+            action?.let {
+                handleAction(target, action)
+                emit(action)
+            }
         }
     }
 
     fun doubleClick(index: Int) = flow {
-        val target = getArea(index)
-        val action = if (target.isCovered) gameControl.onCovered.doubleClick else gameControl.onOpen.doubleClick
-        action?.let {
-            handleAction(target, action)
-            emit(action)
+        getArea(index)?.let { target ->
+            val action = if (target.isCovered) gameControl.onCovered.doubleClick else gameControl.onOpen.doubleClick
+            action?.let {
+                handleAction(target, action)
+                emit(action)
+            }
         }
     }
 
     fun longPress(index: Int) = flow {
-        val target = getArea(index)
-        if (target.isCovered || target.minesAround != 0) {
-            val action = if (target.isCovered) gameControl.onCovered.longPress else gameControl.onOpen.longPress
-            action?.let {
-                handleAction(target, action)
-                emit(action)
+        getArea(index)?.let { target ->
+            if (target.isCovered || target.minesAround != 0) {
+                val action = if (target.isCovered) gameControl.onCovered.longPress else gameControl.onOpen.longPress
+                action?.let {
+                    handleAction(target, action)
+                    emit(action)
+                }
             }
         }
     }

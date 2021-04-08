@@ -112,4 +112,7 @@
     <string name="switch_control_desc">Utiliser le bouton pour basculer entre Drapeau et Ouvrir</string>
     <string name="app_description">Vous devez vider un tableau rectangulaire contenant des mines cachées sans en détonner.</string>
     <string name="app_name">Anti-Mine</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Savez-vous comment jouer au démineur?</string>
+    <string name="close">Sulje</string>
+    <string name="open_tutorial">Ouvrir le tutoriel</string>
 </resources>

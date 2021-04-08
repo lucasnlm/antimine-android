@@ -6,6 +6,7 @@ import android.widget.SeekBar
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
+import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.view.ThemeAdapter
@@ -15,6 +16,7 @@ import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import dev.lucasnlm.external.IAdsManager
+import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.android.synthetic.main.activity_theme.*
@@ -32,9 +34,12 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), SeekBar.OnSeekB
     private val preferencesRepository: IPreferencesRepository by inject()
     private val billingManager: IBillingManager by inject()
     private val adsManager: IAdsManager by inject()
+    private val analyticsManager: IAnalyticsManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        analyticsManager.sentEvent(Analytics.OpenThemes)
 
         if (!preferencesRepository.isPremiumEnabled()) {
             adsManager.start(this)

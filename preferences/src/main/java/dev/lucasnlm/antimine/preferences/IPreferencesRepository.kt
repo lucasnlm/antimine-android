@@ -104,4 +104,7 @@ interface IPreferencesRepository {
 
     fun squareDivider(): Int
     fun setSquareDivider(value: Int?)
+
+    fun showTutorialDialog(): Boolean
+    fun setTutorialDialog(show: Boolean)
 }

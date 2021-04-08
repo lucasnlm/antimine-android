@@ -112,4 +112,7 @@
     <string name="switch_control_desc">Dùng nút để chuyển giữa Gắn cờ và Mở</string>
     <string name="app_description">Bạn phải mở tất cả các ô trên một bãi mìn mà không làm nổ cục mìn nào.</string>
     <string name="app_name">Dò mìn</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Bạn có biết chơi dò mìn không?</string>
+    <string name="close">Đóng</string>
+    <string name="open_tutorial">Mở Hướng dẫn</string>
 </resources>

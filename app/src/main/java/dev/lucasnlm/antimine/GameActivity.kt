@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.ConfigurationCompat
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
@@ -30,6 +31,7 @@ import dev.lucasnlm.antimine.common.level.view.GdxLevelFragment
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.splash.SplashActivity
+import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.external.IAdsManager
@@ -481,6 +483,34 @@ class GameActivity :
 
             if (preferencesRepository.getUseCount() > featureFlagManager.minUsageToReview) {
                 reviewWrapper.startInAppReview(this)
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            if (preferencesRepository.showTutorialDialog()) {
+                val firstLocale = ConfigurationCompat.getLocales(resources.configuration).get(0)
+                val lang = firstLocale.language
+
+                val message = getString(R.string.do_you_know_how_to_play)
+                val baseText = "Do you know how to play minesweeper?"
+
+                if (lang == "en" || (lang != "en" && message != baseText)) {
+                    MaterialAlertDialogBuilder(this@GameActivity).run {
+                        setTitle(R.string.tutorial)
+                        setMessage(R.string.do_you_know_how_to_play)
+                        setPositiveButton(R.string.open_tutorial) { _, _ ->
+                            analyticsManager.sentEvent(Analytics.KnowHowToPlay(false))
+                            preferencesRepository.setTutorialDialog(false)
+                            val intent = Intent(this@GameActivity, TutorialActivity::class.java)
+                            startActivity(intent)
+                        }
+                        setNegativeButton(R.string.close) { _, _ ->
+                            analyticsManager.sentEvent(Analytics.KnowHowToPlay(true))
+                            preferencesRepository.setTutorialDialog(false)
+                        }
+                        show()
+                    }
+                }
             }
         }
     }

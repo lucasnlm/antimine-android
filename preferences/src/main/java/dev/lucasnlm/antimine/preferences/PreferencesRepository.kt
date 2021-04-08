@@ -379,4 +379,12 @@ class PreferencesRepository(
             preferencesManager.putInt(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER, value.coerceIn(0, 50))
         }
     }
+
+    override fun showTutorialDialog(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_TUTORIAL_DIALOG, true)
+    }
+
+    override fun setTutorialDialog(show: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_TUTORIAL_DIALOG, show)
+    }
 }

@@ -4,7 +4,7 @@
     <string name="tutorial_basic">Reguły gry są proste, numer widoczny na polu reprezentuje liczbę min przylegających do tego pola, a Twoim zadaniem jest oznaczyć je wszystkie.</string>
     <string name="tutorial_text_1">Jeśli do pola z numerem przylega taka sama liczba pól, to na wszystkich tych polach są miny.</string>
     <string name="tutorial_text_2">Po oznaczeniu pierwszego pola, sprawdź numery i zastanów się nad kolejnym ruchem.</string>
-    <string name="tutorial_text_3">Jeśli kwadrat ma taką samą liczbę flag, wszystkie pozostałe kwadraty przylegające do niego nie są kopalniami (zielona strzałka).</string>
+    <string name="tutorial_text_3">Jeśli do pola przystaje określona liczba flag, wówczas wszystkie pozostałe przystające do niego pola nie mają min (zielona strzałka).</string>
     <string name="tutorial_text_4">Sprawdź liczby i kontynuuj odkrywanie pól.</string>
     <string name="games">Rozgrywki</string>
     <string name="tap_to_begin">Naciśnij, aby rozpocząć</string>
@@ -64,7 +64,7 @@
     <string name="single_click">Pojedyncze naciśnięcie</string>
     <string name="double_click">Podwójne naciśnięcie</string>
     <string name="long_press">Długie naciśnięcie</string>
-    <string name="control_description">%AKCJA i %REAKCJA</string>
+    <string name="control_description">%ACTION - %REACTION</string>
     <string name="touch_sensibility">Czułość dotyku</string>
     <string name="open_tile">Odkryj</string>
     <string name="flag_tile">Oznacz</string>
@@ -112,4 +112,7 @@
     <string name="switch_control_desc">Użyj przycisku do przełączania się pomiędzy oznaczaniem i odkrywaniem</string>
     <string name="app_description">Znajdź wszystkie ukryte miny znajdujące się na kwadratowej planszy unikając ich detonacji.</string>
     <string name="app_name">Antimine</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Czy chcesz przejść samouczek gry?</string>
+    <string name="close">Zamknij</string>
+    <string name="open_tutorial">Otwórz samouczek</string>
 </resources>

@@ -112,4 +112,7 @@
     <string name="switch_control_desc">버튼을 사용하여 플래그와 열기 간 전환</string>
     <string name="app_description">당신은 이 사각형 게임판에 숨겨진 지뢰를 하나도 터뜨리지 않고 게임을 끝내야 합니다.</string>
     <string name="app_name">Antimine</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
+    <string name="close">Close</string>
+    <string name="open_tutorial">Open Tutorial</string>
 </resources>

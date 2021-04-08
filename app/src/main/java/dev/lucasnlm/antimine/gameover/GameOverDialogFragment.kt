@@ -11,7 +11,6 @@ import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.Window
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -125,9 +124,9 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                             subtitle.text = state.message
 
                             emoji.apply {
-                                analyticsManager.sentEvent(Analytics.ClickEmoji)
                                 setImageResource(state.titleEmoji)
                                 setOnClickListener {
+                                    analyticsManager.sentEvent(Analytics.ClickEmoji)
                                     endGameViewModel.sendEvent(
                                         EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji)
                                     )
@@ -255,10 +254,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
             setView(view)
         }.create().apply {
             setCanceledOnTouchOutside(false)
-            window?.apply {
-                setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                requestFeature(Window.FEATURE_NO_TITLE)
-            }
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
     }
 

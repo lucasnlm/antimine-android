@@ -112,4 +112,7 @@
     <string name="switch_control_desc">Usa il bottone per passare da Bandiera ad Aperto</string>
     <string name="app_description">L\'obbiettivo del gioco è ripulire un campo rettangolare che contiene mine nascoste senza detonarne nessuna.</string>
     <string name="app_name">Antimine</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Conosci già le regole di Campo Minato?</string>
+    <string name="close">Chiudi</string>
+    <string name="open_tutorial">Apri Tutorial</string>
 </resources>
