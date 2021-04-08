@@ -112,4 +112,7 @@
     <string name="switch_control_desc">ध्वज और खुले के बीच स्विच करने के लिए बटन का उपयोग करें</string>
     <string name="app_description">लोकप्रिय लॉजिक पजल माइन्सवीपर. बोर्ड से माइंस साफ करता है वर्ग से संकेत को प्रयोग करते हुए जिसे आपने पहले से खोला है.</string>
     <string name="app_name">Antimine</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
+    <string name="close">Close</string>
+    <string name="open_tutorial">Open Tutorial</string>
 </resources>

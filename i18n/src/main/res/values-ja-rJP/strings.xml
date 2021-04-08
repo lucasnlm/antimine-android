@@ -112,4 +112,7 @@
     <string name="switch_control_desc">旗と開くを切り替えるにはボタンを使用します</string>
     <string name="app_description">地雷が隠された長方形から1つも爆発させることなくクリアしましょう。</string>
     <string name="app_name">Antimine</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
+    <string name="close">閉じる</string>
+    <string name="open_tutorial">チュートリアルを開く</string>
 </resources>

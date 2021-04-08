@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ca">
     <string name="tutorial">Tutorial</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_basic">Les regles del joc són simples, el número en un quadrat indica el número de mines que té adjacents, i heu de marcar totes les mines.</string>
+    <string name="tutorial_text_1">Si un número està tocant el mateix nombre de quadrats, llavors tots els quadrats són mines.</string>
+    <string name="tutorial_text_2">Després de posar la primera bandera, examineu els números i analitzeu el següent quadrat.</string>
+    <string name="tutorial_text_3">Si un quadrat té el mateix número de banderes, cap els altres quadrats romanents adjacents a ella són mines (la fletxa verda).</string>
+    <string name="tutorial_text_4">Observeu els números i continueu destapant quadrats.</string>
     <string name="games">Jocs</string>
     <string name="tap_to_begin">Toqueu per començar</string>
     <string name="previous_games">Partides prèvies</string>
@@ -112,4 +112,7 @@
     <string name="switch_control_desc">Useu el botó per canviar entre \'Marcar\' i \'Destapar\'</string>
     <string name="app_description">Has de netejar un tauler rectangular amb mines amagades sense detonar-ne cap.</string>
     <string name="app_name">Antimines</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Sabeu com es juga al buscamines?</string>
+    <string name="close">Tancar</string>
+    <string name="open_tutorial">Obriu el tutorial</string>
 </resources>

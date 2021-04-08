@@ -112,4 +112,7 @@
     <string name="switch_control_desc">使用按钮在标记和打开之间切换</string>
     <string name="app_description">你需要清除一个隐藏着地雷的矩形面板，不能使任何地雷爆炸。</string>
     <string name="app_name">扫雷 (踩地雷) - Antimine</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
+    <string name="close">Close</string>
+    <string name="open_tutorial">Open Tutorial</string>
 </resources>

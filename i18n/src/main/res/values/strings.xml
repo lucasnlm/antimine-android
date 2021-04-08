@@ -113,4 +113,7 @@
     <string name="app_description">You have to clear a rectangular board containing hidden mines without detonating any of them.</string>
     <string name="app_name">Antimine</string>
     <string name="crowdin" translatable="false">Crowdin</string>
+    <string name="do_you_know_how_to_play">Do you know how to play minesweeper?</string>
+    <string name="close">Close</string>
+    <string name="open_tutorial">Open Tutorial</string>
 </resources>

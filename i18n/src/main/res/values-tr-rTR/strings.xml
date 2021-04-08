@@ -112,4 +112,7 @@
     <string name="switch_control_desc">Bayrak ile Açık arasında geçiş yapmak için butonu kullanınız</string>
     <string name="app_description">Hiçbirini patlatmadan gizli mayın içeren dikdörtgen bir tahtayı temizlemelisiniz.</string>
     <string name="app_name">Anti-Mine</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Mayın tarama gemisi oynamayı biliyor musun?</string>
+    <string name="close">Kapat</string>
+    <string name="open_tutorial">Öğreticiyi aç</string>
 </resources>

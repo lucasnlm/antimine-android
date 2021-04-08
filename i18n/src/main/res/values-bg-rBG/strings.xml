@@ -112,4 +112,7 @@
     <string name="switch_control_desc">Използвай бутонът за да превключиш между Флаг и Отворен</string>
     <string name="app_description">Вие трябва да изчистите квадратна дъска която има скрити мини без да взривите нито една от тях.</string>
     <string name="app_name">Antimine</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Знаете ли как да играете Minesweeper?</string>
+    <string name="close">Затвори</string>
+    <string name="open_tutorial">Отвори урок</string>
 </resources>

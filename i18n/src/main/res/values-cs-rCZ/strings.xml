@@ -64,7 +64,7 @@
     <string name="single_click">Jedno klepnutí</string>
     <string name="double_click">Dvojité klepnutí</string>
     <string name="long_press">Dlouhý stisk</string>
-    <string name="control_description">%ACTION na %REACTION</string>
+    <string name="control_description">%ACTION pro %REACTION</string>
     <string name="touch_sensibility">Citlivost dotyků</string>
     <string name="open_tile">Otevřít</string>
     <string name="flag_tile">Vlajka</string>
@@ -112,4 +112,7 @@
     <string name="switch_control_desc">Pomocí tlačítka můžete přepínat mezi označením a otevřením</string>
     <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté miny, aniž by kterákoliv z nich vybuchla.</string>
     <string name="app_name">Anti-Mine</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Víte, jak hrát Minesweeper?</string>
+    <string name="close">Zavřít</string>
+    <string name="open_tutorial">Otevřít tutoriál</string>
 </resources>

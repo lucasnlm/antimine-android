@@ -112,4 +112,7 @@
     <string name="switch_control_desc">دوگمە بەکاربهێنە بۆ گۆڕین لە نێوان ئاڵا و کردنەوە</string>
     <string name="app_description">پێویستە تەختەیەکی لاکێشەیی پاک کە مینی شاراوەی تێدایە بەبێ ئەوەی هیچ کام لەوان بتەقێتەوە.</string>
     <string name="app_name">دژە مین</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">دەزانی چۆن یاری دژە مین بکەیت؟</string>
+    <string name="close">Close</string>
+    <string name="open_tutorial">Open Tutorial</string>
 </resources>

@@ -2,10 +2,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="id">
     <string name="tutorial">Tutorial</string>
     <string name="tutorial_basic">Peraturan permainannya mudah, angka pada kotak menunjukan jumlah ranjau yang berdekatan dengannya dan Anda harus menandai semua ranjau.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_text_1">Jika angka menyentuh jumlah kotak yang sama, maka semua kotak tersebut adalah ranjau.</string>
+    <string name="tutorial_text_2">Setelah menandai bendera pertama Anda, tinjau angka dan analisis kotak selanjutnya.</string>
+    <string name="tutorial_text_3">Jika kotak memiliki jumlah bendera yang sama, semua kotak yang lain yang berdekatan dengannya bukanlah ranjau(panah hijau).</string>
+    <string name="tutorial_text_4">Tinjau angka dan tetap membuka kotak.</string>
     <string name="games">Permainan</string>
     <string name="tap_to_begin">Ketuk untuk memulai</string>
     <string name="previous_games">Game Sebelumnya</string>
@@ -112,4 +112,7 @@
     <string name="switch_control_desc">Gunakan tombol untuk beralih antara Bendera dan Bukaan</string>
     <string name="app_description">Anda harus membersihkan papan persegi panjang yang berisi ranjau tersembunyi tanpa meledakkannya.</string>
     <string name="app_name">Antimine</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Apakah Anda tahu cara bermain penyapu ranjau?</string>
+    <string name="close">Tutup</string>
+    <string name="open_tutorial">Buka Tutorial</string>
 </resources>

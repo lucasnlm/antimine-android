@@ -112,4 +112,7 @@
     <string name="switch_control_desc">Use o botão para alternar entre a Bandeira e Abrir</string>
     <string name="app_description">Você deve limpar um campo contendo minas escondidas sem detonar nenhuma delas.</string>
     <string name="app_name">Antimine</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Você sabe jogar Campo Minado?</string>
+    <string name="close">Fechar</string>
+    <string name="open_tutorial">Abrir Tutorial</string>
 </resources>

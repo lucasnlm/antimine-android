@@ -112,4 +112,7 @@
     <string name="switch_control_desc">Usa el boton para cambiar entre Bandera y Abrir</string>
     <string name="app_description">Usted tiene que limpiar un tablero cuadrado que contiene minas escondidas sin detonarlas.</string>
     <string name="app_name">Anti-Mina</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">¿Sabes cómo se juega al buscaminas?</string>
+    <string name="close">Cerrar</string>
+    <string name="open_tutorial">Abrir Tutorial</string>
 </resources>
