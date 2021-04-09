@@ -14,7 +14,7 @@ object Themes {
             border = 0x424242,
             background = 0xFFFFFF,
             covered = 0x424242,
-            coveredOdd = 0x383838,
+            coveredOdd = 0x424242,
             uncovered = 0xd5d2cc,
             uncoveredOdd = 0xd5d2cc,
             minesAround1 = 0x527F8D,

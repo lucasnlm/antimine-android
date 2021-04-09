@@ -208,7 +208,7 @@ class PreferencesRepository(
     }
 
     override fun getDoubleClickTimeout(): Long {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT, 400).toLong()
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT, 250).toLong()
     }
 
     override fun setDoubleClickTimeout(value: Long) {
