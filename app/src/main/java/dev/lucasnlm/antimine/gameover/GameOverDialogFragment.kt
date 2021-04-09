@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -32,6 +33,7 @@ import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.level.view.NewGameFragment
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
+import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
@@ -230,6 +232,17 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                         }
                                     }
                                 }
+                            } else if (!preferencesRepository.isPremiumEnabled() &&
+                                instantAppManager.isEnabled(context)
+                            ) {
+                                removeAdsButton.apply {
+                                    visibility = View.VISIBLE
+                                    text = getString(R.string.themes)
+                                    setOnClickListener {
+                                        val intent = Intent(context, ThemeActivity::class.java)
+                                        startActivity(intent)
+                                    }
+                                }
                             }
                         }
                     }
@@ -281,6 +294,9 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                             activity,
                             onDismiss = {
                                 continueGame()
+                            },
+                            onError = {
+                                Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show()
                             }
                         )
                     }

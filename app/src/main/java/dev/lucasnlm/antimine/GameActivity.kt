@@ -372,7 +372,7 @@ class GameActivity :
 
         if (applicationContext.isPortrait()) {
             minesCount.setCompoundDrawablesWithIntrinsicBounds(
-                ContextCompat.getDrawable(this, usingTheme.assets.toolbarMine),
+                ContextCompat.getDrawable(this, R.drawable.mine),
                 null,
                 null,
                 null,
@@ -380,7 +380,7 @@ class GameActivity :
         } else {
             minesCount.setCompoundDrawablesWithIntrinsicBounds(
                 null,
-                ContextCompat.getDrawable(this, usingTheme.assets.toolbarMine),
+                ContextCompat.getDrawable(this, R.drawable.mine),
                 null,
                 null,
             )

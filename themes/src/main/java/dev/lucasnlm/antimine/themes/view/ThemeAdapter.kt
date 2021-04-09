@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.R
@@ -114,6 +115,9 @@ class ThemeAdapter(
                         activity,
                         onDismiss = {
                             themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+                        },
+                        onError = {
+                            Toast.makeText(activity.applicationContext, R.string.no_network, Toast.LENGTH_SHORT).show()
                         }
                     )
                 }

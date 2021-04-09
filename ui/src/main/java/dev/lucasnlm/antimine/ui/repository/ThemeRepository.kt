@@ -6,7 +6,6 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.R
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette
-import dev.lucasnlm.antimine.ui.model.Assets
 
 interface IThemeRepository {
     fun getCustomTheme(): AppTheme?
@@ -46,27 +45,13 @@ class ThemeRepository(
             id = 0L,
             theme = R.style.AppTheme,
             palette = fromDefaultPalette(context),
-            assets = fromDefaultAssets(),
             isPaid = false,
         )
     }
 
-    private fun fromDefaultAssets() =
-        Assets(
-            wrongFlag = R.drawable.red_flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed
-        )
-
     private fun fromDefaultPalette(context: Context) =
         AreaPalette(
             accent = ContextCompat.getColor(context, R.color.accent),
-            border = ContextCompat.getColor(context, R.color.view_cover),
             background = ContextCompat.getColor(context, R.color.background),
             covered = ContextCompat.getColor(context, R.color.view_cover),
             coveredOdd = ContextCompat.getColor(context, R.color.view_cover),

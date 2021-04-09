@@ -123,7 +123,6 @@ class AdMobAdsManager(
     ) {
         interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
-                // Dismiss
                 loadInterstitialAd()
                 onDismiss.invoke()
             }
@@ -134,11 +133,7 @@ class AdMobAdsManager(
                         "Fail to show InterstitialAd \nCode:${it.code} \nMessage: ${it.message} \nCause: ${it.cause}"
                     )
                 }
-                if (onError != null) {
-                    onError.invoke()
-                } else {
-                    onDismiss.invoke()
-                }
+                (onError ?: onDismiss).invoke()
             }
 
             override fun onAdShowedFullScreenContent() {
@@ -146,7 +141,11 @@ class AdMobAdsManager(
             }
         }
 
-        interstitialAd?.show(activity)
+        if (interstitialAd == null) {
+            (onError ?: onDismiss).invoke()
+        } else {
+            interstitialAd?.show(activity)
+        }
     }
 
     override fun createBannerAd(context: Context): View? {

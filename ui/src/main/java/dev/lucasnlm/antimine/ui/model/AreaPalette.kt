@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.ui.model
 import androidx.annotation.ColorInt
 
 data class AreaPalette(
-    @ColorInt val border: Int, // REMOVE
     @ColorInt val background: Int,
     @ColorInt val accent: Int,
     @ColorInt val covered: Int,
