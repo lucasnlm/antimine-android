@@ -40,7 +40,6 @@ class ThemeViewModelTest {
         theme = R.style.CustomLightTheme,
         palette = AreaPalette(
             accent = 0xD32F2F,
-            border = 0x424242,
             background = 0xFFFFFF,
             covered = 0x424242,
             coveredOdd = 0x424242,
@@ -64,7 +63,6 @@ class ThemeViewModelTest {
         theme = R.style.CustomDarkTheme,
         palette = AreaPalette(
             accent = 0xFFFFFF,
-            border = 0x171717,
             background = 0x212121,
             covered = 0x171717,
             coveredOdd = 0x171717,
@@ -88,7 +86,6 @@ class ThemeViewModelTest {
         theme = R.style.CustomGardenTheme,
         palette = AreaPalette(
             accent = 0x689f38,
-            border = 0x171717,
             background = 0xefebe9,
             covered = 0x689f38,
             coveredOdd = 0x558b2f,

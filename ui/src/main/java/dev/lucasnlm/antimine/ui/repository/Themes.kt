@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.ui.repository
 import dev.lucasnlm.antimine.ui.R
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette
-import dev.lucasnlm.antimine.ui.model.Assets
 
 object Themes {
     fun lightTheme() = AppTheme(
@@ -11,7 +10,6 @@ object Themes {
         theme = R.style.CustomLightTheme,
         palette = AreaPalette(
             accent = 0xD32F2F,
-            border = 0x424242,
             background = 0xFFFFFF,
             covered = 0x424242,
             coveredOdd = 0x424242,
@@ -28,16 +26,6 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.red_flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        ),
         isPaid = false,
     )
 
@@ -46,7 +34,6 @@ object Themes {
         theme = R.style.CustomDarkTheme,
         palette = AreaPalette(
             accent = 0xFFFFFF,
-            border = 0x171717,
             background = 0x212121,
             covered = 0xd5d2cc,
             coveredOdd = 0xd5d2cc,
@@ -63,16 +50,6 @@ object Themes {
             highlight = 0xFFFFFF,
             focus = 0xFFFFFF,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_white,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        ),
         isPaid = false,
     )
 
@@ -81,7 +58,6 @@ object Themes {
         theme = R.style.CustomAmoledTheme,
         palette = AreaPalette(
             accent = 0xFFFFFF,
-            border = 0xFFFFFF,
             background = 0x000000,
             covered = 0x212121,
             coveredOdd = 0x212121,
@@ -98,16 +74,6 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine_low,
-            mineExploded = R.drawable.mine_low,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        ),
         isPaid = false,
     )
 
@@ -116,7 +82,6 @@ object Themes {
         theme = R.style.CustomAmoledTheme,
         palette = AreaPalette(
             accent = 0xFFFFFF,
-            border = 0xFFFFFF,
             background = 0x000000,
             covered = 0xEEEEEE,
             coveredOdd = 0xDDDDDD,
@@ -133,16 +98,6 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine_low,
-            mineExploded = R.drawable.mine_low,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        ),
         isPaid = false,
     )
 
@@ -151,7 +106,6 @@ object Themes {
         theme = R.style.CustomLightTheme,
         palette = AreaPalette(
             accent = 0x37474f,
-            border = 0x424242,
             background = 0xFFFFFF,
             covered = 0x4a4a4a,
             coveredOdd = 0x383838,
@@ -168,16 +122,6 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.red_flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun goldenTheme() = AppTheme(
@@ -185,7 +129,6 @@ object Themes {
         theme = R.style.CustomLightTheme,
         palette = AreaPalette(
             accent = 0x37474f,
-            border = 0x424242,
             background = 0xFFFFFF,
             covered = 0xf9a825,
             coveredOdd = 0xf9a825,
@@ -202,16 +145,6 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.red_flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun blueTheme() = AppTheme(
@@ -219,7 +152,6 @@ object Themes {
         theme = R.style.CustomMarineTheme,
         palette = AreaPalette(
             accent = 0x37474f,
-            border = 0x424242,
             background = 0xFFFFFF,
             covered = 0x0277bd,
             coveredOdd = 0x0277bd,
@@ -236,16 +168,6 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.red_flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun gardenTheme() = AppTheme(
@@ -253,7 +175,6 @@ object Themes {
         theme = R.style.CustomGardenTheme,
         palette = AreaPalette(
             accent = 0x689f38,
-            border = 0x171717,
             background = 0xefebe9,
             covered = 0x689f38,
             coveredOdd = 0x558b2f,
@@ -270,16 +191,6 @@ object Themes {
             highlight = 0x689f38,
             focus = 0xFFFFFF,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_white,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        ),
     )
 
     private fun marineTheme() = AppTheme(
@@ -287,7 +198,6 @@ object Themes {
         theme = R.style.CustomMarineTheme,
         palette = AreaPalette(
             accent = 0x0277bd,
-            border = 0x424242,
             background = 0xFFFFFF,
             covered = 0x0277bd,
             coveredOdd = 0x006aa8,
@@ -304,16 +214,6 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.red_flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun blueGreyTheme() = AppTheme(
@@ -321,7 +221,6 @@ object Themes {
         theme = R.style.CustomBlueGreyTheme,
         palette = AreaPalette(
             accent = 0x37474f,
-            border = 0x424242,
             background = 0xFFFFFF,
             covered = 0x37474f,
             coveredOdd = 0x37474f,
@@ -338,16 +237,6 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.red_flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun darkBlueGreyTheme() = AppTheme(
@@ -355,7 +244,6 @@ object Themes {
         theme = R.style.CustomBlueGreyTheme,
         palette = AreaPalette(
             accent = 0x37474f,
-            border = 0x424242,
             background = 0x677075,
             covered = 0x071821,
             coveredOdd = 0x071821,
@@ -372,16 +260,6 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.red_flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun darkOrangeTheme() = AppTheme(
@@ -389,7 +267,6 @@ object Themes {
         theme = R.style.CustomOrangeTheme,
         palette = AreaPalette(
             accent = 0xfb8c00,
-            border = 0x000000,
             background = 0x212121,
             covered = 0xfb8c00,
             coveredOdd = 0xfb8c00,
@@ -406,16 +283,6 @@ object Themes {
             highlight = 0xfb8c00,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag_black,
-            flag = R.drawable.flag_black,
-            questionMark = R.drawable.question_black,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine_white,
-            mineExploded = R.drawable.mine_white,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_black,
-        )
     )
 
     fun darkLimeTheme() = AppTheme(
@@ -423,7 +290,6 @@ object Themes {
         theme = R.style.CustomLimeTheme,
         palette = AreaPalette(
             accent = 0xcddc39,
-            border = 0x000000,
             background = 0x212121,
             covered = 0xcddc39,
             coveredOdd = 0xcddc39,
@@ -440,16 +306,6 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag_black,
-            flag = R.drawable.flag_black,
-            questionMark = R.drawable.question_black,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine_white,
-            mineExploded = R.drawable.mine_white,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_black,
-        )
     )
 
     private fun darkYellowTheme() = AppTheme(
@@ -457,7 +313,6 @@ object Themes {
         theme = R.style.BananaTheme,
         palette = AreaPalette(
             accent = 0xffeb3b,
-            border = 0x000000,
             background = 0x212121,
             covered = 0xffeb3b,
             coveredOdd = 0xe6d335,
@@ -474,16 +329,6 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag_black,
-            flag = R.drawable.flag_black,
-            questionMark = R.drawable.question_black,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine_white,
-            mineExploded = R.drawable.mine_white,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_black,
-        )
     )
 
     private fun pinkTheme() = AppTheme(
@@ -491,7 +336,6 @@ object Themes {
         theme = R.style.CustomPinkTheme,
         palette = AreaPalette(
             accent = 0xf48fb1,
-            border = 0x000000,
             background = 0xFFFFFF,
             covered = 0xf48fb1,
             coveredOdd = 0xf48fb1,
@@ -508,16 +352,6 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine_pink,
-            mineExploded = R.drawable.mine_pink_exploded,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun darkPinkTheme() = AppTheme(
@@ -525,7 +359,6 @@ object Themes {
         theme = R.style.CustomDarkPinkTheme,
         palette = AreaPalette(
             accent = 0xf48fb1,
-            border = 0x000000,
             background = 0x212121,
             covered = 0xf48fb1,
             coveredOdd = 0xf48fb1,
@@ -542,16 +375,6 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine_pink,
-            mineExploded = R.drawable.mine_pink_exploded,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun purpleTheme() = AppTheme(
@@ -559,7 +382,6 @@ object Themes {
         theme = R.style.CustomPurpleTheme,
         palette = AreaPalette(
             accent = 0x6a1b9a,
-            border = 0x000000,
             background = 0xFFFFFF,
             covered = 0x6a1b9a,
             coveredOdd = 0x6a1b9a,
@@ -576,16 +398,6 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine_pink,
-            mineExploded = R.drawable.mine_pink_exploded,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun darkPurpleTheme() = AppTheme(
@@ -593,7 +405,6 @@ object Themes {
         theme = R.style.DarkCustomPurpleTheme,
         palette = AreaPalette(
             accent = 0x6a1b9a,
-            border = 0x000000,
             background = 0x212121,
             covered = 0x6a1b9a,
             coveredOdd = 0x6a1b9a,
@@ -610,16 +421,6 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine_pink,
-            mineExploded = R.drawable.mine_pink_exploded,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun brownTheme() = AppTheme(
@@ -627,7 +428,6 @@ object Themes {
         theme = R.style.CustomLightTheme,
         palette = AreaPalette(
             accent = 0x3e2723,
-            border = 0x000000,
             background = 0xFFFFFF,
             covered = 0x3e2723,
             coveredOdd = 0x4e342e,
@@ -644,16 +444,6 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_pink_exploded,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun redTheme() = AppTheme(
@@ -661,7 +451,6 @@ object Themes {
         theme = R.style.CustomLightTheme,
         palette = AreaPalette(
             accent = 0xc62828,
-            border = 0x000000,
             background = 0xFFFFFF,
             covered = 0xc62828,
             coveredOdd = 0xb71c1c,
@@ -678,16 +467,6 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_pink_exploded,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun wineTheme() = AppTheme(
@@ -695,7 +474,6 @@ object Themes {
         theme = R.style.CustomLightTheme,
         palette = AreaPalette(
             accent = 0x880e4f,
-            border = 0x000000,
             background = 0xFFFFFF,
             covered = 0x880e4f,
             coveredOdd = 0x750b42,
@@ -712,16 +490,6 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_pink_exploded,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun darkBlueTheme() = AppTheme(
@@ -729,7 +497,6 @@ object Themes {
         theme = R.style.CustomLightTheme,
         palette = AreaPalette(
             accent = 0x0d47a1,
-            border = 0x000000,
             background = 0xFFFFFF,
             covered = 0x0d47a1,
             coveredOdd = 0x0a3984,
@@ -746,16 +513,6 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_pink_exploded,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_white,
-        )
     )
 
     private fun darkWhiteTheme() = AppTheme(
@@ -763,7 +520,6 @@ object Themes {
         theme = R.style.CustomDarkTheme,
         palette = AreaPalette(
             accent = 0xedf1f2,
-            border = 0x000000,
             background = 0x212121,
             covered = 0xedf1f2,
             coveredOdd = 0xdcdee0,
@@ -780,16 +536,6 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag_black,
-            flag = R.drawable.flag_black,
-            questionMark = R.drawable.question_black,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine_white,
-            mineExploded = R.drawable.mine_white,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_black,
-        )
     )
 
     private fun whiteYellowTheme() = AppTheme(
@@ -797,7 +543,6 @@ object Themes {
         theme = R.style.BananaThemeLight,
         palette = AreaPalette(
             accent = 0xfbc02d,
-            border = 0x000000,
             background = 0xe0e0e0,
             covered = 0xfbc02d,
             coveredOdd = 0xfbc02d,
@@ -814,24 +559,13 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.red_flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_black,
-        )
     )
 
-    fun whiteOrangeTheme() = AppTheme(
+    private fun whiteOrangeTheme() = AppTheme(
         id = 20L,
         theme = R.style.BananaThemeLight,
         palette = AreaPalette(
             accent = 0xf57c00,
-            border = 0x000000,
             background = 0xe0e0e0,
             covered = 0xf57c00,
             coveredOdd = 0xf57c00,
@@ -848,16 +582,6 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.red_flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_black,
-        )
     )
 
     private fun whiteDarkYellowTheme() = AppTheme(
@@ -865,7 +589,6 @@ object Themes {
         theme = R.style.BananaThemeLight,
         palette = AreaPalette(
             accent = 0x827717,
-            border = 0x000000,
             background = 0xe0e0e0,
             covered = 0x827717,
             coveredOdd = 0x827717,
@@ -882,16 +605,6 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.red_flag,
-            flag = R.drawable.flag_black,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed_black,
-        )
     )
 
     fun getAllCustom() = listOf(
