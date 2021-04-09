@@ -32,6 +32,7 @@ import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.level.view.NewGameFragment
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
+import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
@@ -228,6 +229,17 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                                 billingManager.charge(activity)
                                             }
                                         }
+                                    }
+                                }
+                            } else if (!preferencesRepository.isPremiumEnabled() &&
+                                instantAppManager.isEnabled(context)
+                            ) {
+                                removeAdsButton.apply {
+                                    visibility = View.VISIBLE
+                                    text = getString(R.string.themes)
+                                    setOnClickListener {
+                                        val intent = Intent(context, ThemeActivity::class.java)
+                                        startActivity(intent)
                                     }
                                 }
                             }

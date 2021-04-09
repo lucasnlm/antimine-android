@@ -107,7 +107,7 @@ class EndGameDialogViewModel(
                         gameResult = event.gameResult,
                         showContinueButton = event.showContinueButton,
                         received = event.received,
-                        showTutorial = event.turn in 0..4,
+                        showTutorial = event.turn < 2,
                     )
                 }
                 GameResult.Completed -> {
