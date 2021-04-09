@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -293,6 +294,9 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                             activity,
                             onDismiss = {
                                 continueGame()
+                            },
+                            onError = {
+                                Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show()
                             }
                         )
                     }
