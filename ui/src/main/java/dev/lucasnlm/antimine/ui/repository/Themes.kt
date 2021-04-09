@@ -41,15 +41,15 @@ object Themes {
         isPaid = false,
     )
 
-    fun darkTheme() = AppTheme(
+    private fun darkTheme() = AppTheme(
         id = 3L,
         theme = R.style.CustomDarkTheme,
         palette = AreaPalette(
             accent = 0xFFFFFF,
             border = 0x171717,
             background = 0x212121,
-            covered = 0x171717,
-            coveredOdd = 0x171717,
+            covered = 0xd5d2cc,
+            coveredOdd = 0xd5d2cc,
             uncovered = 0x424242,
             uncoveredOdd = 0x424242,
             minesAround1 = 0xd5d2cc,
