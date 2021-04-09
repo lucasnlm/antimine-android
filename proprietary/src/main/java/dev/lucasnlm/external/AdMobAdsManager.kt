@@ -133,11 +133,7 @@ class AdMobAdsManager(
                         "Fail to show InterstitialAd \nCode:${it.code} \nMessage: ${it.message} \nCause: ${it.cause}"
                     )
                 }
-                if (onError != null) {
-                    onError.invoke()
-                } else {
-                    onDismiss.invoke()
-                }
+                (onError ?: onDismiss).invoke()
             }
 
             override fun onAdShowedFullScreenContent() {
@@ -146,11 +142,7 @@ class AdMobAdsManager(
         }
 
         if (interstitialAd == null) {
-            if (onError == null) {
-                onDismiss.invoke()
-            } else {
-                onError.invoke()
-            }
+            (onError ?: onDismiss).invoke()
         } else {
             interstitialAd?.show(activity)
         }
