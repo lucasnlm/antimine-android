@@ -6,10 +6,8 @@ import dev.lucasnlm.antimine.themes.viewmodel.ThemeState
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette
-import dev.lucasnlm.antimine.ui.model.Assets
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IBillingManager
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -59,16 +57,6 @@ class ThemeViewModelTest {
             highlight = 0x212121,
             focus = 0xD32F2F
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.red_flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_red,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed,
-        )
     )
 
     private val darkTheme = AppTheme(
@@ -93,16 +81,6 @@ class ThemeViewModelTest {
             highlight = 0xFFFFFF,
             focus = 0xFFFFFF
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_white,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed,
-        )
     )
 
     private val gardenTheme = AppTheme(
@@ -127,16 +105,6 @@ class ThemeViewModelTest {
             highlight = 0xFFFFFF,
             focus = 0xFFFFFF
         ),
-        assets = Assets(
-            wrongFlag = R.drawable.flag,
-            flag = R.drawable.flag,
-            questionMark = R.drawable.question,
-            toolbarMine = R.drawable.mine_low,
-            mine = R.drawable.mine,
-            mineExploded = R.drawable.mine_exploded_white,
-            mineLow = R.drawable.mine_low,
-            revealed = R.drawable.mine_revealed,
-        )
     )
 
     private val allThemes = listOf(
@@ -152,14 +120,16 @@ class ThemeViewModelTest {
             every { getTheme() } returns gardenTheme
         }
 
-        val billingManager = mockk<IBillingManager>()
-
-        val preferencesRepository = mockk<IPreferencesRepository> { }
+        val preferencesRepository = mockk<IPreferencesRepository> {
+            every { squareSize() } returns 55
+            every { squareDivider() } returns 0
+            every { squareRadius() } returns 3
+        }
 
         val analyticsManager = mockk<IAnalyticsManager> { }
 
-        val viewModel = ThemeViewModel(themeRepository, billingManager, preferencesRepository, analyticsManager)
-        assertEquals(ThemeState(gardenTheme, allThemes), viewModel.singleState())
+        val viewModel = ThemeViewModel(themeRepository, preferencesRepository, analyticsManager)
+        assertEquals(ThemeState(gardenTheme, 3, 15, 0, allThemes), viewModel.singleState())
     }
 
     @Test
@@ -170,23 +140,22 @@ class ThemeViewModelTest {
             every { setTheme(any()) } returns Unit
         }
 
-        val billingManager = mockk<IBillingManager> {
-            every { isEnabled() } returns false
-        }
-
         val preferencesRepository = mockk<IPreferencesRepository> {
             every { isPremiumEnabled() } returns true
+            every { squareSize() } returns 55
+            every { squareDivider() } returns 0
+            every { squareRadius() } returns 3
         }
 
         val analyticsManager = mockk<IAnalyticsManager> {
             every { sentEvent(any()) } returns Unit
         }
 
-        val state = ThemeViewModel(themeRepository, billingManager, preferencesRepository, analyticsManager).run {
+        val state = ThemeViewModel(themeRepository, preferencesRepository, analyticsManager).run {
             sendEvent(ThemeEvent.ChangeTheme(darkTheme))
             singleState()
         }
-        assertEquals(ThemeState(darkTheme, allThemes), state)
+        assertEquals(ThemeState(darkTheme, 3, 15, 0, allThemes), state)
 
         verify { themeRepository.setTheme(darkTheme.id) }
     }
@@ -199,20 +168,22 @@ class ThemeViewModelTest {
             every { setTheme(any()) } returns Unit
         }
 
-        val billingManager = mockk<IBillingManager>()
-
         val preferencesRepository = mockk<IPreferencesRepository> {
             every { isPremiumEnabled() } returns false
+            every { squareSize() } returns 55
+            every { squareDivider() } returns 0
+            every { squareRadius() } returns 3
+            every { addUnlockedTheme(2) } returns Unit
         }
 
         val analyticsManager = mockk<IAnalyticsManager> {
             every { sentEvent(any()) } returns Unit
         }
 
-        val state = ThemeViewModel(themeRepository, billingManager, preferencesRepository, analyticsManager).run {
-            sendEvent(ThemeEvent.ChangeTheme(darkTheme))
+        val state = ThemeViewModel(themeRepository, preferencesRepository, analyticsManager).run {
+            sendEvent(ThemeEvent.ChangeTheme(gardenTheme))
             singleState()
         }
-        assertEquals(ThemeState(gardenTheme, allThemes), state)
+        assertEquals(ThemeState(gardenTheme, 3, 15, 0, allThemes), state)
     }
 }
