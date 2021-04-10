@@ -68,7 +68,7 @@ class AdMobAdsManager(
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     failErrorCause = adError.message
-                    rewardedAd = null
+                    interstitialAd = null
 
                     if (interstitialAdRetry < 3) {
                         loadInterstitialAd()
