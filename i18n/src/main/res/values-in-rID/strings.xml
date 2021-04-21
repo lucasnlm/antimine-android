@@ -4,7 +4,7 @@
     <string name="tutorial_basic">Peraturan permainannya mudah, angka pada kotak menunjukan jumlah ranjau yang berdekatan dengannya dan Anda harus menandai semua ranjau.</string>
     <string name="tutorial_text_1">Jika angka menyentuh jumlah kotak yang sama, maka semua kotak tersebut adalah ranjau.</string>
     <string name="tutorial_text_2">Setelah menandai bendera pertama Anda, tinjau angka dan analisis kotak selanjutnya.</string>
-    <string name="tutorial_text_3">Jika kotak memiliki jumlah bendera yang sama, semua kotak yang lain yang berdekatan dengannya bukanlah ranjau(panah hijau).</string>
+    <string name="tutorial_text_3">Jika kotak memiliki angka yang sama dari bendera, maka kotak yang tersisa bukanlah ranjau (Panah Hijau).</string>
     <string name="tutorial_text_4">Tinjau angka dan tetap membuka kotak.</string>
     <string name="games">Permainan</string>
     <string name="tap_to_begin">Ketuk untuk memulai</string>
@@ -46,7 +46,7 @@
     <string name="you_finished">Selesai!</string>
     <string name="defeats">Kalah</string>
     <string name="generic_game_over">Semoga beruntung di permainan berikutnya.</string>
-    <string name="generic_win">Anda menemukan %1$d tambang dalam %2$d detik.</string>
+    <string name="generic_win">Anda menemukan %1$d ranjau dalam %2$d detik.</string>
     <string name="fail_to_share">Gagal berbagi</string>
     <string name="version_s">Versi %1$s</string>
     <string name="sound_effects">Efek suara</string>
@@ -65,7 +65,7 @@
     <string name="double_click">Sentuh dua kali</string>
     <string name="long_press">Tekan yang panjang</string>
     <string name="control_description">%ACTION - %REACTION</string>
-    <string name="touch_sensibility">Sensibilitas Sentuhan</string>
+    <string name="touch_sensibility">Sensitifitas Sentuh</string>
     <string name="open_tile">Buka</string>
     <string name="flag_tile">Bendera</string>
     <string name="retry">Ulangi</string>
@@ -115,4 +115,5 @@
     <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Apakah Anda tahu cara bermain penyapu ranjau?</string>
     <string name="close">Tutup</string>
     <string name="open_tutorial">Buka Tutorial</string>
+    <string name="master" comment="new level difficulty">Master</string>
 </resources>
