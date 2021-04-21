@@ -74,7 +74,6 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
-        isPaid = false,
     )
 
     private fun amoledTheme2() = AppTheme(
@@ -98,7 +97,6 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
-        isPaid = false,
     )
 
     private fun standardChessTheme() = AppTheme(
@@ -612,6 +610,12 @@ object Themes {
         darkTheme(),
         amoledTheme(),
         amoledTheme2(),
+        darkOrangeTheme(),
+        darkLimeTheme(),
+        darkYellowTheme(),
+        darkPinkTheme(),
+        darkPurpleTheme(),
+        darkWhiteTheme(),
         standardChessTheme(),
         goldenTheme(),
         blueTheme(),
@@ -619,18 +623,12 @@ object Themes {
         marineTheme(),
         blueGreyTheme(),
         darkBlueGreyTheme(),
-        darkOrangeTheme(),
-        darkLimeTheme(),
-        darkYellowTheme(),
         pinkTheme(),
-        darkPinkTheme(),
         purpleTheme(),
-        darkPurpleTheme(),
         brownTheme(),
         redTheme(),
         wineTheme(),
         darkBlueTheme(),
-        darkWhiteTheme(),
         whiteYellowTheme(),
         whiteOrangeTheme(),
         whiteDarkYellowTheme(),
