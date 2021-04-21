@@ -11,6 +11,7 @@ class DifficultyConverter {
             INT_BEGINNER -> Difficulty.Beginner
             INT_INTERMEDIATE -> Difficulty.Intermediate
             INT_EXPERT -> Difficulty.Expert
+            INT_MASTER -> Difficulty.Master
             INT_CUSTOM -> Difficulty.Custom
             else -> throw IllegalArgumentException("Could not recognize Difficulty")
         }
@@ -24,5 +25,6 @@ class DifficultyConverter {
         const val INT_INTERMEDIATE = 2
         const val INT_EXPERT = 3
         const val INT_CUSTOM = 4
+        const val INT_MASTER = 5
     }
 }

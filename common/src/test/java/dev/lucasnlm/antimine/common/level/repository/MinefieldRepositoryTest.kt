@@ -19,6 +19,7 @@ class MinefieldRepositoryTest {
     private val beginnerMinefield = Minefield(9, 9, 10)
     private val intermediateMinefield = Minefield(16, 16, 40)
     private val expertMinefield = Minefield(24, 24, 99)
+    private val masterMinefield = Minefield(50, 50, 200)
 
     private val mockContext = mock<Context>().apply {
         whenever(isPortrait()) doReturn true
@@ -152,6 +153,20 @@ class MinefieldRepositoryTest {
             preferencesRepository
         )
         assertEquals(expertMinefield, minefield)
+    }
+
+    @Test
+    fun testMasterMinefieldMinefield() {
+        val minefieldRepository = MinefieldRepository(mockContext)
+        val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true)
+        val dimensionRepository = mockk<IDimensionRepository>(relaxed = true)
+
+        val minefield = minefieldRepository.fromDifficulty(
+            Difficulty.Master,
+            dimensionRepository,
+            preferencesRepository
+        )
+        assertEquals(masterMinefield, minefield)
     }
 
     @Test

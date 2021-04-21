@@ -635,6 +635,9 @@ open class GameViewModel(
                 Difficulty.Expert -> {
                     playGamesManager.submitLeaderboard(Leaderboard.ExpertBestTime, clock.time())
                 }
+                Difficulty.Master -> {
+                    playGamesManager.submitLeaderboard(Leaderboard.MasterBestTime, clock.time())
+                }
                 else -> {
                 }
             }

@@ -141,6 +141,18 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
         )
 
+        startMaster.setRadius(5f)
+        startMaster.bind(
+            theme = usingTheme,
+            text = getString(R.string.master),
+            extra = getDifficultyExtra(Difficulty.Master),
+            onAction = {
+                viewModel.sendEvent(
+                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Master)
+                )
+            }
+        )
+
         startCustom.setRadius(5f)
         startCustom.bind(
             theme = usingTheme,
