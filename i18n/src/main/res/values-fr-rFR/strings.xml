@@ -50,11 +50,11 @@
     <string name="fail_to_share">Échec du partage</string>
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Effets sonores</string>
-    <string name="are_you_sure">Vraiment ?</string>
+    <string name="are_you_sure">Êtes-vous sûr ?</string>
     <string name="enable_automatic_flags">Activer le placement automatique de drapeaux</string>
     <string name="open_areas">Zones ouvertes</string>
     <string name="total_time">Temps de jeu total</string>
-    <string name="average_time">Temps moyen</string>
+    <string name="average_time">Temps de jeu moyen</string>
     <string name="shortest_time">Temps le plus court</string>
     <string name="performance">Performance</string>
     <string name="ok">OK</string>
@@ -64,7 +64,7 @@
     <string name="single_click">Appui court</string>
     <string name="double_click">Appui Double</string>
     <string name="long_press">Appui Long</string>
-    <string name="control_description">%ACTION pour %REACTION</string>
+    <string name="control_description">%ACTION vers %REACTION</string>
     <string name="touch_sensibility">Sensibilité tactile</string>
     <string name="open_tile">Ouvrir</string>
     <string name="flag_tile">Drapeau</string>
@@ -112,7 +112,8 @@
     <string name="switch_control_desc">Utiliser le bouton pour basculer entre Drapeau et Ouvrir</string>
     <string name="app_description">Vous devez vider un tableau rectangulaire contenant des mines cachées sans en détonner.</string>
     <string name="app_name">Anti-Mine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Savez-vous comment jouer au démineur?</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Savez-vous comment jouer au Démineur ?</string>
     <string name="close">Sulje</string>
     <string name="open_tutorial">Ouvrir le tutoriel</string>
+    <string name="master" comment="new level difficulty">Maître</string>
 </resources>

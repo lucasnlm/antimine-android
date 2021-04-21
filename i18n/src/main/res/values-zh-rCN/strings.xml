@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh-rCN">
     <string name="tutorial">教程</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_basic">游戏规则很简单：方块上的数字是周围地雷的数量；你必须标出所有地雷。</string>
+    <string name="tutorial_text_1">如果一个数字和它周围的方块数量相等，那么这些方块都是地雷。</string>
+    <string name="tutorial_text_2">在放置了第一个旗标以后，回看数字并分析下一个方块。</string>
+    <string name="tutorial_text_3">如果一个方块周围有相同数量的旗标，那么周围其余方块就不是地雷（绿色箭头）。</string>
+    <string name="tutorial_text_4">回看数字并不断打开方块。</string>
     <string name="games">游戏</string>
     <string name="tap_to_begin">点击开始</string>
     <string name="previous_games">之前的游戏</string>
@@ -35,8 +35,8 @@
     <string name="settings_gameplay">游戏性</string>
     <string name="settings_accessibility">无障碍</string>
     <string name="size">大小</string>
-    <string name="rounded_square">圆角方块</string>
-    <string name="space_between_squares">正方形之間的空間</string>
+    <string name="rounded_square">方块圆角</string>
+    <string name="space_between_squares">方块之间的空隙</string>
     <string name="system">系统</string>
     <string name="rating">反馈</string>
     <string name="sign_in_failed">登录失败。请检查你的网络连接，然后重试。</string>
@@ -63,9 +63,9 @@
     <string name="control">控制</string>
     <string name="single_click">单击</string>
     <string name="double_click">双击</string>
-    <string name="long_press">触摸维持</string>
-    <string name="control_description">%ACTION到%REACTION</string>
-    <string name="touch_sensibility">触摸屏灵敏度</string>
+    <string name="long_press">长按</string>
+    <string name="control_description">%ACTION 来 %REACTION</string>
+    <string name="touch_sensibility">触控灵敏度</string>
     <string name="open_tile">打开</string>
     <string name="flag_tile">标记</string>
     <string name="retry">重试</string>
@@ -112,7 +112,8 @@
     <string name="switch_control_desc">使用按钮在标记和打开之间切换</string>
     <string name="app_description">你需要清除一个隐藏着地雷的矩形面板，不能使任何地雷爆炸。</string>
     <string name="app_name">扫雷 (踩地雷) - Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
-    <string name="close">Close</string>
-    <string name="open_tutorial">Open Tutorial</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">你想阅读教程吗？</string>
+    <string name="close">关闭</string>
+    <string name="open_tutorial">打开教程</string>
+    <string name="master" comment="new level difficulty">大师</string>
 </resources>
