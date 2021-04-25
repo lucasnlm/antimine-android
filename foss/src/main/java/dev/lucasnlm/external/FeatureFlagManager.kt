@@ -15,6 +15,8 @@ class FeatureFlagManager : IFeatureFlagManager() {
     override val minUsageToReview: Int = Int.MAX_VALUE
     override val useInterstitialAd: Boolean = false
     override val isBannerAdEnabled: Boolean = false
+    override val isWeekDaySalesEnabled: Boolean = false
+    override val isHexBannerEnabled: Boolean = false
 
     override suspend fun refresh() {
         // No Feature Flags on FOSS
