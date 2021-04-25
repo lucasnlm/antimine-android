@@ -11,7 +11,7 @@ import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
-@Entity(tableName="new_save")
+@Entity(tableName = "new_save")
 data class Save(
     @PrimaryKey(autoGenerate = true)
     val uid: Int,

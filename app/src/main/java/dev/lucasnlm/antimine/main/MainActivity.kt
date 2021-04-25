@@ -217,7 +217,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                     bindRemoveAds()
 
                     billingManager.getPriceFlow().collect {
-                        bindRemoveAds(it)
+                        bindRemoveAds(it.price, it.offer)
                     }
                 }
             }
@@ -422,14 +422,15 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
     }
 
-    private fun bindRemoveAds(price: String? = null) {
+    private fun bindRemoveAds(price: String? = null, offerText: String? = null) {
         removeAds.apply {
             visibility = View.VISIBLE
             bind(
                 theme = usingTheme,
                 text = getString(R.string.remove_ad),
                 startIcon = R.drawable.remove_ads,
-                extra = price,
+                price = price,
+                offerText = offerText,
                 onAction = {
                     lifecycleScope.launch {
                         billingManager.charge(this@MainActivity)

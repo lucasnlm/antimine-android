@@ -219,11 +219,13 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                             ) {
                                 activity?.let { activity ->
                                     val label = context.getString(R.string.remove_ad)
-                                    val price = billingManager.getPrice()
+                                    val priceModel = billingManager.getPrice()
+                                    val price = priceModel?.price
                                     val unlockLabel = price?.let { "$label - $it" } ?: label
                                     removeAdsButton.apply {
                                         visibility = View.VISIBLE
                                         text = unlockLabel
+
                                         setOnClickListener {
                                             analyticsManager.sentEvent(Analytics.RemoveAds)
                                             lifecycleScope.launch {

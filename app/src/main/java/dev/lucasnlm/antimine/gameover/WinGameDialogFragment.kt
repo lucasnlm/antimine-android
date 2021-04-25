@@ -195,7 +195,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             ) {
                                 activity?.let { activity ->
                                     val label = context.getString(R.string.remove_ad)
-                                    val price = billingManager.getPrice()
+                                    val price = billingManager.getPrice()?.price
                                     val unlockLabel = price?.let { "$label - $it" } ?: label
                                     removeAdsButton.apply {
                                         visibility = View.VISIBLE

@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"/>
 
-            <dev.lucasnlm.antimine.ui.view.CardButtonView
+            <dev.lucasnlm.antimine.ui.view.OfferCardButtonView
                 android:id="@+id/removeAds"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
