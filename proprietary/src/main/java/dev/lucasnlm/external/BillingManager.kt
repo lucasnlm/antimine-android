@@ -19,11 +19,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.filterNotNull
+import java.util.*
 import kotlin.math.roundToInt
 
 class BillingManager(
     private val context: Context,
     private val crashReporter: CrashReporter,
+    private val featureFlagManager: FeatureFlagManager,
 ) : IBillingManager, BillingClientStateListener, PurchasesUpdatedListener {
     private var retry = 0
     private val purchaseBroadcaster = ConflatedBroadcastChannel<PurchaseInfo>()
@@ -33,6 +35,18 @@ class BillingManager(
             .setListener(this)
             .enablePendingPurchases()
             .build()
+    }
+
+    private val giveOffer: Boolean by lazy {
+        if (featureFlagManager.isWeekDaySalesEnabled) {
+            val calendar = Calendar.getInstance()
+            when (calendar.get(Calendar.DAY_OF_WEEK)) {
+                Calendar.THURSDAY, Calendar.TUESDAY, Calendar.WEDNESDAY -> true
+                else -> false
+            }
+        } else {
+            false
+        }
     }
 
     override suspend fun getPrice(): Price? = unlockPrice.value
@@ -90,18 +104,28 @@ class BillingManager(
                     val fullPrice = list?.firstOrNull {
                         it.sku == PREMIUM
                     }
+
                     val halfSize = list?.firstOrNull {
                         it.sku == PREMIUM50
                     }
+
                     if (fullPrice != null && halfSize != null) {
                         val percent = halfSize.priceAmountMicros.toFloat() / fullPrice.priceAmountMicros.toFloat()
                         val percentInt = 5 * ((percent * 100.0f / 5f).roundToInt())
                         val percentText = "$percentInt\nOFF"
 
-                        val price = Price(
-                            fullPrice.price,
-                            percentText,
-                        )
+                        val price = if (giveOffer) {
+                            Price(
+                                halfSize.price,
+                                percentText,
+                            )
+                        } else {
+                            Price(
+                                fullPrice.price,
+                                null,
+                            )
+                        }
+
                         unlockPrice.tryEmit(price)
                     }
                 }
@@ -142,8 +166,14 @@ class BillingManager(
 
     override suspend fun charge(activity: Activity) {
         if (billingClient.isReady) {
+            val item = if (giveOffer) {
+                listOf(PREMIUM50)
+            } else {
+                listOf(PREMIUM)
+            }
+
             val skuDetailsParams = SkuDetailsParams.newBuilder()
-                .setSkusList(listOf(PREMIUM))
+                .setSkusList(item)
                 .setType(BillingClient.SkuType.INAPP)
                 .build()
 

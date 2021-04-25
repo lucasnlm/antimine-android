@@ -21,6 +21,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         MIN_USAGE_TO_REVIEW to 5,
         USE_INTERSTITIAL_AD to true,
         BANNER_AD_ENABLED to true,
+        ENABLE_WEEK_DAY_SALES to true,
     )
 
     private val remoteConfig: FirebaseRemoteConfig by lazy {
@@ -99,6 +100,10 @@ class FeatureFlagManager : IFeatureFlagManager() {
         getBoolean(BANNER_AD_ENABLED)
     }
 
+    override val isWeekDaySalesEnabled: Boolean by lazy {
+        getBoolean(ENABLE_WEEK_DAY_SALES)
+    }
+
     override suspend fun refresh() {
         if (!BuildConfig.DEBUG) {
             withContext(Dispatchers.IO) {
@@ -127,5 +132,6 @@ class FeatureFlagManager : IFeatureFlagManager() {
         private const val MIN_USAGE_TO_REVIEW = "min_usage_to_review"
         private const val USE_INTERSTITIAL_AD = "use_interstitial_ad"
         private const val BANNER_AD_ENABLED = "banner_ad_enabled"
+        private const val ENABLE_WEEK_DAY_SALES = "enable_sales"
     }
 }
