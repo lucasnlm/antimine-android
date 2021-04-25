@@ -9,19 +9,19 @@ import dev.lucasnlm.antimine.common.level.database.models.Save
 
 @Dao
 interface SaveDao {
-    @Query("SELECT * FROM save")
+    @Query("SELECT * FROM new_save")
     suspend fun getAll(): List<Save>
 
-    @Query("SELECT * FROM save WHERE uid IN (:gameIds)")
+    @Query("SELECT * FROM new_save WHERE uid IN (:gameIds)")
     suspend fun loadAllByIds(gameIds: IntArray): List<Save>
 
-    @Query("SELECT * FROM save WHERE uid = :gameId LIMIT 1")
+    @Query("SELECT * FROM new_save WHERE uid = :gameId LIMIT 1")
     suspend fun loadFromId(gameId: Int): Save
 
-    @Query("SELECT * FROM save ORDER BY uid DESC LIMIT 1")
+    @Query("SELECT * FROM new_save ORDER BY uid DESC LIMIT 1")
     suspend fun loadCurrent(): Save?
 
-    @Query("SELECT count(uid) FROM save")
+    @Query("SELECT count(uid) FROM new_save")
     suspend fun getSaveCounts(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -30,6 +30,6 @@ interface SaveDao {
     @Delete
     suspend fun delete(save: Save)
 
-    @Query("DELETE FROM save WHERE uid NOT IN (SELECT uid FROM save WHERE status != 1 LIMIT :maxStorage)")
+    @Query("DELETE FROM new_save WHERE uid NOT IN (SELECT uid FROM new_save WHERE status != 1 LIMIT :maxStorage)")
     suspend fun deleteOldSaves(maxStorage: Int)
 }

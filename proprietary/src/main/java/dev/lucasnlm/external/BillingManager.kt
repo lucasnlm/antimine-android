@@ -11,6 +11,7 @@ import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.SkuDetailsParams
 import com.android.billingclient.api.querySkuDetails
+import dev.lucasnlm.external.model.Price
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
@@ -18,14 +19,17 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.filterNotNull
+import java.util.Calendar
+import kotlin.math.roundToInt
 
 class BillingManager(
     private val context: Context,
     private val crashReporter: CrashReporter,
+    private val featureFlagManager: FeatureFlagManager,
 ) : IBillingManager, BillingClientStateListener, PurchasesUpdatedListener {
     private var retry = 0
     private val purchaseBroadcaster = ConflatedBroadcastChannel<PurchaseInfo>()
-    private val unlockPrice = MutableStateFlow<String?>(null)
+    private val unlockPrice = MutableStateFlow<Price?>(null)
     private val billingClient by lazy {
         BillingClient.newBuilder(context)
             .setListener(this)
@@ -33,9 +37,21 @@ class BillingManager(
             .build()
     }
 
-    override suspend fun getPrice(): String? = unlockPrice.value
+    private val giveOffer: Boolean by lazy {
+        if (featureFlagManager.isWeekDaySalesEnabled) {
+            val calendar = Calendar.getInstance()
+            when (calendar.get(Calendar.DAY_OF_WEEK)) {
+                Calendar.THURSDAY, Calendar.TUESDAY, Calendar.WEDNESDAY -> true
+                else -> false
+            }
+        } else {
+            false
+        }
+    }
 
-    override suspend fun getPriceFlow(): Flow<String> {
+    override suspend fun getPrice(): Price? = unlockPrice.value
+
+    override suspend fun getPriceFlow(): Flow<Price> {
         return unlockPrice.asSharedFlow().filterNotNull()
     }
 
@@ -43,7 +59,7 @@ class BillingManager(
 
     private fun handlePurchases(purchases: List<Purchase>) {
         val status: Boolean = purchases.firstOrNull {
-            it.sku == BASIC_SUPPORT
+            it.sku == PREMIUM || it.sku == PREMIUM50
         }.let {
             when (it?.purchaseState) {
                 Purchase.PurchaseState.PURCHASED, Purchase.PurchaseState.PENDING -> true
@@ -79,13 +95,39 @@ class BillingManager(
             retry = 0
 
             val skuDetailsParams = SkuDetailsParams.newBuilder()
-                .setSkusList(listOf(BASIC_SUPPORT))
+                .setSkusList(listOf(PREMIUM, PREMIUM50))
                 .setType(BillingClient.SkuType.INAPP)
                 .build()
 
             billingClient
                 .querySkuDetailsAsync(skuDetailsParams) { _, list ->
-                    unlockPrice.tryEmit(list?.firstOrNull()?.price)
+                    val fullPrice = list?.firstOrNull {
+                        it.sku == PREMIUM
+                    }
+
+                    val halfSize = list?.firstOrNull {
+                        it.sku == PREMIUM50
+                    }
+
+                    if (fullPrice != null && halfSize != null) {
+                        val percent = halfSize.priceAmountMicros.toFloat() / fullPrice.priceAmountMicros.toFloat()
+                        val percentInt = 5 * ((percent * 100.0f / 5f).roundToInt())
+                        val percentText = "$percentInt\nOFF"
+
+                        val price = if (giveOffer) {
+                            Price(
+                                halfSize.price,
+                                percentText,
+                            )
+                        } else {
+                            Price(
+                                fullPrice.price,
+                                null,
+                            )
+                        }
+
+                        unlockPrice.tryEmit(price)
+                    }
                 }
 
             val purchasesList: List<Purchase> = billingClient
@@ -124,8 +166,14 @@ class BillingManager(
 
     override suspend fun charge(activity: Activity) {
         if (billingClient.isReady) {
+            val item = if (giveOffer) {
+                listOf(PREMIUM50)
+            } else {
+                listOf(PREMIUM)
+            }
+
             val skuDetailsParams = SkuDetailsParams.newBuilder()
-                .setSkusList(listOf(BASIC_SUPPORT))
+                .setSkusList(item)
                 .setType(BillingClient.SkuType.INAPP)
                 .build()
 
@@ -144,6 +192,7 @@ class BillingManager(
     }
 
     companion object {
-        private const val BASIC_SUPPORT = "unlock_0"
+        private const val PREMIUM = "unlock_0"
+        private const val PREMIUM50 = "unlock_1"
     }
 }

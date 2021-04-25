@@ -34,6 +34,7 @@ class HistoryAdapter(
                 Difficulty.Intermediate -> R.string.intermediate
                 Difficulty.Expert -> R.string.expert
                 Difficulty.Standard -> R.string.standard
+                Difficulty.Master -> R.string.master
                 Difficulty.Custom -> R.string.custom
             }
         )

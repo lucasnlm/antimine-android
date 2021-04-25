@@ -15,6 +15,8 @@ abstract class IFeatureFlagManager {
     abstract val isThemeTastingEnabled: Boolean
     abstract val minUsageToReview: Int
     abstract val isBannerAdEnabled: Boolean
+    abstract val isWeekDaySalesEnabled: Boolean
+    abstract val isHexBannerEnabled: Boolean
 
     abstract suspend fun refresh()
 }

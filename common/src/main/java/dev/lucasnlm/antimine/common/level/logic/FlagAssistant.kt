@@ -17,9 +17,10 @@ class FlagAssistant(
     fun result(): List<Area> = field.toList()
 
     private fun putFlagIfIsolated(it: Area) {
-        val neighbors = field.filterNeighborsOf(it)
+        val neighbors = it.neighborsIds
         val neighborsCount = neighbors.count()
-        val revealedNeighborsCount = neighbors.count { neighbor ->
+        val revealedNeighborsCount = neighbors.count { neighborId ->
+            val neighbor = field[neighborId]
             !neighbor.isCovered || (neighbor.hasMine && neighbor.mark.isFlag())
         }
 

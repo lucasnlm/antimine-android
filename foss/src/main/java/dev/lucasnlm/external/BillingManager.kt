@@ -3,6 +3,7 @@ package dev.lucasnlm.external
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import dev.lucasnlm.external.model.Price
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -19,9 +20,9 @@ class BillingManager : IBillingManager {
         activity.startActivity(intent)
     }
 
-    override suspend fun getPrice(): String? = null
+    override suspend fun getPrice(): Price? = null
 
-    override suspend fun getPriceFlow(): Flow<String> = flowOf()
+    override suspend fun getPriceFlow(): Flow<Price> = flowOf()
 
     override fun listenPurchases(): Flow<PurchaseInfo> = flowOf()
 

@@ -53,13 +53,30 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), SeekBar.OnSeekB
             unlockAll.bind(
                 theme = usingTheme,
                 invert = true,
-                text = R.string.remove_ad,
+                text = getString(R.string.remove_ad),
                 onAction = {
                     lifecycleScope.launch {
                         billingManager.charge(this@ThemeActivity)
                     }
                 }
             )
+
+            lifecycleScope.launchWhenResumed {
+                billingManager.getPriceFlow().collect {
+                    unlockAll.bind(
+                        theme = usingTheme,
+                        invert = true,
+                        text = getString(R.string.remove_ad),
+                        price = it.price,
+                        offerText = it.offer,
+                        onAction = {
+                            lifecycleScope.launch {
+                                billingManager.charge(this@ThemeActivity)
+                            }
+                        }
+                    )
+                }
+            }
         }
 
         squareSize.setOnSeekBarChangeListener(this)

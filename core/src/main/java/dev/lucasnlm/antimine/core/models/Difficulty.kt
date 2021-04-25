@@ -8,4 +8,5 @@ enum class Difficulty(
     Intermediate("INTERMEDIATE"),
     Expert("EXPERT"),
     Custom("CUSTOM"),
+    Master("MASTER"),
 }
