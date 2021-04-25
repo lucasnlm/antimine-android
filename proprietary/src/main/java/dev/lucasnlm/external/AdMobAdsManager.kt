@@ -1,8 +1,12 @@
 package dev.lucasnlm.external
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
@@ -19,6 +23,7 @@ import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 class AdMobAdsManager(
     private val context: Context,
     private val crashReporter: ICrashReporter,
+    private val featureFlagManager: FeatureFlagManager,
 ) : IAdsManager {
     private var rewardedAd: RewardedAd? = null
     private var secondRewardedAd: RewardedAd? = null
@@ -246,12 +251,38 @@ class AdMobAdsManager(
         }
     }
 
+    private fun getHexBanner(): View {
+        return AppCompatImageView(context).apply {
+            setImageResource(R.drawable.hex_banner)
+            setOnClickListener {
+                val packageName = "dev.lucasnlm.hexo"
+                try {
+                    val uri = "market://details?id=$packageName"
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri)).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
+                    context.startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    val url = "https://play.google.com/store/apps/details?id=$packageName"
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
+                    context.startActivity(intent)
+                }
+            }
+        }
+    }
+
     override fun createBannerAd(context: Context): View? {
-        val adRequest = AdRequest.Builder().build()
-        return AdView(context).apply {
-            adSize = AdSize.SMART_BANNER
-            adUnitId = Ads.BannerAd
-            loadAd(adRequest)
+        return if (featureFlagManager.isHexBannerEnabled) {
+            getHexBanner()
+        } else {
+            val adRequest = AdRequest.Builder().build()
+            AdView(context).apply {
+                adSize = AdSize.SMART_BANNER
+                adUnitId = Ads.BannerAd
+                loadAd(adRequest)
+            }
         }
     }
 }

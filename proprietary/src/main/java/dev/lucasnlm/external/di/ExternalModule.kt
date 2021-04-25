@@ -36,7 +36,7 @@ val ExternalModule = module {
 
     single { CrashReporter() } bind ICrashReporter::class
 
-    single { AdMobAdsManager(get(), get()) } bind IAdsManager::class
+    single { AdMobAdsManager(get(), get(), get()) } bind IAdsManager::class
 
     single { InAppUpdateManager() } bind IInAppUpdateManager::class
 }

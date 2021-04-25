@@ -22,6 +22,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         USE_INTERSTITIAL_AD to true,
         BANNER_AD_ENABLED to true,
         ENABLE_WEEK_DAY_SALES to true,
+        HEX_BANNER to false,
     )
 
     private val remoteConfig: FirebaseRemoteConfig by lazy {
@@ -104,6 +105,10 @@ class FeatureFlagManager : IFeatureFlagManager() {
         getBoolean(ENABLE_WEEK_DAY_SALES)
     }
 
+    override val isHexBannerEnabled: Boolean by lazy {
+        getBoolean(HEX_BANNER)
+    }
+
     override suspend fun refresh() {
         if (!BuildConfig.DEBUG) {
             withContext(Dispatchers.IO) {
@@ -133,5 +138,6 @@ class FeatureFlagManager : IFeatureFlagManager() {
         private const val USE_INTERSTITIAL_AD = "use_interstitial_ad"
         private const val BANNER_AD_ENABLED = "banner_ad_enabled"
         private const val ENABLE_WEEK_DAY_SALES = "enable_sales"
+        private const val HEX_BANNER = "hex_banner_enabled"
     }
 }
