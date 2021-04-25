@@ -14,7 +14,7 @@ class MinefieldCreator(
         val height = minefield.height
         val fieldLength = width * height
 
-        return (0 until fieldLength).map { index ->
+        val list = (0 until fieldLength).map { index ->
             val yPosition = floor((index / width).toDouble()).toInt()
             val xPosition = (index % width)
             Area(
@@ -22,8 +22,13 @@ class MinefieldCreator(
                 xPosition,
                 yPosition,
                 0,
-                hasMine = false
+                hasMine = false,
+                neighbors = emptyList(),
             )
+        }
+
+        return list.map {
+            it.copy(neighbors = list.filterNeighborsOf(it).map { area -> area.id })
         }
     }
 
@@ -42,8 +47,11 @@ class MinefieldCreator(
                 .shuffled(randomGenerator)
                 .take(minefield.mines)
                 .onEach {
-                    filterNeighborsOf(it).forEach { neighbor ->
-                        this[neighbor.id] = this[neighbor.id].copy(minesAround = neighbor.minesAround + 1)
+                    it.neighbors.forEach { neighborId ->
+                        val neighbor = this[neighborId]
+                        this[neighborId] = this[neighborId].copy(
+                            minesAround = neighbor.minesAround + 1,
+                        )
                     }
                 }
                 .onEach {

@@ -69,7 +69,8 @@ class MinefieldHandler(
                 )
 
                 if (!hasMine && minesAround == 0 && openNeighbors) {
-                    field.filterNeighborsOf(this)
+                    neighbors
+                        .map { field[it] }
                         .filter { it.isCovered }
                         .onEach {
                             openAt(it.id, openNeighbors = true, passive = true)
@@ -84,7 +85,9 @@ class MinefieldHandler(
             if (!target.isCovered) {
                 field[index] = target.copy(highlighted = target.minesAround != 0 && !target.highlighted)
 
-                field.filterNeighborsOf(target)
+                target
+                    .neighbors
+                    .map { field[it] }
                     .filter { it.mark.isNone() && it.isCovered }
                     .onEach { neighbor ->
                         field[neighbor.id] = neighbor.copy(highlighted = true)
@@ -96,7 +99,7 @@ class MinefieldHandler(
     fun openOrFlagNeighborsOf(index: Int) {
         field.getOrNull(index)?.run {
             if (!isCovered) {
-                val neighbors = field.filterNeighborsOf(this)
+                val neighbors = neighbors.map { field[it] }
                 val flaggedCount = neighbors.count { it.mark.isFlag() || (!it.isCovered && it.hasMine) }
                 if (flaggedCount >= minesAround) {
                     neighbors
