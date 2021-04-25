@@ -11,5 +11,5 @@ data class Area(
     val mark: Mark = Mark.None,
     val highlighted: Boolean = false,
     val revealed: Boolean = false,
-    val neighbors: List<Int>,
+    val neighborsIds: List<Int>,
 )

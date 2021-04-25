@@ -23,12 +23,12 @@ class MinefieldCreator(
                 yPosition,
                 0,
                 hasMine = false,
-                neighbors = emptyList(),
+                neighborsIds = emptyList(),
             )
         }
 
         return list.map {
-            it.copy(neighbors = list.filterNeighborsOf(it).map { area -> area.id })
+            it.copy(neighborsIds = list.filterNeighborsOf(it).map { area -> area.id })
         }
     }
 
@@ -47,7 +47,7 @@ class MinefieldCreator(
                 .shuffled(randomGenerator)
                 .take(minefield.mines)
                 .onEach {
-                    it.neighbors.forEach { neighborId ->
+                    it.neighborsIds.forEach { neighborId ->
                         val neighbor = this[neighborId]
                         this[neighborId] = this[neighborId].copy(
                             minesAround = neighbor.minesAround + 1,
