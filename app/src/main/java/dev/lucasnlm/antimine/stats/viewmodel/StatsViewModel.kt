@@ -36,6 +36,9 @@ class StatsViewModel(
                 // Standard
                 filterStandard(standardSize).fold().copy(title = R.string.standard),
 
+                // Master
+                filter(::isMaster).fold().copy(title = R.string.master),
+
                 // Expert
                 filter(::isExpert).fold().copy(title = R.string.expert),
 
@@ -143,6 +146,10 @@ class StatsViewModel(
     companion object {
         private fun isExpert(stats: Stats): Boolean {
             return stats.mines == 99 && stats.width == 24 && stats.height == 24
+        }
+
+        private fun isMaster(stats: Stats): Boolean {
+            return stats.mines == 200 && stats.width == 50 && stats.height == 50
         }
 
         private fun isIntermediate(stats: Stats): Boolean {
