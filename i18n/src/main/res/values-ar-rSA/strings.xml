@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ar">
     <string name="tutorial">الدورة التعليمية</string>
-    <string name="tutorial_basic">إن قاعدة اللعبة بسيطة، الرقم الموجود على المربع يظهر عدد الألغام المتاخمة له ويجب عليك أن ترفع علامة على جميع الألغام.</string>
-    <string name="tutorial_text_1">وإذا كان عدد ما يلمس نفس العدد من المربعات، فإن المربعات كلها ألغام.</string>
-    <string name="tutorial_text_2">بعد وضع علامة على العلم الأول، راجع الأرقام وتحليل المربع التالي.</string>
+    <string name="tutorial_basic">قاعدة اللعبة بسيطة، الرقم الموجود على المربع يوضح عدد الألغام المجاورة لها وعليك وضع علامة على جميع الألغام.</string>
+    <string name="tutorial_text_1">إذا كان الرقم يلامس نفس العدد من المربعات، فإن المربعات كلها ألغام.</string>
+    <string name="tutorial_text_2">بعد وضع علامة على العلم الأول، راجع الأرقام وحلل المربع التالي.</string>
     <string name="tutorial_text_3">إذا كان المربع يحمل نفس العدد من الأعلام، فإن جميع المربعات المتبقية المجاورة له ليست ألغاما (السهم الأخضر).</string>
     <string name="tutorial_text_4">مراجعة الأرقام والاستمرار في فتح المربعات.</string>
     <string name="games">ألعاب</string>
@@ -25,7 +25,7 @@
     <string name="width">العرض</string>
     <string name="height">الارتفاع</string>
     <string name="mines">الألغام</string>
-    <string name="retry_sure">إذا بدأت لعبة جديدة،\nىستفقد تقدمك الحالي.</string>
+    <string name="retry_sure">إذا بدأت لعبة جديدة،\nستفقد تقدمك الحالي.</string>
     <string name="show_licenses">إظهار التراخيص</string>
     <string name="new_game_request">هل تريد بدء لعبة جديدة؟</string>
     <string name="mines_remaining">%d لغم</string>
@@ -115,5 +115,5 @@
     <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">هل تعرف كيف تلعب كانسة الألغام؟</string>
     <string name="close">أغلق</string>
     <string name="open_tutorial">فتح البرنامج التعليمي</string>
-    <string name="master" comment="new level difficulty">Master</string>
+    <string name="master" comment="new level difficulty">محترف</string>
 </resources>
