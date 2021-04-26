@@ -10,6 +10,7 @@ import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.Leaderboard
+import dev.lucasnlm.external.model.Price
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -31,9 +32,9 @@ val AppModule = module {
 
             override suspend fun charge(activity: Activity) {}
 
-            override suspend fun getPrice(): String? = null
+            override suspend fun getPrice(): Price? = null
 
-            override suspend fun getPriceFlow(): Flow<String> = flowOf()
+            override suspend fun getPriceFlow(): Flow<Price> = flowOf()
 
             override fun listenPurchases(): Flow<PurchaseInfo> = flowOf()
         }
