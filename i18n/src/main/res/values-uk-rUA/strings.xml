@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="uk">
     <string name="tutorial">Навчальний посібник</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_basic">Правило гри просте, число на квадраті показує кількість хв навколо нього, і Ви повинні відзначити всі міни.</string>
+    <string name="tutorial_text_1">Якщо число відображає кількість усіх квадратів, то у всіх квадратах міни.</string>
+    <string name="tutorial_text_2">Після позначки Вашого першого прапора, перегляньте цифри і проаналізуйте наступний квадрат.</string>
+    <string name="tutorial_text_3">Якщо в квадраті однакова кількість прапорів, то всі інші поруч з ним квадрати не містять хв (зелена стрілка).</string>
+    <string name="tutorial_text_4">Подивіться на числа і продовжуйте відкривати квадрати.</string>
     <string name="games">Ігри</string>
     <string name="tap_to_begin">Натисніть, щоб почати</string>
     <string name="previous_games">Попередня гра</string>
@@ -112,8 +112,8 @@
     <string name="switch_control_desc">Використовуйте кнопку, щоб переключитися між встановленням прапора і відкриттям</string>
     <string name="app_description">Вам потрібно очистити поле від схованих мін, не детонуючи їх.</string>
     <string name="app_name">Сапер</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
-    <string name="close">Close</string>
-    <string name="open_tutorial">Open Tutorial</string>
-    <string name="master" comment="new level difficulty">Master</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Ви вмієте грати в сапера?</string>
+    <string name="close">Закрити</string>
+    <string name="open_tutorial">Відкрити навчання</string>
+    <string name="master" comment="new level difficulty">Досвідчений</string>
 </resources>

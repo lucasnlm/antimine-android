@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pt-rPT">
     <string name="tutorial">Tutorial</string>
-    <string name="tutorial_basic">A regras do jogo é simples, o número em um quadrado mostra o número de minas adjacentes a ele e você tem que marcar todas as minas.</string>
-    <string name="tutorial_text_1">Se um número está tocando o mesmo número de quadrados, então os quadrados são todos as minas.</string>
+    <string name="tutorial_basic">A regra do jogo é simples, o número em um quadrado mostra o número de minas adjacentes a ele e você tem que sinalizar todas as minas.</string>
+    <string name="tutorial_text_1">Se um número está atingindo o mesmo número de quadrados, então os quadrados são todos as minas.</string>
     <string name="tutorial_text_2">Depois de marcar sua primeira bandeira, revise os números e analise o próximo quadrado.</string>
     <string name="tutorial_text_3">Se um quadrado tem o mesmo número de bandeiras, todos os outros quadrados restantes adjacentes a ele não são minas (a seta verde).</string>
     <string name="tutorial_text_4">Revise os números e continue abrindo os quadrados.</string>
