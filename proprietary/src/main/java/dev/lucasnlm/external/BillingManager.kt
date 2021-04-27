@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.filterNotNull
 import java.util.Calendar
-import kotlin.math.roundToInt
 
 class BillingManager(
     private val context: Context,
@@ -110,19 +109,15 @@ class BillingManager(
                     }
 
                     if (fullPrice != null && halfSize != null) {
-                        val percent = halfSize.priceAmountMicros.toFloat() / fullPrice.priceAmountMicros.toFloat()
-                        val percentInt = 5 * ((percent * 100.0f / 5f).roundToInt())
-                        val percentText = "$percentInt\nOFF"
-
                         val price = if (giveOffer) {
                             Price(
                                 halfSize.price,
-                                percentText,
+                                true,
                             )
                         } else {
                             Price(
                                 fullPrice.price,
-                                null,
+                                false,
                             )
                         }
 

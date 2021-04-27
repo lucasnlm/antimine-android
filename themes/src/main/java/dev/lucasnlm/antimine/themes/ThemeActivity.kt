@@ -68,7 +68,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), SeekBar.OnSeekB
                         invert = true,
                         text = getString(R.string.remove_ad),
                         price = it.price,
-                        offerText = it.offer,
+                        showOffer = it.offer,
                         onAction = {
                             lifecycleScope.launch {
                                 billingManager.charge(this@ThemeActivity)

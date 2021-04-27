@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:alpha="0.9"
                 android:includeFontPadding="false"
-                android:paddingHorizontal="8dp"
+                android:paddingHorizontal="4dp"
                 android:textColor="@color/accent"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -61,21 +61,16 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="$ 1,00" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/priceOff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="0.9"
-                android:gravity="center_horizontal"
-                android:includeFontPadding="false"
-                android:lineHeight="12sp"
-                android:textColor="@color/accent"
-                android:textSize="14sp"
-                android:textStyle="bold"
+                android:src="@drawable/offer"
+                android:importantForAccessibility="no"
+                app:tint="@color/accent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="50\nOFF" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
