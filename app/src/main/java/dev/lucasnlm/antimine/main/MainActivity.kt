@@ -422,7 +422,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
     }
 
-    private fun bindRemoveAds(price: String? = null, offerText: String? = null) {
+    private fun bindRemoveAds(price: String? = null, showOffer: Boolean = false) {
         removeAds.apply {
             visibility = View.VISIBLE
             bind(
@@ -430,7 +430,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                 text = getString(R.string.remove_ad),
                 startIcon = R.drawable.remove_ads,
                 price = price,
-                offerText = offerText,
+                showOffer = showOffer,
                 onAction = {
                     lifecycleScope.launch {
                         billingManager.charge(this@MainActivity)

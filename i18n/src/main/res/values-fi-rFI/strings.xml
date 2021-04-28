@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fi">
-    <string name="tutorial">Opetusohjelma</string>
+    <string name="tutorial">Johdanto</string>
     <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
     <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
     <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
     <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_text_4">Tarkista numerot ja avaa neliöitä.</string>
     <string name="games">Pelit</string>
     <string name="tap_to_begin">Aloita napauttamalla</string>
     <string name="previous_games">Edelliset pelit</string>
@@ -46,7 +46,7 @@
     <string name="you_finished">Olet valmis!</string>
     <string name="defeats">Tappioita</string>
     <string name="generic_game_over">Onnea seuraavaan peliisi.</string>
-    <string name="generic_win">Löysit %1$d miinoja %2$d sekunnin kuluttua.</string>
+    <string name="generic_win">Löysit %1$d miinaa %2$d sekuntissa.</string>
     <string name="fail_to_share">Jakaminen epäonnistui</string>
     <string name="version_s">Versio %1$s</string>
     <string name="sound_effects">Äänitehosteet</string>
@@ -112,8 +112,8 @@
     <string name="switch_control_desc">Käytä painiketta vaihtaaksesi lipun ja avaamisen välillä</string>
     <string name="app_description">Sinun täytyy tyhjentää piileskeleviä miinoja sisältävä suorakulmainen taulu räjäyttämättä miinoja kertaakaan.</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
-    <string name="close">Close</string>
-    <string name="open_tutorial">Open Tutorial</string>
-    <string name="master" comment="new level difficulty">Master</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Tiedätkö miten pelata miinanharavaa?</string>
+    <string name="close">Sulje</string>
+    <string name="open_tutorial">Avaa Johdanto</string>
+    <string name="master" comment="new level difficulty">Mestari</string>
 </resources>

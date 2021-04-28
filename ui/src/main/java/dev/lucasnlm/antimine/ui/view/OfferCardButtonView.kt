@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.ui.view
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.appcompat.widget.AppCompatImageView
 import com.google.android.material.card.MaterialCardView
 import dev.lucasnlm.antimine.ui.R
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
@@ -30,7 +32,7 @@ class OfferCardButtonView : FrameLayout {
         invert: Boolean = false,
         text: String,
         price: String? = null,
-        offerText: String? = null,
+        showOffer: Boolean = false,
         onAction: (View) -> Unit,
         centralize: Boolean = false,
         @DrawableRes startIcon: Int? = null,
@@ -40,7 +42,7 @@ class OfferCardButtonView : FrameLayout {
             invert = invert,
             text = text,
             price = price,
-            offerText = offerText,
+            showOffer = showOffer,
             centralize = centralize,
             onAction = onAction,
             startIcon = startIcon,
@@ -52,7 +54,7 @@ class OfferCardButtonView : FrameLayout {
         invert: Boolean = false,
         text: String,
         price: String? = null,
-        offerText: String? = null,
+        showOffer: Boolean,
         centralize: Boolean = false,
         onAction: (View) -> Unit,
         @DrawableRes startIcon: Int? = null,
@@ -90,16 +92,15 @@ class OfferCardButtonView : FrameLayout {
             }
         }
 
-        val offerView = findViewById<TextView>(R.id.priceOff).apply {
-            if (offerText == null) {
-                visibility = View.GONE
+        val offerView = findViewById<AppCompatImageView>(R.id.priceOff).apply {
+            visibility = if (showOffer) {
+                View.VISIBLE
             } else {
-                visibility = View.VISIBLE
-                this.text = offerText
+                View.GONE
             }
 
             if (invert) {
-                setTextColor(color)
+                imageTintList = ColorStateList.valueOf(color)
             }
         }
 
@@ -138,7 +139,7 @@ class OfferCardButtonView : FrameLayout {
                 priceView.setTextColor(inverted)
                 iconView.setColorFilter(inverted)
                 setCardBackgroundColor(focusedBackgroundColor)
-                offerView.setTextColor(inverted)
+                offerView.imageTintList = ColorStateList.valueOf(inverted)
             }
         }
     }
