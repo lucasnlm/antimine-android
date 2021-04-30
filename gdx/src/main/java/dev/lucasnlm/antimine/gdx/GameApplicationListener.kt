@@ -296,7 +296,7 @@ class GameApplicationListener(
                     start = padding,
                     end = padding,
                     bottom = padding,
-                    top = 0f,
+                    top = padding,
                 )
             }
             else -> {

@@ -88,16 +88,6 @@ class GameActivity :
         handleIntent(intent)
         bindTapToBegin()
 
-        if (!isPortrait()) {
-            val decorView = window.decorView
-
-            @Suppress("DEPRECATION")
-            val uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
-
-            @Suppress("DEPRECATION")
-            decorView.systemUiVisibility = uiOptions
-        }
-
         playGamesManager.showPlayPopUp(this)
 
         onOpenAppActions()
@@ -336,6 +326,10 @@ class GameActivity :
             analyticsManager.sentEvent(Analytics.Quit)
         } else if (gameViewModel.singleState().isActive) {
             gameViewModel.pauseGame()
+        }
+
+        lifecycleScope.launch {
+            gameViewModel.saveGame()
         }
     }
 
