@@ -1,56 +1,56 @@
 Prueba tu poder de razonamiento en un desafiante juego de rompecabezas donde tienes que resolver un campo de minas sin explotar ninguna de ellas.
 Esta es una versión minimalista y moderna del clásico Buscaminas.
 
-¿Eres capaz de resolver un campo minado? ¡Vamos!
+¿Eres capaz de despejar un campo de minas? ¡Vamos!
 
 OBJETIVO
-Es como Buscaminas. Ganas la partida cuando has marcado todas las minas en el campo de minas. ¡Ten cuidado de no activar una!
+Es como el buscaminas. Ganarás la partida cuando hayas marcado todas las minas del campo de minas. ¡Ten cuidado de no activar una!
 
 SIN ADIVINAR
-Este juego tiene un algoritmo que siempre crea campos de minas solventables. ¡No tendrás que adivinar dónde está la última mina!
+Este juego tiene un algoritmo que siempre crea campos de minas con solución. ¡No tendrás que adivinar dónde está la última mina!
 
 NIVELES DE JUEGO
-Al igual que Buscaminas, este juego tiene diferentes niveles: principiante, intermedio y experto. Pero también tiene un modo progresivo único que se hace más difícil cuando ganas.
+Al igual que el buscaminas, este juego tiene diferentes niveles: principiante, intermedio y experto. Pero también tiene un modo progresivo único que se hace más difícil cuando ganas.
 
 NIVEL PERSONALIZADO
-Si los modos estándar no son suficientes, puedes crear tu nivel de dificultad!
+Si los modos estándar no son suficientes, ¡puedes crear tu nivel de dificultad!
 
 TEMAS
 Antimine tiene más de 15 temas (incluyendo luz, oscuridad y AMOLED). ¡Y pronto se añadirán más!
 
 MINIMALISTA
-Un aspecto limpio: minimalista, ligero y también un tamaño de menos de 9MB.
+Apariencia y sensación de organización: aspecto visual minimalista y un tamaño de app muy ligero (menos de 9MB).
 
 TUTORIAL
-¿No sabes cómo jugar a Buscaminas? No hay problema, puedes jugar nuestro nivel de tutorial y activar Consejos en la configuración.
+¿No sabes cómo jugar al buscaminas? No hay problema, puedes jugar nuestro nivel de tutorial y activar los consejos en la configuración.
 
 ESTADÍSTICAS
-Compruebe sus resultados y desarrollo.
+Compruebe tus resultados y desarrollo.
 
-ASISTANTE DEL JUEGO
-El juego marcará automáticamente los cuadrados que has aislado. 
+ASISTENTE DEL JUEGO
+El juego marcará automáticamente los cuadrados que hayas aislado. 
 
 PERSONALIZACIÓN
-Puedes cambiar el juego para hacerlo como quieras. 
-Ejemplo: Ayuda, animaciones, comentarios hápticos, signo de interrogación.
+Puedes cambiar el juego para darle tu toque personal. 
+Ejemplo: ayuda, animaciones, estímulos hápticos, signo de interrogación.
 
 CONTROLES
-Soporta cuatro sistemas de control diferentes. Ejemplo: bandera usando tap o pulsación larga.
+Puedes usar hasta cuatro sistemas de control diferentes. Ejemplo: colocar bandera solo tocando o manteniendo pulsado en la pantalla.
 
-ACHIEVEMENTES Y MARCADORES 
+LOGROS Y CLASIFICACIÓN 
 Tienes ocho logros para desbloquear y diferentes tablas de clasificación para compartir con tus amigos.
 
 ACCESIBILIDAD
-Puedes personalizar este juego a tus necesidades: cambiar el tamaño de los cuadrados, el radio, la hora táctil y el soporte para lectores de pantalla.
-Siempre estamos tratando de mejorar nuestros ajustes de accesibilidad. Si te pierdes algo, danos tus comentarios!
+Puedes personalizar este juego a tus necesidades: cambiar el tamaño de los cuadrados, el radio, la reactividad táctil y el soporte para lectores de pantalla.
+Siempre estamos tratando de mejorar nuestros ajustes de accesibilidad. Si echas de menos alguna cosa, ¡envíanos tu comentario!
 
-ANDROID
-Soporta características interesantes de Android como pantalla dividida, acceso directo, compartir, tema del sistema, y siempre soportando la última versión.
+APP DE ANDROID
+El juego permite el uso de características interesantes de Android, como la pantalla dividida, accesos directos, compartir, tema del sistema y siempre actualizado a la última versión.
 
-EN LÍNEA O DESARROLLO
+EN LÍNEA O DESCONECTADO
 ¡No necesitas estar conectado para jugar al juego!
 
-AUTO-GUARDAR
-¡Puedes empezar un juego y continuar más tarde! Guardará automáticamente tu juego.
+AUTOGUARDADO
+¡Puedes empezar una partida y continuarla más tarde! El progreso se guardará automáticamente.
 
 ¡Disfruta!

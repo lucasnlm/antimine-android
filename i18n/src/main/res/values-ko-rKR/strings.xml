@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ko">
     <string name="tutorial">튜토리얼</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_basic">게임의 규칙은 간단합니다. 네모 위의 숫자는 인접한 칸의 지뢰의 수를 보여주고, 지뢰가 있는 모든 칸에 깃발을 꽂아야 합니다.</string>
+    <string name="tutorial_text_1">만약 숫자가 맞닿은 네모 칸의 수와 같다면, 그 칸들에는 모두 지뢰가 있는 것입니다.</string>
+    <string name="tutorial_text_2">처음 깃발을 꽂은 다음에는, 숫자를 다시 확인한 뒤 다음 칸을 찾아봅니다.</string>
+    <string name="tutorial_text_3">네모의 숫자와 깃발의 수가 같다면, 그 네모와 인접한 나머지 칸(초록 화살표로 표시)에는 지뢰가 없습니다.</string>
+    <string name="tutorial_text_4">숫자를 재차 확인하면서 칸을 밝혀나가세요.</string>
     <string name="games">게임</string>
     <string name="tap_to_begin">시작하려면 탭하세요</string>
     <string name="previous_games">이전 게임</string>
@@ -112,8 +112,8 @@
     <string name="switch_control_desc">버튼을 사용하여 플래그와 열기 간 전환</string>
     <string name="app_description">당신은 이 사각형 게임판에 숨겨진 지뢰를 하나도 터뜨리지 않고 게임을 끝내야 합니다.</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
-    <string name="close">Close</string>
-    <string name="open_tutorial">Open Tutorial</string>
-    <string name="master" comment="new level difficulty">Master</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">지뢰찾기를 하는 방법을 아십니까?</string>
+    <string name="close">닫기</string>
+    <string name="open_tutorial">튜토리얼 열기</string>
+    <string name="master" comment="new level difficulty">마스터</string>
 </resources>
