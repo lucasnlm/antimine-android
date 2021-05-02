@@ -99,6 +99,7 @@ class GameActivity :
             val extras = intent.extras ?: Bundle()
             when {
                 extras.containsKey(DIFFICULTY) -> {
+                    intent.removeExtra(DIFFICULTY)
                     val difficulty = extras.getSerializable(DIFFICULTY) as Difficulty
                     gameViewModel.startNewGame(difficulty)
                 }
