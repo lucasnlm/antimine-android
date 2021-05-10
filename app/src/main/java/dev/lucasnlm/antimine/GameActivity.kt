@@ -43,6 +43,7 @@ import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -329,7 +330,7 @@ class GameActivity :
             gameViewModel.pauseGame()
         }
 
-        lifecycleScope.launch {
+        GlobalScope.launch {
             gameViewModel.saveGame()
         }
     }

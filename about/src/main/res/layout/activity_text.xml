@@ -25,7 +25,8 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:paddingHorizontal="@dimen/main_activity_padding"
+            android:paddingVertical="16dp">
 
             <TextView
                 android:id="@+id/textView"

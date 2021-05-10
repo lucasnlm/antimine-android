@@ -332,11 +332,11 @@ class MinefieldStage(
             val dx = Gdx.input.deltaX.toFloat()
             val dy = Gdx.input.deltaY.toFloat()
 
-            if (dx * dx + dy * dy > actionSettings.touchSensibility * 4) {
+            if (dx * dx + dy * dy > actionSettings.touchSensibility * 8) {
                 inputEvents.clear()
             }
 
-            if (dx * dx + dy * dy > actionSettings.touchSensibility) {
+            if (dx * dx + dy * dy > actionSettings.touchSensibility * 8) {
                 cameraController.addVelocity(
                     -dx * currentZoom,
                     dy * currentZoom,

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,10 +17,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fadeScrollbars="false"
-        app:layout_constraintTop_toBottomOf="@id/section"
+        android:paddingHorizontal="@dimen/main_activity_padding"
+        android:scrollbarStyle="outsideInset"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/section">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -32,22 +33,21 @@
                 android:id="@+id/basic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tutorial_basic"
-                android:paddingHorizontal="32dp"
                 android:paddingVertical="16dp"
+                android:text="@string/tutorial_basic"
                 android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/basic"
-                app:layout_constraintStart_toStartOf="parent"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:cardCornerRadius="10dp">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/basic">
 
                 <ImageView
                     android:layout_width="128dp"
@@ -61,22 +61,21 @@
                 android:id="@+id/text1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tutorial_text_1"
-                android:paddingHorizontal="32dp"
                 android:paddingVertical="16dp"
+                android:text="@string/tutorial_text_1"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/image" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/image2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/text1"
-                app:layout_constraintStart_toStartOf="parent"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:cardCornerRadius="10dp">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text1">
 
                 <ImageView
                     android:layout_width="128dp"
@@ -90,21 +89,21 @@
                 android:id="@+id/text2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingVertical="16dp"
                 android:text="@string/tutorial_text_2"
-                android:padding="32dp"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@+id/image2"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/image2" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/image3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/text2"
-                app:layout_constraintStart_toStartOf="parent"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:cardCornerRadius="10dp">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text2">
 
                 <ImageView
                     android:layout_width="128dp"
@@ -118,22 +117,21 @@
                 android:id="@+id/text3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tutorial_text_3"
-                android:paddingHorizontal="32dp"
                 android:paddingVertical="16dp"
+                android:text="@string/tutorial_text_3"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@+id/image3"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/image3" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/image4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/text3"
-                app:layout_constraintStart_toStartOf="parent"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:cardCornerRadius="10dp">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text3">
 
                 <ImageView
                     android:layout_width="128dp"
@@ -148,23 +146,22 @@
                 android:id="@+id/text4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tutorial_text_4"
-                android:paddingHorizontal="32dp"
                 android:paddingVertical="16dp"
+                android:text="@string/tutorial_text_4"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@+id/image4"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/image4" />
 
             <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/playGame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="16dp"
                 android:layout_marginHorizontal="32dp"
-                app:layout_constraintTop_toBottomOf="@id/text4"
+                android:paddingVertical="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/text4" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

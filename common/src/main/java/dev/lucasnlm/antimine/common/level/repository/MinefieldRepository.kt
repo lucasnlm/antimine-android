@@ -6,6 +6,8 @@ import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.random.Random
 
 interface IMinefieldRepository {
@@ -50,8 +52,11 @@ class MinefieldRepository(
         val progressiveMines = preferencesRepository.getProgressiveValue()
 
         val display = dimensionRepository.displaySize()
-        val calculatedWidth = ((display.width / fieldSize).toInt() - HORIZONTAL_STANDARD_GAP)
-        val calculatedHeight = ((display.height / fieldSize).toInt() - verticalGap)
+        val width = min(display.width, display.height)
+        val height = max(display.width, display.height)
+
+        val calculatedWidth = ((width / fieldSize).toInt() - HORIZONTAL_STANDARD_GAP)
+        val calculatedHeight = ((height / fieldSize).toInt() - verticalGap)
         val finalWidth = calculatedWidth.coerceAtLeast(MIN_STANDARD_WIDTH)
         val finalHeight = calculatedHeight.coerceAtLeast(MIN_STANDARD_HEIGHT)
         val fieldArea = finalWidth * finalHeight

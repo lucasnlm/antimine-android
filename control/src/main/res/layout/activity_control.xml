@@ -17,38 +17,37 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fadeScrollbars="false"
-        app:layout_constraintTop_toBottomOf="@id/section"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/section">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="8dp">
+            android:paddingHorizontal="@dimen/main_activity_padding"
+            android:paddingVertical="8dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:layout_marginHorizontal="12dp"
-                android:requiresFadingEdge="vertical"
+                android:fadeScrollbars="false"
                 android:fadingEdge="vertical"
                 android:fadingEdgeLength="24dp"
-                android:fadeScrollbars="false"
+                android:requiresFadingEdge="vertical"
                 android:scrollbarStyle="outsideInset"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/longPressLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:paddingVertical="12dp"
                 android:layout_marginTop="16dp"
+                android:paddingVertical="12dp"
                 android:text="@string/long_press"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
@@ -69,7 +68,6 @@
                 android:id="@+id/touch_sensibility"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:paddingVertical="12dp"
                 android:text="@string/touch_sensibility"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +89,6 @@
                 android:id="@+id/doubleClickLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:paddingVertical="12dp"
                 android:text="@string/double_click"
                 app:layout_constraintStart_toStartOf="parent"

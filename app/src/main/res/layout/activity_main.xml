@@ -22,7 +22,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="32dp"
+            android:paddingHorizontal="@dimen/main_activity_padding"
             android:paddingVertical="32dp"
             android:orientation="vertical"
             android:animateLayoutChanges="true">

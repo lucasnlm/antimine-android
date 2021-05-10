@@ -242,14 +242,14 @@ open class GameViewModel(
             field = gameController.field(),
             tips = tipRepository.getTotalTips(),
             isGameCompleted = isCompletedWithMistakes(),
-            isActive = true,
+            isActive = !gameController.isGameOver(),
             hasMines = true,
             useHelp = preferencesRepository.useHelp(),
         )
 
         sendEvent(GameEvent.NewGame(newGameState))
 
-        if (!newGameState.isGameCompleted) {
+        if (newGameState.isActive && !newGameState.isGameCompleted) {
             runClock()
         }
 
