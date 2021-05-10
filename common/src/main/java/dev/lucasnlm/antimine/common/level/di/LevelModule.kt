@@ -44,7 +44,7 @@ val LevelModule = module {
     } bind IStatsRepository::class
 
     single {
-        MinefieldRepository(get())
+        MinefieldRepository()
     } bind IMinefieldRepository::class
 
     single {

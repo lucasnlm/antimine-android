@@ -161,11 +161,13 @@ class StatsViewModel(
         }
 
         private fun List<Stats>.filterStandard(standardSize: Minefield) = filter {
-            it.width == standardSize.width && it.height == standardSize.height
+            (it.width == standardSize.width && it.height == standardSize.height) ||
+                (it.width == standardSize.height && it.height == standardSize.width)
         }
 
         private fun List<Stats>.filterNotStandard(standardSize: Minefield) = filterNot {
-            it.width == standardSize.width && it.height == standardSize.height
+            (it.width == standardSize.width && it.height == standardSize.height) ||
+                (it.width == standardSize.height && it.height == standardSize.width)
         }
     }
 }
