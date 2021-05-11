@@ -152,7 +152,7 @@ class GameActivity :
                     tapToBegin.visibility = View.GONE
                 }
 
-                if (it.turn < 3 && it.saveId == 0L) {
+                if (it.turn < 1 && it.saveId == 0L) {
                     val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
                     val controlText = gameViewModel.getControlDescription(applicationContext)
