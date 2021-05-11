@@ -1,56 +1,56 @@
-Test resonnementet ditt med et utfordrende puslespill der du må løse et minefelt uten å eksploere noen gruve.
-Dette er en minimalistisk og moderne versjon av den klassiske Minesweeper.
+Test din logiske sans med et hjernetrimspill hvor du må løse et minefelt uten å detonere noen miner.
+Dette er en minimalistisk og moderne versjon av den klassiske Minesveiper.
 
 Er du i stand til å tømme et minefelt? Kom igjen!
 
 MÅL
-Det er som Minesweeper. Du vinner spillet når du har flagget hver gruve i minefeltet. Pass på at du ikke utløser en!
+Det er som Minesveiper. Du vinner spillet når du har flagget hver mine i minefeltet. Pass på at du ikke utløser en!
 
-IKKE GJETT
-Dette spillet har en algoritme som lager alltid løsbare minefelt. Du trenger ikke gjette hvor den siste gruven ligger!
+INGEN GJETTING
+Dette spillet har en algoritme som alltid lager løsbare minefelt. Du trenger ikke gjette hvor den siste minen ligger!
 
-SPILL NIVÅER
-Akkurat som Minesweeper, dette spillet har forskjellige nivåer: Nybegynnere, Mellomliggende, og Ekspert. Men det har også en unike progressive modus som blir vanskeligere når du vinner.
+SPILLNIVÅER
+Akkurat som Minesveiper har dette spillet forskjellige nivåer: Nybegynner, Middels og Ekspert. Men den har også en unik progressiv modus som blir vanskeligere jo mer du vinner.
 
 EGENDEFINERT NIVÅ
-Hvis standardmodusene ikke er nok, kan du lage ditt egen nivåvanskelighet!
+Hvis standardmodusene ikke er nok, kan du lage din egen vanskelighetsgrad!
 
-TEMA
-Antimine har mer som 15 tema (inkludert lys, mørkt og AMOLED). Og snart skal mer bli lagt til!
+TEMAER
+Antimine har mer enn 15 temaer (inkludert lyst, mørkt og AMOLED). Og mer blir lagt til snart!
 
 MINIMALISTISK
-Rent utseende og følelse: et minimalistisk visuell og også lett appstørelse (mindre som 9MB).
+Rent utseende og følelse: visuelt minimalistisk og en lettvekter av en app (mindre enn 9MB).
 
 OPPLÆRING
-Vet du ikke hvordan man spiller Minesweeper? Ikke noe problem, kan du spille opplæringsnivået vårt og aktivere tips i innstillingene.
+Vet du ikke hvordan man spiller Minesveiper? Ikke noe problem, du kan spille opplæringsnivået vårt og aktivere tips i innstillingene.
 
 STATISTIKK
-Sjekk resultatene og utviklingen din.
+Sjekk dine resultater og utvikling.
 
 SPILLASSISTENT
 Spillet flagger automatisk kvadratene du isolerer. 
 
 TILPASNING
-Du kan endre spillet for å gjøre det som du vil det være. 
+Du kan endre spillet slik du ønsker. 
 Eksempel: Hjelp, animasjoner, haptisk tilbakemelding, spørsmålstegn.
 
-KONTROLL
+KONTROLLER
 Spillet støtter fire ulike kontrollordninger. Eksempel: flagg ved å bruke tapp eller langt trykk.
 
 PRESTASJONER OG LEDERTAVLER 
-Du har åtte prestasjoner til å låse opp og forskjellige ledertavler for å dele med vennene dine.
+Du har åtte prestasjoner å låse opp og forskjellige ledertavler å dele med vennene dine.
 
 TILGJENGELIGHET
-Du kan tilpasse dette spillet for dine behov: endre kvadratstørrelse, radius, berørningstidspunkte, og støtte for skjermleser.
-Vi prøver alltid å forbedre tilgjengelighetsinnstillingene våre. Hvis du går glipp av noe, gi oss tilbakemelding!
+Du kan tilpasse dette spillet for dine behov: endre kvadratstørrelse, radius, berøringstiming, og støtte for skjermleser.
+Vi prøver alltid å forbedre tilgjengelighetsinnstillingene våre. Gi oss tilbakemelding om du savner noe!
 
-ANDROID-FOKUSERTE APP
-Appen støtter kule Android-funksjoner som delt skerm, snarveier, deling, systemtema, og støtter alltid den nyeste versjonen.
+ANDROID-FOKUSERT APP
+Appen støtter kule Android-funksjoner som delt skjerm, snarveier, deling, systemtema, og støtter alltid den nyeste versjonen.
 
 ONLINE ELLER OFFLINE
 Du trenger ikke være online for å spille spillet!
 
-AUTO-LAGRE
+AUTO-LAGRING
 Du kan starte et spill og fortsette senere! Det lagrer ditt spill automatisk.
 
-Nyt den.
+Kos deg.

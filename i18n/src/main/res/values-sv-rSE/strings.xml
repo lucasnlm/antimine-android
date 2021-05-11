@@ -115,5 +115,5 @@
     <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Vet du hur man spelar Minesweeper?</string>
     <string name="close">Stäng</string>
     <string name="open_tutorial">Öppna Guide</string>
-    <string name="master" comment="new level difficulty">Master</string>
+    <string name="master" comment="new level difficulty">Mäster</string>
 </resources>

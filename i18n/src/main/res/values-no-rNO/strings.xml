@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="no">
-    <string name="tutorial">Tutorial</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial">Opplæring</string>
+    <string name="tutorial_basic">Reglene for spillet er lette; nummeret på en firkant viser antall miner som berører den og du må flagge alle minene.</string>
+    <string name="tutorial_text_1">Hvis et nummer berører samme antallet firkanter så er alle firkantene miner.</string>
+    <string name="tutorial_text_2">Etter du har satt ditt første flagg, se over og analyser den neste firkanten.</string>
+    <string name="tutorial_text_3">Hvis en firkant har samme antall flagg, vil alle de gjenværende firkantene som berører den ikke være miner (den grønne pilen).</string>
+    <string name="tutorial_text_4">Se over tallene og fortsett å åpne firkanter.</string>
     <string name="games">Spill</string>
     <string name="tap_to_begin">Trykk for å begynne</string>
     <string name="previous_games">Tidligere Spill</string>
     <string name="minefield">Vanskelighet</string>
     <string name="standard">Standard</string>
     <string name="beginner">Nybegynner</string>
-    <string name="intermediate">Mellomliggende</string>
+    <string name="intermediate">Middels</string>
     <string name="expert">Ekspert</string>
     <string name="open">Åpne</string>
     <string name="settings">Innstillinger</string>
@@ -25,29 +25,29 @@
     <string name="width">Bredde</string>
     <string name="height">Høyde</string>
     <string name="mines">Miner</string>
-    <string name="retry_sure">Hvis du starter et nytt spill, skal din nåværende framgang gå tapt.</string>
+    <string name="retry_sure">Hvis du starter et nytt spill vil din nåværende fremgang gå tapt.</string>
     <string name="show_licenses">Vis Lisenser</string>
     <string name="new_game_request">Vil du starte et nytt spill?</string>
     <string name="mines_remaining">%d miner</string>
-    <string name="game_time">Spill Tid</string>
-    <string name="mine">Min</string>
+    <string name="game_time">Spilletid</string>
+    <string name="mine">Mine</string>
     <string name="settings_general">Generelt</string>
     <string name="settings_gameplay">Spillopplevelse</string>
     <string name="settings_accessibility">Tilgjengelighet</string>
     <string name="size">Størrelse</string>
-    <string name="rounded_square">Avrundet kvadrat</string>
+    <string name="rounded_square">Avrundet Firkant</string>
     <string name="space_between_squares">Mellomrom mellom firkanter</string>
     <string name="system">System</string>
-    <string name="rating">Ttilbakemelding</string>
-    <string name="sign_in_failed">Feilet med å logge på. Vennligst sjekk nettverkstilkoblingen din og prøv igjen.</string>
+    <string name="rating">Tilbakemelding</string>
+    <string name="sign_in_failed">Innlogging feilet. Vennligst sjekk nettverkstilkoblingen din og prøv igjen.</string>
     <string name="you_won">Du vant!</string>
     <string name="victories">Seire</string>
     <string name="you_lost">Du tapte!</string>
     <string name="you_finished">Du er ferdig!</string>
     <string name="defeats">Nederlag</string>
-    <string name="generic_game_over">Lykke til på det neste spillet.</string>
-    <string name="generic_win">Du fant %1$d minutter om %2$d sekunder.</string>
-    <string name="fail_to_share">Feilet med å dele</string>
+    <string name="generic_game_over">Lykke til i det neste spillet.</string>
+    <string name="generic_win">Du fant %1$d miner på %2$d sekunder.</string>
+    <string name="fail_to_share">Deling feilet</string>
     <string name="version_s">Versjon %1$s</string>
     <string name="sound_effects">Lydeffekter</string>
     <string name="are_you_sure">Er du sikker?</string>
@@ -60,12 +60,12 @@
     <string name="ok">OK</string>
     <string name="use_question_mark">Bruk Spørsmålstegn</string>
     <string name="no_guessing_mode">\'Ingen gjetting\'-modus</string>
-    <string name="control">Styring</string>
-    <string name="single_click">Ett trykk</string>
+    <string name="control">Kontroller</string>
+    <string name="single_click">Enkeltrykk</string>
     <string name="double_click">Dobbeltrykk</string>
     <string name="long_press">Langt trykk</string>
     <string name="control_description">%ACTION til %REACTION</string>
-    <string name="touch_sensibility">Touch følsomhet</string>
+    <string name="touch_sensibility">Berøringsfølsomhet</string>
     <string name="open_tile">Åpne</string>
     <string name="flag_tile">Flagg</string>
     <string name="retry">Prøv på nytt</string>
@@ -75,7 +75,7 @@
     <string name="you_have_received">Du har mottatt: +%1$d</string>
     <string name="help_win_a_game">For mer hjelp, må du vinne et spill.</string>
     <string name="unknown_error">Ukjent feil.</string>
-    <string name="leaderboards">Leaderboards</string>
+    <string name="leaderboards">Ledertavle</string>
     <string name="cancel">Avbryt</string>
     <string name="resume">Fortsett</string>
     <string name="yes">Ja</string>
@@ -101,19 +101,19 @@
     <string name="appearance">Utseende</string>
     <string name="themes">Temaer</string>
     <string name="delete_all_message">Slett alle hendelser permanent.</string>
-    <string name="remove_ad">Fjern Reklame</string>
+    <string name="remove_ad">Fjern Reklamer</string>
     <string name="help">Hjelp</string>
     <string name="back">Tilbake</string>
     <string name="donation">Donasjon</string>
     <string name="open_on_game">Åpne på spillskjermen</string>
     <string name="show_windows">Vis vinduer</string>
     <string name="select_language">Velg språk</string>
-    <string name="switch_control">Bytte: Flagg og Åpne</string>
+    <string name="switch_control">Bytt: Flagg og Åpne</string>
     <string name="switch_control_desc">Bruk knappen for å bytte mellom Flagg og Åpne</string>
-    <string name="app_description">Du må fjerne en rektangulær plate med skjulte miner uten å løsne noen av dem.</string>
+    <string name="app_description">Du må rydde en rektangulær plate med skjulte miner uten å detonere noen av dem.</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
-    <string name="close">Close</string>
-    <string name="open_tutorial">Open Tutorial</string>
-    <string name="master" comment="new level difficulty">Master</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Vet du allerede hvordan man spiller minesveiper?</string>
+    <string name="close">Lukk</string>
+    <string name="open_tutorial">Åpne opplæring</string>
+    <string name="master" comment="new level difficulty">Mester</string>
 </resources>
