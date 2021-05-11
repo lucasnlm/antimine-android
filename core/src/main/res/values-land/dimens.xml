@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="main_activity_padding">96dp</dimen>
+</resources>

@@ -1,5 +1,5 @@
 <resources>
-    <dimen name="main_activity_padding">16dp</dimen>
+    <dimen name="main_activity_padding">24dp</dimen>
 
     <dimen name="field_size">76dp</dimen>
     <dimen name="field_radius">1.5dp</dimen>

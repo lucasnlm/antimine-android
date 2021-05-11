@@ -43,6 +43,7 @@ import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -151,7 +152,7 @@ class GameActivity :
                     tapToBegin.visibility = View.GONE
                 }
 
-                if (it.turn < 3 && it.saveId == 0L) {
+                if (it.turn < 1 && it.saveId == 0L) {
                     val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
                     val controlText = gameViewModel.getControlDescription(applicationContext)
@@ -329,7 +330,7 @@ class GameActivity :
             gameViewModel.pauseGame()
         }
 
-        lifecycleScope.launch {
+        GlobalScope.launch {
             gameViewModel.saveGame()
         }
     }

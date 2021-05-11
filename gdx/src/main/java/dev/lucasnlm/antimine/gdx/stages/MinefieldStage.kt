@@ -70,11 +70,12 @@ class MinefieldStage(
     fun changeZoom(zoomMultiplier: Float) {
         (camera as OrthographicCamera).apply {
             val newZoom = if (zoomMultiplier > 1.0) {
-                zoom + 2.0f * zoomMultiplier * Gdx.graphics.deltaTime
+                zoom + zoom * zoomMultiplier * Gdx.graphics.deltaTime
             } else {
-                zoom - 2.0f * (1.0f / zoomMultiplier) * Gdx.graphics.deltaTime
+                zoom - 2.0f * zoom * (1.0f / zoomMultiplier) * Gdx.graphics.deltaTime
             }
             zoom = newZoom.coerceIn(0.7f, 4.0f)
+            currentZoom = zoom
             update(true)
 
             GdxLocal.zoomLevelAlpha = when {
@@ -327,21 +328,31 @@ class MinefieldStage(
         }
     }
 
+    override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
+        cameraController.freeTouch(screenX.toFloat(), screenY.toFloat())
+        return super.touchUp(screenX, screenY, pointer, button)
+    }
+
     override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean {
         return minefieldSize?.let {
             val dx = Gdx.input.deltaX.toFloat()
             val dy = Gdx.input.deltaY.toFloat()
 
-            if (dx * dx + dy * dy > actionSettings.touchSensibility * 4) {
+            if (dx * dx + dy * dy > actionSettings.touchSensibility * 8) {
                 inputEvents.clear()
             }
 
-            if (dx * dx + dy * dy > actionSettings.touchSensibility) {
-                cameraController.addVelocity(
-                    -dx * currentZoom,
-                    dy * currentZoom,
-                )
-            }
+            cameraController.startTouch(
+                x = screenX.toFloat(),
+                y = screenY.toFloat(),
+            )
+
+            cameraController.translate(
+                dx = -dx * currentZoom,
+                dy = dy * currentZoom,
+                x = screenX.toFloat(),
+                y = screenY.toFloat(),
+            )
 
             true
         } != null

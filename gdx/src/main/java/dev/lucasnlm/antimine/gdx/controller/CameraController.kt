@@ -1,5 +1,4 @@
 package dev.lucasnlm.antimine.gdx.controller
-
 import android.util.SizeF
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Camera
@@ -12,6 +11,7 @@ class CameraController(
     private val camera: Camera,
 ) {
     private val velocity: Vector2 = Vector2.Zero.cpy()
+    private var touch: Vector2? = null
 
     private fun limitSpeed(minefieldSize: SizeF) {
         val padding = renderSettings.internalPadding
@@ -53,10 +53,31 @@ class CameraController(
         }
     }
 
-    fun addVelocity(dx: Float, dy: Float) {
-        val zoom = (camera as OrthographicCamera).zoom
-        velocity.add(dx * zoom, dy * zoom)
-        camera.update(true)
+    fun freeTouch(x: Float, y: Float) {
+        touch?.let {
+            val dx = it.x - x
+            val dy = y - it.y
+            velocity.add(dx * Gdx.graphics.deltaTime, dy * Gdx.graphics.deltaTime)
+        }
+        touch = null
+    }
+
+    fun startTouch(x: Float, y: Float) {
+        if (touch == null) {
+            touch = Vector2(x, y)
+        }
+    }
+
+    fun translate(dx: Float, dy: Float, x: Float, y: Float) {
+        touch?.let {
+            if (Vector2(x, y).sub(it.x, it.y).len() > renderSettings.areaSize) {
+                camera.run {
+                    translate(dx, dy, 0f)
+                    update(true)
+                    Gdx.graphics.requestRendering()
+                }
+            }
+        }
     }
 
     companion object {

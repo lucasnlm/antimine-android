@@ -18,19 +18,19 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:elevation="0.0dp"
-        android:paddingHorizontal="20dp"
+        android:paddingHorizontal="@dimen/main_activity_padding"
+        app:layout_constraintBottom_toTopOf="@+id/open_crowdin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/open_crowdin"
         app:layout_constraintTop_toBottomOf="@id/section" />
 
     <dev.lucasnlm.antimine.ui.view.CardButtonView
         android:id="@+id/open_crowdin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="@dimen/main_activity_padding"
         android:layout_marginVertical="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

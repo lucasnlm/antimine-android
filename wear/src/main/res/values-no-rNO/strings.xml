@@ -2,5 +2,5 @@
 <resources>
     <string name="new_game">Nytt Spill</string>
     <string name="victory">Du vant!&#xA0; 😎</string>
-    <string name="game_over">Detonert!&#xA0;😢</string>
+    <string name="game_over">Eksplodert!&#xA0;😢</string>
 </resources>

@@ -47,7 +47,6 @@ class GameApplicationListener(
 
     private val assetManager = AssetManager()
 
-    private val isPortrait = context.isPortrait()
     private var minefieldStage: MinefieldStage? = null
     private var boundAreas: List<Area> = listOf()
     private var boundMinefield: Minefield? = null
@@ -231,7 +230,7 @@ class GameApplicationListener(
                     setUniformf(BlurShader.direction, 1.0f, 1.0f)
                     setUniformf(BlurShader.radius, 2.0f)
 
-                    if (isPortrait) {
+                    if (context.isPortrait()) {
                         setUniformf(BlurShader.blurTop, (1.0f - (renderSettings.appBarWithStatusHeight / height)))
                         setUniformf(BlurShader.blurBottom, (renderSettings.navigationBarHeight / height))
                         setUniformf(BlurShader.blurStart, 0.0f)
