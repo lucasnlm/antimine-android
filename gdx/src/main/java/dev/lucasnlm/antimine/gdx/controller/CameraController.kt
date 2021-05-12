@@ -12,6 +12,7 @@ class CameraController(
 ) {
     private val velocity: Vector2 = Vector2.Zero.cpy()
     private var touch: Vector2? = null
+    private var unlockTouch = false
 
     private fun limitSpeed(minefieldSize: SizeF) {
         val padding = renderSettings.internalPadding
@@ -60,6 +61,7 @@ class CameraController(
             velocity.add(dx * Gdx.graphics.deltaTime, dy * Gdx.graphics.deltaTime)
         }
         touch = null
+        unlockTouch = false
     }
 
     fun startTouch(x: Float, y: Float) {
@@ -70,12 +72,13 @@ class CameraController(
 
     fun translate(dx: Float, dy: Float, x: Float, y: Float) {
         touch?.let {
-            if (Vector2(x, y).sub(it.x, it.y).len() > renderSettings.areaSize) {
+            if (Vector2(x, y).sub(it.x, it.y).len() > renderSettings.areaSize || unlockTouch) {
                 camera.run {
                     translate(dx, dy, 0f)
                     update(true)
                     Gdx.graphics.requestRendering()
                 }
+                unlockTouch = true
             }
         }
     }
