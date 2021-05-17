@@ -44,8 +44,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
-    implementation 'androidx.activity:activity-ktx:1.2.2'
-    implementation "androidx.fragment:fragment-ktx:1.3.2"
+    implementation 'androidx.activity:activity-ktx:1.2.3'
+    implementation "androidx.fragment:fragment-ktx:1.3.3"
 
     // Google
     implementation 'com.google.android.material:material:1.3.0'
@@ -63,10 +63,10 @@ dependencies {
     testImplementation 'org.koin:koin-test:2.2.1'
 
     // Room
-    api 'androidx.room:room-runtime:2.2.5'
-    api 'androidx.room:room-ktx:2.2.5'
-    kapt 'androidx.room:room-compiler:2.2.5'
-    testImplementation 'androidx.room:room-testing:2.2.5'
+    api 'androidx.room:room-runtime:2.3.0'
+    api 'androidx.room:room-ktx:2.3.0'
+    kapt 'androidx.room:room-compiler:2.3.0'
+    testImplementation 'androidx.room:room-testing:2.3.0'
 
     // Moshi - Json
     api 'com.squareup.moshi:moshi:1.11.0'
@@ -88,12 +88,12 @@ dependencies {
     testImplementation "io.mockk:mockk:1.10.3"
 
     // Core library
-    androidTestImplementation 'androidx.test:core:1.2.0'
+    androidTestImplementation 'androidx.test:core:1.3.0'
 
     // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test:rules:1.2.0'
-    androidTestUtil 'androidx.test:orchestrator:1.2.0'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
+    androidTestUtil 'androidx.test:orchestrator:1.3.0'
 }
 
 tasks.withType(Test) {

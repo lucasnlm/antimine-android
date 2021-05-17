@@ -38,22 +38,22 @@ dependencies {
     implementation project(':external')
 
     // Amplitude
-    implementation 'com.amplitude:android-sdk:2.25.2'
+    implementation 'com.amplitude:android-sdk:2.31.0'
     implementation 'com.squareup.okhttp3:okhttp:4.2.2'
 
     // Google
-    implementation 'com.android.billingclient:billing-ktx:3.0.2'
+    implementation 'com.android.billingclient:billing-ktx:3.0.3'
     implementation 'com.google.android.gms:play-services-instantapps:17.0.0'
     implementation 'com.google.android.gms:play-services-games:21.0.0'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
-    implementation 'com.google.android.gms:play-services-ads:19.7.0'
+    implementation 'com.google.android.gms:play-services-ads:20.1.0'
     implementation 'com.google.android.play:core-ktx:1.8.1'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-analytics-ktx:18.0.2'
-    implementation 'com.google.firebase:firebase-crashlytics:17.3.1'
-    implementation 'com.google.firebase:firebase-firestore-ktx:22.1.1'
-    implementation 'com.google.firebase:firebase-config-ktx:20.0.4'
+    implementation 'com.google.firebase:firebase-analytics-ktx:19.0.0'
+    implementation 'com.google.firebase:firebase-crashlytics:18.0.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:23.0.0'
+    implementation 'com.google.firebase:firebase-config-ktx:21.0.0'
 
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
