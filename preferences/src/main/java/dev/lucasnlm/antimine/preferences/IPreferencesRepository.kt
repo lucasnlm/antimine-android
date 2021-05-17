@@ -107,4 +107,7 @@ interface IPreferencesRepository {
 
     fun showTutorialDialog(): Boolean
     fun setTutorialDialog(show: Boolean)
+
+    fun allowTapOnNumbers(): Boolean
+    fun setAllowTapOnNumbers(allow: Boolean)
 }

@@ -387,4 +387,12 @@ class PreferencesRepository(
     override fun setTutorialDialog(show: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_TUTORIAL_DIALOG, show)
     }
+
+    override fun allowTapOnNumbers(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_ALLOW_TAP_NUMBER, true)
+    }
+
+    override fun setAllowTapOnNumbers(allow: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_ALLOW_TAP_NUMBER, allow)
+    }
 }

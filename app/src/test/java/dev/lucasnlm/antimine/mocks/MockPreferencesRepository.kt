@@ -150,4 +150,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun showTutorialDialog(): Boolean = false
 
     override fun setTutorialDialog(show: Boolean) { }
+
+    override fun allowTapOnNumbers(): Boolean = true
+
+    override fun setAllowTapOnNumbers(allow: Boolean) { }
 }

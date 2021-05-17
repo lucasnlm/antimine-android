@@ -27,6 +27,7 @@ class GameController {
     private var useQuestionMark = true
     private var useOpenOnSwitchControl = true
     private var useNoGuessing = true
+    private var useClickOnNumbers = true
     private var errorTolerance = 0
 
     val seed: Long
@@ -116,8 +117,10 @@ class GameController {
                     }
                 }
                 ActionResponse.OpenNeighbors -> {
-                    this.actions++
-                    minefieldHandler.openOrFlagNeighborsOf(target.id)
+                    if (useClickOnNumbers) {
+                        this.actions++
+                        minefieldHandler.openOrFlagNeighborsOf(target.id)
+                    }
                 }
                 ActionResponse.OpenOrMark -> {
                     if (!hasMines()) {
@@ -339,6 +342,10 @@ class GameController {
 
     fun useNoGuessing(noGuessing: Boolean) {
         this.useNoGuessing = noGuessing
+    }
+
+    fun useClickOnNumbers(clickNumbers: Boolean) {
+        this.useClickOnNumbers = clickNumbers
     }
 
     fun useOpenOnSwitchControl(useOpen: Boolean) {

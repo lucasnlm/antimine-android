@@ -126,6 +126,14 @@ class PreferencesActivity :
             action = { preferenceRepository.setHelp(it) }
         )
 
+        bindItem(
+            label = allowClickNumberLabel,
+            switch = clickOnNumbers,
+            supportTv = false,
+            checked = preferenceRepository.allowTapOnNumbers(),
+            action = { preferenceRepository.setAllowTapOnNumbers(it) }
+        )
+
         PreferenceManager.getDefaultSharedPreferences(this)
             .registerOnSharedPreferenceChangeListener(this)
     }

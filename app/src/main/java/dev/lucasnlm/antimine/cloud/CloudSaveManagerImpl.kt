@@ -53,6 +53,7 @@ class CloudSaveManagerImpl(
                     unlockedThemes = preferencesRepository.getUnlockedThemes().joinToString(" "),
                     squareDivider = preferencesRepository.squareDivider(),
                     doubleClickTimeout = preferencesRepository.getDoubleClickTimeout().toInt(),
+                    allowTapNumbers = preferencesRepository.allowTapOnNumbers().toInt(),
                 )
             }
         } catch (e: Exception) {

@@ -83,6 +83,7 @@ class MainViewModel(
             setFlagAssistant(gameAssistance != 0)
             setHapticFeedback(hapticFeedback != 0)
             setHelp(help != 0)
+            setAllowTapOnNumbers(allowTapNumbers != 0)
             setSoundEffectsEnabled(soundEffects != 0)
             setPremiumFeatures(premiumFeatures != 0)
             useControlStyle(ControlStyle.values()[controlStyle])
