@@ -176,7 +176,6 @@ dependencies {
     androidTestImplementation 'androidx.test:core:1.3.0'
 
     // AndroidJUnitRunner and JUnit Rules
-    androidtestImplementation 'androidx.core:core-ktx:1.5.0'
     androidTestImplementation 'androidx.test:core:1.3.0'
     androidTestImplementation 'androidx.test:core-ktx:1.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

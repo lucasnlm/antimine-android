@@ -1,13 +1,16 @@
 package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.common.level.GameController
-import dev.lucasnlm.antimine.core.control.GameControl
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
+import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -39,7 +42,7 @@ class GameControllerTest {
     @Test
     fun testGetScore() = runBlockingTest {
         withGameController { controller ->
-            assertEquals(Score(0, 20, 100), controller.getScore())
+            assertEquals(Score(20, 20, 100), controller.getScore())
 
             repeat(20) { markedMines ->
                 controller
@@ -48,10 +51,10 @@ class GameControllerTest {
                     .filter { it.mark.isNone() }
                     .forEach {
                         // Put a flag.
-                        controller.fakeLongPress(it.id)
+                        fakeLongPress(controller, it.id)
                     }
 
-                assertEquals(Score(markedMines, 20, 100), controller.getScore())
+                assertEquals(markedMines, controller.rightFlags())
             }
         }
     }
@@ -67,8 +70,8 @@ class GameControllerTest {
                 .take(5)
                 .forEach {
                     // Put Question Mark
-                    controller.fakeLongPress(it.id)
-                    controller.fakeLongPress(it.id)
+                    fakeLongPress(controller, it.id)
+                    fakeLongPress(controller, it.id)
                 }
 
             assertEquals(Score(0, 20, 100), controller.getScore())
@@ -138,11 +141,11 @@ class GameControllerTest {
     fun testShowWrongFlags() = runBlockingTest {
         withGameController { controller ->
             controller.field().first { !it.hasMine && it.isCovered }.run {
-                controller.fakeLongPress(id)
+                fakeLongPress(controller, id)
             }
 
             controller.mines().first().run {
-                controller.fakeLongPress(id)
+                fakeLongPress(controller, id)
             }
 
             controller.showWrongFlags()
@@ -173,14 +176,14 @@ class GameControllerTest {
             controller.field()
                 .filter { it.hasMine }
                 .take(10)
-                .forEach { controller.fakeLongPress(it.id) }
+                .forEach { fakeLongPress(controller, it.id) }
 
             assertFalse(controller.hasFlaggedAllMines())
 
             controller.field()
                 .filter { it.hasMine }
                 .filter { it.mark.isNone() }
-                .forEach { controller.fakeLongPress(it.id) }
+                .forEach { fakeLongPress(controller, it.id) }
 
             assertTrue(controller.hasFlaggedAllMines())
         }
@@ -197,7 +200,7 @@ class GameControllerTest {
                     .take(flagCount)
                     .forEach {
                         if (!it.mark.isFlag()) {
-                            controller.fakeLongPress(it.id)
+                            fakeLongPress(controller, it.id)
                         }
                     }
                 assertEquals("flagging $flagCount mines", 20 - flagCount, controller.remainingMines())
@@ -257,7 +260,7 @@ class GameControllerTest {
         withGameController { controller ->
             assertFalse(controller.isVictory())
 
-            controller.mines().forEach { controller.fakeLongPress(it.id) }
+            controller.mines().forEach { fakeLongPress(controller, it.id) }
             assertFalse(controller.isVictory())
 
             controller.field { !it.hasMine }.forEach { controller.fakeSingleClick(it.id) }
@@ -295,21 +298,21 @@ class GameControllerTest {
                 updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
                 useQuestionMark(true)
 
-                fakeLongPress(4)
+                fakeLongPress(controller, 4)
                 assertTrue(at(4).mark.isFlag())
                 assertTrue(at(4).isCovered)
-                fakeLongPress(4)
+                fakeLongPress(controller, 4)
                 assertTrue(at(4).mark.isQuestion())
                 assertTrue(at(4).isCovered)
-                fakeLongPress(4)
+                fakeLongPress(controller, 4)
                 assertTrue(at(4).mark.isNone())
                 assertTrue(at(4).isCovered)
 
                 useQuestionMark(false)
-                fakeLongPress(4)
+                fakeLongPress(controller, 4)
                 assertTrue(at(4).mark.isFlag())
                 assertTrue(at(4).isCovered)
-                fakeLongPress(4)
+                fakeLongPress(controller, 4)
                 assertTrue(at(4).mark.isNone())
                 assertTrue(at(4).isCovered)
             }
@@ -328,11 +331,11 @@ class GameControllerTest {
                     assertTrue(it.isCovered)
                 }
 
-                mines().forEach { fakeLongPress(it.id) }
+                mines().forEach { fakeLongPress(controller, it.id) }
 
                 mines().forEach { assertTrue(it.mark.isFlag()) }
 
-                fakeLongPress(14)
+                fakeLongPress(controller, 14)
 
                 field().filterNeighborsOf(at(14)).forEach {
                     if (it.hasMine) {
@@ -346,17 +349,17 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlFirstActionWithFastFlag() {
+    fun testControlFirstActionWithFastFlag() = runBlockingTest {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
                 fakeSingleClick(3)
                 assertTrue(at(3).isCovered)
                 assertTrue(at(3).mark.isFlag())
-                fakeLongPress(3)
+                fakeLongPress(controller, 3)
                 assertFalse(at(3).mark.isFlag())
                 assertTrue(at(3).isCovered)
-                fakeLongPress(3)
+                fakeLongPress(controller, 3)
                 assertFalse(at(3).isCovered)
             }
         }
@@ -391,11 +394,11 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlFastFlagOpenMultiple() {
+    fun testControlFastFlagOpenMultiple() = runBlockingTest {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
-                fakeLongPress(14)
+                fakeLongPress(controller, 14)
                 assertFalse(at(14).isCovered)
 
                 field().filterNeighborsOf(at(14)).forEach {
@@ -532,19 +535,15 @@ class GameControllerTest {
         return this.field().first { it.id == index }
     }
 
-    private fun GameController.fakeSingleClick(index: Int) {
-        runBlocking {
-            launch {
-                singleClick(index).single()
-            }
+    private fun TestCoroutineScope.fakeSingleClick(gameController: GameController, index: Int) {
+        launch {
+            gameController.singleClick(index).single()
         }
     }
 
-    private fun GameController.fakeLongPress(index: Int) {
-        runBlocking {
-            launch {
-                longPress(index).single()
-            }
+    private fun TestCoroutineScope.fakeLongPress(gameController: GameController, index: Int) {
+        launch {
+            gameController.longPress(index).single()
         }
     }
 
@@ -552,7 +551,7 @@ class GameControllerTest {
         runBlocking {
             launch {
                 doubleClick(index).single()
-            }
+            }.join()
         }
     }
 }

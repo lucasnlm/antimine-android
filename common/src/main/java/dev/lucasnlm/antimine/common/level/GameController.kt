@@ -241,7 +241,7 @@ class GameController {
         return result
     }
 
-    private fun hasAnyMineExploded(): Boolean = mines().firstOrNull { it.mistake } != null
+    fun hasAnyMineExploded(): Boolean = mines().firstOrNull { it.mistake } != null
 
     private fun explodedMinesCount(): Int = mines().count { it.mistake }
 
@@ -251,7 +251,7 @@ class GameController {
         return field.count { area -> !area.hasMine && area.isCovered } == 0
     }
 
-    private fun rightFlags() = mines().count { it.mark.isFlag() }
+    fun rightFlags() = mines().count { it.mark.isFlag() }
 
     fun isVictory(): Boolean =
         hasMines() && hasIsolatedAllMines() && !hasAnyMineExploded()

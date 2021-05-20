@@ -21,13 +21,9 @@ class MinefieldRepositoryTest {
     private val expertMinefield = Minefield(24, 24, 99)
     private val masterMinefield = Minefield(50, 50, 200)
 
-    private val mockContext = mock<Context>().apply {
-        whenever(isPortrait()) doReturn true
-    }
-
     @Test
     fun testStandardSizeCalcWithoutNavigationBar() {
-        val minefieldRepository = MinefieldRepository(mockContext)
+        val minefieldRepository = MinefieldRepository()
         val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true) {
             every { getProgressiveValue() } returns 0
         }
@@ -49,7 +45,7 @@ class MinefieldRepositoryTest {
 
     @Test
     fun testStandardSizeCalcWithNavigationBar() {
-        val minefieldRepository = MinefieldRepository(mockContext)
+        val minefieldRepository = MinefieldRepository()
         val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true) {
             every { getProgressiveValue() } returns 0
         }
@@ -71,7 +67,7 @@ class MinefieldRepositoryTest {
 
     @Test
     fun testStandardSizeCalcWithNavigationBarAndProgress() {
-        val minefieldRepository = MinefieldRepository(mockContext)
+        val minefieldRepository = MinefieldRepository()
         val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true) {
             every { getProgressiveValue() } returns 50
         }
@@ -93,7 +89,7 @@ class MinefieldRepositoryTest {
 
     @Test
     fun testStandardSizeCalcWithNavigationBarAndHighProgress() {
-        val minefieldRepository = MinefieldRepository(mockContext)
+        val minefieldRepository = MinefieldRepository()
         val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true) {
             every { getProgressiveValue() } returns 10000
         }
@@ -115,7 +111,7 @@ class MinefieldRepositoryTest {
 
     @Test
     fun testBeginnerMinefield() {
-        val minefieldRepository = MinefieldRepository(mockContext)
+        val minefieldRepository = MinefieldRepository()
         val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true)
         val dimensionRepository = mockk<IDimensionRepository>(relaxed = true)
 
@@ -129,7 +125,7 @@ class MinefieldRepositoryTest {
 
     @Test
     fun testIntermediateMinefield() {
-        val minefieldRepository = MinefieldRepository(mockContext)
+        val minefieldRepository = MinefieldRepository()
         val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true)
         val dimensionRepository = mockk<IDimensionRepository>(relaxed = true)
 
@@ -143,7 +139,7 @@ class MinefieldRepositoryTest {
 
     @Test
     fun testExpertMinefieldMinefield() {
-        val minefieldRepository = MinefieldRepository(mockContext)
+        val minefieldRepository = MinefieldRepository()
         val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true)
         val dimensionRepository = mockk<IDimensionRepository>(relaxed = true)
 
@@ -157,7 +153,7 @@ class MinefieldRepositoryTest {
 
     @Test
     fun testMasterMinefieldMinefield() {
-        val minefieldRepository = MinefieldRepository(mockContext)
+        val minefieldRepository = MinefieldRepository()
         val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true)
         val dimensionRepository = mockk<IDimensionRepository>(relaxed = true)
 
@@ -171,7 +167,7 @@ class MinefieldRepositoryTest {
 
     @Test
     fun testCustomMinefieldMinefield() {
-        val minefieldRepository = MinefieldRepository(mockContext)
+        val minefieldRepository = MinefieldRepository()
         val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true) {
             every { customGameMode() } returns Minefield(25, 20, 12)
         }

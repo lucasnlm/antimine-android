@@ -19,7 +19,8 @@ class AreaConverterTest {
               "isCovered":true,
               "mark":"None",
               "highlighted":true,
-              "revealed":false
+              "revealed":false,
+              "neighborsIds":[]
            },
            {
               "id":2,
@@ -31,7 +32,8 @@ class AreaConverterTest {
               "isCovered":false,
               "mark":"PurposefulNone",
               "highlighted":false,
-              "revealed":false
+              "revealed":false,
+              "neighborsIds":[]
            },
            {
               "id":3,
@@ -43,7 +45,8 @@ class AreaConverterTest {
               "isCovered":true,
               "mark":"Flag",
               "highlighted":true,
-              "revealed":false
+              "revealed":false,
+              "neighborsIds":[]
            },
            {
               "id":4,
@@ -55,7 +58,8 @@ class AreaConverterTest {
               "isCovered":true,
               "mark":"Question",
               "highlighted":true,
-              "revealed":true
+              "revealed":true,
+              "neighborsIds":[]
            }
         ]
         """.trimIndent().replace(
@@ -73,6 +77,7 @@ class AreaConverterTest {
                 mark = Mark.None,
                 highlighted = true,
                 revealed = false,
+                neighborsIds = listOf(),
             ),
             Area(
                 2, 5, 3, 0,
@@ -82,6 +87,7 @@ class AreaConverterTest {
                 mark = Mark.PurposefulNone,
                 highlighted = false,
                 revealed = false,
+                neighborsIds = listOf(),
             ),
             Area(
                 3, 1, 1, 3,
@@ -91,6 +97,7 @@ class AreaConverterTest {
                 mark = Mark.Flag,
                 highlighted = true,
                 revealed = false,
+                neighborsIds = listOf(),
             ),
             Area(
                 4, 0, 0, 6,
@@ -100,6 +107,7 @@ class AreaConverterTest {
                 mark = Mark.Question,
                 highlighted = true,
                 revealed = true,
+                neighborsIds = listOf(),
             )
         )
 

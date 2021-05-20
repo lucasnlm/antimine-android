@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.level.database.converters
 
-import dev.lucasnlm.antimine.common.level.models.Difficulty
+import dev.lucasnlm.antimine.core.models.Difficulty
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -18,7 +18,7 @@ class DifficultyConverterTest {
     @Test(expected = IllegalArgumentException::class)
     fun toDifficultyInvalid() {
         val converter = DifficultyConverter()
-        converter.toDifficulty(5)
+        converter.toDifficulty(6)
     }
 
     @Test
