@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="da">
     <string name="tutorial">Vejledning</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_basic">Reglen for spillet er enkel, nummeret på en firkant viser antallet af miner ved siden af, og du skal markere alle minerne.</string>
+    <string name="tutorial_text_1">Hvis et tal er ved at røre det samme antal af firkanter, så er kvadraterne alle miner.</string>
+    <string name="tutorial_text_2">Efter markeringen af dit første flag, gennemse tallene og analysere det næste felt.</string>
+    <string name="tutorial_text_3">Hvis en firkant har det samme antal af flag, er alle andre resterende firkanter ved siden af det ikke miner. (Den grønne pil).</string>
+    <string name="tutorial_text_4">Gennemgå tallene og behold åbningskvardrater.</string>
     <string name="games">Spil</string>
     <string name="tap_to_begin">Tryk for at starte</string>
     <string name="previous_games">Forrige Spil</string>
@@ -112,8 +112,9 @@
     <string name="switch_control_desc">Brug knappen til at skifte mellem Flag og Åbn</string>
     <string name="app_description">Ryd skjulte miner fra et minefelt.</string>
     <string name="app_name">Antimine - Minestryger</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
-    <string name="close">Close</string>
-    <string name="open_tutorial">Open Tutorial</string>
-    <string name="master" comment="new level difficulty">Master</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Ved du hvordan man spiller minesweeper?</string>
+    <string name="close">Luk</string>
+    <string name="open_tutorial">Åben vejledning</string>
+    <string name="master" comment="new level difficulty">Mester</string>
+    <string name="click_numbers" comment="this is a settings item">Tillad tryk på numre</string>
 </resources>

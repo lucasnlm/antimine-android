@@ -13,7 +13,7 @@
     <string name="standard">Standard</string>
     <string name="beginner">Prinsipiante</string>
     <string name="intermediate">Mezan</string>
-    <string name="expert">Mestro</string>
+    <string name="expert">Navegà</string>
     <string name="open">Verzi</string>
     <string name="settings">Inpostasion</string>
     <string name="animations">Animasion</string>
@@ -112,8 +112,9 @@
     <string name="switch_control_desc">Dòpara el boton par pasar da Marca a Verzi</string>
     <string name="app_description">Te ghè da sgonbrar na toła retangołar contenente mine sconte sensa fàrghene sciopar njanca una.</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Seto come zogar a canpo minà?</string>
     <string name="close">Sara</string>
-    <string name="open_tutorial">Open Tutorial</string>
-    <string name="master" comment="new level difficulty">Master</string>
+    <string name="open_tutorial">Verzi el Tutorial</string>
+    <string name="master" comment="new level difficulty">Mestro</string>
+    <string name="click_numbers" comment="this is a settings item">Parmeti de strucar so i nùmari</string>
 </resources>

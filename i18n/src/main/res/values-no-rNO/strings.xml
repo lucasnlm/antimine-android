@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="no">
     <string name="tutorial">Opplæring</string>
-    <string name="tutorial_basic">Reglene for spillet er lette; nummeret på en firkant viser antall miner som berører den og du må flagge alle minene.</string>
-    <string name="tutorial_text_1">Hvis et nummer berører samme antallet firkanter så er alle firkantene miner.</string>
-    <string name="tutorial_text_2">Etter du har satt ditt første flagg, se over og analyser den neste firkanten.</string>
-    <string name="tutorial_text_3">Hvis en firkant har samme antall flagg, vil alle de gjenværende firkantene som berører den ikke være miner (den grønne pilen).</string>
-    <string name="tutorial_text_4">Se over tallene og fortsett å åpne firkanter.</string>
+    <string name="tutorial_basic">Reglene for spillet er lette; nummeret på en rute viser antall miner som berører den og du må flagge alle minene.</string>
+    <string name="tutorial_text_1">Hvis et nummer berører samme antallet ruter så er alle rutene miner.</string>
+    <string name="tutorial_text_2">Etter du har satt ditt første flagg, se over og analyser den neste ruten.</string>
+    <string name="tutorial_text_3">Hvis en rute har samme antall flagg, vil alle de gjenværende rutene som berører den ikke være miner (den grønne pilen).</string>
+    <string name="tutorial_text_4">Se over tallene og fortsett å åpne ruter.</string>
     <string name="games">Spill</string>
     <string name="tap_to_begin">Trykk for å begynne</string>
     <string name="previous_games">Tidligere Spill</string>
@@ -35,8 +35,8 @@
     <string name="settings_gameplay">Spillopplevelse</string>
     <string name="settings_accessibility">Tilgjengelighet</string>
     <string name="size">Størrelse</string>
-    <string name="rounded_square">Avrundet Firkant</string>
-    <string name="space_between_squares">Mellomrom mellom firkanter</string>
+    <string name="rounded_square">Avrundet Rute</string>
+    <string name="space_between_squares">Mellomrom mellom ruter</string>
     <string name="system">System</string>
     <string name="rating">Tilbakemelding</string>
     <string name="sign_in_failed">Innlogging feilet. Vennligst sjekk nettverkstilkoblingen din og prøv igjen.</string>
@@ -116,4 +116,5 @@
     <string name="close">Lukk</string>
     <string name="open_tutorial">Åpne opplæring</string>
     <string name="master" comment="new level difficulty">Mester</string>
+    <string name="click_numbers" comment="this is a settings item">Tillat trykk på tall</string>
 </resources>

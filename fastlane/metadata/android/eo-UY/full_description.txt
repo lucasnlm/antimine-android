@@ -1,56 +1,56 @@
-Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
-This is a minimalist and modern version of the classic Minesweeper.
+Provu vian pensopovon je defia puzloludo, kie vi devas solvi minejon sen eksplodigi minon.
+Ĉi tiu estas minimumisma kaj aktuala versio de la klasika Minesweeper.
 
-Are you able to clear a minefield? Let’s go!
+Ĉu vi povas viŝi minejon? Antaŭen!
 
-OBJECTIVE
-It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
+CELO
+Same kiel en Minesweeper,  vi gajnos en la ludo kiam vi finos flagumi ĉiun minon en la minejo. Estu singarda ne ŝalti eĉ unu el ili!
 
-NO GUESSING
-This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
+NE DIVENU
+Ĉi tiu ludo havas algoritmon, kiu ĉiam montras solveblajn minejojn. Vi ne devos diveni, kie la lasta mino estas!
 
-GAME LEVELS
-Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
+LUDNIVELOJ
+Same kiel en Minesweeper, ĉi tiu ludo havas malsamajn nivelojn: Komencanto, Mezulo kaj Spertulo. Tamen ĝi ankaŭ havas unikan progresan ludmanieron, kiu malfaciliĝas laŭ viaj gajnoj.
 
-CUSTOM LEVEL
-If the standard modes aren't enough, you can create your level difficulty!
+PROPRA NIVELO
+Se la ordinaraj ludmanieroj ne sufiĉas, vi rajtas krei laŭvole nivelan malfacilecon!
 
-THEMES
-Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+TONOJ
+Antimine havas pli ol 15 tonojn (inkluzive je luma, malluma kaj AMOLED). Kaj pliaj estos aldonitaj baldaŭ!
 
-MINIMALIST
-Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+MINIMUMISMA
+Klaraj aspekto kaj sentigo: minimumisma bildaro kaj malpeza app-grando (malpli ol 9MB).
 
-TUTORIAL
-Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+LERNILO
+Ĉu vi ne scias ludi Minesweeper? Senprobleme; vi povas ludi la lernilan nivelon kaj ŝalti konsilojn ĉe agordo.
 
-STATISTICS
-Check your results and development.
+STATISTIKOJ
+Kontrolu viajn rezultojn kaj progreson.
 
-GAME ASSISTANT
-The game will automatically flag the squares you isolated. 
+LUDHELPILO
+La ludo aŭtomate flagumos la kvarlaterojn, kiujn vi lasis malkunaj. 
 
-CUSTOMIZATION
-You can change the game to make it like you want to. 
-Example: Help, animations, haptic feedback, question mark.
+AGORDADO
+Vi rajtas ŝanĝi la ludon, por ke ĝi estu laŭ via ŝato. 
+Ekzemple: Helpo, movbildoj, haptika retrokuplo, demandosigno.
 
-CONTROLS
-It supports four different control schemes. Example: flag using tap or long press.
+REGILOJ
+Ĝi subtenas kvar malsimilajn regilskemojn. Ekzemplo: flagi uzante tuŝeti aŭ tuŝadi.
 
-ACHIEVEMENTS AND LEADERBOARDS 
-You have eight achievements to unlock and different leaderboards to share with your friends.
+AKIROJ KAJ ĈAMPIONEJOJ 
+Vi havas ok akiroj por malbloki kaj malsimilajn ĉampionejojn por disvastigi kun viaj amikoj.
 
-ACCESSIBILITY
-You can customize this game to your needs: change the squares size, radius, touch timing, and screen reader support.
-We are always trying to improve our accessibility settings. If you miss something give us feedback!
+ALIREBLO
+Vi povas akomodi ĉi tiu ludo for vian necesojn: ŝanĝi la kvatradojn amplekso, radiuso, tuŝtempomezurado, kaj ekranlegilo subteno.
+Ni ĉiam provas plibonigi nian alireblajn agordojn. Se vi maltrafas ion, sendu al ni vian prikomentado!
 
-ANDROID FOCUSED APP
-It supports cool Android features like split-screen, shortcuts, sharing, system theme, and always supporting the last version.
+ANDROIDO FOKUSITA APO
+Ĝi subtenas mojosa Androido trajtoj kiel ekrandividado, simbola ligilo, disvastigado, sistemtemo, kaj ĉiam subtenante la lastan version.
 
-ONLINE OR OFFLINE
-You don't need to be online to play the game!
+ENRETA AŬ MALENRETA
+Vi ne bezonas esti enreta por uzi la ludon!
 
-AUTO-SAVE
-You can start a game and continue it later! It will auto-save your game.
+AŬTOKONSERVADO
+Vi povas komenci ludon kaj daurigi ĝin poste! Ĝi automate savos vian ludon.
 
-Enjoy.
+Ĝuu.

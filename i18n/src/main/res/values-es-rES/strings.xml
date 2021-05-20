@@ -116,4 +116,5 @@
     <string name="close">Cerrar</string>
     <string name="open_tutorial">Abrir Tutorial</string>
     <string name="master" comment="new level difficulty">Maestro</string>
+    <string name="click_numbers" comment="this is a settings item">Permitir tocar números</string>
 </resources>

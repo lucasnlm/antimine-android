@@ -47,7 +47,7 @@ dependencies {
     testImplementation 'org.koin:koin-test:2.2.1'
 
     // AndroidX
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
 
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'

@@ -291,7 +291,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:paddingVertical="16dp"
-                android:text="@string/help"
+                android:text="@string/click_numbers"
                 android:textColor="?attr/colorOnBackground"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"

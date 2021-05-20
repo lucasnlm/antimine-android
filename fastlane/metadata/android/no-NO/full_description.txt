@@ -28,7 +28,7 @@ STATISTIKK
 Sjekk dine resultater og utvikling.
 
 SPILLASSISTENT
-Spillet flagger automatisk kvadratene du isolerer. 
+Spillet flagger automatisk rutene du isolerer. 
 
 TILPASNING
 Du kan endre spillet slik du ønsker. 
@@ -41,7 +41,7 @@ PRESTASJONER OG LEDERTAVLER
 Du har åtte prestasjoner å låse opp og forskjellige ledertavler å dele med vennene dine.
 
 TILGJENGELIGHET
-Du kan tilpasse dette spillet for dine behov: endre kvadratstørrelse, radius, berøringstiming, og støtte for skjermleser.
+Du kan tilpasse dette spillet for dine behov: endre rutestørrelse, radius, berøringstiming, og støtte for skjermleser.
 Vi prøver alltid å forbedre tilgjengelighetsinnstillingene våre. Gi oss tilbakemelding om du savner noe!
 
 ANDROID-FOKUSERT APP
