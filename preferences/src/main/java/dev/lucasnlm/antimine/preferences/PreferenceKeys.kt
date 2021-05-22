@@ -39,4 +39,5 @@ object PreferenceKeys {
     const val PREFERENCE_SQUARE_DIVIDER = "preference_new_square_divider"
     const val PREFERENCE_OLD_AREA_SIZES = "preference_migration_old_sizes"
     const val PREFERENCE_TUTORIAL_DIALOG = "preference_show_tutorial_dialog"
+    const val PREFERENCE_ALLOW_TAP_NUMBER = "preference_allow_tap_number"
 }

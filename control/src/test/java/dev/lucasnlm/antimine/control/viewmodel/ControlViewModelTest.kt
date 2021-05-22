@@ -35,6 +35,7 @@ class ControlViewModelTest {
             every { controlStyle() } returns ControlStyle.DoubleClick
             every { touchSensibility() } returns 10
             every { customLongPressTimeout() } returns 500L
+            every { getDoubleClickTimeout() } returns 500L
         }
 
         val viewModel = ControlViewModel(preferenceRepository)

@@ -1,56 +1,56 @@
-Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
-This is a minimalist and modern version of the classic Minesweeper.
+Test din ræsonnement magt på et udfordrende puslespil, hvor du er nødt til at løse et minefelt uden at eksplodere nogen mine.
+Dette er et minimalistisk og moderne version af det klassiske Minesweeper.
 
-Are you able to clear a minefield? Let’s go!
+Er du i stand til at rydde et minefelt? Afsted!
 
-OBJECTIVE
-It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
+FORMÅL
+Det ligesom Minesweeper. Du vinder spillet, når du har flaget hver mine i minefeltet. Vær forsigtig med ikke at udløse en!
 
-NO GUESSING
-This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
+INGEN GÆTTERI
+Dette spil har en algorimte, der altid skaber løsbare minefelter. Du bliver ikke nød til at gætte hvor den sidste mine er!
 
-GAME LEVELS
-Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
+SPIL NIVEAUER
+Ligesom Minesweeper, har dette spil forskellige niveauer: Begynder, Mellemliggende, og ekspert. Men det har også en unik progressiv tilstand, der bliver hårdere, når du vinder.
 
-CUSTOM LEVEL
-If the standard modes aren't enough, you can create your level difficulty!
+BRUGERDEFINEREDE NIVEAU
+Hvis standardtilstandene ikke er nok, kan du oprette dit niveau sværhed!
 
-THEMES
-Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+TEMAER
+Antmine har mere end 15 temaer (inkluderende lys, mørke og AMOLED). Og snart vil der blive tilføjet flere!
 
 MINIMALIST
-Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+Rent udseende og følelse: en minimalistisk visuel og også let app størrelse (mindre end 9MB).
 
-TUTORIAL
-Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+VEJLEDNING
+Ved du ikke, hvordan man spiller Minesweeper? Intet problem, du kan spille vores vejlednings niveau og aktivere Tips i indstillinger.
 
-STATISTICS
-Check your results and development.
+STATISTIK
+Tjek dine resultater og udvikling.
 
-GAME ASSISTANT
-The game will automatically flag the squares you isolated. 
+SPIL ASSISTENT
+Spillet vil automatisk markere de felter du isolerede. 
 
-CUSTOMIZATION
-You can change the game to make it like you want to. 
-Example: Help, animations, haptic feedback, question mark.
+TILPASNING
+Du kan ændre spillet for at gøre det ligesom du ønsker. 
+Eksempel: Hjælp, animationer, haptisk feedback, spørgsmåltegn.
 
-CONTROLS
-It supports four different control schemes. Example: flag using tap or long press.
+KONTROL
+Det understøtter fire forskellige kontrolordninger. Eksempel: marker ved tryk eller langt tryk.
 
-ACHIEVEMENTS AND LEADERBOARDS 
-You have eight achievements to unlock and different leaderboards to share with your friends.
+OPNÅELSER OG LEDERTAVLER 
+Du har otte opnåelser at låse op og forskellige ledertavler til at dele med dine venner.
 
-ACCESSIBILITY
-You can customize this game to your needs: change the squares size, radius, touch timing, and screen reader support.
-We are always trying to improve our accessibility settings. If you miss something give us feedback!
+TILGÆNGELIGHED
+Du kan tilpasse dette spil til dine behov: ændre firkanternes størrelse, radius, berørelses timing, og støtte til skærmlæseren.
+Vi forsøger altid at forbedre vores tilgængeligshedsindstillinger. Hvis du går glip af noget giv os feedback!
 
-ANDROID FOCUSED APP
-It supports cool Android features like split-screen, shortcuts, sharing, system theme, and always supporting the last version.
+ANDROID FOKUSERET APP
+Det undersøtter cool Android-funktioner som split-skærm, genveje, deling, systemtema, og støtter altid den seneste version.
 
-ONLINE OR OFFLINE
-You don't need to be online to play the game!
+ONLINE ELLER OFFLINE
+Du behøver ikke at være online for at spille spillet!
 
-AUTO-SAVE
-You can start a game and continue it later! It will auto-save your game.
+AUTO-GEM
+Du kan starte spillet og fortsætte det senere! Det vil auto-gemme dit spil.
 
-Enjoy.
+God fornøjelse.

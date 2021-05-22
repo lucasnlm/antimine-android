@@ -27,6 +27,7 @@ class GameController {
     private var useQuestionMark = true
     private var useOpenOnSwitchControl = true
     private var useNoGuessing = true
+    private var useClickOnNumbers = true
     private var errorTolerance = 0
 
     val seed: Long
@@ -116,8 +117,10 @@ class GameController {
                     }
                 }
                 ActionResponse.OpenNeighbors -> {
-                    this.actions++
-                    minefieldHandler.openOrFlagNeighborsOf(target.id)
+                    if (useClickOnNumbers) {
+                        this.actions++
+                        minefieldHandler.openOrFlagNeighborsOf(target.id)
+                    }
                 }
                 ActionResponse.OpenOrMark -> {
                     if (!hasMines()) {
@@ -238,7 +241,7 @@ class GameController {
         return result
     }
 
-    private fun hasAnyMineExploded(): Boolean = mines().firstOrNull { it.mistake } != null
+    fun hasAnyMineExploded(): Boolean = mines().firstOrNull { it.mistake } != null
 
     private fun explodedMinesCount(): Int = mines().count { it.mistake }
 
@@ -248,7 +251,7 @@ class GameController {
         return field.count { area -> !area.hasMine && area.isCovered } == 0
     }
 
-    private fun rightFlags() = mines().count { it.mark.isFlag() }
+    fun rightFlags() = mines().count { it.mark.isFlag() }
 
     fun isVictory(): Boolean =
         hasMines() && hasIsolatedAllMines() && !hasAnyMineExploded()
@@ -339,6 +342,10 @@ class GameController {
 
     fun useNoGuessing(noGuessing: Boolean) {
         this.useNoGuessing = noGuessing
+    }
+
+    fun useClickOnNumbers(clickNumbers: Boolean) {
+        this.useClickOnNumbers = clickNumbers
     }
 
     fun useOpenOnSwitchControl(useOpen: Boolean) {

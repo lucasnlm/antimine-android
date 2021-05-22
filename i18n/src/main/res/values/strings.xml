@@ -102,7 +102,7 @@
     <string name="appearance">Appearance</string>
     <string name="themes">Themes</string>
     <string name="delete_all_message">Delete all events permanently.</string>
-    <string name="remove_ad">Remove Ads</string>
+    <string name="remove_ad">Premium</string>
     <string name="help">Help</string>
     <string name="back">Back</string>
     <string name="donation">Donation</string>
@@ -117,4 +117,5 @@
     <string name="do_you_know_how_to_play">Do you know how to play minesweeper?</string>
     <string name="close">Close</string>
     <string name="open_tutorial">Open Tutorial</string>
+    <string name="click_numbers">Allow tap on numbers</string>
 </resources>

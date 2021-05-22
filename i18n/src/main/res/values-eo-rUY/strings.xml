@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="eo">
     <string name="tutorial">Lernilo</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_basic">La reguloj de la ludo estas simpla, la numero sur kvadrato signas la kvanton da la bomboj ĉirkaŭ ĝi, kaj vi devas flagi ĉiuj la bomboj.</string>
     <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
     <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
     <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
@@ -32,39 +32,39 @@
     <string name="game_time">Luda Tempo</string>
     <string name="mine">Mino</string>
     <string name="settings_general">Ĝeneralaj</string>
-    <string name="settings_gameplay">Gameplay</string>
+    <string name="settings_gameplay">Ludmaniero</string>
     <string name="settings_accessibility">Alirebleco</string>
     <string name="size">Grando</string>
     <string name="rounded_square">Ronda Kvadrato</string>
     <string name="space_between_squares">Space Between Squares</string>
     <string name="system">Operaciumo</string>
-    <string name="rating">Feedback</string>
+    <string name="rating">Prikomentado</string>
     <string name="sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
     <string name="you_won">Vi venkis!</string>
     <string name="victories">Venkoj</string>
     <string name="you_lost">Vi malvenkis!</string>
     <string name="you_finished">Vi finis!</string>
     <string name="defeats">Malvenkoj</string>
-    <string name="generic_game_over">Good luck on your next game.</string>
+    <string name="generic_game_over">Bonŝancon en via proksima ludo.</string>
     <string name="generic_win">Vi trovis %1$d minojn en %2$d sekundoj.</string>
     <string name="fail_to_share">Failed to share</string>
     <string name="version_s">Versio %1$s</string>
-    <string name="sound_effects">Sound Effects</string>
+    <string name="sound_effects">Sonefektoj</string>
     <string name="are_you_sure">Ĉu vi certas?</string>
     <string name="enable_automatic_flags">Enable automatic placing of flags</string>
     <string name="open_areas">Open Areas</string>
     <string name="total_time">Tuta Tempo</string>
     <string name="average_time">Mezuma Tempo</string>
     <string name="shortest_time">Plej Mallonga Tempo</string>
-    <string name="performance">Performance</string>
+    <string name="performance">Rendimento</string>
     <string name="ok">Bone</string>
     <string name="use_question_mark">Uzi Demandosignoj</string>
     <string name="no_guessing_mode">\'No guessing\' mode</string>
-    <string name="control">Controls</string>
-    <string name="single_click">Single Tap</string>
-    <string name="double_click">Double Tap</string>
-    <string name="long_press">Long Tap</string>
-    <string name="control_description">%ACTION to %REACTION</string>
+    <string name="control">Regiloj</string>
+    <string name="single_click">Unuopa tuŝeti</string>
+    <string name="double_click">Duoble Tuŝeti</string>
+    <string name="long_press">Tuŝadi</string>
+    <string name="control_description">%ACTION por %REACTION</string>
     <string name="touch_sensibility">Touch Sensibility</string>
     <string name="open_tile">Malfermi</string>
     <string name="flag_tile">Flago</string>
@@ -104,7 +104,7 @@
     <string name="remove_ad">Forigi Reklamojn</string>
     <string name="help">Helpo</string>
     <string name="back">Reveni</string>
-    <string name="donation">Donation</string>
+    <string name="donation">Donaco</string>
     <string name="open_on_game">Open on game screen</string>
     <string name="show_windows">Montri fenestrojn</string>
     <string name="select_language">Elekti Lingvon</string>
@@ -112,8 +112,9 @@
     <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">You have to clear a rectangular board containing hidden mines without detonating any of them.</string>
     <string name="app_name">Malminoj</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
-    <string name="close">Close</string>
-    <string name="open_tutorial">Open Tutorial</string>
-    <string name="master" comment="new level difficulty">Master</string>
+    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Ĉu vi scias ludi Minesweeper?</string>
+    <string name="close">Fermi</string>
+    <string name="open_tutorial">Malfermi Lernilo</string>
+    <string name="master" comment="new level difficulty">Majstro</string>
+    <string name="click_numbers" comment="this is a settings item">Allow tap on numbers</string>
 </resources>

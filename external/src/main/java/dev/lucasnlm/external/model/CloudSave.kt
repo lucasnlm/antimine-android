@@ -23,6 +23,7 @@ data class CloudSave(
     val unlockedThemes: String,
     val squareDivider: Int,
     val doubleClickTimeout: Int,
+    val allowTapNumbers: Int,
 )
 
 fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
@@ -46,6 +47,7 @@ fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
     "unlockedThemes" to unlockedThemes,
     "newSquareDivider" to squareDivider,
     "doubleClickTimeout" to doubleClickTimeout,
+    "allowTapNumbers" to allowTapNumbers,
 )
 
 private fun Any?.parseInt(): Int = this?.toString()?.toInt() ?: throw Exception("Fail to parse Int")
@@ -75,4 +77,5 @@ fun cloudSaveOf(id: String, data: Map<String, Any>) =
         unlockedThemes = data["unlockedThemes"].parseString(""),
         squareDivider = data["newSquareDivider"].parseInt(0),
         doubleClickTimeout = data["doubleClickTimeout"].parseInt(400),
+        allowTapNumbers = data["allowTapNumbers"].parseInt(1),
     )

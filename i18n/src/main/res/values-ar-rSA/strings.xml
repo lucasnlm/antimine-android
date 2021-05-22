@@ -116,4 +116,5 @@
     <string name="close">أغلق</string>
     <string name="open_tutorial">فتح البرنامج التعليمي</string>
     <string name="master" comment="new level difficulty">محترف</string>
+    <string name="click_numbers" comment="this is a settings item">Allow tap on numbers</string>
 </resources>

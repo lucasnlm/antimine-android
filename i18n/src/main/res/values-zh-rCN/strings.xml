@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh-rCN">
     <string name="tutorial">教程</string>
-    <string name="tutorial_basic">游戏规则很简单：方块上的数字是周围地雷的数量；你必须标出所有地雷。</string>
+    <string name="tutorial_basic">游戏规则很简单：方块上的数字是周围地雷的数量；你必须要用旗子标记出所有的地雷。</string>
     <string name="tutorial_text_1">如果一个数字和它周围的方块数量相等，那么这些方块都是地雷。</string>
     <string name="tutorial_text_2">在放置了第一个旗标以后，回看数字并分析下一个方块。</string>
     <string name="tutorial_text_3">如果一个方块周围有相同数量的旗标，那么周围其余方块就不是地雷（绿色箭头）。</string>
@@ -116,4 +116,5 @@
     <string name="close">关闭</string>
     <string name="open_tutorial">打开教程</string>
     <string name="master" comment="new level difficulty">大师</string>
+    <string name="click_numbers" comment="this is a settings item">允许点击数字</string>
 </resources>
