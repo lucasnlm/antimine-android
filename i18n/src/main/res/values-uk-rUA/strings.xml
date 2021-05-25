@@ -116,5 +116,5 @@
     <string name="close">Закрити</string>
     <string name="open_tutorial">Відкрити навчання</string>
     <string name="master" comment="new level difficulty">Досвідчений</string>
-    <string name="click_numbers" comment="this is a settings item">Allow tap on numbers</string>
+    <string name="click_numbers" comment="this is a settings item">Дозволити натискання на цифри</string>
 </resources>
