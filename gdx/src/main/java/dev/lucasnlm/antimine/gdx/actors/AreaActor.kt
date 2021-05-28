@@ -180,7 +180,7 @@ class AreaActor(
 
     private fun drawMineBackground(batch: Batch) {
         val internalPadding = squareDivider / GdxLocal.zoom
-        val coverColor = theme.palette.covered.toOppositeMax().mul(0.8f, 0.3f, 0.3f, 1.0f)
+        val coverColor = theme.palette.uncovered.toGdxColor().mul(0.8f, 0.3f, 0.3f, 1.0f)
 
         GdxLocal.areaAtlas?.let { atlas ->
             pieces.forEach { piece ->
