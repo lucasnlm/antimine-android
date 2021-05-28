@@ -65,6 +65,8 @@ class AreaActor(
 
     fun boundAreaId() = area.id
 
+    fun boundAreaHashCode() = area.hashCode()
+
     fun bindArea(reset: Boolean, area: Area, areaForm: AreaForm) {
         if (reset) {
             this.isPressed = false
