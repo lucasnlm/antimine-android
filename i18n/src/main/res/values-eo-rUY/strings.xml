@@ -2,12 +2,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="eo">
     <string name="tutorial">Lernilo</string>
     <string name="tutorial_basic">La reguloj de la ludo estas simpla, la numero sur kvadrato signas la kvanton da la bomboj ĉirkaŭ ĝi, kaj vi devas flagi ĉiuj la bomboj.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_text_1">Se numero tuŝas la saman nombron da kvadratoj, do ĉiuj kvadratoj estas minoj.</string>
+    <string name="tutorial_text_2">Post ke vi markos vian unuan flagon, kontrolu la numerojn kaj analizu la sekvantan kvadraton.</string>
+    <string name="tutorial_text_3">Se kvadrato havas la saman nombron da flagoj, ĉiuj restantaj kvadratoj apud ĝi ne estas minoj (la sago verda).</string>
+    <string name="tutorial_text_4">Kontrolu la numerojn kaj malfermu plu kvadratojn.</string>
     <string name="games">Ludoj</string>
-    <string name="tap_to_begin">Tap to begin</string>
+    <string name="tap_to_begin">Frapeti por komenci</string>
     <string name="previous_games">Antaŭaj Ludoj</string>
     <string name="minefield">Malfacileco</string>
     <string name="standard">Standarda</string>
@@ -17,7 +17,7 @@
     <string name="open">Malfermi</string>
     <string name="settings">Agordoj</string>
     <string name="animations">Animacioj</string>
-    <string name="vibration">Haptic Feedback</string>
+    <string name="vibration">Tuŝ-retrokuplado</string>
     <string name="about">Pri</string>
     <string name="events">Statistikaĵoj</string>
     <string name="custom">Laŭmenda</string>
@@ -25,7 +25,7 @@
     <string name="width">Larĝeco</string>
     <string name="height">Alteco</string>
     <string name="mines">Minoj</string>
-    <string name="retry_sure">If you start a new game, your current progress will be lost.</string>
+    <string name="retry_sure">Se vi komencus novan ludon, perdiĝus via kuranta progreso.</string>
     <string name="show_licenses">Montri Permesilojn</string>
     <string name="new_game_request">Ĉu vi volas komenci novan ludon?</string>
     <string name="mines_remaining">%d minoj</string>
@@ -36,10 +36,10 @@
     <string name="settings_accessibility">Alirebleco</string>
     <string name="size">Grando</string>
     <string name="rounded_square">Ronda Kvadrato</string>
-    <string name="space_between_squares">Space Between Squares</string>
+    <string name="space_between_squares">Spaco inter kvadratoj</string>
     <string name="system">Operaciumo</string>
     <string name="rating">Prikomentado</string>
-    <string name="sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
+    <string name="sign_in_failed">Malsukcesis ensaluto. Bonvolu kontroli vian retkonekton kaj reprovi.</string>
     <string name="you_won">Vi venkis!</string>
     <string name="victories">Venkoj</string>
     <string name="you_lost">Vi malvenkis!</string>
@@ -47,31 +47,31 @@
     <string name="defeats">Malvenkoj</string>
     <string name="generic_game_over">Bonŝancon en via proksima ludo.</string>
     <string name="generic_win">Vi trovis %1$d minojn en %2$d sekundoj.</string>
-    <string name="fail_to_share">Failed to share</string>
+    <string name="fail_to_share">Malsukcesis kunhavigo</string>
     <string name="version_s">Versio %1$s</string>
     <string name="sound_effects">Sonefektoj</string>
     <string name="are_you_sure">Ĉu vi certas?</string>
-    <string name="enable_automatic_flags">Enable automatic placing of flags</string>
-    <string name="open_areas">Open Areas</string>
+    <string name="enable_automatic_flags">Ŝalti aŭtomatan metadon de flagoj</string>
+    <string name="open_areas">Malfermitaj areoj</string>
     <string name="total_time">Tuta Tempo</string>
     <string name="average_time">Mezuma Tempo</string>
     <string name="shortest_time">Plej Mallonga Tempo</string>
     <string name="performance">Rendimento</string>
     <string name="ok">Bone</string>
     <string name="use_question_mark">Uzi Demandosignoj</string>
-    <string name="no_guessing_mode">\'No guessing\' mode</string>
+    <string name="no_guessing_mode">Ne-divena reĝimo</string>
     <string name="control">Regiloj</string>
     <string name="single_click">Unuopa tuŝeti</string>
     <string name="double_click">Duoble Tuŝeti</string>
     <string name="long_press">Tuŝadi</string>
     <string name="control_description">%ACTION por %REACTION</string>
-    <string name="touch_sensibility">Touch Sensibility</string>
+    <string name="touch_sensibility">Tuŝ-sentemo</string>
     <string name="open_tile">Malfermi</string>
     <string name="flag_tile">Flago</string>
     <string name="retry">Reprovi</string>
     <string name="continue_game">Daŭrigi</string>
     <string name="empty">Malplene</string>
-    <string name="cant_do_it_now">Impossible to do that now</string>
+    <string name="cant_do_it_now">Ne eblas fari tion nun</string>
     <string name="you_have_received">Vi ricevis: +%1$d</string>
     <string name="help_win_a_game">Por pli da Helpo vi devas venki la ludon.</string>
     <string name="unknown_error">Nekonata eraro.</string>
@@ -96,25 +96,25 @@
     <string name="new_game">Nova Ludo</string>
     <string name="share">Konigi</string>
     <string name="share_menu">Konigi…</string>
-    <string name="no_network">No internet connection.</string>
+    <string name="no_network">Neniu interreta konekto.</string>
     <string name="delete_all">Forigi ĉiujn</string>
     <string name="appearance">Apero</string>
     <string name="themes">Etosoj</string>
-    <string name="delete_all_message">Delete all events permanently.</string>
+    <string name="delete_all_message">Forigi ĉiujn eventojn porĉiame.</string>
     <string name="remove_ad">Forigi Reklamojn</string>
     <string name="help">Helpo</string>
     <string name="back">Reveni</string>
     <string name="donation">Donaco</string>
-    <string name="open_on_game">Open on game screen</string>
+    <string name="open_on_game">Malfermi en ludekranon</string>
     <string name="show_windows">Montri fenestrojn</string>
     <string name="select_language">Elekti Lingvon</string>
-    <string name="switch_control">Switch: Flag and Open</string>
-    <string name="switch_control_desc">Use button to switch between Flag and Open</string>
-    <string name="app_description">You have to clear a rectangular board containing hidden mines without detonating any of them.</string>
+    <string name="switch_control">Ŝaltilo: Flagi kaj Malfermi</string>
+    <string name="switch_control_desc">Uzu la butonon por ŝanĝi inter Flagi kaj Malfermi</string>
+    <string name="app_description">Vi devas purigi la kvadratan tabulon kiu enhavas kaŝitajn minojn sen eksplodigi ilin.</string>
     <string name="app_name">Malminoj</string>
     <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Ĉu vi scias ludi Minesweeper?</string>
     <string name="close">Fermi</string>
     <string name="open_tutorial">Malfermi Lernilo</string>
     <string name="master" comment="new level difficulty">Majstro</string>
-    <string name="click_numbers" comment="this is a settings item">Allow tap on numbers</string>
+    <string name="click_numbers" comment="this is a settings item">Permesi tuŝeti numerojn</string>
 </resources>

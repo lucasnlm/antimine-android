@@ -28,6 +28,7 @@ import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.common.level.view.GdxLevelFragment
+import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.splash.SplashActivity
@@ -74,6 +75,9 @@ class GameActivity :
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         intent?.run(::handleIntent)
+
+        GdxLocal.zoom = 1.0f
+        GdxLocal.zoomLevelAlpha = 1.0f
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

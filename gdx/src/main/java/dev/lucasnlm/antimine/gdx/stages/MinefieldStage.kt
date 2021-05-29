@@ -14,6 +14,7 @@ import dev.lucasnlm.antimine.gdx.BuildConfig
 import dev.lucasnlm.antimine.gdx.controller.CameraController
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
+import dev.lucasnlm.antimine.gdx.actors.areaFullForm
 import dev.lucasnlm.antimine.gdx.actors.areaNoForm
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
@@ -67,14 +68,36 @@ class MinefieldStage(
         )
     }
 
-    fun changeZoom(zoomMultiplier: Float) {
+    fun setZoom(value: Float) {
+        (camera as OrthographicCamera).apply {
+            zoom = value.coerceIn(0.8f, 3.0f)
+            currentZoom = zoom
+            update(true)
+
+            GdxLocal.zoomLevelAlpha = when {
+                zoom < 3.5f -> {
+                    1.0f
+                }
+                zoom > 4.0f -> {
+                    0.0f
+                }
+                else -> {
+                    (3.5f - zoom)
+                }
+            }
+        }
+
+        inputEvents.clear()
+    }
+
+    fun scaleZoom(zoomMultiplier: Float) {
         (camera as OrthographicCamera).apply {
             val newZoom = if (zoomMultiplier > 1.0) {
-                zoom + zoom * zoomMultiplier * Gdx.graphics.deltaTime
+                zoom + 2.0f * Gdx.graphics.deltaTime
             } else {
-                zoom - 2.0f * zoom * (1.0f / zoomMultiplier) * Gdx.graphics.deltaTime
+                zoom - 2.0f * Gdx.graphics.deltaTime
             }
-            zoom = newZoom.coerceIn(0.7f, 4.0f)
+            zoom = newZoom.coerceIn(0.8f, 3.0f)
             currentZoom = zoom
             update(true)
 
@@ -98,9 +121,9 @@ class MinefieldStage(
         boundAreas = field
     }
 
-    private fun refreshAreas() {
+    private fun refreshAreas(cameraChanged: Boolean) {
         val currentHashCode = boundAreas.hashCode()
-        if (boundAreas.hashCode() != boundHashCode) {
+        if (boundAreas.hashCode() != boundHashCode || cameraChanged) {
             boundHashCode = currentHashCode
 
             boundAreas.let { field ->
@@ -119,17 +142,28 @@ class MinefieldStage(
                             onInputEvent = ::handleGameEvent,
                             squareDivider = renderSettings.squareDivider,
                         )
-                    }.forEach {
-                        addActor(it)
-                    }
+                    }.forEach(::addActor)
                 } else {
                     val reset = field.count { it.hasMine } == 0
 
                     actors.forEach {
                         val areaActor = (it as AreaActor)
                         val area = field[areaActor.boundAreaId()]
-                        val areaForm = if (renderSettings.joinAreas) AreaActor.getForm(area, field) else areaNoForm
-                        areaActor.bindArea(reset, area, areaForm)
+                        if (area.hashCode() != areaActor.boundAreaHashCode() || areaActor.isVisible) {
+                            val areaForm = if (renderSettings.joinAreas && area.isCovered) {
+                                if (currentZoom < 1.4f) {
+                                    AreaActor.getForm(
+                                        area,
+                                        field,
+                                    )
+                                } else {
+                                    areaFullForm
+                                }
+                            } else {
+                                areaNoForm
+                            }
+                            areaActor.bindArea(reset, area, areaForm)
+                        }
                     }
                 }
             }
@@ -295,9 +329,9 @@ class MinefieldStage(
         // Handle camera movement
         minefieldSize?.let { cameraController.act(it) }
 
-        refreshAreas()
+        val cameraChanged = refreshVisibleActorsIfNeeded()
 
-        refreshVisibleActorsIfNeeded()
+        refreshAreas(cameraChanged)
 
         GdxLocal.run {
             if (highlightAlpha > 0.0f) {
@@ -311,9 +345,10 @@ class MinefieldStage(
         }
     }
 
-    private fun refreshVisibleActorsIfNeeded() {
+    private fun refreshVisibleActorsIfNeeded(): Boolean {
         val camera = camera as OrthographicCamera
-        if (!camera.position.epsilonEquals(lastCameraPosition) || lastZoom != camera.zoom) {
+        val cameraChanged: Boolean = !camera.position.epsilonEquals(lastCameraPosition) || lastZoom != camera.zoom
+        if (cameraChanged) {
             lastCameraPosition = camera.position.cpy()
             lastZoom = camera.zoom
 
@@ -326,6 +361,8 @@ class MinefieldStage(
             val visibleCount = actors.count { it.isVisible }
             Gdx.app.log("GDX", "GDX count = $visibleCount")
         }
+
+        return cameraChanged
     }
 
     override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {

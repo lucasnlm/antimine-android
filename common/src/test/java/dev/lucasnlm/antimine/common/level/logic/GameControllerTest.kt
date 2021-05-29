@@ -6,9 +6,9 @@ import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
@@ -18,6 +18,7 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
+@ExperimentalCoroutinesApi
 class GameControllerTest {
     private fun withGameController(
         clickOnCreate: Boolean = true,
@@ -26,7 +27,9 @@ class GameControllerTest {
         val minefield = Minefield(10, 10, 20)
         val gameController = GameController(minefield, 200L)
         if (clickOnCreate) {
-            gameController.fakeSingleClick(10)
+            runBlockingTest {
+                fakeSingleClick(gameController, 10)
+            }
         }
         block(gameController)
     }
@@ -94,7 +97,7 @@ class GameControllerTest {
         withGameController { controller ->
             assertNull(controller.findExplodedMine())
             val target = controller.mines().first()
-            controller.fakeSingleClick(target.id)
+            fakeSingleClick(controller, target.id)
             assertNotNull(controller.findExplodedMine())
             assertEquals(target.id, controller.findExplodedMine()!!.id)
         }
@@ -219,7 +222,7 @@ class GameControllerTest {
             controller.field()
                 .filter { !it.hasMine }
                 .onEach {
-                    controller.fakeSingleClick(it.id)
+                    fakeSingleClick(controller, it.id)
 
                     if (it.id != lastArea) {
                         assertFalse(controller.hasIsolatedAllMines())
@@ -237,7 +240,7 @@ class GameControllerTest {
         withGameController { controller ->
             assertFalse(controller.hasAnyMineExploded())
 
-            controller.field().first { it.hasMine }.also { controller.fakeSingleClick(it.id) }
+            controller.field().first { it.hasMine }.also { fakeSingleClick(controller, it.id) }
 
             assertTrue(controller.hasAnyMineExploded())
         }
@@ -248,7 +251,7 @@ class GameControllerTest {
         withGameController { controller ->
             assertFalse(controller.isGameOver())
 
-            controller.field().first { it.hasMine }.also { controller.fakeSingleClick(it.id) }
+            controller.field().first { it.hasMine }.also { fakeSingleClick(controller, it.id) }
 
             assertTrue(controller.isGameOver())
         }
@@ -262,12 +265,12 @@ class GameControllerTest {
             controller.mines().forEach { fakeLongPress(controller, it.id) }
             assertFalse(controller.isVictory())
 
-            controller.field { !it.hasMine }.forEach { controller.fakeSingleClick(it.id) }
+            controller.field { !it.hasMine }.forEach { fakeSingleClick(controller, it.id) }
             assertTrue(controller.isVictory())
 
             controller.mines().first().run {
-                controller.fakeSingleClick(id)
-                controller.fakeSingleClick(id)
+                fakeSingleClick(controller, id)
+                fakeSingleClick(controller, id)
             }
             assertFalse(controller.isVictory())
         }
@@ -285,7 +288,7 @@ class GameControllerTest {
         withGameController { controller ->
             controller.updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
             assertTrue(controller.at(3).isCovered)
-            controller.fakeSingleClick(3)
+            fakeSingleClick(controller, 3)
             assertFalse(controller.at(3).isCovered)
         }
     }
@@ -323,7 +326,7 @@ class GameControllerTest {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
-                fakeSingleClick(14)
+                fakeSingleClick(controller, 14)
                 assertFalse(at(14).isCovered)
 
                 field().filterNeighborsOf(at(14)).forEach {
@@ -352,7 +355,7 @@ class GameControllerTest {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
-                fakeSingleClick(3)
+                fakeSingleClick(controller, 3)
                 assertTrue(at(3).isCovered)
                 assertTrue(at(3).mark.isFlag())
                 fakeLongPress(controller, 3)
@@ -365,15 +368,15 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlFirstActionWithInvertedDoubleClick() {
+    fun testControlFirstActionWithInvertedDoubleClick() = runBlockingTest {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClickInverted))
                 assertTrue(at(3).isCovered)
-                fakeDoubleClick(3)
+                fakeDoubleClick(controller, 3)
                 assertTrue(at(3).isCovered)
                 assertTrue(at(3).mark.isFlag())
-                fakeDoubleClick(3)
+                fakeDoubleClick(controller, 3)
                 assertFalse(at(3).mark.isFlag())
                 assertTrue(at(3).isCovered)
             }
@@ -381,12 +384,12 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlSecondActionWithInvertedDoubleClick() {
+    fun testControlSecondActionWithInvertedDoubleClick() = runBlockingTest {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClickInverted))
                 assertTrue(at(3).isCovered)
-                fakeSingleClick(3)
+                fakeSingleClick(controller, 3)
                 assertFalse(at(3).isCovered)
             }
         }
@@ -405,14 +408,14 @@ class GameControllerTest {
                 }
 
                 mines().forEach {
-                    fakeSingleClick(it.id)
+                    fakeSingleClick(controller, it.id)
                 }
 
                 mines().forEach {
                     assertTrue(it.mark.isFlag())
                 }
 
-                fakeSingleClick(14)
+                fakeSingleClick(controller, 14)
                 field().filterNeighborsOf(at(14)).forEach {
                     if (it.hasMine) {
                         assertTrue(it.isCovered)
@@ -425,72 +428,72 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlFirstActionWithDoubleClick() {
+    fun testControlFirstActionWithDoubleClick() = runBlockingTest {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
-                fakeSingleClick(3)
+                fakeSingleClick(controller, 3)
                 assertTrue(at(3).isCovered)
                 assertTrue(at(3).mark.isFlag())
-                fakeDoubleClick(3)
+                fakeDoubleClick(controller, 3)
                 assertFalse(at(3).mark.isFlag())
                 assertTrue(at(3).isCovered)
-                fakeDoubleClick(3)
+                fakeDoubleClick(controller, 3)
                 assertFalse(at(3).isCovered)
             }
         }
     }
 
     @Test
-    fun testControlFirstActionWithDoubleClickAndWithoutQuestionMark() {
+    fun testControlFirstActionWithDoubleClickAndWithoutQuestionMark() = runBlockingTest {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
 
                 useQuestionMark(true)
                 var targetId = 4
-                fakeSingleClick(targetId)
+                fakeSingleClick(controller, targetId)
                 assertTrue(at(targetId).isCovered)
                 assertTrue(at(targetId).mark.isFlag())
-                fakeSingleClick(targetId)
+                fakeSingleClick(controller, targetId)
                 assertTrue(at(targetId).mark.isQuestion())
                 assertTrue(at(targetId).isCovered)
-                fakeSingleClick(targetId)
+                fakeSingleClick(controller, targetId)
                 assertTrue(at(targetId).mark.isNone())
                 assertTrue(at(targetId).isCovered)
-                fakeDoubleClick(targetId)
+                fakeDoubleClick(controller, targetId)
                 assertFalse(at(targetId).isCovered)
 
                 useQuestionMark(false)
                 targetId = 3
-                fakeSingleClick(targetId)
+                fakeSingleClick(controller, targetId)
                 assertTrue(at(targetId).isCovered)
                 assertTrue(at(targetId).mark.isFlag())
-                fakeSingleClick(targetId)
+                fakeSingleClick(controller, targetId)
                 assertFalse(at(targetId).mark.isFlag())
                 assertTrue(at(targetId).isCovered)
-                fakeDoubleClick(targetId)
+                fakeDoubleClick(controller, targetId)
                 assertFalse(at(targetId).isCovered)
             }
         }
     }
 
     @Test
-    fun testControlDoubleClickOpenMultiple() {
+    fun testControlDoubleClickOpenMultiple() = runBlockingTest {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
-                fakeDoubleClick(14)
+                fakeDoubleClick(controller, 14)
                 assertFalse(at(14).isCovered)
                 field().filterNeighborsOf(at(14)).forEach {
                     assertTrue(it.isCovered)
                 }
 
-                mines().forEach { fakeSingleClick(it.id) }
+                mines().forEach { fakeSingleClick(controller, it.id) }
 
                 mines().forEach { assertTrue(it.mark.isFlag()) }
 
-                fakeDoubleClick(14)
+                fakeDoubleClick(controller, 14)
                 field().filterNeighborsOf(at(14)).forEach {
                     if (it.hasMine) {
                         assertTrue(it.isCovered)
@@ -503,13 +506,13 @@ class GameControllerTest {
     }
 
     @Test
-    fun testIfDoubleClickPlantMinesOnFirstClick() {
+    fun testIfDoubleClickPlantMinesOnFirstClick() = runBlockingTest {
         withGameController(clickOnCreate = false) { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
                 assertFalse(hasMines())
                 assertEquals(0, field().filterNot { it.isCovered }.count())
-                fakeSingleClick(40)
+                fakeSingleClick(controller, 40)
                 assertTrue(hasMines())
                 field().filterNeighborsOf(at(40)).forEach { assertFalse(it.isCovered) }
             }
@@ -517,13 +520,13 @@ class GameControllerTest {
     }
 
     @Test
-    fun testIfFastFlagPlantMinesOnFirstClick() {
+    fun testIfFastFlagPlantMinesOnFirstClick() = runBlockingTest {
         withGameController(clickOnCreate = false) { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
                 assertFalse(hasMines())
                 assertEquals(0, field().filterNot { it.isCovered }.count())
-                fakeSingleClick(40)
+                fakeSingleClick(controller, 40)
                 assertTrue(hasMines())
                 field().filterNeighborsOf(at(40)).forEach { assertFalse(it.isCovered) }
             }
@@ -546,11 +549,9 @@ class GameControllerTest {
         }
     }
 
-    private fun GameController.fakeDoubleClick(index: Int) {
-        runBlocking {
-            launch {
-                doubleClick(index).single()
-            }.join()
+    private fun TestCoroutineScope.fakeDoubleClick(gameController: GameController, index: Int) {
+        launch {
+            gameController.doubleClick(index).single()
         }
     }
 }

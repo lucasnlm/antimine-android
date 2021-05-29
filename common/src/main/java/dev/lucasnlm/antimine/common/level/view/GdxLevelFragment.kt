@@ -92,10 +92,15 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
 
     override fun onResume() {
         super.onResume()
-        levelApplicationListener.refreshSettings()
+        levelApplicationListener.apply {
+            refreshSettings()
+            refreshZoom()
+        }
 
-        view?.let {
-            bindControlSwitcherIfNeeded(it)
+        if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
+            view?.let {
+                bindControlSwitcherIfNeeded(it)
+            }
         }
     }
 
@@ -122,6 +127,10 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 .collect {
                     GdxLocal.currentFocus = null
                     levelApplicationListener.recenter()
+
+                    if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
+                        bindControlSwitcherIfNeeded(view)
+                    }
                 }
         }
 
