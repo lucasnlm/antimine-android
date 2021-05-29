@@ -149,7 +149,7 @@ class StatsViewModel(
         }
 
         private fun isMaster(stats: Stats): Boolean {
-            return stats.mines == 200 && stats.width == 50 && stats.height == 50
+            return (stats.mines == 200 || stats.mines == 300) && stats.width == 50 && stats.height == 50
         }
 
         private fun isIntermediate(stats: Stats): Boolean {

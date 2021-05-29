@@ -14,6 +14,7 @@ import dev.lucasnlm.antimine.gdx.BuildConfig
 import dev.lucasnlm.antimine.gdx.controller.CameraController
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
+import dev.lucasnlm.antimine.gdx.actors.areaFullForm
 import dev.lucasnlm.antimine.gdx.actors.areaNoForm
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
@@ -67,14 +68,36 @@ class MinefieldStage(
         )
     }
 
-    fun changeZoom(zoomMultiplier: Float) {
+    fun setZoom(value: Float) {
+        (camera as OrthographicCamera).apply {
+            zoom = value.coerceIn(0.8f, 3.0f)
+            currentZoom = zoom
+            update(true)
+
+            GdxLocal.zoomLevelAlpha = when {
+                zoom < 3.5f -> {
+                    1.0f
+                }
+                zoom > 4.0f -> {
+                    0.0f
+                }
+                else -> {
+                    (3.5f - zoom)
+                }
+            }
+        }
+
+        inputEvents.clear()
+    }
+
+    fun scaleZoom(zoomMultiplier: Float) {
         (camera as OrthographicCamera).apply {
             val newZoom = if (zoomMultiplier > 1.0) {
-                zoom + zoom * zoomMultiplier * Gdx.graphics.deltaTime
+                zoom + 2.0f * Gdx.graphics.deltaTime
             } else {
-                zoom - 2.0f * zoom * (1.0f / zoomMultiplier) * Gdx.graphics.deltaTime
+                zoom - 2.0f * Gdx.graphics.deltaTime
             }
-            zoom = newZoom.coerceIn(0.7f, 4.0f)
+            zoom = newZoom.coerceIn(0.8f, 3.0f)
             currentZoom = zoom
             update(true)
 
@@ -128,10 +151,14 @@ class MinefieldStage(
                         val area = field[areaActor.boundAreaId()]
                         if (area.hashCode() != areaActor.boundAreaHashCode() || areaActor.isVisible) {
                             val areaForm = if (renderSettings.joinAreas && area.isCovered) {
-                                AreaActor.getForm(
-                                    area,
-                                    field,
-                                )
+                                if (currentZoom < 1.4f) {
+                                    AreaActor.getForm(
+                                        area,
+                                        field,
+                                    )
+                                } else {
+                                    areaFullForm
+                                }
                             } else {
                                 areaNoForm
                             }

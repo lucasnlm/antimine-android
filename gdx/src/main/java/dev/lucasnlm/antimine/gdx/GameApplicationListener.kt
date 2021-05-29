@@ -84,7 +84,7 @@ class GameApplicationListener(
     private val minefieldInputController = GameInputController(
         onChangeZoom = {
             GdxLocal.zoom = it
-            minefieldStage?.changeZoom(it)
+            minefieldStage?.scaleZoom(it)
         }
     )
 
@@ -328,6 +328,10 @@ class GameApplicationListener(
 
     fun recenter() {
         minefieldStage?.centerCamera()
+    }
+
+    fun refreshZoom() {
+        minefieldStage?.setZoom(GdxLocal.zoom)
     }
 
     fun refreshSettings() {

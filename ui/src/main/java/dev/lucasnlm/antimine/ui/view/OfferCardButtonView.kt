@@ -109,7 +109,7 @@ class OfferCardButtonView : FrameLayout {
                 visibility = View.GONE
             } else {
                 visibility = View.VISIBLE
-                val tintColor = theme.palette.accent.toAndroidColor()
+                val tintColor = theme.palette.covered.toAndroidColor()
                 imageTintList = ColorStateList.valueOf(tintColor)
                 setImageResource(startIcon)
             }
