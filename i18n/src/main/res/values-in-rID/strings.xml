@@ -117,4 +117,5 @@
     <string name="open_tutorial">Buka Tutorial</string>
     <string name="master" comment="new level difficulty">Master</string>
     <string name="click_numbers" comment="this is a settings item">Allow tap on numbers</string>
+    <string name="legend" comment="level difficulty">Legend</string>
 </resources>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="pl">
     <string name="tutorial">Samouczek</string>
-    <string name="tutorial_basic">Reguły gry są proste, numer widoczny na polu reprezentuje liczbę min przylegających do tego pola, a Twoim zadaniem jest oznaczyć je wszystkie.</string>
-    <string name="tutorial_text_1">Jeśli do pola z numerem przylega taka sama liczba pól, to na wszystkich tych polach są miny.</string>
+    <string name="tutorial_basic">Reguły gry są proste. Liczba widoczna na polu oznacza ilość min przylegających do tego pola, a Twoim zadaniem jest oznaczyć je wszystkie.</string>
+    <string name="tutorial_text_1">Jeśli do pola z liczbą przylega taka sama liczba nieodkrytych pól na jaką wskazuje ta liczba, to na wszystkich tych polach są miny.</string>
     <string name="tutorial_text_2">Po oznaczeniu pierwszego pola, sprawdź numery i zastanów się nad kolejnym ruchem.</string>
     <string name="tutorial_text_3">Jeśli do pola przystaje określona liczba flag, wówczas wszystkie pozostałe przystające do niego pola nie mają min (zielona strzałka).</string>
     <string name="tutorial_text_4">Sprawdź liczby i kontynuuj odkrywanie pól.</string>
@@ -36,7 +36,7 @@
     <string name="settings_accessibility">Ułatwienia dostępu</string>
     <string name="size">Powiększenie</string>
     <string name="rounded_square">Zaokrąglenie pól</string>
-    <string name="space_between_squares">Odstęp pomiędzy polami</string>
+    <string name="space_between_squares">Rozstaw pól</string>
     <string name="system">Systemowy</string>
     <string name="rating">Opinia</string>
     <string name="sign_in_failed">Błąd logowania. Sprawdź swoje połączenie z Internetem i spróbuj ponownie.</string>
@@ -116,5 +116,6 @@
     <string name="close">Zamknij</string>
     <string name="open_tutorial">Otwórz samouczek</string>
     <string name="master" comment="new level difficulty">Mistrz</string>
-    <string name="click_numbers" comment="this is a settings item">Allow tap on numbers</string>
+    <string name="click_numbers" comment="this is a settings item">Możliwość naciskania liczb</string>
+    <string name="legend" comment="level difficulty">Legendarny</string>
 </resources>

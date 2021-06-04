@@ -24,17 +24,26 @@ import dev.lucasnlm.antimine.ui.model.minesAround
 
 class AreaActor(
     size: Float,
-    initialAreaForm: AreaForm,
+    field: List<Area>,
+    enableLigatures: Boolean,
     private var area: Area,
     private var focusScale: Float = 1.0f,
     private var isPressed: Boolean = false,
-    private val pieces: MutableList<String> = mutableListOf(),
+    private val pieces: MutableList<String> = ArrayList(20),
     private val theme: AppTheme,
-    private val squareDivider: Float = 0f,
     private val onInputEvent: (GdxEvent) -> Unit,
 ) : Actor() {
 
     private var areaForm: AreaForm? = null
+
+    private val topId: Int
+    private val bottomId: Int
+    private val leftId: Int
+    private val rightId: Int
+    private val topLeftId: Int
+    private val topRightId: Int
+    private val bottomLeftId: Int
+    private val bottomRightId: Int
 
     init {
         width = size
@@ -61,40 +70,67 @@ class AreaActor(
             }
         })
 
-        bindArea(true, area, initialAreaForm)
+        topId = field.getPos(area.posX, area.posY + 1)?.id ?: -1
+        bottomId = field.getPos(area.posX, area.posY - 1)?.id ?: -1
+        leftId = field.getPos(area.posX - 1, area.posY)?.id ?: -1
+        rightId = field.getPos(area.posX + 1, area.posY)?.id ?: -1
+        topLeftId = field.getPos(area.posX - 1, area.posY + 1)?.id ?: -1
+        topRightId = field.getPos(area.posX + 1, area.posY + 1)?.id ?: -1
+        bottomLeftId = field.getPos(area.posX - 1, area.posY - 1)?.id ?: -1
+        bottomRightId = field.getPos(area.posX + 1, area.posY - 1)?.id ?: -1
+
+        bindArea(reset = true, ligatureEnabled = enableLigatures, area = area, field = field)
     }
 
     fun boundAreaId() = area.id
 
     fun boundAreaHashCode() = area.hashCode()
 
-    fun bindArea(reset: Boolean, area: Area, areaForm: AreaForm) {
+    fun bindArea(reset: Boolean, ligatureEnabled: Boolean, area: Area, field: List<Area>) {
         if (reset) {
             this.isPressed = false
         }
 
-        if ((area.isCovered || area.hasMine) && this.areaForm != areaForm) {
-            this.areaForm = areaForm
+        val newForm = when {
+            area.isCovered && ligatureEnabled -> {
+                AreaForm(
+                    top = field.getOrNull(topId)?.canLigatureTo(area) == true,
+                    bottom = field.getOrNull(bottomId)?.canLigatureTo(area) == true,
+                    left = field.getOrNull(leftId)?.canLigatureTo(area) == true,
+                    right = field.getOrNull(rightId)?.canLigatureTo(area) == true,
+                    topLeft = field.getOrNull(topLeftId)?.canLigatureTo(area) == true,
+                    topRight = field.getOrNull(topRightId)?.canLigatureTo(area) == true,
+                    bottomLeft = field.getOrNull(bottomLeftId)?.canLigatureTo(area) == true,
+                    bottomRight = field.getOrNull(bottomRightId)?.canLigatureTo(area) == true,
+                )
+            }
+            else -> {
+                areaNoForm
+            }
+        }
+
+        if ((area.isCovered || area.hasMine) && this.areaForm != newForm) {
+            this.areaForm = newForm
 
             pieces.clear()
             val newPieces = mapOf(
                 FormNames.core to true,
-                FormNames.top to areaForm.top,
-                FormNames.left to areaForm.left,
-                FormNames.bottom to areaForm.bottom,
-                FormNames.right to areaForm.right,
-                FormNames.cornerTopLeft to (!areaForm.top && !areaForm.left),
-                FormNames.cornerTopRight to (!areaForm.top && !areaForm.right),
-                FormNames.cornerBottomLeft to (!areaForm.bottom && !areaForm.left),
-                FormNames.cornerBottomRight to (!areaForm.bottom && !areaForm.right),
-                FormNames.borderCornerTopRight to (areaForm.top && areaForm.right && !areaForm.topRight),
-                FormNames.borderCornerTopLeft to (areaForm.top && areaForm.left && !areaForm.topLeft),
-                FormNames.borderCornerBottomRight to (areaForm.bottom && areaForm.right && !areaForm.bottomRight),
-                FormNames.borderCornerBottomLeft to (areaForm.bottom && areaForm.left && !areaForm.bottomLeft),
-                FormNames.fillTopLeft to (areaForm.top && areaForm.left && areaForm.topLeft),
-                FormNames.fillTopRight to (areaForm.top && areaForm.right && areaForm.topRight),
-                FormNames.fillBottomLeft to (areaForm.bottom && areaForm.left && areaForm.bottomLeft),
-                FormNames.fillBottomRight to (areaForm.bottom && areaForm.right && areaForm.bottomRight),
+                FormNames.top to newForm.top,
+                FormNames.left to newForm.left,
+                FormNames.bottom to newForm.bottom,
+                FormNames.right to newForm.right,
+                FormNames.cornerTopLeft to (!newForm.top && !newForm.left),
+                FormNames.cornerTopRight to (!newForm.top && !newForm.right),
+                FormNames.cornerBottomLeft to (!newForm.bottom && !newForm.left),
+                FormNames.cornerBottomRight to (!newForm.bottom && !newForm.right),
+                FormNames.borderCornerTopRight to (newForm.top && newForm.right && !newForm.topRight),
+                FormNames.borderCornerTopLeft to (newForm.top && newForm.left && !newForm.topLeft),
+                FormNames.borderCornerBottomRight to (newForm.bottom && newForm.right && !newForm.bottomRight),
+                FormNames.borderCornerBottomLeft to (newForm.bottom && newForm.left && !newForm.bottomLeft),
+                FormNames.fillTopLeft to (newForm.top && newForm.left && newForm.topLeft),
+                FormNames.fillTopRight to (newForm.top && newForm.right && newForm.topRight),
+                FormNames.fillBottomLeft to (newForm.bottom && newForm.left && newForm.bottomLeft),
+                FormNames.fillBottomRight to (newForm.bottom && newForm.right && newForm.bottomRight),
             ).filter {
                 it.value
             }.keys
@@ -137,16 +173,14 @@ class AreaActor(
     }
 
     private fun drawBackground(batch: Batch, isOdd: Boolean) {
-        val internalPadding = squareDivider / GdxLocal.zoom
-
         if (!isOdd && !area.isCovered && GdxLocal.zoomLevelAlpha > 0.0f) {
             GdxLocal.gameTextures?.areaCovered?.let {
                 batch.drawTexture(
                     texture = it,
-                    x = x + internalPadding,
-                    y = y + internalPadding,
-                    width = width - internalPadding * 2,
-                    height = height - internalPadding * 2,
+                    x = x,
+                    y = y,
+                    width = width,
+                    height = height,
                     blend = false,
                     color = theme.palette.background.toOppositeMax(GdxLocal.zoomLevelAlpha).alpha(0.025f)
                 )
@@ -155,7 +189,6 @@ class AreaActor(
     }
 
     private fun drawCovered(batch: Batch, isOdd: Boolean) {
-        val internalPadding = squareDivider / GdxLocal.zoom
         val coverColor = when {
             area.mark.isNotNone() -> theme.palette.covered
             isOdd -> theme.palette.coveredOdd
@@ -163,13 +196,13 @@ class AreaActor(
         }
 
         GdxLocal.areaAtlas?.let { atlas ->
-            pieces.forEach { piece ->
+            if (areaForm == areaFullForm) {
                 batch.drawRegion(
-                    texture = atlas.findRegion(piece),
-                    x = x + internalPadding - Gdx.graphics.density * 2,
-                    y = y + internalPadding - Gdx.graphics.density * 2,
-                    width = width - internalPadding * 2 + 4 * Gdx.graphics.density,
-                    height = height - internalPadding * 2 + 4 * Gdx.graphics.density,
+                    texture = atlas.findRegion(FormNames.full),
+                    x = x - Gdx.graphics.density * 2,
+                    y = y - Gdx.graphics.density * 2,
+                    width = width + 4 * Gdx.graphics.density,
+                    height = height + 4 * Gdx.graphics.density,
                     color = if (area.mark.isNotNone()) {
                         coverColor.toGdxColor(1.0f).dim(0.6f)
                     } else {
@@ -177,22 +210,37 @@ class AreaActor(
                     },
                     blend = false,
                 )
+            } else {
+                pieces.forEach { piece ->
+                    batch.drawRegion(
+                        texture = atlas.findRegion(piece),
+                        x = x - Gdx.graphics.density * 2,
+                        y = y - Gdx.graphics.density * 2,
+                        width = width + 4 * Gdx.graphics.density,
+                        height = height + 4 * Gdx.graphics.density,
+                        color = if (area.mark.isNotNone()) {
+                            coverColor.toGdxColor(1.0f).dim(0.6f)
+                        } else {
+                            coverColor.toGdxColor(1.0f)
+                        },
+                        blend = false,
+                    )
+                }
             }
         }
     }
 
     private fun drawMineBackground(batch: Batch) {
-        val internalPadding = squareDivider / GdxLocal.zoom
         val coverColor = Color(0.8f, 0.3f, 0.3f, 1.0f)
 
         GdxLocal.areaAtlas?.let { atlas ->
             pieces.forEach { piece ->
                 batch.drawRegion(
                     texture = atlas.findRegion(piece),
-                    x = x + internalPadding - Gdx.graphics.density * 2,
-                    y = y + internalPadding - Gdx.graphics.density * 2,
-                    width = width - internalPadding * 2 + 4 * Gdx.graphics.density,
-                    height = height - internalPadding * 2 + 4 * Gdx.graphics.density,
+                    x = x - Gdx.graphics.density * 2,
+                    y = y - Gdx.graphics.density * 2,
+                    width = width + 4 * Gdx.graphics.density,
+                    height = height + 4 * Gdx.graphics.density,
                     color = coverColor,
                     blend = false,
                 )
@@ -263,8 +311,6 @@ class AreaActor(
     }
 
     private fun drawPressed(batch: Batch, isOdd: Boolean) {
-        val internalPadding = squareDivider / GdxLocal.zoom
-
         if ((isPressed || focusScale > 1.0f)) {
             if (area.isCovered) {
                 val coverColor = if (isOdd) { theme.palette.coveredOdd } else { theme.palette.covered }
@@ -272,10 +318,10 @@ class AreaActor(
                 GdxLocal.gameTextures?.detailedArea?.let {
                     batch.drawTexture(
                         texture = it,
-                        x = x + internalPadding,
-                        y = y + internalPadding,
-                        width = width - internalPadding * 2,
-                        height = height - internalPadding * 2,
+                        x = x,
+                        y = y,
+                        width = width,
+                        height = height,
                         color = coverColor.toGdxColor(1.0f),
                         blend = true,
                     )
@@ -348,6 +394,26 @@ class AreaActor(
         }
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as AreaActor
+
+        if (area != other.area) return false
+        if (pieces != other.pieces) return false
+        if (areaForm != other.areaForm) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = area.hashCode()
+        result = 31 * result + pieces.hashCode()
+        result = 31 * result + (areaForm?.hashCode() ?: 0)
+        return result
+    }
+
     companion object {
         const val MIN_SCALE = 1.0f
         const val MAX_SCALE = 1.15f
@@ -355,32 +421,6 @@ class AreaActor(
 
         private fun Area.canLigatureTo(area: Area): Boolean {
             return isCovered && mark.ligatureId == area.mark.ligatureId
-        }
-
-        fun getForm(area: Area, field: List<Area>): AreaForm {
-            if (area.hasMine && !area.isCovered) {
-                return areaNoForm
-            } else {
-                val top = field.getPos(area.posX, area.posY + 1)?.canLigatureTo(area) ?: false
-                val bottom = field.getPos(area.posX, area.posY - 1)?.canLigatureTo(area) ?: false
-                val left = field.getPos(area.posX - 1, area.posY)?.canLigatureTo(area) ?: false
-                val right = field.getPos(area.posX + 1, area.posY)?.canLigatureTo(area) ?: false
-                val topLeft = field.getPos(area.posX - 1, area.posY + 1)?.canLigatureTo(area) ?: false
-                val topRight = field.getPos(area.posX + 1, area.posY + 1)?.canLigatureTo(area) ?: false
-                val bottomLeft = field.getPos(area.posX - 1, area.posY - 1)?.canLigatureTo(area) ?: false
-                val bottomRight = field.getPos(area.posX + 1, area.posY - 1)?.canLigatureTo(area) ?: false
-
-                return AreaForm(
-                    top = top,
-                    bottom = bottom,
-                    left = left,
-                    right = right,
-                    topLeft = topLeft,
-                    topRight = topRight,
-                    bottomLeft = bottomLeft,
-                    bottomRight = bottomRight,
-                )
-            }
         }
     }
 }

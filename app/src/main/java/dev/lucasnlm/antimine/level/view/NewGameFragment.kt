@@ -14,6 +14,7 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.ui.view.CardButtonView
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -34,7 +35,9 @@ class NewGameFragment : AppCompatDialogFragment() {
                             theme = themeRepository.getTheme(),
                             text = R.string.beginner,
                             onAction = {
-                                gameViewModel.startNewGame(Difficulty.Beginner)
+                                lifecycleScope.launch {
+                                    gameViewModel.startNewGame(Difficulty.Beginner)
+                                }
                                 dismissAllowingStateLoss()
                             }
                         )
@@ -45,7 +48,9 @@ class NewGameFragment : AppCompatDialogFragment() {
                             theme = themeRepository.getTheme(),
                             text = R.string.intermediate,
                             onAction = {
-                                gameViewModel.startNewGame(Difficulty.Intermediate)
+                                lifecycleScope.launch {
+                                    gameViewModel.startNewGame(Difficulty.Intermediate)
+                                }
                                 dismissAllowingStateLoss()
                             }
                         )
@@ -56,7 +61,9 @@ class NewGameFragment : AppCompatDialogFragment() {
                             theme = themeRepository.getTheme(),
                             text = R.string.expert,
                             onAction = {
-                                gameViewModel.startNewGame(Difficulty.Expert)
+                                lifecycleScope.launch {
+                                    gameViewModel.startNewGame(Difficulty.Expert)
+                                }
                                 dismissAllowingStateLoss()
                             }
                         )
@@ -72,6 +79,9 @@ class NewGameFragment : AppCompatDialogFragment() {
                             }
                             Difficulty.Expert -> {
                                 expert.requestFocus()
+                            }
+                            else -> {
+                                // Not implemented on TV
                             }
                         }
                     }

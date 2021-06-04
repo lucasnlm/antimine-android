@@ -117,4 +117,5 @@
     <string name="open_tutorial">کردنەوەی فێرکاری</string>
     <string name="master" comment="new level difficulty">مامۆستا</string>
     <string name="click_numbers" comment="this is a settings item">ڕێگەبدە بە کرتەکردن لەسەر ژمارەکان</string>
+    <string name="legend" comment="level difficulty">ئەفسانەیی</string>
 </resources>

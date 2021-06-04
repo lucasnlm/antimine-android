@@ -80,7 +80,6 @@ class GameController {
 
     private fun handleAction(target: Area, actionResponse: ActionResponse?) {
         val mustPlantMines = !hasMines()
-
         val minefieldHandler: MinefieldHandler
 
         if (mustPlantMines) {

@@ -287,6 +287,13 @@ object AreaAssetBuilder {
             fillRectangle(x, y, textureSize, textureSize)
             setColor(coverColor)
             fillRectangle(x, y + textureSize - border, border, border)
+
+            // full
+            x = textureSize * 7
+            y = textureSize * 4
+            textureRegions[FormNames.full] = GridPoint2(x, y)
+            setColor(coverColor)
+            fillRectangle(x, y, textureSize, textureSize)
         }
 
         val texture = Texture(pixmap).apply {

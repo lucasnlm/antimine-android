@@ -16,6 +16,7 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dev.lucasnlm.antimine.common.R
+import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.isPortrait
@@ -66,6 +67,11 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
             onLongTap = {
                 lifecycleScope.launch {
                     gameViewModel.onLongClick(it)
+                }
+            },
+            onEngineReady = {
+                lifecycleScope.launch {
+                    gameViewModel.sendEvent(GameEvent.EngineReady)
                 }
             },
             quality = getQuality(),
@@ -126,7 +132,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 .distinctUntilChanged()
                 .collect {
                     GdxLocal.currentFocus = null
-                    levelApplicationListener.recenter()
+                    levelApplicationListener.onChangeGame()
 
                     if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
                         bindControlSwitcherIfNeeded(view)

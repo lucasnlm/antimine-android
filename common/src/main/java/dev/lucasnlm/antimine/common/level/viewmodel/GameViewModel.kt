@@ -57,9 +57,9 @@ open class GameViewModel(
         return GameState(
             turn = 0,
             field = listOf(),
-            duration = System.currentTimeMillis(),
+            duration = 0L,
             difficulty = Difficulty.Beginner,
-            mineCount = 9,
+            mineCount = null,
             minefield = Minefield(9, 9, 9),
             seed = 0L,
             tips = tipRepository.getTotalTips(),
@@ -67,6 +67,7 @@ open class GameViewModel(
             isActive = false,
             hasMines = false,
             useHelp = preferencesRepository.useHelp(),
+            isLoadingMap = true,
         )
     }
 
@@ -104,6 +105,12 @@ open class GameViewModel(
                 )
                 emit(newState)
             }
+            is GameEvent.EngineReady -> {
+                emit(state.copy(isLoadingMap = false))
+            }
+            is GameEvent.LoadingNewGame -> {
+                emit(state.copy(isLoadingMap = true, duration = 0L, isActive = false))
+            }
             is GameEvent.UpdateTime -> {
                 val newState = state.copy(duration = event.time)
                 emit(newState)
@@ -113,6 +120,7 @@ open class GameViewModel(
                 val isGameOver = gameController.isGameOver()
                 val isComplete = isCompletedWithMistakes()
                 val wasCompleted = state.isGameCompleted
+                val hasMines = gameController.hasMines()
 
                 var newState = state.copy(
                     turn = state.turn + 1,
@@ -121,12 +129,6 @@ open class GameViewModel(
                     isGameCompleted = isVictory || isGameOver || isComplete,
                     hasMines = event.field.firstOrNull { it.hasMine } != null,
                 )
-
-                if (!newState.isGameCompleted) {
-                    runClock()
-                } else {
-                    stopClock()
-                }
 
                 if (!wasCompleted) {
                     when {
@@ -173,6 +175,12 @@ open class GameViewModel(
                     }
                 }
 
+                if (!newState.isGameCompleted && hasMines) {
+                    runClock()
+                } else {
+                    stopClock()
+                }
+
                 emit(newState)
             }
             else -> {
@@ -181,8 +189,9 @@ open class GameViewModel(
         }
     }
 
-    fun startNewGame(newDifficulty: Difficulty = state.difficulty): Minefield {
+    suspend fun startNewGame(newDifficulty: Difficulty = state.difficulty): Minefield {
         clock.reset()
+        initialized = false
 
         val minefield = minefieldRepository.fromDifficulty(
             newDifficulty,
@@ -190,42 +199,49 @@ open class GameViewModel(
             preferencesRepository
         )
 
-        val seed = minefieldRepository.randomSeed()
+        withContext(Dispatchers.IO) {
+            sendEvent(GameEvent.LoadingNewGame)
 
-        gameController = GameController(minefield, seed)
+            val seed = minefieldRepository.randomSeed()
 
-        val newGameState = GameState(
-            duration = 0L,
-            seed = seed,
-            difficulty = newDifficulty,
-            minefield = minefield,
-            mineCount = minefield.mines,
-            field = gameController.field(),
-            tips = tipRepository.getTotalTips(),
-            isGameCompleted = false,
-            isActive = true,
-            hasMines = false,
-            useHelp = preferencesRepository.useHelp(),
-        )
+            gameController = GameController(minefield, seed)
 
-        sendEvent(GameEvent.NewGame(newGameState))
-
-        initialized = true
-        refreshUserPreferences()
-
-        analyticsManager.sentEvent(
-            Analytics.NewGame(
-                minefield,
-                newDifficulty,
-                gameController.seed,
+            val newGameState = GameState(
+                duration = 0L,
+                seed = seed,
+                difficulty = newDifficulty,
+                minefield = minefield,
+                mineCount = minefield.mines,
+                field = gameController.field(),
+                tips = tipRepository.getTotalTips(),
+                isGameCompleted = false,
+                isActive = true,
+                hasMines = false,
+                useHelp = preferencesRepository.useHelp(),
+                isLoadingMap = true,
             )
-        )
+
+            sendEvent(GameEvent.NewGame(newGameState))
+
+            initialized = true
+            refreshUserPreferences()
+
+            analyticsManager.sentEvent(
+                Analytics.NewGame(
+                    minefield,
+                    newDifficulty,
+                    gameController.seed,
+                )
+            )
+        }
 
         return minefield
     }
 
     private fun resumeGameFromSave(save: Save): Minefield {
         clock.reset(save.duration)
+
+        sendEvent(GameEvent.LoadingNewGame)
 
         gameController = GameController(save)
         initialized = true
@@ -245,6 +261,7 @@ open class GameViewModel(
             isActive = !gameController.isGameOver(),
             hasMines = true,
             useHelp = preferencesRepository.useHelp(),
+            isLoadingMap = true,
         )
 
         sendEvent(GameEvent.NewGame(newGameState))
@@ -261,6 +278,8 @@ open class GameViewModel(
 
     private fun retryGame(save: Save) {
         clock.reset()
+
+        sendEvent(GameEvent.LoadingNewGame)
 
         gameController = GameController(save.minefield, save.seed, save.uid)
         initialized = true
@@ -279,6 +298,7 @@ open class GameViewModel(
             isActive = true,
             hasMines = false,
             useHelp = preferencesRepository.useHelp(),
+            isLoadingMap = true,
         )
 
         sendEvent(GameEvent.NewGame(newGameState))

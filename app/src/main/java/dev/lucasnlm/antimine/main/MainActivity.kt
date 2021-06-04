@@ -153,6 +153,18 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
         )
 
+        startLegend.setRadius(5f)
+        startLegend.bind(
+            theme = usingTheme,
+            text = getString(R.string.legend),
+            extra = getDifficultyExtra(Difficulty.Legend),
+            onAction = {
+                viewModel.sendEvent(
+                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Legend)
+                )
+            }
+        )
+
         startCustom.setRadius(5f)
         startCustom.bind(
             theme = usingTheme,

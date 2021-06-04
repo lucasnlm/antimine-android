@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine
 
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -90,12 +91,9 @@ class GameActivity :
         bindViewModel()
         bindToolbar()
         loadGameOrTutorial()
-        handleIntent(intent)
         bindTapToBegin()
 
         playGamesManager.showPlayPopUp(this)
-
-        onOpenAppActions()
         playGamesStartUp()
     }
 
@@ -142,13 +140,31 @@ class GameActivity :
         }
     }
 
+    private fun startCountAnimation(from: Int, to: Int, updateMineCount: (Int) -> Unit) {
+        ValueAnimator.ofInt(from, to).apply {
+            duration = 250
+            addUpdateListener { animation ->
+                updateMineCount(animation.animatedValue as Int)
+            }
+        }.start()
+    }
+
     private fun bindViewModel() = gameViewModel.apply {
         lifecycleScope.launchWhenCreated {
             observeState().collect {
-                if (it.turn == 0 && it.saveId == 0L) {
+                if (it.turn == 0 && it.saveId == 0L || it.isLoadingMap) {
                     val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
+
                     tapToBegin.apply {
+                        text = when {
+                            it.isLoadingMap -> {
+                                getString(R.string.loading)
+                            }
+                            else -> {
+                                getString(R.string.tap_to_begin)
+                            }
+                        }
                         visibility = View.VISIBLE
                         backgroundTintList = tint
                     }
@@ -156,7 +172,7 @@ class GameActivity :
                     tapToBegin.visibility = View.GONE
                 }
 
-                if (it.turn < 1 && it.saveId == 0L) {
+                if (it.turn < 1 && it.saveId == 0L && !it.isLoadingMap) {
                     val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
                     val controlText = gameViewModel.getControlDescription(applicationContext)
@@ -180,16 +196,27 @@ class GameActivity :
                 }
 
                 minesCount.apply {
-                    if (it.mineCount < 0) {
-                        text.toString().toIntOrNull()?.let { oldValue ->
-                            if (oldValue > it.mineCount) {
-                                startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+                    val currentMineCount = it.mineCount
+                    if (currentMineCount != null) {
+                        val oldValue = text.toString().toIntOrNull()
+                        if (oldValue != null) {
+                            if (currentMineCount < 0) {
+                                if (oldValue > currentMineCount) {
+                                    startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+                                }
                             }
-                        }
-                    }
 
-                    visibility = View.VISIBLE
-                    text = it.mineCount.toString()
+                            startCountAnimation(oldValue, currentMineCount) { animateIt ->
+                                text = animateIt.toString()
+                            }
+                        } else {
+                            text = currentMineCount.toString()
+                        }
+
+                        visibility = View.VISIBLE
+                    } else {
+                        visibility = View.GONE
+                    }
                 }
 
                 tipsCounter.text = it.tips.toString()
@@ -421,7 +448,9 @@ class GameActivity :
                 adsManager.showInterstitialAd(
                     activity = this,
                     onDismiss = {
-                        gameViewModel.startNewGame()
+                        lifecycleScope.launch {
+                            gameViewModel.startNewGame()
+                        }
                     }
                 )
             } else {
@@ -429,15 +458,21 @@ class GameActivity :
                     activity = this,
                     skipIfFrequent = true,
                     onRewarded = {
-                        gameViewModel.startNewGame()
+                        lifecycleScope.launch {
+                            gameViewModel.startNewGame()
+                        }
                     },
                     onFail = {
-                        gameViewModel.startNewGame()
+                        lifecycleScope.launch {
+                            gameViewModel.startNewGame()
+                        }
                     }
                 )
             }
         } else {
-            gameViewModel.startNewGame()
+            lifecycleScope.launch {
+                gameViewModel.startNewGame()
+            }
         }
     }
 
@@ -517,18 +552,29 @@ class GameActivity :
 
     private fun loadGameOrTutorial() {
         if (!isFinishing) {
-            loadGameFragment()
+            lifecycleScope.launchWhenCreated {
+                loadGameFragment()
+            }
         }
     }
 
-    private fun loadGameFragment() {
+    private suspend fun loadGameFragment() {
         supportFragmentManager.apply {
             if (findFragmentByTag(GdxLevelFragment.TAG) == null) {
-                beginTransaction().apply {
-                    replace(R.id.levelContainer, GdxLevelFragment(), GdxLevelFragment.TAG)
-                    setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    commitAllowingStateLoss()
+                val fragment = withContext(Dispatchers.IO) {
+                    GdxLevelFragment()
                 }
+
+                withContext(Dispatchers.Main) {
+                    beginTransaction().apply {
+                        replace(R.id.levelContainer, fragment, GdxLevelFragment.TAG)
+                        setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        commitAllowingStateLoss()
+                    }
+                }
+
+                handleIntent(intent)
+                onOpenAppActions()
             }
         }
     }

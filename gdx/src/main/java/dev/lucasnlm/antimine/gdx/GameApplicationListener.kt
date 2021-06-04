@@ -42,6 +42,7 @@ class GameApplicationListener(
     private val onSingleTap: (Int) -> Unit,
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTap: (Int) -> Unit,
+    private val onEngineReady: () -> Unit,
     private val crashLogger: (String) -> Unit,
 ) : ApplicationAdapter() {
 
@@ -118,6 +119,7 @@ class GameApplicationListener(
             onSingleTap = onSingleTap,
             onDoubleTap = onDoubleTap,
             onLongTouch = onLongTap,
+            onEngineReady = onEngineReady,
             forceFocus = context.isAndroidTv(),
         ).apply {
             bindField(boundAreas)
@@ -326,8 +328,8 @@ class GameApplicationListener(
         GdxLocal.actionsEnabled = enabled
     }
 
-    fun recenter() {
-        minefieldStage?.centerCamera()
+    fun onChangeGame() {
+        minefieldStage?.onChangeGame()
     }
 
     fun refreshZoom() {

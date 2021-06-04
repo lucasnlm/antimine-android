@@ -117,4 +117,5 @@
     <string name="open_tutorial">Άνοιγμα Οδηγού</string>
     <string name="master" comment="new level difficulty">Αρχηγός</string>
     <string name="click_numbers" comment="this is a settings item">Επίτρεψε το πάτημα σε αριθμούς</string>
+    <string name="legend" comment="level difficulty">Θρύλος</string>
 </resources>

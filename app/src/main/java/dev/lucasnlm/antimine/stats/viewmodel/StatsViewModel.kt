@@ -36,6 +36,9 @@ class StatsViewModel(
                 // Standard
                 filterStandard(standardSize).fold().copy(title = R.string.standard),
 
+                // Legend
+                filter(::isLegend).fold().copy(title = R.string.legend),
+
                 // Master
                 filter(::isMaster).fold().copy(title = R.string.master),
 
@@ -143,31 +146,33 @@ class StatsViewModel(
         }
     }
 
-    companion object {
-        private fun isExpert(stats: Stats): Boolean {
-            return stats.mines == 99 && stats.width == 24 && stats.height == 24
-        }
+    private fun isExpert(stats: Stats): Boolean {
+        return stats.mines == 99 && stats.width == 24 && stats.height == 24
+    }
 
-        private fun isMaster(stats: Stats): Boolean {
-            return (stats.mines == 200 || stats.mines == 300) && stats.width == 50 && stats.height == 50
-        }
+    private fun isMaster(stats: Stats): Boolean {
+        return (stats.mines == 200 || stats.mines == 300) && stats.width == 50 && stats.height == 50
+    }
 
-        private fun isIntermediate(stats: Stats): Boolean {
-            return stats.mines == 40 && stats.width == 16 && stats.height == 16
-        }
+    private fun isLegend(stats: Stats): Boolean {
+        return stats.mines == 2000 && stats.width == 100 && stats.height == 100
+    }
 
-        private fun isBeginner(stats: Stats): Boolean {
-            return stats.mines == 10 && stats.width == 9 && stats.height == 9
-        }
+    private fun isIntermediate(stats: Stats): Boolean {
+        return stats.mines == 40 && stats.width == 16 && stats.height == 16
+    }
 
-        private fun List<Stats>.filterStandard(standardSize: Minefield) = filter {
-            (it.width == standardSize.width && it.height == standardSize.height) ||
-                (it.width == standardSize.height && it.height == standardSize.width)
-        }
+    private fun isBeginner(stats: Stats): Boolean {
+        return stats.mines == 10 && stats.width == 9 && stats.height == 9
+    }
 
-        private fun List<Stats>.filterNotStandard(standardSize: Minefield) = filterNot {
-            (it.width == standardSize.width && it.height == standardSize.height) ||
-                (it.width == standardSize.height && it.height == standardSize.width)
-        }
+    private fun List<Stats>.filterStandard(standardSize: Minefield) = filter {
+        (it.width == standardSize.width && it.height == standardSize.height) ||
+            (it.width == standardSize.height && it.height == standardSize.width)
+    }
+
+    private fun List<Stats>.filterNotStandard(standardSize: Minefield) = filterNot {
+        (it.width == standardSize.width && it.height == standardSize.height) ||
+            (it.width == standardSize.height && it.height == standardSize.width)
     }
 }

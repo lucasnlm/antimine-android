@@ -29,6 +29,10 @@ sealed class GameEvent {
 
     object ShowNewGameDialog : GameEvent()
 
+    object LoadingNewGame : GameEvent()
+
+    object EngineReady : GameEvent()
+
     data class VictoryDialog(
         val delayToShow: Long,
         val totalMines: Int,

@@ -117,4 +117,5 @@
     <string name="open_tutorial">Malfermi Lernilo</string>
     <string name="master" comment="new level difficulty">Majstro</string>
     <string name="click_numbers" comment="this is a settings item">Permesi tuŝeti numerojn</string>
+    <string name="legend" comment="level difficulty">Legenda</string>
 </resources>
