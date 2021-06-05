@@ -317,11 +317,19 @@ class PreferencesRepository(
     }
 
     override fun useHelp(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_USE_HELP, false)
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_USE_HELP, true)
     }
 
     override fun setHelp(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_USE_HELP, value)
+    }
+
+    override fun lastHelpUsed(): Long {
+        return preferencesManager.getLong(PreferenceKeys.PREFERENCE_LAST_HELP_USED, 0L)
+    }
+
+    override fun refreshLastHelpUsed() {
+        preferencesManager.putLong(PreferenceKeys.PREFERENCE_LAST_HELP_USED, System.currentTimeMillis())
     }
 
     override fun squareRadius(): Int {

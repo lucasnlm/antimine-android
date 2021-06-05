@@ -50,6 +50,8 @@ interface IPreferencesRepository {
 
     fun useHelp(): Boolean
     fun setHelp(value: Boolean)
+    fun lastHelpUsed(): Long
+    fun refreshLastHelpUsed()
 
     fun squareRadius(): Int
     fun setSquareRadius(value: Int?)

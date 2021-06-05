@@ -23,6 +23,8 @@ sealed class GameEvent {
         val active: Boolean,
     ) : GameEvent()
 
+    object GiveMoreTip : GameEvent()
+
     object ConsumeTip : GameEvent()
 
     object ContinueGame : GameEvent()

@@ -80,6 +80,13 @@ open class GameViewModel(
             is GameEvent.ShowNewGameDialog -> {
                 sendSideEffect(GameEvent.ShowNewGameDialog)
             }
+            is GameEvent.GiveMoreTip -> {
+                tipRepository.increaseTip(25)
+                val newState = state.copy(
+                    tips = tipRepository.getTotalTips(),
+                )
+                emit(newState)
+            }
             is GameEvent.ConsumeTip -> {
                 if (tipRepository.removeTip()) {
                     val newState = state.copy(

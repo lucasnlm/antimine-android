@@ -39,6 +39,14 @@ private class TestPreferenceManager : IPreferencesManager {
     override fun contains(key: String): Boolean {
         return values.containsKey(key)
     }
+
+    override fun getLong(key: String, defaultValue: Long): Long {
+        return values.getOrDefault(key, defaultValue) as Long
+    }
+
+    override fun putLong(key: String, value: Long) {
+        values[key] = value
+    }
 }
 
 class PreferencesRepositoryTest {

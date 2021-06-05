@@ -415,9 +415,17 @@ class GameActivity :
     }
 
     private fun refreshTipShortcutIcon() {
+        val dt = System.currentTimeMillis() - preferencesRepository.lastHelpUsed()
+        val canUseHelpNow = dt > 10 * 1000L
+        val canRequestHelpWithAds = gameViewModel.getTips() == 0 && adsManager.isAvailable()
+
         tipsCounter.apply {
-            visibility = View.VISIBLE
-            text = gameViewModel.getTips().toString()
+            visibility = if (canUseHelpNow) View.VISIBLE else View.GONE
+            text = if (canRequestHelpWithAds) {
+                "25+"
+            } else {
+                gameViewModel.getTips().toString()
+            }
         }
 
         shortcutIcon.apply {
@@ -425,22 +433,52 @@ class GameActivity :
             setImageResource(R.drawable.tip)
             setColorFilter(minesCount.currentTextColor)
             visibility = View.VISIBLE
-            animate().alpha(1.0f).start()
-            setOnClickListener {
-                lifecycleScope.launch {
-                    analyticsManager.sentEvent(Analytics.UseTip)
 
-                    if (gameViewModel.getTips() > 0) {
-                        if (!gameViewModel.revealRandomMine()) {
-                            Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
-                        } else {
-                            if (!preferencesRepository.isPremiumEnabled()) {
-                                adsManager.showInterstitialAd(this@GameActivity, onDismiss = {})
+            if (canUseHelpNow) {
+                animate().alpha(1.0f).start()
+
+                if (canRequestHelpWithAds) {
+                    setOnClickListener {
+                        lifecycleScope.launch {
+                            analyticsManager.sentEvent(Analytics.RequestMoreTip)
+
+                            adsManager.showRewardedAd(
+                                activity = this@GameActivity,
+                                skipIfFrequent = false,
+                                onRewarded = {
+                                    gameViewModel.sendEvent(GameEvent.GiveMoreTip)
+                                },
+                                onFail = {
+                                    Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
+                                },
+                            )
+                        }
+                    }
+                } else {
+                    setOnClickListener {
+                        lifecycleScope.launch {
+                            analyticsManager.sentEvent(Analytics.UseTip)
+
+                            if (gameViewModel.getTips() > 0) {
+                                if (!gameViewModel.revealRandomMine()) {
+                                    Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
+                                } else {
+                                    if (featureFlagManager.showAdWhenUsingTip) {
+                                        if (!preferencesRepository.isPremiumEnabled()) {
+                                            adsManager.showInterstitialAd(this@GameActivity, onDismiss = {})
+                                        }
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(applicationContext, R.string.help_win_a_game, Toast.LENGTH_SHORT).show()
                             }
                         }
-                    } else {
-                        Toast.makeText(applicationContext, R.string.help_win_a_game, Toast.LENGTH_SHORT).show()
                     }
+                }
+            } else {
+                animate().alpha(0.25f).start()
+                setOnClickListener {
+                    Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
                 }
             }
         }

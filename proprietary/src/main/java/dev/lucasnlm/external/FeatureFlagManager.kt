@@ -23,6 +23,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         BANNER_AD_ENABLED to true,
         ENABLE_WEEK_DAY_SALES to true,
         HEX_BANNER to false,
+        SHOW_ADS_WHEN_USE_TIP to true,
     )
 
     private val remoteConfig: FirebaseRemoteConfig by lazy {
@@ -109,6 +110,10 @@ class FeatureFlagManager : IFeatureFlagManager() {
         getBoolean(HEX_BANNER)
     }
 
+    override val showAdWhenUsingTip: Boolean by lazy {
+        getBoolean(SHOW_ADS_WHEN_USE_TIP)
+    }
+
     override suspend fun refresh() {
         if (!BuildConfig.DEBUG) {
             withContext(Dispatchers.IO) {
@@ -139,5 +144,6 @@ class FeatureFlagManager : IFeatureFlagManager() {
         private const val BANNER_AD_ENABLED = "banner_ad_enabled"
         private const val ENABLE_WEEK_DAY_SALES = "enable_sales"
         private const val HEX_BANNER = "hex_banner_enabled"
+        private const val SHOW_ADS_WHEN_USE_TIP = "show_ads_when_use_tip"
     }
 }
