@@ -254,7 +254,7 @@ class AreaActor(
             when {
                 area.mark.isFlag() -> {
                     val color = if (area.mistake) {
-                        theme.palette.covered.toOppositeMax(0.8f).mul(1.0f, 0.5f, 0.5f, 1.0f)
+                        Color(0.8f, 0.3f, 0.3f, 1.0f)
                     } else {
                         theme.palette.covered.toOppositeMax(0.8f)
                     }
