@@ -449,7 +449,11 @@ class GameActivity :
                                     gameViewModel.sendEvent(GameEvent.GiveMoreTip)
                                 },
                                 onFail = {
-                                    Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        applicationContext,
+                                        R.string.cant_do_it_now,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 },
                             )
                         }
@@ -461,7 +465,11 @@ class GameActivity :
 
                             if (gameViewModel.getTips() > 0) {
                                 if (!gameViewModel.revealRandomMine()) {
-                                    Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        applicationContext,
+                                        R.string.cant_do_it_now,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 } else {
                                     if (featureFlagManager.showAdWhenUsingTip) {
                                         if (!preferencesRepository.isPremiumEnabled()) {
