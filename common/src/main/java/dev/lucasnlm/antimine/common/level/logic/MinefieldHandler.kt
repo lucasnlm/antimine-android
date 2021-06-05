@@ -27,11 +27,27 @@ class MinefieldHandler(
             .forEach { field[it.id] = it.copy(isCovered = false) }
     }
 
-    fun revealRandomMine(): Boolean {
-        return field.filter { it.hasMine && it.mark.isNone() && !it.revealed }.shuffled().firstOrNull()?.run {
-            field[this.id] = this.copy(revealed = true)
-            true
-        } ?: false
+    fun revealRandomMineNearUncoveredArea(): Boolean {
+        val unrevealedMines = field.filter { it.hasMine && it.mark.isNone() && !it.revealed }
+        val unrevealedMinesWithUncovered = unrevealedMines.filter {
+            it.neighborsIds
+                .map { areaId -> field[areaId] }
+                .firstOrNull { area -> !area.isCovered && !area.hasMine } != null
+        }
+
+        val result = if (unrevealedMinesWithUncovered.isNotEmpty()) {
+            unrevealedMinesWithUncovered.shuffled().firstOrNull()?.run {
+                field[this.id] = this.copy(revealed = true)
+                true
+            }
+        } else {
+            unrevealedMines.shuffled().firstOrNull()?.run {
+                field[this.id] = this.copy(revealed = true)
+                true
+            }
+        }
+
+        return result ?: false
     }
 
     fun turnOffAllHighlighted() {

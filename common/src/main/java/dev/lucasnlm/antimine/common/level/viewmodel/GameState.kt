@@ -26,7 +26,7 @@ data class GameState(
     val field: List<Area>,
 
     // Current mine counter.
-    val mineCount: Int,
+    val mineCount: Int?,
 
     // Current game durations in milliseconds.
     val duration: Long,
@@ -47,4 +47,7 @@ data class GameState(
 
     // Is true, user may interact with the minefield.
     val isActive: Boolean,
+
+    // If true, the map is being loaded.
+    val isLoadingMap: Boolean,
 )

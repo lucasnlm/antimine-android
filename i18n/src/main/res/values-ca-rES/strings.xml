@@ -115,6 +115,7 @@
     <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Sabeu com es juga al buscamines?</string>
     <string name="close">Tancar</string>
     <string name="open_tutorial">Obriu el tutorial</string>
-    <string name="master" comment="new level difficulty">Master</string>
+    <string name="master" comment="new level difficulty">Mestre</string>
     <string name="click_numbers" comment="this is a settings item">Allow tap on numbers</string>
+    <string name="legend" comment="level difficulty">Legend</string>
 </resources>

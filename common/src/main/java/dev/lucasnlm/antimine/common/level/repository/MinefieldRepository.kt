@@ -31,6 +31,7 @@ class MinefieldRepository : IMinefieldRepository {
             Difficulty.Intermediate -> intermediateMinefield
             Difficulty.Expert -> expertMinefield
             Difficulty.Master -> masterMinefield
+            Difficulty.Legend -> legendMinefield
             Difficulty.Custom -> preferencesRepository.customGameMode()
         }
 
@@ -67,6 +68,7 @@ class MinefieldRepository : IMinefieldRepository {
         private val intermediateMinefield = Minefield(16, 16, 40)
         private val expertMinefield = Minefield(24, 24, 99)
         private val masterMinefield = Minefield(50, 50, 300)
+        private val legendMinefield = Minefield(100, 100, 2000)
 
         private const val CUSTOM_LEVEL_MINE_RATIO = 0.2
         private const val MAX_LEVEL_MINE_RATIO = 0.45

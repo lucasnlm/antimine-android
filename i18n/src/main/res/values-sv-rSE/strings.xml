@@ -117,4 +117,5 @@
     <string name="open_tutorial">Öppna Guide</string>
     <string name="master" comment="new level difficulty">Mäster</string>
     <string name="click_numbers" comment="this is a settings item">Tillåt tryck på siffror</string>
+    <string name="legend" comment="level difficulty">Legendariskt</string>
 </resources>

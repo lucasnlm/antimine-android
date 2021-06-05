@@ -42,6 +42,7 @@ class GameApplicationListener(
     private val onSingleTap: (Int) -> Unit,
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTap: (Int) -> Unit,
+    private val onEngineReady: () -> Unit,
     private val crashLogger: (String) -> Unit,
 ) : ApplicationAdapter() {
 
@@ -113,11 +114,14 @@ class GameApplicationListener(
         assetManager.finishLoading()
 
         minefieldStage = MinefieldStage(
+            screenWidth = Gdx.graphics.width.toFloat(),
+            screenHeight = Gdx.graphics.height.toFloat(),
             renderSettings = renderSettings,
             actionSettings = actionSettings,
             onSingleTap = onSingleTap,
             onDoubleTap = onDoubleTap,
             onLongTouch = onLongTap,
+            onEngineReady = onEngineReady,
             forceFocus = context.isAndroidTv(),
         ).apply {
             bindField(boundAreas)
@@ -140,6 +144,7 @@ class GameApplicationListener(
             gameTextures = GameTextures(
                 areaHighlight = AreaAssetBuilder.getAreaBorderTexture(
                     expectedSize = expectedSize,
+                    squareDivider = renderSettings.squareDivider,
                     radiusLevel = radiusLevel,
                 ),
                 areaCovered = AreaAssetBuilder.getAreaTexture(
@@ -326,8 +331,8 @@ class GameApplicationListener(
         GdxLocal.actionsEnabled = enabled
     }
 
-    fun recenter() {
-        minefieldStage?.centerCamera()
+    fun onChangeGame() {
+        minefieldStage?.onChangeGame()
     }
 
     fun refreshZoom() {

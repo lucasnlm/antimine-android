@@ -17,6 +17,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
     override val isBannerAdEnabled: Boolean = false
     override val isWeekDaySalesEnabled: Boolean = false
     override val isHexBannerEnabled: Boolean = false
+    override val showAdWhenUsingTip: Boolean = false
 
     override suspend fun refresh() {
         // No Feature Flags on FOSS

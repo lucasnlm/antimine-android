@@ -25,4 +25,8 @@ class PreferencesManager(
     override fun contains(key: String): Boolean = preferences.contains(key)
 
     override fun removeKey(key: String) = preferences.edit().remove(key).apply()
+
+    override fun getLong(key: String, defaultValue: Long): Long = preferences.getLong(key, defaultValue)
+
+    override fun putLong(key: String, value: Long) = preferences.edit().putLong(key, value).apply()
 }

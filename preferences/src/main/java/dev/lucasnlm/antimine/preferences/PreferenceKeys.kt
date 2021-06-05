@@ -8,6 +8,7 @@ object PreferenceKeys {
     const val PREFERENCE_AREA_SIZE = "preference_new_area_size"
     const val PREFERENCE_QUESTION_MARK = "preference_use_question_mark"
     const val PREFERENCE_USE_HELP = "preference_use_help"
+    const val PREFERENCE_LAST_HELP_USED = "preference_last_help_used"
     const val PREFERENCE_CONTROL_STYLE = "preference_control_style"
     const val PREFERENCE_CUSTOM_THEME = "preference_custom_theme"
     const val PREFERENCE_OLD_DOUBLE_CLICK = "preference_double_click_open"

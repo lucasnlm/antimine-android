@@ -147,7 +147,9 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                     if (context.isAndroidTv()) {
                                         NewGameFragment().show(parentFragmentManager, NewGameFragment.TAG)
                                     } else {
-                                        gameViewModel.startNewGame()
+                                        lifecycleScope.launch {
+                                            gameViewModel.startNewGame()
+                                        }
                                     }
                                     dismissAllowingStateLoss()
                                 }
@@ -256,7 +258,9 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
             if (activity.isAndroidTv()) {
                 NewGameFragment().show(parentFragmentManager, NewGameFragment.TAG)
             } else {
-                gameViewModel.startNewGame()
+                lifecycleScope.launch {
+                    gameViewModel.startNewGame()
+                }
             }
             dismissAllowingStateLoss()
         }

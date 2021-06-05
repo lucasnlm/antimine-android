@@ -73,5 +73,5 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:2.24.0'
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
-    testImplementation "io.mockk:mockk:1.10.3"
+    testImplementation 'io.mockk:mockk:1.11.0'
 }

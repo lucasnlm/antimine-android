@@ -43,7 +43,10 @@ class WatchGameActivity : ThematicActivity(R.layout.activity_level), AndroidFrag
 
         bindViewModel()
         loadGameFragment()
-        viewModel.startNewGame(Difficulty.Custom)
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.startNewGame(Difficulty.Custom)
+        }
 
         swipe.isSwipeable = false
     }
@@ -93,15 +96,18 @@ class WatchGameActivity : ThematicActivity(R.layout.activity_level), AndroidFrag
                 }
 
                 messageText.apply {
-                    if (it.mineCount < 0) {
+                    val mineCount = it.mineCount
+                    if (mineCount != null && mineCount < 0) {
+                        visibility = View.VISIBLE
                         text.toString().toIntOrNull()?.let { oldValue ->
-                            if (oldValue > it.mineCount) {
+                            if (oldValue > mineCount) {
                                 startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
                             }
                         }
+                    } else {
+                        visibility = View.GONE
                     }
 
-                    visibility = View.VISIBLE
                     text = applicationContext.getString(R.string.mines_remaining, it.mineCount)
                 }
 
@@ -150,7 +156,9 @@ class WatchGameActivity : ThematicActivity(R.layout.activity_level), AndroidFrag
                     visibility = View.VISIBLE
                     setOnClickListener {
                         it.visibility = View.GONE
-                        viewModel.startNewGame()
+                        lifecycleScope.launch {
+                            viewModel.startNewGame()
+                        }
                     }
                 }
             }

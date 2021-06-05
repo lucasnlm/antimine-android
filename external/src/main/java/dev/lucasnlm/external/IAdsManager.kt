@@ -7,6 +7,8 @@ import android.view.View
 interface IAdsManager {
     fun start(context: Context)
 
+    fun isAvailable(): Boolean
+
     fun showRewardedAd(
         activity: Activity,
         skipIfFrequent: Boolean,

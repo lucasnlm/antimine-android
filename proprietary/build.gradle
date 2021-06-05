@@ -39,7 +39,7 @@ dependencies {
 
     // Amplitude
     implementation 'com.amplitude:android-sdk:2.31.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 
     // Google
     implementation 'com.android.billingclient:billing-ktx:3.0.3'
@@ -51,8 +51,8 @@ dependencies {
 
     // Firebase
     implementation 'com.google.firebase:firebase-analytics-ktx:19.0.0'
-    implementation 'com.google.firebase:firebase-crashlytics:18.0.0'
-    implementation 'com.google.firebase:firebase-firestore-ktx:23.0.0'
+    implementation 'com.google.firebase:firebase-crashlytics:18.0.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx:23.0.1'
     implementation 'com.google.firebase:firebase-config-ktx:21.0.0'
 
     // Kotlin

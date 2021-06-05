@@ -36,6 +36,10 @@ class AdMobAdsManager(
 
     private var initialized = false
 
+    override fun isAvailable(): Boolean {
+        return initialized
+    }
+
     override fun start(context: Context) {
         if (!initialized) {
             initialized = true

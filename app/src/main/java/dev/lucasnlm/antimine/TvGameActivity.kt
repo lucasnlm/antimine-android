@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.activity_game_tv.*
 import kotlinx.android.synthetic.main.activity_game_tv.controlsToast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -56,7 +57,9 @@ class TvGameActivity :
         loadGameFragment()
         bindToast()
 
-        gameViewModel.startNewGame()
+        lifecycleScope.launch {
+            gameViewModel.startNewGame()
+        }
 
         onOpenAppActions()
     }
@@ -79,7 +82,7 @@ class TvGameActivity :
                 }
 
                 minesCount.apply {
-                    visibility = View.VISIBLE
+                    visibility = if (it.mineCount != null) View.VISIBLE else View.GONE
                     text = it.mineCount.toString()
                 }
 

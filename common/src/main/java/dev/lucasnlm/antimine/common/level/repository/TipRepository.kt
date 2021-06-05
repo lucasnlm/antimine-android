@@ -22,6 +22,7 @@ class TipRepository(
 
         return when {
             tips >= 1 -> {
+                preferencesRepository.refreshLastHelpUsed()
                 preferencesRepository.setTips(tips - 1)
                 true
             }
@@ -45,6 +46,6 @@ class TipRepository(
     }
 
     companion object {
-        const val MAX_TIPS = 15
+        const val MAX_TIPS = 25
     }
 }

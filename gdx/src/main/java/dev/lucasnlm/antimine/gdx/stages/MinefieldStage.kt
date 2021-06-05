@@ -13,22 +13,24 @@ import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.BuildConfig
 import dev.lucasnlm.antimine.gdx.controller.CameraController
 import dev.lucasnlm.antimine.gdx.GdxLocal
+import dev.lucasnlm.antimine.gdx.PixelPerfectViewport
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
-import dev.lucasnlm.antimine.gdx.actors.areaFullForm
-import dev.lucasnlm.antimine.gdx.actors.areaNoForm
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
 class MinefieldStage(
+    val screenWidth: Float,
+    val screenHeight: Float,
     private var actionSettings: ActionSettings,
     private val renderSettings: RenderSettings,
     private val onSingleTap: (Int) -> Unit,
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTouch: (Int) -> Unit,
+    private val onEngineReady: () -> Unit,
     private val forceFocus: Boolean,
-) : Stage() {
+) : Stage(PixelPerfectViewport(screenWidth, screenHeight)) {
     private var minefield: Minefield? = null
     private var minefieldSize: SizeF? = null
     private var currentZoom: Float = 1.0f
@@ -38,6 +40,7 @@ class MinefieldStage(
 
     private val cameraController: CameraController
 
+    private var forceRefreshVisibleAreas = true
     private var boundHashCode: Int? = null
     private var boundAreas = listOf<Area>()
 
@@ -119,12 +122,14 @@ class MinefieldStage(
 
     fun bindField(field: List<Area>) {
         boundAreas = field
+        forceRefreshVisibleAreas = true
     }
 
-    private fun refreshAreas(cameraChanged: Boolean) {
-        val currentHashCode = boundAreas.hashCode()
-        if (boundAreas.hashCode() != boundHashCode || cameraChanged) {
-            boundHashCode = currentHashCode
+    private fun refreshAreas(visibleHash: Int?) {
+        if (visibleHash != boundHashCode && visibleHash != null || forceRefreshVisibleAreas) {
+            if (visibleHash != null) {
+                boundHashCode = visibleHash
+            }
 
             boundAreas.let { field ->
                 if (actors.size != field.size) {
@@ -134,40 +139,32 @@ class MinefieldStage(
                             theme = renderSettings.theme,
                             size = renderSettings.areaSize,
                             area = it,
-                            initialAreaForm = if (renderSettings.joinAreas) {
-                                AreaActor.getForm(it, field)
-                            } else {
-                                areaNoForm
-                            },
+                            field = field,
                             onInputEvent = ::handleGameEvent,
-                            squareDivider = renderSettings.squareDivider,
+                            enableLigatures = renderSettings.joinAreas,
                         )
                     }.forEach(::addActor)
+
+                    camera.update(true)
+                    refreshVisibleActorsIfNeeded()
                 } else {
                     val reset = field.count { it.hasMine } == 0
 
                     actors.forEach {
-                        val areaActor = (it as AreaActor)
-                        val area = field[areaActor.boundAreaId()]
-                        if (area.hashCode() != areaActor.boundAreaHashCode() || areaActor.isVisible) {
-                            val areaForm = if (renderSettings.joinAreas && area.isCovered) {
-                                if (currentZoom < 1.4f) {
-                                    AreaActor.getForm(
-                                        area,
-                                        field,
-                                    )
-                                } else {
-                                    areaFullForm
-                                }
-                            } else {
-                                areaNoForm
+                        if (it.isVisible) {
+                            val areaActor = (it as AreaActor)
+                            val area = field[areaActor.boundAreaId()]
+                            if (area.hashCode() != areaActor.boundAreaHashCode() || areaActor.isVisible) {
+                                areaActor.bindArea(reset, renderSettings.joinAreas, area, field)
                             }
-                            areaActor.bindArea(reset, area, areaForm)
                         }
                     }
                 }
             }
 
+            onEngineReady()
+
+            forceRefreshVisibleAreas = false
             Gdx.graphics.requestRendering()
         }
     }
@@ -180,10 +177,10 @@ class MinefieldStage(
                 it.height * renderSettings.areaSize,
             )
         }
-        centerCamera()
+        onChangeGame()
     }
 
-    fun centerCamera() {
+    private fun centerCamera() {
         this.minefieldSize?.let {
             val virtualWidth = Gdx.graphics.width
             val virtualHeight = Gdx.graphics.height
@@ -201,6 +198,10 @@ class MinefieldStage(
 
             Gdx.graphics.requestRendering()
         }
+    }
+
+    fun onChangeGame() {
+        centerCamera()
     }
 
     private fun handleGameEvent(gdxEvent: GdxEvent) {
@@ -329,9 +330,9 @@ class MinefieldStage(
         // Handle camera movement
         minefieldSize?.let { cameraController.act(it) }
 
-        val cameraChanged = refreshVisibleActorsIfNeeded()
+        val visibleHash = refreshVisibleActorsIfNeeded()
 
-        refreshAreas(cameraChanged)
+        refreshAreas(visibleHash)
 
         GdxLocal.run {
             if (highlightAlpha > 0.0f) {
@@ -345,16 +346,18 @@ class MinefieldStage(
         }
     }
 
-    private fun refreshVisibleActorsIfNeeded(): Boolean {
+    private fun refreshVisibleActorsIfNeeded(): Int? {
         val camera = camera as OrthographicCamera
+        var visibleHash: Int? = null
         val cameraChanged: Boolean = !camera.position.epsilonEquals(lastCameraPosition) || lastZoom != camera.zoom
-        if (cameraChanged) {
+        if (cameraChanged || forceRefreshVisibleAreas) {
             lastCameraPosition = camera.position.cpy()
             lastZoom = camera.zoom
 
-            actors.forEach {
+            visibleHash = actors.filter {
                 it.isVisible = camera.frustum.boundsInFrustum(it.x, it.y, 0f, it.width, it.height, 0.0f)
-            }
+                it.isVisible
+            }.hashCode()
         }
 
         if (BuildConfig.DEBUG) {
@@ -362,7 +365,7 @@ class MinefieldStage(
             Gdx.app.log("GDX", "GDX count = $visibleCount")
         }
 
-        return cameraChanged
+        return visibleHash
     }
 
     override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {

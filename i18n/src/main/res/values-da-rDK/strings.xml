@@ -70,7 +70,7 @@
     <string name="flag_tile">Flag</string>
     <string name="retry">Forsøg igen</string>
     <string name="continue_game">Forsæt</string>
-    <string name="empty">Tomt</string>
+    <string name="empty">Tom</string>
     <string name="cant_do_it_now">Umuligt at gøre det nu</string>
     <string name="you_have_received">Du har modtaget: +%1$d</string>
     <string name="help_win_a_game">For mere hjælp, skal du vinde et spil.</string>
@@ -117,4 +117,5 @@
     <string name="open_tutorial">Åben vejledning</string>
     <string name="master" comment="new level difficulty">Mester</string>
     <string name="click_numbers" comment="this is a settings item">Tillad tryk på numre</string>
+    <string name="legend" comment="level difficulty">Legende</string>
 </resources>

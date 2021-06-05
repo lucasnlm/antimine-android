@@ -117,4 +117,5 @@
     <string name="open_tutorial">打开教程</string>
     <string name="master" comment="new level difficulty">大师</string>
     <string name="click_numbers" comment="this is a settings item">允许点击数字</string>
+    <string name="legend" comment="level difficulty">传奇</string>
 </resources>
