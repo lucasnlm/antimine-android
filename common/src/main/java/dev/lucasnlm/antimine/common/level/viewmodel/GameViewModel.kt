@@ -134,7 +134,7 @@ open class GameViewModel(
                     field = event.field,
                     mineCount = gameController.remainingMines(),
                     isGameCompleted = isVictory || isGameOver || isComplete,
-                    hasMines = event.field.firstOrNull { it.hasMine } != null,
+                    hasMines = hasMines,
                 )
 
                 if (!wasCompleted) {
@@ -182,7 +182,7 @@ open class GameViewModel(
                     }
                 }
 
-                if (!newState.isGameCompleted && hasMines) {
+                if (!newState.isGameCompleted && hasMines && !newState.isLoadingMap) {
                     runClock()
                 } else {
                     stopClock()
@@ -637,10 +637,12 @@ open class GameViewModel(
         saveGame()
         saveStats()
 
-        if (isCompletedWithMistakes()) {
-            addNewTip(1)
-        } else {
-            addNewTip(2)
+        if (clock.time() > 5L) {
+            if (isCompletedWithMistakes()) {
+                addNewTip(1)
+            } else {
+                addNewTip(2)
+            }
         }
     }
 
@@ -653,21 +655,29 @@ open class GameViewModel(
 
         val time = clock.time()
         if (time > 1L && gameController.getActionsCount() > 7) {
-            when (state.difficulty) {
+            val board = when (state.difficulty) {
                 Difficulty.Beginner -> {
-                    playGamesManager.submitLeaderboard(Leaderboard.BeginnerBestTime, clock.time())
+                    Leaderboard.BeginnerBestTime
                 }
                 Difficulty.Intermediate -> {
-                    playGamesManager.submitLeaderboard(Leaderboard.IntermediateBestTime, clock.time())
+                    Leaderboard.IntermediateBestTime
                 }
                 Difficulty.Expert -> {
-                    playGamesManager.submitLeaderboard(Leaderboard.ExpertBestTime, clock.time())
+                    Leaderboard.ExpertBestTime
                 }
                 Difficulty.Master -> {
-                    playGamesManager.submitLeaderboard(Leaderboard.MasterBestTime, clock.time())
+                    Leaderboard.MasterBestTime
+                }
+                Difficulty.Legend -> {
+                    Leaderboard.LegendaryBestTime
                 }
                 else -> {
+                    null
                 }
+            }
+
+            board?.let {
+                playGamesManager.submitLeaderboard(it, time)
             }
 
             statsRepository.getAllStats(0).count {

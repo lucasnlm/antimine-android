@@ -23,6 +23,7 @@ enum class Leaderboard(
     IntermediateBestTime(""),
     ExpertBestTime(""),
     MasterBestTime(""),
+    LegendaryBestTime(""),
 }
 
 interface IPlayGamesManager {
