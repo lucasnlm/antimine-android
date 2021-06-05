@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine
 
 import androidx.multidex.MultiDexApplication
 import dev.lucasnlm.antimine.common.level.di.LevelModule
-import dev.lucasnlm.antimine.common.level.repository.TipRepository
 import dev.lucasnlm.antimine.core.di.CommonModule
 import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.core.models.Analytics
