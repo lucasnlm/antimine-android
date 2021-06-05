@@ -144,6 +144,7 @@ class GameApplicationListener(
             gameTextures = GameTextures(
                 areaHighlight = AreaAssetBuilder.getAreaBorderTexture(
                     expectedSize = expectedSize,
+                    squareDivider = renderSettings.squareDivider,
                     radiusLevel = radiusLevel,
                 ),
                 areaCovered = AreaAssetBuilder.getAreaTexture(

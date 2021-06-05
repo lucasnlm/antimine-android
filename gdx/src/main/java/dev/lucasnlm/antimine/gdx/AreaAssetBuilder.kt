@@ -48,6 +48,7 @@ object AreaAssetBuilder {
 
     fun getAreaBorderTexture(
         expectedSize: Float,
+        squareDivider: Float,
         radiusLevel: Int,
     ): Texture {
         val size = expectedSize.toDouble().run {
@@ -55,7 +56,7 @@ object AreaAssetBuilder {
         }.toInt()
 
         val radius = (size * 0.5 * radiusLevel * 0.1f).toInt()
-        val border = (3 * Gdx.graphics.density).toInt()
+        val border = (squareDivider * Gdx.graphics.density).toInt()
 
         val pixmap = Pixmap(size, size, Pixmap.Format.RGBA8888).apply {
             blending = Pixmap.Blending.None
