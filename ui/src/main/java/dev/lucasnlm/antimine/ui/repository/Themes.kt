@@ -536,6 +536,75 @@ object Themes {
         ),
     )
 
+    private fun darkLightBlueTheme() = AppTheme(
+        id = 28L,
+        theme = R.style.DarkLightBlueTheme,
+        palette = AreaPalette(
+            accent = 0x42a5f5,
+            background = 0x212121,
+            covered = 0x42a5f5,
+            coveredOdd = 0x42a5f5,
+            uncovered = 0x212121,
+            uncoveredOdd = 0x1c1c1c,
+            minesAround1 = 0xFFFFFF,
+            minesAround2 = 0xCCCCCC,
+            minesAround3 = 0xAAAAAA,
+            minesAround4 = 0xDDDDDD,
+            minesAround5 = 0xFFFFFF,
+            minesAround6 = 0xFF0000,
+            minesAround7 = 0xFF0000,
+            minesAround8 = 0xFF0000,
+            highlight = 0xd1c4e9,
+            focus = 0xD32F2F,
+        ),
+    )
+
+    private fun darkRedTheme() = AppTheme(
+        id = 29L,
+        theme = R.style.DarkRedTheme,
+        palette = AreaPalette(
+            accent = 0xf44336,
+            background = 0x212121,
+            covered = 0xf44336,
+            coveredOdd = 0xf44336,
+            uncovered = 0x212121,
+            uncoveredOdd = 0x1c1c1c,
+            minesAround1 = 0xFFFFFF,
+            minesAround2 = 0xCCCCCC,
+            minesAround3 = 0xAAAAAA,
+            minesAround4 = 0xDDDDDD,
+            minesAround5 = 0xFFFFFF,
+            minesAround6 = 0xFF0000,
+            minesAround7 = 0xFF0000,
+            minesAround8 = 0xFF0000,
+            highlight = 0xd1c4e9,
+            focus = 0xD32F2F,
+        ),
+    )
+
+    private fun darkPurpleTheme2() = AppTheme(
+        id = 30L,
+        theme = R.style.DarkCustomPurpleTheme,
+        palette = AreaPalette(
+            accent = 0x7e57c2,
+            background = 0x212121,
+            covered = 0x7e57c2,
+            coveredOdd = 0x7e57c2,
+            uncovered = 0xd1c4e9,
+            uncoveredOdd = 0xd1c4e9,
+            minesAround1 = 0xFFFFFF,
+            minesAround2 = 0xCCCCCC,
+            minesAround3 = 0xAAAAAA,
+            minesAround4 = 0xDDDDDD,
+            minesAround5 = 0xFFFFFF,
+            minesAround6 = 0xFF0000,
+            minesAround7 = 0xFF0000,
+            minesAround8 = 0xFF0000,
+            highlight = 0xd1c4e9,
+            focus = 0xD32F2F,
+        ),
+    )
+
     private fun whiteYellowTheme() = AppTheme(
         id = 19L,
         theme = R.style.BananaThemeLight,
@@ -616,6 +685,9 @@ object Themes {
         darkPinkTheme(),
         darkPurpleTheme(),
         darkWhiteTheme(),
+        darkLightBlueTheme(),
+        darkRedTheme(),
+        darkPurpleTheme2(),
         standardChessTheme(),
         goldenTheme(),
         blueTheme(),

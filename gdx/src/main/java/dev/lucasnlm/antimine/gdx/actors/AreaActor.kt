@@ -199,10 +199,10 @@ class AreaActor(
             if (areaForm == areaFullForm) {
                 batch.drawRegion(
                     texture = atlas.findRegion(FormNames.full),
-                    x = x - Gdx.graphics.density * 2,
-                    y = y - Gdx.graphics.density * 2,
-                    width = width + 4 * Gdx.graphics.density,
-                    height = height + 4 * Gdx.graphics.density,
+                    x = x - 0.5f,
+                    y = y - 0.5f,
+                    width = width + 0.5f,
+                    height = height + 0.5f,
                     color = if (area.mark.isNotNone()) {
                         coverColor.toGdxColor(1.0f).dim(0.6f)
                     } else {
@@ -214,10 +214,10 @@ class AreaActor(
                 pieces.forEach { piece ->
                     batch.drawRegion(
                         texture = atlas.findRegion(piece),
-                        x = x - Gdx.graphics.density * 2,
-                        y = y - Gdx.graphics.density * 2,
-                        width = width + 4 * Gdx.graphics.density,
-                        height = height + 4 * Gdx.graphics.density,
+                        x = x,
+                        y = y,
+                        width = width,
+                        height = height,
                         color = if (area.mark.isNotNone()) {
                             coverColor.toGdxColor(1.0f).dim(0.6f)
                         } else {
@@ -237,10 +237,10 @@ class AreaActor(
             pieces.forEach { piece ->
                 batch.drawRegion(
                     texture = atlas.findRegion(piece),
-                    x = x - Gdx.graphics.density * 2,
-                    y = y - Gdx.graphics.density * 2,
-                    width = width + 4 * Gdx.graphics.density,
-                    height = height + 4 * Gdx.graphics.density,
+                    x = x - 0.5f,
+                    y = y - 0.5f,
+                    width = width + 1.0f,
+                    height = height + 1.0f,
                     color = coverColor,
                     blend = false,
                 )

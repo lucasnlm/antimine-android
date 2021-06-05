@@ -114,6 +114,8 @@ class GameApplicationListener(
         assetManager.finishLoading()
 
         minefieldStage = MinefieldStage(
+            screenWidth = Gdx.graphics.width.toFloat(),
+            screenHeight = Gdx.graphics.height.toFloat(),
             renderSettings = renderSettings,
             actionSettings = actionSettings,
             onSingleTap = onSingleTap,

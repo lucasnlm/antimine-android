@@ -433,6 +433,10 @@ class GameActivity :
                     if (gameViewModel.getTips() > 0) {
                         if (!gameViewModel.revealRandomMine()) {
                             Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
+                        } else {
+                            if (!preferencesRepository.isPremiumEnabled()) {
+                                adsManager.showInterstitialAd(this@GameActivity, onDismiss = {})
+                            }
                         }
                     } else {
                         Toast.makeText(applicationContext, R.string.help_win_a_game, Toast.LENGTH_SHORT).show()

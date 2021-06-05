@@ -85,6 +85,30 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
+    <style name="DarkLightBlueTheme" parent="ThemeOverlay.MaterialComponents.Dark">
+        <item name="colorPrimary">#42a5f5</item>
+        <item name="colorPrimaryDark">#42a5f5</item>
+        <item name="colorAccent">#42a5f5</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="DarkRedTheme" parent="ThemeOverlay.MaterialComponents.Dark">
+        <item name="colorPrimary">#f44336</item>
+        <item name="colorPrimaryDark">#f44336</item>
+        <item name="colorAccent">#f44336</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
     <style name="CustomOrangeTheme" parent="ThemeOverlay.MaterialComponents.Dark">
         <item name="colorPrimary">#fb8c00</item>
         <item name="colorPrimaryDark">#fb8c00</item>

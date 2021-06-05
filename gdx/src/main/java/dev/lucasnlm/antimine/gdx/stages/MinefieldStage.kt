@@ -13,6 +13,7 @@ import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.BuildConfig
 import dev.lucasnlm.antimine.gdx.controller.CameraController
 import dev.lucasnlm.antimine.gdx.GdxLocal
+import dev.lucasnlm.antimine.gdx.PixelPerfectViewport
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
@@ -20,6 +21,8 @@ import dev.lucasnlm.antimine.gdx.models.RenderSettings
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
 class MinefieldStage(
+    val screenWidth: Float,
+    val screenHeight: Float,
     private var actionSettings: ActionSettings,
     private val renderSettings: RenderSettings,
     private val onSingleTap: (Int) -> Unit,
@@ -27,7 +30,7 @@ class MinefieldStage(
     private val onLongTouch: (Int) -> Unit,
     private val onEngineReady: () -> Unit,
     private val forceFocus: Boolean,
-) : Stage() {
+) : Stage(PixelPerfectViewport(screenWidth, screenHeight)) {
     private var minefield: Minefield? = null
     private var minefieldSize: SizeF? = null
     private var currentZoom: Float = 1.0f
