@@ -14,8 +14,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 121
-        versionName '11.1.0-inst'
+        versionCode 1200001
+        versionName '12.0.0'
         minSdkVersion 21
         targetSdkVersion 30
         multiDexEnabled true
@@ -84,7 +84,7 @@ android {
     productFlavors {
         google {
             dimension 'version'
-            applicationId 'dev.lucasnlm.antimine'
+            applicationId 'com.logical.minato'
         }
 
         googleInstant {

@@ -55,18 +55,16 @@ dependencies {
     testImplementation 'org.koin:koin-test:2.2.1'
 
     // LibGDX
-    api "com.badlogicgames.gdx:gdx-backend-android:1.9.14"
-    api "com.badlogicgames.gdx:gdx:1.9.14"
-    natives "com.badlogicgames.gdx:gdx-platform:1.9.14:natives-armeabi"
-    natives "com.badlogicgames.gdx:gdx-platform:1.9.14:natives-armeabi-v7a"
-    natives "com.badlogicgames.gdx:gdx-platform:1.9.14:natives-arm64-v8a"
-    natives "com.badlogicgames.gdx:gdx-platform:1.9.14:natives-x86"
-    natives "com.badlogicgames.gdx:gdx-platform:1.9.14:natives-x86_64"
+    api 'com.badlogicgames.gdx:gdx-backend-android:1.10.0'
+    api 'com.badlogicgames.gdx:gdx:1.10.0'
+    natives 'com.badlogicgames.gdx:gdx-platform:1.10.0:natives-armeabi-v7a'
+    natives 'com.badlogicgames.gdx:gdx-platform:1.10.0:natives-arm64-v8a'
+    natives 'com.badlogicgames.gdx:gdx-platform:1.10.0:natives-x86'
+    natives 'com.badlogicgames.gdx:gdx-platform:1.10.0:natives-x86_64'
 }
 
 task copyAndroidNatives {
     doFirst {
-        file("libs/armeabi/").mkdirs()
         file("libs/armeabi-v7a/").mkdirs()
         file("libs/arm64-v8a/").mkdirs()
         file("libs/x86_64/").mkdirs()
@@ -76,7 +74,6 @@ task copyAndroidNatives {
             def outputDir = null
             if (jar.name.endsWith("natives-arm64-v8a.jar")) outputDir = file("libs/arm64-v8a")
             if (jar.name.endsWith("natives-armeabi-v7a.jar")) outputDir = file("libs/armeabi-v7a")
-            if (jar.name.endsWith("natives-armeabi.jar")) outputDir = file("libs/armeabi")
             if (jar.name.endsWith("natives-x86_64.jar")) outputDir = file("libs/x86_64")
             if (jar.name.endsWith("natives-x86.jar")) outputDir = file("libs/x86")
             if (outputDir != null) {
