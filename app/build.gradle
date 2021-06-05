@@ -84,7 +84,7 @@ android {
     productFlavors {
         google {
             dimension 'version'
-            applicationId 'com.logical.minato'
+            applicationId 'dev.lucasnlm.antimine'
         }
 
         googleInstant {
