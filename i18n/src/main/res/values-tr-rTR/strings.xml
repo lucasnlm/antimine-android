@@ -116,6 +116,6 @@
     <string name="close">Kapat</string>
     <string name="open_tutorial">Öğreticiyi aç</string>
     <string name="master" comment="new level difficulty">Usta</string>
-    <string name="click_numbers" comment="this is a settings item">Allow tap on numbers</string>
-    <string name="legend" comment="level difficulty">Legend</string>
+    <string name="click_numbers" comment="this is a settings item">Sayılara dokunmaya izin ver</string>
+    <string name="legend" comment="level difficulty">Efsane</string>
 </resources>
