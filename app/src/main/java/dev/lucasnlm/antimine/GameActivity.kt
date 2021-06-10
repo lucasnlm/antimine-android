@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
@@ -416,7 +417,7 @@ class GameActivity :
 
     private fun refreshTipShortcutIcon() {
         val dt = System.currentTimeMillis() - preferencesRepository.lastHelpUsed()
-        val canUseHelpNow = dt > 10 * 1000L
+        val canUseHelpNow = dt > 5 * 1000L
         val canRequestHelpWithAds = gameViewModel.getTips() == 0 && adsManager.isAvailable()
 
         tipsCounter.apply {
@@ -432,9 +433,14 @@ class GameActivity :
             TooltipCompat.setTooltipText(this, getString(R.string.help))
             setImageResource(R.drawable.tip)
             setColorFilter(minesCount.currentTextColor)
-            visibility = View.VISIBLE
 
             if (canUseHelpNow) {
+                tipCooldown.apply {
+                    animate().alpha(0.0f).start()
+                    visibility = View.GONE
+                    progress = 0
+                }
+
                 animate().alpha(1.0f).start()
 
                 if (canRequestHelpWithAds) {
@@ -473,7 +479,22 @@ class GameActivity :
                                 } else {
                                     if (featureFlagManager.showAdWhenUsingTip) {
                                         if (!preferencesRepository.isPremiumEnabled()) {
-                                            adsManager.showInterstitialAd(this@GameActivity, onDismiss = {})
+                                            val state = gameViewModel.singleState()
+                                            val adReward = (state.mineCount ?: 0) < state.minefield.mines * 0.10
+
+                                            if (adReward) {
+                                                adsManager.showRewardedAd(
+                                                    this@GameActivity,
+                                                    skipIfFrequent = false,
+                                                    onRewarded = {},
+                                                    onFail = {},
+                                                )
+                                            } else {
+                                                adsManager.showInterstitialAd(
+                                                    activity = this@GameActivity,
+                                                    onDismiss = {},
+                                                )
+                                            }
                                         }
                                     }
                                 }
@@ -484,7 +505,29 @@ class GameActivity :
                     }
                 }
             } else {
-                animate().alpha(0.25f).start()
+                tipCooldown.apply {
+                    animate().alpha(1.0f).start()
+                    if (progress == 0) {
+                        ValueAnimator.ofFloat(0.0f, 5.0f).apply {
+                            duration = 5000
+                            repeatCount = 0
+                            addUpdateListener {
+                                progress = ((it.animatedValue as Float) * 1000f).toInt()
+                            }
+                            start()
+                        }
+                    }
+                    visibility = View.VISIBLE
+                    max = 5000
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        setProgress(dt.toInt(), true)
+                    } else {
+                        progress = dt.toInt()
+                    }
+                }
+
+                animate().alpha(0.0f).start()
+
                 setOnClickListener {
                     Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
                 }
