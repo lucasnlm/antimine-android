@@ -423,7 +423,7 @@ class GameActivity :
         tipsCounter.apply {
             visibility = if (canUseHelpNow) View.VISIBLE else View.GONE
             text = if (canRequestHelpWithAds) {
-                "25+"
+                "10+"
             } else {
                 gameViewModel.getTips().toString()
             }
@@ -452,13 +452,14 @@ class GameActivity :
                                 activity = this@GameActivity,
                                 skipIfFrequent = false,
                                 onRewarded = {
+                                    gameViewModel.revealRandomMine(false)
                                     gameViewModel.sendEvent(GameEvent.GiveMoreTip)
                                 },
                                 onFail = {
                                     Toast.makeText(
                                         applicationContext,
                                         R.string.cant_do_it_now,
-                                        Toast.LENGTH_SHORT
+                                        Toast.LENGTH_SHORT,
                                     ).show()
                                 },
                             )
@@ -474,7 +475,7 @@ class GameActivity :
                                     Toast.makeText(
                                         applicationContext,
                                         R.string.cant_do_it_now,
-                                        Toast.LENGTH_SHORT
+                                        Toast.LENGTH_SHORT,
                                     ).show()
                                 } else {
                                     if (featureFlagManager.showAdWhenUsingTip) {

@@ -81,7 +81,7 @@ open class GameViewModel(
                 sendSideEffect(GameEvent.ShowNewGameDialog)
             }
             is GameEvent.GiveMoreTip -> {
-                tipRepository.increaseTip(25)
+                tipRepository.increaseTip(10)
                 val newState = state.copy(
                     tips = tipRepository.getTotalTips(),
                 )
@@ -541,9 +541,11 @@ open class GameViewModel(
         gameController.revealAllEmptyAreas()
     }
 
-    fun revealRandomMine(): Boolean {
+    fun revealRandomMine(consume: Boolean = true): Boolean {
         return if (gameController.revealRandomMine()) {
-            sendEvent(GameEvent.ConsumeTip)
+            if (consume) {
+                sendEvent(GameEvent.ConsumeTip)
+            }
             true
         } else {
             false
