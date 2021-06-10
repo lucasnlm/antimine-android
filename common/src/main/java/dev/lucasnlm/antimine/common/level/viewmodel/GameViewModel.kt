@@ -18,6 +18,7 @@ import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
+import dev.lucasnlm.antimine.core.updateLanguage
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ActionResponse
@@ -723,6 +724,10 @@ open class GameViewModel(
     }
 
     fun getControlDescription(context: Context): SpannedString? {
+        preferencesRepository.getPreferredLocale()?.let {
+            context.updateLanguage(it)
+        }
+
         var openAction: String? = null
         var openReaction: String? = null
         var flagAction: String? = null
@@ -800,6 +805,8 @@ open class GameViewModel(
                 append(first)
                 append("\n")
                 append(second)
+                append("\n")
+                append(context.getString(R.string.tap_to_customize))
             }
         }
 

@@ -187,7 +187,8 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                             backgroundTintList = ColorStateList.valueOf(palette.accent.toAndroidColor(255))
                             setImageResource(R.drawable.touch)
 
-                            compatElevation = 0f
+                            compatElevation = 4f
+                            setShadowPaddingEnabled(true)
                             alpha = 0f
                             animate().apply {
                                 alpha(1.0f)

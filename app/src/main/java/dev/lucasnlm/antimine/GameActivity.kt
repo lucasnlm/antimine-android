@@ -30,6 +30,7 @@ import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.common.level.view.GdxLevelFragment
+import dev.lucasnlm.antimine.control.ControlActivity
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
@@ -182,7 +183,13 @@ class GameActivity :
                         controlsToast.apply {
                             visibility = View.VISIBLE
                             backgroundTintList = tint
-                            this.text = controlText
+                            text = controlText
+
+                            setOnClickListener {
+                                val intent = Intent(this@GameActivity, ControlActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
                         }
                     } else {
                         controlsToast.visibility = View.GONE
