@@ -14,6 +14,8 @@
     <string name="beginner">초급</string>
     <string name="intermediate">중급</string>
     <string name="expert">고급</string>
+    <string name="master">마스터</string>
+    <string name="legend">전설</string>
     <string name="open">오픈</string>
     <string name="settings">설정</string>
     <string name="animations">애니메이션</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">버튼을 사용하여 플래그와 열기 간 전환</string>
     <string name="app_description">당신은 이 사각형 게임판에 숨겨진 지뢰를 하나도 터뜨리지 않고 게임을 끝내야 합니다.</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">지뢰찾기를 하는 방법을 아십니까?</string>
+    <string name="do_you_know_how_to_play">지뢰찾기를 하는 방법을 아십니까?</string>
     <string name="close">닫기</string>
     <string name="open_tutorial">튜토리얼 열기</string>
-    <string name="master" comment="new level difficulty">마스터</string>
-    <string name="click_numbers" comment="this is a settings item">숫자 누르기 허용</string>
-    <string name="legend" comment="level difficulty">전설</string>
+    <string name="click_numbers">숫자 누르기 허용</string>
+    <string name="tap_to_customize">눌러서 사용자 지정</string>
 </resources>

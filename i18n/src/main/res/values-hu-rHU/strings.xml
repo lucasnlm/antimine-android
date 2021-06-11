@@ -14,6 +14,8 @@
     <string name="beginner">Kezdő</string>
     <string name="intermediate">Haladó</string>
     <string name="expert">Szakértő</string>
+    <string name="master">Master</string>
+    <string name="legend">Legend</string>
     <string name="open">Megnyitás</string>
     <string name="settings">Beállítások</string>
     <string name="animations">Animációk</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">A gombbal válthat a Flag és a Open között</string>
     <string name="app_description">Meg kell tisztítanod egy rejtett aknákkal teli, négyszögletes pályát anélkül, hogy akár egyet is felrobbantanál.</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
+    <string name="do_you_know_how_to_play">Do you know how to play minesweeper?</string>
     <string name="close">Close</string>
     <string name="open_tutorial">Open Tutorial</string>
-    <string name="master" comment="new level difficulty">Master</string>
-    <string name="click_numbers" comment="this is a settings item">Allow tap on numbers</string>
-    <string name="legend" comment="level difficulty">Legend</string>
+    <string name="click_numbers">Allow tap on numbers</string>
+    <string name="tap_to_customize">Tap to customize</string>
 </resources>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="it">
     <string name="tutorial">Tutorial</string>
-    <string name="tutorial_basic">La regola del gioco è semplice: il numero su una casella mostra il numero di mine adiacenti ad essa; dovrai segnalare tutte le mine.</string>
-    <string name="tutorial_text_1">Se un numero tocca lo stesso numero di caselle, allora le caselle sono tutte mine.</string>
-    <string name="tutorial_text_2">Dopo aver contrassegnato la prima bandiera, controlla i numeri e analizza la casella successiva.</string>
-    <string name="tutorial_text_3">Se una casella ha lo stesso numero di bandiere, tutte le caselle adiacenti ad essa non sono mine (vedi la freccia verde).</string>
+    <string name="tutorial_basic">Hai un\'unica regola da seguire: il numero della casella mostra la quantità di mine adiacenti ad essa; dovrai segnalare tutte le mine.</string>
+    <string name="tutorial_text_1">Se il numero è adiacente allo stesso numero di caselle ignote, allora quelle caselle saranno tutte mine.</string>
+    <string name="tutorial_text_2">Dopo aver posizionato la prima bandiera, controlla i numeri e passa alla casella successiva.</string>
+    <string name="tutorial_text_3">Se due caselle adiacenti hanno lo stesso numero di bandiere, allora tutte le altre caselle ignote non sono mine (vedi freccia verde).</string>
     <string name="tutorial_text_4">Controlla i numeri e continua ad aprire le caselle.</string>
     <string name="games">Giochi</string>
     <string name="tap_to_begin">Tocca per iniziare</string>
@@ -14,7 +14,9 @@
     <string name="beginner">Principiante</string>
     <string name="intermediate">Normale</string>
     <string name="expert">Esperto</string>
-    <string name="open">Apri</string>
+    <string name="master">Maestro</string>
+    <string name="legend">Leggenda</string>
+    <string name="open">Aprire</string>
     <string name="settings">Impostazioni</string>
     <string name="animations">Animazioni</string>
     <string name="vibration">Feedback tattile</string>
@@ -25,7 +27,7 @@
     <string name="width">Larghezza</string>
     <string name="height">Altezza</string>
     <string name="mines">Mine</string>
-    <string name="retry_sure">Se inizi una nuova partita,\nperderai i progressi.</string>
+    <string name="retry_sure">Se inizi una nuova partita, i progressi attuali andranno persi.</string>
     <string name="show_licenses">Visualizza licenze</string>
     <string name="new_game_request">Vuoi iniziare una nuova partita?</string>
     <string name="mines_remaining">%d mine</string>
@@ -36,7 +38,7 @@
     <string name="settings_accessibility">Accessibilità</string>
     <string name="size">Dimensione</string>
     <string name="rounded_square">Caselle Arrotondate</string>
-    <string name="space_between_squares">Spazio Tra Le Caselle</string>
+    <string name="space_between_squares">Spazio Tra Caselle</string>
     <string name="system">Sistema</string>
     <string name="rating">Suggerimenti</string>
     <string name="sign_in_failed">Impossibile accedere. Controllare la connessione di rete e riprovare.</string>
@@ -45,7 +47,7 @@
     <string name="you_lost">Hai perso!</string>
     <string name="you_finished">Hai finito!</string>
     <string name="defeats">Sconfitte</string>
-    <string name="generic_game_over">Buona fortuna nella prossima partita.</string>
+    <string name="generic_game_over">Buona fortuna per la prossima partita!</string>
     <string name="generic_win">Hai trovato %1$d mine in %2$d secondi.</string>
     <string name="fail_to_share">Condivisione fallita</string>
     <string name="version_s">Versione %1$s</string>
@@ -109,13 +111,12 @@
     <string name="show_windows">Visualizza finestre</string>
     <string name="select_language">Seleziona Lingua</string>
     <string name="switch_control">Pulsante: Bandiera e Aperto</string>
-    <string name="switch_control_desc">Usa il bottone per passare da Bandiera ad Aperto</string>
+    <string name="switch_control_desc">Usa il bottone per passare da Bandiera ad Apri</string>
     <string name="app_description">L\'obbiettivo del gioco è ripulire un campo rettangolare che contiene mine nascoste senza detonarne nessuna.</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Conosci già le regole di Campo Minato?</string>
+    <string name="do_you_know_how_to_play">Conosci già le regole di Campo Minato?</string>
     <string name="close">Chiudi</string>
     <string name="open_tutorial">Apri Tutorial</string>
-    <string name="master" comment="new level difficulty">Maestro</string>
-    <string name="click_numbers" comment="this is a settings item">Consenti tocco sui numeri</string>
-    <string name="legend" comment="level difficulty">Leggenda</string>
+    <string name="click_numbers">Consenti tocco sui numeri</string>
+    <string name="tap_to_customize">Tocca per modificare</string>
 </resources>

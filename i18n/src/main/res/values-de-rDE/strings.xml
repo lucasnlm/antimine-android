@@ -14,6 +14,8 @@
     <string name="beginner">Anfänger</string>
     <string name="intermediate">Mittleres Niveau</string>
     <string name="expert">Experte</string>
+    <string name="master">Meister</string>
+    <string name="legend">Legend</string>
     <string name="open">Öffnen</string>
     <string name="settings">Einstellungen</string>
     <string name="animations">Animationen</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">Benutze den Knopf, um zwischen Markierung und Öffnen zu wechseln</string>
     <string name="app_description">Du musst ein rechteckiges Spielfeld, das versteckte Minen enthält, räumen, ohne irgendeine davon zur Explosion zu bringen.</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Weißt du, wie man Minesweeper spielt?</string>
+    <string name="do_you_know_how_to_play">Weißt du, wie man Minesweeper spielt?</string>
     <string name="close">Schließen</string>
     <string name="open_tutorial">Anleitung öffnen</string>
-    <string name="master" comment="new level difficulty">Meister</string>
-    <string name="click_numbers" comment="this is a settings item">Allow tap on numbers</string>
-    <string name="legend" comment="level difficulty">Legend</string>
+    <string name="click_numbers">Allow tap on numbers</string>
+    <string name="tap_to_customize">Zum Anpassen tippen</string>
 </resources>

@@ -6,7 +6,7 @@
     <string name="tutorial_text_2">在放置了第一个旗标以后，回看数字并分析下一个方块。</string>
     <string name="tutorial_text_3">如果一个方块周围有相同数量的旗标，那么周围其余方块就不是地雷（绿色箭头）。</string>
     <string name="tutorial_text_4">回看数字并不断打开方块。</string>
-    <string name="games">游戏</string>
+    <string name="games">游戏数</string>
     <string name="tap_to_begin">点击开始</string>
     <string name="previous_games">之前的游戏</string>
     <string name="minefield">难度</string>
@@ -14,6 +14,8 @@
     <string name="beginner">新手</string>
     <string name="intermediate">中等</string>
     <string name="expert">专家</string>
+    <string name="master">大师</string>
+    <string name="legend">传奇</string>
     <string name="open">打开</string>
     <string name="settings">设置</string>
     <string name="animations">动画</string>
@@ -22,9 +24,9 @@
     <string name="events">统计</string>
     <string name="custom">自定义</string>
     <string name="start">开始</string>
-    <string name="width">宽度</string>
-    <string name="height">高度</string>
-    <string name="mines">地雷</string>
+    <string name="width">宽</string>
+    <string name="height">高</string>
+    <string name="mines">地雷数</string>
     <string name="retry_sure">如果你开始一个新游戏，\n你的当前进度将会丢失。</string>
     <string name="show_licenses">显示许可证</string>
     <string name="new_game_request">你要开始一个新游戏吗？</string>
@@ -43,7 +45,7 @@
     <string name="you_won">你获胜了！</string>
     <string name="victories">胜利</string>
     <string name="you_lost">你输了！</string>
-    <string name="you_finished">你已看完！</string>
+    <string name="you_finished">完成了！</string>
     <string name="defeats">失败</string>
     <string name="generic_game_over">祝你下次游戏好运。</string>
     <string name="generic_win">你用%2$d秒找出了%1$d枚地雷。</string>
@@ -88,7 +90,7 @@
     <string name="translation">翻译</string>
     <string name="licenses">许可证</string>
     <string name="google_play_games">Google Play 游戏</string>
-    <string name="loading">启动中……</string>
+    <string name="loading">加载中……</string>
     <string name="connect">连接</string>
     <string name="connecting">正在连接…</string>
     <string name="disconnect">断开</string>
@@ -100,22 +102,21 @@
     <string name="delete_all">全部删除</string>
     <string name="appearance">界面外观</string>
     <string name="themes">主题</string>
-    <string name="delete_all_message">永久删除全部记录。</string>
+    <string name="delete_all_message">全部记录将被永久删除。</string>
     <string name="remove_ad">去除广告</string>
     <string name="help">帮助</string>
     <string name="back">后退</string>
-    <string name="donation">捐赠</string>
-    <string name="open_on_game">在游戏屏幕上打开</string>
-    <string name="show_windows">显示窗口</string>
+    <string name="donation">捐助</string>
+    <string name="open_on_game">在游戏启动时上打开上一局游戏</string>
+    <string name="show_windows">显示结果对话框</string>
     <string name="select_language">选择语言</string>
     <string name="switch_control">开关：（切换）标记与打开</string>
     <string name="switch_control_desc">使用按钮在标记和打开之间切换</string>
     <string name="app_description">你需要清除一个隐藏着地雷的矩形面板，不能使任何地雷爆炸。</string>
     <string name="app_name">扫雷 (踩地雷) - Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">你想阅读教程吗？</string>
+    <string name="do_you_know_how_to_play">你想阅读教程吗？</string>
     <string name="close">关闭</string>
     <string name="open_tutorial">打开教程</string>
-    <string name="master" comment="new level difficulty">大师</string>
-    <string name="click_numbers" comment="this is a settings item">允许点击数字</string>
-    <string name="legend" comment="level difficulty">传奇</string>
+    <string name="click_numbers">允许点击数字</string>
+    <string name="tap_to_customize">点按即可自定义</string>
 </resources>

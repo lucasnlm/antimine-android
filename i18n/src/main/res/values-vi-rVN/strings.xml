@@ -14,6 +14,8 @@
     <string name="beginner">Dễ</string>
     <string name="intermediate">Trung bình</string>
     <string name="expert">Khó</string>
+    <string name="master">Bậc thầy</string>
+    <string name="legend">Huyền thoại</string>
     <string name="open">Mở</string>
     <string name="settings">Cài đặt</string>
     <string name="animations">Hiệu ứng động</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">Dùng nút để chuyển giữa Gắn cờ và Mở</string>
     <string name="app_description">Bạn phải mở tất cả các ô trên một bãi mìn mà không làm nổ cục mìn nào.</string>
     <string name="app_name">Dò mìn</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Bạn có biết chơi dò mìn không?</string>
+    <string name="do_you_know_how_to_play">Bạn có biết chơi dò mìn không?</string>
     <string name="close">Đóng</string>
     <string name="open_tutorial">Mở Hướng dẫn</string>
-    <string name="master" comment="new level difficulty">Bậc thầy</string>
-    <string name="click_numbers" comment="this is a settings item">Cho phép nhấn vào các con số</string>
-    <string name="legend" comment="level difficulty">Huyền thoại</string>
+    <string name="click_numbers">Cho phép nhấn vào các con số</string>
+    <string name="tap_to_customize">Nhấn để tuỳ chỉnh</string>
 </resources>

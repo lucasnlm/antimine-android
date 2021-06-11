@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fi">
     <string name="tutorial">Johdanto</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
+    <string name="tutorial_basic">Pelin sääntö on yksinkertainen: ruudussa oleva numero kertoo sen vierellä olevien miinojen määrän, ja sinun täytyy merkitä kaikki miinat.</string>
+    <string name="tutorial_text_1">Jos numero koskettaa samaa määrää ruutuja, ovat ne kaikki ruudut miinoja.</string>
+    <string name="tutorial_text_2">Ensimmäisen lippusi merkittyä tarkista numerot ja tutki seuraava ruutu.</string>
+    <string name="tutorial_text_3">Jos ruudulla on sama määrä lippuja, kaikki muut jäljellä olevat ruudut sen vierellä eivät ole miinoja (vihreä nuoli).</string>
     <string name="tutorial_text_4">Tarkista numerot ja avaa neliöitä.</string>
     <string name="games">Pelit</string>
     <string name="tap_to_begin">Aloita napauttamalla</string>
@@ -14,6 +14,8 @@
     <string name="beginner">Aloittelija</string>
     <string name="intermediate">Keskitaso</string>
     <string name="expert">Edistynyt</string>
+    <string name="master">Mestari</string>
+    <string name="legend">Legenda</string>
     <string name="open">Avaa</string>
     <string name="settings">Asetukset</string>
     <string name="animations">Animaatiot</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">Käytä painiketta vaihtaaksesi lipun ja avaamisen välillä</string>
     <string name="app_description">Sinun täytyy tyhjentää piileskeleviä miinoja sisältävä suorakulmainen taulu räjäyttämättä miinoja kertaakaan.</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Tiedätkö miten pelata miinanharavaa?</string>
+    <string name="do_you_know_how_to_play">Tiedätkö miten pelata miinanharavaa?</string>
     <string name="close">Sulje</string>
     <string name="open_tutorial">Avaa Johdanto</string>
-    <string name="master" comment="new level difficulty">Mestari</string>
-    <string name="click_numbers" comment="this is a settings item">Allow tap on numbers</string>
-    <string name="legend" comment="level difficulty">Legend</string>
+    <string name="click_numbers">Salli numeroiden napauttaminen</string>
+    <string name="tap_to_customize">Tap to customize</string>
 </resources>

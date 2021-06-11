@@ -14,6 +14,8 @@
     <string name="beginner">Новачок</string>
     <string name="intermediate">Середній</string>
     <string name="expert">Експерт</string>
+    <string name="master">Досвідчений</string>
+    <string name="legend">Legend</string>
     <string name="open">Відкрити</string>
     <string name="settings">Налаштування</string>
     <string name="animations">Анімації</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">Використовуйте кнопку, щоб переключитися між встановленням прапора і відкриттям</string>
     <string name="app_description">Вам потрібно очистити поле від схованих мін, не детонуючи їх.</string>
     <string name="app_name">Сапер</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Ви вмієте грати в сапера?</string>
+    <string name="do_you_know_how_to_play">Ви вмієте грати в сапера?</string>
     <string name="close">Закрити</string>
     <string name="open_tutorial">Відкрити навчання</string>
-    <string name="master" comment="new level difficulty">Досвідчений</string>
-    <string name="click_numbers" comment="this is a settings item">Дозволити натискання на цифри</string>
-    <string name="legend" comment="level difficulty">Legend</string>
+    <string name="click_numbers">Дозволити натискання на цифри</string>
+    <string name="tap_to_customize">Tap to customize</string>
 </resources>

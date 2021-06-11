@@ -14,6 +14,8 @@
     <string name="beginner">Αρχάριος</string>
     <string name="intermediate">Ενδιάμεση</string>
     <string name="expert">Εξπέρ</string>
+    <string name="master">Αρχηγός</string>
+    <string name="legend">Θρύλος</string>
     <string name="open">Άνοιγμα</string>
     <string name="settings">Ρυθμίσεις</string>
     <string name="animations">Εφέ Κίνησης</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">Χρησιμοποιήστε το κουμπί για εναλλαγή μεταξύ Σημαίας και Ανοίγματος</string>
     <string name="app_description">Πρέπει να καθαρίσετε μια ορθογώνια πλακέτα που περιέχει κρυμμένες \"νάρκες\" χωρίς να πυροδοτήσετε καμία από αυτές.</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Ξέρετε πώς να παίξετε το Minesweeper;</string>
+    <string name="do_you_know_how_to_play">Ξέρετε πώς να παίξετε το Minesweeper;</string>
     <string name="close">Κλείσιμο</string>
     <string name="open_tutorial">Άνοιγμα Οδηγού</string>
-    <string name="master" comment="new level difficulty">Αρχηγός</string>
-    <string name="click_numbers" comment="this is a settings item">Επίτρεψε το πάτημα σε αριθμούς</string>
-    <string name="legend" comment="level difficulty">Θρύλος</string>
+    <string name="click_numbers">Επίτρεψε το πάτημα σε αριθμούς</string>
+    <string name="tap_to_customize">Πατήστε για προσαρμογή</string>
 </resources>

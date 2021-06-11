@@ -14,6 +14,8 @@
     <string name="beginner">Facile</string>
     <string name="intermediate">Intermédiaire</string>
     <string name="expert">Difficile</string>
+    <string name="master">Maître</string>
+    <string name="legend">Légende</string>
     <string name="open">Ouvrir</string>
     <string name="settings">Réglages</string>
     <string name="animations">Animations</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">Utiliser le bouton pour basculer entre Drapeau et Ouvrir</string>
     <string name="app_description">Vous devez vider un tableau rectangulaire contenant des mines cachées sans en détonner.</string>
     <string name="app_name">Anti-Mine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Savez-vous comment jouer au Démineur ?</string>
+    <string name="do_you_know_how_to_play">Savez-vous comment jouer au Démineur ?</string>
     <string name="close">Sulje</string>
     <string name="open_tutorial">Ouvrir le tutoriel</string>
-    <string name="master" comment="new level difficulty">Maître</string>
-    <string name="click_numbers" comment="this is a settings item">Permettre de cliquer sur les numéros</string>
-    <string name="legend" comment="level difficulty">Légende</string>
+    <string name="click_numbers">Permettre de cliquer sur les numéros</string>
+    <string name="tap_to_customize">Appuyer pour personnaliser</string>
 </resources>

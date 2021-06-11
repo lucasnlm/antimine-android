@@ -14,6 +14,8 @@
     <string name="beginner">Novato</string>
     <string name="intermediate">Intermedio</string>
     <string name="expert">Experto</string>
+    <string name="master">Maestro</string>
+    <string name="legend">Leyenda</string>
     <string name="open">Abrir</string>
     <string name="settings">Configuración</string>
     <string name="animations">Animaciones</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">Usa el boton para cambiar entre Bandera y Abrir</string>
     <string name="app_description">Usted tiene que limpiar un tablero cuadrado que contiene minas escondidas sin detonarlas.</string>
     <string name="app_name">Anti-Mina</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">¿Sabes cómo se juega al buscaminas?</string>
+    <string name="do_you_know_how_to_play">¿Sabes cómo se juega al buscaminas?</string>
     <string name="close">Cerrar</string>
     <string name="open_tutorial">Abrir Tutorial</string>
-    <string name="master" comment="new level difficulty">Maestro</string>
-    <string name="click_numbers" comment="this is a settings item">Permitir tocar números</string>
-    <string name="legend" comment="level difficulty">Leyenda</string>
+    <string name="click_numbers">Permitir tocar números</string>
+    <string name="tap_to_customize">Toca para personalizar</string>
 </resources>
