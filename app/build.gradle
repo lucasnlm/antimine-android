@@ -121,6 +121,7 @@ dependencies {
 
     googleImplementation project(':proprietary')
     googleInstantImplementation project(':proprietary')
+    googleInstantImplementation project(':instant')
     fossImplementation project(':foss')
 
     // AndroidX
