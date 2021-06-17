@@ -14,6 +14,8 @@
     <string name="beginner">Başlangıç</string>
     <string name="intermediate">Orta düzey</string>
     <string name="expert">Uzman</string>
+    <string name="master">Usta</string>
+    <string name="legend">Efsane</string>
     <string name="open">Aç</string>
     <string name="settings">Ayarlar</string>
     <string name="animations">Animasyonlar</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">Bayrak ile Açık arasında geçiş yapmak için butonu kullanınız</string>
     <string name="app_description">Hiçbirini patlatmadan gizli mayın içeren dikdörtgen bir tahtayı temizlemelisiniz.</string>
     <string name="app_name">Anti-Mine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Mayın Tarlası\'nı nasıl oynayacağını bilmiyor musunuz?</string>
+    <string name="do_you_know_how_to_play">Mayın Tarlası\'nı nasıl oynayacağını bilmiyor musunuz?</string>
     <string name="close">Kapat</string>
     <string name="open_tutorial">Öğreticiyi aç</string>
-    <string name="master" comment="new level difficulty">Usta</string>
-    <string name="click_numbers" comment="this is a settings item">Sayılara dokunmaya izin ver</string>
-    <string name="legend" comment="level difficulty">Efsane</string>
+    <string name="click_numbers">Sayılara dokunmaya izin ver</string>
+    <string name="tap_to_customize">Tap to customize</string>
 </resources>

@@ -18,6 +18,7 @@ import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
+import dev.lucasnlm.antimine.core.updateLanguage
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ActionResponse
@@ -81,10 +82,12 @@ open class GameViewModel(
                 sendSideEffect(GameEvent.ShowNewGameDialog)
             }
             is GameEvent.GiveMoreTip -> {
-                tipRepository.increaseTip(25)
+                tipRepository.increaseTip(event.value)
+
                 val newState = state.copy(
                     tips = tipRepository.getTotalTips(),
                 )
+
                 emit(newState)
             }
             is GameEvent.ConsumeTip -> {
@@ -332,11 +335,13 @@ open class GameViewModel(
     }
 
     suspend fun onContinueFromGameOver() {
-        gameController.increaseErrorTolerance()
-        statsRepository.deleteLastStats()
-        analyticsManager.sentEvent(
-            Analytics.ContinueGameAfterGameOver(gameController.getErrorTolerance())
-        )
+        if (initialized) {
+            gameController.increaseErrorTolerance()
+            statsRepository.deleteLastStats()
+            analyticsManager.sentEvent(
+                Analytics.ContinueGameAfterGameOver(gameController.getErrorTolerance())
+            )
+        }
     }
 
     private fun isCompletedWithMistakes(): Boolean {
@@ -541,9 +546,11 @@ open class GameViewModel(
         gameController.revealAllEmptyAreas()
     }
 
-    fun revealRandomMine(): Boolean {
-        return if (gameController.revealRandomMine()) {
-            sendEvent(GameEvent.ConsumeTip)
+    fun revealRandomMine(consume: Boolean = true): Boolean {
+        return if (initialized && gameController.revealRandomMine()) {
+            if (consume) {
+                sendEvent(GameEvent.ConsumeTip)
+            }
             true
         } else {
             false
@@ -721,6 +728,10 @@ open class GameViewModel(
     }
 
     fun getControlDescription(context: Context): SpannedString? {
+        preferencesRepository.getPreferredLocale()?.let {
+            context.updateLanguage(it)
+        }
+
         var openAction: String? = null
         var openReaction: String? = null
         var flagAction: String? = null
@@ -798,6 +809,8 @@ open class GameViewModel(
                 append(first)
                 append("\n")
                 append(second)
+                append("\n")
+                append(context.getString(R.string.tap_to_customize))
             }
         }
 

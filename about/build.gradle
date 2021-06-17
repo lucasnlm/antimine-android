@@ -49,7 +49,7 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.3.4'
 
     // RecyclerView
-    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     // Constraint
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'

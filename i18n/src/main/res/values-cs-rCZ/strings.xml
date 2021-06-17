@@ -14,6 +14,8 @@
     <string name="beginner">Začátečník</string>
     <string name="intermediate">Středně pokročilý</string>
     <string name="expert">Expert</string>
+    <string name="master">Mistr</string>
+    <string name="legend">Legenda</string>
     <string name="open">Otevřít</string>
     <string name="settings">Nastavení</string>
     <string name="animations">Animace</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">Pomocí tlačítka můžete přepínat mezi označením a otevřením</string>
     <string name="app_description">Musíte vyčistit obdélníkovou desku obsahující skryté miny, aniž by kterákoliv z nich vybuchla.</string>
     <string name="app_name">Anti-Mine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Víte, jak hrát Minesweeper?</string>
+    <string name="do_you_know_how_to_play">Víte, jak hrát Minesweeper?</string>
     <string name="close">Zavřít</string>
-    <string name="open_tutorial">Otevřít tutoriál</string>
-    <string name="master" comment="new level difficulty">Mistr</string>
-    <string name="click_numbers" comment="this is a settings item">Povolit klepnutí na čísla</string>
-    <string name="legend" comment="level difficulty">Legenda</string>
+    <string name="open_tutorial">Otevřít průvodce</string>
+    <string name="click_numbers">Povolit klepnutí na čísla</string>
+    <string name="tap_to_customize">Klepnutím přizpůsobit</string>
 </resources>

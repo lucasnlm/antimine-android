@@ -130,8 +130,17 @@
             </LinearLayout>
 
             <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize">
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/tipCooldown"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="center"
+                    app:trackThickness="3dp"
+                    app:indicatorSize="24dp"
+                    app:indicatorColor="?attr/colorPrimary"/>
 
                 <ImageView
                     android:id="@+id/shortcutIcon"

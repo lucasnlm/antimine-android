@@ -131,7 +131,11 @@ class GameController {
                     } else {
                         this.actions++
                         if (useOpenOnSwitchControl) {
-                            minefieldHandler.openAt(target.id, false)
+                            if (target.mark.isNone()) {
+                                minefieldHandler.openAt(target.id, false)
+                            } else {
+                                minefieldHandler.removeMarkAt(target.id)
+                            }
                         } else {
                             minefieldHandler.switchMarkAt(target.id)
                         }

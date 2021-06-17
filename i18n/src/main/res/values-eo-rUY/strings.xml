@@ -14,6 +14,8 @@
     <string name="beginner">Komencanta</string>
     <string name="intermediate">Meznivela</string>
     <string name="expert">Eksperta</string>
+    <string name="master">Majstro</string>
+    <string name="legend">Legenda</string>
     <string name="open">Malfermi</string>
     <string name="settings">Agordoj</string>
     <string name="animations">Animacioj</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">Uzu la butonon por ŝanĝi inter Flagi kaj Malfermi</string>
     <string name="app_description">Vi devas purigi la kvadratan tabulon kiu enhavas kaŝitajn minojn sen eksplodigi ilin.</string>
     <string name="app_name">Malminoj</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Ĉu vi scias ludi Minesweeper?</string>
+    <string name="do_you_know_how_to_play">Ĉu vi scias ludi Minesweeper?</string>
     <string name="close">Fermi</string>
     <string name="open_tutorial">Malfermi Lernilo</string>
-    <string name="master" comment="new level difficulty">Majstro</string>
-    <string name="click_numbers" comment="this is a settings item">Permesi tuŝeti numerojn</string>
-    <string name="legend" comment="level difficulty">Legenda</string>
+    <string name="click_numbers">Permesi tuŝeti numerojn</string>
+    <string name="tap_to_customize">Tap to customize</string>
 </resources>

@@ -14,6 +14,8 @@
     <string name="beginner">רמת התחלה</string>
     <string name="intermediate">רמה בינונית</string>
     <string name="expert">רמה גבוהה</string>
+    <string name="master">Master</string>
+    <string name="legend">Legend</string>
     <string name="open">פתיחה</string>
     <string name="settings">הגדרות</string>
     <string name="animations">אנימציות</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">השמתשו בלחצן כדי להחליף בין סימון ופתיחה</string>
     <string name="app_description">צריך לנקות את הלוח הריבועי המכיל מוקשים נסתרים מבלי לפוצץ אף אחד מהם.</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
-    <string name="close">Close</string>
+    <string name="do_you_know_how_to_play">Do you know how to play minesweeper?</string>
+    <string name="close">לִסְגוֹר</string>
     <string name="open_tutorial">Open Tutorial</string>
-    <string name="master" comment="new level difficulty">Master</string>
-    <string name="click_numbers" comment="this is a settings item">Allow tap on numbers</string>
-    <string name="legend" comment="level difficulty">Legend</string>
+    <string name="click_numbers">Allow tap on numbers</string>
+    <string name="tap_to_customize">Tap to customize</string>
 </resources>

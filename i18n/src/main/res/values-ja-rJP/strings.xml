@@ -14,6 +14,8 @@
     <string name="beginner">初級</string>
     <string name="intermediate">中級</string>
     <string name="expert">上級</string>
+    <string name="master">マスター</string>
+    <string name="legend">レジェンド</string>
     <string name="open">開く</string>
     <string name="settings">設定</string>
     <string name="animations">アニメーション</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">旗と開くを切り替えるにはボタンを使用します</string>
     <string name="app_description">地雷が隠された長方形から1つも爆発させることなくクリアしましょう。</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">Do you know how to play minesweeper?</string>
+    <string name="do_you_know_how_to_play">Do you know how to play minesweeper?</string>
     <string name="close">閉じる</string>
     <string name="open_tutorial">チュートリアルを開く</string>
-    <string name="master" comment="new level difficulty">マスター</string>
-    <string name="click_numbers" comment="this is a settings item">Allow tap on numbers</string>
-    <string name="legend" comment="level difficulty">Legend</string>
+    <string name="click_numbers">Allow tap on numbers</string>
+    <string name="tap_to_customize">タップしてカスタマイズ</string>
 </resources>

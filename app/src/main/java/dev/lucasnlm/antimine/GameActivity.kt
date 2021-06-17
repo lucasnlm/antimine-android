@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
@@ -29,6 +30,7 @@ import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.common.level.view.GdxLevelFragment
+import dev.lucasnlm.antimine.control.ControlActivity
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
@@ -181,7 +183,13 @@ class GameActivity :
                         controlsToast.apply {
                             visibility = View.VISIBLE
                             backgroundTintList = tint
-                            this.text = controlText
+                            text = controlText
+
+                            setOnClickListener {
+                                val intent = Intent(this@GameActivity, ControlActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
                         }
                     } else {
                         controlsToast.visibility = View.GONE
@@ -416,13 +424,17 @@ class GameActivity :
 
     private fun refreshTipShortcutIcon() {
         val dt = System.currentTimeMillis() - preferencesRepository.lastHelpUsed()
-        val canUseHelpNow = dt > 10 * 1000L
+        val canUseHelpNow = dt > 5 * 1000L
         val canRequestHelpWithAds = gameViewModel.getTips() == 0 && adsManager.isAvailable()
 
         tipsCounter.apply {
             visibility = if (canUseHelpNow) View.VISIBLE else View.GONE
             text = if (canRequestHelpWithAds) {
-                "25+"
+                if (instantAppManager.isEnabled(applicationContext)) {
+                    "+10"
+                } else {
+                    "+25"
+                }
             } else {
                 gameViewModel.getTips().toString()
             }
@@ -432,9 +444,14 @@ class GameActivity :
             TooltipCompat.setTooltipText(this, getString(R.string.help))
             setImageResource(R.drawable.tip)
             setColorFilter(minesCount.currentTextColor)
-            visibility = View.VISIBLE
 
             if (canUseHelpNow) {
+                tipCooldown.apply {
+                    animate().alpha(0.0f).start()
+                    visibility = View.GONE
+                    progress = 0
+                }
+
                 animate().alpha(1.0f).start()
 
                 if (canRequestHelpWithAds) {
@@ -446,13 +463,20 @@ class GameActivity :
                                 activity = this@GameActivity,
                                 skipIfFrequent = false,
                                 onRewarded = {
-                                    gameViewModel.sendEvent(GameEvent.GiveMoreTip)
+                                    val value = if (instantAppManager.isEnabled(applicationContext)) {
+                                        10
+                                    } else {
+                                        25
+                                    }
+
+                                    gameViewModel.revealRandomMine(false)
+                                    gameViewModel.sendEvent(GameEvent.GiveMoreTip(value))
                                 },
                                 onFail = {
                                     Toast.makeText(
                                         applicationContext,
                                         R.string.cant_do_it_now,
-                                        Toast.LENGTH_SHORT
+                                        Toast.LENGTH_SHORT,
                                     ).show()
                                 },
                             )
@@ -468,12 +492,27 @@ class GameActivity :
                                     Toast.makeText(
                                         applicationContext,
                                         R.string.cant_do_it_now,
-                                        Toast.LENGTH_SHORT
+                                        Toast.LENGTH_SHORT,
                                     ).show()
                                 } else {
                                     if (featureFlagManager.showAdWhenUsingTip) {
                                         if (!preferencesRepository.isPremiumEnabled()) {
-                                            adsManager.showInterstitialAd(this@GameActivity, onDismiss = {})
+                                            val state = gameViewModel.singleState()
+                                            val adReward = (state.mineCount ?: 0) < state.minefield.mines * 0.10
+
+                                            if (adReward) {
+                                                adsManager.showRewardedAd(
+                                                    this@GameActivity,
+                                                    skipIfFrequent = false,
+                                                    onRewarded = {},
+                                                    onFail = {},
+                                                )
+                                            } else {
+                                                adsManager.showInterstitialAd(
+                                                    activity = this@GameActivity,
+                                                    onDismiss = {},
+                                                )
+                                            }
                                         }
                                     }
                                 }
@@ -484,7 +523,29 @@ class GameActivity :
                     }
                 }
             } else {
-                animate().alpha(0.25f).start()
+                tipCooldown.apply {
+                    animate().alpha(1.0f).start()
+                    if (progress == 0) {
+                        ValueAnimator.ofFloat(0.0f, 5.0f).apply {
+                            duration = 5000
+                            repeatCount = 0
+                            addUpdateListener {
+                                progress = ((it.animatedValue as Float) * 1000f).toInt()
+                            }
+                            start()
+                        }
+                    }
+                    visibility = View.VISIBLE
+                    max = 5000
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        setProgress(dt.toInt(), true)
+                    } else {
+                        progress = dt.toInt()
+                    }
+                }
+
+                animate().alpha(0.0f).start()
+
                 setOnClickListener {
                     Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
                 }

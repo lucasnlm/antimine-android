@@ -14,6 +14,8 @@
     <string name="beginner">مبتدئ</string>
     <string name="intermediate">متوسط</string>
     <string name="expert">خبير</string>
+    <string name="master">محترف</string>
+    <string name="legend">أسطوري</string>
     <string name="open">فتح</string>
     <string name="settings">الإعدادات</string>
     <string name="animations">الرسوم المتحركة</string>
@@ -112,10 +114,9 @@
     <string name="switch_control_desc">استخدم الزر للتبديل بين العلم وفتح</string>
     <string name="app_description">يجب عليك مسح لوحة مستطيلة تحتوي على ألغام مخفية دون تفجير أي منها.</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play" comment="It will be shown in a window before show or not the tutorial.&#13;&#10;May also be translated as &quot;Do you want to read the tutorial?&quot;">هل تعرف كيف تلعب كانسة الألغام؟</string>
+    <string name="do_you_know_how_to_play">هل تعرف كيف تلعب كانسة الألغام؟</string>
     <string name="close">أغلق</string>
     <string name="open_tutorial">فتح البرنامج التعليمي</string>
-    <string name="master" comment="new level difficulty">محترف</string>
-    <string name="click_numbers" comment="this is a settings item">السماح بالنقر على الأرقام</string>
-    <string name="legend" comment="level difficulty">أسطوري</string>
+    <string name="click_numbers">السماح بالنقر على الأرقام</string>
+    <string name="tap_to_customize">انقر للتخصيص</string>
 </resources>
