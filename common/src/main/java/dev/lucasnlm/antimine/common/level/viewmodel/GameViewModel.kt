@@ -82,10 +82,12 @@ open class GameViewModel(
                 sendSideEffect(GameEvent.ShowNewGameDialog)
             }
             is GameEvent.GiveMoreTip -> {
-                tipRepository.increaseTip(10)
+                tipRepository.increaseTip(event.value)
+
                 val newState = state.copy(
                     tips = tipRepository.getTotalTips(),
                 )
+
                 emit(newState)
             }
             is GameEvent.ConsumeTip -> {
@@ -333,11 +335,13 @@ open class GameViewModel(
     }
 
     suspend fun onContinueFromGameOver() {
-        gameController.increaseErrorTolerance()
-        statsRepository.deleteLastStats()
-        analyticsManager.sentEvent(
-            Analytics.ContinueGameAfterGameOver(gameController.getErrorTolerance())
-        )
+        if (initialized) {
+            gameController.increaseErrorTolerance()
+            statsRepository.deleteLastStats()
+            analyticsManager.sentEvent(
+                Analytics.ContinueGameAfterGameOver(gameController.getErrorTolerance())
+            )
+        }
     }
 
     private fun isCompletedWithMistakes(): Boolean {
@@ -543,7 +547,7 @@ open class GameViewModel(
     }
 
     fun revealRandomMine(consume: Boolean = true): Boolean {
-        return if (gameController.revealRandomMine()) {
+        return if (initialized && gameController.revealRandomMine()) {
             if (consume) {
                 sendEvent(GameEvent.ConsumeTip)
             }
