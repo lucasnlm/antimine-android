@@ -22,7 +22,6 @@ import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.ReviewWrapper
-import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.activity_game.minesCount
 import kotlinx.android.synthetic.main.activity_game.timer
 import kotlinx.android.synthetic.main.activity_game_tv.*
