@@ -22,12 +22,12 @@ MINIMALISTA
 Uma aparência limpa: um visual minimalista e também um tamanho leve para o aplicativo (menos de 9MB).
 
 TUTORIAL
-Você não sabe jogar Campo Minado? Sem problemas, você pode tocar o nível do nosso tutorial e habilitar Dicas nas configurações.
+Você não sabe jogar Campo Minado? Sem problemas, você pode jogar o nível do nosso tutorial e habilitar Dicas nas configurações.
 
 ESTATÍSTICAS
 Verifique seus resultados e desenvolvimento.
 
-ASSISTANTE DE JOGO
+ASSISTENTE DE JOGO
 O jogo irá automaticamente sinalizar os quadrados que você isolou. 
 
 PERSONALIZAÇÃO
@@ -42,7 +42,7 @@ Você tem oito conquistas para desbloquear e diferentes placares de classificaç
 
 ACESSIBILIDADE
 Você pode personalizar este jogo para suas necessidades: altere o tamanho dos quadrados, o raio, o tempo de toque e o suporte ao leitor de tela.
-Estamos sempre tentando melhorar nossas configurações de acessibilidade. Se você sentir falta de algo, nos dê sua opnião!
+Estamos sempre tentando melhorar nossas configurações de acessibilidade. Se você sentir falta de algo, nos dê sua opinião!
 
 APP FOCADO EM ANDROID
 Ele oferece suporte a recursos legais do Android, como tela dividida, atalhos, compartilhamento, tema do sistema e sempre suporta a última versão.

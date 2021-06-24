@@ -1,56 +1,56 @@
-Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
-This is a minimalist and modern version of the classic Minesweeper.
+Testa o teu poder de raciocínio num jogo de desafio onde tens de resolver um campo minado sem explodir nenhuma mina.
+Isto é uma versão minimalista e moderna do clássico Minesweeper.
 
-Are you able to clear a minefield? Let’s go!
+Consegues limpar um campo minado? Vamos lá!
 
-OBJECTIVE
-It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
+OBJETIVO
+É como o Minesweeper. Vences o jogo quando sinalizas com uma bandeira todas as minas no campo minado. Cuidado para não ativares nenhuma!
 
-NO GUESSING
-This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
+SEM ADIVINHAÇÕES
+Esse jogo tem um algoritmo que cria sempre campos de minas que podem ser sempre resolvidos. Não precisarás de adivinhar onde está a última mina!
 
-GAME LEVELS
-Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
+NÍVEIS DO JOGO
+Tal como o Minesweeper, este jogo tem níveis diferentes: iniciante, intermédio e perito. Mas também tem um modo progressivo único que fica mais difícil quando vences.
 
-CUSTOM LEVEL
-If the standard modes aren't enough, you can create your level difficulty!
+NÍVEL PERSONALIZADO
+Se os modos originais não forem suficientes, podes criar o teu nível de dificuldade!
 
-THEMES
-Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+TEMAS
+O Antimine tem mais de 15 temas (incluindo claro, escuro e AMOLED). E em breve serão adicionados mais!
 
-MINIMALIST
-Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+MINIMALISTA
+Uma aparência limpa: um visual minimalista e também um tamanho leve da aplicação (menos de 9MB).
 
 TUTORIAL
-Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+Não sabes como jogar o Campo Minado? Não há problema. Podes jogar o nível tutorial e ativar as Dicas nas configurações.
 
-STATISTICS
-Check your results and development.
+ESTATÍSTICAS
+Verifica os teus resultados e progresso.
 
-GAME ASSISTANT
-The game will automatically flag the squares you isolated. 
+ASSISTENTE DO JOGO
+O jogo irá sinalizar automaticamente com bandeiras os quadrados que isolaste. 
 
-CUSTOMIZATION
-You can change the game to make it like you want to. 
-Example: Help, animations, haptic feedback, question mark.
+PERSONALIZAÇÃO
+Podes mudar o jogo conforme as tuas preferências. 
+Exemplo: ajuda, animações, resposta tátil, ponto de interrogação.
 
-CONTROLS
-It supports four different control schemes. Example: flag using tap or long press.
+CONTROLOS
+Tem quatro esquemas de controlo diferentes. Exemplo: sinalizar com bandeira utilizando um toque simples ou toque longo.
 
-ACHIEVEMENTS AND LEADERBOARDS 
-You have eight achievements to unlock and different leaderboards to share with your friends.
+CONQUISTAS E QUADROS DE CLASSIFICAÇÃO 
+Tens oito conquistas para desbloquear e diferentes quadros de classificação para partilhares com os teus amigos.
 
-ACCESSIBILITY
-You can customize this game to your needs: change the squares size, radius, touch timing, and screen reader support.
-We are always trying to improve our accessibility settings. If you miss something give us feedback!
+ACESSIBILIDADE
+Podes personalizar este jogo conforme as tuas preferências: altera o tamanho dos quadrados, o raio, o tempo de toque e o suporte ao leitor de ecrã.
+Estamos sempre a tentar melhorar as nossas configurações de acessibilidade. Se achas que falta alguma coisa, dá-nos a tua opinião!
 
-ANDROID FOCUSED APP
-It supports cool Android features like split-screen, shortcuts, sharing, system theme, and always supporting the last version.
+APLICAÇÃO FOCADA EM ANDROID
+A aplicação suporta várias funcionalidades do Android, como ecrã dividido, atalhos, partilha, tema do sistema e suporta sempre a última versão.
 
-ONLINE OR OFFLINE
-You don't need to be online to play the game!
+LIGADO OU DESLIGADO DA INTERNET
+Não tens de estar ligado à Internet para jogar!
 
-AUTO-SAVE
-You can start a game and continue it later! It will auto-save your game.
+GUARDAR AUTOMÁTICO
+Podes começar um jogo e terminá-lo noutra altura! O jogo será guardado automaticamente.
 
-Enjoy.
+Diverte-te.

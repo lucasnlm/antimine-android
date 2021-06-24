@@ -1,1 +1,1 @@
-Um jogo de quebra-cabeças em que você procura por todas as minas escondidas. 
+Um jogo quebra-cabeças em que tens de encontrar todas as minas escondidas. 

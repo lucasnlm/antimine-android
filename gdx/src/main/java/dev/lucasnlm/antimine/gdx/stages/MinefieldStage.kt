@@ -230,6 +230,10 @@ class MinefieldStage(
             GdxLocal.currentFocus = null
         }
 
+        if (boundAreas.isEmpty()) {
+            return
+        }
+
         if (minefield != null && currentFocus == null && forceFocus) {
             val id = minefield.width * (minefield.height / 2) + minefield.width / 2
             GdxLocal.currentFocus = boundAreas[id]

@@ -7,6 +7,7 @@ plugins {
 
 if (System.getenv('IS_GOOGLE_BUILD')) {
     apply plugin: 'com.google.firebase.crashlytics'
+    apply plugin: 'com.google.firebase.firebase-perf'
 }
 
 android {

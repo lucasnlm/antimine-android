@@ -15,7 +15,7 @@
     <string name="intermediate">Mittleres Niveau</string>
     <string name="expert">Experte</string>
     <string name="master">Meister</string>
-    <string name="legend">Legend</string>
+    <string name="legend">Ikone</string>
     <string name="open">Öffnen</string>
     <string name="settings">Einstellungen</string>
     <string name="animations">Animationen</string>
@@ -117,6 +117,6 @@
     <string name="do_you_know_how_to_play">Weißt du, wie man Minesweeper spielt?</string>
     <string name="close">Schließen</string>
     <string name="open_tutorial">Anleitung öffnen</string>
-    <string name="click_numbers">Allow tap on numbers</string>
+    <string name="click_numbers">Antippen von Zahlenquadraten erlauben</string>
     <string name="tap_to_customize">Zum Anpassen tippen</string>
 </resources>
