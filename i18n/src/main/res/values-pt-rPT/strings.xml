@@ -89,7 +89,7 @@
     <string name="source_code">Código-fonte</string>
     <string name="translation">Tradução</string>
     <string name="licenses">Licenças</string>
-    <string name="google_play_games">Jogos Google Play</string>
+    <string name="google_play_games">Google Play Jogos</string>
     <string name="loading">A carregar…</string>
     <string name="connect">Conectar</string>
     <string name="connecting">A conectar…</string>
@@ -119,4 +119,5 @@
     <string name="open_tutorial">Abrir tutorial</string>
     <string name="click_numbers">Permitir toque nos números</string>
     <string name="tap_to_customize">Tocar para personalizar</string>
+    <string name="toggle_button_top">Mostrar \"Botão Alternar\" na barra superior</string>
 </resources>

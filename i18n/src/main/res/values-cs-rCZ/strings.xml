@@ -119,4 +119,5 @@
     <string name="open_tutorial">Otevřít průvodce</string>
     <string name="click_numbers">Povolit klepnutí na čísla</string>
     <string name="tap_to_customize">Klepnutím přizpůsobit</string>
+    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
 </resources>

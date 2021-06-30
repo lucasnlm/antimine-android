@@ -40,13 +40,6 @@ It supports four different control schemes. Example: flag using tap or long pres
 ACHIEVEMENTS AND LEADERBOARDS 
 You have eight achievements to unlock and different leaderboards to share with your friends.
 
-ACCESSIBILITY
-You can customize this game to your needs: change the squares size, radius, touch timing, and screen reader support.
-We are always trying to improve our accessibility settings. If something is missing, give us feedback!
-
-ANDROID FOCUSED APP
-It supports cool Android features like split-screen, shortcuts, sharing, system theme, and always supporting the latest version.
-
 ONLINE OR OFFLINE
 You don't need to be online to play the game!
 
