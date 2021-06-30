@@ -1,5 +1,5 @@
 Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
-This is a minimalist and modern version of the classic Minesweeper.
+Ez egy egyszerű és modern változata a klasszikus Aknakereső játéknak.
 
 Are you able to clear a minefield? Gyerünk!
 

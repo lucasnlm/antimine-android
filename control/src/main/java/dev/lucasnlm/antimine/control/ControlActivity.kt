@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.control
 
 import android.os.Bundle
+import android.view.View
 import android.widget.SeekBar
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,11 +45,23 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), SeekBar.OnS
         longPress.setOnSeekBarChangeListener(this)
         doubleClick.setOnSeekBarChangeListener(this)
 
+        toggleButtonTopBar.isChecked = preferencesRepository.showToggleButtonOnTopBar()
+        toggleButtonTopBarLabel.setOnClickListener {
+            toggleButtonTopBar.isChecked = !toggleButtonTopBar.isChecked
+        }
+        toggleButtonTopBar.setOnCheckedChangeListener { _, checked ->
+            preferencesRepository.setToggleButtonOnTopBar(checked)
+        }
+
         lifecycleScope.launchWhenCreated {
             viewModel.observeState().collect {
                 controlAdapter.bindControlStyleList(it.selected, it.controls)
                 longPress.progress = it.longPress
                 touchSensibility.progress = it.touchSensibility
+
+                val toggleVisible = if (it.showToggleButtonSettings) View.VISIBLE else View.GONE
+                toggleButtonTopBar.visibility = toggleVisible
+                toggleButtonTopBarLabel.visibility = toggleVisible
             }
         }
     }

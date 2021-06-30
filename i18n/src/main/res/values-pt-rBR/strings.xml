@@ -57,7 +57,7 @@
     <string name="open_areas">Áreas abertas</string>
     <string name="total_time">Tempo total</string>
     <string name="average_time">Tempo médio</string>
-    <string name="shortest_time">Menor Tempo</string>
+    <string name="shortest_time">Menor tempo</string>
     <string name="performance">Desempenho</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">Usar Ponto de Interrogação</string>
@@ -86,7 +86,7 @@
     <string name="no">Não</string>
     <string name="general">Geral</string>
     <string name="more">Mais</string>
-    <string name="source_code">Código fonte</string>
+    <string name="source_code">Código-fonte</string>
     <string name="translation">Tradução</string>
     <string name="licenses">Licenças</string>
     <string name="google_play_games">Google Play Jogos</string>
@@ -112,11 +112,12 @@
     <string name="select_language">Selecionar Idioma</string>
     <string name="switch_control">Alternar: sinalizar e abrir</string>
     <string name="switch_control_desc">Usar um botão para alternar entre a Bandeira e Abrir</string>
-    <string name="app_description">Você deve limpar um campo cheio de mines escondidas sem detonar nenhumas delas.</string>
+    <string name="app_description">Você deve limpar um campo cheio de minas escondidas sem detonar nenhumas delas.</string>
     <string name="app_name">Antimine</string>
     <string name="do_you_know_how_to_play">Você sabe como jogar Campo Minado?</string>
     <string name="close">Fechar</string>
     <string name="open_tutorial">Abrir Tutorial</string>
     <string name="click_numbers">Permitir toque nos números</string>
     <string name="tap_to_customize">Toque para personalizar</string>
+    <string name="toggle_button_top">Mostrar \"Botão de Alternar\" na barra superior</string>
 </resources>

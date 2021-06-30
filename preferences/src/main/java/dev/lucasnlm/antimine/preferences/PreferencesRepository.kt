@@ -403,4 +403,12 @@ class PreferencesRepository(
     override fun setAllowTapOnNumbers(allow: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_ALLOW_TAP_NUMBER, allow)
     }
+
+    override fun setToggleButtonOnTopBar(enabled: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_TOGGLE_ON_TOP_BAR, enabled)
+    }
+
+    override fun showToggleButtonOnTopBar(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_TOGGLE_ON_TOP_BAR, false)
+    }
 }

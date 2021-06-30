@@ -46,6 +46,10 @@
         android:theme="@style/AppTheme"
         tools:targetApi="lollipop">
 
+<!--        <meta-data-->
+<!--            android:name="com.google.android.gms.instant.flavor"-->
+<!--            android:value="1337" />-->
+
         <activity
             android:name="dev.lucasnlm.antimine.splash.SplashActivity"
             android:theme="@style/Theme.Splash">

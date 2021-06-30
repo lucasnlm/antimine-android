@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh-rCN">
     <string name="tutorial">教程</string>
-    <string name="tutorial_basic">游戏规则很简单：方块上的数字是周围地雷的数量；你必须要用旗子标记出所有的地雷。</string>
+    <string name="tutorial_basic">游戏规则很简单：方块上的数字是周围地雷的数量；你必须标出所有地雷。</string>
     <string name="tutorial_text_1">如果一个数字和它周围的方块数量相等，那么这些方块都是地雷。</string>
-    <string name="tutorial_text_2">在放置了第一个旗标以后，回看数字并分析下一个方块。</string>
+    <string name="tutorial_text_2">标记之后，回看数字并分析下一个方块。</string>
     <string name="tutorial_text_3">如果一个方块周围有相同数量的旗标，那么周围其余方块就不是地雷（绿色箭头）。</string>
     <string name="tutorial_text_4">回看数字并不断打开方块。</string>
     <string name="games">游戏数</string>
@@ -48,13 +48,13 @@
     <string name="you_finished">完成了！</string>
     <string name="defeats">失败</string>
     <string name="generic_game_over">祝你下次游戏好运。</string>
-    <string name="generic_win">你用%2$d秒找出了%1$d枚地雷。</string>
+    <string name="generic_win">你用 %2$d 秒找出了 %1$d 枚地雷。</string>
     <string name="fail_to_share">分享失败</string>
     <string name="version_s">版本 %1$s</string>
     <string name="sound_effects">音效</string>
     <string name="are_you_sure">你确定吗？</string>
     <string name="enable_automatic_flags">启用旗标自动放置</string>
-    <string name="open_areas">开放区域</string>
+    <string name="open_areas">踩中地雷</string>
     <string name="total_time">总用时</string>
     <string name="average_time">平均用时</string>
     <string name="shortest_time">最短用时</string>
@@ -73,8 +73,8 @@
     <string name="retry">重试</string>
     <string name="continue_game">继续</string>
     <string name="empty">空</string>
-    <string name="cant_do_it_now">现在无法做到这一点。</string>
-    <string name="you_have_received">您已收到: +%1$d</string>
+    <string name="cant_do_it_now">目前无法使用</string>
+    <string name="you_have_received">您获得了：+%1$d</string>
     <string name="help_win_a_game">为了获得更多帮助，你必须赢得一场游戏。</string>
     <string name="unknown_error">未知错误。</string>
     <string name="leaderboards">排行榜</string>
@@ -83,8 +83,8 @@
     <string name="yes">是</string>
     <string name="unlock">解锁​​​​</string>
     <string name="achievements">成就</string>
-    <string name="no">否</string>
-    <string name="general">通用</string>
+    <string name="no">不</string>
+    <string name="general">总计</string>
     <string name="more">更多</string>
     <string name="source_code">源代码</string>
     <string name="translation">翻译</string>
@@ -105,18 +105,19 @@
     <string name="delete_all_message">全部记录将被永久删除。</string>
     <string name="remove_ad">去除广告</string>
     <string name="help">帮助</string>
-    <string name="back">后退</string>
+    <string name="back">返回</string>
     <string name="donation">捐助</string>
     <string name="open_on_game">在游戏启动时上打开上一局游戏</string>
     <string name="show_windows">显示结果对话框</string>
     <string name="select_language">选择语言</string>
     <string name="switch_control">开关：（切换）标记与打开</string>
     <string name="switch_control_desc">使用按钮在标记和打开之间切换</string>
-    <string name="app_description">你需要清除一个隐藏着地雷的矩形面板，不能使任何地雷爆炸。</string>
+    <string name="app_description">你需要在不引爆地雷的情况下， 清理有着隐藏地雷的矩形区域。</string>
     <string name="app_name">扫雷 (踩地雷) - Antimine</string>
     <string name="do_you_know_how_to_play">你想阅读教程吗？</string>
     <string name="close">关闭</string>
     <string name="open_tutorial">打开教程</string>
     <string name="click_numbers">允许点击数字</string>
-    <string name="tap_to_customize">点按即可自定义</string>
+    <string name="tap_to_customize">点击可自定义</string>
+    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
 </resources>

@@ -1,16 +1,16 @@
-Metti alla prova la tua capacità di ragionamento in un puzzle game in cui devi risolvere un campo minato senza far esplodere nessuna mina.
-Questa è una versione minimalista e moderna del classico Minesweeper.
+Metti alla prova la tua capacità di ragionamento con un puzzle game in cui devi risolvere un campo minato senza far esplodere nessuna mina.
+Questa è una versione minimalista e moderna del classico Campo Minato.
 
-Sarai in grado di sgombrare un campo minato? Iniziamo!
+Riuscirai a sgombrare il campo minato? Iniziamo!
 
 OBIETTIVO
-È come il Minesweeper. Vinci la partita quando hai contrassegnato ogni mina nel campo minato. Stai attento a non farle esplodere!
+È come Campo Minato. Vinci la partita quando hai contrassegnato ogni mina nel campo minato. Attenzione a non farle esplodere!
 
-NON C'È BISOGNO DI INDOVINARE
-Questo gioco ha un algoritmo che crea sempre campi minati risolvibili. Non dovrai indovinare dov'è l'ultima mina!
+NON SERVE INDOVINARE
+Il gioco ha un algoritmo che crea sempre campi minati risolvibili. Non sarà necessario indovinare dov'è l'ultima mina!
 
 LIVELLI DI GIOCO
-Proprio come Minesweeper, questo gioco ha diversi livelli: Principiante, Intermedio e Esperto. Ha anche una modalità progressiva che diventa più difficile dopo ogni vittoria.
+Proprio come Campo Minato, questo gioco ha diversi livelli: Principiante, Intermedio e Esperto. Ha anche una modalità progressiva che diventa più difficile dopo ogni vittoria.
 
 LIVELLO CUSTOM
 Se le modalità standard non ti soddisfano, puoi creare il tuo livello di difficoltà!
@@ -22,33 +22,33 @@ MINIMALISTA
 Aspetto e feeling semplici: una grafica minimalista in un'app molto leggera (meno di 9MB).
 
 TUTORIAL
-Non sai come giocare a Campo Minato? Nessun problema, puoi giocare il nostro livello tutorial e abilitare i suggerimenti sulle impostazioni.
+Non sai come si gioca a Campo Minato? Nessun problema, puoi giocare il tutorial e attivare i suggerimenti nelle impostazioni.
 
 STATISTICHE
-Controlla i tuoi risultati e il tuo sviluppo.
+Controlla i tuoi risultati e lo sviluppo.
 
 ASSISTENZA DEL GIOCO
 Il gioco contrassegna automaticamente le caselle che hai isolato. 
 
 PERSONALIZZAZIONE
-È possibile modificare il gioco per renderlo come si desidera. 
-Esempio: Aiuto, animazioni, feedback aptico, punto interrogativo.
+Puoi modificare il gioco a tuo piacimento. 
+Esempio: Aiuto, animazioni, feedback tattile, punto interrogativo.
 
 CONTROLLI
-Il gioco sostiene quattro diversi sistemi di controllo. Esempio: contrassegno utilizzando tap o pressione prolungata.
+Il gioco offre quattro diversi modi di giocare. Esempio: contrassegno facendo tap oppure con pressione prolungata.
 
-RISULTATI E LEADERBOARD 
+RISULTATI E CLASSIFICHE 
 Puoi sbloccare fino a otto obiettivi e condividere diverse classifiche con i tuoi amici.
 
 ACCESSIBILITÀ
-Puoi personalizzare il gioco in base alle tue esigenze: cambiare la dimensione delle caselle, il raggio, il tempo di tocco, e il supporto per i lettori di schermo.
-Cerchiamo sempre di migliorare le nostre impostazioni di accessibilità. Se ti manca qualcosa ci danno un feedback!
+Puoi personalizzare il gioco in base alle tue esigenze: cambiare la dimensione delle caselle, il raggio, il tempo di tocco e il supporto per i lettori di schermo.
+Cerchiamo sempre di migliorare le impostazioni di accessibilità. Se noti che manca qualcosa, dacci pure il tuo feedback!
 
-ANDROID
-Supporta caratteristiche interessanti di Android come split-screen, scorciatoie, condivisione, tema di sistema, e sempre supportando la versione più recente.
+APP PER ANDROID
+Supporta caratteristiche interessanti di Android come split-screen, scorciatoie, condivisione, tema di sistema e sempre supportando la versione più recente.
 
 ONLINE O OFFLINE
-Non è necessario essere online per giocare al gioco!
+Non è necessario essere online per giocare!
 
 AUTO-SALVATAGGIO
 Puoi iniziare una partita e riprenderla più tardi! La partita verrà salvata automaticamente.

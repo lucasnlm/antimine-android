@@ -22,35 +22,35 @@
         android:id="@+id/tapToBegin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="false"
-        android:text="@string/tap_to_begin"
-        android:textStyle="bold"
-        android:textAllCaps="true"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="12dp"
         android:background="@drawable/round_background"
+        android:clickable="false"
         android:includeFontPadding="false"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:text="@string/tap_to_begin"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/controlsToast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="false"
         android:layout_marginVertical="100dp"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="12dp"
         android:background="@drawable/round_background"
+        android:clickable="false"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="8dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
         android:visibility="gone"
-        tools:text="Action to Reaction"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        tools:text="Action to Reaction" />
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -129,6 +129,16 @@
                     tools:visibility="visible" />
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/topBarToggle"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/switch_control"
+                android:padding="16dp"
+                android:src="@drawable/touch"
+                android:visibility="gone" />
+
             <FrameLayout
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize">
@@ -138,9 +148,9 @@
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:layout_gravity="center"
-                    app:trackThickness="3dp"
+                    app:indicatorColor="?attr/colorPrimary"
                     app:indicatorSize="24dp"
-                    app:indicatorColor="?attr/colorPrimary"/>
+                    app:trackThickness="3dp" />
 
                 <ImageView
                     android:id="@+id/shortcutIcon"

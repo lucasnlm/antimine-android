@@ -111,7 +111,7 @@
     <string name="show_windows">Visualizza finestre</string>
     <string name="select_language">Seleziona Lingua</string>
     <string name="switch_control">Pulsante: Bandiera e Aperto</string>
-    <string name="switch_control_desc">Usa il bottone per passare da Bandiera ad Apri</string>
+    <string name="switch_control_desc">Usa il tasto per passare da Bandiera ad Apri</string>
     <string name="app_description">L\'obbiettivo del gioco è ripulire un campo rettangolare che contiene mine nascoste senza detonarne nessuna.</string>
     <string name="app_name">Antimine</string>
     <string name="do_you_know_how_to_play">Conosci già le regole di Campo Minato?</string>
@@ -119,4 +119,5 @@
     <string name="open_tutorial">Apri Tutorial</string>
     <string name="click_numbers">Consenti tocco sui numeri</string>
     <string name="tap_to_customize">Tocca per modificare</string>
+    <string name="toggle_button_top">Mostra \"Attiva Tasto\" nella barra in alto</string>
 </resources>

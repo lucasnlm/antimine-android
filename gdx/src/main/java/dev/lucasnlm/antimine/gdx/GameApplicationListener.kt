@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.input.GestureDetector
+import dev.lucasnlm.antimine.core.IAppVersionManager
 import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.core.isAndroidWearOs
 import dev.lucasnlm.antimine.core.isPortrait
@@ -35,6 +36,7 @@ import dev.lucasnlm.antimine.ui.model.AppTheme
 
 class GameApplicationListener(
     private val context: Context,
+    private val appVersion: IAppVersionManager,
     private val preferencesRepository: IPreferencesRepository,
     private val dimensionRepository: IDimensionRepository,
     private val quality: RenderQuality,
@@ -45,7 +47,6 @@ class GameApplicationListener(
     private val onEngineReady: () -> Unit,
     private val crashLogger: (String) -> Unit,
 ) : ApplicationAdapter() {
-
     private val assetManager = AssetManager()
 
     private var minefieldStage: MinefieldStage? = null
@@ -222,6 +223,10 @@ class GameApplicationListener(
                 draw()
             }
             mainFrameBuffer?.end()
+
+            if (!appVersion.isValid()) {
+                Thread.sleep(500L)
+            }
 
             batch?.run {
                 begin()
