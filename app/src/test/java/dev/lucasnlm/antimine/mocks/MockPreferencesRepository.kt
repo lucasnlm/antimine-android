@@ -158,4 +158,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun allowTapOnNumbers(): Boolean = true
 
     override fun setAllowTapOnNumbers(allow: Boolean) { }
+
+    override fun setToggleButtonOnTopBar(enabled: Boolean) { }
+
+    override fun showToggleButtonOnTopBar(): Boolean = false
 }

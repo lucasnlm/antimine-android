@@ -215,7 +215,8 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             receivedMessage.apply {
                                 if (state.received > 0 &&
                                     state.gameResult == GameResult.Victory &&
-                                    preferencesRepository.useHelp()
+                                    preferencesRepository.useHelp() &&
+                                    preferencesRepository.isPremiumEnabled()
                                 ) {
                                     visibility = View.VISIBLE
                                     text = getString(R.string.you_have_received, state.received)

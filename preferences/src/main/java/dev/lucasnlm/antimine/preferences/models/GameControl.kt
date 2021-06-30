@@ -105,7 +105,7 @@ sealed class GameControl(
             doubleClick = null,
         ),
         onOpen = Actions(
-            singleClick = ActionResponse.HighlightNeighbors,
+            singleClick = ActionResponse.OpenNeighbors,
             longPress = null,
             doubleClick = null,
         )

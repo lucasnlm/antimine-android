@@ -34,6 +34,7 @@ import dev.lucasnlm.antimine.control.ControlActivity
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
@@ -74,6 +75,8 @@ class GameActivity :
     private val renderSquareRadius = preferencesRepository.squareRadius()
     private val renderSquareDivider = preferencesRepository.squareDivider()
     private val renderSquareSize = preferencesRepository.squareSize()
+    private val showFloatingButtonOnTop = preferencesRepository.showToggleButtonOnTopBar()
+    private val hasFloatingButton = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
@@ -94,6 +97,7 @@ class GameActivity :
         bindToolbar()
         loadGameOrTutorial()
         bindTapToBegin()
+        bindToggleButton()
 
         playGamesManager.showPlayPopUp(this)
         playGamesStartUp()
@@ -344,7 +348,9 @@ class GameActivity :
         super.onResume()
         if (renderSquareRadius != preferencesRepository.squareRadius() ||
             renderSquareDivider != preferencesRepository.squareDivider() ||
-            renderSquareSize != preferencesRepository.squareSize()
+            renderSquareSize != preferencesRepository.squareSize() ||
+            showFloatingButtonOnTop != preferencesRepository.showToggleButtonOnTopBar() ||
+            hasFloatingButton != (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen)
         ) {
             // If used changed any currently rendered settings, we
             // must recreate the activity to force all sprites are updated.
@@ -720,6 +726,40 @@ class GameActivity :
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         } else {
             window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+    }
+
+    private fun bindToggleButton() {
+        if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
+            if (preferencesRepository.showToggleButtonOnTopBar()) {
+                topBarToggle.apply {
+                    visibility = View.VISIBLE
+                    contentDescription = getString(R.string.open)
+                    TooltipCompat.setTooltipText(this, getString(R.string.open))
+                    setImageResource(R.drawable.touch)
+                    preferencesRepository.setSwitchControl(true)
+
+                    setOnClickListener {
+                        if (preferencesRepository.openUsingSwitchControl()) {
+                            contentDescription = getString(R.string.flag_tile)
+                            TooltipCompat.setTooltipText(this, getString(R.string.flag_tile))
+                            setImageResource(R.drawable.flag)
+                            preferencesRepository.setSwitchControl(false)
+                            gameViewModel.refreshUseOpenOnSwitchControl(false)
+                        } else {
+                            contentDescription = getString(R.string.open)
+                            TooltipCompat.setTooltipText(this, getString(R.string.open))
+                            setImageResource(R.drawable.touch)
+                            preferencesRepository.setSwitchControl(true)
+                            gameViewModel.refreshUseOpenOnSwitchControl(true)
+                        }
+                    }
+                }
+            } else {
+                topBarToggle.visibility = View.GONE
+            }
+
+            gameViewModel.refreshUseOpenOnSwitchControl(true)
         }
     }
 

@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.core.IAppVersionManager
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
@@ -29,12 +30,14 @@ import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.ICrashReporter
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import kotlin.system.exitProcess
 
 open class GdxLevelFragment : AndroidFragmentApplication() {
     private val gameViewModel by sharedViewModel<GameViewModel>()
@@ -42,12 +45,14 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     private val dimensionRepository: IDimensionRepository by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
     private val crashReporter: ICrashReporter by inject()
+    private val appVersionManager: IAppVersionManager by inject()
 
     private var controlSwitcher: FloatingActionButton? = null
 
     private val levelApplicationListener by lazy {
         GameApplicationListener(
             context = requireContext(),
+            appVersion = appVersionManager,
             theme = themeRepository.getTheme(),
             preferencesRepository = preferencesRepository,
             dimensionRepository = dimensionRepository,
@@ -114,6 +119,13 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launchWhenCreated {
+            if (!appVersionManager.isValid()) {
+                delay(15 * 1000L)
+                exitProcess(0)
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
             gameViewModel.observeState().collect {
                 levelApplicationListener.bindField(it.field)
 
@@ -169,11 +181,13 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     private fun bindControlSwitcherIfNeeded(view: View, delayed: Boolean = true) {
         if (controlSwitcher != null) {
             if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
-                controlSwitcher?.visibility = View.VISIBLE
-            } else {
-                controlSwitcher?.visibility = View.GONE
+                if (preferencesRepository.showToggleButtonOnTopBar()) {
+                    controlSwitcher?.hide()
+                } else {
+                    controlSwitcher?.show()
+                }
             }
-        } else {
+        } else if (!preferencesRepository.showToggleButtonOnTopBar()) {
             view.postDelayed(if (delayed) 200L else 0L) {
                 val isParentFinishing = activity?.isFinishing ?: true
                 if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen && !isParentFinishing) {
@@ -188,7 +202,6 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                             setImageResource(R.drawable.touch)
 
                             compatElevation = 4f
-                            setShadowPaddingEnabled(true)
                             alpha = 0f
                             animate().apply {
                                 alpha(1.0f)

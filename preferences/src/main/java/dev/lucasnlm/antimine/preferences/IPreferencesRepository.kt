@@ -112,4 +112,7 @@ interface IPreferencesRepository {
 
     fun allowTapOnNumbers(): Boolean
     fun setAllowTapOnNumbers(allow: Boolean)
+
+    fun setToggleButtonOnTopBar(enabled: Boolean)
+    fun showToggleButtonOnTopBar(): Boolean
 }

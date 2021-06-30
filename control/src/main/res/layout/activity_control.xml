@@ -43,14 +43,25 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/longPressLabel"
+                android:id="@+id/settings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:paddingVertical="8dp"
+                android:text="@string/settings"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+            <TextView
+                android:id="@+id/longPressLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp"
                 android:text="@string/long_press"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/settings" />
 
             <androidx.appcompat.widget.AppCompatSeekBar
                 android:id="@+id/longPress"
@@ -68,6 +79,7 @@
                 android:id="@+id/touch_sensibility"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp"
                 android:text="@string/touch_sensibility"
                 app:layout_constraintStart_toStartOf="parent"
@@ -89,6 +101,7 @@
                 android:id="@+id/doubleClickLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp"
                 android:text="@string/double_click"
                 app:layout_constraintStart_toStartOf="parent"
@@ -107,6 +120,31 @@
                 app:layout_constraintStart_toEndOf="@+id/doubleClickLabel"
                 app:layout_constraintTop_toTopOf="@+id/doubleClickLabel" />
 
+            <TextView
+                android:id="@+id/toggleButtonTopBarLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:alpha="1.0"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="16dp"
+                android:text="@string/toggle_button_top"
+                android:textColor="?attr/colorControlNormal"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/doubleClickLabel" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/toggleButtonTopBar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingVertical="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/toggleButtonTopBarLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/toggleButtonTopBarLabel" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

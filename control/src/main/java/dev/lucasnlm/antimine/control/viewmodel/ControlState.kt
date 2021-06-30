@@ -9,4 +9,5 @@ data class ControlState(
     val doubleClick: Int,
     val selected: ControlStyle,
     val controls: List<ControlDetails>,
+    val showToggleButtonSettings: Boolean,
 )

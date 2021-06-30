@@ -644,7 +644,7 @@ open class GameViewModel(
         saveGame()
         saveStats()
 
-        if (clock.time() > 5L) {
+        if (clock.time() > 5L && preferencesRepository.isPremiumEnabled()) {
             if (isCompletedWithMistakes()) {
                 addNewTip(1)
             } else {

@@ -63,7 +63,8 @@ class ControlViewModel(
             longPress = preferencesRepository.customLongPressTimeout().toInt(),
             doubleClick = preferencesRepository.getDoubleClickTimeout().toInt(),
             selected = controlDetails?.controlStyle ?: ControlStyle.Standard,
-            controls = gameControlOptions
+            controls = gameControlOptions,
+            showToggleButtonSettings = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen,
         )
     }
 
@@ -108,7 +109,8 @@ class ControlViewModel(
                 val selected = state.controls.first { it.controlStyle == event.controlStyle }
 
                 val newState = state.copy(
-                    selected = selected.controlStyle
+                    selected = selected.controlStyle,
+                    showToggleButtonSettings = selected.controlStyle == ControlStyle.SwitchMarkOpen,
                 )
 
                 emit(newState)
