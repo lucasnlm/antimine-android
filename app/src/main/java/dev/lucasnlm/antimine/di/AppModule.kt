@@ -10,6 +10,7 @@ import dev.lucasnlm.antimine.support.AppVersionManagerImpl
 import dev.lucasnlm.antimine.support.IapHandler
 import dev.lucasnlm.external.ExternalAnalyticsWrapper
 import dev.lucasnlm.external.IAnalyticsManager
+import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -18,7 +19,7 @@ val AppModule = module {
 
     single { CloudSaveManagerImpl(get(), get(), get(), get()) } bind CloudSaveManager::class
 
-    single { AppVersionManagerImpl(BuildConfig.DEBUG, BuildConfig.VERSION_NAME) } bind IAppVersionManager::class
+    single { AppVersionManagerImpl(BuildConfig.DEBUG, androidApplication()) } bind IAppVersionManager::class
 
     single {
         if (BuildConfig.DEBUG) {

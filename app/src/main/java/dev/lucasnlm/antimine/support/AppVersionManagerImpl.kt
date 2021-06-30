@@ -1,12 +1,14 @@
 package dev.lucasnlm.antimine.support
 
+import android.app.Application
 import dev.lucasnlm.antimine.core.IAppVersionManager
 
 class AppVersionManagerImpl(
     private val debug: Boolean,
-    private val id: String,
+    private val application: Application,
 ) : IAppVersionManager {
     private val valid by lazy {
+        val id = application.packageName
         debug || id == "com.logical.minato" || id == "dev.lucasnlm.antimine" || id == "dev.lucanlm.antimine"
     }
 
