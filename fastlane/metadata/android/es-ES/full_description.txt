@@ -6,7 +6,7 @@ Esta es una versión minimalista y moderna del clásico Buscaminas.
 OBJETIVO
 Es como el buscaminas. Ganarás la partida cuando hayas marcado todas las minas del campo de minas. ¡Ten cuidado de no activar una!
 
-SIN ADIVINAR
+NO GUESSING
 Este juego tiene un algoritmo que siempre crea campos de minas con solución. ¡No tendrás que adivinar dónde está la última mina!
 
 NIVELES DE JUEGO
@@ -39,13 +39,6 @@ Puedes usar hasta cuatro sistemas de control diferentes. Ejemplo: colocar bander
 
 LOGROS Y CLASIFICACIÓN 
 Tienes ocho logros para desbloquear y diferentes tablas de clasificación para compartir con tus amigos.
-
-ACCESIBILIDAD
-Puedes personalizar este juego a tus necesidades: cambiar el tamaño de los cuadrados, el radio, la reactividad táctil y el soporte para lectores de pantalla.
-Siempre estamos tratando de mejorar nuestros ajustes de accesibilidad. Si echas de menos alguna cosa, ¡envíanos tu comentario!
-
-APP DE ANDROID
-El juego permite el uso de características interesantes de Android, como la pantalla dividida, accesos directos, compartir, tema del sistema y siempre actualizado a la última versión.
 
 EN LÍNEA O DESCONECTADO
 ¡No necesitas estar conectado para jugar al juego!

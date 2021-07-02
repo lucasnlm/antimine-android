@@ -6,7 +6,7 @@ Sou capaç de netejar un camp de mines? Vinga!
 OBJECTIU
 És com el buscamines. Guanyeu quan heu marcat totes les mines del camp. Aneu en compte de no detonar-ne cap!
 
-SENSE ENDEVINAR
+NO GUESSING
 Aquest joc té un algorisme que sempre crea camps de mines resolubles. No haureu d'endevinar on es troba la darrera mina!
 
 NIVELLS DE JOC
@@ -39,13 +39,6 @@ Suporta quatre esquemes de control diferents. Exemple: marca fent 'tap' o premen
 
 ASSOLIMENTS I CLASSIFICACIONS 
 Tens vuit assoliments per a desbloquejar i diferents classificacions per compartir amb els amics.
-
-ACCESSIBILITAT
-Podeu personalitzar el joc a les vostres necessitats: canviar la mida dels quadres, el radi, el temps per marcar, i el suport per al lector de pantalla.
-Sempre estem mirant de millorar la configuració de l'accessibilitat. Si trobeu res a faltar, dieu-nos-ho!
-
-APP FOCALITZADA PER A ANDROID
-Suporta diferents característiques xules de l'Android com la pantalla dividida, dreceres, compartir, tema del sistema, i sempre adaptada a la darrera versió.
 
 ONLINE O DESCONNECTAT
 No cal estar connectat per poder jugar!

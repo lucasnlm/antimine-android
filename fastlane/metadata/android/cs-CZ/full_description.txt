@@ -6,7 +6,7 @@ Dokážete vyčistit minové pole? Pojďme na to!
 CÍL
 Je to jako Minesweeper. Vyhrajete hru, jestliže jste označil každou minu v minovém poli. Dávejte pozor, aby žádná mina nevybouchla!
 
-BEZ HÁDÁNÍ
+NO GUESSING
 Tato hra obsahuje algoritmus, který vždy vytváří řešitelná minová pole. Nebudete muset hádat, kde je poslední mina!
 
 ÚROVNĚ HRY
@@ -39,13 +39,6 @@ Podporuje čtyři různá schémata ovládání. Příklad: označení pomocí k
 
 ÚSPĚCHY A ŽEBŘÍČKY 
 Máte k dispozici osm úspěchů k odemčení a různé žebříčky, které můžete sdílet se svými přáteli.
-
-PŘÍSTUPNOST
-Tuto hru si můžete přizpůsobit podle svých potřeb: změňte velikost čtverců, poloměr, načasování dotyků a podporu čtečky obrazovky.
-Vždy se snažíme vylepšit naše nastavení přístupnosti. Pokud vám něco chybí, dejte nám zpětnou vazbu!
-
-APLIKACE ZAMĚŘENÁ NA ANDROID
-Podporuje skvělé funkce systému Android, jako je rozdělená obrazovka, klávesové zkratky, sdílení, systémové motivy a vždy podporuje poslední verzi.
 
 ONLINE NEBO OFFLINE
 K hraní hry nemusíte být online!

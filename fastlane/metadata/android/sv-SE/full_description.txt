@@ -6,7 +6,7 @@ Kan du rensa ett minfält? Nu kör vi!
 MÅL
 Det är som Minesweeper. Du vinner spelet när du har markerat varje mina i fältet med flaggor. Var noga med att inte utlöser en!
 
-INGEN GISSNING
+NO GUESSING
 Detta spel har en algoritm som alltid skapar lösbara minfält. Du behöver inte gissa var den sista minan är!
 
 SPELNIVÅER
@@ -39,13 +39,6 @@ Den stödjer fyra olika kontrollsystem. Exempel: flagga med tryck eller långtry
 
 PRESTATIONER OCH TOPPLISTOR 
 Du har åtta prestationer att låsa upp och olika topplistor att dela med dina vänner.
-
-TILLGÄNGLIGHET
-Du kan anpassa detta spel till dina behov: ändra rutstorlek, radie, trycktiming och stöd för skärmläsare.
-Vi försöker alltid förbättra våra tillgänglighetsinställningar. Om du saknar något ge oss feedback!
-
-ANDROID FOKUSERAD APP
-Den stöder coola Android-funktioner som delad skärm, genvägar, delning, systemtema, och stödjer alltid den senaste versionen.
 
 ONLINE ELLER OFFLINE
 Du behöver inte vara online för att spela spelet!

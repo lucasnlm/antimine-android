@@ -6,7 +6,7 @@ Ești în stare să rezolvi un câmp minat? Să începem!
 OBIECTIVE
 Ca și în Minesweeper. Câștigi jocul când ai marcat fiecare mină din câmp. Fii atent să nu declanșezi una!
 
-FĂRĂ GHICIT
+NO GUESSING
 Jocul are un algoritm care crează numai câmpuri minate rezolvabile. Nu va trebui să ghicești unde este ultima mină!
 
 NIVELURILE JOCULUI
@@ -39,13 +39,6 @@ Acest joc suportă 4 scheme diferite de controale. Exemplu: marcaj folosind apă
 
 ÎNDEPLINIRI ȘI REZULTATE TOP 
 Ai opt îndepliniri pentru a le debloca și diferite rezultate top pe care le poți împărtășii cu prieteni.
-
-ACCESIBILITATE
-Poți personaliza acest joc în funcție de nevoi: schimbă dimensiunea pătratelor, raza, timpul de tastare și sportul cititorului de ecran.
-Încercăm întotdeauna să îmbunătățim setările noastre de accesibilitate. Dacă ceva lipsește, trimite-ne un feedback!
-
-APP ORIGINAL ANDROID
-Suportă caracteristici interesante Android precum ecran împărțit, scurtături, partajare, interfața sistemului și asistență pentru ultima versiune.
 
 ONLINE SAU OFFLINE
 Nu trebuie să fii online pentru a juca jocul acesta!

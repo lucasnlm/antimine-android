@@ -6,7 +6,7 @@ Bir mayın tarlasını temizlemeyi başarabilir misiniz? Hadi bakalım!
 AMAÇ
 Tıpkı Mayın Tarlası gibi. Mayın Tarlasındaki her bir mayını bayrakladığınızda oyunu kazanırsınız. Birisini tetiklememeye dikkat edin!
 
-TAHMİN ETMEK YOK
+NO GUESSING
 Bu oyun, daima çözülebilir mayın tarlaları yaratan bir algoritmaya sahiptir. Son mayının nerede bulunduğunu tahmin etmek zorunda değilsiniz!
 
 OYUN SEVİYELERİ
@@ -39,13 +39,6 @@ Dört farklı kontrol şemasını desteklemektedir. Örneğin: dokunarak bayrak 
 
 BAŞARIMLAR VE LİDERLİK TABLOLARI 
 Kilidini açabileceğiniz 8 başarıma ve arkadaşlarınızla paylaşabileceğiniz farklı liderlik tablolarına sahipsiniz.
-
-ERİŞİLEBİLİRLİK
-Bu oyunu ihtiyaçlarınıza göre özelleştirebilirsiniz: karelerin boyutunu değiştirmek, yarıçap, dokunma süresi, ve ekran okuyucusu desteği.
-Bizler daima erişilebilirlik ayarlarımızı geliştirmeye çalışıyoruz. Eksik bir şey varsa bize geri bildirimde bulunun!
-
-ANDROID ODAKLI UYGULAMA
-Bölünmüş ekran, kısayollar, paylaşım, sistem teması, ve daima son sürümü desteklemek gibi harika Android özelliklerini destekler.
 
 ÇEVRİMİÇİ VEYA ÇEVRİMDIŞI
 Oyunu oynamak için çevrimiçi olmanıza gerek yok!

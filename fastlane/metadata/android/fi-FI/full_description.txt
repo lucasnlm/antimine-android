@@ -6,7 +6,7 @@ Pystytkö tyhjentämään miinakenttän? Aloitetaan!
 TAVOITE
 Se on kuin Miinaharava. Sinä voitat pelin, kun olet merkinnyt jokaisen miinan miinakenttään. Varo, ettet laukaise yhtään!
 
-EI ARVATTAVAA
+NO GUESSING
 Tässä pelissä on algoritmi, joka luo aina ratkaistavissa olevan miinakentän. Sinun ei tarvitse arvata missä viimeinen miina on!
 
 PELITASOT
@@ -39,13 +39,6 @@ Se tukee neljää eri ohjaustapaa. Esimerkiksi: merkitse napautuksella tai pitk�
 
 SAAVUTUKSET JA TULOSTAULUT 
 Sinulla on kahdeksan saavutusta avattavaksi ja eri pistetaulukoita jakaa ystäviesi kanssa.
-
-ESTEETTÖMYYS
-Voit muokata tätä peliä tarpeisiisi: muuta neliöiden kokoa, sädettä, kosketuksen ajoitus ja näytön lukijan tuki.
-Yritämme aina parantaa esteettömyysasetuksiamme. Jos kaipaat jotain anna meille palautetta!
-
-ANDROID FOCUSED APLIKAATIO
-Se tukee cooleja Android ominaisuuksia, kuten jaetu näytö, pikanäppäimet, jakaminen, järjestelmän teema, ja tukee aina viimeisintä versiota.
 
 ONLINE TAI OFFLINE
 Sinun ei tarvitse olla verkossa pelataksesi peliä!

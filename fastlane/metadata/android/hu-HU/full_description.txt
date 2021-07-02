@@ -6,7 +6,7 @@ Ki tudja tisztítani az aknamezőt? Gyerünk!
 CÉL
 Olyan, mint az Aknakereső. Ha meg tudja jelölni az összes aknát az aknamezőn, Ön nyert! Legyen óvatos, nehogy felrobbantson egyet!
 
-NINCS TALÁLGATÁS
+NO GUESSING
 A játék algoritmusa által generált aknamezők mindig megoldhatóak. Nem kell találgatnia, merre lehet az utolsó akna!
 
 NEHÉZSÉGI SZINTEK
@@ -39,13 +39,6 @@ Négy különböző irányítási mód érhető el. Például: megjelölhet nég
 
 TELJESÍTMÉNYEK ÉS RANGLISTA 
 Nyolc különböző Teljesítményt érhet el, és ranglistákat oszthat meg barátaival.
-
-KISEGÍTŐ LEHETŐSÉGEK
-Testre szabhatja a játékot szükségletei szerint: beállíthatja a négyzetek méretét, lekerekítés mértékét, érintés időzítését és az olvasás segítőt.
-Törekszünk a Kisegítő Lehetőségeink bővítésére. Ha nem talál valamit, jelezze nekünk!
-
-ANDROID-KÖZPONTÚ JÁTÉK
-Minden egyedi Android funkciót támogat, mint az osztott képernyő, parancsikonok, megosztás, rendszertéma, és mindig támogatja a legújabb verziót.
 
 ONLINE VAGY OFFLINE
 Nem szükséges internetkapcsolat a játékhoz!

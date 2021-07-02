@@ -6,7 +6,7 @@ Consegues limpar um campo minado? Vamos lá!
 OBJETIVO
 É como o Minesweeper. Vences o jogo quando sinalizas com uma bandeira todas as minas no campo minado. Cuidado para não ativares nenhuma!
 
-SEM ADIVINHAÇÕES
+NO GUESSING
 Esse jogo tem um algoritmo que cria sempre campos de minas que podem ser sempre resolvidos. Não precisarás de adivinhar onde está a última mina!
 
 NÍVEIS DO JOGO
@@ -39,13 +39,6 @@ Tem quatro esquemas de controlo diferentes. Exemplo: sinalizar com bandeira util
 
 CONQUISTAS E QUADROS DE CLASSIFICAÇÃO 
 Tens oito conquistas para desbloquear e diferentes quadros de classificação para partilhares com os teus amigos.
-
-ACESSIBILIDADE
-Podes personalizar este jogo conforme as tuas preferências: altera o tamanho dos quadrados, o raio, o tempo de toque e o suporte ao leitor de ecrã.
-Estamos sempre a tentar melhorar as nossas configurações de acessibilidade. Se achas que falta alguma coisa, dá-nos a tua opinião!
-
-APLICAÇÃO FOCADA EM ANDROID
-A aplicação suporta várias funcionalidades do Android, como ecrã dividido, atalhos, partilha, tema do sistema e suporta sempre a última versão.
 
 LIGADO OU DESLIGADO DA INTERNET
 Não tens de estar ligado à Internet para jogar!
