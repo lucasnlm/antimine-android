@@ -6,7 +6,7 @@ Are you able to clear a minefield? Let’s go!
 OBJECTIVE
 It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
 
-NO NEED TO GUESS
+NO GUESSING
 This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
 
 GAME LEVELS

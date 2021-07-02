@@ -6,7 +6,7 @@ Kannst du ein Minenfeld räumen? Auf geht's!
 ZIELSETZUNG
 Es ist wie Minesweeper. Du gewinnst das Spiel, wenn du jede Mine im Minenfeld markiert hast. Sei vorsichtig, nicht eine auszulösen!
 
-KEIN RÄTSELRATEN
+NO GUESSING
 Dieses Spiel nutzt einen Algorithmus, der immer lösbare Minenfelder erzeugt. Du wirst nicht raten müssen, wo die letzte Mine ist!
 
 SPIEL-LEVEL
@@ -39,13 +39,6 @@ Es unterstützt vier verschiedene Kontrollschemata. Beispiel: Markieren durch Ti
 
 ERFOLGE UND BESTENLISTE 
 Es gilt acht Erfolgsstufen zu entsperren, und du hast verschiedene Bestenlisten, die du mit deinen Freunden teilen kannst.
-
-BARRIEREFREIHEIT
-Du kannst dieses Spiel deinen Bedürfnissen anpassen: Ändere Quadratgröße, Radius, Reaktionszeit und Leseunterstützung.
-Wir bemühen uns stets, unsere Einstellungen der Barrierefreiheit zu verbessern. Falls du etwas vermisst, gib uns eine Rückmeldung!
-
-ANDROID FOCUSIERTE APP
-Sie unterstützt coole Androidfunktionalitäten wie Splitscreen, Verknüpfung, Teilen, Systemthemen und immer die Unterstützung der letzten Version.
 
 ONLINE ODER OFFLINE
 Du musst nicht online sein, um das Spiel zu spielen!

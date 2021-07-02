@@ -66,7 +66,7 @@
     <string name="single_click">Appui court</string>
     <string name="double_click">Appui Double</string>
     <string name="long_press">Appui Long</string>
-    <string name="control_description">%ACTION vers %REACTION</string>
+    <string name="control_description">%ACTION pour %REACTION</string>
     <string name="touch_sensibility">Sensibilité tactile</string>
     <string name="open_tile">Ouvrir</string>
     <string name="flag_tile">Drapeau</string>
@@ -115,9 +115,9 @@
     <string name="app_description">Vous devez vider un tableau rectangulaire contenant des mines cachées sans en détonner.</string>
     <string name="app_name">Anti-Mine</string>
     <string name="do_you_know_how_to_play">Savez-vous comment jouer au Démineur ?</string>
-    <string name="close">Sulje</string>
+    <string name="close">Fermer</string>
     <string name="open_tutorial">Ouvrir le tutoriel</string>
     <string name="click_numbers">Permettre de cliquer sur les numéros</string>
     <string name="tap_to_customize">Appuyer pour personnaliser</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
+    <string name="toggle_button_top">Afficher \"Bouton Activer\" sur la barre du haut</string>
 </resources>

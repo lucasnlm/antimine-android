@@ -6,7 +6,7 @@ Er du i stand til å tømme et minefelt? Kom igjen!
 MÅL
 Det er som Minesveiper. Du vinner spillet når du har flagget hver mine i minefeltet. Pass på at du ikke utløser en!
 
-INGEN GJETTING
+NO GUESSING
 Dette spillet har en algoritme som alltid lager løsbare minefelt. Du trenger ikke gjette hvor den siste minen ligger!
 
 SPILLNIVÅER
@@ -39,13 +39,6 @@ Spillet støtter fire ulike kontrollordninger. Eksempel: flagg ved å bruke tapp
 
 PRESTASJONER OG LEDERTAVLER 
 Du har åtte prestasjoner å låse opp og forskjellige ledertavler å dele med vennene dine.
-
-TILGJENGELIGHET
-Du kan tilpasse dette spillet for dine behov: endre rutestørrelse, radius, berøringstiming, og støtte for skjermleser.
-Vi prøver alltid å forbedre tilgjengelighetsinnstillingene våre. Gi oss tilbakemelding om du savner noe!
-
-ANDROID-FOKUSERT APP
-Appen støtter kule Android-funksjoner som delt skjerm, snarveier, deling, systemtema, og støtter alltid den nyeste versjonen.
 
 ONLINE ELLER OFFLINE
 Du trenger ikke være online for å spille spillet!

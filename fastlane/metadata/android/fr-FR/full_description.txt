@@ -6,7 +6,7 @@ Il s'agit d'une version minimaliste et moderne du Démineur classique.
 OBJECTIF
 C'est comme le Démineur. Vous gagnez la partie quand vous posez un drapeau sur chaque mine sur le champ de mine. Attention de ne pas en activer !
 
-PAS BESOIN DE DEVINER
+NO GUESSING
 Ce jeu a un algorithme qui crée toujours des champs de mines résolubles. Vous n'aurez pas à deviner où se trouve la dernière mine !
 
 NIVEAUX DE JEU
@@ -39,13 +39,6 @@ Il supporte quatre systèmes de contrôle différents. Exemple : drapeau en cliq
 
 SUCCÈS ET CLASSEMENTS 
 Vous avez huit succès à débloquer et différents classements à partager avec vos amis.
-
-ACCESSIBILITÉ
-Vous pouvez personnaliser ce jeu en fonction de vos besoins : changer la taille des carrés, leur rayon, le minutage tactile et le support du lecteur d'écran.
-Nous essayons toujours d'améliorer nos paramètres d'accessibilité. Si vous manquez quelque chose, faites-nous part de vos commentaires !
-
-ANDROID
-Il prend en charge les fonctionnalités cool d'Android comme l'écran partagé, les raccourcis, le partage, le thème du système et supporte toujours la dernière version.
 
 EN LIGNE OU HORS LIGNE
 Vous n'avez pas besoin d'être en ligne pour jouer au jeu !

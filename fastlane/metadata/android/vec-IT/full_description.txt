@@ -6,7 +6,7 @@ Sito bon de sgonbrar un canpo minà? Ndemo!
 OBIETIVO
 A ze cofà Canpo Minà. Te vinsi ła partìa co te ghè marcà tute łe mine inte'l canpo minà. Sta' tento a no infogonàrghene una!
 
-NO TE GHÈ DA INDOVINAR
+NO GUESSING
 'Sto zogo el ga un algoritmo che'l crea senpre canpi minài dezbrocàbiłi. No te gavarè da indovinar dove che ła ze l'ùltima mina!
 
 ŁIVEŁI DE ZOGO
@@ -39,13 +39,6 @@ El suporta cuatro schemi de controło difarenti. Ezenpio: marca tocando o tenjen
 
 CONCUISTE E CLASÌFEGHE 
 Te ghè oto obietivi da dezbrocar e arcuante clasìfeghe da sconpartir co i to amighi.
-
-ACESIBIŁITÀ
-Te połi parsonałizar 'sto zogo a seconda de łe to ezijense: modifegar łe dimension de i cuadrati, el rajo, el tenpo de toco e el suporto de'l łetore de schermo.
-A semo senpre drio sercar de mejorar łe nostre inpostasion de acesibiłità. Se te manca calcosa, dane un suzerimento!
-
-APP FOGAŁIZÀ PAR ANDROID
-El suporta arcuante funsionałità de Android cofà schermo tramezà, scurtarołe, sconpartision, tema de sistema e suporta senpre l'ùltima varsion.
 
 ONLINE O OFFLINE
 No te ghè da èsar cołegà par zogar!

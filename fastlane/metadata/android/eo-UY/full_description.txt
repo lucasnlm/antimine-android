@@ -6,7 +6,7 @@ Provu vian pensopovon je defia puzloludo, kie vi devas solvi minejon sen eksplod
 CELO
 Same kiel en Minesweeper,  vi gajnos en la ludo kiam vi finos flagumi ĉiun minon en la minejo. Estu singarda ne ŝalti eĉ unu el ili!
 
-NE DIVENU
+NO GUESSING
 Ĉi tiu ludo havas algoritmon, kiu ĉiam montras solveblajn minejojn. Vi ne devos diveni, kie la lasta mino estas!
 
 LUDNIVELOJ
@@ -39,13 +39,6 @@ REGILOJ
 
 AKIROJ KAJ ĈAMPIONEJOJ 
 Vi havas ok akiroj por malbloki kaj malsimilajn ĉampionejojn por disvastigi kun viaj amikoj.
-
-ALIREBLO
-Vi povas akomodi ĉi tiu ludo for vian necesojn: ŝanĝi la kvatradojn amplekso, radiuso, tuŝtempomezurado, kaj ekranlegilo subteno.
-Ni ĉiam provas plibonigi nian alireblajn agordojn. Se vi maltrafas ion, sendu al ni vian prikomentado!
-
-ANDROIDO FOKUSITA APO
-Ĝi subtenas mojosa Androido trajtoj kiel ekrandividado, simbola ligilo, disvastigado, sistemtemo, kaj ĉiam subtenante la lastan version.
 
 ENRETA AŬ MALENRETA
 Vi ne bezonas esti enreta por uzi la ludon!

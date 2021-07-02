@@ -6,7 +6,7 @@ Czy zdołasz oczyścić pole minowe? Do dzieła!
 TWÓJ CEL
 Ta gra jest jak Saper. Aby wygrać rozgrywkę, należy oznaczyć każdą minę na polu minowym. Uważaj, aby żadnej nie zdetonować!
 
-BEZ ZGADYWANIA
+NO GUESSING
 Gra wykorzystuje algorytm, który zawsze tworzy pola minowe, które są możliwe do rozwiązania. Nie trzeba zgadywać gdzie jest ostatnia mina!
 
 POZIOMY GRY
@@ -39,13 +39,6 @@ Dostępne są cztery systemy sterowania. Na przykład: oznaczanie pola przez dot
 
 OSIĄGNIĘCIA I TABLICE WYNIKÓW 
 Do zdobycia jest osiem osiągnięć oraz różne tablice wyników do udostępnienia znajomym.
-
-UŁATWIENIA DOSTĘPU
-Możesz dowolnie dostosować swoją rozgrywkę: zmienić rozmiar pól, ich promień, czas długiego naciśnięcia oraz włączyć obsługę czytania ekranu.
-Ciągle staramy się ulepszać nasze ustawienia ułatwień dostępu. Jeśli czegoś tu brakuje, prześlij nam opinię!
-
-APLIKACJA DEDYKOWANA DLA ANDROIDA
-Obsługuje fajne funkcje Androida, takie jak podzielony ekran, skróty, udostępnianie, motyw systemowy oraz ciągłe wsparcie dla najnowszych wersji.
 
 Z SIECIĄ LUB BEZ
 Nie musisz mieć połączenia z Internetem, aby zagrać!

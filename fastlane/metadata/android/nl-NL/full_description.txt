@@ -6,7 +6,7 @@ Kan je een mijnenveld opruimen? Aan de slag!
 DOEL
 Het is zoals Mijnenveger. Je wint het spel wanneer je elke mijn in het mijnenveld hebt gemarkeerd. Pas op dat je er geen activeert!
 
-NIET GOKKEN
+NO GUESSING
 Dit spel heeft een algoritme dat altijd oplosbare mijnenvelden creëert. Dus je hoeft niet te raden waar de laatste mijn is!
 
 SPELNIVEAUS
@@ -39,13 +39,6 @@ Er worden vier verschillende controlesystemen ondersteunt. Bijvoorbeeld: een vla
 
 PRESTATIES EN SCOREBORDEN 
 Er zijn acht prestaties te ontgrendelen en verschillende scoreborden om met je vrienden te delen.
-
-TOEGANG
-Je kunt dit spel aanpassen aan je eigen behoeften: verander de grootte van de vakjes, radius, aanraaktijd en ondersteuning voor een schermlezer.
-We proberen steeds onze toegankelijkheidsinstellingen te verbeteren. Als je iets mist geef ons feedback!
-
-ANDROID-GERICHTE APP
-Het ondersteunt coole Android-functies zoals split-screen, snelkoppelingen, delen, systeemthema en altijd het ondersteunen van de laatste versie.
 
 ONLINE OF OFFLINE
 Je hoeft niet online te zijn om het spel te spelen!

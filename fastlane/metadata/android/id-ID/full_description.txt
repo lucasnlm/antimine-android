@@ -6,7 +6,7 @@ Apakah anda bisa membersihkan ladang ranjau? Ayoo!
 OBJEKTIF
 Ini seperti Minesweeper. Anda memenangkan permainan ketika anda menandai semua ranjau yang ada di ladang. Berhati-hatilah untuk tidak memicu salah satu ranjau!
 
-TANPA MENEBAK
+NO GUESSING
 Game ini mempunyai algoritma yang selalu membuat ladang ranjau dapat diselesaikan. Anda tidak perlu menebak dimana ranjau terakhir berada!
 
 TINGKAT GAME
@@ -39,13 +39,6 @@ Mendukung empat skema kontrol yang berbeda. Contoh: menandai menggunakan tap ata
 
 PRESTASI DAN PAPAN PERINGKAT 
 Anda mempunyai delapan prestasi untuk dibuka dan papan peringkat yang berbeda untuk dibagikan ke teman anda.
-
-AKSESIBILITAS
-Anda bisa mengkustomisasi game ini sesuai kebutuhan anda: mengganti ukuran kotak, radius, waktu sentuh, dan dukungan pembaca layar.
-Kami selalu mencoba untuk memperbaiki pengaturan aksesiblitas kami. Jika anda melewatkan sesuatu berikan kami umpan balik!
-
-APLIKASI KHUSUS UNTUK ANDROID
-Mendukung fitur-fitur keren Android seperti split-screen, jalan pintas, berbagi, sistem tema, dan selalu mendukung Android terbaru.
 
 ONLINE ATAU OFFLINE
 Anda tidak harus selalu online untuk memainkan game ini!

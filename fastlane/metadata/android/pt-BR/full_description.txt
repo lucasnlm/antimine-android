@@ -40,13 +40,6 @@ Suporte a quatro esquemas de controlo diferentes. Exemplo: bandeira usando toque
 CONQUISTAS E TABELAS 
 Você tem oito conquistas para desbloquear e diferentes placares de classificação para compartilhar com seus amigos.
 
-ACESSIBILIDADE
-Você pode personalizar este jogo para suas necessidades: altere o tamanho dos quadrados, o raio, o tempo de toque e o suporte ao leitor de tela.
-Estamos sempre tentando melhorar nossas configurações de acessibilidade. Se você sentir falta de algo, nos dê sua opinião!
-
-APP FOCADO EM ANDROID
-Ele oferece suporte a recursos legais do Android, como tela dividida, atalhos, compartilhamento, tema do sistema e sempre suporta a última versão.
-
 ONLINE OU OFFLINE
 Você não precisa estar online para jogar o jogo!
 

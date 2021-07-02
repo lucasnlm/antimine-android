@@ -6,7 +6,7 @@ Er du i stand til at rydde et minefelt? Afsted!
 FORMÅL
 Det ligesom Minesweeper. Du vinder spillet, når du har flaget hver mine i minefeltet. Vær forsigtig med ikke at udløse en!
 
-INGEN GÆTTERI
+NO GUESSING
 Dette spil har en algorimte, der altid skaber løsbare minefelter. Du bliver ikke nød til at gætte hvor den sidste mine er!
 
 SPIL NIVEAUER
@@ -39,13 +39,6 @@ Det understøtter fire forskellige kontrolordninger. Eksempel: marker ved tryk e
 
 OPNÅELSER OG LEDERTAVLER 
 Du har otte opnåelser at låse op og forskellige ledertavler til at dele med dine venner.
-
-TILGÆNGELIGHED
-Du kan tilpasse dette spil til dine behov: ændre firkanternes størrelse, radius, berørelses timing, og støtte til skærmlæseren.
-Vi forsøger altid at forbedre vores tilgængeligshedsindstillinger. Hvis du går glip af noget giv os feedback!
-
-ANDROID FOKUSERET APP
-Det undersøtter cool Android-funktioner som split-skærm, genveje, deling, systemtema, og støtter altid den seneste version.
 
 ONLINE ELLER OFFLINE
 Du behøver ikke at være online for at spille spillet!

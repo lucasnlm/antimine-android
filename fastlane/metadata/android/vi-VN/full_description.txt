@@ -6,7 +6,7 @@ Bạn có thể quét sạch một bãi mìn không? Đi nào!
 MỤC TIÊU
 Giống như Minesweeper. Bạn thắng khi bạn đã gắn cờ mọi quả mìn trong bãi mìn. Hãy cẩn thận đừng kích hoạt quả nào!
 
-KHÔNG ĐOÁN
+NO GUESSING
 Trò chơi này có một thuật toán luôn luôn tạo những bãi mìn có thể giải. Bạn sẽ không phải đoán quả mìn cuối cùng ở đâu!
 
 CẤP ĐỘ CHƠI
@@ -39,13 +39,6 @@ Nó hỗ trợ bốn sự sắp đặt điều khiển khác nhau. Ví dụ: g�
 
 THÀNH TÍCH VÀ BẢNG XẾP HẠNG 
 Bạn có tám thành tích để mở khoá và các bảng xếp hạng khác nhau để chia sẻ với các bạn của bạn.
-
-HỖ TRƠ TIẾP CẬN
-Bạn có thể tuỳ chỉnh trò chơi này khi cần: thay đổi kích cỡ ô vuông, bán kính, căn giờ chạm, và hỗ trợ trình đọc màn hình.
-Chúng tôi luôn cố gắng cải thiện cài đặt hỗ trợ tiếp cận. Nếu bạn nhớ thứ gì đó hãy cho chúng tôi phản hồi!
-
-ỨNG DỤNG TẬP TRUNG VÀO ANDROID
-Nó hỗ trợ các tính năng tuyệt vời của Android như chia màn hình, lối tắt, chia sẻ, chủ đề hệ thống, và luôn hỗ trợ phiên bản mới nhất.
 
 TRỰC TUYẾN HOẶC NGOẠI TUYẾN
 Bạn không cần trực tuyến để chơi trò này!

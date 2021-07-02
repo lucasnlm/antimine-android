@@ -119,5 +119,5 @@
     <string name="open_tutorial">Åpne opplæring</string>
     <string name="click_numbers">Tillat trykk på tall</string>
     <string name="tap_to_customize">Trykk for å tilpasse</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
+    <string name="toggle_button_top">Vis \"Slå på/av knapp\" på topplinjen</string>
 </resources>
