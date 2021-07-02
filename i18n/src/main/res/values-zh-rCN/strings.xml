@@ -110,7 +110,7 @@
     <string name="open_on_game">在游戏启动时上打开上一局游戏</string>
     <string name="show_windows">显示结果对话框</string>
     <string name="select_language">选择语言</string>
-    <string name="switch_control">开关：（切换）标记与打开</string>
+    <string name="switch_control">切换标记与打开</string>
     <string name="switch_control_desc">使用按钮在标记和打开之间切换</string>
     <string name="app_description">你需要在不引爆地雷的情况下， 清理有着隐藏地雷的矩形区域。</string>
     <string name="app_name">扫雷 (踩地雷) - Antimine</string>
@@ -119,5 +119,5 @@
     <string name="open_tutorial">打开教程</string>
     <string name="click_numbers">允许点击数字</string>
     <string name="tap_to_customize">点击可自定义</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
+    <string name="toggle_button_top">在顶部栏显示“切换按钮”</string>
 </resources>

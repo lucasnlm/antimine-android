@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="hu">
     <string name="tutorial">Ismertető</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_basic">A játékszabály egyszerű, a négyzeten lévő szám mutatja a szomszédos aknák számát. A cél minden akna megjelölése.</string>
+    <string name="tutorial_text_1">Ha egy szám ugyanannyi négyzetet érint, akkor a négyzetek mind aknák.</string>
+    <string name="tutorial_text_2">Miután megjelölte az első zászlót, tekintse át a számokat és elemezze a következő négyzetet.</string>
+    <string name="tutorial_text_3">Ha egy négyzetnek ugyanannyi zászlaja van, akkor a többi szomszédos négyzetek nem aknák (zöld nyíl).</string>
+    <string name="tutorial_text_4">Tekintse át a számokat és nyisson ki több négyzetet.</string>
     <string name="games">Játékok</string>
     <string name="tap_to_begin">Érintse meg a kezdéshez</string>
     <string name="previous_games">Előző játékok</string>
@@ -14,8 +14,8 @@
     <string name="beginner">Kezdő</string>
     <string name="intermediate">Haladó</string>
     <string name="expert">Szakértő</string>
-    <string name="master">Master</string>
-    <string name="legend">Legend</string>
+    <string name="master">Mester</string>
+    <string name="legend">Legenda</string>
     <string name="open">Megnyitás</string>
     <string name="settings">Beállítások</string>
     <string name="animations">Animációk</string>
@@ -114,10 +114,10 @@
     <string name="switch_control_desc">A gombbal válthat a Flag és a Open között</string>
     <string name="app_description">Meg kell tisztítanod egy rejtett aknákkal teli, négyszögletes pályát anélkül, hogy akár egyet is felrobbantanál.</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play">Do you know how to play minesweeper?</string>
-    <string name="close">Close</string>
-    <string name="open_tutorial">Open Tutorial</string>
-    <string name="click_numbers">Allow tap on numbers</string>
-    <string name="tap_to_customize">Tap to customize</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
+    <string name="do_you_know_how_to_play">Tudja, hogy kell aknakeresőt játszani?</string>
+    <string name="close">Bezárás</string>
+    <string name="open_tutorial">Bemutató megnyitása</string>
+    <string name="click_numbers">Koppintás engedélyezése számokon</string>
+    <string name="tap_to_customize">Koppintson a testreszabáshoz</string>
+    <string name="toggle_button_top">Mutassa a Kapcsolót a felső sávon</string>
 </resources>
