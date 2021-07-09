@@ -6,7 +6,7 @@ Esta es una versión minimalista y moderna del clásico Buscaminas.
 OBJETIVO
 Es como el buscaminas. Ganarás la partida cuando hayas marcado todas las minas del campo de minas. ¡Ten cuidado de no activar una!
 
-NO GUESSING
+SIN ADIVINAR
 Este juego tiene un algoritmo que siempre crea campos de minas con solución. ¡No tendrás que adivinar dónde está la última mina!
 
 NIVELES DE JUEGO

@@ -6,7 +6,7 @@ Kannst du ein Minenfeld räumen? Auf geht's!
 ZIELSETZUNG
 Es ist wie Minesweeper. Du gewinnst das Spiel, wenn du jede Mine im Minenfeld markiert hast. Sei vorsichtig, nicht eine auszulösen!
 
-NO GUESSING
+KEIN RATEN
 Dieses Spiel nutzt einen Algorithmus, der immer lösbare Minenfelder erzeugt. Du wirst nicht raten müssen, wo die letzte Mine ist!
 
 SPIEL-LEVEL

@@ -6,7 +6,7 @@ Er du i stand til å tømme et minefelt? Kom igjen!
 MÅL
 Det er som Minesveiper. Du vinner spillet når du har flagget hver mine i minefeltet. Pass på at du ikke utløser en!
 
-NO GUESSING
+INGEN GJETTING
 Dette spillet har en algoritme som alltid lager løsbare minefelt. Du trenger ikke gjette hvor den siste minen ligger!
 
 SPILLNIVÅER
