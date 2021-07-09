@@ -6,7 +6,7 @@ Il s'agit d'une version minimaliste et moderne du Démineur classique.
 OBJECTIF
 C'est comme le Démineur. Vous gagnez la partie quand vous posez un drapeau sur chaque mine sur le champ de mine. Attention de ne pas en activer !
 
-NO GUESSING
+PAS BESOIN DE DEVINER
 Ce jeu a un algorithme qui crée toujours des champs de mines résolubles. Vous n'aurez pas à deviner où se trouve la dernière mine !
 
 NIVEAUX DE JEU

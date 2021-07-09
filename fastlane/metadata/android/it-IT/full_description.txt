@@ -6,7 +6,7 @@ Riuscirai a sgombrare il campo minato? Iniziamo!
 OBIETTIVO
 È come Campo Minato. Vinci la partita quando hai contrassegnato ogni mina nel campo minato. Attenzione a non farle esplodere!
 
-NO GUESSING
+NON DEVI INDOVINARE
 Il gioco ha un algoritmo che crea sempre campi minati risolvibili. Non sarà necessario indovinare dov'è l'ultima mina!
 
 LIVELLI DI GIOCO

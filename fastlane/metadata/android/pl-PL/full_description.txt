@@ -6,7 +6,7 @@ Czy zdołasz oczyścić pole minowe? Do dzieła!
 TWÓJ CEL
 Ta gra jest jak Saper. Aby wygrać rozgrywkę, należy oznaczyć każdą minę na polu minowym. Uważaj, aby żadnej nie zdetonować!
 
-NO GUESSING
+BEZ ZGADYWANIA
 Gra wykorzystuje algorytm, który zawsze tworzy pola minowe, które są możliwe do rozwiązania. Nie trzeba zgadywać gdzie jest ostatnia mina!
 
 POZIOMY GRY

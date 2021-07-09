@@ -6,7 +6,7 @@ Dokážete vyčistit minové pole? Pojďme na to!
 CÍL
 Je to jako Minesweeper. Vyhrajete hru, jestliže jste označil každou minu v minovém poli. Dávejte pozor, aby žádná mina nevybouchla!
 
-NO GUESSING
+BEZ HÁDÁNÍ
 Tato hra obsahuje algoritmus, který vždy vytváří řešitelná minová pole. Nebudete muset hádat, kde je poslední mina!
 
 ÚROVNĚ HRY

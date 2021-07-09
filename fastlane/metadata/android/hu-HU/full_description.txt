@@ -6,7 +6,7 @@ Ki tudja tisztítani az aknamezőt? Gyerünk!
 CÉL
 Olyan, mint az Aknakereső. Ha meg tudja jelölni az összes aknát az aknamezőn, Ön nyert! Legyen óvatos, nehogy felrobbantson egyet!
 
-NO GUESSING
+NINCS TALÁLGATÁS
 A játék algoritmusa által generált aknamezők mindig megoldhatóak. Nem kell találgatnia, merre lehet az utolsó akna!
 
 NEHÉZSÉGI SZINTEK

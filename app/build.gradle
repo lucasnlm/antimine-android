@@ -15,8 +15,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1204021
-        versionName '12.4.2'
+        versionCode 1205001
+        versionName '12.5.0'
         minSdkVersion 21
         targetSdkVersion 30
         multiDexEnabled true
@@ -147,7 +147,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     // Google
-    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
 
     // Koin
     implementation 'org.koin:koin-android:2.2.1'
@@ -162,29 +162,28 @@ dependencies {
     // Tests
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'android.arch.core:core-testing:1.1.1'
-    testImplementation 'androidx.core:core-ktx:1.5.0'
-    testImplementation 'androidx.test:core:1.3.0'
-    testImplementation 'androidx.test:core-ktx:1.3.0'
-    testImplementation 'androidx.test:rules:1.3.0'
-    testImplementation 'androidx.test:runner:1.3.0'
-    testImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    testImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
+    testImplementation 'androidx.core:core-ktx:1.6.0'
+    testImplementation 'androidx.test:core-ktx:1.4.0'
+    testImplementation 'androidx.test:rules:1.4.0'
+    testImplementation 'androidx.test:runner:1.4.0'
+    testImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    testImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
     testImplementation 'androidx.fragment:fragment-testing:1.3.5'
     testImplementation 'org.robolectric:robolectric:4.4'
-    testImplementation 'androidx.test.ext:junit:1.1.2'
+    testImplementation 'androidx.test.ext:junit:1.1.3'
     testImplementation 'io.mockk:mockk:1.11.0'
 
     // Core library
-    androidTestImplementation 'androidx.test:core:1.3.0'
+    androidTestImplementation 'androidx.test:core:1.4.0'
 
     // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation 'androidx.test:core:1.3.0'
-    androidTestImplementation 'androidx.test:core-ktx:1.3.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
-    androidTestImplementation 'androidx.test:runner:1.3.0'
-    androidTestImplementation 'androidx.test:rules:1.3.0'
-    androidTestUtil 'androidx.test:orchestrator:1.3.0'
+    androidTestImplementation 'androidx.test:core:1.4.0'
+    androidTestImplementation 'androidx.test:core-ktx:1.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+    androidTestUtil 'androidx.test:orchestrator:1.4.0'
 }
 
 tasks.withType(Test) {
