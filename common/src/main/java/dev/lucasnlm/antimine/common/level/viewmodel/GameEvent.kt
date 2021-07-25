@@ -37,6 +37,8 @@ sealed class GameEvent {
 
     object EngineReady : GameEvent()
 
+    object ShowNoGuessFailWarning : GameEvent()
+
     data class VictoryDialog(
         val delayToShow: Long,
         val totalMines: Int,

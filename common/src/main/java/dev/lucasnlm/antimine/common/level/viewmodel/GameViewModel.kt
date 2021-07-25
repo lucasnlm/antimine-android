@@ -214,7 +214,12 @@ open class GameViewModel(
 
             val seed = minefieldRepository.randomSeed()
 
-            gameController = GameController(minefield, seed)
+            gameController = GameController(
+                minefield = minefield,
+                seed = seed,
+                onCreateUnsafeLevel = ::onCreateUnsafeLevel,
+                saveId = null
+            )
 
             val newGameState = GameState(
                 duration = 0L,
@@ -291,7 +296,7 @@ open class GameViewModel(
 
         sendEvent(GameEvent.LoadingNewGame)
 
-        gameController = GameController(save.minefield, save.seed, save.uid)
+        gameController = GameController(save.minefield, save.seed, save.uid, ::onCreateUnsafeLevel)
         initialized = true
         refreshUserPreferences()
 
@@ -725,6 +730,10 @@ open class GameViewModel(
                 playGamesManager.incrementAchievement(Achievement.Boom)
             }
         }
+    }
+
+    private fun onCreateUnsafeLevel() {
+        sendSideEffect(GameEvent.ShowNoGuessFailWarning)
     }
 
     fun getControlDescription(context: Context): SpannedString? {

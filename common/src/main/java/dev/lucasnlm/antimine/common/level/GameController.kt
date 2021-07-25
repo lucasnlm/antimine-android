@@ -34,13 +34,21 @@ class GameController {
 
     private val minefieldCreator: MinefieldCreator
     private var field: List<Area>
+    private var noGuessTestedLevel = true
+    private var onCreateUnsafeLevel: (() -> Unit)? = null
 
-    constructor(minefield: Minefield, seed: Long, saveId: Int? = null) {
+    constructor(
+        minefield: Minefield,
+        seed: Long,
+        saveId: Int? = null,
+        onCreateUnsafeLevel: () -> Unit,
+    ) {
         this.minefieldCreator = MinefieldCreator(minefield, Random(seed))
         this.minefield = minefield
         this.seed = seed
         this.saveId = saveId ?: 0
         this.actions = 0
+        this.onCreateUnsafeLevel = onCreateUnsafeLevel
 
         this.field = minefieldCreator.createEmpty()
     }
@@ -73,7 +81,8 @@ class GameController {
             val fieldCopy = field.map { it.copy() }.toMutableList()
             val minefieldHandler = MinefieldHandler(fieldCopy, false)
             minefieldHandler.openAt(safeId, false)
-        } while (useNoGuessing && solver.keepTrying() && !solver.trySolve(minefieldHandler.result().toMutableList()))
+            noGuessTestedLevel = solver.trySolve(minefieldHandler.result().toMutableList())
+        } while (useNoGuessing && solver.keepTrying() && !noGuessTestedLevel)
 
         firstOpen = FirstOpen.Position(safeId)
     }
@@ -86,6 +95,10 @@ class GameController {
             plantMinesExcept(target.id)
             minefieldHandler = MinefieldHandler(field.toMutableList(), useQuestionMark)
             minefieldHandler.openAt(target.id, false)
+
+            if (!noGuessTestedLevel) {
+                onCreateUnsafeLevel?.invoke()
+            }
         } else {
             minefieldHandler = MinefieldHandler(field.toMutableList(), useQuestionMark)
             minefieldHandler.turnOffAllHighlighted()
