@@ -45,9 +45,9 @@ dependencies {
     implementation project(':ui')
 
     // AndroidX
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'androidx.activity:activity-ktx:1.2.3'
-    implementation 'androidx.fragment:fragment-ktx:1.3.5'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.activity:activity-ktx:1.2.4'
+    implementation 'androidx.fragment:fragment-ktx:1.3.6'
 
     // Koin
     implementation 'io.insert-koin:koin-android:3.1.2'
