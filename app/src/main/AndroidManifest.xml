@@ -52,6 +52,7 @@
 
         <activity
             android:name="dev.lucasnlm.antimine.splash.SplashActivity"
+            android:exported="true"
             android:theme="@style/Theme.Splash">
 
             <tools:validation testUrl="https://www.lucasnlm.dev/antimine" />

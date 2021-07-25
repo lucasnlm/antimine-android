@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 

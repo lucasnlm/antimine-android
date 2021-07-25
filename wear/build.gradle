@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
@@ -14,7 +14,7 @@ android {
         versionName '10.0.1'
         applicationId 'dev.lucasnlm.antimine'
         minSdkVersion 23
-        targetSdkVersion 30
+        targetSdkVersion 31
         vectorDrawables.useSupportLibrary true
         resConfigs 'af-rZA', 'ar-rSA', 'ca-rES', 'cs-rCZ', 'da-rDK', 'de-rDE', 'el-rGR', 'en-rUS',
                 'es-rES', 'fi-rFI', 'fr-rFR', 'hi-rIN', 'hu-rHU', 'it-rIT', 'iw-rIL', 'ja-rJP',
