@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
@@ -19,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -70,7 +70,7 @@ class GameActivity :
     private val reviewWrapper: ReviewWrapper by inject()
     private val featureFlagManager: IFeatureFlagManager by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
-    private var gameToast: Toast? = null
+    private var gameToast: Snackbar? = null
 
     private val renderSquareRadius = preferencesRepository.squareRadius()
     private val renderSquareDivider = preferencesRepository.squareDivider()
@@ -159,6 +159,10 @@ class GameActivity :
         lifecycleScope.launchWhenCreated {
             observeState().collect {
                 if (it.turn == 0 && it.saveId == 0L || it.isLoadingMap) {
+                    if (it.turn == 0) {
+                        gameToast?.dismiss()
+                    }
+
                     val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
 
@@ -239,10 +243,6 @@ class GameActivity :
                     refreshRetryShortcut(it.hasMines)
                 }
 
-                if (it.isActive) {
-                    gameToast?.cancel()
-                }
-
                 keepScreenOn(it.isActive)
             }
         }
@@ -250,6 +250,18 @@ class GameActivity :
         lifecycleScope.launchWhenCreated {
             gameViewModel.observeSideEffects().collect {
                 when (it) {
+                    is GameEvent.ShowNoGuessFailWarning -> {
+                        gameToast = Snackbar.make(
+                            findViewById(android.R.id.content),
+                            R.string.no_guess_fail_warning,
+                            Snackbar.LENGTH_INDEFINITE,
+                        ).apply {
+                            setAction(R.string.ok) {
+                                gameToast?.dismiss()
+                            }
+                            show()
+                        }
+                    }
                     is GameEvent.ShowNewGameDialog -> {
                         lifecycleScope.launch {
                             GameOverDialogFragment.newInstance(
@@ -707,7 +719,7 @@ class GameActivity :
     }
 
     private fun showEndGameToast(gameResult: GameResult) {
-        gameToast?.cancel()
+        gameToast?.dismiss()
 
         val message = when (gameResult) {
             GameResult.GameOver -> R.string.you_lost
@@ -715,8 +727,11 @@ class GameActivity :
             GameResult.Completed -> R.string.you_finished
         }
 
-        gameToast = Toast.makeText(this, message, Toast.LENGTH_LONG).apply {
-            setGravity(Gravity.CENTER, 0, 0)
+        gameToast = Snackbar.make(
+            findViewById(android.R.id.content),
+            message,
+            Snackbar.LENGTH_LONG
+        ).apply {
             show()
         }
     }
