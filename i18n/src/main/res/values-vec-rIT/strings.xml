@@ -63,8 +63,8 @@
     <string name="use_question_mark">Dòpara el Ponto de Domanda</string>
     <string name="no_guessing_mode">Modałità sensa predision</string>
     <string name="control">Comandi</string>
-    <string name="single_click">Toca na volta</string>
-    <string name="double_click">Toca do volte</string>
+    <string name="single_click">Toca na \'olta</string>
+    <string name="double_click">Toca do \'olte</string>
     <string name="long_press">Tien strucà</string>
     <string name="control_description">%ACTION par %REACTION</string>
     <string name="touch_sensibility">Sensibiłità de Toco</string>
@@ -107,7 +107,7 @@
     <string name="help">Juto</string>
     <string name="back">Indrìo</string>
     <string name="donation">Donasion</string>
-    <string name="open_on_game">Verzi \'te ła schermada de zogo</string>
+    <string name="open_on_game">Verzi inte ła schermada de zogo</string>
     <string name="show_windows">Mostra fenestre</string>
     <string name="select_language">Sernisi Łengua</string>
     <string name="switch_control">Scanbia: Marca e Verzi</string>
@@ -115,9 +115,10 @@
     <string name="app_description">Te ghè da sgonbrar na toła retangołar contenente mine sconte sensa fàrghene sciopar njanca una.</string>
     <string name="app_name">Antimine</string>
     <string name="do_you_know_how_to_play">Seto come zogar a canpo minà?</string>
-    <string name="close">Sara</string>
+    <string name="close">Sara sù</string>
     <string name="open_tutorial">Verzi el Tutorial</string>
     <string name="click_numbers">Parmeti de strucar so i nùmari</string>
-    <string name="tap_to_customize">Tap to customize</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
+    <string name="tap_to_customize">Struca par parsonałizar</string>
+    <string name="toggle_button_top">Mostra ła łeveta so ła bara par alto</string>
+    <string name="no_guess_fail_warning">\'Sto canpo minà no el se połe mìa conpletar sensa intivar!</string>
 </resources>

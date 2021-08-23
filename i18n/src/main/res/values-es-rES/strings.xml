@@ -120,4 +120,5 @@
     <string name="click_numbers">Permitir tocar números</string>
     <string name="tap_to_customize">Toca para personalizar</string>
     <string name="toggle_button_top">Mostrar botón \"Activar\" en la barra superior</string>
+    <string name="no_guess_fail_warning">¡Es posible que necesites una pista para solucionar este nivel!</string>
 </resources>

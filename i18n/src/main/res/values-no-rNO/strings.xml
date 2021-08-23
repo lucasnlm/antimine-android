@@ -120,4 +120,5 @@
     <string name="click_numbers">Tillat trykk på tall</string>
     <string name="tap_to_customize">Trykk for å tilpasse</string>
     <string name="toggle_button_top">Vis \"Slå på/av knapp\" på topplinjen</string>
+    <string name="no_guess_fail_warning">Det nåværende minefeltet kan ikke løses uten å gjette!</string>
 </resources>

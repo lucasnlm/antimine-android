@@ -18,6 +18,6 @@ class LimitedCheckNeighborsSolver(
     }
 
     companion object {
-        const val DEFAULT_BRUTE_FORCE_TIMEOUT = 500L
+        const val DEFAULT_BRUTE_FORCE_TIMEOUT = 1000L
     }
 }

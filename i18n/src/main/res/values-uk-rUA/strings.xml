@@ -120,4 +120,5 @@
     <string name="click_numbers">Дозволити натискання на цифри</string>
     <string name="tap_to_customize">Натисніть, щоб налаштувати</string>
     <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
+    <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
 </resources>

@@ -152,7 +152,7 @@ open class GameViewModel(
                                 totalMines = totalMines,
                                 rightMines = totalMines,
                                 timestamp = state.duration,
-                                receivedTips = 2,
+                                receivedTips = calcRewardHints(),
                             )
                             sendSideEffect(sideEffect)
                         }
@@ -164,7 +164,7 @@ open class GameViewModel(
                                 totalMines = gameController.mines().count(),
                                 rightMines = gameController.mines().count { it.mark.isNotNone() },
                                 timestamp = state.duration,
-                                receivedTips = 1,
+                                receivedTips = calcRewardHints(),
                                 turn = state.turn,
                             )
                             sendSideEffect(sideEffect)
@@ -384,10 +384,6 @@ open class GameViewModel(
             // Fail to load
             startNewGame()
         }
-    }
-
-    suspend fun loadGame(): Minefield {
-        return loadLastGame()
     }
 
     fun pauseGame() {
@@ -649,12 +645,23 @@ open class GameViewModel(
         saveGame()
         saveStats()
 
-        if (clock.time() > 5L && preferencesRepository.isPremiumEnabled()) {
-            if (isCompletedWithMistakes()) {
-                addNewTip(1)
+        val rewardedHints = calcRewardHints()
+        if (rewardedHints > 0) {
+            addNewTip(rewardedHints)
+        }
+    }
+
+    private fun calcRewardHints(): Int {
+        return if (clock.time() > 5L && preferencesRepository.isPremiumEnabled()) {
+            val rewardedHints = if (isCompletedWithMistakes()) {
+                (state.minefield.mines * 0.05).toInt()
             } else {
-                addNewTip(2)
+                (state.minefield.mines * 0.1).toInt()
             }
+
+            rewardedHints
+        } else {
+            0
         }
     }
 
