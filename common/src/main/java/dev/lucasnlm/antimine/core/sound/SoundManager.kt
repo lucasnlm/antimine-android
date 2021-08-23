@@ -23,7 +23,7 @@ class SoundManager(
                 }
             }.start()
         } catch (e: Exception) {
-            // Some Huawei phones fail to play sounds there.
+            // Some Huawei phones may fail to play sounds.
             // Adding this try catch to at lease to make they crash.
             crashReporter.sendError("Fail to play sound.\n${e.message}")
         }

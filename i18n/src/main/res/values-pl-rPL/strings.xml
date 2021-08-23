@@ -3,7 +3,7 @@
     <string name="tutorial">Samouczek</string>
     <string name="tutorial_basic">Reguły gry są proste. Liczba widoczna na polu oznacza ilość min przylegających do tego pola, a Twoim zadaniem jest oznaczyć je wszystkie.</string>
     <string name="tutorial_text_1">Jeśli do pola z liczbą przylega taka sama liczba nieodkrytych pól na jaką wskazuje ta liczba, to na wszystkich tych polach są miny.</string>
-    <string name="tutorial_text_2">Po oznaczeniu pierwszego pola, sprawdź numery i zastanów się nad kolejnym ruchem.</string>
+    <string name="tutorial_text_2">Po oznaczeniu pierwszego pola, przejrzyj cyfry i zastanów się nad kolejnym ruchem.</string>
     <string name="tutorial_text_3">Jeśli do pola przystaje określona liczba flag, wówczas wszystkie pozostałe przystające do niego pola nie mają min (zielona strzałka).</string>
     <string name="tutorial_text_4">Sprawdź liczby i kontynuuj odkrywanie pól.</string>
     <string name="games">Rozgrywki</string>
@@ -99,7 +99,7 @@
     <string name="share">Udostępnij</string>
     <string name="share_menu">Udostępnij przez…</string>
     <string name="no_network">Brak połączenia z Internetem.</string>
-    <string name="delete_all">Usuń wszystkie</string>
+    <string name="delete_all">Wyzeruj</string>
     <string name="appearance">Wygląd</string>
     <string name="themes">Motywy</string>
     <string name="delete_all_message">Spowoduje to nieodwracalne usunięcie wszystkich statystyk.</string>
@@ -111,7 +111,7 @@
     <string name="show_windows">Pokaż okna</string>
     <string name="select_language">Wybierz język</string>
     <string name="switch_control">Przełączanie: Oznacz i odkryj</string>
-    <string name="switch_control_desc">Użyj przycisku do przełączania się pomiędzy oznaczaniem i odkrywaniem</string>
+    <string name="switch_control_desc">Użyj przycisku do przełączania pomiędzy oznaczaniem i odkrywaniem</string>
     <string name="app_description">Znajdź wszystkie ukryte miny znajdujące się na kwadratowej planszy unikając ich detonacji.</string>
     <string name="app_name">Antimine</string>
     <string name="do_you_know_how_to_play">Czy chcesz przejść samouczek gry?</string>
@@ -120,4 +120,5 @@
     <string name="click_numbers">Możliwość naciskania liczb</string>
     <string name="tap_to_customize">Naciśnij, aby zmienić</string>
     <string name="toggle_button_top">Wyświetl \"Przełącz sterowanie\" na górnej pasku</string>
+    <string name="no_guess_fail_warning">To pole minowe może wymagać zgadywania, aby je ukończyć!</string>
 </resources>

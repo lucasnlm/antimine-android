@@ -14,8 +14,8 @@
     <string name="beginner">Beginner</string>
     <string name="intermediate">Gevorderd</string>
     <string name="expert">Expert</string>
-    <string name="master">Master</string>
-    <string name="legend">Legend</string>
+    <string name="master">Meester</string>
+    <string name="legend">Legende</string>
     <string name="open">Open</string>
     <string name="settings">Instellingen</string>
     <string name="animations">Animaties</string>
@@ -114,10 +114,11 @@
     <string name="switch_control_desc">Gebruik de knop om te wisselen tussen vlag en open</string>
     <string name="app_description">Je moet een rechthoekig bord met verborgen mijnen verwijderen zonder er een te ontploffen.</string>
     <string name="app_name">Antimijn</string>
-    <string name="do_you_know_how_to_play">Do you know how to play minesweeper?</string>
-    <string name="close">Close</string>
-    <string name="open_tutorial">Open Tutorial</string>
+    <string name="do_you_know_how_to_play">Weet je hoe he Minesweeper moet spelen?</string>
+    <string name="close">Sluiten</string>
+    <string name="open_tutorial">Handleiding openen</string>
     <string name="click_numbers">Allow tap on numbers</string>
     <string name="tap_to_customize">Tap to customize</string>
     <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
+    <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
 </resources>

@@ -120,4 +120,5 @@
     <string name="click_numbers">Permitir toque nos números</string>
     <string name="tap_to_customize">Toque para personalizar</string>
     <string name="toggle_button_top">Mostrar \"Botão de Alternar\" na barra superior</string>
+    <string name="no_guess_fail_warning">O campo minado atual pode não ser resolvido sem adivinhação!</string>
 </resources>
