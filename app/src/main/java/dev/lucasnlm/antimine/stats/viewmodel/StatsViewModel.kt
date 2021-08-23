@@ -22,8 +22,7 @@ class StatsViewModel(
     private suspend fun loadStatsModel(): List<StatsModel> {
         val minId = preferenceRepository.getStatsBase()
         val stats = statsRepository.getAllStats(minId)
-        val standardSize = minefieldRepository.fromDifficulty(
-            Difficulty.Standard,
+        val standardSize = minefieldRepository.baseStandardSize(
             dimensionRepository,
             preferenceRepository,
         )
@@ -151,7 +150,8 @@ class StatsViewModel(
     }
 
     private fun isMaster(stats: Stats): Boolean {
-        return (stats.mines == 200 || stats.mines == 300) && stats.width == 50 && stats.height == 50
+        return (stats.mines == 200 || stats.mines == 300 || stats.mines == 400)
+            && stats.width == 50 && stats.height == 50
     }
 
     private fun isLegend(stats: Stats): Boolean {
@@ -167,8 +167,16 @@ class StatsViewModel(
     }
 
     private fun List<Stats>.filterStandard(standardSize: Minefield) = filter {
-        (it.width == standardSize.width && it.height == standardSize.height) ||
-            (it.width == standardSize.height && it.height == standardSize.width)
+        val baseWidth = (it.width - standardSize.width)
+        val baseHeight = (it.height - standardSize.height)
+        val baseWidthInv = (it.height - standardSize.width)
+        val baseHeightInv = (it.width - standardSize.height)
+
+        ((baseWidth >= 0 && baseWidth % 2 == 0 && baseHeight >= 0 && baseHeight % 2 == 0) ||
+            (baseWidthInv >= 0 && baseWidthInv % 2 == 0 && baseHeightInv >= 0 && baseHeightInv % 2 == 0)) &&
+            listOf(::isExpert, ::isMaster, ::isLegend, ::isIntermediate, ::isBeginner)
+                .any { func -> func.invoke(it) }
+                .not()
     }
 
     private fun List<Stats>.filterNotStandard(standardSize: Minefield) = filterNot {

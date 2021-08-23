@@ -7,6 +7,11 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlin.random.Random
 
 interface IMinefieldRepository {
+    fun baseStandardSize(
+        dimensionRepository: IDimensionRepository,
+        preferencesRepository: IPreferencesRepository,
+    ): Minefield
+
     fun fromDifficulty(
         difficulty: Difficulty,
         dimensionRepository: IDimensionRepository,
@@ -17,6 +22,31 @@ interface IMinefieldRepository {
 }
 
 class MinefieldRepository : IMinefieldRepository {
+    override fun baseStandardSize(
+        dimensionRepository: IDimensionRepository,
+        preferencesRepository: IPreferencesRepository,
+    ): Minefield {
+        val fieldSize = dimensionRepository.defaultAreaSize()
+        val verticalGap = if (dimensionRepository.navigationBarHeight() > 0)
+            VERTICAL_STANDARD_GAP else VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM
+
+        val progressiveMines = preferencesRepository.getProgressiveValue()
+
+        val display = dimensionRepository.displaySize()
+        val width = display.width
+        val height = display.height
+
+        val calculatedWidth = ((width / fieldSize).toInt() - HORIZONTAL_STANDARD_GAP)
+        val calculatedHeight = ((height / fieldSize).toInt() - verticalGap)
+        val fitWidth = calculatedWidth.coerceAtLeast(MIN_STANDARD_WIDTH)
+        val fitHeight = calculatedHeight.coerceAtLeast(MIN_STANDARD_HEIGHT)
+        val fieldArea = fitWidth * fitHeight
+        val fitMines =
+            ((fieldArea * CUSTOM_LEVEL_MINE_RATIO).toInt() + progressiveMines)
+                .coerceAtMost((fieldArea * MAX_LEVEL_MINE_RATIO).toInt())
+        return Minefield(fitWidth, fitHeight, fitMines)
+    }
+
     override fun fromDifficulty(
         difficulty: Difficulty,
         dimensionRepository: IDimensionRepository,
@@ -39,26 +69,22 @@ class MinefieldRepository : IMinefieldRepository {
         dimensionRepository: IDimensionRepository,
         preferencesRepository: IPreferencesRepository,
     ): Minefield {
-        val fieldSize = dimensionRepository.defaultAreaSize()
-        val verticalGap = if (dimensionRepository.navigationBarHeight() > 0)
-            VERTICAL_STANDARD_GAP else VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM
+        var result: Minefield = baseStandardSize(dimensionRepository, preferencesRepository)
+        var resultWidth = result.width
+        var resultHeight = result.height
 
-        val progressiveMines = preferencesRepository.getProgressiveValue()
+        do {
+            val percentage = (result.mines.toDouble() / (resultWidth * resultHeight) * 100.0).toInt()
+            result = Minefield(resultWidth, resultHeight, result.mines)
+            if (percentage <= 22) {
+                break
+            } else {
+                resultWidth += 2
+                resultHeight += 2
+            }
+        } while (percentage > 22)
 
-        val display = dimensionRepository.displaySize()
-        val width = display.width
-        val height = display.height
-
-        val calculatedWidth = ((width / fieldSize).toInt() - HORIZONTAL_STANDARD_GAP)
-        val calculatedHeight = ((height / fieldSize).toInt() - verticalGap)
-        val finalWidth = calculatedWidth.coerceAtLeast(MIN_STANDARD_WIDTH)
-        val finalHeight = calculatedHeight.coerceAtLeast(MIN_STANDARD_HEIGHT)
-        val fieldArea = finalWidth * finalHeight
-        val finalMines =
-            ((fieldArea * CUSTOM_LEVEL_MINE_RATIO).toInt() + progressiveMines)
-                .coerceAtMost((fieldArea * MAX_LEVEL_MINE_RATIO).toInt())
-
-        return Minefield(finalWidth, finalHeight, finalMines)
+        return result
     }
 
     override fun randomSeed(): Long = Random.nextLong()
@@ -67,7 +93,7 @@ class MinefieldRepository : IMinefieldRepository {
         private val beginnerMinefield = Minefield(9, 9, 10)
         private val intermediateMinefield = Minefield(16, 16, 40)
         private val expertMinefield = Minefield(24, 24, 99)
-        private val masterMinefield = Minefield(50, 50, 300)
+        private val masterMinefield = Minefield(50, 50, 400)
         private val legendMinefield = Minefield(100, 100, 2000)
 
         private const val CUSTOM_LEVEL_MINE_RATIO = 0.2
