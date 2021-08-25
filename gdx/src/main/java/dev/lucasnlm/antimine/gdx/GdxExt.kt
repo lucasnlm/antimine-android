@@ -75,11 +75,11 @@ fun Int.toGdxColor(alpha: Float? = 1.0f): Color {
 fun Int.toOppositeMax(alpha: Float? = 1.0f): Color {
     val mid = (
         android.graphics.Color.red(this) +
-        android.graphics.Color.green(this) +
-        android.graphics.Color.blue(this)
-    ) / 3
+            android.graphics.Color.green(this) +
+            android.graphics.Color.blue(this)
+        )
 
-    val value = if (mid > 160) {
+    val value = if (mid > (160 * 3)) {
         0.15f
     } else {
         1.0f
