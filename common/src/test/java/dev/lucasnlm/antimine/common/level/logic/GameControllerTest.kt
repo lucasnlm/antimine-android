@@ -8,8 +8,6 @@ import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.single
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -519,19 +517,15 @@ class GameControllerTest {
         return this.field().first { it.id == index }
     }
 
-    private fun TestCoroutineScope.fakeSingleClick(gameController: GameController, index: Int) {
-        launch {
-            gameController.singleClick(index).single()
-        }
+    private suspend fun fakeSingleClick(gameController: GameController, index: Int) {
+        gameController.singleClick(index).single()
     }
 
-    private fun TestCoroutineScope.fakeLongPress(gameController: GameController, index: Int) {
-        launch {
-            gameController.longPress(index).single()
-        }
+    private suspend fun fakeLongPress(gameController: GameController, index: Int) {
+        gameController.longPress(index).single()
     }
 
-    private suspend fun TestCoroutineScope.fakeDoubleClick(gameController: GameController, index: Int) {
+    private suspend fun fakeDoubleClick(gameController: GameController, index: Int) {
         gameController.doubleClick(index).single()
     }
 }
