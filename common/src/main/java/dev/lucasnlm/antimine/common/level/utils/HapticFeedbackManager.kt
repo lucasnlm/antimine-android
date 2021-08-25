@@ -21,7 +21,6 @@ class HapticFeedbackManager(
         if (Build.VERSION.SDK_INT >= 31) {
             val vibratorManager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
             vibratorManager.defaultVibrator
-
         } else {
             @Suppress("DEPRECATION")
             context.getSystemService(VIBRATOR_SERVICE) as Vibrator
