@@ -5,6 +5,7 @@ import android.content.Context.VIBRATOR_SERVICE
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.os.VibratorManager
 
 interface IHapticFeedbackManager {
     fun longPressFeedback()
@@ -16,7 +17,15 @@ class HapticFeedbackManager(
     context: Context,
 ) : IHapticFeedbackManager {
 
-    private val vibrator by lazy { context.getSystemService(VIBRATOR_SERVICE) as Vibrator }
+    private val vibrator by lazy {
+        if (Build.VERSION.SDK_INT >= 31) {
+            val vibratorManager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+            vibratorManager.defaultVibrator
+        } else {
+            @Suppress("DEPRECATION")
+            context.getSystemService(VIBRATOR_SERVICE) as Vibrator
+        }
+    }
 
     override fun longPressFeedback() {
         vibrateTo(70, 240)
