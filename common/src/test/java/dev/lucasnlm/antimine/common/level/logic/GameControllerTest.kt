@@ -20,9 +20,9 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class GameControllerTest {
-    private fun withGameController(
+    private suspend fun withGameController(
         clickOnCreate: Boolean = true,
-        block: (GameController) -> Unit
+        block: suspend (GameController) -> Unit
     ) {
         val minefield = Minefield(10, 10, 20)
         val gameController = GameController(minefield, 200L)
@@ -58,25 +58,6 @@ class GameControllerTest {
 
                 assertEquals(markedMines, controller.rightFlags())
             }
-        }
-    }
-
-    @Test
-    fun testGetScoreWithQuestion() = runBlockingTest {
-        withGameController { controller ->
-            assertEquals(Score(0, 20, 100), controller.getScore())
-            controller.useQuestionMark(true)
-
-            controller
-                .mines()
-                .take(5)
-                .forEach {
-                    // Put Question Mark
-                    fakeLongPress(controller, it.id)
-                    fakeLongPress(controller, it.id)
-                }
-
-            assertEquals(Score(0, 20, 100), controller.getScore())
         }
     }
 
@@ -490,16 +471,17 @@ class GameControllerTest {
                 }
 
                 mines().forEach { fakeSingleClick(controller, it.id) }
-
                 mines().forEach { assertTrue(it.mark.isFlag()) }
 
-                fakeDoubleClick(controller, 14)
+                fakeSingleClick(controller, 14)
+
                 field().filterNeighborsOf(at(14)).forEach {
-                    if (it.hasMine) {
-                        assertTrue(it.isCovered)
+                    val message = if (it.hasMine) {
+                        "${it.id} has mine, so it must be covered after open multiple"
                     } else {
-                        assertFalse(it.isCovered)
+                        "${it.id} doesn\'t have mine, so it must be uncovered after open multiple"
                     }
+                    assertTrue(message, it.hasMine == it.isCovered)
                 }
             }
         }
@@ -549,9 +531,7 @@ class GameControllerTest {
         }
     }
 
-    private fun TestCoroutineScope.fakeDoubleClick(gameController: GameController, index: Int) {
-        launch {
-            gameController.doubleClick(index).single()
-        }
+    private suspend fun TestCoroutineScope.fakeDoubleClick(gameController: GameController, index: Int) {
+        gameController.doubleClick(index).single()
     }
 }

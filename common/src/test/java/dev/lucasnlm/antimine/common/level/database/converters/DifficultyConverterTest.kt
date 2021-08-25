@@ -18,7 +18,7 @@ class DifficultyConverterTest {
     @Test(expected = IllegalArgumentException::class)
     fun toDifficultyInvalid() {
         val converter = DifficultyConverter()
-        converter.toDifficulty(6)
+        converter.toDifficulty(100)
     }
 
     @Test

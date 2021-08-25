@@ -41,7 +41,7 @@ class GameController {
         minefield: Minefield,
         seed: Long,
         saveId: Int? = null,
-        onCreateUnsafeLevel: () -> Unit,
+        onCreateUnsafeLevel: (() -> Unit)? = null,
     ) {
         this.minefieldCreator = MinefieldCreator(minefield, Random(seed))
         this.minefield = minefield
@@ -162,7 +162,7 @@ class GameController {
 
     fun singleClick(index: Int) = flow {
         getArea(index)?.let { target ->
-            val action = if (target.isCovered) gameControl.onCovered.singleClick else gameControl.onOpen.singleClick
+            val action = if (target.isCovered) gameControl.onCovered.singleClick else gameControl.onUncovered.singleClick
             action?.let {
                 handleAction(target, action)
                 emit(action)
@@ -172,7 +172,7 @@ class GameController {
 
     fun doubleClick(index: Int) = flow {
         getArea(index)?.let { target ->
-            val action = if (target.isCovered) gameControl.onCovered.doubleClick else gameControl.onOpen.doubleClick
+            val action = if (target.isCovered) gameControl.onCovered.doubleClick else gameControl.onUncovered.doubleClick
             action?.let {
                 handleAction(target, action)
                 emit(action)
@@ -183,7 +183,7 @@ class GameController {
     fun longPress(index: Int) = flow {
         getArea(index)?.let { target ->
             if (target.isCovered || target.minesAround != 0) {
-                val action = if (target.isCovered) gameControl.onCovered.longPress else gameControl.onOpen.longPress
+                val action = if (target.isCovered) gameControl.onCovered.longPress else gameControl.onUncovered.longPress
                 action?.let {
                     handleAction(target, action)
                     emit(action)

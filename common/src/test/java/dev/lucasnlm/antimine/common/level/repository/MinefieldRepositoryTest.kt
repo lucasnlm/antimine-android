@@ -14,7 +14,8 @@ class MinefieldRepositoryTest {
     private val beginnerMinefield = Minefield(9, 9, 10)
     private val intermediateMinefield = Minefield(16, 16, 40)
     private val expertMinefield = Minefield(24, 24, 99)
-    private val masterMinefield = Minefield(50, 50, 200)
+    private val masterMinefield = Minefield(50, 50, 400)
+    private val legendMinefield = Minefield(100, 100, 2000)
 
     @Test
     fun testStandardSizeCalcWithoutNavigationBar() {
@@ -101,7 +102,7 @@ class MinefieldRepositoryTest {
             preferencesRepository
         )
 
-        assertEquals(Minefield(99, 97, 4321), minefield)
+        assertEquals(Minefield(139, 137, 4321), minefield)
     }
 
     @Test
@@ -133,7 +134,7 @@ class MinefieldRepositoryTest {
     }
 
     @Test
-    fun testExpertMinefieldMinefield() {
+    fun testExpertMinefield() {
         val minefieldRepository = MinefieldRepository()
         val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true)
         val dimensionRepository = mockk<IDimensionRepository>(relaxed = true)
@@ -147,7 +148,7 @@ class MinefieldRepositoryTest {
     }
 
     @Test
-    fun testMasterMinefieldMinefield() {
+    fun testMasterMinefield() {
         val minefieldRepository = MinefieldRepository()
         val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true)
         val dimensionRepository = mockk<IDimensionRepository>(relaxed = true)
@@ -161,7 +162,21 @@ class MinefieldRepositoryTest {
     }
 
     @Test
-    fun testCustomMinefieldMinefield() {
+    fun testLegendMinefield() {
+        val minefieldRepository = MinefieldRepository()
+        val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true)
+        val dimensionRepository = mockk<IDimensionRepository>(relaxed = true)
+
+        val minefield = minefieldRepository.fromDifficulty(
+            Difficulty.Legend,
+            dimensionRepository,
+            preferencesRepository
+        )
+        assertEquals(legendMinefield, minefield)
+    }
+
+    @Test
+    fun testCustomMinefield() {
         val minefieldRepository = MinefieldRepository()
         val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true) {
             every { customGameMode() } returns Minefield(25, 20, 12)

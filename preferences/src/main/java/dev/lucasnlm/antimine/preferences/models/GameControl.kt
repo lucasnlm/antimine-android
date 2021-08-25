@@ -39,7 +39,7 @@ enum class ControlStyle {
 sealed class GameControl(
     val id: ControlStyle,
     val onCovered: Actions,
-    val onOpen: Actions,
+    val onUncovered: Actions,
 ) {
     object Standard : GameControl(
         id = ControlStyle.Standard,
@@ -48,7 +48,7 @@ sealed class GameControl(
             longPress = ActionResponse.SwitchMark,
             doubleClick = null,
         ),
-        onOpen = Actions(
+        onUncovered = Actions(
             singleClick = ActionResponse.HighlightNeighbors,
             longPress = ActionResponse.OpenNeighbors,
             doubleClick = null,
@@ -62,7 +62,7 @@ sealed class GameControl(
             longPress = ActionResponse.OpenTile,
             doubleClick = null,
         ),
-        onOpen = Actions(
+        onUncovered = Actions(
             singleClick = ActionResponse.OpenNeighbors,
             longPress = ActionResponse.HighlightNeighbors,
             doubleClick = null,
@@ -76,7 +76,7 @@ sealed class GameControl(
             longPress = null,
             doubleClick = ActionResponse.OpenTile,
         ),
-        onOpen = Actions(
+        onUncovered = Actions(
             singleClick = ActionResponse.OpenNeighbors,
             longPress = null,
             doubleClick = ActionResponse.HighlightNeighbors,
@@ -90,7 +90,7 @@ sealed class GameControl(
             longPress = null,
             doubleClick = ActionResponse.SwitchMark,
         ),
-        onOpen = Actions(
+        onUncovered = Actions(
             singleClick = ActionResponse.OpenNeighbors,
             longPress = null,
             doubleClick = ActionResponse.HighlightNeighbors,
@@ -104,7 +104,7 @@ sealed class GameControl(
             longPress = null,
             doubleClick = null,
         ),
-        onOpen = Actions(
+        onUncovered = Actions(
             singleClick = ActionResponse.OpenNeighbors,
             longPress = null,
             doubleClick = null,
