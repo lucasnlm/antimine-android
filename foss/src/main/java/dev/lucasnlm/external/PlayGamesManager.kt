@@ -7,11 +7,11 @@ import android.content.Intent
 class PlayGamesManager(
     context: Context,
 ) : IPlayGamesManager {
-    override fun playerId(): String? = null
+    override suspend fun playerId(): String? = null
 
     override fun hasGooglePlayGames(): Boolean = false
 
-    override fun silentLogin(): Boolean {
+    override suspend fun silentLogin(): Boolean {
         // F-droid build doesn't have Google Play Games
         return false
     }

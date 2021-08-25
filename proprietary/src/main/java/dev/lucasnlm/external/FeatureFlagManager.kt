@@ -1,9 +1,9 @@
 package dev.lucasnlm.external
 
 import android.util.Log
-import com.google.android.gms.tasks.Tasks
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class FeatureFlagManager : IFeatureFlagManager() {
@@ -118,7 +118,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         if (!BuildConfig.DEBUG) {
             withContext(Dispatchers.IO) {
                 try {
-                    Tasks.await(remoteConfig.fetchAndActivate())
+                    remoteConfig.fetchAndActivate().await()
                 } catch (e: Exception) {
                     Log.e(TAG, "Fail to fetch flags", e)
                 }
