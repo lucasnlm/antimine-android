@@ -12,10 +12,10 @@ import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.control.ControlActivity
-import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.history.HistoryActivity
 import dev.lucasnlm.antimine.language.LanguageSelectorActivity
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent

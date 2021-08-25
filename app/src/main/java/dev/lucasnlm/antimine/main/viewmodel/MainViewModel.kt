@@ -13,9 +13,9 @@ import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
+import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.external.ICloudStorageManager
 import dev.lucasnlm.external.model.CloudSave
-import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import kotlinx.coroutines.launch
 
 class MainViewModel(

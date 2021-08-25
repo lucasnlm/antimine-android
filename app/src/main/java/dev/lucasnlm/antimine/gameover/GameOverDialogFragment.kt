@@ -25,11 +25,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
-import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.level.view.NewGameFragment
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
