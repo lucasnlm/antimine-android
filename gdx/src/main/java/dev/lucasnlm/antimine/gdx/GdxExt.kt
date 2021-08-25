@@ -7,13 +7,6 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.Actor
-import dev.lucasnlm.antimine.gdx.models.GameTextures
-
-fun Batch.scope(block: (Batch, GameTextures) -> Unit) {
-    GdxLocal.gameTextures?.let {
-        block(this, it)
-    }
-}
 
 fun Batch.drawTexture(
     texture: Texture,
@@ -80,11 +73,11 @@ fun Int.toGdxColor(alpha: Float? = 1.0f): Color {
 }
 
 fun Int.toOppositeMax(alpha: Float? = 1.0f): Color {
-    val mid = sequenceOf(
-        android.graphics.Color.red(this),
-        android.graphics.Color.green(this),
-        android.graphics.Color.blue(this),
-    ).sum() / 3
+    val mid = (
+        android.graphics.Color.red(this) +
+        android.graphics.Color.green(this) +
+        android.graphics.Color.blue(this)
+    ) / 3
 
     val value = if (mid > 160) {
         0.15f
