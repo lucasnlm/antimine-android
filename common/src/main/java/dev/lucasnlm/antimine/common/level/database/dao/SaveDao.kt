@@ -12,9 +12,6 @@ interface SaveDao {
     @Query("SELECT * FROM new_save")
     suspend fun getAll(): List<Save>
 
-    @Query("SELECT * FROM new_save WHERE uid IN (:gameIds)")
-    suspend fun loadAllByIds(gameIds: IntArray): List<Save>
-
     @Query("SELECT * FROM new_save WHERE uid = :gameId LIMIT 1")
     suspend fun loadFromId(gameId: Int): Save
 

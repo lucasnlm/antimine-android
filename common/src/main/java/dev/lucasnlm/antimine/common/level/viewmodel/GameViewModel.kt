@@ -339,7 +339,7 @@ open class GameViewModel(
         }
     }
 
-    suspend fun onContinueFromGameOver() {
+    private suspend fun onContinueFromGameOver() {
         if (initialized) {
             gameController.increaseErrorTolerance()
             statsRepository.deleteLastStats()
@@ -574,7 +574,7 @@ open class GameViewModel(
         }
     }
 
-    fun getScore() = gameController.getScore()
+    private fun getScore() = gameController.getScore()
 
     private suspend fun onGameOver(useGameOverFeedback: Boolean) {
         stopClock()
