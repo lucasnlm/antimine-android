@@ -53,7 +53,7 @@ object Themes {
         isPaid = false,
     )
 
-    fun amoledTheme() = AppTheme(
+    private fun amoledTheme() = AppTheme(
         id = 2L,
         theme = R.style.CustomAmoledTheme,
         palette = AreaPalette(

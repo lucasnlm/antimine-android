@@ -20,8 +20,10 @@ import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.view.GdxLevelFragment
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.control.ControlActivity
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Analytics
@@ -29,8 +31,6 @@ import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
-import dev.lucasnlm.antimine.common.level.view.GdxLevelFragment
-import dev.lucasnlm.antimine.control.ControlActivity
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository

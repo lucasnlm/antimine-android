@@ -29,15 +29,6 @@ val areaFullForm = AreaForm(
     bottomRight = true,
 )
 
-fun allAreaForms() = (0..15).map {
-    AreaForm(
-        top = it and 0b1000 != 0x00,
-        bottom = it and 0b0100 != 0x00,
-        left = it and 0b0010 != 0x00,
-        right = it and 0b0001 != 0x00,
-    )
-}.toList()
-
 object FormNames {
     const val core = "core"
     const val bottom = "b"

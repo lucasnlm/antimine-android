@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.history.viewmodel
 
-import android.content.Context
+import android.app.Application
 import android.content.Intent
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
@@ -8,7 +8,7 @@ import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 
 class HistoryViewModel(
-    private val context: Context,
+    private val application: Application,
     private val savesRepository: ISavesRepository,
 ) : IntentViewModel<HistoryEvent, HistoryState>() {
 
@@ -41,6 +41,7 @@ class HistoryViewModel(
     }
 
     private fun replayGame(uid: Int) {
+        val context = application.applicationContext
         val intent = Intent(context, GameActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
             putExtra(GameActivity.RETRY_GAME, uid)
@@ -49,6 +50,7 @@ class HistoryViewModel(
     }
 
     private fun loadGame(uid: Int) {
+        val context = application.applicationContext
         val intent = Intent(context, GameActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
             putExtra(GameActivity.START_GAME, uid)

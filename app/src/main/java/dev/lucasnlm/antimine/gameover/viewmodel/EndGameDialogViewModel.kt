@@ -1,21 +1,21 @@
 package dev.lucasnlm.antimine.gameover.viewmodel
 
-import android.content.Context
+import android.app.Application
 import androidx.annotation.DrawableRes
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.core.updateLanguage
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.core.updateLanguage
 import kotlinx.coroutines.flow.flow
 
 class EndGameDialogViewModel(
-    private val context: Context,
+    private val application: Application,
     preferencesRepository: IPreferencesRepository,
 ) : IntentViewModel<EndGameDialogEvent, EndGameDialogState>() {
     init {
         preferencesRepository.getPreferredLocale()?.let {
-            context.updateLanguage(it)
+            application.applicationContext.updateLanguage(it)
         }
     }
 
@@ -64,8 +64,9 @@ class EndGameDialogViewModel(
         R.drawable.emoji_sad_but_relieved_face,
     ).safeRandomEmoji(except)
 
-    private fun messageTo(minesCount: Int, time: Long, gameResult: GameResult): String =
-        if (time != 0L) {
+    private fun messageTo(minesCount: Int, time: Long, gameResult: GameResult): String {
+        val context = application.applicationContext
+        return if (time != 0L) {
             when (gameResult) {
                 GameResult.Victory -> context.getString(R.string.generic_win, minesCount, time)
                 GameResult.GameOver -> context.getString(R.string.generic_game_over)
@@ -74,6 +75,7 @@ class EndGameDialogViewModel(
         } else {
             context.getString(R.string.generic_game_over)
         }
+    }
 
     override fun initialState() = EndGameDialogState(
         R.drawable.emoji_triangular_flag,
@@ -86,6 +88,7 @@ class EndGameDialogViewModel(
     )
 
     override suspend fun mapEventToState(event: EndGameDialogEvent) = flow {
+        val context = application.applicationContext
         if (event is EndGameDialogEvent.BuildCustomEndGame) {
             val state = when (event.gameResult) {
                 GameResult.Victory -> {

@@ -11,10 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.BuildConfig
-import dev.lucasnlm.antimine.gdx.controller.CameraController
 import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.PixelPerfectViewport
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
+import dev.lucasnlm.antimine.gdx.controller.CameraController
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
 import dev.lucasnlm.antimine.gdx.models.RenderSettings

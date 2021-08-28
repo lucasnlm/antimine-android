@@ -2,7 +2,6 @@ package dev.lucasnlm.external
 
 import android.text.format.DateUtils
 import android.util.Log
-import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -10,7 +9,7 @@ import dev.lucasnlm.external.model.CloudSave
 import dev.lucasnlm.external.model.cloudSaveOf
 import dev.lucasnlm.external.model.toHashMap
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class CloudStorageManager : ICloudStorageManager {
@@ -20,23 +19,21 @@ class CloudStorageManager : ICloudStorageManager {
     override fun uploadSave(cloudSave: CloudSave) {
         FirebaseFirestore.setLoggingEnabled(BuildConfig.DEBUG)
         val data = cloudSave.toHashMap()
-        Tasks.await(
-            db.collection(SAVES)
-                .document(cloudSave.playId)
-                .set(data)
-                .addOnCompleteListener {
-                    Log.v(TAG, "Cloud storage complete")
-                }
-                .addOnCanceledListener {
-                    Log.v(TAG, "Cloud storage canceled")
-                }
-                .addOnFailureListener {
-                    Log.e(TAG, "Cloud storage error", it)
-                }
-                .addOnSuccessListener {
-                    Log.v(TAG, "Cloud storage success")
-                }
-        )
+        db.collection(SAVES)
+            .document(cloudSave.playId)
+            .set(data)
+            .addOnCompleteListener {
+                Log.v(TAG, "Cloud storage complete")
+            }
+            .addOnCanceledListener {
+                Log.v(TAG, "Cloud storage canceled")
+            }
+            .addOnFailureListener {
+                Log.e(TAG, "Cloud storage error", it)
+            }
+            .addOnSuccessListener {
+                Log.v(TAG, "Cloud storage success")
+            }
     }
 
     @Suppress("BlockingMethodInNonBlockingContext")
@@ -44,23 +41,15 @@ class CloudStorageManager : ICloudStorageManager {
         return if (System.currentTimeMillis() - lastSync > DateUtils.MINUTE_IN_MILLIS) {
             lastSync = System.currentTimeMillis()
 
-            runBlocking {
-                try {
-                    withContext(Dispatchers.IO) {
-                        val result = Tasks.await(
-                            db.collection(SAVES)
-                                .document(playId)
-                                .get()
-                        )
-
-                        result.data?.let {
-                            cloudSaveOf(playId, it.toMap())
-                        }
+            try {
+                withContext(Dispatchers.IO) {
+                    db.collection(SAVES).document(playId).get().await().data?.let {
+                        cloudSaveOf(playId, it.toMap())
                     }
-                } catch (e: Exception) {
-                    Log.e(TAG, "Fail to load save on cloud", e)
-                    null
                 }
+            } catch (e: Exception) {
+                Log.e(TAG, "Fail to load save on cloud", e)
+                null
             }
         } else {
             null

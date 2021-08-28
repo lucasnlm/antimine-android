@@ -11,7 +11,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.games.Games
-import com.google.android.gms.tasks.Tasks
+import kotlinx.coroutines.tasks.await
 
 class PlayGamesManager(
     private val context: Context,
@@ -27,10 +27,10 @@ class PlayGamesManager(
         }
     }
 
-    override fun playerId(): String? {
+    override suspend fun playerId(): String? {
         return account?.let {
             try {
-                Tasks.await(Games.getPlayersClient(context, it).currentPlayerId)
+                Games.getPlayersClient(context, it).currentPlayerId.await()
             } catch (exception: Exception) {
                 exception.message?.let { message ->
                     crashReporter.sendError(message)
@@ -53,12 +53,12 @@ class PlayGamesManager(
 
     override fun hasGooglePlayGames(): Boolean = true
 
-    override fun silentLogin(): Boolean {
+    override suspend fun silentLogin(): Boolean {
         val signInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build()
         val lastAccount: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(context)
         return try {
             val client = GoogleSignIn.getClient(context, signInOptions)
-            account = lastAccount ?: Tasks.await(client.silentSignIn())
+            account = lastAccount ?: client.silentSignIn().await()
             account != null
         } catch (e: Exception) {
             account = null
