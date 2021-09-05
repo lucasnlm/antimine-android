@@ -6,7 +6,7 @@ Bạn có thể quét sạch một bãi mìn không? Đi nào!
 MỤC TIÊU
 Giống như Minesweeper. Bạn thắng khi bạn đã gắn cờ mọi quả mìn trong bãi mìn. Hãy cẩn thận đừng kích hoạt quả nào!
 
-NO GUESSING
+KHÔNG ĐOÁN
 Trò chơi này có một thuật toán luôn luôn tạo những bãi mìn có thể giải. Bạn sẽ không phải đoán quả mìn cuối cùng ở đâu!
 
 CẤP ĐỘ CHƠI

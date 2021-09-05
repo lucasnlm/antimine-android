@@ -6,7 +6,7 @@ Bir mayın tarlasını temizlemeyi başarabilir misiniz? Hadi bakalım!
 AMAÇ
 Tıpkı Mayın Tarlası gibi. Mayın Tarlasındaki her bir mayını bayrakladığınızda oyunu kazanırsınız. Birisini tetiklememeye dikkat edin!
 
-NO GUESSING
+TAHMİN ETMEK YOK
 Bu oyun, daima çözülebilir mayın tarlaları yaratan bir algoritmaya sahiptir. Son mayının nerede bulunduğunu tahmin etmek zorunda değilsiniz!
 
 OYUN SEVİYELERİ

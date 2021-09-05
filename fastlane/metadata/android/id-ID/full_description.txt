@@ -6,7 +6,7 @@ Apakah anda bisa membersihkan ladang ranjau? Ayoo!
 OBJEKTIF
 Ini seperti Minesweeper. Anda memenangkan permainan ketika anda menandai semua ranjau yang ada di ladang. Berhati-hatilah untuk tidak memicu salah satu ranjau!
 
-NO GUESSING
+JANGAN MENEBAK SEMBARANGAN
 Game ini mempunyai algoritma yang selalu membuat ladang ranjau dapat diselesaikan. Anda tidak perlu menebak dimana ranjau terakhir berada!
 
 TINGKAT GAME

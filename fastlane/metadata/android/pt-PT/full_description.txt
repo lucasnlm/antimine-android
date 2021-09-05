@@ -6,7 +6,7 @@ Consegues limpar um campo minado? Vamos lá!
 OBJETIVO
 É como o Minesweeper. Vences o jogo quando sinalizas com uma bandeira todas as minas no campo minado. Cuidado para não ativares nenhuma!
 
-NO GUESSING
+NÃO ADIVINHES
 Esse jogo tem um algoritmo que cria sempre campos de minas que podem ser sempre resolvidos. Não precisarás de adivinhar onde está a última mina!
 
 NÍVEIS DO JOGO

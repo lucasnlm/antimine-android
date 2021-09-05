@@ -67,7 +67,7 @@
     <string name="double_click">Çift Tıklama</string>
     <string name="long_press">Uzun Basış</string>
     <string name="control_description">%FAALİYET ve %TEPKİME</string>
-    <string name="touch_sensibility">Dokunmatik hassasiyeti</string>
+    <string name="touch_sensibility">Dokunma hassasiyeti</string>
     <string name="open_tile">Aç</string>
     <string name="flag_tile">Bayrak</string>
     <string name="retry">Yeniden dene</string>
@@ -119,6 +119,6 @@
     <string name="open_tutorial">Öğreticiyi aç</string>
     <string name="click_numbers">Sayılara dokunmaya izin ver</string>
     <string name="tap_to_customize">Özelleştirmek için tıkla</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
-    <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
+    <string name="toggle_button_top">Üst çubukta \"Geçiş Düğmesini\" göster</string>
+    <string name="no_guess_fail_warning">Mevcut mayın tarlası tahmin edilemez olmayabilir!</string>
 </resources>

@@ -115,7 +115,7 @@
     <string name="app_description">กู้กับระเบิดที่ซ่อนอยู่จากสนาม</string>
     <string name="app_name">Antimine</string>
     <string name="do_you_know_how_to_play">Do you know how to play minesweeper?</string>
-    <string name="close">Close</string>
+    <string name="close">ปิด</string>
     <string name="open_tutorial">Open Tutorial</string>
     <string name="click_numbers">Allow tap on numbers</string>
     <string name="tap_to_customize">Tap to customize</string>
