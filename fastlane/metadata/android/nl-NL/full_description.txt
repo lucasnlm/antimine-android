@@ -6,7 +6,7 @@ Kan je een mijnenveld opruimen? Aan de slag!
 DOEL
 Het is zoals Mijnenveger. Je wint het spel wanneer je elke mijn in het mijnenveld hebt gemarkeerd. Pas op dat je er geen activeert!
 
-NO GUESSING
+NIET RADEN
 Dit spel heeft een algoritme dat altijd oplosbare mijnenvelden creëert. Dus je hoeft niet te raden waar de laatste mijn is!
 
 SPELNIVEAUS

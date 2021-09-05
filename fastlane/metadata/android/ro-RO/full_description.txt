@@ -1,33 +1,33 @@
-Testează-ți raționamentul pe un joc de puzzle provocator, unde trebuie să rezolvi un câmp minat fără să explodezi nicio mină.
+Testează-ți puterea de gândire într-un joc de puzzle provocator în care trebuie să rezolvi un câmp de mine fără să explodezi vreo mină.
 Aceasta este o versiune minimalistă și modernă a clasicului joc Minesweeper.
 
-Ești în stare să rezolvi un câmp minat? Să începem!
+Sunteți capabili să curățați un câmp de mine? Să începem!
 
 OBIECTIVE
-Ca și în Minesweeper. Câștigi jocul când ai marcat fiecare mină din câmp. Fii atent să nu declanșezi una!
+Este ca Minesweeper. Câștigi jocul atunci când ai marcat toate minele din câmp. Ai grijă să nu declanșezi una!
 
-NO GUESSING
-Jocul are un algoritm care crează numai câmpuri minate rezolvabile. Nu va trebui să ghicești unde este ultima mină!
+FĂRĂ GHICIT
+Acest joc are un algoritm care creează întotdeauna câmpuri de mine care pot fi rezolvate. Nu va trebui să ghicești unde este ultima mină!
 
 NIVELURILE JOCULUI
-La fel ca Minesweeper, acest joc are diferite nivele: începător, intermediar și expert. Dar are și un mod progresiv care devine dificil atunci când câștigi.
+La fel ca Minesweeper, acest joc are diferite nivele: începător, intermediar și expert. Dar are și un mod progresiv unic, care devine din ce în ce mai greu atunci când câștigi.
 
 NIVEL PERSONALIZAT
-Dacă modurile standard nu sunt suficiente, îți poți crea propria dificultate!
+Dacă modurile standard nu sunt suficiente, îți poți crea propriul nivel de dificultate!
 
 INTERFAȚĂ
-Antimine are mai mult de 15 interfețe ( inclusiv luminat, întuneric, și AMOLED). Iar în curând se vor adăuga mai multe!
+Antimine are mai mult de 15 teme (inclusiv aprins, întunecat și AMOLED). Iar în curând se vor adăuga mai multe!
 
 MINIMALIST
-Un aspect curat și minimalist iar aplicația are o mărime mică ( mai puțin de 9MB).
+Un aspect curat: un aspect vizual minimalist și, de asemenea, o dimensiune redusă a aplicației (mai puțin de 9 MB).
 
 TUTORIAL
-Nu ai încercat niciodată să joci Minesweeper? Nici o problemă, poți să încerci tutorialul și să activezi Ajutor în setări.
+Nu știi cum se joacă Minesweeper? Nicio problemă, puteți juca nivelul nostru de tutorial și activați Sfaturi în setări.
 
 STATISTICI
 Verifică-ți rezultate și progresul.
 
-ASISTENȚĂ JOC
+ASISTENT DE JOC
 Jocul va marca automat pătratele pe care le-ați izolat. 
 
 PERSONALIZARE
@@ -37,8 +37,8 @@ Exemplu: Ajutor, animații, feedback haptic, semn de întrebare.
 CONTROALE
 Acest joc suportă 4 scheme diferite de controale. Exemplu: marcaj folosind apăsare scurtă sau apăsare lungă.
 
-ÎNDEPLINIRI ȘI REZULTATE TOP 
-Ai opt îndepliniri pentru a le debloca și diferite rezultate top pe care le poți împărtășii cu prieteni.
+REALIZĂRI ȘI CLASAMENT 
+Ai opt realizări de deblocat și diferite clasamente pe care să le împarți cu prietenii tăi.
 
 ONLINE SAU OFFLINE
 Nu trebuie să fii online pentru a juca jocul acesta!
@@ -46,4 +46,4 @@ Nu trebuie să fii online pentru a juca jocul acesta!
 SALVARE AUTOMATĂ
 Poți începe un joc și îl poți continua mai târziu! Se va salva automat jocul.
 
-Bucurați-vă de el.
+Bucurați-vă.

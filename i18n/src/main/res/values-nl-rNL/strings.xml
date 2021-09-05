@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="nl">
     <string name="tutorial">Tutorial</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_basic">De regels van het spel zijn eenvoudig, het aantal op een vierkant toont het aantal mijnen dat er naast ligt en je moet alle mijnen markeren met een vlag.</string>
     <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
     <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
     <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>

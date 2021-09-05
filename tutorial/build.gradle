@@ -64,12 +64,12 @@ dependencies {
     testImplementation 'io.insert-koin:koin-test:3.1.2'
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
 
     // Kotlin Lib
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.21'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30'
 
     // Unit Tests
     testImplementation 'junit:junit:4.13.2'

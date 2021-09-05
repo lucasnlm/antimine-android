@@ -15,8 +15,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1400001
-        versionName '14.0.0'
+        versionCode 1400011
+        versionName '14.0.1'
         minSdkVersion 21
         targetSdkVersion 31
         multiDexEnabled true
@@ -153,8 +153,8 @@ dependencies {
     testImplementation 'io.insert-koin:koin-test:3.1.2'
 
     // Kotlin
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.21'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
 
     // Tests
