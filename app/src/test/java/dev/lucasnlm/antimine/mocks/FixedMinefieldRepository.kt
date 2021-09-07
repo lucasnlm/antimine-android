@@ -9,9 +9,9 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 class FixedMinefieldRepository : IMinefieldRepository {
     override fun baseStandardSize(
         dimensionRepository: IDimensionRepository,
-        preferencesRepository: IPreferencesRepository
+        progressiveMines: Int,
     ): Minefield =
-        Minefield(9, 9, 9)
+        Minefield(9, 9, 9 + progressiveMines)
 
     override fun fromDifficulty(
         difficulty: Difficulty,
