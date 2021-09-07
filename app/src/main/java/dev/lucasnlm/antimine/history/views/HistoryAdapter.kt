@@ -37,6 +37,7 @@ class HistoryAdapter(
                 Difficulty.Master -> R.string.master
                 Difficulty.Legend -> R.string.legend
                 Difficulty.Custom -> R.string.custom
+                Difficulty.FixedSize -> R.string.fixed_size
             }
         )
 

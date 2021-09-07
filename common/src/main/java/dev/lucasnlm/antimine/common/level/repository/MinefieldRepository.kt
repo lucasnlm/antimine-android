@@ -9,7 +9,7 @@ import kotlin.random.Random
 interface IMinefieldRepository {
     fun baseStandardSize(
         dimensionRepository: IDimensionRepository,
-        preferencesRepository: IPreferencesRepository,
+        progressiveMines: Int,
     ): Minefield
 
     fun fromDifficulty(
@@ -24,13 +24,11 @@ interface IMinefieldRepository {
 class MinefieldRepository : IMinefieldRepository {
     override fun baseStandardSize(
         dimensionRepository: IDimensionRepository,
-        preferencesRepository: IPreferencesRepository,
+        progressiveMines: Int,
     ): Minefield {
         val fieldSize = dimensionRepository.defaultAreaSize()
         val verticalGap = if (dimensionRepository.navigationBarHeight() > 0)
             VERTICAL_STANDARD_GAP else VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM
-
-        val progressiveMines = preferencesRepository.getProgressiveValue()
 
         val display = dimensionRepository.displaySize()
         val width = display.width
@@ -53,15 +51,13 @@ class MinefieldRepository : IMinefieldRepository {
         preferencesRepository: IPreferencesRepository,
     ): Minefield =
         when (difficulty) {
-            Difficulty.Standard -> calculateStandardMode(
-                dimensionRepository,
-                preferencesRepository
-            )
+            Difficulty.Standard -> calculateStandardMode(dimensionRepository, preferencesRepository)
             Difficulty.Beginner -> beginnerMinefield
             Difficulty.Intermediate -> intermediateMinefield
             Difficulty.Expert -> expertMinefield
             Difficulty.Master -> masterMinefield
             Difficulty.Legend -> legendMinefield
+            Difficulty.FixedSize -> baseStandardSize(dimensionRepository, 0)
             Difficulty.Custom -> preferencesRepository.customGameMode()
         }
 
@@ -69,7 +65,7 @@ class MinefieldRepository : IMinefieldRepository {
         dimensionRepository: IDimensionRepository,
         preferencesRepository: IPreferencesRepository,
     ): Minefield {
-        var result: Minefield = baseStandardSize(dimensionRepository, preferencesRepository)
+        var result: Minefield = baseStandardSize(dimensionRepository, preferencesRepository.getProgressiveValue())
         var resultWidth = result.width
         var resultHeight = result.height
 
