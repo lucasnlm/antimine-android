@@ -21,18 +21,18 @@ class StatsViewModel(
     private suspend fun loadStatsModel(): List<StatsModel> {
         val minId = preferenceRepository.getStatsBase()
         val stats = statsRepository.getAllStats(minId)
-        val standardSize = minefieldRepository.baseStandardSize(
-            dimensionRepository,
-            preferenceRepository,
-        )
+        val standardSize = minefieldRepository.baseStandardSize(dimensionRepository, 0)
 
         return with(stats) {
             listOf(
                 // General
                 fold().copy(title = R.string.general),
 
-                // Standard
-                filterStandard(standardSize).fold().copy(title = R.string.standard),
+                // Progressive
+                filterStandard(standardSize).fold().copy(title = R.string.progressive),
+
+                // Fixed Size
+                filter { isFixedSize(standardSize, it) }.fold().copy(title = R.string.fixed_size),
 
                 // Legend
                 filter(::isLegend).fold().copy(title = R.string.legend),
@@ -155,6 +155,12 @@ class StatsViewModel(
 
     private fun isLegend(stats: Stats): Boolean {
         return stats.mines == 2000 && stats.width == 100 && stats.height == 100
+    }
+
+    private fun isFixedSize(standardSize: Minefield, stats: Stats): Boolean {
+        return stats.width == standardSize.width &&
+            stats.height == standardSize.height &&
+            stats.mines == standardSize.mines
     }
 
     private fun isIntermediate(stats: Stats): Boolean {

@@ -96,7 +96,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         startStandard.setRadius(5f)
         startStandard.bind(
             theme = usingTheme,
-            text = getString(R.string.standard),
+            text = getString(R.string.progressive),
             extra = getDifficultyExtra(Difficulty.Standard),
             onAction = {
                 viewModel.sendEvent(
@@ -161,6 +161,21 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             onAction = {
                 viewModel.sendEvent(
                     MainEvent.StartNewGameEvent(difficulty = Difficulty.Legend)
+                )
+            }
+        )
+
+        difficultyDivider1.setBackgroundColor(usingTheme.palette.covered.toAndroidColor())
+        difficultyDivider2.setBackgroundColor(usingTheme.palette.covered.toAndroidColor())
+
+        startFixedSize.setRadius(5f)
+        startFixedSize.bind(
+            theme = usingTheme,
+            text = getString(R.string.fixed_size),
+            extra = getDifficultyExtra(Difficulty.FixedSize),
+            onAction = {
+                viewModel.sendEvent(
+                    MainEvent.StartNewGameEvent(difficulty = Difficulty.FixedSize)
                 )
             }
         )
