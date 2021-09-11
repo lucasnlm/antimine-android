@@ -121,4 +121,6 @@
     <string name="tap_to_customize">Tyknij, coby zmiynić</string>
     <string name="toggle_button_top">Wyświytl \"Przeszaltruj sterowanie\" na gōrnym pasku</string>
     <string name="no_guess_fail_warning">To pole może wymogać zgadywanio, cobyś skōńczōł!</string>
+    <string name="fixed_size">Fixed Size</string>
+    <string name="progressive">Progressive</string>
 </resources>
