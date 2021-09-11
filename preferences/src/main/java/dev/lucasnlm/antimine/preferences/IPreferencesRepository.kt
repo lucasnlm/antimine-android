@@ -53,6 +53,9 @@ interface IPreferencesRepository {
     fun lastHelpUsed(): Long
     fun refreshLastHelpUsed()
 
+    fun useSimonTathamAlgorithm(): Boolean
+    fun setSimonTathamAlgorithm(enabled: Boolean)
+
     fun squareRadius(): Int
     fun setSquareRadius(value: Int?)
 

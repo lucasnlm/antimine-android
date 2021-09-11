@@ -71,6 +71,10 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun useHelp(): Boolean = false
 
+    override fun useSimonTathamAlgorithm(): Boolean = true
+
+    override fun setSimonTathamAlgorithm(enabled: Boolean) { }
+
     override fun lastHelpUsed(): Long = 0L
 
     override fun refreshLastHelpUsed() {}

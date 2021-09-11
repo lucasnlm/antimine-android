@@ -11,7 +11,7 @@ import kotlin.random.Random
 class FlagAssistantTest {
     private fun testCase(seed: Long, expectedFlagMap: List<Int>) {
         val randomness = Random(seed)
-        val creator = MinefieldCreator(
+        val creator = MinefieldCreatorImpl(
             Minefield(8, 8, 25),
             randomness,
         )

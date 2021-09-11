@@ -332,6 +332,14 @@ class PreferencesRepository(
         preferencesManager.putLong(PreferenceKeys.PREFERENCE_LAST_HELP_USED, System.currentTimeMillis())
     }
 
+    override fun useSimonTathamAlgorithm(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SIMON_TATHAM_ALGORITHM, true)
+    }
+
+    override fun setSimonTathamAlgorithm(enabled: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SIMON_TATHAM_ALGORITHM, enabled)
+    }
+
     override fun squareRadius(): Int {
         return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 3)
     }

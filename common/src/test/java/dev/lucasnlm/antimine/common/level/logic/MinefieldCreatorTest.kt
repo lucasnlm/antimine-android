@@ -8,7 +8,7 @@ import kotlin.random.Random
 class MinefieldCreatorTest {
     @Test
     fun testMinefieldCreation() {
-        val creator = MinefieldCreator(Minefield(4, 4, 9), Random(200))
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
         val map = creator.create(2, true)
         assertEquals(
             listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
@@ -18,7 +18,7 @@ class MinefieldCreatorTest {
 
     @Test
     fun testMinefieldCreationMines() {
-        val creator = MinefieldCreator(Minefield(5, 5, 99), Random(200))
+        val creator = MinefieldCreatorImpl(Minefield(5, 5, 99), Random(200))
         val map = creator.create(12, true)
         assertEquals(
             listOf(
@@ -35,7 +35,7 @@ class MinefieldCreatorTest {
 
     @Test
     fun testMinefieldCreationMines2() {
-        val creator = MinefieldCreator(Minefield(4, 4, 9), Random(200))
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
         val map = creator.create(2, true)
         assertEquals(
             listOf(
@@ -50,7 +50,7 @@ class MinefieldCreatorTest {
 
     @Test
     fun testMinefieldCreationMines3() {
-        val creator = MinefieldCreator(Minefield(4, 4, 9), Random(100))
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(100))
         val map = creator.create(2, true)
         assertEquals(
             listOf(
@@ -65,7 +65,7 @@ class MinefieldCreatorTest {
 
     @Test
     fun testMinefieldCreationMines4() {
-        val creator = MinefieldCreator(Minefield(4, 4, 9), Random(50))
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(50))
         val map = creator.create(2, true)
         assertEquals(
             listOf(
@@ -80,7 +80,7 @@ class MinefieldCreatorTest {
 
     @Test
     fun testMinefieldCreationMinesTips() {
-        val creator = MinefieldCreator(Minefield(4, 4, 9), Random(200))
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
         val map = creator.create(2, true)
         assertEquals(
             listOf(
@@ -95,7 +95,7 @@ class MinefieldCreatorTest {
 
     @Test
     fun testMinefieldCreationMinesTips2() {
-        val creator = MinefieldCreator(Minefield(4, 4, 9), Random(100))
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(100))
         val map = creator.create(2, true)
         assertEquals(
             listOf(
@@ -110,7 +110,7 @@ class MinefieldCreatorTest {
 
     @Test
     fun testMinefieldCreationMinesTips3() {
-        val creator = MinefieldCreator(Minefield(4, 4, 9), Random(50))
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(50))
         val map = creator.create(2, true)
         assertEquals(
             listOf(
@@ -125,7 +125,7 @@ class MinefieldCreatorTest {
 
     @Test
     fun testMinefieldCreationPosition() {
-        val creator = MinefieldCreator(Minefield(4, 4, 9), Random(200))
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
         val map = creator.create(2, true)
         assertEquals(
             listOf(
@@ -140,7 +140,7 @@ class MinefieldCreatorTest {
 
     @Test
     fun testMinefieldMustBeCreatedWithoutMines() {
-        val creator = MinefieldCreator(Minefield(4, 4, 9), Random(200))
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
         val map = creator.createEmpty()
         assertEquals(0, map.count { it.hasMine })
     }

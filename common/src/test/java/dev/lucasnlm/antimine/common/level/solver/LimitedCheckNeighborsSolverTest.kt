@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.level.solver
 
-import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
+import dev.lucasnlm.antimine.common.level.logic.MinefieldCreatorImpl
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import org.junit.Assert.assertFalse
@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 class LimitedCheckNeighborsSolverTest {
     private fun handleMinefield(block: (MinefieldHandler) -> Unit) {
-        val creator = MinefieldCreator(
+        val creator = MinefieldCreatorImpl(
             Minefield(9, 9, 12),
             Random(200)
         )

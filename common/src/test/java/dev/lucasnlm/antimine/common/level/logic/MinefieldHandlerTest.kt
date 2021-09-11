@@ -14,7 +14,7 @@ class MinefieldHandlerTest {
         useSafeZone: Boolean = false,
         block: (MinefieldHandler) -> Unit
     ) {
-        val creator = MinefieldCreator(Minefield(4, 4, 9), Random(200))
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
         val minefield = creator.create(10, useSafeZone).toMutableList()
         val minefieldHandler = MinefieldHandler(minefield, useQuestionMark)
         block(minefieldHandler)

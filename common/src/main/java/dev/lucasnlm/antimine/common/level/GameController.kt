@@ -6,6 +6,8 @@ import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.logic.FlagAssistant
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
+import dev.lucasnlm.antimine.common.level.logic.MinefieldCreatorImpl
+import dev.lucasnlm.antimine.common.level.logic.MinefieldCreatorNativeImpl
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
 import dev.lucasnlm.antimine.common.level.solver.LimitedCheckNeighborsSolver
 import dev.lucasnlm.antimine.core.models.Area
@@ -29,6 +31,7 @@ class GameController {
     private var useNoGuessing = true
     private var useClickOnNumbers = true
     private var errorTolerance = 0
+    private var useSimonTatham = true
 
     val seed: Long
 
@@ -40,27 +43,41 @@ class GameController {
     constructor(
         minefield: Minefield,
         seed: Long,
+        useSimonTatham: Boolean,
         saveId: Int? = null,
+        difficulty: Difficulty,
         onCreateUnsafeLevel: (() -> Unit)? = null,
     ) {
-        this.minefieldCreator = MinefieldCreator(minefield, Random(seed))
+        val shouldUseSimonTatham = useSimonTatham && difficulty != Difficulty.Beginner
+        this.minefieldCreator = if (shouldUseSimonTatham) {
+            MinefieldCreatorNativeImpl(minefield, Random(seed))
+        } else {
+            MinefieldCreatorImpl(minefield, Random(seed))
+        }
         this.minefield = minefield
         this.seed = seed
         this.saveId = saveId ?: 0
         this.actions = 0
         this.onCreateUnsafeLevel = onCreateUnsafeLevel
-
         this.field = minefieldCreator.createEmpty()
+        this.useSimonTatham = shouldUseSimonTatham
     }
 
-    constructor(save: Save) {
-        this.minefieldCreator = MinefieldCreator(save.minefield, Random(save.seed))
+    constructor(
+        save: Save,
+        useSimonTatham: Boolean,
+    ) {
         this.minefield = save.minefield
-        this.saveId = save.uid
         this.seed = save.seed
+        this.saveId = save.uid
         this.firstOpen = save.firstOpen
         this.field = save.field
         this.actions = save.actions
+        this.minefieldCreator = if (useSimonTatham) {
+            MinefieldCreatorNativeImpl(minefield, Random(seed))
+        } else {
+            MinefieldCreatorImpl(minefield, Random(seed))
+        }
     }
 
     fun field() = field
@@ -81,8 +98,8 @@ class GameController {
             val fieldCopy = field.map { it.copy() }.toMutableList()
             val minefieldHandler = MinefieldHandler(fieldCopy, false)
             minefieldHandler.openAt(safeId, false)
-            noGuessTestedLevel = solver.trySolve(minefieldHandler.result().toMutableList())
-        } while (useNoGuessing && solver.keepTrying() && !noGuessTestedLevel)
+            noGuessTestedLevel = useSimonTatham || solver.trySolve(minefieldHandler.result().toMutableList())
+        } while (useNoGuessing && !useSimonTatham && solver.keepTrying() && !noGuessTestedLevel)
 
         firstOpen = FirstOpen.Position(safeId)
     }
@@ -302,15 +319,15 @@ class GameController {
         }
         return Save(
             saveId,
-            seed,
-            startTime,
-            duration,
-            minefield,
-            difficulty,
-            firstOpen,
-            saveStatus,
-            field.toList(),
-            actions
+            seed = seed,
+            startDate = startTime,
+            duration = duration,
+            minefield = minefield,
+            difficulty = difficulty,
+            firstOpen = firstOpen,
+            status = saveStatus,
+            field = field.toList(),
+            actions = actions,
         )
     }
 
