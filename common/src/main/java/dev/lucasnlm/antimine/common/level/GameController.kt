@@ -6,6 +6,8 @@ import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.logic.FlagAssistant
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
+import dev.lucasnlm.antimine.common.level.logic.MinefieldCreatorImpl
+import dev.lucasnlm.antimine.common.level.logic.MinefieldCreatorNativeImpl
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
 import dev.lucasnlm.antimine.common.level.solver.LimitedCheckNeighborsSolver
 import dev.lucasnlm.antimine.core.models.Area
@@ -43,7 +45,7 @@ class GameController {
         saveId: Int? = null,
         onCreateUnsafeLevel: (() -> Unit)? = null,
     ) {
-        this.minefieldCreator = MinefieldCreator(minefield, Random(seed))
+        this.minefieldCreator = MinefieldCreatorNativeImpl(minefield, Random(seed))
         this.minefield = minefield
         this.seed = seed
         this.saveId = saveId ?: 0
@@ -54,7 +56,7 @@ class GameController {
     }
 
     constructor(save: Save) {
-        this.minefieldCreator = MinefieldCreator(save.minefield, Random(save.seed))
+        this.minefieldCreator = MinefieldCreatorImpl(save.minefield, Random(save.seed))
         this.minefield = save.minefield
         this.saveId = save.uid
         this.seed = save.seed
