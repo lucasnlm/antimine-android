@@ -220,6 +220,7 @@ open class GameViewModel(
                 useSimonTatham = preferencesRepository.useSimonTathamAlgorithm(),
                 onCreateUnsafeLevel = ::onCreateUnsafeLevel,
                 saveId = null,
+                difficulty = newDifficulty,
             )
 
             val newGameState = GameState(
@@ -302,7 +303,8 @@ open class GameViewModel(
             seed = save.seed,
             useSimonTatham = preferencesRepository.useSimonTathamAlgorithm(),
             saveId = save.uid,
-            onCreateUnsafeLevel = ::onCreateUnsafeLevel
+            onCreateUnsafeLevel = ::onCreateUnsafeLevel,
+            difficulty = save.difficulty,
         )
         initialized = true
         refreshUserPreferences()

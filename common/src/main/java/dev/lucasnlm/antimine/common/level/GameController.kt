@@ -45,9 +45,11 @@ class GameController {
         seed: Long,
         useSimonTatham: Boolean,
         saveId: Int? = null,
+        difficulty: Difficulty,
         onCreateUnsafeLevel: (() -> Unit)? = null,
     ) {
-        this.minefieldCreator = if (useSimonTatham) {
+        val shouldUseSimonTatham = useSimonTatham && difficulty != Difficulty.Beginner
+        this.minefieldCreator = if (shouldUseSimonTatham) {
             MinefieldCreatorNativeImpl(minefield, Random(seed))
         } else {
             MinefieldCreatorImpl(minefield, Random(seed))
@@ -58,7 +60,7 @@ class GameController {
         this.actions = 0
         this.onCreateUnsafeLevel = onCreateUnsafeLevel
         this.field = minefieldCreator.createEmpty()
-        this.useSimonTatham = useSimonTatham
+        this.useSimonTatham = shouldUseSimonTatham
     }
 
     constructor(
@@ -96,7 +98,7 @@ class GameController {
             val fieldCopy = field.map { it.copy() }.toMutableList()
             val minefieldHandler = MinefieldHandler(fieldCopy, false)
             minefieldHandler.openAt(safeId, false)
-            noGuessTestedLevel = !useSimonTatham || solver.trySolve(minefieldHandler.result().toMutableList())
+            noGuessTestedLevel = useSimonTatham || solver.trySolve(minefieldHandler.result().toMutableList())
         } while (useNoGuessing && !useSimonTatham && solver.keepTrying() && !noGuessTestedLevel)
 
         firstOpen = FirstOpen.Position(safeId)
