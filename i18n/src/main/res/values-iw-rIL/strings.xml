@@ -121,4 +121,6 @@
     <string name="tap_to_customize">Tap to customize</string>
     <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
+    <string name="fixed_size">Fixed Size</string>
+    <string name="progressive">Progressive</string>
 </resources>

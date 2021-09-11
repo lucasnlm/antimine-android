@@ -121,4 +121,6 @@
     <string name="tap_to_customize">点击此处来自定义操作方式</string>
     <string name="toggle_button_top">在顶部栏显示“切换按钮”</string>
     <string name="no_guess_fail_warning">当前雷场可能不是“无需猜测”的！</string>
+    <string name="fixed_size">Fixed Size</string>
+    <string name="progressive">Progressive</string>
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="bg">
-    <string name="tutorial">Туториал</string>
+    <string name="tutorial">Въведение</string>
     <string name="tutorial_basic">Правилата на играта са прости, номерът в квадрата показва броя на мините в него и вие трябва да сложите флаг на всички мини.</string>
     <string name="tutorial_text_1">Ако цифрата е в близост до същия брой квадрати, тогава във всички квадрати има мини.</string>
     <string name="tutorial_text_2">След като сложите първия си флаг, вижте и анализирайте следващия квадрат.</string>
@@ -14,8 +14,8 @@
     <string name="beginner">Начинаещ</string>
     <string name="intermediate">Напреднал</string>
     <string name="expert">Експерт</string>
-    <string name="master">Експерт</string>
-    <string name="legend">Legend</string>
+    <string name="master">Майстор</string>
+    <string name="legend">Легенда</string>
     <string name="open">Отвори</string>
     <string name="settings">Настройки</string>
     <string name="animations">Анимации</string>
@@ -61,7 +61,7 @@
     <string name="performance">Изпълнение</string>
     <string name="ok">ОК</string>
     <string name="use_question_mark">Въпросителен знак</string>
-    <string name="no_guessing_mode">\'Без налучкване\' режим</string>
+    <string name="no_guessing_mode">Режим \'Без налучкване\'</string>
     <string name="control">Управление</string>
     <string name="single_click">Еднократно натискане</string>
     <string name="double_click">Двойно натискане</string>
@@ -94,7 +94,7 @@
     <string name="connect">Свързване</string>
     <string name="connecting">Свързване…</string>
     <string name="disconnect">Прекъсване</string>
-    <string name="disconnected">Прекъсване</string>
+    <string name="disconnected">Връзката е прекъсната</string>
     <string name="new_game">Нова Игра</string>
     <string name="share">Сподели</string>
     <string name="share_menu">Сподели…</string>
@@ -110,15 +110,17 @@
     <string name="open_on_game">Отвори на игралния екран</string>
     <string name="show_windows">Показване на всички прозорци</string>
     <string name="select_language">Избери език</string>
-    <string name="switch_control">Промени: Флаг и Отворен</string>
-    <string name="switch_control_desc">Използвай бутонът за да превключиш между Флаг и Отворен</string>
+    <string name="switch_control">Размени: Флаг и Отваряне</string>
+    <string name="switch_control_desc">Използвай бутонът за да превключиш между Флаг и Отваряне</string>
     <string name="app_description">Вие трябва да изчистите квадратна дъска която има скрити мини без да взривите нито една от тях.</string>
     <string name="app_name">Antimine</string>
     <string name="do_you_know_how_to_play">Знаете ли как да играете Minesweeper?</string>
     <string name="close">Затвори</string>
-    <string name="open_tutorial">Отвори урок</string>
-    <string name="click_numbers">Allow tap on numbers</string>
-    <string name="tap_to_customize">Tap to customize</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
-    <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
+    <string name="open_tutorial">Отвори въведение</string>
+    <string name="click_numbers">Позволи докосване върху числата</string>
+    <string name="tap_to_customize">Натисни, за да промениш</string>
+    <string name="toggle_button_top">Покажи \"бутон за смяна\" на горната лента</string>
+    <string name="no_guess_fail_warning">Сегашното поле може да не е без предположения!</string>
+    <string name="fixed_size">Фиксиран размер</string>
+    <string name="progressive">Прогресивен</string>
 </resources>

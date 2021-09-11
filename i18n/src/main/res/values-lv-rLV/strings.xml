@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ta">
-    <string name="tutorial">பயிற்சி</string>
-    <string name="tutorial_basic">இந்த ஆட்டத்தின் விதிமுறை எளிமையானது. ஒரு கட்டத்தில் இருக்கும் எண்ணானது அதையொட்டிய கட்டங்களில் மறைந்திருக்கும் வெடிகுண்டுகளின் எண்ணிக்கையைக் குறிக்கிறது. நீங்கள் செய்ய வேண்டியதெல்லாம் மறைந்திருக்கும் வெடிகுண்டுகளை கொடிக் குறியிட்டு காட்ட வேண்டியது மட்டுமே.</string>
-    <string name="tutorial_text_1">கட்டத்திலுள்ள எண்ணானது அதையொட்டி உள்ள அனைத்து கட்டங்களின் எண்ணிக்கையும் குறிக்குமானால், அனைத்து கட்டங்களிலும் வெடிகுண்டுகள் இருப்பதாக அர்த்தம்.</string>
-    <string name="tutorial_text_2">உங்களுடைய முதல் கொடியை குறியிட்டவுடன், எண்களைச் சரிபார்த்து பின்பு அடுத்த கட்டத்தை பகுப்பாய்வு செய்யுங்கள்.</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="lv">
+    <string name="tutorial">Tutorial</string>
+    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
+    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
     <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
     <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">Games</string>
     <string name="tap_to_begin">Tap to begin</string>
-    <string name="previous_games">முந்தைய ஆட்டங்கள்</string>
-    <string name="minefield">கடினத்தன்மை</string>
+    <string name="previous_games">Previous Games</string>
+    <string name="minefield">Difficulty</string>
     <string name="standard">Standard</string>
     <string name="beginner">Beginner</string>
     <string name="intermediate">Intermediate</string>
     <string name="expert">Expert</string>
     <string name="master">Master</string>
     <string name="legend">Legend</string>
-    <string name="open">திற</string>
-    <string name="settings">அமைப்புகள்</string>
+    <string name="open">Open</string>
+    <string name="settings">Settings</string>
     <string name="animations">Animations</string>
     <string name="vibration">Haptic Feedback</string>
-    <string name="about">செயலி பற்றி</string>
-    <string name="events">புள்ளியியல்</string>
-    <string name="custom">தனி விருப்பம்</string>
-    <string name="start">துவங்கு</string>
-    <string name="width">அகலம்</string>
-    <string name="height">உயரம்</string>
+    <string name="about">About</string>
+    <string name="events">Statistics</string>
+    <string name="custom">Custom</string>
+    <string name="start">Start</string>
+    <string name="width">Width</string>
+    <string name="height">Height</string>
     <string name="mines">Mines</string>
     <string name="retry_sure">If you start a new game, your current progress will be lost.</string>
     <string name="show_licenses">Show Licenses</string>
@@ -121,6 +121,6 @@
     <string name="tap_to_customize">Tap to customize</string>
     <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
-    <string name="fixed_size">நிலையான அளவு</string>
+    <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
 </resources>

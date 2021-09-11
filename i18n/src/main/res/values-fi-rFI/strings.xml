@@ -121,4 +121,6 @@
     <string name="tap_to_customize">Paina mukauttaaksesi</string>
     <string name="toggle_button_top">Näytä Vaihda-painike yläpalkissa</string>
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
+    <string name="fixed_size">Fixed Size</string>
+    <string name="progressive">Progressive</string>
 </resources>
