@@ -121,4 +121,6 @@
     <string name="tap_to_customize">Naciśnij, aby zmienić</string>
     <string name="toggle_button_top">Wyświetl \"Przełącz sterowanie\" na górnej pasku</string>
     <string name="no_guess_fail_warning">To pole minowe może wymagać zgadywania, aby je ukończyć!</string>
+    <string name="fixed_size">Ustalony rozmiar</string>
+    <string name="progressive">Progresywny</string>
 </resources>

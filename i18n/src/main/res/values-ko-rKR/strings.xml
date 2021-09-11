@@ -121,4 +121,6 @@
     <string name="tap_to_customize">눌러서 사용자 지정</string>
     <string name="toggle_button_top">상단 바에 \"맞바꾸기 버튼\" 표시</string>
     <string name="no_guess_fail_warning">현재 레벨은 추정 없이 깨지 못할 수도 있습니다!</string>
+    <string name="fixed_size">고정 크기</string>
+    <string name="progressive">프로그레시브</string>
 </resources>

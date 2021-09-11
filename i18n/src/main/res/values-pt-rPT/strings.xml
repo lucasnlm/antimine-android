@@ -121,4 +121,6 @@
     <string name="tap_to_customize">Tocar para personalizar</string>
     <string name="toggle_button_top">Mostrar \"Botão Alternar\" na barra superior</string>
     <string name="no_guess_fail_warning">O campo minado atual pode não ser resolvido sem adivinhação!</string>
+    <string name="fixed_size">Tamanho fixo</string>
+    <string name="progressive">Progressivo</string>
 </resources>

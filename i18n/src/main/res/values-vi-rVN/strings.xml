@@ -121,4 +121,6 @@
     <string name="tap_to_customize">Nhấn để tuỳ chỉnh</string>
     <string name="toggle_button_top">Hiện \"Nút chuyển\" trên thanh ở trên cùng</string>
     <string name="no_guess_fail_warning">Bãi mìn hiện tại có thể sẽ không giải được mà không đoán!</string>
+    <string name="fixed_size">Kích thước cố định</string>
+    <string name="progressive">Tiến trình</string>
 </resources>

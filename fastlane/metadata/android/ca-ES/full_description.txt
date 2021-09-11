@@ -6,7 +6,7 @@ Sou capaç de netejar un camp de mines? Vinga!
 OBJECTIU
 És com el buscamines. Guanyeu quan heu marcat totes les mines del camp. Aneu en compte de no detonar-ne cap!
 
-NO GUESSING
+SENSE PROVAR
 Aquest joc té un algorisme que sempre crea camps de mines resolubles. No haureu d'endevinar on es troba la darrera mina!
 
 NIVELLS DE JOC

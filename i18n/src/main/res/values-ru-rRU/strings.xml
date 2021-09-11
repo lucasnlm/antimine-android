@@ -121,4 +121,6 @@
     <string name="tap_to_customize">Нажмите, чтобы настроить</string>
     <string name="toggle_button_top">Отображать \"Переключить кнопку\" на верхней панели</string>
     <string name="no_guess_fail_warning">Вам может понадобиться подсказка, чтобы пройти этот уровень!</string>
+    <string name="fixed_size">Фиксированный размер</string>
+    <string name="progressive">Прогрессивный</string>
 </resources>
