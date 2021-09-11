@@ -121,6 +121,6 @@
     <string name="tap_to_customize">Atingeți pentru a personaliza</string>
     <string name="toggle_button_top">Afișați \"Butonul de comutare\" pe bara de sus</string>
     <string name="no_guess_fail_warning">Este posibil ca actualul teren de mine să nu fie lipsit de ghiciri!</string>
-    <string name="fixed_size">Fixed Size</string>
-    <string name="progressive">Progressive</string>
+    <string name="fixed_size">Dimensiune fixă</string>
+    <string name="progressive">Progresiv</string>
 </resources>

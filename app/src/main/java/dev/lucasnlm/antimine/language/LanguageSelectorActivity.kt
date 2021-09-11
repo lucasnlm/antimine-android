@@ -75,6 +75,7 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
             "Suomi" to "fi-rFI",
             "Français" to "fr-rFR",
             "हिन्दी" to "hi-rIN",
+            "Latviešu valoda" to "lv-rLV",
             "Magyar" to "hu-rHU",
             "Italiano" to "it-rIT",
             "תירבע" to "iw-rIL",

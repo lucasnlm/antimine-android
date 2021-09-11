@@ -1,49 +1,49 @@
-Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
-This is a minimalist and modern version of the classic Minesweeper.
+Pārbaudi savas loģiskās domāšanas spējas spēlējot spēli, kurā tev ir jāatbrīvo mīnu lauks bez nevienas mīnas detonēšanas.
+Šī ir minimālistiska un moderna klasiskā Minesweeper versija.
 
-Are you able to clear a minefield? Let’s go!
+Vai tu esi spējīgs atbrīvot mīnu lauku no mīnām? Sākam!
 
-OBJECTIVE
-It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
+Mērķis
+Tas ir kā Minesweeper. Tu uzvari šajā spēlē tad, kad visi lauki ir atzīmēti. Uzmanies no mīnu aktivizēšanas!
 
-NO GUESSING
-This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
+Nekādas minēšanas
+Šajā spēlē ir iestrādāts algoritms, kas vienmēr rada bez minēšanas atrisināmus mīnu laukus. Tev nebūs jāmin kur atrodas pēdējā mīna!
 
-GAME LEVELS
-Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
+Grūtības pakāpes
+Tāpat kā Minesweeper, šajai spēlei ir dažādas grūtības pakāpes: Iesācēja, Vidēji grūta un Eksperta. Bet tai arī ir īpašs režīms ar attīstību, kas pēc uzvaras kļūst sarežģītāks.
 
-CUSTOM LEVEL
-If the standard modes aren't enough, you can create your level difficulty!
+Pielāgoti režīmi
+Ja nepietiek ar parastajām grūtības pakāpēm, tu vienmēr vari izveidot savu sarežģītības pakāpes!
 
-THEMES
-Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+Tēmas
+Antimine ir vairāk nekā 15 dažādu tēmu (ieskaitot gaišas, tumšas un AMOLED(melns)). Ar laiku tiks pievienotas vēl!
 
-MINIMALIST
-Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+Minimālistisks
+Lielisks izskats: minimālistisks dizains un mazs lietotnes izmērs (mazāk nekā 9mb).
 
-TUTORIAL
-Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+Pamācība
+Nemāki spēlēt Minesweeper? Nekādu problēmu, vari izspēlēt pamācību un iestatījumos ieslēgt padomus.
 
-STATISTICS
-Check your results and development.
+Statistika
+Vari apskatīt savus rezultātus un tendences.
 
-GAME ASSISTANT
-The game will automatically flag the squares you isolated. 
+Spēles asistents
+Šī spēle automātiski atzīmēs visus izolētos laukus. 
 
-CUSTOMIZATION
-You can change the game to make it like you want to. 
-Example: Help, animations, haptic feedback, question mark.
+Pielāgošana
+Tu vari spēli pielāgot tādu, kādu tu to vēlies. 
+Piemēram: Palīdzību, ieslēgt/izslēgt animācijas, ieslēgt/izslēgt haptisko atsauksmi un pievienot jautājuma zīmi.
 
-CONTROLS
-It supports four different control schemes. Example: flag using tap or long press.
+Kontroles
+Šī lietotne atbalsta četra veida kontroles shēmas. Piemēram: Atzīmēt ar pieskārienu vai ilgo pieskārienu.
 
-ACHIEVEMENTS AND LEADERBOARDS 
-You have eight achievements to unlock and different leaderboards to share with your friends.
+Sasniegumi un labāko spēlētāju saraksts 
+Tu vari sasniegt 8 sasniegumus un kopīgot dažādus labāko sarakstus ar draugiem.
 
-ONLINE OR OFFLINE
-You don't need to be online to play the game!
+Spēlē tiešsaistē un bezsaistē
+Tev nav nepieciešams internets lai spēlētu šo spēli!
 
-AUTO-SAVE
-You can start a game and continue it later! It will auto-save your game.
+Automātiska sagabāšana
+Tu vari iesākt spēli un pabeigt to vēlāk! Tas automātiski to saglabās.
 
-Enjoy.
+Izbaudi.
