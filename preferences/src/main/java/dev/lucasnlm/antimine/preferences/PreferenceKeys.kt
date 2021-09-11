@@ -42,4 +42,5 @@ object PreferenceKeys {
     const val PREFERENCE_TUTORIAL_DIALOG = "preference_show_tutorial_dialog"
     const val PREFERENCE_ALLOW_TAP_NUMBER = "preference_allow_tap_number"
     const val PREFERENCE_SHOW_TOGGLE_ON_TOP_BAR = "preference_show_toggle_on_top_bar"
+    const val PREFERENCE_SIMON_TATHAM_ALGORITHM = "preference_simon_tatham"
 }

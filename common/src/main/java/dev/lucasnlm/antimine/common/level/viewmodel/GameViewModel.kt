@@ -217,8 +217,9 @@ open class GameViewModel(
             gameController = GameController(
                 minefield = minefield,
                 seed = seed,
+                useSimonTatham = preferencesRepository.useSimonTathamAlgorithm(),
                 onCreateUnsafeLevel = ::onCreateUnsafeLevel,
-                saveId = null
+                saveId = null,
             )
 
             val newGameState = GameState(
@@ -258,7 +259,7 @@ open class GameViewModel(
 
         sendEvent(GameEvent.LoadingNewGame)
 
-        gameController = GameController(save)
+        gameController = GameController(save, preferencesRepository.useSimonTathamAlgorithm())
         initialized = true
 
         refreshUserPreferences()
@@ -296,7 +297,13 @@ open class GameViewModel(
 
         sendEvent(GameEvent.LoadingNewGame)
 
-        gameController = GameController(save.minefield, save.seed, save.uid, ::onCreateUnsafeLevel)
+        gameController = GameController(
+            minefield = save.minefield,
+            seed = save.seed,
+            useSimonTatham = preferencesRepository.useSimonTathamAlgorithm(),
+            saveId = save.uid,
+            onCreateUnsafeLevel = ::onCreateUnsafeLevel
+        )
         initialized = true
         refreshUserPreferences()
 

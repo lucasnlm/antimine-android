@@ -127,6 +127,14 @@ class PreferencesActivity :
         )
 
         bindItem(
+            label = simonTathamLabel,
+            switch = simonTatham,
+            supportTv = true,
+            checked = preferenceRepository.useHelp(),
+            action = { preferenceRepository.setHelp(it) }
+        )
+
+        bindItem(
             label = allowClickNumberLabel,
             switch = clickOnNumbers,
             supportTv = false,
