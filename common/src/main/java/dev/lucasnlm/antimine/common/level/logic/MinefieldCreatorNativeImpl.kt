@@ -76,6 +76,14 @@ class MinefieldCreatorNativeImpl(
         return resultList.map { area ->
             area.copy(neighborsIds = resultList.filterNeighborsOf(area).map { it.id })
         }.toMutableList().apply {
+            if (safeZone) {
+                filterNeighborsOf(safeIndex).forEach {
+                    this[it.id] = this[it.id].copy(hasMine = false)
+                }
+
+                this[safeIndex] = this[safeIndex].copy(hasMine = false)
+            }
+
             filter {
                 it.hasMine
             }.onEach {
