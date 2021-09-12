@@ -92,7 +92,7 @@ class MinefieldRepository : IMinefieldRepository {
         private val masterMinefield = Minefield(50, 50, 400)
         private val legendMinefield = Minefield(100, 100, 2000)
 
-        private const val CUSTOM_LEVEL_MINE_RATIO = 0.2
+        private const val CUSTOM_LEVEL_MINE_RATIO = 0.18
         private const val MAX_LEVEL_MINE_RATIO = 0.45
         private const val HORIZONTAL_STANDARD_GAP = 1
         private const val VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM = 4
