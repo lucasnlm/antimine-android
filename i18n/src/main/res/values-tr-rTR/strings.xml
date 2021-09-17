@@ -121,6 +121,6 @@
     <string name="tap_to_customize">Özelleştirmek için tıkla</string>
     <string name="toggle_button_top">Üst çubukta \"Geçiş Düğmesini\" göster</string>
     <string name="no_guess_fail_warning">Mevcut mayın tarlası tahmin edilemez olmayabilir!</string>
-    <string name="fixed_size">Fixed Size</string>
-    <string name="progressive">Progressive</string>
+    <string name="fixed_size">Sabit Boyut</string>
+    <string name="progressive">İlerleme</string>
 </resources>

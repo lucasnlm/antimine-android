@@ -121,6 +121,6 @@
     <string name="tap_to_customize">انقر للتخصيص</string>
     <string name="toggle_button_top">إظهار \"زر تبديل\" في الشريط العلوي</string>
     <string name="no_guess_fail_warning">قد لا يكون حقل الألغام الحالي خاليًا من التخمين!</string>
-    <string name="fixed_size">Fixed Size</string>
-    <string name="progressive">Progressive</string>
+    <string name="fixed_size">الجم الثابت</string>
+    <string name="progressive">التقدمي</string>
 </resources>
