@@ -1,6 +1,7 @@
 package dev.lucasnlm.external
 
 import android.util.Log
+import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
@@ -26,14 +27,27 @@ class FeatureFlagManager : IFeatureFlagManager() {
         SHOW_ADS_WHEN_USE_TIP to true,
     )
 
-    private val remoteConfig: FirebaseRemoteConfig by lazy {
-        FirebaseRemoteConfig.getInstance().apply {
-            setDefaultsAsync(defaultMap)
+    private var remoteConfig: FirebaseRemoteConfig? = null
+
+    private fun getRemoteConfig(): FirebaseRemoteConfig? {
+        return if (remoteConfig != null) {
+            remoteConfig
+        } else {
+            try {
+                FirebaseRemoteConfig.getInstance().apply {
+                    setDefaultsAsync(defaultMap)
+                    remoteConfig = this
+                }
+            } catch (e: Exception) {
+                // Firebase app not initilized yet
+                null
+            }
         }
     }
 
     private fun getBoolean(key: String): Boolean {
-        return if (BuildConfig.DEBUG) {
+        val remoteConfig = getRemoteConfig()
+        return if (BuildConfig.DEBUG || remoteConfig == null) {
             defaultMap[key] as Boolean
         } else {
             remoteConfig.getBoolean(key)
@@ -41,7 +55,8 @@ class FeatureFlagManager : IFeatureFlagManager() {
     }
 
     private fun getInt(key: String): Int {
-        return if (BuildConfig.DEBUG) {
+        val remoteConfig = getRemoteConfig()
+        return if (BuildConfig.DEBUG || remoteConfig == null) {
             defaultMap[key] as Int
         } else {
             remoteConfig.getLong(key).toInt()
@@ -115,7 +130,8 @@ class FeatureFlagManager : IFeatureFlagManager() {
     }
 
     override suspend fun refresh() {
-        if (!BuildConfig.DEBUG) {
+        val remoteConfig = getRemoteConfig()
+        if (!BuildConfig.DEBUG && remoteConfig != null) {
             withContext(Dispatchers.IO) {
                 try {
                     remoteConfig.fetchAndActivate().await()

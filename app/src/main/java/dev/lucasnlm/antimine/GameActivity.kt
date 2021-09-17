@@ -10,7 +10,7 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
-import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.ConfigurationCompat
@@ -39,6 +39,7 @@ import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
+import dev.lucasnlm.antimine.ui.showWarning
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IFeatureFlagManager
@@ -70,7 +71,7 @@ class GameActivity :
     private val reviewWrapper: ReviewWrapper by inject()
     private val featureFlagManager: IFeatureFlagManager by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
-    private var gameToast: Snackbar? = null
+    private var warning: Snackbar? = null
 
     private val renderSquareRadius = preferencesRepository.squareRadius()
     private val renderSquareDivider = preferencesRepository.squareDivider()
@@ -84,6 +85,11 @@ class GameActivity :
 
         GdxLocal.zoom = 1.0f
         GdxLocal.zoomLevelAlpha = 1.0f
+    }
+
+    private fun showGameWarning(@StringRes text: Int) {
+        warning?.dismiss()
+        warning = showWarning(text)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -160,7 +166,7 @@ class GameActivity :
             observeState().collect {
                 if (it.turn == 0 && it.saveId == 0L || it.isLoadingMap) {
                     if (it.turn == 0) {
-                        gameToast?.dismiss()
+                        warning?.dismiss()
                     }
 
                     val color = usingTheme.palette.covered.toAndroidColor(168)
@@ -251,13 +257,13 @@ class GameActivity :
             gameViewModel.observeSideEffects().collect {
                 when (it) {
                     is GameEvent.ShowNoGuessFailWarning -> {
-                        gameToast = Snackbar.make(
+                        warning = Snackbar.make(
                             findViewById(android.R.id.content),
                             R.string.no_guess_fail_warning,
                             Snackbar.LENGTH_INDEFINITE,
                         ).apply {
                             setAction(R.string.ok) {
-                                gameToast?.dismiss()
+                                warning?.dismiss()
                             }
                             show()
                         }
@@ -491,11 +497,7 @@ class GameActivity :
                                     gameViewModel.sendEvent(GameEvent.GiveMoreTip(value))
                                 },
                                 onFail = {
-                                    Toast.makeText(
-                                        applicationContext,
-                                        R.string.cant_do_it_now,
-                                        Toast.LENGTH_SHORT,
-                                    ).show()
+                                    showGameWarning(R.string.cant_do_it_now)
                                 },
                             )
                         }
@@ -507,11 +509,7 @@ class GameActivity :
 
                             if (gameViewModel.getTips() > 0) {
                                 if (!gameViewModel.revealRandomMine()) {
-                                    Toast.makeText(
-                                        applicationContext,
-                                        R.string.cant_do_it_now,
-                                        Toast.LENGTH_SHORT,
-                                    ).show()
+                                    showGameWarning(R.string.cant_do_it_now)
                                 } else {
                                     if (featureFlagManager.showAdWhenUsingTip) {
                                         if (!preferencesRepository.isPremiumEnabled()) {
@@ -535,7 +533,7 @@ class GameActivity :
                                     }
                                 }
                             } else {
-                                Toast.makeText(applicationContext, R.string.help_win_a_game, Toast.LENGTH_SHORT).show()
+                                showGameWarning(R.string.help_win_a_game)
                             }
                         }
                     }
@@ -565,7 +563,7 @@ class GameActivity :
                 animate().alpha(0.0f).start()
 
                 setOnClickListener {
-                    Toast.makeText(applicationContext, R.string.cant_do_it_now, Toast.LENGTH_SHORT).show()
+                    showGameWarning(R.string.cant_do_it_now)
                 }
             }
         }
@@ -719,7 +717,7 @@ class GameActivity :
     }
 
     private fun showEndGameToast(gameResult: GameResult) {
-        gameToast?.dismiss()
+        warning?.dismiss()
 
         val message = when (gameResult) {
             GameResult.GameOver -> R.string.you_lost
@@ -727,7 +725,7 @@ class GameActivity :
             GameResult.Completed -> R.string.you_finished
         }
 
-        gameToast = Snackbar.make(
+        warning = Snackbar.make(
             findViewById(android.R.id.content),
             message,
             Snackbar.LENGTH_LONG

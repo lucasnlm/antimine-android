@@ -4,7 +4,6 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.R
@@ -14,6 +13,7 @@ import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import dev.lucasnlm.antimine.ui.showWarning
 import dev.lucasnlm.external.IAdsManager
 import kotlinx.android.synthetic.main.view_theme.view.*
 
@@ -117,7 +117,7 @@ class ThemeAdapter(
                             themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
                         },
                         onError = {
-                            Toast.makeText(activity.applicationContext, R.string.no_network, Toast.LENGTH_SHORT).show()
+                            activity.showWarning(R.string.no_network)
                         }
                     )
                 }
