@@ -1,7 +1,6 @@
 package dev.lucasnlm.external
 
 import android.util.Log
-import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
