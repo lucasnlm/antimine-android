@@ -50,6 +50,10 @@
 <!--            android:name="com.google.android.gms.instant.flavor"-->
 <!--            android:value="1337" />-->
 
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"/>
+
         <activity
             android:name="dev.lucasnlm.antimine.splash.SplashActivity"
             android:exported="true"

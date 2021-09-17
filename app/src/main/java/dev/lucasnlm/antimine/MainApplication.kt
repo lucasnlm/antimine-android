@@ -15,6 +15,7 @@ import dev.lucasnlm.external.di.ExternalModule
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 
 open class MainApplication : MultiDexApplication() {
     private val analyticsManager: IAnalyticsManager by inject()
@@ -24,6 +25,7 @@ open class MainApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        stopKoin()
         startKoin {
             androidContext(applicationContext)
             modules(AppModule, CommonModule, ExternalModule, LevelModule, ViewModelModule)
