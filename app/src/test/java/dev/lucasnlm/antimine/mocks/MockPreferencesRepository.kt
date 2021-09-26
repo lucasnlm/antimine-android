@@ -166,4 +166,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun setToggleButtonOnTopBar(enabled: Boolean) { }
 
     override fun showToggleButtonOnTopBar(): Boolean = false
+
+    override fun getHapticFeedbackLevel(): Int = 100
+
+    override fun setHapticFeedbackLevel(value: Int) { }
 }

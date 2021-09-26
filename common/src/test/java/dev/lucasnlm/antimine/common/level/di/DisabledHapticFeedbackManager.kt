@@ -1,8 +1,8 @@
 package dev.lucasnlm.antimine.common.level.di
 
-import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
+import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 
-class DisabledHapticFeedbackManager : IHapticFeedbackManager {
+class DisabledHapticFeedbackManager : HapticFeedbackManager {
     override fun longPressFeedback() {
         // Empty
     }

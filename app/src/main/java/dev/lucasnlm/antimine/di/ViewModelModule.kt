@@ -17,7 +17,7 @@ import org.koin.dsl.module
 
 val ViewModelModule = module {
     viewModel { AboutViewModel(get()) }
-    viewModel { ControlViewModel(get()) }
+    viewModel { ControlViewModel(get(), get()) }
     viewModel { CreateGameViewModel(get()) }
     viewModel { HistoryViewModel(get(), get()) }
     viewModel { EndGameDialogViewModel(get(), get()) }

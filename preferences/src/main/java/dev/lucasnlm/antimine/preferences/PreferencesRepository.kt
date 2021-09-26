@@ -72,6 +72,15 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_VIBRATION, value)
     }
 
+    override fun getHapticFeedbackLevel(): Int {
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_VIBRATION_LEVEL, 100)
+    }
+
+    override fun setHapticFeedbackLevel(value: Int) {
+        val newValue = value.coerceIn(0, 200)
+        preferencesManager.putInt(PreferenceKeys.PREFERENCE_VIBRATION_LEVEL, newValue)
+    }
+
     override fun squareSize(): Int =
         preferencesManager.getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50)
 
