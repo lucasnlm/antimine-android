@@ -43,13 +43,18 @@ class HapticFeedbackManager(
     }
 
     private fun vibrateTo(time: Long, amplitude: Int) {
-        if (Build.VERSION.SDK_INT >= 26) {
-            vibrator.vibrate(
-                VibrationEffect.createOneShot(time, amplitude)
-            )
-        } else {
-            @Suppress("DEPRECATION")
-            vibrator.vibrate(time)
+        try {
+            if (Build.VERSION.SDK_INT >= 26) {
+                vibrator.vibrate(
+                    VibrationEffect.createOneShot(time, amplitude)
+                )
+            } else {
+                @Suppress("DEPRECATION")
+                vibrator.vibrate(time)
+            }
+        } catch (e: Exception) {
+            // Probably an internal error. Example: crash in miui.util.QuietUtils implementation.
+            // Just ignore.
         }
     }
 }
