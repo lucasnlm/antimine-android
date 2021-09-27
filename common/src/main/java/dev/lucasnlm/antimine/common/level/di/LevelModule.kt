@@ -11,7 +11,6 @@ import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.common.level.repository.TipRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
-import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
