@@ -20,6 +20,7 @@
     <string name="settings">Beállítások</string>
     <string name="animations">Animációk</string>
     <string name="vibration">Érintéskori visszajelzés</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Rólunk</string>
     <string name="events">Statisztikák</string>
     <string name="custom">Egyéni</string>

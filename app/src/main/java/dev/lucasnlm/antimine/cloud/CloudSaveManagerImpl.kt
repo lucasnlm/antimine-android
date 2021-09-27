@@ -43,6 +43,7 @@ class CloudSaveManagerImpl(
                     gameAssistance = preferencesRepository.useFlagAssistant().toInt(),
                     help = preferencesRepository.useHelp().toInt(),
                     hapticFeedback = preferencesRepository.useHapticFeedback().toInt(),
+                    hapticFeedbackLevel = preferencesRepository.getHapticFeedbackLevel(),
                     soundEffects = preferencesRepository.isSoundEffectsEnabled().toInt(),
                     stats = statsRepository.getAllStats(minId).map { it.toHashMap() },
                     premiumFeatures = preferencesRepository.isPremiumEnabled().toInt(),

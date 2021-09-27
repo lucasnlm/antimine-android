@@ -20,6 +20,7 @@
     <string name="settings">அமைப்புகள்</string>
     <string name="animations">Animations</string>
     <string name="vibration">Haptic Feedback</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">செயலி பற்றி</string>
     <string name="events">புள்ளியியல்</string>
     <string name="custom">தனி விருப்பம்</string>

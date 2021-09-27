@@ -1,23 +1,21 @@
-package dev.lucasnlm.antimine.common.level.utils
+package dev.lucasnlm.antimine.core.haptic
 
+import android.app.Application
 import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 
-interface IHapticFeedbackManager {
-    fun longPressFeedback()
-    fun explosionFeedback()
-    fun tutorialErrorFeedback()
-}
-
-class HapticFeedbackManager(
-    context: Context,
-) : IHapticFeedbackManager {
+class HapticFeedbackManagerImpl(
+    application: Application,
+    private val preferencesRepository: PreferencesRepository,
+) : HapticFeedbackManager {
 
     private val vibrator by lazy {
+        val context = application.applicationContext
         if (Build.VERSION.SDK_INT >= 31) {
             val vibratorManager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
             vibratorManager.defaultVibrator
@@ -44,9 +42,12 @@ class HapticFeedbackManager(
 
     private fun vibrateTo(time: Long, amplitude: Int) {
         try {
+            val feedbackLevel = preferencesRepository.getHapticFeedbackLevel().toDouble() / 100.0
+            val realAmplitude = (feedbackLevel * amplitude).toInt()
+
             if (Build.VERSION.SDK_INT >= 26) {
                 vibrator.vibrate(
-                    VibrationEffect.createOneShot(time, amplitude)
+                    VibrationEffect.createOneShot(time, realAmplitude)
                 )
             } else {
                 @Suppress("DEPRECATION")

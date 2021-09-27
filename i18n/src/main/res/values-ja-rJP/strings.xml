@@ -20,6 +20,7 @@
     <string name="settings">設定</string>
     <string name="animations">アニメーション</string>
     <string name="vibration">タッチ操作バイブ</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">このアプリについて</string>
     <string name="events">統計</string>
     <string name="custom">カスタム</string>

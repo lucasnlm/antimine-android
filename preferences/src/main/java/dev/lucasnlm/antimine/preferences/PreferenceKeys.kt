@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.preferences
 
 object PreferenceKeys {
     const val PREFERENCE_VIBRATION = "preference_vibration"
+    const val PREFERENCE_VIBRATION_LEVEL = "preference_vibration_level"
     const val PREFERENCE_ASSISTANT = "preference_assistant"
     const val PREFERENCE_ANIMATION = "preference_animation"
     const val PREFERENCE_NO_GUESSING = "preference_no_guessing"

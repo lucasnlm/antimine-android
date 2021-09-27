@@ -73,6 +73,9 @@ interface IPreferencesRepository {
     fun useHapticFeedback(): Boolean
     fun setHapticFeedback(value: Boolean)
 
+    fun getHapticFeedbackLevel(): Int
+    fun setHapticFeedbackLevel(value: Int)
+
     fun squareSize(): Int
     fun setSquareSize(value: Int?)
 

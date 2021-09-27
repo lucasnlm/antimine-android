@@ -9,6 +9,7 @@ import dev.lucasnlm.antimine.control.view.ControlAdapter
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
@@ -53,6 +54,22 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), SeekBar.OnS
             preferencesRepository.setToggleButtonOnTopBar(checked)
         }
 
+        hapticLevel.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekbar: SeekBar?, value: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    viewModel.sendEvent(ControlEvent.UpdateHapticFeedbackLevel(value))
+                }
+            }
+
+            override fun onStartTrackingTouch(seekbar: SeekBar?) {
+                // Ignore
+            }
+
+            override fun onStopTrackingTouch(seekbar: SeekBar?) {
+                // Ignore
+            }
+        })
+
         lifecycleScope.launchWhenCreated {
             viewModel.observeState().collect {
                 controlAdapter.bindControlStyleList(it.selected, it.controls)
@@ -62,6 +79,20 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), SeekBar.OnS
                 val toggleVisible = if (it.showToggleButtonSettings) View.VISIBLE else View.GONE
                 toggleButtonTopBar.visibility = toggleVisible
                 toggleButtonTopBarLabel.visibility = toggleVisible
+
+                val longPressVisible = when (it.selected) {
+                    ControlStyle.Standard, ControlStyle.FastFlag -> View.VISIBLE
+                    else -> View.GONE
+                }
+                longPress.visibility = longPressVisible
+                longPressLabel.visibility = longPressVisible
+
+                val doubleClickVisible = when (it.selected) {
+                    ControlStyle.DoubleClick, ControlStyle.DoubleClickInverted -> View.VISIBLE
+                    else -> View.GONE
+                }
+                doubleClick.visibility = doubleClickVisible
+                doubleClickLabel.visibility = doubleClickVisible
             }
         }
     }

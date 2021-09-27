@@ -20,6 +20,7 @@
     <string name="settings">Iestatījumi</string>
     <string name="animations">Animācijas</string>
     <string name="vibration">Haptiskas atsauksmes</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Par lietotni</string>
     <string name="events">Statistika</string>
     <string name="custom">Pielāgots</string>

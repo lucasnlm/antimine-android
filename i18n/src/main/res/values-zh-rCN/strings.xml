@@ -20,6 +20,7 @@
     <string name="settings">设置</string>
     <string name="animations">动画</string>
     <string name="vibration">触摸反馈</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">关于</string>
     <string name="events">统计</string>
     <string name="custom">自定义</string>

@@ -20,6 +20,7 @@
     <string name="settings">การตั้งค่า</string>
     <string name="animations">ภาพเคลื่อนไหว</string>
     <string name="vibration">สั่นเมื่อแตะ</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">เกี่ยวกับ</string>
     <string name="events">สติถิ</string>
     <string name="custom">ปรับแต่งเอง</string>

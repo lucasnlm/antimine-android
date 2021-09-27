@@ -20,6 +20,7 @@
     <string name="settings">Settings</string>
     <string name="animations">Animations</string>
     <string name="vibration">Haptic Feedback</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">About</string>
     <string name="events">Statistics</string>
     <string name="custom">Custom</string>

@@ -20,6 +20,7 @@
     <string name="settings">Настройки</string>
     <string name="animations">Анимации</string>
     <string name="vibration">Виброотклик</string>
+    <string name="haptic_feedback_level">Уровень виброотклика</string>
     <string name="about">Об игре</string>
     <string name="events">Статистика</string>
     <string name="custom">Другой</string>

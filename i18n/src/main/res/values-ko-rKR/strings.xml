@@ -20,6 +20,7 @@
     <string name="settings">설정</string>
     <string name="animations">애니메이션</string>
     <string name="vibration">터치 시 진동</string>
+    <string name="haptic_feedback_level">터치 시 진동 크기</string>
     <string name="about">앱 정보</string>
     <string name="events">통계</string>
     <string name="custom">사용자 지정</string>

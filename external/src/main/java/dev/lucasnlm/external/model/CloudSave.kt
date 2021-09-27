@@ -24,6 +24,7 @@ data class CloudSave(
     val squareDivider: Int,
     val doubleClickTimeout: Int,
     val allowTapNumbers: Int,
+    val hapticFeedbackLevel: Int,
 )
 
 fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
@@ -37,6 +38,7 @@ fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
     "gameAssistance" to gameAssistance,
     "help" to help,
     "hapticFeedback" to hapticFeedback,
+    "hapticFeedbackLevel" to hapticFeedbackLevel,
     "soundEffects" to soundEffects,
     "stats" to stats,
     "premiumFeatures" to premiumFeatures,
@@ -67,6 +69,7 @@ fun cloudSaveOf(id: String, data: Map<String, Any>) =
         gameAssistance = data["gameAssistance"].parseInt(),
         help = data["help"].parseInt(),
         hapticFeedback = data["hapticFeedback"].parseInt(),
+        hapticFeedbackLevel = data["hapticFeedbackLevel"].parseInt(100),
         soundEffects = data["soundEffects"].parseInt(),
         stats = data["stats"] as List<HashMap<String, String>>,
         premiumFeatures = data["premiumFeatures"].parseInt(),

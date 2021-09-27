@@ -6,7 +6,7 @@ import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.repository.MemorySavesRepository
 import dev.lucasnlm.antimine.common.level.repository.MemoryStatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
-import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
+import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 import dev.lucasnlm.antimine.mocks.DisabledHapticFeedbackManager
 import dev.lucasnlm.antimine.mocks.FixedMinefieldRepository
 import org.koin.dsl.bind
@@ -31,5 +31,5 @@ val TestLevelModule = module {
 
     single {
         DisabledHapticFeedbackManager()
-    } bind IHapticFeedbackManager::class
+    } bind HapticFeedbackManager::class
 }

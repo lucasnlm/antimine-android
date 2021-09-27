@@ -20,4 +20,8 @@ sealed class ControlEvent {
     data class UpdateDoubleClick(
         val value: Int,
     ) : ControlEvent()
+
+    data class UpdateHapticFeedbackLevel(
+        val value: Int,
+    ) : ControlEvent()
 }

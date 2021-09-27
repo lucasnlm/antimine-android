@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.control.viewmodel
 
 import dev.lucasnlm.antimine.control.R
 import dev.lucasnlm.antimine.control.models.ControlDetails
+import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
@@ -9,6 +10,7 @@ import kotlinx.coroutines.flow.flow
 
 class ControlViewModel(
     private val preferencesRepository: IPreferencesRepository,
+    private val hapticFeedbackManager: HapticFeedbackManager,
 ) : IntentViewModel<ControlEvent, ControlState>() {
 
     private val gameControlOptions = listOf(
@@ -70,6 +72,11 @@ class ControlViewModel(
 
     override suspend fun mapEventToState(event: ControlEvent) = flow {
         when (event) {
+            is ControlEvent.UpdateHapticFeedbackLevel -> {
+                val value = event.value.coerceIn(0, 200)
+                preferencesRepository.setHapticFeedbackLevel(value)
+                hapticFeedbackManager.longPressFeedback()
+            }
             is ControlEvent.UpdateDoubleClick -> {
                 preferencesRepository.setDoubleClickTimeout(event.value.toLong())
 

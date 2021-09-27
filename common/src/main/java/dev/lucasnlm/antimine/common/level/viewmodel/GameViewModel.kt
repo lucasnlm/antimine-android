@@ -13,7 +13,7 @@ import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.repository.ITipRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
-import dev.lucasnlm.antimine.common.level.utils.IHapticFeedbackManager
+import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
@@ -42,7 +42,7 @@ open class GameViewModel(
     private val statsRepository: IStatsRepository,
     private val dimensionRepository: IDimensionRepository,
     private val preferencesRepository: IPreferencesRepository,
-    private val hapticFeedbackManager: IHapticFeedbackManager,
+    private val hapticFeedbackManager: HapticFeedbackManager,
     private val soundManager: ISoundManager,
     private val minefieldRepository: IMinefieldRepository,
     private val analyticsManager: IAnalyticsManager,

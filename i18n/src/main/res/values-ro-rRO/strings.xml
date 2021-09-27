@@ -20,6 +20,7 @@
     <string name="settings">Setări</string>
     <string name="animations">Animații</string>
     <string name="vibration">Feedback haptic</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Despre</string>
     <string name="events">Statistici</string>
     <string name="custom">Personalizat</string>

@@ -82,6 +82,7 @@ class MainViewModel(
             setPreferredLocale(language)
             setFlagAssistant(gameAssistance != 0)
             setHapticFeedback(hapticFeedback != 0)
+            setHapticFeedbackLevel(hapticFeedbackLevel)
             setHelp(help != 0)
             setAllowTapOnNumbers(allowTapNumbers != 0)
             setSoundEffectsEnabled(soundEffects != 0)

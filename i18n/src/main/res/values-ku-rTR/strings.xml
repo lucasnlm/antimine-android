@@ -20,6 +20,7 @@
     <string name="settings">ڕێکخستنەکان</string>
     <string name="animations">ئەنیمەیشنەکان</string>
     <string name="vibration">وڵامدانەوەی ڕاوبۆچون</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">دەربارە</string>
     <string name="events">ئامار</string>
     <string name="custom">ئاسایی</string>

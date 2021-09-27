@@ -20,6 +20,7 @@
     <string name="settings">Ayarlar</string>
     <string name="animations">Animasyonlar</string>
     <string name="vibration">Dokunsal Geribildirim</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Hakkında</string>
     <string name="events">İstatistikler</string>
     <string name="custom">Özel</string>
