@@ -154,9 +154,7 @@ class MinefieldStage(
                         if (it.isVisible) {
                             val areaActor = (it as AreaActor)
                             val area = field[areaActor.boundAreaId()]
-                            if (area.hashCode() != areaActor.boundAreaHashCode() || areaActor.isVisible) {
-                                areaActor.bindArea(reset, renderSettings.joinAreas, area, field)
-                            }
+                            areaActor.bindArea(reset, renderSettings.joinAreas, area, field)
                         }
                     }
                 }

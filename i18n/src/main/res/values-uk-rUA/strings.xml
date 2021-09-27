@@ -20,6 +20,7 @@
     <string name="settings">Налаштування</string>
     <string name="animations">Анімації</string>
     <string name="vibration">Вібрація при натиску</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Про додаток</string>
     <string name="events">Статистика</string>
     <string name="custom">Свої налаштування</string>

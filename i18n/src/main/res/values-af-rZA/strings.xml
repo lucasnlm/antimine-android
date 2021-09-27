@@ -20,6 +20,7 @@
     <string name="settings">Verstellings</string>
     <string name="animations">Animasie</string>
     <string name="vibration">Haptiese terugvoer</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Aangaande</string>
     <string name="events">Statistiek</string>
     <string name="custom">Pasmaak</string>

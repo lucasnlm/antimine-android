@@ -84,8 +84,6 @@ class AreaActor(
 
     fun boundAreaId() = area.id
 
-    fun boundAreaHashCode() = area.hashCode()
-
     fun bindArea(reset: Boolean, ligatureEnabled: Boolean, area: Area, field: List<Area>) {
         if (reset) {
             this.isPressed = false

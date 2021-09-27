@@ -20,6 +20,7 @@
     <string name="settings">सेटिंग्स</string>
     <string name="animations">एनिमेशन</string>
     <string name="vibration">स्पर्श प्रतिक्रिया</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">के बारे में</string>
     <string name="events">आँकड़े</string>
     <string name="custom">मनपसंद</string>

@@ -20,6 +20,7 @@
     <string name="settings">הגדרות</string>
     <string name="animations">אנימציות</string>
     <string name="vibration">משוב רטט</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">אודות</string>
     <string name="events">סטטיסטיקה</string>
     <string name="custom">התאמה אישית</string>

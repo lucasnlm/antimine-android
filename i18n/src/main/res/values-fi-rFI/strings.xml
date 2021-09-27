@@ -20,6 +20,7 @@
     <string name="settings">Asetukset</string>
     <string name="animations">Animaatiot</string>
     <string name="vibration">Värinä</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Tietoja</string>
     <string name="events">Tilastot</string>
     <string name="custom">Mukautettu</string>

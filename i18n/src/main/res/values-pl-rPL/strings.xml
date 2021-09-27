@@ -20,6 +20,7 @@
     <string name="settings">Ustawienia</string>
     <string name="animations">Animacje</string>
     <string name="vibration">Wibracja przy dotknięciu</string>
+    <string name="haptic_feedback_level">Intensywność wibracji</string>
     <string name="about">Informacje</string>
     <string name="events">Statystyki</string>
     <string name="custom">Niestandardowy</string>

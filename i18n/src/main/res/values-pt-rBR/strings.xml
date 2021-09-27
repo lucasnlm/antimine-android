@@ -20,6 +20,7 @@
     <string name="settings">Preferências</string>
     <string name="animations">Animações</string>
     <string name="vibration">Feedback tátil</string>
+    <string name="haptic_feedback_level">Nível de Feedback tátil</string>
     <string name="about">Sobre</string>
     <string name="events">Estatísticas</string>
     <string name="custom">Personalizado</string>

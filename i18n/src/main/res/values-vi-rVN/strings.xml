@@ -20,6 +20,7 @@
     <string name="settings">Cài đặt</string>
     <string name="animations">Hiệu ứng động</string>
     <string name="vibration">Phản hồi rung</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Giới thiệu</string>
     <string name="events">Thống kê</string>
     <string name="custom">Tuỳ chỉnh</string>

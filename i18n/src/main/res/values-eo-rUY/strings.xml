@@ -20,6 +20,7 @@
     <string name="settings">Agordoj</string>
     <string name="animations">Animacioj</string>
     <string name="vibration">Tuŝ-retrokuplado</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Pri</string>
     <string name="events">Statistikaĵoj</string>
     <string name="custom">Laŭmenda</string>

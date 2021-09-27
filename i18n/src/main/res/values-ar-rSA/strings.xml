@@ -20,6 +20,7 @@
     <string name="settings">الإعدادات</string>
     <string name="animations">الرسوم المتحركة</string>
     <string name="vibration">تغذية راجعة باللمس</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">حول</string>
     <string name="events">إحصائيات</string>
     <string name="custom">مخصص</string>

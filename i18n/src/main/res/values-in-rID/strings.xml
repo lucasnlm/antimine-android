@@ -20,6 +20,7 @@
     <string name="settings">Pengaturan</string>
     <string name="animations">Animasi</string>
     <string name="vibration">Umpan Balik Haptik</string>
+    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Tentang</string>
     <string name="events">Statistik</string>
     <string name="custom">Kustom</string>
