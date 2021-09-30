@@ -1,5 +1,4 @@
 include ':app'
-include ':wear'
 include ':common'
 include ':proprietary'
 include ':foss'

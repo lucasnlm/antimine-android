@@ -39,7 +39,6 @@ Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-andro
 - Multiple Themes (including System and AMOLED)
 - Game Levels: Beginner, Intermediate, Expert, Master, Legend, and Custom
 - Game Statistics
-- Android Wear OS support
 - Save/Resume state when Quit/Resume game
 - Resume previous saved games
 - Retry failed games
