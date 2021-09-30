@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
+import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.control.ControlActivity
@@ -78,6 +79,20 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                         viewModel.sendEvent(MainEvent.ContinueGameEvent)
                     }
                 )
+            }
+        }
+
+        lifecycleScope.launch {
+            if (preferencesRepository.showTutorialButton()) {
+                val shouldShowTutorial = savesRepository.getAllSaves().count { it.status == SaveStatus.VICTORY } < 3
+                preferencesRepository.setShowTutorialButton(false)
+                withContext(Dispatchers.Main) {
+                    if (!shouldShowTutorial) {
+                        tutorial.visibility = View.GONE
+                    }
+                }
+            } else {
+                tutorial.visibility = View.GONE
             }
         }
 

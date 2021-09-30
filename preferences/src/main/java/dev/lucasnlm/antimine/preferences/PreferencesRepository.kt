@@ -432,4 +432,12 @@ class PreferencesRepository(
     override fun showToggleButtonOnTopBar(): Boolean {
         return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_TOGGLE_ON_TOP_BAR, false)
     }
+
+    override fun showTutorialButton(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOULD_SHOW_TUTORIAL_BUTTON, true)
+    }
+
+    override fun setShowTutorialButton(value: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOULD_SHOW_TUTORIAL_BUTTON, value)
+    }
 }
