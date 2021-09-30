@@ -81,6 +81,10 @@ class PreferencesRepository(
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_VIBRATION_LEVEL, newValue)
     }
 
+    override fun resetHapticFeedbackLevel() {
+        preferencesManager.removeKey(PreferenceKeys.PREFERENCE_VIBRATION_LEVEL)
+    }
+
     override fun squareSize(): Int =
         preferencesManager.getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50)
 
@@ -427,5 +431,13 @@ class PreferencesRepository(
 
     override fun showToggleButtonOnTopBar(): Boolean {
         return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_TOGGLE_ON_TOP_BAR, false)
+    }
+
+    override fun showTutorialButton(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOULD_SHOW_TUTORIAL_BUTTON, true)
+    }
+
+    override fun setShowTutorialButton(value: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOULD_SHOW_TUTORIAL_BUTTON, value)
     }
 }

@@ -40,9 +40,17 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
             }
         }
 
+        tutorial.bind(
+            theme = themeRepository.getTheme(),
+            text = R.string.tutorial,
+            centralize = true,
+            onAction = {
+                aboutViewModel.sendEvent(AboutEvent.Tutorial)
+            }
+        )
+
         thirdsParties.bind(
             theme = themeRepository.getTheme(),
-            invert = true,
             text = R.string.show_licenses,
             centralize = true,
             onAction = {
@@ -52,7 +60,6 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
 
         translation.bind(
             theme = themeRepository.getTheme(),
-            invert = true,
             text = R.string.translation,
             centralize = true,
             onAction = {
@@ -62,7 +69,6 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
 
         sourceCode.bind(
             theme = themeRepository.getTheme(),
-            invert = true,
             text = R.string.source_code,
             centralize = true,
             onAction = {

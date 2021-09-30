@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.text.viewmodel
 
-import android.content.Context
+import android.app.Application
 import android.content.res.Resources
 import androidx.annotation.RawRes
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
@@ -10,13 +10,16 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
 class TextViewModel(
-    private val context: Context,
+    private val application: Application,
 ) : IntentViewModel<TextEvent, TextState>() {
 
     private suspend fun loadText(@RawRes rawFile: Int): String? {
         return try {
             withContext(Dispatchers.IO) {
-                context.resources.openRawResource(rawFile)
+                application
+                    .applicationContext
+                    .resources
+                    .openRawResource(rawFile)
                     .bufferedReader()
                     .readLines()
                     .joinToString("\n")

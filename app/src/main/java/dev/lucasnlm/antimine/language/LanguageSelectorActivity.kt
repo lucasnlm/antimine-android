@@ -117,7 +117,7 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
                     .forEach { (language, locale) ->
                         addPreference(
                             Preference(context).apply {
-                                title = language.uppercase()
+                                title = language
                                 isIconSpaceReserved = false
                                 setOnPreferenceClickListener {
                                     preferenceRepository.setPreferredLocale("${locale.language}-${locale.country}")

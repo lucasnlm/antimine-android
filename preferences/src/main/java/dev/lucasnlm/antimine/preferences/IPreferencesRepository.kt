@@ -20,6 +20,9 @@ interface IPreferencesRepository {
     fun isTutorialCompleted(): Boolean
     fun setCompleteTutorial(value: Boolean)
 
+    fun showTutorialButton(): Boolean
+    fun setShowTutorialButton(value: Boolean)
+
     fun customLongPressTimeout(): Long
     fun setCustomLongPressTimeout(value: Long)
 
@@ -75,6 +78,7 @@ interface IPreferencesRepository {
 
     fun getHapticFeedbackLevel(): Int
     fun setHapticFeedbackLevel(value: Int)
+    fun resetHapticFeedbackLevel()
 
     fun squareSize(): Int
     fun setSquareSize(value: Int?)

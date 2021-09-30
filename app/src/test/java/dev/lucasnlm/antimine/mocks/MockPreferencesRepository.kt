@@ -170,4 +170,10 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun getHapticFeedbackLevel(): Int = 100
 
     override fun setHapticFeedbackLevel(value: Int) { }
+
+    override fun resetHapticFeedbackLevel() { }
+
+    override fun showTutorialButton(): Boolean = true
+
+    override fun setShowTutorialButton(value: Boolean) { }
 }

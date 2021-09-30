@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="new_game">เริ่มเกมใหม่</string>
-    <string name="victory">You won!&#xA0;😎</string>
-    <string name="game_over">Exploded!&#xA0;😢</string>
-</resources>

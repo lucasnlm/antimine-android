@@ -66,6 +66,7 @@ class ControlViewModel(
             doubleClick = preferencesRepository.getDoubleClickTimeout().toInt(),
             selected = controlDetails?.controlStyle ?: ControlStyle.Standard,
             controls = gameControlOptions,
+            hapticFeedbackLevel = preferencesRepository.getHapticFeedbackLevel(),
             showToggleButtonSettings = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen,
         )
     }
@@ -76,6 +77,7 @@ class ControlViewModel(
                 val value = event.value.coerceIn(0, 200)
                 preferencesRepository.setHapticFeedbackLevel(value)
                 hapticFeedbackManager.longPressFeedback()
+                preferencesRepository.setHapticFeedback(value != 0)
             }
             is ControlEvent.UpdateDoubleClick -> {
                 preferencesRepository.setDoubleClickTimeout(event.value.toLong())

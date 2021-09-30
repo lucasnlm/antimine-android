@@ -22,7 +22,7 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="76dp"
+            android:layout_width="96dp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:contentDescription="@string/app_name"
@@ -33,6 +33,7 @@
             android:id="@+id/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:text="@string/app_name"
             android:textAllCaps="true"
@@ -68,20 +69,22 @@
         app:layout_constraintTop_toBottomOf="@+id/version_layout">
 
         <dev.lucasnlm.antimine.ui.view.CardButtonView
+            android:id="@+id/tutorial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <dev.lucasnlm.antimine.ui.view.CardButtonView
             android:id="@+id/thirdsParties"
-            android:layout_marginVertical="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <dev.lucasnlm.antimine.ui.view.CardButtonView
             android:id="@+id/translation"
-            android:layout_marginVertical="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <dev.lucasnlm.antimine.ui.view.CardButtonView
             android:id="@+id/sourceCode"
-            android:layout_marginVertical="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

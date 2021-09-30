@@ -59,7 +59,12 @@ class PreferencesActivity :
             switch = hapticFeedback,
             supportTv = false,
             checked = preferenceRepository.useHapticFeedback(),
-            action = { preferenceRepository.setHapticFeedback(it) }
+            action = {
+                preferenceRepository.setHapticFeedback(it)
+                if (it && preferenceRepository.getHapticFeedbackLevel() == 0) {
+                    preferenceRepository.resetHapticFeedbackLevel()
+                }
+            }
         )
 
         bindItem(
@@ -68,14 +73,6 @@ class PreferencesActivity :
             supportTv = true,
             checked = preferenceRepository.isSoundEffectsEnabled(),
             action = { preferenceRepository.setSoundEffectsEnabled(it) }
-        )
-
-        bindItem(
-            label = animationsLabel,
-            switch = animations,
-            supportTv = true,
-            checked = preferenceRepository.useAnimations(),
-            action = { preferenceRepository.setAnimations(it) }
         )
 
         bindItem(
@@ -122,14 +119,6 @@ class PreferencesActivity :
             label = helpLabel,
             switch = help,
             supportTv = false,
-            checked = preferenceRepository.useHelp(),
-            action = { preferenceRepository.setHelp(it) }
-        )
-
-        bindItem(
-            label = simonTathamLabel,
-            switch = simonTatham,
-            supportTv = true,
             checked = preferenceRepository.useHelp(),
             action = { preferenceRepository.setHelp(it) }
         )

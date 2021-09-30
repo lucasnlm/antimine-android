@@ -85,7 +85,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val config = AndroidApplicationConfiguration().apply {
-            numSamples = 0
+            numSamples = 2
             useAccelerometer = false
             useCompass = false
             useGyroscope = false

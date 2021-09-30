@@ -1,21 +1,29 @@
 package dev.lucasnlm.antimine.about.viewmodel
 
-import android.content.Context
+import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
 import dev.lucasnlm.antimine.about.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
+import dev.lucasnlm.antimine.tutorial.TutorialActivity
 
 class AboutViewModel(
-    private val context: Context,
+    private val application: Application,
 ) : IntentViewModel<AboutEvent, AboutState>() {
 
     override fun onEvent(event: AboutEvent) {
-        if (event == AboutEvent.SourceCode) {
-            openSourceCode()
-        } else if (event == AboutEvent.Translators) {
-            openCrowdin()
+        when (event) {
+            AboutEvent.SourceCode -> {
+                openSourceCode()
+            }
+            AboutEvent.Translators -> {
+                openCrowdin()
+            }
+            AboutEvent.Tutorial -> {
+                openTutorial()
+            }
+            else -> { }
         }
     }
 
@@ -32,7 +40,16 @@ class AboutViewModel(
         License(it.key, it.value)
     }.toList()
 
+    private fun openTutorial() {
+        val context = application.applicationContext
+        val intent = Intent(context, TutorialActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        context.startActivity(intent)
+    }
+
     private fun openSourceCode() {
+        val context = application.applicationContext
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(SOURCE_CODE)).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -44,6 +61,7 @@ class AboutViewModel(
     }
 
     private fun openCrowdin() {
+        val context = application.applicationContext
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(CROWDIN_URL)).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK

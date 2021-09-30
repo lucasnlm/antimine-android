@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="new_game">Joc nou</string>
-    <string name="victory">Ați câștigat!&#xA0;😎</string>
-    <string name="game_over">Ați explodat!&#xA0;😢</string>
-</resources>
