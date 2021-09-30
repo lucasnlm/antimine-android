@@ -24,7 +24,7 @@ Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-andro
     <img src="https://raw.githubusercontent.com/lucasnlm/antimine-android/master/.github/google_play.png" alt="Get it on Google Play" height="80"/>
 </a>
 
-### Screeshots
+### Screenshots
 
 <p align="center">
     <img src="https://github.com/lucasnlm/antimine-android/blob/main/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="200px"/>
