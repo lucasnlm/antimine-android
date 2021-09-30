@@ -31,6 +31,5 @@ class AboutViewModelTest {
         val viewModel = AboutViewModel(mockk())
         val state = viewModel.singleState()
         assertTrue(state.licenses.isNotEmpty())
-        assertTrue(state.translators.isNotEmpty())
     }
 }

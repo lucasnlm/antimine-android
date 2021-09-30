@@ -91,7 +91,7 @@ class MinefieldFactoryTest {
         ).run {
             assertEquals(49, width)
             assertEquals(96, height)
-            assertEquals(940, mines)
+            assertEquals(846, mines)
         }
     }
 }

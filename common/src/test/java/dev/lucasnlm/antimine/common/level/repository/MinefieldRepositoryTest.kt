@@ -36,7 +36,7 @@ class MinefieldRepositoryTest {
             preferencesRepository
         )
 
-        assertEquals(Minefield(99, 96, 1900), minefield)
+        assertEquals(Minefield(99, 96, 1710), minefield)
     }
 
     @Test
@@ -58,7 +58,7 @@ class MinefieldRepositoryTest {
             preferencesRepository
         )
 
-        assertEquals(Minefield(99, 97, 1920), minefield)
+        assertEquals(Minefield(99, 97, 1728), minefield)
     }
 
     @Test
@@ -80,7 +80,7 @@ class MinefieldRepositoryTest {
             preferencesRepository
         )
 
-        assertEquals(Minefield(99, 97, 1920 + 50), minefield)
+        assertEquals(Minefield(99, 97, 1778), minefield)
     }
 
     @Test

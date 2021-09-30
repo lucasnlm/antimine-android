@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.core.models.Area
+import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.GameControl
@@ -23,7 +24,12 @@ class GameControllerTest {
         block: suspend (GameController) -> Unit
     ) {
         val minefield = Minefield(10, 10, 20)
-        val gameController = GameController(minefield, 200L)
+        val gameController = GameController(
+            minefield = minefield,
+            seed = 200L,
+            useSimonTatham = false,
+            difficulty = Difficulty.Standard,
+        )
         if (clickOnCreate) {
             runBlockingTest {
                 fakeSingleClick(gameController, 10)
