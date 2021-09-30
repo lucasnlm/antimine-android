@@ -115,8 +115,8 @@ class GameApplicationListener(
         assetManager.finishLoading()
 
         minefieldStage = MinefieldStage(
-            screenWidth = Gdx.graphics.width.toFloat(),
-            screenHeight = Gdx.graphics.height.toFloat(),
+            screenWidth = width.toFloat(),
+            screenHeight = height.toFloat(),
             renderSettings = renderSettings,
             actionSettings = actionSettings,
             onSingleTap = onSingleTap,
@@ -232,7 +232,7 @@ class GameApplicationListener(
                 begin()
 
                 theme.palette.background.run {
-                    Gdx.gl.glClearColor(red(), 0f, blue(), 1f)
+                    Gdx.gl.glClearColor(red(), green(), blue(), 1f)
                     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
                 }
 
@@ -277,6 +277,10 @@ class GameApplicationListener(
                 end()
             }
         } else {
+            if (!appVersion.isValid()) {
+                Thread.sleep(500L)
+            }
+
             minefieldStage?.run {
                 theme.palette.background.run {
                     Gdx.gl.glClearColor(red(), green(), blue(), 1f)

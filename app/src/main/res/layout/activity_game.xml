@@ -137,7 +137,8 @@
                 android:contentDescription="@string/switch_control"
                 android:padding="16dp"
                 android:src="@drawable/touch"
-                android:visibility="gone" />
+                android:visibility="gone"
+                app:tint="?attr/colorAccent" />
 
             <FrameLayout
                 android:layout_width="?attr/actionBarSize"

@@ -94,32 +94,6 @@
                 app:layout_constraintTop_toTopOf="@+id/soundEffectsLabel" />
 
             <TextView
-                android:id="@+id/animationsLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="16dp"
-                android:text="@string/animations"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/soundEffectsLabel" />
-
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/animations"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="?android:attr/selectableItemBackground"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/animationsLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/animationsLabel" />
-
-            <TextView
                 android:id="@+id/showWindowsLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -133,7 +107,7 @@
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/animationsLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/soundEffectsLabel" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/showWindows"
@@ -311,31 +285,6 @@
                 app:layout_constraintBottom_toBottomOf="@+id/helpLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/helpLabel" />
-
-            <TextView
-                android:id="@+id/simonTathamLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="16dp"
-                android:text="@string/use_simon_tatham_algorithm"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/helpLabel" />
-
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/simonTatham"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/simonTathamLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/simonTathamLabel" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

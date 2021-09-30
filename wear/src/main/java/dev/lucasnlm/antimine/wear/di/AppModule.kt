@@ -1,8 +1,12 @@
 package dev.lucasnlm.antimine.wear.di
 
 import dev.lucasnlm.antimine.common.BuildConfig
+import dev.lucasnlm.antimine.core.IAppVersionManager
 import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
 import dev.lucasnlm.antimine.core.analytics.ProdAnalyticsManager
+import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
+import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManagerImpl
+import dev.lucasnlm.antimine.wear.AppVersionManagerImpl
 import dev.lucasnlm.external.BillingManager
 import dev.lucasnlm.external.CrashReporter
 import dev.lucasnlm.external.ExternalAnalyticsWrapper
@@ -19,10 +23,17 @@ import dev.lucasnlm.external.InstantAppManager
 import dev.lucasnlm.external.NoAdsManager
 import dev.lucasnlm.external.PlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
+import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val AppModule = module {
+    single {
+        HapticFeedbackManagerImpl(get(), get())
+    } bind HapticFeedbackManager::class
+
+    single { AppVersionManagerImpl(BuildConfig.DEBUG, androidApplication()) } bind IAppVersionManager::class
+
     single { InstantAppManager() } bind IInstantAppManager::class
 
     single { BillingManager() } bind IBillingManager::class

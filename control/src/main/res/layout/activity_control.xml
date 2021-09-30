@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:animateLayoutChanges="true">
 
     <dev.lucasnlm.antimine.ui.view.SectionView
         android:id="@+id/section"
@@ -76,28 +77,6 @@
                 app:layout_constraintTop_toTopOf="@+id/longPressLabel" />
 
             <TextView
-                android:id="@+id/touch_sensibility"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="12dp"
-                android:text="@string/touch_sensibility"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/longPressLabel" />
-
-            <androidx.appcompat.widget.AppCompatSeekBar
-                android:id="@+id/touchSensibility"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:max="15"
-                android:progress="1"
-                app:layout_constraintBottom_toBottomOf="@+id/touch_sensibility"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/touch_sensibility"
-                app:layout_constraintTop_toTopOf="@+id/touch_sensibility" />
-
-            <TextView
                 android:id="@+id/doubleClickLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,7 +84,7 @@
                 android:paddingVertical="12dp"
                 android:text="@string/double_click"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/touch_sensibility" />
+                app:layout_constraintTop_toBottomOf="@+id/longPressLabel" />
 
             <androidx.appcompat.widget.AppCompatSeekBar
                 android:id="@+id/doubleClick"
@@ -121,6 +100,28 @@
                 app:layout_constraintTop_toTopOf="@+id/doubleClickLabel" />
 
             <TextView
+                android:id="@+id/touch_sensibility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="12dp"
+                android:text="@string/touch_sensibility"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/doubleClickLabel" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/touchSensibility"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:max="15"
+                android:progress="1"
+                app:layout_constraintBottom_toBottomOf="@+id/touch_sensibility"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/touch_sensibility"
+                app:layout_constraintTop_toTopOf="@+id/touch_sensibility" />
+
+            <TextView
                 android:id="@+id/hapticLevelLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -128,7 +129,7 @@
                 android:paddingVertical="12dp"
                 android:text="@string/haptic_feedback_level"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/doubleClickLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/touch_sensibility" />
 
             <androidx.appcompat.widget.AppCompatSeekBar
                 android:id="@+id/hapticLevel"

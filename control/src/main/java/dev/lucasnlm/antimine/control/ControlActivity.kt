@@ -93,6 +93,8 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), SeekBar.OnS
                 }
                 doubleClick.visibility = doubleClickVisible
                 doubleClickLabel.visibility = doubleClickVisible
+
+                hapticLevel.progress = it.hapticFeedbackLevel
             }
         }
     }
