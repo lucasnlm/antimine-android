@@ -7,6 +7,7 @@
 
     <supports-screens
         android:anyDensity="true"
+        android:resizeable="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:smallScreens="true"
@@ -25,6 +26,7 @@
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
+
     <uses-feature
         android:name="android.hardware.faketouch"
         android:required="false" />
