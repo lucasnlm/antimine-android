@@ -29,7 +29,6 @@ class MinefieldStage(
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTouch: (Int) -> Unit,
     private val onEngineReady: () -> Unit,
-    private val forceFocus: Boolean,
 ) : Stage(PixelPerfectViewport(screenWidth, screenHeight)) {
     private var minefield: Minefield? = null
     private var minefieldSize: SizeF? = null
@@ -232,7 +231,7 @@ class MinefieldStage(
             return
         }
 
-        if (minefield != null && currentFocus == null && forceFocus) {
+        if (minefield != null && currentFocus == null) {
             val id = minefield.width * (minefield.height / 2) + minefield.width / 2
             GdxLocal.currentFocus = boundAreas[id]
         } else if (minefield != null && currentFocus != null) {

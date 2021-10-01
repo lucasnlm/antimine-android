@@ -91,14 +91,6 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".TvGameActivity"
-            android:icon="@mipmap/ic_launcher"
-            android:launchMode="singleTop"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:saveEnabled="false"
-            android:theme="@style/AppTheme" />
-
-        <activity
             android:name="dev.lucasnlm.antimine.stats.StatsActivity"
             android:label="@string/events"
             android:theme="@style/AppTheme" />

@@ -13,8 +13,6 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.input.GestureDetector
 import dev.lucasnlm.antimine.core.IAppVersionManager
-import dev.lucasnlm.antimine.core.isAndroidTv
-import dev.lucasnlm.antimine.core.isAndroidWearOs
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
@@ -52,8 +50,7 @@ class GameApplicationListener(
     private var minefieldStage: MinefieldStage? = null
     private var boundAreas: List<Area> = listOf()
     private var boundMinefield: Minefield? = null
-    private val useBlur =
-        !context.isAndroidTv() && !context.isAndroidWearOs() && quality != RenderQuality.Low && context.isPortrait()
+    private val useBlur = quality != RenderQuality.Low && context.isPortrait()
 
     private var batch: SpriteBatch? = null
     private var mainFrameBuffer: FrameBuffer? = null
@@ -123,7 +120,6 @@ class GameApplicationListener(
             onDoubleTap = onDoubleTap,
             onLongTouch = onLongTap,
             onEngineReady = onEngineReady,
-            forceFocus = context.isAndroidTv(),
         ).apply {
             bindField(boundAreas)
             bindSize(boundMinefield)
@@ -296,14 +292,6 @@ class GameApplicationListener(
     private fun getInternalPadding(): InternalPadding {
         val padding = dimensionRepository.areaSize()
         return when {
-            context.isAndroidTv() -> {
-                InternalPadding(
-                    start = padding,
-                    end = padding,
-                    bottom = padding,
-                    top = padding,
-                )
-            }
             context.isPortrait() -> {
                 InternalPadding(
                     start = padding,

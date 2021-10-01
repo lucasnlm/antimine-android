@@ -2,13 +2,11 @@ package dev.lucasnlm.antimine.preferences
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.View
 import android.widget.TextView
 import androidx.preference.PreferenceManager
 import com.google.android.material.switchmaterial.SwitchMaterial
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
-import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.ui.ThematicActivity
 import kotlinx.android.synthetic.main.activity_preferences.*
 import org.koin.android.ext.android.inject
@@ -19,33 +17,26 @@ class PreferencesActivity :
 
     private val preferenceRepository: IPreferencesRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
-    private val isAndroidTv: Boolean by lazy { isAndroidTv() }
 
     private fun bindItem(
         label: TextView,
         switch: SwitchMaterial,
         checked: Boolean,
-        supportTv: Boolean,
         action: (Boolean) -> Unit
     ) {
-        if (isAndroidTv && supportTv || !isAndroidTv) {
-            label.setOnClickListener {
-                switch.apply {
-                    isChecked = !switch.isChecked
-                }
-            }
-
+        label.setOnClickListener {
             switch.apply {
-                isChecked = checked
-                jumpDrawablesToCurrentState()
+                isChecked = !switch.isChecked
             }
+        }
 
-            switch.setOnCheckedChangeListener { _, newCheckedState ->
-                action(newCheckedState)
-            }
-        } else {
-            label.visibility = View.GONE
-            switch.visibility = View.GONE
+        switch.apply {
+            isChecked = checked
+            jumpDrawablesToCurrentState()
+        }
+
+        switch.setOnCheckedChangeListener { _, newCheckedState ->
+            action(newCheckedState)
         }
     }
 
@@ -57,7 +48,6 @@ class PreferencesActivity :
         bindItem(
             label = hapticFeedbackLabel,
             switch = hapticFeedback,
-            supportTv = false,
             checked = preferenceRepository.useHapticFeedback(),
             action = {
                 preferenceRepository.setHapticFeedback(it)
@@ -70,7 +60,6 @@ class PreferencesActivity :
         bindItem(
             label = soundEffectsLabel,
             switch = soundEffects,
-            supportTv = true,
             checked = preferenceRepository.isSoundEffectsEnabled(),
             action = { preferenceRepository.setSoundEffectsEnabled(it) }
         )
@@ -78,7 +67,6 @@ class PreferencesActivity :
         bindItem(
             label = showWindowsLabel,
             switch = showWindows,
-            supportTv = false,
             checked = preferenceRepository.showWindowsWhenFinishGame(),
             action = { preferenceRepository.mustShowWindowsWhenFinishGame(it) }
         )
@@ -86,7 +74,6 @@ class PreferencesActivity :
         bindItem(
             label = openDirectlyLabel,
             switch = openDirectly,
-            supportTv = false,
             checked = preferenceRepository.openGameDirectly(),
             action = { preferenceRepository.setOpenGameDirectly(it) }
         )
@@ -94,7 +81,6 @@ class PreferencesActivity :
         bindItem(
             label = useQuestionMarkLabel,
             switch = useQuestionMark,
-            supportTv = true,
             checked = preferenceRepository.useQuestionMark(),
             action = { preferenceRepository.setQuestionMark(it) }
         )
@@ -102,7 +88,6 @@ class PreferencesActivity :
         bindItem(
             label = automaticFlagsLabel,
             switch = automaticFlags,
-            supportTv = true,
             checked = preferenceRepository.useFlagAssistant(),
             action = { preferenceRepository.setFlagAssistant(it) }
         )
@@ -110,7 +95,6 @@ class PreferencesActivity :
         bindItem(
             label = noGuessingLabel,
             switch = noGuessing,
-            supportTv = true,
             checked = preferenceRepository.useNoGuessingAlgorithm(),
             action = { preferenceRepository.setNoGuessingAlgorithm(it) }
         )
@@ -118,7 +102,6 @@ class PreferencesActivity :
         bindItem(
             label = helpLabel,
             switch = help,
-            supportTv = false,
             checked = preferenceRepository.useHelp(),
             action = { preferenceRepository.setHelp(it) }
         )
@@ -126,7 +109,6 @@ class PreferencesActivity :
         bindItem(
             label = allowClickNumberLabel,
             switch = clickOnNumbers,
-            supportTv = false,
             checked = preferenceRepository.allowTapOnNumbers(),
             action = { preferenceRepository.setAllowTapOnNumbers(it) }
         )

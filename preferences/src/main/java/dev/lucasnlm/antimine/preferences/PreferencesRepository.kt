@@ -5,7 +5,6 @@ import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
 class PreferencesRepository(
-    private val isAndroidTv: Boolean,
     private val preferencesManager: IPreferencesManager,
     private val defaultLongPressTimeout: Int,
 ) : IPreferencesRepository {
@@ -186,12 +185,8 @@ class PreferencesRepository(
     }
 
     override fun controlStyle(): ControlStyle {
-        return if (isAndroidTv) {
-            ControlStyle.FastFlag
-        } else {
-            val index = preferencesManager.getInt(PreferenceKeys.PREFERENCE_CONTROL_STYLE, -1)
-            ControlStyle.values().getOrNull(index) ?: ControlStyle.Standard
-        }
+        val index = preferencesManager.getInt(PreferenceKeys.PREFERENCE_CONTROL_STYLE, -1)
+        return ControlStyle.values().getOrNull(index) ?: ControlStyle.Standard
     }
 
     override fun useControlStyle(controlStyle: ControlStyle) {

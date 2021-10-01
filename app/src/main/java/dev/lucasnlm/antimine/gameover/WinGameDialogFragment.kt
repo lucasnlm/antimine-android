@@ -23,12 +23,10 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
-import dev.lucasnlm.antimine.level.view.NewGameFragment
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.stats.StatsActivity
@@ -144,12 +142,8 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                 ) {
                                     showAdsAndNewGame()
                                 } else {
-                                    if (context.isAndroidTv()) {
-                                        NewGameFragment().show(parentFragmentManager, NewGameFragment.TAG)
-                                    } else {
-                                        lifecycleScope.launch {
-                                            gameViewModel.startNewGame()
-                                        }
+                                    lifecycleScope.launch {
+                                        gameViewModel.startNewGame()
                                     }
                                     dismissAllowingStateLoss()
                                 }
@@ -255,13 +249,9 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
     }
 
     private fun startNewGameAndDismiss() {
-        activity?.let { activity ->
-            if (activity.isAndroidTv()) {
-                NewGameFragment().show(parentFragmentManager, NewGameFragment.TAG)
-            } else {
-                lifecycleScope.launch {
-                    gameViewModel.startNewGame()
-                }
+        activity?.let { _ ->
+            lifecycleScope.launch {
+                gameViewModel.startNewGame()
             }
             dismissAllowingStateLoss()
         }
