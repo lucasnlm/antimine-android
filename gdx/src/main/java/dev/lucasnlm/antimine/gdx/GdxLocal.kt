@@ -16,8 +16,6 @@ object GdxLocal {
     var highlightAlpha = 0.0f
     var zoom = 1.0f
 
-    var currentFocus: Area? = null
-
     // Global animation scale, it defines how fast/slow all animations must be executed.
     var animationScale: Float = 1.0f
 

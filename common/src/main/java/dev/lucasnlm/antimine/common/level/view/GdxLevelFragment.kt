@@ -23,7 +23,6 @@ import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
-import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.gdx.models.RenderQuality
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
@@ -143,7 +142,6 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 .map { it.seed }
                 .distinctUntilChanged()
                 .collect {
-                    GdxLocal.currentFocus = null
                     levelApplicationListener.onChangeGame()
 
                     if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {

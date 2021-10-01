@@ -1,7 +1,6 @@
 package dev.lucasnlm.antimine.gdx.actors
 
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Actor
@@ -144,24 +143,6 @@ class AreaActor(
 
         touchable = if ((area.isCovered || area.minesAround > 0) && GdxLocal.actionsEnabled)
             Touchable.enabled else Touchable.disabled
-
-        val isCurrentFocus = GdxLocal.currentFocus?.id == area.id
-        val isEnterPressed = Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.isKeyPressed(Input.Keys.DPAD_CENTER)
-
-        if (isCurrentFocus && touchable == Touchable.enabled) {
-            if (zIndex != Int.MAX_VALUE) {
-                toFront()
-            }
-
-            if (isEnterPressed && !isPressed) {
-                onInputEvent(GdxEvent.TouchDownEvent(area.id))
-                isPressed = true
-            } else if (!isEnterPressed && isPressed) {
-                toBack()
-                onInputEvent(GdxEvent.TouchUpEvent(area.id))
-                isPressed = false
-            }
-        }
 
         focusScale = if (isPressed) {
             (focusScale + Gdx.graphics.deltaTime).coerceAtMost(MAX_SCALE)
@@ -351,21 +332,6 @@ class AreaActor(
         }
     }
 
-    private fun drawFocusMarker(batch: Batch) {
-        GdxLocal.gameTextures?.areaHighlight?.let {
-            val color = theme.palette.highlight
-            batch.drawTexture(
-                texture = it,
-                x = x - width * (focusScale - 1.0f) * 0.5f,
-                y = y - height * (focusScale - 1.0f) * 0.5f,
-                width = width * focusScale,
-                height = height * focusScale,
-                color = color.toGdxColor().dim(0.8f - (focusScale - 1.0f)),
-                blend = true,
-            )
-        }
-    }
-
     override fun draw(batch: Batch?, parentAlpha: Float) {
         super.draw(batch, parentAlpha)
 
@@ -384,10 +350,6 @@ class AreaActor(
                 }
                 drawPressed(this, isOdd)
                 drawUncoveredIcons(this)
-            }
-
-            if (GdxLocal.currentFocus?.id == area.id) {
-                drawFocusMarker(this)
             }
         }
     }
