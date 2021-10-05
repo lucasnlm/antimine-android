@@ -1,0 +1,49 @@
+Preizkusi svoje logične sposobnosti v zahtevni miselni igri, kjer moraš razvozlati minsko polje, brez da bi sprožil katero od min.
+To je minimalna in moderna verzija klasičnega minolovca (Minesweeper).
+
+Ali lahko počistiš minsko polje? Pa začnimo!
+
+CILJ
+Cilj igre je kot pri minolovcu. Zmagaš tako, da označiš vse mine na minskem polju. Pazi ta katere ne sprožiš!
+
+BREZ UGIBANJA
+Igra je zasnovana tako, da da vedno generira minsko polja, ki jih je mogoče rešiti. Ne bo ti potrebno ugibati, kje se nahaja zadnja mina!
+
+STOPNJE TEŽAVNOSTI
+Tako kot pri minolovcu, ima ta igra različne stopnje težavnosti: Začetnik, poznavalec in strokovnjak. Poleg tega ima tudi edinstven način igre, ki se prilagaja tvojemu znanju in postaja težja po vsaki zmagi.
+
+TEŽAVNOST PO MERI
+Če so ti standardni način težavnosti prelahki, si jo lahko povečaš, tako da ustvariš čisto svoje minsko polje!
+
+TEME
+Igra Antimine ima že več kot 15 tem (vključno z svetlo, temno in AMOLED). Prav tako pa jih bomo dodali še več v prihodonsti!
+
+MINIMALISTIČEN IZGLED
+Preprost izgled in zasnova, z minimalno vizualizacijo, ter majhno velikostjo (manj kot 9MB).
+
+VODIČ
+Ne veš kako igrati minolovca? Ni panike, lahko si pomagaš z vodenim minskim poljem. Poleg tega pa si lahko v nastavitvah omogočiš nasvete.
+
+STATISTIKA
+Preveri svoje rezultate in tvoj napredek.
+
+POMOČNIK
+Igra ti bo avtomatsko predlagala polja, ki si jih že izločil.
+
+PRILAGODITEV
+Lahko si prilagodiš igro, da ustreza tvojemu načinu igranja.
+Na primer: Pomoč, animacije, način vibracije ali vprašaj.
+
+KONTROLA
+Lahko si izbereš enega izmed štirih različnih načinov kontrole igre. Na primer: Označi mino s klikom ali z dolgim pritiskom.
+
+CILJI IN LESTVICA DOSEŽKOV
+Na voljo imaš 8 ciljov, ki jih lahko dosežeš, ter različne lestivce dosežkov, ki jih lahko deliš s prijatelji.
+
+S POVEZAVO ALI BREZ
+Za igranje ne potrebuješ internetne povezave!
+
+AVTOMATSKO SHRANJEVANJE
+Nedokončane igre lahko nadajuješ kasneje! Igra bo avtomatsko shranjena.
+
+Uživaj!
