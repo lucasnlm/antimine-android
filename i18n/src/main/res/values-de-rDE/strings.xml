@@ -67,7 +67,6 @@
     <string name="single_click">Einfaches Tippen</string>
     <string name="double_click">Doppeltes Tippen</string>
     <string name="long_press">Langes Tippen</string>
-    <string name="control_description">%ACTION zum %REACTION</string>
     <string name="touch_sensibility">Berührungsempfindlichkeit</string>
     <string name="open_tile">Öffnen</string>
     <string name="flag_tile">Flagge</string>

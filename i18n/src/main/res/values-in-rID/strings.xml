@@ -67,7 +67,6 @@
     <string name="single_click">Ketuk sekali</string>
     <string name="double_click">Sentuh dua kali</string>
     <string name="long_press">Tekan yang panjang</string>
-    <string name="control_description">%ACTION - %REACTION</string>
     <string name="touch_sensibility">Sensitifitas Sentuh</string>
     <string name="open_tile">Buka</string>
     <string name="flag_tile">Bendera</string>

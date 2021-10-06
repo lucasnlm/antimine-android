@@ -67,7 +67,6 @@
     <string name="single_click">एक बार दबाए</string>
     <string name="double_click">दो बार दबाएं</string>
     <string name="long_press">लंबा दबाएँ</string>
-    <string name="control_description">%ACTION से %REACTION</string>
     <string name="touch_sensibility">स्पर्श संवेदनशीलता</string>
     <string name="open_tile">खुला</string>
     <string name="flag_tile">ध्वज</string>

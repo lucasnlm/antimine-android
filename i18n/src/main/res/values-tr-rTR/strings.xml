@@ -67,7 +67,6 @@
     <string name="single_click">Tek Tıklama</string>
     <string name="double_click">Çift Tıklama</string>
     <string name="long_press">Uzun Basış</string>
-    <string name="control_description">%FAALİYET ve %TEPKİME</string>
     <string name="touch_sensibility">Dokunma hassasiyeti</string>
     <string name="open_tile">Aç</string>
     <string name="flag_tile">Bayrak</string>

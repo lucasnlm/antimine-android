@@ -67,7 +67,6 @@
     <string name="single_click">单击</string>
     <string name="double_click">双击</string>
     <string name="long_press">长按</string>
-    <string name="control_description">%ACTION 来 %REACTION</string>
     <string name="touch_sensibility">触控灵敏度</string>
     <string name="open_tile">打开</string>
     <string name="flag_tile">标记</string>

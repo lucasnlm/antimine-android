@@ -67,7 +67,6 @@
     <string name="single_click">Jedno klepnutí</string>
     <string name="double_click">Dvojité klepnutí</string>
     <string name="long_press">Dlouhý stisk</string>
-    <string name="control_description">%ACTION pro %REACTION</string>
     <string name="touch_sensibility">Citlivost dotyků</string>
     <string name="open_tile">Otevřít</string>
     <string name="flag_tile">Vlajka</string>

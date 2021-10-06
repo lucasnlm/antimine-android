@@ -67,7 +67,6 @@
     <string name="single_click">לחיצה יחידה</string>
     <string name="double_click">לחיצה כפולה</string>
     <string name="long_press">לחיצה ארוכה</string>
-    <string name="control_description">%ACTION ל- REACTION%</string>
     <string name="touch_sensibility">רגישות למגע</string>
     <string name="open_tile">פתוח</string>
     <string name="flag_tile">דגל</string>

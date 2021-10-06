@@ -67,7 +67,6 @@
     <string name="single_click">Nhấn 1 lần</string>
     <string name="double_click">Nhấn đúp</string>
     <string name="long_press">Nhấn giữ</string>
-    <string name="control_description">%ACTION để %REACTION</string>
     <string name="touch_sensibility">Độ nhạy cảm ứng</string>
     <string name="open_tile">Mở</string>
     <string name="flag_tile">Cờ</string>

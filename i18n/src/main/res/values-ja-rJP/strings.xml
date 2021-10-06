@@ -67,7 +67,6 @@
     <string name="single_click">シングルタップ</string>
     <string name="double_click">ダブルタップ</string>
     <string name="long_press">長くタップ</string>
-    <string name="control_description">%ACTION - %REACTION</string>
     <string name="touch_sensibility">タッチ感度</string>
     <string name="open_tile">開く</string>
     <string name="flag_tile">旗</string>

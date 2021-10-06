@@ -67,7 +67,6 @@
     <string name="single_click">Enkele tik</string>
     <string name="double_click">Dubbeltik</string>
     <string name="long_press">Lang aanraken</string>
-    <string name="control_description">%ACTION naar %REACTION</string>
     <string name="touch_sensibility">Aanraakgevoeligheid</string>
     <string name="open_tile">Open</string>
     <string name="flag_tile">Vlag</string>

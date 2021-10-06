@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="sl">
+    <string name="app_name">Antimine</string>
     <string name="tutorial">Vadba</string>
     <string name="tutorial_basic">Pravila igre so preprosta. Števlika prikazana na polju prikazuje število min v okolici, katere je potrebno označiti z zastavo.</string>
     <string name="tutorial_text_1">Če je številka dotika istega števila polj v okolici, potem je na vseh poljih mina.</string>
@@ -67,7 +68,6 @@
     <string name="single_click">Enkratni pritisk</string>
     <string name="double_click">Dvokratni pritisk</string>
     <string name="long_press">Dolgi pritisk</string>
-    <string name="control_description">%ACTION za %REACTION</string>
     <string name="touch_sensibility">Občutljivost dotika</string>
     <string name="open_tile">Razkrij</string>
     <string name="flag_tile">Označi</string>
