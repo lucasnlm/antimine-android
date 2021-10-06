@@ -90,6 +90,7 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
             "Pусский" to "ru-rRU",
             "Ślōnsko" to "szl",
             "Svenska" to "sv-rSE",
+            "Slovensko" to "sl-rSI",
             "ไทย" to "th-rTH",
             "Türkçe" to "tr-rTR",
             "Yкраїньска" to "uk-rUA",
