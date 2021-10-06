@@ -20,7 +20,7 @@
     <string name="settings">Innstillinger</string>
     <string name="animations">Animasjoner</string>
     <string name="vibration">Haptisk Tilbakemelding</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
+    <string name="haptic_feedback_level">Haptisk Tilbakemelding Nivå</string>
     <string name="about">Om</string>
     <string name="events">Statistikk</string>
     <string name="custom">Egendefinert</string>

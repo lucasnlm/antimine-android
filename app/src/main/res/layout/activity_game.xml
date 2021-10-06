@@ -85,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:layoutDirection="ltr"
                 android:gravity="center">
 
                 <TextView
@@ -96,7 +97,7 @@
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
                     android:includeFontPadding="false"
-                    android:minEms="2"
+                    android:minEms="4"
                     android:text="@string/default_time_value"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="@dimen/text_size"
@@ -117,7 +118,7 @@
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
                     android:includeFontPadding="false"
-                    android:minEms="3"
+                    android:minEms="4"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="@dimen/text_size"
                     android:textStyle="bold"

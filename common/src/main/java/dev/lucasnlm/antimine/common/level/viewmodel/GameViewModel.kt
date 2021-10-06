@@ -2,8 +2,10 @@ package dev.lucasnlm.antimine.common.level.viewmodel
 
 import android.content.Context
 import android.text.SpannedString
+import android.util.LayoutDirection
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
+import androidx.core.text.layoutDirection
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
@@ -36,6 +38,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
+import java.util.Locale
 
 open class GameViewModel(
     private val savesRepository: ISavesRepository,
@@ -794,40 +797,38 @@ open class GameViewModel(
         }
 
         if (openAction != null && openReaction != null && flagAction != null && flagReaction != null) {
-            val keywords = listOf(
-                openAction,
-                openReaction,
-                flagAction,
-                flagReaction,
-            )
+            val isLTL = Locale.getDefault().layoutDirection == LayoutDirection.LTR
 
-            val base = context.getString(R.string.control_description)
             val first = buildSpannedString {
-                base.replace("%ACTION", openAction)
-                    .replace("%REACTION", openReaction)
-                    .splitKeeping(keywords)
-                    .forEach {
-                        when {
-                            keywords.contains(it) -> {
-                                bold { append(it) }
-                            }
-                            else -> append(it)
-                        }
+                if (isLTL) {
+                    bold {
+                        append(openAction)
                     }
+                    append(" - ")
+                    append(openReaction)
+                } else {
+                    bold {
+                        append(openReaction)
+                    }
+                    append(" - ")
+                    append(openAction)
+                }
             }
 
             val second = buildSpannedString {
-                base.replace("%ACTION", flagAction)
-                    .replace("%REACTION", flagReaction)
-                    .splitKeeping(keywords)
-                    .forEach {
-                        when {
-                            keywords.contains(it) -> {
-                                bold { append(it) }
-                            }
-                            else -> append(it)
-                        }
+                if (isLTL) {
+                    bold {
+                        append(flagAction)
                     }
+                    append(" - ")
+                    append(flagReaction)
+                } else {
+                    bold {
+                        append(flagReaction)
+                    }
+                    append(" - ")
+                    append(flagAction)
+                }
             }
 
             result = buildSpannedString {
@@ -840,18 +841,6 @@ open class GameViewModel(
         }
 
         return result
-    }
-
-    private fun String.splitKeeping(str: String): List<String> {
-        return this.split(str).flatMap { listOf(it, str) }.dropLast(1).filterNot { it.isEmpty() }
-    }
-
-    private fun String.splitKeeping(targetStrings: List<String>): List<String> {
-        var res = listOf(this)
-        targetStrings.forEach { str ->
-            res = res.flatMap { it.splitKeeping(str) }
-        }
-        return res
     }
 
     private fun refreshField() {

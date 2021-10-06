@@ -20,7 +20,7 @@
     <string name="settings">Ρυθμίσεις</string>
     <string name="animations">Εφέ Κίνησης</string>
     <string name="vibration">Δόνηση</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
+    <string name="haptic_feedback_level">Επίπεδο Δόνησης</string>
     <string name="about">Σχετικά</string>
     <string name="events">Στατιστικά</string>
     <string name="custom">Προσαρμοσμένο</string>

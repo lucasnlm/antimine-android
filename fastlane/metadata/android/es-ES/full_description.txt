@@ -25,7 +25,7 @@ TUTORIAL
 ¿No sabes cómo jugar al buscaminas? No hay problema, puedes jugar nuestro nivel de tutorial y activar los consejos en la configuración.
 
 ESTADÍSTICAS
-Compruebe tus resultados y desarrollo.
+Comprueba tus resultados y desarrollo.
 
 ASISTENTE DEL JUEGO
 El juego marcará automáticamente los cuadrados que hayas aislado. 

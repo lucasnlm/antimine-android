@@ -1,7 +1,6 @@
 package dev.lucasnlm.antimine.gdx
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
-import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.models.GameTextures
 
 // The references are held in public static fields which allows static access to all sub systems. Do not

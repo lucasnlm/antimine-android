@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh-rTW">
     <string name="tutorial">Tutorial</string>
     <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
     <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
@@ -67,6 +67,7 @@
     <string name="single_click">Single Tap</string>
     <string name="double_click">Double Tap</string>
     <string name="long_press">Long Tap</string>
+    <string name="control_description">%ACTION to %REACTION</string>
     <string name="touch_sensibility">Touch Sensibility</string>
     <string name="open_tile">Open</string>
     <string name="flag_tile">Flag</string>
@@ -114,7 +115,6 @@
     <string name="switch_control_desc">Use button to switch between Flag and Open</string>
     <string name="app_description">You have to clear a rectangular board containing hidden mines without detonating any of them.</string>
     <string name="app_name">Antimine</string>
-    <string name="crowdin" translatable="false">Crowdin</string>
     <string name="do_you_know_how_to_play">Do you know how to play minesweeper?</string>
     <string name="close">Close</string>
     <string name="open_tutorial">Open Tutorial</string>

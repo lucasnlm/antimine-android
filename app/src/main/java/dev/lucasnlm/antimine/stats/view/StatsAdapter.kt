@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.stats.view
 
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import dev.lucasnlm.antimine.stats.model.StatsModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.view_stats.view.*
+import java.text.NumberFormat
 
 class StatsAdapter(
     private val statsList: List<StatsModel>,
@@ -23,6 +25,8 @@ class StatsAdapter(
             .inflate(R.layout.view_stats, parent, false)
         return StatsViewHolder(view)
     }
+
+    private fun Int.toL10nString() = String.format("%d", this)
 
     override fun onBindViewHolder(holder: StatsViewHolder, position: Int) {
         val stats = statsList[position]
@@ -38,19 +42,19 @@ class StatsAdapter(
                 } else {
                     statsLabel.visibility = View.GONE
                 }
-                minesCount.text = stats.mines.toString()
+                minesCount.text = stats.mines.toL10nString()
                 totalTime.text = formatTime(stats.totalTime)
                 averageTime.text = formatTime(stats.averageTime)
                 shortestTime.text = if (stats.shortestTime == 0L) emptyText else formatTime(stats.shortestTime)
-                totalGames.text = stats.totalGames.toString()
+                totalGames.text = stats.totalGames.toL10nString()
                 performance.text = formatPercentage(100.0 * stats.victory / stats.totalGames)
-                openAreas.text = stats.openArea.toString()
-                victory.text = stats.victory.toString()
-                defeat.text = (stats.totalGames - stats.victory).toString()
+                openAreas.text = stats.openArea.toL10nString()
+                victory.text = stats.victory.toL10nString()
+                defeat.text = (stats.totalGames - stats.victory).toL10nString()
             } else {
                 val emptyText = "-"
                 statsLabel.visibility = View.GONE
-                totalGames.text = "0"
+                totalGames.text = 0.toL10nString()
                 minesCount.text = emptyText
                 totalTime.text = emptyText
                 averageTime.text = emptyText
@@ -67,10 +71,10 @@ class StatsAdapter(
 
     companion object {
         private fun formatPercentage(value: Double) =
-            String.format("%.2f%%", value)
+            NumberFormat.getPercentInstance().format(value)
 
         private fun formatTime(durationSecs: Long) =
-            String.format("%02d:%02d:%02d", durationSecs / 3600, durationSecs % 3600 / 60, durationSecs % 60)
+            DateUtils.formatElapsedTime(durationSecs)
     }
 }
 

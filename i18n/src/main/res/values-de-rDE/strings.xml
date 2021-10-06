@@ -20,7 +20,7 @@
     <string name="settings">Einstellungen</string>
     <string name="animations">Animationen</string>
     <string name="vibration">Haptische Rückmeldung</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
+    <string name="haptic_feedback_level">Haptische Rückmeldung</string>
     <string name="about">Über</string>
     <string name="events">Statistiken</string>
     <string name="custom">Benutzerdefiniert</string>
@@ -121,7 +121,7 @@
     <string name="click_numbers">Antippen von Zahlenquadraten erlauben</string>
     <string name="tap_to_customize">Zum Anpassen tippen</string>
     <string name="toggle_button_top">\"Umschaltknopf\" in oberer Leiste anzeigen</string>
-    <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
-    <string name="fixed_size">Fixed Size</string>
-    <string name="progressive">Progressive</string>
+    <string name="no_guess_fail_warning">Das aktuelle Minenfeld ist möglicherweise nicht ratenfrei!</string>
+    <string name="fixed_size">Feste Größe</string>
+    <string name="progressive">Fortschrittlich</string>
 </resources>

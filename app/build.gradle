@@ -143,7 +143,7 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.3.0'
 
     // Constraint
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
 
     // Google
     implementation 'com.google.android.material:material:1.4.0'
