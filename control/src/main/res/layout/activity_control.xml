@@ -56,11 +56,12 @@
 
             <TextView
                 android:id="@+id/longPressLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp"
                 android:text="@string/long_press"
+                app:layout_constraintEnd_toStartOf="@id/longPress"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings" />
 
@@ -78,12 +79,13 @@
 
             <TextView
                 android:id="@+id/doubleClickLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp"
                 android:text="@string/double_click"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/longPress"
                 app:layout_constraintTop_toBottomOf="@+id/longPressLabel" />
 
             <androidx.appcompat.widget.AppCompatSeekBar
@@ -101,12 +103,13 @@
 
             <TextView
                 android:id="@+id/touch_sensibility"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp"
                 android:text="@string/touch_sensibility"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/touchSensibility"
                 app:layout_constraintTop_toBottomOf="@+id/doubleClickLabel" />
 
             <androidx.appcompat.widget.AppCompatSeekBar
@@ -123,12 +126,13 @@
 
             <TextView
                 android:id="@+id/hapticLevelLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp"
                 android:text="@string/haptic_feedback_level"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/hapticLevel"
                 app:layout_constraintTop_toBottomOf="@+id/touch_sensibility" />
 
             <androidx.appcompat.widget.AppCompatSeekBar
@@ -157,7 +161,7 @@
                 android:text="@string/toggle_button_top"
                 android:textColor="?attr/colorControlNormal"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/toggleButtonTopBar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hapticLevelLabel" />
 
