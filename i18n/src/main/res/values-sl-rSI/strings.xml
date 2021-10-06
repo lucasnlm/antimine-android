@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="sl">
     <string name="tutorial">Vadba</string>
-    <string name="tutorial_basic">Pravila igre so preprosta. Števlika prikazana na polju prikazuje
-        število min v okolici, katere je potrebno označiti z zastavo.
-    </string>
-    <string name="tutorial_text_1">Če je številka dotika istega števila polj v okolici, potem je na
-        vseh poljih mina.
-    </string>
-    <string name="tutorial_text_2">Za tem ko označiš prvo mino, preveri koliko min se še nahaja v
-        okolici in preveri naslednje polje.</string>
-    <string name="tutorial_text_3">Če je v okolici polja že označeno enako število min, potem ostala
-        sosednja polja niso mine (glej zeleno puščico).</string>
+    <string name="tutorial_basic">Pravila igre so preprosta. Števlika prikazana na polju prikazuje število min v okolici, katere je potrebno označiti z zastavo.</string>
+    <string name="tutorial_text_1">Če je številka dotika istega števila polj v okolici, potem je na vseh poljih mina.</string>
+    <string name="tutorial_text_2">Za tem ko označiš prvo mino, preveri koliko min se še nahaja v okolici in preveri naslednje polje.</string>
+    <string name="tutorial_text_3">Če je v okolici polja že označeno enako število min, potem ostala sosednja polja niso mine (glej zeleno puščico).</string>
     <string name="tutorial_text_4">Preštej koliko min še manjka in nadaljuj z odpiranjem polj.</string>
     <string name="games">Igre</string>
     <string name="tap_to_begin">Pritisni za pričetek igre</string>
@@ -48,8 +42,7 @@
     <string name="space_between_squares">Razmak med polji</string>
     <string name="system">Sistem</string>
     <string name="rating">Povratne informacije</string>
-    <string name="sign_in_failed">Napaka pri prijavi. Prosim preverite internetno povezavo in
-        poizkusite ponovno.</string>
+    <string name="sign_in_failed">Napaka pri prijavi. Prosim preverite internetno povezavo in poizkusite ponovno.</string>
     <string name="you_won">Zmaga!</string>
     <string name="victories">Zmage</string>
     <string name="you_lost">Igra izgubljena!</string>
