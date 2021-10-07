@@ -20,7 +20,7 @@
     <string name="settings">Pengaturan</string>
     <string name="animations">Animasi</string>
     <string name="vibration">Umpan Balik Haptik</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
+    <string name="haptic_feedback_level">Tingkat Umpan Balik Haptik</string>
     <string name="about">Tentang</string>
     <string name="events">Statistik</string>
     <string name="custom">Kustom</string>
@@ -67,7 +67,6 @@
     <string name="single_click">Ketuk sekali</string>
     <string name="double_click">Sentuh dua kali</string>
     <string name="long_press">Tekan yang panjang</string>
-    <string name="control_description">%ACTION - %REACTION</string>
     <string name="touch_sensibility">Sensitifitas Sentuh</string>
     <string name="open_tile">Buka</string>
     <string name="flag_tile">Bendera</string>
@@ -122,6 +121,6 @@
     <string name="tap_to_customize">Ketuk untuk menyesuaikan</string>
     <string name="toggle_button_top">Tunjukkan \"Tombol alihan\" di bar atas</string>
     <string name="no_guess_fail_warning">Ladang Ranjau saat ini kemungkinan tidak dapat diselesaikan tanpa menebak!</string>
-    <string name="fixed_size">Fixed Size</string>
-    <string name="progressive">Progressive</string>
+    <string name="fixed_size">Ukuran tetap</string>
+    <string name="progressive">Progresif</string>
 </resources>

@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.utils.GdxNativesLoader
 import dev.lucasnlm.antimine.GameActivity
-import dev.lucasnlm.antimine.TvGameActivity
-import dev.lucasnlm.antimine.core.isAndroidTv
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
@@ -39,17 +37,13 @@ class SplashActivity : AppCompatActivity() {
     private fun goToMainActivity() {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
-        if (applicationContext.isAndroidTv()) {
-            Intent(this, TvGameActivity::class.java).run { startActivity(this) }
+        val playGames = playGamesManager.hasGooglePlayGames()
+        if ((playGames && preferencesRepository.userId() != null || !playGames) &&
+            preferencesRepository.openGameDirectly()
+        ) {
+            Intent(this, GameActivity::class.java).run { startActivity(this) }
         } else {
-            val playGames = playGamesManager.hasGooglePlayGames()
-            if ((playGames && preferencesRepository.userId() != null || !playGames) &&
-                preferencesRepository.openGameDirectly()
-            ) {
-                Intent(this, GameActivity::class.java).run { startActivity(this) }
-            } else {
-                Intent(this, MainActivity::class.java).run { startActivity(this) }
-            }
+            Intent(this, MainActivity::class.java).run { startActivity(this) }
         }
 
         finish()

@@ -67,7 +67,6 @@
     <string name="single_click">Pieskāriens</string>
     <string name="double_click">Dubultpiesitiens</string>
     <string name="long_press">Ilgs pieskāriens</string>
-    <string name="control_description">%ACTION lai %REACTION</string>
     <string name="touch_sensibility">Jūtīgums</string>
     <string name="open_tile">Atvērt</string>
     <string name="flag_tile">Atzīmēt</string>

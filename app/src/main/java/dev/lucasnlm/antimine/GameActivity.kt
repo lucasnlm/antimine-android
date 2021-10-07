@@ -87,6 +87,8 @@ class GameActivity :
         GdxLocal.zoomLevelAlpha = 1.0f
     }
 
+    private fun Int.toL10nString() = String.format("%d", this)
+
     private fun showGameWarning(@StringRes text: Int) {
         warning?.dismiss()
         warning = showWarning(text)
@@ -229,10 +231,10 @@ class GameActivity :
                             }
 
                             startCountAnimation(oldValue, currentMineCount) { animateIt ->
-                                text = animateIt.toString()
+                                text = animateIt.toL10nString()
                             }
                         } else {
-                            text = currentMineCount.toString()
+                            text = currentMineCount.toL10nString()
                         }
 
                         visibility = View.VISIBLE
@@ -241,7 +243,7 @@ class GameActivity :
                     }
                 }
 
-                tipsCounter.text = it.tips.toString()
+                tipsCounter.text = it.tips.toL10nString()
 
                 if (!it.isGameCompleted && it.useHelp) {
                     refreshTipShortcutIcon()
@@ -455,12 +457,12 @@ class GameActivity :
             visibility = if (canUseHelpNow) View.VISIBLE else View.GONE
             text = if (canRequestHelpWithAds) {
                 if (instantAppManager.isEnabled(applicationContext)) {
-                    "+10"
+                    "+" + 10.toL10nString()
                 } else {
-                    "+25"
+                    "+" + 25.toL10nString()
                 }
             } else {
-                gameViewModel.getTips().toString()
+                gameViewModel.getTips().toL10nString()
             }
         }
 

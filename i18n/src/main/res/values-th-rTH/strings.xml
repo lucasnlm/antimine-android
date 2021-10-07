@@ -14,13 +14,13 @@
     <string name="beginner">มือใหม่</string>
     <string name="intermediate">ปานกลาง</string>
     <string name="expert">ผู้เชี่ยวชาญ</string>
-    <string name="master">Master</string>
-    <string name="legend">Legend</string>
+    <string name="master">เซียน</string>
+    <string name="legend">ตำนาน</string>
     <string name="open">เปิด</string>
     <string name="settings">การตั้งค่า</string>
     <string name="animations">ภาพเคลื่อนไหว</string>
     <string name="vibration">สั่นเมื่อแตะ</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
+    <string name="haptic_feedback_level">การตอบสนองแบบสัมผัส</string>
     <string name="about">เกี่ยวกับ</string>
     <string name="events">สติถิ</string>
     <string name="custom">ปรับแต่งเอง</string>
@@ -67,7 +67,6 @@
     <string name="single_click">แตะเพียงครั้งเดียว</string>
     <string name="double_click">แตะสองครั้ง</string>
     <string name="long_press">แตะค้างไว้</string>
-    <string name="control_description">%ACTION - %REACTION</string>
     <string name="touch_sensibility">ความไวสัมผัส</string>
     <string name="open_tile">เปิด</string>
     <string name="flag_tile">ธง</string>
@@ -90,7 +89,7 @@
     <string name="source_code">ซอร์สโค้ด</string>
     <string name="translation">แปลภาษา</string>
     <string name="licenses">ใบอนุญาต</string>
-    <string name="google_play_games">Google Play Games</string>
+    <string name="google_play_games">Google Play เกม</string>
     <string name="loading">กำลังโหลด...</string>
     <string name="connect">เชื่อมต่อ</string>
     <string name="connecting">กำลังเชื่อมต่อ…</string>

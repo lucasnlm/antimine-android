@@ -15,8 +15,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1403011
-        versionName '14.3.1'
+        versionCode 1500001
+        versionName '15.0.0'
         minSdkVersion 21
         targetSdkVersion 31
         multiDexEnabled true
@@ -143,7 +143,7 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.3.0'
 
     // Constraint
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
 
     // Google
     implementation 'com.google.android.material:material:1.4.0'

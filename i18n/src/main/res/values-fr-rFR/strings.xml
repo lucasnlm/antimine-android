@@ -67,7 +67,6 @@
     <string name="single_click">Appui court</string>
     <string name="double_click">Appui Double</string>
     <string name="long_press">Appui Long</string>
-    <string name="control_description">%ACTION pour %REACTION</string>
     <string name="touch_sensibility">Sensibilité tactile</string>
     <string name="open_tile">Ouvrir</string>
     <string name="flag_tile">Drapeau</string>

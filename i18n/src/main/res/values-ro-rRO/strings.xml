@@ -67,7 +67,6 @@
     <string name="single_click">O singură atingere</string>
     <string name="double_click">Atingere dublă</string>
     <string name="long_press">Apăsare lungă</string>
-    <string name="control_description">%ACTION pentru a %REACTION</string>
     <string name="touch_sensibility">Sensibilitate atingerii</string>
     <string name="open_tile">Deschide</string>
     <string name="flag_tile">Plasare steag</string>

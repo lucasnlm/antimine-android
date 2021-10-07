@@ -283,7 +283,7 @@ object Themes {
         ),
     )
 
-    fun darkLimeTheme() = AppTheme(
+    private fun darkLimeTheme() = AppTheme(
         id = 16L,
         theme = R.style.CustomLimeTheme,
         palette = AreaPalette(

@@ -67,7 +67,6 @@
     <string name="single_click">Enkelt tryk</string>
     <string name="double_click">Dobbelt tryk</string>
     <string name="long_press">Langt tryk</string>
-    <string name="control_description">%ACTION til %REACTION</string>
     <string name="touch_sensibility">Berøringsfølsomhed</string>
     <string name="open_tile">Åbn</string>
     <string name="flag_tile">Flag</string>

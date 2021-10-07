@@ -67,7 +67,6 @@
     <string name="single_click">Еднократно натискане</string>
     <string name="double_click">Двойно натискане</string>
     <string name="long_press">Дълго докосване</string>
-    <string name="control_description">%ACTION към %REACTION</string>
     <string name="touch_sensibility">Чувствителност при докосване</string>
     <string name="open_tile">Отвори</string>
     <string name="flag_tile">Флаг</string>

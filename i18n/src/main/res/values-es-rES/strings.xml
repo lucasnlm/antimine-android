@@ -20,7 +20,7 @@
     <string name="settings">Configuración</string>
     <string name="animations">Animaciones</string>
     <string name="vibration">Respuesta háptica</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
+    <string name="haptic_feedback_level">Nivel de respuesta táctil</string>
     <string name="about">Acerca de</string>
     <string name="events">Estadísticas</string>
     <string name="custom">Personalizado</string>
@@ -67,7 +67,6 @@
     <string name="single_click">Un toque</string>
     <string name="double_click">Dos toques</string>
     <string name="long_press">Toque largo</string>
-    <string name="control_description">%ACTION para %REACTION</string>
     <string name="touch_sensibility">Sensibilidad táctil</string>
     <string name="open_tile">Abrir</string>
     <string name="flag_tile">Bandera</string>

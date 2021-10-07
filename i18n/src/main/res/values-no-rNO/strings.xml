@@ -20,7 +20,7 @@
     <string name="settings">Innstillinger</string>
     <string name="animations">Animasjoner</string>
     <string name="vibration">Haptisk Tilbakemelding</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
+    <string name="haptic_feedback_level">Haptisk Tilbakemelding Nivå</string>
     <string name="about">Om</string>
     <string name="events">Statistikk</string>
     <string name="custom">Egendefinert</string>
@@ -67,7 +67,6 @@
     <string name="single_click">Enkeltrykk</string>
     <string name="double_click">Dobbeltrykk</string>
     <string name="long_press">Langt trykk</string>
-    <string name="control_description">%ACTION til %REACTION</string>
     <string name="touch_sensibility">Berøringsfølsomhet</string>
     <string name="open_tile">Åpne</string>
     <string name="flag_tile">Flagg</string>

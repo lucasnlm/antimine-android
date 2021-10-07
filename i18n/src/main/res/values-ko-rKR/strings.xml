@@ -67,7 +67,6 @@
     <string name="single_click">싱글 탭</string>
     <string name="double_click">더블 탭</string>
     <string name="long_press">길게 누르기</string>
-    <string name="control_description">%ACTION 으로 %REACTION</string>
     <string name="touch_sensibility">터치 감도</string>
     <string name="open_tile">칸 열기</string>
     <string name="flag_tile">깃발 세우기</string>

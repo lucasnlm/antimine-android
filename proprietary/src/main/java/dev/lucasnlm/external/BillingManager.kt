@@ -63,7 +63,7 @@ class BillingManager(
             }
         }
 
-        purchaseBroadcaster.offer(PurchaseInfo.PurchaseResult(isFreeUnlock = false, unlockStatus = status))
+        purchaseBroadcaster.trySend(PurchaseInfo.PurchaseResult(isFreeUnlock = false, unlockStatus = status))
     }
 
     override fun onBillingServiceDisconnected() {
@@ -153,7 +153,7 @@ class BillingManager(
             }
         } else {
             crashReporter.sendError("Fail to charge due to unready status")
-            purchaseBroadcaster.offer(PurchaseInfo.PurchaseFail)
+            purchaseBroadcaster.trySend(PurchaseInfo.PurchaseFail)
         }
     }
 

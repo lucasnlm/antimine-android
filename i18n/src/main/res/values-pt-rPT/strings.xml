@@ -67,7 +67,6 @@
     <string name="single_click">Toque único</string>
     <string name="double_click">Toque duplo</string>
     <string name="long_press">Toque longo</string>
-    <string name="control_description">%ACTION para %REACTION</string>
     <string name="touch_sensibility">Sensibilidade tátil</string>
     <string name="open_tile">Abrir</string>
     <string name="flag_tile">Bandeira</string>

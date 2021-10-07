@@ -67,7 +67,6 @@
     <string name="single_click">Один дотик</string>
     <string name="double_click">Подвійний тиць</string>
     <string name="long_press">Довгий дотик</string>
-    <string name="control_description">%ACTION - %REACTION</string>
     <string name="touch_sensibility">Чутливість сенсора панелі</string>
     <string name="open_tile">Відкрити</string>
     <string name="flag_tile">Прапор</string>

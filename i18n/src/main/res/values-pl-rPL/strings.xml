@@ -67,7 +67,6 @@
     <string name="single_click">Pojedyncze naciśnięcie</string>
     <string name="double_click">Podwójne naciśnięcie</string>
     <string name="long_press">Długie naciśnięcie</string>
-    <string name="control_description">%ACTION - %REACTION</string>
     <string name="touch_sensibility">Czułość dotyku</string>
     <string name="open_tile">Odkryj</string>
     <string name="flag_tile">Oznacz</string>

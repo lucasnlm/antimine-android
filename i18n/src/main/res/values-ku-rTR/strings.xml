@@ -67,7 +67,6 @@
     <string name="single_click">یەک کلیک</string>
     <string name="double_click">دوو کلیک</string>
     <string name="long_press">کلیکی درێژ</string>
-    <string name="control_description">%ACTION to %REACTION</string>
     <string name="touch_sensibility">هەستپێکردنی لەمسی</string>
     <string name="open_tile">کردنەوە</string>
     <string name="flag_tile">ئاڵا</string>

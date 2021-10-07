@@ -20,7 +20,7 @@
     <string name="settings">Ρυθμίσεις</string>
     <string name="animations">Εφέ Κίνησης</string>
     <string name="vibration">Δόνηση</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
+    <string name="haptic_feedback_level">Επίπεδο Δόνησης</string>
     <string name="about">Σχετικά</string>
     <string name="events">Στατιστικά</string>
     <string name="custom">Προσαρμοσμένο</string>
@@ -67,7 +67,6 @@
     <string name="single_click">Απλό χτύπημα</string>
     <string name="double_click">Διπλό κτύπημα</string>
     <string name="long_press">Παρατεταμένο πάτημα</string>
-    <string name="control_description">%ACTION έως %REACTION</string>
     <string name="touch_sensibility">Ευαισθησία αφής</string>
     <string name="open_tile">Άνοιγμα</string>
     <string name="flag_tile">Σημαία</string>
