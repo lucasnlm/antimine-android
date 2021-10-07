@@ -15,7 +15,7 @@ class LimitedCheckNeighborsSolverTest {
             Minefield(9, 9, 12),
             Random(200)
         )
-        val minefield = creator.create(40, true).toMutableList()
+        val minefield = creator.create(40).toMutableList()
         val minefieldHandler = MinefieldHandler(minefield, false)
         block(minefieldHandler)
     }

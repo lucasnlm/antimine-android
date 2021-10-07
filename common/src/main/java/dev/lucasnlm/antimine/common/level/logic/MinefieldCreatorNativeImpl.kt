@@ -45,7 +45,7 @@ class MinefieldCreatorNativeImpl(
         return createMutableEmpty()
     }
 
-    override fun create(safeIndex: Int, safeZone: Boolean): List<Area> {
+    override fun create(safeIndex: Int): List<Area> {
         val seed = randomStringSeed()
         val x = safeIndex % minefield.width
         val y = safeIndex / minefield.height
@@ -76,13 +76,11 @@ class MinefieldCreatorNativeImpl(
         return resultList.map { area ->
             area.copy(neighborsIds = resultList.filterNeighborsOf(area).map { it.id })
         }.toMutableList().apply {
-            if (safeZone) {
-                filterNeighborsOf(safeIndex).forEach {
-                    this[it.id] = this[it.id].copy(hasMine = false)
-                }
-
-                this[safeIndex] = this[safeIndex].copy(hasMine = false)
+            // Ensure the first click and surround won't have a mine.
+            filterNeighborsOf(safeIndex).forEach {
+                this[it.id] = this[it.id].copy(hasMine = false)
             }
+            this[safeIndex] = this[safeIndex].copy(hasMine = false)
 
             filter {
                 it.hasMine

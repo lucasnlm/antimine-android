@@ -57,7 +57,7 @@ class MinefieldRepository : IMinefieldRepository {
             Difficulty.Expert -> expertMinefield
             Difficulty.Master -> masterMinefield
             Difficulty.Legend -> legendMinefield
-            Difficulty.FixedSize -> baseStandardSize(dimensionRepository, 0)
+            Difficulty.FixedSize -> baseStandardSize(dimensionRepository, preferencesRepository.getProgressiveValue())
             Difficulty.Custom -> preferencesRepository.customGameMode()
         }
 

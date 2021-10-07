@@ -36,14 +36,9 @@ class MinefieldCreatorImpl(
         return createMutableEmpty()
     }
 
-    override fun create(safeIndex: Int, safeZone: Boolean): List<Area> {
+    override fun create(safeIndex: Int): List<Area> {
         return createMutableEmpty().toMutableList().apply {
-            // Plant mines and setup number tips
-            if (safeZone) {
-                filterNotNeighborsOf(safeIndex)
-            } else {
-                filterNot { it.id == safeIndex }
-            }
+            filterNotNeighborsOf(safeIndex)
                 .shuffled(randomGenerator)
                 .take(minefield.mines)
                 .onEach {
