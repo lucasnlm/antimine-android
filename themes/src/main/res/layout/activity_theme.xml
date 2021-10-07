@@ -32,11 +32,12 @@
 
             <TextView
                 android:id="@+id/square_size_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingVertical="12dp"
                 android:text="@string/size"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/squareSize"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatSeekBar
@@ -54,11 +55,12 @@
 
             <TextView
                 android:id="@+id/square_radius_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingVertical="12dp"
                 android:text="@string/rounded_square"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/squareRadius"
                 app:layout_constraintTop_toBottomOf="@+id/square_size_text" />
 
             <androidx.appcompat.widget.AppCompatSeekBar
@@ -75,11 +77,12 @@
 
             <TextView
                 android:id="@+id/square_divider_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingVertical="12dp"
                 android:text="@string/space_between_squares"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/squareDivider"
                 app:layout_constraintTop_toBottomOf="@+id/square_radius_text" />
 
             <androidx.appcompat.widget.AppCompatSeekBar
