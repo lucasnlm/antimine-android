@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,10 +19,10 @@
         android:fadeScrollbars="false"
         android:paddingHorizontal="@dimen/main_activity_padding"
         android:scrollbarStyle="outsideInset"
-        app:layout_constraintTop_toBottomOf="@id/section"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/section">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -36,22 +35,28 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="12dp"
                 android:text="@string/size"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/squareSize"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatSeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/squareSize"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:max="40"
-                android:min="0"
-                android:progress="15"
+                android:stepSize="5"
+                android:value="15"
+                android:valueFrom="0"
+                android:valueTo="40"
                 app:layout_constraintBottom_toBottomOf="@+id/square_size_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/square_size_text"
-                app:layout_constraintTop_toTopOf="@+id/square_size_text" />
+                app:layout_constraintTop_toTopOf="@+id/square_size_text"
+                app:thumbColor="?colorAccent"
+                app:thumbStrokeColor="?colorAccent"
+                app:tickVisible="false"
+                app:trackColorActive="?colorAccent"
+                app:trackHeight="12dp" />
 
             <TextView
                 android:id="@+id/square_radius_text"
@@ -59,21 +64,28 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="12dp"
                 android:text="@string/rounded_square"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/squareRadius"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/square_size_text" />
 
-            <androidx.appcompat.widget.AppCompatSeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/squareRadius"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:max="10"
-                android:progress="3"
+                android:stepSize="1"
+                android:value="3"
+                android:valueFrom="0"
+                android:valueTo="10"
                 app:layout_constraintBottom_toBottomOf="@+id/square_radius_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/square_radius_text"
-                app:layout_constraintTop_toTopOf="@+id/square_radius_text" />
+                app:layout_constraintTop_toTopOf="@+id/square_radius_text"
+                app:thumbColor="?colorAccent"
+                app:thumbStrokeColor="?colorAccent"
+                app:tickVisible="false"
+                app:trackColorActive="?colorAccent"
+                app:trackHeight="12dp" />
 
             <TextView
                 android:id="@+id/square_divider_text"
@@ -81,44 +93,52 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="12dp"
                 android:text="@string/space_between_squares"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/squareDivider"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/square_radius_text" />
 
-            <androidx.appcompat.widget.AppCompatSeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/squareDivider"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:max="5"
                 android:progress="0"
+                android:stepSize="1"
+                android:valueFrom="0"
+                android:valueTo="5"
                 app:layout_constraintBottom_toBottomOf="@+id/square_divider_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/square_divider_text"
-                app:layout_constraintTop_toTopOf="@+id/square_divider_text" />
+                app:layout_constraintTop_toTopOf="@+id/square_divider_text"
+                app:thumbColor="?colorAccent"
+                app:thumbStrokeColor="?colorAccent"
+                app:tickVisible="false"
+                app:trackColorActive="?colorAccent"
+                app:trackHeight="12dp" />
 
             <dev.lucasnlm.antimine.ui.view.OfferCardButtonView
                 android:id="@+id/unlockAll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="12dp"
-                app:layout_constraintTop_toBottomOf="@+id/square_divider_text"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/square_divider_text" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clipToPadding="false"
                 android:layout_marginTop="12dp"
+                android:clipToPadding="false"
                 android:fadeScrollbars="false"
-                android:scrollbarStyle="outsideInset"
                 android:paddingBottom="@dimen/main_activity_padding"
+                android:scrollbarStyle="outsideInset"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/unlockAll"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/unlockAll" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
