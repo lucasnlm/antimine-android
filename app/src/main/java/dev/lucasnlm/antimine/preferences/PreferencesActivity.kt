@@ -93,13 +93,6 @@ class PreferencesActivity :
         )
 
         bindItem(
-            label = noGuessingLabel,
-            switch = noGuessing,
-            checked = preferenceRepository.useNoGuessingAlgorithm(),
-            action = { preferenceRepository.setNoGuessingAlgorithm(it) }
-        )
-
-        bindItem(
             label = helpLabel,
             switch = help,
             checked = preferenceRepository.useHelp(),

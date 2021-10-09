@@ -212,31 +212,6 @@
                 app:layout_constraintTop_toTopOf="@+id/automaticFlagsLabel" />
 
             <TextView
-                android:id="@+id/noGuessingLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="16dp"
-                android:text="@string/no_guessing_mode"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/automaticFlagsLabel" />
-
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/noGuessing"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/noGuessingLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/noGuessingLabel" />
-
-            <TextView
                 android:id="@+id/allowClickNumberLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -250,7 +225,7 @@
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/noGuessingLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/automaticFlagsLabel" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/clickOnNumbers"

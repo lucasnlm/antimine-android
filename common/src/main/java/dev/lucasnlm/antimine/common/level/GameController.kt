@@ -28,7 +28,6 @@ class GameController {
     private var gameControl: GameControl = GameControl.Standard
     private var useQuestionMark = true
     private var useOpenOnSwitchControl = true
-    private var useNoGuessing = true
     private var useClickOnNumbers = true
     private var errorTolerance = 0
     private var useSimonTatham = true
@@ -98,7 +97,7 @@ class GameController {
             val minefieldHandler = MinefieldHandler(fieldCopy, false)
             minefieldHandler.openAt(safeId, false)
             noGuessTestedLevel = useSimonTatham || solver.trySolve(minefieldHandler.result().toMutableList())
-        } while (useNoGuessing && !useSimonTatham && solver.keepTrying() && !noGuessTestedLevel)
+        } while (!useSimonTatham && solver.keepTrying() && !noGuessTestedLevel)
 
         firstOpen = FirstOpen.Position(safeId)
     }
@@ -382,10 +381,6 @@ class GameController {
 
     fun useQuestionMark(useQuestionMark: Boolean) {
         this.useQuestionMark = useQuestionMark
-    }
-
-    fun useNoGuessing(noGuessing: Boolean) {
-        this.useNoGuessing = noGuessing
     }
 
     fun useClickOnNumbers(clickNumbers: Boolean) {

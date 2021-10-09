@@ -5,7 +5,6 @@ object PreferenceKeys {
     const val PREFERENCE_VIBRATION_LEVEL = "preference_vibration_level"
     const val PREFERENCE_ASSISTANT = "preference_assistant"
     const val PREFERENCE_ANIMATION = "preference_animation"
-    const val PREFERENCE_NO_GUESSING = "preference_no_guessing"
     const val PREFERENCE_AREA_SIZE = "preference_new_area_size"
     const val PREFERENCE_QUESTION_MARK = "preference_use_question_mark"
     const val PREFERENCE_USE_HELP = "preference_use_help"

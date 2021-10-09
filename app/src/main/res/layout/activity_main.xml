@@ -38,7 +38,7 @@
                 android:layout_marginStart="4dp"
                 android:textColor="?attr/colorOnBackground"
                 android:drawablePadding="8dp"
-                android:paddingStart="16dp"
+                android:paddingStart="8dp"
                 android:paddingEnd="0dp"
                 tools:text="@string/app_name"
                 app:drawableStartCompat="@drawable/mine" />
