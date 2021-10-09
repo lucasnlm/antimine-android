@@ -611,7 +611,7 @@ open class GameViewModel(
             updateGameState()
         }
 
-        if (state.difficulty == Difficulty.Standard) {
+        if (state.difficulty == Difficulty.Standard || state.difficulty == Difficulty.FixedSize) {
             preferencesRepository.decrementProgressiveValue()
         }
 
@@ -645,7 +645,7 @@ open class GameViewModel(
             showWrongFlags()
         }
 
-        if (state.difficulty == Difficulty.Standard) {
+        if (state.difficulty == Difficulty.Standard || state.difficulty == Difficulty.FixedSize) {
             preferencesRepository.incrementProgressiveValue()
         }
 

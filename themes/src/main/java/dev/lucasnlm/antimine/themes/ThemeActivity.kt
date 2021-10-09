@@ -2,9 +2,9 @@ package dev.lucasnlm.antimine.themes
 
 import android.os.Bundle
 import android.view.View
-import android.widget.SeekBar
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.slider.Slider
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ThemeActivity : ThematicActivity(R.layout.activity_theme), SeekBar.OnSeekBarChangeListener {
+class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChangeListener {
     private val themeViewModel by viewModel<ThemeViewModel>()
 
     private val themeRepository: IThemeRepository by inject()
@@ -79,9 +79,9 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), SeekBar.OnSeekB
             }
         }
 
-        squareSize.setOnSeekBarChangeListener(this)
-        squareDivider.setOnSeekBarChangeListener(this)
-        squareRadius.setOnSeekBarChangeListener(this)
+        squareSize.addOnChangeListener(this)
+        squareDivider.addOnChangeListener(this)
+        squareRadius.addOnChangeListener(this)
 
         lifecycleScope.launchWhenCreated {
             val size = dimensionRepository.displaySize()
@@ -127,9 +127,9 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), SeekBar.OnSeekB
                         cloudSaveManager.uploadSave()
                     }
 
-                    squareSize.progress = it.squareSize
-                    squareDivider.progress = it.squareDivider
-                    squareRadius.progress = it.squareRadius
+                    squareSize.value = it.squareSize.toFloat()
+                    squareDivider.value = it.squareDivider.toFloat()
+                    squareRadius.value = it.squareRadius.toFloat()
                 }
             }
         }
@@ -152,9 +152,10 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), SeekBar.OnSeekB
         )
     }
 
-    override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
+    override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
         if (fromUser) {
-            when (seekbar) {
+            val progress = value.toInt()
+            when (slider) {
                 squareSize -> {
                     themeViewModel.sendEvent(ThemeEvent.SetSquareSize(progress))
                 }
@@ -166,13 +167,5 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), SeekBar.OnSeekB
                 }
             }
         }
-    }
-
-    override fun onStartTrackingTouch(seekbar: SeekBar?) {
-        // Empty
-    }
-
-    override fun onStopTrackingTouch(seekbar: SeekBar?) {
-        // Empty
     }
 }

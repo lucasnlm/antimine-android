@@ -84,9 +84,9 @@ class StatsViewModel(
                 )
             ) { acc, value ->
                 StatsModel(
-                    0,
-                    acc.totalGames,
-                    acc.totalTime + value.duration,
+                    title = 0,
+                    totalGames = acc.totalGames,
+                    totalTime = acc.totalTime + value.duration,
                     victoryTime = acc.victoryTime + if (value.victory != 0) {
                         value.duration
                     } else {
@@ -102,9 +102,9 @@ class StatsViewModel(
                     } else {
                         acc.shortestTime
                     },
-                    acc.mines + value.mines,
-                    acc.victory + value.victory,
-                    acc.openArea + value.openArea,
+                    mines = acc.mines + value.mines,
+                    victory = acc.victory + value.victory,
+                    openArea = acc.openArea + value.openArea,
                 )
             }.run {
                 if (victory > 0) {

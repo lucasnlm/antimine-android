@@ -2,9 +2,9 @@ package dev.lucasnlm.antimine.control
 
 import android.os.Bundle
 import android.view.View
-import android.widget.SeekBar
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.slider.Slider
 import dev.lucasnlm.antimine.control.view.ControlAdapter
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_control.*
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 
-class ControlActivity : ThematicActivity(R.layout.activity_control), SeekBar.OnSeekBarChangeListener {
+class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnChangeListener {
     private val viewModel: ControlViewModel by inject()
     private val themeRepository: IThemeRepository by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
@@ -42,9 +42,10 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), SeekBar.OnS
             adapter = controlAdapter
         }
 
-        touchSensibility.setOnSeekBarChangeListener(this)
-        longPress.setOnSeekBarChangeListener(this)
-        doubleClick.setOnSeekBarChangeListener(this)
+        touchSensibility.addOnChangeListener(this)
+        longPress.addOnChangeListener(this)
+        doubleClick.addOnChangeListener(this)
+        hapticLevel.addOnChangeListener(this)
 
         toggleButtonTopBar.isChecked = preferencesRepository.showToggleButtonOnTopBar()
         toggleButtonTopBarLabel.setOnClickListener {
@@ -54,27 +55,11 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), SeekBar.OnS
             preferencesRepository.setToggleButtonOnTopBar(checked)
         }
 
-        hapticLevel.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekbar: SeekBar?, value: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    viewModel.sendEvent(ControlEvent.UpdateHapticFeedbackLevel(value))
-                }
-            }
-
-            override fun onStartTrackingTouch(seekbar: SeekBar?) {
-                // Ignore
-            }
-
-            override fun onStopTrackingTouch(seekbar: SeekBar?) {
-                // Ignore
-            }
-        })
-
         lifecycleScope.launchWhenCreated {
             viewModel.observeState().collect {
                 controlAdapter.bindControlStyleList(it.selected, it.controls)
-                longPress.progress = it.longPress
-                touchSensibility.progress = it.touchSensibility
+                longPress.value = it.longPress.toFloat()
+                touchSensibility.value = it.touchSensibility.toFloat()
 
                 val toggleVisible = if (it.showToggleButtonSettings) View.VISIBLE else View.GONE
                 toggleButtonTopBar.visibility = toggleVisible
@@ -94,14 +79,15 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), SeekBar.OnS
                 doubleClick.visibility = doubleClickVisible
                 doubleClickLabel.visibility = doubleClickVisible
 
-                hapticLevel.progress = it.hapticFeedbackLevel
+                hapticLevel.value = it.hapticFeedbackLevel.toFloat()
             }
         }
     }
 
-    override fun onProgressChanged(seekbar: SeekBar?, progress: Int, fromUser: Boolean) {
+    override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
         if (fromUser) {
-            when (seekbar) {
+            val progress = value.toInt()
+            when (slider) {
                 touchSensibility -> {
                     viewModel.sendEvent(ControlEvent.UpdateTouchSensibility(progress))
                 }
@@ -111,16 +97,11 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), SeekBar.OnS
                 doubleClick -> {
                     viewModel.sendEvent(ControlEvent.UpdateDoubleClick(progress))
                 }
+                hapticLevel -> {
+                    viewModel.sendEvent(ControlEvent.UpdateHapticFeedbackLevel(progress))
+                }
             }
         }
-    }
-
-    override fun onStartTrackingTouch(seekbar: SeekBar?) {
-        // Empty
-    }
-
-    override fun onStopTrackingTouch(seekbar: SeekBar?) {
-        // Empty
     }
 
     private fun bindToolbar() {

@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    android:fitsSystemWindows="true">
 
     <dev.lucasnlm.antimine.ui.view.SectionView
         android:id="@+id/section"
@@ -65,17 +65,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settings" />
 
-            <androidx.appcompat.widget.AppCompatSeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/longPress"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:max="2000"
-                android:progress="500"
+                android:stepSize="5"
+                android:value="500"
+                android:valueFrom="0"
+                android:valueTo="2000"
                 app:layout_constraintBottom_toBottomOf="@+id/longPressLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/longPressLabel"
-                app:layout_constraintTop_toTopOf="@+id/longPressLabel" />
+                app:layout_constraintTop_toTopOf="@+id/longPressLabel"
+                app:thumbColor="?colorAccent"
+                app:thumbStrokeColor="?colorAccent"
+                app:tickVisible="false"
+                app:trackColorActive="?colorAccent"
+                app:trackHeight="12dp" />
 
             <TextView
                 android:id="@+id/doubleClickLabel"
@@ -84,22 +91,28 @@
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp"
                 android:text="@string/double_click"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/longPress"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/longPressLabel" />
 
-            <androidx.appcompat.widget.AppCompatSeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/doubleClick"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:max="700"
-                android:min="100"
-                android:progress="250"
+                android:stepSize="5"
+                android:value="250"
+                android:valueFrom="100"
+                android:valueTo="700"
                 app:layout_constraintBottom_toBottomOf="@+id/doubleClickLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/doubleClickLabel"
-                app:layout_constraintTop_toTopOf="@+id/doubleClickLabel" />
+                app:layout_constraintTop_toTopOf="@+id/doubleClickLabel"
+                app:thumbColor="?colorAccent"
+                app:thumbStrokeColor="?colorAccent"
+                app:tickVisible="false"
+                app:trackColorActive="?colorAccent"
+                app:trackHeight="12dp" />
 
             <TextView
                 android:id="@+id/touch_sensibility"
@@ -108,21 +121,29 @@
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp"
                 android:text="@string/touch_sensibility"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/touchSensibility"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/doubleClickLabel" />
 
-            <androidx.appcompat.widget.AppCompatSeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/touchSensibility"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:max="15"
-                android:progress="1"
+                android:stepSize="1"
+                android:value="1"
+                android:valueFrom="0"
+                android:valueTo="15"
                 app:layout_constraintBottom_toBottomOf="@+id/touch_sensibility"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/touch_sensibility"
-                app:layout_constraintTop_toTopOf="@+id/touch_sensibility" />
+                app:layout_constraintTop_toTopOf="@+id/touch_sensibility"
+                app:thumbColor="?colorAccent"
+                app:thumbStrokeColor="?colorAccent"
+                app:tickVisible="false"
+                app:trackColorActive="?colorAccent"
+                app:trackHeight="12dp" />
 
             <TextView
                 android:id="@+id/hapticLevelLabel"
@@ -131,22 +152,29 @@
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="12dp"
                 android:text="@string/haptic_feedback_level"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/hapticLevel"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/touch_sensibility" />
 
-            <androidx.appcompat.widget.AppCompatSeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/hapticLevel"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:max="200"
-                android:min="0"
-                android:progress="100"
+                android:max="15"
+                android:stepSize="1"
+                android:value="100"
+                android:valueFrom="0"
+                android:valueTo="200"
                 app:layout_constraintBottom_toBottomOf="@+id/hapticLevelLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/hapticLevelLabel"
-                app:layout_constraintTop_toTopOf="@+id/hapticLevelLabel" />
+                app:layout_constraintTop_toTopOf="@+id/hapticLevelLabel"
+                app:thumbColor="?colorAccent"
+                app:thumbStrokeColor="?colorAccent"
+                app:tickVisible="false"
+                app:trackColorActive="?colorAccent"
+                app:trackHeight="12dp" />
 
             <TextView
                 android:id="@+id/toggleButtonTopBarLabel"

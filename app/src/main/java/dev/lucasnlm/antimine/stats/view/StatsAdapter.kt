@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.stats.model.StatsModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
@@ -25,8 +25,6 @@ class StatsAdapter(
             .inflate(R.layout.view_stats, parent, false)
         return StatsViewHolder(view)
     }
-
-    private fun Int.toL10nString() = String.format("%d", this)
 
     override fun onBindViewHolder(holder: StatsViewHolder, position: Int) {
         val stats = statsList[position]
@@ -47,7 +45,7 @@ class StatsAdapter(
                 averageTime.text = formatTime(stats.averageTime)
                 shortestTime.text = if (stats.shortestTime == 0L) emptyText else formatTime(stats.shortestTime)
                 totalGames.text = stats.totalGames.toL10nString()
-                performance.text = formatPercentage(100.0 * stats.victory / stats.totalGames)
+                performance.text = formatPercentage(stats.victory.toDouble() / stats.totalGames)
                 openAreas.text = stats.openArea.toL10nString()
                 victory.text = stats.victory.toL10nString()
                 defeat.text = (stats.totalGames - stats.victory).toL10nString()
@@ -70,8 +68,13 @@ class StatsAdapter(
     override fun getItemCount(): Int = statsList.size
 
     companion object {
+        private fun Int.toL10nString() = String.format("%d", this)
+
         private fun formatPercentage(value: Double) =
-            NumberFormat.getPercentInstance().format(value)
+            NumberFormat.getPercentInstance().run {
+                maximumFractionDigits = 2
+                format(value)
+            }
 
         private fun formatTime(durationSecs: Long) =
             DateUtils.formatElapsedTime(durationSecs)
@@ -79,7 +82,7 @@ class StatsAdapter(
 }
 
 class StatsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val card: CardView = itemView.card
+    val card: MaterialCardView = itemView.card
     val statsLabel: TextView = itemView.statsLabel
     val totalGames: TextView = itemView.totalGames
     val minesCount: TextView = itemView.minesCount
