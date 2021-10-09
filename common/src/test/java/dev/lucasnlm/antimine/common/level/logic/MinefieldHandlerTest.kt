@@ -11,11 +11,10 @@ import kotlin.random.Random
 class MinefieldHandlerTest {
     private fun handleMinefield(
         useQuestionMark: Boolean = false,
-        useSafeZone: Boolean = false,
         block: (MinefieldHandler) -> Unit
     ) {
         val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
-        val minefield = creator.create(10, useSafeZone).toMutableList()
+        val minefield = creator.create(10).toMutableList()
         val minefieldHandler = MinefieldHandler(minefield, useQuestionMark)
         block(minefieldHandler)
     }
@@ -32,7 +31,7 @@ class MinefieldHandlerTest {
 
     @Test
     fun testOpenAreaWithSafeZone() {
-        handleMinefield(useSafeZone = true) { handler ->
+        handleMinefield() { handler ->
             assertTrue(handler.result()[3].isCovered)
             handler.openAt(3, false, openNeighbors = false)
             assertFalse(handler.result()[3].isCovered)
@@ -101,9 +100,9 @@ class MinefieldHandlerTest {
             // After Open
             handler.openAt(5, false, openNeighbors = false)
             handler.highlightAt(5)
-            assertEquals(8, handler.result().count { it.highlighted })
+            assertEquals(9, handler.result().count { it.highlighted })
             assertEquals(
-                listOf(0, 1, 2, 4, 6, 8, 9, 10),
+                listOf(0, 1, 2, 4, 5, 6, 8, 9, 10),
                 handler.result()
                     .filter { it.highlighted }
                     .map { it.id }
@@ -125,7 +124,7 @@ class MinefieldHandlerTest {
         handleMinefield { handler ->
             handler.openAt(5, false, openNeighbors = true)
             handler.openOrFlagNeighborsOf(5)
-            assertEquals(9, handler.result().count { !it.isCovered })
+            assertEquals(1, handler.result().count { !it.isCovered })
         }
     }
 
@@ -146,7 +145,7 @@ class MinefieldHandlerTest {
             val remainCoveredNeighbors =
                 handler.result().filterNeighborsOf(handler.result().first { it.id == 5 }).count { !it.isCovered }
 
-            assertEquals(4, remainCovered)
+            assertEquals(9, remainCovered)
             assertEquals(3, remainCoveredNeighbors)
         }
     }
@@ -171,8 +170,8 @@ class MinefieldHandlerTest {
             val remainCoveredNeighbors =
                 handler.result().filterNeighborsOf(handler.result().first { it.id == 5 }).count { !it.isCovered }
 
-            assertEquals(4, remainCovered)
-            assertEquals(3, remainCoveredNeighbors)
+            assertEquals(1, remainCovered)
+            assertEquals(0, remainCoveredNeighbors)
         }
     }
 }
