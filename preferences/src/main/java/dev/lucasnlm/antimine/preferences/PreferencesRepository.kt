@@ -103,13 +103,6 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_ANIMATION, enabled)
     }
 
-    override fun setNoGuessingAlgorithm(value: Boolean) {
-        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_NO_GUESSING, value)
-    }
-
-    override fun useNoGuessingAlgorithm(): Boolean =
-        preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_NO_GUESSING, true)
-
     override fun useQuestionMark(): Boolean =
         preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_QUESTION_MARK, false)
 

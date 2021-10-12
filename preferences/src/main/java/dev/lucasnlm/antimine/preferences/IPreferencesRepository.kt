@@ -86,9 +86,6 @@ interface IPreferencesRepository {
     fun useAnimations(): Boolean
     fun setAnimations(enabled: Boolean)
 
-    fun setNoGuessingAlgorithm(value: Boolean)
-    fun useNoGuessingAlgorithm(): Boolean
-
     fun useQuestionMark(): Boolean
     fun setQuestionMark(value: Boolean)
 
