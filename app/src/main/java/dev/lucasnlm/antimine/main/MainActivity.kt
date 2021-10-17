@@ -84,8 +84,8 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
 
         lifecycleScope.launch {
             if (preferencesRepository.showTutorialButton()) {
-                val shouldShowTutorial = savesRepository.getAllSaves().count { it.status == SaveStatus.VICTORY } < 3
-                preferencesRepository.setShowTutorialButton(false)
+                val shouldShowTutorial = savesRepository.getAllSaves().count { it.status == SaveStatus.VICTORY } < 2
+                preferencesRepository.setShowTutorialButton(shouldShowTutorial)
                 withContext(Dispatchers.Main) {
                     if (!shouldShowTutorial) {
                         tutorial.visibility = View.GONE
