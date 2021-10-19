@@ -48,7 +48,7 @@ class MinefieldCreatorNativeImpl(
     override fun create(safeIndex: Int): List<Area> {
         val seed = randomStringSeed()
         val x = safeIndex % minefield.width
-        val y = safeIndex / minefield.height
+        val y = safeIndex / minefield.width
         val width = minefield.width
 
         val nativeResult = sgTathamMines.createMinefield(
