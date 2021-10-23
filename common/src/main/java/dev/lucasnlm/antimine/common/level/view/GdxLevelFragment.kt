@@ -231,11 +231,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                             val padding = context.dpToPx(16)
                             gravity = GravityCompat.END or Gravity.BOTTOM
 
-                            if (context.isPortrait()) {
-                                setMargins(0, 0, padding, padding + dimensionRepository.navigationBarHeight())
-                            } else {
-                                setMargins(0, 0, padding + dimensionRepository.navigationBarHeight(), padding)
-                            }
+                            setMargins(0, 0, dimensionRepository.horizontalNavigationBarHeight(), padding + dimensionRepository.verticalNavigationBarHeight())
                         }
 
                         addView(controlSwitcher, layoutParams)

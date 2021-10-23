@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.core.repository
 
 import android.content.Context
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.content.res.TypedArray
 import android.os.Build
@@ -19,6 +20,8 @@ interface IDimensionRepository {
     fun actionBarSizeWithStatus(): Int
     fun actionBarSize(): Int
     fun navigationBarHeight(): Int
+    fun verticalNavigationBarHeight(): Int
+    fun horizontalNavigationBarHeight(): Int
 }
 
 data class Size(
@@ -108,6 +111,22 @@ class DimensionRepository(
             }
         }
         return navHeight
+    }
+
+    override fun verticalNavigationBarHeight(): Int {
+        val orientation = context.resources.configuration.orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            return navigationBarHeight()
+        }
+        return 0
+    }
+
+    override fun horizontalNavigationBarHeight(): Int {
+        val orientation = context.resources.configuration.orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            return navigationBarHeight()
+        }
+        return 0
     }
 
     private fun hasNavBar(): Boolean = hasNavBar
