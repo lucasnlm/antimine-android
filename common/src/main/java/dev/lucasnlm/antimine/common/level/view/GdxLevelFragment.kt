@@ -20,7 +20,6 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.IAppVersionManager
 import dev.lucasnlm.antimine.core.dpToPx
-import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
 import dev.lucasnlm.antimine.gdx.models.RenderQuality
@@ -231,7 +230,12 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                             val padding = context.dpToPx(16)
                             gravity = GravityCompat.END or Gravity.BOTTOM
 
-                            setMargins(0, 0, dimensionRepository.horizontalNavigationBarHeight(), padding + dimensionRepository.verticalNavigationBarHeight())
+                            setMargins(
+                                0,
+                                0,
+                                dimensionRepository.horizontalNavigationBarHeight(),
+                                padding + dimensionRepository.verticalNavigationBarHeight()
+                            )
                         }
 
                         addView(controlSwitcher, layoutParams)

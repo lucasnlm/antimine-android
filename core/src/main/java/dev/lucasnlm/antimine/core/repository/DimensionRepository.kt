@@ -106,13 +106,15 @@ class DimensionRepository(
      * Takes into account the current system orientation and screen size.
      * @return True if navigation bar is located at the bottom of the screen. False otherwise.
      */
-    private fun isNavigationBarAtBottom(): Boolean{
-        val orientation = context.resources.configuration.orientation;
+    private fun isNavigationBarAtBottom(): Boolean {
+        val orientation = context.resources.configuration.orientation
 
         // On big screens (tablets), the navigation bar will be on bottom in landscape orientation as well.
         // See AOSP `RenderSessionImpl.findNavigationBar` code for reference:
         // https://android.googlesource.com/platform/frameworks/base/+/android-4.2.2_r1/tools/layoutlib/bridge/src/com/android/layoutlib/bridge/impl/RenderSessionImpl.java
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE && context.resources.configuration.smallestScreenWidthDp < 600) {
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE &&
+            context.resources.configuration.smallestScreenWidthDp < 600
+        ) {
             return false
         }
         return true
