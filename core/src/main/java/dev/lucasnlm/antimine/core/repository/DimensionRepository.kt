@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.core.repository
 
 import android.content.Context
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.content.res.TypedArray
 import android.os.Build
@@ -19,6 +20,8 @@ interface IDimensionRepository {
     fun actionBarSizeWithStatus(): Int
     fun actionBarSize(): Int
     fun navigationBarHeight(): Int
+    fun verticalNavigationBarHeight(): Int
+    fun horizontalNavigationBarHeight(): Int
 }
 
 data class Size(
@@ -98,6 +101,25 @@ class DimensionRepository(
         return actionBarSize
     }
 
+    /**
+     * Determines if the system UI navigation bar is located at the bottom.
+     * Takes into account the current system orientation and screen size.
+     * @return True if navigation bar is located at the bottom of the screen. False otherwise.
+     */
+    private fun isNavigationBarAtBottom(): Boolean {
+        val orientation = context.resources.configuration.orientation
+
+        // On big screens (tablets), the navigation bar will be on bottom in landscape orientation as well.
+        // See AOSP `RenderSessionImpl.findNavigationBar` code for reference:
+        // https://android.googlesource.com/platform/frameworks/base/+/android-4.2.2_r1/tools/layoutlib/bridge/src/com/android/layoutlib/bridge/impl/RenderSessionImpl.java
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE &&
+            context.resources.configuration.smallestScreenWidthDp < 600
+        ) {
+            return false
+        }
+        return true
+    }
+
     override fun navigationBarHeight(): Int {
         var navHeight = 0
         if (hasNavBar()) {
@@ -108,6 +130,20 @@ class DimensionRepository(
             }
         }
         return navHeight
+    }
+
+    override fun verticalNavigationBarHeight(): Int {
+        if (isNavigationBarAtBottom()) {
+            return navigationBarHeight()
+        }
+        return 0
+    }
+
+    override fun horizontalNavigationBarHeight(): Int {
+        if (!isNavigationBarAtBottom()) {
+            return navigationBarHeight()
+        }
+        return 0
     }
 
     private fun hasNavBar(): Boolean = hasNavBar

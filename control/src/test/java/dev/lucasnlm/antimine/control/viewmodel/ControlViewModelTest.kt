@@ -1,5 +1,7 @@
 package dev.lucasnlm.antimine.control.viewmodel
 
+import com.nhaarman.mockitokotlin2.mock
+import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import io.mockk.every
@@ -18,6 +20,7 @@ import org.junit.Test
 @ExperimentalCoroutinesApi
 class ControlViewModelTest {
     private val dispatcher = TestCoroutineDispatcher()
+    private val hapticFeedbackManager: HapticFeedbackManager = mock()
 
     @Before
     fun setup() {
@@ -38,7 +41,7 @@ class ControlViewModelTest {
             every { getDoubleClickTimeout() } returns 500L
         }
 
-        val viewModel = ControlViewModel(preferenceRepository)
+        val viewModel = ControlViewModel(preferenceRepository, hapticFeedbackManager)
         assertEquals(ControlStyle.DoubleClick, viewModel.singleState().selected)
     }
 
@@ -48,7 +51,7 @@ class ControlViewModelTest {
             every { controlStyle() } returns ControlStyle.Standard
         }
 
-        val viewModel = ControlViewModel(preferenceRepository)
+        val viewModel = ControlViewModel(preferenceRepository, hapticFeedbackManager)
         viewModel.sendEvent(
             ControlEvent.SelectControlStyle(
                 ControlStyle.FastFlag
