@@ -50,11 +50,6 @@ class MinefieldHandler(
         return result ?: false
     }
 
-    fun turnOffAllHighlighted() {
-        field.filter { it.highlighted }
-            .forEach { field[it.id] = it.copy(highlighted = false) }
-    }
-
     fun removeMarkAt(index: Int) {
         field.getOrNull(index)?.let {
             field[it.id] = it.copy(mark = Mark.PurposefulNone)
@@ -92,22 +87,6 @@ class MinefieldHandler(
                             openAt(it.id, openNeighbors = true, passive = true)
                         }.count()
                 }
-            }
-        }
-    }
-
-    fun highlightAt(index: Int) {
-        field.getOrNull(index)?.let { target ->
-            if (!target.isCovered) {
-                field[index] = target.copy(highlighted = target.minesAround != 0 && !target.highlighted)
-
-                target
-                    .neighborsIds
-                    .map { field[it] }
-                    .filter { it.mark.isNone() && it.isCovered }
-                    .onEach { neighbor ->
-                        field[neighbor.id] = neighbor.copy(highlighted = true)
-                    }
             }
         }
     }

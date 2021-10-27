@@ -51,10 +51,6 @@ class MinefieldStage(
         addListener(object : InputListener() {
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
                 return if (event?.target is Group) {
-                    GdxLocal.apply {
-                        hasHighlightAreas = false
-                        highlightAlpha = 0.0f
-                    }
                     event.cancel()
                     true
                 } else {
@@ -278,13 +274,6 @@ class MinefieldStage(
         val visibleHash = refreshVisibleActorsIfNeeded()
 
         refreshAreas(visibleHash)
-
-        GdxLocal.run {
-            if (highlightAlpha > 0.0f) {
-                highlightAlpha = (highlightAlpha - 0.25f * Gdx.graphics.deltaTime).coerceAtLeast(0.0f)
-                Gdx.graphics.requestRendering()
-            }
-        }
 
         if (BuildConfig.DEBUG) {
             Gdx.app.log("GDX", "GDX FPS = ${Gdx.graphics.framesPerSecond}")

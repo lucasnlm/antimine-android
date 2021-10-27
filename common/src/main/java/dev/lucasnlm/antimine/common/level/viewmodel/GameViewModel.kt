@@ -483,6 +483,10 @@ open class GameViewModel(
             gameController.runFlagAssistant()
         }
 
+        if (preferencesRepository.dimNumbers() && !gameController.isGameOver()) {
+            gameController.runNumberDimmer()
+        }
+
         updateGameState()
     }
 
@@ -494,9 +498,6 @@ open class GameViewModel(
                 }
                 ActionResponse.SwitchMark -> {
                     analyticsManager.sentEvent(Analytics.SwitchMark(index))
-                }
-                ActionResponse.HighlightNeighbors -> {
-                    analyticsManager.sentEvent(Analytics.HighlightNeighbors(index))
                 }
                 ActionResponse.OpenNeighbors -> {
                     analyticsManager.sentEvent(Analytics.OpenNeighbors(index))

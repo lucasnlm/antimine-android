@@ -428,4 +428,12 @@ class PreferencesRepository(
     override fun setShowTutorialButton(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOULD_SHOW_TUTORIAL_BUTTON, value)
     }
+
+    override fun dimNumbers(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_DIM_NUMBERS, false)
+    }
+
+    override fun setDimNumbers(value: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_DIM_NUMBERS, value)
+    }
 }

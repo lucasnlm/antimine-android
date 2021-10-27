@@ -52,8 +52,6 @@ sealed class Analytics(
 
     class SwitchMark(index: Int) : Analytics("Switch Mark", mapOf("Index" to index.toString()))
 
-    class HighlightNeighbors(index: Int) : Analytics("Highlight Neighbors", mapOf("Index" to index.toString()))
-
     class OpenNeighbors(index: Int) : Analytics("Open Neighbors", mapOf("Index" to index.toString()))
 
     class GameOver(time: Long, score: Score) : Analytics(

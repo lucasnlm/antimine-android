@@ -40,15 +40,6 @@ class MinefieldHandlerTest {
     }
 
     @Test
-    fun testTurnOffHighlight() {
-        handleMinefield { handler ->
-            handler.highlightAt(3)
-            handler.turnOffAllHighlighted()
-            assertFalse(handler.result()[3].highlighted)
-        }
-    }
-
-    @Test
     fun testRemoveMark() {
         handleMinefield { handler ->
             handler.switchMarkAt(3)
@@ -85,29 +76,6 @@ class MinefieldHandlerTest {
 
             handler.switchMarkAt(3)
             assertTrue(handler.result()[3].mark.isNone())
-        }
-    }
-
-    @Test
-    fun testHighlight() {
-        handleMinefield(useQuestionMark = true) { handler ->
-            assertEquals(0, handler.result().count { it.highlighted })
-
-            // Before open
-            handler.highlightAt(5)
-            assertEquals(0, handler.result().count { it.highlighted })
-
-            // After Open
-            handler.openAt(5, false, openNeighbors = false)
-            handler.highlightAt(5)
-            assertEquals(9, handler.result().count { it.highlighted })
-            assertEquals(
-                listOf(0, 1, 2, 4, 5, 6, 8, 9, 10),
-                handler.result()
-                    .filter { it.highlighted }
-                    .map { it.id }
-                    .toList()
-            )
         }
     }
 

@@ -44,4 +44,5 @@ object PreferenceKeys {
     const val PREFERENCE_SHOW_TOGGLE_ON_TOP_BAR = "preference_show_toggle_on_top_bar"
     const val PREFERENCE_SIMON_TATHAM_ALGORITHM = "preference_simon_tatham"
     const val PREFERENCE_SHOULD_SHOW_TUTORIAL_BUTTON = "preference_should_show_tutorial_button"
+    const val PREFERENCE_DIM_NUMBERS = "preference_dim_numbers"
 }

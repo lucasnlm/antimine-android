@@ -172,4 +172,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun showTutorialButton(): Boolean = true
 
     override fun setShowTutorialButton(value: Boolean) { }
+
+    override fun dimNumbers(): Boolean = false
+
+    override fun setDimNumbers(value: Boolean) { }
 }
