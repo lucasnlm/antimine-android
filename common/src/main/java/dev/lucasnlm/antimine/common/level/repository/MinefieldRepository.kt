@@ -27,14 +27,16 @@ class MinefieldRepository : IMinefieldRepository {
         progressiveMines: Int,
     ): Minefield {
         val fieldSize = dimensionRepository.defaultAreaSize()
-        val verticalGap = if (dimensionRepository.navigationBarHeight() > 0)
+        val horizontalGap = if (dimensionRepository.horizontalNavigationBarHeight() > 0)
+            HORIZONTAL_STANDARD_GAP else HORIZONTAL_STANDARD_GAP_WITHOUT_SIDE
+        val verticalGap = if (dimensionRepository.verticalNavigationBarHeight() > 0)
             VERTICAL_STANDARD_GAP else VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM
 
         val display = dimensionRepository.displaySize()
         val width = display.width
         val height = display.height
 
-        val calculatedWidth = ((width / fieldSize).toInt() - HORIZONTAL_STANDARD_GAP)
+        val calculatedWidth = ((width / fieldSize).toInt() - horizontalGap)
         val calculatedHeight = ((height / fieldSize).toInt() - verticalGap)
         val fitWidth = calculatedWidth.coerceAtLeast(MIN_STANDARD_WIDTH)
         val fitHeight = calculatedHeight.coerceAtLeast(MIN_STANDARD_HEIGHT)
@@ -94,7 +96,8 @@ class MinefieldRepository : IMinefieldRepository {
 
         private const val CUSTOM_LEVEL_MINE_RATIO = 0.18
         private const val MAX_LEVEL_MINE_RATIO = 0.45
-        private const val HORIZONTAL_STANDARD_GAP = 1
+        private const val HORIZONTAL_STANDARD_GAP_WITHOUT_SIDE = 1
+        private const val HORIZONTAL_STANDARD_GAP = 3
         private const val VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM = 4
         private const val VERTICAL_STANDARD_GAP = 3
         private const val MIN_STANDARD_WIDTH = 6
