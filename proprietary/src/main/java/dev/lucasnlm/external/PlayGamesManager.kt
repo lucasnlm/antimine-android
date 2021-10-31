@@ -11,6 +11,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.games.Games
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PlayGamesAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
 class PlayGamesManager(
@@ -19,6 +23,9 @@ class PlayGamesManager(
 ) : IPlayGamesManager {
     private var account: GoogleSignInAccount? = null
     private var requestLogin: Boolean = true
+    private val firebaseAuth: FirebaseAuth by lazy {
+        Firebase.auth
+    }
 
     private fun setupPopUp(activity: Activity, account: GoogleSignInAccount) {
         Games.getGamesClient(context, account).apply {
@@ -132,6 +139,28 @@ class PlayGamesManager(
 
     override fun shouldRequestLogin(): Boolean {
         return requestLogin
+    }
+
+    override fun signInToFirebase(activity: Activity) {
+        val googleAccount = account
+        val serverAuthCode = googleAccount?.serverAuthCode
+
+        if (googleAccount != null && serverAuthCode != null) {
+            val credential = PlayGamesAuthProvider.getCredential(serverAuthCode)
+
+            firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(activity) { task ->
+                    if (task.isSuccessful) {
+                        Log.d(TAG, "signInWithCredential:success")
+                    } else {
+                        Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    }
+                }
+                .addOnFailureListener {
+                    Log.e(TAG, "Fail to signIn with firebase", it)
+                    crashReporter.sendError("Fail to  signIn with firebase. $it")
+                }
+        }
     }
 
     companion object {
