@@ -261,6 +261,32 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/helpLabel" />
 
+            <TextView
+                android:id="@+id/highlightUnsolvedNumbersLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:alpha="1.0"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingVertical="16dp"
+                android:text="@string/highlight_unsolved_numbers"
+                android:textColor="?attr/colorControlNormal"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/helpLabel" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/highlightUnsolvedNumbers"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingVertical="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/highlightUnsolvedNumbersLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/highlightUnsolvedNumbersLabel" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

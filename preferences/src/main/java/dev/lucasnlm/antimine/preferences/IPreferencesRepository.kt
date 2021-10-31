@@ -73,6 +73,9 @@ interface IPreferencesRepository {
     fun useFlagAssistant(): Boolean
     fun setFlagAssistant(value: Boolean)
 
+    fun dimNumbers(): Boolean
+    fun setDimNumbers(value: Boolean)
+
     fun useHapticFeedback(): Boolean
     fun setHapticFeedback(value: Boolean)
 

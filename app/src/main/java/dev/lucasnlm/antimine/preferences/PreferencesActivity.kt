@@ -106,6 +106,13 @@ class PreferencesActivity :
             action = { preferenceRepository.setAllowTapOnNumbers(it) }
         )
 
+        bindItem(
+            label = highlightUnsolvedNumbersLabel,
+            switch = highlightUnsolvedNumbers,
+            checked = preferenceRepository.dimNumbers(),
+            action = { preferenceRepository.setDimNumbers(it) }
+        )
+
         PreferenceManager.getDefaultSharedPreferences(this)
             .registerOnSharedPreferenceChangeListener(this)
     }

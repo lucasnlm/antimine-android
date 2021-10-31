@@ -6,7 +6,6 @@ package dev.lucasnlm.antimine.preferences.models
 enum class ActionResponse {
     OpenTile,
     SwitchMark,
-    HighlightNeighbors,
     OpenNeighbors,
     OpenOrMark,
 }
@@ -49,7 +48,7 @@ sealed class GameControl(
             doubleClick = null,
         ),
         onUncovered = Actions(
-            singleClick = ActionResponse.HighlightNeighbors,
+            singleClick = null,
             longPress = ActionResponse.OpenNeighbors,
             doubleClick = null,
         )
@@ -64,7 +63,7 @@ sealed class GameControl(
         ),
         onUncovered = Actions(
             singleClick = ActionResponse.OpenNeighbors,
-            longPress = ActionResponse.HighlightNeighbors,
+            longPress = null,
             doubleClick = null,
         )
     )
@@ -79,7 +78,7 @@ sealed class GameControl(
         onUncovered = Actions(
             singleClick = ActionResponse.OpenNeighbors,
             longPress = null,
-            doubleClick = ActionResponse.HighlightNeighbors,
+            doubleClick = null,
         )
     )
 
@@ -93,7 +92,7 @@ sealed class GameControl(
         onUncovered = Actions(
             singleClick = ActionResponse.OpenNeighbors,
             longPress = null,
-            doubleClick = ActionResponse.HighlightNeighbors,
+            doubleClick = null,
         )
     )
 

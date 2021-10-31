@@ -11,7 +11,6 @@ object GdxLocal {
     var textureAtlas: TextureAtlas? = null
     var areaAtlas: TextureAtlas? = null
     var gameTextures: GameTextures? = null
-    var hasHighlightAreas = false
     var highlightAlpha = 0.0f
     var zoom = 1.0f
 

@@ -321,7 +321,6 @@ class GameApplicationListener(
         boundAreas = field
         minefieldStage?.bindField(field)
         Gdx.graphics.requestRendering()
-        GdxLocal.hasHighlightAreas = field.firstOrNull { it.highlighted } != null
     }
 
     fun setActionsEnabled(enabled: Boolean) {

@@ -9,6 +9,7 @@ import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreatorImpl
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreatorNativeImpl
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
+import dev.lucasnlm.antimine.common.level.logic.NumberDimmer
 import dev.lucasnlm.antimine.common.level.solver.LimitedCheckNeighborsSolver
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
@@ -116,7 +117,6 @@ class GameController {
             }
         } else {
             minefieldHandler = MinefieldHandler(field.toMutableList(), useQuestionMark)
-            minefieldHandler.turnOffAllHighlighted()
 
             when (actionResponse) {
                 ActionResponse.OpenTile -> {
@@ -136,11 +136,6 @@ class GameController {
                         }
                     } else {
                         minefieldHandler.switchMarkAt(target.id)
-                    }
-                }
-                ActionResponse.HighlightNeighbors -> {
-                    if (target.minesAround != 0) {
-                        minefieldHandler.highlightAt(target.id)
                     }
                 }
                 ActionResponse.OpenNeighbors -> {
@@ -222,6 +217,13 @@ class GameController {
     fun runFlagAssistant() {
         field = FlagAssistant(field.toMutableList()).run {
             runFlagAssistant()
+            result()
+        }
+    }
+
+    fun runNumberDimmer() {
+        field = NumberDimmer(field.toMutableList()).run {
+            runDimmer()
             result()
         }
     }

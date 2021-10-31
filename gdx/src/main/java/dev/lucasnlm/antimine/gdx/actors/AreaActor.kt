@@ -61,7 +61,6 @@ class AreaActor(
 
             override fun touchDown(event: InputEvent, x: Float, y: Float, pointer: Int, button: Int): Boolean {
                 toFront()
-                GdxLocal.highlightAlpha = 0.45f
                 isPressed = true
                 onInputEvent(GdxEvent.TouchDownEvent(area.id))
                 Gdx.graphics.requestRendering()
@@ -144,10 +143,15 @@ class AreaActor(
         touchable = if ((area.isCovered || area.minesAround > 0) && GdxLocal.actionsEnabled)
             Touchable.enabled else Touchable.disabled
 
-        focusScale = if (isPressed) {
+        val newFocusScale = if (isPressed) {
             (focusScale + Gdx.graphics.deltaTime).coerceAtMost(MAX_SCALE)
         } else {
             (focusScale - Gdx.graphics.deltaTime).coerceAtLeast(MIN_SCALE)
+        }
+
+        if (newFocusScale != focusScale) {
+            focusScale = newFocusScale
+            Gdx.graphics.requestRendering()
         }
     }
 
@@ -273,11 +277,18 @@ class AreaActor(
                 drawAsset(
                     batch = batch,
                     texture = it.aroundMines[area.minesAround - 1],
-                    color = theme.palette.minesAround(area.minesAround - 1).toGdxColor(GdxLocal.zoomLevelAlpha),
+                    color = if (area.dimNumber) {
+                        theme.palette
+                            .minesAround(area.minesAround - 1)
+                            .toGdxColor(GdxLocal.zoomLevelAlpha * 0.35f)
+                            .dim(0.5f)
+                    } else {
+                        theme.palette
+                            .minesAround(area.minesAround - 1)
+                            .toGdxColor(GdxLocal.zoomLevelAlpha)
+                    },
                 )
-            }
-
-            if (area.hasMine) {
+            } else if (area.hasMine) {
                 val color = theme.palette.uncovered
                 drawAsset(
                     batch = batch,
