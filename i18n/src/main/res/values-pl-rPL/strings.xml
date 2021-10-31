@@ -121,5 +121,5 @@
     <string name="no_guess_fail_warning">To pole minowe może wymagać zgadywania, aby je ukończyć!</string>
     <string name="fixed_size">Ustalony rozmiar</string>
     <string name="progressive">Progresywny</string>
-    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="highlight_unsolved_numbers">Podświetl nierozwiązane pola</string>
 </resources>
