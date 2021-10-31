@@ -11,7 +11,6 @@ object GdxLocal {
     var textureAtlas: TextureAtlas? = null
     var areaAtlas: TextureAtlas? = null
     var gameTextures: GameTextures? = null
-    var highlightAlpha = 0.0f
     var zoom = 1.0f
 
     // Global animation scale, it defines how fast/slow all animations must be executed.

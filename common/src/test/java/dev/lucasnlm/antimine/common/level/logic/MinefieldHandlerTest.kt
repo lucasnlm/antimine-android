@@ -31,7 +31,7 @@ class MinefieldHandlerTest {
 
     @Test
     fun testOpenAreaWithSafeZone() {
-        handleMinefield() { handler ->
+        handleMinefield { handler ->
             assertTrue(handler.result()[3].isCovered)
             handler.openAt(3, false, openNeighbors = false)
             assertFalse(handler.result()[3].isCovered)
