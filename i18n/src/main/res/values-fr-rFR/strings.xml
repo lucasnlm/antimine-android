@@ -20,7 +20,6 @@
     <string name="settings">Réglages</string>
     <string name="animations">Animations</string>
     <string name="vibration">Retour tactile</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">À propos</string>
     <string name="events">Statistiques</string>
     <string name="custom">Personnalisé</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Voulez-vous commencer une nouvelle partie ?</string>
     <string name="mines_remaining">%d mines</string>
     <string name="game_time">Temps de jeu</string>
-    <string name="mine">Mine</string>
     <string name="settings_general">Général</string>
     <string name="settings_gameplay">Jouabilité</string>
     <string name="settings_accessibility">Accessibilité</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">Le champ de mines actuel ne peut pas être résolu sans deviner !</string>
     <string name="fixed_size">Taille fixe</string>
     <string name="progressive">Progressif</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

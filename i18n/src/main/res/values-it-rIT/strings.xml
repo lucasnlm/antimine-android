@@ -20,7 +20,6 @@
     <string name="settings">Impostazioni</string>
     <string name="animations">Animazioni</string>
     <string name="vibration">Feedback tattile</string>
-    <string name="haptic_feedback_level">Feedback tattile</string>
     <string name="about">Informazioni</string>
     <string name="events">Statistiche</string>
     <string name="custom">Personalizza</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Vuoi iniziare una nuova partita?</string>
     <string name="mines_remaining">%d mine</string>
     <string name="game_time">Tempo di gioco</string>
-    <string name="mine">Scava</string>
     <string name="settings_general">Generale</string>
     <string name="settings_gameplay">Gioco</string>
     <string name="settings_accessibility">Accessibilità</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">L\'attuale campo minato potrebbe non essere indovinabile!</string>
     <string name="fixed_size">Dimensione Fissa</string>
     <string name="progressive">Progressivo</string>
+    <string name="highlight_unsolved_numbers">Evidenzia numeri non risolti</string>
 </resources>

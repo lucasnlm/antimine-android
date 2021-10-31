@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh">
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="zh-rTW">
     <string name="tutorial">教程</string>
     <string name="tutorial_basic">遊戲規則很簡單，方格上的數字顯示與其相鄰的地雷數量，您必須標記所有地雷。</string>
     <string name="tutorial_text_1">如果一個數字與相同數量的方塊接觸，那麼這些方塊都是地雷。</string>
@@ -112,7 +112,6 @@
     <string name="switch_control_desc">使用按鈕在標記和打開之間切換</string>
     <string name="app_description">你必須在不引爆任何地雷的情況下清除一個包含隱藏地雷的矩形板。</string>
     <string name="app_name">踩地雷</string>
-    <string name="crowdin" translatable="false">Crowdin</string>
     <string name="do_you_know_how_to_play">你知道怎麼玩掃雷嗎？</string>
     <string name="close">關閉</string>
     <string name="open_tutorial">打開教程</string>
@@ -122,4 +121,5 @@
     <string name="no_guess_fail_warning">目前的雷區可能不是無猜測的！</string>
     <string name="fixed_size">固定尺寸</string>
     <string name="progressive">進步</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

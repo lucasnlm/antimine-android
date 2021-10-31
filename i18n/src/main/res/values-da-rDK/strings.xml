@@ -20,7 +20,6 @@
     <string name="settings">Settings</string>
     <string name="animations">Animationer</string>
     <string name="vibration">Haptisk Feedback</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Om</string>
     <string name="events">Statistik</string>
     <string name="custom">Tilpasset</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Vil du starte et nyt spil?</string>
     <string name="mines_remaining">%d miner</string>
     <string name="game_time">Spil Tid</string>
-    <string name="mine">Mine</string>
     <string name="settings_general">Generelt</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Tilgængelighed</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

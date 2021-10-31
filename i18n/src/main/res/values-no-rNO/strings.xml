@@ -20,7 +20,6 @@
     <string name="settings">Innstillinger</string>
     <string name="animations">Animasjoner</string>
     <string name="vibration">Haptisk Tilbakemelding</string>
-    <string name="haptic_feedback_level">Haptisk Tilbakemelding Nivå</string>
     <string name="about">Om</string>
     <string name="events">Statistikk</string>
     <string name="custom">Egendefinert</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Vil du starte et nytt spill?</string>
     <string name="mines_remaining">%d miner</string>
     <string name="game_time">Spilletid</string>
-    <string name="mine">Mine</string>
     <string name="settings_general">Generelt</string>
     <string name="settings_gameplay">Spillopplevelse</string>
     <string name="settings_accessibility">Tilgjengelighet</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">Det nåværende minefeltet kan ikke løses uten å gjette!</string>
     <string name="fixed_size">Fast størrelse</string>
     <string name="progressive">Progressiv</string>
+    <string name="highlight_unsolved_numbers">Marker uløste numre</string>
 </resources>

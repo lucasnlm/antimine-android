@@ -20,7 +20,6 @@
     <string name="settings">Inpostasion</string>
     <string name="animations">Animasion</string>
     <string name="vibration">Feedback Tàtiłe</string>
-    <string name="haptic_feedback_level">Feedback Tàtiłe</string>
     <string name="about">Informasion</string>
     <string name="events">Statìsteghe</string>
     <string name="custom">Parsonałizà</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Vuto scuminsiar na nova partìa?</string>
     <string name="mines_remaining">%d mine</string>
     <string name="game_time">Tenpo de Zogo</string>
-    <string name="mine">Mina</string>
     <string name="settings_general">Zenarałe</string>
     <string name="settings_gameplay">Zogo</string>
     <string name="settings_accessibility">Acesibiłità</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">\'Sto canpo minà no el se połe mìa conpletar sensa intivar!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

@@ -20,7 +20,6 @@
     <string name="settings">Inställningar</string>
     <string name="animations">Animationer</string>
     <string name="vibration">Haptik-feedback</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Om</string>
     <string name="events">Statistik</string>
     <string name="custom">Anpassa</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Vill du starta ett nytt spel?</string>
     <string name="mines_remaining">%d minor</string>
     <string name="game_time">Speltid</string>
-    <string name="mine">Mina</string>
     <string name="settings_general">Allmänt</string>
     <string name="settings_gameplay">Spelsätt</string>
     <string name="settings_accessibility">Tillgänglighet</string>
@@ -118,9 +116,10 @@
     <string name="close">Stäng</string>
     <string name="open_tutorial">Öppna Guide</string>
     <string name="click_numbers">Tillåt tryck på siffror</string>
-    <string name="tap_to_customize">Tap to customize</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
-    <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
-    <string name="fixed_size">Fixed Size</string>
-    <string name="progressive">Progressive</string>
+    <string name="tap_to_customize">Tryck för att anpassa</string>
+    <string name="toggle_button_top">Visa \"Växla knapp\" i övre fältet</string>
+    <string name="no_guess_fail_warning">Den nuvarande minfälten kanske inte är gissfri!</string>
+    <string name="fixed_size">Fast storlek</string>
+    <string name="progressive">Progressiv</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

@@ -20,7 +20,6 @@
     <string name="settings">设置</string>
     <string name="animations">动画</string>
     <string name="vibration">触摸反馈</string>
-    <string name="haptic_feedback_level">触动反馈级别</string>
     <string name="about">关于</string>
     <string name="events">统计</string>
     <string name="custom">自定义</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">你要开始一个新游戏吗？</string>
     <string name="mines_remaining">%d 个地雷</string>
     <string name="game_time">游戏时间</string>
-    <string name="mine">地雷</string>
     <string name="settings_general">通用</string>
     <string name="settings_gameplay">游戏性</string>
     <string name="settings_accessibility">无障碍</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">当前雷场可能不是“无需猜测”的！</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

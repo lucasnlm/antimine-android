@@ -20,7 +20,6 @@
     <string name="settings">Ustawienia</string>
     <string name="animations">Animacje</string>
     <string name="vibration">Wibracja przy dotknięciu</string>
-    <string name="haptic_feedback_level">Intensywność wibracji</string>
     <string name="about">Informacje</string>
     <string name="events">Statystyki</string>
     <string name="custom">Niestandardowy</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Czy chcesz rozpocząć nową rozgrywkę?</string>
     <string name="mines_remaining">%d</string>
     <string name="game_time">Czas gry</string>
-    <string name="mine">Mina</string>
     <string name="settings_general">Ogólne</string>
     <string name="settings_gameplay">Rozgrywka</string>
     <string name="settings_accessibility">Ułatwienia dostępu</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">To pole minowe może wymagać zgadywania, aby je ukończyć!</string>
     <string name="fixed_size">Ustalony rozmiar</string>
     <string name="progressive">Progresywny</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

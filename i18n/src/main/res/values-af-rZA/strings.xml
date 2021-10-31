@@ -20,7 +20,6 @@
     <string name="settings">Verstellings</string>
     <string name="animations">Animasie</string>
     <string name="vibration">Haptiese terugvoer</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Aangaande</string>
     <string name="events">Statistiek</string>
     <string name="custom">Pasmaak</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Wil u \'n nuwe spel begin met hierdie kaart?</string>
     <string name="mines_remaining">%d myne</string>
     <string name="game_time">Speeltyd</string>
-    <string name="mine">Myne</string>
     <string name="settings_general">Algemeen</string>
     <string name="settings_gameplay">Spel</string>
     <string name="settings_accessibility">Toeganklikheid</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

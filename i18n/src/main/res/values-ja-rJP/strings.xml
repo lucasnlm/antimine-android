@@ -20,7 +20,6 @@
     <string name="settings">設定</string>
     <string name="animations">アニメーション</string>
     <string name="vibration">タッチ操作バイブ</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">このアプリについて</string>
     <string name="events">統計</string>
     <string name="custom">カスタム</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">新しくゲームを始めますか？</string>
     <string name="mines_remaining">%d 個の地雷</string>
     <string name="game_time">ゲーム時間</string>
-    <string name="mine">地雷</string>
     <string name="settings_general">全般</string>
     <string name="settings_gameplay">ゲームプレイ</string>
     <string name="settings_accessibility">アクセシビリティ</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

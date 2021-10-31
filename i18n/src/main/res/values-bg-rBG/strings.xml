@@ -20,7 +20,6 @@
     <string name="settings">Настройки</string>
     <string name="animations">Анимации</string>
     <string name="vibration">Вибрация при докосване</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">За нас</string>
     <string name="events">Статистики</string>
     <string name="custom">По избор</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Искате ли да започнете нова игра?</string>
     <string name="mines_remaining">%d мини</string>
     <string name="game_time">Време в играта</string>
-    <string name="mine">Мина</string>
     <string name="settings_general">Основни</string>
     <string name="settings_gameplay">Начин на игра</string>
     <string name="settings_accessibility">Достъпност</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">Сегашното поле може да не е без предположения!</string>
     <string name="fixed_size">Фиксиран размер</string>
     <string name="progressive">Прогресивен</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>
