@@ -11,6 +11,7 @@ import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.SkuDetailsParams
 import com.android.billingclient.api.acknowledgePurchase
+import com.android.billingclient.api.queryPurchasesAsync
 import com.android.billingclient.api.querySkuDetails
 import dev.lucasnlm.external.model.Price
 import dev.lucasnlm.external.model.PurchaseInfo
@@ -49,8 +50,8 @@ class BillingManager(
         coroutineScope.launch {
             while (true) {
                 val purchasesList: List<Purchase> = billingClient
-                    .queryPurchases(BillingClient.SkuType.INAPP)
-                    .purchasesList.let { it?.toList() ?: listOf() }
+                    .queryPurchasesAsync(BillingClient.SkuType.INAPP)
+                    .purchasesList
 
                 if (purchasesList.isEmpty()) {
                     break
@@ -69,7 +70,7 @@ class BillingManager(
 
     private suspend fun handlePurchases(purchases: List<Purchase>): Boolean {
         val status: Boolean = purchases.firstOrNull {
-            it.sku == PREMIUM
+            it.skus.contains(PREMIUM)
         }.let {
             when (it?.purchaseState) {
                 Purchase.PurchaseState.PURCHASED, Purchase.PurchaseState.PENDING -> true
