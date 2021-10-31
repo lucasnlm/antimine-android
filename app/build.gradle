@@ -161,7 +161,7 @@ dependencies {
     // Tests
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'android.arch.core:core-testing:1.1.1'
-    testImplementation 'androidx.core:core-ktx:1.7.0'
+    testImplementation 'androidx.core:core-ktx:1.6.0'
     testImplementation 'androidx.test:core-ktx:1.4.0'
     testImplementation 'androidx.test:rules:1.4.0'
     testImplementation 'androidx.test:runner:1.4.0'
