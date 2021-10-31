@@ -20,7 +20,6 @@
     <string name="settings">Configuració</string>
     <string name="animations">Animacions</string>
     <string name="vibration">Resposta hàptica</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Quant a</string>
     <string name="events">Estadístiques</string>
     <string name="custom">Personalitzat</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Vols començar un joc nou?</string>
     <string name="mines_remaining">%d mines</string>
     <string name="game_time">Temps de joc</string>
-    <string name="mine">Mina</string>
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Joc</string>
     <string name="settings_accessibility">Accessibilitat</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Mida Fixa</string>
     <string name="progressive">Progressiu</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

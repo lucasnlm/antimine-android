@@ -410,6 +410,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     }
 
     private fun afterGooglePlayGames() {
+        playGamesManager.signInToFirebase(this)
         inAppUpdateManager.checkUpdate(this)
     }
 

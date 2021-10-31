@@ -54,6 +54,7 @@ class CloudSaveManagerImpl(
                     squareDivider = preferencesRepository.squareDivider(),
                     doubleClickTimeout = preferencesRepository.getDoubleClickTimeout().toInt(),
                     allowTapNumbers = preferencesRepository.allowTapOnNumbers().toInt(),
+                    highlightNumbers = preferencesRepository.dimNumbers().toInt(),
                 )
             }
         } catch (e: Exception) {

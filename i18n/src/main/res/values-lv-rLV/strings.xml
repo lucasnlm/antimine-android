@@ -20,7 +20,6 @@
     <string name="settings">Iestatījumi</string>
     <string name="animations">Animācijas</string>
     <string name="vibration">Haptiskas atsauksmes</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Par lietotni</string>
     <string name="events">Statistika</string>
     <string name="custom">Pielāgots</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Vai tu vēlies uzsākt jaunu spēli?</string>
     <string name="mines_remaining">%d mīnas</string>
     <string name="game_time">Spēles laiks</string>
-    <string name="mine">Mīna</string>
     <string name="settings_general">Vispārīgi</string>
     <string name="settings_gameplay">Spēlē</string>
     <string name="settings_accessibility">Pieejamība</string>
@@ -54,18 +52,18 @@
     <string name="version_s">Versija %1$s</string>
     <string name="sound_effects">Skaņas efekti</string>
     <string name="are_you_sure">Vai esi pārliecināts(a)?</string>
-    <string name="enable_automatic_flags">Ieslēgt automātisku atzīmēšanu</string>
+    <string name="enable_automatic_flags">Iespējot automātisku atzīmēšanu</string>
     <string name="open_areas">Atvērti lauki</string>
     <string name="total_time">Kopējais laiks</string>
     <string name="average_time">Vidējais laiks</string>
     <string name="shortest_time">Īsākais laiks</string>
     <string name="performance">Izpilde</string>
     <string name="ok">Labi</string>
-    <string name="use_question_mark">Izmantot arī jautājuma zīmi</string>
-    <string name="no_guessing_mode">Bez minēšanas</string>
+    <string name="use_question_mark">Iespējot jautājuma zīmi</string>
+    <string name="no_guessing_mode">Režīms bez minēšanas</string>
     <string name="control">Kontroles</string>
     <string name="single_click">Pieskāriens</string>
-    <string name="double_click">Dubultpiesitiens</string>
+    <string name="double_click">Dubultpieskāriens</string>
     <string name="long_press">Ilgs pieskāriens</string>
     <string name="touch_sensibility">Jūtīgums</string>
     <string name="open_tile">Atvērt</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">Pašreizējais mīnu lauks nav no minēšanas brīvs!</string>
     <string name="fixed_size">Nemainīga lieluma</string>
     <string name="progressive">Ar attīstību</string>
+    <string name="highlight_unsolved_numbers">Izcelt neatrisinātos skaitļus</string>
 </resources>

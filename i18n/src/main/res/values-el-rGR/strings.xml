@@ -20,7 +20,6 @@
     <string name="settings">Ρυθμίσεις</string>
     <string name="animations">Εφέ Κίνησης</string>
     <string name="vibration">Δόνηση</string>
-    <string name="haptic_feedback_level">Επίπεδο Δόνησης</string>
     <string name="about">Σχετικά</string>
     <string name="events">Στατιστικά</string>
     <string name="custom">Προσαρμοσμένο</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Θέλετε να ξεκινήσετε ένα νέο παιχνίδι;</string>
     <string name="mines_remaining">%d νάρκες</string>
     <string name="game_time">Ώρα Παιχνιδιού</string>
-    <string name="mine">Νάρκη</string>
     <string name="settings_general">Γενικά</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Προσβασιμότητα</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">Το τρέχον ναρκοπέδιο δεν μπορεί να λυθεί χωρίς μαντεψιές!</string>
     <string name="fixed_size">Προεπιλεγμένο Μέγεθος</string>
     <string name="progressive">Προοδευτικό</string>
+    <string name="highlight_unsolved_numbers">Επισήμανση άλυτων αριθμών</string>
 </resources>

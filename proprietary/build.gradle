@@ -42,7 +42,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 
     // Google
-    implementation 'com.android.billingclient:billing-ktx:3.0.3'
+    implementation 'com.android.billingclient:billing-ktx:4.0.0'
     implementation 'com.google.android.gms:play-services-instantapps:17.0.1'
     implementation 'com.google.android.gms:play-services-games:21.0.0'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'

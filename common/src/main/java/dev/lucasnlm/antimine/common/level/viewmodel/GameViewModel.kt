@@ -524,7 +524,7 @@ open class GameViewModel(
         }
     }
 
-    fun refreshUserPreferences() {
+    private fun refreshUserPreferences() {
         if (initialized) {
             gameController.apply {
                 val controlType = preferencesRepository.controlStyle()

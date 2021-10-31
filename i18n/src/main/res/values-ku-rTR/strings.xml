@@ -20,7 +20,6 @@
     <string name="settings">ڕێکخستنەکان</string>
     <string name="animations">ئەنیمەیشنەکان</string>
     <string name="vibration">وڵامدانەوەی ڕاوبۆچون</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">دەربارە</string>
     <string name="events">ئامار</string>
     <string name="custom">ئاسایی</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">ئایا دەتەوێت یاریەکی نوێ دەست پێبکەیت؟</string>
     <string name="mines_remaining">%dمینەکان</string>
     <string name="game_time">کاتی یاری</string>
-    <string name="mine">مین</string>
     <string name="settings_general">گشتی</string>
     <string name="settings_gameplay">شێوازی یاری</string>
     <string name="settings_accessibility">توانای گەیشتن</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

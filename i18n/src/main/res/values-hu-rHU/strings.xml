@@ -20,7 +20,6 @@
     <string name="settings">Beállítások</string>
     <string name="animations">Animációk</string>
     <string name="vibration">Érintéskori visszajelzés</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Rólunk</string>
     <string name="events">Statisztikák</string>
     <string name="custom">Egyéni</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Szeretnél új játékot kezdeni?</string>
     <string name="mines_remaining">%d akna</string>
     <string name="game_time">Játékidő</string>
-    <string name="mine">Akna</string>
     <string name="settings_general">Általános</string>
     <string name="settings_gameplay">Játékmenet</string>
     <string name="settings_accessibility">Kisegítő lehetőségek</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">A jelenlegi szint lehet nem tipp mentes!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

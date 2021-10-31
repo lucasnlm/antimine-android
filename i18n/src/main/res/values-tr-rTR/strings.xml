@@ -20,7 +20,6 @@
     <string name="settings">Ayarlar</string>
     <string name="animations">Animasyonlar</string>
     <string name="vibration">Dokunsal Geribildirim</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Hakkında</string>
     <string name="events">İstatistikler</string>
     <string name="custom">Özel</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Yeni bir oyun başlatmak istiyor musunuz?</string>
     <string name="mines_remaining">%d mayın</string>
     <string name="game_time">Oyun Süresi</string>
-    <string name="mine">Mayın</string>
     <string name="settings_general">Genel</string>
     <string name="settings_gameplay">Oynanış</string>
     <string name="settings_accessibility">Erişilebilirlik</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">Mevcut mayın tarlası tahmin edilemez olmayabilir!</string>
     <string name="fixed_size">Sabit Boyut</string>
     <string name="progressive">İlerleme</string>
+    <string name="highlight_unsolved_numbers">Çözülmemiş sayıları vurgula</string>
 </resources>

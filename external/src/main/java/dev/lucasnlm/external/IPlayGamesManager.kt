@@ -41,4 +41,5 @@ interface IPlayGamesManager {
     fun submitLeaderboard(leaderboard: Leaderboard, value: Long)
     fun keepRequestingLogin(status: Boolean)
     fun shouldRequestLogin(): Boolean
+    fun signInToFirebase(activity: Activity)
 }

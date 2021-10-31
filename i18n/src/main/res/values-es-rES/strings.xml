@@ -20,7 +20,6 @@
     <string name="settings">Configuración</string>
     <string name="animations">Animaciones</string>
     <string name="vibration">Respuesta háptica</string>
-    <string name="haptic_feedback_level">Nivel de respuesta táctil</string>
     <string name="about">Acerca de</string>
     <string name="events">Estadísticas</string>
     <string name="custom">Personalizado</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">¿Deseas empezar una nueva partida?</string>
     <string name="mines_remaining">%d minas</string>
     <string name="game_time">Tiempo de juego</string>
-    <string name="mine">Mina</string>
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Jugabilidad</string>
     <string name="settings_accessibility">Accesibilidad</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">¡Es posible que necesites una pista para solucionar este nivel!</string>
     <string name="fixed_size">Tamaño fijo</string>
     <string name="progressive">Progresivo</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

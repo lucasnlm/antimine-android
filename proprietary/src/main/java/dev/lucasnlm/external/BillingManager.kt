@@ -10,22 +10,26 @@ import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.SkuDetailsParams
+import com.android.billingclient.api.acknowledgePurchase
+import com.android.billingclient.api.queryPurchasesAsync
 import com.android.billingclient.api.querySkuDetails
 import dev.lucasnlm.external.model.Price
 import dev.lucasnlm.external.model.PurchaseInfo
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
 
 class BillingManager(
     private val context: Context,
     private val crashReporter: CrashReporter,
+    private val coroutineScope: CoroutineScope,
 ) : IBillingManager, BillingClientStateListener, PurchasesUpdatedListener {
     private var retry = 0
-    private val purchaseBroadcaster = ConflatedBroadcastChannel<PurchaseInfo>()
+    private val purchaseBroadcaster = MutableStateFlow<PurchaseInfo?>(null)
     private val unlockPrice = MutableStateFlow<Price?>(null)
     private val billingClient by lazy {
         BillingClient.newBuilder(context)
@@ -40,11 +44,33 @@ class BillingManager(
         return unlockPrice.asSharedFlow().filterNotNull()
     }
 
-    override fun listenPurchases(): Flow<PurchaseInfo> = purchaseBroadcaster.asFlow()
+    override fun listenPurchases(): Flow<PurchaseInfo> = purchaseBroadcaster.asSharedFlow().filterNotNull()
 
-    private fun handlePurchases(purchases: List<Purchase>) {
+    private fun asyncRefreshPurchasesList() {
+        coroutineScope.launch {
+            while (true) {
+                val purchasesList: List<Purchase> = billingClient
+                    .queryPurchasesAsync(BillingClient.SkuType.INAPP)
+                    .purchasesList
+
+                if (purchasesList.isEmpty()) {
+                    break
+                } else {
+                    val result = handlePurchases(purchasesList)
+
+                    if (result) {
+                        break
+                    } else {
+                        delay(30 * 1000L)
+                    }
+                }
+            }
+        }
+    }
+
+    private suspend fun handlePurchases(purchases: List<Purchase>): Boolean {
         val status: Boolean = purchases.firstOrNull {
-            it.sku == PREMIUM
+            it.skus.contains(PREMIUM)
         }.let {
             when (it?.purchaseState) {
                 Purchase.PurchaseState.PURCHASED, Purchase.PurchaseState.PENDING -> true
@@ -56,14 +82,17 @@ class BillingManager(
                             .setPurchaseToken(it.purchaseToken)
                             .build()
 
-                    billingClient.acknowledgePurchase(acknowledgePurchaseParams) {
-                        // Purchase acknowledged
+                    val result = billingClient.acknowledgePurchase(acknowledgePurchaseParams)
+
+                    if (result.responseCode != BillingClient.BillingResponseCode.OK) {
+                        return false
                     }
                 }
             }
         }
 
-        purchaseBroadcaster.trySend(PurchaseInfo.PurchaseResult(isFreeUnlock = false, unlockStatus = status))
+        purchaseBroadcaster.tryEmit(PurchaseInfo.PurchaseResult(isFreeUnlock = false, unlockStatus = status))
+        return true
     }
 
     override fun onBillingServiceDisconnected() {
@@ -100,11 +129,7 @@ class BillingManager(
                     }
                 }
 
-            val purchasesList: List<Purchase> = billingClient
-                .queryPurchases(BillingClient.SkuType.INAPP)
-                .purchasesList.let { it?.toList() ?: listOf() }
-
-            handlePurchases(purchasesList)
+            asyncRefreshPurchasesList()
         } else {
             val code = billingResult.responseCode
             val message = billingResult.debugMessage
@@ -113,15 +138,11 @@ class BillingManager(
     }
 
     override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
-        val purchasesList: List<Purchase> = if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-            // The BillingClient is ready. You can query purchases here.
-            purchases?.toList() ?: listOf()
+        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+            asyncRefreshPurchasesList()
         } else {
             crashReporter.sendError("Charge update failed due to response ${billingResult.responseCode}")
-            listOf()
         }
-
-        handlePurchases(purchasesList)
     }
 
     override fun start() {
@@ -153,7 +174,7 @@ class BillingManager(
             }
         } else {
             crashReporter.sendError("Fail to charge due to unready status")
-            purchaseBroadcaster.trySend(PurchaseInfo.PurchaseFail)
+            purchaseBroadcaster.tryEmit(PurchaseInfo.PurchaseFail)
         }
     }
 

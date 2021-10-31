@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="hi">
     <string name="tutorial">ट्यूटोरियल</string>
     <string name="tutorial_basic">गेम का नियम सरल है, स्क्वेयर पर मौजूद संख्या उसके पास वाले माइन की संख्या को दर्शाती है और आपको सभी माइन पर फ़्लैग लगाना है.</string>
@@ -112,7 +112,6 @@
     <string name="switch_control_desc">फ्लैग करें और खोलें के बीच स्विच करने के लिए बटन का उपयोग करें</string>
     <string name="app_description">आपको एक आयताकार बोर्ड को साफ करना होगा जिसमें छिपी हुई माइन हैं, साथ ही उनमें से कोई भी विस्फोट न हो.</string>
     <string name="app_name">एंटीमाइन</string>
-    <string name="crowdin" translatable="false">Crowdin</string>
     <string name="do_you_know_how_to_play">क्या आप माइनस्वीपर खेलना जानते हैं?</string>
     <string name="close">बंद करे</string>
     <string name="open_tutorial">ट्यूटोरियल खोलें</string>
@@ -122,4 +121,5 @@
     <string name="no_guess_fail_warning">वर्तमान माइनफ़ील्ड अनुमान-मुक्त नहीं हो सकता है!</string>
     <string name="fixed_size">निर्धारित आकार</string>
     <string name="progressive">प्रोग्रेसिव</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

@@ -7,7 +7,7 @@
     <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
     <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">Games</string>
-    <string name="tap_to_begin">Tap to begin</string>
+    <string name="tap_to_begin">Tap to Begin</string>
     <string name="previous_games">Previous Games</string>
     <string name="minefield">Difficulty</string>
     <string name="standard">Standard</string>
@@ -20,7 +20,6 @@
     <string name="settings">Settings</string>
     <string name="animations">Animations</string>
     <string name="vibration">Haptic Feedback</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">About</string>
     <string name="events">Statistics</string>
     <string name="custom">Custom</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Do you want to start a new game?</string>
     <string name="mines_remaining">%d mines</string>
     <string name="game_time">Game Time</string>
-    <string name="mine">Mine</string>
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Accessibility</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

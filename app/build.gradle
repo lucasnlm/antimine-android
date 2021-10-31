@@ -15,8 +15,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1500021
-        versionName '15.0.2'
+        versionCode 1501001
+        versionName '15.1.0'
         minSdkVersion 21
         targetSdkVersion 31
         multiDexEnabled true
@@ -135,10 +135,10 @@ dependencies {
     implementation 'androidx.work:work-runtime-ktx:2.7.0'
 
     // Lifecycle
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-common-java8:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.4.0'
 
     // Room
     implementation 'androidx.room:room-ktx:2.3.0'

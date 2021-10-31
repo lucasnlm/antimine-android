@@ -20,7 +20,6 @@
     <string name="settings">การตั้งค่า</string>
     <string name="animations">ภาพเคลื่อนไหว</string>
     <string name="vibration">สั่นเมื่อแตะ</string>
-    <string name="haptic_feedback_level">การตอบสนองแบบสัมผัส</string>
     <string name="about">เกี่ยวกับ</string>
     <string name="events">สติถิ</string>
     <string name="custom">ปรับแต่งเอง</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">ยืนยันเริ่มเกมใหม่หรือไม่？</string>
     <string name="mines_remaining">%d กับระเบิด</string>
     <string name="game_time">เวลาเล่นเกม</string>
-    <string name="mine">ทุ่นระเบิด</string>
     <string name="settings_general">ทั่วไป</string>
     <string name="settings_gameplay">การเล่นเกม</string>
     <string name="settings_accessibility">การเข้าถึง</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>

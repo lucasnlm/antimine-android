@@ -20,7 +20,6 @@
     <string name="settings">Настройки</string>
     <string name="animations">Анимации</string>
     <string name="vibration">Виброотклик</string>
-    <string name="haptic_feedback_level">Уровень виброотклика</string>
     <string name="about">Об игре</string>
     <string name="events">Статистика</string>
     <string name="custom">Другой</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Начать новую игру?</string>
     <string name="mines_remaining">%d мин</string>
     <string name="game_time">Время в игре</string>
-    <string name="mine">Мина</string>
     <string name="settings_general">Общее</string>
     <string name="settings_gameplay">Геймплей</string>
     <string name="settings_accessibility">Специальные возможности</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">Вам может понадобиться подсказка, чтобы пройти этот уровень!</string>
     <string name="fixed_size">Фиксированный размер</string>
     <string name="progressive">Прогрессивный</string>
+    <string name="highlight_unsolved_numbers">Подсвечивать неразгаданные числа</string>
 </resources>

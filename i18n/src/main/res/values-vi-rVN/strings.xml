@@ -20,7 +20,6 @@
     <string name="settings">Cài đặt</string>
     <string name="animations">Hiệu ứng động</string>
     <string name="vibration">Phản hồi rung</string>
-    <string name="haptic_feedback_level">Haptic Feedback Level</string>
     <string name="about">Giới thiệu</string>
     <string name="events">Thống kê</string>
     <string name="custom">Tuỳ chỉnh</string>
@@ -33,7 +32,6 @@
     <string name="new_game_request">Bạn có chắc muốn bắt đầu trò chơi mới?</string>
     <string name="mines_remaining">%d mìn</string>
     <string name="game_time">Thời gian chơi</string>
-    <string name="mine">Mìn</string>
     <string name="settings_general">Tổng quan</string>
     <string name="settings_gameplay">Cách thức chơi</string>
     <string name="settings_accessibility">Trợ năng</string>
@@ -123,4 +121,5 @@
     <string name="no_guess_fail_warning">Bãi mìn hiện tại có thể sẽ không giải được mà không đoán!</string>
     <string name="fixed_size">Kích thước cố định</string>
     <string name="progressive">Tiến trình</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
 </resources>
