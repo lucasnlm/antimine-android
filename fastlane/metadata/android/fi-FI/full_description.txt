@@ -6,7 +6,7 @@ Pystytkö tyhjentämään miinakenttän? Aloitetaan!
 TAVOITE
 Se on kuin Miinaharava. Sinä voitat pelin, kun olet merkinnyt jokaisen miinan miinakenttään. Varo, ettet laukaise yhtään!
 
-NO GUESSING
+EI ARVATTAVAA
 Tässä pelissä on algoritmi, joka luo aina ratkaistavissa olevan miinakentän. Sinun ei tarvitse arvata missä viimeinen miina on!
 
 PELITASOT

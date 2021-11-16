@@ -121,5 +121,5 @@
     <string name="no_guess_fail_warning">Le champ de mines actuel ne peut pas être résolu sans deviner !</string>
     <string name="fixed_size">Taille fixe</string>
     <string name="progressive">Progressif</string>
-    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="highlight_unsolved_numbers">Surligner les nombres non résolus</string>
 </resources>
