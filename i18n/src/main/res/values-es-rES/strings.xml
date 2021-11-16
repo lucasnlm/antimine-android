@@ -121,5 +121,5 @@
     <string name="no_guess_fail_warning">¡Es posible que necesites una pista para solucionar este nivel!</string>
     <string name="fixed_size">Tamaño fijo</string>
     <string name="progressive">Progresivo</string>
-    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="highlight_unsolved_numbers">Resaltar números sin completar</string>
 </resources>

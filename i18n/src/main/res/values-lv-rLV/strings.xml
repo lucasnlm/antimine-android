@@ -7,8 +7,8 @@
     <string name="tutorial_text_3">Ja skaitlis ir tikpat liels cik atzīmēto kvadrātu skaits, pārējie kvadrāti nav mīnas (norādīts ar zaļo bultu).</string>
     <string name="tutorial_text_4">Apskati skaitļus un turpini lauku atklāšanu.</string>
     <string name="games">Spēles</string>
-    <string name="tap_to_begin">Pieskarieties lai sāktu</string>
-    <string name="previous_games">Iepriekšejās spēles</string>
+    <string name="tap_to_begin">Piesist, lai sāktu</string>
+    <string name="previous_games">Iepriekšējās spēles</string>
     <string name="minefield">Sarežģītība</string>
     <string name="standard">Standarta</string>
     <string name="beginner">Iesācēja</string>
@@ -19,7 +19,7 @@
     <string name="open">Atvērt</string>
     <string name="settings">Iestatījumi</string>
     <string name="animations">Animācijas</string>
-    <string name="vibration">Haptiskas atsauksmes</string>
+    <string name="vibration">Sajūtu atgriezeniskā saite</string>
     <string name="about">Par lietotni</string>
     <string name="events">Statistika</string>
     <string name="custom">Pielāgots</string>
@@ -63,9 +63,9 @@
     <string name="no_guessing_mode">Režīms bez minēšanas</string>
     <string name="control">Kontroles</string>
     <string name="single_click">Pieskāriens</string>
-    <string name="double_click">Dubultpieskāriens</string>
+    <string name="double_click">Divkāršs piesitiens</string>
     <string name="long_press">Ilgs pieskāriens</string>
-    <string name="touch_sensibility">Jūtīgums</string>
+    <string name="touch_sensibility">Saskares jutīgums</string>
     <string name="open_tile">Atvērt</string>
     <string name="flag_tile">Atzīmēt</string>
     <string name="retry">Mēģināt vēlreiz</string>
@@ -99,7 +99,7 @@
     <string name="no_network">Nav interneta savienojuma.</string>
     <string name="delete_all">Dzēst visu</string>
     <string name="appearance">Izskats</string>
-    <string name="themes">Tēmas</string>
+    <string name="themes">Izskats</string>
     <string name="delete_all_message">Neatgriezeniski dzēst visus notikumus.</string>
     <string name="remove_ad">Premium</string>
     <string name="help">Palīgs</string>
@@ -109,14 +109,14 @@
     <string name="show_windows">Rādīt logus</string>
     <string name="select_language">Izvēlēties valodu</string>
     <string name="switch_control">Slēdzis: Atzīmēt vai atvērt</string>
-    <string name="switch_control_desc">Izmantot slēdzi lai pārslēgtos starp atzīmēšanu un atvēršanu</string>
+    <string name="switch_control_desc">Izmantot pogu, lai pārslēgtos starp atzīmēšanu un atvēršanu</string>
     <string name="app_description">Tev ir jāatzīmē visas mīnas laukumā bez nevienas mīnas detonēšanas.</string>
     <string name="app_name">Antimine</string>
     <string name="do_you_know_how_to_play">Vai tu zini kā spēlēt Minesweeper?</string>
     <string name="close">Aizvērt</string>
     <string name="open_tutorial">Atvērt pamācību</string>
     <string name="click_numbers">Atļaut pieskaršanos skaitļiem</string>
-    <string name="tap_to_customize">Pieskaries lai pielāgotu</string>
+    <string name="tap_to_customize">Piesist, lai pielāgotu</string>
     <string name="toggle_button_top">Rādīt pārslēgšanas slēdzi augšējā izvēlnē</string>
     <string name="no_guess_fail_warning">Pašreizējais mīnu lauks nav no minēšanas brīvs!</string>
     <string name="fixed_size">Nemainīga lieluma</string>

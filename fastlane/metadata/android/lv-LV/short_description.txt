@@ -1,1 +1,1 @@
-Domāšanas spēle, kurā ir jāatrod visas apslēptās mīnas. 
+Atjautības spēle, kurā ir jāatrod visas apslēptās mīnas. 

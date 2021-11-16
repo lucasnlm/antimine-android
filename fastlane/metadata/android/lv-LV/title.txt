@@ -1,1 +1,1 @@
-Minesweeper - Antimine
+Mīnu meklētājs - Antimine

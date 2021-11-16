@@ -3,7 +3,7 @@
     <string name="tutorial">Johdanto</string>
     <string name="tutorial_basic">Pelin sääntö on yksinkertainen: ruudussa oleva numero kertoo sen vierellä olevien miinojen määrän, ja sinun täytyy merkitä kaikki miinat.</string>
     <string name="tutorial_text_1">Jos numero koskettaa samaa määrää ruutuja, ovat ne kaikki ruudut miinoja.</string>
-    <string name="tutorial_text_2">Ensimmäisen lippusi merkittyä tarkista numerot ja tutki seuraava ruutu.</string>
+    <string name="tutorial_text_2">Merkattuasi ensimmäisen lippusi, tarkista numerot ja tutki seuraava ruutu.</string>
     <string name="tutorial_text_3">Jos ruudulla on sama määrä lippuja, kaikki muut jäljellä olevat ruudut sen vierellä eivät ole miinoja (vihreä nuoli).</string>
     <string name="tutorial_text_4">Tarkista numerot ja avaa neliöitä.</string>
     <string name="games">Pelit</string>
@@ -118,8 +118,8 @@
     <string name="click_numbers">Salli numeroiden napauttaminen</string>
     <string name="tap_to_customize">Paina mukauttaaksesi</string>
     <string name="toggle_button_top">Näytä Vaihda-painike yläpalkissa</string>
-    <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
-    <string name="fixed_size">Fixed Size</string>
-    <string name="progressive">Progressive</string>
-    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="no_guess_fail_warning">Nykyinen miinakenttä ei välttämättä ole arvattamaton!</string>
+    <string name="fixed_size">Kiinteä koko</string>
+    <string name="progressive">Edistyvä</string>
+    <string name="highlight_unsolved_numbers">Korosta ratkaisemattomat numerot</string>
 </resources>
