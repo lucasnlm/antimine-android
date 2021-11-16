@@ -236,7 +236,6 @@ class MinefieldStage(
                                     }
                                 }.also {
                                     inputEvents.clear()
-                                    Gdx.graphics.requestRendering()
                                 }
                         }
                     } else {
@@ -245,10 +244,11 @@ class MinefieldStage(
                             .run(onSingleTap)
                             .also {
                                 inputEvents.clear()
-                                Gdx.graphics.requestRendering()
                             }
                     }
                 }
+
+                Gdx.graphics.requestRendering()
             } else if (touchDownEvents.isNotEmpty()) {
                 if (dt > actionSettings.longTapTimeout) {
                     touchDownEvents.map { it.id }
@@ -256,9 +256,10 @@ class MinefieldStage(
                         .run(onLongTouch)
                         .also {
                             inputEvents.clear()
-                            Gdx.graphics.requestRendering()
                         }
                 }
+
+                Gdx.graphics.requestRendering()
             }
         }
     }
