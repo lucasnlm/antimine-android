@@ -39,7 +39,6 @@
     <string name="rounded_square">圓角正方形</string>
     <string name="space_between_squares">正方形之間的空間</string>
     <string name="system">系統</string>
-    <string name="rating">回饋</string>
     <string name="sign_in_failed">無法登錄。請檢查您的網絡連接，然後重試。</string>
     <string name="you_won">你贏了！</string>
     <string name="victories">勝利</string>

@@ -39,7 +39,6 @@
     <string name="rounded_square">Yuvarlak kare</string>
     <string name="space_between_squares">Kareler Arası Boşluk</string>
     <string name="system">Sistem</string>
-    <string name="rating">Geri bildirim</string>
     <string name="sign_in_failed">Oturum açılamadı. Lütfen ağ bağlantınızı kontrol edip tekrar deneyin.</string>
     <string name="you_won">Kazandın!</string>
     <string name="victories">Zaferler</string>

@@ -39,7 +39,6 @@
     <string name="rounded_square">Avrundad kvadrat</string>
     <string name="space_between_squares">Mellanrum mellan rutor</string>
     <string name="system">System</string>
-    <string name="rating">Feedback</string>
     <string name="sign_in_failed">Det gick inte att logga in. Kontrollera nätverksanslutningen och försök igen.</string>
     <string name="you_won">Du vann!</string>
     <string name="victories">Vinster</string>

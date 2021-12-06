@@ -39,7 +39,6 @@
     <string name="rounded_square">方块圆角</string>
     <string name="space_between_squares">方块之间的空隙</string>
     <string name="system">系统</string>
-    <string name="rating">反馈</string>
     <string name="sign_in_failed">登录失败。请检查你的网络连接，然后重试。</string>
     <string name="you_won">你获胜了！</string>
     <string name="victories">胜利</string>

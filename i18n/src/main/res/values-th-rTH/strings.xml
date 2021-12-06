@@ -39,7 +39,6 @@
     <string name="rounded_square">สี่เหลี่ยมจัตุรัสขอบมน</string>
     <string name="space_between_squares">ช่องว่างระหว่างกำลังสอง</string>
     <string name="system">ระบบ</string>
-    <string name="rating">ผลตอบรับ</string>
     <string name="sign_in_failed">ไม่สามารถเชื่อมต่อได้ กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณและลองอีกครั้ง</string>
     <string name="you_won">คุณชนะแล้ว!</string>
     <string name="victories">ชัยชนะ</string>

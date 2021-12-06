@@ -39,7 +39,6 @@
     <string name="rounded_square">Lekerekített négyzet</string>
     <string name="space_between_squares">Tér a négyzetek között</string>
     <string name="system">Rendszer</string>
-    <string name="rating">Visszajelzés</string>
     <string name="sign_in_failed">Sikertelen bejelentkezés. Kérlek ellenőrizd a hálózati csatlakozást és próbáld újra.</string>
     <string name="you_won">Győztél!</string>
     <string name="victories">Győzelmek</string>
