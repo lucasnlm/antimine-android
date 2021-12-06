@@ -15,8 +15,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1501011
-        versionName '15.1.1'
+        versionCode 1501021
+        versionName '15.1.2'
         minSdkVersion 21
         targetSdkVersion 31
         multiDexEnabled true
@@ -126,13 +126,13 @@ dependencies {
     fossImplementation project(':foss')
 
     // AndroidX
-    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.activity:activity-ktx:1.3.1'
-    implementation 'androidx.fragment:fragment-ktx:1.3.6'
-    implementation 'androidx.work:work-runtime-ktx:2.7.0'
+    implementation 'androidx.activity:activity-ktx:1.4.0'
+    implementation 'androidx.fragment:fragment-ktx:1.4.0'
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
 
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
@@ -144,7 +144,7 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.3.0'
 
     // Constraint
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
 
     // Google
     implementation 'com.google.android.material:material:1.4.0'
@@ -161,13 +161,13 @@ dependencies {
     // Tests
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'android.arch.core:core-testing:1.1.1'
-    testImplementation 'androidx.core:core-ktx:1.6.0'
+    testImplementation 'androidx.core:core-ktx:1.7.0'
     testImplementation 'androidx.test:core-ktx:1.4.0'
     testImplementation 'androidx.test:rules:1.4.0'
     testImplementation 'androidx.test:runner:1.4.0'
     testImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     testImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
-    testImplementation 'androidx.fragment:fragment-testing:1.3.6'
+    testImplementation 'androidx.fragment:fragment-testing:1.4.0'
     testImplementation 'org.robolectric:robolectric:4.5.1'
     testImplementation 'androidx.test.ext:junit:1.1.3'
     testImplementation 'io.mockk:mockk:1.11.0'
