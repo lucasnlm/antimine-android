@@ -39,7 +39,6 @@
     <string name="rounded_square">둥근 사각형</string>
     <string name="space_between_squares">사각형 사이의 공간</string>
     <string name="system">시스템</string>
-    <string name="rating">피드백</string>
     <string name="sign_in_failed">게임에 접속할 수 없습니다. 네트워크 환경을 확인해고 다시 접속해주세요.</string>
     <string name="you_won">성공!</string>
     <string name="victories">성공 횟수</string>

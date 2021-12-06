@@ -39,7 +39,6 @@
     <string name="rounded_square">Carré arrondi</string>
     <string name="space_between_squares">Espace entre les cases</string>
     <string name="system">Système</string>
-    <string name="rating">Retour d\'expérience</string>
     <string name="sign_in_failed">Erreur lors de la connexion. Vérifiez l\'état de votre connexion Internet et réessayez.</string>
     <string name="you_won">Victoire !</string>
     <string name="victories">Victoires</string>
@@ -121,5 +120,5 @@
     <string name="no_guess_fail_warning">Le champ de mines actuel ne peut pas être résolu sans deviner !</string>
     <string name="fixed_size">Taille fixe</string>
     <string name="progressive">Progressif</string>
-    <string name="highlight_unsolved_numbers">Surligner les nombres non résolus</string>
+    <string name="highlight_unsolved_numbers">Mettre en évidence les nombres non résolus</string>
 </resources>

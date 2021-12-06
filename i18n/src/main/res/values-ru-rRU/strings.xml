@@ -39,7 +39,6 @@
     <string name="rounded_square">Скругленный квадрат</string>
     <string name="space_between_squares">Расстояние между квадратами</string>
     <string name="system">Система</string>
-    <string name="rating">Обратная связь</string>
     <string name="sign_in_failed">Подключение невозможно. Проверьте интернет-подключение и повторите попытку.</string>
     <string name="you_won">Вы выиграли!</string>
     <string name="victories">Победы</string>
