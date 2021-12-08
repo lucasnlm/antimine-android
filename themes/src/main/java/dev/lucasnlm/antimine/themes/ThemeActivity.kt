@@ -127,9 +127,9 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
                         cloudSaveManager.uploadSave()
                     }
 
-                    squareSize.value = it.squareSize.toFloat()
-                    squareDivider.value = it.squareDivider.toFloat()
-                    squareRadius.value = it.squareRadius.toFloat()
+                    squareSize.value = (it.squareSize / squareSize.stepSize).toInt() * squareSize.stepSize
+                    squareDivider.value = (it.squareDivider / squareSize.stepSize).toInt() * squareSize.stepSize
+                    squareRadius.value = (it.squareRadius / squareSize.stepSize).toInt() * squareSize.stepSize
                 }
             }
         }
