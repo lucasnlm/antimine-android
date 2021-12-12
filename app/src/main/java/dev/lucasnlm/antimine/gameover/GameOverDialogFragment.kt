@@ -41,6 +41,7 @@ import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -104,6 +105,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                         endGameViewModel.observeState().collect { state ->
                             val newGameButton: AppCompatButton = findViewById(R.id.new_game)
                             val continueButton: AppCompatButton = findViewById(R.id.continue_game)
+                            val countdown: TextView = findViewById(R.id.countdown)
                             val removeAdsButton: AppCompatButton = findViewById(R.id.remove_ads)
                             val tutorialButton: AppCompatButton = findViewById(R.id.tutorial)
                             val settingsButton: View = findViewById(R.id.settings)
@@ -189,6 +191,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 state.showContinueButton &&
                                 featureFlagManager.isContinueGameEnabled
                             ) {
+                                countdown.visibility = View.VISIBLE
                                 continueButton.visibility = View.VISIBLE
                                 if (!preferencesRepository.isPremiumEnabled() &&
                                     featureFlagManager.isAdsOnContinueEnabled
@@ -198,8 +201,20 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                         R.drawable.watch_ads_icon, 0, 0, 0
                                     )
                                 }
+
+                                lifecycleScope.launchWhenCreated {
+                                    var countdownTime = 10
+                                    while (countdownTime > 0) {
+                                        countdown.text = countdownTime.toString()
+                                        delay(1000L)
+                                        countdownTime -= 1
+                                    }
+                                    countdown.visibility = View.GONE
+                                    continueButton.visibility = View.GONE
+                                }
                             } else {
                                 continueButton.visibility = View.GONE
+                                countdown.visibility = View.GONE
                             }
 
                             if (state.showTutorial) {
