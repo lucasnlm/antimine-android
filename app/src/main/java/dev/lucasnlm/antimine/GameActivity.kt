@@ -456,11 +456,7 @@ class GameActivity :
         tipsCounter.apply {
             visibility = if (canUseHelpNow) View.VISIBLE else View.GONE
             text = if (canRequestHelpWithAds) {
-                if (instantAppManager.isEnabled(applicationContext)) {
-                    "+" + 10.toL10nString()
-                } else {
-                    "+" + 25.toL10nString()
-                }
+                "+5"
             } else {
                 gameViewModel.getTips().toL10nString()
             }
@@ -489,12 +485,7 @@ class GameActivity :
                                 activity = this@GameActivity,
                                 skipIfFrequent = false,
                                 onRewarded = {
-                                    val value = if (instantAppManager.isEnabled(applicationContext)) {
-                                        10
-                                    } else {
-                                        25
-                                    }
-
+                                    val value = 5
                                     gameViewModel.revealRandomMine(false)
                                     gameViewModel.sendEvent(GameEvent.GiveMoreTip(value))
                                 },
