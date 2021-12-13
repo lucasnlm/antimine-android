@@ -191,7 +191,6 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 state.showContinueButton &&
                                 featureFlagManager.isContinueGameEnabled
                             ) {
-                                countdown.visibility = View.VISIBLE
                                 continueButton.visibility = View.VISIBLE
                                 if (!preferencesRepository.isPremiumEnabled() &&
                                     featureFlagManager.isAdsOnContinueEnabled
@@ -202,15 +201,19 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                     )
                                 }
 
-                                lifecycleScope.launchWhenCreated {
-                                    var countdownTime = 10
-                                    while (countdownTime > 0) {
-                                        countdown.text = countdownTime.toString()
-                                        delay(1000L)
-                                        countdownTime -= 1
+                                if (!preferencesRepository.isPremiumEnabled() &&
+                                    featureFlagManager.showCountdownToContinue) {
+                                    countdown.visibility = View.VISIBLE
+                                    lifecycleScope.launchWhenCreated {
+                                        var countdownTime = 10
+                                        while (countdownTime > 0) {
+                                            countdown.text = countdownTime.toString()
+                                            delay(1000L)
+                                            countdownTime -= 1
+                                        }
+                                        countdown.visibility = View.GONE
+                                        continueButton.visibility = View.GONE
                                     }
-                                    countdown.visibility = View.GONE
-                                    continueButton.visibility = View.GONE
                                 }
                             } else {
                                 continueButton.visibility = View.GONE
