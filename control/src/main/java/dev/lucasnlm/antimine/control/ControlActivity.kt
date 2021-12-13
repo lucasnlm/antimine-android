@@ -59,7 +59,8 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
             viewModel.observeState().collect {
                 controlAdapter.bindControlStyleList(it.selected, it.controls)
                 longPress.value = (it.longPress.toFloat() / longPress.stepSize).toInt() * longPress.stepSize
-                touchSensibility.value = (it.touchSensibility.toFloat() / touchSensibility.stepSize).toInt() * touchSensibility.stepSize
+                touchSensibility.value =
+                    (it.touchSensibility.toFloat() / touchSensibility.stepSize).toInt() * touchSensibility.stepSize
 
                 val toggleVisible = if (it.showToggleButtonSettings) View.VISIBLE else View.GONE
                 toggleButtonTopBar.visibility = toggleVisible
@@ -79,7 +80,8 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
                 doubleClick.visibility = doubleClickVisible
                 doubleClickLabel.visibility = doubleClickVisible
 
-                hapticLevel.value = (it.hapticFeedbackLevel.toFloat() / hapticLevel.stepSize).toInt() * hapticLevel.stepSize
+                hapticLevel.value =
+                    (it.hapticFeedbackLevel.toFloat() / hapticLevel.stepSize).toInt() * hapticLevel.stepSize
             }
         }
     }

@@ -202,7 +202,8 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 }
 
                                 if (!preferencesRepository.isPremiumEnabled() &&
-                                    featureFlagManager.showCountdownToContinue) {
+                                    featureFlagManager.showCountdownToContinue
+                                ) {
                                     countdown.visibility = View.VISIBLE
                                     lifecycleScope.launchWhenCreated {
                                         var countdownTime = 10
