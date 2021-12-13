@@ -18,9 +18,9 @@ class AreaConverterTest {
               "mistake":false,
               "isCovered":true,
               "mark":"None",
-              "highlighted":true,
               "revealed":false,
-              "neighborsIds":[]
+              "neighborsIds":[],
+              "dimNumber":false
            },
            {
               "id":2,
@@ -31,9 +31,9 @@ class AreaConverterTest {
               "mistake":true,
               "isCovered":false,
               "mark":"PurposefulNone",
-              "highlighted":false,
               "revealed":false,
-              "neighborsIds":[]
+              "neighborsIds":[],
+              "dimNumber":false
            },
            {
               "id":3,
@@ -44,9 +44,9 @@ class AreaConverterTest {
               "mistake":false,
               "isCovered":true,
               "mark":"Flag",
-              "highlighted":true,
               "revealed":false,
-              "neighborsIds":[]
+              "neighborsIds":[],
+              "dimNumber":false
            },
            {
               "id":4,
@@ -57,9 +57,9 @@ class AreaConverterTest {
               "mistake":false,
               "isCovered":true,
               "mark":"Question",
-              "highlighted":true,
               "revealed":true,
-              "neighborsIds":[]
+              "neighborsIds":[],
+              "dimNumber":true
            }
         ]
         """.trimIndent().replace(
@@ -104,6 +104,7 @@ class AreaConverterTest {
                 mark = Mark.Question,
                 revealed = true,
                 neighborsIds = listOf(),
+                dimNumber = true,
             )
         )
 

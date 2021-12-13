@@ -18,6 +18,7 @@ abstract class IFeatureFlagManager {
     abstract val isWeekDaySalesEnabled: Boolean
     abstract val isHexBannerEnabled: Boolean
     abstract val showAdWhenUsingTip: Boolean
+    abstract val showCountdownToContinue: Boolean
 
     abstract suspend fun refresh()
 }

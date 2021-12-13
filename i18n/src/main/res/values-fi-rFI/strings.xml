@@ -39,7 +39,6 @@
     <string name="rounded_square">Pyöristetty neliö</string>
     <string name="space_between_squares">Tila Neliöiden Välillä</string>
     <string name="system">Järjestelmä</string>
-    <string name="rating">Lähetä palautetta</string>
     <string name="sign_in_failed">Virhe kirjautuessa sisään. Tarkista verkkoyhteytesi ja yritä uudelleen.</string>
     <string name="you_won">Sinä voitit!</string>
     <string name="victories">Voittoja</string>

@@ -245,7 +245,7 @@ class GameActivity :
 
                 tipsCounter.text = it.tips.toL10nString()
 
-                if (!it.isGameCompleted && it.useHelp) {
+                if (!it.isGameCompleted && it.isActive && it.useHelp) {
                     refreshTipShortcutIcon()
                 } else {
                     refreshRetryShortcut(it.hasMines)

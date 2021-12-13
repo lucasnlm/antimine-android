@@ -39,7 +39,6 @@
     <string name="rounded_square">Caselle Arrotondate</string>
     <string name="space_between_squares">Spazio Tra Caselle</string>
     <string name="system">Sistema</string>
-    <string name="rating">Suggerimenti</string>
     <string name="sign_in_failed">Impossibile accedere. Controllare la connessione di rete e riprovare.</string>
     <string name="you_won">Hai vinto!</string>
     <string name="victories">Vittorie</string>
@@ -118,7 +117,7 @@
     <string name="click_numbers">Consenti tocco sui numeri</string>
     <string name="tap_to_customize">Tocca per modificare</string>
     <string name="toggle_button_top">Mostra \"Attiva Tasto\" nella barra in alto</string>
-    <string name="no_guess_fail_warning">L\'attuale campo minato potrebbe non essere indovinabile!</string>
+    <string name="no_guess_fail_warning">L\'attuale campo minato potrebbe non essere risolvibile senza indovinare!</string>
     <string name="fixed_size">Dimensione Fissa</string>
     <string name="progressive">Progressivo</string>
     <string name="highlight_unsolved_numbers">Evidenzia numeri non risolti</string>

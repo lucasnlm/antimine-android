@@ -24,6 +24,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         ENABLE_WEEK_DAY_SALES to true,
         HEX_BANNER to false,
         SHOW_ADS_WHEN_USE_TIP to true,
+        SHOW_COUNTDOWN_TO_CONTINUE to true,
     )
 
     private var remoteConfig: FirebaseRemoteConfig? = null
@@ -128,6 +129,10 @@ class FeatureFlagManager : IFeatureFlagManager() {
         getBoolean(SHOW_ADS_WHEN_USE_TIP)
     }
 
+    override val showCountdownToContinue: Boolean by lazy {
+        getBoolean(SHOW_COUNTDOWN_TO_CONTINUE)
+    }
+
     override suspend fun refresh() {
         val remoteConfig = getRemoteConfig()
         if (!BuildConfig.DEBUG && remoteConfig != null) {
@@ -160,5 +165,6 @@ class FeatureFlagManager : IFeatureFlagManager() {
         private const val ENABLE_WEEK_DAY_SALES = "enable_sales"
         private const val HEX_BANNER = "hex_banner_enabled"
         private const val SHOW_ADS_WHEN_USE_TIP = "show_ads_when_use_tip"
+        private const val SHOW_COUNTDOWN_TO_CONTINUE = "show_countdown_to_continue"
     }
 }

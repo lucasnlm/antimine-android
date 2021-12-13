@@ -39,7 +39,6 @@
     <string name="rounded_square">गोल स्क्वेयर</string>
     <string name="space_between_squares">स्क्वेयर के बीच की जगह</string>
     <string name="system">सिस्ट</string>
-    <string name="rating">फ़ीडबैक</string>
     <string name="sign_in_failed">साइन इन करने में विफल. कृपया अपने नेटवर्क कनेक्शन की जांच करें और फिर कोशिश करें.</string>
     <string name="you_won">आप जीत गए!</string>
     <string name="victories">जीत</string>

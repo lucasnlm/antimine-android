@@ -1,1 +1,1 @@
-Un joc de puzzle în care trebuie să cauți toate minele ascunse. 
+Un joc-enigmă în care cauți minele ascunse. 

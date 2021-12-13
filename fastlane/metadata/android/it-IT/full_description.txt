@@ -6,13 +6,13 @@ Riuscirai a sgombrare il campo minato? Iniziamo!
 OBIETTIVO
 È come Campo Minato. Vinci la partita quando hai contrassegnato ogni mina nel campo minato. Attenzione a non farle esplodere!
 
-NON DEVI INDOVINARE
+NON SERVE INDOVINARE
 Il gioco ha un algoritmo che crea sempre campi minati risolvibili. Non sarà necessario indovinare dov'è l'ultima mina!
 
-LIVELLI DI GIOCO
+LIVELLI DI DIFFICOLTÀ
 Proprio come Campo Minato, questo gioco ha diversi livelli: Principiante, Intermedio e Esperto. Ha anche una modalità progressiva che diventa più difficile dopo ogni vittoria.
 
-LIVELLO CUSTOM
+DIFFICOLTÀ PERSONALIZZATA
 Se le modalità standard non ti soddisfano, puoi creare il tuo livello di difficoltà!
 
 TEMI
@@ -25,9 +25,9 @@ TUTORIAL
 Non sai come si gioca a Campo Minato? Nessun problema, puoi giocare il tutorial e attivare i suggerimenti nelle impostazioni.
 
 STATISTICHE
-Controlla i tuoi risultati e lo sviluppo.
+Controlla i tuoi risultati e la tua crescita.
 
-ASSISTENZA DEL GIOCO
+ASSISTENTE DI GIOCO
 Il gioco contrassegna automaticamente le caselle che hai isolato. 
 
 PERSONALIZZAZIONE

@@ -52,7 +52,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     // Constraint
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
 
     // Lifecycle
     api 'android.arch.lifecycle:extensions:1.1.1'
@@ -72,7 +72,7 @@ dependencies {
 
     // Unit Tests
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.mockito:mockito-core:2.24.0'
+    testImplementation 'org.mockito:mockito-core:3.9.0'
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
     testImplementation 'io.mockk:mockk:1.11.0'
 }

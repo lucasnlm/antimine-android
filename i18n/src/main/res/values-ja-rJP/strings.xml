@@ -39,7 +39,6 @@
     <string name="rounded_square">丸い長方形</string>
     <string name="space_between_squares">正方形間のスペース</string>
     <string name="system">システム</string>
-    <string name="rating">フィードバック</string>
     <string name="sign_in_failed">サインインに失敗しました。インターネット接続を確認してからもう一度お試しください。</string>
     <string name="you_won">あなたの勝ちです！</string>
     <string name="victories">勝利回数</string>
