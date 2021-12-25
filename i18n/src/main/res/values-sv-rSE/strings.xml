@@ -120,5 +120,6 @@
     <string name="no_guess_fail_warning">Den nuvarande minfälten kanske inte är gissfri!</string>
     <string name="fixed_size">Fast storlek</string>
     <string name="progressive">Progressiv</string>
-    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="highlight_unsolved_numbers">Markera olösta tal</string>
+    <string name="more_games">Fler spel</string>
 </resources>

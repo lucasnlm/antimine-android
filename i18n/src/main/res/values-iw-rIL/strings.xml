@@ -14,8 +14,8 @@
     <string name="beginner">רמת התחלה</string>
     <string name="intermediate">רמה בינונית</string>
     <string name="expert">רמה גבוהה</string>
-    <string name="master">Master</string>
-    <string name="legend">Legend</string>
+    <string name="master">רב-אמן</string>
+    <string name="legend">אגדה</string>
     <string name="open">פתיחה</string>
     <string name="settings">הגדרות</string>
     <string name="animations">אנימציות</string>
@@ -118,7 +118,8 @@
     <string name="tap_to_customize">Tap to customize</string>
     <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
-    <string name="fixed_size">Fixed Size</string>
-    <string name="progressive">Progressive</string>
+    <string name="fixed_size">גודל קבוע</string>
+    <string name="progressive">התקדמות</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="more_games">משחקים נוספים</string>
 </resources>

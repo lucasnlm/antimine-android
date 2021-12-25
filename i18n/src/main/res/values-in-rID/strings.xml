@@ -120,5 +120,6 @@
     <string name="no_guess_fail_warning">Ladang Ranjau saat ini kemungkinan tidak dapat diselesaikan tanpa menebak!</string>
     <string name="fixed_size">Ukuran tetap</string>
     <string name="progressive">Progresif</string>
-    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="highlight_unsolved_numbers">Soroti nomor yang belum diselesaikan</string>
+    <string name="more_games">Game Lain</string>
 </resources>

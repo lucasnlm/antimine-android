@@ -121,4 +121,5 @@
     <string name="fixed_size">Sabit Boyut</string>
     <string name="progressive">İlerleme</string>
     <string name="highlight_unsolved_numbers">Çözülmemiş sayıları vurgula</string>
+    <string name="more_games">Daha Fazla Oyun</string>
 </resources>

@@ -115,10 +115,11 @@
     <string name="close">Luk</string>
     <string name="open_tutorial">Åben vejledning</string>
     <string name="click_numbers">Tillad tryk på numre</string>
-    <string name="tap_to_customize">Tap to customize</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
+    <string name="tap_to_customize">Tryk for at tilpasse</string>
+    <string name="toggle_button_top">Vis \"Skift knap\" på øverste bjælke</string>
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
-    <string name="fixed_size">Fixed Size</string>
-    <string name="progressive">Progressive</string>
-    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="fixed_size">Fast Størrelse</string>
+    <string name="progressive">Fremskridt</string>
+    <string name="highlight_unsolved_numbers">Fremhæv uløste tal</string>
+    <string name="more_games">Flere spil</string>
 </resources>

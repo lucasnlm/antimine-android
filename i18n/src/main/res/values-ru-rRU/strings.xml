@@ -121,4 +121,5 @@
     <string name="fixed_size">Фиксированный размер</string>
     <string name="progressive">Прогрессивный</string>
     <string name="highlight_unsolved_numbers">Подсвечивать неразгаданные числа</string>
+    <string name="more_games">Больше игр</string>
 </resources>
