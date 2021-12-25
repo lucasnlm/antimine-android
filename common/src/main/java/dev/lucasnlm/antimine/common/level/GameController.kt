@@ -33,6 +33,9 @@ class GameController {
     private var errorTolerance = 0
     private var useSimonTatham = true
 
+    private var lastIdInteractionX: Int? = null
+    private var lastIdInteractionY: Int? = null
+
     val seed: Long
 
     private val minefieldCreator: MinefieldCreator
@@ -167,6 +170,9 @@ class GameController {
             }
         }
 
+        lastIdInteractionX = target.posX
+        lastIdInteractionY = target.posY
+
         field = minefieldHandler.result()
     }
 
@@ -280,7 +286,7 @@ class GameController {
     fun revealRandomMine(): Boolean {
         val result: Boolean
         field = MinefieldHandler(field.toMutableList(), false).run {
-            result = revealRandomMineNearUncoveredArea()
+            result = revealRandomMineNearUncoveredArea(lastIdInteractionX, lastIdInteractionY)
             result()
         }
         return result
