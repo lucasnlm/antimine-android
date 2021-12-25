@@ -42,4 +42,5 @@ interface IPlayGamesManager {
     fun keepRequestingLogin(status: Boolean)
     fun shouldRequestLogin(): Boolean
     fun signInToFirebase(activity: Activity)
+    fun moreGameDeeplink(): String
 }
