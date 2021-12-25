@@ -33,7 +33,7 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
     private fun getSelectedMinefield(): Minefield {
         val width = filterInput(mapWidth.text.toString(), MIN_WIDTH).coerceAtMost(MAX_WIDTH)
         val height = filterInput(mapHeight.text.toString(), MIN_HEIGHT).coerceAtMost(MAX_HEIGHT)
-        val mines = filterInput(mapMines.text.toString(), MIN_MINES).coerceAtMost(width * height - 1)
+        val mines = filterInput(mapMines.text.toString(), MIN_MINES).coerceAtMost(width * height - 9)
 
         return Minefield(width, height, mines)
     }
