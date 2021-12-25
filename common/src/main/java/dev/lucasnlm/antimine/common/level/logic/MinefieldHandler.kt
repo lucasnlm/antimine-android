@@ -32,7 +32,7 @@ class MinefieldHandler(
         val unrevealedMines = field.filter { it.hasMine && it.mark.isNone() && !it.revealed }
         val nearestTarget = if (lastX != null && lastY != null) {
             unrevealedMines.filter {
-                (lastX - it.posX).absoluteValue < 2 && (lastY - it.posY).absoluteValue < 2
+                (lastX - it.posX).absoluteValue < 3 && (lastY - it.posY).absoluteValue < 3
             }.shuffled().firstOrNull()
         } else null
 
