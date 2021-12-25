@@ -121,4 +121,5 @@
     <string name="fixed_size">Kích thước cố định</string>
     <string name="progressive">Tiến trình</string>
     <string name="highlight_unsolved_numbers">Đánh dấu các số chưa giải</string>
+    <string name="more_games">Trò chơi khác</string>
 </resources>

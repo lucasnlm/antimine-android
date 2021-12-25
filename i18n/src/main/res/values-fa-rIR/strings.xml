@@ -6,7 +6,7 @@
     <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
     <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
     <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
-    <string name="games">Games</string>
+    <string name="games">بازی‌ها</string>
     <string name="tap_to_begin">Tap to Begin</string>
     <string name="previous_games">Previous Games</string>
     <string name="minefield">Difficulty</string>
@@ -121,4 +121,5 @@
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="more_games">More games</string>
 </resources>

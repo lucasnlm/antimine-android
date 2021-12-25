@@ -121,4 +121,5 @@
     <string name="fixed_size">Feste Größe</string>
     <string name="progressive">Fortschrittlich</string>
     <string name="highlight_unsolved_numbers">Ungelöste Zahlen hervorheben</string>
+    <string name="more_games">Mehr Spiele</string>
 </resources>

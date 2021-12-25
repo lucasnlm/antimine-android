@@ -111,14 +111,15 @@
     <string name="switch_control_desc">旗と開くを切り替えるにはボタンを使用します</string>
     <string name="app_description">地雷が隠された長方形から1つも爆発させることなくクリアしましょう。</string>
     <string name="app_name">Antimine</string>
-    <string name="do_you_know_how_to_play">Do you know how to play minesweeper?</string>
+    <string name="do_you_know_how_to_play">「マインスイーパー」の遊び方がわかりませんか？</string>
     <string name="close">閉じる</string>
     <string name="open_tutorial">チュートリアルを開く</string>
-    <string name="click_numbers">Allow tap on numbers</string>
+    <string name="click_numbers">番号のタップを許可する</string>
     <string name="tap_to_customize">タップしてカスタマイズ</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
+    <string name="toggle_button_top">上部バーに「トグルボタン」を表示する</string>
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
-    <string name="fixed_size">Fixed Size</string>
-    <string name="progressive">Progressive</string>
-    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="fixed_size">固定サイズ</string>
+    <string name="progressive">プログレッシブ</string>
+    <string name="highlight_unsolved_numbers">未解決の数字をハイライト表示</string>
+    <string name="more_games">その他のゲーム</string>
 </resources>

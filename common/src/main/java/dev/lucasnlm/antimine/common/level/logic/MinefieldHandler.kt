@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Mark
+import kotlin.math.absoluteValue
 
 class MinefieldHandler(
     private val field: MutableList<Area>,
@@ -27,23 +28,24 @@ class MinefieldHandler(
             .forEach { field[it.id] = it.copy(isCovered = false) }
     }
 
-    fun revealRandomMineNearUncoveredArea(): Boolean {
+    fun revealRandomMineNearUncoveredArea(lastX: Int? = null, lastY: Int? = null): Boolean {
         val unrevealedMines = field.filter { it.hasMine && it.mark.isNone() && !it.revealed }
-        val unrevealedMinesWithUncovered = unrevealedMines.filter {
-            it.neighborsIds
-                .map { areaId -> field[areaId] }
-                .firstOrNull { area -> !area.isCovered && !area.hasMine } != null
-        }
+        val nearestTarget = if (lastX != null && lastY != null) {
+            unrevealedMines.filter {
+                (lastX - it.posX).absoluteValue < 3 && (lastY - it.posY).absoluteValue < 3
+            }.shuffled().firstOrNull()
+        } else null
 
-        val result = if (unrevealedMinesWithUncovered.isNotEmpty()) {
-            unrevealedMinesWithUncovered.shuffled().firstOrNull()?.run {
-                field[this.id] = this.copy(revealed = true)
+        val result = when {
+            nearestTarget != null -> {
+                field[nearestTarget.id] = nearestTarget.copy(revealed = true)
                 true
             }
-        } else {
-            unrevealedMines.shuffled().firstOrNull()?.run {
-                field[this.id] = this.copy(revealed = true)
-                true
+            else -> {
+                unrevealedMines.shuffled().firstOrNull()?.run {
+                    field[this.id] = this.copy(revealed = true)
+                    true
+                }
             }
         }
 

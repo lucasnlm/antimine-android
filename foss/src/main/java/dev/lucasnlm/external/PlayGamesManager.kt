@@ -59,4 +59,6 @@ class PlayGamesManager(
     override fun signInToFirebase(activity: Activity) {
         // F-droid build doesn't have Google Play Games
     }
+
+    override fun moreGameDeeplink(): String = ""
 }

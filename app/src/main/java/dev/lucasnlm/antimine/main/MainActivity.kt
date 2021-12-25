@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.main
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -311,6 +312,22 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                 startActivity(intent)
             }
         )
+
+        val moreGamesDeeplink = playGamesManager.moreGameDeeplink()
+        if (moreGamesDeeplink.isNotBlank()) {
+            moreGames.bind(
+                theme = usingTheme,
+                text = R.string.more_games,
+                startIcon = R.drawable.more_games,
+                onAction = {
+                    analyticsManager.sentEvent(Analytics.MoreGames)
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(moreGamesDeeplink))
+                    startActivity(browserIntent)
+                }
+            )
+        } else {
+            moreGames.visibility = View.GONE
+        }
 
         translation.bind(
             theme = usingTheme,

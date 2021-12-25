@@ -131,12 +131,16 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
             <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/tutorial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="8dp"/>
 
             <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/themes"
@@ -161,11 +165,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"/>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
             <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/stats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="8dp"/>
 
             <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/previousGames"
@@ -173,11 +181,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"/>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <dev.lucasnlm.antimine.ui.view.CardButtonView
+                android:id="@+id/moreGames"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/>
+
             <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/translation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="8dp"/>
 
             <dev.lucasnlm.antimine.ui.view.CardButtonView
                 android:id="@+id/play_games"

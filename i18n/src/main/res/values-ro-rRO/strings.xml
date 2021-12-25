@@ -46,7 +46,7 @@
     <string name="you_finished">Ai terminat!</string>
     <string name="defeats">Înfrângeri</string>
     <string name="generic_game_over">Mult noroc la următorul joc.</string>
-    <string name="generic_win">You found %1$d mines in %2$d seconds.</string>
+    <string name="generic_win">Ai găsit %1$d mine în %2$d secunde.</string>
     <string name="fail_to_share">Distribuire eșuată</string>
     <string name="version_s">Versiunea %1$s</string>
     <string name="sound_effects">Efecte sonore</string>
@@ -121,4 +121,5 @@
     <string name="fixed_size">Dimensiune fixă</string>
     <string name="progressive">Progresiv</string>
     <string name="highlight_unsolved_numbers">Evidențiază numerele nerezolvate</string>
+    <string name="more_games">Mai multe jocuri</string>
 </resources>

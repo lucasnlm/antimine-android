@@ -121,4 +121,5 @@
     <string name="fixed_size">고정 크기</string>
     <string name="progressive">프로그레시브</string>
     <string name="highlight_unsolved_numbers">미해결 숫자 강조</string>
+    <string name="more_games">다른 게임</string>
 </resources>

@@ -122,4 +122,6 @@
     <string name="no_guess_fail_warning">To pole może wymogać zgadywanio, cobyś skōńczōł!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
+    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="more_games">More games</string>
 </resources>
