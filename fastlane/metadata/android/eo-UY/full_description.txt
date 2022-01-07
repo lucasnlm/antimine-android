@@ -6,7 +6,7 @@ Provu vian pensopovon je defia puzloludo, kie vi devas solvi minejon sen eksplod
 CELO
 Same kiel en Minesweeper,  vi gajnos en la ludo kiam vi finos flagumi ĉiun minon en la minejo. Estu singarda ne ŝalti eĉ unu el ili!
 
-NO GUESSING
+NE DIVENU
 Ĉi tiu ludo havas algoritmon, kiu ĉiam montras solveblajn minejojn. Vi ne devos diveni, kie la lasta mino estas!
 
 LUDNIVELOJ
@@ -35,7 +35,7 @@ Vi rajtas ŝanĝi la ludon, por ke ĝi estu laŭ via ŝato.
 Ekzemple: Helpo, movbildoj, haptika retrokuplo, demandosigno.
 
 REGILOJ
-Ĝi subtenas kvar malsimilajn regilskemojn. Ekzemplo: flagi uzante frapeti aŭ tuŝadi.
+Ĝi subtenas kvar malsimilajn regilskemojn. Example: flag using tap or long press.
 
 AKIROJ KAJ ĈAMPIONEJOJ 
 Vi havas ok akiroj por malbloki kaj malsimilajn ĉampionejojn por disvastigi kun viaj amikoj.
@@ -46,4 +46,4 @@ Vi ne bezonas esti enreta por uzi la ludon!
 AŬTOKONSERVADO
 Vi povas komenci ludon kaj daurigi ĝin poste! Ĝi automate savos vian ludon.
 
-Ĝui.
+Ĝuu.

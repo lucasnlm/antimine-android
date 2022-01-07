@@ -96,7 +96,7 @@
     <string name="share">مشاركة</string>
     <string name="share_menu">مشاركة…</string>
     <string name="no_network">لا يوجد اتصال بالإنترنت.</string>
-    <string name="delete_all">حذف الكل</string>
+    <string name="delete_all">مسح الكل</string>
     <string name="appearance">المظهر</string>
     <string name="themes">المظهر</string>
     <string name="delete_all_message">احذف جميع الأحداث نهائيًا.</string>
@@ -120,6 +120,6 @@
     <string name="no_guess_fail_warning">قد لا يكون حقل الألغام الحالي خاليًا من التخمين!</string>
     <string name="fixed_size">الجم الثابت</string>
     <string name="progressive">التقدمي</string>
-    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="highlight_unsolved_numbers">تسليط الضوء على الأرقام غير المحلولة</string>
     <string name="more_games">المزيد من الألعاب</string>
 </resources>
