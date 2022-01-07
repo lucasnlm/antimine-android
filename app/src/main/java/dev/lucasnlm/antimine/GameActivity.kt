@@ -168,6 +168,7 @@ class GameActivity :
             observeState().collect {
                 if (it.turn == 0 && it.saveId == 0L || it.isLoadingMap) {
                     if (it.turn == 0) {
+                        setOpenControlSwitcherIcon()
                         warning?.dismiss()
                     }
 
@@ -735,6 +736,26 @@ class GameActivity :
         }
     }
 
+    private fun setOpenControlSwitcherIcon() {
+        topBarToggle.apply {
+            contentDescription = getString(R.string.open)
+            TooltipCompat.setTooltipText(this, getString(R.string.open))
+            setImageResource(R.drawable.touch)
+            preferencesRepository.setSwitchControl(true)
+            gameViewModel.refreshUseOpenOnSwitchControl(true)
+        }
+    }
+
+    private fun setFlagControlSwitcherIcon() {
+        topBarToggle.apply {
+            contentDescription = getString(R.string.flag_tile)
+            TooltipCompat.setTooltipText(this, getString(R.string.flag_tile))
+            setImageResource(R.drawable.flag)
+            preferencesRepository.setSwitchControl(false)
+            gameViewModel.refreshUseOpenOnSwitchControl(false)
+        }
+    }
+
     private fun bindToggleButton() {
         if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
             if (preferencesRepository.showToggleButtonOnTopBar()) {
@@ -747,17 +768,9 @@ class GameActivity :
 
                     setOnClickListener {
                         if (preferencesRepository.openUsingSwitchControl()) {
-                            contentDescription = getString(R.string.flag_tile)
-                            TooltipCompat.setTooltipText(this, getString(R.string.flag_tile))
-                            setImageResource(R.drawable.flag)
-                            preferencesRepository.setSwitchControl(false)
-                            gameViewModel.refreshUseOpenOnSwitchControl(false)
+                            setFlagControlSwitcherIcon()
                         } else {
-                            contentDescription = getString(R.string.open)
-                            TooltipCompat.setTooltipText(this, getString(R.string.open))
-                            setImageResource(R.drawable.touch)
-                            preferencesRepository.setSwitchControl(true)
-                            gameViewModel.refreshUseOpenOnSwitchControl(true)
+                            setOpenControlSwitcherIcon()
                         }
                     }
                 }

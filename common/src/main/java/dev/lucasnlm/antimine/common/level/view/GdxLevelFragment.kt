@@ -127,6 +127,10 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
             gameViewModel.observeState().collect {
                 levelApplicationListener.bindField(it.field)
 
+                if (it.turn == 0) {
+                    bindControlSwitcherIfNeeded(view, false)
+                }
+
                 if (it.isActive && !it.isGameCompleted) {
                     levelApplicationListener.setActionsEnabled(true)
                 } else {
@@ -141,6 +145,8 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 .map { it.seed }
                 .distinctUntilChanged()
                 .collect {
+                    setOpenControlSwitcherIcon()
+
                     levelApplicationListener.onChangeGame()
 
                     if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
@@ -172,6 +178,34 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
             else -> {
                 RenderQuality.High
             }
+        }
+    }
+
+    private fun setOpenControlSwitcherIcon() {
+        controlSwitcher?.apply {
+            contentDescription = getString(R.string.open)
+            TooltipCompat.setTooltipText(this, getString(R.string.open))
+            gameViewModel.refreshUseOpenOnSwitchControl(true)
+            preferencesRepository.setSwitchControl(true)
+            setImageResource(R.drawable.touch)
+        }
+    }
+
+    private fun setFlagControlSwitcherIcon() {
+        controlSwitcher?.apply {
+            contentDescription = getString(R.string.flag_tile)
+            TooltipCompat.setTooltipText(this, getString(R.string.flag_tile))
+            gameViewModel.refreshUseOpenOnSwitchControl(false)
+            preferencesRepository.setSwitchControl(false)
+            setImageResource(R.drawable.flag_black)
+        }
+    }
+
+    private fun toggleControlSwitcherIcon() {
+        if (preferencesRepository.openUsingSwitchControl()) {
+            setFlagControlSwitcherIcon()
+        } else {
+            setOpenControlSwitcherIcon()
         }
     }
 
@@ -207,19 +241,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                             }
 
                             setOnClickListener {
-                                if (preferencesRepository.openUsingSwitchControl()) {
-                                    contentDescription = getString(R.string.flag_tile)
-                                    TooltipCompat.setTooltipText(this, getString(R.string.flag_tile))
-                                    gameViewModel.refreshUseOpenOnSwitchControl(false)
-                                    preferencesRepository.setSwitchControl(false)
-                                    setImageResource(R.drawable.flag_black)
-                                } else {
-                                    contentDescription = getString(R.string.open)
-                                    TooltipCompat.setTooltipText(this, getString(R.string.open))
-                                    gameViewModel.refreshUseOpenOnSwitchControl(true)
-                                    preferencesRepository.setSwitchControl(true)
-                                    setImageResource(R.drawable.touch)
-                                }
+                                toggleControlSwitcherIcon()
                             }
                         }
 
@@ -233,7 +255,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                             setMargins(
                                 0,
                                 0,
-                                dimensionRepository.horizontalNavigationBarHeight(),
+                                padding + dimensionRepository.horizontalNavigationBarHeight(),
                                 padding + dimensionRepository.verticalNavigationBarHeight()
                             )
                         }
