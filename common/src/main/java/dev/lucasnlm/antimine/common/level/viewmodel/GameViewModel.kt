@@ -120,8 +120,15 @@ open class GameViewModel(
             }
             is GameEvent.EngineReady -> {
                 emit(state.copy(isLoadingMap = false))
+
+                if (!state.isGameCompleted && state.hasMines && !state.isLoadingMap) {
+                    runClock()
+                } else {
+                    stopClock()
+                }
             }
             is GameEvent.LoadingNewGame -> {
+                stopClock()
                 emit(state.copy(isLoadingMap = true, duration = 0L, isActive = false))
             }
             is GameEvent.UpdateTime -> {
@@ -286,7 +293,7 @@ open class GameViewModel(
 
         sendEvent(GameEvent.NewGame(newGameState))
 
-        if (newGameState.isActive && !newGameState.isGameCompleted) {
+        if (newGameState.isActive && !newGameState.isGameCompleted && !newGameState.isLoadingMap) {
             runClock()
         }
 
@@ -437,7 +444,6 @@ open class GameViewModel(
     fun resumeGame() {
         if (initialized && gameController.hasMines() && !gameController.isGameOver()) {
             sendEvent(GameEvent.SetGameActivation(true))
-            runClock()
         }
     }
 

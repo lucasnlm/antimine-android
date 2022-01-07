@@ -117,9 +117,9 @@
     <string name="click_numbers">Permet pressionar els números</string>
     <string name="tap_to_customize">Pressiona per a customitzar</string>
     <string name="toggle_button_top">Mostrar \"alternar botó\" en la barra superior</string>
-    <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
+    <string name="no_guess_fail_warning">Aquest camp de mines pot no ser deduïble: hareu d\'arriscar!</string>
     <string name="fixed_size">Mida Fixa</string>
     <string name="progressive">Progressiu</string>
-    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="highlight_unsolved_numbers">Remarcar els números no resolts</string>
     <string name="more_games">Més jocs</string>
 </resources>
