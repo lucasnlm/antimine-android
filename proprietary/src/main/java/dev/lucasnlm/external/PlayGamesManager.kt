@@ -163,10 +163,6 @@ class PlayGamesManager(
         }
     }
 
-    override fun moreGameDeeplink(): String {
-        return "https://play.google.com/store/apps/details?id=dev.lucasnlm.hexo"
-    }
-
     companion object {
         val TAG = PlayGamesManager::class.simpleName
     }
