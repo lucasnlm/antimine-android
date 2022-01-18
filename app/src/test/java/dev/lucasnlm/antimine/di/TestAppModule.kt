@@ -71,8 +71,6 @@ val AppModule = module {
             override fun shouldRequestLogin(): Boolean = false
 
             override fun signInToFirebase(activity: Activity) {}
-
-            override fun moreGameDeeplink(): String = ""
         }
     } bind IPlayGamesManager::class
 

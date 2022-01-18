@@ -121,5 +121,5 @@
     <string name="fixed_size">Kiinteä koko</string>
     <string name="progressive">Edistyvä</string>
     <string name="highlight_unsolved_numbers">Korosta ratkaisemattomat numerot</string>
-    <string name="more_games">Lisää pelejä</string>
+    <string name="left_handed">Vasenkätisyys</string>
 </resources>

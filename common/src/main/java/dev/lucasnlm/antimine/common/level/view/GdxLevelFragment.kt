@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.level.view
 
 import android.content.res.ColorStateList
-import android.content.res.Resources
+import android.content.res.Resources.getSystem
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ import androidx.core.view.postDelayed
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -45,7 +45,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     private val crashReporter: ICrashReporter by inject()
     private val appVersionManager: IAppVersionManager by inject()
 
-    private var controlSwitcher: FloatingActionButton? = null
+    private var controlSwitcher: ExtendedFloatingActionButton? = null
 
     private val levelApplicationListener by lazy {
         GameApplicationListener(
@@ -131,10 +131,11 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                     bindControlSwitcherIfNeeded(view, false)
                 }
 
+                bindControlSwitcherIfNeeded(view, false)
+
                 if (it.isActive && !it.isGameCompleted) {
                     levelApplicationListener.setActionsEnabled(true)
                 } else {
-                    bindControlSwitcherIfNeeded(view, false)
                     levelApplicationListener.setActionsEnabled(false)
                 }
             }
@@ -167,7 +168,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     }
 
     private fun getQuality(): RenderQuality {
-        val width = Resources.getSystem().displayMetrics.widthPixels
+        val width = getSystem().displayMetrics.widthPixels
         return when {
             width < 900 -> {
                 RenderQuality.Low
@@ -187,7 +188,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
             TooltipCompat.setTooltipText(this, getString(R.string.open))
             gameViewModel.refreshUseOpenOnSwitchControl(true)
             preferencesRepository.setSwitchControl(true)
-            setImageResource(R.drawable.touch)
+            setIconResource(R.drawable.touch)
         }
     }
 
@@ -197,7 +198,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
             TooltipCompat.setTooltipText(this, getString(R.string.flag_tile))
             gameViewModel.refreshUseOpenOnSwitchControl(false)
             preferencesRepository.setSwitchControl(false)
-            setImageResource(R.drawable.flag_black)
+            setIconResource(R.drawable.flag_black)
         }
     }
 
@@ -209,58 +210,87 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
         }
     }
 
+    private fun getSwitchControlLayoutParams(): FrameLayout.LayoutParams {
+        val context = requireContext()
+        return FrameLayout.LayoutParams(
+            context.dpToPx(54),
+            context.dpToPx(48),
+        ).apply {
+            val padding = context.dpToPx(24)
+            val leftHanded = preferencesRepository.leftHandedMode()
+
+            gravity = if (leftHanded) {
+                GravityCompat.START or Gravity.BOTTOM
+            } else {
+                GravityCompat.END or Gravity.BOTTOM
+            }
+
+            if (leftHanded) {
+                setMargins(
+                    padding + dimensionRepository.horizontalNavigationBarHeight(),
+                    0,
+                    0,
+                    padding + dimensionRepository.verticalNavigationBarHeight()
+                )
+            } else {
+                setMargins(
+                    0,
+                    0,
+                    padding + dimensionRepository.horizontalNavigationBarHeight(),
+                    padding + dimensionRepository.verticalNavigationBarHeight()
+                )
+            }
+        }
+    }
+
     private fun bindControlSwitcherIfNeeded(view: View, delayed: Boolean = true) {
+        val controlSwitcher = controlSwitcher
         if (controlSwitcher != null) {
             if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
                 if (preferencesRepository.showToggleButtonOnTopBar()) {
-                    controlSwitcher?.hide()
+                    controlSwitcher.visibility = View.GONE
                 } else {
-                    controlSwitcher?.show()
+                    controlSwitcher.visibility = View.VISIBLE
+                    controlSwitcher.layoutParams = getSwitchControlLayoutParams()
+                    controlSwitcher.shrink()
                 }
+            } else {
+                controlSwitcher.visibility = View.GONE
             }
         } else if (!preferencesRepository.showToggleButtonOnTopBar()) {
             view.postDelayed(if (delayed) 200L else 0L) {
-                val isParentFinishing = activity?.isFinishing ?: true
-                if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen && !isParentFinishing) {
-                    (view.parent as? FrameLayout)?.apply {
-                        controlSwitcher = FloatingActionButton(context).apply {
-                            val palette = themeRepository.getTheme().palette
-                            contentDescription = getString(R.string.open)
-                            TooltipCompat.setTooltipText(this, getString(R.string.open))
-                            gameViewModel.refreshUseOpenOnSwitchControl(true)
-                            preferencesRepository.setSwitchControl(true)
-                            backgroundTintList = ColorStateList.valueOf(palette.accent.toAndroidColor(255))
-                            setImageResource(R.drawable.touch)
+                if (this.controlSwitcher == null) {
+                    val isParentFinishing = activity?.isFinishing ?: true
+                    if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen && !isParentFinishing) {
+                        (view.parent as? FrameLayout)?.apply {
+                            this@GdxLevelFragment.controlSwitcher = ExtendedFloatingActionButton(context).apply {
+                                val palette = themeRepository.getTheme().palette
+                                contentDescription = getString(R.string.open)
+                                TooltipCompat.setTooltipText(this, getString(R.string.open))
+                                gameViewModel.refreshUseOpenOnSwitchControl(true)
+                                preferencesRepository.setSwitchControl(true)
+                                backgroundTintList = ColorStateList.valueOf(palette.accent.toAndroidColor(255))
+                                cornerRadius = view.context.dpToPx(10)
+                                if (palette.accent == palette.covered) {
+                                    strokeColor = ColorStateList.valueOf(palette.background.toAndroidColor(255))
+                                    strokeWidth = view.context.dpToPx(1)
+                                }
+                                setIconResource(R.drawable.touch)
+                                elevation = 2f
+                                alpha = 0f
+                                animate().apply {
+                                    alpha(1.0f)
+                                    duration = 300L
+                                    start()
+                                }
 
-                            compatElevation = 4f
-                            alpha = 0f
-                            animate().apply {
-                                alpha(1.0f)
-                                duration = 300L
-                                start()
+                                setOnClickListener {
+                                    toggleControlSwitcherIcon()
+                                }
                             }
 
-                            setOnClickListener {
-                                toggleControlSwitcherIcon()
-                            }
+                            addView(this@GdxLevelFragment.controlSwitcher, getSwitchControlLayoutParams())
                         }
-
-                        val layoutParams = FrameLayout.LayoutParams(
-                            FrameLayout.LayoutParams.WRAP_CONTENT,
-                            FrameLayout.LayoutParams.WRAP_CONTENT
-                        ).apply {
-                            val padding = context.dpToPx(16)
-                            gravity = GravityCompat.END or Gravity.BOTTOM
-
-                            setMargins(
-                                0,
-                                0,
-                                padding + dimensionRepository.horizontalNavigationBarHeight(),
-                                padding + dimensionRepository.verticalNavigationBarHeight()
-                            )
-                        }
-
-                        addView(controlSwitcher, layoutParams)
                     }
                 }
             }

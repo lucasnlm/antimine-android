@@ -16,10 +16,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-feature
-        android:name="android.software.leanback"
-        android:required="false" />
-
-    <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
 

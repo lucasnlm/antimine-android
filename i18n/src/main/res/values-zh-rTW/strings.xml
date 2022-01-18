@@ -120,6 +120,6 @@
     <string name="no_guess_fail_warning">目前的雷區可能不是無猜測的！</string>
     <string name="fixed_size">固定尺寸</string>
     <string name="progressive">進步</string>
-    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
-    <string name="more_games">更多遊戲</string>
+    <string name="highlight_unsolved_numbers">突出显示未解决的数字</string>
+    <string name="left_handed">左撇子</string>
 </resources>

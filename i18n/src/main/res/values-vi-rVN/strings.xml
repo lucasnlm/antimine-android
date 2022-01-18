@@ -3,7 +3,7 @@
     <string name="tutorial">Hướng dẫn</string>
     <string name="tutorial_basic">Quy tắc trò chơi rất đơn giản, con số trên một ô vuông cho thấy số mìn liền kề với nó và bạn phải gắn cờ tất cả mìn.</string>
     <string name="tutorial_text_1">Nếu một con số đang chạm số các ô vuông đó, thì tất cả các ô vuông đó đều là mìn.</string>
-    <string name="tutorial_text_2">Sau khi đánh dấu cờ đầu tiên, hãy xem xét các con số và phân tích ô vuông tiếp theo.</string>
+    <string name="tutorial_text_2">Sau khi đánh dấu ngọn cờ đầu tiên, hãy xem xét các con số và chọn ô vuông tiếp theo.</string>
     <string name="tutorial_text_3">Nếu một ô vuông có số cờ như nhau, tất cả ô vuông còn lại liền kề với nó không phải mìn (mũi tên xanh lá).</string>
     <string name="tutorial_text_4">Hãy xem xét các con số và tiếp tục mở các ô vuông.</string>
     <string name="games">Trò chơi</string>
@@ -121,5 +121,5 @@
     <string name="fixed_size">Kích thước cố định</string>
     <string name="progressive">Tiến trình</string>
     <string name="highlight_unsolved_numbers">Đánh dấu các số chưa giải</string>
-    <string name="more_games">Trò chơi khác</string>
+    <string name="left_handed">Thuận tay trái</string>
 </resources>

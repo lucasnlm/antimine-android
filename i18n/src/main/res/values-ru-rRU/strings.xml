@@ -3,7 +3,7 @@
     <string name="tutorial">Обучение</string>
     <string name="tutorial_basic">Правило игры простое, число на квадрате показывает количество мин вокруг него, и Вы должны отметить все мины.</string>
     <string name="tutorial_text_1">Если число отображает количество всех квадратов, то во всех квадратах мины.</string>
-    <string name="tutorial_text_2">После отметки Вашего первого флага, просмотрите цифры и проанализируйте следующий квадрат.</string>
+    <string name="tutorial_text_2">Отметив свой первый флаг, просмотрите цифры и проанализируйте следующий квадрат.</string>
     <string name="tutorial_text_3">Если в квадрате одинаковое количество флагов, то все остальные рядом с ним квадраты не содержат мин (зеленая стрелка).</string>
     <string name="tutorial_text_4">Посмотрите на числа и продолжайте открывать квадраты.</string>
     <string name="games">Игры</string>
@@ -121,5 +121,5 @@
     <string name="fixed_size">Фиксированный размер</string>
     <string name="progressive">Прогрессивный</string>
     <string name="highlight_unsolved_numbers">Подсвечивать неразгаданные числа</string>
-    <string name="more_games">Больше игр</string>
+    <string name="left_handed">Режим левши</string>
 </resources>

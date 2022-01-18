@@ -3,7 +3,7 @@
     <string name="tutorial">Lernilo</string>
     <string name="tutorial_basic">La reguloj de la ludo estas simpla, la numero sur kvadrato signas la kvanton da la bomboj ĉirkaŭ ĝi, kaj vi devas flagi ĉiuj la bomboj.</string>
     <string name="tutorial_text_1">Se numero tuŝas la saman nombron da kvadratoj, do ĉiuj kvadratoj estas minoj.</string>
-    <string name="tutorial_text_2">Post ke vi markos vian unuan flagon, kontrolu la numerojn kaj analizu la sekvantan kvadraton.</string>
+    <string name="tutorial_text_2">After marking your first flag, review the numbers and analyze the next square.</string>
     <string name="tutorial_text_3">Se kvadrato havas la saman nombron da flagoj, ĉiuj restantaj kvadratoj apud ĝi ne estas minoj (la sago verda).</string>
     <string name="tutorial_text_4">Kontrolu la numerojn kaj malfermu plu kvadratojn.</string>
     <string name="games">Ludoj</string>
@@ -121,5 +121,5 @@
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
-    <string name="more_games">More games</string>
+    <string name="left_handed">Left-handed</string>
 </resources>

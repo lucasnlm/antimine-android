@@ -1,5 +1,4 @@
-#ifndef ANTIMINE_ANDROID_MALLOC_H
-#define ANTIMINE_ANDROID_MALLOC_H
+#pragma once
 
 #include <malloc.h>
 #include <stdlib.h>
@@ -29,5 +28,3 @@ inline void *srealloc(void *p, size_t size) {
     if (!q) abort();
     return q;
 }
-
-#endif

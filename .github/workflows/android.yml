@@ -33,8 +33,7 @@ jobs:
           java-version: 1.8
       - name: Build with Gradle
         run: |
-          ./gradlew assembleDebug
-          ./gradlew testGoogleDebugUnitTest --stacktrace
+          ./gradlew testFossDebugUnitTest --stacktrace
 
 
   fdroid:

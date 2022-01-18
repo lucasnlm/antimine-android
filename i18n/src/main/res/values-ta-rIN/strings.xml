@@ -3,7 +3,7 @@
     <string name="tutorial">பயிற்சி</string>
     <string name="tutorial_basic">இந்த ஆட்டத்தின் விதிமுறை எளிமையானது. ஒரு கட்டத்தில் இருக்கும் எண்ணானது அதையொட்டிய கட்டங்களில் மறைந்திருக்கும் வெடிகுண்டுகளின் எண்ணிக்கையைக் குறிக்கிறது. நீங்கள் செய்ய வேண்டியதெல்லாம் மறைந்திருக்கும் வெடிகுண்டுகளை கொடிக் குறியிட்டு காட்ட வேண்டியது மட்டுமே.</string>
     <string name="tutorial_text_1">கட்டத்திலுள்ள எண்ணானது அதையொட்டி உள்ள அனைத்து கட்டங்களின் எண்ணிக்கையும் குறிக்குமானால், அனைத்து கட்டங்களிலும் வெடிகுண்டுகள் இருப்பதாக அர்த்தம்.</string>
-    <string name="tutorial_text_2">உங்களுடைய முதல் கொடியை குறியிட்டவுடன், எண்களைச் சரிபார்த்து பின்பு அடுத்த கட்டத்தை பகுப்பாய்வு செய்யுங்கள்.</string>
+    <string name="tutorial_text_2">After marking your first flag, review the numbers and analyze the next square.</string>
     <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
     <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">Games</string>
@@ -121,5 +121,5 @@
     <string name="fixed_size">நிலையான அளவு</string>
     <string name="progressive">Progressive</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
-    <string name="more_games">More games</string>
+    <string name="left_handed">Left-handed</string>
 </resources>

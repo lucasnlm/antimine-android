@@ -120,6 +120,6 @@
     <string name="no_guess_fail_warning">Сегашното поле може да не е без предположения!</string>
     <string name="fixed_size">Фиксиран размер</string>
     <string name="progressive">Прогресивен</string>
-    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
-    <string name="more_games">More games</string>
+    <string name="highlight_unsolved_numbers">Маркирайте нерешените числа</string>
+    <string name="left_handed">Леворък</string>
 </resources>

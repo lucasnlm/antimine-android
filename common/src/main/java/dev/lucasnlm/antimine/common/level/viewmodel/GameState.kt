@@ -50,4 +50,7 @@ data class GameState(
 
     // If true, the map is being loaded.
     val isLoadingMap: Boolean,
+
+    // If false, it will hide tutorial tip during this session.
+    val showTutorial: Boolean,
 )
