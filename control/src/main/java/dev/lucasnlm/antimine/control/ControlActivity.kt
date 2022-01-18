@@ -55,6 +55,14 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
             preferencesRepository.setToggleButtonOnTopBar(checked)
         }
 
+        leftHanded.isChecked = preferencesRepository.leftHandedMode()
+        leftHandedLabel.setOnClickListener {
+            leftHanded.isChecked = !leftHanded.isChecked
+        }
+        leftHanded.setOnCheckedChangeListener { _, checked ->
+            preferencesRepository.setLeftHandedMode(checked)
+        }
+
         lifecycleScope.launchWhenCreated {
             viewModel.observeState().collect {
                 controlAdapter.bindControlStyleList(it.selected, it.controls)
@@ -65,6 +73,8 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
                 val toggleVisible = if (it.showToggleButtonSettings) View.VISIBLE else View.GONE
                 toggleButtonTopBar.visibility = toggleVisible
                 toggleButtonTopBarLabel.visibility = toggleVisible
+                leftHanded.visibility = toggleVisible
+                leftHandedLabel.visibility = toggleVisible
 
                 val longPressVisible = when (it.selected) {
                     ControlStyle.Standard, ControlStyle.FastFlag -> View.VISIBLE

@@ -25,6 +25,8 @@ data class CloudSave(
     val allowTapNumbers: Int,
     val hapticFeedbackLevel: Int,
     val highlightNumbers: Int,
+    val leftHanded: Int,
+    val dimNumbers: Int,
 )
 
 fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
@@ -50,6 +52,8 @@ fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
     "doubleClickTimeout" to doubleClickTimeout,
     "allowTapNumbers" to allowTapNumbers,
     "highlightNumbers" to highlightNumbers,
+    "leftHanded" to leftHanded,
+    "dimNumbers" to dimNumbers,
 )
 
 private fun Any?.parseInt(): Int = this?.toString()?.toInt() ?: throw Exception("Fail to parse Int")
@@ -81,4 +85,6 @@ fun cloudSaveOf(id: String, data: Map<String, Any>) =
         doubleClickTimeout = data["doubleClickTimeout"].parseInt(400),
         allowTapNumbers = data["allowTapNumbers"].parseInt(1),
         highlightNumbers = data["highlightNumbers"].parseInt(0),
+        leftHanded = data["leftHanded"].parseInt(0),
+        dimNumbers = data["dimNumbers"].parseInt(0),
     )

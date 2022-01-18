@@ -39,7 +39,6 @@
     <string name="rounded_square">Rounded Square</string>
     <string name="space_between_squares">Space Between Squares</string>
     <string name="system">System</string>
-    <string name="rating">Feedback</string>
     <string name="sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
     <string name="you_won">You won!</string>
     <string name="victories">Victories</string>
@@ -123,4 +122,5 @@
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
+    <string name="left_handed">Left-handed</string>
 </resources>

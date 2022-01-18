@@ -91,6 +91,8 @@ class MainViewModel(
             setUnlockedThemes(unlockedThemes)
             setSquareDivider(squareDivider)
             setDoubleClickTimeout(doubleClickTimeout.toLong())
+            setLeftHandedMode(leftHanded != 0)
+            setDimNumbers(dimNumbers != 0)
         }
 
         cloudSave.stats.mapNotNull {

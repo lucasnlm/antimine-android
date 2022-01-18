@@ -436,4 +436,12 @@ class PreferencesRepository(
     override fun setDimNumbers(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_DIM_NUMBERS, value)
     }
+
+    override fun setLeftHandedMode(enabled: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_LEFT_HANDED, enabled)
+    }
+
+    override fun leftHandedMode(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_LEFT_HANDED, false)
+    }
 }

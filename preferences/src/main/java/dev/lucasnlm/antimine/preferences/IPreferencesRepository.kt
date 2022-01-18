@@ -125,4 +125,7 @@ interface IPreferencesRepository {
 
     fun setToggleButtonOnTopBar(enabled: Boolean)
     fun showToggleButtonOnTopBar(): Boolean
+
+    fun setLeftHandedMode(enabled: Boolean)
+    fun leftHandedMode(): Boolean
 }

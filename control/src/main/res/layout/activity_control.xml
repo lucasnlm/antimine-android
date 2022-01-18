@@ -202,6 +202,32 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/toggleButtonTopBarLabel" />
 
+            <TextView
+                android:id="@+id/leftHandedLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:alpha="1.0"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="16dp"
+                android:text="@string/left_handed"
+                android:textColor="?attr/colorControlNormal"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@id/toggleButtonTopBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toggleButtonTopBarLabel" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/leftHanded"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingVertical="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/leftHandedLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/leftHandedLabel" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

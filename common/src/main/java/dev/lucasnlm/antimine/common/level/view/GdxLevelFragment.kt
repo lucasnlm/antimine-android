@@ -258,15 +258,30 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                             FrameLayout.LayoutParams.WRAP_CONTENT,
                             FrameLayout.LayoutParams.WRAP_CONTENT
                         ).apply {
-                            val padding = context.dpToPx(16)
-                            gravity = GravityCompat.END or Gravity.BOTTOM
+                            val padding = context.dpToPx(24)
+                            val leftHanded = preferencesRepository.leftHandedMode()
 
-                            setMargins(
-                                0,
-                                0,
-                                padding + dimensionRepository.horizontalNavigationBarHeight(),
-                                padding + dimensionRepository.verticalNavigationBarHeight()
-                            )
+                            gravity = if (leftHanded) {
+                                GravityCompat.START or Gravity.BOTTOM
+                            } else {
+                                GravityCompat.END or Gravity.BOTTOM
+                            }
+
+                            if (leftHanded) {
+                                setMargins(
+                                    padding + dimensionRepository.horizontalNavigationBarHeight(),
+                                    0,
+                                    0,
+                                    padding + dimensionRepository.verticalNavigationBarHeight()
+                                )
+                            } else {
+                                setMargins(
+                                    0,
+                                    0,
+                                    padding + dimensionRepository.horizontalNavigationBarHeight(),
+                                    padding + dimensionRepository.verticalNavigationBarHeight()
+                                )
+                            }
                         }
 
                         addView(controlSwitcher, layoutParams)

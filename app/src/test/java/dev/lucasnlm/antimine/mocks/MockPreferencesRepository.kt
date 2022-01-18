@@ -176,4 +176,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun dimNumbers(): Boolean = false
 
     override fun setDimNumbers(value: Boolean) { }
+
+    override fun setLeftHandedMode(enabled: Boolean) {}
+
+    override fun leftHandedMode(): Boolean = false
 }
