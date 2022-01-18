@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.common.level.view
 
 import android.content.res.ColorStateList
 import android.content.res.Resources
+import android.content.res.Resources.getSystem
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -14,6 +15,8 @@ import androidx.core.view.postDelayed
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
@@ -26,6 +29,7 @@ import dev.lucasnlm.antimine.gdx.models.RenderQuality
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
+import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.ICrashReporter
 import kotlinx.coroutines.delay
@@ -45,7 +49,9 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     private val crashReporter: ICrashReporter by inject()
     private val appVersionManager: IAppVersionManager by inject()
 
-    private var controlSwitcher: FloatingActionButton? = null
+    private var controlSwitcher: MaterialButton? = null
+
+    val Int.px: Int get() = (this * getSystem().displayMetrics.density).toInt()
 
     private val levelApplicationListener by lazy {
         GameApplicationListener(
@@ -187,7 +193,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
             TooltipCompat.setTooltipText(this, getString(R.string.open))
             gameViewModel.refreshUseOpenOnSwitchControl(true)
             preferencesRepository.setSwitchControl(true)
-            setImageResource(R.drawable.touch)
+            setIconResource(R.drawable.touch)
         }
     }
 
@@ -197,7 +203,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
             TooltipCompat.setTooltipText(this, getString(R.string.flag_tile))
             gameViewModel.refreshUseOpenOnSwitchControl(false)
             preferencesRepository.setSwitchControl(false)
-            setImageResource(R.drawable.flag_black)
+            setIconResource(R.drawable.flag_black)
         }
     }
 
@@ -213,9 +219,9 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
         if (controlSwitcher != null) {
             if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
                 if (preferencesRepository.showToggleButtonOnTopBar()) {
-                    controlSwitcher?.hide()
+                    controlSwitcher?.visibility = View.GONE
                 } else {
-                    controlSwitcher?.show()
+                    controlSwitcher?.visibility = View.VISIBLE
                 }
             }
         } else if (!preferencesRepository.showToggleButtonOnTopBar()) {
@@ -223,16 +229,19 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 val isParentFinishing = activity?.isFinishing ?: true
                 if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen && !isParentFinishing) {
                     (view.parent as? FrameLayout)?.apply {
-                        controlSwitcher = FloatingActionButton(context).apply {
+
+                        controlSwitcher = ExtendedFloatingActionButton(context).apply {
                             val palette = themeRepository.getTheme().palette
                             contentDescription = getString(R.string.open)
                             TooltipCompat.setTooltipText(this, getString(R.string.open))
                             gameViewModel.refreshUseOpenOnSwitchControl(true)
                             preferencesRepository.setSwitchControl(true)
                             backgroundTintList = ColorStateList.valueOf(palette.accent.toAndroidColor(255))
-                            setImageResource(R.drawable.touch)
-
-                            compatElevation = 4f
+                            cornerRadius = 10.px
+                            strokeColor = ColorStateList.valueOf(palette.background.toAndroidColor(255))
+                            strokeWidth = 1.px
+                            setIconResource(R.drawable.touch)
+                            elevation = 2f
                             alpha = 0f
                             animate().apply {
                                 alpha(1.0f)

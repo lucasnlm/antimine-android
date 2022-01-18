@@ -72,6 +72,7 @@ open class GameViewModel(
             hasMines = false,
             useHelp = preferencesRepository.useHelp(),
             isLoadingMap = true,
+            showTutorial = preferencesRepository.showTutorialButton(),
         )
     }
 
@@ -246,6 +247,7 @@ open class GameViewModel(
                 hasMines = false,
                 useHelp = preferencesRepository.useHelp(),
                 isLoadingMap = true,
+                showTutorial = preferencesRepository.showTutorialButton(),
             )
 
             sendEvent(GameEvent.NewGame(newGameState))
@@ -289,6 +291,7 @@ open class GameViewModel(
             hasMines = true,
             useHelp = preferencesRepository.useHelp(),
             isLoadingMap = true,
+            showTutorial = preferencesRepository.showTutorialButton(),
         )
 
         sendEvent(GameEvent.NewGame(newGameState))
@@ -333,6 +336,7 @@ open class GameViewModel(
             hasMines = false,
             useHelp = preferencesRepository.useHelp(),
             isLoadingMap = true,
+            showTutorial = preferencesRepository.showTutorialButton(),
         )
 
         sendEvent(GameEvent.NewGame(newGameState))
@@ -670,11 +674,11 @@ open class GameViewModel(
     }
 
     private fun calcRewardHints(): Int {
-        return if (clock.time() > 5L && preferencesRepository.isPremiumEnabled()) {
+        return if (clock.time() > 10L && preferencesRepository.isPremiumEnabled()) {
             val rewardedHints = if (isCompletedWithMistakes()) {
-                (state.minefield.mines * 0.05).toInt()
+                (state.minefield.mines * 0.025).toInt()
             } else {
-                (state.minefield.mines * 0.1).toInt()
+                (state.minefield.mines * 0.05).toInt()
             }
 
             rewardedHints

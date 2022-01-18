@@ -170,6 +170,7 @@ class GameActivity :
                     if (it.turn == 0) {
                         setOpenControlSwitcherIcon()
                         warning?.dismiss()
+                        warning = null
                     }
 
                     val color = usingTheme.palette.covered.toAndroidColor(168)
@@ -191,7 +192,7 @@ class GameActivity :
                     tapToBegin.visibility = View.GONE
                 }
 
-                if (it.turn < 1 && it.saveId == 0L && !it.isLoadingMap) {
+                if (it.turn < 1 && it.saveId == 0L && !it.isLoadingMap && it.showTutorial) {
                     val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
                     val controlText = gameViewModel.getControlDescription(applicationContext)
@@ -414,8 +415,10 @@ class GameActivity :
         tapToBegin.apply {
             setTextColor(usingTheme.palette.background.toAndroidColor(255))
         }
-        controlsToast.apply {
-            setTextColor(usingTheme.palette.background.toAndroidColor(255))
+        if (preferencesRepository.showTutorialButton()) {
+            controlsToast.apply {
+                setTextColor(usingTheme.palette.background.toAndroidColor(255))
+            }
         }
     }
 
