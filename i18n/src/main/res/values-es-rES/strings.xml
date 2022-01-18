@@ -121,5 +121,5 @@
     <string name="fixed_size">Tamaño fijo</string>
     <string name="progressive">Progresivo</string>
     <string name="highlight_unsolved_numbers">Resaltar números sin completar</string>
-    <string name="more_games">Más juegos</string>
+    <string name="left_handed">Modo para zurdos</string>
 </resources>

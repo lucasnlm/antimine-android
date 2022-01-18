@@ -3,7 +3,7 @@
     <string name="tutorial">הדרכה</string>
     <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
     <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
+    <string name="tutorial_text_2">After marking your first flag, review the numbers and analyze the next square.</string>
     <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
     <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">משחקים</string>
@@ -121,5 +121,5 @@
     <string name="fixed_size">גודל קבוע</string>
     <string name="progressive">התקדמות</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
-    <string name="more_games">משחקים נוספים</string>
+    <string name="left_handed">Left-handed</string>
 </resources>

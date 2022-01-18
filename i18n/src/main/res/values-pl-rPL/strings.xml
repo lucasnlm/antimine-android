@@ -3,7 +3,7 @@
     <string name="tutorial">Samouczek</string>
     <string name="tutorial_basic">Reguły gry są proste. Liczba widoczna na polu oznacza ilość min przylegających do tego pola, a Twoim zadaniem jest oznaczyć je wszystkie.</string>
     <string name="tutorial_text_1">Jeśli do pola z liczbą przylega taka sama liczba nieodkrytych pól na jaką wskazuje ta liczba, to na wszystkich tych polach są miny.</string>
-    <string name="tutorial_text_2">Po oznaczeniu pierwszego pola, przejrzyj cyfry i zastanów się nad kolejnym ruchem.</string>
+    <string name="tutorial_text_2">Po oznaczeniu pierwszego pola, przyjrzyj się cyfrom i przeanalizuj następne pole.</string>
     <string name="tutorial_text_3">Jeśli do pola przystaje określona liczba flag, wówczas wszystkie pozostałe przystające do niego pola nie mają min (zielona strzałka).</string>
     <string name="tutorial_text_4">Sprawdź liczby i kontynuuj odkrywanie pól.</string>
     <string name="games">Rozgrywki</string>
@@ -121,5 +121,5 @@
     <string name="fixed_size">Ustalony rozmiar</string>
     <string name="progressive">Progresywny</string>
     <string name="highlight_unsolved_numbers">Podświetl nierozwiązane pola</string>
-    <string name="more_games">Więcej gier</string>
+    <string name="left_handed">Tryb leworęczny</string>
 </resources>
