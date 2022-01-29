@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.di
+package dev.lucasnlm.external.di
 
 import dev.lucasnlm.external.BillingManager
 import dev.lucasnlm.external.CloudStorageManager
