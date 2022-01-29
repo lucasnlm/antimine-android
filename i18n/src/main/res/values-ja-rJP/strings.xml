@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ja">
     <string name="tutorial">チュートリアル</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After marking your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_basic">ゲームのルールは簡単です。マスの数字はそのマスに隣接している地雷の数を表しているので、それを手がかりにすべての地雷に旗を立てていきます。</string>
+    <string name="tutorial_text_1">数字が同じ数の開けていないマスに隣接していれば、それらはすべて地雷です。</string>
+    <string name="tutorial_text_2">旗を立てたら、数字を確認して、次のマスに移りましょう。</string>
+    <string name="tutorial_text_3">数字の周りに同じ数だけ旗が立っていたら、数字に隣接する残りのマスはすべて地雷ではありません (緑の矢印)。</string>
+    <string name="tutorial_text_4">数字を確認して、ほかのマスを開けていきます。</string>
     <string name="games">ゲーム回数</string>
     <string name="tap_to_begin">タップして開始</string>
     <string name="previous_games">前のゲーム</string>
@@ -36,8 +36,8 @@
     <string name="settings_gameplay">ゲームプレイ</string>
     <string name="settings_accessibility">アクセシビリティ</string>
     <string name="size">サイズ</string>
-    <string name="rounded_square">丸い長方形</string>
-    <string name="space_between_squares">正方形間のスペース</string>
+    <string name="rounded_square">角の丸さ</string>
+    <string name="space_between_squares">マス間のスペース</string>
     <string name="system">システム</string>
     <string name="sign_in_failed">サインインに失敗しました。インターネット接続を確認してからもう一度お試しください。</string>
     <string name="you_won">あなたの勝ちです！</string>
@@ -59,18 +59,18 @@
     <string name="performance">パフォーマンス</string>
     <string name="ok">OK</string>
     <string name="use_question_mark">クエスチョンマークを使う</string>
-    <string name="no_guessing_mode">\'推測なし\' モード</string>
+    <string name="no_guessing_mode">「推測なし」 モード</string>
     <string name="control">コントロール</string>
     <string name="single_click">シングルタップ</string>
     <string name="double_click">ダブルタップ</string>
-    <string name="long_press">長くタップ</string>
+    <string name="long_press">長押し</string>
     <string name="touch_sensibility">タッチ感度</string>
     <string name="open_tile">開く</string>
     <string name="flag_tile">旗</string>
     <string name="retry">リトライ</string>
     <string name="continue_game">続行</string>
     <string name="empty">空</string>
-    <string name="cant_do_it_now">今それを行うことは不可能です</string>
+    <string name="cant_do_it_now">現在は実行できません</string>
     <string name="you_have_received">受け取りました: +%1$d</string>
     <string name="help_win_a_game">ヘルプを増やすには、ゲームに勝つ必要があります。</string>
     <string name="unknown_error">不明なエラーです。</string>
@@ -79,7 +79,7 @@
     <string name="resume">続ける</string>
     <string name="yes">はい</string>
     <string name="unlock">ロック解除</string>
-    <string name="achievements">達成</string>
+    <string name="achievements">実績</string>
     <string name="no">いいえ</string>
     <string name="general">全般</string>
     <string name="more">もっと</string>
@@ -107,19 +107,21 @@
     <string name="open_on_game">ゲーム画面で開く</string>
     <string name="show_windows">ウィンドウの表示</string>
     <string name="select_language">言語の選択</string>
-    <string name="switch_control">スイッチ: フラグと開く</string>
-    <string name="switch_control_desc">旗と開くを切り替えるにはボタンを使用します</string>
+    <string name="switch_control">操作切り替え: 「旗」と「開く」</string>
+    <string name="switch_control_desc">旗の操作と開く操作をボタンで切り替え</string>
     <string name="app_description">地雷が隠された長方形から1つも爆発させることなくクリアしましょう。</string>
     <string name="app_name">Antimine</string>
     <string name="do_you_know_how_to_play">「マインスイーパー」の遊び方がわかりませんか？</string>
     <string name="close">閉じる</string>
     <string name="open_tutorial">チュートリアルを開く</string>
-    <string name="click_numbers">番号のタップを許可する</string>
+    <string name="click_numbers">数字のタップを有効にする</string>
     <string name="tap_to_customize">タップしてカスタマイズ</string>
     <string name="toggle_button_top">上部バーに「トグルボタン」を表示する</string>
-    <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
+    <string name="no_guess_fail_warning">現在の盤面は、推測なしではクリアできない可能性があります!</string>
     <string name="fixed_size">固定サイズ</string>
     <string name="progressive">プログレッシブ</string>
     <string name="highlight_unsolved_numbers">未解決の数字をハイライト表示</string>
     <string name="left_handed">左側を上にする</string>
+    <string name="donate_request">If you like this game, consider making a donation.</string>
+    <string name="donate_help">It will help keep this project active!</string>
 </resources>

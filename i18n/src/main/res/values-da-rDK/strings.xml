@@ -122,4 +122,6 @@
     <string name="progressive">Fremskridt</string>
     <string name="highlight_unsolved_numbers">Fremhæv uløste tal</string>
     <string name="left_handed">Venstrehåndet</string>
+    <string name="donate_request">If you like this game, consider making a donation.</string>
+    <string name="donate_help">It will help keep this project active!</string>
 </resources>

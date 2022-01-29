@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="it">
     <string name="tutorial">Tutorial</string>
-    <string name="tutorial_basic">Hai un\'unica regola da seguire: il numero della casella mostra la quantità di mine adiacenti ad essa; dovrai segnalare tutte le mine.</string>
+    <string name="tutorial_basic">Hai un\'unica regola da seguire: il numero della casella mostra la quantità di mine adiacenti a essa; dovrai segnalare tutte le mine.</string>
     <string name="tutorial_text_1">Se il numero è adiacente allo stesso numero di caselle ignote, allora quelle caselle saranno tutte mine.</string>
     <string name="tutorial_text_2">Dopo aver posizionato la prima bandiera, controlla i numeri e passa alla casella successiva.</string>
     <string name="tutorial_text_3">Se due caselle adiacenti hanno lo stesso numero di bandiere, allora tutte le altre caselle ignote non sono mine (vedi freccia verde).</string>
@@ -122,4 +122,6 @@
     <string name="progressive">Progressivo</string>
     <string name="highlight_unsolved_numbers">Evidenzia numeri non risolti</string>
     <string name="left_handed">Mancino</string>
+    <string name="donate_request">Se il gioco ti è piaciuto, supporta i creatori con una donazione.</string>
+    <string name="donate_help">Contribuirai a mantenere il progetto attivo!</string>
 </resources>

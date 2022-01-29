@@ -122,4 +122,6 @@
     <string name="progressive">Progresivo</string>
     <string name="highlight_unsolved_numbers">Resaltar números sin completar</string>
     <string name="left_handed">Modo para zurdos</string>
+    <string name="donate_request">Si te gusta el juego, aceptamos cualquier tipo de donación.</string>
+    <string name="donate_help">¡Eso nos ayudará a mantener este proyecto activo!</string>
 </resources>

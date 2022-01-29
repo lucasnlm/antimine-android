@@ -122,4 +122,6 @@
     <string name="progressive">Progressief</string>
     <string name="highlight_unsolved_numbers">Onopgeloste nummers markeren</string>
     <string name="left_handed">Linkshandig</string>
+    <string name="donate_request">If you like this game, consider making a donation.</string>
+    <string name="donate_help">It will help keep this project active!</string>
 </resources>

@@ -122,4 +122,6 @@
     <string name="progressive">Прогрессивный</string>
     <string name="highlight_unsolved_numbers">Подсвечивать неразгаданные числа</string>
     <string name="left_handed">Режим левши</string>
+    <string name="donate_request">Если вам нравится эта игра, подумайте о том, чтобы сделать пожертвование.</string>
+    <string name="donate_help">Это поможет сохранить проект активным!</string>
 </resources>

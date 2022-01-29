@@ -122,4 +122,6 @@
     <string name="progressive">Προοδευτικό</string>
     <string name="highlight_unsolved_numbers">Επισήμανση άλυτων αριθμών</string>
     <string name="left_handed">Αριστερόχειρας</string>
+    <string name="donate_request">Αν σας αρέσει αυτό το παιχνίδι, σκεφτείτε να κάνετε μια δωρεά.</string>
+    <string name="donate_help">Θα βοηθήσει να διατηρηθεί αυτό το έργο ενεργό!</string>
 </resources>

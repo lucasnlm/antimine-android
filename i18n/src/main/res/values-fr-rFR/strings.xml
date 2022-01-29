@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
-    <string name="tutorial">Didacticiel</string>
+    <string name="tutorial">Tutoriel</string>
     <string name="tutorial_basic">La règle du jeu est simple, le nombre sur un carré indique le nombre de mines adjacentes et vous devez marquer toutes les mines.</string>
     <string name="tutorial_text_1">Si un nombre touche le même nombre de carrés, alors les carrés sont tous des mines.</string>
     <string name="tutorial_text_2">Après avoir marqué votre premier drapeau, passez en revue les chiffres et analysez le carré suivant.</string>
@@ -122,4 +122,6 @@
     <string name="progressive">Progressif</string>
     <string name="highlight_unsolved_numbers">Mettre en évidence les nombres non résolus</string>
     <string name="left_handed">Gaucher</string>
+    <string name="donate_request">Si vous appréciez ce jeu, pensez à faire un don.</string>
+    <string name="donate_help">Cela aidera à maintenir ce projet actif !</string>
 </resources>

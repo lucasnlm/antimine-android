@@ -3,7 +3,7 @@
     <string name="tutorial">Pamācība</string>
     <string name="tutorial_basic">Spēles noteikumi ir vienkārši: kvadrātā ierakstītiais skaitlis apzīmē apkārt esošo mīnu skaitu, un tās visas ir nepieciešams atzīmēt ar karogu.</string>
     <string name="tutorial_text_1">Ja skaitlis pieskaras tikpat kvadrātiem cik norādīts, tad visi kvadrāti ir mīnas.</string>
-    <string name="tutorial_text_2">Kad tu atzīmē savu pirmo mīnu, apskati un analizē nākamos kvadrātus.</string>
+    <string name="tutorial_text_2">Pēc pirmās mīnas atzīmēšanas pārskati un izvērtē nākamo kvadrātu.</string>
     <string name="tutorial_text_3">Ja skaitlis ir tikpat liels cik atzīmēto kvadrātu skaits, pārējie kvadrāti nav mīnas (norādīts ar zaļo bultu).</string>
     <string name="tutorial_text_4">Apskati skaitļus un turpini lauku atklāšanu.</string>
     <string name="games">Spēles</string>
@@ -21,7 +21,7 @@
     <string name="animations">Animācijas</string>
     <string name="vibration">Sajūtu atgriezeniskā saite</string>
     <string name="about">Par lietotni</string>
-    <string name="events">Statistika</string>
+    <string name="events">Apkopojums</string>
     <string name="custom">Pielāgots</string>
     <string name="start">Sākt</string>
     <string name="width">Platums</string>
@@ -60,7 +60,7 @@
     <string name="ok">Labi</string>
     <string name="use_question_mark">Iespējot jautājuma zīmi</string>
     <string name="no_guessing_mode">Režīms bez minēšanas</string>
-    <string name="control">Kontroles</string>
+    <string name="control">Vadība</string>
     <string name="single_click">Pieskāriens</string>
     <string name="double_click">Divkāršs piesitiens</string>
     <string name="long_press">Ilgs pieskāriens</string>
@@ -107,7 +107,7 @@
     <string name="open_on_game">Atverot lietotni turpināt pēdējo spēli</string>
     <string name="show_windows">Rādīt logus</string>
     <string name="select_language">Izvēlēties valodu</string>
-    <string name="switch_control">Slēdzis: Atzīmēt vai atvērt</string>
+    <string name="switch_control">Slēdzis: atzīmēt un atvērt</string>
     <string name="switch_control_desc">Izmantot pogu, lai pārslēgtos starp atzīmēšanu un atvēršanu</string>
     <string name="app_description">Tev ir jāatzīmē visas mīnas laukumā bez nevienas mīnas detonēšanas.</string>
     <string name="app_name">Antimine</string>
@@ -121,5 +121,7 @@
     <string name="fixed_size">Nemainīga lieluma</string>
     <string name="progressive">Ar attīstību</string>
     <string name="highlight_unsolved_numbers">Izcelt neatrisinātos skaitļus</string>
-    <string name="left_handed">Kreilim</string>
+    <string name="left_handed">Kreisrocīgs</string>
+    <string name="donate_request">If you like this game, consider making a donation.</string>
+    <string name="donate_help">It will help keep this project active!</string>
 </resources>
