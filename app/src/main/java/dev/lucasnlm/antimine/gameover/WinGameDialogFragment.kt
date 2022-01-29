@@ -179,7 +179,9 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                         Gravity.CENTER_HORIZONTAL
                                     )
                                 )
-                            } else if (!preferencesRepository.isPremiumEnabled() && featureFlagManager.isBannerAdEnabled) {
+                            } else if (!preferencesRepository.isPremiumEnabled() &&
+                                featureFlagManager.isBannerAdEnabled
+                            ) {
                                 adFrame.visibility = View.VISIBLE
 
                                 adFrame.addView(
