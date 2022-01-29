@@ -63,7 +63,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         }
     }
 
-    override val isFoos: Boolean = false
+    override val isFoss: Boolean = false
 
     override val isGameHistoryEnabled: Boolean by lazy {
         getBoolean(HISTORY_ENABLED)

@@ -124,7 +124,7 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
             startAction = {
                 finish()
             },
-            endButton = R.drawable.delete,
+            endButton = R.drawable.undo,
             endDescription = R.string.delete_all,
             endAction = {
                 viewModel.sendEvent(ControlEvent.Reset)

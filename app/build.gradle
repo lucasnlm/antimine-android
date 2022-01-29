@@ -15,8 +15,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1505001
-        versionName '15.5.0'
+        versionCode 1506001
+        versionName '15.6.0'
         minSdkVersion 21
         targetSdkVersion 31
         multiDexEnabled true
@@ -91,6 +91,7 @@ android {
         googleInstant {
             dimension 'version'
             applicationId 'dev.lucasnlm.antimine'
+            versionNameSuffix "-inst"
         }
 
         foss {
@@ -146,7 +147,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
 
     // Google
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.5.0'
 
     // Koin
     implementation 'io.insert-koin:koin-android:3.1.2'

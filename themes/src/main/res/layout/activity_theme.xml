@@ -33,7 +33,7 @@
                 android:id="@+id/square_size_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingVertical="12dp"
+                android:paddingVertical="4dp"
                 android:text="@string/size"
                 app:layout_constraintEnd_toStartOf="@id/squareSize"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,13 +56,13 @@
                 app:thumbStrokeColor="?colorAccent"
                 app:tickVisible="false"
                 app:trackColorActive="?colorAccent"
-                app:trackHeight="12dp" />
+                app:trackHeight="8dp" />
 
             <TextView
                 android:id="@+id/square_radius_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingVertical="12dp"
+                android:paddingVertical="4dp"
                 android:text="@string/rounded_square"
                 app:layout_constraintEnd_toStartOf="@id/squareRadius"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,13 +85,13 @@
                 app:thumbStrokeColor="?colorAccent"
                 app:tickVisible="false"
                 app:trackColorActive="?colorAccent"
-                app:trackHeight="12dp" />
+                app:trackHeight="8dp" />
 
             <TextView
                 android:id="@+id/square_divider_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingVertical="12dp"
+                android:paddingVertical="4dp"
                 android:text="@string/space_between_squares"
                 app:layout_constraintEnd_toStartOf="@+id/squareDivider"
                 app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +115,7 @@
                 app:thumbStrokeColor="?colorAccent"
                 app:tickVisible="false"
                 app:trackColorActive="?colorAccent"
-                app:trackHeight="12dp" />
+                app:trackHeight="8dp" />
 
             <dev.lucasnlm.antimine.ui.view.OfferCardButtonView
                 android:id="@+id/unlockAll"

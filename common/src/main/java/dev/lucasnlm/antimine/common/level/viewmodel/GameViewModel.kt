@@ -122,7 +122,7 @@ open class GameViewModel(
             is GameEvent.EngineReady -> {
                 emit(state.copy(isLoadingMap = false))
 
-                if (!state.isGameCompleted && state.hasMines && !state.isLoadingMap) {
+                if (!state.isGameCompleted && state.hasMines && !state.isLoadingMap && !gameController.hasOpenMines()) {
                     runClock()
                 } else {
                     stopClock()
@@ -671,6 +671,10 @@ open class GameViewModel(
         if (rewardedHints > 0) {
             addNewTip(rewardedHints)
         }
+    }
+
+    fun isGameStarted(): Boolean {
+        return gameController.mines().isNotEmpty()
     }
 
     private fun calcRewardHints(): Int {

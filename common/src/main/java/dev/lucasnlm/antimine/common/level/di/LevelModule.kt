@@ -46,6 +46,6 @@ val LevelModule = module {
     } bind IMinefieldRepository::class
 
     single {
-        TipRepository(get())
+        TipRepository(get(), get())
     } bind ITipRepository::class
 }

@@ -126,13 +126,18 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
                         recreate()
                         cloudSaveManager.uploadSave()
                     }
-
-                    squareSize.value = (it.squareSize / squareSize.stepSize).toInt() * squareSize.stepSize
-                    squareDivider.value = (it.squareDivider / squareSize.stepSize).toInt() * squareSize.stepSize
-                    squareRadius.value = (it.squareRadius / squareSize.stepSize).toInt() * squareSize.stepSize
                 }
             }
+
+            refreshForm()
         }
+    }
+
+    private fun refreshForm() {
+        val state = themeViewModel.singleState()
+        squareSize.value = (state.squareSize / squareSize.stepSize).toInt() * squareSize.stepSize
+        squareDivider.value = (state.squareDivider / squareDivider.stepSize).toInt() * squareDivider.stepSize
+        squareRadius.value = (state.squareRadius / squareRadius.stepSize).toInt() * squareRadius.stepSize
     }
 
     private fun bindToolbar() {
@@ -143,11 +148,15 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
             startAction = {
                 finish()
             },
-            endButton = R.drawable.delete,
+            endButton = R.drawable.undo,
             endDescription = R.string.delete_all,
             endAction = {
                 themeViewModel.sendEvent(ThemeEvent.ResetTheme)
+                lifecycleScope.launch {
+                    refreshForm()
+                }
                 bindToolbar()
+                section.showEndAction(false)
             }
         )
     }
@@ -166,6 +175,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
                     themeViewModel.sendEvent(ThemeEvent.SetSquareRadius(progress))
                 }
             }
+            section.showEndAction(true)
         }
     }
 }

@@ -158,9 +158,28 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                 )
                             }
 
-                            if (!preferencesRepository.isPremiumEnabled() &&
-                                featureFlagManager.isBannerAdEnabled
-                            ) {
+                            if (featureFlagManager.isFoss && preferencesRepository.requestDonation()) {
+                                adFrame.visibility = View.VISIBLE
+
+                                val view = View.inflate(context, R.layout.donation_request, null)
+                                view.setOnClickListener {
+                                    activity?.let {
+                                        lifecycleScope.launch {
+                                            billingManager.charge(it)
+                                            preferencesRepository.setRequestDonation(false)
+                                        }
+                                    }
+                                }
+
+                                adFrame.addView(
+                                    view,
+                                    FrameLayout.LayoutParams(
+                                        FrameLayout.LayoutParams.MATCH_PARENT,
+                                        FrameLayout.LayoutParams.WRAP_CONTENT,
+                                        Gravity.CENTER_HORIZONTAL
+                                    )
+                                )
+                            } else if (!preferencesRepository.isPremiumEnabled() && featureFlagManager.isBannerAdEnabled) {
                                 adFrame.visibility = View.VISIBLE
 
                                 adFrame.addView(

@@ -444,4 +444,12 @@ class PreferencesRepository(
     override fun leftHandedMode(): Boolean {
         return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_LEFT_HANDED, false)
     }
+
+    override fun setRequestDonation(request: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_REQUEST_DONATION, request)
+    }
+
+    override fun requestDonation(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_REQUEST_DONATION, true)
+    }
 }

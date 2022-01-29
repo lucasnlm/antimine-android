@@ -26,7 +26,7 @@ object AreaAssetBuilder {
 
         val pixmap = Pixmap(size, size, Pixmap.Format.RGBA8888).apply {
             blending = Pixmap.Blending.None
-            filter = Pixmap.Filter.BiLinear
+            filter = Pixmap.Filter.NearestNeighbour
 
             setColor(Color.WHITE.toGdxColor(0.0f))
             fillRectangle(0, 0, size, size)
@@ -42,7 +42,7 @@ object AreaAssetBuilder {
 
         return Texture(pixmap).also {
             pixmap.dispose()
-            it.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear)
+            it.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest)
         }
     }
 
@@ -87,7 +87,7 @@ object AreaAssetBuilder {
 
         return Texture(pixmap).also {
             pixmap.dispose()
-            it.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear)
+            it.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest)
         }
     }
 
@@ -291,7 +291,7 @@ object AreaAssetBuilder {
 
             // full
             x = textureSize * 7
-            y = textureSize * 4
+            y = textureSize * 6
             textureRegions[FormNames.full] = GridPoint2(x, y)
             setColor(coverColor)
             fillRectangle(x, y, textureSize, textureSize)

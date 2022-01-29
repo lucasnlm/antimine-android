@@ -19,6 +19,7 @@
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tint="?colorControlNormal"
         tools:layout_height="32dp"
         tools:layout_width="32dp"
         tools:visibility="visible" />
@@ -30,13 +31,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:textAllCaps="true"
+        android:textColor="?colorControlNormal"
         android:textSize="18sp"
         android:textStyle="bold"
         android:translationX="-8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/endButton"
         app:layout_constraintStart_toEndOf="@+id/startButton"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:text="Section Name" />
 
     <ImageView
@@ -49,6 +51,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tint="?colorControlNormal"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

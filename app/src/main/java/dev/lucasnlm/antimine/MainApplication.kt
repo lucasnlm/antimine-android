@@ -5,12 +5,12 @@ import dev.lucasnlm.antimine.common.level.di.LevelModule
 import dev.lucasnlm.antimine.core.di.CommonModule
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.di.AppModule
+import dev.lucasnlm.antimine.di.ExternalModule
 import dev.lucasnlm.antimine.di.ViewModelModule
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IFeatureFlagManager
-import dev.lucasnlm.external.di.ExternalModule
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -35,7 +35,7 @@ open class MainApplication : MultiDexApplication() {
             sentEvent(Analytics.Open)
         }
 
-        if (featureFlagManager.isFoos) {
+        if (featureFlagManager.isFoss) {
             preferencesRepository.setPremiumFeatures(true)
         } else {
             adsManager.start(this)

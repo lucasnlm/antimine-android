@@ -180,4 +180,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun setLeftHandedMode(enabled: Boolean) {}
 
     override fun leftHandedMode(): Boolean = false
+
+    override fun setRequestDonation(request: Boolean) {}
+
+    override fun requestDonation(): Boolean = true
 }

@@ -48,6 +48,9 @@ interface IPreferencesRepository {
     fun setPremiumFeatures(status: Boolean)
     fun isPremiumEnabled(): Boolean
 
+    fun setRequestDonation(request: Boolean)
+    fun requestDonation(): Boolean
+
     fun setShowSupport(show: Boolean)
     fun showSupport(): Boolean
 
