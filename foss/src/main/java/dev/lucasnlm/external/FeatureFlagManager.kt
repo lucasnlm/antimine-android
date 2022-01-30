@@ -10,7 +10,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
     override val isAdsOnContinueEnabled: Boolean = false
     override val isContinueGameEnabled: Boolean = true
     override val isRecyclerScrollEnabled: Boolean = true
-    override val isFoos: Boolean = true
+    override val isFoss: Boolean = true
     override val isThemeTastingEnabled: Boolean = true
     override val minUsageToReview: Int = Int.MAX_VALUE
     override val useInterstitialAd: Boolean = false

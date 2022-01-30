@@ -35,7 +35,7 @@ open class MainApplication : MultiDexApplication() {
             sentEvent(Analytics.Open)
         }
 
-        if (featureFlagManager.isFoos) {
+        if (featureFlagManager.isFoss) {
             preferencesRepository.setPremiumFeatures(true)
         } else {
             adsManager.start(this)

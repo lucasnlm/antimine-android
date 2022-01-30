@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.common.level.repository
 
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.external.IFeatureFlagManager
 
 interface ITipRepository {
     fun setExtraTips(amount: Int)
@@ -10,7 +11,8 @@ interface ITipRepository {
 }
 
 class TipRepository(
-    private val preferencesRepository: IPreferencesRepository
+    private val preferencesRepository: IPreferencesRepository,
+    private val featureFlagManager: IFeatureFlagManager,
 ) : ITipRepository {
     override fun setExtraTips(amount: Int) {
         preferencesRepository.setExtraTips(amount)
@@ -37,7 +39,10 @@ class TipRepository(
     }
 
     override fun increaseTip(amount: Int) {
-        val newValue = (preferencesRepository.getTips() + amount).coerceAtMost(MAX_TIPS).coerceAtLeast(0)
+        val newValue =
+            (preferencesRepository.getTips() + amount)
+                .coerceAtMost(getMaxTips())
+                .coerceAtLeast(0)
         preferencesRepository.setTips(newValue)
     }
 
@@ -45,7 +50,7 @@ class TipRepository(
         return preferencesRepository.getExtraTips() + preferencesRepository.getTips()
     }
 
-    companion object {
-        const val MAX_TIPS = 25
+    private fun getMaxTips(): Int {
+        return if (featureFlagManager.isFoss) 100 else 25
     }
 }

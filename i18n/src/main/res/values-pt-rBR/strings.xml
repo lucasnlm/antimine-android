@@ -122,4 +122,6 @@
     <string name="progressive">Progressivo</string>
     <string name="highlight_unsolved_numbers">Destacar números não resolvidos</string>
     <string name="left_handed">Canhoto</string>
+    <string name="donate_request">Se você gosta deste jogo, considere fazer uma doação.</string>
+    <string name="donate_help">Isso ajudará a manter este projeto ativo!</string>
 </resources>

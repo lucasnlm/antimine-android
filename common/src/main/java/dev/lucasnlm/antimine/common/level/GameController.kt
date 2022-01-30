@@ -310,6 +310,9 @@ class GameController {
     fun isGameOver(): Boolean =
         hasIsolatedAllMines() || (explodedMinesCount() > errorTolerance)
 
+    fun hasOpenMines(): Boolean =
+        mines().firstOrNull { it.hasMine && !it.isCovered } != null
+
     fun remainingMines(): Int {
         val flagsCount = field.count { it.isCovered && it.mark.isFlag() }
         val minesCount = mines().count()

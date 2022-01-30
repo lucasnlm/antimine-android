@@ -29,6 +29,10 @@ class SectionView : FrameLayout {
         }
     }
 
+    fun showEndAction(visible: Boolean) {
+        findViewById<ImageView>(R.id.endButton).visibility = if (visible) View.VISIBLE else View.GONE
+    }
+
     fun bind(
         text: String,
         @DrawableRes startButton: Int? = null,

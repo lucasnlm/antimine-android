@@ -122,4 +122,6 @@
     <string name="progressive">Progresywny</string>
     <string name="highlight_unsolved_numbers">Podświetl nierozwiązane pola</string>
     <string name="left_handed">Tryb leworęczny</string>
+    <string name="donate_request">Jeśli lubisz tę grę, rozważ przekazanie darowizny.</string>
+    <string name="donate_help">Dzięki temu będzie ona dalej rozwijana!</string>
 </resources>

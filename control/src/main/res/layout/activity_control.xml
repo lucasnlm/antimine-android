@@ -82,7 +82,7 @@
                 app:thumbStrokeColor="?colorAccent"
                 app:tickVisible="false"
                 app:trackColorActive="?colorAccent"
-                app:trackHeight="12dp" />
+                app:trackHeight="8dp" />
 
             <TextView
                 android:id="@+id/doubleClickLabel"
@@ -112,7 +112,7 @@
                 app:thumbStrokeColor="?colorAccent"
                 app:tickVisible="false"
                 app:trackColorActive="?colorAccent"
-                app:trackHeight="12dp" />
+                app:trackHeight="8dp" />
 
             <TextView
                 android:id="@+id/touch_sensibility"
@@ -143,7 +143,7 @@
                 app:thumbStrokeColor="?colorAccent"
                 app:tickVisible="false"
                 app:trackColorActive="?colorAccent"
-                app:trackHeight="12dp" />
+                app:trackHeight="8dp" />
 
             <TextView
                 android:id="@+id/hapticLevelLabel"
@@ -174,7 +174,7 @@
                 app:thumbStrokeColor="?colorAccent"
                 app:tickVisible="false"
                 app:trackColorActive="?colorAccent"
-                app:trackHeight="12dp" />
+                app:trackHeight="8dp" />
 
             <TextView
                 android:id="@+id/toggleButtonTopBarLabel"
@@ -185,7 +185,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:paddingHorizontal="8dp"
-                android:paddingVertical="16dp"
+                android:paddingVertical="8dp"
                 android:text="@string/toggle_button_top"
                 android:textColor="?attr/colorControlNormal"
                 android:textSize="15sp"
@@ -211,7 +211,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:paddingHorizontal="8dp"
-                android:paddingVertical="16dp"
+                android:paddingVertical="8dp"
                 android:text="@string/left_handed"
                 android:textColor="?attr/colorControlNormal"
                 android:textSize="15sp"

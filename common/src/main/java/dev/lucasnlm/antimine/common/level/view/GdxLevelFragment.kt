@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.common.level.view
 
-import android.content.res.ColorStateList
 import android.content.res.Resources.getSystem
 import android.os.Bundle
 import android.view.Gravity
@@ -8,24 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.appcompat.widget.TooltipCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.postDelayed
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.IAppVersionManager
 import dev.lucasnlm.antimine.core.dpToPx
+import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
 import dev.lucasnlm.antimine.gdx.models.RenderQuality
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.ICrashReporter
 import kotlinx.coroutines.delay
@@ -45,7 +41,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     private val crashReporter: ICrashReporter by inject()
     private val appVersionManager: IAppVersionManager by inject()
 
-    private var controlSwitcher: ExtendedFloatingActionButton? = null
+    private var controlSwitcher: SwitchButtonView? = null
 
     private val levelApplicationListener by lazy {
         GameApplicationListener(
@@ -83,7 +79,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val config = AndroidApplicationConfiguration().apply {
-            numSamples = 2
+            numSamples = 0
             useAccelerometer = false
             useCompass = false
             useGyroscope = false
@@ -184,21 +180,19 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
 
     private fun setOpenControlSwitcherIcon() {
         controlSwitcher?.apply {
-            contentDescription = getString(R.string.open)
-            TooltipCompat.setTooltipText(this, getString(R.string.open))
+            val palette = themeRepository.getTheme().palette
+            bindAsOpenAction(palette = palette)
             gameViewModel.refreshUseOpenOnSwitchControl(true)
             preferencesRepository.setSwitchControl(true)
-            setIconResource(R.drawable.touch)
         }
     }
 
     private fun setFlagControlSwitcherIcon() {
         controlSwitcher?.apply {
-            contentDescription = getString(R.string.flag_tile)
-            TooltipCompat.setTooltipText(this, getString(R.string.flag_tile))
+            val palette = themeRepository.getTheme().palette
+            bindAsFlagAction(palette = palette)
             gameViewModel.refreshUseOpenOnSwitchControl(false)
             preferencesRepository.setSwitchControl(false)
-            setIconResource(R.drawable.flag_black)
         }
     }
 
@@ -213,10 +207,10 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     private fun getSwitchControlLayoutParams(): FrameLayout.LayoutParams {
         val context = requireContext()
         return FrameLayout.LayoutParams(
-            context.dpToPx(54),
-            context.dpToPx(48),
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT,
         ).apply {
-            val padding = context.dpToPx(24)
+            val padding = context.dpToPx(16)
             val leftHanded = preferencesRepository.leftHandedMode()
 
             gravity = if (leftHanded) {
@@ -225,20 +219,38 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 GravityCompat.END or Gravity.BOTTOM
             }
 
-            if (leftHanded) {
-                setMargins(
-                    padding + dimensionRepository.horizontalNavigationBarHeight(),
-                    0,
-                    0,
-                    padding + dimensionRepository.verticalNavigationBarHeight()
-                )
+            if (context.isPortrait()) {
+                if (leftHanded) {
+                    setMargins(
+                        padding + dimensionRepository.horizontalNavigationBarHeight(),
+                        0,
+                        0,
+                        padding + dimensionRepository.verticalNavigationBarHeight(),
+                    )
+                } else {
+                    setMargins(
+                        0,
+                        0,
+                        padding + dimensionRepository.horizontalNavigationBarHeight(),
+                        padding + dimensionRepository.verticalNavigationBarHeight(),
+                    )
+                }
             } else {
-                setMargins(
-                    0,
-                    0,
-                    padding + dimensionRepository.horizontalNavigationBarHeight(),
-                    padding + dimensionRepository.verticalNavigationBarHeight()
-                )
+                if (leftHanded) {
+                    setMargins(
+                        padding + dimensionRepository.actionBarSizeWithStatus(),
+                        padding,
+                        padding + dimensionRepository.actionBarSizeWithStatus(),
+                        padding,
+                    )
+                } else {
+                    setMargins(
+                        padding,
+                        padding,
+                        padding,
+                        padding,
+                    )
+                }
             }
         }
     }
@@ -252,7 +264,6 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 } else {
                     controlSwitcher.visibility = View.VISIBLE
                     controlSwitcher.layoutParams = getSwitchControlLayoutParams()
-                    controlSwitcher.shrink()
                 }
             } else {
                 controlSwitcher.visibility = View.GONE
@@ -263,20 +274,17 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                     val isParentFinishing = activity?.isFinishing ?: true
                     if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen && !isParentFinishing) {
                         (view.parent as? FrameLayout)?.apply {
-                            this@GdxLevelFragment.controlSwitcher = ExtendedFloatingActionButton(context).apply {
+                            this@GdxLevelFragment.controlSwitcher = SwitchButtonView(context).apply {
                                 val palette = themeRepository.getTheme().palette
-                                contentDescription = getString(R.string.open)
-                                TooltipCompat.setTooltipText(this, getString(R.string.open))
-                                gameViewModel.refreshUseOpenOnSwitchControl(true)
-                                preferencesRepository.setSwitchControl(true)
-                                backgroundTintList = ColorStateList.valueOf(palette.accent.toAndroidColor(255))
-                                cornerRadius = view.context.dpToPx(10)
-                                if (palette.accent == palette.covered) {
-                                    strokeColor = ColorStateList.valueOf(palette.background.toAndroidColor(255))
-                                    strokeWidth = view.context.dpToPx(1)
+                                if (preferencesRepository.openUsingSwitchControl() || !gameViewModel.isGameStarted()) {
+                                    bindAsOpenAction(palette = palette)
+                                    gameViewModel.refreshUseOpenOnSwitchControl(true)
+                                    preferencesRepository.setSwitchControl(true)
+                                } else {
+                                    bindAsFlagAction(palette = palette)
+                                    gameViewModel.refreshUseOpenOnSwitchControl(false)
                                 }
-                                setIconResource(R.drawable.touch)
-                                elevation = 2f
+
                                 alpha = 0f
                                 animate().apply {
                                     alpha(1.0f)

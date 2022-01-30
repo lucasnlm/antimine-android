@@ -122,4 +122,6 @@
     <string name="progressive">Progressiv</string>
     <string name="highlight_unsolved_numbers">Marker uløste numre</string>
     <string name="left_handed">Venstrehendt</string>
+    <string name="donate_request">Vurder å donere dersom du liker dette spillet.</string>
+    <string name="donate_help">Det bidrar til å holde dette prosjektet aktivt!</string>
 </resources>

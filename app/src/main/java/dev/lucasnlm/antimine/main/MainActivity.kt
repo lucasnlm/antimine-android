@@ -237,7 +237,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         )
 
         removeAds.visibility = View.GONE
-        if (featureFlagManager.isFoos) {
+        if (featureFlagManager.isFoss) {
             removeAds.apply {
                 visibility = View.VISIBLE
                 bind(
