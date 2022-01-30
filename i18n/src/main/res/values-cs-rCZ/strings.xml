@@ -122,6 +122,6 @@
     <string name="progressive">Progresivní</string>
     <string name="highlight_unsolved_numbers">Zvýraznit nevyřešená čísla</string>
     <string name="left_handed">Pro leváky</string>
-    <string name="donate_request">If you like this game, consider making a donation.</string>
-    <string name="donate_help">It will help keep this project active!</string>
+    <string name="donate_request">Pokud se vám hra líbí, zvažte možnost přispět.</string>
+    <string name="donate_help">Pomůžete nám udržet tento projekt aktivní!</string>
 </resources>
