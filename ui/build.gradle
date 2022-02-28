@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -66,7 +66,7 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
 
     // Kotlin Lib
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10'
 
     // Unit Tests
     testImplementation 'junit:junit:4.13.2'

@@ -11,14 +11,14 @@ if (System.getenv('IS_GOOGLE_BUILD')) {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
         versionCode 1506001
         versionName '15.6.0'
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 32
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -155,7 +155,7 @@ dependencies {
 
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
 
     // Tests
