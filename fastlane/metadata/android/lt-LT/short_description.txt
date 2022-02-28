@@ -1,0 +1,1 @@
+Loginis žaidimas, kuriame ieškote paslėptų minų. 

@@ -122,6 +122,6 @@
     <string name="progressive">プログレッシブ</string>
     <string name="highlight_unsolved_numbers">未解決の数字をハイライト表示</string>
     <string name="left_handed">左側を上にする</string>
-    <string name="donate_request">If you like this game, consider making a donation.</string>
-    <string name="donate_help">It will help keep this project active!</string>
+    <string name="donate_request">もしこのゲームが気に入ったら、ぜひご支援の検討をお願いします。</string>
+    <string name="donate_help">このプロジェクトを長く続かせるのに一役買うでしょう！</string>
 </resources>

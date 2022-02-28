@@ -122,6 +122,6 @@
     <string name="progressive">Fortschrittlich</string>
     <string name="highlight_unsolved_numbers">Ungelöste Zahlen hervorheben</string>
     <string name="left_handed">Linkshänder</string>
-    <string name="donate_request">If you like this game, consider making a donation.</string>
-    <string name="donate_help">It will help keep this project active!</string>
+    <string name="donate_request">Wenn dir dieses Spiel gefällt, erwäge eine Spende zu tätigen.</string>
+    <string name="donate_help">Es wird helfen, dieses Projekt aktiv zu halten!</string>
 </resources>

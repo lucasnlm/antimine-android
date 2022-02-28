@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="nl">
     <string name="tutorial">Tutorial</string>
-    <string name="tutorial_basic">De regels van het spel zijn eenvoudig, het aantal op een vierkant toont het aantal mijnen dat er naast ligt en je moet alle mijnen markeren met een vlag.</string>
-    <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After marking your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_basic">De regels van het spel zijn eenvoudig: het getal op een vierkant toont het aantal mijnen dat ernaast ligt, en je moet alle mijnen markeren met een vlag.</string>
+    <string name="tutorial_text_1">Als een nummer hetzelfde aantal vierkanten raakt, zijn de vierkanten allemaal mijnen.</string>
+    <string name="tutorial_text_2">Bekijk nadat je je eerste vlag hebt neergezet, de nummers en analyseer het volgende vierkant.</string>
+    <string name="tutorial_text_3">Als een getal precies dat aantal mijnen raakt, dan is er geen mijn onder de overgebleven aangrenzende vierkanten (de groene pijl).</string>
+    <string name="tutorial_text_4">Bekijk de getallen en blijf vierkanten openen.</string>
     <string name="games">Games</string>
     <string name="tap_to_begin">Tik om te beginnen</string>
     <string name="previous_games">Vorige games</string>
     <string name="minefield">Moeilijkheidsgraad</string>
     <string name="standard">Standaard</string>
     <string name="beginner">Beginner</string>
-    <string name="intermediate">Gevorderd</string>
+    <string name="intermediate">Gemiddeld</string>
     <string name="expert">Expert</string>
     <string name="master">Meester</string>
     <string name="legend">Legende</string>
@@ -36,7 +36,7 @@
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Toegankelijkheid</string>
     <string name="size">Grootte</string>
-    <string name="rounded_square">Afgerond vierkant</string>
+    <string name="rounded_square">Afgeronde hoeken</string>
     <string name="space_between_squares">Ruimte tussen vierkanten</string>
     <string name="system">Systeem</string>
     <string name="sign_in_failed">Aanmelden mislukt. Controleer uw netwerkverbinding en probeer het opnieuw.</string>
@@ -55,11 +55,11 @@
     <string name="open_areas">Open gebieden</string>
     <string name="total_time">Totale Tijd</string>
     <string name="average_time">Gemiddelde Tijd</string>
-    <string name="shortest_time">Kortste Eerst</string>
+    <string name="shortest_time">Kortste tijd</string>
     <string name="performance">Prestatie</string>
     <string name="ok">Oké</string>
     <string name="use_question_mark">Gebruik vraagteken</string>
-    <string name="no_guessing_mode">\'Niet raadgen\' modus</string>
+    <string name="no_guessing_mode">\'Niet-gokken\' modus</string>
     <string name="control">Besturing</string>
     <string name="single_click">Enkele tik</string>
     <string name="double_click">Dubbeltik</string>
@@ -75,11 +75,11 @@
     <string name="help_win_a_game">Voor meer hulp moet je een spel winnen.</string>
     <string name="unknown_error">Onbekende fout.</string>
     <string name="leaderboards">Ranglijsten</string>
-    <string name="cancel">Anneleren</string>
+    <string name="cancel">Annuleren</string>
     <string name="resume">Doorgaan</string>
     <string name="yes">Ja</string>
     <string name="unlock">Ontgrendelen</string>
-    <string name="achievements">Achievements</string>
+    <string name="achievements">Prestaties</string>
     <string name="no">Nee</string>
     <string name="general">Algemeen</string>
     <string name="more">Meer</string>
@@ -98,11 +98,11 @@
     <string name="no_network">Geen internetverbinding.</string>
     <string name="delete_all">Alles verwijderen</string>
     <string name="appearance">Uiterlijk</string>
-    <string name="themes">Themas</string>
+    <string name="themes">Thema\'s</string>
     <string name="delete_all_message">Verwijder alle gebeurtenissen permanent.</string>
     <string name="remove_ad">Verwijder advertenties</string>
     <string name="help">Help</string>
-    <string name="back">Vorige</string>
+    <string name="back">Terug</string>
     <string name="donation">Doneren</string>
     <string name="open_on_game">Open op spelscherm</string>
     <string name="show_windows">Vensters weergeven</string>
@@ -111,7 +111,7 @@
     <string name="switch_control_desc">Gebruik de knop om te wisselen tussen vlag en open</string>
     <string name="app_description">Je moet een rechthoekig bord met verborgen mijnen verwijderen zonder er een te ontploffen.</string>
     <string name="app_name">Antimijn</string>
-    <string name="do_you_know_how_to_play">Weet je hoe he Minesweeper moet spelen?</string>
+    <string name="do_you_know_how_to_play">Weet je hoe je Minesweeper moet spelen?</string>
     <string name="close">Sluiten</string>
     <string name="open_tutorial">Handleiding openen</string>
     <string name="click_numbers">Tikken op getallen toestaan</string>
@@ -122,6 +122,6 @@
     <string name="progressive">Progressief</string>
     <string name="highlight_unsolved_numbers">Onopgeloste nummers markeren</string>
     <string name="left_handed">Linkshandig</string>
-    <string name="donate_request">If you like this game, consider making a donation.</string>
-    <string name="donate_help">It will help keep this project active!</string>
+    <string name="donate_request">Overweeg een donatie te doen als je dit spel leuk vind.</string>
+    <string name="donate_help">Hierdoor kan het project actief blijven!</string>
 </resources>
