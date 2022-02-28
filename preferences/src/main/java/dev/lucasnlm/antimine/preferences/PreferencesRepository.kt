@@ -179,7 +179,7 @@ class PreferencesRepository(
 
     override fun controlStyle(): ControlStyle {
         val index = preferencesManager.getInt(PreferenceKeys.PREFERENCE_CONTROL_STYLE, -1)
-        return ControlStyle.values().getOrNull(index) ?: ControlStyle.Standard
+        return ControlStyle.values().getOrNull(index) ?: ControlStyle.SwitchMarkOpen
     }
 
     override fun useControlStyle(controlStyle: ControlStyle) {

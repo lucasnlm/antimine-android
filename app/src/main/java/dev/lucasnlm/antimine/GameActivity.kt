@@ -318,7 +318,7 @@ class GameActivity :
                                 delay(it.delayToShow)
                                 GameOverDialogFragment.newInstance(
                                     gameResult = GameResult.GameOver,
-                                    showContinueButton = true,
+                                    showContinueButton = gameViewModel.hasUnknownMines(),
                                     rightMines = it.rightMines,
                                     totalMines = it.totalMines,
                                     time = it.timestamp,

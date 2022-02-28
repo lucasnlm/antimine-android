@@ -42,11 +42,11 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 
     // Google
-    implementation 'com.android.billingclient:billing-ktx:4.0.0'
+    implementation 'com.android.billingclient:billing-ktx:4.1.0'
     implementation 'com.google.android.gms:play-services-instantapps:18.0.1'
     implementation 'com.google.android.gms:play-services-games:22.0.1'
-    implementation 'com.google.android.gms:play-services-auth:20.0.1'
-    implementation 'com.google.android.gms:play-services-ads:20.5.0'
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
+    implementation 'com.google.android.gms:play-services-ads:20.6.0'
     implementation 'com.google.android.play:core-ktx:1.8.1'
 
     // Jetbrains

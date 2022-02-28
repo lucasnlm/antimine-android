@@ -43,10 +43,10 @@ dependencies {
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'androidx.preference:preference-ktx:1.1.1'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.activity:activity-ktx:1.4.0'
-    implementation 'androidx.fragment:fragment-ktx:1.4.0'
+    implementation 'androidx.fragment:fragment-ktx:1.4.1'
 
     // Google
     implementation 'com.google.android.material:material:1.5.0'
@@ -63,10 +63,10 @@ dependencies {
     testImplementation 'io.insert-koin:koin-test:3.1.2'
 
     // Room
-    api 'androidx.room:room-runtime:2.4.1'
-    api 'androidx.room:room-ktx:2.4.1'
-    kapt 'androidx.room:room-compiler:2.4.1'
-    testImplementation 'androidx.room:room-testing:2.4.1'
+    api 'androidx.room:room-runtime:2.4.2'
+    api 'androidx.room:room-ktx:2.4.2'
+    kapt 'androidx.room:room-compiler:2.4.2'
+    testImplementation 'androidx.room:room-testing:2.4.2'
 
     // Moshi - Json
     api 'com.squareup.moshi:moshi:1.11.0'

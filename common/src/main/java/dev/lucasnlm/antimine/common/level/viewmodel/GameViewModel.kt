@@ -122,8 +122,10 @@ open class GameViewModel(
             is GameEvent.EngineReady -> {
                 emit(state.copy(isLoadingMap = false))
 
-                if (!state.isGameCompleted && state.hasMines && !state.isLoadingMap && !gameController.hasOpenMines()) {
-                    runClock()
+                if (!state.isGameCompleted && state.hasMines && !state.isLoadingMap) {
+                    if (!gameController.isGameOver() && !gameController.isVictory()) {
+                        runClock()
+                    }
                 } else {
                     stopClock()
                 }
@@ -153,7 +155,7 @@ open class GameViewModel(
 
                 if (!wasCompleted) {
                     when {
-                        isVictory -> {
+                        isVictory && !gameController.hadMistakes() -> {
                             onVictory()
                             newState = newState.copy(field = gameController.field())
 
@@ -196,7 +198,7 @@ open class GameViewModel(
                     }
                 }
 
-                if (!newState.isGameCompleted && hasMines && !newState.isLoadingMap) {
+                if (!wasCompleted && hasMines && !newState.isLoadingMap) {
                     runClock()
                 } else {
                     stopClock()
@@ -287,7 +289,7 @@ open class GameViewModel(
             field = gameController.field(),
             tips = tipRepository.getTotalTips(),
             isGameCompleted = isCompletedWithMistakes(),
-            isActive = !gameController.isGameOver(),
+            isActive = !gameController.allMinesFound(),
             hasMines = true,
             useHelp = preferencesRepository.useHelp(),
             isLoadingMap = true,
@@ -365,6 +367,7 @@ open class GameViewModel(
     private suspend fun onContinueFromGameOver() {
         if (initialized) {
             gameController.increaseErrorTolerance()
+            gameController.dismissMistake()
             statsRepository.deleteLastStats()
             analyticsManager.sentEvent(
                 Analytics.ContinueGameAfterGameOver(gameController.getErrorTolerance())
@@ -583,7 +586,7 @@ open class GameViewModel(
     private fun explosionDelay() = if (preferencesRepository.useAnimations()) 400L else 0L
 
     fun hasUnknownMines(): Boolean {
-        return !gameController.hasIsolatedAllMines()
+        return !gameController.hasIsolatedAllMines() && gameController.remainingMines() > 1
     }
 
     fun revealMines() {

@@ -28,6 +28,11 @@ class MinefieldHandler(
             .forEach { field[it.id] = it.copy(isCovered = false) }
     }
 
+    fun dismissMistake() {
+        field.filter { it.hasMine && it.mistake }
+            .forEach { field[it.id] = it.copy(mistake = false) }
+    }
+
     fun revealRandomMineNearUncoveredArea(lastX: Int? = null, lastY: Int? = null): Boolean {
         val unrevealedMines = field.filter { it.hasMine && it.mark.isNone() && !it.revealed }
         val nearestTarget = if (lastX != null && lastY != null) {

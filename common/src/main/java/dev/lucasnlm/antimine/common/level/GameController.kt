@@ -294,7 +294,7 @@ class GameController {
 
     fun hasAnyMineExploded(): Boolean = mines().firstOrNull { it.mistake } != null
 
-    private fun explodedMinesCount(): Int = mines().count { it.mistake }
+    private fun explodedMinesCount(): Int = mines().count { !it.isCovered && it.hasMine }
 
     fun hasFlaggedAllMines(): Boolean = rightFlags() == minefield.mines
 
@@ -310,8 +310,9 @@ class GameController {
     fun isGameOver(): Boolean =
         hasIsolatedAllMines() || (explodedMinesCount() > errorTolerance)
 
-    fun hasOpenMines(): Boolean =
-        mines().firstOrNull { it.hasMine && !it.isCovered } != null
+    fun allMinesFound(): Boolean {
+        return mines().count { !it.isCovered || it.mark.isNotNone() } == mines().count()
+    }
 
     fun remainingMines(): Int {
         val flagsCount = field.count { it.isCovered && it.mark.isFlag() }
@@ -353,6 +354,12 @@ class GameController {
 
     fun increaseErrorTolerance(value: Int = 1) {
         errorTolerance += value
+    }
+
+    fun dismissMistake() {
+        val minefieldHandler = MinefieldHandler(field.toMutableList(), useQuestionMark)
+        minefieldHandler.dismissMistake()
+        field = minefieldHandler.result()
     }
 
     fun getErrorTolerance(): Int = errorTolerance
