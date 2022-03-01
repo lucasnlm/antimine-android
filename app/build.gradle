@@ -18,7 +18,7 @@ android {
         versionCode 1507001
         versionName '15.7.0'
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 31
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
