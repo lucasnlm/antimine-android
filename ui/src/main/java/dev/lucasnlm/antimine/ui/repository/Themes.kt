@@ -60,7 +60,7 @@ object Themes {
             accent = 0xFFFFFF,
             background = 0x000000,
             covered = 0x616161,
-            coveredOdd = 616161,
+            coveredOdd = 0x616161,
             uncovered = 0x000000,
             uncoveredOdd = 0x050505,
             minesAround1 = 0xCCCCCC,
