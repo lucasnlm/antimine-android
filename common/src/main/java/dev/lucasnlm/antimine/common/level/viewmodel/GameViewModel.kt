@@ -123,7 +123,11 @@ open class GameViewModel(
                 emit(state.copy(isLoadingMap = false))
 
                 if (!state.isGameCompleted && state.hasMines && !state.isLoadingMap) {
-                    if (!gameController.isGameOver() && !gameController.isVictory() && gameController.remainingMines() > 1) {
+                    if (
+                        !gameController.isGameOver() &&
+                        !gameController.isVictory() &&
+                        gameController.remainingMines() > 1
+                    ) {
                         runClock()
                     }
                 } else {
