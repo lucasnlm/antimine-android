@@ -83,8 +83,6 @@ sealed class Analytics(
 
     object OpenAbout : Analytics("Open About")
 
-    object MoreGames : Analytics("Open More Games")
-
     object OpenStats : Analytics("Open Stats")
 
     object OpenTranslations : Analytics("Open Translations")

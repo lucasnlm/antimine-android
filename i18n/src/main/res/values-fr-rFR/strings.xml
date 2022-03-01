@@ -3,7 +3,7 @@
     <string name="tutorial">Tutoriel</string>
     <string name="tutorial_basic">La règle du jeu est simple, le nombre sur un carré indique le nombre de mines adjacentes et vous devez marquer toutes les mines.</string>
     <string name="tutorial_text_1">Si un nombre touche le même nombre de carrés, alors les carrés sont tous des mines.</string>
-    <string name="tutorial_text_2">Après avoir marqué votre premier drapeau, passez en revue les chiffres et analysez le carré suivant.</string>
+    <string name="tutorial_text_2">Après avoir placé votre premier drapeau, examinez les chiffres et analysez le carré suivant.</string>
     <string name="tutorial_text_3">Si un carré a le même nombre de drapeaux, tous les autres carrés restants adjacents ne sont pas des mines (la flèche verte).</string>
     <string name="tutorial_text_4">Examinez les chiffres et gardez les cases ouvertes.</string>
     <string name="games">Jeux</string>

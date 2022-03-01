@@ -1,0 +1,49 @@
+Išbandykite savo mąstymo galią loginiame žaidime, kuriame turite išvalyti minų lauką nesprogdinę minos.
+Tai yra minimalistinė ir šiuolaikinė klasikinio Išminuotojo versija.
+
+Ar sugebėsite išvalyti minų lauką? Pirmyn!
+
+UŽDUOTIS
+Tai yra kaip Išminuotojas. Žaidimą laimite pažymėję kiekvieną miną vėliavėle. Būkite atsargūs, kad jų nesusprogdintumėte!
+
+BE SPĖLIOJIMŲ
+Šis žaidimas turi algoritmą, sukuriantį išsprendžiamus minų laukus. Nereikės spėlioti, kur yra paskutinė mina!
+
+ŽAIDIMO LYGIAI
+Kaip ir Išminuotojas, šis žaidimas turi skirtingus lygius: naujokas, vidutinis ir ekspertas. Tačiau jis turi unikalų progresyvų režimą, kuris tampa sunkesnis su kiekviena pergale.
+
+TINKINTAS LYGIS
+Jei nepakanka standartinių režimų, galite sukurti savo sunkumo lygį!
+
+TEMOS
+Antimine turi daugiau nei 15 temų (įskaitant šviesią, tamsią ir AMOLED). Ir greitai bus pridėta daugiau!
+
+MINIMALIZMAS
+Paprasta išvaizda ir pojūtis: minimalistinis vaizdas ir nedidelis programėlės dydis (mažiau nei 9 MB).
+
+APMOKYMAS
+Nemokate žaisti Išminuotojo? Jokių problemų, galite žaisti mūsų apmokymo lygį ir įjungti patarimus nustatymuose.
+
+STATISTIKA
+Patikrinkite savo rezultatus ir progresą.
+
+PADĖJĖJAS
+Žaidimas automatiškai pažymės jūsų atskirtus kvadratus. 
+
+TINKINIMAS
+Galite keisti žaidimą pagal savo skonį. 
+Pavyzdžiui: pagalba, animacijos, vibracija, klaustukas.
+
+VALDYMAS
+Palaikomos keturios skirtingos valdymo schemos. Pavyzdžiui: pažymėjimas vėliavėle su bakstelėjimu arba ilgu spustelėjimu.
+
+PASIEKIMAI IR LYDERIŲ LENTELĖS 
+Galite atrakinti aštuonis pasiekimus ir dalintis lyderių lentelėmis su draugais.
+
+PRIJUNGTIS AR ATJUNGTIS
+Nereikia turėti interneto ryšio, kad galėtumėte žaisti!
+
+AUTOMATINIS IŠSAUGOJIMAS
+Galite pradėti žaidimą ir tęsti vėliau! Žaidimas automatiškai išsaugo jūsų progresą.
+
+Mėgaukites.

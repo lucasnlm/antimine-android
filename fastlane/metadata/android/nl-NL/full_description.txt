@@ -1,4 +1,4 @@
-Test je redeneringskrachtinp een uitdagend puzzelspel waar je een mijnenveld moet oplossen zonder een mijn te laten exploderen.
+Test je redeneringskracht in een uitdagend puzzelspel waar je de plekken zonder mijn moet markeren, zonder een mijn te laten exploderen.
 Dit is een minimalistische en moderne versie van de klassieker Mijnenveger.
 
 Kan je een mijnenveld opruimen? Aan de slag!
@@ -16,7 +16,7 @@ AANGEPAST NIVEAU
 Als de standaard modi niet genoeg zijn, kan je je eigen moeilijkheid creëren!
 
 THEMA'S
-Antimine heeft meer dan 15 thema's (inclusief licht, donker en AMOLED). En binnenkort worden er nog meer toegevoegd!
+Antimijn heeft meer dan 15 thema's (inclusief licht, donker en AMOLED). En binnenkort worden er nog meer toegevoegd!
 
 MINIMALIST
 Strakke look en feel: een minimalistische visuele en ook lichtgewichte app (minder dan 9MB).

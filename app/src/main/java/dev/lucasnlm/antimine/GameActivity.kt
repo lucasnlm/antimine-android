@@ -47,7 +47,6 @@ import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay

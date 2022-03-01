@@ -9,11 +9,11 @@ if (System.getenv('IS_GOOGLE_BUILD')) {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 32
     }
 
     buildTypes {
@@ -53,7 +53,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.1'
 
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+    implementation platform('com.google.firebase:firebase-bom:29.1.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-firestore-ktx'
@@ -63,7 +63,7 @@ dependencies {
 
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
 
     // Koin

@@ -47,7 +47,7 @@ class SwitchButtonView : FrameLayout {
             }
         }
 
-        val iconColor = palette.covered.toOppositeMax(0.9f)
+        val iconColor = palette.accent.toOppositeMax(0.9f)
         icon.apply {
             setImageResource(R.drawable.touch)
             imageTintList = ColorStateList.valueOf(iconColor.toIntBits())

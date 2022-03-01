@@ -121,7 +121,7 @@
     <string name="fixed_size">Sabit Boyut</string>
     <string name="progressive">İlerleme</string>
     <string name="highlight_unsolved_numbers">Çözülmemiş sayıları vurgula</string>
-    <string name="left_handed">Solak Modu</string>
-    <string name="donate_request">If you like this game, consider making a donation.</string>
-    <string name="donate_help">It will help keep this project active!</string>
+    <string name="left_handed">Solak Mod</string>
+    <string name="donate_request">Eğer oyunu beğendiyseniz, bağış yapmayı unutmayın.</string>
+    <string name="donate_help">Projeyi ayakta tutmamıza yardımcı olacaktır!</string>
 </resources>
