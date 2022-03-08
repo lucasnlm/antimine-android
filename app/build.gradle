@@ -15,8 +15,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1507001
-        versionName '15.7.0'
+        versionCode 1507011
+        versionName '15.7.1'
         minSdkVersion 21
         targetSdkVersion 31
         multiDexEnabled true

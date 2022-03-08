@@ -6,6 +6,7 @@ import android.util.LayoutDirection
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.layoutDirection
+import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
@@ -37,6 +38,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
 
@@ -667,7 +669,9 @@ open class GameViewModel(
         }
 
         if (clock.time() < 30L) {
-            playGamesManager.unlockAchievement(Achievement.ThirtySeconds)
+            withContext(Dispatchers.Main) {
+                playGamesManager.unlockAchievement(Achievement.ThirtySeconds)
+            }
         }
 
         checkVictoryAchievements()
@@ -701,7 +705,9 @@ open class GameViewModel(
     private suspend fun checkVictoryAchievements() = with(gameController) {
         state.field.count { it.mark.isFlag() }.also {
             if (it > 0) {
-                playGamesManager.unlockAchievement(Achievement.Flags)
+                withContext(Dispatchers.Main) {
+                    playGamesManager.incrementAchievement(Achievement.Flags, it)
+                }
             }
         }
 
@@ -735,39 +741,52 @@ open class GameViewModel(
             statsRepository.getAllStats(0).count {
                 it.victory == 1
             }.also {
-                if (it >= 20) {
-                    playGamesManager.incrementAchievement(Achievement.Beginner)
-                }
+                if (it > 0) {
+                    viewModelScope.launch(Dispatchers.Main) {
+                        playGamesManager.setAchievementSteps(Achievement.Beginner, it)
+                    }
 
-                if (it >= 50) {
-                    playGamesManager.incrementAchievement(Achievement.Intermediate)
-                }
+                    viewModelScope.launch(Dispatchers.Main) {
+                        playGamesManager.setAchievementSteps(Achievement.Intermediate, it)
+                    }
 
-                if (it >= 100) {
-                    playGamesManager.incrementAchievement(Achievement.Expert)
+                    viewModelScope.launch(Dispatchers.Main) {
+                        playGamesManager.setAchievementSteps(Achievement.Expert, it)
+                    }
                 }
             }
         }
     }
 
     private fun checkGameOverAchievements() = with(gameController) {
-        if (getActionsCount() < 3) {
-            playGamesManager.unlockAchievement(Achievement.NoLuck)
-        }
-
-        if (almostAchievement()) {
-            playGamesManager.unlockAchievement(Achievement.Almost)
-        }
-
-        state.field.count { it.mark.isFlag() }.also {
-            if (it > 0) {
-                playGamesManager.incrementAchievement(Achievement.Flags)
+        viewModelScope.launch {
+            if (getActionsCount() < 3) {
+                withContext(Dispatchers.Main) {
+                    playGamesManager.unlockAchievement(Achievement.NoLuck)
+                }
             }
-        }
 
-        state.field.count { it.hasMine && it.mistake }.also {
-            if (it > 0) {
-                playGamesManager.incrementAchievement(Achievement.Boom)
+            if (almostAchievement()) {
+                withContext(Dispatchers.Main) {
+                    playGamesManager.unlockAchievement(Achievement.Almost)
+                }
+            }
+
+            state.field.count { it.mark.isFlag() }.also {
+                if (it > 0) {
+                    withContext(Dispatchers.Main) {
+                        playGamesManager.incrementAchievement(Achievement.Flags, it)
+                    }
+                }
+            }
+
+            state.field.count { it.hasMine && it.mistake }.also {
+                if (it > 0) {
+
+                    withContext(Dispatchers.Main) {
+                        playGamesManager.incrementAchievement(Achievement.Boom, it)
+                    }
+                }
             }
         }
     }

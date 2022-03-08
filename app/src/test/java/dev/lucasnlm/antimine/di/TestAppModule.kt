@@ -60,9 +60,11 @@ val AppModule = module {
 
             override fun openLeaderboards(activity: Activity) {}
 
-            override fun unlockAchievement(achievement: Achievement) {}
+            override suspend fun incrementAchievement(achievement: Achievement, value: Int) {}
 
-            override fun incrementAchievement(achievement: Achievement) {}
+            override suspend fun setAchievementSteps(achievement: Achievement, value: Int) {}
+
+            override suspend fun unlockAchievement(achievement: Achievement) {}
 
             override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) {}
 

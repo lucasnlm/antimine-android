@@ -36,8 +36,9 @@ interface IPlayGamesManager {
     fun isLogged(): Boolean
     fun openAchievements(activity: Activity)
     fun openLeaderboards(activity: Activity)
-    fun unlockAchievement(achievement: Achievement)
-    fun incrementAchievement(achievement: Achievement)
+    suspend fun unlockAchievement(achievement: Achievement)
+    suspend fun incrementAchievement(achievement: Achievement, value: Int)
+    suspend fun setAchievementSteps(achievement: Achievement, value: Int)
     fun submitLeaderboard(leaderboard: Leaderboard, value: Long)
     fun keepRequestingLogin(status: Boolean)
     fun shouldRequestLogin(): Boolean

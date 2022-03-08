@@ -102,7 +102,7 @@ class MinefieldRepositoryTest {
             preferencesRepository
         )
 
-        assertEquals(Minefield(139, 137, 4321), minefield)
+        assertEquals(Minefield(227, 225, 11728), minefield)
     }
 
     @Test
