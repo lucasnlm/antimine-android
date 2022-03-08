@@ -115,15 +115,33 @@ class PlayGamesManager(
         }
     }
 
-    override fun unlockAchievement(achievement: Achievement) {
+    override suspend fun unlockAchievement(achievement: Achievement) {
         account?.let {
-            Games.getAchievementsClient(context, it).unlock(achievement.value)
+            try {
+                Games.getAchievementsClient(context, it).unlockImmediate(achievement.value).await()
+            } catch (e: Exception) {
+                // Ignore
+            }
         }
     }
 
-    override fun incrementAchievement(achievement: Achievement) {
+    override suspend fun incrementAchievement(achievement: Achievement, value: Int) {
         account?.let {
-            Games.getAchievementsClient(context, it).increment(achievement.value, 1)
+            try {
+                Games.getAchievementsClient(context, it).incrementImmediate(achievement.value, value).await()
+            } catch (e: Exception) {
+                // Ignore
+            }
+        }
+    }
+
+    override suspend fun setAchievementSteps(achievement: Achievement, value: Int) {
+        account?.let {
+            try {
+                Games.getAchievementsClient(context, it).setStepsImmediate(achievement.value, value).await()
+            } catch (e: Exception) {
+                // Ignore
+            }
         }
     }
 
