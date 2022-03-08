@@ -781,7 +781,6 @@ open class GameViewModel(
             }
 
             state.field.count { it.hasMine && it.mistake }.also {
-                println("lucasnlm >>> $it")
                 if (it > 0) {
 
                     withContext(Dispatchers.Main) {
