@@ -41,9 +41,7 @@ class MinefieldRepository : IMinefieldRepository {
         val fitWidth = calculatedWidth.coerceAtLeast(MIN_STANDARD_WIDTH)
         val fitHeight = calculatedHeight.coerceAtLeast(MIN_STANDARD_HEIGHT)
         val fieldArea = fitWidth * fitHeight
-        val fitMines =
-            ((fieldArea * CUSTOM_LEVEL_MINE_RATIO).toInt() + progressiveMines)
-                .coerceAtMost((fieldArea * MAX_LEVEL_MINE_RATIO).toInt())
+        val fitMines = ((fieldArea * CUSTOM_LEVEL_MINE_RATIO).toInt() + progressiveMines)
         return Minefield(fitWidth, fitHeight, fitMines)
     }
 
