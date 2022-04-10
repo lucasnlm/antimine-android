@@ -9,7 +9,7 @@ You win the game when you've flagged every mine in the minefield. Be careful not
 
 ### Donate
 
-[![Donate with Bitcoin](https://en.cryptobadges.io/badge/micro/1CG9cyRHkVMW3onjDmXVNzDawnX1ydSWiM)](https://en.cryptobadges.io/donate/1CG9cyRHkVMW3onjDmXVNzDawnX1ydSWiM) [![Donate with Ethereum](https://en.cryptobadges.io/badge/micro/0x8982aA55e7CEB31691854A8f2CD8F2203dC5543c)](https://en.cryptobadges.io/donate/0x8982aA55e7CEB31691854A8f2CD8F2203dC5543c) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=49XX9XDNUV4SW)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=49XX9XDNUV4SW)
 
 ### Contributing
 
