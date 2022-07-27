@@ -122,6 +122,6 @@
     <string name="progressive">Progressiv</string>
     <string name="highlight_unsolved_numbers">Markera olösta tal</string>
     <string name="left_handed">Vänsterhänt</string>
-    <string name="donate_request">If you like this game, consider making a donation.</string>
-    <string name="donate_help">It will help keep this project active!</string>
+    <string name="donate_request">Om du gillar spelet, överväg om du vill göra en donation.</string>
+    <string name="donate_help">Det kommer hjälpa till att hålla projektet aktivt!</string>
 </resources>

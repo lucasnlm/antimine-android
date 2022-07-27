@@ -1,1 +1,1 @@
-Minesweeper - Antimine
+踩地雷 (掃雷) - Antimine

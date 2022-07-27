@@ -45,11 +45,11 @@ class AdMobAdsManager(
             initialized = true
 
             MobileAds.initialize(context) {
-                val hasProvider = it.adapterStatusMap.count { provider ->
+                val providerCount = it.adapterStatusMap.count { provider ->
                     provider.value.initializationState == AdapterStatus.State.READY
-                } != 0
+                }
 
-                if (hasProvider) {
+                if (providerCount != 0) {
                     preloadAds()
                 } else {
                     initialized = false
@@ -214,12 +214,10 @@ class AdMobAdsManager(
                 onDismiss.invoke()
             }
 
-            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                adError?.let {
-                    crashReporter.sendError(
-                        "Fail to show InterstitialAd \nCode:${it.code} \nMessage: ${it.message} \nCause: ${it.cause}"
-                    )
-                }
+            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                crashReporter.sendError(
+                    "Fail to show InterstitialAd \nCode:${adError.code} \nMessage: ${adError.message} \nCause: ${adError.cause}"
+                )
                 (onError ?: onDismiss).invoke()
             }
 
@@ -234,12 +232,10 @@ class AdMobAdsManager(
                 onDismiss.invoke()
             }
 
-            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                adError?.let {
-                    crashReporter.sendError(
-                        "Fail to show InterstitialAd \nCode:${it.code} \nMessage: ${it.message} \nCause: ${it.cause}"
-                    )
-                }
+            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                crashReporter.sendError(
+                    "Fail to show InterstitialAd \nCode:${adError.code} \nMessage: ${adError.message} \nCause: ${adError.cause}"
+                )
                 (onError ?: onDismiss).invoke()
             }
 
@@ -277,13 +273,14 @@ class AdMobAdsManager(
         }
     }
 
+    @Suppress("UsePropertyAccessSyntax")
     override fun createBannerAd(context: Context): View? {
         return if (featureFlagManager.isHexBannerEnabled) {
             getHexBanner()
         } else {
             val adRequest = AdRequest.Builder().build()
             AdView(context).apply {
-                adSize = AdSize.SMART_BANNER
+                setAdSize(AdSize.BANNER)
                 adUnitId = Ads.BannerAd
                 loadAd(adRequest)
             }

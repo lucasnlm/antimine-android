@@ -1,0 +1,49 @@
+Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
+This is a minimalist and modern version of the classic Minesweeper.
+
+Are you able to clear a minefield? Let’s go!
+
+OBJECTIVE
+It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
+
+NO GUESSING
+This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
+
+GAME LEVELS
+Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
+
+CUSTOM LEVEL
+If the standard modes aren't enough, you can create your level difficulty!
+
+THEMES
+Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+
+MINIMALIST
+Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+
+TUTORIAL
+Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+
+STATISTICS
+Check your results and development.
+
+GAME ASSISTANT
+The game will automatically flag the squares you isolated. 
+
+CUSTOMIZATION
+You can change the game to make it like you want to. 
+Example: Help, animations, haptic feedback, question mark.
+
+CONTROLS
+It supports four different control schemes. Example: flag using tap or long press.
+
+ACHIEVEMENTS AND LEADERBOARDS 
+You have eight achievements to unlock and different leaderboards to share with your friends.
+
+ONLINE OR OFFLINE
+You don't need to be online to play the game!
+
+AUTO-SAVE
+You can start a game and continue it later! It will auto-save your game.
+
+අත්විඳින්න.
