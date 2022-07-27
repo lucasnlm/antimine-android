@@ -167,6 +167,7 @@ class GameController {
                         }
                     }
                 }
+                else -> {}
             }
         }
 
