@@ -216,7 +216,12 @@ class AdMobAdsManager(
 
             override fun onAdFailedToShowFullScreenContent(adError: AdError) {
                 crashReporter.sendError(
-                    "Fail to show InterstitialAd \nCode:${adError.code} \nMessage: ${adError.message} \nCause: ${adError.cause}"
+                    listOf(
+                        "Fail to show InterstitialAd",
+                        "Code: ${adError.code}",
+                        "Message: ${adError.message}",
+                        "Cause: ${adError.cause}",
+                    ).joinToString("\n")
                 )
                 (onError ?: onDismiss).invoke()
             }
@@ -234,7 +239,12 @@ class AdMobAdsManager(
 
             override fun onAdFailedToShowFullScreenContent(adError: AdError) {
                 crashReporter.sendError(
-                    "Fail to show InterstitialAd \nCode:${adError.code} \nMessage: ${adError.message} \nCause: ${adError.cause}"
+                    listOf(
+                        "Fail to show InterstitialAd",
+                        "Code: ${adError.code}",
+                        "Message: ${adError.message}",
+                        "Cause: ${adError.cause}",
+                    ).joinToString("\n")
                 )
                 (onError ?: onDismiss).invoke()
             }
