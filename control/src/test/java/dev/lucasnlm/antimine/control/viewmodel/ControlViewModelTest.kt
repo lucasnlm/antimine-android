@@ -54,8 +54,8 @@ class ControlViewModelTest {
         val viewModel = ControlViewModel(preferenceRepository, hapticFeedbackManager)
         viewModel.sendEvent(
             ControlEvent.SelectControlStyle(
-                ControlStyle.FastFlag
-            )
+                ControlStyle.FastFlag,
+            ),
         )
         assertEquals(ControlStyle.FastFlag, viewModel.singleState().selected)
         verify { preferenceRepository.useControlStyle(ControlStyle.FastFlag) }

@@ -30,6 +30,6 @@ fun AreaPalette.minesAround(index: Int): Int {
         minesAround5,
         minesAround6,
         minesAround7,
-        minesAround8
+        minesAround8,
     )[index]
 }

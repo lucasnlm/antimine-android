@@ -38,7 +38,7 @@ class HistoryAdapter(
                 Difficulty.Legend -> R.string.legend
                 Difficulty.Custom -> R.string.custom
                 Difficulty.FixedSize -> R.string.fixed_size
-            }
+            },
         )
 
         val context = holder.itemView.context

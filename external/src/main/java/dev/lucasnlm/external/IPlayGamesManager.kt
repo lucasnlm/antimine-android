@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 
 enum class Achievement(
-    val value: String
+    val value: String,
 ) {
     NoLuck(""),
     Almost(""),
@@ -17,7 +17,7 @@ enum class Achievement(
 }
 
 enum class Leaderboard(
-    val value: String
+    val value: String,
 ) {
     BeginnerBestTime(""),
     IntermediateBestTime(""),

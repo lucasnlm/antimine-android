@@ -45,7 +45,7 @@ class PreferencesRepository(
         Minefield(
             getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_WIDTH, 9),
             getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_HEIGHT, 9),
-            getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_MINES, 9)
+            getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_MINES, 9),
         )
     }
 

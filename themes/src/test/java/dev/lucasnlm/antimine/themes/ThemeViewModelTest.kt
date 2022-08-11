@@ -54,7 +54,7 @@ class ThemeViewModelTest {
             minesAround7 = 0x66126B,
             minesAround8 = 0x000000,
             highlight = 0x212121,
-            focus = 0xD32F2F
+            focus = 0xD32F2F,
         ),
     )
 
@@ -77,7 +77,7 @@ class ThemeViewModelTest {
             minesAround7 = 0xd5d2cc,
             minesAround8 = 0xd5d2cc,
             highlight = 0xFFFFFF,
-            focus = 0xFFFFFF
+            focus = 0xFFFFFF,
         ),
     )
 
@@ -100,14 +100,14 @@ class ThemeViewModelTest {
             minesAround7 = 0x66126B,
             minesAround8 = 0x000000,
             highlight = 0xFFFFFF,
-            focus = 0xFFFFFF
+            focus = 0xFFFFFF,
         ),
     )
 
     private val allThemes = listOf(
         lightTheme,
         darkTheme,
-        gardenTheme
+        gardenTheme,
     )
 
     @Test

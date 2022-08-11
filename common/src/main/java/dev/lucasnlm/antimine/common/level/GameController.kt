@@ -238,7 +238,7 @@ class GameController {
     fun getScore() = Score(
         mines().count { !it.mistake },
         getMinesCount(),
-        field.count()
+        field.count(),
     )
 
     fun getMinesCount() = mines().count()
@@ -385,7 +385,7 @@ class GameController {
                 if (gameStatus == SaveStatus.VICTORY) 1 else 0,
                 minefield.width,
                 minefield.height,
-                mines().count { !it.isCovered }
+                mines().count { !it.isCovered },
             )
         }
     }

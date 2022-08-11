@@ -15,7 +15,7 @@ fun Batch.drawTexture(
     width: Float,
     height: Float,
     blend: Boolean,
-    color: Color? = null
+    color: Color? = null,
 ) {
     if (blend && !isBlendingEnabled) {
         enableBlending()
@@ -32,7 +32,7 @@ fun Batch.drawRegion(
     width: Float,
     height: Float,
     blend: Boolean,
-    color: Color? = null
+    color: Color? = null,
 ) {
     if (blend && !isBlendingEnabled) {
         enableBlending()
@@ -47,7 +47,7 @@ fun Actor.drawAsset(
     texture: TextureRegion,
     color: Color? = null,
     blend: Boolean = true,
-    scale: Float = 1.0f
+    scale: Float = 1.0f,
 ) {
     if (blend && !batch.isBlendingEnabled) {
         batch.enableBlending()
@@ -60,7 +60,7 @@ fun Actor.drawAsset(
             x - width * (scale - 1.0f) * 0.5f,
             y - height * (scale - 1.0f) * 0.5f,
             width * scale,
-            height * scale
+            height * scale,
         )
     }
 }

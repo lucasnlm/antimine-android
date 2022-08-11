@@ -21,7 +21,7 @@ class EndGameDialogViewModel(
 
     private fun List<Int>.safeRandomEmoji(
         @DrawableRes except: Int,
-        fallback: Int = R.drawable.emoji_smiling_face_with_sunglasses
+        fallback: Int = R.drawable.emoji_smiling_face_with_sunglasses,
     ) = filter { it != except }
         .ifEmpty { listOf(fallback) }
         .random()

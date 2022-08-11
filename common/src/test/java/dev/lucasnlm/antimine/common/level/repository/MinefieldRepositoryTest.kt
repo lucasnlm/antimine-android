@@ -33,7 +33,7 @@ class MinefieldRepositoryTest {
         val minefield = minefieldRepository.fromDifficulty(
             Difficulty.Standard,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         )
 
         assertEquals(Minefield(99, 96, 1710), minefield)
@@ -55,7 +55,7 @@ class MinefieldRepositoryTest {
         val minefield = minefieldRepository.fromDifficulty(
             Difficulty.Standard,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         )
 
         assertEquals(Minefield(99, 97, 1728), minefield)
@@ -77,7 +77,7 @@ class MinefieldRepositoryTest {
         val minefield = minefieldRepository.fromDifficulty(
             Difficulty.Standard,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         )
 
         assertEquals(Minefield(99, 97, 1778), minefield)
@@ -99,7 +99,7 @@ class MinefieldRepositoryTest {
         val minefield = minefieldRepository.fromDifficulty(
             Difficulty.Standard,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         )
 
         assertEquals(Minefield(227, 225, 11728), minefield)
@@ -114,7 +114,7 @@ class MinefieldRepositoryTest {
         val minefield = minefieldRepository.fromDifficulty(
             Difficulty.Beginner,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         )
         assertEquals(beginnerMinefield, minefield)
     }
@@ -128,7 +128,7 @@ class MinefieldRepositoryTest {
         val minefield = minefieldRepository.fromDifficulty(
             Difficulty.Intermediate,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         )
         assertEquals(intermediateMinefield, minefield)
     }
@@ -142,7 +142,7 @@ class MinefieldRepositoryTest {
         val minefield = minefieldRepository.fromDifficulty(
             Difficulty.Expert,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         )
         assertEquals(expertMinefield, minefield)
     }
@@ -156,7 +156,7 @@ class MinefieldRepositoryTest {
         val minefield = minefieldRepository.fromDifficulty(
             Difficulty.Master,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         )
         assertEquals(masterMinefield, minefield)
     }
@@ -170,7 +170,7 @@ class MinefieldRepositoryTest {
         val minefield = minefieldRepository.fromDifficulty(
             Difficulty.Legend,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         )
         assertEquals(legendMinefield, minefield)
     }
@@ -186,7 +186,7 @@ class MinefieldRepositoryTest {
         val minefield = minefieldRepository.fromDifficulty(
             Difficulty.Custom,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         )
         assertEquals(Minefield(25, 20, 12), minefield)
     }

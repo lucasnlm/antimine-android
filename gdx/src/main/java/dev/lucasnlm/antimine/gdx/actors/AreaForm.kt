@@ -15,7 +15,7 @@ val areaNoForm = AreaForm(
     top = false,
     bottom = false,
     left = false,
-    right = false
+    right = false,
 )
 
 val areaFullForm = AreaForm(

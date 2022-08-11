@@ -28,7 +28,7 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
-import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
@@ -37,7 +37,6 @@ import dev.lucasnlm.external.IInAppUpdateManager
 import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
@@ -66,7 +65,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             text = R.string.start,
             onAction = {
                 viewModel.sendEvent(MainEvent.ContinueGameEvent)
-            }
+            },
         )
 
         lifecycleScope.launch {
@@ -77,7 +76,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                     text = R.string.continue_game,
                     onAction = {
                         viewModel.sendEvent(MainEvent.ContinueGameEvent)
-                    }
+                    },
                 )
             }
         }
@@ -103,7 +102,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             onAction = {
                 newGameShow.visibility = View.GONE
                 difficulties.visibility = View.VISIBLE
-            }
+            },
         )
 
         difficulties.strokeColor = usingTheme.palette.covered.toAndroidColor()
@@ -115,9 +114,9 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             extra = getDifficultyExtra(Difficulty.Standard),
             onAction = {
                 viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Standard)
+                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Standard),
                 )
-            }
+            },
         )
 
         startBeginner.setRadius(5f)
@@ -127,9 +126,9 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             extra = getDifficultyExtra(Difficulty.Beginner),
             onAction = {
                 viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Beginner)
+                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Beginner),
                 )
-            }
+            },
         )
 
         startIntermediate.setRadius(5f)
@@ -139,9 +138,9 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             extra = getDifficultyExtra(Difficulty.Intermediate),
             onAction = {
                 viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Intermediate)
+                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Intermediate),
                 )
-            }
+            },
         )
 
         startExpert.setRadius(5f)
@@ -151,9 +150,9 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             extra = getDifficultyExtra(Difficulty.Expert),
             onAction = {
                 viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Expert)
+                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Expert),
                 )
-            }
+            },
         )
 
         startMaster.setRadius(5f)
@@ -163,9 +162,9 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             extra = getDifficultyExtra(Difficulty.Master),
             onAction = {
                 viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Master)
+                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Master),
                 )
-            }
+            },
         )
 
         startLegend.setRadius(5f)
@@ -175,9 +174,9 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             extra = getDifficultyExtra(Difficulty.Legend),
             onAction = {
                 viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Legend)
+                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Legend),
                 )
-            }
+            },
         )
 
         difficultyDivider1.setBackgroundColor(usingTheme.palette.covered.toAndroidColor())
@@ -190,9 +189,9 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             extra = getDifficultyExtra(Difficulty.FixedSize),
             onAction = {
                 viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.FixedSize)
+                    MainEvent.StartNewGameEvent(difficulty = Difficulty.FixedSize),
                 )
-            }
+            },
         )
 
         startCustom.setRadius(5f)
@@ -202,7 +201,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             onAction = {
                 analyticsManager.sentEvent(Analytics.OpenCustom)
                 viewModel.sendEvent(MainEvent.ShowCustomDifficultyDialogEvent)
-            }
+            },
         )
 
         settings.bind(
@@ -213,7 +212,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                 analyticsManager.sentEvent(Analytics.OpenSettings)
                 val intent = Intent(this, PreferencesActivity::class.java)
                 startActivity(intent)
-            }
+            },
         )
 
         themes.bind(
@@ -223,7 +222,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             onAction = {
                 val intent = Intent(this, ThemeActivity::class.java)
                 startActivity(intent)
-            }
+            },
         )
 
         controls.bind(
@@ -233,7 +232,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             onAction = {
                 analyticsManager.sentEvent(Analytics.OpenControls)
                 viewModel.sendEvent(MainEvent.ShowControlsEvent)
-            }
+            },
         )
 
         removeAds.visibility = View.GONE
@@ -248,7 +247,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                         lifecycleScope.launch {
                             billingManager.charge(this@MainActivity)
                         }
-                    }
+                    },
                 )
             }
         } else {
@@ -274,7 +273,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                     analyticsManager.sentEvent(Analytics.OpenSaveHistory)
                     val intent = Intent(this, HistoryActivity::class.java)
                     startActivity(intent)
-                }
+                },
             )
         } else {
             previousGames.visibility = View.GONE
@@ -287,7 +286,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             onAction = {
                 analyticsManager.sentEvent(Analytics.OpenTutorial)
                 viewModel.sendEvent(MainEvent.StartTutorialEvent)
-            }
+            },
         )
 
         stats.bind(
@@ -298,7 +297,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                 analyticsManager.sentEvent(Analytics.OpenStats)
                 val intent = Intent(this, StatsActivity::class.java)
                 startActivity(intent)
-            }
+            },
         )
 
         about.bind(
@@ -309,7 +308,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                 analyticsManager.sentEvent(Analytics.OpenAbout)
                 val intent = Intent(this, AboutActivity::class.java)
                 startActivity(intent)
-            }
+            },
         )
 
         translation.bind(
@@ -319,7 +318,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             onAction = {
                 analyticsManager.sentEvent(Analytics.OpenTranslations)
                 startActivity(Intent(this, LanguageSelectorActivity::class.java))
-            }
+            },
         )
 
         if (playGamesManager.hasGooglePlayGames()) {
@@ -330,7 +329,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                 onAction = {
                     analyticsManager.sentEvent(Analytics.OpenGooglePlayGames)
                     viewModel.sendEvent(MainEvent.ShowGooglePlayGamesEvent)
-                }
+                },
             )
         } else {
             play_games.visibility = View.GONE
@@ -438,8 +437,10 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                     try {
                         playGamesManager.getLoginIntent()?.let {
                             ActivityCompat.startActivityForResult(
-                                this@MainActivity, it,
-                                RC_GOOGLE_PLAY, null
+                                this@MainActivity,
+                                it,
+                                RC_GOOGLE_PLAY,
+                                null,
                             )
                         }
                     } catch (e: Exception) {
@@ -478,7 +479,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                     lifecycleScope.launch {
                         billingManager.charge(this@MainActivity)
                     }
-                }
+                },
             )
         }
     }

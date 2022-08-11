@@ -118,9 +118,9 @@ class ThemeAdapter(
                         },
                         onError = {
                             activity.showWarning(R.string.no_network)
-                        }
+                        },
                     )
-                }
+                },
             )
         }
     }

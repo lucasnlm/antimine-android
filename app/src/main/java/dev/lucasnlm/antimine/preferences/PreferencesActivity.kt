@@ -7,7 +7,7 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.switchmaterial.SwitchMaterial
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
-import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import kotlinx.android.synthetic.main.activity_preferences.*
 import org.koin.android.ext.android.inject
 
@@ -22,7 +22,7 @@ class PreferencesActivity :
         label: TextView,
         switch: SwitchMaterial,
         checked: Boolean,
-        action: (Boolean) -> Unit
+        action: (Boolean) -> Unit,
     ) {
         label.setOnClickListener {
             switch.apply {
@@ -54,63 +54,63 @@ class PreferencesActivity :
                 if (it && preferenceRepository.getHapticFeedbackLevel() == 0) {
                     preferenceRepository.resetHapticFeedbackLevel()
                 }
-            }
+            },
         )
 
         bindItem(
             label = soundEffectsLabel,
             switch = soundEffects,
             checked = preferenceRepository.isSoundEffectsEnabled(),
-            action = { preferenceRepository.setSoundEffectsEnabled(it) }
+            action = { preferenceRepository.setSoundEffectsEnabled(it) },
         )
 
         bindItem(
             label = showWindowsLabel,
             switch = showWindows,
             checked = preferenceRepository.showWindowsWhenFinishGame(),
-            action = { preferenceRepository.mustShowWindowsWhenFinishGame(it) }
+            action = { preferenceRepository.mustShowWindowsWhenFinishGame(it) },
         )
 
         bindItem(
             label = openDirectlyLabel,
             switch = openDirectly,
             checked = preferenceRepository.openGameDirectly(),
-            action = { preferenceRepository.setOpenGameDirectly(it) }
+            action = { preferenceRepository.setOpenGameDirectly(it) },
         )
 
         bindItem(
             label = useQuestionMarkLabel,
             switch = useQuestionMark,
             checked = preferenceRepository.useQuestionMark(),
-            action = { preferenceRepository.setQuestionMark(it) }
+            action = { preferenceRepository.setQuestionMark(it) },
         )
 
         bindItem(
             label = automaticFlagsLabel,
             switch = automaticFlags,
             checked = preferenceRepository.useFlagAssistant(),
-            action = { preferenceRepository.setFlagAssistant(it) }
+            action = { preferenceRepository.setFlagAssistant(it) },
         )
 
         bindItem(
             label = helpLabel,
             switch = help,
             checked = preferenceRepository.useHelp(),
-            action = { preferenceRepository.setHelp(it) }
+            action = { preferenceRepository.setHelp(it) },
         )
 
         bindItem(
             label = allowClickNumberLabel,
             switch = clickOnNumbers,
             checked = preferenceRepository.allowTapOnNumbers(),
-            action = { preferenceRepository.setAllowTapOnNumbers(it) }
+            action = { preferenceRepository.setAllowTapOnNumbers(it) },
         )
 
         bindItem(
             label = highlightUnsolvedNumbersLabel,
             switch = highlightUnsolvedNumbers,
             checked = preferenceRepository.dimNumbers(),
-            action = { preferenceRepository.setDimNumbers(it) }
+            action = { preferenceRepository.setDimNumbers(it) },
         )
 
         PreferenceManager.getDefaultSharedPreferences(this)
@@ -145,7 +145,7 @@ class PreferencesActivity :
                 endAction = {
                     preferenceRepository.reset()
                     bindToolbar(false)
-                }
+                },
             )
         } else {
             section.bind(
@@ -154,7 +154,7 @@ class PreferencesActivity :
                 startDescription = R.string.back,
                 startAction = {
                     finish()
-                }
+                },
             )
         }
     }

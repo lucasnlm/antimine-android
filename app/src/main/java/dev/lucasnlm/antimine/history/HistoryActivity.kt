@@ -3,7 +3,7 @@ package dev.lucasnlm.antimine.history
 import android.os.Bundle
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.history.views.HistoryFragment
-import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import kotlinx.android.synthetic.main.activity_stats.*
 
 class HistoryActivity : ThematicActivity(R.layout.activity_history) {
@@ -16,7 +16,7 @@ class HistoryActivity : ThematicActivity(R.layout.activity_history) {
             startDescription = R.string.back,
             startAction = {
                 finish()
-            }
+            },
         )
 
         supportFragmentManager.beginTransaction().apply {

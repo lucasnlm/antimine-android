@@ -14,7 +14,7 @@ class FixedMinefieldRepository : IMinefieldRepository {
     override fun fromDifficulty(
         difficulty: Difficulty,
         dimensionRepository: IDimensionRepository,
-        preferencesRepository: IPreferencesRepository
+        preferencesRepository: IPreferencesRepository,
     ) = Minefield(9, 9, 9)
 
     override fun randomSeed(): Long = 200

@@ -12,7 +12,7 @@ class MinefieldCreatorTest {
         val map = creator.create(2)
         assertEquals(
             listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
-            map.map { it.id }.toList()
+            map.map { it.id }.toList(),
         )
     }
 
@@ -26,9 +26,9 @@ class MinefieldCreatorTest {
                 1, 0, 0, 0, 1,
                 1, 0, 0, 0, 1,
                 1, 0, 0, 0, 1,
-                1, 1, 1, 1, 1
+                1, 1, 1, 1, 1,
             ),
-            map.map { if (it.hasMine) 1 else 0 }.toList()
+            map.map { if (it.hasMine) 1 else 0 }.toList(),
         )
         assertEquals(16, map.count { it.hasMine })
     }
@@ -42,9 +42,9 @@ class MinefieldCreatorTest {
                 1, 0, 0, 0,
                 1, 0, 0, 0,
                 1, 1, 1, 1,
-                1, 0, 1, 1
+                1, 0, 1, 1,
             ),
-            map.map { if (it.hasMine) 1 else 0 }.toList()
+            map.map { if (it.hasMine) 1 else 0 }.toList(),
         )
     }
 
@@ -57,9 +57,9 @@ class MinefieldCreatorTest {
                 1, 0, 0, 0,
                 1, 0, 0, 0,
                 1, 0, 1, 1,
-                1, 1, 1, 1
+                1, 1, 1, 1,
             ),
-            map.map { if (it.hasMine) 1 else 0 }.toList()
+            map.map { if (it.hasMine) 1 else 0 }.toList(),
         )
     }
 
@@ -72,9 +72,9 @@ class MinefieldCreatorTest {
                 1, 0, 0, 0,
                 1, 0, 0, 0,
                 1, 1, 0, 1,
-                1, 1, 1, 1
+                1, 1, 1, 1,
             ),
-            map.map { if (it.hasMine) 1 else 0 }.toList()
+            map.map { if (it.hasMine) 1 else 0 }.toList(),
         )
     }
 
@@ -87,9 +87,9 @@ class MinefieldCreatorTest {
                 0, 2, 0, 0,
                 0, 5, 3, 2,
                 0, 0, 0, 0,
-                0, 5, 0, 0
+                0, 5, 0, 0,
             ),
-            map.map { it.minesAround }.toList()
+            map.map { it.minesAround }.toList(),
         )
     }
 
@@ -102,9 +102,9 @@ class MinefieldCreatorTest {
                 0, 2, 0, 0,
                 0, 4, 2, 2,
                 0, 6, 0, 0,
-                0, 0, 0, 0
+                0, 0, 0, 0,
             ),
-            map.map { it.minesAround }.toList()
+            map.map { it.minesAround }.toList(),
         )
     }
 
@@ -117,9 +117,9 @@ class MinefieldCreatorTest {
                 0, 2, 0, 0,
                 0, 4, 2, 1,
                 0, 0, 5, 0,
-                0, 0, 0, 0
+                0, 0, 0, 0,
             ),
-            map.map { it.minesAround }.toList()
+            map.map { it.minesAround }.toList(),
         )
     }
 
@@ -132,9 +132,9 @@ class MinefieldCreatorTest {
                 (0 to 0), (1 to 0), (2 to 0), (3 to 0),
                 (0 to 1), (1 to 1), (2 to 1), (3 to 1),
                 (0 to 2), (1 to 2), (2 to 2), (3 to 2),
-                (0 to 3), (1 to 3), (2 to 3), (3 to 3)
+                (0 to 3), (1 to 3), (2 to 3), (3 to 3),
             ),
-            map.map { it.posX to it.posY }.toList()
+            map.map { it.posX to it.posY }.toList(),
         )
     }
 

@@ -38,7 +38,7 @@ open class Clock {
                     }
                 },
                 1000L,
-                1000L
+                1000L,
             )
         }
     }

@@ -71,7 +71,7 @@ class MinefieldHandler(
                         Mark.PurposefulNone, Mark.None -> Mark.Flag
                         Mark.Flag -> if (useQuestionMark) Mark.Question else Mark.None
                         Mark.Question -> Mark.None
-                    }
+                    },
                 )
             }
         }
@@ -83,7 +83,7 @@ class MinefieldHandler(
                 field[index] = copy(
                     isCovered = false,
                     mark = Mark.None,
-                    mistake = (!passive && hasMine) || (!hasMine && mark.isFlag())
+                    mistake = (!passive && hasMine) || (!hasMine && mark.isFlag()),
                 )
 
                 if (!hasMine && minesAround == 0 && openNeighbors) {

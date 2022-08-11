@@ -8,7 +8,7 @@ fun Activity.showWarning(@StringRes text: Int): Snackbar {
     return Snackbar.make(
         findViewById(android.R.id.content),
         getString(text),
-        Snackbar.LENGTH_SHORT
+        Snackbar.LENGTH_SHORT,
     ).apply {
         show()
     }

@@ -5,7 +5,7 @@ import dev.lucasnlm.antimine.common.level.database.converters.SaveStatusConverte
 
 @TypeConverters(SaveStatusConverter::class)
 enum class SaveStatus(
-    val code: Int
+    val code: Int,
 ) {
     // Not finished game.
     ON_GOING(0),

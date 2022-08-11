@@ -8,7 +8,7 @@ import org.junit.Test
 import java.util.Timer
 
 internal class MockClock(
-    private val timer: Timer
+    private val timer: Timer,
 ) : Clock() {
     override fun provideTimer(): Timer = timer
 

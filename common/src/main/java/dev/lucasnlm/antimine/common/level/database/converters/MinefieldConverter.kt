@@ -9,7 +9,7 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 class MinefieldConverter {
     private val moshi: Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
     private val jsonAdapter: JsonAdapter<Minefield> = moshi.adapter(
-        Minefield::class.java
+        Minefield::class.java,
     )
 
     @TypeConverter

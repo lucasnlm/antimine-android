@@ -13,14 +13,14 @@ sealed class Analytics(
         difficulty: Difficulty,
         seed: Long,
     ) : Analytics(
-        "New Game",
-        mapOf(
+        name = "New Game",
+        extra = mapOf(
             "Seed" to seed.toString(),
             "Difficulty Preset" to difficulty.text,
             "Width" to minefield.width.toString(),
             "Height" to minefield.height.toString(),
             "Mines" to minefield.mines.toString(),
-        )
+        ),
     )
 
     class RetryGame(
@@ -29,15 +29,15 @@ sealed class Analytics(
         seed: Long,
         firstOpen: Int,
     ) : Analytics(
-        "Retry Game",
-        mapOf(
+        name = "Retry Game",
+        extra = mapOf(
             "Seed" to seed.toString(),
             "Difficulty Preset" to difficulty.text,
             "Width" to minefield.width.toString(),
             "Height" to minefield.height.toString(),
             "Mines" to minefield.mines.toString(),
-            "First Open" to firstOpen.toString()
-        )
+            "First Open" to firstOpen.toString(),
+        ),
     )
 
     data class ContinueGameAfterGameOver(
@@ -55,24 +55,24 @@ sealed class Analytics(
     class OpenNeighbors(index: Int) : Analytics("Open Neighbors", mapOf("Index" to index.toString()))
 
     class GameOver(time: Long, score: Score) : Analytics(
-        "Game Over",
-        mapOf(
+        name = "Game Over",
+        extra = mapOf(
             "Time" to time.toString(),
             "Right Mines" to score.rightMines.toString(),
             "Total Mines" to score.totalMines.toString(),
-            "Total Area" to score.totalArea.toString()
-        )
+            "Total Area" to score.totalArea.toString(),
+        ),
     )
 
     class Victory(time: Long, score: Score, difficulty: Difficulty) : Analytics(
-        "Victory",
-        mapOf(
+        name = "Victory",
+        extra = mapOf(
             "Time" to time.toString(),
             "Difficulty" to difficulty.text,
             "Right Mines" to score.rightMines.toString(),
             "Total Mines" to score.totalMines.toString(),
-            "Total Area" to score.totalArea.toString()
-        )
+            "Total Area" to score.totalArea.toString(),
+        ),
     )
 
     object Resume : Analytics("Back to the game")

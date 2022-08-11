@@ -9,10 +9,9 @@ import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.about.R
 import dev.lucasnlm.antimine.text.viewmodel.TextEvent
 import dev.lucasnlm.antimine.text.viewmodel.TextViewModel
-import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import kotlinx.android.synthetic.main.activity_text.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,15 +29,15 @@ class TextActivity : ThematicActivity(R.layout.activity_text) {
             startAction = {
                 section.bindText(R.string.about)
                 onBackPressed()
-            }
+            },
         )
 
         lifecycleScope.launchWhenCreated {
             textViewModel.sendEvent(
                 TextEvent.LoadText(
                     title = bundle.getString(TEXT_TITLE, ""),
-                    rawFileRes = bundle.getInt(TEXT_PATH, -1)
-                )
+                    rawFileRes = bundle.getInt(TEXT_PATH, -1),
+                ),
             )
 
             withContext(Dispatchers.Main) {

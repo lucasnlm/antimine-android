@@ -52,7 +52,7 @@ class PlayGamesDialogFragment : AppCompatDialogFragment() {
     }
 
     private class PlayGamesAdapter(
-        private val playGamesViewModel: PlayGamesViewModel
+        private val playGamesViewModel: PlayGamesViewModel,
     ) : BaseAdapter() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val view = if (convertView == null) {

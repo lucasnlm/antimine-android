@@ -117,7 +117,7 @@ open class GameViewModel(
                 runClock()
                 val newState = state.copy(
                     isActive = true,
-                    isGameCompleted = false
+                    isGameCompleted = false,
                 )
                 emit(newState)
             }
@@ -225,7 +225,7 @@ open class GameViewModel(
         val minefield = minefieldRepository.fromDifficulty(
             newDifficulty,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         )
 
         withContext(Dispatchers.IO) {
@@ -268,7 +268,7 @@ open class GameViewModel(
                     minefield,
                     newDifficulty,
                     gameController.seed,
-                )
+                ),
             )
         }
 
@@ -354,8 +354,8 @@ open class GameViewModel(
                 newGameState.minefield,
                 newGameState.difficulty,
                 newGameState.seed,
-                save.firstOpen.toInt()
-            )
+                save.firstOpen.toInt(),
+            ),
         )
     }
 
@@ -376,7 +376,7 @@ open class GameViewModel(
             gameController.dismissMistake()
             statsRepository.deleteLastStats()
             analyticsManager.sentEvent(
-                Analytics.ContinueGameAfterGameOver(gameController.getErrorTolerance())
+                Analytics.ContinueGameAfterGameOver(gameController.getErrorTolerance()),
             )
         }
     }
@@ -432,7 +432,7 @@ open class GameViewModel(
             gameController.let {
                 if (it.hasMines()) {
                     savesRepository.saveGame(
-                        it.getSaveState(state.duration, state.difficulty)
+                        it.getSaveState(state.duration, state.difficulty),
                     )?.let { id ->
                         it.setCurrentSaveId(id.toInt())
                         sendEvent(GameEvent.UpdateSave(id))
@@ -652,8 +652,8 @@ open class GameViewModel(
             Analytics.Victory(
                 clock.time(),
                 getScore(),
-                state.difficulty
-            )
+                state.difficulty,
+            ),
         )
 
         stopClock()
@@ -782,7 +782,6 @@ open class GameViewModel(
 
             state.field.count { it.hasMine && it.mistake }.also {
                 if (it > 0) {
-
                     withContext(Dispatchers.Main) {
                         playGamesManager.incrementAchievement(Achievement.Boom, it)
                     }

@@ -16,17 +16,17 @@ import dev.lucasnlm.antimine.common.level.database.models.Stats
 @Database(
     entities = [
         Save::class,
-        Stats::class
+        Stats::class,
     ],
     version = 8,
-    exportSchema = false
+    exportSchema = false,
 )
 @TypeConverters(
     AreaConverter::class,
     SaveStatusConverter::class,
     MinefieldConverter::class,
     DifficultyConverter::class,
-    FirstOpenConverter::class
+    FirstOpenConverter::class,
 )
 abstract class AppDataBase : RoomDatabase() {
     abstract fun saveDao(): SaveDao

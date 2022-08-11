@@ -51,7 +51,7 @@ sealed class GameControl(
             singleClick = null,
             longPress = ActionResponse.OpenNeighbors,
             doubleClick = null,
-        )
+        ),
     )
 
     object FastFlag : GameControl(
@@ -65,7 +65,7 @@ sealed class GameControl(
             singleClick = ActionResponse.OpenNeighbors,
             longPress = null,
             doubleClick = null,
-        )
+        ),
     )
 
     object DoubleClick : GameControl(
@@ -79,7 +79,7 @@ sealed class GameControl(
             singleClick = ActionResponse.OpenNeighbors,
             longPress = null,
             doubleClick = null,
-        )
+        ),
     )
 
     object DoubleClickInverted : GameControl(
@@ -93,7 +93,7 @@ sealed class GameControl(
             singleClick = ActionResponse.OpenNeighbors,
             longPress = null,
             doubleClick = null,
-        )
+        ),
     )
 
     object SwitchMarkOpen : GameControl(
@@ -107,7 +107,7 @@ sealed class GameControl(
             singleClick = ActionResponse.OpenNeighbors,
             longPress = null,
             doubleClick = null,
-        )
+        ),
     )
 
     companion object {

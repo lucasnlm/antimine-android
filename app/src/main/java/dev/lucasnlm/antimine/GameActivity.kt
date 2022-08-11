@@ -37,7 +37,7 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
-import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.showWarning
 import dev.lucasnlm.external.IAdsManager
@@ -50,7 +50,6 @@ import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
@@ -574,7 +573,7 @@ class GameActivity :
                         lifecycleScope.launch {
                             gameViewModel.startNewGame()
                         }
-                    }
+                    },
                 )
             } else {
                 adsManager.showRewardedAd(
@@ -589,7 +588,7 @@ class GameActivity :
                         lifecycleScope.launch {
                             gameViewModel.startNewGame()
                         }
-                    }
+                    },
                 )
             }
         } else {
@@ -724,7 +723,7 @@ class GameActivity :
         warning = Snackbar.make(
             findViewById(android.R.id.content),
             message,
-            Snackbar.LENGTH_LONG
+            Snackbar.LENGTH_LONG,
         ).apply {
             show()
         }

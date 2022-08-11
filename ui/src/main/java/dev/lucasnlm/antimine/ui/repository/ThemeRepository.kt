@@ -66,6 +66,6 @@ class ThemeRepository(
             minesAround7 = ContextCompat.getColor(context, R.color.mines_around_7),
             minesAround8 = ContextCompat.getColor(context, R.color.mines_around_8),
             highlight = ContextCompat.getColor(context, R.color.highlight),
-            focus = ContextCompat.getColor(context, R.color.accent)
+            focus = ContextCompat.getColor(context, R.color.accent),
         )
 }

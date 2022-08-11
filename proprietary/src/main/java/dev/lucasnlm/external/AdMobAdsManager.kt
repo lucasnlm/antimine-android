@@ -62,7 +62,9 @@ class AdMobAdsManager(
         var rewardedAdRetry = 0
         val adRequest = AdRequest.Builder().build()
         RewardedAd.load(
-            context, Ads.RewardAd, adRequest,
+            context,
+            Ads.RewardAd,
+            adRequest,
             object : RewardedAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     failErrorCause = adError.message
@@ -78,7 +80,7 @@ class AdMobAdsManager(
                     rewardedAd = result
                     rewardedAdRetry = 0
                 }
-            }
+            },
         )
     }
 
@@ -86,7 +88,9 @@ class AdMobAdsManager(
         var rewardedAdRetry = 0
         val adRequest = AdRequest.Builder().build()
         RewardedAd.load(
-            context, Ads.SecondRewardAd, adRequest,
+            context,
+            Ads.SecondRewardAd,
+            adRequest,
             object : RewardedAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     failErrorCause = adError.message
@@ -102,7 +106,7 @@ class AdMobAdsManager(
                     secondRewardedAd = result
                     rewardedAdRetry = 0
                 }
-            }
+            },
         )
     }
 
@@ -110,7 +114,9 @@ class AdMobAdsManager(
         var interstitialAdRetry = 0
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
-            context, Ads.InterstitialAd, adRequest,
+            context,
+            Ads.InterstitialAd,
+            adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     failErrorCause = adError.message
@@ -126,7 +132,7 @@ class AdMobAdsManager(
                     interstitialAd = result
                     interstitialAdRetry = 0
                 }
-            }
+            },
         )
     }
 
@@ -134,7 +140,9 @@ class AdMobAdsManager(
         var interstitialAdRetry = 0
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
-            context, Ads.SecondInterstitialAd, adRequest,
+            context,
+            Ads.SecondInterstitialAd,
+            adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     failErrorCause = adError.message
@@ -150,7 +158,7 @@ class AdMobAdsManager(
                     secondInterstitialAd = result
                     interstitialAdRetry = 0
                 }
-            }
+            },
         )
     }
 
@@ -165,7 +173,7 @@ class AdMobAdsManager(
         activity: Activity,
         skipIfFrequent: Boolean,
         onRewarded: (() -> Unit)?,
-        onFail: (() -> Unit)?
+        onFail: (() -> Unit)?,
     ) {
         if (skipIfFrequent && (System.currentTimeMillis() - lastShownAd < Ads.MIN_FREQUENCY)) {
             onRewarded?.invoke()
@@ -221,7 +229,7 @@ class AdMobAdsManager(
                         "Code: ${adError.code}",
                         "Message: ${adError.message}",
                         "Cause: ${adError.cause}",
-                    ).joinToString("\n")
+                    ).joinToString("\n"),
                 )
                 (onError ?: onDismiss).invoke()
             }
@@ -244,7 +252,7 @@ class AdMobAdsManager(
                         "Code: ${adError.code}",
                         "Message: ${adError.message}",
                         "Cause: ${adError.cause}",
-                    ).joinToString("\n")
+                    ).joinToString("\n"),
                 )
                 (onError ?: onDismiss).invoke()
             }

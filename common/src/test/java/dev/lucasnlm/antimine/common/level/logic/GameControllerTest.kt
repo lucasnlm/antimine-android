@@ -21,7 +21,7 @@ import org.junit.Test
 class GameControllerTest {
     private suspend fun withGameController(
         clickOnCreate: Boolean = true,
-        block: suspend (GameController) -> Unit
+        block: suspend (GameController) -> Unit,
     ) {
         val minefield = Minefield(10, 10, 20)
         val gameController = GameController(
@@ -94,19 +94,19 @@ class GameControllerTest {
             val lastMine = controller.mines().last()
             assertEquals(
                 listOf(95, 85, 74, 73, 65, 88, 55, 91, 45, 52, 90, 47, 59, 42, 36, 32, 39, 28, 4, 3),
-                controller.takeExplosionRadius(lastMine).map { it.id }.toList()
+                controller.takeExplosionRadius(lastMine).map { it.id }.toList(),
             )
 
             val firstMine = controller.mines().first()
             assertEquals(
                 listOf(3, 4, 32, 42, 36, 45, 52, 28, 55, 47, 65, 39, 73, 74, 59, 85, 91, 95, 88, 90),
-                controller.takeExplosionRadius(firstMine).map { it.id }.toList()
+                controller.takeExplosionRadius(firstMine).map { it.id }.toList(),
             )
 
             val midMine = controller.mines().take(controller.getMinesCount() / 2).last()
             assertEquals(
                 listOf(52, 42, 32, 73, 74, 55, 45, 65, 91, 85, 36, 90, 95, 3, 47, 4, 28, 88, 59, 39),
-                controller.takeExplosionRadius(midMine).map { it.id }.toList()
+                controller.takeExplosionRadius(midMine).map { it.id }.toList(),
             )
         }
     }

@@ -40,7 +40,7 @@ class GameInputController(
         initialPointer1: Vector2?,
         initialPointer2: Vector2?,
         pointer1: Vector2?,
-        pointer2: Vector2?
+        pointer2: Vector2?,
     ): Boolean {
         return false
     }

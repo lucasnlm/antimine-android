@@ -122,7 +122,7 @@ class BillingManager(
                     if (hasPremium != null) {
                         val price = Price(
                             hasPremium.price,
-                            false,
+                            offer = false,
                         )
 
                         unlockPrice.tryEmit(price)

@@ -74,7 +74,7 @@ class AboutViewModel(
 
     override fun initialState(): AboutState =
         AboutState(
-            licenses = getLicensesList()
+            licenses = getLicensesList(),
         )
 
     companion object {
