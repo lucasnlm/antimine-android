@@ -25,7 +25,6 @@ import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.ICrashReporter
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -264,6 +263,12 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 } else {
                     controlSwitcher.visibility = View.VISIBLE
                     controlSwitcher.layoutParams = getSwitchControlLayoutParams()
+                    val palette = themeRepository.getTheme().palette
+                    if (preferencesRepository.openUsingSwitchControl()) {
+                        controlSwitcher.bindAsOpenAction(palette = palette)
+                    } else {
+                        controlSwitcher.bindAsFlagAction(palette = palette)
+                    }
                 }
             } else {
                 controlSwitcher.visibility = View.GONE
