@@ -30,6 +30,7 @@ class GameController {
     private var useQuestionMark = true
     private var useOpenOnSwitchControl = true
     private var useClickOnNumbers = true
+    private var letNumbersPutFlag = true
     private var errorTolerance = 0
     private var useSimonTatham = true
 
@@ -144,7 +145,11 @@ class GameController {
                 ActionResponse.OpenNeighbors -> {
                     if (useClickOnNumbers) {
                         this.actions++
-                        minefieldHandler.openOrFlagNeighborsOf(target.id)
+                        if (letNumbersPutFlag) {
+                            minefieldHandler.openOrFlagNeighborsOf(target.id)
+                        } else {
+                            minefieldHandler.openNeighborsOf(target.id)
+                        }
                     }
                 }
                 ActionResponse.OpenOrMark -> {
@@ -408,5 +413,9 @@ class GameController {
 
     fun useOpenOnSwitchControl(useOpen: Boolean) {
         this.useOpenOnSwitchControl = useOpen
+    }
+
+    fun letNumbersPutFlag(enabled: Boolean) {
+        this.letNumbersPutFlag = enabled
     }
 }

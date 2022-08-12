@@ -452,4 +452,12 @@ class PreferencesRepository(
     override fun requestDonation(): Boolean {
         return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_REQUEST_DONATION, true)
     }
+
+    override fun letNumbersAutoFlag(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_LET_NUMBERS_AUTO_FLAG, true)
+    }
+
+    override fun setNumbersAutoFlag(allow: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_LET_NUMBERS_AUTO_FLAG, allow)
+    }
 }

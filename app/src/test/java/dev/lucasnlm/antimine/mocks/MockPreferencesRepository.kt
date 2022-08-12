@@ -184,4 +184,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun setRequestDonation(request: Boolean) {}
 
     override fun requestDonation(): Boolean = true
+
+    override fun letNumbersAutoFlag(): Boolean = true
+
+    override fun setNumbersAutoFlag(allow: Boolean) { }
 }

@@ -122,5 +122,16 @@ class MinefieldHandler(
         }
     }
 
+    fun openNeighborsOf(index: Int) {
+        field.getOrNull(index)?.run {
+            if (!isCovered) {
+                val neighbors = neighborsIds.map { field[it] }
+                neighbors
+                    .filter { it.isCovered && it.mark.isNone() }
+                    .forEach { openAt(it.id, passive = false, openNeighbors = true) }
+            }
+        }
+    }
+
     fun result(): List<Area> = field.toList()
 }

@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.preferences
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.preference.PreferenceManager
 import com.google.android.material.switchmaterial.SwitchMaterial
@@ -103,8 +104,30 @@ class PreferencesActivity :
             label = allowClickNumberLabel,
             switch = clickOnNumbers,
             checked = preferenceRepository.allowTapOnNumbers(),
-            action = { preferenceRepository.setAllowTapOnNumbers(it) },
+            action = {
+                preferenceRepository.setAllowTapOnNumbers(it)
+
+                if (it) {
+                    flagWhenTapOnNumbersLabel.visibility = View.VISIBLE
+                    flagWhenTapOnNumbers.visibility = View.VISIBLE
+                } else {
+                    flagWhenTapOnNumbersLabel.visibility = View.GONE
+                    flagWhenTapOnNumbers.visibility = View.GONE
+                }
+            },
         )
+
+        bindItem(
+            label = flagWhenTapOnNumbersLabel,
+            switch = flagWhenTapOnNumbers,
+            checked = preferenceRepository.letNumbersAutoFlag(),
+            action = { preferenceRepository.setNumbersAutoFlag(it) },
+        )
+
+        if (!preferenceRepository.allowTapOnNumbers()) {
+            flagWhenTapOnNumbersLabel.visibility = View.GONE
+            flagWhenTapOnNumbers.visibility = View.GONE
+        }
 
         bindItem(
             label = highlightUnsolvedNumbersLabel,

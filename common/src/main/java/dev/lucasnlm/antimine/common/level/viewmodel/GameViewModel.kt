@@ -552,6 +552,7 @@ open class GameViewModel(
                 updateGameControl(gameControl)
                 useQuestionMark(preferencesRepository.useQuestionMark())
                 useClickOnNumbers(preferencesRepository.allowTapOnNumbers())
+                letNumbersPutFlag(preferencesRepository.letNumbersAutoFlag())
             }
         }
     }
