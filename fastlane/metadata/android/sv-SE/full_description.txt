@@ -6,7 +6,7 @@ Kan du rensa ett minfält? Nu kör vi!
 MÅL
 Det är som Minesweeper. Du vinner spelet när du har markerat varje mina i fältet med flaggor. Var noga med att inte utlöser en!
 
-NO GUESSING
+INGEN GISSNING
 Detta spel har en algoritm som alltid skapar lösbara minfält. Du behöver inte gissa var den sista minan är!
 
 SPELNIVÅER
