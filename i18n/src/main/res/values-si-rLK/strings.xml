@@ -115,6 +115,7 @@
     <string name="close">වසන්න</string>
     <string name="open_tutorial">නිබන්ධනය විවෘත කරන්න</string>
     <string name="click_numbers">අංක මත තට්ටු කිරීමට ඉඩ දෙන්න</string>
+    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">අභිරුචිකරණයට ඔබන්න</string>
     <string name="toggle_button_top">ඉහළ තීරුවේ \"ටොගල් බොත්තම\" පෙන්වන්න</string>
     <string name="no_guess_fail_warning">වත්මන් බිම්බෝම්බය අනුමාන-නිදහස් නොවිය හැක!</string>

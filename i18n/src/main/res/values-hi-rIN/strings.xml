@@ -115,6 +115,7 @@
     <string name="close">बंद करे</string>
     <string name="open_tutorial">ट्यूटोरियल खोलें</string>
     <string name="click_numbers">नंबरों पर टैप करने दें</string>
+    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">कस्टमाइज़ करने के लिए टैप करें</string>
     <string name="toggle_button_top">शीर्ष पट्टी पर \"टॉगल बटन\" दिखाएं</string>
     <string name="no_guess_fail_warning">वर्तमान माइनफ़ील्ड अनुमान-मुक्त नहीं हो सकता है!</string>

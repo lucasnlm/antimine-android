@@ -115,6 +115,7 @@
     <string name="close">Bezárás</string>
     <string name="open_tutorial">Bemutató megnyitása</string>
     <string name="click_numbers">Koppintás engedélyezése számokon</string>
+    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Koppintson a testreszabáshoz</string>
     <string name="toggle_button_top">Mutassa a Kapcsolót a felső sávon</string>
     <string name="no_guess_fail_warning">A jelenlegi szint lehet nem tipp mentes!</string>

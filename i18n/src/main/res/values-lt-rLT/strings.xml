@@ -115,6 +115,7 @@
     <string name="close">Uždaryti</string>
     <string name="open_tutorial">Atidaryti apmokymą</string>
     <string name="click_numbers">Leisti skaičių bakstelėjimą</string>
+    <string name="flag_when_tap_numbers">Pažymėti vėliavėle bakstelėjus ant skaičiaus</string>
     <string name="tap_to_customize">Bakstelėkite, kad tinkintumėte</string>
     <string name="toggle_button_top">Rodyti perjungimo mygtuką viršutinėje juostoje</string>
     <string name="no_guess_fail_warning">Dabartinis minų laukas gali būti neatspėjamas!</string>
