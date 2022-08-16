@@ -85,7 +85,9 @@ class PreferencesRepository(
     }
 
     override fun squareSize(): Int =
-        preferencesManager.getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50)
+        preferencesManager.getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, defaultSquareSize())
+
+    override fun defaultSquareSize(): Int = 50
 
     override fun setSquareSize(value: Int?) {
         if (value == null) {
@@ -342,8 +344,10 @@ class PreferencesRepository(
     }
 
     override fun squareRadius(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 3)
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, defaultSquareRadius())
     }
+
+    override fun defaultSquareRadius(): Int = 3
 
     override fun setSquareRadius(value: Int?) {
         if (value == null) {
@@ -386,8 +390,10 @@ class PreferencesRepository(
     }
 
     override fun squareDivider(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER, 0)
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER, defaultSquareDivider())
     }
+
+    override fun defaultSquareDivider(): Int = 0
 
     override fun setSquareDivider(value: Int?) {
         if (value == null) {

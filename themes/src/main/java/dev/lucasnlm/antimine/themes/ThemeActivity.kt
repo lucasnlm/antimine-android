@@ -137,6 +137,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
         squareSize.value = (state.squareSize / squareSize.stepSize).toInt() * squareSize.stepSize
         squareDivider.value = (state.squareDivider / squareDivider.stepSize).toInt() * squareDivider.stepSize
         squareRadius.value = (state.squareRadius / squareRadius.stepSize).toInt() * squareRadius.stepSize
+        section.showEndAction(state.hasChangedSize)
     }
 
     private fun bindToolbar() {

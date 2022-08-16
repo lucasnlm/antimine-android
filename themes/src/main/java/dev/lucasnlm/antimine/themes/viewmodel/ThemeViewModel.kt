@@ -21,15 +21,30 @@ class ThemeViewModel(
         when (event) {
             is ThemeEvent.SetSquareSize -> {
                 preferencesRepository.setSquareSize(event.size + 40)
-                emit(state.copy(squareSize = event.size))
+                emit(
+                    state.copy(
+                        squareSize = event.size,
+                        hasChangedSize = hasChangedSize(),
+                    ),
+                )
             }
             is ThemeEvent.SetSquareRadius -> {
                 preferencesRepository.setSquareRadius(event.radius)
-                emit(state.copy(squareRadius = event.radius))
+                emit(
+                    state.copy(
+                        squareRadius = event.radius,
+                        hasChangedSize = hasChangedSize(),
+                    ),
+                )
             }
             is ThemeEvent.SetSquareDivider -> {
                 preferencesRepository.setSquareDivider(event.divider)
-                emit(state.copy(squareDivider = event.divider))
+                emit(
+                    state.copy(
+                        squareDivider = event.divider,
+                        hasChangedSize = hasChangedSize(),
+                    ),
+                )
             }
             is ThemeEvent.ResetTheme -> {
                 preferencesRepository.setSquareRadius(null)
@@ -56,11 +71,18 @@ class ThemeViewModel(
         }
     }
 
+    private fun hasChangedSize(): Boolean {
+        return preferencesRepository.defaultSquareSize() != preferencesRepository.squareSize() ||
+            preferencesRepository.defaultSquareDivider() != preferencesRepository.squareDivider() ||
+            preferencesRepository.defaultSquareRadius() != preferencesRepository.squareRadius()
+    }
+
     override fun initialState() = ThemeState(
         current = themeRepository.getTheme(),
         themes = themeRepository.getAllThemes(),
         squareSize = preferencesRepository.squareSize() - 40,
         squareDivider = preferencesRepository.squareDivider(),
         squareRadius = preferencesRepository.squareRadius(),
+        hasChangedSize = hasChangedSize(),
     )
 }

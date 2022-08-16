@@ -8,4 +8,5 @@ data class ThemeState(
     val squareSize: Int,
     val squareDivider: Int,
     val themes: List<AppTheme>,
+    val hasChangedSize: Boolean,
 )
