@@ -53,10 +53,9 @@ Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-andro
 
 ## Technical Details
 
-- [Android SDK 31](https://developer.android.com/about/versions/12)
+- [Android SDK 33](https://developer.android.com/about/versions/13)
 - [AndroidX](https://developer.android.com/jetpack/androidx)
 - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
 - [Koin](https://github.com/InsertKoinIO/koin)
 - [Room](https://developer.android.com/training/data-storage/room)
-- [Robolectric](http://robolectric.org/)
