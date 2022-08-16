@@ -11,14 +11,14 @@ if (System.getenv('IS_GOOGLE_BUILD')) {
 }
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
         versionCode 1508001
         versionName '15.8.0'
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
