@@ -64,7 +64,7 @@ class AreaConverterTest {
         ]
         """.trimIndent().replace(
             " ",
-            ""
+            "",
         ).replace("\n", "")
 
     private val areaList =
@@ -105,7 +105,7 @@ class AreaConverterTest {
                 revealed = true,
                 neighborsIds = listOf(),
                 dimNumber = true,
-            )
+            ),
         )
 
     @Test
@@ -114,7 +114,7 @@ class AreaConverterTest {
         val list = fieldConverter.toAreaList(expectedJson)
         assertEquals(
             areaList,
-            list
+            list,
         )
     }
 

@@ -3,7 +3,7 @@
     <string name="tutorial">教程</string>
     <string name="tutorial_basic">遊戲規則很簡單，方格上的數字顯示與其相鄰的地雷數量，您必須標記所有地雷。</string>
     <string name="tutorial_text_1">如果一個數字與相同數量的方塊接觸，那麼這些方塊都是地雷。</string>
-    <string name="tutorial_text_2">標記您的第一個標誌後，查看數字並分析下一個方塊。</string>
+    <string name="tutorial_text_2">標記第一枚旗幟後，檢查數字並分析下一個方塊。</string>
     <string name="tutorial_text_3">如果一個方格具有相同數量的旗幟，則與其相鄰的所有其他剩餘方格都不是地雷（綠色箭頭）。</string>
     <string name="tutorial_text_4">查看數字並繼續打開正方形。</string>
     <string name="games">遊戲</string>
@@ -24,9 +24,9 @@
     <string name="events">統計數據</string>
     <string name="custom">風俗</string>
     <string name="start">開始</string>
-    <string name="width">寬度</string>
-    <string name="height">高度</string>
-    <string name="mines">礦山</string>
+    <string name="width">寬</string>
+    <string name="height">高</string>
+    <string name="mines">地雷數</string>
     <string name="retry_sure">如果您開始新遊戲，您當前的進度將丟失。</string>
     <string name="show_licenses">顯示許可證</string>
     <string name="new_game_request">你想開始一個新的遊戲嗎？</string>
@@ -115,13 +115,14 @@
     <string name="close">關閉</string>
     <string name="open_tutorial">打開教程</string>
     <string name="click_numbers">允許點按數字</string>
+    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">點按即可自定義</string>
     <string name="toggle_button_top">在頂部欄顯示“切換按鈕”</string>
     <string name="no_guess_fail_warning">目前的雷區可能不是無猜測的！</string>
     <string name="fixed_size">固定尺寸</string>
     <string name="progressive">進步</string>
-    <string name="highlight_unsolved_numbers">突出显示未解决的数字</string>
+    <string name="highlight_unsolved_numbers">凸顯未解決的數字</string>
     <string name="left_handed">左撇子</string>
-    <string name="donate_request">If you like this game, consider making a donation.</string>
-    <string name="donate_help">It will help keep this project active!</string>
+    <string name="donate_request">如果您喜歡這款遊戲，不妨付費贊助。</string>
+    <string name="donate_help">您的舉手之勞能使本專案繼續活躍！</string>
 </resources>

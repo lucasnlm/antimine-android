@@ -115,6 +115,7 @@
     <string name="close">Luk</string>
     <string name="open_tutorial">Åben vejledning</string>
     <string name="click_numbers">Tillad tryk på numre</string>
+    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Tryk for at tilpasse</string>
     <string name="toggle_button_top">Vis \"Skift knap\" på øverste bjælke</string>
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>

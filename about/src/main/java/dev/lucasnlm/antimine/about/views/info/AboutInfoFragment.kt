@@ -46,7 +46,7 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
             centralize = true,
             onAction = {
                 aboutViewModel.sendEvent(AboutEvent.Tutorial)
-            }
+            },
         )
 
         thirdsParties.bind(
@@ -55,7 +55,7 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
             centralize = true,
             onAction = {
                 aboutViewModel.sendEvent(AboutEvent.ThirdPartyLicenses)
-            }
+            },
         )
 
         translation.bind(
@@ -64,7 +64,7 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
             centralize = true,
             onAction = {
                 aboutViewModel.sendEvent(AboutEvent.Translators)
-            }
+            },
         )
 
         sourceCode.bind(
@@ -73,7 +73,7 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
             centralize = true,
             onAction = {
                 aboutViewModel.sendEvent(AboutEvent.SourceCode)
-            }
+            },
         )
     }
 

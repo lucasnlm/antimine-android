@@ -115,6 +115,7 @@
     <string name="close">Закрити</string>
     <string name="open_tutorial">Відкрити навчання</string>
     <string name="click_numbers">Дозволити натискання на цифри</string>
+    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Натисніть, щоб налаштувати</string>
     <string name="toggle_button_top">Показувати \"Перемкнути кнопки\" на верхній панелі</string>
     <string name="no_guess_fail_warning">Поточне мінне поле не можна пройти без здогадок!</string>
@@ -122,6 +123,6 @@
     <string name="progressive">Прогресивна</string>
     <string name="highlight_unsolved_numbers">Підсвічувати невирішені числа</string>
     <string name="left_handed">Для лівші</string>
-    <string name="donate_request">If you like this game, consider making a donation.</string>
-    <string name="donate_help">It will help keep this project active!</string>
+    <string name="donate_request">Якщо вам подобається ця гра, пожертвуйте донатом.</string>
+    <string name="donate_help">Це допоможе зберегти цей проєкт активним!</string>
 </resources>

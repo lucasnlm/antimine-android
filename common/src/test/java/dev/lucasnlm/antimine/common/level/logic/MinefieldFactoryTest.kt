@@ -20,7 +20,7 @@ class MinefieldFactoryTest {
         MinefieldRepository().fromDifficulty(
             Difficulty.Beginner,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         ).run {
             assertEquals(9, width)
             assertEquals(9, height)
@@ -33,7 +33,7 @@ class MinefieldFactoryTest {
         MinefieldRepository().fromDifficulty(
             Difficulty.Intermediate,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         ).run {
             assertEquals(16, width)
             assertEquals(16, height)
@@ -46,7 +46,7 @@ class MinefieldFactoryTest {
         MinefieldRepository().fromDifficulty(
             Difficulty.Expert,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         ).run {
             assertEquals(24, width)
             assertEquals(24, height)
@@ -60,14 +60,14 @@ class MinefieldFactoryTest {
             on { customGameMode() } doReturn Minefield(
                 10,
                 10,
-                30
+                30,
             )
         }
 
         MinefieldRepository().fromDifficulty(
             Difficulty.Custom,
             mock(),
-            preferencesRepository
+            preferencesRepository,
         ).run {
             assertEquals(10, width)
             assertEquals(10, height)
@@ -87,7 +87,7 @@ class MinefieldFactoryTest {
         MinefieldRepository().fromDifficulty(
             Difficulty.Standard,
             dimensionRepository,
-            preferencesRepository
+            preferencesRepository,
         ).run {
             assertEquals(49, width)
             assertEquals(96, height)

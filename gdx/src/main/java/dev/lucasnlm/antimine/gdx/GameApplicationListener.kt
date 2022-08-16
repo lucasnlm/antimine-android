@@ -84,7 +84,7 @@ class GameApplicationListener(
         onChangeZoom = {
             GdxLocal.zoom = it
             minefieldStage?.scaleZoom(it)
-        }
+        },
     )
 
     override fun create() {

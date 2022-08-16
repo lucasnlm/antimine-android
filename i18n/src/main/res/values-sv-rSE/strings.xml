@@ -115,6 +115,7 @@
     <string name="close">Stäng</string>
     <string name="open_tutorial">Öppna Guide</string>
     <string name="click_numbers">Tillåt tryck på siffror</string>
+    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Tryck för att anpassa</string>
     <string name="toggle_button_top">Visa \"Växla knapp\" i övre fältet</string>
     <string name="no_guess_fail_warning">Den nuvarande minfälten kanske inte är gissfri!</string>
@@ -122,6 +123,6 @@
     <string name="progressive">Progressiv</string>
     <string name="highlight_unsolved_numbers">Markera olösta tal</string>
     <string name="left_handed">Vänsterhänt</string>
-    <string name="donate_request">If you like this game, consider making a donation.</string>
-    <string name="donate_help">It will help keep this project active!</string>
+    <string name="donate_request">Om du gillar spelet, överväg om du vill göra en donation.</string>
+    <string name="donate_help">Det kommer hjälpa till att hålla projektet aktivt!</string>
 </resources>

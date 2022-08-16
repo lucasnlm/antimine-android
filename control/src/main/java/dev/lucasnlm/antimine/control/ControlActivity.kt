@@ -10,11 +10,10 @@ import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.activity_control.*
-import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 
 class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnChangeListener {
@@ -32,7 +31,7 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
             selected = preferencesRepository.controlStyle(),
             onControlSelected = { controlStyle ->
                 viewModel.sendEvent(ControlEvent.SelectControlStyle(controlStyle))
-            }
+            },
         )
 
         recyclerView.apply {
@@ -128,7 +127,7 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
             endDescription = R.string.delete_all,
             endAction = {
                 viewModel.sendEvent(ControlEvent.Reset)
-            }
+            },
         )
     }
 }

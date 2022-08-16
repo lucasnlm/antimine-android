@@ -115,6 +115,7 @@
     <string name="close">Tancar</string>
     <string name="open_tutorial">Obriu el tutorial</string>
     <string name="click_numbers">Permet pressionar els números</string>
+    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Pressiona per a customitzar</string>
     <string name="toggle_button_top">Mostrar \"alternar botó\" en la barra superior</string>
     <string name="no_guess_fail_warning">Aquest camp de mines pot no ser deduïble: hareu d\'arriscar!</string>

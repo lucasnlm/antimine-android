@@ -115,6 +115,7 @@
     <string name="close">Sara sù</string>
     <string name="open_tutorial">Verzi el Tutorial</string>
     <string name="click_numbers">Parmeti de strucar so i nùmari</string>
+    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Struca par parsonałizar</string>
     <string name="toggle_button_top">Mostra ła łeveta so ła bara par alto</string>
     <string name="no_guess_fail_warning">\'Sto canpo minà no el se połe mìa conpletar sensa intivar!</string>

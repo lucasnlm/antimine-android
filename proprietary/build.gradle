@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 32
     }
 
     buildTypes {
@@ -42,7 +42,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 
     // Google
-    implementation 'com.android.billingclient:billing-ktx:4.1.0'
+    implementation 'com.android.billingclient:billing-ktx:5.0.0'
     implementation 'com.google.android.gms:play-services-instantapps:18.0.1'
     implementation 'com.google.android.gms:play-services-games:22.0.1'
     implementation 'com.google.android.gms:play-services-auth:20.1.0'
@@ -50,7 +50,7 @@ dependencies {
     implementation 'com.google.android.play:core-ktx:1.8.1'
 
     // Jetbrains
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1'
 
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:29.1.0')
@@ -62,9 +62,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-perf-ktx'
 
     // Kotlin
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1'
 
     // Koin
     implementation 'io.insert-koin:koin-android:3.1.2'

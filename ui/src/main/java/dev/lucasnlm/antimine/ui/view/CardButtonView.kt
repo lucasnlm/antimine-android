@@ -44,7 +44,7 @@ class CardButtonView : FrameLayout {
             onAction = onAction,
             centralize = centralize,
             startIcon = startIcon,
-            endIcon = endIcon
+            endIcon = endIcon,
         )
     }
 
@@ -66,7 +66,7 @@ class CardButtonView : FrameLayout {
             centralize = centralize,
             onAction = onAction,
             startIcon = startIcon,
-            endIcon = endIcon
+            endIcon = endIcon,
         )
     }
 

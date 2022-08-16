@@ -12,7 +12,7 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.view.ThemeAdapter
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
-import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import dev.lucasnlm.external.IAdsManager
@@ -20,7 +20,6 @@ import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.android.synthetic.main.activity_theme.*
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -58,7 +57,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
                     lifecycleScope.launch {
                         billingManager.charge(this@ThemeActivity)
                     }
-                }
+                },
             )
 
             lifecycleScope.launchWhenResumed {
@@ -73,7 +72,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
                             lifecycleScope.launch {
                                 billingManager.charge(this@ThemeActivity)
                             }
-                        }
+                        },
                     )
                 }
             }
@@ -92,7 +91,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
                 activity = this@ThemeActivity,
                 themeViewModel = themeViewModel,
                 preferencesRepository = preferencesRepository,
-                adsManager = adsManager
+                adsManager = adsManager,
             )
 
             recyclerView.apply {
@@ -138,6 +137,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
         squareSize.value = (state.squareSize / squareSize.stepSize).toInt() * squareSize.stepSize
         squareDivider.value = (state.squareDivider / squareDivider.stepSize).toInt() * squareDivider.stepSize
         squareRadius.value = (state.squareRadius / squareRadius.stepSize).toInt() * squareRadius.stepSize
+        section.showEndAction(state.hasChangedSize)
     }
 
     private fun bindToolbar() {
@@ -157,7 +157,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
                 }
                 bindToolbar()
                 section.showEndAction(false)
-            }
+            },
         )
     }
 

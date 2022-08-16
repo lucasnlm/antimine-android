@@ -78,7 +78,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                     totalMines = getInt(DIALOG_TOTAL_MINES, 0),
                     received = getInt(DIALOG_RECEIVED, -1),
                     turn = -1,
-                )
+                ),
             )
         }
     }
@@ -124,7 +124,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                 setOnClickListener {
                                     analyticsManager.sentEvent(Analytics.ClickEmoji)
                                     endGameViewModel.sendEvent(
-                                        EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji)
+                                        EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji),
                                     )
                                 }
                             }
@@ -154,7 +154,10 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             ) {
                                 newGameButton.compoundDrawablePadding = 0
                                 newGameButton.setCompoundDrawablesWithIntrinsicBounds(
-                                    R.drawable.watch_ads_icon, 0, 0, 0
+                                    R.drawable.watch_ads_icon,
+                                    0,
+                                    0,
+                                    0,
                                 )
                             }
 
@@ -176,8 +179,8 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                     FrameLayout.LayoutParams(
                                         FrameLayout.LayoutParams.MATCH_PARENT,
                                         FrameLayout.LayoutParams.WRAP_CONTENT,
-                                        Gravity.CENTER_HORIZONTAL
-                                    )
+                                        Gravity.CENTER_HORIZONTAL,
+                                    ),
                                 )
                             } else if (!preferencesRepository.isPremiumEnabled() &&
                                 featureFlagManager.isBannerAdEnabled
@@ -189,8 +192,8 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                     FrameLayout.LayoutParams(
                                         FrameLayout.LayoutParams.MATCH_PARENT,
                                         FrameLayout.LayoutParams.WRAP_CONTENT,
-                                        Gravity.CENTER_HORIZONTAL
-                                    )
+                                        Gravity.CENTER_HORIZONTAL,
+                                    ),
                                 )
                             }
 
@@ -292,9 +295,9 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             activity,
                             onDismiss = {
                                 startNewGameAndDismiss()
-                            }
+                            },
                         )
-                    }
+                    },
                 )
             }
         }

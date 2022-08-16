@@ -53,7 +53,7 @@ class ControlViewModel(
             firstActionResponseId = 0,
             secondActionId = 0,
             secondActionResponseId = 0,
-        )
+        ),
     )
 
     override fun initialState(): ControlState {

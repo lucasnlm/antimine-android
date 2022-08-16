@@ -50,23 +50,25 @@ class AreaActor(
         x = area.posX * width
         y = area.posY * height
 
-        addListener(object : InputListener() {
-            override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int) {
-                super.touchUp(event, x, y, pointer, button)
-                onInputEvent(GdxEvent.TouchUpEvent(area.id))
-                isPressed = false
-                toBack()
-                Gdx.graphics.requestRendering()
-            }
+        addListener(
+            object : InputListener() {
+                override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int) {
+                    super.touchUp(event, x, y, pointer, button)
+                    onInputEvent(GdxEvent.TouchUpEvent(area.id))
+                    isPressed = false
+                    toBack()
+                    Gdx.graphics.requestRendering()
+                }
 
-            override fun touchDown(event: InputEvent, x: Float, y: Float, pointer: Int, button: Int): Boolean {
-                toFront()
-                isPressed = true
-                onInputEvent(GdxEvent.TouchDownEvent(area.id))
-                Gdx.graphics.requestRendering()
-                return true
-            }
-        })
+                override fun touchDown(event: InputEvent, x: Float, y: Float, pointer: Int, button: Int): Boolean {
+                    toFront()
+                    isPressed = true
+                    onInputEvent(GdxEvent.TouchDownEvent(area.id))
+                    Gdx.graphics.requestRendering()
+                    return true
+                }
+            },
+        )
 
         topId = field.getPos(area.posX, area.posY + 1)?.id ?: -1
         bottomId = field.getPos(area.posX, area.posY - 1)?.id ?: -1
@@ -140,8 +142,11 @@ class AreaActor(
         super.act(delta)
         val area = this.area
 
-        touchable = if ((area.isCovered || area.minesAround > 0) && GdxLocal.actionsEnabled)
-            Touchable.enabled else Touchable.disabled
+        touchable = if ((area.isCovered || area.minesAround > 0) && GdxLocal.actionsEnabled) {
+            Touchable.enabled
+        } else {
+            Touchable.disabled
+        }
 
         val newFocusScale = if (isPressed) {
             (focusScale + Gdx.graphics.deltaTime).coerceAtMost(MAX_SCALE)
@@ -165,7 +170,7 @@ class AreaActor(
                     width = width,
                     height = height,
                     blend = false,
-                    color = theme.palette.background.toOppositeMax(GdxLocal.zoomLevelAlpha).alpha(0.025f)
+                    color = theme.palette.background.toOppositeMax(GdxLocal.zoomLevelAlpha).alpha(0.025f),
                 )
             }
         }
@@ -246,7 +251,7 @@ class AreaActor(
                         batch = batch,
                         texture = it.flag,
                         color = color,
-                        scale = if (isAboveOthers) focusScale else BASE_ICON_SCALE
+                        scale = if (isAboveOthers) focusScale else BASE_ICON_SCALE,
                     )
                 }
                 area.mark.isQuestion() -> {
@@ -255,7 +260,7 @@ class AreaActor(
                         batch = batch,
                         texture = it.question,
                         color = color,
-                        scale = if (isAboveOthers) focusScale else BASE_ICON_SCALE
+                        scale = if (isAboveOthers) focusScale else BASE_ICON_SCALE,
                     )
                 }
                 area.revealed -> {
@@ -264,7 +269,7 @@ class AreaActor(
                         batch = batch,
                         texture = it.mine,
                         color = color.toGdxColor(0.65f),
-                        scale = BASE_ICON_SCALE
+                        scale = BASE_ICON_SCALE,
                     )
                 }
             }
@@ -294,7 +299,7 @@ class AreaActor(
                     batch = batch,
                     texture = it.mine,
                     color = color.toOppositeMax(1.0f),
-                    scale = BASE_ICON_SCALE
+                    scale = BASE_ICON_SCALE,
                 )
             }
         }

@@ -81,7 +81,7 @@ class StatsViewModel(
                     mines = 0,
                     victory = 0,
                     openArea = 0,
-                )
+                ),
             ) { acc, value ->
                 StatsModel(
                     title = 0,

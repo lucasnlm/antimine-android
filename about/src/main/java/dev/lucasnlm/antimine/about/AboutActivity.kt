@@ -8,9 +8,8 @@ import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import dev.lucasnlm.antimine.about.views.info.AboutInfoFragment
 import dev.lucasnlm.antimine.about.views.licenses.LicensesFragment
-import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AboutActivity : ThematicActivity(R.layout.activity_about) {
@@ -26,7 +25,7 @@ class AboutActivity : ThematicActivity(R.layout.activity_about) {
             startAction = {
                 section.bindText(R.string.about)
                 onBackPressed()
-            }
+            },
         )
 
         replaceFragment(AboutInfoFragment(), null)

@@ -184,4 +184,14 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun setRequestDonation(request: Boolean) {}
 
     override fun requestDonation(): Boolean = true
+
+    override fun letNumbersAutoFlag(): Boolean = true
+
+    override fun setNumbersAutoFlag(allow: Boolean) { }
+
+    override fun defaultSquareRadius(): Int = 0
+
+    override fun defaultSquareSize(): Int = 0
+
+    override fun defaultSquareDivider(): Int = 0
 }

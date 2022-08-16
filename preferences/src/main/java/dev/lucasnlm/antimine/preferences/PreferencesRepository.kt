@@ -45,7 +45,7 @@ class PreferencesRepository(
         Minefield(
             getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_WIDTH, 9),
             getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_HEIGHT, 9),
-            getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_MINES, 9)
+            getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_MINES, 9),
         )
     }
 
@@ -85,7 +85,9 @@ class PreferencesRepository(
     }
 
     override fun squareSize(): Int =
-        preferencesManager.getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50)
+        preferencesManager.getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, defaultSquareSize())
+
+    override fun defaultSquareSize(): Int = 50
 
     override fun setSquareSize(value: Int?) {
         if (value == null) {
@@ -342,8 +344,10 @@ class PreferencesRepository(
     }
 
     override fun squareRadius(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 3)
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, defaultSquareRadius())
     }
+
+    override fun defaultSquareRadius(): Int = 3
 
     override fun setSquareRadius(value: Int?) {
         if (value == null) {
@@ -386,8 +390,10 @@ class PreferencesRepository(
     }
 
     override fun squareDivider(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER, 0)
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER, defaultSquareDivider())
     }
+
+    override fun defaultSquareDivider(): Int = 0
 
     override fun setSquareDivider(value: Int?) {
         if (value == null) {
@@ -451,5 +457,13 @@ class PreferencesRepository(
 
     override fun requestDonation(): Boolean {
         return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_REQUEST_DONATION, true)
+    }
+
+    override fun letNumbersAutoFlag(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_LET_NUMBERS_AUTO_FLAG, true)
+    }
+
+    override fun setNumbersAutoFlag(allow: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_LET_NUMBERS_AUTO_FLAG, allow)
     }
 }

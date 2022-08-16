@@ -73,7 +73,7 @@ class DimensionRepository(
     override fun actionBarSizeWithStatus(): Int {
         val styledAttributes: TypedArray =
             context.theme.obtainStyledAttributes(
-                IntArray(1) { android.R.attr.actionBarSize }
+                IntArray(1) { android.R.attr.actionBarSize },
             )
 
         val resourceId: Int = context.resources.getIdentifier("status_bar_height", "dimen", "android")
@@ -92,7 +92,7 @@ class DimensionRepository(
     override fun actionBarSize(): Int {
         val styledAttributes: TypedArray =
             context.theme.obtainStyledAttributes(
-                IntArray(1) { android.R.attr.actionBarSize }
+                IntArray(1) { android.R.attr.actionBarSize },
             )
 
         val actionBarSize: Int = styledAttributes.getDimension(0, 0.0f).toInt()

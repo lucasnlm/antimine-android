@@ -47,7 +47,7 @@ class HapticFeedbackManagerImpl(
 
             if (Build.VERSION.SDK_INT >= 26) {
                 vibrator.vibrate(
-                    VibrationEffect.createOneShot(time, realAmplitude)
+                    VibrationEffect.createOneShot(time, realAmplitude),
                 )
             } else {
                 @Suppress("DEPRECATION")

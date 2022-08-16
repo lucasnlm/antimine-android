@@ -4,7 +4,7 @@ import dev.lucasnlm.antimine.ui.model.AppTheme
 
 sealed class ThemeEvent {
     data class Unlock(
-        val themeId: Long
+        val themeId: Long,
     ) : ThemeEvent()
 
     data class ChangeTheme(

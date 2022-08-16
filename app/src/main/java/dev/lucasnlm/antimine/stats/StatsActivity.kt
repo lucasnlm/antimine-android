@@ -9,10 +9,9 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.stats.view.StatsAdapter
 import dev.lucasnlm.antimine.stats.viewmodel.StatsEvent
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
-import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.activity_stats.*
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,7 +49,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
                 startDescription = R.string.back,
                 startAction = {
                     finish()
-                }
+                },
             )
         } else {
             section.bind(
@@ -64,7 +63,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
                 endDescription = R.string.delete_all,
                 endAction = {
                     confirmAndDelete()
-                }
+                },
             )
         }
     }

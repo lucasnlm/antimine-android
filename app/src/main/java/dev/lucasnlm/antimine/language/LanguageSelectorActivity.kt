@@ -9,7 +9,7 @@ import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.ui.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import kotlinx.android.synthetic.main.activity_language.*
 import org.koin.android.ext.android.inject
 import java.util.Locale
@@ -23,7 +23,7 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
             startButton = R.drawable.back_arrow,
             startAction = {
                 finish()
-            }
+            },
         )
 
         open_crowdin.bind(
@@ -38,7 +38,7 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
                 } catch (e: Exception) {
                     Toast.makeText(applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT).show()
                 }
-            }
+            },
         )
 
         placePreferenceFragment()
@@ -126,7 +126,7 @@ class LanguageSelectorActivity : ThematicActivity(R.layout.activity_language) {
                                     activity?.finish()
                                     true
                                 }
-                            }
+                            },
                         )
                     }
             }

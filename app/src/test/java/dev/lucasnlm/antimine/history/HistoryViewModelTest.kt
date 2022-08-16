@@ -21,18 +21,18 @@ class HistoryViewModelTest : IntentViewModelTest() {
         Save(
             0, 1, 0L, 100L, fakeMinefield,
             Difficulty.Beginner, FirstOpen.Unknown, SaveStatus.ON_GOING,
-            listOf(), 10
+            listOf(), 10,
         ),
         Save(
             1, 2, 0L, 100L, fakeMinefield,
             Difficulty.Beginner, FirstOpen.Unknown, SaveStatus.ON_GOING,
-            listOf(), 20
+            listOf(), 20,
         ),
         Save(
             2, 3, 0L, 100L, fakeMinefield,
             Difficulty.Beginner, FirstOpen.Unknown, SaveStatus.ON_GOING,
-            listOf(), 30
-        )
+            listOf(), 30,
+        ),
     )
 
     @Test

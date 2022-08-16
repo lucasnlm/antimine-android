@@ -115,6 +115,7 @@
     <string name="close">Zavřít</string>
     <string name="open_tutorial">Otevřít průvodce</string>
     <string name="click_numbers">Povolit klepnutí na čísla</string>
+    <string name="flag_when_tap_numbers">Označit při klepnutí na číslo</string>
     <string name="tap_to_customize">Klepnutím přizpůsobit</string>
     <string name="toggle_button_top">Zobrazit \"Přepínací tlačítko\" v horní liště</string>
     <string name="no_guess_fail_warning">Možná budete potřebovat nápovědu k dokončení této úrovně!</string>

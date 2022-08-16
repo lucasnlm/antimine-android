@@ -49,16 +49,18 @@ class MinefieldStage(
     init {
         actionsRequestRendering = true
 
-        addListener(object : InputListener() {
-            override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
-                return if (event?.target is Group) {
-                    event.cancel()
-                    true
-                } else {
-                    false
+        addListener(
+            object : InputListener() {
+                override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
+                    return if (event?.target is Group) {
+                        event.cancel()
+                        true
+                    } else {
+                        false
+                    }
                 }
-            }
-        })
+            },
+        )
 
         cameraController = CameraController(
             camera = camera,

@@ -11,7 +11,7 @@ import kotlin.random.Random
 class MinefieldHandlerTest {
     private fun handleMinefield(
         useQuestionMark: Boolean = false,
-        block: (MinefieldHandler) -> Unit
+        block: (MinefieldHandler) -> Unit,
     ) {
         val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
         val minefield = creator.create(10).toMutableList()

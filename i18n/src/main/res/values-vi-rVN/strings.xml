@@ -115,6 +115,7 @@
     <string name="close">Đóng</string>
     <string name="open_tutorial">Mở Hướng dẫn</string>
     <string name="click_numbers">Cho phép nhấn vào các con số</string>
+    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Nhấn để tuỳ chỉnh</string>
     <string name="toggle_button_top">Hiện \"Nút chuyển\" trên thanh ở trên cùng</string>
     <string name="no_guess_fail_warning">Bãi mìn hiện tại có thể sẽ không giải được mà không đoán!</string>

@@ -18,8 +18,8 @@ class ReviewWrapper : IReviewWrapper {
                 activity.startActivity(
                     Intent(
                         Intent.ACTION_VIEW,
-                        Uri.parse(playStorePage)
-                    )
+                        Uri.parse(playStorePage),
+                    ),
                 )
             }
         }

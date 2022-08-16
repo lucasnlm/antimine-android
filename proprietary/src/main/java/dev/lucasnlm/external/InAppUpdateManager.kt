@@ -21,7 +21,7 @@ class InAppUpdateManager : IInAppUpdateManager {
                     appUpdateManager.startUpdateFlow(
                         appUpdateInfo,
                         activity,
-                        AppUpdateOptions.defaultOptions(AppUpdateType.FLEXIBLE)
+                        AppUpdateOptions.defaultOptions(AppUpdateType.FLEXIBLE),
                     )
                 }
             }

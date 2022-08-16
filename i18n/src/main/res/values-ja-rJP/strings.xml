@@ -115,6 +115,7 @@
     <string name="close">閉じる</string>
     <string name="open_tutorial">チュートリアルを開く</string>
     <string name="click_numbers">数字のタップを有効にする</string>
+    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">タップしてカスタマイズ</string>
     <string name="toggle_button_top">上部バーに「トグルボタン」を表示する</string>
     <string name="no_guess_fail_warning">現在の盤面は、推測なしではクリアできない可能性があります!</string>

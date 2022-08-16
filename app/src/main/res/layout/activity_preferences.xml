@@ -237,6 +237,31 @@
                 app:layout_constraintTop_toTopOf="@+id/allowClickNumberLabel" />
 
             <TextView
+                android:id="@+id/flagWhenTapOnNumbersLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:alpha="1.0"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingVertical="16dp"
+                android:text="@string/flag_when_tap_numbers"
+                android:textColor="?attr/colorControlNormal"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/allowClickNumberLabel" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/flagWhenTapOnNumbers"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingVertical="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/flagWhenTapOnNumbersLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/flagWhenTapOnNumbersLabel" />
+
+            <TextView
                 android:id="@+id/helpLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -250,7 +275,7 @@
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/allowClickNumberLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/flagWhenTapOnNumbers" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/help"

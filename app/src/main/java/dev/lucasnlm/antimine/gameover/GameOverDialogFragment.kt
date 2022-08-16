@@ -82,7 +82,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                     totalMines = getInt(DIALOG_TOTAL_MINES, 0),
                     received = getInt(DIALOG_RECEIVED, -1),
                     turn = getInt(DIALOG_TURN, 0),
-                )
+                ),
             )
         }
     }
@@ -130,7 +130,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 setOnClickListener {
                                     analyticsManager.sentEvent(Analytics.ClickEmoji)
                                     endGameViewModel.sendEvent(
-                                        EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji)
+                                        EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji),
                                     )
                                 }
                             }
@@ -189,8 +189,8 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                     FrameLayout.LayoutParams(
                                         FrameLayout.LayoutParams.MATCH_PARENT,
                                         FrameLayout.LayoutParams.WRAP_CONTENT,
-                                        Gravity.CENTER_HORIZONTAL
-                                    )
+                                        Gravity.CENTER_HORIZONTAL,
+                                    ),
                                 )
                             } else if (!preferencesRepository.isPremiumEnabled() &&
                                 featureFlagManager.isBannerAdEnabled
@@ -202,8 +202,8 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                     FrameLayout.LayoutParams(
                                         FrameLayout.LayoutParams.MATCH_PARENT,
                                         FrameLayout.LayoutParams.WRAP_CONTENT,
-                                        Gravity.CENTER_HORIZONTAL
-                                    )
+                                        Gravity.CENTER_HORIZONTAL,
+                                    ),
                                 )
                             }
 
@@ -218,7 +218,10 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 ) {
                                     continueButton.compoundDrawablePadding = 0
                                     continueButton.setCompoundDrawablesWithIntrinsicBounds(
-                                        R.drawable.watch_ads_icon, 0, 0, 0
+                                        R.drawable.watch_ads_icon,
+                                        0,
+                                        0,
+                                        0,
                                     )
                                 }
 
@@ -335,9 +338,9 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                             },
                             onError = {
                                 Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show()
-                            }
+                            },
                         )
-                    }
+                    },
                 )
             }
         }

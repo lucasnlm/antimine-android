@@ -47,4 +47,5 @@ object PreferenceKeys {
     const val PREFERENCE_DIM_NUMBERS = "preference_dim_numbers"
     const val PREFERENCE_LEFT_HANDED = "preference_left_handed"
     const val PREFERENCE_REQUEST_DONATION = "preference_request_donation"
+    const val PREFERENCE_LET_NUMBERS_AUTO_FLAG = "preference_let_numbers_flag"
 }

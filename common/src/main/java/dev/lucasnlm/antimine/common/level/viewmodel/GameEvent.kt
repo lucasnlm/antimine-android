@@ -8,7 +8,7 @@ sealed class GameEvent {
     ) : GameEvent()
 
     data class UpdateTime(
-        val time: Long
+        val time: Long,
     ) : GameEvent()
 
     data class NewGame(

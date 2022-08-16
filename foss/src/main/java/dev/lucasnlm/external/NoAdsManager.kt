@@ -11,7 +11,7 @@ class NoAdsManager : IAdsManager {
         activity: Activity,
         skipIfFrequent: Boolean,
         onRewarded: (() -> Unit)?,
-        onFail: (() -> Unit)?
+        onFail: (() -> Unit)?,
     ) {
         // Empty
     }

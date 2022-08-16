@@ -115,6 +115,7 @@
     <string name="close">Закрыть</string>
     <string name="open_tutorial">Открыть обучение</string>
     <string name="click_numbers">Разрешить нажатие на цифры</string>
+    <string name="flag_when_tap_numbers">Отметить флагом при нажатии на цифры</string>
     <string name="tap_to_customize">Нажмите, чтобы настроить</string>
     <string name="toggle_button_top">Отображать \"Переключить кнопку\" на верхней панели</string>
     <string name="no_guess_fail_warning">Вам может понадобиться подсказка, чтобы пройти этот уровень!</string>

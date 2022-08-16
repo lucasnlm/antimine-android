@@ -12,7 +12,7 @@ class CheckNeighborsSolverTest {
     private fun handleMinefield(block: (MinefieldHandler) -> Unit) {
         val creator = MinefieldCreatorImpl(
             Minefield(9, 9, 12),
-            Random(200)
+            Random(200),
         )
         val minefield = creator.create(40).toMutableList()
         val minefieldHandler =
