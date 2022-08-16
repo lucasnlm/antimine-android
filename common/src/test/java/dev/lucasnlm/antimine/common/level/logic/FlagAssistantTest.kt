@@ -2,7 +2,8 @@ package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import kotlin.random.Random
@@ -38,7 +39,7 @@ class FlagAssistantTest {
     }
 
     @Test
-    fun testRunAssistantCase1() = runBlockingTest {
+    fun testRunAssistantCase1() = runTest(UnconfinedTestDispatcher()) {
         testCase(
             seed = 200,
             expectedFlagMap = listOf(
@@ -55,7 +56,7 @@ class FlagAssistantTest {
     }
 
     @Test
-    fun testRunAssistantCase2() = runBlockingTest {
+    fun testRunAssistantCase2() = runTest(UnconfinedTestDispatcher()) {
         testCase(
             seed = 250,
             expectedFlagMap = listOf(

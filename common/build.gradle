@@ -45,8 +45,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'androidx.activity:activity-ktx:1.5.0'
-    implementation 'androidx.fragment:fragment-ktx:1.5.0'
+    implementation 'androidx.activity:activity-ktx:1.5.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.2'
 
     // Google
     implementation 'com.google.android.material:material:1.6.1'
@@ -63,10 +63,10 @@ dependencies {
     testImplementation 'io.insert-koin:koin-test:3.1.2'
 
     // Room
-    api 'androidx.room:room-runtime:2.4.2'
-    api 'androidx.room:room-ktx:2.4.2'
-    kapt 'androidx.room:room-compiler:2.4.2'
-    testImplementation 'androidx.room:room-testing:2.4.2'
+    api 'androidx.room:room-runtime:2.4.3'
+    api 'androidx.room:room-ktx:2.4.3'
+    kapt 'androidx.room:room-compiler:2.4.3'
+    testImplementation 'androidx.room:room-testing:2.4.3'
 
     // Moshi - Json
     api 'com.squareup.moshi:moshi:1.11.0'
@@ -76,7 +76,7 @@ dependencies {
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1'
 
     // Kotlin Lib
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10'

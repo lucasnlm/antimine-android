@@ -39,7 +39,7 @@ dependencies {
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1'
 
     // Koin
     implementation 'io.insert-koin:koin-android:3.1.2'
@@ -49,8 +49,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.2'
 
     // Lifecycle
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
-    implementation 'androidx.lifecycle:lifecycle-common-java8:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.5.1'
 }

@@ -8,8 +8,9 @@ import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.single
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -31,7 +32,7 @@ class GameControllerTest {
             difficulty = Difficulty.Standard,
         )
         if (clickOnCreate) {
-            runBlockingTest {
+            runTest(UnconfinedTestDispatcher()) {
                 fakeSingleClick(gameController, 10)
             }
         }
@@ -39,14 +40,14 @@ class GameControllerTest {
     }
 
     @Test
-    fun testGetMinesCount() = runBlockingTest {
+    fun testGetMinesCount() = runTest(UnconfinedTestDispatcher()) {
         withGameController {
             assertEquals(20, it.getMinesCount())
         }
     }
 
     @Test
-    fun testGetScore() = runBlockingTest {
+    fun testGetScore() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             assertEquals(Score(20, 20, 100), controller.getScore())
 
@@ -66,7 +67,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testFlagAllMines() = runBlockingTest {
+    fun testFlagAllMines() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             val minesCount = controller.mines().count()
 
@@ -78,7 +79,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testFindExplodedMine() = runBlockingTest {
+    fun testFindExplodedMine() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             assertNull(controller.findExplodedMine())
             val target = controller.mines().first()
@@ -89,7 +90,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testTakeExplosionRadius() = runBlockingTest {
+    fun testTakeExplosionRadius() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             val lastMine = controller.mines().last()
             assertEquals(
@@ -112,7 +113,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testShowAllMines() = runBlockingTest {
+    fun testShowAllMines() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             controller.showAllMistakes()
             controller.mines().filter { it.mistake }.forEach {
@@ -125,7 +126,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testShowWrongFlags() = runBlockingTest {
+    fun testShowWrongFlags() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             controller.field().first { !it.hasMine && it.isCovered }.run {
                 fakeLongPress(controller, id)
@@ -146,7 +147,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testRevealAllEmptyAreas() = runBlockingTest {
+    fun testRevealAllEmptyAreas() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             val covered = controller.field { it.isCovered }
             assertTrue(covered.isNotEmpty())
@@ -156,7 +157,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testFlaggedAllMines() = runBlockingTest {
+    fun testFlaggedAllMines() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             assertFalse(controller.hasFlaggedAllMines())
 
@@ -177,7 +178,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testRemainingMines() = runBlockingTest {
+    fun testRemainingMines() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             assertEquals(20, controller.remainingMines())
 
@@ -196,7 +197,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testHasIsolatedAllMines() = runBlockingTest {
+    fun testHasIsolatedAllMines() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             assertFalse(controller.hasIsolatedAllMines())
             assertFalse(controller.isGameOver())
@@ -221,7 +222,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testHasAnyMineExploded() = runBlockingTest {
+    fun testHasAnyMineExploded() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             assertFalse(controller.hasAnyMineExploded())
 
@@ -232,7 +233,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testGameOverWithMineExploded() = runBlockingTest {
+    fun testGameOverWithMineExploded() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             assertFalse(controller.isGameOver())
 
@@ -243,7 +244,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testVictory() = runBlockingTest {
+    fun testVictory() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             assertFalse(controller.isVictory())
 
@@ -262,14 +263,14 @@ class GameControllerTest {
     }
 
     @Test
-    fun testCantShowVictoryIfHasNoMines() = runBlockingTest {
+    fun testCantShowVictoryIfHasNoMines() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             assertFalse(controller.isVictory())
         }
     }
 
     @Test
-    fun testControlFirstActionWithStandard() = runBlockingTest {
+    fun testControlFirstActionWithStandard() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             controller.updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
             assertTrue(controller.at(3).isCovered)
@@ -279,7 +280,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlSecondActionWithStandard() = runBlockingTest {
+    fun testControlSecondActionWithStandard() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
@@ -307,7 +308,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlStandardOpenMultiple() = runBlockingTest {
+    fun testControlStandardOpenMultiple() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
@@ -336,7 +337,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlFirstActionWithFastFlag() = runBlockingTest {
+    fun testControlFirstActionWithFastFlag() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
@@ -353,7 +354,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlFirstActionWithInvertedDoubleClick() = runBlockingTest {
+    fun testControlFirstActionWithInvertedDoubleClick() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClickInverted))
@@ -369,7 +370,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlSecondActionWithInvertedDoubleClick() = runBlockingTest {
+    fun testControlSecondActionWithInvertedDoubleClick() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClickInverted))
@@ -381,7 +382,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlFastFlagOpenMultiple() = runBlockingTest {
+    fun testControlFastFlagOpenMultiple() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
@@ -413,7 +414,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlFirstActionWithDoubleClick() = runBlockingTest {
+    fun testControlFirstActionWithDoubleClick() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
@@ -430,7 +431,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlFirstActionWithDoubleClickAndWithoutQuestionMark() = runBlockingTest {
+    fun testControlFirstActionWithDoubleClickAndWithoutQuestionMark() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
@@ -464,7 +465,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlDoubleClickOpenMultiple() = runBlockingTest {
+    fun testControlDoubleClickOpenMultiple() = runTest(UnconfinedTestDispatcher()) {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
@@ -492,7 +493,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testIfDoubleClickPlantMinesOnFirstClick() = runBlockingTest {
+    fun testIfDoubleClickPlantMinesOnFirstClick() = runTest(UnconfinedTestDispatcher()) {
         withGameController(clickOnCreate = false) { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
@@ -506,7 +507,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testIfFastFlagPlantMinesOnFirstClick() = runBlockingTest {
+    fun testIfFastFlagPlantMinesOnFirstClick() = runTest(UnconfinedTestDispatcher()) {
         withGameController(clickOnCreate = false) { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
@@ -524,14 +525,14 @@ class GameControllerTest {
     }
 
     private suspend fun fakeSingleClick(gameController: GameController, index: Int) {
-        gameController.singleClick(index).single()
+        gameController.singleClick(index).collect()
     }
 
     private suspend fun fakeLongPress(gameController: GameController, index: Int) {
-        gameController.longPress(index).single()
+        gameController.longPress(index).collect()
     }
 
     private suspend fun fakeDoubleClick(gameController: GameController, index: Int) {
-        gameController.doubleClick(index).single()
+        gameController.doubleClick(index).collect()
     }
 }
