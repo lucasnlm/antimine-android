@@ -65,7 +65,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
                     unlockAll.bind(
                         theme = usingTheme,
                         invert = true,
-                        text = getString(R.string.remove_ad),
+                        text = getString(R.string.unlock),
                         price = it.price,
                         showOffer = it.offer,
                         onAction = {
@@ -88,10 +88,16 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
 
             val themeAdapter = ThemeAdapter(
                 themeRepository = themeRepository,
-                activity = this@ThemeActivity,
                 themeViewModel = themeViewModel,
                 preferencesRepository = preferencesRepository,
-                adsManager = adsManager,
+                onSelectTheme = { theme ->
+                    themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+                },
+                onRequestPurchase = {
+                    lifecycleScope.launch {
+                        billingManager.charge(this@ThemeActivity)
+                    }
+                },
             )
 
             recyclerView.apply {

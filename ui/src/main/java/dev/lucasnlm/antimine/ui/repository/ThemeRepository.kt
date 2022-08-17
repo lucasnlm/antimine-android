@@ -45,7 +45,7 @@ class ThemeRepository(
             id = 0L,
             theme = R.style.AppTheme,
             palette = fromDefaultPalette(context),
-            isPaid = false,
+            isPaid = true,
         )
     }
 

@@ -26,7 +26,7 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
-        isPaid = false,
+        isPaid = true,
     )
 
     private fun darkTheme() = AppTheme(
@@ -50,7 +50,7 @@ object Themes {
             highlight = 0xFFFFFF,
             focus = 0xFFFFFF,
         ),
-        isPaid = false,
+        isPaid = true,
     )
 
     private fun amoledTheme() = AppTheme(
