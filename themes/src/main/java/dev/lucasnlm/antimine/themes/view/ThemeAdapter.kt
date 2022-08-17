@@ -22,7 +22,6 @@ class ThemeAdapter(
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
 
     private val themes: List<AppTheme> = themeViewModel.singleState().themes
-    private val unlockedThemes = preferencesRepository.getUnlockedThemes()
     private val currentTheme = themeRepository.getTheme()
 
     init {
