@@ -1,6 +1,9 @@
 package dev.lucasnlm.antimine.ui.repository
 
 import android.content.Context
+import android.content.res.Configuration
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.R
@@ -44,8 +47,52 @@ class ThemeRepository(
         return AppTheme(
             id = 0L,
             theme = R.style.AppTheme,
-            palette = fromDefaultPalette(context),
-            isPaid = false,
+            palette = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                fromMaterialYou(context)
+            } else {
+                fromDefaultPalette(context)
+            },
+            isPaid = true,
+        )
+    }
+
+    private fun isDarkTheme(): Boolean {
+        val mask = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        return mask == Configuration.UI_MODE_NIGHT_YES
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun fromMaterialYou(context: Context): AreaPalette {
+        val isDarkTheme = isDarkTheme()
+        val background = if (isDarkTheme) {
+            ContextCompat.getColor(context, R.color.background)
+        } else {
+            ContextCompat.getColor(context, android.R.color.background_light)
+        }
+
+        val coveredColor = if (isDarkTheme) {
+            ContextCompat.getColor(context, android.R.color.system_accent1_300)
+        } else {
+            ContextCompat.getColor(context, android.R.color.system_accent1_600)
+        }
+
+        return AreaPalette(
+            accent = ContextCompat.getColor(context, android.R.color.system_accent1_500),
+            background = background,
+            covered = coveredColor,
+            coveredOdd = coveredColor,
+            uncovered = background,
+            uncoveredOdd = background,
+            minesAround1 = ContextCompat.getColor(context, R.color.mines_around_1),
+            minesAround2 = ContextCompat.getColor(context, R.color.mines_around_2),
+            minesAround3 = ContextCompat.getColor(context, R.color.mines_around_3),
+            minesAround4 = ContextCompat.getColor(context, R.color.mines_around_4),
+            minesAround5 = ContextCompat.getColor(context, R.color.mines_around_5),
+            minesAround6 = ContextCompat.getColor(context, R.color.mines_around_6),
+            minesAround7 = ContextCompat.getColor(context, R.color.mines_around_7),
+            minesAround8 = ContextCompat.getColor(context, R.color.mines_around_8),
+            highlight = ContextCompat.getColor(context, R.color.highlight),
+            focus = ContextCompat.getColor(context, android.R.color.system_accent1_500),
         )
     }
 

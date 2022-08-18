@@ -1,32 +1,27 @@
 package dev.lucasnlm.antimine.themes.view
 
-import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.R
-import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
-import dev.lucasnlm.antimine.ui.showWarning
-import dev.lucasnlm.external.IAdsManager
 import kotlinx.android.synthetic.main.view_theme.view.*
 
 class ThemeAdapter(
     themeRepository: IThemeRepository,
-    private val activity: Activity,
     private val themeViewModel: ThemeViewModel,
     private val preferencesRepository: IPreferencesRepository,
-    private val adsManager: IAdsManager,
+    private val onSelectTheme: (AppTheme) -> Unit,
+    private val onRequestPurchase: () -> Unit,
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
 
     private val themes: List<AppTheme> = themeViewModel.singleState().themes
-    private val unlockedThemes = preferencesRepository.getUnlockedThemes()
     private val currentTheme = themeRepository.getTheme()
 
     init {
@@ -67,20 +62,6 @@ class ThemeAdapter(
                     setCompoundDrawables(null, null, null, null)
                     visibility = View.VISIBLE
                 }
-            } else if (
-                theme.isPaid &&
-                !preferencesRepository.isPremiumEnabled() &&
-                !unlockedThemes.contains(theme.id.toInt())
-            ) {
-                label.apply {
-                    text = label.context.getString(R.string.unlock)
-                    setTextColor(theme.palette.background.toInvertedAndroidColor(200))
-                    setBackgroundResource(android.R.color.transparent)
-                    compoundDrawables.forEach {
-                        it?.setTint(theme.palette.background.toInvertedAndroidColor(200))
-                    }
-                    visibility = View.VISIBLE
-                }
             } else {
                 label.apply {
                     setCompoundDrawables(null, null, null, null)
@@ -91,37 +72,13 @@ class ThemeAdapter(
             cardTheme.apply {
                 strokeColor = currentTheme.palette.background.toInvertedAndroidColor(alpha)
                 setOnClickListener {
-                    unlockThemeIfNeeded(theme)
+                    if (preferencesRepository.isPremiumEnabled()) {
+                        onSelectTheme(theme)
+                    } else {
+                        onRequestPurchase()
+                    }
                 }
             }
-        }
-    }
-
-    private fun unlockThemeIfNeeded(theme: AppTheme) {
-        if (!theme.isPaid ||
-            preferencesRepository.isPremiumEnabled() ||
-            unlockedThemes.contains(theme.id.toInt())
-        ) {
-            themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
-        } else {
-            adsManager.showRewardedAd(
-                activity,
-                skipIfFrequent = false,
-                onRewarded = {
-                    themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
-                },
-                onFail = {
-                    adsManager.showInterstitialAd(
-                        activity,
-                        onDismiss = {
-                            themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
-                        },
-                        onError = {
-                            activity.showWarning(R.string.no_network)
-                        },
-                    )
-                },
-            )
         }
     }
 }
