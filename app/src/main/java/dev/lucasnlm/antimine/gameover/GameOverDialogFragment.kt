@@ -75,7 +75,9 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                 EndGameDialogEvent.BuildCustomEndGame(
                     gameResult = if (getInt(DIALOG_TOTAL_MINES, 0) > 0) {
                         GameResult.values()[getInt(DIALOG_GAME_RESULT)]
-                    } else GameResult.GameOver,
+                    } else {
+                        GameResult.GameOver
+                    },
                     showContinueButton = getBoolean(DIALOG_SHOW_CONTINUE),
                     time = getLong(DIALOG_TIME, 0L),
                     rightMines = getInt(DIALOG_RIGHT_MINES, 0),

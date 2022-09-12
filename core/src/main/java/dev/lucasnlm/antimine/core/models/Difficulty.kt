@@ -10,5 +10,5 @@ enum class Difficulty(
     Custom("CUSTOM"),
     Master("MASTER"),
     Legend("LEGEND"),
-    FixedSize("FIXED_SIZE")
+    FixedSize("FIXED_SIZE"),
 }

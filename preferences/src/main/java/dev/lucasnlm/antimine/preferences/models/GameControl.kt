@@ -28,7 +28,7 @@ enum class ControlStyle {
     DoubleClick,
     FastFlag,
     DoubleClickInverted,
-    SwitchMarkOpen
+    SwitchMarkOpen,
 }
 
 /**
