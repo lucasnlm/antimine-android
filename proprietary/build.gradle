@@ -45,8 +45,8 @@ dependencies {
     implementation 'com.android.billingclient:billing-ktx:5.0.0'
     implementation 'com.google.android.gms:play-services-instantapps:18.0.1'
     implementation 'com.google.android.gms:play-services-games:22.0.1'
-    implementation 'com.google.android.gms:play-services-auth:20.1.0'
-    implementation 'com.google.android.gms:play-services-ads:20.6.0'
+    implementation 'com.google.android.gms:play-services-auth:20.3.0'
+    implementation 'com.google.android.gms:play-services-ads:21.2.0'
     implementation 'com.google.android.play:core-ktx:1.8.1'
 
     // Jetbrains
@@ -63,7 +63,7 @@ dependencies {
 
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1'
 
     // Koin

@@ -24,7 +24,7 @@
         tools:layout_width="32dp"
         tools:visibility="visible" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

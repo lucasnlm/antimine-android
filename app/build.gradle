@@ -15,8 +15,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1509021
-        versionName '15.9.2'
+        versionCode 1000001
+        versionName '16.0.0'
         minSdkVersion 21
         targetSdkVersion 33
         multiDexEnabled true
@@ -122,7 +122,7 @@ dependencies {
     fossImplementation project(':foss')
 
     // AndroidX
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.multidex:multidex:2.0.1'
@@ -150,13 +150,13 @@ dependencies {
 
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1'
 
     // Tests
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'android.arch.core:core-testing:1.1.1'
-    testImplementation 'androidx.core:core-ktx:1.8.0'
+    testImplementation 'androidx.core:core-ktx:1.9.0'
     testImplementation 'androidx.test:core-ktx:1.4.0'
     testImplementation 'androidx.test:rules:1.4.0'
     testImplementation 'androidx.test:runner:1.4.0'

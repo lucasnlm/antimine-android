@@ -39,7 +39,7 @@ import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
-import dev.lucasnlm.antimine.ui.showWarning
+import dev.lucasnlm.antimine.ui.ext.showWarning
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IFeatureFlagManager

@@ -44,7 +44,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
 
     // AndroidX
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.activity:activity-ktx:1.5.1'
     implementation 'androidx.fragment:fragment-ktx:1.5.2'
 
@@ -68,7 +68,7 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1'
 
     // Kotlin Lib
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10'
 
     // Unit Tests
     testImplementation 'junit:junit:4.13.2'

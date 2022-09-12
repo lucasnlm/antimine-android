@@ -18,7 +18,7 @@
         <requestFocus />
     </FrameLayout>
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tapToBegin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/controlsToast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/timer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                     tools:text="10:00"
                     tools:visibility="visible" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/minesCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -162,7 +162,7 @@
                     app:srcCompat="@drawable/retry"
                     tools:alpha="1.0" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tipsCounter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -177,5 +177,7 @@
             </FrameLayout>
 
         </LinearLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

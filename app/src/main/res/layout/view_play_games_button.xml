@@ -20,7 +20,7 @@
         app:tintMode="src_in"
         tools:src="@drawable/games_achievements" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

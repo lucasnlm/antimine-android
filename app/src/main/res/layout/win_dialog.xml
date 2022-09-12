@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,12 +9,12 @@
         android:id="@+id/dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         android:background="@drawable/round_background"
-        app:layout_constraintTop_toTopOf="parent"
+        android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/adFrame"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/title_emoji"
@@ -32,7 +31,7 @@
             tools:ignore="KeyboardInaccessibleWidget"
             tools:src="@drawable/emoji_smiling_face_with_sunglasses" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +46,7 @@
             app:layout_constraintTop_toBottomOf="@+id/title_emoji"
             tools:text="@string/you_lost" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +59,7 @@
             app:layout_constraintTop_toBottomOf="@+id/title"
             tools:text="You did 5/12 in 34 seconds." />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/received_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,27 +75,31 @@
             app:layout_constraintTop_toBottomOf="@+id/subtitle"
             tools:visibility="visible" />
 
-        <ImageView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/close"
+            style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?selectableItemBackgroundBorderless"
             android:contentDescription="@string/cancel"
             android:importantForAccessibility="no"
             android:padding="8dp"
-            android:src="@drawable/close"
+            app:icon="@drawable/close"
+            app:iconTint="?colorOnBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/settings"
+            style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?selectableItemBackgroundBorderless"
             android:contentDescription="@string/settings"
             android:importantForAccessibility="no"
             android:padding="8dp"
-            android:src="@drawable/settings"
+            app:icon="@drawable/settings"
+            app:iconTint="?colorOnBackground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -110,35 +113,37 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/received_message">
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/new_game"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/new_game"
                 android:textAllCaps="true">
 
                 <requestFocus />
-            </androidx.appcompat.widget.AppCompatButton>
+            </com.google.android.material.button.MaterialButton>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/stats"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/events"
                 android:textAllCaps="true"
                 android:visibility="gone"
+                app:strokeWidth="0dp"
                 tools:visibility="visible" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/remove_ads"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/remove_ad"
                 android:textAllCaps="true"
                 android:visibility="gone"
+                app:strokeWidth="0dp"
                 tools:visibility="visible" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -147,13 +152,13 @@
         android:id="@+id/adFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="50dp"
-        android:background="@drawable/round_background"
         android:layout_marginTop="16dp"
+        android:background="@drawable/round_background"
         android:gravity="center"
+        android:minHeight="50dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog" />
 </androidx.constraintlayout.widget.ConstraintLayout>
