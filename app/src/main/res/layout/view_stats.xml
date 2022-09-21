@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/statsLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,12 +46,12 @@
 
                 <TableRow>
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:padding="8dp"
                         android:text="@string/games"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/totalGames"
                         android:gravity="end"
                         android:padding="8dp"
@@ -61,12 +61,12 @@
 
                 <TableRow>
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:padding="8dp"
                         android:text="@string/mines"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/minesCount"
                         android:gravity="end"
                         android:padding="8dp"
@@ -76,12 +76,12 @@
 
                 <TableRow>
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:padding="8dp"
                         android:text="@string/total_time"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/totalTime"
                         android:gravity="end"
                         android:padding="8dp"
@@ -91,12 +91,12 @@
 
                 <TableRow>
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:padding="8dp"
                         android:text="@string/average_time"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/averageTime"
                         android:gravity="end"
                         android:padding="8dp"
@@ -106,12 +106,12 @@
 
                 <TableRow>
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:padding="8dp"
                         android:text="@string/shortest_time"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/shortestTime"
                         android:gravity="end"
                         android:padding="8dp"
@@ -121,12 +121,12 @@
 
                 <TableRow>
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:padding="8dp"
                         android:text="@string/open_areas"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/openAreas"
                         android:gravity="end"
                         android:padding="8dp"
@@ -136,12 +136,12 @@
 
                 <TableRow>
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:padding="8dp"
                         android:text="@string/performance"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/performance"
                         android:gravity="end"
                         android:padding="8dp"
@@ -151,12 +151,12 @@
 
                 <TableRow>
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:padding="8dp"
                         android:text="@string/victories"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/victory"
                         android:gravity="end"
                         android:padding="8dp"
@@ -166,19 +166,23 @@
 
                 <TableRow>
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:padding="8dp"
                         android:text="@string/defeats"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/defeat"
                         android:gravity="end"
                         android:padding="8dp"
                         android:text="-"
                         tools:ignore="HardcodedText" />
                 </TableRow>
+
             </TableLayout>
+
         </LinearLayout>
+
     </com.google.android.material.card.MaterialCardView>
+
 </FrameLayout>

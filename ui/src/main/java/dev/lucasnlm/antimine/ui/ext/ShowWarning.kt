@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.ui
+package dev.lucasnlm.antimine.ui.ext
 
 import android.app.Activity
 import androidx.annotation.StringRes

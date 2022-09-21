@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/flag" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/difficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Difficulty" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/minefieldSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@id/difficulty"
         tools:text="9 x 9" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/dash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@id/difficulty"
         tools:ignore="HardcodedText" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/minesCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

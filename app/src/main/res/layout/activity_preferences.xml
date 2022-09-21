@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fadeScrollbars="false"
@@ -30,7 +30,7 @@
             android:paddingHorizontal="@dimen/main_activity_padding"
             android:paddingTop="8dp">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/general_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/hapticFeedbackLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/general_label" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/hapticFeedback"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -68,7 +68,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/hapticFeedbackLabel" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/soundEffectsLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hapticFeedbackLabel" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/soundEffects"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -93,7 +93,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/soundEffectsLabel" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/showWindowsLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/soundEffectsLabel" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/showWindows"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -118,7 +118,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/showWindowsLabel" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/openDirectlyLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/showWindowsLabel" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/openDirectly"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -143,7 +143,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/openDirectlyLabel" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/gameplay_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/openDirectlyLabel" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/useQuestionMarkLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/gameplay_label" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/useQuestionMark"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -182,7 +182,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/useQuestionMarkLabel" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/automaticFlagsLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -201,7 +201,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/useQuestionMarkLabel" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/automaticFlags"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -211,7 +211,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/automaticFlagsLabel" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/allowClickNumberLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -227,7 +227,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/automaticFlagsLabel" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/clickOnNumbers"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -236,7 +236,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/allowClickNumberLabel" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/flagWhenTapOnNumbersLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -252,7 +252,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/allowClickNumberLabel" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/flagWhenTapOnNumbers"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -261,7 +261,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/flagWhenTapOnNumbersLabel" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/helpLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -277,7 +277,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/flagWhenTapOnNumbers" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/help"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -286,7 +286,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/helpLabel" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/highlightUnsolvedNumbersLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -302,7 +302,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/helpLabel" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/highlightUnsolvedNumbers"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -313,6 +313,6 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

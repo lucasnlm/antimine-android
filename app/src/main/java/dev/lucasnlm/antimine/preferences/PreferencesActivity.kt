@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.preference.PreferenceManager
-import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.android.material.checkbox.MaterialCheckBox
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.ui.ext.ThematicActivity
@@ -21,7 +21,7 @@ class PreferencesActivity :
 
     private fun bindItem(
         label: TextView,
-        switch: SwitchMaterial,
+        switch: MaterialCheckBox,
         checked: Boolean,
         action: (Boolean) -> Unit,
     ) {

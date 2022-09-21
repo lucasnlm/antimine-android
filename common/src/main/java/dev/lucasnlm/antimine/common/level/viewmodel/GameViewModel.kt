@@ -565,8 +565,10 @@ open class GameViewModel(
 
     private fun runClock() {
         clock.run {
-            if (isStopped) start {
-                sendEvent(GameEvent.UpdateTime(it))
+            if (isStopped) {
+                start {
+                    sendEvent(GameEvent.UpdateTime(it))
+                }
             }
         }
     }

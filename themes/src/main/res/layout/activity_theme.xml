@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="8dp">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/square_size_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 app:trackColorActive="?colorAccent"
                 app:trackHeight="8dp" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/square_radius_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                 app:trackColorActive="?colorAccent"
                 app:trackHeight="8dp" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/square_divider_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

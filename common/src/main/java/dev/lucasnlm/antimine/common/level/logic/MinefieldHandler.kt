@@ -39,7 +39,9 @@ class MinefieldHandler(
             unrevealedMines.filter {
                 (lastX - it.posX).absoluteValue < 3 && (lastY - it.posY).absoluteValue < 3
             }.shuffled().firstOrNull()
-        } else null
+        } else {
+            null
+        }
 
         val result = when {
             nearestTarget != null -> {

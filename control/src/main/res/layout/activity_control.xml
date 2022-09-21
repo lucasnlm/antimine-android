@@ -43,7 +43,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/settings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/longPressLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                 app:trackColorActive="?colorAccent"
                 app:trackHeight="8dp" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/doubleClickLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                 app:trackColorActive="?colorAccent"
                 app:trackHeight="8dp" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/touch_sensibility"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
                 app:trackColorActive="?colorAccent"
                 app:trackHeight="8dp" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/hapticLevelLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
                 app:trackColorActive="?colorAccent"
                 app:trackHeight="8dp" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/toggleButtonTopBarLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hapticLevelLabel" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/toggleButtonTopBar"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -202,7 +202,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/toggleButtonTopBarLabel" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/leftHandedLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -219,7 +219,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toggleButtonTopBarLabel" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/leftHanded"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
