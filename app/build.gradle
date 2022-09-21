@@ -95,7 +95,6 @@ android {
             applicationId 'dev.lucanlm.antimine'
         }
     }
-    namespace 'dev.lucasnlm.antimine'
 }
 
 kapt {
