@@ -35,6 +35,7 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+    namespace 'dev.lucasnlm.antimine.gdx'
 }
 
 configurations { natives }
