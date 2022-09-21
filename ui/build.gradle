@@ -29,7 +29,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    namespace 'dev.lucasnlm.antimine.ui'
 }
 
 dependencies {

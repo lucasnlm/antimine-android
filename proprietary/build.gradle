@@ -29,7 +29,6 @@ android {
                 '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi',
                 '-Xuse-experimental=kotlinx.coroutines.FlowPreview']
     }
-    namespace 'dev.lucasnlm.antimine'
 }
 
 dependencies {
