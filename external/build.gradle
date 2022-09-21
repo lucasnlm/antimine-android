@@ -26,7 +26,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    namespace 'dev.lucasnlm.external'
 }
 
 dependencies {
