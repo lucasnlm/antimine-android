@@ -15,10 +15,14 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class AdMobAdsManager(
     private val context: Context,
     private val crashReporter: ICrashReporter,
+    private val scope: CoroutineScope,
 ) : IAdsManager {
     private var rewardedAd: RewardedAd? = null
     private var secondRewardedAd: RewardedAd? = null
@@ -45,7 +49,9 @@ class AdMobAdsManager(
                 }
 
                 if (providerCount != 0) {
-                    preloadAds()
+                    scope.launch {
+                        preloadAds()
+                    }
                 } else {
                     initialized = false
                 }
@@ -53,7 +59,7 @@ class AdMobAdsManager(
         }
     }
 
-    private fun loadRewardAd() {
+    private suspend fun loadRewardAd() {
         var rewardedAdRetry = 0
         val adRequest = AdRequest.Builder().build()
         RewardedAd.load(
@@ -67,7 +73,10 @@ class AdMobAdsManager(
 
                     if (rewardedAdRetry < 3) {
                         rewardedAdRetry++
-                        loadRewardAd()
+                        scope.launch {
+                            delay(RETRY_DELAY_MS)
+                            loadRewardAd()
+                        }
                     }
                 }
 
@@ -79,7 +88,7 @@ class AdMobAdsManager(
         )
     }
 
-    private fun loadSecondRewardAd() {
+    private suspend fun loadSecondRewardAd() {
         var rewardedAdRetry = 0
         val adRequest = AdRequest.Builder().build()
         RewardedAd.load(
@@ -93,7 +102,10 @@ class AdMobAdsManager(
 
                     if (rewardedAdRetry < 3) {
                         rewardedAdRetry++
-                        loadRewardAd()
+                        scope.launch {
+                            delay(RETRY_DELAY_MS)
+                            loadSecondRewardAd()
+                        }
                     }
                 }
 
@@ -105,7 +117,7 @@ class AdMobAdsManager(
         )
     }
 
-    private fun loadInterstitialAd() {
+    private suspend fun loadInterstitialAd() {
         var interstitialAdRetry = 0
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
@@ -118,8 +130,11 @@ class AdMobAdsManager(
                     interstitialAd = null
 
                     if (interstitialAdRetry < 3) {
-                        loadInterstitialAd()
-                        interstitialAdRetry++
+                        scope.launch {
+                            delay(RETRY_DELAY_MS)
+                            loadInterstitialAd()
+                            interstitialAdRetry++
+                        }
                     }
                 }
 
@@ -144,8 +159,11 @@ class AdMobAdsManager(
                     secondInterstitialAd = null
 
                     if (interstitialAdRetry < 3) {
-                        loadInterstitialAd()
-                        interstitialAdRetry++
+                        scope.launch {
+                            delay(RETRY_DELAY_MS)
+                            loadSecondInterstitialAd()
+                            interstitialAdRetry++
+                        }
                     }
                 }
 
@@ -157,7 +175,7 @@ class AdMobAdsManager(
         )
     }
 
-    private fun preloadAds() {
+    private suspend fun preloadAds() {
         loadRewardAd()
         loadSecondRewardAd()
         loadInterstitialAd()
@@ -182,20 +200,22 @@ class AdMobAdsManager(
                         if (!activity.isFinishing) {
                             lastShownAd = System.currentTimeMillis()
                             onRewarded?.invoke()
-                            loadSecondRewardAd()
+                            scope.launch {
+                                loadSecondRewardAd()
+                            }
                         }
                     }
-                    loadSecondRewardAd()
                 }
                 rewardedAd != null -> {
                     rewardedAd.show(activity) {
                         if (!activity.isFinishing) {
                             lastShownAd = System.currentTimeMillis()
                             onRewarded?.invoke()
-                            loadRewardAd()
+                            scope.launch {
+                                loadRewardAd()
+                            }
                         }
                     }
-                    loadRewardAd()
                 }
                 else -> {
                     val message = failErrorCause?.let { "Fail to load Ad\n$it" } ?: "Fail to load Ad"
@@ -236,7 +256,9 @@ class AdMobAdsManager(
 
         interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
-                loadInterstitialAd()
+                scope.launch {
+                    loadInterstitialAd()
+                }
                 onDismiss.invoke()
             }
 
@@ -271,5 +293,9 @@ class AdMobAdsManager(
             adUnitId = Ads.BannerAd
             loadAd(adRequest)
         }
+    }
+
+    companion object {
+        const val RETRY_DELAY_MS = 2000L
     }
 }

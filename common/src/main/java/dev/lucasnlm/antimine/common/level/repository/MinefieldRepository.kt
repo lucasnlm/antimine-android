@@ -4,7 +4,6 @@ import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import kotlin.random.Random
 
 interface IMinefieldRepository {
     fun baseStandardSize(
@@ -84,12 +83,12 @@ class MinefieldRepository : IMinefieldRepository {
                 resultWidth += 2
                 resultHeight += 2
             }
-        } while (percentage > 22)
+        } while (true)
 
         return result
     }
 
-    override fun randomSeed(): Long = Random.nextLong()
+    override fun randomSeed(): Long = System.currentTimeMillis()
 
     companion object {
         private val beginnerMinefield = Minefield(9, 9, 10)
@@ -99,7 +98,6 @@ class MinefieldRepository : IMinefieldRepository {
         private val legendMinefield = Minefield(100, 100, 2000)
 
         private const val CUSTOM_LEVEL_MINE_RATIO = 0.18
-        private const val MAX_LEVEL_MINE_RATIO = 0.45
         private const val HORIZONTAL_STANDARD_GAP_WITHOUT_SIDE = 1
         private const val HORIZONTAL_STANDARD_GAP = 3
         private const val VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM = 4
