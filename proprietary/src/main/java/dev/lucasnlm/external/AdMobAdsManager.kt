@@ -176,10 +176,12 @@ class AdMobAdsManager(
     }
 
     private suspend fun preloadAds() {
-        loadRewardAd()
-        loadSecondRewardAd()
-        loadInterstitialAd()
-        loadSecondInterstitialAd()
+        withContext(Dispatchers.Main) {
+            loadRewardAd()
+            loadSecondRewardAd()
+            loadInterstitialAd()
+            loadSecondInterstitialAd()
+        }
     }
 
     override fun showRewardedAd(
