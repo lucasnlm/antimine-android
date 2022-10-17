@@ -51,7 +51,7 @@ class AdMobAdsManager(
                 }
 
                 if (providerCount != 0) {
-                    scope.launch {
+                    scope.launch(Dispatchers.Main) {
                         preloadAds()
                     }
                 } else {
@@ -75,7 +75,7 @@ class AdMobAdsManager(
 
                     if (rewardedAdRetry < 3) {
                         rewardedAdRetry++
-                        scope.launch {
+                        scope.launch(Dispatchers.Main) {
                             delay(RETRY_DELAY_MS)
                             loadRewardAd()
                         }
@@ -104,7 +104,7 @@ class AdMobAdsManager(
 
                     if (rewardedAdRetry < 3) {
                         rewardedAdRetry++
-                        scope.launch {
+                        scope.launch(Dispatchers.Main) {
                             delay(RETRY_DELAY_MS)
                             loadSecondRewardAd()
                         }
@@ -132,7 +132,7 @@ class AdMobAdsManager(
                     interstitialAd = null
 
                     if (interstitialAdRetry < 3) {
-                        scope.launch {
+                        scope.launch(Dispatchers.Main) {
                             delay(RETRY_DELAY_MS)
                             loadInterstitialAd()
                             interstitialAdRetry++
@@ -161,7 +161,7 @@ class AdMobAdsManager(
                     secondInterstitialAd = null
 
                     if (interstitialAdRetry < 3) {
-                        scope.launch {
+                        scope.launch(Dispatchers.Main) {
                             delay(RETRY_DELAY_MS)
                             loadSecondInterstitialAd()
                             interstitialAdRetry++
@@ -204,7 +204,7 @@ class AdMobAdsManager(
                         if (!activity.isFinishing) {
                             lastShownAd = System.currentTimeMillis()
                             onRewarded?.invoke()
-                            scope.launch {
+                            scope.launch(Dispatchers.Main) {
                                 loadSecondRewardAd()
                             }
                         }
@@ -215,7 +215,7 @@ class AdMobAdsManager(
                         if (!activity.isFinishing) {
                             lastShownAd = System.currentTimeMillis()
                             onRewarded?.invoke()
-                            scope.launch {
+                            scope.launch(Dispatchers.Main) {
                                 loadRewardAd()
                             }
                         }
@@ -260,7 +260,7 @@ class AdMobAdsManager(
 
         interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
-                scope.launch {
+                scope.launch(Dispatchers.Main) {
                     loadInterstitialAd()
                 }
                 onDismiss.invoke()
