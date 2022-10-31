@@ -123,6 +123,6 @@
     <string name="progressive">प्रोग्रेसिव</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
     <string name="left_handed">बायां हाथ</string>
-    <string name="donate_request">If you like this game, consider making a donation.</string>
-    <string name="donate_help">It will help keep this project active!</string>
+    <string name="donate_request">अगर आपको यह खेल पसंद है, तो दान करने पर विचार करें।</string>
+    <string name="donate_help">यह इस प्रोजैक्ट को सक्रिय रखने में मदद करेगा!</string>
 </resources>

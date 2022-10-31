@@ -46,11 +46,11 @@
     <string name="you_finished">끝났어!</string>
     <string name="defeats">실패 횟수</string>
     <string name="generic_game_over">다음 판에서는 잘하시길 빕니다.</string>
-    <string name="generic_win">%2$d 초 만에 %1$d 개의 광산을 찾았습니다.</string>
+    <string name="generic_win">%2$d 초 동안 %1$d 개의 지뢰을 찾았습니다.</string>
     <string name="fail_to_share">공유 실패</string>
     <string name="version_s">버전: %1$s</string>
     <string name="sound_effects">효과음</string>
-    <string name="are_you_sure">확실합니까?</string>
+    <string name="are_you_sure">계속하시겠습니까?</string>
     <string name="enable_automatic_flags">자동으로 깃발 놓기 사용</string>
     <string name="open_areas">칸 열기</string>
     <string name="total_time">총 시간</string>
@@ -70,10 +70,10 @@
     <string name="retry">재시도</string>
     <string name="continue_game">계속</string>
     <string name="empty">비어있음</string>
-    <string name="cant_do_it_now">지금은 불가능 해</string>
+    <string name="cant_do_it_now">지금은 불가능한 작업입니다</string>
     <string name="you_have_received">당신은 받았습니다: +%1$d</string>
     <string name="help_win_a_game">더 많은 도움을 받으려면 게임에서 승리해야합니다.</string>
-    <string name="unknown_error">알 수 없는 오류 발생</string>
+    <string name="unknown_error">알 수 없는 오류</string>
     <string name="leaderboards">리더보드</string>
     <string name="cancel">취소</string>
     <string name="resume">계속하기</string>
