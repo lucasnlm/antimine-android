@@ -115,7 +115,7 @@
     <string name="close">Kapat</string>
     <string name="open_tutorial">Öğreticiyi aç</string>
     <string name="click_numbers">Sayılara dokunmaya izin ver</string>
-    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
+    <string name="flag_when_tap_numbers">Sayılara dokununca bayrak koyma</string>
     <string name="tap_to_customize">Özelleştirmek için tıkla</string>
     <string name="toggle_button_top">Üst çubukta \"Geçiş Düğmesini\" göster</string>
     <string name="no_guess_fail_warning">Mevcut mayın tarlası tahmin edilemez olmayabilir!</string>

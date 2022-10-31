@@ -115,14 +115,14 @@
     <string name="close">Tutup</string>
     <string name="open_tutorial">Buka Tutorial</string>
     <string name="click_numbers">Izinkan ketuk di nomor</string>
-    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
+    <string name="flag_when_tap_numbers">Bendera saat memencet nomor</string>
     <string name="tap_to_customize">Ketuk untuk menyesuaikan</string>
     <string name="toggle_button_top">Tunjukkan \"Tombol alihan\" di bar atas</string>
     <string name="no_guess_fail_warning">Ladang Ranjau saat ini kemungkinan tidak dapat diselesaikan tanpa menebak!</string>
     <string name="fixed_size">Ukuran tetap</string>
     <string name="progressive">Progresif</string>
     <string name="highlight_unsolved_numbers">Soroti nomor yang belum diselesaikan</string>
-    <string name="left_handed">Pengguna tangan kiri</string>
+    <string name="left_handed">Kidal</string>
     <string name="donate_request">Jika Anda menyukai permainan ini, pertimbangkan untuk berdonasi.</string>
     <string name="donate_help">It will help keep this project active!</string>
 </resources>
