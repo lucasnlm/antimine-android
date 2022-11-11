@@ -256,7 +256,7 @@ class AreaActor(
                     color = if (area.dimNumber) {
                         theme.palette
                             .minesAround(area.minesAround - 1)
-                            .toGdxColor(GdxLocal.zoomLevelAlpha * 0.35f)
+                            .toGdxColor(GdxLocal.zoomLevelAlpha * 0.45f)
                             .dim(0.5f)
                     } else {
                         theme.palette
