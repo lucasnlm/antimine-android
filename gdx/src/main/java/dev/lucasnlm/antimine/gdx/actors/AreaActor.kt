@@ -9,15 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import dev.lucasnlm.antimine.core.getPos
 import dev.lucasnlm.antimine.core.models.Area
-import dev.lucasnlm.antimine.gdx.GdxLocal
-import dev.lucasnlm.antimine.gdx.alpha
-import dev.lucasnlm.antimine.gdx.dim
-import dev.lucasnlm.antimine.gdx.drawAsset
-import dev.lucasnlm.antimine.gdx.drawRegion
-import dev.lucasnlm.antimine.gdx.drawTexture
+import dev.lucasnlm.antimine.gdx.*
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
-import dev.lucasnlm.antimine.gdx.toGdxColor
-import dev.lucasnlm.antimine.gdx.toOppositeMax
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.minesAround
 
@@ -109,30 +102,8 @@ class AreaActor(
 
         if ((area.isCovered || area.hasMine) && this.areaForm != newForm) {
             this.areaForm = newForm
-
             pieces.clear()
-            val newPieces = mapOf(
-                FormNames.core to true,
-                FormNames.top to newForm.top,
-                FormNames.left to newForm.left,
-                FormNames.bottom to newForm.bottom,
-                FormNames.right to newForm.right,
-                FormNames.cornerTopLeft to (!newForm.top && !newForm.left),
-                FormNames.cornerTopRight to (!newForm.top && !newForm.right),
-                FormNames.cornerBottomLeft to (!newForm.bottom && !newForm.left),
-                FormNames.cornerBottomRight to (!newForm.bottom && !newForm.right),
-                FormNames.borderCornerTopRight to (newForm.top && newForm.right && !newForm.topRight),
-                FormNames.borderCornerTopLeft to (newForm.top && newForm.left && !newForm.topLeft),
-                FormNames.borderCornerBottomRight to (newForm.bottom && newForm.right && !newForm.bottomRight),
-                FormNames.borderCornerBottomLeft to (newForm.bottom && newForm.left && !newForm.bottomLeft),
-                FormNames.fillTopLeft to (newForm.top && newForm.left && newForm.topLeft),
-                FormNames.fillTopRight to (newForm.top && newForm.right && newForm.topRight),
-                FormNames.fillBottomLeft to (newForm.bottom && newForm.left && newForm.bottomLeft),
-                FormNames.fillBottomRight to (newForm.bottom && newForm.right && newForm.bottomRight),
-            ).filter {
-                it.value
-            }.keys
-            pieces.addAll(newPieces)
+            pieces.addAll(newForm.getAtlasNames())
         }
 
         this.area = area
@@ -163,7 +134,7 @@ class AreaActor(
     private fun drawBackground(batch: Batch, isOdd: Boolean) {
         if (!isOdd && !area.isCovered && GdxLocal.zoomLevelAlpha > 0.0f) {
             GdxLocal.gameTextures?.areaCovered?.let {
-                batch.drawTexture(
+                batch.drawRegion(
                     texture = it,
                     x = x,
                     y = y,
@@ -183,10 +154,10 @@ class AreaActor(
             else -> theme.palette.covered
         }
 
-        GdxLocal.areaAtlas?.let { atlas ->
+        GdxLocal.atlas?.let { atlas ->
             if (areaForm == areaFullForm) {
                 batch.drawRegion(
-                    texture = atlas.findRegion(FormNames.full),
+                    texture = atlas.findRegion(AtlasNames.full),
                     x = x - 0.5f,
                     y = y - 0.5f,
                     width = width + 0.5f,
@@ -201,7 +172,7 @@ class AreaActor(
             } else {
                 pieces.forEach { piece ->
                     batch.drawRegion(
-                        texture = atlas.findRegion(piece),
+                        texture = GdxLocal.gameTextures!!.pieces[piece]!!,
                         x = x - 0.5f,
                         y = y - 0.5f,
                         width = width + 0.5f,
@@ -221,7 +192,7 @@ class AreaActor(
     private fun drawMineBackground(batch: Batch) {
         val coverColor = Color(0.8f, 0.3f, 0.3f, 1.0f)
 
-        GdxLocal.areaAtlas?.let { atlas ->
+        GdxLocal.atlas?.let { atlas ->
             pieces.forEach { piece ->
                 batch.drawRegion(
                     texture = atlas.findRegion(piece),
@@ -311,7 +282,7 @@ class AreaActor(
                 val coverColor = if (isOdd) { theme.palette.coveredOdd } else { theme.palette.covered }
 
                 GdxLocal.gameTextures?.detailedArea?.let {
-                    batch.drawTexture(
+                    batch.drawRegion(
                         texture = it,
                         x = x,
                         y = y,
@@ -321,7 +292,7 @@ class AreaActor(
                         blend = true,
                     )
 
-                    batch.drawTexture(
+                    batch.drawRegion(
                         texture = it,
                         x = x - width * (focusScale - 1.0f) * 0.5f,
                         y = y - height * (focusScale - 1.0f) * 0.5f,
@@ -334,7 +305,7 @@ class AreaActor(
             } else {
                 GdxLocal.gameTextures?.detailedArea?.let {
                     val color = theme.palette.background
-                    batch.drawTexture(
+                    batch.drawRegion(
                         texture = it,
                         x = x - width * (focusScale - 1.0f) * 0.5f,
                         y = y - height * (focusScale - 1.0f) * 0.5f,
@@ -396,7 +367,7 @@ class AreaActor(
         const val BASE_ICON_SCALE = 0.8f
 
         private fun Area.canLigatureTo(area: Area): Boolean {
-            return isCovered && mark.ligatureId == area.mark.ligatureId
+            return isCovered && mark.ligatureMask == area.mark.ligatureMask
         }
     }
 }

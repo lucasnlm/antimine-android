@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:background="?selectableItemBackgroundBorderless"
         android:importantForAccessibility="no"
-        android:padding="16dp"
+        android:padding="20dp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

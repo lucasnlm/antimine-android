@@ -1,5 +1,7 @@
 package dev.lucasnlm.antimine.gdx.actors
 
+import dev.lucasnlm.antimine.gdx.AtlasNames
+
 data class AreaForm(
     val top: Boolean,
     val bottom: Boolean,
@@ -9,7 +11,31 @@ data class AreaForm(
     val topRight: Boolean = false,
     val bottomLeft: Boolean = false,
     val bottomRight: Boolean = false,
-)
+) {
+    fun getAtlasNames(): Set<String> {
+        return mapOf(
+            AtlasNames.core to true,
+            AtlasNames.top to top,
+            AtlasNames.left to left,
+            AtlasNames.bottom to bottom,
+            AtlasNames.right to right,
+            AtlasNames.cornerTopLeft to (!top && !left),
+            AtlasNames.cornerTopRight to (!top && !right),
+            AtlasNames.cornerBottomLeft to (!bottom && !left),
+            AtlasNames.cornerBottomRight to (!bottom && !right),
+            AtlasNames.borderCornerTopRight to (top && right && !topRight),
+            AtlasNames.borderCornerTopLeft to (top && left && !topLeft),
+            AtlasNames.borderCornerBottomRight to (bottom && right && !bottomRight),
+            AtlasNames.borderCornerBottomLeft to (bottom && left && !bottomLeft),
+            AtlasNames.fillTopLeft to (top && left && topLeft),
+            AtlasNames.fillTopRight to (top && right && topRight),
+            AtlasNames.fillBottomLeft to (bottom && left && bottomLeft),
+            AtlasNames.fillBottomRight to (bottom && right && bottomRight),
+        ).filter {
+            it.value
+        }.keys
+    }
+}
 
 val areaNoForm = AreaForm(
     top = false,
@@ -28,24 +54,3 @@ val areaFullForm = AreaForm(
     bottomLeft = true,
     bottomRight = true,
 )
-
-object FormNames {
-    const val core = "core"
-    const val bottom = "b"
-    const val top = "t"
-    const val right = "r"
-    const val left = "l"
-    const val cornerTopLeft = "c-t-l"
-    const val cornerTopRight = "c-t-r"
-    const val cornerBottomRight = "c-b-r"
-    const val cornerBottomLeft = "c-b-l"
-    const val borderCornerTopRight = "bc-t-r"
-    const val borderCornerTopLeft = "bc-t-l"
-    const val borderCornerBottomRight = "bc-b-r"
-    const val borderCornerBottomLeft = "bc-b-l"
-    const val fillTopLeft = "t-l-tl"
-    const val fillTopRight = "t-r-tr"
-    const val fillBottomRight = "b-r-br"
-    const val fillBottomLeft = "b-l-bl"
-    const val full = "full"
-}
