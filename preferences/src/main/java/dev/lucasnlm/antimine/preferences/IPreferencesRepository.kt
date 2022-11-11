@@ -137,4 +137,7 @@ interface IPreferencesRepository {
 
     fun setLeftHandedMode(enabled: Boolean)
     fun leftHandedMode(): Boolean
+
+    fun showTimer(): Boolean
+    fun setTimerVisible(visible: Boolean)
 }

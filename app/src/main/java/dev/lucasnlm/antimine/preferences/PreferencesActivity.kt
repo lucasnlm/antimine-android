@@ -87,6 +87,13 @@ class PreferencesActivity :
         )
 
         bindItem(
+            label = showTimerLabel,
+            switch = showTimer,
+            checked = preferenceRepository.showTimer(),
+            action = { preferenceRepository.setTimerVisible(it) },
+        )
+
+        bindItem(
             label = automaticFlagsLabel,
             switch = automaticFlags,
             checked = preferenceRepository.useFlagAssistant(),

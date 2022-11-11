@@ -57,6 +57,7 @@ class CloudSaveManagerImpl(
                     highlightNumbers = preferencesRepository.dimNumbers().toInt(),
                     leftHanded = preferencesRepository.leftHandedMode().toInt(),
                     dimNumbers = preferencesRepository.dimNumbers().toInt(),
+                    timerVisible = preferencesRepository.showTimer().toInt(),
                 )
             }
         } catch (e: Exception) {

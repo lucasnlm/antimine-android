@@ -466,4 +466,12 @@ class PreferencesRepository(
     override fun setNumbersAutoFlag(allow: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_LET_NUMBERS_AUTO_FLAG, allow)
     }
+
+    override fun showTimer(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_TIMER, true)
+    }
+
+    override fun setTimerVisible(visible: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_TIMER, visible)
+    }
 }

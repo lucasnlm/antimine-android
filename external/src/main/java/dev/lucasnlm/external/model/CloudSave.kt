@@ -27,6 +27,7 @@ data class CloudSave(
     val highlightNumbers: Int,
     val leftHanded: Int,
     val dimNumbers: Int,
+    val timerVisible: Int,
 )
 
 fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
@@ -87,4 +88,5 @@ fun cloudSaveOf(id: String, data: Map<String, Any>) =
         highlightNumbers = data["highlightNumbers"].parseInt(0),
         leftHanded = data["leftHanded"].parseInt(0),
         dimNumbers = data["dimNumbers"].parseInt(0),
+        timerVisible = data["timerVisible"].parseInt(1),
     )

@@ -215,7 +215,12 @@ class GameActivity :
                 }
 
                 timer.apply {
-                    visibility = if (it.duration == 0L) View.GONE else View.VISIBLE
+                    visibility = if (it.duration == 0L || !preferencesRepository.showTimer()) {
+                        View.GONE
+                    } else {
+                        View.VISIBLE
+                    }
+
                     text = DateUtils.formatElapsedTime(it.duration)
                 }
 

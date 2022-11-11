@@ -194,4 +194,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun defaultSquareSize(): Int = 0
 
     override fun defaultSquareDivider(): Int = 0
+
+    override fun showTimer(): Boolean = true
+
+    override fun setTimerVisible(visible: Boolean) {}
 }
