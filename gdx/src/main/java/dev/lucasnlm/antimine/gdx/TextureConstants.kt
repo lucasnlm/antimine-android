@@ -4,6 +4,8 @@ object TextureTheme {
     const val standard = "standard.png"
     const val square = "square.png"
     const val square2 = "square-2.png"
+    const val square3 = "square-3.png"
+    const val classic = "classic.png"
 }
 
 object AtlasNames {
