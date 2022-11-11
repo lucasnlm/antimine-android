@@ -43,7 +43,7 @@ object GameTextureAtlas {
             AtlasNames.fillBottomLeft to gridPoint(x = textureSize, y = textureSize * 4),
             AtlasNames.full to gridPoint(x = textureSize * 7, y = textureSize * 6),
             AtlasNames.single to gridPoint(x = 0, y = textureSize * 2),
-            AtlasNames.singleBackground to gridPoint(x = textureSize, y = textureSize * 2),
+            AtlasNames.singleBackground to gridPoint(x = 0, y = textureSize * 7),
             AtlasNames.number1 to gridPoint(x = textureSize * 2, y = textureSize * 2),
             AtlasNames.number2 to gridPoint(x = textureSize * 3, y = textureSize * 2),
             AtlasNames.number3 to gridPoint(x = textureSize * 4, y = textureSize * 2),

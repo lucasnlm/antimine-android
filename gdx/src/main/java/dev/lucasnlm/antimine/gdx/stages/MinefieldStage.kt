@@ -32,7 +32,6 @@ class MinefieldStage(
     private var minefield: Minefield? = null
     private var minefieldSize: SizeF? = null
     private var currentZoom: Float = 1.0f
-    private var engineLoaded = false
 
     private var lastCameraPosition: Vector3? = null
     private var lastZoom: Float? = null

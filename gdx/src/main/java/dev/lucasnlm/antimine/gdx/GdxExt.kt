@@ -3,27 +3,9 @@ package dev.lucasnlm.antimine.gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Color.WHITE
 import com.badlogic.gdx.graphics.Color.argb8888ToColor
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.Actor
-
-fun Batch.drawTexture(
-    texture: Texture,
-    x: Float,
-    y: Float,
-    width: Float,
-    height: Float,
-    blend: Boolean,
-    color: Color? = null,
-) {
-    if (blend && !isBlendingEnabled) {
-        enableBlending()
-    }
-
-    setColor(color ?: WHITE)
-    draw(texture, x, y, width, height)
-}
 
 fun Batch.drawRegion(
     texture: TextureRegion,

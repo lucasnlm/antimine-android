@@ -436,7 +436,7 @@ class PreferencesRepository(
     }
 
     override fun dimNumbers(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_DIM_NUMBERS, false)
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_DIM_NUMBERS, true)
     }
 
     override fun setDimNumbers(value: Boolean) {
