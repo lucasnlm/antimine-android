@@ -656,7 +656,7 @@ class GameActivity :
                 val message = getString(R.string.do_you_know_how_to_play)
                 val baseText = "Do you know how to play minesweeper?"
 
-                if (lang != null && (lang == "en" || (lang != "en" && message != baseText))) {
+                if (lang != null && (lang == "en" || message != baseText)) {
                     MaterialAlertDialogBuilder(this@GameActivity).run {
                         setTitle(R.string.tutorial)
                         setMessage(R.string.do_you_know_how_to_play)
