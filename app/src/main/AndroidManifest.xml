@@ -33,7 +33,6 @@
         android:name="dev.lucasnlm.antimine.MainApplication"
         android:allowBackup="false"
         android:allowClearUserData="true"
-        android:banner="@mipmap/ic_banner"
         android:description="@string/app_description"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -58,13 +57,6 @@
             <tools:validation testUrl="http://www.lucasnlm.dev/antimine" />
             <tools:validation testUrl="https://www.lucasnlm.dev/" />
             <tools:validation testUrl="http://www.lucasnlm.dev/" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
