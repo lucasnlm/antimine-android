@@ -55,8 +55,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Lifecycle
-    implementation 'android.arch.lifecycle:extensions:1.1.1'
-    implementation 'android.arch.lifecycle:viewmodel:1.1.1'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
 
     // Koin
     implementation 'io.insert-koin:koin-android:3.1.2'
