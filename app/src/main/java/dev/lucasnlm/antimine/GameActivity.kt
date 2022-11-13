@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
+import androidx.activity.addCallback
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
@@ -28,6 +29,7 @@ import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.core.serializableNonSafe
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
@@ -47,11 +49,7 @@ import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.android.synthetic.main.activity_game.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -60,6 +58,7 @@ class GameActivity :
     AndroidFragmentApplication.Callbacks {
 
     private val gameViewModel by viewModel<GameViewModel>()
+    private val appScope: CoroutineScope by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
     private val analyticsManager: IAnalyticsManager by inject()
     private val instantAppManager: IInstantAppManager by inject()
@@ -107,6 +106,10 @@ class GameActivity :
 
         playGamesManager.showPlayPopUp(this)
         playGamesStartUp()
+
+        onBackPressedDispatcher.addCallback {
+            backToMainActivity()
+        }
     }
 
     private fun handleIntent(intent: Intent) {
@@ -115,7 +118,7 @@ class GameActivity :
             when {
                 extras.containsKey(DIFFICULTY) -> {
                     intent.removeExtra(DIFFICULTY)
-                    val difficulty = extras.getSerializable(DIFFICULTY) as Difficulty
+                    val difficulty = extras.serializableNonSafe<Difficulty>(DIFFICULTY)
                     gameViewModel.startNewGame(difficulty)
                 }
                 extras.containsKey(RETRY_GAME) -> {
@@ -400,7 +403,7 @@ class GameActivity :
             gameViewModel.pauseGame()
         }
 
-        GlobalScope.launch {
+        appScope.launch {
             gameViewModel.saveGame()
         }
     }
@@ -408,10 +411,6 @@ class GameActivity :
     private fun backToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-    }
-
-    override fun onBackPressed() {
-        backToMainActivity()
     }
 
     private fun bindTapToBegin() {

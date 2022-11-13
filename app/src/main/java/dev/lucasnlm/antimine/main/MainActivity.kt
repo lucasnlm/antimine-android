@@ -1,11 +1,14 @@
 package dev.lucasnlm.antimine.main
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.app.ActivityCompat
+import androidx.activity.addCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import dev.lucasnlm.antimine.R
@@ -57,8 +60,16 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
 
     private lateinit var viewPager: ViewPager2
 
+    private lateinit var googlePlayLauncher: ActivityResultLauncher<Intent>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        googlePlayLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                handlePlayGames(result.data)
+            }
+        }
 
         continueGame.bind(
             theme = usingTheme,
@@ -347,6 +358,10 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
 
         launchGooglePlayGames()
+
+        onBackPressedDispatcher.addCallback {
+            handleBackPressed()
+        }
     }
 
     private fun getDifficultyExtra(difficulty: Difficulty): String {
@@ -408,7 +423,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
         } else {
             playGamesManager.getLoginIntent()?.let {
-                ActivityCompat.startActivityForResult(this, it, RC_GOOGLE_PLAY, null)
+                googlePlayLauncher.launch(it)
             }
         }
     }
@@ -441,12 +456,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                 if (!logged) {
                     try {
                         playGamesManager.getLoginIntent()?.let {
-                            ActivityCompat.startActivityForResult(
-                                this@MainActivity,
-                                it,
-                                RC_GOOGLE_PLAY,
-                                null,
-                            )
+                            googlePlayLauncher.launch(it)
                         }
                     } catch (e: Exception) {
                         Log.e(SplashActivity.TAG, "User not logged or doesn't have Play Games", e)
@@ -460,14 +470,10 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == RC_GOOGLE_PLAY) {
-            playGamesManager.handleLoginResult(data)
-            lifecycleScope.launch {
-                refreshUserId()
-            }
+    private fun handlePlayGames(data: Intent?) {
+        playGamesManager.handleLoginResult(data)
+        lifecycleScope.launch {
+            refreshUserId()
         }
     }
 
@@ -514,16 +520,12 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
     }
 
-    override fun onBackPressed() {
+    private fun handleBackPressed() {
         if (newGameShow.visibility == View.GONE) {
             newGameShow.visibility = View.VISIBLE
             difficulties.visibility = View.GONE
         } else {
             finishAffinity()
         }
-    }
-
-    companion object {
-        private const val RC_GOOGLE_PLAY = 6
     }
 }

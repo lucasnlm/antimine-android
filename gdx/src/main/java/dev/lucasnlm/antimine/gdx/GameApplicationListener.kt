@@ -138,7 +138,7 @@ class GameApplicationListener(
                         AtlasNames.number6,
                         AtlasNames.number7,
                         AtlasNames.number8,
-                    ).map (::findRegion),
+                    ).map(::findRegion),
                     pieces = listOf(
                         AtlasNames.core,
                         AtlasNames.bottom,

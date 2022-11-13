@@ -7,23 +7,19 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.external.ICloudStorageManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.model.CloudSave
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class CloudSaveManagerImpl(
+    private val scope: CoroutineScope,
     private val playGamesManager: IPlayGamesManager,
     private val preferencesRepository: IPreferencesRepository,
     private val statsRepository: IStatsRepository,
     private val cloudStorageManager: ICloudStorageManager,
 ) : CloudSaveManager {
     override fun uploadSave() {
-        GlobalScope.launch {
-            withContext(Dispatchers.IO) {
-                getCloudSave()?.let {
-                    cloudStorageManager.uploadSave(it)
-                }
+        scope.launch(Dispatchers.IO) {
+            getCloudSave()?.let {
+                cloudStorageManager.uploadSave(it)
             }
         }
     }

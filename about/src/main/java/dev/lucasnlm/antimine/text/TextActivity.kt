@@ -28,7 +28,7 @@ class TextActivity : ThematicActivity(R.layout.activity_text) {
             startDescription = getString(R.string.back),
             startAction = {
                 section.bindText(R.string.about)
-                onBackPressed()
+                finish()
             },
         )
 

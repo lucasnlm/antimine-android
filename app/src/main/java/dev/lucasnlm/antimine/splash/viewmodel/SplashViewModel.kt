@@ -2,14 +2,15 @@ package dev.lucasnlm.antimine.splash.viewmodel
 
 import androidx.lifecycle.ViewModel
 import dev.lucasnlm.antimine.support.IapHandler
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class SplashViewModel(
+    private val scope: CoroutineScope,
     private val iapHandler: IapHandler,
 ) : ViewModel() {
     fun startIap() {
-        GlobalScope.launch {
+        scope.launch {
             iapHandler.start()
         }
     }
