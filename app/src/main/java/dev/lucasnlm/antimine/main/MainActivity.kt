@@ -11,6 +11,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
+import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
@@ -29,7 +30,6 @@ import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ext.ThematicActivity
@@ -362,6 +362,8 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         onBackPressedDispatcher.addCallback {
             handleBackPressed()
         }
+
+        redirectToGame()
     }
 
     private fun getDifficultyExtra(difficulty: Difficulty): String {
@@ -370,6 +372,15 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             dimensionRepository,
             preferencesRepository,
         ).toExtraString()
+    }
+
+    private fun redirectToGame() {
+        val playGames = playGamesManager.hasGooglePlayGames()
+        if ((playGames && preferencesRepository.userId() != null || !playGames) &&
+            preferencesRepository.openGameDirectly()
+        ) {
+            Intent(this, GameActivity::class.java).run { startActivity(this) }
+        }
     }
 
     private fun Minefield.toExtraString(): String {
@@ -395,7 +406,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
             is MainEvent.Recreate -> {
                 finish()
-                startActivity(Intent(this, SplashActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 overridePendingTransition(0, 0)
             }
             else -> {
@@ -450,7 +461,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                     }
                 } catch (e: Exception) {
                     logged = false
-                    Log.e(SplashActivity.TAG, "Failed silent login", e)
+                    Log.e(TAG, "Failed silent login", e)
                 }
 
                 if (!logged) {
@@ -459,7 +470,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                             googlePlayLauncher.launch(it)
                         }
                     } catch (e: Exception) {
-                        Log.e(SplashActivity.TAG, "User not logged or doesn't have Play Games", e)
+                        Log.e(TAG, "User not logged or doesn't have Play Games", e)
                     }
                 } else {
                     afterGooglePlayGames()
@@ -527,5 +538,9 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         } else {
             finishAffinity()
         }
+    }
+
+    companion object {
+        val TAG = MainActivity::class.simpleName
     }
 }

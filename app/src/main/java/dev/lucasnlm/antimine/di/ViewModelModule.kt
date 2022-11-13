@@ -8,7 +8,6 @@ import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
 import dev.lucasnlm.antimine.history.viewmodel.HistoryViewModel
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesViewModel
-import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
 import dev.lucasnlm.antimine.text.viewmodel.TextViewModel
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
@@ -25,7 +24,6 @@ val ViewModelModule = module {
     viewModel { StatsViewModel(get(), get(), get(), get()) }
     viewModel { TextViewModel(get()) }
     viewModel { ThemeViewModel(get(), get(), get()) }
-    viewModel { SplashViewModel(get(), get()) }
     viewModel { MainViewModel(get(), get(), get(), get()) }
     viewModel {
         GameViewModel(

@@ -37,7 +37,6 @@ import dev.lucasnlm.antimine.gdx.GdxLocal
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import dev.lucasnlm.antimine.ui.ext.showWarning
@@ -149,7 +148,7 @@ class GameActivity :
                         playGamesManager.showPlayPopUp(this@GameActivity)
                     }
                 } catch (e: Exception) {
-                    Log.e(SplashActivity.TAG, "Failed silent login", e)
+                    Log.e(TAG, "Failed silent login", e)
                 }
             }
         }

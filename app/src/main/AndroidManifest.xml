@@ -49,22 +49,6 @@
             android:required="false"/>
 
         <activity
-            android:name="dev.lucasnlm.antimine.splash.SplashActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Splash">
-
-            <tools:validation testUrl="https://www.lucasnlm.dev/antimine" />
-            <tools:validation testUrl="http://www.lucasnlm.dev/antimine" />
-            <tools:validation testUrl="https://www.lucasnlm.dev/" />
-            <tools:validation testUrl="http://www.lucasnlm.dev/" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name="dev.lucasnlm.antimine.GameActivity"
             android:icon="@mipmap/ic_launcher"
             android:launchMode="singleTop"
@@ -79,7 +63,19 @@
             android:launchMode="singleTop"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:saveEnabled="false"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:exported="true">
+
+            <tools:validation testUrl="https://www.lucasnlm.dev/antimine" />
+            <tools:validation testUrl="http://www.lucasnlm.dev/antimine" />
+            <tools:validation testUrl="https://www.lucasnlm.dev/" />
+            <tools:validation testUrl="http://www.lucasnlm.dev/" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name="dev.lucasnlm.antimine.stats.StatsActivity"

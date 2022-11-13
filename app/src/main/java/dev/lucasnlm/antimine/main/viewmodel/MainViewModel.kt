@@ -10,9 +10,9 @@ import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
+import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.external.ICloudStorageManager
 import dev.lucasnlm.external.model.CloudSave
@@ -116,7 +116,7 @@ class MainViewModel(
             try {
                 statsRepository.addAllStats(it)
             } catch (e: Exception) {
-                Log.e(SplashViewModel.TAG, "Fail to insert stats on DB")
+                Log.e(MainActivity.TAG, "Fail to insert stats on DB")
             }
         }
     }
