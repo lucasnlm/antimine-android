@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
@@ -31,7 +33,7 @@ class HistoryAdapter(
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) = with(saveHistory[position]) {
         val context = holder.itemView.context
 
-        holder.difficulty.text = context.getString(
+        val difficultyText = context.getString(
             when (difficulty) {
                 Difficulty.Beginner -> R.string.beginner
                 Difficulty.Intermediate -> R.string.intermediate
@@ -44,27 +46,28 @@ class HistoryAdapter(
             },
         )
 
-        holder.flag.setColorFilter(holder.minesCount.currentTextColor)
-        holder.flag.alpha = if (status == SaveStatus.VICTORY) 1.0f else 0.35f
+        val gameNameText = "$difficultyText #$uid"
+
+        holder.difficulty.text = gameNameText
+
+        holder.flag.alpha = if (status == SaveStatus.VICTORY) 1.0f else 0.5f
 
         holder.minefieldSize.text = String.format("%d x %d", minefield.width, minefield.height)
         holder.minesCount.text = context.getString(R.string.mines_remaining, minefield.mines)
 
         if (status != SaveStatus.VICTORY) {
-            holder.replay.setImageResource(R.drawable.replay)
-            holder.replay.setColorFilter(holder.minesCount.currentTextColor)
+            holder.replay.icon = ContextCompat.getDrawable(context, R.drawable.replay)
             holder.replay.setOnClickListener {
                 statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
             }
         } else {
-            holder.replay.setImageResource(R.drawable.play)
-            holder.replay.setColorFilter(holder.minesCount.currentTextColor)
+            holder.replay.icon = ContextCompat.getDrawable(context, R.drawable.play)
             holder.replay.setOnClickListener {
-                statelessViewModel.sendEvent(HistoryEvent.LoadSave(uid))
+                statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
             }
         }
 
-        holder.itemView.setOnClickListener {
+        holder.open.setOnClickListener {
             statelessViewModel.sendEvent(HistoryEvent.LoadSave(uid))
         }
     }
@@ -75,5 +78,6 @@ class HistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val difficulty: TextView = view.difficulty
     val minefieldSize: TextView = view.minefieldSize
     val minesCount: TextView = view.minesCount
-    val replay: AppCompatImageView = view.replay
+    val replay: MaterialButton = view.replay
+    val open: MaterialButton = view.open
 }

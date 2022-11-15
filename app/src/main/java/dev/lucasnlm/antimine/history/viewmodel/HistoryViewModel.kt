@@ -14,6 +14,7 @@ class HistoryViewModel(
 
     override fun initialState() = HistoryState(
         saveList = listOf(),
+        loading = true,
     )
 
     override fun onEvent(event: HistoryEvent) {
@@ -32,8 +33,9 @@ class HistoryViewModel(
     override suspend fun mapEventToState(event: HistoryEvent) = flow {
         when (event) {
             is HistoryEvent.LoadAllSaves -> {
+                emit(state.copy(loading = true))
                 val newSaveList = savesRepository.getAllSaves().sortedByDescending { it.uid }
-                emit(state.copy(saveList = newSaveList))
+                emit(state.copy(saveList = newSaveList, loading = false))
             }
             else -> {
             }

@@ -1,73 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/materialCardViewFilledStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true"
-    android:padding="16dp">
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/badge"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/flag" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/difficulty"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/badge"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Difficulty" />
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="16dp">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/minefieldSize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toEndOf="@id/badge"
-        app:layout_constraintTop_toBottomOf="@id/difficulty"
-        tools:text="9 x 9" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/badge"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?colorAccent"
+            app:tintMode="multiply"
+            app:srcCompat="@drawable/flag" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/dash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:text="-"
-        app:layout_constraintStart_toEndOf="@id/minefieldSize"
-        app:layout_constraintTop_toBottomOf="@id/difficulty"
-        tools:ignore="HardcodedText" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/difficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/badge"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/minefieldSize"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Difficulty" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/minesCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toEndOf="@id/dash"
-        app:layout_constraintTop_toBottomOf="@id/difficulty"
-        tools:text="9 mines" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/minefieldSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/badge"
+            app:layout_constraintTop_toBottomOf="@id/difficulty"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="9 x 9" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/replay"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:background="?selectableItemBackgroundBorderless"
-        android:contentDescription="@string/retry"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/retry" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/dash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="-"
+            app:layout_constraintStart_toEndOf="@id/minefieldSize"
+            app:layout_constraintTop_toBottomOf="@id/difficulty"
+            app:layout_constraintBottom_toBottomOf="@id/minefieldSize"
+            tools:ignore="HardcodedText" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/minesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            app:layout_constraintStart_toEndOf="@id/dash"
+            app:layout_constraintTop_toBottomOf="@id/difficulty"
+            app:layout_constraintBottom_toBottomOf="@id/dash"
+            tools:text="9 mines" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/replay"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/retry"
+            app:iconTint="?colorOnSurfaceInverse"
+            app:backgroundTint="?colorPrimary"
+            app:icon="@drawable/retry"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/open"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/replay"
+            android:contentDescription="@string/retry"
+            app:iconTint="?colorOnSurfaceInverse"
+            app:backgroundTint="?colorPrimary"
+            app:icon="@drawable/view"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.history.viewmodel.HistoryEvent
@@ -23,14 +22,19 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
             historyViewModel.sendEvent(HistoryEvent.LoadAllSaves)
 
             historyViewModel.observeState().collect {
-                empty.visibility = if (it.saveList.isEmpty()) {
+                empty.visibility = if (!it.loading && it.saveList.isEmpty()) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+
+                loading.visibility = if (it.loading) {
                     View.VISIBLE
                 } else {
                     View.GONE
                 }
 
                 saveHistory.apply {
-                    addItemDecoration(DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL))
                     layoutManager = LinearLayoutManager(view.context)
                     adapter = HistoryAdapter(it.saveList, historyViewModel)
                 }
