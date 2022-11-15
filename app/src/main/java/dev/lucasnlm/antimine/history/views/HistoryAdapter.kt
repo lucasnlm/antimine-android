@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.history.views
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,9 @@ class HistoryAdapter(
     override fun getItemCount(): Int = saveHistory.size
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) = with(saveHistory[position]) {
-        holder.difficulty.text = holder.itemView.context.getString(
+        val context = holder.itemView.context
+
+        holder.difficulty.text = context.getString(
             when (difficulty) {
                 Difficulty.Beginner -> R.string.beginner
                 Difficulty.Intermediate -> R.string.intermediate
@@ -41,7 +44,6 @@ class HistoryAdapter(
             },
         )
 
-        val context = holder.itemView.context
         holder.flag.setColorFilter(holder.minesCount.currentTextColor)
         holder.flag.alpha = if (status == SaveStatus.VICTORY) 1.0f else 0.35f
 
