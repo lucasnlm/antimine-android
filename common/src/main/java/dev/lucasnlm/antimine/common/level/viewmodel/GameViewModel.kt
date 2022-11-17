@@ -502,7 +502,11 @@ open class GameViewModel(
         }
 
         if (preferencesRepository.dimNumbers() && !gameController.isGameOver()) {
-            gameController.runNumberDimmer()
+            if (gameController.isVictory()) {
+                gameController.runNumberDimmerToAllMines()
+            } else {
+                gameController.runNumberDimmer()
+            }
         }
 
         updateGameState()

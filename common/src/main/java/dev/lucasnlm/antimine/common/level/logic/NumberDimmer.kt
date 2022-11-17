@@ -12,6 +12,12 @@ class NumberDimmer(
             .forEach(::dimIfNumberMatchesFlags)
     }
 
+    fun runDimmerAll() {
+        field
+            .filter { it.minesAround > 0 }
+            .forEach(::dimAll)
+    }
+
     fun result(): List<Area> = field.toList()
 
     private fun dimIfNumberMatchesFlags(it: Area) {
@@ -21,5 +27,9 @@ class NumberDimmer(
             neighbor.isCovered && neighbor.mark == Mark.Flag
         } == it.minesAround
         field[it.id] = it.copy(dimNumber = shouldDim)
+    }
+
+    private fun dimAll(it: Area) {
+        field[it.id] = it.copy(dimNumber = true)
     }
 }

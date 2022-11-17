@@ -240,6 +240,13 @@ class GameController {
         }
     }
 
+    fun runNumberDimmerToAllMines() {
+        field = NumberDimmer(field.toMutableList()).run {
+            runDimmerAll()
+            result()
+        }
+    }
+
     fun getScore() = Score(
         mines().count { !it.mistake },
         getMinesCount(),
