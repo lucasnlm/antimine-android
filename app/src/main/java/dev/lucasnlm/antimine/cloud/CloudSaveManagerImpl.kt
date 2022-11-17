@@ -44,7 +44,6 @@ class CloudSaveManagerImpl(
                     stats = statsRepository.getAllStats(minId).map { it.toHashMap() },
                     premiumFeatures = preferencesRepository.isPremiumEnabled().toInt(),
                     controlStyle = preferencesRepository.controlStyle().ordinal,
-                    language = preferencesRepository.getPreferredLocale() ?: "",
                     openDirectly = preferencesRepository.openGameDirectly().toInt(),
                     unlockedThemes = preferencesRepository.getUnlockedThemes().joinToString(" "),
                     squareDivider = preferencesRepository.squareDivider(),

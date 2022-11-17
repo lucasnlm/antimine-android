@@ -34,7 +34,6 @@ import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gdx.GdxLocal
-import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
@@ -107,7 +106,7 @@ class GameActivity :
         playGamesStartUp()
 
         onBackPressedDispatcher.addCallback {
-            backToMainActivity()
+            finish()
         }
     }
 
@@ -407,11 +406,6 @@ class GameActivity :
         }
     }
 
-    private fun backToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-    }
-
     private fun bindTapToBegin() {
         tapToBegin.apply {
             setTextColor(usingTheme.palette.background.toAndroidColor(255))
@@ -428,7 +422,7 @@ class GameActivity :
             TooltipCompat.setTooltipText(this, getString(R.string.back))
             setColorFilter(minesCount.currentTextColor)
             setOnClickListener {
-                backToMainActivity()
+                finish()
             }
         }
 

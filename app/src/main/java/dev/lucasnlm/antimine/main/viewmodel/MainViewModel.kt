@@ -78,7 +78,6 @@ class MainViewModel(
             setSquareSize(squareSize)
             setCustomLongPressTimeout(touchTiming.toLong())
             setQuestionMark(questionMark != 0)
-            setPreferredLocale(language)
             setFlagAssistant(gameAssistance != 0)
             setHapticFeedback(hapticFeedback != 0)
             setHapticFeedbackLevel(hapticFeedbackLevel)

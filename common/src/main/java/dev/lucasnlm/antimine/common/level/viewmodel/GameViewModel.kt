@@ -21,7 +21,6 @@ import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
-import dev.lucasnlm.antimine.core.updateLanguage
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ActionResponse
@@ -798,10 +797,6 @@ open class GameViewModel(
     }
 
     fun getControlDescription(context: Context): SpannedString? {
-        preferencesRepository.getPreferredLocale()?.let {
-            context.updateLanguage(it)
-        }
-
         var openAction: String? = null
         var openReaction: String? = null
         var flagAction: String? = null
@@ -838,7 +833,7 @@ open class GameViewModel(
             }
         }
 
-        if (openAction != null && openReaction != null && flagAction != null && flagReaction != null) {
+        if (openAction != null) {
             val isLTL = Locale.getDefault().layoutDirection == LayoutDirection.LTR
 
             val first = buildSpannedString {

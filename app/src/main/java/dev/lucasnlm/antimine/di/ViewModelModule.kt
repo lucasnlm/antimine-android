@@ -19,7 +19,7 @@ val ViewModelModule = module {
     viewModel { ControlViewModel(get(), get()) }
     viewModel { CreateGameViewModel(get()) }
     viewModel { HistoryViewModel(get(), get()) }
-    viewModel { EndGameDialogViewModel(get(), get()) }
+    viewModel { EndGameDialogViewModel(get()) }
     viewModel { PlayGamesViewModel(get(), get()) }
     viewModel { StatsViewModel(get(), get(), get(), get()) }
     viewModel { TextViewModel(get()) }
