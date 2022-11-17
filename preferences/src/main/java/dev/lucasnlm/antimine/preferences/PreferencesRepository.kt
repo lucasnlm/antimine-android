@@ -126,18 +126,6 @@ class PreferencesRepository(
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, sensibility)
     }
 
-    override fun setPreferredLocale(locale: String) {
-        if (locale.isBlank()) {
-            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_LOCALE)
-        } else {
-            preferencesManager.putString(PreferenceKeys.PREFERENCE_LOCALE, locale)
-        }
-    }
-
-    override fun getPreferredLocale(): String? {
-        return preferencesManager.getString(PreferenceKeys.PREFERENCE_LOCALE)
-    }
-
     override fun showWindowsWhenFinishGame(): Boolean {
         return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_WINDOWS, true)
     }

@@ -83,7 +83,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:contentDescription="@string/retry"
             app:iconTint="?colorOnSurfaceInverse"
-            app:backgroundTint="?colorPrimary"
+            app:backgroundTint="?colorAccent"
             app:icon="@drawable/retry"/>
 
         <com.google.android.material.button.MaterialButton
@@ -96,7 +96,7 @@
             app:layout_constraintEnd_toStartOf="@+id/replay"
             android:contentDescription="@string/retry"
             app:iconTint="?colorOnSurfaceInverse"
-            app:backgroundTint="?colorPrimary"
+            app:backgroundTint="?colorAccent"
             app:icon="@drawable/view"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -85,8 +85,6 @@ sealed class Analytics(
 
     object OpenStats : Analytics("Open Stats")
 
-    object OpenTranslations : Analytics("Open Translations")
-
     object OpenGooglePlayGames : Analytics("Open Google Play Games")
 
     object OpenControls : Analytics("Open Controls")

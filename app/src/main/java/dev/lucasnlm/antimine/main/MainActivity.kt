@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.main
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -23,7 +22,6 @@ import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.history.HistoryActivity
-import dev.lucasnlm.antimine.language.LanguageSelectorActivity
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
@@ -322,20 +320,6 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                 startActivity(intent)
             },
         )
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            translation.visibility = View.GONE
-        } else {
-            translation.bind(
-                theme = usingTheme,
-                text = R.string.translation,
-                startIcon = R.drawable.translate,
-                onAction = {
-                    analyticsManager.sentEvent(Analytics.OpenTranslations)
-                    startActivity(Intent(this, LanguageSelectorActivity::class.java))
-                },
-            )
-        }
 
         if (playGamesManager.hasGooglePlayGames()) {
             play_games.bind(

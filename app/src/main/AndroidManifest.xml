@@ -90,10 +90,6 @@
             android:name="dev.lucasnlm.antimine.preferences.PreferencesActivity"
             android:label="@string/settings" />
 
-        <activity
-            android:name=".language.LanguageSelectorActivity"
-            android:label="@string/select_language" />
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

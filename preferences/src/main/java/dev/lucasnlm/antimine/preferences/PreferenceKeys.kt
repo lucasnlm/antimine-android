@@ -34,7 +34,6 @@ object PreferenceKeys {
     const val PREFERENCE_USER_ID = "preference_user_id"
     const val PREFERENCE_USE_OPEN_SWITCH_CONTROL = "preference_use_open_switch_control"
     const val PREFERENCE_TOUCH_SENSIBILITY = "preference_new_touch_sensibility"
-    const val PREFERENCE_LOCALE = "preference_locale"
     const val PREFERENCE_OPEN_DIRECTLY = "preference_open_directly"
     const val PREFERENCE_UNLOCKED_THEMES = "preference_unlocked_themes"
     const val PREFERENCE_SQUARE_DIVIDER = "preference_new_square_divider"
