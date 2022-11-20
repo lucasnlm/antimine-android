@@ -12,7 +12,7 @@ import dev.lucasnlm.antimine.core.models.Area
  */
 open class CheckNeighborsSolver : GameSolver() {
     override fun trySolve(minefield: MutableList<Area>): Boolean {
-        val minefieldHandler = MinefieldHandler(minefield, false)
+        val minefieldHandler = MinefieldHandler(minefield, useQuestionMark = false, individualActions = true)
 
         do {
             val initialMap = minefield.filter { !it.isCovered && it.minesAround != 0 }

@@ -93,7 +93,7 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setExtraTips(tips: Int) {}
 
-    override fun openUsingSwitchControl(): Boolean = true
+    override fun getSwitchControlAction(): Boolean = true
 
     override fun setSwitchControl(useOpen: Boolean) {}
 

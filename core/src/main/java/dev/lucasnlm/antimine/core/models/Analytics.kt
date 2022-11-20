@@ -50,6 +50,8 @@ sealed class Analytics(
 
     class OpenOrFlagTile(index: Int) : Analytics("Open or Flag Tile", mapOf("Index" to index.toString()))
 
+    class QuestionMark(index: Int) : Analytics("Question Mark on Tile", mapOf("Index" to index.toString()))
+
     class SwitchMark(index: Int) : Analytics("Switch Mark", mapOf("Index" to index.toString()))
 
     class OpenNeighbors(index: Int) : Analytics("Open Neighbors", mapOf("Index" to index.toString()))

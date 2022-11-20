@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.preferences
 
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
@@ -71,8 +72,8 @@ interface IPreferencesRepository {
     fun getExtraTips(): Int
     fun setExtraTips(tips: Int)
 
-    fun openUsingSwitchControl(): Boolean
-    fun setSwitchControl(useOpen: Boolean)
+    fun getSwitchControlAction(): Action
+    fun setSwitchControl(action: Action)
 
     fun useFlagAssistant(): Boolean
     fun setFlagAssistant(value: Boolean)

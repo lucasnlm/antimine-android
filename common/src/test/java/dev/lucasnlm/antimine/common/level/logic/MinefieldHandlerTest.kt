@@ -15,7 +15,7 @@ class MinefieldHandlerTest {
     ) {
         val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
         val minefield = creator.create(10).toMutableList()
-        val minefieldHandler = MinefieldHandler(minefield, useQuestionMark)
+        val minefieldHandler = MinefieldHandler(minefield, useQuestionMark, individualActions = false)
         block(minefieldHandler)
     }
 

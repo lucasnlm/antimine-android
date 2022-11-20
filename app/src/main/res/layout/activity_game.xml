@@ -118,7 +118,7 @@
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
                     android:includeFontPadding="false"
-                    android:minEms="4"
+                    android:minEms="2"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="@dimen/text_size"
                     android:textStyle="bold"
@@ -129,17 +129,6 @@
                     tools:text="99"
                     tools:visibility="visible" />
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/topBarToggle"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?selectableItemBackgroundBorderless"
-                android:contentDescription="@string/switch_control"
-                android:padding="16dp"
-                android:src="@drawable/touch"
-                android:visibility="gone"
-                app:tint="?attr/colorAccent" />
 
             <FrameLayout
                 android:layout_width="?attr/actionBarSize"

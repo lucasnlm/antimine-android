@@ -13,8 +13,9 @@ import dev.lucasnlm.antimine.common.level.logic.NumberDimmer
 import dev.lucasnlm.antimine.common.level.solver.LimitedCheckNeighborsSolver
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.core.models.Mark
 import dev.lucasnlm.antimine.core.models.Score
-import dev.lucasnlm.antimine.preferences.models.ActionResponse
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.coroutines.flow.flow
@@ -28,7 +29,7 @@ class GameController {
     private var firstOpen: FirstOpen = FirstOpen.Unknown
     private var gameControl: GameControl = GameControl.Standard
     private var useQuestionMark = true
-    private var useOpenOnSwitchControl = true
+    private var selectedAction = Action.OpenTile
     private var useClickOnNumbers = true
     private var letNumbersPutFlag = true
     private var errorTolerance = 0
@@ -92,6 +93,8 @@ class GameController {
 
     fun hasMines() = field.firstOrNull { it.hasMine } != null
 
+    fun useIndividualActions(): Boolean = gameControl == GameControl.SwitchMarkOpen
+
     private fun getArea(id: Int) = field.firstOrNull { it.id == id }
 
     private fun plantMinesExcept(safeId: Int) {
@@ -99,7 +102,11 @@ class GameController {
         do {
             field = minefieldCreator.create(safeId)
             val fieldCopy = field.map { it.copy() }.toMutableList()
-            val minefieldHandler = MinefieldHandler(fieldCopy, false)
+            val minefieldHandler = MinefieldHandler(
+                field = fieldCopy,
+                useQuestionMark = false,
+                individualActions = useIndividualActions(),
+            )
             minefieldHandler.openAt(safeId, false)
             noGuessTestedLevel = useSimonTatham || solver.trySolve(minefieldHandler.result().toMutableList())
         } while (!useSimonTatham && solver.keepTrying() && !noGuessTestedLevel)
@@ -107,23 +114,31 @@ class GameController {
         firstOpen = FirstOpen.Position(safeId)
     }
 
-    private fun handleAction(target: Area, actionResponse: ActionResponse?) {
+    private fun handleAction(target: Area, action: Action?) {
         val mustPlantMines = !hasMines()
         val minefieldHandler: MinefieldHandler
 
         if (mustPlantMines) {
             plantMinesExcept(target.id)
-            minefieldHandler = MinefieldHandler(field.toMutableList(), useQuestionMark)
+            minefieldHandler = MinefieldHandler(
+                field = field.toMutableList(),
+                useQuestionMark = useQuestionMark,
+                individualActions = useIndividualActions(),
+            )
             minefieldHandler.openAt(target.id, false)
 
             if (!noGuessTestedLevel) {
                 onCreateUnsafeLevel?.invoke()
             }
         } else {
-            minefieldHandler = MinefieldHandler(field.toMutableList(), useQuestionMark)
+            minefieldHandler = MinefieldHandler(
+                field = field.toMutableList(),
+                useQuestionMark = useQuestionMark,
+                individualActions = useIndividualActions(),
+            )
 
-            when (actionResponse) {
-                ActionResponse.OpenTile -> {
+            when (action) {
+                Action.OpenTile -> {
                     if (target.mark.isNotNone()) {
                         minefieldHandler.removeMarkAt(target.id)
                     } else {
@@ -131,7 +146,7 @@ class GameController {
                         minefieldHandler.openAt(target.id, false)
                     }
                 }
-                ActionResponse.SwitchMark -> {
+                Action.SwitchMark -> {
                     if (!hasMines()) {
                         if (target.mark.isNotNone()) {
                             minefieldHandler.removeMarkAt(target.id)
@@ -142,7 +157,7 @@ class GameController {
                         minefieldHandler.switchMarkAt(target.id)
                     }
                 }
-                ActionResponse.OpenNeighbors -> {
+                Action.OpenNeighbors -> {
                     if (useClickOnNumbers) {
                         this.actions++
                         if (letNumbersPutFlag) {
@@ -152,7 +167,7 @@ class GameController {
                         }
                     }
                 }
-                ActionResponse.OpenOrMark -> {
+                Action.OpenOrMark -> {
                     if (!hasMines()) {
                         if (target.mark.isNotNone()) {
                             minefieldHandler.removeMarkAt(target.id)
@@ -161,14 +176,24 @@ class GameController {
                         }
                     } else {
                         this.actions++
-                        if (useOpenOnSwitchControl) {
-                            if (target.mark.isNone()) {
-                                minefieldHandler.openAt(target.id, false)
-                            } else {
-                                minefieldHandler.removeMarkAt(target.id)
+
+                        when (selectedAction) {
+                            Action.OpenTile -> {
+                                if (target.mark.isNone()) {
+                                    minefieldHandler.openAt(target.id, false)
+                                } else {
+                                    minefieldHandler.removeMarkAt(target.id)
+                                }
                             }
-                        } else {
-                            minefieldHandler.switchMarkAt(target.id)
+                            Action.SwitchMark -> {
+                                minefieldHandler.switchMarkAt(target.id)
+                            }
+                            Action.QuestionMark -> {
+                                minefieldHandler.toggleMarkAt(target.id, Mark.Question)
+                            }
+                            else -> {
+                                // Unexpected Action. Ignore.
+                            }
                         }
                     }
                 }
@@ -256,7 +281,11 @@ class GameController {
     fun getMinesCount() = mines().count()
 
     fun showAllMistakes() {
-        field = MinefieldHandler(field.toMutableList(), false).run {
+        field = MinefieldHandler(
+            field = field.toMutableList(),
+            useQuestionMark = false,
+            individualActions = useIndividualActions(),
+        ).run {
             showAllMines()
             showAllWrongFlags()
             result()
@@ -273,7 +302,11 @@ class GameController {
         }
 
     fun flagAllMines() {
-        field = MinefieldHandler(field.toMutableList(), false).run {
+        field = MinefieldHandler(
+            field = field.toMutableList(),
+            useQuestionMark = false,
+            individualActions = useIndividualActions(),
+        ).run {
             flagAllMines()
             result()
         }
@@ -290,7 +323,11 @@ class GameController {
     }
 
     fun revealAllEmptyAreas() {
-        field = MinefieldHandler(field.toMutableList(), false).run {
+        field = MinefieldHandler(
+            field = field.toMutableList(),
+            useQuestionMark = false,
+            individualActions = useIndividualActions(),
+        ).run {
             revealAllEmptyAreas()
             result()
         }
@@ -298,7 +335,11 @@ class GameController {
 
     fun revealRandomMine(): Boolean {
         val result: Boolean
-        field = MinefieldHandler(field.toMutableList(), false).run {
+        field = MinefieldHandler(
+            field = field.toMutableList(),
+            useQuestionMark = false,
+            individualActions = useIndividualActions(),
+        ).run {
             result = revealRandomMineNearUncoveredArea(lastIdInteractionX, lastIdInteractionY)
             result()
         }
@@ -370,7 +411,11 @@ class GameController {
     }
 
     fun dismissMistake() {
-        val minefieldHandler = MinefieldHandler(field.toMutableList(), useQuestionMark)
+        val minefieldHandler = MinefieldHandler(
+            field = field.toMutableList(),
+            useQuestionMark = useQuestionMark,
+            individualActions = useIndividualActions(),
+        )
         minefieldHandler.dismissMistake()
         field = minefieldHandler.result()
     }
@@ -418,8 +463,8 @@ class GameController {
         this.useClickOnNumbers = clickNumbers
     }
 
-    fun useOpenOnSwitchControl(useOpen: Boolean) {
-        this.useOpenOnSwitchControl = useOpen
+    fun changeSwitchControlAction(action: Action) {
+        this.selectedAction = action
     }
 
     fun letNumbersPutFlag(enabled: Boolean) {

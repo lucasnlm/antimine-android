@@ -100,7 +100,6 @@ class GameActivity :
         bindToolbar()
         loadGameOrTutorial()
         bindTapToBegin()
-        bindToggleButton()
 
         playGamesManager.showPlayPopUp(this)
         playGamesStartUp()
@@ -167,7 +166,6 @@ class GameActivity :
             observeState().collect {
                 if (it.turn == 0 && it.saveId == 0L || it.isLoadingMap) {
                     if (it.turn == 0) {
-                        setOpenControlSwitcherIcon()
                         warning?.dismiss()
                         warning = null
                     }
@@ -731,52 +729,6 @@ class GameActivity :
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         } else {
             window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        }
-    }
-
-    private fun setOpenControlSwitcherIcon() {
-        topBarToggle.apply {
-            contentDescription = getString(R.string.open)
-            TooltipCompat.setTooltipText(this, getString(R.string.open))
-            setImageResource(R.drawable.touch)
-            preferencesRepository.setSwitchControl(true)
-            gameViewModel.refreshUseOpenOnSwitchControl(true)
-        }
-    }
-
-    private fun setFlagControlSwitcherIcon() {
-        topBarToggle.apply {
-            contentDescription = getString(R.string.flag_tile)
-            TooltipCompat.setTooltipText(this, getString(R.string.flag_tile))
-            setImageResource(R.drawable.flag)
-            preferencesRepository.setSwitchControl(false)
-            gameViewModel.refreshUseOpenOnSwitchControl(false)
-        }
-    }
-
-    private fun bindToggleButton() {
-        if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
-            if (preferencesRepository.showToggleButtonOnTopBar()) {
-                topBarToggle.apply {
-                    visibility = View.VISIBLE
-                    contentDescription = getString(R.string.open)
-                    TooltipCompat.setTooltipText(this, getString(R.string.open))
-                    setImageResource(R.drawable.touch)
-                    preferencesRepository.setSwitchControl(true)
-
-                    setOnClickListener {
-                        if (preferencesRepository.openUsingSwitchControl()) {
-                            setFlagControlSwitcherIcon()
-                        } else {
-                            setOpenControlSwitcherIcon()
-                        }
-                    }
-                }
-            } else {
-                topBarToggle.visibility = View.GONE
-            }
-
-            gameViewModel.refreshUseOpenOnSwitchControl(true)
         }
     }
 

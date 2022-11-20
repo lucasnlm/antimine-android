@@ -18,9 +18,7 @@ class SectionView : FrameLayout {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     init {
-        LayoutInflater
-            .from(context)
-            .inflate(R.layout.view_section, this, true)
+        inflate(context, R.layout.view_section, this)
     }
 
     fun bindText(@StringRes text: Int) {

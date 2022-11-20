@@ -126,16 +126,6 @@
                     tools:visibility="visible" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/topBarToggle"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?selectableItemBackgroundBorderless"
-                android:contentDescription="@string/switch_control"
-                android:padding="16dp"
-                android:src="@drawable/touch"
-                android:visibility="gone" />
-
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

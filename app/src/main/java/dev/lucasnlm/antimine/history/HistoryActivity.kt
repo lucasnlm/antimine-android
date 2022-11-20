@@ -1,26 +1,30 @@
 package dev.lucasnlm.antimine.history
 
 import android.os.Bundle
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
+import com.google.android.material.appbar.MaterialToolbar
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.history.views.HistoryFragment
 import dev.lucasnlm.antimine.ui.ext.ThematicActivity
-import kotlinx.android.synthetic.main.activity_stats.*
 
 class HistoryActivity : ThematicActivity(R.layout.activity_history) {
+    private val toolbar: MaterialToolbar by lazy {
+        findViewById(R.id.toolbar)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        section.bind(
-            text = R.string.previous_games,
-            startButton = R.drawable.back_arrow,
-            startDescription = R.string.back,
-            startAction = {
+        toolbar.apply {
+            setSupportActionBar(this)
+            setNavigationOnClickListener {
                 finish()
-            },
-        )
+            }
+        }
 
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.content, HistoryFragment())
-        }.commitAllowingStateLoss()
+        supportFragmentManager.commit(allowStateLoss = true) {
+            replace<HistoryFragment>(R.id.content)
+        }
     }
 }

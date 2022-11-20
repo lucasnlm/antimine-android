@@ -3,20 +3,21 @@ package dev.lucasnlm.antimine.preferences.models
 /**
  * Possible action response to an user action.
  */
-enum class ActionResponse {
+enum class Action {
     OpenTile,
     SwitchMark,
+    QuestionMark,
     OpenNeighbors,
     OpenOrMark,
 }
 
 /**
- * [Actions] links an [ActionResponse] to an user action.
+ * [Actions] links an [Action] to an user action.
  */
 data class Actions(
-    val singleClick: ActionResponse?,
-    val doubleClick: ActionResponse?,
-    val longPress: ActionResponse?,
+    val singleClick: Action?,
+    val doubleClick: Action?,
+    val longPress: Action?,
 )
 
 /**
@@ -32,7 +33,7 @@ enum class ControlStyle {
 }
 
 /**
- * [GameControl] will map an user action (from [Actions]) to an [ActionResponse].
+ * [GameControl] will map an user action (from [Actions]) to an [Action].
  * This is necessary because same users rather that single click open the tile, other that it flags the tile.
  */
 sealed class GameControl(
@@ -43,13 +44,13 @@ sealed class GameControl(
     object Standard : GameControl(
         id = ControlStyle.Standard,
         onCovered = Actions(
-            singleClick = ActionResponse.OpenTile,
-            longPress = ActionResponse.SwitchMark,
+            singleClick = Action.OpenTile,
+            longPress = Action.SwitchMark,
             doubleClick = null,
         ),
         onUncovered = Actions(
             singleClick = null,
-            longPress = ActionResponse.OpenNeighbors,
+            longPress = Action.OpenNeighbors,
             doubleClick = null,
         ),
     )
@@ -57,12 +58,12 @@ sealed class GameControl(
     object FastFlag : GameControl(
         id = ControlStyle.FastFlag,
         onCovered = Actions(
-            singleClick = ActionResponse.SwitchMark,
-            longPress = ActionResponse.OpenTile,
+            singleClick = Action.SwitchMark,
+            longPress = Action.OpenTile,
             doubleClick = null,
         ),
         onUncovered = Actions(
-            singleClick = ActionResponse.OpenNeighbors,
+            singleClick = Action.OpenNeighbors,
             longPress = null,
             doubleClick = null,
         ),
@@ -71,12 +72,12 @@ sealed class GameControl(
     object DoubleClick : GameControl(
         id = ControlStyle.DoubleClick,
         onCovered = Actions(
-            singleClick = ActionResponse.SwitchMark,
+            singleClick = Action.SwitchMark,
             longPress = null,
-            doubleClick = ActionResponse.OpenTile,
+            doubleClick = Action.OpenTile,
         ),
         onUncovered = Actions(
-            singleClick = ActionResponse.OpenNeighbors,
+            singleClick = Action.OpenNeighbors,
             longPress = null,
             doubleClick = null,
         ),
@@ -85,12 +86,12 @@ sealed class GameControl(
     object DoubleClickInverted : GameControl(
         id = ControlStyle.DoubleClickInverted,
         onCovered = Actions(
-            singleClick = ActionResponse.OpenTile,
+            singleClick = Action.OpenTile,
             longPress = null,
-            doubleClick = ActionResponse.SwitchMark,
+            doubleClick = Action.SwitchMark,
         ),
         onUncovered = Actions(
-            singleClick = ActionResponse.OpenNeighbors,
+            singleClick = Action.OpenNeighbors,
             longPress = null,
             doubleClick = null,
         ),
@@ -99,12 +100,12 @@ sealed class GameControl(
     object SwitchMarkOpen : GameControl(
         id = ControlStyle.SwitchMarkOpen,
         onCovered = Actions(
-            singleClick = ActionResponse.OpenOrMark,
+            singleClick = Action.OpenOrMark,
             longPress = null,
             doubleClick = null,
         ),
         onUncovered = Actions(
-            singleClick = ActionResponse.OpenNeighbors,
+            singleClick = Action.OpenNeighbors,
             longPress = null,
             doubleClick = null,
         ),

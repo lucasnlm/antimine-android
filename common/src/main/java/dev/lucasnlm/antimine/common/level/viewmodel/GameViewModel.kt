@@ -23,7 +23,7 @@ import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.preferences.models.ActionResponse
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
@@ -34,7 +34,6 @@ import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.Leaderboard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -512,20 +511,23 @@ open class GameViewModel(
         updateGameState()
     }
 
-    private fun onFeedbackAnalytics(action: ActionResponse, index: Int) {
+    private fun onFeedbackAnalytics(action: Action, index: Int) {
         if (featureFlagManager.isGameplayAnalyticsEnabled) {
             when (action) {
-                ActionResponse.OpenTile -> {
+                Action.OpenTile -> {
                     analyticsManager.sentEvent(Analytics.OpenTile(index))
                 }
-                ActionResponse.SwitchMark -> {
+                Action.SwitchMark -> {
                     analyticsManager.sentEvent(Analytics.SwitchMark(index))
                 }
-                ActionResponse.OpenNeighbors -> {
+                Action.OpenNeighbors -> {
                     analyticsManager.sentEvent(Analytics.OpenNeighbors(index))
                 }
-                ActionResponse.OpenOrMark -> {
+                Action.OpenOrMark -> {
                     analyticsManager.sentEvent(Analytics.OpenOrFlagTile(index))
+                }
+                Action.QuestionMark -> {
+                    analyticsManager.sentEvent(Analytics.QuestionMark(index))
                 }
             }
         }
@@ -560,9 +562,10 @@ open class GameViewModel(
         }
     }
 
-    fun refreshUseOpenOnSwitchControl(useOpen: Boolean) {
+    fun changeSwitchControlAction(action: Action) {
         if (initialized) {
-            gameController.useOpenOnSwitchControl(useOpen)
+            preferencesRepository.setSwitchControl(action)
+            gameController.changeSwitchControlAction(action)
         }
     }
 

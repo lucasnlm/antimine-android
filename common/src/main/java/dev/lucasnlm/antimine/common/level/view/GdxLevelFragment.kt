@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.core.view.GravityCompat
 import androidx.core.view.postDelayed
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
@@ -16,11 +15,11 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.IAppVersionManager
 import dev.lucasnlm.antimine.core.dpToPx
-import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
 import dev.lucasnlm.antimine.gdx.models.RenderQuality
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.ICrashReporter
@@ -141,8 +140,6 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 .map { it.seed }
                 .distinctUntilChanged()
                 .collect {
-                    setOpenControlSwitcherIcon()
-
                     levelApplicationListener.onChangeGame()
 
                     if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
@@ -177,80 +174,15 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
         }
     }
 
-    private fun setOpenControlSwitcherIcon() {
-        controlSwitcher?.apply {
-            val palette = themeRepository.getTheme().palette
-            bindAsOpenAction(palette = palette)
-            gameViewModel.refreshUseOpenOnSwitchControl(true)
-            preferencesRepository.setSwitchControl(true)
-        }
-    }
-
-    private fun setFlagControlSwitcherIcon() {
-        controlSwitcher?.apply {
-            val palette = themeRepository.getTheme().palette
-            bindAsFlagAction(palette = palette)
-            gameViewModel.refreshUseOpenOnSwitchControl(false)
-            preferencesRepository.setSwitchControl(false)
-        }
-    }
-
-    private fun toggleControlSwitcherIcon() {
-        if (preferencesRepository.openUsingSwitchControl()) {
-            setFlagControlSwitcherIcon()
-        } else {
-            setOpenControlSwitcherIcon()
-        }
-    }
-
     private fun getSwitchControlLayoutParams(): FrameLayout.LayoutParams {
         val context = requireContext()
         return FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT,
         ).apply {
-            val padding = context.dpToPx(16)
-            val leftHanded = preferencesRepository.leftHandedMode()
-
-            gravity = if (leftHanded) {
-                GravityCompat.START or Gravity.BOTTOM
-            } else {
-                GravityCompat.END or Gravity.BOTTOM
-            }
-
-            if (context.isPortrait()) {
-                if (leftHanded) {
-                    setMargins(
-                        padding + dimensionRepository.horizontalNavigationBarHeight(),
-                        0,
-                        0,
-                        padding + dimensionRepository.verticalNavigationBarHeight(),
-                    )
-                } else {
-                    setMargins(
-                        0,
-                        0,
-                        padding + dimensionRepository.horizontalNavigationBarHeight(),
-                        padding + dimensionRepository.verticalNavigationBarHeight(),
-                    )
-                }
-            } else {
-                if (leftHanded) {
-                    setMargins(
-                        padding + dimensionRepository.actionBarSizeWithStatus(),
-                        padding,
-                        padding + dimensionRepository.actionBarSizeWithStatus(),
-                        padding,
-                    )
-                } else {
-                    setMargins(
-                        padding,
-                        padding,
-                        padding,
-                        padding,
-                    )
-                }
-            }
+            val bottomMargin = context.dpToPx(48)
+            gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
+            setMargins(0, 0, 0, bottomMargin)
         }
     }
 
@@ -261,13 +193,31 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                 if (preferencesRepository.showToggleButtonOnTopBar()) {
                     controlSwitcher.visibility = View.GONE
                 } else {
-                    controlSwitcher.visibility = View.VISIBLE
-                    controlSwitcher.layoutParams = getSwitchControlLayoutParams()
-                    val palette = themeRepository.getTheme().palette
-                    if (preferencesRepository.openUsingSwitchControl()) {
-                        controlSwitcher.bindAsOpenAction(palette = palette)
-                    } else {
-                        controlSwitcher.bindAsFlagAction(palette = palette)
+                    controlSwitcher.apply {
+                        visibility = View.VISIBLE
+                        layoutParams = getSwitchControlLayoutParams()
+
+                        setQuestionButtonVisibility(preferencesRepository.useQuestionMark())
+
+                        setOnFlagClickListener {
+                            gameViewModel.changeSwitchControlAction(Action.SwitchMark)
+                        }
+
+                        setOnOpenClickListener {
+                            gameViewModel.changeSwitchControlAction(Action.OpenTile)
+                        }
+
+                        setOnQuestionClickListener {
+                            gameViewModel.changeSwitchControlAction(Action.QuestionMark)
+                        }
+
+                        val selectedAction = preferencesRepository.getSwitchControlAction()
+                        val openAsDefault = selectedAction == Action.OpenTile || selectedAction == Action.QuestionMark
+                        selectOpenAsDefault(openAsDefault)
+
+                        if (selectedAction == Action.QuestionMark) {
+                            preferencesRepository.setSwitchControl(Action.OpenTile)
+                        }
                     }
                 }
             } else {
@@ -280,25 +230,11 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                     if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen && !isParentFinishing) {
                         (view.parent as? FrameLayout)?.apply {
                             this@GdxLevelFragment.controlSwitcher = SwitchButtonView(context).apply {
-                                val palette = themeRepository.getTheme().palette
-                                if (preferencesRepository.openUsingSwitchControl() || !gameViewModel.isGameStarted()) {
-                                    bindAsOpenAction(palette = palette)
-                                    gameViewModel.refreshUseOpenOnSwitchControl(true)
-                                    preferencesRepository.setSwitchControl(true)
-                                } else {
-                                    bindAsFlagAction(palette = palette)
-                                    gameViewModel.refreshUseOpenOnSwitchControl(false)
-                                }
-
                                 alpha = 0f
                                 animate().apply {
                                     alpha(1.0f)
                                     duration = 300L
                                     start()
-                                }
-
-                                setOnClickListener {
-                                    toggleControlSwitcherIcon()
                                 }
                             }
 

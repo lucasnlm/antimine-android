@@ -20,6 +20,10 @@ class HistoryAdapter(
     private val saveHistory: List<Save>,
     private val statelessViewModel: StatelessViewModel<HistoryEvent>,
 ) : RecyclerView.Adapter<HistoryViewHolder>() {
+    init {
+        setHasStableIds(true)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         val view = LayoutInflater
             .from(parent.context)
@@ -27,7 +31,13 @@ class HistoryAdapter(
         return HistoryViewHolder(view)
     }
 
-    override fun getItemCount(): Int = saveHistory.size
+    override fun getItemId(position: Int): Long {
+        return saveHistory[position].uid.toLong()
+    }
+
+    override fun getItemCount(): Int {
+        return saveHistory.size
+    }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) = with(saveHistory[position]) {
         val context = holder.itemView.context

@@ -7,6 +7,7 @@ import kotlin.math.absoluteValue
 class MinefieldHandler(
     private val field: MutableList<Area>,
     private val useQuestionMark: Boolean,
+    private val individualActions: Boolean,
 ) {
     fun showAllMines() {
         field.filter { it.hasMine && it.mark != Mark.Flag }
@@ -65,13 +66,23 @@ class MinefieldHandler(
         }
     }
 
+    fun toggleMarkAt(index: Int, mark: Mark) {
+        field.getOrNull(index)?.let {
+            field[it.id] = if (it.mark.isNone()) {
+                it.copy(mark = mark)
+            } else {
+                it.copy(mark = Mark.None)
+            }
+        }
+    }
+
     fun switchMarkAt(index: Int) {
         field.getOrNull(index)?.let {
             if (it.isCovered) {
                 field[index] = it.copy(
                     mark = when (it.mark) {
                         Mark.PurposefulNone, Mark.None -> Mark.Flag
-                        Mark.Flag -> if (useQuestionMark) Mark.Question else Mark.None
+                        Mark.Flag -> if (useQuestionMark && !individualActions) Mark.Question else Mark.None
                         Mark.Question -> Mark.None
                     },
                 )
