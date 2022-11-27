@@ -69,7 +69,7 @@ class StatsViewModel(
     }
 
     private fun List<Stats>.fold(): StatsModel {
-        return if (size > 0) {
+        return if (isNotEmpty()) {
             fold(
                 StatsModel(
                     title = 0,

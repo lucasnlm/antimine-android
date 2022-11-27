@@ -350,6 +350,15 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         redirectToGame()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (newGameShow.visibility == View.GONE) {
+            newGameShow.visibility = View.VISIBLE
+            difficulties.visibility = View.GONE
+        }
+    }
+
     private fun getDifficultyExtra(difficulty: Difficulty): String {
         return minefieldRepository.fromDifficulty(
             difficulty,

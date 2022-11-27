@@ -1,9 +1,12 @@
 package dev.lucasnlm.antimine.ui.ext
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import dev.lucasnlm.antimine.ui.model.AppTheme
+import dev.lucasnlm.antimine.ui.model.TopBarAction
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import org.koin.android.ext.android.inject
 
@@ -16,6 +19,8 @@ abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActi
 
     private fun currentTheme() = themeRepository.getTheme()
 
+    private var topBarAction: TopBarAction? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         themeRepository.getCustomTheme()?.let {
             setTheme(it.theme)
@@ -26,6 +31,27 @@ abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActi
         window.decorView.setBackgroundColor(
             themeRepository.getTheme().palette.background.toAndroidColor(),
         )
+    }
+
+    fun setTopBarAction(topBarAction: TopBarAction?) {
+        this.topBarAction = topBarAction
+        invalidateMenu()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        if (menu != null) {
+            topBarAction?.let { action ->
+                menu.add(action.actionName)?.apply {
+                    setIcon(action.icon)
+                    setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+                    setOnMenuItemClickListener {
+                        action.action()
+                        true
+                    }
+                }
+            }
+        }
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onResume() {

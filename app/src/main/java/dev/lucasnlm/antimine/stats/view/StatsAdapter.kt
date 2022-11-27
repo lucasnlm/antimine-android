@@ -9,9 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.stats.model.StatsModel
-import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
-import kotlinx.android.synthetic.main.view_stats.view.*
+import kotlinx.android.synthetic.main.view_stats_item.view.*
 import java.text.NumberFormat
 
 class StatsAdapter(
@@ -22,16 +21,13 @@ class StatsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatsViewHolder {
         val view = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.view_stats, parent, false)
+            .inflate(R.layout.view_stats_item, parent, false)
         return StatsViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: StatsViewHolder, position: Int) {
         val stats = statsList[position]
         holder.apply {
-            val color = themeRepository.getTheme().palette.background.toAndroidColor()
-            card.setCardBackgroundColor(color)
-
             if (stats.totalGames > 0) {
                 val emptyText = "-"
                 if (stats.title != 0) {
