@@ -29,13 +29,15 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
     private lateinit var mapWidth: TextView
     private lateinit var mapHeight: TextView
     private lateinit var mapMines: TextView
+    private lateinit var seed: TextView
 
     private fun getSelectedMinefield(): Minefield {
         val width = filterInput(mapWidth.text.toString(), MIN_WIDTH).coerceAtMost(MAX_WIDTH)
         val height = filterInput(mapHeight.text.toString(), MIN_HEIGHT).coerceAtMost(MAX_HEIGHT)
         val mines = filterInput(mapMines.text.toString(), MIN_MINES).coerceAtMost(width * height - 9)
+        val seedValue = seed.text.toString().toLongOrNull()
 
-        return Minefield(width, height, mines)
+        return Minefield(width, height, mines, seedValue)
     }
 
     @SuppressLint("InflateParams")
@@ -47,11 +49,13 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
         mapWidth = view.findViewById(R.id.map_width)
         mapHeight = view.findViewById(R.id.map_height)
         mapMines = view.findViewById(R.id.map_mines)
+        seed = view.findViewById(R.id.seed)
 
         createGameViewModel.singleState().let {
             mapWidth.text = it.width.toString()
             mapHeight.text = it.height.toString()
             mapMines.text = it.mines.toString()
+            seed.text = ""
         }
 
         return view

@@ -51,11 +51,16 @@ class PreferencesRepository(
         }
     }
 
+    override fun forgetCustomSeed() {
+        preferencesManager.removeKey(PreferenceKeys.PREFERENCE_CUSTOM_GAME_SEED)
+    }
+
     override fun customGameMode(): Minefield = with(preferencesManager) {
         Minefield(
             getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_WIDTH, 9),
             getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_HEIGHT, 9),
             getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_MINES, 9),
+            getLongOrNull(PreferenceKeys.PREFERENCE_CUSTOM_GAME_SEED),
         )
     }
 
@@ -64,6 +69,11 @@ class PreferencesRepository(
             putInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_WIDTH, minefield.width)
             putInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_HEIGHT, minefield.height)
             putInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_MINES, minefield.mines)
+            if (minefield.seed != null) {
+                putLong(PreferenceKeys.PREFERENCE_CUSTOM_GAME_SEED, minefield.seed)
+            } else {
+                removeKey(PreferenceKeys.PREFERENCE_CUSTOM_GAME_SEED)
+            }
         }
     }
 

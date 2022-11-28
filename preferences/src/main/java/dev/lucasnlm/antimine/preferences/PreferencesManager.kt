@@ -16,6 +16,14 @@ class PreferencesManager(
 
     override fun getInt(key: String, defaultValue: Int) = preferences.getInt(key, defaultValue)
 
+    override fun getLongOrNull(key: String): Long? {
+        return if (preferences.contains(key)) {
+            preferences.getLong(key, -1)
+        } else {
+            null
+        }
+    }
+
     override fun putInt(key: String, value: Int) = preferences.edit().putInt(key, value).apply()
 
     override fun getString(key: String): String? = preferences.getString(key, null)

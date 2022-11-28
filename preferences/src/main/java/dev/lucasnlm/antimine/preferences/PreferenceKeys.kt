@@ -15,6 +15,7 @@ object PreferenceKeys {
     const val PREFERENCE_CUSTOM_GAME_WIDTH = "preference_custom_game_width"
     const val PREFERENCE_CUSTOM_GAME_HEIGHT = "preference_custom_game_height"
     const val PREFERENCE_CUSTOM_GAME_MINES = "preference_custom_game_mines"
+    const val PREFERENCE_CUSTOM_GAME_SEED = "preference_custom_game_seed"
     const val PREFERENCE_SOUND_EFFECTS = "preference_sound"
     const val PREFERENCE_STATS_BASE = "preference_stats_base"
     const val PREFERENCE_OLD_LARGE_AREA = "preference_large_area"

@@ -13,6 +13,7 @@ interface IPreferencesRepository {
 
     fun customGameMode(): Minefield
     fun updateCustomGameMode(minefield: Minefield)
+    fun forgetCustomSeed()
 
     fun controlStyle(): ControlStyle
     fun useControlStyle(controlStyle: ControlStyle)

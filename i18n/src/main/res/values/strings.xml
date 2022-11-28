@@ -27,6 +27,7 @@
     <string name="width">Width</string>
     <string name="height">Height</string>
     <string name="mines">Mines</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">If you start a new game, your current progress will be lost.</string>
     <string name="show_licenses">Show Licenses</string>
     <string name="new_game_request">Do you want to start a new game?</string>

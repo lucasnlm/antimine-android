@@ -53,11 +53,12 @@ class GameController {
         difficulty: Difficulty,
         onCreateUnsafeLevel: (() -> Unit)? = null,
     ) {
+        val creationSeed = minefield.seed ?: seed
         val shouldUseSimonTatham = useSimonTatham && difficulty != Difficulty.Beginner
         this.minefieldCreator = if (shouldUseSimonTatham) {
-            MinefieldCreatorNativeImpl(minefield, Random(seed))
+            MinefieldCreatorNativeImpl(minefield, Random(creationSeed))
         } else {
-            MinefieldCreatorImpl(minefield, Random(seed))
+            MinefieldCreatorImpl(minefield, Random(creationSeed))
         }
         this.minefield = minefield
         this.seed = seed
