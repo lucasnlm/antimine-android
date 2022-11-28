@@ -33,11 +33,11 @@
             android:id="@+id/stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:divider="?android:listDivider"
             android:fitsSystemWindows="true"
             android:showDividers="middle"
             android:stretchColumns="1"
-            android:layout_marginBottom="8dp"
             tools:context=".stats.StatsActivity">
 
             <TableRow>

@@ -13,6 +13,12 @@ class PreferencesRepository(
         migrateOldPreferences()
     }
 
+    private val listOfControlCustoms = listOf(
+        PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY,
+        PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT,
+        PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT,
+    )
+
     private fun longPressTimeout() = ViewConfiguration.getLongPressTimeout()
 
     override fun hasCustomizations(): Boolean {
@@ -23,11 +29,14 @@ class PreferencesRepository(
         }
     }
 
-    override fun resetControls() {
-        preferencesManager.apply {
-            removeKey(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY)
-            removeKey(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT)
+    override fun hasControlCustomizations(): Boolean {
+        return listOfControlCustoms.fold(false) { acc, current ->
+            acc || preferencesManager.contains(current)
         }
+    }
+
+    override fun resetControls() {
+        listOfControlCustoms.forEach { preferencesManager.removeKey(it) }
     }
 
     override fun reset() {
@@ -413,14 +422,6 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_ALLOW_TAP_NUMBER, allow)
     }
 
-    override fun setToggleButtonOnTopBar(enabled: Boolean) {
-        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_TOGGLE_ON_TOP_BAR, enabled)
-    }
-
-    override fun showToggleButtonOnTopBar(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_TOGGLE_ON_TOP_BAR, false)
-    }
-
     override fun showTutorialButton(): Boolean {
         return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOULD_SHOW_TUTORIAL_BUTTON, true)
     }
@@ -435,14 +436,6 @@ class PreferencesRepository(
 
     override fun setDimNumbers(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_DIM_NUMBERS, value)
-    }
-
-    override fun setLeftHandedMode(enabled: Boolean) {
-        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_LEFT_HANDED, enabled)
-    }
-
-    override fun leftHandedMode(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_LEFT_HANDED, false)
     }
 
     override fun setRequestDonation(request: Boolean) {

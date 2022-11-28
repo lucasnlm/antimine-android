@@ -71,7 +71,6 @@ class GameActivity :
     private val renderSquareRadius = preferencesRepository.squareRadius()
     private val renderSquareDivider = preferencesRepository.squareDivider()
     private val renderSquareSize = preferencesRepository.squareSize()
-    private val showFloatingButtonOnTop = preferencesRepository.showToggleButtonOnTopBar()
     private val hasFloatingButton = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
 
     override fun onNewIntent(intent: Intent?) {
@@ -373,7 +372,6 @@ class GameActivity :
         if (renderSquareRadius != preferencesRepository.squareRadius() ||
             renderSquareDivider != preferencesRepository.squareDivider() ||
             renderSquareSize != preferencesRepository.squareSize() ||
-            showFloatingButtonOnTop != preferencesRepository.showToggleButtonOnTopBar() ||
             hasFloatingButton != (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen)
         ) {
             // If used changed any currently rendered settings, we

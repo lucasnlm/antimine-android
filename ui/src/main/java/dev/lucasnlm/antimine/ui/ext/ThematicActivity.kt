@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.appbar.MaterialToolbar
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.TopBarAction
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
@@ -31,6 +32,15 @@ abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActi
         window.decorView.setBackgroundColor(
             themeRepository.getTheme().palette.background.toAndroidColor(),
         )
+    }
+
+    protected fun bindToolbar(toolbar: MaterialToolbar?) {
+        toolbar?.apply {
+            setSupportActionBar(this)
+            setNavigationOnClickListener {
+                finish()
+            }
+        }
     }
 
     fun setTopBarAction(topBarAction: TopBarAction?) {

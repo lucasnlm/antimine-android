@@ -90,7 +90,6 @@ class MainViewModel(
             setUnlockedThemes(unlockedThemes)
             setSquareDivider(squareDivider)
             setDoubleClickTimeout(doubleClickTimeout.toLong())
-            setLeftHandedMode(leftHanded != 0)
             setDimNumbers(dimNumbers != 0)
             setTimerVisible(timerVisible != 0)
         }

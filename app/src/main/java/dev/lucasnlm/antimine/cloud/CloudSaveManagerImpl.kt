@@ -50,7 +50,7 @@ class CloudSaveManagerImpl(
                     doubleClickTimeout = preferencesRepository.getDoubleClickTimeout().toInt(),
                     allowTapNumbers = preferencesRepository.allowTapOnNumbers().toInt(),
                     highlightNumbers = preferencesRepository.dimNumbers().toInt(),
-                    leftHanded = preferencesRepository.leftHandedMode().toInt(),
+                    leftHanded = 0,
                     dimNumbers = preferencesRepository.dimNumbers().toInt(),
                     timerVisible = preferencesRepository.showTimer().toInt(),
                 )

@@ -6,13 +6,16 @@
     android:animateLayoutChanges="true"
     android:fitsSystemWindows="true">
 
-    <dev.lucasnlm.antimine.ui.view.SectionView
-        android:id="@+id/section"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/back_arrow"
+        app:title="@string/control" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,7 +24,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/section">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,205 +32,199 @@
             android:paddingHorizontal="@dimen/main_activity_padding"
             android:paddingVertical="8dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/control_styles"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:fadeScrollbars="false"
-                android:fadingEdge="vertical"
-                android:fadingEdgeLength="24dp"
-                android:requiresFadingEdge="vertical"
-                android:scrollbarStyle="outsideInset"
+                android:layout_height="wrap_content"
+                app:contentPadding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:paddingVertical="8dp"
-                android:text="@string/settings"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/longPressLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="12dp"
-                android:text="@string/long_press"
-                app:layout_constraintEnd_toStartOf="@id/longPress"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/settings" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/statsLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="8dp"
+                        android:text="@string/control_type"
+                        android:textAllCaps="true"
+                        android:textColor="?colorAccent"
+                        android:textStyle="bold" />
 
-            <com.google.android.material.slider.Slider
-                android:id="@+id/longPress"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:stepSize="5"
-                android:value="500"
-                android:valueFrom="0"
-                android:valueTo="2000"
-                app:layout_constraintBottom_toBottomOf="@+id/longPressLabel"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:fadeScrollbars="false"
+                        android:fadingEdge="vertical"
+                        android:fadingEdgeLength="24dp"
+                        android:requiresFadingEdge="vertical"
+                        android:scrollbarStyle="outsideInset" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <Space
+                android:id="@+id/space"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/longPressLabel"
-                app:layout_constraintTop_toTopOf="@+id/longPressLabel"
-                app:thumbColor="?colorAccent"
-                app:thumbStrokeColor="?colorAccent"
-                app:tickVisible="false"
-                app:trackColorActive="?colorAccent"
-                app:trackHeight="8dp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/doubleClickLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="12dp"
-                android:text="@string/double_click"
-                app:layout_constraintEnd_toStartOf="@+id/longPress"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/longPressLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/control_styles" />
 
-            <com.google.android.material.slider.Slider
-                android:id="@+id/doubleClick"
-                android:layout_width="200dp"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/control_settings"
+                style="?attr/materialCardViewFilledStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:stepSize="5"
-                android:value="250"
-                android:valueFrom="100"
-                android:valueTo="700"
-                app:layout_constraintBottom_toBottomOf="@+id/doubleClickLabel"
+                app:contentPadding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/doubleClickLabel"
-                app:layout_constraintTop_toTopOf="@+id/doubleClickLabel"
-                app:thumbColor="?colorAccent"
-                app:thumbStrokeColor="?colorAccent"
-                app:tickVisible="false"
-                app:trackColorActive="?colorAccent"
-                app:trackHeight="8dp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/touch_sensibility"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="12dp"
-                android:text="@string/touch_sensibility"
-                app:layout_constraintEnd_toStartOf="@id/touchSensibility"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/doubleClickLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/space">
 
-            <com.google.android.material.slider.Slider
-                android:id="@+id/touchSensibility"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:max="15"
-                android:stepSize="1"
-                android:value="1"
-                android:valueFrom="0"
-                android:valueTo="15"
-                app:layout_constraintBottom_toBottomOf="@+id/touch_sensibility"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/touch_sensibility"
-                app:layout_constraintTop_toTopOf="@+id/touch_sensibility"
-                app:thumbColor="?colorAccent"
-                app:thumbStrokeColor="?colorAccent"
-                app:tickVisible="false"
-                app:trackColorActive="?colorAccent"
-                app:trackHeight="8dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/hapticLevelLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="12dp"
-                android:text="@string/vibration"
-                app:layout_constraintEnd_toStartOf="@id/hapticLevel"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/touch_sensibility" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/settingsLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="8dp"
+                        android:text="@string/settings"
+                        android:textAllCaps="true"
+                        android:textColor="?colorAccent"
+                        android:textStyle="bold" />
 
-            <com.google.android.material.slider.Slider
-                android:id="@+id/hapticLevel"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:max="15"
-                android:stepSize="1"
-                android:value="100"
-                android:valueFrom="0"
-                android:valueTo="200"
-                app:layout_constraintBottom_toBottomOf="@+id/hapticLevelLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/hapticLevelLabel"
-                app:layout_constraintTop_toTopOf="@+id/hapticLevelLabel"
-                app:thumbColor="?colorAccent"
-                app:thumbStrokeColor="?colorAccent"
-                app:tickVisible="false"
-                app:trackColorActive="?colorAccent"
-                app:trackHeight="8dp" />
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stretchColumns="1">
+                        <TableRow>
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/touch_sensibility"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="12dp"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="0dp"
+                                android:text="@string/touch_sensibility"
+                                android:textColor="?colorOnSurfaceVariant" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/toggleButtonTopBarLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="8dp"
-                android:text="@string/toggle_button_top"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toStartOf="@id/toggleButtonTopBar"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hapticLevelLabel" />
+                            <com.google.android.material.slider.Slider
+                                android:id="@+id/touchSensibility"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:max="15"
+                                android:stepSize="1"
+                                android:value="1"
+                                android:valueFrom="0"
+                                android:valueTo="15"
+                                app:thumbColor="?colorAccent"
+                                app:thumbStrokeColor="?colorAccent"
+                                app:tickVisible="false"
+                                app:trackColorActive="?colorAccent"
+                                app:trackColorInactive="?colorOnSurfaceVariant"
+                                app:trackHeight="8dp" />
+                        </TableRow>
 
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/toggleButtonTopBar"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/toggleButtonTopBarLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/toggleButtonTopBarLabel" />
+                        <TableRow>
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/hapticLevelLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="12dp"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="0dp"
+                                android:text="@string/vibration"
+                                android:textColor="?colorOnSurfaceVariant" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/leftHandedLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="8dp"
-                android:text="@string/left_handed"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toStartOf="@id/toggleButtonTopBar"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toggleButtonTopBarLabel" />
+                            <com.google.android.material.slider.Slider
+                                android:id="@+id/hapticLevel"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:max="15"
+                                android:stepSize="1"
+                                android:value="100"
+                                android:valueFrom="0"
+                                android:valueTo="200"
+                                app:thumbColor="?colorAccent"
+                                app:thumbStrokeColor="?colorAccent"
+                                app:tickVisible="false"
+                                app:trackColorActive="?colorAccent"
+                                app:trackColorInactive="?colorOnSurfaceVariant"
+                                app:trackHeight="8dp" />
+                        </TableRow>
 
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/leftHanded"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/leftHandedLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/leftHandedLabel" />
+                        <TableRow>
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/longPressLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="12dp"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="0dp"
+                                android:text="@string/long_press"
+                                android:textColor="?colorOnSurfaceVariant" />
 
+                            <com.google.android.material.slider.Slider
+                                android:id="@+id/longPress"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:stepSize="5"
+                                android:value="500"
+                                android:valueFrom="0"
+                                android:valueTo="2000"
+                                app:thumbColor="?colorAccent"
+                                app:thumbStrokeColor="?colorAccent"
+                                app:tickVisible="false"
+                                app:trackColorActive="?colorAccent"
+                                app:trackColorInactive="?colorOnSurfaceVariant"
+                                app:trackHeight="8dp" />
+                        </TableRow>
+
+                        <TableRow>
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/doubleClickLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="12dp"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="0dp"
+                                android:text="@string/double_click"
+                                android:textColor="?colorOnSurfaceVariant" />
+
+                            <com.google.android.material.slider.Slider
+                                android:id="@+id/doubleClick"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:stepSize="5"
+                                android:value="250"
+                                android:valueFrom="100"
+                                android:valueTo="700"
+                                app:thumbColor="?colorAccent"
+                                app:thumbStrokeColor="?colorAccent"
+                                app:tickVisible="false"
+                                app:trackColorActive="?colorAccent"
+                                app:trackColorInactive="?colorOnSurfaceVariant"
+                                app:trackHeight="8dp" />
+                        </TableRow>
+                    </TableLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

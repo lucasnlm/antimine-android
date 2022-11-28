@@ -56,6 +56,10 @@ class ControlViewModel(
         ),
     )
 
+    private fun hasChangedPreferences(): Boolean {
+        return preferencesRepository.hasControlCustomizations()
+    }
+
     override fun initialState(): ControlState {
         val controlDetails = gameControlOptions.firstOrNull {
             it.controlStyle == preferencesRepository.controlStyle()
@@ -67,7 +71,7 @@ class ControlViewModel(
             selected = controlDetails?.controlStyle ?: ControlStyle.Standard,
             controls = gameControlOptions,
             hapticFeedbackLevel = preferencesRepository.getHapticFeedbackLevel(),
-            showToggleButtonSettings = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen,
+            showReset = hasChangedPreferences(),
         )
     }
 
@@ -78,12 +82,18 @@ class ControlViewModel(
                 preferencesRepository.setHapticFeedbackLevel(value)
                 hapticFeedbackManager.longPressFeedback()
                 preferencesRepository.setHapticFeedback(value != 0)
+
+                val newState = state.copy(
+                    showReset = hasChangedPreferences(),
+                )
+                emit(newState)
             }
             is ControlEvent.UpdateDoubleClick -> {
                 preferencesRepository.setDoubleClickTimeout(event.value.toLong())
 
                 val newState = state.copy(
                     doubleClick = event.value,
+                    showReset = hasChangedPreferences(),
                 )
                 emit(newState)
             }
@@ -92,6 +102,7 @@ class ControlViewModel(
 
                 val newState = state.copy(
                     longPress = event.value,
+                    showReset = hasChangedPreferences(),
                 )
                 emit(newState)
             }
@@ -99,6 +110,7 @@ class ControlViewModel(
                 preferencesRepository.setTouchSensibility(event.value)
                 val newState = state.copy(
                     touchSensibility = event.value,
+                    showReset = hasChangedPreferences(),
                 )
                 emit(newState)
             }
@@ -108,6 +120,8 @@ class ControlViewModel(
                 val newState = state.copy(
                     longPress = preferencesRepository.customLongPressTimeout().toInt(),
                     touchSensibility = preferencesRepository.touchSensibility(),
+                    doubleClick = preferencesRepository.getDoubleClickTimeout().toInt(),
+                    showReset = hasChangedPreferences(),
                 )
                 emit(newState)
             }
@@ -119,7 +133,6 @@ class ControlViewModel(
 
                 val newState = state.copy(
                     selected = selected.controlStyle,
-                    showToggleButtonSettings = selected.controlStyle == ControlStyle.SwitchMarkOpen,
                 )
 
                 emit(newState)

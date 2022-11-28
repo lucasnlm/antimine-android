@@ -190,40 +190,36 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
         val controlSwitcher = controlSwitcher
         if (controlSwitcher != null) {
             if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
-                if (preferencesRepository.showToggleButtonOnTopBar()) {
-                    controlSwitcher.visibility = View.GONE
-                } else {
-                    controlSwitcher.apply {
-                        visibility = View.VISIBLE
-                        layoutParams = getSwitchControlLayoutParams()
+                controlSwitcher.apply {
+                    visibility = View.VISIBLE
+                    layoutParams = getSwitchControlLayoutParams()
 
-                        setQuestionButtonVisibility(preferencesRepository.useQuestionMark())
+                    setQuestionButtonVisibility(preferencesRepository.useQuestionMark())
 
-                        setOnFlagClickListener {
-                            gameViewModel.changeSwitchControlAction(Action.SwitchMark)
-                        }
+                    setOnFlagClickListener {
+                        gameViewModel.changeSwitchControlAction(Action.SwitchMark)
+                    }
 
-                        setOnOpenClickListener {
-                            gameViewModel.changeSwitchControlAction(Action.OpenTile)
-                        }
+                    setOnOpenClickListener {
+                        gameViewModel.changeSwitchControlAction(Action.OpenTile)
+                    }
 
-                        setOnQuestionClickListener {
-                            gameViewModel.changeSwitchControlAction(Action.QuestionMark)
-                        }
+                    setOnQuestionClickListener {
+                        gameViewModel.changeSwitchControlAction(Action.QuestionMark)
+                    }
 
-                        val selectedAction = preferencesRepository.getSwitchControlAction()
-                        val openAsDefault = selectedAction == Action.OpenTile || selectedAction == Action.QuestionMark
-                        selectOpenAsDefault(openAsDefault)
+                    val selectedAction = preferencesRepository.getSwitchControlAction()
+                    val openAsDefault = selectedAction == Action.OpenTile || selectedAction == Action.QuestionMark
+                    selectOpenAsDefault(openAsDefault)
 
-                        if (selectedAction == Action.QuestionMark) {
-                            preferencesRepository.setSwitchControl(Action.OpenTile)
-                        }
+                    if (selectedAction == Action.QuestionMark) {
+                        preferencesRepository.setSwitchControl(Action.OpenTile)
                     }
                 }
             } else {
                 controlSwitcher.visibility = View.GONE
             }
-        } else if (!preferencesRepository.showToggleButtonOnTopBar()) {
+        } else {
             view.postDelayed(if (delayed) 200L else 0L) {
                 if (this.controlSwitcher == null) {
                     val isParentFinishing = activity?.isFinishing ?: true

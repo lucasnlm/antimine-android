@@ -12,15 +12,12 @@ import dev.lucasnlm.antimine.stats.viewmodel.StatsEvent
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
 import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import dev.lucasnlm.antimine.ui.model.TopBarAction
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.activity_stats.*
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     private val statsViewModel by viewModel<StatsViewModel>()
-    private val themeRepository: IThemeRepository by inject()
 
     private val toolbar: MaterialToolbar by lazy {
         findViewById(R.id.toolbar)
@@ -28,8 +25,6 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        bindToolbar()
 
         recyclerView.apply {
             setHasFixedSize(true)
@@ -46,24 +41,16 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
                             actionName = R.string.delete_all,
                             icon = R.drawable.delete,
                             action = { confirmAndDelete() },
-                        )
+                        ),
                     )
                 }
 
-                recyclerView.adapter = StatsAdapter(it.stats, themeRepository)
+                recyclerView.adapter = StatsAdapter(it.stats)
                 empty.visibility = if (it.stats.isEmpty()) View.VISIBLE else View.GONE
-                bindToolbar()
             }
         }
-    }
 
-    private fun bindToolbar() {
-        toolbar.apply {
-            setSupportActionBar(this)
-            setNavigationOnClickListener {
-                finish()
-            }
-        }
+        bindToolbar(toolbar)
     }
 
     private fun confirmAndDelete() {

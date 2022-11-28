@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.control.R
 import dev.lucasnlm.antimine.control.models.ControlDetails
+import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.view_control_item.view.*
 
@@ -27,7 +27,7 @@ class ControlAdapter(
             addAll(list)
         }
         this.selected = selected
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0, controls.size)
     }
 
     override fun getItemId(position: Int): Long {
@@ -55,6 +55,7 @@ class ControlAdapter(
     override fun onBindViewHolder(holder: ControlViewHolder, position: Int) {
         val controlDetail = controls[position]
         val isSelected = selected == controlDetail.controlStyle
+        val context = holder.itemView.context
 
         if (getItemViewType(position) == SIMPLE) {
             holder.itemView.run {
@@ -62,10 +63,10 @@ class ControlAdapter(
                     setOnClickListener {
                         onControlSelected(controlDetail.controlStyle)
                     }
-                    strokeColor = if (isSelected) {
-                        themeRepository.getTheme().palette.accent.toAndroidColor()
+                    strokeWidth = if (isSelected) {
+                        context.dpToPx(2)
                     } else {
-                        0x000000.toAndroidColor(32)
+                        0
                     }
                 }
                 firstActionName.text = context.getString(controlDetail.firstActionId)
@@ -76,10 +77,10 @@ class ControlAdapter(
                     setOnClickListener {
                         onControlSelected(controlDetail.controlStyle)
                     }
-                    strokeColor = if (isSelected) {
-                        themeRepository.getTheme().palette.accent.toAndroidColor()
+                    strokeWidth = if (isSelected) {
+                        context.dpToPx(2)
                     } else {
-                        0x000000.toAndroidColor(32)
+                        0
                     }
                 }
                 firstActionName.text = context.getString(controlDetail.firstActionId)

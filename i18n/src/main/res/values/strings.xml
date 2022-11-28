@@ -61,6 +61,7 @@
     <string name="use_question_mark">Use Question Mark</string>
     <string name="no_guessing_mode">\'No guessing\' mode</string>
     <string name="control">Controls</string>
+    <string name="control_type">Control Type</string>
     <string name="single_click">Single Tap</string>
     <string name="double_click">Double Tap</string>
     <string name="long_press">Long Tap</string>
@@ -117,13 +118,11 @@
     <string name="click_numbers">Allow tap on numbers</string>
     <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Tap to customize</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
     <string name="show_timer">Show Timer</string>
-    <string name="left_handed">Left-handed</string>
     <string name="donate_request">If you like this game, consider making a donation.</string>
     <string name="donate_help">It will help keep this project active!</string>
 </resources>

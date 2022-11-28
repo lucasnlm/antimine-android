@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.slider.Slider
 import dev.lucasnlm.antimine.control.view.ControlAdapter
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
@@ -11,8 +12,8 @@ import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThematicActivity
+import dev.lucasnlm.antimine.ui.model.TopBarAction
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
-import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import kotlinx.android.synthetic.main.activity_control.*
 import org.koin.android.ext.android.inject
 
@@ -21,9 +22,12 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
     private val themeRepository: IThemeRepository by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
 
+    private val toolbar: MaterialToolbar by lazy {
+        findViewById(R.id.toolbar)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindToolbar()
 
         val controlAdapter = ControlAdapter(
             themeRepository = themeRepository,
@@ -35,8 +39,8 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
         )
 
         recyclerView.apply {
-            addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
             setHasFixedSize(true)
+            itemAnimator = null
             layoutManager = LinearLayoutManager(context)
             adapter = controlAdapter
         }
@@ -46,34 +50,12 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
         doubleClick.addOnChangeListener(this)
         hapticLevel.addOnChangeListener(this)
 
-        toggleButtonTopBar.isChecked = preferencesRepository.showToggleButtonOnTopBar()
-        toggleButtonTopBarLabel.setOnClickListener {
-            toggleButtonTopBar.isChecked = !toggleButtonTopBar.isChecked
-        }
-        toggleButtonTopBar.setOnCheckedChangeListener { _, checked ->
-            preferencesRepository.setToggleButtonOnTopBar(checked)
-        }
-
-        leftHanded.isChecked = preferencesRepository.leftHandedMode()
-        leftHandedLabel.setOnClickListener {
-            leftHanded.isChecked = !leftHanded.isChecked
-        }
-        leftHanded.setOnCheckedChangeListener { _, checked ->
-            preferencesRepository.setLeftHandedMode(checked)
-        }
-
         lifecycleScope.launchWhenCreated {
             viewModel.observeState().collect {
                 controlAdapter.bindControlStyleList(it.selected, it.controls)
                 longPress.value = (it.longPress.toFloat() / longPress.stepSize).toInt() * longPress.stepSize
                 touchSensibility.value =
                     (it.touchSensibility.toFloat() / touchSensibility.stepSize).toInt() * touchSensibility.stepSize
-
-                val toggleVisible = if (it.showToggleButtonSettings) View.VISIBLE else View.GONE
-                toggleButtonTopBar.visibility = toggleVisible
-                toggleButtonTopBarLabel.visibility = toggleVisible
-                leftHanded.visibility = toggleVisible
-                leftHandedLabel.visibility = toggleVisible
 
                 val longPressVisible = when (it.selected) {
                     ControlStyle.Standard, ControlStyle.FastFlag -> View.VISIBLE
@@ -88,11 +70,28 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
                 }
                 doubleClick.visibility = doubleClickVisible
                 doubleClickLabel.visibility = doubleClickVisible
+                doubleClick.value = it.doubleClick.toFloat()
 
                 hapticLevel.value =
                     (it.hapticFeedbackLevel.toFloat() / hapticLevel.stepSize).toInt() * hapticLevel.stepSize
+
+                if (it.showReset) {
+                    setTopBarAction(
+                        TopBarAction(
+                            actionName = R.string.delete_all,
+                            icon = R.drawable.undo,
+                            action = {
+                                viewModel.sendEvent(ControlEvent.Reset)
+                            },
+                        ),
+                    )
+                } else {
+                    setTopBarAction(null)
+                }
             }
         }
+
+        bindToolbar(toolbar)
     }
 
     override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
@@ -113,21 +112,5 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
                 }
             }
         }
-    }
-
-    private fun bindToolbar() {
-        section.bind(
-            text = R.string.control,
-            startButton = R.drawable.back_arrow,
-            startDescription = R.string.back,
-            startAction = {
-                finish()
-            },
-            endButton = R.drawable.undo,
-            endDescription = R.string.delete_all,
-            endAction = {
-                viewModel.sendEvent(ControlEvent.Reset)
-            },
-        )
     }
 }

@@ -7,6 +7,8 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 interface IPreferencesRepository {
     fun hasCustomizations(): Boolean
     fun reset()
+
+    fun hasControlCustomizations(): Boolean
     fun resetControls()
 
     fun customGameMode(): Minefield
@@ -129,12 +131,6 @@ interface IPreferencesRepository {
 
     fun letNumbersAutoFlag(): Boolean
     fun setNumbersAutoFlag(allow: Boolean)
-
-    fun setToggleButtonOnTopBar(enabled: Boolean)
-    fun showToggleButtonOnTopBar(): Boolean
-
-    fun setLeftHandedMode(enabled: Boolean)
-    fun leftHandedMode(): Boolean
 
     fun showTimer(): Boolean
     fun setTimerVisible(visible: Boolean)
