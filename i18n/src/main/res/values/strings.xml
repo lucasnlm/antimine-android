@@ -61,7 +61,7 @@
     <string name="use_question_mark">Use Question Mark</string>
     <string name="no_guessing_mode">\'No guessing\' mode</string>
     <string name="control">Controls</string>
-    <string name="control_type">Control Type</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">Single Tap</string>
     <string name="double_click">Double Tap</string>
     <string name="long_press">Long Tap</string>

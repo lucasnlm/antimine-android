@@ -54,7 +54,7 @@
                         android:paddingHorizontal="16dp"
                         android:paddingTop="16dp"
                         android:paddingBottom="8dp"
-                        android:text="@string/control_type"
+                        android:text="@string/control_types"
                         android:textAllCaps="true"
                         android:textColor="?colorAccent"
                         android:textStyle="bold" />
