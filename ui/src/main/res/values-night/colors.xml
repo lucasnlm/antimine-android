@@ -15,6 +15,7 @@
 
     <color name="accent">#FFFFFF</color>
     <color name="highlight">#FFFFFF</color>
+    <color name="custom_card_background">#333</color>
 
     <color name="view_cover">#d5d2cc</color>
     <color name="view_clean">#ff424242</color>

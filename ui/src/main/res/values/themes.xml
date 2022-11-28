@@ -22,7 +22,7 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
-        <item name="colorSurfaceVariant">#EEE</item>
+        <item name="colorSurfaceVariant">@color/custom_card_background</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -38,6 +38,7 @@
         <item name="colorPrimary">#757575</item>
         <item name="colorPrimaryDark">#494949</item>
         <item name="colorAccent">#ff6f00</item>
+        <item name="colorSurfaceVariant">#EEEEEE</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -50,6 +51,7 @@
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#FFFFFF</item>
         <item name="colorAccent">#FFFFFF</item>
+        <item name="colorSurfaceVariant">#333333</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -62,6 +64,7 @@
         <item name="colorPrimary">#FFFFFFFF</item>
         <item name="colorPrimaryDark">#FFFFFFFF</item>
         <item name="colorAccent">#FFFFFFFF</item>
+        <item name="colorSurfaceVariant">#333333</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -74,6 +77,7 @@
         <item name="colorPrimary">#5d4037</item>
         <item name="colorPrimaryDark">#321911</item>
         <item name="colorAccent">#53b529</item>
+        <item name="colorSurfaceVariant">#EEEEEE</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -86,6 +90,7 @@
         <item name="colorPrimary">#1565c0</item>
         <item name="colorPrimaryDark">#003c8f</item>
         <item name="colorAccent">#03a9f4</item>
+        <item name="colorSurfaceVariant">#EEEEEE</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -98,6 +103,7 @@
         <item name="colorPrimary">#37474f</item>
         <item name="colorPrimaryDark">#102027</item>
         <item name="colorAccent">#42a5f5</item>
+        <item name="colorSurfaceVariant">#EEEEEE</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -110,6 +116,7 @@
         <item name="colorPrimary">#42a5f5</item>
         <item name="colorPrimaryDark">#42a5f5</item>
         <item name="colorAccent">#42a5f5</item>
+        <item name="colorSurfaceVariant">#333333</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -122,6 +129,7 @@
         <item name="colorPrimary">#f44336</item>
         <item name="colorPrimaryDark">#f44336</item>
         <item name="colorAccent">#f44336</item>
+        <item name="colorSurfaceVariant">#333333</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -134,6 +142,7 @@
         <item name="colorPrimary">#fb8c00</item>
         <item name="colorPrimaryDark">#fb8c00</item>
         <item name="colorAccent">#fb8c00</item>
+        <item name="colorSurfaceVariant">#333333</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -146,6 +155,7 @@
         <item name="colorPrimary">#f8bbd0</item>
         <item name="colorPrimaryDark">#c48b9f</item>
         <item name="colorAccent">#f48fb1</item>
+        <item name="colorSurfaceVariant">#EEEEEE</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -158,6 +168,7 @@
         <item name="colorPrimary">#f8bbd0</item>
         <item name="colorPrimaryDark">#c48b9f</item>
         <item name="colorAccent">#f48fb1</item>
+        <item name="colorSurfaceVariant">#333333</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -170,6 +181,7 @@
         <item name="colorPrimary">#5e35b1</item>
         <item name="colorPrimaryDark">#280680</item>
         <item name="colorAccent">#9c27b0</item>
+        <item name="colorSurfaceVariant">#EEEEEE</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -182,6 +194,7 @@
         <item name="colorPrimary">#5e35b1</item>
         <item name="colorPrimaryDark">#280680</item>
         <item name="colorAccent">#9c27b0</item>
+        <item name="colorSurfaceVariant">#333333</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -194,6 +207,7 @@
         <item name="colorPrimary">#cddc39</item>
         <item name="colorPrimaryDark">#99aa00</item>
         <item name="colorAccent">#cddc39</item>
+        <item name="colorSurfaceVariant">#333333</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -206,6 +220,7 @@
         <item name="colorPrimary">#fdd835</item>
         <item name="colorPrimaryDark">#c6a700</item>
         <item name="colorAccent">#ffeb3b</item>
+        <item name="colorSurfaceVariant">#333333</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -218,6 +233,7 @@
         <item name="colorPrimary">#f57f17</item>
         <item name="colorPrimaryDark">#bc5100</item>
         <item name="colorAccent">#f9a825</item>
+        <item name="colorSurfaceVariant">#EEEEEE</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
