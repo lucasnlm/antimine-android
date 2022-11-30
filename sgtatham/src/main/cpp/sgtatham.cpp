@@ -1,5 +1,8 @@
 #include <jni.h>
 
+#include <algorithm>
+
+
 #include <cassert>
 #include <string>
 #include <cstdint>
@@ -18,6 +21,7 @@
 #define lenof(array) ( sizeof(array) / sizeof(*(array)) )
 
 typedef uint32_t uint32;
+
 
 struct random_state {
     unsigned char seedbuf[40];
@@ -42,7 +46,7 @@ struct minectx {
     int w, h;
     int sx, sy;
     bool allow_big_perturbs;
-    random_state *rs;
+    std::mt19937& random;
 };
 
 struct perturbation {
@@ -265,69 +269,14 @@ void SHA_Simple(const void *p, int len, unsigned char *output) {
     SHA_Final(&s, output);
 }
 
-random_state *random_new(const char *seed, int len) {
-    random_state *state;
-
-    state = snew(random_state);
-
-    SHA_Simple(seed, len, state->seedbuf);
-    SHA_Simple(state->seedbuf, 20, state->seedbuf + 20);
-    SHA_Simple(state->seedbuf, 40, state->databuf);
-    state->pos = 0;
-
-    return state;
+unsigned long random_bits(std::mt19937& random) {
+    std::uniform_int_distribution<std::mt19937::result_type> dist;
+    return dist(random);
 }
 
-unsigned long random_bits(random_state *state, int bits) {
-    unsigned long ret = 0;
-    int n;
-
-    for (n = 0; n < bits; n += 8) {
-        if (state->pos >= 20) {
-            int i;
-
-            for (i = 0; i < 20; i++) {
-                if (state->seedbuf[i] != 0xFF) {
-                    state->seedbuf[i]++;
-                    break;
-                } else
-                    state->seedbuf[i] = 0;
-            }
-            SHA_Simple(state->seedbuf, 40, state->databuf);
-            state->pos = 0;
-        }
-        ret = (ret << 8) | state->databuf[state->pos++];
-    }
-
-    /*
-     * `(1 << bits) - 1' is not good enough, since if bits==32 on a
-     * 32-bit machine, behaviour is undefined and Intel has a nasty
-     * habit of shifting left by zero instead. We'll shift by
-     * bits-1 and then separately shift by one.
-     */
-    ret &= (1 << (bits - 1)) * 2 - 1;
-    return ret;
-}
-
-unsigned long random_upto(random_state *state, unsigned long limit) {
-    int bits = 0;
-    unsigned long max, divisor, data;
-
-    while ((limit >> bits) != 0)
-        bits++;
-
-    bits += 3;
-    assert(bits < 32);
-
-    max = 1L << bits;
-    divisor = max / limit;
-    max = limit * divisor;
-
-    do {
-        data = random_bits(state, bits);
-    } while (data >= max);
-
-    return data / divisor;
+unsigned long random_up_to(std::mt19937& random, std::size_t limit) {
+    std::uniform_int_distribution<std::mt19937::result_type> dist(0,limit - 1);
+    return dist(random);
 }
 
 static int squarecmp(const void *av, const void *bv) {
@@ -452,7 +401,7 @@ struct perturbations *mineperturb(void *vctx, signed char *grid, int setx, int s
              * Finally, a random number to cause qsort to
              * shuffle within each group.
              */
-            sqlist[n].random = static_cast<int>(random_bits(ctx->rs, 31));
+            sqlist[n].random = static_cast<int>(random_bits(ctx->random));
 
             n++;
         }
@@ -552,7 +501,7 @@ struct perturbations *mineperturb(void *vctx, signed char *grid, int setx, int s
          * Now pick `ntoempty' items at random from the list.
          */
         for (k = 0; k < ntoempty; k++) {
-            int index = k + random_upto(ctx->rs, i - k);
+            int index = k + random_up_to(ctx->random, i - k);
             int tmp;
 
             tmp = setlist[k];
@@ -941,10 +890,16 @@ static void known_squares(int w, int h, struct squaretodo *std,
         }
 }
 
-static int minesolve(int w, int h, int n, signed char *grid,
-                     open_cb open,
-                     perturb_cb perturb,
-                     void *ctx, random_state *rs) {
+static int minesolve(
+        int w,
+        int h,
+        int n,
+        signed char *grid,
+        open_cb open,
+        perturb_cb perturb,
+        void *ctx,
+        std::mt19937& random
+) {
     struct setstore *ss = ss_new();
     struct set **list;
     struct squaretodo astd, *std = &astd;
@@ -1407,7 +1362,7 @@ static int minesolve(int w, int h, int n, signed char *grid,
             if (count234(ss->sets) == 0) {
                 ret = perturb(ctx, grid, 0, 0, 0);
             } else {
-                s = static_cast<set *>(index234(ss->sets, random_upto(rs, count234(ss->sets))));
+                s = static_cast<set *>(index234(ss->sets, random_up_to(random, count234(ss->sets))));
                 ret = perturb(ctx, grid, s->x, s->y, s->mask);
             }
 
@@ -1486,7 +1441,14 @@ static int minesolve(int w, int h, int n, signed char *grid,
     return nperturbs;
 }
 
-bool *minegen(int w, int h, int n, int x, int y, bool unique, random_state *rs) {
+bool *minegen(
+        int w,
+        int h,
+        int n,
+        int x,
+        int y,
+        std::mt19937& random
+) {
     bool *ret = snewn(w * h, bool);
     bool success;
     int ntries = 0;
@@ -1519,7 +1481,7 @@ bool *minegen(int w, int h, int n, int x, int y, bool unique, random_state *rs) 
              */
             nn = n;
             while (nn-- > 0) {
-                i = random_upto(rs, k);
+                i = random_up_to(random, k);
                 ret[tmp[i]] = true;
                 tmp[i] = tmp[--k];
             }
@@ -1535,39 +1497,36 @@ bool *minegen(int w, int h, int n, int x, int y, bool unique, random_state *rs) 
          *
          * We bypass this bit if we're not after a unique grid.
              */
-        if (unique) {
-            signed char *solvegrid = snewn(w * h, signed char);
-            struct minectx actx, *ctx = &actx;
-            int solveret, prevret = -2;
+        signed char *solvegrid = snewn(w * h, signed char);
+        int solveret, prevret = -2;
 
-            ctx->grid = ret;
-            ctx->w = w;
-            ctx->h = h;
-            ctx->sx = x;
-            ctx->sy = y;
-            ctx->rs = rs;
-            ctx->allow_big_perturbs = (ntries > 100);
+        struct minectx ctx {
+            .grid = ret,
+            .w = w,
+            .h = h,
+            .sx = x,
+            .sy = y,
+            .allow_big_perturbs = (ntries > 100),
+            .random = random,
+        };
 
-            while (true) {
-                memset(solvegrid, -2, w * h);
-                solvegrid[y * w + x] = mineopen(ctx, x, y);
-                assert(solvegrid[y * w + x] == 0); /* by deliberate arrangement */
+        while (true) {
+            memset(solvegrid, -2, w * h);
+            solvegrid[y * w + x] = mineopen(&ctx, x, y);
+            assert(solvegrid[y * w + x] == 0); /* by deliberate arrangement */
 
-                solveret =
-                        minesolve(w, h, n, solvegrid, mineopen, mineperturb, ctx, rs);
-                if (solveret < 0 || (prevret >= 0 && solveret >= prevret)) {
-                    success = false;
-                    break;
-                } else if (solveret == 0) {
-                    success = true;
-                    break;
-                }
+            solveret =
+                    minesolve(w, h, n, solvegrid, mineopen, mineperturb, &ctx, random);
+            if (solveret < 0 || (prevret >= 0 && solveret >= prevret)) {
+                success = false;
+                break;
+            } else if (solveret == 0) {
+                success = true;
+                break;
             }
-
-            sfree(solvegrid);
-        } else {
-            success = true;
         }
+
+        sfree(solvegrid);
 
     } while (!success);
 
@@ -1586,8 +1545,15 @@ std::string describe_layout(const bool *grid, int area, int x, int y) {
     return result;
 }
 
-std::string new_mine_layout(int w, int h, int n, int x, int y, bool unique, random_state *rs) {
-    bool *grid = minegen(w, h, n, x, y, unique, rs);
+std::string new_mine_layout(
+        int w,
+        int h,
+        int n,
+        int x,
+        int y,
+        std::mt19937& random
+) {
+    bool *grid = minegen(w, h, n, x, y, random);
     std::string result = describe_layout(grid, w * h, x, y);
     sfree(grid);
     return result;
@@ -1597,18 +1563,16 @@ extern "C" JNIEXPORT jstring JNICALL
 Java_dev_lucasnlm_antimine_sgtatham_SgTathamMines_createMinefield(
         JNIEnv *env,
         jobject javaThis,
-        jstring inSeed,
+        jlong inSeed,
         jint inWidth,
         jint inHeight,
         jint inMines,
         jint inX,
-        jint inY) {
+        jint inY
+) {
 
-    char *seed = const_cast<char *>(env->GetStringUTFChars(inSeed, nullptr));
+    std::mt19937 random(inSeed);
+    std::string minefield = new_mine_layout(inWidth, inHeight, inMines, inX, inY, random);
 
-    random_state *rs = random_new(seed, strlen(seed));
-
-    std::string hello = new_mine_layout(inWidth, inHeight, inMines, inX, inY, true, rs);
-
-    return env->NewStringUTF(hello.c_str());
+    return env->NewStringUTF(minefield.c_str());
 }

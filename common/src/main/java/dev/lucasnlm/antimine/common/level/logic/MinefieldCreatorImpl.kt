@@ -2,12 +2,12 @@ package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.preferences.models.Minefield
+import java.util.*
 import kotlin.math.floor
-import kotlin.random.Random
 
 class MinefieldCreatorImpl(
     private val minefield: Minefield,
-    private val randomGenerator: Random,
+    private val seed: Long,
 ) : MinefieldCreator {
     private fun createMutableEmpty(): List<Area> {
         val width = minefield.width
@@ -39,7 +39,7 @@ class MinefieldCreatorImpl(
     override fun create(safeIndex: Int): List<Area> {
         return createMutableEmpty().toMutableList().apply {
             filterNotNeighborsOf(safeIndex)
-                .shuffled(randomGenerator)
+                .shuffled(Random(seed))
                 .take(minefield.mines)
                 .onEach {
                     it.neighborsIds.forEach { neighborId ->

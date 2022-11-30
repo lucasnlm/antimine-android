@@ -3,20 +3,13 @@ package dev.lucasnlm.antimine.common.level.logic
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.sgtatham.SgTathamMines
-import java.nio.charset.StandardCharsets
 import kotlin.math.floor
-import kotlin.random.Random
 
 class MinefieldCreatorNativeImpl(
     private val minefield: Minefield,
-    private val randomGenerator: Random,
+    private val seed: Long,
 ) : MinefieldCreator {
     private val sgTathamMines: SgTathamMines = SgTathamMines()
-
-    private fun randomStringSeed(): String {
-        val bytes = randomGenerator.nextBytes(32)
-        return String(bytes, StandardCharsets.US_ASCII)
-    }
 
     private fun createMutableEmpty(): List<Area> {
         val width = minefield.width
@@ -46,7 +39,6 @@ class MinefieldCreatorNativeImpl(
     }
 
     override fun create(safeIndex: Int): List<Area> {
-        val seed = randomStringSeed()
         val x = safeIndex % minefield.width
         val y = safeIndex / minefield.width
         val width = minefield.width

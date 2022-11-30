@@ -50,15 +50,14 @@ class GameController {
         seed: Long,
         useSimonTatham: Boolean,
         saveId: Int? = null,
-        difficulty: Difficulty,
         onCreateUnsafeLevel: (() -> Unit)? = null,
     ) {
         val creationSeed = minefield.seed ?: seed
-        val shouldUseSimonTatham = useSimonTatham && difficulty != Difficulty.Beginner
+        val shouldUseSimonTatham = useSimonTatham
         this.minefieldCreator = if (shouldUseSimonTatham) {
-            MinefieldCreatorNativeImpl(minefield, Random(creationSeed))
+            MinefieldCreatorNativeImpl(minefield, creationSeed)
         } else {
-            MinefieldCreatorImpl(minefield, Random(creationSeed))
+            MinefieldCreatorImpl(minefield, creationSeed)
         }
         this.minefield = minefield
         this.seed = seed
@@ -80,9 +79,9 @@ class GameController {
         this.field = save.field
         this.actions = save.actions
         this.minefieldCreator = if (useSimonTatham) {
-            MinefieldCreatorNativeImpl(minefield, Random(seed))
+            MinefieldCreatorNativeImpl(minefield, seed)
         } else {
-            MinefieldCreatorImpl(minefield, Random(seed))
+            MinefieldCreatorImpl(minefield, seed)
         }
     }
 
@@ -94,7 +93,7 @@ class GameController {
 
     fun hasMines() = field.firstOrNull { it.hasMine } != null
 
-    fun useIndividualActions(): Boolean = gameControl == GameControl.SwitchMarkOpen
+    private fun useIndividualActions(): Boolean = gameControl == GameControl.SwitchMarkOpen
 
     private fun getArea(id: Int) = field.firstOrNull { it.id == id }
 
