@@ -9,6 +9,8 @@ add_library(# Sets the name of the library.
             SHARED
 
             tree234.cpp
+            random_generator.cpp
+            minefield_creator.cpp
             sgtatham.cpp)
 
 find_library(# Sets the name of the path variable.
