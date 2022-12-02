@@ -14,29 +14,15 @@
 #include "random_generator.h"
 #include "minefield_creator.h"
 
-#define snewn(number, type) \
-    ( (type *) smalloc ((number) * sizeof (type)) )
-
 #define sresize(array, number, type) \
     ( (type *) srealloc ((array), (number) * sizeof (type)) )
 
 #define lenof(array) ( sizeof(array) / sizeof(*(array)) )
 
-struct squaretodo {
-    int *next;
-    int head, tail;
-};
-
-
 struct perturbation {
     std::size_t x;
     std::size_t y;
-    int delta;                   /* +1 == become a mine; -1 == cleared */
-};
-
-struct perturbations {
-    int n;
-    struct perturbation *changes;
+    int delta; // +1 == become a mine; -1 == cleared
 };
 
 struct square {
@@ -58,7 +44,7 @@ struct setstore {
     struct set *todo_head, *todo_tail;
 };
 
-typedef std::function<int(mine_context &, int, int)> open_function;
+typedef std::function<int(mine_context &, std::size_t, std::size_t)> open_function;
 
 typedef std::function<std::vector<perturbation>(mine_context &, std::basic_string<std::int8_t> &,
                                                 int, int, int)> perturbation_function;
@@ -101,28 +87,32 @@ int compare_square(const square &a, const square &b) {
     }
 }
 
-int mineopen(mine_context &ctx, int x, int y) {
-    int i, j, n;
+int mine_open(mine_context &ctx, std::size_t x, std::size_t y) {
+    int result = 0;
 
     assert(x >= 0 && x < ctx.width && y >= 0 && y < ctx.height);
-    if (ctx.grid[y * ctx.width + x])
-        return -1;               /* *bang* */
+    if (ctx.grid[y * ctx.width + x]) {
+        return -1; // bang!
+    }
 
-    n = 0;
-    for (i = -1; i <= +1; i++) {
-        if (x + i < 0 || x + i >= ctx.width)
+    for (int i = -1; i <= +1; i++) {
+        if (x + i < 0 || x + i >= ctx.width) {
             continue;
-        for (j = -1; j <= +1; j++) {
-            if (y + j < 0 || y + j >= ctx.height)
+        }
+        for (int j = -1; j <= +1; j++) {
+            if (y + j < 0 || y + j >= ctx.height) {
                 continue;
-            if (i == 0 && j == 0)
+            }
+            if (i == 0 && j == 0) {
                 continue;
-            if (ctx.grid[(y + j) * ctx.width + (x + i)])
-                n++;
+            }
+            if (ctx.grid[(y + j) * ctx.width + (x + i)]) {
+                result++;
+            }
         }
     }
 
-    return n;
+    return result;
 }
 
 std::vector<perturbation> mine_perturbation(
@@ -173,8 +163,8 @@ std::vector<perturbation> mine_perturbation(
              * If this square is too near the starting position,
              * don't put it on the list at all.
              */
-            int dy = y - static_cast<int>(ctx.start_y);
-            int dx = x - static_cast<int>(ctx.start_x);
+            int dy = static_cast<int>(y) - static_cast<int>(ctx.start_y);
+            int dx = static_cast<int>(x) - static_cast<int>(ctx.start_x);
 
             if (abs(dy) <= 1 && abs(dx) <= 1) {
                 continue;
@@ -201,14 +191,16 @@ std::vector<perturbation> mine_perturbation(
 
                 current.type = 2;
 
-                for (dy = -1; dy <= +1; dy++)
-                    for (dx = -1; dx <= +1; dx++)
+                for (dy = -1; dy <= +1; dy++) {
+                    for (dx = -1; dx <= +1; dx++) {
                         if (x + dx >= 0 && x + dx < ctx.width &&
                             y + dy >= 0 && y + dy < ctx.height &&
                             grid[(y + dy) * ctx.width + (x + dx)] != -2) {
                             current.type = 1;
                             break;
                         }
+                    }
+                }
             }
 
             /*
@@ -241,10 +233,11 @@ std::vector<perturbation> mine_perturbation(
         for (int y = 0; y < ctx.height; y++) {
             for (int x = 0; x < ctx.width; x++) {
                 if (grid[y * ctx.width + x] == -2) {
-                    if (ctx.grid[y * ctx.width + x])
+                    if (ctx.grid[y * ctx.width + x]) {
                         number_of_full++;
-                    else
+                    } else {
                         number_of_empty++;
+                    }
                 }
             }
         }
@@ -335,8 +328,9 @@ std::vector<perturbation> mine_perturbation(
      * the solver, so that it can update its data structures
      * efficiently rather than having to rescan the whole grid.
      */
-    const std::vector<std::size_t> &todo_list = (to_fill.size() == number_of_full) ? to_fill
-                                                                                   : to_empty;
+    const std::vector<std::size_t> &todo_list =
+            (to_fill.size() == number_of_full) ? to_fill : to_empty;
+
     int delta_todo, delta_set;
     int index;
 
@@ -351,7 +345,12 @@ std::vector<perturbation> mine_perturbation(
     changes.reserve(2 * todo_list.size());
     for (index = 0; index < todo_list.size(); index++) {
         const auto id = todo_list[index];
-        changes[index] = {.x = square_list[id].x, .y = square_list[id].y, .delta = delta_todo};
+        const auto pert = perturbation{
+                .x = square_list[id].x,
+                .y = square_list[id].y,
+                .delta = delta_todo
+        };
+        changes[index] = pert;
     }
 
     // now index == todo_list.size()
@@ -359,8 +358,12 @@ std::vector<perturbation> mine_perturbation(
     if (!set_list.empty()) {
         assert(todo_list == to_empty);
         for (auto set_item: set_list) {
-            changes[index] = {.x = set_item % ctx.width, .y = set_item /
-                                                              ctx.width, .delta = delta_set};
+            const auto pert = perturbation{
+                    .x = set_item % ctx.width,
+                    .y = set_item / ctx.width,
+                    .delta = delta_set
+            };
+            changes[index] = pert;
             index++;
         }
     } else if (mask) {
@@ -369,9 +372,12 @@ std::vector<perturbation> mine_perturbation(
                 if (mask & (1 << (dy * 3 + dx))) {
                     int current_value = (ctx.grid[(sety + dy) * ctx.width + (setx + dx)] ? +1 : -1);
                     if (delta_set == -current_value) {
-                        changes[index] = {.x = static_cast<size_t>(setx +
-                                                                   dx), .y = static_cast<size_t>(
-                                sety + dy), .delta = delta_set};
+                        const auto pert = perturbation{
+                                .x = static_cast<size_t>(setx + dx),
+                                .y = static_cast<size_t>(sety + dy),
+                                .delta = delta_set
+                        };
+                        changes[index] = pert;
                         index++;
                     }
                 }
@@ -383,7 +389,12 @@ std::vector<perturbation> mine_perturbation(
                 if (grid[y * ctx.width + x] == -2) {
                     int current_value = (ctx.grid[y * ctx.width + x] ? +1 : -1);
                     if (delta_set == -current_value) {
-                        changes[index] = {.x = x, .y = y, .delta = delta_set};
+                        const auto pert = perturbation{
+                                .x = x,
+                                .y = y,
+                                .delta = delta_set
+                        };
+                        changes[index] = pert;
                         index++;
                     }
                 }
@@ -688,14 +699,14 @@ int solve_minefield(
     int i, j;
     int nperturbs = 0;
 
-    std::list<std::size_t> std;
+    std::list<std::size_t> square_todo;
 
     // Initialise that list with all known squares in the input grid.
     for (std::size_t y = 0; y < context.height; y++) {
         for (std::size_t x = 0; x < context.width; x++) {
             std::size_t index = y * context.width + x;
             if (grid[index] != -2) {
-                std.push_back(index);
+                square_todo.push_back(index);
             }
         }
     }
@@ -707,9 +718,9 @@ int solve_minefield(
 
         // If there are any known squares on the todo list, process
         // them and construct a set for each.
-        while (!std.empty()) {
-            std::size_t index = std.front();
-            std.pop_front();
+        while (!square_todo.empty()) {
+            std::size_t index = square_todo.front();
+            square_todo.pop_front();
 
             std::size_t x = index % context.width;
             std::size_t y = index / context.width;
@@ -799,7 +810,7 @@ int solve_minefield(
                  * If so, we can immediately mark all the squares
                  * in the set as known.
                  */
-                known_squares(context.width, context.height, std, grid, open, context,
+                known_squares(context.width, context.height, square_todo, grid, open, context,
                               s->x, s->y, s->mask, (s->mines != 0));
 
                 /*
@@ -847,10 +858,10 @@ int solve_minefield(
                  */
                 if (swc == s->mines - s2->mines ||
                     s2wc == s2->mines - s->mines) {
-                    known_squares(context.width, context.height, std, grid, open, context,
+                    known_squares(context.width, context.height, square_todo, grid, open, context,
                                   s->x, s->y, swing,
                                   (swc == s->mines - s2->mines));
-                    known_squares(context.width, context.height, std, grid, open, context,
+                    known_squares(context.width, context.height, square_todo, grid, open, context,
                                   s2->x, s2->y, s2wing,
                                   (s2wc == s2->mines - s->mines));
                     continue;
@@ -932,7 +943,7 @@ int solve_minefield(
             if (minesleft == 0 || minesleft == squaresleft) {
                 for (i = 0; i < context.size; i++)
                     if (grid[i] == -2)
-                        known_squares(context.width, context.height, std, grid, open, context,
+                        known_squares(context.width, context.height, square_todo, grid, open, context,
                                       i % context.width, i / context.width, 1, minesleft != 0);
                 continue;           /* now go back to main deductive loop */
             }
@@ -1059,7 +1070,7 @@ int solve_minefield(
                                             break;
                                         }
                                     if (outside)
-                                        known_squares(context.width, context.height, std, grid,
+                                        known_squares(context.width, context.height, square_todo, grid,
                                                       open, context,
                                                       x, y, 1, minesleft != 0);
                                 }
@@ -1148,7 +1159,7 @@ int solve_minefield(
                     if (result[i].delta < 0 &&
                         grid[result[i].y * context.width + result[i].x] != -2) {
                         auto index = result[i].y * context.width + result[i].x;
-                        std.push_back(index);
+                        square_todo.push_back(index);
                     }
 
                     list = ss_overlap(ss, result[i].x, result[i].y, 1);
@@ -1217,14 +1228,14 @@ bool try_solve_minefield(mine_context &context, std::mt19937 &random) {
     while (true) {
         std::basic_string<std::int8_t> solve_grid(context.size, -2);
 
-        solve_grid[context.start_y * context.width + context.start_x] = mineopen(context,
-                                                                                 context.start_x,
-                                                                                 context.start_y);
+        solve_grid[context.start_y * context.width + context.start_x] = mine_open(context,
+                                                                                  context.start_x,
+                                                                                  context.start_y);
         assert(solve_grid[context.start_y * context.width + context.start_x] ==
                0); /* by deliberate arrangement */
 
         int solve_result =
-                solve_minefield(context, solve_grid, mineopen,
+                solve_minefield(context, solve_grid, mine_open,
                                 mine_perturbation,
                                 random);
         if (solve_result < 0) {
