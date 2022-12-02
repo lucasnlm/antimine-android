@@ -7,6 +7,7 @@
 #include <string>
 #include <cstdint>
 #include <iostream>
+#include <list>
 
 #include "common.h"
 #include "tree234.h"
@@ -25,7 +26,6 @@ struct squaretodo {
     int *next;
     int head, tail;
 };
-
 
 
 struct perturbation {
@@ -53,9 +53,10 @@ struct setstore {
     struct set *todo_head, *todo_tail;
 };
 
-typedef std::function<int(mine_context&, int, int)> open_function;
+typedef std::function<int(mine_context &, int, int)> open_function;
 
-typedef std::function<perturbations*(mine_context&, std::basic_string<std::int8_t>&, int, int, int)> perturbation_function;
+typedef std::function<std::vector<perturbation>(mine_context &, std::basic_string<std::int8_t> &,
+                                                int, int, int)> perturbation_function;
 
 static int setcmp(void *av, void *bv) {
     auto *a = (struct set *) av;
@@ -85,29 +86,17 @@ static struct setstore *ss_new() {
 }
 
 
-static int squarecmp(const void *av, const void *bv) {
-    const auto *a = (const struct square *) av;
-    const auto *b = (const struct square *) bv;
-    if (a->type < b->type)
+int compare_square(const square &a, const square &b) {
+    if (a.type < b.type || a.random < b.random || a.y < b.y || a.x < b.x) {
         return -1;
-    else if (a->type > b->type)
+    } else if (a.type > b.type || a.random > b.random || a.y > b.y || a.x > b.x) {
         return +1;
-    else if (a->random < b->random)
-        return -1;
-    else if (a->random > b->random)
-        return +1;
-    else if (a->y < b->y)
-        return -1;
-    else if (a->y > b->y)
-        return +1;
-    else if (a->x < b->x)
-        return -1;
-    else if (a->x > b->x)
-        return +1;
-    return 0;
+    } else {
+        return 0;
+    }
 }
 
-int mineopen(mine_context& ctx, int x, int y) {
+int mineopen(mine_context &ctx, int x, int y) {
     int i, j, n;
 
     assert(x >= 0 && x < ctx.width && y >= 0 && y < ctx.height);
@@ -131,16 +120,20 @@ int mineopen(mine_context& ctx, int x, int y) {
     return n;
 }
 
-struct perturbations *mineperturb(mine_context& ctx, std::basic_string<std::int8_t>& grid, int setx, int sety, int mask) {
-    struct square *sqlist;
-    int x, y, dx, dy, i, n, nfull, nempty;
+std::vector<perturbation>
+mineperturb(mine_context &ctx, std::basic_string<std::int8_t> &grid, int setx, int sety, int mask) {
+    int x, y, i, nfull, nempty;
     struct square **tofill, **toempty, **todo;
     int ntofill, ntoempty, ntodo, dtodo, dset;
-    struct perturbations *ret;
     int *setlist;
 
-    if (!mask && !ctx.allow_big_perturbs)
-        return nullptr;
+    std::vector<perturbation> changes;
+    std::vector<square> square_list;
+    square_list.reserve(ctx.size);
+
+    if (!mask && !ctx.allow_big_perturbs) {
+        return changes;
+    }
 
     /*
      * Make a list of all the squares in the grid which we can
@@ -156,10 +149,13 @@ struct perturbations *mineperturb(mine_context& ctx, std::basic_string<std::int8
      * We do this by preparing list of all squares and then sorting
      * it with a random secondary key.
      */
-    sqlist = snewn(ctx.width * ctx.height, struct square);
-    n = 0;
-    for (y = 0; y < ctx.height; y++)
-        for (x = 0; x < ctx.width; x++) {
+    for (int y = 0; y < ctx.height; y++) {
+        for (int x = 0; x < ctx.width; x++) {
+            square current {
+                .x = x,
+                .y = y
+            };
+
             /*
              * If this square is too near the starting position,
              * don't put it on the list at all.
@@ -181,11 +177,8 @@ struct perturbations *mineperturb(mine_context& ctx, std::basic_string<std::int8
                  mask & (1 << ((y - sety) * 3 + (x - setx)))))
                 continue;
 
-            sqlist[n].x = x;
-            sqlist[n].y = y;
-
             if (grid[y * ctx.width + x] != -2) {
-                sqlist[n].type = 3;    /* known square */
+                current.type = 3;    /* known square */
             } else {
                 /*
                  * Unknown square. Examine everything around it and
@@ -193,14 +186,14 @@ struct perturbations *mineperturb(mine_context& ctx, std::basic_string<std::int8
                  * does, it's class 1, otherwise it's 2.
                  */
 
-                sqlist[n].type = 2;
+                current.type = 2;
 
                 for (dy = -1; dy <= +1; dy++)
                     for (dx = -1; dx <= +1; dx++)
                         if (x + dx >= 0 && x + dx < ctx.width &&
                             y + dy >= 0 && y + dy < ctx.height &&
                             grid[(y + dy) * ctx.width + (x + dx)] != -2) {
-                            sqlist[n].type = 1;
+                            current.type = 1;
                             break;
                         }
             }
@@ -209,12 +202,12 @@ struct perturbations *mineperturb(mine_context& ctx, std::basic_string<std::int8
              * Finally, a random number to cause qsort to
              * shuffle within each group.
              */
-            sqlist[n].random = static_cast<int>(random_bits(ctx.random));
-
-            n++;
+            current.random = static_cast<int>(random_bits(ctx.random));
+            square_list.push_back(current);
         }
+    }
 
-    qsort(sqlist, n, sizeof(struct square), squarecmp);
+    std::sort(square_list.begin(), square_list.end(), compare_square);
 
     /*
      * Now count up the number of full and empty squares in the set
@@ -222,8 +215,8 @@ struct perturbations *mineperturb(mine_context& ctx, std::basic_string<std::int8
      */
     nfull = nempty = 0;
     if (mask) {
-        for (dy = 0; dy < 3; dy++)
-            for (dx = 0; dx < 3; dx++)
+        for (int dy = 0; dy < 3; dy++)
+            for (int dx = 0; dx < 3; dx++)
                 if (mask & (1 << (dy * 3 + dx))) {
                     assert(setx + dx <= ctx.width);
                     assert(sety + dy <= ctx.height);
@@ -258,14 +251,15 @@ struct perturbations *mineperturb(mine_context& ctx, std::basic_string<std::int8
         tofill = snewn(ctx.width * ctx.height, struct square *);
         toempty = snewn(ctx.width * ctx.height, struct square *);
     }
-    for (i = 0; i < n; i++) {
-        struct square *sq = &sqlist[i];
-        if (ctx.grid[sq->y * ctx.width + sq->x])
-            toempty[ntoempty++] = sq;
-        else
-            tofill[ntofill++] = sq;
-        if (ntofill == nfull || ntoempty == nempty)
+    for (auto& square : square_list) {
+        if (ctx.grid[square.y * ctx.width + square.x]) {
+            toempty[ntoempty++] = &square;
+        } else {
+            tofill[ntofill++] = &square;
+        }
+        if (ntofill == nfull || ntoempty == nempty) {
             break;
+        }
     }
 
     /*
@@ -288,8 +282,8 @@ struct perturbations *mineperturb(mine_context& ctx, std::basic_string<std::int8
         setlist = snewn(ctx.width * ctx.height, int);
         i = 0;
         if (mask) {
-            for (dy = 0; dy < 3; dy++)
-                for (dx = 0; dx < 3; dx++)
+            for (int dy = 0; dy < 3; dy++)
+                for (int dx = 0; dx < 3; dx++)
                     if (mask & (1 << (dy * 3 + dx))) {
                         assert(setx + dx <= ctx.width);
                         assert(sety + dy <= ctx.height);
@@ -331,7 +325,6 @@ struct perturbations *mineperturb(mine_context& ctx, std::basic_string<std::int8
      * the solver, so that it can update its data structures
      * efficiently rather than having to rescan the whole grid.
      */
-    ret = snew(struct perturbations);
     if (ntofill == nfull) {
         todo = tofill;
         ntodo = ntofill;
@@ -349,64 +342,65 @@ struct perturbations *mineperturb(mine_context& ctx, std::basic_string<std::int8
         dset = +1;
         sfree(tofill);
     }
-    ret->n = 2 * ntodo;
-    ret->changes = snewn(ret->n, struct perturbation);
+    changes.reserve(2 * ntodo);
     for (i = 0; i < ntodo; i++) {
-        ret->changes[i].x = todo[i]->x;
-        ret->changes[i].y = todo[i]->y;
-        ret->changes[i].delta = dtodo;
+        changes[i].x = todo[i]->x;
+        changes[i].y = todo[i]->y;
+        changes[i].delta = dtodo;
     }
     /* now i == ntodo */
     if (setlist) {
         int j;
         assert(todo == toempty);
         for (j = 0; j < ntoempty; j++) {
-            ret->changes[i].x = setlist[j] % ctx.width;
-            ret->changes[i].y = setlist[j] / ctx.width;
-            ret->changes[i].delta = dset;
+            changes[i].x = setlist[j] % ctx.width;
+            changes[i].y = setlist[j] / ctx.width;
+            changes[i].delta = dset;
             i++;
         }
         sfree(setlist);
     } else if (mask) {
-        for (dy = 0; dy < 3; dy++)
-            for (dx = 0; dx < 3; dx++)
+        for (int dy = 0; dy < 3; dy++) {
+            for (int dx = 0; dx < 3; dx++) {
                 if (mask & (1 << (dy * 3 + dx))) {
                     int currval = (ctx.grid[(sety + dy) * ctx.width + (setx + dx)] ? +1 : -1);
                     if (dset == -currval) {
-                        ret->changes[i].x = setx + dx;
-                        ret->changes[i].y = sety + dy;
-                        ret->changes[i].delta = dset;
+                        changes[i].x = setx + dx;
+                        changes[i].y = sety + dy;
+                        changes[i].delta = dset;
                         i++;
                     }
                 }
+            }
+        }
     } else {
-        for (y = 0; y < ctx.height; y++)
-            for (x = 0; x < ctx.width; x++)
+        for (y = 0; y < ctx.height; y++) {
+            for (x = 0; x < ctx.width; x++) {
                 if (grid[y * ctx.width + x] == -2) {
                     int currval = (ctx.grid[y * ctx.width + x] ? +1 : -1);
                     if (dset == -currval) {
-                        ret->changes[i].x = x;
-                        ret->changes[i].y = y;
-                        ret->changes[i].delta = dset;
+                        changes[i].x = x;
+                        changes[i].y = y;
+                        changes[i].delta = dset;
                         i++;
                     }
                 }
+            }
+        }
     }
-    assert(i == ret->n);
 
-    sfree(sqlist);
     sfree(todo);
 
     /*
      * Having set up the precise list of changes we're going to
      * make, we now simply make them and return.
      */
-    for (i = 0; i < ret->n; i++) {
+    for (i = 0; i < changes.size(); i++) {
         int delta;
 
-        x = ret->changes[i].x;
-        y = ret->changes[i].y;
-        delta = ret->changes[i].delta;
+        x = changes[i].x;
+        y = changes[i].y;
+        delta = changes[i].delta;
 
         /*
          * Check we're not trying to add an existing mine or remove
@@ -422,8 +416,8 @@ struct perturbations *mineperturb(mine_context& ctx, std::basic_string<std::int8
         /*
          * Update any numbers already present in the grid.
          */
-        for (dy = -1; dy <= +1; dy++)
-            for (dx = -1; dx <= +1; dx++)
+        for (int dy = -1; dy <= +1; dy++)
+            for (int dx = -1; dx <= +1; dx++)
                 if (x + dx >= 0 && x + dx < ctx.width &&
                     y + dy >= 0 && y + dy < ctx.height &&
                     grid[(y + dy) * ctx.width + (x + dx)] != -2) {
@@ -452,7 +446,7 @@ struct perturbations *mineperturb(mine_context& ctx, std::basic_string<std::int8
                 }
     }
 
-    return ret;
+    return changes;
 }
 
 static void std_add(struct squaretodo *std, int i) {
@@ -665,8 +659,8 @@ static int bitcount16(int inword) {
 }
 
 static void known_squares(int w, int h, struct squaretodo *std,
-                          std::basic_string<std::int8_t>& grid,
-                          const open_function& open, mine_context& openctx,
+                          std::basic_string<std::int8_t> &grid,
+                          const open_function &open, mine_context &openctx,
                           int x, int y, int mask, bool mine) {
     int xx, yy, bit;
 
@@ -699,11 +693,11 @@ static void known_squares(int w, int h, struct squaretodo *std,
 }
 
 int solve_minefield(
-        mine_context& context,
-        std::basic_string<std::int8_t>& grid,
-        const open_function& open,
-        const perturbation_function& perturb,
-        std::mt19937& random
+        mine_context &context,
+        std::basic_string<std::int8_t> &grid,
+        const open_function &open,
+        const perturbation_function &perturb,
+        std::mt19937 &random
 ) {
     struct setstore *ss = ss_new();
     struct set **list;
@@ -762,7 +756,8 @@ int solve_minefield(
                 val = 0;
                 for (dy = -1; dy <= +1; dy++) {
                     for (dx = -1; dx <= +1; dx++) {
-                        if (x + dx < 0 || x + dx >= context.width || y + dy < 0 || y + dy >= context.height)
+                        if (x + dx < 0 || x + dx >= context.width || y + dy < 0 ||
+                            y + dy >= context.height)
                             /* ignore this one */;
                         else if (grid[i + dy * context.width + dx] == -1)
                             mines--;
@@ -837,7 +832,7 @@ int solve_minefield(
                  * If so, we can immediately mark all the squares
                  * in the set as known.
                  */
-                known_squares( context.width,  context.height, std, grid, open,  context,
+                known_squares(context.width, context.height, std, grid, open, context,
                               s->x, s->y, s->mask, (s->mines != 0));
 
                 /*
@@ -885,10 +880,10 @@ int solve_minefield(
                  */
                 if (swc == s->mines - s2->mines ||
                     s2wc == s2->mines - s->mines) {
-                    known_squares( context.width,  context.height, std, grid, open, context,
+                    known_squares(context.width, context.height, std, grid, open, context,
                                   s->x, s->y, swing,
                                   (swc == s->mines - s2->mines));
-                    known_squares( context.width,  context.height, std, grid, open, context,
+                    known_squares(context.width, context.height, std, grid, open, context,
                                   s2->x, s2->y, s2wing,
                                   (s2wc == s2->mines - s->mines));
                     continue;
@@ -945,8 +940,8 @@ int solve_minefield(
              * mines are to be placed in them.
              */
             squaresleft = 0;
-            minesleft =  context.mines;
-            for (i = 0; i <  context.size; i++) {
+            minesleft = context.mines;
+            for (i = 0; i < context.size; i++) {
                 if (grid[i] == -1)
                     minesleft--;
                 else if (grid[i] == -2)
@@ -968,10 +963,10 @@ int solve_minefield(
              * squares to play them in, then it's all easy.
              */
             if (minesleft == 0 || minesleft == squaresleft) {
-                for (i = 0; i <  context.size; i++)
+                for (i = 0; i < context.size; i++)
                     if (grid[i] == -2)
-                        known_squares( context.width,  context.height, std, grid, open,  context,
-                                      i %  context.width, i /  context.width, 1, minesleft != 0);
+                        known_squares(context.width, context.height, std, grid, open, context,
+                                      i % context.width, i / context.width, 1, minesleft != 0);
                 continue;           /* now go back to main deductive loop */
             }
 
@@ -1097,7 +1092,7 @@ int solve_minefield(
                                             break;
                                         }
                                     if (outside)
-                                        known_squares( context.width,  context.height, std, grid,
+                                        known_squares(context.width, context.height, std, grid,
                                                       open, context,
                                                       x, y, 1, minesleft != 0);
                                 }
@@ -1152,7 +1147,7 @@ int solve_minefield(
          * make it easier.
          */
         if (perturb) {
-            struct perturbations *ret;
+            std::vector<perturbation> result;
             struct set *s;
 
             nperturbs++;
@@ -1165,16 +1160,14 @@ int solve_minefield(
              * If we have no sets at all, we must give up.
              */
             if (count234(ss->sets) == 0) {
-                ret = perturb(context, grid, 0, 0, 0);
+                result = perturb(context, grid, 0, 0, 0);
             } else {
                 s = static_cast<set *>(index234(ss->sets,
                                                 random_up_to(random, count234(ss->sets))));
-                ret = perturb(context, grid, s->x, s->y, s->mask);
+                result = perturb(context, grid, s->x, s->y, s->mask);
             }
 
-            if (ret) {
-                assert(ret->n > 0);    /* otherwise should have been nullptr */
-
+            if (!result.empty()) {
                 /*
                  * A number of squares have been fiddled with, and
                  * the returned structure tells us which. Adjust
@@ -1184,28 +1177,22 @@ int solve_minefield(
                  * known non-mine, put it back on the squares-to-do
                  * list.
                  */
-                for (i = 0; i < ret->n; i++) {
-                    if (ret->changes[i].delta < 0 &&
-                        grid[ret->changes[i].y * context.width + ret->changes[i].x] != -2) {
-                        std_add(std, ret->changes[i].y * context.width + ret->changes[i].x);
+                for (i = 0; i < result.size(); i++) {
+                    if (result[i].delta < 0 &&
+                        grid[result[i].y * context.width + result[i].x] != -2) {
+                        std_add(std, result[i].y * context.width + result[i].x);
                     }
 
                     list = ss_overlap(ss,
-                                      ret->changes[i].x, ret->changes[i].y, 1);
+                                      result[i].x, result[i].y, 1);
 
                     for (j = 0; list[j]; j++) {
-                        list[j]->mines += ret->changes[i].delta;
+                        list[j]->mines += result[i].delta;
                         ss_add_todo(ss, list[j]);
                     }
 
                     sfree(list);
                 }
-
-                /*
-                 * Now free the returned data.
-                 */
-                sfree(ret->changes);
-                sfree(ret);
 
                 /*
                  * And now we can go back round the deductive loop.
@@ -1247,8 +1234,8 @@ int solve_minefield(
     return nperturbs;
 }
 
-bool try_solve_minefield(mine_context& context, std::mt19937 &random) {
-    bool result = false;
+bool try_solve_minefield(mine_context &context, std::mt19937 &random) {
+    bool result;
 
     /*
      * Now set up a results grid to run the solver in, and a
@@ -1262,8 +1249,11 @@ bool try_solve_minefield(mine_context& context, std::mt19937 &random) {
     while (true) {
         std::basic_string<std::int8_t> solve_grid(context.size, -2);
 
-        solve_grid[context.start_y * context.width + context.start_x] = mineopen(context, context.start_x, context.start_y);
-        assert(solve_grid[context.start_y * context.width + context.start_x] == 0); /* by deliberate arrangement */
+        solve_grid[context.start_y * context.width + context.start_x] = mineopen(context,
+                                                                                 context.start_x,
+                                                                                 context.start_y);
+        assert(solve_grid[context.start_y * context.width + context.start_x] ==
+               0); /* by deliberate arrangement */
 
         int solve_result =
                 solve_minefield(context, solve_grid, mineopen,
@@ -1280,16 +1270,6 @@ bool try_solve_minefield(mine_context& context, std::mt19937 &random) {
 
     return result;
 }
-
-
-
-
-
-
-
-
-
-
 
 extern "C" JNIEXPORT jstring JNICALL
 Java_dev_lucasnlm_antimine_sgtatham_SgTathamMines_createMinefield(

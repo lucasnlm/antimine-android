@@ -1,5 +1,4 @@
-#ifndef ANTIMINE_ANDROID_RANDOM_GENERATOR_H
-#define ANTIMINE_ANDROID_RANDOM_GENERATOR_H
+#pragma  once
 
 #include <random>
 
@@ -14,4 +13,3 @@ std::size_t random_index_of(
         const std::basic_string<std::size_t>& except
 );
 
-#endif //ANTIMINE_ANDROID_RANDOM_GENERATOR_H
