@@ -39,7 +39,7 @@ struct set {
     struct set *prev, *next;
 };
 
-struct setstore {
+struct set_store {
     tree234 *sets;
     struct set *todo_head, *todo_tail;
 };
@@ -69,8 +69,8 @@ static int setcmp(void *av, void *bv) {
         return 0;
 }
 
-static struct setstore *ss_new() {
-    struct setstore *ss = snew(struct setstore);
+static struct set_store *ss_new() {
+    struct set_store *ss = snew(struct setstore);
     ss->sets = newtree234(setcmp);
     ss->todo_head = ss->todo_tail = nullptr;
     return ss;
@@ -453,7 +453,7 @@ std::vector<perturbation> mine_perturbation(
     return changes;
 }
 
-static void ss_add_todo(struct setstore *ss, struct set *s) {
+static void ss_add_todo(struct set_store *ss, struct set *s) {
     if (s->todo)
         return;                   /* already on it */
 
@@ -467,7 +467,7 @@ static void ss_add_todo(struct setstore *ss, struct set *s) {
     s->todo = true;
 }
 
-static void ss_add(struct setstore *ss, int x, int y, int mask, int mines) {
+static void ss_add(struct set_store *ss, int x, int y, int mask, int mines) {
     struct set *s;
 
     assert(mask != 0);
@@ -549,7 +549,7 @@ static int setmunge(int x1, int y1, int mask1, int x2, int y2, int mask2,
     return mask1 & mask2;
 }
 
-static struct set **ss_overlap(struct setstore *ss, int x, int y, int mask) {
+static struct set **ss_overlap(struct set_store *ss, int x, int y, int mask) {
     struct set **ret = nullptr;
     int nret = 0, retsize = 0;
     int xx, yy;
@@ -597,7 +597,7 @@ static struct set **ss_overlap(struct setstore *ss, int x, int y, int mask) {
     return ret;
 }
 
-static struct set *ss_todo(struct setstore *ss) {
+static struct set *ss_todo(struct set_store *ss) {
     if (ss->todo_head) {
         struct set *ret = ss->todo_head;
         ss->todo_head = ret->next;
@@ -613,7 +613,7 @@ static struct set *ss_todo(struct setstore *ss) {
     }
 }
 
-static void ss_remove(struct setstore *ss, struct set *s) {
+static void ss_remove(struct set_store *ss, struct set *s) {
     struct set *next = s->next, *prev = s->prev;
 
     /*
@@ -694,7 +694,7 @@ int solve_minefield(
         const perturbation_function &perturb,
         std::mt19937 &random
 ) {
-    struct setstore *ss = ss_new();
+    struct set_store *ss = ss_new();
     struct set **list;
     int i, j;
     int nperturbs = 0;
