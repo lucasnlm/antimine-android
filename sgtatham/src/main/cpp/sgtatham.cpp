@@ -70,7 +70,7 @@ static int setcmp(void *av, void *bv) {
 }
 
 static struct set_store *ss_new() {
-    struct set_store *ss = snew(struct setstore);
+    struct set_store *ss = snew(struct set_store);
     ss->sets = newtree234(setcmp);
     ss->todo_head = ss->todo_tail = nullptr;
     return ss;
