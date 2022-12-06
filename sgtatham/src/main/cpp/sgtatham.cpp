@@ -34,7 +34,10 @@ struct square {
 };
 
 struct set {
-    short x, y, mask, mines;
+    std::size_t x;
+    std::size_t y;
+    std::size_t mask;
+    std::size_t mines;
     bool todo;
     struct set *prev, *next;
 };
@@ -49,33 +52,26 @@ typedef std::function<int(mine_context &, std::size_t, std::size_t)> open_functi
 typedef std::function<std::vector<perturbation>(mine_context &, std::basic_string<std::int8_t> &,
                                                 int, int, int)> perturbation_function;
 
-static int setcmp(void *av, void *bv) {
+static int set_comparator(void *av, void *bv) {
     auto *a = (struct set *) av;
     auto *b = (struct set *) bv;
 
-    if (a->y < b->y)
+    if (a->y < b->y) {
         return -1;
-    else if (a->y > b->y)
+    } else if (a->y > b->y) {
         return +1;
-    else if (a->x < b->x)
+    } else if (a->x < b->x) {
         return -1;
-    else if (a->x > b->x)
+    } else if (a->x > b->x) {
         return +1;
-    else if (a->mask < b->mask)
+    } else if (a->mask < b->mask) {
         return -1;
-    else if (a->mask > b->mask)
+    } else if (a->mask > b->mask) {
         return +1;
-    else
+    } else {
         return 0;
+    }
 }
-
-static struct set_store *ss_new() {
-    struct set_store *ss = snew(struct set_store);
-    ss->sets = newtree234(setcmp);
-    ss->todo_head = ss->todo_tail = nullptr;
-    return ss;
-}
-
 
 int compare_square(const square &a, const square &b) {
     if (a.type < b.type || a.random < b.random || a.y < b.y || a.x < b.x) {
@@ -453,21 +449,21 @@ std::vector<perturbation> mine_perturbation(
     return changes;
 }
 
-static void ss_add_todo(struct set_store *ss, struct set *s) {
+static void ss_add_todo(set_store &ss, struct set *s) {
     if (s->todo)
         return;                   /* already on it */
 
-    s->prev = ss->todo_tail;
+    s->prev = ss.todo_tail;
     if (s->prev)
         s->prev->next = s;
     else
-        ss->todo_head = s;
-    ss->todo_tail = s;
+        ss.todo_head = s;
+    ss.todo_tail = s;
     s->next = nullptr;
     s->todo = true;
 }
 
-static void ss_add(struct set_store *ss, int x, int y, int mask, int mines) {
+static void ss_add(set_store &ss, int x, int y, int mask, int mines) {
     struct set *s;
 
     assert(mask != 0);
@@ -490,7 +486,7 @@ static void ss_add(struct set_store *ss, int x, int y, int mask, int mines) {
     s->mask = mask;
     s->mines = mines;
     s->todo = false;
-    if (add234(ss->sets, s) != s) {
+    if (add234(ss.sets, s) != s) {
         /*
          * This set already existed! Free it and return.
          */
@@ -549,7 +545,7 @@ static int setmunge(int x1, int y1, int mask1, int x2, int y2, int mask2,
     return mask1 & mask2;
 }
 
-static struct set **ss_overlap(struct set_store *ss, int x, int y, int mask) {
+static struct set **ss_overlap(set_store &ss, int x, int y, int mask) {
     struct set **ret = nullptr;
     int nret = 0, retsize = 0;
     int xx, yy;
@@ -566,8 +562,8 @@ static struct set **ss_overlap(struct set_store *ss, int x, int y, int mask) {
             stmp.y = yy;
             stmp.mask = 0;
 
-            if (findrelpos234(ss->sets, &stmp, nullptr, REL234_GE, &pos)) {
-                while ((s = (set *) index234(ss->sets, pos)) != nullptr &&
+            if (findrelpos234(ss.sets, &stmp, nullptr, REL234_GE, &pos)) {
+                while ((s = (set *) index234(ss.sets, pos)) != nullptr &&
                        s->x == xx && s->y == yy) {
                     /*
                      * This set potentially overlaps the input one.
@@ -597,14 +593,14 @@ static struct set **ss_overlap(struct set_store *ss, int x, int y, int mask) {
     return ret;
 }
 
-static struct set *ss_todo(struct set_store *ss) {
-    if (ss->todo_head) {
-        struct set *ret = ss->todo_head;
-        ss->todo_head = ret->next;
-        if (ss->todo_head)
-            ss->todo_head->prev = nullptr;
+static struct set *ss_todo(set_store &ss) {
+    if (ss.todo_head) {
+        struct set *ret = ss.todo_head;
+        ss.todo_head = ret->next;
+        if (ss.todo_head)
+            ss.todo_head->prev = nullptr;
         else
-            ss->todo_tail = nullptr;
+            ss.todo_tail = nullptr;
         ret->next = ret->prev = nullptr;
         ret->todo = false;
         return ret;
@@ -613,7 +609,7 @@ static struct set *ss_todo(struct set_store *ss) {
     }
 }
 
-static void ss_remove(struct set_store *ss, struct set *s) {
+static void ss_remove(set_store &ss, struct set *s) {
     struct set *next = s->next, *prev = s->prev;
 
     /*
@@ -621,20 +617,20 @@ static void ss_remove(struct set_store *ss, struct set *s) {
      */
     if (prev)
         prev->next = next;
-    else if (s == ss->todo_head)
-        ss->todo_head = next;
+    else if (s == ss.todo_head)
+        ss.todo_head = next;
 
     if (next)
         next->prev = prev;
-    else if (s == ss->todo_tail)
-        ss->todo_tail = prev;
+    else if (s == ss.todo_tail)
+        ss.todo_tail = prev;
 
     s->todo = false;
 
     /*
      * Remove s from the tree.
      */
-    del234(ss->sets, s);
+    del234(ss.sets, s);
 
     /*
      * Destroy the actual set structure.
@@ -694,7 +690,12 @@ int solve_minefield(
         const perturbation_function &perturb,
         std::mt19937 &random
 ) {
-    struct set_store *ss = ss_new();
+    set_store ss{
+            .sets = newtree234(set_comparator),
+            .todo_head = nullptr,
+            .todo_tail = nullptr
+    };
+
     struct set **list;
     int i, j;
     int nperturbs = 0;
@@ -943,7 +944,8 @@ int solve_minefield(
             if (minesleft == 0 || minesleft == squaresleft) {
                 for (i = 0; i < context.size; i++)
                     if (grid[i] == -2)
-                        known_squares(context.width, context.height, square_todo, grid, open, context,
+                        known_squares(context.width, context.height, square_todo, grid, open,
+                                      context,
                                       i % context.width, i / context.width, 1, minesleft != 0);
                 continue;           /* now go back to main deductive loop */
             }
@@ -962,7 +964,7 @@ int solve_minefield(
              * a bit slow for large n, so I artificially cap this
              * recursion at n=10 to avoid too much pain.
              */
-            nsets = count234(ss->sets);
+            nsets = count234(ss.sets);
             if (nsets <= lenof(setused)) {
                 /*
                  * Doing this with actual recursive function calls
@@ -1007,7 +1009,7 @@ int solve_minefield(
                  */
                 struct set *sets[lenof(setused)];
                 for (i = 0; i < nsets; i++)
-                    sets[i] = static_cast<set *>(index234(ss->sets, i));
+                    sets[i] = static_cast<set *>(index234(ss.sets, i));
 
                 cursor = 0;
                 while (true) {
@@ -1070,7 +1072,8 @@ int solve_minefield(
                                             break;
                                         }
                                     if (outside)
-                                        known_squares(context.width, context.height, square_todo, grid,
+                                        known_squares(context.width, context.height, square_todo,
+                                                      grid,
                                                       open, context,
                                                       x, y, 1, minesleft != 0);
                                 }
@@ -1137,11 +1140,11 @@ int solve_minefield(
              *
              * If we have no sets at all, we must give up.
              */
-            if (count234(ss->sets) == 0) {
+            if (count234(ss.sets) == 0) {
                 result = perturb(context, grid, 0, 0, 0);
             } else {
-                s = static_cast<set *>(index234(ss->sets,
-                                                random_up_to(random, count234(ss->sets))));
+                s = static_cast<set *>(index234(ss.sets,
+                                                random_up_to(random, count234(ss.sets))));
                 result = perturb(context, grid, s->x, s->y, s->mask);
             }
 
@@ -1204,10 +1207,9 @@ int solve_minefield(
      */
     {
         struct set *s;
-        while ((s = static_cast<set *>(delpos234(ss->sets, 0))) != nullptr)
+        while ((s = static_cast<set *>(delpos234(ss.sets, 0))) != nullptr)
             sfree(s);
-        freetree234(ss->sets);
-        sfree(ss);
+        freetree234(ss.sets);
     }
 
     return nperturbs;
