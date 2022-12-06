@@ -2,8 +2,10 @@ package dev.lucasnlm.antimine.themes
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ScrollView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.slider.Slider
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.models.Analytics
@@ -13,6 +15,7 @@ import dev.lucasnlm.antimine.themes.view.ThemeAdapter
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.ThematicActivity
+import dev.lucasnlm.antimine.ui.model.TopBarAction
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import dev.lucasnlm.external.IAdsManager
@@ -35,6 +38,26 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
     private val adsManager: IAdsManager by inject()
     private val analyticsManager: IAnalyticsManager by inject()
 
+    private val toolbar: MaterialToolbar by lazy {
+        findViewById(R.id.toolbar)
+    }
+
+    private val scrollView: ScrollView by lazy {
+        findViewById(R.id.scrollView)
+    }
+
+    private val undoThemeAction = TopBarAction(
+        actionName = R.string.delete_all,
+        icon = R.drawable.undo,
+        action = {
+            themeViewModel.sendEvent(ThemeEvent.ResetTheme)
+            lifecycleScope.launch {
+                refreshForm()
+            }
+            setTopBarAction(null)
+        },
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,7 +67,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
             adsManager.start(this)
         }
 
-        bindToolbar()
+        bindToolbar(toolbar)
 
         if (preferencesRepository.isPremiumEnabled()) {
             unlockAll.visibility = View.GONE
@@ -111,7 +134,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
                 lifecycleScope.launchWhenResumed {
                     billingManager.listenPurchases().collect {
                         if (it is PurchaseInfo.PurchaseResult && it.unlockStatus) {
-                            themeAdapter.notifyDataSetChanged()
+                            themeAdapter.notifyItemRangeChanged(0, themeAdapter.itemCount)
                         }
                     }
                 }
@@ -138,33 +161,24 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putIntArray(SCROLL_VIEW_STATE, intArrayOf(scrollView.scrollX, scrollView.scrollY))
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState.getIntArray(SCROLL_VIEW_STATE)?.let { position ->
+            scrollView.post { scrollView.scrollTo(position[0], position[1]) }
+        }
+    }
+
     private fun refreshForm() {
         val state = themeViewModel.singleState()
         squareSize.value = (state.squareSize / squareSize.stepSize).toInt() * squareSize.stepSize
         squareDivider.value = (state.squareDivider / squareDivider.stepSize).toInt() * squareDivider.stepSize
         squareRadius.value = (state.squareRadius / squareRadius.stepSize).toInt() * squareRadius.stepSize
-        section.showEndAction(state.hasChangedSize)
-    }
-
-    private fun bindToolbar() {
-        section.bind(
-            text = R.string.themes,
-            startButton = R.drawable.back_arrow,
-            startDescription = R.string.back,
-            startAction = {
-                finish()
-            },
-            endButton = R.drawable.undo,
-            endDescription = R.string.delete_all,
-            endAction = {
-                themeViewModel.sendEvent(ThemeEvent.ResetTheme)
-                lifecycleScope.launch {
-                    refreshForm()
-                }
-                bindToolbar()
-                section.showEndAction(false)
-            },
-        )
+        setTopBarAction(if (state.hasChangedSize) undoThemeAction else null)
     }
 
     override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
@@ -181,7 +195,11 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
                     themeViewModel.sendEvent(ThemeEvent.SetSquareRadius(progress))
                 }
             }
-            section.showEndAction(true)
+            setTopBarAction(undoThemeAction)
         }
+    }
+
+    companion object {
+        const val SCROLL_VIEW_STATE = "SCROLL_VIEW_POSITION"
     }
 }

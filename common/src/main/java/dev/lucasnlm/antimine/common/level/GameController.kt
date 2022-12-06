@@ -19,7 +19,6 @@ import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.coroutines.flow.flow
-import kotlin.random.Random
 
 class GameController {
     private val minefield: Minefield
