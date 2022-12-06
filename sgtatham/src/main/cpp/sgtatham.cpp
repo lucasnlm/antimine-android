@@ -1265,12 +1265,5 @@ Java_dev_lucasnlm_antimine_sgtatham_SgTathamMines_createMinefield(
 ) {
     std::mt19937 random(inSeed);
     std::string minefield = new_mine_layout(inWidth, inHeight, inMines, inX, inY, random);
-
-    for (long i = 0; i < 2000; i++) {
-        std::mt19937 random(i);
-        std::string minefield = new_mine_layout(inWidth, inHeight, inMines, inX, inY, random);
-        std::cout << minefield << std::endl;
-    }
-
     return env->NewStringUTF(minefield.c_str());
 }
