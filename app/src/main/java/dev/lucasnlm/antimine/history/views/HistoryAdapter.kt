@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
@@ -41,6 +42,10 @@ class HistoryAdapter(
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) = with(saveHistory[position]) {
         val context = holder.itemView.context
+        val buttonBackgroundColor = MaterialColors.getColorStateListOrNull(
+            context,
+            dev.lucasnlm.antimine.control.R.attr.colorOnBackground,
+        )?.withAlpha(50)
 
         val difficultyText = context.getString(
             when (difficulty) {
@@ -69,16 +74,19 @@ class HistoryAdapter(
             holder.replay.setOnClickListener {
                 statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
             }
+            holder.replay.backgroundTintList = buttonBackgroundColor
         } else {
             holder.replay.icon = ContextCompat.getDrawable(context, R.drawable.play)
             holder.replay.setOnClickListener {
                 statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
             }
+            holder.replay.backgroundTintList = buttonBackgroundColor
         }
 
         holder.open.setOnClickListener {
             statelessViewModel.sendEvent(HistoryEvent.LoadSave(uid))
         }
+        holder.open.backgroundTintList = buttonBackgroundColor
     }
 }
 
