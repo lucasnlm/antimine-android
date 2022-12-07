@@ -3,15 +3,13 @@ package dev.lucasnlm.antimine.control.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.control.R
 import dev.lucasnlm.antimine.control.models.ControlDetails
-import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.view_control_item.view.*
 
 class ControlAdapter(
-    private val themeRepository: IThemeRepository,
     private var selected: ControlStyle,
     private val controls: MutableList<ControlDetails>,
     private val onControlSelected: (ControlStyle) -> Unit,
@@ -39,17 +37,16 @@ class ControlAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ControlViewHolder {
-        return if (viewType == SIMPLE) {
-            val view = LayoutInflater
+        val view = if (viewType == SIMPLE) {
+            LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.view_control_item_simple, parent, false)
-            ControlViewHolder(view)
         } else {
-            val view = LayoutInflater
+            LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.view_control_item, parent, false)
-            ControlViewHolder(view)
         }
+        return ControlViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ControlViewHolder, position: Int) {
@@ -57,16 +54,21 @@ class ControlAdapter(
         val isSelected = selected == controlDetail.controlStyle
         val context = holder.itemView.context
 
+        val selectedBackgroundColor = MaterialColors.getColorStateListOrNull(
+            context,
+            R.attr.colorOnBackground,
+        )?.withAlpha(50)
+
         if (getItemViewType(position) == SIMPLE) {
             holder.itemView.run {
                 cardView.apply {
                     setOnClickListener {
                         onControlSelected(controlDetail.controlStyle)
                     }
-                    strokeWidth = if (isSelected) {
-                        context.dpToPx(2)
+                    backgroundTintList = if (isSelected) {
+                        selectedBackgroundColor
                     } else {
-                        0
+                        null
                     }
                 }
                 firstActionName.text = context.getString(controlDetail.firstActionId)
@@ -77,10 +79,10 @@ class ControlAdapter(
                     setOnClickListener {
                         onControlSelected(controlDetail.controlStyle)
                     }
-                    strokeWidth = if (isSelected) {
-                        context.dpToPx(2)
+                    backgroundTintList = if (isSelected) {
+                        selectedBackgroundColor
                     } else {
-                        0
+                        null
                     }
                 }
                 firstActionName.text = context.getString(controlDetail.firstActionId)

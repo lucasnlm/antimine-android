@@ -13,13 +13,11 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThematicActivity
 import dev.lucasnlm.antimine.ui.model.TopBarAction
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.activity_control.*
 import org.koin.android.ext.android.inject
 
 class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnChangeListener {
     private val viewModel: ControlViewModel by inject()
-    private val themeRepository: IThemeRepository by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
 
     private val toolbar: MaterialToolbar by lazy {
@@ -30,7 +28,6 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
         super.onCreate(savedInstanceState)
 
         val controlAdapter = ControlAdapter(
-            themeRepository = themeRepository,
             controls = mutableListOf(),
             selected = preferencesRepository.controlStyle(),
             onControlSelected = { controlStyle ->
