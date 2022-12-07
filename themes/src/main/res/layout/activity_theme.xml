@@ -33,9 +33,26 @@
             android:layout_height="wrap_content"
             android:paddingVertical="8dp">
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/themes"
+                style="?attr/materialCardViewFilledStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:contentPadding="8dp"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"/>
+            </com.google.android.material.card.MaterialCardView>
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/square_size_text"
                 android:layout_width="0dp"
+                android:focusable ="true" android:focusableInTouchMode ="true"
                 android:layout_height="wrap_content"
                 android:paddingVertical="4dp"
                 android:text="@string/size"
@@ -128,7 +145,7 @@
                 android:layout_marginVertical="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/square_divider_text" />
+                app:layout_constraintTop_toBottomOf="@+id/themes" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/control_styles"
@@ -149,8 +166,8 @@
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
                     android:fadeScrollbars="false"
-                    android:scrollbarStyle="outsideInset"
-                    />
+                    android:scrollbars="none"
+                    android:overScrollMode="never" />
 
             </com.google.android.material.card.MaterialCardView>
 
