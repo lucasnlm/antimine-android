@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.about.views.info
+package dev.lucasnlm.antimine.about.views
 
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -16,11 +16,6 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
     private val aboutViewModel: AboutViewModel by sharedViewModel()
     private val themeRepository: IThemeRepository by inject()
-
-    override fun onResume() {
-        super.onResume()
-        activity?.setTitle(R.string.about)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

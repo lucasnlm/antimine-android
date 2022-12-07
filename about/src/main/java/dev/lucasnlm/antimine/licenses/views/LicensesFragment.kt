@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.about.views.licenses
+package dev.lucasnlm.antimine.licenses.views
 
 import android.os.Bundle
 import android.view.View
@@ -7,19 +7,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.lucasnlm.antimine.about.R
-import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
+import dev.lucasnlm.antimine.licenses.viewmodel.LicenseViewModel
 import kotlinx.android.synthetic.main.fragment_licenses.*
-import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class LicensesFragment : Fragment(R.layout.fragment_licenses) {
-    private val aboutViewModel: AboutViewModel by sharedViewModel()
+    private val viewModel: LicenseViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launchWhenResumed {
-            aboutViewModel
+            viewModel
                 .observeState()
                 .collect {
                     activity?.setTitle(R.string.licenses)

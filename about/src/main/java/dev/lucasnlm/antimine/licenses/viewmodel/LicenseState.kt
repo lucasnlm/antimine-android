@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.about.viewmodel
+package dev.lucasnlm.antimine.licenses.viewmodel
 
 import androidx.annotation.RawRes
 
@@ -7,6 +7,6 @@ data class License(
     @RawRes val licenseFileRes: Int,
 )
 
-data class AboutState(
+data class LicenseState(
     val licenses: List<License>,
 )
