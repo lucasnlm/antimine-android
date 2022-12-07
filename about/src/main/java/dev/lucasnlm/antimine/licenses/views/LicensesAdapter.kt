@@ -1,5 +1,7 @@
 package dev.lucasnlm.antimine.licenses.views
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.about.R
 import dev.lucasnlm.antimine.licenses.viewmodel.License
-import dev.lucasnlm.antimine.text.TextActivity
 import kotlinx.android.synthetic.main.view_third_party.view.*
 
 internal class LicensesAdapter(
@@ -28,8 +29,12 @@ internal class LicensesAdapter(
         holder.apply {
             title.text = thirdParty.name
             itemView.setOnClickListener { view ->
-                val intent = TextActivity.getIntent(view.context, thirdParty.name, thirdParty.licenseFileRes)
-                view.context.startActivity(intent)
+                try {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(thirdParty.url))
+                    view.context.startActivity(intent)
+                } catch (ignored: Exception) {
+                    // Fail to load browser or URL.
+                }
             }
         }
     }

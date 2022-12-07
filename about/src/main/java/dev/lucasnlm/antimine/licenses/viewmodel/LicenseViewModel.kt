@@ -1,20 +1,22 @@
 package dev.lucasnlm.antimine.licenses.viewmodel
 
-import dev.lucasnlm.antimine.about.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 
 class LicenseViewModel : IntentViewModel<Void, LicenseState>() {
     private fun getLicensesList() = mapOf(
-        "Android SDK License" to R.raw.android_sdk,
-        "Koin" to R.raw.apache2,
-        "LibGDX" to R.raw.apache2,
-        "Material Design" to R.raw.apache2,
-        "Moshi" to R.raw.apache2,
-        "Mockk" to R.raw.apache2,
-        "Noto Emoji" to R.raw.apache2,
-        "Sounds" to R.raw.sounds,
+        "Android SDK License" to "https://developer.android.com/studio/terms",
+        "Koin" to "https://github.com/InsertKoinIO/koin/blob/main/LICENSE",
+        "LibGDX" to "https://github.com/libgdx/libgdx/blob/master/LICENSE",
+        "Material Design" to "https://github.com/material-components/material-components-android/blob/master/LICENSE",
+        "Moshi" to "https://github.com/square/moshi/blob/master/LICENSE.txt",
+        "Mockk" to "https://github.com/mockk/mockk/blob/master/LICENSE",
+        "Noto Emoji" to "https://github.com/googlefonts/noto-emoji/blob/main/fonts/LICENSE",
+        "kotlin" to "https://github.com/JetBrains/kotlin/blob/master/license/LICENSE.txt",
+        "kotlinx.coroutines" to "https://github.com/Kotlin/kotlinx.coroutines/blob/master/LICENSE.txt",
     ).map {
         License(it.key, it.value)
+    }.sortedBy {
+        it.name
     }.toList()
 
     override fun initialState(): LicenseState {
