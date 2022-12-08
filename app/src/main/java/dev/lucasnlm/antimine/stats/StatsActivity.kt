@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.stats.view.StatsAdapter
@@ -18,10 +17,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     private val statsViewModel by viewModel<StatsViewModel>()
-
-    private val toolbar: MaterialToolbar by lazy {
-        findViewById(R.id.toolbar)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

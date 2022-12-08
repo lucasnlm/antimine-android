@@ -20,14 +20,7 @@ class TutorialActivity : ThematicActivity(R.layout.tutorial_activity) {
         preferencesRepository.setTutorialDialog(false)
         analyticsManager.sentEvent(Analytics.OpenTutorial)
 
-        section.bind(
-            text = R.string.tutorial,
-            startButton = R.drawable.back_arrow,
-            startDescription = R.string.back,
-            startAction = {
-                finish()
-            },
-        )
+        bindToolbar(toolbar)
 
         playGame.bind(
             theme = usingTheme,

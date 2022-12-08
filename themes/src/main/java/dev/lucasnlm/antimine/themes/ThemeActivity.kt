@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.ScrollView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.slider.Slider
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.models.Analytics
@@ -37,14 +36,6 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
     private val billingManager: IBillingManager by inject()
     private val adsManager: IAdsManager by inject()
     private val analyticsManager: IAnalyticsManager by inject()
-
-    private val toolbar: MaterialToolbar by lazy {
-        findViewById(R.id.toolbar)
-    }
-
-    private val scrollView: ScrollView by lazy {
-        findViewById(R.id.scrollView)
-    }
 
     private val undoThemeAction = TopBarAction(
         actionName = R.string.delete_all,

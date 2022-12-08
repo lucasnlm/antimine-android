@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.slider.Slider
 import dev.lucasnlm.antimine.control.view.ControlAdapter
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
@@ -19,10 +18,6 @@ import org.koin.android.ext.android.inject
 class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnChangeListener {
     private val viewModel: ControlViewModel by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
-
-    private val toolbar: MaterialToolbar by lazy {
-        findViewById(R.id.toolbar)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
