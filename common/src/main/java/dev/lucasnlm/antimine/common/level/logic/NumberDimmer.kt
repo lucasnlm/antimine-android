@@ -15,7 +15,7 @@ class NumberDimmer(
     fun runDimmerAll() {
         field
             .filter { it.minesAround > 0 }
-            .forEach(::dimAll)
+            .forEach(::dim)
     }
 
     fun result(): List<Area> = field.toList()
@@ -29,7 +29,7 @@ class NumberDimmer(
         field[it.id] = it.copy(dimNumber = shouldDim)
     }
 
-    private fun dimAll(it: Area) {
+    private fun dim(it: Area) {
         field[it.id] = it.copy(dimNumber = true)
     }
 }

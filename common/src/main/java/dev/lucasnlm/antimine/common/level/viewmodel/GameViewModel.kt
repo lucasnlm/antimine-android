@@ -520,11 +520,7 @@ open class GameViewModel(
         }
 
         if (preferencesRepository.dimNumbers() && !gameController.isGameOver()) {
-            if (gameController.isVictory()) {
-                gameController.runNumberDimmerToAllMines()
-            } else {
-                gameController.runNumberDimmer()
-            }
+            gameController.runNumberDimmer()
         }
 
         updateGameState()
@@ -690,6 +686,10 @@ open class GameViewModel(
             showAllEmptyAreas()
             flagAllMines()
             showWrongFlags()
+
+            if (preferencesRepository.dimNumbers()) {
+                runNumberDimmerToAllMines()
+            }
         }
 
         if (state.difficulty == Difficulty.Standard || state.difficulty == Difficulty.FixedSize) {
