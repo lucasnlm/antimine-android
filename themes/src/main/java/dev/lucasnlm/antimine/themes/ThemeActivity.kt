@@ -37,7 +37,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
     private val analyticsManager: IAnalyticsManager by inject()
 
     private val undoThemeAction = TopBarAction(
-        actionName = R.string.delete_all,
+        name = R.string.delete_all,
         icon = R.drawable.undo,
         action = {
             themeViewModel.sendEvent(ThemeEvent.ResetTheme)

@@ -19,14 +19,24 @@ class PreferencesRepository(
         PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT,
     )
 
+    private val listOfSettingsCustoms = listOf(
+        PreferenceKeys.PREFERENCE_ASSISTANT,
+        PreferenceKeys.PREFERENCE_VIBRATION,
+        PreferenceKeys.PREFERENCE_ANIMATION,
+        PreferenceKeys.PREFERENCE_QUESTION_MARK,
+        PreferenceKeys.PREFERENCE_USE_HELP,
+        PreferenceKeys.PREFERENCE_SOUND_EFFECTS,
+        PreferenceKeys.PREFERENCE_SHOW_WINDOWS,
+        PreferenceKeys.PREFERENCE_OPEN_DIRECTLY,
+        PreferenceKeys.PREFERENCE_ALLOW_TAP_NUMBER,
+        PreferenceKeys.PREFERENCE_SHOW_TIMER,
+        PreferenceKeys.PREFERENCE_DIM_NUMBERS,
+    )
+
     private fun longPressTimeout() = ViewConfiguration.getLongPressTimeout()
 
     override fun hasCustomizations(): Boolean {
-        return preferencesManager.run {
-            getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50) != 50 ||
-                getInt(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT, longPressTimeout()) != longPressTimeout() ||
-                getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 3) != 3
-        }
+        return listOfSettingsCustoms.any { preferencesManager.contains(it) }
     }
 
     override fun hasControlCustomizations(): Boolean {
@@ -40,15 +50,7 @@ class PreferencesRepository(
     }
 
     override fun reset() {
-        preferencesManager.apply {
-            removeKey(PreferenceKeys.PREFERENCE_ASSISTANT)
-            removeKey(PreferenceKeys.PREFERENCE_VIBRATION)
-            removeKey(PreferenceKeys.PREFERENCE_ANIMATION)
-            removeKey(PreferenceKeys.PREFERENCE_QUESTION_MARK)
-            removeKey(PreferenceKeys.PREFERENCE_SOUND_EFFECTS)
-            removeKey(PreferenceKeys.PREFERENCE_SQUARE_RADIUS)
-            removeKey(PreferenceKeys.PREFERENCE_AREA_SIZE)
-        }
+        listOfSettingsCustoms.forEach { preferencesManager.removeKey(it) }
     }
 
     override fun forgetCustomSeed() {

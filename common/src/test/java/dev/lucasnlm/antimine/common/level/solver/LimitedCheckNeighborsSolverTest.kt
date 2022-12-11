@@ -15,7 +15,7 @@ class LimitedCheckNeighborsSolverTest {
     private fun handleMinefield(block: (MinefieldHandler) -> Unit) = runTest {
         val creator = MinefieldCreatorImpl(
             Minefield(9, 9, 12),
-            200
+            200,
         )
         val minefield = creator.create(40).toMutableList()
         val minefieldHandler = MinefieldHandler(minefield, useQuestionMark = false, individualActions = false)

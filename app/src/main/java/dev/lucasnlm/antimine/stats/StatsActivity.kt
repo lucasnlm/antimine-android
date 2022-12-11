@@ -33,7 +33,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
                 if (it.stats.isNotEmpty()) {
                     setTopBarAction(
                         TopBarAction(
-                            actionName = R.string.delete_all,
+                            name = R.string.delete_all,
                             icon = R.drawable.delete,
                             action = { confirmAndDelete() },
                         ),

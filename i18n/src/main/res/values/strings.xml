@@ -74,7 +74,7 @@
     <string name="empty">Empty</string>
     <string name="cant_do_it_now">Impossible to do that now</string>
     <string name="you_have_received">You have received: +%1$d</string>
-    <string name="help_win_a_game">For more Help, you must win a game.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Unknown error.</string>
     <string name="leaderboards">Leaderboards</string>
     <string name="cancel">Cancel</string>
@@ -104,7 +104,7 @@
     <string name="themes">Themes</string>
     <string name="delete_all_message">Delete all events permanently.</string>
     <string name="remove_ad">Premium</string>
-    <string name="help">Help</string>
+    <string name="help">Hint</string>
     <string name="back">Back</string>
     <string name="donation">Donation</string>
     <string name="open_on_game">Open on game screen</string>

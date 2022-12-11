@@ -111,7 +111,7 @@ class MinefieldCreatorTest {
     }
 
     @Test
-    fun testMinefieldCreationMinesTips3() = runTest{
+    fun testMinefieldCreationMinesTips3() = runTest {
         val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), 50)
         val map = creator.create(2)
         assertEquals(
@@ -126,7 +126,7 @@ class MinefieldCreatorTest {
     }
 
     @Test
-    fun testMinefieldCreationPosition() = runTest{
+    fun testMinefieldCreationPosition() = runTest {
         val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), 200)
         val map = creator.create(2)
         assertEquals(
@@ -141,7 +141,7 @@ class MinefieldCreatorTest {
     }
 
     @Test
-    fun testMinefieldMustBeCreatedWithoutMines() = runTest{
+    fun testMinefieldMustBeCreatedWithoutMines() = runTest {
         val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), 200)
         val map = creator.createEmpty()
         assertEquals(0, map.count { it.hasMine })

@@ -70,7 +70,7 @@ class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnCh
                 if (it.showReset) {
                     setTopBarAction(
                         TopBarAction(
-                            actionName = R.string.delete_all,
+                            name = R.string.delete_all,
                             icon = R.drawable.undo,
                             action = {
                                 viewModel.sendEvent(ControlEvent.Reset)

@@ -51,7 +51,7 @@ abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActi
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (menu != null) {
             topBarAction?.let { action ->
-                menu.add(action.actionName)?.apply {
+                menu.add(action.name)?.apply {
                     setIcon(action.icon)
                     setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                     setOnMenuItemClickListener {
