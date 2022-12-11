@@ -44,7 +44,7 @@ class MinefieldCreatorTest {
                 1, 0, 0, 0,
                 1, 0, 0, 0,
                 1, 1, 1, 1,
-                1, 0, 1, 1,
+                1, 1, 1, 0,
             ),
             map.map { if (it.hasMine) 1 else 0 }.toList(),
         )
@@ -58,7 +58,7 @@ class MinefieldCreatorTest {
             listOf(
                 1, 0, 0, 0,
                 1, 0, 0, 0,
-                1, 0, 1, 1,
+                1, 1, 1, 0,
                 1, 1, 1, 1,
             ),
             map.map { if (it.hasMine) 1 else 0 }.toList(),
@@ -73,8 +73,8 @@ class MinefieldCreatorTest {
             listOf(
                 1, 0, 0, 0,
                 1, 0, 0, 0,
-                1, 1, 0, 1,
                 1, 1, 1, 1,
+                1, 0, 1, 1,
             ),
             map.map { if (it.hasMine) 1 else 0 }.toList(),
         )
@@ -89,7 +89,7 @@ class MinefieldCreatorTest {
                 0, 2, 0, 0,
                 0, 5, 3, 2,
                 0, 0, 0, 0,
-                0, 5, 0, 0,
+                0, 0, 0, 3,
             ),
             map.map { it.minesAround }.toList(),
         )
@@ -102,8 +102,8 @@ class MinefieldCreatorTest {
         assertEquals(
             listOf(
                 0, 2, 0, 0,
-                0, 4, 2, 2,
-                0, 6, 0, 0,
+                0, 5, 2, 1,
+                0, 0, 0, 3,
                 0, 0, 0, 0,
             ),
             map.map { it.minesAround }.toList(),
@@ -117,9 +117,9 @@ class MinefieldCreatorTest {
         assertEquals(
             listOf(
                 0, 2, 0, 0,
-                0, 4, 2, 1,
-                0, 0, 5, 0,
+                0, 5, 3, 2,
                 0, 0, 0, 0,
+                0, 5, 0, 0,
             ),
             map.map { it.minesAround }.toList(),
         )

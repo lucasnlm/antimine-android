@@ -31,7 +31,7 @@ class LimitedCheckNeighborsSolverTest {
         }
 
         handleMinefield { handler ->
-            handler.openAt(0, passive = false, openNeighbors = true)
+            handler.openAt(5, passive = false, openNeighbors = true)
             val bruteForceSolver = LimitedCheckNeighborsSolver()
             assertFalse(bruteForceSolver.trySolve(handler.result().toMutableList()))
         }
