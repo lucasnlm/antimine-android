@@ -137,7 +137,7 @@
                                 app:thumbStrokeColor="?colorAccent"
                                 app:tickVisible="false"
                                 app:trackColorActive="?colorAccent"
-                                app:trackColorInactive="?colorOnSurfaceVariant"
+                                app:trackColorInactive="?colorOnBackground"
                                 app:trackHeight="8dp" />
                         </TableRow>
 
@@ -165,7 +165,7 @@
                                 app:thumbStrokeColor="?colorAccent"
                                 app:tickVisible="false"
                                 app:trackColorActive="?colorAccent"
-                                app:trackColorInactive="?colorOnSurfaceVariant"
+                                app:trackColorInactive="?colorOnBackground"
                                 app:trackHeight="8dp" />
                         </TableRow>
 
@@ -192,7 +192,7 @@
                                 app:thumbStrokeColor="?colorAccent"
                                 app:tickVisible="false"
                                 app:trackColorActive="?colorAccent"
-                                app:trackColorInactive="?colorOnSurfaceVariant"
+                                app:trackColorInactive="?colorOnBackground"
                                 app:trackHeight="8dp" />
                         </TableRow>
 
@@ -219,7 +219,7 @@
                                 app:thumbStrokeColor="?colorAccent"
                                 app:tickVisible="false"
                                 app:trackColorActive="?colorAccent"
-                                app:trackColorInactive="?colorOnSurfaceVariant"
+                                app:trackColorInactive="?colorOnBackground"
                                 app:trackHeight="8dp" />
                         </TableRow>
                     </TableLayout>
