@@ -19,20 +19,6 @@
 
 #define lenof(array) ( sizeof(array) / sizeof(*(array)) )
 
-struct perturbation {
-    std::size_t x;
-    std::size_t y;
-    int delta; // +1 == become a mine; -1 == cleared
-};
-
-struct square {
-    std::size_t id;
-    std::size_t x;
-    std::size_t y;
-    int type;
-    int random;
-};
-
 struct set {
     std::size_t x;
     std::size_t y;
@@ -49,8 +35,8 @@ struct set_store {
 
 typedef std::function<int(mine_context &, std::size_t, std::size_t)> open_function;
 
-typedef std::function<std::vector<perturbation>(mine_context &, std::basic_string<std::int8_t> &,
-                                                int, int, int)> perturbation_function;
+typedef std::function<void(mine_context &, std::basic_string<std::int8_t> &,
+                           int, int, int)> perturbation_function;
 
 static int set_comparator(void *av, void *bv) {
     auto *a = (struct set *) av;
@@ -111,7 +97,7 @@ int mine_open(mine_context &ctx, std::size_t x, std::size_t y) {
     return result;
 }
 
-std::vector<perturbation> mine_perturbation(
+void mine_perturbation(
         mine_context &ctx,
         std::basic_string<std::int8_t> &grid,
         int setx,
@@ -121,16 +107,24 @@ std::vector<perturbation> mine_perturbation(
     std::size_t number_of_full = 0;
     std::size_t number_of_empty = 0;
 
-    std::vector<square> square_list;
+    std::vector<square>& square_list = ctx.square_list;
     square_list.reserve(ctx.size);
+    square_list.clear();
 
-    std::vector<perturbation> changes;
-    std::vector<std::size_t> to_fill;
-    std::vector<std::size_t> to_empty;
-    std::vector<std::size_t> set_list;
+    std::vector<perturbation>& changes = ctx.changes;
+    changes.clear();
+
+    std::vector<std::size_t>& to_fill = ctx.to_fill;
+    to_fill.clear();
+
+    std::vector<std::size_t>& to_empty = ctx.to_empty;
+    to_fill.clear();
+
+    std::vector<std::size_t>& set_list = ctx.set_list;
+    set_list.clear();
 
     if (!mask && !ctx.allow_big_perturbs) {
-        return changes;
+        return;
     }
 
     /*
@@ -203,7 +197,7 @@ std::vector<perturbation> mine_perturbation(
              * Finally, a random number to cause qsort to
              * shuffle within each group.
              */
-            current.random = static_cast<int>(random_bits(ctx.random));
+            current.random = random_bits(ctx.random);
             square_list.push_back(current);
         }
     }
@@ -445,8 +439,6 @@ std::vector<perturbation> mine_perturbation(
             }
         }
     }
-
-    return changes;
 }
 
 static void ss_add_todo(set_store &ss, struct set *s) {
@@ -1128,7 +1120,6 @@ int solve_minefield(
          * make it easier.
          */
         if (perturb) {
-            std::vector<perturbation> result;
             struct set *s;
 
             nperturbs++;
@@ -1141,14 +1132,14 @@ int solve_minefield(
              * If we have no sets at all, we must give up.
              */
             if (count234(ss.sets) == 0) {
-                result = perturb(context, grid, 0, 0, 0);
+                perturb(context, grid, 0, 0, 0);
             } else {
                 s = static_cast<set *>(index234(ss.sets,
                                                 random_up_to(random, count234(ss.sets))));
-                result = perturb(context, grid, s->x, s->y, s->mask);
+                perturb(context, grid, s->x, s->y, s->mask);
             }
 
-            if (!result.empty()) {
+            if (!context.changes.empty()) {
                 /*
                  * A number of squares have been fiddled with, and
                  * the returned structure tells us which. Adjust
@@ -1158,6 +1149,7 @@ int solve_minefield(
                  * known non-mine, put it back on the squares-to-do
                  * list.
                  */
+                const std::vector<perturbation>& result = context.changes;
                 for (i = 0; i < result.size(); i++) {
                     if (result[i].delta < 0 &&
                         grid[result[i].y * context.width + result[i].x] != -2) {
@@ -1227,8 +1219,10 @@ bool try_solve_minefield(mine_context &context, std::mt19937 &random) {
      * We bypass this bit if we're not after a unique grid.
      */
 
+    std::basic_string<std::int8_t> solve_grid(context.size, -2);
+
     while (true) {
-        std::basic_string<std::int8_t> solve_grid(context.size, -2);
+        std::fill(solve_grid.begin(), solve_grid.end(), -2);
 
         solve_grid[context.start_y * context.width + context.start_x] = mine_open(context,
                                                                                   context.start_x,

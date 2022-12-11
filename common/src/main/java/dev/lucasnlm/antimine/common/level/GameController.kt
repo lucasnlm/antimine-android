@@ -33,6 +33,7 @@ class GameController {
     private var letNumbersPutFlag = true
     private var errorTolerance = 0
     private var useSimonTatham = true
+    private var creatingMinefield = false
 
     private var lastIdInteractionX: Int? = null
     private var lastIdInteractionY: Int? = null
@@ -96,38 +97,52 @@ class GameController {
 
     private fun getArea(id: Int) = field.firstOrNull { it.id == id }
 
-    private fun plantMinesExcept(safeId: Int) {
-        val solver = LimitedCheckNeighborsSolver()
-        do {
-            field = minefieldCreator.create(safeId)
-            val fieldCopy = field.map { it.copy() }.toMutableList()
-            val minefieldHandler = MinefieldHandler(
-                field = fieldCopy,
-                useQuestionMark = false,
-                individualActions = useIndividualActions(),
-            )
-            minefieldHandler.openAt(safeId, false)
-            noGuessTestedLevel = useSimonTatham || solver.trySolve(minefieldHandler.result().toMutableList())
-        } while (!useSimonTatham && solver.keepTrying() && !noGuessTestedLevel)
+    private suspend fun plantMinesExcept(safeId: Int): Boolean {
+        if (!creatingMinefield) {
+            val solver = LimitedCheckNeighborsSolver()
+            creatingMinefield = true
+            do {
+                field = minefieldCreator.create(safeId)
+                val fieldCopy = field.map { it.copy() }.toMutableList()
+                val minefieldHandler = MinefieldHandler(
+                    field = fieldCopy,
+                    useQuestionMark = false,
+                    individualActions = useIndividualActions(),
+                )
+                minefieldHandler.openAt(safeId, false)
+                noGuessTestedLevel = useSimonTatham || solver.trySolve(minefieldHandler.result().toMutableList())
+            } while (!useSimonTatham && solver.keepTrying() && !noGuessTestedLevel)
 
-        firstOpen = FirstOpen.Position(safeId)
+            firstOpen = FirstOpen.Position(safeId)
+            creatingMinefield = false
+            return true
+        } else {
+            return false
+        }
     }
 
-    private fun handleAction(target: Area, action: Action?) {
+    private suspend fun handleAction(target: Area, action: Action?) {
+        if (creatingMinefield) {
+            // Ignore because the game is not ready for any action.
+            return
+        }
+
         val mustPlantMines = !hasMines()
-        val minefieldHandler: MinefieldHandler
+        var minefieldHandler: MinefieldHandler? = null
 
         if (mustPlantMines) {
-            plantMinesExcept(target.id)
-            minefieldHandler = MinefieldHandler(
-                field = field.toMutableList(),
-                useQuestionMark = useQuestionMark,
-                individualActions = useIndividualActions(),
-            )
-            minefieldHandler.openAt(target.id, false)
+            val created = plantMinesExcept(target.id)
+            if (created) {
+                minefieldHandler = MinefieldHandler(
+                    field = field.toMutableList(),
+                    useQuestionMark = useQuestionMark,
+                    individualActions = useIndividualActions(),
+                )
+                minefieldHandler.openAt(target.id, false)
 
-            if (!noGuessTestedLevel) {
-                onCreateUnsafeLevel?.invoke()
+                if (!noGuessTestedLevel) {
+                    onCreateUnsafeLevel?.invoke()
+                }
             }
         } else {
             minefieldHandler = MinefieldHandler(
@@ -203,48 +218,56 @@ class GameController {
         lastIdInteractionX = target.posX
         lastIdInteractionY = target.posY
 
-        field = minefieldHandler.result()
+        minefieldHandler?.let {
+            field = it.result()
+        }
     }
 
     fun singleClick(index: Int) = flow {
-        getArea(index)?.let { target ->
-            val action = if (target.isCovered) {
-                gameControl.onCovered.singleClick
-            } else {
-                gameControl.onUncovered.singleClick
-            }
-            action?.let {
-                handleAction(target, action)
-                emit(action)
+        if (!creatingMinefield) {
+            getArea(index)?.let { target ->
+                val action = if (target.isCovered) {
+                    gameControl.onCovered.singleClick
+                } else {
+                    gameControl.onUncovered.singleClick
+                }
+                action?.let {
+                    handleAction(target, action)
+                    emit(action)
+                }
             }
         }
     }
 
     fun doubleClick(index: Int) = flow {
-        getArea(index)?.let { target ->
-            val action = if (target.isCovered) {
-                gameControl.onCovered.doubleClick
-            } else {
-                gameControl.onUncovered.doubleClick
-            }
-            action?.let {
-                handleAction(target, action)
-                emit(action)
+        if (!creatingMinefield) {
+            getArea(index)?.let { target ->
+                val action = if (target.isCovered) {
+                    gameControl.onCovered.doubleClick
+                } else {
+                    gameControl.onUncovered.doubleClick
+                }
+                action?.let {
+                    handleAction(target, action)
+                    emit(action)
+                }
             }
         }
     }
 
     fun longPress(index: Int) = flow {
-        getArea(index)?.let { target ->
-            if (target.isCovered || target.minesAround != 0) {
-                val action = if (target.isCovered) {
-                    gameControl.onCovered.longPress
-                } else {
-                    gameControl.onUncovered.longPress
-                }
-                action?.let {
-                    handleAction(target, action)
-                    emit(action)
+        if (!creatingMinefield) {
+            getArea(index)?.let { target ->
+                if (target.isCovered || target.minesAround != 0) {
+                    val action = if (target.isCovered) {
+                        gameControl.onCovered.longPress
+                    } else {
+                        gameControl.onUncovered.longPress
+                    }
+                    action?.let {
+                        handleAction(target, action)
+                        emit(action)
+                    }
                 }
             }
         }

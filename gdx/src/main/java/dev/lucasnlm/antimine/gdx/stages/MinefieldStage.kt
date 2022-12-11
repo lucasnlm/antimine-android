@@ -127,31 +127,36 @@ class MinefieldStage(
                 boundHashCode = visibleHash
             }
 
-            boundAreas.let { field ->
-                if (actors.size != field.size) {
-                    clear()
-                    field.map {
+            if (actors.size != boundAreas.size) {
+                clear()
+                if (boundAreas.size < actors.size) {
+                    root.children.shrink()
+                } else {
+                    root.children.ensureCapacity(boundAreas.size)
+                }
+
+                boundAreas.forEach {
+                    addActor(
                         AreaActor(
                             theme = renderSettings.theme,
                             size = renderSettings.areaSize,
                             area = it,
-                            field = field,
+                            field = boundAreas,
                             onInputEvent = ::handleGameEvent,
                             enableLigatures = renderSettings.joinAreas,
-                        )
-                    }.forEach(::addActor)
+                        ),
+                    )
+                }
+                camera.update(true)
+                refreshVisibleActorsIfNeeded()
+            } else {
+                val reset = boundAreas.count { it.hasMine } == 0
 
-                    camera.update(true)
-                    refreshVisibleActorsIfNeeded()
-                } else {
-                    val reset = field.count { it.hasMine } == 0
-
-                    actors.forEach {
-                        if (it.isVisible) {
-                            val areaActor = (it as AreaActor)
-                            val area = field[areaActor.boundAreaId()]
-                            areaActor.bindArea(reset, renderSettings.joinAreas, area, field)
-                        }
+                actors.forEach {
+                    if (it.isVisible) {
+                        val areaActor = (it as AreaActor)
+                        val area = boundAreas[areaActor.boundAreaId()]
+                        areaActor.bindArea(reset, renderSettings.joinAreas, area, boundAreas)
                     }
                 }
             }

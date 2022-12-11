@@ -15,6 +15,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.ConfigurationCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
@@ -163,17 +164,18 @@ class GameActivity :
     private fun bindViewModel() = gameViewModel.apply {
         lifecycleScope.launchWhenCreated {
             observeState().collect {
-                if (it.turn == 0 && it.saveId == 0L || it.isLoadingMap) {
-                    if (it.turn == 0) {
-                        warning?.dismiss()
-                        warning = null
-                    }
+                if (it.turn == 0 && (it.saveId == 0L || it.isLoadingMap || it.isCreatingGame)) {
+                    warning?.dismiss()
+                    warning = null
 
                     val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
 
                     tapToBegin.apply {
                         text = when {
+                            it.isCreatingGame -> {
+                                getString(R.string.creating_valid_game)
+                            }
                             it.isLoadingMap -> {
                                 getString(R.string.loading)
                             }
@@ -186,6 +188,18 @@ class GameActivity :
                     }
                 } else {
                     tapToBegin.visibility = View.GONE
+                }
+
+                if (it.isCreatingGame) {
+                    launch {
+                        // Show loading indicator only when it takes more than:
+                        delay(500)
+                        if (singleState().isCreatingGame) {
+                            loadingGame.show()
+                        }
+                    }
+                } else if (loadingGame.isVisible) {
+                    loadingGame.hide()
                 }
 
                 if (it.turn < 1 && it.saveId == 0L && !it.isLoadingMap && it.showTutorial) {

@@ -3,6 +3,8 @@ package dev.lucasnlm.antimine.common.level.logic
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.sgtatham.SgTathamMines
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlin.math.floor
 
 class MinefieldCreatorNativeImpl(
@@ -38,7 +40,7 @@ class MinefieldCreatorNativeImpl(
         return createMutableEmpty()
     }
 
-    override fun create(safeIndex: Int): List<Area> {
+    override suspend fun create(safeIndex: Int): List<Area> = withContext(Dispatchers.IO) {
         val x = safeIndex % minefield.width
         val y = safeIndex / minefield.width
         val width = minefield.width
@@ -65,7 +67,7 @@ class MinefieldCreatorNativeImpl(
             )
         }
 
-        return resultList.map { area ->
+        resultList.map { area ->
             area.copy(neighborsIds = resultList.filterNeighborsOf(area).map { it.id })
         }.toMutableList().apply {
             // Ensure the first click and surround won't have a mine.

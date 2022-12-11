@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Touchable
-import dev.lucasnlm.antimine.core.getPos
+import dev.lucasnlm.antimine.core.getNeighborIdAtPos
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.*
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
@@ -63,14 +63,14 @@ class AreaActor(
             },
         )
 
-        topId = field.getPos(area.posX, area.posY + 1)?.id ?: -1
-        bottomId = field.getPos(area.posX, area.posY - 1)?.id ?: -1
-        leftId = field.getPos(area.posX - 1, area.posY)?.id ?: -1
-        rightId = field.getPos(area.posX + 1, area.posY)?.id ?: -1
-        topLeftId = field.getPos(area.posX - 1, area.posY + 1)?.id ?: -1
-        topRightId = field.getPos(area.posX + 1, area.posY + 1)?.id ?: -1
-        bottomLeftId = field.getPos(area.posX - 1, area.posY - 1)?.id ?: -1
-        bottomRightId = field.getPos(area.posX + 1, area.posY - 1)?.id ?: -1
+        topId = area.getNeighborIdAtPos(field, 0, 1)
+        bottomId = area.getNeighborIdAtPos(field, 0, -1)
+        leftId = area.getNeighborIdAtPos(field, -1, 0)
+        rightId = area.getNeighborIdAtPos(field, 1, 0)
+        topLeftId = area.getNeighborIdAtPos(field, -1, 1)
+        topRightId = area.getNeighborIdAtPos(field, 1, 1)
+        bottomLeftId = area.getNeighborIdAtPos(field, -1, -1)
+        bottomRightId = area.getNeighborIdAtPos(field, 1, -1)
 
         bindArea(reset = true, ligatureEnabled = enableLigatures, area = area, field = field)
     }
@@ -85,14 +85,14 @@ class AreaActor(
         val newForm = when {
             area.isCovered && ligatureEnabled -> {
                 AreaForm(
-                    top = field.getOrNull(topId)?.canLigatureTo(area) == true,
-                    bottom = field.getOrNull(bottomId)?.canLigatureTo(area) == true,
-                    left = field.getOrNull(leftId)?.canLigatureTo(area) == true,
-                    right = field.getOrNull(rightId)?.canLigatureTo(area) == true,
-                    topLeft = field.getOrNull(topLeftId)?.canLigatureTo(area) == true,
-                    topRight = field.getOrNull(topRightId)?.canLigatureTo(area) == true,
-                    bottomLeft = field.getOrNull(bottomLeftId)?.canLigatureTo(area) == true,
-                    bottomRight = field.getOrNull(bottomRightId)?.canLigatureTo(area) == true,
+                    top = field.getOrNull(topId)?.canLinkTo(area) == true,
+                    bottom = field.getOrNull(bottomId)?.canLinkTo(area) == true,
+                    left = field.getOrNull(leftId)?.canLinkTo(area) == true,
+                    right = field.getOrNull(rightId)?.canLinkTo(area) == true,
+                    topLeft = field.getOrNull(topLeftId)?.canLinkTo(area) == true,
+                    topRight = field.getOrNull(topRightId)?.canLinkTo(area) == true,
+                    bottomLeft = field.getOrNull(bottomLeftId)?.canLinkTo(area) == true,
+                    bottomRight = field.getOrNull(bottomRightId)?.canLinkTo(area) == true,
                 )
             }
             else -> {
@@ -366,7 +366,7 @@ class AreaActor(
         const val MAX_SCALE = 1.15f
         const val BASE_ICON_SCALE = 0.8f
 
-        private fun Area.canLigatureTo(area: Area): Boolean {
+        private fun Area.canLinkTo(area: Area): Boolean {
             return isCovered && mark.ligatureMask == area.mark.ligatureMask
         }
     }

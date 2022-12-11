@@ -70,6 +70,7 @@ open class GameViewModel(
             isGameCompleted = false,
             isActive = false,
             hasMines = false,
+            isCreatingGame = false,
             useHelp = preferencesRepository.useHelp(),
             isLoadingMap = true,
             showTutorial = preferencesRepository.showTutorialButton(),
@@ -78,6 +79,10 @@ open class GameViewModel(
 
     override suspend fun mapEventToState(event: GameEvent): Flow<GameState> = flow {
         when (event) {
+            is GameEvent.CreatingGameEvent -> {
+                val newState = state.copy(isCreatingGame = true)
+                emit(newState)
+            }
             is GameEvent.SetGameActivation -> {
                 val newState = state.copy(isActive = event.active)
                 emit(newState)
@@ -155,6 +160,7 @@ open class GameViewModel(
                     mineCount = gameController.remainingMines(),
                     isGameCompleted = isVictory || isGameOver || isComplete,
                     hasMines = hasMines,
+                    isCreatingGame = false,
                 )
 
                 if (!wasCompleted) {
@@ -250,6 +256,7 @@ open class GameViewModel(
                 isGameCompleted = false,
                 isActive = true,
                 hasMines = false,
+                isCreatingGame = false,
                 useHelp = preferencesRepository.useHelp(),
                 isLoadingMap = true,
                 showTutorial = preferencesRepository.showTutorialButton(),
@@ -292,6 +299,7 @@ open class GameViewModel(
             field = gameController.field(),
             tips = tipRepository.getTotalTips(),
             isGameCompleted = isCompletedWithMistakes(),
+            isCreatingGame = false,
             isActive = !gameController.allMinesFound(),
             hasMines = true,
             useHelp = preferencesRepository.useHelp(),
@@ -335,6 +343,7 @@ open class GameViewModel(
             mineCount = gameController.remainingMines(),
             field = gameController.field(),
             tips = tipRepository.getTotalTips(),
+            isCreatingGame = false,
             isGameCompleted = false,
             isActive = true,
             hasMines = false,
@@ -457,6 +466,10 @@ open class GameViewModel(
     }
 
     open suspend fun onLongClick(index: Int) {
+        if (!gameController.hasMines()) {
+            sendEvent(GameEvent.CreatingGameEvent)
+        }
+
         gameController
             .longPress(index)
             .filterNotNull()
@@ -472,6 +485,10 @@ open class GameViewModel(
     }
 
     open suspend fun onDoubleClick(index: Int) {
+        if (!gameController.hasMines()) {
+            sendEvent(GameEvent.CreatingGameEvent)
+        }
+
         gameController
             .doubleClick(index)
             .filterNotNull()
@@ -483,6 +500,10 @@ open class GameViewModel(
     }
 
     open suspend fun onSingleClick(index: Int) {
+        if (!gameController.hasMines()) {
+            sendEvent(GameEvent.CreatingGameEvent)
+        }
+
         gameController
             .singleClick(index)
             .filterNotNull()
@@ -689,10 +710,6 @@ open class GameViewModel(
         if (rewardedHints > 0) {
             addNewTip(rewardedHints)
         }
-    }
-
-    fun isGameStarted(): Boolean {
-        return gameController.mines().isNotEmpty()
     }
 
     private fun calcRewardHints(): Int {

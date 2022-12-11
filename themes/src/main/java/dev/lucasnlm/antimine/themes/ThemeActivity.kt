@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.themes
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ScrollView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.slider.Slider

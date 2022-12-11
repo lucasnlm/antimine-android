@@ -90,6 +90,7 @@
     <string name="licenses">Licenses</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Loading…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">Connect</string>
     <string name="connecting">Connecting…</string>
     <string name="disconnect">Disconnect</string>

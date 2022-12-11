@@ -36,7 +36,7 @@ class MinefieldCreatorImpl(
         return createMutableEmpty()
     }
 
-    override fun create(safeIndex: Int): List<Area> {
+    override suspend fun create(safeIndex: Int): List<Area> {
         return createMutableEmpty().toMutableList().apply {
             filterNotNeighborsOf(safeIndex)
                 .shuffled(Random(seed))

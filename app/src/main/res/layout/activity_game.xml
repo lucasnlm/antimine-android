@@ -52,7 +52,6 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Action to Reaction" />
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -139,7 +138,7 @@
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:layout_gravity="center"
-                    app:indicatorColor="?attr/colorPrimary"
+                    app:indicatorColor="?colorPrimary"
                     app:indicatorSize="24dp"
                     app:trackThickness="3dp" />
 
@@ -166,11 +165,20 @@
                     android:visibility="gone"
                     tools:text="100"
                     tools:visibility="visible" />
-
             </FrameLayout>
-
         </LinearLayout>
-
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/loadingGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:trackThickness="2dp"
+        android:indeterminate="true"
+        app:hideAnimationBehavior="outward"
+        app:showAnimationBehavior="inward"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
