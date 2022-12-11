@@ -9,12 +9,13 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class StatsViewModelTest : IntentViewModelTest() {
 
     private val listOfStats = listOf(
@@ -53,7 +54,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     }
 
     @Test
-    fun testStatsTotalGames() = runTest(UnconfinedTestDispatcher()) {
+    fun testStatsTotalGames() = runTest {
         val repository = MemoryStatsRepository(listOfStats.toMutableList())
         val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
         viewModel.sendEvent(StatsEvent.LoadStats)
@@ -67,7 +68,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     }
 
     @Test
-    fun testStatsTotalGamesWithBase() = runTest(UnconfinedTestDispatcher()) {
+    fun testStatsTotalGamesWithBase() = runTest {
         val repository = MemoryStatsRepository(listOfStats.toMutableList())
         val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
 
@@ -80,7 +81,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     }
 
     @Test
-    fun testStatsTotalGamesEmpty() = runTest(UnconfinedTestDispatcher()) {
+    fun testStatsTotalGamesEmpty() = runTest {
         val repository = MemoryStatsRepository(mutableListOf())
         val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
         viewModel.sendEvent(StatsEvent.LoadStats)
@@ -100,7 +101,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     }
 
     @Test
-    fun testStatsTotalTime() = runTest(UnconfinedTestDispatcher()) {
+    fun testStatsTotalTime() = runTest {
         val repository = MemoryStatsRepository(listOfStats.toMutableList())
         val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
         viewModel.sendEvent(StatsEvent.LoadStats)
@@ -115,7 +116,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     }
 
     @Test
-    fun testStatsAverageTime() = runTest(UnconfinedTestDispatcher()) {
+    fun testStatsAverageTime() = runTest {
         val repository = MemoryStatsRepository(listOfStats.toMutableList())
         val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
         viewModel.sendEvent(StatsEvent.LoadStats)
@@ -130,7 +131,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     }
 
     @Test
-    fun testStatsShortestTime() = runTest(UnconfinedTestDispatcher()) {
+    fun testStatsShortestTime() = runTest {
         val repository = MemoryStatsRepository(listOfStats.toMutableList())
         val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
         viewModel.sendEvent(StatsEvent.LoadStats)
@@ -145,7 +146,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     }
 
     @Test
-    fun testStatsMines() = runTest(UnconfinedTestDispatcher()) {
+    fun testStatsMines() = runTest {
         val repository = MemoryStatsRepository(listOfStats.toMutableList())
         val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
         viewModel.sendEvent(StatsEvent.LoadStats)
@@ -160,7 +161,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     }
 
     @Test
-    fun testVictory() = runTest(UnconfinedTestDispatcher()) {
+    fun testVictory() = runTest {
         val repository = MemoryStatsRepository(listOfStats.toMutableList())
         val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
         viewModel.sendEvent(StatsEvent.LoadStats)
@@ -175,7 +176,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     }
 
     @Test
-    fun testOpenArea() = runTest(UnconfinedTestDispatcher()) {
+    fun testOpenArea() = runTest {
         val repository = MemoryStatsRepository(listOfStats.toMutableList())
         val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
         viewModel.sendEvent(StatsEvent.LoadStats)
