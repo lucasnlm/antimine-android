@@ -3,17 +3,19 @@ package dev.lucasnlm.antimine.common.level.solver
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreatorImpl
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
 import dev.lucasnlm.antimine.preferences.models.Minefield
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.lang.Thread.sleep
-import kotlin.random.Random
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class LimitedCheckNeighborsSolverTest {
-    private fun handleMinefield(block: (MinefieldHandler) -> Unit) {
+    private fun handleMinefield(block: (MinefieldHandler) -> Unit) = runTest {
         val creator = MinefieldCreatorImpl(
             Minefield(9, 9, 12),
-            Random(200),
+            200
         )
         val minefield = creator.create(40).toMutableList()
         val minefieldHandler = MinefieldHandler(minefield, useQuestionMark = false, individualActions = false)

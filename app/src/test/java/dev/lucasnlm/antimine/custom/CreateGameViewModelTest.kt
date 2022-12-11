@@ -15,6 +15,7 @@ class CreateGameViewModelTest : IntentViewModelTest() {
     fun testInitialValue() {
         val preferenceRepository: IPreferencesRepository = mockk {
             every { customGameMode() } returns Minefield(10, 12, 9)
+            every { forgetCustomSeed() } returns Unit
         }
 
         val result = CreateGameViewModel(preferenceRepository).singleState()
@@ -29,6 +30,7 @@ class CreateGameViewModelTest : IntentViewModelTest() {
         val preferenceRepository: IPreferencesRepository = mockk {
             every { customGameMode() } returns Minefield(10, 12, 9)
             every { updateCustomGameMode(any()) } returns Unit
+            every { forgetCustomSeed() } returns Unit
         }
 
         val result = CreateGameViewModel(preferenceRepository).run {

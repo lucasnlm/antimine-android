@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.core.models.Area
-import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.GameControl
@@ -29,10 +28,9 @@ class GameControllerTest {
             minefield = minefield,
             seed = 200L,
             useSimonTatham = false,
-            difficulty = Difficulty.Standard,
         )
         if (clickOnCreate) {
-            runTest(UnconfinedTestDispatcher()) {
+            runTest {
                 fakeSingleClick(gameController, 10)
             }
         }
@@ -465,14 +463,14 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlDoubleClickOpenMultiple() = runTest(UnconfinedTestDispatcher()) {
+    fun testControlDoubleClickOpenMultiple() = runTest {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
                 fakeDoubleClick(controller, 14)
                 assertFalse(at(14).isCovered)
                 field().filterNeighborsOf(at(14)).forEach {
-                    assertTrue(it.isCovered)
+                    assertFalse(it.isCovered)
                 }
 
                 mines().forEach { fakeSingleClick(controller, it.id) }

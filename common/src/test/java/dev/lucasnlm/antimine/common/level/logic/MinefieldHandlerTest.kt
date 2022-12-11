@@ -2,18 +2,20 @@ package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.core.models.Mark
 import dev.lucasnlm.antimine.preferences.models.Minefield
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import kotlin.random.Random
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class MinefieldHandlerTest {
     private fun handleMinefield(
         useQuestionMark: Boolean = false,
         block: (MinefieldHandler) -> Unit,
-    ) {
-        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
+    ) = runTest {
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), 200)
         val minefield = creator.create(10).toMutableList()
         val minefieldHandler = MinefieldHandler(minefield, useQuestionMark, individualActions = false)
         block(minefieldHandler)

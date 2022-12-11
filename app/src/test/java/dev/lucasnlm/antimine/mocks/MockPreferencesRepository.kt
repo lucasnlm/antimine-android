@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.mocks
 
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
@@ -11,12 +12,18 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun reset() {}
 
+    override fun hasControlCustomizations(): Boolean = false
+
     override fun resetControls() {}
 
     override fun customGameMode(): Minefield = customMinefield
 
     override fun updateCustomGameMode(minefield: Minefield) {
         customMinefield = minefield
+    }
+
+    override fun forgetCustomSeed() {
+        TODO("Not yet implemented")
     }
 
     override fun controlStyle(): ControlStyle = ControlStyle.Standard
@@ -93,9 +100,11 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setExtraTips(tips: Int) {}
 
-    override fun getSwitchControlAction(): Boolean = true
+    override fun getSwitchControlAction(): Action = Action.OpenTile
 
-    override fun setSwitchControl(useOpen: Boolean) {}
+    override fun setSwitchControl(action: Action) {
+        TODO("Not yet implemented")
+    }
 
     override fun useFlagAssistant(): Boolean = false
 
@@ -155,10 +164,6 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setAllowTapOnNumbers(allow: Boolean) { }
 
-    override fun setToggleButtonOnTopBar(enabled: Boolean) { }
-
-    override fun showToggleButtonOnTopBar(): Boolean = false
-
     override fun getHapticFeedbackLevel(): Int = 100
 
     override fun setHapticFeedbackLevel(value: Int) { }
@@ -172,10 +177,6 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun dimNumbers(): Boolean = false
 
     override fun setDimNumbers(value: Boolean) { }
-
-    override fun setLeftHandedMode(enabled: Boolean) {}
-
-    override fun leftHandedMode(): Boolean = false
 
     override fun setRequestDonation(request: Boolean) {}
 
