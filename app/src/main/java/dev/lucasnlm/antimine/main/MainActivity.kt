@@ -69,25 +69,16 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
         }
 
-        continueGame.bind(
-            theme = usingTheme,
-            invert = true,
-            text = R.string.start,
-            onAction = {
+        continueGame.apply {
+            setText(R.string.start)
+            setOnClickListener {
                 viewModel.sendEvent(MainEvent.ContinueGameEvent)
-            },
-        )
+            }
+        }
 
         lifecycleScope.launch {
             savesRepository.fetchCurrentSave()?.let {
-                continueGame.bind(
-                    theme = usingTheme,
-                    invert = true,
-                    text = R.string.continue_game,
-                    onAction = {
-                        viewModel.sendEvent(MainEvent.ContinueGameEvent)
-                    },
-                )
+                continueGame.setText(R.string.continue_game)
             }
         }
 
@@ -105,15 +96,13 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
         }
 
-        newGameShow.bind(
-            theme = usingTheme,
-            text = getString(R.string.new_game),
-            startIcon = R.drawable.more,
-            onAction = {
+        newGameShow.apply {
+            setText(R.string.new_game)
+            setOnClickListener {
                 newGameShow.visibility = View.GONE
                 difficulties.visibility = View.VISIBLE
-            },
-        )
+            }
+        }
 
         difficulties.strokeColor = usingTheme.palette.covered.toAndroidColor()
 
@@ -214,36 +203,21 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             },
         )
 
-        settings.bind(
-            theme = usingTheme,
-            text = R.string.settings,
-            startIcon = R.drawable.settings,
-            onAction = {
-                analyticsManager.sentEvent(Analytics.OpenSettings)
-                val intent = Intent(this, PreferencesActivity::class.java)
-                startActivity(intent)
-            },
-        )
+        settings.setOnClickListener {
+            analyticsManager.sentEvent(Analytics.OpenSettings)
+            val intent = Intent(this, PreferencesActivity::class.java)
+            startActivity(intent)
+        }
 
-        themes.bind(
-            theme = usingTheme,
-            text = R.string.themes,
-            startIcon = R.drawable.themes,
-            onAction = {
-                val intent = Intent(this, ThemeActivity::class.java)
-                startActivity(intent)
-            },
-        )
+        themes.setOnClickListener {
+            val intent = Intent(this, ThemeActivity::class.java)
+            startActivity(intent)
+        }
 
-        controls.bind(
-            theme = usingTheme,
-            text = R.string.control,
-            startIcon = R.drawable.controls,
-            onAction = {
-                analyticsManager.sentEvent(Analytics.OpenControls)
-                viewModel.sendEvent(MainEvent.ShowControlsEvent)
-            },
-        )
+        controls.setOnClickListener {
+            analyticsManager.sentEvent(Analytics.OpenControls)
+            viewModel.sendEvent(MainEvent.ShowControlsEvent)
+        }
 
         removeAds.visibility = View.GONE
         if (featureFlagManager.isFoss) {
@@ -275,62 +249,40 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
 
         if (featureFlagManager.isGameHistoryEnabled) {
-            previousGames.bind(
-                theme = usingTheme,
-                text = R.string.previous_games,
-                startIcon = R.drawable.old_games,
-                onAction = {
-                    analyticsManager.sentEvent(Analytics.OpenSaveHistory)
-                    val intent = Intent(this, HistoryActivity::class.java)
-                    startActivity(intent)
-                },
-            )
+            previousGames.setOnClickListener {
+                analyticsManager.sentEvent(Analytics.OpenSaveHistory)
+                val intent = Intent(this, HistoryActivity::class.java)
+                startActivity(intent)
+            }
         } else {
             previousGames.visibility = View.GONE
         }
 
-        tutorial.bind(
-            theme = usingTheme,
-            text = R.string.tutorial,
-            startIcon = R.drawable.tutorial,
-            onAction = {
+        tutorial.apply {
+            setText(R.string.tutorial)
+            setOnClickListener {
                 analyticsManager.sentEvent(Analytics.OpenTutorial)
                 viewModel.sendEvent(MainEvent.StartTutorialEvent)
-            },
-        )
+            }
+        }
 
-        stats.bind(
-            theme = usingTheme,
-            text = R.string.events,
-            startIcon = R.drawable.stats,
-            onAction = {
-                analyticsManager.sentEvent(Analytics.OpenStats)
-                val intent = Intent(this, StatsActivity::class.java)
-                startActivity(intent)
-            },
-        )
+        stats.setOnClickListener {
+            analyticsManager.sentEvent(Analytics.OpenStats)
+            val intent = Intent(this, StatsActivity::class.java)
+            startActivity(intent)
+        }
 
-        about.bind(
-            theme = usingTheme,
-            text = R.string.about,
-            startIcon = R.drawable.info,
-            onAction = {
-                analyticsManager.sentEvent(Analytics.OpenAbout)
-                val intent = Intent(this, AboutActivity::class.java)
-                startActivity(intent)
-            },
-        )
+        about.setOnClickListener {
+            analyticsManager.sentEvent(Analytics.OpenAbout)
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
+        }
 
         if (playGamesManager.hasGooglePlayGames()) {
-            play_games.bind(
-                theme = usingTheme,
-                text = R.string.google_play_games,
-                startIcon = R.drawable.games_controller,
-                onAction = {
-                    analyticsManager.sentEvent(Analytics.OpenGooglePlayGames)
-                    viewModel.sendEvent(MainEvent.ShowGooglePlayGamesEvent)
-                },
-            )
+            play_games.setOnClickListener {
+                analyticsManager.sentEvent(Analytics.OpenGooglePlayGames)
+                viewModel.sendEvent(MainEvent.ShowGooglePlayGamesEvent)
+            }
         } else {
             play_games.visibility = View.GONE
         }

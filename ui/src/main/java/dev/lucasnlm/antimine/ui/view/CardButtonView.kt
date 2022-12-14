@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.ui.R
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
@@ -85,15 +86,17 @@ class CardButtonView : FrameLayout {
         @DrawableRes endIcon: Int? = null,
     ) {
         val color = if (invert || isFocused) {
-            theme.palette.background.toAndroidColor()
+            MaterialColors.getColor(this, R.attr.colorSurface)
+//            theme.palette.background.toAndroidColor()
         } else {
-            theme.palette.covered.toAndroidColor()
+            MaterialColors.getColor(this, R.attr.colorPrimary)
+//            theme.palette.covered.toAndroidColor()
         }
 
         val backgroundColor = if (invert || isFocused) {
-            theme.palette.covered.toAndroidColor()
+            MaterialColors.getColor(this, R.attr.colorPrimary)
         } else {
-            theme.palette.background.toAndroidColor()
+            MaterialColors.getColor(this, R.attr.colorSurface)
         }
 
         val label = findViewById<TextView>(R.id.label).apply {

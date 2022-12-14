@@ -23,6 +23,26 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="CustomButtonActive" parent="@style/Widget.Material3.Button.IconButton.Filled">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">start</item>
+        <item name="elevation">0dp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="iconPadding">8dp</item>
+        <item name="startIconContentDescription">null</item>
+    </style>
+
+    <style name="CustomButton" parent="@style/Widget.Material3.Button.IconButton">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">start</item>
+        <item name="elevation">0dp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="iconPadding">8dp</item>
+        <item name="startIconContentDescription">null</item>
+    </style>
+
     <style name="AppTheme" parent="Theme.Material3.DynamicColors.DayNight">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
