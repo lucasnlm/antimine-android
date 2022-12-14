@@ -190,6 +190,14 @@ class GameApplicationListener(
         boundMinefield = null
     }
 
+    fun onPause() {
+        GdxLocal.run {
+            zoom = 1.0f
+            animationScale = 1.0f
+            minefieldStage?.setZoom(1.0f)
+        }
+    }
+
     override fun render() {
         super.render()
         val mainFrameBuffer = this.mainFrameBuffer

@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine
 
 import androidx.multidex.MultiDexApplication
 import com.badlogic.gdx.utils.GdxNativesLoader
+import com.google.android.material.color.DynamicColors
 import dev.lucasnlm.antimine.common.level.di.LevelModule
 import dev.lucasnlm.antimine.core.di.CommonModule
 import dev.lucasnlm.antimine.core.models.Analytics
@@ -30,6 +31,8 @@ open class MainApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
+
+        DynamicColors.applyToActivitiesIfAvailable(this)
 
         GdxNativesLoader.load()
 

@@ -91,6 +91,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
         lifecycleScope.launch {
             gameViewModel.saveGame()
         }
+        levelApplicationListener.onPause()
     }
 
     override fun onResume() {

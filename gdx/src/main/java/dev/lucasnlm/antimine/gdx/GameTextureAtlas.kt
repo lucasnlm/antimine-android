@@ -57,7 +57,7 @@ object GameTextureAtlas {
             AtlasNames.question to gridPoint(x = textureSize * 4, y = textureSize * 3),
         )
 
-        val texture = Texture(TextureTheme.stone).apply {
+        val texture = Texture(TextureTheme.standard).apply {
             setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest)
         }
 

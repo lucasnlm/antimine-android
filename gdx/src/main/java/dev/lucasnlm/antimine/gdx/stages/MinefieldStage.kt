@@ -92,13 +92,15 @@ class MinefieldStage(
     fun scaleZoom(zoomMultiplier: Float) {
         (camera as OrthographicCamera).apply {
             val newZoom = if (zoomMultiplier > 1.0) {
-                zoom + 2.0f * Gdx.graphics.deltaTime
+                zoom + 1.0f * Gdx.graphics.deltaTime
             } else {
-                zoom - 2.0f * Gdx.graphics.deltaTime
+                zoom - 1.0f * Gdx.graphics.deltaTime
             }
             zoom = newZoom.coerceIn(0.8f, 3.0f)
-            currentZoom = zoom
-            update(true)
+            if (currentZoom != zoom) {
+                currentZoom = zoom
+                update(true)
+            }
 
             GdxLocal.zoomLevelAlpha = when {
                 zoom < 3.5f -> {
@@ -311,7 +313,7 @@ class MinefieldStage(
     }
 
     override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
-        cameraController.freeTouch(screenX.toFloat(), screenY.toFloat())
+        cameraController.freeTouch()
         return super.touchUp(screenX, screenY, pointer, button)
     }
 

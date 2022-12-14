@@ -33,10 +33,10 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/generalSettings"
-                style="?attr/materialCardViewFilledStyle"
+                style="?materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="28dp"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,14 +49,13 @@
                     android:padding="16dp">
 
                     <com.google.android.material.textview.MaterialTextView
+                        style="@style/SectionTitle"
                         android:id="@+id/generalLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
+                        android:paddingVertical="8dp"
                         android:text="@string/general"
-                        android:textAllCaps="true"
-                        android:textColor="?colorAccent"
-                        android:textStyle="bold"
                         tools:text="General" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -94,10 +93,10 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/gameplaySettings"
-                style="?attr/materialCardViewFilledStyle"
+                style="?materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="28dp"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -110,14 +109,12 @@
                     android:padding="16dp">
 
                     <com.google.android.material.textview.MaterialTextView
+                        style="@style/SectionTitle"
                         android:id="@+id/gameplayLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:paddingVertical="8dp"
                         android:text="@string/settings_gameplay"
-                        android:textAllCaps="true"
-                        android:textColor="?colorAccent"
-                        android:textStyle="bold"
                         tools:text="Gameplay" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -167,9 +164,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
-                        android:text="@string/show_timer" />
+                        android:text="@string/show_clock" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/gameplaySettings"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

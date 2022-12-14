@@ -21,22 +21,23 @@ class PreferencesRepository(
 
     private val listOfSettingsCustoms = listOf(
         PreferenceKeys.PREFERENCE_ASSISTANT,
-        PreferenceKeys.PREFERENCE_VIBRATION,
         PreferenceKeys.PREFERENCE_ANIMATION,
         PreferenceKeys.PREFERENCE_QUESTION_MARK,
-        PreferenceKeys.PREFERENCE_USE_HELP,
+        PreferenceKeys.PREFERENCE_USE_HINT,
         PreferenceKeys.PREFERENCE_SOUND_EFFECTS,
         PreferenceKeys.PREFERENCE_SHOW_WINDOWS,
         PreferenceKeys.PREFERENCE_OPEN_DIRECTLY,
         PreferenceKeys.PREFERENCE_ALLOW_TAP_NUMBER,
-        PreferenceKeys.PREFERENCE_SHOW_TIMER,
+        PreferenceKeys.PREFERENCE_SHOW_CLOCK,
         PreferenceKeys.PREFERENCE_DIM_NUMBERS,
+        PreferenceKeys.PREFERENCE_LET_NUMBERS_AUTO_FLAG,
     )
 
     private fun longPressTimeout() = ViewConfiguration.getLongPressTimeout()
 
     override fun hasCustomizations(): Boolean {
-        return listOfSettingsCustoms.any { preferencesManager.contains(it) }
+        val vibrationDisabled = preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_VIBRATION, true)
+        return listOfSettingsCustoms.any { preferencesManager.contains(it) } || !vibrationDisabled
     }
 
     override fun hasControlCustomizations(): Boolean {
@@ -330,11 +331,11 @@ class PreferencesRepository(
     }
 
     override fun useHelp(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_USE_HELP, true)
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_USE_HINT, true)
     }
 
     override fun setHelp(value: Boolean) {
-        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_USE_HELP, value)
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_USE_HINT, value)
     }
 
     override fun lastHelpUsed(): Long {
@@ -467,10 +468,10 @@ class PreferencesRepository(
     }
 
     override fun showTimer(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_TIMER, true)
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_CLOCK, true)
     }
 
     override fun setTimerVisible(visible: Boolean) {
-        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_TIMER, visible)
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_CLOCK, visible)
     }
 }
