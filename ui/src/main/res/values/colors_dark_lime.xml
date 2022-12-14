@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colors_dark_lime_primary">#C1D02C</color>
+    <color name="colors_dark_lime_onPrimary">#2F3300</color>
+    <color name="colors_dark_lime_primaryContainer">#444B00</color>
+    <color name="colors_dark_lime_onPrimaryContainer">#DDED49</color>
+    <color name="colors_dark_lime_secondary">#C7C9A6</color>
+    <color name="colors_dark_lime_onSecondary">#30321A</color>
+    <color name="colors_dark_lime_secondaryContainer">#46492E</color>
+    <color name="colors_dark_lime_onSecondaryContainer">#E4E5C1</color>
+    <color name="colors_dark_lime_tertiary">#C1D02C</color>
+    <color name="colors_dark_lime_onTertiary">#2F3300</color>
+    <color name="colors_dark_lime_tertiaryContainer">#444B00</color>
+    <color name="colors_dark_lime_onTertiaryContainer">#DDED49</color>
+    <color name="colors_dark_lime_error">#FFB4AB</color>
+    <color name="colors_dark_lime_errorContainer">#93000A</color>
+    <color name="colors_dark_lime_onError">#690005</color>
+    <color name="colors_dark_lime_onErrorContainer">#FFDAD6</color>
+    <color name="colors_dark_lime_background">#1C1C17</color>
+    <color name="colors_dark_lime_onBackground">#E5E2DA</color>
+    <color name="colors_dark_lime_surface">#1C1C17</color>
+    <color name="colors_dark_lime_onSurface">#E5E2DA</color>
+    <color name="colors_dark_lime_surfaceVariant">#47483B</color>
+    <color name="colors_dark_lime_onSurfaceVariant">#C8C7B7</color>
+    <color name="colors_dark_lime_outline">#929282</color>
+    <color name="colors_dark_lime_inverseOnSurface">#1C1C17</color>
+    <color name="colors_dark_lime_inverseSurface">#E5E2DA</color>
+    <color name="colors_dark_lime_inversePrimary">#5B6300</color>
+    <color name="colors_dark_lime_shadow">#000000</color>
+    <color name="colors_dark_lime_surfaceTint">#C1D02C</color>
+    <color name="colors_dark_lime_outlineVariant">#47483B</color>
+    <color name="colors_dark_lime_scrim">#000000</color>
+</resources>

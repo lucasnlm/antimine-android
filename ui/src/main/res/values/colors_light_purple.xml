@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colors_light_purple_primary">#6C45C0</color>
+    <color name="colors_light_purple_onPrimary">#FFFFFF</color>
+    <color name="colors_light_purple_primaryContainer">#EADDFF</color>
+    <color name="colors_light_purple_onPrimaryContainer">#24005B</color>
+    <color name="colors_light_purple_secondary">#625B70</color>
+    <color name="colors_light_purple_onSecondary">#FFFFFF</color>
+    <color name="colors_light_purple_secondaryContainer">#E9DEF8</color>
+    <color name="colors_light_purple_onSecondaryContainer">#1E192B</color>
+    <color name="colors_light_purple_tertiary">#6C45C0</color>
+    <color name="colors_light_purple_onTertiary">#FFFFFF</color>
+    <color name="colors_light_purple_tertiaryContainer">#EADDFF</color>
+    <color name="colors_light_purple_onTertiaryContainer">#24005B</color>
+    <color name="colors_light_purple_error">#BA1A1A</color>
+    <color name="colors_light_purple_errorContainer">#FFDAD6</color>
+    <color name="colors_light_purple_onError">#FFFFFF</color>
+    <color name="colors_light_purple_onErrorContainer">#410002</color>
+    <color name="colors_light_purple_background">#FFFBFF</color>
+    <color name="colors_light_purple_onBackground">#1C1B1E</color>
+    <color name="colors_light_purple_surface">#FFFBFF</color>
+    <color name="colors_light_purple_onSurface">#1C1B1E</color>
+    <color name="colors_light_purple_surfaceVariant">#E7E0EB</color>
+    <color name="colors_light_purple_onSurfaceVariant">#49454E</color>
+    <color name="colors_light_purple_outline">#7A757F</color>
+    <color name="colors_light_purple_inverseOnSurface">#F5EFF4</color>
+    <color name="colors_light_purple_inverseSurface">#323033</color>
+    <color name="colors_light_purple_inversePrimary">#D1BCFF</color>
+    <color name="colors_light_purple_shadow">#000000</color>
+    <color name="colors_light_purple_surfaceTint">#6C45C0</color>
+    <color name="colors_light_purple_outlineVariant">#CBC4CF</color>
+    <color name="colors_light_purple_scrim">#000000</color>
+</resources>

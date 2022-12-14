@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colors_dark_pink_primary">#FFB0CD</color>
+    <color name="colors_dark_pink_onPrimary">#5D1137</color>
+    <color name="colors_dark_pink_primaryContainer">#7A294E</color>
+    <color name="colors_dark_pink_onPrimaryContainer">#FFD9E4</color>
+    <color name="colors_dark_pink_secondary">#E2BDC8</color>
+    <color name="colors_dark_pink_onSecondary">#412932</color>
+    <color name="colors_dark_pink_secondaryContainer">#5A3F49</color>
+    <color name="colors_dark_pink_onSecondaryContainer">#FFD9E4</color>
+    <color name="colors_dark_pink_tertiary">#FFB0CD</color>
+    <color name="colors_dark_pink_onTertiary">#5D1137</color>
+    <color name="colors_dark_pink_tertiaryContainer">#7A294E</color>
+    <color name="colors_dark_pink_onTertiaryContainer">#FFD9E4</color>
+    <color name="colors_dark_pink_error">#FFB4AB</color>
+    <color name="colors_dark_pink_errorContainer">#93000A</color>
+    <color name="colors_dark_pink_onError">#690005</color>
+    <color name="colors_dark_pink_onErrorContainer">#FFDAD6</color>
+    <color name="colors_dark_pink_background">#201A1C</color>
+    <color name="colors_dark_pink_onBackground">#EBE0E2</color>
+    <color name="colors_dark_pink_surface">#201A1C</color>
+    <color name="colors_dark_pink_onSurface">#EBE0E2</color>
+    <color name="colors_dark_pink_surfaceVariant">#514347</color>
+    <color name="colors_dark_pink_onSurfaceVariant">#D5C2C7</color>
+    <color name="colors_dark_pink_outline">#9D8C91</color>
+    <color name="colors_dark_pink_inverseOnSurface">#201A1C</color>
+    <color name="colors_dark_pink_inverseSurface">#EBE0E2</color>
+    <color name="colors_dark_pink_inversePrimary">#974066</color>
+    <color name="colors_dark_pink_shadow">#000000</color>
+    <color name="colors_dark_pink_surfaceTint">#FFB0CD</color>
+    <color name="colors_dark_pink_outlineVariant">#514347</color>
+    <color name="colors_dark_pink_scrim">#000000</color>
+</resources>

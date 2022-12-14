@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colors_dark_orange_primary">#FFB77B</color>
+    <color name="colors_dark_orange_onPrimary">#4C2700</color>
+    <color name="colors_dark_orange_primaryContainer">#6D3A00</color>
+    <color name="colors_dark_orange_onPrimaryContainer">#FFDCC2</color>
+    <color name="colors_dark_orange_secondary">#E3C0A5</color>
+    <color name="colors_dark_orange_onSecondary">#412C19</color>
+    <color name="colors_dark_orange_secondaryContainer">#5A422E</color>
+    <color name="colors_dark_orange_onSecondaryContainer">#FFDCC2</color>
+    <color name="colors_dark_orange_tertiary">#FFB77B</color>
+    <color name="colors_dark_orange_onTertiary">#4C2700</color>
+    <color name="colors_dark_orange_tertiaryContainer">#6D3A00</color>
+    <color name="colors_dark_orange_onTertiaryContainer">#FFDCC2</color>
+    <color name="colors_dark_orange_error">#FFB4AB</color>
+    <color name="colors_dark_orange_errorContainer">#93000A</color>
+    <color name="colors_dark_orange_onError">#690005</color>
+    <color name="colors_dark_orange_onErrorContainer">#FFDAD6</color>
+    <color name="colors_dark_orange_background">#201B17</color>
+    <color name="colors_dark_orange_onBackground">#ECE0DA</color>
+    <color name="colors_dark_orange_surface">#201B17</color>
+    <color name="colors_dark_orange_onSurface">#ECE0DA</color>
+    <color name="colors_dark_orange_surfaceVariant">#51443B</color>
+    <color name="colors_dark_orange_onSurfaceVariant">#D6C3B6</color>
+    <color name="colors_dark_orange_outline">#9E8E82</color>
+    <color name="colors_dark_orange_inverseOnSurface">#201B17</color>
+    <color name="colors_dark_orange_inverseSurface">#ECE0DA</color>
+    <color name="colors_dark_orange_inversePrimary">#8F4E00</color>
+    <color name="colors_dark_orange_shadow">#000000</color>
+    <color name="colors_dark_orange_surfaceTint">#FFB77B</color>
+    <color name="colors_dark_orange_outlineVariant">#51443B</color>
+    <color name="colors_dark_orange_scrim">#000000</color>
+</resources>

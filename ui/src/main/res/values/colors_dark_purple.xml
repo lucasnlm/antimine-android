@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colors_dark_purple_primary">#D1BCFF</color>
+    <color name="colors_dark_purple_onPrimary">#3D0090</color>
+    <color name="colors_dark_purple_primaryContainer">#5429A7</color>
+    <color name="colors_dark_purple_onPrimaryContainer">#EADDFF</color>
+    <color name="colors_dark_purple_secondary">#CCC2DB</color>
+    <color name="colors_dark_purple_onSecondary">#332D41</color>
+    <color name="colors_dark_purple_secondaryContainer">#4A4358</color>
+    <color name="colors_dark_purple_onSecondaryContainer">#E9DEF8</color>
+    <color name="colors_dark_purple_tertiary">#D1BCFF</color>
+    <color name="colors_dark_purple_onTertiary">#3D0090</color>
+    <color name="colors_dark_purple_tertiaryContainer">#5429A7</color>
+    <color name="colors_dark_purple_onTertiaryContainer">#EADDFF</color>
+    <color name="colors_dark_purple_error">#FFB4AB</color>
+    <color name="colors_dark_purple_errorContainer">#93000A</color>
+    <color name="colors_dark_purple_onError">#690005</color>
+    <color name="colors_dark_purple_onErrorContainer">#FFDAD6</color>
+    <color name="colors_dark_purple_background">#1C1B1E</color>
+    <color name="colors_dark_purple_onBackground">#E6E1E6</color>
+    <color name="colors_dark_purple_surface">#1C1B1E</color>
+    <color name="colors_dark_purple_onSurface">#E6E1E6</color>
+    <color name="colors_dark_purple_surfaceVariant">#49454E</color>
+    <color name="colors_dark_purple_onSurfaceVariant">#CBC4CF</color>
+    <color name="colors_dark_purple_outline">#948F99</color>
+    <color name="colors_dark_purple_inverseOnSurface">#1C1B1E</color>
+    <color name="colors_dark_purple_inverseSurface">#E6E1E6</color>
+    <color name="colors_dark_purple_inversePrimary">#6C45C0</color>
+    <color name="colors_dark_purple_shadow">#000000</color>
+    <color name="colors_dark_purple_surfaceTint">#D1BCFF</color>
+    <color name="colors_dark_purple_outlineVariant">#49454E</color>
+    <color name="colors_dark_purple_scrim">#000000</color>
+</resources>

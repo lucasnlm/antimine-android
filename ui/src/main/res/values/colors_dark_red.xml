@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colors_dark_red_primary">#FFB4A9</color>
+    <color name="colors_dark_red_onPrimary">#690002</color>
+    <color name="colors_dark_red_primaryContainer">#930005</color>
+    <color name="colors_dark_red_onPrimaryContainer">#FFDAD5</color>
+    <color name="colors_dark_red_secondary">#E7BDB7</color>
+    <color name="colors_dark_red_onSecondary">#442926</color>
+    <color name="colors_dark_red_secondaryContainer">#5D3F3B</color>
+    <color name="colors_dark_red_onSecondaryContainer">#FFDAD5</color>
+    <color name="colors_dark_red_tertiary">#FFB4A9</color>
+    <color name="colors_dark_red_onTertiary">#690002</color>
+    <color name="colors_dark_red_tertiaryContainer">#930005</color>
+    <color name="colors_dark_red_onTertiaryContainer">#FFDAD5</color>
+    <color name="colors_dark_red_error">#FFB4AB</color>
+    <color name="colors_dark_red_errorContainer">#93000A</color>
+    <color name="colors_dark_red_onError">#690005</color>
+    <color name="colors_dark_red_onErrorContainer">#FFDAD6</color>
+    <color name="colors_dark_red_background">#201A19</color>
+    <color name="colors_dark_red_onBackground">#EDE0DE</color>
+    <color name="colors_dark_red_surface">#201A19</color>
+    <color name="colors_dark_red_onSurface">#EDE0DE</color>
+    <color name="colors_dark_red_surfaceVariant">#534341</color>
+    <color name="colors_dark_red_onSurfaceVariant">#D8C2BE</color>
+    <color name="colors_dark_red_outline">#A08C89</color>
+    <color name="colors_dark_red_inverseOnSurface">#201A19</color>
+    <color name="colors_dark_red_inverseSurface">#EDE0DE</color>
+    <color name="colors_dark_red_inversePrimary">#BB1614</color>
+    <color name="colors_dark_red_shadow">#000000</color>
+    <color name="colors_dark_red_surfaceTint">#FFB4A9</color>
+    <color name="colors_dark_red_outlineVariant">#534341</color>
+    <color name="colors_dark_red_scrim">#000000</color>
+</resources>

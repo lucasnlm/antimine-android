@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colors_dark_primary">#D0BCFF</color>
+    <color name="colors_dark_onPrimary">#381E72</color>
+    <color name="colors_dark_primaryContainer">#4F378B</color>
+    <color name="colors_dark_onPrimaryContainer">#EADDFF</color>
+    <color name="colors_dark_secondary">#CCC2DC</color>
+    <color name="colors_dark_onSecondary">#332D41</color>
+    <color name="colors_dark_secondaryContainer">#4A4458</color>
+    <color name="colors_dark_onSecondaryContainer">#E8DEF8</color>
+    <color name="colors_dark_tertiary">#EFB8C8</color>
+    <color name="colors_dark_onTertiary">#492532</color>
+    <color name="colors_dark_tertiaryContainer">#633B48</color>
+    <color name="colors_dark_onTertiaryContainer">#FFD8E4</color>
+    <color name="colors_dark_error">#F2B8B5</color>
+    <color name="colors_dark_onError">#601410</color>
+    <color name="colors_dark_errorContainer">#8C1D18</color>
+    <color name="colors_dark_onErrorContainer">#F9DEDC</color>
+    <color name="colors_dark_outline">#938F99</color>
+    <color name="colors_dark_background">#1C1B1F</color>
+    <color name="colors_dark_onBackground">#E6E1E5</color>
+    <color name="colors_dark_surface">#1C1B1F</color>
+    <color name="colors_dark_onSurface">#E6E1E5</color>
+    <color name="colors_dark_surfaceVariant">#49454F</color>
+    <color name="colors_dark_onSurfaceVariant">#CAC4D0</color>
+    <color name="colors_dark_inverseSurface">#E6E1E5</color>
+    <color name="colors_dark_inverseOnSurface">#313033</color>
+    <color name="colors_dark_inversePrimary">#6750A4</color>
+    <color name="colors_dark_shadow">#000000</color>
+    <color name="colors_dark_surfaceTint">#D0BCFF</color>
+    <color name="colors_dark_outlineVariant">#49454F</color>
+    <color name="colors_dark_scrim">#000000</color>
+</resources>
