@@ -31,7 +31,6 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ext.ThematicActivity
-import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager
@@ -96,112 +95,43 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
         }
 
-        newGameShow.apply {
-            setText(R.string.new_game)
-            setOnClickListener {
-                newGameShow.visibility = View.GONE
-                difficulties.visibility = View.VISIBLE
+        newGameShow.setOnClickListener {
+            newGameShow.visibility = View.GONE
+            difficulties.visibility = View.VISIBLE
+        }
+
+        mapOf(
+            standardSize to Difficulty.Standard,
+            fixedSizeSize to Difficulty.FixedSize,
+            beginnerSize to Difficulty.Beginner,
+            intermediateSize to Difficulty.Intermediate,
+            expertSize to Difficulty.Expert,
+            masterSize to Difficulty.Master,
+            legendSize to Difficulty.Legend,
+        ).forEach {
+            it.key.text = getDifficultyExtra(it.value)
+        }
+
+        mapOf(
+            startStandard to Difficulty.Standard,
+            startFixedSize to Difficulty.FixedSize,
+            startBeginner to Difficulty.Beginner,
+            startIntermediate to Difficulty.Intermediate,
+            startExpert to Difficulty.Expert,
+            startMaster to Difficulty.Master,
+            startLegend to Difficulty.Legend,
+        ).forEach { view ->
+            view.key.setOnClickListener {
+                viewModel.sendEvent(
+                    MainEvent.StartNewGameEvent(difficulty = view.value),
+                )
             }
         }
 
-        difficulties.strokeColor = usingTheme.palette.covered.toAndroidColor()
-
-        startStandard.setRadius(5f)
-        startStandard.bind(
-            theme = usingTheme,
-            text = getString(R.string.progressive),
-            extra = getDifficultyExtra(Difficulty.Standard),
-            onAction = {
-                viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Standard),
-                )
-            },
-        )
-
-        startBeginner.setRadius(5f)
-        startBeginner.bind(
-            theme = usingTheme,
-            text = getString(R.string.beginner),
-            extra = getDifficultyExtra(Difficulty.Beginner),
-            onAction = {
-                viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Beginner),
-                )
-            },
-        )
-
-        startIntermediate.setRadius(5f)
-        startIntermediate.bind(
-            theme = usingTheme,
-            text = getString(R.string.intermediate),
-            extra = getDifficultyExtra(Difficulty.Intermediate),
-            onAction = {
-                viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Intermediate),
-                )
-            },
-        )
-
-        startExpert.setRadius(5f)
-        startExpert.bind(
-            theme = usingTheme,
-            text = getString(R.string.expert),
-            extra = getDifficultyExtra(Difficulty.Expert),
-            onAction = {
-                viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Expert),
-                )
-            },
-        )
-
-        startMaster.setRadius(5f)
-        startMaster.bind(
-            theme = usingTheme,
-            text = getString(R.string.master),
-            extra = getDifficultyExtra(Difficulty.Master),
-            onAction = {
-                viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Master),
-                )
-            },
-        )
-
-        startLegend.setRadius(5f)
-        startLegend.bind(
-            theme = usingTheme,
-            text = getString(R.string.legend),
-            extra = getDifficultyExtra(Difficulty.Legend),
-            onAction = {
-                viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Legend),
-                )
-            },
-        )
-
-        difficultyDivider1.setBackgroundColor(usingTheme.palette.covered.toAndroidColor())
-        difficultyDivider2.setBackgroundColor(usingTheme.palette.covered.toAndroidColor())
-
-        startFixedSize.setRadius(5f)
-        startFixedSize.bind(
-            theme = usingTheme,
-            text = getString(R.string.fixed_size),
-            extra = getDifficultyExtra(Difficulty.FixedSize),
-            onAction = {
-                viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.FixedSize),
-                )
-            },
-        )
-
-        startCustom.setRadius(5f)
-        startCustom.bind(
-            theme = usingTheme,
-            text = getString(R.string.custom),
-            onAction = {
-                analyticsManager.sentEvent(Analytics.OpenCustom)
-                viewModel.sendEvent(MainEvent.ShowCustomDifficultyDialogEvent)
-            },
-        )
+        startCustom.setOnClickListener {
+            analyticsManager.sentEvent(Analytics.OpenCustom)
+            viewModel.sendEvent(MainEvent.ShowCustomDifficultyDialogEvent)
+        }
 
         settings.setOnClickListener {
             analyticsManager.sentEvent(Analytics.OpenSettings)
@@ -219,20 +149,16 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             viewModel.sendEvent(MainEvent.ShowControlsEvent)
         }
 
-        removeAds.visibility = View.GONE
         if (featureFlagManager.isFoss) {
+            removeAdsRoot.visibility = View.VISIBLE
             removeAds.apply {
-                visibility = View.VISIBLE
-                bind(
-                    theme = usingTheme,
-                    text = getString(R.string.donation),
-                    startIcon = R.drawable.remove_ads,
-                    onAction = {
-                        lifecycleScope.launch {
-                            billingManager.charge(this@MainActivity)
-                        }
-                    },
-                )
+                setOnClickListener {
+                    lifecycleScope.launch {
+                        billingManager.charge(this@MainActivity)
+                    }
+                }
+                text = getString(R.string.donation)
+                setIconResource(R.drawable.remove_ads)
             }
         } else {
             if (!preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
@@ -434,20 +360,23 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     }
 
     private fun bindRemoveAds(price: String? = null, showOffer: Boolean = false) {
+        removeAdsRoot.visibility = View.VISIBLE
         removeAds.apply {
-            visibility = View.VISIBLE
-            bind(
-                theme = usingTheme,
-                text = getString(R.string.remove_ad),
-                startIcon = R.drawable.remove_ads,
-                price = price,
-                showOffer = showOffer,
-                onAction = {
-                    lifecycleScope.launch {
-                        billingManager.charge(this@MainActivity)
-                    }
-                },
-            )
+            setOnClickListener {
+                lifecycleScope.launch {
+                    billingManager.charge(this@MainActivity)
+                }
+            }
+            setText(R.string.remove_ad)
+
+            price?.let {
+                priceText.text = it
+                priceText.visibility = View.VISIBLE
+            }
+
+            if (showOffer) {
+                priceOff.visibility = View.VISIBLE
+            }
         }
     }
 

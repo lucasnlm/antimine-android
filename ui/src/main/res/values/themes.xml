@@ -43,6 +43,14 @@
         <item name="startIconContentDescription">null</item>
     </style>
 
+    <style name="CustomButtonFlat" parent="@style/Widget.Material3.Button.TextButton">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">start</item>
+        <item name="elevation">0dp</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="startIconContentDescription">null</item>
+    </style>
+
     <style name="AppTheme" parent="Theme.Material3.DynamicColors.DayNight">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
