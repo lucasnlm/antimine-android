@@ -199,7 +199,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="start|center_vertical"
                             android:paddingHorizontal="18dp"
-                            android:text="@string/intermediate" />
+                            android:text="@string/expert" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/expertSize"
@@ -224,7 +224,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="start|center_vertical"
                             android:paddingHorizontal="18dp"
-                            android:text="@string/intermediate" />
+                            android:text="@string/master" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/masterSize"
@@ -249,7 +249,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="start|center_vertical"
                             android:paddingHorizontal="18dp"
-                            android:text="@string/intermediate" />
+                            android:text="@string/legend" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/legendSize"
@@ -274,6 +274,7 @@
                         style="@style/CustomButtonFlat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
                         android:paddingHorizontal="18dp"
                         android:text="@string/custom" />
 
