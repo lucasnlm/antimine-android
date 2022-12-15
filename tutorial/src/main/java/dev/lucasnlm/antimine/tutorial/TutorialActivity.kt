@@ -22,22 +22,16 @@ class TutorialActivity : ThematicActivity(R.layout.tutorial_activity) {
 
         bindToolbar(toolbar)
 
-        playGame.bind(
-            theme = usingTheme,
-            text = R.string.start,
-            invert = true,
-            centralize = true,
-            onAction = {
-                finish()
-                val intent = Intent(this, Class.forName("dev.lucasnlm.antimine.GameActivity")).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    val bundle = Bundle().apply {
-                        putSerializable("difficulty", Difficulty.Beginner)
-                    }
-                    putExtras(bundle)
+        playGame.setOnClickListener {
+            finish()
+            val intent = Intent(this, Class.forName("dev.lucasnlm.antimine.GameActivity")).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                val bundle = Bundle().apply {
+                    putSerializable("difficulty", Difficulty.Beginner)
                 }
-                startActivity(intent)
-            },
-        )
+                putExtras(bundle)
+            }
+            startActivity(intent)
+        }
     }
 }

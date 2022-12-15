@@ -167,12 +167,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/scrollView" />
 
-    <dev.lucasnlm.antimine.ui.view.CardButtonView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/playGame"
+        style="@style/CustomButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
+        android:gravity="center"
         android:paddingVertical="16dp"
+        android:text="@string/start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
