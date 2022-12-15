@@ -68,25 +68,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/version_layout">
 
-        <dev.lucasnlm.antimine.ui.view.CardButtonView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/tutorial"
+            style="@style/CustomButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tutorial" />
 
-        <dev.lucasnlm.antimine.ui.view.CardButtonView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/thirdsParties"
+            style="@style/CustomButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/licenses" />
 
-        <dev.lucasnlm.antimine.ui.view.CardButtonView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/translation"
+            style="@style/CustomButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/translation" />
 
-        <dev.lucasnlm.antimine.ui.view.CardButtonView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/sourceCode"
+            style="@style/CustomButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/source_code" />
 
     </LinearLayout>
 

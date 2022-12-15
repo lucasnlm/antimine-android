@@ -8,14 +8,11 @@ import androidx.fragment.app.Fragment
 import dev.lucasnlm.antimine.about.R
 import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.fragment_about_info.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
     private val aboutViewModel: AboutViewModel by sharedViewModel()
-    private val themeRepository: IThemeRepository by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,41 +32,21 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
             }
         }
 
-        tutorial.bind(
-            theme = themeRepository.getTheme(),
-            text = R.string.tutorial,
-            centralize = true,
-            onAction = {
-                aboutViewModel.sendEvent(AboutEvent.Tutorial)
-            },
-        )
+        tutorial.setOnClickListener {
+            aboutViewModel.sendEvent(AboutEvent.Tutorial)
+        }
 
-        thirdsParties.bind(
-            theme = themeRepository.getTheme(),
-            text = R.string.show_licenses,
-            centralize = true,
-            onAction = {
-                aboutViewModel.sendEvent(AboutEvent.ThirdPartyLicenses)
-            },
-        )
+        thirdsParties.setOnClickListener {
+            aboutViewModel.sendEvent(AboutEvent.ThirdPartyLicenses)
+        }
 
-        translation.bind(
-            theme = themeRepository.getTheme(),
-            text = R.string.translation,
-            centralize = true,
-            onAction = {
-                aboutViewModel.sendEvent(AboutEvent.Translators)
-            },
-        )
+        translation.setOnClickListener {
+            aboutViewModel.sendEvent(AboutEvent.Translators)
+        }
 
-        sourceCode.bind(
-            theme = themeRepository.getTheme(),
-            text = R.string.source_code,
-            centralize = true,
-            onAction = {
-                aboutViewModel.sendEvent(AboutEvent.SourceCode)
-            },
-        )
+        sourceCode.setOnClickListener {
+            aboutViewModel.sendEvent(AboutEvent.SourceCode)
+        }
     }
 
     companion object {
