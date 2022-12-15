@@ -135,4 +135,7 @@ interface IPreferencesRepository {
 
     fun showTimer(): Boolean
     fun setTimerVisible(visible: Boolean)
+
+    fun showContinueGame(): Boolean
+    fun setContinueGameLabel(value: Boolean)
 }

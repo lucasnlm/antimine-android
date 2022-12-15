@@ -474,4 +474,12 @@ class PreferencesRepository(
     override fun setTimerVisible(visible: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_CLOCK, visible)
     }
+
+    override fun showContinueGame(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_CONTINUE, false)
+    }
+
+    override fun setContinueGameLabel(value: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_CONTINUE, value)
+    }
 }

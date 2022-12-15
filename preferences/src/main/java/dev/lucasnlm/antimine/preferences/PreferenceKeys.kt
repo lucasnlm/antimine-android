@@ -47,4 +47,5 @@ object PreferenceKeys {
     const val PREFERENCE_REQUEST_DONATION = "preference_request_donation"
     const val PREFERENCE_LET_NUMBERS_AUTO_FLAG = "preference_let_numbers_flag"
     const val PREFERENCE_SHOW_CLOCK = "preference_show_clock"
+    const val PREFERENCE_SHOW_CONTINUE = "preference_show_continue"
 }

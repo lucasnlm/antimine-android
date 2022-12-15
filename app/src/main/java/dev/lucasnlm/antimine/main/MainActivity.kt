@@ -69,15 +69,23 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
 
         continueGame.apply {
-            setText(R.string.start)
+            if (preferencesRepository.showContinueGame()) {
+                setText(R.string.continue_game)
+            } else {
+                setText(R.string.start)
+            }
+
             setOnClickListener {
                 viewModel.sendEvent(MainEvent.ContinueGameEvent)
             }
         }
 
-        lifecycleScope.launch {
-            savesRepository.fetchCurrentSave()?.let {
-                continueGame.setText(R.string.continue_game)
+        if (!preferencesRepository.showContinueGame()) {
+            lifecycleScope.launch {
+                savesRepository.fetchCurrentSave()?.let {
+                    preferencesRepository.setContinueGameLabel(true)
+                    continueGame.setText(R.string.continue_game)
+                }
             }
         }
 

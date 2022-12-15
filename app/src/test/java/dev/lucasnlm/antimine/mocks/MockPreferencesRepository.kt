@@ -80,7 +80,7 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun useSimonTathamAlgorithm(): Boolean = true
 
-    override fun setSimonTathamAlgorithm(enabled: Boolean) { }
+    override fun setSimonTathamAlgorithm(enabled: Boolean) {}
 
     override fun lastHelpUsed(): Long = 0L
 
@@ -146,9 +146,9 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setUserId(userId: String) {}
 
-    override fun addUnlockedTheme(id: Int) { }
+    override fun addUnlockedTheme(id: Int) {}
 
-    override fun setUnlockedThemes(themes: String) { }
+    override fun setUnlockedThemes(themes: String) {}
 
     override fun getUnlockedThemes(): List<Int> = listOf()
 
@@ -158,25 +158,25 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun showTutorialDialog(): Boolean = false
 
-    override fun setTutorialDialog(show: Boolean) { }
+    override fun setTutorialDialog(show: Boolean) {}
 
     override fun allowTapOnNumbers(): Boolean = true
 
-    override fun setAllowTapOnNumbers(allow: Boolean) { }
+    override fun setAllowTapOnNumbers(allow: Boolean) {}
 
     override fun getHapticFeedbackLevel(): Int = 100
 
-    override fun setHapticFeedbackLevel(value: Int) { }
+    override fun setHapticFeedbackLevel(value: Int) {}
 
-    override fun resetHapticFeedbackLevel() { }
+    override fun resetHapticFeedbackLevel() {}
 
     override fun showTutorialButton(): Boolean = true
 
-    override fun setShowTutorialButton(value: Boolean) { }
+    override fun setShowTutorialButton(value: Boolean) {}
 
     override fun dimNumbers(): Boolean = false
 
-    override fun setDimNumbers(value: Boolean) { }
+    override fun setDimNumbers(value: Boolean) {}
 
     override fun setRequestDonation(request: Boolean) {}
 
@@ -184,7 +184,7 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun letNumbersAutoFlag(): Boolean = true
 
-    override fun setNumbersAutoFlag(allow: Boolean) { }
+    override fun setNumbersAutoFlag(allow: Boolean) {}
 
     override fun defaultSquareRadius(): Int = 0
 
@@ -195,4 +195,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun showTimer(): Boolean = true
 
     override fun setTimerVisible(visible: Boolean) {}
+
+    override fun showContinueGame() = true
+
+    override fun setContinueGameLabel(value: Boolean) {}
 }
