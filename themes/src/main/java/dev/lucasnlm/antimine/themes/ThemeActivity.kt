@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.slider.Slider
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
@@ -13,7 +12,6 @@ import dev.lucasnlm.antimine.themes.view.ThemeAdapter
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.ThematicActivity
-import dev.lucasnlm.antimine.ui.model.TopBarAction
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import dev.lucasnlm.external.IAdsManager
@@ -25,7 +23,7 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChangeListener {
+class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
     private val themeViewModel by viewModel<ThemeViewModel>()
 
     private val themeRepository: IThemeRepository by inject()
@@ -35,18 +33,6 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
     private val billingManager: IBillingManager by inject()
     private val adsManager: IAdsManager by inject()
     private val analyticsManager: IAnalyticsManager by inject()
-
-    private val undoThemeAction = TopBarAction(
-        name = R.string.delete_all,
-        icon = R.drawable.undo,
-        action = {
-            themeViewModel.sendEvent(ThemeEvent.ResetTheme)
-            lifecycleScope.launch {
-                refreshForm()
-            }
-            setTopBarAction(null)
-        },
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,10 +76,6 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
                 }
             }
         }
-
-        squareSize.addOnChangeListener(this)
-        squareDivider.addOnChangeListener(this)
-        squareRadius.addOnChangeListener(this)
 
         lifecycleScope.launchWhenCreated {
             val size = dimensionRepository.displaySize()
@@ -146,8 +128,6 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
                     }
                 }
             }
-
-            refreshForm()
         }
     }
 
@@ -160,32 +140,6 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme), Slider.OnChange
         super.onRestoreInstanceState(savedInstanceState)
         savedInstanceState.getIntArray(SCROLL_VIEW_STATE)?.let { position ->
             scrollView.post { scrollView.scrollTo(position[0], position[1]) }
-        }
-    }
-
-    private fun refreshForm() {
-        val state = themeViewModel.singleState()
-        squareSize.value = (state.squareSize / squareSize.stepSize).toInt() * squareSize.stepSize
-        squareDivider.value = (state.squareDivider / squareDivider.stepSize).toInt() * squareDivider.stepSize
-        squareRadius.value = (state.squareRadius / squareRadius.stepSize).toInt() * squareRadius.stepSize
-        setTopBarAction(if (state.hasChangedSize) undoThemeAction else null)
-    }
-
-    override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
-        if (fromUser) {
-            val progress = value.toInt()
-            when (slider) {
-                squareSize -> {
-                    themeViewModel.sendEvent(ThemeEvent.SetSquareSize(progress))
-                }
-                squareDivider -> {
-                    themeViewModel.sendEvent(ThemeEvent.SetSquareDivider(progress))
-                }
-                squareRadius -> {
-                    themeViewModel.sendEvent(ThemeEvent.SetSquareRadius(progress))
-                }
-            }
-            setTopBarAction(undoThemeAction)
         }
     }
 
