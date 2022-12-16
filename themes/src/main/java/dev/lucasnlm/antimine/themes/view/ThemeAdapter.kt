@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.R
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
@@ -70,7 +71,12 @@ class ThemeAdapter(
             }
 
             cardTheme.apply {
-                strokeColor = currentTheme.palette.background.toInvertedAndroidColor(alpha)
+                setStrokeColor(
+                    MaterialColors.getColorStateListOrNull(
+                        context,
+                        R.attr.backgroundColor,
+                    )
+                )
                 setOnClickListener {
                     if (preferencesRepository.isPremiumEnabled()) {
                         onSelectTheme(theme)
