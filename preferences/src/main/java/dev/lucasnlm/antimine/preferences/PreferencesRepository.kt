@@ -236,6 +236,14 @@ class PreferencesRepository(
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_CUSTOM_THEME, themeId.toInt())
     }
 
+    override fun skinId(): Long {
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_CUSTOM_SKIN, 0).toLong()
+    }
+
+    override fun useSkin(skinId: Long) {
+        preferencesManager.putInt(PreferenceKeys.PREFERENCE_CUSTOM_SKIN, skinId.toInt())
+    }
+
     override fun updateStatsBase(statsBase: Int) {
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_STATS_BASE, statsBase)
     }

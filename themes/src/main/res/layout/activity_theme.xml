@@ -34,7 +34,7 @@
             android:paddingVertical="8dp">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/themes"
+                android:id="@+id/themesCard"
                 style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 android:layout_marginVertical="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/themes" />
+                app:layout_constraintTop_toBottomOf="@+id/themesCard" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/control_styles"
@@ -74,7 +74,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/unlockAll">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
+                    android:id="@+id/themes"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clipToPadding="false"

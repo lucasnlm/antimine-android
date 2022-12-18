@@ -11,11 +11,9 @@ import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.view_theme.view.*
 
 class ThemeAdapter(
-    themeRepository: IThemeRepository,
     private val themeViewModel: ThemeViewModel,
     private val preferencesRepository: IPreferencesRepository,
     private val onSelectTheme: (AppTheme) -> Unit,
@@ -23,7 +21,6 @@ class ThemeAdapter(
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
 
     private val themes: List<AppTheme> = themeViewModel.singleState().themes
-    private val currentTheme = themeRepository.getTheme()
 
     init {
         setHasStableIds(true)
@@ -33,8 +30,6 @@ class ThemeAdapter(
     override fun getItemId(position: Int): Long = themes[position].id
 
     override fun getItemCount(): Int = themes.size
-
-    override fun getItemViewType(position: Int): Int = themes[position].id.toInt()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeViewHolder {
         val view = LayoutInflater
@@ -48,7 +43,7 @@ class ThemeAdapter(
         val theme = themes[position]
 
         holder.itemView.apply {
-            val selected = (theme.id == themeViewModel.singleState().current.id)
+            val selected = (theme.id == themeViewModel.singleState().currentTheme.id)
             val alpha = if (selected) 127 else 255
             cardTheme.alpha = if (selected) 0.5f else 1.0f
 
@@ -75,7 +70,7 @@ class ThemeAdapter(
                     MaterialColors.getColorStateListOrNull(
                         context,
                         R.attr.backgroundColor,
-                    )
+                    ),
                 )
                 setOnClickListener {
                     if (preferencesRepository.isPremiumEnabled()) {

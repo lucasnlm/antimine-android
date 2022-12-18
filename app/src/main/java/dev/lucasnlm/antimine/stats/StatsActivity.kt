@@ -21,7 +21,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        recyclerView.apply {
+        themes.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
         }
@@ -40,7 +40,7 @@ class StatsActivity : ThematicActivity(R.layout.activity_stats) {
                     )
                 }
 
-                recyclerView.adapter = StatsAdapter(it.stats)
+                themes.adapter = StatsAdapter(it.stats)
                 empty.visibility = if (it.stats.isEmpty()) View.VISIBLE else View.GONE
             }
         }

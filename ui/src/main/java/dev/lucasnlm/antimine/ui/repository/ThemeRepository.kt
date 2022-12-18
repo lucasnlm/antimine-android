@@ -7,14 +7,18 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.R
+import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette
 
 interface IThemeRepository {
     fun getCustomTheme(): AppTheme?
+    fun getSkin(): AppSkin
     fun getTheme(): AppTheme
     fun getAllThemes(): List<AppTheme>
+    fun getAllSkins(): List<AppSkin>
     fun setTheme(themeId: Long)
+    fun setSkin(skinId: Long)
     fun reset(): AppTheme
 }
 
@@ -27,6 +31,12 @@ class ThemeRepository(
         return getAllThemes().firstOrNull { it.id == targetThemeId }
     }
 
+    override fun getSkin(): AppSkin {
+        val targetSkinId = preferenceRepository.skinId()
+        val allSkins = getAllSkins()
+        return allSkins.firstOrNull { it.id == targetSkinId } ?: allSkins.first()
+    }
+
     override fun getTheme(): AppTheme {
         return getCustomTheme() ?: buildSystemTheme()
     }
@@ -34,8 +44,16 @@ class ThemeRepository(
     override fun getAllThemes(): List<AppTheme> =
         listOf(buildSystemTheme()) + Themes.getAllCustom()
 
+    override fun getAllSkins(): List<AppSkin> {
+        return Skins.getAllSkins()
+    }
+
     override fun setTheme(themeId: Long) {
         preferenceRepository.useTheme(themeId)
+    }
+
+    override fun setSkin(skinId: Long) {
+        preferenceRepository.useSkin(skinId)
     }
 
     override fun reset(): AppTheme {

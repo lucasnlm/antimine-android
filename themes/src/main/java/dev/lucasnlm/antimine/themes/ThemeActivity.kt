@@ -4,15 +4,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.themes.view.SkinAdapter
 import dev.lucasnlm.antimine.themes.view.ThemeAdapter
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.ThematicActivity
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IAnalyticsManager
@@ -26,7 +28,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
     private val themeViewModel by viewModel<ThemeViewModel>()
 
-    private val themeRepository: IThemeRepository by inject()
     private val dimensionRepository: IDimensionRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
     private val preferencesRepository: IPreferencesRepository by inject()
@@ -82,7 +83,6 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
             val columns = if (size.width > size.height) { 5 } else { 3 }
 
             val themeAdapter = ThemeAdapter(
-                themeRepository = themeRepository,
                 themeViewModel = themeViewModel,
                 preferencesRepository = preferencesRepository,
                 onSelectTheme = { theme ->
@@ -95,11 +95,31 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                 },
             )
 
-            recyclerView.apply {
+            val skinAdapter = SkinAdapter(
+                themeViewModel = themeViewModel,
+                preferencesRepository = preferencesRepository,
+                onSelectSkin = { skin ->
+                    themeViewModel.sendEvent(ThemeEvent.ChangeSkin(skin))
+                },
+                onRequestPurchase = {
+                    lifecycleScope.launch {
+                        billingManager.charge(this@ThemeActivity)
+                    }
+                },
+            )
+
+            themes.apply {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
                 setHasFixedSize(true)
                 layoutManager = GridLayoutManager(context, columns)
                 adapter = themeAdapter
+            }
+
+            skins.apply {
+                addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                adapter = skinAdapter
             }
 
             if (!preferencesRepository.isPremiumEnabled()) {
@@ -122,7 +142,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
 
             launch {
                 themeViewModel.observeState().collect {
-                    if (usingTheme.id != it.current.id) {
+                    if (usingTheme != it.currentTheme || usingSkin != it.currentAppSkin) {
                         recreate()
                         cloudSaveManager.uploadSave()
                     }

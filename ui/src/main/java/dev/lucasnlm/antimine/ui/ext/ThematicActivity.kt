@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.MaterialToolbar
+import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.TopBarAction
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
@@ -18,7 +19,13 @@ abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActi
         currentTheme()
     }
 
+    protected val usingSkin: AppSkin by lazy {
+        currentSkin()
+    }
+
     private fun currentTheme() = themeRepository.getTheme()
+
+    private fun currentSkin() = themeRepository.getSkin()
 
     private var topBarAction: TopBarAction? = null
 
@@ -68,6 +75,9 @@ abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActi
         super.onResume()
 
         if (usingTheme.id != currentTheme().id) {
+            recreate()
+            overridePendingTransition(0, 0)
+        } else if (usingSkin.id != currentSkin().id) {
             recreate()
             overridePendingTransition(0, 0)
         }

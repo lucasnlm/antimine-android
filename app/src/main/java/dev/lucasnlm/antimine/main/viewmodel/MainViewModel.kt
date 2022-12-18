@@ -74,6 +74,7 @@ class MainViewModel(
             setCompleteTutorial(completeTutorial == 1)
             completeFirstUse()
             useTheme(selectedTheme.toLong())
+            useSkin(selectedSkin.toLong())
             setSquareRadius(squareRadius)
             setSquareSize(squareSize)
             setCustomLongPressTimeout(touchTiming.toLong())

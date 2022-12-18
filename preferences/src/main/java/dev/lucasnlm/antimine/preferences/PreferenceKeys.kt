@@ -11,6 +11,7 @@ object PreferenceKeys {
     const val PREFERENCE_LAST_HELP_USED = "preference_last_help_used"
     const val PREFERENCE_CONTROL_STYLE = "preference_control_style"
     const val PREFERENCE_CUSTOM_THEME = "preference_custom_theme"
+    const val PREFERENCE_CUSTOM_SKIN = "preference_custom_skin"
     const val PREFERENCE_OLD_DOUBLE_CLICK = "preference_double_click_open"
     const val PREFERENCE_CUSTOM_GAME_WIDTH = "preference_custom_game_width"
     const val PREFERENCE_CUSTOM_GAME_HEIGHT = "preference_custom_game_height"

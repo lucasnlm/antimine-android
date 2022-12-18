@@ -36,6 +36,9 @@ interface IPreferencesRepository {
     fun themeId(): Long
     fun useTheme(themeId: Long)
 
+    fun skinId(): Long
+    fun useSkin(skinId: Long)
+
     fun updateStatsBase(statsBase: Int)
     fun getStatsBase(): Int
 

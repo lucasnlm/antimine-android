@@ -113,6 +113,10 @@ sealed class Analytics(
         private val themeId: Long,
     ) : Analytics("Click Theme", mapOf("id" to themeId.toString()))
 
+    data class ClickSkin(
+        private val skinId: Long,
+    ) : Analytics("Click Skin", mapOf("id" to skinId.toString()))
+
     object OpenSettings : Analytics("Open Settings")
 
     object OpenSaveHistory : Analytics("Open Save History")

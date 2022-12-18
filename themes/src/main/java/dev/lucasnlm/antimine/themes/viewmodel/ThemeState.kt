@@ -1,12 +1,11 @@
 package dev.lucasnlm.antimine.themes.viewmodel
 
+import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.model.AppTheme
 
 data class ThemeState(
-    val current: AppTheme,
-    val squareRadius: Int,
-    val squareSize: Int,
-    val squareDivider: Int,
+    val currentTheme: AppTheme,
+    val currentAppSkin: AppSkin,
     val themes: List<AppTheme>,
-    val hasChangedSize: Boolean,
+    val appSkins: List<AppSkin>,
 )
