@@ -28,15 +28,15 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.ui.ext.blue
 import dev.lucasnlm.antimine.ui.ext.green
 import dev.lucasnlm.antimine.ui.ext.red
-import dev.lucasnlm.antimine.ui.model.AppTheme
+import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 
 class GameApplicationListener(
     private val context: Context,
     private val appVersion: IAppVersionManager,
     private val preferencesRepository: IPreferencesRepository,
+    private val themeRepository: IThemeRepository,
     private val dimensionRepository: IDimensionRepository,
     private val quality: RenderQuality,
-    private val theme: AppTheme,
     private val onSingleTap: (Int) -> Unit,
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTap: (Int) -> Unit,
@@ -54,15 +54,13 @@ class GameApplicationListener(
     private var blurShader: ShaderProgram? = null
 
     private val renderSettings = RenderSettings(
-        theme = theme,
+        theme = themeRepository.getTheme(),
         internalPadding = getInternalPadding(),
         areaSize = dimensionRepository.areaSize(),
         navigationBarHeight = dimensionRepository.navigationBarHeight().toFloat(),
         appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
         appBarHeight = if (context.isPortrait()) { dimensionRepository.actionBarSize().toFloat() } else { 0f },
-        radius = preferencesRepository.squareRadius().toFloat(),
-        squareDivider = preferencesRepository.squareDivider().toFloat() * 2,
-        joinAreas = preferencesRepository.squareDivider() == 0,
+        joinAreas = themeRepository.getSkin().joinAreas,
         quality = quality,
     )
 
@@ -118,13 +116,15 @@ class GameApplicationListener(
             bindSize(boundMinefield)
         }
 
+        val currentSkin = themeRepository.getSkin()
+
         GdxLocal.run {
-            val radiusLevel = preferencesRepository.squareRadius()
+            canTintAreas = currentSkin.canTint
+
             animationScale = if (preferencesRepository.useAnimations()) 1f else 100.0f
 
             atlas = GameTextureAtlas.loadTextureAtlas(
-                radiusLevel = radiusLevel,
-                squareDivider = renderSettings.squareDivider,
+                skinFile = currentSkin.file,
                 quality = quality,
             ).apply {
                 gameTextures = GameTextures(
@@ -204,6 +204,7 @@ class GameApplicationListener(
         val minefieldStage = this.minefieldStage
         val batch = this.batch
         val blurShader = this.blurShader
+        val currentTheme = themeRepository.getTheme()
 
         if (useBlur) {
             val width = Gdx.graphics.width
@@ -211,7 +212,7 @@ class GameApplicationListener(
 
             mainFrameBuffer?.begin()
             minefieldStage?.run {
-                theme.palette.background.run {
+                currentTheme.palette.background.run {
                     Gdx.gl.glClearColor(red(), green(), blue(), 1f)
                     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
                 }
@@ -228,7 +229,7 @@ class GameApplicationListener(
             batch?.run {
                 begin()
 
-                theme.palette.background.run {
+                currentTheme.palette.background.run {
                     Gdx.gl.glClearColor(red(), green(), blue(), 1f)
                     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
                 }
@@ -279,7 +280,7 @@ class GameApplicationListener(
             }
 
             minefieldStage?.run {
-                theme.palette.background.run {
+                currentTheme.palette.background.run {
                     Gdx.gl.glClearColor(red(), green(), blue(), 1f)
                     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
                 }

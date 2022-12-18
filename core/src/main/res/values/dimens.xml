@@ -1,7 +1,7 @@
 <resources>
     <dimen name="main_activity_padding">16dp</dimen>
 
-    <dimen name="field_size">76dp</dimen>
+    <dimen name="field_size">38dp</dimen>
     <dimen name="field_radius">1.5dp</dimen>
     <dimen name="field_padding">1dp</dimen>
     <dimen name="highlight_stroke">2dp</dimen>

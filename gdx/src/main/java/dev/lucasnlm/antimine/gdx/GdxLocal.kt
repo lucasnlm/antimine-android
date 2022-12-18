@@ -12,6 +12,9 @@ object GdxLocal {
     var gameTextures: GameTextures? = null
     var zoom = 1.0f
 
+    // Defines if it should tint or not the areas.
+    var canTintAreas = true
+
     // Global animation scale, it defines how fast/slow all animations must be executed.
     var animationScale: Float = 1.0f
 

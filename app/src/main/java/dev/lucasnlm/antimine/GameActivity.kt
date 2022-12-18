@@ -69,9 +69,6 @@ class GameActivity :
     private val cloudSaveManager by inject<CloudSaveManager>()
     private var warning: Snackbar? = null
 
-    private val renderSquareRadius = preferencesRepository.squareRadius()
-    private val renderSquareDivider = preferencesRepository.squareDivider()
-    private val renderSquareSize = preferencesRepository.squareSize()
     private val hasFloatingButton = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
 
     override fun onNewIntent(intent: Intent?) {
@@ -383,10 +380,7 @@ class GameActivity :
 
     override fun onResume() {
         super.onResume()
-        if (renderSquareRadius != preferencesRepository.squareRadius() ||
-            renderSquareDivider != preferencesRepository.squareDivider() ||
-            renderSquareSize != preferencesRepository.squareSize() ||
-            hasFloatingButton != (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen)
+        if (hasFloatingButton != (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen)
         ) {
             // If used changed any currently rendered settings, we
             // must recreate the activity to force all sprites are updated.

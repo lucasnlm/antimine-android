@@ -45,7 +45,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
         GameApplicationListener(
             context = requireContext(),
             appVersion = appVersionManager,
-            theme = themeRepository.getTheme(),
+            themeRepository = themeRepository,
             preferencesRepository = preferencesRepository,
             dimensionRepository = dimensionRepository,
             crashLogger = {

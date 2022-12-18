@@ -12,8 +12,7 @@ object GameTextureAtlas {
     }
 
     fun loadTextureAtlas(
-        radiusLevel: Int,
-        squareDivider: Float,
+        skinFile: String,
         quality: RenderQuality,
     ): TextureAtlas {
         val pixMapSize = when (quality) {
@@ -57,7 +56,7 @@ object GameTextureAtlas {
             AtlasNames.question to gridPoint(x = textureSize * 4, y = textureSize * 3),
         )
 
-        val texture = Texture(TextureTheme.standard).apply {
+        val texture = Texture(skinFile).apply {
             setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest)
         }
 

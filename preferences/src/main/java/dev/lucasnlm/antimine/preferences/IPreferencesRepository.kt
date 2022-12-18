@@ -69,10 +69,6 @@ interface IPreferencesRepository {
     fun useSimonTathamAlgorithm(): Boolean
     fun setSimonTathamAlgorithm(enabled: Boolean)
 
-    fun squareRadius(): Int
-    fun defaultSquareRadius(): Int
-    fun setSquareRadius(value: Int?)
-
     fun getTips(): Int
     fun setTips(tips: Int)
     fun getExtraTips(): Int
@@ -93,10 +89,6 @@ interface IPreferencesRepository {
     fun getHapticFeedbackLevel(): Int
     fun setHapticFeedbackLevel(value: Int)
     fun resetHapticFeedbackLevel()
-
-    fun squareSize(): Int
-    fun defaultSquareSize(): Int
-    fun setSquareSize(value: Int?)
 
     fun useAnimations(): Boolean
     fun setAnimations(enabled: Boolean)
@@ -122,10 +114,6 @@ interface IPreferencesRepository {
     fun addUnlockedTheme(id: Int)
     fun setUnlockedThemes(themes: String)
     fun getUnlockedThemes(): List<Int>
-
-    fun squareDivider(): Int
-    fun defaultSquareDivider(): Int
-    fun setSquareDivider(value: Int?)
 
     fun showTutorialDialog(): Boolean
     fun setTutorialDialog(show: Boolean)

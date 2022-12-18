@@ -9,8 +9,6 @@ data class RenderSettings(
     val navigationBarHeight: Float,
     val appBarWithStatusHeight: Float,
     val appBarHeight: Float,
-    val radius: Float,
     val joinAreas: Boolean,
-    val squareDivider: Float,
     val quality: RenderQuality,
 )

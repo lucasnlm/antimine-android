@@ -13,7 +13,7 @@ import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import org.koin.android.ext.android.inject
 
 abstract class ThematicActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
-    private val themeRepository: IThemeRepository by inject()
+    protected val themeRepository: IThemeRepository by inject()
 
     protected val usingTheme: AppTheme by lazy {
         currentTheme()

@@ -96,6 +96,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
             )
 
             val skinAdapter = SkinAdapter(
+                themeRepository = themeRepository,
                 themeViewModel = themeViewModel,
                 preferencesRepository = preferencesRepository,
                 onSelectSkin = { skin ->

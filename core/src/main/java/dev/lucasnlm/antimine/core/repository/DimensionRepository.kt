@@ -9,7 +9,6 @@ import android.view.KeyCharacterMap
 import android.view.KeyEvent
 import android.view.ViewConfiguration
 import dev.lucasnlm.antimine.core.R
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 
 interface IDimensionRepository {
     fun areaSize(): Float
@@ -31,7 +30,6 @@ data class Size(
 
 class DimensionRepository(
     private val context: Context,
-    private val preferencesRepository: IPreferencesRepository,
 ) : IDimensionRepository {
 
     private val hasNavBar: Boolean by lazy {
@@ -47,9 +45,7 @@ class DimensionRepository(
     }
 
     override fun areaSize(): Float {
-        val multiplier = preferencesRepository.squareSize() / 100.0f
-        val maxArea = context.resources.getDimension(R.dimen.field_size)
-        return maxArea * multiplier
+        return context.resources.getDimension(R.dimen.field_size)
     }
 
     override fun areaSeparator(): Float {

@@ -107,19 +107,6 @@ class PreferencesRepository(
         preferencesManager.removeKey(PreferenceKeys.PREFERENCE_VIBRATION_LEVEL)
     }
 
-    override fun squareSize(): Int =
-        preferencesManager.getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, defaultSquareSize())
-
-    override fun defaultSquareSize(): Int = 50
-
-    override fun setSquareSize(value: Int?) {
-        if (value == null) {
-            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_AREA_SIZE)
-        } else {
-            preferencesManager.putInt(PreferenceKeys.PREFERENCE_AREA_SIZE, value)
-        }
-    }
-
     override fun useAnimations(): Boolean {
         return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_ANIMATION, true)
     }
@@ -362,20 +349,6 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SIMON_TATHAM_ALGORITHM, enabled)
     }
 
-    override fun squareRadius(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, defaultSquareRadius())
-    }
-
-    override fun defaultSquareRadius(): Int = 3
-
-    override fun setSquareRadius(value: Int?) {
-        if (value == null) {
-            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_RADIUS)
-        } else {
-            preferencesManager.putInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, value)
-        }
-    }
-
     override fun getTips(): Int {
         return preferencesManager.getInt(PreferenceKeys.PREFERENCE_TIPS, 5)
     }
@@ -411,20 +384,6 @@ class PreferencesRepository(
 
     override fun setOpenGameDirectly(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_OPEN_DIRECTLY, value)
-    }
-
-    override fun squareDivider(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER, defaultSquareDivider())
-    }
-
-    override fun defaultSquareDivider(): Int = 0
-
-    override fun setSquareDivider(value: Int?) {
-        if (value == null) {
-            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER)
-        } else {
-            preferencesManager.putInt(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER, value.coerceIn(0, 50))
-        }
     }
 
     override fun showTutorialDialog(): Boolean {

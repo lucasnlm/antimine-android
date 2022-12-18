@@ -1,15 +1,5 @@
 package dev.lucasnlm.antimine.gdx
 
-object TextureTheme {
-    const val standard = "standard.png"
-    const val square = "square.png"
-    const val square2 = "square-2.png"
-    const val square3 = "square-3.png"
-    const val classic = "classic.png"
-    const val glass = "glass.png"
-    const val stone = "stone.png"
-}
-
 object AtlasNames {
     const val core = "core"
     const val bottom = "b"
