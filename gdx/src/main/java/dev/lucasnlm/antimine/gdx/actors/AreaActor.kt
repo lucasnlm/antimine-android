@@ -13,6 +13,7 @@ import dev.lucasnlm.antimine.gdx.*
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.minesAround
+import dev.lucasnlm.antimine.ui.repository.Themes
 
 class AreaActor(
     size: Float,
@@ -113,7 +114,7 @@ class AreaActor(
         super.act(delta)
         val area = this.area
 
-        touchable = if ((area.isCovered || area.minesAround > 0) && GdxLocal.actionsEnabled) {
+        touchable = if ((area.isCovered || area.minesAround > 0) && GameContext.actionsEnabled) {
             Touchable.enabled
         } else {
             Touchable.disabled
@@ -132,8 +133,8 @@ class AreaActor(
     }
 
     private fun drawBackground(batch: Batch, isOdd: Boolean) {
-        if (!isOdd && !area.isCovered && GdxLocal.zoomLevelAlpha > 0.0f) {
-            GdxLocal.gameTextures?.areaCovered?.let {
+        if (!isOdd && !area.isCovered && GameContext.zoomLevelAlpha > 0.0f) {
+            GameContext.gameTextures?.areaCovered?.let {
                 batch.drawRegion(
                     texture = it,
                     x = x,
@@ -141,7 +142,7 @@ class AreaActor(
                     width = width,
                     height = height,
                     blend = false,
-                    color = theme.palette.background.toOppositeMax(GdxLocal.zoomLevelAlpha).alpha(0.025f),
+                    color = theme.palette.background.toOppositeMax(GameContext.zoomLevelAlpha).alpha(0.025f),
                 )
             }
         }
@@ -149,12 +150,13 @@ class AreaActor(
 
     private fun drawCovered(batch: Batch, isOdd: Boolean) {
         val coverColor = when {
-            area.mark.isNotNone() -> theme.palette.covered
-            isOdd -> theme.palette.coveredOdd
-            else -> theme.palette.covered
+            !GameContext.canTintAreas -> Themes.WHITE.toGdxColor(1.0f)
+            area.mark.isNotNone() -> theme.palette.covered.toGdxColor(1.0f).dim(0.6f)
+            isOdd -> theme.palette.coveredOdd.toGdxColor(1.0f)
+            else -> theme.palette.covered.toGdxColor(1.0f)
         }
 
-        GdxLocal.atlas?.let { atlas ->
+        GameContext.atlas?.let { atlas ->
             if (areaForm == areaFullForm) {
                 batch.drawRegion(
                     texture = atlas.findRegion(AtlasNames.full),
@@ -162,26 +164,18 @@ class AreaActor(
                     y = y - 0.5f,
                     width = width + 0.5f,
                     height = height + 0.5f,
-                    color = if (area.mark.isNotNone()) {
-                        coverColor.toGdxColor(1.0f).dim(0.6f)
-                    } else {
-                        coverColor.toGdxColor(1.0f)
-                    },
+                    color = coverColor,
                     blend = false,
                 )
             } else {
                 pieces.forEach { piece ->
                     batch.drawRegion(
-                        texture = GdxLocal.gameTextures!!.pieces[piece]!!,
+                        texture = GameContext.gameTextures!!.pieces[piece]!!,
                         x = x - 0.5f,
                         y = y - 0.5f,
                         width = width + 0.5f,
                         height = height + 0.5f,
-                        color = if (area.mark.isNotNone()) {
-                            coverColor.toGdxColor(1.0f).dim(0.6f)
-                        } else {
-                            coverColor.toGdxColor(1.0f)
-                        },
+                        color = coverColor,
                         blend = false,
                     )
                 }
@@ -192,7 +186,7 @@ class AreaActor(
     private fun drawMineBackground(batch: Batch) {
         val coverColor = Color(0.8f, 0.3f, 0.3f, 1.0f)
 
-        GdxLocal.atlas?.let { atlas ->
+        GameContext.atlas?.let { atlas ->
             pieces.forEach { piece ->
                 batch.drawRegion(
                     texture = atlas.findRegion(piece),
@@ -208,14 +202,18 @@ class AreaActor(
     }
 
     private fun drawCoveredIcons(batch: Batch) {
+        val tint = GameContext.canTintAreas
         val isAboveOthers = isPressed
-        GdxLocal.gameTextures?.let {
+
+        GameContext.gameTextures?.let {
             when {
                 area.mark.isFlag() -> {
                     val color = if (area.mistake) {
                         Color(0.8f, 0.3f, 0.3f, 1.0f)
-                    } else {
+                    } else if (tint) {
                         theme.palette.covered.toOppositeMax(0.8f)
+                    } else {
+                        Themes.WHITE.toGdxColor()
                     }
 
                     drawAsset(
@@ -226,7 +224,12 @@ class AreaActor(
                     )
                 }
                 area.mark.isQuestion() -> {
-                    val color = theme.palette.covered.toOppositeMax(1.0f)
+                    val color = if (tint) {
+                        theme.palette.covered.toOppositeMax(1.0f)
+                    } else {
+                        Themes.WHITE.toGdxColor()
+                    }
+
                     drawAsset(
                         batch = batch,
                         texture = it.question,
@@ -235,7 +238,12 @@ class AreaActor(
                     )
                 }
                 area.revealed -> {
-                    val color = theme.palette.uncovered
+                    val color = if (tint) {
+                        theme.palette.uncovered
+                    } else {
+                        Themes.WHITE
+                    }
+
                     drawAsset(
                         batch = batch,
                         texture = it.mine,
@@ -248,7 +256,7 @@ class AreaActor(
     }
 
     private fun drawUncoveredIcons(batch: Batch) {
-        GdxLocal.gameTextures?.let {
+        GameContext.gameTextures?.let {
             if (area.minesAround > 0) {
                 drawAsset(
                     batch = batch,
@@ -256,12 +264,12 @@ class AreaActor(
                     color = if (area.dimNumber) {
                         theme.palette
                             .minesAround(area.minesAround - 1)
-                            .toGdxColor(GdxLocal.zoomLevelAlpha * 0.45f)
+                            .toGdxColor(GameContext.zoomLevelAlpha * 0.45f)
                             .dim(0.5f)
                     } else {
                         theme.palette
                             .minesAround(area.minesAround - 1)
-                            .toGdxColor(GdxLocal.zoomLevelAlpha)
+                            .toGdxColor(GameContext.zoomLevelAlpha)
                     },
                 )
             } else if (area.hasMine) {
@@ -279,16 +287,24 @@ class AreaActor(
     private fun drawPressed(batch: Batch, isOdd: Boolean) {
         if ((isPressed || focusScale > 1.0f)) {
             if (area.isCovered) {
-                val coverColor = if (isOdd) { theme.palette.coveredOdd } else { theme.palette.covered }
+                val tint = GameContext.canTintAreas
+                val coverColor = when {
+                    tint -> if (isOdd) {
+                        theme.palette.coveredOdd
+                    } else {
+                        theme.palette.covered
+                    }
+                    else -> Themes.WHITE
+                }.toGdxColor(0.5f)
 
-                GdxLocal.gameTextures?.detailedArea?.let {
+                GameContext.gameTextures?.detailedArea?.let {
                     batch.drawRegion(
                         texture = it,
                         x = x,
                         y = y,
                         width = width,
                         height = height,
-                        color = coverColor.toGdxColor(1.0f),
+                        color = coverColor,
                         blend = true,
                     )
 
@@ -298,12 +314,12 @@ class AreaActor(
                         y = y - height * (focusScale - 1.0f) * 0.5f,
                         width = width * focusScale,
                         height = height * focusScale,
-                        color = coverColor.toGdxColor(1.0f).dim(0.8f - (focusScale - 1.0f)),
+                        color = coverColor.dim(0.8f - (focusScale - 1.0f)),
                         blend = true,
                     )
                 }
             } else {
-                GdxLocal.gameTextures?.detailedArea?.let {
+                GameContext.gameTextures?.detailedArea?.let {
                     val color = theme.palette.background
                     batch.drawRegion(
                         texture = it,
@@ -322,7 +338,11 @@ class AreaActor(
     override fun draw(batch: Batch?, parentAlpha: Float) {
         super.draw(batch, parentAlpha)
 
-        val isOdd: Boolean = if (area.posY % 2 == 0) { area.posX % 2 != 0 } else { area.posX % 2 == 0 }
+        val isOdd: Boolean = if (area.posY % 2 == 0) {
+            area.posX % 2 != 0
+        } else {
+            area.posX % 2 == 0
+        }
 
         batch?.run {
             drawBackground(this, isOdd)

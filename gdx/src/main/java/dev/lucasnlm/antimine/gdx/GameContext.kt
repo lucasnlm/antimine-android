@@ -7,7 +7,7 @@ import dev.lucasnlm.antimine.gdx.models.GameTextures
 // use Graphics in a thread that is not the rendering thread.
 //
 // This is normally a design faux pas but in this case is better than the alternatives.
-object GdxLocal {
+object GameContext {
     var atlas: TextureAtlas? = null
     var gameTextures: GameTextures? = null
     var zoom = 1.0f

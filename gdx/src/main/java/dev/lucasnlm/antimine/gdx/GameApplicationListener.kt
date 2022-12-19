@@ -76,7 +76,7 @@ class GameApplicationListener(
 
     private val minefieldInputController = GameInputController(
         onChangeZoom = {
-            GdxLocal.zoom = it
+            GameContext.zoom = it
             minefieldStage?.scaleZoom(it)
         },
     )
@@ -118,7 +118,7 @@ class GameApplicationListener(
 
         val currentSkin = themeRepository.getSkin()
 
-        GdxLocal.run {
+        GameContext.run {
             canTintAreas = currentSkin.canTint
 
             animationScale = if (preferencesRepository.useAnimations()) 1f else 100.0f
@@ -178,7 +178,7 @@ class GameApplicationListener(
         blurFrameBuffer?.dispose()
         batch?.dispose()
 
-        GdxLocal.run {
+        GameContext.run {
             zoomLevelAlpha = 1.0f
             animationScale = 1.0f
             gameTextures = null
@@ -191,7 +191,7 @@ class GameApplicationListener(
     }
 
     fun onPause() {
-        GdxLocal.run {
+        GameContext.run {
             zoom = 1.0f
             animationScale = 1.0f
             minefieldStage?.setZoom(1.0f)
@@ -326,7 +326,7 @@ class GameApplicationListener(
     }
 
     fun setActionsEnabled(enabled: Boolean) {
-        GdxLocal.actionsEnabled = enabled
+        GameContext.actionsEnabled = enabled
     }
 
     fun onChangeGame() {
@@ -334,7 +334,7 @@ class GameApplicationListener(
     }
 
     fun refreshZoom() {
-        minefieldStage?.setZoom(GdxLocal.zoom)
+        minefieldStage?.setZoom(GameContext.zoom)
     }
 
     fun refreshSettings() {

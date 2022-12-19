@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.BuildConfig
-import dev.lucasnlm.antimine.gdx.GdxLocal
+import dev.lucasnlm.antimine.gdx.GameContext
 import dev.lucasnlm.antimine.gdx.PixelPerfectViewport
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
 import dev.lucasnlm.antimine.gdx.controller.CameraController
@@ -73,7 +73,7 @@ class MinefieldStage(
             currentZoom = zoom
             update(true)
 
-            GdxLocal.zoomLevelAlpha = when {
+            GameContext.zoomLevelAlpha = when {
                 zoom < 3.5f -> {
                     1.0f
                 }
@@ -102,7 +102,7 @@ class MinefieldStage(
                 update(true)
             }
 
-            GdxLocal.zoomLevelAlpha = when {
+            GameContext.zoomLevelAlpha = when {
                 zoom < 3.5f -> {
                     1.0f
                 }

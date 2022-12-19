@@ -34,7 +34,7 @@ import dev.lucasnlm.antimine.core.serializableNonSafe
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
-import dev.lucasnlm.antimine.gdx.GdxLocal
+import dev.lucasnlm.antimine.gdx.GameContext
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
@@ -75,8 +75,8 @@ class GameActivity :
         super.onNewIntent(intent)
         intent?.run(::handleIntent)
 
-        GdxLocal.zoom = 1.0f
-        GdxLocal.zoomLevelAlpha = 1.0f
+        GameContext.zoom = 1.0f
+        GameContext.zoomLevelAlpha = 1.0f
     }
 
     private fun Int.toL10nString() = String.format("%d", this)

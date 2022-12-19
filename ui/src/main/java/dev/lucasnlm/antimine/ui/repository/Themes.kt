@@ -5,6 +5,8 @@ import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette
 
 object Themes {
+    val WHITE = 0xFFFFFF
+
     fun lightTheme() = AppTheme(
         id = 1L,
         theme = R.style.CustomLightTheme,
