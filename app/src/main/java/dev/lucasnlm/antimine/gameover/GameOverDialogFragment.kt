@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.gameover
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -17,7 +16,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.appcompat.widget.AppCompatButton
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
@@ -33,7 +31,6 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
-import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IAdsManager
@@ -116,13 +113,6 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                             val subtitle: TextView = findViewById(R.id.subtitle)
                             val emoji: ImageView = findViewById(R.id.title_emoji)
                             val adFrame: FrameLayout = findViewById(R.id.adFrame)
-                            val dialog: ConstraintLayout = findViewById(R.id.dialog)
-
-                            val color = usingTheme.palette.background.toAndroidColor(255)
-                            val tint = ColorStateList.valueOf(color)
-
-                            dialog.backgroundTintList = tint
-                            adFrame.backgroundTintList = tint
 
                             title.text = state.title
                             subtitle.text = state.message
@@ -369,14 +359,12 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
             }
         }
 
-        const val DIALOG_GAME_RESULT = "dialog_game_result"
+        private const val DIALOG_GAME_RESULT = "dialog_game_result"
         private const val DIALOG_SHOW_CONTINUE = "dialog_show_continue"
         private const val DIALOG_TIME = "dialog_time"
         private const val DIALOG_RIGHT_MINES = "dialog_right_mines"
         private const val DIALOG_TOTAL_MINES = "dialog_total_mines"
         private const val DIALOG_RECEIVED = "dialog_received"
         private const val DIALOG_TURN = "dialog_turn"
-
-        val TAG = GameOverDialogFragment::class.simpleName!!
     }
 }

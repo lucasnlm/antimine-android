@@ -119,7 +119,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/new_game"
-                android:textAllCaps="true">
+                android:textAllCaps="true"
+                android:textColor="?colorSurfaceVariant"
+                app:backgroundTint="?colorAccent">
 
                 <requestFocus />
             </com.google.android.material.button.MaterialButton>
