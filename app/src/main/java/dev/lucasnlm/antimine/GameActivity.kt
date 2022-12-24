@@ -257,7 +257,7 @@ class GameActivity :
                     }
                 }
 
-                tipsCounter.text = it.tips.toL10nString()
+                hintCounter.text = it.hints.toL10nString()
 
                 if (!it.isGameCompleted && it.isActive && it.useHelp) {
                     refreshTipShortcutIcon()
@@ -456,7 +456,7 @@ class GameActivity :
         val canUseHelpNow = dt > 5 * 1000L
         val canRequestHelpWithAds = gameViewModel.getTips() == 0 && adsManager.isAvailable()
 
-        tipsCounter.apply {
+        hintCounter.apply {
             visibility = if (canUseHelpNow) View.VISIBLE else View.GONE
             text = if (canRequestHelpWithAds) {
                 "+5"
@@ -467,11 +467,11 @@ class GameActivity :
 
         shortcutIcon.apply {
             TooltipCompat.setTooltipText(this, getString(R.string.help))
-            setImageResource(R.drawable.tip)
+            setImageResource(R.drawable.hint)
             setColorFilter(minesCount.currentTextColor)
 
             if (canUseHelpNow) {
-                tipCooldown.apply {
+                hintCooldown.apply {
                     animate().alpha(0.0f).start()
                     visibility = View.GONE
                     progress = 0
@@ -482,7 +482,7 @@ class GameActivity :
                 if (canRequestHelpWithAds) {
                     setOnClickListener {
                         lifecycleScope.launch {
-                            analyticsManager.sentEvent(Analytics.RequestMoreTip)
+                            analyticsManager.sentEvent(Analytics.RequestMoreHints)
 
                             adsManager.showRewardedAd(
                                 activity = this@GameActivity,
@@ -505,7 +505,7 @@ class GameActivity :
                     }
                 }
             } else {
-                tipCooldown.apply {
+                hintCooldown.apply {
                     animate().alpha(1.0f).start()
                     if (progress == 0) {
                         ValueAnimator.ofFloat(0.0f, 5.0f).apply {
@@ -536,7 +536,7 @@ class GameActivity :
     }
 
     private fun revealRandomMine() {
-        analyticsManager.sentEvent(Analytics.UseTip)
+        analyticsManager.sentEvent(Analytics.UseHint)
 
         val hintAmount = gameViewModel.getTips()
         if (hintAmount > 0) {
@@ -606,7 +606,7 @@ class GameActivity :
             }
         }
 
-        tipsCounter.visibility = View.GONE
+        hintCounter.visibility = View.GONE
         shortcutIcon.apply {
             if (enabled) {
                 isClickable = true

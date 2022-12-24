@@ -23,7 +23,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         BANNER_AD_ENABLED to true,
         ENABLE_WEEK_DAY_SALES to true,
         HEX_BANNER to false,
-        SHOW_ADS_WHEN_USE_TIP to true,
+        SHOW_ADS_WHEN_USE_HINT to true,
         SHOW_COUNTDOWN_TO_CONTINUE to true,
     )
 
@@ -126,7 +126,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
     }
 
     override val showAdWhenUsingTip: Boolean by lazy {
-        getBoolean(SHOW_ADS_WHEN_USE_TIP)
+        getBoolean(SHOW_ADS_WHEN_USE_HINT)
     }
 
     override val showCountdownToContinue: Boolean by lazy {
@@ -164,7 +164,7 @@ class FeatureFlagManager : IFeatureFlagManager() {
         private const val BANNER_AD_ENABLED = "banner_ad_enabled"
         private const val ENABLE_WEEK_DAY_SALES = "enable_sales"
         private const val HEX_BANNER = "hex_banner_enabled"
-        private const val SHOW_ADS_WHEN_USE_TIP = "show_ads_when_use_tip"
+        private const val SHOW_ADS_WHEN_USE_HINT = "show_ads_when_use_tip"
         private const val SHOW_COUNTDOWN_TO_CONTINUE = "show_countdown_to_continue"
     }
 }

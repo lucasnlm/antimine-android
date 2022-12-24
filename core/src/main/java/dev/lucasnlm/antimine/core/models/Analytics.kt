@@ -123,9 +123,9 @@ sealed class Analytics(
 
     object RemoveAds : Analytics("Remove Ads")
 
-    object UseTip : Analytics("Use Tip")
+    object UseHint : Analytics("Use Tip")
 
-    object RequestMoreTip : Analytics("Request More Tip")
+    object RequestMoreHints : Analytics("Request More Tip")
 
     class TapGameReset(resign: Boolean) : Analytics("Game reset", mapOf("Resign" to resign.toString()))
 }

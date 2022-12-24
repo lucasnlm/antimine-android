@@ -350,19 +350,19 @@ class PreferencesRepository(
     }
 
     override fun getTips(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_TIPS, 5)
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_HINTS, 5)
     }
 
     override fun setTips(tips: Int) {
-        preferencesManager.putInt(PreferenceKeys.PREFERENCE_TIPS, tips)
+        preferencesManager.putInt(PreferenceKeys.PREFERENCE_HINTS, tips)
     }
 
     override fun getExtraTips(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_EXTRA_TIPS, 0)
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_EXTRA_HINTS, 0)
     }
 
     override fun setExtraTips(tips: Int) {
-        preferencesManager.putInt(PreferenceKeys.PREFERENCE_EXTRA_TIPS, tips)
+        preferencesManager.putInt(PreferenceKeys.PREFERENCE_EXTRA_HINTS, tips)
     }
 
     override fun getSwitchControlAction(): Action {

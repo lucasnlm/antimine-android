@@ -66,7 +66,7 @@ open class GameViewModel(
             mineCount = null,
             minefield = Minefield(9, 9, 9),
             seed = 0L,
-            tips = tipRepository.getTotalTips(),
+            hints = tipRepository.getTotalTips(),
             isGameCompleted = false,
             isActive = false,
             hasMines = false,
@@ -94,7 +94,7 @@ open class GameViewModel(
                 tipRepository.increaseTip(5)
 
                 val newState = state.copy(
-                    tips = tipRepository.getTotalTips(),
+                    hints = tipRepository.getTotalTips(),
                 )
 
                 emit(newState)
@@ -103,7 +103,7 @@ open class GameViewModel(
                 if (tipRepository.removeTip()) {
                     val newState = state.copy(
                         field = gameController.field(),
-                        tips = tipRepository.getTotalTips(),
+                        hints = tipRepository.getTotalTips(),
                     )
                     emit(newState)
                 }
@@ -252,7 +252,7 @@ open class GameViewModel(
                 minefield = minefield,
                 mineCount = minefield.mines,
                 field = gameController.field(),
-                tips = tipRepository.getTotalTips(),
+                hints = tipRepository.getTotalTips(),
                 isGameCompleted = false,
                 isActive = true,
                 hasMines = false,
@@ -297,7 +297,7 @@ open class GameViewModel(
             minefield = save.minefield,
             mineCount = gameController.remainingMines(),
             field = gameController.field(),
-            tips = tipRepository.getTotalTips(),
+            hints = tipRepository.getTotalTips(),
             isGameCompleted = isCompletedWithMistakes(),
             isCreatingGame = false,
             isActive = !gameController.allMinesFound(),
@@ -342,7 +342,7 @@ open class GameViewModel(
             minefield = save.minefield,
             mineCount = gameController.remainingMines(),
             field = gameController.field(),
-            tips = tipRepository.getTotalTips(),
+            hints = tipRepository.getTotalTips(),
             isCreatingGame = false,
             isGameCompleted = false,
             isActive = true,
