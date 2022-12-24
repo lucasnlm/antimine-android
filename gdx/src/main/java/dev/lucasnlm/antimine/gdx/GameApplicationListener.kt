@@ -125,7 +125,6 @@ class GameApplicationListener(
 
             atlas = GameTextureAtlas.loadTextureAtlas(
                 skinFile = currentSkin.file,
-                quality = quality,
             ).apply {
                 gameTextures = GameTextures(
                     areaBackground = findRegion(AtlasNames.singleBackground),

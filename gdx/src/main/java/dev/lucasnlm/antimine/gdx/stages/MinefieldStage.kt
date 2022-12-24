@@ -276,7 +276,7 @@ class MinefieldStage(
 
         GameContext.apply {
             val theme = renderSettings.theme
-            backgroundColor = if (theme.isDarkTheme) {
+            backgroundColor = if (theme.isDarkTheme && canTintAreas) {
                 theme.palette.covered.toGdxColor(0.035f * GameContext.zoomLevelAlpha)
             } else {
                 theme.palette.background.toInverseBackOrWhite(0.1f * GameContext.zoomLevelAlpha)

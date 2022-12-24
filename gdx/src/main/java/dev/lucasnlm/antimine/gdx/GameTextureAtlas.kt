@@ -19,17 +19,8 @@ object GameTextureAtlas {
         }
     }
 
-    fun loadTextureAtlas(
-        skinFile: String,
-        quality: RenderQuality,
-    ): TextureAtlas {
-        val pixMapSize = when (quality) {
-            RenderQuality.Low -> 512
-            RenderQuality.Mid -> 1024
-            RenderQuality.High -> 2048
-        }
-
-        val textureRegions = gridOf(
+    fun loadTextureAtlas(skinFile: String): TextureAtlas {
+         val textureRegions = gridOf(
             AtlasNames.core to gp(x = 0, y = 0),
             AtlasNames.bottom to gp(x = 1, y = 0),
             AtlasNames.top to gp(x = 2, y = 0),
