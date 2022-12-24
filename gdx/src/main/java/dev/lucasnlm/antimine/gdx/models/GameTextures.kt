@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion
 
 data class GameTextures(
     val detailedArea: TextureRegion,
-    val areaCovered: TextureRegion,
+    val areaBackground: TextureRegion,
     val aroundMines: List<TextureRegion>,
     val mine: TextureRegion,
     val flag: TextureRegion,

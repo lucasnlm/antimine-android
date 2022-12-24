@@ -134,7 +134,7 @@ class AreaActor(
 
     private fun drawBackground(batch: Batch, isOdd: Boolean) {
         if (!isOdd && !area.isCovered && GameContext.zoomLevelAlpha > 0.0f) {
-            GameContext.gameTextures?.areaCovered?.let {
+            GameContext.gameTextures?.areaBackground?.let {
                 batch.drawRegion(
                     texture = it,
                     x = x,
@@ -142,22 +142,17 @@ class AreaActor(
                     width = width,
                     height = height,
                     blend = false,
-                    color = if (theme.isDarkTheme) {
-                        theme.palette.covered.toGdxColor(0.05f * GameContext.zoomLevelAlpha)
-                    } else {
-                        theme.palette.background.toInverseBackOrWhite(0.1f * GameContext.zoomLevelAlpha)
-                   },
+                    color = GameContext.backgroundColor,
                 )
             }
         }
     }
 
-    private fun drawCovered(batch: Batch, isOdd: Boolean) {
+    private fun drawCovered(batch: Batch) {
         val coverColor = when {
-            !GameContext.canTintAreas -> Themes.WHITE.toGdxColor(1.0f)
-            area.mark.isNotNone() -> theme.palette.covered.toGdxColor(1.0f).dim(0.6f)
-            isOdd -> theme.palette.coveredOdd.toGdxColor(1.0f)
-            else -> theme.palette.covered.toGdxColor(1.0f)
+            !GameContext.canTintAreas -> GameContext.whiteColor
+            area.mark.isNotNone() -> GameContext.coveredMarkedAreaColor
+            else -> GameContext.coveredAreaColor
         }
 
         GameContext.atlas?.let { atlas ->
@@ -214,10 +209,8 @@ class AreaActor(
                 area.mark.isFlag() -> {
                     val color = if (area.mistake) {
                         Color(0.8f, 0.3f, 0.3f, 1.0f)
-                    } else if (tint) {
-                        theme.palette.covered.toInverseBackOrWhite(0.8f)
                     } else {
-                        Themes.WHITE.toGdxColor()
+                        GameContext.markColor
                     }
 
                     drawAsset(
@@ -228,11 +221,7 @@ class AreaActor(
                     )
                 }
                 area.mark.isQuestion() -> {
-                    val color = if (tint) {
-                        theme.palette.covered.toInverseBackOrWhite(1.0f)
-                    } else {
-                        Themes.WHITE.toGdxColor()
-                    }
+                    val color = GameContext.markColor
 
                     drawAsset(
                         batch = batch,
@@ -242,16 +231,12 @@ class AreaActor(
                     )
                 }
                 area.revealed -> {
-                    val color = if (tint) {
-                        theme.palette.uncovered
-                    } else {
-                        Themes.WHITE
-                    }
+                    val color = GameContext.markColor
 
                     drawAsset(
                         batch = batch,
                         texture = it.mine,
-                        color = color.toGdxColor(0.65f),
+                        color = color.alpha(0.65f),
                         scale = BASE_ICON_SCALE,
                     )
                 }
@@ -352,7 +337,7 @@ class AreaActor(
             drawBackground(this, isOdd)
 
             if (area.isCovered) {
-                drawCovered(this, isOdd)
+                drawCovered(this)
                 drawPressed(this, isOdd)
                 drawCoveredIcons(this)
             } else {

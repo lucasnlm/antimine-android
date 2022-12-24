@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.gdx
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import dev.lucasnlm.antimine.gdx.models.GameTextures
 
@@ -23,4 +24,11 @@ object GameContext {
 
     // Enables / Disables actions according to external logic.
     var actionsEnabled: Boolean = false
+
+    // Predefined theme based colors
+    var backgroundColor: Color = Color.BLACK
+    var coveredAreaColor: Color = Color.BLACK
+    var coveredMarkedAreaColor: Color = Color.BLACK
+    val whiteColor: Color = Color.WHITE
+    var markColor: Color = Color.WHITE
 }

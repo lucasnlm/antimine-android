@@ -128,7 +128,7 @@ class GameApplicationListener(
                 quality = quality,
             ).apply {
                 gameTextures = GameTextures(
-                    areaCovered = findRegion(AtlasNames.singleBackground),
+                    areaBackground = findRegion(AtlasNames.singleBackground),
                     aroundMines = listOf(
                         AtlasNames.number1,
                         AtlasNames.number2,

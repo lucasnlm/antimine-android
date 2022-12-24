@@ -9,9 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import dev.lucasnlm.antimine.core.models.Area
-import dev.lucasnlm.antimine.gdx.BuildConfig
-import dev.lucasnlm.antimine.gdx.GameContext
-import dev.lucasnlm.antimine.gdx.PixelPerfectViewport
+import dev.lucasnlm.antimine.gdx.*
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
 import dev.lucasnlm.antimine.gdx.controller.CameraController
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
@@ -275,6 +273,22 @@ class MinefieldStage(
 
     override fun act() {
         super.act()
+
+        GameContext.apply {
+            val theme = renderSettings.theme
+            backgroundColor = if (theme.isDarkTheme) {
+                theme.palette.covered.toGdxColor(0.035f * GameContext.zoomLevelAlpha)
+            } else {
+                theme.palette.background.toInverseBackOrWhite(0.1f * GameContext.zoomLevelAlpha)
+            }
+            coveredAreaColor = theme.palette.covered.toGdxColor(1.0f)
+            coveredMarkedAreaColor = theme.palette.covered.toGdxColor(1.0f).dim(0.6f)
+            markColor = if (canTintAreas) {
+                theme.palette.covered.toInverseBackOrWhite(0.8f)
+            } else {
+                GameContext.whiteColor
+            }
+        }
 
         checkGameTouchInput(System.currentTimeMillis())
 
