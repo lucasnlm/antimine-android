@@ -71,6 +71,7 @@ class ThemeRepository(
                 fromDefaultPalette(context)
             },
             isPaid = true,
+            isDarkTheme = isDarkTheme()
         )
     }
 

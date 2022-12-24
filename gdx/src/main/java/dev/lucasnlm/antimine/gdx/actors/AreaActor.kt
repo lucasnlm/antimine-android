@@ -142,7 +142,11 @@ class AreaActor(
                     width = width,
                     height = height,
                     blend = false,
-                    color = theme.palette.background.toOppositeMax(GameContext.zoomLevelAlpha).alpha(0.025f),
+                    color = if (theme.isDarkTheme) {
+                        theme.palette.covered.toGdxColor(0.05f * GameContext.zoomLevelAlpha)
+                    } else {
+                        theme.palette.background.toInverseBackOrWhite(0.1f * GameContext.zoomLevelAlpha)
+                   },
                 )
             }
         }
@@ -211,7 +215,7 @@ class AreaActor(
                     val color = if (area.mistake) {
                         Color(0.8f, 0.3f, 0.3f, 1.0f)
                     } else if (tint) {
-                        theme.palette.covered.toOppositeMax(0.8f)
+                        theme.palette.covered.toInverseBackOrWhite(0.8f)
                     } else {
                         Themes.WHITE.toGdxColor()
                     }
@@ -225,7 +229,7 @@ class AreaActor(
                 }
                 area.mark.isQuestion() -> {
                     val color = if (tint) {
-                        theme.palette.covered.toOppositeMax(1.0f)
+                        theme.palette.covered.toInverseBackOrWhite(1.0f)
                     } else {
                         Themes.WHITE.toGdxColor()
                     }
@@ -277,7 +281,7 @@ class AreaActor(
                 drawAsset(
                     batch = batch,
                     texture = it.mine,
-                    color = color.toOppositeMax(1.0f),
+                    color = color.toInverseBackOrWhite(1.0f),
                     scale = BASE_ICON_SCALE,
                 )
             }
@@ -327,7 +331,7 @@ class AreaActor(
                         y = y - height * (focusScale - 1.0f) * 0.5f,
                         width = width * focusScale,
                         height = height * focusScale,
-                        color = color.toOppositeMax(0.25f).dim(0.8f - (focusScale - 1.0f)),
+                        color = color.toInverseBackOrWhite(0.25f).dim(0.8f - (focusScale - 1.0f)),
                         blend = true,
                     )
                 }

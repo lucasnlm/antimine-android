@@ -54,7 +54,7 @@ fun Int.toGdxColor(alpha: Float? = 1.0f): Color {
     return color
 }
 
-fun Int.toOppositeMax(alpha: Float? = 1.0f): Color {
+fun Int.toInverseBackOrWhite(alpha: Float? = 1.0f): Color {
     val sumRgb = (
         android.graphics.Color.red(this) +
             android.graphics.Color.green(this) +

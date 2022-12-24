@@ -29,6 +29,7 @@ object Themes {
             focus = 0xD32F2F,
         ),
         isPaid = true,
+        isDarkTheme = false,
     )
 
     private fun darkTheme() = AppTheme(
@@ -53,6 +54,7 @@ object Themes {
             focus = 0xFFFFFF,
         ),
         isPaid = true,
+        isDarkTheme = true,
     )
 
     private fun amoledTheme() = AppTheme(
@@ -76,6 +78,7 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = true,
     )
 
     private fun amoledTheme2() = AppTheme(
@@ -99,6 +102,7 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = true,
     )
 
     private fun standardChessTheme() = AppTheme(
@@ -122,6 +126,7 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun goldenTheme() = AppTheme(
@@ -145,6 +150,7 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun blueTheme() = AppTheme(
@@ -168,6 +174,7 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun gardenTheme() = AppTheme(
@@ -191,6 +198,7 @@ object Themes {
             highlight = 0x689f38,
             focus = 0xFFFFFF,
         ),
+        isDarkTheme = false,
     )
 
     private fun marineTheme() = AppTheme(
@@ -214,6 +222,7 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun blueGreyTheme() = AppTheme(
@@ -237,6 +246,7 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun darkBlueGreyTheme() = AppTheme(
@@ -260,6 +270,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun darkOrangeTheme() = AppTheme(
@@ -283,6 +294,7 @@ object Themes {
             highlight = 0xfb8c00,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = true,
     )
 
     private fun darkLimeTheme() = AppTheme(
@@ -306,6 +318,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = true,
     )
 
     private fun darkYellowTheme() = AppTheme(
@@ -329,6 +342,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = true,
     )
 
     private fun pinkTheme() = AppTheme(
@@ -352,6 +366,7 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun darkPinkTheme() = AppTheme(
@@ -375,6 +390,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = true,
     )
 
     private fun purpleTheme() = AppTheme(
@@ -398,6 +414,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun darkPurpleTheme() = AppTheme(
@@ -421,6 +438,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = true,
     )
 
     private fun brownTheme() = AppTheme(
@@ -444,6 +462,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun redTheme() = AppTheme(
@@ -467,6 +486,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun wineTheme() = AppTheme(
@@ -490,6 +510,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun darkBlueTheme() = AppTheme(
@@ -513,6 +534,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun darkWhiteTheme() = AppTheme(
@@ -536,6 +558,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = true,
     )
 
     private fun darkLightBlueTheme() = AppTheme(
@@ -559,6 +582,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = true,
     )
 
     private fun darkRedTheme() = AppTheme(
@@ -582,6 +606,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = true,
     )
 
     private fun darkPurpleTheme2() = AppTheme(
@@ -605,6 +630,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = true,
     )
 
     private fun whiteYellowTheme() = AppTheme(
@@ -628,6 +654,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun whiteOrangeTheme() = AppTheme(
@@ -651,6 +678,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     private fun whiteDarkYellowTheme() = AppTheme(
@@ -674,6 +702,7 @@ object Themes {
             highlight = 0xd1c4e9,
             focus = 0xD32F2F,
         ),
+        isDarkTheme = false,
     )
 
     fun getAllCustom() = listOf(
