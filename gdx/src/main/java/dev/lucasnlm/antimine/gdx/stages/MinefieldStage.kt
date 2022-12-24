@@ -277,16 +277,16 @@ class MinefieldStage(
         GameContext.apply {
             val theme = renderSettings.theme
             backgroundColor = if (theme.isDarkTheme && canTintAreas) {
-                theme.palette.covered.toGdxColor(0.035f * GameContext.zoomLevelAlpha)
+                theme.palette.covered.toGdxColor(0.035f * zoomLevelAlpha)
             } else {
-                theme.palette.background.toInverseBackOrWhite(0.1f * GameContext.zoomLevelAlpha)
+                theme.palette.background.toInverseBackOrWhite(0.1f * zoomLevelAlpha)
             }
             coveredAreaColor = theme.palette.covered.toGdxColor(1.0f)
             coveredMarkedAreaColor = theme.palette.covered.toGdxColor(1.0f).dim(0.6f)
             markColor = if (canTintAreas) {
                 theme.palette.covered.toInverseBackOrWhite(0.8f)
             } else {
-                GameContext.whiteColor
+                whiteColor
             }
         }
 
