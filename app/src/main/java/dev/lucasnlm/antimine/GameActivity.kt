@@ -22,7 +22,7 @@ import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
-import dev.lucasnlm.antimine.common.level.view.GdxLevelFragment
+import dev.lucasnlm.antimine.common.level.view.GameRenderFragment
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.ControlActivity
@@ -669,14 +669,14 @@ class GameActivity :
 
     private suspend fun loadGameFragment() {
         supportFragmentManager.apply {
-            if (findFragmentByTag(GdxLevelFragment.TAG) == null) {
+            if (findFragmentByTag(GameRenderFragment.TAG) == null) {
                 val fragment = withContext(Dispatchers.IO) {
-                    GdxLevelFragment()
+                    GameRenderFragment()
                 }
 
                 withContext(Dispatchers.Main) {
                     beginTransaction().apply {
-                        replace(R.id.levelContainer, fragment, GdxLevelFragment.TAG)
+                        replace(R.id.levelContainer, fragment, GameRenderFragment.TAG)
                         setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         commitAllowingStateLoss()
                     }

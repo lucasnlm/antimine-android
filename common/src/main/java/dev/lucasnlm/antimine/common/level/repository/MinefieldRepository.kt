@@ -25,7 +25,7 @@ class MinefieldRepository : IMinefieldRepository {
         dimensionRepository: IDimensionRepository,
         progressiveMines: Int,
     ): Minefield {
-        val fieldSize = dimensionRepository.defaultAreaSize()
+        val fieldSize = dimensionRepository.areaSize()
         val horizontalGap = if (dimensionRepository.horizontalNavigationBarHeight() > 0) {
             HORIZONTAL_STANDARD_GAP
         } else {

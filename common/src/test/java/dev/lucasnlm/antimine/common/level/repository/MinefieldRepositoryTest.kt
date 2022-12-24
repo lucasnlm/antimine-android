@@ -27,7 +27,6 @@ class MinefieldRepositoryTest {
             every { areaSize() } returns 10.0f
             every { verticalNavigationBarHeight() } returns 0
             every { displaySize() } returns Size(1000, 1000)
-            every { defaultAreaSize() } returns 10.0f
         }
 
         val minefield = minefieldRepository.fromDifficulty(
@@ -49,7 +48,6 @@ class MinefieldRepositoryTest {
             every { areaSize() } returns 10.0f
             every { verticalNavigationBarHeight() } returns 100
             every { displaySize() } returns Size(1000, 1000)
-            every { defaultAreaSize() } returns 10.0f
         }
 
         val minefield = minefieldRepository.fromDifficulty(
@@ -71,7 +69,6 @@ class MinefieldRepositoryTest {
             every { areaSize() } returns 10.0f
             every { verticalNavigationBarHeight() } returns 100
             every { displaySize() } returns Size(1000, 1000)
-            every { defaultAreaSize() } returns 10.0f
         }
 
         val minefield = minefieldRepository.fromDifficulty(
@@ -93,7 +90,6 @@ class MinefieldRepositoryTest {
             every { areaSize() } returns 10.0f
             every { verticalNavigationBarHeight() } returns 100
             every { displaySize() } returns Size(1000, 1000)
-            every { defaultAreaSize() } returns 10.0f
         }
 
         val minefield = minefieldRepository.fromDifficulty(

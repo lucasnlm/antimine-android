@@ -13,7 +13,6 @@ import dev.lucasnlm.antimine.core.R
 interface IDimensionRepository {
     fun areaSize(): Float
     fun areaSizeWithPadding(): Float
-    fun defaultAreaSize(): Float
     fun areaSeparator(): Float
     fun displaySize(): Size
     fun actionBarSizeWithStatus(): Int
@@ -54,12 +53,6 @@ class DimensionRepository(
 
     override fun areaSizeWithPadding(): Float {
         return areaSize() + 2 * areaSeparator()
-    }
-
-    override fun defaultAreaSize(): Float {
-        val multiplier = 0.5f
-        val maxArea = context.resources.getDimension(R.dimen.field_size)
-        return maxArea * multiplier
     }
 
     override fun displaySize(): Size = with(Resources.getSystem().displayMetrics) {

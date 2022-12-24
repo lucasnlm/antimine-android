@@ -31,7 +31,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.system.exitProcess
 
-open class GdxLevelFragment : AndroidFragmentApplication() {
+open class GameRenderFragment : AndroidFragmentApplication() {
     private val gameViewModel by sharedViewModel<GameViewModel>()
     private val themeRepository: IThemeRepository by inject()
     private val dimensionRepository: IDimensionRepository by inject()
@@ -181,7 +181,13 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT,
         ).apply {
-            val bottomMargin = context.dpToPx(48)
+            val navHeight = dimensionRepository.navigationBarHeight()
+            val baseBottomDp = 48
+            val bottomMargin = if (navHeight == 0) {
+                context.dpToPx(baseBottomDp)
+            } else {
+                context.dpToPx(baseBottomDp + 32)
+            }
             gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
             setMargins(0, 0, 0, bottomMargin)
         }
@@ -226,7 +232,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                     val isParentFinishing = activity?.isFinishing ?: true
                     if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen && !isParentFinishing) {
                         (view.parent as? FrameLayout)?.apply {
-                            this@GdxLevelFragment.controlSwitcher = SwitchButtonView(context).apply {
+                            this@GameRenderFragment.controlSwitcher = SwitchButtonView(context).apply {
                                 alpha = 0f
                                 animate().apply {
                                     alpha(1.0f)
@@ -235,7 +241,7 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
                                 }
                             }
 
-                            addView(this@GdxLevelFragment.controlSwitcher, getSwitchControlLayoutParams())
+                            addView(this@GameRenderFragment.controlSwitcher, getSwitchControlLayoutParams())
                         }
                     }
                 }
@@ -244,6 +250,6 @@ open class GdxLevelFragment : AndroidFragmentApplication() {
     }
 
     companion object {
-        val TAG = GdxLevelFragment::class.simpleName
+        val TAG = GameRenderFragment::class.simpleName
     }
 }
