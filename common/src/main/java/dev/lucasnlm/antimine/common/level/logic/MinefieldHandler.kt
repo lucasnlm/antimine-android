@@ -34,8 +34,8 @@ class MinefieldHandler(
             .forEach { field[it.id] = it.copy(mistake = false) }
     }
 
-    fun revealRandomMineNearUncoveredArea(lastX: Int? = null, lastY: Int? = null): Boolean {
-        val unrevealedMines = field.filter { it.hasMine && it.mark.isNone() && !it.revealed }
+    fun revealRandomMineNearUncoveredArea(lastX: Int? = null, lastY: Int? = null): Int? {
+        val unrevealedMines = field.filter { it.hasMine && it.mark.isNone() && !it.revealed && it.isCovered }
         val nearestTarget = if (lastX != null && lastY != null) {
             unrevealedMines.filter {
                 (lastX - it.posX).absoluteValue < 3 && (lastY - it.posY).absoluteValue < 3
@@ -44,20 +44,18 @@ class MinefieldHandler(
             null
         }
 
-        val result = when {
+        return when {
             nearestTarget != null -> {
                 field[nearestTarget.id] = nearestTarget.copy(revealed = true)
-                true
+                nearestTarget.id
             }
             else -> {
                 unrevealedMines.shuffled().firstOrNull()?.run {
                     field[this.id] = this.copy(revealed = true)
-                    true
+                    this.id
                 }
             }
         }
-
-        return result ?: false
     }
 
     fun removeMarkAt(index: Int) {

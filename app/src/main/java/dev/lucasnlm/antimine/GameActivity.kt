@@ -488,12 +488,11 @@ class GameActivity :
                                 activity = this@GameActivity,
                                 skipIfFrequent = false,
                                 onRewarded = {
-                                    val value = 5
                                     gameViewModel.revealRandomMine(false)
-                                    gameViewModel.sendEvent(GameEvent.GiveMoreTip(value))
+                                    gameViewModel.sendEvent(GameEvent.GiveMoreTip)
                                 },
                                 onFail = {
-                                    showGameWarning(R.string.cant_do_it_now)
+                                    showGameWarning(R.string.fail_to_load_ad)
                                 },
                             )
                         }
@@ -501,36 +500,7 @@ class GameActivity :
                 } else {
                     setOnClickListener {
                         lifecycleScope.launch {
-                            analyticsManager.sentEvent(Analytics.UseTip)
-
-                            if (gameViewModel.getTips() > 0) {
-                                if (!gameViewModel.revealRandomMine()) {
-                                    showGameWarning(R.string.cant_do_it_now)
-                                } else {
-                                    if (featureFlagManager.showAdWhenUsingTip) {
-                                        if (!preferencesRepository.isPremiumEnabled()) {
-                                            val state = gameViewModel.singleState()
-                                            val adReward = (state.mineCount ?: 0) < state.minefield.mines * 0.10
-
-                                            if (adReward) {
-                                                adsManager.showRewardedAd(
-                                                    this@GameActivity,
-                                                    skipIfFrequent = false,
-                                                    onRewarded = {},
-                                                    onFail = {},
-                                                )
-                                            } else {
-                                                adsManager.showInterstitialAd(
-                                                    activity = this@GameActivity,
-                                                    onDismiss = {},
-                                                )
-                                            }
-                                        }
-                                    }
-                                }
-                            } else {
-                                showGameWarning(R.string.help_win_a_game)
-                            }
+                            revealRandomMine()
                         }
                     }
                 }
@@ -562,6 +532,22 @@ class GameActivity :
                     showGameWarning(R.string.cant_do_it_now)
                 }
             }
+        }
+    }
+
+    private fun revealRandomMine() {
+        analyticsManager.sentEvent(Analytics.UseTip)
+
+        val hintAmount = gameViewModel.getTips()
+        if (hintAmount > 0) {
+            val revealedId = gameViewModel.revealRandomMine()
+            if (revealedId == null) {
+                showGameWarning(R.string.cant_do_it_now)
+            } else {
+                showGameWarning(R.string.mine_revealed)
+            }
+        } else {
+            showGameWarning(R.string.help_win_a_game)
         }
     }
 

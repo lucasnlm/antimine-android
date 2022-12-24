@@ -91,7 +91,7 @@ open class GameViewModel(
                 sendSideEffect(GameEvent.ShowNewGameDialog)
             }
             is GameEvent.GiveMoreTip -> {
-                tipRepository.increaseTip(event.value)
+                tipRepository.increaseTip(5)
 
                 val newState = state.copy(
                     tips = tipRepository.getTotalTips(),
@@ -602,14 +602,15 @@ open class GameViewModel(
         gameController.revealAllEmptyAreas()
     }
 
-    fun revealRandomMine(consume: Boolean = true): Boolean {
-        return if (initialized && gameController.revealRandomMine()) {
-            if (consume) {
+    fun revealRandomMine(consume: Boolean = true): Int? {
+        return if (initialized) {
+            val result = gameController.revealRandomMine()
+            if (consume && result != null) {
                 sendEvent(GameEvent.ConsumeTip)
             }
-            true
+            result
         } else {
-            false
+            null
         }
     }
 
@@ -715,12 +716,12 @@ open class GameViewModel(
     private fun calcRewardHints(): Int {
         return if (clock.time() > 10L && preferencesRepository.isPremiumEnabled()) {
             val rewardedHints = if (isCompletedWithMistakes()) {
-                (state.minefield.mines * 0.025).toInt()
+                (state.minefield.mines * 0.025)
             } else {
-                (state.minefield.mines * 0.05).toInt()
+                (state.minefield.mines * 0.05)
             }
 
-            rewardedHints
+            rewardedHints.toInt().coerceAtLeast(1)
         } else {
             0
         }

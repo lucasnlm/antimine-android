@@ -355,17 +355,17 @@ class GameController {
         }
     }
 
-    fun revealRandomMine(): Boolean {
-        val result: Boolean
+    fun revealRandomMine(): Int? {
+        val resultId: Int?
         field = MinefieldHandler(
             field = field.toMutableList(),
             useQuestionMark = false,
             individualActions = useIndividualActions(),
         ).run {
-            result = revealRandomMineNearUncoveredArea(lastIdInteractionX, lastIdInteractionY)
+            resultId = revealRandomMineNearUncoveredArea(lastIdInteractionX, lastIdInteractionY)
             result()
         }
-        return result
+        return resultId
     }
 
     fun hasAnyMineExploded(): Boolean = mines().firstOrNull { it.mistake } != null
