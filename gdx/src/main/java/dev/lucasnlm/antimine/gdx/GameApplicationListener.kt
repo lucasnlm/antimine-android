@@ -18,7 +18,6 @@ import dev.lucasnlm.antimine.gdx.controller.GameInputController
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
 import dev.lucasnlm.antimine.gdx.models.GameTextures
 import dev.lucasnlm.antimine.gdx.models.InternalPadding
-import dev.lucasnlm.antimine.gdx.models.RenderQuality
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
 import dev.lucasnlm.antimine.gdx.shaders.BlurShader
 import dev.lucasnlm.antimine.gdx.stages.MinefieldStage
@@ -36,7 +35,6 @@ class GameApplicationListener(
     private val preferencesRepository: IPreferencesRepository,
     private val themeRepository: IThemeRepository,
     private val dimensionRepository: IDimensionRepository,
-    private val quality: RenderQuality,
     private val onSingleTap: (Int) -> Unit,
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTap: (Int) -> Unit,
@@ -46,7 +44,7 @@ class GameApplicationListener(
     private var minefieldStage: MinefieldStage? = null
     private var boundAreas: List<Area> = listOf()
     private var boundMinefield: Minefield? = null
-    private val useBlur = quality != RenderQuality.Low && context.isPortrait()
+    private val useBlur = context.isPortrait()
 
     private var batch: SpriteBatch? = null
     private var mainFrameBuffer: FrameBuffer? = null
@@ -61,7 +59,6 @@ class GameApplicationListener(
         appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
         appBarHeight = if (context.isPortrait()) { dimensionRepository.actionBarSize().toFloat() } else { 0f },
         joinAreas = themeRepository.getSkin().joinAreas,
-        quality = quality,
     )
 
     private var actionSettings = with(preferencesRepository) {

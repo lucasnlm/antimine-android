@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.GridPoint2
-import dev.lucasnlm.antimine.gdx.models.RenderQuality
 
 object GameTextureAtlas {
     private const val textureSize = 2048 / 8

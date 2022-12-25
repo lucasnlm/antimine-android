@@ -33,11 +33,11 @@ class SwitchButtonView : FrameLayout {
 
     private val selectedIconTint = MaterialColors.getColorStateListOrNull(
         context,
-        R.attr.colorOnSurfaceInverse,
+        R.attr.colorOnPrimary,
     )
     private val selectedBackgroundTint = MaterialColors.getColorStateListOrNull(
         context,
-        R.attr.colorAccent,
+        R.attr.colorPrimary,
     )
     private val unselectedIconTint = flagButton.iconTint
     private val unselectedBackgroundTint = flagButton.backgroundTintList

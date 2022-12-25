@@ -10,5 +10,4 @@ data class RenderSettings(
     val appBarWithStatusHeight: Float,
     val appBarHeight: Float,
     val joinAreas: Boolean,
-    val quality: RenderQuality,
 )

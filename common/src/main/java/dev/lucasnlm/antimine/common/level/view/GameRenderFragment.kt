@@ -17,7 +17,6 @@ import dev.lucasnlm.antimine.core.IAppVersionManager
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
-import dev.lucasnlm.antimine.gdx.models.RenderQuality
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
@@ -71,7 +70,6 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                     gameViewModel.sendEvent(GameEvent.EngineReady)
                 }
             },
-            quality = getQuality(),
         )
     }
 
@@ -122,12 +120,6 @@ open class GameRenderFragment : AndroidFragmentApplication() {
             gameViewModel.observeState().collect {
                 levelApplicationListener.bindField(it.field)
 
-                if (it.turn == 0) {
-                    bindControlSwitcherIfNeeded(view, false)
-                }
-
-                bindControlSwitcherIfNeeded(view, false)
-
                 if (it.isActive && !it.isGameCompleted) {
                     levelApplicationListener.setActionsEnabled(true)
                 } else {
@@ -160,21 +152,6 @@ open class GameRenderFragment : AndroidFragmentApplication() {
         }
     }
 
-    private fun getQuality(): RenderQuality {
-        val width = getSystem().displayMetrics.widthPixels
-        return when {
-            width < 900 -> {
-                RenderQuality.Low
-            }
-            width < 1080 -> {
-                RenderQuality.Mid
-            }
-            else -> {
-                RenderQuality.High
-            }
-        }
-    }
-
     private fun getSwitchControlLayoutParams(): FrameLayout.LayoutParams {
         val context = requireContext()
         return FrameLayout.LayoutParams(
@@ -197,24 +174,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
         val controlSwitcher = controlSwitcher
         if (controlSwitcher != null) {
             if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
-                controlSwitcher.apply {
-                    visibility = View.VISIBLE
-                    layoutParams = getSwitchControlLayoutParams()
-
-                    setQuestionButtonVisibility(preferencesRepository.useQuestionMark())
-
-                    setOnFlagClickListener {
-                        gameViewModel.changeSwitchControlAction(Action.SwitchMark)
-                    }
-
-                    setOnOpenClickListener {
-                        gameViewModel.changeSwitchControlAction(Action.OpenTile)
-                    }
-
-                    setOnQuestionClickListener {
-                        gameViewModel.changeSwitchControlAction(Action.QuestionMark)
-                    }
-                }
+                controlSwitcher.visibility = View.VISIBLE
             } else {
                 controlSwitcher.visibility = View.GONE
             }
@@ -232,15 +192,35 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                                     start()
                                 }
 
+                                visibility = View.VISIBLE
+                                layoutParams = getSwitchControlLayoutParams()
+
+                                setQuestionButtonVisibility(preferencesRepository.useQuestionMark())
+
+                                setOnFlagClickListener {
+                                    gameViewModel.changeSwitchControlAction(Action.SwitchMark)
+                                }
+
+                                setOnOpenClickListener {
+                                    gameViewModel.changeSwitchControlAction(Action.OpenTile)
+                                }
+
+                                setOnQuestionClickListener {
+                                    gameViewModel.changeSwitchControlAction(Action.QuestionMark)
+                                }
+
                                 val selectedAction = preferencesRepository.getSwitchControlAction()
                                 val openAsDefault = selectedAction == Action.OpenTile || selectedAction == Action.QuestionMark
                                 selectOpenAsDefault(openAsDefault)
+                                if (openAsDefault) {
+                                    gameViewModel.changeSwitchControlAction(Action.OpenTile)
+                                } else {
+                                    gameViewModel.changeSwitchControlAction(Action.SwitchMark)
+                                }
                             }
 
                             addView(this@GameRenderFragment.controlSwitcher, getSwitchControlLayoutParams())
                         }
-
-                        gameViewModel.changeSwitchControlAction(Action.SwitchMark)
                     }
                 }
             }
