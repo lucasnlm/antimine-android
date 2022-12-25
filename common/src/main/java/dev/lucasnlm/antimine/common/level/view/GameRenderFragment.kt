@@ -214,14 +214,6 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                     setOnQuestionClickListener {
                         gameViewModel.changeSwitchControlAction(Action.QuestionMark)
                     }
-
-                    val selectedAction = preferencesRepository.getSwitchControlAction()
-                    val openAsDefault = selectedAction == Action.OpenTile || selectedAction == Action.QuestionMark
-                    selectOpenAsDefault(openAsDefault)
-
-                    if (selectedAction == Action.QuestionMark) {
-                        preferencesRepository.setSwitchControl(Action.OpenTile)
-                    }
                 }
             } else {
                 controlSwitcher.visibility = View.GONE
@@ -239,10 +231,16 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                                     duration = 300L
                                     start()
                                 }
+
+                                val selectedAction = preferencesRepository.getSwitchControlAction()
+                                val openAsDefault = selectedAction == Action.OpenTile || selectedAction == Action.QuestionMark
+                                selectOpenAsDefault(openAsDefault)
                             }
 
                             addView(this@GameRenderFragment.controlSwitcher, getSwitchControlLayoutParams())
                         }
+
+                        gameViewModel.changeSwitchControlAction(Action.SwitchMark)
                     }
                 }
             }

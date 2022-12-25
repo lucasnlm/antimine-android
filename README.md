@@ -35,7 +35,8 @@ Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-andro
 ## Features
 
 - No guessing algorithm
-- Multiple Themes (including System and AMOLED)
+- Multiple themes colors (including dynamic colors and AMOLED)
+- Multiple skins (including the classic)
 - Game Levels: Beginner, Intermediate, Expert, Master, Legend, and Custom
 - Game Statistics
 - Save/Resume state when Quit/Resume game
@@ -49,7 +50,6 @@ Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-andro
 - Game assistant to auto-flag discovered mines
 - Split screen
 - Zoom out
-- Custom appearance (square roundedness, size and divider)
 
 ## Technical Details
 
