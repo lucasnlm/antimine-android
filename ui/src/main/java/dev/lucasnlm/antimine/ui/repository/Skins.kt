@@ -19,7 +19,7 @@ object Skins {
         canTint = true,
         isPaid = true,
         joinAreas = true,
-        imageRes = R.drawable.skin_standard,
+        imageRes = R.drawable.skin_square,
     )
 
     private fun square2() = AppSkin(
@@ -28,7 +28,7 @@ object Skins {
         canTint = true,
         isPaid = true,
         joinAreas = true,
-        imageRes = R.drawable.skin_standard,
+        imageRes = R.drawable.skin_square_2,
     )
 
     private fun square3() = AppSkin(
@@ -37,7 +37,7 @@ object Skins {
         canTint = true,
         isPaid = true,
         joinAreas = true,
-        imageRes = R.drawable.skin_standard,
+        imageRes = R.drawable.skin_square_3,
     )
 
     private fun classic() = AppSkin(
@@ -46,7 +46,7 @@ object Skins {
         canTint = true,
         isPaid = true,
         joinAreas = false,
-        imageRes = R.drawable.skin_standard,
+        imageRes = R.drawable.skin_classic,
     )
 
     private fun classic2() = AppSkin(
@@ -55,7 +55,7 @@ object Skins {
         canTint = false,
         isPaid = true,
         joinAreas = false,
-        imageRes = R.drawable.skin_standard,
+        imageRes = R.drawable.skin_classic,
     )
 
     private fun glass() = AppSkin(
@@ -64,20 +64,29 @@ object Skins {
         canTint = true,
         isPaid = true,
         joinAreas = false,
-        imageRes = R.drawable.skin_standard,
+        imageRes = R.drawable.skin_glass_2,
     )
 
     private fun stone() = AppSkin(
         id = 7,
         file = "stone.png",
+        canTint = false,
+        isPaid = true,
+        joinAreas = false,
+        imageRes = R.drawable.skin_stone,
+    )
+
+    private fun stone2() = AppSkin(
+        id = 8,
+        file = "stone-2.png",
         canTint = true,
         isPaid = true,
         joinAreas = false,
-        imageRes = R.drawable.skin_standard,
+        imageRes = R.drawable.skin_stone_2,
     )
 
     private fun defaultNoJoin() = AppSkin(
-        id = 8,
+        id = 9,
         file = "standard.png",
         canTint = true,
         isPaid = true,
@@ -89,11 +98,12 @@ object Skins {
         default(),
         classic(),
         classic2(),
+        stone(),
+        glass(),
         square(),
         square2(),
         square3(),
-        glass(),
-        stone(),
+        stone2(),
         defaultNoJoin(),
     )
 }

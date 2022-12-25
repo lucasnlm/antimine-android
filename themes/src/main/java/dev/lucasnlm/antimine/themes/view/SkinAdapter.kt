@@ -49,17 +49,21 @@ class SkinAdapter(
         val tintColor = themeRepository.getTheme().palette.covered.toAndroidColor()
 
         holder.itemView.apply {
+            val selected = (skin.id == themeViewModel.singleState().currentAppSkin.id)
+
             val backgroundColor = MaterialColors.getColorStateListOrNull(
                 context,
                 R.attr.backgroundColor,
             )
 
-            val selected = (skin.id == themeViewModel.singleState().currentAppSkin.id)
+            val strokeColor = MaterialColors.getColorStateListOrNull(
+                context,
+                if (selected) R.attr.colorTertiary else R.attr.backgroundColor,
+            )
 
             cardSkin.apply {
-                alpha = if (selected) 0.5f else 1.0f
                 backgroundTintList = backgroundColor
-                setStrokeColor(backgroundColor)
+                setStrokeColor(strokeColor)
                 setOnClickListener {
                     if (preferencesRepository.isPremiumEnabled()) {
                         onSelectSkin(skin)
@@ -70,11 +74,12 @@ class SkinAdapter(
             }
 
             skinImage.apply {
+                alpha = if (selected) 1.0f else 0.5f
                 setImageResource(skin.imageRes)
                 if (skin.canTint) {
                     setColorFilter(tintColor, PorterDuff.Mode.MULTIPLY)
                 } else {
-                    setColorFilter(Color.WHITE)
+                    setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY)
                 }
             }
         }

@@ -47,7 +47,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/skins"
                     android:layout_width="match_parent"
-                    android:layout_height="96dp"/>
+                    android:layout_height="74dp"/>
 
             </com.google.android.material.card.MaterialCardView>
 

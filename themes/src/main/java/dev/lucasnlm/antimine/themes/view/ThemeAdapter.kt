@@ -69,7 +69,7 @@ class ThemeAdapter(
                 setStrokeColor(
                     MaterialColors.getColorStateListOrNull(
                         context,
-                        R.attr.backgroundColor,
+                        if (selected) R.attr.colorTertiary else R.attr.backgroundColor,
                     ),
                 )
                 setOnClickListener {

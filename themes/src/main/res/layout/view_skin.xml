@@ -6,8 +6,8 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardSkin"
-        android:layout_width="86dp"
-        android:layout_height="86dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?selectableItemBackground"

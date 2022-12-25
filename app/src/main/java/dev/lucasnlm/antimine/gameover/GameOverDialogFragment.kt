@@ -5,11 +5,9 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -300,7 +298,15 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
             setView(view)
         }.create().apply {
             setCanceledOnTouchOutside(false)
-            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            window?.apply {
+                setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
+                    attributes?.blurBehindRadius = 8
+                }
+            }
         }
     }
 
