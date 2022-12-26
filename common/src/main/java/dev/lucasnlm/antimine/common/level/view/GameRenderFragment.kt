@@ -209,7 +209,8 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                                 }
 
                                 val selectedAction = preferencesRepository.getSwitchControlAction()
-                                val openAsDefault = selectedAction == Action.OpenTile || selectedAction == Action.QuestionMark
+                                val openAsDefault =
+                                    selectedAction == Action.OpenTile || selectedAction == Action.QuestionMark
                                 selectOpenAsDefault(openAsDefault)
                                 if (openAsDefault) {
                                     gameViewModel.changeSwitchControlAction(Action.OpenTile)
