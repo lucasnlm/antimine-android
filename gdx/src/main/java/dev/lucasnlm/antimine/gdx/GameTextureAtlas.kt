@@ -19,7 +19,7 @@ object GameTextureAtlas {
     }
 
     fun loadTextureAtlas(skinFile: String): TextureAtlas {
-         val textureRegions = gridOf(
+        val textureRegions = gridOf(
             AtlasNames.core to gp(x = 0, y = 0),
             AtlasNames.bottom to gp(x = 1, y = 0),
             AtlasNames.top to gp(x = 2, y = 0),

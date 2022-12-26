@@ -18,6 +18,7 @@
     <string name="legend">Legend</string>
     <string name="open">Open</string>
     <string name="settings">Settings</string>
+    <string name="control_settings">Control Settings</string>
     <string name="shapes">Shapes</string>
     <string name="animations">Animations</string>
     <string name="vibration">Haptic Feedback</string>

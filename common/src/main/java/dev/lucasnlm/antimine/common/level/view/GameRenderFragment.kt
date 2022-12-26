@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.common.level.view
 
-import android.content.res.Resources.getSystem
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater

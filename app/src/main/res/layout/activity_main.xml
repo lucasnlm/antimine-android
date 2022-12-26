@@ -44,239 +44,308 @@
                 app:drawableTint="?colorOnSurfaceVariant"
                 tools:text="@string/app_name" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/continueGame"
-                style="@style/CustomButtonActive"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/new_game_card"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                app:icon="@drawable/play" />
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="8dp"
+                app:cardElevation="0dp"
+                app:strokeColor="?colorControlNormal">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/newGameShow"
-                style="@style/CustomButton"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/continueGame"
+                        style="@style/CustomButtonActive"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_marginTop="4dp"
+                        app:icon="@drawable/play" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/newGameShow"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/new_game"
+                        app:icon="@drawable/more" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/difficulties"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:visibility="gone"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="0dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="false"
+                        app:contentPadding="0dp"
+                        app:strokeColor="?colorPrimary"
+                        app:strokeWidth="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startStandard"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/progressive" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/standardSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startFixedSize"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/fixed_size" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/fixedSizeSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
+
+                            <View
+                                android:id="@+id/difficultyDivider1"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="?colorPrimary" />
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startBeginner"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/beginner" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/beginnerSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startIntermediate"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/intermediate" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/intermediateSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startExpert"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/expert" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/expertSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startMaster"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/master" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/masterSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startLegend"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/legend" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/legendSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
+
+                            <View
+                                android:id="@+id/difficultyDivider2"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="?colorPrimary" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/startCustom"
+                                style="@style/CustomButtonFlat"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:paddingHorizontal="18dp"
+                                android:text="@string/custom" />
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/new_game"
-                app:icon="@drawable/more" />
+                android:layout_height="8dp" />
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/difficulties"
+                android:id="@+id/settings_card"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
-                android:visibility="gone"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="8dp"
                 app:cardElevation="0dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false"
-                app:contentPadding="0dp"
-                app:strokeColor="?colorPrimary"
-                app:strokeWidth="2dp">
+                app:strokeColor="?colorControlNormal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/startStandard"
-                            style="@style/CustomButtonFlat"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="start|center_vertical"
-                            android:paddingHorizontal="18dp"
-                            android:text="@string/progressive" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/standardSize"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end|center_vertical"
-                            android:alpha="0.9"
-                            android:includeFontPadding="false"
-                            android:paddingHorizontal="18dp"
-                            android:textColor="?colorPrimary"
-                            tools:text="8x8x8" />
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/startFixedSize"
-                            style="@style/CustomButtonFlat"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="start|center_vertical"
-                            android:paddingHorizontal="18dp"
-                            android:text="@string/fixed_size" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/fixedSizeSize"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end|center_vertical"
-                            android:alpha="0.9"
-                            android:includeFontPadding="false"
-                            android:paddingHorizontal="18dp"
-                            android:textColor="?colorPrimary"
-                            tools:text="8x8x8" />
-                    </FrameLayout>
-
-                    <View
-                        android:id="@+id/difficultyDivider1"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="?colorPrimary" />
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/startBeginner"
-                            style="@style/CustomButtonFlat"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="start|center_vertical"
-                            android:paddingHorizontal="18dp"
-                            android:text="@string/beginner" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/beginnerSize"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end|center_vertical"
-                            android:alpha="0.9"
-                            android:includeFontPadding="false"
-                            android:paddingHorizontal="18dp"
-                            android:textColor="?colorPrimary"
-                            tools:text="8x8x8" />
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/startIntermediate"
-                            style="@style/CustomButtonFlat"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="start|center_vertical"
-                            android:paddingHorizontal="18dp"
-                            android:text="@string/intermediate" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/intermediateSize"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end|center_vertical"
-                            android:alpha="0.9"
-                            android:includeFontPadding="false"
-                            android:paddingHorizontal="18dp"
-                            android:textColor="?colorPrimary"
-                            tools:text="8x8x8" />
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/startExpert"
-                            style="@style/CustomButtonFlat"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="start|center_vertical"
-                            android:paddingHorizontal="18dp"
-                            android:text="@string/expert" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/expertSize"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end|center_vertical"
-                            android:alpha="0.9"
-                            android:includeFontPadding="false"
-                            android:paddingHorizontal="18dp"
-                            android:textColor="?colorPrimary"
-                            tools:text="8x8x8" />
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/startMaster"
-                            style="@style/CustomButtonFlat"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="start|center_vertical"
-                            android:paddingHorizontal="18dp"
-                            android:text="@string/master" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/masterSize"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end|center_vertical"
-                            android:alpha="0.9"
-                            android:includeFontPadding="false"
-                            android:paddingHorizontal="18dp"
-                            android:textColor="?colorPrimary"
-                            tools:text="8x8x8" />
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/startLegend"
-                            style="@style/CustomButtonFlat"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="start|center_vertical"
-                            android:paddingHorizontal="18dp"
-                            android:text="@string/legend" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/legendSize"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end|center_vertical"
-                            android:alpha="0.9"
-                            android:includeFontPadding="false"
-                            android:paddingHorizontal="18dp"
-                            android:textColor="?colorPrimary"
-                            tools:text="8x8x8" />
-                    </FrameLayout>
-
-                    <View
-                        android:id="@+id/difficultyDivider2"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="?colorPrimary" />
-
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/startCustom"
-                        style="@style/CustomButtonFlat"
+                        android:id="@+id/themes"
+                        style="@style/CustomButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:paddingHorizontal="18dp"
-                        android:text="@string/custom" />
+                        android:text="@string/themes"
+                        app:icon="@drawable/themes" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/controls"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/control"
+                        app:icon="@drawable/controls" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings"
+                        app:icon="@drawable/settings" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -285,126 +354,125 @@
                 android:layout_width="match_parent"
                 android:layout_height="8dp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/tutorial"
-                style="@style/CustomButton"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/history_card"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/tutorial"
-                app:icon="@drawable/tutorial" />
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="8dp"
+                app:cardElevation="0dp"
+                app:strokeColor="?colorControlNormal">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/themes"
-                style="@style/CustomButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:text="@string/themes"
-                app:icon="@drawable/themes" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/settings"
-                style="@style/CustomButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/settings"
-                app:icon="@drawable/settings" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/controls"
-                style="@style/CustomButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/control"
-                app:icon="@drawable/controls" />
-
-            <FrameLayout
-                android:id="@+id/removeAdsRoot"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/removeAds"
-                    style="@style/CustomButton"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="start|center_vertical"
-                    android:text="@string/intermediate" />
+                    android:orientation="vertical">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/priceText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:includeFontPadding="false"
-                    android:paddingStart="0dp"
-                    android:paddingEnd="26dp"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"
-                    app:tint="?colorError"
-                    tools:text="$1,00" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/stats"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/events"
+                        app:icon="@drawable/stats" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/priceOff"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/offer"
-                    android:visibility="gone"
-                    app:tint="?colorError"
-                    app:tintMode="multiply" />
-            </FrameLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/previousGames"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/previous_games"
+                        app:icon="@drawable/old_games" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="8dp" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/stats"
-                style="@style/CustomButton"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/other_card"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/events"
-                app:icon="@drawable/stats" />
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="8dp"
+                app:cardElevation="0dp"
+                app:strokeColor="?colorControlNormal">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/previousGames"
-                style="@style/CustomButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/previous_games"
-                app:icon="@drawable/old_games" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="8dp" />
+                    <FrameLayout
+                        android:id="@+id/removeAdsRoot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/play_games"
-                style="@style/CustomButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/google_play_games"
-                app:icon="@drawable/games_controller" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/removeAds"
+                            style="@style/CustomButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="start|center_vertical"
+                            android:text="@string/intermediate" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/about"
-                style="@style/CustomButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/about"
-                app:icon="@drawable/info" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/priceText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|center_vertical"
+                            android:includeFontPadding="false"
+                            android:paddingStart="0dp"
+                            android:paddingEnd="26dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            app:tint="?colorError"
+                            tools:text="$1,00" />
 
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/priceOff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|center_vertical"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/offer"
+                            android:visibility="gone"
+                            app:tint="?colorError"
+                            app:tintMode="multiply" />
+                    </FrameLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/tutorial"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tutorial"
+                        app:icon="@drawable/tutorial" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/play_games"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/google_play_games"
+                        app:icon="@drawable/games_controller" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/about"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about"
+                        app:icon="@drawable/info" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
