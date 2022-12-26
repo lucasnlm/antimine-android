@@ -47,7 +47,7 @@ dependencies {
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.activity:activity-ktx:1.6.1'
-    implementation 'androidx.fragment:fragment-ktx:1.5.4'
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
 
     // Koin
     implementation 'io.insert-koin:koin-android:3.1.2'
