@@ -74,7 +74,8 @@ class SkinAdapter(
             }
 
             skinImage.apply {
-                alpha = if (selected) 1.0f else 0.5f
+                val floatAlpha = 0.45f
+                alpha = if (selected) 1.0f else floatAlpha
                 setImageResource(skin.imageRes)
                 if (skin.canTint) {
                     setColorFilter(tintColor, PorterDuff.Mode.MULTIPLY)

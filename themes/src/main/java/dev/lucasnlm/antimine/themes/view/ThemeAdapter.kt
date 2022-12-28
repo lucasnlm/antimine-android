@@ -44,8 +44,9 @@ class ThemeAdapter(
 
         holder.itemView.apply {
             val selected = (theme.id == themeViewModel.singleState().currentTheme.id)
-            val alpha = if (selected) 127 else 255
-            cardTheme.alpha = if (selected) 0.5f else 1.0f
+            val floatAlpha = 0.65f
+            val alpha = (if (selected) 255 else floatAlpha * 255).toInt()
+            cardTheme.alpha = if (selected) 1.0f else floatAlpha
 
             covered.setBackgroundColor(theme.palette.covered.toAndroidColor(alpha))
             uncovered.setBackgroundColor(theme.palette.background.toAndroidColor(alpha))

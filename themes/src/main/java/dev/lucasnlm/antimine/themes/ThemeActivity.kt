@@ -52,7 +52,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
             unlockAll.bind(
                 theme = usingTheme,
                 invert = true,
-                text = getString(R.string.remove_ad),
+                text = getString(R.string.unlock_all),
                 onAction = {
                     lifecycleScope.launch {
                         billingManager.charge(this@ThemeActivity)
@@ -65,7 +65,7 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
                     unlockAll.bind(
                         theme = usingTheme,
                         invert = true,
-                        text = getString(R.string.unlock),
+                        text = getString(R.string.unlock_all),
                         price = it.price,
                         showOffer = it.offer,
                         onAction = {
@@ -154,13 +154,13 @@ class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putIntArray(SCROLL_VIEW_STATE, intArrayOf(scrollView.scrollX, scrollView.scrollY))
+        outState.putIntArray(SCROLL_VIEW_STATE, intArrayOf(themes.scrollX, themes.scrollY))
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         savedInstanceState.getIntArray(SCROLL_VIEW_STATE)?.let { position ->
-            scrollView.post { scrollView.scrollTo(position[0], position[1]) }
+            themes.post { themes.scrollTo(position[0], position[1]) }
         }
     }
 
