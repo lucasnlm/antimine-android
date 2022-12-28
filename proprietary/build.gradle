@@ -4,10 +4,6 @@ plugins {
     id 'kotlin-android-extensions'
 }
 
-if (System.getenv('IS_GOOGLE_BUILD')) {
-    apply plugin: 'com.google.gms.google-services'
-}
-
 android {
     compileSdkVersion 33
 
@@ -18,7 +14,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -50,7 +46,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1'
 
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:30.4.1')
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-firestore-ktx'

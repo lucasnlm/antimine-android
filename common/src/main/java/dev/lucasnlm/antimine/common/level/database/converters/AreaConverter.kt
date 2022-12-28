@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.common.level.database.converters
 
+import androidx.annotation.Keep
 import androidx.room.TypeConverter
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi

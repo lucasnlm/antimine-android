@@ -15,3 +15,6 @@ add_library(# Sets the name of the library.
 
 target_link_libraries(# Specifies the target library.
                       sgtatham)
+
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -s -o3")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s -o3")

@@ -1,13 +1,12 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.firebase.firebase-perf'
+
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
-}
-
-if (System.getenv('IS_GOOGLE_BUILD')) {
-    apply plugin: 'com.google.firebase.crashlytics'
-    apply plugin: 'com.google.firebase.firebase-perf'
 }
 
 android {
@@ -23,14 +22,6 @@ android {
         vectorDrawables.useSupportLibrary true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         testInstrumentationRunnerArguments clearPackageData: 'true'
-    }
-
-    bundle {
-        language {
-            // Disable language split to support extra languages that google removes
-            // when building aab.
-            enableSplit = false
-        }
     }
 
     signingConfigs {
@@ -51,7 +42,8 @@ android {
         }
 
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }

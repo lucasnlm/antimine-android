@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.common.level.database.models
 
+import androidx.annotation.Keep
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -11,6 +12,7 @@ import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
+@Keep
 @Entity(tableName = "new_save")
 data class Save(
     @PrimaryKey(autoGenerate = true)

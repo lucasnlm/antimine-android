@@ -5,6 +5,13 @@ plugins {
 
 android {
     compileSdkVersion 33
+    ndkVersion '25.1.8937393'
+
+    externalNativeBuild {
+        cmake {
+            version "3.19.0+"
+        }
+    }
 
     defaultConfig {
         minSdkVersion 21
@@ -14,7 +21,7 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
         externalNativeBuild {
             cmake {
-                cppFlags ""
+                cppFlags "-std=c++20 -Ofast"
             }
         }
     }

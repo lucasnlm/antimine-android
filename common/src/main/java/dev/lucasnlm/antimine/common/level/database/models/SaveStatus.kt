@@ -1,8 +1,10 @@
 package dev.lucasnlm.antimine.common.level.database.models
 
+import androidx.annotation.Keep
 import androidx.room.TypeConverters
 import dev.lucasnlm.antimine.common.level.database.converters.SaveStatusConverter
 
+@Keep
 @TypeConverters(SaveStatusConverter::class)
 enum class SaveStatus(
     val code: Int,
