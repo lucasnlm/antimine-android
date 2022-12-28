@@ -69,7 +69,7 @@
             android:textAlignment="center"
             android:visibility="gone"
             app:drawableEndCompat="@drawable/hint"
-            app:drawableTint="@color/accent"
+            app:drawableTint="?colorSecondaryVariant"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/subtitle"
