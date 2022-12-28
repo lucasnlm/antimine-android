@@ -216,8 +216,8 @@ class PreferencesRepository(
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT, value.toInt())
     }
 
-    override fun themeId(): Long =
-        preferencesManager.getInt(PreferenceKeys.PREFERENCE_CUSTOM_THEME, 0).toLong()
+    override fun themeId(): Long? =
+        preferencesManager.getIntOrNull(PreferenceKeys.PREFERENCE_CUSTOM_THEME)?.toLong()
 
     override fun useTheme(themeId: Long) {
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_CUSTOM_THEME, themeId.toInt())

@@ -9,13 +9,13 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.stats.view.StatsAdapter
 import dev.lucasnlm.antimine.stats.viewmodel.StatsEvent
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
-import dev.lucasnlm.antimine.ui.ext.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.model.TopBarAction
 import kotlinx.android.synthetic.main.activity_stats.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class StatsActivity : ThematicActivity(R.layout.activity_stats) {
+class StatsActivity : ThemedActivity(R.layout.activity_stats) {
     private val statsViewModel by viewModel<StatsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

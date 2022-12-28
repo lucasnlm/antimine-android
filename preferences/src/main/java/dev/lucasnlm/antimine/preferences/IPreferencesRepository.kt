@@ -33,7 +33,7 @@ interface IPreferencesRepository {
     fun getDoubleClickTimeout(): Long
     fun setDoubleClickTimeout(value: Long)
 
-    fun themeId(): Long
+    fun themeId(): Long?
     fun useTheme(themeId: Long)
 
     fun skinId(): Long

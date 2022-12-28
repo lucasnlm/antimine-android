@@ -38,7 +38,7 @@ import dev.lucasnlm.antimine.gdx.GameContext
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
-import dev.lucasnlm.antimine.ui.ext.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.ext.showWarning
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.external.IAdsManager
@@ -53,7 +53,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GameActivity :
-    ThematicActivity(R.layout.activity_game),
+    ThemedActivity(R.layout.activity_game),
     AndroidFragmentApplication.Callbacks {
 
     private val gameViewModel by viewModel<GameViewModel>()

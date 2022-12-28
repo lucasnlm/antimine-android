@@ -5,12 +5,12 @@ import android.os.Bundle
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.ui.ext.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.external.IAnalyticsManager
 import kotlinx.android.synthetic.main.tutorial_activity.*
 import org.koin.android.ext.android.inject
 
-class TutorialActivity : ThematicActivity(R.layout.tutorial_activity) {
+class TutorialActivity : ThemedActivity(R.layout.tutorial_activity) {
     private val preferencesRepository: IPreferencesRepository by inject()
     private val analyticsManager: IAnalyticsManager by inject()
 

@@ -30,7 +30,7 @@ import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
-import dev.lucasnlm.antimine.ui.ext.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager
@@ -43,7 +43,7 @@ import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : ThematicActivity(R.layout.activity_main) {
+class MainActivity : ThemedActivity(R.layout.activity_main) {
     private val viewModel: MainViewModel by viewModel()
     private val playGamesManager: IPlayGamesManager by inject()
     private val preferencesRepository: IPreferencesRepository by inject()

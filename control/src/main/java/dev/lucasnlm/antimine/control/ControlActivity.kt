@@ -10,12 +10,12 @@ import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import dev.lucasnlm.antimine.ui.ext.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.model.TopBarAction
 import kotlinx.android.synthetic.main.activity_control.*
 import org.koin.android.ext.android.inject
 
-class ControlActivity : ThematicActivity(R.layout.activity_control), Slider.OnChangeListener {
+class ControlActivity : ThemedActivity(R.layout.activity_control), Slider.OnChangeListener {
     private val viewModel: ControlViewModel by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
 

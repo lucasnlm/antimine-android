@@ -7,13 +7,13 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.materialswitch.MaterialSwitch
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
-import dev.lucasnlm.antimine.ui.ext.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.model.TopBarAction
 import kotlinx.android.synthetic.main.activity_preferences.*
 import org.koin.android.ext.android.inject
 
 class PreferencesActivity :
-    ThematicActivity(R.layout.activity_preferences),
+    ThemedActivity(R.layout.activity_preferences),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val preferenceRepository: IPreferencesRepository by inject()

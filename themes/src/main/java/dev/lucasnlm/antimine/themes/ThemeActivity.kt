@@ -14,7 +14,7 @@ import dev.lucasnlm.antimine.themes.view.SkinAdapter
 import dev.lucasnlm.antimine.themes.view.ThemeAdapter
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
-import dev.lucasnlm.antimine.ui.ext.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.view.SpaceItemDecoration
 import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IAnalyticsManager
@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ThemeActivity : ThematicActivity(R.layout.activity_theme) {
+class ThemeActivity : ThemedActivity(R.layout.activity_theme) {
     private val themeViewModel by viewModel<ThemeViewModel>()
 
     private val dimensionRepository: IDimensionRepository by inject()

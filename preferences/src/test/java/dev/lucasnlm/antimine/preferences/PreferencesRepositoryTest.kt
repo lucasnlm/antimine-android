@@ -20,6 +20,10 @@ private class TestPreferenceManager : IPreferencesManager {
         return values.getOrDefault(key, defaultValue) as Int
     }
 
+    override fun getIntOrNull(key: String): Int? {
+        return values[key] as? Int
+    }
+
     override fun putInt(key: String, value: Int) {
         values[key] = value
     }

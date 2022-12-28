@@ -26,6 +26,8 @@ class ThemeRepository(
     private val context: Context,
     private val preferenceRepository: IPreferencesRepository,
 ) : IThemeRepository {
+    private val defaultTheme = Themes.lightTheme()
+
     override fun getCustomTheme(): AppTheme? {
         val targetThemeId = preferenceRepository.themeId()
         return getAllThemes().firstOrNull { it.id == targetThemeId }
@@ -38,7 +40,7 @@ class ThemeRepository(
     }
 
     override fun getTheme(): AppTheme {
-        return getCustomTheme() ?: buildSystemTheme()
+        return getCustomTheme() ?: defaultTheme
     }
 
     override fun getAllThemes(): List<AppTheme> =
@@ -57,7 +59,7 @@ class ThemeRepository(
     }
 
     override fun reset(): AppTheme {
-        preferenceRepository.useTheme(0L)
+        preferenceRepository.useTheme(defaultTheme.id)
         return buildSystemTheme()
     }
 
@@ -72,6 +74,7 @@ class ThemeRepository(
             },
             isPaid = true,
             isDarkTheme = isDarkTheme(),
+            name = R.string.system,
         )
     }
 

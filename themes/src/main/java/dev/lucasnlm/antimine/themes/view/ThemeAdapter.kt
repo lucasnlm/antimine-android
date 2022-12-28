@@ -11,6 +11,7 @@ import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
+import dev.lucasnlm.antimine.ui.repository.Themes
 import kotlinx.android.synthetic.main.view_theme.view.*
 
 class ThemeAdapter(
@@ -44,16 +45,13 @@ class ThemeAdapter(
 
         holder.itemView.apply {
             val selected = (theme.id == themeViewModel.singleState().currentTheme.id)
-            val floatAlpha = 0.65f
-            val alpha = (if (selected) 255 else floatAlpha * 255).toInt()
-            cardTheme.alpha = if (selected) 1.0f else floatAlpha
 
-            covered.setBackgroundColor(theme.palette.covered.toAndroidColor(alpha))
-            uncovered.setBackgroundColor(theme.palette.background.toAndroidColor(alpha))
+            covered.setBackgroundColor(theme.palette.covered.toAndroidColor())
+            uncovered.setBackgroundColor(theme.palette.background.toAndroidColor())
 
-            if (position == 0) {
+            if (theme.name != null) {
                 label.apply {
-                    text = label.context.getString(R.string.system)
+                    text = label.context.getString(theme.name!!)
                     setTextColor(theme.palette.background.toInvertedAndroidColor(200))
                     setBackgroundResource(android.R.color.transparent)
                     setCompoundDrawables(null, null, null, null)

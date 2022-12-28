@@ -73,7 +73,7 @@ class MainViewModel(
         with(preferencesRepository) {
             setCompleteTutorial(completeTutorial == 1)
             completeFirstUse()
-            useTheme(selectedTheme.toLong())
+            if (selectedTheme > -1) { useTheme(selectedTheme.toLong()) }
             useSkin(selectedSkin.toLong())
             setCustomLongPressTimeout(touchTiming.toLong())
             setQuestionMark(questionMark != 0)
