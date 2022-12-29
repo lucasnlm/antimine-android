@@ -110,6 +110,7 @@ dependencies {
     googleInstantImplementation project(':proprietary')
     googleInstantImplementation project(':instant')
     fossImplementation project(':foss')
+    fossImplementation project(':donation')
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.5.1'
