@@ -22,12 +22,12 @@ class AreaActor(
     private var area: Area,
     private var focusScale: Float = 1.0f,
     private var isPressed: Boolean = false,
-    private val pieces: MutableList<String> = ArrayList(20),
+    private val pieces: MutableMap<String, Boolean> = mutableMapOf(),
     private val theme: AppTheme,
     private val onInputEvent: (GdxEvent) -> Unit,
 ) : Actor() {
 
-    private var areaForm: AreaForm? = null
+    private var areaForm: Int? = null
 
     private val topId: Int
     private val bottomId: Int
@@ -85,7 +85,7 @@ class AreaActor(
 
         val newForm = when {
             area.isCovered && ligatureEnabled -> {
-                AreaForm(
+                areaFormOf(
                     top = field.getOrNull(topId)?.canLinkTo(area) == true,
                     bottom = field.getOrNull(bottomId)?.canLinkTo(area) == true,
                     left = field.getOrNull(leftId)?.canLinkTo(area) == true,
@@ -103,8 +103,7 @@ class AreaActor(
 
         if ((area.isCovered || area.hasMine) && this.areaForm != newForm) {
             this.areaForm = newForm
-            pieces.clear()
-            pieces.addAll(newForm.getAtlasNames())
+            pieces.putAll(newForm.toAtlasNames())
         }
 
         this.area = area
@@ -168,15 +167,17 @@ class AreaActor(
                 )
             } else {
                 pieces.forEach { piece ->
-                    batch.drawRegion(
-                        texture = GameContext.gameTextures!!.pieces[piece]!!,
-                        x = x - 0.5f,
-                        y = y - 0.5f,
-                        width = width + 0.5f,
-                        height = height + 0.5f,
-                        color = coverColor,
-                        blend = false,
-                    )
+                    if (piece.value) {
+                        batch.drawRegion(
+                            texture = GameContext.gameTextures!!.pieces[piece.key]!!,
+                            x = x - 0.5f,
+                            y = y - 0.5f,
+                            width = width + 0.5f,
+                            height = height + 0.5f,
+                            color = coverColor,
+                            blend = false,
+                        )
+                    }
                 }
             }
         }
@@ -187,21 +188,22 @@ class AreaActor(
 
         GameContext.atlas?.let { atlas ->
             pieces.forEach { piece ->
-                batch.drawRegion(
-                    texture = atlas.findRegion(piece),
-                    x = x - 0.5f,
-                    y = y - 0.5f,
-                    width = width + 1.0f,
-                    height = height + 1.0f,
-                    color = coverColor,
-                    blend = false,
-                )
+                if (piece.value) {
+                    batch.drawRegion(
+                        texture = atlas.findRegion(piece.key),
+                        x = x - 0.5f,
+                        y = y - 0.5f,
+                        width = width + 1.0f,
+                        height = height + 1.0f,
+                        color = coverColor,
+                        blend = false,
+                    )
+                }
             }
         }
     }
 
     private fun drawCoveredIcons(batch: Batch) {
-        val tint = GameContext.canTintAreas
         val isAboveOthers = isPressed
 
         GameContext.gameTextures?.let {
