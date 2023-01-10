@@ -8,4 +8,6 @@ data class Minefield(
     val height: Int,
     val mines: Int,
     val seed: Long? = null,
-)
+) {
+    fun ratio(): Double = mines.toDouble() / (width * height)
+}

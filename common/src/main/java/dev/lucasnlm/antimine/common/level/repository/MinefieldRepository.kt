@@ -94,7 +94,7 @@ class MinefieldRepository : IMinefieldRepository {
         private val beginnerMinefield = Minefield(9, 9, 10)
         private val intermediateMinefield = Minefield(16, 16, 40)
         private val expertMinefield = Minefield(24, 24, 99)
-        private val masterMinefield = Minefield(50, 50, 400)
+        private val masterMinefield = Minefield(50, 50, 440)
         private val legendMinefield = Minefield(100, 100, 2000)
 
         private const val CUSTOM_LEVEL_MINE_RATIO = 0.18
