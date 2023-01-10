@@ -22,9 +22,7 @@ class MockPreferencesRepository : IPreferencesRepository {
         customMinefield = minefield
     }
 
-    override fun forgetCustomSeed() {
-        TODO("Not yet implemented")
-    }
+    override fun forgetCustomSeed() {}
 
     override fun controlStyle(): ControlStyle = ControlStyle.Standard
 
@@ -49,6 +47,10 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun themeId(): Long = 1L
 
     override fun useTheme(themeId: Long) {}
+
+    override fun skinId(): Long = 1L
+
+    override fun useSkin(skinId: Long) {}
 
     override fun updateStatsBase(statsBase: Int) {}
 
@@ -88,10 +90,6 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setHelp(value: Boolean) {}
 
-    override fun squareRadius(): Int = 2
-
-    override fun setSquareRadius(value: Int?) {}
-
     override fun getTips(): Int = 0
 
     override fun setTips(tips: Int) {}
@@ -113,10 +111,6 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun useHapticFeedback(): Boolean = true
 
     override fun setHapticFeedback(value: Boolean) {}
-
-    override fun squareSize(): Int = 50
-
-    override fun setSquareSize(value: Int?) {}
 
     override fun useAnimations(): Boolean = false
 
@@ -152,10 +146,6 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun getUnlockedThemes(): List<Int> = listOf()
 
-    override fun squareDivider(): Int = 0
-
-    override fun setSquareDivider(value: Int?) {}
-
     override fun showTutorialDialog(): Boolean = false
 
     override fun setTutorialDialog(show: Boolean) {}
@@ -185,12 +175,6 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun letNumbersAutoFlag(): Boolean = true
 
     override fun setNumbersAutoFlag(allow: Boolean) {}
-
-    override fun defaultSquareRadius(): Int = 0
-
-    override fun defaultSquareSize(): Int = 0
-
-    override fun defaultSquareDivider(): Int = 0
 
     override fun showTimer(): Boolean = true
 
