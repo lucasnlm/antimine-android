@@ -10,4 +10,6 @@ data class Minefield(
     val seed: Long? = null,
 ) {
     fun ratio(): Double = mines.toDouble() / (width * height)
+
+    fun ratioPercent(): Int = (ratio() * 100.0).toInt()
 }

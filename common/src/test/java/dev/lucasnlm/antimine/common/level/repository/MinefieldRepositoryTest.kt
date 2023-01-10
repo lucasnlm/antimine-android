@@ -8,7 +8,6 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Test
-import kotlin.math.roundToInt
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -206,20 +205,20 @@ class MinefieldRepositoryTest {
         ratios.forEach {
             assertEquals(
                 it.value,
-                (minefieldRepository.fromDifficulty(
+                minefieldRepository.fromDifficulty(
                     it.key,
                     dimensionRepository,
                     preferencesRepository,
-                ).ratio() * 100.0).roundToInt(),
-                "${it.key} should have ratio of ${it.value}"
+                ).ratioPercent(),
+                "${it.key} should have ratio of ${it.value}",
             )
         }
 
-        ratios.entries.sortedBy { 
+        ratios.entries.sortedBy {
             it.key.ordinal
         }.reduce { previous, current ->
             assertTrue(
-                current.value > previous.value ,
+                current.value > previous.value,
                 "${current.key} must have a ratio greater than ${previous.key}",
             )
             current
