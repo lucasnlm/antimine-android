@@ -18,7 +18,10 @@ object GameTextureAtlas {
         }
     }
 
-    fun loadTextureAtlas(skinFile: String): TextureAtlas {
+    fun loadTextureAtlas(
+        skinFile: String,
+        defaultBackground: Int,
+    ): TextureAtlas {
         val textureRegions = gridOf(
             AtlasNames.core to gp(x = 0, y = 0),
             AtlasNames.bottom to gp(x = 1, y = 0),
@@ -39,7 +42,7 @@ object GameTextureAtlas {
             AtlasNames.fillBottomLeft to gp(x = 1, y = 4),
             AtlasNames.full to gp(x = 7, y = 6),
             AtlasNames.single to gp(x = 0, y = 2),
-            AtlasNames.singleBackground to gp(x = 3, y = 7),
+            AtlasNames.singleBackground to gp(x = defaultBackground.coerceIn(0, 4), y = 7),
             AtlasNames.number1 to gp(x = 2, y = 2),
             AtlasNames.number2 to gp(x = 3, y = 2),
             AtlasNames.number3 to gp(x = 4, y = 2),

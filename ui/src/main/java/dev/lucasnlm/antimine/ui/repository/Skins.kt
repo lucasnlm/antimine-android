@@ -47,6 +47,7 @@ object Skins {
         isPaid = true,
         joinAreas = false,
         imageRes = R.drawable.skin_classic,
+        background = 4,
     )
 
     private fun classic2() = AppSkin(
@@ -56,6 +57,7 @@ object Skins {
         isPaid = true,
         joinAreas = false,
         imageRes = R.drawable.skin_classic,
+        background = 4,
     )
 
     private fun glass() = AppSkin(
@@ -74,6 +76,7 @@ object Skins {
         isPaid = true,
         joinAreas = false,
         imageRes = R.drawable.skin_stone,
+        background = 4,
     )
 
     private fun stone2() = AppSkin(
@@ -83,6 +86,7 @@ object Skins {
         isPaid = true,
         joinAreas = false,
         imageRes = R.drawable.skin_stone_2,
+        background = 4,
     )
 
     private fun defaultNoJoin() = AppSkin(
