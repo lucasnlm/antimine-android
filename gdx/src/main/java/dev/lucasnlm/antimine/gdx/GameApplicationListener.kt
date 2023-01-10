@@ -118,8 +118,6 @@ class GameApplicationListener(
         GameContext.run {
             canTintAreas = currentSkin.canTint
 
-            animationScale = if (preferencesRepository.useAnimations()) 1f else 100.0f
-
             atlas = GameTextureAtlas.loadTextureAtlas(
                 skinFile = currentSkin.file,
             ).apply {
@@ -176,7 +174,6 @@ class GameApplicationListener(
 
         GameContext.run {
             zoomLevelAlpha = 1.0f
-            animationScale = 1.0f
             gameTextures = null
             atlas?.dispose()
             atlas = null
@@ -189,7 +186,6 @@ class GameApplicationListener(
     fun onPause() {
         GameContext.run {
             zoom = 1.0f
-            animationScale = 1.0f
             minefieldStage?.setZoom(1.0f)
         }
     }

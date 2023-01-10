@@ -329,13 +329,13 @@ class AreaActor(
     override fun draw(batch: Batch?, parentAlpha: Float) {
         super.draw(batch, parentAlpha)
 
-        val isOdd: Boolean = if (area.posY % 2 == 0) {
-            area.posX % 2 != 0
-        } else {
-            area.posX % 2 == 0
-        }
-
         batch?.run {
+            val isOdd: Boolean = if (area.posY % 2 == 0) {
+                area.posX % 2 != 0
+            } else {
+                area.posX % 2 == 0
+            }
+
             drawBackground(this, isOdd)
 
             if (area.isCovered) {

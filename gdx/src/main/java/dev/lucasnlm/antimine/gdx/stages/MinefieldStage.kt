@@ -37,7 +37,6 @@ class MinefieldStage(
     private val cameraController: CameraController
 
     private var forceRefreshVisibleAreas = true
-    private var boundHashCode: Int? = null
     private var boundAreas = listOf<Area>()
 
     private var inputInit: Long = 0L
@@ -97,7 +96,7 @@ class MinefieldStage(
             zoom = newZoom.coerceIn(0.8f, 3.0f)
             if (currentZoom != zoom) {
                 currentZoom = zoom
-                update(true)
+                Gdx.graphics.requestRendering()
             }
 
             GameContext.zoomLevelAlpha = when {
@@ -121,12 +120,8 @@ class MinefieldStage(
         forceRefreshVisibleAreas = true
     }
 
-    private fun refreshAreas(visibleHash: Int?) {
-        if (visibleHash != boundHashCode && visibleHash != null || forceRefreshVisibleAreas) {
-            if (visibleHash != null) {
-                boundHashCode = visibleHash
-            }
-
+    private fun refreshAreas(forceRefresh: Boolean) {
+        if (forceRefresh || forceRefreshVisibleAreas) {
             if (actors.size != boundAreas.size) {
                 clear()
                 if (boundAreas.size < actors.size) {
@@ -147,7 +142,7 @@ class MinefieldStage(
                         ),
                     )
                 }
-                camera.update(true)
+//                camera.update(true)
                 refreshVisibleActorsIfNeeded()
             } else {
                 val reset = boundAreas.count { it.hasMine } == 0
@@ -295,39 +290,32 @@ class MinefieldStage(
         // Handle camera movement
         minefieldSize?.let { cameraController.act(it) }
 
-        val visibleHash = refreshVisibleActorsIfNeeded()
-
-        refreshAreas(visibleHash)
+        val forceRefresh = refreshVisibleActorsIfNeeded()
+        refreshAreas(forceRefresh)
 
         if (BuildConfig.DEBUG) {
             Gdx.app.log("GDX", "GDX FPS = ${Gdx.graphics.framesPerSecond}")
         }
     }
 
-    private fun refreshVisibleActorsIfNeeded(): Int? {
+    private fun refreshVisibleActorsIfNeeded(): Boolean {
         val camera = camera as OrthographicCamera
-        var visibleHash: Int? = null
         val cameraChanged: Boolean = !camera.position.epsilonEquals(lastCameraPosition) || lastZoom != camera.zoom
         if (cameraChanged || forceRefreshVisibleAreas) {
             lastCameraPosition = camera.position.cpy()
             lastZoom = camera.zoom
-
-            visibleHash = actors.filter {
-                it.isVisible = camera.frustum.boundsInFrustum(it.x, it.y, 0f, it.width, it.height, 0.0f)
-                it.isVisible
-            }.hashCode()
         }
+        return cameraChanged
+    }
 
-        if (BuildConfig.DEBUG) {
-            val visibleCount = actors.count { it.isVisible }
-            Gdx.app.log("GDX", "GDX count = $visibleCount")
-        }
-
-        return visibleHash
+    override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
+        Gdx.graphics.isContinuousRendering = true
+        return super.touchDown(screenX, screenY, pointer, button)
     }
 
     override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
         cameraController.freeTouch()
+        Gdx.graphics.isContinuousRendering = false
         return super.touchUp(screenX, screenY, pointer, button)
     }
 
