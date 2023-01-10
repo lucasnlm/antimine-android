@@ -55,9 +55,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-perf-ktx'
 
     // Kotlin
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
 
     // Koin
     implementation 'io.insert-koin:koin-android:3.1.2'
