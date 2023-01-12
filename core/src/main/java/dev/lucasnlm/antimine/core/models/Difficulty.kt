@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 
 @Keep
 enum class Difficulty(
-    val text: String,
+    val id: String,
 ) {
     Standard("STANDARD"),
     Beginner("BEGINNER"),

@@ -2,12 +2,17 @@ package dev.lucasnlm.antimine.main
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import dev.lucasnlm.antimine.GameActivity
@@ -116,8 +121,17 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
             expertSize to Difficulty.Expert,
             masterSize to Difficulty.Master,
             legendSize to Difficulty.Legend,
-        ).forEach {
+        ).onEach {
             it.key.text = getDifficultyExtra(it.value)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            listOf(
+                Difficulty.Beginner,
+                Difficulty.Intermediate,
+                Difficulty.Expert,
+                Difficulty.Master,
+            ).forEach(::pushShortcutOf)
         }
 
         mapOf(
@@ -128,10 +142,11 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
             startExpert to Difficulty.Expert,
             startMaster to Difficulty.Master,
             startLegend to Difficulty.Legend,
-        ).forEach { view ->
-            view.key.setOnClickListener {
+        ).forEach { (view, difficulty) ->
+            view.setOnClickListener {
+                pushShortcutOf(difficulty)
                 viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = view.value),
+                    MainEvent.StartNewGameEvent(difficulty = difficulty),
                 )
             }
         }
@@ -234,6 +249,37 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
         }
 
         redirectToGame()
+    }
+
+    private fun pushShortcutOf(difficulty: Difficulty) {
+        val idLow = difficulty.id.lowercase()
+        val deeplink = Uri.parse("app://antimine/game?difficulty=$idLow")
+
+        val name = when (difficulty) {
+            Difficulty.Beginner -> R.string.beginner
+            Difficulty.Intermediate -> R.string.intermediate
+            Difficulty.Expert -> R.string.expert
+            Difficulty.Master -> R.string.master
+            Difficulty.Legend -> R.string.legend
+            else -> return
+        }
+
+        val icon = when (difficulty) {
+            Difficulty.Beginner -> R.mipmap.shortcut_one
+            Difficulty.Intermediate -> R.mipmap.shortcut_two
+            Difficulty.Expert -> R.mipmap.shortcut_three
+            Difficulty.Master -> R.mipmap.shortcut_four
+            Difficulty.Legend -> R.mipmap.shortcut_four
+            else -> return
+        }
+
+        val shortcut = ShortcutInfoCompat.Builder(applicationContext, difficulty.id)
+            .setShortLabel(getString(name))
+            .setIcon(IconCompat.createWithResource(applicationContext, icon))
+            .setIntent(Intent(Intent.ACTION_VIEW, deeplink))
+            .build()
+
+        ShortcutManagerCompat.pushDynamicShortcut(applicationContext, shortcut)
     }
 
     override fun onResume() {

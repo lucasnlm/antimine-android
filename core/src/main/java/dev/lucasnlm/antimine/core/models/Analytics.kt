@@ -16,7 +16,7 @@ sealed class Analytics(
         name = "New Game",
         extra = mapOf(
             "Seed" to seed.toString(),
-            "Difficulty Preset" to difficulty.text,
+            "Difficulty Preset" to difficulty.id,
             "Width" to minefield.width.toString(),
             "Height" to minefield.height.toString(),
             "Mines" to minefield.mines.toString(),
@@ -32,7 +32,7 @@ sealed class Analytics(
         name = "Retry Game",
         extra = mapOf(
             "Seed" to seed.toString(),
-            "Difficulty Preset" to difficulty.text,
+            "Difficulty Preset" to difficulty.id,
             "Width" to minefield.width.toString(),
             "Height" to minefield.height.toString(),
             "Mines" to minefield.mines.toString(),
@@ -70,7 +70,7 @@ sealed class Analytics(
         name = "Victory",
         extra = mapOf(
             "Time" to time.toString(),
-            "Difficulty" to difficulty.text,
+            "Difficulty" to difficulty.id,
             "Right Mines" to score.rightMines.toString(),
             "Total Mines" to score.totalMines.toString(),
             "Total Area" to score.totalArea.toString(),

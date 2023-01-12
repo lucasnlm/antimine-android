@@ -57,7 +57,17 @@
             android:parentActivityName=".main.MainActivity"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:saveEnabled="false"
-            android:theme="@style/AppTheme" />
+            android:exported="true"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:scheme="app"
+                    android:host="antimine"
+                    android:pathPrefix="/game"/>
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".main.MainActivity"

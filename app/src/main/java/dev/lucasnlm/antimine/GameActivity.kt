@@ -109,7 +109,17 @@ class GameActivity :
     private fun handleIntent(intent: Intent) {
         lifecycleScope.launch {
             val extras = intent.extras ?: Bundle()
+            val queryParamDifficulty = intent.data?.getQueryParameter("difficulty")
             when {
+                queryParamDifficulty != null -> {
+                    val upperDifficulty = queryParamDifficulty.uppercase()
+                    val difficulty = Difficulty.values().firstOrNull { it.id == upperDifficulty }
+                    if (difficulty == null) {
+                        gameViewModel.loadLastGame()
+                    } else {
+                        gameViewModel.startNewGame(difficulty)
+                    }
+                }
                 extras.containsKey(DIFFICULTY) -> {
                     intent.removeExtra(DIFFICULTY)
                     val difficulty = extras.serializableNonSafe<Difficulty>(DIFFICULTY)
