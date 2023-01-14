@@ -233,7 +233,7 @@ class AreaActor(
                     )
                 }
                 area.revealed -> {
-                    val color = GameContext.markColor
+                    val color = GameContext.markColor.cpy()
 
                     drawAsset(
                         batch = batch,
