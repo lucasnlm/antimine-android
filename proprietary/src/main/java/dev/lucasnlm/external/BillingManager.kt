@@ -2,17 +2,7 @@ package dev.lucasnlm.external
 
 import android.app.Activity
 import android.content.Context
-import com.android.billingclient.api.AcknowledgePurchaseParams
-import com.android.billingclient.api.BillingClient
-import com.android.billingclient.api.BillingClientStateListener
-import com.android.billingclient.api.BillingFlowParams
-import com.android.billingclient.api.BillingResult
-import com.android.billingclient.api.Purchase
-import com.android.billingclient.api.PurchasesUpdatedListener
-import com.android.billingclient.api.SkuDetailsParams
-import com.android.billingclient.api.acknowledgePurchase
-import com.android.billingclient.api.queryPurchasesAsync
-import com.android.billingclient.api.querySkuDetails
+import com.android.billingclient.api.*
 import dev.lucasnlm.external.model.Price
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.coroutines.CoroutineScope
@@ -29,6 +19,7 @@ class BillingManager(
     private val coroutineScope: CoroutineScope,
 ) : IBillingManager, BillingClientStateListener, PurchasesUpdatedListener {
     private var retry = 0
+    private var isLoading = false
     private val purchaseBroadcaster = MutableStateFlow<PurchaseInfo?>(null)
     private val unlockPrice = MutableStateFlow<Price?>(null)
     private val billingClient by lazy {
@@ -37,6 +28,8 @@ class BillingManager(
             .enablePendingPurchases()
             .build()
     }
+
+    private var premiumProduct: ProductDetails? = null
 
     override suspend fun getPrice(): Price? = unlockPrice.value
 
@@ -49,8 +42,12 @@ class BillingManager(
     private fun asyncRefreshPurchasesList() {
         coroutineScope.launch {
             while (true) {
+                val queryPurchasesParams = QueryPurchasesParams.newBuilder()
+                    .setProductType(BillingClient.ProductType.INAPP)
+                    .build()
+
                 val purchasesList: List<Purchase> = billingClient
-                    .queryPurchasesAsync(BillingClient.SkuType.INAPP)
+                    .queryPurchasesAsync(queryPurchasesParams)
                     .purchasesList
 
                 if (purchasesList.isEmpty()) {
@@ -70,7 +67,7 @@ class BillingManager(
 
     private suspend fun handlePurchases(purchases: List<Purchase>): Boolean {
         val status: Boolean = purchases.firstOrNull {
-            it.skus.contains(PREMIUM)
+            it.products.contains(PREMIUM)
         }.let {
             when (it?.purchaseState) {
                 Purchase.PurchaseState.PURCHASED, Purchase.PurchaseState.PENDING -> true
@@ -97,36 +94,37 @@ class BillingManager(
 
     override fun onBillingServiceDisconnected() {
         crashReporter.sendError("Billing service disconnected $retry")
+        isLoading = false
 
         if (retry < 3) {
-            start()
             retry++
+            coroutineScope.launch {
+                delay(5 * 1000)
+                start()
+            }
         }
     }
 
     override fun onBillingSetupFinished(billingResult: BillingResult) {
+        isLoading = false
+
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
             retry = 0
 
-            val skuDetailsParams = SkuDetailsParams.newBuilder()
-                .setSkusList(listOf(PREMIUM))
-                .setType(BillingClient.SkuType.INAPP)
+            val premiumProductParams = QueryProductDetailsParams
+                .Product
+                .newBuilder()
+                .setProductType(BillingClient.ProductType.INAPP)
+                .setProductId(PREMIUM)
+                .build()
+
+            val productDetailsParams = QueryProductDetailsParams.newBuilder()
+                .setProductList(listOf(premiumProductParams))
                 .build()
 
             billingClient
-                .querySkuDetailsAsync(skuDetailsParams) { _, list ->
-                    val hasPremium = list?.firstOrNull {
-                        it.sku == PREMIUM
-                    }
-
-                    if (hasPremium != null) {
-                        val price = Price(
-                            hasPremium.price,
-                            offer = false,
-                        )
-
-                        unlockPrice.tryEmit(price)
-                    }
+                .queryProductDetailsAsync(productDetailsParams) { _, list ->
+                    onReceivePremiumProduct(list.firstOrNull())
                 }
 
             asyncRefreshPurchasesList()
@@ -134,6 +132,24 @@ class BillingManager(
             val code = billingResult.responseCode
             val message = billingResult.debugMessage
             crashReporter.sendError("Billing setup failed due to response $code. $message")
+        }
+    }
+
+    private fun onReceivePremiumProduct(productDetails: ProductDetails?) {
+        val premiumProductDetails = productDetails?.productId == PREMIUM
+
+        if (productDetails != null && premiumProductDetails) {
+            premiumProduct = productDetails
+            val premiumPrice = productDetails.oneTimePurchaseOfferDetails?.formattedPrice
+
+            if (premiumPrice != null) {
+                val price = Price(
+                    premiumPrice,
+                    offer = false,
+                )
+
+                unlockPrice.tryEmit(price)
+            }
         }
     }
 
@@ -146,7 +162,7 @@ class BillingManager(
     }
 
     override fun start() {
-        if (!billingClient.isReady) {
+        if (!billingClient.isReady && !isLoading) {
             billingClient.startConnection(this)
         }
     }
@@ -156,22 +172,18 @@ class BillingManager(
     }
 
     override suspend fun charge(activity: Activity) {
-        if (billingClient.isReady) {
-            val item = listOf(PREMIUM)
+        val premiumProduct = this.premiumProduct
 
-            val skuDetailsParams = SkuDetailsParams.newBuilder()
-                .setSkusList(item)
-                .setType(BillingClient.SkuType.INAPP)
+        if (billingClient.isReady && premiumProduct != null) {
+            val productDetailsParams = BillingFlowParams.ProductDetailsParams.newBuilder()
+                .setProductDetails(premiumProduct)
                 .build()
 
-            val details = billingClient.querySkuDetails(skuDetailsParams)
-            details.skuDetailsList?.firstOrNull()?.let {
-                val flowParams = BillingFlowParams.newBuilder()
-                    .setSkuDetails(it)
-                    .build()
+            val flowParams = BillingFlowParams.newBuilder()
+                .setProductDetailsParamsList(listOf(productDetailsParams))
+                .build()
 
-                billingClient.launchBillingFlow(activity, flowParams)
-            }
+            billingClient.launchBillingFlow(activity, flowParams)
         } else {
             crashReporter.sendError("Fail to charge due to unready status")
             purchaseBroadcaster.tryEmit(PurchaseInfo.PurchaseFail)
