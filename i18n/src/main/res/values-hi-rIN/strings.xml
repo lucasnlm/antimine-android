@@ -18,6 +18,8 @@
     <string name="legend">दिग्गज</string>
     <string name="open">खोलें</string>
     <string name="settings">सेटिंग</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">एनिमेशन</string>
     <string name="vibration">हैप्टिक फ़ीडबैक</string>
     <string name="about">परिचय</string>
@@ -27,6 +29,7 @@
     <string name="width">चौड़ाई</string>
     <string name="height">ऊंचाई</string>
     <string name="mines">माइन</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">यदि आप नया गेम शुरू करते हैं, तो आपकी वर्तमान प्रगति खो जाएगी.</string>
     <string name="show_licenses">लाइसेंस दिखाएं</string>
     <string name="new_game_request">क्या आप एक नया गेम शुरू करना चाहते हैं?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">सामान्य</string>
     <string name="settings_gameplay">गेमप्ले</string>
     <string name="settings_accessibility">एक्सेसिबिलिटी</string>
-    <string name="size">आकार</string>
-    <string name="rounded_square">गोल स्क्वेयर</string>
-    <string name="space_between_squares">स्क्वेयर के बीच की जगह</string>
     <string name="system">सिस्ट</string>
     <string name="sign_in_failed">साइन इन करने में विफल. कृपया अपने नेटवर्क कनेक्शन की जांच करें और फिर कोशिश करें.</string>
     <string name="you_won">आप जीत गए!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">प्रश्न चिह्न का उपयोग करें</string>
     <string name="no_guessing_mode">\'कोई अनुमान नहीं\' मोड</string>
     <string name="control">नियंत्रण</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">एक टैप</string>
     <string name="double_click">दो बार टैप</string>
     <string name="long_press">लंबा टैप</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">जारी रखें</string>
     <string name="empty">खाली</string>
     <string name="cant_do_it_now">अब ऐसा करना नामुमकिन है</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">आपको मिला है: +%1$d</string>
-    <string name="help_win_a_game">अधिक सहायता के लिए, आपको एक गेम जीतना होगा.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">अज्ञात त्रुटि.</string>
     <string name="leaderboards">लीडरबोर्ड</string>
     <string name="cancel">रद्द करें</string>
     <string name="resume">फिर शुरू करें</string>
     <string name="yes">हां</string>
     <string name="unlock">अनलॉक करें</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">उपलब्धियां</string>
     <string name="no">नहीं</string>
     <string name="general">सामान्य</string>
@@ -88,6 +92,7 @@
     <string name="licenses">लाइसेंस</string>
     <string name="google_play_games">Google Play गेम</string>
     <string name="loading">लोड हो रहा है…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">कनेक्ट हों</string>
     <string name="connecting">कनेक्ट हो रहा है…</string>
     <string name="disconnect">डिस्कनेक्ट करें</string>
@@ -101,7 +106,7 @@
     <string name="themes">थीम</string>
     <string name="delete_all_message">सभी इवेंट को स्थायी रूप से डिलीट करें.</string>
     <string name="remove_ad">प्रीमियम</string>
-    <string name="help">सहायता</string>
+    <string name="help">Hint</string>
     <string name="back">वापस जाएं</string>
     <string name="donation">डोनेशन</string>
     <string name="open_on_game">गेम स्क्रीन पर खोलें</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">नंबरों पर टैप करने दें</string>
     <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">कस्टमाइज़ करने के लिए टैप करें</string>
-    <string name="toggle_button_top">शीर्ष पट्टी पर \"टॉगल बटन\" दिखाएं</string>
     <string name="no_guess_fail_warning">वर्तमान माइनफ़ील्ड अनुमान-मुक्त नहीं हो सकता है!</string>
     <string name="fixed_size">निर्धारित आकार</string>
     <string name="progressive">प्रोग्रेसिव</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
-    <string name="left_handed">बायां हाथ</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">अगर आपको यह खेल पसंद है, तो दान करने पर विचार करें।</string>
     <string name="donate_help">यह इस प्रोजैक्ट को सक्रिय रखने में मदद करेगा!</string>
 </resources>

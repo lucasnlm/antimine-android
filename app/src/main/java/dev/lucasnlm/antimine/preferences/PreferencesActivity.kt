@@ -3,51 +3,51 @@ package dev.lucasnlm.antimine.preferences
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.preference.PreferenceManager
-import com.google.android.material.checkbox.MaterialCheckBox
+import com.google.android.material.materialswitch.MaterialSwitch
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
-import dev.lucasnlm.antimine.ui.ext.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThemedActivity
+import dev.lucasnlm.antimine.ui.model.TopBarAction
 import kotlinx.android.synthetic.main.activity_preferences.*
 import org.koin.android.ext.android.inject
 
 class PreferencesActivity :
-    ThematicActivity(R.layout.activity_preferences),
+    ThemedActivity(R.layout.activity_preferences),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val preferenceRepository: IPreferencesRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
 
+    private val preferenceManager by lazy {
+        PreferenceManager.getDefaultSharedPreferences(this)
+    }
+
     private fun bindItem(
-        label: TextView,
-        switch: MaterialCheckBox,
+        switch: MaterialSwitch,
         checked: Boolean,
         action: (Boolean) -> Unit,
     ) {
-        label.setOnClickListener {
-            switch.apply {
-                isChecked = !switch.isChecked
-            }
-        }
-
         switch.apply {
             isChecked = checked
-            jumpDrawablesToCurrentState()
-        }
-
-        switch.setOnCheckedChangeListener { _, newCheckedState ->
-            action(newCheckedState)
+            setOnCheckedChangeListener { _, newCheckedState ->
+                action(newCheckedState)
+            }
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bindToolbar(preferenceRepository.hasCustomizations())
+        bindToolbar(toolbar)
+        bindToolbarAction(preferenceRepository.hasCustomizations())
+        bindItems()
 
+        preferenceManager.registerOnSharedPreferenceChangeListener(this)
+    }
+
+    private fun bindItems() {
         bindItem(
-            label = hapticFeedbackLabel,
             switch = hapticFeedback,
             checked = preferenceRepository.useHapticFeedback(),
             action = {
@@ -59,90 +59,79 @@ class PreferencesActivity :
         )
 
         bindItem(
-            label = soundEffectsLabel,
             switch = soundEffects,
             checked = preferenceRepository.isSoundEffectsEnabled(),
             action = { preferenceRepository.setSoundEffectsEnabled(it) },
         )
 
         bindItem(
-            label = showWindowsLabel,
             switch = showWindows,
             checked = preferenceRepository.showWindowsWhenFinishGame(),
             action = { preferenceRepository.mustShowWindowsWhenFinishGame(it) },
         )
 
         bindItem(
-            label = openDirectlyLabel,
             switch = openDirectly,
             checked = preferenceRepository.openGameDirectly(),
             action = { preferenceRepository.setOpenGameDirectly(it) },
         )
 
         bindItem(
-            label = useQuestionMarkLabel,
             switch = useQuestionMark,
             checked = preferenceRepository.useQuestionMark(),
             action = { preferenceRepository.setQuestionMark(it) },
         )
 
         bindItem(
-            label = automaticFlagsLabel,
+            switch = showTimer,
+            checked = preferenceRepository.showTimer(),
+            action = { preferenceRepository.setTimerVisible(it) },
+        )
+
+        bindItem(
             switch = automaticFlags,
             checked = preferenceRepository.useFlagAssistant(),
             action = { preferenceRepository.setFlagAssistant(it) },
         )
 
         bindItem(
-            label = helpLabel,
-            switch = help,
+            switch = hint,
             checked = preferenceRepository.useHelp(),
             action = { preferenceRepository.setHelp(it) },
         )
 
         bindItem(
-            label = allowClickNumberLabel,
-            switch = clickOnNumbers,
+            switch = allowClickNumber,
             checked = preferenceRepository.allowTapOnNumbers(),
             action = {
                 preferenceRepository.setAllowTapOnNumbers(it)
 
                 if (it) {
-                    flagWhenTapOnNumbersLabel.visibility = View.VISIBLE
+                    flagWhenTapOnNumbers.visibility = View.VISIBLE
                     flagWhenTapOnNumbers.visibility = View.VISIBLE
                 } else {
-                    flagWhenTapOnNumbersLabel.visibility = View.GONE
+                    flagWhenTapOnNumbers.visibility = View.GONE
                     flagWhenTapOnNumbers.visibility = View.GONE
                 }
             },
         )
 
         bindItem(
-            label = flagWhenTapOnNumbersLabel,
             switch = flagWhenTapOnNumbers,
             checked = preferenceRepository.letNumbersAutoFlag(),
             action = { preferenceRepository.setNumbersAutoFlag(it) },
         )
 
         if (!preferenceRepository.allowTapOnNumbers()) {
-            flagWhenTapOnNumbersLabel.visibility = View.GONE
+            flagWhenTapOnNumbers.visibility = View.GONE
             flagWhenTapOnNumbers.visibility = View.GONE
         }
 
         bindItem(
-            label = highlightUnsolvedNumbersLabel,
             switch = highlightUnsolvedNumbers,
             checked = preferenceRepository.dimNumbers(),
             action = { preferenceRepository.setDimNumbers(it) },
         )
-
-        PreferenceManager.getDefaultSharedPreferences(this)
-            .registerOnSharedPreferenceChangeListener(this)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return true
     }
 
     override fun onDestroy() {
@@ -150,39 +139,28 @@ class PreferencesActivity :
 
         cloudSaveManager.uploadSave()
 
-        PreferenceManager.getDefaultSharedPreferences(this)
-            .unregisterOnSharedPreferenceChangeListener(this)
+        preferenceManager.unregisterOnSharedPreferenceChangeListener(this)
     }
 
-    private fun bindToolbar(hasCustomizations: Boolean) {
+    private fun bindToolbarAction(hasCustomizations: Boolean) {
         if (hasCustomizations) {
-            section.bind(
-                text = R.string.settings,
-                startButton = R.drawable.back_arrow,
-                startDescription = R.string.back,
-                startAction = {
-                    finish()
-                },
-                endButton = R.drawable.delete,
-                endDescription = R.string.delete_all,
-                endAction = {
-                    preferenceRepository.reset()
-                    bindToolbar(false)
-                },
+            setTopBarAction(
+                TopBarAction(
+                    name = R.string.delete_all,
+                    icon = R.drawable.delete,
+                    action = {
+                        preferenceRepository.reset()
+                        bindItems()
+                        setTopBarAction(null)
+                    },
+                ),
             )
         } else {
-            section.bind(
-                text = R.string.settings,
-                startButton = R.drawable.back_arrow,
-                startDescription = R.string.back,
-                startAction = {
-                    finish()
-                },
-            )
+            setTopBarAction(null)
         }
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        bindToolbar(preferenceRepository.hasCustomizations())
+        bindToolbarAction(preferenceRepository.hasCustomizations())
     }
 }

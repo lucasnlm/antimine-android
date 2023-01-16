@@ -18,6 +18,8 @@
     <string name="legend">Leģendas</string>
     <string name="open">Atvērt</string>
     <string name="settings">Iestatījumi</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">Animācijas</string>
     <string name="vibration">Sajūtu atgriezeniskā saite</string>
     <string name="about">Par lietotni</string>
@@ -27,6 +29,7 @@
     <string name="width">Platums</string>
     <string name="height">Augstums</string>
     <string name="mines">Mīnu skaits</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">Uzsākot jaunu spēli pašreizējais progress tiks zaudēts.</string>
     <string name="show_licenses">Rādīt licences</string>
     <string name="new_game_request">Vai tu vēlies uzsākt jaunu spēli?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Vispārīgi</string>
     <string name="settings_gameplay">Spēlē</string>
     <string name="settings_accessibility">Pieejamība</string>
-    <string name="size">Izmērs</string>
-    <string name="rounded_square">Noapaļoti kvadrāti</string>
-    <string name="space_between_squares">Attālums starp kvadrātiem</string>
     <string name="system">Sistēmas</string>
     <string name="sign_in_failed">Neizdevās pierakstīties. Lūdzu, pārbaudiet savu tīkla savienojumu un mēģiniet vēlreiz.</string>
     <string name="you_won">Tu uzvarēji!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Iespējot jautājuma zīmi</string>
     <string name="no_guessing_mode">Režīms bez minēšanas</string>
     <string name="control">Vadība</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">Pieskāriens</string>
     <string name="double_click">Divkāršs piesitiens</string>
     <string name="long_press">Ilgs pieskāriens</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Turpināt</string>
     <string name="empty">Tukšs</string>
     <string name="cant_do_it_now">To pašreiz nav iespējams veikt</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">Tu esi saņēmis: +%1$d</string>
-    <string name="help_win_a_game">Papildus \"Palīdzībai\", tev ir jāuzvar spēle.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Nezināma kļūda.</string>
     <string name="leaderboards">Labāko spēlētāju saraksts</string>
     <string name="cancel">Atcelt</string>
     <string name="resume">Vienalga turpināt</string>
     <string name="yes">Jā</string>
     <string name="unlock">Atbloķēt</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">Sasniegumi</string>
     <string name="no">Nē</string>
     <string name="general">Vispārīgi</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Licences</string>
     <string name="google_play_games">Google Play spēles</string>
     <string name="loading">Notiek ielāde…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">Savienot</string>
     <string name="connecting">Notiek savienojuma izveide…</string>
     <string name="disconnect">Atvienot</string>
@@ -101,7 +106,7 @@
     <string name="themes">Izskats</string>
     <string name="delete_all_message">Neatgriezeniski dzēst visus notikumus.</string>
     <string name="remove_ad">Premium</string>
-    <string name="help">Palīgs</string>
+    <string name="help">Hint</string>
     <string name="back">Atpakaļ</string>
     <string name="donation">Ziedot</string>
     <string name="open_on_game">Atverot lietotni turpināt pēdējo spēli</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Atļaut pieskaršanos skaitļiem</string>
     <string name="flag_when_tap_numbers">Atzīmēt, kad piesit skaitļiem</string>
     <string name="tap_to_customize">Piesist, lai pielāgotu</string>
-    <string name="toggle_button_top">Rādīt pārslēgšanas slēdzi augšējā izvēlnē</string>
     <string name="no_guess_fail_warning">Pašreizējais mīnu lauks nav no minēšanas brīvs!</string>
     <string name="fixed_size">Nemainīga lieluma</string>
     <string name="progressive">Ar attīstību</string>
     <string name="highlight_unsolved_numbers">Izcelt neatrisinātos skaitļus</string>
-    <string name="left_handed">Kreisrocīgs</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">Lūgums apsvērt ziedojumu, ja patīk šī spēle.</string>
     <string name="donate_help">Tas palīdzēs nodrošināt izstrādi.</string>
 </resources>

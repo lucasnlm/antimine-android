@@ -18,6 +18,8 @@
     <string name="legend">ئەفسانەیی</string>
     <string name="open">کردنەوە</string>
     <string name="settings">ڕێکخستنەکان</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">ئەنیمەیشنەکان</string>
     <string name="vibration">وڵامدانەوەی ڕاوبۆچون</string>
     <string name="about">دەربارە</string>
@@ -27,6 +29,7 @@
     <string name="width">پانی</string>
     <string name="height">بەرزی</string>
     <string name="mines">مینەکان</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">ئەگەر دەست بە یارییەکی نوێ بکەیت، پێشکەوتنی ئێستات لەدەست دەچێت.</string>
     <string name="show_licenses">نیشاندانی مۆڵەتەکان</string>
     <string name="new_game_request">ئایا دەتەوێت یاریەکی نوێ دەست پێبکەیت؟</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">گشتی</string>
     <string name="settings_gameplay">شێوازی یاری</string>
     <string name="settings_accessibility">توانای گەیشتن</string>
-    <string name="size">قه‌باره‌</string>
-    <string name="rounded_square">چوارگۆشەی چەماو</string>
-    <string name="space_between_squares">بۆشایی نێوان چوارگۆشەکان</string>
     <string name="system">سیستەم</string>
     <string name="sign_in_failed">چوونە ژوورەوە سەرکەوتوو نەبوو. تکایە گرێدانی تۆڕەکەت بپشکنە و دووبارە هەوڵ بدەرەوە.</string>
     <string name="you_won">تۆبردتەوە!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">نیشانەی پرسیار بەکاربهێنە</string>
     <string name="no_guessing_mode">دۆخی پێشبینی نەکردن</string>
     <string name="control">کۆنترۆڵەکان</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">یەک کلیک</string>
     <string name="double_click">دوو کلیک</string>
     <string name="long_press">کلیکی درێژ</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">بەردەوام بە</string>
     <string name="empty">بەتاڵ</string>
     <string name="cant_do_it_now">مەحاڵە ئێستا ئەوە بکەین</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">تۆ وەرت گرتووە: +%1$d</string>
-    <string name="help_win_a_game">بۆ یارمەتی زیاتر، پێویستە یارییەک ببەیتەوە.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">هەڵەیەکی نەناسراو.</string>
     <string name="leaderboards">تەختەپێشەنگ</string>
     <string name="cancel">هەڵۆشاندنەوە</string>
     <string name="resume">دەستپێکردنەوەی</string>
     <string name="yes">بەڵێ</string>
     <string name="unlock">کردنەوەی قفل</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">دەستکەوتەکان</string>
     <string name="no">نەخێر</string>
     <string name="general">گشتی</string>
@@ -88,6 +92,7 @@
     <string name="licenses">مۆڵەتەکان</string>
     <string name="google_play_games">یاریییەکانی گۆگڵ پلەی</string>
     <string name="loading">چاوەڕوانبە…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">په‌یوه‌ندیکردن</string>
     <string name="connecting">…گرێدان…</string>
     <string name="disconnect">پچڕانی پەیوەندی</string>
@@ -101,7 +106,7 @@
     <string name="themes">ڕووکارەکان</string>
     <string name="delete_all_message">سڕینەوەی هەموو ڕووداوەکان بە هەمیشەیی.</string>
     <string name="remove_ad">لابردنی ڕیکڵامەکان</string>
-    <string name="help">یارمەتی</string>
+    <string name="help">Hint</string>
     <string name="back">گەڕانەوە</string>
     <string name="donation">بەخشین</string>
     <string name="open_on_game">کردنەوە لەسەر شاشەی یاری</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">ڕێگەبدە بە کرتەکردن لەسەر ژمارەکان</string>
     <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Tap to customize</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
-    <string name="left_handed">چه‌پله‌ر</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">If you like this game, consider making a donation.</string>
     <string name="donate_help">It will help keep this project active!</string>
 </resources>

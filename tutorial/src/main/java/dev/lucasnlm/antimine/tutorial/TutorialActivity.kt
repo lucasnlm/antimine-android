@@ -5,12 +5,12 @@ import android.os.Bundle
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.ui.ext.ThematicActivity
+import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.external.IAnalyticsManager
 import kotlinx.android.synthetic.main.tutorial_activity.*
 import org.koin.android.ext.android.inject
 
-class TutorialActivity : ThematicActivity(R.layout.tutorial_activity) {
+class TutorialActivity : ThemedActivity(R.layout.tutorial_activity) {
     private val preferencesRepository: IPreferencesRepository by inject()
     private val analyticsManager: IAnalyticsManager by inject()
 
@@ -20,31 +20,18 @@ class TutorialActivity : ThematicActivity(R.layout.tutorial_activity) {
         preferencesRepository.setTutorialDialog(false)
         analyticsManager.sentEvent(Analytics.OpenTutorial)
 
-        section.bind(
-            text = R.string.tutorial,
-            startButton = R.drawable.back_arrow,
-            startDescription = R.string.back,
-            startAction = {
-                finish()
-            },
-        )
+        bindToolbar(toolbar)
 
-        playGame.bind(
-            theme = usingTheme,
-            text = R.string.start,
-            invert = true,
-            centralize = true,
-            onAction = {
-                finish()
-                val intent = Intent(this, Class.forName("dev.lucasnlm.antimine.GameActivity")).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    val bundle = Bundle().apply {
-                        putSerializable("difficulty", Difficulty.Beginner)
-                    }
-                    putExtras(bundle)
+        playGame.setOnClickListener {
+            finish()
+            val intent = Intent(this, Class.forName("dev.lucasnlm.antimine.GameActivity")).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                val bundle = Bundle().apply {
+                    putSerializable("difficulty", Difficulty.Beginner)
                 }
-                startActivity(intent)
-            },
-        )
+                putExtras(bundle)
+            }
+            startActivity(intent)
+        }
     }
 }

@@ -5,141 +5,65 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <dev.lucasnlm.antimine.ui.view.SectionView
-        android:id="@+id/section"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/back_arrow"
+        app:title="@string/themes" />
 
-    <ScrollView
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/themesCard"
+        style="?attr/materialCardViewFilledStyle"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fadeScrollbars="false"
-        android:paddingHorizontal="@dimen/main_activity_padding"
-        android:scrollbarStyle="outsideInset"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/main_activity_padding"
+        android:layout_marginBottom="12dp"
+        app:contentPadding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/section">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/skins"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp">
+            android:layout_height="74dp" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/square_size_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingVertical="4dp"
-                android:text="@string/size"
-                app:layout_constraintEnd_toStartOf="@id/squareSize"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.slider.Slider
-                android:id="@+id/squareSize"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:stepSize="5"
-                android:value="15"
-                android:valueFrom="0"
-                android:valueTo="40"
-                app:layout_constraintBottom_toBottomOf="@+id/square_size_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/square_size_text"
-                app:layout_constraintTop_toTopOf="@+id/square_size_text"
-                app:thumbColor="?colorAccent"
-                app:thumbStrokeColor="?colorAccent"
-                app:tickVisible="false"
-                app:trackColorActive="?colorAccent"
-                app:trackHeight="8dp" />
+    <dev.lucasnlm.antimine.ui.view.OfferCardButtonView
+        android:id="@+id/unlockAll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/main_activity_padding"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@id/themesCard"
+        app:layout_constraintStart_toStartOf="@id/themesCard"
+        app:layout_constraintTop_toBottomOf="@+id/themesCard" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/square_radius_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingVertical="4dp"
-                android:text="@string/rounded_square"
-                app:layout_constraintEnd_toStartOf="@id/squareRadius"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/square_size_text" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/control_styles"
+        style="?attr/materialCardViewFilledStyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        app:contentPadding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/themesCard"
+        app:layout_constraintStart_toStartOf="@id/themesCard"
+        app:layout_constraintTop_toBottomOf="@id/unlockAll">
 
-            <com.google.android.material.slider.Slider
-                android:id="@+id/squareRadius"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:stepSize="1"
-                android:value="3"
-                android:valueFrom="0"
-                android:valueTo="10"
-                app:layout_constraintBottom_toBottomOf="@+id/square_radius_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/square_radius_text"
-                app:layout_constraintTop_toTopOf="@+id/square_radius_text"
-                app:thumbColor="?colorAccent"
-                app:thumbStrokeColor="?colorAccent"
-                app:tickVisible="false"
-                app:trackColorActive="?colorAccent"
-                app:trackHeight="8dp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/square_divider_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingVertical="4dp"
-                android:text="@string/space_between_squares"
-                app:layout_constraintEnd_toStartOf="@+id/squareDivider"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/square_radius_text" />
-
-            <com.google.android.material.slider.Slider
-                android:id="@+id/squareDivider"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:max="5"
-                android:progress="0"
-                android:stepSize="1"
-                android:valueFrom="0"
-                android:valueTo="5"
-                app:layout_constraintBottom_toBottomOf="@+id/square_divider_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/square_divider_text"
-                app:layout_constraintTop_toTopOf="@+id/square_divider_text"
-                app:thumbColor="?colorAccent"
-                app:thumbStrokeColor="?colorAccent"
-                app:tickVisible="false"
-                app:trackColorActive="?colorAccent"
-                app:trackHeight="8dp" />
-
-            <dev.lucasnlm.antimine.ui.view.OfferCardButtonView
-                android:id="@+id/unlockAll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/square_divider_text" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="12dp"
-                android:clipToPadding="false"
-                android:fadeScrollbars="false"
-                android:paddingBottom="@dimen/main_activity_padding"
-                android:scrollbarStyle="outsideInset"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/unlockAll" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/themes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fadeScrollbars="false"
+            android:overScrollMode="never" />
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

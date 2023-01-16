@@ -10,5 +10,5 @@ data class ControlState(
     val hapticFeedbackLevel: Int,
     val selected: ControlStyle,
     val controls: List<ControlDetails>,
-    val showToggleButtonSettings: Boolean,
+    val showReset: Boolean,
 )

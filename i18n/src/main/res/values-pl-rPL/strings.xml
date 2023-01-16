@@ -18,6 +18,8 @@
     <string name="legend">Legendarny</string>
     <string name="open">Odkryj</string>
     <string name="settings">Ustawienia</string>
+    <string name="control_settings">Sterowanie</string>
+    <string name="shapes">Kształty</string>
     <string name="animations">Animacje</string>
     <string name="vibration">Wibracja przy dotknięciu</string>
     <string name="about">Informacje</string>
@@ -27,6 +29,7 @@
     <string name="width">Szerokość</string>
     <string name="height">Wysokość</string>
     <string name="mines">Ilość min</string>
+    <string name="seed">Ziarno</string>
     <string name="retry_sure">Jeśli rozpoczniesz nową rozgrywkę, Twój obecny postęp zostanie utracony.</string>
     <string name="show_licenses">Licencje</string>
     <string name="new_game_request">Czy chcesz rozpocząć nową rozgrywkę?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Ogólne</string>
     <string name="settings_gameplay">Rozgrywka</string>
     <string name="settings_accessibility">Ułatwienia dostępu</string>
-    <string name="size">Powiększenie</string>
-    <string name="rounded_square">Zaokrąglenie pól</string>
-    <string name="space_between_squares">Rozstaw pól</string>
     <string name="system">Systemowy</string>
     <string name="sign_in_failed">Błąd logowania. Sprawdź swoje połączenie z Internetem i spróbuj ponownie.</string>
     <string name="you_won">Udało się!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Używaj Znaku zapytania</string>
     <string name="no_guessing_mode">Tryb \'Bez zgadywania\'</string>
     <string name="control">Sterowanie</string>
+    <string name="control_types">Typy sterowania</string>
     <string name="single_click">Pojedyncze naciśnięcie</string>
     <string name="double_click">Podwójne naciśnięcie</string>
     <string name="long_press">Długie naciśnięcie</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Kontynuuj</string>
     <string name="empty">Puste</string>
     <string name="cant_do_it_now">Nie można tego teraz zrobić</string>
+    <string name="mine_revealed">Odkryto minę</string>
+    <string name="fail_to_load_ad">Błąd wczytywania reklamy</string>
     <string name="you_have_received">Otrzymano: +%1$d</string>
-    <string name="help_win_a_game">Wygraj rozgrywkę, aby uzyskać więcej podpowiedzi.</string>
+    <string name="help_win_a_game">Wygraj, aby uzyskać więcej porad.</string>
     <string name="unknown_error">Nieznany błąd.</string>
     <string name="leaderboards">Tablica wyników</string>
     <string name="cancel">Anuluj</string>
     <string name="resume">Kontynuuj</string>
     <string name="yes">Tak</string>
     <string name="unlock">Odblokuj</string>
+    <string name="unlock_all">Odblokuj wszystko</string>
     <string name="achievements">Osiągnięcia</string>
     <string name="no">Nie</string>
     <string name="general">Ogólne</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Licencje</string>
     <string name="google_play_games">Gry Google Play</string>
     <string name="loading">Wczytywanie…</string>
+    <string name="creating_valid_game">Tworzenie prawidłowej gry…</string>
     <string name="connect">Połącz</string>
     <string name="connecting">Łączenie…</string>
     <string name="disconnect">Rozłącz</string>
@@ -101,7 +106,7 @@
     <string name="themes">Motywy</string>
     <string name="delete_all_message">Spowoduje to nieodwracalne usunięcie wszystkich statystyk.</string>
     <string name="remove_ad">Usuń reklamy</string>
-    <string name="help">Podpowiedzi</string>
+    <string name="help">Porada</string>
     <string name="back">Wstecz</string>
     <string name="donation">Wesprzyj</string>
     <string name="open_on_game">Otwieraj od razu w rozgrywce</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Możliwość naciskania liczb</string>
     <string name="flag_when_tap_numbers">Oznacz po naciśnięciu na liczbę</string>
     <string name="tap_to_customize">Naciśnij, aby zmienić</string>
-    <string name="toggle_button_top">Wyświetl \"Przełącz sterowanie\" na górnej pasku</string>
     <string name="no_guess_fail_warning">To pole minowe może wymagać zgadywania, aby je ukończyć!</string>
     <string name="fixed_size">Ustalony rozmiar</string>
     <string name="progressive">Progresywny</string>
     <string name="highlight_unsolved_numbers">Podświetl nierozwiązane pola</string>
-    <string name="left_handed">Tryb leworęczny</string>
+    <string name="show_clock">Pokaż zegar</string>
     <string name="donate_request">Jeśli lubisz tę grę, rozważ przekazanie darowizny.</string>
     <string name="donate_help">Dzięki temu będzie ona dalej rozwijana!</string>
 </resources>

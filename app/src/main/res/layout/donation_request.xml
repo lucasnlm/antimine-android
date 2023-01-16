@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:contentDescription="@string/donation"
+    android:background="?selectableItemBackground"
     android:focusable="true"
     android:padding="16dp">
 
     <ImageView
         android:id="@+id/money"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:importantForAccessibility="no"
-        android:src="@drawable/money"
+        android:src="@drawable/heart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/accent" />
+        app:tint="?colorError" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:importantForAccessibility="no"
@@ -42,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/donate_help"
+            android:textStyle="bold"
             android:textColor="?colorOnBackground" />
     </LinearLayout>
 

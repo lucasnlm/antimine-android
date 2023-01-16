@@ -18,6 +18,8 @@
     <string name="legend">Legenda</string>
     <string name="open">Megnyitás</string>
     <string name="settings">Beállítások</string>
+    <string name="control_settings">Irányítási beállítások</string>
+    <string name="shapes">Formák</string>
     <string name="animations">Animációk</string>
     <string name="vibration">Érintéskori visszajelzés</string>
     <string name="about">Rólunk</string>
@@ -27,6 +29,7 @@
     <string name="width">Szélesség</string>
     <string name="height">Magasság</string>
     <string name="mines">Aknák</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">Ha új játékot kezdesz, minden haladásod elveszik.</string>
     <string name="show_licenses">Licencek megtekintése</string>
     <string name="new_game_request">Szeretnél új játékot kezdeni?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Általános</string>
     <string name="settings_gameplay">Játékmenet</string>
     <string name="settings_accessibility">Kisegítő lehetőségek</string>
-    <string name="size">Méret</string>
-    <string name="rounded_square">Lekerekített négyzet</string>
-    <string name="space_between_squares">Tér a négyzetek között</string>
     <string name="system">Rendszer</string>
     <string name="sign_in_failed">Sikertelen bejelentkezés. Kérlek ellenőrizd a hálózati csatlakozást és próbáld újra.</string>
     <string name="you_won">Győztél!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Kérdőjel használata</string>
     <string name="no_guessing_mode">\"Nincs tippelés\" mód</string>
     <string name="control">Irányítások</string>
+    <string name="control_types">Kontroller típus</string>
     <string name="single_click">Egyszeri érintés</string>
     <string name="double_click">Dupla érintés</string>
     <string name="long_press">Hosszú érintés</string>
@@ -71,6 +72,8 @@
     <string name="continue_game">Folytatás</string>
     <string name="empty">Üres</string>
     <string name="cant_do_it_now">Most lehetetlen ezt megtenni</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Hiba betöltés közben</string>
     <string name="you_have_received">Kapott összeg: +%1$d</string>
     <string name="help_win_a_game">További segítségért meg kell nyernie egy játékot.</string>
     <string name="unknown_error">Ismeretlen hiba.</string>
@@ -79,6 +82,7 @@
     <string name="resume">Folytatás</string>
     <string name="yes">Igen</string>
     <string name="unlock">Feloldás</string>
+    <string name="unlock_all">Összes feloldása</string>
     <string name="achievements">Teljesítmények</string>
     <string name="no">Nem</string>
     <string name="general">Általános</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Licencek</string>
     <string name="google_play_games">Google Play Játékok</string>
     <string name="loading">Betöltés…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">Csatlakozás</string>
     <string name="connecting">Csatlakozás…</string>
     <string name="disconnect">Lecsatlakozás</string>
@@ -101,7 +106,7 @@
     <string name="themes">Témák</string>
     <string name="delete_all_message">Az összes esemény végleges törlése.</string>
     <string name="remove_ad">Prémium</string>
-    <string name="help">Segítség</string>
+    <string name="help">Tipp</string>
     <string name="back">Vissza</string>
     <string name="donation">Adomány</string>
     <string name="open_on_game">Nyissa meg a játék képernyőn</string>
@@ -115,14 +120,13 @@
     <string name="close">Bezárás</string>
     <string name="open_tutorial">Bemutató megnyitása</string>
     <string name="click_numbers">Koppintás engedélyezése számokon</string>
-    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
+    <string name="flag_when_tap_numbers">Megjelölés, amikor a számokra koppint</string>
     <string name="tap_to_customize">Koppintson a testreszabáshoz</string>
-    <string name="toggle_button_top">Mutassa a Kapcsolót a felső sávon</string>
     <string name="no_guess_fail_warning">A jelenlegi szint lehet nem tipp mentes!</string>
     <string name="fixed_size">Rögzített méret</string>
     <string name="progressive">Előrehaladás</string>
     <string name="highlight_unsolved_numbers">Megoldatlan számok kiemelése</string>
-    <string name="left_handed">Balkezes</string>
+    <string name="show_clock">Óra megjelenítése</string>
     <string name="donate_request">Ha tetszik ez a játék, fontolja meg az adományozást.</string>
     <string name="donate_help">Ez segíteni fog abban, hogy ez a projekt aktív maradjon!</string>
 </resources>

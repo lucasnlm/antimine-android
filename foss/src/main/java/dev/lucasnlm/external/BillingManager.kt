@@ -16,7 +16,8 @@ class BillingManager : IBillingManager {
     override fun isEnabled(): Boolean = false
 
     override suspend fun charge(activity: Activity) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(DONATE_LINK))
+        val donationDeeplink = "app://antimine/donation"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(donationDeeplink))
         activity.startActivity(intent)
     }
 
@@ -25,9 +26,4 @@ class BillingManager : IBillingManager {
     override suspend fun getPriceFlow(): Flow<Price> = flowOf()
 
     override fun listenPurchases(): Flow<PurchaseInfo> = flowOf()
-
-    companion object {
-        const val DONATE_LINK =
-            "https://www.paypal.com/donate?hosted_button_id=49XX9XDNUV4SW"
-    }
 }

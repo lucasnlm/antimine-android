@@ -7,8 +7,9 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import io.mockk.every
 import io.mockk.mockk
-import org.junit.Assert.assertEquals
 import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class MinefieldRepositoryTest {
     private val beginnerMinefield = Minefield(9, 9, 10)
@@ -27,7 +28,6 @@ class MinefieldRepositoryTest {
             every { areaSize() } returns 10.0f
             every { verticalNavigationBarHeight() } returns 0
             every { displaySize() } returns Size(1000, 1000)
-            every { defaultAreaSize() } returns 10.0f
         }
 
         val minefield = minefieldRepository.fromDifficulty(
@@ -49,7 +49,6 @@ class MinefieldRepositoryTest {
             every { areaSize() } returns 10.0f
             every { verticalNavigationBarHeight() } returns 100
             every { displaySize() } returns Size(1000, 1000)
-            every { defaultAreaSize() } returns 10.0f
         }
 
         val minefield = minefieldRepository.fromDifficulty(
@@ -71,7 +70,6 @@ class MinefieldRepositoryTest {
             every { areaSize() } returns 10.0f
             every { verticalNavigationBarHeight() } returns 100
             every { displaySize() } returns Size(1000, 1000)
-            every { defaultAreaSize() } returns 10.0f
         }
 
         val minefield = minefieldRepository.fromDifficulty(
@@ -93,7 +91,6 @@ class MinefieldRepositoryTest {
             every { areaSize() } returns 10.0f
             every { verticalNavigationBarHeight() } returns 100
             every { displaySize() } returns Size(1000, 1000)
-            every { defaultAreaSize() } returns 10.0f
         }
 
         val minefield = minefieldRepository.fromDifficulty(
@@ -189,5 +186,42 @@ class MinefieldRepositoryTest {
             preferencesRepository,
         )
         assertEquals(Minefield(25, 20, 12), minefield)
+    }
+
+    @Test
+    fun testDifficultyRatio() {
+        val minefieldRepository = MinefieldRepository()
+        val preferencesRepository = mockk<IPreferencesRepository>(relaxed = true) {}
+        val dimensionRepository = mockk<IDimensionRepository>(relaxed = true)
+
+        val ratios = mapOf(
+            Difficulty.Beginner to 12,
+            Difficulty.Intermediate to 16,
+            Difficulty.Expert to 17,
+            Difficulty.Master to 18,
+            Difficulty.Legend to 20,
+        )
+
+        ratios.forEach {
+            assertEquals(
+                it.value,
+                minefieldRepository.fromDifficulty(
+                    it.key,
+                    dimensionRepository,
+                    preferencesRepository,
+                ).ratioPercent(),
+                "${it.key} should have ratio of ${it.value}",
+            )
+        }
+
+        ratios.entries.sortedBy {
+            it.key.ordinal
+        }.reduce { previous, current ->
+            assertTrue(
+                current.value > previous.value,
+                "${current.key} must have a ratio greater than ${previous.key}",
+            )
+            current
+        }
     }
 }

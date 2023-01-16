@@ -38,7 +38,7 @@ class HistoryViewModelTest : IntentViewModelTest() {
     @Test
     fun testInitialValue() {
         val viewModel = HistoryViewModel(mockk(), mockk())
-        assertEquals(HistoryState(listOf()), viewModel.singleState())
+        assertEquals(HistoryState(true, listOf()), viewModel.singleState())
     }
 
     @Test
@@ -51,6 +51,6 @@ class HistoryViewModelTest : IntentViewModelTest() {
             sendEvent(HistoryEvent.LoadAllSaves)
             singleState()
         }
-        assertEquals(HistoryState(allSaves.sortedByDescending { it.uid }), state)
+        assertEquals(HistoryState(false, allSaves.sortedByDescending { it.uid }), state)
     }
 }

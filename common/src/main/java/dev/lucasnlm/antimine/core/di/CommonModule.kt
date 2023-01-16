@@ -17,7 +17,7 @@ import org.koin.dsl.module
 val CommonModule = module {
     single { PreferencesManager(get()) } bind IPreferencesManager::class
 
-    single { DimensionRepository(get(), get()) } bind IDimensionRepository::class
+    single { DimensionRepository(get()) } bind IDimensionRepository::class
 
     single {
         PreferencesRepository(

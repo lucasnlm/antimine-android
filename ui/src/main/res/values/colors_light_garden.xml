@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colors_garden_light_primary">#246D00</color>
+    <color name="colors_garden_light_onPrimary">#FFFFFF</color>
+    <color name="colors_garden_light_primaryContainer">#94FB68</color>
+    <color name="colors_garden_light_onPrimaryContainer">#062100</color>
+    <color name="colors_garden_light_secondary">#55624C</color>
+    <color name="colors_garden_light_onSecondary">#FFFFFF</color>
+    <color name="colors_garden_light_secondaryContainer">#D8E7CB</color>
+    <color name="colors_garden_light_onSecondaryContainer">#131F0D</color>
+    <color name="colors_garden_light_tertiary">#9B4427</color>
+    <color name="colors_garden_light_onTertiary">#FFFFFF</color>
+    <color name="colors_garden_light_tertiaryContainer">#FFDBD0</color>
+    <color name="colors_garden_light_onTertiaryContainer">#3A0B00</color>
+    <color name="colors_garden_light_error">#BA1A1A</color>
+    <color name="colors_garden_light_errorContainer">#FFDAD6</color>
+    <color name="colors_garden_light_onError">#FFFFFF</color>
+    <color name="colors_garden_light_onErrorContainer">#410002</color>
+    <color name="colors_garden_light_background">#FDFDF6</color>
+    <color name="colors_garden_light_onBackground">#1A1C18</color>
+    <color name="colors_garden_light_surface">#FDFDF6</color>
+    <color name="colors_garden_light_onSurface">#1A1C18</color>
+    <color name="colors_garden_light_surfaceVariant">#DFE4D7</color>
+    <color name="colors_garden_light_onSurfaceVariant">#43483E</color>
+    <color name="colors_garden_light_outline">#73796D</color>
+    <color name="colors_garden_light_inverseOnSurface">#F1F1EA</color>
+    <color name="colors_garden_light_inverseSurface">#2F312D</color>
+    <color name="colors_garden_light_inversePrimary">#79DE4E</color>
+    <color name="colors_garden_light_shadow">#000000</color>
+    <color name="colors_garden_light_surfaceTint">#246D00</color>
+    <color name="colors_garden_light_outlineVariant">#C3C8BB</color>
+    <color name="colors_garden_light_scrim">#000000</color>
+</resources>

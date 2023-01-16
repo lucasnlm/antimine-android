@@ -9,18 +9,12 @@ add_library(# Sets the name of the library.
             SHARED
 
             tree234.cpp
+            random_generator.cpp
+            minefield_creator.cpp
             sgtatham.cpp)
 
-find_library(# Sets the name of the path variable.
-             log-lib
-
-             # Specifies the name of the NDK library that
-             # you want CMake to locate.
-             log )
-
 target_link_libraries(# Specifies the target library.
-                      sgtatham
+                      sgtatham)
 
-                      # Links the target library to the log library
-                      # included in the NDK.
-                      ${log-lib} )
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -s -o3")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s -o3")

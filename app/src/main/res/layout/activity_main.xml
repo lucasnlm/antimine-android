@@ -4,206 +4,475 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false"
     android:animateLayoutChanges="true"
+    android:fitsSystemWindows="false"
     android:paddingHorizontal="16dp"
     tools:context=".main.MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
+        android:layout_centerVertical="true"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:layout_centerVertical="true"
         android:fadeScrollbars="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/main_activity_padding"
-            android:paddingVertical="32dp"
+            android:animateLayoutChanges="true"
             android:orientation="vertical"
-            android:animateLayoutChanges="true">
+            android:paddingHorizontal="@dimen/main_activity_padding"
+            android:paddingVertical="32dp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:text="@string/app_name"
-                android:textSize="20sp"
                 android:layout_marginStart="4dp"
-                android:textColor="?attr/colorOnBackground"
                 android:drawablePadding="8dp"
                 android:paddingStart="8dp"
                 android:paddingEnd="0dp"
-                tools:text="@string/app_name"
-                app:drawableStartCompat="@drawable/mine" />
-
-            <dev.lucasnlm.antimine.ui.view.CardButtonView
-                android:id="@+id/continueGame"
-                android:layout_marginTop="32dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <dev.lucasnlm.antimine.ui.view.CardButtonView
-                android:id="@+id/newGameShow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"/>
+                android:text="@string/app_name"
+                android:textAllCaps="true"
+                android:textColor="?colorOnSurfaceVariant"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/mine"
+                app:drawableTint="?colorOnSurfaceVariant"
+                tools:text="@string/app_name" />
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/difficulties"
+                android:id="@+id/new_game_card"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:contentPadding="0dp"
-                app:cardUseCompatPadding="false"
-                app:strokeColor="?attr/colorOnBackground"
-                app:cardPreventCornerOverlap="true"
-                app:cardCornerRadius="10dp"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="8dp"
                 app:cardElevation="0dp"
-                app:strokeWidth="1dp">
+                app:strokeColor="?colorControlNormal">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical">
 
-                    <dev.lucasnlm.antimine.ui.view.CardButtonView
-                        android:id="@+id/startStandard"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/continueGame"
+                        style="@style/CustomButtonActive"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_marginTop="4dp"
+                        app:icon="@drawable/play" />
 
-                    <dev.lucasnlm.antimine.ui.view.CardButtonView
-                        android:id="@+id/startFixedSize"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/newGameShow"
+                        style="@style/CustomButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="@string/new_game"
+                        app:icon="@drawable/more" />
 
-                    <View
-                        android:id="@+id/difficultyDivider1"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/difficulties"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/colorOnBackground"/>
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:visibility="gone"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="0dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="false"
+                        app:contentPadding="0dp"
+                        app:strokeColor="?colorPrimary"
+                        app:strokeWidth="2dp">
 
-                    <dev.lucasnlm.antimine.ui.view.CardButtonView
-                        android:id="@+id/startBeginner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-                    <dev.lucasnlm.antimine.ui.view.CardButtonView
-                        android:id="@+id/startIntermediate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                    <dev.lucasnlm.antimine.ui.view.CardButtonView
-                        android:id="@+id/startExpert"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startStandard"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/progressive" />
 
-                    <dev.lucasnlm.antimine.ui.view.CardButtonView
-                        android:id="@+id/startMaster"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/standardSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
 
-                    <dev.lucasnlm.antimine.ui.view.CardButtonView
-                        android:id="@+id/startLegend"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                    <View
-                        android:id="@+id/difficultyDivider2"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?attr/colorOnBackground"/>
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startFixedSize"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/fixed_size" />
 
-                    <dev.lucasnlm.antimine.ui.view.CardButtonView
-                        android:id="@+id/startCustom"
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/fixedSizeSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
+
+                            <View
+                                android:id="@+id/difficultyDivider1"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="?colorPrimary" />
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startBeginner"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/beginner" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/beginnerSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startIntermediate"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/intermediate" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/intermediateSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startExpert"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/expert" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/expertSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startMaster"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/master" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/masterSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/startLegend"
+                                    style="@style/CustomButtonFlat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start|center_vertical"
+                                    android:paddingHorizontal="18dp"
+                                    android:text="@string/legend" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/legendSize"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end|center_vertical"
+                                    android:alpha="0.9"
+                                    android:includeFontPadding="false"
+                                    android:paddingHorizontal="18dp"
+                                    android:textColor="?colorPrimary"
+                                    tools:text="8x8x8" />
+                            </FrameLayout>
+
+                            <View
+                                android:id="@+id/difficultyDivider2"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="?colorPrimary" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/startCustom"
+                                style="@style/CustomButtonFlat"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:paddingHorizontal="18dp"
+                                android:text="@string/custom" />
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="12dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/settings_card"
+                style="?attr/materialCardViewFilledStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="8dp"
+                app:cardElevation="0dp"
+                app:strokeColor="?colorControlNormal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/themes"
+                        style="@style/CustomButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="@string/themes"
+                        app:icon="@drawable/themes" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/controls"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/control"
+                        app:icon="@drawable/controls" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/settings"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings"
+                        app:icon="@drawable/settings" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="8dp" />
+                android:layout_height="12dp" />
 
-            <dev.lucasnlm.antimine.ui.view.CardButtonView
-                android:id="@+id/tutorial"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/history_card"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="8dp"/>
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="8dp"
+                app:cardElevation="0dp"
+                app:strokeColor="?colorControlNormal">
 
-            <dev.lucasnlm.antimine.ui.view.CardButtonView
-                android:id="@+id/themes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <dev.lucasnlm.antimine.ui.view.CardButtonView
-                android:id="@+id/settings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/stats"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/events"
+                        app:icon="@drawable/stats" />
 
-            <dev.lucasnlm.antimine.ui.view.CardButtonView
-                android:id="@+id/controls"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"/>
-
-            <dev.lucasnlm.antimine.ui.view.OfferCardButtonView
-                android:id="@+id/removeAds"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/previousGames"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/previous_games"
+                        app:icon="@drawable/old_games" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="8dp" />
+                android:layout_height="12dp" />
 
-            <dev.lucasnlm.antimine.ui.view.CardButtonView
-                android:id="@+id/stats"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/other_card"
+                style="?attr/materialCardViewFilledStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="8dp"
+                app:cardElevation="0dp"
+                app:strokeColor="?colorControlNormal">
 
-            <dev.lucasnlm.antimine.ui.view.CardButtonView
-                android:id="@+id/previousGames"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="8dp" />
+                    <FrameLayout
+                        android:id="@+id/removeAdsRoot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
 
-            <dev.lucasnlm.antimine.ui.view.CardButtonView
-                android:id="@+id/translation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/removeAds"
+                            style="@style/CustomButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="start|center_vertical"
+                            android:text="@string/remove_ad" />
 
-            <dev.lucasnlm.antimine.ui.view.CardButtonView
-                android:id="@+id/play_games"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"/>
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/priceText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|center_vertical"
+                            android:includeFontPadding="false"
+                            android:paddingStart="0dp"
+                            android:paddingEnd="26dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            app:tint="?colorError"
+                            tools:text="$1,00" />
 
-            <dev.lucasnlm.antimine.ui.view.CardButtonView
-                android:id="@+id/about"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"/>
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/priceOff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|center_vertical"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/offer"
+                            android:visibility="gone"
+                            app:tint="?colorError"
+                            app:tintMode="multiply" />
+                    </FrameLayout>
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/tutorial"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tutorial"
+                        app:icon="@drawable/tutorial" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/play_games"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/google_play_games"
+                        app:icon="@drawable/games_controller" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/about"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about"
+                        app:icon="@drawable/info" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

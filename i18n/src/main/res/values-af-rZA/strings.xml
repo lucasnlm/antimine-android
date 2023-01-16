@@ -18,6 +18,8 @@
     <string name="legend">Legende</string>
     <string name="open">Maak oop</string>
     <string name="settings">Verstellings</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">Animasie</string>
     <string name="vibration">Haptiese terugvoer</string>
     <string name="about">Aangaande</string>
@@ -27,6 +29,7 @@
     <string name="width">Wydte</string>
     <string name="height">Hoogte</string>
     <string name="mines">Myne</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">Wil u \'n nuwe spel begin met hierdie kaart?</string>
     <string name="show_licenses">Wys lisensies</string>
     <string name="new_game_request">Wil u \'n nuwe spel begin met hierdie kaart?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Algemeen</string>
     <string name="settings_gameplay">Spel</string>
     <string name="settings_accessibility">Toeganklikheid</string>
-    <string name="size">Grootte</string>
-    <string name="rounded_square">Afgeronde vierkant</string>
-    <string name="space_between_squares">Spasie tussen vierkante</string>
     <string name="system">Stelsel</string>
     <string name="sign_in_failed">Kan nie koppel nie. Gaan asseblief jou netwerkverbinding na en probeer weer.</string>
     <string name="you_won">Jy het Gewen!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Gebruik die vraagteken</string>
     <string name="no_guessing_mode">\'Geen raai\'-modus nie</string>
     <string name="control">Kontrole</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">Enkele tik</string>
     <string name="double_click">Dubbel tik</string>
     <string name="long_press">Lang Druk</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Gaan Voort</string>
     <string name="empty">Leeg</string>
     <string name="cant_do_it_now">Onmoontlik om dit nou te doen</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">U het ontvang: +%1$d</string>
-    <string name="help_win_a_game">Vir meer hulp, moet u \'n wedstryd wen.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Onbekende fout.</string>
     <string name="leaderboards">Leierbord</string>
     <string name="cancel">Kanselleer</string>
     <string name="resume">Hervat</string>
     <string name="yes">Ja</string>
     <string name="unlock">Ontsluit</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">Prestasies</string>
     <string name="no">Nee</string>
     <string name="general">Algemeen</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Licenses</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Laai…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">Konnekteer</string>
     <string name="connecting">Besig om aanlyn te koppel…</string>
     <string name="disconnect">Ontkoppel</string>
@@ -101,7 +106,7 @@
     <string name="themes">Temas</string>
     <string name="delete_all_message">Vee alle gebeure permanent uit.</string>
     <string name="remove_ad">Verwyder Advertensies</string>
-    <string name="help">Help</string>
+    <string name="help">Hint</string>
     <string name="back">Terug</string>
     <string name="donation">Donasie</string>
     <string name="open_on_game">Maak oop op die spelskerm</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Allow tap on numbers</string>
     <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Tap to customize</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
-    <string name="left_handed">Links handig</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">If you like this game, consider making a donation.</string>
     <string name="donate_help">It will help keep this project active!</string>
 </resources>

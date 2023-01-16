@@ -20,12 +20,16 @@ private class TestPreferenceManager : IPreferencesManager {
         return values.getOrDefault(key, defaultValue) as Int
     }
 
+    override fun getIntOrNull(key: String): Int? {
+        return values[key] as? Int
+    }
+
     override fun putInt(key: String, value: Int) {
         values[key] = value
     }
 
     override fun getString(key: String): String? {
-        return values[key] as String
+        return values[key] as? String
     }
 
     override fun putString(key: String, value: String) {
@@ -46,6 +50,10 @@ private class TestPreferenceManager : IPreferencesManager {
 
     override fun putLong(key: String, value: Long) {
         values[key] = value
+    }
+
+    override fun getLongOrNull(key: String): Long? {
+        return values[key] as? Long
     }
 }
 
@@ -107,7 +115,7 @@ class PreferencesRepositoryTest {
         PreferencesRepository(preferenceManager, 400)
 
         assertTrue(preferenceManager.values["preference_large_area"] == null)
-        assertEquals(63, preferenceManager.getInt("preference_area_size", -1))
+        assertEquals(63, preferenceManager.getInt("preference_new_area_size", -1))
     }
 
     @Test
@@ -116,7 +124,7 @@ class PreferencesRepositoryTest {
         PreferencesRepository(preferenceManager, 400)
 
         assertTrue(preferenceManager.values["preference_large_area"] == null)
-        assertEquals(50, preferenceManager.getInt("preference_area_size", -1))
+        assertEquals(50, preferenceManager.getInt("preference_new_area_size", -1))
     }
 
     @Test
@@ -128,6 +136,20 @@ class PreferencesRepositoryTest {
         PreferencesRepository(preferenceManager, 400)
 
         assertTrue(preferenceManager.values["preference_large_area"] == null)
-        assertEquals(50, preferenceManager.getInt("preference_area_size", -1))
+        assertEquals(50, preferenceManager.getInt("preference_new_area_size", -1))
+    }
+
+    @Test
+    fun testPremiumFlag() {
+        val preferenceManager = TestPreferenceManager()
+        val preferencesRepository = PreferencesRepository(preferenceManager, 500)
+        assertFalse(preferencesRepository.isPremiumEnabled())
+
+        preferencesRepository.setPremiumFeatures(true)
+        assertTrue(preferencesRepository.isPremiumEnabled())
+
+        // Premium can't be disabled after enabled.
+        preferencesRepository.setPremiumFeatures(false)
+        assertTrue(preferencesRepository.isPremiumEnabled())
     }
 }

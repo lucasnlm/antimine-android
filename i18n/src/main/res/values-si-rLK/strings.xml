@@ -18,6 +18,8 @@
     <string name="legend">පුරාවෘත්තය</string>
     <string name="open">විවෘත</string>
     <string name="settings">සැකසුම්</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">චලන දසුන්</string>
     <string name="vibration">හප්ටික් ප්‍රතිපෝෂණය</string>
     <string name="about">පිළිබඳව</string>
@@ -27,6 +29,7 @@
     <string name="width">පුළුල්</string>
     <string name="height">උස</string>
     <string name="mines">පතල්</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">ඔබ නව ක්‍රීඩාවක් ආරම්භ කළහොත්, ඔබගේ වර්තමාන ප්‍රගතිය නැති වනු ඇත.</string>
     <string name="show_licenses">බලපත්ර පෙන්වන්න</string>
     <string name="new_game_request">නව ක්‍රීඩාවක් ඉදිරිපත් කිරීමට තිබේද?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">ජනරාල්</string>
     <string name="settings_gameplay">ක්රීඩාව</string>
     <string name="settings_accessibility">ප්රවේශ</string>
-    <string name="size">ප්‍රමාණය</string>
-    <string name="rounded_square">වටකුරු චතුරස්රය</string>
-    <string name="space_between_squares">වර්ග අතර අවකාශය</string>
     <string name="system">පද්ධතිය</string>
     <string name="sign_in_failed">පුරනය වීම අසාර්ථක විය. කරුණාකර ඔබගේ ජාල සම්බන්ධතාවය පරීක්ෂා කර නැවත උත්සාහ කරන්න.</string>
     <string name="you_won">ඔබ දිනුම්!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">ප්‍රශ්න ලකුණ භාවිතා කරන්න</string>
     <string name="no_guessing_mode">\'අනුමාන කිරීම් නැත\' මාදිලිය</string>
     <string name="control">පාලනයන්</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">තනි තට්ටුව</string>
     <string name="double_click">ද්විත්ව තට්ටුව</string>
     <string name="long_press">සපයන තට්ටුව</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">ඉදිරියට</string>
     <string name="empty">හිස්ය</string>
     <string name="cant_do_it_now">දැන් ඒක කරන්න බෑ</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">ඔබට ලැබී ඇත: +%1$d</string>
-    <string name="help_win_a_game">වැඩි උපකාර සඳහා, ඔබ ක්‍රීඩාවක් ජයග්‍රහණය කළ යුතුය.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">නොදන්නා දෝෂයකි.</string>
     <string name="leaderboards">ප්‍රමුඛ පෙළ</string>
     <string name="cancel">වගේ</string>
     <string name="resume">නැවතත්</string>
     <string name="yes">ඔව්</string>
     <string name="unlock">අගුළු මෙහෙයවීම</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">ජයග්රහණය</string>
     <string name="no">නැහැ</string>
     <string name="general">ජනරාල්</string>
@@ -88,6 +92,7 @@
     <string name="licenses">බලපත්ර</string>
     <string name="google_play_games">ගූගල් ප්ලේ ක්‍රීඩා</string>
     <string name="loading">පූරණයෙන්…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">සබඳින්න</string>
     <string name="connecting">සබැඳෙමින්…</string>
     <string name="disconnect">විසන්ධි කරන්න</string>
@@ -101,7 +106,7 @@
     <string name="themes">තේමා</string>
     <string name="delete_all_message">සියලුම සිදුවීම් ස්ථිරවම මකන්න.</string>
     <string name="remove_ad">වාරික</string>
-    <string name="help">උදව්</string>
+    <string name="help">Hint</string>
     <string name="back">ආපසු</string>
     <string name="donation">පරිත්‍යාග</string>
     <string name="open_on_game">ක්‍රීඩා තිරය මත විවෘත කරන්න</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">අංක මත තට්ටු කිරීමට ඉඩ දෙන්න</string>
     <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">අභිරුචිකරණයට ඔබන්න</string>
-    <string name="toggle_button_top">ඉහළ තීරුවේ \"ටොගල් බොත්තම\" පෙන්වන්න</string>
     <string name="no_guess_fail_warning">වත්මන් බිම්බෝම්බය අනුමාන-නිදහස් නොවිය හැක!</string>
     <string name="fixed_size">ස්ථාවර ප්රමාණය</string>
     <string name="progressive">ප්‍රගතිශීලී</string>
     <string name="highlight_unsolved_numbers">නොවිසඳුණු අංක ඉස්මතු කරන්න</string>
-    <string name="left_handed">වමත්</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">ඔබ මෙම ක්‍රීඩාවට කැමති නම්, පරිත්‍යාගයක් කිරීමට සලකා බලන්න.</string>
     <string name="donate_help">එය මෙම ව්‍යාපෘතිය ක්‍රියාකාරීව තබා ගැනීමට උපකාරී වනු ඇත!</string>
 </resources>

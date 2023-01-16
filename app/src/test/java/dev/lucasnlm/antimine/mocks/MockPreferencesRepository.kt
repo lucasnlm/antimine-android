@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.mocks
 
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
@@ -11,6 +12,8 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun reset() {}
 
+    override fun hasControlCustomizations(): Boolean = false
+
     override fun resetControls() {}
 
     override fun customGameMode(): Minefield = customMinefield
@@ -18,6 +21,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun updateCustomGameMode(minefield: Minefield) {
         customMinefield = minefield
     }
+
+    override fun forgetCustomSeed() {}
 
     override fun controlStyle(): ControlStyle = ControlStyle.Standard
 
@@ -42,6 +47,10 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun themeId(): Long = 1L
 
     override fun useTheme(themeId: Long) {}
+
+    override fun skinId(): Long = 1L
+
+    override fun useSkin(skinId: Long) {}
 
     override fun updateStatsBase(statsBase: Int) {}
 
@@ -73,17 +82,13 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun useSimonTathamAlgorithm(): Boolean = true
 
-    override fun setSimonTathamAlgorithm(enabled: Boolean) { }
+    override fun setSimonTathamAlgorithm(enabled: Boolean) {}
 
     override fun lastHelpUsed(): Long = 0L
 
     override fun refreshLastHelpUsed() {}
 
     override fun setHelp(value: Boolean) {}
-
-    override fun squareRadius(): Int = 2
-
-    override fun setSquareRadius(value: Int?) {}
 
     override fun getTips(): Int = 0
 
@@ -93,9 +98,11 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setExtraTips(tips: Int) {}
 
-    override fun openUsingSwitchControl(): Boolean = true
+    override fun getSwitchControlAction(): Action = Action.OpenTile
 
-    override fun setSwitchControl(useOpen: Boolean) {}
+    override fun setSwitchControl(action: Action) {
+        TODO("Not yet implemented")
+    }
 
     override fun useFlagAssistant(): Boolean = false
 
@@ -104,10 +111,6 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun useHapticFeedback(): Boolean = true
 
     override fun setHapticFeedback(value: Boolean) {}
-
-    override fun squareSize(): Int = 50
-
-    override fun setSquareSize(value: Int?) {}
 
     override fun useAnimations(): Boolean = false
 
@@ -125,10 +128,6 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setTouchSensibility(sensibility: Int) {}
 
-    override fun setPreferredLocale(locale: String) {}
-
-    override fun getPreferredLocale(): String? = null
-
     override fun showWindowsWhenFinishGame(): Boolean = true
 
     override fun mustShowWindowsWhenFinishGame(enabled: Boolean) {}
@@ -141,45 +140,33 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setUserId(userId: String) {}
 
-    override fun addUnlockedTheme(id: Int) { }
+    override fun addUnlockedTheme(id: Int) {}
 
-    override fun setUnlockedThemes(themes: String) { }
+    override fun setUnlockedThemes(themes: String) {}
 
     override fun getUnlockedThemes(): List<Int> = listOf()
 
-    override fun squareDivider(): Int = 0
-
-    override fun setSquareDivider(value: Int?) {}
-
     override fun showTutorialDialog(): Boolean = false
 
-    override fun setTutorialDialog(show: Boolean) { }
+    override fun setTutorialDialog(show: Boolean) {}
 
     override fun allowTapOnNumbers(): Boolean = true
 
-    override fun setAllowTapOnNumbers(allow: Boolean) { }
-
-    override fun setToggleButtonOnTopBar(enabled: Boolean) { }
-
-    override fun showToggleButtonOnTopBar(): Boolean = false
+    override fun setAllowTapOnNumbers(allow: Boolean) {}
 
     override fun getHapticFeedbackLevel(): Int = 100
 
-    override fun setHapticFeedbackLevel(value: Int) { }
+    override fun setHapticFeedbackLevel(value: Int) {}
 
-    override fun resetHapticFeedbackLevel() { }
+    override fun resetHapticFeedbackLevel() {}
 
     override fun showTutorialButton(): Boolean = true
 
-    override fun setShowTutorialButton(value: Boolean) { }
+    override fun setShowTutorialButton(value: Boolean) {}
 
     override fun dimNumbers(): Boolean = false
 
-    override fun setDimNumbers(value: Boolean) { }
-
-    override fun setLeftHandedMode(enabled: Boolean) {}
-
-    override fun leftHandedMode(): Boolean = false
+    override fun setDimNumbers(value: Boolean) {}
 
     override fun setRequestDonation(request: Boolean) {}
 
@@ -187,11 +174,13 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun letNumbersAutoFlag(): Boolean = true
 
-    override fun setNumbersAutoFlag(allow: Boolean) { }
+    override fun setNumbersAutoFlag(allow: Boolean) {}
 
-    override fun defaultSquareRadius(): Int = 0
+    override fun showTimer(): Boolean = true
 
-    override fun defaultSquareSize(): Int = 0
+    override fun setTimerVisible(visible: Boolean) {}
 
-    override fun defaultSquareDivider(): Int = 0
+    override fun showContinueGame() = true
+
+    override fun setContinueGameLabel(value: Boolean) {}
 }

@@ -31,8 +31,8 @@ data class GameState(
     // Current game durations in milliseconds.
     val duration: Long,
 
-    // How many tips are available.
-    val tips: Int,
+    // How many hints are available.
+    val hints: Int,
 
     // If true, user have already started the game
     // and the minefield has mines in it.
@@ -50,6 +50,9 @@ data class GameState(
 
     // If true, the map is being loaded.
     val isLoadingMap: Boolean,
+
+    // If true, a valid game is being created.
+    val isCreatingGame: Boolean,
 
     // If false, it will hide tutorial tip during this session.
     val showTutorial: Boolean,

@@ -1,22 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">0dp</item>
+    </style>
 
-    <style name="AppTheme" parent="Theme.Material3.DayNight">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
+    <style name="Widget.App.Button.OutlinedButton.IconOnly" parent="Widget.Material3.Button.OutlinedButton.Icon">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="strokeWidth">0.75dp</item>
+        <item name="iconSize">28dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
+    </style>
+
+    <style name="SectionTitle" parent="@style/TextAppearance.Material3.TitleMedium">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="CustomButtonActive" parent="@style/Widget.Material3.Button.IconButton.Filled">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">start</item>
+        <item name="elevation">0dp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="iconPadding">8dp</item>
+        <item name="startIconContentDescription">null</item>
+    </style>
+
+    <style name="CustomButton" parent="@style/Widget.Material3.Button.IconButton">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">start</item>
+        <item name="elevation">0dp</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="iconPadding">8dp</item>
+        <item name="startIconContentDescription">null</item>
+    </style>
+
+    <style name="CustomButtonFlat" parent="@style/Widget.Material3.Button.TextButton">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">start</item>
+        <item name="elevation">0dp</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="startIconContentDescription">null</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.Material3.DynamicColors.DayNight">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/launcher_background_night</item>
+        <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">1000</item>
+        <item name="android:windowSplashScreenBehavior" tools:targetApi="tiramisu">icon_preferred</item>
     </style>
 
     <style name="CustomLightTheme" parent="Theme.Material3.Light">
-        <item name="colorPrimary">#757575</item>
-        <item name="colorPrimaryDark">#494949</item>
-        <item name="colorAccent">#ff6f00</item>
+        <item name="colorPrimary">@color/colors_light_primary</item>
+        <item name="colorOnPrimary">@color/colors_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_light_secondary</item>
+        <item name="colorOnSecondary">@color/colors_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_light_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_light_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_light_error</item>
+        <item name="colorErrorContainer">@color/colors_light_errorContainer</item>
+        <item name="colorOnError">@color/colors_light_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_light_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_light_background</item>
+        <item name="colorOnBackground">@color/colors_light_onBackground</item>
+        <item name="colorSurface">@color/colors_light_surface</item>
+        <item name="colorOnSurface">@color/colors_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_light_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_light_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_light_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_light_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -26,11 +99,32 @@
     </style>
 
     <style name="CustomDarkTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="colorPrimary">#FFFFFF</item>
-        <item name="colorPrimaryDark">#FFFFFF</item>
-        <item name="colorAccent">#FFFFFF</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colors_dark_primary</item>
+        <item name="colorOnPrimary">@color/colors_dark_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_dark_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_dark_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_dark_secondary</item>
+        <item name="colorOnSecondary">@color/colors_dark_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_dark_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_dark_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_dark_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_dark_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_dark_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_dark_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_dark_error</item>
+        <item name="colorOnError">@color/colors_dark_onError</item>
+        <item name="colorErrorContainer">@color/colors_dark_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/colors_dark_onErrorContainer</item>
+        <item name="colorOutline">@color/colors_dark_outline</item>
+        <item name="android:colorBackground">@color/colors_dark_background</item>
+        <item name="colorOnBackground">@color/colors_dark_onBackground</item>
+        <item name="colorSurface">@color/colors_dark_surface</item>
+        <item name="colorOnSurface">@color/colors_dark_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_dark_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_dark_onSurfaceVariant</item>
+        <item name="colorSurfaceInverse">@color/colors_dark_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/colors_dark_inverseOnSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_dark_inversePrimary</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
@@ -38,11 +132,32 @@
     </style>
 
     <style name="CustomAmoledTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="colorPrimary">#FFFFFFFF</item>
-        <item name="colorPrimaryDark">#FFFFFFFF</item>
-        <item name="colorAccent">#FFFFFFFF</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colors_amoled_primary</item>
+        <item name="colorOnPrimary">@color/colors_amoled_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_amoled_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_amoled_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_amoled_secondary</item>
+        <item name="colorOnSecondary">@color/colors_amoled_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_amoled_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_amoled_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_amoled_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_amoled_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_amoled_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_amoled_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_amoled_error</item>
+        <item name="colorOnError">@color/colors_amoled_onError</item>
+        <item name="colorErrorContainer">@color/colors_amoled_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/colors_amoled_onErrorContainer</item>
+        <item name="colorOutline">@color/colors_amoled_outline</item>
+        <item name="android:colorBackground">@color/colors_amoled_background</item>
+        <item name="colorOnBackground">@color/colors_amoled_onBackground</item>
+        <item name="colorSurface">@color/colors_amoled_surface</item>
+        <item name="colorOnSurface">@color/colors_amoled_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_amoled_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_amoled_onSurfaceVariant</item>
+        <item name="colorSurfaceInverse">@color/colors_amoled_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/colors_amoled_inverseOnSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_amoled_inversePrimary</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
@@ -50,9 +165,32 @@
     </style>
 
     <style name="CustomGardenTheme" parent="Theme.Material3.Light.NoActionBar">
-        <item name="colorPrimary">#5d4037</item>
-        <item name="colorPrimaryDark">#321911</item>
-        <item name="colorAccent">#53b529</item>
+        <item name="colorPrimary">@color/colors_garden_light_primary</item>
+        <item name="colorOnPrimary">@color/colors_garden_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_garden_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_garden_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_garden_light_secondary</item>
+        <item name="colorOnSecondary">@color/colors_garden_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_garden_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_garden_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_garden_light_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_garden_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_garden_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_garden_light_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_garden_light_error</item>
+        <item name="colorErrorContainer">@color/colors_garden_light_errorContainer</item>
+        <item name="colorOnError">@color/colors_garden_light_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_garden_light_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_garden_light_background</item>
+        <item name="colorOnBackground">@color/colors_garden_light_onBackground</item>
+        <item name="colorSurface">@color/colors_garden_light_surface</item>
+        <item name="colorOnSurface">@color/colors_garden_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_garden_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_garden_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_garden_light_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_garden_light_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_garden_light_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_garden_light_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -62,9 +200,32 @@
     </style>
 
     <style name="CustomMarineTheme" parent="Theme.Material3.Light">
-        <item name="colorPrimary">#1565c0</item>
-        <item name="colorPrimaryDark">#003c8f</item>
-        <item name="colorAccent">#03a9f4</item>
+        <item name="colorPrimary">@color/colors_blue_light_primary</item>
+        <item name="colorOnPrimary">@color/colors_blue_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_blue_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_blue_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_blue_light_secondary</item>
+        <item name="colorOnSecondary">@color/colors_blue_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_blue_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_blue_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_blue_light_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_blue_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_blue_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_blue_light_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_blue_light_error</item>
+        <item name="colorErrorContainer">@color/colors_blue_light_errorContainer</item>
+        <item name="colorOnError">@color/colors_blue_light_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_blue_light_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_blue_light_background</item>
+        <item name="colorOnBackground">@color/colors_blue_light_onBackground</item>
+        <item name="colorSurface">@color/colors_blue_light_surface</item>
+        <item name="colorOnSurface">@color/colors_blue_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_blue_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_blue_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_blue_light_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_blue_light_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_blue_light_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_blue_light_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -74,9 +235,32 @@
     </style>
 
     <style name="CustomBlueGreyTheme" parent="Theme.Material3.Light">
-        <item name="colorPrimary">#37474f</item>
-        <item name="colorPrimaryDark">#102027</item>
-        <item name="colorAccent">#42a5f5</item>
+        <item name="colorPrimary">@color/colors_blue_light_primary</item>
+        <item name="colorOnPrimary">@color/colors_blue_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_blue_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_blue_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_blue_light_secondary</item>
+        <item name="colorOnSecondary">@color/colors_blue_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_blue_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_blue_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_blue_light_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_blue_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_blue_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_blue_light_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_blue_light_error</item>
+        <item name="colorErrorContainer">@color/colors_blue_light_errorContainer</item>
+        <item name="colorOnError">@color/colors_blue_light_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_blue_light_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_blue_light_background</item>
+        <item name="colorOnBackground">@color/colors_blue_light_onBackground</item>
+        <item name="colorSurface">@color/colors_blue_light_surface</item>
+        <item name="colorOnSurface">@color/colors_blue_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_blue_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_blue_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_blue_light_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_blue_light_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_blue_light_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_blue_light_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -86,9 +270,32 @@
     </style>
 
     <style name="DarkLightBlueTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="colorPrimary">#42a5f5</item>
-        <item name="colorPrimaryDark">#42a5f5</item>
-        <item name="colorAccent">#42a5f5</item>
+        <item name="colorPrimary">@color/colors_dark_blue_primary</item>
+        <item name="colorOnPrimary">@color/colors_dark_blue_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_dark_blue_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_dark_blue_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_dark_blue_secondary</item>
+        <item name="colorOnSecondary">@color/colors_dark_blue_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_dark_blue_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_dark_blue_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_dark_blue_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_dark_blue_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_dark_blue_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_dark_blue_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_dark_blue_error</item>
+        <item name="colorErrorContainer">@color/colors_dark_blue_errorContainer</item>
+        <item name="colorOnError">@color/colors_dark_blue_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_dark_blue_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_dark_blue_background</item>
+        <item name="colorOnBackground">@color/colors_dark_blue_onBackground</item>
+        <item name="colorSurface">@color/colors_dark_blue_surface</item>
+        <item name="colorOnSurface">@color/colors_dark_blue_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_dark_blue_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_dark_blue_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_dark_blue_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_dark_blue_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_dark_blue_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_dark_blue_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -98,9 +305,32 @@
     </style>
 
     <style name="DarkRedTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="colorPrimary">#f44336</item>
-        <item name="colorPrimaryDark">#f44336</item>
-        <item name="colorAccent">#f44336</item>
+        <item name="colorPrimary">@color/colors_dark_red_primary</item>
+        <item name="colorOnPrimary">@color/colors_dark_red_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_dark_red_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_dark_red_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_dark_red_secondary</item>
+        <item name="colorOnSecondary">@color/colors_dark_red_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_dark_red_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_dark_red_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_dark_red_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_dark_red_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_dark_red_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_dark_red_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_dark_red_error</item>
+        <item name="colorErrorContainer">@color/colors_dark_red_errorContainer</item>
+        <item name="colorOnError">@color/colors_dark_red_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_dark_red_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_dark_red_background</item>
+        <item name="colorOnBackground">@color/colors_dark_red_onBackground</item>
+        <item name="colorSurface">@color/colors_dark_red_surface</item>
+        <item name="colorOnSurface">@color/colors_dark_red_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_dark_red_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_dark_red_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_dark_red_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_dark_red_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_dark_red_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_dark_red_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -110,9 +340,32 @@
     </style>
 
     <style name="CustomOrangeTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="colorPrimary">#fb8c00</item>
-        <item name="colorPrimaryDark">#fb8c00</item>
-        <item name="colorAccent">#fb8c00</item>
+        <item name="colorPrimary">@color/colors_dark_orange_primary</item>
+        <item name="colorOnPrimary">@color/colors_dark_orange_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_dark_orange_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_dark_orange_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_dark_orange_secondary</item>
+        <item name="colorOnSecondary">@color/colors_dark_orange_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_dark_orange_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_dark_orange_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_dark_orange_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_dark_orange_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_dark_orange_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_dark_orange_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_dark_orange_error</item>
+        <item name="colorErrorContainer">@color/colors_dark_orange_errorContainer</item>
+        <item name="colorOnError">@color/colors_dark_orange_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_dark_orange_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_dark_orange_background</item>
+        <item name="colorOnBackground">@color/colors_dark_orange_onBackground</item>
+        <item name="colorSurface">@color/colors_dark_orange_surface</item>
+        <item name="colorOnSurface">@color/colors_dark_orange_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_dark_orange_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_dark_orange_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_dark_orange_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_dark_orange_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_dark_orange_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_dark_orange_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -122,9 +375,32 @@
     </style>
 
     <style name="CustomPinkTheme" parent="Theme.Material3.Light">
-        <item name="colorPrimary">#f8bbd0</item>
-        <item name="colorPrimaryDark">#c48b9f</item>
-        <item name="colorAccent">#f48fb1</item>
+        <item name="colorPrimary">@color/colors_light_pink_primary</item>
+        <item name="colorOnPrimary">@color/colors_light_pink_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_light_pink_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_light_pink_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_light_pink_secondary</item>
+        <item name="colorOnSecondary">@color/colors_light_pink_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_light_pink_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_light_pink_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_light_pink_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_light_pink_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_light_pink_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_light_pink_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_light_pink_error</item>
+        <item name="colorErrorContainer">@color/colors_light_pink_errorContainer</item>
+        <item name="colorOnError">@color/colors_light_pink_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_light_pink_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_light_pink_background</item>
+        <item name="colorOnBackground">@color/colors_light_pink_onBackground</item>
+        <item name="colorSurface">@color/colors_light_pink_surface</item>
+        <item name="colorOnSurface">@color/colors_light_pink_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_light_pink_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_light_pink_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_light_pink_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_light_pink_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_light_pink_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_light_pink_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -134,9 +410,32 @@
     </style>
 
     <style name="CustomDarkPinkTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="colorPrimary">#f8bbd0</item>
-        <item name="colorPrimaryDark">#c48b9f</item>
-        <item name="colorAccent">#f48fb1</item>
+        <item name="colorPrimary">@color/colors_dark_pink_primary</item>
+        <item name="colorOnPrimary">@color/colors_dark_pink_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_dark_pink_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_dark_pink_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_dark_pink_secondary</item>
+        <item name="colorOnSecondary">@color/colors_dark_pink_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_dark_pink_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_dark_pink_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_dark_pink_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_dark_pink_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_dark_pink_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_dark_pink_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_dark_pink_error</item>
+        <item name="colorErrorContainer">@color/colors_dark_pink_errorContainer</item>
+        <item name="colorOnError">@color/colors_dark_pink_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_dark_pink_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_dark_pink_background</item>
+        <item name="colorOnBackground">@color/colors_dark_pink_onBackground</item>
+        <item name="colorSurface">@color/colors_dark_pink_surface</item>
+        <item name="colorOnSurface">@color/colors_dark_pink_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_dark_pink_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_dark_pink_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_dark_pink_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_dark_pink_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_dark_pink_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_dark_pink_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -146,9 +445,32 @@
     </style>
 
     <style name="CustomPurpleTheme" parent="Theme.Material3.Light">
-        <item name="colorPrimary">#5e35b1</item>
-        <item name="colorPrimaryDark">#280680</item>
-        <item name="colorAccent">#9c27b0</item>
+        <item name="colorPrimary">@color/colors_light_purple_primary</item>
+        <item name="colorOnPrimary">@color/colors_light_purple_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_light_purple_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_light_purple_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_light_purple_secondary</item>
+        <item name="colorOnSecondary">@color/colors_light_purple_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_light_purple_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_light_purple_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_light_purple_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_light_purple_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_light_purple_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_light_purple_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_light_purple_error</item>
+        <item name="colorErrorContainer">@color/colors_light_purple_errorContainer</item>
+        <item name="colorOnError">@color/colors_light_purple_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_light_purple_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_light_purple_background</item>
+        <item name="colorOnBackground">@color/colors_light_purple_onBackground</item>
+        <item name="colorSurface">@color/colors_light_purple_surface</item>
+        <item name="colorOnSurface">@color/colors_light_purple_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_light_purple_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_light_purple_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_light_purple_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_light_purple_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_light_purple_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_light_purple_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -158,9 +480,32 @@
     </style>
 
     <style name="DarkCustomPurpleTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="colorPrimary">#5e35b1</item>
-        <item name="colorPrimaryDark">#280680</item>
-        <item name="colorAccent">#9c27b0</item>
+        <item name="colorPrimary">@color/colors_dark_purple_primary</item>
+        <item name="colorOnPrimary">@color/colors_dark_purple_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_dark_purple_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_dark_purple_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_dark_purple_secondary</item>
+        <item name="colorOnSecondary">@color/colors_dark_purple_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_dark_purple_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_dark_purple_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_dark_purple_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_dark_purple_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_dark_purple_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_dark_purple_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_dark_purple_error</item>
+        <item name="colorErrorContainer">@color/colors_dark_purple_errorContainer</item>
+        <item name="colorOnError">@color/colors_dark_purple_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_dark_purple_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_dark_purple_background</item>
+        <item name="colorOnBackground">@color/colors_dark_purple_onBackground</item>
+        <item name="colorSurface">@color/colors_dark_purple_surface</item>
+        <item name="colorOnSurface">@color/colors_dark_purple_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_dark_purple_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_dark_purple_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_dark_purple_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_dark_purple_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_dark_purple_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_dark_purple_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -170,9 +515,32 @@
     </style>
 
     <style name="CustomLimeTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="colorPrimary">#cddc39</item>
-        <item name="colorPrimaryDark">#99aa00</item>
-        <item name="colorAccent">#cddc39</item>
+        <item name="colorPrimary">@color/colors_dark_lime_primary</item>
+        <item name="colorOnPrimary">@color/colors_dark_lime_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_dark_lime_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_dark_lime_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_dark_lime_secondary</item>
+        <item name="colorOnSecondary">@color/colors_dark_lime_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_dark_lime_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_dark_lime_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_dark_lime_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_dark_lime_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_dark_lime_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_dark_lime_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_dark_lime_error</item>
+        <item name="colorErrorContainer">@color/colors_dark_lime_errorContainer</item>
+        <item name="colorOnError">@color/colors_dark_lime_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_dark_lime_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_dark_lime_background</item>
+        <item name="colorOnBackground">@color/colors_dark_lime_onBackground</item>
+        <item name="colorSurface">@color/colors_dark_lime_surface</item>
+        <item name="colorOnSurface">@color/colors_dark_lime_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_dark_lime_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_dark_lime_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_dark_lime_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_dark_lime_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_dark_lime_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_dark_lime_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -182,9 +550,32 @@
     </style>
 
     <style name="BananaTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="colorPrimary">#fdd835</item>
-        <item name="colorPrimaryDark">#c6a700</item>
-        <item name="colorAccent">#ffeb3b</item>
+        <item name="colorPrimary">@color/colors_dark_banana_primary</item>
+        <item name="colorOnPrimary">@color/colors_dark_banana_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_dark_banana_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_dark_banana_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_dark_banana_secondary</item>
+        <item name="colorOnSecondary">@color/colors_dark_banana_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_dark_banana_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_dark_banana_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_dark_banana_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_dark_banana_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_dark_banana_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_dark_banana_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_dark_banana_error</item>
+        <item name="colorErrorContainer">@color/colors_dark_banana_errorContainer</item>
+        <item name="colorOnError">@color/colors_dark_banana_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_dark_banana_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_dark_banana_background</item>
+        <item name="colorOnBackground">@color/colors_dark_banana_onBackground</item>
+        <item name="colorSurface">@color/colors_dark_banana_surface</item>
+        <item name="colorOnSurface">@color/colors_dark_banana_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_dark_banana_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_dark_banana_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_dark_banana_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_dark_banana_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_dark_banana_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_dark_banana_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -194,9 +585,32 @@
     </style>
 
     <style name="BananaThemeLight" parent="Theme.Material3.Light">
-        <item name="colorPrimary">#f57f17</item>
-        <item name="colorPrimaryDark">#bc5100</item>
-        <item name="colorAccent">#f9a825</item>
+        <item name="colorPrimary">@color/colors_light_banana_primary</item>
+        <item name="colorOnPrimary">@color/colors_light_banana_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/colors_light_banana_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/colors_light_banana_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/colors_light_banana_secondary</item>
+        <item name="colorOnSecondary">@color/colors_light_banana_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/colors_light_banana_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_light_banana_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/colors_light_banana_tertiary</item>
+        <item name="colorOnTertiary">@color/colors_light_banana_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/colors_light_banana_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/colors_light_banana_onTertiaryContainer</item>
+        <item name="colorError">@color/colors_light_banana_error</item>
+        <item name="colorErrorContainer">@color/colors_light_banana_errorContainer</item>
+        <item name="colorOnError">@color/colors_light_banana_onError</item>
+        <item name="colorOnErrorContainer">@color/colors_light_banana_onErrorContainer</item>
+        <item name="android:colorBackground">@color/colors_light_banana_background</item>
+        <item name="colorOnBackground">@color/colors_light_banana_onBackground</item>
+        <item name="colorSurface">@color/colors_light_banana_surface</item>
+        <item name="colorOnSurface">@color/colors_light_banana_onSurface</item>
+        <item name="colorSurfaceVariant">@color/colors_light_banana_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/colors_light_banana_onSurfaceVariant</item>
+        <item name="colorOutline">@color/colors_light_banana_outline</item>
+        <item name="colorOnSurfaceInverse">@color/colors_light_banana_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/colors_light_banana_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/colors_light_banana_inversePrimary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>

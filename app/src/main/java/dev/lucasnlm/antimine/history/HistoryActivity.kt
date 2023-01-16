@@ -1,26 +1,21 @@
 package dev.lucasnlm.antimine.history
 
 import android.os.Bundle
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.history.views.HistoryFragment
-import dev.lucasnlm.antimine.ui.ext.ThematicActivity
-import kotlinx.android.synthetic.main.activity_stats.*
+import dev.lucasnlm.antimine.ui.ext.ThemedActivity
+import kotlinx.android.synthetic.main.activity_history.*
 
-class HistoryActivity : ThematicActivity(R.layout.activity_history) {
+class HistoryActivity : ThemedActivity(R.layout.activity_history) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        section.bind(
-            text = R.string.previous_games,
-            startButton = R.drawable.back_arrow,
-            startDescription = R.string.back,
-            startAction = {
-                finish()
-            },
-        )
+        bindToolbar(toolbar)
 
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.content, HistoryFragment())
-        }.commitAllowingStateLoss()
+        supportFragmentManager.commit(allowStateLoss = true) {
+            replace<HistoryFragment>(R.id.content)
+        }
     }
 }

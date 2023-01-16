@@ -18,6 +18,8 @@
     <string name="legend">Legende</string>
     <string name="open">Åbn</string>
     <string name="settings">Settings</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">Animationer</string>
     <string name="vibration">Haptisk Feedback</string>
     <string name="about">Om</string>
@@ -27,6 +29,7 @@
     <string name="width">Bredde</string>
     <string name="height">Højde</string>
     <string name="mines">Mines</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">Hvis du starter et nyt spil, vil dit nuværende fremskridt gå tabt.</string>
     <string name="show_licenses">Vis Licenser</string>
     <string name="new_game_request">Vil du starte et nyt spil?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Generelt</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Tilgængelighed</string>
-    <string name="size">Størrelse</string>
-    <string name="rounded_square">Afrundet firkant</string>
-    <string name="space_between_squares">Mellemrum Mellem Firkanter</string>
     <string name="system">System</string>
     <string name="sign_in_failed">Kan ikke forbinde. Tjek venligst din netværksforbindelse, og prøv igen.</string>
     <string name="you_won">Du vandt!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Brug flag med spørgsmålstegn</string>
     <string name="no_guessing_mode">\'Ingen gætning\' tilstand</string>
     <string name="control">Controls</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">Enkelt tryk</string>
     <string name="double_click">Dobbelt tryk</string>
     <string name="long_press">Langt tryk</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Forsæt</string>
     <string name="empty">Tom</string>
     <string name="cant_do_it_now">Umuligt at gøre det nu</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">Du har modtaget: +%1$d</string>
-    <string name="help_win_a_game">For mere hjælp, skal du vinde et spil.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Ukendt fejl.</string>
     <string name="leaderboards">Turneringsskema</string>
     <string name="cancel">Annuller</string>
     <string name="resume">Fortsæt</string>
     <string name="yes">Ja</string>
     <string name="unlock">Lås op</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">Achievements</string>
     <string name="no">Nej</string>
     <string name="general">Generelt</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Licenser</string>
     <string name="google_play_games">Google Play Spil</string>
     <string name="loading">Indlæser…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">Tilslut</string>
     <string name="connecting">Tilslutter…</string>
     <string name="disconnect">Afbryd</string>
@@ -101,7 +106,7 @@
     <string name="themes">Temaer</string>
     <string name="delete_all_message">Slet alle begivenheder permanent.</string>
     <string name="remove_ad">Fjern annoncer</string>
-    <string name="help">Hjælp</string>
+    <string name="help">Hint</string>
     <string name="back">Tilbage</string>
     <string name="donation">Donation</string>
     <string name="open_on_game">Åbn på spilskærmen</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Tillad tryk på numre</string>
     <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Tryk for at tilpasse</string>
-    <string name="toggle_button_top">Vis \"Skift knap\" på øverste bjælke</string>
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Fast Størrelse</string>
     <string name="progressive">Fremskridt</string>
     <string name="highlight_unsolved_numbers">Fremhæv uløste tal</string>
-    <string name="left_handed">Venstrehåndet</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">If you like this game, consider making a donation.</string>
     <string name="donate_help">It will help keep this project active!</string>
 </resources>

@@ -1,7 +1,10 @@
 package dev.lucasnlm.antimine.core.models
 
+import androidx.annotation.Keep
+
+@Keep
 enum class Mark(
-    val ligatureId: Int,
+    val ligatureMask: Int,
 ) {
     None(0),
     Flag(1),

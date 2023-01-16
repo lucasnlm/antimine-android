@@ -18,6 +18,8 @@
     <string name="legend">أسطوري</string>
     <string name="open">فتح</string>
     <string name="settings">الإعدادات</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">الرسوم المتحركة</string>
     <string name="vibration">تغذية راجعة باللمس</string>
     <string name="about">حول</string>
@@ -27,6 +29,7 @@
     <string name="width">العرض</string>
     <string name="height">الارتفاع</string>
     <string name="mines">الألغام</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">إذا بدأت لعبة جديدة،\nستفقد تقدمك الحالي.</string>
     <string name="show_licenses">إظهار التراخيص</string>
     <string name="new_game_request">هل تريد بدء لعبة جديدة؟</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">عام</string>
     <string name="settings_gameplay">أسلوب اللعبة</string>
     <string name="settings_accessibility">إمكانية الوصول</string>
-    <string name="size">الحجم</string>
-    <string name="rounded_square">مربع مدور</string>
-    <string name="space_between_squares">المساحة بين المربعات</string>
     <string name="system">نظام</string>
     <string name="sign_in_failed">فشل تسجيل الدخول. يرجى التحقق من اتصال الشبكة والمحاولة مرة أخرى.</string>
     <string name="you_won">لقد فزت!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">استخدام الإستفهام</string>
     <string name="no_guessing_mode">وضع \"لا تخمين\"</string>
     <string name="control">التحكم</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">ضغطة واحدة</string>
     <string name="double_click">نقر مزدوج</string>
     <string name="long_press">ضغط مطوّل</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">إستمرار</string>
     <string name="empty">فارغ</string>
     <string name="cant_do_it_now">من المستحيل القيام بذلك الآن</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">لقد استلمت: +%1$d</string>
-    <string name="help_win_a_game">للمزيد من المساعدة، يجب أن تفوز بلعبة.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">خطأ غير معروف.</string>
     <string name="leaderboards">المتصدرين</string>
     <string name="cancel">الغاء</string>
     <string name="resume">استأنف</string>
     <string name="yes">نعم</string>
     <string name="unlock">فتح</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">الإنجازات</string>
     <string name="no">لا</string>
     <string name="general">عام</string>
@@ -88,6 +92,7 @@
     <string name="licenses">التراخيص</string>
     <string name="google_play_games">ألعاب Google Play</string>
     <string name="loading">جاري التحميل…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">الاتصال</string>
     <string name="connecting">جاري الاتصال…</string>
     <string name="disconnect">قطع الاتصال</string>
@@ -101,7 +106,7 @@
     <string name="themes">المظهر</string>
     <string name="delete_all_message">احذف جميع الأحداث نهائيًا.</string>
     <string name="remove_ad">إزالة الإعلانات</string>
-    <string name="help">مساعدة</string>
+    <string name="help">Hint</string>
     <string name="back">رجوع</string>
     <string name="donation">التبرع</string>
     <string name="open_on_game">فتح على شاشة اللعبة</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">السماح بالنقر على الأرقام</string>
     <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">انقر للتخصيص</string>
-    <string name="toggle_button_top">إظهار \"زر تبديل\" في الشريط العلوي</string>
     <string name="no_guess_fail_warning">قد لا يكون حقل الألغام الحالي خاليًا من التخمين!</string>
     <string name="fixed_size">الجم الثابت</string>
     <string name="progressive">التقدمي</string>
     <string name="highlight_unsolved_numbers">تسليط الضوء على الأرقام غير المحلولة</string>
-    <string name="left_handed">أعسر</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">If you like this game, consider making a donation.</string>
     <string name="donate_help">It will help keep this project active!</string>
 </resources>

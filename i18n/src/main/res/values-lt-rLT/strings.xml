@@ -18,6 +18,8 @@
     <string name="legend">Legenda</string>
     <string name="open">Atidaryti</string>
     <string name="settings">Nustatymai</string>
+    <string name="control_settings">Valdymo nustatymai</string>
+    <string name="shapes">Figūros</string>
     <string name="animations">Animacijos</string>
     <string name="vibration">Vibracija</string>
     <string name="about">Apie</string>
@@ -27,6 +29,7 @@
     <string name="width">Plotis</string>
     <string name="height">Aukštis</string>
     <string name="mines">Minos</string>
+    <string name="seed">Raktas</string>
     <string name="retry_sure">Jei pradėsite naują žaidimą, jūsų dabartinis progresas bus prarastas.</string>
     <string name="show_licenses">Rodyti licencijas</string>
     <string name="new_game_request">Tikrai norite pradėti naują žaidimą?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Bendrieji</string>
     <string name="settings_gameplay">Žaidimo procesas</string>
     <string name="settings_accessibility">Prieinamumas</string>
-    <string name="size">Dydis</string>
-    <string name="rounded_square">Suapvalintas kvadratas</string>
-    <string name="space_between_squares">Atstumas tarp kvadratų</string>
     <string name="system">Sistema</string>
     <string name="sign_in_failed">Nepavyko prisijungti. Patikrinkite interneto ryšį ir bandykite dar kartą.</string>
     <string name="you_won">Laimėjote!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Naudoti klaustuką</string>
     <string name="no_guessing_mode">Režimas „Be spėliojimų“</string>
     <string name="control">Valdymas</string>
+    <string name="control_types">Valdymo rūšys</string>
     <string name="single_click">Vienkartis bakstelėjimas</string>
     <string name="double_click">Dvikartis bakstelėjimas</string>
     <string name="long_press">Ilgas bakstelėjimas</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Tęsti</string>
     <string name="empty">Tuščia</string>
     <string name="cant_do_it_now">Šiuo metu neįmanoma</string>
+    <string name="mine_revealed">Atrasta mina</string>
+    <string name="fail_to_load_ad">Nepavyko įkelti reklamos</string>
     <string name="you_have_received">Gavote: +%1$d</string>
-    <string name="help_win_a_game">Norėdami gauti papildomos pagalbos, turite laimėti žaidimą.</string>
+    <string name="help_win_a_game">Kad gautumėte daugiau užuominų, turite laimėti žaidimą.</string>
     <string name="unknown_error">Nežinoma klaida.</string>
     <string name="leaderboards">Lyderių lentelės</string>
     <string name="cancel">Atšaukti</string>
     <string name="resume">Tęsti</string>
     <string name="yes">Taip</string>
     <string name="unlock">Atrakinti</string>
+    <string name="unlock_all">Atrakinti viską</string>
     <string name="achievements">Pasiekimai</string>
     <string name="no">Ne</string>
     <string name="general">Bendroji</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Licencijos</string>
     <string name="google_play_games">Play žaidimai</string>
     <string name="loading">Įkeliama…</string>
+    <string name="creating_valid_game">Kuriamas žaidimas…</string>
     <string name="connect">Prisijungti</string>
     <string name="connecting">Prisijungiama…</string>
     <string name="disconnect">Atsijungti</string>
@@ -101,7 +106,7 @@
     <string name="themes">Temos</string>
     <string name="delete_all_message">Naikinti įvykius visam laikui.</string>
     <string name="remove_ad">Atsikratyti reklamų</string>
-    <string name="help">Pagalba</string>
+    <string name="help">Užuomina</string>
     <string name="back">Atgal</string>
     <string name="donation">Parama</string>
     <string name="open_on_game">Atidaryti žaidimo ekrane</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Leisti skaičių bakstelėjimą</string>
     <string name="flag_when_tap_numbers">Pažymėti vėliavėle bakstelėjus ant skaičiaus</string>
     <string name="tap_to_customize">Bakstelėkite, kad tinkintumėte</string>
-    <string name="toggle_button_top">Rodyti perjungimo mygtuką viršutinėje juostoje</string>
     <string name="no_guess_fail_warning">Dabartinis minų laukas gali būti neatspėjamas!</string>
     <string name="fixed_size">Fiksuotas dydis</string>
     <string name="progressive">Progresyvus</string>
     <string name="highlight_unsolved_numbers">Paryškinti neišspręstus skaičius</string>
-    <string name="left_handed">Kairiarankio režimas</string>
+    <string name="show_clock">Rodyti laikrodį</string>
     <string name="donate_request">Jei jums patinka šis žaidimas, apsvarstykite galimybę paremti kūrėją.</string>
     <string name="donate_help">Tai padės šiam projektui išlikti aktyviam!</string>
 </resources>

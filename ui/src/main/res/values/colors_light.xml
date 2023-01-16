@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colors_light_primary">#0062A2</color>
+    <color name="colors_light_onPrimary">#FFFFFF</color>
+    <color name="colors_light_primaryContainer">#D1E4FF</color>
+    <color name="colors_light_onPrimaryContainer">#001D35</color>
+    <color name="colors_light_secondary">#535F70</color>
+    <color name="colors_light_onSecondary">#FFFFFF</color>
+    <color name="colors_light_secondaryContainer">#D6E4F7</color>
+    <color name="colors_light_onSecondaryContainer">#0F1C2B</color>
+    <color name="colors_light_tertiary">#96490A</color>
+    <color name="colors_light_onTertiary">#FFFFFF</color>
+    <color name="colors_light_tertiaryContainer">#FFDBC8</color>
+    <color name="colors_light_onTertiaryContainer">#321300</color>
+    <color name="colors_light_error">#BA1A1A</color>
+    <color name="colors_light_errorContainer">#FFDAD6</color>
+    <color name="colors_light_onError">#FFFFFF</color>
+    <color name="colors_light_onErrorContainer">#410002</color>
+    <color name="colors_light_background">#FDFCFF</color>
+    <color name="colors_light_onBackground">#1A1C1E</color>
+    <color name="colors_light_surface">#FDFCFF</color>
+    <color name="colors_light_onSurface">#1A1C1E</color>
+    <color name="colors_light_surfaceVariant">#DFE2EB</color>
+    <color name="colors_light_onSurfaceVariant">#42474E</color>
+    <color name="colors_light_outline">#73777F</color>
+    <color name="colors_light_inverseOnSurface">#F1F0F4</color>
+    <color name="colors_light_inverseSurface">#2F3033</color>
+    <color name="colors_light_inversePrimary">#9DCAFF</color>
+    <color name="colors_light_shadow">#000000</color>
+    <color name="colors_light_surfaceTint">#0062A2</color>
+    <color name="colors_light_outlineVariant">#C3C7CF</color>
+    <color name="colors_light_scrim">#000000</color>
+</resources>

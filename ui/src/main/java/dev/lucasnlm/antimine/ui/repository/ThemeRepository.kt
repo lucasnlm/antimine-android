@@ -7,14 +7,18 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.R
+import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette
 
 interface IThemeRepository {
     fun getCustomTheme(): AppTheme?
+    fun getSkin(): AppSkin
     fun getTheme(): AppTheme
     fun getAllThemes(): List<AppTheme>
+    fun getAllSkins(): List<AppSkin>
     fun setTheme(themeId: Long)
+    fun setSkin(skinId: Long)
     fun reset(): AppTheme
 }
 
@@ -22,24 +26,40 @@ class ThemeRepository(
     private val context: Context,
     private val preferenceRepository: IPreferencesRepository,
 ) : IThemeRepository {
+    private val defaultTheme = Themes.lightTheme()
+
     override fun getCustomTheme(): AppTheme? {
         val targetThemeId = preferenceRepository.themeId()
         return getAllThemes().firstOrNull { it.id == targetThemeId }
     }
 
+    override fun getSkin(): AppSkin {
+        val targetSkinId = preferenceRepository.skinId()
+        val allSkins = getAllSkins()
+        return allSkins.firstOrNull { it.id == targetSkinId } ?: allSkins.first()
+    }
+
     override fun getTheme(): AppTheme {
-        return getCustomTheme() ?: buildSystemTheme()
+        return getCustomTheme() ?: defaultTheme
     }
 
     override fun getAllThemes(): List<AppTheme> =
         listOf(buildSystemTheme()) + Themes.getAllCustom()
 
+    override fun getAllSkins(): List<AppSkin> {
+        return Skins.getAllSkins()
+    }
+
     override fun setTheme(themeId: Long) {
         preferenceRepository.useTheme(themeId)
     }
 
+    override fun setSkin(skinId: Long) {
+        preferenceRepository.useSkin(skinId)
+    }
+
     override fun reset(): AppTheme {
-        preferenceRepository.useTheme(0L)
+        preferenceRepository.useTheme(defaultTheme.id)
         return buildSystemTheme()
     }
 
@@ -53,6 +73,8 @@ class ThemeRepository(
                 fromDefaultPalette(context)
             },
             isPaid = true,
+            isDarkTheme = isDarkTheme(),
+            name = R.string.system,
         )
     }
 

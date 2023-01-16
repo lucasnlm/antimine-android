@@ -32,7 +32,6 @@
     <string name="new_game_request">Chcesz zaczōńć nowy szpil?</string>
     <string name="mines_remaining">%d</string>
     <string name="game_time">Czas szpilu</string>
-    <string name="mine">Mina</string>
     <string name="settings_general">Ôgōlne</string>
     <string name="settings_gameplay">Szpilanie</string>
     <string name="settings_accessibility">Ulekszynia dostympu</string>
@@ -40,7 +39,6 @@
     <string name="rounded_square">Kolitość polōw</string>
     <string name="space_between_squares">Ôdstymp pōmiyndzy polami</string>
     <string name="system">Systymowy</string>
-    <string name="rating">Ôpinijo</string>
     <string name="sign_in_failed">Feler przi logowaniu. Dej pozōr na swoje połōnczynie z Internetym i sprōbuj zaś.</string>
     <string name="you_won">Zwyciynstwo!</string>
     <string name="victories">Zwyciynstwa</string>
@@ -123,5 +121,4 @@
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
-    <string name="more_games">More games</string>
 </resources>

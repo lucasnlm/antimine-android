@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colors_dark_banana_primary">#E8C41D</color>
+    <color name="colors_dark_banana_onPrimary">#3A3000</color>
+    <color name="colors_dark_banana_primaryContainer">#544600</color>
+    <color name="colors_dark_banana_onPrimaryContainer">#FFE16E</color>
+    <color name="colors_dark_banana_secondary">#D2C6A1</color>
+    <color name="colors_dark_banana_onSecondary">#373016</color>
+    <color name="colors_dark_banana_secondaryContainer">#4E462A</color>
+    <color name="colors_dark_banana_onSecondaryContainer">#EFE2BC</color>
+    <color name="colors_dark_banana_tertiary">#E8C41D</color>
+    <color name="colors_dark_banana_onTertiary">#3A3000</color>
+    <color name="colors_dark_banana_tertiaryContainer">#544600</color>
+    <color name="colors_dark_banana_onTertiaryContainer">#FFE16E</color>
+    <color name="colors_dark_banana_error">#FFB4AB</color>
+    <color name="colors_dark_banana_errorContainer">#93000A</color>
+    <color name="colors_dark_banana_onError">#690005</color>
+    <color name="colors_dark_banana_onErrorContainer">#FFDAD6</color>
+    <color name="colors_dark_banana_background">#1D1B16</color>
+    <color name="colors_dark_banana_onBackground">#E8E2D9</color>
+    <color name="colors_dark_banana_surface">#1D1B16</color>
+    <color name="colors_dark_banana_onSurface">#E8E2D9</color>
+    <color name="colors_dark_banana_surfaceVariant">#4B4739</color>
+    <color name="colors_dark_banana_onSurfaceVariant">#CDC6B4</color>
+    <color name="colors_dark_banana_outline">#979080</color>
+    <color name="colors_dark_banana_inverseOnSurface">#1D1B16</color>
+    <color name="colors_dark_banana_inverseSurface">#E8E2D9</color>
+    <color name="colors_dark_banana_inversePrimary">#705D00</color>
+    <color name="colors_dark_banana_shadow">#000000</color>
+    <color name="colors_dark_banana_surfaceTint">#E8C41D</color>
+    <color name="colors_dark_banana_outlineVariant">#4B4739</color>
+    <color name="colors_dark_banana_scrim">#000000</color>
+</resources>

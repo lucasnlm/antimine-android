@@ -79,7 +79,6 @@ class MinefieldFactoryTest {
     fun testFromDifficultyPresetStandard() {
         val dimensionRepository: IDimensionRepository = mock {
             on { areaSize() } doReturn 10.0f
-            on { defaultAreaSize() } doReturn 10.0f
             on { actionBarSizeWithStatus() } doReturn 10
             on { displaySize() } doReturn Size(500, 1000)
         }

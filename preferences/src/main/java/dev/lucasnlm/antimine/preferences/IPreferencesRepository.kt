@@ -1,15 +1,19 @@
 package dev.lucasnlm.antimine.preferences
 
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
 interface IPreferencesRepository {
     fun hasCustomizations(): Boolean
     fun reset()
+
+    fun hasControlCustomizations(): Boolean
     fun resetControls()
 
     fun customGameMode(): Minefield
     fun updateCustomGameMode(minefield: Minefield)
+    fun forgetCustomSeed()
 
     fun controlStyle(): ControlStyle
     fun useControlStyle(controlStyle: ControlStyle)
@@ -29,8 +33,11 @@ interface IPreferencesRepository {
     fun getDoubleClickTimeout(): Long
     fun setDoubleClickTimeout(value: Long)
 
-    fun themeId(): Long
+    fun themeId(): Long?
     fun useTheme(themeId: Long)
+
+    fun skinId(): Long
+    fun useSkin(skinId: Long)
 
     fun updateStatsBase(statsBase: Int)
     fun getStatsBase(): Int
@@ -62,17 +69,13 @@ interface IPreferencesRepository {
     fun useSimonTathamAlgorithm(): Boolean
     fun setSimonTathamAlgorithm(enabled: Boolean)
 
-    fun squareRadius(): Int
-    fun defaultSquareRadius(): Int
-    fun setSquareRadius(value: Int?)
-
     fun getTips(): Int
     fun setTips(tips: Int)
     fun getExtraTips(): Int
     fun setExtraTips(tips: Int)
 
-    fun openUsingSwitchControl(): Boolean
-    fun setSwitchControl(useOpen: Boolean)
+    fun getSwitchControlAction(): Action
+    fun setSwitchControl(action: Action)
 
     fun useFlagAssistant(): Boolean
     fun setFlagAssistant(value: Boolean)
@@ -87,10 +90,6 @@ interface IPreferencesRepository {
     fun setHapticFeedbackLevel(value: Int)
     fun resetHapticFeedbackLevel()
 
-    fun squareSize(): Int
-    fun defaultSquareSize(): Int
-    fun setSquareSize(value: Int?)
-
     fun useAnimations(): Boolean
     fun setAnimations(enabled: Boolean)
 
@@ -102,9 +101,6 @@ interface IPreferencesRepository {
 
     fun touchSensibility(): Int
     fun setTouchSensibility(sensibility: Int)
-
-    fun setPreferredLocale(locale: String)
-    fun getPreferredLocale(): String?
 
     fun showWindowsWhenFinishGame(): Boolean
     fun mustShowWindowsWhenFinishGame(enabled: Boolean)
@@ -119,10 +115,6 @@ interface IPreferencesRepository {
     fun setUnlockedThemes(themes: String)
     fun getUnlockedThemes(): List<Int>
 
-    fun squareDivider(): Int
-    fun defaultSquareDivider(): Int
-    fun setSquareDivider(value: Int?)
-
     fun showTutorialDialog(): Boolean
     fun setTutorialDialog(show: Boolean)
 
@@ -132,9 +124,9 @@ interface IPreferencesRepository {
     fun letNumbersAutoFlag(): Boolean
     fun setNumbersAutoFlag(allow: Boolean)
 
-    fun setToggleButtonOnTopBar(enabled: Boolean)
-    fun showToggleButtonOnTopBar(): Boolean
+    fun showTimer(): Boolean
+    fun setTimerVisible(visible: Boolean)
 
-    fun setLeftHandedMode(enabled: Boolean)
-    fun leftHandedMode(): Boolean
+    fun showContinueGame(): Boolean
+    fun setContinueGameLabel(value: Boolean)
 }

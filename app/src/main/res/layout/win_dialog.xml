@@ -68,8 +68,8 @@
             android:text="@string/you_have_received"
             android:textAlignment="center"
             android:visibility="gone"
-            app:drawableEndCompat="@drawable/tip"
-            app:drawableTint="@color/accent"
+            app:drawableEndCompat="@drawable/hint"
+            app:drawableTint="?colorSecondaryVariant"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/subtitle"
@@ -119,7 +119,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/new_game"
-                android:textAllCaps="true">
+                android:textAllCaps="true"
+                android:textColor="?colorSurfaceVariant"
+                app:iconTint="?colorSurfaceVariant"
+                app:iconTintMode="multiply"
+                app:backgroundTint="?colorAccent">
 
                 <requestFocus />
             </com.google.android.material.button.MaterialButton>

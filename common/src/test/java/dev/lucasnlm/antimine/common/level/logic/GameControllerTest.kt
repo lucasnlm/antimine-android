@@ -2,14 +2,12 @@ package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.core.models.Area
-import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -29,10 +27,9 @@ class GameControllerTest {
             minefield = minefield,
             seed = 200L,
             useSimonTatham = false,
-            difficulty = Difficulty.Standard,
         )
         if (clickOnCreate) {
-            runTest(UnconfinedTestDispatcher()) {
+            runTest {
                 fakeSingleClick(gameController, 10)
             }
         }
@@ -40,14 +37,14 @@ class GameControllerTest {
     }
 
     @Test
-    fun testGetMinesCount() = runTest(UnconfinedTestDispatcher()) {
+    fun testGetMinesCount() = runTest {
         withGameController {
             assertEquals(20, it.getMinesCount())
         }
     }
 
     @Test
-    fun testGetScore() = runTest(UnconfinedTestDispatcher()) {
+    fun testGetScore() = runTest {
         withGameController { controller ->
             assertEquals(Score(20, 20, 100), controller.getScore())
 
@@ -67,7 +64,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testFlagAllMines() = runTest(UnconfinedTestDispatcher()) {
+    fun testFlagAllMines() = runTest {
         withGameController { controller ->
             val minesCount = controller.mines().count()
 
@@ -79,7 +76,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testFindExplodedMine() = runTest(UnconfinedTestDispatcher()) {
+    fun testFindExplodedMine() = runTest {
         withGameController { controller ->
             assertNull(controller.findExplodedMine())
             val target = controller.mines().first()
@@ -90,30 +87,30 @@ class GameControllerTest {
     }
 
     @Test
-    fun testTakeExplosionRadius() = runTest(UnconfinedTestDispatcher()) {
+    fun testTakeExplosionRadius() = runTest {
         withGameController { controller ->
             val lastMine = controller.mines().last()
             assertEquals(
-                listOf(95, 85, 74, 73, 65, 88, 55, 91, 45, 52, 90, 47, 59, 42, 36, 32, 39, 28, 4, 3),
+                listOf(98, 97, 67, 85, 66, 57, 59, 63, 92, 26, 42, 18, 24, 15, 60, 23, 14, 6, 22, 30),
                 controller.takeExplosionRadius(lastMine).map { it.id }.toList(),
             )
 
             val firstMine = controller.mines().first()
             assertEquals(
-                listOf(3, 4, 32, 42, 36, 45, 52, 28, 55, 47, 65, 39, 73, 74, 59, 85, 91, 95, 88, 90),
+                listOf(6, 15, 26, 14, 18, 24, 23, 22, 57, 42, 59, 66, 67, 30, 63, 85, 60, 97, 98, 92),
                 controller.takeExplosionRadius(firstMine).map { it.id }.toList(),
             )
 
             val midMine = controller.mines().take(controller.getMinesCount() / 2).last()
             assertEquals(
-                listOf(52, 42, 32, 73, 74, 55, 45, 65, 91, 85, 36, 90, 95, 3, 47, 4, 28, 88, 59, 39),
+                listOf(42, 22, 23, 30, 63, 24, 60, 14, 15, 26, 66, 85, 92, 57, 67, 6, 18, 59, 97, 98),
                 controller.takeExplosionRadius(midMine).map { it.id }.toList(),
             )
         }
     }
 
     @Test
-    fun testShowAllMines() = runTest(UnconfinedTestDispatcher()) {
+    fun testShowAllMines() = runTest {
         withGameController { controller ->
             controller.showAllMistakes()
             controller.mines().filter { it.mistake }.forEach {
@@ -126,7 +123,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testShowWrongFlags() = runTest(UnconfinedTestDispatcher()) {
+    fun testShowWrongFlags() = runTest {
         withGameController { controller ->
             controller.field().first { !it.hasMine && it.isCovered }.run {
                 fakeLongPress(controller, id)
@@ -147,7 +144,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testRevealAllEmptyAreas() = runTest(UnconfinedTestDispatcher()) {
+    fun testRevealAllEmptyAreas() = runTest {
         withGameController { controller ->
             val covered = controller.field { it.isCovered }
             assertTrue(covered.isNotEmpty())
@@ -157,7 +154,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testFlaggedAllMines() = runTest(UnconfinedTestDispatcher()) {
+    fun testFlaggedAllMines() = runTest {
         withGameController { controller ->
             assertFalse(controller.hasFlaggedAllMines())
 
@@ -178,7 +175,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testRemainingMines() = runTest(UnconfinedTestDispatcher()) {
+    fun testRemainingMines() = runTest {
         withGameController { controller ->
             assertEquals(20, controller.remainingMines())
 
@@ -197,7 +194,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testHasIsolatedAllMines() = runTest(UnconfinedTestDispatcher()) {
+    fun testHasIsolatedAllMines() = runTest {
         withGameController { controller ->
             assertFalse(controller.hasIsolatedAllMines())
             assertFalse(controller.isGameOver())
@@ -222,7 +219,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testHasAnyMineExploded() = runTest(UnconfinedTestDispatcher()) {
+    fun testHasAnyMineExploded() = runTest {
         withGameController { controller ->
             assertFalse(controller.hasAnyMineExploded())
 
@@ -233,7 +230,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testGameOverWithMineExploded() = runTest(UnconfinedTestDispatcher()) {
+    fun testGameOverWithMineExploded() = runTest {
         withGameController { controller ->
             assertFalse(controller.isGameOver())
 
@@ -244,7 +241,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testVictory() = runTest(UnconfinedTestDispatcher()) {
+    fun testVictory() = runTest {
         withGameController { controller ->
             assertFalse(controller.isVictory())
 
@@ -263,24 +260,25 @@ class GameControllerTest {
     }
 
     @Test
-    fun testCantShowVictoryIfHasNoMines() = runTest(UnconfinedTestDispatcher()) {
+    fun testCantShowVictoryIfHasNoMines() = runTest {
         withGameController { controller ->
             assertFalse(controller.isVictory())
         }
     }
 
     @Test
-    fun testControlFirstActionWithStandard() = runTest(UnconfinedTestDispatcher()) {
+    fun testControlFirstActionWithStandard() = runTest {
         withGameController { controller ->
+            val targetId = controller.field().first { it.isCovered }.id
             controller.updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
-            assertTrue(controller.at(3).isCovered)
-            fakeSingleClick(controller, 3)
-            assertFalse(controller.at(3).isCovered)
+            assertTrue(controller.at(targetId).isCovered)
+            fakeSingleClick(controller, targetId)
+            assertFalse(controller.at(targetId).isCovered)
         }
     }
 
     @Test
-    fun testControlSecondActionWithStandard() = runTest(UnconfinedTestDispatcher()) {
+    fun testControlSecondActionWithStandard() = runTest {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
@@ -308,90 +306,88 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlStandardOpenMultiple() = runTest(UnconfinedTestDispatcher()) {
+    fun testControlStandardOpenMultiple() = runTest {
         withGameController { controller ->
             controller.run {
+                val testIndex = 0
                 updateGameControl(GameControl.fromControlType(ControlStyle.Standard))
-                fakeSingleClick(controller, 14)
-                assertFalse(at(14).isCovered)
-
-                field().filterNeighborsOf(at(14)).forEach {
-                    assertTrue(it.isCovered)
-                }
+                fakeSingleClick(controller, testIndex)
+                assertFalse(at(testIndex).isCovered)
 
                 mines().forEach { fakeLongPress(controller, it.id) }
 
                 mines().forEach { assertTrue(it.mark.isFlag()) }
 
-                fakeLongPress(controller, 14)
+                fakeLongPress(controller, testIndex)
 
-                field().filterNeighborsOf(at(14)).forEach {
-                    if (it.hasMine) {
-                        assertTrue(it.isCovered)
+                field().filterNeighborsOf(at(testIndex)).forEach {
+                    val message = if (it.hasMine) {
+                        "${it.id} has mine, so it must be covered after open multiple"
                     } else {
-                        assertFalse(it.isCovered)
+                        "${it.id} doesn\'t have mine, so it must be uncovered after open multiple"
                     }
+                    assertTrue(message, it.hasMine == it.isCovered)
                 }
             }
         }
     }
 
     @Test
-    fun testControlFirstActionWithFastFlag() = runTest(UnconfinedTestDispatcher()) {
+    fun testControlFirstActionWithFastFlag() = runTest {
         withGameController { controller ->
             controller.run {
+                val targetId = controller.field().first { it.isCovered }.id
                 updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
-                fakeSingleClick(controller, 3)
-                assertTrue(at(3).isCovered)
-                assertTrue(at(3).mark.isFlag())
-                fakeLongPress(controller, 3)
-                assertFalse(at(3).mark.isFlag())
-                assertTrue(at(3).isCovered)
-                fakeLongPress(controller, 3)
-                assertFalse(at(3).isCovered)
+                fakeSingleClick(controller, targetId)
+                assertTrue(at(targetId).isCovered)
+                assertTrue(at(targetId).mark.isFlag())
+                fakeLongPress(controller, targetId)
+                assertFalse(at(targetId).mark.isFlag())
+                assertTrue(at(targetId).isCovered)
+                fakeLongPress(controller, targetId)
+                assertFalse(at(targetId).isCovered)
             }
         }
     }
 
     @Test
-    fun testControlFirstActionWithInvertedDoubleClick() = runTest(UnconfinedTestDispatcher()) {
+    fun testControlFirstActionWithInvertedDoubleClick() = runTest {
         withGameController { controller ->
             controller.run {
+                val targetId = controller.field().first { it.isCovered }.id
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClickInverted))
-                assertTrue(at(3).isCovered)
-                fakeDoubleClick(controller, 3)
-                assertTrue(at(3).isCovered)
-                assertTrue(at(3).mark.isFlag())
-                fakeDoubleClick(controller, 3)
-                assertFalse(at(3).mark.isFlag())
-                assertTrue(at(3).isCovered)
+                assertTrue(at(targetId).isCovered)
+                fakeDoubleClick(controller, targetId)
+                assertTrue(at(targetId).isCovered)
+                assertTrue(at(targetId).mark.isFlag())
+                fakeDoubleClick(controller, targetId)
+                assertFalse(at(targetId).mark.isFlag())
+                assertTrue(at(targetId).isCovered)
             }
         }
     }
 
     @Test
-    fun testControlSecondActionWithInvertedDoubleClick() = runTest(UnconfinedTestDispatcher()) {
+    fun testControlSecondActionWithInvertedDoubleClick() = runTest {
         withGameController { controller ->
             controller.run {
+                val targetId = controller.field().first { it.isCovered }.id
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClickInverted))
-                assertTrue(at(3).isCovered)
-                fakeSingleClick(controller, 3)
-                assertFalse(at(3).isCovered)
+                assertTrue(at(targetId).isCovered)
+                fakeSingleClick(controller, targetId)
+                assertFalse(at(targetId).isCovered)
             }
         }
     }
 
     @Test
-    fun testControlFastFlagOpenMultiple() = runTest(UnconfinedTestDispatcher()) {
+    fun testControlFastFlagOpenMultiple() = runTest {
         withGameController { controller ->
             controller.run {
+                val testIndex = 0
                 updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))
-                fakeLongPress(controller, 14)
-                assertFalse(at(14).isCovered)
-
-                field().filterNeighborsOf(at(14)).forEach {
-                    assertTrue(it.isCovered)
-                }
+                fakeLongPress(controller, testIndex)
+                assertFalse(at(testIndex).isCovered)
 
                 mines().forEach {
                     fakeSingleClick(controller, it.id)
@@ -401,43 +397,45 @@ class GameControllerTest {
                     assertTrue(it.mark.isFlag())
                 }
 
-                fakeSingleClick(controller, 14)
-                field().filterNeighborsOf(at(14)).forEach {
-                    if (it.hasMine) {
-                        assertTrue(it.isCovered)
+                fakeSingleClick(controller, testIndex)
+                field().filterNeighborsOf(at(testIndex)).forEach {
+                    val message = if (it.hasMine) {
+                        "${it.id} has mine, so it must be covered after open multiple"
                     } else {
-                        assertFalse(it.isCovered)
+                        "${it.id} doesn\'t have mine, so it must be uncovered after open multiple"
                     }
+                    assertTrue(message, it.hasMine == it.isCovered)
                 }
             }
         }
     }
 
     @Test
-    fun testControlFirstActionWithDoubleClick() = runTest(UnconfinedTestDispatcher()) {
+    fun testControlFirstActionWithDoubleClick() = runTest {
         withGameController { controller ->
             controller.run {
+                val targetId = controller.field().first { it.isCovered }.id
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
-                fakeSingleClick(controller, 3)
-                assertTrue(at(3).isCovered)
-                assertTrue(at(3).mark.isFlag())
-                fakeDoubleClick(controller, 3)
-                assertFalse(at(3).mark.isFlag())
-                assertTrue(at(3).isCovered)
-                fakeDoubleClick(controller, 3)
-                assertFalse(at(3).isCovered)
+                fakeSingleClick(controller, targetId)
+                assertTrue(at(targetId).isCovered)
+                assertTrue(at(targetId).mark.isFlag())
+                fakeDoubleClick(controller, targetId)
+                assertFalse(at(targetId).mark.isFlag())
+                assertTrue(at(targetId).isCovered)
+                fakeDoubleClick(controller, targetId)
+                assertFalse(at(targetId).isCovered)
             }
         }
     }
 
     @Test
-    fun testControlFirstActionWithDoubleClickAndWithoutQuestionMark() = runTest(UnconfinedTestDispatcher()) {
+    fun testControlFirstActionWithDoubleClickAndWithoutQuestionMark() = runTest {
         withGameController { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
 
                 useQuestionMark(true)
-                var targetId = 4
+                var targetId = controller.field().first { it.isCovered }.id
                 fakeSingleClick(controller, targetId)
                 assertTrue(at(targetId).isCovered)
                 assertTrue(at(targetId).mark.isFlag())
@@ -451,7 +449,7 @@ class GameControllerTest {
                 assertFalse(at(targetId).isCovered)
 
                 useQuestionMark(false)
-                targetId = 3
+                targetId = controller.field().first { it.isCovered }.id
                 fakeSingleClick(controller, targetId)
                 assertTrue(at(targetId).isCovered)
                 assertTrue(at(targetId).mark.isFlag())
@@ -465,22 +463,23 @@ class GameControllerTest {
     }
 
     @Test
-    fun testControlDoubleClickOpenMultiple() = runTest(UnconfinedTestDispatcher()) {
+    fun testControlDoubleClickOpenMultiple() = runTest {
         withGameController { controller ->
             controller.run {
+                val testIndex = 0
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
-                fakeDoubleClick(controller, 14)
-                assertFalse(at(14).isCovered)
-                field().filterNeighborsOf(at(14)).forEach {
-                    assertTrue(it.isCovered)
+                fakeDoubleClick(controller, testIndex)
+                assertFalse(at(testIndex).isCovered)
+                field().filterNeighborsOf(at(testIndex)).forEach {
+                    assertFalse(it.isCovered)
                 }
 
                 mines().forEach { fakeSingleClick(controller, it.id) }
                 mines().forEach { assertTrue(it.mark.isFlag()) }
 
-                fakeSingleClick(controller, 14)
+                fakeSingleClick(controller, testIndex)
 
-                field().filterNeighborsOf(at(14)).forEach {
+                field().filterNeighborsOf(at(testIndex)).forEach {
                     val message = if (it.hasMine) {
                         "${it.id} has mine, so it must be covered after open multiple"
                     } else {
@@ -493,7 +492,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testIfDoubleClickPlantMinesOnFirstClick() = runTest(UnconfinedTestDispatcher()) {
+    fun testIfDoubleClickPlantMinesOnFirstClick() = runTest {
         withGameController(clickOnCreate = false) { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.DoubleClick))
@@ -507,7 +506,7 @@ class GameControllerTest {
     }
 
     @Test
-    fun testIfFastFlagPlantMinesOnFirstClick() = runTest(UnconfinedTestDispatcher()) {
+    fun testIfFastFlagPlantMinesOnFirstClick() = runTest {
         withGameController(clickOnCreate = false) { controller ->
             controller.run {
                 updateGameControl(GameControl.fromControlType(ControlStyle.FastFlag))

@@ -7,13 +7,16 @@
     android:fitsSystemWindows="true"
     tools:context=".preferences.PreferencesActivity">
 
-    <dev.lucasnlm.antimine.ui.view.SectionView
-        android:id="@+id/section"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/back_arrow"
+        app:title="@string/settings" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -22,297 +25,155 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/section">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/main_activity_padding"
-            android:paddingTop="8dp">
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/general_label"
-                android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/generalSettings"
+                style="?materialCardViewFilledStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:paddingVertical="8dp"
-                android:text="@string/general"
-                android:textColor="?attr/colorAccent"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/hapticFeedbackLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="16dp"
-                android:text="@string/vibration"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/general_label" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/hapticFeedback"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/hapticFeedbackLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/hapticFeedbackLabel" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/soundEffectsLabel"
-                android:layout_width="0dp"
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/SectionTitle"
+                        android:id="@+id/generalLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:paddingVertical="8dp"
+                        android:text="@string/general"
+                        tools:text="General" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/hapticFeedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/vibration"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/general_label" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/soundEffects"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/sound_effects" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/showWindows"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/show_windows" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/openDirectly"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/open_on_game" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/gameplaySettings"
+                style="?materialCardViewFilledStyle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="16dp"
-                android:text="@string/sound_effects"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hapticFeedbackLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/generalSettings">
 
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/soundEffects"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/soundEffectsLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/soundEffectsLabel" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/showWindowsLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="16dp"
-                android:text="@string/show_windows"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/SectionTitle"
+                        android:id="@+id/gameplayLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="8dp"
+                        android:text="@string/settings_gameplay"
+                        tools:text="Gameplay" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/useQuestionMark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/use_question_mark" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/automaticFlags"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/enable_automatic_flags" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/allowClickNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/click_numbers" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/flagWhenTapOnNumbers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/flag_when_tap_numbers" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/hint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/help" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/highlightUnsolvedNumbers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/highlight_unsolved_numbers" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/showTimer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/show_clock" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/gameplaySettings"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/soundEffectsLabel" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/showWindows"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/showWindowsLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/showWindowsLabel" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/openDirectlyLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="16dp"
-                android:text="@string/open_on_game"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/showWindowsLabel" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/openDirectly"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/openDirectlyLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/openDirectlyLabel" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/gameplay_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:alpha="1.0"
-                android:paddingVertical="8dp"
-                android:text="@string/settings_gameplay"
-                android:textColor="?attr/colorAccent"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/openDirectlyLabel" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/useQuestionMarkLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="16dp"
-                android:text="@string/use_question_mark"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/gameplay_label" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/useQuestionMark"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/useQuestionMarkLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/useQuestionMarkLabel" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/automaticFlagsLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintWidth_percent="0.80"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="16dp"
-                app:layout_constraintHorizontal_weight="1"
-                android:autoSizeTextType="uniform"
-                android:text="@string/enable_automatic_flags"
-                android:textColor="?attr/colorControlNormal"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/useQuestionMarkLabel" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/automaticFlags"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintBottom_toBottomOf="@+id/automaticFlagsLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/automaticFlagsLabel" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/allowClickNumberLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="16dp"
-                android:text="@string/click_numbers"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/automaticFlagsLabel" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/clickOnNumbers"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/allowClickNumberLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/allowClickNumberLabel" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/flagWhenTapOnNumbersLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="16dp"
-                android:text="@string/flag_when_tap_numbers"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/allowClickNumberLabel" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/flagWhenTapOnNumbers"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/flagWhenTapOnNumbersLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/flagWhenTapOnNumbersLabel" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/helpLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="16dp"
-                android:text="@string/help"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/flagWhenTapOnNumbers" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/help"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/helpLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/helpLabel" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/highlightUnsolvedNumbersLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:alpha="1.0"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingVertical="16dp"
-                android:text="@string/highlight_unsolved_numbers"
-                android:textColor="?attr/colorControlNormal"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/helpLabel" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/highlightUnsolvedNumbers"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingVertical="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/highlightUnsolvedNumbersLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/highlightUnsolvedNumbersLabel" />
-
-
+                app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

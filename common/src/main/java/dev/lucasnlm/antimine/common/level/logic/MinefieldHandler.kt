@@ -7,6 +7,7 @@ import kotlin.math.absoluteValue
 class MinefieldHandler(
     private val field: MutableList<Area>,
     private val useQuestionMark: Boolean,
+    private val individualActions: Boolean,
 ) {
     fun showAllMines() {
         field.filter { it.hasMine && it.mark != Mark.Flag }
@@ -33,35 +34,43 @@ class MinefieldHandler(
             .forEach { field[it.id] = it.copy(mistake = false) }
     }
 
-    fun revealRandomMineNearUncoveredArea(lastX: Int? = null, lastY: Int? = null): Boolean {
-        val unrevealedMines = field.filter { it.hasMine && it.mark.isNone() && !it.revealed }
+    fun revealRandomMineNearUncoveredArea(lastX: Int? = null, lastY: Int? = null): Int? {
+        val unrevealedMines = field.filter { it.hasMine && it.mark.isNone() && !it.revealed && it.isCovered }
         val nearestTarget = if (lastX != null && lastY != null) {
             unrevealedMines.filter {
-                (lastX - it.posX).absoluteValue < 3 && (lastY - it.posY).absoluteValue < 3
+                (lastX - it.posX).absoluteValue < 5 && (lastY - it.posY).absoluteValue < 5
             }.shuffled().firstOrNull()
         } else {
             null
         }
 
-        val result = when {
+        return when {
             nearestTarget != null -> {
                 field[nearestTarget.id] = nearestTarget.copy(revealed = true)
-                true
+                nearestTarget.id
             }
             else -> {
                 unrevealedMines.shuffled().firstOrNull()?.run {
                     field[this.id] = this.copy(revealed = true)
-                    true
+                    this.id
                 }
             }
         }
-
-        return result ?: false
     }
 
     fun removeMarkAt(index: Int) {
         field.getOrNull(index)?.let {
             field[it.id] = it.copy(mark = Mark.PurposefulNone)
+        }
+    }
+
+    fun toggleMarkAt(index: Int, mark: Mark) {
+        field.getOrNull(index)?.let {
+            field[it.id] = if (it.mark.isNone()) {
+                it.copy(mark = mark)
+            } else {
+                it.copy(mark = Mark.None)
+            }
         }
     }
 
@@ -71,7 +80,7 @@ class MinefieldHandler(
                 field[index] = it.copy(
                     mark = when (it.mark) {
                         Mark.PurposefulNone, Mark.None -> Mark.Flag
-                        Mark.Flag -> if (useQuestionMark) Mark.Question else Mark.None
+                        Mark.Flag -> if (useQuestionMark && !individualActions) Mark.Question else Mark.None
                         Mark.Question -> Mark.None
                     },
                 )

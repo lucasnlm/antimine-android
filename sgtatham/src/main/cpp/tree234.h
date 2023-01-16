@@ -11,8 +11,6 @@ typedef struct tree234_Tag tree234;
 
 typedef int (*cmpfn234)(void *, void *);
 
-typedef void *(*copyfn234)(void *state, void *element);
-
 /*
  * Create a 2-3-4 tree. If `cmp' is NULL, the tree is unsorted, and
  * lookups by key will fail: you can only look things up by numeric

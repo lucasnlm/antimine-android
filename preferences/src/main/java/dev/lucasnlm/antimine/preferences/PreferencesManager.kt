@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.preferences
 
 import android.content.Context
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 
 class PreferencesManager(
@@ -16,6 +17,22 @@ class PreferencesManager(
 
     override fun getInt(key: String, defaultValue: Int) = preferences.getInt(key, defaultValue)
 
+    override fun getIntOrNull(key: String): Int? {
+        return if (preferences.contains(key)) {
+            preferences.getInt(key, -1)
+        } else {
+            null
+        }
+    }
+
+    override fun getLongOrNull(key: String): Long? {
+        return if (preferences.contains(key)) {
+            preferences.getLong(key, -1)
+        } else {
+            null
+        }
+    }
+
     override fun putInt(key: String, value: Int) = preferences.edit().putInt(key, value).apply()
 
     override fun getString(key: String): String? = preferences.getString(key, null)
@@ -24,7 +41,7 @@ class PreferencesManager(
 
     override fun contains(key: String): Boolean = preferences.contains(key)
 
-    override fun removeKey(key: String) = preferences.edit().remove(key).apply()
+    override fun removeKey(key: String) = preferences.edit { remove(key) }
 
     override fun getLong(key: String, defaultValue: Long): Long = preferences.getLong(key, defaultValue)
 

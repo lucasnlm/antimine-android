@@ -14,6 +14,7 @@ class HistoryViewModel(
 
     override fun initialState() = HistoryState(
         saveList = listOf(),
+        loading = true,
     )
 
     override fun onEvent(event: HistoryEvent) {
@@ -32,8 +33,9 @@ class HistoryViewModel(
     override suspend fun mapEventToState(event: HistoryEvent) = flow {
         when (event) {
             is HistoryEvent.LoadAllSaves -> {
+                emit(state.copy(loading = true))
                 val newSaveList = savesRepository.getAllSaves().sortedByDescending { it.uid }
-                emit(state.copy(saveList = newSaveList))
+                emit(state.copy(saveList = newSaveList, loading = false))
             }
             else -> {
             }
@@ -43,7 +45,7 @@ class HistoryViewModel(
     private fun replayGame(uid: Int) {
         val context = application.applicationContext
         val intent = Intent(context, GameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             putExtra(GameActivity.RETRY_GAME, uid)
         }
         context.startActivity(intent)
@@ -52,7 +54,7 @@ class HistoryViewModel(
     private fun loadGame(uid: Int) {
         val context = application.applicationContext
         val intent = Intent(context, GameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             putExtra(GameActivity.START_GAME, uid)
         }
         context.startActivity(intent)

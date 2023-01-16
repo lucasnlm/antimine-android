@@ -18,6 +18,8 @@
     <string name="legend">ตำนาน</string>
     <string name="open">เปิด</string>
     <string name="settings">การตั้งค่า</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">ภาพเคลื่อนไหว</string>
     <string name="vibration">สั่นเมื่อแตะ</string>
     <string name="about">เกี่ยวกับ</string>
@@ -27,6 +29,7 @@
     <string name="width">ความกว้าง</string>
     <string name="height">วามสูง</string>
     <string name="mines">กับระเบิด</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">หากคุณเริ่มเกมใหม่ความคืบหน้าในปัจจุบันของคุณจะหายไป</string>
     <string name="show_licenses">แสดงสิทธิ์การใช้งาน</string>
     <string name="new_game_request">ยืนยันเริ่มเกมใหม่หรือไม่？</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">ทั่วไป</string>
     <string name="settings_gameplay">การเล่นเกม</string>
     <string name="settings_accessibility">การเข้าถึง</string>
-    <string name="size">ขนาด</string>
-    <string name="rounded_square">สี่เหลี่ยมจัตุรัสขอบมน</string>
-    <string name="space_between_squares">ช่องว่างระหว่างกำลังสอง</string>
     <string name="system">ระบบ</string>
     <string name="sign_in_failed">ไม่สามารถเชื่อมต่อได้ กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณและลองอีกครั้ง</string>
     <string name="you_won">คุณชนะแล้ว!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">เครื่องหมายคำถาม</string>
     <string name="no_guessing_mode">โหมด \'ไม่ต้องเดา\'</string>
     <string name="control">การควบคุม</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">แตะเพียงครั้งเดียว</string>
     <string name="double_click">แตะสองครั้ง</string>
     <string name="long_press">แตะค้างไว้</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">ดำเนินการต่อ</string>
     <string name="empty">ว่างเปล่า</string>
     <string name="cant_do_it_now">ตอนนี้ทำไม่ได้</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">คุณได้รับ: +%1$d</string>
-    <string name="help_win_a_game">หากต้องการความช่วยเหลือเพิ่มเติมคุณต้องชนะเกม</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">ข้อผิดพลาดที่ไม่รู้จัก</string>
     <string name="leaderboards">ลีดเดอร์บอร์ด</string>
     <string name="cancel">ยกเลิก</string>
     <string name="resume">เริ่มต่อ</string>
     <string name="yes">ใช่</string>
     <string name="unlock">ปลดล็อค</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">ความสำเร็จ</string>
     <string name="no">ไม่ใช่</string>
     <string name="general">ทั่วไป</string>
@@ -88,6 +92,7 @@
     <string name="licenses">ใบอนุญาต</string>
     <string name="google_play_games">Google Play เกม</string>
     <string name="loading">กำลังโหลด...</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">เชื่อมต่อ</string>
     <string name="connecting">กำลังเชื่อมต่อ…</string>
     <string name="disconnect">ตัดการเชื่อมต่อ</string>
@@ -101,7 +106,7 @@
     <string name="themes">ธีมส์</string>
     <string name="delete_all_message">ลบกิจกรรมทั้งหมดอย่างถาวร</string>
     <string name="remove_ad">ลบโฆษณา</string>
-    <string name="help">ช่วยเหลือ</string>
+    <string name="help">Hint</string>
     <string name="back">กลับ</string>
     <string name="donation">บริจาค</string>
     <string name="open_on_game">เปิดบนหน้าจอเกม</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Allow tap on numbers</string>
     <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Tap to customize</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
-    <string name="left_handed">ทางซ้ายมือ</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">If you like this game, consider making a donation.</string>
     <string name="donate_help">It will help keep this project active!</string>
 </resources>

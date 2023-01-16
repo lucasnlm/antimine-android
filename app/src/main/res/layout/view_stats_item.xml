@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    style="?attr/materialCardViewFilledStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/statsLabel"
+            style="@style/SectionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            tools:text="General" />
+
+        <TableLayout
+            android:id="@+id/stats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:divider="?dividerHorizontal"
+            android:dividerPadding="16dp"
+            android:fitsSystemWindows="true"
+            android:showDividers="middle"
+            android:stretchColumns="1"
+            tools:context=".stats.StatsActivity">
+
+            <TableRow>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/games"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/totalGames"
+                    android:gravity="end"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="0"
+                    android:textColor="?colorTertiary"
+                    tools:ignore="HardcodedText" />
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/mines"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/minesCount"
+                    android:gravity="end"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="-"
+                    android:textColor="?colorTertiary"
+                    tools:ignore="HardcodedText" />
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/total_time"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/totalTime"
+                    android:gravity="end"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="-"
+                    android:textColor="?colorTertiary"
+                    tools:ignore="HardcodedText" />
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/average_time"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/averageTime"
+                    android:gravity="end"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="-"
+                    android:textColor="?colorTertiary"
+                    tools:ignore="HardcodedText" />
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/shortest_time"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/shortestTime"
+                    android:gravity="end"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="-"
+                    android:textColor="?colorTertiary"
+                    tools:ignore="HardcodedText" />
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/open_areas"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/openAreas"
+                    android:gravity="end"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="-"
+                    android:textColor="?colorTertiary"
+                    tools:ignore="HardcodedText" />
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/performance"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/performance"
+                    android:gravity="end"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="-"
+                    android:textColor="?colorTertiary"
+                    tools:ignore="HardcodedText" />
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/victories"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/victory"
+                    android:gravity="end"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="-"
+                    android:textColor="?colorTertiary"
+                    tools:ignore="HardcodedText" />
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/defeats"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/defeat"
+                    android:gravity="end"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="-"
+                    android:textColor="?colorTertiary"
+                    tools:ignore="HardcodedText" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

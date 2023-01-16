@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.preferences
 
 import android.view.ViewConfiguration
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
@@ -12,33 +13,49 @@ class PreferencesRepository(
         migrateOldPreferences()
     }
 
+    private val listOfControlCustoms = listOf(
+        PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY,
+        PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT,
+        PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT,
+    )
+
+    private val listOfSettingsCustoms = listOf(
+        PreferenceKeys.PREFERENCE_ASSISTANT,
+        PreferenceKeys.PREFERENCE_ANIMATION,
+        PreferenceKeys.PREFERENCE_QUESTION_MARK,
+        PreferenceKeys.PREFERENCE_USE_HINT,
+        PreferenceKeys.PREFERENCE_SOUND_EFFECTS,
+        PreferenceKeys.PREFERENCE_SHOW_WINDOWS,
+        PreferenceKeys.PREFERENCE_OPEN_DIRECTLY,
+        PreferenceKeys.PREFERENCE_ALLOW_TAP_NUMBER,
+        PreferenceKeys.PREFERENCE_SHOW_CLOCK,
+        PreferenceKeys.PREFERENCE_DIM_NUMBERS,
+        PreferenceKeys.PREFERENCE_LET_NUMBERS_AUTO_FLAG,
+    )
+
     private fun longPressTimeout() = ViewConfiguration.getLongPressTimeout()
 
     override fun hasCustomizations(): Boolean {
-        return preferencesManager.run {
-            getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50) != 50 ||
-                getInt(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT, longPressTimeout()) != longPressTimeout() ||
-                getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, 3) != 3
+        val vibrationDisabled = preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_VIBRATION, true)
+        return listOfSettingsCustoms.any { preferencesManager.contains(it) } || !vibrationDisabled
+    }
+
+    override fun hasControlCustomizations(): Boolean {
+        return listOfControlCustoms.fold(false) { acc, current ->
+            acc || preferencesManager.contains(current)
         }
     }
 
     override fun resetControls() {
-        preferencesManager.apply {
-            removeKey(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY)
-            removeKey(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT)
-        }
+        listOfControlCustoms.forEach { preferencesManager.removeKey(it) }
     }
 
     override fun reset() {
-        preferencesManager.apply {
-            removeKey(PreferenceKeys.PREFERENCE_ASSISTANT)
-            removeKey(PreferenceKeys.PREFERENCE_VIBRATION)
-            removeKey(PreferenceKeys.PREFERENCE_ANIMATION)
-            removeKey(PreferenceKeys.PREFERENCE_QUESTION_MARK)
-            removeKey(PreferenceKeys.PREFERENCE_SOUND_EFFECTS)
-            removeKey(PreferenceKeys.PREFERENCE_SQUARE_RADIUS)
-            removeKey(PreferenceKeys.PREFERENCE_AREA_SIZE)
-        }
+        listOfSettingsCustoms.forEach { preferencesManager.removeKey(it) }
+    }
+
+    override fun forgetCustomSeed() {
+        preferencesManager.removeKey(PreferenceKeys.PREFERENCE_CUSTOM_GAME_SEED)
     }
 
     override fun customGameMode(): Minefield = with(preferencesManager) {
@@ -46,6 +63,7 @@ class PreferencesRepository(
             getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_WIDTH, 9),
             getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_HEIGHT, 9),
             getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_MINES, 9),
+            getLongOrNull(PreferenceKeys.PREFERENCE_CUSTOM_GAME_SEED),
         )
     }
 
@@ -54,6 +72,11 @@ class PreferencesRepository(
             putInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_WIDTH, minefield.width)
             putInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_HEIGHT, minefield.height)
             putInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_MINES, minefield.mines)
+            if (minefield.seed != null) {
+                putLong(PreferenceKeys.PREFERENCE_CUSTOM_GAME_SEED, minefield.seed)
+            } else {
+                removeKey(PreferenceKeys.PREFERENCE_CUSTOM_GAME_SEED)
+            }
         }
     }
 
@@ -84,19 +107,6 @@ class PreferencesRepository(
         preferencesManager.removeKey(PreferenceKeys.PREFERENCE_VIBRATION_LEVEL)
     }
 
-    override fun squareSize(): Int =
-        preferencesManager.getInt(PreferenceKeys.PREFERENCE_AREA_SIZE, defaultSquareSize())
-
-    override fun defaultSquareSize(): Int = 50
-
-    override fun setSquareSize(value: Int?) {
-        if (value == null) {
-            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_AREA_SIZE)
-        } else {
-            preferencesManager.putInt(PreferenceKeys.PREFERENCE_AREA_SIZE, value)
-        }
-    }
-
     override fun useAnimations(): Boolean {
         return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_ANIMATION, true)
     }
@@ -124,18 +134,6 @@ class PreferencesRepository(
 
     override fun setTouchSensibility(sensibility: Int) {
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, sensibility)
-    }
-
-    override fun setPreferredLocale(locale: String) {
-        if (locale.isBlank()) {
-            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_LOCALE)
-        } else {
-            preferencesManager.putString(PreferenceKeys.PREFERENCE_LOCALE, locale)
-        }
-    }
-
-    override fun getPreferredLocale(): String? {
-        return preferencesManager.getString(PreferenceKeys.PREFERENCE_LOCALE)
     }
 
     override fun showWindowsWhenFinishGame(): Boolean {
@@ -218,11 +216,19 @@ class PreferencesRepository(
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT, value.toInt())
     }
 
-    override fun themeId(): Long =
-        preferencesManager.getInt(PreferenceKeys.PREFERENCE_CUSTOM_THEME, 0).toLong()
+    override fun themeId(): Long? =
+        preferencesManager.getIntOrNull(PreferenceKeys.PREFERENCE_CUSTOM_THEME)?.toLong()
 
     override fun useTheme(themeId: Long) {
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_CUSTOM_THEME, themeId.toInt())
+    }
+
+    override fun skinId(): Long {
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_CUSTOM_SKIN, 0).toLong()
+    }
+
+    override fun useSkin(skinId: Long) {
+        preferencesManager.putInt(PreferenceKeys.PREFERENCE_CUSTOM_SKIN, skinId.toInt())
     }
 
     override fun updateStatsBase(statsBase: Int) {
@@ -320,11 +326,11 @@ class PreferencesRepository(
     }
 
     override fun useHelp(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_USE_HELP, true)
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_USE_HINT, true)
     }
 
     override fun setHelp(value: Boolean) {
-        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_USE_HELP, value)
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_USE_HINT, value)
     }
 
     override fun lastHelpUsed(): Long {
@@ -343,42 +349,33 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SIMON_TATHAM_ALGORITHM, enabled)
     }
 
-    override fun squareRadius(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, defaultSquareRadius())
-    }
-
-    override fun defaultSquareRadius(): Int = 3
-
-    override fun setSquareRadius(value: Int?) {
-        if (value == null) {
-            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_RADIUS)
-        } else {
-            preferencesManager.putInt(PreferenceKeys.PREFERENCE_SQUARE_RADIUS, value)
-        }
-    }
-
     override fun getTips(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_TIPS, 5)
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_HINTS, 5)
     }
 
     override fun setTips(tips: Int) {
-        preferencesManager.putInt(PreferenceKeys.PREFERENCE_TIPS, tips)
+        preferencesManager.putInt(PreferenceKeys.PREFERENCE_HINTS, tips)
     }
 
     override fun getExtraTips(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_EXTRA_TIPS, 0)
+        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_EXTRA_HINTS, 0)
     }
 
     override fun setExtraTips(tips: Int) {
-        preferencesManager.putInt(PreferenceKeys.PREFERENCE_EXTRA_TIPS, tips)
+        preferencesManager.putInt(PreferenceKeys.PREFERENCE_EXTRA_HINTS, tips)
     }
 
-    override fun openUsingSwitchControl(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_USE_OPEN_SWITCH_CONTROL, true)
+    override fun getSwitchControlAction(): Action {
+        return preferencesManager.getInt(
+            PreferenceKeys.PREFERENCE_USE_OPEN_SWITCH_CONTROL,
+            Action.OpenTile.ordinal,
+        ).let {
+            Action.values()[it]
+        }
     }
 
-    override fun setSwitchControl(useOpen: Boolean) {
-        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_USE_OPEN_SWITCH_CONTROL, useOpen)
+    override fun setSwitchControl(action: Action) {
+        preferencesManager.putInt(PreferenceKeys.PREFERENCE_USE_OPEN_SWITCH_CONTROL, action.ordinal)
     }
 
     override fun openGameDirectly(): Boolean {
@@ -387,20 +384,6 @@ class PreferencesRepository(
 
     override fun setOpenGameDirectly(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_OPEN_DIRECTLY, value)
-    }
-
-    override fun squareDivider(): Int {
-        return preferencesManager.getInt(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER, defaultSquareDivider())
-    }
-
-    override fun defaultSquareDivider(): Int = 0
-
-    override fun setSquareDivider(value: Int?) {
-        if (value == null) {
-            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER)
-        } else {
-            preferencesManager.putInt(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER, value.coerceIn(0, 50))
-        }
     }
 
     override fun showTutorialDialog(): Boolean {
@@ -419,14 +402,6 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_ALLOW_TAP_NUMBER, allow)
     }
 
-    override fun setToggleButtonOnTopBar(enabled: Boolean) {
-        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_TOGGLE_ON_TOP_BAR, enabled)
-    }
-
-    override fun showToggleButtonOnTopBar(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_TOGGLE_ON_TOP_BAR, false)
-    }
-
     override fun showTutorialButton(): Boolean {
         return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOULD_SHOW_TUTORIAL_BUTTON, true)
     }
@@ -436,19 +411,11 @@ class PreferencesRepository(
     }
 
     override fun dimNumbers(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_DIM_NUMBERS, false)
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_DIM_NUMBERS, true)
     }
 
     override fun setDimNumbers(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_DIM_NUMBERS, value)
-    }
-
-    override fun setLeftHandedMode(enabled: Boolean) {
-        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_LEFT_HANDED, enabled)
-    }
-
-    override fun leftHandedMode(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_LEFT_HANDED, false)
     }
 
     override fun setRequestDonation(request: Boolean) {
@@ -465,5 +432,21 @@ class PreferencesRepository(
 
     override fun setNumbersAutoFlag(allow: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_LET_NUMBERS_AUTO_FLAG, allow)
+    }
+
+    override fun showTimer(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_CLOCK, true)
+    }
+
+    override fun setTimerVisible(visible: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_CLOCK, visible)
+    }
+
+    override fun showContinueGame(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SHOW_CONTINUE, false)
+    }
+
+    override fun setContinueGameLabel(value: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_CONTINUE, value)
     }
 }

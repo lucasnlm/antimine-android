@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colors_light_pink_primary">#974066</color>
+    <color name="colors_light_pink_onPrimary">#FFFFFF</color>
+    <color name="colors_light_pink_primaryContainer">#FFD9E4</color>
+    <color name="colors_light_pink_onPrimaryContainer">#3E0021</color>
+    <color name="colors_light_pink_secondary">#735760</color>
+    <color name="colors_light_pink_onSecondary">#FFFFFF</color>
+    <color name="colors_light_pink_secondaryContainer">#FFD9E4</color>
+    <color name="colors_light_pink_onSecondaryContainer">#2A151D</color>
+    <color name="colors_light_pink_tertiary">#974066</color>
+    <color name="colors_light_pink_onTertiary">#FFFFFF</color>
+    <color name="colors_light_pink_tertiaryContainer">#FFD9E4</color>
+    <color name="colors_light_pink_onTertiaryContainer">#3E0021</color>
+    <color name="colors_light_pink_error">#BA1A1A</color>
+    <color name="colors_light_pink_errorContainer">#FFDAD6</color>
+    <color name="colors_light_pink_onError">#FFFFFF</color>
+    <color name="colors_light_pink_onErrorContainer">#410002</color>
+    <color name="colors_light_pink_background">#FFFBFF</color>
+    <color name="colors_light_pink_onBackground">#201A1C</color>
+    <color name="colors_light_pink_surface">#FFFBFF</color>
+    <color name="colors_light_pink_onSurface">#201A1C</color>
+    <color name="colors_light_pink_surfaceVariant">#F2DDE2</color>
+    <color name="colors_light_pink_onSurfaceVariant">#514347</color>
+    <color name="colors_light_pink_outline">#837377</color>
+    <color name="colors_light_pink_inverseOnSurface">#FAEEF0</color>
+    <color name="colors_light_pink_inverseSurface">#352F30</color>
+    <color name="colors_light_pink_inversePrimary">#FFB0CD</color>
+    <color name="colors_light_pink_shadow">#000000</color>
+    <color name="colors_light_pink_surfaceTint">#974066</color>
+    <color name="colors_light_pink_outlineVariant">#D5C2C7</color>
+    <color name="colors_light_pink_scrim">#000000</color>
+</resources>

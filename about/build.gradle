@@ -11,8 +11,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 33
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        consumerProguardFiles 'consumer-rules.pro'
     }
 
     buildTypes {
@@ -42,12 +42,12 @@ dependencies {
     implementation project(':tutorial')
 
     // Google
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0-rc01'
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'androidx.activity:activity-ktx:1.6.0'
-    implementation 'androidx.fragment:fragment-ktx:1.5.3'
+    implementation 'androidx.activity:activity-ktx:1.6.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
 
     // RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
@@ -56,20 +56,19 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Lifecycle
-    implementation 'android.arch.lifecycle:extensions:1.1.1'
-    implementation 'android.arch.lifecycle:viewmodel:1.1.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
 
     // Koin
     implementation 'io.insert-koin:koin-android:3.1.2'
     testImplementation 'io.insert-koin:koin-test:3.1.2'
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
 
     // Kotlin Lib
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20'
 
     // Unit Tests
     testImplementation 'junit:junit:4.13.2'

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colors_amoled_primary">#D0D0D0</color>
+    <color name="colors_amoled_onPrimary">#383838</color>
+    <color name="colors_amoled_primaryContainer">#4F4F4F</color>
+    <color name="colors_amoled_onPrimaryContainer">#EAEAEA</color>
+    <color name="colors_amoled_secondary">#CCCCCC</color>
+    <color name="colors_amoled_onSecondary">#333333</color>
+    <color name="colors_amoled_secondaryContainer">#4A4A4A</color>
+    <color name="colors_amoled_onSecondaryContainer">#E8E8E8</color>
+    <color name="colors_amoled_tertiary">#EFEFEF</color>
+    <color name="colors_amoled_onTertiary">#494949</color>
+    <color name="colors_amoled_tertiaryContainer">#636363</color>
+    <color name="colors_amoled_onTertiaryContainer">#FFFFFF</color>
+    <color name="colors_amoled_error">#F2F2F2</color>
+    <color name="colors_amoled_onError">#606060</color>
+    <color name="colors_amoled_errorContainer">#8C8C8C</color>
+    <color name="colors_amoled_onErrorContainer">#F9F9F9</color>
+    <color name="colors_amoled_outline">#938F99</color>
+    <color name="colors_amoled_background">#1C1B1F</color>
+    <color name="colors_amoled_onBackground">#E6E1E5</color>
+    <color name="colors_amoled_surface">#1C1B1F</color>
+    <color name="colors_amoled_onSurface">#E6E1E5</color>
+    <color name="colors_amoled_surfaceVariant">#111</color>
+    <color name="colors_amoled_onSurfaceVariant">#CAC4C4</color>
+    <color name="colors_amoled_inverseSurface">#E6E1E5</color>
+    <color name="colors_amoled_inverseOnSurface">#313033</color>
+    <color name="colors_amoled_inversePrimary">#676767</color>
+    <color name="colors_amoled_shadow">#000000</color>
+    <color name="colors_amoled_surfaceTint">#D0D0D0</color>
+    <color name="colors_amoled_outlineVariant">#49454F</color>
+    <color name="colors_amoled_scrim">#000000</color>
+</resources>

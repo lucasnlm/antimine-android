@@ -1,14 +1,16 @@
 package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.preferences.models.Minefield
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import kotlin.random.Random
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class MinefieldCreatorTest {
     @Test
-    fun testMinefieldCreation() {
-        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
+    fun testMinefieldCreation() = runTest {
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), 200)
         val map = creator.create(2)
         assertEquals(
             listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
@@ -17,8 +19,8 @@ class MinefieldCreatorTest {
     }
 
     @Test
-    fun testMinefieldCreationMines() {
-        val creator = MinefieldCreatorImpl(Minefield(5, 5, 99), Random(200))
+    fun testMinefieldCreationMines() = runTest {
+        val creator = MinefieldCreatorImpl(Minefield(5, 5, 99), 200)
         val map = creator.create(12)
         assertEquals(
             listOf(
@@ -34,8 +36,38 @@ class MinefieldCreatorTest {
     }
 
     @Test
-    fun testMinefieldCreationMines2() {
-        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
+    fun testMinefieldCreationMines2() = runTest {
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), 200)
+        val map = creator.create(2)
+        assertEquals(
+            listOf(
+                1, 0, 0, 0,
+                1, 0, 0, 0,
+                1, 1, 1, 1,
+                1, 1, 1, 0,
+            ),
+            map.map { if (it.hasMine) 1 else 0 }.toList(),
+        )
+    }
+
+    @Test
+    fun testMinefieldCreationMines3() = runTest {
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), 100)
+        val map = creator.create(2)
+        assertEquals(
+            listOf(
+                1, 0, 0, 0,
+                1, 0, 0, 0,
+                1, 1, 1, 0,
+                1, 1, 1, 1,
+            ),
+            map.map { if (it.hasMine) 1 else 0 }.toList(),
+        )
+    }
+
+    @Test
+    fun testMinefieldCreationMines4() = runTest {
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), 50)
         val map = creator.create(2)
         assertEquals(
             listOf(
@@ -49,38 +81,38 @@ class MinefieldCreatorTest {
     }
 
     @Test
-    fun testMinefieldCreationMines3() {
-        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(100))
+    fun testMinefieldCreationMinesTips() = runTest {
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), 200)
         val map = creator.create(2)
         assertEquals(
             listOf(
-                1, 0, 0, 0,
-                1, 0, 0, 0,
-                1, 0, 1, 1,
-                1, 1, 1, 1,
+                0, 2, 0, 0,
+                0, 5, 3, 2,
+                0, 0, 0, 0,
+                0, 0, 0, 3,
             ),
-            map.map { if (it.hasMine) 1 else 0 }.toList(),
+            map.map { it.minesAround }.toList(),
         )
     }
 
     @Test
-    fun testMinefieldCreationMines4() {
-        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(50))
+    fun testMinefieldCreationMinesTips2() = runTest {
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), 100)
         val map = creator.create(2)
         assertEquals(
             listOf(
-                1, 0, 0, 0,
-                1, 0, 0, 0,
-                1, 1, 0, 1,
-                1, 1, 1, 1,
+                0, 2, 0, 0,
+                0, 5, 2, 1,
+                0, 0, 0, 3,
+                0, 0, 0, 0,
             ),
-            map.map { if (it.hasMine) 1 else 0 }.toList(),
+            map.map { it.minesAround }.toList(),
         )
     }
 
     @Test
-    fun testMinefieldCreationMinesTips() {
-        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
+    fun testMinefieldCreationMinesTips3() = runTest {
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), 50)
         val map = creator.create(2)
         assertEquals(
             listOf(
@@ -94,38 +126,8 @@ class MinefieldCreatorTest {
     }
 
     @Test
-    fun testMinefieldCreationMinesTips2() {
-        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(100))
-        val map = creator.create(2)
-        assertEquals(
-            listOf(
-                0, 2, 0, 0,
-                0, 4, 2, 2,
-                0, 6, 0, 0,
-                0, 0, 0, 0,
-            ),
-            map.map { it.minesAround }.toList(),
-        )
-    }
-
-    @Test
-    fun testMinefieldCreationMinesTips3() {
-        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(50))
-        val map = creator.create(2)
-        assertEquals(
-            listOf(
-                0, 2, 0, 0,
-                0, 4, 2, 1,
-                0, 0, 5, 0,
-                0, 0, 0, 0,
-            ),
-            map.map { it.minesAround }.toList(),
-        )
-    }
-
-    @Test
-    fun testMinefieldCreationPosition() {
-        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
+    fun testMinefieldCreationPosition() = runTest {
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), 200)
         val map = creator.create(2)
         assertEquals(
             listOf(
@@ -139,8 +141,8 @@ class MinefieldCreatorTest {
     }
 
     @Test
-    fun testMinefieldMustBeCreatedWithoutMines() {
-        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), Random(200))
+    fun testMinefieldMustBeCreatedWithoutMines() = runTest {
+        val creator = MinefieldCreatorImpl(Minefield(4, 4, 9), 200)
         val map = creator.createEmpty()
         assertEquals(0, map.count { it.hasMine })
     }

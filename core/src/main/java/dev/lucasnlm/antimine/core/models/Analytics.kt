@@ -16,7 +16,7 @@ sealed class Analytics(
         name = "New Game",
         extra = mapOf(
             "Seed" to seed.toString(),
-            "Difficulty Preset" to difficulty.text,
+            "Difficulty Preset" to difficulty.id,
             "Width" to minefield.width.toString(),
             "Height" to minefield.height.toString(),
             "Mines" to minefield.mines.toString(),
@@ -32,7 +32,7 @@ sealed class Analytics(
         name = "Retry Game",
         extra = mapOf(
             "Seed" to seed.toString(),
-            "Difficulty Preset" to difficulty.text,
+            "Difficulty Preset" to difficulty.id,
             "Width" to minefield.width.toString(),
             "Height" to minefield.height.toString(),
             "Mines" to minefield.mines.toString(),
@@ -49,6 +49,8 @@ sealed class Analytics(
     class OpenTile(index: Int) : Analytics("Open Tile", mapOf("Index" to index.toString()))
 
     class OpenOrFlagTile(index: Int) : Analytics("Open or Flag Tile", mapOf("Index" to index.toString()))
+
+    class QuestionMark(index: Int) : Analytics("Question Mark on Tile", mapOf("Index" to index.toString()))
 
     class SwitchMark(index: Int) : Analytics("Switch Mark", mapOf("Index" to index.toString()))
 
@@ -68,7 +70,7 @@ sealed class Analytics(
         name = "Victory",
         extra = mapOf(
             "Time" to time.toString(),
-            "Difficulty" to difficulty.text,
+            "Difficulty" to difficulty.id,
             "Right Mines" to score.rightMines.toString(),
             "Total Mines" to score.totalMines.toString(),
             "Total Area" to score.totalArea.toString(),
@@ -84,8 +86,6 @@ sealed class Analytics(
     object OpenAbout : Analytics("Open About")
 
     object OpenStats : Analytics("Open Stats")
-
-    object OpenTranslations : Analytics("Open Translations")
 
     object OpenGooglePlayGames : Analytics("Open Google Play Games")
 
@@ -113,15 +113,19 @@ sealed class Analytics(
         private val themeId: Long,
     ) : Analytics("Click Theme", mapOf("id" to themeId.toString()))
 
+    data class ClickSkin(
+        private val skinId: Long,
+    ) : Analytics("Click Skin", mapOf("id" to skinId.toString()))
+
     object OpenSettings : Analytics("Open Settings")
 
     object OpenSaveHistory : Analytics("Open Save History")
 
     object RemoveAds : Analytics("Remove Ads")
 
-    object UseTip : Analytics("Use Tip")
+    object UseHint : Analytics("Use Tip")
 
-    object RequestMoreTip : Analytics("Request More Tip")
+    object RequestMoreHints : Analytics("Request More Tip")
 
     class TapGameReset(resign: Boolean) : Analytics("Game reset", mapOf("Resign" to resign.toString()))
 }

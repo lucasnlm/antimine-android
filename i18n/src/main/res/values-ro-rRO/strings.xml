@@ -18,6 +18,8 @@
     <string name="legend">Legendă</string>
     <string name="open">Deschide</string>
     <string name="settings">Setări</string>
+    <string name="control_settings">Setări de control</string>
+    <string name="shapes">Forme</string>
     <string name="animations">Animații</string>
     <string name="vibration">Reacție haptică</string>
     <string name="about">Despre</string>
@@ -27,6 +29,7 @@
     <string name="width">Lățime</string>
     <string name="height">Înălțime</string>
     <string name="mines">Mine</string>
+    <string name="seed">Număr de generare</string>
     <string name="retry_sure">Dacă începi un joc nou, progresul actual va fi pierdut.</string>
     <string name="show_licenses">Afișează licențele</string>
     <string name="new_game_request">Vrei să începi un joc nou?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Dinamica jocului</string>
     <string name="settings_accessibility">Accesibilitate</string>
-    <string name="size">Dimensiune</string>
-    <string name="rounded_square">Pătrat rotunjit</string>
-    <string name="space_between_squares">Spațiul dintre pătrate</string>
     <string name="system">Sistem</string>
     <string name="sign_in_failed">Nu se poate conecta. Te rugăm să îți verifici conexiunea la rețea și să încerci din nou.</string>
     <string name="you_won">Ai câștigat!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Folosește semnul de întrebare</string>
     <string name="no_guessing_mode">Modul „Fără ghicit”</string>
     <string name="control">Comenzi</string>
+    <string name="control_types">Tipuri de control</string>
     <string name="single_click">Apăsare singură</string>
     <string name="double_click">Apăsare dublă</string>
     <string name="long_press">Apăsare lungă</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Continuă</string>
     <string name="empty">Gol</string>
     <string name="cant_do_it_now">Nu se poate face acest lucru acum</string>
+    <string name="mine_revealed">O mină a fost dezvăluită</string>
+    <string name="fail_to_load_ad">Reclama nu a putut fi încărcată</string>
     <string name="you_have_received">Ai primit: +%1$d</string>
-    <string name="help_win_a_game">Trebuie să câștigi un joc pentru a beneficia de mai mult ajutor.</string>
+    <string name="help_win_a_game">Trebuie să câștigi un joc pentru a beneficia de mai multe indicii.</string>
     <string name="unknown_error">Eroare necunoscută.</string>
     <string name="leaderboards">Clasamente</string>
     <string name="cancel">Anulează</string>
     <string name="resume">Reia</string>
     <string name="yes">Da</string>
     <string name="unlock">Deblocare</string>
+    <string name="unlock_all">Deblocare toate</string>
     <string name="achievements">Realizări</string>
     <string name="no">Nu</string>
     <string name="general">General</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Licențe</string>
     <string name="google_play_games">Jocuri Google Play</string>
     <string name="loading">Se încarcă…</string>
+    <string name="creating_valid_game">Se creează un joc valid…</string>
     <string name="connect">Conectare</string>
     <string name="connecting">Se conectează…</string>
     <string name="disconnect">Deconectare</string>
@@ -101,7 +106,7 @@
     <string name="themes">Teme</string>
     <string name="delete_all_message">Șterge permanent toate evenimentele.</string>
     <string name="remove_ad">Premium</string>
-    <string name="help">Ajutor</string>
+    <string name="help">Indiciu</string>
     <string name="back">Înapoi</string>
     <string name="donation">Donație</string>
     <string name="open_on_game">Deschide pe ecranul jocului</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Permite atingerea numerelor</string>
     <string name="flag_when_tap_numbers">Plasare steag la atingerea numerelor</string>
     <string name="tap_to_customize">Atinge pentru a particulariza</string>
-    <string name="toggle_button_top">Afișează „butonul de comutare” în bara de sus</string>
     <string name="no_guess_fail_warning">Câmpul minat actual nu poate fi rezolvat fără ghiciri!</string>
     <string name="fixed_size">Dimensiune fixă</string>
     <string name="progressive">Progresiv</string>
     <string name="highlight_unsolved_numbers">Evidențiază numerele nerezolvate</string>
-    <string name="left_handed">Stângaci</string>
+    <string name="show_clock">Afișare ceas</string>
     <string name="donate_request">Dacă îți place acest joc, ia în considerare să faci o donație.</string>
     <string name="donate_help">Va ajuta la menținerea activă a acestui proiect!</string>
 </resources>

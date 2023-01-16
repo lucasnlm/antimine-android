@@ -7,23 +7,19 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.external.ICloudStorageManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.model.CloudSave
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class CloudSaveManagerImpl(
+    private val scope: CoroutineScope,
     private val playGamesManager: IPlayGamesManager,
     private val preferencesRepository: IPreferencesRepository,
     private val statsRepository: IStatsRepository,
     private val cloudStorageManager: ICloudStorageManager,
 ) : CloudSaveManager {
     override fun uploadSave() {
-        GlobalScope.launch {
-            withContext(Dispatchers.IO) {
-                getCloudSave()?.let {
-                    cloudStorageManager.uploadSave(it)
-                }
+        scope.launch(Dispatchers.IO) {
+            getCloudSave()?.let {
+                cloudStorageManager.uploadSave(it)
             }
         }
     }
@@ -35,9 +31,8 @@ class CloudSaveManagerImpl(
                 CloudSave(
                     playId = playerId,
                     completeTutorial = if (preferencesRepository.isTutorialCompleted()) 1 else 0,
-                    selectedTheme = preferencesRepository.themeId().toInt(),
-                    squareRadius = preferencesRepository.squareRadius(),
-                    squareSize = preferencesRepository.squareSize(),
+                    selectedTheme = preferencesRepository.themeId()?.toInt() ?: -1,
+                    selectedSkin = preferencesRepository.skinId().toInt(),
                     touchTiming = preferencesRepository.customLongPressTimeout().toInt(),
                     questionMark = preferencesRepository.useQuestionMark().toInt(),
                     gameAssistance = preferencesRepository.useFlagAssistant().toInt(),
@@ -48,15 +43,14 @@ class CloudSaveManagerImpl(
                     stats = statsRepository.getAllStats(minId).map { it.toHashMap() },
                     premiumFeatures = preferencesRepository.isPremiumEnabled().toInt(),
                     controlStyle = preferencesRepository.controlStyle().ordinal,
-                    language = preferencesRepository.getPreferredLocale() ?: "",
                     openDirectly = preferencesRepository.openGameDirectly().toInt(),
                     unlockedThemes = preferencesRepository.getUnlockedThemes().joinToString(" "),
-                    squareDivider = preferencesRepository.squareDivider(),
                     doubleClickTimeout = preferencesRepository.getDoubleClickTimeout().toInt(),
                     allowTapNumbers = preferencesRepository.allowTapOnNumbers().toInt(),
                     highlightNumbers = preferencesRepository.dimNumbers().toInt(),
-                    leftHanded = preferencesRepository.leftHandedMode().toInt(),
+                    leftHanded = 0,
                     dimNumbers = preferencesRepository.dimNumbers().toInt(),
+                    timerVisible = preferencesRepository.showTimer().toInt(),
                 )
             }
         } catch (e: Exception) {

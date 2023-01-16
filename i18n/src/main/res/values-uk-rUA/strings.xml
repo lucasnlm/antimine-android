@@ -18,6 +18,8 @@
     <string name="legend">Легенда</string>
     <string name="open">Відкрити</string>
     <string name="settings">Налаштування</string>
+    <string name="control_settings">Параметри керування</string>
+    <string name="shapes">Форми</string>
     <string name="animations">Анімації</string>
     <string name="vibration">Вібрація при натиску</string>
     <string name="about">Про додаток</string>
@@ -27,6 +29,7 @@
     <string name="width">Ширина</string>
     <string name="height">Висота</string>
     <string name="mines">Міни</string>
+    <string name="seed">Код генерації</string>
     <string name="retry_sure">Якщо ви почнете нову гру,\nваш поточний прогрес буде втрачено.</string>
     <string name="show_licenses">Показати ліцензії</string>
     <string name="new_game_request">Хочете розпочати нову гру?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Загальне</string>
     <string name="settings_gameplay">Геймплей</string>
     <string name="settings_accessibility">Спеціальні можливості</string>
-    <string name="size">Розмір</string>
-    <string name="rounded_square">Округлі квадрати</string>
-    <string name="space_between_squares">Простір між квадратами</string>
     <string name="system">Система</string>
     <string name="sign_in_failed">Не вдається увійти. Перевірте підключення до Інтернету і повторіть спробу.</string>
     <string name="you_won">Ви перемогли!</string>
@@ -58,9 +58,10 @@
     <string name="shortest_time">Найкоротший час</string>
     <string name="performance">Ефективність</string>
     <string name="ok">Гаразд</string>
-    <string name="use_question_mark">Використовувати прапорці «?»</string>
+    <string name="use_question_mark">Знак питання</string>
     <string name="no_guessing_mode">Режим \'Без вгадування\'</string>
     <string name="control">Елементи керування</string>
+    <string name="control_types">Типи керування</string>
     <string name="single_click">Один дотик</string>
     <string name="double_click">Подвійний тиць</string>
     <string name="long_press">Довгий дотик</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Продовжити</string>
     <string name="empty">Пусто</string>
     <string name="cant_do_it_now">Неможливо зробити це зараз</string>
+    <string name="mine_revealed">Міна була виявлена.</string>
+    <string name="fail_to_load_ad">Реклама не завантажилась</string>
     <string name="you_have_received">Ви отримали: +%1$d</string>
-    <string name="help_win_a_game">Для отримання додаткової допомоги ви повинні виграти гру.</string>
+    <string name="help_win_a_game">Пройди гру, щоб отримати підказки.</string>
     <string name="unknown_error">Невідома помилка.</string>
     <string name="leaderboards">Таблиця лідерів</string>
     <string name="cancel">Відмінити</string>
     <string name="resume">Відновити</string>
     <string name="yes">Так</string>
     <string name="unlock">Розблокування</string>
+    <string name="unlock_all">Розблокувати все</string>
     <string name="achievements">Досягнення</string>
     <string name="no">Ні</string>
     <string name="general">Загальне</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Ліцензії</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Завантаження…</string>
+    <string name="creating_valid_game">Створюю чесну гру…</string>
     <string name="connect">Під’єднатись</string>
     <string name="connecting">Підключення…</string>
     <string name="disconnect">Відключитись</string>
@@ -101,7 +106,7 @@
     <string name="themes">Тема</string>
     <string name="delete_all_message">Видалити всі події назавжди.</string>
     <string name="remove_ad">Прибрати рекламу</string>
-    <string name="help">Допомога</string>
+    <string name="help">Підказка</string>
     <string name="back">Назад</string>
     <string name="donation">Грошева підтримка</string>
     <string name="open_on_game">Відкрити на екрані гри</string>
@@ -115,14 +120,13 @@
     <string name="close">Закрити</string>
     <string name="open_tutorial">Відкрити навчання</string>
     <string name="click_numbers">Дозволити натискання на цифри</string>
-    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
+    <string name="flag_when_tap_numbers">Прапор тоді коли натискаєш на цифри</string>
     <string name="tap_to_customize">Натисніть, щоб налаштувати</string>
-    <string name="toggle_button_top">Показувати \"Перемкнути кнопки\" на верхній панелі</string>
     <string name="no_guess_fail_warning">Поточне мінне поле не можна пройти без здогадок!</string>
     <string name="fixed_size">Фіксований розмір</string>
     <string name="progressive">Прогресивна</string>
     <string name="highlight_unsolved_numbers">Підсвічувати невирішені числа</string>
-    <string name="left_handed">Для лівші</string>
+    <string name="show_clock">Показувати годинник</string>
     <string name="donate_request">Якщо вам подобається ця гра, пожертвуйте донатом.</string>
     <string name="donate_help">Це допоможе зберегти цей проєкт активним!</string>
 </resources>

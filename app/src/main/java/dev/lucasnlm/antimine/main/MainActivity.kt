@@ -1,13 +1,21 @@
 package dev.lucasnlm.antimine.main
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.app.ActivityCompat
+import androidx.activity.addCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
+import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
@@ -19,18 +27,15 @@ import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.history.HistoryActivity
-import dev.lucasnlm.antimine.language.LanguageSelectorActivity
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.splash.SplashActivity
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
-import dev.lucasnlm.antimine.ui.ext.ThematicActivity
-import dev.lucasnlm.antimine.ui.ext.toAndroidColor
+import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.IFeatureFlagManager
@@ -43,7 +48,7 @@ import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : ThematicActivity(R.layout.activity_main) {
+class MainActivity : ThemedActivity(R.layout.activity_main) {
     private val viewModel: MainViewModel by viewModel()
     private val playGamesManager: IPlayGamesManager by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
@@ -57,28 +62,35 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
 
     private lateinit var viewPager: ViewPager2
 
+    private lateinit var googlePlayLauncher: ActivityResultLauncher<Intent>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        continueGame.bind(
-            theme = usingTheme,
-            invert = true,
-            text = R.string.start,
-            onAction = {
-                viewModel.sendEvent(MainEvent.ContinueGameEvent)
-            },
-        )
+        googlePlayLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                handlePlayGames(result.data)
+            }
+        }
 
-        lifecycleScope.launch {
-            savesRepository.fetchCurrentSave()?.let {
-                continueGame.bind(
-                    theme = usingTheme,
-                    invert = true,
-                    text = R.string.continue_game,
-                    onAction = {
-                        viewModel.sendEvent(MainEvent.ContinueGameEvent)
-                    },
-                )
+        continueGame.apply {
+            if (preferencesRepository.showContinueGame()) {
+                setText(R.string.continue_game)
+            } else {
+                setText(R.string.start)
+            }
+
+            setOnClickListener {
+                viewModel.sendEvent(MainEvent.ContinueGameEvent)
+            }
+        }
+
+        if (!preferencesRepository.showContinueGame()) {
+            lifecycleScope.launch {
+                savesRepository.fetchCurrentSave()?.let {
+                    preferencesRepository.setContinueGameLabel(true)
+                    continueGame.setText(R.string.continue_game)
+                }
             }
         }
 
@@ -96,160 +108,83 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
         }
 
-        newGameShow.bind(
-            theme = usingTheme,
-            text = getString(R.string.new_game),
-            startIcon = R.drawable.more,
-            onAction = {
-                newGameShow.visibility = View.GONE
-                difficulties.visibility = View.VISIBLE
-            },
-        )
+        newGameShow.setOnClickListener {
+            newGameShow.visibility = View.GONE
+            difficulties.visibility = View.VISIBLE
+        }
 
-        difficulties.strokeColor = usingTheme.palette.covered.toAndroidColor()
+        mapOf(
+            standardSize to Difficulty.Standard,
+            fixedSizeSize to Difficulty.FixedSize,
+            beginnerSize to Difficulty.Beginner,
+            intermediateSize to Difficulty.Intermediate,
+            expertSize to Difficulty.Expert,
+            masterSize to Difficulty.Master,
+            legendSize to Difficulty.Legend,
+        ).onEach {
+            it.key.text = getDifficultyExtra(it.value)
+        }
 
-        startStandard.setRadius(5f)
-        startStandard.bind(
-            theme = usingTheme,
-            text = getString(R.string.progressive),
-            extra = getDifficultyExtra(Difficulty.Standard),
-            onAction = {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            listOf(
+                Difficulty.Beginner,
+                Difficulty.Intermediate,
+                Difficulty.Expert,
+                Difficulty.Master,
+            ).forEach(::pushShortcutOf)
+        }
+
+        mapOf(
+            startStandard to Difficulty.Standard,
+            startFixedSize to Difficulty.FixedSize,
+            startBeginner to Difficulty.Beginner,
+            startIntermediate to Difficulty.Intermediate,
+            startExpert to Difficulty.Expert,
+            startMaster to Difficulty.Master,
+            startLegend to Difficulty.Legend,
+        ).forEach { (view, difficulty) ->
+            view.setOnClickListener {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    pushShortcutOf(difficulty)
+                }
+
                 viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Standard),
+                    MainEvent.StartNewGameEvent(difficulty = difficulty),
                 )
-            },
-        )
+            }
+        }
 
-        startBeginner.setRadius(5f)
-        startBeginner.bind(
-            theme = usingTheme,
-            text = getString(R.string.beginner),
-            extra = getDifficultyExtra(Difficulty.Beginner),
-            onAction = {
-                viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Beginner),
-                )
-            },
-        )
+        startCustom.setOnClickListener {
+            analyticsManager.sentEvent(Analytics.OpenCustom)
+            viewModel.sendEvent(MainEvent.ShowCustomDifficultyDialogEvent)
+        }
 
-        startIntermediate.setRadius(5f)
-        startIntermediate.bind(
-            theme = usingTheme,
-            text = getString(R.string.intermediate),
-            extra = getDifficultyExtra(Difficulty.Intermediate),
-            onAction = {
-                viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Intermediate),
-                )
-            },
-        )
+        settings.setOnClickListener {
+            analyticsManager.sentEvent(Analytics.OpenSettings)
+            val intent = Intent(this, PreferencesActivity::class.java)
+            startActivity(intent)
+        }
 
-        startExpert.setRadius(5f)
-        startExpert.bind(
-            theme = usingTheme,
-            text = getString(R.string.expert),
-            extra = getDifficultyExtra(Difficulty.Expert),
-            onAction = {
-                viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Expert),
-                )
-            },
-        )
+        themes.setOnClickListener {
+            val intent = Intent(this, ThemeActivity::class.java)
+            startActivity(intent)
+        }
 
-        startMaster.setRadius(5f)
-        startMaster.bind(
-            theme = usingTheme,
-            text = getString(R.string.master),
-            extra = getDifficultyExtra(Difficulty.Master),
-            onAction = {
-                viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Master),
-                )
-            },
-        )
+        controls.setOnClickListener {
+            analyticsManager.sentEvent(Analytics.OpenControls)
+            viewModel.sendEvent(MainEvent.ShowControlsEvent)
+        }
 
-        startLegend.setRadius(5f)
-        startLegend.bind(
-            theme = usingTheme,
-            text = getString(R.string.legend),
-            extra = getDifficultyExtra(Difficulty.Legend),
-            onAction = {
-                viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.Legend),
-                )
-            },
-        )
-
-        difficultyDivider1.setBackgroundColor(usingTheme.palette.covered.toAndroidColor())
-        difficultyDivider2.setBackgroundColor(usingTheme.palette.covered.toAndroidColor())
-
-        startFixedSize.setRadius(5f)
-        startFixedSize.bind(
-            theme = usingTheme,
-            text = getString(R.string.fixed_size),
-            extra = getDifficultyExtra(Difficulty.FixedSize),
-            onAction = {
-                viewModel.sendEvent(
-                    MainEvent.StartNewGameEvent(difficulty = Difficulty.FixedSize),
-                )
-            },
-        )
-
-        startCustom.setRadius(5f)
-        startCustom.bind(
-            theme = usingTheme,
-            text = getString(R.string.custom),
-            onAction = {
-                analyticsManager.sentEvent(Analytics.OpenCustom)
-                viewModel.sendEvent(MainEvent.ShowCustomDifficultyDialogEvent)
-            },
-        )
-
-        settings.bind(
-            theme = usingTheme,
-            text = R.string.settings,
-            startIcon = R.drawable.settings,
-            onAction = {
-                analyticsManager.sentEvent(Analytics.OpenSettings)
-                val intent = Intent(this, PreferencesActivity::class.java)
-                startActivity(intent)
-            },
-        )
-
-        themes.bind(
-            theme = usingTheme,
-            text = R.string.themes,
-            startIcon = R.drawable.themes,
-            onAction = {
-                val intent = Intent(this, ThemeActivity::class.java)
-                startActivity(intent)
-            },
-        )
-
-        controls.bind(
-            theme = usingTheme,
-            text = R.string.control,
-            startIcon = R.drawable.controls,
-            onAction = {
-                analyticsManager.sentEvent(Analytics.OpenControls)
-                viewModel.sendEvent(MainEvent.ShowControlsEvent)
-            },
-        )
-
-        removeAds.visibility = View.GONE
         if (featureFlagManager.isFoss) {
+            removeAdsRoot.visibility = View.VISIBLE
             removeAds.apply {
-                visibility = View.VISIBLE
-                bind(
-                    theme = usingTheme,
-                    text = getString(R.string.donation),
-                    startIcon = R.drawable.remove_ads,
-                    onAction = {
-                        lifecycleScope.launch {
-                            billingManager.charge(this@MainActivity)
-                        }
-                    },
-                )
+                setOnClickListener {
+                    lifecycleScope.launch {
+                        billingManager.charge(this@MainActivity)
+                    }
+                }
+                text = getString(R.string.donation)
+                setIconResource(R.drawable.remove_ads)
             }
         } else {
             if (!preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
@@ -266,76 +201,40 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
 
         if (featureFlagManager.isGameHistoryEnabled) {
-            previousGames.bind(
-                theme = usingTheme,
-                text = R.string.previous_games,
-                startIcon = R.drawable.old_games,
-                onAction = {
-                    analyticsManager.sentEvent(Analytics.OpenSaveHistory)
-                    val intent = Intent(this, HistoryActivity::class.java)
-                    startActivity(intent)
-                },
-            )
+            previousGames.setOnClickListener {
+                analyticsManager.sentEvent(Analytics.OpenSaveHistory)
+                val intent = Intent(this, HistoryActivity::class.java)
+                startActivity(intent)
+            }
         } else {
             previousGames.visibility = View.GONE
         }
 
-        tutorial.bind(
-            theme = usingTheme,
-            text = R.string.tutorial,
-            startIcon = R.drawable.tutorial,
-            onAction = {
+        tutorial.apply {
+            setText(R.string.tutorial)
+            setOnClickListener {
                 analyticsManager.sentEvent(Analytics.OpenTutorial)
                 viewModel.sendEvent(MainEvent.StartTutorialEvent)
-            },
-        )
+            }
+        }
 
-        stats.bind(
-            theme = usingTheme,
-            text = R.string.events,
-            startIcon = R.drawable.stats,
-            onAction = {
-                analyticsManager.sentEvent(Analytics.OpenStats)
-                val intent = Intent(this, StatsActivity::class.java)
-                startActivity(intent)
-            },
-        )
+        stats.setOnClickListener {
+            analyticsManager.sentEvent(Analytics.OpenStats)
+            val intent = Intent(this, StatsActivity::class.java)
+            startActivity(intent)
+        }
 
-        about.bind(
-            theme = usingTheme,
-            text = R.string.about,
-            startIcon = R.drawable.info,
-            onAction = {
-                analyticsManager.sentEvent(Analytics.OpenAbout)
-                val intent = Intent(this, AboutActivity::class.java)
-                startActivity(intent)
-            },
-        )
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            translation.visibility = View.GONE
-        } else {
-            translation.bind(
-                theme = usingTheme,
-                text = R.string.translation,
-                startIcon = R.drawable.translate,
-                onAction = {
-                    analyticsManager.sentEvent(Analytics.OpenTranslations)
-                    startActivity(Intent(this, LanguageSelectorActivity::class.java))
-                },
-            )
+        about.setOnClickListener {
+            analyticsManager.sentEvent(Analytics.OpenAbout)
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
         }
 
         if (playGamesManager.hasGooglePlayGames()) {
-            play_games.bind(
-                theme = usingTheme,
-                text = R.string.google_play_games,
-                startIcon = R.drawable.games_controller,
-                onAction = {
-                    analyticsManager.sentEvent(Analytics.OpenGooglePlayGames)
-                    viewModel.sendEvent(MainEvent.ShowGooglePlayGamesEvent)
-                },
-            )
+            play_games.setOnClickListener {
+                analyticsManager.sentEvent(Analytics.OpenGooglePlayGames)
+                viewModel.sendEvent(MainEvent.ShowGooglePlayGamesEvent)
+            }
         } else {
             play_games.visibility = View.GONE
         }
@@ -347,6 +246,52 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
 
         launchGooglePlayGames()
+
+        onBackPressedDispatcher.addCallback {
+            handleBackPressed()
+        }
+
+        redirectToGame()
+    }
+
+    private fun pushShortcutOf(difficulty: Difficulty) {
+        val idLow = difficulty.id.lowercase()
+        val deeplink = Uri.parse("app://antimine/game?difficulty=$idLow")
+
+        val name = when (difficulty) {
+            Difficulty.Beginner -> R.string.beginner
+            Difficulty.Intermediate -> R.string.intermediate
+            Difficulty.Expert -> R.string.expert
+            Difficulty.Master -> R.string.master
+            Difficulty.Legend -> R.string.legend
+            else -> return
+        }
+
+        val icon = when (difficulty) {
+            Difficulty.Beginner -> R.mipmap.shortcut_one
+            Difficulty.Intermediate -> R.mipmap.shortcut_two
+            Difficulty.Expert -> R.mipmap.shortcut_three
+            Difficulty.Master -> R.mipmap.shortcut_four
+            Difficulty.Legend -> R.mipmap.shortcut_four
+            else -> return
+        }
+
+        val shortcut = ShortcutInfoCompat.Builder(applicationContext, difficulty.id)
+            .setShortLabel(getString(name))
+            .setIcon(IconCompat.createWithResource(applicationContext, icon))
+            .setIntent(Intent(Intent.ACTION_VIEW, deeplink))
+            .build()
+
+        ShortcutManagerCompat.pushDynamicShortcut(applicationContext, shortcut)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (newGameShow.visibility == View.GONE) {
+            newGameShow.visibility = View.VISIBLE
+            difficulties.visibility = View.GONE
+        }
     }
 
     private fun getDifficultyExtra(difficulty: Difficulty): String {
@@ -355,6 +300,15 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             dimensionRepository,
             preferencesRepository,
         ).toExtraString()
+    }
+
+    private fun redirectToGame() {
+        val playGames = playGamesManager.hasGooglePlayGames()
+        if ((playGames && preferencesRepository.userId() != null || !playGames) &&
+            preferencesRepository.openGameDirectly()
+        ) {
+            Intent(this, GameActivity::class.java).run { startActivity(this) }
+        }
     }
 
     private fun Minefield.toExtraString(): String {
@@ -380,7 +334,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
             is MainEvent.Recreate -> {
                 finish()
-                startActivity(Intent(this, SplashActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 overridePendingTransition(0, 0)
             }
             else -> {
@@ -408,7 +362,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
             }
         } else {
             playGamesManager.getLoginIntent()?.let {
-                ActivityCompat.startActivityForResult(this, it, RC_GOOGLE_PLAY, null)
+                googlePlayLauncher.launch(it)
             }
         }
     }
@@ -435,21 +389,16 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
                     }
                 } catch (e: Exception) {
                     logged = false
-                    Log.e(SplashActivity.TAG, "Failed silent login", e)
+                    Log.e(TAG, "Failed silent login", e)
                 }
 
                 if (!logged) {
                     try {
                         playGamesManager.getLoginIntent()?.let {
-                            ActivityCompat.startActivityForResult(
-                                this@MainActivity,
-                                it,
-                                RC_GOOGLE_PLAY,
-                                null,
-                            )
+                            googlePlayLauncher.launch(it)
                         }
                     } catch (e: Exception) {
-                        Log.e(SplashActivity.TAG, "User not logged or doesn't have Play Games", e)
+                        Log.e(TAG, "User not logged or doesn't have Play Games", e)
                     }
                 } else {
                     afterGooglePlayGames()
@@ -460,32 +409,32 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == RC_GOOGLE_PLAY) {
-            playGamesManager.handleLoginResult(data)
-            lifecycleScope.launch {
-                refreshUserId()
-            }
+    private fun handlePlayGames(data: Intent?) {
+        playGamesManager.handleLoginResult(data)
+        lifecycleScope.launch {
+            refreshUserId()
         }
     }
 
     private fun bindRemoveAds(price: String? = null, showOffer: Boolean = false) {
+        removeAdsRoot.visibility = View.VISIBLE
         removeAds.apply {
-            visibility = View.VISIBLE
-            bind(
-                theme = usingTheme,
-                text = getString(R.string.remove_ad),
-                startIcon = R.drawable.remove_ads,
-                price = price,
-                showOffer = showOffer,
-                onAction = {
-                    lifecycleScope.launch {
-                        billingManager.charge(this@MainActivity)
-                    }
-                },
-            )
+            setOnClickListener {
+                lifecycleScope.launch {
+                    billingManager.charge(this@MainActivity)
+                }
+            }
+            setText(R.string.remove_ad)
+            setIconResource(R.drawable.remove_ads)
+
+            price?.let {
+                priceText.text = it
+                priceText.visibility = View.VISIBLE
+            }
+
+            if (showOffer) {
+                priceOff.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -514,7 +463,7 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
         }
     }
 
-    override fun onBackPressed() {
+    private fun handleBackPressed() {
         if (newGameShow.visibility == View.GONE) {
             newGameShow.visibility = View.VISIBLE
             difficulties.visibility = View.GONE
@@ -524,6 +473,6 @@ class MainActivity : ThematicActivity(R.layout.activity_main) {
     }
 
     companion object {
-        private const val RC_GOOGLE_PLAY = 6
+        val TAG = MainActivity::class.simpleName
     }
 }

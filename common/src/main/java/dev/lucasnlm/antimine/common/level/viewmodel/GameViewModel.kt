@@ -21,10 +21,9 @@ import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.core.sound.ISoundManager
-import dev.lucasnlm.antimine.core.updateLanguage
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.preferences.models.ActionResponse
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
@@ -35,7 +34,6 @@ import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.Leaderboard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
@@ -68,10 +66,11 @@ open class GameViewModel(
             mineCount = null,
             minefield = Minefield(9, 9, 9),
             seed = 0L,
-            tips = tipRepository.getTotalTips(),
+            hints = tipRepository.getTotalTips(),
             isGameCompleted = false,
             isActive = false,
             hasMines = false,
+            isCreatingGame = false,
             useHelp = preferencesRepository.useHelp(),
             isLoadingMap = true,
             showTutorial = preferencesRepository.showTutorialButton(),
@@ -80,6 +79,10 @@ open class GameViewModel(
 
     override suspend fun mapEventToState(event: GameEvent): Flow<GameState> = flow {
         when (event) {
+            is GameEvent.CreatingGameEvent -> {
+                val newState = state.copy(isCreatingGame = true)
+                emit(newState)
+            }
             is GameEvent.SetGameActivation -> {
                 val newState = state.copy(isActive = event.active)
                 emit(newState)
@@ -88,10 +91,10 @@ open class GameViewModel(
                 sendSideEffect(GameEvent.ShowNewGameDialog)
             }
             is GameEvent.GiveMoreTip -> {
-                tipRepository.increaseTip(event.value)
+                tipRepository.increaseTip(5)
 
                 val newState = state.copy(
-                    tips = tipRepository.getTotalTips(),
+                    hints = tipRepository.getTotalTips(),
                 )
 
                 emit(newState)
@@ -100,7 +103,7 @@ open class GameViewModel(
                 if (tipRepository.removeTip()) {
                     val newState = state.copy(
                         field = gameController.field(),
-                        tips = tipRepository.getTotalTips(),
+                        hints = tipRepository.getTotalTips(),
                     )
                     emit(newState)
                 }
@@ -157,6 +160,7 @@ open class GameViewModel(
                     mineCount = gameController.remainingMines(),
                     isGameCompleted = isVictory || isGameOver || isComplete,
                     hasMines = hasMines,
+                    isCreatingGame = false,
                 )
 
                 if (!wasCompleted) {
@@ -239,7 +243,6 @@ open class GameViewModel(
                 useSimonTatham = preferencesRepository.useSimonTathamAlgorithm(),
                 onCreateUnsafeLevel = ::onCreateUnsafeLevel,
                 saveId = null,
-                difficulty = newDifficulty,
             )
 
             val newGameState = GameState(
@@ -249,10 +252,11 @@ open class GameViewModel(
                 minefield = minefield,
                 mineCount = minefield.mines,
                 field = gameController.field(),
-                tips = tipRepository.getTotalTips(),
+                hints = tipRepository.getTotalTips(),
                 isGameCompleted = false,
                 isActive = true,
                 hasMines = false,
+                isCreatingGame = false,
                 useHelp = preferencesRepository.useHelp(),
                 isLoadingMap = true,
                 showTutorial = preferencesRepository.showTutorialButton(),
@@ -293,8 +297,9 @@ open class GameViewModel(
             minefield = save.minefield,
             mineCount = gameController.remainingMines(),
             field = gameController.field(),
-            tips = tipRepository.getTotalTips(),
+            hints = tipRepository.getTotalTips(),
             isGameCompleted = isCompletedWithMistakes(),
+            isCreatingGame = false,
             isActive = !gameController.allMinesFound(),
             hasMines = true,
             useHelp = preferencesRepository.useHelp(),
@@ -325,7 +330,6 @@ open class GameViewModel(
             useSimonTatham = preferencesRepository.useSimonTathamAlgorithm(),
             saveId = save.uid,
             onCreateUnsafeLevel = ::onCreateUnsafeLevel,
-            difficulty = save.difficulty,
         )
         initialized = true
         refreshUserPreferences()
@@ -338,7 +342,8 @@ open class GameViewModel(
             minefield = save.minefield,
             mineCount = gameController.remainingMines(),
             field = gameController.field(),
-            tips = tipRepository.getTotalTips(),
+            hints = tipRepository.getTotalTips(),
+            isCreatingGame = false,
             isGameCompleted = false,
             isActive = true,
             hasMines = false,
@@ -461,6 +466,10 @@ open class GameViewModel(
     }
 
     open suspend fun onLongClick(index: Int) {
+        if (!gameController.hasMines()) {
+            sendEvent(GameEvent.CreatingGameEvent)
+        }
+
         gameController
             .longPress(index)
             .filterNotNull()
@@ -476,6 +485,10 @@ open class GameViewModel(
     }
 
     open suspend fun onDoubleClick(index: Int) {
+        if (!gameController.hasMines()) {
+            sendEvent(GameEvent.CreatingGameEvent)
+        }
+
         gameController
             .doubleClick(index)
             .filterNotNull()
@@ -487,6 +500,10 @@ open class GameViewModel(
     }
 
     open suspend fun onSingleClick(index: Int) {
+        if (!gameController.hasMines()) {
+            sendEvent(GameEvent.CreatingGameEvent)
+        }
+
         gameController
             .singleClick(index)
             .filterNotNull()
@@ -509,20 +526,23 @@ open class GameViewModel(
         updateGameState()
     }
 
-    private fun onFeedbackAnalytics(action: ActionResponse, index: Int) {
+    private fun onFeedbackAnalytics(action: Action, index: Int) {
         if (featureFlagManager.isGameplayAnalyticsEnabled) {
             when (action) {
-                ActionResponse.OpenTile -> {
+                Action.OpenTile -> {
                     analyticsManager.sentEvent(Analytics.OpenTile(index))
                 }
-                ActionResponse.SwitchMark -> {
+                Action.SwitchMark -> {
                     analyticsManager.sentEvent(Analytics.SwitchMark(index))
                 }
-                ActionResponse.OpenNeighbors -> {
+                Action.OpenNeighbors -> {
                     analyticsManager.sentEvent(Analytics.OpenNeighbors(index))
                 }
-                ActionResponse.OpenOrMark -> {
+                Action.OpenOrMark -> {
                     analyticsManager.sentEvent(Analytics.OpenOrFlagTile(index))
+                }
+                Action.QuestionMark -> {
+                    analyticsManager.sentEvent(Analytics.QuestionMark(index))
                 }
             }
         }
@@ -557,9 +577,10 @@ open class GameViewModel(
         }
     }
 
-    fun refreshUseOpenOnSwitchControl(useOpen: Boolean) {
+    fun changeSwitchControlAction(action: Action) {
         if (initialized) {
-            gameController.useOpenOnSwitchControl(useOpen)
+            preferencesRepository.setSwitchControl(action)
+            gameController.changeSwitchControlAction(action)
         }
     }
 
@@ -581,14 +602,15 @@ open class GameViewModel(
         gameController.revealAllEmptyAreas()
     }
 
-    fun revealRandomMine(consume: Boolean = true): Boolean {
-        return if (initialized && gameController.revealRandomMine()) {
-            if (consume) {
+    fun revealRandomMine(consume: Boolean = true): Int? {
+        return if (initialized) {
+            val result = gameController.revealRandomMine()
+            if (consume && result != null) {
                 sendEvent(GameEvent.ConsumeTip)
             }
-            true
+            result
         } else {
-            false
+            null
         }
     }
 
@@ -665,6 +687,10 @@ open class GameViewModel(
             showAllEmptyAreas()
             flagAllMines()
             showWrongFlags()
+
+            if (preferencesRepository.dimNumbers()) {
+                runNumberDimmerToAllMines()
+            }
         }
 
         if (state.difficulty == Difficulty.Standard || state.difficulty == Difficulty.FixedSize) {
@@ -687,19 +713,15 @@ open class GameViewModel(
         }
     }
 
-    fun isGameStarted(): Boolean {
-        return gameController.mines().isNotEmpty()
-    }
-
     private fun calcRewardHints(): Int {
         return if (clock.time() > 10L && preferencesRepository.isPremiumEnabled()) {
             val rewardedHints = if (isCompletedWithMistakes()) {
-                (state.minefield.mines * 0.025).toInt()
+                (state.minefield.mines * 0.025)
             } else {
-                (state.minefield.mines * 0.05).toInt()
+                (state.minefield.mines * 0.05)
             }
 
-            rewardedHints
+            rewardedHints.toInt().coerceAtLeast(1)
         } else {
             0
         }
@@ -798,10 +820,6 @@ open class GameViewModel(
     }
 
     fun getControlDescription(context: Context): SpannedString? {
-        preferencesRepository.getPreferredLocale()?.let {
-            context.updateLanguage(it)
-        }
-
         var openAction: String? = null
         var openReaction: String? = null
         var flagAction: String? = null
@@ -838,7 +856,7 @@ open class GameViewModel(
             }
         }
 
-        if (openAction != null && openReaction != null && flagAction != null && flagReaction != null) {
+        if (openAction != null) {
             val isLTL = Locale.getDefault().layoutDirection == LayoutDirection.LTR
 
             val first = buildSpannedString {

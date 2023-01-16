@@ -13,9 +13,7 @@ open class StatelessViewModel<Event> : ViewModel() {
 
     init {
         viewModelScope.launch {
-            observeEvent().collect {
-                onEvent(it)
-            }
+            observeEvent().collect(::onEvent)
         }
     }
 

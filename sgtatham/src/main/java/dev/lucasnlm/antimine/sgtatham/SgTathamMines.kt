@@ -4,7 +4,7 @@ class SgTathamMines {
     /**
      * Uses the same minefield generator of SgTatham mines game.
      */
-    external fun createMinefield(seed: String, width: Int, height: Int, mines: Int, x: Int, y: Int): String
+    external fun createMinefield(seed: Long, width: Int, height: Int, mines: Int, x: Int, y: Int): String
 
     companion object {
         // Used to load the 'sgtatham' library on application startup.

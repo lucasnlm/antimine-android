@@ -3,20 +3,16 @@ package dev.lucasnlm.antimine.gameover
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.appcompat.widget.AppCompatButton
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
@@ -30,7 +26,6 @@ import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.stats.StatsActivity
-import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.external.IAdsManager
@@ -110,13 +105,6 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             val subtitle: TextView = findViewById(R.id.subtitle)
                             val emoji: ImageView = findViewById(R.id.title_emoji)
                             val adFrame: FrameLayout = findViewById(R.id.adFrame)
-                            val dialog: ConstraintLayout = findViewById(R.id.dialog)
-
-                            val color = usingTheme.palette.background.toAndroidColor(255)
-                            val tint = ColorStateList.valueOf(color)
-
-                            dialog.backgroundTintList = tint
-                            adFrame.backgroundTintList = tint
 
                             title.text = state.title
                             subtitle.text = state.message
@@ -267,7 +255,15 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
             setView(view)
         }.create().apply {
             setCanceledOnTouchOutside(false)
-            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            window?.apply {
+                setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
+                    attributes?.blurBehindRadius = 8
+                }
+            }
         }
 
     private fun showSettings() {

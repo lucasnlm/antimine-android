@@ -1,56 +1,19 @@
 package dev.lucasnlm.antimine.about
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.lifecycleScope
-import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
-import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
-import dev.lucasnlm.antimine.about.views.info.AboutInfoFragment
-import dev.lucasnlm.antimine.about.views.licenses.LicensesFragment
-import dev.lucasnlm.antimine.ui.ext.ThematicActivity
-import kotlinx.android.synthetic.main.activity_about.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.fragment.app.commit
+import dev.lucasnlm.antimine.about.views.AboutInfoFragment
+import dev.lucasnlm.antimine.ui.ext.ThemedActivity
+import kotlinx.android.synthetic.main.activity_container.*
 
-class AboutActivity : ThematicActivity(R.layout.activity_about) {
-    private val aboutViewModel: AboutViewModel by viewModel()
-
+class AboutActivity : ThemedActivity(R.layout.activity_container) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        section.bind(
-            text = R.string.about,
-            startButton = R.drawable.back_arrow,
-            startDescription = R.string.back,
-            startAction = {
-                section.bindText(R.string.about)
-                onBackPressed()
-            },
-        )
+        bindToolbar(toolbar)
 
-        replaceFragment(AboutInfoFragment(), null)
-
-        lifecycleScope.launchWhenCreated {
-            aboutViewModel.observeEvent().collect { event ->
-                when (event) {
-                    AboutEvent.ThirdPartyLicenses -> {
-                        section.bindText(R.string.licenses)
-                        replaceFragment(LicensesFragment(), LicensesFragment.TAG)
-                    }
-                    else -> {
-                    }
-                }
-            }
+        supportFragmentManager.commit(allowStateLoss = true) {
+            replace(R.id.content, AboutInfoFragment())
         }
-    }
-
-    private fun replaceFragment(fragment: Fragment, stackName: String?) {
-        supportFragmentManager.beginTransaction().apply {
-            if (stackName != null) {
-                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                addToBackStack(stackName)
-            }
-            replace(R.id.content, fragment)
-        }.commitAllowingStateLoss()
     }
 }

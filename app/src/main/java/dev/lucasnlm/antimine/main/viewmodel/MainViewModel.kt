@@ -10,9 +10,9 @@ import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
+import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import dev.lucasnlm.antimine.splash.viewmodel.SplashViewModel
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.external.ICloudStorageManager
 import dev.lucasnlm.external.model.CloudSave
@@ -73,12 +73,10 @@ class MainViewModel(
         with(preferencesRepository) {
             setCompleteTutorial(completeTutorial == 1)
             completeFirstUse()
-            useTheme(selectedTheme.toLong())
-            setSquareRadius(squareRadius)
-            setSquareSize(squareSize)
+            if (selectedTheme > -1) { useTheme(selectedTheme.toLong()) }
+            useSkin(selectedSkin.toLong())
             setCustomLongPressTimeout(touchTiming.toLong())
             setQuestionMark(questionMark != 0)
-            setPreferredLocale(language)
             setFlagAssistant(gameAssistance != 0)
             setHapticFeedback(hapticFeedback != 0)
             setHapticFeedbackLevel(hapticFeedbackLevel)
@@ -89,10 +87,9 @@ class MainViewModel(
             useControlStyle(ControlStyle.values()[controlStyle])
             setOpenGameDirectly(openDirectly != 0)
             setUnlockedThemes(unlockedThemes)
-            setSquareDivider(squareDivider)
             setDoubleClickTimeout(doubleClickTimeout.toLong())
-            setLeftHandedMode(leftHanded != 0)
             setDimNumbers(dimNumbers != 0)
+            setTimerVisible(timerVisible != 0)
         }
 
         cloudSave.stats.mapNotNull {
@@ -115,7 +112,7 @@ class MainViewModel(
             try {
                 statsRepository.addAllStats(it)
             } catch (e: Exception) {
-                Log.e(SplashViewModel.TAG, "Fail to insert stats on DB")
+                Log.e(MainActivity.TAG, "Fail to insert stats on DB")
             }
         }
     }

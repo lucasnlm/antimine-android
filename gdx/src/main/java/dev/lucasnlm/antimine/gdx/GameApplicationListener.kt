@@ -4,11 +4,9 @@ import android.content.Context
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
-import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.input.GestureDetector
@@ -20,7 +18,6 @@ import dev.lucasnlm.antimine.gdx.controller.GameInputController
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
 import dev.lucasnlm.antimine.gdx.models.GameTextures
 import dev.lucasnlm.antimine.gdx.models.InternalPadding
-import dev.lucasnlm.antimine.gdx.models.RenderQuality
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
 import dev.lucasnlm.antimine.gdx.shaders.BlurShader
 import dev.lucasnlm.antimine.gdx.stages.MinefieldStage
@@ -30,27 +27,24 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.ui.ext.blue
 import dev.lucasnlm.antimine.ui.ext.green
 import dev.lucasnlm.antimine.ui.ext.red
-import dev.lucasnlm.antimine.ui.model.AppTheme
+import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 
 class GameApplicationListener(
     private val context: Context,
     private val appVersion: IAppVersionManager,
     private val preferencesRepository: IPreferencesRepository,
+    private val themeRepository: IThemeRepository,
     private val dimensionRepository: IDimensionRepository,
-    private val quality: RenderQuality,
-    private val theme: AppTheme,
     private val onSingleTap: (Int) -> Unit,
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTap: (Int) -> Unit,
     private val onEngineReady: () -> Unit,
     private val crashLogger: (String) -> Unit,
 ) : ApplicationAdapter() {
-    private val assetManager = AssetManager()
-
     private var minefieldStage: MinefieldStage? = null
     private var boundAreas: List<Area> = listOf()
     private var boundMinefield: Minefield? = null
-    private val useBlur = quality != RenderQuality.Low && context.isPortrait()
+    private val useBlur = context.isPortrait()
 
     private var batch: SpriteBatch? = null
     private var mainFrameBuffer: FrameBuffer? = null
@@ -58,16 +52,13 @@ class GameApplicationListener(
     private var blurShader: ShaderProgram? = null
 
     private val renderSettings = RenderSettings(
-        theme = theme,
+        theme = themeRepository.getTheme(),
         internalPadding = getInternalPadding(),
         areaSize = dimensionRepository.areaSize(),
         navigationBarHeight = dimensionRepository.navigationBarHeight().toFloat(),
         appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
         appBarHeight = if (context.isPortrait()) { dimensionRepository.actionBarSize().toFloat() } else { 0f },
-        radius = preferencesRepository.squareRadius().toFloat(),
-        squareDivider = preferencesRepository.squareDivider().toFloat() * 2,
-        joinAreas = preferencesRepository.squareDivider() == 0,
-        quality = quality,
+        joinAreas = themeRepository.getSkin().joinAreas,
     )
 
     private var actionSettings = with(preferencesRepository) {
@@ -82,7 +73,7 @@ class GameApplicationListener(
 
     private val minefieldInputController = GameInputController(
         onChangeZoom = {
-            GdxLocal.zoom = it
+            GameContext.zoom = it
             minefieldStage?.scaleZoom(it)
         },
     )
@@ -108,9 +99,6 @@ class GameApplicationListener(
             }
         }
 
-        assetManager.load(TextureConstants.atlasName, TextureAtlas::class.java)
-        assetManager.finishLoading()
-
         minefieldStage = MinefieldStage(
             screenWidth = width.toFloat(),
             screenHeight = height.toFloat(),
@@ -125,47 +113,53 @@ class GameApplicationListener(
             bindSize(boundMinefield)
         }
 
-        GdxLocal.run {
-            val expectedSize = dimensionRepository.areaSize()
-            val radiusLevel = preferencesRepository.squareRadius()
-            val atlas = assetManager.get<TextureAtlas>(TextureConstants.atlasName)
+        val currentSkin = themeRepository.getSkin()
 
-            animationScale = if (preferencesRepository.useAnimations()) 1f else 100.0f
+        GameContext.run {
+            canTintAreas = currentSkin.canTint
 
-            areaAtlas = AreaAssetBuilder.getAreaTextureAtlas(
-                radiusLevel = radiusLevel,
-                squareDivider = renderSettings.squareDivider,
-                quality = quality,
-            )
-            textureAtlas = atlas
-            gameTextures = GameTextures(
-                areaHighlight = AreaAssetBuilder.getAreaBorderTexture(
-                    expectedSize = expectedSize,
-                    squareDivider = renderSettings.squareDivider,
-                    radiusLevel = radiusLevel,
-                ),
-                areaCovered = AreaAssetBuilder.getAreaTexture(
-                    expectedSize = expectedSize,
-                    radiusLevel = radiusLevel,
-                ),
-                aroundMines = listOf(
-                    atlas.findRegion(TextureConstants.around1),
-                    atlas.findRegion(TextureConstants.around2),
-                    atlas.findRegion(TextureConstants.around3),
-                    atlas.findRegion(TextureConstants.around4),
-                    atlas.findRegion(TextureConstants.around5),
-                    atlas.findRegion(TextureConstants.around6),
-                    atlas.findRegion(TextureConstants.around7),
-                    atlas.findRegion(TextureConstants.around8),
-                ),
-                mine = atlas.findRegion(TextureConstants.mine),
-                flag = atlas.findRegion(TextureConstants.flag),
-                question = atlas.findRegion(TextureConstants.question),
-                detailedArea = AreaAssetBuilder.getAreaTexture(
-                    expectedSize = expectedSize,
-                    radiusLevel = radiusLevel,
-                ),
-            )
+            atlas = GameTextureAtlas.loadTextureAtlas(
+                skinFile = currentSkin.file,
+                defaultBackground = currentSkin.background,
+            ).apply {
+                gameTextures = GameTextures(
+                    areaBackground = findRegion(AtlasNames.singleBackground),
+                    aroundMines = listOf(
+                        AtlasNames.number1,
+                        AtlasNames.number2,
+                        AtlasNames.number3,
+                        AtlasNames.number4,
+                        AtlasNames.number5,
+                        AtlasNames.number6,
+                        AtlasNames.number7,
+                        AtlasNames.number8,
+                    ).map(::findRegion),
+                    pieces = listOf(
+                        AtlasNames.core,
+                        AtlasNames.bottom,
+                        AtlasNames.top,
+                        AtlasNames.right,
+                        AtlasNames.left,
+                        AtlasNames.cornerTopLeft,
+                        AtlasNames.cornerTopRight,
+                        AtlasNames.cornerBottomRight,
+                        AtlasNames.cornerBottomLeft,
+                        AtlasNames.borderCornerTopRight,
+                        AtlasNames.borderCornerTopLeft,
+                        AtlasNames.borderCornerBottomRight,
+                        AtlasNames.borderCornerBottomLeft,
+                        AtlasNames.fillTopLeft,
+                        AtlasNames.fillTopRight,
+                        AtlasNames.fillBottomRight,
+                        AtlasNames.fillBottomLeft,
+                        AtlasNames.full,
+                    ).associateWith(::findRegion),
+                    mine = findRegion(AtlasNames.mine),
+                    flag = findRegion(AtlasNames.flag),
+                    question = findRegion(AtlasNames.question),
+                    detailedArea = findRegion(AtlasNames.single),
+                )
+            }
         }
 
         Gdx.input.inputProcessor = InputMultiplexer(GestureDetector(minefieldInputController), minefieldStage)
@@ -179,22 +173,22 @@ class GameApplicationListener(
         blurFrameBuffer?.dispose()
         batch?.dispose()
 
-        GdxLocal.run {
+        GameContext.run {
             zoomLevelAlpha = 1.0f
-            animationScale = 1.0f
-            gameTextures?.run {
-                areaHighlight.dispose()
-                detailedArea.dispose()
-            }
-            textureAtlas?.dispose()
-            areaAtlas?.dispose()
-            areaAtlas = null
-            textureAtlas = null
+            gameTextures = null
+            atlas?.dispose()
+            atlas = null
         }
 
         Gdx.input.inputProcessor = null
         boundMinefield = null
-        assetManager.dispose()
+    }
+
+    fun onPause() {
+        GameContext.run {
+            zoom = 1.0f
+            minefieldStage?.setZoom(1.0f)
+        }
     }
 
     override fun render() {
@@ -203,6 +197,7 @@ class GameApplicationListener(
         val minefieldStage = this.minefieldStage
         val batch = this.batch
         val blurShader = this.blurShader
+        val currentTheme = themeRepository.getTheme()
 
         if (useBlur) {
             val width = Gdx.graphics.width
@@ -210,7 +205,7 @@ class GameApplicationListener(
 
             mainFrameBuffer?.begin()
             minefieldStage?.run {
-                theme.palette.background.run {
+                currentTheme.palette.background.run {
                     Gdx.gl.glClearColor(red(), green(), blue(), 1f)
                     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
                 }
@@ -227,7 +222,7 @@ class GameApplicationListener(
             batch?.run {
                 begin()
 
-                theme.palette.background.run {
+                currentTheme.palette.background.run {
                     Gdx.gl.glClearColor(red(), green(), blue(), 1f)
                     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
                 }
@@ -278,7 +273,7 @@ class GameApplicationListener(
             }
 
             minefieldStage?.run {
-                theme.palette.background.run {
+                currentTheme.palette.background.run {
                     Gdx.gl.glClearColor(red(), green(), blue(), 1f)
                     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
                 }
@@ -324,7 +319,7 @@ class GameApplicationListener(
     }
 
     fun setActionsEnabled(enabled: Boolean) {
-        GdxLocal.actionsEnabled = enabled
+        GameContext.actionsEnabled = enabled
     }
 
     fun onChangeGame() {
@@ -332,7 +327,7 @@ class GameApplicationListener(
     }
 
     fun refreshZoom() {
-        minefieldStage?.setZoom(GdxLocal.zoom)
+        minefieldStage?.setZoom(GameContext.zoom)
     }
 
     fun refreshSettings() {

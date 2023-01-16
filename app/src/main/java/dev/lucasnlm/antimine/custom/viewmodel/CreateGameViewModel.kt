@@ -7,6 +7,9 @@ import kotlinx.coroutines.flow.flow
 class CreateGameViewModel(
     private val preferencesRepository: IPreferencesRepository,
 ) : IntentViewModel<CustomEvent, CustomState>() {
+    init {
+        preferencesRepository.forgetCustomSeed()
+    }
 
     override suspend fun mapEventToState(event: CustomEvent) = flow {
         if (event is CustomEvent.UpdateCustomGameEvent) {

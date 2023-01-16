@@ -12,18 +12,23 @@ import dev.lucasnlm.antimine.support.AppVersionManagerImpl
 import dev.lucasnlm.antimine.support.IapHandler
 import dev.lucasnlm.external.ExternalAnalyticsWrapper
 import dev.lucasnlm.external.IAnalyticsManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val AppModule = module {
+    factory { CoroutineScope(Dispatchers.Main + SupervisorJob()) }
+
     single { IapHandler(get(), get(), get()) }
 
     single {
         HapticFeedbackManagerImpl(get(), get())
     } bind HapticFeedbackManager::class
 
-    single { CloudSaveManagerImpl(get(), get(), get(), get()) } bind CloudSaveManager::class
+    single { CloudSaveManagerImpl(get(), get(), get(), get(), get()) } bind CloudSaveManager::class
 
     single { AppVersionManagerImpl(BuildConfig.DEBUG, androidApplication()) } bind IAppVersionManager::class
 

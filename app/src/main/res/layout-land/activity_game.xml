@@ -74,7 +74,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?selectableItemBackgroundBorderless"
                 android:contentDescription="@string/back"
-                android:padding="14dp"
+                android:padding="20dp"
                 app:srcCompat="@drawable/arrow_left" />
 
             <LinearLayout
@@ -126,26 +126,16 @@
                     tools:visibility="visible" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/topBarToggle"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?selectableItemBackgroundBorderless"
-                android:contentDescription="@string/switch_control"
-                android:padding="16dp"
-                android:src="@drawable/touch"
-                android:visibility="gone" />
-
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.progressindicator.CircularProgressIndicator
-                    android:id="@+id/tipCooldown"
+                    android:id="@+id/hintCooldown"
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:layout_gravity="center"
-                    app:indicatorColor="?attr/colorPrimary"
+                    app:indicatorColor="?colorPrimary"
                     app:indicatorSize="24dp"
                     app:trackThickness="3dp" />
 
@@ -158,12 +148,12 @@
                     android:background="?selectableItemBackgroundBorderless"
                     android:clickable="false"
                     android:contentDescription="@string/new_game"
-                    android:padding="14dp"
+                    android:padding="20dp"
                     app:srcCompat="@drawable/retry"
                     tools:alpha="1.0" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tipsCounter"
+                    android:id="@+id/hintCounter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -175,9 +165,19 @@
                     tools:visibility="visible" />
 
             </FrameLayout>
-
         </LinearLayout>
-
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/loadingGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:trackThickness="2dp"
+        android:indeterminate="true"
+        app:hideAnimationBehavior="outward"
+        app:showAnimationBehavior="inward"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

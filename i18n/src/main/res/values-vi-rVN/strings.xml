@@ -18,6 +18,8 @@
     <string name="legend">Huyền thoại</string>
     <string name="open">Mở</string>
     <string name="settings">Cài đặt</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">Hiệu ứng động</string>
     <string name="vibration">Phản hồi rung</string>
     <string name="about">Giới thiệu</string>
@@ -27,6 +29,7 @@
     <string name="width">Chiều rộng</string>
     <string name="height">Chiều cao</string>
     <string name="mines">Mìn</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">Nếu chơi trò chơi mới,\ntrò chơi đang chơi dở sẽ bị mất.</string>
     <string name="show_licenses">Hiển thị giấy phép</string>
     <string name="new_game_request">Bạn có chắc muốn bắt đầu trò chơi mới?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Tổng quan</string>
     <string name="settings_gameplay">Cách thức chơi</string>
     <string name="settings_accessibility">Trợ năng</string>
-    <string name="size">Kích thước</string>
-    <string name="rounded_square">Hình vuông bo góc</string>
-    <string name="space_between_squares">Khoảng cách giữa các ô vuông</string>
     <string name="system">Hệ thống</string>
     <string name="sign_in_failed">Không đăng nhập được. Hãy kiểm tra lại kết nối mạng và thử lại.</string>
     <string name="you_won">Thắng rồi!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Dùng dấu hỏi</string>
     <string name="no_guessing_mode">Chế độ \'không đoán\'</string>
     <string name="control">Điều khiển</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">Nhấn 1 lần</string>
     <string name="double_click">Nhấn đúp</string>
     <string name="long_press">Nhấn giữ</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Tiếp tục</string>
     <string name="empty">Trống</string>
     <string name="cant_do_it_now">Không thể làm điều đó bây giờ</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">Bạn đã nhận được: +%1$d</string>
-    <string name="help_win_a_game">Để có thêm Trợ giúp, bạn phải thắng một trò chơi.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Lỗi không xác định.</string>
     <string name="leaderboards">Bảng xếp hạng</string>
     <string name="cancel">Huỷ</string>
     <string name="resume">Tiếp tục</string>
     <string name="yes">Có</string>
     <string name="unlock">Mở khoá</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">Thành tựu</string>
     <string name="no">Không</string>
     <string name="general">Tổng quan</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Giấy phép</string>
     <string name="google_play_games">Google Play Trò chơi</string>
     <string name="loading">Đang tải…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">Kết nối</string>
     <string name="connecting">Đang kết nối…</string>
     <string name="disconnect">Ngừng kết nối</string>
@@ -101,7 +106,7 @@
     <string name="themes">Chủ đề</string>
     <string name="delete_all_message">Xóa tất cả các sự kiện vĩnh viễn.</string>
     <string name="remove_ad">Loại bỏ quảng cáo</string>
-    <string name="help">Trợ Giúp</string>
+    <string name="help">Hint</string>
     <string name="back">Trở lại</string>
     <string name="donation">Quyên góp</string>
     <string name="open_on_game">Mở màn hình chơi</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Cho phép nhấn vào các con số</string>
     <string name="flag_when_tap_numbers">Gắn cờ khi nhấn vào các con số</string>
     <string name="tap_to_customize">Nhấn để tuỳ chỉnh</string>
-    <string name="toggle_button_top">Hiện \"Nút chuyển\" trên thanh ở trên cùng</string>
     <string name="no_guess_fail_warning">Bãi mìn hiện tại có thể sẽ không giải được mà không đoán!</string>
     <string name="fixed_size">Kích thước cố định</string>
     <string name="progressive">Tiến trình</string>
     <string name="highlight_unsolved_numbers">Đánh dấu các số chưa giải</string>
-    <string name="left_handed">Thuận tay trái</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">Nếu bạn thích trò chơi này, hãy cân nhắc ủng hộ tôi.</string>
     <string name="donate_help">Việc đó sẽ giúp giữ cho dự án này hoạt động!</string>
 </resources>

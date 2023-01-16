@@ -18,6 +18,8 @@
     <string name="legend">Légende</string>
     <string name="open">Ouvrir</string>
     <string name="settings">Réglages</string>
+    <string name="control_settings">Paramètres de contrôle</string>
+    <string name="shapes">Formes</string>
     <string name="animations">Animations</string>
     <string name="vibration">Retour tactile</string>
     <string name="about">À propos</string>
@@ -27,6 +29,7 @@
     <string name="width">Largeur</string>
     <string name="height">Hauteur</string>
     <string name="mines">Mines</string>
+    <string name="seed">Graine</string>
     <string name="retry_sure">Si vous commencez une nouvelle partie,\nvotre progression actuelle sera perdue.</string>
     <string name="show_licenses">Afficher les licences</string>
     <string name="new_game_request">Voulez-vous commencer une nouvelle partie ?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Général</string>
     <string name="settings_gameplay">Jouabilité</string>
     <string name="settings_accessibility">Accessibilité</string>
-    <string name="size">Taille</string>
-    <string name="rounded_square">Carré arrondi</string>
-    <string name="space_between_squares">Espace entre les cases</string>
     <string name="system">Système</string>
     <string name="sign_in_failed">Erreur lors de la connexion. Vérifiez l\'état de votre connexion Internet et réessayez.</string>
     <string name="you_won">Victoire !</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Utiliser des drapeaux points d’interrogation</string>
     <string name="no_guessing_mode">Mode sans prédiction</string>
     <string name="control">Contrôles</string>
+    <string name="control_types">Types de contrôles</string>
     <string name="single_click">Appui court</string>
     <string name="double_click">Appui Double</string>
     <string name="long_press">Appui Long</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Continuer</string>
     <string name="empty">Vide</string>
     <string name="cant_do_it_now">Impossible de faire ça maintenant</string>
+    <string name="mine_revealed">Une mine a été révélée</string>
+    <string name="fail_to_load_ad">Échec du chargement de la publicité</string>
     <string name="you_have_received">Vous avez reçu : +%1$d</string>
-    <string name="help_win_a_game">Pour plus d\'aide, vous devez gagner une partie.</string>
+    <string name="help_win_a_game">Pour plus d\'indices, vous devez gagner une partie.</string>
     <string name="unknown_error">Erreur inconnue.</string>
     <string name="leaderboards">Classements</string>
     <string name="cancel">Annuler</string>
     <string name="resume">Nouv. partie</string>
     <string name="yes">Oui</string>
     <string name="unlock">Déverrouiller</string>
+    <string name="unlock_all">Débloquer tout</string>
     <string name="achievements">Succès</string>
     <string name="no">Non</string>
     <string name="general">Général</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Licences</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Chargement…</string>
+    <string name="creating_valid_game">Création d\'une partie valide…</string>
     <string name="connect">Connexion</string>
     <string name="connecting">Connexion en cours…</string>
     <string name="disconnect">Déconnexion</string>
@@ -101,7 +106,7 @@
     <string name="themes">Thèmes</string>
     <string name="delete_all_message">Supprimer définitivement tous les événements.</string>
     <string name="remove_ad">Supprimer les publicités</string>
-    <string name="help">Aide</string>
+    <string name="help">Indice</string>
     <string name="back">Retour</string>
     <string name="donation">Faire un don</string>
     <string name="open_on_game">Ouvrir dans l\'écran de jeu</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Permettre de cliquer sur les numéros</string>
     <string name="flag_when_tap_numbers">Placer un drapeau quand on clique sur des numéros</string>
     <string name="tap_to_customize">Appuyer pour personnaliser</string>
-    <string name="toggle_button_top">Afficher \"Bouton Activer\" sur la barre du haut</string>
     <string name="no_guess_fail_warning">Le champ de mines actuel ne peut pas être résolu sans deviner !</string>
     <string name="fixed_size">Taille fixe</string>
     <string name="progressive">Progressif</string>
     <string name="highlight_unsolved_numbers">Mettre en évidence les nombres non résolus</string>
-    <string name="left_handed">Gaucher</string>
+    <string name="show_clock">Afficher l’horloge</string>
     <string name="donate_request">Si vous appréciez ce jeu, pensez à faire un don.</string>
     <string name="donate_help">Cela aidera à maintenir ce projet actif !</string>
 </resources>

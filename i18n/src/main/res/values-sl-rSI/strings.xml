@@ -21,7 +21,6 @@
     <string name="settings">Nastavitve</string>
     <string name="animations">Animacije</string>
     <string name="vibration">Vibracija na dotik</string>
-    <string name="haptic_feedback_level">Intenzivnost vibracij</string>
     <string name="about">O aplikaciji</string>
     <string name="events">Statistika</string>
     <string name="custom">Po meri</string>
@@ -34,7 +33,6 @@
     <string name="new_game_request">Ali želite pričeti novo igro?</string>
     <string name="mines_remaining">%d min</string>
     <string name="game_time">Čas igre</string>
-    <string name="mine">Mine</string>
     <string name="settings_general">Splošne</string>
     <string name="settings_gameplay">Igralne</string>
     <string name="settings_accessibility">Dostopne</string>
@@ -42,7 +40,6 @@
     <string name="rounded_square">Zaobljenost robov</string>
     <string name="space_between_squares">Razmak med polji</string>
     <string name="system">Sistem</string>
-    <string name="rating">Povratne informacije</string>
     <string name="sign_in_failed">Napaka pri prijavi. Prosim preverite internetno povezavo in poizkusite ponovno.</string>
     <string name="you_won">Zmaga!</string>
     <string name="victories">Zmage</string>

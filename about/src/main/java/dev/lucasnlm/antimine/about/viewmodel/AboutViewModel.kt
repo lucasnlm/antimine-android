@@ -5,15 +5,19 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
 import dev.lucasnlm.antimine.about.R
-import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
+import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
+import dev.lucasnlm.antimine.licenses.LicenseActivity
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
 
 class AboutViewModel(
     private val application: Application,
-) : IntentViewModel<AboutEvent, AboutState>() {
+) : StatelessViewModel<AboutEvent>() {
 
     override fun onEvent(event: AboutEvent) {
         when (event) {
+            AboutEvent.ThirdPartyLicenses -> {
+                openLicensesActivity()
+            }
             AboutEvent.SourceCode -> {
                 openSourceCode()
             }
@@ -23,22 +27,16 @@ class AboutViewModel(
             AboutEvent.Tutorial -> {
                 openTutorial()
             }
-            else -> { }
         }
     }
 
-    private fun getLicensesList() = mapOf(
-        "Android SDK License" to R.raw.android_sdk,
-        "Koin" to R.raw.apache2,
-        "LibGDX" to R.raw.apache2,
-        "Material Design" to R.raw.apache2,
-        "Moshi" to R.raw.apache2,
-        "Mockk" to R.raw.apache2,
-        "Noto Emoji" to R.raw.apache2,
-        "Sounds" to R.raw.sounds,
-    ).map {
-        License(it.key, it.value)
-    }.toList()
+    private fun openLicensesActivity() {
+        val context = application.applicationContext
+        val intent = Intent(context, LicenseActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        context.startActivity(intent)
+    }
 
     private fun openTutorial() {
         val context = application.applicationContext
@@ -71,11 +69,6 @@ class AboutViewModel(
             Toast.makeText(context.applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT).show()
         }
     }
-
-    override fun initialState(): AboutState =
-        AboutState(
-            licenses = getLicensesList(),
-        )
 
     companion object {
         private const val SOURCE_CODE = "https://github.com/lucasnlm/antimine-android"

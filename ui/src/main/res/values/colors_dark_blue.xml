@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colors_dark_blue_primary">#99CBFF</color>
+    <color name="colors_dark_blue_onPrimary">#003355</color>
+    <color name="colors_dark_blue_primaryContainer">#004A78</color>
+    <color name="colors_dark_blue_onPrimaryContainer">#CFE5FF</color>
+    <color name="colors_dark_blue_secondary">#B9C8DA</color>
+    <color name="colors_dark_blue_onSecondary">#243240</color>
+    <color name="colors_dark_blue_secondaryContainer">#3A4857</color>
+    <color name="colors_dark_blue_onSecondaryContainer">#D5E4F7</color>
+    <color name="colors_dark_blue_tertiary">#99CBFF</color>
+    <color name="colors_dark_blue_onTertiary">#003355</color>
+    <color name="colors_dark_blue_tertiaryContainer">#004A78</color>
+    <color name="colors_dark_blue_onTertiaryContainer">#CFE5FF</color>
+    <color name="colors_dark_blue_error">#FFB4AB</color>
+    <color name="colors_dark_blue_errorContainer">#93000A</color>
+    <color name="colors_dark_blue_onError">#690005</color>
+    <color name="colors_dark_blue_onErrorContainer">#FFDAD6</color>
+    <color name="colors_dark_blue_background">#1A1C1E</color>
+    <color name="colors_dark_blue_onBackground">#E2E2E5</color>
+    <color name="colors_dark_blue_surface">#1A1C1E</color>
+    <color name="colors_dark_blue_onSurface">#E2E2E5</color>
+    <color name="colors_dark_blue_surfaceVariant">#42474E</color>
+    <color name="colors_dark_blue_onSurfaceVariant">#C2C7CF</color>
+    <color name="colors_dark_blue_outline">#8C9199</color>
+    <color name="colors_dark_blue_inverseOnSurface">#1A1C1E</color>
+    <color name="colors_dark_blue_inverseSurface">#E2E2E5</color>
+    <color name="colors_dark_blue_inversePrimary">#00629D</color>
+    <color name="colors_dark_blue_shadow">#000000</color>
+    <color name="colors_dark_blue_surfaceTint">#99CBFF</color>
+    <color name="colors_dark_blue_outlineVariant">#42474E</color>
+    <color name="colors_dark_blue_scrim">#000000</color>
+</resources>

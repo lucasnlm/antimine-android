@@ -5,7 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
@@ -18,6 +21,10 @@ class HistoryAdapter(
     private val saveHistory: List<Save>,
     private val statelessViewModel: StatelessViewModel<HistoryEvent>,
 ) : RecyclerView.Adapter<HistoryViewHolder>() {
+    init {
+        setHasStableIds(true)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         val view = LayoutInflater
             .from(parent.context)
@@ -25,10 +32,22 @@ class HistoryAdapter(
         return HistoryViewHolder(view)
     }
 
-    override fun getItemCount(): Int = saveHistory.size
+    override fun getItemId(position: Int): Long {
+        return saveHistory[position].uid.toLong()
+    }
+
+    override fun getItemCount(): Int {
+        return saveHistory.size
+    }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) = with(saveHistory[position]) {
-        holder.difficulty.text = holder.itemView.context.getString(
+        val context = holder.itemView.context
+        val buttonBackgroundColor = MaterialColors.getColorStateListOrNull(
+            context,
+            dev.lucasnlm.antimine.control.R.attr.colorOnBackground,
+        )?.withAlpha(50)
+
+        val difficultyText = context.getString(
             when (difficulty) {
                 Difficulty.Beginner -> R.string.beginner
                 Difficulty.Intermediate -> R.string.intermediate
@@ -41,30 +60,33 @@ class HistoryAdapter(
             },
         )
 
-        val context = holder.itemView.context
-        holder.flag.setColorFilter(holder.minesCount.currentTextColor)
-        holder.flag.alpha = if (status == SaveStatus.VICTORY) 1.0f else 0.35f
+        val gameNameText = "$difficultyText #$uid"
+
+        holder.difficulty.text = gameNameText
+
+        holder.flag.alpha = if (status == SaveStatus.VICTORY) 1.0f else 0.5f
 
         holder.minefieldSize.text = String.format("%d x %d", minefield.width, minefield.height)
         holder.minesCount.text = context.getString(R.string.mines_remaining, minefield.mines)
 
         if (status != SaveStatus.VICTORY) {
-            holder.replay.setImageResource(R.drawable.replay)
-            holder.replay.setColorFilter(holder.minesCount.currentTextColor)
+            holder.replay.icon = ContextCompat.getDrawable(context, R.drawable.replay)
             holder.replay.setOnClickListener {
                 statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
             }
+            holder.replay.backgroundTintList = buttonBackgroundColor
         } else {
-            holder.replay.setImageResource(R.drawable.play)
-            holder.replay.setColorFilter(holder.minesCount.currentTextColor)
+            holder.replay.icon = ContextCompat.getDrawable(context, R.drawable.play)
             holder.replay.setOnClickListener {
-                statelessViewModel.sendEvent(HistoryEvent.LoadSave(uid))
+                statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
             }
+            holder.replay.backgroundTintList = buttonBackgroundColor
         }
 
-        holder.itemView.setOnClickListener {
+        holder.open.setOnClickListener {
             statelessViewModel.sendEvent(HistoryEvent.LoadSave(uid))
         }
+        holder.open.backgroundTintList = buttonBackgroundColor
     }
 }
 
@@ -73,5 +95,6 @@ class HistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val difficulty: TextView = view.difficulty
     val minefieldSize: TextView = view.minefieldSize
     val minesCount: TextView = view.minesCount
-    val replay: AppCompatImageView = view.replay
+    val replay: MaterialButton = view.replay
+    val open: MaterialButton = view.open
 }

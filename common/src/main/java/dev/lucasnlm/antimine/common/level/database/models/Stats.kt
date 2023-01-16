@@ -1,9 +1,11 @@
 package dev.lucasnlm.antimine.common.level.database.models
 
+import androidx.annotation.Keep
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+@Keep
 @Entity
 data class Stats(
     @PrimaryKey(autoGenerate = true)

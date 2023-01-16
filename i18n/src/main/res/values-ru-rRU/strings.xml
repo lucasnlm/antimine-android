@@ -18,6 +18,8 @@
     <string name="legend">Сложность</string>
     <string name="open">Открыть</string>
     <string name="settings">Настройки</string>
+    <string name="control_settings">Настройки управления</string>
+    <string name="shapes">Формы</string>
     <string name="animations">Анимации</string>
     <string name="vibration">Виброотклик</string>
     <string name="about">Об игре</string>
@@ -27,6 +29,7 @@
     <string name="width">Ширина</string>
     <string name="height">Высота</string>
     <string name="mines">Мины</string>
+    <string name="seed">Ключ генерации</string>
     <string name="retry_sure">Если Вы начнёте новую игру,\nтекущий прогресс будет сброшен.</string>
     <string name="show_licenses">Показать лицензии</string>
     <string name="new_game_request">Начать новую игру?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Общее</string>
     <string name="settings_gameplay">Геймплей</string>
     <string name="settings_accessibility">Специальные возможности</string>
-    <string name="size">Размер</string>
-    <string name="rounded_square">Скругленный квадрат</string>
-    <string name="space_between_squares">Расстояние между квадратами</string>
     <string name="system">Система</string>
     <string name="sign_in_failed">Подключение невозможно. Проверьте интернет-подключение и повторите попытку.</string>
     <string name="you_won">Вы выиграли!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Использовать знак вопроса</string>
     <string name="no_guessing_mode">Режим \'Без угадывания\'</string>
     <string name="control">Управление</string>
+    <string name="control_types">Тип управления</string>
     <string name="single_click">Одиночное нажатие</string>
     <string name="double_click">Двойное нажатие</string>
     <string name="long_press">Длительное нажатие</string>
@@ -71,6 +72,8 @@
     <string name="continue_game">Продолжить</string>
     <string name="empty">Пусто</string>
     <string name="cant_do_it_now">Невозможно сделать это сейчас</string>
+    <string name="mine_revealed">Была обнаружена мина</string>
+    <string name="fail_to_load_ad">Ошибка загрузки рекламы</string>
     <string name="you_have_received">Вы получили: +%1$d</string>
     <string name="help_win_a_game">Для получения дополнительной помощи вы должны выиграть игру.</string>
     <string name="unknown_error">Неизвестная ошибка.</string>
@@ -79,6 +82,7 @@
     <string name="resume">Продолжить</string>
     <string name="yes">Да</string>
     <string name="unlock">Разблокировать</string>
+    <string name="unlock_all">Открыть все</string>
     <string name="achievements">Достижения</string>
     <string name="no">Нет</string>
     <string name="general">Общее</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Лицензии</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Загрузка…</string>
+    <string name="creating_valid_game">Создание корректной игры…</string>
     <string name="connect">Подключиться</string>
     <string name="connecting">Подключение…</string>
     <string name="disconnect">Отключиться</string>
@@ -101,7 +106,7 @@
     <string name="themes">Темы</string>
     <string name="delete_all_message">Удалить все события навсегда.</string>
     <string name="remove_ad">Удалить рекламу</string>
-    <string name="help">Помощь</string>
+    <string name="help">Совет</string>
     <string name="back">Назад</string>
     <string name="donation">Пожертвование</string>
     <string name="open_on_game">Открыть на экране игры</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Разрешить нажатие на цифры</string>
     <string name="flag_when_tap_numbers">Отметить флагом при нажатии на цифры</string>
     <string name="tap_to_customize">Нажмите, чтобы настроить</string>
-    <string name="toggle_button_top">Отображать \"Переключить кнопку\" на верхней панели</string>
     <string name="no_guess_fail_warning">Вам может понадобиться подсказка, чтобы пройти этот уровень!</string>
     <string name="fixed_size">Фиксированный размер</string>
     <string name="progressive">Прогрессивный</string>
     <string name="highlight_unsolved_numbers">Подсвечивать неразгаданные числа</string>
-    <string name="left_handed">Режим левши</string>
+    <string name="show_clock">Отображать часы</string>
     <string name="donate_request">Если вам нравится эта игра, подумайте о том, чтобы сделать пожертвование.</string>
     <string name="donate_help">Это поможет сохранить проект активным!</string>
 </resources>

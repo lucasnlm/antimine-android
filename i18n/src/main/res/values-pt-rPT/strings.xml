@@ -18,6 +18,8 @@
     <string name="legend">Lenda</string>
     <string name="open">Abrir</string>
     <string name="settings">Configurações</string>
+    <string name="control_settings">Configurações de controlo</string>
+    <string name="shapes">Formas</string>
     <string name="animations">Animações</string>
     <string name="vibration">Resposta tátil</string>
     <string name="about">Sobre</string>
@@ -27,6 +29,7 @@
     <string name="width">Largura</string>
     <string name="height">Altura</string>
     <string name="mines">Minas</string>
+    <string name="seed">Semente</string>
     <string name="retry_sure">Se iniciares um novo jogo, o teu progresso atual será perdido.</string>
     <string name="show_licenses">Mostrar licenças</string>
     <string name="new_game_request">Queres começar um novo jogo?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Geral</string>
     <string name="settings_gameplay">Jogabilidade</string>
     <string name="settings_accessibility">Acessibilidade</string>
-    <string name="size">Tamanho</string>
-    <string name="rounded_square">Quadrado arredondado</string>
-    <string name="space_between_squares">Espaço entre quadrados</string>
     <string name="system">Sistema</string>
     <string name="sign_in_failed">Não foi possível fazer a autenticação. Por favor verifica a tua ligação à Internet e tenta de novo.</string>
     <string name="you_won">Ganhaste!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Usar ponto de interrogação</string>
     <string name="no_guessing_mode">Modo \"sem adivinhação\"</string>
     <string name="control">Controlos</string>
+    <string name="control_types">Tipos de Control</string>
     <string name="single_click">Toque único</string>
     <string name="double_click">Toque duplo</string>
     <string name="long_press">Toque longo</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Continuar</string>
     <string name="empty">Vazio</string>
     <string name="cant_do_it_now">Impossível fazer isso agora</string>
+    <string name="mine_revealed">Uma mina foi revelada</string>
+    <string name="fail_to_load_ad">Falha ao carregar anúncio</string>
     <string name="you_have_received">Recebeste: +%1$d</string>
-    <string name="help_win_a_game">Para mais ajuda, tens de ganhar um jogo.</string>
+    <string name="help_win_a_game">Para mais dicas, tens de ganhar um jogo.</string>
     <string name="unknown_error">Erro desconhecido.</string>
     <string name="leaderboards">Quadro de pontuações</string>
     <string name="cancel">Cancelar</string>
     <string name="resume">Continuar</string>
     <string name="yes">Sim</string>
     <string name="unlock">Desbloquear</string>
+    <string name="unlock_all">Desbloquear tudo</string>
     <string name="achievements">Conquistas</string>
     <string name="no">Não</string>
     <string name="general">Geral</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Licenças</string>
     <string name="google_play_games">Google Play Jogos</string>
     <string name="loading">A carregar…</string>
+    <string name="creating_valid_game">Criando um jogo válido…</string>
     <string name="connect">Conectar</string>
     <string name="connecting">A conectar…</string>
     <string name="disconnect">Desconectar</string>
@@ -101,7 +106,7 @@
     <string name="themes">Temas</string>
     <string name="delete_all_message">Eliminar todos os eventos permanentemente.</string>
     <string name="remove_ad">Remover anúncios</string>
-    <string name="help">Ajuda</string>
+    <string name="help">Dica</string>
     <string name="back">Voltar</string>
     <string name="donation">Donativo</string>
     <string name="open_on_game">Abrir no ecrã do jogo</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Permitir toque nos números</string>
     <string name="flag_when_tap_numbers">Colocar bandeira ao clicar nos números</string>
     <string name="tap_to_customize">Tocar para personalizar</string>
-    <string name="toggle_button_top">Mostrar \"Botão Alternar\" na barra superior</string>
     <string name="no_guess_fail_warning">O campo minado atual pode não ser resolvido sem adivinhação!</string>
     <string name="fixed_size">Tamanho fixo</string>
     <string name="progressive">Progressivo</string>
     <string name="highlight_unsolved_numbers">Destacar números não resolvidos</string>
-    <string name="left_handed">Canhoto</string>
+    <string name="show_clock">Mostrar Relógio</string>
     <string name="donate_request">Se você gosta deste jogo, considere fazer uma doação.</string>
     <string name="donate_help">Isso ajudará a manter este projeto ativo!</string>
 </resources>

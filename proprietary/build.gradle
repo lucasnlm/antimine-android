@@ -4,10 +4,6 @@ plugins {
     id 'kotlin-android-extensions'
 }
 
-if (System.getenv('IS_GOOGLE_BUILD')) {
-    apply plugin: 'com.google.gms.google-services'
-}
-
 android {
     compileSdkVersion 33
 
@@ -18,16 +14,13 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
-        freeCompilerArgs += [
-                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi',
-                '-Xuse-experimental=kotlinx.coroutines.FlowPreview']
     }
 }
 
@@ -42,18 +35,18 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 
     // Google
-    implementation 'com.android.billingclient:billing-ktx:5.0.0'
+    implementation 'com.android.billingclient:billing-ktx:5.1.0'
     implementation 'com.google.android.gms:play-services-instantapps:18.0.1'
-    implementation 'com.google.android.gms:play-services-games:23.0.0'
-    implementation 'com.google.android.gms:play-services-auth:20.3.0'
-    implementation 'com.google.android.gms:play-services-ads:21.3.0'
+    implementation 'com.google.android.gms:play-services-games:23.1.0'
+    implementation 'com.google.android.gms:play-services-auth:20.4.0'
+    implementation 'com.google.android.gms:play-services-ads:21.4.0'
     implementation 'com.google.android.play:core-ktx:1.8.1'
 
     // Jetbrains
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
 
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:30.4.1')
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-firestore-ktx'
@@ -62,9 +55,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-perf-ktx'
 
     // Kotlin
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
 
     // Koin
     implementation 'io.insert-koin:koin-android:3.1.2'

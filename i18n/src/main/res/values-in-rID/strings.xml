@@ -18,6 +18,8 @@
     <string name="legend">Legenda</string>
     <string name="open">Buka</string>
     <string name="settings">Pengaturan</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">Animasi</string>
     <string name="vibration">Umpan Balik Haptik</string>
     <string name="about">Tentang</string>
@@ -27,6 +29,7 @@
     <string name="width">Lebar</string>
     <string name="height">Tinggi</string>
     <string name="mines">Ranjau</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">Bila anda memulai permainan baru, Perkembangan anda saat ini akan hilang.</string>
     <string name="show_licenses">Tampilkan lisensi</string>
     <string name="new_game_request">Apakah Anda ingin memulai permainan baru?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Umum</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Aksesibilitas</string>
-    <string name="size">Ukuran</string>
-    <string name="rounded_square">Persegi Bulat</string>
-    <string name="space_between_squares">Spasi Antar Kotak</string>
     <string name="system">Sistem</string>
     <string name="sign_in_failed">Gagal untuk masuk. Silakan periksa koneksi jaringan anda dan coba lagi.</string>
     <string name="you_won">Anda menang!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Pakai Bendera Tanda Tanya</string>
     <string name="no_guessing_mode">Mode \'sekali coba\'</string>
     <string name="control">Kontrol</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">Ketuk sekali</string>
     <string name="double_click">Sentuh dua kali</string>
     <string name="long_press">Tekan yang panjang</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Lanjutkan</string>
     <string name="empty">Kosong</string>
     <string name="cant_do_it_now">Tidak mungkin melakukan itu sekarang</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">Anda telah menerima: +%1$d</string>
-    <string name="help_win_a_game">Untuk Bantuan lebih lanjut, Anda harus memenangkan permainan.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Kesalahan tidak diketahui.</string>
     <string name="leaderboards">Papan Peringkat</string>
     <string name="cancel">Batal</string>
     <string name="resume">Lanjutkan</string>
     <string name="yes">Ya</string>
     <string name="unlock">Buka</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">Prestasi</string>
     <string name="no">Tidak</string>
     <string name="general">Umum</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Lisensi</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Memuat…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">Sambungkan</string>
     <string name="connecting">Menghubungkan…</string>
     <string name="disconnect">Terputus</string>
@@ -101,7 +106,7 @@
     <string name="themes">Tema</string>
     <string name="delete_all_message">Hapus permanen semua kejadian.</string>
     <string name="remove_ad">Hapus Iklan</string>
-    <string name="help">Bantuan</string>
+    <string name="help">Hint</string>
     <string name="back">Kembali</string>
     <string name="donation">Donasi</string>
     <string name="open_on_game">Buka di layar permainan</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Izinkan ketuk di nomor</string>
     <string name="flag_when_tap_numbers">Bendera saat memencet nomor</string>
     <string name="tap_to_customize">Ketuk untuk menyesuaikan</string>
-    <string name="toggle_button_top">Tunjukkan \"Tombol alihan\" di bar atas</string>
     <string name="no_guess_fail_warning">Ladang Ranjau saat ini kemungkinan tidak dapat diselesaikan tanpa menebak!</string>
     <string name="fixed_size">Ukuran tetap</string>
     <string name="progressive">Progresif</string>
     <string name="highlight_unsolved_numbers">Soroti nomor yang belum diselesaikan</string>
-    <string name="left_handed">Kidal</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">Jika Anda menyukai permainan ini, pertimbangkan untuk berdonasi.</string>
     <string name="donate_help">It will help keep this project active!</string>
 </resources>

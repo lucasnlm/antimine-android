@@ -18,6 +18,8 @@
     <string name="legend">Θρύλος</string>
     <string name="open">Άνοιγμα</string>
     <string name="settings">Ρυθμίσεις</string>
+    <string name="control_settings">Ρυθμίσεις Ελέγχου</string>
+    <string name="shapes">Σχήματα</string>
     <string name="animations">Εφέ Κίνησης</string>
     <string name="vibration">Δόνηση</string>
     <string name="about">Σχετικά</string>
@@ -27,6 +29,7 @@
     <string name="width">Πλάτος</string>
     <string name="height">Ύψος</string>
     <string name="mines">Νάρκες</string>
+    <string name="seed">Αριθμός</string>
     <string name="retry_sure">Εάν ξεκινήσετε ένα νέο παιχνίδι,\nη τρέχουσα πρόοδός σας θα χαθεί.</string>
     <string name="show_licenses">Εμφάνιση αδειών</string>
     <string name="new_game_request">Θέλετε να ξεκινήσετε ένα νέο παιχνίδι;</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Γενικά</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Προσβασιμότητα</string>
-    <string name="size">Μέγεθος</string>
-    <string name="rounded_square">Στρογγυλεμένο τετράγωνο</string>
-    <string name="space_between_squares">Διάστημα Μεταξύ Τετραγώνων</string>
     <string name="system">Σύστημα</string>
     <string name="sign_in_failed">Αποτυχία σύνδεσης. Ελέγξτε τη σύνδεση δικτύου σας και δοκιμάστε ξανά.</string>
     <string name="you_won">Κέρδισες!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Χρήση ερωτηματικών</string>
     <string name="no_guessing_mode">Λειτουργία «Χωρίς μαντέψεις»</string>
     <string name="control">Ελεγχος</string>
+    <string name="control_types">Τύποι Ελέγχου</string>
     <string name="single_click">Απλό χτύπημα</string>
     <string name="double_click">Διπλό κτύπημα</string>
     <string name="long_press">Παρατεταμένο πάτημα</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Συνέχεια</string>
     <string name="empty">Κενό</string>
     <string name="cant_do_it_now">Αδύνατο να το κάνουμε τώρα</string>
+    <string name="mine_revealed">Μια νάρκη έχει αποκαλυφθεί</string>
+    <string name="fail_to_load_ad">Αποτυχία φόρτωσης διαφήμισης</string>
     <string name="you_have_received">Εχεις λάβει: +%1$d</string>
-    <string name="help_win_a_game">Για περισσότερη βοήθεια, πρέπει να κερδίσετε ένα παιχνίδι.</string>
+    <string name="help_win_a_game">Για περισσότερες υποδείξεις, θα πρέπει να κερδίσετε ένα παιχνίδι.</string>
     <string name="unknown_error">Άγνωστο σφάλμα.</string>
     <string name="leaderboards">Πίνακες κατάταξης</string>
     <string name="cancel">Ακύρωση</string>
     <string name="resume">Συνέχεια</string>
     <string name="yes">Ναι</string>
     <string name="unlock">Ξεκλείδωμα</string>
+    <string name="unlock_all">Ξεκλείδωμα όλων</string>
     <string name="achievements">Επιτεύγματα</string>
     <string name="no">Όχι</string>
     <string name="general">Γενικά</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Άδειες</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Φόρτωση…</string>
+    <string name="creating_valid_game">Δημιουργία έγκυρου παιχνιδιού…</string>
     <string name="connect">Σύνδεση</string>
     <string name="connecting">Σύνδεση…</string>
     <string name="disconnect">Αποσύνδεση</string>
@@ -101,7 +106,7 @@
     <string name="themes">Θέμα</string>
     <string name="delete_all_message">Μόνιμη διαγραφή επιλεγμένων.</string>
     <string name="remove_ad">Κατάργηση διαφημίσεων</string>
-    <string name="help">Βοήθεια</string>
+    <string name="help">Υπόδειξη</string>
     <string name="back">Πίσω</string>
     <string name="donation">Δωρεά</string>
     <string name="open_on_game">Άνοιγμα στην οθόνη του παιχνιδιού</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Επίτρεψε το πάτημα σε αριθμούς</string>
     <string name="flag_when_tap_numbers">Σημαία όταν πατάτε σε αριθμούς</string>
     <string name="tap_to_customize">Πατήστε για προσαρμογή</string>
-    <string name="toggle_button_top">Εμφάνιση \"Εναλλαγή κουμπιού\" στην επάνω γραμμή</string>
     <string name="no_guess_fail_warning">Το τρέχον ναρκοπέδιο δεν μπορεί να λυθεί χωρίς μαντεψιές!</string>
     <string name="fixed_size">Προεπιλεγμένο Μέγεθος</string>
     <string name="progressive">Προοδευτικό</string>
     <string name="highlight_unsolved_numbers">Επισήμανση άλυτων αριθμών</string>
-    <string name="left_handed">Αριστερόχειρας</string>
+    <string name="show_clock">Εμφάνιση ρολογιού</string>
     <string name="donate_request">Αν σας αρέσει αυτό το παιχνίδι, σκεφτείτε να κάνετε μια δωρεά.</string>
     <string name="donate_help">Θα βοηθήσει να διατηρηθεί αυτό το έργο ενεργό!</string>
 </resources>
