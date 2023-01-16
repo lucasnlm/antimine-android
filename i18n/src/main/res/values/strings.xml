@@ -38,9 +38,6 @@
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Gameplay</string>
     <string name="settings_accessibility">Accessibility</string>
-    <string name="size">Size</string>
-    <string name="rounded_square">Rounded Square</string>
-    <string name="space_between_squares">Space Between Squares</string>
     <string name="system">System</string>
     <string name="sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
     <string name="you_won">You won!</string>
