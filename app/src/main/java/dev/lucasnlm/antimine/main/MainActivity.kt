@@ -144,7 +144,10 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
             startLegend to Difficulty.Legend,
         ).forEach { (view, difficulty) ->
             view.setOnClickListener {
-                pushShortcutOf(difficulty)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    pushShortcutOf(difficulty)
+                }
+
                 viewModel.sendEvent(
                     MainEvent.StartNewGameEvent(difficulty = difficulty),
                 )
@@ -422,6 +425,7 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
                 }
             }
             setText(R.string.remove_ad)
+            setIconResource(R.drawable.remove_ads)
 
             price?.let {
                 priceText.text = it

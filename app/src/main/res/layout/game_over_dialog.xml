@@ -105,10 +105,13 @@
                     style="@style/Widget.Material3.Button.TonalButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/continue_game"
+                    android:textAllCaps="true"
                     android:textColor="?colorSurfaceVariant"
                     app:backgroundTint="?colorAccent"
-                    android:text="@string/continue_game"
-                    android:textAllCaps="true" />
+                    app:iconPadding="0dp"
+                    app:iconTint="?colorSurfaceVariant"
+                    app:iconTintMode="multiply" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/countdown"
@@ -117,7 +120,7 @@
                     android:layout_gravity="center_vertical|end"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="4dp"
-                    android:textColor="?colorPrimary"
+                    android:textColor="?colorSurfaceVariant"
                     android:textStyle="bold"
                     android:visibility="gone"
                     tools:text="10"
@@ -154,8 +157,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tutorial"
                 android:textAllCaps="true"
-                app:strokeWidth="0dp"
                 android:visibility="gone"
+                app:strokeWidth="0dp"
                 tools:visibility="visible" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

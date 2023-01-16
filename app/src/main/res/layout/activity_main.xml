@@ -420,7 +420,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="start|center_vertical"
-                            android:text="@string/intermediate" />
+                            android:text="@string/remove_ad" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/priceText"

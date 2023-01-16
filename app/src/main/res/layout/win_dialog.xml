@@ -121,6 +121,8 @@
                 android:text="@string/new_game"
                 android:textAllCaps="true"
                 android:textColor="?colorSurfaceVariant"
+                app:iconTint="?colorSurfaceVariant"
+                app:iconTintMode="multiply"
                 app:backgroundTint="?colorAccent">
 
                 <requestFocus />

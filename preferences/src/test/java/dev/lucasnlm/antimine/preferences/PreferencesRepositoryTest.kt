@@ -138,4 +138,18 @@ class PreferencesRepositoryTest {
         assertTrue(preferenceManager.values["preference_large_area"] == null)
         assertEquals(50, preferenceManager.getInt("preference_new_area_size", -1))
     }
+
+    @Test
+    fun testPremiumFlag() {
+        val preferenceManager = TestPreferenceManager()
+        val preferencesRepository = PreferencesRepository(preferenceManager, 500)
+        assertFalse(preferencesRepository.isPremiumEnabled())
+
+        preferencesRepository.setPremiumFeatures(true)
+        assertTrue(preferencesRepository.isPremiumEnabled())
+
+        // Premium can't be disabled after enabled.
+        preferencesRepository.setPremiumFeatures(false)
+        assertTrue(preferencesRepository.isPremiumEnabled())
+    }
 }
