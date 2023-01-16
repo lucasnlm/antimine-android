@@ -18,6 +18,8 @@
     <string name="legend">レジェンド</string>
     <string name="open">開く</string>
     <string name="settings">設定</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">アニメーション</string>
     <string name="vibration">タッチ操作バイブ</string>
     <string name="about">このアプリについて</string>
@@ -27,6 +29,7 @@
     <string name="width">横幅</string>
     <string name="height">縦幅</string>
     <string name="mines">地雷の数</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">新しいゲームを開始すると、\n現在の進行状況は失われます。</string>
     <string name="show_licenses">ライセンスを表示</string>
     <string name="new_game_request">新しくゲームを始めますか？</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">全般</string>
     <string name="settings_gameplay">ゲームプレイ</string>
     <string name="settings_accessibility">アクセシビリティ</string>
-    <string name="size">サイズ</string>
-    <string name="rounded_square">角の丸さ</string>
-    <string name="space_between_squares">マス間のスペース</string>
     <string name="system">システム</string>
     <string name="sign_in_failed">サインインに失敗しました。インターネット接続を確認してからもう一度お試しください。</string>
     <string name="you_won">あなたの勝ちです！</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">クエスチョンマークを使う</string>
     <string name="no_guessing_mode">「推測なし」 モード</string>
     <string name="control">コントロール</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">シングルタップ</string>
     <string name="double_click">ダブルタップ</string>
     <string name="long_press">長押し</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">続行</string>
     <string name="empty">空</string>
     <string name="cant_do_it_now">現在は実行できません</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">受け取りました: +%1$d</string>
-    <string name="help_win_a_game">ヘルプを増やすには、ゲームに勝つ必要があります。</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">不明なエラーです。</string>
     <string name="leaderboards">リーダーボード</string>
     <string name="cancel">キャンセル</string>
     <string name="resume">続ける</string>
     <string name="yes">はい</string>
     <string name="unlock">ロック解除</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">実績</string>
     <string name="no">いいえ</string>
     <string name="general">全般</string>
@@ -88,6 +92,7 @@
     <string name="licenses">ライセンス</string>
     <string name="google_play_games">Google Play ゲーム</string>
     <string name="loading">読み込み中…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">接続</string>
     <string name="connecting">接続しています...</string>
     <string name="disconnect">切断</string>
@@ -101,7 +106,7 @@
     <string name="themes">テーマ</string>
     <string name="delete_all_message">すべてのイベントを永久的に削除します。</string>
     <string name="remove_ad">広告を削除</string>
-    <string name="help">ヘルプ</string>
+    <string name="help">Hint</string>
     <string name="back">戻る</string>
     <string name="donation">寄付</string>
     <string name="open_on_game">ゲーム画面で開く</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">数字のタップを有効にする</string>
     <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">タップしてカスタマイズ</string>
-    <string name="toggle_button_top">上部バーに「トグルボタン」を表示する</string>
     <string name="no_guess_fail_warning">現在の盤面は、推測なしではクリアできない可能性があります!</string>
     <string name="fixed_size">固定サイズ</string>
     <string name="progressive">プログレッシブ</string>
     <string name="highlight_unsolved_numbers">未解決の数字をハイライト表示</string>
-    <string name="left_handed">左側を上にする</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">もしこのゲームが気に入ったら、ぜひご支援の検討をお願いします。</string>
     <string name="donate_help">このプロジェクトを長く続かせるのに一役買うでしょう！</string>
 </resources>

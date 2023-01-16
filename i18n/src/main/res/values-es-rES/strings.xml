@@ -18,6 +18,8 @@
     <string name="legend">Leyenda</string>
     <string name="open">Abrir</string>
     <string name="settings">Configuración</string>
+    <string name="control_settings">Ajustes de control</string>
+    <string name="shapes">Formas</string>
     <string name="animations">Animaciones</string>
     <string name="vibration">Respuesta háptica</string>
     <string name="about">Acerca de</string>
@@ -27,6 +29,7 @@
     <string name="width">Ancho</string>
     <string name="height">Alto</string>
     <string name="mines">Minas</string>
+    <string name="seed">Semilla</string>
     <string name="retry_sure">Si comienzas una partida nueva,\ntu progreso actual se perderá.</string>
     <string name="show_licenses">Ver Licencias</string>
     <string name="new_game_request">¿Deseas empezar una nueva partida?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Jugabilidad</string>
     <string name="settings_accessibility">Accesibilidad</string>
-    <string name="size">Tamaño</string>
-    <string name="rounded_square">Cuadrado redondeado</string>
-    <string name="space_between_squares">Espacio entre cuadrados</string>
     <string name="system">Sistema</string>
     <string name="sign_in_failed">Imposible conectar. Por favor, revisa tu conexión de datos e inténtalo nuevamente.</string>
     <string name="you_won">¡Ganaste!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Usar signo de interrogación</string>
     <string name="no_guessing_mode">Modo \"Sin adivinación\"</string>
     <string name="control">Controles</string>
+    <string name="control_types">Tipos de control</string>
     <string name="single_click">Un toque</string>
     <string name="double_click">Dos toques</string>
     <string name="long_press">Toque largo</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Continuar</string>
     <string name="empty">Vacío</string>
     <string name="cant_do_it_now">Imposible hacer eso ahora</string>
+    <string name="mine_revealed">Se ha encontrado una mina</string>
+    <string name="fail_to_load_ad">Fallo al cargar anuncio</string>
     <string name="you_have_received">Has recibido: +%1$d</string>
-    <string name="help_win_a_game">Para obtener más Ayuda, debes ganar una partida.</string>
+    <string name="help_win_a_game">Para conseguir más pistas, debes ganar una partida.</string>
     <string name="unknown_error">Error desconocido.</string>
     <string name="leaderboards">Ránking</string>
     <string name="cancel">Cancelar</string>
     <string name="resume">Continuar</string>
     <string name="yes">Sí</string>
     <string name="unlock">Desbloquear</string>
+    <string name="unlock_all">Desbloquear todo</string>
     <string name="achievements">Logros</string>
     <string name="no">No</string>
     <string name="general">General</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Licencias</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Cargando…</string>
+    <string name="creating_valid_game">Creando partida válida…</string>
     <string name="connect">Conectar</string>
     <string name="connecting">Conectando…</string>
     <string name="disconnect">Desconectar</string>
@@ -101,7 +106,7 @@
     <string name="themes">Temas</string>
     <string name="delete_all_message">Borrar todos los eventos permanentemente.</string>
     <string name="remove_ad">Eliminar anuncios</string>
-    <string name="help">Ayuda</string>
+    <string name="help">Pista</string>
     <string name="back">Volver</string>
     <string name="donation">Donación</string>
     <string name="open_on_game">Abrir en la pantalla del juego</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Permitir tocar números</string>
     <string name="flag_when_tap_numbers">Marcar al pulsar números</string>
     <string name="tap_to_customize">Toca para personalizar</string>
-    <string name="toggle_button_top">Mostrar botón \"Activar\" en la barra superior</string>
     <string name="no_guess_fail_warning">¡Es posible que necesites una pista para solucionar este nivel!</string>
     <string name="fixed_size">Tamaño fijo</string>
     <string name="progressive">Progresivo</string>
     <string name="highlight_unsolved_numbers">Resaltar números sin completar</string>
-    <string name="left_handed">Modo para zurdos</string>
+    <string name="show_clock">Mostrar reloj</string>
     <string name="donate_request">Si te gusta el juego, aceptamos cualquier tipo de donación.</string>
     <string name="donate_help">¡Eso nos ayudará a mantener este proyecto activo!</string>
 </resources>

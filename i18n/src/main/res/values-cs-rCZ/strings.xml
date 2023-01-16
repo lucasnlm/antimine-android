@@ -18,6 +18,8 @@
     <string name="legend">Legenda</string>
     <string name="open">Otevřít</string>
     <string name="settings">Nastavení</string>
+    <string name="control_settings">Nastavení ovládání</string>
+    <string name="shapes">Tvary</string>
     <string name="animations">Animace</string>
     <string name="vibration">Hmatová odezva</string>
     <string name="about">O aplikaci</string>
@@ -27,6 +29,7 @@
     <string name="width">Šířka</string>
     <string name="height">Výška</string>
     <string name="mines">Miny</string>
+    <string name="seed">Osivo</string>
     <string name="retry_sure">Pokud zahájíte novou hru,\nbude váš aktuální postup ztracen.</string>
     <string name="show_licenses">Zobrazit licence</string>
     <string name="new_game_request">Chcete začít novou hru?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Obecné</string>
     <string name="settings_gameplay">Hra</string>
     <string name="settings_accessibility">Přístupnost</string>
-    <string name="size">Velikost</string>
-    <string name="rounded_square">Zaoblený čtverec</string>
-    <string name="space_between_squares">Prostor mezi čtverci</string>
     <string name="system">Systém</string>
     <string name="sign_in_failed">Nelze se přihlásit. Zkontrolujte síťové připojení a akci opakujte.</string>
     <string name="you_won">Vyhráli jste!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Použít otazníky</string>
     <string name="no_guessing_mode">Režim \"bez hádání\"</string>
     <string name="control">Ovládání</string>
+    <string name="control_types">Typ ovládání</string>
     <string name="single_click">Jedno klepnutí</string>
     <string name="double_click">Dvojité klepnutí</string>
     <string name="long_press">Dlouhý stisk</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Pokračovat</string>
     <string name="empty">Prázdné</string>
     <string name="cant_do_it_now">Není možné to nyní udělat</string>
+    <string name="mine_revealed">Mina byla odkryta</string>
+    <string name="fail_to_load_ad">Nepodařilo se načíst reklamu</string>
     <string name="you_have_received">Obdrželi jste: +%1$d</string>
-    <string name="help_win_a_game">Pro další nápovědu musíte vyhrát hru.</string>
+    <string name="help_win_a_game">Pro další tipy musíte vyhrát hru.</string>
     <string name="unknown_error">Neznámá chyba.</string>
     <string name="leaderboards">Žebříčky</string>
     <string name="cancel">Zrušit</string>
     <string name="resume">Pokračovat</string>
     <string name="yes">Ano</string>
     <string name="unlock">Odemknout</string>
+    <string name="unlock_all">Odemknout vše</string>
     <string name="achievements">Úspěchy</string>
     <string name="no">Ne</string>
     <string name="general">Obecné</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Licence</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Načítání…</string>
+    <string name="creating_valid_game">Vytvářím platnou hru…</string>
     <string name="connect">Připojit</string>
     <string name="connecting">Připojování…</string>
     <string name="disconnect">Odpojit</string>
@@ -101,7 +106,7 @@
     <string name="themes">Motivy</string>
     <string name="delete_all_message">Trvale smazat všechny události.</string>
     <string name="remove_ad">Odstranit reklamy</string>
-    <string name="help">Nápověda</string>
+    <string name="help">Tip</string>
     <string name="back">Zpět</string>
     <string name="donation">Darovat</string>
     <string name="open_on_game">Otevřít na obrazovce hry</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Povolit klepnutí na čísla</string>
     <string name="flag_when_tap_numbers">Označit při klepnutí na číslo</string>
     <string name="tap_to_customize">Klepnutím přizpůsobit</string>
-    <string name="toggle_button_top">Zobrazit \"Přepínací tlačítko\" v horní liště</string>
     <string name="no_guess_fail_warning">Možná budete potřebovat nápovědu k dokončení této úrovně!</string>
     <string name="fixed_size">Pevná velikost</string>
     <string name="progressive">Progresivní</string>
     <string name="highlight_unsolved_numbers">Zvýraznit nevyřešená čísla</string>
-    <string name="left_handed">Pro leváky</string>
+    <string name="show_clock">Zobrazit hodiny</string>
     <string name="donate_request">Pokud se vám hra líbí, zvažte možnost přispět.</string>
     <string name="donate_help">Pomůžete nám udržet tento projekt aktivní!</string>
 </resources>

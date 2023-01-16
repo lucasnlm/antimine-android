@@ -4,8 +4,8 @@
     <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
     <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
     <string name="tutorial_text_2">After marking your first flag, review the numbers and analyze the next square.</string>
-    <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
-    <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
+    <string name="tutorial_text_3">אם לריבוע יש אותו מספר דגלים, כל שאר הריבועים הסמוכים לו אינם מוקשים (החץ הירוק).</string>
+    <string name="tutorial_text_4">בדוק את המספרים והמשיכו לפתוח ריבועים.</string>
     <string name="games">משחקים</string>
     <string name="tap_to_begin">לחץ כדי להתחיל</string>
     <string name="previous_games">משחקים קודמים</string>
@@ -18,6 +18,8 @@
     <string name="legend">אגדה</string>
     <string name="open">פתיחה</string>
     <string name="settings">הגדרות</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">אנימציות</string>
     <string name="vibration">משוב רטט</string>
     <string name="about">אודות</string>
@@ -27,6 +29,7 @@
     <string name="width">רוחב</string>
     <string name="height">גובה</string>
     <string name="mines">מוקשים</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">כאשר יתחיל משחק חדש, ההתקדמות הנוכחית שלך תיעלם.</string>
     <string name="show_licenses">הצג רשיונות</string>
     <string name="new_game_request">האם ברצונך להתחיל משחק חדש?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">כללי</string>
     <string name="settings_gameplay">משחק</string>
     <string name="settings_accessibility">נגישות</string>
-    <string name="size">גודל</string>
-    <string name="rounded_square">ריבוע בעל פינות עגולות</string>
-    <string name="space_between_squares">רווח בין ריבועים</string>
     <string name="system">מערכת</string>
     <string name="sign_in_failed">אין אפשרות להתחבר. בדוק את חיבור הרשת ונסה שוב.</string>
     <string name="you_won">ניצחת!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">סימן שאלה</string>
     <string name="no_guessing_mode">מצב \'ללא ניחושים\'</string>
     <string name="control">פקדים</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">לחיצה יחידה</string>
     <string name="double_click">לחיצה כפולה</string>
     <string name="long_press">לחיצה ארוכה</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">המשך</string>
     <string name="empty">ריק</string>
     <string name="cant_do_it_now">אי אפשר לעשות את זה עכשיו</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">קיבלת: +%1$d</string>
-    <string name="help_win_a_game">לקבלת עזרה נוספת, עליך לנצח במשחק.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">שגיאה לא ידועה.</string>
     <string name="leaderboards">לוח תוצאות</string>
     <string name="cancel">ביטול</string>
     <string name="resume">לְהַמשִׁיך</string>
     <string name="yes"> כן</string>
     <string name="unlock">בטל את הנעילה</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">הישגים</string>
     <string name="no">לא</string>
     <string name="general">כללי</string>
@@ -88,6 +92,7 @@
     <string name="licenses">רשיונות</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">טוען…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">התחבר</string>
     <string name="connecting">מתחבר…</string>
     <string name="disconnect">נתק</string>
@@ -101,7 +106,7 @@
     <string name="themes">ערכות נושא</string>
     <string name="delete_all_message">מחיקה לצמיתות של כל האירועים.</string>
     <string name="remove_ad">הסרת פרסומות</string>
-    <string name="help">עזרה</string>
+    <string name="help">Hint</string>
     <string name="back">חזור</string>
     <string name="donation">תרומה</string>
     <string name="open_on_game">פתיחה על מסך משחק</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Allow tap on numbers</string>
     <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Tap to customize</string>
-    <string name="toggle_button_top">Show \"Toggle Button\" on top bar</string>
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">גודל קבוע</string>
     <string name="progressive">התקדמות</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
-    <string name="left_handed">Left-handed</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">If you like this game, consider making a donation.</string>
     <string name="donate_help">It will help keep this project active!</string>
 </resources>

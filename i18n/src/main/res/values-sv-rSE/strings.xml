@@ -18,6 +18,8 @@
     <string name="legend">Legendariskt</string>
     <string name="open">Öppna</string>
     <string name="settings">Inställningar</string>
+    <string name="control_settings">Kontrollinställningar</string>
+    <string name="shapes">Former</string>
     <string name="animations">Animationer</string>
     <string name="vibration">Haptik-feedback</string>
     <string name="about">Om</string>
@@ -27,6 +29,7 @@
     <string name="width">Bredd</string>
     <string name="height">Höjd</string>
     <string name="mines">Minor</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">Om du startar ett nytt spel kommer dina pågående framsteg att förloras.</string>
     <string name="show_licenses">Visa licenser</string>
     <string name="new_game_request">Vill du starta ett nytt spel?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Allmänt</string>
     <string name="settings_gameplay">Spelsätt</string>
     <string name="settings_accessibility">Tillgänglighet</string>
-    <string name="size">Storlek</string>
-    <string name="rounded_square">Avrundad kvadrat</string>
-    <string name="space_between_squares">Mellanrum mellan rutor</string>
     <string name="system">System</string>
     <string name="sign_in_failed">Det gick inte att logga in. Kontrollera nätverksanslutningen och försök igen.</string>
     <string name="you_won">Du vann!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Använd frågetecken</string>
     <string name="no_guessing_mode">‘Ingen gissning’ läge</string>
     <string name="control">Kontroller</string>
+    <string name="control_types">Kontrolltyper</string>
     <string name="single_click">Enkeltryck</string>
     <string name="double_click">Dubbeltryck</string>
     <string name="long_press">Långtryck</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Fortsätt</string>
     <string name="empty">Tom</string>
     <string name="cant_do_it_now">Det är omöjligt att göra det nu</string>
+    <string name="mine_revealed">En mina har avslöjats</string>
+    <string name="fail_to_load_ad">Misslyckades att ladda annons</string>
     <string name="you_have_received">Du har fått: +%1$d</string>
-    <string name="help_win_a_game">För mer hjälp så måste du vinna ett spel.</string>
+    <string name="help_win_a_game">För fler ledtrådar, måste du vinna ett spel.</string>
     <string name="unknown_error">Okänt fel.</string>
     <string name="leaderboards">Topplistor</string>
     <string name="cancel">Avbryt</string>
     <string name="resume">Återuppta</string>
     <string name="yes">Ja</string>
     <string name="unlock">Lås upp</string>
+    <string name="unlock_all">Lås upp allt</string>
     <string name="achievements">Prestationer</string>
     <string name="no">Nej</string>
     <string name="general">Allmänt</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Licenser</string>
     <string name="google_play_games">Google Play Spel</string>
     <string name="loading">Laddar…</string>
+    <string name="creating_valid_game">Skapar ett giltigt spel…</string>
     <string name="connect">Anslut</string>
     <string name="connecting">Ansluter…</string>
     <string name="disconnect">Koppla från</string>
@@ -101,7 +106,7 @@
     <string name="themes">Teman</string>
     <string name="delete_all_message">Ta bort alla händelser permanent.</string>
     <string name="remove_ad">Ta bort annonser</string>
-    <string name="help">Hjälp</string>
+    <string name="help">Ledtråd</string>
     <string name="back">Tillbaka</string>
     <string name="donation">Donation</string>
     <string name="open_on_game">Öppna på spelskärmen</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Tillåt tryck på siffror</string>
     <string name="flag_when_tap_numbers">Flagga när du trycker på nummer</string>
     <string name="tap_to_customize">Tryck för att anpassa</string>
-    <string name="toggle_button_top">Visa \"Växla knapp\" i övre fältet</string>
     <string name="no_guess_fail_warning">Den nuvarande minfälten kanske inte är gissfri!</string>
     <string name="fixed_size">Fast storlek</string>
     <string name="progressive">Progressiv</string>
     <string name="highlight_unsolved_numbers">Markera olösta tal</string>
-    <string name="left_handed">Vänsterhänt</string>
+    <string name="show_clock">Visa klocka</string>
     <string name="donate_request">Om du gillar spelet, överväg om du vill göra en donation.</string>
     <string name="donate_help">Det kommer hjälpa till att hålla projektet aktivt!</string>
 </resources>

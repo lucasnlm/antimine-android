@@ -18,6 +18,8 @@
     <string name="legend">Легенда</string>
     <string name="open">Отвори</string>
     <string name="settings">Настройки</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">Анимации</string>
     <string name="vibration">Вибрация при докосване</string>
     <string name="about">За нас</string>
@@ -27,6 +29,7 @@
     <string name="width">Ширина</string>
     <string name="height">Височина</string>
     <string name="mines">Мини</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">Ако стартираш нова игра, твоят досегашен прогрес ще бъде занулен.</string>
     <string name="show_licenses">Преглед на лиценза</string>
     <string name="new_game_request">Искате ли да започнете нова игра?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Основни</string>
     <string name="settings_gameplay">Начин на игра</string>
     <string name="settings_accessibility">Достъпност</string>
-    <string name="size">Размер</string>
-    <string name="rounded_square">Заоблен квадрат</string>
-    <string name="space_between_squares">Пространство между квадратите</string>
     <string name="system">Система</string>
     <string name="sign_in_failed">Неуспешно влизане. Моля проверете връзката си с интернет и опитайте отново.</string>
     <string name="you_won">Вие победихте!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Въпросителен знак</string>
     <string name="no_guessing_mode">Режим \'Без налучкване\'</string>
     <string name="control">Управление</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">Еднократно натискане</string>
     <string name="double_click">Двойно натискане</string>
     <string name="long_press">Дълго докосване</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Продължи</string>
     <string name="empty">Празно</string>
     <string name="cant_do_it_now">Невъзможно е да се направи това сега</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">Получихте: +%1$d</string>
-    <string name="help_win_a_game">За повече помощ трябва да спечелите игра.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Неизвестна грешка.</string>
     <string name="leaderboards">Класиране</string>
     <string name="cancel">Отказ</string>
     <string name="resume">Продължи</string>
     <string name="yes">Да</string>
     <string name="unlock">Отключи</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">Постижения</string>
     <string name="no">Не</string>
     <string name="general">Основни</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Лицензи</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Зареждане…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">Свързване</string>
     <string name="connecting">Свързване…</string>
     <string name="disconnect">Прекъсване</string>
@@ -101,7 +106,7 @@
     <string name="themes">Теми</string>
     <string name="delete_all_message">Изтрий всички завинаги.</string>
     <string name="remove_ad">Премахване на реклами</string>
-    <string name="help">Помощ</string>
+    <string name="help">Hint</string>
     <string name="back">Назад</string>
     <string name="donation">Дарение</string>
     <string name="open_on_game">Отвори на игралния екран</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Позволи докосване върху числата</string>
     <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Натисни, за да промениш</string>
-    <string name="toggle_button_top">Покажи \"бутон за смяна\" на горната лента</string>
     <string name="no_guess_fail_warning">Сегашното поле може да не е без предположения!</string>
     <string name="fixed_size">Фиксиран размер</string>
     <string name="progressive">Прогресивен</string>
     <string name="highlight_unsolved_numbers">Маркирайте нерешените числа</string>
-    <string name="left_handed">Леворък</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">If you like this game, consider making a donation.</string>
     <string name="donate_help">It will help keep this project active!</string>
 </resources>

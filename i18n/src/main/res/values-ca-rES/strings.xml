@@ -18,6 +18,8 @@
     <string name="legend">Legend</string>
     <string name="open">Obert</string>
     <string name="settings">Configuració</string>
+    <string name="control_settings">Paràmetres de control</string>
+    <string name="shapes">Formes</string>
     <string name="animations">Animacions</string>
     <string name="vibration">Resposta hàptica</string>
     <string name="about">Quant a</string>
@@ -27,6 +29,7 @@
     <string name="width">Amplada</string>
     <string name="height">Alçada</string>
     <string name="mines">Mines</string>
+    <string name="seed">Llavor</string>
     <string name="retry_sure">Si comences un altre joc, el teu progrés actual es perdrà.</string>
     <string name="show_licenses">Mostra les llicències</string>
     <string name="new_game_request">Vols començar un joc nou?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Joc</string>
     <string name="settings_accessibility">Accessibilitat</string>
-    <string name="size">Mida</string>
-    <string name="rounded_square">Quadrat arrodonit</string>
-    <string name="space_between_squares">Espai entre places</string>
     <string name="system">Sistema</string>
     <string name="sign_in_failed">No s\'ha pogut connectar. Si us plau verifica la teva connexió de xarxa i intenta-ho de nou.</string>
     <string name="you_won">Has guanyat!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Utilitza l\'interrogant</string>
     <string name="no_guessing_mode">mode \'sense endevinar\'</string>
     <string name="control">Controls</string>
+    <string name="control_types">Tipus de control</string>
     <string name="single_click">Un toc</string>
     <string name="double_click">Doble toc</string>
     <string name="long_press">Toc llarg</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Continua</string>
     <string name="empty">Buida</string>
     <string name="cant_do_it_now">És impossible fer-ho ara</string>
+    <string name="mine_revealed">Una mina ha estat descoberta</string>
+    <string name="fail_to_load_ad">No s\'ha pogut carregar l\'anunci</string>
     <string name="you_have_received">Heu rebut: +%1$d</string>
-    <string name="help_win_a_game">Per obtenir més ajuda, heu de guanyar una partida.</string>
+    <string name="help_win_a_game">Per a més pistes, heu de guanyar una partida.</string>
     <string name="unknown_error">Error desconegut.</string>
     <string name="leaderboards">Llista de líders</string>
     <string name="cancel">Cancel•lar</string>
     <string name="resume">Continuar</string>
     <string name="yes">Sí</string>
     <string name="unlock">Desbloqueja</string>
+    <string name="unlock_all">Desbloqueja-ho tot</string>
     <string name="achievements">Assoliments</string>
     <string name="no">No</string>
     <string name="general">General</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Llicències</string>
     <string name="google_play_games">Google Play Jocs</string>
     <string name="loading">Carregant…</string>
+    <string name="creating_valid_game">Creant un joc vàlid…</string>
     <string name="connect">Connectar</string>
     <string name="connecting">Connectant…</string>
     <string name="disconnect">Desconnectar</string>
@@ -101,7 +106,7 @@
     <string name="themes">Temes</string>
     <string name="delete_all_message">Esborra tots els esdeveniments permanentment.</string>
     <string name="remove_ad">Elimina els anuncis</string>
-    <string name="help">Ajuda</string>
+    <string name="help">Pista</string>
     <string name="back">Tornar</string>
     <string name="donation">Donacions</string>
     <string name="open_on_game">Obre a la pantalla del joc</string>
@@ -115,14 +120,13 @@
     <string name="close">Tancar</string>
     <string name="open_tutorial">Obriu el tutorial</string>
     <string name="click_numbers">Permet pressionar els números</string>
-    <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
+    <string name="flag_when_tap_numbers">Permet pressionar els números</string>
     <string name="tap_to_customize">Pressiona per a customitzar</string>
-    <string name="toggle_button_top">Mostrar \"alternar botó\" en la barra superior</string>
     <string name="no_guess_fail_warning">Aquest camp de mines pot no ser deduïble: hareu d\'arriscar!</string>
     <string name="fixed_size">Mida Fixa</string>
     <string name="progressive">Progressiu</string>
     <string name="highlight_unsolved_numbers">Remarcar els números no resolts</string>
-    <string name="left_handed">Esquerrà</string>
+    <string name="show_clock">Mostra el rellotge</string>
     <string name="donate_request">Si t\'agrada aquest joc, considera fer una donació.</string>
     <string name="donate_help">Ajudarà a mantenir actiu aquest projecte!</string>
 </resources>

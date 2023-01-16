@@ -18,6 +18,8 @@
     <string name="legend">Ikone</string>
     <string name="open">Öffnen</string>
     <string name="settings">Einstellungen</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">Animationen</string>
     <string name="vibration">Haptische Rückmeldung</string>
     <string name="about">Über</string>
@@ -27,6 +29,7 @@
     <string name="width">Breite</string>
     <string name="height">Höhe</string>
     <string name="mines">Minen</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">Wenn du ein neues Spiel startest,\nwird dein aktueller Verlauf verloren gehen.</string>
     <string name="show_licenses">Lizenzen anzeigen</string>
     <string name="new_game_request">Möchtest du ein neues Spiel beginnen?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Allgemein</string>
     <string name="settings_gameplay">Spielablauf</string>
     <string name="settings_accessibility">Barrierefreiheit</string>
-    <string name="size">Größe</string>
-    <string name="rounded_square">Abgerundetes Quadrat</string>
-    <string name="space_between_squares">Platz zwischen Quadraten</string>
     <string name="system">System</string>
     <string name="sign_in_failed">Login fehlgeschlagen. Überprüfe Deine Netzwerkverbindung und versuche es erneut.</string>
     <string name="you_won">Du hast gewonnen!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Fragezeichen benutzen</string>
     <string name="no_guessing_mode">\"Kein Erraten\"-Modus</string>
     <string name="control">Steuerung</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">Einfaches Tippen</string>
     <string name="double_click">Doppeltes Tippen</string>
     <string name="long_press">Langes Tippen</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Fortsetzen</string>
     <string name="empty">Leer</string>
     <string name="cant_do_it_now">Dies jetzt nicht möglich</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">Du hast +%1$d erhalten</string>
-    <string name="help_win_a_game">Für weitere Hilfe musst du ein Spiel gewinnen.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Unbekannter Fehler.</string>
     <string name="leaderboards">Ranglisten</string>
     <string name="cancel">Abbrechen</string>
     <string name="resume">Fortfahren</string>
     <string name="yes">Ja</string>
     <string name="unlock">Entsperren</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">Erfolge</string>
     <string name="no">Nein</string>
     <string name="general">Allgemein</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Lizenzen</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Wird geladen...</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">Verbinden</string>
     <string name="connecting">Verbindung wird hergestellt…</string>
     <string name="disconnect">Trennen</string>
@@ -101,7 +106,7 @@
     <string name="themes">Themen</string>
     <string name="delete_all_message">Alle Ereignisse dauerhaft löschen.</string>
     <string name="remove_ad">Werbung entfernen</string>
-    <string name="help">Hilfe</string>
+    <string name="help">Hint</string>
     <string name="back">Zurück</string>
     <string name="donation">Spende</string>
     <string name="open_on_game">Im Spiel-Bildschirm öffnen</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Antippen von Zahlenquadraten erlauben</string>
     <string name="flag_when_tap_numbers">Beim Tippen auf Zahlen markieren</string>
     <string name="tap_to_customize">Zum Anpassen tippen</string>
-    <string name="toggle_button_top">\"Umschaltknopf\" in oberer Leiste anzeigen</string>
     <string name="no_guess_fail_warning">Das aktuelle Minenfeld ist möglicherweise nicht ratenfrei!</string>
     <string name="fixed_size">Feste Größe</string>
     <string name="progressive">Fortschrittlich</string>
     <string name="highlight_unsolved_numbers">Ungelöste Zahlen hervorheben</string>
-    <string name="left_handed">Linkshänder</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">Wenn dir dieses Spiel gefällt, erwäge eine Spende zu tätigen.</string>
     <string name="donate_help">Es wird helfen, dieses Projekt aktiv zu halten!</string>
 </resources>

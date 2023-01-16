@@ -18,6 +18,8 @@
     <string name="legend">Łegenda</string>
     <string name="open">Verzi</string>
     <string name="settings">Inpostasion</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">Animasion</string>
     <string name="vibration">Feedback Tàtiłe</string>
     <string name="about">Informasion</string>
@@ -27,6 +29,7 @@
     <string name="width">Łarghesa</string>
     <string name="height">Altesa</string>
     <string name="mines">Mine</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">Se te scuminsi na nova partìa, te perdarè i to progresi corivi.</string>
     <string name="show_licenses">Mostra Łicense</string>
     <string name="new_game_request">Vuto scuminsiar na nova partìa?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Zenarałe</string>
     <string name="settings_gameplay">Zogo</string>
     <string name="settings_accessibility">Acesibiłità</string>
-    <string name="size">Dimension</string>
-    <string name="rounded_square">Cuadrati Stondài</string>
-    <string name="space_between_squares">Spasio infra i cuadrài</string>
     <string name="system">Sistema</string>
     <string name="sign_in_failed">Aceso mìa riusìo. Controła ła conesion e prova da novo.</string>
     <string name="you_won">Te ghè vinto!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Dòpara el Ponto de Domanda</string>
     <string name="no_guessing_mode">Modałità sensa predision</string>
     <string name="control">Comandi</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">Toca na \'olta</string>
     <string name="double_click">Toca do \'olte</string>
     <string name="long_press">Tien strucà</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Sèita</string>
     <string name="empty">Vodo</string>
     <string name="cant_do_it_now">A ze inposìbiłe farlo deso</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">Te ghè resevùo +%1$d</string>
-    <string name="help_win_a_game">Par ver pì juti, te ghè da vinsar na partìa.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Eror desconosesto.</string>
     <string name="leaderboards">Clasìfega</string>
     <string name="cancel">Desfa</string>
     <string name="resume">Taca da novo</string>
     <string name="yes">Sì</string>
     <string name="unlock">Dezbroca</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">Conchiste</string>
     <string name="no">Nò</string>
     <string name="general">Zenarałe</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Łisensa</string>
     <string name="google_play_games">Zoghi de Google Play</string>
     <string name="loading">Cargando…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">Conétate</string>
     <string name="connecting">Drio Conétarse…</string>
     <string name="disconnect">Desconétate</string>
@@ -101,7 +106,7 @@
     <string name="themes">Temi</string>
     <string name="delete_all_message">Scanseła tuti i eventi permanentemente.</string>
     <string name="remove_ad">Cava i Anunsi</string>
-    <string name="help">Juto</string>
+    <string name="help">Hint</string>
     <string name="back">Indrìo</string>
     <string name="donation">Donasion</string>
     <string name="open_on_game">Verzi inte ła schermada de zogo</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Parmeti de strucar so i nùmari</string>
     <string name="flag_when_tap_numbers">Flag when tap on numbers</string>
     <string name="tap_to_customize">Struca par parsonałizar</string>
-    <string name="toggle_button_top">Mostra ła łeveta so ła bara par alto</string>
     <string name="no_guess_fail_warning">\'Sto canpo minà no el se połe mìa conpletar sensa intivar!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
-    <string name="left_handed">Left-handed</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">If you like this game, consider making a donation.</string>
     <string name="donate_help">It will help keep this project active!</string>
 </resources>

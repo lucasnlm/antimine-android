@@ -18,6 +18,8 @@
     <string name="legend">Legenda</string>
     <string name="open">Avaa</string>
     <string name="settings">Asetukset</string>
+    <string name="control_settings">Control Settings</string>
+    <string name="shapes">Shapes</string>
     <string name="animations">Animaatiot</string>
     <string name="vibration">Värinä</string>
     <string name="about">Tietoja</string>
@@ -27,6 +29,7 @@
     <string name="width">Leveys</string>
     <string name="height">Korkeus</string>
     <string name="mines">Miinoja</string>
+    <string name="seed">Seed</string>
     <string name="retry_sure">Jos aloitat uuden pelin, nykyinen edistymisesi tyhjennetään.</string>
     <string name="show_licenses">Näytä lisenssit</string>
     <string name="new_game_request">Tahdotko aloittaa uuden pelin?</string>
@@ -35,9 +38,6 @@
     <string name="settings_general">Yleiset</string>
     <string name="settings_gameplay">Pelattavuus</string>
     <string name="settings_accessibility">Esteettömyys</string>
-    <string name="size">Koko</string>
-    <string name="rounded_square">Pyöristetty neliö</string>
-    <string name="space_between_squares">Tila Neliöiden Välillä</string>
     <string name="system">Järjestelmä</string>
     <string name="sign_in_failed">Virhe kirjautuessa sisään. Tarkista verkkoyhteytesi ja yritä uudelleen.</string>
     <string name="you_won">Sinä voitit!</string>
@@ -61,6 +61,7 @@
     <string name="use_question_mark">Käytä kysymysmerkkiä</string>
     <string name="no_guessing_mode">\'Ei arvausta\' -tilaa</string>
     <string name="control">Kontrollit</string>
+    <string name="control_types">Control Types</string>
     <string name="single_click">Yksi napautus</string>
     <string name="double_click">Kaksoisnapautus</string>
     <string name="long_press">Pitkä painallus</string>
@@ -71,14 +72,17 @@
     <string name="continue_game">Jatka</string>
     <string name="empty">Tyhjä</string>
     <string name="cant_do_it_now">Ei mahdollista tehdä sitä nyt</string>
+    <string name="mine_revealed">A mine has been revealed</string>
+    <string name="fail_to_load_ad">Fail to load ad</string>
     <string name="you_have_received">Olet saanut: +%1$d</string>
-    <string name="help_win_a_game">Saat enemmän apua, kun voitat pelin.</string>
+    <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Tuntematon virhe.</string>
     <string name="leaderboards">Tulostaulukot</string>
     <string name="cancel">Peruuta</string>
     <string name="resume">Jatka</string>
     <string name="yes">Kyllä</string>
     <string name="unlock">Avaa</string>
+    <string name="unlock_all">Unlock all</string>
     <string name="achievements">Saavutukset</string>
     <string name="no">Ei</string>
     <string name="general">Yleiset</string>
@@ -88,6 +92,7 @@
     <string name="licenses">Lisenssit</string>
     <string name="google_play_games">Google Play Pelit</string>
     <string name="loading">Ladataan…</string>
+    <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">Yhdistä</string>
     <string name="connecting">Yhdistetään…</string>
     <string name="disconnect">Katkaise yhteys</string>
@@ -101,7 +106,7 @@
     <string name="themes">Teemat</string>
     <string name="delete_all_message">Poistetaanko kaikki tapahtumat pysyvästi.</string>
     <string name="remove_ad">Poista Mainokset</string>
-    <string name="help">Apua</string>
+    <string name="help">Hint</string>
     <string name="back">Takaisin</string>
     <string name="donation">Lahjoitus</string>
     <string name="open_on_game">Avaa pelinäytöllä</string>
@@ -117,12 +122,11 @@
     <string name="click_numbers">Salli numeroiden napauttaminen</string>
     <string name="flag_when_tap_numbers">Merkitse napauttaessasi numeroa</string>
     <string name="tap_to_customize">Paina mukauttaaksesi</string>
-    <string name="toggle_button_top">Näytä Vaihda-painike yläpalkissa</string>
     <string name="no_guess_fail_warning">Nykyinen miinakenttä ei välttämättä ole arvattamaton!</string>
     <string name="fixed_size">Kiinteä koko</string>
     <string name="progressive">Edistyvä</string>
     <string name="highlight_unsolved_numbers">Korosta ratkaisemattomat numerot</string>
-    <string name="left_handed">Vasenkätisyys</string>
+    <string name="show_clock">Show clock</string>
     <string name="donate_request">Jos pidät pelistä, harkitse lahjoittamista.</string>
     <string name="donate_help">Se auttaisi pitämään tämän projektin aktiivisena!</string>
 </resources>
