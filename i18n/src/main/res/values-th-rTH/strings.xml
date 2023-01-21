@@ -18,8 +18,8 @@
     <string name="legend">ตำนาน</string>
     <string name="open">เปิด</string>
     <string name="settings">การตั้งค่า</string>
-    <string name="control_settings">Control Settings</string>
-    <string name="shapes">Shapes</string>
+    <string name="control_settings">ตั้งค่าการควบคุม</string>
+    <string name="shapes">รูปร่าง</string>
     <string name="animations">ภาพเคลื่อนไหว</string>
     <string name="vibration">สั่นเมื่อแตะ</string>
     <string name="about">เกี่ยวกับ</string>
@@ -29,7 +29,7 @@
     <string name="width">ความกว้าง</string>
     <string name="height">วามสูง</string>
     <string name="mines">กับระเบิด</string>
-    <string name="seed">Seed</string>
+    <string name="seed">รหัสตัวเลข</string>
     <string name="retry_sure">หากคุณเริ่มเกมใหม่ความคืบหน้าในปัจจุบันของคุณจะหายไป</string>
     <string name="show_licenses">แสดงสิทธิ์การใช้งาน</string>
     <string name="new_game_request">ยืนยันเริ่มเกมใหม่หรือไม่？</string>
@@ -61,7 +61,7 @@
     <string name="use_question_mark">เครื่องหมายคำถาม</string>
     <string name="no_guessing_mode">โหมด \'ไม่ต้องเดา\'</string>
     <string name="control">การควบคุม</string>
-    <string name="control_types">Control Types</string>
+    <string name="control_types">ส่วนควบคุมประเภท</string>
     <string name="single_click">แตะเพียงครั้งเดียว</string>
     <string name="double_click">แตะสองครั้ง</string>
     <string name="long_press">แตะค้างไว้</string>
@@ -82,7 +82,7 @@
     <string name="resume">เริ่มต่อ</string>
     <string name="yes">ใช่</string>
     <string name="unlock">ปลดล็อค</string>
-    <string name="unlock_all">Unlock all</string>
+    <string name="unlock_all">ปลดล็อกทั้งหมด</string>
     <string name="achievements">ความสำเร็จ</string>
     <string name="no">ไม่ใช่</string>
     <string name="general">ทั่วไป</string>

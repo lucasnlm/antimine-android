@@ -18,8 +18,8 @@
     <string name="legend">أسطوري</string>
     <string name="open">فتح</string>
     <string name="settings">الإعدادات</string>
-    <string name="control_settings">Control Settings</string>
-    <string name="shapes">Shapes</string>
+    <string name="control_settings">Control settings</string>
+    <string name="shapes">أشكال</string>
     <string name="animations">الرسوم المتحركة</string>
     <string name="vibration">تغذية راجعة باللمس</string>
     <string name="about">حول</string>
@@ -61,7 +61,7 @@
     <string name="use_question_mark">استخدام الإستفهام</string>
     <string name="no_guessing_mode">وضع \"لا تخمين\"</string>
     <string name="control">التحكم</string>
-    <string name="control_types">Control Types</string>
+    <string name="control_types">نوع التحكم</string>
     <string name="single_click">ضغطة واحدة</string>
     <string name="double_click">نقر مزدوج</string>
     <string name="long_press">ضغط مطوّل</string>
@@ -82,7 +82,7 @@
     <string name="resume">استأنف</string>
     <string name="yes">نعم</string>
     <string name="unlock">فتح</string>
-    <string name="unlock_all">Unlock all</string>
+    <string name="unlock_all">فتح الكل</string>
     <string name="achievements">الإنجازات</string>
     <string name="no">لا</string>
     <string name="general">عام</string>
@@ -126,7 +126,7 @@
     <string name="fixed_size">الجم الثابت</string>
     <string name="progressive">التقدمي</string>
     <string name="highlight_unsolved_numbers">تسليط الضوء على الأرقام غير المحلولة</string>
-    <string name="show_clock">Show clock</string>
+    <string name="show_clock">إظهار الساعة</string>
     <string name="donate_request">If you like this game, consider making a donation.</string>
     <string name="donate_help">It will help keep this project active!</string>
 </resources>

@@ -18,8 +18,8 @@
     <string name="legend">전설</string>
     <string name="open">오픈</string>
     <string name="settings">설정</string>
-    <string name="control_settings">Control Settings</string>
-    <string name="shapes">Shapes</string>
+    <string name="control_settings">조작 설정</string>
+    <string name="shapes">모양</string>
     <string name="animations">애니메이션</string>
     <string name="vibration">터치 시 진동</string>
     <string name="about">앱 정보</string>
@@ -29,7 +29,7 @@
     <string name="width">가로</string>
     <string name="height">세로</string>
     <string name="mines">지뢰 수</string>
-    <string name="seed">Seed</string>
+    <string name="seed">시드</string>
     <string name="retry_sure">새 게임을 시작하면 현재 진행 상황이 손실됩니다.</string>
     <string name="show_licenses">저작권 표시</string>
     <string name="new_game_request">새로운 게임을 시작하시겠습니까?</string>
@@ -61,7 +61,7 @@
     <string name="use_question_mark">물음표 깃발 사용</string>
     <string name="no_guessing_mode">\'추측 없음\' 모드</string>
     <string name="control">컨트롤</string>
-    <string name="control_types">Control Types</string>
+    <string name="control_types">조작 유형</string>
     <string name="single_click">한 번 누르기</string>
     <string name="double_click">두 번 누르기</string>
     <string name="long_press">길게 누르기</string>
@@ -72,17 +72,17 @@
     <string name="continue_game">계속</string>
     <string name="empty">비어있음</string>
     <string name="cant_do_it_now">지금은 불가능한 작업입니다</string>
-    <string name="mine_revealed">A mine has been revealed</string>
-    <string name="fail_to_load_ad">Fail to load ad</string>
+    <string name="mine_revealed">지뢰가 드러났습니다</string>
+    <string name="fail_to_load_ad">광고 불러오기 실패</string>
     <string name="you_have_received">당신은 받았습니다: +%1$d</string>
-    <string name="help_win_a_game">For more hints, you must win a game.</string>
+    <string name="help_win_a_game">더 많은 힌트를 받으려면 게임에서 승리해야 합니다.</string>
     <string name="unknown_error">알 수 없는 오류</string>
     <string name="leaderboards">리더보드</string>
     <string name="cancel">취소</string>
     <string name="resume">계속하기</string>
     <string name="yes">네</string>
     <string name="unlock">잠금 해제</string>
-    <string name="unlock_all">Unlock all</string>
+    <string name="unlock_all">모두 잠금 해제</string>
     <string name="achievements">도전 과제</string>
     <string name="no">아니오</string>
     <string name="general">기본설정</string>
@@ -92,7 +92,7 @@
     <string name="licenses">라이선스</string>
     <string name="google_play_games">Google Play 게임</string>
     <string name="loading">로딩중…</string>
-    <string name="creating_valid_game">Creating valid game…</string>
+    <string name="creating_valid_game">유효한 게임 생성 중…</string>
     <string name="connect">연결하기</string>
     <string name="connecting">연결중…</string>
     <string name="disconnect">연결 해제</string>
@@ -106,7 +106,7 @@
     <string name="themes">테마 선택</string>
     <string name="delete_all_message">모든 이벤트 알림을 영구히 삭제합니다.</string>
     <string name="remove_ad">광고 제거</string>
-    <string name="help">Hint</string>
+    <string name="help">힌트</string>
     <string name="back">뒤로</string>
     <string name="donation">공헌</string>
     <string name="open_on_game">게임 화면에서 열기</string>
@@ -126,7 +126,7 @@
     <string name="fixed_size">고정 크기</string>
     <string name="progressive">프로그레시브</string>
     <string name="highlight_unsolved_numbers">미해결 숫자 강조</string>
-    <string name="show_clock">Show clock</string>
+    <string name="show_clock">시계 표시</string>
     <string name="donate_request">이 게임이 좋으시다면, 후원을 고려해주세요.</string>
     <string name="donate_help">프로젝트를 지속적으로 진행하는 데 도움이 됩니다!</string>
 </resources>
