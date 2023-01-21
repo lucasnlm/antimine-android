@@ -18,8 +18,8 @@
     <string name="legend">Efsane</string>
     <string name="open">Aç</string>
     <string name="settings">Ayarlar</string>
-    <string name="control_settings">Control Settings</string>
-    <string name="shapes">Shapes</string>
+    <string name="control_settings">Kontrol ayarları</string>
+    <string name="shapes">Şekiller</string>
     <string name="animations">Animasyonlar</string>
     <string name="vibration">Dokunsal Geribildirim</string>
     <string name="about">Hakkında</string>
@@ -29,7 +29,7 @@
     <string name="width">Genişlik</string>
     <string name="height">Yükseklik</string>
     <string name="mines">Mayınlar</string>
-    <string name="seed">Seed</string>
+    <string name="seed">Oluşum Numarası</string>
     <string name="retry_sure">Yeni bir oyuna başlarsanız,\nmevcut ilerlemeniz kaybolacak.</string>
     <string name="show_licenses">Lisansları Göster</string>
     <string name="new_game_request">Yeni bir oyun başlatmak istiyor musunuz?</string>
@@ -61,7 +61,7 @@
     <string name="use_question_mark">Soru İşareti Kullan</string>
     <string name="no_guessing_mode">\"Tahmin yok\" modu</string>
     <string name="control">Kontroller</string>
-    <string name="control_types">Control Types</string>
+    <string name="control_types">Kontrol Tipleri</string>
     <string name="single_click">Tek Tıklama</string>
     <string name="double_click">Çift Tıklama</string>
     <string name="long_press">Uzun Basış</string>
@@ -72,17 +72,17 @@
     <string name="continue_game">Devam Et</string>
     <string name="empty">Boş</string>
     <string name="cant_do_it_now">Bunu şimdi yapmak imkansız</string>
-    <string name="mine_revealed">A mine has been revealed</string>
-    <string name="fail_to_load_ad">Fail to load ad</string>
+    <string name="mine_revealed">Bir mayın ortaya çıkarıldı</string>
+    <string name="fail_to_load_ad">Reklamı yükleme başarısız oldu</string>
     <string name="you_have_received">Aldın: +%1$d</string>
-    <string name="help_win_a_game">For more hints, you must win a game.</string>
+    <string name="help_win_a_game">Daha fazla ipucu için bir oyun kazanmalısınız.</string>
     <string name="unknown_error">Bilinmeyen hata.</string>
     <string name="leaderboards">Liderlik Tablosu</string>
     <string name="cancel">İptal</string>
     <string name="resume">Devam et</string>
     <string name="yes">Evet</string>
     <string name="unlock">Kilidini Aç</string>
-    <string name="unlock_all">Unlock all</string>
+    <string name="unlock_all">Tümünü aç</string>
     <string name="achievements">Başarımlar</string>
     <string name="no">Hayır</string>
     <string name="general">Genel</string>
@@ -92,7 +92,7 @@
     <string name="licenses">Lisanslar</string>
     <string name="google_play_games">Google Play Oyunlar</string>
     <string name="loading">Yükleniyor…</string>
-    <string name="creating_valid_game">Creating valid game…</string>
+    <string name="creating_valid_game">Geçerli bir oyun yaratılıyor…</string>
     <string name="connect">Bağlan</string>
     <string name="connecting">Bağlanıyor…</string>
     <string name="disconnect">Bağlantıyı kes</string>
@@ -106,7 +106,7 @@
     <string name="themes">Temalar</string>
     <string name="delete_all_message">Tüm etkinlikleri kalıcı olarak silin.</string>
     <string name="remove_ad">Reklamları kaldır</string>
-    <string name="help">Hint</string>
+    <string name="help">İpucu</string>
     <string name="back">Geri</string>
     <string name="donation">Bağış</string>
     <string name="open_on_game">Oyun ekranına aç</string>
@@ -126,7 +126,7 @@
     <string name="fixed_size">Sabit Boyut</string>
     <string name="progressive">İlerleme</string>
     <string name="highlight_unsolved_numbers">Çözülmemiş sayıları vurgula</string>
-    <string name="show_clock">Show clock</string>
+    <string name="show_clock">Saati göster</string>
     <string name="donate_request">Eğer oyunu beğendiyseniz, bağış yapmayı unutmayın.</string>
     <string name="donate_help">Projeyi ayakta tutmamıza yardımcı olacaktır!</string>
 </resources>

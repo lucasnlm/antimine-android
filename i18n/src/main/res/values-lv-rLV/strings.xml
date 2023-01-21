@@ -18,8 +18,8 @@
     <string name="legend">Leģendas</string>
     <string name="open">Atvērt</string>
     <string name="settings">Iestatījumi</string>
-    <string name="control_settings">Control Settings</string>
-    <string name="shapes">Shapes</string>
+    <string name="control_settings">Vadības iestatījumi</string>
+    <string name="shapes">Apveidi</string>
     <string name="animations">Animācijas</string>
     <string name="vibration">Sajūtu atgriezeniskā saite</string>
     <string name="about">Par lietotni</string>
@@ -29,7 +29,7 @@
     <string name="width">Platums</string>
     <string name="height">Augstums</string>
     <string name="mines">Mīnu skaits</string>
-    <string name="seed">Seed</string>
+    <string name="seed">Sēkla</string>
     <string name="retry_sure">Uzsākot jaunu spēli pašreizējais progress tiks zaudēts.</string>
     <string name="show_licenses">Rādīt licences</string>
     <string name="new_game_request">Vai tu vēlies uzsākt jaunu spēli?</string>
@@ -61,7 +61,7 @@
     <string name="use_question_mark">Iespējot jautājuma zīmi</string>
     <string name="no_guessing_mode">Režīms bez minēšanas</string>
     <string name="control">Vadība</string>
-    <string name="control_types">Control Types</string>
+    <string name="control_types">Vadības veidi</string>
     <string name="single_click">Pieskāriens</string>
     <string name="double_click">Divkāršs piesitiens</string>
     <string name="long_press">Ilgs pieskāriens</string>
@@ -72,17 +72,17 @@
     <string name="continue_game">Turpināt</string>
     <string name="empty">Tukšs</string>
     <string name="cant_do_it_now">To pašreiz nav iespējams veikt</string>
-    <string name="mine_revealed">A mine has been revealed</string>
-    <string name="fail_to_load_ad">Fail to load ad</string>
+    <string name="mine_revealed">Tika atklāta mīna</string>
+    <string name="fail_to_load_ad">Neizdevās ielādēt reklāmu</string>
     <string name="you_have_received">Tu esi saņēmis: +%1$d</string>
-    <string name="help_win_a_game">For more hints, you must win a game.</string>
+    <string name="help_win_a_game">Jauzvar spēle, lai iegūt vairāk norāžu.</string>
     <string name="unknown_error">Nezināma kļūda.</string>
     <string name="leaderboards">Labāko spēlētāju saraksts</string>
     <string name="cancel">Atcelt</string>
     <string name="resume">Vienalga turpināt</string>
     <string name="yes">Jā</string>
     <string name="unlock">Atbloķēt</string>
-    <string name="unlock_all">Unlock all</string>
+    <string name="unlock_all">Atslēgt visu</string>
     <string name="achievements">Sasniegumi</string>
     <string name="no">Nē</string>
     <string name="general">Vispārīgi</string>
@@ -92,7 +92,7 @@
     <string name="licenses">Licences</string>
     <string name="google_play_games">Google Play spēles</string>
     <string name="loading">Notiek ielāde…</string>
-    <string name="creating_valid_game">Creating valid game…</string>
+    <string name="creating_valid_game">Izveido derīgu spēli…</string>
     <string name="connect">Savienot</string>
     <string name="connecting">Notiek savienojuma izveide…</string>
     <string name="disconnect">Atvienot</string>
@@ -106,7 +106,7 @@
     <string name="themes">Izskats</string>
     <string name="delete_all_message">Neatgriezeniski dzēst visus notikumus.</string>
     <string name="remove_ad">Premium</string>
-    <string name="help">Hint</string>
+    <string name="help">Norāde</string>
     <string name="back">Atpakaļ</string>
     <string name="donation">Ziedot</string>
     <string name="open_on_game">Atverot lietotni turpināt pēdējo spēli</string>
@@ -126,7 +126,7 @@
     <string name="fixed_size">Nemainīga lieluma</string>
     <string name="progressive">Ar attīstību</string>
     <string name="highlight_unsolved_numbers">Izcelt neatrisinātos skaitļus</string>
-    <string name="show_clock">Show clock</string>
+    <string name="show_clock">Rādīt pulksteni</string>
     <string name="donate_request">Lūgums apsvērt ziedojumu, ja patīk šī spēle.</string>
     <string name="donate_help">Tas palīdzēs nodrošināt izstrādi.</string>
 </resources>

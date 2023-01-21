@@ -18,8 +18,8 @@
     <string name="legend">レジェンド</string>
     <string name="open">開く</string>
     <string name="settings">設定</string>
-    <string name="control_settings">Control Settings</string>
-    <string name="shapes">Shapes</string>
+    <string name="control_settings">コントロールの設定</string>
+    <string name="shapes">シェイプ</string>
     <string name="animations">アニメーション</string>
     <string name="vibration">タッチ操作バイブ</string>
     <string name="about">このアプリについて</string>
@@ -61,7 +61,7 @@
     <string name="use_question_mark">クエスチョンマークを使う</string>
     <string name="no_guessing_mode">「推測なし」 モード</string>
     <string name="control">コントロール</string>
-    <string name="control_types">Control Types</string>
+    <string name="control_types">コントロールタイプ</string>
     <string name="single_click">シングルタップ</string>
     <string name="double_click">ダブルタップ</string>
     <string name="long_press">長押し</string>
@@ -92,7 +92,7 @@
     <string name="licenses">ライセンス</string>
     <string name="google_play_games">Google Play ゲーム</string>
     <string name="loading">読み込み中…</string>
-    <string name="creating_valid_game">Creating valid game…</string>
+    <string name="creating_valid_game">有効なゲームを作成しています…</string>
     <string name="connect">接続</string>
     <string name="connecting">接続しています...</string>
     <string name="disconnect">切断</string>
@@ -106,7 +106,7 @@
     <string name="themes">テーマ</string>
     <string name="delete_all_message">すべてのイベントを永久的に削除します。</string>
     <string name="remove_ad">広告を削除</string>
-    <string name="help">Hint</string>
+    <string name="help">ヒント</string>
     <string name="back">戻る</string>
     <string name="donation">寄付</string>
     <string name="open_on_game">ゲーム画面で開く</string>
@@ -126,7 +126,7 @@
     <string name="fixed_size">固定サイズ</string>
     <string name="progressive">プログレッシブ</string>
     <string name="highlight_unsolved_numbers">未解決の数字をハイライト表示</string>
-    <string name="show_clock">Show clock</string>
+    <string name="show_clock">時計の表示</string>
     <string name="donate_request">もしこのゲームが気に入ったら、ぜひご支援の検討をお願いします。</string>
     <string name="donate_help">このプロジェクトを長く続かせるのに一役買うでしょう！</string>
 </resources>

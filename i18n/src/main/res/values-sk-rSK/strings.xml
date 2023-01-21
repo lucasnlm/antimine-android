@@ -3,7 +3,7 @@
     <string name="tutorial">Tutorial</string>
     <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
     <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
-    <string name="tutorial_text_2">After marking your first flag, review the numbers and analyze the next square.</string>
+    <string name="tutorial_text_2">After mark your first flag, review the numbers and analyze the next square.</string>
     <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>
     <string name="tutorial_text_4">Review the numbers and keep opening squares.</string>
     <string name="games">Games</string>
@@ -18,8 +18,8 @@
     <string name="legend">Legend</string>
     <string name="open">Open</string>
     <string name="settings">Settings</string>
-    <string name="control_settings">Control Settings</string>
-    <string name="shapes">Shapes</string>
+    <string name="control_settings">Nastavenia ovladania</string>
+    <string name="shapes">Tvary</string>
     <string name="animations">Animations</string>
     <string name="vibration">Haptic Feedback</string>
     <string name="about">About</string>
@@ -29,7 +29,7 @@
     <string name="width">Width</string>
     <string name="height">Height</string>
     <string name="mines">Mines</string>
-    <string name="seed">Seed</string>
+    <string name="seed">Zrnko</string>
     <string name="retry_sure">If you start a new game, your current progress will be lost.</string>
     <string name="show_licenses">Show Licenses</string>
     <string name="new_game_request">Do you want to start a new game?</string>
@@ -61,7 +61,7 @@
     <string name="use_question_mark">Use Question Mark</string>
     <string name="no_guessing_mode">\'No guessing\' mode</string>
     <string name="control">Controls</string>
-    <string name="control_types">Control Types</string>
+    <string name="control_types">Platobné status</string>
     <string name="single_click">Single Tap</string>
     <string name="double_click">Double Tap</string>
     <string name="long_press">Long Tap</string>
@@ -72,17 +72,17 @@
     <string name="continue_game">Continue</string>
     <string name="empty">Empty</string>
     <string name="cant_do_it_now">Impossible to do that now</string>
-    <string name="mine_revealed">A mine has been revealed</string>
-    <string name="fail_to_load_ad">Fail to load ad</string>
+    <string name="mine_revealed">Bola odhalená mína</string>
+    <string name="fail_to_load_ad">Nepodarilo sa načítať reklamu</string>
     <string name="you_have_received">You have received: +%1$d</string>
-    <string name="help_win_a_game">For more hints, you must win a game.</string>
+    <string name="help_win_a_game">Pre viac nápovedí musíte vyhrať hru.</string>
     <string name="unknown_error">Unknown error.</string>
     <string name="leaderboards">Leaderboards</string>
     <string name="cancel">Cancel</string>
     <string name="resume">Resume</string>
     <string name="yes">Yes</string>
     <string name="unlock">Unlock</string>
-    <string name="unlock_all">Unlock all</string>
+    <string name="unlock_all">Odomknúť všetko</string>
     <string name="achievements">Achievements</string>
     <string name="no">No</string>
     <string name="general">General</string>
@@ -92,7 +92,7 @@
     <string name="licenses">Licenses</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Loading…</string>
-    <string name="creating_valid_game">Creating valid game…</string>
+    <string name="creating_valid_game">Tvorba platnej hry…</string>
     <string name="connect">Connect</string>
     <string name="connecting">Connecting…</string>
     <string name="disconnect">Disconnect</string>
@@ -106,7 +106,7 @@
     <string name="themes">Themes</string>
     <string name="delete_all_message">Delete all events permanently.</string>
     <string name="remove_ad">Premium</string>
-    <string name="help">Hint</string>
+    <string name="help">Rady</string>
     <string name="back">Back</string>
     <string name="donation">Donation</string>
     <string name="open_on_game">Open on game screen</string>
@@ -125,8 +125,8 @@
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
-    <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
-    <string name="show_clock">Show clock</string>
-    <string name="donate_request">If you like this game, consider making a donation.</string>
-    <string name="donate_help">It will help keep this project active!</string>
+    <string name="highlight_unsolved_numbers">Zvýrazniť nevyriešené čísla</string>
+    <string name="show_clock">Zobraziť hodiny</string>
+    <string name="donate_request">Ak sa vám páči táto hra, zvážte prispieť darom.</string>
+    <string name="donate_help">To pomôže udržať tento projekt aktívnym!</string>
 </resources>

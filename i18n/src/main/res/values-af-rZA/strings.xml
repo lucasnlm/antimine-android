@@ -18,7 +18,7 @@
     <string name="legend">Legende</string>
     <string name="open">Maak oop</string>
     <string name="settings">Verstellings</string>
-    <string name="control_settings">Control Settings</string>
+    <string name="control_settings">Kontrole stellings</string>
     <string name="shapes">Shapes</string>
     <string name="animations">Animasie</string>
     <string name="vibration">Haptiese terugvoer</string>
@@ -82,7 +82,7 @@
     <string name="resume">Hervat</string>
     <string name="yes">Ja</string>
     <string name="unlock">Ontsluit</string>
-    <string name="unlock_all">Unlock all</string>
+    <string name="unlock_all">Ontsluit almal</string>
     <string name="achievements">Prestasies</string>
     <string name="no">Nee</string>
     <string name="general">Algemeen</string>

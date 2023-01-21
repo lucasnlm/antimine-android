@@ -1,1 +1,1 @@
-Ryd skjulte miner fra et minefelt 
+Et puslespil, hvor du søger efter alle skjulte miner. 

@@ -1,49 +1,49 @@
-Test din ræsonnement magt på et udfordrende puslespil, hvor du er nødt til at løse et minefelt uden at eksplodere nogen mine.
-Dette er et minimalistisk og moderne version af det klassiske Minesweeper.
+Test din evne til at ræsonnere i et udfordrende puslespil, hvor du skal løse et minefelt uden at få en mine til at eksplodere.
+Dette er en minimalistisk og moderne version af det klassiske Minesweeper.
 
-Er du i stand til at rydde et minefelt? Afsted!
+Kan du rydde et minefelt? Afsted!
 
 FORMÅL
-Det ligesom Minesweeper. Du vinder spillet, når du har flaget hver mine i minefeltet. Vær forsigtig med ikke at udløse en!
+Det er ligesom Minesweeper. Du vinder spillet, når du har markeret alle miner i minefeltet med et flag. Pas på ikke at udløse en!
 
-NO GUESSING
-Dette spil har en algorimte, der altid skaber løsbare minefelter. Du bliver ikke nød til at gætte hvor den sidste mine er!
+INGEN GÆTTERI
+Dette spil har en algoritme, der altid skaber løsbare minefelter. Du bliver ikke nødt til at gætte, hvor den sidste mine er!
 
-SPIL NIVEAUER
-Ligesom Minesweeper, har dette spil forskellige niveauer: Begynder, Mellemliggende, og ekspert. Men det har også en unik progressiv tilstand, der bliver hårdere, når du vinder.
+SPILNIVEAUER
+Ligesom Minesweeper har dette spil forskellige niveauer: Begynder, Mellem, og Ekspert. Men det har også en unik progressiv tilstand, der bliver hårdere, når du vinder.
 
-BRUGERDEFINEREDE NIVEAU
-Hvis standardtilstandene ikke er nok, kan du oprette dit niveau sværhed!
+BRUGERDEFINERET NIVEAU
+Hvis standardtilstandene ikke er nok, kan du oprette din egen sværhedsgrad!
 
 TEMAER
-Antmine har mere end 15 temaer (inkluderende lys, mørke og AMOLED). Og snart vil der blive tilføjet flere!
+Antimine har mere end 15 temaer (inklusiv lys, mørk og AMOLED). Og snart bliver der tilføjet flere!
 
 MINIMALIST
 Rent udseende og følelse: en minimalistisk visuel og også let app størrelse (mindre end 9MB).
 
 VEJLEDNING
-Ved du ikke, hvordan man spiller Minesweeper? Intet problem, du kan spille vores vejlednings niveau og aktivere Tips i indstillinger.
+Ved du ikke, hvordan man spiller Minesweeper? Intet problem, du kan spille vores vejledningsniveau og aktivere Tips i indstillinger.
 
 STATISTIK
 Tjek dine resultater og udvikling.
 
-SPIL ASSISTENT
+SPILASSISTENT
 Spillet vil automatisk markere de felter du isolerede. 
 
 TILPASNING
 Du kan ændre spillet for at gøre det ligesom du ønsker. 
-Eksempel: Hjælp, animationer, haptisk feedback, spørgsmåltegn.
+Eksempel: Hjælp, animationer, haptisk feedback, spørgsmålstegn.
 
-KONTROL
+KONTROLLER
 Det understøtter fire forskellige kontrolordninger. Eksempel: marker ved tryk eller langt tryk.
 
-OPNÅELSER OG LEDERTAVLER 
-Du har otte opnåelser at låse op og forskellige ledertavler til at dele med dine venner.
+RESULTATER OG RANGLISTER 
+Du har otte præstationer at låse op og forskellige ranglister at dele med dine venner.
 
 ONLINE ELLER OFFLINE
 Du behøver ikke at være online for at spille spillet!
 
-AUTO-GEM
-Du kan starte spillet og fortsætte det senere! Det vil auto-gemme dit spil.
+GEM AUTOMATISK
+Du kan starte et spil og fortsætte det senere! Det vil automatisk gemme dit spil.
 
 God fornøjelse.
