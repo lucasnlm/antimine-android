@@ -24,13 +24,13 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
             } else {
-                @Suppress("DEPRECATION") getPackageInfo(packageName, flags)
+                @Suppress("DEPRECATION")
+                getPackageInfo(packageName, flags)
             }
         } catch (e: Exception) {
             null
         }
     }
-
 
     private fun PackageManager.getApplicationInfoCompat(packageName: String, flags: Int = 0): ApplicationInfo? {
         return try {
@@ -38,13 +38,13 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
                 val applicationInfoFlags = PackageManager.ApplicationInfoFlags.of(flags.toLong())
                 getApplicationInfo(packageName, applicationInfoFlags)
             } else {
-                @Suppress("DEPRECATION") getApplicationInfo(packageName, flags)
+                @Suppress("DEPRECATION")
+                getApplicationInfo(packageName, flags)
             }
         } catch (e: Exception) {
             null
         }
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
