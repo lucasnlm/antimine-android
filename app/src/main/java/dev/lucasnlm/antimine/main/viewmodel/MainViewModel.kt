@@ -86,7 +86,6 @@ class MainViewModel(
             setPremiumFeatures(premiumFeatures != 0)
             useControlStyle(ControlStyle.values()[controlStyle])
             setOpenGameDirectly(openDirectly != 0)
-            setUnlockedThemes(unlockedThemes)
             setDoubleClickTimeout(doubleClickTimeout.toLong())
             setDimNumbers(dimNumbers != 0)
             setTimerVisible(timerVisible != 0)

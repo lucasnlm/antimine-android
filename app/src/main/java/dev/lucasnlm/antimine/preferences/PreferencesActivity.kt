@@ -1,13 +1,22 @@
 package dev.lucasnlm.antimine.preferences
 
+import android.app.Activity
+import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.DocumentsContract
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.preference.PreferenceManager
 import com.google.android.material.materialswitch.MaterialSwitch
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
+import dev.lucasnlm.antimine.ui.ext.showWarning
 import dev.lucasnlm.antimine.ui.model.TopBarAction
 import kotlinx.android.synthetic.main.activity_preferences.*
 import org.koin.android.ext.android.inject
@@ -18,9 +27,15 @@ class PreferencesActivity :
 
     private val preferenceRepository: IPreferencesRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
+    private val settingsBackupManager: SettingsBackupManager by lazy {
+        SettingsBackupManager(applicationContext)
+    }
+
+    private lateinit var exportResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var importResultLauncher: ActivityResultLauncher<Intent>
 
     private val preferenceManager by lazy {
-        PreferenceManager.getDefaultSharedPreferences(this)
+        PreferenceManager.getDefaultSharedPreferences(applicationContext)
     }
 
     private fun bindItem(
@@ -38,6 +53,44 @@ class PreferencesActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        exportResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                var result = false
+                val target = it.data?.data
+                if (target != null) {
+                    val data = preferenceRepository.exportData()
+                    result = settingsBackupManager.exportSettings(target, data)
+                }
+
+                if (result) {
+                    showWarning(R.string.exported_success)
+                } else {
+                    showWarning(R.string.error)
+                }
+            }
+        }
+
+        importResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                var result = false
+                val target = it.data?.data
+                if (target != null) {
+                    val data = settingsBackupManager.importSettings(target)
+                    if (data != null && data.isNotEmpty()) {
+                        preferenceRepository.importData(data)
+                        result = true
+                    }
+                }
+
+                if (result) {
+                    showWarning(R.string.imported_success)
+                    bindItems()
+                } else {
+                    showWarning(R.string.error)
+                }
+            }
+        }
 
         bindToolbar(toolbar)
         bindToolbarAction(preferenceRepository.hasCustomizations())
@@ -132,6 +185,36 @@ class PreferencesActivity :
             checked = preferenceRepository.dimNumbers(),
             action = { preferenceRepository.setDimNumbers(it) },
         )
+
+        exportSettings.setOnClickListener {
+            val exportIntent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)
+                type = "application/json"
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val documentsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                    putExtra(DocumentsContract.EXTRA_INITIAL_URI, documentsDir.toUri())
+                }
+            }
+
+            exportResultLauncher.launch(exportIntent)
+        }
+
+        importSettings.setOnClickListener {
+            val exportIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)
+                type = "application/json"
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val documentsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                    putExtra(DocumentsContract.EXTRA_INITIAL_URI, documentsDir.toUri())
+                }
+            }
+
+            importResultLauncher.launch(exportIntent)
+        }
     }
 
     override fun onDestroy() {

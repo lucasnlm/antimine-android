@@ -12,5 +12,7 @@ interface IPreferencesManager {
     fun getString(key: String): String?
     fun putString(key: String, value: String)
     fun removeKey(key: String)
+    fun clear()
     fun contains(key: String): Boolean
+    fun toMap(): Map<String, Any?>
 }

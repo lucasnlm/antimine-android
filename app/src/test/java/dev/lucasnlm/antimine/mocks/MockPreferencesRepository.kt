@@ -140,12 +140,6 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setUserId(userId: String) {}
 
-    override fun addUnlockedTheme(id: Int) {}
-
-    override fun setUnlockedThemes(themes: String) {}
-
-    override fun getUnlockedThemes(): List<Int> = listOf()
-
     override fun showTutorialDialog(): Boolean = false
 
     override fun setTutorialDialog(show: Boolean) {}
@@ -183,4 +177,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun showContinueGame() = true
 
     override fun setContinueGameLabel(value: Boolean) {}
+
+    override fun exportData(): Map<String, Any?> = mapOf()
+
+    override fun importData(data: Map<String, Any?>) {}
 }

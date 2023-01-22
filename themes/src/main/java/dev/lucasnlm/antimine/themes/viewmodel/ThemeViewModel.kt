@@ -28,7 +28,6 @@ class ThemeViewModel(
                 setTheme(event.newTheme)
                 analyticsManager.sentEvent(Analytics.ClickTheme(event.newTheme.id))
                 emit(state.copy(currentTheme = event.newTheme))
-                preferencesRepository.addUnlockedTheme(event.newTheme.id.toInt())
             }
             is ThemeEvent.ChangeSkin -> {
                 setSkin(event.newSkin)

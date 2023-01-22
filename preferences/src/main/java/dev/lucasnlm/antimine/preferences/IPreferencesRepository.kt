@@ -111,10 +111,6 @@ interface IPreferencesRepository {
     fun userId(): String?
     fun setUserId(userId: String)
 
-    fun addUnlockedTheme(id: Int)
-    fun setUnlockedThemes(themes: String)
-    fun getUnlockedThemes(): List<Int>
-
     fun showTutorialDialog(): Boolean
     fun setTutorialDialog(show: Boolean)
 
@@ -129,4 +125,7 @@ interface IPreferencesRepository {
 
     fun showContinueGame(): Boolean
     fun setContinueGameLabel(value: Boolean)
+
+    fun exportData(): Map<String, Any?>
+    fun importData(data: Map<String, Any?>)
 }

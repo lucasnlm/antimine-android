@@ -13,7 +13,7 @@ class PreferencesManager(
 
     override fun getBoolean(key: String, defaultValue: Boolean) = preferences.getBoolean(key, defaultValue)
 
-    override fun putBoolean(key: String, value: Boolean) = preferences.edit().putBoolean(key, value).apply()
+    override fun putBoolean(key: String, value: Boolean) = preferences.edit { putBoolean(key, value) }
 
     override fun getInt(key: String, defaultValue: Int) = preferences.getInt(key, defaultValue)
 
@@ -33,17 +33,21 @@ class PreferencesManager(
         }
     }
 
-    override fun putInt(key: String, value: Int) = preferences.edit().putInt(key, value).apply()
+    override fun putInt(key: String, value: Int) = preferences.edit { putInt(key, value) }
 
     override fun getString(key: String): String? = preferences.getString(key, null)
 
-    override fun putString(key: String, value: String) = preferences.edit().putString(key, value).apply()
+    override fun putString(key: String, value: String) = preferences.edit { putString(key, value) }
 
     override fun contains(key: String): Boolean = preferences.contains(key)
 
     override fun removeKey(key: String) = preferences.edit { remove(key) }
 
+    override fun clear() = preferences.edit { clear() }
+
     override fun getLong(key: String, defaultValue: Long): Long = preferences.getLong(key, defaultValue)
 
-    override fun putLong(key: String, value: Long) = preferences.edit().putLong(key, value).apply()
+    override fun putLong(key: String, value: Long) = preferences.edit { putLong(key, value) }
+
+    override fun toMap(): Map<String, Any?> = preferences.all.toMap()
 }
