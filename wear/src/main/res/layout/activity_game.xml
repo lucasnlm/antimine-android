@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.wear.widget.SwipeDismissFrameLayout
+        android:id="@+id/levelContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <requestFocus />
+    </androidx.wear.widget.SwipeDismissFrameLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tapToBegin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_background"
+        android:clickable="false"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:text="@string/tap_to_begin"
+        android:textAllCaps="true"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_background"
+        android:clickable="false"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:textAllCaps="true"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="12:00" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/loadingGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:hideAnimationBehavior="outward"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:showAnimationBehavior="inward"
+        app:trackThickness="2dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/newGame"
+        style="@style/CustomButtonActive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:contentDescription="@string/new_game"
+        android:gravity="center"
+        app:icon="@drawable/refresh"
+        app:iconPadding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/selectFlag"
+        style="@style/CustomButtonActive"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:contentDescription="@string/flag_tile"
+        android:gravity="center"
+        android:backgroundTint="?colorPrimary"
+        android:background="#FFFFFF"
+        android:foreground="?selectableItemBackgroundBorderless"
+        app:srcCompat="@drawable/flag"
+        app:tint="?colorOnPrimary"
+        android:scaleType="centerInside"
+        android:padding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/selectOpen"
+        style="@style/CustomButtonActive"
+        android:layout_width="16dp"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/open"
+        android:gravity="center"
+        android:backgroundTint="?colorPrimary"
+        android:background="#FFFFFF"
+        android:foreground="?selectableItemBackgroundBorderless"
+        app:srcCompat="@drawable/touch"
+        app:tint="?colorOnPrimary"
+        android:scaleType="centerInside"
+        android:padding="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/close"
+        style="@style/CustomButtonActive"
+        android:layout_width="16dp"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/close"
+        android:gravity="center"
+        android:backgroundTint="?colorPrimary"
+        android:background="#FFFFFF"
+        android:foreground="?selectableItemBackgroundBorderless"
+        app:srcCompat="@drawable/close"
+        app:tint="?colorOnPrimary"
+        android:scaleType="centerInside"
+        android:padding="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

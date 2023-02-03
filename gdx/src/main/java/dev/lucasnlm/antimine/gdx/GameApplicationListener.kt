@@ -44,7 +44,7 @@ class GameApplicationListener(
     private var minefieldStage: MinefieldStage? = null
     private var boundAreas: List<Area> = listOf()
     private var boundMinefield: Minefield? = null
-    private val useBlur = context.isPortrait()
+    private val useBlur = context.isPortrait() && !appVersion.isWatch()
 
     private var batch: SpriteBatch? = null
     private var mainFrameBuffer: FrameBuffer? = null

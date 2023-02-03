@@ -119,8 +119,8 @@ open class GameViewModel(
                 onContinueFromGameOver()
                 runClock()
                 val newState = state.copy(
-                    isActive = true,
-                    isGameCompleted = false,
+                    isActive = !gameController.allMinesFound(),
+                    isGameCompleted = gameController.remainingMines() == 0,
                 )
                 emit(newState)
             }
@@ -298,7 +298,7 @@ open class GameViewModel(
             mineCount = gameController.remainingMines(),
             field = gameController.field(),
             hints = tipRepository.getTotalTips(),
-            isGameCompleted = isCompletedWithMistakes(),
+            isGameCompleted = gameController.remainingMines() == 0,
             isCreatingGame = false,
             isActive = !gameController.allMinesFound(),
             hasMines = true,

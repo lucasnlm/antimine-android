@@ -161,6 +161,10 @@ class PreferencesRepository(
         return ControlStyle.values().getOrNull(index) ?: ControlStyle.SwitchMarkOpen
     }
 
+    override fun hasCustomControlStyle(): Boolean {
+        return preferencesManager.contains(PreferenceKeys.PREFERENCE_CONTROL_STYLE)
+    }
+
     override fun useControlStyle(controlStyle: ControlStyle) {
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_CONTROL_STYLE, controlStyle.ordinal)
     }

@@ -18,4 +18,8 @@ class AppVersionManagerImpl(
         // Any fork / changed version must also be open sourced.
         return valid
     }
+
+    override fun isWatch(): Boolean {
+        return false
+    }
 }

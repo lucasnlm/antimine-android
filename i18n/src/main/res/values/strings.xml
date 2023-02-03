@@ -23,6 +23,7 @@
     <string name="animations">Animations</string>
     <string name="vibration">Haptic Feedback</string>
     <string name="about">About</string>
+    <string name="quit">Quit</string>
     <string name="events">Statistics</string>
     <string name="custom">Custom</string>
     <string name="start">Start</string>

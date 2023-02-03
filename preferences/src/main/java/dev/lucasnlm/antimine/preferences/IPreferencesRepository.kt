@@ -16,6 +16,7 @@ interface IPreferencesRepository {
     fun forgetCustomSeed()
 
     fun controlStyle(): ControlStyle
+    fun hasCustomControlStyle(): Boolean
     fun useControlStyle(controlStyle: ControlStyle)
 
     fun isFirstUse(): Boolean

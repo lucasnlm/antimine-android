@@ -1,0 +1,43 @@
+package dev.lucasnlm.antimine.wear.message
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import dev.lucasnlm.antimine.ui.ext.ThemedActivity
+import dev.lucasnlm.antimine.wear.databinding.ActivityGameOverBinding
+import dev.lucasnlm.antimine.wear.game.GameActivity
+
+abstract class EmojiMessageActivity : ThemedActivity() {
+    @get:StringRes
+    abstract val message: Int
+
+    @get:DrawableRes
+    abstract val emojiRes: Int
+
+    private lateinit var binding: ActivityGameOverBinding
+
+    private fun newGame() {
+        val context = application.applicationContext
+        val intent = Intent(context, GameActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            putExtra(GameActivity.NEW_GAME, "true")
+        }
+        context.startActivity(intent)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityGameOverBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.image.setImageResource(emojiRes)
+
+        binding.message.text = getString(message)
+
+        binding.action.setOnClickListener {
+            newGame()
+        }
+    }
+}

@@ -26,6 +26,8 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun controlStyle(): ControlStyle = ControlStyle.Standard
 
+    override fun hasCustomControlStyle(): Boolean = false
+
     override fun useControlStyle(controlStyle: ControlStyle) {}
 
     override fun isFirstUse(): Boolean = false

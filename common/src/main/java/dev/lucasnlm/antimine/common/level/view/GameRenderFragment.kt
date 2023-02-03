@@ -38,6 +38,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
     private val appVersionManager: IAppVersionManager by inject()
 
     private var controlSwitcher: SwitchButtonView? = null
+    private val isWatch = appVersionManager.isWatch()
 
     private val levelApplicationListener by lazy {
         GameApplicationListener(
@@ -98,7 +99,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
             refreshZoom()
         }
 
-        if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
+        if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen && !isWatch) {
             view?.let {
                 bindControlSwitcherIfNeeded(it)
             }
@@ -134,7 +135,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                 .collect {
                     levelApplicationListener.onChangeGame()
 
-                    if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
+                    if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen && !isWatch) {
                         bindControlSwitcherIfNeeded(view)
                     }
                 }
