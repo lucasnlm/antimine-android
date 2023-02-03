@@ -11,8 +11,8 @@ android {
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
         applicationId 'dev.lucasnlm.antimine.wear'
-        versionCode 1700010
-        versionName '17.0.1'
+        versionCode 1701000
+        versionName '17.1.0'
         minSdkVersion 25
         targetSdkVersion 33
         multiDexEnabled true
