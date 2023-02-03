@@ -37,6 +37,10 @@
     <string name="game_time">게임 시간</string>
     <string name="settings_general">일반</string>
     <string name="settings_gameplay">게임 플레이</string>
+    <string name="export_settings">내보내기</string>
+    <string name="import_settings">가져오기</string>
+    <string name="exported_success">설정을 내보냈습니다!</string>
+    <string name="imported_success">설정을 불러왔습니다!</string>
     <string name="settings_accessibility">접근성</string>
     <string name="system">시스템</string>
     <string name="sign_in_failed">게임에 접속할 수 없습니다. 네트워크 환경을 확인해고 다시 접속해주세요.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">당신은 받았습니다: +%1$d</string>
     <string name="help_win_a_game">더 많은 힌트를 받으려면 게임에서 승리해야 합니다.</string>
     <string name="unknown_error">알 수 없는 오류</string>
+    <string name="error">오류!</string>
     <string name="leaderboards">리더보드</string>
     <string name="cancel">취소</string>
     <string name="resume">계속하기</string>

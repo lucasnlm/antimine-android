@@ -37,6 +37,10 @@
     <string name="game_time">Време в играта</string>
     <string name="settings_general">Основни</string>
     <string name="settings_gameplay">Начин на игра</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">Достъпност</string>
     <string name="system">Система</string>
     <string name="sign_in_failed">Неуспешно влизане. Моля проверете връзката си с интернет и опитайте отново.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Получихте: +%1$d</string>
     <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Неизвестна грешка.</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">Класиране</string>
     <string name="cancel">Отказ</string>
     <string name="resume">Продължи</string>

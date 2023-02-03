@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
     <string name="tutorial">Tutoriel</string>
-    <string name="tutorial_basic">La règle du jeu est simple, le nombre sur un carré indique le nombre de mines adjacentes et vous devez marquer toutes les mines.</string>
-    <string name="tutorial_text_1">Si un nombre touche le même nombre de carrés, alors les carrés sont tous des mines.</string>
-    <string name="tutorial_text_2">Après avoir placé votre premier drapeau, examinez les chiffres et analysez le carré suivant.</string>
+    <string name="tutorial_basic">La règle du jeu est simple, le numéro sur un carré indique le nombre de mines adjacentes et vous devez marquer toutes les mines.</string>
+    <string name="tutorial_text_1">Si un numéro touche le même nombre de carrés, alors les carrés sont tous des mines.</string>
+    <string name="tutorial_text_2">Après avoir placé votre premier drapeau, examinez les numéros et analysez le carré suivant.</string>
     <string name="tutorial_text_3">Si un carré a le même nombre de drapeaux, tous les autres carrés restants adjacents ne sont pas des mines (la flèche verte).</string>
-    <string name="tutorial_text_4">Examinez les chiffres et gardez les cases ouvertes.</string>
+    <string name="tutorial_text_4">Examinez les numéros et gardez les cases ouvertes.</string>
     <string name="games">Jeux</string>
     <string name="tap_to_begin">Cliquer pour commencer</string>
     <string name="previous_games">Parties précédentes</string>
@@ -37,6 +37,10 @@
     <string name="game_time">Temps de jeu</string>
     <string name="settings_general">Général</string>
     <string name="settings_gameplay">Jouabilité</string>
+    <string name="export_settings">Exporter</string>
+    <string name="import_settings">Importer</string>
+    <string name="exported_success">Paramètres exportés !</string>
+    <string name="imported_success">Paramètres importés !</string>
     <string name="settings_accessibility">Accessibilité</string>
     <string name="system">Système</string>
     <string name="sign_in_failed">Erreur lors de la connexion. Vérifiez l\'état de votre connexion Internet et réessayez.</string>
@@ -77,9 +81,10 @@
     <string name="you_have_received">Vous avez reçu : +%1$d</string>
     <string name="help_win_a_game">Pour plus d\'indices, vous devez gagner une partie.</string>
     <string name="unknown_error">Erreur inconnue.</string>
+    <string name="error">Erreur !</string>
     <string name="leaderboards">Classements</string>
     <string name="cancel">Annuler</string>
-    <string name="resume">Nouv. partie</string>
+    <string name="resume">Continuer la partie</string>
     <string name="yes">Oui</string>
     <string name="unlock">Déverrouiller</string>
     <string name="unlock_all">Débloquer tout</string>

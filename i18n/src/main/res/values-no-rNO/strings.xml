@@ -37,6 +37,10 @@
     <string name="game_time">Spilletid</string>
     <string name="settings_general">Generelt</string>
     <string name="settings_gameplay">Spillopplevelse</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">Tilgjengelighet</string>
     <string name="system">System</string>
     <string name="sign_in_failed">Innlogging feilet. Vennligst sjekk nettverkstilkoblingen din og prøv igjen.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Du har mottatt: +%1$d</string>
     <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Ukjent feil.</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">Ledertavle</string>
     <string name="cancel">Avbryt</string>
     <string name="resume">Fortsett</string>

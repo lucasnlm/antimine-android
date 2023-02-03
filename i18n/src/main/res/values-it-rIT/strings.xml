@@ -37,6 +37,10 @@
     <string name="game_time">Tempo di gioco</string>
     <string name="settings_general">Generale</string>
     <string name="settings_gameplay">Gioco</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">Accessibilità</string>
     <string name="system">Sistema</string>
     <string name="sign_in_failed">Impossibile accedere. Controllare la connessione di rete e riprovare.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Hai ricevuto: +%1$d</string>
     <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Errore sconosciuto.</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">Classifiche</string>
     <string name="cancel">Annulla</string>
     <string name="resume">Riprendi</string>

@@ -37,6 +37,10 @@
     <string name="game_time">遊戲時間</string>
     <string name="settings_general">一般的</string>
     <string name="settings_gameplay">遊戲玩法</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">無障礙</string>
     <string name="system">系統</string>
     <string name="sign_in_failed">無法登錄。請檢查您的網絡連接，然後重試。</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">您已收到：+%1$d</string>
     <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">未知錯誤。</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">排行榜</string>
     <string name="cancel">取消</string>
     <string name="resume">恢復</string>

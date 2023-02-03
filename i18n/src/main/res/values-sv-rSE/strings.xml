@@ -37,6 +37,10 @@
     <string name="game_time">Speltid</string>
     <string name="settings_general">Allmänt</string>
     <string name="settings_gameplay">Spelsätt</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">Tillgänglighet</string>
     <string name="system">System</string>
     <string name="sign_in_failed">Det gick inte att logga in. Kontrollera nätverksanslutningen och försök igen.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Du har fått: +%1$d</string>
     <string name="help_win_a_game">För fler ledtrådar, måste du vinna ett spel.</string>
     <string name="unknown_error">Okänt fel.</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">Topplistor</string>
     <string name="cancel">Avbryt</string>
     <string name="resume">Återuppta</string>

@@ -37,6 +37,10 @@
     <string name="game_time">Tempo de jogo</string>
     <string name="settings_general">Geral</string>
     <string name="settings_gameplay">Jogabilidade</string>
+    <string name="export_settings">Exportar</string>
+    <string name="import_settings">Importar</string>
+    <string name="exported_success">Configurações exportadas!</string>
+    <string name="imported_success">Configurações importadas!</string>
     <string name="settings_accessibility">Acessibilidade</string>
     <string name="system">Sistema</string>
     <string name="sign_in_failed">Não foi possível fazer a autenticação. Por favor verifica a tua ligação à Internet e tenta de novo.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Recebeste: +%1$d</string>
     <string name="help_win_a_game">Para mais dicas, tens de ganhar um jogo.</string>
     <string name="unknown_error">Erro desconhecido.</string>
+    <string name="error">Erro!</string>
     <string name="leaderboards">Quadro de pontuações</string>
     <string name="cancel">Cancelar</string>
     <string name="resume">Continuar</string>

@@ -37,6 +37,10 @@
     <string name="game_time">Herní čas</string>
     <string name="settings_general">Obecné</string>
     <string name="settings_gameplay">Hra</string>
+    <string name="export_settings">Exportovat</string>
+    <string name="import_settings">Importovat</string>
+    <string name="exported_success">Nastavení exportována!</string>
+    <string name="imported_success">Nastavení importována!</string>
     <string name="settings_accessibility">Přístupnost</string>
     <string name="system">Systém</string>
     <string name="sign_in_failed">Nelze se přihlásit. Zkontrolujte síťové připojení a akci opakujte.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Obdrželi jste: +%1$d</string>
     <string name="help_win_a_game">Pro další tipy musíte vyhrát hru.</string>
     <string name="unknown_error">Neznámá chyba.</string>
+    <string name="error">Chyba!</string>
     <string name="leaderboards">Žebříčky</string>
     <string name="cancel">Zrušit</string>
     <string name="resume">Pokračovat</string>

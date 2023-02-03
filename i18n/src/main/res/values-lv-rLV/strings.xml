@@ -37,6 +37,10 @@
     <string name="game_time">Spēles laiks</string>
     <string name="settings_general">Vispārīgi</string>
     <string name="settings_gameplay">Spēlē</string>
+    <string name="export_settings">Izdot</string>
+    <string name="import_settings">Ievietot</string>
+    <string name="exported_success">Iestatījumi izdoti</string>
+    <string name="imported_success">Iestatījumi ievietoti</string>
     <string name="settings_accessibility">Pieejamība</string>
     <string name="system">Sistēmas</string>
     <string name="sign_in_failed">Neizdevās pierakstīties. Lūdzu, pārbaudiet savu tīkla savienojumu un mēģiniet vēlreiz.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Tu esi saņēmis: +%1$d</string>
     <string name="help_win_a_game">Jauzvar spēle, lai iegūt vairāk norāžu.</string>
     <string name="unknown_error">Nezināma kļūda.</string>
+    <string name="error">Kļūda!</string>
     <string name="leaderboards">Labāko spēlētāju saraksts</string>
     <string name="cancel">Atcelt</string>
     <string name="resume">Vienalga turpināt</string>

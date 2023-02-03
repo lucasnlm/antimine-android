@@ -37,6 +37,10 @@
     <string name="game_time">Ώρα Παιχνιδιού</string>
     <string name="settings_general">Γενικά</string>
     <string name="settings_gameplay">Gameplay</string>
+    <string name="export_settings">Εξαγωγή</string>
+    <string name="import_settings">Εισαγωγή</string>
+    <string name="exported_success">Οι ρυθμίσεις εξήχθησαν!</string>
+    <string name="imported_success">Οι ρυθμίσεις εισήχθησαν!</string>
     <string name="settings_accessibility">Προσβασιμότητα</string>
     <string name="system">Σύστημα</string>
     <string name="sign_in_failed">Αποτυχία σύνδεσης. Ελέγξτε τη σύνδεση δικτύου σας και δοκιμάστε ξανά.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Εχεις λάβει: +%1$d</string>
     <string name="help_win_a_game">Για περισσότερες υποδείξεις, θα πρέπει να κερδίσετε ένα παιχνίδι.</string>
     <string name="unknown_error">Άγνωστο σφάλμα.</string>
+    <string name="error">Σφάλμα!</string>
     <string name="leaderboards">Πίνακες κατάταξης</string>
     <string name="cancel">Ακύρωση</string>
     <string name="resume">Συνέχεια</string>

@@ -37,6 +37,10 @@
     <string name="game_time">Peliaika</string>
     <string name="settings_general">Yleiset</string>
     <string name="settings_gameplay">Pelattavuus</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">Esteettömyys</string>
     <string name="system">Järjestelmä</string>
     <string name="sign_in_failed">Virhe kirjautuessa sisään. Tarkista verkkoyhteytesi ja yritä uudelleen.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Olet saanut: +%1$d</string>
     <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Tuntematon virhe.</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">Tulostaulukot</string>
     <string name="cancel">Peruuta</string>
     <string name="resume">Jatka</string>

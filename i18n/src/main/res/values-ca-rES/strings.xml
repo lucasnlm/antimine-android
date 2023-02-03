@@ -37,6 +37,10 @@
     <string name="game_time">Temps de joc</string>
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Joc</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">Accessibilitat</string>
     <string name="system">Sistema</string>
     <string name="sign_in_failed">No s\'ha pogut connectar. Si us plau verifica la teva connexió de xarxa i intenta-ho de nou.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Heu rebut: +%1$d</string>
     <string name="help_win_a_game">Per a més pistes, heu de guanyar una partida.</string>
     <string name="unknown_error">Error desconegut.</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">Llista de líders</string>
     <string name="cancel">Cancel•lar</string>
     <string name="resume">Continuar</string>

@@ -37,6 +37,10 @@
     <string name="game_time">Waktu permainan</string>
     <string name="settings_general">Umum</string>
     <string name="settings_gameplay">Gameplay</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">Aksesibilitas</string>
     <string name="system">Sistem</string>
     <string name="sign_in_failed">Gagal untuk masuk. Silakan periksa koneksi jaringan anda dan coba lagi.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Anda telah menerima: +%1$d</string>
     <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Kesalahan tidak diketahui.</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">Papan Peringkat</string>
     <string name="cancel">Batal</string>
     <string name="resume">Lanjutkan</string>

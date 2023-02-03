@@ -37,6 +37,10 @@
     <string name="game_time">Tenpo de Zogo</string>
     <string name="settings_general">Zenarałe</string>
     <string name="settings_gameplay">Zogo</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">Acesibiłità</string>
     <string name="system">Sistema</string>
     <string name="sign_in_failed">Aceso mìa riusìo. Controła ła conesion e prova da novo.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Te ghè resevùo +%1$d</string>
     <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Eror desconosesto.</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">Clasìfega</string>
     <string name="cancel">Desfa</string>
     <string name="resume">Taca da novo</string>
