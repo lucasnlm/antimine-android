@@ -127,6 +127,9 @@ interface IPreferencesRepository {
     fun showContinueGame(): Boolean
     fun setContinueGameLabel(value: Boolean)
 
+    fun showNewThemesIcon(): Boolean
+    fun setNewThemesIcon(visible: Boolean)
+
     fun exportData(): Map<String, Any?>
     fun importData(data: Map<String, Any?>)
 }

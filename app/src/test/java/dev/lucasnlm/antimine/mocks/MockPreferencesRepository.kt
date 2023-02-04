@@ -180,6 +180,10 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setContinueGameLabel(value: Boolean) {}
 
+    override fun showNewThemesIcon(): Boolean = false
+
+    override fun setNewThemesIcon(visible: Boolean) {}
+
     override fun exportData(): Map<String, Any?> = mapOf()
 
     override fun importData(data: Map<String, Any?>) {}

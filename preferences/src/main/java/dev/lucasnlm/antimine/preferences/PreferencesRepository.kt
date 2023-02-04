@@ -411,6 +411,14 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_CONTINUE, value)
     }
 
+    override fun showNewThemesIcon(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_NEW_THEMES_ICON, true)
+    }
+
+    override fun setNewThemesIcon(visible: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_NEW_THEMES_ICON, visible)
+    }
+
     override fun exportData(): Map<String, Any?> {
         return preferencesManager.toMap()
     }

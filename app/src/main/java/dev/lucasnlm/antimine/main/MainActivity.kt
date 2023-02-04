@@ -167,7 +167,14 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
 
         themes.setOnClickListener {
             val intent = Intent(this, ThemeActivity::class.java)
+            preferencesRepository.setNewThemesIcon(false)
             startActivity(intent)
+        }
+
+        newThemesIcon.visibility = if (preferencesRepository.showNewThemesIcon()) {
+            View.VISIBLE
+        } else {
+            View.GONE
         }
 
         controls.setOnClickListener {
