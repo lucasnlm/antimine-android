@@ -40,6 +40,11 @@ class SettingsBackupManager(
                 val bytes = stream.readAllBytesCompat()
                 val jsonStr = String(bytes, StandardCharsets.UTF_8)
                 result = jsonStringToMap(jsonStr)
+
+                if (result?.get(PACKAGE_KEY) != PACKAGE) {
+                    return null
+                }
+
                 result = filterDataToImport(result)
             }
         } catch (e: Exception) {
@@ -53,7 +58,9 @@ class SettingsBackupManager(
         var result = true
 
         val contentResolver: ContentResolver = context.contentResolver
-        val jsonData = mapToJsonString(filterDataToExport(exportData))
+        val filteredData = filterDataToExport(exportData).toMutableMap()
+        filteredData[PACKAGE_KEY] = PACKAGE
+        val jsonData = mapToJsonString(filteredData)
 
         try {
             contentResolver.openOutputStream(location)?.use { stream ->
@@ -104,5 +111,7 @@ class SettingsBackupManager(
     companion object {
         const val FILE_NAME = "antimine-settings-backup.json"
         const val PREFERENCE_SUFFIX = "preference_"
+        const val PACKAGE_KEY = "package"
+        const val PACKAGE = "dev.lucasnlm.antimine"
     }
 }
