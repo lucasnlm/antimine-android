@@ -18,7 +18,7 @@
         app:navigationIcon="@drawable/back_arrow"
         app:title="@string/settings" />
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fadeScrollbars="false"
@@ -207,5 +207,5 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/settingsManagement" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
