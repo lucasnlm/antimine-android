@@ -53,7 +53,7 @@
         <activity
             android:name="dev.lucasnlm.antimine.GameActivity"
             android:icon="@mipmap/ic_launcher"
-            android:launchMode="singleTop"
+            android:launchMode="singleInstance"
             android:parentActivityName=".main.MainActivity"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:saveEnabled="false"
