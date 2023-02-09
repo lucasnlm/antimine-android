@@ -25,7 +25,7 @@ class TutorialActivity : ThemedActivity(R.layout.tutorial_activity) {
         playGame.setOnClickListener {
             finish()
             val intent = Intent(this, Class.forName("dev.lucasnlm.antimine.GameActivity")).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
                 val bundle = Bundle().apply {
                     putSerializable("difficulty", Difficulty.Beginner)
                 }

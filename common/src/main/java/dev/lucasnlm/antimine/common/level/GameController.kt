@@ -19,6 +19,7 @@ import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withTimeout
 
 class GameController {
     private val minefield: Minefield
@@ -102,15 +103,20 @@ class GameController {
             val solver = LimitedCheckNeighborsSolver()
             creatingMinefield = true
             do {
-                field = minefieldCreator.create(safeId)
-                val fieldCopy = field.map { it.copy() }.toMutableList()
-                val minefieldHandler = MinefieldHandler(
-                    field = fieldCopy,
-                    useQuestionMark = false,
-                    individualActions = useIndividualActions(),
-                )
-                minefieldHandler.openAt(safeId, false)
-                noGuessTestedLevel = useSimonTatham || solver.trySolve(minefieldHandler.result().toMutableList())
+                var solvable = false
+                withTimeout(20000L) {
+                    field = minefieldCreator.create(safeId)
+                    val fieldCopy = field.map { it.copy() }.toMutableList()
+                    val minefieldHandler = MinefieldHandler(
+                        field = fieldCopy,
+                        useQuestionMark = false,
+                        individualActions = useIndividualActions(),
+                    )
+                    minefieldHandler.openAt(safeId, false)
+                    solvable = solver.trySolve(minefieldHandler.result().toMutableList())
+                }
+
+                noGuessTestedLevel = useSimonTatham || solvable
             } while (!useSimonTatham && solver.keepTrying() && !noGuessTestedLevel)
 
             firstOpen = FirstOpen.Position(safeId)

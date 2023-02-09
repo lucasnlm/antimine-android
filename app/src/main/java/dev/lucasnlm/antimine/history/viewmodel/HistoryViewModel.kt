@@ -45,7 +45,7 @@ class HistoryViewModel(
     private fun replayGame(uid: Int) {
         val context = application.applicationContext
         val intent = Intent(context, GameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
             putExtra(GameActivity.RETRY_GAME, uid)
         }
         context.startActivity(intent)
@@ -54,7 +54,7 @@ class HistoryViewModel(
     private fun loadGame(uid: Int) {
         val context = application.applicationContext
         val intent = Intent(context, GameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
             putExtra(GameActivity.START_GAME, uid)
         }
         context.startActivity(intent)

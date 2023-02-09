@@ -9,6 +9,10 @@
 -keep class dev.lucasnlm.antimine.common.level.database.dao.** { *; }
 -keep class androidx.room.** { *; }
 
+-keep class * implements android.os.Parcelable {
+   public static final android.os.Parcelable$Creator *;
+}
+
 -keepclassmembers @com.squareup.moshi.JsonClass class * extends java.lang.Enum {
     <fields>;
     **[] values();

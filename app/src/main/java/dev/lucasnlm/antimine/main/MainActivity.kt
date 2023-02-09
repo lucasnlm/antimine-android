@@ -36,11 +36,7 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
-import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IBillingManager
-import dev.lucasnlm.external.IFeatureFlagManager
-import dev.lucasnlm.external.IInAppUpdateManager
-import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.external.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -59,6 +55,7 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
     private val billingManager: IBillingManager by inject()
     private val savesRepository: ISavesRepository by inject()
     private val inAppUpdateManager: IInAppUpdateManager by inject()
+    private val instantAppManager: IInstantAppManager by inject()
 
     private lateinit var viewPager: ViewPager2
 
@@ -262,6 +259,11 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
     }
 
     private fun pushShortcutOf(difficulty: Difficulty) {
+        if (instantAppManager.isEnabled(applicationContext)) {
+            // Ignore. Instant App doesn't support shortcuts.
+            return
+        }
+
         val idLow = difficulty.id.lowercase()
         val deeplink = Uri.parse("app://antimine/game?difficulty=$idLow")
 

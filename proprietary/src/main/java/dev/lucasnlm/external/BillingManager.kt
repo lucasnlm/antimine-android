@@ -29,6 +29,12 @@ class BillingManager(
             .build()
     }
 
+    private val allowedErrorCodes = listOf(
+        BillingClient.BillingResponseCode.OK,
+        BillingClient.BillingResponseCode.USER_CANCELED,
+        BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED,
+    )
+
     private var premiumProduct: ProductDetails? = null
 
     override suspend fun getPrice(): Price? = unlockPrice.value
@@ -154,10 +160,11 @@ class BillingManager(
     }
 
     override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
-        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+        val resultCode = billingResult.responseCode
+        if (resultCode == BillingClient.BillingResponseCode.OK) {
             asyncRefreshPurchasesList()
-        } else {
-            crashReporter.sendError("Charge update failed due to response ${billingResult.responseCode}")
+        } else if (!allowedErrorCodes.contains(resultCode)) {
+            crashReporter.sendError("Charge update failed due to response $resultCode")
         }
     }
 

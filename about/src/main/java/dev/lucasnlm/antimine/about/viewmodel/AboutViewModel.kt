@@ -33,7 +33,7 @@ class AboutViewModel(
     private fun openLicensesActivity() {
         val context = application.applicationContext
         val intent = Intent(context, LicenseActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
         }
         context.startActivity(intent)
     }
@@ -41,7 +41,7 @@ class AboutViewModel(
     private fun openTutorial() {
         val context = application.applicationContext
         val intent = Intent(context, TutorialActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
         }
         context.startActivity(intent)
     }

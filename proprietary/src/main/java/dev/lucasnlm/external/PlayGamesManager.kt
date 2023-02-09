@@ -1,6 +1,7 @@
 package dev.lucasnlm.external
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -100,7 +101,12 @@ class PlayGamesManager(
             Games.getAchievementsClient(context, it)
                 .achievementsIntent
                 .addOnSuccessListener { intent ->
-                    activity.startActivityForResult(intent, 0)
+                    try {
+                        activity.startActivityForResult(intent, 0)
+                    } catch (e: ActivityNotFoundException) {
+                        // Google Play Games error
+                        // TODO add warning
+                    }
                 }
         }
     }
@@ -110,7 +116,12 @@ class PlayGamesManager(
             Games.getLeaderboardsClient(context, it)
                 .allLeaderboardsIntent
                 .addOnSuccessListener { intent ->
-                    activity.startActivityForResult(intent, 0)
+                    try {
+                        activity.startActivityForResult(intent, 0)
+                    } catch (e: ActivityNotFoundException) {
+                        // Google Play Games error
+                        // TODO add warning
+                    }
                 }
         }
     }
