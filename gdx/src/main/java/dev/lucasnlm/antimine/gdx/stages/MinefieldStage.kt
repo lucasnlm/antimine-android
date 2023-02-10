@@ -93,7 +93,7 @@ class MinefieldStage(
             } else {
                 zoom - 1.0f * Gdx.graphics.deltaTime
             }
-            zoom = newZoom.coerceIn(0.8f, 3.0f)
+            zoom = newZoom.coerceIn(MAX_ZOOM_OUT, MAX_ZOOM_IN)
             if (currentZoom != zoom) {
                 currentZoom = zoom
                 Gdx.graphics.requestRendering()
@@ -142,7 +142,6 @@ class MinefieldStage(
                         ),
                     )
                 }
-//                camera.update(true)
                 refreshVisibleActorsIfNeeded()
             } else {
                 val reset = boundAreas.count { it.hasMine } == 0
@@ -346,5 +345,10 @@ class MinefieldStage(
 
     fun updateActionSettings(actionSettings: ActionSettings) {
         this.actionSettings = actionSettings
+    }
+
+    companion object {
+        const val MAX_ZOOM_OUT = 0.35f
+        const val MAX_ZOOM_IN = 3.0f
     }
 }
