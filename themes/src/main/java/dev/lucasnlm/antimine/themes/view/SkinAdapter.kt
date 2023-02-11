@@ -14,7 +14,6 @@ import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import kotlinx.android.synthetic.main.view_skin.view.*
-import kotlinx.android.synthetic.main.view_theme.view.*
 
 class SkinAdapter(
     private val themeRepository: IThemeRepository,
@@ -33,15 +32,21 @@ class SkinAdapter(
     override fun getItemId(position: Int): Long = appSkins[position].id
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkinViewHolder {
+        val layout = if (viewType == WITH_PADDING) R.layout.view_skin else R.layout.view_skin_full
+
         val view = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.view_skin, parent, false)
+            .inflate(layout, parent, false)
 
         return SkinViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return appSkins.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (appSkins[position].showPadding) WITH_PADDING else WITHOUT_PADDING
     }
 
     override fun onBindViewHolder(holder: SkinViewHolder, position: Int) {
@@ -84,6 +89,11 @@ class SkinAdapter(
                 }
             }
         }
+    }
+
+    private companion object {
+        const val WITH_PADDING = 0
+        const val WITHOUT_PADDING = 1
     }
 }
 

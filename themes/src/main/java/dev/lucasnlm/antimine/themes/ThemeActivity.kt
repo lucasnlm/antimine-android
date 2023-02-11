@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
@@ -80,7 +78,8 @@ class ThemeActivity : ThemedActivity(R.layout.activity_theme) {
 
         lifecycleScope.launchWhenCreated {
             val size = dimensionRepository.displaySize()
-            val columns = if (size.width > size.height) { 5 } else { 3 }
+            val themesColumns = if (size.width > size.height) { 5 } else { 3 }
+            val skinsColumns = if (size.width > size.height) { 2 } else { 5 }
 
             val themeAdapter = ThemeAdapter(
                 themeViewModel = themeViewModel,
@@ -112,14 +111,14 @@ class ThemeActivity : ThemedActivity(R.layout.activity_theme) {
             themes.apply {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
                 setHasFixedSize(true)
-                layoutManager = GridLayoutManager(context, columns)
+                layoutManager = GridLayoutManager(context, themesColumns)
                 adapter = themeAdapter
             }
 
             skins.apply {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
                 setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                layoutManager = GridLayoutManager(context, skinsColumns)
                 adapter = skinAdapter
             }
 

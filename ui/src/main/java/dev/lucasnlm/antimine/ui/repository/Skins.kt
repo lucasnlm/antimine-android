@@ -38,6 +38,7 @@ object Skins {
         isPaid = true,
         joinAreas = true,
         imageRes = R.drawable.skin_square_3,
+        showPadding = false,
     )
 
     private fun classic() = AppSkin(
@@ -95,7 +96,8 @@ object Skins {
         canTint = true,
         isPaid = true,
         joinAreas = false,
-        imageRes = R.drawable.skin_standard,
+        imageRes = R.drawable.skin_standard_no_connection,
+        showPadding = false,
     )
 
     fun getAllSkins() = listOf(
