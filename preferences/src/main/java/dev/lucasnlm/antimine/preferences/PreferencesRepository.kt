@@ -454,4 +454,12 @@ class PreferencesRepository(
             preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_PREMIUM_FEATURES, true)
         }
     }
+
+    override fun keepRequestPlayGames(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_REQUEST_PLAY_GAMES, true)
+    }
+
+    override fun setRequestPlayGames(showRequest: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_REQUEST_PLAY_GAMES, showRequest)
+    }
 }

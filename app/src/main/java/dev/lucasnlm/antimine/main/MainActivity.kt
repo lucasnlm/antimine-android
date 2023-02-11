@@ -56,6 +56,7 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
     private val savesRepository: ISavesRepository by inject()
     private val inAppUpdateManager: IInAppUpdateManager by inject()
     private val instantAppManager: IInstantAppManager by inject()
+    private val preferenceRepository: IPreferencesRepository by inject()
 
     private lateinit var viewPager: ViewPager2
 
@@ -382,7 +383,10 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
     }
 
     private fun launchGooglePlayGames() {
-        if (playGamesManager.hasGooglePlayGames() && playGamesManager.shouldRequestLogin()) {
+        if (playGamesManager.hasGooglePlayGames() &&
+            playGamesManager.shouldRequestLogin() &&
+            preferenceRepository.keepRequestPlayGames()
+        ) {
             playGamesManager.keepRequestingLogin(false)
 
             lifecycleScope.launchWhenCreated {

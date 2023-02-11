@@ -187,4 +187,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun exportData(): Map<String, Any?> = mapOf()
 
     override fun importData(data: Map<String, Any?>) {}
+
+    override fun keepRequestPlayGames(): Boolean = false
+
+    override fun setRequestPlayGames(showRequest: Boolean) {}
 }

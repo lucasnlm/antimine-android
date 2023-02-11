@@ -89,6 +89,13 @@
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
                         android:text="@string/open_on_game" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/playGames"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/google_play_games" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

@@ -43,7 +43,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/skins"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:fadingEdge="vertical"
+            android:fadingEdgeLength="30dp"
+            android:fillViewport="false"
+            android:requiresFadingEdge="vertical"/>
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -67,6 +72,10 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:fadeScrollbars="false"
-            android:overScrollMode="never" />
+            android:overScrollMode="never"
+            android:fadingEdge="vertical"
+            android:fadingEdgeLength="30dp"
+            android:fillViewport="false"
+            android:requiresFadingEdge="vertical"/>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

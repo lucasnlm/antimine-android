@@ -18,6 +18,7 @@ import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.ext.showWarning
 import dev.lucasnlm.antimine.ui.model.TopBarAction
+import dev.lucasnlm.external.IPlayGamesManager
 import kotlinx.android.synthetic.main.activity_preferences.*
 import org.koin.android.ext.android.inject
 
@@ -25,6 +26,7 @@ class PreferencesActivity :
     ThemedActivity(R.layout.activity_preferences),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
+    private val playGamesManager: IPlayGamesManager by inject()
     private val preferenceRepository: IPreferencesRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
     private val settingsBackupManager: SettingsBackupManager by lazy {
@@ -185,6 +187,18 @@ class PreferencesActivity :
             checked = preferenceRepository.dimNumbers(),
             action = { preferenceRepository.setDimNumbers(it) },
         )
+
+        if (playGamesManager.hasGooglePlayGames()) {
+            bindItem(
+                switch = playGames,
+                checked = preferenceRepository.keepRequestPlayGames(),
+                action = {
+                    preferenceRepository.setRequestPlayGames(it)
+                },
+            )
+        } else {
+            playGames.visibility = View.GONE
+        }
 
         exportSettings.setOnClickListener {
             val exportIntent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {

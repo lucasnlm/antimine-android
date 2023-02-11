@@ -132,4 +132,7 @@ interface IPreferencesRepository {
 
     fun exportData(): Map<String, Any?>
     fun importData(data: Map<String, Any?>)
+
+    fun keepRequestPlayGames(): Boolean
+    fun setRequestPlayGames(showRequest: Boolean)
 }

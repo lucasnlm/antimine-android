@@ -11,8 +11,9 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        app:cardCornerRadius="15dp"
         app:cardElevation="0dp"
-        app:strokeColor="?colorPrimary"
+        app:strokeColor="?colorSurface"
         app:strokeWidth="2dp">
 
         <LinearLayout
@@ -37,8 +38,8 @@
                 android:layout_width="52dp"
                 android:layout_height="52dp"
                 android:layout_gravity="center"
-                app:strokeWidth="0dp"
-                app:icon="@drawable/flag" />
+                app:icon="@drawable/flag"
+                app:strokeWidth="0dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/open"
@@ -46,10 +47,8 @@
                 android:layout_width="52dp"
                 android:layout_height="52dp"
                 android:layout_gravity="center"
-                app:strokeWidth="0dp"
-                app:icon="@drawable/touch" />
-
+                app:icon="@drawable/touch"
+                app:strokeWidth="0dp" />
         </LinearLayout>
-
     </com.google.android.material.card.MaterialCardView>
 </FrameLayout>
