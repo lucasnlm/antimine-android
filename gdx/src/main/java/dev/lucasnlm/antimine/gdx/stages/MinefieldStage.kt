@@ -38,6 +38,7 @@ class MinefieldStage(
 
     private var forceRefreshVisibleAreas = true
     private var boundAreas = listOf<Area>()
+    private var newBoundAreas: List<Area>? = null
 
     private var inputInit: Long = 0L
     private val inputEvents: MutableList<GdxEvent> = mutableListOf()
@@ -116,12 +117,19 @@ class MinefieldStage(
     }
 
     fun bindField(field: List<Area>) {
-        boundAreas = field
+        newBoundAreas = field
         forceRefreshVisibleAreas = true
     }
 
     private fun refreshAreas(forceRefresh: Boolean) {
         if (forceRefresh || forceRefreshVisibleAreas) {
+            val boundAreas = newBoundAreas ?: this.boundAreas
+
+            newBoundAreas?.let {
+                this.boundAreas = it
+                this.newBoundAreas = null
+            }
+
             if (actors.size != boundAreas.size) {
                 clear()
                 if (boundAreas.size < actors.size) {

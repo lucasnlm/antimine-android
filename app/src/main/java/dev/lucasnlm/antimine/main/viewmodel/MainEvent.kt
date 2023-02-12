@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.main.viewmodel
 
+import android.content.Intent
 import dev.lucasnlm.antimine.core.models.Difficulty
 
 sealed class MainEvent {
@@ -14,6 +15,10 @@ sealed class MainEvent {
     object StartTutorialEvent : MainEvent()
 
     object GoToMainPageEvent : MainEvent()
+
+    data class OpenActivity(
+        val intent: Intent,
+    ) : MainEvent()
 
     object GoToSettingsPageEvent : MainEvent()
 

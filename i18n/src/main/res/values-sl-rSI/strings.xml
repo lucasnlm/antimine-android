@@ -36,9 +36,6 @@
     <string name="settings_general">Splošne</string>
     <string name="settings_gameplay">Igralne</string>
     <string name="settings_accessibility">Dostopne</string>
-    <string name="size">Velikost</string>
-    <string name="rounded_square">Zaobljenost robov</string>
-    <string name="space_between_squares">Razmak med polji</string>
     <string name="system">Sistem</string>
     <string name="sign_in_failed">Napaka pri prijavi. Prosim preverite internetno povezavo in poizkusite ponovno.</string>
     <string name="you_won">Zmaga!</string>
@@ -116,7 +113,6 @@
     <string name="open_tutorial">Odpri vaje</string>
     <string name="click_numbers">Omogoči pritisk na številke</string>
     <string name="tap_to_customize">Pritisni za prilagoditev</string>
-    <string name="toggle_button_top">Pokaži \"preklopno tipko\" v zgornji vrstici</string>
     <string name="no_guess_fail_warning">Trenutnega polja ni mogoče končati prez ugibanja!</string>
     <string name="fixed_size">Fiksna velikost</string>
     <string name="progressive">Progresivno</string>

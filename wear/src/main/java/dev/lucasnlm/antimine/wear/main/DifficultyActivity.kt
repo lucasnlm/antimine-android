@@ -52,7 +52,7 @@ class DifficultyActivity : ThemedActivity() {
     private fun startGameOnDifficulty(difficulty: Difficulty) {
         val context = application.applicationContext
         val intent = Intent(context, GameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             val bundle = Bundle().apply {
                 putSerializable(GameActivity.DIFFICULTY, difficulty)
             }

@@ -34,8 +34,6 @@ open class MainApplication : MultiDexApplication() {
 
         DynamicColors.applyToActivitiesIfAvailable(this)
 
-        GdxNativesLoader.load()
-
         stopKoin()
         startKoin {
             androidContext(applicationContext)
@@ -63,6 +61,12 @@ open class MainApplication : MultiDexApplication() {
         val lastAppVersion = preferencesRepository.lastAppVersion()
         if (lastAppVersion == null) {
             preferencesRepository.setLastAppVersion(BuildConfig.VERSION_CODE)
+        }
+    }
+
+    companion object {
+        init {
+            GdxNativesLoader.load()
         }
     }
 }

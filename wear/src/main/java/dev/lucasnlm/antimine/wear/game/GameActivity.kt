@@ -229,19 +229,19 @@ class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
                     }
                     is GameEvent.VictoryDialog -> {
                         val intent = Intent(applicationContext, VictoryActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                         }
                         startActivity(intent)
                     }
                     is GameEvent.GameOverDialog -> {
                         val intent = Intent(applicationContext, GameOverActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                         }
                         startActivity(intent)
                     }
                     is GameEvent.GameCompleteDialog -> {
                         val intent = Intent(applicationContext, VictoryActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                         }
                         startActivity(intent)
                     }

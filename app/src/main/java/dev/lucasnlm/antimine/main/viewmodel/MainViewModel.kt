@@ -119,7 +119,6 @@ class MainViewModel(
     private fun continueGame(difficulty: Difficulty? = null) {
         val context = application.applicationContext
         val intent = Intent(context, GameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
             difficulty?.let {
                 val bundle = Bundle().apply {
                     putSerializable(GameActivity.DIFFICULTY, it)
@@ -127,14 +126,12 @@ class MainViewModel(
                 putExtras(bundle)
             }
         }
-        context.startActivity(intent)
+        sendSideEffect(MainEvent.OpenActivity(intent))
     }
 
     private fun startTutorial() {
         val context = application.applicationContext
-        val intent = Intent(context, TutorialActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
-        }
-        context.startActivity(intent)
+        val intent = Intent(context, TutorialActivity::class.java)
+        sendSideEffect(MainEvent.OpenActivity(intent))
     }
 }

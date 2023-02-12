@@ -333,6 +333,9 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
             is MainEvent.GoToMainPageEvent -> {
                 viewPager.setCurrentItem(0, true)
             }
+            is MainEvent.OpenActivity -> {
+                startActivity(event.intent)
+            }
             is MainEvent.GoToSettingsPageEvent -> {
                 viewPager.setCurrentItem(1, true)
             }
