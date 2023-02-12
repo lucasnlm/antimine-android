@@ -6,8 +6,8 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardSkin"
-        android:layout_width="62dp"
-        android:layout_height="62dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?selectableItemBackground"
@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/skinImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:padding="8dp"
             android:scaleType="fitCenter" />

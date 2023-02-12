@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
@@ -118,7 +119,14 @@ class ThemeActivity : ThemedActivity(R.layout.activity_theme) {
             skins.apply {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
                 setHasFixedSize(true)
-                layoutManager = GridLayoutManager(context, skinsColumns)
+                layoutManager = object : GridLayoutManager(context, skinsColumns) {
+                    override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
+                        val lpSize = width / (skinsColumns + 1)
+                        lp?.height = lpSize
+                        lp?.width = lpSize
+                        return true
+                    }
+                }
                 adapter = skinAdapter
             }
 

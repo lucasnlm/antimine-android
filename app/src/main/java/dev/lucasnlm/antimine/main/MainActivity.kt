@@ -123,7 +123,7 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
             it.key.text = getDifficultyExtra(it.value)
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && instantAppManager.isEnabled(applicationContext)) {
             listOf(
                 Difficulty.Beginner,
                 Difficulty.Intermediate,
