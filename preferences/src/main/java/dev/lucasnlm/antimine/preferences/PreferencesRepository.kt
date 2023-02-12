@@ -462,4 +462,14 @@ class PreferencesRepository(
     override fun setRequestPlayGames(showRequest: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_REQUEST_PLAY_GAMES, showRequest)
     }
+
+    override fun lastAppVersion(): Int? {
+        return preferencesManager.getIntOrNull(PreferenceKeys.PREFERENCE_LAST_VERSION)
+    }
+
+    override fun setLastAppVersion(versionCode: Int) {
+        if (versionCode > 0) {
+            preferencesManager.putInt(PreferenceKeys.PREFERENCE_LAST_VERSION, versionCode)
+        }
+    }
 }

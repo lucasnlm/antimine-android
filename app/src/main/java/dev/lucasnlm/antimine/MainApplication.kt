@@ -59,5 +59,10 @@ open class MainApplication : MultiDexApplication() {
             }
             adsManager.start(this)
         }
+
+        val lastAppVersion = preferencesRepository.lastAppVersion()
+        if (lastAppVersion == null) {
+            preferencesRepository.setLastAppVersion(BuildConfig.VERSION_CODE)
+        }
     }
 }

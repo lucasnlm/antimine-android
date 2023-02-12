@@ -191,4 +191,8 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun keepRequestPlayGames(): Boolean = false
 
     override fun setRequestPlayGames(showRequest: Boolean) {}
+
+    override fun lastAppVersion(): Int = 0
+
+    override fun setLastAppVersion(versionCode: Int) {}
 }

@@ -135,4 +135,7 @@ interface IPreferencesRepository {
 
     fun keepRequestPlayGames(): Boolean
     fun setRequestPlayGames(showRequest: Boolean)
+
+    fun lastAppVersion(): Int?
+    fun setLastAppVersion(versionCode: Int)
 }

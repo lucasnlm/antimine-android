@@ -45,4 +45,5 @@ object PreferenceKeys {
     const val PREFERENCE_SHOW_CONTINUE = "preference_show_continue"
     const val PREFERENCE_NEW_THEMES_ICON = "preference_new_themes_icon"
     const val PREFERENCE_REQUEST_PLAY_GAMES = "preference_play_games"
+    const val PREFERENCE_LAST_VERSION = "preference_last_version"
 }
