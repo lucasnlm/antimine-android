@@ -21,34 +21,68 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/question"
-                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:layout_gravity="center"
-                android:visibility="gone"
-                app:icon="@drawable/question"
-                app:strokeWidth="0dp"
-                tools:visibility="visible" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/questionBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/flag"
-                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:layout_gravity="center"
-                app:icon="@drawable/flag"
-                app:strokeWidth="0dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/question"
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:icon="@drawable/question"
+                    app:strokeWidth="0dp"
+                    tools:visibility="visible" />
+            </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/open"
-                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:layout_gravity="center"
-                app:icon="@drawable/touch"
-                app:strokeWidth="0dp" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/flagBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/flag"
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center"
+                    app:icon="@drawable/flag"
+                    app:strokeWidth="0dp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/openBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/open"
+                    style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center"
+                    app:icon="@drawable/touch"
+                    app:strokeWidth="0dp" />
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </FrameLayout>
