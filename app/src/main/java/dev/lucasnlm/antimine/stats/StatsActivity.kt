@@ -15,7 +15,7 @@ import dev.lucasnlm.antimine.ui.model.TopBarAction
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class StatsActivity : ThemedActivity(R.layout.activity_stats) {
+class StatsActivity : ThemedActivity() {
     private val statsViewModel by viewModel<StatsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

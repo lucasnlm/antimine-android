@@ -12,10 +12,7 @@ import dev.lucasnlm.antimine.ui.model.TopBarAction
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import org.koin.android.ext.android.inject
 
-abstract class ThemedActivity : AppCompatActivity {
-    constructor() : super()
-    constructor(@LayoutRes contentLayoutId: Int) : super(contentLayoutId)
-
+abstract class ThemedActivity : AppCompatActivity() {
     protected val themeRepository: IThemeRepository by inject()
 
     protected val usingTheme: AppTheme by lazy {

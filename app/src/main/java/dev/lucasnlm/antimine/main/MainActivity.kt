@@ -44,7 +44,7 @@ import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : ThemedActivity(R.layout.activity_main) {
+class MainActivity : ThemedActivity() {
     private val viewModel: MainViewModel by viewModel()
     private val playGamesManager: IPlayGamesManager by inject()
     private val preferencesRepository: IPreferencesRepository by inject()

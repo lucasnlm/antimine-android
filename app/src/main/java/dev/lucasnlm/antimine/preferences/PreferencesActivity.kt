@@ -23,7 +23,7 @@ import dev.lucasnlm.external.IPlayGamesManager
 import org.koin.android.ext.android.inject
 
 class PreferencesActivity :
-    ThemedActivity(R.layout.activity_preferences),
+    ThemedActivity(),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val playGamesManager: IPlayGamesManager by inject()
