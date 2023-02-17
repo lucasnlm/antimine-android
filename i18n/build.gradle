@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace 'dev.lucasnlm.antimine.i18n'
     compileSdkVersion 33
 
     defaultConfig {
@@ -34,7 +35,7 @@ android {
 dependencies {
     // Dependencies must be hardcoded to support F-droid
 
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0-rc01'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

@@ -1,10 +1,10 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
 }
 
 android {
+    namespace 'dev.lucasnlm.antimine.themes'
     compileSdkVersion 33
 
     defaultConfig {
@@ -27,6 +27,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -42,7 +46,7 @@ dependencies {
     implementation project(':ui')
 
     // AndroidX
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.activity:activity-ktx:1.6.1'
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
 

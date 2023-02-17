@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace 'dev.lucasnlm.antimine.sgtatham'
     compileSdkVersion 33
     ndkVersion '25.1.8937393'
 
@@ -21,7 +22,7 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
         externalNativeBuild {
             cmake {
-                cppFlags "-std=c++20 -Ofast"
+                cppFlags "-std=c++20 -Ofast -g0"
             }
         }
     }
@@ -47,7 +48,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0-rc01'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

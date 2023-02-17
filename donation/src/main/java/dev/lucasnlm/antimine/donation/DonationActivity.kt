@@ -9,21 +9,26 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ShareCompat
 import androidx.core.os.LocaleListCompat
+import dev.lucasnlm.antimine.donation.databinding.ActivityDonationBinding
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
-import kotlinx.android.synthetic.main.activity_donation.*
 
-class DonationActivity : ThemedActivity(R.layout.activity_donation) {
+class DonationActivity : ThemedActivity() {
+    private lateinit var binding: ActivityDonationBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindToolbar(toolbar)
+        binding = ActivityDonationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        paypalButton.setOnClickListener { openPayPal() }
-        githubButton.setOnClickListener { openGithub() }
+        bindToolbar(binding.toolbar)
+
+        binding.paypalButton.setOnClickListener { openPayPal() }
+        binding.githubButton.setOnClickListener { openGithub() }
 
         if (hasBrazilLocale()) {
-            pixButton.setOnClickListener { copyPixKey() }
+            binding.pixButton.setOnClickListener { copyPixKey() }
         } else {
-            pixButton.visibility = View.GONE
+            binding.pixButton.visibility = View.GONE
         }
     }
 

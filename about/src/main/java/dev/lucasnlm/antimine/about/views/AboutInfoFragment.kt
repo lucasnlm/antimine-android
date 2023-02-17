@@ -5,18 +5,20 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import dev.lucasnlm.antimine.about.R
+import dev.lucasnlm.antimine.about.databinding.FragmentAboutInfoBinding
 import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
-import kotlinx.android.synthetic.main.fragment_about_info.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
+class AboutInfoFragment : Fragment() {
+    private lateinit var binding: FragmentAboutInfoBinding
     private val aboutViewModel: AboutViewModel by sharedViewModel()
-
     private val unknownVersionName = "?.?.?"
 
     private fun PackageManager.getPackageInfoCompat(packageName: String, flags: Int = 0): PackageInfo? {
@@ -46,6 +48,11 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
         }
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentAboutInfoBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,8 +60,8 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
         val packageManager = context.packageManager
         val packageName = context.packageName
         val versionName = packageManager.getPackageInfoCompat(packageName, 0)?.versionName ?: unknownVersionName
-        version.text = getString(R.string.version_s, versionName)
-        instant.isVisible = view.context.run {
+        binding.version.text = getString(R.string.version_s, versionName)
+        binding.instant.isVisible = view.context.run {
             try {
                 val info = packageManager.getApplicationInfoCompat(packageName, PackageManager.GET_META_DATA)
                 val bundle: Bundle? = info?.metaData
@@ -65,19 +72,19 @@ class AboutInfoFragment : Fragment(R.layout.fragment_about_info) {
             }
         }
 
-        tutorial.setOnClickListener {
+        binding.tutorial.setOnClickListener {
             aboutViewModel.sendEvent(AboutEvent.Tutorial)
         }
 
-        thirdsParties.setOnClickListener {
+        binding.thirdsParties.setOnClickListener {
             aboutViewModel.sendEvent(AboutEvent.ThirdPartyLicenses)
         }
 
-        translation.setOnClickListener {
+        binding.translation.setOnClickListener {
             aboutViewModel.sendEvent(AboutEvent.Translators)
         }
 
-        sourceCode.setOnClickListener {
+        binding.sourceCode.setOnClickListener {
             aboutViewModel.sendEvent(AboutEvent.SourceCode)
         }
     }

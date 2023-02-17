@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.R
+import dev.lucasnlm.antimine.themes.databinding.ViewThemeBinding
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
-import kotlinx.android.synthetic.main.view_theme.view.*
 
 class ThemeAdapter(
     private val themeViewModel: ThemeViewModel,
@@ -32,11 +32,9 @@ class ThemeAdapter(
     override fun getItemCount(): Int = themes.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeViewHolder {
-        val view = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.view_theme, parent, false)
-
-        return ThemeViewHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ViewThemeBinding.inflate(layoutInflater, parent, false)
+        return ThemeViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ThemeViewHolder, position: Int) {
@@ -45,25 +43,25 @@ class ThemeAdapter(
         holder.itemView.apply {
             val selected = (theme.id == themeViewModel.singleState().currentTheme.id)
 
-            covered.setBackgroundColor(theme.palette.covered.toAndroidColor())
-            uncovered.setBackgroundColor(theme.palette.background.toAndroidColor())
+            holder.binding.covered.setBackgroundColor(theme.palette.covered.toAndroidColor())
+            holder.binding.uncovered.setBackgroundColor(theme.palette.background.toAndroidColor())
 
             if (theme.name != null) {
-                label.apply {
-                    text = label.context.getString(theme.name!!)
+                holder.binding.label.apply {
+                    text = context.getString(theme.name!!)
                     setTextColor(theme.palette.background.toInvertedAndroidColor(200))
                     setBackgroundResource(android.R.color.transparent)
                     setCompoundDrawables(null, null, null, null)
                     visibility = View.VISIBLE
                 }
             } else {
-                label.apply {
+                holder.binding.label.apply {
                     setCompoundDrawables(null, null, null, null)
                     visibility = View.GONE
                 }
             }
 
-            cardTheme.apply {
+            holder.binding.cardTheme.apply {
                 setStrokeColor(
                     MaterialColors.getColorStateListOrNull(
                         context,
@@ -82,4 +80,6 @@ class ThemeAdapter(
     }
 }
 
-class ThemeViewHolder(view: View) : RecyclerView.ViewHolder(view)
+class ThemeViewHolder(
+    val binding: ViewThemeBinding,
+) : RecyclerView.ViewHolder(binding.root)

@@ -7,10 +7,10 @@ if (System.getenv('IS_RELEASE_BUILD')) {
 }
 
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+    namespace 'dev.lucasnlm.antimine'
     compileSdkVersion 33
 
     defaultConfig {
@@ -48,6 +48,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     compileOptions {
@@ -113,7 +117,7 @@ dependencies {
     fossImplementation project(':donation')
 
     // AndroidX
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.multidex:multidex:2.0.1'

@@ -27,10 +27,12 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.ControlActivity
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
+import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.serializableNonSafe
+import dev.lucasnlm.antimine.databinding.ActivityGameBinding
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
@@ -47,13 +49,12 @@ import dev.lucasnlm.external.IFeatureFlagManager
 import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
-import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GameActivity :
-    ThemedActivity(R.layout.activity_game),
+    ThemedActivity(),
     AndroidFragmentApplication.Callbacks {
 
     private val gameViewModel by viewModel<GameViewModel>()
@@ -70,6 +71,7 @@ class GameActivity :
     private var warning: Snackbar? = null
 
     private val hasFloatingButton = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
+    private lateinit var binding: ActivityGameBinding
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
@@ -88,6 +90,9 @@ class GameActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityGameBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         if (!preferencesRepository.isPremiumEnabled()) {
             adsManager.start(this)
@@ -178,7 +183,7 @@ class GameActivity :
                     val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
 
-                    tapToBegin.apply {
+                    binding.tapToBegin.apply {
                         text = when {
                             it.isCreatingGame -> {
                                 getString(R.string.creating_valid_game)
@@ -194,7 +199,7 @@ class GameActivity :
                         backgroundTintList = tint
                     }
                 } else {
-                    tapToBegin.visibility = View.GONE
+                    binding.tapToBegin.visibility = View.GONE
                 }
 
                 if (it.isCreatingGame) {
@@ -202,11 +207,11 @@ class GameActivity :
                         // Show loading indicator only when it takes more than:
                         delay(500)
                         if (singleState().isCreatingGame) {
-                            loadingGame.show()
+                            binding.loadingGame.show()
                         }
                     }
-                } else if (loadingGame.isVisible) {
-                    loadingGame.hide()
+                } else if (binding.loadingGame.isVisible) {
+                    binding.loadingGame.hide()
                 }
 
                 if (it.turn < 1 && it.saveId == 0L && !it.isLoadingMap && it.showTutorial) {
@@ -215,7 +220,7 @@ class GameActivity :
                     val controlText = gameViewModel.getControlDescription(applicationContext)
 
                     if (controlText != null && controlText.isNotBlank()) {
-                        controlsToast.apply {
+                        binding.controlsToast.apply {
                             visibility = View.VISIBLE
                             backgroundTintList = tint
                             text = controlText
@@ -227,13 +232,13 @@ class GameActivity :
                             }
                         }
                     } else {
-                        controlsToast.visibility = View.GONE
+                        binding.controlsToast.visibility = View.GONE
                     }
                 } else {
-                    controlsToast.visibility = View.GONE
+                    binding.controlsToast.visibility = View.GONE
                 }
 
-                timer.apply {
+                binding.timer.apply {
                     visibility = if (it.duration == 0L || !preferencesRepository.showTimer()) {
                         View.GONE
                     } else {
@@ -243,7 +248,7 @@ class GameActivity :
                     text = DateUtils.formatElapsedTime(it.duration)
                 }
 
-                minesCount.apply {
+                binding.minesCount.apply {
                     val currentMineCount = it.mineCount
                     if (currentMineCount != null) {
                         val oldValue = text.toString().toIntOrNull()
@@ -267,7 +272,7 @@ class GameActivity :
                     }
                 }
 
-                hintCounter.text = it.hints.toL10nString()
+                binding.hintCounter.text = it.hints.toL10nString()
 
                 if (!it.isGameCompleted && it.isActive && it.useHelp) {
                     refreshTipShortcutIcon()
@@ -284,7 +289,7 @@ class GameActivity :
                 when (it) {
                     is GameEvent.ShowNoGuessFailWarning -> {
                         warning = Snackbar.make(
-                            findViewById(android.R.id.content),
+                            binding.root,
                             R.string.no_guess_fail_warning,
                             Snackbar.LENGTH_INDEFINITE,
                         ).apply {
@@ -421,38 +426,39 @@ class GameActivity :
     }
 
     private fun bindTapToBegin() {
-        tapToBegin.apply {
+        binding.tapToBegin.apply {
             setTextColor(usingTheme.palette.background.toAndroidColor(255))
         }
+
         if (preferencesRepository.showTutorialButton()) {
-            controlsToast.apply {
+            binding.controlsToast.apply {
                 setTextColor(usingTheme.palette.background.toAndroidColor(255))
             }
         }
     }
 
     private fun bindToolbar() {
-        back.apply {
+        binding.back.apply {
             TooltipCompat.setTooltipText(this, getString(R.string.back))
-            setColorFilter(minesCount.currentTextColor)
+            setColorFilter(binding.minesCount.currentTextColor)
             setOnClickListener {
                 finish()
             }
         }
 
-        app_bar?.apply {
+        binding.appBar.apply {
             setBackgroundColor(usingTheme.palette.background.toAndroidColor(200))
         }
 
         if (applicationContext.isPortrait()) {
-            minesCount.setCompoundDrawablesWithIntrinsicBounds(
+            binding.minesCount.setCompoundDrawablesWithIntrinsicBounds(
                 ContextCompat.getDrawable(this, R.drawable.mine),
                 null,
                 null,
                 null,
             )
         } else {
-            minesCount.setCompoundDrawablesWithIntrinsicBounds(
+            binding.minesCount.setCompoundDrawablesWithIntrinsicBounds(
                 null,
                 ContextCompat.getDrawable(this, R.drawable.mine),
                 null,
@@ -466,7 +472,7 @@ class GameActivity :
         val canUseHelpNow = dt > 5 * 1000L
         val canRequestHelpWithAds = gameViewModel.getTips() == 0 && adsManager.isAvailable()
 
-        hintCounter.apply {
+        binding.hintCounter.apply {
             visibility = if (canUseHelpNow) View.VISIBLE else View.GONE
             text = if (canRequestHelpWithAds) {
                 "+5"
@@ -475,13 +481,13 @@ class GameActivity :
             }
         }
 
-        shortcutIcon.apply {
+        binding.shortcutIcon.apply {
             TooltipCompat.setTooltipText(this, getString(R.string.help))
             setImageResource(R.drawable.hint)
-            setColorFilter(minesCount.currentTextColor)
+            setColorFilter(binding.minesCount.currentTextColor)
 
             if (canUseHelpNow) {
-                hintCooldown.apply {
+                binding.hintCooldown.apply {
                     animate().alpha(0.0f).start()
                     visibility = View.GONE
                     progress = 0
@@ -515,7 +521,7 @@ class GameActivity :
                     }
                 }
             } else {
-                hintCooldown.apply {
+                binding.hintCooldown.apply {
                     animate().alpha(1.0f).start()
                     if (progress == 0) {
                         ValueAnimator.ofFloat(0.0f, 5.0f).apply {
@@ -596,10 +602,10 @@ class GameActivity :
     }
 
     private fun refreshRetryShortcut(enabled: Boolean) {
-        shortcutIcon.apply {
+        binding.shortcutIcon.apply {
             TooltipCompat.setTooltipText(this, getString(R.string.new_game))
             setImageResource(R.drawable.retry)
-            setColorFilter(minesCount.currentTextColor)
+            setColorFilter(binding.minesCount.currentTextColor)
             setOnClickListener {
                 lifecycleScope.launch {
                     val confirmResign = gameViewModel.singleState().isActive
@@ -616,8 +622,8 @@ class GameActivity :
             }
         }
 
-        hintCounter.visibility = View.GONE
-        shortcutIcon.apply {
+        binding.hintCounter.visibility = View.GONE
+        binding.shortcutIcon.apply {
             if (enabled) {
                 isClickable = true
                 animate().alpha(1.0f).start()
@@ -718,10 +724,14 @@ class GameActivity :
         }
 
         warning = Snackbar.make(
-            findViewById(android.R.id.content),
+            binding.root,
             message,
             Snackbar.LENGTH_LONG,
         ).apply {
+            if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
+                view.translationY = -dpToPx(128).toFloat()
+            }
+
             show()
         }
     }

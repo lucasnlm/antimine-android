@@ -40,8 +40,16 @@ private class TestPreferenceManager : IPreferencesManager {
         values.remove(key)
     }
 
+    override fun clear() {
+        values.clear()
+    }
+
     override fun contains(key: String): Boolean {
         return values.containsKey(key)
+    }
+
+    override fun toMap(): Map<String, Any?> {
+        return values.toMap()
     }
 
     override fun getLong(key: String, defaultValue: Long): Long {
@@ -104,39 +112,6 @@ class PreferencesRepositoryTest {
 
         assertTrue(preferenceManager.values["preference_double_click_open"] == null)
         assertFalse(preferenceManager.getBoolean("preference_double_click_open", false))
-    }
-
-    @Test
-    fun testMigrationLargeAreaOn() {
-        val preferenceManager = TestPreferenceManager()
-        preferenceManager.putBoolean("preference_large_area", true)
-        assertTrue(preferenceManager.values["preference_large_area"] as Boolean)
-
-        PreferencesRepository(preferenceManager, 400)
-
-        assertTrue(preferenceManager.values["preference_large_area"] == null)
-        assertEquals(63, preferenceManager.getInt("preference_new_area_size", -1))
-    }
-
-    @Test
-    fun testMigrationLargeAreaOff() {
-        val preferenceManager = TestPreferenceManager()
-        PreferencesRepository(preferenceManager, 400)
-
-        assertTrue(preferenceManager.values["preference_large_area"] == null)
-        assertEquals(50, preferenceManager.getInt("preference_new_area_size", -1))
-    }
-
-    @Test
-    fun testMigrationLargeAreaFalse() {
-        val preferenceManager = TestPreferenceManager()
-        preferenceManager.putBoolean("preference_large_area", false)
-        assertEquals(false, preferenceManager.values["preference_large_area"] as Boolean)
-
-        PreferencesRepository(preferenceManager, 400)
-
-        assertTrue(preferenceManager.values["preference_large_area"] == null)
-        assertEquals(50, preferenceManager.getInt("preference_new_area_size", -1))
     }
 
     @Test

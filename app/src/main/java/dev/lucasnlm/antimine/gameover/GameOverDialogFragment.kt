@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.gameover
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -9,11 +8,8 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
@@ -22,6 +18,7 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Analytics
+import dev.lucasnlm.antimine.databinding.GameOverDialogBinding
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
@@ -90,194 +87,181 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
         fragmentTransaction.commitAllowingStateLoss()
     }
 
-    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context = requireContext()
         return MaterialAlertDialogBuilder(context).apply {
-            val view = LayoutInflater
-                .from(context)
-                .inflate(R.layout.game_over_dialog, null, false)
-                .apply {
-                    lifecycleScope.launchWhenCreated {
-                        endGameViewModel.observeState().collect { state ->
-                            val newGameButton: AppCompatButton = findViewById(R.id.new_game)
-                            val continueButton: AppCompatButton = findViewById(R.id.continue_game)
-                            val countdown: TextView = findViewById(R.id.countdown)
-                            val removeAdsButton: AppCompatButton = findViewById(R.id.remove_ads)
-                            val tutorialButton: AppCompatButton = findViewById(R.id.tutorial)
-                            val settingsButton: View = findViewById(R.id.settings)
-                            val closeButton: View = findViewById(R.id.close)
-                            val title: TextView = findViewById(R.id.title)
-                            val subtitle: TextView = findViewById(R.id.subtitle)
-                            val emoji: ImageView = findViewById(R.id.title_emoji)
-                            val adFrame: FrameLayout = findViewById(R.id.adFrame)
+            val layoutInflater = LayoutInflater.from(context)
+            val binding = GameOverDialogBinding.inflate(layoutInflater, null, false)
 
-                            title.text = state.title
-                            subtitle.text = state.message
+            binding.run {
+                lifecycleScope.launchWhenCreated {
+                    endGameViewModel.observeState().collect { state ->
+                        title.text = state.title
+                        subtitle.text = state.message
 
-                            emoji.apply {
-                                setImageResource(state.titleEmoji)
-                                setOnClickListener {
-                                    analyticsManager.sentEvent(Analytics.ClickEmoji)
-                                    endGameViewModel.sendEvent(
-                                        EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji),
-                                    )
-                                }
-                            }
-
-                            newGameButton.setOnClickListener {
-                                lifecycleScope.launch {
-                                    gameViewModel.startNewGame()
-                                }
-                                dismissAllowingStateLoss()
-                            }
-
-                            continueButton.setOnClickListener {
-                                analyticsManager.sentEvent(Analytics.ContinueGame)
-                                if (featureFlagManager.isAdsOnContinueEnabled &&
-                                    !preferencesRepository.isPremiumEnabled()
-                                ) {
-                                    showAdsAndContinue()
-                                } else {
-                                    gameViewModel.sendEvent(GameEvent.ContinueGame)
-                                    dismissAllowingStateLoss()
-                                }
-                            }
-
-                            settingsButton.setOnClickListener {
-                                analyticsManager.sentEvent(Analytics.OpenSettings)
-                                showSettings()
-                            }
-
-                            closeButton.setOnClickListener {
-                                analyticsManager.sentEvent(Analytics.CloseEndGameScreen)
-                                activity?.let {
-                                    if (!it.isFinishing) {
-                                        lifecycleScope.launch {
-                                            gameViewModel.revealMines()
-                                        }
-                                    }
-                                }
-                                dismissAllowingStateLoss()
-                            }
-
-                            if (featureFlagManager.isFoss && preferencesRepository.requestDonation()) {
-                                adFrame.visibility = View.VISIBLE
-
-                                val view = View.inflate(context, R.layout.donation_request, null)
-                                view.setOnClickListener {
-                                    activity?.let {
-                                        lifecycleScope.launch {
-                                            billingManager.charge(it)
-                                            preferencesRepository.setRequestDonation(false)
-                                        }
-                                    }
-                                }
-
-                                adFrame.addView(
-                                    view,
-                                    FrameLayout.LayoutParams(
-                                        FrameLayout.LayoutParams.MATCH_PARENT,
-                                        FrameLayout.LayoutParams.WRAP_CONTENT,
-                                        Gravity.CENTER_HORIZONTAL,
-                                    ),
-                                )
-                            } else if (!preferencesRepository.isPremiumEnabled() &&
-                                featureFlagManager.isBannerAdEnabled
-                            ) {
-                                adFrame.visibility = View.VISIBLE
-
-                                adFrame.addView(
-                                    adsManager.createBannerAd(context),
-                                    FrameLayout.LayoutParams(
-                                        FrameLayout.LayoutParams.MATCH_PARENT,
-                                        FrameLayout.LayoutParams.WRAP_CONTENT,
-                                        Gravity.CENTER_HORIZONTAL,
-                                    ),
+                        titleEmoji.apply {
+                            setImageResource(state.titleEmoji)
+                            setOnClickListener {
+                                analyticsManager.sentEvent(Analytics.ClickEmoji)
+                                endGameViewModel.sendEvent(
+                                    EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji),
                                 )
                             }
+                        }
 
-                            if (
-                                !state.showTutorial &&
-                                state.showContinueButton &&
-                                featureFlagManager.isContinueGameEnabled
+                        newGame.setOnClickListener {
+                            lifecycleScope.launch {
+                                gameViewModel.startNewGame()
+                            }
+                            dismissAllowingStateLoss()
+                        }
+
+                        continueGame.setOnClickListener {
+                            analyticsManager.sentEvent(Analytics.ContinueGame)
+                            if (featureFlagManager.isAdsOnContinueEnabled &&
+                                !preferencesRepository.isPremiumEnabled()
                             ) {
-                                continueButton.visibility = View.VISIBLE
-                                if (!preferencesRepository.isPremiumEnabled() &&
-                                    featureFlagManager.isAdsOnContinueEnabled
-                                ) {
-                                    continueButton.compoundDrawablePadding = 0
-                                    continueButton.setCompoundDrawablesWithIntrinsicBounds(
-                                        R.drawable.watch_ads_icon,
-                                        0,
-                                        0,
-                                        0,
-                                    )
-                                }
-
-                                if (!preferencesRepository.isPremiumEnabled() &&
-                                    featureFlagManager.showCountdownToContinue
-                                ) {
-                                    countdown.visibility = View.VISIBLE
-                                    lifecycleScope.launchWhenCreated {
-                                        var countdownTime = 10
-                                        while (countdownTime > 0) {
-                                            countdown.text = countdownTime.toString()
-                                            delay(1000L)
-                                            countdownTime -= 1
-                                        }
-                                        countdown.visibility = View.GONE
-                                        continueButton.visibility = View.GONE
-                                    }
-                                }
+                                showAdsAndContinue()
                             } else {
-                                continueButton.visibility = View.GONE
-                                countdown.visibility = View.GONE
+                                gameViewModel.sendEvent(GameEvent.ContinueGame)
+                                dismissAllowingStateLoss()
+                            }
+                        }
+
+                        settings.setOnClickListener {
+                            analyticsManager.sentEvent(Analytics.OpenSettings)
+                            showSettings()
+                        }
+
+                        close.setOnClickListener {
+                            analyticsManager.sentEvent(Analytics.CloseEndGameScreen)
+                            activity?.let {
+                                if (!it.isFinishing) {
+                                    lifecycleScope.launch {
+                                        gameViewModel.revealMines()
+                                    }
+                                }
+                            }
+                            dismissAllowingStateLoss()
+                        }
+
+                        if (featureFlagManager.isFoss && preferencesRepository.requestDonation()) {
+                            adFrame.visibility = View.VISIBLE
+
+                            val view = View.inflate(context, R.layout.donation_request, null)
+                            view.setOnClickListener {
+                                activity?.let {
+                                    lifecycleScope.launch {
+                                        billingManager.charge(it)
+                                        preferencesRepository.setRequestDonation(false)
+                                    }
+                                }
                             }
 
-                            if (state.showTutorial) {
-                                tutorialButton.visibility = View.VISIBLE
-                                tutorialButton.setOnClickListener {
-                                    val intent = Intent(context, TutorialActivity::class.java)
-                                    context.startActivity(intent)
-                                }
-                            } else if (
-                                !preferencesRepository.isPremiumEnabled() &&
-                                !instantAppManager.isEnabled(context) &&
-                                featureFlagManager.isGameOverAdEnabled
-                            ) {
-                                activity?.let { activity ->
-                                    val label = context.getString(R.string.remove_ad)
-                                    val priceModel = billingManager.getPrice()
-                                    val price = priceModel?.price
-                                    val unlockLabel = price?.let { "$label - $it" } ?: label
-                                    removeAdsButton.apply {
-                                        visibility = View.VISIBLE
-                                        text = unlockLabel
+                            adFrame.addView(
+                                view,
+                                FrameLayout.LayoutParams(
+                                    FrameLayout.LayoutParams.MATCH_PARENT,
+                                    FrameLayout.LayoutParams.WRAP_CONTENT,
+                                    Gravity.CENTER_HORIZONTAL,
+                                ),
+                            )
+                        } else if (!preferencesRepository.isPremiumEnabled() &&
+                            featureFlagManager.isBannerAdEnabled
+                        ) {
+                            adFrame.visibility = View.VISIBLE
 
-                                        setOnClickListener {
-                                            analyticsManager.sentEvent(Analytics.RemoveAds)
-                                            lifecycleScope.launch {
-                                                billingManager.charge(activity)
-                                            }
+                            adFrame.addView(
+                                adsManager.createBannerAd(context),
+                                FrameLayout.LayoutParams(
+                                    FrameLayout.LayoutParams.MATCH_PARENT,
+                                    FrameLayout.LayoutParams.WRAP_CONTENT,
+                                    Gravity.CENTER_HORIZONTAL,
+                                ),
+                            )
+                        }
+
+                        if (
+                            !state.showTutorial &&
+                            state.showContinueButton &&
+                            featureFlagManager.isContinueGameEnabled
+                        ) {
+                            continueGame.visibility = View.VISIBLE
+                            if (!preferencesRepository.isPremiumEnabled() &&
+                                featureFlagManager.isAdsOnContinueEnabled
+                            ) {
+                                continueGame.compoundDrawablePadding = 0
+                                continueGame.setCompoundDrawablesWithIntrinsicBounds(
+                                    R.drawable.watch_ads_icon,
+                                    0,
+                                    0,
+                                    0,
+                                )
+                            }
+
+                            if (!preferencesRepository.isPremiumEnabled() &&
+                                featureFlagManager.showCountdownToContinue
+                            ) {
+                                countdown.visibility = View.VISIBLE
+                                lifecycleScope.launchWhenCreated {
+                                    var countdownTime = 10
+                                    while (countdownTime > 0) {
+                                        countdown.text = countdownTime.toString()
+                                        delay(1000L)
+                                        countdownTime -= 1
+                                    }
+                                    countdown.visibility = View.GONE
+                                    continueGame.visibility = View.GONE
+                                }
+                            }
+                        } else {
+                            continueGame.visibility = View.GONE
+                            countdown.visibility = View.GONE
+                        }
+
+                        if (state.showTutorial) {
+                            tutorial.visibility = View.VISIBLE
+                            tutorial.setOnClickListener {
+                                val intent = Intent(context, TutorialActivity::class.java)
+                                context.startActivity(intent)
+                            }
+                        } else if (
+                            !preferencesRepository.isPremiumEnabled() &&
+                            !instantAppManager.isEnabled(context) &&
+                            featureFlagManager.isGameOverAdEnabled
+                        ) {
+                            activity?.let { activity ->
+                                val label = context.getString(R.string.remove_ad)
+                                val priceModel = billingManager.getPrice()
+                                val price = priceModel?.price
+                                val unlockLabel = price?.let { "$label - $it" } ?: label
+                                removeAds.apply {
+                                    visibility = View.VISIBLE
+                                    text = unlockLabel
+
+                                    setOnClickListener {
+                                        analyticsManager.sentEvent(Analytics.RemoveAds)
+                                        lifecycleScope.launch {
+                                            billingManager.charge(activity)
                                         }
                                     }
                                 }
-                            } else if (!preferencesRepository.isPremiumEnabled() &&
-                                instantAppManager.isEnabled(context)
-                            ) {
-                                removeAdsButton.apply {
-                                    visibility = View.VISIBLE
-                                    text = getString(R.string.themes)
-                                    setOnClickListener {
-                                        val intent = Intent(context, ThemeActivity::class.java)
-                                        startActivity(intent)
-                                    }
+                            }
+                        } else if (!preferencesRepository.isPremiumEnabled() &&
+                            instantAppManager.isEnabled(context)
+                        ) {
+                            removeAds.apply {
+                                visibility = View.VISIBLE
+                                text = getString(R.string.themes)
+                                setOnClickListener {
+                                    val intent = Intent(context, ThemeActivity::class.java)
+                                    startActivity(intent)
                                 }
                             }
                         }
                     }
                 }
+            }
 
             setOnKeyListener { _, _, keyEvent ->
                 if (keyEvent.keyCode == KeyEvent.KEYCODE_BACK) {
@@ -295,7 +279,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                 }
             }
 
-            setView(view)
+            setView(binding.root)
         }.create().apply {
             setCanceledOnTouchOutside(false)
 

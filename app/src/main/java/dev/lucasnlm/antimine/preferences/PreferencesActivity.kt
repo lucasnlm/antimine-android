@@ -15,11 +15,11 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.materialswitch.MaterialSwitch
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
+import dev.lucasnlm.antimine.databinding.ActivityPreferencesBinding
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.ext.showWarning
 import dev.lucasnlm.antimine.ui.model.TopBarAction
 import dev.lucasnlm.external.IPlayGamesManager
-import kotlinx.android.synthetic.main.activity_preferences.*
 import org.koin.android.ext.android.inject
 
 class PreferencesActivity :
@@ -35,26 +35,27 @@ class PreferencesActivity :
 
     private lateinit var exportResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var importResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var binding: ActivityPreferencesBinding
 
     private val preferenceManager by lazy {
         PreferenceManager.getDefaultSharedPreferences(applicationContext)
     }
 
-    private fun bindItem(
-        switch: MaterialSwitch,
+    private fun MaterialSwitch.bindItem(
         checked: Boolean,
         action: (Boolean) -> Unit,
     ) {
-        switch.apply {
-            isChecked = checked
-            setOnCheckedChangeListener { _, newCheckedState ->
-                action(newCheckedState)
-            }
+        isChecked = checked
+        setOnCheckedChangeListener { _, newCheckedState ->
+            action(newCheckedState)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityPreferencesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         exportResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
@@ -94,7 +95,7 @@ class PreferencesActivity :
             }
         }
 
-        bindToolbar(toolbar)
+        bindToolbar(binding.toolbar)
         bindToolbarAction(preferenceRepository.hasCustomizations())
         bindItems()
 
@@ -102,8 +103,7 @@ class PreferencesActivity :
     }
 
     private fun bindItems() {
-        bindItem(
-            switch = hapticFeedback,
+        binding.hapticFeedback.bindItem(
             checked = preferenceRepository.useHapticFeedback(),
             action = {
                 preferenceRepository.setHapticFeedback(it)
@@ -113,94 +113,83 @@ class PreferencesActivity :
             },
         )
 
-        bindItem(
-            switch = soundEffects,
+        binding.soundEffects.bindItem(
             checked = preferenceRepository.isSoundEffectsEnabled(),
             action = { preferenceRepository.setSoundEffectsEnabled(it) },
         )
 
-        bindItem(
-            switch = showWindows,
+        binding.showWindows.bindItem(
             checked = preferenceRepository.showWindowsWhenFinishGame(),
             action = { preferenceRepository.mustShowWindowsWhenFinishGame(it) },
         )
 
-        bindItem(
-            switch = openDirectly,
+        binding.openDirectly.bindItem(
             checked = preferenceRepository.openGameDirectly(),
             action = { preferenceRepository.setOpenGameDirectly(it) },
         )
 
-        bindItem(
-            switch = useQuestionMark,
+        binding.useQuestionMark.bindItem(
             checked = preferenceRepository.useQuestionMark(),
             action = { preferenceRepository.setQuestionMark(it) },
         )
 
-        bindItem(
-            switch = showTimer,
+        binding.showTimer.bindItem(
             checked = preferenceRepository.showTimer(),
             action = { preferenceRepository.setTimerVisible(it) },
         )
 
-        bindItem(
-            switch = automaticFlags,
+        binding.automaticFlags.bindItem(
             checked = preferenceRepository.useFlagAssistant(),
             action = { preferenceRepository.setFlagAssistant(it) },
         )
 
-        bindItem(
-            switch = hint,
+        binding.hint.bindItem(
             checked = preferenceRepository.useHelp(),
             action = { preferenceRepository.setHelp(it) },
         )
 
-        bindItem(
-            switch = allowClickNumber,
+        binding.allowClickNumber.bindItem(
             checked = preferenceRepository.allowTapOnNumbers(),
             action = {
                 preferenceRepository.setAllowTapOnNumbers(it)
 
                 if (it) {
-                    flagWhenTapOnNumbers.visibility = View.VISIBLE
-                    flagWhenTapOnNumbers.visibility = View.VISIBLE
+                    binding.flagWhenTapOnNumbers.visibility = View.VISIBLE
+                    binding.flagWhenTapOnNumbers.visibility = View.VISIBLE
                 } else {
-                    flagWhenTapOnNumbers.visibility = View.GONE
-                    flagWhenTapOnNumbers.visibility = View.GONE
+                    binding.flagWhenTapOnNumbers.visibility = View.GONE
+                    binding.flagWhenTapOnNumbers.visibility = View.GONE
                 }
             },
         )
 
-        bindItem(
-            switch = flagWhenTapOnNumbers,
+        binding.flagWhenTapOnNumbers.bindItem(
             checked = preferenceRepository.letNumbersAutoFlag(),
             action = { preferenceRepository.setNumbersAutoFlag(it) },
         )
 
         if (!preferenceRepository.allowTapOnNumbers()) {
-            flagWhenTapOnNumbers.visibility = View.GONE
-            flagWhenTapOnNumbers.visibility = View.GONE
+            binding.flagWhenTapOnNumbers.visibility = View.GONE
+            binding.flagWhenTapOnNumbers.visibility = View.GONE
         }
 
-        bindItem(
-            switch = highlightUnsolvedNumbers,
+        binding.highlightUnsolvedNumbers.bindItem(
             checked = preferenceRepository.dimNumbers(),
             action = { preferenceRepository.setDimNumbers(it) },
         )
 
         if (playGamesManager.hasGooglePlayGames()) {
-            bindItem(
-                switch = playGames,
+            binding.playGames.bindItem(
                 checked = preferenceRepository.keepRequestPlayGames(),
                 action = {
                     preferenceRepository.setRequestPlayGames(it)
                 },
             )
         } else {
-            playGames.visibility = View.GONE
+            binding.playGames.visibility = View.GONE
         }
 
-        exportSettings.setOnClickListener {
+        binding.exportSettings.setOnClickListener {
             val exportIntent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
                 addCategory(Intent.CATEGORY_OPENABLE)
                 putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)
@@ -215,7 +204,7 @@ class PreferencesActivity :
             exportResultLauncher.launch(exportIntent)
         }
 
-        importSettings.setOnClickListener {
+        binding.importSettings.setOnClickListener {
             val exportIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
                 addCategory(Intent.CATEGORY_OPENABLE)
                 putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)

@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.control.R
+import dev.lucasnlm.antimine.control.databinding.ViewControlItemBinding
+import dev.lucasnlm.antimine.control.databinding.ViewControlItemSimpleBinding
 import dev.lucasnlm.antimine.control.models.ControlDetails
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import kotlinx.android.synthetic.main.view_control_item.view.*
 
 class ControlAdapter(
     private var selected: ControlStyle,
@@ -33,20 +34,28 @@ class ControlAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == 4) SIMPLE else COMPLEX
+        return if (position == 4) SINGLE_LINE_CONTROL else TWO_LINES_CONTROL
+    }
+
+    private fun <T> Int.inflateIf(type: Int, action: () -> T): T? {
+        return if (this == type) {
+            action()
+        } else {
+            null
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ControlViewHolder {
-        val view = if (viewType == SIMPLE) {
-            LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.view_control_item_simple, parent, false)
-        } else {
-            LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.view_control_item, parent, false)
-        }
-        return ControlViewHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+
+        return ControlViewHolder(
+            simpleItem = viewType.inflateIf(SINGLE_LINE_CONTROL) {
+                ViewControlItemSimpleBinding.inflate(layoutInflater, parent, false)
+            },
+            controlItem = viewType.inflateIf(TWO_LINES_CONTROL) {
+                ViewControlItemBinding.inflate(layoutInflater, parent, false)
+            },
+        )
     }
 
     override fun onBindViewHolder(holder: ControlViewHolder, position: Int) {
@@ -59,9 +68,9 @@ class ControlAdapter(
             R.attr.colorOnBackground,
         )?.withAlpha(50)
 
-        if (getItemViewType(position) == SIMPLE) {
+        if (holder.simpleItem != null) {
             holder.itemView.run {
-                cardView.apply {
+                holder.simpleItem.cardView.apply {
                     setOnClickListener {
                         onControlSelected(controlDetail.controlStyle)
                     }
@@ -71,11 +80,11 @@ class ControlAdapter(
                         null
                     }
                 }
-                firstActionName.text = context.getString(controlDetail.firstActionId)
+                holder.simpleItem.firstActionName.text = context.getString(controlDetail.firstActionId)
             }
-        } else {
+        } else if (holder.controlItem != null) {
             holder.itemView.run {
-                cardView.apply {
+                holder.controlItem.cardView.apply {
                     setOnClickListener {
                         onControlSelected(controlDetail.controlStyle)
                     }
@@ -85,10 +94,10 @@ class ControlAdapter(
                         null
                     }
                 }
-                firstActionName.text = context.getString(controlDetail.firstActionId)
-                firstActionResponse.text = context.getString(controlDetail.firstActionResponseId)
-                secondActionName.text = context.getString(controlDetail.secondActionId)
-                secondActionResponse.text = context.getString(controlDetail.secondActionResponseId)
+                holder.controlItem.firstActionName.text = context.getString(controlDetail.firstActionId)
+                holder.controlItem.firstActionResponse.text = context.getString(controlDetail.firstActionResponseId)
+                holder.controlItem.secondActionName.text = context.getString(controlDetail.secondActionId)
+                holder.controlItem.secondActionResponse.text = context.getString(controlDetail.secondActionResponseId)
             }
         }
     }
@@ -98,7 +107,7 @@ class ControlAdapter(
     }
 
     companion object {
-        private const val COMPLEX = 0
-        private const val SIMPLE = 1
+        private const val TWO_LINES_CONTROL = 0
+        private const val SINGLE_LINE_CONTROL = 1
     }
 }

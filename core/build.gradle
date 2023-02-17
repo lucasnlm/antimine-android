@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace 'dev.lucasnlm.antimine.core'
     compileSdkVersion 33
 
     defaultConfig {
@@ -46,7 +47,7 @@ dependencies {
     testImplementation 'io.insert-koin:koin-test:3.1.2'
 
     // AndroidX
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
