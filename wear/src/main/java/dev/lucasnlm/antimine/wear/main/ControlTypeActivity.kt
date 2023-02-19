@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.wear.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.wear.widget.WearableLinearLayoutManager
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
@@ -28,68 +29,48 @@ class ControlTypeActivity : ThemedActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun refreshControlTypeList() {
-        val currentStyle = preferencesRepository.controlStyle()
-
         val controlTypes = listOf(
             ControlTypeItem(
                 id = 0,
-                primaryAction = R.string.open,
-                secondaryAction = R.string.flag_tile,
-                selected = ControlStyle.Standard == currentStyle,
-                onClick = {
-                    preferencesRepository.useControlStyle(ControlStyle.Standard)
-                    finish()
-                },
+                primaryAction = R.string.single_click,
+                secondaryAction = R.string.long_press,
+                controlStyle = ControlStyle.Standard,
             ),
             ControlTypeItem(
                 id = 1,
-                primaryAction = R.string.flag_tile,
-                secondaryAction = R.string.open,
-                selected = ControlStyle.FastFlag == currentStyle,
-                onClick = {
-                    preferencesRepository.useControlStyle(ControlStyle.FastFlag)
-                    finish()
-                },
+                primaryAction = R.string.long_press,
+                secondaryAction = R.string.single_click,
+                controlStyle = ControlStyle.FastFlag,
             ),
             ControlTypeItem(
                 id = 2,
                 primaryAction = R.string.single_click,
                 secondaryAction = R.string.double_click,
-                selected = ControlStyle.DoubleClick == currentStyle,
-                onClick = {
-                    preferencesRepository.useControlStyle(ControlStyle.DoubleClick)
-                    finish()
-                },
-            ),
-            ControlTypeItem(
-                id = 3,
-                primaryAction = R.string.double_click,
-                secondaryAction = R.string.single_click,
-                selected = ControlStyle.DoubleClickInverted == currentStyle,
-                onClick = {
-                    preferencesRepository.useControlStyle(ControlStyle.DoubleClickInverted)
-                    finish()
-                },
+                controlStyle = ControlStyle.DoubleClick,
             ),
             ControlTypeItem(
                 id = 4,
                 primaryAction = R.string.switch_control_desc,
-                selected = ControlStyle.SwitchMarkOpen == currentStyle,
-                onClick = {
-                    preferencesRepository.useControlStyle(ControlStyle.SwitchMarkOpen)
-                    finish()
-                },
+                controlStyle = ControlStyle.SwitchMarkOpen,
             ),
-        ).sortedBy {
-            !it.selected
-        }
+        )
 
         binding.recyclerView.apply {
             setHasFixedSize(true)
             isEdgeItemsCenteringEnabled = true
             layoutManager = WearableLinearLayoutManager(this@ControlTypeActivity)
-            adapter = ControlTypeListAdapter(controlTypes)
+            adapter = ControlTypeListAdapter(
+                controlTypeItemList = controlTypes,
+                preferencesRepository = preferencesRepository,
+                onChangeControl = {
+                    val layoutManager = binding.recyclerView.layoutManager
+                    val recyclerViewState = layoutManager?.onSaveInstanceState()
+                    binding.recyclerView.adapter?.notifyDataSetChanged()
+                    layoutManager?.onRestoreInstanceState(recyclerViewState)
+                },
+            )
         }
     }
 }

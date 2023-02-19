@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.ui.ext
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.MaterialToolbar
 import dev.lucasnlm.antimine.ui.model.AppSkin
