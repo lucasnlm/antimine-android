@@ -30,7 +30,6 @@ class ThemeActivity : ThemedActivity() {
     private fun refreshThemeList() {
         binding.recyclerView.apply {
             setHasFixedSize(true)
-//            isEdgeItemsCenteringEnabled = true
             layoutManager = LinearLayoutManager(this@ThemeActivity)
             adapter = ThemeListAdapter(
                 themes = themesRepository.getAllThemes(),
