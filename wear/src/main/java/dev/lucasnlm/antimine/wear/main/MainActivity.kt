@@ -11,6 +11,7 @@ import dev.lucasnlm.antimine.wear.databinding.ActivityMainBinding
 import dev.lucasnlm.antimine.wear.game.GameActivity
 import dev.lucasnlm.antimine.wear.main.models.MenuItem
 import dev.lucasnlm.antimine.wear.main.view.MainMenuAdapter
+import dev.lucasnlm.antimine.wear.tutorial.TutorialActivity
 import org.koin.android.ext.android.inject
 
 class MainActivity : ThemedActivity() {
@@ -64,13 +65,9 @@ class MainActivity : ThemedActivity() {
                 id = 4L,
                 label = R.string.tutorial,
                 icon = R.drawable.tutorial,
-                onClick = {},
-            ),
-            MenuItem(
-                id = 5L,
-                label = R.string.about,
-                icon = R.drawable.about,
-                onClick = {},
+                onClick = {
+                    startTutorial()
+                },
             ),
             MenuItem(
                 id = 6L,
@@ -116,6 +113,11 @@ class MainActivity : ThemedActivity() {
 
     private fun startThemeScreen() {
         val intent = Intent(this, ThemeActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun startTutorial() {
+        val intent = Intent(this, TutorialActivity::class.java)
         startActivity(intent)
     }
 }

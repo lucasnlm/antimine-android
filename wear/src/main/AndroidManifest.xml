@@ -76,6 +76,11 @@
             android:name=".main.ThemeActivity"
             android:windowSwipeToDismiss="false"
             android:exported="true"/>
+
+        <activity
+            android:name=".tutorial.TutorialActivity"
+            android:windowSwipeToDismiss="false"
+            android:exported="true"/>
     </application>
 
 </manifest>
