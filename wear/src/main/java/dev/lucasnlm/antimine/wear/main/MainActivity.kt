@@ -56,7 +56,9 @@ class MainActivity : ThemedActivity() {
                 id = 3L,
                 label = R.string.themes,
                 icon = R.drawable.themes,
-                onClick = {},
+                onClick = {
+                    startThemeScreen()
+                },
             ),
             MenuItem(
                 id = 4L,
@@ -109,6 +111,11 @@ class MainActivity : ThemedActivity() {
 
     private fun startControlScreen() {
         val intent = Intent(this, ControlTypeActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun startThemeScreen() {
+        val intent = Intent(this, ThemeActivity::class.java)
         startActivity(intent)
     }
 }

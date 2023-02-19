@@ -71,6 +71,11 @@
             android:name=".main.ControlTypeActivity"
             android:windowSwipeToDismiss="false"
             android:exported="true"/>
+
+        <activity
+            android:name=".main.ThemeActivity"
+            android:windowSwipeToDismiss="false"
+            android:exported="true"/>
     </application>
 
 </manifest>
