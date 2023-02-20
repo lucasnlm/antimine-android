@@ -75,12 +75,13 @@ android {
         google {
             dimension 'version'
             applicationId 'dev.lucasnlm.antimine'
+            versionNameSuffix " R"
         }
 
         googleInstant {
             dimension 'version'
             applicationId 'dev.lucasnlm.antimine'
-            versionNameSuffix "-inst"
+            versionNameSuffix " I"
         }
 
         foss {
