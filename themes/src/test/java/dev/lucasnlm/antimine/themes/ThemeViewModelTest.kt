@@ -117,11 +117,7 @@ class ThemeViewModelTest {
             every { getTheme() } returns gardenTheme
         }
 
-        val preferencesRepository = mockk<IPreferencesRepository> {
-            every { squareSize() } returns 55
-            every { squareDivider() } returns 0
-            every { squareRadius() } returns 3
-        }
+        val preferencesRepository = mockk<IPreferencesRepository>()
 
         val analyticsManager = mockk<IAnalyticsManager> { }
 
@@ -139,9 +135,6 @@ class ThemeViewModelTest {
 
         val preferencesRepository = mockk<IPreferencesRepository> {
             every { isPremiumEnabled() } returns true
-            every { squareSize() } returns 55
-            every { squareDivider() } returns 0
-            every { squareRadius() } returns 3
         }
 
         val analyticsManager = mockk<IAnalyticsManager> {
@@ -167,10 +160,6 @@ class ThemeViewModelTest {
 
         val preferencesRepository = mockk<IPreferencesRepository> {
             every { isPremiumEnabled() } returns false
-            every { squareSize() } returns 55
-            every { squareDivider() } returns 0
-            every { squareRadius() } returns 3
-            every { addUnlockedTheme(2) } returns Unit
         }
 
         val analyticsManager = mockk<IAnalyticsManager> {

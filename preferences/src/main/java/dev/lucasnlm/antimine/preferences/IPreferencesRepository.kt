@@ -16,6 +16,7 @@ interface IPreferencesRepository {
     fun forgetCustomSeed()
 
     fun controlStyle(): ControlStyle
+    fun hasCustomControlStyle(): Boolean
     fun useControlStyle(controlStyle: ControlStyle)
 
     fun isFirstUse(): Boolean
@@ -111,10 +112,6 @@ interface IPreferencesRepository {
     fun userId(): String?
     fun setUserId(userId: String)
 
-    fun addUnlockedTheme(id: Int)
-    fun setUnlockedThemes(themes: String)
-    fun getUnlockedThemes(): List<Int>
-
     fun showTutorialDialog(): Boolean
     fun setTutorialDialog(show: Boolean)
 
@@ -129,4 +126,16 @@ interface IPreferencesRepository {
 
     fun showContinueGame(): Boolean
     fun setContinueGameLabel(value: Boolean)
+
+    fun showNewThemesIcon(): Boolean
+    fun setNewThemesIcon(visible: Boolean)
+
+    fun exportData(): Map<String, Any?>
+    fun importData(data: Map<String, Any?>)
+
+    fun keepRequestPlayGames(): Boolean
+    fun setRequestPlayGames(showRequest: Boolean)
+
+    fun lastAppVersion(): Int?
+    fun setLastAppVersion(versionCode: Int)
 }

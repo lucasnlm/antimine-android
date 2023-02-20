@@ -1,5 +1,5 @@
-Testez votre puissance de raisonnement dans un jeu de puzzle difficile où vous devez nettoyer un champ de mines sans faire exploser aucune mine.
-Il s'agit d'une version minimaliste et moderne du Démineur classique.
+Testez votre capacité de raisonnement sur un jeu de logique difficile où vous devez débarrasser toutes les mines, dans un champ de mines, sans faire sauter aucune mine.
+Il s'agit d'une version minimaliste et moderne du Minesweeper classique.
 
 Êtes-vous en mesure de nettoyer un champ de mines ? C'est parti !
 

@@ -15,7 +15,7 @@ class MinefieldRepositoryTest {
     private val beginnerMinefield = Minefield(9, 9, 10)
     private val intermediateMinefield = Minefield(16, 16, 40)
     private val expertMinefield = Minefield(24, 24, 99)
-    private val masterMinefield = Minefield(50, 50, 400)
+    private val masterMinefield = Minefield(50, 50, 450)
     private val legendMinefield = Minefield(100, 100, 2000)
 
     @Test
@@ -196,7 +196,7 @@ class MinefieldRepositoryTest {
 
         val ratios = mapOf(
             Difficulty.Beginner to 12,
-            Difficulty.Intermediate to 16,
+            Difficulty.Intermediate to 15,
             Difficulty.Expert to 17,
             Difficulty.Master to 18,
             Difficulty.Legend to 20,

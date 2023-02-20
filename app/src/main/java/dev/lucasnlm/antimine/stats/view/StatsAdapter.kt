@@ -4,11 +4,9 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.databinding.ViewStatsItemBinding
 import dev.lucasnlm.antimine.stats.model.StatsModel
-import kotlinx.android.synthetic.main.view_stats_item.view.*
 import java.text.NumberFormat
 
 class StatsAdapter(
@@ -16,15 +14,15 @@ class StatsAdapter(
 ) : RecyclerView.Adapter<StatsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatsViewHolder {
-        val view = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.view_stats_item, parent, false)
-        return StatsViewHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        return StatsViewHolder(
+            binding = ViewStatsItemBinding.inflate(layoutInflater, parent, false),
+        )
     }
 
     override fun onBindViewHolder(holder: StatsViewHolder, position: Int) {
         val stats = statsList[position]
-        holder.apply {
+        holder.binding.apply {
             if (stats.totalGames > 0) {
                 val emptyText = "-"
                 if (stats.title != 0) {
@@ -74,15 +72,6 @@ class StatsAdapter(
     }
 }
 
-class StatsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val statsLabel: TextView = itemView.statsLabel
-    val totalGames: TextView = itemView.totalGames
-    val minesCount: TextView = itemView.minesCount
-    val totalTime: TextView = itemView.totalTime
-    val averageTime: TextView = itemView.averageTime
-    val shortestTime: TextView = itemView.shortestTime
-    val openAreas: TextView = itemView.openAreas
-    val performance: TextView = itemView.performance
-    val victory: TextView = itemView.victory
-    val defeat: TextView = itemView.defeat
-}
+class StatsViewHolder(
+    val binding: ViewStatsItemBinding,
+) : RecyclerView.ViewHolder(binding.root)

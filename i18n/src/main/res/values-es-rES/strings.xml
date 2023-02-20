@@ -37,6 +37,10 @@
     <string name="game_time">Tiempo de juego</string>
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Jugabilidad</string>
+    <string name="export_settings">Exportar</string>
+    <string name="import_settings">Importar</string>
+    <string name="exported_success">¡Ajustes exportados!</string>
+    <string name="imported_success">¡Ajustes importados!</string>
     <string name="settings_accessibility">Accesibilidad</string>
     <string name="system">Sistema</string>
     <string name="sign_in_failed">Imposible conectar. Por favor, revisa tu conexión de datos e inténtalo nuevamente.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Has recibido: +%1$d</string>
     <string name="help_win_a_game">Para conseguir más pistas, debes ganar una partida.</string>
     <string name="unknown_error">Error desconocido.</string>
+    <string name="error">¡Error!</string>
     <string name="leaderboards">Ránking</string>
     <string name="cancel">Cancelar</string>
     <string name="resume">Continuar</string>

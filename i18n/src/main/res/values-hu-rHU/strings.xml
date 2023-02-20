@@ -37,6 +37,10 @@
     <string name="game_time">Játékidő</string>
     <string name="settings_general">Általános</string>
     <string name="settings_gameplay">Játékmenet</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">Kisegítő lehetőségek</string>
     <string name="system">Rendszer</string>
     <string name="sign_in_failed">Sikertelen bejelentkezés. Kérlek ellenőrizd a hálózati csatlakozást és próbáld újra.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Kapott összeg: +%1$d</string>
     <string name="help_win_a_game">További segítségért meg kell nyernie egy játékot.</string>
     <string name="unknown_error">Ismeretlen hiba.</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">Ranglista</string>
     <string name="cancel">Mégse</string>
     <string name="resume">Folytatás</string>

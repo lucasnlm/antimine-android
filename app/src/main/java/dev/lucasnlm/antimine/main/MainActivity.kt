@@ -26,6 +26,7 @@ import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
+import dev.lucasnlm.antimine.databinding.ActivityMainBinding
 import dev.lucasnlm.antimine.history.HistoryActivity
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
@@ -36,19 +37,14 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
-import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IBillingManager
-import dev.lucasnlm.external.IFeatureFlagManager
-import dev.lucasnlm.external.IInAppUpdateManager
-import dev.lucasnlm.external.IPlayGamesManager
-import kotlinx.android.synthetic.main.activity_main.*
+import dev.lucasnlm.external.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : ThemedActivity(R.layout.activity_main) {
+class MainActivity : ThemedActivity() {
     private val viewModel: MainViewModel by viewModel()
     private val playGamesManager: IPlayGamesManager by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
@@ -59,13 +55,18 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
     private val billingManager: IBillingManager by inject()
     private val savesRepository: ISavesRepository by inject()
     private val inAppUpdateManager: IInAppUpdateManager by inject()
+    private val instantAppManager: IInstantAppManager by inject()
+    private val preferenceRepository: IPreferencesRepository by inject()
 
     private lateinit var viewPager: ViewPager2
-
     private lateinit var googlePlayLauncher: ActivityResultLauncher<Intent>
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         googlePlayLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -73,7 +74,7 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
             }
         }
 
-        continueGame.apply {
+        binding.continueGame.apply {
             if (preferencesRepository.showContinueGame()) {
                 setText(R.string.continue_game)
             } else {
@@ -89,7 +90,7 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
             lifecycleScope.launch {
                 savesRepository.fetchCurrentSave()?.let {
                     preferencesRepository.setContinueGameLabel(true)
-                    continueGame.setText(R.string.continue_game)
+                    binding.continueGame.setText(R.string.continue_game)
                 }
             }
         }
@@ -100,32 +101,32 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
                 preferencesRepository.setShowTutorialButton(shouldShowTutorial)
                 withContext(Dispatchers.Main) {
                     if (!shouldShowTutorial) {
-                        tutorial.visibility = View.GONE
+                        binding.tutorial.visibility = View.GONE
                     }
                 }
             } else {
-                tutorial.visibility = View.GONE
+                binding.tutorial.visibility = View.GONE
             }
         }
 
-        newGameShow.setOnClickListener {
-            newGameShow.visibility = View.GONE
-            difficulties.visibility = View.VISIBLE
+        binding.newGameShow.setOnClickListener {
+            binding.newGameShow.visibility = View.GONE
+            binding.difficulties.visibility = View.VISIBLE
         }
 
         mapOf(
-            standardSize to Difficulty.Standard,
-            fixedSizeSize to Difficulty.FixedSize,
-            beginnerSize to Difficulty.Beginner,
-            intermediateSize to Difficulty.Intermediate,
-            expertSize to Difficulty.Expert,
-            masterSize to Difficulty.Master,
-            legendSize to Difficulty.Legend,
+            binding.standardSize to Difficulty.Standard,
+            binding.fixedSizeSize to Difficulty.FixedSize,
+            binding.beginnerSize to Difficulty.Beginner,
+            binding.intermediateSize to Difficulty.Intermediate,
+            binding.expertSize to Difficulty.Expert,
+            binding.masterSize to Difficulty.Master,
+            binding.legendSize to Difficulty.Legend,
         ).onEach {
             it.key.text = getDifficultyExtra(it.value)
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && instantAppManager.isEnabled(applicationContext)) {
             listOf(
                 Difficulty.Beginner,
                 Difficulty.Intermediate,
@@ -135,13 +136,13 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
         }
 
         mapOf(
-            startStandard to Difficulty.Standard,
-            startFixedSize to Difficulty.FixedSize,
-            startBeginner to Difficulty.Beginner,
-            startIntermediate to Difficulty.Intermediate,
-            startExpert to Difficulty.Expert,
-            startMaster to Difficulty.Master,
-            startLegend to Difficulty.Legend,
+            binding.startStandard to Difficulty.Standard,
+            binding.startFixedSize to Difficulty.FixedSize,
+            binding.startBeginner to Difficulty.Beginner,
+            binding.startIntermediate to Difficulty.Intermediate,
+            binding.startExpert to Difficulty.Expert,
+            binding.startMaster to Difficulty.Master,
+            binding.startLegend to Difficulty.Legend,
         ).forEach { (view, difficulty) ->
             view.setOnClickListener {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -154,30 +155,37 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
             }
         }
 
-        startCustom.setOnClickListener {
+        binding.startCustom.setOnClickListener {
             analyticsManager.sentEvent(Analytics.OpenCustom)
             viewModel.sendEvent(MainEvent.ShowCustomDifficultyDialogEvent)
         }
 
-        settings.setOnClickListener {
+        binding.settings.setOnClickListener {
             analyticsManager.sentEvent(Analytics.OpenSettings)
             val intent = Intent(this, PreferencesActivity::class.java)
             startActivity(intent)
         }
 
-        themes.setOnClickListener {
+        binding.themes.setOnClickListener {
             val intent = Intent(this, ThemeActivity::class.java)
+            preferencesRepository.setNewThemesIcon(false)
             startActivity(intent)
         }
 
-        controls.setOnClickListener {
+        binding.newThemesIcon.visibility = if (preferencesRepository.showNewThemesIcon()) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
+
+        binding.controls.setOnClickListener {
             analyticsManager.sentEvent(Analytics.OpenControls)
             viewModel.sendEvent(MainEvent.ShowControlsEvent)
         }
 
         if (featureFlagManager.isFoss) {
-            removeAdsRoot.visibility = View.VISIBLE
-            removeAds.apply {
+            binding.removeAdsRoot.visibility = View.VISIBLE
+            binding.removeAds.apply {
                 setOnClickListener {
                     lifecycleScope.launch {
                         billingManager.charge(this@MainActivity)
@@ -201,16 +209,16 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
         }
 
         if (featureFlagManager.isGameHistoryEnabled) {
-            previousGames.setOnClickListener {
+            binding.previousGames.setOnClickListener {
                 analyticsManager.sentEvent(Analytics.OpenSaveHistory)
                 val intent = Intent(this, HistoryActivity::class.java)
                 startActivity(intent)
             }
         } else {
-            previousGames.visibility = View.GONE
+            binding.previousGames.visibility = View.GONE
         }
 
-        tutorial.apply {
+        binding.tutorial.apply {
             setText(R.string.tutorial)
             setOnClickListener {
                 analyticsManager.sentEvent(Analytics.OpenTutorial)
@@ -218,25 +226,25 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
             }
         }
 
-        stats.setOnClickListener {
+        binding.stats.setOnClickListener {
             analyticsManager.sentEvent(Analytics.OpenStats)
             val intent = Intent(this, StatsActivity::class.java)
             startActivity(intent)
         }
 
-        about.setOnClickListener {
+        binding.about.setOnClickListener {
             analyticsManager.sentEvent(Analytics.OpenAbout)
             val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)
         }
 
         if (playGamesManager.hasGooglePlayGames()) {
-            play_games.setOnClickListener {
+            binding.playGames.setOnClickListener {
                 analyticsManager.sentEvent(Analytics.OpenGooglePlayGames)
                 viewModel.sendEvent(MainEvent.ShowGooglePlayGamesEvent)
             }
         } else {
-            play_games.visibility = View.GONE
+            binding.playGames.visibility = View.GONE
         }
 
         lifecycleScope.launchWhenCreated {
@@ -255,6 +263,11 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
     }
 
     private fun pushShortcutOf(difficulty: Difficulty) {
+        if (instantAppManager.isEnabled(applicationContext)) {
+            // Ignore. Instant App doesn't support shortcuts.
+            return
+        }
+
         val idLow = difficulty.id.lowercase()
         val deeplink = Uri.parse("app://antimine/game?difficulty=$idLow")
 
@@ -288,9 +301,9 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
     override fun onResume() {
         super.onResume()
 
-        if (newGameShow.visibility == View.GONE) {
-            newGameShow.visibility = View.VISIBLE
-            difficulties.visibility = View.GONE
+        if (binding.newGameShow.visibility == View.GONE) {
+            binding.newGameShow.visibility = View.VISIBLE
+            binding.difficulties.visibility = View.GONE
         }
     }
 
@@ -322,6 +335,9 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
             }
             is MainEvent.GoToMainPageEvent -> {
                 viewPager.setCurrentItem(0, true)
+            }
+            is MainEvent.OpenActivity -> {
+                startActivity(event.intent)
             }
             is MainEvent.GoToSettingsPageEvent -> {
                 viewPager.setCurrentItem(1, true)
@@ -373,7 +389,10 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
     }
 
     private fun launchGooglePlayGames() {
-        if (playGamesManager.hasGooglePlayGames() && playGamesManager.shouldRequestLogin()) {
+        if (playGamesManager.hasGooglePlayGames() &&
+            playGamesManager.shouldRequestLogin() &&
+            preferenceRepository.keepRequestPlayGames()
+        ) {
             playGamesManager.keepRequestingLogin(false)
 
             lifecycleScope.launchWhenCreated {
@@ -417,8 +436,8 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
     }
 
     private fun bindRemoveAds(price: String? = null, showOffer: Boolean = false) {
-        removeAdsRoot.visibility = View.VISIBLE
-        removeAds.apply {
+        binding.removeAdsRoot.visibility = View.VISIBLE
+        binding.removeAds.apply {
             setOnClickListener {
                 lifecycleScope.launch {
                     billingManager.charge(this@MainActivity)
@@ -428,12 +447,12 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
             setIconResource(R.drawable.remove_ads)
 
             price?.let {
-                priceText.text = it
-                priceText.visibility = View.VISIBLE
+                binding.priceText.text = it
+                binding.priceText.visibility = View.VISIBLE
             }
 
             if (showOffer) {
-                priceOff.visibility = View.VISIBLE
+                binding.priceOff.visibility = View.VISIBLE
             }
         }
     }
@@ -464,9 +483,9 @@ class MainActivity : ThemedActivity(R.layout.activity_main) {
     }
 
     private fun handleBackPressed() {
-        if (newGameShow.visibility == View.GONE) {
-            newGameShow.visibility = View.VISIBLE
-            difficulties.visibility = View.GONE
+        if (binding.newGameShow.visibility == View.GONE) {
+            binding.newGameShow.visibility = View.VISIBLE
+            binding.difficulties.visibility = View.GONE
         } else {
             finishAffinity()
         }

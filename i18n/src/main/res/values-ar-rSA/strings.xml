@@ -37,6 +37,10 @@
     <string name="game_time">وقت اللعب</string>
     <string name="settings_general">عام</string>
     <string name="settings_gameplay">أسلوب اللعبة</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">إمكانية الوصول</string>
     <string name="system">نظام</string>
     <string name="sign_in_failed">فشل تسجيل الدخول. يرجى التحقق من اتصال الشبكة والمحاولة مرة أخرى.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">لقد استلمت: +%1$d</string>
     <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">خطأ غير معروف.</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">المتصدرين</string>
     <string name="cancel">الغاء</string>
     <string name="resume">استأنف</string>

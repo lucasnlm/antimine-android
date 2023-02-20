@@ -112,7 +112,7 @@
                         android:paddingHorizontal="8dp">
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/touch_sensibility"
+                            android:id="@+id/touchSensibilityLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="8dp"

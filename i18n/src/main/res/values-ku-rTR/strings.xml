@@ -37,6 +37,10 @@
     <string name="game_time">کاتی یاری</string>
     <string name="settings_general">گشتی</string>
     <string name="settings_gameplay">شێوازی یاری</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">توانای گەیشتن</string>
     <string name="system">سیستەم</string>
     <string name="sign_in_failed">چوونە ژوورەوە سەرکەوتوو نەبوو. تکایە گرێدانی تۆڕەکەت بپشکنە و دووبارە هەوڵ بدەرەوە.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">تۆ وەرت گرتووە: +%1$d</string>
     <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">هەڵەیەکی نەناسراو.</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">تەختەپێشەنگ</string>
     <string name="cancel">هەڵۆشاندنەوە</string>
     <string name="resume">دەستپێکردنەوەی</string>

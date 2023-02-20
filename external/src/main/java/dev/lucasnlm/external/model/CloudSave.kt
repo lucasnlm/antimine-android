@@ -17,7 +17,6 @@ data class CloudSave(
     val premiumFeatures: Int,
     val controlStyle: Int,
     val openDirectly: Int,
-    val unlockedThemes: String,
     val doubleClickTimeout: Int,
     val allowTapNumbers: Int,
     val hapticFeedbackLevel: Int,
@@ -43,7 +42,6 @@ fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
     "premiumFeatures" to premiumFeatures,
     "controlStyle" to controlStyle,
     "openDirectly" to openDirectly,
-    "unlockedThemes" to unlockedThemes,
     "doubleClickTimeout" to doubleClickTimeout,
     "allowTapNumbers" to allowTapNumbers,
     "highlightNumbers" to highlightNumbers,
@@ -53,7 +51,6 @@ fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
 
 private fun Any?.parseInt(): Int = this?.toString()?.toInt() ?: throw Exception("Fail to parse Int")
 private fun Any?.parseInt(default: Int): Int = this?.toString()?.toInt() ?: default
-private fun Any?.parseString(default: String): String = this?.toString() ?: default
 
 @Suppress("UNCHECKED_CAST")
 fun cloudSaveOf(id: String, data: Map<String, Any>) =
@@ -73,7 +70,6 @@ fun cloudSaveOf(id: String, data: Map<String, Any>) =
         premiumFeatures = data["premiumFeatures"].parseInt(),
         controlStyle = data["controlStyle"].parseInt(),
         openDirectly = data["openDirectly"].parseInt(0),
-        unlockedThemes = data["unlockedThemes"].parseString(""),
         doubleClickTimeout = data["doubleClickTimeout"].parseInt(400),
         allowTapNumbers = data["allowTapNumbers"].parseInt(1),
         highlightNumbers = data["highlightNumbers"].parseInt(0),

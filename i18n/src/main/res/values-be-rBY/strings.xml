@@ -37,6 +37,10 @@
     <string name="game_time">Час гульні</string>
     <string name="settings_general">Асноўныя</string>
     <string name="settings_gameplay">Геймплэй</string>
+    <string name="export_settings">Экспартаваць</string>
+    <string name="import_settings">Імпартаваць</string>
+    <string name="exported_success">Налады экспартаваны!</string>
+    <string name="imported_success">Налады iмпартаваны!</string>
     <string name="settings_accessibility">Спецыяльныя магчымасці</string>
     <string name="system">Сістэма</string>
     <string name="sign_in_failed">Не атрымалася ўвайсці. Калі ласка, праверце сваю злучэнне з інтэрнэтам і паспрабуйце пазней.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Вы атрымалі: +%1$d</string>
     <string name="help_win_a_game">Каб атрымаць дадатковыя падказкі, вы павінны выйграць гульню.</string>
     <string name="unknown_error">Невядомая памылка.</string>
+    <string name="error">Памылка!</string>
     <string name="leaderboards">Лепшыя гульцы</string>
     <string name="cancel">Скасаваць</string>
     <string name="resume">Працягнуць</string>

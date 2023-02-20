@@ -6,22 +6,25 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.databinding.ActivityStatsBinding
 import dev.lucasnlm.antimine.stats.view.StatsAdapter
 import dev.lucasnlm.antimine.stats.viewmodel.StatsEvent
 import dev.lucasnlm.antimine.stats.viewmodel.StatsViewModel
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.model.TopBarAction
-import kotlinx.android.synthetic.main.activity_stats.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class StatsActivity : ThemedActivity(R.layout.activity_stats) {
+class StatsActivity : ThemedActivity() {
     private val statsViewModel by viewModel<StatsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        themes.apply {
+        val binding = ActivityStatsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.stats.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
         }
@@ -40,12 +43,12 @@ class StatsActivity : ThemedActivity(R.layout.activity_stats) {
                     )
                 }
 
-                themes.adapter = StatsAdapter(it.stats)
-                empty.visibility = if (it.stats.isEmpty()) View.VISIBLE else View.GONE
+                binding.stats.adapter = StatsAdapter(it.stats)
+                binding.empty.visibility = if (it.stats.isEmpty()) View.VISIBLE else View.GONE
             }
         }
 
-        bindToolbar(toolbar)
+        bindToolbar(binding.toolbar)
     }
 
     private fun confirmAndDelete() {

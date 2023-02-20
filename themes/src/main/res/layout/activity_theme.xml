@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    tools:context=".ThemeActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -17,21 +19,28 @@
         app:title="@string/themes" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/themesCard"
+        android:id="@+id/skinsCard"
         style="?attr/materialCardViewFilledStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/main_activity_padding"
         android:layout_marginBottom="12dp"
+        android:layout_marginTop="8dp"
         app:contentPadding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/unlockAll">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/skins"
             android:layout_width="match_parent"
-            android:layout_height="74dp" />
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:fadingEdge="vertical"
+            android:fadingEdgeLength="30dp"
+            android:fillViewport="false"
+            android:requiresFadingEdge="vertical"/>
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -41,12 +50,12 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/main_activity_padding"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@id/themesCard"
-        app:layout_constraintStart_toStartOf="@id/themesCard"
-        app:layout_constraintTop_toBottomOf="@+id/themesCard" />
+        app:layout_constraintEnd_toEndOf="@id/skinsCard"
+        app:layout_constraintStart_toStartOf="@id/skinsCard"
+        app:layout_constraintTop_toBottomOf="@+id/skinsCard" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/control_styles"
+        android:id="@+id/themesCard"
         style="?attr/materialCardViewFilledStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -54,8 +63,8 @@
         android:layout_marginBottom="24dp"
         app:contentPadding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/themesCard"
-        app:layout_constraintStart_toStartOf="@id/themesCard"
+        app:layout_constraintEnd_toEndOf="@id/skinsCard"
+        app:layout_constraintStart_toStartOf="@id/skinsCard"
         app:layout_constraintTop_toBottomOf="@id/unlockAll">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -64,6 +73,10 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:fadeScrollbars="false"
-            android:overScrollMode="never" />
+            android:overScrollMode="never"
+            android:fadingEdge="vertical"
+            android:fadingEdgeLength="30dp"
+            android:fillViewport="false"
+            android:requiresFadingEdge="vertical"/>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,154 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'dev.lucasnlm.antimine.wear'
+    compileSdk 33
+
+    defaultConfig {
+        // versionCode and versionName must be hardcoded to support F-droid
+        applicationId 'dev.lucasnlm.antimine'
+        versionCode 1701010
+        versionName '17.1.1 W'
+        minSdkVersion 25
+        targetSdkVersion 33
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary true
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+    }
+
+    signingConfigs {
+        release {
+            if (System.getenv('IS_RELEASE_BUILD')) {
+                storeFile file(System.getenv('KEYSTORE'))
+                keyAlias System.getenv('KEY_ALIAS')
+                storePassword System.getenv('KEY_STORE_PASSWORD')
+                keyPassword System.getenv('KEY_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources true
+            animationsDisabled true
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+kapt {
+    correctErrorTypes true
+}
+
+dependencies {
+    // Dependencies must be hardcoded to support F-droid
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':external')
+    implementation project(':common')
+    implementation project(':control')
+    implementation project(':ui')
+    implementation project(':preferences')
+    implementation project(':core')
+    implementation project(':gdx')
+    implementation project(':foss')
+    implementation project(':donation')
+
+    // Wear OS
+    implementation 'androidx.wear:wear:1.2.0'
+
+    // AndroidX
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.activity:activity-ktx:1.6.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
+
+    // Lifecycle
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.5.1'
+
+    // Room
+    implementation 'androidx.room:room-ktx:2.5.0'
+
+    // Constraint
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Google
+    implementation 'com.google.android.material:material:1.8.0-rc01'
+
+    // Koin
+    implementation 'io.insert-koin:koin-android:3.1.2'
+    testImplementation 'io.insert-koin:koin-test:3.1.2'
+
+    // Kotlin
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
+
+    // Tests
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.core:core-ktx:1.9.0'
+    testImplementation 'androidx.test:core-ktx:1.5.0'
+    testImplementation 'androidx.test:rules:1.5.0'
+    testImplementation 'androidx.test:runner:1.5.2'
+    testImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation 'androidx.fragment:fragment-testing:1.5.5'
+    testImplementation 'org.robolectric:robolectric:4.5.1'
+    testImplementation 'androidx.test.ext:junit:1.1.5'
+    testImplementation 'io.mockk:mockk:1.11.0'
+
+    // Core library
+    androidTestImplementation 'androidx.test:core:1.5.0'
+
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation 'androidx.test:core:1.5.0'
+    androidTestImplementation 'androidx.test:core-ktx:1.5.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestUtil 'androidx.test:orchestrator:1.4.2'
+}
+
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat 'full'
+    }
+    afterTest { desc, result ->
+        println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}

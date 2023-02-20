@@ -37,6 +37,10 @@
     <string name="game_time">זמן משחק</string>
     <string name="settings_general">כללי</string>
     <string name="settings_gameplay">משחק</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">נגישות</string>
     <string name="system">מערכת</string>
     <string name="sign_in_failed">אין אפשרות להתחבר. בדוק את חיבור הרשת ונסה שוב.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">קיבלת: +%1$d</string>
     <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">שגיאה לא ידועה.</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">לוח תוצאות</string>
     <string name="cancel">ביטול</string>
     <string name="resume">לְהַמשִׁיך</string>

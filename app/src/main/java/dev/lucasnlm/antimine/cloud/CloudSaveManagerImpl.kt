@@ -44,7 +44,6 @@ class CloudSaveManagerImpl(
                     premiumFeatures = preferencesRepository.isPremiumEnabled().toInt(),
                     controlStyle = preferencesRepository.controlStyle().ordinal,
                     openDirectly = preferencesRepository.openGameDirectly().toInt(),
-                    unlockedThemes = preferencesRepository.getUnlockedThemes().joinToString(" "),
                     doubleClickTimeout = preferencesRepository.getDoubleClickTimeout().toInt(),
                     allowTapNumbers = preferencesRepository.allowTapOnNumbers().toInt(),
                     highlightNumbers = preferencesRepository.dimNumbers().toInt(),

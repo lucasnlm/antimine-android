@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.ui.ext
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.MaterialToolbar
 import dev.lucasnlm.antimine.ui.model.AppSkin
@@ -12,7 +11,7 @@ import dev.lucasnlm.antimine.ui.model.TopBarAction
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import org.koin.android.ext.android.inject
 
-abstract class ThemedActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
+abstract class ThemedActivity : AppCompatActivity() {
     protected val themeRepository: IThemeRepository by inject()
 
     protected val usingTheme: AppTheme by lazy {

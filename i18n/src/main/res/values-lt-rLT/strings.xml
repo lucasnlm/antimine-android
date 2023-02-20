@@ -37,6 +37,10 @@
     <string name="game_time">Žaidimo laikas</string>
     <string name="settings_general">Bendrieji</string>
     <string name="settings_gameplay">Žaidimo procesas</string>
+    <string name="export_settings">Eksportuoti</string>
+    <string name="import_settings">Importuoti</string>
+    <string name="exported_success">Nustatymai eksportuoti!</string>
+    <string name="imported_success">Nustatymai importuoti!</string>
     <string name="settings_accessibility">Prieinamumas</string>
     <string name="system">Sistema</string>
     <string name="sign_in_failed">Nepavyko prisijungti. Patikrinkite interneto ryšį ir bandykite dar kartą.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Gavote: +%1$d</string>
     <string name="help_win_a_game">Kad gautumėte daugiau užuominų, turite laimėti žaidimą.</string>
     <string name="unknown_error">Nežinoma klaida.</string>
+    <string name="error">Klaida!</string>
     <string name="leaderboards">Lyderių lentelės</string>
     <string name="cancel">Atšaukti</string>
     <string name="resume">Tęsti</string>

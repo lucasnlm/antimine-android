@@ -4,16 +4,16 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.databinding.ViewPlayGamesButtonBinding
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesEvent
 import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesViewModel
 import kotlinx.coroutines.flow.collect
@@ -64,8 +64,8 @@ class PlayGamesDialogFragment : AppCompatDialogFragment() {
             val item = playGamesViewModel.playGamesItems[position]
 
             return view.apply {
-                text.text = view.context.getString(item.stringRes)
-                icon.setImageResource(item.iconRes)
+                binding.text.text = view.context.getString(item.stringRes)
+                binding.icon.setImageResource(item.iconRes)
 
                 setOnClickListener {
                     playGamesViewModel.sendEvent(item.triggerEvent)
@@ -93,12 +93,9 @@ class PlayGamesButton : FrameLayout {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     init {
-        inflate(context, R.layout.view_play_games_button, this)
-
-        icon = findViewById(R.id.icon)
-        text = findViewById(R.id.text)
+        val layoutInflater = LayoutInflater.from(context)
+        binding = ViewPlayGamesButtonBinding.inflate(layoutInflater, this, false)
     }
 
-    val icon: AppCompatImageView
-    val text: TextView
+    val binding: ViewPlayGamesButtonBinding
 }

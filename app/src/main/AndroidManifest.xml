@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
-    package="dev.lucasnlm.antimine"
     android:installLocation="auto">
 
     <supports-screens
@@ -53,7 +52,7 @@
         <activity
             android:name="dev.lucasnlm.antimine.GameActivity"
             android:icon="@mipmap/ic_launcher"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:parentActivityName=".main.MainActivity"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:saveEnabled="false"

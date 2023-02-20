@@ -19,6 +19,7 @@ import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withTimeout
 
 class GameController {
     private val minefield: Minefield
@@ -41,6 +42,7 @@ class GameController {
     val seed: Long
 
     private val minefieldCreator: MinefieldCreator
+    private val fallbackCreator: MinefieldCreator
     private var field: List<Area>
     private var noGuessTestedLevel = true
     private var onCreateUnsafeLevel: (() -> Unit)? = null
@@ -54,10 +56,11 @@ class GameController {
     ) {
         val creationSeed = minefield.seed ?: seed
         val shouldUseSimonTatham = useSimonTatham
+        this.fallbackCreator = MinefieldCreatorImpl(minefield, creationSeed)
         this.minefieldCreator = if (shouldUseSimonTatham) {
             MinefieldCreatorNativeImpl(minefield, creationSeed)
         } else {
-            MinefieldCreatorImpl(minefield, creationSeed)
+            fallbackCreator
         }
         this.minefield = minefield
         this.seed = seed
@@ -78,10 +81,11 @@ class GameController {
         this.firstOpen = save.firstOpen
         this.field = save.field
         this.actions = save.actions
+        this.fallbackCreator = MinefieldCreatorImpl(minefield, seed)
         this.minefieldCreator = if (useSimonTatham) {
             MinefieldCreatorNativeImpl(minefield, seed)
         } else {
-            MinefieldCreatorImpl(minefield, seed)
+            fallbackCreator
         }
     }
 
@@ -101,17 +105,35 @@ class GameController {
         if (!creatingMinefield) {
             val solver = LimitedCheckNeighborsSolver()
             creatingMinefield = true
-            do {
-                field = minefieldCreator.create(safeId)
-                val fieldCopy = field.map { it.copy() }.toMutableList()
-                val minefieldHandler = MinefieldHandler(
-                    field = fieldCopy,
-                    useQuestionMark = false,
-                    individualActions = useIndividualActions(),
-                )
-                minefieldHandler.openAt(safeId, false)
-                noGuessTestedLevel = useSimonTatham || solver.trySolve(minefieldHandler.result().toMutableList())
-            } while (!useSimonTatham && solver.keepTrying() && !noGuessTestedLevel)
+
+            try {
+                // Try using native implementation first.
+                // If it fails, use fallback random generator.
+                withTimeout(MAX_CREATION_TIME_MS) {
+                    field = minefieldCreator.create(safeId)
+                    val fieldCopy = field.map { it.copy() }.toMutableList()
+                    val minefieldHandler = MinefieldHandler(
+                        field = fieldCopy,
+                        useQuestionMark = false,
+                        individualActions = useIndividualActions(),
+                    )
+                    minefieldHandler.openAt(safeId, false)
+                }
+            } catch (ignored: Exception) {
+                do {
+                    var solvable: Boolean
+                    field = fallbackCreator.create(safeId)
+                    val fieldCopy = field.map { it.copy() }.toMutableList()
+                    val minefieldHandler = MinefieldHandler(
+                        field = fieldCopy,
+                        useQuestionMark = false,
+                        individualActions = useIndividualActions(),
+                    )
+                    minefieldHandler.openAt(safeId, false)
+                    solvable = solver.trySolve(minefieldHandler.result().toMutableList())
+                    noGuessTestedLevel = solvable
+                } while (solver.keepTrying() && !noGuessTestedLevel)
+            }
 
             firstOpen = FirstOpen.Position(safeId)
             creatingMinefield = false
@@ -491,5 +513,9 @@ class GameController {
 
     fun letNumbersPutFlag(enabled: Boolean) {
         this.letNumbersPutFlag = enabled
+    }
+
+    private companion object {
+        const val MAX_CREATION_TIME_MS = 30000L
     }
 }

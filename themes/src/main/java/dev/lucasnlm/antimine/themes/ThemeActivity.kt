@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.themes.databinding.ActivityThemeBinding
 import dev.lucasnlm.antimine.themes.view.SkinAdapter
 import dev.lucasnlm.antimine.themes.view.ThemeAdapter
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
@@ -20,12 +20,13 @@ import dev.lucasnlm.external.IAdsManager
 import dev.lucasnlm.external.IAnalyticsManager
 import dev.lucasnlm.external.IBillingManager
 import dev.lucasnlm.external.model.PurchaseInfo
-import kotlinx.android.synthetic.main.activity_theme.*
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ThemeActivity : ThemedActivity(R.layout.activity_theme) {
+class ThemeActivity : ThemedActivity() {
+    private lateinit var binding: ActivityThemeBinding
+
     private val themeViewModel by viewModel<ThemeViewModel>()
 
     private val dimensionRepository: IDimensionRepository by inject()
@@ -37,6 +38,8 @@ class ThemeActivity : ThemedActivity(R.layout.activity_theme) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityThemeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         analyticsManager.sentEvent(Analytics.OpenThemes)
 
@@ -44,12 +47,12 @@ class ThemeActivity : ThemedActivity(R.layout.activity_theme) {
             adsManager.start(this)
         }
 
-        bindToolbar(toolbar)
+        bindToolbar(binding.toolbar)
 
         if (preferencesRepository.isPremiumEnabled()) {
-            unlockAll.visibility = View.GONE
+            binding.unlockAll.visibility = View.GONE
         } else {
-            unlockAll.bind(
+            binding.unlockAll.bind(
                 theme = usingTheme,
                 invert = true,
                 text = getString(R.string.unlock_all),
@@ -62,7 +65,7 @@ class ThemeActivity : ThemedActivity(R.layout.activity_theme) {
 
             lifecycleScope.launchWhenResumed {
                 billingManager.getPriceFlow().collect {
-                    unlockAll.bind(
+                    binding.unlockAll.bind(
                         theme = usingTheme,
                         invert = true,
                         text = getString(R.string.unlock_all),
@@ -80,7 +83,8 @@ class ThemeActivity : ThemedActivity(R.layout.activity_theme) {
 
         lifecycleScope.launchWhenCreated {
             val size = dimensionRepository.displaySize()
-            val columns = if (size.width > size.height) { 5 } else { 3 }
+            val themesColumns = if (size.width > size.height) { 5 } else { 3 }
+            val skinsColumns = if (size.width > size.height) { 2 } else { 5 }
 
             val themeAdapter = ThemeAdapter(
                 themeViewModel = themeViewModel,
@@ -109,17 +113,24 @@ class ThemeActivity : ThemedActivity(R.layout.activity_theme) {
                 },
             )
 
-            themes.apply {
+            binding.themes.apply {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
                 setHasFixedSize(true)
-                layoutManager = GridLayoutManager(context, columns)
+                layoutManager = GridLayoutManager(context, themesColumns)
                 adapter = themeAdapter
             }
 
-            skins.apply {
+            binding.skins.apply {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
                 setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                layoutManager = object : GridLayoutManager(context, skinsColumns) {
+                    override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
+                        val lpSize = width / (skinsColumns + 1)
+                        lp?.height = lpSize
+                        lp?.width = lpSize
+                        return true
+                    }
+                }
                 adapter = skinAdapter
             }
 
@@ -154,12 +165,14 @@ class ThemeActivity : ThemedActivity(R.layout.activity_theme) {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        val themes = binding.themes
         outState.putIntArray(SCROLL_VIEW_STATE, intArrayOf(themes.scrollX, themes.scrollY))
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         savedInstanceState.getIntArray(SCROLL_VIEW_STATE)?.let { position ->
+            val themes = binding.themes
             themes.post { themes.scrollTo(position[0], position[1]) }
         }
     }

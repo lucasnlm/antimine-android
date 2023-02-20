@@ -37,6 +37,10 @@
     <string name="game_time">Luda Tempo</string>
     <string name="settings_general">Ĝeneralaj</string>
     <string name="settings_gameplay">Ludmaniero</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">Alirebleco</string>
     <string name="system">Operaciumo</string>
     <string name="sign_in_failed">Malsukcesis ensaluto. Bonvolu kontroli vian retkonekton kaj reprovi.</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">Vi ricevis: +%1$d</string>
     <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">Nekonata eraro.</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">Sukcesotabuloj</string>
     <string name="cancel">Rezigni</string>
     <string name="resume">Daŭrigi</string>

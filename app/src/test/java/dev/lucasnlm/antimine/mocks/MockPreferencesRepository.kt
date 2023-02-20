@@ -26,6 +26,8 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun controlStyle(): ControlStyle = ControlStyle.Standard
 
+    override fun hasCustomControlStyle(): Boolean = false
+
     override fun useControlStyle(controlStyle: ControlStyle) {}
 
     override fun isFirstUse(): Boolean = false
@@ -140,12 +142,6 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setUserId(userId: String) {}
 
-    override fun addUnlockedTheme(id: Int) {}
-
-    override fun setUnlockedThemes(themes: String) {}
-
-    override fun getUnlockedThemes(): List<Int> = listOf()
-
     override fun showTutorialDialog(): Boolean = false
 
     override fun setTutorialDialog(show: Boolean) {}
@@ -183,4 +179,20 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun showContinueGame() = true
 
     override fun setContinueGameLabel(value: Boolean) {}
+
+    override fun showNewThemesIcon(): Boolean = false
+
+    override fun setNewThemesIcon(visible: Boolean) {}
+
+    override fun exportData(): Map<String, Any?> = mapOf()
+
+    override fun importData(data: Map<String, Any?>) {}
+
+    override fun keepRequestPlayGames(): Boolean = false
+
+    override fun setRequestPlayGames(showRequest: Boolean) {}
+
+    override fun lastAppVersion(): Int = 0
+
+    override fun setLastAppVersion(versionCode: Int) {}
 }

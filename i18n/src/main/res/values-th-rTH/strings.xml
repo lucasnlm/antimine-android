@@ -37,6 +37,10 @@
     <string name="game_time">เวลาเล่นเกม</string>
     <string name="settings_general">ทั่วไป</string>
     <string name="settings_gameplay">การเล่นเกม</string>
+    <string name="export_settings">Export</string>
+    <string name="import_settings">Import</string>
+    <string name="exported_success">Settings exported!</string>
+    <string name="imported_success">Settings imported!</string>
     <string name="settings_accessibility">การเข้าถึง</string>
     <string name="system">ระบบ</string>
     <string name="sign_in_failed">ไม่สามารถเชื่อมต่อได้ กรุณาตรวจสอบการเชื่อมต่อเครือข่ายของคุณและลองอีกครั้ง</string>
@@ -77,6 +81,7 @@
     <string name="you_have_received">คุณได้รับ: +%1$d</string>
     <string name="help_win_a_game">For more hints, you must win a game.</string>
     <string name="unknown_error">ข้อผิดพลาดที่ไม่รู้จัก</string>
+    <string name="error">Error!</string>
     <string name="leaderboards">ลีดเดอร์บอร์ด</string>
     <string name="cancel">ยกเลิก</string>
     <string name="resume">เริ่มต่อ</string>

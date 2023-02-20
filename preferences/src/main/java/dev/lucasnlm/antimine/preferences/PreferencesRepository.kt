@@ -156,30 +156,13 @@ class PreferencesRepository(
         }
     }
 
-    override fun addUnlockedTheme(id: Int) {
-        val themes = preferencesManager.getString(PreferenceKeys.PREFERENCE_UNLOCKED_THEMES) ?: ""
-        val themesIt = themes.split(" ").mapNotNull { it.toIntOrNull() }
-        if (!themesIt.contains(id)) {
-            val newState = themesIt.toMutableList().run {
-                add(id)
-                joinToString(" ")
-            }
-            preferencesManager.putString(PreferenceKeys.PREFERENCE_UNLOCKED_THEMES, newState)
-        }
-    }
-
-    override fun setUnlockedThemes(themes: String) {
-        preferencesManager.putString(PreferenceKeys.PREFERENCE_UNLOCKED_THEMES, themes)
-    }
-
-    override fun getUnlockedThemes(): List<Int> {
-        val themes = preferencesManager.getString(PreferenceKeys.PREFERENCE_UNLOCKED_THEMES) ?: ""
-        return themes.split(" ").mapNotNull { it.toIntOrNull() }
-    }
-
     override fun controlStyle(): ControlStyle {
         val index = preferencesManager.getInt(PreferenceKeys.PREFERENCE_CONTROL_STYLE, -1)
         return ControlStyle.values().getOrNull(index) ?: ControlStyle.SwitchMarkOpen
+    }
+
+    override fun hasCustomControlStyle(): Boolean {
+        return preferencesManager.contains(PreferenceKeys.PREFERENCE_CONTROL_STYLE)
     }
 
     override fun useControlStyle(controlStyle: ControlStyle) {
@@ -276,34 +259,12 @@ class PreferencesRepository(
             preferencesManager.removeKey(PreferenceKeys.PREFERENCE_OLD_DOUBLE_CLICK)
         }
 
-        // Migrate Large Area to Custom Area size
-        if (preferencesManager.contains(PreferenceKeys.PREFERENCE_OLD_LARGE_AREA)) {
-            if (preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_OLD_LARGE_AREA, false)) {
-                preferencesManager.putInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 63)
-            } else {
-                preferencesManager.putInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50)
-            }
-            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_OLD_LARGE_AREA)
-        }
-
-        if (!preferencesManager.contains(PreferenceKeys.PREFERENCE_AREA_SIZE)) {
-            preferencesManager.putInt(PreferenceKeys.PREFERENCE_AREA_SIZE, 50)
-        }
-
         if (!preferencesManager.contains(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT)) {
             preferencesManager.putInt(PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT, defaultLongPressTimeout)
         }
 
         if (preferencesManager.contains(PreferenceKeys.PREFERENCE_FIRST_USE)) {
             preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_TUTORIAL_COMPLETED, true)
-        }
-
-        // Remove old sizes
-        if (preferencesManager.contains(PreferenceKeys.PREFERENCE_OLD_AREA_SIZES)) {
-            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_AREA_SIZE)
-            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_RADIUS)
-            preferencesManager.removeKey(PreferenceKeys.PREFERENCE_SQUARE_DIVIDER)
-            preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_OLD_AREA_SIZES, true)
         }
     }
 
@@ -448,5 +409,67 @@ class PreferencesRepository(
 
     override fun setContinueGameLabel(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOW_CONTINUE, value)
+    }
+
+    override fun showNewThemesIcon(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_NEW_THEMES_ICON, true)
+    }
+
+    override fun setNewThemesIcon(visible: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_NEW_THEMES_ICON, visible)
+    }
+
+    override fun exportData(): Map<String, Any?> {
+        return preferencesManager.toMap()
+    }
+
+    override fun importData(data: Map<String, Any?>) {
+        val wasPremium = preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_PREMIUM_FEATURES, false)
+
+        preferencesManager.clear()
+
+        data.filter {
+            it.key != PreferenceKeys.PREFERENCE_PREMIUM_FEATURES
+        }.forEach { (key, value) ->
+            when (value) {
+                null -> {
+                    // Ignore
+                }
+                is Long -> {
+                    preferencesManager.putLong(key, value)
+                }
+                is Int -> {
+                    preferencesManager.putInt(key, value)
+                }
+                is String -> {
+                    preferencesManager.putString(key, value)
+                }
+                is Boolean -> {
+                    preferencesManager.putBoolean(key, value)
+                }
+            }
+        }
+
+        if (wasPremium) {
+            preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_PREMIUM_FEATURES, true)
+        }
+    }
+
+    override fun keepRequestPlayGames(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_REQUEST_PLAY_GAMES, true)
+    }
+
+    override fun setRequestPlayGames(showRequest: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_REQUEST_PLAY_GAMES, showRequest)
+    }
+
+    override fun lastAppVersion(): Int? {
+        return preferencesManager.getIntOrNull(PreferenceKeys.PREFERENCE_LAST_VERSION)
+    }
+
+    override fun setLastAppVersion(versionCode: Int) {
+        if (versionCode > 0) {
+            preferencesManager.putInt(PreferenceKeys.PREFERENCE_LAST_VERSION, versionCode)
+        }
     }
 }

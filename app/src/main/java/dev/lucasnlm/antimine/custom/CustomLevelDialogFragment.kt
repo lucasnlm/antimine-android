@@ -6,13 +6,13 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.custom.viewmodel.CreateGameViewModel
 import dev.lucasnlm.antimine.custom.viewmodel.CustomEvent
+import dev.lucasnlm.antimine.databinding.DialogCustomGameBinding
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
@@ -26,39 +26,33 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
     private val createGameViewModel by viewModel<CreateGameViewModel>()
     private val preferencesRepository: IPreferencesRepository by inject()
 
-    private lateinit var mapWidth: TextView
-    private lateinit var mapHeight: TextView
-    private lateinit var mapMines: TextView
-    private lateinit var seed: TextView
+    private lateinit var binding: DialogCustomGameBinding
 
     private fun getSelectedMinefield(): Minefield {
-        val width = filterInput(mapWidth.text.toString(), MIN_WIDTH).coerceAtMost(MAX_WIDTH)
-        val height = filterInput(mapHeight.text.toString(), MIN_HEIGHT).coerceAtMost(MAX_HEIGHT)
-        val mines = filterInput(mapMines.text.toString(), MIN_MINES).coerceAtMost(width * height - 9)
-        val seedValue = seed.text.toString().toLongOrNull()
+        val width = filterInput(binding.mapWidth.text.toString(), MIN_WIDTH).coerceAtMost(MAX_WIDTH)
+        val height = filterInput(binding.mapHeight.text.toString(), MIN_HEIGHT).coerceAtMost(MAX_HEIGHT)
+        val maxMines = width * height - 9
+        val mines = filterInput(binding.mapMines.text.toString(), MIN_MINES).coerceAtMost(maxMines)
+        val seedValue = binding.seed.text.toString().toLongOrNull()
 
         return Minefield(width, height, mines, seedValue)
     }
 
     @SuppressLint("InflateParams")
     private fun createView(): View {
-        val view = LayoutInflater
-            .from(context)
-            .inflate(R.layout.dialog_custom_game, null, false)
+        val layoutInflater = LayoutInflater.from(context)
+        binding = DialogCustomGameBinding.inflate(layoutInflater, null, false)
 
-        mapWidth = view.findViewById(R.id.map_width)
-        mapHeight = view.findViewById(R.id.map_height)
-        mapMines = view.findViewById(R.id.map_mines)
-        seed = view.findViewById(R.id.seed)
-
-        createGameViewModel.singleState().let {
-            mapWidth.text = it.width.toString()
-            mapHeight.text = it.height.toString()
-            mapMines.text = it.mines.toString()
-            seed.text = ""
+        createGameViewModel.singleState().let { state ->
+            binding.run {
+                mapWidth.setText(state.width.toString())
+                mapHeight.setText(state.height.toString())
+                mapMines.setText(state.mines.toString())
+                seed.setText("")
+            }
         }
 
-        return view
+        return binding.root
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

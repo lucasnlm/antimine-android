@@ -3,18 +3,16 @@ package dev.lucasnlm.antimine.themes.view
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.R
+import dev.lucasnlm.antimine.themes.databinding.ViewSkinBinding
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
-import kotlinx.android.synthetic.main.view_skin.view.*
-import kotlinx.android.synthetic.main.view_theme.view.*
 
 class SkinAdapter(
     private val themeRepository: IThemeRepository,
@@ -33,15 +31,17 @@ class SkinAdapter(
     override fun getItemId(position: Int): Long = appSkins[position].id
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkinViewHolder {
-        val view = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.view_skin, parent, false)
-
-        return SkinViewHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ViewSkinBinding.inflate(layoutInflater, parent, false)
+        return SkinViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return appSkins.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (appSkins[position].showPadding) WITH_PADDING else WITHOUT_PADDING
     }
 
     override fun onBindViewHolder(holder: SkinViewHolder, position: Int) {
@@ -61,7 +61,7 @@ class SkinAdapter(
                 if (selected) R.attr.colorTertiary else R.attr.backgroundColor,
             )
 
-            cardSkin.apply {
+            holder.binding.cardSkin.apply {
                 backgroundTintList = backgroundColor
                 setStrokeColor(strokeColor)
                 setOnClickListener {
@@ -73,7 +73,7 @@ class SkinAdapter(
                 }
             }
 
-            skinImage.apply {
+            holder.binding.skinImage.apply {
                 val floatAlpha = 0.45f
                 alpha = if (selected) 1.0f else floatAlpha
                 setImageResource(skin.imageRes)
@@ -85,6 +85,13 @@ class SkinAdapter(
             }
         }
     }
+
+    private companion object {
+        const val WITH_PADDING = 0
+        const val WITHOUT_PADDING = 1
+    }
 }
 
-class SkinViewHolder(view: View) : RecyclerView.ViewHolder(view)
+class SkinViewHolder(
+    val binding: ViewSkinBinding,
+) : RecyclerView.ViewHolder(binding.root)

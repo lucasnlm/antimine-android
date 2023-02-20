@@ -38,6 +38,7 @@ class MinefieldStage(
 
     private var forceRefreshVisibleAreas = true
     private var boundAreas = listOf<Area>()
+    private var newBoundAreas: List<Area>? = null
 
     private var inputInit: Long = 0L
     private val inputEvents: MutableList<GdxEvent> = mutableListOf()
@@ -93,7 +94,7 @@ class MinefieldStage(
             } else {
                 zoom - 1.0f * Gdx.graphics.deltaTime
             }
-            zoom = newZoom.coerceIn(0.8f, 3.0f)
+            zoom = newZoom.coerceIn(MAX_ZOOM_OUT, MAX_ZOOM_IN)
             if (currentZoom != zoom) {
                 currentZoom = zoom
                 Gdx.graphics.requestRendering()
@@ -116,12 +117,19 @@ class MinefieldStage(
     }
 
     fun bindField(field: List<Area>) {
-        boundAreas = field
+        newBoundAreas = field
         forceRefreshVisibleAreas = true
     }
 
     private fun refreshAreas(forceRefresh: Boolean) {
         if (forceRefresh || forceRefreshVisibleAreas) {
+            val boundAreas = newBoundAreas ?: this.boundAreas
+
+            newBoundAreas?.let {
+                this.boundAreas = it
+                this.newBoundAreas = null
+            }
+
             if (actors.size != boundAreas.size) {
                 clear()
                 if (boundAreas.size < actors.size) {
@@ -142,7 +150,6 @@ class MinefieldStage(
                         ),
                     )
                 }
-//                camera.update(true)
                 refreshVisibleActorsIfNeeded()
             } else {
                 val reset = boundAreas.count { it.hasMine } == 0
@@ -346,5 +353,10 @@ class MinefieldStage(
 
     fun updateActionSettings(actionSettings: ActionSettings) {
         this.actionSettings = actionSettings
+    }
+
+    companion object {
+        const val MAX_ZOOM_OUT = 0.35f
+        const val MAX_ZOOM_IN = 3.0f
     }
 }

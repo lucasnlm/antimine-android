@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.slider.Slider
+import dev.lucasnlm.antimine.control.databinding.ActivityControlBinding
 import dev.lucasnlm.antimine.control.view.ControlAdapter
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
@@ -12,15 +13,18 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.model.TopBarAction
-import kotlinx.android.synthetic.main.activity_control.*
 import org.koin.android.ext.android.inject
 
-class ControlActivity : ThemedActivity(R.layout.activity_control), Slider.OnChangeListener {
+class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
+    private lateinit var binding: ActivityControlBinding
+
     private val viewModel: ControlViewModel by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityControlBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val controlAdapter = ControlAdapter(
             controls = mutableListOf(),
@@ -30,21 +34,25 @@ class ControlActivity : ThemedActivity(R.layout.activity_control), Slider.OnChan
             },
         )
 
-        recyclerView.apply {
+        binding.recyclerView.apply {
             setHasFixedSize(true)
             itemAnimator = null
             layoutManager = LinearLayoutManager(context)
             adapter = controlAdapter
         }
 
-        touchSensibility.addOnChangeListener(this)
-        longPress.addOnChangeListener(this)
-        doubleClick.addOnChangeListener(this)
-        hapticLevel.addOnChangeListener(this)
+        binding.touchSensibility.addOnChangeListener(this)
+        binding.longPress.addOnChangeListener(this)
+        binding.doubleClick.addOnChangeListener(this)
+        binding.hapticLevel.addOnChangeListener(this)
 
         lifecycleScope.launchWhenCreated {
             viewModel.observeState().collect {
                 controlAdapter.bindControlStyleList(it.selected, it.controls)
+                val longPress: Slider = binding.longPress
+                val touchSensibility: Slider = binding.touchSensibility
+                val hapticLevel: Slider = binding.hapticLevel
+
                 longPress.value = (it.longPress.toFloat() / longPress.stepSize).toInt() * longPress.stepSize
                 touchSensibility.value =
                     (it.touchSensibility.toFloat() / touchSensibility.stepSize).toInt() * touchSensibility.stepSize
@@ -54,15 +62,15 @@ class ControlActivity : ThemedActivity(R.layout.activity_control), Slider.OnChan
                     else -> View.GONE
                 }
                 longPress.visibility = longPressVisible
-                longPressLabel.visibility = longPressVisible
+                binding.longPressLabel.visibility = longPressVisible
 
                 val doubleClickVisible = when (it.selected) {
                     ControlStyle.DoubleClick, ControlStyle.DoubleClickInverted -> View.VISIBLE
                     else -> View.GONE
                 }
-                doubleClick.visibility = doubleClickVisible
-                doubleClickLabel.visibility = doubleClickVisible
-                doubleClick.value = it.doubleClick.toFloat()
+                binding.doubleClick.visibility = doubleClickVisible
+                binding.doubleClickLabel.visibility = doubleClickVisible
+                binding.doubleClick.value = it.doubleClick.toFloat()
 
                 hapticLevel.value =
                     (it.hapticFeedbackLevel.toFloat() / hapticLevel.stepSize).toInt() * hapticLevel.stepSize
@@ -83,23 +91,23 @@ class ControlActivity : ThemedActivity(R.layout.activity_control), Slider.OnChan
             }
         }
 
-        bindToolbar(toolbar)
+        bindToolbar(binding.toolbar)
     }
 
     override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
         if (fromUser) {
             val progress = value.toInt()
             when (slider) {
-                touchSensibility -> {
+                binding.touchSensibility -> {
                     viewModel.sendEvent(ControlEvent.UpdateTouchSensibility(progress))
                 }
-                longPress -> {
+                binding.longPress -> {
                     viewModel.sendEvent(ControlEvent.UpdateLongPress(progress))
                 }
-                doubleClick -> {
+                binding.doubleClick -> {
                     viewModel.sendEvent(ControlEvent.UpdateDoubleClick(progress))
                 }
-                hapticLevel -> {
+                binding.hapticLevel -> {
                     viewModel.sendEvent(ControlEvent.UpdateHapticFeedbackLevel(progress))
                 }
             }

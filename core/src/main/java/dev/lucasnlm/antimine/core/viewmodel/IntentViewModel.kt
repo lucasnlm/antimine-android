@@ -19,6 +19,7 @@ abstract class IntentViewModel<Event, State> : StatelessViewModel<Event>() {
 
     init {
         viewModelScope.launch {
+            @Suppress("OPT_IN_USAGE")
             observeEvent()
                 .onEach { onEvent(it) }
                 .flatMapConcat(::mapEventToState)

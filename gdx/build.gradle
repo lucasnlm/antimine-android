@@ -1,10 +1,10 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
 }
 
 android {
+    namespace 'dev.lucasnlm.antimine.gdx'
     compileSdkVersion 33
 
     defaultConfig {
@@ -30,6 +30,10 @@ android {
         jvmTarget = '1.8'
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
@@ -45,7 +49,7 @@ dependencies {
     implementation project(':ui')
 
     // AndroidX
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.activity:activity-ktx:1.6.1'
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
 
@@ -86,4 +90,9 @@ task copyAndroidNatives {
     }
 }
 
-preBuild.dependsOn copyAndroidNatives
+preBuild.dependsOn
+try {
+    copyAndroidNatives
+} catch (Exception ignored) {
+    // Ignore
+}

@@ -10,4 +10,5 @@ data class AppSkin(
     val isPaid: Boolean,
     val joinAreas: Boolean,
     val background: Int = 0,
+    val showPadding: Boolean = true,
 )
