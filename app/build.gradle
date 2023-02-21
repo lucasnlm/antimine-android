@@ -75,7 +75,7 @@ android {
         google {
             dimension 'version'
             applicationId 'dev.lucasnlm.antimine'
-            versionNameSuffix " R"
+            versionNameSuffix " S"
         }
 
         googleInstant {
