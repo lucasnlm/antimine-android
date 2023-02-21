@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="de">
     <string name="tutorial">Anleitung</string>
-    <string name="tutorial_basic">Die Regel des Spiels ist einfach, die Zahl auf einem Quadrat zeigt die Anzahl an benachbarten Minen, und du musst alle Minen markieren.</string>
+    <string name="tutorial_basic">Die Regeln des Spiels sind einfach. Die Zahl auf einem Quadrat zeigt die Anzahl an benachbarten Minen an, und deine Aufgabe ist es, alle Minen zu markieren.</string>
     <string name="tutorial_text_1">Falls eine Zahl gleich der Anzahl an berührenden Quadraten ist, dann sind diese Quadrate alle vermint.</string>
-    <string name="tutorial_text_2">Nachdem dem Setzen deiner ersten Markierung, überprüfe die Anzahl und analysiere das nächste Quadrat.</string>
-    <string name="tutorial_text_3">Falls ein Quadrat die gleiche Zahl an Markierungen hat wie ein benachbartes Quadrat, dann sind alle anderen verbleibenden, angrenzenden Quadrate minenfrei (der grüne Pfeil).</string>
+    <string name="tutorial_text_2">Nachdem Sie Ihre erste Markierung markiert haben, überprüfen Sie die Zahlen und analysieren Sie das nächste Quadrat.</string>
+    <string name="tutorial_text_3">Falls ein Quadrat die gleiche Zahl an Markierungen hat wie ein benachbartes Quadrat, dann sind alle anderen verbleibenden, angrenzenden Quadrate minenfrei (grüner Pfeil).</string>
     <string name="tutorial_text_4">Überprüfe die Zahlen, und mache weiter mit dem Öffnen von Quadraten.</string>
     <string name="games">Spiele</string>
     <string name="tap_to_begin">Tippen um anzufangen</string>
@@ -18,8 +18,8 @@
     <string name="legend">Ikone</string>
     <string name="open">Öffnen</string>
     <string name="settings">Einstellungen</string>
-    <string name="control_settings">Control Settings</string>
-    <string name="shapes">Shapes</string>
+    <string name="control_settings">Steuerungseinstellungen</string>
+    <string name="shapes">Formen</string>
     <string name="animations">Animationen</string>
     <string name="vibration">Haptische Rückmeldung</string>
     <string name="about">Über</string>
@@ -37,10 +37,10 @@
     <string name="game_time">Spielzeit</string>
     <string name="settings_general">Allgemein</string>
     <string name="settings_gameplay">Spielablauf</string>
-    <string name="export_settings">Export</string>
-    <string name="import_settings">Import</string>
-    <string name="exported_success">Settings exported!</string>
-    <string name="imported_success">Settings imported!</string>
+    <string name="export_settings">Einstellungen exportieren</string>
+    <string name="import_settings">Einstellungen importieren</string>
+    <string name="exported_success">Einstellungen exportiert!</string>
+    <string name="imported_success">Einstellungen importiert!</string>
     <string name="settings_accessibility">Barrierefreiheit</string>
     <string name="system">System</string>
     <string name="sign_in_failed">Login fehlgeschlagen. Überprüfe Deine Netzwerkverbindung und versuche es erneut.</string>
@@ -65,7 +65,7 @@
     <string name="use_question_mark">Fragezeichen benutzen</string>
     <string name="no_guessing_mode">\"Kein Erraten\"-Modus</string>
     <string name="control">Steuerung</string>
-    <string name="control_types">Control Types</string>
+    <string name="control_types">Steuerungstypen</string>
     <string name="single_click">Einfaches Tippen</string>
     <string name="double_click">Doppeltes Tippen</string>
     <string name="long_press">Langes Tippen</string>
@@ -76,18 +76,18 @@
     <string name="continue_game">Fortsetzen</string>
     <string name="empty">Leer</string>
     <string name="cant_do_it_now">Dies jetzt nicht möglich</string>
-    <string name="mine_revealed">A mine has been revealed</string>
-    <string name="fail_to_load_ad">Fail to load ad</string>
+    <string name="mine_revealed">Eine Mine wurde aufgedeckt</string>
+    <string name="fail_to_load_ad">Fehler beim Laden der Werbung</string>
     <string name="you_have_received">Du hast +%1$d erhalten</string>
-    <string name="help_win_a_game">For more hints, you must win a game.</string>
+    <string name="help_win_a_game">Gewinne ein weiteres Spiel für mehr Tipps.</string>
     <string name="unknown_error">Unbekannter Fehler.</string>
-    <string name="error">Error!</string>
+    <string name="error">Fehler!</string>
     <string name="leaderboards">Ranglisten</string>
     <string name="cancel">Abbrechen</string>
     <string name="resume">Fortfahren</string>
     <string name="yes">Ja</string>
     <string name="unlock">Entsperren</string>
-    <string name="unlock_all">Unlock all</string>
+    <string name="unlock_all">Alles entsperren</string>
     <string name="achievements">Erfolge</string>
     <string name="no">Nein</string>
     <string name="general">Allgemein</string>
@@ -97,7 +97,7 @@
     <string name="licenses">Lizenzen</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Wird geladen...</string>
-    <string name="creating_valid_game">Creating valid game…</string>
+    <string name="creating_valid_game">Gültiges Spiel wird erstellt…</string>
     <string name="connect">Verbinden</string>
     <string name="connecting">Verbindung wird hergestellt…</string>
     <string name="disconnect">Trennen</string>
@@ -111,7 +111,7 @@
     <string name="themes">Themen</string>
     <string name="delete_all_message">Alle Ereignisse dauerhaft löschen.</string>
     <string name="remove_ad">Werbung entfernen</string>
-    <string name="help">Hint</string>
+    <string name="help">Tipp</string>
     <string name="back">Zurück</string>
     <string name="donation">Spende</string>
     <string name="open_on_game">Im Spiel-Bildschirm öffnen</string>
@@ -131,7 +131,7 @@
     <string name="fixed_size">Feste Größe</string>
     <string name="progressive">Fortschrittlich</string>
     <string name="highlight_unsolved_numbers">Ungelöste Zahlen hervorheben</string>
-    <string name="show_clock">Show clock</string>
+    <string name="show_clock">Uhr anzeigen</string>
     <string name="donate_request">Wenn dir dieses Spiel gefällt, erwäge eine Spende zu tätigen.</string>
     <string name="donate_help">Es wird helfen, dieses Projekt aktiv zu halten!</string>
 </resources>

@@ -37,10 +37,10 @@
     <string name="game_time">Время в игре</string>
     <string name="settings_general">Общее</string>
     <string name="settings_gameplay">Геймплей</string>
-    <string name="export_settings">Export</string>
-    <string name="import_settings">Import</string>
-    <string name="exported_success">Settings exported!</string>
-    <string name="imported_success">Settings imported!</string>
+    <string name="export_settings">Экспорт</string>
+    <string name="import_settings">Импорт</string>
+    <string name="exported_success">Настройки экспортированы!</string>
+    <string name="imported_success">Настройки импортированы!</string>
     <string name="settings_accessibility">Специальные возможности</string>
     <string name="system">Система</string>
     <string name="sign_in_failed">Подключение невозможно. Проверьте интернет-подключение и повторите попытку.</string>
@@ -81,7 +81,7 @@
     <string name="you_have_received">Вы получили: +%1$d</string>
     <string name="help_win_a_game">Для получения дополнительной помощи вы должны выиграть игру.</string>
     <string name="unknown_error">Неизвестная ошибка.</string>
-    <string name="error">Error!</string>
+    <string name="error">Ошибка!</string>
     <string name="leaderboards">Списки лидеров</string>
     <string name="cancel">Отмена</string>
     <string name="resume">Продолжить</string>

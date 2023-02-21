@@ -34,13 +34,13 @@
     <string name="show_licenses">Vis Licenser</string>
     <string name="new_game_request">Vil du starte et nyt spil?</string>
     <string name="mines_remaining">%d miner</string>
-    <string name="game_time">Spil Tid</string>
+    <string name="game_time">Spiltid</string>
     <string name="settings_general">Generelt</string>
     <string name="settings_gameplay">Gameplay</string>
-    <string name="export_settings">Export</string>
-    <string name="import_settings">Import</string>
-    <string name="exported_success">Settings exported!</string>
-    <string name="imported_success">Settings imported!</string>
+    <string name="export_settings">Eksporter</string>
+    <string name="import_settings">Importer</string>
+    <string name="exported_success">Indstillinger eksporteret!</string>
+    <string name="imported_success">Indstillinger importeret!</string>
     <string name="settings_accessibility">Tilgængelighed</string>
     <string name="system">System</string>
     <string name="sign_in_failed">Kan ikke forbinde. Tjek venligst din netværksforbindelse og prøv igen.</string>
@@ -81,7 +81,7 @@
     <string name="you_have_received">Du har modtaget: +%1$d</string>
     <string name="help_win_a_game">For flere tips skal du vinde et spil.</string>
     <string name="unknown_error">Ukendt fejl.</string>
-    <string name="error">Error!</string>
+    <string name="error">Fejl!</string>
     <string name="leaderboards">Ranglister</string>
     <string name="cancel">Annuller</string>
     <string name="resume">Fortsæt</string>
