@@ -1,40 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.ControlTypeActivity"
+    tools:context=".tutorial.TutorialActivity"
     tools:deviceIds="wear">
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/close"
-        style="@style/CustomButtonActive"
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:background="#FFFFFF"
-        android:backgroundTint="?colorPrimary"
-        android:contentDescription="@string/close"
-        android:foreground="?selectableItemBackgroundBorderless"
-        android:gravity="center"
-        android:padding="0dp"
-        android:scaleType="centerInside"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/close"
-        app:tint="?colorOnPrimary" />
 
     <androidx.wear.widget.BoxInsetLayout
         android:id="@+id/boxInset"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:clipChildren="false"
         android:scrollbars="vertical"
-        app:layout_boxedEdges="all"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/close">
+        android:padding="16dp"
+        app:layout_boxedEdges="all">
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -43,6 +23,7 @@
             android:clipChildren="false"
             android:fadeScrollbars="false"
             android:padding="@dimen/main_activity_padding"
+            android:clipToPadding="false"
             android:scrollbarStyle="outsideInset">
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -181,4 +162,4 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
         </ScrollView>
     </androidx.wear.widget.BoxInsetLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

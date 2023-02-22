@@ -21,10 +21,6 @@ class ThemeActivity : ThemedActivity() {
         setContentView(binding.root)
 
         refreshThemeList()
-
-        binding.close.setOnClickListener {
-            finish()
-        }
     }
 
     private fun refreshThemeList() {

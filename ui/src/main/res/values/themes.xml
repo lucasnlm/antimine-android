@@ -66,7 +66,6 @@
     <style name="AppTheme" parent="Theme.Material3.DynamicColors.DayNight">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
@@ -77,7 +76,6 @@
     </style>
 
     <style name="CustomLightTheme" parent="Theme.Material3.Light">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_light_primary</item>
         <item name="colorOnPrimary">@color/colors_light_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_light_primaryContainer</item>
@@ -113,7 +111,6 @@
     </style>
 
     <style name="CustomDarkTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_dark_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_primaryContainer</item>
@@ -147,7 +144,6 @@
     </style>
 
     <style name="CustomAmoledTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_amoled_primary</item>
         <item name="colorOnPrimary">@color/colors_amoled_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_amoled_primaryContainer</item>
@@ -181,7 +177,6 @@
     </style>
 
     <style name="CustomGardenTheme" parent="Theme.Material3.Light.NoActionBar">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_garden_light_primary</item>
         <item name="colorOnPrimary">@color/colors_garden_light_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_garden_light_primaryContainer</item>
@@ -217,7 +212,6 @@
     </style>
 
     <style name="CustomMarineTheme" parent="Theme.Material3.Light">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_blue_light_primary</item>
         <item name="colorOnPrimary">@color/colors_blue_light_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_blue_light_primaryContainer</item>
@@ -253,7 +247,6 @@
     </style>
 
     <style name="CustomBlueGreyTheme" parent="Theme.Material3.Light">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_blue_light_primary</item>
         <item name="colorOnPrimary">@color/colors_blue_light_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_blue_light_primaryContainer</item>
@@ -289,7 +282,6 @@
     </style>
 
     <style name="DarkLightBlueTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_dark_blue_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_blue_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_blue_primaryContainer</item>
@@ -325,7 +317,6 @@
     </style>
 
     <style name="DarkRedTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_dark_red_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_red_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_red_primaryContainer</item>
@@ -361,7 +352,6 @@
     </style>
 
     <style name="CustomOrangeTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_dark_orange_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_orange_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_orange_primaryContainer</item>
@@ -397,7 +387,6 @@
     </style>
 
     <style name="CustomPinkTheme" parent="Theme.Material3.Light">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_light_pink_primary</item>
         <item name="colorOnPrimary">@color/colors_light_pink_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_light_pink_primaryContainer</item>
@@ -433,7 +422,6 @@
     </style>
 
     <style name="CustomDarkPinkTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_dark_pink_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_pink_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_pink_primaryContainer</item>
@@ -469,7 +457,6 @@
     </style>
 
     <style name="CustomPurpleTheme" parent="Theme.Material3.Light">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_light_purple_primary</item>
         <item name="colorOnPrimary">@color/colors_light_purple_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_light_purple_primaryContainer</item>
@@ -505,7 +492,6 @@
     </style>
 
     <style name="DarkCustomPurpleTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_dark_purple_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_purple_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_purple_primaryContainer</item>
@@ -541,7 +527,6 @@
     </style>
 
     <style name="CustomLimeTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_dark_lime_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_lime_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_lime_primaryContainer</item>
@@ -577,7 +562,6 @@
     </style>
 
     <style name="BananaTheme" parent="ThemeOverlay.Material3.Dark">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_dark_banana_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_banana_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_banana_primaryContainer</item>
@@ -613,7 +597,6 @@
     </style>
 
     <style name="BananaThemeLight" parent="Theme.Material3.Light">
-        <item name="android:windowSwipeToDismiss">false</item>
         <item name="colorPrimary">@color/colors_light_banana_primary</item>
         <item name="colorOnPrimary">@color/colors_light_banana_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_light_banana_primaryContainer</item>

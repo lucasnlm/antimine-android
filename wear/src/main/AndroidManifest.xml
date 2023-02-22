@@ -45,42 +45,34 @@
 
         <activity
             android:name=".game.GameActivity"
-            android:windowSwipeToDismiss="false"
             android:exported="true"/>
 
         <activity
             android:name=".message.MessageActivity"
-            android:windowSwipeToDismiss="false"
             android:exported="true"/>
 
         <activity
             android:name=".message.GameOverActivity"
-            android:windowSwipeToDismiss="false"
             android:exported="true"/>
 
         <activity
             android:name=".message.VictoryActivity"
-            android:windowSwipeToDismiss="false"
             android:exported="true"/>
 
         <activity
             android:name=".main.DifficultyActivity"
-            android:windowSwipeToDismiss="false"
             android:exported="true"/>
 
         <activity
             android:name=".main.ControlTypeActivity"
-            android:windowSwipeToDismiss="false"
             android:exported="true"/>
 
         <activity
             android:name=".main.ThemeActivity"
-            android:windowSwipeToDismiss="false"
             android:exported="true"/>
 
         <activity
             android:name=".tutorial.TutorialActivity"
-            android:windowSwipeToDismiss="false"
             android:exported="true"/>
     </application>
 

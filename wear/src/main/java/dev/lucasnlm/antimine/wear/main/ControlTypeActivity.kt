@@ -23,10 +23,6 @@ class ControlTypeActivity : ThemedActivity() {
         setContentView(binding.root)
 
         refreshControlTypeList()
-
-        binding.close.setOnClickListener {
-            finish()
-        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

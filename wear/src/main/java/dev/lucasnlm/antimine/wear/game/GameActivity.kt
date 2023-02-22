@@ -45,8 +45,8 @@ class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
         setContentView(binding.root)
 
         binding.levelContainer.apply {
-            isSwipeable = false
-            setBackButtonDismissible(true)
+            canScrollHorizontally(1)
+            dismissMinDragWidthRatio = 0.95f
         }
 
         loadGameFragment()
@@ -200,33 +200,8 @@ class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
         lifecycleScope.launchWhenCreated {
             gameViewModel.observeSideEffects().collect {
                 when (it) {
-                    is GameEvent.ShowNoGuessFailWarning -> {
-//                        warning = Snackbar.make(
-//                            findViewById(android.R.id.content),
-//                            R.string.no_guess_fail_warning,
-//                            Snackbar.LENGTH_INDEFINITE,
-//                        ).apply {
-//                            setAction(R.string.ok) {
-//                                warning?.dismiss()
-//                            }
-//                            show()
-//                        }
-                    }
-                    is GameEvent.ShowNewGameDialog -> {
-//                        lifecycleScope.launch {
-//                            GameOverDialogFragment.newInstance(
-//                                gameResult = GameResult.Completed,
-//                                showContinueButton = gameViewModel.hasUnknownMines(),
-//                                rightMines = 0,
-//                                totalMines = 0,
-//                                time = singleState().duration,
-//                                received = 0,
-//                                turn = -1,
-//                            ).run {
-//                                showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
-//                            }
-//                        }
-                    }
+                    is GameEvent.ShowNoGuessFailWarning -> {}
+                    is GameEvent.ShowNewGameDialog -> {}
                     is GameEvent.VictoryDialog -> {
                         val intent = Intent(applicationContext, VictoryActivity::class.java).apply {
                             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP

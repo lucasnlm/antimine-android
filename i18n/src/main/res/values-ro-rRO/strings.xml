@@ -37,10 +37,10 @@
     <string name="game_time">Timp de joc</string>
     <string name="settings_general">General</string>
     <string name="settings_gameplay">Dinamica jocului</string>
-    <string name="export_settings">Export</string>
-    <string name="import_settings">Import</string>
-    <string name="exported_success">Settings exported!</string>
-    <string name="imported_success">Settings imported!</string>
+    <string name="export_settings">Exportare</string>
+    <string name="import_settings">Importare</string>
+    <string name="exported_success">Setări exportate!</string>
+    <string name="imported_success">Setări importate!</string>
     <string name="settings_accessibility">Accesibilitate</string>
     <string name="system">Sistem</string>
     <string name="sign_in_failed">Nu se poate conecta. Te rugăm să îți verifici conexiunea la rețea și să încerci din nou.</string>
@@ -81,7 +81,7 @@
     <string name="you_have_received">Ai primit: +%1$d</string>
     <string name="help_win_a_game">Trebuie să câștigi un joc pentru a beneficia de mai multe indicii.</string>
     <string name="unknown_error">Eroare necunoscută.</string>
-    <string name="error">Error!</string>
+    <string name="error">Eroare!</string>
     <string name="leaderboards">Clasamente</string>
     <string name="cancel">Anulează</string>
     <string name="resume">Reia</string>

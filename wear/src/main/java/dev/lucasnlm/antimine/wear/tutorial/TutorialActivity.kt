@@ -11,9 +11,5 @@ class TutorialActivity : ThemedActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTutorialBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.close.setOnClickListener {
-            finish()
-        }
     }
 }

@@ -43,10 +43,6 @@ class DifficultyActivity : ThemedActivity() {
             layoutManager = WearableLinearLayoutManager(this@DifficultyActivity)
             adapter = MainMenuAdapter(difficultyList)
         }
-
-        binding.close.setOnClickListener {
-            finish()
-        }
     }
 
     private fun startGameOnDifficulty(difficulty: Difficulty) {
