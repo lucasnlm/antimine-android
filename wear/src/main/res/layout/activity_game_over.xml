@@ -33,6 +33,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/message"
             tools:src="@drawable/emoji_bomb">
 
         </androidx.appcompat.widget.AppCompatImageView>
@@ -49,6 +50,7 @@
             app:layout_constraintEnd_toEndOf="@id/image"
             app:layout_constraintStart_toStartOf="@id/image"
             app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintBottom_toTopOf="@+id/action"
             tools:text="@string/you_lost" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
