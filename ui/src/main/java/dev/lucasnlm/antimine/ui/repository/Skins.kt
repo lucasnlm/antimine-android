@@ -9,7 +9,7 @@ object Skins {
         file = "standard.png",
         canTint = true,
         isPaid = false,
-        joinAreas = true,
+        hasPadding = true,
         imageRes = R.drawable.skin_standard,
     )
 
@@ -18,7 +18,7 @@ object Skins {
         file = "square.png",
         canTint = true,
         isPaid = true,
-        joinAreas = true,
+        hasPadding = true,
         imageRes = R.drawable.skin_square,
     )
 
@@ -27,7 +27,7 @@ object Skins {
         file = "square-2.png",
         canTint = true,
         isPaid = true,
-        joinAreas = true,
+        hasPadding = true,
         imageRes = R.drawable.skin_square_2,
     )
 
@@ -36,7 +36,7 @@ object Skins {
         file = "square-3.png",
         canTint = true,
         isPaid = true,
-        joinAreas = true,
+        hasPadding = false,
         imageRes = R.drawable.skin_square_3,
         showPadding = false,
     )
@@ -46,7 +46,7 @@ object Skins {
         file = "classic.png",
         canTint = true,
         isPaid = true,
-        joinAreas = false,
+        hasPadding = true,
         imageRes = R.drawable.skin_classic,
         background = 4,
     )
@@ -56,7 +56,7 @@ object Skins {
         file = "classic.png",
         canTint = false,
         isPaid = true,
-        joinAreas = false,
+        hasPadding = true,
         imageRes = R.drawable.skin_classic,
         background = 4,
     )
@@ -66,7 +66,7 @@ object Skins {
         file = "glass.png",
         canTint = true,
         isPaid = true,
-        joinAreas = false,
+        hasPadding = true,
         imageRes = R.drawable.skin_glass_2,
     )
 
@@ -75,7 +75,7 @@ object Skins {
         file = "stone.png",
         canTint = false,
         isPaid = true,
-        joinAreas = false,
+        hasPadding = true,
         imageRes = R.drawable.skin_stone,
         background = 4,
     )
@@ -85,7 +85,7 @@ object Skins {
         file = "stone-2.png",
         canTint = true,
         isPaid = true,
-        joinAreas = false,
+        hasPadding = true,
         imageRes = R.drawable.skin_stone_2,
         background = 4,
     )
@@ -95,7 +95,7 @@ object Skins {
         file = "standard.png",
         canTint = true,
         isPaid = true,
-        joinAreas = false,
+        hasPadding = false,
         imageRes = R.drawable.skin_standard_no_connection,
         showPadding = false,
     )

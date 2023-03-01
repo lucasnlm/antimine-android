@@ -8,7 +8,7 @@ data class AppSkin(
     @DrawableRes val imageRes: Int,
     val canTint: Boolean,
     val isPaid: Boolean,
-    val joinAreas: Boolean,
+    val hasPadding: Boolean,
     val background: Int = 0,
     val showPadding: Boolean = true,
 )
