@@ -1,18 +1,14 @@
 package dev.lucasnlm.antimine.wear.game
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.text.format.DateUtils
-import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
-import android.widget.FrameLayout
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
@@ -33,27 +29,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.ref.WeakReference
-
-class CustomDismissibleFrameLayout : FrameLayout {
-    constructor(context: Context) : super(context)
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
-
-    private var childFragment: WeakReference<Fragment>? = null
-
-    fun setChildFragment(fragment: Fragment) {
-        childFragment = WeakReference(fragment)
-    }
-
-    override fun onInterceptTouchEvent(event: MotionEvent?): Boolean {
-        val child = childFragment?.get()
-        if (child != null) {
-            return child.view?.onTouchEvent(event) ?: true
-        }
-        return true
-    }
-}
 
 class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
     private lateinit var binding: ActivityGameBinding
@@ -70,11 +45,6 @@ class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
 
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.levelContainer.apply {
-//        /**/    canScrollHorizontally(1)
-//            dismissMinDragWidthRatio = 0.95f
-        }
 
         loadGameFragment()
         bindViewModel()
