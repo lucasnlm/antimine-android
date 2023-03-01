@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.wear.widget.SwipeDismissFrameLayout
+    <dev.lucasnlm.antimine.wear.game.CustomDismissibleFrameLayout
         android:id="@+id/levelContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <requestFocus />
-    </androidx.wear.widget.SwipeDismissFrameLayout>
+    </dev.lucasnlm.antimine.wear.game.CustomDismissibleFrameLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tapToBegin"
