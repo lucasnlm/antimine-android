@@ -20,9 +20,6 @@ class CustomDismissibleFrameLayout : FrameLayout {
 
     override fun onInterceptTouchEvent(event: MotionEvent?): Boolean {
         val child = childFragment?.get()
-        if (child != null) {
-            return child.view?.onTouchEvent(event) ?: true
-        }
-        return true
+        return child?.view?.onTouchEvent(event) ?: true
     }
 }
