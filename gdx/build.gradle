@@ -90,9 +90,4 @@ task copyAndroidNatives {
     }
 }
 
-preBuild.dependsOn
-try {
-    copyAndroidNatives
-} catch (Exception ignored) {
-    // Ignore
-}
+preBuild.dependsOn copyAndroidNatives
