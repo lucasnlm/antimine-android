@@ -1,8 +1,10 @@
 package dev.lucasnlm.antimine.wear.game
 
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.text.format.DateUtils
+import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.addCallback
@@ -44,13 +46,47 @@ class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.levelContainer.apply {
-            canScrollHorizontally(1)
-            dismissMinDragWidthRatio = 0.95f
-        }
-
         loadGameFragment()
         bindViewModel()
+    }
+
+    @Suppress("UnnecessaryVariable")
+    private fun View.tryHandleMotionEvent(event: MotionEvent?): Boolean {
+        val shouldHandle = if (event == null) {
+            false
+        } else {
+            val location = IntArray(2)
+            getLocationOnScreen(location)
+            val viewX = location[0]
+            val viewY = location[1]
+
+            val left = viewX
+            val right = viewX + width
+            val top = viewY
+            val bottom = viewY + height
+
+            val rect = Rect(left, top, right, bottom)
+            rect.contains(event.x.toInt(), event.y.toInt())
+        }
+
+        return shouldHandle && dispatchTouchEvent(event)
+    }
+
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        val handledByView = listOf(
+            binding.close,
+            binding.selectFlag,
+            binding.selectOpen,
+            binding.newGame,
+        ).firstOrNull {
+            it.tryHandleMotionEvent(event)
+        } != null
+
+        return handledByView || binding.levelContainer.dispatchTouchEvent(event)
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return true
     }
 
     override fun onResume() {
@@ -85,8 +121,11 @@ class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
 
     private fun loadGameFragment() {
         supportFragmentManager.commit(allowStateLoss = true) {
-            replace(binding.levelContainer.id, GameRenderFragment())
+            val fragment = GameRenderFragment()
+            replace(binding.levelContainer.id, fragment)
             handleIntent(intent)
+
+            binding.levelContainer.setChildFragment(fragment)
         }
     }
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
+import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.R
 import dev.lucasnlm.antimine.themes.databinding.ViewSkinBinding
@@ -47,6 +48,7 @@ class SkinAdapter(
     override fun onBindViewHolder(holder: SkinViewHolder, position: Int) {
         val skin = appSkins[position]
         val tintColor = themeRepository.getTheme().palette.covered.toAndroidColor()
+        val context = holder.itemView.context
 
         holder.itemView.apply {
             val selected = (skin.id == themeViewModel.singleState().currentAppSkin.id)
@@ -75,12 +77,18 @@ class SkinAdapter(
 
             holder.binding.skinImage.apply {
                 val floatAlpha = 0.45f
+                val paddingValue = context.dpToPx(8)
                 alpha = if (selected) 1.0f else floatAlpha
                 setImageResource(skin.imageRes)
                 if (skin.canTint) {
                     setColorFilter(tintColor, PorterDuff.Mode.MULTIPLY)
                 } else {
                     setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY)
+                }
+                if (!skin.hasPadding) {
+                    setPadding(0, 0, 0, 0)
+                } else {
+                    setPadding(paddingValue, paddingValue, paddingValue, paddingValue)
                 }
             }
         }
