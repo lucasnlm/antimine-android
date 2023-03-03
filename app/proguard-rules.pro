@@ -27,6 +27,7 @@
 -dontwarn org.openjsse.**
 
 # For Google Play Services
+-keep class io.grpc.** {*;}
 -keep public class com.google.android.gms.ads.** {
     public *;
 }
