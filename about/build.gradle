@@ -72,7 +72,7 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
 
     // Kotlin Lib
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
 
     // Unit Tests
     testImplementation 'junit:junit:4.13.2'
