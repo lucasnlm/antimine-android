@@ -118,6 +118,11 @@ class PreferencesActivity :
             action = { preferenceRepository.setSoundEffectsEnabled(it) },
         )
 
+        binding.music.bindItem(
+            checked = preferenceRepository.isMusicEnabled(),
+            action = { preferenceRepository.setMusicEnabled(it) }
+        )
+
         binding.showWindows.bindItem(
             checked = preferenceRepository.showWindowsWhenFinishGame(),
             action = { preferenceRepository.mustShowWindowsWhenFinishGame(it) },

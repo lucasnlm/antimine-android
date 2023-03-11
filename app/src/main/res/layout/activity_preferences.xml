@@ -77,6 +77,13 @@
                         android:text="@string/sound_effects" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/music"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/music" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/showWindows"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
