@@ -120,7 +120,7 @@ class PreferencesActivity :
 
         binding.music.bindItem(
             initialValue = preferenceRepository.isMusicEnabled(),
-            onChangeValue = { preferenceRepository.setMusicEnabled(it) }
+            onChangeValue = { preferenceRepository.setMusicEnabled(it) },
         )
 
         binding.showWindows.bindItem(
