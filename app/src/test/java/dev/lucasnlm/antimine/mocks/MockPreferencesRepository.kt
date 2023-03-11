@@ -126,6 +126,10 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setSoundEffectsEnabled(value: Boolean) {}
 
+    override fun isMusicEnabled(): Boolean = false
+
+    override fun setMusicEnabled(value: Boolean) {}
+
     override fun touchSensibility(): Int = 35
 
     override fun setTouchSensibility(sensibility: Int) {}
