@@ -42,12 +42,12 @@ class PreferencesActivity :
     }
 
     private fun MaterialSwitch.bindItem(
-        checked: Boolean,
-        action: (Boolean) -> Unit,
+        initialValue: Boolean,
+        onChangeValue: (Boolean) -> Unit,
     ) {
-        isChecked = checked
+        isChecked = initialValue
         setOnCheckedChangeListener { _, newCheckedState ->
-            action(newCheckedState)
+            onChangeValue(newCheckedState)
         }
     }
 
@@ -104,8 +104,8 @@ class PreferencesActivity :
 
     private fun bindItems() {
         binding.hapticFeedback.bindItem(
-            checked = preferenceRepository.useHapticFeedback(),
-            action = {
+            initialValue = preferenceRepository.useHapticFeedback(),
+            onChangeValue = {
                 preferenceRepository.setHapticFeedback(it)
                 if (it && preferenceRepository.getHapticFeedbackLevel() == 0) {
                     preferenceRepository.resetHapticFeedbackLevel()
@@ -114,48 +114,48 @@ class PreferencesActivity :
         )
 
         binding.soundEffects.bindItem(
-            checked = preferenceRepository.isSoundEffectsEnabled(),
-            action = { preferenceRepository.setSoundEffectsEnabled(it) },
+            initialValue = preferenceRepository.isSoundEffectsEnabled(),
+            onChangeValue = { preferenceRepository.setSoundEffectsEnabled(it) },
         )
 
         binding.music.bindItem(
-            checked = preferenceRepository.isMusicEnabled(),
-            action = { preferenceRepository.setMusicEnabled(it) }
+            initialValue = preferenceRepository.isMusicEnabled(),
+            onChangeValue = { preferenceRepository.setMusicEnabled(it) }
         )
 
         binding.showWindows.bindItem(
-            checked = preferenceRepository.showWindowsWhenFinishGame(),
-            action = { preferenceRepository.mustShowWindowsWhenFinishGame(it) },
+            initialValue = preferenceRepository.showWindowsWhenFinishGame(),
+            onChangeValue = { preferenceRepository.mustShowWindowsWhenFinishGame(it) },
         )
 
         binding.openDirectly.bindItem(
-            checked = preferenceRepository.openGameDirectly(),
-            action = { preferenceRepository.setOpenGameDirectly(it) },
+            initialValue = preferenceRepository.openGameDirectly(),
+            onChangeValue = { preferenceRepository.setOpenGameDirectly(it) },
         )
 
         binding.useQuestionMark.bindItem(
-            checked = preferenceRepository.useQuestionMark(),
-            action = { preferenceRepository.setQuestionMark(it) },
+            initialValue = preferenceRepository.useQuestionMark(),
+            onChangeValue = { preferenceRepository.setQuestionMark(it) },
         )
 
         binding.showTimer.bindItem(
-            checked = preferenceRepository.showTimer(),
-            action = { preferenceRepository.setTimerVisible(it) },
+            initialValue = preferenceRepository.showTimer(),
+            onChangeValue = { preferenceRepository.setTimerVisible(it) },
         )
 
         binding.automaticFlags.bindItem(
-            checked = preferenceRepository.useFlagAssistant(),
-            action = { preferenceRepository.setFlagAssistant(it) },
+            initialValue = preferenceRepository.useFlagAssistant(),
+            onChangeValue = { preferenceRepository.setFlagAssistant(it) },
         )
 
         binding.hint.bindItem(
-            checked = preferenceRepository.useHelp(),
-            action = { preferenceRepository.setHelp(it) },
+            initialValue = preferenceRepository.useHelp(),
+            onChangeValue = { preferenceRepository.setHelp(it) },
         )
 
         binding.allowClickNumber.bindItem(
-            checked = preferenceRepository.allowTapOnNumbers(),
-            action = {
+            initialValue = preferenceRepository.allowTapOnNumbers(),
+            onChangeValue = {
                 preferenceRepository.setAllowTapOnNumbers(it)
 
                 if (it) {
@@ -169,8 +169,8 @@ class PreferencesActivity :
         )
 
         binding.flagWhenTapOnNumbers.bindItem(
-            checked = preferenceRepository.letNumbersAutoFlag(),
-            action = { preferenceRepository.setNumbersAutoFlag(it) },
+            initialValue = preferenceRepository.letNumbersAutoFlag(),
+            onChangeValue = { preferenceRepository.setNumbersAutoFlag(it) },
         )
 
         if (!preferenceRepository.allowTapOnNumbers()) {
@@ -179,14 +179,14 @@ class PreferencesActivity :
         }
 
         binding.highlightUnsolvedNumbers.bindItem(
-            checked = preferenceRepository.dimNumbers(),
-            action = { preferenceRepository.setDimNumbers(it) },
+            initialValue = preferenceRepository.dimNumbers(),
+            onChangeValue = { preferenceRepository.setDimNumbers(it) },
         )
 
         if (playGamesManager.hasGooglePlayGames()) {
             binding.playGames.bindItem(
-                checked = preferenceRepository.keepRequestPlayGames(),
-                action = {
+                initialValue = preferenceRepository.keepRequestPlayGames(),
+                onChangeValue = {
                     preferenceRepository.setRequestPlayGames(it)
                 },
             )
