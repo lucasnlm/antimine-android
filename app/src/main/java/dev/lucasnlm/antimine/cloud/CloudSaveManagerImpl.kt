@@ -40,6 +40,7 @@ class CloudSaveManagerImpl(
                     hapticFeedback = preferencesRepository.useHapticFeedback().toInt(),
                     hapticFeedbackLevel = preferencesRepository.getHapticFeedbackLevel(),
                     soundEffects = preferencesRepository.isSoundEffectsEnabled().toInt(),
+                    music = preferencesRepository.isMusicEnabled().toInt(),
                     stats = statsRepository.getAllStats(minId).map { it.toHashMap() },
                     premiumFeatures = preferencesRepository.isPremiumEnabled().toInt(),
                     controlStyle = preferencesRepository.controlStyle().ordinal,

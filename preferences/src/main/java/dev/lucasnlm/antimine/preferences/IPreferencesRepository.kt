@@ -100,6 +100,9 @@ interface IPreferencesRepository {
     fun isSoundEffectsEnabled(): Boolean
     fun setSoundEffectsEnabled(value: Boolean)
 
+    fun isMusicEnabled(): Boolean
+    fun setMusicEnabled(value: Boolean)
+
     fun touchSensibility(): Int
     fun setTouchSensibility(sensibility: Int)
 

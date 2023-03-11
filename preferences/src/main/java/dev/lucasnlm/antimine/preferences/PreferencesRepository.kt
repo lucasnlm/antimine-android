@@ -122,11 +122,20 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_QUESTION_MARK, value)
     }
 
-    override fun isSoundEffectsEnabled(): Boolean =
-        preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SOUND_EFFECTS, false)
+    override fun isSoundEffectsEnabled(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SOUND_EFFECTS, true)
+    }
 
     override fun setSoundEffectsEnabled(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SOUND_EFFECTS, value)
+    }
+
+    override fun isMusicEnabled(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_MUSIC, true)
+    }
+
+    override fun setMusicEnabled(value: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_MUSIC, value)
     }
 
     override fun touchSensibility(): Int =

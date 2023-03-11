@@ -83,6 +83,7 @@ class MainViewModel(
             setHelp(help != 0)
             setAllowTapOnNumbers(allowTapNumbers != 0)
             setSoundEffectsEnabled(soundEffects != 0)
+            setMusicEnabled(music != 0)
             setPremiumFeatures(premiumFeatures != 0)
             useControlStyle(ControlStyle.values()[controlStyle])
             setOpenGameDirectly(openDirectly != 0)
