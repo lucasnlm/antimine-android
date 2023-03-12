@@ -2,8 +2,8 @@ package dev.lucasnlm.antimine.common.level.view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import android.widget.FrameLayout
+import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.common.R
@@ -43,7 +43,7 @@ class SwitchButtonView : FrameLayout {
     private val unselectedBackgroundTint = flagButton.backgroundTintList
 
     fun setQuestionButtonVisibility(visible: Boolean) {
-        questionButton.visibility = if (visible) View.VISIBLE else View.GONE
+        questionButton.isVisible = visible
     }
 
     private fun updateMaterialButtonState(target: MaterialButton, selected: Boolean) {

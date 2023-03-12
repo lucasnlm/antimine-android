@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.themes
 
 import android.os.Bundle
-import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,7 +50,7 @@ class ThemeActivity : ThemedActivity() {
         bindToolbar(binding.toolbar)
 
         if (preferencesRepository.isPremiumEnabled()) {
-            binding.unlockAll.visibility = View.GONE
+            binding.unlockAll.isVisible = false
         } else {
             binding.unlockAll.bind(
                 theme = usingTheme,

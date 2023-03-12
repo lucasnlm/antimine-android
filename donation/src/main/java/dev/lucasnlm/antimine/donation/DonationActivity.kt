@@ -5,10 +5,10 @@ import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.core.app.ShareCompat
 import androidx.core.os.LocaleListCompat
+import androidx.core.view.isVisible
 import dev.lucasnlm.antimine.donation.databinding.ActivityDonationBinding
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 
@@ -28,7 +28,7 @@ class DonationActivity : ThemedActivity() {
         if (hasBrazilLocale()) {
             binding.pixButton.setOnClickListener { copyPixKey() }
         } else {
-            binding.pixButton.visibility = View.GONE
+            binding.pixButton.isVisible = false
         }
     }
 

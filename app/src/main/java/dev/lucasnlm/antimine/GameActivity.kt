@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
-import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import androidx.activity.addCallback
@@ -195,11 +194,11 @@ class GameActivity :
                                 getString(R.string.tap_to_begin)
                             }
                         }
-                        visibility = View.VISIBLE
+                        isVisible = true
                         backgroundTintList = tint
                     }
                 } else {
-                    binding.tapToBegin.visibility = View.GONE
+                    binding.tapToBegin.isVisible = false
                 }
 
                 if (it.isCreatingGame) {
@@ -221,7 +220,7 @@ class GameActivity :
 
                     if (controlText != null && controlText.isNotBlank()) {
                         binding.controlsToast.apply {
-                            visibility = View.VISIBLE
+                            isVisible = true
                             backgroundTintList = tint
                             text = controlText
 
@@ -232,19 +231,14 @@ class GameActivity :
                             }
                         }
                     } else {
-                        binding.controlsToast.visibility = View.GONE
+                        binding.controlsToast.isVisible = false
                     }
                 } else {
-                    binding.controlsToast.visibility = View.GONE
+                    binding.controlsToast.isVisible = false
                 }
 
                 binding.timer.apply {
-                    visibility = if (it.duration == 0L || !preferencesRepository.showTimer()) {
-                        View.GONE
-                    } else {
-                        View.VISIBLE
-                    }
-
+                    isVisible = preferencesRepository.showTimer() && it.duration != 0L
                     text = DateUtils.formatElapsedTime(it.duration)
                 }
 
@@ -266,9 +260,9 @@ class GameActivity :
                             text = currentMineCount.toL10nString()
                         }
 
-                        visibility = View.VISIBLE
+                        isVisible = true
                     } else {
-                        visibility = View.GONE
+                        isVisible = false
                     }
                 }
 
@@ -473,7 +467,7 @@ class GameActivity :
         val canRequestHelpWithAds = gameViewModel.getTips() == 0 && adsManager.isAvailable()
 
         binding.hintCounter.apply {
-            visibility = if (canUseHelpNow) View.VISIBLE else View.GONE
+            isVisible = canUseHelpNow
             text = if (canRequestHelpWithAds) {
                 "+5"
             } else {
@@ -489,7 +483,7 @@ class GameActivity :
             if (canUseHelpNow) {
                 binding.hintCooldown.apply {
                     animate().alpha(0.0f).start()
-                    visibility = View.GONE
+                    isVisible = false
                     progress = 0
                 }
 
@@ -533,7 +527,7 @@ class GameActivity :
                             start()
                         }
                     }
-                    visibility = View.VISIBLE
+                    isVisible = true
                     max = 5000
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         setProgress(dt.toInt(), true)
@@ -622,7 +616,7 @@ class GameActivity :
             }
         }
 
-        binding.hintCounter.visibility = View.GONE
+        binding.hintCounter.isVisible = false
         binding.shortcutIcon.apply {
             if (enabled) {
                 isClickable = true

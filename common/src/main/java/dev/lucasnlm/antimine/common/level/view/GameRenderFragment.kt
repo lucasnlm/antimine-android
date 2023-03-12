@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.view.isVisible
 import androidx.core.view.postDelayed
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
@@ -173,11 +174,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
     private fun bindControlSwitcherIfNeeded(view: View, delayed: Boolean = true) {
         val controlSwitcher = controlSwitcher
         if (controlSwitcher != null) {
-            if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
-                controlSwitcher.visibility = View.VISIBLE
-            } else {
-                controlSwitcher.visibility = View.GONE
-            }
+            controlSwitcher.isVisible = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
         } else {
             view.postDelayed(if (delayed) 200L else 0L) {
                 if (this.controlSwitcher == null) {
@@ -192,7 +189,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                                     start()
                                 }
 
-                                visibility = View.VISIBLE
+                                isVisible = true
                                 layoutParams = getSwitchControlLayoutParams()
 
                                 setQuestionButtonVisibility(preferencesRepository.useQuestionMark())

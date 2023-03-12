@@ -7,10 +7,10 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
-import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
 import com.google.android.material.materialswitch.MaterialSwitch
 import dev.lucasnlm.antimine.R
@@ -157,14 +157,8 @@ class PreferencesActivity :
             initialValue = preferenceRepository.allowTapOnNumbers(),
             onChangeValue = {
                 preferenceRepository.setAllowTapOnNumbers(it)
-
-                if (it) {
-                    binding.flagWhenTapOnNumbers.visibility = View.VISIBLE
-                    binding.flagWhenTapOnNumbers.visibility = View.VISIBLE
-                } else {
-                    binding.flagWhenTapOnNumbers.visibility = View.GONE
-                    binding.flagWhenTapOnNumbers.visibility = View.GONE
-                }
+                binding.flagWhenTapOnNumbers.isVisible = it
+                binding.flagWhenTapOnNumbers.isVisible = it
             },
         )
 
@@ -174,8 +168,8 @@ class PreferencesActivity :
         )
 
         if (!preferenceRepository.allowTapOnNumbers()) {
-            binding.flagWhenTapOnNumbers.visibility = View.GONE
-            binding.flagWhenTapOnNumbers.visibility = View.GONE
+            binding.flagWhenTapOnNumbers.isVisible = false
+            binding.flagWhenTapOnNumbers.isVisible = false
         }
 
         binding.highlightUnsolvedNumbers.bindItem(
@@ -191,7 +185,7 @@ class PreferencesActivity :
                 },
             )
         } else {
-            binding.playGames.visibility = View.GONE
+            binding.playGames.isVisible = false
         }
 
         binding.exportSettings.setOnClickListener {

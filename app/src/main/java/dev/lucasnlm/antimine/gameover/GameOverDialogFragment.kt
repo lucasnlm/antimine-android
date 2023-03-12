@@ -10,6 +10,7 @@ import android.view.*
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
@@ -146,7 +147,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                         }
 
                         if (featureFlagManager.isFoss && preferencesRepository.requestDonation()) {
-                            adFrame.visibility = View.VISIBLE
+                            adFrame.isVisible = true
 
                             val view = View.inflate(context, R.layout.donation_request, null)
                             view.setOnClickListener {
@@ -169,7 +170,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                         } else if (!preferencesRepository.isPremiumEnabled() &&
                             featureFlagManager.isBannerAdEnabled
                         ) {
-                            adFrame.visibility = View.VISIBLE
+                            adFrame.isVisible = true
 
                             adFrame.addView(
                                 adsManager.createBannerAd(context),
@@ -186,7 +187,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                             state.showContinueButton &&
                             featureFlagManager.isContinueGameEnabled
                         ) {
-                            continueGame.visibility = View.VISIBLE
+                            continueGame.isVisible = true
                             if (!preferencesRepository.isPremiumEnabled() &&
                                 featureFlagManager.isAdsOnContinueEnabled
                             ) {
@@ -202,7 +203,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                             if (!preferencesRepository.isPremiumEnabled() &&
                                 featureFlagManager.showCountdownToContinue
                             ) {
-                                countdown.visibility = View.VISIBLE
+                                countdown.isVisible = true
                                 lifecycleScope.launchWhenCreated {
                                     var countdownTime = 10
                                     while (countdownTime > 0) {
@@ -210,17 +211,17 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                         delay(1000L)
                                         countdownTime -= 1
                                     }
-                                    countdown.visibility = View.GONE
-                                    continueGame.visibility = View.GONE
+                                    countdown.isVisible = false
+                                    continueGame.isVisible = false
                                 }
                             }
                         } else {
-                            continueGame.visibility = View.GONE
-                            countdown.visibility = View.GONE
+                            continueGame.isVisible = false
+                            countdown.isVisible = false
                         }
 
                         if (state.showTutorial) {
-                            tutorial.visibility = View.VISIBLE
+                            tutorial.isVisible = true
                             tutorial.setOnClickListener {
                                 val intent = Intent(context, TutorialActivity::class.java)
                                 context.startActivity(intent)
@@ -236,7 +237,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 val price = priceModel?.price
                                 val unlockLabel = price?.let { "$label - $it" } ?: label
                                 removeAds.apply {
-                                    visibility = View.VISIBLE
+                                    isVisible = true
                                     text = unlockLabel
 
                                     setOnClickListener {
@@ -251,7 +252,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                             instantAppManager.isEnabled(context)
                         ) {
                             removeAds.apply {
-                                visibility = View.VISIBLE
+                                isVisible = true
                                 text = getString(R.string.themes)
                                 setOnClickListener {
                                     val intent = Intent(context, ThemeActivity::class.java)

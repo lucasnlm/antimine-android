@@ -6,13 +6,13 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import dev.lucasnlm.antimine.GameActivity
@@ -100,18 +100,16 @@ class MainActivity : ThemedActivity() {
                 val shouldShowTutorial = savesRepository.getAllSaves().count { it.status == SaveStatus.VICTORY } < 2
                 preferencesRepository.setShowTutorialButton(shouldShowTutorial)
                 withContext(Dispatchers.Main) {
-                    if (!shouldShowTutorial) {
-                        binding.tutorial.visibility = View.GONE
-                    }
+                    binding.tutorial.isVisible = shouldShowTutorial
                 }
             } else {
-                binding.tutorial.visibility = View.GONE
+                binding.tutorial.isVisible = false
             }
         }
 
         binding.newGameShow.setOnClickListener {
-            binding.newGameShow.visibility = View.GONE
-            binding.difficulties.visibility = View.VISIBLE
+            binding.newGameShow.isVisible = false
+            binding.difficulties.isVisible = true
         }
 
         mapOf(
@@ -172,11 +170,7 @@ class MainActivity : ThemedActivity() {
             startActivity(intent)
         }
 
-        binding.newThemesIcon.visibility = if (preferencesRepository.showNewThemesIcon()) {
-            View.VISIBLE
-        } else {
-            View.GONE
-        }
+        binding.newThemesIcon.isVisible = preferencesRepository.showNewThemesIcon()
 
         binding.controls.setOnClickListener {
             analyticsManager.sentEvent(Analytics.OpenControls)
@@ -184,7 +178,7 @@ class MainActivity : ThemedActivity() {
         }
 
         if (featureFlagManager.isFoss) {
-            binding.removeAdsRoot.visibility = View.VISIBLE
+            binding.removeAdsRoot.isVisible = true
             binding.removeAds.apply {
                 setOnClickListener {
                     lifecycleScope.launch {
@@ -215,7 +209,7 @@ class MainActivity : ThemedActivity() {
                 startActivity(intent)
             }
         } else {
-            binding.previousGames.visibility = View.GONE
+            binding.previousGames.isVisible = false
         }
 
         binding.tutorial.apply {
@@ -244,7 +238,7 @@ class MainActivity : ThemedActivity() {
                 viewModel.sendEvent(MainEvent.ShowGooglePlayGamesEvent)
             }
         } else {
-            binding.playGames.visibility = View.GONE
+            binding.playGames.isVisible = false
         }
 
         lifecycleScope.launchWhenCreated {
@@ -301,9 +295,9 @@ class MainActivity : ThemedActivity() {
     override fun onResume() {
         super.onResume()
 
-        if (binding.newGameShow.visibility == View.GONE) {
-            binding.newGameShow.visibility = View.VISIBLE
-            binding.difficulties.visibility = View.GONE
+        if (!binding.newGameShow.isVisible) {
+            binding.newGameShow.isVisible = true
+            binding.difficulties.isVisible = false
         }
     }
 
@@ -436,7 +430,7 @@ class MainActivity : ThemedActivity() {
     }
 
     private fun bindRemoveAds(price: String? = null, showOffer: Boolean = false) {
-        binding.removeAdsRoot.visibility = View.VISIBLE
+        binding.removeAdsRoot.isVisible = true
         binding.removeAds.apply {
             setOnClickListener {
                 lifecycleScope.launch {
@@ -448,12 +442,10 @@ class MainActivity : ThemedActivity() {
 
             price?.let {
                 binding.priceText.text = it
-                binding.priceText.visibility = View.VISIBLE
+                binding.priceText.isVisible = true
             }
 
-            if (showOffer) {
-                binding.priceOff.visibility = View.VISIBLE
-            }
+            binding.priceOff.isVisible = showOffer
         }
     }
 
@@ -483,9 +475,9 @@ class MainActivity : ThemedActivity() {
     }
 
     private fun handleBackPressed() {
-        if (binding.newGameShow.visibility == View.GONE) {
-            binding.newGameShow.visibility = View.VISIBLE
-            binding.difficulties.visibility = View.GONE
+        if (!binding.newGameShow.isVisible) {
+            binding.newGameShow.isVisible = true
+            binding.difficulties.isVisible = false
         } else {
             finishAffinity()
         }

@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
@@ -139,7 +140,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                         }
 
                         if (featureFlagManager.isFoss && preferencesRepository.requestDonation()) {
-                            adFrame.visibility = View.VISIBLE
+                            adFrame.isVisible = true
 
                             val view = View.inflate(context, R.layout.donation_request, null)
                             view.setOnClickListener {
@@ -162,7 +163,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                         } else if (!preferencesRepository.isPremiumEnabled() &&
                             featureFlagManager.isBannerAdEnabled
                         ) {
-                            adFrame.visibility = View.VISIBLE
+                            adFrame.isVisible = true
 
                             adFrame.addView(
                                 adsManager.createBannerAd(context),
@@ -183,7 +184,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             close.setOnClickListener {
                                 dismissAllowingStateLoss()
                             }
-                            stats.visibility = View.VISIBLE
+                            stats.isVisible = true
                         }
 
                         if (!preferencesRepository.isPremiumEnabled() &&
@@ -195,7 +196,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                 val price = billingManager.getPrice()?.price
                                 val unlockLabel = price?.let { "$label - $it" } ?: label
                                 removeAds.apply {
-                                    visibility = View.VISIBLE
+                                    isVisible = true
                                     text = unlockLabel
                                     setOnClickListener {
                                         analyticsManager.sentEvent(Analytics.RemoveAds)
@@ -213,10 +214,10 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                 preferencesRepository.useHelp() &&
                                 preferencesRepository.isPremiumEnabled()
                             ) {
-                                visibility = View.VISIBLE
+                                isVisible = true
                                 text = getString(R.string.you_have_received, state.received)
                             } else {
-                                visibility = View.GONE
+                                isVisible = false
                             }
                         }
                     }

@@ -1,8 +1,8 @@
 package dev.lucasnlm.antimine.themes.view
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
@@ -52,12 +52,12 @@ class ThemeAdapter(
                     setTextColor(theme.palette.background.toInvertedAndroidColor(200))
                     setBackgroundResource(android.R.color.transparent)
                     setCompoundDrawables(null, null, null, null)
-                    visibility = View.VISIBLE
+                    isVisible = true
                 }
             } else {
                 holder.binding.label.apply {
                     setCompoundDrawables(null, null, null, null)
-                    visibility = View.GONE
+                    isVisible = false
                 }
             }
 

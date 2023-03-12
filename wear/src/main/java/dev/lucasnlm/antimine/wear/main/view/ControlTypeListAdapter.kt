@@ -1,8 +1,8 @@
 package dev.lucasnlm.antimine.wear.main.view
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.wear.R
@@ -59,16 +59,15 @@ class ControlTypeListAdapter(
 
                 firstActionLabel.text = context.getString(controlTypeItem.primaryAction)
 
-                if (controlTypeItem.secondaryAction != null) {
-                    secondActionLabel.text = context.getString(controlTypeItem.secondaryAction)
-                    secondActionLabel.visibility = View.VISIBLE
-                    flag.visibility = View.VISIBLE
-                    shovel.visibility = View.VISIBLE
-                } else {
-                    secondActionLabel.visibility = View.GONE
-                    flag.visibility = View.GONE
-                    shovel.visibility = View.GONE
+                val hasSecondaryAction = controlTypeItem.secondaryAction != null
+
+                if (hasSecondaryAction) {
+                    secondActionLabel.text = controlTypeItem.secondaryAction?.let { context.getString(it) }
                 }
+
+                secondActionLabel.isVisible = hasSecondaryAction
+                flag.isVisible = hasSecondaryAction
+                shovel.isVisible = hasSecondaryAction
 
                 root.setOnClickListener {
                     preferencesRepository.useControlStyle(controlTypeItem.controlStyle)

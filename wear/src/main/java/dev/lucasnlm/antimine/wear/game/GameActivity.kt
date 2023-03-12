@@ -96,14 +96,13 @@ class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
 
     private fun refreshSwitchButtons() {
         val enabled = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
-        val visibilityValue = if (enabled) { View.VISIBLE } else { View.GONE }
 
         binding.close.setOnClickListener {
             finish()
         }
 
         binding.selectOpen.apply {
-            visibility = visibilityValue
+            isVisible = enabled
             alpha = if (preferencesRepository.getSwitchControlAction() == Action.OpenTile) 1.0f else 0.5f
             setOnClickListener {
                 gameViewModel.changeSwitchControlAction(Action.OpenTile)
@@ -111,7 +110,7 @@ class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
         }
 
         binding.selectFlag.apply {
-            visibility = visibilityValue
+            isVisible = enabled
             alpha = if (preferencesRepository.getSwitchControlAction() == Action.SwitchMark) 1.0f else 0.5f
             setOnClickListener {
                 gameViewModel.changeSwitchControlAction(Action.SwitchMark)
@@ -183,10 +182,10 @@ class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
                                 getString(R.string.tap_to_begin)
                             }
                         }
-                        visibility = View.VISIBLE
+                        isVisible = true
                     }
                 } else {
-                    binding.tapToBegin.visibility = View.GONE
+                    binding.tapToBegin.isVisible = false
                 }
 
                 if (it.isCreatingGame) {
@@ -203,12 +202,7 @@ class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
 
                 if (it.duration % 10 > 2) {
                     binding.timer.apply {
-                        visibility = if (!preferencesRepository.showTimer()) {
-                            View.GONE
-                        } else {
-                            View.VISIBLE
-                        }
-
+                        isVisible = preferencesRepository.showTimer()
                         alpha = 0.7f
                         text = DateUtils.formatElapsedTime(it.duration)
                     }
@@ -217,7 +211,7 @@ class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
                         text = getString(R.string.mines_remaining, it.mineCount)
                     }
                 } else {
-                    binding.timer.visibility = View.GONE
+                    binding.timer.isVisible = false
                 }
 
                 if (it.isGameCompleted) {
@@ -226,9 +220,9 @@ class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
                             gameViewModel.startNewGame()
                         }
                     }
-                    binding.newGame.visibility = View.VISIBLE
+                    binding.newGame.isVisible = true
                 } else {
-                    binding.newGame.visibility = View.GONE
+                    binding.newGame.isVisible = false
                 }
 
                 keepScreenOn(it.isActive)

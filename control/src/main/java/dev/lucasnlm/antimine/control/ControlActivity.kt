@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.control
 
 import android.os.Bundle
-import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.slider.Slider
@@ -58,18 +58,18 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
                     (it.touchSensibility.toFloat() / touchSensibility.stepSize).toInt() * touchSensibility.stepSize
 
                 val longPressVisible = when (it.selected) {
-                    ControlStyle.Standard, ControlStyle.FastFlag -> View.VISIBLE
-                    else -> View.GONE
+                    ControlStyle.Standard, ControlStyle.FastFlag -> true
+                    else -> false
                 }
-                longPress.visibility = longPressVisible
-                binding.longPressLabel.visibility = longPressVisible
+                longPress.isVisible = longPressVisible
+                binding.longPressLabel.isVisible = longPressVisible
 
                 val doubleClickVisible = when (it.selected) {
-                    ControlStyle.DoubleClick, ControlStyle.DoubleClickInverted -> View.VISIBLE
-                    else -> View.GONE
+                    ControlStyle.DoubleClick, ControlStyle.DoubleClickInverted -> true
+                    else -> false
                 }
-                binding.doubleClick.visibility = doubleClickVisible
-                binding.doubleClickLabel.visibility = doubleClickVisible
+                binding.doubleClick.isVisible = doubleClickVisible
+                binding.doubleClickLabel.isVisible = doubleClickVisible
                 binding.doubleClick.value = it.doubleClick.toFloat()
 
                 hapticLevel.value =
