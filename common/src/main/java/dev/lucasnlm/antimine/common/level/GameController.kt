@@ -254,6 +254,7 @@ class GameController {
                     gameControl.onUncovered.singleClick
                 }
                 action?.let {
+                    val initActions = actions
                     handleAction(target, action)
                     emit(action)
                 }

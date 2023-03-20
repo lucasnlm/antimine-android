@@ -31,6 +31,7 @@ import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.serializableNonSafe
+import dev.lucasnlm.antimine.core.sound.SoundManager
 import dev.lucasnlm.antimine.databinding.ActivityGameBinding
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
@@ -63,6 +64,7 @@ class GameActivity :
     private val instantAppManager: IInstantAppManager by inject()
     private val savesRepository: ISavesRepository by inject()
     private val playGamesManager: IPlayGamesManager by inject()
+    private val soundManager: SoundManager by inject()
     private val adsManager: IAdsManager by inject()
     private val reviewWrapper: ReviewWrapper by inject()
     private val featureFlagManager: IFeatureFlagManager by inject()
@@ -199,6 +201,10 @@ class GameActivity :
                     }
                 } else {
                     binding.tapToBegin.isVisible = false
+                }
+
+                if (it.turn > 0 || it.saveId != 0L) {
+                    soundManager.playMusic()
                 }
 
                 if (it.isCreatingGame) {
@@ -400,6 +406,7 @@ class GameActivity :
         analyticsManager.sentEvent(Analytics.Resume)
         keepScreenOn(true)
         gameViewModel.resumeGame()
+        soundManager.resumeMusic()
     }
 
     override fun onPause() {
@@ -417,6 +424,14 @@ class GameActivity :
         appScope.launch {
             gameViewModel.saveGame()
         }
+
+        soundManager.pauseMusic()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        soundManager.stopMusic()
     }
 
     private fun bindTapToBegin() {

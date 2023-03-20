@@ -504,6 +504,8 @@ open class GameViewModel(
             sendEvent(GameEvent.CreatingGameEvent)
         }
 
+        val initActions = gameController.getActionsCount()
+
         gameController
             .singleClick(index)
             .filterNotNull()
@@ -521,6 +523,10 @@ open class GameViewModel(
 
         if (preferencesRepository.dimNumbers() && !gameController.isGameOver()) {
             gameController.runNumberDimmer()
+        }
+
+        if (preferencesRepository.isSoundEffectsEnabled()) {
+            soundManager.playOpenArea()
         }
 
         updateGameState()

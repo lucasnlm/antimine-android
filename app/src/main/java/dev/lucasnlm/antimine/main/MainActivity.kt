@@ -25,6 +25,7 @@ import dev.lucasnlm.antimine.control.ControlActivity
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.core.sound.ISoundManager
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.databinding.ActivityMainBinding
 import dev.lucasnlm.antimine.history.HistoryActivity
@@ -57,6 +58,7 @@ class MainActivity : ThemedActivity() {
     private val inAppUpdateManager: IInAppUpdateManager by inject()
     private val instantAppManager: IInstantAppManager by inject()
     private val preferenceRepository: IPreferencesRepository by inject()
+    private val soundManager: ISoundManager by inject()
 
     private lateinit var viewPager: ViewPager2
     private lateinit var googlePlayLauncher: ActivityResultLauncher<Intent>
@@ -82,6 +84,7 @@ class MainActivity : ThemedActivity() {
             }
 
             setOnClickListener {
+                soundManager.playClickSound()
                 viewModel.sendEvent(MainEvent.ContinueGameEvent)
             }
         }
@@ -108,6 +111,7 @@ class MainActivity : ThemedActivity() {
         }
 
         binding.newGameShow.setOnClickListener {
+            soundManager.playClickSound()
             binding.newGameShow.isVisible = false
             binding.difficulties.isVisible = true
         }
@@ -147,6 +151,8 @@ class MainActivity : ThemedActivity() {
                     pushShortcutOf(difficulty)
                 }
 
+                soundManager.playClickSound()
+
                 viewModel.sendEvent(
                     MainEvent.StartNewGameEvent(difficulty = difficulty),
                 )
@@ -154,17 +160,20 @@ class MainActivity : ThemedActivity() {
         }
 
         binding.startCustom.setOnClickListener {
+            soundManager.playClickSound()
             analyticsManager.sentEvent(Analytics.OpenCustom)
             viewModel.sendEvent(MainEvent.ShowCustomDifficultyDialogEvent)
         }
 
         binding.settings.setOnClickListener {
+            soundManager.playClickSound()
             analyticsManager.sentEvent(Analytics.OpenSettings)
             val intent = Intent(this, PreferencesActivity::class.java)
             startActivity(intent)
         }
 
         binding.themes.setOnClickListener {
+            soundManager.playClickSound()
             val intent = Intent(this, ThemeActivity::class.java)
             preferencesRepository.setNewThemesIcon(false)
             startActivity(intent)
@@ -173,6 +182,7 @@ class MainActivity : ThemedActivity() {
         binding.newThemesIcon.isVisible = preferencesRepository.showNewThemesIcon()
 
         binding.controls.setOnClickListener {
+            soundManager.playClickSound()
             analyticsManager.sentEvent(Analytics.OpenControls)
             viewModel.sendEvent(MainEvent.ShowControlsEvent)
         }
@@ -181,6 +191,7 @@ class MainActivity : ThemedActivity() {
             binding.removeAdsRoot.isVisible = true
             binding.removeAds.apply {
                 setOnClickListener {
+                    soundManager.playClickSound()
                     lifecycleScope.launch {
                         billingManager.charge(this@MainActivity)
                     }
@@ -204,6 +215,7 @@ class MainActivity : ThemedActivity() {
 
         if (featureFlagManager.isGameHistoryEnabled) {
             binding.previousGames.setOnClickListener {
+                soundManager.playClickSound()
                 analyticsManager.sentEvent(Analytics.OpenSaveHistory)
                 val intent = Intent(this, HistoryActivity::class.java)
                 startActivity(intent)
@@ -215,18 +227,21 @@ class MainActivity : ThemedActivity() {
         binding.tutorial.apply {
             setText(R.string.tutorial)
             setOnClickListener {
+                soundManager.playClickSound()
                 analyticsManager.sentEvent(Analytics.OpenTutorial)
                 viewModel.sendEvent(MainEvent.StartTutorialEvent)
             }
         }
 
         binding.stats.setOnClickListener {
+            soundManager.playClickSound()
             analyticsManager.sentEvent(Analytics.OpenStats)
             val intent = Intent(this, StatsActivity::class.java)
             startActivity(intent)
         }
 
         binding.about.setOnClickListener {
+            soundManager.playClickSound()
             analyticsManager.sentEvent(Analytics.OpenAbout)
             val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)
@@ -234,6 +249,7 @@ class MainActivity : ThemedActivity() {
 
         if (playGamesManager.hasGooglePlayGames()) {
             binding.playGames.setOnClickListener {
+                soundManager.playClickSound()
                 analyticsManager.sentEvent(Analytics.OpenGooglePlayGames)
                 viewModel.sendEvent(MainEvent.ShowGooglePlayGamesEvent)
             }
@@ -433,6 +449,7 @@ class MainActivity : ThemedActivity() {
         binding.removeAdsRoot.isVisible = true
         binding.removeAds.apply {
             setOnClickListener {
+                soundManager.playClickSound()
                 lifecycleScope.launch {
                     billingManager.charge(this@MainActivity)
                 }
@@ -478,6 +495,7 @@ class MainActivity : ThemedActivity() {
         if (!binding.newGameShow.isVisible) {
             binding.newGameShow.isVisible = true
             binding.difficulties.isVisible = false
+            soundManager.playClickSound(1)
         } else {
             finishAffinity()
         }

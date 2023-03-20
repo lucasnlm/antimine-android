@@ -26,7 +26,7 @@ val CommonModule = module {
         )
     } bind IPreferencesRepository::class
 
-    single { SoundManager(get(), get()) } bind ISoundManager::class
+    single { SoundManager(get(), get(), get()) } bind ISoundManager::class
 
     single {
         ThemeRepository(get(), get())
