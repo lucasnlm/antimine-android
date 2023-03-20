@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.common.level.logic
 
-import dev.lucasnlm.antimine.common.level.GameController
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.preferences.models.ControlStyle

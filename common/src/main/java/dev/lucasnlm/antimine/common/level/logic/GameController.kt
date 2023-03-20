@@ -1,15 +1,9 @@
-package dev.lucasnlm.antimine.common.level
+package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.database.models.Stats
-import dev.lucasnlm.antimine.common.level.logic.FlagAssistant
-import dev.lucasnlm.antimine.common.level.logic.MinefieldCreator
-import dev.lucasnlm.antimine.common.level.logic.MinefieldCreatorImpl
-import dev.lucasnlm.antimine.common.level.logic.MinefieldCreatorNativeImpl
-import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
-import dev.lucasnlm.antimine.common.level.logic.NumberDimmer
 import dev.lucasnlm.antimine.common.level.solver.LimitedCheckNeighborsSolver
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
