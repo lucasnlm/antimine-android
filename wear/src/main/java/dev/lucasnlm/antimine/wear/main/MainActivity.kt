@@ -8,7 +8,7 @@ import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.wear.R
 import dev.lucasnlm.antimine.wear.databinding.ActivityMainBinding
-import dev.lucasnlm.antimine.wear.game.GameActivity
+import dev.lucasnlm.antimine.wear.game.WearGameActivity
 import dev.lucasnlm.antimine.wear.main.models.MenuItem
 import dev.lucasnlm.antimine.wear.main.view.MainMenuAdapter
 import dev.lucasnlm.antimine.wear.tutorial.TutorialActivity
@@ -89,11 +89,11 @@ class MainActivity : ThemedActivity() {
 
     private fun continueGame(difficulty: Difficulty? = null) {
         val context = application.applicationContext
-        val intent = Intent(context, GameActivity::class.java).apply {
+        val intent = Intent(context, WearGameActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             difficulty?.let {
                 val bundle = Bundle().apply {
-                    putSerializable(GameActivity.DIFFICULTY, it)
+                    putSerializable(WearGameActivity.DIFFICULTY, it)
                 }
                 putExtras(bundle)
             }

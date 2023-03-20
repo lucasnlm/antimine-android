@@ -6,7 +6,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.wear.databinding.ActivityGameOverBinding
-import dev.lucasnlm.antimine.wear.game.GameActivity
+import dev.lucasnlm.antimine.wear.game.WearGameActivity
 
 abstract class EmojiMessageActivity : ThemedActivity() {
     @get:StringRes
@@ -19,9 +19,9 @@ abstract class EmojiMessageActivity : ThemedActivity() {
 
     private fun newGame() {
         val context = application.applicationContext
-        val intent = Intent(context, GameActivity::class.java).apply {
+        val intent = Intent(context, WearGameActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            putExtra(GameActivity.NEW_GAME, "true")
+            putExtra(WearGameActivity.NEW_GAME, "true")
         }
         context.startActivity(intent)
     }

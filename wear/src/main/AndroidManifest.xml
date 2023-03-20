@@ -45,7 +45,7 @@
         </activity>
 
         <activity
-            android:name=".game.GameActivity"
+            android:name=".game.WearGameActivity"
             android:exported="true"/>
 
         <activity

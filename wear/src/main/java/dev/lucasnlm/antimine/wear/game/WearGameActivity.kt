@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class GameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
+class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
     private lateinit var binding: ActivityGameBinding
 
     private val gameViewModel by viewModel<GameViewModel>()
