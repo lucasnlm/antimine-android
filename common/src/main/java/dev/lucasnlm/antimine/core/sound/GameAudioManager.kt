@@ -37,7 +37,7 @@ class GameAudioManager(
                     musicMediaPlayer = MediaPlayer().apply {
                         setDataSource(it.fileDescriptor, it.startOffset, it.length)
                         prepare()
-                        setVolume(0.35f, 0.35f)
+                        setVolume(MUSIC_MAX_VOLUME, MUSIC_MAX_VOLUME)
                         isLooping = true
                         start()
                     }
@@ -115,7 +115,7 @@ class GameAudioManager(
                 MediaPlayer().apply {
                     setDataSource(soundAsset.fileDescriptor, soundAsset.startOffset, soundAsset.length)
                     prepare()
-                    setVolume(0.7f, 0.7f)
+                    setVolume(SFX_MAX_VOLUME, SFX_MAX_VOLUME)
                     seekTo(0)
                     isLooping = false
                     setOnCompletionListener {
@@ -150,6 +150,9 @@ class GameAudioManager(
     }
 
     companion object {
+        const val MUSIC_MAX_VOLUME = 0.3f
+        const val SFX_MAX_VOLUME = 0.7f
+
         private fun filesCount(count: Int) = (0 until count)
 
         fun winFileName() = "win.ogg"
