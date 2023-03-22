@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine
 
+import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -539,6 +540,23 @@ class GameActivity :
                             addUpdateListener {
                                 progress = ((it.animatedValue as Float) * 1000f).toInt()
                             }
+                            addListener(object : Animator.AnimatorListener {
+                                override fun onAnimationStart(animation: Animator) {
+                                    // Ignore
+                                }
+
+                                override fun onAnimationEnd(animation: Animator) {
+                                    gameAudioManager.playRevealBombReloaded()
+                                }
+
+                                override fun onAnimationCancel(animation: Animator) {
+                                    // Ignore
+                                }
+
+                                override fun onAnimationRepeat(animation: Animator) {
+                                    // Ignore
+                                }
+                            })
                             start()
                         }
                     }

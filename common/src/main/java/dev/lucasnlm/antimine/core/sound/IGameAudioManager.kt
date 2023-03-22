@@ -12,5 +12,6 @@ interface IGameAudioManager {
     fun playPutFlag()
     fun playOpenMultipleArea()
     fun playRevealBomb()
+    fun playRevealBombReloaded()
     fun free()
 }

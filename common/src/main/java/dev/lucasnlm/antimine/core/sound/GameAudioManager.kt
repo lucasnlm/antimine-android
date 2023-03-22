@@ -100,6 +100,11 @@ class GameAudioManager(
         revealBombFiles().pickOneAndPlay()
     }
 
+    override fun playRevealBombReloaded() {
+        val fileName = revealBombReloadFile()
+        playSoundFromAssets(fileName)
+    }
+
     override fun free() {
         stopMusic()
     }
@@ -155,5 +160,6 @@ class GameAudioManager(
         fun openMultipleFiles() = filesCount(3).map { "open_multiple_$it.ogg" }
         fun putFlagFiles() = filesCount(3).map { "put_flag_$it.ogg" }
         fun revealBombFiles() = filesCount(3).map { "reveal_mine_$it.ogg" }
+        fun revealBombReloadFile() = "reveal_mine_reload.ogg"
     }
 }
