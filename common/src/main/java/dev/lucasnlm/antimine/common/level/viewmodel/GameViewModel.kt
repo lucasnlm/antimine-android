@@ -8,9 +8,10 @@ import androidx.core.text.buildSpannedString
 import androidx.core.text.layoutDirection
 import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.common.R
-import dev.lucasnlm.antimine.common.level.logic.GameController
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
+import dev.lucasnlm.antimine.common.level.logic.GameController
+import dev.lucasnlm.antimine.common.level.models.ActionCompleted
 import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
@@ -20,7 +21,7 @@ import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
-import dev.lucasnlm.antimine.core.sound.ISoundManager
+import dev.lucasnlm.antimine.core.sound.IGameAudioManager
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Action
@@ -46,7 +47,7 @@ open class GameViewModel(
     private val dimensionRepository: IDimensionRepository,
     private val preferencesRepository: IPreferencesRepository,
     private val hapticFeedbackManager: HapticFeedbackManager,
-    private val soundManager: ISoundManager,
+    private val soundManager: IGameAudioManager,
     private val minefieldRepository: IMinefieldRepository,
     private val analyticsManager: IAnalyticsManager,
     private val playGamesManager: IPlayGamesManager,
@@ -473,9 +474,10 @@ open class GameViewModel(
         gameController
             .longPress(index)
             .filterNotNull()
-            .collect { action ->
-                onFeedbackAnalytics(action, index)
+            .collect { actionCompleted ->
+                onFeedbackAnalytics(actionCompleted.action, index)
                 onPostAction()
+                playActionSound(actionCompleted)
                 refreshField()
 
                 if (preferencesRepository.useHapticFeedback()) {
@@ -492,9 +494,10 @@ open class GameViewModel(
         gameController
             .doubleClick(index)
             .filterNotNull()
-            .collect { action ->
-                onFeedbackAnalytics(action, index)
+            .collect { actionCompleted ->
+                onFeedbackAnalytics(actionCompleted.action, index)
                 onPostAction()
+                playActionSound(actionCompleted)
                 refreshField()
             }
     }
@@ -504,16 +507,33 @@ open class GameViewModel(
             sendEvent(GameEvent.CreatingGameEvent)
         }
 
-        val initActions = gameController.getActionsCount()
-
         gameController
             .singleClick(index)
             .filterNotNull()
-            .collect { action ->
-                onFeedbackAnalytics(action, index)
+            .collect { actionCompleted ->
+                onFeedbackAnalytics(actionCompleted.action, index)
                 onPostAction()
+                playActionSound(actionCompleted)
                 refreshField()
             }
+    }
+
+    private fun playActionSound(actionCompleted: ActionCompleted) {
+        when (actionCompleted.action) {
+            Action.OpenTile -> soundManager.playOpenArea()
+            Action.OpenOrMark -> {
+                if (preferencesRepository.getSwitchControlAction() == Action.OpenTile) {
+                    soundManager.playOpenArea()
+                } else {
+                    soundManager.playPutFlag()
+                }
+            }
+            Action.SwitchMark, Action.QuestionMark -> soundManager.playPutFlag()
+            Action.OpenNeighbors -> soundManager.playOpenMultipleArea()
+            else -> {
+                // No sound
+            }
+        }
     }
 
     private fun onPostAction() {
@@ -523,10 +543,6 @@ open class GameViewModel(
 
         if (preferencesRepository.dimNumbers() && !gameController.isGameOver()) {
             gameController.runNumberDimmer()
-        }
-
-        if (preferencesRepository.isSoundEffectsEnabled()) {
-            soundManager.playOpenArea()
         }
 
         updateGameState()
@@ -611,8 +627,13 @@ open class GameViewModel(
     fun revealRandomMine(consume: Boolean = true): Int? {
         return if (initialized) {
             val result = gameController.revealRandomMine()
-            if (consume && result != null) {
-                sendEvent(GameEvent.ConsumeTip)
+
+            if (result != null) {
+                soundManager.playRevealBomb()
+
+                if (consume) {
+                    sendEvent(GameEvent.ConsumeTip)
+                }
             }
             result
         } else {
@@ -648,9 +669,8 @@ open class GameViewModel(
                     hapticFeedbackManager.explosionFeedback()
                 }
 
-                if (preferencesRepository.isSoundEffectsEnabled()) {
-                    soundManager.play(R.raw.mine_explosion_sound)
-                }
+                soundManager.playBombExplosion()
+                soundManager.pauseMusic()
             }
 
             if (hasIsolatedAllMines()) {
@@ -712,6 +732,8 @@ open class GameViewModel(
         checkVictoryAchievements()
         saveGame()
         saveStats()
+
+        soundManager.playWin()
 
         val rewardedHints = calcRewardHints()
         if (rewardedHints > 0) {

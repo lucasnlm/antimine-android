@@ -4,6 +4,7 @@ import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.database.models.Stats
+import dev.lucasnlm.antimine.common.level.models.ActionCompleted
 import dev.lucasnlm.antimine.common.level.solver.LimitedCheckNeighborsSolver
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
@@ -12,6 +13,7 @@ import dev.lucasnlm.antimine.core.models.Score
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withTimeout
 
@@ -239,7 +241,7 @@ class GameController {
         }
     }
 
-    fun singleClick(index: Int) = flow {
+    fun singleClick(index: Int): Flow<ActionCompleted> = flow {
         if (!creatingMinefield) {
             getArea(index)?.let { target ->
                 val action = if (target.isCovered) {
@@ -250,13 +252,15 @@ class GameController {
                 action?.let {
                     val initActions = actions
                     handleAction(target, action)
-                    emit(action)
+                    emit(
+                        ActionCompleted(action, actions - initActions),
+                    )
                 }
             }
         }
     }
 
-    fun doubleClick(index: Int) = flow {
+    fun doubleClick(index: Int): Flow<ActionCompleted> = flow {
         if (!creatingMinefield) {
             getArea(index)?.let { target ->
                 val action = if (target.isCovered) {
@@ -265,14 +269,17 @@ class GameController {
                     gameControl.onUncovered.doubleClick
                 }
                 action?.let {
+                    val initActions = actions
                     handleAction(target, action)
-                    emit(action)
+                    emit(
+                        ActionCompleted(action, actions - initActions),
+                    )
                 }
             }
         }
     }
 
-    fun longPress(index: Int) = flow {
+    fun longPress(index: Int): Flow<ActionCompleted> = flow {
         if (!creatingMinefield) {
             getArea(index)?.let { target ->
                 if (target.isCovered || target.minesAround != 0) {
@@ -282,8 +289,11 @@ class GameController {
                         gameControl.onUncovered.longPress
                     }
                     action?.let {
+                        val initActions = actions
                         handleAction(target, action)
-                        emit(action)
+                        emit(
+                            ActionCompleted(action, actions - initActions),
+                        )
                     }
                 }
             }

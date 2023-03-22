@@ -25,7 +25,7 @@ import dev.lucasnlm.antimine.control.ControlActivity
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
-import dev.lucasnlm.antimine.core.sound.ISoundManager
+import dev.lucasnlm.antimine.core.sound.IGameAudioManager
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.databinding.ActivityMainBinding
 import dev.lucasnlm.antimine.history.HistoryActivity
@@ -58,7 +58,7 @@ class MainActivity : ThemedActivity() {
     private val inAppUpdateManager: IInAppUpdateManager by inject()
     private val instantAppManager: IInstantAppManager by inject()
     private val preferenceRepository: IPreferencesRepository by inject()
-    private val soundManager: ISoundManager by inject()
+    private val soundManager: IGameAudioManager by inject()
 
     private lateinit var viewPager: ViewPager2
     private lateinit var googlePlayLauncher: ActivityResultLauncher<Intent>

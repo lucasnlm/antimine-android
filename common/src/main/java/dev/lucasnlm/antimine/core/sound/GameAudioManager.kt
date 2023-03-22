@@ -3,47 +3,35 @@ package dev.lucasnlm.antimine.core.sound
 import android.content.Context
 import android.content.res.AssetFileDescriptor
 import android.media.MediaPlayer
-import androidx.annotation.RawRes
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.external.ICrashReporter
 
-interface ISoundManager {
-    fun play(@RawRes soundId: Int)
-    fun playMusic()
-    fun pauseMusic()
-    fun resumeMusic()
-    fun stopMusic()
-    fun playClickSound(index: Int = 0)
-    fun playOpenArea()
-    fun free()
-}
-
-class SoundManager(
+class GameAudioManager(
     private val context: Context,
     private val crashReporter: ICrashReporter,
     private val preferencesRepository: IPreferencesRepository,
-) : ISoundManager {
+) : IGameAudioManager {
     private var musicMediaPlayer: MediaPlayer? = null
 
-    override fun play(@RawRes soundId: Int) {
-        try {
-            MediaPlayer.create(context, soundId).apply {
-                setVolume(0.7f, 0.7f)
-                setOnCompletionListener {
-                    release()
-                }
-            }.start()
-        } catch (e: Exception) {
-            // Some Huawei phones may fail to play sounds.
-            // Adding this try catch to at lease to make they crash.
-            crashReporter.sendError("Fail to play sound.\n${e.message}")
+    override fun playBombExplosion() {
+        if (preferencesRepository.isSoundEffectsEnabled()) {
+            val fileName = bombExplosionFileName()
+            playSoundFromAssets(fileName)
+        }
+    }
+
+    override fun playWin() {
+        if (preferencesRepository.isSoundEffectsEnabled()) {
+            val fileName = winFileName()
+            playSoundFromAssets(fileName)
         }
     }
 
     override fun playMusic() {
         if (preferencesRepository.isMusicEnabled()) {
             if (musicMediaPlayer == null) {
-                val musicFd = tryOpenFd(MUSIC_FILE_NAME)
+                val musicName = musicFileName()
+                val musicFd = tryOpenFd(musicName)
 
                 musicFd?.use {
                     musicMediaPlayer = MediaPlayer().apply {
@@ -63,11 +51,19 @@ class SoundManager(
     }
 
     override fun pauseMusic() {
-        musicMediaPlayer?.pause()
+        try {
+            if (musicMediaPlayer?.isPlaying == true) {
+                musicMediaPlayer?.pause()
+            }
+        } catch (e: IllegalStateException) {
+            // Ignore
+        }
     }
 
     override fun resumeMusic() {
-        musicMediaPlayer?.start()
+        if (preferencesRepository.isSoundEffectsEnabled()) {
+            musicMediaPlayer?.start()
+        }
     }
 
     override fun stopMusic() {
@@ -79,20 +75,29 @@ class SoundManager(
     }
 
     override fun playClickSound(index: Int) {
-        when (index) {
-            0 -> playSoundFromAssets(SFX_CLICK_0_NAME)
-            1 -> playSoundFromAssets(SFX_CLICK_1_NAME)
-            2 -> playSoundFromAssets(SFX_CLICK_2_NAME)
+        if (preferencesRepository.isSoundEffectsEnabled()) {
+            val clickFileNames = clickFileName()
+            if (index < clickFileNames.size) {
+                val fileClickName = clickFileNames[index]
+                playSoundFromAssets(fileClickName)
+            }
         }
     }
 
     override fun playOpenArea() {
-        listOf(
-            SFX_OPEN_AREA_0,
-            SFX_OPEN_AREA_1,
-            SFX_OPEN_AREA_2,
-            SFX_OPEN_AREA_3,
-        ).shuffled().first().also(::playSoundFromAssets)
+        openAreaFiles().pickOneAndPlay()
+    }
+
+    override fun playPutFlag() {
+        putFlagFiles().pickOneAndPlay()
+    }
+
+    override fun playOpenMultipleArea() {
+        openMultipleFiles().pickOneAndPlay()
+    }
+
+    override fun playRevealBomb() {
+        revealBombFiles().pickOneAndPlay()
     }
 
     override fun free() {
@@ -131,14 +136,24 @@ class SoundManager(
         }
     }
 
+    private fun List<String>.pickOne() = this.shuffled().first()
+
+    private fun List<String>.pickOneAndPlay() {
+        if (preferencesRepository.isSoundEffectsEnabled()) {
+            pickOne().also(::playSoundFromAssets)
+        }
+    }
+
     companion object {
-        const val MUSIC_FILE_NAME = "music.ogg"
-        const val SFX_CLICK_0_NAME = "menu_click.ogg"
-        const val SFX_CLICK_1_NAME = "menu_click_alt.ogg"
-        const val SFX_CLICK_2_NAME = "menu_click_back.ogg"
-        const val SFX_OPEN_AREA_0 = "open_area_0.ogg"
-        const val SFX_OPEN_AREA_1 = "open_area_1.ogg"
-        const val SFX_OPEN_AREA_2 = "open_area_2.ogg"
-        const val SFX_OPEN_AREA_3 = "open_area_3.ogg"
+        private fun filesCount(count: Int) = (0 until count)
+
+        fun winFileName() = "win.ogg"
+        fun bombExplosionFileName() = "bomb_explosion.ogg"
+        fun clickFileName() = listOf("menu_click.ogg", "menu_click_alt.ogg", "menu_click_back.ogg")
+        fun musicFileName() = "music.ogg"
+        fun openAreaFiles() = filesCount(4).map { "open_area_$it.ogg" }
+        fun openMultipleFiles() = filesCount(3).map { "open_multiple_$it.ogg" }
+        fun putFlagFiles() = filesCount(3).map { "put_flag_$it.ogg" }
+        fun revealBombFiles() = filesCount(3).map { "reveal_mine_$it.ogg" }
     }
 }

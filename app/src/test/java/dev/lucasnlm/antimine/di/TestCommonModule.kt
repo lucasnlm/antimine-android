@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.di
 
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
-import dev.lucasnlm.antimine.core.sound.ISoundManager
+import dev.lucasnlm.antimine.core.sound.IGameAudioManager
 import dev.lucasnlm.antimine.mocks.FixedDimensionRepository
 import dev.lucasnlm.antimine.mocks.MockPreferencesRepository
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
@@ -19,10 +19,10 @@ val TestCommonModule = module {
     single { MockPreferencesRepository() } bind IPreferencesRepository::class
 
     single {
-        object : ISoundManager {
+        object : IGameAudioManager {
             override fun play(soundId: Int) {}
         }
-    } bind ISoundManager::class
+    } bind IGameAudioManager::class
 
     single {
         object : IThemeRepository {
