@@ -15,11 +15,11 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val ViewModelModule = module {
-    viewModel { AboutViewModel(get()) }
+    viewModel { AboutViewModel(get(), get()) }
     viewModel { LicenseViewModel() }
     viewModel { ControlViewModel(get(), get()) }
     viewModel { CreateGameViewModel(get()) }
-    viewModel { HistoryViewModel(get(), get()) }
+    viewModel { HistoryViewModel(get(), get(), get()) }
     viewModel { EndGameDialogViewModel(get()) }
     viewModel { PlayGamesViewModel(get(), get()) }
     viewModel { StatsViewModel(get(), get(), get(), get()) }

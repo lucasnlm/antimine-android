@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine.tutorial
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import dev.lucasnlm.antimine.core.audio.IGameAudioManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.tutorial.databinding.TutorialActivityBinding
@@ -14,6 +15,7 @@ class TutorialActivity : ThemedActivity() {
     private lateinit var binding: TutorialActivityBinding
     private val preferencesRepository: IPreferencesRepository by inject()
     private val analyticsManager: IAnalyticsManager by inject()
+    private val audioManager: IGameAudioManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +29,8 @@ class TutorialActivity : ThemedActivity() {
 
         binding.playGame.setOnClickListener {
             finish()
+
+            audioManager.playClickSound()
 
             val deeplink = Uri.parse(NEW_GAME_DEEPLINK)
             val intent = Intent(Intent.ACTION_VIEW, deeplink).apply {

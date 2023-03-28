@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.di
 
+import dev.lucasnlm.antimine.core.audio.IGameAudioManager
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
-import dev.lucasnlm.antimine.core.sound.IGameAudioManager
 import dev.lucasnlm.antimine.mocks.FixedDimensionRepository
 import dev.lucasnlm.antimine.mocks.MockPreferencesRepository
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository

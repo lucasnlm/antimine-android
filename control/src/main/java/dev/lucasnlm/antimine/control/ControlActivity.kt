@@ -9,6 +9,7 @@ import dev.lucasnlm.antimine.control.databinding.ActivityControlBinding
 import dev.lucasnlm.antimine.control.view.ControlAdapter
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
+import dev.lucasnlm.antimine.core.audio.IGameAudioManager
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
@@ -20,6 +21,7 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
 
     private val viewModel: ControlViewModel by inject()
     private val preferencesRepository: IPreferencesRepository by inject()
+    private val gameAudioManager: IGameAudioManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,7 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
             selected = preferencesRepository.controlStyle(),
             onControlSelected = { controlStyle ->
                 viewModel.sendEvent(ControlEvent.SelectControlStyle(controlStyle))
+                gameAudioManager.playClickSound()
             },
         )
 

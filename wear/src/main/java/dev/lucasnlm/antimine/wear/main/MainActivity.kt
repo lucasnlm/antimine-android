@@ -11,7 +11,7 @@ import dev.lucasnlm.antimine.wear.databinding.ActivityMainBinding
 import dev.lucasnlm.antimine.wear.game.WearGameActivity
 import dev.lucasnlm.antimine.wear.main.models.MenuItem
 import dev.lucasnlm.antimine.wear.main.view.MainMenuAdapter
-import dev.lucasnlm.antimine.wear.tutorial.TutorialActivity
+import dev.lucasnlm.antimine.wear.tutorial.WearTutorialActivity
 import org.koin.android.ext.android.inject
 
 class MainActivity : ThemedActivity() {
@@ -117,7 +117,7 @@ class MainActivity : ThemedActivity() {
     }
 
     private fun startTutorial() {
-        val intent = Intent(this, TutorialActivity::class.java)
+        val intent = Intent(this, WearTutorialActivity::class.java)
         startActivity(intent)
     }
 }

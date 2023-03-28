@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.core.sound
+package dev.lucasnlm.antimine.core.audio
 
 interface IGameAudioManager {
     fun playWin()
@@ -12,6 +12,8 @@ interface IGameAudioManager {
     fun playPutFlag()
     fun playOpenMultipleArea()
     fun playRevealBomb()
+    fun playMonetization()
     fun playRevealBombReloaded()
     fun free()
+    fun getComposerData(): List<ComposerData>
 }

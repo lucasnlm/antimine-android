@@ -14,6 +14,7 @@ import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
 import com.google.android.material.materialswitch.MaterialSwitch
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.core.audio.IGameAudioManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.databinding.ActivityPreferencesBinding
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
@@ -26,6 +27,7 @@ class PreferencesActivity :
     ThemedActivity(),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
+    private val audioManager: IGameAudioManager by inject()
     private val playGamesManager: IPlayGamesManager by inject()
     private val preferenceRepository: IPreferencesRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
@@ -45,9 +47,11 @@ class PreferencesActivity :
         initialValue: Boolean,
         onChangeValue: (Boolean) -> Unit,
     ) {
+        isSoundEffectsEnabled = false
         isChecked = initialValue
         setOnCheckedChangeListener { _, newCheckedState ->
             onChangeValue(newCheckedState)
+            audioManager.playClickSound(if (newCheckedState) 0 else 1)
         }
     }
 

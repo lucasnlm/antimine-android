@@ -1,14 +1,12 @@
-package dev.lucasnlm.antimine.core.sound
+package dev.lucasnlm.antimine.core.audio
 
 import android.content.Context
 import android.content.res.AssetFileDescriptor
 import android.media.MediaPlayer
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.external.ICrashReporter
 
 class GameAudioManager(
     private val context: Context,
-    private val crashReporter: ICrashReporter,
     private val preferencesRepository: IPreferencesRepository,
 ) : IGameAudioManager {
     private var musicMediaPlayer: MediaPlayer? = null
@@ -31,16 +29,13 @@ class GameAudioManager(
         if (preferencesRepository.isMusicEnabled()) {
             if (musicMediaPlayer == null) {
                 val musicName = musicFileName()
-                val musicFd = tryOpenFd(musicName)
-
-                musicFd?.use {
-                    musicMediaPlayer = MediaPlayer().apply {
-                        setDataSource(it.fileDescriptor, it.startOffset, it.length)
-                        prepare()
-                        setVolume(MUSIC_MAX_VOLUME, MUSIC_MAX_VOLUME)
-                        isLooping = true
-                        start()
-                    }
+                tryOpenFd(musicName)?.use { musicFd ->
+                    musicMediaPlayer = playWithMediaPlayer(
+                        soundAsset = musicFd,
+                        volume = MUSIC_MAX_VOLUME,
+                        repeat = true,
+                        releaseOnComplete = false,
+                    )
                 }
             } else if (musicMediaPlayer?.isPlaying == false) {
                 musicMediaPlayer?.start()
@@ -100,6 +95,10 @@ class GameAudioManager(
         revealBombFiles().pickOneAndPlay()
     }
 
+    override fun playMonetization() {
+        revealBombFiles().pickOneAndPlay()
+    }
+
     override fun playRevealBombReloaded() {
         val fileName = revealBombReloadFile()
         playSoundFromAssets(fileName)
@@ -109,26 +108,53 @@ class GameAudioManager(
         stopMusic()
     }
 
-    private fun playSoundFromAssets(fileName: String) {
+    override fun getComposerData(): List<ComposerData> {
+        return listOf(
+            ComposerData(
+                composer = "Tatyana Jacques",
+                composerLink = "https://open.spotify.com/artist/5Z1PXKko20wSH0yFr9HtNr",
+            ),
+        )
+    }
+
+    private fun playWithMediaPlayer(
+        soundAsset: AssetFileDescriptor,
+        volume: Float,
+        repeat: Boolean,
+        releaseOnComplete: Boolean,
+        seekTo: Int? = null,
+    ): MediaPlayer {
+        val mediaPlayer = MediaPlayer()
         try {
-            tryOpenFd(fileName)?.use { soundAsset ->
-                MediaPlayer().apply {
-                    setDataSource(soundAsset.fileDescriptor, soundAsset.startOffset, soundAsset.length)
-                    prepare()
-                    setVolume(SFX_MAX_VOLUME, SFX_MAX_VOLUME)
-                    seekTo(0)
-                    isLooping = false
+            mediaPlayer.run {
+                setDataSource(soundAsset.fileDescriptor, soundAsset.startOffset, soundAsset.length)
+                prepare()
+                setVolume(volume, volume)
+                seekTo?.let { seekTo(it) }
+                isLooping = repeat
+                if (releaseOnComplete) {
                     setOnCompletionListener {
                         release()
                     }
-                    start()
-                }.start()
+                }
+                start()
             }
-        } catch (e: Exception) {
-            // Some Huawei phones may fail to play sounds.
-            // Adding this try catch to at lease to make they crash.
-            crashReporter.sendError("Fail to play sound '$fileName'.")
-        } finally {
+        } catch (_: Exception) {
+            // Fail to load or play file. Ignore.
+            mediaPlayer.release()
+        }
+        return mediaPlayer
+    }
+
+    private fun playSoundFromAssets(fileName: String) {
+        tryOpenFd(fileName)?.use { soundAsset ->
+            playWithMediaPlayer(
+                soundAsset = soundAsset,
+                volume = SFX_MAX_VOLUME,
+                repeat = false,
+                releaseOnComplete = true,
+                seekTo = 0,
+            )
         }
     }
 
@@ -136,7 +162,7 @@ class GameAudioManager(
         return try {
             context.assets.openFd(fileName)
         } catch (e: Exception) {
-            // Failed to load, file not exist.
+            // Failed to load, file does not exist.
             null
         }
     }

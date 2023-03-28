@@ -41,6 +41,8 @@ class ThemeAdapter(
         val theme = themes[position]
 
         holder.itemView.apply {
+            isSoundEffectsEnabled = false
+
             val selected = (theme.id == themeViewModel.singleState().currentTheme.id)
 
             holder.binding.covered.setBackgroundColor(theme.palette.covered.toAndroidColor())
@@ -68,6 +70,7 @@ class ThemeAdapter(
                         if (selected) R.attr.colorTertiary else R.attr.backgroundColor,
                     ),
                 )
+                isSoundEffectsEnabled = false
                 setOnClickListener {
                     if (preferencesRepository.isPremiumEnabled()) {
                         onSelectTheme(theme)

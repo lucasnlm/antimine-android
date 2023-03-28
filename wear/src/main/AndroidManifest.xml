@@ -14,7 +14,7 @@
         android:required="true" />
 
     <application
-        android:name="dev.lucasnlm.antimine.wear.WatchMainApplication"
+        android:name="dev.lucasnlm.antimine.wear.WearMainApplication"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
         android:allowBackup="true"
         android:allowClearUserData="true"
@@ -73,7 +73,7 @@
             android:exported="true"/>
 
         <activity
-            android:name=".tutorial.TutorialActivity"
+            android:name=".tutorial.WearTutorialActivity"
             android:exported="true"/>
     </application>
 

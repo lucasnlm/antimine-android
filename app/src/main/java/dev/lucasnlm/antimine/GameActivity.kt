@@ -26,13 +26,13 @@ import dev.lucasnlm.antimine.common.level.view.GameRenderFragment
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.ControlActivity
+import dev.lucasnlm.antimine.core.audio.IGameAudioManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.serializableNonSafe
-import dev.lucasnlm.antimine.core.sound.GameAudioManager
 import dev.lucasnlm.antimine.databinding.ActivityGameBinding
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
@@ -65,7 +65,7 @@ class GameActivity :
     private val instantAppManager: IInstantAppManager by inject()
     private val savesRepository: ISavesRepository by inject()
     private val playGamesManager: IPlayGamesManager by inject()
-    private val gameAudioManager: GameAudioManager by inject()
+    private val gameAudioManager: IGameAudioManager by inject()
     private val adsManager: IAdsManager by inject()
     private val reviewWrapper: ReviewWrapper by inject()
     private val featureFlagManager: IFeatureFlagManager by inject()
@@ -86,8 +86,9 @@ class GameActivity :
     private fun Int.toL10nString() = String.format("%d", this)
 
     private fun showGameWarning(@StringRes text: Int) {
+        val isSwitchAndOpen = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
         warning?.dismiss()
-        warning = showWarning(text)
+        warning = showWarning(text, isSwitchAndOpen)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -289,11 +290,7 @@ class GameActivity :
             gameViewModel.observeSideEffects().collect {
                 when (it) {
                     is GameEvent.ShowNoGuessFailWarning -> {
-                        warning = Snackbar.make(
-                            binding.root,
-                            R.string.no_guess_fail_warning,
-                            Snackbar.LENGTH_INDEFINITE,
-                        ).apply {
+                        warning = showWarning(R.string.no_guess_fail_warning).apply {
                             setAction(R.string.ok) {
                                 warning?.dismiss()
                             }
@@ -635,6 +632,7 @@ class GameActivity :
             setColorFilter(binding.minesCount.currentTextColor)
             setOnClickListener {
                 lifecycleScope.launch {
+                    gameAudioManager.playClickSound()
                     val confirmResign = gameViewModel.singleState().isActive
                     analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
 

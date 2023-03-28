@@ -115,6 +115,7 @@ class OfferCardButtonView : FrameLayout {
                 backgroundColor
             }
             setCardBackgroundColor(backgroundColor)
+            isSoundEffectsEnabled = false
 
             setOnFocusChangeListener { _, focused ->
                 val focusedBackgroundColor = if (focused) {

@@ -5,42 +5,39 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
 import dev.lucasnlm.antimine.about.R
+import dev.lucasnlm.antimine.core.audio.IGameAudioManager
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.licenses.LicenseActivity
-import dev.lucasnlm.antimine.tutorial.TutorialActivity
 
 class AboutViewModel(
     private val application: Application,
+    private val audioManager: IGameAudioManager,
 ) : StatelessViewModel<AboutEvent>() {
 
     override fun onEvent(event: AboutEvent) {
         when (event) {
             AboutEvent.ThirdPartyLicenses -> {
+                playClickSound()
                 openLicensesActivity()
             }
             AboutEvent.SourceCode -> {
+                playClickSound()
                 openSourceCode()
             }
             AboutEvent.Translators -> {
+                playClickSound()
                 openCrowdin()
             }
-            AboutEvent.Tutorial -> {
-                openTutorial()
-            }
         }
+    }
+
+    private fun playClickSound() {
+        audioManager.playClickSound()
     }
 
     private fun openLicensesActivity() {
         val context = application.applicationContext
         val intent = Intent(context, LicenseActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        context.startActivity(intent)
-    }
-
-    private fun openTutorial() {
-        val context = application.applicationContext
-        val intent = Intent(context, TutorialActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         context.startActivity(intent)

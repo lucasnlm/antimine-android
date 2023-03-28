@@ -5,6 +5,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dev.lucasnlm.antimine.core.audio.IGameAudioManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.repository.IDimensionRepository
@@ -35,6 +36,7 @@ class ThemeActivity : ThemedActivity() {
     private val billingManager: IBillingManager by inject()
     private val adsManager: IAdsManager by inject()
     private val analyticsManager: IAnalyticsManager by inject()
+    private val gameAudioManager: IGameAudioManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +62,7 @@ class ThemeActivity : ThemedActivity() {
                     lifecycleScope.launch {
                         billingManager.charge(this@ThemeActivity)
                     }
+                    gameAudioManager.playClickSound()
                 },
             )
 
@@ -75,6 +78,7 @@ class ThemeActivity : ThemedActivity() {
                             lifecycleScope.launch {
                                 billingManager.charge(this@ThemeActivity)
                             }
+                            gameAudioManager.playClickSound()
                         },
                     )
                 }
@@ -91,11 +95,13 @@ class ThemeActivity : ThemedActivity() {
                 preferencesRepository = preferencesRepository,
                 onSelectTheme = { theme ->
                     themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+                    gameAudioManager.playClickSound()
                 },
                 onRequestPurchase = {
                     lifecycleScope.launch {
                         billingManager.charge(this@ThemeActivity)
                     }
+                    gameAudioManager.playMonetization()
                 },
             )
 
@@ -105,11 +111,13 @@ class ThemeActivity : ThemedActivity() {
                 preferencesRepository = preferencesRepository,
                 onSelectSkin = { skin ->
                     themeViewModel.sendEvent(ThemeEvent.ChangeSkin(skin))
+                    gameAudioManager.playClickSound()
                 },
                 onRequestPurchase = {
                     lifecycleScope.launch {
                         billingManager.charge(this@ThemeActivity)
                     }
+                    gameAudioManager.playMonetization()
                 },
             )
 

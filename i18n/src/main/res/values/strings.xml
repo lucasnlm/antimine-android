@@ -56,6 +56,7 @@
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Sound Effects</string>
     <string name="music">Music</string>
+    <string name="music_by">Music by %1$s</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="enable_automatic_flags">Enable automatic placing of flags</string>
     <string name="open_areas">Open Areas</string>

@@ -51,6 +51,8 @@ class SkinAdapter(
         val context = holder.itemView.context
 
         holder.itemView.apply {
+            isSoundEffectsEnabled = false
+
             val selected = (skin.id == themeViewModel.singleState().currentAppSkin.id)
 
             val backgroundColor = MaterialColors.getColorStateListOrNull(
@@ -66,6 +68,7 @@ class SkinAdapter(
             holder.binding.cardSkin.apply {
                 backgroundTintList = backgroundColor
                 setStrokeColor(strokeColor)
+                isSoundEffectsEnabled = false
                 setOnClickListener {
                     if (preferencesRepository.isPremiumEnabled()) {
                         onSelectSkin(skin)
@@ -80,6 +83,7 @@ class SkinAdapter(
                 val paddingValue = context.dpToPx(8)
                 alpha = if (selected) 1.0f else floatAlpha
                 setImageResource(skin.imageRes)
+                isSoundEffectsEnabled = false
                 if (skin.canTint) {
                     setColorFilter(tintColor, PorterDuff.Mode.MULTIPLY)
                 } else {
