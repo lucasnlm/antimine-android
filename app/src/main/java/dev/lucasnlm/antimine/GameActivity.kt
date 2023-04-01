@@ -352,6 +352,7 @@ class GameActivity :
                             withContext(Dispatchers.Main) {
                                 showKonfettiView()
                             }
+                            gameAudioManager.pauseMusic()
                             showEndGameToast(GameResult.Victory)
                         }
                     }
