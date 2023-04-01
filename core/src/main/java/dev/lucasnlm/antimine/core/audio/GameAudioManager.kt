@@ -2,7 +2,9 @@ package dev.lucasnlm.antimine.core.audio
 
 import android.content.Context
 import android.content.res.AssetFileDescriptor
+import android.media.AudioAttributes
 import android.media.MediaPlayer
+import android.os.Build
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 
 class GameAudioManager(
@@ -25,19 +27,24 @@ class GameAudioManager(
         }
     }
 
+    private fun buildMusicMediaPlayer(assetFileDescriptor: AssetFileDescriptor): MediaPlayer {
+        return playWithMediaPlayer(
+            soundAsset = assetFileDescriptor,
+            volume = MUSIC_MAX_VOLUME,
+            repeat = true,
+            releaseOnComplete = false,
+            isMusic = true,
+        )
+    }
+
     override fun playMusic() {
         if (preferencesRepository.isMusicEnabled()) {
             if (musicMediaPlayer == null) {
                 val musicName = musicFileName()
                 tryOpenFd(musicName)?.use { musicFd ->
-                    musicMediaPlayer = playWithMediaPlayer(
-                        soundAsset = musicFd,
-                        volume = MUSIC_MAX_VOLUME,
-                        repeat = true,
-                        releaseOnComplete = false,
-                    )
+                    musicMediaPlayer = buildMusicMediaPlayer(musicFd)
                 }
-            } else if (musicMediaPlayer?.isPlaying == false) {
+            } else {
                 musicMediaPlayer?.start()
             }
         } else {
@@ -57,7 +64,9 @@ class GameAudioManager(
 
     override fun resumeMusic() {
         if (preferencesRepository.isSoundEffectsEnabled()) {
-            musicMediaPlayer?.start()
+            if (musicMediaPlayer?.isPlaying == false) {
+                musicMediaPlayer?.start()
+            }
         }
     }
 
@@ -66,6 +75,7 @@ class GameAudioManager(
             stop()
             release()
         }
+
         musicMediaPlayer = null
     }
 
@@ -117,11 +127,32 @@ class GameAudioManager(
         )
     }
 
+    private fun getAudioAttributes(isMusic: Boolean): AudioAttributes {
+        return AudioAttributes.Builder().apply {
+            setUsage(AudioAttributes.USAGE_GAME)
+
+            if (isMusic) {
+                setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            } else {
+                setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                if (isMusic) {
+                    setAllowedCapturePolicy(AudioAttributes.ALLOW_CAPTURE_BY_NONE)
+                } else {
+                    setAllowedCapturePolicy(AudioAttributes.ALLOW_CAPTURE_BY_ALL)
+                }
+            }
+        }.build()
+    }
+
     private fun playWithMediaPlayer(
         soundAsset: AssetFileDescriptor,
         volume: Float,
         repeat: Boolean,
         releaseOnComplete: Boolean,
+        isMusic: Boolean = false,
         seekTo: Int? = null,
     ): MediaPlayer {
         val mediaPlayer = MediaPlayer()
@@ -129,8 +160,9 @@ class GameAudioManager(
             mediaPlayer.run {
                 setDataSource(soundAsset.fileDescriptor, soundAsset.startOffset, soundAsset.length)
                 prepare()
+                setAudioAttributes(getAudioAttributes(isMusic))
                 setVolume(volume, volume)
-                seekTo?.let { seekTo(it) }
+                seekTo?.let(::seekTo)
                 isLooping = repeat
                 if (releaseOnComplete) {
                     setOnCompletionListener {
@@ -154,6 +186,7 @@ class GameAudioManager(
                 repeat = false,
                 releaseOnComplete = true,
                 seekTo = 0,
+                isMusic = false,
             )
         }
     }
