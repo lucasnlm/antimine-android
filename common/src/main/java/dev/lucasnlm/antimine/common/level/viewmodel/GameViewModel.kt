@@ -172,7 +172,7 @@ open class GameViewModel(
 
                             val totalMines = gameController.mines().count()
                             val sideEffect = GameEvent.VictoryDialog(
-                                delayToShow = 0L,
+                                delayToShow = 1500L,
                                 totalMines = totalMines,
                                 rightMines = totalMines,
                                 timestamp = state.duration,

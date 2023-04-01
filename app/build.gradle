@@ -154,6 +154,9 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
 
+    // Konfetti
+    implementation 'nl.dionsegijn:konfetti-xml:2.0.2'
+
     // Tests
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'androidx.core:core-ktx:1.9.0'

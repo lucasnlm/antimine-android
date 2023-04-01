@@ -51,8 +51,12 @@ import dev.lucasnlm.external.IInstantAppManager
 import dev.lucasnlm.external.IPlayGamesManager
 import dev.lucasnlm.external.ReviewWrapper
 import kotlinx.coroutines.*
+import nl.dionsegijn.konfetti.core.Party
+import nl.dionsegijn.konfetti.core.Position
+import nl.dionsegijn.konfetti.core.emitter.Emitter
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.concurrent.TimeUnit
 
 class GameActivity :
     ThemedActivity(),
@@ -182,6 +186,10 @@ class GameActivity :
                 if (it.turn == 0 && (it.saveId == 0L || it.isLoadingMap || it.isCreatingGame)) {
                     warning?.dismiss()
                     warning = null
+
+                    withContext(Dispatchers.Main) {
+                        stopKonfettiView()
+                    }
 
                     val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
@@ -314,8 +322,15 @@ class GameActivity :
                     }
                     is GameEvent.VictoryDialog -> {
                         if (preferencesRepository.showWindowsWhenFinishGame()) {
+                            withContext(Dispatchers.Main) {
+                                showKonfettiView()
+                            }
+
                             lifecycleScope.launch {
                                 delay(it.delayToShow)
+
+                                gameAudioManager.pauseMusic()
+
                                 WinGameDialogFragment.newInstance(
                                     gameResult = GameResult.Victory,
                                     showContinueButton = false,
@@ -334,6 +349,9 @@ class GameActivity :
                                 }
                             }
                         } else {
+                            withContext(Dispatchers.Main) {
+                                showKonfettiView()
+                            }
                             showEndGameToast(GameResult.Victory)
                         }
                     }
@@ -766,6 +784,26 @@ class GameActivity :
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         } else {
             window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+    }
+
+    private fun stopKonfettiView() {
+        binding.konfettiView?.stopGracefully()
+    }
+
+    private fun showKonfettiView() {
+        binding.konfettiView?.apply {
+            start(
+                Party(
+                    speed = 0f,
+                    maxSpeed = 30f,
+                    damping = 0.9f,
+                    spread = 360,
+                    colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
+                    emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(100),
+                    position = Position.Relative(0.5, 0.2),
+                ),
+            )
         }
     }
 
