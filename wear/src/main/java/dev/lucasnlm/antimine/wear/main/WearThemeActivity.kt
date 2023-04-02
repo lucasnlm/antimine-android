@@ -9,7 +9,7 @@ import dev.lucasnlm.antimine.wear.databinding.ActivityThemesBinding
 import dev.lucasnlm.antimine.wear.main.view.ThemeListAdapter
 import org.koin.android.ext.android.inject
 
-class ThemeActivity : ThemedActivity() {
+class WearThemeActivity : ThemedActivity() {
     private lateinit var binding: ActivityThemesBinding
     private val preferencesRepository: IPreferencesRepository by inject()
     private val themesRepository: IThemeRepository by inject()
@@ -26,7 +26,7 @@ class ThemeActivity : ThemedActivity() {
     private fun refreshThemeList() {
         binding.recyclerView.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this@ThemeActivity)
+            layoutManager = LinearLayoutManager(this@WearThemeActivity)
             adapter = ThemeListAdapter(
                 themes = themesRepository.getAllThemes(),
                 preferencesRepository = preferencesRepository,

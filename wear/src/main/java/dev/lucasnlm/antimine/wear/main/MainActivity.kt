@@ -112,7 +112,7 @@ class MainActivity : ThemedActivity() {
     }
 
     private fun startThemeScreen() {
-        val intent = Intent(this, ThemeActivity::class.java)
+        val intent = Intent(this, WearThemeActivity::class.java)
         startActivity(intent)
     }
 

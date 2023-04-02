@@ -47,7 +47,8 @@ class SkinAdapter(
 
     override fun onBindViewHolder(holder: SkinViewHolder, position: Int) {
         val skin = appSkins[position]
-        val tintColor = themeRepository.getTheme().palette.covered.toAndroidColor()
+        val palette = themeRepository.getTheme().palette
+        val tintColor = palette.covered.toAndroidColor()
         val context = holder.itemView.context
 
         holder.itemView.apply {
@@ -60,10 +61,7 @@ class SkinAdapter(
                 R.attr.backgroundColor,
             )
 
-            val strokeColor = MaterialColors.getColorStateListOrNull(
-                context,
-                if (selected) R.attr.colorTertiary else R.attr.backgroundColor,
-            )
+            val strokeColor = palette.background.toAndroidColor()
 
             holder.binding.cardSkin.apply {
                 backgroundTintList = backgroundColor

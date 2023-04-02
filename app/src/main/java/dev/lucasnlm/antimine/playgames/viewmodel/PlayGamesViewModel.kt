@@ -14,8 +14,18 @@ class PlayGamesViewModel(
 ) : StatelessViewModel<PlayGamesEvent>() {
 
     val playGamesItems = listOf(
-        PlayGamesItem(0, R.drawable.games_achievements, R.string.achievements, PlayGamesEvent.OpenAchievements),
-        PlayGamesItem(1, R.drawable.games_leaderboards, R.string.leaderboards, PlayGamesEvent.OpenLeaderboards),
+        PlayGamesItem(
+            id = 0,
+            iconRes = R.drawable.games_achievements,
+            stringRes = R.string.achievements,
+            triggerEvent = PlayGamesEvent.OpenAchievements
+        ),
+        PlayGamesItem(
+            id = 1,
+            iconRes = R.drawable.games_leaderboards,
+            stringRes = R.string.leaderboards,
+            triggerEvent = PlayGamesEvent.OpenLeaderboards
+        ),
     )
 
     fun openAchievements(activity: Activity) {

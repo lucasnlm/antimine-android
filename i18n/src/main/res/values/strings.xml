@@ -58,6 +58,7 @@
     <string name="music">Music</string>
     <string name="music_by">Music by %1$s</string>
     <string name="check_music">Listen on Spotify…</string>
+    <string name="selected">Selected</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="enable_automatic_flags">Enable automatic placing of flags</string>
     <string name="open_areas">Open Areas</string>

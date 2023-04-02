@@ -69,7 +69,7 @@
             android:exported="true"/>
 
         <activity
-            android:name=".main.ThemeActivity"
+            android:name=".main.WearThemeActivity"
             android:exported="true"/>
 
         <activity

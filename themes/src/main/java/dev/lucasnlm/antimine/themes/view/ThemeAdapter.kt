@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.themes.R
 import dev.lucasnlm.antimine.themes.databinding.ViewThemeBinding
@@ -45,10 +44,25 @@ class ThemeAdapter(
 
             val selected = (theme.id == themeViewModel.singleState().currentTheme.id)
 
-            holder.binding.covered.setBackgroundColor(theme.palette.covered.toAndroidColor())
-            holder.binding.uncovered.setBackgroundColor(theme.palette.background.toAndroidColor())
+            holder.binding.covered.apply {
+                setBackgroundColor(theme.palette.covered.toAndroidColor())
+                alpha = 1.0f
+            }
+            holder.binding.uncovered.apply {
+                setBackgroundColor(theme.palette.background.toAndroidColor())
+                alpha = 1.0f
+            }
 
-            if (theme.name != null) {
+            if (selected) {
+                holder.binding.label.apply {
+                    text = context.getString(R.string.selected)
+                    setTextColor(theme.palette.background.toInvertedAndroidColor(200))
+                    setBackgroundResource(android.R.color.transparent)
+                    setCompoundDrawables(null, null, null, null)
+                    isVisible = true
+                }
+                holder.binding.covered.alpha = 0.25f
+            } else if (theme.name != null) {
                 holder.binding.label.apply {
                     text = context.getString(theme.name!!)
                     setTextColor(theme.palette.background.toInvertedAndroidColor(200))
@@ -64,12 +78,7 @@ class ThemeAdapter(
             }
 
             holder.binding.cardTheme.apply {
-                setStrokeColor(
-                    MaterialColors.getColorStateListOrNull(
-                        context,
-                        if (selected) R.attr.colorTertiary else R.attr.backgroundColor,
-                    ),
-                )
+                strokeColor = theme.palette.background.toAndroidColor()
                 isSoundEffectsEnabled = false
                 setOnClickListener {
                     if (preferencesRepository.isPremiumEnabled()) {
