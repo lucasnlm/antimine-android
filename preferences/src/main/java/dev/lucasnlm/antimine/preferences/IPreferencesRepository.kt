@@ -28,6 +28,11 @@ interface IPreferencesRepository {
     fun showTutorialButton(): Boolean
     fun setShowTutorialButton(value: Boolean)
 
+    fun showMusicBanner(): Boolean
+    fun setShowMusicBanner(value: Boolean)
+    fun lastMusicBanner(): Long
+    fun setLastMusicBanner(value: Long)
+
     fun customLongPressTimeout(): Long
     fun setCustomLongPressTimeout(value: Long)
 

@@ -380,6 +380,22 @@ class PreferencesRepository(
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_SHOULD_SHOW_TUTORIAL_BUTTON, value)
     }
 
+    override fun showMusicBanner(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_MUSIC_BANNER, true)
+    }
+
+    override fun setShowMusicBanner(value: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_MUSIC_BANNER, value)
+    }
+
+    override fun lastMusicBanner(): Long {
+        return preferencesManager.getLong(PreferenceKeys.PREFERENCE_MUSIC_BANNER_LAST, 0L)
+    }
+
+    override fun setLastMusicBanner(value: Long) {
+        preferencesManager.putLong(PreferenceKeys.PREFERENCE_MUSIC_BANNER_LAST, value)
+    }
+
     override fun dimNumbers(): Boolean {
         return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_DIM_NUMBERS, true)
     }

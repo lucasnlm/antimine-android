@@ -5,18 +5,22 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textview.MaterialTextView
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.databinding.WinDialogBinding
 import dev.lucasnlm.antimine.gameover.model.GameResult
@@ -48,6 +52,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
     private val billingManager: IBillingManager by inject()
     private val featureFlagManager: IFeatureFlagManager by inject()
     private val themeRepository: IThemeRepository by inject()
+    private val gameAudioManager: GameAudioManager by inject()
 
     private lateinit var usingTheme: AppTheme
 
@@ -140,39 +145,11 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                         }
 
                         if (featureFlagManager.isFoss && preferencesRepository.requestDonation()) {
-                            adFrame.isVisible = true
-
-                            val view = View.inflate(context, R.layout.donation_request, null)
-                            view.setOnClickListener {
-                                activity?.let {
-                                    lifecycleScope.launch {
-                                        billingManager.charge(it)
-                                        preferencesRepository.setRequestDonation(false)
-                                    }
-                                }
-                            }
-
-                            adFrame.addView(
-                                view,
-                                FrameLayout.LayoutParams(
-                                    FrameLayout.LayoutParams.MATCH_PARENT,
-                                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                                    Gravity.CENTER_HORIZONTAL,
-                                ),
-                            )
-                        } else if (!preferencesRepository.isPremiumEnabled() &&
-                            featureFlagManager.isBannerAdEnabled
-                        ) {
-                            adFrame.isVisible = true
-
-                            adFrame.addView(
-                                adsManager.createBannerAd(context),
-                                FrameLayout.LayoutParams(
-                                    FrameLayout.LayoutParams.MATCH_PARENT,
-                                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                                    Gravity.CENTER_HORIZONTAL,
-                                ),
-                            )
+                            showDonationDialog(adFrame)
+                        } else if (!preferencesRepository.isPremiumEnabled() && featureFlagManager.isBannerAdEnabled) {
+                            showAdBannerDialog(adFrame)
+                        } else if (state.showMusicDialog) {
+                            showMusicDialog(adFrame)
                         }
 
                         settings.setOnClickListener {
@@ -256,6 +233,90 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
 
     private fun showSettings() {
         startActivity(Intent(requireContext(), PreferencesActivity::class.java))
+    }
+
+    private fun showDonationDialog(adFrame: FrameLayout) {
+        adFrame.isVisible = true
+
+        val view = View.inflate(context, R.layout.donation_request, null)
+        view.apply {
+            setOnClickListener {
+                gameAudioManager.playMonetization()
+                activity?.let {
+                    lifecycleScope.launch {
+                        billingManager.charge(it)
+                        preferencesRepository.setRequestDonation(false)
+                    }
+                }
+            }
+        }
+
+        adFrame.addView(
+            view,
+            FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER_HORIZONTAL,
+            ),
+        )
+    }
+
+    private fun showAdBannerDialog(adFrame: FrameLayout) {
+        adFrame.isVisible = true
+
+        adFrame.addView(
+            adsManager.createBannerAd(requireContext()),
+            FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                Gravity.CENTER_HORIZONTAL,
+            ),
+        )
+    }
+
+    private fun showMusicDialog(adFrame: FrameLayout) {
+        gameAudioManager.getComposerData().firstOrNull()?.let { composer ->
+            adFrame.isVisible = true
+
+            preferencesRepository.setLastMusicBanner(System.currentTimeMillis())
+
+            val view = View.inflate(context, R.layout.music_link, null)
+            view.run {
+                findViewById<MaterialTextView>(R.id.music_by).text =
+                    getString(R.string.music_by, composer.composer)
+
+                setOnClickListener {
+                    preferencesRepository.setShowMusicBanner(false)
+                    gameAudioManager.playMonetization()
+                    openComposer(composer.composerLink)
+                }
+            }
+
+            adFrame.addView(
+                view,
+                FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.WRAP_CONTENT,
+                    Gravity.CENTER_HORIZONTAL,
+                ),
+            )
+        }
+    }
+
+    private fun openComposer(composerLink: String) {
+        val context = requireContext()
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(composerLink)).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(
+                context.applicationContext,
+                dev.lucasnlm.antimine.about.R.string.unknown_error,
+                Toast.LENGTH_SHORT,
+            ).show()
+        }
     }
 
     private fun startNewGameAndDismiss() {

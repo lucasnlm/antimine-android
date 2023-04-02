@@ -164,6 +164,14 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setShowTutorialButton(value: Boolean) {}
 
+    override fun showMusicBanner(): Boolean = true
+
+    override fun setShowMusicBanner(value: Boolean) {}
+
+    override fun lastMusicBanner(): Long = 0L
+
+    override fun setLastMusicBanner(value: Long) {}
+
     override fun dimNumbers(): Boolean = false
 
     override fun setDimNumbers(value: Boolean) {}

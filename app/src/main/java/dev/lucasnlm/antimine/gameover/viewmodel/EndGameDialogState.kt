@@ -11,4 +11,5 @@ data class EndGameDialogState(
     val showContinueButton: Boolean,
     val received: Int,
     val showTutorial: Boolean,
+    val showMusicDialog: Boolean,
 )

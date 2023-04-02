@@ -24,6 +24,8 @@ object PreferenceKeys {
     const val PREFERENCE_DOUBLE_CLICK_TIMEOUT = "preference_double_click_timeout"
     const val PREFERENCE_FIRST_USE = "preference_first_use"
     const val PREFERENCE_TUTORIAL_COMPLETED = "preference_tutorial_completed"
+    const val PREFERENCE_MUSIC_BANNER = "preference_music_banner"
+    const val PREFERENCE_MUSIC_BANNER_LAST = "preference_music_banner_last"
     const val PREFERENCE_USE_COUNT = "preference_use_count"
     const val PREFERENCE_REQUEST_RATING = "preference_request_rating"
     const val PREFERENCE_PREMIUM_FEATURES = "preference_premium_features"
