@@ -48,9 +48,6 @@ open class GameRenderFragment : AndroidFragmentApplication() {
             themeRepository = themeRepository,
             preferencesRepository = preferencesRepository,
             dimensionRepository = dimensionRepository,
-            crashLogger = {
-                crashReporter.sendError(it)
-            },
             onSingleTap = {
                 lifecycleScope.launch {
                     gameViewModel.onSingleClick(it)
