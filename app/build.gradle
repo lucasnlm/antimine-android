@@ -120,7 +120,7 @@ dependencies {
 
     googleImplementation project(':audio')
     fossImplementation project(':audio')
-    googleInstantImplementation project(':audio')
+    googleInstantImplementation project(':audio-low')
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.6.1'
