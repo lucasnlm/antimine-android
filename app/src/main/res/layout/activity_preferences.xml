@@ -181,6 +181,13 @@
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
                         android:text="@string/show_clock" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/noGuessingMode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="16dp"
+                        android:text="@string/no_guessing_mode" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
