@@ -99,6 +99,7 @@
     <string name="more">More</string>
     <string name="source_code">Source Code</string>
     <string name="translation">Translation</string>
+    <string name="language">Language</string>
     <string name="licenses">Licenses</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Loading…</string>

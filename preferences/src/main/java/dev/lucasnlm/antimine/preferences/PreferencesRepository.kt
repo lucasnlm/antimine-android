@@ -223,6 +223,14 @@ class PreferencesRepository(
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_CUSTOM_SKIN, skinId.toInt())
     }
 
+    override fun setPreferredLocale(locale: String) {
+        preferencesManager.putString(PreferenceKeys.PREFERENCE_LOCALE, locale)
+    }
+
+    override fun getPreferredLocale(): String? {
+        return preferencesManager.getString(PreferenceKeys.PREFERENCE_LOCALE)
+    }
+
     override fun updateStatsBase(statsBase: Int) {
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_STATS_BASE, statsBase)
     }

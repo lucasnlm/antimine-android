@@ -29,6 +29,7 @@ import dev.lucasnlm.antimine.core.repository.IDimensionRepository
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.databinding.ActivityMainBinding
 import dev.lucasnlm.antimine.history.HistoryActivity
+import dev.lucasnlm.antimine.l10n.GameLocaleManager
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
@@ -59,6 +60,7 @@ class MainActivity : ThemedActivity() {
     private val instantAppManager: IInstantAppManager by inject()
     private val preferenceRepository: IPreferencesRepository by inject()
     private val soundManager: IGameAudioManager by inject()
+    private val gameLocaleManager: GameLocaleManager by inject()
 
     private lateinit var viewPager: ViewPager2
     private lateinit var googlePlayLauncher: ActivityResultLauncher<Intent>
@@ -66,6 +68,9 @@ class MainActivity : ThemedActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Must be called after onCreate
+        gameLocaleManager.applyPreferredLocaleIfNeeded()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -230,6 +235,15 @@ class MainActivity : ThemedActivity() {
                 soundManager.playClickSound()
                 analyticsManager.sentEvent(Analytics.OpenTutorial)
                 viewModel.sendEvent(MainEvent.StartTutorialEvent)
+            }
+        }
+
+        binding.language.apply {
+            setText(R.string.language)
+            setOnClickListener {
+                soundManager.playClickSound()
+                analyticsManager.sentEvent(Analytics.OpenLanguage)
+                viewModel.sendEvent(MainEvent.StartLanguageEvent)
             }
         }
 

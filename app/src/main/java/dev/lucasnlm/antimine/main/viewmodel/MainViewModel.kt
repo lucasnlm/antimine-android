@@ -10,6 +10,7 @@ import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
+import dev.lucasnlm.antimine.l10n.LocalizationActivity
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
@@ -30,6 +31,7 @@ class MainViewModel(
             is MainEvent.StartNewGameEvent -> continueGame(event.difficulty)
             is MainEvent.ShowCustomDifficultyDialogEvent -> showCustomDifficultyDialogEvent()
             is MainEvent.StartTutorialEvent -> startTutorial()
+            is MainEvent.StartLanguageEvent -> startLocalization()
             is MainEvent.GoToSettingsPageEvent -> goToSettingsPageEvent()
             is MainEvent.GoToMainPageEvent -> goToMainPageEvent()
             is MainEvent.ShowControlsEvent -> showControlsEvent()
@@ -133,6 +135,12 @@ class MainViewModel(
     private fun startTutorial() {
         val context = application.applicationContext
         val intent = Intent(context, TutorialActivity::class.java)
+        sendSideEffect(MainEvent.OpenActivity(intent))
+    }
+
+    private fun startLocalization() {
+        val context = application.applicationContext
+        val intent = Intent(context, LocalizationActivity::class.java)
         sendSideEffect(MainEvent.OpenActivity(intent))
     }
 }

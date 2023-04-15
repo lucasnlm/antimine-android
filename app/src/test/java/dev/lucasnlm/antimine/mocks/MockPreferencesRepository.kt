@@ -54,6 +54,10 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun useSkin(skinId: Long) {}
 
+    override fun setPreferredLocale(locale: String) {}
+
+    override fun getPreferredLocale(): String = "en"
+
     override fun updateStatsBase(statsBase: Int) {}
 
     override fun getStatsBase(): Int = 0

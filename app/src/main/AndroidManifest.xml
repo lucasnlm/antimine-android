@@ -45,6 +45,15 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
 
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -96,6 +105,10 @@
         <activity
             android:name="dev.lucasnlm.antimine.history.HistoryActivity"
             android:label="@string/previous_games" />
+
+        <activity
+            android:name="dev.lucasnlm.antimine.l10n.LocalizationActivity"
+            android:label="@string/language" />
 
         <activity
             android:name="dev.lucasnlm.antimine.preferences.PreferencesActivity"

@@ -8,6 +8,8 @@ import dev.lucasnlm.antimine.core.analytics.ProdAnalyticsManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManagerImpl
+import dev.lucasnlm.antimine.l10n.GameLocaleManager
+import dev.lucasnlm.antimine.l10n.GameLocaleManagerImpl
 import dev.lucasnlm.antimine.support.AppVersionManagerImpl
 import dev.lucasnlm.antimine.support.IapHandler
 import dev.lucasnlm.external.ExternalAnalyticsWrapper
@@ -31,6 +33,8 @@ val AppModule = module {
     single { CloudSaveManagerImpl(get(), get(), get(), get(), get()) } bind CloudSaveManager::class
 
     single { AppVersionManagerImpl(BuildConfig.DEBUG, androidApplication()) } bind IAppVersionManager::class
+
+    single { GameLocaleManagerImpl(get()) } bind GameLocaleManager::class
 
     single {
         if (BuildConfig.DEBUG) {

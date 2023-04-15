@@ -45,6 +45,9 @@ interface IPreferencesRepository {
     fun skinId(): Long
     fun useSkin(skinId: Long)
 
+    fun setPreferredLocale(locale: String)
+    fun getPreferredLocale(): String?
+
     fun updateStatsBase(statsBase: Int)
     fun getStatsBase(): Int
 

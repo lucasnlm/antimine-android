@@ -99,6 +99,8 @@ sealed class Analytics(
 
     object OpenTutorial : Analytics("Open Tutorial")
 
+    object OpenLanguage : Analytics("Open Language")
+
     data class KnowHowToPlay(
         private val known: Boolean,
     ) : Analytics("Know How To Play", mapOf("Known" to known.toString()))

@@ -470,6 +470,14 @@
                         app:icon="@drawable/tutorial" />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/language"
+                        style="@style/CustomButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/language"
+                        app:icon="@drawable/translate" />
+
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/play_games"
                         style="@style/CustomButton"
                         android:layout_width="match_parent"

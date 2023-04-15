@@ -19,6 +19,7 @@ object PreferenceKeys {
     const val PREFERENCE_SOUND_EFFECTS = "preference_sound_v2"
     const val PREFERENCE_MUSIC = "preference_music"
     const val PREFERENCE_STATS_BASE = "preference_stats_base"
+    const val PREFERENCE_LOCALE = "preference_locale"
     const val PREFERENCE_PROGRESSIVE_VALUE = "preference_progressive_value"
     const val PREFERENCE_LONG_PRESS_TIMEOUT = "preference_long_press_timeout"
     const val PREFERENCE_DOUBLE_CLICK_TIMEOUT = "preference_double_click_timeout"

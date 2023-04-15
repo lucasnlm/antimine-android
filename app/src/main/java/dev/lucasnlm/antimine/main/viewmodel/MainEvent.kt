@@ -14,6 +14,8 @@ sealed class MainEvent {
 
     object StartTutorialEvent : MainEvent()
 
+    object StartLanguageEvent : MainEvent()
+
     object GoToMainPageEvent : MainEvent()
 
     data class OpenActivity(
