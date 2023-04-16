@@ -10,6 +10,7 @@ import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.ui.repository.Skins
 import dev.lucasnlm.antimine.ui.repository.Themes.lightTheme
+import io.mockk.mockk
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
@@ -19,9 +20,7 @@ val TestCommonModule = module {
     single { MockPreferencesRepository() } bind IPreferencesRepository::class
 
     single {
-        object : IGameAudioManager {
-            override fun play(soundId: Int) {}
-        }
+        mockk<IGameAudioManager>()
     } bind IGameAudioManager::class
 
     single {

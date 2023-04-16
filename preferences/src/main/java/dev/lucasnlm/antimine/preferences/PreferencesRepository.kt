@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.preferences
 
+import android.os.Build
 import android.view.ViewConfiguration
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
@@ -123,7 +124,8 @@ class PreferencesRepository(
     }
 
     override fun isSoundEffectsEnabled(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SOUND_EFFECTS, true)
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+            preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_SOUND_EFFECTS, true)
     }
 
     override fun setSoundEffectsEnabled(value: Boolean) {
@@ -131,7 +133,8 @@ class PreferencesRepository(
     }
 
     override fun isMusicEnabled(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_MUSIC, true)
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+            preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_MUSIC, true)
     }
 
     override fun setMusicEnabled(value: Boolean) {
@@ -296,8 +299,7 @@ class PreferencesRepository(
     }
 
     override fun isPremiumEnabled(): Boolean {
-//        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_PREMIUM_FEATURES, false)
-        return false
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_PREMIUM_FEATURES, false)
     }
 
     override fun showSupport(): Boolean {

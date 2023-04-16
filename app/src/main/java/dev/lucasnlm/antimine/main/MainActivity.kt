@@ -238,13 +238,17 @@ class MainActivity : ThemedActivity() {
             }
         }
 
-        binding.language.apply {
-            setText(R.string.language)
-            setOnClickListener {
-                soundManager.playClickSound()
-                analyticsManager.sentEvent(Analytics.OpenLanguage)
-                viewModel.sendEvent(MainEvent.StartLanguageEvent)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.language.apply {
+                setText(R.string.language)
+                setOnClickListener {
+                    soundManager.playClickSound()
+                    analyticsManager.sentEvent(Analytics.OpenLanguage)
+                    viewModel.sendEvent(MainEvent.StartLanguageEvent)
+                }
             }
+        } else {
+            binding.language.isVisible = false
         }
 
         binding.stats.setOnClickListener {

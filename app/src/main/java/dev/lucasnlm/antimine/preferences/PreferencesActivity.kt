@@ -44,9 +44,11 @@ class PreferencesActivity :
     }
 
     private fun MaterialSwitch.bindItem(
+        visible: Boolean = true,
         initialValue: Boolean,
         onChangeValue: (Boolean) -> Unit,
     ) {
+        isVisible = visible
         isSoundEffectsEnabled = false
         isChecked = initialValue
         setOnCheckedChangeListener { _, newCheckedState ->
@@ -118,11 +120,13 @@ class PreferencesActivity :
         )
 
         binding.soundEffects.bindItem(
+            visible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M,
             initialValue = preferenceRepository.isSoundEffectsEnabled(),
             onChangeValue = { preferenceRepository.setSoundEffectsEnabled(it) },
         )
 
         binding.music.bindItem(
+            visible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M,
             initialValue = preferenceRepository.isMusicEnabled(),
             onChangeValue = { preferenceRepository.setMusicEnabled(it) },
         )

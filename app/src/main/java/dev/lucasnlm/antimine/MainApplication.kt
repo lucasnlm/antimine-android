@@ -8,6 +8,7 @@ import dev.lucasnlm.antimine.core.di.CommonModule
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.di.AppModule
 import dev.lucasnlm.antimine.di.ViewModelModule
+import dev.lucasnlm.antimine.l10n.GameLocaleManager
 import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.support.IapHandler
 import dev.lucasnlm.external.IAdsManager
