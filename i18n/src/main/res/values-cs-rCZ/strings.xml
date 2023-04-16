@@ -23,6 +23,7 @@
     <string name="animations">Animace</string>
     <string name="vibration">Hmatová odezva</string>
     <string name="about">O aplikaci</string>
+    <string name="quit">Ukončit</string>
     <string name="events">Statistiky</string>
     <string name="custom">Vlastní</string>
     <string name="start">Start</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Sdílení se nezdařilo</string>
     <string name="version_s">Verze %1$s</string>
     <string name="sound_effects">Zvukové efekty</string>
+    <string name="music">Hudba</string>
+    <string name="music_by">Hudba od %1$s</string>
+    <string name="check_music">Poslouchat na Spotify…</string>
+    <string name="selected">Vybráno</string>
     <string name="are_you_sure">Jste si jisti?</string>
     <string name="enable_automatic_flags">Povolit automatické umísťování vlajek</string>
     <string name="open_areas">Otevřené oblasti</string>
@@ -94,6 +99,7 @@
     <string name="more">Více</string>
     <string name="source_code">Zdrojový kód</string>
     <string name="translation">Překlad</string>
+    <string name="language">Jazyk</string>
     <string name="licenses">Licence</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Načítání…</string>

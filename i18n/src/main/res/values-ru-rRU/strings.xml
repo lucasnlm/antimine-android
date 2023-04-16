@@ -23,6 +23,7 @@
     <string name="animations">Анимации</string>
     <string name="vibration">Виброотклик</string>
     <string name="about">Об игре</string>
+    <string name="quit">Выход</string>
     <string name="events">Статистика</string>
     <string name="custom">Другой</string>
     <string name="start">Начать</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Не удалось поделиться</string>
     <string name="version_s">Версия %1$s</string>
     <string name="sound_effects">Звуковые эффекты</string>
+    <string name="music">Музыка</string>
+    <string name="music_by">Музыка: %1$s</string>
+    <string name="check_music">Слушать на Spotify…</string>
+    <string name="selected">Выбрано</string>
     <string name="are_you_sure">Вы уверены?</string>
     <string name="enable_automatic_flags">Включить авторазмещение флагов</string>
     <string name="open_areas">Открытые зоны</string>
@@ -94,6 +99,7 @@
     <string name="more">Подробнее</string>
     <string name="source_code">Исходный код</string>
     <string name="translation">Перевод</string>
+    <string name="language">Язык</string>
     <string name="licenses">Лицензии</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Загрузка…</string>

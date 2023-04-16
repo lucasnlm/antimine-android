@@ -1,11 +1,10 @@
 package dev.lucasnlm.antimine.themes.view
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.color.MaterialColors
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.themes.R
 import dev.lucasnlm.antimine.themes.databinding.ViewThemeBinding
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
@@ -15,7 +14,7 @@ import dev.lucasnlm.antimine.ui.model.AppTheme
 
 class ThemeAdapter(
     private val themeViewModel: ThemeViewModel,
-    private val preferencesRepository: IPreferencesRepository,
+    private val preferencesRepository: PreferencesRepository,
     private val onSelectTheme: (AppTheme) -> Unit,
     private val onRequestPurchase: () -> Unit,
 ) : RecyclerView.Adapter<ThemeViewHolder>() {
@@ -41,33 +40,46 @@ class ThemeAdapter(
         val theme = themes[position]
 
         holder.itemView.apply {
+            isSoundEffectsEnabled = false
+
             val selected = (theme.id == themeViewModel.singleState().currentTheme.id)
 
-            holder.binding.covered.setBackgroundColor(theme.palette.covered.toAndroidColor())
-            holder.binding.uncovered.setBackgroundColor(theme.palette.background.toAndroidColor())
+            holder.binding.covered.apply {
+                setBackgroundColor(theme.palette.covered.toAndroidColor())
+                alpha = 1.0f
+            }
+            holder.binding.uncovered.apply {
+                setBackgroundColor(theme.palette.background.toAndroidColor())
+                alpha = 1.0f
+            }
 
-            if (theme.name != null) {
+            if (selected) {
+                holder.binding.label.apply {
+                    text = context.getString(R.string.selected)
+                    setTextColor(theme.palette.background.toInvertedAndroidColor(200))
+                    setBackgroundResource(android.R.color.transparent)
+                    setCompoundDrawables(null, null, null, null)
+                    isVisible = true
+                }
+                holder.binding.covered.alpha = 0.25f
+            } else if (theme.name != null) {
                 holder.binding.label.apply {
                     text = context.getString(theme.name!!)
                     setTextColor(theme.palette.background.toInvertedAndroidColor(200))
                     setBackgroundResource(android.R.color.transparent)
                     setCompoundDrawables(null, null, null, null)
-                    visibility = View.VISIBLE
+                    isVisible = true
                 }
             } else {
                 holder.binding.label.apply {
                     setCompoundDrawables(null, null, null, null)
-                    visibility = View.GONE
+                    isVisible = false
                 }
             }
 
             holder.binding.cardTheme.apply {
-                setStrokeColor(
-                    MaterialColors.getColorStateListOrNull(
-                        context,
-                        if (selected) R.attr.colorTertiary else R.attr.backgroundColor,
-                    ),
-                )
+                strokeColor = theme.palette.background.toAndroidColor()
+                isSoundEffectsEnabled = false
                 setOnClickListener {
                     if (preferencesRepository.isPremiumEnabled()) {
                         onSelectTheme(theme)

@@ -8,11 +8,11 @@ import com.google.android.material.appbar.MaterialToolbar
 import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.TopBarAction
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import dev.lucasnlm.antimine.ui.repository.ThemeRepository
 import org.koin.android.ext.android.inject
 
 abstract class ThemedActivity : AppCompatActivity() {
-    protected val themeRepository: IThemeRepository by inject()
+    protected val themeRepository: ThemeRepository by inject()
 
     protected val usingTheme: AppTheme by lazy {
         currentTheme()

@@ -1,24 +1,30 @@
 package dev.lucasnlm.antimine.about.views
 
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import dev.lucasnlm.antimine.about.R
 import dev.lucasnlm.antimine.about.databinding.FragmentAboutInfoBinding
 import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AboutInfoFragment : Fragment() {
     private lateinit var binding: FragmentAboutInfoBinding
     private val aboutViewModel: AboutViewModel by sharedViewModel()
+    private val audioManager: GameAudioManager by inject()
     private val unknownVersionName = "?.?.?"
 
     private fun PackageManager.getPackageInfoCompat(packageName: String, flags: Int = 0): PackageInfo? {
@@ -72,8 +78,17 @@ class AboutInfoFragment : Fragment() {
             }
         }
 
-        binding.tutorial.setOnClickListener {
-            aboutViewModel.sendEvent(AboutEvent.Tutorial)
+        binding.musicBy.run {
+            val composer = audioManager.getComposerData().firstOrNull()
+
+            if (composer == null) {
+                binding.musicCard.isVisible = false
+            } else {
+                text = getString(R.string.music_by, composer.composer)
+                setOnClickListener {
+                    openComposer(composer.composerLink)
+                }
+            }
         }
 
         binding.thirdsParties.setOnClickListener {
@@ -86,6 +101,18 @@ class AboutInfoFragment : Fragment() {
 
         binding.sourceCode.setOnClickListener {
             aboutViewModel.sendEvent(AboutEvent.SourceCode)
+        }
+    }
+
+    private fun openComposer(composerLink: String) {
+        val context = requireContext()
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(composerLink)).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(context.applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT).show()
         }
     }
 

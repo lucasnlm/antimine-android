@@ -7,7 +7,7 @@ import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.wear.R
 import dev.lucasnlm.antimine.wear.databinding.ActivityDifficultyBinding
-import dev.lucasnlm.antimine.wear.game.GameActivity
+import dev.lucasnlm.antimine.wear.game.WearGameActivity
 import dev.lucasnlm.antimine.wear.main.models.MenuItem
 import dev.lucasnlm.antimine.wear.main.view.MainMenuAdapter
 
@@ -47,10 +47,10 @@ class DifficultyActivity : ThemedActivity() {
 
     private fun startGameOnDifficulty(difficulty: Difficulty) {
         val context = application.applicationContext
-        val intent = Intent(context, GameActivity::class.java).apply {
+        val intent = Intent(context, WearGameActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             val bundle = Bundle().apply {
-                putSerializable(GameActivity.DIFFICULTY, difficulty)
+                putSerializable(WearGameActivity.DIFFICULTY, difficulty)
             }
             putExtras(bundle)
         }

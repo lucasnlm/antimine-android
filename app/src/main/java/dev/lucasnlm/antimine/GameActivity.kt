@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine
 
+import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -7,7 +8,6 @@ import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
-import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import androidx.activity.addCallback
@@ -21,11 +21,12 @@ import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.common.level.view.GameRenderFragment
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.ControlActivity
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.isPortrait
@@ -37,21 +38,25 @@ import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gdx.GameContext
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.ext.showWarning
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
-import dev.lucasnlm.external.IAdsManager
-import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IFeatureFlagManager
-import dev.lucasnlm.external.IInstantAppManager
-import dev.lucasnlm.external.IPlayGamesManager
-import dev.lucasnlm.external.ReviewWrapper
+import dev.lucasnlm.external.AdsManager
+import dev.lucasnlm.external.AnalyticsManager
+import dev.lucasnlm.external.FeatureFlagManager
+import dev.lucasnlm.external.InstantAppManager
+import dev.lucasnlm.external.PlayGamesManager
+import dev.lucasnlm.external.ReviewWrapperImpl
 import kotlinx.coroutines.*
+import nl.dionsegijn.konfetti.core.Party
+import nl.dionsegijn.konfetti.core.Position
+import nl.dionsegijn.konfetti.core.emitter.Emitter
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.concurrent.TimeUnit
 
 class GameActivity :
     ThemedActivity(),
@@ -59,16 +64,18 @@ class GameActivity :
 
     private val gameViewModel by viewModel<GameViewModel>()
     private val appScope: CoroutineScope by inject()
-    private val preferencesRepository: IPreferencesRepository by inject()
-    private val analyticsManager: IAnalyticsManager by inject()
-    private val instantAppManager: IInstantAppManager by inject()
-    private val savesRepository: ISavesRepository by inject()
-    private val playGamesManager: IPlayGamesManager by inject()
-    private val adsManager: IAdsManager by inject()
-    private val reviewWrapper: ReviewWrapper by inject()
-    private val featureFlagManager: IFeatureFlagManager by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
+    private val analyticsManager: AnalyticsManager by inject()
+    private val instantAppManager: InstantAppManager by inject()
+    private val savesRepository: SavesRepository by inject()
+    private val playGamesManager: PlayGamesManager by inject()
+    private val gameAudioManager: GameAudioManager by inject()
+    private val adsManager: AdsManager by inject()
+    private val reviewWrapper: ReviewWrapperImpl by inject()
+    private val featureFlagManager: FeatureFlagManager by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
     private var warning: Snackbar? = null
+    private var revealBombFeedback: ValueAnimator? = null
 
     private val hasFloatingButton = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
     private lateinit var binding: ActivityGameBinding
@@ -84,8 +91,9 @@ class GameActivity :
     private fun Int.toL10nString() = String.format("%d", this)
 
     private fun showGameWarning(@StringRes text: Int) {
+        val isSwitchAndOpen = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
         warning?.dismiss()
-        warning = showWarning(text)
+        warning = showWarning(text, isSwitchAndOpen)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -180,6 +188,10 @@ class GameActivity :
                     warning?.dismiss()
                     warning = null
 
+                    withContext(Dispatchers.Main) {
+                        stopKonfettiView()
+                    }
+
                     val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
 
@@ -195,11 +207,15 @@ class GameActivity :
                                 getString(R.string.tap_to_begin)
                             }
                         }
-                        visibility = View.VISIBLE
+                        isVisible = true
                         backgroundTintList = tint
                     }
                 } else {
-                    binding.tapToBegin.visibility = View.GONE
+                    binding.tapToBegin.isVisible = false
+                }
+
+                if ((it.turn > 0 || it.saveId != 0L) && it.isActive) {
+                    gameAudioManager.playMusic()
                 }
 
                 if (it.isCreatingGame) {
@@ -221,7 +237,7 @@ class GameActivity :
 
                     if (controlText != null && controlText.isNotBlank()) {
                         binding.controlsToast.apply {
-                            visibility = View.VISIBLE
+                            isVisible = true
                             backgroundTintList = tint
                             text = controlText
 
@@ -232,19 +248,14 @@ class GameActivity :
                             }
                         }
                     } else {
-                        binding.controlsToast.visibility = View.GONE
+                        binding.controlsToast.isVisible = false
                     }
                 } else {
-                    binding.controlsToast.visibility = View.GONE
+                    binding.controlsToast.isVisible = false
                 }
 
                 binding.timer.apply {
-                    visibility = if (it.duration == 0L || !preferencesRepository.showTimer()) {
-                        View.GONE
-                    } else {
-                        View.VISIBLE
-                    }
-
+                    isVisible = preferencesRepository.showTimer() && it.duration != 0L
                     text = DateUtils.formatElapsedTime(it.duration)
                 }
 
@@ -266,9 +277,9 @@ class GameActivity :
                             text = currentMineCount.toL10nString()
                         }
 
-                        visibility = View.VISIBLE
+                        isVisible = true
                     } else {
-                        visibility = View.GONE
+                        isVisible = false
                     }
                 }
 
@@ -288,11 +299,7 @@ class GameActivity :
             gameViewModel.observeSideEffects().collect {
                 when (it) {
                     is GameEvent.ShowNoGuessFailWarning -> {
-                        warning = Snackbar.make(
-                            binding.root,
-                            R.string.no_guess_fail_warning,
-                            Snackbar.LENGTH_INDEFINITE,
-                        ).apply {
+                        warning = showWarning(R.string.no_guess_fail_warning).apply {
                             setAction(R.string.ok) {
                                 warning?.dismiss()
                             }
@@ -316,8 +323,15 @@ class GameActivity :
                     }
                     is GameEvent.VictoryDialog -> {
                         if (preferencesRepository.showWindowsWhenFinishGame()) {
+                            withContext(Dispatchers.Main) {
+                                showKonfettiView()
+                            }
+
                             lifecycleScope.launch {
                                 delay(it.delayToShow)
+
+                                gameAudioManager.pauseMusic()
+
                                 WinGameDialogFragment.newInstance(
                                     gameResult = GameResult.Victory,
                                     showContinueButton = false,
@@ -336,6 +350,10 @@ class GameActivity :
                                 }
                             }
                         } else {
+                            withContext(Dispatchers.Main) {
+                                showKonfettiView()
+                            }
+                            gameAudioManager.pauseMusic()
                             showEndGameToast(GameResult.Victory)
                         }
                     }
@@ -406,11 +424,15 @@ class GameActivity :
         analyticsManager.sentEvent(Analytics.Resume)
         keepScreenOn(true)
         gameViewModel.resumeGame()
+        gameAudioManager.resumeMusic()
     }
 
     override fun onPause() {
         super.onPause()
         keepScreenOn(false)
+
+        revealBombFeedback?.removeAllListeners()
+        revealBombFeedback = null
 
         cloudSaveManager.uploadSave()
 
@@ -423,6 +445,14 @@ class GameActivity :
         appScope.launch {
             gameViewModel.saveGame()
         }
+
+        gameAudioManager.pauseMusic()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        gameAudioManager.stopMusic()
     }
 
     private fun bindTapToBegin() {
@@ -473,7 +503,7 @@ class GameActivity :
         val canRequestHelpWithAds = gameViewModel.getTips() == 0 && adsManager.isAvailable()
 
         binding.hintCounter.apply {
-            visibility = if (canUseHelpNow) View.VISIBLE else View.GONE
+            isVisible = canUseHelpNow
             text = if (canRequestHelpWithAds) {
                 "+5"
             } else {
@@ -489,7 +519,7 @@ class GameActivity :
             if (canUseHelpNow) {
                 binding.hintCooldown.apply {
                     animate().alpha(0.0f).start()
-                    visibility = View.GONE
+                    isVisible = false
                     progress = 0
                 }
 
@@ -499,15 +529,26 @@ class GameActivity :
                     setOnClickListener {
                         lifecycleScope.launch {
                             analyticsManager.sentEvent(Analytics.RequestMoreHints)
-
+                            val wasPlaying = gameAudioManager.isPlayingMusic()
                             adsManager.showRewardedAd(
                                 activity = this@GameActivity,
                                 skipIfFrequent = false,
+                                onStart = {
+                                    if (wasPlaying) {
+                                        gameAudioManager.pauseMusic()
+                                    }
+                                },
                                 onRewarded = {
+                                    if (wasPlaying) {
+                                        gameAudioManager.resumeMusic()
+                                    }
                                     gameViewModel.revealRandomMine(false)
                                     gameViewModel.sendEvent(GameEvent.GiveMoreTip)
                                 },
                                 onFail = {
+                                    if (wasPlaying) {
+                                        gameAudioManager.resumeMusic()
+                                    }
                                     showGameWarning(R.string.fail_to_load_ad)
                                 },
                             )
@@ -530,10 +571,33 @@ class GameActivity :
                             addUpdateListener {
                                 progress = ((it.animatedValue as Float) * 1000f).toInt()
                             }
+                            revealBombFeedback = this
+
+                            addListener(
+                                object : Animator.AnimatorListener {
+                                    override fun onAnimationStart(animation: Animator) {
+                                        // Ignore
+                                    }
+
+                                    override fun onAnimationEnd(animation: Animator) {
+                                        if (!isPaused) {
+                                            gameAudioManager.playRevealBombReloaded()
+                                        }
+                                    }
+
+                                    override fun onAnimationCancel(animation: Animator) {
+                                        // Ignore
+                                    }
+
+                                    override fun onAnimationRepeat(animation: Animator) {
+                                        // Ignore
+                                    }
+                                },
+                            )
                             start()
                         }
                     }
-                    visibility = View.VISIBLE
+                    isVisible = true
                     max = 5000
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         setProgress(dt.toInt(), true)
@@ -608,6 +672,7 @@ class GameActivity :
             setColorFilter(binding.minesCount.currentTextColor)
             setOnClickListener {
                 lifecycleScope.launch {
+                    gameAudioManager.playClickSound()
                     val confirmResign = gameViewModel.singleState().isActive
                     analyticsManager.sentEvent(Analytics.TapGameReset(confirmResign))
 
@@ -622,7 +687,7 @@ class GameActivity :
             }
         }
 
-        binding.hintCounter.visibility = View.GONE
+        binding.hintCounter.isVisible = false
         binding.shortcutIcon.apply {
             if (enabled) {
                 isClickable = true
@@ -741,6 +806,26 @@ class GameActivity :
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         } else {
             window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+    }
+
+    private fun stopKonfettiView() {
+        binding.konfettiView?.stopGracefully()
+    }
+
+    private fun showKonfettiView() {
+        binding.konfettiView?.apply {
+            start(
+                Party(
+                    speed = 0f,
+                    maxSpeed = 30f,
+                    damping = 0.9f,
+                    spread = 360,
+                    colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
+                    emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(100),
+                    position = Position.Relative(0.5, 0.2),
+                ),
+            )
         }
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,17 +30,8 @@ class HistoryFragment : Fragment() {
             historyViewModel.sendEvent(HistoryEvent.LoadAllSaves)
 
             historyViewModel.observeState().collect {
-                binding.empty.visibility = if (!it.loading && it.saveList.isEmpty()) {
-                    View.VISIBLE
-                } else {
-                    View.GONE
-                }
-
-                binding.loading.visibility = if (it.loading) {
-                    View.VISIBLE
-                } else {
-                    View.GONE
-                }
+                binding.empty.isVisible = !it.loading && it.saveList.isEmpty()
+                binding.loading.isVisible = it.loading
 
                 binding.saveHistory.apply {
                     layoutManager = LinearLayoutManager(view.context)

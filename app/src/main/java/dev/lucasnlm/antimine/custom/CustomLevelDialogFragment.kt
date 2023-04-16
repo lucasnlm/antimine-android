@@ -15,7 +15,7 @@ import dev.lucasnlm.antimine.custom.viewmodel.CustomEvent
 import dev.lucasnlm.antimine.databinding.DialogCustomGameBinding
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -24,7 +24,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class CustomLevelDialogFragment : AppCompatDialogFragment() {
     private val gameViewModel by sharedViewModel<MainViewModel>()
     private val createGameViewModel by viewModel<CreateGameViewModel>()
-    private val preferencesRepository: IPreferencesRepository by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
 
     private lateinit var binding: DialogCustomGameBinding
 

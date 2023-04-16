@@ -5,11 +5,11 @@ import android.content.Context
 import android.content.Intent
 import dev.lucasnlm.antimine.core.analytics.DebugAnalyticsManager
 import dev.lucasnlm.external.Achievement
-import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IBillingManager
-import dev.lucasnlm.external.IInstantAppManager
-import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.external.AnalyticsManager
+import dev.lucasnlm.external.BillingManager
+import dev.lucasnlm.external.InstantAppManager
 import dev.lucasnlm.external.Leaderboard
+import dev.lucasnlm.external.PlayGamesManager
 import dev.lucasnlm.external.model.Price
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.coroutines.flow.Flow
@@ -19,13 +19,13 @@ import org.koin.dsl.module
 
 val AppModule = module {
     single {
-        object : IInstantAppManager {
+        object : InstantAppManager {
             override fun isEnabled(context: Context): Boolean = false
         }
-    } bind IInstantAppManager::class
+    } bind InstantAppManager::class
 
     single {
-        object : IBillingManager {
+        object : BillingManager {
             override fun start() {}
 
             override fun isEnabled(): Boolean = false
@@ -38,10 +38,10 @@ val AppModule = module {
 
             override fun listenPurchases(): Flow<PurchaseInfo> = flowOf()
         }
-    } bind IBillingManager::class
+    } bind BillingManager::class
 
     single {
-        object : IPlayGamesManager {
+        object : PlayGamesManager {
             override suspend fun playerId(): String? = null
 
             override fun hasGooglePlayGames(): Boolean = false
@@ -74,9 +74,9 @@ val AppModule = module {
 
             override fun signInToFirebase(activity: Activity) {}
         }
-    } bind IPlayGamesManager::class
+    } bind PlayGamesManager::class
 
     single {
         DebugAnalyticsManager()
-    } bind IAnalyticsManager::class
+    } bind AnalyticsManager::class
 }

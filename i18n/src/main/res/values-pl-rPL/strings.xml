@@ -23,6 +23,7 @@
     <string name="animations">Animacje</string>
     <string name="vibration">Wibracja przy dotknięciu</string>
     <string name="about">Informacje</string>
+    <string name="quit">Wyjdź</string>
     <string name="events">Statystyki</string>
     <string name="custom">Niestandardowy</string>
     <string name="start">Rozpocznij</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Nie udało się udostępnić</string>
     <string name="version_s">Wersja %1$s</string>
     <string name="sound_effects">Efekty dźwiękowe</string>
+    <string name="music">Muzyka</string>
+    <string name="music_by">Muzyka od: %1$s</string>
+    <string name="check_music">Słuchaj na Spotify…</string>
+    <string name="selected">Wybrane</string>
     <string name="are_you_sure">Na pewno?</string>
     <string name="enable_automatic_flags">Automatyczne umieszczanie flag</string>
     <string name="open_areas">Odkryte pola</string>
@@ -94,6 +99,7 @@
     <string name="more">Więcej</string>
     <string name="source_code">Kod źródłowy</string>
     <string name="translation">Tłumaczenie</string>
+    <string name="language">Język</string>
     <string name="licenses">Licencje</string>
     <string name="google_play_games">Gry Google Play</string>
     <string name="loading">Wczytywanie…</string>

@@ -2,22 +2,22 @@ package dev.lucasnlm.antimine.common.level.logic
 
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
-import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
+import dev.lucasnlm.antimine.common.level.repository.MinefieldRepositoryImpl
 import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.core.repository.Size
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class MinefieldFactoryTest {
-    private val dimensionRepository: IDimensionRepository = mock()
-    private val preferencesRepository: IPreferencesRepository = mock()
+    private val dimensionRepository: DimensionRepository = mock()
+    private val preferencesRepository: PreferencesRepository = mock()
 
     @Test
     fun testFromDifficultyPresetBeginner() {
-        MinefieldRepository().fromDifficulty(
+        MinefieldRepositoryImpl().fromDifficulty(
             Difficulty.Beginner,
             dimensionRepository,
             preferencesRepository,
@@ -30,7 +30,7 @@ class MinefieldFactoryTest {
 
     @Test
     fun testFromDifficultyPresetIntermediate() {
-        MinefieldRepository().fromDifficulty(
+        MinefieldRepositoryImpl().fromDifficulty(
             Difficulty.Intermediate,
             dimensionRepository,
             preferencesRepository,
@@ -43,7 +43,7 @@ class MinefieldFactoryTest {
 
     @Test
     fun testFromDifficultyPresetExpert() {
-        MinefieldRepository().fromDifficulty(
+        MinefieldRepositoryImpl().fromDifficulty(
             Difficulty.Expert,
             dimensionRepository,
             preferencesRepository,
@@ -56,7 +56,7 @@ class MinefieldFactoryTest {
 
     @Test
     fun testFromDifficultyPresetCustom() {
-        val preferencesRepository: IPreferencesRepository = mock {
+        val preferencesRepository: PreferencesRepository = mock {
             on { customGameMode() } doReturn Minefield(
                 10,
                 10,
@@ -64,7 +64,7 @@ class MinefieldFactoryTest {
             )
         }
 
-        MinefieldRepository().fromDifficulty(
+        MinefieldRepositoryImpl().fromDifficulty(
             Difficulty.Custom,
             mock(),
             preferencesRepository,
@@ -77,13 +77,13 @@ class MinefieldFactoryTest {
 
     @Test
     fun testFromDifficultyPresetStandard() {
-        val dimensionRepository: IDimensionRepository = mock {
+        val dimensionRepository: DimensionRepository = mock {
             on { areaSize() } doReturn 10.0f
             on { actionBarSizeWithStatus() } doReturn 10
             on { displaySize() } doReturn Size(500, 1000)
         }
 
-        MinefieldRepository().fromDifficulty(
+        MinefieldRepositoryImpl().fromDifficulty(
             Difficulty.Standard,
             dimensionRepository,
             preferencesRepository,

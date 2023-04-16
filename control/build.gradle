@@ -45,21 +45,21 @@ dependencies {
     implementation project(':ui')
 
     // Google
-    implementation 'com.google.android.material:material:1.8.0-rc01'
+    implementation 'com.google.android.material:material:1.9.0-beta01'
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.activity:activity-ktx:1.6.1'
-    implementation 'androidx.fragment:fragment-ktx:1.5.5'
+    implementation 'androidx.activity:activity-ktx:1.7.0'
+    implementation 'androidx.fragment:fragment-ktx:1.5.6'
 
     // RecyclerView
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.3.0'
 
     // Constraint
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Lifecycle
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
 
     // Koin
     implementation 'io.insert-koin:koin-android:3.1.2'
@@ -71,7 +71,7 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
 
     // Kotlin Lib
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
 
     // Unit Tests
     testImplementation 'junit:junit:4.13.2'

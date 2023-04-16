@@ -94,7 +94,7 @@ class PlayGamesButton : FrameLayout {
 
     init {
         val layoutInflater = LayoutInflater.from(context)
-        binding = ViewPlayGamesButtonBinding.inflate(layoutInflater, this, false)
+        binding = ViewPlayGamesButtonBinding.inflate(layoutInflater, this, true)
     }
 
     val binding: ViewPlayGamesButtonBinding

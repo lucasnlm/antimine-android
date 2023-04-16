@@ -23,6 +23,7 @@
     <string name="animations">动画</string>
     <string name="vibration">触摸反馈</string>
     <string name="about">关于</string>
+    <string name="quit">退出</string>
     <string name="events">统计</string>
     <string name="custom">自定义</string>
     <string name="start">开始</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">分享失败</string>
     <string name="version_s">版本 %1$s</string>
     <string name="sound_effects">音效</string>
+    <string name="music">音乐</string>
+    <string name="music_by">作曲：%1$s</string>
+    <string name="check_music">在 Spotify 中收听…</string>
+    <string name="selected">已选择</string>
     <string name="are_you_sure">你确定吗？</string>
     <string name="enable_automatic_flags">启用旗标自动放置</string>
     <string name="open_areas">踩中地雷</string>
@@ -94,6 +99,7 @@
     <string name="more">更多</string>
     <string name="source_code">源代码</string>
     <string name="translation">翻译</string>
+    <string name="language">语言</string>
     <string name="licenses">许可证</string>
     <string name="google_play_games">Google Play 游戏</string>
     <string name="loading">加载中……</string>

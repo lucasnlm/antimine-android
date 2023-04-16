@@ -23,6 +23,7 @@
     <string name="animations">Animacions</string>
     <string name="vibration">Resposta hàptica</string>
     <string name="about">Quant a</string>
+    <string name="quit">Quit</string>
     <string name="events">Estadístiques</string>
     <string name="custom">Personalitzat</string>
     <string name="start">Inicia</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">No s\'ha pogut compartir</string>
     <string name="version_s">Versió %1$s</string>
     <string name="sound_effects">Efecte de so</string>
+    <string name="music">Music</string>
+    <string name="music_by">Music by %1$s</string>
+    <string name="check_music">Listen on Spotify…</string>
+    <string name="selected">Selected</string>
     <string name="are_you_sure">Esteu segurs?</string>
     <string name="enable_automatic_flags">Activa la col·locació automàtica de banderes</string>
     <string name="open_areas">Zones obertes</string>
@@ -94,6 +99,7 @@
     <string name="more">Més</string>
     <string name="source_code">Codi font</string>
     <string name="translation">Traduccions</string>
+    <string name="language">Idioma</string>
     <string name="licenses">Llicències</string>
     <string name="google_play_games">Google Play Jocs</string>
     <string name="loading">Carregant…</string>

@@ -23,6 +23,7 @@
     <string name="animations">Animationer</string>
     <string name="vibration">Haptisk Feedback</string>
     <string name="about">Om</string>
+    <string name="quit">Quit</string>
     <string name="events">Statistik</string>
     <string name="custom">Tilpasset</string>
     <string name="start">Start</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Deling mislykkedes</string>
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Lydeffekter</string>
+    <string name="music">Music</string>
+    <string name="music_by">Music by %1$s</string>
+    <string name="check_music">Listen on Spotify…</string>
+    <string name="selected">Selected</string>
     <string name="are_you_sure">Er du sikker?</string>
     <string name="enable_automatic_flags">Aktivér automatisk placering af flag</string>
     <string name="open_areas">Åbne Områder</string>
@@ -94,6 +99,7 @@
     <string name="more">Mere</string>
     <string name="source_code">Kildekode</string>
     <string name="translation">Oversættelse</string>
+    <string name="language">Language</string>
     <string name="licenses">Licenser</string>
     <string name="google_play_games">Google Play Spil</string>
     <string name="loading">Indlæser…</string>

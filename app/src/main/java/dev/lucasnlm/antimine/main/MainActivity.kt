@@ -6,33 +6,35 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
-import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
-import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
+import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.control.ControlActivity
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.databinding.ActivityMainBinding
 import dev.lucasnlm.antimine.history.HistoryActivity
+import dev.lucasnlm.antimine.l10n.GameLocaleManager
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
@@ -46,17 +48,19 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ThemedActivity() {
     private val viewModel: MainViewModel by viewModel()
-    private val playGamesManager: IPlayGamesManager by inject()
-    private val preferencesRepository: IPreferencesRepository by inject()
-    private val minefieldRepository: IMinefieldRepository by inject()
-    private val dimensionRepository: IDimensionRepository by inject()
-    private val analyticsManager: IAnalyticsManager by inject()
-    private val featureFlagManager: IFeatureFlagManager by inject()
-    private val billingManager: IBillingManager by inject()
-    private val savesRepository: ISavesRepository by inject()
-    private val inAppUpdateManager: IInAppUpdateManager by inject()
-    private val instantAppManager: IInstantAppManager by inject()
-    private val preferenceRepository: IPreferencesRepository by inject()
+    private val playGamesManager: PlayGamesManager by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
+    private val minefieldRepository: MinefieldRepository by inject()
+    private val dimensionRepository: DimensionRepository by inject()
+    private val analyticsManager: AnalyticsManager by inject()
+    private val featureFlagManager: FeatureFlagManager by inject()
+    private val billingManager: BillingManager by inject()
+    private val savesRepository: SavesRepository by inject()
+    private val inAppUpdateManager: InAppUpdateManager by inject()
+    private val instantAppManager: InstantAppManager by inject()
+    private val preferenceRepository: PreferencesRepository by inject()
+    private val soundManager: GameAudioManager by inject()
+    private val gameLocaleManager: GameLocaleManager by inject()
 
     private lateinit var viewPager: ViewPager2
     private lateinit var googlePlayLauncher: ActivityResultLauncher<Intent>
@@ -64,6 +68,9 @@ class MainActivity : ThemedActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Must be called after onCreate
+        gameLocaleManager.applyPreferredLocaleIfNeeded()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -82,6 +89,7 @@ class MainActivity : ThemedActivity() {
             }
 
             setOnClickListener {
+                soundManager.playClickSound()
                 viewModel.sendEvent(MainEvent.ContinueGameEvent)
             }
         }
@@ -100,18 +108,17 @@ class MainActivity : ThemedActivity() {
                 val shouldShowTutorial = savesRepository.getAllSaves().count { it.status == SaveStatus.VICTORY } < 2
                 preferencesRepository.setShowTutorialButton(shouldShowTutorial)
                 withContext(Dispatchers.Main) {
-                    if (!shouldShowTutorial) {
-                        binding.tutorial.visibility = View.GONE
-                    }
+                    binding.tutorial.isVisible = shouldShowTutorial
                 }
             } else {
-                binding.tutorial.visibility = View.GONE
+                binding.tutorial.isVisible = false
             }
         }
 
         binding.newGameShow.setOnClickListener {
-            binding.newGameShow.visibility = View.GONE
-            binding.difficulties.visibility = View.VISIBLE
+            soundManager.playClickSound()
+            binding.newGameShow.isVisible = false
+            binding.difficulties.isVisible = true
         }
 
         mapOf(
@@ -149,6 +156,8 @@ class MainActivity : ThemedActivity() {
                     pushShortcutOf(difficulty)
                 }
 
+                soundManager.playClickSound()
+
                 viewModel.sendEvent(
                     MainEvent.StartNewGameEvent(difficulty = difficulty),
                 )
@@ -156,37 +165,38 @@ class MainActivity : ThemedActivity() {
         }
 
         binding.startCustom.setOnClickListener {
+            soundManager.playClickSound()
             analyticsManager.sentEvent(Analytics.OpenCustom)
             viewModel.sendEvent(MainEvent.ShowCustomDifficultyDialogEvent)
         }
 
         binding.settings.setOnClickListener {
+            soundManager.playClickSound()
             analyticsManager.sentEvent(Analytics.OpenSettings)
             val intent = Intent(this, PreferencesActivity::class.java)
             startActivity(intent)
         }
 
         binding.themes.setOnClickListener {
+            soundManager.playClickSound()
             val intent = Intent(this, ThemeActivity::class.java)
             preferencesRepository.setNewThemesIcon(false)
             startActivity(intent)
         }
 
-        binding.newThemesIcon.visibility = if (preferencesRepository.showNewThemesIcon()) {
-            View.VISIBLE
-        } else {
-            View.GONE
-        }
+        binding.newThemesIcon.isVisible = preferencesRepository.showNewThemesIcon()
 
         binding.controls.setOnClickListener {
+            soundManager.playClickSound()
             analyticsManager.sentEvent(Analytics.OpenControls)
             viewModel.sendEvent(MainEvent.ShowControlsEvent)
         }
 
         if (featureFlagManager.isFoss) {
-            binding.removeAdsRoot.visibility = View.VISIBLE
+            binding.removeAdsRoot.isVisible = true
             binding.removeAds.apply {
                 setOnClickListener {
+                    soundManager.playClickSound()
                     lifecycleScope.launch {
                         billingManager.charge(this@MainActivity)
                     }
@@ -210,29 +220,46 @@ class MainActivity : ThemedActivity() {
 
         if (featureFlagManager.isGameHistoryEnabled) {
             binding.previousGames.setOnClickListener {
+                soundManager.playClickSound()
                 analyticsManager.sentEvent(Analytics.OpenSaveHistory)
                 val intent = Intent(this, HistoryActivity::class.java)
                 startActivity(intent)
             }
         } else {
-            binding.previousGames.visibility = View.GONE
+            binding.previousGames.isVisible = false
         }
 
         binding.tutorial.apply {
             setText(R.string.tutorial)
             setOnClickListener {
+                soundManager.playClickSound()
                 analyticsManager.sentEvent(Analytics.OpenTutorial)
                 viewModel.sendEvent(MainEvent.StartTutorialEvent)
             }
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.language.apply {
+                setText(R.string.language)
+                setOnClickListener {
+                    soundManager.playClickSound()
+                    analyticsManager.sentEvent(Analytics.OpenLanguage)
+                    viewModel.sendEvent(MainEvent.StartLanguageEvent)
+                }
+            }
+        } else {
+            binding.language.isVisible = false
+        }
+
         binding.stats.setOnClickListener {
+            soundManager.playClickSound()
             analyticsManager.sentEvent(Analytics.OpenStats)
             val intent = Intent(this, StatsActivity::class.java)
             startActivity(intent)
         }
 
         binding.about.setOnClickListener {
+            soundManager.playClickSound()
             analyticsManager.sentEvent(Analytics.OpenAbout)
             val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)
@@ -240,11 +267,12 @@ class MainActivity : ThemedActivity() {
 
         if (playGamesManager.hasGooglePlayGames()) {
             binding.playGames.setOnClickListener {
+                soundManager.playClickSound()
                 analyticsManager.sentEvent(Analytics.OpenGooglePlayGames)
                 viewModel.sendEvent(MainEvent.ShowGooglePlayGamesEvent)
             }
         } else {
-            binding.playGames.visibility = View.GONE
+            binding.playGames.isVisible = false
         }
 
         lifecycleScope.launchWhenCreated {
@@ -301,9 +329,9 @@ class MainActivity : ThemedActivity() {
     override fun onResume() {
         super.onResume()
 
-        if (binding.newGameShow.visibility == View.GONE) {
-            binding.newGameShow.visibility = View.VISIBLE
-            binding.difficulties.visibility = View.GONE
+        if (!binding.newGameShow.isVisible) {
+            binding.newGameShow.isVisible = true
+            binding.difficulties.isVisible = false
         }
     }
 
@@ -436,9 +464,10 @@ class MainActivity : ThemedActivity() {
     }
 
     private fun bindRemoveAds(price: String? = null, showOffer: Boolean = false) {
-        binding.removeAdsRoot.visibility = View.VISIBLE
+        binding.removeAdsRoot.isVisible = true
         binding.removeAds.apply {
             setOnClickListener {
+                soundManager.playClickSound()
                 lifecycleScope.launch {
                     billingManager.charge(this@MainActivity)
                 }
@@ -448,12 +477,10 @@ class MainActivity : ThemedActivity() {
 
             price?.let {
                 binding.priceText.text = it
-                binding.priceText.visibility = View.VISIBLE
+                binding.priceText.isVisible = true
             }
 
-            if (showOffer) {
-                binding.priceOff.visibility = View.VISIBLE
-            }
+            binding.priceOff.isVisible = showOffer
         }
     }
 
@@ -483,9 +510,10 @@ class MainActivity : ThemedActivity() {
     }
 
     private fun handleBackPressed() {
-        if (binding.newGameShow.visibility == View.GONE) {
-            binding.newGameShow.visibility = View.VISIBLE
-            binding.difficulties.visibility = View.GONE
+        if (!binding.newGameShow.isVisible) {
+            binding.newGameShow.isVisible = true
+            binding.difficulties.isVisible = false
+            soundManager.playClickSound(1)
         } else {
             finishAffinity()
         }

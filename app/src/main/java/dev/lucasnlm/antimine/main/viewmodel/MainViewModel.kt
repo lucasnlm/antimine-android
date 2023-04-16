@@ -7,22 +7,23 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.common.level.database.models.Stats
-import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
+import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
+import dev.lucasnlm.antimine.l10n.LocalizationActivity
 import dev.lucasnlm.antimine.main.MainActivity
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
-import dev.lucasnlm.external.ICloudStorageManager
+import dev.lucasnlm.external.CloudStorageManager
 import dev.lucasnlm.external.model.CloudSave
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val application: Application,
-    private val preferencesRepository: IPreferencesRepository,
-    private val statsRepository: IStatsRepository,
-    private val saveCloudStorageManager: ICloudStorageManager,
+    private val preferencesRepository: PreferencesRepository,
+    private val statsRepository: StatsRepository,
+    private val saveCloudStorageManager: CloudStorageManager,
 ) : StatelessViewModel<MainEvent>() {
     override fun onEvent(event: MainEvent) {
         when (event) {
@@ -30,6 +31,7 @@ class MainViewModel(
             is MainEvent.StartNewGameEvent -> continueGame(event.difficulty)
             is MainEvent.ShowCustomDifficultyDialogEvent -> showCustomDifficultyDialogEvent()
             is MainEvent.StartTutorialEvent -> startTutorial()
+            is MainEvent.StartLanguageEvent -> startLocalization()
             is MainEvent.GoToSettingsPageEvent -> goToSettingsPageEvent()
             is MainEvent.GoToMainPageEvent -> goToMainPageEvent()
             is MainEvent.ShowControlsEvent -> showControlsEvent()
@@ -83,6 +85,7 @@ class MainViewModel(
             setHelp(help != 0)
             setAllowTapOnNumbers(allowTapNumbers != 0)
             setSoundEffectsEnabled(soundEffects != 0)
+            setMusicEnabled(music != 0)
             setPremiumFeatures(premiumFeatures != 0)
             useControlStyle(ControlStyle.values()[controlStyle])
             setOpenGameDirectly(openDirectly != 0)
@@ -132,6 +135,12 @@ class MainViewModel(
     private fun startTutorial() {
         val context = application.applicationContext
         val intent = Intent(context, TutorialActivity::class.java)
+        sendSideEffect(MainEvent.OpenActivity(intent))
+    }
+
+    private fun startLocalization() {
+        val context = application.applicationContext
+        val intent = Intent(context, LocalizationActivity::class.java)
         sendSideEffect(MainEvent.OpenActivity(intent))
     }
 }

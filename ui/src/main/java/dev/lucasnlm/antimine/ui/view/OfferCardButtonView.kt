@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.view.isVisible
 import com.google.android.material.card.MaterialCardView
 import dev.lucasnlm.antimine.ui.R
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
@@ -80,10 +81,8 @@ class OfferCardButtonView : FrameLayout {
         }
 
         val priceView = findViewById<TextView>(R.id.price).apply {
-            if (price == null) {
-                visibility = View.GONE
-            } else {
-                visibility = View.VISIBLE
+            isVisible = price != null
+            if (price != null) {
                 this.text = price
             }
 
@@ -93,22 +92,15 @@ class OfferCardButtonView : FrameLayout {
         }
 
         val offerView = findViewById<AppCompatImageView>(R.id.priceOff).apply {
-            visibility = if (showOffer) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
-
+            isVisible = showOffer
             if (invert) {
                 imageTintList = ColorStateList.valueOf(color)
             }
         }
 
         val iconView = findViewById<ImageView>(R.id.icon).apply {
-            if (startIcon == null) {
-                visibility = View.GONE
-            } else {
-                visibility = View.VISIBLE
+            isVisible = startIcon != null
+            if (startIcon != null) {
                 val tintColor = theme.palette.covered.toAndroidColor()
                 imageTintList = ColorStateList.valueOf(tintColor)
                 setImageResource(startIcon)
@@ -123,6 +115,7 @@ class OfferCardButtonView : FrameLayout {
                 backgroundColor
             }
             setCardBackgroundColor(backgroundColor)
+            isSoundEffectsEnabled = false
 
             setOnFocusChangeListener { _, focused ->
                 val focusedBackgroundColor = if (focused) {

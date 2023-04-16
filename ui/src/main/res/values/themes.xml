@@ -31,6 +31,7 @@
         <item name="cornerRadius">8dp</item>
         <item name="iconPadding">8dp</item>
         <item name="startIconContentDescription">null</item>
+        <item name="android:soundEffectsEnabled">false</item>
     </style>
 
     <style name="CustomButtonOutlined" parent="@style/Widget.Material3.Button.IconButton.Outlined">
@@ -43,6 +44,7 @@
         <item name="cornerRadius">8dp</item>
         <item name="iconPadding">8dp</item>
         <item name="startIconContentDescription">null</item>
+        <item name="android:soundEffectsEnabled">false</item>
     </style>
 
     <style name="CustomButton" parent="@style/Widget.Material3.Button.IconButton">
@@ -53,6 +55,7 @@
         <item name="cornerRadius">8dp</item>
         <item name="iconPadding">8dp</item>
         <item name="startIconContentDescription">null</item>
+        <item name="android:soundEffectsEnabled">false</item>
     </style>
 
     <style name="CustomButtonFlat" parent="@style/Widget.Material3.Button.TextButton">
@@ -61,6 +64,7 @@
         <item name="elevation">0dp</item>
         <item name="cornerRadius">0dp</item>
         <item name="startIconContentDescription">null</item>
+        <item name="android:soundEffectsEnabled">false</item>
     </style>
 
     <style name="AppTheme" parent="Theme.Material3.DynamicColors.DayNight">

@@ -6,21 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.view.isVisible
 import androidx.core.view.postDelayed
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.core.IAppVersionManager
+import dev.lucasnlm.antimine.core.AppVersionManager
 import dev.lucasnlm.antimine.core.dpToPx
-import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
-import dev.lucasnlm.external.ICrashReporter
+import dev.lucasnlm.antimine.ui.repository.ThemeRepository
+import dev.lucasnlm.external.CrashReporter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
@@ -31,11 +32,11 @@ import kotlin.system.exitProcess
 
 open class GameRenderFragment : AndroidFragmentApplication() {
     private val gameViewModel by sharedViewModel<GameViewModel>()
-    private val themeRepository: IThemeRepository by inject()
-    private val dimensionRepository: IDimensionRepository by inject()
-    private val preferencesRepository: IPreferencesRepository by inject()
-    private val crashReporter: ICrashReporter by inject()
-    private val appVersionManager: IAppVersionManager by inject()
+    private val themeRepository: ThemeRepository by inject()
+    private val dimensionRepository: DimensionRepository by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
+    private val crashReporter: CrashReporter by inject()
+    private val appVersionManager: AppVersionManager by inject()
 
     private var controlSwitcher: SwitchButtonView? = null
     private val isWatch = appVersionManager.isWatch()
@@ -47,9 +48,6 @@ open class GameRenderFragment : AndroidFragmentApplication() {
             themeRepository = themeRepository,
             preferencesRepository = preferencesRepository,
             dimensionRepository = dimensionRepository,
-            crashLogger = {
-                crashReporter.sendError(it)
-            },
             onSingleTap = {
                 lifecycleScope.launch {
                     gameViewModel.onSingleClick(it)
@@ -173,11 +171,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
     private fun bindControlSwitcherIfNeeded(view: View, delayed: Boolean = true) {
         val controlSwitcher = controlSwitcher
         if (controlSwitcher != null) {
-            if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
-                controlSwitcher.visibility = View.VISIBLE
-            } else {
-                controlSwitcher.visibility = View.GONE
-            }
+            controlSwitcher.isVisible = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
         } else {
             view.postDelayed(if (delayed) 200L else 0L) {
                 if (this.controlSwitcher == null) {
@@ -192,7 +186,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                                     start()
                                 }
 
-                                visibility = View.VISIBLE
+                                isVisible = true
                                 layoutParams = getSwitchControlLayoutParams()
 
                                 setQuestionButtonVisibility(preferencesRepository.useQuestionMark())

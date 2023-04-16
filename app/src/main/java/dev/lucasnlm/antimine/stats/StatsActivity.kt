@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.stats
 
 import android.os.Bundle
-import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -44,7 +44,7 @@ class StatsActivity : ThemedActivity() {
                 }
 
                 binding.stats.adapter = StatsAdapter(it.stats)
-                binding.empty.visibility = if (it.stats.isEmpty()) View.VISIBLE else View.GONE
+                binding.empty.isVisible = it.stats.isEmpty()
             }
         }
 

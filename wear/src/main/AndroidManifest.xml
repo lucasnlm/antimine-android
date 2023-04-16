@@ -14,7 +14,7 @@
         android:required="true" />
 
     <application
-        android:name="dev.lucasnlm.antimine.wear.WatchMainApplication"
+        android:name="dev.lucasnlm.antimine.wear.WearMainApplication"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
         android:allowBackup="true"
         android:allowClearUserData="true"
@@ -45,7 +45,7 @@
         </activity>
 
         <activity
-            android:name=".game.GameActivity"
+            android:name=".game.WearGameActivity"
             android:exported="true"/>
 
         <activity
@@ -69,11 +69,11 @@
             android:exported="true"/>
 
         <activity
-            android:name=".main.ThemeActivity"
+            android:name=".main.WearThemeActivity"
             android:exported="true"/>
 
         <activity
-            android:name=".tutorial.TutorialActivity"
+            android:name=".tutorial.WearTutorialActivity"
             android:exported="true"/>
     </application>
 

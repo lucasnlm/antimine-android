@@ -23,6 +23,7 @@
     <string name="animations">Εφέ Κίνησης</string>
     <string name="vibration">Δόνηση</string>
     <string name="about">Σχετικά</string>
+    <string name="quit">Έξοδος</string>
     <string name="events">Στατιστικά</string>
     <string name="custom">Προσαρμοσμένο</string>
     <string name="start">Έναρξη</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Αποτυχία κοινοποίησης</string>
     <string name="version_s">Έκδοση %1$s</string>
     <string name="sound_effects">Ηχητικά εφέ</string>
+    <string name="music">Μουσική</string>
+    <string name="music_by">Μουσική από %1$s</string>
+    <string name="check_music">Άκουσε στο Spotify…</string>
+    <string name="selected">Επιλέχθηκε</string>
     <string name="are_you_sure">Είσαι σίγουρος;</string>
     <string name="enable_automatic_flags">Ενεργοποίηση αυτόματης τοποθέτησης σημαιών</string>
     <string name="open_areas">Ανοιχτές περιοχές</string>
@@ -94,6 +99,7 @@
     <string name="more">Περισσότερα</string>
     <string name="source_code">Πηγαίος Κώδικας</string>
     <string name="translation">Μετάφραση</string>
+    <string name="language">Γλώσσα</string>
     <string name="licenses">Άδειες</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Φόρτωση…</string>

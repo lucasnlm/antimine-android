@@ -5,14 +5,17 @@ import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.core.app.ShareCompat
 import androidx.core.os.LocaleListCompat
+import androidx.core.view.isVisible
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.donation.databinding.ActivityDonationBinding
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
+import org.koin.android.ext.android.inject
 
 class DonationActivity : ThemedActivity() {
+    private val audioManager: GameAudioManager by inject()
     private lateinit var binding: ActivityDonationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,13 +25,22 @@ class DonationActivity : ThemedActivity() {
 
         bindToolbar(binding.toolbar)
 
-        binding.paypalButton.setOnClickListener { openPayPal() }
-        binding.githubButton.setOnClickListener { openGithub() }
+        binding.paypalButton.setOnClickListener {
+            playMonetizationSound()
+            openPayPal()
+        }
+        binding.githubButton.setOnClickListener {
+            playMonetizationSound()
+            openGithub()
+        }
 
         if (hasBrazilLocale()) {
-            binding.pixButton.setOnClickListener { copyPixKey() }
+            binding.pixButton.setOnClickListener {
+                playMonetizationSound()
+                copyPixKey()
+            }
         } else {
-            binding.pixButton.visibility = View.GONE
+            binding.pixButton.isVisible = false
         }
     }
 
@@ -42,6 +54,10 @@ class DonationActivity : ThemedActivity() {
         } catch (e: Exception) {
             Toast.makeText(context.applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun playMonetizationSound() {
+        audioManager.playMonetization()
     }
 
     private fun openPayPal() {

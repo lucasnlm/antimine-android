@@ -6,11 +6,10 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.view.*
-import android.widget.FrameLayout
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.fragment.app.FragmentManager
+import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.WindowManager
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -22,48 +21,27 @@ import dev.lucasnlm.antimine.databinding.GameOverDialogBinding
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
-import dev.lucasnlm.antimine.ui.model.AppTheme
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
-import dev.lucasnlm.external.IAdsManager
-import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IBillingManager
-import dev.lucasnlm.external.IFeatureFlagManager
-import dev.lucasnlm.external.IInstantAppManager
+import dev.lucasnlm.external.AnalyticsManager
+import dev.lucasnlm.external.FeatureFlagManager
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class GameOverDialogFragment : AppCompatDialogFragment() {
-    private val analyticsManager: IAnalyticsManager by inject()
-    private val adsManager: IAdsManager by inject()
-    private val instantAppManager: IInstantAppManager by inject()
-    private val endGameViewModel by viewModel<EndGameDialogViewModel>()
+class GameOverDialogFragment : CommonGameDialogFragment() {
+    private val analyticsManager: AnalyticsManager by inject()
+    private val dialogViewModel by viewModel<EndGameDialogViewModel>()
     private val gameViewModel by sharedViewModel<GameViewModel>()
-    private val preferencesRepository: IPreferencesRepository by inject()
-    private val billingManager: IBillingManager by inject()
-    private val featureFlagManager: IFeatureFlagManager by inject()
-    private val themeRepository: IThemeRepository by inject()
-
-    private lateinit var usingTheme: AppTheme
+    private val featureFlagManager: FeatureFlagManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        usingTheme = themeRepository.getTheme()
-
-        if (!preferencesRepository.isPremiumEnabled()) {
-            billingManager.start()
-        }
-
         arguments?.run {
-            endGameViewModel.sendEvent(
+            dialogViewModel.sendEvent(
                 EndGameDialogEvent.BuildCustomEndGame(
                     gameResult = if (getInt(DIALOG_TOTAL_MINES, 0) > 0) {
                         GameResult.values()[getInt(DIALOG_GAME_RESULT)]
@@ -81,12 +59,6 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
         }
     }
 
-    fun showAllowingStateLoss(manager: FragmentManager, tag: String?) {
-        val fragmentTransaction = manager.beginTransaction()
-        fragmentTransaction.add(this, tag)
-        fragmentTransaction.commitAllowingStateLoss()
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context = requireContext()
         return MaterialAlertDialogBuilder(context).apply {
@@ -94,8 +66,8 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
             val binding = GameOverDialogBinding.inflate(layoutInflater, null, false)
 
             binding.run {
-                lifecycleScope.launchWhenCreated {
-                    endGameViewModel.observeState().collect { state ->
+                lifecycleScope.launch {
+                    dialogViewModel.observeState().collect { state ->
                         title.text = state.title
                         subtitle.text = state.message
 
@@ -103,7 +75,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                             setImageResource(state.titleEmoji)
                             setOnClickListener {
                                 analyticsManager.sentEvent(Analytics.ClickEmoji)
-                                endGameViewModel.sendEvent(
+                                dialogViewModel.sendEvent(
                                     EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji),
                                 )
                             }
@@ -118,9 +90,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
 
                         continueGame.setOnClickListener {
                             analyticsManager.sentEvent(Analytics.ContinueGame)
-                            if (featureFlagManager.isAdsOnContinueEnabled &&
-                                !preferencesRepository.isPremiumEnabled()
-                            ) {
+                            if (featureFlagManager.isAdsOnContinueEnabled && !isPremiumEnabled) {
                                 showAdsAndContinue()
                             } else {
                                 gameViewModel.sendEvent(GameEvent.ContinueGame)
@@ -145,51 +115,18 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                             dismissAllowingStateLoss()
                         }
 
-                        if (featureFlagManager.isFoss && preferencesRepository.requestDonation()) {
-                            adFrame.visibility = View.VISIBLE
-
-                            val view = View.inflate(context, R.layout.donation_request, null)
-                            view.setOnClickListener {
-                                activity?.let {
-                                    lifecycleScope.launch {
-                                        billingManager.charge(it)
-                                        preferencesRepository.setRequestDonation(false)
-                                    }
-                                }
-                            }
-
-                            adFrame.addView(
-                                view,
-                                FrameLayout.LayoutParams(
-                                    FrameLayout.LayoutParams.MATCH_PARENT,
-                                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                                    Gravity.CENTER_HORIZONTAL,
-                                ),
-                            )
-                        } else if (!preferencesRepository.isPremiumEnabled() &&
-                            featureFlagManager.isBannerAdEnabled
-                        ) {
-                            adFrame.visibility = View.VISIBLE
-
-                            adFrame.addView(
-                                adsManager.createBannerAd(context),
-                                FrameLayout.LayoutParams(
-                                    FrameLayout.LayoutParams.MATCH_PARENT,
-                                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                                    Gravity.CENTER_HORIZONTAL,
-                                ),
-                            )
+                        if (featureFlagManager.isFoss && canRequestDonation) {
+                            showDonationDialog(adFrame)
+                        } else if (!isPremiumEnabled && featureFlagManager.isBannerAdEnabled) {
+                            showAdBannerDialog(adFrame)
                         }
 
-                        if (
-                            !state.showTutorial &&
+                        if (!state.showTutorial &&
                             state.showContinueButton &&
                             featureFlagManager.isContinueGameEnabled
                         ) {
-                            continueGame.visibility = View.VISIBLE
-                            if (!preferencesRepository.isPremiumEnabled() &&
-                                featureFlagManager.isAdsOnContinueEnabled
-                            ) {
+                            continueGame.isVisible = true
+                            if (!isPremiumEnabled && featureFlagManager.isAdsOnContinueEnabled) {
                                 continueGame.compoundDrawablePadding = 0
                                 continueGame.setCompoundDrawablesWithIntrinsicBounds(
                                     R.drawable.watch_ads_icon,
@@ -199,35 +136,33 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 )
                             }
 
-                            if (!preferencesRepository.isPremiumEnabled() &&
-                                featureFlagManager.showCountdownToContinue
-                            ) {
-                                countdown.visibility = View.VISIBLE
-                                lifecycleScope.launchWhenCreated {
+                            if (!isPremiumEnabled && featureFlagManager.showCountdownToContinue) {
+                                countdown.isVisible = true
+                                lifecycleScope.launch {
                                     var countdownTime = 10
                                     while (countdownTime > 0) {
                                         countdown.text = countdownTime.toString()
                                         delay(1000L)
                                         countdownTime -= 1
                                     }
-                                    countdown.visibility = View.GONE
-                                    continueGame.visibility = View.GONE
+                                    countdown.isVisible = false
+                                    continueGame.isVisible = false
                                 }
                             }
                         } else {
-                            continueGame.visibility = View.GONE
-                            countdown.visibility = View.GONE
+                            continueGame.isVisible = false
+                            countdown.isVisible = false
                         }
 
                         if (state.showTutorial) {
-                            tutorial.visibility = View.VISIBLE
+                            tutorial.isVisible = true
                             tutorial.setOnClickListener {
                                 val intent = Intent(context, TutorialActivity::class.java)
                                 context.startActivity(intent)
                             }
                         } else if (
-                            !preferencesRepository.isPremiumEnabled() &&
-                            !instantAppManager.isEnabled(context) &&
+                            !isPremiumEnabled &&
+                            !isInstantMode &&
                             featureFlagManager.isGameOverAdEnabled
                         ) {
                             activity?.let { activity ->
@@ -236,7 +171,7 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                 val price = priceModel?.price
                                 val unlockLabel = price?.let { "$label - $it" } ?: label
                                 removeAds.apply {
-                                    visibility = View.VISIBLE
+                                    isVisible = true
                                     text = unlockLabel
 
                                     setOnClickListener {
@@ -247,11 +182,9 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
                                     }
                                 }
                             }
-                        } else if (!preferencesRepository.isPremiumEnabled() &&
-                            instantAppManager.isEnabled(context)
-                        ) {
+                        } else if (!isPremiumEnabled && isInstantMode) {
                             removeAds.apply {
-                                visibility = View.VISIBLE
+                                isVisible = true
                                 text = getString(R.string.themes)
                                 setOnClickListener {
                                     val intent = Intent(context, ThemeActivity::class.java)
@@ -294,38 +227,13 @@ class GameOverDialogFragment : AppCompatDialogFragment() {
         }
     }
 
-    private fun showSettings() {
-        startActivity(Intent(requireContext(), PreferencesActivity::class.java))
-    }
-
-    private fun continueGame() {
+    override fun continueGame() {
         gameViewModel.sendEvent(GameEvent.ContinueGame)
         dismissAllowingStateLoss()
     }
 
-    private fun showAdsAndContinue() {
-        activity?.let { activity ->
-            if (!activity.isFinishing) {
-                adsManager.showRewardedAd(
-                    activity,
-                    skipIfFrequent = false,
-                    onRewarded = {
-                        continueGame()
-                    },
-                    onFail = {
-                        adsManager.showInterstitialAd(
-                            activity,
-                            onDismiss = {
-                                continueGame()
-                            },
-                            onError = {
-                                Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show()
-                            },
-                        )
-                    },
-                )
-            }
-        }
+    override fun canShowMusicBanner(): Boolean {
+        return dialogViewModel.singleState().showMusicDialog
     }
 
     companion object {

@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.view.isVisible
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.ui.R
@@ -108,20 +109,16 @@ class CardButtonView : FrameLayout {
         }
 
         val size = findViewById<TextView>(R.id.size).apply {
-            if (extra == null) {
-                visibility = View.GONE
-            } else {
-                visibility = View.VISIBLE
+            isVisible = extra != null
+            if (extra != null) {
                 this.text = extra
                 setTextColor(color)
             }
         }
 
         val iconView = findViewById<ImageView>(R.id.icon).apply {
-            if (startIcon == null) {
-                visibility = View.GONE
-            } else {
-                visibility = View.VISIBLE
+            isVisible = startIcon != null
+            if (startIcon != null) {
                 setImageResource(startIcon)
             }
             setColorFilter(color)

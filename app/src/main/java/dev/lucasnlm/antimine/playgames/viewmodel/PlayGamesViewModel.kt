@@ -5,17 +5,27 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.playgames.model.PlayGamesItem
-import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.external.AnalyticsManager
+import dev.lucasnlm.external.PlayGamesManager
 
 class PlayGamesViewModel(
-    private val playGamesManager: IPlayGamesManager,
-    private val analyticsManager: IAnalyticsManager,
+    private val playGamesManager: PlayGamesManager,
+    private val analyticsManager: AnalyticsManager,
 ) : StatelessViewModel<PlayGamesEvent>() {
 
     val playGamesItems = listOf(
-        PlayGamesItem(0, R.drawable.games_achievements, R.string.achievements, PlayGamesEvent.OpenAchievements),
-        PlayGamesItem(1, R.drawable.games_leaderboards, R.string.leaderboards, PlayGamesEvent.OpenLeaderboards),
+        PlayGamesItem(
+            id = 0,
+            iconRes = R.drawable.games_achievements,
+            stringRes = R.string.achievements,
+            triggerEvent = PlayGamesEvent.OpenAchievements,
+        ),
+        PlayGamesItem(
+            id = 1,
+            iconRes = R.drawable.games_leaderboards,
+            stringRes = R.string.leaderboards,
+            triggerEvent = PlayGamesEvent.OpenLeaderboards,
+        ),
     )
 
     fun openAchievements(activity: Activity) {

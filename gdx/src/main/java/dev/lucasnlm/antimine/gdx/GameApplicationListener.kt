@@ -5,51 +5,42 @@ import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.graphics.GL20
-import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.graphics.glutils.FrameBuffer
-import com.badlogic.gdx.graphics.glutils.ShaderProgram
 import com.badlogic.gdx.input.GestureDetector
-import dev.lucasnlm.antimine.core.IAppVersionManager
+import dev.lucasnlm.antimine.core.AppVersionManager
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Area
-import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.gdx.controller.GameInputController
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
 import dev.lucasnlm.antimine.gdx.models.GameTextures
 import dev.lucasnlm.antimine.gdx.models.InternalPadding
 import dev.lucasnlm.antimine.gdx.models.RenderSettings
-import dev.lucasnlm.antimine.gdx.shaders.BlurShader
 import dev.lucasnlm.antimine.gdx.stages.MinefieldStage
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.ui.ext.blue
 import dev.lucasnlm.antimine.ui.ext.green
 import dev.lucasnlm.antimine.ui.ext.red
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import dev.lucasnlm.antimine.ui.repository.ThemeRepository
 
 class GameApplicationListener(
     private val context: Context,
-    private val appVersion: IAppVersionManager,
-    private val preferencesRepository: IPreferencesRepository,
-    private val themeRepository: IThemeRepository,
-    private val dimensionRepository: IDimensionRepository,
+    private val appVersion: AppVersionManager,
+    private val preferencesRepository: PreferencesRepository,
+    private val themeRepository: ThemeRepository,
+    private val dimensionRepository: DimensionRepository,
     private val onSingleTap: (Int) -> Unit,
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTap: (Int) -> Unit,
     private val onEngineReady: () -> Unit,
-    private val crashLogger: (String) -> Unit,
 ) : ApplicationAdapter() {
     private var minefieldStage: MinefieldStage? = null
     private var boundAreas: List<Area> = listOf()
     private var boundMinefield: Minefield? = null
-    private val useBlur = context.isPortrait() && !appVersion.isWatch()
 
     private var batch: SpriteBatch? = null
-    private var mainFrameBuffer: FrameBuffer? = null
-    private var blurFrameBuffer: FrameBuffer? = null
-    private var blurShader: ShaderProgram? = null
 
     private val renderSettings = RenderSettings(
         theme = themeRepository.getTheme(),
@@ -83,21 +74,6 @@ class GameApplicationListener(
 
         val width = Gdx.graphics.width
         val height = Gdx.graphics.height
-
-        if (useBlur) {
-            batch = SpriteBatch()
-            mainFrameBuffer = FrameBuffer(Pixmap.Format.RGB888, width, height, false)
-            blurFrameBuffer = FrameBuffer(Pixmap.Format.RGBA8888, width, height, false)
-
-            blurShader = ShaderProgram(BlurShader.vert(), BlurShader.frag()).apply {
-                bind()
-                if (log.isNotBlank()) {
-                    crashLogger("Fail to compile shader. Error: $log")
-                }
-
-                setUniformf(BlurShader.resolution, width.toFloat())
-            }
-        }
 
         minefieldStage = MinefieldStage(
             screenWidth = width.toFloat(),
@@ -168,9 +144,6 @@ class GameApplicationListener(
 
     override fun dispose() {
         super.dispose()
-        blurShader?.dispose()
-        mainFrameBuffer?.dispose()
-        blurFrameBuffer?.dispose()
         batch?.dispose()
 
         GameContext.run {
@@ -193,94 +166,21 @@ class GameApplicationListener(
 
     override fun render() {
         super.render()
-        val mainFrameBuffer = this.mainFrameBuffer
         val minefieldStage = this.minefieldStage
-        val batch = this.batch
-        val blurShader = this.blurShader
         val currentTheme = themeRepository.getTheme()
 
-        if (useBlur) {
-            val width = Gdx.graphics.width
-            val height = Gdx.graphics.height
+        if (!appVersion.isValid()) {
+            Thread.sleep(500L)
+        }
 
-            mainFrameBuffer?.begin()
-            minefieldStage?.run {
-                currentTheme.palette.background.run {
-                    Gdx.gl.glClearColor(red(), green(), blue(), 1f)
-                    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
-                }
-
-                act()
-                draw()
-            }
-            mainFrameBuffer?.end()
-
-            if (!appVersion.isValid()) {
-                Thread.sleep(500L)
+        minefieldStage?.run {
+            currentTheme.palette.background.run {
+                Gdx.gl.glClearColor(red(), green(), blue(), 1f)
+                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
             }
 
-            batch?.run {
-                begin()
-
-                currentTheme.palette.background.run {
-                    Gdx.gl.glClearColor(red(), green(), blue(), 1f)
-                    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
-                }
-
-                shader = blurShader?.apply {
-                    setUniformf(BlurShader.direction, 1.0f, 1.0f)
-                    setUniformf(BlurShader.radius, 2.0f)
-
-                    if (context.isPortrait()) {
-                        setUniformf(BlurShader.blurTop, (1.0f - (renderSettings.appBarWithStatusHeight / height)))
-                        setUniformf(BlurShader.blurBottom, (renderSettings.navigationBarHeight / height))
-                        setUniformf(BlurShader.blurStart, 0.0f)
-                        setUniformf(BlurShader.blurEnd, 1.0f)
-                    } else {
-                        setUniformf(BlurShader.blurTop, 1.0f)
-                        setUniformf(BlurShader.blurBottom, 0.0f)
-                        setUniformf(BlurShader.blurStart, (renderSettings.appBarHeight / width))
-                        setUniformf(BlurShader.blurEnd, 1.0f - (renderSettings.navigationBarHeight / width))
-                    }
-                }
-
-                mainFrameBuffer?.let {
-                    draw(
-                        it.colorBufferTexture,
-                        0.0f,
-                        0.0f,
-                        0.0f,
-                        0.0f,
-                        width.toFloat(),
-                        height.toFloat(),
-                        1.0f,
-                        1.0f,
-                        0.0f,
-                        0,
-                        0,
-                        width,
-                        height,
-                        false,
-                        true,
-                    )
-                }
-
-                end()
-            }
-        } else {
-            if (!appVersion.isValid()) {
-                Thread.sleep(500L)
-            }
-
-            minefieldStage?.run {
-                currentTheme.palette.background.run {
-                    Gdx.gl.glClearColor(red(), green(), blue(), 1f)
-                    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
-                }
-
-                act()
-                draw()
-            }
+            act()
+            draw()
         }
     }
 

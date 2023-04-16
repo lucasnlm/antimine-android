@@ -23,6 +23,7 @@
     <string name="animations">애니메이션</string>
     <string name="vibration">터치 시 진동</string>
     <string name="about">앱 정보</string>
+    <string name="quit">나가기</string>
     <string name="events">통계</string>
     <string name="custom">사용자 지정</string>
     <string name="start">시작</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">공유 실패</string>
     <string name="version_s">버전: %1$s</string>
     <string name="sound_effects">효과음</string>
+    <string name="music">음악</string>
+    <string name="music_by">음악 제공: %1$s</string>
+    <string name="check_music">Spotify에서 듣기…</string>
+    <string name="selected">선택함</string>
     <string name="are_you_sure">계속하시겠습니까?</string>
     <string name="enable_automatic_flags">자동으로 깃발 놓기 사용</string>
     <string name="open_areas">칸 열기</string>
@@ -94,6 +99,7 @@
     <string name="more">더보기</string>
     <string name="source_code">소스 코드</string>
     <string name="translation">번역</string>
+    <string name="language">Language</string>
     <string name="licenses">라이선스</string>
     <string name="google_play_games">Google Play 게임</string>
     <string name="loading">로딩중…</string>

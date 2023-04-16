@@ -58,6 +58,44 @@
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/musicCard"
+        style="?attr/materialCardViewFilledStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/version_layout">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/musicBy"
+                style="@style/CustomButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/music" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginHorizontal="16dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:importantForAccessibility="no"
+                android:tint="?colorPrimary"
+                app:srcCompat="@drawable/open_in_new" />
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
     <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="0dp"
@@ -66,15 +104,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/version_layout">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/tutorial"
-            style="@style/CustomButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/tutorial" />
+        app:layout_constraintTop_toBottomOf="@+id/musicCard">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/thirdsParties"

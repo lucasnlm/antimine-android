@@ -71,6 +71,7 @@ class ControlAdapter(
         if (holder.simpleItem != null) {
             holder.itemView.run {
                 holder.simpleItem.cardView.apply {
+                    isSoundEffectsEnabled = false
                     setOnClickListener {
                         onControlSelected(controlDetail.controlStyle)
                     }
@@ -85,6 +86,7 @@ class ControlAdapter(
         } else if (holder.controlItem != null) {
             holder.itemView.run {
                 holder.controlItem.cardView.apply {
+                    isSoundEffectsEnabled = false
                     setOnClickListener {
                         onControlSelected(controlDetail.controlStyle)
                     }

@@ -4,12 +4,12 @@ import dev.lucasnlm.antimine.control.R
 import dev.lucasnlm.antimine.control.models.ControlDetails
 import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import kotlinx.coroutines.flow.flow
 
 class ControlViewModel(
-    private val preferencesRepository: IPreferencesRepository,
+    private val preferencesRepository: PreferencesRepository,
     private val hapticFeedbackManager: HapticFeedbackManager,
 ) : IntentViewModel<ControlEvent, ControlState>() {
 

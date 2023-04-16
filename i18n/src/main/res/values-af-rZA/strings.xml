@@ -23,6 +23,7 @@
     <string name="animations">Animasie</string>
     <string name="vibration">Haptiese terugvoer</string>
     <string name="about">Aangaande</string>
+    <string name="quit">Quit</string>
     <string name="events">Statistiek</string>
     <string name="custom">Pasmaak</string>
     <string name="start">Begin</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Kon nie deel nie</string>
     <string name="version_s">Weergawe %1$s</string>
     <string name="sound_effects">Byklanke</string>
+    <string name="music">Music</string>
+    <string name="music_by">Music by %1$s</string>
+    <string name="check_music">Listen on Spotify…</string>
+    <string name="selected">Selected</string>
     <string name="are_you_sure">Is jy seker?</string>
     <string name="enable_automatic_flags">Aktiveer outomatiese plasing van vlaggies</string>
     <string name="open_areas">Open Areas</string>
@@ -94,6 +99,7 @@
     <string name="more">Meer</string>
     <string name="source_code">Bron Kode</string>
     <string name="translation">Vertalings</string>
+    <string name="language">Language</string>
     <string name="licenses">Licenses</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Laai…</string>

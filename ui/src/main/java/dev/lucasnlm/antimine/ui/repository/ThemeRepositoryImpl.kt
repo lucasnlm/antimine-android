@@ -1,0 +1,140 @@
+package dev.lucasnlm.antimine.ui.repository
+
+import android.content.Context
+import android.content.res.Configuration
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
+import dev.lucasnlm.antimine.ui.R
+import dev.lucasnlm.antimine.ui.model.AppSkin
+import dev.lucasnlm.antimine.ui.model.AppTheme
+import dev.lucasnlm.antimine.ui.model.AreaPalette
+
+interface ThemeRepository {
+    fun getCustomTheme(): AppTheme?
+    fun getSkin(): AppSkin
+    fun getTheme(): AppTheme
+    fun getAllThemes(): List<AppTheme>
+    fun getAllSkins(): List<AppSkin>
+    fun setTheme(themeId: Long)
+    fun setSkin(skinId: Long)
+    fun reset(): AppTheme
+}
+
+class ThemeRepositoryImpl(
+    private val context: Context,
+    private val preferenceRepository: PreferencesRepository,
+) : ThemeRepository {
+    private val defaultTheme = Themes.lightTheme()
+
+    override fun getCustomTheme(): AppTheme? {
+        val targetThemeId = preferenceRepository.themeId()
+        return getAllThemes().firstOrNull { it.id == targetThemeId }
+    }
+
+    override fun getSkin(): AppSkin {
+        val targetSkinId = preferenceRepository.skinId()
+        val allSkins = getAllSkins()
+        return allSkins.firstOrNull { it.id == targetSkinId } ?: allSkins.first()
+    }
+
+    override fun getTheme(): AppTheme {
+        return getCustomTheme() ?: defaultTheme
+    }
+
+    override fun getAllThemes(): List<AppTheme> =
+        listOf(buildSystemTheme()) + Themes.getAllCustom()
+
+    override fun getAllSkins(): List<AppSkin> {
+        return Skins.getAllSkins()
+    }
+
+    override fun setTheme(themeId: Long) {
+        preferenceRepository.useTheme(themeId)
+    }
+
+    override fun setSkin(skinId: Long) {
+        preferenceRepository.useSkin(skinId)
+    }
+
+    override fun reset(): AppTheme {
+        preferenceRepository.useTheme(defaultTheme.id)
+        return buildSystemTheme()
+    }
+
+    private fun buildSystemTheme(): AppTheme {
+        return AppTheme(
+            id = 0L,
+            theme = R.style.AppTheme,
+            palette = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                fromMaterialYou(context)
+            } else {
+                fromDefaultPalette(context)
+            },
+            isPaid = true,
+            isDarkTheme = isDarkTheme(),
+            name = R.string.system,
+        )
+    }
+
+    private fun isDarkTheme(): Boolean {
+        val mask = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        return mask == Configuration.UI_MODE_NIGHT_YES
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun fromMaterialYou(context: Context): AreaPalette {
+        val isDarkTheme = isDarkTheme()
+        val background = if (isDarkTheme) {
+            ContextCompat.getColor(context, R.color.background)
+        } else {
+            ContextCompat.getColor(context, android.R.color.background_light)
+        }
+
+        val coveredColor = if (isDarkTheme) {
+            ContextCompat.getColor(context, android.R.color.system_accent1_300)
+        } else {
+            ContextCompat.getColor(context, android.R.color.system_accent1_600)
+        }
+
+        return AreaPalette(
+            accent = ContextCompat.getColor(context, android.R.color.system_accent1_500),
+            background = background,
+            covered = coveredColor,
+            coveredOdd = coveredColor,
+            uncovered = background,
+            uncoveredOdd = background,
+            minesAround1 = ContextCompat.getColor(context, R.color.mines_around_1),
+            minesAround2 = ContextCompat.getColor(context, R.color.mines_around_2),
+            minesAround3 = ContextCompat.getColor(context, R.color.mines_around_3),
+            minesAround4 = ContextCompat.getColor(context, R.color.mines_around_4),
+            minesAround5 = ContextCompat.getColor(context, R.color.mines_around_5),
+            minesAround6 = ContextCompat.getColor(context, R.color.mines_around_6),
+            minesAround7 = ContextCompat.getColor(context, R.color.mines_around_7),
+            minesAround8 = ContextCompat.getColor(context, R.color.mines_around_8),
+            highlight = ContextCompat.getColor(context, R.color.highlight),
+            focus = ContextCompat.getColor(context, android.R.color.system_accent1_500),
+        )
+    }
+
+    private fun fromDefaultPalette(context: Context) =
+        AreaPalette(
+            accent = ContextCompat.getColor(context, R.color.accent),
+            background = ContextCompat.getColor(context, R.color.background),
+            covered = ContextCompat.getColor(context, R.color.view_cover),
+            coveredOdd = ContextCompat.getColor(context, R.color.view_cover),
+            uncovered = ContextCompat.getColor(context, R.color.view_clean),
+            uncoveredOdd = ContextCompat.getColor(context, R.color.view_clean),
+            minesAround1 = ContextCompat.getColor(context, R.color.mines_around_1),
+            minesAround2 = ContextCompat.getColor(context, R.color.mines_around_2),
+            minesAround3 = ContextCompat.getColor(context, R.color.mines_around_3),
+            minesAround4 = ContextCompat.getColor(context, R.color.mines_around_4),
+            minesAround5 = ContextCompat.getColor(context, R.color.mines_around_5),
+            minesAround6 = ContextCompat.getColor(context, R.color.mines_around_6),
+            minesAround7 = ContextCompat.getColor(context, R.color.mines_around_7),
+            minesAround8 = ContextCompat.getColor(context, R.color.mines_around_8),
+            highlight = ContextCompat.getColor(context, R.color.highlight),
+            focus = ContextCompat.getColor(context, R.color.accent),
+        )
+}

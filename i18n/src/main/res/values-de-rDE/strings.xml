@@ -23,13 +23,14 @@
     <string name="animations">Animationen</string>
     <string name="vibration">Haptische Rückmeldung</string>
     <string name="about">Über</string>
+    <string name="quit">Beenden</string>
     <string name="events">Statistiken</string>
     <string name="custom">Benutzerdefiniert</string>
     <string name="start">Start</string>
     <string name="width">Breite</string>
     <string name="height">Höhe</string>
     <string name="mines">Minen</string>
-    <string name="seed">Seed</string>
+    <string name="seed">Startwert / Seed</string>
     <string name="retry_sure">Wenn du ein neues Spiel startest,\nwird dein aktueller Verlauf verloren gehen.</string>
     <string name="show_licenses">Lizenzen anzeigen</string>
     <string name="new_game_request">Möchtest du ein neues Spiel beginnen?</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Fehler beim Teilen</string>
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Toneffekte</string>
+    <string name="music">Musik</string>
+    <string name="music_by">Musik von %1$s</string>
+    <string name="check_music">Auf Spotify anhören...</string>
+    <string name="selected">Ausgewählt</string>
     <string name="are_you_sure">Bist du sicher?</string>
     <string name="enable_automatic_flags">Automatische Markierungen aktivieren</string>
     <string name="open_areas">Offene Flächen</string>
@@ -94,6 +99,7 @@
     <string name="more">Mehr</string>
     <string name="source_code">Quellcode</string>
     <string name="translation">Übersetzung</string>
+    <string name="language">Sprache</string>
     <string name="licenses">Lizenzen</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Wird geladen...</string>

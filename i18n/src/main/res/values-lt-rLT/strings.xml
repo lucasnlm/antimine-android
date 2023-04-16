@@ -23,6 +23,7 @@
     <string name="animations">Animacijos</string>
     <string name="vibration">Vibracija</string>
     <string name="about">Apie</string>
+    <string name="quit">Išeiti</string>
     <string name="events">Statistika</string>
     <string name="custom">Tinkintas</string>
     <string name="start">Pradėti</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Nepavyko pasidalinti</string>
     <string name="version_s">Versija: %1$s</string>
     <string name="sound_effects">Garso efektai</string>
+    <string name="music">Muzika</string>
+    <string name="music_by">Muzika: %1$s</string>
+    <string name="check_music">Klausytis Spotify…</string>
+    <string name="selected">Pasirinkta</string>
     <string name="are_you_sure">Esate tikri?</string>
     <string name="enable_automatic_flags">Įjungti automatinį vėliavėlių dėjimą</string>
     <string name="open_areas">Susprogdintos minos</string>
@@ -94,6 +99,7 @@
     <string name="more">Daugiau</string>
     <string name="source_code">Pirminis kodas</string>
     <string name="translation">Vertimas</string>
+    <string name="language">Kalba</string>
     <string name="licenses">Licencijos</string>
     <string name="google_play_games">Play žaidimai</string>
     <string name="loading">Įkeliama…</string>

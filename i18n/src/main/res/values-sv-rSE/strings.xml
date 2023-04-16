@@ -23,6 +23,7 @@
     <string name="animations">Animationer</string>
     <string name="vibration">Haptik-feedback</string>
     <string name="about">Om</string>
+    <string name="quit">Quit</string>
     <string name="events">Statistik</string>
     <string name="custom">Anpassa</string>
     <string name="start">Börja</string>
@@ -37,10 +38,10 @@
     <string name="game_time">Speltid</string>
     <string name="settings_general">Allmänt</string>
     <string name="settings_gameplay">Spelsätt</string>
-    <string name="export_settings">Export</string>
-    <string name="import_settings">Import</string>
-    <string name="exported_success">Settings exported!</string>
-    <string name="imported_success">Settings imported!</string>
+    <string name="export_settings">Exportera</string>
+    <string name="import_settings">Importera</string>
+    <string name="exported_success">Inställningar exporterade!</string>
+    <string name="imported_success">Inställningar importerade!</string>
     <string name="settings_accessibility">Tillgänglighet</string>
     <string name="system">System</string>
     <string name="sign_in_failed">Det gick inte att logga in. Kontrollera nätverksanslutningen och försök igen.</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Misslyckades att dela</string>
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Ljudeffekter</string>
+    <string name="music">Music</string>
+    <string name="music_by">Music by %1$s</string>
+    <string name="check_music">Listen on Spotify…</string>
+    <string name="selected">Selected</string>
     <string name="are_you_sure">Är du säker?</string>
     <string name="enable_automatic_flags">Aktivera automatisk placering av flaggor</string>
     <string name="open_areas">Öppna områden</string>
@@ -81,7 +86,7 @@
     <string name="you_have_received">Du har fått: +%1$d</string>
     <string name="help_win_a_game">För fler ledtrådar, måste du vinna ett spel.</string>
     <string name="unknown_error">Okänt fel.</string>
-    <string name="error">Error!</string>
+    <string name="error">Fel!</string>
     <string name="leaderboards">Topplistor</string>
     <string name="cancel">Avbryt</string>
     <string name="resume">Återuppta</string>
@@ -94,6 +99,7 @@
     <string name="more">Mer</string>
     <string name="source_code">Källkod</string>
     <string name="translation">Översättning</string>
+    <string name="language">Language</string>
     <string name="licenses">Licenser</string>
     <string name="google_play_games">Google Play Spel</string>
     <string name="loading">Laddar…</string>
@@ -127,7 +133,7 @@
     <string name="click_numbers">Tillåt tryck på siffror</string>
     <string name="flag_when_tap_numbers">Flagga när du trycker på nummer</string>
     <string name="tap_to_customize">Tryck för att anpassa</string>
-    <string name="no_guess_fail_warning">Den nuvarande minfälten kanske inte är gissfri!</string>
+    <string name="no_guess_fail_warning">Den nuvarande minfälten kanske inte är gissningsfria!</string>
     <string name="fixed_size">Fast storlek</string>
     <string name="progressive">Progressiv</string>
     <string name="highlight_unsolved_numbers">Markera olösta tal</string>

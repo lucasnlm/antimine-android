@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.core.dpToPx
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.themes.R
 import dev.lucasnlm.antimine.themes.databinding.ViewSkinBinding
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppSkin
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import dev.lucasnlm.antimine.ui.repository.ThemeRepository
 
 class SkinAdapter(
-    private val themeRepository: IThemeRepository,
+    private val themeRepository: ThemeRepository,
     private val themeViewModel: ThemeViewModel,
-    private val preferencesRepository: IPreferencesRepository,
+    private val preferencesRepository: PreferencesRepository,
     private val onSelectSkin: (AppSkin) -> Unit,
     private val onRequestPurchase: () -> Unit,
 ) : RecyclerView.Adapter<SkinViewHolder>() {
@@ -47,10 +47,13 @@ class SkinAdapter(
 
     override fun onBindViewHolder(holder: SkinViewHolder, position: Int) {
         val skin = appSkins[position]
-        val tintColor = themeRepository.getTheme().palette.covered.toAndroidColor()
+        val palette = themeRepository.getTheme().palette
+        val tintColor = palette.covered.toAndroidColor()
         val context = holder.itemView.context
 
         holder.itemView.apply {
+            isSoundEffectsEnabled = false
+
             val selected = (skin.id == themeViewModel.singleState().currentAppSkin.id)
 
             val backgroundColor = MaterialColors.getColorStateListOrNull(
@@ -58,14 +61,12 @@ class SkinAdapter(
                 R.attr.backgroundColor,
             )
 
-            val strokeColor = MaterialColors.getColorStateListOrNull(
-                context,
-                if (selected) R.attr.colorTertiary else R.attr.backgroundColor,
-            )
+            val strokeColor = palette.background.toAndroidColor()
 
             holder.binding.cardSkin.apply {
                 backgroundTintList = backgroundColor
                 setStrokeColor(strokeColor)
+                isSoundEffectsEnabled = false
                 setOnClickListener {
                     if (preferencesRepository.isPremiumEnabled()) {
                         onSelectSkin(skin)
@@ -80,6 +81,7 @@ class SkinAdapter(
                 val paddingValue = context.dpToPx(8)
                 alpha = if (selected) 1.0f else floatAlpha
                 setImageResource(skin.imageRes)
+                isSoundEffectsEnabled = false
                 if (skin.canTint) {
                     setColorFilter(tintColor, PorterDuff.Mode.MULTIPLY)
                 } else {

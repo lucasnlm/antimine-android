@@ -4,19 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.wear.widget.WearableLinearLayoutManager
 import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.wear.R
 import dev.lucasnlm.antimine.wear.databinding.ActivityMainBinding
-import dev.lucasnlm.antimine.wear.game.GameActivity
+import dev.lucasnlm.antimine.wear.game.WearGameActivity
 import dev.lucasnlm.antimine.wear.main.models.MenuItem
 import dev.lucasnlm.antimine.wear.main.view.MainMenuAdapter
-import dev.lucasnlm.antimine.wear.tutorial.TutorialActivity
+import dev.lucasnlm.antimine.wear.tutorial.WearTutorialActivity
 import org.koin.android.ext.android.inject
 
 class MainActivity : ThemedActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val preferencesRepository: IPreferencesRepository by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,11 +89,11 @@ class MainActivity : ThemedActivity() {
 
     private fun continueGame(difficulty: Difficulty? = null) {
         val context = application.applicationContext
-        val intent = Intent(context, GameActivity::class.java).apply {
+        val intent = Intent(context, WearGameActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             difficulty?.let {
                 val bundle = Bundle().apply {
-                    putSerializable(GameActivity.DIFFICULTY, it)
+                    putSerializable(WearGameActivity.DIFFICULTY, it)
                 }
                 putExtras(bundle)
             }
@@ -112,12 +112,12 @@ class MainActivity : ThemedActivity() {
     }
 
     private fun startThemeScreen() {
-        val intent = Intent(this, ThemeActivity::class.java)
+        val intent = Intent(this, WearThemeActivity::class.java)
         startActivity(intent)
     }
 
     private fun startTutorial() {
-        val intent = Intent(this, TutorialActivity::class.java)
+        val intent = Intent(this, WearTutorialActivity::class.java)
         startActivity(intent)
     }
 }

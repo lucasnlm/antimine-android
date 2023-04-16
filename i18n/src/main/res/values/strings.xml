@@ -55,6 +55,10 @@
     <string name="fail_to_share">Failed to share</string>
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Sound Effects</string>
+    <string name="music">Music</string>
+    <string name="music_by">Music by %1$s</string>
+    <string name="check_music">Listen on Spotify…</string>
+    <string name="selected">Selected</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="enable_automatic_flags">Enable automatic placing of flags</string>
     <string name="open_areas">Open Areas</string>
@@ -95,6 +99,7 @@
     <string name="more">More</string>
     <string name="source_code">Source Code</string>
     <string name="translation">Translation</string>
+    <string name="language">Language</string>
     <string name="licenses">Licenses</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Loading…</string>

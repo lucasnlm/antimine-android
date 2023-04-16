@@ -1,11 +1,11 @@
 package dev.lucasnlm.antimine.wear.main.view
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
@@ -15,7 +15,7 @@ import dev.lucasnlm.antimine.wear.databinding.ViewThemeBinding
 class ThemeListAdapter(
     private val themes: List<AppTheme>,
     private val onSelectTheme: (AppTheme) -> Unit,
-    private val preferencesRepository: IPreferencesRepository,
+    private val preferencesRepository: PreferencesRepository,
 ) : RecyclerView.Adapter<ThemeListAdapter.RecyclerViewHolder>() {
     init {
         setHasStableIds(true)
@@ -45,7 +45,7 @@ class ThemeListAdapter(
 
     class RecyclerViewHolder(
         private val binding: ViewThemeBinding,
-        private val preferencesRepository: IPreferencesRepository,
+        private val preferencesRepository: PreferencesRepository,
         private val onSelectTheme: (AppTheme) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(theme: AppTheme) {
@@ -60,12 +60,12 @@ class ThemeListAdapter(
                     setTextColor(theme.palette.background.toInvertedAndroidColor(200))
                     setBackgroundResource(android.R.color.transparent)
                     setCompoundDrawables(null, null, null, null)
-                    visibility = View.VISIBLE
+                    isVisible = true
                 }
             } else {
                 binding.label.apply {
                     setCompoundDrawables(null, null, null, null)
-                    visibility = View.GONE
+                    isVisible = false
                 }
             }
 

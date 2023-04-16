@@ -1,11 +1,11 @@
 package dev.lucasnlm.antimine.mocks
 
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
-class MockPreferencesRepository : IPreferencesRepository {
+class MockPreferencesRepository : PreferencesRepository {
     private var customMinefield = Minefield(9, 9, 9)
 
     override fun hasCustomizations(): Boolean = true
@@ -53,6 +53,10 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun skinId(): Long = 1L
 
     override fun useSkin(skinId: Long) {}
+
+    override fun setPreferredLocale(locale: String) {}
+
+    override fun getPreferredLocale(): String = "en"
 
     override fun updateStatsBase(statsBase: Int) {}
 
@@ -126,6 +130,10 @@ class MockPreferencesRepository : IPreferencesRepository {
 
     override fun setSoundEffectsEnabled(value: Boolean) {}
 
+    override fun isMusicEnabled(): Boolean = false
+
+    override fun setMusicEnabled(value: Boolean) {}
+
     override fun touchSensibility(): Int = 35
 
     override fun setTouchSensibility(sensibility: Int) {}
@@ -159,6 +167,14 @@ class MockPreferencesRepository : IPreferencesRepository {
     override fun showTutorialButton(): Boolean = true
 
     override fun setShowTutorialButton(value: Boolean) {}
+
+    override fun showMusicBanner(): Boolean = true
+
+    override fun setShowMusicBanner(value: Boolean) {}
+
+    override fun lastMusicBanner(): Long = 0L
+
+    override fun setLastMusicBanner(value: Long) {}
 
     override fun dimNumbers(): Boolean = false
 

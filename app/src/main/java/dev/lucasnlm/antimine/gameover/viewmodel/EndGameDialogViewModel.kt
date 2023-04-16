@@ -1,14 +1,19 @@
 package dev.lucasnlm.antimine.gameover.viewmodel
 
 import android.app.Application
+import android.content.Context.AUDIO_SERVICE
+import android.media.AudioManager
 import androidx.annotation.DrawableRes
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.gameover.model.GameResult
+import dev.lucasnlm.antimine.preferences.PreferencesRepositoryImpl
 import kotlinx.coroutines.flow.flow
+import java.util.concurrent.TimeUnit
 
 class EndGameDialogViewModel(
     private val application: Application,
+    private val preferencesRepository: PreferencesRepositoryImpl,
 ) : IntentViewModel<EndGameDialogEvent, EndGameDialogState>() {
     private fun List<Int>.safeRandomEmoji(
         @DrawableRes except: Int,
@@ -68,6 +73,24 @@ class EndGameDialogViewModel(
         }
     }
 
+    private fun canShowMusicDialog(): Boolean {
+        val lastBannerDeltaMs = System.currentTimeMillis() - preferencesRepository.lastMusicBanner()
+        val days = TimeUnit.MILLISECONDS.toHours(lastBannerDeltaMs)
+
+        return if (preferencesRepository.isMusicEnabled() && preferencesRepository.showMusicBanner() && days > 1) {
+            val context = application.applicationContext
+            val audioManager = context.getSystemService(AUDIO_SERVICE) as AudioManager?
+            return audioManager?.run {
+                val volumeLevel = getStreamVolume(AudioManager.STREAM_MUSIC)
+                val maxVolumeLevel = getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+                val volumePercent = (volumeLevel.toFloat() / maxVolumeLevel)
+                volumePercent > 0.1f
+            } == true
+        } else {
+            false
+        }
+    }
+
     override fun initialState() = EndGameDialogState(
         R.drawable.emoji_triangular_flag,
         "",
@@ -76,6 +99,7 @@ class EndGameDialogViewModel(
         showContinueButton = false,
         received = 0,
         showTutorial = false,
+        showMusicDialog = false,
     )
 
     override suspend fun mapEventToState(event: EndGameDialogEvent) = flow {
@@ -91,6 +115,7 @@ class EndGameDialogViewModel(
                         showContinueButton = false,
                         received = event.received,
                         showTutorial = false,
+                        showMusicDialog = canShowMusicDialog(),
                     )
                 }
                 GameResult.GameOver -> {
@@ -102,6 +127,7 @@ class EndGameDialogViewModel(
                         showContinueButton = event.showContinueButton,
                         received = event.received,
                         showTutorial = event.turn in 1..2,
+                        showMusicDialog = canShowMusicDialog(),
                     )
                 }
                 GameResult.Completed -> {
@@ -113,6 +139,7 @@ class EndGameDialogViewModel(
                         showContinueButton = false,
                         received = event.received,
                         showTutorial = false,
+                        showMusicDialog = canShowMusicDialog(),
                     )
                 }
             }

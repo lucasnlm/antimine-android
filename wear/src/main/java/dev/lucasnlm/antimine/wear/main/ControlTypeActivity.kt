@@ -3,7 +3,7 @@ package dev.lucasnlm.antimine.wear.main
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.wear.widget.WearableLinearLayoutManager
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.wear.R
@@ -14,7 +14,7 @@ import org.koin.android.ext.android.inject
 
 class ControlTypeActivity : ThemedActivity() {
     private lateinit var binding: ActivityControlTypesBinding
-    private val preferencesRepository: IPreferencesRepository by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

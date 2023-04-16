@@ -8,9 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.widget.FrameLayout
-import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.fragment.app.FragmentManager
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -21,46 +19,25 @@ import dev.lucasnlm.antimine.databinding.WinDialogBinding
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.stats.StatsActivity
-import dev.lucasnlm.antimine.ui.model.AppTheme
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
-import dev.lucasnlm.external.IAdsManager
-import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IBillingManager
-import dev.lucasnlm.external.IFeatureFlagManager
-import dev.lucasnlm.external.IInstantAppManager
-import kotlinx.coroutines.flow.collect
+import dev.lucasnlm.external.AnalyticsManager
+import dev.lucasnlm.external.FeatureFlagManager
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class WinGameDialogFragment : AppCompatDialogFragment() {
-    private val analyticsManager: IAnalyticsManager by inject()
-    private val adsManager: IAdsManager by inject()
-    private val instantAppManager: IInstantAppManager by inject()
-    private val endGameViewModel by viewModel<EndGameDialogViewModel>()
+class WinGameDialogFragment : CommonGameDialogFragment() {
+    private val analyticsManager: AnalyticsManager by inject()
+    private val dialogViewmodel by viewModel<EndGameDialogViewModel>()
     private val gameViewModel by sharedViewModel<GameViewModel>()
-    private val preferencesRepository: IPreferencesRepository by inject()
-    private val billingManager: IBillingManager by inject()
-    private val featureFlagManager: IFeatureFlagManager by inject()
-    private val themeRepository: IThemeRepository by inject()
-
-    private lateinit var usingTheme: AppTheme
+    private val featureFlagManager: FeatureFlagManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        usingTheme = themeRepository.getTheme()
-
-        if (!preferencesRepository.isPremiumEnabled()) {
-            billingManager.start()
-        }
-
         arguments?.run {
-            endGameViewModel.sendEvent(
+            dialogViewmodel.sendEvent(
                 EndGameDialogEvent.BuildCustomEndGame(
                     gameResult = if (getInt(DIALOG_TOTAL_MINES, 0) > 0) {
                         GameResult.values()[getInt(DIALOG_GAME_RESULT)]
@@ -78,21 +55,29 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
         }
     }
 
-    fun showAllowingStateLoss(manager: FragmentManager, tag: String?) {
-        val fragmentTransaction = manager.beginTransaction()
-        fragmentTransaction.add(this, tag)
-        fragmentTransaction.commitAllowingStateLoss()
+    override fun continueGame() {
+        activity?.let { _ ->
+            lifecycleScope.launch {
+                gameViewModel.startNewGame()
+            }
+            dismissAllowingStateLoss()
+        }
+    }
+
+    override fun canShowMusicBanner(): Boolean {
+        return dialogViewmodel.singleState().showMusicDialog
     }
 
     @SuppressLint("InflateParams")
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
-        MaterialAlertDialogBuilder(requireContext()).apply {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val context = requireContext()
+        return MaterialAlertDialogBuilder(context).apply {
             val layoutInflater = LayoutInflater.from(context)
             val binding = WinDialogBinding.inflate(layoutInflater, null, false)
 
             binding.run {
-                lifecycleScope.launchWhenCreated {
-                    endGameViewModel.observeState().collect { state ->
+                lifecycleScope.launch {
+                    dialogViewmodel.observeState().collect { state ->
                         title.text = state.title
                         subtitle.text = state.message
 
@@ -100,7 +85,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             setImageResource(state.titleEmoji)
                             setOnClickListener {
                                 analyticsManager.sentEvent(Analytics.ClickEmoji)
-                                endGameViewModel.sendEvent(
+                                dialogViewmodel.sendEvent(
                                     EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji),
                                 )
                             }
@@ -114,20 +99,14 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                         }
 
                         newGame.setOnClickListener {
-                            if (featureFlagManager.isAdsOnContinueEnabled &&
-                                !preferencesRepository.isPremiumEnabled()
-                            ) {
-                                showAdsAndNewGame()
+                            if (featureFlagManager.isAdsOnContinueEnabled && !isPremiumEnabled) {
+                                showAdsAndContinue()
                             } else {
-                                lifecycleScope.launch {
-                                    gameViewModel.startNewGame()
-                                }
-                                dismissAllowingStateLoss()
+                                continueGame()
                             }
                         }
 
-                        if (!preferencesRepository.isPremiumEnabled() &&
-                            featureFlagManager.isAdsOnContinueEnabled
+                        if (!isPremiumEnabled && featureFlagManager.isAdsOnContinueEnabled
                         ) {
                             newGame.compoundDrawablePadding = 0
                             newGame.setCompoundDrawablesWithIntrinsicBounds(
@@ -138,40 +117,12 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             )
                         }
 
-                        if (featureFlagManager.isFoss && preferencesRepository.requestDonation()) {
-                            adFrame.visibility = View.VISIBLE
-
-                            val view = View.inflate(context, R.layout.donation_request, null)
-                            view.setOnClickListener {
-                                activity?.let {
-                                    lifecycleScope.launch {
-                                        billingManager.charge(it)
-                                        preferencesRepository.setRequestDonation(false)
-                                    }
-                                }
-                            }
-
-                            adFrame.addView(
-                                view,
-                                FrameLayout.LayoutParams(
-                                    FrameLayout.LayoutParams.MATCH_PARENT,
-                                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                                    Gravity.CENTER_HORIZONTAL,
-                                ),
-                            )
-                        } else if (!preferencesRepository.isPremiumEnabled() &&
-                            featureFlagManager.isBannerAdEnabled
-                        ) {
-                            adFrame.visibility = View.VISIBLE
-
-                            adFrame.addView(
-                                adsManager.createBannerAd(context),
-                                FrameLayout.LayoutParams(
-                                    FrameLayout.LayoutParams.MATCH_PARENT,
-                                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                                    Gravity.CENTER_HORIZONTAL,
-                                ),
-                            )
+                        if (featureFlagManager.isFoss && canRequestDonation) {
+                            showDonationDialog(adFrame)
+                        } else if (!isPremiumEnabled && featureFlagManager.isBannerAdEnabled) {
+                            showAdBannerDialog(adFrame)
+                        } else if (state.showMusicDialog) {
+                            showMusicDialog(adFrame)
                         }
 
                         settings.setOnClickListener {
@@ -183,11 +134,11 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             close.setOnClickListener {
                                 dismissAllowingStateLoss()
                             }
-                            stats.visibility = View.VISIBLE
+                            stats.isVisible = true
                         }
 
-                        if (!preferencesRepository.isPremiumEnabled() &&
-                            !instantAppManager.isEnabled(context) &&
+                        if (!isPremiumEnabled &&
+                            !isInstantMode &&
                             featureFlagManager.isGameOverAdEnabled
                         ) {
                             activity?.let { activity ->
@@ -195,7 +146,7 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                                 val price = billingManager.getPrice()?.price
                                 val unlockLabel = price?.let { "$label - $it" } ?: label
                                 removeAds.apply {
-                                    visibility = View.VISIBLE
+                                    isVisible = true
                                     text = unlockLabel
                                     setOnClickListener {
                                         analyticsManager.sentEvent(Analytics.RemoveAds)
@@ -211,12 +162,12 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                             if (state.received > 0 &&
                                 state.gameResult == GameResult.Victory &&
                                 preferencesRepository.useHelp() &&
-                                preferencesRepository.isPremiumEnabled()
+                                isPremiumEnabled
                             ) {
-                                visibility = View.VISIBLE
+                                isVisible = true
                                 text = getString(R.string.you_have_received, state.received)
                             } else {
-                                visibility = View.GONE
+                                isVisible = false
                             }
                         }
                     }
@@ -250,40 +201,6 @@ class WinGameDialogFragment : AppCompatDialogFragment() {
                     addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
                     attributes?.blurBehindRadius = 8
                 }
-            }
-        }
-
-    private fun showSettings() {
-        startActivity(Intent(requireContext(), PreferencesActivity::class.java))
-    }
-
-    private fun startNewGameAndDismiss() {
-        activity?.let { _ ->
-            lifecycleScope.launch {
-                gameViewModel.startNewGame()
-            }
-            dismissAllowingStateLoss()
-        }
-    }
-
-    private fun showAdsAndNewGame() {
-        activity?.let { activity ->
-            if (!activity.isFinishing) {
-                adsManager.showRewardedAd(
-                    activity,
-                    skipIfFrequent = false,
-                    onRewarded = {
-                        startNewGameAndDismiss()
-                    },
-                    onFail = {
-                        adsManager.showInterstitialAd(
-                            activity,
-                            onDismiss = {
-                                startNewGameAndDismiss()
-                            },
-                        )
-                    },
-                )
             }
         }
     }

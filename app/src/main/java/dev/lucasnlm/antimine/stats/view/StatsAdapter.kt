@@ -2,8 +2,8 @@ package dev.lucasnlm.antimine.stats.view
 
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.databinding.ViewStatsItemBinding
 import dev.lucasnlm.antimine.stats.model.StatsModel
@@ -27,9 +27,9 @@ class StatsAdapter(
                 val emptyText = "-"
                 if (stats.title != 0) {
                     statsLabel.text = holder.itemView.context.getString(stats.title)
-                    statsLabel.visibility = View.VISIBLE
+                    statsLabel.isVisible = true
                 } else {
-                    statsLabel.visibility = View.GONE
+                    statsLabel.isVisible = false
                 }
                 minesCount.text = stats.mines.toL10nString()
                 totalTime.text = formatTime(stats.totalTime)
@@ -42,7 +42,7 @@ class StatsAdapter(
                 defeat.text = (stats.totalGames - stats.victory).toL10nString()
             } else {
                 val emptyText = "-"
-                statsLabel.visibility = View.GONE
+                statsLabel.isVisible = false
                 totalGames.text = 0.toL10nString()
                 minesCount.text = emptyText
                 totalTime.text = emptyText

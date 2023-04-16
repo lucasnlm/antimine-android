@@ -1,0 +1,49 @@
+Froga ezazu zure logika gaitasuna puzzle-joko desafiatzaile honetan: mina-eremu bat garbitu beharko duzu, bakar bat ere leherrarazi gabe.
+Dragamina klasikoaren bertsio moderno eta minimalista da hau.
+
+Gai al zara mina-eremua garbitzeko? Goazen!
+
+HELBURUA
+Dragamina bezalakoa da. Partida irabazi duzu taulako mina guztiak markatu dituzunean. Kontuz, minarik leherrarazi gabe!
+
+AIERURIK GABE
+Joko honek beti ebatzi daitezkeen mina-eremuak sortzen dituen algoritmo bat dauka. Ez duzu azken mina non dagoen asmatu beharko!
+
+JOKOAREN MAILA
+Dragamina bezala, joko honek maila ezberdinak ditu: Hasiberria, Erdi-mailakoa eta Aditua. Baina modu progresibo paregabe bat ere badu, irabazten duzun neurrian zailago egiten doana.
+
+MAILA PERTSONALIZATUA
+Modu estandarrak nahikoa ez badira, zure zailtasun maila sor dezakezu nahieran!
+
+AZALAK
+Antiminek 15 azal baino gehiago ditu (argia, iluna eta AMOLED barne). Eta gehiago izango dira laster!
+
+MINIMALISTA
+Itxura garbia: diseinu grafiko minimalista eta baita pisu arina ere (9MB baino gutxiago).
+
+TUTORIALA
+Ez dakizu Dragamina jolasten? Arazorik ez, tutoriala joka dezakezu edo baita aholkuak gaitu ezarpenetan.
+
+ESTATISTIKAK
+Begiratu zure emaitzak eta garapena.
+
+JOKO-LAGUNTZAILEA
+Jokoak automatikoki markatuko ditu isolatu dituzun karratuak. 
+
+PERTSONALIZAZIOA
+Jokoa alda dezakezu zuk nahi duzun erara ezartzeko. 
+Adibidez: Laguntza, animazioak, ukipenezko erantzuna, galdera ikurra.
+
+KONTROLAK
+Lau kolore-eskema ezberdin baimentzen ditu. Adibidez: markatu ukituz ala luze sakatuz.
+
+LORPENAK ETA SAILKAPENAK 
+Zortzi lorpen desblokeatu ditzakezu eta sailkapen ezberdinak partekatu ditzkezu lagunekin.
+
+ONLINE ALA OFFLINE
+Ez da behar linean egotea jokatu ahal izateko!
+
+AUTO-GORDE
+Partida bat has dezakezu eta beste momentu batean jarraitu! Zure partida auto-gordeko da.
+
+Gozatu.

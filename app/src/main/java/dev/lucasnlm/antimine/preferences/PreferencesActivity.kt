@@ -7,27 +7,29 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
-import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
 import com.google.android.material.materialswitch.MaterialSwitch
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.databinding.ActivityPreferencesBinding
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.ext.showWarning
 import dev.lucasnlm.antimine.ui.model.TopBarAction
-import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.external.PlayGamesManager
 import org.koin.android.ext.android.inject
 
 class PreferencesActivity :
     ThemedActivity(),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private val playGamesManager: IPlayGamesManager by inject()
-    private val preferenceRepository: IPreferencesRepository by inject()
+    private val audioManager: GameAudioManager by inject()
+    private val playGamesManager: PlayGamesManager by inject()
+    private val preferenceRepository: PreferencesRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
     private val settingsBackupManager: SettingsBackupManager by lazy {
         SettingsBackupManager(applicationContext)
@@ -42,12 +44,16 @@ class PreferencesActivity :
     }
 
     private fun MaterialSwitch.bindItem(
-        checked: Boolean,
-        action: (Boolean) -> Unit,
+        visible: Boolean = true,
+        initialValue: Boolean,
+        onChangeValue: (Boolean) -> Unit,
     ) {
-        isChecked = checked
+        isVisible = visible
+        isSoundEffectsEnabled = false
+        isChecked = initialValue
         setOnCheckedChangeListener { _, newCheckedState ->
-            action(newCheckedState)
+            onChangeValue(newCheckedState)
+            audioManager.playClickSound(if (newCheckedState) 0 else 1)
         }
     }
 
@@ -104,8 +110,8 @@ class PreferencesActivity :
 
     private fun bindItems() {
         binding.hapticFeedback.bindItem(
-            checked = preferenceRepository.useHapticFeedback(),
-            action = {
+            initialValue = preferenceRepository.useHapticFeedback(),
+            onChangeValue = {
                 preferenceRepository.setHapticFeedback(it)
                 if (it && preferenceRepository.getHapticFeedbackLevel() == 0) {
                     preferenceRepository.resetHapticFeedbackLevel()
@@ -114,79 +120,85 @@ class PreferencesActivity :
         )
 
         binding.soundEffects.bindItem(
-            checked = preferenceRepository.isSoundEffectsEnabled(),
-            action = { preferenceRepository.setSoundEffectsEnabled(it) },
+            visible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M,
+            initialValue = preferenceRepository.isSoundEffectsEnabled(),
+            onChangeValue = { preferenceRepository.setSoundEffectsEnabled(it) },
+        )
+
+        binding.music.bindItem(
+            visible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M,
+            initialValue = preferenceRepository.isMusicEnabled(),
+            onChangeValue = { preferenceRepository.setMusicEnabled(it) },
         )
 
         binding.showWindows.bindItem(
-            checked = preferenceRepository.showWindowsWhenFinishGame(),
-            action = { preferenceRepository.mustShowWindowsWhenFinishGame(it) },
+            initialValue = preferenceRepository.showWindowsWhenFinishGame(),
+            onChangeValue = { preferenceRepository.mustShowWindowsWhenFinishGame(it) },
         )
 
         binding.openDirectly.bindItem(
-            checked = preferenceRepository.openGameDirectly(),
-            action = { preferenceRepository.setOpenGameDirectly(it) },
+            initialValue = preferenceRepository.openGameDirectly(),
+            onChangeValue = { preferenceRepository.setOpenGameDirectly(it) },
         )
 
         binding.useQuestionMark.bindItem(
-            checked = preferenceRepository.useQuestionMark(),
-            action = { preferenceRepository.setQuestionMark(it) },
+            initialValue = preferenceRepository.useQuestionMark(),
+            onChangeValue = { preferenceRepository.setQuestionMark(it) },
         )
 
         binding.showTimer.bindItem(
-            checked = preferenceRepository.showTimer(),
-            action = { preferenceRepository.setTimerVisible(it) },
+            initialValue = preferenceRepository.showTimer(),
+            onChangeValue = { preferenceRepository.setTimerVisible(it) },
         )
 
         binding.automaticFlags.bindItem(
-            checked = preferenceRepository.useFlagAssistant(),
-            action = { preferenceRepository.setFlagAssistant(it) },
+            initialValue = preferenceRepository.useFlagAssistant(),
+            onChangeValue = { preferenceRepository.setFlagAssistant(it) },
         )
 
         binding.hint.bindItem(
-            checked = preferenceRepository.useHelp(),
-            action = { preferenceRepository.setHelp(it) },
+            initialValue = preferenceRepository.useHelp(),
+            onChangeValue = { preferenceRepository.setHelp(it) },
+        )
+
+        binding.noGuessingMode.bindItem(
+            initialValue = preferenceRepository.useSimonTathamAlgorithm(),
+            onChangeValue = { preferenceRepository.setSimonTathamAlgorithm(it) },
         )
 
         binding.allowClickNumber.bindItem(
-            checked = preferenceRepository.allowTapOnNumbers(),
-            action = {
+            initialValue = preferenceRepository.allowTapOnNumbers(),
+            onChangeValue = {
                 preferenceRepository.setAllowTapOnNumbers(it)
-
-                if (it) {
-                    binding.flagWhenTapOnNumbers.visibility = View.VISIBLE
-                    binding.flagWhenTapOnNumbers.visibility = View.VISIBLE
-                } else {
-                    binding.flagWhenTapOnNumbers.visibility = View.GONE
-                    binding.flagWhenTapOnNumbers.visibility = View.GONE
-                }
+                binding.flagWhenTapOnNumbers.isVisible = it
+                binding.flagWhenTapOnNumbers.isVisible = it
             },
         )
 
         binding.flagWhenTapOnNumbers.bindItem(
-            checked = preferenceRepository.letNumbersAutoFlag(),
-            action = { preferenceRepository.setNumbersAutoFlag(it) },
+            initialValue = preferenceRepository.letNumbersAutoFlag(),
+            onChangeValue = { preferenceRepository.setNumbersAutoFlag(it) },
         )
 
         if (!preferenceRepository.allowTapOnNumbers()) {
-            binding.flagWhenTapOnNumbers.visibility = View.GONE
-            binding.flagWhenTapOnNumbers.visibility = View.GONE
+            binding.flagWhenTapOnNumbers.isVisible = false
+            binding.flagWhenTapOnNumbers.isVisible = false
         }
 
         binding.highlightUnsolvedNumbers.bindItem(
-            checked = preferenceRepository.dimNumbers(),
-            action = { preferenceRepository.setDimNumbers(it) },
+            initialValue = preferenceRepository.dimNumbers(),
+            onChangeValue = { preferenceRepository.setDimNumbers(it) },
         )
 
         if (playGamesManager.hasGooglePlayGames()) {
             binding.playGames.bindItem(
-                checked = preferenceRepository.keepRequestPlayGames(),
-                action = {
+                initialValue = preferenceRepository.keepRequestPlayGames(),
+                onChangeValue = {
                     preferenceRepository.setRequestPlayGames(it)
                 },
             )
         } else {
-            binding.playGames.visibility = View.GONE
+            binding.playGames.isVisible = false
         }
 
         binding.exportSettings.setOnClickListener {

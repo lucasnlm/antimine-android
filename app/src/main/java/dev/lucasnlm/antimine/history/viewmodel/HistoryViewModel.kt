@@ -3,13 +3,15 @@ package dev.lucasnlm.antimine.history.viewmodel
 import android.app.Application
 import android.content.Intent
 import dev.lucasnlm.antimine.GameActivity
-import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.repository.SavesRepository
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 
 class HistoryViewModel(
     private val application: Application,
-    private val savesRepository: ISavesRepository,
+    private val savesRepository: SavesRepository,
+    private val audioManager: GameAudioManager,
 ) : IntentViewModel<HistoryEvent, HistoryState>() {
 
     override fun initialState() = HistoryState(
@@ -43,6 +45,8 @@ class HistoryViewModel(
     }
 
     private fun replayGame(uid: Int) {
+        audioManager.playClickSound()
+
         val context = application.applicationContext
         val intent = Intent(context, GameActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -52,6 +56,8 @@ class HistoryViewModel(
     }
 
     private fun loadGame(uid: Int) {
+        audioManager.playClickSound()
+
         val context = application.applicationContext
         val intent = Intent(context, GameActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP

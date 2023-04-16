@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.control
 
 import android.os.Bundle
-import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.slider.Slider
@@ -9,7 +9,8 @@ import dev.lucasnlm.antimine.control.databinding.ActivityControlBinding
 import dev.lucasnlm.antimine.control.view.ControlAdapter
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.model.TopBarAction
@@ -19,7 +20,8 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
     private lateinit var binding: ActivityControlBinding
 
     private val viewModel: ControlViewModel by inject()
-    private val preferencesRepository: IPreferencesRepository by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
+    private val gameAudioManager: GameAudioManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,7 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
             selected = preferencesRepository.controlStyle(),
             onControlSelected = { controlStyle ->
                 viewModel.sendEvent(ControlEvent.SelectControlStyle(controlStyle))
+                gameAudioManager.playClickSound()
             },
         )
 
@@ -58,18 +61,18 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
                     (it.touchSensibility.toFloat() / touchSensibility.stepSize).toInt() * touchSensibility.stepSize
 
                 val longPressVisible = when (it.selected) {
-                    ControlStyle.Standard, ControlStyle.FastFlag -> View.VISIBLE
-                    else -> View.GONE
+                    ControlStyle.Standard, ControlStyle.FastFlag -> true
+                    else -> false
                 }
-                longPress.visibility = longPressVisible
-                binding.longPressLabel.visibility = longPressVisible
+                longPress.isVisible = longPressVisible
+                binding.longPressLabel.isVisible = longPressVisible
 
                 val doubleClickVisible = when (it.selected) {
-                    ControlStyle.DoubleClick, ControlStyle.DoubleClickInverted -> View.VISIBLE
-                    else -> View.GONE
+                    ControlStyle.DoubleClick, ControlStyle.DoubleClickInverted -> true
+                    else -> false
                 }
-                binding.doubleClick.visibility = doubleClickVisible
-                binding.doubleClickLabel.visibility = doubleClickVisible
+                binding.doubleClick.isVisible = doubleClickVisible
+                binding.doubleClickLabel.isVisible = doubleClickVisible
                 binding.doubleClick.value = it.doubleClick.toFloat()
 
                 hapticLevel.value =

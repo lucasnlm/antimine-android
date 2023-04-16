@@ -23,6 +23,7 @@
     <string name="animations">Animações</string>
     <string name="vibration">Feedback tátil</string>
     <string name="about">Sobre</string>
+    <string name="quit">Sair</string>
     <string name="events">Estatísticas</string>
     <string name="custom">Personalizado</string>
     <string name="start">Iniciar</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Falha ao compartilhar</string>
     <string name="version_s">Versão %1$s</string>
     <string name="sound_effects">Efeitos sonoros</string>
+    <string name="music">Música</string>
+    <string name="music_by">Música por %1$s</string>
+    <string name="check_music">Ouvir no Spotify…</string>
+    <string name="selected">Selecionado</string>
     <string name="are_you_sure">Tem certeza?</string>
     <string name="enable_automatic_flags">Ativar colocação automática de bandeiras</string>
     <string name="open_areas">Áreas abertas</string>
@@ -94,6 +99,7 @@
     <string name="more">Mais</string>
     <string name="source_code">Código-fonte</string>
     <string name="translation">Tradução</string>
+    <string name="language">Idioma</string>
     <string name="licenses">Licenças</string>
     <string name="google_play_games">Google Play Jogos</string>
     <string name="loading">Carregando…</string>
