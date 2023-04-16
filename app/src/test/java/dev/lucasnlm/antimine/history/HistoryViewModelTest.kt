@@ -37,7 +37,7 @@ class HistoryViewModelTest : IntentViewModelTest() {
 
     @Test
     fun testInitialValue() {
-        val viewModel = HistoryViewModel(mockk(), mockk())
+        val viewModel = HistoryViewModel(mockk(), mockk(), mockk())
         assertEquals(HistoryState(true, listOf()), viewModel.singleState())
     }
 
@@ -47,7 +47,7 @@ class HistoryViewModelTest : IntentViewModelTest() {
             coEvery { getAllSaves() } returns allSaves
         }
 
-        val state = HistoryViewModel(mockk(), savesRepository).run {
+        val state = HistoryViewModel(mockk(), savesRepository, mockk()).run {
             sendEvent(HistoryEvent.LoadAllSaves)
             singleState()
         }
