@@ -75,6 +75,7 @@ class GameActivity :
     private val featureFlagManager: FeatureFlagManager by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
     private var warning: Snackbar? = null
+    private var revealBombFeedback: ValueAnimator? = null
 
     private val hasFloatingButton = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
     private lateinit var binding: ActivityGameBinding
@@ -430,6 +431,9 @@ class GameActivity :
         super.onPause()
         keepScreenOn(false)
 
+        revealBombFeedback?.removeAllListeners()
+        revealBombFeedback = null
+
         cloudSaveManager.uploadSave()
 
         if (isFinishing) {
@@ -567,23 +571,29 @@ class GameActivity :
                             addUpdateListener {
                                 progress = ((it.animatedValue as Float) * 1000f).toInt()
                             }
-                            addListener(object : Animator.AnimatorListener {
-                                override fun onAnimationStart(animation: Animator) {
-                                    // Ignore
-                                }
+                            revealBombFeedback = this
 
-                                override fun onAnimationEnd(animation: Animator) {
-                                    gameAudioManager.playRevealBombReloaded()
-                                }
+                            addListener(
+                                object : Animator.AnimatorListener {
+                                    override fun onAnimationStart(animation: Animator) {
+                                        // Ignore
+                                    }
 
-                                override fun onAnimationCancel(animation: Animator) {
-                                    // Ignore
-                                }
+                                    override fun onAnimationEnd(animation: Animator) {
+                                        if (!isPaused) {
+                                            gameAudioManager.playRevealBombReloaded()
+                                        }
+                                    }
 
-                                override fun onAnimationRepeat(animation: Animator) {
-                                    // Ignore
-                                }
-                            })
+                                    override fun onAnimationCancel(animation: Animator) {
+                                        // Ignore
+                                    }
+
+                                    override fun onAnimationRepeat(animation: Animator) {
+                                        // Ignore
+                                    }
+                                },
+                            )
                             start()
                         }
                     }
