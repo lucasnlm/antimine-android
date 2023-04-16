@@ -12,17 +12,22 @@ interface IAdsManager {
     fun showRewardedAd(
         activity: Activity,
         skipIfFrequent: Boolean,
+        onStart: (() -> Unit)? = null,
         onRewarded: (() -> Unit)?,
         onFail: (() -> Unit)?,
     )
 
     fun showInterstitialAd(
         activity: Activity,
+        onStart: (() -> Unit)? = null,
         onDismiss: (() -> Unit),
         onError: (() -> Unit)? = null,
     )
 
-    fun createBannerAd(context: Context): View?
+    fun createBannerAd(
+        context: Context,
+        onError: (() -> Unit)? = null,
+    ): View?
 }
 
 object Ads {

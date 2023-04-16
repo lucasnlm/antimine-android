@@ -35,18 +35,18 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 
     // Google
-    implementation 'com.android.billingclient:billing-ktx:5.1.0'
+    implementation 'com.android.billingclient:billing-ktx:5.2.0'
     implementation 'com.google.android.gms:play-services-instantapps:18.0.1'
     implementation 'com.google.android.gms:play-services-games:23.1.0'
-    implementation 'com.google.android.gms:play-services-auth:20.4.1'
-    implementation 'com.google.android.gms:play-services-ads:21.5.0'
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
+    implementation 'com.google.android.gms:play-services-ads:22.0.0'
     implementation 'com.google.android.play:core-ktx:1.8.1'
 
     // Jetbrains
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
 
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:31.2.3')
+    implementation platform('com.google.firebase:firebase-bom:31.4.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'

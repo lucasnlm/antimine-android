@@ -159,7 +159,7 @@ class PreferencesActivity :
 
         binding.noGuessingMode.bindItem(
             initialValue = preferenceRepository.useSimonTathamAlgorithm(),
-            onChangeValue = { preferenceRepository.setSimonTathamAlgorithm(it) }
+            onChangeValue = { preferenceRepository.setSimonTathamAlgorithm(it) },
         )
 
         binding.allowClickNumber.bindItem(

@@ -525,15 +525,26 @@ class GameActivity :
                     setOnClickListener {
                         lifecycleScope.launch {
                             analyticsManager.sentEvent(Analytics.RequestMoreHints)
-
+                            val wasPlaying = gameAudioManager.isPlayingMusic()
                             adsManager.showRewardedAd(
                                 activity = this@GameActivity,
                                 skipIfFrequent = false,
+                                onStart = {
+                                    if (wasPlaying) {
+                                        gameAudioManager.pauseMusic()
+                                    }
+                                },
                                 onRewarded = {
+                                    if (wasPlaying) {
+                                        gameAudioManager.resumeMusic()
+                                    }
                                     gameViewModel.revealRandomMine(false)
                                     gameViewModel.sendEvent(GameEvent.GiveMoreTip)
                                 },
                                 onFail = {
+                                    if (wasPlaying) {
+                                        gameAudioManager.resumeMusic()
+                                    }
                                     showGameWarning(R.string.fail_to_load_ad)
                                 },
                             )

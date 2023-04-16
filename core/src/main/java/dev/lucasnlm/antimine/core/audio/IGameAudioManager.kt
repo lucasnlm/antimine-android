@@ -4,6 +4,7 @@ interface IGameAudioManager {
     fun playWin()
     fun playBombExplosion()
     fun playMusic()
+    fun isPlayingMusic(): Boolean
     fun pauseMusic()
     fun resumeMusic()
     fun stopMusic()

@@ -26,7 +26,7 @@ val ViewModelModule = module {
     viewModel { StatsViewModel(get(), get(), get(), get()) }
     viewModel { ThemeViewModel(get(), get(), get()) }
     viewModel { MainViewModel(get(), get(), get(), get()) }
-    viewModel { LocalizationViewModel(get(), get())}
+    viewModel { LocalizationViewModel(get(), get()) }
     viewModel {
         GameViewModel(
             get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(),

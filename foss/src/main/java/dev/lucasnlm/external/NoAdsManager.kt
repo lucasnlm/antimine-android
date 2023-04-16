@@ -10,6 +10,7 @@ class NoAdsManager : IAdsManager {
     override fun showRewardedAd(
         activity: Activity,
         skipIfFrequent: Boolean,
+        onStart: (() -> Unit)?,
         onRewarded: (() -> Unit)?,
         onFail: (() -> Unit)?,
     ) {
@@ -18,11 +19,19 @@ class NoAdsManager : IAdsManager {
 
     override fun isAvailable(): Boolean = false
 
-    override fun showInterstitialAd(activity: Activity, onDismiss: () -> Unit, onError: (() -> Unit)?) {
+    override fun showInterstitialAd(
+        activity: Activity,
+        onStart: (() -> Unit)?,
+        onDismiss: () -> Unit,
+        onError: (() -> Unit)?,
+    ) {
         // Empty
     }
 
-    override fun createBannerAd(context: Context): View? {
+    override fun createBannerAd(
+        context: Context,
+        onError: (() -> Unit)?,
+    ): View? {
         return null
     }
 }

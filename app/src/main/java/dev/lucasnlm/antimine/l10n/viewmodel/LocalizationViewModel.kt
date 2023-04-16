@@ -69,6 +69,4 @@ class LocalizationViewModel(
             it.name
         }
     }
-
 }
-

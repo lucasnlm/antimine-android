@@ -127,7 +127,7 @@ class EndGameDialogViewModel(
                         showContinueButton = event.showContinueButton,
                         received = event.received,
                         showTutorial = event.turn in 1..2,
-                        showMusicDialog = false,
+                        showMusicDialog = canShowMusicDialog(),
                     )
                 }
                 GameResult.Completed -> {

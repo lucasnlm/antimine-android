@@ -52,6 +52,10 @@ class GameAudioManager(
         }
     }
 
+    override fun isPlayingMusic(): Boolean {
+        return musicMediaPlayer?.isPlaying == true
+    }
+
     override fun pauseMusic() {
         try {
             if (musicMediaPlayer?.isPlaying == true) {

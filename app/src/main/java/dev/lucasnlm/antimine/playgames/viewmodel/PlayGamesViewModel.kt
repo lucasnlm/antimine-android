@@ -18,13 +18,13 @@ class PlayGamesViewModel(
             id = 0,
             iconRes = R.drawable.games_achievements,
             stringRes = R.string.achievements,
-            triggerEvent = PlayGamesEvent.OpenAchievements
+            triggerEvent = PlayGamesEvent.OpenAchievements,
         ),
         PlayGamesItem(
             id = 1,
             iconRes = R.drawable.games_leaderboards,
             stringRes = R.string.leaderboards,
-            triggerEvent = PlayGamesEvent.OpenLeaderboards
+            triggerEvent = PlayGamesEvent.OpenLeaderboards,
         ),
     )
 

@@ -31,9 +31,9 @@ class LocalizationActivity : ThemedActivity() {
                             gameLanguages = state.languages,
                             onSelectLanguage = {
                                 localizationViewModel.sendEvent(
-                                    LocalizationEvent.SetLanguage(it)
+                                    LocalizationEvent.SetLanguage(it),
                                 )
-                            }
+                            },
                         )
                     }
                 }

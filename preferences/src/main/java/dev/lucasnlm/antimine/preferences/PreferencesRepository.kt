@@ -296,7 +296,8 @@ class PreferencesRepository(
     }
 
     override fun isPremiumEnabled(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_PREMIUM_FEATURES, false)
+//        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_PREMIUM_FEATURES, false)
+        return false
     }
 
     override fun showSupport(): Boolean {

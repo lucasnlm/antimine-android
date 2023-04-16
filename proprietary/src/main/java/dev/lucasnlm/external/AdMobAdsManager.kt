@@ -3,13 +3,7 @@ package dev.lucasnlm.external
 import android.app.Activity
 import android.content.Context
 import android.view.View
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.*
 import com.google.android.gms.ads.initialization.AdapterStatus
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
@@ -189,6 +183,7 @@ class AdMobAdsManager(
     override fun showRewardedAd(
         activity: Activity,
         skipIfFrequent: Boolean,
+        onStart: (() -> Unit)?,
         onRewarded: (() -> Unit)?,
         onFail: (() -> Unit)?,
     ) {
@@ -200,6 +195,7 @@ class AdMobAdsManager(
 
             when {
                 secondRewardedAd != null -> {
+                    onStart?.invoke()
                     secondRewardedAd.show(activity) {
                         if (!activity.isFinishing) {
                             lastShownAd = System.currentTimeMillis()
@@ -211,6 +207,7 @@ class AdMobAdsManager(
                     }
                 }
                 rewardedAd != null -> {
+                    onStart?.invoke()
                     rewardedAd.show(activity) {
                         if (!activity.isFinishing) {
                             lastShownAd = System.currentTimeMillis()
@@ -232,6 +229,7 @@ class AdMobAdsManager(
 
     override fun showInterstitialAd(
         activity: Activity,
+        onStart: (() -> Unit)?,
         onDismiss: (() -> Unit),
         onError: (() -> Unit)?,
     ) {
@@ -290,12 +288,21 @@ class AdMobAdsManager(
         }
     }
 
-    override fun createBannerAd(context: Context): View? {
+    override fun createBannerAd(
+        context: Context,
+        onError: (() -> Unit)?,
+    ): View {
         val adRequest = AdRequest.Builder().build()
         return AdView(context).apply {
-            setAdSize(AdSize.BANNER)
+            setAdSize(AdSize.FULL_BANNER)
             adUnitId = Ads.BannerAd
             loadAd(adRequest)
+            adListener = object : AdListener() {
+                override fun onAdFailedToLoad(error: LoadAdError) {
+                    super.onAdFailedToLoad(error)
+                    onError?.invoke()
+                }
+            }
         }
     }
 
