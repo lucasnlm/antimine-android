@@ -23,6 +23,7 @@
     <string name="animations">Animasyonlar</string>
     <string name="vibration">Dokunsal Geribildirim</string>
     <string name="about">Hakkında</string>
+    <string name="quit">Çıkış</string>
     <string name="events">İstatistikler</string>
     <string name="custom">Özel</string>
     <string name="start">Başlat</string>
@@ -37,10 +38,10 @@
     <string name="game_time">Oyun Süresi</string>
     <string name="settings_general">Genel</string>
     <string name="settings_gameplay">Oynanış</string>
-    <string name="export_settings">Export</string>
-    <string name="import_settings">Import</string>
-    <string name="exported_success">Settings exported!</string>
-    <string name="imported_success">Settings imported!</string>
+    <string name="export_settings">Dışa Aktar</string>
+    <string name="import_settings">İçe Aktar</string>
+    <string name="exported_success">Ayarlar dışa aktarıldı!</string>
+    <string name="imported_success">Ayarlar içe aktarıldı!</string>
     <string name="settings_accessibility">Erişilebilirlik</string>
     <string name="system">Sistem</string>
     <string name="sign_in_failed">Oturum açılamadı. Lütfen ağ bağlantınızı kontrol edip tekrar deneyin.</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Paylaşılamıyor</string>
     <string name="version_s">Sürüm: %1$s</string>
     <string name="sound_effects">Ses Efektleri</string>
+    <string name="music">Müzik</string>
+    <string name="music_by">%1$s tarafından müzik</string>
+    <string name="check_music">Spotify\'da dinle…</string>
+    <string name="selected">Seçildi</string>
     <string name="are_you_sure">Emin misiniz?</string>
     <string name="enable_automatic_flags">Bayrakları Otomatik Yerleştir</string>
     <string name="open_areas">Açık Alanlar</string>
@@ -81,7 +86,7 @@
     <string name="you_have_received">Aldın: +%1$d</string>
     <string name="help_win_a_game">Daha fazla ipucu için bir oyun kazanmalısınız.</string>
     <string name="unknown_error">Bilinmeyen hata.</string>
-    <string name="error">Error!</string>
+    <string name="error">Hata!</string>
     <string name="leaderboards">Liderlik Tablosu</string>
     <string name="cancel">İptal</string>
     <string name="resume">Devam et</string>
@@ -94,6 +99,7 @@
     <string name="more">Daha Fazla</string>
     <string name="source_code">Kaynak Kodu</string>
     <string name="translation">Çeviri</string>
+    <string name="language">Dil</string>
     <string name="licenses">Lisanslar</string>
     <string name="google_play_games">Google Play Oyunlar</string>
     <string name="loading">Yükleniyor…</string>

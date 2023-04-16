@@ -23,6 +23,7 @@
     <string name="animations">אנימציות</string>
     <string name="vibration">משוב רטט</string>
     <string name="about">אודות</string>
+    <string name="quit">Quit</string>
     <string name="events">סטטיסטיקה</string>
     <string name="custom">התאמה אישית</string>
     <string name="start">התחלה</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">השיתוף נכשל</string>
     <string name="version_s">גרסה %1$s</string>
     <string name="sound_effects">אפקטי צליל</string>
+    <string name="music">Music</string>
+    <string name="music_by">Music by %1$s</string>
+    <string name="check_music">Listen on Spotify…</string>
+    <string name="selected">Selected</string>
     <string name="are_you_sure">את/ה בטוח/ה?</string>
     <string name="enable_automatic_flags">מיקום דגלים אוטומטי</string>
     <string name="open_areas">ריבועים פתוחים</string>
@@ -94,6 +99,7 @@
     <string name="more">עוד</string>
     <string name="source_code">קוד מקור</string>
     <string name="translation">תרגומים</string>
+    <string name="language">Language</string>
     <string name="licenses">רשיונות</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">טוען…</string>

@@ -23,6 +23,7 @@
     <string name="animations">Animații</string>
     <string name="vibration">Reacție haptică</string>
     <string name="about">Despre</string>
+    <string name="quit">Ieși</string>
     <string name="events">Statistici</string>
     <string name="custom">Particularizat</string>
     <string name="start">Începe</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Distribuire eșuată</string>
     <string name="version_s">Versiunea %1$s</string>
     <string name="sound_effects">Efecte sonore</string>
+    <string name="music">Muzică</string>
+    <string name="music_by">Muzică de %1$s</string>
+    <string name="check_music">Ascultă pe Spotify…</string>
+    <string name="selected">Selectat</string>
     <string name="are_you_sure">Confirmi acțiunea?</string>
     <string name="enable_automatic_flags">Activează plasarea automată a steagurilor</string>
     <string name="open_areas">Zone deschise</string>
@@ -94,6 +99,7 @@
     <string name="more">Mai multe</string>
     <string name="source_code">Cod sursă</string>
     <string name="translation">Traducere</string>
+    <string name="language">Limbă</string>
     <string name="licenses">Licențe</string>
     <string name="google_play_games">Jocuri Google Play</string>
     <string name="loading">Se încarcă…</string>

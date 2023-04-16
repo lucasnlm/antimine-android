@@ -23,6 +23,7 @@
     <string name="animations">Анимации</string>
     <string name="vibration">Вибрация при докосване</string>
     <string name="about">За нас</string>
+    <string name="quit">Quit</string>
     <string name="events">Статистики</string>
     <string name="custom">По избор</string>
     <string name="start">Начало</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Неуспешно споделяне</string>
     <string name="version_s">Версия %1$s</string>
     <string name="sound_effects">Звукови ефекти</string>
+    <string name="music">Music</string>
+    <string name="music_by">Music by %1$s</string>
+    <string name="check_music">Listen on Spotify…</string>
+    <string name="selected">Selected</string>
     <string name="are_you_sure">Сигурни ли сте?</string>
     <string name="enable_automatic_flags">Позволява автоматично слагане на флагове</string>
     <string name="open_areas">Отворени площи</string>
@@ -94,6 +99,7 @@
     <string name="more">Повече</string>
     <string name="source_code">Програмен Код</string>
     <string name="translation">Превод</string>
+    <string name="language">Language</string>
     <string name="licenses">Лицензи</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Зареждане…</string>

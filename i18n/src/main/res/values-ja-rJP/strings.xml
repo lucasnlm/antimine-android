@@ -23,6 +23,7 @@
     <string name="animations">アニメーション</string>
     <string name="vibration">タッチ操作バイブ</string>
     <string name="about">このアプリについて</string>
+    <string name="quit">Quit</string>
     <string name="events">統計</string>
     <string name="custom">カスタム</string>
     <string name="start">開始</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">共有に失敗しました</string>
     <string name="version_s">バージョン %1$s</string>
     <string name="sound_effects">サウンドエフェクト</string>
+    <string name="music">Music</string>
+    <string name="music_by">Music by %1$s</string>
+    <string name="check_music">Listen on Spotify…</string>
+    <string name="selected">Selected</string>
     <string name="are_you_sure">本当によろしいですか？</string>
     <string name="enable_automatic_flags">旗を自動で立てる</string>
     <string name="open_areas">開いたエリアの数</string>
@@ -94,6 +99,7 @@
     <string name="more">もっと</string>
     <string name="source_code">ソースコード</string>
     <string name="translation">翻訳</string>
+    <string name="language">Language</string>
     <string name="licenses">ライセンス</string>
     <string name="google_play_games">Google Play ゲーム</string>
     <string name="loading">読み込み中…</string>

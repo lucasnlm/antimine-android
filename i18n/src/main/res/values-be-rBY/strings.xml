@@ -23,6 +23,7 @@
     <string name="animations">Анімацыі</string>
     <string name="vibration">Тактыльная зваротная сувязь</string>
     <string name="about">Пра нас</string>
+    <string name="quit">Выхад</string>
     <string name="events">Статыстыка</string>
     <string name="custom">Прыстасаваныя</string>
     <string name="start">Пачаць</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Не ўдалося абагуліць</string>
     <string name="version_s">Версія %1$s</string>
     <string name="sound_effects">Гукавыя эфекты</string>
+    <string name="music">Музыка</string>
+    <string name="music_by">Аўтар музыкi %1$s</string>
+    <string name="check_music">Слухаць на Spotify…</string>
+    <string name="selected">Абрана</string>
     <string name="are_you_sure">Вы ўпэўнены?</string>
     <string name="enable_automatic_flags">Уключыць аўтаматычнае выстаўленне флажкоў</string>
     <string name="open_areas">Адкрытыя пляцоўкі</string>
@@ -86,7 +91,7 @@
     <string name="cancel">Скасаваць</string>
     <string name="resume">Працягнуць</string>
     <string name="yes">Так</string>
-    <string name="unlock">Разблакіраваць</string>
+    <string name="unlock">Разблакаваць</string>
     <string name="unlock_all">Разблакаваць усе</string>
     <string name="achievements">Дасягненні</string>
     <string name="no">Не</string>
@@ -94,6 +99,7 @@
     <string name="more">Яшчэ</string>
     <string name="source_code">Зыходны код</string>
     <string name="translation">Пераклад</string>
+    <string name="language">Language</string>
     <string name="licenses">Ліцензії</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Ідзе загрузка…</string>

@@ -23,6 +23,7 @@
     <string name="animations">Animācijas</string>
     <string name="vibration">Sajūtu atgriezeniskā saite</string>
     <string name="about">Par lietotni</string>
+    <string name="quit">Iziet</string>
     <string name="events">Apkopojums</string>
     <string name="custom">Pielāgots</string>
     <string name="start">Sākt</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Neizdevās kopīgot</string>
     <string name="version_s">Versija %1$s</string>
     <string name="sound_effects">Skaņas efekti</string>
+    <string name="music">Mūzika</string>
+    <string name="music_by">%1$s mūzika</string>
+    <string name="check_music">Klausīties Spotify…</string>
+    <string name="selected">Atlasīts</string>
     <string name="are_you_sure">Vai esi pārliecināts(a)?</string>
     <string name="enable_automatic_flags">Iespējot automātisku atzīmēšanu</string>
     <string name="open_areas">Atvērti lauki</string>
@@ -94,6 +99,7 @@
     <string name="more">Vairāk</string>
     <string name="source_code">Pirmkods</string>
     <string name="translation">Tulkojums</string>
+    <string name="language">Valoda</string>
     <string name="licenses">Licences</string>
     <string name="google_play_games">Google Play spēles</string>
     <string name="loading">Notiek ielāde…</string>

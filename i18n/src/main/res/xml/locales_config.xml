@@ -8,6 +8,7 @@
     <locale android:name="da"/>
     <locale android:name="de"/>
     <locale android:name="el"/>
+    <locale android:name="eu"/>
     <locale android:name="en"/>
     <locale android:name="eo"/>
     <locale android:name="es"/>

@@ -23,6 +23,7 @@
     <string name="animations">Анімації</string>
     <string name="vibration">Вібрація при натиску</string>
     <string name="about">Про додаток</string>
+    <string name="quit">Вийти</string>
     <string name="events">Статистика</string>
     <string name="custom">Власний</string>
     <string name="start">Старт</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Не вдалося поділитись</string>
     <string name="version_s">Версія: %1$s</string>
     <string name="sound_effects">Звукові ефекти</string>
+    <string name="music">Музика</string>
+    <string name="music_by">Музика від %1$s</string>
+    <string name="check_music">Слухаємо на Spotify…</string>
+    <string name="selected">Обране</string>
     <string name="are_you_sure">Ви впевнені?</string>
     <string name="enable_automatic_flags">Увімкнути автоматичне розміщення прапорців</string>
     <string name="open_areas">Відкриті зони</string>
@@ -94,6 +99,7 @@
     <string name="more">Більше</string>
     <string name="source_code">Вихідний код</string>
     <string name="translation">Переклад</string>
+    <string name="language">Language</string>
     <string name="licenses">Ліцензії</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Завантаження…</string>

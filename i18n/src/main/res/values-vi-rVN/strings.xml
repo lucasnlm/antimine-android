@@ -23,6 +23,7 @@
     <string name="animations">Hiệu ứng động</string>
     <string name="vibration">Phản hồi rung</string>
     <string name="about">Giới thiệu</string>
+    <string name="quit">Quit</string>
     <string name="events">Thống kê</string>
     <string name="custom">Tuỳ chỉnh</string>
     <string name="start">Bắt đầu</string>
@@ -54,6 +55,10 @@
     <string name="fail_to_share">Chia sẻ thất bại</string>
     <string name="version_s">Phiên bản %1$s</string>
     <string name="sound_effects">Hiệu ứng âm thanh</string>
+    <string name="music">Music</string>
+    <string name="music_by">Music by %1$s</string>
+    <string name="check_music">Listen on Spotify…</string>
+    <string name="selected">Selected</string>
     <string name="are_you_sure">Bạn chắc chứ?</string>
     <string name="enable_automatic_flags">Bật tự động đặt cờ</string>
     <string name="open_areas">Khu vực mở</string>
@@ -94,6 +99,7 @@
     <string name="more">Nhiều hơn</string>
     <string name="source_code">Mã nguồn</string>
     <string name="translation">Dịch thuật</string>
+    <string name="language">Language</string>
     <string name="licenses">Giấy phép</string>
     <string name="google_play_games">Google Play Trò chơi</string>
     <string name="loading">Đang tải…</string>

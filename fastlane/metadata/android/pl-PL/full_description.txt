@@ -6,17 +6,17 @@ Czy zdołasz oczyścić pole minowe? Do dzieła!
 TWÓJ CEL
 Ta gra jest jak Saper. Aby wygrać rozgrywkę, należy oznaczyć każdą minę na polu minowym. Uważaj, aby żadnej nie zdetonować!
 
-BEZ ZGADYWANIA
-Gra wykorzystuje algorytm, który zawsze tworzy pola minowe, które są możliwe do rozwiązania. Nie trzeba zgadywać gdzie jest ostatnia mina!
+ZAWSZE JEST ROZWIĄZANIE
+Gra wykorzystuje algorytm do tworzenia pól minowych, które zawsze są możliwe do rozwiązania. Nie trzeba zgadywać, gdzie jest ostatnia z min!
 
 POZIOMY GRY
-Tak jak Saper, ta gra posiada różne tryby gry: Łatwy, Średni oraz Ekspert. Ale oprócz tego, gra posiada unikalny tryb progresywny, którego poziom trudności wzrasta wraz z wygrywaniem.
+W tej grze, tak samo jak w Saperze, dostępne są różne tryby gry: Łatwy, Średni oraz Ekspert. Ale oprócz tego, w grze dostępny jest unikalny tryb progresywny, którego poziom trudności wzrasta wraz z wygrywaniem.
 
 TRYB NIESTANDARDOWY
 Jeśli standardowe tryby to za mało, możesz utworzyć własny poziom trudności!
 
 MOTYWY
-Antimine zawiera ponad 15 motywów (w tym jasny, ciemny oraz AMOLED). A kolejne są już w drodze!
+W Antimine dostępnych jest ponad 15 motywów (w tym jasny, ciemny oraz AMOLED). A kolejne są już w drodze!
 
 MINIMALIZM
 Piękno w prostocie: minimalistyczna wizualnie oraz rozmiarowo aplikacja (mniej niż 9MB).
@@ -27,7 +27,7 @@ Nie wiesz jak grać w Sapera? Żaden problem, ponieważ możesz zagrać w nasz t
 STATYSTYKI
 Sprawdzaj swoje wyniki oraz postępy.
 
-POMOCNIK W GRZE
+ASYSTENT GRY
 Gra automatycznie oznacza odizolowane pola. 
 
 DOSTOSOWYWANIE
