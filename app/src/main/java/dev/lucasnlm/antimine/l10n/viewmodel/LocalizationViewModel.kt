@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.l10n.viewmodel
 
-import dev.lucasnlm.antimine.core.audio.IGameAudioManager
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.l10n.GameLocaleManager
 import dev.lucasnlm.antimine.l10n.models.GameLanguage
@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 import java.util.*
 
 class LocalizationViewModel(
-    private val audioManager: IGameAudioManager,
+    private val audioManager: GameAudioManager,
     private val gameLocaleManager: GameLocaleManager,
 ) : IntentViewModel<LocalizationEvent, LocalizationState>() {
     override fun initialState(): LocalizationState {

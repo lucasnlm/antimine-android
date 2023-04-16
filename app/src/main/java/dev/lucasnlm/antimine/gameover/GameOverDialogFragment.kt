@@ -23,8 +23,8 @@ import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
-import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IFeatureFlagManager
+import dev.lucasnlm.external.AnalyticsManager
+import dev.lucasnlm.external.FeatureFlagManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -32,10 +32,10 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GameOverDialogFragment : CommonGameDialogFragment() {
-    private val analyticsManager: IAnalyticsManager by inject()
+    private val analyticsManager: AnalyticsManager by inject()
     private val dialogViewModel by viewModel<EndGameDialogViewModel>()
     private val gameViewModel by sharedViewModel<GameViewModel>()
-    private val featureFlagManager: IFeatureFlagManager by inject()
+    private val featureFlagManager: FeatureFlagManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

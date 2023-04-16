@@ -5,7 +5,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-private class TestPreferenceManager : IPreferencesManager {
+private class TestPreferenceManager : PreferencesManager {
     val values = mutableMapOf<String, Any>()
 
     override fun getBoolean(key: String, defaultValue: Boolean): Boolean {
@@ -69,7 +69,7 @@ class PreferencesRepositoryTest {
     @Test
     fun testProgressValue() {
         val preferenceManager = TestPreferenceManager()
-        val preferencesRepository = PreferencesRepository(preferenceManager, 400)
+        val preferencesRepository = PreferencesRepositoryImpl(preferenceManager, 400)
 
         assertEquals(0, preferencesRepository.getProgressiveValue())
 
@@ -95,7 +95,7 @@ class PreferencesRepositoryTest {
         preferenceManager.putBoolean("preference_double_click_open", true)
         assertTrue(preferenceManager.values["preference_double_click_open"] as Boolean)
 
-        PreferencesRepository(preferenceManager, 400)
+        PreferencesRepositoryImpl(preferenceManager, 400)
 
         assertTrue(preferenceManager.values["preference_double_click_open"] == null)
         assertEquals(1, preferenceManager.values["preference_control_style"])
@@ -108,7 +108,7 @@ class PreferencesRepositoryTest {
         preferenceManager.putBoolean("preference_double_click_open", false)
         assertFalse(preferenceManager.values["preference_double_click_open"] as Boolean)
 
-        PreferencesRepository(preferenceManager, 400)
+        PreferencesRepositoryImpl(preferenceManager, 400)
 
         assertTrue(preferenceManager.values["preference_double_click_open"] == null)
         assertFalse(preferenceManager.getBoolean("preference_double_click_open", false))
@@ -117,7 +117,7 @@ class PreferencesRepositoryTest {
     @Test
     fun testPremiumFlag() {
         val preferenceManager = TestPreferenceManager()
-        val preferencesRepository = PreferencesRepository(preferenceManager, 500)
+        val preferencesRepository = PreferencesRepositoryImpl(preferenceManager, 500)
         assertFalse(preferencesRepository.isPremiumEnabled())
 
         preferencesRepository.setPremiumFeatures(true)

@@ -1,20 +1,20 @@
 package dev.lucasnlm.antimine.cloud
 
 import dev.lucasnlm.antimine.common.level.database.models.toHashMap
-import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
+import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
-import dev.lucasnlm.external.ICloudStorageManager
-import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
+import dev.lucasnlm.external.CloudStorageManager
+import dev.lucasnlm.external.PlayGamesManager
 import dev.lucasnlm.external.model.CloudSave
 import kotlinx.coroutines.*
 
 class CloudSaveManagerImpl(
     private val scope: CoroutineScope,
-    private val playGamesManager: IPlayGamesManager,
-    private val preferencesRepository: IPreferencesRepository,
-    private val statsRepository: IStatsRepository,
-    private val cloudStorageManager: ICloudStorageManager,
+    private val playGamesManager: PlayGamesManager,
+    private val preferencesRepository: PreferencesRepository,
+    private val statsRepository: StatsRepository,
+    private val cloudStorageManager: CloudStorageManager,
 ) : CloudSaveManager {
     override fun uploadSave() {
         scope.launch(Dispatchers.IO) {

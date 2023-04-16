@@ -13,15 +13,15 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
-import dev.lucasnlm.antimine.core.IAppVersionManager
+import dev.lucasnlm.antimine.core.AppVersionManager
 import dev.lucasnlm.antimine.core.dpToPx
-import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
-import dev.lucasnlm.external.ICrashReporter
+import dev.lucasnlm.antimine.ui.repository.ThemeRepository
+import dev.lucasnlm.external.CrashReporter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
@@ -32,11 +32,11 @@ import kotlin.system.exitProcess
 
 open class GameRenderFragment : AndroidFragmentApplication() {
     private val gameViewModel by sharedViewModel<GameViewModel>()
-    private val themeRepository: IThemeRepository by inject()
-    private val dimensionRepository: IDimensionRepository by inject()
-    private val preferencesRepository: IPreferencesRepository by inject()
-    private val crashReporter: ICrashReporter by inject()
-    private val appVersionManager: IAppVersionManager by inject()
+    private val themeRepository: ThemeRepository by inject()
+    private val dimensionRepository: DimensionRepository by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
+    private val crashReporter: CrashReporter by inject()
+    private val appVersionManager: AppVersionManager by inject()
 
     private var controlSwitcher: SwitchButtonView? = null
     private val isWatch = appVersionManager.isWatch()

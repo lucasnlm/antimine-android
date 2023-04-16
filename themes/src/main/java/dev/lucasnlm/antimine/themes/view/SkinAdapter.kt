@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.core.dpToPx
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.themes.R
 import dev.lucasnlm.antimine.themes.databinding.ViewSkinBinding
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppSkin
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
+import dev.lucasnlm.antimine.ui.repository.ThemeRepository
 
 class SkinAdapter(
-    private val themeRepository: IThemeRepository,
+    private val themeRepository: ThemeRepository,
     private val themeViewModel: ThemeViewModel,
-    private val preferencesRepository: IPreferencesRepository,
+    private val preferencesRepository: PreferencesRepository,
     private val onSelectSkin: (AppSkin) -> Unit,
     private val onRequestPurchase: () -> Unit,
 ) : RecyclerView.Adapter<SkinViewHolder>() {

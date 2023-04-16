@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.wear.widget.WearableLinearLayoutManager
 import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.wear.R
 import dev.lucasnlm.antimine.wear.databinding.ActivityMainBinding
@@ -16,7 +16,7 @@ import org.koin.android.ext.android.inject
 
 class MainActivity : ThemedActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val preferencesRepository: IPreferencesRepository by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

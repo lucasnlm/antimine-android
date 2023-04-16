@@ -12,27 +12,27 @@ import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.logic.GameController
 import dev.lucasnlm.antimine.common.level.models.ActionCompleted
-import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
-import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
-import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
-import dev.lucasnlm.antimine.common.level.repository.ITipRepository
+import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
+import dev.lucasnlm.antimine.common.level.repository.SavesRepository
+import dev.lucasnlm.antimine.common.level.repository.StatsRepository
+import dev.lucasnlm.antimine.common.level.repository.TipRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
-import dev.lucasnlm.antimine.core.audio.IGameAudioManager
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.external.Achievement
-import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IFeatureFlagManager
-import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.external.AnalyticsManager
+import dev.lucasnlm.external.FeatureFlagManager
 import dev.lucasnlm.external.Leaderboard
+import dev.lucasnlm.external.PlayGamesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
@@ -42,17 +42,17 @@ import kotlinx.coroutines.withContext
 import java.util.Locale
 
 open class GameViewModel(
-    private val savesRepository: ISavesRepository,
-    private val statsRepository: IStatsRepository,
-    private val dimensionRepository: IDimensionRepository,
-    private val preferencesRepository: IPreferencesRepository,
+    private val savesRepository: SavesRepository,
+    private val statsRepository: StatsRepository,
+    private val dimensionRepository: DimensionRepository,
+    private val preferencesRepository: PreferencesRepository,
     private val hapticFeedbackManager: HapticFeedbackManager,
-    private val soundManager: IGameAudioManager,
-    private val minefieldRepository: IMinefieldRepository,
-    private val analyticsManager: IAnalyticsManager,
-    private val playGamesManager: IPlayGamesManager,
-    private val tipRepository: ITipRepository,
-    private val featureFlagManager: IFeatureFlagManager,
+    private val soundManager: GameAudioManager,
+    private val minefieldRepository: MinefieldRepository,
+    private val analyticsManager: AnalyticsManager,
+    private val playGamesManager: PlayGamesManager,
+    private val tipRepository: TipRepository,
+    private val featureFlagManager: FeatureFlagManager,
     private val clock: Clock,
 ) : IntentViewModel<GameEvent, GameState>() {
     private lateinit var gameController: GameController

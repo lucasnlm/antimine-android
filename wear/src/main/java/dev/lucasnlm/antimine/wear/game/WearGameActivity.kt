@@ -17,7 +17,7 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.serializableNonSafe
-import dev.lucasnlm.antimine.preferences.PreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepositoryImpl
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
@@ -34,7 +34,7 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
     private lateinit var binding: ActivityGameBinding
 
     private val gameViewModel by viewModel<GameViewModel>()
-    private val preferencesRepository: PreferencesRepository by inject()
+    private val preferencesRepository: PreferencesRepositoryImpl by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

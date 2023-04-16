@@ -1,30 +1,30 @@
 package dev.lucasnlm.antimine.di
 
-import dev.lucasnlm.antimine.core.audio.IGameAudioManager
-import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
+import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.mocks.FixedDimensionRepository
 import dev.lucasnlm.antimine.mocks.MockPreferencesRepository
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.model.AppTheme
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
 import dev.lucasnlm.antimine.ui.repository.Skins
+import dev.lucasnlm.antimine.ui.repository.ThemeRepository
 import dev.lucasnlm.antimine.ui.repository.Themes.lightTheme
 import io.mockk.mockk
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val TestCommonModule = module {
-    single { FixedDimensionRepository() } bind IDimensionRepository::class
+    single { FixedDimensionRepository() } bind DimensionRepository::class
 
-    single { MockPreferencesRepository() } bind IPreferencesRepository::class
-
-    single {
-        mockk<IGameAudioManager>()
-    } bind IGameAudioManager::class
+    single { MockPreferencesRepository() } bind PreferencesRepository::class
 
     single {
-        object : IThemeRepository {
+        mockk<GameAudioManager>()
+    } bind GameAudioManager::class
+
+    single {
+        object : ThemeRepository {
             override fun getCustomTheme(): AppTheme? = null
 
             override fun getSkin(): AppSkin = Skins.getAllSkins().first()
@@ -41,5 +41,5 @@ val TestCommonModule = module {
 
             override fun reset(): AppTheme = lightTheme()
         }
-    } bind IThemeRepository::class
+    } bind ThemeRepository::class
 }

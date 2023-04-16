@@ -2,11 +2,11 @@ package dev.lucasnlm.antimine.l10n
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
-import dev.lucasnlm.antimine.preferences.PreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepositoryImpl
 import java.util.*
 
 class GameLocaleManagerImpl(
-    private val preferencesRepository: PreferencesRepository,
+    private val preferencesRepository: PreferencesRepositoryImpl,
 ) : GameLocaleManager {
     override fun getAllGameLocaleTags(): List<String> {
         return listOf(

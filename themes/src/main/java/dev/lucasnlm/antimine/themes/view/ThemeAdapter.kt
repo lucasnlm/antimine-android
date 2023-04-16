@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.themes.R
 import dev.lucasnlm.antimine.themes.databinding.ViewThemeBinding
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
@@ -14,7 +14,7 @@ import dev.lucasnlm.antimine.ui.model.AppTheme
 
 class ThemeAdapter(
     private val themeViewModel: ThemeViewModel,
-    private val preferencesRepository: IPreferencesRepository,
+    private val preferencesRepository: PreferencesRepository,
     private val onSelectTheme: (AppTheme) -> Unit,
     private val onRequestPurchase: () -> Unit,
 ) : RecyclerView.Adapter<ThemeViewHolder>() {

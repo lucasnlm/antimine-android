@@ -21,12 +21,12 @@ import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.common.level.view.GameRenderFragment
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.ControlActivity
-import dev.lucasnlm.antimine.core.audio.IGameAudioManager
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.isPortrait
@@ -38,18 +38,18 @@ import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gdx.GameContext
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.ext.showWarning
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
-import dev.lucasnlm.external.IAdsManager
-import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IFeatureFlagManager
-import dev.lucasnlm.external.IInstantAppManager
-import dev.lucasnlm.external.IPlayGamesManager
-import dev.lucasnlm.external.ReviewWrapper
+import dev.lucasnlm.external.AdsManager
+import dev.lucasnlm.external.AnalyticsManager
+import dev.lucasnlm.external.FeatureFlagManager
+import dev.lucasnlm.external.InstantAppManager
+import dev.lucasnlm.external.PlayGamesManager
+import dev.lucasnlm.external.ReviewWrapperImpl
 import kotlinx.coroutines.*
 import nl.dionsegijn.konfetti.core.Party
 import nl.dionsegijn.konfetti.core.Position
@@ -64,15 +64,15 @@ class GameActivity :
 
     private val gameViewModel by viewModel<GameViewModel>()
     private val appScope: CoroutineScope by inject()
-    private val preferencesRepository: IPreferencesRepository by inject()
-    private val analyticsManager: IAnalyticsManager by inject()
-    private val instantAppManager: IInstantAppManager by inject()
-    private val savesRepository: ISavesRepository by inject()
-    private val playGamesManager: IPlayGamesManager by inject()
-    private val gameAudioManager: IGameAudioManager by inject()
-    private val adsManager: IAdsManager by inject()
-    private val reviewWrapper: ReviewWrapper by inject()
-    private val featureFlagManager: IFeatureFlagManager by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
+    private val analyticsManager: AnalyticsManager by inject()
+    private val instantAppManager: InstantAppManager by inject()
+    private val savesRepository: SavesRepository by inject()
+    private val playGamesManager: PlayGamesManager by inject()
+    private val gameAudioManager: GameAudioManager by inject()
+    private val adsManager: AdsManager by inject()
+    private val reviewWrapper: ReviewWrapperImpl by inject()
+    private val featureFlagManager: FeatureFlagManager by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
     private var warning: Snackbar? = null
 

@@ -2,10 +2,10 @@ package dev.lucasnlm.antimine.stats.viewmodel
 
 import dev.lucasnlm.antimine.IntentViewModelTest
 import dev.lucasnlm.antimine.common.level.database.models.Stats
-import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.MemoryStatsRepository
-import dev.lucasnlm.antimine.core.repository.IDimensionRepository
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
+import dev.lucasnlm.antimine.core.repository.DimensionRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import io.mockk.every
 import io.mockk.mockk
@@ -40,9 +40,9 @@ class StatsViewModelTest : IntentViewModelTest() {
         Stats(9, 9200, 5, 0, 5, 5, 4),
     )
 
-    private val prefsRepository: IPreferencesRepository = mockk()
-    private val minefieldRepository: IMinefieldRepository = mockk()
-    private val dimensionRepository: IDimensionRepository = mockk()
+    private val prefsRepository: PreferencesRepository = mockk()
+    private val minefieldRepository: MinefieldRepository = mockk()
+    private val dimensionRepository: DimensionRepository = mockk()
 
     @Before
     override fun setup() {

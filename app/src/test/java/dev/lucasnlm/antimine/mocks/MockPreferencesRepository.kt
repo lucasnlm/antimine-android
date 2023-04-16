@@ -1,11 +1,11 @@
 package dev.lucasnlm.antimine.mocks
 
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
-class MockPreferencesRepository : IPreferencesRepository {
+class MockPreferencesRepository : PreferencesRepository {
     private var customMinefield = Minefield(9, 9, 9)
 
     override fun hasCustomizations(): Boolean = true

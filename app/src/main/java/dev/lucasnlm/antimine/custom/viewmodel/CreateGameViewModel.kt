@@ -1,11 +1,11 @@
 package dev.lucasnlm.antimine.custom.viewmodel
 
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import kotlinx.coroutines.flow.flow
 
 class CreateGameViewModel(
-    private val preferencesRepository: IPreferencesRepository,
+    private val preferencesRepository: PreferencesRepository,
 ) : IntentViewModel<CustomEvent, CustomState>() {
     init {
         preferencesRepository.forgetCustomSeed()

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.wear.R
 import dev.lucasnlm.antimine.wear.databinding.ViewControlTypeItemBinding
 import dev.lucasnlm.antimine.wear.main.models.ControlTypeItem
@@ -12,7 +12,7 @@ import dev.lucasnlm.antimine.wear.main.models.ControlTypeItem
 class ControlTypeListAdapter(
     private val controlTypeItemList: List<ControlTypeItem>,
     private val onChangeControl: () -> Unit,
-    private val preferencesRepository: IPreferencesRepository,
+    private val preferencesRepository: PreferencesRepository,
 ) : RecyclerView.Adapter<ControlTypeListAdapter.RecyclerViewHolder>() {
     init {
         setHasStableIds(true)
@@ -42,7 +42,7 @@ class ControlTypeListAdapter(
 
     class RecyclerViewHolder(
         private val binding: ViewControlTypeItemBinding,
-        private val preferencesRepository: IPreferencesRepository,
+        private val preferencesRepository: PreferencesRepository,
         private val onChangeControl: () -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(controlTypeItem: ControlTypeItem) {

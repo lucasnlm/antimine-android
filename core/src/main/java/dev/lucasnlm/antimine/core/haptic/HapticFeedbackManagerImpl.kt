@@ -7,11 +7,11 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
-import dev.lucasnlm.antimine.preferences.PreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepositoryImpl
 
 class HapticFeedbackManagerImpl(
     application: Application,
-    private val preferencesRepository: PreferencesRepository,
+    private val preferencesRepository: PreferencesRepositoryImpl,
 ) : HapticFeedbackManager {
 
     private val vibrator by lazy {

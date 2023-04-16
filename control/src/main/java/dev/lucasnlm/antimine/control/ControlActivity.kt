@@ -9,8 +9,8 @@ import dev.lucasnlm.antimine.control.databinding.ActivityControlBinding
 import dev.lucasnlm.antimine.control.view.ControlAdapter
 import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
-import dev.lucasnlm.antimine.core.audio.IGameAudioManager
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.model.TopBarAction
@@ -20,8 +20,8 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
     private lateinit var binding: ActivityControlBinding
 
     private val viewModel: ControlViewModel by inject()
-    private val preferencesRepository: IPreferencesRepository by inject()
-    private val gameAudioManager: IGameAudioManager by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
+    private val gameAudioManager: GameAudioManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

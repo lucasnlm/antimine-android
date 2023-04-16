@@ -3,15 +3,15 @@ package dev.lucasnlm.antimine.history.viewmodel
 import android.app.Application
 import android.content.Intent
 import dev.lucasnlm.antimine.GameActivity
-import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
-import dev.lucasnlm.antimine.core.audio.IGameAudioManager
+import dev.lucasnlm.antimine.common.level.repository.SavesRepository
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import kotlinx.coroutines.flow.flow
 
 class HistoryViewModel(
     private val application: Application,
-    private val savesRepository: ISavesRepository,
-    private val audioManager: IGameAudioManager,
+    private val savesRepository: SavesRepository,
+    private val audioManager: GameAudioManager,
 ) : IntentViewModel<HistoryEvent, HistoryState>() {
 
     override fun initialState() = HistoryState(

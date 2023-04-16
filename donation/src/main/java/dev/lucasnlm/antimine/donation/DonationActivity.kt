@@ -9,13 +9,13 @@ import android.widget.Toast
 import androidx.core.app.ShareCompat
 import androidx.core.os.LocaleListCompat
 import androidx.core.view.isVisible
-import dev.lucasnlm.antimine.core.audio.IGameAudioManager
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.donation.databinding.ActivityDonationBinding
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import org.koin.android.ext.android.inject
 
 class DonationActivity : ThemedActivity() {
-    private val audioManager: IGameAudioManager by inject()
+    private val audioManager: GameAudioManager by inject()
     private lateinit var binding: ActivityDonationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

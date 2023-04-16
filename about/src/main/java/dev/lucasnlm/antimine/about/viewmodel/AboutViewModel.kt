@@ -5,13 +5,13 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
 import dev.lucasnlm.antimine.about.R
-import dev.lucasnlm.antimine.core.audio.IGameAudioManager
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.licenses.LicenseActivity
 
 class AboutViewModel(
     private val application: Application,
-    private val audioManager: IGameAudioManager,
+    private val audioManager: GameAudioManager,
 ) : StatelessViewModel<AboutEvent>() {
 
     override fun onEvent(event: AboutEvent) {

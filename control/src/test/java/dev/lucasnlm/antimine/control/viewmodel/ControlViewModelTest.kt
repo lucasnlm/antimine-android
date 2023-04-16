@@ -2,7 +2,7 @@ package dev.lucasnlm.antimine.control.viewmodel
 
 import com.nhaarman.mockitokotlin2.mock
 import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import io.mockk.every
 import io.mockk.mockk
@@ -34,7 +34,7 @@ class ControlViewModelTest {
 
     @Test
     fun testInitialValue() {
-        val preferenceRepository: IPreferencesRepository = mockk {
+        val preferenceRepository: PreferencesRepository = mockk {
             every { controlStyle() } returns ControlStyle.DoubleClick
             every { touchSensibility() } returns 10
             every { customLongPressTimeout() } returns 500L
@@ -47,7 +47,7 @@ class ControlViewModelTest {
 
     @Test
     fun testControlStyleChanges() {
-        val preferenceRepository: IPreferencesRepository = mockk(relaxed = true) {
+        val preferenceRepository: PreferencesRepository = mockk(relaxed = true) {
             every { controlStyle() } returns ControlStyle.Standard
         }
 

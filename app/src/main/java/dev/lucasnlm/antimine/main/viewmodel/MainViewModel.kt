@@ -7,23 +7,23 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.common.level.database.models.Stats
-import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
+import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.l10n.LocalizationActivity
 import dev.lucasnlm.antimine.main.MainActivity
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
-import dev.lucasnlm.external.ICloudStorageManager
+import dev.lucasnlm.external.CloudStorageManager
 import dev.lucasnlm.external.model.CloudSave
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val application: Application,
-    private val preferencesRepository: IPreferencesRepository,
-    private val statsRepository: IStatsRepository,
-    private val saveCloudStorageManager: ICloudStorageManager,
+    private val preferencesRepository: PreferencesRepository,
+    private val statsRepository: StatsRepository,
+    private val saveCloudStorageManager: CloudStorageManager,
 ) : StatelessViewModel<MainEvent>() {
     override fun onEvent(event: MainEvent) {
         when (event) {

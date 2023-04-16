@@ -1,10 +1,10 @@
 package dev.lucasnlm.antimine.di
 
-import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
-import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
-import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
 import dev.lucasnlm.antimine.common.level.repository.MemorySavesRepository
 import dev.lucasnlm.antimine.common.level.repository.MemoryStatsRepository
+import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
+import dev.lucasnlm.antimine.common.level.repository.SavesRepository
+import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 import dev.lucasnlm.antimine.mocks.DisabledHapticFeedbackManager
@@ -19,15 +19,15 @@ val TestLevelModule = module {
 
     single {
         MemorySavesRepository()
-    } bind ISavesRepository::class
+    } bind SavesRepository::class
 
     single {
         MemoryStatsRepository()
-    } bind IStatsRepository::class
+    } bind StatsRepository::class
 
     single {
         FixedMinefieldRepository()
-    } bind IMinefieldRepository::class
+    } bind MinefieldRepository::class
 
     single {
         DisabledHapticFeedbackManager()

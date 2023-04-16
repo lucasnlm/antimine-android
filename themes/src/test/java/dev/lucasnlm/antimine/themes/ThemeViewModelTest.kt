@@ -1,13 +1,13 @@
 package dev.lucasnlm.antimine.themes
 
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeEvent
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeState
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette
-import dev.lucasnlm.antimine.ui.repository.IThemeRepository
-import dev.lucasnlm.external.IAnalyticsManager
+import dev.lucasnlm.antimine.ui.repository.ThemeRepository
+import dev.lucasnlm.external.AnalyticsManager
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -112,14 +112,14 @@ class ThemeViewModelTest {
 
     @Test
     fun testInitialValue() {
-        val themeRepository = mockk<IThemeRepository> {
+        val themeRepository = mockk<ThemeRepository> {
             every { getAllThemes() } returns allThemes
             every { getTheme() } returns gardenTheme
         }
 
-        val preferencesRepository = mockk<IPreferencesRepository>()
+        val preferencesRepository = mockk<PreferencesRepository>()
 
-        val analyticsManager = mockk<IAnalyticsManager> { }
+        val analyticsManager = mockk<AnalyticsManager> { }
 
         val viewModel = ThemeViewModel(themeRepository, preferencesRepository, analyticsManager)
         assertEquals(ThemeState(gardenTheme, 3, 15, 0, allThemes), viewModel.singleState())
@@ -127,17 +127,17 @@ class ThemeViewModelTest {
 
     @Test
     fun testChangeValue() {
-        val themeRepository = mockk<IThemeRepository> {
+        val themeRepository = mockk<ThemeRepository> {
             every { getAllThemes() } returns allThemes
             every { getTheme() } returns gardenTheme
             every { setTheme(any()) } returns Unit
         }
 
-        val preferencesRepository = mockk<IPreferencesRepository> {
+        val preferencesRepository = mockk<PreferencesRepository> {
             every { isPremiumEnabled() } returns true
         }
 
-        val analyticsManager = mockk<IAnalyticsManager> {
+        val analyticsManager = mockk<AnalyticsManager> {
             every { sentEvent(any()) } returns Unit
         }
 
@@ -152,17 +152,17 @@ class ThemeViewModelTest {
 
     @Test
     fun testChangeValueWithoutExtras() {
-        val themeRepository = mockk<IThemeRepository> {
+        val themeRepository = mockk<ThemeRepository> {
             every { getAllThemes() } returns allThemes
             every { getTheme() } returns gardenTheme
             every { setTheme(any()) } returns Unit
         }
 
-        val preferencesRepository = mockk<IPreferencesRepository> {
+        val preferencesRepository = mockk<PreferencesRepository> {
             every { isPremiumEnabled() } returns false
         }
 
-        val analyticsManager = mockk<IAnalyticsManager> {
+        val analyticsManager = mockk<AnalyticsManager> {
             every { sentEvent(any()) } returns Unit
         }
 

@@ -8,12 +8,11 @@ import dev.lucasnlm.antimine.core.di.CommonModule
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.di.AppModule
 import dev.lucasnlm.antimine.di.ViewModelModule
-import dev.lucasnlm.antimine.l10n.GameLocaleManager
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.support.IapHandler
-import dev.lucasnlm.external.IAdsManager
-import dev.lucasnlm.external.IAnalyticsManager
-import dev.lucasnlm.external.IFeatureFlagManager
+import dev.lucasnlm.external.AdsManager
+import dev.lucasnlm.external.AnalyticsManager
+import dev.lucasnlm.external.FeatureFlagManager
 import dev.lucasnlm.external.di.ExternalModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -24,10 +23,10 @@ import org.koin.core.context.stopKoin
 
 open class MainApplication : MultiDexApplication() {
     private val appScope: CoroutineScope by inject()
-    private val analyticsManager: IAnalyticsManager by inject()
-    private val preferencesRepository: IPreferencesRepository by inject()
-    private val featureFlagManager: IFeatureFlagManager by inject()
-    private val adsManager: IAdsManager by inject()
+    private val analyticsManager: AnalyticsManager by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
+    private val featureFlagManager: FeatureFlagManager by inject()
+    private val adsManager: AdsManager by inject()
     private val iapHandler: IapHandler by inject()
 
     override fun onCreate() {

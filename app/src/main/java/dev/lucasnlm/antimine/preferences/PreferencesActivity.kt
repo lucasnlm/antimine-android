@@ -14,22 +14,22 @@ import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
 import com.google.android.material.materialswitch.MaterialSwitch
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.core.audio.IGameAudioManager
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.databinding.ActivityPreferencesBinding
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.ext.showWarning
 import dev.lucasnlm.antimine.ui.model.TopBarAction
-import dev.lucasnlm.external.IPlayGamesManager
+import dev.lucasnlm.external.PlayGamesManager
 import org.koin.android.ext.android.inject
 
 class PreferencesActivity :
     ThemedActivity(),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private val audioManager: IGameAudioManager by inject()
-    private val playGamesManager: IPlayGamesManager by inject()
-    private val preferenceRepository: IPreferencesRepository by inject()
+    private val audioManager: GameAudioManager by inject()
+    private val playGamesManager: PlayGamesManager by inject()
+    private val preferenceRepository: PreferencesRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
     private val settingsBackupManager: SettingsBackupManager by lazy {
         SettingsBackupManager(applicationContext)

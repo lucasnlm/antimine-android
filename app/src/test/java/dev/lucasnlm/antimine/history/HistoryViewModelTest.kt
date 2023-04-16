@@ -4,7 +4,7 @@ import dev.lucasnlm.antimine.IntentViewModelTest
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
-import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.history.viewmodel.HistoryEvent
 import dev.lucasnlm.antimine.history.viewmodel.HistoryState
@@ -43,7 +43,7 @@ class HistoryViewModelTest : IntentViewModelTest() {
 
     @Test
     fun testLoadHistory() {
-        val savesRepository = mockk<ISavesRepository> {
+        val savesRepository = mockk<SavesRepository> {
             coEvery { getAllSaves() } returns allSaves
         }
 

@@ -1,42 +1,42 @@
 package dev.lucasnlm.external.di
 
+import dev.lucasnlm.external.AdsManager
 import dev.lucasnlm.external.BillingManager
+import dev.lucasnlm.external.BillingManagerImpl
 import dev.lucasnlm.external.CloudStorageManager
+import dev.lucasnlm.external.CloudStorageManagerImpl
 import dev.lucasnlm.external.CrashReporter
+import dev.lucasnlm.external.CrashReporterImpl
 import dev.lucasnlm.external.FeatureFlagManager
-import dev.lucasnlm.external.IAdsManager
-import dev.lucasnlm.external.IBillingManager
-import dev.lucasnlm.external.ICloudStorageManager
-import dev.lucasnlm.external.ICrashReporter
-import dev.lucasnlm.external.IFeatureFlagManager
-import dev.lucasnlm.external.IInAppUpdateManager
-import dev.lucasnlm.external.IInstantAppManager
-import dev.lucasnlm.external.IPlayGamesManager
-import dev.lucasnlm.external.IReviewWrapper
+import dev.lucasnlm.external.FeatureFlagManagerImpl
 import dev.lucasnlm.external.InAppUpdateManager
+import dev.lucasnlm.external.InAppUpdateManagerImpl
 import dev.lucasnlm.external.InstantAppManager
+import dev.lucasnlm.external.InstantAppManagerImpl
 import dev.lucasnlm.external.NoAdsManager
 import dev.lucasnlm.external.PlayGamesManager
+import dev.lucasnlm.external.PlayGamesManagerImpl
 import dev.lucasnlm.external.ReviewWrapper
+import dev.lucasnlm.external.ReviewWrapperImpl
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val ExternalModule = module {
-    single { InstantAppManager() } bind IInstantAppManager::class
+    single { InstantAppManagerImpl() } bind InstantAppManager::class
 
-    single { BillingManager() } bind IBillingManager::class
+    single { BillingManagerImpl() } bind BillingManager::class
 
-    single { PlayGamesManager(get()) } bind IPlayGamesManager::class
+    single { PlayGamesManagerImpl(get()) } bind PlayGamesManager::class
 
-    single { ReviewWrapper() } bind IReviewWrapper::class
+    single { ReviewWrapperImpl() } bind ReviewWrapper::class
 
-    single { CloudStorageManager() } bind ICloudStorageManager::class
+    single { CloudStorageManagerImpl() } bind CloudStorageManager::class
 
-    single { FeatureFlagManager() } bind IFeatureFlagManager::class
+    single { FeatureFlagManagerImpl() } bind FeatureFlagManager::class
 
-    single { CrashReporter() } bind ICrashReporter::class
+    single { CrashReporterImpl() } bind CrashReporter::class
 
-    single { NoAdsManager() } bind IAdsManager::class
+    single { NoAdsManager() } bind AdsManager::class
 
-    single { InAppUpdateManager() } bind IInAppUpdateManager::class
+    single { InAppUpdateManagerImpl() } bind InAppUpdateManager::class
 }

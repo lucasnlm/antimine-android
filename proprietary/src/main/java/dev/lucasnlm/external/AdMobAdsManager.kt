@@ -17,9 +17,9 @@ import kotlinx.coroutines.withContext
 
 class AdMobAdsManager(
     private val context: Context,
-    private val crashReporter: ICrashReporter,
+    private val crashReporter: CrashReporter,
     private val scope: CoroutineScope,
-) : IAdsManager {
+) : AdsManager {
     private var rewardedAd: RewardedAd? = null
     private var secondRewardedAd: RewardedAd? = null
 

@@ -2,14 +2,14 @@ package dev.lucasnlm.antimine.common.level.di
 
 import androidx.room.Room
 import dev.lucasnlm.antimine.common.level.database.AppDataBase
-import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
-import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
-import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
-import dev.lucasnlm.antimine.common.level.repository.ITipRepository
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
+import dev.lucasnlm.antimine.common.level.repository.MinefieldRepositoryImpl
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
+import dev.lucasnlm.antimine.common.level.repository.SavesRepositoryImpl
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
+import dev.lucasnlm.antimine.common.level.repository.StatsRepositoryImpl
 import dev.lucasnlm.antimine.common.level.repository.TipRepository
+import dev.lucasnlm.antimine.common.level.repository.TipRepositoryImpl
 import dev.lucasnlm.antimine.common.level.utils.Clock
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -34,18 +34,18 @@ val LevelModule = module {
     }
 
     single {
-        SavesRepository(get())
-    } bind ISavesRepository::class
+        SavesRepositoryImpl(get())
+    } bind SavesRepository::class
 
     single {
-        StatsRepository(get())
-    } bind IStatsRepository::class
+        StatsRepositoryImpl(get())
+    } bind StatsRepository::class
 
     single {
-        MinefieldRepository()
-    } bind IMinefieldRepository::class
+        MinefieldRepositoryImpl()
+    } bind MinefieldRepository::class
 
     single {
-        TipRepository(get(), get())
-    } bind ITipRepository::class
+        TipRepositoryImpl(get(), get())
+    } bind TipRepository::class
 }

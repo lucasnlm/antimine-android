@@ -7,13 +7,13 @@ import androidx.annotation.DrawableRes
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
 import dev.lucasnlm.antimine.gameover.model.GameResult
-import dev.lucasnlm.antimine.preferences.PreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepositoryImpl
 import kotlinx.coroutines.flow.flow
 import java.util.concurrent.TimeUnit
 
 class EndGameDialogViewModel(
     private val application: Application,
-    private val preferencesRepository: PreferencesRepository,
+    private val preferencesRepository: PreferencesRepositoryImpl,
 ) : IntentViewModel<EndGameDialogEvent, EndGameDialogState>() {
     private fun List<Int>.safeRandomEmoji(
         @DrawableRes except: Int,

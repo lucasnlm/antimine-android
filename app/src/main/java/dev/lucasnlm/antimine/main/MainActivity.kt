@@ -19,13 +19,13 @@ import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
-import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
-import dev.lucasnlm.antimine.common.level.repository.ISavesRepository
+import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
+import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.control.ControlActivity
-import dev.lucasnlm.antimine.core.audio.IGameAudioManager
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.custom.CustomLevelDialogFragment
 import dev.lucasnlm.antimine.databinding.ActivityMainBinding
 import dev.lucasnlm.antimine.history.HistoryActivity
@@ -33,8 +33,8 @@ import dev.lucasnlm.antimine.l10n.GameLocaleManager
 import dev.lucasnlm.antimine.main.viewmodel.MainEvent
 import dev.lucasnlm.antimine.main.viewmodel.MainViewModel
 import dev.lucasnlm.antimine.playgames.PlayGamesDialogFragment
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.themes.ThemeActivity
@@ -48,18 +48,18 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ThemedActivity() {
     private val viewModel: MainViewModel by viewModel()
-    private val playGamesManager: IPlayGamesManager by inject()
-    private val preferencesRepository: IPreferencesRepository by inject()
-    private val minefieldRepository: IMinefieldRepository by inject()
-    private val dimensionRepository: IDimensionRepository by inject()
-    private val analyticsManager: IAnalyticsManager by inject()
-    private val featureFlagManager: IFeatureFlagManager by inject()
-    private val billingManager: IBillingManager by inject()
-    private val savesRepository: ISavesRepository by inject()
-    private val inAppUpdateManager: IInAppUpdateManager by inject()
-    private val instantAppManager: IInstantAppManager by inject()
-    private val preferenceRepository: IPreferencesRepository by inject()
-    private val soundManager: IGameAudioManager by inject()
+    private val playGamesManager: PlayGamesManager by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
+    private val minefieldRepository: MinefieldRepository by inject()
+    private val dimensionRepository: DimensionRepository by inject()
+    private val analyticsManager: AnalyticsManager by inject()
+    private val featureFlagManager: FeatureFlagManager by inject()
+    private val billingManager: BillingManager by inject()
+    private val savesRepository: SavesRepository by inject()
+    private val inAppUpdateManager: InAppUpdateManager by inject()
+    private val instantAppManager: InstantAppManager by inject()
+    private val preferenceRepository: PreferencesRepository by inject()
+    private val soundManager: GameAudioManager by inject()
     private val gameLocaleManager: GameLocaleManager by inject()
 
     private lateinit var viewPager: ViewPager2

@@ -2,21 +2,21 @@ package dev.lucasnlm.antimine.stats.viewmodel
 
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.database.models.Stats
-import dev.lucasnlm.antimine.common.level.repository.IMinefieldRepository
-import dev.lucasnlm.antimine.common.level.repository.IStatsRepository
-import dev.lucasnlm.antimine.core.repository.IDimensionRepository
+import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
+import dev.lucasnlm.antimine.common.level.repository.StatsRepository
+import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
-import dev.lucasnlm.antimine.preferences.IPreferencesRepository
+import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.stats.model.StatsModel
 import dev.lucasnlm.antimine.stats.model.StatsState
 import kotlinx.coroutines.flow.flow
 
 class StatsViewModel(
-    private val statsRepository: IStatsRepository,
-    private val preferenceRepository: IPreferencesRepository,
-    private val minefieldRepository: IMinefieldRepository,
-    private val dimensionRepository: IDimensionRepository,
+    private val statsRepository: StatsRepository,
+    private val preferenceRepository: PreferencesRepository,
+    private val minefieldRepository: MinefieldRepository,
+    private val dimensionRepository: DimensionRepository,
 ) : IntentViewModel<StatsEvent, StatsState>() {
     private suspend fun loadStatsModel(): List<StatsModel> {
         val minId = preferenceRepository.getStatsBase()
