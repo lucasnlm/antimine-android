@@ -90,4 +90,4 @@ task copyAndroidNatives {
     }
 }
 
-preBuild.dependsOn copyAndroidNatives
+//preBuild.dependsOn copyAndroidNatives
