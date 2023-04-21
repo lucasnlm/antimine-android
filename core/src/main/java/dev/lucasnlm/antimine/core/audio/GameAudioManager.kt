@@ -15,6 +15,7 @@ interface GameAudioManager {
     fun playRevealBomb()
     fun playMonetization()
     fun playRevealBombReloaded()
+    fun playSwitchAction()
     fun free()
     fun getComposerData(): List<ComposerData>
 }
