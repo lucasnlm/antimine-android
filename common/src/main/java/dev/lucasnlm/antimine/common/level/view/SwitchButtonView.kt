@@ -60,43 +60,46 @@ class SwitchButtonView : FrameLayout {
     }
 
     fun setOnFlagClickListener(listener: OnClickListener?) {
+        flagButton.isSoundEffectsEnabled = false
         flagButton.setOnClickListener {
             listener?.onClick(it)
-            updateMaterialButtonState(flagButton, true)
-            updateMaterialButtonState(questionButton, false)
-            updateMaterialButtonState(openButton, false)
+            selectFlag()
         }
     }
 
     fun setOnOpenClickListener(listener: OnClickListener?) {
+        openButton.isSoundEffectsEnabled = false
         openButton.setOnClickListener {
             listener?.onClick(it)
-            updateMaterialButtonState(flagButton, false)
-            updateMaterialButtonState(questionButton, false)
-            updateMaterialButtonState(openButton, true)
+            selectOpen()
         }
     }
 
     fun setOnQuestionClickListener(listener: OnClickListener?) {
+        questionButton.isSoundEffectsEnabled = false
         questionButton.setOnClickListener {
             listener?.onClick(it)
-            updateMaterialButtonState(flagButton, false)
-            updateMaterialButtonState(questionButton, true)
-            updateMaterialButtonState(openButton, false)
+            selectQuestionMark()
         }
     }
 
-    fun selectOpenAsDefault(enabled: Boolean) {
-        if (currentSelected == null) {
-            if (enabled) {
-                updateMaterialButtonState(flagButton, false)
-                updateMaterialButtonState(questionButton, false)
-                updateMaterialButtonState(openButton, true)
-            } else {
-                updateMaterialButtonState(flagButton, true)
-                updateMaterialButtonState(questionButton, false)
-                updateMaterialButtonState(openButton, false)
-            }
-        }
+    private fun selectQuestionMark() {
+        updateMaterialButtonState(flagButton, false)
+        updateMaterialButtonState(questionButton, true)
+        updateMaterialButtonState(openButton, false)
     }
+
+    private fun selectOpen() {
+        updateMaterialButtonState(flagButton, false)
+        updateMaterialButtonState(questionButton, false)
+        updateMaterialButtonState(openButton, true)
+    }
+
+    private fun selectFlag() {
+        updateMaterialButtonState(flagButton, true)
+        updateMaterialButtonState(questionButton, false)
+        updateMaterialButtonState(openButton, false)
+    }
+
+    fun selectDefault() = selectFlag()
 }

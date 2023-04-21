@@ -14,6 +14,7 @@ import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.AppVersionManager
+import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
@@ -21,10 +22,8 @@ import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.repository.ThemeRepository
-import dev.lucasnlm.external.CrashReporter
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -35,8 +34,8 @@ open class GameRenderFragment : AndroidFragmentApplication() {
     private val themeRepository: ThemeRepository by inject()
     private val dimensionRepository: DimensionRepository by inject()
     private val preferencesRepository: PreferencesRepository by inject()
-    private val crashReporter: CrashReporter by inject()
     private val appVersionManager: AppVersionManager by inject()
+    private val gameAudioManager: GameAudioManager by inject()
 
     private var controlSwitcher: SwitchButtonView? = null
     private val isWatch = appVersionManager.isWatch()
@@ -193,25 +192,29 @@ open class GameRenderFragment : AndroidFragmentApplication() {
 
                                 setOnFlagClickListener {
                                     gameViewModel.changeSwitchControlAction(Action.SwitchMark)
+                                    gameAudioManager.playSwitchAction()
                                 }
 
                                 setOnOpenClickListener {
                                     gameViewModel.changeSwitchControlAction(Action.OpenTile)
+                                    gameAudioManager.playSwitchAction()
                                 }
 
                                 setOnQuestionClickListener {
                                     gameViewModel.changeSwitchControlAction(Action.QuestionMark)
+                                    gameAudioManager.playSwitchAction()
                                 }
+                            }.also {
+                                it.selectDefault()
+                            }
 
-                                val selectedAction = preferencesRepository.getSwitchControlAction()
-                                val openAsDefault =
-                                    selectedAction == Action.OpenTile || selectedAction == Action.QuestionMark
-                                selectOpenAsDefault(openAsDefault)
-                                if (openAsDefault) {
-                                    gameViewModel.changeSwitchControlAction(Action.OpenTile)
-                                } else {
-                                    gameViewModel.changeSwitchControlAction(Action.SwitchMark)
-                                }
+                            lifecycleScope.launch {
+                                gameViewModel
+                                    .observeState()
+                                    .filter { it.isGameCompleted || it.turn == 0 }
+                                    .collect {
+                                        this@GameRenderFragment.controlSwitcher?.selectDefault()
+                                    }
                             }
 
                             addView(this@GameRenderFragment.controlSwitcher, getSwitchControlLayoutParams())

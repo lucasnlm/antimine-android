@@ -118,6 +118,11 @@ class GameAudioManagerImpl(
         playSoundFromAssets(fileName)
     }
 
+    override fun playSwitchAction() {
+        val fileName = revealBombReloadFile()
+        playSoundFromAssets(fileName)
+    }
+
     override fun free() {
         stopMusic()
     }

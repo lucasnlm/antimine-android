@@ -6,6 +6,18 @@ on:
       - main
 
 jobs:
+  libgdx:
+    name: Check LibGDX import
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run script
+        run: |
+          chmod +x ./gdx/check_import.sh
+          bash ./gdx/check_import.sh ./gdx/build.gradle
+        shell: bash
+
   ktlint:
     name: Check Code Quality
     runs-on: ubuntu-latest
@@ -15,7 +27,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - name: Run Ktlint
+      - name: Run ktlint
         uses: lucasnlm/ktlint-action@master
 
   test:
