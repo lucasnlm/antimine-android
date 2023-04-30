@@ -211,7 +211,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                             lifecycleScope.launch {
                                 gameViewModel
                                     .observeState()
-                                    .filter { it.isGameCompleted || it.turn == 0 }
+                                    .filter { it.isGameCompleted || (it.turn == 0 && !it.hasMines) }
                                     .collect {
                                         this@GameRenderFragment.controlSwitcher?.selectDefault()
                                     }
