@@ -67,7 +67,7 @@ class GameAudioManagerImpl(
     }
 
     override fun resumeMusic() {
-        if (preferencesRepository.isSoundEffectsEnabled()) {
+        if (preferencesRepository.isMusicEnabled()) {
             if (musicMediaPlayer?.isPlaying == false) {
                 musicMediaPlayer?.start()
             }

@@ -424,7 +424,10 @@ class GameActivity :
         analyticsManager.sentEvent(Analytics.Resume)
         keepScreenOn(true)
         gameViewModel.resumeGame()
-        gameAudioManager.resumeMusic()
+
+        if (gameViewModel.singleState().isActive) {
+            gameAudioManager.resumeMusic()
+        }
     }
 
     override fun onPause() {
