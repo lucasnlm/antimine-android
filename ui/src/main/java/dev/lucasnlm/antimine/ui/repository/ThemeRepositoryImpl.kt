@@ -26,7 +26,14 @@ class ThemeRepositoryImpl(
     private val context: Context,
     private val preferenceRepository: PreferencesRepository,
 ) : ThemeRepository {
-    private val defaultTheme = Themes.lightTheme()
+
+    private fun getDefaultTheme(): AppTheme {
+        return if (preferenceRepository.isPremiumEnabled()) {
+            buildSystemTheme()
+        } else {
+            Themes.lightTheme()
+        }
+    }
 
     override fun getCustomTheme(): AppTheme? {
         val targetThemeId = preferenceRepository.themeId()
@@ -40,7 +47,7 @@ class ThemeRepositoryImpl(
     }
 
     override fun getTheme(): AppTheme {
-        return getCustomTheme() ?: defaultTheme
+        return getCustomTheme() ?: getDefaultTheme()
     }
 
     override fun getAllThemes(): List<AppTheme> =
@@ -59,8 +66,9 @@ class ThemeRepositoryImpl(
     }
 
     override fun reset(): AppTheme {
+        val defaultTheme = getDefaultTheme()
         preferenceRepository.useTheme(defaultTheme.id)
-        return buildSystemTheme()
+        return defaultTheme
     }
 
     private fun buildSystemTheme(): AppTheme {
