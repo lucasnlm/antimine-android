@@ -14,17 +14,13 @@ class GameAudioManagerImpl(
     private var musicMediaPlayer: MediaPlayer? = null
 
     override fun playBombExplosion() {
-        if (preferencesRepository.isSoundEffectsEnabled()) {
-            val fileName = bombExplosionFileName()
-            playSoundFromAssets(fileName)
-        }
+        val fileName = bombExplosionFileName()
+        playSoundFromAssets(fileName)
     }
 
     override fun playWin() {
-        if (preferencesRepository.isSoundEffectsEnabled()) {
-            val fileName = winFileName()
-            playSoundFromAssets(fileName)
-        }
+        val fileName = winFileName()
+        playSoundFromAssets(fileName)
     }
 
     private fun buildMusicMediaPlayer(assetFileDescriptor: AssetFileDescriptor): MediaPlayer {
@@ -67,7 +63,7 @@ class GameAudioManagerImpl(
     }
 
     override fun resumeMusic() {
-        if (preferencesRepository.isSoundEffectsEnabled()) {
+        if (preferencesRepository.isMusicEnabled()) {
             if (musicMediaPlayer?.isPlaying == false) {
                 musicMediaPlayer?.start()
             }
@@ -84,12 +80,10 @@ class GameAudioManagerImpl(
     }
 
     override fun playClickSound(index: Int) {
-        if (preferencesRepository.isSoundEffectsEnabled()) {
-            val clickFileNames = clickFileName()
-            if (index < clickFileNames.size) {
-                val fileClickName = clickFileNames[index]
-                playSoundFromAssets(fileClickName)
-            }
+        val clickFileNames = clickFileName()
+        if (index < clickFileNames.size) {
+            val fileClickName = clickFileNames[index]
+            playSoundFromAssets(fileClickName)
         }
     }
 
@@ -188,15 +182,17 @@ class GameAudioManagerImpl(
     }
 
     private fun playSoundFromAssets(fileName: String) {
-        tryOpenFd(fileName)?.use { soundAsset ->
-            playWithMediaPlayer(
-                soundAsset = soundAsset,
-                volume = SFX_MAX_VOLUME,
-                repeat = false,
-                releaseOnComplete = true,
-                seekTo = 0,
-                isMusic = false,
-            )
+        if (preferencesRepository.isSoundEffectsEnabled()) {
+            tryOpenFd(fileName)?.use { soundAsset ->
+                playWithMediaPlayer(
+                    soundAsset = soundAsset,
+                    volume = SFX_MAX_VOLUME,
+                    repeat = false,
+                    releaseOnComplete = true,
+                    seekTo = 0,
+                    isMusic = false,
+                )
+            }
         }
     }
 
@@ -212,9 +208,7 @@ class GameAudioManagerImpl(
     private fun List<String>.pickOne() = this.shuffled().first()
 
     private fun List<String>.pickOneAndPlay() {
-        if (preferencesRepository.isSoundEffectsEnabled()) {
-            pickOne().also(::playSoundFromAssets)
-        }
+        pickOne().also(::playSoundFromAssets)
     }
 
     companion object {
