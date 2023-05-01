@@ -79,6 +79,7 @@ android {
         }
 
         googleInstant {
+            versionCode 156
             dimension 'version'
             applicationId 'dev.lucasnlm.antimine'
             versionNameSuffix " I"
