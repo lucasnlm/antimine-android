@@ -11,8 +11,8 @@ android {
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
         applicationId 'dev.lucasnlm.antimine'
-        versionCode 1701080
-        versionName '17.1.8 W'
+        versionCode 1702040
+        versionName '17.2.4 W'
         minSdkVersion 25
         targetSdkVersion 33
         multiDexEnabled true
@@ -83,7 +83,6 @@ dependencies {
     implementation project(':core')
     implementation project(':gdx')
     implementation project(':foss')
-    implementation project(':donation')
 
     // Wear OS
     implementation 'androidx.wear:wear:1.2.0'
