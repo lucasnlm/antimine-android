@@ -16,9 +16,11 @@ import com.google.android.material.textview.MaterialTextView
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.audio.GameAudioManagerImpl
 import dev.lucasnlm.antimine.core.dpToPx
+import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.external.AdsManager
+import dev.lucasnlm.external.AnalyticsManager
 import dev.lucasnlm.external.BillingManager
 import dev.lucasnlm.external.InstantAppManager
 import kotlinx.coroutines.launch
@@ -28,6 +30,7 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
     private val adsManager: AdsManager by inject()
     private val gameAudioManager: GameAudioManagerImpl by inject()
     private val instantAppManager: InstantAppManager by inject()
+    private val analyticsManager: AnalyticsManager by inject()
 
     protected val preferencesRepository: PreferencesRepository by inject()
     protected val billingManager: BillingManager by inject()
@@ -106,6 +109,9 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
                     getString(R.string.music_by, composer.composer)
 
                 setOnClickListener {
+                    analyticsManager.sentEvent(
+                        Analytics.OpenMusicLink(from = "End Game"),
+                    )
                     preferencesRepository.setShowMusicBanner(false)
                     gameAudioManager.playMonetization()
                     openComposer(composer.composerLink)

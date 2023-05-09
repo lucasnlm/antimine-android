@@ -18,6 +18,8 @@ import dev.lucasnlm.antimine.about.databinding.FragmentAboutInfoBinding
 import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
+import dev.lucasnlm.antimine.core.models.Analytics
+import dev.lucasnlm.external.AnalyticsManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -25,6 +27,7 @@ class AboutInfoFragment : Fragment() {
     private lateinit var binding: FragmentAboutInfoBinding
     private val aboutViewModel: AboutViewModel by sharedViewModel()
     private val audioManager: GameAudioManager by inject()
+    private val analyticsManager: AnalyticsManager by inject()
     private val unknownVersionName = "?.?.?"
 
     private fun PackageManager.getPackageInfoCompat(packageName: String, flags: Int = 0): PackageInfo? {
@@ -107,6 +110,10 @@ class AboutInfoFragment : Fragment() {
     private fun openComposer(composerLink: String) {
         val context = requireContext()
         try {
+            analyticsManager.sentEvent(
+                Analytics.OpenMusicLink(from = "About"),
+            )
+
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(composerLink)).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
             }

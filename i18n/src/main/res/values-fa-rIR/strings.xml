@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fa">
-    <string name="tutorial">Tutorial</string>
-    <string name="tutorial_basic">The rule of the game is simple, the number on a square shows the number of mines adjacent to it and you have to flag all the mines.</string>
+    <string name="tutorial">آموزش</string>
+    <string name="tutorial_basic">قوانین بازی سادن! عدد روی یک مربع تعداد مین های کنار اون رو نشون میده و تو باید تمام مین ها رو علامت گذاری کنی.</string>
     <string name="tutorial_text_1">If a number is touching the same number of squares, then the squares are all mines.</string>
     <string name="tutorial_text_2">After marking your first flag, review the numbers and analyze the next square.</string>
     <string name="tutorial_text_3">If a square has the same number of flags, all other remaining squares adjacent to it aren\'t mines (the green arrow).</string>

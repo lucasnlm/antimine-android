@@ -12,7 +12,7 @@
     <string name="minefield">Schwierigkeitsgrad</string>
     <string name="standard">Voreinstellung</string>
     <string name="beginner">Anfänger</string>
-    <string name="intermediate">Mittleres Niveau</string>
+    <string name="intermediate">Fortgeschritten</string>
     <string name="expert">Experte</string>
     <string name="master">Meister</string>
     <string name="legend">Ikone</string>

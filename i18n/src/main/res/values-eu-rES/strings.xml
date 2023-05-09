@@ -23,7 +23,7 @@
     <string name="animations">Animazioak</string>
     <string name="vibration">Ukipen-erantzuna</string>
     <string name="about">Honi buruz</string>
-    <string name="quit">Quit</string>
+    <string name="quit">Irten</string>
     <string name="events">Estatistikak</string>
     <string name="custom">Pertsonalizatua</string>
     <string name="start">Hasi</string>
@@ -56,9 +56,9 @@
     <string name="version_s">%1$s bertsioa</string>
     <string name="sound_effects">Soinu efektuak</string>
     <string name="music">Musika</string>
-    <string name="music_by">Music by %1$s</string>
-    <string name="check_music">Listen on Spotify…</string>
-    <string name="selected">Selected</string>
+    <string name="music_by">%1$s(r)en musika</string>
+    <string name="check_music">Entzun Spotifyn…</string>
+    <string name="selected">Hautatuta</string>
     <string name="are_you_sure">Ziur zaude?</string>
     <string name="enable_automatic_flags">Gaitu automatikoki markatzea</string>
     <string name="open_areas">Zabaldutako eremuak</string>
@@ -99,7 +99,7 @@
     <string name="more">Gehiago</string>
     <string name="source_code">Iturburu-kodea</string>
     <string name="translation">Itzulpena</string>
-    <string name="language">Language</string>
+    <string name="language">Hizkuntza</string>
     <string name="licenses">Lizentziak</string>
     <string name="google_play_games">Google Play Games</string>
     <string name="loading">Kargatzen…</string>
