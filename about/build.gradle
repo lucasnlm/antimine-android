@@ -44,6 +44,7 @@ dependencies {
     implementation project(':preferences')
     implementation project(':ui')
     implementation project(':tutorial')
+    implementation project(':external')
 
     // Google
     implementation 'com.google.android.material:material:1.9.0-beta01'

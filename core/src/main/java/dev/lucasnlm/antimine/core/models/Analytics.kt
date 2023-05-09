@@ -56,6 +56,8 @@ sealed class Analytics(
 
     class OpenNeighbors(index: Int) : Analytics("Open Neighbors", mapOf("Index" to index.toString()))
 
+    class OpenMusicLink(from: String) : Analytics("Open Music Link", mapOf("From" to from))
+
     class GameOver(time: Long, score: Score) : Analytics(
         name = "Game Over",
         extra = mapOf(
