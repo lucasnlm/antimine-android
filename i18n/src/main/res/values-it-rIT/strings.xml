@@ -56,9 +56,9 @@
     <string name="version_s">Versione %1$s</string>
     <string name="sound_effects">Effetti Sonori</string>
     <string name="music">Musica</string>
-    <string name="music_by">Music by %1$s</string>
+    <string name="music_by">Musica di %1$s</string>
     <string name="check_music">Ascolta su Spotify…</string>
-    <string name="selected">Selected</string>
+    <string name="selected">Selezionato</string>
     <string name="are_you_sure">Sei sicuro?</string>
     <string name="enable_automatic_flags">Abilita il posizionamento automatico delle bandiere</string>
     <string name="open_areas">Aree Aperte</string>
