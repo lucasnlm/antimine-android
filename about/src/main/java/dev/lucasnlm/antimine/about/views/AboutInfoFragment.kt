@@ -111,7 +111,7 @@ class AboutInfoFragment : Fragment() {
         val context = requireContext()
         try {
             analyticsManager.sentEvent(
-                Analytics.OpenMusicLink(from = "About")
+                Analytics.OpenMusicLink(from = "About"),
             )
 
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(composerLink)).apply {

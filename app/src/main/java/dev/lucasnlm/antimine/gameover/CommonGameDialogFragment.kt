@@ -110,7 +110,7 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
 
                 setOnClickListener {
                     analyticsManager.sentEvent(
-                        Analytics.OpenMusicLink(from = "End Game")
+                        Analytics.OpenMusicLink(from = "End Game"),
                     )
                     preferencesRepository.setShowMusicBanner(false)
                     gameAudioManager.playMonetization()
