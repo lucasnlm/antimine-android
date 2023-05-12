@@ -32,7 +32,7 @@ android {
             res {
                 srcDirs("../app/src/main/res")
             }
-            manifest.srcFile("src/AndroidManifest.xml")
+            manifest.srcFile("src/main/AndroidManifest.xml")
         }
     }
     signingConfigs {
