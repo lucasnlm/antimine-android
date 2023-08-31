@@ -6,6 +6,7 @@ import dev.lucasnlm.antimine.about.R
 import dev.lucasnlm.antimine.about.databinding.ActivityContainerBinding
 import dev.lucasnlm.antimine.licenses.views.LicensesFragment
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class LicenseActivity : ThemedActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +15,7 @@ class LicenseActivity : ThemedActivity() {
         setContentView(binding.root)
 
         bindToolbar(binding.toolbar)
-        binding.toolbar.setTitle(R.string.licenses)
+        binding.toolbar.setTitle(i18n.string.licenses)
 
         supportFragmentManager.commit(allowStateLoss = true) {
             replace(R.id.content, LicensesFragment())

@@ -28,7 +28,7 @@ object Themes {
             highlight = 0x212121,
             focus = 0xD32F2F,
         ),
-        isPaid = true,
+        isPremium = true,
         isDarkTheme = false,
     )
 
@@ -53,7 +53,7 @@ object Themes {
             highlight = 0xFFFFFF,
             focus = 0xFFFFFF,
         ),
-        isPaid = true,
+        isPremium = true,
         isDarkTheme = true,
     )
 

@@ -14,8 +14,12 @@ class MinefieldConverter {
 
     @TypeConverter
     fun toMinefield(jsonInput: String): Minefield =
-        jsonAdapter.fromJson(jsonInput) ?: Minefield(9, 9, 9)
+        jsonAdapter.fromJson(jsonInput) ?: BEGINNER_MINEFIELD
 
     @TypeConverter
     fun toJsonString(field: Minefield): String = jsonAdapter.toJson(field)
+
+    companion object {
+        val BEGINNER_MINEFIELD = Minefield(9, 9, 9)
+    }
 }

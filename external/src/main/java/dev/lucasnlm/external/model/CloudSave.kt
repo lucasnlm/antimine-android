@@ -1,6 +1,6 @@
 package dev.lucasnlm.external.model
 
-import java.lang.Exception
+import java.security.InvalidKeyException
 
 data class CloudSave(
     val playId: String,
@@ -50,7 +50,7 @@ fun CloudSave.toHashMap(): HashMap<String, Any> = hashMapOf(
     "dimNumbers" to dimNumbers,
 )
 
-private fun Any?.parseInt(): Int = this?.toString()?.toInt() ?: throw Exception("Fail to parse Int")
+private fun Any?.parseInt(): Int = this?.toString()?.toInt() ?: throw InvalidKeyException("Fail to parse Int")
 private fun Any?.parseInt(default: Int): Int = this?.toString()?.toInt() ?: default
 
 @Suppress("UNCHECKED_CAST")

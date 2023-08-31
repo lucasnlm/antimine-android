@@ -56,4 +56,13 @@ data class GameState(
 
     // If false, it will hide tutorial tip during this session.
     val showTutorial: Boolean,
-)
+) {
+    /** Indicates whether is a new game */
+    val isNewGame = turn == 0 && (saveId == 0L || isLoadingMap || isCreatingGame)
+
+    /** Indicates whether the game is started */
+    val isGameStarted = (turn > 0 || saveId != 0L)
+
+    /** Indicates whether show controls text */
+    val shouldShowControls = turn < 1 && saveId == 0L && !isLoadingMap && showTutorial
+}

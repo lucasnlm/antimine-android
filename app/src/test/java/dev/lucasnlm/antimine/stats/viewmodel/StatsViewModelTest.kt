@@ -2,9 +2,9 @@ package dev.lucasnlm.antimine.stats.viewmodel
 
 import dev.lucasnlm.antimine.IntentViewModelTest
 import dev.lucasnlm.antimine.common.level.database.models.Stats
-import dev.lucasnlm.antimine.common.level.repository.MemoryStatsRepository
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.core.repository.DimensionRepository
+import dev.lucasnlm.antimine.mocks.MemoryStatsRepository
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import io.mockk.every
@@ -72,7 +72,7 @@ class StatsViewModelTest : IntentViewModelTest() {
         val repository = MemoryStatsRepository(listOfStats.toMutableList())
         val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
 
-        mapOf(0 to 6, 2 to 5, 4 to 4, 6 to 3, 8 to 2, 10 to 0).forEach { (base, expected) ->
+        mapOf(0 to 3, 2 to 5, 4 to 4, 6 to 3, 8 to 2, 10 to 0).forEach { (base, expected) ->
             every { prefsRepository.getStatsBase() } returns base
             viewModel.sendEvent(StatsEvent.LoadStats)
             val statsModelBase0 = viewModel.singleState()

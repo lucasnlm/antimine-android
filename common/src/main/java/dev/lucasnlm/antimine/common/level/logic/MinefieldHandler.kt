@@ -38,7 +38,8 @@ class MinefieldHandler(
         val unrevealedMines = field.filter { it.hasMine && it.mark.isNone() && !it.revealed && it.isCovered }
         val nearestTarget = if (lastX != null && lastY != null) {
             unrevealedMines.filter {
-                (lastX - it.posX).absoluteValue < 5 && (lastY - it.posY).absoluteValue < 5
+                (lastX - it.posX).absoluteValue < NEAR_MINE_THRESHOLD &&
+                    (lastY - it.posY).absoluteValue < NEAR_MINE_THRESHOLD
             }.shuffled().firstOrNull()
         } else {
             null
@@ -145,4 +146,8 @@ class MinefieldHandler(
     }
 
     fun result(): List<Area> = field.toList()
+
+    companion object {
+        const val NEAR_MINE_THRESHOLD = 5
+    }
 }

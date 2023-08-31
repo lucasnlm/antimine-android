@@ -14,13 +14,11 @@ class GameAudioManagerImpl(
     private var musicMediaPlayer: MediaPlayer? = null
 
     override fun playBombExplosion() {
-        val fileName = bombExplosionFileName()
-        playSoundFromAssets(fileName)
+        playSoundFromAssets(BOMB_EXPLOSION_FILE_NAME)
     }
 
     override fun playWin() {
-        val fileName = winFileName()
-        playSoundFromAssets(fileName)
+        playSoundFromAssets(WIN_FILE_NAME)
     }
 
     private fun buildMusicMediaPlayer(assetFileDescriptor: AssetFileDescriptor): MediaPlayer {
@@ -36,8 +34,7 @@ class GameAudioManagerImpl(
     override fun playMusic() {
         if (preferencesRepository.isMusicEnabled()) {
             if (musicMediaPlayer == null) {
-                val musicName = musicFileName()
-                tryOpenFd(musicName)?.use { musicFd ->
+                tryOpenFd(MUSIC_FILE_NAME)?.use { musicFd ->
                     musicMediaPlayer = buildMusicMediaPlayer(musicFd)
                 }
             } else {
@@ -53,12 +50,10 @@ class GameAudioManagerImpl(
     }
 
     override fun pauseMusic() {
-        try {
+        runCatching {
             if (musicMediaPlayer?.isPlaying == true) {
                 musicMediaPlayer?.pause()
             }
-        } catch (e: IllegalStateException) {
-            // Ignore
         }
     }
 
@@ -80,11 +75,9 @@ class GameAudioManagerImpl(
     }
 
     override fun playClickSound(index: Int) {
-        val clickFileNames = clickFileName()
-        if (index < clickFileNames.size) {
-            val fileClickName = clickFileNames[index]
-            playSoundFromAssets(fileClickName)
-        }
+        clickFileName()
+            .getOrNull(index)
+            ?.let(::playSoundFromAssets)
     }
 
     override fun playOpenArea() {
@@ -108,13 +101,11 @@ class GameAudioManagerImpl(
     }
 
     override fun playRevealBombReloaded() {
-        val fileName = revealBombReloadFile()
-        playSoundFromAssets(fileName)
+        playSoundFromAssets(REVEAL_BOMB_RELOAD_FILE_NAME)
     }
 
     override fun playSwitchAction() {
-        val fileName = revealBombReloadFile()
-        playSoundFromAssets(fileName)
+        playSoundFromAssets(REVEAL_BOMB_RELOAD_FILE_NAME)
     }
 
     override fun free() {
@@ -159,7 +150,7 @@ class GameAudioManagerImpl(
         seekTo: Int? = null,
     ): MediaPlayer {
         val mediaPlayer = MediaPlayer()
-        try {
+        runCatching {
             mediaPlayer.run {
                 setDataSource(soundAsset.fileDescriptor, soundAsset.startOffset, soundAsset.length)
                 prepare()
@@ -174,8 +165,7 @@ class GameAudioManagerImpl(
                 }
                 start()
             }
-        } catch (_: Exception) {
-            // Fail to load or play file. Ignore.
+        }.onFailure {
             mediaPlayer.release()
         }
         return mediaPlayer
@@ -197,12 +187,9 @@ class GameAudioManagerImpl(
     }
 
     private fun tryOpenFd(fileName: String): AssetFileDescriptor? {
-        return try {
+        return runCatching {
             context.assets.openFd(fileName)
-        } catch (e: Exception) {
-            // Failed to load, file does not exist.
-            null
-        }
+        }.getOrNull()
     }
 
     private fun List<String>.pickOne() = this.shuffled().first()
@@ -217,14 +204,19 @@ class GameAudioManagerImpl(
 
         private fun filesCount(count: Int) = (0 until count)
 
-        fun winFileName() = "win.ogg"
-        fun bombExplosionFileName() = "bomb_explosion.ogg"
+        private const val OPEN_AREA_COUNT = 4
+        private const val OPEN_MULTIPLE_COUNT = 3
+        private const val PUT_FLAG_COUNT = 3
+        private const val REVEAL_BOMB_COUNT = 3
+
+        const val MUSIC_FILE_NAME = "music.ogg"
+        const val WIN_FILE_NAME = "win.ogg"
+        const val BOMB_EXPLOSION_FILE_NAME = "bomb_explosion.ogg"
+        const val REVEAL_BOMB_RELOAD_FILE_NAME = "reveal_mine_reload.ogg"
         fun clickFileName() = listOf("menu_click.ogg", "menu_click_alt.ogg", "menu_click_back.ogg")
-        fun musicFileName() = "music.ogg"
-        fun openAreaFiles() = filesCount(4).map { "open_area_$it.ogg" }
-        fun openMultipleFiles() = filesCount(3).map { "open_multiple_$it.ogg" }
-        fun putFlagFiles() = filesCount(3).map { "put_flag_$it.ogg" }
-        fun revealBombFiles() = filesCount(3).map { "reveal_mine_$it.ogg" }
-        fun revealBombReloadFile() = "reveal_mine_reload.ogg"
+        fun openAreaFiles() = filesCount(OPEN_AREA_COUNT).map { "open_area_$it.ogg" }
+        fun openMultipleFiles() = filesCount(OPEN_MULTIPLE_COUNT).map { "open_multiple_$it.ogg" }
+        fun putFlagFiles() = filesCount(PUT_FLAG_COUNT).map { "put_flag_$it.ogg" }
+        fun revealBombFiles() = filesCount(REVEAL_BOMB_COUNT).map { "reveal_mine_$it.ogg" }
     }
 }

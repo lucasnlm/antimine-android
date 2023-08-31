@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.mocks
 
+import dev.lucasnlm.antimine.core.models.MinefieldSize
 import dev.lucasnlm.antimine.core.repository.DimensionRepository
-import dev.lucasnlm.antimine.core.repository.Size
 
 class FixedDimensionRepository : DimensionRepository {
     override fun areaSize(): Float = 50.0f
@@ -12,7 +12,7 @@ class FixedDimensionRepository : DimensionRepository {
 
     override fun areaSeparator(): Float = 1.0f
 
-    override fun displaySize(): Size = Size(50 * 15, 50 * 30)
+    override fun displaySize(): MinefieldSize = MinefieldSize(50 * 15, 50 * 30)
 
     override fun actionBarSizeWithStatus(): Int = 50
 

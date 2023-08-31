@@ -11,16 +11,14 @@ import dev.lucasnlm.antimine.ui.model.TopBarAction
 import dev.lucasnlm.antimine.ui.repository.ThemeRepository
 import org.koin.android.ext.android.inject
 
+/**
+ * A class that provides a themed activity.
+ */
 abstract class ThemedActivity : AppCompatActivity() {
     protected val themeRepository: ThemeRepository by inject()
 
-    protected val usingTheme: AppTheme by lazy {
-        currentTheme()
-    }
-
-    protected val usingSkin: AppSkin by lazy {
-        currentSkin()
-    }
+    protected val usingTheme: AppTheme by lazy { currentTheme() }
+    protected val usingSkin: AppSkin by lazy { currentSkin() }
 
     private fun currentTheme() = themeRepository.getTheme()
 

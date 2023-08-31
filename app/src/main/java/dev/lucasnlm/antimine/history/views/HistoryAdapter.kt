@@ -12,6 +12,8 @@ import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.databinding.ViewHistoryItemBinding
 import dev.lucasnlm.antimine.history.viewmodel.HistoryEvent
+import com.google.android.material.R as GR
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class HistoryAdapter(
     private val saveHistory: List<Save>,
@@ -40,49 +42,60 @@ class HistoryAdapter(
         val context = holder.itemView.context
         val buttonBackgroundColor = MaterialColors.getColorStateListOrNull(
             context,
-            dev.lucasnlm.antimine.control.R.attr.colorOnBackground,
-        )?.withAlpha(50)
+            GR.attr.colorOnBackground,
+        )?.withAlpha(BUTTON_BACKGROUND_ALPHA)
 
         val difficultyText = context.getString(
             when (difficulty) {
-                Difficulty.Beginner -> R.string.beginner
-                Difficulty.Intermediate -> R.string.intermediate
-                Difficulty.Expert -> R.string.expert
-                Difficulty.Standard -> R.string.standard
-                Difficulty.Master -> R.string.master
-                Difficulty.Legend -> R.string.legend
-                Difficulty.Custom -> R.string.custom
-                Difficulty.FixedSize -> R.string.fixed_size
+                Difficulty.Beginner -> i18n.string.beginner
+                Difficulty.Intermediate -> i18n.string.intermediate
+                Difficulty.Expert -> i18n.string.expert
+                Difficulty.Standard -> i18n.string.standard
+                Difficulty.Master -> i18n.string.master
+                Difficulty.Legend -> i18n.string.legend
+                Difficulty.Custom -> i18n.string.custom
+                Difficulty.FixedSize -> i18n.string.fixed_size
             },
         )
 
         val gameNameText = "$difficultyText #$uid"
 
-        holder.binding.difficulty.text = gameNameText
+        holder.binding.run {
+            difficulty.text = gameNameText
+            badge.alpha = if (status == SaveStatus.VICTORY) BADGE_VICTORY_ALPHA else BADGE_DEFEAT_ALPHA
 
-        holder.binding.badge.alpha = if (status == SaveStatus.VICTORY) 1.0f else 0.5f
+            minefieldSize.text = context.getString(i18n.string.minefield_size, minefield.width, minefield.height)
+            minesCount.text = context.getString(i18n.string.mines_remaining, minefield.mines)
 
-        holder.binding.minefieldSize.text = String.format("%d x %d", minefield.width, minefield.height)
-        holder.binding.minesCount.text = context.getString(R.string.mines_remaining, minefield.mines)
-
-        if (status != SaveStatus.VICTORY) {
-            holder.binding.replay.icon = ContextCompat.getDrawable(context, R.drawable.replay)
-            holder.binding.replay.setOnClickListener {
-                statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
+            replay.run {
+                if (status != SaveStatus.VICTORY) {
+                    icon = ContextCompat.getDrawable(context, R.drawable.replay)
+                    setOnClickListener {
+                        statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
+                    }
+                    backgroundTintList = buttonBackgroundColor
+                } else {
+                    icon = ContextCompat.getDrawable(context, R.drawable.play)
+                    setOnClickListener {
+                        statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
+                    }
+                    backgroundTintList = buttonBackgroundColor
+                }
             }
-            holder.binding.replay.backgroundTintList = buttonBackgroundColor
-        } else {
-            holder.binding.replay.icon = ContextCompat.getDrawable(context, R.drawable.play)
-            holder.binding.replay.setOnClickListener {
-                statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
-            }
-            holder.binding.replay.backgroundTintList = buttonBackgroundColor
-        }
 
-        holder.binding.open.setOnClickListener {
-            statelessViewModel.sendEvent(HistoryEvent.LoadSave(uid))
+            open.run {
+                setOnClickListener {
+                    statelessViewModel.sendEvent(HistoryEvent.LoadSave(uid))
+                }
+                backgroundTintList = buttonBackgroundColor
+            }
         }
-        holder.binding.open.backgroundTintList = buttonBackgroundColor
+    }
+
+    companion object {
+        const val BUTTON_BACKGROUND_ALPHA = 50
+        const val BADGE_VICTORY_ALPHA = 1.0f
+        const val BADGE_DEFEAT_ALPHA = 0.5f
     }
 }
 

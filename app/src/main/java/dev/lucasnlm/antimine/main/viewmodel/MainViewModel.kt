@@ -95,7 +95,7 @@ class MainViewModel(
         }
 
         cloudSave.stats.mapNotNull {
-            try {
+            runCatching {
                 Stats(
                     uid = it["uid"]!!.toInt(),
                     duration = it["duration"]!!.toLong(),
@@ -105,15 +105,13 @@ class MainViewModel(
                     height = it["height"]!!.toInt(),
                     openArea = it["openArea"]!!.toInt(),
                 )
-            } catch (e: Exception) {
-                null
-            }
+            }.getOrNull()
         }.distinctBy {
             it.uid
         }.also {
-            try {
+            runCatching {
                 statsRepository.addAllStats(it)
-            } catch (e: Exception) {
+            }.onFailure {
                 Log.e(MainActivity.TAG, "Fail to insert stats on DB")
             }
         }

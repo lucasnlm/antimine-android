@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.common.level.utils
 
+import android.text.format.DateUtils
 import java.util.Timer
 import java.util.TimerTask
 
@@ -37,8 +38,8 @@ open class Clock {
                         onTick(elapsedTimeSeconds)
                     }
                 },
-                1000L,
-                1000L,
+                DateUtils.SECOND_IN_MILLIS,
+                DateUtils.SECOND_IN_MILLIS,
             )
         }
     }

@@ -25,6 +25,7 @@ import dev.lucasnlm.external.BillingManager
 import dev.lucasnlm.external.InstantAppManager
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
     private val adsManager: AdsManager by inject()
@@ -66,14 +67,18 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
     abstract fun canShowMusicBanner(): Boolean
 
     private fun openHexLink(context: Context) {
-        val hexUri = "https://play.google.com/store/apps/details?id=dev.lucasnlm.hexo"
-        try {
+        runCatching {
+            val hexUri = "https://play.google.com/store/apps/details?id=dev.lucasnlm.hexo"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(hexUri)).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
             }
             context.startActivity(intent)
-        } catch (e: Exception) {
-            Toast.makeText(context.applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+        }.onFailure {
+            Toast.makeText(
+                context.applicationContext,
+                i18n.string.unknown_error,
+                Toast.LENGTH_SHORT,
+            ).show()
         }
     }
 
@@ -90,7 +95,7 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
                 view,
                 FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
-                    context.dpToPx(75),
+                    context.dpToPx(HEX_BANNER_HEIGHT_DP),
                     Gravity.CENTER_HORIZONTAL,
                 ),
             )
@@ -106,7 +111,7 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
             val view = View.inflate(context, R.layout.music_link, null)
             view.run {
                 findViewById<MaterialTextView>(R.id.music_by).text =
-                    getString(R.string.music_by, composer.composer)
+                    getString(i18n.string.music_by, composer.composer)
 
                 setOnClickListener {
                     analyticsManager.sentEvent(
@@ -131,15 +136,16 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
 
     private fun openComposer(composerLink: String) {
         val context = requireContext()
-        try {
+
+        runCatching {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(composerLink)).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
             }
             context.startActivity(intent)
-        } catch (e: Exception) {
+        }.onFailure {
             Toast.makeText(
                 context.applicationContext,
-                dev.lucasnlm.antimine.about.R.string.unknown_error,
+                i18n.string.unknown_error,
                 Toast.LENGTH_SHORT,
             ).show()
         }
@@ -212,12 +218,18 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
                                 continueGame()
                             },
                             onError = {
-                                Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, i18n.string.no_network, Toast.LENGTH_SHORT).show()
                             },
                         )
                     },
                 )
             }
         }
+    }
+
+    companion object {
+        const val DIALOG_STATE = "dialog_state"
+        const val HEX_BANNER_HEIGHT_DP = 75
+        const val BACKGROUND_BLUR_RADIUS = 8
     }
 }

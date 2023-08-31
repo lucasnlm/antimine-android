@@ -2,48 +2,39 @@ package dev.lucasnlm.antimine.common.level.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.color.MaterialColors
-import dev.lucasnlm.antimine.common.R
+import dev.lucasnlm.antimine.common.databinding.SwitchButtonBinding
+import com.google.android.material.R as GR
 
 class SwitchButtonView : FrameLayout {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    init {
-        inflate(context, R.layout.switch_button, this)
-    }
-
-    private val questionButton: MaterialButton by lazy {
-        findViewById(R.id.question)
-    }
-
-    private val flagButton: MaterialButton by lazy {
-        findViewById(R.id.flag)
-    }
-
-    private val openButton: MaterialButton by lazy {
-        findViewById(R.id.open)
+    private val binding by lazy {
+        val layoutInflater = LayoutInflater.from(context)
+        SwitchButtonBinding.inflate(layoutInflater, this, true)
     }
 
     private var currentSelected: MaterialButton? = null
 
     private val selectedIconTint = MaterialColors.getColorStateListOrNull(
         context,
-        R.attr.colorOnPrimary,
+        GR.attr.colorOnPrimary,
     )
     private val selectedBackgroundTint = MaterialColors.getColorStateListOrNull(
         context,
-        R.attr.colorPrimary,
+        GR.attr.colorPrimary,
     )
-    private val unselectedIconTint = flagButton.iconTint
-    private val unselectedBackgroundTint = flagButton.backgroundTintList
+    private val unselectedIconTint = binding.flagButton.iconTint
+    private val unselectedBackgroundTint = binding.flagButton.backgroundTintList
 
     fun setQuestionButtonVisibility(visible: Boolean) {
-        questionButton.isVisible = visible
+        binding.questionButton.isVisible = visible
     }
 
     private fun updateMaterialButtonState(target: MaterialButton, selected: Boolean) {
@@ -60,45 +51,45 @@ class SwitchButtonView : FrameLayout {
     }
 
     fun setOnFlagClickListener(listener: OnClickListener?) {
-        flagButton.isSoundEffectsEnabled = false
-        flagButton.setOnClickListener {
+        binding.flagButton.isSoundEffectsEnabled = false
+        binding.flagButton.setOnClickListener {
             listener?.onClick(it)
             selectFlag()
         }
     }
 
     fun setOnOpenClickListener(listener: OnClickListener?) {
-        openButton.isSoundEffectsEnabled = false
-        openButton.setOnClickListener {
+        binding.openButton.isSoundEffectsEnabled = false
+        binding.openButton.setOnClickListener {
             listener?.onClick(it)
             selectOpen()
         }
     }
 
     fun setOnQuestionClickListener(listener: OnClickListener?) {
-        questionButton.isSoundEffectsEnabled = false
-        questionButton.setOnClickListener {
+        binding.questionButton.isSoundEffectsEnabled = false
+        binding.questionButton.setOnClickListener {
             listener?.onClick(it)
             selectQuestionMark()
         }
     }
 
     private fun selectQuestionMark() {
-        updateMaterialButtonState(flagButton, false)
-        updateMaterialButtonState(questionButton, true)
-        updateMaterialButtonState(openButton, false)
+        updateMaterialButtonState(binding.flagButton, false)
+        updateMaterialButtonState(binding.questionButton, true)
+        updateMaterialButtonState(binding.openButton, false)
     }
 
     private fun selectOpen() {
-        updateMaterialButtonState(flagButton, false)
-        updateMaterialButtonState(questionButton, false)
-        updateMaterialButtonState(openButton, true)
+        updateMaterialButtonState(binding.flagButton, false)
+        updateMaterialButtonState(binding.questionButton, false)
+        updateMaterialButtonState(binding.openButton, true)
     }
 
     private fun selectFlag() {
-        updateMaterialButtonState(flagButton, true)
-        updateMaterialButtonState(questionButton, false)
-        updateMaterialButtonState(openButton, false)
+        updateMaterialButtonState(binding.flagButton, true)
+        updateMaterialButtonState(binding.questionButton, false)
+        updateMaterialButtonState(binding.openButton, false)
     }
 
     fun selectDefault() = selectFlag()

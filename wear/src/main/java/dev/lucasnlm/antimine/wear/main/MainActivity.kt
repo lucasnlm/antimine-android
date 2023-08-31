@@ -13,6 +13,7 @@ import dev.lucasnlm.antimine.wear.main.models.MenuItem
 import dev.lucasnlm.antimine.wear.main.view.MainMenuAdapter
 import dev.lucasnlm.antimine.wear.tutorial.WearTutorialActivity
 import org.koin.android.ext.android.inject
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class MainActivity : ThemedActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -28,9 +29,9 @@ class MainActivity : ThemedActivity() {
             MenuItem(
                 id = 0L,
                 label = if (preferencesRepository.showContinueGame()) {
-                    R.string.continue_game
+                    i18n.string.continue_game
                 } else {
-                    R.string.start
+                    i18n.string.start
                 },
                 icon = R.drawable.play,
                 onClick = {
@@ -39,7 +40,7 @@ class MainActivity : ThemedActivity() {
             ),
             MenuItem(
                 id = 1L,
-                label = R.string.minefield,
+                label = i18n.string.minefield,
                 icon = R.drawable.add,
                 onClick = {
                     startDifficultyScreen()
@@ -47,7 +48,7 @@ class MainActivity : ThemedActivity() {
             ),
             MenuItem(
                 id = 2L,
-                label = R.string.control_types,
+                label = i18n.string.control_types,
                 icon = R.drawable.control,
                 onClick = {
                     startControlScreen()
@@ -55,7 +56,7 @@ class MainActivity : ThemedActivity() {
             ),
             MenuItem(
                 id = 3L,
-                label = R.string.themes,
+                label = i18n.string.themes,
                 icon = R.drawable.themes,
                 onClick = {
                     startThemeScreen()
@@ -63,7 +64,7 @@ class MainActivity : ThemedActivity() {
             ),
             MenuItem(
                 id = 4L,
-                label = R.string.tutorial,
+                label = i18n.string.tutorial,
                 icon = R.drawable.tutorial,
                 onClick = {
                     startTutorial()
@@ -71,7 +72,7 @@ class MainActivity : ThemedActivity() {
             ),
             MenuItem(
                 id = 6L,
-                label = R.string.quit,
+                label = i18n.string.quit,
                 icon = R.drawable.close,
                 onClick = {
                     finishAffinity()

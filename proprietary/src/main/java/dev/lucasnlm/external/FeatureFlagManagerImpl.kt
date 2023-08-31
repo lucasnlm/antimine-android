@@ -2,6 +2,7 @@ package dev.lucasnlm.external
 
 import android.util.Log
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import dev.lucasnlm.antimine.proprietary.BuildConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -137,10 +138,10 @@ class FeatureFlagManagerImpl : FeatureFlagManager() {
         val remoteConfig = getRemoteConfig()
         if (!BuildConfig.DEBUG && remoteConfig != null) {
             withContext(Dispatchers.IO) {
-                try {
+                runCatching {
                     remoteConfig.fetchAndActivate().await()
-                } catch (e: Exception) {
-                    Log.e(TAG, "Fail to fetch flags", e)
+                }.onFailure {
+                    Log.e(TAG, "Fail to fetch flags", it)
                 }
             }
         }

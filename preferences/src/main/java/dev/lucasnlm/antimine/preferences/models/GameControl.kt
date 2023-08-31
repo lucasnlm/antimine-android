@@ -41,7 +41,7 @@ sealed class GameControl(
     val onCovered: Actions,
     val onUncovered: Actions,
 ) {
-    object Standard : GameControl(
+    data object Standard : GameControl(
         id = ControlStyle.Standard,
         onCovered = Actions(
             singleClick = Action.OpenTile,
@@ -55,7 +55,7 @@ sealed class GameControl(
         ),
     )
 
-    object FastFlag : GameControl(
+    data object FastFlag : GameControl(
         id = ControlStyle.FastFlag,
         onCovered = Actions(
             singleClick = Action.SwitchMark,
@@ -69,7 +69,7 @@ sealed class GameControl(
         ),
     )
 
-    object DoubleClick : GameControl(
+    data object DoubleClick : GameControl(
         id = ControlStyle.DoubleClick,
         onCovered = Actions(
             singleClick = Action.SwitchMark,
@@ -83,7 +83,7 @@ sealed class GameControl(
         ),
     )
 
-    object DoubleClickInverted : GameControl(
+    data object DoubleClickInverted : GameControl(
         id = ControlStyle.DoubleClickInverted,
         onCovered = Actions(
             singleClick = Action.OpenTile,
@@ -97,7 +97,7 @@ sealed class GameControl(
         ),
     )
 
-    object SwitchMarkOpen : GameControl(
+    data object SwitchMarkOpen : GameControl(
         id = ControlStyle.SwitchMarkOpen,
         onCovered = Actions(
             singleClick = Action.OpenOrMark,

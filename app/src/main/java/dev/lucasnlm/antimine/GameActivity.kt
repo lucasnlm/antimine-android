@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine
 
 import android.animation.Animator
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Build
@@ -36,6 +37,7 @@ import dev.lucasnlm.antimine.core.serializableNonSafe
 import dev.lucasnlm.antimine.databinding.ActivityGameBinding
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
+import dev.lucasnlm.antimine.gameover.model.CommonDialogState
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gdx.GameContext
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
@@ -50,13 +52,19 @@ import dev.lucasnlm.external.FeatureFlagManager
 import dev.lucasnlm.external.InstantAppManager
 import dev.lucasnlm.external.PlayGamesManager
 import dev.lucasnlm.external.ReviewWrapperImpl
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import nl.dionsegijn.konfetti.core.Party
 import nl.dionsegijn.konfetti.core.Position
 import nl.dionsegijn.konfetti.core.emitter.Emitter
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
+import dev.lucasnlm.antimine.i18n.R as i18n
+import dev.lucasnlm.antimine.ui.R as ui
 
 class GameActivity :
     ThemedActivity(),
@@ -74,12 +82,16 @@ class GameActivity :
     private val reviewWrapper: ReviewWrapperImpl by inject()
     private val featureFlagManager: FeatureFlagManager by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
+
     private var warning: Snackbar? = null
     private var revealBombFeedback: ValueAnimator? = null
 
     private val hasFloatingButton = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
-    private lateinit var binding: ActivityGameBinding
+    private val binding: ActivityGameBinding by lazy {
+        ActivityGameBinding.inflate(layoutInflater)
+    }
 
+    @SuppressLint("MissingSuperCall")
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         intent?.run(::handleIntent)
@@ -99,7 +111,6 @@ class GameActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         if (!preferencesRepository.isPremiumEnabled()) {
@@ -156,7 +167,7 @@ class GameActivity :
     private fun playGamesStartUp() {
         if (playGamesManager.hasGooglePlayGames() && playGamesManager.shouldRequestLogin()) {
             playGamesManager.keepRequestingLogin(false)
-            lifecycleScope.launchWhenCreated {
+            lifecycleScope.launch {
                 try {
                     withContext(Dispatchers.IO) {
                         val logged = playGamesManager.silentLogin()
@@ -174,7 +185,7 @@ class GameActivity :
 
     private fun startCountAnimation(from: Int, to: Int, updateMineCount: (Int) -> Unit) {
         ValueAnimator.ofInt(from, to).apply {
-            duration = 250
+            duration = MINE_COUNTER_ANIM_COUNTER_MS
             addUpdateListener { animation ->
                 updateMineCount(animation.animatedValue as Int)
             }
@@ -182,9 +193,9 @@ class GameActivity :
     }
 
     private fun bindViewModel() = gameViewModel.apply {
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch {
             observeState().collect {
-                if (it.turn == 0 && (it.saveId == 0L || it.isLoadingMap || it.isCreatingGame)) {
+                if (it.isNewGame) {
                     warning?.dismiss()
                     warning = null
 
@@ -198,13 +209,13 @@ class GameActivity :
                     binding.tapToBegin.apply {
                         text = when {
                             it.isCreatingGame -> {
-                                getString(R.string.creating_valid_game)
+                                getString(i18n.string.creating_valid_game)
                             }
                             it.isLoadingMap -> {
-                                getString(R.string.loading)
+                                getString(i18n.string.loading)
                             }
                             else -> {
-                                getString(R.string.tap_to_begin)
+                                getString(i18n.string.tap_to_begin)
                             }
                         }
                         isVisible = true
@@ -214,14 +225,14 @@ class GameActivity :
                     binding.tapToBegin.isVisible = false
                 }
 
-                if ((it.turn > 0 || it.saveId != 0L) && it.isActive) {
+                if (it.isGameStarted && it.isActive) {
                     gameAudioManager.playMusic()
                 }
 
                 if (it.isCreatingGame) {
                     launch {
                         // Show loading indicator only when it takes more than:
-                        delay(500)
+                        delay(LOADING_INDICATOR_MS)
                         if (singleState().isCreatingGame) {
                             binding.loadingGame.show()
                         }
@@ -230,12 +241,12 @@ class GameActivity :
                     binding.loadingGame.hide()
                 }
 
-                if (it.turn < 1 && it.saveId == 0L && !it.isLoadingMap && it.showTutorial) {
+                if (it.shouldShowControls) {
                     val color = usingTheme.palette.covered.toAndroidColor(168)
                     val tint = ColorStateList.valueOf(color)
                     val controlText = gameViewModel.getControlDescription(applicationContext)
 
-                    if (controlText != null && controlText.isNotBlank()) {
+                    if (!controlText.isNullOrBlank()) {
                         binding.controlsToast.apply {
                             isVisible = true
                             backgroundTintList = tint
@@ -295,12 +306,12 @@ class GameActivity :
             }
         }
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch {
             gameViewModel.observeSideEffects().collect {
                 when (it) {
                     is GameEvent.ShowNoGuessFailWarning -> {
-                        warning = showWarning(R.string.no_guess_fail_warning).apply {
-                            setAction(R.string.ok) {
+                        warning = showWarning(i18n.string.no_guess_fail_warning).apply {
+                            setAction(i18n.string.ok) {
                                 warning?.dismiss()
                             }
                             show()
@@ -309,13 +320,15 @@ class GameActivity :
                     is GameEvent.ShowNewGameDialog -> {
                         lifecycleScope.launch {
                             GameOverDialogFragment.newInstance(
-                                gameResult = GameResult.Completed,
-                                showContinueButton = gameViewModel.hasUnknownMines(),
-                                rightMines = 0,
-                                totalMines = 0,
-                                time = singleState().duration,
-                                received = 0,
-                                turn = -1,
+                                CommonDialogState(
+                                    gameResult = GameResult.Completed,
+                                    showContinueButton = gameViewModel.hasUnknownMines(),
+                                    rightMines = 0,
+                                    totalMines = 0,
+                                    time = singleState().duration,
+                                    received = 0,
+                                    turn = -1,
+                                ),
                             ).run {
                                 showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
                             }
@@ -333,12 +346,15 @@ class GameActivity :
                                 gameAudioManager.pauseMusic()
 
                                 WinGameDialogFragment.newInstance(
-                                    gameResult = GameResult.Victory,
-                                    showContinueButton = false,
-                                    rightMines = it.rightMines,
-                                    totalMines = it.totalMines,
-                                    time = it.timestamp,
-                                    received = it.receivedTips,
+                                    CommonDialogState(
+                                        gameResult = GameResult.Victory,
+                                        showContinueButton = false,
+                                        rightMines = it.rightMines,
+                                        totalMines = it.totalMines,
+                                        time = it.timestamp,
+                                        received = it.receivedTips,
+                                        turn = -1,
+                                    ),
                                 ).run {
                                     showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
 
@@ -362,13 +378,15 @@ class GameActivity :
                             lifecycleScope.launch {
                                 delay(it.delayToShow)
                                 GameOverDialogFragment.newInstance(
-                                    gameResult = GameResult.GameOver,
-                                    showContinueButton = gameViewModel.hasUnknownMines(),
-                                    rightMines = it.rightMines,
-                                    totalMines = it.totalMines,
-                                    time = it.timestamp,
-                                    received = it.receivedTips,
-                                    turn = it.turn,
+                                    CommonDialogState(
+                                        gameResult = GameResult.GameOver,
+                                        showContinueButton = gameViewModel.hasUnknownMines(),
+                                        rightMines = it.rightMines,
+                                        totalMines = it.totalMines,
+                                        time = it.timestamp,
+                                        received = it.receivedTips,
+                                        turn = it.turn,
+                                    ),
                                 ).run {
                                     showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
                                 }
@@ -382,13 +400,15 @@ class GameActivity :
                             lifecycleScope.launch {
                                 delay(it.delayToShow)
                                 GameOverDialogFragment.newInstance(
-                                    gameResult = GameResult.Completed,
-                                    showContinueButton = false,
-                                    rightMines = it.rightMines,
-                                    totalMines = it.totalMines,
-                                    time = it.timestamp,
-                                    received = it.receivedTips,
-                                    turn = it.turn,
+                                    CommonDialogState(
+                                        gameResult = GameResult.Completed,
+                                        showContinueButton = false,
+                                        rightMines = it.rightMines,
+                                        totalMines = it.totalMines,
+                                        time = it.timestamp,
+                                        received = it.receivedTips,
+                                        turn = it.turn,
+                                    ),
                                 ).run {
                                     showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
 
@@ -454,28 +474,27 @@ class GameActivity :
 
     override fun onDestroy() {
         super.onDestroy()
-
         gameAudioManager.stopMusic()
     }
 
     private fun bindTapToBegin() {
         binding.tapToBegin.apply {
-            setTextColor(usingTheme.palette.background.toAndroidColor(255))
+            setTextColor(usingTheme.palette.background.toAndroidColor())
         }
 
         if (preferencesRepository.showTutorialButton()) {
             binding.controlsToast.apply {
-                setTextColor(usingTheme.palette.background.toAndroidColor(255))
+                setTextColor(usingTheme.palette.background.toAndroidColor())
             }
         }
     }
 
     private fun bindToolbar() {
         binding.back.apply {
-            TooltipCompat.setTooltipText(this, getString(R.string.back))
+            TooltipCompat.setTooltipText(this, getString(i18n.string.back))
             setColorFilter(binding.minesCount.currentTextColor)
             setOnClickListener {
-                finish()
+                onBackPressed()
             }
         }
 
@@ -485,7 +504,7 @@ class GameActivity :
 
         if (applicationContext.isPortrait()) {
             binding.minesCount.setCompoundDrawablesWithIntrinsicBounds(
-                ContextCompat.getDrawable(this, R.drawable.mine),
+                ContextCompat.getDrawable(this, ui.drawable.mine),
                 null,
                 null,
                 null,
@@ -493,7 +512,7 @@ class GameActivity :
         } else {
             binding.minesCount.setCompoundDrawablesWithIntrinsicBounds(
                 null,
-                ContextCompat.getDrawable(this, R.drawable.mine),
+                ContextCompat.getDrawable(this, ui.drawable.mine),
                 null,
                 null,
             )
@@ -502,7 +521,7 @@ class GameActivity :
 
     private fun refreshTipShortcutIcon() {
         val dt = System.currentTimeMillis() - preferencesRepository.lastHelpUsed()
-        val canUseHelpNow = dt > 5 * 1000L
+        val canUseHelpNow = dt > TIP_COOLDOWN_MS
         val canRequestHelpWithAds = gameViewModel.getTips() == 0 && adsManager.isAvailable()
 
         binding.hintCounter.apply {
@@ -515,7 +534,7 @@ class GameActivity :
         }
 
         binding.shortcutIcon.apply {
-            TooltipCompat.setTooltipText(this, getString(R.string.help))
+            TooltipCompat.setTooltipText(this, getString(i18n.string.help))
             setImageResource(R.drawable.hint)
             setColorFilter(binding.minesCount.currentTextColor)
 
@@ -552,7 +571,7 @@ class GameActivity :
                                     if (wasPlaying) {
                                         gameAudioManager.resumeMusic()
                                     }
-                                    showGameWarning(R.string.fail_to_load_ad)
+                                    showGameWarning(i18n.string.fail_to_load_ad)
                                 },
                             )
                         }
@@ -568,11 +587,11 @@ class GameActivity :
                 binding.hintCooldown.apply {
                     animate().alpha(1.0f).start()
                     if (progress == 0) {
-                        ValueAnimator.ofFloat(0.0f, 5.0f).apply {
-                            duration = 5000
+                        ValueAnimator.ofInt(0, TIP_COOLDOWN_MS.toInt()).apply {
+                            duration = TIP_COOLDOWN_MS
                             repeatCount = 0
                             addUpdateListener {
-                                progress = ((it.animatedValue as Float) * 1000f).toInt()
+                                progress = it.animatedValue as Int
                             }
                             revealBombFeedback = this
 
@@ -601,7 +620,7 @@ class GameActivity :
                         }
                     }
                     isVisible = true
-                    max = 5000
+                    max = TIP_COOLDOWN_MS.toInt()
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         setProgress(dt.toInt(), true)
                     } else {
@@ -612,7 +631,7 @@ class GameActivity :
                 animate().alpha(0.0f).start()
 
                 setOnClickListener {
-                    showGameWarning(R.string.cant_do_it_now)
+                    showGameWarning(i18n.string.cant_do_it_now)
                 }
             }
         }
@@ -625,12 +644,12 @@ class GameActivity :
         if (hintAmount > 0) {
             val revealedId = gameViewModel.revealRandomMine()
             if (revealedId == null) {
-                showGameWarning(R.string.cant_do_it_now)
+                showGameWarning(i18n.string.cant_do_it_now)
             } else {
-                showGameWarning(R.string.mine_revealed)
+                showGameWarning(i18n.string.mine_revealed)
             }
         } else {
-            showGameWarning(R.string.help_win_a_game)
+            showGameWarning(i18n.string.help_win_a_game)
         }
     }
 
@@ -670,7 +689,7 @@ class GameActivity :
 
     private fun refreshRetryShortcut(enabled: Boolean) {
         binding.shortcutIcon.apply {
-            TooltipCompat.setTooltipText(this, getString(R.string.new_game))
+            TooltipCompat.setTooltipText(this, getString(i18n.string.new_game))
             setImageResource(R.drawable.retry)
             setColorFilter(binding.minesCount.currentTextColor)
             setOnClickListener {
@@ -691,14 +710,16 @@ class GameActivity :
         }
 
         binding.hintCounter.isVisible = false
+
         binding.shortcutIcon.apply {
-            if (enabled) {
-                isClickable = true
-                animate().alpha(1.0f).start()
-            } else {
-                isClickable = false
-                animate().alpha(0.3f).start()
-            }
+            isClickable = enabled
+            val alphaValue =
+                if (enabled) {
+                    ENABLED_SHORTCUT_ALPHA
+                } else {
+                    DISABLED_SHORTCUT_ALPHA
+                }
+            animate().alpha(alphaValue).start()
         }
     }
 
@@ -714,25 +735,25 @@ class GameActivity :
             }
         }
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch {
             if (preferencesRepository.showTutorialDialog()) {
                 val firstLocale = ConfigurationCompat.getLocales(resources.configuration).get(0)
                 val lang = firstLocale?.language
 
-                val message = getString(R.string.do_you_know_how_to_play)
+                val message = getString(i18n.string.do_you_know_how_to_play)
                 val baseText = "Do you know how to play minesweeper?"
 
                 if (lang != null && (lang == "en" || message != baseText)) {
                     MaterialAlertDialogBuilder(this@GameActivity).run {
-                        setTitle(R.string.tutorial)
-                        setMessage(R.string.do_you_know_how_to_play)
-                        setPositiveButton(R.string.open_tutorial) { _, _ ->
+                        setTitle(i18n.string.tutorial)
+                        setMessage(i18n.string.do_you_know_how_to_play)
+                        setPositiveButton(i18n.string.open_tutorial) { _, _ ->
                             analyticsManager.sentEvent(Analytics.KnowHowToPlay(false))
                             preferencesRepository.setTutorialDialog(false)
                             val intent = Intent(this@GameActivity, TutorialActivity::class.java)
                             startActivity(intent)
                         }
-                        setNegativeButton(R.string.close) { _, _ ->
+                        setNegativeButton(i18n.string.close) { _, _ ->
                             analyticsManager.sentEvent(Analytics.KnowHowToPlay(true))
                             preferencesRepository.setTutorialDialog(false)
                         }
@@ -745,7 +766,7 @@ class GameActivity :
 
     private fun loadGameOrTutorial() {
         if (!isFinishing) {
-            lifecycleScope.launchWhenCreated {
+            lifecycleScope.launch {
                 loadGameFragment()
             }
         }
@@ -774,10 +795,10 @@ class GameActivity :
 
     private fun newGameConfirmation(action: () -> Unit) {
         MaterialAlertDialogBuilder(this).apply {
-            setTitle(R.string.new_game)
-            setMessage(R.string.retry_sure)
-            setPositiveButton(R.string.resume) { _, _ -> action() }
-            setNegativeButton(R.string.cancel, null)
+            setTitle(i18n.string.new_game)
+            setMessage(i18n.string.retry_sure)
+            setPositiveButton(i18n.string.resume) { _, _ -> action() }
+            setNegativeButton(i18n.string.cancel, null)
             show()
         }
     }
@@ -786,9 +807,9 @@ class GameActivity :
         warning?.dismiss()
 
         val message = when (gameResult) {
-            GameResult.GameOver -> R.string.you_lost
-            GameResult.Victory -> R.string.you_won
-            GameResult.Completed -> R.string.you_finished
+            GameResult.GameOver -> i18n.string.you_lost
+            GameResult.Victory -> i18n.string.you_won
+            GameResult.Completed -> i18n.string.you_finished
         }
 
         warning = Snackbar.make(
@@ -797,18 +818,19 @@ class GameActivity :
             Snackbar.LENGTH_LONG,
         ).apply {
             if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
-                view.translationY = -dpToPx(128).toFloat()
+                view.translationY = -dpToPx(TOAST_OFFSET_Y_DP).toFloat()
             }
-
             show()
         }
     }
 
     private fun keepScreenOn(enabled: Boolean) {
-        if (enabled) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        } else {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        window.run {
+            if (enabled) {
+                addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            } else {
+                clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            }
         }
     }
 
@@ -824,9 +846,9 @@ class GameActivity :
                     maxSpeed = 30f,
                     damping = 0.9f,
                     spread = 360,
-                    colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
-                    emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(100),
-                    position = Position.Relative(0.5, 0.2),
+                    colors = CONFETTI_COLORS,
+                    emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(MAX_CONFETTI_COUNT),
+                    position = CONFETTI_POSITION,
                 ),
             )
         }
@@ -842,5 +864,18 @@ class GameActivity :
         const val DIFFICULTY = "difficulty"
         const val START_GAME = "start_game"
         const val RETRY_GAME = "retry_game"
+
+        const val TIP_COOLDOWN_MS = 5 * 1000L
+        const val MINE_COUNTER_ANIM_COUNTER_MS = 250L
+        const val LOADING_INDICATOR_MS = 500L
+
+        const val MAX_CONFETTI_COUNT = 100
+        val CONFETTI_COLORS = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def)
+        val CONFETTI_POSITION = Position.Relative(0.5, 0.2)
+
+        const val TOAST_OFFSET_Y_DP = 128
+
+        const val ENABLED_SHORTCUT_ALPHA = 1.0f
+        const val DISABLED_SHORTCUT_ALPHA = 0.3f
     }
 }

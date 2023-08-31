@@ -7,7 +7,9 @@ import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.external.CloudStorageManager
 import dev.lucasnlm.external.PlayGamesManager
 import dev.lucasnlm.external.model.CloudSave
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CloudSaveManagerImpl(
     private val scope: CoroutineScope,
@@ -25,37 +27,36 @@ class CloudSaveManagerImpl(
     }
 
     private suspend fun getCloudSave(): CloudSave? {
-        try {
-            val minId = preferencesRepository.getStatsBase()
-            return playGamesManager.playerId()?.let { playerId ->
+        return runCatching {
+            val prefs = preferencesRepository
+            val minId = prefs.getStatsBase()
+            playGamesManager.playerId()?.let { playerId ->
                 CloudSave(
                     playId = playerId,
-                    completeTutorial = if (preferencesRepository.isTutorialCompleted()) 1 else 0,
-                    selectedTheme = preferencesRepository.themeId()?.toInt() ?: -1,
-                    selectedSkin = preferencesRepository.skinId().toInt(),
-                    touchTiming = preferencesRepository.customLongPressTimeout().toInt(),
-                    questionMark = preferencesRepository.useQuestionMark().toInt(),
-                    gameAssistance = preferencesRepository.useFlagAssistant().toInt(),
-                    help = preferencesRepository.useHelp().toInt(),
-                    hapticFeedback = preferencesRepository.useHapticFeedback().toInt(),
-                    hapticFeedbackLevel = preferencesRepository.getHapticFeedbackLevel(),
-                    soundEffects = preferencesRepository.isSoundEffectsEnabled().toInt(),
-                    music = preferencesRepository.isMusicEnabled().toInt(),
+                    completeTutorial = if (prefs.isTutorialCompleted()) 1 else 0,
+                    selectedTheme = prefs.themeId()?.toInt() ?: -1,
+                    selectedSkin = prefs.skinId().toInt(),
+                    touchTiming = prefs.customLongPressTimeout().toInt(),
+                    questionMark = prefs.useQuestionMark().toInt(),
+                    gameAssistance = prefs.useFlagAssistant().toInt(),
+                    help = prefs.useHelp().toInt(),
+                    hapticFeedback = prefs.useHapticFeedback().toInt(),
+                    hapticFeedbackLevel = prefs.getHapticFeedbackLevel(),
+                    soundEffects = prefs.isSoundEffectsEnabled().toInt(),
+                    music = prefs.isMusicEnabled().toInt(),
                     stats = statsRepository.getAllStats(minId).map { it.toHashMap() },
-                    premiumFeatures = preferencesRepository.isPremiumEnabled().toInt(),
-                    controlStyle = preferencesRepository.controlStyle().ordinal,
-                    openDirectly = preferencesRepository.openGameDirectly().toInt(),
-                    doubleClickTimeout = preferencesRepository.getDoubleClickTimeout().toInt(),
-                    allowTapNumbers = preferencesRepository.allowTapOnNumbers().toInt(),
-                    highlightNumbers = preferencesRepository.dimNumbers().toInt(),
+                    premiumFeatures = prefs.isPremiumEnabled().toInt(),
+                    controlStyle = prefs.controlStyle().ordinal,
+                    openDirectly = prefs.openGameDirectly().toInt(),
+                    doubleClickTimeout = prefs.getDoubleClickTimeout().toInt(),
+                    allowTapNumbers = prefs.allowTapOnNumbers().toInt(),
+                    highlightNumbers = prefs.dimNumbers().toInt(),
                     leftHanded = 0,
-                    dimNumbers = preferencesRepository.dimNumbers().toInt(),
-                    timerVisible = preferencesRepository.showTimer().toInt(),
+                    dimNumbers = prefs.dimNumbers().toInt(),
+                    timerVisible = prefs.showTimer().toInt(),
                 )
             }
-        } catch (e: Exception) {
-            return null
-        }
+        }.getOrNull()
     }
 
     private fun Boolean.toInt() = if (this) 1 else 0

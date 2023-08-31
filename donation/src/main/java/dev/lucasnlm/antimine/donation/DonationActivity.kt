@@ -13,14 +13,16 @@ import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.donation.databinding.ActivityDonationBinding
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import org.koin.android.ext.android.inject
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class DonationActivity : ThemedActivity() {
     private val audioManager: GameAudioManager by inject()
-    private lateinit var binding: ActivityDonationBinding
+    private val binding: ActivityDonationBinding by lazy {
+        ActivityDonationBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDonationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         bindToolbar(binding.toolbar)
@@ -46,13 +48,17 @@ class DonationActivity : ThemedActivity() {
 
     private fun openLink(link: String) {
         val context = application.applicationContext
-        try {
+        runCatching {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link)).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
             }
             context.startActivity(intent)
-        } catch (e: Exception) {
-            Toast.makeText(context.applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+        }.onFailure {
+            Toast.makeText(
+                context.applicationContext,
+                i18n.string.unknown_error,
+                Toast.LENGTH_SHORT,
+            ).show()
         }
     }
 
@@ -78,6 +84,9 @@ class DonationActivity : ThemedActivity() {
                     if (it.country == "BR") {
                         result = true
                     }
+                }
+                if (result) {
+                    break
                 }
             }
             result

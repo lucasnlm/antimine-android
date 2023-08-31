@@ -16,7 +16,8 @@ class HapticFeedbackManagerImpl(
 
     private val vibrator by lazy {
         val context = application.applicationContext
-        if (Build.VERSION.SDK_INT >= 31) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val vibratorManager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
             vibratorManager.defaultVibrator
         } else {
@@ -41,11 +42,11 @@ class HapticFeedbackManagerImpl(
     }
 
     private fun vibrateTo(time: Long, amplitude: Int) {
-        try {
+        runCatching {
             val feedbackLevel = preferencesRepository.getHapticFeedbackLevel().toDouble() / 100.0
             val realAmplitude = (feedbackLevel * amplitude).toInt()
 
-            if (Build.VERSION.SDK_INT >= 26) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 vibrator.vibrate(
                     VibrationEffect.createOneShot(time, realAmplitude),
                 )
@@ -53,9 +54,6 @@ class HapticFeedbackManagerImpl(
                 @Suppress("DEPRECATION")
                 vibrator.vibrate(time)
             }
-        } catch (e: Exception) {
-            // Probably an internal error. Example: crash in miui.util.QuietUtils implementation.
-            // Just ignore.
         }
     }
 }

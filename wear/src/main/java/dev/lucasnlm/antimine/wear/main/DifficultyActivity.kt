@@ -10,6 +10,7 @@ import dev.lucasnlm.antimine.wear.databinding.ActivityDifficultyBinding
 import dev.lucasnlm.antimine.wear.game.WearGameActivity
 import dev.lucasnlm.antimine.wear.main.models.MenuItem
 import dev.lucasnlm.antimine.wear.main.view.MainMenuAdapter
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class DifficultyActivity : ThemedActivity() {
     private lateinit var binding: ActivityDifficultyBinding
@@ -21,10 +22,10 @@ class DifficultyActivity : ThemedActivity() {
         setContentView(binding.root)
 
         val difficultyList = mapOf(
-            Difficulty.Beginner to R.string.beginner,
-            Difficulty.Intermediate to R.string.intermediate,
-            Difficulty.Expert to R.string.expert,
-            Difficulty.Master to R.string.master,
+            Difficulty.Beginner to i18n.string.beginner,
+            Difficulty.Intermediate to i18n.string.intermediate,
+            Difficulty.Expert to i18n.string.expert,
+            Difficulty.Master to i18n.string.master,
         ).entries.mapIndexed { index, entry ->
             MenuItem(
                 id = index.toLong(),

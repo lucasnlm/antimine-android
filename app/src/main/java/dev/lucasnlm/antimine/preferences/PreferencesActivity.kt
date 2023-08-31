@@ -22,6 +22,7 @@ import dev.lucasnlm.antimine.ui.ext.showWarning
 import dev.lucasnlm.antimine.ui.model.TopBarAction
 import dev.lucasnlm.external.PlayGamesManager
 import org.koin.android.ext.android.inject
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class PreferencesActivity :
     ThemedActivity(),
@@ -73,9 +74,9 @@ class PreferencesActivity :
                 }
 
                 if (result) {
-                    showWarning(R.string.exported_success)
+                    showWarning(i18n.string.exported_success)
                 } else {
-                    showWarning(R.string.error)
+                    showWarning(i18n.string.error)
                 }
             }
         }
@@ -86,17 +87,17 @@ class PreferencesActivity :
                 val target = it.data?.data
                 if (target != null) {
                     val data = settingsBackupManager.importSettings(target)
-                    if (data != null && data.isNotEmpty()) {
+                    if (!data.isNullOrEmpty()) {
                         preferenceRepository.importData(data)
                         result = true
                     }
                 }
 
                 if (result) {
-                    showWarning(R.string.imported_success)
+                    showWarning(i18n.string.imported_success)
                     bindItems()
                 } else {
-                    showWarning(R.string.error)
+                    showWarning(i18n.string.error)
                 }
             }
         }
@@ -244,7 +245,7 @@ class PreferencesActivity :
         if (hasCustomizations) {
             setTopBarAction(
                 TopBarAction(
-                    name = R.string.delete_all,
+                    name = i18n.string.delete_all,
                     icon = R.drawable.delete,
                     action = {
                         preferenceRepository.reset()

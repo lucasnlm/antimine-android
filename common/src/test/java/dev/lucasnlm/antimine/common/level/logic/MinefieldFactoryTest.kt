@@ -4,8 +4,8 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepositoryImpl
 import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.core.models.MinefieldSize
 import dev.lucasnlm.antimine.core.repository.DimensionRepository
-import dev.lucasnlm.antimine.core.repository.Size
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import org.junit.Assert.assertEquals
@@ -80,7 +80,7 @@ class MinefieldFactoryTest {
         val dimensionRepository: DimensionRepository = mock {
             on { areaSize() } doReturn 10.0f
             on { actionBarSizeWithStatus() } doReturn 10
-            on { displaySize() } doReturn Size(500, 1000)
+            on { displaySize() } doReturn MinefieldSize(500, 1000)
         }
 
         MinefieldRepositoryImpl().fromDifficulty(

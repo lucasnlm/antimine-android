@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.themes.viewmodel
 
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.viewmodel.IntentViewModel
-import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.ThemeRepository
@@ -11,7 +10,6 @@ import kotlinx.coroutines.flow.flow
 
 class ThemeViewModel(
     private val themeRepository: ThemeRepository,
-    private val preferencesRepository: PreferencesRepository,
     private val analyticsManager: AnalyticsManager,
 ) : IntentViewModel<ThemeEvent, ThemeState>() {
     private fun setTheme(theme: AppTheme) {

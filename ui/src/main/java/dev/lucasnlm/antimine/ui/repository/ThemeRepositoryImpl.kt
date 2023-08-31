@@ -10,17 +10,7 @@ import dev.lucasnlm.antimine.ui.R
 import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette
-
-interface ThemeRepository {
-    fun getCustomTheme(): AppTheme?
-    fun getSkin(): AppSkin
-    fun getTheme(): AppTheme
-    fun getAllThemes(): List<AppTheme>
-    fun getAllSkins(): List<AppSkin>
-    fun setTheme(themeId: Long)
-    fun setSkin(skinId: Long)
-    fun reset(): AppTheme
-}
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class ThemeRepositoryImpl(
     private val context: Context,
@@ -80,9 +70,9 @@ class ThemeRepositoryImpl(
             } else {
                 fromDefaultPalette(context)
             },
-            isPaid = true,
+            isPremium = true,
             isDarkTheme = isDarkTheme(),
-            name = R.string.system,
+            name = i18n.string.system,
         )
     }
 

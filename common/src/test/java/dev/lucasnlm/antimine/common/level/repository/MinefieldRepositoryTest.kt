@@ -1,8 +1,8 @@
 package dev.lucasnlm.antimine.common.level.repository
 
 import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.core.models.MinefieldSize
 import dev.lucasnlm.antimine.core.repository.DimensionRepository
-import dev.lucasnlm.antimine.core.repository.Size
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import io.mockk.every
@@ -27,7 +27,7 @@ class MinefieldRepositoryTest {
         val dimensionRepository = mockk<DimensionRepository>(relaxed = true) {
             every { areaSize() } returns 10.0f
             every { verticalNavigationBarHeight() } returns 0
-            every { displaySize() } returns Size(1000, 1000)
+            every { displaySize() } returns MinefieldSize(1000, 1000)
         }
 
         val minefield = minefieldRepository.fromDifficulty(
@@ -48,7 +48,7 @@ class MinefieldRepositoryTest {
         val dimensionRepository = mockk<DimensionRepository>(relaxed = true) {
             every { areaSize() } returns 10.0f
             every { verticalNavigationBarHeight() } returns 100
-            every { displaySize() } returns Size(1000, 1000)
+            every { displaySize() } returns MinefieldSize(1000, 1000)
         }
 
         val minefield = minefieldRepository.fromDifficulty(
@@ -69,7 +69,7 @@ class MinefieldRepositoryTest {
         val dimensionRepository = mockk<DimensionRepository>(relaxed = true) {
             every { areaSize() } returns 10.0f
             every { verticalNavigationBarHeight() } returns 100
-            every { displaySize() } returns Size(1000, 1000)
+            every { displaySize() } returns MinefieldSize(1000, 1000)
         }
 
         val minefield = minefieldRepository.fromDifficulty(
@@ -90,7 +90,7 @@ class MinefieldRepositoryTest {
         val dimensionRepository = mockk<DimensionRepository>(relaxed = true) {
             every { areaSize() } returns 10.0f
             every { verticalNavigationBarHeight() } returns 100
-            every { displaySize() } returns Size(1000, 1000)
+            every { displaySize() } returns MinefieldSize(1000, 1000)
         }
 
         val minefield = minefieldRepository.fromDifficulty(

@@ -2,6 +2,7 @@ package dev.lucasnlm.external
 
 import android.app.Activity
 import android.content.Context
+import android.text.format.DateUtils
 import com.android.billingclient.api.*
 import dev.lucasnlm.external.model.Price
 import dev.lucasnlm.external.model.PurchaseInfo
@@ -64,7 +65,7 @@ class BillingManagerImpl(
                     if (result) {
                         break
                     } else {
-                        delay(30 * 1000L)
+                        delay(30 * DateUtils.SECOND_IN_MILLIS)
                     }
                 }
             }

@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
-import dev.lucasnlm.antimine.wear.R
 import dev.lucasnlm.antimine.wear.databinding.ViewMenuItemBinding
 import dev.lucasnlm.antimine.wear.main.models.MenuItem
+import com.google.android.material.R as GR
 
 class MainMenuAdapter(
     private val menuItems: List<MenuItem>,
@@ -48,12 +48,12 @@ class MainMenuAdapter(
                 backgroundTintList = if (menuItem.highlight) {
                     MaterialColors.getColorStateListOrNull(
                         context,
-                        R.attr.colorPrimaryDark,
-                    )?.withAlpha(50)
+                        GR.attr.colorPrimaryDark,
+                    )?.withAlpha(HIGHLIGHT_ITEM_ALPHA)
                 } else {
                     MaterialColors.getColorStateListOrNull(
                         context,
-                        R.attr.colorSurface,
+                        GR.attr.colorSurface,
                     )?.withAlpha(0)
                 }
                 setOnClickListener {
@@ -61,5 +61,9 @@ class MainMenuAdapter(
                 }
             }
         }
+    }
+
+    companion object {
+        private const val HIGHLIGHT_ITEM_ALPHA = 50
     }
 }

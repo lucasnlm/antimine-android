@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
-    tools:context="dev.lucasnlm.antimine.about.dev.lucasnlm.antimine.licenses.views.LicensesFragment">
+    tools:context="dev.lucasnlm.antimine.licenses.LicenseActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/licenses"

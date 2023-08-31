@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.databinding.ViewStatsItemBinding
 import dev.lucasnlm.antimine.stats.model.StatsModel
 import java.text.NumberFormat
+import java.util.Locale
 
 class StatsAdapter(
     private val statsList: List<StatsModel>,
@@ -59,7 +60,7 @@ class StatsAdapter(
     override fun getItemCount(): Int = statsList.size
 
     companion object {
-        private fun Int.toL10nString() = String.format("%d", this)
+        private fun Int.toL10nString() = String.format(Locale.getDefault(), "%d", this)
 
         private fun formatPercentage(value: Double) =
             NumberFormat.getPercentInstance().run {

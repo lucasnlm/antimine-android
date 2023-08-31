@@ -8,36 +8,36 @@ object Skins {
         id = 0,
         file = "standard.png",
         canTint = true,
-        isPaid = false,
+        isPremium = false,
         hasPadding = true,
-        imageRes = R.drawable.skin_standard,
+        thumbnailImageRes = R.drawable.skin_standard,
     )
 
     private fun square() = AppSkin(
         id = 1,
         file = "square.png",
         canTint = true,
-        isPaid = true,
+        isPremium = true,
         hasPadding = true,
-        imageRes = R.drawable.skin_square,
+        thumbnailImageRes = R.drawable.skin_square,
     )
 
     private fun square2() = AppSkin(
         id = 2,
         file = "square-2.png",
         canTint = true,
-        isPaid = true,
+        isPremium = true,
         hasPadding = true,
-        imageRes = R.drawable.skin_square_2,
+        thumbnailImageRes = R.drawable.skin_square_2,
     )
 
     private fun square3() = AppSkin(
         id = 3,
         file = "square-3.png",
         canTint = true,
-        isPaid = true,
+        isPremium = true,
         hasPadding = false,
-        imageRes = R.drawable.skin_square_3,
+        thumbnailImageRes = R.drawable.skin_square_3,
         showPadding = false,
     )
 
@@ -45,9 +45,9 @@ object Skins {
         id = 4,
         file = "classic.png",
         canTint = true,
-        isPaid = true,
+        isPremium = true,
         hasPadding = true,
-        imageRes = R.drawable.skin_classic,
+        thumbnailImageRes = R.drawable.skin_classic,
         background = 4,
     )
 
@@ -55,9 +55,9 @@ object Skins {
         id = 5,
         file = "classic.png",
         canTint = false,
-        isPaid = true,
+        isPremium = true,
         hasPadding = true,
-        imageRes = R.drawable.skin_classic,
+        thumbnailImageRes = R.drawable.skin_classic,
         background = 4,
     )
 
@@ -65,18 +65,18 @@ object Skins {
         id = 6,
         file = "glass.png",
         canTint = true,
-        isPaid = true,
+        isPremium = true,
         hasPadding = true,
-        imageRes = R.drawable.skin_glass_2,
+        thumbnailImageRes = R.drawable.skin_glass_2,
     )
 
     private fun stone() = AppSkin(
         id = 7,
         file = "stone.png",
         canTint = false,
-        isPaid = true,
+        isPremium = true,
         hasPadding = true,
-        imageRes = R.drawable.skin_stone,
+        thumbnailImageRes = R.drawable.skin_stone,
         background = 4,
     )
 
@@ -84,9 +84,9 @@ object Skins {
         id = 8,
         file = "stone-2.png",
         canTint = true,
-        isPaid = true,
+        isPremium = true,
         hasPadding = true,
-        imageRes = R.drawable.skin_stone_2,
+        thumbnailImageRes = R.drawable.skin_stone_2,
         background = 4,
     )
 
@@ -94,9 +94,9 @@ object Skins {
         id = 9,
         file = "standard.png",
         canTint = true,
-        isPaid = true,
+        isPremium = true,
         hasPadding = false,
-        imageRes = R.drawable.skin_standard_no_connection,
+        thumbnailImageRes = R.drawable.skin_standard_no_connection,
         showPadding = false,
     )
 

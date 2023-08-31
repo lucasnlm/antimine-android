@@ -10,6 +10,7 @@ import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.preferences.PreferencesRepositoryImpl
 import kotlinx.coroutines.flow.flow
 import java.util.concurrent.TimeUnit
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class EndGameDialogViewModel(
     private val application: Application,
@@ -64,12 +65,12 @@ class EndGameDialogViewModel(
         val context = application.applicationContext
         return if (time != 0L) {
             when (gameResult) {
-                GameResult.Victory -> context.getString(R.string.generic_win, minesCount, time)
-                GameResult.GameOver -> context.getString(R.string.generic_game_over)
-                else -> context.getString(R.string.generic_game_over)
+                GameResult.Victory -> context.getString(i18n.string.generic_win, minesCount, time)
+                GameResult.GameOver -> context.getString(i18n.string.generic_game_over)
+                else -> context.getString(i18n.string.generic_game_over)
             }
         } else {
-            context.getString(R.string.generic_game_over)
+            context.getString(i18n.string.generic_game_over)
         }
     }
 
@@ -84,7 +85,7 @@ class EndGameDialogViewModel(
                 val volumeLevel = getStreamVolume(AudioManager.STREAM_MUSIC)
                 val maxVolumeLevel = getStreamMaxVolume(AudioManager.STREAM_MUSIC)
                 val volumePercent = (volumeLevel.toFloat() / maxVolumeLevel)
-                volumePercent > 0.1f
+                volumePercent > MIN_VOLUME_TO_SUGGEST_MUSIC
             } == true
         } else {
             false
@@ -109,7 +110,7 @@ class EndGameDialogViewModel(
                 GameResult.Victory -> {
                     EndGameDialogState(
                         titleEmoji = randomVictoryEmoji(0),
-                        title = context.getString(R.string.you_won),
+                        title = context.getString(i18n.string.you_won),
                         message = messageTo(event.rightMines, event.time, event.gameResult),
                         gameResult = event.gameResult,
                         showContinueButton = false,
@@ -121,7 +122,7 @@ class EndGameDialogViewModel(
                 GameResult.GameOver -> {
                     EndGameDialogState(
                         titleEmoji = randomGameOverEmoji(0),
-                        title = context.getString(R.string.you_lost),
+                        title = context.getString(i18n.string.you_lost),
                         message = messageTo(event.rightMines, event.time, event.gameResult),
                         gameResult = event.gameResult,
                         showContinueButton = event.showContinueButton,
@@ -133,8 +134,8 @@ class EndGameDialogViewModel(
                 GameResult.Completed -> {
                     EndGameDialogState(
                         titleEmoji = randomNeutralEmoji(0),
-                        title = context.getString(R.string.you_finished),
-                        message = context.getString(R.string.new_game_request),
+                        title = context.getString(i18n.string.you_finished),
+                        message = context.getString(i18n.string.new_game_request),
                         gameResult = event.gameResult,
                         showContinueButton = false,
                         received = event.received,
@@ -158,5 +159,9 @@ class EndGameDialogViewModel(
                 }
             }
         }
+    }
+
+    companion object {
+        const val MIN_VOLUME_TO_SUGGEST_MUSIC = 0.1f
     }
 }

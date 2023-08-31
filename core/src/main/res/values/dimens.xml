@@ -8,6 +8,4 @@
     <dimen name="mark_padding">5dp</dimen>
     <dimen name="mine_padding">2dp</dimen>
     <dimen name="text_size">16sp</dimen>
-
-    <dimen name="theme_divider">5dp</dimen>
 </resources>

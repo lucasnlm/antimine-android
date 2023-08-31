@@ -45,6 +45,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import dev.lucasnlm.antimine.common.R as CR
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class MainActivity : ThemedActivity() {
     private val viewModel: MainViewModel by viewModel()
@@ -62,9 +64,12 @@ class MainActivity : ThemedActivity() {
     private val soundManager: GameAudioManager by inject()
     private val gameLocaleManager: GameLocaleManager by inject()
 
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
     private lateinit var viewPager: ViewPager2
     private lateinit var googlePlayLauncher: ActivityResultLauncher<Intent>
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +77,6 @@ class MainActivity : ThemedActivity() {
         // Must be called after onCreate
         gameLocaleManager.applyPreferredLocaleIfNeeded()
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         googlePlayLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -81,11 +85,38 @@ class MainActivity : ThemedActivity() {
             }
         }
 
+        bindMenuButtons()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && instantAppManager.isEnabled(applicationContext)) {
+            listOf(
+                Difficulty.Beginner,
+                Difficulty.Intermediate,
+                Difficulty.Expert,
+                Difficulty.Master,
+            ).forEach(::pushShortcutOf)
+        }
+
+        lifecycleScope.launch {
+            viewModel
+                .observeSideEffects()
+                .collect(::handleSideEffects)
+        }
+
+        launchGooglePlayGames()
+
+        onBackPressedDispatcher.addCallback {
+            handleBackPressed()
+        }
+
+        redirectToGame()
+    }
+
+    private fun bindMenuButtons() {
         binding.continueGame.apply {
             if (preferencesRepository.showContinueGame()) {
-                setText(R.string.continue_game)
+                setText(i18n.string.continue_game)
             } else {
-                setText(R.string.start)
+                setText(i18n.string.start)
             }
 
             setOnClickListener {
@@ -98,7 +129,7 @@ class MainActivity : ThemedActivity() {
             lifecycleScope.launch {
                 savesRepository.fetchCurrentSave()?.let {
                     preferencesRepository.setContinueGameLabel(true)
-                    binding.continueGame.setText(R.string.continue_game)
+                    binding.continueGame.setText(i18n.string.continue_game)
                 }
             }
         }
@@ -131,15 +162,6 @@ class MainActivity : ThemedActivity() {
             binding.legendSize to Difficulty.Legend,
         ).onEach {
             it.key.text = getDifficultyExtra(it.value)
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && instantAppManager.isEnabled(applicationContext)) {
-            listOf(
-                Difficulty.Beginner,
-                Difficulty.Intermediate,
-                Difficulty.Expert,
-                Difficulty.Master,
-            ).forEach(::pushShortcutOf)
         }
 
         mapOf(
@@ -201,14 +223,14 @@ class MainActivity : ThemedActivity() {
                         billingManager.charge(this@MainActivity)
                     }
                 }
-                text = getString(R.string.donation)
+                text = getString(i18n.string.donation)
                 setIconResource(R.drawable.remove_ads)
             }
         } else {
             if (!preferencesRepository.isPremiumEnabled() && billingManager.isEnabled()) {
                 billingManager.start()
 
-                lifecycleScope.launchWhenResumed {
+                lifecycleScope.launch {
                     bindRemoveAds()
 
                     billingManager.getPriceFlow().collect {
@@ -230,7 +252,7 @@ class MainActivity : ThemedActivity() {
         }
 
         binding.tutorial.apply {
-            setText(R.string.tutorial)
+            setText(i18n.string.tutorial)
             setOnClickListener {
                 soundManager.playClickSound()
                 analyticsManager.sentEvent(Analytics.OpenTutorial)
@@ -240,7 +262,7 @@ class MainActivity : ThemedActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             binding.language.apply {
-                setText(R.string.language)
+                setText(i18n.string.language)
                 setOnClickListener {
                     soundManager.playClickSound()
                     analyticsManager.sentEvent(Analytics.OpenLanguage)
@@ -274,22 +296,12 @@ class MainActivity : ThemedActivity() {
         } else {
             binding.playGames.isVisible = false
         }
-
-        lifecycleScope.launchWhenCreated {
-            viewModel
-                .observeSideEffects()
-                .collect(::handleSideEffects)
-        }
-
-        launchGooglePlayGames()
-
-        onBackPressedDispatcher.addCallback {
-            handleBackPressed()
-        }
-
-        redirectToGame()
     }
 
+    /**
+     * Pushes a shortcut to the Home launcher.
+     * @param difficulty The difficulty to be used as a shortcut.
+     */
     private fun pushShortcutOf(difficulty: Difficulty) {
         if (instantAppManager.isEnabled(applicationContext)) {
             // Ignore. Instant App doesn't support shortcuts.
@@ -300,20 +312,20 @@ class MainActivity : ThemedActivity() {
         val deeplink = Uri.parse("app://antimine/game?difficulty=$idLow")
 
         val name = when (difficulty) {
-            Difficulty.Beginner -> R.string.beginner
-            Difficulty.Intermediate -> R.string.intermediate
-            Difficulty.Expert -> R.string.expert
-            Difficulty.Master -> R.string.master
-            Difficulty.Legend -> R.string.legend
+            Difficulty.Beginner -> i18n.string.beginner
+            Difficulty.Intermediate -> i18n.string.intermediate
+            Difficulty.Expert -> i18n.string.expert
+            Difficulty.Master -> i18n.string.master
+            Difficulty.Legend -> i18n.string.legend
             else -> return
         }
 
         val icon = when (difficulty) {
-            Difficulty.Beginner -> R.mipmap.shortcut_one
-            Difficulty.Intermediate -> R.mipmap.shortcut_two
-            Difficulty.Expert -> R.mipmap.shortcut_three
-            Difficulty.Master -> R.mipmap.shortcut_four
-            Difficulty.Legend -> R.mipmap.shortcut_four
+            Difficulty.Beginner -> CR.mipmap.shortcut_one
+            Difficulty.Intermediate -> CR.mipmap.shortcut_two
+            Difficulty.Expert -> CR.mipmap.shortcut_three
+            Difficulty.Master -> CR.mipmap.shortcut_four
+            Difficulty.Legend -> CR.mipmap.shortcut_four
             else -> return
         }
 
@@ -343,17 +355,20 @@ class MainActivity : ThemedActivity() {
         ).toExtraString()
     }
 
-    private fun redirectToGame() {
+    private fun canOpenGameDirectly(): Boolean {
         val playGames = playGamesManager.hasGooglePlayGames()
-        if ((playGames && preferencesRepository.userId() != null || !playGames) &&
-            preferencesRepository.openGameDirectly()
-        ) {
+        val openDirectly = preferencesRepository.openGameDirectly()
+        return (playGames && preferencesRepository.userId() != null || !playGames) && openDirectly
+    }
+
+    private fun redirectToGame() {
+        if (canOpenGameDirectly()) {
             Intent(this, GameActivity::class.java).run { startActivity(this) }
         }
     }
 
     private fun Minefield.toExtraString(): String {
-        return "${this.width} × ${this.height} - ${this.mines}"
+        return getString(i18n.string.minefield_with_mines_size, width, height, mines)
     }
 
     private fun handleSideEffects(event: MainEvent) {
@@ -423,7 +438,7 @@ class MainActivity : ThemedActivity() {
         ) {
             playGamesManager.keepRequestingLogin(false)
 
-            lifecycleScope.launchWhenCreated {
+            lifecycleScope.launch {
                 var logged: Boolean
 
                 try {
@@ -472,7 +487,7 @@ class MainActivity : ThemedActivity() {
                     billingManager.charge(this@MainActivity)
                 }
             }
-            setText(R.string.remove_ad)
+            setText(i18n.string.remove_ad)
             setIconResource(R.drawable.remove_ads)
 
             price?.let {
@@ -500,7 +515,7 @@ class MainActivity : ThemedActivity() {
     }
 
     private fun migrateDataAndRecreate() {
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch {
             if (!isFinishing) {
                 preferencesRepository.userId()?.let {
                     viewModel.sendEvent(MainEvent.FetchCloudSave(it))

@@ -7,13 +7,9 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.DrawableRes
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.isVisible
-import com.google.android.material.card.MaterialCardView
-import dev.lucasnlm.antimine.ui.R
+import dev.lucasnlm.antimine.ui.databinding.ViewOfferCardButtonBinding
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 
@@ -22,10 +18,13 @@ class OfferCardButtonView : FrameLayout {
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
+    private val binding: ViewOfferCardButtonBinding by lazy {
+        ViewOfferCardButtonBinding.bind(this)
+    }
+
     init {
-        LayoutInflater
-            .from(context)
-            .inflate(R.layout.view_offer_card_button, this, true)
+        val layoutInflater = LayoutInflater.from(context)
+        ViewOfferCardButtonBinding.inflate(layoutInflater, this, true)
     }
 
     fun bind(
@@ -72,7 +71,7 @@ class OfferCardButtonView : FrameLayout {
             theme.palette.background.toAndroidColor()
         }
 
-        val label = findViewById<TextView>(R.id.label).apply {
+        val label = binding.label.apply {
             this.text = text
             if (centralize) {
                 gravity = Gravity.CENTER_HORIZONTAL
@@ -80,7 +79,7 @@ class OfferCardButtonView : FrameLayout {
             setTextColor(color)
         }
 
-        val priceView = findViewById<TextView>(R.id.price).apply {
+        val priceView = binding.price.apply {
             isVisible = price != null
             if (price != null) {
                 this.text = price
@@ -91,14 +90,14 @@ class OfferCardButtonView : FrameLayout {
             }
         }
 
-        val offerView = findViewById<AppCompatImageView>(R.id.priceOff).apply {
+        val offerView = binding.priceOff.apply {
             isVisible = showOffer
             if (invert) {
                 imageTintList = ColorStateList.valueOf(color)
             }
         }
 
-        val iconView = findViewById<ImageView>(R.id.icon).apply {
+        val iconView = binding.icon.apply {
             isVisible = startIcon != null
             if (startIcon != null) {
                 val tintColor = theme.palette.covered.toAndroidColor()
@@ -107,7 +106,7 @@ class OfferCardButtonView : FrameLayout {
             }
         }
 
-        findViewById<MaterialCardView>(R.id.card_view).apply {
+        binding.cardView.apply {
             setOnClickListener(onAction)
             strokeColor = if (!invert) {
                 color

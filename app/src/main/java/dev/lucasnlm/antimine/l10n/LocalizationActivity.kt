@@ -10,6 +10,8 @@ import dev.lucasnlm.antimine.l10n.viewmodel.LocalizationViewModel
 import dev.lucasnlm.antimine.l10n.views.LocalizationItemAdapter
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNot
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,12 +23,14 @@ class LocalizationActivity : ThemedActivity() {
         val binding = ActivityLocalizationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         bindToolbar(binding.toolbar)
+        binding.content.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
         lifecycleScope.launch {
-            localizationViewModel.observeState().collect { state ->
-                if (!state.loading) {
+            localizationViewModel
+                .observeState()
+                .filterNot { it.loading }
+                .collect { state ->
                     binding.content.apply {
-                        layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                         adapter = LocalizationItemAdapter(
                             gameLanguages = state.languages,
                             onSelectLanguage = {
@@ -37,15 +41,13 @@ class LocalizationActivity : ThemedActivity() {
                         )
                     }
                 }
-            }
         }
 
         lifecycleScope.launch {
-            localizationViewModel.observeSideEffects().collect {
-                if (it is LocalizationEvent.FinishActivity) {
-                    finish()
-                }
-            }
+            localizationViewModel
+                .observeSideEffects()
+                .filter { it is LocalizationEvent.FinishActivity }
+                .collect { finish() }
         }
     }
 

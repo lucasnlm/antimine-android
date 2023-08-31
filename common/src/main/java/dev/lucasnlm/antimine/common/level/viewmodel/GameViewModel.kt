@@ -7,7 +7,6 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.layoutDirection
 import androidx.lifecycle.viewModelScope
-import dev.lucasnlm.antimine.common.R
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.logic.GameController
@@ -40,6 +39,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 open class GameViewModel(
     private val savesRepository: SavesRepository,
@@ -641,7 +641,7 @@ open class GameViewModel(
         }
     }
 
-    private fun explosionDelay() = if (preferencesRepository.useAnimations()) 400L else 0L
+    private fun explosionDelay() = if (preferencesRepository.useAnimations()) EXPLOSION_DELAY else 0L
 
     fun hasUnknownMines(): Boolean {
         return !gameController.hasIsolatedAllMines() && gameController.remainingMines() > 1
@@ -723,7 +723,7 @@ open class GameViewModel(
             preferencesRepository.incrementProgressiveValue()
         }
 
-        if (clock.time() < 30L) {
+        if (clock.time() < THIRTY_SECONDS_ACHIEVEMENT) {
             withContext(Dispatchers.Main) {
                 playGamesManager.unlockAchievement(Achievement.ThirtySeconds)
             }
@@ -742,11 +742,11 @@ open class GameViewModel(
     }
 
     private fun calcRewardHints(): Int {
-        return if (clock.time() > 10L && preferencesRepository.isPremiumEnabled()) {
+        return if (clock.time() > MIN_REWARD_GAME_SECONDS && preferencesRepository.isPremiumEnabled()) {
             val rewardedHints = if (isCompletedWithMistakes()) {
-                (state.minefield.mines * 0.025)
+                (state.minefield.mines * REWARD_RATIO_WITH_MISTAKES)
             } else {
-                (state.minefield.mines * 0.05)
+                (state.minefield.mines * REWARD_RATIO_WITHOUT_MISTAKES)
             }
 
             rewardedHints.toInt().coerceAtLeast(1)
@@ -765,7 +765,7 @@ open class GameViewModel(
         }
 
         val time = clock.time()
-        if (time > 1L && gameController.getActionsCount() > 7) {
+        if (time > 1L && gameController.getActionsCount() > MIN_ACTION_TO_REWARD) {
             val board = when (state.difficulty) {
                 Difficulty.Beginner -> {
                     Leaderboard.BeginnerBestTime
@@ -813,7 +813,7 @@ open class GameViewModel(
 
     private fun checkGameOverAchievements() = with(gameController) {
         viewModelScope.launch {
-            if (getActionsCount() < 3) {
+            if (getActionsCount() < MIN_ACTION_TO_NO_LUCK) {
                 withContext(Dispatchers.Main) {
                     playGamesManager.unlockAchievement(Achievement.NoLuck)
                 }
@@ -856,28 +856,28 @@ open class GameViewModel(
 
         when (preferencesRepository.controlStyle()) {
             ControlStyle.Standard -> {
-                openAction = context.getString(R.string.single_click)
-                openReaction = context.getString(R.string.open)
-                flagAction = context.getString(R.string.long_press)
-                flagReaction = context.getString(R.string.flag_tile)
+                openAction = context.getString(i18n.string.single_click)
+                openReaction = context.getString(i18n.string.open)
+                flagAction = context.getString(i18n.string.long_press)
+                flagReaction = context.getString(i18n.string.flag_tile)
             }
             ControlStyle.FastFlag -> {
-                openAction = context.getString(R.string.single_click)
-                openReaction = context.getString(R.string.flag_tile)
-                flagAction = context.getString(R.string.long_press)
-                flagReaction = context.getString(R.string.open)
+                openAction = context.getString(i18n.string.single_click)
+                openReaction = context.getString(i18n.string.flag_tile)
+                flagAction = context.getString(i18n.string.long_press)
+                flagReaction = context.getString(i18n.string.open)
             }
             ControlStyle.DoubleClick -> {
-                openAction = context.getString(R.string.single_click)
-                openReaction = context.getString(R.string.flag_tile)
-                flagAction = context.getString(R.string.double_click)
-                flagReaction = context.getString(R.string.open)
+                openAction = context.getString(i18n.string.single_click)
+                openReaction = context.getString(i18n.string.flag_tile)
+                flagAction = context.getString(i18n.string.double_click)
+                flagReaction = context.getString(i18n.string.open)
             }
             ControlStyle.DoubleClickInverted -> {
-                openAction = context.getString(R.string.single_click)
-                openReaction = context.getString(R.string.open)
-                flagAction = context.getString(R.string.double_click)
-                flagReaction = context.getString(R.string.flag_tile)
+                openAction = context.getString(i18n.string.single_click)
+                openReaction = context.getString(i18n.string.open)
+                flagAction = context.getString(i18n.string.double_click)
+                flagReaction = context.getString(i18n.string.flag_tile)
             }
             else -> {
                 // With switch button, it doesn't require toast
@@ -921,10 +921,10 @@ open class GameViewModel(
 
             result = buildSpannedString {
                 append(first)
-                append("\n")
+                appendLine()
                 append(second)
-                append("\n")
-                append(context.getString(R.string.tap_to_customize))
+                appendLine()
+                append(context.getString(i18n.string.tap_to_customize))
             }
         }
 
@@ -933,5 +933,15 @@ open class GameViewModel(
 
     private fun refreshField() {
         sendEvent(GameEvent.UpdateMinefield(gameController.field()))
+    }
+
+    companion object {
+        const val EXPLOSION_DELAY = 400L
+        const val THIRTY_SECONDS_ACHIEVEMENT = 30L
+        const val MIN_REWARD_GAME_SECONDS = 10L
+        const val REWARD_RATIO_WITH_MISTAKES = 0.025
+        const val REWARD_RATIO_WITHOUT_MISTAKES = 0.05
+        const val MIN_ACTION_TO_REWARD = 7
+        const val MIN_ACTION_TO_NO_LUCK = 3
     }
 }

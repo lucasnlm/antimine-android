@@ -6,22 +6,27 @@ plugins {
 
 android {
     namespace 'dev.lucasnlm.antimine.common'
-    compileSdkVersion 33
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        minSdkVersion 21
-        targetSdkVersion 33
+        minSdk 21
+        targetSdk 34
+        compileSdk 34
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    buildFeatures {
+        buildConfig true
+        viewBinding true
     }
 }
 
@@ -63,10 +68,10 @@ dependencies {
     testImplementation 'io.insert-koin:koin-test:3.1.2'
 
     // Room
-    api 'androidx.room:room-runtime:2.5.1'
-    api 'androidx.room:room-ktx:2.5.1'
-    kapt 'androidx.room:room-compiler:2.5.1'
-    testImplementation 'androidx.room:room-testing:2.5.1'
+    api 'androidx.room:room-runtime:2.5.2'
+    api 'androidx.room:room-ktx:2.5.2'
+    kapt 'androidx.room:room-compiler:2.5.2'
+    testImplementation 'androidx.room:room-testing:2.5.2'
 
     // Moshi - Json
     api 'com.squareup.moshi:moshi:1.11.0'
@@ -79,7 +84,7 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
 
     // Kotlin Lib
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.10'
 
     // Unit Tests
     testImplementation 'junit:junit:4.13.2'
@@ -96,7 +101,7 @@ dependencies {
     androidTestUtil 'androidx.test:orchestrator:1.4.2'
 }
 
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
     testLogging {
         exceptionFormat "full"
     }

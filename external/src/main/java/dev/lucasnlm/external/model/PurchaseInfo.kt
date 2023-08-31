@@ -6,5 +6,5 @@ sealed class PurchaseInfo {
         val unlockStatus: Boolean,
     ) : PurchaseInfo()
 
-    object PurchaseFail : PurchaseInfo()
+    data object PurchaseFail : PurchaseInfo()
 }

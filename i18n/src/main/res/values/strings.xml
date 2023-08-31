@@ -34,6 +34,8 @@
     <string name="retry_sure">If you start a new game, your current progress will be lost.</string>
     <string name="show_licenses">Show Licenses</string>
     <string name="new_game_request">Do you want to start a new game?</string>
+    <string name="minefield_size" translatable="false">%1$d × %2$d</string>
+    <string name="minefield_with_mines_size" translatable="false">%1$d × %2$d - %3$d</string>
     <string name="mines_remaining">%d mines</string>
     <string name="game_time">Game Time</string>
     <string name="settings_general">General</string>

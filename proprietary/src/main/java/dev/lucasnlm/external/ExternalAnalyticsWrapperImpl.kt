@@ -11,23 +11,17 @@ class ExternalAnalyticsWrapperImpl(
     private val context: Context,
 ) : ExternalAnalyticsWrapper {
     private val firebaseAnalytics: FirebaseAnalytics? by lazy {
-        try {
+        runCatching {
             FirebaseAnalytics.getInstance(context)
-        } catch (e: Throwable) {
-            // If fail to initialize Firebase, just ignore it.
-            null
-        }
+        }.getOrNull()
     }
     private val amplitudeClient: AmplitudeClient? by lazy {
-        try {
+        runCatching {
             Amplitude
                 .getInstance()
                 .enableCoppaControl()
                 .initialize(context, "AMPLITUDE_API_KEY")
-        } catch (e: Throwable) {
-            // If fail to initialize Amplitude, just ignore it.
-            null
-        }
+        }.getOrNull()
     }
 
     override fun setup(context: Context, properties: Map<String, String>) {
@@ -42,7 +36,7 @@ class ExternalAnalyticsWrapperImpl(
         val bundle = Bundle().apply {
             putString(FirebaseAnalytics.Param.ITEM_NAME, name)
             content.forEach { (key, value) ->
-                this.putString(key, value)
+                putString(key, value)
             }
         }
 

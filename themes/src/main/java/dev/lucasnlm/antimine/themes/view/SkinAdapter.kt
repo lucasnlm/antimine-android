@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
-import dev.lucasnlm.antimine.themes.R
 import dev.lucasnlm.antimine.themes.databinding.ViewSkinBinding
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.repository.ThemeRepository
+import com.google.android.material.R as GR
 
 class SkinAdapter(
     private val themeRepository: ThemeRepository,
@@ -58,7 +58,7 @@ class SkinAdapter(
 
             val backgroundColor = MaterialColors.getColorStateListOrNull(
                 context,
-                R.attr.backgroundColor,
+                GR.attr.backgroundColor,
             )
 
             val strokeColor = palette.background.toAndroidColor()
@@ -80,7 +80,7 @@ class SkinAdapter(
                 val floatAlpha = 0.45f
                 val paddingValue = context.dpToPx(8)
                 alpha = if (selected) 1.0f else floatAlpha
-                setImageResource(skin.imageRes)
+                setImageResource(skin.thumbnailImageRes)
                 isSoundEffectsEnabled = false
                 if (skin.canTint) {
                     setColorFilter(tintColor, PorterDuff.Mode.MULTIPLY)

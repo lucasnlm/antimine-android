@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import dev.lucasnlm.antimine.about.R
 import dev.lucasnlm.antimine.about.databinding.FragmentAboutInfoBinding
 import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
@@ -22,6 +21,7 @@ import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.external.AnalyticsManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class AboutInfoFragment : Fragment() {
     private lateinit var binding: FragmentAboutInfoBinding
@@ -35,7 +35,6 @@ class AboutInfoFragment : Fragment() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
             } else {
-                @Suppress("DEPRECATION")
                 getPackageInfo(packageName, flags)
             }
         } catch (e: Exception) {
@@ -69,7 +68,7 @@ class AboutInfoFragment : Fragment() {
         val packageManager = context.packageManager
         val packageName = context.packageName
         val versionName = packageManager.getPackageInfoCompat(packageName, 0)?.versionName ?: unknownVersionName
-        binding.version.text = getString(R.string.version_s, versionName)
+        binding.version.text = getString(i18n.string.version_s, versionName)
         binding.instant.isVisible = view.context.run {
             try {
                 val info = packageManager.getApplicationInfoCompat(packageName, PackageManager.GET_META_DATA)
@@ -87,7 +86,7 @@ class AboutInfoFragment : Fragment() {
             if (composer == null) {
                 binding.musicCard.isVisible = false
             } else {
-                text = getString(R.string.music_by, composer.composer)
+                text = getString(i18n.string.music_by, composer.composer)
                 setOnClickListener {
                     openComposer(composer.composerLink)
                 }
@@ -119,7 +118,7 @@ class AboutInfoFragment : Fragment() {
             }
             context.startActivity(intent)
         } catch (e: Exception) {
-            Toast.makeText(context.applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context.applicationContext, i18n.string.unknown_error, Toast.LENGTH_SHORT).show()
         }
     }
 

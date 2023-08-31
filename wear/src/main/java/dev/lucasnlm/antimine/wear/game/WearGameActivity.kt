@@ -21,7 +21,6 @@ import dev.lucasnlm.antimine.preferences.PreferencesRepositoryImpl
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
-import dev.lucasnlm.antimine.wear.R
 import dev.lucasnlm.antimine.wear.databinding.ActivityGameBinding
 import dev.lucasnlm.antimine.wear.message.GameOverActivity
 import dev.lucasnlm.antimine.wear.message.VictoryActivity
@@ -29,6 +28,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
     private lateinit var binding: ActivityGameBinding
@@ -173,13 +173,13 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
                     binding.tapToBegin.apply {
                         text = when {
                             it.isCreatingGame -> {
-                                getString(R.string.creating_valid_game)
+                                getString(i18n.string.creating_valid_game)
                             }
                             it.isLoadingMap -> {
-                                getString(R.string.loading)
+                                getString(i18n.string.loading)
                             }
                             else -> {
-                                getString(R.string.tap_to_begin)
+                                getString(i18n.string.tap_to_begin)
                             }
                         }
                         isVisible = true
@@ -208,7 +208,7 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
                     }
                 } else if (it.duration > 0) {
                     binding.timer.apply {
-                        text = getString(R.string.mines_remaining, it.mineCount)
+                        text = getString(i18n.string.mines_remaining, it.mineCount)
                     }
                 } else {
                     binding.timer.isVisible = false

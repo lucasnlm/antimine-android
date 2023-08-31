@@ -12,9 +12,11 @@ fun Activity.showWarning(@StringRes text: Int, isSwitchMarkOpen: Boolean = false
         Snackbar.LENGTH_SHORT,
     ).apply {
         if (isSwitchMarkOpen) {
-            view.translationY = -dpToPx(128).toFloat()
+            view.translationY = -dpToPx(SNACK_BAR_VERTICAL_OFFSET_DP).toFloat()
         }
 
         show()
     }
 }
+
+private const val SNACK_BAR_VERTICAL_OFFSET_DP = 128

@@ -4,10 +4,10 @@ import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
-import dev.lucasnlm.antimine.about.R
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.licenses.LicenseActivity
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class AboutViewModel(
     private val application: Application,
@@ -51,7 +51,11 @@ class AboutViewModel(
             }
             context.startActivity(intent)
         } catch (e: Exception) {
-            Toast.makeText(context.applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context.applicationContext,
+                i18n.string.unknown_error,
+                Toast.LENGTH_SHORT,
+            ).show()
         }
     }
 
@@ -63,7 +67,11 @@ class AboutViewModel(
             }
             context.startActivity(intent)
         } catch (e: Exception) {
-            Toast.makeText(context.applicationContext, R.string.unknown_error, Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context.applicationContext,
+                i18n.string.unknown_error,
+                Toast.LENGTH_SHORT,
+            ).show()
         }
     }
 

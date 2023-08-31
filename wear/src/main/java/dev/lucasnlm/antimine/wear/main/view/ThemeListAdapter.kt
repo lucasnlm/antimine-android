@@ -11,6 +11,7 @@ import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.wear.R
 import dev.lucasnlm.antimine.wear.databinding.ViewThemeBinding
+import com.google.android.material.R as GR
 
 class ThemeListAdapter(
     private val themes: List<AppTheme>,
@@ -50,14 +51,15 @@ class ThemeListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(theme: AppTheme) {
             val selected = (theme.id == preferencesRepository.themeId())
+            val themeName = theme.name
 
             binding.covered.setBackgroundColor(theme.palette.covered.toAndroidColor())
             binding.uncovered.setBackgroundColor(theme.palette.background.toAndroidColor())
 
-            if (theme.name != null) {
+            if (themeName != null) {
                 binding.label.apply {
-                    text = context.getString(theme.name!!)
-                    setTextColor(theme.palette.background.toInvertedAndroidColor(200))
+                    text = context.getString(themeName)
+                    setTextColor(theme.palette.background.toInvertedAndroidColor(THEME_LABEL_ALPHA))
                     setBackgroundResource(android.R.color.transparent)
                     setCompoundDrawables(null, null, null, null)
                     isVisible = true
@@ -73,7 +75,7 @@ class ThemeListAdapter(
                 setStrokeColor(
                     MaterialColors.getColorStateListOrNull(
                         context,
-                        if (selected) R.attr.colorTertiary else R.attr.backgroundColor,
+                        if (selected) GR.attr.colorTertiary else GR.attr.backgroundColor,
                     ),
                 )
                 setOnClickListener {
@@ -81,5 +83,9 @@ class ThemeListAdapter(
                 }
             }
         }
+    }
+
+    companion object {
+        private const val THEME_LABEL_ALPHA = 200
     }
 }

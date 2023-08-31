@@ -7,6 +7,7 @@ import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.playgames.model.PlayGamesItem
 import dev.lucasnlm.external.AnalyticsManager
 import dev.lucasnlm.external.PlayGamesManager
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class PlayGamesViewModel(
     private val playGamesManager: PlayGamesManager,
@@ -17,13 +18,13 @@ class PlayGamesViewModel(
         PlayGamesItem(
             id = 0,
             iconRes = R.drawable.games_achievements,
-            stringRes = R.string.achievements,
+            stringRes = i18n.string.achievements,
             triggerEvent = PlayGamesEvent.OpenAchievements,
         ),
         PlayGamesItem(
             id = 1,
             iconRes = R.drawable.games_leaderboards,
-            stringRes = R.string.leaderboards,
+            stringRes = i18n.string.leaderboards,
             triggerEvent = PlayGamesEvent.OpenLeaderboards,
         ),
     )

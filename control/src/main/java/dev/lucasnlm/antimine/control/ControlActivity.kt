@@ -14,7 +14,9 @@ import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.model.TopBarAction
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
     private lateinit var binding: ActivityControlBinding
@@ -49,7 +51,7 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
         binding.doubleClick.addOnChangeListener(this)
         binding.hapticLevel.addOnChangeListener(this)
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch {
             viewModel.observeState().collect {
                 controlAdapter.bindControlStyleList(it.selected, it.controls)
                 val longPress: Slider = binding.longPress
@@ -81,7 +83,7 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
                 if (it.showReset) {
                     setTopBarAction(
                         TopBarAction(
-                            name = R.string.delete_all,
+                            name = i18n.string.delete_all,
                             icon = R.drawable.undo,
                             action = {
                                 viewModel.sendEvent(ControlEvent.Reset)

@@ -5,21 +5,6 @@ import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
-interface MinefieldRepository {
-    fun baseStandardSize(
-        dimensionRepository: DimensionRepository,
-        progressiveMines: Int,
-    ): Minefield
-
-    fun fromDifficulty(
-        difficulty: Difficulty,
-        dimensionRepository: DimensionRepository,
-        preferencesRepository: PreferencesRepository,
-    ): Minefield
-
-    fun randomSeed(): Long
-}
-
 class MinefieldRepositoryImpl : MinefieldRepository {
     override fun baseStandardSize(
         dimensionRepository: DimensionRepository,
@@ -70,14 +55,17 @@ class MinefieldRepositoryImpl : MinefieldRepository {
         dimensionRepository: DimensionRepository,
         preferencesRepository: PreferencesRepository,
     ): Minefield {
-        var result: Minefield = baseStandardSize(dimensionRepository, preferencesRepository.getProgressiveValue())
+        var result: Minefield = baseStandardSize(
+            dimensionRepository,
+            preferencesRepository.getProgressiveValue(),
+        )
         var resultWidth = result.width
         var resultHeight = result.height
 
         do {
-            val percentage = (result.mines.toDouble() / (resultWidth * resultHeight) * 100.0).toInt()
+            val percentage = result.mines.toDouble() / (resultWidth * resultHeight)
             result = Minefield(resultWidth, resultHeight, result.mines)
-            if (percentage <= 22) {
+            if (percentage <= MAX_MINE_RATIO) {
                 break
             } else {
                 resultWidth += 2
@@ -104,5 +92,6 @@ class MinefieldRepositoryImpl : MinefieldRepository {
         private const val VERTICAL_STANDARD_GAP = 3
         private const val MIN_STANDARD_WIDTH = 6
         private const val MIN_STANDARD_HEIGHT = 9
+        private const val MAX_MINE_RATIO = 0.22
     }
 }
