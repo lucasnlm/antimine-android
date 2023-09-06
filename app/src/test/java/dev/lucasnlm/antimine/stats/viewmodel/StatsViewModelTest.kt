@@ -58,24 +58,34 @@ class StatsViewModelTest : IntentViewModelTest() {
             viewModel.sendEvent(StatsEvent.LoadStats)
             val statsModel = viewModel.singleState()
             assertEquals(10, statsModel.stats[0].totalGames)
-            assertEquals(2, statsModel.stats[1].totalGames)
-            assertEquals(2, statsModel.stats[2].totalGames)
-            assertEquals(2, statsModel.stats[3].totalGames)
-            assertEquals(2, statsModel.stats[4].totalGames)
-            assertEquals(2, statsModel.stats[5].totalGames)
+            assertEquals(6, statsModel.stats[1].totalGames)
+            assertEquals(8, statsModel.stats[2].totalGames)
         }
 
     @Test
     fun testStatsTotalGamesWithBase() =
         runTest {
             val repository = MemoryStatsRepository(listOfStats.toMutableList())
-            val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
+            val viewModel = StatsViewModel(
+                statsRepository = repository,
+                preferenceRepository = prefsRepository,
+                minefieldRepository = minefieldRepository,
+                dimensionRepository = dimensionRepository,
+            )
 
-            mapOf(0 to 3, 2 to 5, 4 to 4, 6 to 3, 8 to 2, 10 to 0).forEach { (base, expected) ->
+            mapOf(
+                0 to 3,
+                2 to 3,
+                4 to 3,
+                6 to 2,
+                8 to 2,
+                10 to 0,
+            ).forEach { (base, expected) ->
                 every { prefsRepository.getStatsBase() } returns base
                 viewModel.sendEvent(StatsEvent.LoadStats)
-                val statsModelBase0 = viewModel.singleState()
-                assertEquals(expected, statsModelBase0.stats.size)
+                val statsModelBase = viewModel.singleState()
+                val current = statsModelBase.stats.size
+                assertEquals(expected, current)
             }
         }
 
@@ -97,7 +107,7 @@ class StatsViewModelTest : IntentViewModelTest() {
         val statsModel = viewModel.singleState()
 
         // General, Standard, Beginner, Intermediate, Expert, Custom
-        assertEquals(6, statsModel.stats.count())
+        assertEquals(3, statsModel.stats.count())
     }
 
     @Test
@@ -109,11 +119,8 @@ class StatsViewModelTest : IntentViewModelTest() {
             val statsModel = viewModel.singleState()
 
             assertEquals(47000, statsModel.stats[0].totalTime)
-            assertEquals(2200, statsModel.stats[1].totalTime)
-            assertEquals(5200, statsModel.stats[2].totalTime)
-            assertEquals(9200, statsModel.stats[3].totalTime)
-            assertEquals(13200, statsModel.stats[4].totalTime)
-            assertEquals(17200, statsModel.stats[5].totalTime)
+            assertEquals(16600, statsModel.stats[1].totalTime)
+            assertEquals(44800, statsModel.stats[2].totalTime)
         }
 
     @Test
@@ -125,11 +132,8 @@ class StatsViewModelTest : IntentViewModelTest() {
             val statsModel = viewModel.singleState()
 
             assertEquals(4200, statsModel.stats[0].averageTime)
-            assertEquals(1000, statsModel.stats[1].averageTime)
-            assertEquals(2000, statsModel.stats[2].averageTime)
-            assertEquals(4000, statsModel.stats[3].averageTime)
-            assertEquals(6000, statsModel.stats[4].averageTime)
-            assertEquals(8000, statsModel.stats[5].averageTime)
+            assertEquals(2333, statsModel.stats[1].averageTime)
+            assertEquals(5000, statsModel.stats[2].averageTime)
         }
 
     @Test
@@ -143,9 +147,6 @@ class StatsViewModelTest : IntentViewModelTest() {
             assertEquals(1000, statsModel.stats[0].shortestTime)
             assertEquals(1000, statsModel.stats[1].shortestTime)
             assertEquals(2000, statsModel.stats[2].shortestTime)
-            assertEquals(4000, statsModel.stats[3].shortestTime)
-            assertEquals(6000, statsModel.stats[4].shortestTime)
-            assertEquals(8000, statsModel.stats[5].shortestTime)
         }
 
     @Test
@@ -157,11 +158,8 @@ class StatsViewModelTest : IntentViewModelTest() {
             val statsModel = viewModel.singleState()
 
             assertEquals(329, statsModel.stats[0].mines)
-            assertEquals(21, statsModel.stats[1].mines)
-            assertEquals(198, statsModel.stats[2].mines)
-            assertEquals(80, statsModel.stats[3].mines)
-            assertEquals(20, statsModel.stats[4].mines)
-            assertEquals(10, statsModel.stats[5].mines)
+            assertEquals(299, statsModel.stats[1].mines)
+            assertEquals(308, statsModel.stats[2].mines)
         }
 
     @Test
@@ -173,11 +171,8 @@ class StatsViewModelTest : IntentViewModelTest() {
             val statsModel = viewModel.singleState()
 
             assertEquals(5, statsModel.stats[0].victory)
-            assertEquals(1, statsModel.stats[1].victory)
-            assertEquals(1, statsModel.stats[2].victory)
-            assertEquals(1, statsModel.stats[3].victory)
-            assertEquals(1, statsModel.stats[4].victory)
-            assertEquals(1, statsModel.stats[5].victory)
+            assertEquals(3, statsModel.stats[1].victory)
+            assertEquals(4, statsModel.stats[2].victory)
         }
 
     @Test
@@ -189,10 +184,7 @@ class StatsViewModelTest : IntentViewModelTest() {
             val statsModel = viewModel.singleState()
 
             assertEquals(254, statsModel.stats[0].openArea)
-            assertEquals(50, statsModel.stats[1].openArea)
-            assertEquals(110, statsModel.stats[2].openArea)
-            assertEquals(50, statsModel.stats[3].openArea)
-            assertEquals(35, statsModel.stats[4].openArea)
-            assertEquals(35, statsModel.stats[4].openArea)
+            assertEquals(210, statsModel.stats[1].openArea)
+            assertEquals(204, statsModel.stats[2].openArea)
         }
 }
