@@ -66,12 +66,13 @@ class StatsViewModelTest : IntentViewModelTest() {
     fun testStatsTotalGamesWithBase() =
         runTest {
             val repository = MemoryStatsRepository(listOfStats.toMutableList())
-            val viewModel = StatsViewModel(
-                statsRepository = repository,
-                preferenceRepository = prefsRepository,
-                minefieldRepository = minefieldRepository,
-                dimensionRepository = dimensionRepository,
-            )
+            val viewModel =
+                StatsViewModel(
+                    statsRepository = repository,
+                    preferenceRepository = prefsRepository,
+                    minefieldRepository = minefieldRepository,
+                    dimensionRepository = dimensionRepository,
+                )
 
             mapOf(
                 0 to 3,
