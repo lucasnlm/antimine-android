@@ -55,7 +55,7 @@ Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-andro
 
 ## Technical Details
 
-- [Android SDK 33](https://developer.android.com/about/versions/13)
+- [Android SDK 34](https://developer.android.com/about/versions/14)
 - [AndroidX](https://developer.android.com/jetpack/androidx)
 - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
