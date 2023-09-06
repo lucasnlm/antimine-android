@@ -17,66 +17,76 @@ import kotlinx.coroutines.flow.flowOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val AppModule = module {
-    single {
-        object : InstantAppManager {
-            override fun isEnabled(context: Context): Boolean = false
-        }
-    } bind InstantAppManager::class
+val AppModule =
+    module {
+        single {
+            object : InstantAppManager {
+                override fun isEnabled(context: Context): Boolean = false
+            }
+        } bind InstantAppManager::class
 
-    single {
-        object : BillingManager {
-            override fun start() {}
+        single {
+            object : BillingManager {
+                override fun start() {}
 
-            override fun isEnabled(): Boolean = false
+                override fun isEnabled(): Boolean = false
 
-            override suspend fun charge(activity: Activity) {}
+                override suspend fun charge(activity: Activity) {}
 
-            override suspend fun getPrice(): Price? = null
+                override suspend fun getPrice(): Price? = null
 
-            override suspend fun getPriceFlow(): Flow<Price> = flowOf()
+                override suspend fun getPriceFlow(): Flow<Price> = flowOf()
 
-            override fun listenPurchases(): Flow<PurchaseInfo> = flowOf()
-        }
-    } bind BillingManager::class
+                override fun listenPurchases(): Flow<PurchaseInfo> = flowOf()
+            }
+        } bind BillingManager::class
 
-    single {
-        object : PlayGamesManager {
-            override suspend fun playerId(): String? = null
+        single {
+            object : PlayGamesManager {
+                override suspend fun playerId(): String? = null
 
-            override fun hasGooglePlayGames(): Boolean = false
+                override fun hasGooglePlayGames(): Boolean = false
 
-            override suspend fun silentLogin(): Boolean = false
+                override suspend fun silentLogin(): Boolean = false
 
-            override fun showPlayPopUp(activity: Activity) {}
+                override fun showPlayPopUp(activity: Activity) {}
 
-            override fun getLoginIntent(): Intent? = null
+                override fun getLoginIntent(): Intent? = null
 
-            override fun handleLoginResult(data: Intent?) {}
+                override fun handleLoginResult(data: Intent?) {}
 
-            override fun isLogged(): Boolean = false
+                override fun isLogged(): Boolean = false
 
-            override fun openAchievements(activity: Activity) {}
+                override fun openAchievements(activity: Activity) {}
 
-            override fun openLeaderboards(activity: Activity) {}
+                override fun openLeaderboards(activity: Activity) {}
 
-            override suspend fun incrementAchievement(achievement: Achievement, value: Int) {}
+                override suspend fun incrementAchievement(
+                    achievement: Achievement,
+                    value: Int,
+                ) {}
 
-            override suspend fun setAchievementSteps(achievement: Achievement, value: Int) {}
+                override suspend fun setAchievementSteps(
+                    achievement: Achievement,
+                    value: Int,
+                ) {}
 
-            override suspend fun unlockAchievement(achievement: Achievement) {}
+                override suspend fun unlockAchievement(achievement: Achievement) {}
 
-            override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) {}
+                override fun submitLeaderboard(
+                    leaderboard: Leaderboard,
+                    value: Long,
+                ) {}
 
-            override fun keepRequestingLogin(status: Boolean) {}
+                override fun keepRequestingLogin(status: Boolean) {}
 
-            override fun shouldRequestLogin(): Boolean = false
+                override fun shouldRequestLogin(): Boolean = false
 
-            override fun signInToFirebase(activity: Activity) {}
-        }
-    } bind PlayGamesManager::class
+                override fun signInToFirebase(activity: Activity) {}
+            }
+        } bind PlayGamesManager::class
 
-    single {
-        DebugAnalyticsManager()
-    } bind AnalyticsManager::class
-}
+        single {
+            DebugAnalyticsManager()
+        } bind AnalyticsManager::class
+    }

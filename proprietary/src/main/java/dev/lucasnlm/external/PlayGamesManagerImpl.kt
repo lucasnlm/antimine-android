@@ -1,7 +1,6 @@
 package dev.lucasnlm.external
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -28,7 +27,10 @@ class PlayGamesManagerImpl(
         Firebase.auth
     }
 
-    private fun setupPopUp(activity: Activity, account: GoogleSignInAccount) {
+    private fun setupPopUp(
+        activity: Activity,
+        account: GoogleSignInAccount,
+    ) {
         Games.getGamesClient(context, account).apply {
             setViewForPopups(activity.findViewById(android.R.id.content))
             setGravityForPopups(Gravity.TOP or Gravity.END)
@@ -37,17 +39,19 @@ class PlayGamesManagerImpl(
 
     override suspend fun playerId(): String? {
         return account?.let {
-            try {
-                Games.getPlayersClient(context, it).currentPlayerId.await()
-            } catch (exception: Exception) {
-                exception.message?.let { message ->
+            runCatching {
+                Games
+                    .getPlayersClient(context, it)
+                    .currentPlayerId
+                    .await()
+            }.onFailure {
+                it.message?.let { message ->
                     crashReporter.sendError(message)
                 }
 
-                Log.e(TAG, "Fail to request current player id", exception)
                 account = null
-                null
-            }
+                Log.e(TAG, "Fail to request current player id", it)
+            }.getOrNull()
         }
     }
 
@@ -64,14 +68,13 @@ class PlayGamesManagerImpl(
     override suspend fun silentLogin(): Boolean {
         val signInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build()
         val lastAccount: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(context)
-        return try {
+        return runCatching {
             val client = GoogleSignIn.getClient(context, signInOptions)
             account = lastAccount ?: client.silentSignIn().await()
-            account != null
-        } catch (e: Exception) {
+            account
+        }.onFailure {
             account = null
-            false
-        }
+        }.getOrNull() != null
     }
 
     override fun getLoginIntent(): Intent? {
@@ -101,11 +104,8 @@ class PlayGamesManagerImpl(
             Games.getAchievementsClient(context, it)
                 .achievementsIntent
                 .addOnSuccessListener { intent ->
-                    try {
+                    runCatching {
                         activity.startActivityForResult(intent, 0)
-                    } catch (e: ActivityNotFoundException) {
-                        // Google Play Games error
-                        // TODO add warning
                     }
                 }
         }
@@ -116,11 +116,8 @@ class PlayGamesManagerImpl(
             Games.getLeaderboardsClient(context, it)
                 .allLeaderboardsIntent
                 .addOnSuccessListener { intent ->
-                    try {
+                    runCatching {
                         activity.startActivityForResult(intent, 0)
-                    } catch (e: ActivityNotFoundException) {
-                        // Google Play Games error
-                        // TODO add warning
                     }
                 }
         }
@@ -128,37 +125,49 @@ class PlayGamesManagerImpl(
 
     override suspend fun unlockAchievement(achievement: Achievement) {
         account?.let {
-            try {
-                Games.getAchievementsClient(context, it).unlockImmediate(achievement.value).await()
-            } catch (e: Exception) {
-                // Ignore
+            runCatching {
+                Games
+                    .getAchievementsClient(context, it)
+                    .unlockImmediate(achievement.value)
+                    .await()
             }
         }
     }
 
-    override suspend fun incrementAchievement(achievement: Achievement, value: Int) {
+    override suspend fun incrementAchievement(
+        achievement: Achievement,
+        value: Int,
+    ) {
         account?.let {
-            try {
-                Games.getAchievementsClient(context, it).incrementImmediate(achievement.value, value).await()
-            } catch (e: Exception) {
-                // Ignore
+            runCatching {
+                Games
+                    .getAchievementsClient(context, it)
+                    .incrementImmediate(achievement.value, value).await()
             }
         }
     }
 
-    override suspend fun setAchievementSteps(achievement: Achievement, value: Int) {
+    override suspend fun setAchievementSteps(
+        achievement: Achievement,
+        value: Int,
+    ) {
         account?.let {
-            try {
-                Games.getAchievementsClient(context, it).setStepsImmediate(achievement.value, value).await()
-            } catch (e: Exception) {
-                // Ignore
+            runCatching {
+                Games
+                    .getAchievementsClient(context, it)
+                    .setStepsImmediate(achievement.value, value).await()
             }
         }
     }
 
-    override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) {
+    override fun submitLeaderboard(
+        leaderboard: Leaderboard,
+        value: Long,
+    ) {
         account?.let {
-            Games.getLeaderboardsClient(context, it).submitScore(leaderboard.value, value)
+            Games
+                .getLeaderboardsClient(context, it)
+                .submitScore(leaderboard.value, value)
         }
     }
 

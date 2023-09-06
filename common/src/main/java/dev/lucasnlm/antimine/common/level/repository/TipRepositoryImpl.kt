@@ -3,13 +3,6 @@ package dev.lucasnlm.antimine.common.level.repository
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.external.FeatureFlagManager
 
-interface TipRepository {
-    fun setExtraTips(amount: Int)
-    fun removeTip(): Boolean
-    fun increaseTip(amount: Int)
-    fun getTotalTips(): Int
-}
-
 class TipRepositoryImpl(
     private val preferencesRepository: PreferencesRepository,
     private val featureFlagManager: FeatureFlagManager,
@@ -51,6 +44,11 @@ class TipRepositoryImpl(
     }
 
     private fun getMaxTips(): Int {
-        return if (featureFlagManager.isFoss) 100 else 25
+        return if (featureFlagManager.isFoss) MAX_TIPS_FOSS else MAX_TIPS_CLOSED
+    }
+
+    companion object {
+        private const val MAX_TIPS_FOSS = 100
+        private const val MAX_TIPS_CLOSED = 25
     }
 }

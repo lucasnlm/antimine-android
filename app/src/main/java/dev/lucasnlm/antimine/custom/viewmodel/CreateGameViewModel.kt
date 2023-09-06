@@ -11,15 +11,17 @@ class CreateGameViewModel(
         preferencesRepository.forgetCustomSeed()
     }
 
-    override suspend fun mapEventToState(event: CustomEvent) = flow {
-        if (event is CustomEvent.UpdateCustomGameEvent) {
-            val minefield = event.minefield
-            preferencesRepository.updateCustomGameMode(minefield)
-            emit(CustomState(minefield.width, minefield.height, minefield.mines))
+    override suspend fun mapEventToState(event: CustomEvent) =
+        flow {
+            if (event is CustomEvent.UpdateCustomGameEvent) {
+                val minefield = event.minefield
+                preferencesRepository.updateCustomGameMode(minefield)
+                emit(CustomState(minefield.width, minefield.height, minefield.mines))
+            }
         }
-    }
 
-    override fun initialState() = with(preferencesRepository.customGameMode()) {
-        CustomState(width, height, mines)
-    }
+    override fun initialState() =
+        with(preferencesRepository.customGameMode()) {
+            CustomState(width, height, mines)
+        }
 }

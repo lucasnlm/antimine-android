@@ -14,21 +14,22 @@ import dev.lucasnlm.antimine.ui.repository.ThemeRepositoryImpl
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val CommonModule = module {
-    single { PreferencesManagerImpl(get()) } bind PreferencesManager::class
+val CommonModule =
+    module {
+        single { PreferencesManagerImpl(get()) } bind PreferencesManager::class
 
-    single { DimensionRepositoryImpl(get()) } bind DimensionRepository::class
+        single { DimensionRepositoryImpl(get()) } bind DimensionRepository::class
 
-    single {
-        PreferencesRepositoryImpl(
-            get(),
-            ViewConfiguration.getLongPressTimeout(),
-        )
-    } bind PreferencesRepository::class
+        single {
+            PreferencesRepositoryImpl(
+                get(),
+                ViewConfiguration.getLongPressTimeout(),
+            )
+        } bind PreferencesRepository::class
 
-    single { GameAudioManagerImpl(get(), get()) } bind GameAudioManager::class
+        single { GameAudioManagerImpl(get(), get()) } bind GameAudioManager::class
 
-    single {
-        ThemeRepositoryImpl(get(), get())
-    } bind ThemeRepository::class
-}
+        single {
+            ThemeRepositoryImpl(get(), get())
+        } bind ThemeRepository::class
+    }

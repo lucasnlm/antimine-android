@@ -23,21 +23,21 @@ sealed class GameEvent {
         val active: Boolean,
     ) : GameEvent()
 
-    object GiveMoreTip : GameEvent()
+    data object GiveMoreTip : GameEvent()
 
-    object ConsumeTip : GameEvent()
+    data object ConsumeTip : GameEvent()
 
-    object ContinueGame : GameEvent()
+    data object ContinueGame : GameEvent()
 
-    object ShowNewGameDialog : GameEvent()
+    data object ShowNewGameDialog : GameEvent()
 
-    object LoadingNewGame : GameEvent()
+    data object LoadingNewGame : GameEvent()
 
-    object EngineReady : GameEvent()
+    data object EngineReady : GameEvent()
 
-    object ShowNoGuessFailWarning : GameEvent()
+    data object ShowNoGuessFailWarning : GameEvent()
 
-    object CreatingGameEvent : GameEvent()
+    data object CreatingGameEvent : GameEvent()
 
     data class VictoryDialog(
         val delayToShow: Long,

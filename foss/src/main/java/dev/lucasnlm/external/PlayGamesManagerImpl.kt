@@ -40,15 +40,24 @@ class PlayGamesManagerImpl(
         // F-droid build doesn't have Google Play Games
     }
 
-    override suspend fun incrementAchievement(achievement: Achievement, value: Int) {
+    override suspend fun incrementAchievement(
+        achievement: Achievement,
+        value: Int,
+    ) {
         // F-droid build doesn't have Google Play Games
     }
 
-    override suspend fun setAchievementSteps(achievement: Achievement, value: Int) {
+    override suspend fun setAchievementSteps(
+        achievement: Achievement,
+        value: Int,
+    ) {
         // F-droid build doesn't have Google Play Games
     }
 
-    override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) {
+    override fun submitLeaderboard(
+        leaderboard: Leaderboard,
+        value: Long,
+    ) {
         // F-droid build doesn't have Google Play Games
     }
 

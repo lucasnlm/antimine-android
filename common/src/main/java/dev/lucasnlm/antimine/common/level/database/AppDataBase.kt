@@ -30,6 +30,7 @@ import dev.lucasnlm.antimine.common.level.database.models.Stats
 )
 abstract class AppDataBase : RoomDatabase() {
     abstract fun saveDao(): SaveDao
+
     abstract fun statsDao(): StatsDao
 
     companion object {

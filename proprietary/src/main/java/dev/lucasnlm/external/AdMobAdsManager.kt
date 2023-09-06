@@ -40,9 +40,10 @@ class AdMobAdsManager(
             initialized = true
 
             MobileAds.initialize(context) {
-                val providerCount = it.adapterStatusMap.count { provider ->
-                    provider.value.initializationState == AdapterStatus.State.READY
-                }
+                val providerCount =
+                    it.adapterStatusMap.count { provider ->
+                        provider.value.initializationState == AdapterStatus.State.READY
+                    }
 
                 if (providerCount != 0) {
                     scope.launch(Dispatchers.Main) {
@@ -60,7 +61,7 @@ class AdMobAdsManager(
         val adRequest = AdRequest.Builder().build()
         RewardedAd.load(
             context,
-            Ads.RewardAd,
+            Ads.REWARD_AD,
             adRequest,
             object : RewardedAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
@@ -89,7 +90,7 @@ class AdMobAdsManager(
         val adRequest = AdRequest.Builder().build()
         RewardedAd.load(
             context,
-            Ads.SecondRewardAd,
+            Ads.SECOND_REWARD_AD,
             adRequest,
             object : RewardedAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
@@ -118,7 +119,7 @@ class AdMobAdsManager(
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
             context,
-            Ads.InterstitialAd,
+            Ads.INTERSTITIAL_AD,
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
@@ -147,7 +148,7 @@ class AdMobAdsManager(
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
             context,
-            Ads.SecondInterstitialAd,
+            Ads.SECOND_INTERSTITIAL_AD,
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
@@ -233,53 +234,55 @@ class AdMobAdsManager(
         onDismiss: (() -> Unit),
         onError: (() -> Unit)?,
     ) {
-        secondInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
-            override fun onAdDismissedFullScreenContent() {
-                loadSecondInterstitialAd()
-                onDismiss.invoke()
-            }
-
-            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                crashReporter.sendError(
-                    listOf(
-                        "Fail to show InterstitialAd",
-                        "Code: ${adError.code}",
-                        "Message: ${adError.message}",
-                        "Cause: ${adError.cause}",
-                    ).joinToString("\n"),
-                )
-                (onError ?: onDismiss).invoke()
-            }
-
-            override fun onAdShowedFullScreenContent() {
-                // Empty
-            }
-        }
-
-        interstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
-            override fun onAdDismissedFullScreenContent() {
-                scope.launch(Dispatchers.Main) {
-                    loadInterstitialAd()
+        secondInterstitialAd?.fullScreenContentCallback =
+            object : FullScreenContentCallback() {
+                override fun onAdDismissedFullScreenContent() {
+                    loadSecondInterstitialAd()
+                    onDismiss.invoke()
                 }
-                onDismiss.invoke()
+
+                override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                    crashReporter.sendError(
+                        listOf(
+                            "Fail to show InterstitialAd",
+                            "Code: ${adError.code}",
+                            "Message: ${adError.message}",
+                            "Cause: ${adError.cause}",
+                        ).joinToString("\n"),
+                    )
+                    (onError ?: onDismiss).invoke()
+                }
+
+                override fun onAdShowedFullScreenContent() {
+                    // Empty
+                }
             }
 
-            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                crashReporter.sendError(
-                    listOf(
-                        "Fail to show InterstitialAd",
-                        "Code: ${adError.code}",
-                        "Message: ${adError.message}",
-                        "Cause: ${adError.cause}",
-                    ).joinToString("\n"),
-                )
-                (onError ?: onDismiss).invoke()
-            }
+        interstitialAd?.fullScreenContentCallback =
+            object : FullScreenContentCallback() {
+                override fun onAdDismissedFullScreenContent() {
+                    scope.launch(Dispatchers.Main) {
+                        loadInterstitialAd()
+                    }
+                    onDismiss.invoke()
+                }
 
-            override fun onAdShowedFullScreenContent() {
-                // Empty
+                override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                    crashReporter.sendError(
+                        listOf(
+                            "Fail to show InterstitialAd",
+                            "Code: ${adError.code}",
+                            "Message: ${adError.message}",
+                            "Cause: ${adError.cause}",
+                        ).joinToString("\n"),
+                    )
+                    (onError ?: onDismiss).invoke()
+                }
+
+                override fun onAdShowedFullScreenContent() {
+                    // Empty
+                }
             }
-        }
 
         if (interstitialAd == null && secondInterstitialAd == null) {
             (onError ?: onDismiss).invoke()
@@ -295,14 +298,15 @@ class AdMobAdsManager(
         val adRequest = AdRequest.Builder().build()
         return AdView(context).apply {
             setAdSize(AdSize.FULL_BANNER)
-            adUnitId = Ads.BannerAd
+            adUnitId = Ads.BANNER_AD
             loadAd(adRequest)
-            adListener = object : AdListener() {
-                override fun onAdFailedToLoad(error: LoadAdError) {
-                    super.onAdFailedToLoad(error)
-                    onError?.invoke()
+            adListener =
+                object : AdListener() {
+                    override fun onAdFailedToLoad(error: LoadAdError) {
+                        super.onAdFailedToLoad(error)
+                        onError?.invoke()
+                    }
                 }
-            }
         }
     }
 

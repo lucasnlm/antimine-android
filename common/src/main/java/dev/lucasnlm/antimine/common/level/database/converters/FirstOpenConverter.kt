@@ -5,10 +5,11 @@ import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 
 class FirstOpenConverter {
     @TypeConverter
-    fun toFirstOpen(value: Int): FirstOpen = when {
-        (value < 0) -> FirstOpen.Unknown
-        else -> FirstOpen.Position(value)
-    }
+    fun toFirstOpen(value: Int): FirstOpen =
+        when {
+            (value < 0) -> FirstOpen.Unknown
+            else -> FirstOpen.Position(value)
+        }
 
     @TypeConverter
     fun toInteger(firstOpen: FirstOpen): Int = firstOpen.toInt()

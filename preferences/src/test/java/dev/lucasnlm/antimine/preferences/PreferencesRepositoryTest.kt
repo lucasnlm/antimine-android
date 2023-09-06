@@ -8,15 +8,24 @@ import org.junit.Test
 private class TestPreferenceManager : PreferencesManager {
     val values = mutableMapOf<String, Any>()
 
-    override fun getBoolean(key: String, defaultValue: Boolean): Boolean {
+    override fun getBoolean(
+        key: String,
+        defaultValue: Boolean,
+    ): Boolean {
         return values.getOrDefault(key, defaultValue) as Boolean
     }
 
-    override fun putBoolean(key: String, value: Boolean) {
+    override fun putBoolean(
+        key: String,
+        value: Boolean,
+    ) {
         values[key] = value
     }
 
-    override fun getInt(key: String, defaultValue: Int): Int {
+    override fun getInt(
+        key: String,
+        defaultValue: Int,
+    ): Int {
         return values.getOrDefault(key, defaultValue) as Int
     }
 
@@ -24,7 +33,10 @@ private class TestPreferenceManager : PreferencesManager {
         return values[key] as? Int
     }
 
-    override fun putInt(key: String, value: Int) {
+    override fun putInt(
+        key: String,
+        value: Int,
+    ) {
         values[key] = value
     }
 
@@ -32,7 +44,10 @@ private class TestPreferenceManager : PreferencesManager {
         return values[key] as? String
     }
 
-    override fun putString(key: String, value: String) {
+    override fun putString(
+        key: String,
+        value: String,
+    ) {
         values[key] = value
     }
 
@@ -52,11 +67,17 @@ private class TestPreferenceManager : PreferencesManager {
         return values.toMap()
     }
 
-    override fun getLong(key: String, defaultValue: Long): Long {
+    override fun getLong(
+        key: String,
+        defaultValue: Long,
+    ): Long {
         return values.getOrDefault(key, defaultValue) as Long
     }
 
-    override fun putLong(key: String, value: Long) {
+    override fun putLong(
+        key: String,
+        value: Long,
+    ) {
         values[key] = value
     }
 

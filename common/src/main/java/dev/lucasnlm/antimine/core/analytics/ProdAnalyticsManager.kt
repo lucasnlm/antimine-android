@@ -8,7 +8,10 @@ import dev.lucasnlm.external.ExternalAnalyticsWrapper
 class ProdAnalyticsManager(
     private val analyticsWrapper: ExternalAnalyticsWrapper,
 ) : AnalyticsManager {
-    override fun setup(context: Context, properties: Map<String, String>) {
+    override fun setup(
+        context: Context,
+        properties: Map<String, String>,
+    ) {
         analyticsWrapper.setup(context, properties)
     }
 

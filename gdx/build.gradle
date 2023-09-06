@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'dev.lucasnlm.antimine.gdx'
-    compileSdkVersion 33
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        minSdkVersion 21
-        targetSdkVersion 33
+        minSdk 21
+        targetSdk 34
+        compileSdk 34
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
@@ -22,15 +22,16 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = '1.8'
+    kotlin {
+        jvmToolchain(17)
     }
 
     buildFeatures {
+        buildConfig true
         viewBinding true
     }
 
@@ -66,7 +67,7 @@ dependencies {
     natives 'com.badlogicgames.gdx:gdx-platform:1.11.0:natives-x86_64'
 }
 
-task copyAndroidNatives {
+tasks.register('copyAndroidNatives') {
     doFirst {
         file("libs/armeabi-v7a/").mkdirs()
         file("libs/arm64-v8a/").mkdirs()

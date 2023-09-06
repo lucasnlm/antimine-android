@@ -14,14 +14,20 @@ internal class LicensesAdapter(
 
     override fun getItemCount(): Int = licenses.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThirdPartyViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ThirdPartyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ThirdPartyViewHolder(
             binding = ViewThirdPartyBinding.inflate(layoutInflater, parent, false),
         )
     }
 
-    override fun onBindViewHolder(holder: ThirdPartyViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ThirdPartyViewHolder,
+        position: Int,
+    ) {
         val thirdParty = licenses[position]
         holder.apply {
             binding.thirdName.text = thirdParty.name

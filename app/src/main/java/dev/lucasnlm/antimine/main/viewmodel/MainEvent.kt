@@ -4,31 +4,31 @@ import android.content.Intent
 import dev.lucasnlm.antimine.core.models.Difficulty
 
 sealed class MainEvent {
-    object ContinueGameEvent : MainEvent()
+    data object ContinueGameEvent : MainEvent()
 
     data class StartNewGameEvent(
         val difficulty: Difficulty,
     ) : MainEvent()
 
-    object ShowCustomDifficultyDialogEvent : MainEvent()
+    data object ShowCustomDifficultyDialogEvent : MainEvent()
 
-    object StartTutorialEvent : MainEvent()
+    data object StartTutorialEvent : MainEvent()
 
-    object StartLanguageEvent : MainEvent()
+    data object StartLanguageEvent : MainEvent()
 
-    object GoToMainPageEvent : MainEvent()
+    data object GoToMainPageEvent : MainEvent()
 
     data class OpenActivity(
         val intent: Intent,
     ) : MainEvent()
 
-    object GoToSettingsPageEvent : MainEvent()
+    data object GoToSettingsPageEvent : MainEvent()
 
-    object ShowControlsEvent : MainEvent()
+    data object ShowControlsEvent : MainEvent()
 
-    object Recreate : MainEvent()
+    data object Recreate : MainEvent()
 
-    object ShowGooglePlayGamesEvent : MainEvent()
+    data object ShowGooglePlayGamesEvent : MainEvent()
 
     data class FetchCloudSave(
         val playGamesId: String,

@@ -18,7 +18,10 @@ class ControlTypeListAdapter(
         setHasStableIds(true)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): RecyclerViewHolder {
         val binding = ViewControlTypeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RecyclerViewHolder(
             binding = binding,
@@ -35,7 +38,10 @@ class ControlTypeListAdapter(
         return controlTypeItemList[position].id
     }
 
-    override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: RecyclerViewHolder,
+        position: Int,
+    ) {
         val menuItem = controlTypeItemList[position]
         holder.bind(menuItem)
     }
@@ -50,11 +56,12 @@ class ControlTypeListAdapter(
             val isSelected = controlTypeItem.controlStyle == preferencesRepository.controlStyle()
 
             binding.apply {
-                val imageRes = if (isSelected) {
-                    R.drawable.radio_button_checked
-                } else {
-                    R.drawable.radio_button_unchecked
-                }
+                val imageRes =
+                    if (isSelected) {
+                        R.drawable.radio_button_checked
+                    } else {
+                        R.drawable.radio_button_unchecked
+                    }
                 radio.setImageResource(imageRes)
 
                 firstActionLabel.text = context.getString(controlTypeItem.primaryAction)

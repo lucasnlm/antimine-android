@@ -59,13 +59,14 @@ fun Int.toInverseBackOrWhite(alpha: Float? = 1.0f): Color {
         android.graphics.Color.red(this) +
             android.graphics.Color.green(this) +
             android.graphics.Color.blue(this)
-        )
+    )
 
-    val value = if (sumRgb > (160 * 3)) {
-        0.15f
-    } else {
-        1.0f
-    }
+    val value =
+        if (sumRgb > (160 * 3)) {
+            0.15f
+        } else {
+            1.0f
+        }
 
     return Color(value, value, value, alpha ?: 1.0f)
 }

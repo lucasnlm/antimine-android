@@ -11,6 +11,7 @@ import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class ThemeAdapter(
     private val themeViewModel: ThemeViewModel,
@@ -30,13 +31,19 @@ class ThemeAdapter(
 
     override fun getItemCount(): Int = themes.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ThemeViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ViewThemeBinding.inflate(layoutInflater, parent, false)
         return ThemeViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ThemeViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ThemeViewHolder,
+        position: Int,
+    ) {
         val theme = themes[position]
 
         holder.itemView.apply {
@@ -55,7 +62,7 @@ class ThemeAdapter(
 
             if (selected) {
                 holder.binding.label.apply {
-                    text = context.getString(R.string.selected)
+                    text = context.getString(i18n.string.selected)
                     setTextColor(theme.palette.background.toInvertedAndroidColor(200))
                     setBackgroundResource(android.R.color.transparent)
                     setCompoundDrawables(null, null, null, null)

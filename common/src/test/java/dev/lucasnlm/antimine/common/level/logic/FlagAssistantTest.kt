@@ -9,11 +9,15 @@ import java.util.*
 
 @ExperimentalCoroutinesApi
 class FlagAssistantTest {
-    private fun testCase(seed: Long, expectedFlagMap: List<Int>) = runTest {
-        val creator = MinefieldCreatorImpl(
-            Minefield(8, 8, 25),
-            seed,
-        )
+    private fun testCase(
+        seed: Long,
+        expectedFlagMap: List<Int>,
+    ) = runTest {
+        val creator =
+            MinefieldCreatorImpl(
+                Minefield(8, 8, 25),
+                seed,
+            )
 
         val map = creator.create(50).toMutableList()
 
@@ -28,45 +32,50 @@ class FlagAssistantTest {
                     }
             }
 
-        val actual = FlagAssistant(map.toMutableList()).run {
-            runFlagAssistant()
-            result().map { it.mark.ordinal }
-        }
+        val actual =
+            FlagAssistant(map.toMutableList()).run {
+                runFlagAssistant()
+                result().map { it.mark.ordinal }
+            }
 
         assertEquals(expectedFlagMap, actual)
     }
 
     @Test
-    fun testRunAssistantCase1() = runTest {
-        testCase(
-            seed = 200,
-            expectedFlagMap = listOf(
-                0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-                1, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 1, 0, 0, 0,
-                0, 0, 0, 0, 1, 0, 0, 0,
-                1, 0, 0, 0, 1, 0, 0, 0,
-                0, 0, 0, 0, 1, 1, 0, 0,
-            ),
-        )
-    }
+    fun testRunAssistantCase1() =
+        runTest {
+            testCase(
+                seed = 200,
+                expectedFlagMap =
+                    listOf(
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        1, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 1, 0, 0, 0,
+                        0, 0, 0, 0, 1, 0, 0, 0,
+                        1, 0, 0, 0, 1, 0, 0, 0,
+                        0, 0, 0, 0, 1, 1, 0, 0,
+                    ),
+            )
+        }
 
     @Test
-    fun testRunAssistantCase2() = runTest {
-        testCase(
-            seed = 250,
-            expectedFlagMap = listOf(
-                0, 0, 0, 0, 0, 0, 0, 1,
-                0, 0, 0, 0, 1, 1, 1, 1,
-                0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-                1, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 1, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-            ),
-        )
-    }
+    fun testRunAssistantCase2() =
+        runTest {
+            testCase(
+                seed = 250,
+                expectedFlagMap =
+                    listOf(
+                        0, 0, 0, 0, 0, 0, 0, 1,
+                        0, 0, 0, 0, 1, 1, 1, 1,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        1, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 1, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                    ),
+            )
+        }
 }

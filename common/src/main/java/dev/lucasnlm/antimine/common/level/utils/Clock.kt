@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.common.level.utils
 
+import android.text.format.DateUtils
 import java.util.Timer
 import java.util.TimerTask
 
@@ -29,17 +30,18 @@ open class Clock {
 
     fun start(onTick: (seconds: Long) -> Unit) {
         stop()
-        timer = provideTimer().apply {
-            scheduleAtFixedRate(
-                object : TimerTask() {
-                    override fun run() {
-                        elapsedTimeSeconds++
-                        onTick(elapsedTimeSeconds)
-                    }
-                },
-                1000L,
-                1000L,
-            )
-        }
+        timer =
+            provideTimer().apply {
+                scheduleAtFixedRate(
+                    object : TimerTask() {
+                        override fun run() {
+                            elapsedTimeSeconds++
+                            onTick(elapsedTimeSeconds)
+                        }
+                    },
+                    DateUtils.SECOND_IN_MILLIS,
+                    DateUtils.SECOND_IN_MILLIS,
+                )
+            }
     }
 }

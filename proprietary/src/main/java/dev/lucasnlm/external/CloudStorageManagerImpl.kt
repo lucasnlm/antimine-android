@@ -5,6 +5,7 @@ import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dev.lucasnlm.antimine.proprietary.BuildConfig
 import dev.lucasnlm.external.model.CloudSave
 import dev.lucasnlm.external.model.cloudSaveOf
 import dev.lucasnlm.external.model.toHashMap
@@ -36,21 +37,19 @@ class CloudStorageManagerImpl : CloudStorageManager {
             }
     }
 
-    @Suppress("BlockingMethodInNonBlockingContext")
     override suspend fun getSave(playId: String): CloudSave? {
         return if (System.currentTimeMillis() - lastSync > DateUtils.MINUTE_IN_MILLIS) {
             lastSync = System.currentTimeMillis()
 
-            try {
+            runCatching {
                 withContext(Dispatchers.IO) {
                     db.collection(SAVES).document(playId).get().await().data?.let {
                         cloudSaveOf(playId, it.toMap())
                     }
                 }
-            } catch (e: Exception) {
-                Log.e(TAG, "Fail to load save on cloud", e)
-                null
-            }
+            }.onFailure {
+                Log.e(TAG, "Fail to load save on cloud", it)
+            }.getOrNull()
         } else {
             null
         }

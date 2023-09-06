@@ -71,64 +71,67 @@ class MainViewModel(
         }
     }
 
-    private suspend fun loadCloudSave(cloudSave: CloudSave) = with(cloudSave) {
-        with(preferencesRepository) {
-            setCompleteTutorial(completeTutorial == 1)
-            completeFirstUse()
-            if (selectedTheme > -1) { useTheme(selectedTheme.toLong()) }
-            useSkin(selectedSkin.toLong())
-            setCustomLongPressTimeout(touchTiming.toLong())
-            setQuestionMark(questionMark != 0)
-            setFlagAssistant(gameAssistance != 0)
-            setHapticFeedback(hapticFeedback != 0)
-            setHapticFeedbackLevel(hapticFeedbackLevel)
-            setHelp(help != 0)
-            setAllowTapOnNumbers(allowTapNumbers != 0)
-            setSoundEffectsEnabled(soundEffects != 0)
-            setMusicEnabled(music != 0)
-            setPremiumFeatures(premiumFeatures != 0)
-            useControlStyle(ControlStyle.values()[controlStyle])
-            setOpenGameDirectly(openDirectly != 0)
-            setDoubleClickTimeout(doubleClickTimeout.toLong())
-            setDimNumbers(dimNumbers != 0)
-            setTimerVisible(timerVisible != 0)
-        }
+    private suspend fun loadCloudSave(cloudSave: CloudSave) =
+        with(cloudSave) {
+            with(preferencesRepository) {
+                setCompleteTutorial(completeTutorial == 1)
+                completeFirstUse()
+                if (selectedTheme > -1) {
+                    useTheme(selectedTheme.toLong())
+                }
+                useSkin(selectedSkin.toLong())
+                setCustomLongPressTimeout(touchTiming.toLong())
+                setQuestionMark(questionMark != 0)
+                setFlagAssistant(gameAssistance != 0)
+                setHapticFeedback(hapticFeedback != 0)
+                setHapticFeedbackLevel(hapticFeedbackLevel)
+                setHelp(help != 0)
+                setAllowTapOnNumbers(allowTapNumbers != 0)
+                setSoundEffectsEnabled(soundEffects != 0)
+                setMusicEnabled(music != 0)
+                setPremiumFeatures(premiumFeatures != 0)
+                useControlStyle(ControlStyle.values()[controlStyle])
+                setOpenGameDirectly(openDirectly != 0)
+                setDoubleClickTimeout(doubleClickTimeout.toLong())
+                setDimNumbers(dimNumbers != 0)
+                setTimerVisible(timerVisible != 0)
+            }
 
-        cloudSave.stats.mapNotNull {
-            try {
-                Stats(
-                    uid = it["uid"]!!.toInt(),
-                    duration = it["duration"]!!.toLong(),
-                    mines = it["mines"]!!.toInt(),
-                    victory = it["victory"]!!.toInt(),
-                    width = it["width"]!!.toInt(),
-                    height = it["height"]!!.toInt(),
-                    openArea = it["openArea"]!!.toInt(),
-                )
-            } catch (e: Exception) {
-                null
-            }
-        }.distinctBy {
-            it.uid
-        }.also {
-            try {
-                statsRepository.addAllStats(it)
-            } catch (e: Exception) {
-                Log.e(MainActivity.TAG, "Fail to insert stats on DB")
+            cloudSave.stats.mapNotNull {
+                runCatching {
+                    Stats(
+                        uid = it["uid"]!!.toInt(),
+                        duration = it["duration"]!!.toLong(),
+                        mines = it["mines"]!!.toInt(),
+                        victory = it["victory"]!!.toInt(),
+                        width = it["width"]!!.toInt(),
+                        height = it["height"]!!.toInt(),
+                        openArea = it["openArea"]!!.toInt(),
+                    )
+                }.getOrNull()
+            }.distinctBy {
+                it.uid
+            }.also {
+                runCatching {
+                    statsRepository.addAllStats(it)
+                }.onFailure {
+                    Log.e(MainActivity.TAG, "Fail to insert stats on DB")
+                }
             }
         }
-    }
 
     private fun continueGame(difficulty: Difficulty? = null) {
         val context = application.applicationContext
-        val intent = Intent(context, GameActivity::class.java).apply {
-            difficulty?.let {
-                val bundle = Bundle().apply {
-                    putSerializable(GameActivity.DIFFICULTY, it)
+        val intent =
+            Intent(context, GameActivity::class.java).apply {
+                difficulty?.let {
+                    val bundle =
+                        Bundle().apply {
+                            putSerializable(GameActivity.DIFFICULTY, it)
+                        }
+                    putExtras(bundle)
                 }
-                putExtras(bundle)
             }
-        }
         sendSideEffect(MainEvent.OpenActivity(intent))
     }
 

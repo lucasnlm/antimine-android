@@ -11,26 +11,23 @@ class ExternalAnalyticsWrapperImpl(
     private val context: Context,
 ) : ExternalAnalyticsWrapper {
     private val firebaseAnalytics: FirebaseAnalytics? by lazy {
-        try {
+        runCatching {
             FirebaseAnalytics.getInstance(context)
-        } catch (e: Throwable) {
-            // If fail to initialize Firebase, just ignore it.
-            null
-        }
+        }.getOrNull()
     }
     private val amplitudeClient: AmplitudeClient? by lazy {
-        try {
+        runCatching {
             Amplitude
                 .getInstance()
                 .enableCoppaControl()
                 .initialize(context, "AMPLITUDE_API_KEY")
-        } catch (e: Throwable) {
-            // If fail to initialize Amplitude, just ignore it.
-            null
-        }
+        }.getOrNull()
     }
 
-    override fun setup(context: Context, properties: Map<String, String>) {
+    override fun setup(
+        context: Context,
+        properties: Map<String, String>,
+    ) {
         properties.forEach { (key, value) ->
             firebaseAnalytics?.setUserProperty(key, value)
         }
@@ -38,13 +35,17 @@ class ExternalAnalyticsWrapperImpl(
         amplitudeClient?.setUserProperties(JSONObject(properties))
     }
 
-    override fun sendEvent(name: String, content: Map<String, String>) {
-        val bundle = Bundle().apply {
-            putString(FirebaseAnalytics.Param.ITEM_NAME, name)
-            content.forEach { (key, value) ->
-                this.putString(key, value)
+    override fun sendEvent(
+        name: String,
+        content: Map<String, String>,
+    ) {
+        val bundle =
+            Bundle().apply {
+                putString(FirebaseAnalytics.Param.ITEM_NAME, name)
+                content.forEach { (key, value) ->
+                    putString(key, value)
+                }
             }
-        }
 
         firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
         amplitudeClient?.logEvent(name, JSONObject(content))

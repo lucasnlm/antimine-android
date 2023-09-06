@@ -21,7 +21,6 @@ import dev.lucasnlm.antimine.preferences.PreferencesRepositoryImpl
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
-import dev.lucasnlm.antimine.wear.R
 import dev.lucasnlm.antimine.wear.databinding.ActivityGameBinding
 import dev.lucasnlm.antimine.wear.message.GameOverActivity
 import dev.lucasnlm.antimine.wear.message.VictoryActivity
@@ -29,6 +28,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
     private lateinit var binding: ActivityGameBinding
@@ -52,35 +52,37 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
 
     @Suppress("UnnecessaryVariable")
     private fun View.tryHandleMotionEvent(event: MotionEvent?): Boolean {
-        val shouldHandle = if (event == null) {
-            false
-        } else {
-            val location = IntArray(2)
-            getLocationOnScreen(location)
-            val viewX = location[0]
-            val viewY = location[1]
+        val shouldHandle =
+            if (event == null) {
+                false
+            } else {
+                val location = IntArray(2)
+                getLocationOnScreen(location)
+                val viewX = location[0]
+                val viewY = location[1]
 
-            val left = viewX
-            val right = viewX + width
-            val top = viewY
-            val bottom = viewY + height
+                val left = viewX
+                val right = viewX + width
+                val top = viewY
+                val bottom = viewY + height
 
-            val rect = Rect(left, top, right, bottom)
-            rect.contains(event.x.toInt(), event.y.toInt())
-        }
+                val rect = Rect(left, top, right, bottom)
+                rect.contains(event.x.toInt(), event.y.toInt())
+            }
 
         return shouldHandle && dispatchTouchEvent(event)
     }
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
-        val handledByView = listOf(
-            binding.close,
-            binding.selectFlag,
-            binding.selectOpen,
-            binding.newGame,
-        ).firstOrNull {
-            it.tryHandleMotionEvent(event)
-        } != null
+        val handledByView =
+            listOf(
+                binding.close,
+                binding.selectFlag,
+                binding.selectOpen,
+                binding.newGame,
+            ).firstOrNull {
+                it.tryHandleMotionEvent(event)
+            } != null
 
         return handledByView || binding.levelContainer.dispatchTouchEvent(event)
     }
@@ -166,100 +168,105 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
         }
     }
 
-    private fun bindViewModel() = gameViewModel.apply {
-        lifecycleScope.launchWhenCreated {
-            observeState().collect {
-                if (it.turn == 0 && (it.saveId == 0L || it.isLoadingMap || it.isCreatingGame)) {
-                    binding.tapToBegin.apply {
-                        text = when {
-                            it.isCreatingGame -> {
-                                getString(R.string.creating_valid_game)
+    private fun bindViewModel() =
+        gameViewModel.apply {
+            lifecycleScope.launchWhenCreated {
+                observeState().collect {
+                    if (it.turn == 0 && (it.saveId == 0L || it.isLoadingMap || it.isCreatingGame)) {
+                        binding.tapToBegin.apply {
+                            text =
+                                when {
+                                    it.isCreatingGame -> {
+                                        getString(i18n.string.creating_valid_game)
+                                    }
+                                    it.isLoadingMap -> {
+                                        getString(i18n.string.loading)
+                                    }
+                                    else -> {
+                                        getString(i18n.string.tap_to_begin)
+                                    }
+                                }
+                            isVisible = true
+                        }
+                    } else {
+                        binding.tapToBegin.isVisible = false
+                    }
+
+                    if (it.isCreatingGame) {
+                        launch {
+                            // Show loading indicator only when it takes more than:
+                            delay(500)
+                            if (singleState().isCreatingGame) {
+                                binding.loadingGame.show()
                             }
-                            it.isLoadingMap -> {
-                                getString(R.string.loading)
+                        }
+                    } else if (binding.loadingGame.isVisible) {
+                        binding.loadingGame.hide()
+                    }
+
+                    if (it.duration % 10 > 2) {
+                        binding.timer.apply {
+                            isVisible = preferencesRepository.showTimer()
+                            alpha = 0.7f
+                            text = DateUtils.formatElapsedTime(it.duration)
+                        }
+                    } else if (it.duration > 0) {
+                        binding.timer.apply {
+                            text = getString(i18n.string.mines_remaining, it.mineCount)
+                        }
+                    } else {
+                        binding.timer.isVisible = false
+                    }
+
+                    if (it.isGameCompleted) {
+                        binding.newGame.setOnClickListener {
+                            lifecycleScope.launch {
+                                gameViewModel.startNewGame()
                             }
-                            else -> {
-                                getString(R.string.tap_to_begin)
-                            }
                         }
-                        isVisible = true
+                        binding.newGame.isVisible = true
+                    } else {
+                        binding.newGame.isVisible = false
                     }
-                } else {
-                    binding.tapToBegin.isVisible = false
-                }
 
-                if (it.isCreatingGame) {
-                    launch {
-                        // Show loading indicator only when it takes more than:
-                        delay(500)
-                        if (singleState().isCreatingGame) {
-                            binding.loadingGame.show()
-                        }
-                    }
-                } else if (binding.loadingGame.isVisible) {
-                    binding.loadingGame.hide()
-                }
-
-                if (it.duration % 10 > 2) {
-                    binding.timer.apply {
-                        isVisible = preferencesRepository.showTimer()
-                        alpha = 0.7f
-                        text = DateUtils.formatElapsedTime(it.duration)
-                    }
-                } else if (it.duration > 0) {
-                    binding.timer.apply {
-                        text = getString(R.string.mines_remaining, it.mineCount)
-                    }
-                } else {
-                    binding.timer.isVisible = false
-                }
-
-                if (it.isGameCompleted) {
-                    binding.newGame.setOnClickListener {
-                        lifecycleScope.launch {
-                            gameViewModel.startNewGame()
-                        }
-                    }
-                    binding.newGame.isVisible = true
-                } else {
-                    binding.newGame.isVisible = false
-                }
-
-                keepScreenOn(it.isActive)
-                refreshSwitchButtons()
-            }
-        }
-
-        lifecycleScope.launchWhenCreated {
-            gameViewModel.observeSideEffects().collect {
-                when (it) {
-                    is GameEvent.ShowNoGuessFailWarning -> {}
-                    is GameEvent.ShowNewGameDialog -> {}
-                    is GameEvent.VictoryDialog -> {
-                        val intent = Intent(applicationContext, VictoryActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        }
-                        startActivity(intent)
-                    }
-                    is GameEvent.GameOverDialog -> {
-                        val intent = Intent(applicationContext, GameOverActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        }
-                        startActivity(intent)
-                    }
-                    is GameEvent.GameCompleteDialog -> {
-                        val intent = Intent(applicationContext, VictoryActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        }
-                        startActivity(intent)
-                    }
-                    else -> {
-                        // Empty
-                    }
+                    keepScreenOn(it.isActive)
+                    refreshSwitchButtons()
                 }
             }
+
+            lifecycleScope.launchWhenCreated {
+                gameViewModel.observeSideEffects().collect {
+                    when (it) {
+                        is GameEvent.ShowNoGuessFailWarning -> {}
+                        is GameEvent.ShowNewGameDialog -> {}
+                        is GameEvent.VictoryDialog -> {
+                            val intent =
+                                Intent(applicationContext, VictoryActivity::class.java).apply {
+                                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                }
+                            startActivity(intent)
+                        }
+                        is GameEvent.GameOverDialog -> {
+                            val intent =
+                                Intent(applicationContext, GameOverActivity::class.java).apply {
+                                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                }
+                            startActivity(intent)
+                        }
+                        is GameEvent.GameCompleteDialog -> {
+                            val intent =
+                                Intent(applicationContext, VictoryActivity::class.java).apply {
+                                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                }
+                            startActivity(intent)
+                        }
+                        else -> {
+                            // Empty
+                        }
+                    }
+                }
+            }
         }
-    }
 
     private fun keepScreenOn(enabled: Boolean) {
         if (enabled) {

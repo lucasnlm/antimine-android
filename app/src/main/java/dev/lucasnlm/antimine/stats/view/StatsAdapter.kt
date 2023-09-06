@@ -8,19 +8,26 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.lucasnlm.antimine.databinding.ViewStatsItemBinding
 import dev.lucasnlm.antimine.stats.model.StatsModel
 import java.text.NumberFormat
+import java.util.Locale
 
 class StatsAdapter(
     private val statsList: List<StatsModel>,
 ) : RecyclerView.Adapter<StatsViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatsViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): StatsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return StatsViewHolder(
             binding = ViewStatsItemBinding.inflate(layoutInflater, parent, false),
         )
     }
 
-    override fun onBindViewHolder(holder: StatsViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: StatsViewHolder,
+        position: Int,
+    ) {
         val stats = statsList[position]
         holder.binding.apply {
             if (stats.totalGames > 0) {
@@ -59,7 +66,7 @@ class StatsAdapter(
     override fun getItemCount(): Int = statsList.size
 
     companion object {
-        private fun Int.toL10nString() = String.format("%d", this)
+        private fun Int.toL10nString() = String.format(Locale.getDefault(), "%d", this)
 
         private fun formatPercentage(value: Double) =
             NumberFormat.getPercentInstance().run {
@@ -67,8 +74,7 @@ class StatsAdapter(
                 format(value)
             }
 
-        private fun formatTime(durationSecs: Long) =
-            DateUtils.formatElapsedTime(durationSecs)
+        private fun formatTime(durationSecs: Long) = DateUtils.formatElapsedTime(durationSecs)
     }
 }
 

@@ -3,7 +3,10 @@ package dev.lucasnlm.external
 import android.app.Activity
 
 class ReviewWrapperImpl : ReviewWrapper {
-    override fun startReviewPage(activity: Activity, appPackage: String) {
+    override fun startReviewPage(
+        activity: Activity,
+        appPackage: String,
+    ) {
         // There's not review on FOSS build.
     }
 

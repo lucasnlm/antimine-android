@@ -7,7 +7,7 @@ sealed class ControlEvent {
         val controlStyle: ControlStyle,
     ) : ControlEvent()
 
-    object Reset : ControlEvent()
+    data object Reset : ControlEvent()
 
     data class UpdateTouchSensibility(
         val value: Int,

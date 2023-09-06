@@ -7,13 +7,9 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.DrawableRes
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.isVisible
-import com.google.android.material.card.MaterialCardView
-import dev.lucasnlm.antimine.ui.R
+import dev.lucasnlm.antimine.ui.databinding.ViewOfferCardButtonBinding
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 
@@ -22,10 +18,13 @@ class OfferCardButtonView : FrameLayout {
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
+    private val binding: ViewOfferCardButtonBinding by lazy {
+        ViewOfferCardButtonBinding.bind(this)
+    }
+
     init {
-        LayoutInflater
-            .from(context)
-            .inflate(R.layout.view_offer_card_button, this, true)
+        val layoutInflater = LayoutInflater.from(context)
+        ViewOfferCardButtonBinding.inflate(layoutInflater, this, true)
     }
 
     fun bind(
@@ -60,75 +59,84 @@ class OfferCardButtonView : FrameLayout {
         onAction: (View) -> Unit,
         @DrawableRes startIcon: Int? = null,
     ) {
-        val color = if (invert || isFocused) {
-            theme.palette.background.toAndroidColor()
-        } else {
-            theme.palette.covered.toAndroidColor()
-        }
-
-        val backgroundColor = if (invert || isFocused) {
-            theme.palette.covered.toAndroidColor()
-        } else {
-            theme.palette.background.toAndroidColor()
-        }
-
-        val label = findViewById<TextView>(R.id.label).apply {
-            this.text = text
-            if (centralize) {
-                gravity = Gravity.CENTER_HORIZONTAL
-            }
-            setTextColor(color)
-        }
-
-        val priceView = findViewById<TextView>(R.id.price).apply {
-            isVisible = price != null
-            if (price != null) {
-                this.text = price
+        val color =
+            if (invert || isFocused) {
+                theme.palette.background.toAndroidColor()
+            } else {
+                theme.palette.covered.toAndroidColor()
             }
 
-            if (invert) {
+        val backgroundColor =
+            if (invert || isFocused) {
+                theme.palette.covered.toAndroidColor()
+            } else {
+                theme.palette.background.toAndroidColor()
+            }
+
+        val label =
+            binding.label.apply {
+                this.text = text
+                if (centralize) {
+                    gravity = Gravity.CENTER_HORIZONTAL
+                }
                 setTextColor(color)
             }
-        }
 
-        val offerView = findViewById<AppCompatImageView>(R.id.priceOff).apply {
-            isVisible = showOffer
-            if (invert) {
-                imageTintList = ColorStateList.valueOf(color)
+        val priceView =
+            binding.price.apply {
+                isVisible = price != null
+                if (price != null) {
+                    this.text = price
+                }
+
+                if (invert) {
+                    setTextColor(color)
+                }
             }
-        }
 
-        val iconView = findViewById<ImageView>(R.id.icon).apply {
-            isVisible = startIcon != null
-            if (startIcon != null) {
-                val tintColor = theme.palette.covered.toAndroidColor()
-                imageTintList = ColorStateList.valueOf(tintColor)
-                setImageResource(startIcon)
+        val offerView =
+            binding.priceOff.apply {
+                isVisible = showOffer
+                if (invert) {
+                    imageTintList = ColorStateList.valueOf(color)
+                }
             }
-        }
 
-        findViewById<MaterialCardView>(R.id.card_view).apply {
+        val iconView =
+            binding.icon.apply {
+                isVisible = startIcon != null
+                if (startIcon != null) {
+                    val tintColor = theme.palette.covered.toAndroidColor()
+                    imageTintList = ColorStateList.valueOf(tintColor)
+                    setImageResource(startIcon)
+                }
+            }
+
+        binding.cardView.apply {
             setOnClickListener(onAction)
-            strokeColor = if (!invert) {
-                color
-            } else {
-                backgroundColor
-            }
+            strokeColor =
+                if (!invert) {
+                    color
+                } else {
+                    backgroundColor
+                }
             setCardBackgroundColor(backgroundColor)
             isSoundEffectsEnabled = false
 
             setOnFocusChangeListener { _, focused ->
-                val focusedBackgroundColor = if (focused) {
-                    theme.palette.accent.toAndroidColor()
-                } else {
-                    theme.palette.background.toAndroidColor()
-                }
+                val focusedBackgroundColor =
+                    if (focused) {
+                        theme.palette.accent.toAndroidColor()
+                    } else {
+                        theme.palette.background.toAndroidColor()
+                    }
 
-                val inverted = if (focused) {
-                    theme.palette.background.toAndroidColor()
-                } else {
-                    theme.palette.accent.toAndroidColor()
-                }
+                val inverted =
+                    if (focused) {
+                        theme.palette.background.toAndroidColor()
+                    } else {
+                        theme.palette.accent.toAndroidColor()
+                    }
 
                 label.setTextColor(inverted)
                 priceView.setTextColor(inverted)

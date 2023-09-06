@@ -34,12 +34,13 @@ class ControlViewModelTest {
 
     @Test
     fun testInitialValue() {
-        val preferenceRepository: PreferencesRepository = mockk {
-            every { controlStyle() } returns ControlStyle.DoubleClick
-            every { touchSensibility() } returns 10
-            every { customLongPressTimeout() } returns 500L
-            every { getDoubleClickTimeout() } returns 500L
-        }
+        val preferenceRepository: PreferencesRepository =
+            mockk {
+                every { controlStyle() } returns ControlStyle.DoubleClick
+                every { touchSensibility() } returns 10
+                every { customLongPressTimeout() } returns 500L
+                every { getDoubleClickTimeout() } returns 500L
+            }
 
         val viewModel = ControlViewModel(preferenceRepository, hapticFeedbackManager)
         assertEquals(ControlStyle.DoubleClick, viewModel.singleState().selected)
@@ -47,9 +48,10 @@ class ControlViewModelTest {
 
     @Test
     fun testControlStyleChanges() {
-        val preferenceRepository: PreferencesRepository = mockk(relaxed = true) {
-            every { controlStyle() } returns ControlStyle.Standard
-        }
+        val preferenceRepository: PreferencesRepository =
+            mockk(relaxed = true) {
+                every { controlStyle() } returns ControlStyle.Standard
+            }
 
         val viewModel = ControlViewModel(preferenceRepository, hapticFeedbackManager)
         viewModel.sendEvent(

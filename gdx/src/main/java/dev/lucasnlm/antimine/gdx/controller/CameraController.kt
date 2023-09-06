@@ -15,7 +15,12 @@ class CameraController(
     private var touch: Vector2? = null
     private var unlockTouch = false
 
-    private fun limitValueBetween(value: Float, min: Float, max: Float, default: Float?): Float {
+    private fun limitValueBetween(
+        value: Float,
+        min: Float,
+        max: Float,
+        default: Float?,
+    ): Float {
         return if (min < max) {
             value.coerceIn(min, max)
         } else {
@@ -57,11 +62,19 @@ class CameraController(
         unlockTouch = false
     }
 
-    fun startTouch(x: Float, y: Float) {
+    fun startTouch(
+        x: Float,
+        y: Float,
+    ) {
         touch = touch ?: Vector2(x, y)
     }
 
-    fun translate(dx: Float, dy: Float, x: Float, y: Float) {
+    fun translate(
+        dx: Float,
+        dy: Float,
+        x: Float,
+        y: Float,
+    ) {
         touch?.let {
             if (Vector2(x, y).sub(it.x, it.y).len() > renderSettings.areaSize || unlockTouch) {
                 camera.run {

@@ -1,8 +1,8 @@
 package dev.lucasnlm.antimine.common.level.repository
 
 import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.core.models.MinefieldSize
 import dev.lucasnlm.antimine.core.repository.DimensionRepository
-import dev.lucasnlm.antimine.core.repository.Size
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import io.mockk.every
@@ -21,20 +21,23 @@ class MinefieldRepositoryTest {
     @Test
     fun testStandardSizeCalcWithoutNavigationBar() {
         val minefieldRepository = MinefieldRepositoryImpl()
-        val preferencesRepository = mockk<PreferencesRepository>(relaxed = true) {
-            every { getProgressiveValue() } returns 0
-        }
-        val dimensionRepository = mockk<DimensionRepository>(relaxed = true) {
-            every { areaSize() } returns 10.0f
-            every { verticalNavigationBarHeight() } returns 0
-            every { displaySize() } returns Size(1000, 1000)
-        }
+        val preferencesRepository =
+            mockk<PreferencesRepository>(relaxed = true) {
+                every { getProgressiveValue() } returns 0
+            }
+        val dimensionRepository =
+            mockk<DimensionRepository>(relaxed = true) {
+                every { areaSize() } returns 10.0f
+                every { verticalNavigationBarHeight() } returns 0
+                every { displaySize() } returns MinefieldSize(1000, 1000)
+            }
 
-        val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Standard,
-            dimensionRepository,
-            preferencesRepository,
-        )
+        val minefield =
+            minefieldRepository.fromDifficulty(
+                Difficulty.Standard,
+                dimensionRepository,
+                preferencesRepository,
+            )
 
         assertEquals(Minefield(99, 96, 1710), minefield)
     }
@@ -42,20 +45,23 @@ class MinefieldRepositoryTest {
     @Test
     fun testStandardSizeCalcWithNavigationBar() {
         val minefieldRepository = MinefieldRepositoryImpl()
-        val preferencesRepository = mockk<PreferencesRepository>(relaxed = true) {
-            every { getProgressiveValue() } returns 0
-        }
-        val dimensionRepository = mockk<DimensionRepository>(relaxed = true) {
-            every { areaSize() } returns 10.0f
-            every { verticalNavigationBarHeight() } returns 100
-            every { displaySize() } returns Size(1000, 1000)
-        }
+        val preferencesRepository =
+            mockk<PreferencesRepository>(relaxed = true) {
+                every { getProgressiveValue() } returns 0
+            }
+        val dimensionRepository =
+            mockk<DimensionRepository>(relaxed = true) {
+                every { areaSize() } returns 10.0f
+                every { verticalNavigationBarHeight() } returns 100
+                every { displaySize() } returns MinefieldSize(1000, 1000)
+            }
 
-        val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Standard,
-            dimensionRepository,
-            preferencesRepository,
-        )
+        val minefield =
+            minefieldRepository.fromDifficulty(
+                Difficulty.Standard,
+                dimensionRepository,
+                preferencesRepository,
+            )
 
         assertEquals(Minefield(99, 97, 1728), minefield)
     }
@@ -63,20 +69,23 @@ class MinefieldRepositoryTest {
     @Test
     fun testStandardSizeCalcWithNavigationBarAndProgress() {
         val minefieldRepository = MinefieldRepositoryImpl()
-        val preferencesRepository = mockk<PreferencesRepository>(relaxed = true) {
-            every { getProgressiveValue() } returns 50
-        }
-        val dimensionRepository = mockk<DimensionRepository>(relaxed = true) {
-            every { areaSize() } returns 10.0f
-            every { verticalNavigationBarHeight() } returns 100
-            every { displaySize() } returns Size(1000, 1000)
-        }
+        val preferencesRepository =
+            mockk<PreferencesRepository>(relaxed = true) {
+                every { getProgressiveValue() } returns 50
+            }
+        val dimensionRepository =
+            mockk<DimensionRepository>(relaxed = true) {
+                every { areaSize() } returns 10.0f
+                every { verticalNavigationBarHeight() } returns 100
+                every { displaySize() } returns MinefieldSize(1000, 1000)
+            }
 
-        val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Standard,
-            dimensionRepository,
-            preferencesRepository,
-        )
+        val minefield =
+            minefieldRepository.fromDifficulty(
+                Difficulty.Standard,
+                dimensionRepository,
+                preferencesRepository,
+            )
 
         assertEquals(Minefield(99, 97, 1778), minefield)
     }
@@ -84,22 +93,25 @@ class MinefieldRepositoryTest {
     @Test
     fun testStandardSizeCalcWithNavigationBarAndHighProgress() {
         val minefieldRepository = MinefieldRepositoryImpl()
-        val preferencesRepository = mockk<PreferencesRepository>(relaxed = true) {
-            every { getProgressiveValue() } returns 10000
-        }
-        val dimensionRepository = mockk<DimensionRepository>(relaxed = true) {
-            every { areaSize() } returns 10.0f
-            every { verticalNavigationBarHeight() } returns 100
-            every { displaySize() } returns Size(1000, 1000)
-        }
+        val preferencesRepository =
+            mockk<PreferencesRepository>(relaxed = true) {
+                every { getProgressiveValue() } returns 10000
+            }
+        val dimensionRepository =
+            mockk<DimensionRepository>(relaxed = true) {
+                every { areaSize() } returns 10.0f
+                every { verticalNavigationBarHeight() } returns 100
+                every { displaySize() } returns MinefieldSize(1000, 1000)
+            }
 
-        val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Standard,
-            dimensionRepository,
-            preferencesRepository,
-        )
+        val minefield =
+            minefieldRepository.fromDifficulty(
+                Difficulty.Standard,
+                dimensionRepository,
+                preferencesRepository,
+            )
 
-        assertEquals(Minefield(227, 225, 11728), minefield)
+        assertEquals(Minefield(233, 231, 11728), minefield)
     }
 
     @Test
@@ -108,11 +120,12 @@ class MinefieldRepositoryTest {
         val preferencesRepository = mockk<PreferencesRepository>(relaxed = true)
         val dimensionRepository = mockk<DimensionRepository>(relaxed = true)
 
-        val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Beginner,
-            dimensionRepository,
-            preferencesRepository,
-        )
+        val minefield =
+            minefieldRepository.fromDifficulty(
+                Difficulty.Beginner,
+                dimensionRepository,
+                preferencesRepository,
+            )
         assertEquals(beginnerMinefield, minefield)
     }
 
@@ -122,11 +135,12 @@ class MinefieldRepositoryTest {
         val preferencesRepository = mockk<PreferencesRepository>(relaxed = true)
         val dimensionRepository = mockk<DimensionRepository>(relaxed = true)
 
-        val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Intermediate,
-            dimensionRepository,
-            preferencesRepository,
-        )
+        val minefield =
+            minefieldRepository.fromDifficulty(
+                Difficulty.Intermediate,
+                dimensionRepository,
+                preferencesRepository,
+            )
         assertEquals(intermediateMinefield, minefield)
     }
 
@@ -136,11 +150,12 @@ class MinefieldRepositoryTest {
         val preferencesRepository = mockk<PreferencesRepository>(relaxed = true)
         val dimensionRepository = mockk<DimensionRepository>(relaxed = true)
 
-        val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Expert,
-            dimensionRepository,
-            preferencesRepository,
-        )
+        val minefield =
+            minefieldRepository.fromDifficulty(
+                Difficulty.Expert,
+                dimensionRepository,
+                preferencesRepository,
+            )
         assertEquals(expertMinefield, minefield)
     }
 
@@ -150,11 +165,12 @@ class MinefieldRepositoryTest {
         val preferencesRepository = mockk<PreferencesRepository>(relaxed = true)
         val dimensionRepository = mockk<DimensionRepository>(relaxed = true)
 
-        val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Master,
-            dimensionRepository,
-            preferencesRepository,
-        )
+        val minefield =
+            minefieldRepository.fromDifficulty(
+                Difficulty.Master,
+                dimensionRepository,
+                preferencesRepository,
+            )
         assertEquals(masterMinefield, minefield)
     }
 
@@ -164,27 +180,30 @@ class MinefieldRepositoryTest {
         val preferencesRepository = mockk<PreferencesRepository>(relaxed = true)
         val dimensionRepository = mockk<DimensionRepository>(relaxed = true)
 
-        val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Legend,
-            dimensionRepository,
-            preferencesRepository,
-        )
+        val minefield =
+            minefieldRepository.fromDifficulty(
+                Difficulty.Legend,
+                dimensionRepository,
+                preferencesRepository,
+            )
         assertEquals(legendMinefield, minefield)
     }
 
     @Test
     fun testCustomMinefield() {
         val minefieldRepository = MinefieldRepositoryImpl()
-        val preferencesRepository = mockk<PreferencesRepository>(relaxed = true) {
-            every { customGameMode() } returns Minefield(25, 20, 12)
-        }
+        val preferencesRepository =
+            mockk<PreferencesRepository>(relaxed = true) {
+                every { customGameMode() } returns Minefield(25, 20, 12)
+            }
         val dimensionRepository = mockk<DimensionRepository>(relaxed = true)
 
-        val minefield = minefieldRepository.fromDifficulty(
-            Difficulty.Custom,
-            dimensionRepository,
-            preferencesRepository,
-        )
+        val minefield =
+            minefieldRepository.fromDifficulty(
+                Difficulty.Custom,
+                dimensionRepository,
+                preferencesRepository,
+            )
         assertEquals(Minefield(25, 20, 12), minefield)
     }
 
@@ -194,13 +213,14 @@ class MinefieldRepositoryTest {
         val preferencesRepository = mockk<PreferencesRepository>(relaxed = true) {}
         val dimensionRepository = mockk<DimensionRepository>(relaxed = true)
 
-        val ratios = mapOf(
-            Difficulty.Beginner to 12,
-            Difficulty.Intermediate to 15,
-            Difficulty.Expert to 17,
-            Difficulty.Master to 18,
-            Difficulty.Legend to 20,
-        )
+        val ratios =
+            mapOf(
+                Difficulty.Beginner to 12,
+                Difficulty.Intermediate to 15,
+                Difficulty.Expert to 17,
+                Difficulty.Master to 18,
+                Difficulty.Legend to 20,
+            )
 
         ratios.forEach {
             assertEquals(

@@ -6,15 +6,15 @@ plugins {
 
 android {
     namespace 'dev.lucasnlm.antimine.wear'
-    compileSdk 33
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
         applicationId 'dev.lucasnlm.antimine'
         versionCode 1702040
         versionName '17.2.4 W'
-        minSdkVersion 25
-        targetSdkVersion 33
+        minSdk 25
+        targetSdk 34
+        compileSdk 34
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -47,12 +47,12 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_17
     }
 
     testOptions {
@@ -116,7 +116,7 @@ dependencies {
 
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.10'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
 
     // Tests

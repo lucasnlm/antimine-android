@@ -11,14 +11,14 @@ apply plugin: 'kotlin-kapt'
 
 android {
     namespace 'dev.lucasnlm.antimine'
-    compileSdkVersion 33
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
         versionCode 1702051
         versionName '17.2.5'
-        minSdkVersion 21
-        targetSdkVersion 33
+        minSdk 21
+        targetSdk 34
+        compileSdk 34
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -51,16 +51,17 @@ android {
     }
 
     buildFeatures {
+        buildConfig true
         viewBinding true
     }
 
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     testOptions {
@@ -70,7 +71,7 @@ android {
         }
     }
 
-    flavorDimensions 'version'
+    flavorDimensions = ['version']
     productFlavors {
         google {
             dimension 'version'
@@ -152,7 +153,7 @@ dependencies {
 
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.10'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
 
     // Konfetti

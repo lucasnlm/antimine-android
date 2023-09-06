@@ -22,10 +22,11 @@ class NumberDimmer(
 
     private fun dimIfNumberMatchesFlags(it: Area) {
         val neighbors = it.neighborsIds
-        val shouldDim = neighbors.count {
-            val neighbor = field[it]
-            neighbor.isCovered && neighbor.mark == Mark.Flag
-        } == it.minesAround
+        val shouldDim =
+            neighbors.count {
+                val neighbor = field[it]
+                neighbor.isCovered && neighbor.mark == Mark.Flag
+            } == it.minesAround
         field[it.id] = it.copy(dimNumber = shouldDim)
     }
 

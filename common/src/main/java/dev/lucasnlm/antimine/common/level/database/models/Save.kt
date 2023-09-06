@@ -17,34 +17,25 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 data class Save(
     @PrimaryKey(autoGenerate = true)
     val uid: Int,
-
     @ColumnInfo(name = "seed")
     val seed: Long,
-
     @ColumnInfo(name = "date")
     val startDate: Long,
-
     @ColumnInfo(name = "duration")
     val duration: Long,
-
     @ColumnInfo(name = "minefield")
     val minefield: Minefield,
-
     @ColumnInfo(name = "difficulty")
     val difficulty: Difficulty,
-
     @TypeConverters(FirstOpenConverter::class)
     @ColumnInfo(name = "firstOpen")
     val firstOpen: FirstOpen,
-
     @TypeConverters(SaveStatusConverter::class)
     @ColumnInfo(name = "status")
     val status: SaveStatus,
-
     @TypeConverters(AreaConverter::class)
     @ColumnInfo(name = "field")
     val field: List<Area>,
-
     @ColumnInfo(name = "actions")
     val actions: Int,
 )

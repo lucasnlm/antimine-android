@@ -10,17 +10,7 @@ import dev.lucasnlm.antimine.ui.R
 import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette
-
-interface ThemeRepository {
-    fun getCustomTheme(): AppTheme?
-    fun getSkin(): AppSkin
-    fun getTheme(): AppTheme
-    fun getAllThemes(): List<AppTheme>
-    fun getAllSkins(): List<AppSkin>
-    fun setTheme(themeId: Long)
-    fun setSkin(skinId: Long)
-    fun reset(): AppTheme
-}
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class ThemeRepositoryImpl(
     private val context: Context,
@@ -50,8 +40,7 @@ class ThemeRepositoryImpl(
         return getCustomTheme() ?: getDefaultTheme()
     }
 
-    override fun getAllThemes(): List<AppTheme> =
-        listOf(buildSystemTheme()) + Themes.getAllCustom()
+    override fun getAllThemes(): List<AppTheme> = listOf(buildSystemTheme()) + Themes.getAllCustom()
 
     override fun getAllSkins(): List<AppSkin> {
         return Skins.getAllSkins()
@@ -75,14 +64,15 @@ class ThemeRepositoryImpl(
         return AppTheme(
             id = 0L,
             theme = R.style.AppTheme,
-            palette = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                fromMaterialYou(context)
-            } else {
-                fromDefaultPalette(context)
-            },
-            isPaid = true,
+            palette =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    fromMaterialYou(context)
+                } else {
+                    fromDefaultPalette(context)
+                },
+            isPremium = true,
             isDarkTheme = isDarkTheme(),
-            name = R.string.system,
+            name = i18n.string.system,
         )
     }
 
@@ -94,17 +84,19 @@ class ThemeRepositoryImpl(
     @RequiresApi(Build.VERSION_CODES.S)
     private fun fromMaterialYou(context: Context): AreaPalette {
         val isDarkTheme = isDarkTheme()
-        val background = if (isDarkTheme) {
-            ContextCompat.getColor(context, R.color.background)
-        } else {
-            ContextCompat.getColor(context, android.R.color.background_light)
-        }
+        val background =
+            if (isDarkTheme) {
+                ContextCompat.getColor(context, R.color.background)
+            } else {
+                ContextCompat.getColor(context, android.R.color.background_light)
+            }
 
-        val coveredColor = if (isDarkTheme) {
-            ContextCompat.getColor(context, android.R.color.system_accent1_300)
-        } else {
-            ContextCompat.getColor(context, android.R.color.system_accent1_600)
-        }
+        val coveredColor =
+            if (isDarkTheme) {
+                ContextCompat.getColor(context, android.R.color.system_accent1_300)
+            } else {
+                ContextCompat.getColor(context, android.R.color.system_accent1_600)
+            }
 
         return AreaPalette(
             accent = ContextCompat.getColor(context, android.R.color.system_accent1_500),

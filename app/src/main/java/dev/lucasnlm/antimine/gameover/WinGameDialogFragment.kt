@@ -1,13 +1,14 @@
 package dev.lucasnlm.antimine.gameover
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.WindowManager
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
@@ -15,7 +16,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Analytics
+import dev.lucasnlm.antimine.core.parcelable
 import dev.lucasnlm.antimine.databinding.WinDialogBinding
+import dev.lucasnlm.antimine.gameover.model.CommonDialogState
 import dev.lucasnlm.antimine.gameover.model.GameResult
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
@@ -26,33 +29,37 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class WinGameDialogFragment : CommonGameDialogFragment() {
     private val analyticsManager: AnalyticsManager by inject()
-    private val dialogViewmodel by viewModel<EndGameDialogViewModel>()
+    private val dialogViewModel by viewModel<EndGameDialogViewModel>()
     private val gameViewModel by sharedViewModel<GameViewModel>()
     private val featureFlagManager: FeatureFlagManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.run {
-            dialogViewmodel.sendEvent(
-                EndGameDialogEvent.BuildCustomEndGame(
-                    gameResult = if (getInt(DIALOG_TOTAL_MINES, 0) > 0) {
-                        GameResult.values()[getInt(DIALOG_GAME_RESULT)]
-                    } else {
-                        GameResult.GameOver
-                    },
-                    showContinueButton = getBoolean(DIALOG_SHOW_CONTINUE),
-                    time = getLong(DIALOG_TIME, 0L),
-                    rightMines = getInt(DIALOG_RIGHT_MINES, 0),
-                    totalMines = getInt(DIALOG_TOTAL_MINES, 0),
-                    received = getInt(DIALOG_RECEIVED, -1),
-                    turn = -1,
-                ),
-            )
-        }
+        arguments
+            ?.parcelable<CommonDialogState>(DIALOG_STATE)
+            ?.run {
+                dialogViewModel.sendEvent(
+                    EndGameDialogEvent.BuildCustomEndGame(
+                        gameResult =
+                            if (totalMines > 0) {
+                                gameResult
+                            } else {
+                                GameResult.GameOver
+                            },
+                        showContinueButton = showContinueButton,
+                        time = time,
+                        rightMines = rightMines,
+                        totalMines = totalMines,
+                        received = received,
+                        turn = turn,
+                    ),
+                )
+            }
     }
 
     override fun continueGame() {
@@ -65,10 +72,9 @@ class WinGameDialogFragment : CommonGameDialogFragment() {
     }
 
     override fun canShowMusicBanner(): Boolean {
-        return dialogViewmodel.singleState().showMusicDialog
+        return dialogViewModel.singleState().showMusicDialog
     }
 
-    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context = requireContext()
         return MaterialAlertDialogBuilder(context).apply {
@@ -77,7 +83,7 @@ class WinGameDialogFragment : CommonGameDialogFragment() {
 
             binding.run {
                 lifecycleScope.launch {
-                    dialogViewmodel.observeState().collect { state ->
+                    dialogViewModel.observeState().collect { state ->
                         title.text = state.title
                         subtitle.text = state.message
 
@@ -85,7 +91,7 @@ class WinGameDialogFragment : CommonGameDialogFragment() {
                             setImageResource(state.titleEmoji)
                             setOnClickListener {
                                 analyticsManager.sentEvent(Analytics.ClickEmoji)
-                                dialogViewmodel.sendEvent(
+                                dialogViewModel.sendEvent(
                                     EndGameDialogEvent.ChangeEmoji(state.gameResult, state.titleEmoji),
                                 )
                             }
@@ -142,7 +148,7 @@ class WinGameDialogFragment : CommonGameDialogFragment() {
                             featureFlagManager.isGameOverAdEnabled
                         ) {
                             activity?.let { activity ->
-                                val label = context.getString(R.string.remove_ad)
+                                val label = context.getString(i18n.string.remove_ad)
                                 val price = billingManager.getPrice()?.price
                                 val unlockLabel = price?.let { "$label - $it" } ?: label
                                 removeAds.apply {
@@ -165,7 +171,7 @@ class WinGameDialogFragment : CommonGameDialogFragment() {
                                 isPremiumEnabled
                             ) {
                                 isVisible = true
-                                text = getString(R.string.you_have_received, state.received)
+                                text = getString(i18n.string.you_have_received, state.received)
                             } else {
                                 isVisible = false
                             }
@@ -199,37 +205,20 @@ class WinGameDialogFragment : CommonGameDialogFragment() {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                     addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
-                    attributes?.blurBehindRadius = 8
+                    attributes?.blurBehindRadius = BACKGROUND_BLUR_RADIUS
                 }
             }
         }
     }
 
     companion object {
-        fun newInstance(
-            gameResult: GameResult,
-            showContinueButton: Boolean,
-            rightMines: Int,
-            totalMines: Int,
-            time: Long,
-            received: Int,
-        ) = WinGameDialogFragment().apply {
-            arguments = Bundle().apply {
-                putInt(DIALOG_GAME_RESULT, gameResult.ordinal)
-                putBoolean(DIALOG_SHOW_CONTINUE, showContinueButton)
-                putInt(DIALOG_RIGHT_MINES, rightMines)
-                putInt(DIALOG_TOTAL_MINES, totalMines)
-                putInt(DIALOG_RECEIVED, received)
-                putLong(DIALOG_TIME, time)
+        fun newInstance(commonDialogState: CommonDialogState) =
+            WinGameDialogFragment().apply {
+                arguments =
+                    Bundle().apply {
+                        putParcelable(DIALOG_STATE, commonDialogState)
+                    }
             }
-        }
-
-        const val DIALOG_GAME_RESULT = "dialog_game_result"
-        private const val DIALOG_SHOW_CONTINUE = "dialog_show_continue"
-        private const val DIALOG_TIME = "dialog_time"
-        private const val DIALOG_RIGHT_MINES = "dialog_right_mines"
-        private const val DIALOG_TOTAL_MINES = "dialog_total_mines"
-        private const val DIALOG_RECEIVED = "dialog_received"
 
         val TAG = WinGameDialogFragment::class.simpleName!!
     }

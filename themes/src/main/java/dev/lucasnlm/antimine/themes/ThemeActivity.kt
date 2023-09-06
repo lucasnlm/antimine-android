@@ -24,6 +24,7 @@ import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class ThemeActivity : ThemedActivity() {
     private lateinit var binding: ActivityThemeBinding
@@ -57,7 +58,7 @@ class ThemeActivity : ThemedActivity() {
             binding.unlockAll.bind(
                 theme = usingTheme,
                 invert = true,
-                text = getString(R.string.unlock_all),
+                text = getString(i18n.string.unlock_all),
                 onAction = {
                     lifecycleScope.launch {
                         billingManager.charge(this@ThemeActivity)
@@ -66,12 +67,12 @@ class ThemeActivity : ThemedActivity() {
                 },
             )
 
-            lifecycleScope.launchWhenResumed {
+            lifecycleScope.launch {
                 billingManager.getPriceFlow().collect {
                     binding.unlockAll.bind(
                         theme = usingTheme,
                         invert = true,
-                        text = getString(R.string.unlock_all),
+                        text = getString(i18n.string.unlock_all),
                         price = it.price,
                         showOffer = it.offer,
                         onAction = {
@@ -85,41 +86,53 @@ class ThemeActivity : ThemedActivity() {
             }
         }
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch {
             val size = dimensionRepository.displaySize()
-            val themesColumns = if (size.width > size.height) { 5 } else { 3 }
-            val skinsColumns = if (size.width > size.height) { 2 } else { 5 }
+            val themesColumns =
+                if (size.width > size.height) {
+                    5
+                } else {
+                    3
+                }
+            val skinsColumns =
+                if (size.width > size.height) {
+                    2
+                } else {
+                    5
+                }
 
-            val themeAdapter = ThemeAdapter(
-                themeViewModel = themeViewModel,
-                preferencesRepository = preferencesRepository,
-                onSelectTheme = { theme ->
-                    themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
-                    gameAudioManager.playClickSound()
-                },
-                onRequestPurchase = {
-                    lifecycleScope.launch {
-                        billingManager.charge(this@ThemeActivity)
-                    }
-                    gameAudioManager.playMonetization()
-                },
-            )
+            val themeAdapter =
+                ThemeAdapter(
+                    themeViewModel = themeViewModel,
+                    preferencesRepository = preferencesRepository,
+                    onSelectTheme = { theme ->
+                        themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+                        gameAudioManager.playClickSound()
+                    },
+                    onRequestPurchase = {
+                        lifecycleScope.launch {
+                            billingManager.charge(this@ThemeActivity)
+                        }
+                        gameAudioManager.playMonetization()
+                    },
+                )
 
-            val skinAdapter = SkinAdapter(
-                themeRepository = themeRepository,
-                themeViewModel = themeViewModel,
-                preferencesRepository = preferencesRepository,
-                onSelectSkin = { skin ->
-                    themeViewModel.sendEvent(ThemeEvent.ChangeSkin(skin))
-                    gameAudioManager.playClickSound()
-                },
-                onRequestPurchase = {
-                    lifecycleScope.launch {
-                        billingManager.charge(this@ThemeActivity)
-                    }
-                    gameAudioManager.playMonetization()
-                },
-            )
+            val skinAdapter =
+                SkinAdapter(
+                    themeRepository = themeRepository,
+                    themeViewModel = themeViewModel,
+                    preferencesRepository = preferencesRepository,
+                    onSelectSkin = { skin ->
+                        themeViewModel.sendEvent(ThemeEvent.ChangeSkin(skin))
+                        gameAudioManager.playClickSound()
+                    },
+                    onRequestPurchase = {
+                        lifecycleScope.launch {
+                            billingManager.charge(this@ThemeActivity)
+                        }
+                        gameAudioManager.playMonetization()
+                    },
+                )
 
             binding.themes.apply {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
@@ -131,19 +144,20 @@ class ThemeActivity : ThemedActivity() {
             binding.skins.apply {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
                 setHasFixedSize(true)
-                layoutManager = object : GridLayoutManager(context, skinsColumns) {
-                    override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
-                        val lpSize = width / (skinsColumns + 1)
-                        lp?.height = lpSize
-                        lp?.width = lpSize
-                        return true
+                layoutManager =
+                    object : GridLayoutManager(context, skinsColumns) {
+                        override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
+                            val lpSize = width / (skinsColumns + 1)
+                            lp?.height = lpSize
+                            lp?.width = lpSize
+                            return true
+                        }
                     }
-                }
                 adapter = skinAdapter
             }
 
             if (!preferencesRepository.isPremiumEnabled()) {
-                lifecycleScope.launchWhenResumed {
+                lifecycleScope.launch {
                     billingManager.listenPurchases().collect {
                         if (it is PurchaseInfo.PurchaseResult && it.unlockStatus) {
                             themeAdapter.notifyItemRangeChanged(0, themeAdapter.itemCount)

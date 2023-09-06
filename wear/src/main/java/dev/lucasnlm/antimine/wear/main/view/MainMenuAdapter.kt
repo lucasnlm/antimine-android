@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
-import dev.lucasnlm.antimine.wear.R
 import dev.lucasnlm.antimine.wear.databinding.ViewMenuItemBinding
 import dev.lucasnlm.antimine.wear.main.models.MenuItem
+import com.google.android.material.R as GR
 
 class MainMenuAdapter(
     private val menuItems: List<MenuItem>,
@@ -16,7 +16,10 @@ class MainMenuAdapter(
         setHasStableIds(true)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): RecyclerViewHolder {
         val binding = ViewMenuItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RecyclerViewHolder(binding)
     }
@@ -29,7 +32,10 @@ class MainMenuAdapter(
         return menuItems[position].id
     }
 
-    override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: RecyclerViewHolder,
+        position: Int,
+    ) {
         val menuItem = menuItems[position]
         holder.bind(menuItem)
     }
@@ -45,21 +51,26 @@ class MainMenuAdapter(
                 text = context.getString(menuItem.label)
                 setTypeface(null, Typeface.NORMAL)
                 setIconResource(menuItem.icon)
-                backgroundTintList = if (menuItem.highlight) {
-                    MaterialColors.getColorStateListOrNull(
-                        context,
-                        R.attr.colorPrimaryDark,
-                    )?.withAlpha(50)
-                } else {
-                    MaterialColors.getColorStateListOrNull(
-                        context,
-                        R.attr.colorSurface,
-                    )?.withAlpha(0)
-                }
+                backgroundTintList =
+                    if (menuItem.highlight) {
+                        MaterialColors.getColorStateListOrNull(
+                            context,
+                            GR.attr.colorPrimaryDark,
+                        )?.withAlpha(HIGHLIGHT_ITEM_ALPHA)
+                    } else {
+                        MaterialColors.getColorStateListOrNull(
+                            context,
+                            GR.attr.colorSurface,
+                        )?.withAlpha(0)
+                    }
                 setOnClickListener {
                     menuItem.onClick()
                 }
             }
         }
+    }
+
+    companion object {
+        private const val HIGHLIGHT_ITEM_ALPHA = 50
     }
 }

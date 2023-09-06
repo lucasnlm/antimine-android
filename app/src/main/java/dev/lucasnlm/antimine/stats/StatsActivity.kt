@@ -14,6 +14,7 @@ import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.model.TopBarAction
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import dev.lucasnlm.antimine.i18n.R as i18n
 
 class StatsActivity : ThemedActivity() {
     private val statsViewModel by viewModel<StatsViewModel>()
@@ -29,14 +30,14 @@ class StatsActivity : ThemedActivity() {
             layoutManager = LinearLayoutManager(context)
         }
 
-        lifecycleScope.launchWhenResumed {
+        lifecycleScope.launch {
             statsViewModel.sendEvent(StatsEvent.LoadStats)
 
             statsViewModel.observeState().collect {
                 if (it.stats.isNotEmpty()) {
                     setTopBarAction(
                         TopBarAction(
-                            name = R.string.delete_all,
+                            name = i18n.string.delete_all,
                             icon = R.drawable.delete,
                             action = { confirmAndDelete() },
                         ),
@@ -53,10 +54,10 @@ class StatsActivity : ThemedActivity() {
 
     private fun confirmAndDelete() {
         MaterialAlertDialogBuilder(this)
-            .setTitle(R.string.are_you_sure)
-            .setMessage(R.string.delete_all_message)
-            .setNegativeButton(R.string.cancel, null)
-            .setPositiveButton(R.string.delete_all) { _, _ ->
+            .setTitle(i18n.string.are_you_sure)
+            .setMessage(i18n.string.delete_all_message)
+            .setNegativeButton(i18n.string.cancel, null)
+            .setPositiveButton(i18n.string.delete_all) { _, _ ->
                 lifecycleScope.launch {
                     statsViewModel.sendEvent(StatsEvent.DeleteStats)
                 }

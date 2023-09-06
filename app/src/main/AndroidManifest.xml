@@ -26,6 +26,10 @@
         android:name="android.hardware.faketouch"
         android:required="false" />
 
+    <uses-feature
+        android:name="android.hardware.type.automotive"
+        android:required="false" />
+
     <dist:module dist:instant="true" />
 
     <application
@@ -113,6 +117,9 @@
         <activity
             android:name="dev.lucasnlm.antimine.preferences.PreferencesActivity"
             android:label="@string/settings" />
+
+        <meta-data android:name="com.android.automotive"
+            android:resource="@xml/automotive_app_desc"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

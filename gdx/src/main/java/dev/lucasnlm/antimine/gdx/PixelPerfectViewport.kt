@@ -4,7 +4,11 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import kotlin.math.floor
 
 class PixelPerfectViewport(worldWidth: Float, worldHeight: Float) : FitViewport(worldWidth, worldHeight) {
-    override fun update(screenWidth: Int, screenHeight: Int, centerCamera: Boolean) {
+    override fun update(
+        screenWidth: Int,
+        screenHeight: Int,
+        centerCamera: Boolean,
+    ) {
         val wRate = screenWidth / worldWidth
         val hRate = screenHeight / worldHeight
         val rate = wRate.coerceAtMost(hRate)

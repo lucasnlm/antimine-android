@@ -53,11 +53,12 @@ class GameController {
         val creationSeed = minefield.seed ?: seed
         val shouldUseSimonTatham = useSimonTatham
         this.fallbackCreator = MinefieldCreatorImpl(minefield, creationSeed)
-        this.minefieldCreator = if (shouldUseSimonTatham) {
-            MinefieldCreatorNativeImpl(minefield, creationSeed)
-        } else {
-            fallbackCreator
-        }
+        this.minefieldCreator =
+            if (shouldUseSimonTatham) {
+                MinefieldCreatorNativeImpl(minefield, creationSeed)
+            } else {
+                fallbackCreator
+            }
         this.minefield = minefield
         this.seed = seed
         this.saveId = saveId ?: 0
@@ -78,11 +79,12 @@ class GameController {
         this.field = save.field
         this.actions = save.actions
         this.fallbackCreator = MinefieldCreatorImpl(minefield, seed)
-        this.minefieldCreator = if (useSimonTatham) {
-            MinefieldCreatorNativeImpl(minefield, seed)
-        } else {
-            fallbackCreator
-        }
+        this.minefieldCreator =
+            if (useSimonTatham) {
+                MinefieldCreatorNativeImpl(minefield, seed)
+            } else {
+                fallbackCreator
+            }
     }
 
     fun field() = field
@@ -108,11 +110,12 @@ class GameController {
                 withTimeout(MAX_CREATION_TIME_MS) {
                     field = minefieldCreator.create(safeId)
                     val fieldCopy = field.map { it.copy() }.toMutableList()
-                    val minefieldHandler = MinefieldHandler(
-                        field = fieldCopy,
-                        useQuestionMark = false,
-                        individualActions = useIndividualActions(),
-                    )
+                    val minefieldHandler =
+                        MinefieldHandler(
+                            field = fieldCopy,
+                            useQuestionMark = false,
+                            individualActions = useIndividualActions(),
+                        )
                     minefieldHandler.openAt(safeId, false)
                 }
             } catch (ignored: Exception) {
@@ -120,11 +123,12 @@ class GameController {
                     var solvable: Boolean
                     field = fallbackCreator.create(safeId)
                     val fieldCopy = field.map { it.copy() }.toMutableList()
-                    val minefieldHandler = MinefieldHandler(
-                        field = fieldCopy,
-                        useQuestionMark = false,
-                        individualActions = useIndividualActions(),
-                    )
+                    val minefieldHandler =
+                        MinefieldHandler(
+                            field = fieldCopy,
+                            useQuestionMark = false,
+                            individualActions = useIndividualActions(),
+                        )
                     minefieldHandler.openAt(safeId, false)
                     solvable = solver.trySolve(minefieldHandler.result().toMutableList())
                     noGuessTestedLevel = solvable
@@ -139,7 +143,10 @@ class GameController {
         }
     }
 
-    private suspend fun handleAction(target: Area, action: Action?) {
+    private suspend fun handleAction(
+        target: Area,
+        action: Action?,
+    ) {
         if (creatingMinefield) {
             // Ignore because the game is not ready for any action.
             return
@@ -151,11 +158,12 @@ class GameController {
         if (mustPlantMines) {
             val created = plantMinesExcept(target.id)
             if (created) {
-                minefieldHandler = MinefieldHandler(
-                    field = field.toMutableList(),
-                    useQuestionMark = useQuestionMark,
-                    individualActions = useIndividualActions(),
-                )
+                minefieldHandler =
+                    MinefieldHandler(
+                        field = field.toMutableList(),
+                        useQuestionMark = useQuestionMark,
+                        individualActions = useIndividualActions(),
+                    )
                 minefieldHandler.openAt(target.id, false)
 
                 if (!noGuessTestedLevel) {
@@ -163,11 +171,12 @@ class GameController {
                 }
             }
         } else {
-            minefieldHandler = MinefieldHandler(
-                field = field.toMutableList(),
-                useQuestionMark = useQuestionMark,
-                individualActions = useIndividualActions(),
-            )
+            minefieldHandler =
+                MinefieldHandler(
+                    field = field.toMutableList(),
+                    useQuestionMark = useQuestionMark,
+                    individualActions = useIndividualActions(),
+                )
 
             when (action) {
                 Action.OpenTile -> {
@@ -241,53 +250,16 @@ class GameController {
         }
     }
 
-    fun singleClick(index: Int): Flow<ActionCompleted> = flow {
-        if (!creatingMinefield) {
-            getArea(index)?.let { target ->
-                val action = if (target.isCovered) {
-                    gameControl.onCovered.singleClick
-                } else {
-                    gameControl.onUncovered.singleClick
-                }
-                action?.let {
-                    val initActions = actions
-                    handleAction(target, action)
-                    emit(
-                        ActionCompleted(action, actions - initActions),
-                    )
-                }
-            }
-        }
-    }
-
-    fun doubleClick(index: Int): Flow<ActionCompleted> = flow {
-        if (!creatingMinefield) {
-            getArea(index)?.let { target ->
-                val action = if (target.isCovered) {
-                    gameControl.onCovered.doubleClick
-                } else {
-                    gameControl.onUncovered.doubleClick
-                }
-                action?.let {
-                    val initActions = actions
-                    handleAction(target, action)
-                    emit(
-                        ActionCompleted(action, actions - initActions),
-                    )
-                }
-            }
-        }
-    }
-
-    fun longPress(index: Int): Flow<ActionCompleted> = flow {
-        if (!creatingMinefield) {
-            getArea(index)?.let { target ->
-                if (target.isCovered || target.minesAround != 0) {
-                    val action = if (target.isCovered) {
-                        gameControl.onCovered.longPress
-                    } else {
-                        gameControl.onUncovered.longPress
-                    }
+    fun singleClick(index: Int): Flow<ActionCompleted> =
+        flow {
+            if (!creatingMinefield) {
+                getArea(index)?.let { target ->
+                    val action =
+                        if (target.isCovered) {
+                            gameControl.onCovered.singleClick
+                        } else {
+                            gameControl.onUncovered.singleClick
+                        }
                     action?.let {
                         val initActions = actions
                         handleAction(target, action)
@@ -298,47 +270,95 @@ class GameController {
                 }
             }
         }
-    }
+
+    fun doubleClick(index: Int): Flow<ActionCompleted> =
+        flow {
+            if (!creatingMinefield) {
+                getArea(index)?.let { target ->
+                    val action =
+                        if (target.isCovered) {
+                            gameControl.onCovered.doubleClick
+                        } else {
+                            gameControl.onUncovered.doubleClick
+                        }
+                    action?.let {
+                        val initActions = actions
+                        handleAction(target, action)
+                        emit(
+                            ActionCompleted(action, actions - initActions),
+                        )
+                    }
+                }
+            }
+        }
+
+    fun longPress(index: Int): Flow<ActionCompleted> =
+        flow {
+            if (!creatingMinefield) {
+                getArea(index)?.let { target ->
+                    if (target.isCovered || target.minesAround != 0) {
+                        val action =
+                            if (target.isCovered) {
+                                gameControl.onCovered.longPress
+                            } else {
+                                gameControl.onUncovered.longPress
+                            }
+                        action?.let {
+                            val initActions = actions
+                            handleAction(target, action)
+                            emit(
+                                ActionCompleted(action, actions - initActions),
+                            )
+                        }
+                    }
+                }
+            }
+        }
 
     fun runFlagAssistant() {
-        field = FlagAssistant(field.toMutableList()).run {
-            runFlagAssistant()
-            result()
-        }
+        field =
+            FlagAssistant(field.toMutableList()).run {
+                runFlagAssistant()
+                result()
+            }
     }
 
     fun runNumberDimmer() {
-        field = NumberDimmer(field.toMutableList()).run {
-            runDimmer()
-            result()
-        }
+        field =
+            NumberDimmer(field.toMutableList()).run {
+                runDimmer()
+                result()
+            }
     }
 
     fun runNumberDimmerToAllMines() {
-        field = NumberDimmer(field.toMutableList()).run {
-            runDimmerAll()
-            result()
-        }
+        field =
+            NumberDimmer(field.toMutableList()).run {
+                runDimmerAll()
+                result()
+            }
     }
 
-    fun getScore() = Score(
-        mines().count { !it.mistake },
-        getMinesCount(),
-        field.count(),
-    )
+    fun getScore() =
+        Score(
+            mines().count { !it.mistake },
+            getMinesCount(),
+            field.count(),
+        )
 
     fun getMinesCount() = mines().count()
 
     fun showAllMistakes() {
-        field = MinefieldHandler(
-            field = field.toMutableList(),
-            useQuestionMark = false,
-            individualActions = useIndividualActions(),
-        ).run {
-            showAllMines()
-            showAllWrongFlags()
-            result()
-        }
+        field =
+            MinefieldHandler(
+                field = field.toMutableList(),
+                useQuestionMark = false,
+                individualActions = useIndividualActions(),
+            ).run {
+                showAllMines()
+                showAllWrongFlags()
+                result()
+            }
     }
 
     fun findExplodedMine() = mines().firstOrNull { it.mistake }
@@ -351,47 +371,51 @@ class GameController {
         }
 
     fun flagAllMines() {
-        field = MinefieldHandler(
-            field = field.toMutableList(),
-            useQuestionMark = false,
-            individualActions = useIndividualActions(),
-        ).run {
-            flagAllMines()
-            result()
-        }
+        field =
+            MinefieldHandler(
+                field = field.toMutableList(),
+                useQuestionMark = false,
+                individualActions = useIndividualActions(),
+            ).run {
+                flagAllMines()
+                result()
+            }
     }
 
     fun showWrongFlags() {
-        field = field.map {
-            if (!it.hasMine && it.mark.isFlag()) {
-                it.copy(mistake = true)
-            } else {
-                it
+        field =
+            field.map {
+                if (!it.hasMine && it.mark.isFlag()) {
+                    it.copy(mistake = true)
+                } else {
+                    it
+                }
             }
-        }
     }
 
     fun revealAllEmptyAreas() {
-        field = MinefieldHandler(
-            field = field.toMutableList(),
-            useQuestionMark = false,
-            individualActions = useIndividualActions(),
-        ).run {
-            revealAllEmptyAreas()
-            result()
-        }
+        field =
+            MinefieldHandler(
+                field = field.toMutableList(),
+                useQuestionMark = false,
+                individualActions = useIndividualActions(),
+            ).run {
+                revealAllEmptyAreas()
+                result()
+            }
     }
 
     fun revealRandomMine(): Int? {
         val resultId: Int?
-        field = MinefieldHandler(
-            field = field.toMutableList(),
-            useQuestionMark = false,
-            individualActions = useIndividualActions(),
-        ).run {
-            resultId = revealRandomMineNearUncoveredArea(lastIdInteractionX, lastIdInteractionY)
-            result()
-        }
+        field =
+            MinefieldHandler(
+                field = field.toMutableList(),
+                useQuestionMark = false,
+                individualActions = useIndividualActions(),
+            ).run {
+                resultId = revealRandomMineNearUncoveredArea(lastIdInteractionX, lastIdInteractionY)
+                result()
+            }
         return resultId
     }
 
@@ -407,11 +431,9 @@ class GameController {
 
     fun rightFlags() = mines().count { it.mark.isFlag() }
 
-    fun isVictory(): Boolean =
-        hasMines() && hasIsolatedAllMines() && !hasAnyMineExploded()
+    fun isVictory(): Boolean = hasMines() && hasIsolatedAllMines() && !hasAnyMineExploded()
 
-    fun isGameOver(): Boolean =
-        hasIsolatedAllMines() || (explodedMinesCount() > errorTolerance)
+    fun isGameOver(): Boolean = hasIsolatedAllMines() || (explodedMinesCount() > errorTolerance)
 
     fun allMinesFound(): Boolean {
         return mines().count { !it.isCovered || it.mark.isNotNone() } == mines().count()
@@ -424,12 +446,16 @@ class GameController {
         return (minesCount - flagsCount - openMinesCount)
     }
 
-    fun getSaveState(duration: Long, difficulty: Difficulty): Save {
-        val saveStatus: SaveStatus = when {
-            isVictory() -> SaveStatus.VICTORY
-            isGameOver() -> SaveStatus.DEFEAT
-            else -> SaveStatus.ON_GOING
-        }
+    fun getSaveState(
+        duration: Long,
+        difficulty: Difficulty,
+    ): Save {
+        val saveStatus: SaveStatus =
+            when {
+                isVictory() -> SaveStatus.VICTORY
+                isGameOver() -> SaveStatus.DEFEAT
+                else -> SaveStatus.ON_GOING
+            }
         return Save(
             saveId,
             seed = seed,
@@ -460,11 +486,12 @@ class GameController {
     }
 
     fun dismissMistake() {
-        val minefieldHandler = MinefieldHandler(
-            field = field.toMutableList(),
-            useQuestionMark = useQuestionMark,
-            individualActions = useIndividualActions(),
-        )
+        val minefieldHandler =
+            MinefieldHandler(
+                field = field.toMutableList(),
+                useQuestionMark = useQuestionMark,
+                individualActions = useIndividualActions(),
+            )
         minefieldHandler.dismissMistake()
         field = minefieldHandler.result()
     }
@@ -476,11 +503,12 @@ class GameController {
     }
 
     fun getStats(duration: Long): Stats? {
-        val gameStatus: SaveStatus = when {
-            isVictory() -> SaveStatus.VICTORY
-            isGameOver() -> SaveStatus.DEFEAT
-            else -> SaveStatus.ON_GOING
-        }
+        val gameStatus: SaveStatus =
+            when {
+                isVictory() -> SaveStatus.VICTORY
+                isGameOver() -> SaveStatus.DEFEAT
+                else -> SaveStatus.ON_GOING
+            }
         return if (gameStatus == SaveStatus.ON_GOING) {
             null
         } else {

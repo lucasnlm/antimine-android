@@ -12,21 +12,29 @@ import dev.lucasnlm.antimine.databinding.FragmentHistoryBinding
 import dev.lucasnlm.antimine.history.viewmodel.HistoryEvent
 import dev.lucasnlm.antimine.history.viewmodel.HistoryViewModel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryFragment : Fragment() {
     private lateinit var binding: FragmentHistoryBinding
     private val historyViewModel by viewModel<HistoryViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launch {
             historyViewModel.sendEvent(HistoryEvent.LoadAllSaves)
 
             historyViewModel.observeState().collect {

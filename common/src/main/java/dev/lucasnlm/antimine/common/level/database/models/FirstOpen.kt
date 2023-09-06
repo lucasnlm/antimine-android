@@ -21,13 +21,15 @@ sealed class FirstOpen {
         val value: Int,
     ) : FirstOpen()
 
-    override fun toString(): String = when (this) {
-        is Position -> value.toString()
-        else -> "Unknown"
-    }
+    override fun toString(): String =
+        when (this) {
+            is Position -> value.toString()
+            else -> "Unknown"
+        }
 
-    fun toInt(): Int = when (this) {
-        is Position -> value
-        else -> -1
-    }
+    fun toInt(): Int =
+        when (this) {
+            is Position -> value
+            else -> -1
+        }
 }
