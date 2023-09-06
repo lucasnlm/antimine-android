@@ -102,7 +102,9 @@ class GameActivity :
 
     private fun Int.toL10nString() = String.format("%d", this)
 
-    private fun showGameWarning(@StringRes text: Int) {
+    private fun showGameWarning(
+        @StringRes text: Int,
+    ) {
         val isSwitchAndOpen = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
         warning?.dismiss()
         warning = showWarning(text, isSwitchAndOpen)
@@ -183,7 +185,11 @@ class GameActivity :
         }
     }
 
-    private fun startCountAnimation(from: Int, to: Int, updateMineCount: (Int) -> Unit) {
+    private fun startCountAnimation(
+        from: Int,
+        to: Int,
+        updateMineCount: (Int) -> Unit,
+    ) {
         ValueAnimator.ofInt(from, to).apply {
             duration = MINE_COUNTER_ANIM_COUNTER_MS
             addUpdateListener { animation ->
@@ -192,244 +198,247 @@ class GameActivity :
         }.start()
     }
 
-    private fun bindViewModel() = gameViewModel.apply {
-        lifecycleScope.launch {
-            observeState().collect {
-                if (it.isNewGame) {
-                    warning?.dismiss()
-                    warning = null
+    private fun bindViewModel() =
+        gameViewModel.apply {
+            lifecycleScope.launch {
+                observeState().collect {
+                    if (it.isNewGame) {
+                        warning?.dismiss()
+                        warning = null
 
-                    withContext(Dispatchers.Main) {
-                        stopKonfettiView()
-                    }
-
-                    val color = usingTheme.palette.covered.toAndroidColor(168)
-                    val tint = ColorStateList.valueOf(color)
-
-                    binding.tapToBegin.apply {
-                        text = when {
-                            it.isCreatingGame -> {
-                                getString(i18n.string.creating_valid_game)
-                            }
-                            it.isLoadingMap -> {
-                                getString(i18n.string.loading)
-                            }
-                            else -> {
-                                getString(i18n.string.tap_to_begin)
-                            }
+                        withContext(Dispatchers.Main) {
+                            stopKonfettiView()
                         }
-                        isVisible = true
-                        backgroundTintList = tint
-                    }
-                } else {
-                    binding.tapToBegin.isVisible = false
-                }
 
-                if (it.isGameStarted && it.isActive) {
-                    gameAudioManager.playMusic()
-                }
+                        val color = usingTheme.palette.covered.toAndroidColor(168)
+                        val tint = ColorStateList.valueOf(color)
 
-                if (it.isCreatingGame) {
-                    launch {
-                        // Show loading indicator only when it takes more than:
-                        delay(LOADING_INDICATOR_MS)
-                        if (singleState().isCreatingGame) {
-                            binding.loadingGame.show()
-                        }
-                    }
-                } else if (binding.loadingGame.isVisible) {
-                    binding.loadingGame.hide()
-                }
-
-                if (it.shouldShowControls) {
-                    val color = usingTheme.palette.covered.toAndroidColor(168)
-                    val tint = ColorStateList.valueOf(color)
-                    val controlText = gameViewModel.getControlDescription(applicationContext)
-
-                    if (!controlText.isNullOrBlank()) {
-                        binding.controlsToast.apply {
+                        binding.tapToBegin.apply {
+                            text =
+                                when {
+                                    it.isCreatingGame -> {
+                                        getString(i18n.string.creating_valid_game)
+                                    }
+                                    it.isLoadingMap -> {
+                                        getString(i18n.string.loading)
+                                    }
+                                    else -> {
+                                        getString(i18n.string.tap_to_begin)
+                                    }
+                                }
                             isVisible = true
                             backgroundTintList = tint
-                            text = controlText
+                        }
+                    } else {
+                        binding.tapToBegin.isVisible = false
+                    }
 
-                            setOnClickListener {
-                                val intent = Intent(this@GameActivity, ControlActivity::class.java)
-                                startActivity(intent)
-                                finish()
+                    if (it.isGameStarted && it.isActive) {
+                        gameAudioManager.playMusic()
+                    }
+
+                    if (it.isCreatingGame) {
+                        launch {
+                            // Show loading indicator only when it takes more than:
+                            delay(LOADING_INDICATOR_MS)
+                            if (singleState().isCreatingGame) {
+                                binding.loadingGame.show()
                             }
+                        }
+                    } else if (binding.loadingGame.isVisible) {
+                        binding.loadingGame.hide()
+                    }
+
+                    if (it.shouldShowControls) {
+                        val color = usingTheme.palette.covered.toAndroidColor(168)
+                        val tint = ColorStateList.valueOf(color)
+                        val controlText = gameViewModel.getControlDescription(applicationContext)
+
+                        if (!controlText.isNullOrBlank()) {
+                            binding.controlsToast.apply {
+                                isVisible = true
+                                backgroundTintList = tint
+                                text = controlText
+
+                                setOnClickListener {
+                                    val intent = Intent(this@GameActivity, ControlActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            }
+                        } else {
+                            binding.controlsToast.isVisible = false
                         }
                     } else {
                         binding.controlsToast.isVisible = false
                     }
-                } else {
-                    binding.controlsToast.isVisible = false
-                }
 
-                binding.timer.apply {
-                    isVisible = preferencesRepository.showTimer() && it.duration != 0L
-                    text = DateUtils.formatElapsedTime(it.duration)
-                }
+                    binding.timer.apply {
+                        isVisible = preferencesRepository.showTimer() && it.duration != 0L
+                        text = DateUtils.formatElapsedTime(it.duration)
+                    }
 
-                binding.minesCount.apply {
-                    val currentMineCount = it.mineCount
-                    if (currentMineCount != null) {
-                        val oldValue = text.toString().toIntOrNull()
-                        if (oldValue != null) {
-                            if (currentMineCount < 0) {
-                                if (oldValue > currentMineCount) {
-                                    startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+                    binding.minesCount.apply {
+                        val currentMineCount = it.mineCount
+                        if (currentMineCount != null) {
+                            val oldValue = text.toString().toIntOrNull()
+                            if (oldValue != null) {
+                                if (currentMineCount < 0) {
+                                    if (oldValue > currentMineCount) {
+                                        startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+                                    }
                                 }
+
+                                startCountAnimation(oldValue, currentMineCount) { animateIt ->
+                                    text = animateIt.toL10nString()
+                                }
+                            } else {
+                                text = currentMineCount.toL10nString()
                             }
 
-                            startCountAnimation(oldValue, currentMineCount) { animateIt ->
-                                text = animateIt.toL10nString()
-                            }
+                            isVisible = true
                         } else {
-                            text = currentMineCount.toL10nString()
+                            isVisible = false
                         }
+                    }
 
-                        isVisible = true
+                    binding.hintCounter.text = it.hints.toL10nString()
+
+                    if (!it.isGameCompleted && it.isActive && it.useHelp) {
+                        refreshTipShortcutIcon()
                     } else {
-                        isVisible = false
+                        refreshRetryShortcut(it.hasMines)
                     }
+
+                    keepScreenOn(it.isActive)
                 }
-
-                binding.hintCounter.text = it.hints.toL10nString()
-
-                if (!it.isGameCompleted && it.isActive && it.useHelp) {
-                    refreshTipShortcutIcon()
-                } else {
-                    refreshRetryShortcut(it.hasMines)
-                }
-
-                keepScreenOn(it.isActive)
             }
-        }
 
-        lifecycleScope.launch {
-            gameViewModel.observeSideEffects().collect {
-                when (it) {
-                    is GameEvent.ShowNoGuessFailWarning -> {
-                        warning = showWarning(i18n.string.no_guess_fail_warning).apply {
-                            setAction(i18n.string.ok) {
-                                warning?.dismiss()
-                            }
-                            show()
+            lifecycleScope.launch {
+                gameViewModel.observeSideEffects().collect {
+                    when (it) {
+                        is GameEvent.ShowNoGuessFailWarning -> {
+                            warning =
+                                showWarning(i18n.string.no_guess_fail_warning).apply {
+                                    setAction(i18n.string.ok) {
+                                        warning?.dismiss()
+                                    }
+                                    show()
+                                }
                         }
-                    }
-                    is GameEvent.ShowNewGameDialog -> {
-                        lifecycleScope.launch {
-                            GameOverDialogFragment.newInstance(
-                                CommonDialogState(
-                                    gameResult = GameResult.Completed,
-                                    showContinueButton = gameViewModel.hasUnknownMines(),
-                                    rightMines = 0,
-                                    totalMines = 0,
-                                    time = singleState().duration,
-                                    received = 0,
-                                    turn = -1,
-                                ),
-                            ).run {
-                                showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
-                            }
-                        }
-                    }
-                    is GameEvent.VictoryDialog -> {
-                        if (preferencesRepository.showWindowsWhenFinishGame()) {
-                            withContext(Dispatchers.Main) {
-                                showKonfettiView()
-                            }
-
+                        is GameEvent.ShowNewGameDialog -> {
                             lifecycleScope.launch {
-                                delay(it.delayToShow)
-
-                                gameAudioManager.pauseMusic()
-
-                                WinGameDialogFragment.newInstance(
+                                GameOverDialogFragment.newInstance(
                                     CommonDialogState(
-                                        gameResult = GameResult.Victory,
-                                        showContinueButton = false,
-                                        rightMines = it.rightMines,
-                                        totalMines = it.totalMines,
-                                        time = it.timestamp,
-                                        received = it.receivedTips,
+                                        gameResult = GameResult.Completed,
+                                        showContinueButton = gameViewModel.hasUnknownMines(),
+                                        rightMines = 0,
+                                        totalMines = 0,
+                                        time = singleState().duration,
+                                        received = 0,
                                         turn = -1,
                                     ),
                                 ).run {
                                     showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
+                                }
+                            }
+                        }
+                        is GameEvent.VictoryDialog -> {
+                            if (preferencesRepository.showWindowsWhenFinishGame()) {
+                                withContext(Dispatchers.Main) {
+                                    showKonfettiView()
+                                }
 
-                                    dialog?.setOnDismissListener {
-                                        if (!isFinishing) {
-                                            reviewWrapper.startInAppReview(this@GameActivity)
+                                lifecycleScope.launch {
+                                    delay(it.delayToShow)
+
+                                    gameAudioManager.pauseMusic()
+
+                                    WinGameDialogFragment.newInstance(
+                                        CommonDialogState(
+                                            gameResult = GameResult.Victory,
+                                            showContinueButton = false,
+                                            rightMines = it.rightMines,
+                                            totalMines = it.totalMines,
+                                            time = it.timestamp,
+                                            received = it.receivedTips,
+                                            turn = -1,
+                                        ),
+                                    ).run {
+                                        showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
+
+                                        dialog?.setOnDismissListener {
+                                            if (!isFinishing) {
+                                                reviewWrapper.startInAppReview(this@GameActivity)
+                                            }
                                         }
                                     }
                                 }
-                            }
-                        } else {
-                            withContext(Dispatchers.Main) {
-                                showKonfettiView()
-                            }
-                            gameAudioManager.pauseMusic()
-                            showEndGameToast(GameResult.Victory)
-                        }
-                    }
-                    is GameEvent.GameOverDialog -> {
-                        if (preferencesRepository.showWindowsWhenFinishGame()) {
-                            lifecycleScope.launch {
-                                delay(it.delayToShow)
-                                GameOverDialogFragment.newInstance(
-                                    CommonDialogState(
-                                        gameResult = GameResult.GameOver,
-                                        showContinueButton = gameViewModel.hasUnknownMines(),
-                                        rightMines = it.rightMines,
-                                        totalMines = it.totalMines,
-                                        time = it.timestamp,
-                                        received = it.receivedTips,
-                                        turn = it.turn,
-                                    ),
-                                ).run {
-                                    showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
+                            } else {
+                                withContext(Dispatchers.Main) {
+                                    showKonfettiView()
                                 }
+                                gameAudioManager.pauseMusic()
+                                showEndGameToast(GameResult.Victory)
                             }
-                        } else {
-                            showEndGameToast(GameResult.GameOver)
                         }
-                    }
-                    is GameEvent.GameCompleteDialog -> {
-                        if (preferencesRepository.showWindowsWhenFinishGame()) {
-                            lifecycleScope.launch {
-                                delay(it.delayToShow)
-                                GameOverDialogFragment.newInstance(
-                                    CommonDialogState(
-                                        gameResult = GameResult.Completed,
-                                        showContinueButton = false,
-                                        rightMines = it.rightMines,
-                                        totalMines = it.totalMines,
-                                        time = it.timestamp,
-                                        received = it.receivedTips,
-                                        turn = it.turn,
-                                    ),
-                                ).run {
-                                    showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
+                        is GameEvent.GameOverDialog -> {
+                            if (preferencesRepository.showWindowsWhenFinishGame()) {
+                                lifecycleScope.launch {
+                                    delay(it.delayToShow)
+                                    GameOverDialogFragment.newInstance(
+                                        CommonDialogState(
+                                            gameResult = GameResult.GameOver,
+                                            showContinueButton = gameViewModel.hasUnknownMines(),
+                                            rightMines = it.rightMines,
+                                            totalMines = it.totalMines,
+                                            time = it.timestamp,
+                                            received = it.receivedTips,
+                                            turn = it.turn,
+                                        ),
+                                    ).run {
+                                        showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
+                                    }
+                                }
+                            } else {
+                                showEndGameToast(GameResult.GameOver)
+                            }
+                        }
+                        is GameEvent.GameCompleteDialog -> {
+                            if (preferencesRepository.showWindowsWhenFinishGame()) {
+                                lifecycleScope.launch {
+                                    delay(it.delayToShow)
+                                    GameOverDialogFragment.newInstance(
+                                        CommonDialogState(
+                                            gameResult = GameResult.Completed,
+                                            showContinueButton = false,
+                                            rightMines = it.rightMines,
+                                            totalMines = it.totalMines,
+                                            time = it.timestamp,
+                                            received = it.receivedTips,
+                                            turn = it.turn,
+                                        ),
+                                    ).run {
+                                        showAllowingStateLoss(supportFragmentManager, WinGameDialogFragment.TAG)
 
-                                    dialog?.setOnDismissListener {
-                                        if (!isFinishing) {
-                                            reviewWrapper.startInAppReview(this@GameActivity)
+                                        dialog?.setOnDismissListener {
+                                            if (!isFinishing) {
+                                                reviewWrapper.startInAppReview(this@GameActivity)
+                                            }
                                         }
                                     }
                                 }
+                            } else {
+                                showEndGameToast(GameResult.Completed)
                             }
-                        } else {
-                            showEndGameToast(GameResult.Completed)
                         }
-                    }
-                    else -> {
-                        // Empty
+                        else -> {
+                            // Empty
+                        }
                     }
                 }
             }
         }
-    }
 
     override fun onResume() {
         super.onResume()
@@ -526,11 +535,12 @@ class GameActivity :
 
         binding.hintCounter.apply {
             isVisible = canUseHelpNow
-            text = if (canRequestHelpWithAds) {
-                "+5"
-            } else {
-                gameViewModel.getTips().toL10nString()
-            }
+            text =
+                if (canRequestHelpWithAds) {
+                    "+5"
+                } else {
+                    gameViewModel.getTips().toL10nString()
+                }
         }
 
         binding.shortcutIcon.apply {
@@ -775,9 +785,10 @@ class GameActivity :
     private suspend fun loadGameFragment() {
         supportFragmentManager.apply {
             if (findFragmentByTag(GameRenderFragment.TAG) == null) {
-                val fragment = withContext(Dispatchers.IO) {
-                    GameRenderFragment()
-                }
+                val fragment =
+                    withContext(Dispatchers.IO) {
+                        GameRenderFragment()
+                    }
 
                 withContext(Dispatchers.Main) {
                     beginTransaction().apply {
@@ -806,22 +817,24 @@ class GameActivity :
     private fun showEndGameToast(gameResult: GameResult) {
         warning?.dismiss()
 
-        val message = when (gameResult) {
-            GameResult.GameOver -> i18n.string.you_lost
-            GameResult.Victory -> i18n.string.you_won
-            GameResult.Completed -> i18n.string.you_finished
-        }
-
-        warning = Snackbar.make(
-            binding.root,
-            message,
-            Snackbar.LENGTH_LONG,
-        ).apply {
-            if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
-                view.translationY = -dpToPx(TOAST_OFFSET_Y_DP).toFloat()
+        val message =
+            when (gameResult) {
+                GameResult.GameOver -> i18n.string.you_lost
+                GameResult.Victory -> i18n.string.you_won
+                GameResult.Completed -> i18n.string.you_finished
             }
-            show()
-        }
+
+        warning =
+            Snackbar.make(
+                binding.root,
+                message,
+                Snackbar.LENGTH_LONG,
+            ).apply {
+                if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
+                    view.translationY = -dpToPx(TOAST_OFFSET_Y_DP).toFloat()
+                }
+                show()
+            }
     }
 
     private fun keepScreenOn(enabled: Boolean) {

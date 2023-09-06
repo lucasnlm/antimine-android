@@ -79,11 +79,12 @@ class MainActivity : ThemedActivity() {
 
         setContentView(binding.root)
 
-        googlePlayLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                handlePlayGames(result.data)
+        googlePlayLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    handlePlayGames(result.data)
+                }
             }
-        }
 
         bindMenuButtons()
 
@@ -311,29 +312,32 @@ class MainActivity : ThemedActivity() {
         val idLow = difficulty.id.lowercase()
         val deeplink = Uri.parse("app://antimine/game?difficulty=$idLow")
 
-        val name = when (difficulty) {
-            Difficulty.Beginner -> i18n.string.beginner
-            Difficulty.Intermediate -> i18n.string.intermediate
-            Difficulty.Expert -> i18n.string.expert
-            Difficulty.Master -> i18n.string.master
-            Difficulty.Legend -> i18n.string.legend
-            else -> return
-        }
+        val name =
+            when (difficulty) {
+                Difficulty.Beginner -> i18n.string.beginner
+                Difficulty.Intermediate -> i18n.string.intermediate
+                Difficulty.Expert -> i18n.string.expert
+                Difficulty.Master -> i18n.string.master
+                Difficulty.Legend -> i18n.string.legend
+                else -> return
+            }
 
-        val icon = when (difficulty) {
-            Difficulty.Beginner -> CR.mipmap.shortcut_one
-            Difficulty.Intermediate -> CR.mipmap.shortcut_two
-            Difficulty.Expert -> CR.mipmap.shortcut_three
-            Difficulty.Master -> CR.mipmap.shortcut_four
-            Difficulty.Legend -> CR.mipmap.shortcut_four
-            else -> return
-        }
+        val icon =
+            when (difficulty) {
+                Difficulty.Beginner -> CR.mipmap.shortcut_one
+                Difficulty.Intermediate -> CR.mipmap.shortcut_two
+                Difficulty.Expert -> CR.mipmap.shortcut_three
+                Difficulty.Master -> CR.mipmap.shortcut_four
+                Difficulty.Legend -> CR.mipmap.shortcut_four
+                else -> return
+            }
 
-        val shortcut = ShortcutInfoCompat.Builder(applicationContext, difficulty.id)
-            .setShortLabel(getString(name))
-            .setIcon(IconCompat.createWithResource(applicationContext, icon))
-            .setIntent(Intent(Intent.ACTION_VIEW, deeplink))
-            .build()
+        val shortcut =
+            ShortcutInfoCompat.Builder(applicationContext, difficulty.id)
+                .setShortLabel(getString(name))
+                .setIcon(IconCompat.createWithResource(applicationContext, icon))
+                .setIntent(Intent(Intent.ACTION_VIEW, deeplink))
+                .build()
 
         ShortcutManagerCompat.pushDynamicShortcut(applicationContext, shortcut)
     }
@@ -478,7 +482,10 @@ class MainActivity : ThemedActivity() {
         }
     }
 
-    private fun bindRemoveAds(price: String? = null, showOffer: Boolean = false) {
+    private fun bindRemoveAds(
+        price: String? = null,
+        showOffer: Boolean = false,
+    ) {
         binding.removeAdsRoot.isVisible = true
         binding.removeAds.apply {
             setOnClickListener {

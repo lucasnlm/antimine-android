@@ -31,7 +31,10 @@ class SkinAdapter(
 
     override fun getItemId(position: Int): Long = appSkins[position].id
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkinViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): SkinViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ViewSkinBinding.inflate(layoutInflater, parent, false)
         return SkinViewHolder(binding)
@@ -45,7 +48,10 @@ class SkinAdapter(
         return if (appSkins[position].showPadding) WITH_PADDING else WITHOUT_PADDING
     }
 
-    override fun onBindViewHolder(holder: SkinViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: SkinViewHolder,
+        position: Int,
+    ) {
         val skin = appSkins[position]
         val palette = themeRepository.getTheme().palette
         val tintColor = palette.covered.toAndroidColor()
@@ -56,10 +62,11 @@ class SkinAdapter(
 
             val selected = (skin.id == themeViewModel.singleState().currentAppSkin.id)
 
-            val backgroundColor = MaterialColors.getColorStateListOrNull(
-                context,
-                GR.attr.backgroundColor,
-            )
+            val backgroundColor =
+                MaterialColors.getColorStateListOrNull(
+                    context,
+                    GR.attr.backgroundColor,
+                )
 
             val strokeColor = palette.background.toAndroidColor()
 

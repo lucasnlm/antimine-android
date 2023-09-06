@@ -13,15 +13,16 @@ sealed class Analytics(
         difficulty: Difficulty,
         seed: Long,
     ) : Analytics(
-        name = "New Game",
-        extra = mapOf(
-            "Seed" to seed.toString(),
-            "Difficulty Preset" to difficulty.id,
-            "Width" to minefield.width.toString(),
-            "Height" to minefield.height.toString(),
-            "Mines" to minefield.mines.toString(),
-        ),
-    )
+            name = "New Game",
+            extra =
+                mapOf(
+                    "Seed" to seed.toString(),
+                    "Difficulty Preset" to difficulty.id,
+                    "Width" to minefield.width.toString(),
+                    "Height" to minefield.height.toString(),
+                    "Mines" to minefield.mines.toString(),
+                ),
+        )
 
     class RetryGame(
         minefield: Minefield,
@@ -29,16 +30,17 @@ sealed class Analytics(
         seed: Long,
         firstOpen: Int,
     ) : Analytics(
-        name = "Retry Game",
-        extra = mapOf(
-            "Seed" to seed.toString(),
-            "Difficulty Preset" to difficulty.id,
-            "Width" to minefield.width.toString(),
-            "Height" to minefield.height.toString(),
-            "Mines" to minefield.mines.toString(),
-            "First Open" to firstOpen.toString(),
-        ),
-    )
+            name = "Retry Game",
+            extra =
+                mapOf(
+                    "Seed" to seed.toString(),
+                    "Difficulty Preset" to difficulty.id,
+                    "Width" to minefield.width.toString(),
+                    "Height" to minefield.height.toString(),
+                    "Mines" to minefield.mines.toString(),
+                    "First Open" to firstOpen.toString(),
+                ),
+        )
 
     data class ContinueGameAfterGameOver(
         val error: Int,
@@ -60,23 +62,25 @@ sealed class Analytics(
 
     class GameOver(time: Long, score: Score) : Analytics(
         name = "Game Over",
-        extra = mapOf(
-            "Time" to time.toString(),
-            "Right Mines" to score.rightMines.toString(),
-            "Total Mines" to score.totalMines.toString(),
-            "Total Area" to score.totalArea.toString(),
-        ),
+        extra =
+            mapOf(
+                "Time" to time.toString(),
+                "Right Mines" to score.rightMines.toString(),
+                "Total Mines" to score.totalMines.toString(),
+                "Total Area" to score.totalArea.toString(),
+            ),
     )
 
     class Victory(time: Long, score: Score, difficulty: Difficulty) : Analytics(
         name = "Victory",
-        extra = mapOf(
-            "Time" to time.toString(),
-            "Difficulty" to difficulty.id,
-            "Right Mines" to score.rightMines.toString(),
-            "Total Mines" to score.totalMines.toString(),
-            "Total Area" to score.totalArea.toString(),
-        ),
+        extra =
+            mapOf(
+                "Time" to time.toString(),
+                "Difficulty" to difficulty.id,
+                "Right Mines" to score.rightMines.toString(),
+                "Total Mines" to score.totalMines.toString(),
+                "Total Area" to score.totalArea.toString(),
+            ),
     )
 
     data object Resume : Analytics("Back to the game")

@@ -23,7 +23,10 @@ class HistoryAdapter(
         setHasStableIds(true)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): HistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return HistoryViewHolder(
             binding = ViewHistoryItemBinding.inflate(layoutInflater, parent, false),
@@ -38,25 +41,30 @@ class HistoryAdapter(
         return saveHistory.size
     }
 
-    override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) = with(saveHistory[position]) {
+    override fun onBindViewHolder(
+        holder: HistoryViewHolder,
+        position: Int,
+    ) = with(saveHistory[position]) {
         val context = holder.itemView.context
-        val buttonBackgroundColor = MaterialColors.getColorStateListOrNull(
-            context,
-            GR.attr.colorOnBackground,
-        )?.withAlpha(BUTTON_BACKGROUND_ALPHA)
+        val buttonBackgroundColor =
+            MaterialColors.getColorStateListOrNull(
+                context,
+                GR.attr.colorOnBackground,
+            )?.withAlpha(BUTTON_BACKGROUND_ALPHA)
 
-        val difficultyText = context.getString(
-            when (difficulty) {
-                Difficulty.Beginner -> i18n.string.beginner
-                Difficulty.Intermediate -> i18n.string.intermediate
-                Difficulty.Expert -> i18n.string.expert
-                Difficulty.Standard -> i18n.string.standard
-                Difficulty.Master -> i18n.string.master
-                Difficulty.Legend -> i18n.string.legend
-                Difficulty.Custom -> i18n.string.custom
-                Difficulty.FixedSize -> i18n.string.fixed_size
-            },
-        )
+        val difficultyText =
+            context.getString(
+                when (difficulty) {
+                    Difficulty.Beginner -> i18n.string.beginner
+                    Difficulty.Intermediate -> i18n.string.intermediate
+                    Difficulty.Expert -> i18n.string.expert
+                    Difficulty.Standard -> i18n.string.standard
+                    Difficulty.Master -> i18n.string.master
+                    Difficulty.Legend -> i18n.string.legend
+                    Difficulty.Custom -> i18n.string.custom
+                    Difficulty.FixedSize -> i18n.string.fixed_size
+                },
+            )
 
         val gameNameText = "$difficultyText #$uid"
 

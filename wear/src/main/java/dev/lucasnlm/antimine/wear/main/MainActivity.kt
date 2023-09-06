@@ -25,60 +25,62 @@ class MainActivity : ThemedActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val menuList = listOf(
-            MenuItem(
-                id = 0L,
-                label = if (preferencesRepository.showContinueGame()) {
-                    i18n.string.continue_game
-                } else {
-                    i18n.string.start
-                },
-                icon = R.drawable.play,
-                onClick = {
-                    continueGame()
-                },
-            ),
-            MenuItem(
-                id = 1L,
-                label = i18n.string.minefield,
-                icon = R.drawable.add,
-                onClick = {
-                    startDifficultyScreen()
-                },
-            ),
-            MenuItem(
-                id = 2L,
-                label = i18n.string.control_types,
-                icon = R.drawable.control,
-                onClick = {
-                    startControlScreen()
-                },
-            ),
-            MenuItem(
-                id = 3L,
-                label = i18n.string.themes,
-                icon = R.drawable.themes,
-                onClick = {
-                    startThemeScreen()
-                },
-            ),
-            MenuItem(
-                id = 4L,
-                label = i18n.string.tutorial,
-                icon = R.drawable.tutorial,
-                onClick = {
-                    startTutorial()
-                },
-            ),
-            MenuItem(
-                id = 6L,
-                label = i18n.string.quit,
-                icon = R.drawable.close,
-                onClick = {
-                    finishAffinity()
-                },
-            ),
-        )
+        val menuList =
+            listOf(
+                MenuItem(
+                    id = 0L,
+                    label =
+                        if (preferencesRepository.showContinueGame()) {
+                            i18n.string.continue_game
+                        } else {
+                            i18n.string.start
+                        },
+                    icon = R.drawable.play,
+                    onClick = {
+                        continueGame()
+                    },
+                ),
+                MenuItem(
+                    id = 1L,
+                    label = i18n.string.minefield,
+                    icon = R.drawable.add,
+                    onClick = {
+                        startDifficultyScreen()
+                    },
+                ),
+                MenuItem(
+                    id = 2L,
+                    label = i18n.string.control_types,
+                    icon = R.drawable.control,
+                    onClick = {
+                        startControlScreen()
+                    },
+                ),
+                MenuItem(
+                    id = 3L,
+                    label = i18n.string.themes,
+                    icon = R.drawable.themes,
+                    onClick = {
+                        startThemeScreen()
+                    },
+                ),
+                MenuItem(
+                    id = 4L,
+                    label = i18n.string.tutorial,
+                    icon = R.drawable.tutorial,
+                    onClick = {
+                        startTutorial()
+                    },
+                ),
+                MenuItem(
+                    id = 6L,
+                    label = i18n.string.quit,
+                    icon = R.drawable.close,
+                    onClick = {
+                        finishAffinity()
+                    },
+                ),
+            )
 
         binding.recyclerView.apply {
             setHasFixedSize(true)
@@ -90,15 +92,17 @@ class MainActivity : ThemedActivity() {
 
     private fun continueGame(difficulty: Difficulty? = null) {
         val context = application.applicationContext
-        val intent = Intent(context, WearGameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            difficulty?.let {
-                val bundle = Bundle().apply {
-                    putSerializable(WearGameActivity.DIFFICULTY, it)
+        val intent =
+            Intent(context, WearGameActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                difficulty?.let {
+                    val bundle =
+                        Bundle().apply {
+                            putSerializable(WearGameActivity.DIFFICULTY, it)
+                        }
+                    putExtras(bundle)
                 }
-                putExtras(bundle)
             }
-        }
         context.startActivity(intent)
     }
 

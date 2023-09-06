@@ -27,7 +27,10 @@ class PlayGamesManagerImpl(
         Firebase.auth
     }
 
-    private fun setupPopUp(activity: Activity, account: GoogleSignInAccount) {
+    private fun setupPopUp(
+        activity: Activity,
+        account: GoogleSignInAccount,
+    ) {
         Games.getGamesClient(context, account).apply {
             setViewForPopups(activity.findViewById(android.R.id.content))
             setGravityForPopups(Gravity.TOP or Gravity.END)
@@ -131,7 +134,10 @@ class PlayGamesManagerImpl(
         }
     }
 
-    override suspend fun incrementAchievement(achievement: Achievement, value: Int) {
+    override suspend fun incrementAchievement(
+        achievement: Achievement,
+        value: Int,
+    ) {
         account?.let {
             runCatching {
                 Games
@@ -141,7 +147,10 @@ class PlayGamesManagerImpl(
         }
     }
 
-    override suspend fun setAchievementSteps(achievement: Achievement, value: Int) {
+    override suspend fun setAchievementSteps(
+        achievement: Achievement,
+        value: Int,
+    ) {
         account?.let {
             runCatching {
                 Games
@@ -151,7 +160,10 @@ class PlayGamesManagerImpl(
         }
     }
 
-    override fun submitLeaderboard(leaderboard: Leaderboard, value: Long) {
+    override fun submitLeaderboard(
+        leaderboard: Leaderboard,
+        value: Long,
+    ) {
         account?.let {
             Games
                 .getLeaderboardsClient(context, it)

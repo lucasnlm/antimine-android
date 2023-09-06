@@ -30,14 +30,15 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
         binding = ActivityControlBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val controlAdapter = ControlAdapter(
-            controls = mutableListOf(),
-            selected = preferencesRepository.controlStyle(),
-            onControlSelected = { controlStyle ->
-                viewModel.sendEvent(ControlEvent.SelectControlStyle(controlStyle))
-                gameAudioManager.playClickSound()
-            },
-        )
+        val controlAdapter =
+            ControlAdapter(
+                controls = mutableListOf(),
+                selected = preferencesRepository.controlStyle(),
+                onControlSelected = { controlStyle ->
+                    viewModel.sendEvent(ControlEvent.SelectControlStyle(controlStyle))
+                    gameAudioManager.playClickSound()
+                },
+            )
 
         binding.recyclerView.apply {
             setHasFixedSize(true)
@@ -62,17 +63,19 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
                 touchSensibility.value =
                     (it.touchSensibility.toFloat() / touchSensibility.stepSize).toInt() * touchSensibility.stepSize
 
-                val longPressVisible = when (it.selected) {
-                    ControlStyle.Standard, ControlStyle.FastFlag -> true
-                    else -> false
-                }
+                val longPressVisible =
+                    when (it.selected) {
+                        ControlStyle.Standard, ControlStyle.FastFlag -> true
+                        else -> false
+                    }
                 longPress.isVisible = longPressVisible
                 binding.longPressLabel.isVisible = longPressVisible
 
-                val doubleClickVisible = when (it.selected) {
-                    ControlStyle.DoubleClick, ControlStyle.DoubleClickInverted -> true
-                    else -> false
-                }
+                val doubleClickVisible =
+                    when (it.selected) {
+                        ControlStyle.DoubleClick, ControlStyle.DoubleClickInverted -> true
+                        else -> false
+                    }
                 binding.doubleClick.isVisible = doubleClickVisible
                 binding.doubleClickLabel.isVisible = doubleClickVisible
                 binding.doubleClick.value = it.doubleClick.toFloat()
@@ -99,7 +102,11 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
         bindToolbar(binding.toolbar)
     }
 
-    override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
+    override fun onValueChange(
+        slider: Slider,
+        value: Float,
+        fromUser: Boolean,
+    ) {
         if (fromUser) {
             val progress = value.toInt()
             when (slider) {

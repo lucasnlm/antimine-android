@@ -10,15 +10,13 @@ class FixedMinefieldRepository : MinefieldRepository {
     override fun baseStandardSize(
         dimensionRepository: DimensionRepository,
         progressiveMines: Int,
-    ): Minefield =
-        Minefield(9, 9, 9 + progressiveMines)
+    ): Minefield = Minefield(9, 9, 9 + progressiveMines)
 
     override fun fromDifficulty(
         difficulty: Difficulty,
         dimensionRepository: DimensionRepository,
         preferencesRepository: PreferencesRepository,
-    ): Minefield =
-        Minefield(9, 9, 9)
+    ): Minefield = Minefield(9, 9, 9)
 
     override fun randomSeed(): Long = 0L
 }

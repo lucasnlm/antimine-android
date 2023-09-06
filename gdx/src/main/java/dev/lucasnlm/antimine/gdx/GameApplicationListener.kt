@@ -42,32 +42,40 @@ class GameApplicationListener(
 
     private var batch: SpriteBatch? = null
 
-    private val renderSettings = RenderSettings(
-        theme = themeRepository.getTheme(),
-        internalPadding = getInternalPadding(),
-        areaSize = dimensionRepository.areaSize(),
-        navigationBarHeight = dimensionRepository.navigationBarHeight().toFloat(),
-        appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
-        appBarHeight = if (context.isPortrait()) { dimensionRepository.actionBarSize().toFloat() } else { 0f },
-        joinAreas = themeRepository.getSkin().hasPadding,
-    )
-
-    private var actionSettings = with(preferencesRepository) {
-        val control = controlStyle()
-        ActionSettings(
-            handleDoubleTaps = control == ControlStyle.DoubleClick || control == ControlStyle.DoubleClickInverted,
-            longTapTimeout = preferencesRepository.customLongPressTimeout(),
-            doubleTapTimeout = preferencesRepository.getDoubleClickTimeout(),
-            touchSensibility = preferencesRepository.touchSensibility() * preferencesRepository.touchSensibility(),
+    private val renderSettings =
+        RenderSettings(
+            theme = themeRepository.getTheme(),
+            internalPadding = getInternalPadding(),
+            areaSize = dimensionRepository.areaSize(),
+            navigationBarHeight = dimensionRepository.navigationBarHeight().toFloat(),
+            appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
+            appBarHeight =
+                if (context.isPortrait()) {
+                    dimensionRepository.actionBarSize().toFloat()
+                } else {
+                    0f
+                },
+            joinAreas = themeRepository.getSkin().hasPadding,
         )
-    }
 
-    private val minefieldInputController = GameInputController(
-        onChangeZoom = {
-            GameContext.zoom = it
-            minefieldStage?.scaleZoom(it)
-        },
-    )
+    private var actionSettings =
+        with(preferencesRepository) {
+            val control = controlStyle()
+            ActionSettings(
+                handleDoubleTaps = control == ControlStyle.DoubleClick || control == ControlStyle.DoubleClickInverted,
+                longTapTimeout = preferencesRepository.customLongPressTimeout(),
+                doubleTapTimeout = preferencesRepository.getDoubleClickTimeout(),
+                touchSensibility = preferencesRepository.touchSensibility() * preferencesRepository.touchSensibility(),
+            )
+        }
+
+    private val minefieldInputController =
+        GameInputController(
+            onChangeZoom = {
+                GameContext.zoom = it
+                minefieldStage?.scaleZoom(it)
+            },
+        )
 
     override fun create() {
         super.create()
@@ -75,67 +83,72 @@ class GameApplicationListener(
         val width = Gdx.graphics.width
         val height = Gdx.graphics.height
 
-        minefieldStage = MinefieldStage(
-            screenWidth = width.toFloat(),
-            screenHeight = height.toFloat(),
-            renderSettings = renderSettings,
-            actionSettings = actionSettings,
-            onSingleTap = onSingleTap,
-            onDoubleTap = onDoubleTap,
-            onLongTouch = onLongTap,
-            onEngineReady = onEngineReady,
-        ).apply {
-            bindField(boundAreas)
-            bindSize(boundMinefield)
-        }
+        minefieldStage =
+            MinefieldStage(
+                screenWidth = width.toFloat(),
+                screenHeight = height.toFloat(),
+                renderSettings = renderSettings,
+                actionSettings = actionSettings,
+                onSingleTap = onSingleTap,
+                onDoubleTap = onDoubleTap,
+                onLongTouch = onLongTap,
+                onEngineReady = onEngineReady,
+            ).apply {
+                bindField(boundAreas)
+                bindSize(boundMinefield)
+            }
 
         val currentSkin = themeRepository.getSkin()
 
         GameContext.run {
             canTintAreas = currentSkin.canTint
 
-            atlas = GameTextureAtlas.loadTextureAtlas(
-                skinFile = currentSkin.file,
-                defaultBackground = currentSkin.background,
-            ).apply {
-                gameTextures = GameTextures(
-                    areaBackground = findRegion(AtlasNames.singleBackground),
-                    aroundMines = listOf(
-                        AtlasNames.number1,
-                        AtlasNames.number2,
-                        AtlasNames.number3,
-                        AtlasNames.number4,
-                        AtlasNames.number5,
-                        AtlasNames.number6,
-                        AtlasNames.number7,
-                        AtlasNames.number8,
-                    ).map(::findRegion),
-                    pieces = listOf(
-                        AtlasNames.core,
-                        AtlasNames.bottom,
-                        AtlasNames.top,
-                        AtlasNames.right,
-                        AtlasNames.left,
-                        AtlasNames.cornerTopLeft,
-                        AtlasNames.cornerTopRight,
-                        AtlasNames.cornerBottomRight,
-                        AtlasNames.cornerBottomLeft,
-                        AtlasNames.borderCornerTopRight,
-                        AtlasNames.borderCornerTopLeft,
-                        AtlasNames.borderCornerBottomRight,
-                        AtlasNames.borderCornerBottomLeft,
-                        AtlasNames.fillTopLeft,
-                        AtlasNames.fillTopRight,
-                        AtlasNames.fillBottomRight,
-                        AtlasNames.fillBottomLeft,
-                        AtlasNames.full,
-                    ).associateWith(::findRegion),
-                    mine = findRegion(AtlasNames.mine),
-                    flag = findRegion(AtlasNames.flag),
-                    question = findRegion(AtlasNames.question),
-                    detailedArea = findRegion(AtlasNames.single),
-                )
-            }
+            atlas =
+                GameTextureAtlas.loadTextureAtlas(
+                    skinFile = currentSkin.file,
+                    defaultBackground = currentSkin.background,
+                ).apply {
+                    gameTextures =
+                        GameTextures(
+                            areaBackground = findRegion(AtlasNames.SINGLE_BACKGROUND),
+                            aroundMines =
+                                listOf(
+                                    AtlasNames.NUMBER_1,
+                                    AtlasNames.NUMBER_2,
+                                    AtlasNames.NUMBER_3,
+                                    AtlasNames.NUMBER_4,
+                                    AtlasNames.NUMBER_5,
+                                    AtlasNames.NUMBER_6,
+                                    AtlasNames.NUMBER_7,
+                                    AtlasNames.NUMBER_8,
+                                ).map(::findRegion),
+                            pieces =
+                                listOf(
+                                    AtlasNames.CORE,
+                                    AtlasNames.BOTTOM,
+                                    AtlasNames.TOP,
+                                    AtlasNames.RIGHT,
+                                    AtlasNames.LEFT,
+                                    AtlasNames.CORNER_TOP_LEFT,
+                                    AtlasNames.CORNER_TOP_RIGHT,
+                                    AtlasNames.CORNER_BOTTOM_RIGHT,
+                                    AtlasNames.CORNER_BOTTOM_LEFT,
+                                    AtlasNames.BORDER_CORNER_RIGHT,
+                                    AtlasNames.BORDER_CORNER_LEFT,
+                                    AtlasNames.BORDER_CORNER_BOTTOM_RIGHT,
+                                    AtlasNames.BORDER_CORNER_BOTTOM_LEFT,
+                                    AtlasNames.FILL_TOP_LEFT,
+                                    AtlasNames.FILL_TOP_RIGHT,
+                                    AtlasNames.FILL_BOTTOM_RIGHT,
+                                    AtlasNames.FILL_BOTTOM_LEFT,
+                                    AtlasNames.FULL,
+                                ).associateWith(::findRegion),
+                            mine = findRegion(AtlasNames.MINE),
+                            flag = findRegion(AtlasNames.FLAG),
+                            question = findRegion(AtlasNames.QUESTION),
+                            detailedArea = findRegion(AtlasNames.SINGLE),
+                        )
+                }
         }
 
         Gdx.input.inputProcessor = InputMultiplexer(GestureDetector(minefieldInputController), minefieldStage)
@@ -231,15 +244,17 @@ class GameApplicationListener(
     }
 
     fun refreshSettings() {
-        actionSettings = with(preferencesRepository) {
-            val control = controlStyle()
-            ActionSettings(
-                handleDoubleTaps = control == ControlStyle.DoubleClick || control == ControlStyle.DoubleClickInverted,
-                longTapTimeout = preferencesRepository.customLongPressTimeout(),
-                doubleTapTimeout = preferencesRepository.getDoubleClickTimeout(),
-                touchSensibility = preferencesRepository.touchSensibility() * preferencesRepository.touchSensibility(),
-            )
-        }
+        actionSettings =
+            with(preferencesRepository) {
+                val control = controlStyle()
+                val isDoubleClick = control == ControlStyle.DoubleClick || control == ControlStyle.DoubleClickInverted
+                ActionSettings(
+                    handleDoubleTaps = isDoubleClick,
+                    longTapTimeout = preferencesRepository.customLongPressTimeout(),
+                    doubleTapTimeout = preferencesRepository.getDoubleClickTimeout(),
+                    touchSensibility = preferencesRepository.touchSensibility(),
+                )
+            }
 
         minefieldStage?.updateActionSettings(actionSettings)
     }

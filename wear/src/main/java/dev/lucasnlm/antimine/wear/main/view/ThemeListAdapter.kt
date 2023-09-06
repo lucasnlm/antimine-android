@@ -22,7 +22,10 @@ class ThemeListAdapter(
         setHasStableIds(true)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): RecyclerViewHolder {
         val binding = ViewThemeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RecyclerViewHolder(
             binding = binding,
@@ -39,7 +42,10 @@ class ThemeListAdapter(
         return themes[position].id
     }
 
-    override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: RecyclerViewHolder,
+        position: Int,
+    ) {
         val theme = themes[position]
         holder.bind(theme)
     }

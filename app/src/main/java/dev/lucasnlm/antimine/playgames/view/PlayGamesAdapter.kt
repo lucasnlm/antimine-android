@@ -8,12 +8,17 @@ import dev.lucasnlm.antimine.playgames.viewmodel.PlayGamesViewModel
 class PlayGamesAdapter(
     private val playGamesViewModel: PlayGamesViewModel,
 ) : BaseAdapter() {
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = if (convertView == null) {
-            PlayGamesButtonView(parent!!.context)
-        } else {
-            (convertView as PlayGamesButtonView)
-        }
+    override fun getView(
+        position: Int,
+        convertView: View?,
+        parent: ViewGroup?,
+    ): View {
+        val view =
+            if (convertView == null) {
+                PlayGamesButtonView(parent!!.context)
+            } else {
+                (convertView as PlayGamesButtonView)
+            }
 
         val item = playGamesViewModel.playGamesItems[position]
 

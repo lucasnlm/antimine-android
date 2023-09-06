@@ -13,10 +13,11 @@ import org.junit.Test
 class CreateGameViewModelTest : IntentViewModelTest() {
     @Test
     fun testInitialValue() {
-        val preferenceRepository: PreferencesRepository = mockk {
-            every { customGameMode() } returns Minefield(10, 12, 9)
-            every { forgetCustomSeed() } returns Unit
-        }
+        val preferenceRepository: PreferencesRepository =
+            mockk {
+                every { customGameMode() } returns Minefield(10, 12, 9)
+                every { forgetCustomSeed() } returns Unit
+            }
 
         val result = CreateGameViewModel(preferenceRepository).singleState()
 
@@ -27,16 +28,18 @@ class CreateGameViewModelTest : IntentViewModelTest() {
 
     @Test
     fun testSetNewCustomValues() {
-        val preferenceRepository: PreferencesRepository = mockk {
-            every { customGameMode() } returns Minefield(10, 12, 9)
-            every { updateCustomGameMode(any()) } returns Unit
-            every { forgetCustomSeed() } returns Unit
-        }
+        val preferenceRepository: PreferencesRepository =
+            mockk {
+                every { customGameMode() } returns Minefield(10, 12, 9)
+                every { updateCustomGameMode(any()) } returns Unit
+                every { forgetCustomSeed() } returns Unit
+            }
 
-        val result = CreateGameViewModel(preferenceRepository).run {
-            sendEvent(CustomEvent.UpdateCustomGameEvent(Minefield(9, 8, 5)))
-            singleState()
-        }
+        val result =
+            CreateGameViewModel(preferenceRepository).run {
+                sendEvent(CustomEvent.UpdateCustomGameEvent(Minefield(9, 8, 5)))
+                singleState()
+            }
 
         assertEquals(9, result.width)
         assertEquals(8, result.height)

@@ -56,7 +56,10 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
         }
     }
 
-    fun showAllowingStateLoss(manager: FragmentManager, tag: String?) {
+    fun showAllowingStateLoss(
+        manager: FragmentManager,
+        tag: String?,
+    ) {
         val fragmentTransaction = manager.beginTransaction()
         fragmentTransaction.add(this, tag)
         fragmentTransaction.commitAllowingStateLoss()
@@ -69,9 +72,10 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
     private fun openHexLink(context: Context) {
         runCatching {
             val hexUri = "https://play.google.com/store/apps/details?id=dev.lucasnlm.hexo"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(hexUri)).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            }
+            val intent =
+                Intent(Intent.ACTION_VIEW, Uri.parse(hexUri)).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }
             context.startActivity(intent)
         }.onFailure {
             Toast.makeText(
@@ -138,9 +142,10 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
         val context = requireContext()
 
         runCatching {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(composerLink)).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            }
+            val intent =
+                Intent(Intent.ACTION_VIEW, Uri.parse(composerLink)).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }
             context.startActivity(intent)
         }.onFailure {
             Toast.makeText(

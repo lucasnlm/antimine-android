@@ -53,7 +53,13 @@ class MinefieldStage(
 
         addListener(
             object : InputListener() {
-                override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
+                override fun touchDown(
+                    event: InputEvent?,
+                    x: Float,
+                    y: Float,
+                    pointer: Int,
+                    button: Int,
+                ): Boolean {
                     return if (event?.target is Group) {
                         event.cancel()
                         true
@@ -64,10 +70,11 @@ class MinefieldStage(
             },
         )
 
-        cameraController = CameraController(
-            camera = camera,
-            renderSettings = renderSettings,
-        )
+        cameraController =
+            CameraController(
+                camera = camera,
+                renderSettings = renderSettings,
+            )
     }
 
     fun setZoom(value: Float) {
@@ -76,17 +83,18 @@ class MinefieldStage(
             currentZoom = zoom
             update(true)
 
-            GameContext.zoomLevelAlpha = when {
-                zoom < 3.5f -> {
-                    1.0f
+            GameContext.zoomLevelAlpha =
+                when {
+                    zoom < 3.5f -> {
+                        1.0f
+                    }
+                    zoom > 4.0f -> {
+                        0.0f
+                    }
+                    else -> {
+                        (3.5f - zoom)
+                    }
                 }
-                zoom > 4.0f -> {
-                    0.0f
-                }
-                else -> {
-                    (3.5f - zoom)
-                }
-            }
         }
 
         inputEvents.clear()
@@ -94,28 +102,30 @@ class MinefieldStage(
 
     fun scaleZoom(zoomMultiplier: Float) {
         (camera as OrthographicCamera).apply {
-            val newZoom = if (zoomMultiplier > 1.0) {
-                zoom + 1.0f * Gdx.graphics.deltaTime
-            } else {
-                zoom - 1.0f * Gdx.graphics.deltaTime
-            }
+            val newZoom =
+                if (zoomMultiplier > 1.0) {
+                    zoom + 1.0f * Gdx.graphics.deltaTime
+                } else {
+                    zoom - 1.0f * Gdx.graphics.deltaTime
+                }
             zoom = newZoom.coerceIn(MAX_ZOOM_OUT, MAX_ZOOM_IN)
             if (currentZoom != zoom) {
                 currentZoom = zoom
                 Gdx.graphics.requestRendering()
             }
 
-            GameContext.zoomLevelAlpha = when {
-                zoom < 3.5f -> {
-                    1.0f
+            GameContext.zoomLevelAlpha =
+                when {
+                    zoom < 3.5f -> {
+                        1.0f
+                    }
+                    zoom > 4.0f -> {
+                        0.0f
+                    }
+                    else -> {
+                        (3.5f - zoom)
+                    }
                 }
-                zoom > 4.0f -> {
-                    0.0f
-                }
-                else -> {
-                    (3.5f - zoom)
-                }
-            }
         }
 
         inputEvents.clear()
@@ -177,12 +187,13 @@ class MinefieldStage(
 
     fun bindSize(newMinefield: Minefield?) {
         minefield = newMinefield
-        minefieldSize = newMinefield?.let {
-            SizeF(
-                it.width * renderSettings.areaSize,
-                it.height * renderSettings.areaSize,
-            )
-        }
+        minefieldSize =
+            newMinefield?.let {
+                SizeF(
+                    it.width * renderSettings.areaSize,
+                    it.height * renderSettings.areaSize,
+                )
+            }
         onChangeGame()
     }
 
@@ -283,18 +294,20 @@ class MinefieldStage(
 
         GameContext.apply {
             val theme = renderSettings.theme
-            backgroundColor = if (theme.isDarkTheme && canTintAreas) {
-                theme.palette.covered.toGdxColor(0.035f * zoomLevelAlpha)
-            } else {
-                theme.palette.background.toInverseBackOrWhite(0.1f * zoomLevelAlpha)
-            }
+            backgroundColor =
+                if (theme.isDarkTheme && canTintAreas) {
+                    theme.palette.covered.toGdxColor(0.035f * zoomLevelAlpha)
+                } else {
+                    theme.palette.background.toInverseBackOrWhite(0.1f * zoomLevelAlpha)
+                }
             coveredAreaColor = theme.palette.covered.toGdxColor(1.0f)
             coveredMarkedAreaColor = theme.palette.covered.toGdxColor(1.0f).dim(0.6f)
-            markColor = if (canTintAreas) {
-                theme.palette.covered.toInverseBackOrWhite(0.8f)
-            } else {
-                whiteColor
-            }
+            markColor =
+                if (canTintAreas) {
+                    theme.palette.covered.toInverseBackOrWhite(0.8f)
+                } else {
+                    whiteColor
+                }
         }
 
         checkGameTouchInput(System.currentTimeMillis())
@@ -320,18 +333,32 @@ class MinefieldStage(
         return cameraChanged
     }
 
-    override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
+    override fun touchDown(
+        screenX: Int,
+        screenY: Int,
+        pointer: Int,
+        button: Int,
+    ): Boolean {
         Gdx.graphics.isContinuousRendering = true
         return super.touchDown(screenX, screenY, pointer, button)
     }
 
-    override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
+    override fun touchUp(
+        screenX: Int,
+        screenY: Int,
+        pointer: Int,
+        button: Int,
+    ): Boolean {
         cameraController.freeTouch()
         Gdx.graphics.isContinuousRendering = false
         return super.touchUp(screenX, screenY, pointer, button)
     }
 
-    override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean {
+    override fun touchDragged(
+        screenX: Int,
+        screenY: Int,
+        pointer: Int,
+    ): Boolean {
         return minefieldSize?.let {
             val dx = Gdx.input.deltaX.toFloat()
             val dy = Gdx.input.deltaY.toFloat()

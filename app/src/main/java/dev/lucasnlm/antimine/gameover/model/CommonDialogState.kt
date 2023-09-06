@@ -22,7 +22,10 @@ data class CommonDialogState(
         turn = parcel.readInt(),
     )
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+    override fun writeToParcel(
+        parcel: Parcel,
+        flags: Int,
+    ) {
         parcel.writeString(gameResult.name)
         parcel.writeInt(if (showContinueButton) 1 else 0)
         parcel.writeInt(rightMines)

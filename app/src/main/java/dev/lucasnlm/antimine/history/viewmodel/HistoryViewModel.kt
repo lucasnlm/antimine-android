@@ -14,10 +14,11 @@ class HistoryViewModel(
     private val audioManager: GameAudioManager,
 ) : IntentViewModel<HistoryEvent, HistoryState>() {
 
-    override fun initialState() = HistoryState(
-        saveList = listOf(),
-        loading = true,
-    )
+    override fun initialState() =
+        HistoryState(
+            saveList = listOf(),
+            loading = true,
+        )
 
     override fun onEvent(event: HistoryEvent) {
         when (event) {
@@ -32,26 +33,28 @@ class HistoryViewModel(
         }
     }
 
-    override suspend fun mapEventToState(event: HistoryEvent) = flow {
-        when (event) {
-            is HistoryEvent.LoadAllSaves -> {
-                emit(state.copy(loading = true))
-                val newSaveList = savesRepository.getAllSaves().sortedByDescending { it.uid }
-                emit(state.copy(saveList = newSaveList, loading = false))
-            }
-            else -> {
+    override suspend fun mapEventToState(event: HistoryEvent) =
+        flow {
+            when (event) {
+                is HistoryEvent.LoadAllSaves -> {
+                    emit(state.copy(loading = true))
+                    val newSaveList = savesRepository.getAllSaves().sortedByDescending { it.uid }
+                    emit(state.copy(saveList = newSaveList, loading = false))
+                }
+                else -> {
+                }
             }
         }
-    }
 
     private fun replayGame(uid: Int) {
         audioManager.playClickSound()
 
         val context = application.applicationContext
-        val intent = Intent(context, GameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            putExtra(GameActivity.RETRY_GAME, uid)
-        }
+        val intent =
+            Intent(context, GameActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                putExtra(GameActivity.RETRY_GAME, uid)
+            }
         context.startActivity(intent)
     }
 
@@ -59,10 +62,11 @@ class HistoryViewModel(
         audioManager.playClickSound()
 
         val context = application.applicationContext
-        val intent = Intent(context, GameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            putExtra(GameActivity.START_GAME, uid)
-        }
+        val intent =
+            Intent(context, GameActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                putExtra(GameActivity.START_GAME, uid)
+            }
         context.startActivity(intent)
     }
 }

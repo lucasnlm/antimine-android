@@ -39,9 +39,10 @@ class DimensionRepositoryImpl(
         return areaSize() + 2 * areaSeparator()
     }
 
-    override fun displaySize(): MinefieldSize = with(Resources.getSystem().displayMetrics) {
-        return MinefieldSize(this.widthPixels, this.heightPixels)
-    }
+    override fun displaySize(): MinefieldSize =
+        with(Resources.getSystem().displayMetrics) {
+            return MinefieldSize(this.widthPixels, this.heightPixels)
+        }
 
     override fun actionBarSizeWithStatus(): Int {
         val styledAttributes: TypedArray =
@@ -50,11 +51,12 @@ class DimensionRepositoryImpl(
             )
 
         val resourceId: Int = context.resources.getIdentifier("status_bar_height", "dimen", "android")
-        val statusBar = if (resourceId > 0) {
-            context.resources.getDimensionPixelSize(resourceId)
-        } else {
-            0
-        }
+        val statusBar =
+            if (resourceId > 0) {
+                context.resources.getDimensionPixelSize(resourceId)
+            } else {
+                0
+            }
 
         val actionBarSize: Int = styledAttributes.getDimension(0, 0.0f).toInt()
         styledAttributes.recycle()
@@ -97,11 +99,12 @@ class DimensionRepositoryImpl(
         var navHeight = 0
         if (hasNavBar()) {
             val resources = context.resources
-            val resourceId: Int = resources.getIdentifier(
-                NAVIGATION_BAR_HEIGHT,
-                DEF_TYPE_DIMEN,
-                DEF_PACKAGE,
-            )
+            val resourceId: Int =
+                resources.getIdentifier(
+                    NAVIGATION_BAR_HEIGHT,
+                    DEF_TYPE_DIMEN,
+                    DEF_PACKAGE,
+                )
             if (resourceId > 0) {
                 navHeight = resources.getDimensionPixelSize(resourceId)
             }
@@ -126,30 +129,32 @@ class DimensionRepositoryImpl(
     private fun hasNavBar(): Boolean = hasNavBar
 
     private fun isEmulator(): Boolean {
-        val emulatorBrand = listOf(
-            Build.BRAND.startsWith("generic"),
-            Build.DEVICE.startsWith("generic"),
-            Build.FINGERPRINT.startsWith("generic"),
-            Build.FINGERPRINT.startsWith("unknown"),
-            Build.HARDWARE.contains("goldfish"),
-            Build.HARDWARE.contains("ranchu"),
-            Build.MANUFACTURER.contains("Genymotion"),
-        ).any()
+        val emulatorBrand =
+            listOf(
+                Build.BRAND.startsWith("generic"),
+                Build.DEVICE.startsWith("generic"),
+                Build.FINGERPRINT.startsWith("generic"),
+                Build.FINGERPRINT.startsWith("unknown"),
+                Build.HARDWARE.contains("goldfish"),
+                Build.HARDWARE.contains("ranchu"),
+                Build.MANUFACTURER.contains("Genymotion"),
+            ).any()
 
-        val emulatorModel = listOf(
-            "google_sdk",
-            "Emulator",
-            "Android SDK built for x86",
-            "sdk_google",
-            "google_sdk",
-            "sdk",
-            "sdk_x86",
-            "vbox86p",
-            "emulator",
-            "simulator",
-        ).any {
-            Build.MODEL.contains(it) || Build.PRODUCT.contains(it)
-        }
+        val emulatorModel =
+            listOf(
+                "google_sdk",
+                "Emulator",
+                "Android SDK built for x86",
+                "sdk_google",
+                "google_sdk",
+                "sdk",
+                "sdk_x86",
+                "vbox86p",
+                "emulator",
+                "simulator",
+            ).any {
+                Build.MODEL.contains(it) || Build.PRODUCT.contains(it)
+            }
 
         return emulatorBrand || emulatorModel
     }

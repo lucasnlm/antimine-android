@@ -19,10 +19,11 @@ class FlagAssistant(
     private fun putFlagIfIsolated(it: Area) {
         val neighbors = it.neighborsIds
         val neighborsCount = neighbors.count()
-        val revealedNeighborsCount = neighbors.count { neighborId ->
-            val neighbor = field[neighborId]
-            !neighbor.isCovered || (neighbor.hasMine && neighbor.mark.isFlag())
-        }
+        val revealedNeighborsCount =
+            neighbors.count { neighborId ->
+                val neighbor = field[neighborId]
+                !neighbor.isCovered || (neighbor.hasMine && neighbor.mark.isFlag())
+            }
 
         if (revealedNeighborsCount == neighborsCount) {
             field[it.id] = it.copy(mark = Mark.Flag)

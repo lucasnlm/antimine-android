@@ -53,7 +53,13 @@ class AreaActor(
 
         addListener(
             object : InputListener() {
-                override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int) {
+                override fun touchUp(
+                    event: InputEvent?,
+                    x: Float,
+                    y: Float,
+                    pointer: Int,
+                    button: Int,
+                ) {
                     super.touchUp(event, x, y, pointer, button)
                     onInputEvent(GdxEvent.TouchUpEvent(area.id))
                     isPressed = false
@@ -61,7 +67,13 @@ class AreaActor(
                     Gdx.graphics.requestRendering()
                 }
 
-                override fun touchDown(event: InputEvent, x: Float, y: Float, pointer: Int, button: Int): Boolean {
+                override fun touchDown(
+                    event: InputEvent,
+                    x: Float,
+                    y: Float,
+                    pointer: Int,
+                    button: Int,
+                ): Boolean {
                     toFront()
                     isPressed = true
                     onInputEvent(GdxEvent.TouchDownEvent(area.id))
@@ -85,28 +97,34 @@ class AreaActor(
 
     fun boundAreaId() = area.id
 
-    fun bindArea(reset: Boolean, ligatureEnabled: Boolean, area: Area, field: List<Area>) {
+    fun bindArea(
+        reset: Boolean,
+        ligatureEnabled: Boolean,
+        area: Area,
+        field: List<Area>,
+    ) {
         if (reset) {
             this.isPressed = false
         }
 
-        val newForm = when {
-            area.isCovered && ligatureEnabled -> {
-                areaFormOf(
-                    top = field.getOrNull(topId)?.canLinkTo(area) == true,
-                    bottom = field.getOrNull(bottomId)?.canLinkTo(area) == true,
-                    left = field.getOrNull(leftId)?.canLinkTo(area) == true,
-                    right = field.getOrNull(rightId)?.canLinkTo(area) == true,
-                    topLeft = field.getOrNull(topLeftId)?.canLinkTo(area) == true,
-                    topRight = field.getOrNull(topRightId)?.canLinkTo(area) == true,
-                    bottomLeft = field.getOrNull(bottomLeftId)?.canLinkTo(area) == true,
-                    bottomRight = field.getOrNull(bottomRightId)?.canLinkTo(area) == true,
-                )
+        val newForm =
+            when {
+                area.isCovered && ligatureEnabled -> {
+                    areaFormOf(
+                        top = field.getOrNull(topId)?.canLinkTo(area) == true,
+                        bottom = field.getOrNull(bottomId)?.canLinkTo(area) == true,
+                        left = field.getOrNull(leftId)?.canLinkTo(area) == true,
+                        right = field.getOrNull(rightId)?.canLinkTo(area) == true,
+                        topLeft = field.getOrNull(topLeftId)?.canLinkTo(area) == true,
+                        topRight = field.getOrNull(topRightId)?.canLinkTo(area) == true,
+                        bottomLeft = field.getOrNull(bottomLeftId)?.canLinkTo(area) == true,
+                        bottomRight = field.getOrNull(bottomRightId)?.canLinkTo(area) == true,
+                    )
+                }
+                else -> {
+                    AREA_NO_FORM
+                }
             }
-            else -> {
-                areaNoForm
-            }
-        }
 
         if ((area.isCovered || area.hasMine) && this.areaForm != newForm) {
             this.areaForm = newForm
@@ -120,17 +138,19 @@ class AreaActor(
         super.act(delta)
         val area = this.area
 
-        touchable = if ((area.isCovered || area.minesAround > 0) && GameContext.actionsEnabled) {
-            Touchable.enabled
-        } else {
-            Touchable.disabled
-        }
+        touchable =
+            if ((area.isCovered || area.minesAround > 0) && GameContext.actionsEnabled) {
+                Touchable.enabled
+            } else {
+                Touchable.disabled
+            }
 
-        val newFocusScale = if (isPressed) {
-            (focusScale + Gdx.graphics.deltaTime).coerceAtMost(MAX_SCALE)
-        } else {
-            (focusScale - Gdx.graphics.deltaTime).coerceAtLeast(MIN_SCALE)
-        }
+        val newFocusScale =
+            if (isPressed) {
+                (focusScale + Gdx.graphics.deltaTime).coerceAtMost(MAX_SCALE)
+            } else {
+                (focusScale - Gdx.graphics.deltaTime).coerceAtLeast(MIN_SCALE)
+            }
 
         if (newFocusScale != focusScale) {
             focusScale = newFocusScale
@@ -138,7 +158,10 @@ class AreaActor(
         }
     }
 
-    private fun drawBackground(batch: Batch, isOdd: Boolean) {
+    private fun drawBackground(
+        batch: Batch,
+        isOdd: Boolean,
+    ) {
         if (!isOdd && !area.isCovered && GameContext.zoomLevelAlpha > 0.0f) {
             GameContext.gameTextures?.areaBackground?.let {
                 batch.drawRegion(
@@ -155,16 +178,17 @@ class AreaActor(
     }
 
     private fun drawCovered(batch: Batch) {
-        val coverColor = when {
-            !GameContext.canTintAreas -> GameContext.whiteColor
-            area.mark.isNotNone() -> GameContext.coveredMarkedAreaColor
-            else -> GameContext.coveredAreaColor
-        }
+        val coverColor =
+            when {
+                !GameContext.canTintAreas -> GameContext.whiteColor
+                area.mark.isNotNone() -> GameContext.coveredMarkedAreaColor
+                else -> GameContext.coveredAreaColor
+            }
 
         GameContext.atlas?.let { atlas ->
-            if (areaForm == areaFullForm) {
+            if (areaForm == AREA_FULL_FORM) {
                 batch.drawRegion(
-                    texture = atlas.findRegion(AtlasNames.full),
+                    texture = atlas.findRegion(AtlasNames.FULL),
                     x = x - 0.5f,
                     y = y - 0.5f,
                     width = width + 0.5f,
@@ -216,11 +240,12 @@ class AreaActor(
         GameContext.gameTextures?.let {
             when {
                 area.mark.isFlag() -> {
-                    val color = if (area.mistake) {
-                        Color(0.8f, 0.3f, 0.3f, 1.0f)
-                    } else {
-                        GameContext.markColor
-                    }
+                    val color =
+                        if (area.mistake) {
+                            Color(0.8f, 0.3f, 0.3f, 1.0f)
+                        } else {
+                            GameContext.markColor
+                        }
 
                     drawAsset(
                         batch = batch,
@@ -259,16 +284,17 @@ class AreaActor(
                 drawAsset(
                     batch = batch,
                     texture = it.aroundMines[area.minesAround - 1],
-                    color = if (area.dimNumber) {
-                        theme.palette
-                            .minesAround(area.minesAround - 1)
-                            .toGdxColor(GameContext.zoomLevelAlpha * 0.45f)
-                            .dim(0.5f)
-                    } else {
-                        theme.palette
-                            .minesAround(area.minesAround - 1)
-                            .toGdxColor(GameContext.zoomLevelAlpha)
-                    },
+                    color =
+                        if (area.dimNumber) {
+                            theme.palette
+                                .minesAround(area.minesAround - 1)
+                                .toGdxColor(GameContext.zoomLevelAlpha * 0.45f)
+                                .dim(0.5f)
+                        } else {
+                            theme.palette
+                                .minesAround(area.minesAround - 1)
+                                .toGdxColor(GameContext.zoomLevelAlpha)
+                        },
                 )
             } else if (area.hasMine) {
                 val color = theme.palette.uncovered
@@ -282,18 +308,23 @@ class AreaActor(
         }
     }
 
-    private fun drawPressed(batch: Batch, isOdd: Boolean) {
+    private fun drawPressed(
+        batch: Batch,
+        isOdd: Boolean,
+    ) {
         if ((isPressed || focusScale > 1.0f)) {
             if (area.isCovered) {
                 val tint = GameContext.canTintAreas
-                val coverColor = when {
-                    tint -> if (isOdd) {
-                        theme.palette.coveredOdd
-                    } else {
-                        theme.palette.covered
-                    }
-                    else -> Themes.WHITE
-                }.toGdxColor(0.5f)
+                val coverColor =
+                    when {
+                        tint ->
+                            if (isOdd) {
+                                theme.palette.coveredOdd
+                            } else {
+                                theme.palette.covered
+                            }
+                        else -> Themes.WHITE
+                    }.toGdxColor(0.5f)
 
                 GameContext.gameTextures?.detailedArea?.let {
                     batch.drawRegion(
@@ -333,15 +364,19 @@ class AreaActor(
         }
     }
 
-    override fun draw(batch: Batch?, parentAlpha: Float) {
+    override fun draw(
+        batch: Batch?,
+        parentAlpha: Float,
+    ) {
         super.draw(batch, parentAlpha)
 
         batch?.run {
-            val isOdd: Boolean = if (area.posY % 2 == 0) {
-                area.posX % 2 != 0
-            } else {
-                area.posX % 2 == 0
-            }
+            val isOdd: Boolean =
+                if (area.posY % 2 == 0) {
+                    area.posX % 2 != 0
+                } else {
+                    area.posX % 2 == 0
+                }
 
             drawBackground(this, isOdd)
 

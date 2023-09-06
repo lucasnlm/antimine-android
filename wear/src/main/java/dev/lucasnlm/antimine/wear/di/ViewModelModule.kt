@@ -5,11 +5,12 @@ import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val ViewModelModule = module {
-    viewModel { ControlViewModel(get(), get()) }
-    viewModel {
-        GameViewModel(
-            get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(),
-        )
+val ViewModelModule =
+    module {
+        viewModel { ControlViewModel(get(), get()) }
+        viewModel {
+            GameViewModel(
+                get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(),
+            )
+        }
     }
-}

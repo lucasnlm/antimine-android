@@ -15,7 +15,10 @@ class LocalizationItemAdapter(
         setHasStableIds(true)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocalizationItemViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): LocalizationItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return LocalizationItemViewHolder(
             binding = ViewLocalizationItemBinding.inflate(layoutInflater, parent, false),
@@ -34,7 +37,10 @@ class LocalizationItemAdapter(
         return gameLanguages.size
     }
 
-    override fun onBindViewHolder(holder: LocalizationItemViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: LocalizationItemViewHolder,
+        position: Int,
+    ) {
         holder.binding.language.apply {
             text = gameLanguages[position].name
             setOnClickListener {

@@ -20,27 +20,28 @@ class LocalizationViewModel(
         )
     }
 
-    override suspend fun mapEventToState(event: LocalizationEvent) = flow {
-        when (event) {
-            is LocalizationEvent.LoadAllLanguages -> {
-                emit(state.copy(loading = true))
-                val languages = loadLocaleList()
-                emit(state.copy(loading = false, languages = languages))
-            }
-            is LocalizationEvent.SetLanguage -> {
-                val locale = event.locale.toLanguageTag()
-                withContext(Dispatchers.Main) {
-                    audioManager.playClickSound()
-                    gameLocaleManager.setGameLocale(locale)
-                    gameLocaleManager.applyPreferredLocaleIfNeeded()
-                    sendSideEffect(LocalizationEvent.FinishActivity)
+    override suspend fun mapEventToState(event: LocalizationEvent) =
+        flow {
+            when (event) {
+                is LocalizationEvent.LoadAllLanguages -> {
+                    emit(state.copy(loading = true))
+                    val languages = loadLocaleList()
+                    emit(state.copy(loading = false, languages = languages))
+                }
+                is LocalizationEvent.SetLanguage -> {
+                    val locale = event.locale.toLanguageTag()
+                    withContext(Dispatchers.Main) {
+                        audioManager.playClickSound()
+                        gameLocaleManager.setGameLocale(locale)
+                        gameLocaleManager.applyPreferredLocaleIfNeeded()
+                        sendSideEffect(LocalizationEvent.FinishActivity)
+                    }
+                }
+                else -> {
+                    // Ignore
                 }
             }
-            else -> {
-                // Ignore
-            }
         }
-    }
 
     private fun appLocales(): List<Locale> {
         return gameLocaleManager.getAllGameLocaleTags().map {

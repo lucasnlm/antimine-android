@@ -27,46 +27,48 @@ class ControlTypeActivity : ThemedActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun refreshControlTypeList() {
-        val controlTypes = listOf(
-            ControlTypeItem(
-                id = 0,
-                primaryAction = i18n.string.single_click,
-                secondaryAction = i18n.string.long_press,
-                controlStyle = ControlStyle.Standard,
-            ),
-            ControlTypeItem(
-                id = 1,
-                primaryAction = i18n.string.long_press,
-                secondaryAction = i18n.string.single_click,
-                controlStyle = ControlStyle.FastFlag,
-            ),
-            ControlTypeItem(
-                id = 2,
-                primaryAction = i18n.string.single_click,
-                secondaryAction = i18n.string.double_click,
-                controlStyle = ControlStyle.DoubleClick,
-            ),
-            ControlTypeItem(
-                id = 4,
-                primaryAction = i18n.string.switch_control_desc,
-                controlStyle = ControlStyle.SwitchMarkOpen,
-            ),
-        )
+        val controlTypes =
+            listOf(
+                ControlTypeItem(
+                    id = 0,
+                    primaryAction = i18n.string.single_click,
+                    secondaryAction = i18n.string.long_press,
+                    controlStyle = ControlStyle.Standard,
+                ),
+                ControlTypeItem(
+                    id = 1,
+                    primaryAction = i18n.string.long_press,
+                    secondaryAction = i18n.string.single_click,
+                    controlStyle = ControlStyle.FastFlag,
+                ),
+                ControlTypeItem(
+                    id = 2,
+                    primaryAction = i18n.string.single_click,
+                    secondaryAction = i18n.string.double_click,
+                    controlStyle = ControlStyle.DoubleClick,
+                ),
+                ControlTypeItem(
+                    id = 4,
+                    primaryAction = i18n.string.switch_control_desc,
+                    controlStyle = ControlStyle.SwitchMarkOpen,
+                ),
+            )
 
         binding.recyclerView.apply {
             setHasFixedSize(true)
             isEdgeItemsCenteringEnabled = true
             layoutManager = WearableLinearLayoutManager(this@ControlTypeActivity)
-            adapter = ControlTypeListAdapter(
-                controlTypeItemList = controlTypes,
-                preferencesRepository = preferencesRepository,
-                onChangeControl = {
-                    val layoutManager = binding.recyclerView.layoutManager
-                    val recyclerViewState = layoutManager?.onSaveInstanceState()
-                    binding.recyclerView.adapter?.notifyDataSetChanged()
-                    layoutManager?.onRestoreInstanceState(recyclerViewState)
-                },
-            )
+            adapter =
+                ControlTypeListAdapter(
+                    controlTypeItemList = controlTypes,
+                    preferencesRepository = preferencesRepository,
+                    onChangeControl = {
+                        val layoutManager = binding.recyclerView.layoutManager
+                        val recyclerViewState = layoutManager?.onSaveInstanceState()
+                        binding.recyclerView.adapter?.notifyDataSetChanged()
+                        layoutManager?.onRestoreInstanceState(recyclerViewState)
+                    },
+                )
         }
     }
 }

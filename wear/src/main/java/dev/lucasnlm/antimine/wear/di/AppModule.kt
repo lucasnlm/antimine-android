@@ -15,20 +15,21 @@ import kotlinx.coroutines.SupervisorJob
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val AppModule = module {
-    factory { CoroutineScope(Dispatchers.Main + SupervisorJob()) }
+val AppModule =
+    module {
+        factory { CoroutineScope(Dispatchers.Main + SupervisorJob()) }
 
-    single { AppVersionManagerImpl() } bind AppVersionManager::class
+        single { AppVersionManagerImpl() } bind AppVersionManager::class
 
-    single {
-        HapticFeedbackManagerImpl(get(), get())
-    } bind HapticFeedbackManager::class
+        single {
+            HapticFeedbackManagerImpl(get(), get())
+        } bind HapticFeedbackManager::class
 
-    single {
-        if (BuildConfig.DEBUG) {
-            DebugAnalyticsManager()
-        } else {
-            ProdAnalyticsManager(ExternalAnalyticsWrapperImpl(get()))
-        }
-    } bind AnalyticsManager::class
-}
+        single {
+            if (BuildConfig.DEBUG) {
+                DebugAnalyticsManager()
+            } else {
+                ProdAnalyticsManager(ExternalAnalyticsWrapperImpl(get()))
+            }
+        } bind AnalyticsManager::class
+    }

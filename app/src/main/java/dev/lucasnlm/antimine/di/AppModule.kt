@@ -21,26 +21,27 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val AppModule = module {
-    factory { CoroutineScope(Dispatchers.Main + SupervisorJob()) }
+val AppModule =
+    module {
+        factory { CoroutineScope(Dispatchers.Main + SupervisorJob()) }
 
-    single { IapHandler(get(), get(), get()) }
+        single { IapHandler(get(), get(), get()) }
 
-    single {
-        HapticFeedbackManagerImpl(get(), get())
-    } bind HapticFeedbackManager::class
+        single {
+            HapticFeedbackManagerImpl(get(), get())
+        } bind HapticFeedbackManager::class
 
-    single { CloudSaveManagerImpl(get(), get(), get(), get(), get()) } bind CloudSaveManager::class
+        single { CloudSaveManagerImpl(get(), get(), get(), get(), get()) } bind CloudSaveManager::class
 
-    single { AppVersionManagerImpl(BuildConfig.DEBUG, androidApplication()) } bind AppVersionManager::class
+        single { AppVersionManagerImpl(BuildConfig.DEBUG, androidApplication()) } bind AppVersionManager::class
 
-    single { GameLocaleManagerImpl(get()) } bind GameLocaleManager::class
+        single { GameLocaleManagerImpl(get()) } bind GameLocaleManager::class
 
-    single {
-        if (BuildConfig.DEBUG) {
-            DebugAnalyticsManager()
-        } else {
-            ProdAnalyticsManager(ExternalAnalyticsWrapperImpl(get()))
-        }
-    } bind AnalyticsManager::class
-}
+        single {
+            if (BuildConfig.DEBUG) {
+                DebugAnalyticsManager()
+            } else {
+                ProdAnalyticsManager(ExternalAnalyticsWrapperImpl(get()))
+            }
+        } bind AnalyticsManager::class
+    }

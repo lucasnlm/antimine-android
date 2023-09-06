@@ -24,7 +24,10 @@ class ExternalAnalyticsWrapperImpl(
         }.getOrNull()
     }
 
-    override fun setup(context: Context, properties: Map<String, String>) {
+    override fun setup(
+        context: Context,
+        properties: Map<String, String>,
+    ) {
         properties.forEach { (key, value) ->
             firebaseAnalytics?.setUserProperty(key, value)
         }
@@ -32,13 +35,17 @@ class ExternalAnalyticsWrapperImpl(
         amplitudeClient?.setUserProperties(JSONObject(properties))
     }
 
-    override fun sendEvent(name: String, content: Map<String, String>) {
-        val bundle = Bundle().apply {
-            putString(FirebaseAnalytics.Param.ITEM_NAME, name)
-            content.forEach { (key, value) ->
-                putString(key, value)
+    override fun sendEvent(
+        name: String,
+        content: Map<String, String>,
+    ) {
+        val bundle =
+            Bundle().apply {
+                putString(FirebaseAnalytics.Param.ITEM_NAME, name)
+                content.forEach { (key, value) ->
+                    putString(key, value)
+                }
             }
-        }
 
         firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
         amplitudeClient?.logEvent(name, JSONObject(content))

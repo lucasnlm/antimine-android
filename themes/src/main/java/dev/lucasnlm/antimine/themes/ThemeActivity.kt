@@ -88,39 +88,51 @@ class ThemeActivity : ThemedActivity() {
 
         lifecycleScope.launch {
             val size = dimensionRepository.displaySize()
-            val themesColumns = if (size.width > size.height) { 5 } else { 3 }
-            val skinsColumns = if (size.width > size.height) { 2 } else { 5 }
+            val themesColumns =
+                if (size.width > size.height) {
+                    5
+                } else {
+                    3
+                }
+            val skinsColumns =
+                if (size.width > size.height) {
+                    2
+                } else {
+                    5
+                }
 
-            val themeAdapter = ThemeAdapter(
-                themeViewModel = themeViewModel,
-                preferencesRepository = preferencesRepository,
-                onSelectTheme = { theme ->
-                    themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
-                    gameAudioManager.playClickSound()
-                },
-                onRequestPurchase = {
-                    lifecycleScope.launch {
-                        billingManager.charge(this@ThemeActivity)
-                    }
-                    gameAudioManager.playMonetization()
-                },
-            )
+            val themeAdapter =
+                ThemeAdapter(
+                    themeViewModel = themeViewModel,
+                    preferencesRepository = preferencesRepository,
+                    onSelectTheme = { theme ->
+                        themeViewModel.sendEvent(ThemeEvent.ChangeTheme(theme))
+                        gameAudioManager.playClickSound()
+                    },
+                    onRequestPurchase = {
+                        lifecycleScope.launch {
+                            billingManager.charge(this@ThemeActivity)
+                        }
+                        gameAudioManager.playMonetization()
+                    },
+                )
 
-            val skinAdapter = SkinAdapter(
-                themeRepository = themeRepository,
-                themeViewModel = themeViewModel,
-                preferencesRepository = preferencesRepository,
-                onSelectSkin = { skin ->
-                    themeViewModel.sendEvent(ThemeEvent.ChangeSkin(skin))
-                    gameAudioManager.playClickSound()
-                },
-                onRequestPurchase = {
-                    lifecycleScope.launch {
-                        billingManager.charge(this@ThemeActivity)
-                    }
-                    gameAudioManager.playMonetization()
-                },
-            )
+            val skinAdapter =
+                SkinAdapter(
+                    themeRepository = themeRepository,
+                    themeViewModel = themeViewModel,
+                    preferencesRepository = preferencesRepository,
+                    onSelectSkin = { skin ->
+                        themeViewModel.sendEvent(ThemeEvent.ChangeSkin(skin))
+                        gameAudioManager.playClickSound()
+                    },
+                    onRequestPurchase = {
+                        lifecycleScope.launch {
+                            billingManager.charge(this@ThemeActivity)
+                        }
+                        gameAudioManager.playMonetization()
+                    },
+                )
 
             binding.themes.apply {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
@@ -132,14 +144,15 @@ class ThemeActivity : ThemedActivity() {
             binding.skins.apply {
                 addItemDecoration(SpaceItemDecoration(R.dimen.theme_divider))
                 setHasFixedSize(true)
-                layoutManager = object : GridLayoutManager(context, skinsColumns) {
-                    override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
-                        val lpSize = width / (skinsColumns + 1)
-                        lp?.height = lpSize
-                        lp?.width = lpSize
-                        return true
+                layoutManager =
+                    object : GridLayoutManager(context, skinsColumns) {
+                        override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
+                            val lpSize = width / (skinsColumns + 1)
+                            lp?.height = lpSize
+                            lp?.width = lpSize
+                            return true
+                        }
                     }
-                }
                 adapter = skinAdapter
             }
 

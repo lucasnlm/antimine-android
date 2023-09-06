@@ -49,9 +49,10 @@ class DonationActivity : ThemedActivity() {
     private fun openLink(link: String) {
         val context = application.applicationContext
         runCatching {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link)).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            }
+            val intent =
+                Intent(Intent.ACTION_VIEW, Uri.parse(link)).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }
             context.startActivity(intent)
         }.onFailure {
             Toast.makeText(

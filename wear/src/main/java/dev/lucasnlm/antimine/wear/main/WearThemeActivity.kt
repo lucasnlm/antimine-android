@@ -27,14 +27,15 @@ class WearThemeActivity : ThemedActivity() {
         binding.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@WearThemeActivity)
-            adapter = ThemeListAdapter(
-                themes = themesRepository.getAllThemes(),
-                preferencesRepository = preferencesRepository,
-                onSelectTheme = { theme ->
-                    preferencesRepository.useTheme(theme.id)
-                    recreate()
-                },
-            )
+            adapter =
+                ThemeListAdapter(
+                    themes = themesRepository.getAllThemes(),
+                    preferencesRepository = preferencesRepository,
+                    onSelectTheme = { theme ->
+                        preferencesRepository.useTheme(theme.id)
+                        recreate()
+                    },
+                )
         }
     }
 }

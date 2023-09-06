@@ -21,22 +21,23 @@ import dev.lucasnlm.external.ReviewWrapperImpl
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val ExternalModule = module {
-    single { InstantAppManagerImpl() } bind InstantAppManager::class
+val ExternalModule =
+    module {
+        single { InstantAppManagerImpl() } bind InstantAppManager::class
 
-    single { BillingManagerImpl() } bind BillingManager::class
+        single { BillingManagerImpl() } bind BillingManager::class
 
-    single { PlayGamesManagerImpl(get()) } bind PlayGamesManager::class
+        single { PlayGamesManagerImpl(get()) } bind PlayGamesManager::class
 
-    single { ReviewWrapperImpl() } bind ReviewWrapper::class
+        single { ReviewWrapperImpl() } bind ReviewWrapper::class
 
-    single { CloudStorageManagerImpl() } bind CloudStorageManager::class
+        single { CloudStorageManagerImpl() } bind CloudStorageManager::class
 
-    single { FeatureFlagManagerImpl() } bind FeatureFlagManager::class
+        single { FeatureFlagManagerImpl() } bind FeatureFlagManager::class
 
-    single { CrashReporterImpl() } bind CrashReporter::class
+        single { CrashReporterImpl() } bind CrashReporter::class
 
-    single { NoAdsManager() } bind AdsManager::class
+        single { NoAdsManager() } bind AdsManager::class
 
-    single { InAppUpdateManagerImpl() } bind InAppUpdateManager::class
-}
+        single { InAppUpdateManagerImpl() } bind InAppUpdateManager::class
+    }

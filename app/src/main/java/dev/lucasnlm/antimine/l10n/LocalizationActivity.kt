@@ -31,14 +31,15 @@ class LocalizationActivity : ThemedActivity() {
                 .filterNot { it.loading }
                 .collect { state ->
                     binding.content.apply {
-                        adapter = LocalizationItemAdapter(
-                            gameLanguages = state.languages,
-                            onSelectLanguage = {
-                                localizationViewModel.sendEvent(
-                                    LocalizationEvent.SetLanguage(it),
-                                )
-                            },
-                        )
+                        adapter =
+                            LocalizationItemAdapter(
+                                gameLanguages = state.languages,
+                                onSelectLanguage = {
+                                    localizationViewModel.sendEvent(
+                                        LocalizationEvent.SetLanguage(it),
+                                    )
+                                },
+                            )
                     }
                 }
         }

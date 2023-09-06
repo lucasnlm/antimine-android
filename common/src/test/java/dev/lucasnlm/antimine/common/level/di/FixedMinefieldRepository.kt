@@ -7,7 +7,10 @@ import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
 class FixedMinefieldRepository : MinefieldRepository {
-    override fun baseStandardSize(dimensionRepository: DimensionRepository, progressiveMines: Int): Minefield {
+    override fun baseStandardSize(
+        dimensionRepository: DimensionRepository,
+        progressiveMines: Int,
+    ): Minefield {
         return Minefield(9, 9, 9)
     }
 

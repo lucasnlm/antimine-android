@@ -30,17 +30,18 @@ open class Clock {
 
     fun start(onTick: (seconds: Long) -> Unit) {
         stop()
-        timer = provideTimer().apply {
-            scheduleAtFixedRate(
-                object : TimerTask() {
-                    override fun run() {
-                        elapsedTimeSeconds++
-                        onTick(elapsedTimeSeconds)
-                    }
-                },
-                DateUtils.SECOND_IN_MILLIS,
-                DateUtils.SECOND_IN_MILLIS,
-            )
-        }
+        timer =
+            provideTimer().apply {
+                scheduleAtFixedRate(
+                    object : TimerTask() {
+                        override fun run() {
+                            elapsedTimeSeconds++
+                            onTick(elapsedTimeSeconds)
+                        }
+                    },
+                    DateUtils.SECOND_IN_MILLIS,
+                    DateUtils.SECOND_IN_MILLIS,
+                )
+            }
     }
 }

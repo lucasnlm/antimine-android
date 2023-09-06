@@ -22,14 +22,16 @@ class SwitchButtonView : FrameLayout {
 
     private var currentSelected: MaterialButton? = null
 
-    private val selectedIconTint = MaterialColors.getColorStateListOrNull(
-        context,
-        GR.attr.colorOnPrimary,
-    )
-    private val selectedBackgroundTint = MaterialColors.getColorStateListOrNull(
-        context,
-        GR.attr.colorPrimary,
-    )
+    private val selectedIconTint =
+        MaterialColors.getColorStateListOrNull(
+            context,
+            GR.attr.colorOnPrimary,
+        )
+    private val selectedBackgroundTint =
+        MaterialColors.getColorStateListOrNull(
+            context,
+            GR.attr.colorPrimary,
+        )
     private val unselectedIconTint = binding.flagButton.iconTint
     private val unselectedBackgroundTint = binding.flagButton.backgroundTintList
 
@@ -37,7 +39,10 @@ class SwitchButtonView : FrameLayout {
         binding.questionButton.isVisible = visible
     }
 
-    private fun updateMaterialButtonState(target: MaterialButton, selected: Boolean) {
+    private fun updateMaterialButtonState(
+        target: MaterialButton,
+        selected: Boolean,
+    ) {
         target.apply {
             if (selected) {
                 currentSelected = target

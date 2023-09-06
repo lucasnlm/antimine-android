@@ -49,11 +49,12 @@ class GameOverDialogFragment : CommonGameDialogFragment() {
             ?.run {
                 dialogViewModel.sendEvent(
                     EndGameDialogEvent.BuildCustomEndGame(
-                        gameResult = if (totalMines > 0) {
-                            gameResult
-                        } else {
-                            GameResult.GameOver
-                        },
+                        gameResult =
+                            if (totalMines > 0) {
+                                gameResult
+                            } else {
+                                GameResult.GameOver
+                            },
                         showContinueButton = showContinueButton,
                         time = time,
                         rightMines = rightMines,
@@ -241,11 +242,13 @@ class GameOverDialogFragment : CommonGameDialogFragment() {
     }
 
     companion object {
-        fun newInstance(state: CommonDialogState) = GameOverDialogFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(DIALOG_STATE, state)
+        fun newInstance(state: CommonDialogState) =
+            GameOverDialogFragment().apply {
+                arguments =
+                    Bundle().apply {
+                        putParcelable(DIALOG_STATE, state)
+                    }
             }
-        }
 
         private const val CONTINUE_COUNTDOWN_SECONDS = 10
     }

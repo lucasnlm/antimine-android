@@ -64,43 +64,45 @@ class PreferencesActivity :
         binding = ActivityPreferencesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        exportResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                var result = false
-                val target = it.data?.data
-                if (target != null) {
-                    val data = preferenceRepository.exportData()
-                    result = settingsBackupManager.exportSettings(target, data)
-                }
+        exportResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == Activity.RESULT_OK) {
+                    var result = false
+                    val target = it.data?.data
+                    if (target != null) {
+                        val data = preferenceRepository.exportData()
+                        result = settingsBackupManager.exportSettings(target, data)
+                    }
 
-                if (result) {
-                    showWarning(i18n.string.exported_success)
-                } else {
-                    showWarning(i18n.string.error)
-                }
-            }
-        }
-
-        importResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                var result = false
-                val target = it.data?.data
-                if (target != null) {
-                    val data = settingsBackupManager.importSettings(target)
-                    if (!data.isNullOrEmpty()) {
-                        preferenceRepository.importData(data)
-                        result = true
+                    if (result) {
+                        showWarning(i18n.string.exported_success)
+                    } else {
+                        showWarning(i18n.string.error)
                     }
                 }
+            }
 
-                if (result) {
-                    showWarning(i18n.string.imported_success)
-                    bindItems()
-                } else {
-                    showWarning(i18n.string.error)
+        importResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == Activity.RESULT_OK) {
+                    var result = false
+                    val target = it.data?.data
+                    if (target != null) {
+                        val data = settingsBackupManager.importSettings(target)
+                        if (!data.isNullOrEmpty()) {
+                            preferenceRepository.importData(data)
+                            result = true
+                        }
+                    }
+
+                    if (result) {
+                        showWarning(i18n.string.imported_success)
+                        bindItems()
+                    } else {
+                        showWarning(i18n.string.error)
+                    }
                 }
             }
-        }
 
         bindToolbar(binding.toolbar)
         bindToolbarAction(preferenceRepository.hasCustomizations())
@@ -203,31 +205,39 @@ class PreferencesActivity :
         }
 
         binding.exportSettings.setOnClickListener {
-            val exportIntent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
-                addCategory(Intent.CATEGORY_OPENABLE)
-                putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)
-                type = "application/json"
+            val exportIntent =
+                Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                    putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)
+                    type = "application/json"
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val documentsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-                    putExtra(DocumentsContract.EXTRA_INITIAL_URI, documentsDir.toUri())
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        val documentsDir =
+                            Environment.getExternalStoragePublicDirectory(
+                                Environment.DIRECTORY_DOCUMENTS,
+                            )
+                        putExtra(DocumentsContract.EXTRA_INITIAL_URI, documentsDir.toUri())
+                    }
                 }
-            }
 
             exportResultLauncher.launch(exportIntent)
         }
 
         binding.importSettings.setOnClickListener {
-            val exportIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                addCategory(Intent.CATEGORY_OPENABLE)
-                putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)
-                type = "application/json"
+            val exportIntent =
+                Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                    putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)
+                    type = "application/json"
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val documentsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-                    putExtra(DocumentsContract.EXTRA_INITIAL_URI, documentsDir.toUri())
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        val documentsDir =
+                            Environment.getExternalStoragePublicDirectory(
+                                Environment.DIRECTORY_DOCUMENTS,
+                            )
+                        putExtra(DocumentsContract.EXTRA_INITIAL_URI, documentsDir.toUri())
+                    }
                 }
-            }
 
             importResultLauncher.launch(exportIntent)
         }
@@ -259,7 +269,10 @@ class PreferencesActivity :
         }
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+    override fun onSharedPreferenceChanged(
+        sharedPreferences: SharedPreferences?,
+        key: String?,
+    ) {
         bindToolbarAction(preferenceRepository.hasCustomizations())
     }
 }

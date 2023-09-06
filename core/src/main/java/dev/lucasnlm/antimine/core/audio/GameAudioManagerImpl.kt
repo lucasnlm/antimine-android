@@ -213,10 +213,15 @@ class GameAudioManagerImpl(
         const val WIN_FILE_NAME = "win.ogg"
         const val BOMB_EXPLOSION_FILE_NAME = "bomb_explosion.ogg"
         const val REVEAL_BOMB_RELOAD_FILE_NAME = "reveal_mine_reload.ogg"
+
         fun clickFileName() = listOf("menu_click.ogg", "menu_click_alt.ogg", "menu_click_back.ogg")
+
         fun openAreaFiles() = filesCount(OPEN_AREA_COUNT).map { "open_area_$it.ogg" }
+
         fun openMultipleFiles() = filesCount(OPEN_MULTIPLE_COUNT).map { "open_multiple_$it.ogg" }
+
         fun putFlagFiles() = filesCount(PUT_FLAG_COUNT).map { "put_flag_$it.ogg" }
+
         fun revealBombFiles() = filesCount(REVEAL_BOMB_COUNT).map { "reveal_mine_$it.ogg" }
     }
 }

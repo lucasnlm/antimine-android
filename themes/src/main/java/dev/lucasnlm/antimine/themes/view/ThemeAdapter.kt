@@ -31,13 +31,19 @@ class ThemeAdapter(
 
     override fun getItemCount(): Int = themes.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ThemeViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ViewThemeBinding.inflate(layoutInflater, parent, false)
         return ThemeViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ThemeViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ThemeViewHolder,
+        position: Int,
+    ) {
         val theme = themes[position]
 
         holder.itemView.apply {

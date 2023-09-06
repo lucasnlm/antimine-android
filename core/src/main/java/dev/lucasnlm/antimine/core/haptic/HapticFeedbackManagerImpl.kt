@@ -41,7 +41,10 @@ class HapticFeedbackManagerImpl(
         vibrateTo(70, 240)
     }
 
-    private fun vibrateTo(time: Long, amplitude: Int) {
+    private fun vibrateTo(
+        time: Long,
+        amplitude: Int,
+    ) {
         runCatching {
             val feedbackLevel = preferencesRepository.getHapticFeedbackLevel().toDouble() / 100.0
             val realAmplitude = (feedbackLevel * amplitude).toInt()

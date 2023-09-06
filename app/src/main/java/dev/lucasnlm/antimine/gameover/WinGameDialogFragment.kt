@@ -45,11 +45,12 @@ class WinGameDialogFragment : CommonGameDialogFragment() {
             ?.run {
                 dialogViewModel.sendEvent(
                     EndGameDialogEvent.BuildCustomEndGame(
-                        gameResult = if (totalMines > 0) {
-                            gameResult
-                        } else {
-                            GameResult.GameOver
-                        },
+                        gameResult =
+                            if (totalMines > 0) {
+                                gameResult
+                            } else {
+                                GameResult.GameOver
+                            },
                         showContinueButton = showContinueButton,
                         time = time,
                         rightMines = rightMines,
@@ -211,11 +212,13 @@ class WinGameDialogFragment : CommonGameDialogFragment() {
     }
 
     companion object {
-        fun newInstance(commonDialogState: CommonDialogState) = WinGameDialogFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(DIALOG_STATE, commonDialogState)
+        fun newInstance(commonDialogState: CommonDialogState) =
+            WinGameDialogFragment().apply {
+                arguments =
+                    Bundle().apply {
+                        putParcelable(DIALOG_STATE, commonDialogState)
+                    }
             }
-        }
 
         val TAG = WinGameDialogFragment::class.simpleName!!
     }

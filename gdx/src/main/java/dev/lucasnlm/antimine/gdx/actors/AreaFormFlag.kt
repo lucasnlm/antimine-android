@@ -18,12 +18,19 @@ private fun Int.checkForm(flag: Int): Boolean {
 }
 
 fun Int.top(): Boolean = checkForm(AreaFormFlag.TOP)
+
 fun Int.bottom(): Boolean = checkForm(AreaFormFlag.BOTTOM)
+
 fun Int.left(): Boolean = checkForm(AreaFormFlag.LEFT)
+
 fun Int.right(): Boolean = checkForm(AreaFormFlag.RIGHT)
+
 fun Int.topLeft(): Boolean = checkForm(AreaFormFlag.TOP_LEFT)
+
 fun Int.topRight(): Boolean = checkForm(AreaFormFlag.TOP_RIGHT)
+
 fun Int.bottomLeft(): Boolean = checkForm(AreaFormFlag.BOTTOM_LEFT)
+
 fun Int.bottomRight(): Boolean = checkForm(AreaFormFlag.BOTTOM_RIGHT)
 
 fun areaFormOf(
@@ -75,26 +82,26 @@ fun areaFormOf(
 
 fun Int.toAtlasNames(): Map<String, Boolean> {
     return mapOf(
-        AtlasNames.core to true,
-        AtlasNames.top to top(),
-        AtlasNames.left to left(),
-        AtlasNames.bottom to bottom(),
-        AtlasNames.right to right(),
-        AtlasNames.cornerTopLeft to (!top() && !left()),
-        AtlasNames.cornerTopRight to (!top() && !right()),
-        AtlasNames.cornerBottomLeft to (!bottom() && !left()),
-        AtlasNames.cornerBottomRight to (!bottom() && !right()),
-        AtlasNames.borderCornerTopRight to (top() && right() && !topRight()),
-        AtlasNames.borderCornerTopLeft to (top() && left() && !topLeft()),
-        AtlasNames.borderCornerBottomRight to (bottom() && right() && !bottomRight()),
-        AtlasNames.borderCornerBottomLeft to (bottom() && left() && !bottomLeft()),
-        AtlasNames.fillTopLeft to (top() && left() && topLeft()),
-        AtlasNames.fillTopRight to (top() && right() && topRight()),
-        AtlasNames.fillBottomLeft to (bottom() && left() && bottomLeft()),
-        AtlasNames.fillBottomRight to (bottom() && right() && bottomRight()),
+        AtlasNames.CORE to true,
+        AtlasNames.TOP to top(),
+        AtlasNames.LEFT to left(),
+        AtlasNames.BOTTOM to bottom(),
+        AtlasNames.RIGHT to right(),
+        AtlasNames.CORNER_TOP_LEFT to (!top() && !left()),
+        AtlasNames.CORNER_TOP_RIGHT to (!top() && !right()),
+        AtlasNames.CORNER_BOTTOM_LEFT to (!bottom() && !left()),
+        AtlasNames.CORNER_BOTTOM_RIGHT to (!bottom() && !right()),
+        AtlasNames.BORDER_CORNER_RIGHT to (top() && right() && !topRight()),
+        AtlasNames.BORDER_CORNER_LEFT to (top() && left() && !topLeft()),
+        AtlasNames.BORDER_CORNER_BOTTOM_RIGHT to (bottom() && right() && !bottomRight()),
+        AtlasNames.BORDER_CORNER_BOTTOM_LEFT to (bottom() && left() && !bottomLeft()),
+        AtlasNames.FILL_TOP_LEFT to (top() && left() && topLeft()),
+        AtlasNames.FILL_TOP_RIGHT to (top() && right() && topRight()),
+        AtlasNames.FILL_BOTTOM_LEFT to (bottom() && left() && bottomLeft()),
+        AtlasNames.FILL_BOTTOM_RIGHT to (bottom() && right() && bottomRight()),
     )
 }
 
-const val areaNoForm = 0b00000000
+const val AREA_NO_FORM = 0b00000000
 
-const val areaFullForm = 0b11111111
+const val AREA_FULL_FORM = 0b11111111

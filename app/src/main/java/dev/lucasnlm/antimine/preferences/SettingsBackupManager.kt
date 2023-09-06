@@ -49,7 +49,10 @@ class SettingsBackupManager(
         }.getOrNull()
     }
 
-    fun exportSettings(location: Uri, exportData: Map<String, Any?>): Boolean {
+    fun exportSettings(
+        location: Uri,
+        exportData: Map<String, Any?>,
+    ): Boolean {
         val contentResolver: ContentResolver = context.contentResolver
         val filteredData = filterDataToExport(exportData).toMutableMap()
         filteredData[PACKAGE_KEY] = PACKAGE

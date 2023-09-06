@@ -34,16 +34,20 @@ class MinefieldHandler(
             .forEach { field[it.id] = it.copy(mistake = false) }
     }
 
-    fun revealRandomMineNearUncoveredArea(lastX: Int? = null, lastY: Int? = null): Int? {
+    fun revealRandomMineNearUncoveredArea(
+        lastX: Int? = null,
+        lastY: Int? = null,
+    ): Int? {
         val unrevealedMines = field.filter { it.hasMine && it.mark.isNone() && !it.revealed && it.isCovered }
-        val nearestTarget = if (lastX != null && lastY != null) {
-            unrevealedMines.filter {
-                (lastX - it.posX).absoluteValue < NEAR_MINE_THRESHOLD &&
-                    (lastY - it.posY).absoluteValue < NEAR_MINE_THRESHOLD
-            }.shuffled().firstOrNull()
-        } else {
-            null
-        }
+        val nearestTarget =
+            if (lastX != null && lastY != null) {
+                unrevealedMines.filter {
+                    (lastX - it.posX).absoluteValue < NEAR_MINE_THRESHOLD &&
+                        (lastY - it.posY).absoluteValue < NEAR_MINE_THRESHOLD
+                }.shuffled().firstOrNull()
+            } else {
+                null
+            }
 
         return when {
             nearestTarget != null -> {
@@ -65,38 +69,49 @@ class MinefieldHandler(
         }
     }
 
-    fun toggleMarkAt(index: Int, mark: Mark) {
+    fun toggleMarkAt(
+        index: Int,
+        mark: Mark,
+    ) {
         field.getOrNull(index)?.let {
-            field[it.id] = if (it.mark.isNone()) {
-                it.copy(mark = mark)
-            } else {
-                it.copy(mark = Mark.None)
-            }
+            field[it.id] =
+                if (it.mark.isNone()) {
+                    it.copy(mark = mark)
+                } else {
+                    it.copy(mark = Mark.None)
+                }
         }
     }
 
     fun switchMarkAt(index: Int) {
         field.getOrNull(index)?.let {
             if (it.isCovered) {
-                field[index] = it.copy(
-                    mark = when (it.mark) {
-                        Mark.PurposefulNone, Mark.None -> Mark.Flag
-                        Mark.Flag -> if (useQuestionMark && !individualActions) Mark.Question else Mark.None
-                        Mark.Question -> Mark.None
-                    },
-                )
+                field[index] =
+                    it.copy(
+                        mark =
+                            when (it.mark) {
+                                Mark.PurposefulNone, Mark.None -> Mark.Flag
+                                Mark.Flag -> if (useQuestionMark && !individualActions) Mark.Question else Mark.None
+                                Mark.Question -> Mark.None
+                            },
+                    )
             }
         }
     }
 
-    fun openAt(index: Int, passive: Boolean, openNeighbors: Boolean = true) {
+    fun openAt(
+        index: Int,
+        passive: Boolean,
+        openNeighbors: Boolean = true,
+    ) {
         field.getOrNull(index)?.run {
             if (isCovered) {
-                field[index] = copy(
-                    isCovered = false,
-                    mark = Mark.None,
-                    mistake = (!passive && hasMine) || (!hasMine && mark.isFlag()),
-                )
+                field[index] =
+                    copy(
+                        isCovered = false,
+                        mark = Mark.None,
+                        mistake = (!passive && hasMine) || (!hasMine && mark.isFlag()),
+                    )
 
                 if (!hasMine && minesAround == 0 && openNeighbors) {
                     neighborsIds

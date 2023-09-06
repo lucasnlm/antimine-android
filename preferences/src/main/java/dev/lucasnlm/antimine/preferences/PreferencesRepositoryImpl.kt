@@ -14,25 +14,27 @@ class PreferencesRepositoryImpl(
         migrateOldPreferences()
     }
 
-    private val listOfControlCustoms = listOf(
-        PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY,
-        PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT,
-        PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT,
-    )
+    private val listOfControlCustoms =
+        listOf(
+            PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY,
+            PreferenceKeys.PREFERENCE_LONG_PRESS_TIMEOUT,
+            PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT,
+        )
 
-    private val listOfSettingsCustoms = listOf(
-        PreferenceKeys.PREFERENCE_ASSISTANT,
-        PreferenceKeys.PREFERENCE_ANIMATION,
-        PreferenceKeys.PREFERENCE_QUESTION_MARK,
-        PreferenceKeys.PREFERENCE_USE_HINT,
-        PreferenceKeys.PREFERENCE_SOUND_EFFECTS,
-        PreferenceKeys.PREFERENCE_SHOW_WINDOWS,
-        PreferenceKeys.PREFERENCE_OPEN_DIRECTLY,
-        PreferenceKeys.PREFERENCE_ALLOW_TAP_NUMBER,
-        PreferenceKeys.PREFERENCE_SHOW_CLOCK,
-        PreferenceKeys.PREFERENCE_DIM_NUMBERS,
-        PreferenceKeys.PREFERENCE_LET_NUMBERS_AUTO_FLAG,
-    )
+    private val listOfSettingsCustoms =
+        listOf(
+            PreferenceKeys.PREFERENCE_ASSISTANT,
+            PreferenceKeys.PREFERENCE_ANIMATION,
+            PreferenceKeys.PREFERENCE_QUESTION_MARK,
+            PreferenceKeys.PREFERENCE_USE_HINT,
+            PreferenceKeys.PREFERENCE_SOUND_EFFECTS,
+            PreferenceKeys.PREFERENCE_SHOW_WINDOWS,
+            PreferenceKeys.PREFERENCE_OPEN_DIRECTLY,
+            PreferenceKeys.PREFERENCE_ALLOW_TAP_NUMBER,
+            PreferenceKeys.PREFERENCE_SHOW_CLOCK,
+            PreferenceKeys.PREFERENCE_DIM_NUMBERS,
+            PreferenceKeys.PREFERENCE_LET_NUMBERS_AUTO_FLAG,
+        )
 
     private fun longPressTimeout() = ViewConfiguration.getLongPressTimeout()
 
@@ -59,14 +61,15 @@ class PreferencesRepositoryImpl(
         preferencesManager.removeKey(PreferenceKeys.PREFERENCE_CUSTOM_GAME_SEED)
     }
 
-    override fun customGameMode(): Minefield = with(preferencesManager) {
-        Minefield(
-            getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_WIDTH, 9),
-            getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_HEIGHT, 9),
-            getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_MINES, 9),
-            getLongOrNull(PreferenceKeys.PREFERENCE_CUSTOM_GAME_SEED),
-        )
-    }
+    override fun customGameMode(): Minefield =
+        with(preferencesManager) {
+            Minefield(
+                getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_WIDTH, 9),
+                getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_HEIGHT, 9),
+                getInt(PreferenceKeys.PREFERENCE_CUSTOM_GAME_MINES, 9),
+                getLongOrNull(PreferenceKeys.PREFERENCE_CUSTOM_GAME_SEED),
+            )
+        }
 
     override fun updateCustomGameMode(minefield: Minefield) {
         preferencesManager.apply {
@@ -81,15 +84,13 @@ class PreferencesRepositoryImpl(
         }
     }
 
-    override fun useFlagAssistant(): Boolean =
-        preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_ASSISTANT, true)
+    override fun useFlagAssistant(): Boolean = preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_ASSISTANT, true)
 
     override fun setFlagAssistant(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_ASSISTANT, value)
     }
 
-    override fun useHapticFeedback(): Boolean =
-        preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_VIBRATION, true)
+    override fun useHapticFeedback(): Boolean = preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_VIBRATION, true)
 
     override fun setHapticFeedback(value: Boolean) {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_VIBRATION, value)
@@ -141,8 +142,7 @@ class PreferencesRepositoryImpl(
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_MUSIC, value)
     }
 
-    override fun touchSensibility(): Int =
-        preferencesManager.getInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, 5)
+    override fun touchSensibility(): Int = preferencesManager.getInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, 5)
 
     override fun setTouchSensibility(sensibility: Int) {
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_TOUCH_SENSIBILITY, sensibility)
@@ -181,8 +181,7 @@ class PreferencesRepositoryImpl(
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_CONTROL_STYLE, controlStyle.ordinal)
     }
 
-    override fun isFirstUse(): Boolean =
-        preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_FIRST_USE, true)
+    override fun isFirstUse(): Boolean = preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_FIRST_USE, true)
 
     override fun completeFirstUse() {
         preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_FIRST_USE, false)
@@ -211,8 +210,7 @@ class PreferencesRepositoryImpl(
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_DOUBLE_CLICK_TIMEOUT, value.toInt())
     }
 
-    override fun themeId(): Long? =
-        preferencesManager.getIntOrNull(PreferenceKeys.PREFERENCE_CUSTOM_THEME)?.toLong()
+    override fun themeId(): Long? = preferencesManager.getIntOrNull(PreferenceKeys.PREFERENCE_CUSTOM_THEME)?.toLong()
 
     override fun useTheme(themeId: Long) {
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_CUSTOM_THEME, themeId.toInt())
@@ -238,11 +236,9 @@ class PreferencesRepositoryImpl(
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_STATS_BASE, statsBase)
     }
 
-    override fun getStatsBase(): Int =
-        preferencesManager.getInt(PreferenceKeys.PREFERENCE_STATS_BASE, 0)
+    override fun getStatsBase(): Int = preferencesManager.getInt(PreferenceKeys.PREFERENCE_STATS_BASE, 0)
 
-    override fun getUseCount(): Int =
-        preferencesManager.getInt(PreferenceKeys.PREFERENCE_USE_COUNT, 0)
+    override fun getUseCount(): Int = preferencesManager.getInt(PreferenceKeys.PREFERENCE_USE_COUNT, 0)
 
     override fun incrementUseCount() {
         val current = preferencesManager.getInt(PreferenceKeys.PREFERENCE_USE_COUNT, 0)
@@ -259,8 +255,7 @@ class PreferencesRepositoryImpl(
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_PROGRESSIVE_VALUE, (value - 1).coerceAtLeast(0))
     }
 
-    override fun getProgressiveValue(): Int =
-        preferencesManager.getInt(PreferenceKeys.PREFERENCE_PROGRESSIVE_VALUE, 0)
+    override fun getProgressiveValue(): Int = preferencesManager.getInt(PreferenceKeys.PREFERENCE_PROGRESSIVE_VALUE, 0)
 
     override fun isRequestRatingEnabled(): Boolean =
         preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_REQUEST_RATING, true)

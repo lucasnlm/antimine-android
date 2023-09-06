@@ -20,28 +20,30 @@ class ThemeViewModel(
         themeRepository.setSkin(skin.id)
     }
 
-    override suspend fun mapEventToState(event: ThemeEvent) = flow {
-        when (event) {
-            is ThemeEvent.ChangeTheme -> {
-                setTheme(event.newTheme)
-                analyticsManager.sentEvent(Analytics.ClickTheme(event.newTheme.id))
-                emit(state.copy(currentTheme = event.newTheme))
-            }
-            is ThemeEvent.ChangeSkin -> {
-                setSkin(event.newSkin)
-                analyticsManager.sentEvent(Analytics.ClickSkin(event.newSkin.id))
-                emit(state.copy(currentAppSkin = event.newSkin))
-            }
-            else -> {
-                // Ignore
+    override suspend fun mapEventToState(event: ThemeEvent) =
+        flow {
+            when (event) {
+                is ThemeEvent.ChangeTheme -> {
+                    setTheme(event.newTheme)
+                    analyticsManager.sentEvent(Analytics.ClickTheme(event.newTheme.id))
+                    emit(state.copy(currentTheme = event.newTheme))
+                }
+                is ThemeEvent.ChangeSkin -> {
+                    setSkin(event.newSkin)
+                    analyticsManager.sentEvent(Analytics.ClickSkin(event.newSkin.id))
+                    emit(state.copy(currentAppSkin = event.newSkin))
+                }
+                else -> {
+                    // Ignore
+                }
             }
         }
-    }
 
-    override fun initialState() = ThemeState(
-        currentTheme = themeRepository.getTheme(),
-        currentAppSkin = themeRepository.getSkin(),
-        themes = themeRepository.getAllThemes(),
-        appSkins = themeRepository.getAllSkins(),
-    )
+    override fun initialState() =
+        ThemeState(
+            currentTheme = themeRepository.getTheme(),
+            currentAppSkin = themeRepository.getSkin(),
+            themes = themeRepository.getAllThemes(),
+            appSkins = themeRepository.getAllSkins(),
+        )
 }

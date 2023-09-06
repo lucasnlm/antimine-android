@@ -35,9 +35,10 @@ class TutorialActivity : ThemedActivity() {
             audioManager.playClickSound()
 
             val deeplink = Uri.parse(NEW_GAME_DEEPLINK)
-            val intent = Intent(Intent.ACTION_VIEW, deeplink).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            }
+            val intent =
+                Intent(Intent.ACTION_VIEW, deeplink).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                }
             startActivity(intent)
         }
     }

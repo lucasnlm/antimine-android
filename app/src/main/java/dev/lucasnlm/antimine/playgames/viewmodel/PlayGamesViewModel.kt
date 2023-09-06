@@ -14,20 +14,21 @@ class PlayGamesViewModel(
     private val analyticsManager: AnalyticsManager,
 ) : StatelessViewModel<PlayGamesEvent>() {
 
-    val playGamesItems = listOf(
-        PlayGamesItem(
-            id = 0,
-            iconRes = R.drawable.games_achievements,
-            stringRes = i18n.string.achievements,
-            triggerEvent = PlayGamesEvent.OpenAchievements,
-        ),
-        PlayGamesItem(
-            id = 1,
-            iconRes = R.drawable.games_leaderboards,
-            stringRes = i18n.string.leaderboards,
-            triggerEvent = PlayGamesEvent.OpenLeaderboards,
-        ),
-    )
+    val playGamesItems =
+        listOf(
+            PlayGamesItem(
+                id = 0,
+                iconRes = R.drawable.games_achievements,
+                stringRes = i18n.string.achievements,
+                triggerEvent = PlayGamesEvent.OpenAchievements,
+            ),
+            PlayGamesItem(
+                id = 1,
+                iconRes = R.drawable.games_leaderboards,
+                stringRes = i18n.string.leaderboards,
+                triggerEvent = PlayGamesEvent.OpenLeaderboards,
+            ),
+        )
 
     fun openAchievements(activity: Activity) {
         analyticsManager.sentEvent(Analytics.OpenAchievements)

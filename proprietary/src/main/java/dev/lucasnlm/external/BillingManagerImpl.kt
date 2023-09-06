@@ -30,11 +30,12 @@ class BillingManagerImpl(
             .build()
     }
 
-    private val allowedErrorCodes = listOf(
-        BillingClient.BillingResponseCode.OK,
-        BillingClient.BillingResponseCode.USER_CANCELED,
-        BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED,
-    )
+    private val allowedErrorCodes =
+        listOf(
+            BillingClient.BillingResponseCode.OK,
+            BillingClient.BillingResponseCode.USER_CANCELED,
+            BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED,
+        )
 
     private var premiumProduct: ProductDetails? = null
 
@@ -49,13 +50,15 @@ class BillingManagerImpl(
     private fun asyncRefreshPurchasesList() {
         coroutineScope.launch {
             while (true) {
-                val queryPurchasesParams = QueryPurchasesParams.newBuilder()
-                    .setProductType(BillingClient.ProductType.INAPP)
-                    .build()
+                val queryPurchasesParams =
+                    QueryPurchasesParams.newBuilder()
+                        .setProductType(BillingClient.ProductType.INAPP)
+                        .build()
 
-                val purchasesList: List<Purchase> = billingClient
-                    .queryPurchasesAsync(queryPurchasesParams)
-                    .purchasesList
+                val purchasesList: List<Purchase> =
+                    billingClient
+                        .queryPurchasesAsync(queryPurchasesParams)
+                        .purchasesList
 
                 if (purchasesList.isEmpty()) {
                     break
@@ -73,27 +76,28 @@ class BillingManagerImpl(
     }
 
     private suspend fun handlePurchases(purchases: List<Purchase>): Boolean {
-        val status: Boolean = purchases.firstOrNull {
-            it.products.contains(PREMIUM)
-        }.let {
-            when (it?.purchaseState) {
-                Purchase.PurchaseState.PURCHASED, Purchase.PurchaseState.PENDING -> true
-                else -> false
-            }.also { purchased ->
-                if (purchased && it?.isAcknowledged == false) {
-                    val acknowledgePurchaseParams =
-                        AcknowledgePurchaseParams.newBuilder()
-                            .setPurchaseToken(it.purchaseToken)
-                            .build()
+        val status: Boolean =
+            purchases.firstOrNull {
+                it.products.contains(PREMIUM)
+            }.let {
+                when (it?.purchaseState) {
+                    Purchase.PurchaseState.PURCHASED, Purchase.PurchaseState.PENDING -> true
+                    else -> false
+                }.also { purchased ->
+                    if (purchased && it?.isAcknowledged == false) {
+                        val acknowledgePurchaseParams =
+                            AcknowledgePurchaseParams.newBuilder()
+                                .setPurchaseToken(it.purchaseToken)
+                                .build()
 
-                    val result = billingClient.acknowledgePurchase(acknowledgePurchaseParams)
+                        val result = billingClient.acknowledgePurchase(acknowledgePurchaseParams)
 
-                    if (result.responseCode != BillingClient.BillingResponseCode.OK) {
-                        return false
+                        if (result.responseCode != BillingClient.BillingResponseCode.OK) {
+                            return false
+                        }
                     }
                 }
             }
-        }
 
         purchaseBroadcaster.tryEmit(PurchaseInfo.PurchaseResult(isFreeUnlock = false, unlockStatus = status))
         return true
@@ -118,16 +122,18 @@ class BillingManagerImpl(
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
             retry = 0
 
-            val premiumProductParams = QueryProductDetailsParams
-                .Product
-                .newBuilder()
-                .setProductType(BillingClient.ProductType.INAPP)
-                .setProductId(PREMIUM)
-                .build()
+            val premiumProductParams =
+                QueryProductDetailsParams
+                    .Product
+                    .newBuilder()
+                    .setProductType(BillingClient.ProductType.INAPP)
+                    .setProductId(PREMIUM)
+                    .build()
 
-            val productDetailsParams = QueryProductDetailsParams.newBuilder()
-                .setProductList(listOf(premiumProductParams))
-                .build()
+            val productDetailsParams =
+                QueryProductDetailsParams.newBuilder()
+                    .setProductList(listOf(premiumProductParams))
+                    .build()
 
             billingClient
                 .queryProductDetailsAsync(productDetailsParams) { _, list ->
@@ -150,17 +156,21 @@ class BillingManagerImpl(
             val premiumPrice = productDetails.oneTimePurchaseOfferDetails?.formattedPrice
 
             if (premiumPrice != null) {
-                val price = Price(
-                    premiumPrice,
-                    offer = false,
-                )
+                val price =
+                    Price(
+                        premiumPrice,
+                        offer = false,
+                    )
 
                 unlockPrice.tryEmit(price)
             }
         }
     }
 
-    override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
+    override fun onPurchasesUpdated(
+        billingResult: BillingResult,
+        purchases: MutableList<Purchase>?,
+    ) {
         val resultCode = billingResult.responseCode
         if (resultCode == BillingClient.BillingResponseCode.OK) {
             asyncRefreshPurchasesList()
@@ -183,13 +193,15 @@ class BillingManagerImpl(
         val premiumProduct = this.premiumProduct
 
         if (billingClient.isReady && premiumProduct != null) {
-            val productDetailsParams = BillingFlowParams.ProductDetailsParams.newBuilder()
-                .setProductDetails(premiumProduct)
-                .build()
+            val productDetailsParams =
+                BillingFlowParams.ProductDetailsParams.newBuilder()
+                    .setProductDetails(premiumProduct)
+                    .build()
 
-            val flowParams = BillingFlowParams.newBuilder()
-                .setProductDetailsParamsList(listOf(productDetailsParams))
-                .build()
+            val flowParams =
+                BillingFlowParams.newBuilder()
+                    .setProductDetailsParamsList(listOf(productDetailsParams))
+                    .build()
 
             billingClient.launchBillingFlow(activity, flowParams)
         } else {

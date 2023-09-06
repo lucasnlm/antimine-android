@@ -28,19 +28,43 @@ enum class Leaderboard(
 
 interface PlayGamesManager {
     suspend fun playerId(): String?
+
     fun hasGooglePlayGames(): Boolean
+
     suspend fun silentLogin(): Boolean
+
     fun showPlayPopUp(activity: Activity)
+
     fun getLoginIntent(): Intent?
+
     fun handleLoginResult(data: Intent?)
+
     fun isLogged(): Boolean
+
     fun openAchievements(activity: Activity)
+
     fun openLeaderboards(activity: Activity)
+
     suspend fun unlockAchievement(achievement: Achievement)
-    suspend fun incrementAchievement(achievement: Achievement, value: Int)
-    suspend fun setAchievementSteps(achievement: Achievement, value: Int)
-    fun submitLeaderboard(leaderboard: Leaderboard, value: Long)
+
+    suspend fun incrementAchievement(
+        achievement: Achievement,
+        value: Int,
+    )
+
+    suspend fun setAchievementSteps(
+        achievement: Achievement,
+        value: Int,
+    )
+
+    fun submitLeaderboard(
+        leaderboard: Leaderboard,
+        value: Long,
+    )
+
     fun keepRequestingLogin(status: Boolean)
+
     fun shouldRequestLogin(): Boolean
+
     fun signInToFirebase(activity: Activity)
 }

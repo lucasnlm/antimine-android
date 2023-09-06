@@ -87,73 +87,82 @@ class CardButtonView : FrameLayout {
         @DrawableRes startIcon: Int? = null,
         @DrawableRes endIcon: Int? = null,
     ) {
-        val color = if (invert || isFocused) {
-            com.google.android.material.R.attr.colorSurface
-            MaterialColors.getColor(this, GR.attr.colorSurface)
-        } else {
-            MaterialColors.getColor(this, GR.attr.colorPrimary)
-        }
-
-        val backgroundColor = if (invert || isFocused) {
-            MaterialColors.getColor(this, GR.attr.colorPrimary)
-        } else {
-            MaterialColors.getColor(this, GR.attr.colorSurface)
-        }
-
-        val label = binding.label.apply {
-            this.text = text
-            if (centralize) {
-                gravity = Gravity.CENTER_HORIZONTAL
+        val color =
+            if (invert || isFocused) {
+                com.google.android.material.R.attr.colorSurface
+                MaterialColors.getColor(this, GR.attr.colorSurface)
+            } else {
+                MaterialColors.getColor(this, GR.attr.colorPrimary)
             }
-            setTextColor(color)
-        }
 
-        val size = binding.size.apply {
-            isVisible = extra != null
-            if (extra != null) {
-                this.text = extra
+        val backgroundColor =
+            if (invert || isFocused) {
+                MaterialColors.getColor(this, GR.attr.colorPrimary)
+            } else {
+                MaterialColors.getColor(this, GR.attr.colorSurface)
+            }
+
+        val label =
+            binding.label.apply {
+                this.text = text
+                if (centralize) {
+                    gravity = Gravity.CENTER_HORIZONTAL
+                }
                 setTextColor(color)
             }
-        }
 
-        val iconView = binding.icon.apply {
-            isVisible = startIcon != null
-            if (startIcon != null) {
-                setImageResource(startIcon)
+        val size =
+            binding.size.apply {
+                isVisible = extra != null
+                if (extra != null) {
+                    this.text = extra
+                    setTextColor(color)
+                }
             }
-            setColorFilter(color)
-        }
 
-        val endIconView = binding.endIcon.apply {
-            if (endIcon == null) {
-                setImageResource(0)
-            } else {
-                setImageResource(endIcon)
+        val iconView =
+            binding.icon.apply {
+                isVisible = startIcon != null
+                if (startIcon != null) {
+                    setImageResource(startIcon)
+                }
+                setColorFilter(color)
             }
-            setColorFilter(color)
-        }
+
+        val endIconView =
+            binding.endIcon.apply {
+                if (endIcon == null) {
+                    setImageResource(0)
+                } else {
+                    setImageResource(endIcon)
+                }
+                setColorFilter(color)
+            }
 
         binding.cardView.apply {
             setOnClickListener(onAction)
-            strokeColor = if (!invert) {
-                color
-            } else {
-                backgroundColor
-            }
+            strokeColor =
+                if (!invert) {
+                    color
+                } else {
+                    backgroundColor
+                }
             setCardBackgroundColor(backgroundColor)
 
             setOnFocusChangeListener { _, focused ->
-                val focusedBackgroundColor = if (focused) {
-                    theme.palette.accent.toAndroidColor()
-                } else {
-                    theme.palette.background.toAndroidColor()
-                }
+                val focusedBackgroundColor =
+                    if (focused) {
+                        theme.palette.accent.toAndroidColor()
+                    } else {
+                        theme.palette.background.toAndroidColor()
+                    }
 
-                val inverted = if (focused) {
-                    theme.palette.background.toAndroidColor()
-                } else {
-                    theme.palette.accent.toAndroidColor()
-                }
+                val inverted =
+                    if (focused) {
+                        theme.palette.background.toAndroidColor()
+                    } else {
+                        theme.palette.accent.toAndroidColor()
+                    }
 
                 label.setTextColor(inverted)
                 size.setTextColor(inverted)

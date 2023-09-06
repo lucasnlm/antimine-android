@@ -56,13 +56,15 @@ class MinefieldFactoryTest {
 
     @Test
     fun testFromDifficultyPresetCustom() {
-        val preferencesRepository: PreferencesRepository = mock {
-            on { customGameMode() } doReturn Minefield(
-                10,
-                10,
-                30,
-            )
-        }
+        val preferencesRepository: PreferencesRepository =
+            mock {
+                on { customGameMode() } doReturn
+                    Minefield(
+                        10,
+                        10,
+                        30,
+                    )
+            }
 
         MinefieldRepositoryImpl().fromDifficulty(
             Difficulty.Custom,
@@ -77,11 +79,12 @@ class MinefieldFactoryTest {
 
     @Test
     fun testFromDifficultyPresetStandard() {
-        val dimensionRepository: DimensionRepository = mock {
-            on { areaSize() } doReturn 10.0f
-            on { actionBarSizeWithStatus() } doReturn 10
-            on { displaySize() } doReturn MinefieldSize(500, 1000)
-        }
+        val dimensionRepository: DimensionRepository =
+            mock {
+                on { areaSize() } doReturn 10.0f
+                on { actionBarSizeWithStatus() } doReturn 10
+                on { displaySize() } doReturn MinefieldSize(500, 1000)
+            }
 
         MinefieldRepositoryImpl().fromDifficulty(
             Difficulty.Standard,

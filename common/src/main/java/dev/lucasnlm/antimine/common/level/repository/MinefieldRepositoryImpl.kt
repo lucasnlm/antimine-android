@@ -11,16 +11,18 @@ class MinefieldRepositoryImpl : MinefieldRepository {
         progressiveMines: Int,
     ): Minefield {
         val fieldSize = dimensionRepository.areaSize()
-        val horizontalGap = if (dimensionRepository.horizontalNavigationBarHeight() > 0) {
-            HORIZONTAL_STANDARD_GAP
-        } else {
-            HORIZONTAL_STANDARD_GAP_WITHOUT_SIDE
-        }
-        val verticalGap = if (dimensionRepository.verticalNavigationBarHeight() > 0) {
-            VERTICAL_STANDARD_GAP
-        } else {
-            VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM
-        }
+        val horizontalGap =
+            if (dimensionRepository.horizontalNavigationBarHeight() > 0) {
+                HORIZONTAL_STANDARD_GAP
+            } else {
+                HORIZONTAL_STANDARD_GAP_WITHOUT_SIDE
+            }
+        val verticalGap =
+            if (dimensionRepository.verticalNavigationBarHeight() > 0) {
+                VERTICAL_STANDARD_GAP
+            } else {
+                VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM
+            }
 
         val display = dimensionRepository.displaySize()
         val width = display.width
@@ -55,10 +57,11 @@ class MinefieldRepositoryImpl : MinefieldRepository {
         dimensionRepository: DimensionRepository,
         preferencesRepository: PreferencesRepository,
     ): Minefield {
-        var result: Minefield = baseStandardSize(
-            dimensionRepository,
-            preferencesRepository.getProgressiveValue(),
-        )
+        var result: Minefield =
+            baseStandardSize(
+                dimensionRepository,
+                preferencesRepository.getProgressiveValue(),
+            )
         var resultWidth = result.width
         var resultHeight = result.height
 

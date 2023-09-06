@@ -18,27 +18,24 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class StatsViewModelTest : IntentViewModelTest() {
 
-    private val listOfStats = listOf(
-        // Standard
-        Stats(0, 1000, 10, 1, 6, 12, 30),
-        Stats(1, 1200, 11, 0, 6, 12, 20),
-
-        // Expert
-        Stats(2, 2000, 99, 1, 24, 24, 90),
-        Stats(3, 3200, 99, 0, 24, 24, 20),
-
-        // Intermediate
-        Stats(4, 4000, 40, 1, 16, 16, 40),
-        Stats(5, 5200, 40, 0, 16, 16, 10),
-
-        // Beginner
-        Stats(6, 6000, 10, 1, 9, 9, 15),
-        Stats(7, 7200, 10, 0, 9, 9, 20),
-
-        // Custom
-        Stats(8, 8000, 5, 1, 5, 5, 5),
-        Stats(9, 9200, 5, 0, 5, 5, 4),
-    )
+    private val listOfStats =
+        listOf(
+            // Standard
+            Stats(0, 1000, 10, 1, 6, 12, 30),
+            Stats(1, 1200, 11, 0, 6, 12, 20),
+            // Expert
+            Stats(2, 2000, 99, 1, 24, 24, 90),
+            Stats(3, 3200, 99, 0, 24, 24, 20),
+            // Intermediate
+            Stats(4, 4000, 40, 1, 16, 16, 40),
+            Stats(5, 5200, 40, 0, 16, 16, 10),
+            // Beginner
+            Stats(6, 6000, 10, 1, 9, 9, 15),
+            Stats(7, 7200, 10, 0, 9, 9, 20),
+            // Custom
+            Stats(8, 8000, 5, 1, 5, 5, 5),
+            Stats(9, 9200, 5, 0, 5, 5, 4),
+        )
 
     private val prefsRepository: PreferencesRepository = mockk()
     private val minefieldRepository: MinefieldRepository = mockk()
@@ -54,40 +51,43 @@ class StatsViewModelTest : IntentViewModelTest() {
     }
 
     @Test
-    fun testStatsTotalGames() = runTest {
-        val repository = MemoryStatsRepository(listOfStats.toMutableList())
-        val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
-        viewModel.sendEvent(StatsEvent.LoadStats)
-        val statsModel = viewModel.singleState()
-        assertEquals(10, statsModel.stats[0].totalGames)
-        assertEquals(2, statsModel.stats[1].totalGames)
-        assertEquals(2, statsModel.stats[2].totalGames)
-        assertEquals(2, statsModel.stats[3].totalGames)
-        assertEquals(2, statsModel.stats[4].totalGames)
-        assertEquals(2, statsModel.stats[5].totalGames)
-    }
-
-    @Test
-    fun testStatsTotalGamesWithBase() = runTest {
-        val repository = MemoryStatsRepository(listOfStats.toMutableList())
-        val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
-
-        mapOf(0 to 3, 2 to 5, 4 to 4, 6 to 3, 8 to 2, 10 to 0).forEach { (base, expected) ->
-            every { prefsRepository.getStatsBase() } returns base
+    fun testStatsTotalGames() =
+        runTest {
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
+            val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
             viewModel.sendEvent(StatsEvent.LoadStats)
-            val statsModelBase0 = viewModel.singleState()
-            assertEquals(expected, statsModelBase0.stats.size)
+            val statsModel = viewModel.singleState()
+            assertEquals(10, statsModel.stats[0].totalGames)
+            assertEquals(2, statsModel.stats[1].totalGames)
+            assertEquals(2, statsModel.stats[2].totalGames)
+            assertEquals(2, statsModel.stats[3].totalGames)
+            assertEquals(2, statsModel.stats[4].totalGames)
+            assertEquals(2, statsModel.stats[5].totalGames)
         }
-    }
 
     @Test
-    fun testStatsTotalGamesEmpty() = runTest {
-        val repository = MemoryStatsRepository(mutableListOf())
-        val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
-        viewModel.sendEvent(StatsEvent.LoadStats)
-        val statsModel = viewModel.singleState()
-        assertEquals(0, statsModel.stats.size)
-    }
+    fun testStatsTotalGamesWithBase() =
+        runTest {
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
+            val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
+
+            mapOf(0 to 3, 2 to 5, 4 to 4, 6 to 3, 8 to 2, 10 to 0).forEach { (base, expected) ->
+                every { prefsRepository.getStatsBase() } returns base
+                viewModel.sendEvent(StatsEvent.LoadStats)
+                val statsModelBase0 = viewModel.singleState()
+                assertEquals(expected, statsModelBase0.stats.size)
+            }
+        }
+
+    @Test
+    fun testStatsTotalGamesEmpty() =
+        runTest {
+            val repository = MemoryStatsRepository(mutableListOf())
+            val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
+            viewModel.sendEvent(StatsEvent.LoadStats)
+            val statsModel = viewModel.singleState()
+            assertEquals(0, statsModel.stats.size)
+        }
 
     @Test
     fun testStatsMustGenerateStatsForEveryKindOfGamePlusGeneral() {
@@ -101,92 +101,98 @@ class StatsViewModelTest : IntentViewModelTest() {
     }
 
     @Test
-    fun testStatsTotalTime() = runTest {
-        val repository = MemoryStatsRepository(listOfStats.toMutableList())
-        val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
-        viewModel.sendEvent(StatsEvent.LoadStats)
-        val statsModel = viewModel.singleState()
+    fun testStatsTotalTime() =
+        runTest {
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
+            val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
+            viewModel.sendEvent(StatsEvent.LoadStats)
+            val statsModel = viewModel.singleState()
 
-        assertEquals(47000, statsModel.stats[0].totalTime)
-        assertEquals(2200, statsModel.stats[1].totalTime)
-        assertEquals(5200, statsModel.stats[2].totalTime)
-        assertEquals(9200, statsModel.stats[3].totalTime)
-        assertEquals(13200, statsModel.stats[4].totalTime)
-        assertEquals(17200, statsModel.stats[5].totalTime)
-    }
-
-    @Test
-    fun testStatsAverageTime() = runTest {
-        val repository = MemoryStatsRepository(listOfStats.toMutableList())
-        val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
-        viewModel.sendEvent(StatsEvent.LoadStats)
-        val statsModel = viewModel.singleState()
-
-        assertEquals(4200, statsModel.stats[0].averageTime)
-        assertEquals(1000, statsModel.stats[1].averageTime)
-        assertEquals(2000, statsModel.stats[2].averageTime)
-        assertEquals(4000, statsModel.stats[3].averageTime)
-        assertEquals(6000, statsModel.stats[4].averageTime)
-        assertEquals(8000, statsModel.stats[5].averageTime)
-    }
+            assertEquals(47000, statsModel.stats[0].totalTime)
+            assertEquals(2200, statsModel.stats[1].totalTime)
+            assertEquals(5200, statsModel.stats[2].totalTime)
+            assertEquals(9200, statsModel.stats[3].totalTime)
+            assertEquals(13200, statsModel.stats[4].totalTime)
+            assertEquals(17200, statsModel.stats[5].totalTime)
+        }
 
     @Test
-    fun testStatsShortestTime() = runTest {
-        val repository = MemoryStatsRepository(listOfStats.toMutableList())
-        val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
-        viewModel.sendEvent(StatsEvent.LoadStats)
-        val statsModel = viewModel.singleState()
+    fun testStatsAverageTime() =
+        runTest {
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
+            val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
+            viewModel.sendEvent(StatsEvent.LoadStats)
+            val statsModel = viewModel.singleState()
 
-        assertEquals(1000, statsModel.stats[0].shortestTime)
-        assertEquals(1000, statsModel.stats[1].shortestTime)
-        assertEquals(2000, statsModel.stats[2].shortestTime)
-        assertEquals(4000, statsModel.stats[3].shortestTime)
-        assertEquals(6000, statsModel.stats[4].shortestTime)
-        assertEquals(8000, statsModel.stats[5].shortestTime)
-    }
-
-    @Test
-    fun testStatsMines() = runTest {
-        val repository = MemoryStatsRepository(listOfStats.toMutableList())
-        val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
-        viewModel.sendEvent(StatsEvent.LoadStats)
-        val statsModel = viewModel.singleState()
-
-        assertEquals(329, statsModel.stats[0].mines)
-        assertEquals(21, statsModel.stats[1].mines)
-        assertEquals(198, statsModel.stats[2].mines)
-        assertEquals(80, statsModel.stats[3].mines)
-        assertEquals(20, statsModel.stats[4].mines)
-        assertEquals(10, statsModel.stats[5].mines)
-    }
+            assertEquals(4200, statsModel.stats[0].averageTime)
+            assertEquals(1000, statsModel.stats[1].averageTime)
+            assertEquals(2000, statsModel.stats[2].averageTime)
+            assertEquals(4000, statsModel.stats[3].averageTime)
+            assertEquals(6000, statsModel.stats[4].averageTime)
+            assertEquals(8000, statsModel.stats[5].averageTime)
+        }
 
     @Test
-    fun testVictory() = runTest {
-        val repository = MemoryStatsRepository(listOfStats.toMutableList())
-        val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
-        viewModel.sendEvent(StatsEvent.LoadStats)
-        val statsModel = viewModel.singleState()
+    fun testStatsShortestTime() =
+        runTest {
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
+            val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
+            viewModel.sendEvent(StatsEvent.LoadStats)
+            val statsModel = viewModel.singleState()
 
-        assertEquals(5, statsModel.stats[0].victory)
-        assertEquals(1, statsModel.stats[1].victory)
-        assertEquals(1, statsModel.stats[2].victory)
-        assertEquals(1, statsModel.stats[3].victory)
-        assertEquals(1, statsModel.stats[4].victory)
-        assertEquals(1, statsModel.stats[5].victory)
-    }
+            assertEquals(1000, statsModel.stats[0].shortestTime)
+            assertEquals(1000, statsModel.stats[1].shortestTime)
+            assertEquals(2000, statsModel.stats[2].shortestTime)
+            assertEquals(4000, statsModel.stats[3].shortestTime)
+            assertEquals(6000, statsModel.stats[4].shortestTime)
+            assertEquals(8000, statsModel.stats[5].shortestTime)
+        }
 
     @Test
-    fun testOpenArea() = runTest {
-        val repository = MemoryStatsRepository(listOfStats.toMutableList())
-        val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
-        viewModel.sendEvent(StatsEvent.LoadStats)
-        val statsModel = viewModel.singleState()
+    fun testStatsMines() =
+        runTest {
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
+            val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
+            viewModel.sendEvent(StatsEvent.LoadStats)
+            val statsModel = viewModel.singleState()
 
-        assertEquals(254, statsModel.stats[0].openArea)
-        assertEquals(50, statsModel.stats[1].openArea)
-        assertEquals(110, statsModel.stats[2].openArea)
-        assertEquals(50, statsModel.stats[3].openArea)
-        assertEquals(35, statsModel.stats[4].openArea)
-        assertEquals(35, statsModel.stats[4].openArea)
-    }
+            assertEquals(329, statsModel.stats[0].mines)
+            assertEquals(21, statsModel.stats[1].mines)
+            assertEquals(198, statsModel.stats[2].mines)
+            assertEquals(80, statsModel.stats[3].mines)
+            assertEquals(20, statsModel.stats[4].mines)
+            assertEquals(10, statsModel.stats[5].mines)
+        }
+
+    @Test
+    fun testVictory() =
+        runTest {
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
+            val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
+            viewModel.sendEvent(StatsEvent.LoadStats)
+            val statsModel = viewModel.singleState()
+
+            assertEquals(5, statsModel.stats[0].victory)
+            assertEquals(1, statsModel.stats[1].victory)
+            assertEquals(1, statsModel.stats[2].victory)
+            assertEquals(1, statsModel.stats[3].victory)
+            assertEquals(1, statsModel.stats[4].victory)
+            assertEquals(1, statsModel.stats[5].victory)
+        }
+
+    @Test
+    fun testOpenArea() =
+        runTest {
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
+            val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
+            viewModel.sendEvent(StatsEvent.LoadStats)
+            val statsModel = viewModel.singleState()
+
+            assertEquals(254, statsModel.stats[0].openArea)
+            assertEquals(50, statsModel.stats[1].openArea)
+            assertEquals(110, statsModel.stats[2].openArea)
+            assertEquals(50, statsModel.stats[3].openArea)
+            assertEquals(35, statsModel.stats[4].openArea)
+            assertEquals(35, statsModel.stats[4].openArea)
+        }
 }

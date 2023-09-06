@@ -73,14 +73,19 @@ open class GameRenderFragment : AndroidFragmentApplication() {
         )
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val config = AndroidApplicationConfiguration().apply {
-            numSamples = 0
-            useAccelerometer = false
-            useCompass = false
-            useGyroscope = false
-            useWakelock = false
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        val config =
+            AndroidApplicationConfiguration().apply {
+                numSamples = 0
+                useAccelerometer = false
+                useCompass = false
+                useGyroscope = false
+                useWakelock = false
+            }
         return initializeForView(levelApplicationListener, config)
     }
 
@@ -106,7 +111,10 @@ open class GameRenderFragment : AndroidFragmentApplication() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
@@ -159,17 +167,21 @@ open class GameRenderFragment : AndroidFragmentApplication() {
             FrameLayout.LayoutParams.WRAP_CONTENT,
         ).apply {
             val navHeight = dimensionRepository.navigationBarHeight()
-            val bottomMargin = if (navHeight == 0) {
-                context.dpToPx(BOTTOM_MARGIN_WITHOUT_NAV_DP)
-            } else {
-                context.dpToPx(BOTTOM_MARGIN_WITH_NAV_DP)
-            }
+            val bottomMargin =
+                if (navHeight == 0) {
+                    context.dpToPx(BOTTOM_MARGIN_WITHOUT_NAV_DP)
+                } else {
+                    context.dpToPx(BOTTOM_MARGIN_WITH_NAV_DP)
+                }
             gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
             setMargins(0, 0, 0, bottomMargin)
         }
     }
 
-    private fun bindControlSwitcherIfNeeded(view: View, delayed: Boolean = true) {
+    private fun bindControlSwitcherIfNeeded(
+        view: View,
+        delayed: Boolean = true,
+    ) {
         val controlSwitcher = controlSwitcher
         if (controlSwitcher != null) {
             controlSwitcher.isVisible = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
@@ -179,36 +191,37 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                     val isParentFinishing = activity?.isFinishing ?: true
                     if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen && !isParentFinishing) {
                         (view.parent as? FrameLayout)?.apply {
-                            this@GameRenderFragment.controlSwitcher = SwitchButtonView(context).apply {
-                                alpha = 0f
-                                animate().apply {
-                                    alpha(1.0f)
-                                    duration = DELAY_TO_CONTROL_DISPLAY
-                                    start()
+                            this@GameRenderFragment.controlSwitcher =
+                                SwitchButtonView(context).apply {
+                                    alpha = 0f
+                                    animate().apply {
+                                        alpha(1.0f)
+                                        duration = DELAY_TO_CONTROL_DISPLAY
+                                        start()
+                                    }
+
+                                    isVisible = true
+                                    layoutParams = getSwitchControlLayoutParams()
+
+                                    setQuestionButtonVisibility(preferencesRepository.useQuestionMark())
+
+                                    setOnFlagClickListener {
+                                        gameViewModel.changeSwitchControlAction(Action.SwitchMark)
+                                        gameAudioManager.playSwitchAction()
+                                    }
+
+                                    setOnOpenClickListener {
+                                        gameViewModel.changeSwitchControlAction(Action.OpenTile)
+                                        gameAudioManager.playSwitchAction()
+                                    }
+
+                                    setOnQuestionClickListener {
+                                        gameViewModel.changeSwitchControlAction(Action.QuestionMark)
+                                        gameAudioManager.playSwitchAction()
+                                    }
+                                }.also {
+                                    it.selectDefault()
                                 }
-
-                                isVisible = true
-                                layoutParams = getSwitchControlLayoutParams()
-
-                                setQuestionButtonVisibility(preferencesRepository.useQuestionMark())
-
-                                setOnFlagClickListener {
-                                    gameViewModel.changeSwitchControlAction(Action.SwitchMark)
-                                    gameAudioManager.playSwitchAction()
-                                }
-
-                                setOnOpenClickListener {
-                                    gameViewModel.changeSwitchControlAction(Action.OpenTile)
-                                    gameAudioManager.playSwitchAction()
-                                }
-
-                                setOnQuestionClickListener {
-                                    gameViewModel.changeSwitchControlAction(Action.QuestionMark)
-                                    gameAudioManager.playSwitchAction()
-                                }
-                            }.also {
-                                it.selectDefault()
-                            }
 
                             lifecycleScope.launch {
                                 gameViewModel

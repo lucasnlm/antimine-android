@@ -2,7 +2,11 @@ package dev.lucasnlm.antimine.core
 
 import dev.lucasnlm.antimine.core.models.Area
 
-fun Area.getNeighborIdAtPos(field: List<Area>, dx: Int, dy: Int): Int {
+fun Area.getNeighborIdAtPos(
+    field: List<Area>,
+    dx: Int,
+    dy: Int,
+): Int {
     val posX = posX + dx
     val posY = posY + dy
 

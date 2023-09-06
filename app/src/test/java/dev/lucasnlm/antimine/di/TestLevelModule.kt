@@ -12,24 +12,25 @@ import dev.lucasnlm.antimine.mocks.MemoryStatsRepository
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val TestLevelModule = module {
-    single {
-        Clock()
+val TestLevelModule =
+    module {
+        single {
+            Clock()
+        }
+
+        single {
+            MemorySavesRepository()
+        } bind SavesRepository::class
+
+        single {
+            MemoryStatsRepository()
+        } bind StatsRepository::class
+
+        single {
+            FixedMinefieldRepository()
+        } bind MinefieldRepository::class
+
+        single {
+            DisabledHapticFeedbackManager()
+        } bind HapticFeedbackManager::class
     }
-
-    single {
-        MemorySavesRepository()
-    } bind SavesRepository::class
-
-    single {
-        MemoryStatsRepository()
-    } bind StatsRepository::class
-
-    single {
-        FixedMinefieldRepository()
-    } bind MinefieldRepository::class
-
-    single {
-        DisabledHapticFeedbackManager()
-    } bind HapticFeedbackManager::class
-}

@@ -14,32 +14,33 @@ import io.mockk.mockk
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val TestCommonModule = module {
-    single { FixedDimensionRepository() } bind DimensionRepository::class
+val TestCommonModule =
+    module {
+        single { FixedDimensionRepository() } bind DimensionRepository::class
 
-    single { MockPreferencesRepository() } bind PreferencesRepository::class
+        single { MockPreferencesRepository() } bind PreferencesRepository::class
 
-    single {
-        mockk<GameAudioManager>()
-    } bind GameAudioManager::class
+        single {
+            mockk<GameAudioManager>()
+        } bind GameAudioManager::class
 
-    single {
-        object : ThemeRepository {
-            override fun getCustomTheme(): AppTheme? = null
+        single {
+            object : ThemeRepository {
+                override fun getCustomTheme(): AppTheme? = null
 
-            override fun getSkin(): AppSkin = Skins.getAllSkins().first()
+                override fun getSkin(): AppSkin = Skins.getAllSkins().first()
 
-            override fun getTheme(): AppTheme = lightTheme()
+                override fun getTheme(): AppTheme = lightTheme()
 
-            override fun getAllThemes(): List<AppTheme> = listOf(lightTheme())
+                override fun getAllThemes(): List<AppTheme> = listOf(lightTheme())
 
-            override fun getAllSkins(): List<AppSkin> = Skins.getAllSkins()
+                override fun getAllSkins(): List<AppSkin> = Skins.getAllSkins()
 
-            override fun setTheme(themeId: Long) {}
+                override fun setTheme(themeId: Long) {}
 
-            override fun setSkin(skinId: Long) {}
+                override fun setSkin(skinId: Long) {}
 
-            override fun reset(): AppTheme = lightTheme()
-        }
-    } bind ThemeRepository::class
-}
+                override fun reset(): AppTheme = lightTheme()
+            }
+        } bind ThemeRepository::class
+    }

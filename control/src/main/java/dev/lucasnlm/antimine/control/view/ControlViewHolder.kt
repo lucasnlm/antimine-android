@@ -8,5 +8,5 @@ class ControlViewHolder(
     val controlItem: ViewControlItemBinding?,
     val simpleItem: ViewControlItemSimpleBinding?,
 ) : RecyclerView.ViewHolder(
-    (controlItem?.root ?: simpleItem?.root)!!,
-)
+        (controlItem?.root ?: simpleItem?.root)!!,
+    )

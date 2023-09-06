@@ -11,7 +11,12 @@ class ProprietaryAppWrapper {
 
     fun isInAppPaymentsSupported(context: Context) = false
 
-    fun showInstallPrompt(activity: Activity, intent: Intent?, requestCode: Int, referrer: String?) {
+    fun showInstallPrompt(
+        activity: Activity,
+        intent: Intent?,
+        requestCode: Int,
+        referrer: String?,
+    ) {
         // Empty
     }
 }

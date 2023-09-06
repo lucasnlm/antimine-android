@@ -8,25 +8,26 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class FeatureFlagManagerImpl : FeatureFlagManager() {
-    private val defaultMap = mapOf(
-        HISTORY_ENABLED to false,
-        RATE_US_ENABLED to true,
-        IN_APP_ADS_ENABLED to false,
-        GAMEPLAY_EVENTS_ENABLED to false,
-        GAME_OVER_AD_ENABLED to true,
-        SHOW_ADS_ON_CONTINUE_ENABLED to true,
-        SHOW_ADS_ON_NEW_GAME_ENABLED to true,
-        CONTINUE_ENABLED to true,
-        RECYCLER_SCROLL_ENABLED to true,
-        THEME_TASTING_ENABLED to true,
-        MIN_USAGE_TO_REVIEW to 5,
-        USE_INTERSTITIAL_AD to true,
-        BANNER_AD_ENABLED to true,
-        ENABLE_WEEK_DAY_SALES to true,
-        HEX_BANNER to false,
-        SHOW_ADS_WHEN_USE_HINT to true,
-        SHOW_COUNTDOWN_TO_CONTINUE to true,
-    )
+    private val defaultMap =
+        mapOf(
+            HISTORY_ENABLED to false,
+            RATE_US_ENABLED to true,
+            IN_APP_ADS_ENABLED to false,
+            GAMEPLAY_EVENTS_ENABLED to false,
+            GAME_OVER_AD_ENABLED to true,
+            SHOW_ADS_ON_CONTINUE_ENABLED to true,
+            SHOW_ADS_ON_NEW_GAME_ENABLED to true,
+            CONTINUE_ENABLED to true,
+            RECYCLER_SCROLL_ENABLED to true,
+            THEME_TASTING_ENABLED to true,
+            MIN_USAGE_TO_REVIEW to 5,
+            USE_INTERSTITIAL_AD to true,
+            BANNER_AD_ENABLED to true,
+            ENABLE_WEEK_DAY_SALES to true,
+            HEX_BANNER to false,
+            SHOW_ADS_WHEN_USE_HINT to true,
+            SHOW_COUNTDOWN_TO_CONTINUE to true,
+        )
 
     private var remoteConfig: FirebaseRemoteConfig? = null
 

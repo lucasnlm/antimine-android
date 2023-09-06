@@ -14,14 +14,20 @@ class StatsAdapter(
     private val statsList: List<StatsModel>,
 ) : RecyclerView.Adapter<StatsViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatsViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): StatsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return StatsViewHolder(
             binding = ViewStatsItemBinding.inflate(layoutInflater, parent, false),
         )
     }
 
-    override fun onBindViewHolder(holder: StatsViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: StatsViewHolder,
+        position: Int,
+    ) {
         val stats = statsList[position]
         holder.binding.apply {
             if (stats.totalGames > 0) {
@@ -68,8 +74,7 @@ class StatsAdapter(
                 format(value)
             }
 
-        private fun formatTime(durationSecs: Long) =
-            DateUtils.formatElapsedTime(durationSecs)
+        private fun formatTime(durationSecs: Long) = DateUtils.formatElapsedTime(durationSecs)
     }
 }
 

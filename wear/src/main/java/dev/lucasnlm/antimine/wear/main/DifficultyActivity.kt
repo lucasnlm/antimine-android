@@ -21,22 +21,23 @@ class DifficultyActivity : ThemedActivity() {
         binding = ActivityDifficultyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val difficultyList = mapOf(
-            Difficulty.Beginner to i18n.string.beginner,
-            Difficulty.Intermediate to i18n.string.intermediate,
-            Difficulty.Expert to i18n.string.expert,
-            Difficulty.Master to i18n.string.master,
-        ).entries.mapIndexed { index, entry ->
-            MenuItem(
-                id = index.toLong(),
-                label = entry.value,
-                icon = R.drawable.round_arrow,
-                highlight = false,
-                onClick = {
-                    startGameOnDifficulty(entry.key)
-                },
-            )
-        }
+        val difficultyList =
+            mapOf(
+                Difficulty.Beginner to i18n.string.beginner,
+                Difficulty.Intermediate to i18n.string.intermediate,
+                Difficulty.Expert to i18n.string.expert,
+                Difficulty.Master to i18n.string.master,
+            ).entries.mapIndexed { index, entry ->
+                MenuItem(
+                    id = index.toLong(),
+                    label = entry.value,
+                    icon = R.drawable.round_arrow,
+                    highlight = false,
+                    onClick = {
+                        startGameOnDifficulty(entry.key)
+                    },
+                )
+            }
 
         binding.recyclerView.apply {
             setHasFixedSize(true)
@@ -48,13 +49,15 @@ class DifficultyActivity : ThemedActivity() {
 
     private fun startGameOnDifficulty(difficulty: Difficulty) {
         val context = application.applicationContext
-        val intent = Intent(context, WearGameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            val bundle = Bundle().apply {
-                putSerializable(WearGameActivity.DIFFICULTY, difficulty)
+        val intent =
+            Intent(context, WearGameActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                val bundle =
+                    Bundle().apply {
+                        putSerializable(WearGameActivity.DIFFICULTY, difficulty)
+                    }
+                putExtras(bundle)
             }
-            putExtras(bundle)
-        }
         context.startActivity(intent)
     }
 }

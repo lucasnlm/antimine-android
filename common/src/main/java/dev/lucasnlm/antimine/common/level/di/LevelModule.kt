@@ -14,38 +14,39 @@ import dev.lucasnlm.antimine.common.level.utils.Clock
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val LevelModule = module {
-    single {
-        Room.databaseBuilder(get(), AppDataBase::class.java, AppDataBase.DATA_BASE_NAME)
-            .fallbackToDestructiveMigration()
-            .build()
+val LevelModule =
+    module {
+        single {
+            Room.databaseBuilder(get(), AppDataBase::class.java, AppDataBase.DATA_BASE_NAME)
+                .fallbackToDestructiveMigration()
+                .build()
+        }
+
+        single {
+            get<AppDataBase>(AppDataBase::class).saveDao()
+        }
+
+        single {
+            get<AppDataBase>(AppDataBase::class).statsDao()
+        }
+
+        single {
+            Clock()
+        }
+
+        single {
+            SavesRepositoryImpl(get())
+        } bind SavesRepository::class
+
+        single {
+            StatsRepositoryImpl(get())
+        } bind StatsRepository::class
+
+        single {
+            MinefieldRepositoryImpl()
+        } bind MinefieldRepository::class
+
+        single {
+            TipRepositoryImpl(get(), get())
+        } bind TipRepository::class
     }
-
-    single {
-        get<AppDataBase>(AppDataBase::class).saveDao()
-    }
-
-    single {
-        get<AppDataBase>(AppDataBase::class).statsDao()
-    }
-
-    single {
-        Clock()
-    }
-
-    single {
-        SavesRepositoryImpl(get())
-    } bind SavesRepository::class
-
-    single {
-        StatsRepositoryImpl(get())
-    } bind StatsRepository::class
-
-    single {
-        MinefieldRepositoryImpl()
-    } bind MinefieldRepository::class
-
-    single {
-        TipRepositoryImpl(get(), get())
-    } bind TipRepository::class
-}
