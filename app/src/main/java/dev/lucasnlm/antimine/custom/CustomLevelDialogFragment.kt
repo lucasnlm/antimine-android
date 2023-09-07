@@ -86,17 +86,9 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
             target: String,
             min: Int,
         ): Int {
-            var result = min
-
-            try {
-                result = Integer.valueOf(target)
-            } catch (e: NumberFormatException) {
-                result = min
-            } finally {
-                result = result.coerceAtLeast(min)
-            }
-
-            return result
+            return runCatching { Integer.valueOf(target) }
+                .getOrDefault(min)
+                .coerceAtLeast(min)
         }
 
         val TAG = CustomLevelDialogFragment::class.simpleName!!

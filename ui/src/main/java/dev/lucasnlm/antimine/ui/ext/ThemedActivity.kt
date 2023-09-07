@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.ui.ext
 
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -61,15 +62,22 @@ abstract class ThemedActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    @Suppress("DEPRECATION")
+    protected fun compatOverridePendingTransition() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overridePendingTransition(0, 0)
+        } else {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, 0, 0)
+            overrideActivityTransition(OVERRIDE_TRANSITION_CLOSE, 0, 0)
+        }
+    }
+
     override fun onResume() {
         super.onResume()
 
-        if (usingTheme.id != currentTheme().id) {
+        if (usingTheme.id != currentTheme().id || usingSkin.id != currentSkin().id) {
             recreate()
-            overridePendingTransition(0, 0)
-        } else if (usingSkin.id != currentSkin().id) {
-            recreate()
-            overridePendingTransition(0, 0)
+            compatOverridePendingTransition()
         }
     }
 }

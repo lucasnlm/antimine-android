@@ -13,6 +13,12 @@
 -keepnames class * extends android.os.Parcelable
 -keepnames class * extends java.io.Serializable
 
+-keepattributes *Annotation*
+-keepattributes Signature
+-dontwarn com.squareup.**
+-keep class com.squareup.** { *; }
+-keep class com.squareup.moshi.** { *; }
+
 -keep class * implements android.os.Parcelable {
    public static final android.os.Parcelable$Creator *;
 }

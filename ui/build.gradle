@@ -16,8 +16,10 @@ android {
     }
 
     buildFeatures {
+        buildConfig true
         viewBinding true
     }
+
 
     buildTypes {
         release {
@@ -44,7 +46,7 @@ dependencies {
     implementation project(':preferences')
 
     // Google
-    implementation 'com.google.android.material:material:1.9.0-beta01'
+    implementation 'com.google.android.material:material:1.9.0'
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.6.1'

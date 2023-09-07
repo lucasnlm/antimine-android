@@ -104,7 +104,7 @@ class GameController {
             val solver = LimitedCheckNeighborsSolver()
             creatingMinefield = true
 
-            try {
+            runCatching {
                 // Try using native implementation first.
                 // If it fails, use fallback random generator.
                 withTimeout(MAX_CREATION_TIME_MS) {
@@ -118,7 +118,7 @@ class GameController {
                         )
                     minefieldHandler.openAt(safeId, false)
                 }
-            } catch (ignored: Exception) {
+            }.onFailure {
                 do {
                     var solvable: Boolean
                     field = fallbackCreator.create(safeId)

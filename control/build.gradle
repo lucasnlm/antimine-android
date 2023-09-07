@@ -45,7 +45,7 @@ dependencies {
     implementation project(':ui')
 
     // Google
-    implementation 'com.google.android.material:material:1.9.0-beta01'
+    implementation 'com.google.android.material:material:1.9.0'
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.6.1'

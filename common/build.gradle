@@ -55,7 +55,7 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.5.7'
 
     // Google
-    implementation 'com.google.android.material:material:1.9.0-beta01'
+    implementation 'com.google.android.material:material:1.9.0'
 
     // Constraint
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
