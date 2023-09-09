@@ -14,8 +14,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1702051
-        versionName '17.2.5'
+        versionCode 1703001
+        versionName '17.3.0'
         minSdk 21
         targetSdk 34
         compileSdk 34
