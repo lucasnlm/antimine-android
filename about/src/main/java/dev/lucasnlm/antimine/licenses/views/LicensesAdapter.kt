@@ -32,11 +32,9 @@ internal class LicensesAdapter(
         holder.apply {
             binding.thirdName.text = thirdParty.name
             itemView.setOnClickListener { view ->
-                try {
+                runCatching {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(thirdParty.url))
                     view.context.startActivity(intent)
-                } catch (ignored: Exception) {
-                    // Fail to load browser or URL.
                 }
             }
         }

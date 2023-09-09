@@ -68,7 +68,7 @@ class AdMobAdsManager(
                     failErrorCause = adError.message
                     rewardedAd = null
 
-                    if (rewardedAdRetry < 3) {
+                    if (rewardedAdRetry < MAX_RETRY) {
                         rewardedAdRetry++
                         scope.launch(Dispatchers.Main) {
                             delay(RETRY_DELAY_MS)
@@ -97,7 +97,7 @@ class AdMobAdsManager(
                     failErrorCause = adError.message
                     secondRewardedAd = null
 
-                    if (rewardedAdRetry < 3) {
+                    if (rewardedAdRetry < MAX_RETRY) {
                         rewardedAdRetry++
                         scope.launch(Dispatchers.Main) {
                             delay(RETRY_DELAY_MS)
@@ -126,7 +126,7 @@ class AdMobAdsManager(
                     failErrorCause = adError.message
                     interstitialAd = null
 
-                    if (interstitialAdRetry < 3) {
+                    if (interstitialAdRetry < MAX_RETRY) {
                         scope.launch(Dispatchers.Main) {
                             delay(RETRY_DELAY_MS)
                             loadInterstitialAd()
@@ -155,7 +155,7 @@ class AdMobAdsManager(
                     failErrorCause = adError.message
                     secondInterstitialAd = null
 
-                    if (interstitialAdRetry < 3) {
+                    if (interstitialAdRetry < MAX_RETRY) {
                         scope.launch(Dispatchers.Main) {
                             delay(RETRY_DELAY_MS)
                             loadSecondInterstitialAd()
@@ -311,6 +311,7 @@ class AdMobAdsManager(
     }
 
     companion object {
+        const val MAX_RETRY = 3
         const val RETRY_DELAY_MS = 2000L
     }
 }

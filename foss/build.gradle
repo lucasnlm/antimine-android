@@ -36,9 +36,9 @@ dependencies {
     implementation project(':external')
 
     // Kotlin
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.10'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3'
 
     // Koin
     implementation 'io.insert-koin:koin-android:3.1.2'

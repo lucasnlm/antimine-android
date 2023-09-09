@@ -398,7 +398,7 @@ class MainActivity : ThemedActivity() {
             is MainEvent.Recreate -> {
                 finish()
                 startActivity(Intent(this, MainActivity::class.java))
-                overridePendingTransition(0, 0)
+                compatOverridePendingTransition()
             }
             else -> {
             }
@@ -443,9 +443,9 @@ class MainActivity : ThemedActivity() {
             playGamesManager.keepRequestingLogin(false)
 
             lifecycleScope.launch {
-                var logged: Boolean
+                var logged = false
 
-                try {
+                runCatching {
                     withContext(Dispatchers.IO) {
                         logged = playGamesManager.silentLogin()
                         if (logged) {
@@ -453,18 +453,17 @@ class MainActivity : ThemedActivity() {
                         }
                         playGamesManager.showPlayPopUp(this@MainActivity)
                     }
-                } catch (e: Exception) {
-                    logged = false
-                    Log.e(TAG, "Failed silent login", e)
+                }.onFailure {
+                    Log.e(TAG, "Failed silent login", it)
                 }
 
                 if (!logged) {
-                    try {
+                    runCatching {
                         playGamesManager.getLoginIntent()?.let {
                             googlePlayLauncher.launch(it)
                         }
-                    } catch (e: Exception) {
-                        Log.e(TAG, "User not logged or doesn't have Play Games", e)
+                    }.onFailure {
+                        Log.e(TAG, "User not logged or doesn't have Play Games", it)
                     }
                 } else {
                     afterGooglePlayGames()

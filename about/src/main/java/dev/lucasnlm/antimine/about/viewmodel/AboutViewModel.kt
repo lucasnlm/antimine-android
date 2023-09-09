@@ -46,13 +46,13 @@ class AboutViewModel(
 
     private fun openSourceCode() {
         val context = application.applicationContext
-        try {
+        runCatching {
             val intent =
                 Intent(Intent.ACTION_VIEW, Uri.parse(SOURCE_CODE)).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 }
             context.startActivity(intent)
-        } catch (e: Exception) {
+        }.onFailure {
             Toast.makeText(
                 context.applicationContext,
                 i18n.string.unknown_error,
@@ -63,13 +63,13 @@ class AboutViewModel(
 
     private fun openCrowdin() {
         val context = application.applicationContext
-        try {
+        runCatching {
             val intent =
                 Intent(Intent.ACTION_VIEW, Uri.parse(CROWDIN_URL)).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 }
             context.startActivity(intent)
-        } catch (e: Exception) {
+        }.onFailure {
             Toast.makeText(
                 context.applicationContext,
                 i18n.string.unknown_error,

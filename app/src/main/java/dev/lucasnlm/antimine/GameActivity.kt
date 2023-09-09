@@ -170,7 +170,7 @@ class GameActivity :
         if (playGamesManager.hasGooglePlayGames() && playGamesManager.shouldRequestLogin()) {
             playGamesManager.keepRequestingLogin(false)
             lifecycleScope.launch {
-                try {
+                runCatching {
                     withContext(Dispatchers.IO) {
                         val logged = playGamesManager.silentLogin()
                         if (!logged) {
@@ -178,8 +178,8 @@ class GameActivity :
                         }
                         playGamesManager.showPlayPopUp(this@GameActivity)
                     }
-                } catch (e: Exception) {
-                    Log.e(TAG, "Failed silent login", e)
+                }.onFailure {
+                    Log.e(TAG, "Failed silent login", it)
                 }
             }
         }
