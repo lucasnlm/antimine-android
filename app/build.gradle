@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-if (System.getenv('IS_RELEASE_BUILD')) {
+if (System.getenv('IS_GOOGLE_BUILD')) {
     apply plugin: 'com.google.gms.google-services'
     apply plugin: 'com.google.firebase.crashlytics'
     apply plugin: 'com.google.firebase.firebase-perf'
@@ -14,8 +14,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1703001
-        versionName '17.3.0'
+        versionCode 1704001
+        versionName '17.4.0'
         minSdk 21
         targetSdk 34
         compileSdk 34
@@ -76,21 +76,21 @@ android {
         google {
             dimension 'version'
             applicationId 'dev.lucasnlm.antimine'
-            versionNameSuffix " S"
+            versionNameSuffix ' S'
         }
 
         googleInstant {
-            versionCode 157
+            versionCode 160
             dimension 'version'
             applicationId 'dev.lucasnlm.antimine'
-            versionNameSuffix " I"
+            versionNameSuffix ' I'
         }
 
         foss {
             dimension 'version'
             // There's a typo on F-Droid release :(
             applicationId 'dev.lucanlm.antimine'
-            versionNameSuffix " F"
+            versionNameSuffix ' F'
         }
     }
 }
