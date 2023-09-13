@@ -59,12 +59,12 @@ dependencies {
     testImplementation 'io.insert-koin:koin-test:3.1.2'
 
     // LibGDX
-    api 'com.badlogicgames.gdx:gdx-backend-android:1.11.0'
-    api 'com.badlogicgames.gdx:gdx:1.11.0'
-    natives 'com.badlogicgames.gdx:gdx-platform:1.11.0:natives-armeabi-v7a'
-    natives 'com.badlogicgames.gdx:gdx-platform:1.11.0:natives-arm64-v8a'
-    natives 'com.badlogicgames.gdx:gdx-platform:1.11.0:natives-x86'
-    natives 'com.badlogicgames.gdx:gdx-platform:1.11.0:natives-x86_64'
+    api 'com.badlogicgames.gdx:gdx-backend-android:1.12.0'
+    api 'com.badlogicgames.gdx:gdx:1.12.0'
+    natives 'com.badlogicgames.gdx:gdx-platform:1.12.0:natives-armeabi-v7a'
+    natives 'com.badlogicgames.gdx:gdx-platform:1.12.0:natives-arm64-v8a'
+    natives 'com.badlogicgames.gdx:gdx-platform:1.12.0:natives-x86'
+    natives 'com.badlogicgames.gdx:gdx-platform:1.12.0:natives-x86_64'
 }
 
 tasks.register('copyAndroidNatives') {

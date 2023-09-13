@@ -77,7 +77,7 @@ class PlayGamesManagerImpl(
         }.getOrNull() != null
     }
 
-    override fun getLoginIntent(): Intent? {
+    override fun getLoginIntent(): Intent {
         return GoogleSignIn.getClient(context, GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).signInIntent
     }
 

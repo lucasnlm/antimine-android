@@ -26,10 +26,6 @@
         android:name="android.hardware.faketouch"
         android:required="false" />
 
-    <uses-feature
-        android:name="android.hardware.type.automotive"
-        android:required="false" />
-
     <dist:module dist:instant="true" />
 
     <application

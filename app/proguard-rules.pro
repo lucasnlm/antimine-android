@@ -47,3 +47,29 @@
 -keep class com.google.android.material.** { *; }
 -dontwarn com.google.android.material.**
 -dontnote com.google.android.material.**
+
+# Kryo
+-dontwarn sun.reflect.**
+-dontwarn java.beans.**
+-dontwarn sun.nio.ch.**
+-dontwarn sun.misc.**
+
+# LibGDX
+
+-keep class com.badlogic.gdx.scenes.** { *; }
+
+-dontwarn com.badlogic.gdx.backends.android.AndroidFragmentApplication
+
+# Required if using Gdx-Controllers extension
+-keep class com.badlogic.gdx.controllers.android.AndroidControllers
+
+# Required if using Box2D extension
+-keepclassmembers class com.badlogic.gdx.physics.box2d.World {
+   boolean contactFilter(long, long);
+   void    beginContact(long);
+   void    endContact(long);
+   void    preSolve(long, long);
+   void    postSolve(long, long);
+   boolean reportFixture(long);
+   float   reportRayFixture(long, float, float, float, float, float);
+}

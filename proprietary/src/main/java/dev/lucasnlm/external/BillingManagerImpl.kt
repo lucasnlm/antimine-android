@@ -3,7 +3,17 @@ package dev.lucasnlm.external
 import android.app.Activity
 import android.content.Context
 import android.text.format.DateUtils
-import com.android.billingclient.api.*
+import android.util.Log
+import com.android.billingclient.api.AcknowledgePurchaseParams
+import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.BillingClientStateListener
+import com.android.billingclient.api.BillingFlowParams
+import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.ProductDetails
+import com.android.billingclient.api.Purchase
+import com.android.billingclient.api.PurchasesUpdatedListener
+import com.android.billingclient.api.QueryProductDetailsParams
+import com.android.billingclient.api.QueryPurchasesParams
 import dev.lucasnlm.external.model.Price
 import dev.lucasnlm.external.model.PurchaseInfo
 import kotlinx.coroutines.CoroutineScope
@@ -22,7 +32,7 @@ class BillingManagerImpl(
     private var retry = 0
     private var isLoading = false
     private val purchaseBroadcaster = MutableStateFlow<PurchaseInfo?>(null)
-    private val unlockPrice = MutableStateFlow<Price?>(null)
+    private val premiumInAppPrice = MutableStateFlow<Price?>(null)
     private val billingClient by lazy {
         BillingClient.newBuilder(context)
             .setListener(this)
@@ -39,43 +49,36 @@ class BillingManagerImpl(
 
     private var premiumProduct: ProductDetails? = null
 
-    override suspend fun getPrice(): Price? = unlockPrice.value
+    override suspend fun getPrice(): Price? = premiumInAppPrice.value
 
     override suspend fun getPriceFlow(): Flow<Price> {
-        return unlockPrice.asSharedFlow().filterNotNull()
+        return premiumInAppPrice.asSharedFlow().filterNotNull()
     }
 
     override fun listenPurchases(): Flow<PurchaseInfo> = purchaseBroadcaster.asSharedFlow().filterNotNull()
 
-    private fun asyncRefreshPurchasesList() {
-        coroutineScope.launch {
-            while (true) {
-                val queryPurchasesParams =
-                    QueryPurchasesParams.newBuilder()
-                        .setProductType(BillingClient.ProductType.INAPP)
-                        .build()
+    private fun asyncRefreshPurchasesList(retry: Boolean) {
+        val queryPurchasesParams =
+            QueryPurchasesParams.newBuilder()
+                .setProductType(BillingClient.ProductType.INAPP)
+                .build()
 
-                val purchasesList: List<Purchase> =
-                    billingClient
-                        .queryPurchasesAsync(queryPurchasesParams)
-                        .purchasesList
-
-                if (purchasesList.isEmpty()) {
-                    break
-                } else {
-                    val result = handlePurchases(purchasesList)
-
-                    if (result) {
-                        break
-                    } else {
-                        delay(30 * DateUtils.SECOND_IN_MILLIS)
+        billingClient
+            .queryPurchasesAsync(queryPurchasesParams) { result, purchasesList ->
+                if (result.responseCode != BillingClient.BillingResponseCode.OK) {
+                    if (retry) {
+                        coroutineScope.launch {
+                            delay(DateUtils.SECOND_IN_MILLIS * HANDLE_PURCHASES_DELAY_SECONDS)
+                            asyncRefreshPurchasesList(false)
+                        }
                     }
+                } else if (purchasesList.isNotEmpty()) {
+                    handlePurchases(purchasesList)
                 }
             }
-        }
     }
 
-    private suspend fun handlePurchases(purchases: List<Purchase>): Boolean {
+    private fun handlePurchases(purchases: List<Purchase>) {
         val status: Boolean =
             purchases.firstOrNull {
                 it.products.contains(PREMIUM)
@@ -90,27 +93,31 @@ class BillingManagerImpl(
                                 .setPurchaseToken(it.purchaseToken)
                                 .build()
 
-                        val result = billingClient.acknowledgePurchase(acknowledgePurchaseParams)
-
-                        if (result.responseCode != BillingClient.BillingResponseCode.OK) {
-                            return false
+                        billingClient.acknowledgePurchase(acknowledgePurchaseParams) { result ->
+                            if (result.responseCode != BillingClient.BillingResponseCode.OK) {
+                                Log.e(TAG, "Fail to acknowledge purchase")
+                            }
                         }
                     }
                 }
             }
 
-        purchaseBroadcaster.tryEmit(PurchaseInfo.PurchaseResult(isFreeUnlock = false, unlockStatus = status))
-        return true
+        purchaseBroadcaster.tryEmit(
+            PurchaseInfo.PurchaseResult(
+                isFreeUnlock = false,
+                unlockStatus = status,
+            ),
+        )
     }
 
     override fun onBillingServiceDisconnected() {
         crashReporter.sendError("Billing service disconnected $retry")
         isLoading = false
 
-        if (retry < 3) {
+        if (retry < MAX_RETRY_CONNECTION) {
             retry++
             coroutineScope.launch {
-                delay(5 * 1000)
+                delay(retry * RETRY_SECONDS_STEP_SECONDS * DateUtils.SECOND_IN_MILLIS)
                 start()
             }
         }
@@ -140,7 +147,7 @@ class BillingManagerImpl(
                     onReceivePremiumProduct(list.firstOrNull())
                 }
 
-            asyncRefreshPurchasesList()
+            asyncRefreshPurchasesList(true)
         } else {
             val code = billingResult.responseCode
             val message = billingResult.debugMessage
@@ -162,7 +169,7 @@ class BillingManagerImpl(
                         offer = false,
                     )
 
-                unlockPrice.tryEmit(price)
+                premiumInAppPrice.tryEmit(price)
             }
         }
     }
@@ -173,7 +180,7 @@ class BillingManagerImpl(
     ) {
         val resultCode = billingResult.responseCode
         if (resultCode == BillingClient.BillingResponseCode.OK) {
-            asyncRefreshPurchasesList()
+            asyncRefreshPurchasesList(true)
         } else if (!allowedErrorCodes.contains(resultCode)) {
             crashReporter.sendError("Charge update failed due to response $resultCode")
         }
@@ -211,6 +218,10 @@ class BillingManagerImpl(
     }
 
     companion object {
+        private const val TAG = "BillingManager"
         private const val PREMIUM = "unlock_0"
+        private const val RETRY_SECONDS_STEP_SECONDS = 5
+        private const val MAX_RETRY_CONNECTION = 3
+        private const val HANDLE_PURCHASES_DELAY_SECONDS = 10
     }
 }

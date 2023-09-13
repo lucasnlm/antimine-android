@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.gdx.stages
 
 import android.util.SizeF
+import androidx.annotation.Keep
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector3
@@ -22,6 +23,7 @@ import dev.lucasnlm.antimine.gdx.toGdxColor
 import dev.lucasnlm.antimine.gdx.toInverseBackOrWhite
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
+@Keep
 class MinefieldStage(
     val screenWidth: Float,
     val screenHeight: Float,
