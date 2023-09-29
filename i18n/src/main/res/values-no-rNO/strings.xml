@@ -23,7 +23,7 @@
     <string name="animations">Animasjoner</string>
     <string name="vibration">Haptisk Tilbakemelding</string>
     <string name="about">Om</string>
-    <string name="quit">Quit</string>
+    <string name="quit">Avslutt</string>
     <string name="events">Statistikk</string>
     <string name="custom">Egendefinert</string>
     <string name="start">Start</string>
@@ -55,10 +55,10 @@
     <string name="fail_to_share">Deling feilet</string>
     <string name="version_s">Versjon %1$s</string>
     <string name="sound_effects">Lydeffekter</string>
-    <string name="music">Music</string>
-    <string name="music_by">Music by %1$s</string>
-    <string name="check_music">Listen on Spotify…</string>
-    <string name="selected">Selected</string>
+    <string name="music">Musikk</string>
+    <string name="music_by">Musikk av %1$s</string>
+    <string name="check_music">Lytt på Spotify…</string>
+    <string name="selected">Valgt</string>
     <string name="are_you_sure">Er du sikker?</string>
     <string name="enable_automatic_flags">Aktiver automatisk plassering av flagg</string>
     <string name="open_areas">Åpne områder</string>
@@ -99,7 +99,7 @@
     <string name="more">Mer</string>
     <string name="source_code">Kildekode</string>
     <string name="translation">Oversettelse</string>
-    <string name="language">Language</string>
+    <string name="language">Språk</string>
     <string name="licenses">Lisenser</string>
     <string name="google_play_games">Google Play Spill</string>
     <string name="loading">Laster…</string>
