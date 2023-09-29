@@ -17,6 +17,9 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.audio.GameAudioManagerImpl
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.models.Analytics
+import dev.lucasnlm.antimine.databinding.DonationRequestBinding
+import dev.lucasnlm.antimine.databinding.HexBannerBinding
+import dev.lucasnlm.antimine.databinding.MusicLinkBinding
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.external.AdsManager
@@ -88,15 +91,15 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
 
     private fun showHexBanner(adFrame: FrameLayout) {
         val context = adFrame.context
+        val binding = HexBannerBinding.inflate(layoutInflater)
 
-        val view = View.inflate(context, R.layout.hex_banner, null)
-        view.setOnClickListener {
+        binding.root.setOnClickListener {
             openHexLink(context)
         }
 
         adFrame.apply {
             addView(
-                view,
+                binding.root,
                 FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     context.dpToPx(HEX_BANNER_HEIGHT_DP),
@@ -112,12 +115,12 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
 
             preferencesRepository.setLastMusicBanner(System.currentTimeMillis())
 
-            val view = View.inflate(context, R.layout.music_link, null)
-            view.run {
-                findViewById<MaterialTextView>(R.id.music_by).text =
+            val binding = MusicLinkBinding.inflate(layoutInflater)
+            binding.run {
+                musicBy.text =
                     getString(i18n.string.music_by, composer.composer)
 
-                setOnClickListener {
+                root.setOnClickListener {
                     analyticsManager.sentEvent(
                         Analytics.OpenMusicLink(from = "End Game"),
                     )
@@ -128,7 +131,7 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
             }
 
             adFrame.addView(
-                view,
+                binding.root,
                 FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.WRAP_CONTENT,
@@ -184,9 +187,9 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
     protected fun showDonationDialog(adFrame: FrameLayout) {
         adFrame.isVisible = true
 
-        val view = View.inflate(context, R.layout.donation_request, null)
-        view.apply {
-            setOnClickListener {
+        val binding = DonationRequestBinding.inflate(layoutInflater)
+        binding.apply {
+            root.setOnClickListener {
                 gameAudioManager.playMonetization()
                 activity?.let {
                     lifecycleScope.launch {
@@ -198,7 +201,7 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
         }
 
         adFrame.addView(
-            view,
+            binding.root,
             FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT,

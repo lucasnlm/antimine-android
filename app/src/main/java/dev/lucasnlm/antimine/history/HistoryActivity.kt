@@ -17,7 +17,7 @@ class HistoryActivity : ThemedActivity() {
         bindToolbar(binding.toolbar)
 
         supportFragmentManager.commit(allowStateLoss = true) {
-            replace<HistoryFragment>(R.id.content)
+            replace<HistoryFragment>(binding.content.id)
         }
     }
 }

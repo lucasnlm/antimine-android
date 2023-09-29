@@ -15,7 +15,7 @@ class AboutActivity : ThemedActivity() {
         bindToolbar(binding.toolbar)
 
         supportFragmentManager.commit(allowStateLoss = true) {
-            replace(R.id.content, AboutInfoFragment())
+            replace(binding.content.id, AboutInfoFragment())
         }
     }
 }

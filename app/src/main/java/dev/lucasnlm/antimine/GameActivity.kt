@@ -107,7 +107,11 @@ class GameActivity :
     ) {
         val isSwitchAndOpen = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
         warning?.dismiss()
-        warning = showWarning(text, isSwitchAndOpen)
+        warning = showWarning(
+            text = text,
+            container = binding.root,
+            isSwitchMarkOpen = isSwitchAndOpen,
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -319,7 +323,10 @@ class GameActivity :
                     when (it) {
                         is GameEvent.ShowNoGuessFailWarning -> {
                             warning =
-                                showWarning(i18n.string.no_guess_fail_warning).apply {
+                                showWarning(
+                                    text = i18n.string.no_guess_fail_warning,
+                                    container = binding.root,
+                                ).apply {
                                     setAction(i18n.string.ok) {
                                         warning?.dismiss()
                                     }
@@ -792,7 +799,7 @@ class GameActivity :
 
                 withContext(Dispatchers.Main) {
                     beginTransaction().apply {
-                        replace(R.id.levelContainer, fragment, GameRenderFragment.TAG)
+                        replace(binding.levelContainer.id, fragment, GameRenderFragment.TAG)
                         setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         commitAllowingStateLoss()
                     }

@@ -18,7 +18,7 @@ class LicenseActivity : ThemedActivity() {
         binding.toolbar.setTitle(i18n.string.licenses)
 
         supportFragmentManager.commit(allowStateLoss = true) {
-            replace(R.id.content, LicensesFragment())
+            replace(binding.content.id, LicensesFragment())
         }
     }
 }

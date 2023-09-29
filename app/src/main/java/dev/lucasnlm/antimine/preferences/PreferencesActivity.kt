@@ -75,9 +75,15 @@ class PreferencesActivity :
                     }
 
                     if (result) {
-                        showWarning(i18n.string.exported_success)
+                        showWarning(
+                            text = i18n.string.exported_success,
+                            container = binding.root,
+                        )
                     } else {
-                        showWarning(i18n.string.error)
+                        showWarning(
+                            text = i18n.string.error,
+                            container = binding.root,
+                        )
                     }
                 }
             }
@@ -96,10 +102,16 @@ class PreferencesActivity :
                     }
 
                     if (result) {
-                        showWarning(i18n.string.imported_success)
+                        showWarning(
+                            text = i18n.string.imported_success,
+                            container = binding.root,
+                        )
                         bindItems()
                     } else {
-                        showWarning(i18n.string.error)
+                        showWarning(
+                            text = i18n.string.error,
+                            container = binding.root,
+                        )
                     }
                 }
             }
