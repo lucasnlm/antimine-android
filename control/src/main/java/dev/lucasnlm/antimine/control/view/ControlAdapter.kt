@@ -59,13 +59,13 @@ class ControlAdapter(
 
         return ControlViewHolder(
             simpleItem =
-                viewType.inflateIf(SINGLE_LINE_CONTROL) {
-                    ViewControlItemSimpleBinding.inflate(layoutInflater, parent, false)
-                },
+            viewType.inflateIf(SINGLE_LINE_CONTROL) {
+                ViewControlItemSimpleBinding.inflate(layoutInflater, parent, false)
+            },
             controlItem =
-                viewType.inflateIf(TWO_LINES_CONTROL) {
-                    ViewControlItemBinding.inflate(layoutInflater, parent, false)
-                },
+            viewType.inflateIf(TWO_LINES_CONTROL) {
+                ViewControlItemBinding.inflate(layoutInflater, parent, false)
+            },
         )
     }
 

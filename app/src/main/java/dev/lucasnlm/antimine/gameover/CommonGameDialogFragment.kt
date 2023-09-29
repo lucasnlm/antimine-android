@@ -5,15 +5,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.textview.MaterialTextView
-import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.audio.GameAudioManagerImpl
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.models.Analytics

@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.history
 import android.os.Bundle
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.databinding.ActivityHistoryBinding
 import dev.lucasnlm.antimine.history.views.HistoryFragment
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity

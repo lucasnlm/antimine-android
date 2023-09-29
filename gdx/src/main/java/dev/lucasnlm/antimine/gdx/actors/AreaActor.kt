@@ -285,16 +285,16 @@ class AreaActor(
                     batch = batch,
                     texture = it.aroundMines[area.minesAround - 1],
                     color =
-                        if (area.dimNumber) {
-                            theme.palette
-                                .minesAround(area.minesAround - 1)
-                                .toGdxColor(GameContext.zoomLevelAlpha * 0.45f)
-                                .dim(0.5f)
-                        } else {
-                            theme.palette
-                                .minesAround(area.minesAround - 1)
-                                .toGdxColor(GameContext.zoomLevelAlpha)
-                        },
+                    if (area.dimNumber) {
+                        theme.palette
+                            .minesAround(area.minesAround - 1)
+                            .toGdxColor(GameContext.zoomLevelAlpha * 0.45f)
+                            .dim(0.5f)
+                    } else {
+                        theme.palette
+                            .minesAround(area.minesAround - 1)
+                            .toGdxColor(GameContext.zoomLevelAlpha)
+                    },
                 )
             } else if (area.hasMine) {
                 val color = theme.palette.uncovered
