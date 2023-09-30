@@ -38,34 +38,39 @@ class HistoryViewModel(
             when (event) {
                 is HistoryEvent.LoadAllSaves -> {
                     emit(state.copy(loading = true))
-                    val newSaveList = savesRepository.getAllSaves().sortedByDescending { it.uid }
-                    emit(state.copy(saveList = newSaveList, loading = false))
+                    val newSaveList = savesRepository.getAllSaves().sortedByDescending { it.startDate }
+                    emit(
+                        state.copy(
+                            saveList = newSaveList,
+                            loading = false,
+                        ),
+                    )
                 }
                 else -> {
                 }
             }
         }
 
-    private fun replayGame(uid: Int) {
+    private fun replayGame(saveId: String) {
         audioManager.playClickSound()
 
         val context = application.applicationContext
         val intent =
             Intent(context, GameActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                putExtra(GameActivity.RETRY_GAME, uid)
+                putExtra(GameActivity.RETRY_GAME, saveId)
             }
         context.startActivity(intent)
     }
 
-    private fun loadGame(uid: Int) {
+    private fun loadGame(saveId: String) {
         audioManager.playClickSound()
 
         val context = application.applicationContext
         val intent =
             Intent(context, GameActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                putExtra(GameActivity.START_GAME, uid)
+                putExtra(GameActivity.START_GAME, saveId)
             }
         context.startActivity(intent)
     }

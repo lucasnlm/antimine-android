@@ -1,15 +1,15 @@
 package dev.lucasnlm.antimine.common.level.repository
 
-import dev.lucasnlm.antimine.common.level.database.models.Save
+import dev.lucasnlm.antimine.common.io.models.FileSave
 
 interface SavesRepository {
-    suspend fun getAllSaves(): List<Save>
+    suspend fun getAllSaves(): List<FileSave>
 
-    suspend fun fetchCurrentSave(): Save?
+    suspend fun currentSaveId(): String?
 
-    suspend fun loadFromId(id: Int): Save?
+    suspend fun fetchCurrentSave(): FileSave?
 
-    suspend fun saveGame(save: Save): Long?
+    suspend fun loadFromId(id: String): FileSave?
 
-    fun setLimit(maxSavesStorage: Int)
+    suspend fun saveGame(save: FileSave): String?
 }

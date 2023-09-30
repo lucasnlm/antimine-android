@@ -5,9 +5,8 @@ import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
 data class GameState(
-    // The ID generated after save this game.
-    // It will be zero if it wasn't saved yet.
-    val saveId: Long = 0,
+    // The save id of current game.
+    val saveId: String? = null,
     // How many turns in this current session.
     // This value will be reseted if user kill the app.
     val turn: Int = 0,
@@ -43,11 +42,11 @@ data class GameState(
     val showTutorial: Boolean,
 ) {
     /** Indicates whether is a new game */
-    val isNewGame = turn == 0 && (saveId == 0L || isLoadingMap || isCreatingGame)
+    val isNewGame = turn == 0 && (saveId == null || isLoadingMap || isCreatingGame)
 
     /** Indicates whether the game is started */
-    val isGameStarted = (turn > 0 || saveId != 0L)
+    val isGameStarted = (turn > 0 || saveId != null)
 
     /** Indicates whether show controls text */
-    val shouldShowControls = turn < 1 && saveId == 0L && !isLoadingMap && showTutorial
+    val shouldShowControls = turn < 1 && saveId == null && !isLoadingMap && showTutorial
 }

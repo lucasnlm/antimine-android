@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.common.level.database.models.Save
+import dev.lucasnlm.antimine.common.io.models.FileSave
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
@@ -16,7 +16,7 @@ import com.google.android.material.R as GR
 import dev.lucasnlm.antimine.i18n.R as i18n
 
 class HistoryAdapter(
-    private val saveHistory: List<Save>,
+    private val saveHistory: List<FileSave>,
     private val statelessViewModel: StatelessViewModel<HistoryEvent>,
 ) : RecyclerView.Adapter<HistoryViewHolder>() {
     init {
@@ -34,7 +34,7 @@ class HistoryAdapter(
     }
 
     override fun getItemId(position: Int): Long {
-        return saveHistory[position].uid.toLong()
+        return saveHistory[position].id.hashCode().toLong()
     }
 
     override fun getItemCount(): Int {
@@ -66,7 +66,8 @@ class HistoryAdapter(
                 },
             )
 
-        val gameNameText = "$difficultyText #$uid"
+        val saveId = id.orEmpty()
+        val gameNameText = "$difficultyText #$saveId"
 
         holder.binding.run {
             difficulty.text = gameNameText
@@ -79,13 +80,13 @@ class HistoryAdapter(
                 if (status != SaveStatus.VICTORY) {
                     icon = ContextCompat.getDrawable(context, R.drawable.replay)
                     setOnClickListener {
-                        statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
+                        statelessViewModel.sendEvent(HistoryEvent.ReplaySave(saveId))
                     }
                     backgroundTintList = buttonBackgroundColor
                 } else {
                     icon = ContextCompat.getDrawable(context, R.drawable.play)
                     setOnClickListener {
-                        statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
+                        statelessViewModel.sendEvent(HistoryEvent.ReplaySave(saveId))
                     }
                     backgroundTintList = buttonBackgroundColor
                 }
@@ -93,7 +94,7 @@ class HistoryAdapter(
 
             open.run {
                 setOnClickListener {
-                    statelessViewModel.sendEvent(HistoryEvent.LoadSave(uid))
+                    statelessViewModel.sendEvent(HistoryEvent.LoadSave(saveId))
                 }
                 backgroundTintList = buttonBackgroundColor
             }

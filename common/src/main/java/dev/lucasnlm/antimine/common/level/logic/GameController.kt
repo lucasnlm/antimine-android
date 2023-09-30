@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.level.logic
 
+import dev.lucasnlm.antimine.common.io.models.FileSave
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
-import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.models.ActionCompleted
@@ -20,7 +20,7 @@ import kotlinx.coroutines.withTimeout
 class GameController {
     private val minefield: Minefield
     private val startTime = System.currentTimeMillis()
-    private var saveId = 0
+    private var saveId: String? = null
     private var actions = 0
     private var firstOpen: FirstOpen = FirstOpen.Unknown
     private var gameControl: GameControl = GameControl.Standard
@@ -47,7 +47,7 @@ class GameController {
         minefield: Minefield,
         seed: Long,
         useSimonTatham: Boolean,
-        saveId: Int? = null,
+        saveId: String? = null,
         onCreateUnsafeLevel: (() -> Unit)? = null,
     ) {
         val creationSeed = minefield.seed ?: seed
@@ -61,7 +61,7 @@ class GameController {
             }
         this.minefield = minefield
         this.seed = seed
-        this.saveId = saveId ?: 0
+        this.saveId = saveId
         this.actions = 0
         this.onCreateUnsafeLevel = onCreateUnsafeLevel
         this.field = minefieldCreator.createEmpty()
@@ -69,12 +69,12 @@ class GameController {
     }
 
     constructor(
-        save: Save,
+        save: FileSave,
         useSimonTatham: Boolean,
     ) {
         this.minefield = save.minefield
         this.seed = save.seed
-        this.saveId = save.uid
+        this.saveId = save.id
         this.firstOpen = save.firstOpen
         this.field = save.field
         this.actions = save.actions
@@ -449,15 +449,15 @@ class GameController {
     fun getSaveState(
         duration: Long,
         difficulty: Difficulty,
-    ): Save {
+    ): FileSave {
         val saveStatus: SaveStatus =
             when {
                 isVictory() -> SaveStatus.VICTORY
                 isGameOver() -> SaveStatus.DEFEAT
                 else -> SaveStatus.ON_GOING
             }
-        return Save(
-            saveId,
+        return FileSave(
+            id = saveId,
             seed = seed,
             startDate = startTime,
             duration = duration,
@@ -524,8 +524,8 @@ class GameController {
         }
     }
 
-    fun setCurrentSaveId(id: Int) {
-        this.saveId = id.coerceAtLeast(0)
+    fun setCurrentSaveId(saveId: String?) {
+        this.saveId = saveId
     }
 
     fun updateGameControl(newGameControl: GameControl) {

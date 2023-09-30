@@ -15,4 +15,8 @@ data class Area(
     val revealed: Boolean = false,
     val neighborsIds: List<Int>,
     val dimNumber: Boolean = false,
-)
+) {
+    companion object {
+        const val BYTE_SIZE = 20 * Int.SIZE_BYTES
+    }
+}

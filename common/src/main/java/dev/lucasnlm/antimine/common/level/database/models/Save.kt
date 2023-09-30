@@ -14,6 +14,7 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 
 @Keep
 @Entity(tableName = "new_save")
+@Deprecated("Use FileSave instead")
 data class Save(
     @PrimaryKey(autoGenerate = true)
     val uid: Int,

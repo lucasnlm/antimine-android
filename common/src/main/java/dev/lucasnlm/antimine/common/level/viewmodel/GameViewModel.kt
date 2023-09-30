@@ -7,8 +7,8 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.layoutDirection
 import androidx.lifecycle.viewModelScope
+import dev.lucasnlm.antimine.common.io.models.FileSave
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
-import dev.lucasnlm.antimine.common.level.database.models.Save
 import dev.lucasnlm.antimine.common.level.logic.GameController
 import dev.lucasnlm.antimine.common.level.models.ActionCompleted
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
@@ -253,7 +253,6 @@ open class GameViewModel(
                     seed = seed,
                     useSimonTatham = preferencesRepository.useSimonTathamAlgorithm(),
                     onCreateUnsafeLevel = ::onCreateUnsafeLevel,
-                    saveId = null,
                 )
 
             val newGameState =
@@ -291,7 +290,7 @@ open class GameViewModel(
         return minefield
     }
 
-    private fun resumeGameFromSave(save: Save): Minefield {
+    private fun resumeGameFromSave(save: FileSave): Minefield {
         clock.reset(save.duration)
 
         sendEvent(GameEvent.LoadingNewGame)
@@ -303,7 +302,7 @@ open class GameViewModel(
 
         val newGameState =
             GameState(
-                saveId = save.uid.toLong(),
+                saveId = save.id,
                 duration = save.duration,
                 seed = save.seed,
                 difficulty = save.difficulty,
@@ -332,7 +331,7 @@ open class GameViewModel(
         return newGameState.minefield
     }
 
-    private fun retryGame(save: Save) {
+    private fun retryGame(save: FileSave) {
         clock.reset()
 
         sendEvent(GameEvent.LoadingNewGame)
@@ -342,7 +341,6 @@ open class GameViewModel(
                 minefield = save.minefield,
                 seed = save.seed,
                 useSimonTatham = preferencesRepository.useSimonTathamAlgorithm(),
-                saveId = save.uid,
                 onCreateUnsafeLevel = ::onCreateUnsafeLevel,
             )
         initialized = true
@@ -350,7 +348,6 @@ open class GameViewModel(
 
         val newGameState =
             GameState(
-                saveId = save.uid.toLong(),
                 duration = save.duration,
                 seed = save.seed,
                 difficulty = save.difficulty,
@@ -379,9 +376,9 @@ open class GameViewModel(
         )
     }
 
-    suspend fun loadGame(uid: Int): Minefield =
+    suspend fun loadGame(saveId: String): Minefield =
         withContext(Dispatchers.IO) {
-            val lastGame = savesRepository.loadFromId(uid)
+            val lastGame = savesRepository.loadFromId(saveId)
 
             if (lastGame != null) {
                 resumeGameFromSave(lastGame)
@@ -406,9 +403,9 @@ open class GameViewModel(
         return gameController.hadMistakes() && gameController.hasIsolatedAllMines()
     }
 
-    suspend fun retryGame(uid: Int): Minefield =
+    suspend fun retryGame(saveId: String): Minefield =
         withContext(Dispatchers.IO) {
-            val save = savesRepository.loadFromId(uid)
+            val save = savesRepository.loadFromId(saveId)
 
             if (save != null) {
                 retryGame(save)
@@ -431,9 +428,10 @@ open class GameViewModel(
 
     suspend fun loadLastGame(): Minefield =
         withContext(Dispatchers.IO) {
+            val saveId = savesRepository.currentSaveId()
             val lastGame = savesRepository.fetchCurrentSave()
 
-            if (lastGame != null) {
+            if (lastGame != null && saveId != null) {
                 resumeGameFromSave(lastGame)
             } else {
                 // Fail to load
@@ -455,9 +453,9 @@ open class GameViewModel(
             gameController.let {
                 if (it.hasMines()) {
                     savesRepository.saveGame(
-                        it.getSaveState(state.duration, state.difficulty),
+                        save = it.getSaveState(state.duration, state.difficulty),
                     )?.let { id ->
-                        it.setCurrentSaveId(id.toInt())
+                        it.setCurrentSaveId(id)
                         sendEvent(GameEvent.UpdateSave(id))
                     }
                 }

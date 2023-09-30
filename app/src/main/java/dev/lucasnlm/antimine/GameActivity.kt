@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.ConfigurationCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -156,12 +157,12 @@ class GameActivity :
                     gameViewModel.startNewGame(difficulty)
                 }
                 extras.containsKey(RETRY_GAME) -> {
-                    val uid = extras.getInt(RETRY_GAME)
-                    gameViewModel.retryGame(uid)
+                    val saveId = extras.getString(RETRY_GAME).orEmpty()
+                    gameViewModel.retryGame(saveId)
                 }
                 extras.containsKey(START_GAME) -> {
-                    val uid = extras.getInt(START_GAME)
-                    gameViewModel.loadGame(uid)
+                    val saveId = extras.getString(START_GAME).orEmpty()
+                    gameViewModel.loadGame(saveId)
                 }
                 else -> {
                     gameViewModel.loadLastGame()
@@ -510,7 +511,7 @@ class GameActivity :
             TooltipCompat.setTooltipText(this, getString(i18n.string.back))
             setColorFilter(binding.minesCount.currentTextColor)
             setOnClickListener {
-                onBackPressed()
+                finish()
             }
         }
 
@@ -741,10 +742,7 @@ class GameActivity :
     }
 
     private fun onOpenAppActions() {
-        if (instantAppManager.isEnabled(applicationContext)) {
-            // Instant App does nothing.
-            savesRepository.setLimit(1)
-        } else {
+        if (!instantAppManager.isEnabled(applicationContext)) {
             preferencesRepository.incrementUseCount()
 
             if (preferencesRepository.getUseCount() > featureFlagManager.minUsageToReview) {
@@ -783,31 +781,18 @@ class GameActivity :
 
     private fun loadGameOrTutorial() {
         if (!isFinishing) {
-            lifecycleScope.launch {
-                loadGameFragment()
-            }
+            loadGameFragment()
         }
     }
 
-    private suspend fun loadGameFragment() {
-        supportFragmentManager.apply {
-            if (findFragmentByTag(GameRenderFragment.TAG) == null) {
-                val fragment =
-                    withContext(Dispatchers.IO) {
-                        GameRenderFragment()
-                    }
+    private fun loadGameFragment() {
+        supportFragmentManager.commit(allowStateLoss = true) {
+            val fragment = GameRenderFragment()
+            replace(binding.levelContainer.id, fragment, GameRenderFragment.TAG)
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
 
-                withContext(Dispatchers.Main) {
-                    beginTransaction().apply {
-                        replace(binding.levelContainer.id, fragment, GameRenderFragment.TAG)
-                        setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                        commitAllowingStateLoss()
-                    }
-                }
-
-                handleIntent(intent)
-                onOpenAppActions()
-            }
+            handleIntent(intent)
+            onOpenAppActions()
         }
     }
 

@@ -16,7 +16,7 @@ sealed class GameEvent {
     ) : GameEvent()
 
     data class UpdateSave(
-        val saveId: Long,
+        val saveId: String?,
     ) : GameEvent()
 
     data class SetGameActivation(

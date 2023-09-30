@@ -35,7 +35,7 @@ val LevelModule =
         }
 
         single {
-            SavesRepositoryImpl(get())
+            SavesRepositoryImpl(get(), get())
         } bind SavesRepository::class
 
         single {
