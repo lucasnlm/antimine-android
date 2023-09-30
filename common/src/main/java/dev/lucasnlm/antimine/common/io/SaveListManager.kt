@@ -15,7 +15,7 @@ interface SaveListManager {
      * Returns the first save file in the list.
      * Or null if there is no save file.
      */
-    suspend fun first(): String?
+    suspend fun currentSaveId(): String?
 
     /**
      * Returns the list of save files.

@@ -10,7 +10,7 @@ class SavesRepositoryImpl(
 ) : SavesRepository {
 
     override suspend fun currentSaveId(): String? {
-        return saveListManager.first()
+        return saveListManager.currentSaveId()
     }
 
     override suspend fun getAllSaves(): List<SaveFile> {
@@ -20,7 +20,7 @@ class SavesRepositoryImpl(
     }
 
     override suspend fun fetchCurrentSave(): SaveFile? {
-        return saveListManager.first()?.let {
+        return saveListManager.currentSaveId()?.let {
             return loadFromId(it)
         }
     }

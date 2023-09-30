@@ -40,8 +40,8 @@ class SaveListManagerImpl(
         }
     }
 
-    override suspend fun first(): String? {
-        return readSaveList().firstOrNull()
+    override suspend fun currentSaveId(): String? {
+        return readSaveList().lastOrNull()
     }
 
     override suspend fun readSaveList(): List<String> {
