@@ -1,5 +1,14 @@
 package dev.lucasnlm.antimine.common.io.models
 
+/**
+ * Represents a stats file
+ * @property duration The duration of the game
+ * @property mines The number of mines in the game
+ * @property victory The victory status of the game
+ * @property width The width of the game
+ * @property height The height of the game
+ * @property openArea The number of open areas in the game
+ */
 data class StatsFile(
     val duration: Long,
     val mines: Int,
