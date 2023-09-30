@@ -7,7 +7,7 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.layoutDirection
 import androidx.lifecycle.viewModelScope
-import dev.lucasnlm.antimine.common.io.models.FileSave
+import dev.lucasnlm.antimine.common.io.models.SaveFile
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.logic.GameController
 import dev.lucasnlm.antimine.common.level.models.ActionCompleted
@@ -290,7 +290,7 @@ open class GameViewModel(
         return minefield
     }
 
-    private fun resumeGameFromSave(save: FileSave): Minefield {
+    private fun resumeGameFromSave(save: SaveFile): Minefield {
         clock.reset(save.duration)
 
         sendEvent(GameEvent.LoadingNewGame)
@@ -331,7 +331,7 @@ open class GameViewModel(
         return newGameState.minefield
     }
 
-    private fun retryGame(save: FileSave) {
+    private fun retryGame(save: SaveFile) {
         clock.reset()
 
         sendEvent(GameEvent.LoadingNewGame)
@@ -812,7 +812,7 @@ open class GameViewModel(
                     playGamesManager.submitLeaderboard(it, time)
                 }
 
-                statsRepository.getAllStats(0).count {
+                statsRepository.getAllStats().count {
                     it.victory == 1
                 }.also {
                     if (it > 0) {

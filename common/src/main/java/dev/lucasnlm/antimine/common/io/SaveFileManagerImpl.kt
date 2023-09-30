@@ -1,8 +1,8 @@
 package dev.lucasnlm.antimine.common.io
 
 import android.content.Context
-import dev.lucasnlm.antimine.common.io.models.FileSave
-import dev.lucasnlm.antimine.common.io.serializer.FileSaveSerializer
+import dev.lucasnlm.antimine.common.io.models.SaveFile
+import dev.lucasnlm.antimine.common.io.serializer.SaveFileSerializer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,16 +15,16 @@ class SaveFileManagerImpl(
     private val saveListManager: SaveListManager,
     private val scope: CoroutineScope,
 ) : SaveFileManager {
-    override suspend fun loadSave(filePath: String): FileSave? {
+    override suspend fun loadSave(filePath: String): SaveFile? {
         return withContext(Dispatchers.IO) {
             runCatching {
                 val content = context.filesDir.resolve(filePath).readBytes()
-                FileSaveSerializer.deserialize(filePath, content)
+                SaveFileSerializer.deserialize(filePath, content)
             }.getOrNull()
         }
     }
 
-    override suspend fun writeSave(save: FileSave): String {
+    override suspend fun writeSave(save: SaveFile): String {
         val filePath = save.id ?: createRandomFileName()
         scope.launch {
             var result = writeSaveFile(filePath, save)
@@ -44,7 +44,7 @@ class SaveFileManagerImpl(
         }
     }
 
-    private suspend fun writeSaveFile(filePath: String, save: FileSave): Boolean {
+    private suspend fun writeSaveFile(filePath: String, save: SaveFile): Boolean {
         return withContext(Dispatchers.IO) {
             runCatching {
                 File(context.filesDir, filePath).apply {
@@ -52,7 +52,7 @@ class SaveFileManagerImpl(
                     delete()
 
                     writeBytes(
-                        FileSaveSerializer.serialize(save),
+                        SaveFileSerializer.serialize(save),
                     )
                 }
                 true

@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.io
 
-import dev.lucasnlm.antimine.common.level.database.models.Stats
+import dev.lucasnlm.antimine.common.io.models.StatsFile
 
 /**
  * Handles the file that stores the stats
@@ -10,10 +10,15 @@ interface StatsFileManager {
      * Inserts a new stats
      * @param stats The stats to be inserted
      */
-    fun insert(stats: Stats)
+    suspend fun insert(stats: StatsFile)
 
     /**
      * Deletes the last stats
      */
-    fun readStats(): List<Stats>
+    suspend fun readStats(): List<StatsFile>
+
+    /**
+     * Deletes the last stats
+     */
+    suspend fun deleteStats()
 }

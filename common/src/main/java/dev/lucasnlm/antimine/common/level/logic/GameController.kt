@@ -1,9 +1,9 @@
 package dev.lucasnlm.antimine.common.level.logic
 
-import dev.lucasnlm.antimine.common.io.models.FileSave
+import dev.lucasnlm.antimine.common.io.models.SaveFile
+import dev.lucasnlm.antimine.common.io.models.StatsFile
 import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
-import dev.lucasnlm.antimine.common.level.database.models.Stats
 import dev.lucasnlm.antimine.common.level.models.ActionCompleted
 import dev.lucasnlm.antimine.common.level.solver.LimitedCheckNeighborsSolver
 import dev.lucasnlm.antimine.core.models.Area
@@ -69,7 +69,7 @@ class GameController {
     }
 
     constructor(
-        save: FileSave,
+        save: SaveFile,
         useSimonTatham: Boolean,
     ) {
         this.minefield = save.minefield
@@ -449,14 +449,14 @@ class GameController {
     fun getSaveState(
         duration: Long,
         difficulty: Difficulty,
-    ): FileSave {
+    ): SaveFile {
         val saveStatus: SaveStatus =
             when {
                 isVictory() -> SaveStatus.VICTORY
                 isGameOver() -> SaveStatus.DEFEAT
                 else -> SaveStatus.ON_GOING
             }
-        return FileSave(
+        return SaveFile(
             id = saveId,
             seed = seed,
             startDate = startTime,
@@ -502,7 +502,7 @@ class GameController {
         return errorTolerance != 0
     }
 
-    fun getStats(duration: Long): Stats? {
+    fun getStats(duration: Long): StatsFile? {
         val gameStatus: SaveStatus =
             when {
                 isVictory() -> SaveStatus.VICTORY
@@ -512,8 +512,7 @@ class GameController {
         return if (gameStatus == SaveStatus.ON_GOING) {
             null
         } else {
-            Stats(
-                0,
+            StatsFile(
                 duration,
                 getMinesCount(),
                 if (gameStatus == SaveStatus.VICTORY) 1 else 0,

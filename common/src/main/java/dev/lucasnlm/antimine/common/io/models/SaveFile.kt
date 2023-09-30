@@ -5,7 +5,6 @@ import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import java.io.InvalidObjectException
 
 /**
  * This class is a representation of a save file.
@@ -20,7 +19,7 @@ import java.io.InvalidObjectException
  * @property field The list of areas of the game.
  * @property actions The number of actions of the game.
  */
-data class FileSave(
+data class SaveFile(
     val id: String? = null,
     val seed: Long,
     val startDate: Long,

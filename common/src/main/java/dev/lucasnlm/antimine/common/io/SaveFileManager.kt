@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.io
 
-import dev.lucasnlm.antimine.common.io.models.FileSave
+import dev.lucasnlm.antimine.common.io.models.SaveFile
 
 interface SaveFileManager {
     /**
@@ -8,11 +8,11 @@ interface SaveFileManager {
      * @param filePath The path of the save file.
      * @return The save file or null if it could not be loaded.
      */
-    suspend fun loadSave(filePath: String): FileSave?
+    suspend fun loadSave(filePath: String): SaveFile?
 
     /**
      * Writes a save file.
      * @param save The save file to be written.
      */
-    suspend fun writeSave(save: FileSave): String
+    suspend fun writeSave(save: SaveFile): String
 }

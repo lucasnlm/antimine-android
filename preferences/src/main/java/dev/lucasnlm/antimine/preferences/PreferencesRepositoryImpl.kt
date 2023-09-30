@@ -232,12 +232,6 @@ class PreferencesRepositoryImpl(
         return preferencesManager.getString(PreferenceKeys.PREFERENCE_LOCALE)
     }
 
-    override fun updateStatsBase(statsBase: Int) {
-        preferencesManager.putInt(PreferenceKeys.PREFERENCE_STATS_BASE, statsBase)
-    }
-
-    override fun getStatsBase(): Int = preferencesManager.getInt(PreferenceKeys.PREFERENCE_STATS_BASE, 0)
-
     override fun getUseCount(): Int = preferencesManager.getInt(PreferenceKeys.PREFERENCE_USE_COUNT, 0)
 
     override fun incrementUseCount() {

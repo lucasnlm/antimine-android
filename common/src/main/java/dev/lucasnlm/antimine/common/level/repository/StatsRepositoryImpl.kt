@@ -1,34 +1,26 @@
 package dev.lucasnlm.antimine.common.level.repository
 
-import dev.lucasnlm.antimine.common.level.database.dao.StatsDao
-import dev.lucasnlm.antimine.common.level.database.models.Stats
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import dev.lucasnlm.antimine.common.io.StatsFileManager
+import dev.lucasnlm.antimine.common.io.models.StatsFile
 
 class StatsRepositoryImpl(
-    private val statsDao: StatsDao,
+    private val statsFileManager: StatsFileManager,
 ) : StatsRepository {
-    override suspend fun getAllStats(minId: Int): List<Stats> {
-        return withContext(Dispatchers.IO) {
-            statsDao.getAll(minId)
+    override suspend fun getAllStats(): List<StatsFile> {
+        return statsFileManager.readStats()
+    }
+
+    override suspend fun addAllStats(stats: List<StatsFile>) {
+        return stats.forEach {
+            statsFileManager.insert(it)
         }
     }
 
-    override suspend fun addAllStats(stats: List<Stats>): Long? {
-        return withContext(Dispatchers.IO) {
-            statsDao.insertAll(stats).firstOrNull()
-        }
-    }
-
-    override suspend fun addStats(stats: Stats): Long {
-        return withContext(Dispatchers.IO) {
-            statsDao.insert(stats)
-        }
+    override suspend fun addStats(stats: StatsFile) {
+        statsFileManager.insert(stats)
     }
 
     override suspend fun deleteLastStats() {
-        return withContext(Dispatchers.IO) {
-            statsDao.deleteLast()
-        }
+        statsFileManager.deleteStats()
     }
 }

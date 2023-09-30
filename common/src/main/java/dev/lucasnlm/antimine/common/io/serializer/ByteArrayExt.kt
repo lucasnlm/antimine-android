@@ -1,9 +1,12 @@
 package dev.lucasnlm.antimine.common.io.serializer
 
+import dev.lucasnlm.antimine.common.io.serializer.ByteArrayExt.toInt
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Mark
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.DataInputStream
+import java.io.DataOutputStream
 import java.nio.ByteBuffer
 
 object ByteArrayExt {
@@ -30,40 +33,40 @@ object ByteArrayExt {
     /**
      * Writes an [Area] to a [ByteArrayOutputStream].
      */
-    fun ByteArrayOutputStream.writeArea(area: Area) {
-        write(area.id)
-        write(area.posX)
-        write(area.posY)
-        write(area.minesAround)
-        write(area.hasMine.toInt())
-        write(area.mistake.toInt())
-        write(area.isCovered.toInt())
-        write(area.mark.ordinal)
-        write(area.revealed.toInt())
-        write(area.neighborsIds.size)
+    fun DataOutputStream.writeArea(area: Area) {
+        writeInt(area.id)
+        writeInt(area.posX)
+        writeInt(area.posY)
+        writeInt(area.minesAround)
+        writeInt(area.hasMine.toInt())
+        writeInt(area.mistake.toInt())
+        writeInt(area.isCovered.toInt())
+        writeInt(area.mark.ordinal)
+        writeInt(area.revealed.toInt())
+        writeInt(area.neighborsIds.size)
         area.neighborsIds.forEach { neighborId ->
-            write(neighborId)
+            writeInt(neighborId)
         }
-        write(area.dimNumber.toInt())
+        writeInt(area.dimNumber.toInt())
     }
 
     /**
      * Reads an [Area] from a [ByteArrayInputStream].
      * @return The read [Area].
      */
-    fun ByteArrayInputStream.readArea(): Area {
+    fun DataInputStream.readArea(): Area {
         return Area(
-            id = read(),
-            posX = read(),
-            posY = read(),
-            minesAround = read(),
-            hasMine = read() != 0,
-            mistake = read() != 0,
-            isCovered = read() != 0,
-            mark = Mark.values()[read()],
-            revealed = read() != 0,
-            neighborsIds = List(read()) { read() },
-            dimNumber = read() != 0,
+            id = readInt(),
+            posX = readInt(),
+            posY = readInt(),
+            minesAround = readInt(),
+            hasMine = readInt() != 0,
+            mistake = readInt() != 0,
+            isCovered = readInt() != 0,
+            mark = Mark.values()[readInt()],
+            revealed = readInt() != 0,
+            neighborsIds = List(readInt()) { readInt() },
+            dimNumber = readInt() != 0,
         )
     }
 

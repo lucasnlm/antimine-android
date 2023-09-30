@@ -17,7 +17,7 @@ sealed class FirstOpen {
      * Describes the [value] of the first step.
      */
     @Keep
-    class Position(
+    data class Position(
         val value: Int,
     ) : FirstOpen()
 

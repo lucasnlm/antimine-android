@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.common.io.models.FileSave
+import dev.lucasnlm.antimine.common.io.models.SaveFile
 import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
@@ -16,7 +16,7 @@ import com.google.android.material.R as GR
 import dev.lucasnlm.antimine.i18n.R as i18n
 
 class HistoryAdapter(
-    private val saveHistory: List<FileSave>,
+    private val saveHistory: List<SaveFile>,
     private val statelessViewModel: StatelessViewModel<HistoryEvent>,
 ) : RecyclerView.Adapter<HistoryViewHolder>() {
     init {

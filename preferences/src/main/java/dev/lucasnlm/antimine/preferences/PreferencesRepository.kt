@@ -65,10 +65,6 @@ interface PreferencesRepository {
 
     fun getPreferredLocale(): String?
 
-    fun updateStatsBase(statsBase: Int)
-
-    fun getStatsBase(): Int
-
     fun getUseCount(): Int
 
     fun incrementUseCount()
