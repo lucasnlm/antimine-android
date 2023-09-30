@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 
 @Keep
 @Entity
+@Deprecated("Use FileStats instead")
 data class Stats(
     @PrimaryKey(autoGenerate = true)
     val uid: Int,
@@ -22,15 +23,15 @@ data class Stats(
     val height: Int,
     @ColumnInfo(name = "openArea")
     val openArea: Int,
-)
-
-fun Stats.toHashMap(): HashMap<String, String> =
-    hashMapOf(
-        "uid" to uid.toString(),
-        "duration" to duration.toString(),
-        "mines" to mines.toString(),
-        "victory" to victory.toString(),
-        "width" to width.toString(),
-        "height" to height.toString(),
-        "openArea" to openArea.toString(),
-    )
+) {
+    fun toHashMap(): HashMap<String, String> =
+        hashMapOf(
+            "uid" to uid.toString(),
+            "duration" to duration.toString(),
+            "mines" to mines.toString(),
+            "victory" to victory.toString(),
+            "width" to width.toString(),
+            "height" to height.toString(),
+            "openArea" to openArea.toString(),
+        )
+}
