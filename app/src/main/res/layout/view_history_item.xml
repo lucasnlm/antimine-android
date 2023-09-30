@@ -81,7 +81,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:contentDescription="@string/retry"
-            app:iconTint="?colorOnSurfaceInverse"
+            app:iconTint="?colorTertiary"
             app:backgroundTint="?colorAccent"
             app:icon="@drawable/retry"/>
 
@@ -94,7 +94,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/replay"
             android:contentDescription="@string/retry"
-            app:iconTint="?colorOnSurfaceInverse"
+            app:iconTint="?colorTertiary"
             app:backgroundTint="?colorAccent"
             app:icon="@drawable/view"/>
 

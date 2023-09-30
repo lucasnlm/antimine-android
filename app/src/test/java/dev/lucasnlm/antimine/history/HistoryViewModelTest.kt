@@ -1,9 +1,9 @@
 package dev.lucasnlm.antimine.history
 
 import dev.lucasnlm.antimine.IntentViewModelTest
+import dev.lucasnlm.antimine.common.io.models.FirstOpen
 import dev.lucasnlm.antimine.common.io.models.SaveFile
-import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
-import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
+import dev.lucasnlm.antimine.common.io.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.history.viewmodel.HistoryEvent

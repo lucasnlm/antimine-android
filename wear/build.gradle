@@ -101,9 +101,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.6.2'
 
-    // Room
-    implementation 'androidx.room:room-ktx:2.5.2'
-
     // Constraint
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 

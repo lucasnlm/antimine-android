@@ -1,7 +1,5 @@
 package dev.lucasnlm.antimine.common.level.di
 
-import androidx.room.Room
-import dev.lucasnlm.antimine.common.level.database.AppDataBase
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepositoryImpl
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
@@ -16,20 +14,6 @@ import org.koin.dsl.module
 
 val LevelModule =
     module {
-        single {
-            Room.databaseBuilder(get(), AppDataBase::class.java, AppDataBase.DATA_BASE_NAME)
-                .fallbackToDestructiveMigration()
-                .build()
-        }
-
-        single {
-            get<AppDataBase>(AppDataBase::class).saveDao()
-        }
-
-        single {
-            get<AppDataBase>(AppDataBase::class).statsDao()
-        }
-
         single {
             Clock()
         }

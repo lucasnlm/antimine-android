@@ -7,8 +7,8 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.layoutDirection
 import androidx.lifecycle.viewModelScope
+import dev.lucasnlm.antimine.common.io.models.FirstOpen
 import dev.lucasnlm.antimine.common.io.models.SaveFile
-import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
 import dev.lucasnlm.antimine.common.level.logic.GameController
 import dev.lucasnlm.antimine.common.level.models.ActionCompleted
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository

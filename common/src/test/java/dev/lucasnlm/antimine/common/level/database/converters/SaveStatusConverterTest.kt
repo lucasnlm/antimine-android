@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.level.database.converters
 
-import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
+import dev.lucasnlm.antimine.common.io.models.SaveStatus
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
