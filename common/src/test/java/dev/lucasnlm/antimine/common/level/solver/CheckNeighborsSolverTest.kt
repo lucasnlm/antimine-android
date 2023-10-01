@@ -9,7 +9,6 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class CheckNeighborsSolverTest {
     private fun handleMinefield(block: (MinefieldHandler) -> Unit) =
         runTest {

@@ -9,7 +9,6 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class MinefieldHandlerTest {
     private fun handleMinefield(
         useQuestionMark: Boolean = false,

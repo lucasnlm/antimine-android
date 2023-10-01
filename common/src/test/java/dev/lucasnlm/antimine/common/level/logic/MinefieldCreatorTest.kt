@@ -6,7 +6,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class MinefieldCreatorTest {
     @Test
     fun testMinefieldCreation() =

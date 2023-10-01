@@ -10,7 +10,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.lang.Thread.sleep
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class LimitedCheckNeighborsSolverTest {
     private fun handleMinefield(block: (MinefieldHandler) -> Unit) =
         runTest {
