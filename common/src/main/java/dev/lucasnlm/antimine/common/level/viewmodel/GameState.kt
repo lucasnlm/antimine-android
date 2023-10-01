@@ -20,7 +20,7 @@ data class GameState(
     val field: List<Area>,
     // Current mine counter.
     val mineCount: Int?,
-    // Current game durations in milliseconds.
+    // Current game durations in seconds.
     val duration: Long,
     // How many hints are available.
     val hints: Int,

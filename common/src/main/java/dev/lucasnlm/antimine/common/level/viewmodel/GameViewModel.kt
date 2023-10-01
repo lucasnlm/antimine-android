@@ -15,7 +15,7 @@ import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.common.level.repository.TipRepository
-import dev.lucasnlm.antimine.common.level.utils.Clock
+import dev.lucasnlm.antimine.common.level.utils.ClockManager
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 import dev.lucasnlm.antimine.core.models.Analytics
@@ -53,10 +53,19 @@ open class GameViewModel(
     private val playGamesManager: PlayGamesManager,
     private val tipRepository: TipRepository,
     private val featureFlagManager: FeatureFlagManager,
-    private val clock: Clock,
+    private val clock: ClockManager,
 ) : IntentViewModel<GameEvent, GameState>() {
     private lateinit var gameController: GameController
     private var initialized = false
+
+    init {
+        viewModelScope.launch {
+            clock.observe()
+                .collect {
+                    sendEvent(GameEvent.UpdateTime(it))
+                }
+        }
+    }
 
     override fun initialState(): GameState {
         return GameState(
@@ -627,9 +636,7 @@ open class GameViewModel(
     private fun runClock() {
         clock.run {
             if (isStopped) {
-                start {
-                    sendEvent(GameEvent.UpdateTime(it))
-                }
+                start()
             }
         }
     }
@@ -679,7 +686,7 @@ open class GameViewModel(
 
     private suspend fun onGameOver(useGameOverFeedback: Boolean) {
         stopClock()
-        analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
+        analyticsManager.sentEvent(Analytics.GameOver(clock.timeInSeconds(), getScore()))
 
         gameController.run {
             if (useGameOverFeedback) {
@@ -719,7 +726,7 @@ open class GameViewModel(
     private suspend fun onVictory() {
         analyticsManager.sentEvent(
             Analytics.Victory(
-                clock.time(),
+                clock.timeInSeconds(),
                 getScore(),
                 state.difficulty,
             ),
@@ -741,7 +748,7 @@ open class GameViewModel(
             preferencesRepository.incrementProgressiveValue()
         }
 
-        if (clock.time() < THIRTY_SECONDS_ACHIEVEMENT) {
+        if (clock.timeInSeconds() < THIRTY_SECONDS_ACHIEVEMENT) {
             withContext(Dispatchers.Main) {
                 playGamesManager.unlockAchievement(Achievement.ThirtySeconds)
             }
@@ -760,7 +767,7 @@ open class GameViewModel(
     }
 
     private fun calcRewardHints(): Int {
-        return if (clock.time() > MIN_REWARD_GAME_SECONDS && preferencesRepository.isPremiumEnabled()) {
+        return if (clock.timeInSeconds() > MIN_REWARD_GAME_SECONDS && preferencesRepository.isPremiumEnabled()) {
             val rewardedHints =
                 if (isCompletedWithMistakes()) {
                     (state.minefield.mines * REWARD_RATIO_WITH_MISTAKES)
@@ -784,7 +791,7 @@ open class GameViewModel(
                 }
             }
 
-            val time = clock.time()
+            val time = clock.timeInSeconds()
             if (time > 1L && gameController.getActionsCount() > MIN_ACTION_TO_REWARD) {
                 val board =
                     when (state.difficulty) {
