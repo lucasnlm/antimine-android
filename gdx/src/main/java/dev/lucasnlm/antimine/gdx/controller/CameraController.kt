@@ -60,6 +60,7 @@ class CameraController(
     fun freeTouch() {
         touch = null
         unlockTouch = false
+        Gdx.graphics.isContinuousRendering = false
     }
 
     fun startTouch(
@@ -67,6 +68,7 @@ class CameraController(
         y: Float,
     ) {
         touch = touch ?: Vector2(x, y)
+        Gdx.graphics.isContinuousRendering = true
     }
 
     fun translate(
@@ -80,7 +82,6 @@ class CameraController(
                 camera.run {
                     translate(dx, dy, 0f)
                     update(true)
-                    Gdx.graphics.requestRendering()
                 }
                 unlockTouch = true
             }

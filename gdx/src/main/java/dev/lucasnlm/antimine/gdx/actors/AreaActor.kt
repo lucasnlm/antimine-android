@@ -4,139 +4,104 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Actor
-import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import dev.lucasnlm.antimine.core.getNeighborIdAtPos
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.AtlasNames
 import dev.lucasnlm.antimine.gdx.GameContext
+import dev.lucasnlm.antimine.gdx.actors.AreaForm.AREA_FULL_FORM
+import dev.lucasnlm.antimine.gdx.actors.AreaForm.AREA_NO_FORM
+import dev.lucasnlm.antimine.gdx.actors.AreaForm.areaFormOf
+import dev.lucasnlm.antimine.gdx.actors.AreaForm.toAtlasNames
 import dev.lucasnlm.antimine.gdx.alpha
 import dev.lucasnlm.antimine.gdx.dim
 import dev.lucasnlm.antimine.gdx.drawAsset
 import dev.lucasnlm.antimine.gdx.drawRegion
-import dev.lucasnlm.antimine.gdx.events.GdxEvent
+import dev.lucasnlm.antimine.gdx.models.RenderSettings
 import dev.lucasnlm.antimine.gdx.toGdxColor
 import dev.lucasnlm.antimine.gdx.toInverseBackOrWhite
-import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.minesAround
 import dev.lucasnlm.antimine.ui.repository.Themes
 
 class AreaActor(
-    size: Float,
-    field: List<Area>,
-    enableLigatures: Boolean,
-    private var area: Area,
+    inputListener: InputListener,
+    var isPressed: Boolean = false,
     private var focusScale: Float = 1.0f,
-    private var isPressed: Boolean = false,
-    private val pieces: MutableMap<String, Boolean> = mutableMapOf(),
-    private val theme: AppTheme,
-    private val onInputEvent: (GdxEvent) -> Unit,
+    private var pieces: Map<String, Boolean> = mapOf(),
+    private val renderSettings: RenderSettings,
 ) : Actor() {
+    var area: Area? = null
 
     private var areaForm: Int? = null
 
-    private val topId: Int
-    private val bottomId: Int
-    private val leftId: Int
-    private val rightId: Int
-    private val topLeftId: Int
-    private val topRightId: Int
-    private val bottomLeftId: Int
-    private val bottomRightId: Int
+    private var topId: Int = -1
+    private var bottomId: Int = -1
+    private var leftId: Int = -1
+    private var rightId: Int = -1
+    private var topLeftId: Int = -1
+    private var topRightId: Int = -1
+    private var bottomLeftId: Int = -1
+    private var bottomRightId: Int = -1
 
     init {
-        width = size
-        height = size
-        x = area.posX * width
-        y = area.posY * height
+        width = renderSettings.areaSize
+        height = renderSettings.areaSize
 
-        addListener(
-            object : InputListener() {
-                override fun touchUp(
-                    event: InputEvent?,
-                    x: Float,
-                    y: Float,
-                    pointer: Int,
-                    button: Int,
-                ) {
-                    super.touchUp(event, x, y, pointer, button)
-                    onInputEvent(GdxEvent.TouchUpEvent(area.id))
-                    isPressed = false
-                    toBack()
-                    Gdx.graphics.requestRendering()
-                }
-
-                override fun touchDown(
-                    event: InputEvent,
-                    x: Float,
-                    y: Float,
-                    pointer: Int,
-                    button: Int,
-                ): Boolean {
-                    toFront()
-                    isPressed = true
-                    onInputEvent(GdxEvent.TouchDownEvent(area.id))
-                    Gdx.graphics.requestRendering()
-                    return true
-                }
-            },
-        )
-
-        topId = area.getNeighborIdAtPos(field, 0, 1)
-        bottomId = area.getNeighborIdAtPos(field, 0, -1)
-        leftId = area.getNeighborIdAtPos(field, -1, 0)
-        rightId = area.getNeighborIdAtPos(field, 1, 0)
-        topLeftId = area.getNeighborIdAtPos(field, -1, 1)
-        topRightId = area.getNeighborIdAtPos(field, 1, 1)
-        bottomLeftId = area.getNeighborIdAtPos(field, -1, -1)
-        bottomRightId = area.getNeighborIdAtPos(field, 1, -1)
-
-        bindArea(reset = true, ligatureEnabled = enableLigatures, area = area, field = field)
+        addListener(inputListener)
     }
-
-    fun boundAreaId() = area.id
 
     fun bindArea(
         reset: Boolean,
-        ligatureEnabled: Boolean,
         area: Area,
         field: List<Area>,
+        checkShape: Boolean,
     ) {
         if (reset) {
             this.isPressed = false
         }
 
-        val newForm =
-            when {
-                area.isCovered && ligatureEnabled -> {
-                    areaFormOf(
-                        top = field.getOrNull(topId)?.canLinkTo(area) == true,
-                        bottom = field.getOrNull(bottomId)?.canLinkTo(area) == true,
-                        left = field.getOrNull(leftId)?.canLinkTo(area) == true,
-                        right = field.getOrNull(rightId)?.canLinkTo(area) == true,
-                        topLeft = field.getOrNull(topLeftId)?.canLinkTo(area) == true,
-                        topRight = field.getOrNull(topRightId)?.canLinkTo(area) == true,
-                        bottomLeft = field.getOrNull(bottomLeftId)?.canLinkTo(area) == true,
-                        bottomRight = field.getOrNull(bottomRightId)?.canLinkTo(area) == true,
-                    )
-                }
-                else -> {
-                    AREA_NO_FORM
-                }
+        if (this.area != area) {
+            if (this.area?.id != area.id) {
+                x = area.posX * width
+                y = area.posY * height
+                refreshLinks(area, field)
             }
 
-        if ((area.isCovered || area.hasMine) && this.areaForm != newForm) {
-            this.areaForm = newForm
-            pieces.putAll(newForm.toAtlasNames())
+            this.area = area
         }
 
-        this.area = area
+        if (checkShape) {
+            val newForm =
+                when {
+                    area.isCovered && renderSettings.joinAreas -> {
+                        areaFormOf(
+                            top = field.getOrNull(topId)?.canLinkTo(area) == true,
+                            bottom = field.getOrNull(bottomId)?.canLinkTo(area) == true,
+                            left = field.getOrNull(leftId)?.canLinkTo(area) == true,
+                            right = field.getOrNull(rightId)?.canLinkTo(area) == true,
+                            topLeft = field.getOrNull(topLeftId)?.canLinkTo(area) == true,
+                            topRight = field.getOrNull(topRightId)?.canLinkTo(area) == true,
+                            bottomLeft = field.getOrNull(bottomLeftId)?.canLinkTo(area) == true,
+                            bottomRight = field.getOrNull(bottomRightId)?.canLinkTo(area) == true,
+                        )
+                    }
+
+                    else -> {
+                        AREA_NO_FORM
+                    }
+                }
+
+            if ((area.isCovered || area.hasMine) && this.areaForm != newForm) {
+                this.areaForm = newForm
+                pieces = newForm.toAtlasNames()
+            }
+        }
     }
 
     override fun act(delta: Float) {
         super.act(delta)
-        val area = this.area
+        val area = this.area ?: return
 
         touchable =
             if ((area.isCovered || area.minesAround > 0) && GameContext.actionsEnabled) {
@@ -162,6 +127,8 @@ class AreaActor(
         batch: Batch,
         isOdd: Boolean,
     ) {
+        val area = this.area ?: return
+
         if (!isOdd && !area.isCovered && GameContext.zoomLevelAlpha > 0.0f) {
             GameContext.gameTextures?.areaBackground?.let {
                 batch.drawRegion(
@@ -178,6 +145,8 @@ class AreaActor(
     }
 
     private fun drawCovered(batch: Batch) {
+        val area = this.area ?: return
+
         val coverColor =
             when {
                 !GameContext.canTintAreas -> GameContext.whiteColor
@@ -235,6 +204,7 @@ class AreaActor(
     }
 
     private fun drawCoveredIcons(batch: Batch) {
+        val area = this.area ?: return
         val isAboveOthers = isPressed
 
         GameContext.gameTextures?.let {
@@ -279,6 +249,7 @@ class AreaActor(
     }
 
     private fun drawUncoveredIcons(batch: Batch) {
+        val area = this.area ?: return
         GameContext.gameTextures?.let {
             if (area.minesAround > 0) {
                 drawAsset(
@@ -286,18 +257,18 @@ class AreaActor(
                     texture = it.aroundMines[area.minesAround - 1],
                     color =
                     if (area.dimNumber) {
-                        theme.palette
+                        renderSettings.theme.palette
                             .minesAround(area.minesAround - 1)
                             .toGdxColor(GameContext.zoomLevelAlpha * 0.45f)
                             .dim(0.5f)
                     } else {
-                        theme.palette
+                        renderSettings.theme.palette
                             .minesAround(area.minesAround - 1)
                             .toGdxColor(GameContext.zoomLevelAlpha)
                     },
                 )
             } else if (area.hasMine) {
-                val color = theme.palette.uncovered
+                val color = renderSettings.theme.palette.uncovered
                 drawAsset(
                     batch = batch,
                     texture = it.mine,
@@ -312,6 +283,7 @@ class AreaActor(
         batch: Batch,
         isOdd: Boolean,
     ) {
+        val area = this.area ?: return
         if ((isPressed || focusScale > 1.0f)) {
             if (area.isCovered) {
                 val tint = GameContext.canTintAreas
@@ -319,9 +291,9 @@ class AreaActor(
                     when {
                         tint ->
                             if (isOdd) {
-                                theme.palette.coveredOdd
+                                renderSettings.theme.palette.coveredOdd
                             } else {
-                                theme.palette.covered
+                                renderSettings.theme.palette.covered
                             }
                         else -> Themes.WHITE
                     }.toGdxColor(0.5f)
@@ -349,7 +321,7 @@ class AreaActor(
                 }
             } else {
                 GameContext.gameTextures?.detailedArea?.let {
-                    val color = theme.palette.background
+                    val color = renderSettings.theme.palette.background
                     batch.drawRegion(
                         texture = it,
                         x = x - width * (focusScale - 1.0f) * 0.5f,
@@ -369,6 +341,7 @@ class AreaActor(
         parentAlpha: Float,
     ) {
         super.draw(batch, parentAlpha)
+        val area = this.area ?: return
 
         batch?.run {
             val isOdd: Boolean =
@@ -391,6 +364,31 @@ class AreaActor(
                 drawPressed(this, isOdd)
                 drawUncoveredIcons(this)
             }
+        }
+    }
+
+    private fun refreshLinks(
+        area: Area,
+        field: List<Area>,
+    ) {
+        if (renderSettings.joinAreas) {
+            topId = area.getNeighborIdAtPos(field, 0, 1)
+            bottomId = area.getNeighborIdAtPos(field, 0, -1)
+            leftId = area.getNeighborIdAtPos(field, -1, 0)
+            rightId = area.getNeighborIdAtPos(field, 1, 0)
+            topLeftId = area.getNeighborIdAtPos(field, -1, 1)
+            topRightId = area.getNeighborIdAtPos(field, 1, 1)
+            bottomLeftId = area.getNeighborIdAtPos(field, -1, -1)
+            bottomRightId = area.getNeighborIdAtPos(field, 1, -1)
+        } else {
+            topId = -1
+            bottomId = -1
+            leftId = -1
+            rightId = -1
+            topLeftId = -1
+            topRightId = -1
+            bottomLeftId = -1
+            bottomRightId = -1
         }
     }
 

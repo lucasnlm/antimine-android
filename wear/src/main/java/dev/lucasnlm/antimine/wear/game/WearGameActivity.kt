@@ -154,12 +154,12 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
                     gameViewModel.startNewGame()
                 }
                 extras.containsKey(RETRY_GAME) -> {
-                    val uid = extras.getInt(RETRY_GAME)
-                    gameViewModel.retryGame(uid)
+                    val saveId = extras.getString(RETRY_GAME)
+                    gameViewModel.retryGame(saveId.orEmpty())
                 }
                 extras.containsKey(START_GAME) -> {
-                    val uid = extras.getInt(START_GAME)
-                    gameViewModel.loadGame(uid)
+                    val saveId = extras.getString(START_GAME)
+                    gameViewModel.loadGame(saveId.orEmpty())
                 }
                 else -> {
                     gameViewModel.loadLastGame()
@@ -170,9 +170,9 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
 
     private fun bindViewModel() =
         gameViewModel.apply {
-            lifecycleScope.launchWhenCreated {
+            lifecycleScope.launch {
                 observeState().collect {
-                    if (it.turn == 0 && (it.saveId == 0L || it.isLoadingMap || it.isCreatingGame)) {
+                    if (it.turn == 0 && (it.saveId == null || it.isLoadingMap || it.isCreatingGame)) {
                         binding.tapToBegin.apply {
                             text =
                                 when {
@@ -234,7 +234,7 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
                 }
             }
 
-            lifecycleScope.launchWhenCreated {
+            lifecycleScope.launch {
                 gameViewModel.observeSideEffects().collect {
                     when (it) {
                         is GameEvent.ShowNoGuessFailWarning -> {}

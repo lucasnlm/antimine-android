@@ -23,7 +23,6 @@ import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.common.level.view.GameRenderFragment
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -76,7 +75,6 @@ class GameActivity :
     private val preferencesRepository: PreferencesRepository by inject()
     private val analyticsManager: AnalyticsManager by inject()
     private val instantAppManager: InstantAppManager by inject()
-    private val savesRepository: SavesRepository by inject()
     private val playGamesManager: PlayGamesManager by inject()
     private val gameAudioManager: GameAudioManager by inject()
     private val adsManager: AdsManager by inject()
@@ -140,7 +138,7 @@ class GameActivity :
     private fun handleIntent(intent: Intent) {
         lifecycleScope.launch {
             val extras = intent.extras ?: Bundle()
-            val queryParamDifficulty = intent.data?.getQueryParameter("difficulty")
+            val queryParamDifficulty = intent.data?.getQueryParameter(DIFFICULTY)
             when {
                 queryParamDifficulty != null -> {
                     val upperDifficulty = queryParamDifficulty.uppercase()

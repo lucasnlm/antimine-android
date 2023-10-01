@@ -80,13 +80,8 @@ class GameApplicationListener(
     override fun create() {
         super.create()
 
-        val width = Gdx.graphics.width
-        val height = Gdx.graphics.height
-
         minefieldStage =
             MinefieldStage(
-                screenWidth = width.toFloat(),
-                screenHeight = height.toFloat(),
                 renderSettings = renderSettings,
                 actionSettings = actionSettings,
                 onSingleTap = onSingleTap,

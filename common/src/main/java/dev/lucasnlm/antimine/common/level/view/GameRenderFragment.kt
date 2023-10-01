@@ -19,13 +19,14 @@ import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
+import dev.lucasnlm.antimine.gdx.GameContext
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.repository.ThemeRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -71,6 +72,12 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                 }
             },
         )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        GameContext.refreshColors(themeRepository.getTheme())
     }
 
     override fun onCreateView(
@@ -125,15 +132,18 @@ open class GameRenderFragment : AndroidFragmentApplication() {
         }
 
         lifecycleScope.launch {
-            gameViewModel.observeState().collect {
-                levelApplicationListener.bindField(it.field)
+            gameViewModel
+                .observeState()
+                .distinctUntilChangedBy { it.field }
+                .collect {
+                    levelApplicationListener.bindField(it.field)
 
-                if (it.isActive && !it.isGameCompleted) {
-                    levelApplicationListener.setActionsEnabled(true)
-                } else {
-                    levelApplicationListener.setActionsEnabled(false)
+                    if (it.isActive && !it.isGameCompleted) {
+                        levelApplicationListener.setActionsEnabled(true)
+                    } else {
+                        levelApplicationListener.setActionsEnabled(false)
+                    }
                 }
-            }
         }
 
         lifecycleScope.launch {
@@ -222,15 +232,6 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                                 }.also {
                                     it.selectDefault()
                                 }
-
-                            lifecycleScope.launch {
-                                gameViewModel
-                                    .observeState()
-                                    .filter { it.isGameCompleted || (it.turn == 0 && !it.hasMines) }
-                                    .collect {
-                                        this@GameRenderFragment.controlSwitcher?.selectDefault()
-                                    }
-                            }
 
                             addView(this@GameRenderFragment.controlSwitcher, getSwitchControlLayoutParams())
                         }
