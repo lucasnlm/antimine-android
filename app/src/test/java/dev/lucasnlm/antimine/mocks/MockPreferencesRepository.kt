@@ -58,10 +58,6 @@ class MockPreferencesRepository : PreferencesRepository {
 
     override fun getPreferredLocale(): String = "en"
 
-    override fun updateStatsBase(statsBase: Int) {}
-
-    override fun getStatsBase(): Int = 0
-
     override fun getUseCount(): Int = 10
 
     override fun incrementUseCount() {}

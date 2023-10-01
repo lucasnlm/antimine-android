@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.common.level.solver
 import dev.lucasnlm.antimine.common.level.logic.MinefieldCreatorImpl
 import dev.lucasnlm.antimine.common.level.logic.MinefieldHandler
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

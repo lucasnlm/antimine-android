@@ -1,26 +1,24 @@
 package dev.lucasnlm.antimine.mocks
 
-import dev.lucasnlm.antimine.common.level.database.models.Stats
+import dev.lucasnlm.antimine.common.io.models.StatsFile
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 
 class MemoryStatsRepository(
-    private val memoryStats: MutableList<Stats> = mutableListOf(),
+    private val memoryStats: MutableList<StatsFile> = mutableListOf(),
 ) : StatsRepository {
-    override suspend fun getAllStats(minId: Int): List<Stats> = memoryStats.filter { it.uid >= minId }
-
-    override suspend fun addAllStats(stats: List<Stats>): Long {
-        memoryStats.addAll(stats)
-        return memoryStats.count().toLong()
+    override suspend fun getAllStats(): List<StatsFile> {
+        return memoryStats
     }
 
-    override suspend fun addStats(stats: Stats): Long {
+    override suspend fun addAllStats(stats: List<StatsFile>) {
+        memoryStats.addAll(stats)
+    }
+
+    override suspend fun addStats(stats: StatsFile) {
         memoryStats.add(stats)
-        return memoryStats.count().toLong()
     }
 
     override suspend fun deleteLastStats() {
-        if (memoryStats.isNotEmpty()) {
-            memoryStats.removeLast()
-        }
+        memoryStats.clear()
     }
 }
