@@ -16,21 +16,21 @@ object AreaForm {
         return (this and flag) != 0
     }
 
-    fun Int.top(): Boolean = checkForm(AreaForm.TOP)
+    private fun Int.top(): Boolean = checkForm(AreaForm.TOP)
 
-    fun Int.bottom(): Boolean = checkForm(AreaForm.BOTTOM)
+    private fun Int.bottom(): Boolean = checkForm(AreaForm.BOTTOM)
 
-    fun Int.left(): Boolean = checkForm(AreaForm.LEFT)
+    private fun Int.left(): Boolean = checkForm(AreaForm.LEFT)
 
-    fun Int.right(): Boolean = checkForm(AreaForm.RIGHT)
+    private fun Int.right(): Boolean = checkForm(AreaForm.RIGHT)
 
-    fun Int.topLeft(): Boolean = checkForm(AreaForm.TOP_LEFT)
+    private fun Int.topLeft(): Boolean = checkForm(AreaForm.TOP_LEFT)
 
-    fun Int.topRight(): Boolean = checkForm(AreaForm.TOP_RIGHT)
+    private fun Int.topRight(): Boolean = checkForm(AreaForm.TOP_RIGHT)
 
-    fun Int.bottomLeft(): Boolean = checkForm(AreaForm.BOTTOM_LEFT)
+    private fun Int.bottomLeft(): Boolean = checkForm(AreaForm.BOTTOM_LEFT)
 
-    fun Int.bottomRight(): Boolean = checkForm(AreaForm.BOTTOM_RIGHT)
+    private fun Int.bottomRight(): Boolean = checkForm(AreaForm.BOTTOM_RIGHT)
 
     fun areaFormOf(
         top: Boolean,

@@ -24,6 +24,9 @@ import dev.lucasnlm.antimine.gdx.toInverseBackOrWhite
 import dev.lucasnlm.antimine.ui.model.minesAround
 import dev.lucasnlm.antimine.ui.repository.Themes
 
+/**
+ * Wraps an [Area] and draws it on the screen.
+ */
 class AreaActor(
     inputListener: InputListener,
     var isPressed: Boolean = false,
