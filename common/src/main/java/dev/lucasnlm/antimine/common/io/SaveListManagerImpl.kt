@@ -25,9 +25,10 @@ class SaveListManagerImpl(
                     }
 
                     // Update the list
-                    val newSaveList = saveFileList
-                        .takeLast(saveFileLimit - 1)
-                        .toMutableList()
+                    val newSaveList =
+                        saveFileList
+                            .takeLast(saveFileLimit - 1)
+                            .toMutableList()
 
                     // Update save file list
                     newSaveList.add(filePath)

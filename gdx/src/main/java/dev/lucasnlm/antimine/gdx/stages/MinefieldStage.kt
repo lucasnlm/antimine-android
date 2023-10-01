@@ -137,10 +137,11 @@ class MinefieldStage(
                 if (actors.size < boundAreas.size) {
                     val remaining = boundAreas.size - actors.size
                     repeat(remaining) {
-                        val areaActor = AreaActor(
-                            renderSettings = renderSettings,
-                            inputListener = inputListener,
-                        )
+                        val areaActor =
+                            AreaActor(
+                                renderSettings = renderSettings,
+                                inputListener = inputListener,
+                            )
                         actors.add(areaActor)
                     }
                 }
@@ -151,12 +152,13 @@ class MinefieldStage(
                 val areaActor = (actor as AreaActor)
                 val area = boundAreas[index]
 
-                actor.isVisible = camera.frustum.sphereInFrustum(
-                    areaSize * area.posX,
-                    areaSize * area.posY,
-                    0f,
-                    renderSettings.areaSize * 2,
-                )
+                actor.isVisible =
+                    camera.frustum.sphereInFrustum(
+                        areaSize * area.posX,
+                        areaSize * area.posY,
+                        0f,
+                        renderSettings.areaSize * 2,
+                    )
 
                 areaActor.bindArea(
                     reset = resetEvents,
@@ -303,8 +305,9 @@ class MinefieldStage(
     private fun refreshVisibleActorsIfNeeded(): Boolean {
         val camera = camera as OrthographicCamera
         val lastZoom = this.lastZoom
-        val cameraChanged: Boolean = !camera.position.epsilonEquals(lastCameraPosition) ||
-            (lastZoom != null && lastZoom < camera.zoom)
+        val cameraChanged: Boolean =
+            !camera.position.epsilonEquals(lastCameraPosition) ||
+                (lastZoom != null && lastZoom < camera.zoom)
         if (cameraChanged || forceRefreshVisibleAreas) {
             lastCameraPosition = camera.position.cpy()
             this.lastZoom = camera.zoom

@@ -50,11 +50,11 @@ class GameOverDialogFragment : CommonGameDialogFragment() {
                 dialogViewModel.sendEvent(
                     EndGameDialogEvent.BuildCustomEndGame(
                         gameResult =
-                        if (totalMines > 0) {
-                            gameResult
-                        } else {
-                            GameResult.GameOver
-                        },
+                            if (totalMines > 0) {
+                                gameResult
+                            } else {
+                                GameResult.GameOver
+                            },
                         showContinueButton = showContinueButton,
                         time = time,
                         rightMines = rightMines,

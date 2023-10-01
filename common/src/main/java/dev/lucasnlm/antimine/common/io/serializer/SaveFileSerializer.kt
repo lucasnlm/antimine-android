@@ -57,7 +57,10 @@ object SaveFileSerializer {
      * @param content The content to be deserialized.
      * @return The deserialized save.
      */
-    fun deserialize(saveId: String, content: ByteArray): SaveFile {
+    fun deserialize(
+        saveId: String,
+        content: ByteArray,
+    ): SaveFile {
         return ByteArrayInputStream(content).use {
             DataInputStream(it).use { stream ->
                 stream.run {
@@ -65,31 +68,35 @@ object SaveFileSerializer {
                     val startDate = readLong()
                     val duration = readLong()
                     val difficulty = Difficulty.values()[readInt()]
-                    val firstOpen = readInt().let { readValue ->
-                        if (readValue < 0) {
-                            FirstOpen.Unknown
-                        } else {
-                            FirstOpen.Position(readValue)
+                    val firstOpen =
+                        readInt().let { readValue ->
+                            if (readValue < 0) {
+                                FirstOpen.Unknown
+                            } else {
+                                FirstOpen.Position(readValue)
+                            }
                         }
-                    }
                     val status = SaveStatus.values()[readInt()]
                     val actions = readInt()
-                    val minefield = Minefield(
-                        width = readInt(),
-                        height = readInt(),
-                        mines = readInt(),
-                        seed = readLong().let { readValue ->
-                            if (readValue == 0L) {
-                                null
-                            } else {
-                                readValue
-                            }
-                        },
-                    )
+                    val minefield =
+                        Minefield(
+                            width = readInt(),
+                            height = readInt(),
+                            mines = readInt(),
+                            seed =
+                                readLong().let { readValue ->
+                                    if (readValue == 0L) {
+                                        null
+                                    } else {
+                                        readValue
+                                    }
+                                },
+                        )
 
-                    val field = List(readInt()) {
-                        readArea()
-                    }
+                    val field =
+                        List(readInt()) {
+                            readArea()
+                        }
 
                     SaveFile(
                         id = saveId,

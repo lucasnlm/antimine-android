@@ -98,23 +98,23 @@ class StatsViewModel(
                     totalGames = acc.totalGames,
                     totalTime = acc.totalTime + value.duration,
                     victoryTime =
-                    acc.victoryTime +
-                        if (value.victory != 0) {
-                            value.duration
-                        } else {
-                            0
-                        },
+                        acc.victoryTime +
+                            if (value.victory != 0) {
+                                value.duration
+                            } else {
+                                0
+                            },
                     averageTime = 0,
                     shortestTime =
-                    if (value.victory != 0) {
-                        if (acc.shortestTime == 0L) {
-                            value.duration
+                        if (value.victory != 0) {
+                            if (acc.shortestTime == 0L) {
+                                value.duration
+                            } else {
+                                acc.shortestTime.coerceAtMost(value.duration)
+                            }
                         } else {
-                            acc.shortestTime.coerceAtMost(value.duration)
-                        }
-                    } else {
-                        acc.shortestTime
-                    },
+                            acc.shortestTime
+                        },
                     mines = acc.mines + value.mines,
                     victory = acc.victory + value.victory,
                     openArea = acc.openArea + value.openArea,

@@ -24,9 +24,10 @@ object ByteArrayExt {
      * @return The read value.
      */
     fun ByteArrayInputStream.readLong(): Long {
-        val bytes = ByteArray(Long.SIZE_BYTES).apply {
-            read(this)
-        }
+        val bytes =
+            ByteArray(Long.SIZE_BYTES).apply {
+                read(this)
+            }
         return ByteBuffer.wrap(bytes).long
     }
 

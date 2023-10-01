@@ -89,11 +89,11 @@ class MinefieldHandler(
                 field[index] =
                     it.copy(
                         mark =
-                        when (it.mark) {
-                            Mark.PurposefulNone, Mark.None -> Mark.Flag
-                            Mark.Flag -> if (useQuestionMark && !individualActions) Mark.Question else Mark.None
-                            Mark.Question -> Mark.None
-                        },
+                            when (it.mark) {
+                                Mark.PurposefulNone, Mark.None -> Mark.Flag
+                                Mark.Flag -> if (useQuestionMark && !individualActions) Mark.Question else Mark.None
+                                Mark.Question -> Mark.None
+                            },
                     )
             }
         }

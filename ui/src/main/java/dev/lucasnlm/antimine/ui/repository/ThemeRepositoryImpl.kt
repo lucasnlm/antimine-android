@@ -65,11 +65,11 @@ class ThemeRepositoryImpl(
             id = 0L,
             theme = R.style.AppTheme,
             palette =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                fromMaterialYou(context)
-            } else {
-                fromDefaultPalette(context)
-            },
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    fromMaterialYou(context)
+                } else {
+                    fromDefaultPalette(context)
+                },
             isPremium = true,
             isDarkTheme = isDarkTheme(),
             name = i18n.string.system,

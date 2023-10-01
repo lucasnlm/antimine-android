@@ -22,7 +22,7 @@ class StatsFileManagerImpl(
         scope.launch {
             withContext(Dispatchers.IO) {
                 val statsBytes = StatsSerializer.serialize(stats)
-                context.filesDir.resolve(filePath).appendBytes(statsBytes)
+                context.filesDir.resolve(FILE_PATH).appendBytes(statsBytes)
             }
         }
     }
@@ -30,14 +30,15 @@ class StatsFileManagerImpl(
     override suspend fun readStats(): List<StatsFile> {
         return withContext(Dispatchers.IO) {
             runCatching {
-                context.filesDir.resolve(filePath).readBytes().let { bytes ->
+                context.filesDir.resolve(FILE_PATH).readBytes().let { bytes ->
                     val result = mutableListOf<StatsFile>()
                     bytes.inputStream().use { inputStream ->
                         DataInputStream(inputStream).use { stream ->
                             do {
-                                val stats = stream.readStatsFile()?.also {
-                                    result.add(it)
-                                }
+                                val stats =
+                                    stream.readStatsFile()?.also {
+                                        result.add(it)
+                                    }
                             } while (stats != null)
                         }
                     }
@@ -49,11 +50,11 @@ class StatsFileManagerImpl(
 
     override suspend fun deleteStats() {
         withContext(Dispatchers.IO) {
-            context.filesDir.resolve(filePath).delete()
+            context.filesDir.resolve(FILE_PATH).delete()
         }
     }
 
     companion object {
-        private const val filePath = "stats"
+        private const val FILE_PATH = "stats"
     }
 }

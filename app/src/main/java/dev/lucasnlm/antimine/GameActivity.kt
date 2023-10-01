@@ -106,11 +106,12 @@ class GameActivity :
     ) {
         val isSwitchAndOpen = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
         warning?.dismiss()
-        warning = showWarning(
-            text = text,
-            container = binding.root,
-            isSwitchMarkOpen = isSwitchAndOpen,
-        )
+        warning =
+            showWarning(
+                text = text,
+                container = binding.root,
+                isSwitchMarkOpen = isSwitchAndOpen,
+            )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

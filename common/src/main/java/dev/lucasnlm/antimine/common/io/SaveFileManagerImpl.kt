@@ -44,7 +44,10 @@ class SaveFileManagerImpl(
         }
     }
 
-    private suspend fun writeSaveFile(filePath: String, save: SaveFile): Boolean {
+    private suspend fun writeSaveFile(
+        filePath: String,
+        save: SaveFile,
+    ): Boolean {
         return withContext(Dispatchers.IO) {
             runCatching {
                 File(context.filesDir, filePath).apply {

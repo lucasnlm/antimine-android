@@ -9,23 +9,25 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 class StatsSerializerTest {
-    private val statsFile = StatsFile(
-        duration = 12345678L,
-        mines = 10,
-        victory = 1,
-        width = 14,
-        height = 9,
-        openArea = 1234,
-    )
+    private val statsFile =
+        StatsFile(
+            duration = 12345678L,
+            mines = 10,
+            victory = 1,
+            width = 14,
+            height = 9,
+            openArea = 1234,
+        )
 
     @Test
     fun `serialize should return the same value as deserialize`() {
         val serialized = StatsSerializer.serialize(statsFile)
-        val deserialized = serialized.inputStream().use {
-            DataInputStream(it).use { stream ->
-                stream.readStatsFile()
+        val deserialized =
+            serialized.inputStream().use {
+                DataInputStream(it).use { stream ->
+                    stream.readStatsFile()
+                }
             }
-        }
 
         val serializedArray = serialized.map { it.toInt() }
         assertEquals(
