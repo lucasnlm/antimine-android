@@ -29,7 +29,6 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.ControlActivity
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
-import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
@@ -43,8 +42,8 @@ import dev.lucasnlm.antimine.gdx.GameContext
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
+import dev.lucasnlm.antimine.ui.ext.SnackbarExt.showWarning
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
-import dev.lucasnlm.antimine.ui.ext.showWarning
 import dev.lucasnlm.antimine.ui.ext.toAndroidColor
 import dev.lucasnlm.external.AdsManager
 import dev.lucasnlm.external.AnalyticsManager
@@ -107,13 +106,12 @@ class GameActivity :
     private fun showGameWarning(
         @StringRes text: Int,
     ) {
-        val isSwitchAndOpen = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
         warning?.dismiss()
         warning =
             showWarning(
-                text = text,
+                resId = text,
                 container = binding.root,
-                isSwitchMarkOpen = isSwitchAndOpen,
+                preferencesRepository = preferencesRepository,
             )
     }
 
@@ -340,8 +338,9 @@ class GameActivity :
                     is GameEvent.ShowNoGuessFailWarning -> {
                         warning =
                             showWarning(
-                                text = i18n.string.no_guess_fail_warning,
+                                resId = i18n.string.no_guess_fail_warning,
                                 container = binding.root,
+                                preferencesRepository = preferencesRepository,
                             ).apply {
                                 setAction(i18n.string.ok) {
                                     warning?.dismiss()
@@ -832,16 +831,11 @@ class GameActivity :
             }
 
         warning =
-            Snackbar.make(
-                binding.root,
-                message,
-                Snackbar.LENGTH_LONG,
-            ).apply {
-                if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen) {
-                    view.translationY = -dpToPx(TOAST_OFFSET_Y_DP).toFloat()
-                }
-                show()
-            }
+            showWarning(
+                container = binding.root,
+                resId = message,
+                preferencesRepository = preferencesRepository,
+            )
     }
 
     private fun keepScreenOn(enabled: Boolean) {

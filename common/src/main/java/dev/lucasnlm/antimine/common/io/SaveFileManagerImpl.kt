@@ -3,9 +3,7 @@ package dev.lucasnlm.antimine.common.io
 import android.content.Context
 import dev.lucasnlm.antimine.common.io.models.SaveFile
 import dev.lucasnlm.antimine.common.io.serializer.SaveFileSerializer
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.UUID
