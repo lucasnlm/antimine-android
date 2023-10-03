@@ -53,14 +53,14 @@ open class GameViewModel(
     private val playGamesManager: PlayGamesManager,
     private val tipRepository: TipRepository,
     private val featureFlagManager: FeatureFlagManager,
-    private val clock: ClockManager,
+    private val clockManager: ClockManager,
 ) : IntentViewModel<GameEvent, GameState>() {
     private lateinit var gameController: GameController
     private var initialized = false
 
     init {
         viewModelScope.launch {
-            clock.observe()
+            clockManager.observe()
                 .collect {
                     sendEvent(GameEvent.UpdateTime(it))
                 }
@@ -139,7 +139,14 @@ open class GameViewModel(
                     emit(newState)
                 }
                 is GameEvent.EngineReady -> {
-                    emit(state.copy(isLoadingMap = false))
+                    if (state.isLoadingMap) {
+                        emit(
+                            state.copy(
+                                isLoadingMap = false,
+                                selectedAction = Action.OpenTile,
+                            ),
+                        )
+                    }
 
                     if (!state.isGameCompleted && state.hasMines && !state.isLoadingMap) {
                         if (
@@ -156,6 +163,10 @@ open class GameViewModel(
                 is GameEvent.LoadingNewGame -> {
                     stopClock()
                     emit(state.copy(isLoadingMap = true, duration = 0L, isActive = false))
+                }
+                is GameEvent.ChangeSelectedAction -> {
+                    val newState = state.copy(selectedAction = event.action)
+                    emit(newState)
                 }
                 is GameEvent.UpdateTime -> {
                     val newState = state.copy(duration = event.time)
@@ -241,7 +252,7 @@ open class GameViewModel(
         }
 
     suspend fun startNewGame(newDifficulty: Difficulty = state.difficulty): Minefield {
-        clock.reset()
+        clockManager.reset()
         initialized = false
 
         val minefield =
@@ -300,7 +311,7 @@ open class GameViewModel(
     }
 
     private fun resumeGameFromSave(save: SaveFile): Minefield {
-        clock.reset(save.duration)
+        clockManager.reset(save.duration)
 
         sendEvent(GameEvent.LoadingNewGame)
 
@@ -341,7 +352,7 @@ open class GameViewModel(
     }
 
     private fun retryGame(save: SaveFile) {
-        clock.reset()
+        clockManager.reset()
 
         sendEvent(GameEvent.LoadingNewGame)
 
@@ -453,7 +464,7 @@ open class GameViewModel(
             if (gameController.hasMines()) {
                 sendEvent(GameEvent.SetGameActivation(false))
             }
-            clock.stop()
+            clockManager.stop()
         }
     }
 
@@ -546,7 +557,7 @@ open class GameViewModel(
         when (actionCompleted.action) {
             Action.OpenTile -> soundManager.playOpenArea()
             Action.OpenOrMark -> {
-                if (preferencesRepository.getSwitchControlAction() == Action.OpenTile) {
+                if (state.selectedAction == Action.OpenTile) {
                     soundManager.playOpenArea()
                 } else {
                     soundManager.playPutFlag()
@@ -628,13 +639,13 @@ open class GameViewModel(
 
     fun changeSwitchControlAction(action: Action) {
         if (initialized) {
-            preferencesRepository.setSwitchControl(action)
+            sendEvent(GameEvent.ChangeSelectedAction(action))
             gameController.changeSwitchControlAction(action)
         }
     }
 
     private fun runClock() {
-        clock.run {
+        clockManager.run {
             if (isStopped) {
                 start()
             }
@@ -642,7 +653,7 @@ open class GameViewModel(
     }
 
     private fun stopClock() {
-        clock.stop()
+        clockManager.stop()
     }
 
     private fun showAllEmptyAreas() {
@@ -686,7 +697,7 @@ open class GameViewModel(
 
     private suspend fun onGameOver(useGameOverFeedback: Boolean) {
         stopClock()
-        analyticsManager.sentEvent(Analytics.GameOver(clock.timeInSeconds(), getScore()))
+        analyticsManager.sentEvent(Analytics.GameOver(clockManager.timeInSeconds(), getScore()))
 
         gameController.run {
             if (useGameOverFeedback) {
@@ -726,7 +737,7 @@ open class GameViewModel(
     private suspend fun onVictory() {
         analyticsManager.sentEvent(
             Analytics.Victory(
-                clock.timeInSeconds(),
+                clockManager.timeInSeconds(),
                 getScore(),
                 state.difficulty,
             ),
@@ -748,7 +759,7 @@ open class GameViewModel(
             preferencesRepository.incrementProgressiveValue()
         }
 
-        if (clock.timeInSeconds() < THIRTY_SECONDS_ACHIEVEMENT) {
+        if (clockManager.timeInSeconds() < THIRTY_SECONDS_ACHIEVEMENT) {
             withContext(Dispatchers.Main) {
                 playGamesManager.unlockAchievement(Achievement.ThirtySeconds)
             }
@@ -767,7 +778,7 @@ open class GameViewModel(
     }
 
     private fun calcRewardHints(): Int {
-        return if (clock.timeInSeconds() > MIN_REWARD_GAME_SECONDS && preferencesRepository.isPremiumEnabled()) {
+        return if (clockManager.timeInSeconds() > MIN_REWARD_GAME_SECONDS && preferencesRepository.isPremiumEnabled()) {
             val rewardedHints =
                 if (isCompletedWithMistakes()) {
                     (state.minefield.mines * REWARD_RATIO_WITH_MISTAKES)
@@ -791,7 +802,7 @@ open class GameViewModel(
                 }
             }
 
-            val time = clock.timeInSeconds()
+            val time = clockManager.timeInSeconds()
             if (time > 1L && gameController.getActionsCount() > MIN_ACTION_TO_REWARD) {
                 val board =
                     when (state.difficulty) {

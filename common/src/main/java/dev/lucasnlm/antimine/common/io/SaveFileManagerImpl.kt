@@ -13,7 +13,6 @@ import java.util.UUID
 class SaveFileManagerImpl(
     private val context: Context,
     private val saveListManager: SaveListManager,
-    private val scope: CoroutineScope,
 ) : SaveFileManager {
     override suspend fun loadSave(filePath: String): SaveFile? {
         return withContext(Dispatchers.IO) {
@@ -26,14 +25,12 @@ class SaveFileManagerImpl(
 
     override suspend fun writeSave(save: SaveFile): String {
         val filePath = save.id ?: createRandomFileName()
-        scope.launch {
-            var result = writeSaveFile(filePath, save)
-            if (result) {
-                result = saveListManager.insertNewSave(filePath)
-            }
-            if (!result) {
-                deleteSaveFile(filePath)
-            }
+        var result = writeSaveFile(filePath, save)
+        if (result) {
+            result = saveListManager.insertNewSave(filePath)
+        }
+        if (!result) {
+            deleteSaveFile(filePath)
         }
         return filePath
     }

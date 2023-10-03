@@ -25,7 +25,7 @@ class GameController {
     private var firstOpen: FirstOpen = FirstOpen.Unknown
     private var gameControl: GameControl = GameControl.Standard
     private var useQuestionMark = true
-    private var selectedAction = Action.SwitchMark
+    private var selectedAction = Action.OpenTile
     private var useClickOnNumbers = true
     private var letNumbersPutFlag = true
     private var errorTolerance = 0

@@ -18,7 +18,7 @@ import dev.lucasnlm.antimine.gdx.alpha
 import dev.lucasnlm.antimine.gdx.dim
 import dev.lucasnlm.antimine.gdx.drawAsset
 import dev.lucasnlm.antimine.gdx.drawRegion
-import dev.lucasnlm.antimine.gdx.models.RenderSettings
+import dev.lucasnlm.antimine.gdx.models.GameRenderingContext
 import dev.lucasnlm.antimine.gdx.toGdxColor
 import dev.lucasnlm.antimine.gdx.toInverseBackOrWhite
 import dev.lucasnlm.antimine.ui.model.minesAround
@@ -32,7 +32,7 @@ class AreaActor(
     var isPressed: Boolean = false,
     private var focusScale: Float = 1.0f,
     private var pieces: Map<String, Boolean> = mapOf(),
-    private val renderSettings: RenderSettings,
+    private val gameRenderingContext: GameRenderingContext,
 ) : Actor() {
     var area: Area? = null
 
@@ -48,8 +48,8 @@ class AreaActor(
     private var bottomRightId: Int = -1
 
     init {
-        width = renderSettings.areaSize
-        height = renderSettings.areaSize
+        width = gameRenderingContext.areaSize
+        height = gameRenderingContext.areaSize
 
         addListener(inputListener)
     }
@@ -77,7 +77,7 @@ class AreaActor(
         if (checkShape) {
             val newForm =
                 when {
-                    area.isCovered && renderSettings.joinAreas -> {
+                    area.isCovered && gameRenderingContext.joinAreas -> {
                         areaFormOf(
                             top = field.getOrNull(topId)?.canLinkTo(area) == true,
                             bottom = field.getOrNull(bottomId)?.canLinkTo(area) == true,
@@ -260,18 +260,18 @@ class AreaActor(
                     texture = it.aroundMines[area.minesAround - 1],
                     color =
                         if (area.dimNumber) {
-                            renderSettings.theme.palette
+                            gameRenderingContext.theme.palette
                                 .minesAround(area.minesAround - 1)
                                 .toGdxColor(GameContext.zoomLevelAlpha * 0.45f)
                                 .dim(0.5f)
                         } else {
-                            renderSettings.theme.palette
+                            gameRenderingContext.theme.palette
                                 .minesAround(area.minesAround - 1)
                                 .toGdxColor(GameContext.zoomLevelAlpha)
                         },
                 )
             } else if (area.hasMine) {
-                val color = renderSettings.theme.palette.uncovered
+                val color = gameRenderingContext.theme.palette.uncovered
                 drawAsset(
                     batch = batch,
                     texture = it.mine,
@@ -294,9 +294,9 @@ class AreaActor(
                     when {
                         tint ->
                             if (isOdd) {
-                                renderSettings.theme.palette.coveredOdd
+                                gameRenderingContext.theme.palette.coveredOdd
                             } else {
-                                renderSettings.theme.palette.covered
+                                gameRenderingContext.theme.palette.covered
                             }
                         else -> Themes.WHITE
                     }.toGdxColor(0.5f)
@@ -324,7 +324,7 @@ class AreaActor(
                 }
             } else {
                 GameContext.gameTextures?.detailedArea?.let {
-                    val color = renderSettings.theme.palette.background
+                    val color = gameRenderingContext.theme.palette.background
                     batch.drawRegion(
                         texture = it,
                         x = x - width * (focusScale - 1.0f) * 0.5f,
@@ -374,7 +374,7 @@ class AreaActor(
         area: Area,
         field: List<Area>,
     ) {
-        if (renderSettings.joinAreas) {
+        if (gameRenderingContext.joinAreas) {
             topId = area.getNeighborIdAtPos(field, 0, 1)
             bottomId = area.getNeighborIdAtPos(field, 0, -1)
             leftId = area.getNeighborIdAtPos(field, -1, 0)

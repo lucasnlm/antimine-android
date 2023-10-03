@@ -34,7 +34,6 @@ object PreferenceKeys {
     const val PREFERENCE_EXTRA_HINTS = "preference_extra_tips"
     const val PREFERENCE_SHOW_WINDOWS = "preference_show_windows"
     const val PREFERENCE_USER_ID = "preference_user_id"
-    const val PREFERENCE_USE_OPEN_SWITCH_CONTROL = "preference_use_open_switch_control_v2"
     const val PREFERENCE_TOUCH_SENSIBILITY = "preference_new_touch_sensibility"
     const val PREFERENCE_OPEN_DIRECTLY = "preference_open_directly"
     const val PREFERENCE_TUTORIAL_DIALOG = "preference_show_tutorial_dialog"

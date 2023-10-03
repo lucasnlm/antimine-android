@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.common.level.viewmodel
 
 import dev.lucasnlm.antimine.core.models.Area
+import dev.lucasnlm.antimine.preferences.models.Action
 
 sealed class GameEvent {
     data class UpdateMinefield(
@@ -38,6 +39,10 @@ sealed class GameEvent {
     data object ShowNoGuessFailWarning : GameEvent()
 
     data object CreatingGameEvent : GameEvent()
+
+    data class ChangeSelectedAction(
+        val action: Action?,
+    ) : GameEvent()
 
     data class VictoryDialog(
         val delayToShow: Long,

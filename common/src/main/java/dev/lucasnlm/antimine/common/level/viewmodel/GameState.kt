@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.common.level.viewmodel
 
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
 data class GameState(
@@ -20,6 +21,8 @@ data class GameState(
     val field: List<Area>,
     // Current mine counter.
     val mineCount: Int?,
+    // Current action selected by user.
+    val selectedAction: Action? = null,
     // Current game durations in seconds.
     val duration: Long,
     // How many hints are available.

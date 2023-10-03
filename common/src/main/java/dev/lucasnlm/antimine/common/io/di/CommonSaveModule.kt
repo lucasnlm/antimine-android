@@ -25,7 +25,7 @@ val CommonIoModule =
         } bind SaveListManager::class
 
         single {
-            SaveFileManagerImpl(get(), get(), get())
+            SaveFileManagerImpl(get(), get())
         } bind SaveFileManager::class
 
         single {

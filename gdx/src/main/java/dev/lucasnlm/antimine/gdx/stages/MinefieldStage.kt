@@ -13,17 +13,18 @@ import dev.lucasnlm.antimine.gdx.actors.AreaActor
 import dev.lucasnlm.antimine.gdx.controller.CameraController
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
-import dev.lucasnlm.antimine.gdx.models.RenderSettings
+import dev.lucasnlm.antimine.gdx.models.GameRenderingContext
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
 @Keep
 class MinefieldStage(
     private var actionSettings: ActionSettings,
-    private val renderSettings: RenderSettings,
+    private val gameRenderingContext: GameRenderingContext,
     private val onSingleTap: (Int) -> Unit,
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTouch: (Int) -> Unit,
     private val onEngineReady: () -> Unit,
+    private val onEmptyActors: () -> Unit,
 ) : Stage() {
     private var minefield: Minefield? = null
     private var minefieldSize: SizeF? = null
@@ -34,8 +35,9 @@ class MinefieldStage(
 
     private val cameraController: CameraController
 
-    private var forceRefreshVisibleAreas = true
-    private var resetEvents = true
+    private var forceRefreshVisibleAreas: Boolean = true
+    private var resetEvents: Boolean = true
+    private var engineReady: Boolean = false
 
     var boundAreas = listOf<Area>()
     private var newBoundAreas: List<Area>? = null
@@ -53,7 +55,7 @@ class MinefieldStage(
         cameraController =
             CameraController(
                 camera = camera,
-                renderSettings = renderSettings,
+                gameRenderingContext = gameRenderingContext,
             )
     }
 
@@ -139,7 +141,7 @@ class MinefieldStage(
                     repeat(remaining) {
                         val areaActor =
                             AreaActor(
-                                renderSettings = renderSettings,
+                                gameRenderingContext = gameRenderingContext,
                                 inputListener = inputListener,
                             )
                         actors.add(areaActor)
@@ -147,7 +149,8 @@ class MinefieldStage(
                 }
             }
 
-            val areaSize = renderSettings.areaSize
+            val areaSize = gameRenderingContext.areaSize
+            Gdx.graphics.isContinuousRendering = true
             actors.forEachIndexed { index, actor ->
                 val areaActor = (actor as AreaActor)
                 val area = boundAreas[index]
@@ -157,7 +160,7 @@ class MinefieldStage(
                         areaSize * area.posX,
                         areaSize * area.posY,
                         0f,
-                        renderSettings.areaSize * 2,
+                        gameRenderingContext.areaSize * 2,
                     )
 
                 areaActor.bindArea(
@@ -167,13 +170,19 @@ class MinefieldStage(
                     checkShape = forceRefreshVisibleAreas,
                 )
             }
+            Gdx.graphics.isContinuousRendering = false
 
             if (resetEvents) {
                 resetEvents = false
             }
 
-            if (actors.size > 0) {
+            if (!engineReady || forceRefreshVisibleAreas) {
+                engineReady = true
                 onEngineReady()
+
+                if (actors.isEmpty) {
+                    onEmptyActors()
+                }
             }
 
             forceRefreshVisibleAreas = false
@@ -186,8 +195,8 @@ class MinefieldStage(
         minefieldSize =
             newMinefield?.let {
                 SizeF(
-                    it.width * renderSettings.areaSize,
-                    it.height * renderSettings.areaSize,
+                    it.width * gameRenderingContext.areaSize,
+                    it.height * gameRenderingContext.areaSize,
                 )
             }
         onChangeGame()
@@ -197,12 +206,12 @@ class MinefieldStage(
         this.minefieldSize?.let {
             val virtualWidth = Gdx.graphics.width
             val virtualHeight = Gdx.graphics.height
-            val padding = renderSettings.internalPadding
+            val padding = gameRenderingContext.internalPadding
 
             val start = 0.5f * virtualWidth - padding.start
             val end = it.width - 0.5f * virtualWidth + padding.end
             val top = it.height - 0.5f * (virtualHeight - padding.top)
-            val bottom = 0.5f * virtualHeight + padding.bottom - renderSettings.navigationBarHeight
+            val bottom = 0.5f * virtualHeight + padding.bottom - gameRenderingContext.navigationBarHeight
 
             camera.run {
                 position.set((start + end) * 0.5f, (top + bottom) * 0.5f, 0f)
@@ -288,7 +297,7 @@ class MinefieldStage(
     override fun act() {
         super.act()
 
-        GameContext.refreshColors(renderSettings.theme)
+        GameContext.refreshColors(gameRenderingContext.theme)
         checkGameTouchInput(System.currentTimeMillis())
 
         // Handle camera movement
@@ -332,7 +341,6 @@ class MinefieldStage(
         button: Int,
     ): Boolean {
         cameraController.freeTouch()
-        Gdx.graphics.isContinuousRendering = false
         return super.touchUp(screenX, screenY, pointer, button)
     }
 

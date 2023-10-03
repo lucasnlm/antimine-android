@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.Camera
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
-import dev.lucasnlm.antimine.gdx.models.RenderSettings
+import dev.lucasnlm.antimine.gdx.models.GameRenderingContext
 
 class CameraController(
-    private val renderSettings: RenderSettings,
+    private val gameRenderingContext: GameRenderingContext,
     private val camera: Camera,
 ) {
     private var lastCameraPosition: Vector3? = null
@@ -33,7 +33,7 @@ class CameraController(
         val cameraPosition = camera.position
         if (lastCameraPosition != cameraPosition) {
             camera.run {
-                val padding = renderSettings.internalPadding
+                val padding = gameRenderingContext.internalPadding
                 val zoom = (camera as OrthographicCamera).zoom
                 val screenWidth = if (zoom < 1.0f) Gdx.graphics.width * zoom else Gdx.graphics.width.toFloat()
                 val screenHeight = if (zoom < 1.0f) Gdx.graphics.height * zoom else Gdx.graphics.height.toFloat()
@@ -43,7 +43,7 @@ class CameraController(
                 val start = percentLimit * screenWidth - padding.start * invZoom
                 val end = minefieldSize.width - percentLimit * screenWidth + padding.end * invZoom
                 val top = minefieldSize.height + padding.top * invZoom - percentLimit * screenHeight
-                val bottom = padding.bottom * invZoom - renderSettings.navigationBarHeight + percentLimit * screenHeight
+                val bottom = padding.bottom * invZoom - gameRenderingContext.navigationBarHeight + percentLimit * screenHeight
 
                 val limitedX = limitValueBetween(camera.position.x, start, end, lastCameraPosition?.x)
                 val limitedY = limitValueBetween(camera.position.y, bottom, top, lastCameraPosition?.y)
@@ -60,7 +60,6 @@ class CameraController(
     fun freeTouch() {
         touch = null
         unlockTouch = false
-        Gdx.graphics.isContinuousRendering = false
     }
 
     fun startTouch(
@@ -68,7 +67,6 @@ class CameraController(
         y: Float,
     ) {
         touch = touch ?: Vector2(x, y)
-        Gdx.graphics.isContinuousRendering = true
     }
 
     fun translate(
@@ -78,7 +76,7 @@ class CameraController(
         y: Float,
     ) {
         touch?.let {
-            if (Vector2(x, y).sub(it.x, it.y).len() > renderSettings.areaSize || unlockTouch) {
+            if (Vector2(x, y).sub(it.x, it.y).len() > gameRenderingContext.areaSize || unlockTouch) {
                 camera.run {
                     translate(dx, dy, 0f)
                     update(true)

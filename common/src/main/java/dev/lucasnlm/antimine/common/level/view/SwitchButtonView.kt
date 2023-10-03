@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.color.MaterialColors
@@ -37,6 +38,28 @@ class SwitchButtonView : FrameLayout {
 
     fun setQuestionButtonVisibility(visible: Boolean) {
         binding.questionButton.isVisible = visible
+    }
+
+    fun isVertical(): Boolean {
+        return binding.buttonLayout.orientation == LinearLayout.VERTICAL
+    }
+
+    fun isHorizontal(): Boolean {
+        return binding.buttonLayout.orientation == LinearLayout.HORIZONTAL
+    }
+
+    fun setHorizontalLayout() {
+        binding.buttonLayout.run {
+            orientation = LinearLayout.HORIZONTAL
+            requestLayout()
+        }
+    }
+
+    fun setVerticalLayout() {
+        binding.buttonLayout.run {
+            orientation = LinearLayout.VERTICAL
+            requestLayout()
+        }
     }
 
     private fun updateMaterialButtonState(
@@ -79,23 +102,21 @@ class SwitchButtonView : FrameLayout {
         }
     }
 
-    private fun selectQuestionMark() {
+    fun selectQuestionMark() {
         updateMaterialButtonState(binding.flagButton, false)
         updateMaterialButtonState(binding.questionButton, true)
         updateMaterialButtonState(binding.openButton, false)
     }
 
-    private fun selectOpen() {
+    fun selectOpen() {
         updateMaterialButtonState(binding.flagButton, false)
         updateMaterialButtonState(binding.questionButton, false)
         updateMaterialButtonState(binding.openButton, true)
     }
 
-    private fun selectFlag() {
+    fun selectFlag() {
         updateMaterialButtonState(binding.flagButton, true)
         updateMaterialButtonState(binding.questionButton, false)
         updateMaterialButtonState(binding.openButton, false)
     }
-
-    fun selectDefault() = selectFlag()
 }
