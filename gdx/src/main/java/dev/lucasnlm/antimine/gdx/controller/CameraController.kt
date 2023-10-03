@@ -40,10 +40,11 @@ class CameraController(
                 val invZoom = 1.0f / zoom
                 val percentLimit = 0.15f
 
+                val navigationBarHeight = gameRenderingContext.navigationBarHeight
                 val start = percentLimit * screenWidth - padding.start * invZoom
                 val end = minefieldSize.width - percentLimit * screenWidth + padding.end * invZoom
                 val top = minefieldSize.height + padding.top * invZoom - percentLimit * screenHeight
-                val bottom = padding.bottom * invZoom - gameRenderingContext.navigationBarHeight + percentLimit * screenHeight
+                val bottom = padding.bottom * invZoom - navigationBarHeight + percentLimit * screenHeight
 
                 val limitedX = limitValueBetween(camera.position.x, start, end, lastCameraPosition?.x)
                 val limitedY = limitValueBetween(camera.position.y, bottom, top, lastCameraPosition?.y)
