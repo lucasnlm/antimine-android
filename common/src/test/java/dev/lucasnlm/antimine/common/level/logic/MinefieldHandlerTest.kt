@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.common.level.logic
 
+import dev.lucasnlm.antimine.common.level.logic.MinefieldExt.filterNeighborsOf
 import dev.lucasnlm.antimine.core.models.Mark
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.coroutines.test.runTest
