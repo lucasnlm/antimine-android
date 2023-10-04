@@ -1,7 +1,6 @@
 package dev.lucasnlm.antimine.mocks
 
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
-import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
