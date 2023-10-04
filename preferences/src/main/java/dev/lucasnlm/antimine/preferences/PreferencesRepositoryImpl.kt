@@ -2,7 +2,6 @@ package dev.lucasnlm.antimine.preferences
 
 import android.os.Build
 import android.view.ViewConfiguration
-import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
@@ -232,12 +231,6 @@ class PreferencesRepositoryImpl(
         return preferencesManager.getString(PreferenceKeys.PREFERENCE_LOCALE)
     }
 
-    override fun updateStatsBase(statsBase: Int) {
-        preferencesManager.putInt(PreferenceKeys.PREFERENCE_STATS_BASE, statsBase)
-    }
-
-    override fun getStatsBase(): Int = preferencesManager.getInt(PreferenceKeys.PREFERENCE_STATS_BASE, 0)
-
     override fun getUseCount(): Int = preferencesManager.getInt(PreferenceKeys.PREFERENCE_USE_COUNT, 0)
 
     override fun incrementUseCount() {
@@ -339,19 +332,6 @@ class PreferencesRepositoryImpl(
 
     override fun setExtraTips(tips: Int) {
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_EXTRA_HINTS, tips)
-    }
-
-    override fun getSwitchControlAction(): Action {
-        return preferencesManager.getInt(
-            PreferenceKeys.PREFERENCE_USE_OPEN_SWITCH_CONTROL,
-            Action.OpenTile.ordinal,
-        ).let {
-            Action.values()[it]
-        }
-    }
-
-    override fun setSwitchControl(action: Action) {
-        preferencesManager.putInt(PreferenceKeys.PREFERENCE_USE_OPEN_SWITCH_CONTROL, action.ordinal)
     }
 
     override fun openGameDirectly(): Boolean {

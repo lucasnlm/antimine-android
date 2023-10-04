@@ -3,9 +3,16 @@ package dev.lucasnlm.antimine.common.level.logic
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Mark
 
+/**
+ * This class is responsible for flagging squares that are isolated.
+ * @param field The field to be flagged.
+ */
 class FlagAssistant(
     private val field: MutableList<Area>,
 ) {
+    /**
+     * Runs the flag assistant.
+     */
     fun runFlagAssistant() {
         // Must not select Mark.PurposefulNone, only Mark.None. Otherwise, it will flag
         // a square that was previously unflagged by player.

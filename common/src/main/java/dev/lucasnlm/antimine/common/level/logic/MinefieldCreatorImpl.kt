@@ -1,5 +1,7 @@
 package dev.lucasnlm.antimine.common.level.logic
 
+import dev.lucasnlm.antimine.common.level.logic.MinefieldExt.filterNeighborsOf
+import dev.lucasnlm.antimine.common.level.logic.MinefieldExt.filterNotNeighborsOf
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import java.util.*

@@ -5,137 +5,73 @@ import androidx.annotation.Keep
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector3
-import com.badlogic.gdx.scenes.scene2d.Group
-import com.badlogic.gdx.scenes.scene2d.InputEvent
-import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.BuildConfig
 import dev.lucasnlm.antimine.gdx.GameContext
-import dev.lucasnlm.antimine.gdx.PixelPerfectViewport
 import dev.lucasnlm.antimine.gdx.actors.AreaActor
 import dev.lucasnlm.antimine.gdx.controller.CameraController
-import dev.lucasnlm.antimine.gdx.dim
 import dev.lucasnlm.antimine.gdx.events.GdxEvent
 import dev.lucasnlm.antimine.gdx.models.ActionSettings
-import dev.lucasnlm.antimine.gdx.models.RenderSettings
-import dev.lucasnlm.antimine.gdx.toGdxColor
-import dev.lucasnlm.antimine.gdx.toInverseBackOrWhite
+import dev.lucasnlm.antimine.gdx.models.GameRenderingContext
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
 @Keep
 class MinefieldStage(
-    val screenWidth: Float,
-    val screenHeight: Float,
     private var actionSettings: ActionSettings,
-    private val renderSettings: RenderSettings,
+    private val gameRenderingContext: GameRenderingContext,
     private val onSingleTap: (Int) -> Unit,
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTouch: (Int) -> Unit,
     private val onEngineReady: () -> Unit,
-) : Stage(PixelPerfectViewport(screenWidth, screenHeight)) {
+    private val onEmptyActors: () -> Unit,
+) : Stage() {
     private var minefield: Minefield? = null
     private var minefieldSize: SizeF? = null
-    private var currentZoom: Float = 1.0f
 
     private var lastCameraPosition: Vector3? = null
     private var lastZoom: Float? = null
 
     private val cameraController: CameraController
 
-    private var forceRefreshVisibleAreas = true
-    private var boundAreas = listOf<Area>()
+    private var forceRefreshVisibleAreas: Boolean = true
+    private var resetEvents: Boolean = true
+    private var engineReady: Boolean = false
+
+    var boundAreas = listOf<Area>()
     private var newBoundAreas: List<Area>? = null
 
     private var inputInit: Long = 0L
     private val inputEvents: MutableList<GdxEvent> = mutableListOf()
 
+    private val inputListener = GameInputListener(::handleGameEvent)
+
     init {
         actionsRequestRendering = true
 
-        addListener(
-            object : InputListener() {
-                override fun touchDown(
-                    event: InputEvent?,
-                    x: Float,
-                    y: Float,
-                    pointer: Int,
-                    button: Int,
-                ): Boolean {
-                    return if (event?.target is Group) {
-                        event.cancel()
-                        true
-                    } else {
-                        false
-                    }
-                }
-            },
-        )
+        addListener(inputListener)
 
         cameraController =
             CameraController(
-                camera = camera,
-                renderSettings = renderSettings,
+                camera = camera as OrthographicCamera,
+                gameRenderingContext = gameRenderingContext,
             )
     }
 
     fun setZoom(value: Float) {
-        (camera as OrthographicCamera).apply {
-            zoom = value.coerceIn(0.8f, 3.0f)
-            currentZoom = zoom
-            update(true)
-
-            GameContext.zoomLevelAlpha =
-                when {
-                    zoom < 3.5f -> {
-                        1.0f
-                    }
-                    zoom > 4.0f -> {
-                        0.0f
-                    }
-                    else -> {
-                        (3.5f - zoom)
-                    }
-                }
-        }
-
+        cameraController.setZoom(value)
         inputEvents.clear()
     }
 
     fun scaleZoom(zoomMultiplier: Float) {
-        (camera as OrthographicCamera).apply {
-            val newZoom =
-                if (zoomMultiplier > 1.0) {
-                    zoom + 1.0f * Gdx.graphics.deltaTime
-                } else {
-                    zoom - 1.0f * Gdx.graphics.deltaTime
-                }
-            zoom = newZoom.coerceIn(MAX_ZOOM_OUT, MAX_ZOOM_IN)
-            if (currentZoom != zoom) {
-                currentZoom = zoom
-                Gdx.graphics.requestRendering()
-            }
-
-            GameContext.zoomLevelAlpha =
-                when {
-                    zoom < 3.5f -> {
-                        1.0f
-                    }
-                    zoom > 4.0f -> {
-                        0.0f
-                    }
-                    else -> {
-                        (3.5f - zoom)
-                    }
-                }
-        }
-
+        cameraController.scaleZoom(zoomMultiplier)
         inputEvents.clear()
     }
 
     fun bindField(field: List<Area>) {
         newBoundAreas = field
         forceRefreshVisibleAreas = true
+        resetEvents = boundAreas.count { it.hasMine } == 0
     }
 
     private fun refreshAreas(forceRefresh: Boolean) {
@@ -148,39 +84,61 @@ class MinefieldStage(
             }
 
             if (actors.size != boundAreas.size) {
-                clear()
                 if (boundAreas.size < actors.size) {
-                    root.children.shrink()
+                    actors.removeRange(boundAreas.size, actors.size)
+                    actors.shrink()
                 } else {
-                    root.children.ensureCapacity(boundAreas.size)
+                    actors.ensureCapacity(boundAreas.size + 1)
                 }
 
-                boundAreas.forEach {
-                    addActor(
-                        AreaActor(
-                            theme = renderSettings.theme,
-                            size = renderSettings.areaSize,
-                            area = it,
-                            field = boundAreas,
-                            onInputEvent = ::handleGameEvent,
-                            enableLigatures = renderSettings.joinAreas,
-                        ),
-                    )
-                }
-                refreshVisibleActorsIfNeeded()
-            } else {
-                val reset = boundAreas.count { it.hasMine } == 0
-
-                actors.forEach {
-                    if (it.isVisible) {
-                        val areaActor = (it as AreaActor)
-                        val area = boundAreas[areaActor.boundAreaId()]
-                        areaActor.bindArea(reset, renderSettings.joinAreas, area, boundAreas)
+                if (actors.size < boundAreas.size) {
+                    val remaining = boundAreas.size - actors.size
+                    repeat(remaining) {
+                        val areaActor =
+                            AreaActor(
+                                gameRenderingContext = gameRenderingContext,
+                                inputListener = inputListener,
+                            )
+                        actors.add(areaActor)
                     }
                 }
             }
 
-            onEngineReady()
+            val areaSize = gameRenderingContext.areaSize
+            Gdx.graphics.isContinuousRendering = true
+            actors.forEachIndexed { index, actor ->
+                val areaActor = (actor as AreaActor)
+                val area = boundAreas[index]
+
+                actor.isVisible =
+                    camera.frustum.sphereInFrustum(
+                        areaSize * area.posX,
+                        areaSize * area.posY,
+                        0f,
+                        gameRenderingContext.areaSize * 2,
+                    )
+
+                areaActor.bindArea(
+                    reset = resetEvents,
+                    area = area,
+                    field = boundAreas,
+                    checkShape = forceRefreshVisibleAreas,
+                )
+            }
+            Gdx.graphics.isContinuousRendering = false
+
+            if (resetEvents) {
+                resetEvents = false
+            }
+
+            if (!engineReady || forceRefreshVisibleAreas) {
+                engineReady = true
+                onEngineReady()
+
+                if (actors.isEmpty) {
+                    onEmptyActors()
+                }
+            }
 
             forceRefreshVisibleAreas = false
             Gdx.graphics.requestRendering()
@@ -192,35 +150,17 @@ class MinefieldStage(
         minefieldSize =
             newMinefield?.let {
                 SizeF(
-                    it.width * renderSettings.areaSize,
-                    it.height * renderSettings.areaSize,
+                    it.width * gameRenderingContext.areaSize,
+                    it.height * gameRenderingContext.areaSize,
                 )
             }
         onChangeGame()
     }
 
-    private fun centerCamera() {
-        this.minefieldSize?.let {
-            val virtualWidth = Gdx.graphics.width
-            val virtualHeight = Gdx.graphics.height
-            val padding = renderSettings.internalPadding
-
-            val start = 0.5f * virtualWidth - padding.start
-            val end = it.width - 0.5f * virtualWidth + padding.end
-            val top = it.height - 0.5f * (virtualHeight - padding.top)
-            val bottom = 0.5f * virtualHeight + padding.bottom - renderSettings.navigationBarHeight
-
-            camera.run {
-                position.set((start + end) * 0.5f, (top + bottom) * 0.5f, 0f)
-                update(true)
-            }
-
-            Gdx.graphics.requestRendering()
-        }
-    }
-
     fun onChangeGame() {
-        centerCamera()
+        minefieldSize?.let {
+            cameraController.centerCameraTo(it)
+        }
     }
 
     private fun handleGameEvent(gdxEvent: GdxEvent) {
@@ -294,24 +234,7 @@ class MinefieldStage(
     override fun act() {
         super.act()
 
-        GameContext.apply {
-            val theme = renderSettings.theme
-            backgroundColor =
-                if (theme.isDarkTheme && canTintAreas) {
-                    theme.palette.covered.toGdxColor(0.035f * zoomLevelAlpha)
-                } else {
-                    theme.palette.background.toInverseBackOrWhite(0.1f * zoomLevelAlpha)
-                }
-            coveredAreaColor = theme.palette.covered.toGdxColor(1.0f)
-            coveredMarkedAreaColor = theme.palette.covered.toGdxColor(1.0f).dim(0.6f)
-            markColor =
-                if (canTintAreas) {
-                    theme.palette.covered.toInverseBackOrWhite(0.8f)
-                } else {
-                    whiteColor
-                }
-        }
-
+        GameContext.refreshColors(gameRenderingContext.theme)
         checkGameTouchInput(System.currentTimeMillis())
 
         // Handle camera movement
@@ -327,10 +250,13 @@ class MinefieldStage(
 
     private fun refreshVisibleActorsIfNeeded(): Boolean {
         val camera = camera as OrthographicCamera
-        val cameraChanged: Boolean = !camera.position.epsilonEquals(lastCameraPosition) || lastZoom != camera.zoom
+        val lastZoom = this.lastZoom
+        val cameraChanged: Boolean =
+            !camera.position.epsilonEquals(lastCameraPosition) ||
+                (lastZoom != null && lastZoom < camera.zoom)
         if (cameraChanged || forceRefreshVisibleAreas) {
             lastCameraPosition = camera.position.cpy()
-            lastZoom = camera.zoom
+            this.lastZoom = camera.zoom
         }
         return cameraChanged
     }
@@ -352,7 +278,6 @@ class MinefieldStage(
         button: Int,
     ): Boolean {
         cameraController.freeTouch()
-        Gdx.graphics.isContinuousRendering = false
         return super.touchUp(screenX, screenY, pointer, button)
     }
 
@@ -375,8 +300,8 @@ class MinefieldStage(
             )
 
             cameraController.translate(
-                dx = -dx * currentZoom,
-                dy = dy * currentZoom,
+                dx = -dx,
+                dy = dy,
                 x = screenX.toFloat(),
                 y = screenY.toFloat(),
             )

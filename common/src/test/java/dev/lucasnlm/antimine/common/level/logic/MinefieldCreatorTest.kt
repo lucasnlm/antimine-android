@@ -1,12 +1,10 @@
 package dev.lucasnlm.antimine.common.level.logic
 
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class MinefieldCreatorTest {
     @Test
     fun testMinefieldCreation() =

@@ -4,6 +4,12 @@ import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Mark
 import kotlin.math.absoluteValue
 
+/**
+ * This class is responsible for handling the minefield.
+ * @param field The field to be handled.
+ * @param useQuestionMark Whether to use the question mark mark.
+ * @param individualActions Whether to use individual actions.
+ */
 class MinefieldHandler(
     private val field: MutableList<Area>,
     private val useQuestionMark: Boolean,
@@ -89,11 +95,11 @@ class MinefieldHandler(
                 field[index] =
                     it.copy(
                         mark =
-                        when (it.mark) {
-                            Mark.PurposefulNone, Mark.None -> Mark.Flag
-                            Mark.Flag -> if (useQuestionMark && !individualActions) Mark.Question else Mark.None
-                            Mark.Question -> Mark.None
-                        },
+                            when (it.mark) {
+                                Mark.PurposefulNone, Mark.None -> Mark.Flag
+                                Mark.Flag -> if (useQuestionMark && !individualActions) Mark.Question else Mark.None
+                                Mark.Question -> Mark.None
+                            },
                     )
             }
         }

@@ -27,11 +27,15 @@ val AppModule =
 
         single {
             object : BillingManager {
-                override fun start() {}
+                override fun start() {
+                    // Not implemented
+                }
 
                 override fun isEnabled(): Boolean = false
 
-                override suspend fun charge(activity: Activity) {}
+                override suspend fun charge(activity: Activity) {
+                    // Not implemented
+                }
 
                 override suspend fun getPrice(): Price? = null
 
@@ -49,40 +53,60 @@ val AppModule =
 
                 override suspend fun silentLogin(): Boolean = false
 
-                override fun showPlayPopUp(activity: Activity) {}
+                override fun showPlayPopUp(activity: Activity) {
+                    // Not implemented
+                }
 
                 override fun getLoginIntent(): Intent? = null
 
-                override fun handleLoginResult(data: Intent?) {}
+                override fun handleLoginResult(data: Intent?) {
+                    // Not implemented
+                }
 
                 override fun isLogged(): Boolean = false
 
-                override fun openAchievements(activity: Activity) {}
+                override fun openAchievements(activity: Activity) {
+                    // Not implemented
+                }
 
-                override fun openLeaderboards(activity: Activity) {}
+                override fun openLeaderboards(activity: Activity) {
+                    // Not implemented
+                }
 
                 override suspend fun incrementAchievement(
                     achievement: Achievement,
                     value: Int,
-                ) {}
+                ) {
+                    // Not implemented
+                }
 
                 override suspend fun setAchievementSteps(
                     achievement: Achievement,
                     value: Int,
-                ) {}
+                ) {
+                    // Not implemented
+                }
 
-                override suspend fun unlockAchievement(achievement: Achievement) {}
+                override suspend fun unlockAchievement(achievement: Achievement) {
+                    // Not implemented
+                }
 
                 override fun submitLeaderboard(
                     leaderboard: Leaderboard,
                     value: Long,
-                ) {}
+                ) {
+                    // Not implemented
+                }
 
-                override fun keepRequestingLogin(status: Boolean) {}
+                override fun keepRequestingLogin(status: Boolean) {
+                    // Not implemented
+                }
 
                 override fun shouldRequestLogin(): Boolean = false
 
-                override fun signInToFirebase(activity: Activity) {}
+                override fun signInToFirebase(activity: Activity) {
+                    // Not implemented
+                }
             }
         } bind PlayGamesManager::class
 

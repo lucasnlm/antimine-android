@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.preferences
 
-import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
@@ -65,10 +64,6 @@ interface PreferencesRepository {
 
     fun getPreferredLocale(): String?
 
-    fun updateStatsBase(statsBase: Int)
-
-    fun getStatsBase(): Int
-
     fun getUseCount(): Int
 
     fun incrementUseCount()
@@ -114,10 +109,6 @@ interface PreferencesRepository {
     fun getExtraTips(): Int
 
     fun setExtraTips(tips: Int)
-
-    fun getSwitchControlAction(): Action
-
-    fun setSwitchControl(action: Action)
 
     fun useFlagAssistant(): Boolean
 

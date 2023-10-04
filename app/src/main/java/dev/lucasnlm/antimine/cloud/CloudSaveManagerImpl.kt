@@ -1,6 +1,5 @@
 package dev.lucasnlm.antimine.cloud
 
-import dev.lucasnlm.antimine.common.level.database.models.toHashMap
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
@@ -29,7 +28,6 @@ class CloudSaveManagerImpl(
     private suspend fun getCloudSave(): CloudSave? {
         return runCatching {
             val prefs = preferencesRepository
-            val minId = prefs.getStatsBase()
             playGamesManager.playerId()?.let { playerId ->
                 CloudSave(
                     playId = playerId,
@@ -44,7 +42,7 @@ class CloudSaveManagerImpl(
                     hapticFeedbackLevel = prefs.getHapticFeedbackLevel(),
                     soundEffects = prefs.isSoundEffectsEnabled().toInt(),
                     music = prefs.isMusicEnabled().toInt(),
-                    stats = statsRepository.getAllStats(minId).map { it.toHashMap() },
+                    stats = statsRepository.getAllStats().map { it.toHashMap() },
                     premiumFeatures = prefs.isPremiumEnabled().toInt(),
                     controlStyle = prefs.controlStyle().ordinal,
                     openDirectly = prefs.openGameDirectly().toInt(),

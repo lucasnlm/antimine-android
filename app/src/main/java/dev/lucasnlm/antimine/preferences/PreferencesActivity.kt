@@ -17,8 +17,8 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.databinding.ActivityPreferencesBinding
+import dev.lucasnlm.antimine.ui.ext.SnackbarExt.showWarning
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
-import dev.lucasnlm.antimine.ui.ext.showWarning
 import dev.lucasnlm.antimine.ui.model.TopBarAction
 import dev.lucasnlm.external.PlayGamesManager
 import org.koin.android.ext.android.inject
@@ -30,7 +30,7 @@ class PreferencesActivity :
 
     private val audioManager: GameAudioManager by inject()
     private val playGamesManager: PlayGamesManager by inject()
-    private val preferenceRepository: PreferencesRepository by inject()
+    private val preferencesRepository: PreferencesRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
     private val settingsBackupManager: SettingsBackupManager by lazy {
         SettingsBackupManager(applicationContext)
@@ -70,18 +70,18 @@ class PreferencesActivity :
                     var result = false
                     val target = it.data?.data
                     if (target != null) {
-                        val data = preferenceRepository.exportData()
+                        val data = preferencesRepository.exportData()
                         result = settingsBackupManager.exportSettings(target, data)
                     }
 
                     if (result) {
                         showWarning(
-                            text = i18n.string.exported_success,
+                            resId = i18n.string.exported_success,
                             container = binding.root,
                         )
                     } else {
                         showWarning(
-                            text = i18n.string.error,
+                            resId = i18n.string.error,
                             container = binding.root,
                         )
                     }
@@ -96,20 +96,20 @@ class PreferencesActivity :
                     if (target != null) {
                         val data = settingsBackupManager.importSettings(target)
                         if (!data.isNullOrEmpty()) {
-                            preferenceRepository.importData(data)
+                            preferencesRepository.importData(data)
                             result = true
                         }
                     }
 
                     if (result) {
                         showWarning(
-                            text = i18n.string.imported_success,
+                            resId = i18n.string.imported_success,
                             container = binding.root,
                         )
                         bindItems()
                     } else {
                         showWarning(
-                            text = i18n.string.error,
+                            resId = i18n.string.error,
                             container = binding.root,
                         )
                     }
@@ -117,7 +117,7 @@ class PreferencesActivity :
             }
 
         bindToolbar(binding.toolbar)
-        bindToolbarAction(preferenceRepository.hasCustomizations())
+        bindToolbarAction(preferencesRepository.hasCustomizations())
         bindItems()
 
         preferenceManager.registerOnSharedPreferenceChangeListener(this)
@@ -125,91 +125,91 @@ class PreferencesActivity :
 
     private fun bindItems() {
         binding.hapticFeedback.bindItem(
-            initialValue = preferenceRepository.useHapticFeedback(),
+            initialValue = preferencesRepository.useHapticFeedback(),
             onChangeValue = {
-                preferenceRepository.setHapticFeedback(it)
-                if (it && preferenceRepository.getHapticFeedbackLevel() == 0) {
-                    preferenceRepository.resetHapticFeedbackLevel()
+                preferencesRepository.setHapticFeedback(it)
+                if (it && preferencesRepository.getHapticFeedbackLevel() == 0) {
+                    preferencesRepository.resetHapticFeedbackLevel()
                 }
             },
         )
 
         binding.soundEffects.bindItem(
             visible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M,
-            initialValue = preferenceRepository.isSoundEffectsEnabled(),
-            onChangeValue = { preferenceRepository.setSoundEffectsEnabled(it) },
+            initialValue = preferencesRepository.isSoundEffectsEnabled(),
+            onChangeValue = { preferencesRepository.setSoundEffectsEnabled(it) },
         )
 
         binding.music.bindItem(
             visible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M,
-            initialValue = preferenceRepository.isMusicEnabled(),
-            onChangeValue = { preferenceRepository.setMusicEnabled(it) },
+            initialValue = preferencesRepository.isMusicEnabled(),
+            onChangeValue = { preferencesRepository.setMusicEnabled(it) },
         )
 
         binding.showWindows.bindItem(
-            initialValue = preferenceRepository.showWindowsWhenFinishGame(),
-            onChangeValue = { preferenceRepository.mustShowWindowsWhenFinishGame(it) },
+            initialValue = preferencesRepository.showWindowsWhenFinishGame(),
+            onChangeValue = { preferencesRepository.mustShowWindowsWhenFinishGame(it) },
         )
 
         binding.openDirectly.bindItem(
-            initialValue = preferenceRepository.openGameDirectly(),
-            onChangeValue = { preferenceRepository.setOpenGameDirectly(it) },
+            initialValue = preferencesRepository.openGameDirectly(),
+            onChangeValue = { preferencesRepository.setOpenGameDirectly(it) },
         )
 
         binding.useQuestionMark.bindItem(
-            initialValue = preferenceRepository.useQuestionMark(),
-            onChangeValue = { preferenceRepository.setQuestionMark(it) },
+            initialValue = preferencesRepository.useQuestionMark(),
+            onChangeValue = { preferencesRepository.setQuestionMark(it) },
         )
 
         binding.showTimer.bindItem(
-            initialValue = preferenceRepository.showTimer(),
-            onChangeValue = { preferenceRepository.setTimerVisible(it) },
+            initialValue = preferencesRepository.showTimer(),
+            onChangeValue = { preferencesRepository.setTimerVisible(it) },
         )
 
         binding.automaticFlags.bindItem(
-            initialValue = preferenceRepository.useFlagAssistant(),
-            onChangeValue = { preferenceRepository.setFlagAssistant(it) },
+            initialValue = preferencesRepository.useFlagAssistant(),
+            onChangeValue = { preferencesRepository.setFlagAssistant(it) },
         )
 
         binding.hint.bindItem(
-            initialValue = preferenceRepository.useHelp(),
-            onChangeValue = { preferenceRepository.setHelp(it) },
+            initialValue = preferencesRepository.useHelp(),
+            onChangeValue = { preferencesRepository.setHelp(it) },
         )
 
         binding.noGuessingMode.bindItem(
-            initialValue = preferenceRepository.useSimonTathamAlgorithm(),
-            onChangeValue = { preferenceRepository.setSimonTathamAlgorithm(it) },
+            initialValue = preferencesRepository.useSimonTathamAlgorithm(),
+            onChangeValue = { preferencesRepository.setSimonTathamAlgorithm(it) },
         )
 
         binding.allowClickNumber.bindItem(
-            initialValue = preferenceRepository.allowTapOnNumbers(),
+            initialValue = preferencesRepository.allowTapOnNumbers(),
             onChangeValue = {
-                preferenceRepository.setAllowTapOnNumbers(it)
+                preferencesRepository.setAllowTapOnNumbers(it)
                 binding.flagWhenTapOnNumbers.isVisible = it
                 binding.flagWhenTapOnNumbers.isVisible = it
             },
         )
 
         binding.flagWhenTapOnNumbers.bindItem(
-            initialValue = preferenceRepository.letNumbersAutoFlag(),
-            onChangeValue = { preferenceRepository.setNumbersAutoFlag(it) },
+            initialValue = preferencesRepository.letNumbersAutoFlag(),
+            onChangeValue = { preferencesRepository.setNumbersAutoFlag(it) },
         )
 
-        if (!preferenceRepository.allowTapOnNumbers()) {
+        if (!preferencesRepository.allowTapOnNumbers()) {
             binding.flagWhenTapOnNumbers.isVisible = false
             binding.flagWhenTapOnNumbers.isVisible = false
         }
 
         binding.highlightUnsolvedNumbers.bindItem(
-            initialValue = preferenceRepository.dimNumbers(),
-            onChangeValue = { preferenceRepository.setDimNumbers(it) },
+            initialValue = preferencesRepository.dimNumbers(),
+            onChangeValue = { preferencesRepository.setDimNumbers(it) },
         )
 
         if (playGamesManager.hasGooglePlayGames()) {
             binding.playGames.bindItem(
-                initialValue = preferenceRepository.keepRequestPlayGames(),
+                initialValue = preferencesRepository.keepRequestPlayGames(),
                 onChangeValue = {
-                    preferenceRepository.setRequestPlayGames(it)
+                    preferencesRepository.setRequestPlayGames(it)
                 },
             )
         } else {
@@ -270,7 +270,7 @@ class PreferencesActivity :
                     name = i18n.string.delete_all,
                     icon = R.drawable.delete,
                     action = {
-                        preferenceRepository.reset()
+                        preferencesRepository.reset()
                         bindItems()
                         setTopBarAction(null)
                     },
@@ -285,6 +285,6 @@ class PreferencesActivity :
         sharedPreferences: SharedPreferences?,
         key: String?,
     ) {
-        bindToolbarAction(preferenceRepository.hasCustomizations())
+        bindToolbarAction(preferencesRepository.hasCustomizations())
     }
 }

@@ -2,52 +2,54 @@ package dev.lucasnlm.antimine.common.level.viewmodel
 
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Difficulty
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
+/**
+ * Represents the current state of the game.
+ * @property saveId The save id of current game.
+ * @property turn How many turns in this current session.
+ * @property seed The seed number used to generate this game.
+ * @property difficulty Current game difficulty.
+ * @property minefield Setup to the current game.
+ * @property field Current game field.
+ * @property mineCount Current mine counter.
+ * @property selectedAction Current action selected by user.
+ * @property duration Current game durations in seconds.
+ * @property hints How many hints are available.
+ * @property hasMines If true, user have already started the game.
+ * @property useHelp If true, user may use help.
+ * @property isGameCompleted If true, the game is completed.
+ * @property isActive If true, user may interact with the minefield.
+ * @property isLoadingMap If true, the map is being loaded.
+ * @property isCreatingGame If true, a valid game is being created.
+ * @property showTutorial If false, it will hide tutorial tip during this session.
+ */
 data class GameState(
-    // The ID generated after save this game.
-    // It will be zero if it wasn't saved yet.
-    val saveId: Long = 0,
-    // How many turns in this current session.
-    // This value will be reseted if user kill the app.
+    val saveId: String? = null,
     val turn: Int = 0,
-    // The seed number used to generate this game.
     val seed: Long,
-    // Current game difficulty.
     val difficulty: Difficulty,
-    // Setup to the current game.
     val minefield: Minefield,
-    // All [Area] on current game.
     val field: List<Area>,
-    // Current mine counter.
     val mineCount: Int?,
-    // Current game durations in milliseconds.
+    val selectedAction: Action? = null,
     val duration: Long,
-    // How many hints are available.
     val hints: Int,
-    // If true, user have already started the game
-    // and the minefield has mines in it.
     val hasMines: Boolean,
-    // If true, user may use Help feature.
     val useHelp: Boolean,
-    // Indicates whether the state is in Game Over
-    // Victory or Complete status.
     val isGameCompleted: Boolean,
-    // Is true, user may interact with the minefield.
     val isActive: Boolean,
-    // If true, the map is being loaded.
     val isLoadingMap: Boolean,
-    // If true, a valid game is being created.
     val isCreatingGame: Boolean,
-    // If false, it will hide tutorial tip during this session.
     val showTutorial: Boolean,
 ) {
     /** Indicates whether is a new game */
-    val isNewGame = turn == 0 && (saveId == 0L || isLoadingMap || isCreatingGame)
+    val isNewGame = turn == 0 && (saveId == null || isLoadingMap || isCreatingGame)
 
     /** Indicates whether the game is started */
-    val isGameStarted = (turn > 0 || saveId != 0L)
+    val isGameStarted = (turn > 0 || saveId != null)
 
     /** Indicates whether show controls text */
-    val shouldShowControls = turn < 1 && saveId == 0L && !isLoadingMap && showTutorial
+    val shouldShowControls = turn < 1 && saveId == null && !isLoadingMap && showTutorial
 }

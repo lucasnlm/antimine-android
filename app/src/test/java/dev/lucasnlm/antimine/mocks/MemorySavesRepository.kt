@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.mocks
 
-import dev.lucasnlm.antimine.common.level.database.models.Save
+import dev.lucasnlm.antimine.common.io.models.Save
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 
 class MemorySavesRepository : SavesRepository {
@@ -9,20 +9,23 @@ class MemorySavesRepository : SavesRepository {
 
     override suspend fun getAllSaves(): List<Save> = memoryList.toList()
 
-    override suspend fun fetchCurrentSave(): Save? = memoryList.lastOrNull()
+    override suspend fun currentSaveId(): String? {
+        return memoryList.firstOrNull()?.id
+    }
 
-    override suspend fun loadFromId(id: Int): Save? = memoryList.find { it.uid == id }
+    override suspend fun fetchCurrentSave(): Save? {
+        return memoryList.lastOrNull()
+    }
 
-    override suspend fun saveGame(save: Save): Long {
+    override suspend fun loadFromId(id: String): Save? {
+        return memoryList.find { it.id == id }
+    }
+
+    override suspend fun saveGame(save: Save): String {
         if (maxSavesStorage - 1 > 0) {
             memoryList = memoryList.subList(0, maxSavesStorage - 1)
         }
         memoryList.add(save)
-        return memoryList.count().toLong()
-    }
-
-    override fun setLimit(maxSavesStorage: Int) {
-        this.maxSavesStorage = maxSavesStorage
-        memoryList = memoryList.subList(0, maxSavesStorage)
+        return save.id.orEmpty()
     }
 }

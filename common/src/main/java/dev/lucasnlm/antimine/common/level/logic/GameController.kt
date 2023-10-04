@@ -1,9 +1,9 @@
 package dev.lucasnlm.antimine.common.level.logic
 
-import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
-import dev.lucasnlm.antimine.common.level.database.models.Save
-import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
-import dev.lucasnlm.antimine.common.level.database.models.Stats
+import dev.lucasnlm.antimine.common.io.models.FirstOpen
+import dev.lucasnlm.antimine.common.io.models.Save
+import dev.lucasnlm.antimine.common.io.models.SaveStatus
+import dev.lucasnlm.antimine.common.io.models.Stats
 import dev.lucasnlm.antimine.common.level.models.ActionCompleted
 import dev.lucasnlm.antimine.common.level.solver.LimitedCheckNeighborsSolver
 import dev.lucasnlm.antimine.core.models.Area
@@ -20,12 +20,12 @@ import kotlinx.coroutines.withTimeout
 class GameController {
     private val minefield: Minefield
     private val startTime = System.currentTimeMillis()
-    private var saveId = 0
+    private var saveId: String? = null
     private var actions = 0
     private var firstOpen: FirstOpen = FirstOpen.Unknown
     private var gameControl: GameControl = GameControl.Standard
     private var useQuestionMark = true
-    private var selectedAction = Action.SwitchMark
+    private var selectedAction = Action.OpenTile
     private var useClickOnNumbers = true
     private var letNumbersPutFlag = true
     private var errorTolerance = 0
@@ -47,7 +47,7 @@ class GameController {
         minefield: Minefield,
         seed: Long,
         useSimonTatham: Boolean,
-        saveId: Int? = null,
+        saveId: String? = null,
         onCreateUnsafeLevel: (() -> Unit)? = null,
     ) {
         val creationSeed = minefield.seed ?: seed
@@ -61,7 +61,7 @@ class GameController {
             }
         this.minefield = minefield
         this.seed = seed
-        this.saveId = saveId ?: 0
+        this.saveId = saveId
         this.actions = 0
         this.onCreateUnsafeLevel = onCreateUnsafeLevel
         this.field = minefieldCreator.createEmpty()
@@ -74,7 +74,7 @@ class GameController {
     ) {
         this.minefield = save.minefield
         this.seed = save.seed
-        this.saveId = save.uid
+        this.saveId = save.id
         this.firstOpen = save.firstOpen
         this.field = save.field
         this.actions = save.actions
@@ -457,7 +457,7 @@ class GameController {
                 else -> SaveStatus.ON_GOING
             }
         return Save(
-            saveId,
+            id = saveId,
             seed = seed,
             startDate = startTime,
             duration = duration,
@@ -513,7 +513,6 @@ class GameController {
             null
         } else {
             Stats(
-                0,
                 duration,
                 getMinesCount(),
                 if (gameStatus == SaveStatus.VICTORY) 1 else 0,
@@ -524,8 +523,8 @@ class GameController {
         }
     }
 
-    fun setCurrentSaveId(id: Int) {
-        this.saveId = id.coerceAtLeast(0)
+    fun setCurrentSaveId(saveId: String?) {
+        this.saveId = saveId
     }
 
     fun updateGameControl(newGameControl: GameControl) {

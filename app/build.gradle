@@ -14,8 +14,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1704001
-        versionName '17.4.0'
+        versionCode 1705001
+        versionName '17.5.0'
         minSdk 21
         targetSdk 34
         compileSdk 34
@@ -138,9 +138,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.6.2'
 
-    // Room
-    implementation 'androidx.room:room-ktx:2.5.2'
-
     // Constraint
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
@@ -157,7 +154,7 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3'
 
     // Konfetti
-    implementation 'nl.dionsegijn:konfetti-xml:2.0.2'
+    implementation 'nl.dionsegijn:konfetti-xml:2.0.3'
 
     // Tests
     testImplementation 'junit:junit:4.13.2'

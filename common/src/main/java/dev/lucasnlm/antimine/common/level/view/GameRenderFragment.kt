@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.common.level.view
 
+import android.content.Context
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.Gravity
@@ -7,25 +8,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.core.view.postDelayed
 import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
+import dev.lucasnlm.antimine.common.level.viewmodel.GameState
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.AppVersionManager
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.dpToPx
+import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
+import dev.lucasnlm.antimine.gdx.GameContext
+import dev.lucasnlm.antimine.gdx.models.GameRenderingContext
+import dev.lucasnlm.antimine.gdx.models.InternalPadding
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.repository.ThemeRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -40,16 +46,34 @@ open class GameRenderFragment : AndroidFragmentApplication() {
     private val appVersionManager: AppVersionManager by inject()
     private val gameAudioManager: GameAudioManager by inject()
 
-    private var controlSwitcher: SwitchButtonView? = null
+    private val layoutParent: FrameLayout? by lazy {
+        view?.parent as? FrameLayout
+    }
+
+    private var engineReady: Boolean = false
+    private val controlSwitcher: SwitchButtonView by lazy { initSwitchButtonView() }
     private val isWatch = appVersionManager.isWatch()
+    private val useControlSwitcher = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
+
+    private val gameRenderingContext: GameRenderingContext by lazy {
+        val context = requireContext()
+        GameRenderingContext(
+            theme = themeRepository.getTheme(),
+            internalPadding = getInternalPadding(),
+            areaSize = dimensionRepository.areaSize(),
+            navigationBarHeight = dimensionRepository.navigationBarHeight().toFloat(),
+            appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
+            appBarHeight = appBarHeight(context),
+            joinAreas = themeRepository.getSkin().hasPadding,
+            appSkin = themeRepository.getSkin(),
+        )
+    }
 
     private val levelApplicationListener by lazy {
         GameApplicationListener(
-            context = requireContext(),
+            gameRenderingContext = gameRenderingContext,
             appVersion = appVersionManager,
-            themeRepository = themeRepository,
             preferencesRepository = preferencesRepository,
-            dimensionRepository = dimensionRepository,
             onSingleTap = {
                 lifecycleScope.launch {
                     gameViewModel.onSingleClick(it)
@@ -66,11 +90,23 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                 }
             },
             onEngineReady = {
+                if (!engineReady) {
+                    onEngineReady()
+                }
+
                 lifecycleScope.launch {
                     gameViewModel.sendEvent(GameEvent.EngineReady)
                 }
             },
+            onEmptyActors = {
+                forceRefresh()
+            },
         )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        GameContext.refreshColors(themeRepository.getTheme())
     }
 
     override fun onCreateView(
@@ -85,30 +121,66 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                 useCompass = false
                 useGyroscope = false
                 useWakelock = false
+                useImmersiveMode = true
             }
         return initializeForView(levelApplicationListener, config)
     }
 
     override fun onPause() {
         super.onPause()
-        lifecycleScope.launch {
-            gameViewModel.saveGame()
-        }
         levelApplicationListener.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        levelApplicationListener.apply {
-            refreshSettings()
-            refreshZoom()
-        }
-
-        if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen && !isWatch) {
-            view?.let {
-                bindControlSwitcherIfNeeded(it)
+        if (engineReady) {
+            levelApplicationListener.apply {
+                refreshSettings()
+                refreshZoom()
             }
         }
+    }
+
+    private fun forceRefresh() {
+        lifecycleScope.launch {
+            gameViewModel.singleState().let(::refreshState)
+        }
+    }
+
+    private fun onEngineReady() {
+        this.engineReady = true
+
+        lifecycleScope.launch {
+            gameViewModel
+                .singleState()
+                .let(::refreshState)
+        }
+
+        lifecycleScope.launch {
+            gameViewModel
+                .observeState()
+                .distinctUntilChangedBy { it.field }
+                .collect(::refreshState)
+        }
+
+        lifecycleScope.launch {
+            gameViewModel.observeState()
+                .map { it.seed to it.minefield }
+                .distinctUntilChanged()
+                .collect { (_, minefield) ->
+                    levelApplicationListener.onChangeGame()
+                    levelApplicationListener.bindMinefield(minefield)
+                }
+        }
+    }
+
+    private fun refreshState(state: GameState) {
+        levelApplicationListener.bindField(state.field)
+
+        val areActionsEnabled = state.isActive && !state.isGameCompleted
+        levelApplicationListener.setActionsEnabled(areActionsEnabled)
+
+        syncControlSwitcher(state.selectedAction)
     }
 
     override fun onViewCreated(
@@ -125,119 +197,131 @@ open class GameRenderFragment : AndroidFragmentApplication() {
         }
 
         lifecycleScope.launch {
-            gameViewModel.observeState().collect {
-                levelApplicationListener.bindField(it.field)
-
-                if (it.isActive && !it.isGameCompleted) {
-                    levelApplicationListener.setActionsEnabled(true)
-                } else {
-                    levelApplicationListener.setActionsEnabled(false)
-                }
-            }
-        }
-
-        lifecycleScope.launch {
             gameViewModel.observeState()
                 .map { it.seed }
                 .distinctUntilChanged()
                 .collect {
-                    levelApplicationListener.onChangeGame()
-
                     if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen && !isWatch) {
                         bindControlSwitcherIfNeeded(view)
                     }
                 }
         }
 
-        lifecycleScope.launch {
-            gameViewModel
-                .observeState()
-                .map { it.minefield }
-                .distinctUntilChanged()
-                .collect {
-                    levelApplicationListener.bindMinefield(it)
-                }
+        if (savedInstanceState != null && engineReady) {
+            onEngineReady()
         }
     }
 
     private fun getSwitchControlLayoutParams(): FrameLayout.LayoutParams {
         val context = requireContext()
+        val isPortrait = context.isPortrait()
         return FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT,
         ).apply {
-            val navHeight = dimensionRepository.navigationBarHeight()
-            val bottomMargin =
-                if (navHeight == 0) {
-                    context.dpToPx(BOTTOM_MARGIN_WITHOUT_NAV_DP)
-                } else {
-                    context.dpToPx(BOTTOM_MARGIN_WITH_NAV_DP)
-                }
-            gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
-            setMargins(0, 0, 0, bottomMargin)
+            if (isPortrait) {
+                val navHeight = dimensionRepository.navigationBarHeight()
+                val bottomMargin =
+                    if (navHeight == 0) {
+                        context.dpToPx(BOTTOM_MARGIN_WITHOUT_NAV_DP)
+                    } else {
+                        context.dpToPx(BOTTOM_MARGIN_WITH_NAV_DP)
+                    }
+                gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
+                setMargins(0, 0, 0, bottomMargin)
+            } else {
+                val rightMargin = context.dpToPx(RIGHT_MARGIN_DP)
+                gravity = Gravity.END or Gravity.CENTER_VERTICAL
+                setMargins(0, 0, rightMargin, 0)
+            }
         }
     }
 
-    private fun bindControlSwitcherIfNeeded(
-        view: View,
-        delayed: Boolean = true,
-    ) {
-        val controlSwitcher = controlSwitcher
-        if (controlSwitcher != null) {
-            controlSwitcher.isVisible = preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen
-        } else {
-            view.postDelayed(if (delayed) DELAY_TO_CONTROL_DISPLAY else 0L) {
-                if (this.controlSwitcher == null) {
-                    val isParentFinishing = activity?.isFinishing ?: true
-                    if (preferencesRepository.controlStyle() == ControlStyle.SwitchMarkOpen && !isParentFinishing) {
-                        (view.parent as? FrameLayout)?.apply {
-                            this@GameRenderFragment.controlSwitcher =
-                                SwitchButtonView(context).apply {
-                                    alpha = 0f
-                                    animate().apply {
-                                        alpha(1.0f)
-                                        duration = DELAY_TO_CONTROL_DISPLAY
-                                        start()
-                                    }
+    private fun bindControlSwitcherIfNeeded(view: View) {
+        controlSwitcher.isGone = !useControlSwitcher
+        syncControlSwitcher(gameViewModel.singleState().selectedAction)
 
-                                    isVisible = true
-                                    layoutParams = getSwitchControlLayoutParams()
+        if (controlSwitcher.parent == null) {
+            (view.parent as? FrameLayout)
+                ?.addView(controlSwitcher, getSwitchControlLayoutParams())
+        }
+    }
 
-                                    setQuestionButtonVisibility(preferencesRepository.useQuestionMark())
+    private fun initSwitchButtonView(): SwitchButtonView {
+        return SwitchButtonView(requireContext()).apply {
+            alpha = 0f
+            animate().apply {
+                alpha(1.0f)
+                duration = DELAY_TO_CONTROL_DISPLAY
+                start()
+            }
 
-                                    setOnFlagClickListener {
-                                        gameViewModel.changeSwitchControlAction(Action.SwitchMark)
-                                        gameAudioManager.playSwitchAction()
-                                    }
+            isVisible = true
+            layoutParams = getSwitchControlLayoutParams()
 
-                                    setOnOpenClickListener {
-                                        gameViewModel.changeSwitchControlAction(Action.OpenTile)
-                                        gameAudioManager.playSwitchAction()
-                                    }
+            setQuestionButtonVisibility(preferencesRepository.useQuestionMark())
 
-                                    setOnQuestionClickListener {
-                                        gameViewModel.changeSwitchControlAction(Action.QuestionMark)
-                                        gameAudioManager.playSwitchAction()
-                                    }
-                                }.also {
-                                    it.selectDefault()
-                                }
+            setOnFlagClickListener {
+                gameViewModel.changeSwitchControlAction(Action.SwitchMark)
+                gameAudioManager.playSwitchAction()
+            }
 
-                            lifecycleScope.launch {
-                                gameViewModel
-                                    .observeState()
-                                    .filter { it.isGameCompleted || (it.turn == 0 && !it.hasMines) }
-                                    .collect {
-                                        this@GameRenderFragment.controlSwitcher?.selectDefault()
-                                    }
-                            }
+            setOnOpenClickListener {
+                gameViewModel.changeSwitchControlAction(Action.OpenTile)
+                gameAudioManager.playSwitchAction()
+            }
 
-                            addView(this@GameRenderFragment.controlSwitcher, getSwitchControlLayoutParams())
-                        }
-                    }
+            setOnQuestionClickListener {
+                gameViewModel.changeSwitchControlAction(Action.QuestionMark)
+                gameAudioManager.playSwitchAction()
+            }
+        }
+    }
+
+    private fun syncControlSwitcher(action: Action?) {
+        if (useControlSwitcher) {
+            val isPortrait = requireContext().isPortrait()
+            if (isPortrait && controlSwitcher.isVertical()) {
+                controlSwitcher.setHorizontalLayout()
+                layoutParent?.run {
+                    removeView(controlSwitcher)
+                    addView(controlSwitcher, getSwitchControlLayoutParams())
+                }
+            } else if (!isPortrait && controlSwitcher.isHorizontal()) {
+                controlSwitcher.setVerticalLayout()
+                layoutParent?.run {
+                    removeView(controlSwitcher)
+                    addView(controlSwitcher, getSwitchControlLayoutParams())
+                }
+            }
+
+            controlSwitcher.apply {
+                when (action) {
+                    Action.SwitchMark -> selectFlag()
+                    Action.OpenTile -> selectOpen()
+                    Action.QuestionMark -> selectQuestionMark()
+                    else -> {}
                 }
             }
         }
+    }
+
+    private fun appBarHeight(context: Context): Float {
+        return if (context.isPortrait()) {
+            dimensionRepository.actionBarSize().toFloat()
+        } else {
+            0f
+        }
+    }
+
+    private fun getInternalPadding(): InternalPadding {
+        val padding = dimensionRepository.areaSize()
+        return InternalPadding(
+            start = padding,
+            end = padding,
+            bottom = padding,
+            top = padding,
+        )
     }
 
     companion object {
@@ -246,6 +330,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
         const val MAX_INVALID_TIME_S = 30
         const val BOTTOM_MARGIN_WITHOUT_NAV_DP = 48
         const val BOTTOM_MARGIN_WITH_NAV_DP = 80
+        const val RIGHT_MARGIN_DP = 32
         const val DELAY_TO_CONTROL_DISPLAY = 200L
     }
 }

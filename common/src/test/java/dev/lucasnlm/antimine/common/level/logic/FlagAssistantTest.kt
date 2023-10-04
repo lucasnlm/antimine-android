@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.common.level.logic
 
+import dev.lucasnlm.antimine.common.level.logic.MinefieldExt.filterNeighborsOf
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -47,16 +48,16 @@ class FlagAssistantTest {
             testCase(
                 seed = 200,
                 expectedFlagMap =
-                listOf(
-                    0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0,
-                    1, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 1, 0, 0, 0,
-                    0, 0, 0, 0, 1, 0, 0, 0,
-                    1, 0, 0, 0, 1, 0, 0, 0,
-                    0, 0, 0, 0, 1, 1, 0, 0,
-                ),
+                    listOf(
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        1, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 1, 0, 0, 0,
+                        0, 0, 0, 0, 1, 0, 0, 0,
+                        1, 0, 0, 0, 1, 0, 0, 0,
+                        0, 0, 0, 0, 1, 1, 0, 0,
+                    ),
             )
         }
 
@@ -66,16 +67,16 @@ class FlagAssistantTest {
             testCase(
                 seed = 250,
                 expectedFlagMap =
-                listOf(
-                    0, 0, 0, 0, 0, 0, 0, 1,
-                    0, 0, 0, 0, 1, 1, 1, 1,
-                    0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0,
-                    1, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 1, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0,
-                ),
+                    listOf(
+                        0, 0, 0, 0, 0, 0, 0, 1,
+                        0, 0, 0, 0, 1, 1, 1, 1,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        1, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 1, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                    ),
             )
         }
 }

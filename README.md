@@ -60,4 +60,3 @@ Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-andro
 - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
 - [Koin](https://github.com/InsertKoinIO/koin)
-- [Room](https://developer.android.com/training/data-storage/room)

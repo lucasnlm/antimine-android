@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.stats.viewmodel
 
-import dev.lucasnlm.antimine.common.level.database.models.Stats
+import dev.lucasnlm.antimine.common.io.models.Stats
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.core.models.Difficulty
@@ -36,8 +36,7 @@ class StatsViewModel(
     }
 
     private suspend fun loadStatsModel(): List<StatsModel> {
-        val minId = preferenceRepository.getStatsBase()
-        val stats = statsRepository.getAllStats(minId)
+        val stats = statsRepository.getAllStats()
 
         return with(stats) {
             listOf(
@@ -76,9 +75,7 @@ class StatsViewModel(
     }
 
     private suspend fun deleteAll() {
-        statsRepository.getAllStats(0).lastOrNull()?.let {
-            preferenceRepository.updateStatsBase(it.uid + 1)
-        }
+        statsRepository.deleteLastStats()
     }
 
     private fun List<Stats>.fold(): StatsModel {
@@ -101,23 +98,23 @@ class StatsViewModel(
                     totalGames = acc.totalGames,
                     totalTime = acc.totalTime + value.duration,
                     victoryTime =
-                    acc.victoryTime +
-                        if (value.victory != 0) {
-                            value.duration
-                        } else {
-                            0
-                        },
+                        acc.victoryTime +
+                            if (value.victory != 0) {
+                                value.duration
+                            } else {
+                                0
+                            },
                     averageTime = 0,
                     shortestTime =
-                    if (value.victory != 0) {
-                        if (acc.shortestTime == 0L) {
-                            value.duration
+                        if (value.victory != 0) {
+                            if (acc.shortestTime == 0L) {
+                                value.duration
+                            } else {
+                                acc.shortestTime.coerceAtMost(value.duration)
+                            }
                         } else {
-                            acc.shortestTime.coerceAtMost(value.duration)
-                        }
-                    } else {
-                        acc.shortestTime
-                    },
+                            acc.shortestTime
+                        },
                     mines = acc.mines + value.mines,
                     victory = acc.victory + value.victory,
                     openArea = acc.openArea + value.openArea,

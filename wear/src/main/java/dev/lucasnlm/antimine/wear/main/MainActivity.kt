@@ -30,11 +30,11 @@ class MainActivity : ThemedActivity() {
                 MenuItem(
                     id = 0L,
                     label =
-                    if (preferencesRepository.showContinueGame()) {
-                        i18n.string.continue_game
-                    } else {
-                        i18n.string.start
-                    },
+                        if (preferencesRepository.showContinueGame()) {
+                            i18n.string.continue_game
+                        } else {
+                            i18n.string.start
+                        },
                     icon = R.drawable.play,
                     onClick = {
                         continueGame()

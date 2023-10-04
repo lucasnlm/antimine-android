@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine
 import androidx.multidex.MultiDexApplication
 import com.badlogic.gdx.utils.GdxNativesLoader
 import com.google.android.material.color.DynamicColors
+import dev.lucasnlm.antimine.common.io.di.CommonIoModule
 import dev.lucasnlm.antimine.common.level.di.LevelModule
 import dev.lucasnlm.antimine.core.di.CommonModule
 import dev.lucasnlm.antimine.core.models.Analytics
@@ -37,7 +38,7 @@ open class MainApplication : MultiDexApplication() {
         stopKoin()
         startKoin {
             androidContext(applicationContext)
-            modules(AppModule, CommonModule, ExternalModule, LevelModule, ViewModelModule)
+            modules(AppModule, CommonModule, CommonIoModule, ExternalModule, LevelModule, ViewModelModule)
         }
 
         appScope.launch {

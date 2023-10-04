@@ -6,8 +6,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.common.level.database.models.Save
-import dev.lucasnlm.antimine.common.level.database.models.SaveStatus
+import dev.lucasnlm.antimine.common.io.models.Save
+import dev.lucasnlm.antimine.common.io.models.SaveStatus
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.databinding.ViewHistoryItemBinding
@@ -34,7 +34,7 @@ class HistoryAdapter(
     }
 
     override fun getItemId(position: Int): Long {
-        return saveHistory[position].uid.toLong()
+        return saveHistory[position].id.hashCode().toLong()
     }
 
     override fun getItemCount(): Int {
@@ -46,10 +46,10 @@ class HistoryAdapter(
         position: Int,
     ) = with(saveHistory[position]) {
         val context = holder.itemView.context
-        val buttonBackgroundColor =
+        val buttonIconColor =
             MaterialColors.getColorStateListOrNull(
                 context,
-                GR.attr.colorOnBackground,
+                GR.attr.colorTertiary,
             )?.withAlpha(BUTTON_BACKGROUND_ALPHA)
 
         val difficultyText =
@@ -66,10 +66,10 @@ class HistoryAdapter(
                 },
             )
 
-        val gameNameText = "$difficultyText #$uid"
+        val saveId = id.orEmpty()
 
         holder.binding.run {
-            difficulty.text = gameNameText
+            difficulty.text = difficultyText
             badge.alpha = if (status == SaveStatus.VICTORY) BADGE_VICTORY_ALPHA else BADGE_DEFEAT_ALPHA
 
             minefieldSize.text = context.getString(i18n.string.minefield_size, minefield.width, minefield.height)
@@ -79,23 +79,23 @@ class HistoryAdapter(
                 if (status != SaveStatus.VICTORY) {
                     icon = ContextCompat.getDrawable(context, R.drawable.replay)
                     setOnClickListener {
-                        statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
+                        statelessViewModel.sendEvent(HistoryEvent.ReplaySave(saveId))
                     }
-                    backgroundTintList = buttonBackgroundColor
+                    backgroundTintList = buttonIconColor
                 } else {
                     icon = ContextCompat.getDrawable(context, R.drawable.play)
                     setOnClickListener {
-                        statelessViewModel.sendEvent(HistoryEvent.ReplaySave(uid))
+                        statelessViewModel.sendEvent(HistoryEvent.ReplaySave(saveId))
                     }
-                    backgroundTintList = buttonBackgroundColor
+                    backgroundTintList = buttonIconColor
                 }
             }
 
             open.run {
                 setOnClickListener {
-                    statelessViewModel.sendEvent(HistoryEvent.LoadSave(uid))
+                    statelessViewModel.sendEvent(HistoryEvent.LoadSave(saveId))
                 }
-                backgroundTintList = buttonBackgroundColor
+                backgroundTintList = buttonIconColor
             }
         }
     }

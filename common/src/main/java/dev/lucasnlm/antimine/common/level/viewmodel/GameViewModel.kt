@@ -7,15 +7,15 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.layoutDirection
 import androidx.lifecycle.viewModelScope
-import dev.lucasnlm.antimine.common.level.database.models.FirstOpen
-import dev.lucasnlm.antimine.common.level.database.models.Save
+import dev.lucasnlm.antimine.common.io.models.FirstOpen
+import dev.lucasnlm.antimine.common.io.models.Save
 import dev.lucasnlm.antimine.common.level.logic.GameController
 import dev.lucasnlm.antimine.common.level.models.ActionCompleted
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.common.level.repository.TipRepository
-import dev.lucasnlm.antimine.common.level.utils.Clock
+import dev.lucasnlm.antimine.common.level.utils.ClockManager
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 import dev.lucasnlm.antimine.core.models.Analytics
@@ -53,10 +53,19 @@ open class GameViewModel(
     private val playGamesManager: PlayGamesManager,
     private val tipRepository: TipRepository,
     private val featureFlagManager: FeatureFlagManager,
-    private val clock: Clock,
+    private val clockManager: ClockManager,
 ) : IntentViewModel<GameEvent, GameState>() {
     private lateinit var gameController: GameController
     private var initialized = false
+
+    init {
+        viewModelScope.launch {
+            clockManager.observe()
+                .collect {
+                    sendEvent(GameEvent.UpdateTime(it))
+                }
+        }
+    }
 
     override fun initialState(): GameState {
         return GameState(
@@ -112,7 +121,7 @@ open class GameViewModel(
                         emit(newState)
                     }
                 }
-                is GameEvent.UpdateSave -> {
+                is GameEvent.UpdateSaveId -> {
                     val newState = state.copy(saveId = event.saveId)
                     emit(newState)
                 }
@@ -130,7 +139,14 @@ open class GameViewModel(
                     emit(newState)
                 }
                 is GameEvent.EngineReady -> {
-                    emit(state.copy(isLoadingMap = false))
+                    if (state.isLoadingMap) {
+                        emit(
+                            state.copy(
+                                isLoadingMap = false,
+                                selectedAction = Action.OpenTile,
+                            ),
+                        )
+                    }
 
                     if (!state.isGameCompleted && state.hasMines && !state.isLoadingMap) {
                         if (
@@ -147,6 +163,10 @@ open class GameViewModel(
                 is GameEvent.LoadingNewGame -> {
                     stopClock()
                     emit(state.copy(isLoadingMap = true, duration = 0L, isActive = false))
+                }
+                is GameEvent.ChangeSelectedAction -> {
+                    val newState = state.copy(selectedAction = event.action)
+                    emit(newState)
                 }
                 is GameEvent.UpdateTime -> {
                     val newState = state.copy(duration = event.time)
@@ -232,7 +252,7 @@ open class GameViewModel(
         }
 
     suspend fun startNewGame(newDifficulty: Difficulty = state.difficulty): Minefield {
-        clock.reset()
+        clockManager.reset()
         initialized = false
 
         val minefield =
@@ -253,7 +273,6 @@ open class GameViewModel(
                     seed = seed,
                     useSimonTatham = preferencesRepository.useSimonTathamAlgorithm(),
                     onCreateUnsafeLevel = ::onCreateUnsafeLevel,
-                    saveId = null,
                 )
 
             val newGameState =
@@ -292,7 +311,7 @@ open class GameViewModel(
     }
 
     private fun resumeGameFromSave(save: Save): Minefield {
-        clock.reset(save.duration)
+        clockManager.reset(save.duration)
 
         sendEvent(GameEvent.LoadingNewGame)
 
@@ -303,7 +322,7 @@ open class GameViewModel(
 
         val newGameState =
             GameState(
-                saveId = save.uid.toLong(),
+                saveId = save.id,
                 duration = save.duration,
                 seed = save.seed,
                 difficulty = save.difficulty,
@@ -333,7 +352,7 @@ open class GameViewModel(
     }
 
     private fun retryGame(save: Save) {
-        clock.reset()
+        clockManager.reset()
 
         sendEvent(GameEvent.LoadingNewGame)
 
@@ -342,7 +361,6 @@ open class GameViewModel(
                 minefield = save.minefield,
                 seed = save.seed,
                 useSimonTatham = preferencesRepository.useSimonTathamAlgorithm(),
-                saveId = save.uid,
                 onCreateUnsafeLevel = ::onCreateUnsafeLevel,
             )
         initialized = true
@@ -350,7 +368,6 @@ open class GameViewModel(
 
         val newGameState =
             GameState(
-                saveId = save.uid.toLong(),
                 duration = save.duration,
                 seed = save.seed,
                 difficulty = save.difficulty,
@@ -379,9 +396,9 @@ open class GameViewModel(
         )
     }
 
-    suspend fun loadGame(uid: Int): Minefield =
+    suspend fun loadGame(saveId: String): Minefield =
         withContext(Dispatchers.IO) {
-            val lastGame = savesRepository.loadFromId(uid)
+            val lastGame = savesRepository.loadFromId(saveId)
 
             if (lastGame != null) {
                 resumeGameFromSave(lastGame)
@@ -406,9 +423,9 @@ open class GameViewModel(
         return gameController.hadMistakes() && gameController.hasIsolatedAllMines()
     }
 
-    suspend fun retryGame(uid: Int): Minefield =
+    suspend fun retryGame(saveId: String): Minefield =
         withContext(Dispatchers.IO) {
-            val save = savesRepository.loadFromId(uid)
+            val save = savesRepository.loadFromId(saveId)
 
             if (save != null) {
                 retryGame(save)
@@ -431,9 +448,10 @@ open class GameViewModel(
 
     suspend fun loadLastGame(): Minefield =
         withContext(Dispatchers.IO) {
+            val saveId = savesRepository.currentSaveId()
             val lastGame = savesRepository.fetchCurrentSave()
 
-            if (lastGame != null) {
+            if (lastGame != null && saveId != null) {
                 resumeGameFromSave(lastGame)
             } else {
                 // Fail to load
@@ -446,7 +464,7 @@ open class GameViewModel(
             if (gameController.hasMines()) {
                 sendEvent(GameEvent.SetGameActivation(false))
             }
-            clock.stop()
+            clockManager.stop()
         }
     }
 
@@ -455,10 +473,10 @@ open class GameViewModel(
             gameController.let {
                 if (it.hasMines()) {
                     savesRepository.saveGame(
-                        it.getSaveState(state.duration, state.difficulty),
+                        save = it.getSaveState(state.duration, state.difficulty),
                     )?.let { id ->
-                        it.setCurrentSaveId(id.toInt())
-                        sendEvent(GameEvent.UpdateSave(id))
+                        it.setCurrentSaveId(id)
+                        sendEvent(GameEvent.UpdateSaveId(id))
                     }
                 }
             }
@@ -539,7 +557,7 @@ open class GameViewModel(
         when (actionCompleted.action) {
             Action.OpenTile -> soundManager.playOpenArea()
             Action.OpenOrMark -> {
-                if (preferencesRepository.getSwitchControlAction() == Action.OpenTile) {
+                if (state.selectedAction == Action.OpenTile) {
                     soundManager.playOpenArea()
                 } else {
                     soundManager.playPutFlag()
@@ -621,23 +639,21 @@ open class GameViewModel(
 
     fun changeSwitchControlAction(action: Action) {
         if (initialized) {
-            preferencesRepository.setSwitchControl(action)
+            sendEvent(GameEvent.ChangeSelectedAction(action))
             gameController.changeSwitchControlAction(action)
         }
     }
 
     private fun runClock() {
-        clock.run {
+        clockManager.run {
             if (isStopped) {
-                start {
-                    sendEvent(GameEvent.UpdateTime(it))
-                }
+                start()
             }
         }
     }
 
     private fun stopClock() {
-        clock.stop()
+        clockManager.stop()
     }
 
     private fun showAllEmptyAreas() {
@@ -681,7 +697,7 @@ open class GameViewModel(
 
     private suspend fun onGameOver(useGameOverFeedback: Boolean) {
         stopClock()
-        analyticsManager.sentEvent(Analytics.GameOver(clock.time(), getScore()))
+        analyticsManager.sentEvent(Analytics.GameOver(clockManager.timeInSeconds(), getScore()))
 
         gameController.run {
             if (useGameOverFeedback) {
@@ -721,7 +737,7 @@ open class GameViewModel(
     private suspend fun onVictory() {
         analyticsManager.sentEvent(
             Analytics.Victory(
-                clock.time(),
+                clockManager.timeInSeconds(),
                 getScore(),
                 state.difficulty,
             ),
@@ -743,7 +759,7 @@ open class GameViewModel(
             preferencesRepository.incrementProgressiveValue()
         }
 
-        if (clock.time() < THIRTY_SECONDS_ACHIEVEMENT) {
+        if (clockManager.timeInSeconds() < THIRTY_SECONDS_ACHIEVEMENT) {
             withContext(Dispatchers.Main) {
                 playGamesManager.unlockAchievement(Achievement.ThirtySeconds)
             }
@@ -762,7 +778,7 @@ open class GameViewModel(
     }
 
     private fun calcRewardHints(): Int {
-        return if (clock.time() > MIN_REWARD_GAME_SECONDS && preferencesRepository.isPremiumEnabled()) {
+        return if (clockManager.timeInSeconds() > MIN_REWARD_GAME_SECONDS && preferencesRepository.isPremiumEnabled()) {
             val rewardedHints =
                 if (isCompletedWithMistakes()) {
                     (state.minefield.mines * REWARD_RATIO_WITH_MISTAKES)
@@ -786,7 +802,7 @@ open class GameViewModel(
                 }
             }
 
-            val time = clock.time()
+            val time = clockManager.timeInSeconds()
             if (time > 1L && gameController.getActionsCount() > MIN_ACTION_TO_REWARD) {
                 val board =
                     when (state.difficulty) {
@@ -814,7 +830,7 @@ open class GameViewModel(
                     playGamesManager.submitLeaderboard(it, time)
                 }
 
-                statsRepository.getAllStats(0).count {
+                statsRepository.getAllStats().count {
                     it.victory == 1
                 }.also {
                     if (it > 0) {

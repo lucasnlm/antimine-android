@@ -10,7 +10,6 @@ class LicenseViewModel : IntentViewModel<Void, LicenseState>() {
             "Koin" to "https://github.com/InsertKoinIO/koin/blob/main/LICENSE",
             "LibGDX" to "https://github.com/libgdx/libgdx/blob/master/LICENSE",
             "Material Design" to "https://github.com/material-components/material-components-android/",
-            "Moshi" to "https://github.com/square/moshi/blob/master/LICENSE.txt",
             "Mockk" to "https://github.com/mockk/mockk/blob/master/LICENSE",
             "Noto Emoji" to "https://github.com/googlefonts/noto-emoji/blob/main/fonts/LICENSE",
             "kotlin" to "https://github.com/JetBrains/kotlin/blob/master/license/LICENSE.txt",
