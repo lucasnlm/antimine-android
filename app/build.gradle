@@ -154,7 +154,7 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3'
 
     // Konfetti
-    implementation 'nl.dionsegijn:konfetti-xml:2.0.2'
+    implementation 'nl.dionsegijn:konfetti-xml:2.0.3'
 
     // Tests
     testImplementation 'junit:junit:4.13.2'
