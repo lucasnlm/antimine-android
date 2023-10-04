@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.io.serializer
 
-import dev.lucasnlm.antimine.common.io.models.StatsFile
+import dev.lucasnlm.antimine.common.io.models.Stats
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.DataOutputStream
@@ -10,13 +10,13 @@ import java.io.DataOutputStream
  */
 object StatsSerializer {
     /**
-     * Serializes a [StatsFile] object into a [ByteArray].
+     * Serializes a [Stats] object into a [ByteArray].
      * @param stats The stats to be serialized.
      * @return The serialized stats.
      */
-    fun serialize(stats: StatsFile): ByteArray {
+    fun serialize(stats: Stats): ByteArray {
         return ByteArrayOutputStream(
-            StatsFile.BYTE_SIZE,
+            Stats.BYTE_SIZE,
         ).use {
             DataOutputStream(it).use { dataOutputStream ->
                 dataOutputStream.writeLong(stats.duration)
@@ -31,16 +31,16 @@ object StatsSerializer {
     }
 
     /**
-     * Deserializes a [ByteArray] into a [StatsFile] object.
+     * Deserializes a [ByteArray] into a [Stats] object.
      * @return The deserialized stats.
      */
-    fun DataInputStream.readStatsFile(): StatsFile? {
+    fun DataInputStream.readStatsFile(): Stats? {
         return run {
-            if (available() < StatsFile.BYTE_SIZE) {
+            if (available() < Stats.BYTE_SIZE) {
                 return null
             } else {
                 runCatching {
-                    StatsFile(
+                    Stats(
                         duration = readLong(),
                         mines = readInt(),
                         victory = readInt(),

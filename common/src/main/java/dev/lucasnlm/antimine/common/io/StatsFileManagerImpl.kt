@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.io
 
 import android.content.Context
-import dev.lucasnlm.antimine.common.io.models.StatsFile
+import dev.lucasnlm.antimine.common.io.models.Stats
 import dev.lucasnlm.antimine.common.io.serializer.StatsSerializer
 import dev.lucasnlm.antimine.common.io.serializer.StatsSerializer.readStatsFile
 import kotlinx.coroutines.CoroutineScope
@@ -18,7 +18,7 @@ class StatsFileManagerImpl(
     private val context: Context,
     private val scope: CoroutineScope,
 ) : StatsFileManager {
-    override suspend fun insert(stats: StatsFile) {
+    override suspend fun insert(stats: Stats) {
         scope.launch {
             withContext(Dispatchers.IO) {
                 val statsBytes = StatsSerializer.serialize(stats)
@@ -27,11 +27,11 @@ class StatsFileManagerImpl(
         }
     }
 
-    override suspend fun readStats(): List<StatsFile> {
+    override suspend fun readStats(): List<Stats> {
         return withContext(Dispatchers.IO) {
             runCatching {
                 context.filesDir.resolve(FILE_PATH).readBytes().let { bytes ->
-                    val result = mutableListOf<StatsFile>()
+                    val result = mutableListOf<Stats>()
                     bytes.inputStream().use { inputStream ->
                         DataInputStream(inputStream).use { stream ->
                             do {

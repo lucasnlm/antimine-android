@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.common.io
 
-import dev.lucasnlm.antimine.common.io.models.StatsFile
+import dev.lucasnlm.antimine.common.io.models.Stats
 import dev.lucasnlm.antimine.common.io.serializer.StatsSerializer
 import dev.lucasnlm.antimine.common.io.serializer.StatsSerializer.readStatsFile
 import org.junit.Test
@@ -9,8 +9,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 class StatsSerializerTest {
-    private val statsFile =
-        StatsFile(
+    private val stats =
+        Stats(
             duration = 12345678L,
             mines = 10,
             victory = 1,
@@ -21,7 +21,7 @@ class StatsSerializerTest {
 
     @Test
     fun `serialize should return the same value as deserialize`() {
-        val serialized = StatsSerializer.serialize(statsFile)
+        val serialized = StatsSerializer.serialize(stats)
         val deserialized =
             serialized.inputStream().use {
                 DataInputStream(it).use { stream ->
@@ -36,11 +36,11 @@ class StatsSerializerTest {
         )
 
         assertNotNull(deserialized)
-        assertEquals(statsFile.duration, deserialized.duration)
-        assertEquals(statsFile.mines, deserialized.mines)
-        assertEquals(statsFile.victory, deserialized.victory)
-        assertEquals(statsFile.width, deserialized.width)
-        assertEquals(statsFile.height, deserialized.height)
-        assertEquals(statsFile.openArea, deserialized.openArea)
+        assertEquals(stats.duration, deserialized.duration)
+        assertEquals(stats.mines, deserialized.mines)
+        assertEquals(stats.victory, deserialized.victory)
+        assertEquals(stats.width, deserialized.width)
+        assertEquals(stats.height, deserialized.height)
+        assertEquals(stats.openArea, deserialized.openArea)
     }
 }

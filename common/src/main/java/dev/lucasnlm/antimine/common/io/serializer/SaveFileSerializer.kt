@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.io.serializer
 
 import dev.lucasnlm.antimine.common.io.models.FirstOpen
-import dev.lucasnlm.antimine.common.io.models.SaveFile
+import dev.lucasnlm.antimine.common.io.models.Save
 import dev.lucasnlm.antimine.common.io.models.SaveStatus
 import dev.lucasnlm.antimine.common.io.serializer.ByteArrayExt.readArea
 import dev.lucasnlm.antimine.common.io.serializer.ByteArrayExt.writeArea
@@ -18,13 +18,13 @@ import java.io.DataOutputStream
  */
 object SaveFileSerializer {
     /**
-     * Serializes a [SaveFile] object into a [ByteArray].
+     * Serializes a [Save] object into a [ByteArray].
      * @param save The save to be serialized.
      * @return The serialized save.
      */
-    fun serialize(save: SaveFile): ByteArray {
+    fun serialize(save: Save): ByteArray {
         return ByteArrayOutputStream(
-            SaveFile.BYTE_SIZE + (save.field.size * Area.BYTE_SIZE),
+            Save.BYTE_SIZE + (save.field.size * Area.BYTE_SIZE),
         ).use {
             DataOutputStream(it).use { stream ->
                 stream.run {
@@ -52,7 +52,7 @@ object SaveFileSerializer {
     }
 
     /**
-     * Deserializes a [ByteArray] into a [SaveFile] object.
+     * Deserializes a [ByteArray] into a [Save] object.
      * @param saveId The save id.
      * @param content The content to be deserialized.
      * @return The deserialized save.
@@ -60,7 +60,7 @@ object SaveFileSerializer {
     fun deserialize(
         saveId: String,
         content: ByteArray,
-    ): SaveFile {
+    ): Save {
         return ByteArrayInputStream(content).use {
             DataInputStream(it).use { stream ->
                 stream.run {
@@ -98,7 +98,7 @@ object SaveFileSerializer {
                             readArea()
                         }
 
-                    SaveFile(
+                    Save(
                         id = saveId,
                         seed = seed,
                         startDate = startDate,

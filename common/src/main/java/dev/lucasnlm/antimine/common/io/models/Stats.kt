@@ -9,7 +9,7 @@ package dev.lucasnlm.antimine.common.io.models
  * @property height The height of the game
  * @property openArea The number of open areas in the game
  */
-data class StatsFile(
+data class Stats(
     val duration: Long,
     val mines: Int,
     val victory: Int,

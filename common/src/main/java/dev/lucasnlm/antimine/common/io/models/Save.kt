@@ -17,7 +17,7 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
  * @property field The list of areas of the game.
  * @property actions The number of actions of the game.
  */
-data class SaveFile(
+data class Save(
     val id: String? = null,
     val seed: Long,
     val startDate: Long,

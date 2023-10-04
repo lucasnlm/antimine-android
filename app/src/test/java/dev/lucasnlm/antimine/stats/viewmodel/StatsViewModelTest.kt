@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.stats.viewmodel
 
 import dev.lucasnlm.antimine.IntentViewModelTest
-import dev.lucasnlm.antimine.common.io.models.StatsFile
+import dev.lucasnlm.antimine.common.io.models.Stats
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.mocks.MemoryStatsRepository
@@ -15,23 +15,23 @@ import org.junit.Before
 import org.junit.Test
 
 class StatsViewModelTest : IntentViewModelTest() {
-    private val listOfStatsFile =
+    private val listOfStats =
         listOf(
             // Standard
-            StatsFile(1000, 10, 1, 6, 12, 30),
-            StatsFile(1200, 11, 0, 6, 12, 20),
+            Stats(1000, 10, 1, 6, 12, 30),
+            Stats(1200, 11, 0, 6, 12, 20),
             // Expert
-            StatsFile(2000, 99, 1, 24, 24, 90),
-            StatsFile(3200, 99, 0, 24, 24, 20),
+            Stats(2000, 99, 1, 24, 24, 90),
+            Stats(3200, 99, 0, 24, 24, 20),
             // Intermediate
-            StatsFile(4000, 40, 1, 16, 16, 40),
-            StatsFile(5200, 40, 0, 16, 16, 10),
+            Stats(4000, 40, 1, 16, 16, 40),
+            Stats(5200, 40, 0, 16, 16, 10),
             // Beginner
-            StatsFile(6000, 10, 1, 9, 9, 15),
-            StatsFile(7200, 10, 0, 9, 9, 20),
+            Stats(6000, 10, 1, 9, 9, 15),
+            Stats(7200, 10, 0, 9, 9, 20),
             // Custom
-            StatsFile(8000, 5, 1, 5, 5, 5),
-            StatsFile(9200, 5, 0, 5, 5, 4),
+            Stats(8000, 5, 1, 5, 5, 5),
+            Stats(9200, 5, 0, 5, 5, 4),
         )
 
     private val prefsRepository: PreferencesRepository = mockk()
@@ -49,7 +49,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     @Test
     fun testStatsFileTotalGames() =
         runTest {
-            val repository = MemoryStatsRepository(listOfStatsFile.toMutableList())
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
             val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
             viewModel.sendEvent(StatsEvent.LoadStats)
             val statsFileModel = viewModel.singleState()
@@ -70,7 +70,7 @@ class StatsViewModelTest : IntentViewModelTest() {
 
     @Test
     fun testStatsFileMustGenerateStatsFileForEveryKindOfGamePlusGeneral() {
-        val repository = MemoryStatsRepository(listOfStatsFile.toMutableList())
+        val repository = MemoryStatsRepository(listOfStats.toMutableList())
         val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
         viewModel.sendEvent(StatsEvent.LoadStats)
         val statsFileModel = viewModel.singleState()
@@ -82,7 +82,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     @Test
     fun testStatsFileTotalTime() =
         runTest {
-            val repository = MemoryStatsRepository(listOfStatsFile.toMutableList())
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
             val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
             viewModel.sendEvent(StatsEvent.LoadStats)
             val statsFileModel = viewModel.singleState()
@@ -95,7 +95,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     @Test
     fun testStatsFileAverageTime() =
         runTest {
-            val repository = MemoryStatsRepository(listOfStatsFile.toMutableList())
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
             val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
             viewModel.sendEvent(StatsEvent.LoadStats)
             val statsFileModel = viewModel.singleState()
@@ -108,7 +108,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     @Test
     fun testStatsFileShortestTime() =
         runTest {
-            val repository = MemoryStatsRepository(listOfStatsFile.toMutableList())
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
             val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
             viewModel.sendEvent(StatsEvent.LoadStats)
             val statsFileModel = viewModel.singleState()
@@ -121,7 +121,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     @Test
     fun testStatsFileMines() =
         runTest {
-            val repository = MemoryStatsRepository(listOfStatsFile.toMutableList())
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
             val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
             viewModel.sendEvent(StatsEvent.LoadStats)
 
@@ -135,7 +135,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     @Test
     fun testVictory() =
         runTest {
-            val repository = MemoryStatsRepository(listOfStatsFile.toMutableList())
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
             val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
             viewModel.sendEvent(StatsEvent.LoadStats)
             val statsFileModel = viewModel.singleState()
@@ -148,7 +148,7 @@ class StatsViewModelTest : IntentViewModelTest() {
     @Test
     fun testOpenArea() =
         runTest {
-            val repository = MemoryStatsRepository(listOfStatsFile.toMutableList())
+            val repository = MemoryStatsRepository(listOfStats.toMutableList())
             val viewModel = StatsViewModel(repository, prefsRepository, minefieldRepository, dimensionRepository)
             viewModel.sendEvent(StatsEvent.LoadStats)
             val statsFileModel = viewModel.singleState()

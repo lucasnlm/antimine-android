@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.stats.viewmodel
 
-import dev.lucasnlm.antimine.common.io.models.StatsFile
+import dev.lucasnlm.antimine.common.io.models.Stats
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.core.models.Difficulty
@@ -78,7 +78,7 @@ class StatsViewModel(
         statsRepository.deleteLastStats()
     }
 
-    private fun List<StatsFile>.fold(): StatsModel {
+    private fun List<Stats>.fold(): StatsModel {
         return if (isNotEmpty()) {
             fold(
                 StatsModel(
@@ -159,35 +159,35 @@ class StatsViewModel(
             }
         }
 
-    private fun StatsFile.isSizeOf(minefield: Minefield): Boolean {
+    private fun Stats.isSizeOf(minefield: Minefield): Boolean {
         return this.mines == minefield.mines && this.width == minefield.width && this.height == minefield.height
     }
 
-    private fun isExpert(stats: StatsFile): Boolean {
+    private fun isExpert(stats: Stats): Boolean {
         return stats.isSizeOf(expertSize)
     }
 
-    private fun isMaster(stats: StatsFile): Boolean {
+    private fun isMaster(stats: Stats): Boolean {
         return stats.isSizeOf(masterSize)
     }
 
-    private fun isLegend(stats: StatsFile): Boolean {
+    private fun isLegend(stats: Stats): Boolean {
         return stats.isSizeOf(legendSize)
     }
 
-    private fun isFixedSize(stats: StatsFile): Boolean {
+    private fun isFixedSize(stats: Stats): Boolean {
         return stats.isSizeOf(standardSize)
     }
 
-    private fun isIntermediate(stats: StatsFile): Boolean {
+    private fun isIntermediate(stats: Stats): Boolean {
         return stats.isSizeOf(intermediateSize)
     }
 
-    private fun isBeginner(stats: StatsFile): Boolean {
+    private fun isBeginner(stats: Stats): Boolean {
         return stats.isSizeOf(beginnerSize)
     }
 
-    private fun List<StatsFile>.filterStandard(standardSize: Minefield) =
+    private fun List<Stats>.filterStandard(standardSize: Minefield) =
         filter {
             val baseWidth = (it.width - standardSize.width)
             val baseHeight = (it.height - standardSize.height)
@@ -204,7 +204,7 @@ class StatsViewModel(
                     .not()
         }
 
-    private fun Sequence<StatsFile>.filterNotStandard(standardSize: Minefield) =
+    private fun Sequence<Stats>.filterNotStandard(standardSize: Minefield) =
         filterNot {
             (it.width == standardSize.width && it.height == standardSize.height) ||
                 (it.width == standardSize.height && it.height == standardSize.width)

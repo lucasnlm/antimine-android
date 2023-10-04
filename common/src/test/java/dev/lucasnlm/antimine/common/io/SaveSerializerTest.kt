@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.io
 
 import dev.lucasnlm.antimine.common.io.models.FirstOpen
-import dev.lucasnlm.antimine.common.io.models.SaveFile
+import dev.lucasnlm.antimine.common.io.models.Save
 import dev.lucasnlm.antimine.common.io.models.SaveStatus
 import dev.lucasnlm.antimine.common.io.serializer.SaveFileSerializer
 import dev.lucasnlm.antimine.core.models.Area
@@ -11,7 +11,7 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class SaveFileSerializerTest {
+class SaveSerializerTest {
     private val area =
         Area(
             id = 10,
@@ -27,8 +27,8 @@ class SaveFileSerializerTest {
             dimNumber = false,
         )
 
-    private val saveFile =
-        SaveFile(
+    private val save =
+        Save(
             id = "some-id",
             seed = 12345678L,
             startDate = 12345678L,
@@ -49,8 +49,8 @@ class SaveFileSerializerTest {
 
     @Test
     fun `serialize should return the same value as deserialize`() {
-        val serialized = SaveFileSerializer.serialize(saveFile)
-        val deserialized = SaveFileSerializer.deserialize(saveFile.id!!, serialized)
-        assertEquals(saveFile, deserialized)
+        val serialized = SaveFileSerializer.serialize(save)
+        val deserialized = SaveFileSerializer.deserialize(save.id!!, serialized)
+        assertEquals(save, deserialized)
     }
 }

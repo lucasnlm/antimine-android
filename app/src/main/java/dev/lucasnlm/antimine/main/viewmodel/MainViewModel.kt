@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.GameActivity
-import dev.lucasnlm.antimine.common.io.models.StatsFile
+import dev.lucasnlm.antimine.common.io.models.Stats
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
@@ -99,7 +99,7 @@ class MainViewModel(
 
             cloudSave.stats.mapNotNull {
                 runCatching {
-                    StatsFile(
+                    Stats(
                         duration = it["duration"]!!.toLong(),
                         mines = it["mines"]!!.toInt(),
                         victory = it["victory"]!!.toInt(),

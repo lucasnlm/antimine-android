@@ -8,7 +8,7 @@ import androidx.core.text.buildSpannedString
 import androidx.core.text.layoutDirection
 import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.common.io.models.FirstOpen
-import dev.lucasnlm.antimine.common.io.models.SaveFile
+import dev.lucasnlm.antimine.common.io.models.Save
 import dev.lucasnlm.antimine.common.level.logic.GameController
 import dev.lucasnlm.antimine.common.level.models.ActionCompleted
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
@@ -121,7 +121,7 @@ open class GameViewModel(
                         emit(newState)
                     }
                 }
-                is GameEvent.UpdateSave -> {
+                is GameEvent.UpdateSaveId -> {
                     val newState = state.copy(saveId = event.saveId)
                     emit(newState)
                 }
@@ -310,7 +310,7 @@ open class GameViewModel(
         return minefield
     }
 
-    private fun resumeGameFromSave(save: SaveFile): Minefield {
+    private fun resumeGameFromSave(save: Save): Minefield {
         clockManager.reset(save.duration)
 
         sendEvent(GameEvent.LoadingNewGame)
@@ -351,7 +351,7 @@ open class GameViewModel(
         return newGameState.minefield
     }
 
-    private fun retryGame(save: SaveFile) {
+    private fun retryGame(save: Save) {
         clockManager.reset()
 
         sendEvent(GameEvent.LoadingNewGame)
@@ -476,7 +476,7 @@ open class GameViewModel(
                         save = it.getSaveState(state.duration, state.difficulty),
                     )?.let { id ->
                         it.setCurrentSaveId(id)
-                        sendEvent(GameEvent.UpdateSave(id))
+                        sendEvent(GameEvent.UpdateSaveId(id))
                     }
                 }
             }

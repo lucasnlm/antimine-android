@@ -1,13 +1,28 @@
 package dev.lucasnlm.antimine.common.level.repository
 
-import dev.lucasnlm.antimine.common.io.models.StatsFile
+import dev.lucasnlm.antimine.common.io.models.Stats
 
+/**
+ * Repository for statistics.
+ */
 interface StatsRepository {
-    suspend fun getAllStats(): List<StatsFile>
+    /**
+     * @return A list of all stats files.
+     */
+    suspend fun getAllStats(): List<Stats>
 
-    suspend fun addAllStats(stats: List<StatsFile>)
+    /**
+     * Add a list of stats.
+     */
+    suspend fun addAllStats(stats: List<Stats>)
 
-    suspend fun addStats(stats: StatsFile)
+    /**
+     * Add a stats.
+     */
+    suspend fun addStats(stats: Stats)
 
+    /**
+     * Delete the stats file.
+     */
     suspend fun deleteLastStats()
 }

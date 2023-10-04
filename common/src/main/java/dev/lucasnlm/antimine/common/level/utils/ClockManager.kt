@@ -11,6 +11,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
+/**
+ * Manages the clock.
+ */
 open class ClockManager(
     private val scope: CoroutineScope,
 ) {

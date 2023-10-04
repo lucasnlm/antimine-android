@@ -2,7 +2,7 @@ package dev.lucasnlm.antimine.history
 
 import dev.lucasnlm.antimine.IntentViewModelTest
 import dev.lucasnlm.antimine.common.io.models.FirstOpen
-import dev.lucasnlm.antimine.common.io.models.SaveFile
+import dev.lucasnlm.antimine.common.io.models.Save
 import dev.lucasnlm.antimine.common.io.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.core.models.Difficulty
@@ -19,17 +19,17 @@ class HistoryViewModelTest : IntentViewModelTest() {
     private val fakeMinefield = Minefield(9, 9, 9)
     private val allSaves =
         listOf(
-            SaveFile(
+            Save(
                 "0", 1, 0L, 100L, fakeMinefield,
                 Difficulty.Beginner, FirstOpen.Unknown, SaveStatus.ON_GOING,
                 listOf(), 10,
             ),
-            SaveFile(
+            Save(
                 "1", 2, 0L, 100L, fakeMinefield,
                 Difficulty.Beginner, FirstOpen.Unknown, SaveStatus.ON_GOING,
                 listOf(), 20,
             ),
-            SaveFile(
+            Save(
                 "2", 3, 0L, 100L, fakeMinefield,
                 Difficulty.Beginner, FirstOpen.Unknown, SaveStatus.ON_GOING,
                 listOf(), 30,

@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.io
 
 import android.content.Context
-import dev.lucasnlm.antimine.common.io.models.SaveFile
+import dev.lucasnlm.antimine.common.io.models.Save
 import dev.lucasnlm.antimine.common.io.serializer.SaveFileSerializer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -12,7 +12,7 @@ class SaveFileManagerImpl(
     private val context: Context,
     private val saveListManager: SaveListManager,
 ) : SaveFileManager {
-    override suspend fun loadSave(filePath: String): SaveFile? {
+    override suspend fun loadSave(filePath: String): Save? {
         return withContext(Dispatchers.IO) {
             runCatching {
                 val content = context.filesDir.resolve(filePath).readBytes()
@@ -21,7 +21,7 @@ class SaveFileManagerImpl(
         }
     }
 
-    override suspend fun writeSave(save: SaveFile): String {
+    override suspend fun writeSave(save: Save): String {
         val filePath = save.id ?: createRandomFileName()
         var result = writeSaveFile(filePath, save)
         if (result) {
@@ -41,7 +41,7 @@ class SaveFileManagerImpl(
 
     private suspend fun writeSaveFile(
         filePath: String,
-        save: SaveFile,
+        save: Save,
     ): Boolean {
         return withContext(Dispatchers.IO) {
             runCatching {
