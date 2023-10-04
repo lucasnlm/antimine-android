@@ -105,7 +105,7 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
 
         binding.selectOpen.apply {
             isVisible = enabled
-            alpha = if (preferencesRepository.getSwitchControlAction() == Action.OpenTile) 1.0f else 0.5f
+            alpha = if (gameViewModel.singleState().selectedAction == Action.OpenTile) 1.0f else 0.5f
             setOnClickListener {
                 gameViewModel.changeSwitchControlAction(Action.OpenTile)
             }
@@ -113,7 +113,7 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
 
         binding.selectFlag.apply {
             isVisible = enabled
-            alpha = if (preferencesRepository.getSwitchControlAction() == Action.SwitchMark) 1.0f else 0.5f
+            alpha = if (gameViewModel.singleState().selectedAction == Action.SwitchMark) 1.0f else 0.5f
             setOnClickListener {
                 gameViewModel.changeSwitchControlAction(Action.SwitchMark)
             }
