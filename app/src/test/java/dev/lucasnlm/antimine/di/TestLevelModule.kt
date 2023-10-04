@@ -15,7 +15,7 @@ import org.koin.dsl.module
 val TestLevelModule =
     module {
         single {
-            ClockManager()
+            ClockManager(get())
         }
 
         single {
