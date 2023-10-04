@@ -28,7 +28,6 @@ class MinefieldStage(
 ) : Stage() {
     private var minefield: Minefield? = null
     private var minefieldSize: SizeF? = null
-    private var currentZoom: Float = 1.0f
 
     private var lastCameraPosition: Vector3? = null
     private var lastZoom: Float? = null
@@ -54,62 +53,18 @@ class MinefieldStage(
 
         cameraController =
             CameraController(
-                camera = camera,
+                camera = camera as OrthographicCamera,
                 gameRenderingContext = gameRenderingContext,
             )
     }
 
     fun setZoom(value: Float) {
-        (camera as OrthographicCamera).apply {
-            zoom = value.coerceIn(0.8f, 3.0f)
-            currentZoom = zoom
-            update(true)
-
-            GameContext.zoomLevelAlpha =
-                when {
-                    zoom < 3.5f -> {
-                        1.0f
-                    }
-                    zoom > 4.0f -> {
-                        0.0f
-                    }
-                    else -> {
-                        (3.5f - zoom)
-                    }
-                }
-        }
-
+        cameraController.setZoom(value)
         inputEvents.clear()
     }
 
     fun scaleZoom(zoomMultiplier: Float) {
-        (camera as OrthographicCamera).apply {
-            val newZoom =
-                if (zoomMultiplier > 1.0) {
-                    zoom + 1.0f * Gdx.graphics.deltaTime
-                } else {
-                    zoom - 1.0f * Gdx.graphics.deltaTime
-                }
-            zoom = newZoom.coerceIn(MAX_ZOOM_OUT, MAX_ZOOM_IN)
-            if (currentZoom != zoom) {
-                currentZoom = zoom
-                Gdx.graphics.requestRendering()
-            }
-
-            GameContext.zoomLevelAlpha =
-                when {
-                    zoom < 3.5f -> {
-                        1.0f
-                    }
-                    zoom > 4.0f -> {
-                        0.0f
-                    }
-                    else -> {
-                        (3.5f - zoom)
-                    }
-                }
-        }
-
+        cameraController.scaleZoom(zoomMultiplier)
         inputEvents.clear()
     }
 
@@ -202,28 +157,10 @@ class MinefieldStage(
         onChangeGame()
     }
 
-    private fun centerCamera() {
-        this.minefieldSize?.let {
-            val virtualWidth = Gdx.graphics.width
-            val virtualHeight = Gdx.graphics.height
-            val padding = gameRenderingContext.internalPadding
-
-            val start = 0.5f * virtualWidth - padding.start
-            val end = it.width - 0.5f * virtualWidth + padding.end
-            val top = it.height - 0.5f * (virtualHeight - padding.top)
-            val bottom = 0.5f * virtualHeight + padding.bottom - gameRenderingContext.navigationBarHeight
-
-            camera.run {
-                position.set((start + end) * 0.5f, (top + bottom) * 0.5f, 0f)
-                update(true)
-            }
-
-            Gdx.graphics.requestRendering()
-        }
-    }
-
     fun onChangeGame() {
-        centerCamera()
+        minefieldSize?.let {
+            cameraController.centerCameraTo(it)
+        }
     }
 
     private fun handleGameEvent(gdxEvent: GdxEvent) {
@@ -363,8 +300,8 @@ class MinefieldStage(
             )
 
             cameraController.translate(
-                dx = -dx * currentZoom,
-                dy = dy * currentZoom,
+                dx = -dx,
+                dy = dy,
                 x = screenX.toFloat(),
                 y = screenY.toFloat(),
             )
