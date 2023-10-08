@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.common.level.view
+package dev.lucasnlm.antimine.control
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.color.MaterialColors
-import dev.lucasnlm.antimine.common.databinding.SwitchButtonBinding
+import dev.lucasnlm.antimine.control.databinding.SwitchButtonBinding
 import com.google.android.material.R as GR
 
 class SwitchButtonView : FrameLayout {

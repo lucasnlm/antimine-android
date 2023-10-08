@@ -40,7 +40,7 @@ dependencies {
     implementation project(':ui')
     implementation project(':gdx')
     implementation project(':sgtatham')
-    implementation project(':sgtatham')
+    implementation project(':control')
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.6.1'

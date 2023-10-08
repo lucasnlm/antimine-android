@@ -48,4 +48,5 @@ object PreferenceKeys {
     const val PREFERENCE_NEW_THEMES_ICON = "preference_new_themes_icon_v2"
     const val PREFERENCE_REQUEST_PLAY_GAMES = "preference_play_games"
     const val PREFERENCE_LAST_VERSION = "preference_last_version"
+    const val PREFERENCE_DEFAULT_SWITCH_BUTTON = "preference_default_switch_button"
 }
