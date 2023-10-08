@@ -33,6 +33,8 @@
 -dontwarn org.openjsse.**
 
 # For Google Play Services
+-keepattributes Signature
+-keep class com.google.android.gms.** { *; }
 -keep class io.grpc.** {*;}
 -keep public class com.google.android.gms.ads.** {
     public *;
@@ -54,8 +56,11 @@
 -dontwarn sun.nio.ch.**
 -dontwarn sun.misc.**
 
-# LibGDX
+# Firebase
+-keep class com.google.android.gms.** { *; }
+-keep class com.google.firebase.** { *; }
 
+# LibGDX
 -keep class com.badlogic.gdx.scenes.** { *; }
 
 -dontwarn com.badlogic.gdx.backends.android.AndroidFragmentApplication
