@@ -6,6 +6,7 @@ import com.google.android.material.color.DynamicColors
 import dev.lucasnlm.antimine.common.io.di.CommonIoModule
 import dev.lucasnlm.antimine.common.level.di.LevelModule
 import dev.lucasnlm.antimine.core.di.CommonModule
+import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.di.AppModule
 import dev.lucasnlm.antimine.di.ViewModelModule
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
@@ -44,10 +45,10 @@ open class MainApplication : MultiDexApplication() {
             iapHandler.start()
         }
 
-//        analyticsManager.apply {
-//            setup(applicationContext, mapOf())
-//            sentEvent(Analytics.Open)
-//        }
+        analyticsManager.apply {
+            setup(applicationContext, mapOf())
+            sentEvent(Analytics.Open)
+        }
 
         if (featureFlagManager.isFoss) {
             preferencesRepository.setPremiumFeatures(true)

@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1705001
-        versionName '17.5.0'
+        versionCode 1705011
+        versionName '17.5.1'
         minSdk 21
         targetSdk 34
         compileSdk 34
@@ -188,14 +188,15 @@ tasks.withType(Test).configureEach {
 }
 
 // The following code disables Google Services when building for F-Droid
-android.applicationVariants.configureEach { variant ->
-    if (variant.flavorName == 'foss') {
-        println(project.tasks)
-        project.tasks.names.findAll { it.contains("Google")}
-        .forEach { taskName ->
-            project.tasks.named(taskName).configure {
-                enabled = false
-            }
+if (System.getenv('IS_GOOGLE_BUILD') == null) {
+    android.applicationVariants.configureEach { variant ->
+        if (variant.flavorName == 'foss') {
+            project.tasks.names.findAll { it.contains("Google") }
+                    .forEach { taskName ->
+                        project.tasks.named(taskName).configure {
+                            enabled = false
+                        }
+                    }
         }
     }
 }

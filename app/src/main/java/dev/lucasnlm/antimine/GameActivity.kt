@@ -118,6 +118,10 @@ class GameActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        themeRepository.getTheme().palette.background.toAndroidColor().let {
+            window.decorView.setBackgroundColor(it)
+        }
+
         setContentView(binding.root)
 
         if (!preferencesRepository.isPremiumEnabled()) {
@@ -126,8 +130,14 @@ class GameActivity :
 
         bindViewModel()
         bindToolbar()
-        loadGameOrTutorial()
         bindTapToBegin()
+
+        lifecycleScope.launch {
+            delay(100)
+            withContext(Dispatchers.Main) {
+                loadGameOrTutorial()
+            }
+        }
 
         playGamesManager.showPlayPopUp(this)
         playGamesStartUp()
