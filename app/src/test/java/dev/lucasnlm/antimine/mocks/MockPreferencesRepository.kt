@@ -298,7 +298,7 @@ class MockPreferencesRepository : PreferencesRepository {
         // Not implemented
     }
 
-    override fun defaultSwitchButton(): Action  = Action.SwitchMark
+    override fun defaultSwitchButton(): Action = Action.SwitchMark
 
     override fun setDefaultSwitchButton(action: Action) {
         // Not implemented
