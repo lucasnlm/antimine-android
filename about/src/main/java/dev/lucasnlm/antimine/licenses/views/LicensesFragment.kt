@@ -11,6 +11,7 @@ import com.google.android.material.divider.MaterialDividerItemDecoration
 import dev.lucasnlm.antimine.about.R
 import dev.lucasnlm.antimine.about.databinding.FragmentLicensesBinding
 import dev.lucasnlm.antimine.licenses.viewmodel.LicenseViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class LicensesFragment : Fragment(R.layout.fragment_licenses) {
@@ -21,7 +22,7 @@ class LicensesFragment : Fragment(R.layout.fragment_licenses) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentLicensesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,7 +33,7 @@ class LicensesFragment : Fragment(R.layout.fragment_licenses) {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launchWhenResumed {
+        lifecycleScope.launch {
             viewModel
                 .observeState()
                 .collect {

@@ -143,7 +143,7 @@ open class GameViewModel(
                         emit(
                             state.copy(
                                 isLoadingMap = false,
-                                selectedAction = Action.OpenTile,
+                                selectedAction = gameController.getSelectedAction(),
                             ),
                         )
                     }
@@ -273,6 +273,7 @@ open class GameViewModel(
                     seed = seed,
                     useSimonTatham = preferencesRepository.useSimonTathamAlgorithm(),
                     onCreateUnsafeLevel = ::onCreateUnsafeLevel,
+                    selectedAction = preferencesRepository.defaultSwitchButton(),
                 )
 
             val newGameState =
@@ -315,7 +316,12 @@ open class GameViewModel(
 
         sendEvent(GameEvent.LoadingNewGame)
 
-        gameController = GameController(save, preferencesRepository.useSimonTathamAlgorithm())
+        gameController =
+            GameController(
+                save = save,
+                useSimonTatham = preferencesRepository.useSimonTathamAlgorithm(),
+                selectedAction = preferencesRepository.defaultSwitchButton(),
+            )
         initialized = true
 
         refreshUserPreferences()
@@ -362,6 +368,7 @@ open class GameViewModel(
                 seed = save.seed,
                 useSimonTatham = preferencesRepository.useSimonTathamAlgorithm(),
                 onCreateUnsafeLevel = ::onCreateUnsafeLevel,
+                selectedAction = preferencesRepository.defaultSwitchButton(),
             )
         initialized = true
         refreshUserPreferences()

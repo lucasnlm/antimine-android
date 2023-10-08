@@ -2,6 +2,7 @@ package dev.lucasnlm.antimine.preferences
 
 import android.os.Build
 import android.view.ViewConfiguration
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
@@ -482,5 +483,15 @@ class PreferencesRepositoryImpl(
         if (versionCode > 0) {
             preferencesManager.putInt(PreferenceKeys.PREFERENCE_LAST_VERSION, versionCode)
         }
+    }
+
+    override fun defaultSwitchButton(): Action {
+        preferencesManager.getInt(PreferenceKeys.PREFERENCE_DEFAULT_SWITCH_BUTTON, 0).let {
+            return Action.values().getOrNull(it) ?: Action.OpenTile
+        }
+    }
+
+    override fun setDefaultSwitchButton(action: Action) {
+        preferencesManager.putInt(PreferenceKeys.PREFERENCE_DEFAULT_SWITCH_BUTTON, action.ordinal)
     }
 }

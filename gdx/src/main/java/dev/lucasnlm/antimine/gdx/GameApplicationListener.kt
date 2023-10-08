@@ -123,7 +123,6 @@ class GameApplicationListener(
         }
 
         Gdx.input.inputProcessor = InputMultiplexer(GestureDetector(minefieldInputController), minefieldStage)
-        Gdx.graphics.isContinuousRendering = false
     }
 
     override fun dispose() {

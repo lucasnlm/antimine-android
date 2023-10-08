@@ -11,11 +11,13 @@ import android.widget.FrameLayout
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameState
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
+import dev.lucasnlm.antimine.control.SwitchButtonView
 import dev.lucasnlm.antimine.core.AppVersionManager
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.dpToPx
@@ -116,12 +118,13 @@ open class GameRenderFragment : AndroidFragmentApplication() {
     ): View? {
         val config =
             AndroidApplicationConfiguration().apply {
-                numSamples = 0
+                numSamples = 2
                 useAccelerometer = false
                 useCompass = false
                 useGyroscope = false
                 useWakelock = false
                 useImmersiveMode = true
+                disableAudio = true
             }
         return initializeForView(levelApplicationListener, config)
     }
@@ -149,6 +152,8 @@ open class GameRenderFragment : AndroidFragmentApplication() {
 
     private fun onEngineReady() {
         this.engineReady = true
+
+        Gdx.graphics.requestRendering()
 
         lifecycleScope.launch {
             gameViewModel

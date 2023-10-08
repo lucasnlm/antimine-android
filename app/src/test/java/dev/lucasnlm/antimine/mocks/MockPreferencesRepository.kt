@@ -1,6 +1,7 @@
 package dev.lucasnlm.antimine.mocks
 
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
@@ -294,6 +295,12 @@ class MockPreferencesRepository : PreferencesRepository {
     override fun lastAppVersion(): Int = 0
 
     override fun setLastAppVersion(versionCode: Int) {
+        // Not implemented
+    }
+
+    override fun defaultSwitchButton(): Action = Action.SwitchMark
+
+    override fun setDefaultSwitchButton(action: Action) {
         // Not implemented
     }
 }

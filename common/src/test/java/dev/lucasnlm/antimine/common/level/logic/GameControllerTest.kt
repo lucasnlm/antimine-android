@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine.common.level.logic
 import dev.lucasnlm.antimine.common.level.logic.MinefieldExt.filterNeighborsOf
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.core.models.Score
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
@@ -28,6 +29,7 @@ class GameControllerTest {
                 minefield = minefield,
                 seed = 200L,
                 useSimonTatham = false,
+                selectedAction = Action.OpenTile,
             )
         if (clickOnCreate) {
             runTest {

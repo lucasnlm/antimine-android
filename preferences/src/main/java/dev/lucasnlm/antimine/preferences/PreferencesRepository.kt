@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.preferences
 
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
 
@@ -195,4 +196,8 @@ interface PreferencesRepository {
     fun lastAppVersion(): Int?
 
     fun setLastAppVersion(versionCode: Int)
+
+    fun defaultSwitchButton(): Action
+
+    fun setDefaultSwitchButton(action: Action)
 }

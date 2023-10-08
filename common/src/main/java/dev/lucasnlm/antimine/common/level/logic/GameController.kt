@@ -25,7 +25,7 @@ class GameController {
     private var firstOpen: FirstOpen = FirstOpen.Unknown
     private var gameControl: GameControl = GameControl.Standard
     private var useQuestionMark = true
-    private var selectedAction = Action.OpenTile
+    private var selectedAction: Action
     private var useClickOnNumbers = true
     private var letNumbersPutFlag = true
     private var errorTolerance = 0
@@ -47,6 +47,7 @@ class GameController {
         minefield: Minefield,
         seed: Long,
         useSimonTatham: Boolean,
+        selectedAction: Action,
         saveId: String? = null,
         onCreateUnsafeLevel: (() -> Unit)? = null,
     ) {
@@ -66,11 +67,13 @@ class GameController {
         this.onCreateUnsafeLevel = onCreateUnsafeLevel
         this.field = minefieldCreator.createEmpty()
         this.useSimonTatham = shouldUseSimonTatham
+        this.selectedAction = selectedAction
     }
 
     constructor(
         save: Save,
         useSimonTatham: Boolean,
+        selectedAction: Action,
     ) {
         this.minefield = save.minefield
         this.seed = save.seed
@@ -78,6 +81,7 @@ class GameController {
         this.firstOpen = save.firstOpen
         this.field = save.field
         this.actions = save.actions
+        this.selectedAction = selectedAction
         this.fallbackCreator = MinefieldCreatorImpl(minefield, seed)
         this.minefieldCreator =
             if (useSimonTatham) {
@@ -534,6 +538,8 @@ class GameController {
     fun useQuestionMark(useQuestionMark: Boolean) {
         this.useQuestionMark = useQuestionMark
     }
+
+    fun getSelectedAction() = selectedAction
 
     fun useClickOnNumbers(clickNumbers: Boolean) {
         this.useClickOnNumbers = clickNumbers

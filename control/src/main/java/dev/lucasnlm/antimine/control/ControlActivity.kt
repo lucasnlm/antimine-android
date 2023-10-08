@@ -11,6 +11,7 @@ import dev.lucasnlm.antimine.control.viewmodel.ControlEvent
 import dev.lucasnlm.antimine.control.viewmodel.ControlViewModel
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
+import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.model.TopBarAction
@@ -19,7 +20,9 @@ import org.koin.android.ext.android.inject
 import dev.lucasnlm.antimine.i18n.R as i18n
 
 class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
-    private lateinit var binding: ActivityControlBinding
+    private val binding: ActivityControlBinding by lazy {
+        ActivityControlBinding.inflate(layoutInflater)
+    }
 
     private val viewModel: ControlViewModel by inject()
     private val preferencesRepository: PreferencesRepository by inject()
@@ -27,7 +30,6 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityControlBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val controlAdapter =
@@ -51,6 +53,23 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
         binding.longPress.addOnChangeListener(this)
         binding.doubleClick.addOnChangeListener(this)
         binding.hapticLevel.addOnChangeListener(this)
+
+        when (preferencesRepository.defaultSwitchButton()) {
+            Action.SwitchMark -> {
+                binding.switchButtonView.selectFlag()
+            }
+            else -> {
+                binding.switchButtonView.selectOpen()
+            }
+        }
+
+        binding.switchButtonView.setOnOpenClickListener {
+            preferencesRepository.setDefaultSwitchButton(Action.OpenTile)
+        }
+
+        binding.switchButtonView.setOnFlagClickListener {
+            preferencesRepository.setDefaultSwitchButton(Action.SwitchMark)
+        }
 
         lifecycleScope.launch {
             viewModel.observeState().collect {
@@ -96,6 +115,8 @@ class ControlActivity : ThemedActivity(), Slider.OnChangeListener {
                 } else {
                     setTopBarAction(null)
                 }
+
+                binding.controlDefault.isVisible = it.selected == ControlStyle.SwitchMarkOpen
             }
         }
 
