@@ -696,7 +696,7 @@ class GameActivity :
     }
 
     private fun startNewGameWithAds() {
-        if (!preferencesRepository.isPremiumEnabled() && featureFlagManager.isAdsOnNewGameEnabled) {
+        if (!preferencesRepository.isPremiumEnabled()) {
             if (featureFlagManager.useInterstitialAd) {
                 adsManager.showInterstitialAd(
                     activity = this,
@@ -769,7 +769,7 @@ class GameActivity :
         if (!instantAppManager.isEnabled(applicationContext)) {
             preferencesRepository.incrementUseCount()
 
-            if (preferencesRepository.getUseCount() > featureFlagManager.minUsageToReview) {
+            if (preferencesRepository.getUseCount() > MIN_USAGE_TO_REVIEW) {
                 reviewWrapper.startInAppReview(this)
             }
         }
@@ -897,7 +897,7 @@ class GameActivity :
         val CONFETTI_COLORS = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def)
         val CONFETTI_POSITION = Position.Relative(0.5, 0.2)
 
-        const val TOAST_OFFSET_Y_DP = 128
+        const val MIN_USAGE_TO_REVIEW = 2
 
         const val ENABLED_SHORTCUT_ALPHA = 1.0f
         const val DISABLED_SHORTCUT_ALPHA = 0.3f

@@ -123,7 +123,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                 useCompass = false
                 useGyroscope = false
                 useWakelock = false
-                useImmersiveMode = true
+                useImmersiveMode = false
                 disableAudio = true
             }
         return initializeForView(levelApplicationListener, config)

@@ -431,7 +431,6 @@ class MainActivity : ThemedActivity() {
     }
 
     private fun afterGooglePlayGames() {
-        playGamesManager.signInToFirebase(this)
         inAppUpdateManager.checkUpdate(this)
     }
 

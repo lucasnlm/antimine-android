@@ -97,7 +97,7 @@ class GameOverDialogFragment : CommonGameDialogFragment() {
 
                         continueGame.setOnClickListener {
                             analyticsManager.sentEvent(Analytics.ContinueGame)
-                            if (featureFlagManager.isAdsOnContinueEnabled && !isPremiumEnabled) {
+                            if (!isPremiumEnabled) {
                                 showAdsAndContinue()
                             } else {
                                 gameViewModel.sendEvent(GameEvent.ContinueGame)
@@ -128,12 +128,9 @@ class GameOverDialogFragment : CommonGameDialogFragment() {
                             showAdBannerDialog(adFrame)
                         }
 
-                        if (!state.showTutorial &&
-                            state.showContinueButton &&
-                            featureFlagManager.isContinueGameEnabled
-                        ) {
+                        if (!state.showTutorial && state.showContinueButton) {
                             continueGame.isVisible = true
-                            if (!isPremiumEnabled && featureFlagManager.isAdsOnContinueEnabled) {
+                            if (!isPremiumEnabled) {
                                 continueGame.compoundDrawablePadding = 0
                                 continueGame.setCompoundDrawablesWithIntrinsicBounds(
                                     R.drawable.watch_ads_icon,
@@ -165,11 +162,7 @@ class GameOverDialogFragment : CommonGameDialogFragment() {
                                 val intent = Intent(context, TutorialActivity::class.java)
                                 context.startActivity(intent)
                             }
-                        } else if (
-                            !isPremiumEnabled &&
-                            !isInstantMode &&
-                            featureFlagManager.isGameOverAdEnabled
-                        ) {
+                        } else if (!isPremiumEnabled && !isInstantMode) {
                             activity?.let { activity ->
                                 val label = context.getString(i18n.string.remove_ad)
                                 val priceModel = billingManager.getPrice()

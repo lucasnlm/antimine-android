@@ -517,7 +517,6 @@ open class GameViewModel(
             .longPress(index)
             .filterNotNull()
             .collect { actionCompleted ->
-                onFeedbackAnalytics(actionCompleted.action, index)
                 onPostAction()
                 playActionSound(actionCompleted)
                 refreshField()
@@ -537,7 +536,6 @@ open class GameViewModel(
             .doubleClick(index)
             .filterNotNull()
             .collect { actionCompleted ->
-                onFeedbackAnalytics(actionCompleted.action, index)
                 onPostAction()
                 playActionSound(actionCompleted)
                 refreshField()
@@ -553,7 +551,6 @@ open class GameViewModel(
             .singleClick(index)
             .filterNotNull()
             .collect { actionCompleted ->
-                onFeedbackAnalytics(actionCompleted.action, index)
                 onPostAction()
                 playActionSound(actionCompleted)
                 refreshField()
@@ -588,31 +585,6 @@ open class GameViewModel(
         }
 
         updateGameState()
-    }
-
-    private fun onFeedbackAnalytics(
-        action: Action,
-        index: Int,
-    ) {
-        if (featureFlagManager.isGameplayAnalyticsEnabled) {
-            when (action) {
-                Action.OpenTile -> {
-                    analyticsManager.sentEvent(Analytics.OpenTile(index))
-                }
-                Action.SwitchMark -> {
-                    analyticsManager.sentEvent(Analytics.SwitchMark(index))
-                }
-                Action.OpenNeighbors -> {
-                    analyticsManager.sentEvent(Analytics.OpenNeighbors(index))
-                }
-                Action.OpenOrMark -> {
-                    analyticsManager.sentEvent(Analytics.OpenOrFlagTile(index))
-                }
-                Action.QuestionMark -> {
-                    analyticsManager.sentEvent(Analytics.QuestionMark(index))
-                }
-            }
-        }
     }
 
     private fun updateGameState() {
