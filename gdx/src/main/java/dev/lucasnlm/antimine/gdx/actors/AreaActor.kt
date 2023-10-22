@@ -38,14 +38,14 @@ class AreaActor(
 
     private var areaForm: Int? = null
 
-    private var topId: Int = -1
-    private var bottomId: Int = -1
-    private var leftId: Int = -1
-    private var rightId: Int = -1
-    private var topLeftId: Int = -1
-    private var topRightId: Int = -1
-    private var bottomLeftId: Int = -1
-    private var bottomRightId: Int = -1
+    private var topId: Int = NO_LINK
+    private var bottomId: Int = NO_LINK
+    private var leftId: Int = NO_LINK
+    private var rightId: Int = NO_LINK
+    private var topLeftId: Int = NO_LINK
+    private var topRightId: Int = NO_LINK
+    private var bottomLeftId: Int = NO_LINK
+    private var bottomRightId: Int = NO_LINK
 
     init {
         width = gameRenderingContext.areaSize
@@ -382,14 +382,14 @@ class AreaActor(
             bottomLeftId = area.getNeighborIdAtPos(field, -1, -1)
             bottomRightId = area.getNeighborIdAtPos(field, 1, -1)
         } else {
-            topId = -1
-            bottomId = -1
-            leftId = -1
-            rightId = -1
-            topLeftId = -1
-            topRightId = -1
-            bottomLeftId = -1
-            bottomRightId = -1
+            topId = NO_LINK
+            bottomId = NO_LINK
+            leftId = NO_LINK
+            rightId = NO_LINK
+            topLeftId = NO_LINK
+            topRightId = NO_LINK
+            bottomLeftId = NO_LINK
+            bottomRightId = NO_LINK
         }
     }
 
@@ -417,6 +417,7 @@ class AreaActor(
         const val MIN_SCALE = 1.0f
         const val MAX_SCALE = 1.15f
         const val BASE_ICON_SCALE = 0.8f
+        const val NO_LINK = -1
 
         private fun Area.canLinkTo(area: Area): Boolean {
             return isCovered && mark.ligatureMask == area.mark.ligatureMask
