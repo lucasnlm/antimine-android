@@ -16,21 +16,21 @@ object AreaForm {
         return (this and flag) != 0
     }
 
-    private fun Int.top(): Boolean = checkForm(AreaForm.TOP)
+    private fun Int.top(): Boolean = checkForm(TOP)
 
-    private fun Int.bottom(): Boolean = checkForm(AreaForm.BOTTOM)
+    private fun Int.bottom(): Boolean = checkForm(BOTTOM)
 
-    private fun Int.left(): Boolean = checkForm(AreaForm.LEFT)
+    private fun Int.left(): Boolean = checkForm(LEFT)
 
-    private fun Int.right(): Boolean = checkForm(AreaForm.RIGHT)
+    private fun Int.right(): Boolean = checkForm(RIGHT)
 
-    private fun Int.topLeft(): Boolean = checkForm(AreaForm.TOP_LEFT)
+    private fun Int.topLeft(): Boolean = checkForm(TOP_LEFT)
 
-    private fun Int.topRight(): Boolean = checkForm(AreaForm.TOP_RIGHT)
+    private fun Int.topRight(): Boolean = checkForm(TOP_RIGHT)
 
-    private fun Int.bottomLeft(): Boolean = checkForm(AreaForm.BOTTOM_LEFT)
+    private fun Int.bottomLeft(): Boolean = checkForm(BOTTOM_LEFT)
 
-    private fun Int.bottomRight(): Boolean = checkForm(AreaForm.BOTTOM_RIGHT)
+    private fun Int.bottomRight(): Boolean = checkForm(BOTTOM_RIGHT)
 
     fun areaFormOf(
         top: Boolean,
@@ -79,7 +79,7 @@ object AreaForm {
         return result
     }
 
-    fun Int.toAtlasNames(): Map<String, Boolean> {
+    fun Int.toAtlasNames(): Set<String> {
         return mapOf(
             AtlasNames.CORE to true,
             AtlasNames.TOP to top(),
@@ -98,7 +98,9 @@ object AreaForm {
             AtlasNames.FILL_TOP_RIGHT to (top() && right() && topRight()),
             AtlasNames.FILL_BOTTOM_LEFT to (bottom() && left() && bottomLeft()),
             AtlasNames.FILL_BOTTOM_RIGHT to (bottom() && right() && bottomRight()),
-        )
+        ).filter {
+            it.value
+        }.keys
     }
 
     const val AREA_NO_FORM = 0b00000000

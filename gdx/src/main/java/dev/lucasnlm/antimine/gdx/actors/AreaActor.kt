@@ -31,7 +31,7 @@ class AreaActor(
     inputListener: InputListener,
     var isPressed: Boolean = false,
     private var focusScale: Float = 1.0f,
-    private var pieces: Map<String, Boolean> = mapOf(),
+    private var pieces: Set<String> = setOf(),
     private val gameRenderingContext: GameRenderingContext,
 ) : Actor() {
     var area: Area? = null
@@ -168,17 +168,15 @@ class AreaActor(
                 )
             } else {
                 pieces.forEach { piece ->
-                    if (piece.value) {
-                        batch.drawRegion(
-                            texture = GameContext.gameTextures!!.pieces[piece.key]!!,
-                            x = x - 0.5f,
-                            y = y - 0.5f,
-                            width = width + 0.5f,
-                            height = height + 0.5f,
-                            color = coverColor,
-                            blend = false,
-                        )
-                    }
+                    batch.drawRegion(
+                        texture = GameContext.gameTextures!!.pieces[piece]!!,
+                        x = x - 0.5f,
+                        y = y - 0.5f,
+                        width = width + 0.5f,
+                        height = height + 0.5f,
+                        color = coverColor,
+                        blend = false,
+                    )
                 }
             }
         }
@@ -189,17 +187,15 @@ class AreaActor(
 
         GameContext.atlas?.let { atlas ->
             pieces.forEach { piece ->
-                if (piece.value) {
-                    batch.drawRegion(
-                        texture = atlas.findRegion(piece.key),
-                        x = x - 0.5f,
-                        y = y - 0.5f,
-                        width = width + 1.0f,
-                        height = height + 1.0f,
-                        color = coverColor,
-                        blend = false,
-                    )
-                }
+                batch.drawRegion(
+                    texture = atlas.findRegion(piece),
+                    x = x - 0.5f,
+                    y = y - 0.5f,
+                    width = width + 1.0f,
+                    height = height + 1.0f,
+                    color = coverColor,
+                    blend = false,
+                )
             }
         }
     }
