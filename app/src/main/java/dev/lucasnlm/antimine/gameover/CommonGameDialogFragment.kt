@@ -123,7 +123,7 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
                     )
                     preferencesRepository.setShowMusicBanner(false)
                     gameAudioManager.playMonetization()
-                    openComposer(composer.composerLink)
+                    openComposer(it.context, composer.composerLink)
                 }
             }
 
@@ -138,9 +138,10 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
         }
     }
 
-    private fun openComposer(composerLink: String) {
-        val context = requireContext()
-
+    private fun openComposer(
+        context: Context,
+        composerLink: String,
+    ) {
         runCatching {
             val intent =
                 Intent(Intent.ACTION_VIEW, Uri.parse(composerLink)).apply {
@@ -163,7 +164,7 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
             post {
                 addView(
                     adsManager.createBannerAd(
-                        requireContext(),
+                        adFrame.context,
                         onError = {
                             showHexBanner(this)
                         },

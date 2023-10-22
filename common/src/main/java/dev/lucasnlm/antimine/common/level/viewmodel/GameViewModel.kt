@@ -29,7 +29,6 @@ import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.external.Achievement
 import dev.lucasnlm.external.AnalyticsManager
-import dev.lucasnlm.external.FeatureFlagManager
 import dev.lucasnlm.external.Leaderboard
 import dev.lucasnlm.external.PlayGamesManager
 import kotlinx.coroutines.Dispatchers
@@ -52,7 +51,6 @@ open class GameViewModel(
     private val analyticsManager: AnalyticsManager,
     private val playGamesManager: PlayGamesManager,
     private val tipRepository: TipRepository,
-    private val featureFlagManager: FeatureFlagManager,
     private val clockManager: ClockManager,
 ) : IntentViewModel<GameEvent, GameState>() {
     private lateinit var gameController: GameController
@@ -143,12 +141,17 @@ open class GameViewModel(
                         emit(
                             state.copy(
                                 isLoadingMap = false,
-                                selectedAction = gameController.getSelectedAction(),
+                                selectedAction =
+                                    if (initialized) {
+                                        gameController.getSelectedAction()
+                                    } else {
+                                        preferencesRepository.defaultSwitchButton()
+                                    },
                             ),
                         )
                     }
 
-                    if (!state.isGameCompleted && state.hasMines && !state.isLoadingMap) {
+                    if (initialized && !state.isGameCompleted && state.hasMines && !state.isLoadingMap) {
                         if (
                             !gameController.isGameOver() &&
                             !gameController.isVictory() &&

@@ -65,11 +65,9 @@ class AreaActor(
         }
 
         if (this.area != area) {
-            if (this.area?.id != area.id) {
-                x = area.posX * width
-                y = area.posY * height
-                refreshLinks(area, field)
-            }
+            x = area.posX * width
+            y = area.posY * height
+            refreshLinks(area, field)
 
             this.area = area
         }

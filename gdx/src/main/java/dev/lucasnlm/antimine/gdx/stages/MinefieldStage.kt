@@ -83,11 +83,9 @@ class MinefieldStage(
                 this.newBoundAreas = null
             }
 
-            if (actors.size != boundAreas.size) {
-                if (boundAreas.size < actors.size) {
-                    actors.removeRange(boundAreas.size, actors.size)
-                    actors.shrink()
-                } else {
+            val forceRebind = actors.size != boundAreas.size
+            if (forceRebind) {
+                if (boundAreas.size > actors.size) {
                     actors.ensureCapacity(boundAreas.size + 1)
                 }
 
@@ -101,10 +99,13 @@ class MinefieldStage(
                             )
                         actors.add(areaActor)
                     }
+                } else if (actors.size > boundAreas.size) {
+                    actors.removeRange(boundAreas.size, actors.size - 1)
                 }
             }
 
             val areaSize = gameRenderingContext.areaSize
+            val checkShape = forceRefreshVisibleAreas || forceRebind
             Gdx.graphics.isContinuousRendering = true
             actors.forEachIndexed { index, actor ->
                 val areaActor = (actor as AreaActor)
@@ -122,7 +123,7 @@ class MinefieldStage(
                     reset = resetEvents,
                     area = area,
                     field = boundAreas,
-                    checkShape = forceRefreshVisibleAreas,
+                    checkShape = checkShape,
                 )
             }
             Gdx.graphics.isContinuousRendering = false

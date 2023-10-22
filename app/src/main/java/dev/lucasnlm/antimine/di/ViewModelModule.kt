@@ -30,7 +30,7 @@ val ViewModelModule =
         viewModel { LocalizationViewModel(get(), get()) }
         viewModel {
             GameViewModel(
-                get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(),
+                get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(),
             )
         }
     }
