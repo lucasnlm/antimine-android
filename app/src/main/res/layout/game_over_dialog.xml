@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/round_background"
         android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/adFrame"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -165,16 +165,15 @@
 
     <FrameLayout
         android:id="@+id/adFrame"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/round_background"
         android:gravity="center"
         android:minHeight="50dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/dialog"
+        app:layout_constraintEnd_toEndOf="@+id/dialog"
         app:layout_constraintTop_toBottomOf="@+id/dialog" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

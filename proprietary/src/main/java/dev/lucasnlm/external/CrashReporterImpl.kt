@@ -1,7 +1,14 @@
 package dev.lucasnlm.external
 
+import android.app.Application
+import com.bugsnag.android.Bugsnag
+
 class CrashReporterImpl : CrashReporter {
     override fun sendError(message: String) {
-        // Not implemented yet.
+        // No-op
+    }
+
+    override fun start(application: Application) {
+        Bugsnag.start(application.applicationContext)
     }
 }

@@ -19,12 +19,15 @@ android {
         }
     }
 
+    buildFeatures {
+        buildConfig true
+        viewBinding true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
-    
 }
 
 dependencies {
@@ -32,6 +35,7 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':external')
+    implementation project(':i18n')
 
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
@@ -41,4 +45,10 @@ dependencies {
     // Koin
     implementation 'io.insert-koin:koin-android:3.1.2'
     testImplementation 'io.insert-koin:koin-test:3.1.2'
+
+    // Acra
+    implementation 'ch.acra:acra-core:5.11.2'
+    implementation 'ch.acra:acra-mail:5.11.2'
+    implementation 'ch.acra:acra-toast:5.11.2'
+    implementation 'ch.acra:acra-limiter:5.11.2'
 }

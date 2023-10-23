@@ -9,20 +9,15 @@ import dev.lucasnlm.antimine.core.di.CommonModule
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.di.AppModule
 import dev.lucasnlm.antimine.di.ViewModelModule
-import dev.lucasnlm.antimine.i18n.R
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.support.IapHandler
 import dev.lucasnlm.external.AdsManager
 import dev.lucasnlm.external.AnalyticsManager
+import dev.lucasnlm.external.CrashReporter
 import dev.lucasnlm.external.FeatureFlagManager
 import dev.lucasnlm.external.di.ExternalModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.acra.config.limiter
-import org.acra.config.mailSender
-import org.acra.config.toast
-import org.acra.data.StringFormat
-import org.acra.ktx.initAcra
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -35,18 +30,18 @@ open class MainApplication : MultiDexApplication() {
     private val featureFlagManager: FeatureFlagManager by inject()
     private val adsManager: AdsManager by inject()
     private val iapHandler: IapHandler by inject()
+    private val crashReporter: CrashReporter by inject()
 
     override fun onCreate() {
         super.onCreate()
         DynamicColors.applyToActivitiesIfAvailable(this)
-
-        setupAcra()
-
         stopKoin()
         startKoin {
             androidContext(applicationContext)
             modules(AppModule, CommonModule, CommonIoModule, ExternalModule, LevelModule, ViewModelModule)
         }
+
+        crashReporter.start(this)
 
         appScope.launch {
             iapHandler.start()
@@ -66,27 +61,6 @@ open class MainApplication : MultiDexApplication() {
         val lastAppVersion = preferencesRepository.lastAppVersion()
         if (lastAppVersion == null) {
             preferencesRepository.setLastAppVersion(BuildConfig.VERSION_CODE)
-        }
-    }
-
-    private fun setupAcra() {
-        initAcra {
-            buildConfigClass = BuildConfig::class.java
-            reportFormat = StringFormat.JSON
-
-            mailSender {
-                subject = "[antimine] crash report"
-                mailTo = "me@lucasnlm.dev"
-                reportFileName = "report.txt"
-            }
-
-            toast {
-                text = getString(R.string.acra_toast_text)
-            }
-
-            limiter {
-                // No changes
-            }
         }
     }
 

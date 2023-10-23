@@ -8,6 +8,9 @@
 
     <application>
         <meta-data
+            android:name="com.bugsnag.android.API_KEY"
+            android:value="BUGSNAP-KEY"/>
+        <meta-data
             android:name="com.google.android.gms.games.APP_ID"
             android:value="@string/app_id" />
         <meta-data

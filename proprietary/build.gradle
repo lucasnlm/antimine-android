@@ -40,6 +40,9 @@ dependencies {
     implementation 'com.amplitude:android-sdk:2.32.1'
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
 
+    // Bugsnag
+    implementation 'com.bugsnag:bugsnag-android:5.31.2'
+
     // Google
     implementation 'com.android.billingclient:billing-ktx:6.0.1'
     implementation 'com.google.android.gms:play-services-instantapps:18.0.1'

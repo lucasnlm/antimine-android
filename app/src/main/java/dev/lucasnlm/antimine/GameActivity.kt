@@ -569,7 +569,7 @@ class GameActivity :
             isVisible = canUseHelpNow
             text =
                 if (canRequestHelpWithAds) {
-                    "+5"
+                    "+10"
                 } else {
                     gameViewModel.getTips().toL10nString()
                 }
@@ -577,7 +577,11 @@ class GameActivity :
 
         binding.shortcutIcon.apply {
             TooltipCompat.setTooltipText(this, getString(i18n.string.help))
-            setImageResource(R.drawable.hint)
+            if (canRequestHelpWithAds) {
+                setImageResource(R.drawable.movie)
+            } else {
+                setImageResource(R.drawable.hint)
+            }
             setColorFilter(binding.minesCount.currentTextColor)
 
             if (canUseHelpNow) {
@@ -889,7 +893,7 @@ class GameActivity :
         const val START_GAME = "start_game"
         const val RETRY_GAME = "retry_game"
 
-        const val TIP_COOLDOWN_MS = 5 * 1000L
+        const val TIP_COOLDOWN_MS = 2 * 1000L
         const val MINE_COUNTER_ANIM_COUNTER_MS = 250L
         const val LOADING_INDICATOR_MS = 500L
 
