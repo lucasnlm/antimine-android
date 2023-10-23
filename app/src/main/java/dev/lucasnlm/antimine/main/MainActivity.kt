@@ -37,10 +37,12 @@ import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.antimine.stats.StatsActivity
+import dev.lucasnlm.antimine.support.IapHandler
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.external.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
@@ -63,6 +65,7 @@ class MainActivity : ThemedActivity() {
     private val preferenceRepository: PreferencesRepository by inject()
     private val soundManager: GameAudioManager by inject()
     private val gameLocaleManager: GameLocaleManager by inject()
+    private val iapHandler: IapHandler by inject()
 
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
@@ -109,7 +112,20 @@ class MainActivity : ThemedActivity() {
             handleBackPressed()
         }
 
+        listenToPurchase()
         redirectToGame()
+    }
+
+    private fun listenToPurchase() {
+        if (!preferenceRepository.isPremiumEnabled() && iapHandler.isEnabled()) {
+            lifecycleScope.launch {
+                iapHandler.listenPurchase().collect {
+                    if (it) {
+                        recreate()
+                    }
+                }
+            }
+        }
     }
 
     private fun bindMenuButtons() {

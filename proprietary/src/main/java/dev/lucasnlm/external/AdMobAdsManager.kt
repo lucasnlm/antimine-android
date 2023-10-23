@@ -190,47 +190,42 @@ class AdMobAdsManager(
 
     override fun showRewardedAd(
         activity: Activity,
-        skipIfFrequent: Boolean,
         onStart: (() -> Unit)?,
         onRewarded: (() -> Unit)?,
         onFail: (() -> Unit)?,
     ) {
-        if (skipIfFrequent && (System.currentTimeMillis() - lastShownAd < Ads.MIN_FREQUENCY)) {
-            onRewarded?.invoke()
-        } else {
-            val rewardedAd = this.rewardedAd
-            val secondRewardedAd = this.secondRewardedAd
+        val rewardedAd = this.rewardedAd
+        val secondRewardedAd = this.secondRewardedAd
 
-            when {
-                secondRewardedAd != null -> {
-                    onStart?.invoke()
-                    secondRewardedAd.show(activity) {
-                        if (!activity.isFinishing) {
-                            lastShownAd = System.currentTimeMillis()
-                            onRewarded?.invoke()
-                            scope.launch(Dispatchers.Main) {
-                                loadSecondRewardAd()
-                            }
+        when {
+            secondRewardedAd != null -> {
+                onStart?.invoke()
+                secondRewardedAd.show(activity) {
+                    if (!activity.isFinishing) {
+                        lastShownAd = System.currentTimeMillis()
+                        onRewarded?.invoke()
+                        scope.launch(Dispatchers.Main) {
+                            loadSecondRewardAd()
                         }
                     }
                 }
-                rewardedAd != null -> {
-                    onStart?.invoke()
-                    rewardedAd.show(activity) {
-                        if (!activity.isFinishing) {
-                            lastShownAd = System.currentTimeMillis()
-                            onRewarded?.invoke()
-                            scope.launch(Dispatchers.Main) {
-                                loadRewardAd()
-                            }
+            }
+            rewardedAd != null -> {
+                onStart?.invoke()
+                rewardedAd.show(activity) {
+                    if (!activity.isFinishing) {
+                        lastShownAd = System.currentTimeMillis()
+                        onRewarded?.invoke()
+                        scope.launch(Dispatchers.Main) {
+                            loadRewardAd()
                         }
                     }
                 }
-                else -> {
-                    val message = failErrorCause?.let { "Fail to load Ad\n$it" } ?: "Fail to load Ad"
-                    crashReporter.sendError(message)
-                    onFail?.invoke()
-                }
+            }
+            else -> {
+                val message = failErrorCause?.let { "Fail to load Ad\n$it" } ?: "Fail to load Ad"
+                crashReporter.sendError(message)
+                onFail?.invoke()
             }
         }
     }

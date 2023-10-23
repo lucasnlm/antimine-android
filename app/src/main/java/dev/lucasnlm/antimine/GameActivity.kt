@@ -600,7 +600,6 @@ class GameActivity :
                             val wasPlaying = gameAudioManager.isPlayingMusic()
                             adsManager.showRewardedAd(
                                 activity = this@GameActivity,
-                                skipIfFrequent = false,
                                 onStart = {
                                     if (wasPlaying) {
                                         gameAudioManager.pauseMusic()
@@ -704,22 +703,12 @@ class GameActivity :
             if (featureFlagManager.useInterstitialAd) {
                 adsManager.showInterstitialAd(
                     activity = this,
+                    onError = {
+                        lifecycleScope.launch {
+                            gameViewModel.startNewGame()
+                        }
+                    },
                     onDismiss = {
-                        lifecycleScope.launch {
-                            gameViewModel.startNewGame()
-                        }
-                    },
-                )
-            } else {
-                adsManager.showRewardedAd(
-                    activity = this,
-                    skipIfFrequent = true,
-                    onRewarded = {
-                        lifecycleScope.launch {
-                            gameViewModel.startNewGame()
-                        }
-                    },
-                    onFail = {
                         lifecycleScope.launch {
                             gameViewModel.startNewGame()
                         }

@@ -213,7 +213,6 @@ abstract class CommonGameDialogFragment : AppCompatDialogFragment() {
             if (!activity.isFinishing) {
                 adsManager.showRewardedAd(
                     activity,
-                    skipIfFrequent = false,
                     onRewarded = {
                         continueGame()
                     },
