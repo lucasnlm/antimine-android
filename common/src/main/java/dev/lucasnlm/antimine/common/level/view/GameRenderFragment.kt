@@ -123,7 +123,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                 useCompass = false
                 useGyroscope = false
                 useWakelock = false
-                useImmersiveMode = true
+                useImmersiveMode = false
                 disableAudio = true
             }
         return initializeForView(levelApplicationListener, config)
@@ -169,6 +169,18 @@ open class GameRenderFragment : AndroidFragmentApplication() {
         }
 
         lifecycleScope.launch {
+            gameViewModel
+                .observeState()
+                .distinctUntilChangedBy { it.isActive }
+                .collect { state ->
+                    val areActionsEnabled = state.isActive
+                    levelApplicationListener.setActionsEnabled(areActionsEnabled)
+                    Gdx.graphics.requestRendering()
+                    syncControlSwitcher(state.selectedAction)
+                }
+        }
+
+        lifecycleScope.launch {
             gameViewModel.observeState()
                 .map { it.seed to it.minefield }
                 .distinctUntilChanged()
@@ -182,7 +194,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
     private fun refreshState(state: GameState) {
         levelApplicationListener.bindField(state.field)
 
-        val areActionsEnabled = state.isActive && !state.isGameCompleted
+        val areActionsEnabled = state.isActive
         levelApplicationListener.setActionsEnabled(areActionsEnabled)
 
         syncControlSwitcher(state.selectedAction)

@@ -103,10 +103,6 @@ val AppModule =
                 }
 
                 override fun shouldRequestLogin(): Boolean = false
-
-                override fun signInToFirebase(activity: Activity) {
-                    // Not implemented
-                }
             }
         } bind PlayGamesManager::class
 

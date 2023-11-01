@@ -1,9 +1,14 @@
 package dev.lucasnlm.external
 
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import android.app.Application
+import com.bugsnag.android.Bugsnag
 
 class CrashReporterImpl : CrashReporter {
     override fun sendError(message: String) {
-        FirebaseCrashlytics.getInstance().recordException(Exception(message))
+        // No-op
+    }
+
+    override fun start(application: Application) {
+        Bugsnag.start(application.applicationContext)
     }
 }

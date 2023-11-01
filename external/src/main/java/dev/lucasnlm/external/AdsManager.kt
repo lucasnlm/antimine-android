@@ -11,7 +11,6 @@ interface AdsManager {
 
     fun showRewardedAd(
         activity: Activity,
-        skipIfFrequent: Boolean,
         onStart: (() -> Unit)? = null,
         onRewarded: (() -> Unit)?,
         onFail: (() -> Unit)?,

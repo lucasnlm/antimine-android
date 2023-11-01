@@ -13,6 +13,7 @@ import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.support.IapHandler
 import dev.lucasnlm.external.AdsManager
 import dev.lucasnlm.external.AnalyticsManager
+import dev.lucasnlm.external.CrashReporter
 import dev.lucasnlm.external.FeatureFlagManager
 import dev.lucasnlm.external.di.ExternalModule
 import kotlinx.coroutines.CoroutineScope
@@ -29,17 +30,18 @@ open class MainApplication : MultiDexApplication() {
     private val featureFlagManager: FeatureFlagManager by inject()
     private val adsManager: AdsManager by inject()
     private val iapHandler: IapHandler by inject()
+    private val crashReporter: CrashReporter by inject()
 
     override fun onCreate() {
         super.onCreate()
-
         DynamicColors.applyToActivitiesIfAvailable(this)
-
         stopKoin()
         startKoin {
             androidContext(applicationContext)
             modules(AppModule, CommonModule, CommonIoModule, ExternalModule, LevelModule, ViewModelModule)
         }
+
+        crashReporter.start(this)
 
         appScope.launch {
             iapHandler.start()
@@ -53,9 +55,6 @@ open class MainApplication : MultiDexApplication() {
         if (featureFlagManager.isFoss) {
             preferencesRepository.setPremiumFeatures(true)
         } else {
-            appScope.launch {
-                featureFlagManager.refresh()
-            }
             adsManager.start(this)
         }
 

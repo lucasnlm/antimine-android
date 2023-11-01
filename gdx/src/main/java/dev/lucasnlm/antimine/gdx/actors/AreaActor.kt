@@ -31,21 +31,21 @@ class AreaActor(
     inputListener: InputListener,
     var isPressed: Boolean = false,
     private var focusScale: Float = 1.0f,
-    private var pieces: Map<String, Boolean> = mapOf(),
+    private var pieces: Set<String> = setOf(),
     private val gameRenderingContext: GameRenderingContext,
 ) : Actor() {
     var area: Area? = null
 
     private var areaForm: Int? = null
 
-    private var topId: Int = -1
-    private var bottomId: Int = -1
-    private var leftId: Int = -1
-    private var rightId: Int = -1
-    private var topLeftId: Int = -1
-    private var topRightId: Int = -1
-    private var bottomLeftId: Int = -1
-    private var bottomRightId: Int = -1
+    private var topId: Int = NO_LINK
+    private var bottomId: Int = NO_LINK
+    private var leftId: Int = NO_LINK
+    private var rightId: Int = NO_LINK
+    private var topLeftId: Int = NO_LINK
+    private var topRightId: Int = NO_LINK
+    private var bottomLeftId: Int = NO_LINK
+    private var bottomRightId: Int = NO_LINK
 
     init {
         width = gameRenderingContext.areaSize
@@ -65,11 +65,9 @@ class AreaActor(
         }
 
         if (this.area != area) {
-            if (this.area?.id != area.id) {
-                x = area.posX * width
-                y = area.posY * height
-                refreshLinks(area, field)
-            }
+            x = area.posX * width
+            y = area.posY * height
+            refreshLinks(area, field)
 
             this.area = area
         }
@@ -170,17 +168,15 @@ class AreaActor(
                 )
             } else {
                 pieces.forEach { piece ->
-                    if (piece.value) {
-                        batch.drawRegion(
-                            texture = GameContext.gameTextures!!.pieces[piece.key]!!,
-                            x = x - 0.5f,
-                            y = y - 0.5f,
-                            width = width + 0.5f,
-                            height = height + 0.5f,
-                            color = coverColor,
-                            blend = false,
-                        )
-                    }
+                    batch.drawRegion(
+                        texture = GameContext.gameTextures!!.pieces[piece]!!,
+                        x = x - 0.5f,
+                        y = y - 0.5f,
+                        width = width + 0.5f,
+                        height = height + 0.5f,
+                        color = coverColor,
+                        blend = false,
+                    )
                 }
             }
         }
@@ -191,17 +187,15 @@ class AreaActor(
 
         GameContext.atlas?.let { atlas ->
             pieces.forEach { piece ->
-                if (piece.value) {
-                    batch.drawRegion(
-                        texture = atlas.findRegion(piece.key),
-                        x = x - 0.5f,
-                        y = y - 0.5f,
-                        width = width + 1.0f,
-                        height = height + 1.0f,
-                        color = coverColor,
-                        blend = false,
-                    )
-                }
+                batch.drawRegion(
+                    texture = atlas.findRegion(piece),
+                    x = x - 0.5f,
+                    y = y - 0.5f,
+                    width = width + 1.0f,
+                    height = height + 1.0f,
+                    color = coverColor,
+                    blend = false,
+                )
             }
         }
     }
@@ -384,14 +378,14 @@ class AreaActor(
             bottomLeftId = area.getNeighborIdAtPos(field, -1, -1)
             bottomRightId = area.getNeighborIdAtPos(field, 1, -1)
         } else {
-            topId = -1
-            bottomId = -1
-            leftId = -1
-            rightId = -1
-            topLeftId = -1
-            topRightId = -1
-            bottomLeftId = -1
-            bottomRightId = -1
+            topId = NO_LINK
+            bottomId = NO_LINK
+            leftId = NO_LINK
+            rightId = NO_LINK
+            topLeftId = NO_LINK
+            topRightId = NO_LINK
+            bottomLeftId = NO_LINK
+            bottomRightId = NO_LINK
         }
     }
 
@@ -419,6 +413,7 @@ class AreaActor(
         const val MIN_SCALE = 1.0f
         const val MAX_SCALE = 1.15f
         const val BASE_ICON_SCALE = 0.8f
+        const val NO_LINK = -1
 
         private fun Area.canLinkTo(area: Area): Boolean {
             return isCovered && mark.ligatureMask == area.mark.ligatureMask

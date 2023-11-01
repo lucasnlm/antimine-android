@@ -1,18 +1,28 @@
 package dev.lucasnlm.external
 
-abstract class FeatureFlagManager {
-    abstract val isGameHistoryEnabled: Boolean
-    abstract val isRateUsEnabled: Boolean
-    abstract val isGameplayAnalyticsEnabled: Boolean
-    abstract val isGameOverAdEnabled: Boolean
-    abstract val isAdsOnContinueEnabled: Boolean
-    abstract val isAdsOnNewGameEnabled: Boolean
-    abstract val useInterstitialAd: Boolean
-    abstract val isContinueGameEnabled: Boolean
-    abstract val isFoss: Boolean
-    abstract val minUsageToReview: Int
-    abstract val isBannerAdEnabled: Boolean
-    abstract val showCountdownToContinue: Boolean
+interface FeatureFlagManager {
+    /**
+     * Whether the game history feature is enabled.
+     */
+    val isGameHistoryEnabled: Boolean
 
-    abstract suspend fun refresh()
+    /**
+     * Whether the interstitial ad should be used.
+     */
+    val useInterstitialAd: Boolean
+
+    /**
+     * Whether the app is the FOSS version.
+     */
+    val isFoss: Boolean
+
+    /**
+     * Whether the banner ad should be used.
+     */
+    val isBannerAdEnabled: Boolean
+
+    /**
+     * Whether the countdown to continue should be shown.
+     */
+    val showCountdownToContinue: Boolean
 }

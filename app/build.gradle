@@ -1,6 +1,6 @@
 plugins {
     id 'com.android.application'
-    id('kotlin-android')
+    id 'kotlin-android'
 }
 
 android {
@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1705011
-        versionName '17.5.1'
+        versionCode 1705061
+        versionName '17.5.6'
         minSdk 21
         targetSdk 34
         compileSdk 34
@@ -73,8 +73,7 @@ android {
             versionNameSuffix ' S'
 
             apply plugin: 'com.google.gms.google-services'
-            apply plugin: 'com.google.firebase.crashlytics'
-            apply plugin: 'com.google.firebase.firebase-perf'
+            apply plugin: 'com.bugsnag.android.gradle'
         }
 
         googleInstant {
@@ -84,8 +83,6 @@ android {
             versionNameSuffix ' I'
 
             apply plugin: 'com.google.gms.google-services'
-            apply plugin: 'com.google.firebase.crashlytics'
-            apply plugin: 'com.google.firebase.firebase-perf'
         }
 
         foss {

@@ -29,7 +29,6 @@ import dev.lucasnlm.antimine.preferences.models.GameControl
 import dev.lucasnlm.antimine.preferences.models.Minefield
 import dev.lucasnlm.external.Achievement
 import dev.lucasnlm.external.AnalyticsManager
-import dev.lucasnlm.external.FeatureFlagManager
 import dev.lucasnlm.external.Leaderboard
 import dev.lucasnlm.external.PlayGamesManager
 import kotlinx.coroutines.Dispatchers
@@ -52,7 +51,6 @@ open class GameViewModel(
     private val analyticsManager: AnalyticsManager,
     private val playGamesManager: PlayGamesManager,
     private val tipRepository: TipRepository,
-    private val featureFlagManager: FeatureFlagManager,
     private val clockManager: ClockManager,
 ) : IntentViewModel<GameEvent, GameState>() {
     private lateinit var gameController: GameController
@@ -102,7 +100,7 @@ open class GameViewModel(
                     sendSideEffect(GameEvent.ShowNewGameDialog)
                 }
                 is GameEvent.GiveMoreTip -> {
-                    tipRepository.increaseTip(5)
+                    tipRepository.increaseTip(10)
 
                     val newState =
                         state.copy(
@@ -143,12 +141,17 @@ open class GameViewModel(
                         emit(
                             state.copy(
                                 isLoadingMap = false,
-                                selectedAction = gameController.getSelectedAction(),
+                                selectedAction =
+                                    if (initialized) {
+                                        gameController.getSelectedAction()
+                                    } else {
+                                        preferencesRepository.defaultSwitchButton()
+                                    },
                             ),
                         )
                     }
 
-                    if (!state.isGameCompleted && state.hasMines && !state.isLoadingMap) {
+                    if (initialized && !state.isGameCompleted && state.hasMines && !state.isLoadingMap) {
                         if (
                             !gameController.isGameOver() &&
                             !gameController.isVictory() &&
@@ -517,7 +520,6 @@ open class GameViewModel(
             .longPress(index)
             .filterNotNull()
             .collect { actionCompleted ->
-                onFeedbackAnalytics(actionCompleted.action, index)
                 onPostAction()
                 playActionSound(actionCompleted)
                 refreshField()
@@ -537,7 +539,6 @@ open class GameViewModel(
             .doubleClick(index)
             .filterNotNull()
             .collect { actionCompleted ->
-                onFeedbackAnalytics(actionCompleted.action, index)
                 onPostAction()
                 playActionSound(actionCompleted)
                 refreshField()
@@ -553,7 +554,6 @@ open class GameViewModel(
             .singleClick(index)
             .filterNotNull()
             .collect { actionCompleted ->
-                onFeedbackAnalytics(actionCompleted.action, index)
                 onPostAction()
                 playActionSound(actionCompleted)
                 refreshField()
@@ -588,31 +588,6 @@ open class GameViewModel(
         }
 
         updateGameState()
-    }
-
-    private fun onFeedbackAnalytics(
-        action: Action,
-        index: Int,
-    ) {
-        if (featureFlagManager.isGameplayAnalyticsEnabled) {
-            when (action) {
-                Action.OpenTile -> {
-                    analyticsManager.sentEvent(Analytics.OpenTile(index))
-                }
-                Action.SwitchMark -> {
-                    analyticsManager.sentEvent(Analytics.SwitchMark(index))
-                }
-                Action.OpenNeighbors -> {
-                    analyticsManager.sentEvent(Analytics.OpenNeighbors(index))
-                }
-                Action.OpenOrMark -> {
-                    analyticsManager.sentEvent(Analytics.OpenOrFlagTile(index))
-                }
-                Action.QuestionMark -> {
-                    analyticsManager.sentEvent(Analytics.QuestionMark(index))
-                }
-            }
-        }
     }
 
     private fun updateGameState() {

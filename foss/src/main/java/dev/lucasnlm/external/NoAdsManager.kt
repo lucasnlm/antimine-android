@@ -9,7 +9,6 @@ class NoAdsManager : AdsManager {
 
     override fun showRewardedAd(
         activity: Activity,
-        skipIfFrequent: Boolean,
         onStart: (() -> Unit)?,
         onRewarded: (() -> Unit)?,
         onFail: (() -> Unit)?,

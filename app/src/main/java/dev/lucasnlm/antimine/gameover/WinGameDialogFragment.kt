@@ -105,15 +105,14 @@ class WinGameDialogFragment : CommonGameDialogFragment() {
                         }
 
                         newGame.setOnClickListener {
-                            if (featureFlagManager.isAdsOnContinueEnabled && !isPremiumEnabled) {
+                            if (!isPremiumEnabled) {
                                 showAdsAndContinue()
                             } else {
                                 continueGame()
                             }
                         }
 
-                        if (!isPremiumEnabled && featureFlagManager.isAdsOnContinueEnabled
-                        ) {
+                        if (!isPremiumEnabled) {
                             newGame.compoundDrawablePadding = 0
                             newGame.setCompoundDrawablesWithIntrinsicBounds(
                                 R.drawable.watch_ads_icon,
@@ -143,10 +142,7 @@ class WinGameDialogFragment : CommonGameDialogFragment() {
                             stats.isVisible = true
                         }
 
-                        if (!isPremiumEnabled &&
-                            !isInstantMode &&
-                            featureFlagManager.isGameOverAdEnabled
-                        ) {
+                        if (!isPremiumEnabled && !isInstantMode) {
                             activity?.let { activity ->
                                 val label = context.getString(i18n.string.remove_ad)
                                 val price = billingManager.getPrice()?.price

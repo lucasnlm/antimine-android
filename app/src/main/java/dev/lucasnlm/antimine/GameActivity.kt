@@ -569,7 +569,7 @@ class GameActivity :
             isVisible = canUseHelpNow
             text =
                 if (canRequestHelpWithAds) {
-                    "+5"
+                    "+10"
                 } else {
                     gameViewModel.getTips().toL10nString()
                 }
@@ -577,7 +577,11 @@ class GameActivity :
 
         binding.shortcutIcon.apply {
             TooltipCompat.setTooltipText(this, getString(i18n.string.help))
-            setImageResource(R.drawable.hint)
+            if (canRequestHelpWithAds) {
+                setImageResource(R.drawable.movie)
+            } else {
+                setImageResource(R.drawable.hint)
+            }
             setColorFilter(binding.minesCount.currentTextColor)
 
             if (canUseHelpNow) {
@@ -596,7 +600,6 @@ class GameActivity :
                             val wasPlaying = gameAudioManager.isPlayingMusic()
                             adsManager.showRewardedAd(
                                 activity = this@GameActivity,
-                                skipIfFrequent = false,
                                 onStart = {
                                     if (wasPlaying) {
                                         gameAudioManager.pauseMusic()
@@ -696,26 +699,16 @@ class GameActivity :
     }
 
     private fun startNewGameWithAds() {
-        if (!preferencesRepository.isPremiumEnabled() && featureFlagManager.isAdsOnNewGameEnabled) {
+        if (!preferencesRepository.isPremiumEnabled()) {
             if (featureFlagManager.useInterstitialAd) {
                 adsManager.showInterstitialAd(
                     activity = this,
+                    onError = {
+                        lifecycleScope.launch {
+                            gameViewModel.startNewGame()
+                        }
+                    },
                     onDismiss = {
-                        lifecycleScope.launch {
-                            gameViewModel.startNewGame()
-                        }
-                    },
-                )
-            } else {
-                adsManager.showRewardedAd(
-                    activity = this,
-                    skipIfFrequent = true,
-                    onRewarded = {
-                        lifecycleScope.launch {
-                            gameViewModel.startNewGame()
-                        }
-                    },
-                    onFail = {
                         lifecycleScope.launch {
                             gameViewModel.startNewGame()
                         }
@@ -769,7 +762,7 @@ class GameActivity :
         if (!instantAppManager.isEnabled(applicationContext)) {
             preferencesRepository.incrementUseCount()
 
-            if (preferencesRepository.getUseCount() > featureFlagManager.minUsageToReview) {
+            if (preferencesRepository.getUseCount() > MIN_USAGE_TO_REVIEW) {
                 reviewWrapper.startInAppReview(this)
             }
         }
@@ -889,7 +882,7 @@ class GameActivity :
         const val START_GAME = "start_game"
         const val RETRY_GAME = "retry_game"
 
-        const val TIP_COOLDOWN_MS = 5 * 1000L
+        const val TIP_COOLDOWN_MS = 2 * 1000L
         const val MINE_COUNTER_ANIM_COUNTER_MS = 250L
         const val LOADING_INDICATOR_MS = 500L
 
@@ -897,7 +890,7 @@ class GameActivity :
         val CONFETTI_COLORS = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def)
         val CONFETTI_POSITION = Position.Relative(0.5, 0.2)
 
-        const val TOAST_OFFSET_Y_DP = 128
+        const val MIN_USAGE_TO_REVIEW = 2
 
         const val ENABLED_SHORTCUT_ALPHA = 1.0f
         const val DISABLED_SHORTCUT_ALPHA = 0.3f

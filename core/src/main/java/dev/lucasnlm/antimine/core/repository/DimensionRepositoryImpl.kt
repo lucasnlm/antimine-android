@@ -28,7 +28,7 @@ class DimensionRepositoryImpl(
     }
 
     override fun areaSize(): Float {
-        return context.resources.getDimension(R.dimen.field_size)
+        return displaySize().width / 11.0f
     }
 
     override fun areaSeparator(): Float {

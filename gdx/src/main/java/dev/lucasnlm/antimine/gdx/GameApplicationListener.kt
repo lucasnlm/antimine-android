@@ -123,6 +123,7 @@ class GameApplicationListener(
         }
 
         Gdx.input.inputProcessor = InputMultiplexer(GestureDetector(minefieldInputController), minefieldStage)
+        minefieldStage.setZoom(GameContext.zoom)
     }
 
     override fun dispose() {
@@ -142,7 +143,6 @@ class GameApplicationListener(
     fun onPause() {
         GameContext.run {
             zoom = 1.0f
-            minefieldStage.setZoom(1.0f)
         }
     }
 

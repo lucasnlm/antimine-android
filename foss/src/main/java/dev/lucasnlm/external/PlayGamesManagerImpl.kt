@@ -68,8 +68,4 @@ class PlayGamesManagerImpl(
     override fun shouldRequestLogin(): Boolean {
         return false
     }
-
-    override fun signInToFirebase(activity: Activity) {
-        // F-droid build doesn't have Google Play Games
-    }
 }
