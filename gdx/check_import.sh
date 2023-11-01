@@ -14,9 +14,7 @@ fi
 
 # Check if the file contains the string in an unique line
 if grep -xq "preBuild.dependsOn copyAndroidNatives" "$1"; then
-  echo "achou"
   exit 0
 else
-  echo "n achou"
   exit 1
 fi
