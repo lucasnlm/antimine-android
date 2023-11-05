@@ -119,12 +119,10 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
             setView(createView())
             setNegativeButton(i18n.string.cancel, null)
             setPositiveButton(i18n.string.start) { _, _ ->
-                if (checkLimitFeedbacks()) {
-                    val minefield = getSelectedMinefield()
-                    preferencesRepository.setCompleteTutorial(true)
-                    createGameViewModel.sendEvent(CustomEvent.UpdateCustomGameEvent(minefield))
-                    gameViewModel.sendEvent(MainEvent.StartNewGameEvent(Difficulty.Custom))
-                }
+                val minefield = getSelectedMinefield()
+                preferencesRepository.setCompleteTutorial(true)
+                createGameViewModel.sendEvent(CustomEvent.UpdateCustomGameEvent(minefield))
+                gameViewModel.sendEvent(MainEvent.StartNewGameEvent(Difficulty.Custom))
             }
         }.create()
     }

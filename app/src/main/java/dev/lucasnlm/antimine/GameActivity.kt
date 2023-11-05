@@ -377,8 +377,11 @@ class GameActivity :
                     }
                     is GameEvent.VictoryDialog -> {
                         if (preferencesRepository.showWindowsWhenFinishGame()) {
-                            withContext(Dispatchers.Main) {
-                                showKonfettiView()
+                            val duration = gameViewModel.singleState().duration
+                            if (duration > 5) {
+                                withContext(Dispatchers.Main) {
+                                    showKonfettiView()
+                                }
                             }
 
                             lifecycleScope.launch {
