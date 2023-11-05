@@ -22,10 +22,10 @@ android {
     signingConfigs {
         release {
             if (System.getenv('IS_RELEASE_BUILD')) {
-                storeFile file(System.getenv('KEYSTORE'))
-                keyAlias System.getenv('KEY_ALIAS')
-                storePassword System.getenv('KEY_STORE_PASSWORD')
-                keyPassword System.getenv('KEY_PASSWORD')
+                storeFile file('./keystore')
+                keyAlias System.getenv('BITRISEIO_ANDROID_KEYSTORE_ALIAS')
+                storePassword System.getenv('BITRISEIO_ANDROID_KEYSTORE_PASSWORD')
+                keyPassword System.getenv('BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD')
             }
         }
     }
