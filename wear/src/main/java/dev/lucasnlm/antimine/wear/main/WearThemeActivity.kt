@@ -29,7 +29,7 @@ class WearThemeActivity : ThemedActivity() {
             layoutManager = LinearLayoutManager(this@WearThemeActivity)
             adapter =
                 ThemeListAdapter(
-                    themes = themesRepository.getAllThemes(),
+                    themes = themesRepository.getAllDarkThemes(),
                     preferencesRepository = preferencesRepository,
                     onSelectTheme = { theme ->
                         preferencesRepository.useTheme(theme.id)

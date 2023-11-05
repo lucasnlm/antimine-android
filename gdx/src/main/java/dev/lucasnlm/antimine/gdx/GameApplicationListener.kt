@@ -189,6 +189,10 @@ class GameApplicationListener(
         minefieldStage.setZoom(GameContext.zoom)
     }
 
+    fun onScroll(delta: Float) {
+        minefieldStage.scaleZoom(delta)
+    }
+
     fun refreshSettings() {
         actionSettings =
             with(preferencesRepository) {

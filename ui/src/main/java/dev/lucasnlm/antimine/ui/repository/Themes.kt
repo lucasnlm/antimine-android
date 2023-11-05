@@ -34,7 +34,7 @@ object Themes {
             isDarkTheme = false,
         )
 
-    private fun darkTheme() =
+    fun darkTheme() =
         AppTheme(
             id = 3L,
             theme = R.style.CustomDarkTheme,

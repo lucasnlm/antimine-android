@@ -3,8 +3,6 @@ package dev.lucasnlm.antimine.core.di
 import android.view.ViewConfiguration
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.audio.GameAudioManagerImpl
-import dev.lucasnlm.antimine.core.repository.DimensionRepository
-import dev.lucasnlm.antimine.core.repository.DimensionRepositoryImpl
 import dev.lucasnlm.antimine.preferences.PreferencesManager
 import dev.lucasnlm.antimine.preferences.PreferencesManagerImpl
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
@@ -17,8 +15,6 @@ import org.koin.dsl.module
 val CommonModule =
     module {
         single { PreferencesManagerImpl(get()) } bind PreferencesManager::class
-
-        single { DimensionRepositoryImpl(get()) } bind DimensionRepository::class
 
         single {
             PreferencesRepositoryImpl(

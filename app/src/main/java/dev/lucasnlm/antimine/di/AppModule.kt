@@ -8,6 +8,8 @@ import dev.lucasnlm.antimine.core.analytics.ProdAnalyticsManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManager
 import dev.lucasnlm.antimine.core.haptic.HapticFeedbackManagerImpl
+import dev.lucasnlm.antimine.core.repository.DimensionRepository
+import dev.lucasnlm.antimine.core.repository.DimensionRepositoryImpl
 import dev.lucasnlm.antimine.l10n.GameLocaleManager
 import dev.lucasnlm.antimine.l10n.GameLocaleManagerImpl
 import dev.lucasnlm.antimine.support.AppVersionManagerImpl
@@ -24,6 +26,8 @@ import org.koin.dsl.module
 val AppModule =
     module {
         factory { CoroutineScope(Dispatchers.Main + SupervisorJob()) }
+
+        single { DimensionRepositoryImpl(get()) } bind DimensionRepository::class
 
         single { IapHandler(get(), get(), get()) }
 

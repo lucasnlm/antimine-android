@@ -2,7 +2,9 @@ package dev.lucasnlm.antimine.wear.main
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import androidx.wear.widget.WearableLinearLayoutManager
+import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
@@ -12,15 +14,25 @@ import dev.lucasnlm.antimine.wear.game.WearGameActivity
 import dev.lucasnlm.antimine.wear.main.models.MenuItem
 import dev.lucasnlm.antimine.wear.main.view.MainMenuAdapter
 import dev.lucasnlm.antimine.wear.tutorial.WearTutorialActivity
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import dev.lucasnlm.antimine.i18n.R as i18n
 
 class MainActivity : ThemedActivity() {
     private lateinit var binding: ActivityMainBinding
     private val preferencesRepository: PreferencesRepository by inject()
+    private val savesRepository: SavesRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (!preferencesRepository.showContinueGame()) {
+            lifecycleScope.launch {
+                savesRepository.fetchCurrentSave()?.let {
+                    preferencesRepository.setContinueGameLabel(true)
+                }
+            }
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

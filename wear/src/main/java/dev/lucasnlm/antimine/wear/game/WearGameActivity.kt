@@ -8,6 +8,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.addCallback
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
@@ -31,10 +32,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import dev.lucasnlm.antimine.i18n.R as i18n
 
 class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks {
-    private lateinit var binding: ActivityGameBinding
-
     private val gameViewModel by viewModel<GameViewModel>()
     private val preferencesRepository: PreferencesRepositoryImpl by inject()
+
+    private val binding: ActivityGameBinding by lazy {
+        ActivityGameBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +46,6 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
             finish()
         }
 
-        binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         loadGameFragment()
@@ -224,9 +226,10 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
                                 gameViewModel.startNewGame()
                             }
                         }
-                        binding.newGame.isVisible = true
+                        binding.newGame.isGone = false
                     } else {
-                        binding.newGame.isVisible = false
+                        binding.newGame.setOnClickListener(null)
+                        binding.newGame.isGone = true
                     }
 
                     keepScreenOn(it.isActive)

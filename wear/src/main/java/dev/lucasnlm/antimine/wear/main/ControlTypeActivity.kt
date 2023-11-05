@@ -47,11 +47,6 @@ class ControlTypeActivity : ThemedActivity() {
                     secondaryAction = i18n.string.double_click,
                     controlStyle = ControlStyle.DoubleClick,
                 ),
-                ControlTypeItem(
-                    id = 4,
-                    primaryAction = i18n.string.switch_control_desc,
-                    controlStyle = ControlStyle.SwitchMarkOpen,
-                ),
             )
 
         binding.recyclerView.apply {

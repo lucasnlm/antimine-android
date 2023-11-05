@@ -10,7 +10,7 @@ val ViewModelModule =
         viewModel { ControlViewModel(get(), get()) }
         viewModel {
             GameViewModel(
-                get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(),
+                get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get(),
             )
         }
     }

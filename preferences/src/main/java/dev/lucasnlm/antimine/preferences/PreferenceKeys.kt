@@ -4,7 +4,6 @@ object PreferenceKeys {
     const val PREFERENCE_VIBRATION = "preference_vibration"
     const val PREFERENCE_VIBRATION_LEVEL = "preference_vibration_level"
     const val PREFERENCE_ASSISTANT = "preference_assistant"
-    const val PREFERENCE_ANIMATION = "preference_animation"
     const val PREFERENCE_QUESTION_MARK = "preference_use_question_mark"
     const val PREFERENCE_USE_HINT = "preference_use_help"
     const val PREFERENCE_LAST_HELP_USED = "preference_last_help_used"
@@ -49,4 +48,5 @@ object PreferenceKeys {
     const val PREFERENCE_REQUEST_PLAY_GAMES = "preference_play_games"
     const val PREFERENCE_LAST_VERSION = "preference_last_version"
     const val PREFERENCE_DEFAULT_SWITCH_BUTTON = "preference_default_switch_button"
+    const val PREFERENCE_USE_IMMERSIVE_MODE = "preference_use_immersive_mode"
 }

@@ -40,7 +40,13 @@ class ThemeRepositoryImpl(
         return getCustomTheme() ?: getDefaultTheme()
     }
 
-    override fun getAllThemes(): List<AppTheme> = listOf(buildSystemTheme()) + Themes.getAllCustom()
+    override fun getAllThemes(): List<AppTheme> {
+        return listOf(buildSystemTheme()) + Themes.getAllCustom()
+    }
+
+    override fun getAllDarkThemes(): List<AppTheme> {
+        return getAllThemes().filter { it.isDarkTheme }
+    }
 
     override fun getAllSkins(): List<AppSkin> {
         return Skins.getAllSkins()

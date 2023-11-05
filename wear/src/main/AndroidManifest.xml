@@ -25,7 +25,7 @@
         android:localeConfig="@xml/locales_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/CustomDarkTheme">
         <uses-library
             android:name="com.google.android.wearable"
             android:required="true" />
@@ -35,14 +35,20 @@
             android:value="true" />
 
         <activity
-            android:name=".main.MainActivity"
+            android:name=".main.StartActivity"
             android:windowSwipeToDismiss="true"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.App.Wear.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".main.MainActivity"
+            android:windowSwipeToDismiss="true"
+            android:exported="true"/>
 
         <activity
             android:name=".game.WearGameActivity"

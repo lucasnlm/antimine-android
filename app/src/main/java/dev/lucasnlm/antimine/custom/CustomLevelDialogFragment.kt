@@ -5,8 +5,12 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputEditText
+import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.custom.viewmodel.CreateGameViewModel
 import dev.lucasnlm.antimine.custom.viewmodel.CustomEvent
@@ -47,10 +51,66 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
                 mapHeight.setText(state.height.toString())
                 mapMines.setText(state.mines.toString())
                 seed.setText("")
+
+                mapWidth.checkLimit(MIN_WIDTH, MAX_WIDTH)
+                mapHeight.checkLimit(MIN_HEIGHT, MAX_HEIGHT)
+                mapMines.checkProportionOnChange()
             }
         }
 
         return binding.root
+    }
+
+    private fun TextInputEditText.checkProportion() {
+        val width = binding.mapWidth.text.toString().toIntOrNull()
+        val height = binding.mapHeight.text.toString().toIntOrNull()
+        val current = text.toString().toIntOrNull()
+        error =
+            if (current != null && width != null && height != null) {
+                val minMines = (width * height * 0.5 - MIN_SAFE_AREA).toInt().coerceAtLeast(1)
+                if (current <= minMines) {
+                    null
+                } else {
+                    val maxProportion = width * height * 0.75
+                    if (current >= maxProportion) {
+                        getString(i18n.string.proportion_too_high)
+                    } else {
+                        null
+                    }
+                }
+            } else {
+                null
+            }
+    }
+
+    private fun TextInputEditText.checkProportionOnChange() {
+        doAfterTextChanged {
+            checkProportion()
+        }
+    }
+
+    private fun TextInputEditText.checkLimit(
+        min: Int,
+        max: Int,
+    ) {
+        doAfterTextChanged {
+            if (it?.isNotBlank() == true) {
+                val current = text.toString().toIntOrNull()
+                if (current != null) {
+                    if (current > max) {
+                        error = getString(i18n.string.value_limit_max, max)
+                    } else if (current < min) {
+                        error = getString(i18n.string.value_limit_min, min)
+                    }
+                } else {
+                    error = null
+                }
+            } else {
+                error = null
+            }
+
+            binding.mapMines.checkProportion()
+        }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -59,12 +119,64 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
             setView(createView())
             setNegativeButton(i18n.string.cancel, null)
             setPositiveButton(i18n.string.start) { _, _ ->
-                val minefield = getSelectedMinefield()
-                preferencesRepository.setCompleteTutorial(true)
-                createGameViewModel.sendEvent(CustomEvent.UpdateCustomGameEvent(minefield))
-                gameViewModel.sendEvent(MainEvent.StartNewGameEvent(Difficulty.Custom))
+                if (checkLimitFeedbacks()) {
+                    val minefield = getSelectedMinefield()
+                    preferencesRepository.setCompleteTutorial(true)
+                    createGameViewModel.sendEvent(CustomEvent.UpdateCustomGameEvent(minefield))
+                    gameViewModel.sendEvent(MainEvent.StartNewGameEvent(Difficulty.Custom))
+                }
             }
         }.create()
+    }
+
+    private fun checkLimitFeedbacks(): Boolean {
+        val wantedWidth = binding.mapWidth.text.toString().toIntOrNull()
+        var allValid = true
+        if (wantedWidth == null) {
+            binding.mapWidth.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+            allValid = false
+        } else if (wantedWidth >= MAX_WIDTH) {
+            binding.mapWidth.setText(MAX_WIDTH.toString())
+            binding.mapWidth.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+            allValid = false
+        } else if (wantedWidth <= MIN_WIDTH) {
+            binding.mapWidth.setText(MIN_WIDTH.toString())
+            binding.mapWidth.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+            allValid = false
+        }
+
+        val wantedHeight = binding.mapHeight.text.toString().toIntOrNull()
+        if (wantedHeight == null) {
+            binding.mapHeight.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+            allValid = false
+        } else if (wantedHeight >= MAX_HEIGHT) {
+            binding.mapHeight.setText(MAX_HEIGHT.toString())
+            binding.mapHeight.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+            allValid = false
+        } else if (wantedHeight <= MIN_HEIGHT) {
+            binding.mapHeight.setText(MIN_HEIGHT.toString())
+            binding.mapHeight.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+            allValid = false
+        }
+
+        if (allValid && wantedWidth != null && wantedHeight != null) {
+            val wantedMines = binding.mapMines.text.toString().toIntOrNull()
+            val maxMines = wantedWidth * wantedHeight - MIN_SAFE_AREA
+            if (wantedMines == null) {
+                binding.mapMines.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+                allValid = false
+            } else if (wantedMines >= maxMines) {
+                binding.mapMines.setText((wantedWidth * wantedHeight - MIN_SAFE_AREA).toString())
+                binding.mapMines.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+                allValid = false
+            } else if (wantedMines <= MIN_MINES) {
+                binding.mapMines.setText(MIN_MINES.toString())
+                binding.mapMines.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
+                allValid = false
+            }
+        }
+
+        return allValid
     }
 
     override fun onDismiss(dialog: DialogInterface) {
@@ -79,8 +191,8 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
         const val MIN_HEIGHT = 5
         const val MIN_MINES = 3
         const val MIN_SAFE_AREA = 9
-        const val MAX_WIDTH = 50
-        const val MAX_HEIGHT = 50
+        const val MAX_WIDTH = 100
+        const val MAX_HEIGHT = 100
 
         private fun filterInput(
             target: String,

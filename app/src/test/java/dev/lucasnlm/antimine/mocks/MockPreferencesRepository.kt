@@ -156,12 +156,6 @@ class MockPreferencesRepository : PreferencesRepository {
         // Not implemented
     }
 
-    override fun useAnimations(): Boolean = false
-
-    override fun setAnimations(enabled: Boolean) {
-        // Not implemented
-    }
-
     override fun useQuestionMark(): Boolean = false
 
     override fun setQuestionMark(value: Boolean) {
@@ -301,6 +295,14 @@ class MockPreferencesRepository : PreferencesRepository {
     override fun defaultSwitchButton(): Action = Action.SwitchMark
 
     override fun setDefaultSwitchButton(action: Action) {
+        // Not implemented
+    }
+
+    override fun useImmersiveMode(): Boolean {
+        return false
+    }
+
+    override fun setImmersiveMode(enabled: Boolean) {
         // Not implemented
     }
 }
