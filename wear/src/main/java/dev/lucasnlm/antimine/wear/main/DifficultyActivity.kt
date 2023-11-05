@@ -13,12 +13,12 @@ import dev.lucasnlm.antimine.wear.main.view.MainMenuAdapter
 import dev.lucasnlm.antimine.i18n.R as i18n
 
 class DifficultyActivity : ThemedActivity() {
-    private lateinit var binding: ActivityDifficultyBinding
+    private val binding: ActivityDifficultyBinding by lazy {
+        ActivityDifficultyBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityDifficultyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val difficultyList =

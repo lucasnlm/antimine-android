@@ -19,9 +19,11 @@ import org.koin.android.ext.android.inject
 import dev.lucasnlm.antimine.i18n.R as i18n
 
 class MainActivity : ThemedActivity() {
-    private lateinit var binding: ActivityMainBinding
     private val preferencesRepository: PreferencesRepository by inject()
     private val savesRepository: SavesRepository by inject()
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +36,6 @@ class MainActivity : ThemedActivity() {
             }
         }
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val menuList =

@@ -9,6 +9,7 @@ import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.repository.Skins
 import dev.lucasnlm.antimine.ui.repository.ThemeRepository
+import dev.lucasnlm.antimine.ui.repository.Themes.darkTheme
 import dev.lucasnlm.antimine.ui.repository.Themes.lightTheme
 import io.mockk.mockk
 import org.koin.dsl.bind
@@ -33,6 +34,8 @@ val TestCommonModule =
                 override fun getTheme(): AppTheme = lightTheme()
 
                 override fun getAllThemes(): List<AppTheme> = listOf(lightTheme())
+
+                override fun getAllDarkThemes(): List<AppTheme> = listOf(darkTheme())
 
                 override fun getAllSkins(): List<AppSkin> = Skins.getAllSkins()
 

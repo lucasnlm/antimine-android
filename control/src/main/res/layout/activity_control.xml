@@ -128,6 +128,9 @@
                             android:valueFrom="0"
                             android:valueTo="15"
                             app:tickVisible="false"
+                            app:trackHeight="24dp"
+                            app:thumbElevation="0dp"
+                            app:thumbColor="?colorOnPrimary"
                             app:trackColorInactive="?colorOnSurfaceVariant" />
                     </LinearLayout>
 
@@ -155,6 +158,9 @@
                             android:valueFrom="0"
                             android:valueTo="200"
                             app:tickVisible="false"
+                            app:trackHeight="24dp"
+                            app:thumbElevation="0dp"
+                            app:thumbColor="?colorOnPrimary"
                             app:trackColorInactive="?colorOnSurfaceVariant" />
                     </LinearLayout>
 
@@ -181,6 +187,9 @@
                             android:valueFrom="0"
                             android:valueTo="2000"
                             app:tickVisible="false"
+                            app:trackHeight="24dp"
+                            app:thumbElevation="0dp"
+                            app:thumbColor="?colorOnPrimary"
                             app:trackColorInactive="?colorOnSurfaceVariant" />
                     </LinearLayout>
 
@@ -206,7 +215,10 @@
                             android:value="250"
                             android:valueFrom="100"
                             android:valueTo="700"
+                            app:trackHeight="24dp"
                             app:tickVisible="false"
+                            app:thumbElevation="0dp"
+                            app:thumbColor="?colorOnPrimary"
                             app:trackColorInactive="?colorOnSurfaceVariant" />
                     </LinearLayout>
                 </LinearLayout>

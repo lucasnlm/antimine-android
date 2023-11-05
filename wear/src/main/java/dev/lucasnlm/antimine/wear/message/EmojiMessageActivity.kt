@@ -15,7 +15,9 @@ abstract class EmojiMessageActivity : ThemedActivity() {
     @get:DrawableRes
     abstract val emojiRes: Int
 
-    private lateinit var binding: ActivityGameOverBinding
+    private val binding: ActivityGameOverBinding by lazy {
+        ActivityGameOverBinding.inflate(layoutInflater)
+    }
 
     private fun newGame() {
         val context = application.applicationContext
@@ -29,8 +31,6 @@ abstract class EmojiMessageActivity : ThemedActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityGameOverBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.image.setImageResource(emojiRes)
