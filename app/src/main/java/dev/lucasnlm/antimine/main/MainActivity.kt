@@ -22,6 +22,7 @@ import dev.lucasnlm.antimine.common.io.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.control.ControlActivity
+import dev.lucasnlm.antimine.core.ActivityExt.compatOverridePendingTransition
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty

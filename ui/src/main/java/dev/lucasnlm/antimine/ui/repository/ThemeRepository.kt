@@ -12,6 +12,8 @@ interface ThemeRepository {
 
     fun getAllThemes(): List<AppTheme>
 
+    fun getAllDarkThemes(): List<AppTheme>
+
     fun getAllSkins(): List<AppSkin>
 
     fun setTheme(themeId: Long)

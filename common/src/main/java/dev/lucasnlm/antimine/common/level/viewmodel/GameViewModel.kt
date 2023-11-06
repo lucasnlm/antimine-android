@@ -228,7 +228,7 @@ open class GameViewModel(
                                 newState = newState.copy(field = gameController.field())
                                 val sideEffect =
                                     GameEvent.GameOverDialog(
-                                        delayToShow = explosionDelay(),
+                                        delayToShow = EXPLOSION_DELAY_MS,
                                         totalMines = gameController.mines().count(),
                                         rightMines = gameController.mines().count { it.mark.isNotNone() },
                                         timestamp = state.duration,
@@ -659,8 +659,6 @@ open class GameViewModel(
         }
     }
 
-    private fun explosionDelay() = if (preferencesRepository.useAnimations()) EXPLOSION_DELAY else 0L
-
     fun hasUnknownMines(): Boolean {
         return !gameController.hasIsolatedAllMines() && gameController.remainingMines() > 1
     }
@@ -961,7 +959,7 @@ open class GameViewModel(
     }
 
     companion object {
-        const val EXPLOSION_DELAY = 400L
+        const val EXPLOSION_DELAY_MS = 1000L
         const val THIRTY_SECONDS_ACHIEVEMENT = 30L
         const val MIN_REWARD_GAME_SECONDS = 10L
         const val REWARD_RATIO_WITH_MISTAKES = 0.025

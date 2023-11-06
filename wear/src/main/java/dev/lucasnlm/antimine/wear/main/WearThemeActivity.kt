@@ -10,16 +10,15 @@ import dev.lucasnlm.antimine.wear.main.view.ThemeListAdapter
 import org.koin.android.ext.android.inject
 
 class WearThemeActivity : ThemedActivity() {
-    private lateinit var binding: ActivityThemesBinding
     private val preferencesRepository: PreferencesRepository by inject()
     private val themesRepository: ThemeRepository by inject()
+    private val binding: ActivityThemesBinding by lazy {
+        ActivityThemesBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityThemesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         refreshThemeList()
     }
 
@@ -29,7 +28,7 @@ class WearThemeActivity : ThemedActivity() {
             layoutManager = LinearLayoutManager(this@WearThemeActivity)
             adapter =
                 ThemeListAdapter(
-                    themes = themesRepository.getAllThemes(),
+                    themes = themesRepository.getAllDarkThemes(),
                     preferencesRepository = preferencesRepository,
                     onSelectTheme = { theme ->
                         preferencesRepository.useTheme(theme.id)

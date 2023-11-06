@@ -24,7 +24,6 @@ class PreferencesRepositoryImpl(
     private val listOfSettingsCustoms =
         listOf(
             PreferenceKeys.PREFERENCE_ASSISTANT,
-            PreferenceKeys.PREFERENCE_ANIMATION,
             PreferenceKeys.PREFERENCE_QUESTION_MARK,
             PreferenceKeys.PREFERENCE_USE_HINT,
             PreferenceKeys.PREFERENCE_SOUND_EFFECTS,
@@ -107,14 +106,6 @@ class PreferencesRepositoryImpl(
 
     override fun resetHapticFeedbackLevel() {
         preferencesManager.removeKey(PreferenceKeys.PREFERENCE_VIBRATION_LEVEL)
-    }
-
-    override fun useAnimations(): Boolean {
-        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_ANIMATION, true)
-    }
-
-    override fun setAnimations(enabled: Boolean) {
-        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_ANIMATION, enabled)
     }
 
     override fun useQuestionMark(): Boolean =
@@ -493,5 +484,13 @@ class PreferencesRepositoryImpl(
 
     override fun setDefaultSwitchButton(action: Action) {
         preferencesManager.putInt(PreferenceKeys.PREFERENCE_DEFAULT_SWITCH_BUTTON, action.ordinal)
+    }
+
+    override fun useImmersiveMode(): Boolean {
+        return preferencesManager.getBoolean(PreferenceKeys.PREFERENCE_USE_IMMERSIVE_MODE, false)
+    }
+
+    override fun setImmersiveMode(enabled: Boolean) {
+        preferencesManager.putBoolean(PreferenceKeys.PREFERENCE_USE_IMMERSIVE_MODE, enabled)
     }
 }

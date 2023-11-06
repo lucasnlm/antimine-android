@@ -129,10 +129,6 @@ interface PreferencesRepository {
 
     fun resetHapticFeedbackLevel()
 
-    fun useAnimations(): Boolean
-
-    fun setAnimations(enabled: Boolean)
-
     fun useQuestionMark(): Boolean
 
     fun setQuestionMark(value: Boolean)
@@ -200,4 +196,8 @@ interface PreferencesRepository {
     fun defaultSwitchButton(): Action
 
     fun setDefaultSwitchButton(action: Action)
+
+    fun useImmersiveMode(): Boolean
+
+    fun setImmersiveMode(enabled: Boolean)
 }

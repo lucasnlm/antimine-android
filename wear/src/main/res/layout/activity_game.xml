@@ -77,6 +77,7 @@
         android:gravity="center"
         app:icon="@drawable/refresh"
         app:iconPadding="0dp"
+        app:backgroundTint="?colorError"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -115,17 +116,18 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/close"
-        android:layout_width="16dp"
+        android:layout_width="24dp"
         android:layout_height="match_parent"
-        android:background="?colorPrimary"
+        android:background="?colorError"
         android:contentDescription="@string/close"
         android:foreground="?selectableItemBackgroundBorderless"
         android:gravity="center"
         android:padding="0dp"
         android:scaleType="centerInside"
+        android:alpha="0.7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/close"
-        app:tint="?colorOnPrimary" />
+        app:tint="?colorOnError" />
 </androidx.constraintlayout.widget.ConstraintLayout>

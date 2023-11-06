@@ -7,24 +7,24 @@
     tools:context=".tutorial.WearTutorialActivity"
     tools:deviceIds="wear">
 
-    <androidx.wear.widget.BoxInsetLayout
-        android:id="@+id/boxInset"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
-        android:scrollbars="vertical"
-        android:padding="16dp"
-        app:layout_boxedEdges="all">
+        android:fadeScrollbars="false"
+        android:paddingHorizontal="@dimen/main_activity_padding"
+        android:paddingTop="24dp"
+        android:clipToPadding="false"
+        android:scrollbarStyle="outsideInset">
 
-        <ScrollView
-            android:id="@+id/scrollView"
+        <androidx.wear.widget.BoxInsetLayout
+            android:id="@+id/boxInset"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:clipChildren="false"
-            android:fadeScrollbars="false"
-            android:padding="@dimen/main_activity_padding"
-            android:clipToPadding="false"
-            android:scrollbarStyle="outsideInset">
+            android:padding="16dp"
+            app:layout_boxedEdges="all">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -160,6 +160,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/image4" />
             </androidx.appcompat.widget.LinearLayoutCompat>
-        </ScrollView>
-    </androidx.wear.widget.BoxInsetLayout>
+
+        </androidx.wear.widget.BoxInsetLayout>
+
+        <requestFocus
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
+    </ScrollView>
 </FrameLayout>

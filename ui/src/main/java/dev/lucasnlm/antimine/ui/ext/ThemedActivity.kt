@@ -1,11 +1,11 @@
 package dev.lucasnlm.antimine.ui.ext
 
-import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.MaterialToolbar
+import dev.lucasnlm.antimine.core.ActivityExt.compatOverridePendingTransition
 import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.TopBarAction
@@ -60,16 +60,6 @@ abstract class ThemedActivity : AppCompatActivity() {
             }
         }
         return super.onCreateOptionsMenu(menu)
-    }
-
-    @Suppress("DEPRECATION")
-    protected fun compatOverridePendingTransition() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            overridePendingTransition(0, 0)
-        } else {
-            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, 0, 0)
-            overrideActivityTransition(OVERRIDE_TRANSITION_CLOSE, 0, 0)
-        }
     }
 
     override fun onResume() {

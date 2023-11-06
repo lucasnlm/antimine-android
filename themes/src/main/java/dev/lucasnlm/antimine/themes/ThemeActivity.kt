@@ -27,10 +27,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import dev.lucasnlm.antimine.i18n.R as i18n
 
 class ThemeActivity : ThemedActivity() {
-    private lateinit var binding: ActivityThemeBinding
-
     private val themeViewModel by viewModel<ThemeViewModel>()
-
     private val dimensionRepository: DimensionRepository by inject()
     private val cloudSaveManager by inject<CloudSaveManager>()
     private val preferencesRepository: PreferencesRepository by inject()
@@ -39,9 +36,12 @@ class ThemeActivity : ThemedActivity() {
     private val analyticsManager: AnalyticsManager by inject()
     private val gameAudioManager: GameAudioManager by inject()
 
+    private val binding: ActivityThemeBinding by lazy {
+        ActivityThemeBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityThemeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         analyticsManager.sentEvent(Analytics.OpenThemes)

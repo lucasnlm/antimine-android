@@ -13,15 +13,14 @@ import org.koin.android.ext.android.inject
 import dev.lucasnlm.antimine.i18n.R as i18n
 
 class ControlTypeActivity : ThemedActivity() {
-    private lateinit var binding: ActivityControlTypesBinding
     private val preferencesRepository: PreferencesRepository by inject()
+    private val binding: ActivityControlTypesBinding by lazy {
+        ActivityControlTypesBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityControlTypesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         refreshControlTypeList()
     }
 
@@ -46,11 +45,6 @@ class ControlTypeActivity : ThemedActivity() {
                     primaryAction = i18n.string.single_click,
                     secondaryAction = i18n.string.double_click,
                     controlStyle = ControlStyle.DoubleClick,
-                ),
-                ControlTypeItem(
-                    id = 4,
-                    primaryAction = i18n.string.switch_control_desc,
-                    controlStyle = ControlStyle.SwitchMarkOpen,
                 ),
             )
 

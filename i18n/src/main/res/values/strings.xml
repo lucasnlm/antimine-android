@@ -105,6 +105,7 @@
     <string name="language">Language</string>
     <string name="licenses">Licenses</string>
     <string name="google_play_games">Google Play Games</string>
+    <string name="immersive_mode">Immersive Mode</string>
     <string name="loading">Loading…</string>
     <string name="creating_valid_game">Creating valid game…</string>
     <string name="connect">Connect</string>
@@ -142,6 +143,9 @@
     <string name="no_guess_fail_warning">The current minefield may not be guess-free!</string>
     <string name="fixed_size">Fixed Size</string>
     <string name="progressive">Progressive</string>
+    <string name="value_limit_min">Min is %d</string>
+    <string name="value_limit_max">Max is %d</string>
+    <string name="proportion_too_high">Proportion is too high!</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
     <string name="show_clock">Show clock</string>
     <string name="donate_request">If you like this game, consider making a donation.</string>

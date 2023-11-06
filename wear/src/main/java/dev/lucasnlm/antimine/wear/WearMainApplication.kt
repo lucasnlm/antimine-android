@@ -9,6 +9,7 @@ import dev.lucasnlm.antimine.core.di.CommonModule
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
+import dev.lucasnlm.antimine.ui.repository.Themes
 import dev.lucasnlm.antimine.wear.di.AppModule
 import dev.lucasnlm.antimine.wear.di.ViewModelModule
 import dev.lucasnlm.external.AnalyticsManager
@@ -35,6 +36,8 @@ open class WearMainApplication : MultiDexApplication() {
             modules(AppModule, CommonModule, CommonIoModule, ExternalModule, LevelModule, ViewModelModule)
         }
 
+        predefineDarkTheme()
+
         if (!preferencesRepository.hasCustomControlStyle()) {
             preferencesRepository.useControlStyle(ControlStyle.FastFlag)
         }
@@ -45,5 +48,11 @@ open class WearMainApplication : MultiDexApplication() {
         }
 
         preferencesRepository.setPremiumFeatures(true)
+    }
+
+    private fun predefineDarkTheme() {
+        if (preferencesRepository.themeId() == null) {
+            preferencesRepository.useTheme(Themes.darkTheme().id)
+        }
     }
 }

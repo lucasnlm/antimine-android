@@ -5,9 +5,14 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.view.InputDeviceCompat
+import androidx.core.view.MotionEventCompat
+import androidx.core.view.ViewConfigurationCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -123,10 +128,26 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                 useCompass = false
                 useGyroscope = false
                 useWakelock = false
-                useImmersiveMode = false
+                useImmersiveMode = preferencesRepository.useImmersiveMode()
                 disableAudio = true
             }
-        return initializeForView(levelApplicationListener, config)
+        return initializeForView(levelApplicationListener, config).apply {
+            setOnGenericMotionListener { _, event ->
+                if (event.action == MotionEvent.ACTION_SCROLL &&
+                    event.isFromSource(InputDeviceCompat.SOURCE_ROTARY_ENCODER)
+                ) {
+                    val delta =
+                        -event.getAxisValue(MotionEventCompat.AXIS_SCROLL) *
+                            ViewConfigurationCompat.getScaledVerticalScrollFactor(
+                                ViewConfiguration.get(context), context,
+                            )
+                    levelApplicationListener.onScroll(delta)
+                    true
+                } else {
+                    false
+                }
+            }
+        }
     }
 
     override fun onPause() {

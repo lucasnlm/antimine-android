@@ -12,5 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        app:layout_boxedEdges="all"/>
+        app:layout_boxedEdges="all">
+        <requestFocus
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
+    </androidx.wear.widget.WearableRecyclerView>
 </FrameLayout>

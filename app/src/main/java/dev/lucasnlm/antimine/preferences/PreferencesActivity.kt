@@ -35,10 +35,12 @@ class PreferencesActivity :
     private val settingsBackupManager: SettingsBackupManager by lazy {
         SettingsBackupManager(applicationContext)
     }
+    private val binding: ActivityPreferencesBinding by lazy {
+        ActivityPreferencesBinding.inflate(layoutInflater)
+    }
 
     private lateinit var exportResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var importResultLauncher: ActivityResultLauncher<Intent>
-    private lateinit var binding: ActivityPreferencesBinding
 
     private val preferenceManager by lazy {
         PreferenceManager.getDefaultSharedPreferences(applicationContext)
@@ -61,7 +63,6 @@ class PreferencesActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityPreferencesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         exportResultLauncher =
@@ -203,6 +204,11 @@ class PreferencesActivity :
         binding.highlightUnsolvedNumbers.bindItem(
             initialValue = preferencesRepository.dimNumbers(),
             onChangeValue = { preferencesRepository.setDimNumbers(it) },
+        )
+
+        binding.immersiveMode.bindItem(
+            initialValue = preferencesRepository.useImmersiveMode(),
+            onChangeValue = { preferencesRepository.setImmersiveMode(it) },
         )
 
         if (playGamesManager.hasGooglePlayGames()) {

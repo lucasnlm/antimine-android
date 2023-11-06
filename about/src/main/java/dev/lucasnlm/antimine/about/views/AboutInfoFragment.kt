@@ -24,11 +24,12 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import dev.lucasnlm.antimine.i18n.R as i18n
 
 class AboutInfoFragment : Fragment() {
-    private lateinit var binding: FragmentAboutInfoBinding
     private val aboutViewModel: AboutViewModel by sharedViewModel()
     private val audioManager: GameAudioManager by inject()
     private val analyticsManager: AnalyticsManager by inject()
     private val unknownVersionName = "?.?.?"
+
+    private lateinit var binding: FragmentAboutInfoBinding
 
     private fun PackageManager.getPackageInfoCompat(
         packageName: String,
