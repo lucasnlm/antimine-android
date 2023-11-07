@@ -1,49 +1,49 @@
-Test your reasoning power on a challenging puzzle game where you have to solve a minefield without exploding any mine.
-This is a minimalist and modern version of the classic Minesweeper.
+Test your logical reasoning skills with this engaging puzzle game, where your objective is to safely navigate a minefield without triggering any explosives. Experience a sleek and contemporary twist on the timeless classic, Minesweeper.
+Are you up for the challenge of clearing a minefield? Let's get started!
 
-Are you able to clear a minefield? Let’s go!
+Objective:
+Similar to the iconic Minesweeper, your goal is to emerge victorious by flagging each mine in the field while avoiding accidental detonations.
 
-OBJECTIVE
-It's like Minesweeper. You win the game when you've flagged every mine in the minefield. Be careful not to trigger one!
+No More Guesswork:
+Our game features an intelligent algorithm that guarantees solvable minefields, eliminating the need for guesswork. Say goodbye to uncertainty and confidently explore the game.
 
-NO GUESSING
-This game has an algorithm that always creates solvable minefields. You won't have to guess where the last mine is!
+Diverse Game Levels:
+Choose from familiar levels like Beginner, Intermediate, and Expert, or challenge yourself with our unique progressive mode, which grows more intricate as you conquer each level.
 
-GAME LEVELS
-Just like Minesweeper, this game has different levels: Beginner, Intermediate, and Expert. But it also has a unique progressive mode that gets harder when you win.
+Customizable Experience:
+Craft your gaming experience to perfection. If the default settings don't suffice, create your own level of difficulty to tailor the game to your preferences.
 
-CUSTOM LEVEL
-If the standard modes aren't enough, you can create your level difficulty!
+Immersive Themes:
+Antimine offers a wide array of themes, including light, dark, and AMOLED options. Stay tuned for even more themes in the pipeline.
 
-THEMES
-Antimine has more than 15 themes (including light, dark, and AMOLED). And soon more will be added!
+Minimalist Design:
+Enjoy a clean and lightweight gaming experience with our minimalist visual design and a compact app size, occupying less than 9MB.
 
-MINIMALIST
-Clean look and feel: a minimalist visual and also lightweight app size (less than 9MB).
+Guided Tutorial:
+New to Minesweeper? No worries! Our tutorial level and built-in Tips feature will help you get started.
 
-TUTORIAL
-Don't you know how to play Minesweeper? No problem, you can play our tutorial level and enable Tips on settings.
+Track Your Progress:
+Monitor your gameplay results and development through our comprehensive statistics feature.
 
-STATISTICS
-Check your results and development.
+Game Assistant:
+The game automatically flags the squares you've isolated, ensuring a smoother gaming experience.
 
-GAME ASSISTANT
-The game will automatically flag the squares you isolated. 
+Personalized Customization:
+Modify the game to suit your preferences. Add helpful features like animations, haptic feedback, and a question mark when you need assistance.
 
-CUSTOMIZATION
-You can change the game to make it like you want to. 
-Example: Help, animations, haptic feedback, question mark.
+Multiple Control Options:
+Select from four distinct control schemes, such as flagging with a simple tap or a long press, providing a control method that suits your style.
 
-CONTROLS
-It supports four different control schemes. Example: flag using tap or long press.
+Achievements and Leaderboards:
+Unlock eight unique achievements and share your accomplishments with friends on various leaderboards.
 
-ACHIEVEMENTS AND LEADERBOARDS 
-You have eight achievements to unlock and different leaderboards to share with your friends.
+Online or Offline Play:
+No internet connection? No problem! Enjoy the game online or offline.
 
-ONLINE OR OFFLINE
-You don't need to be online to play the game!
+Auto-Save Feature:
+Begin a game and return to it at your convenience—the game automatically saves your progress.
 
-AUTO-SAVE
-You can start a game and continue it later! It will auto-save your game.
+Wear OS Compatibility:
+Play seamlessly on Wear OS, even from your watch.
 
-Enjoy.
+Enjoy!
