@@ -135,7 +135,7 @@
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:layout_gravity="center"
-                    app:indicatorColor="?colorPrimary"
+                    app:indicatorColor="?colorError"
                     app:indicatorSize="24dp"
                     app:trackThickness="3dp" />
 
@@ -172,13 +172,14 @@
         android:id="@+id/loadingGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:trackThickness="2dp"
         android:indeterminate="true"
+        android:visibility="gone"
         app:hideAnimationBehavior="outward"
+        app:indicatorColor="?colorError"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:showAnimationBehavior="inward"
-        android:visibility="gone"/>
+        app:trackThickness="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
