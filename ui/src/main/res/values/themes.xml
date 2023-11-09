@@ -79,7 +79,16 @@
         <item name="android:windowSplashScreenBehavior" tools:targetApi="tiramisu">icon_preferred</item>
     </style>
 
-    <style name="CustomLightTheme" parent="Theme.Material3.DynamicColors.Light">
+    <style name="AntimineLight" parent="Theme.Material3.DynamicColors.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AntimineDark" parent="Theme.Material3.DynamicColors.Dark">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="CustomLightTheme" parent="AntimineLight">
         <item name="colorPrimary">@color/colors_light_primary</item>
         <item name="colorOnPrimary">@color/colors_light_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_light_primaryContainer</item>
@@ -114,7 +123,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomDarkTheme" parent="Theme.Material3.DynamicColors.Dark">
+    <style name="CustomDarkTheme" parent="AntimineDark">
         <item name="colorPrimary">@color/colors_dark_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_primaryContainer</item>
@@ -147,7 +156,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomAmoledTheme" parent="Theme.Material3.DynamicColors.Dark">
+    <style name="CustomAmoledTheme" parent="AntimineDark">
         <item name="colorPrimary">@color/colors_amoled_primary</item>
         <item name="colorOnPrimary">@color/colors_amoled_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_amoled_primaryContainer</item>
@@ -180,7 +189,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomGardenTheme" parent="Theme.Material3.DynamicColors.Light">
+    <style name="CustomGardenTheme" parent="AntimineLight">
         <item name="colorPrimary">@color/colors_garden_light_primary</item>
         <item name="colorOnPrimary">@color/colors_garden_light_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_garden_light_primaryContainer</item>
@@ -215,7 +224,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomMarineTheme" parent="Theme.Material3.DynamicColors.Light">
+    <style name="CustomMarineTheme" parent="AntimineLight">
         <item name="colorPrimary">@color/colors_blue_light_primary</item>
         <item name="colorOnPrimary">@color/colors_blue_light_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_blue_light_primaryContainer</item>
@@ -250,7 +259,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomBlueGreyTheme" parent="Theme.Material3.DynamicColors.Light">
+    <style name="CustomBlueGreyTheme" parent="AntimineLight">
         <item name="colorPrimary">@color/colors_blue_light_primary</item>
         <item name="colorOnPrimary">@color/colors_blue_light_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_blue_light_primaryContainer</item>
@@ -285,7 +294,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="DarkLightBlueTheme" parent="Theme.Material3.DynamicColors.Dark">
+    <style name="DarkLightBlueTheme" parent="AntimineDark">
         <item name="colorPrimary">@color/colors_dark_blue_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_blue_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_blue_primaryContainer</item>
@@ -320,7 +329,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="DarkRedTheme" parent="Theme.Material3.DynamicColors.Dark">
+    <style name="DarkRedTheme" parent="AntimineDark">
         <item name="colorPrimary">@color/colors_dark_red_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_red_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_red_primaryContainer</item>
@@ -355,7 +364,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomOrangeTheme" parent="Theme.Material3.DynamicColors.Dark">
+    <style name="CustomOrangeTheme" parent="AntimineDark">
         <item name="colorPrimary">@color/colors_dark_orange_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_orange_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_orange_primaryContainer</item>
@@ -390,7 +399,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomPinkTheme" parent="Theme.Material3.DynamicColors.Light">
+    <style name="CustomPinkTheme" parent="AntimineLight">
         <item name="colorPrimary">@color/colors_light_pink_primary</item>
         <item name="colorOnPrimary">@color/colors_light_pink_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_light_pink_primaryContainer</item>
@@ -425,7 +434,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomDarkPinkTheme" parent="Theme.Material3.DynamicColors.Dark">
+    <style name="CustomDarkPinkTheme" parent="AntimineDark">
         <item name="colorPrimary">@color/colors_dark_pink_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_pink_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_pink_primaryContainer</item>
@@ -460,7 +469,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomPurpleTheme" parent="Theme.Material3.DynamicColors.Light">
+    <style name="CustomPurpleTheme" parent="AntimineLight">
         <item name="colorPrimary">@color/colors_light_purple_primary</item>
         <item name="colorOnPrimary">@color/colors_light_purple_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_light_purple_primaryContainer</item>
@@ -495,7 +504,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="DarkCustomPurpleTheme" parent="Theme.Material3.DynamicColors.Dark">
+    <style name="DarkCustomPurpleTheme" parent="AntimineDark">
         <item name="colorPrimary">@color/colors_dark_purple_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_purple_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_purple_primaryContainer</item>
@@ -530,7 +539,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="CustomLimeTheme" parent="Theme.Material3.DynamicColors.Dark">
+    <style name="CustomLimeTheme" parent="AntimineDark">
         <item name="colorPrimary">@color/colors_dark_lime_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_lime_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_lime_primaryContainer</item>
@@ -565,7 +574,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="BananaTheme" parent="Theme.Material3.DynamicColors.Dark">
+    <style name="BananaTheme" parent="AntimineDark">
         <item name="colorPrimary">@color/colors_dark_banana_primary</item>
         <item name="colorOnPrimary">@color/colors_dark_banana_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_dark_banana_primaryContainer</item>
@@ -600,7 +609,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
-    <style name="BananaThemeLight" parent="Theme.Material3.DynamicColors.Light">
+    <style name="BananaThemeLight" parent="AntimineLight">
         <item name="colorPrimary">@color/colors_light_banana_primary</item>
         <item name="colorOnPrimary">@color/colors_light_banana_onPrimary</item>
         <item name="colorPrimaryContainer">@color/colors_light_banana_primaryContainer</item>
