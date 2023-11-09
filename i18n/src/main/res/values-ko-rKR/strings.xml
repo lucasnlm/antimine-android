@@ -19,6 +19,7 @@
     <string name="open">오픈</string>
     <string name="settings">설정</string>
     <string name="control_settings">조작 설정</string>
+    <string name="default_button">기본 버튼</string>
     <string name="shapes">모양</string>
     <string name="animations">애니메이션</string>
     <string name="vibration">터치 시 진동</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">현재 레벨은 추정 없이 깨지 못할 수도 있습니다!</string>
     <string name="fixed_size">고정 크기</string>
     <string name="progressive">프로그레시브</string>
+    <string name="value_limit_min">최소 %d</string>
+    <string name="value_limit_max">최대 %d</string>
+    <string name="proportion_too_high">비율이 너무 큽니다!</string>
     <string name="highlight_unsolved_numbers">미해결 숫자 강조</string>
     <string name="show_clock">시계 표시</string>
     <string name="donate_request">이 게임이 좋으시다면, 후원을 고려해주세요.</string>
     <string name="donate_help">프로젝트를 지속적으로 진행하는 데 도움이 됩니다!</string>
+    <string name="acra_toast_text">죄송합니다. 오류가 발생했습니다. 개발자에게 오류 보고서를 전송해주세요.</string>
 </resources>

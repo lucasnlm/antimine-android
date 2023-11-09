@@ -19,6 +19,7 @@
     <string name="open">打開</string>
     <string name="settings">設置</string>
     <string name="control_settings">Control Settings</string>
+    <string name="default_button">Default Button</string>
     <string name="shapes">Shapes</string>
     <string name="animations">動畫</string>
     <string name="vibration">觸覺反饋</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">目前的雷區可能不是無猜測的！</string>
     <string name="fixed_size">固定尺寸</string>
     <string name="progressive">進步</string>
+    <string name="value_limit_min">Min is %d</string>
+    <string name="value_limit_max">Max is %d</string>
+    <string name="proportion_too_high">Proportion is too high!</string>
     <string name="highlight_unsolved_numbers">凸顯未解決的數字</string>
     <string name="show_clock">顯示時鐘</string>
     <string name="donate_request">如果您喜歡這款遊戲，不妨付費贊助。</string>
     <string name="donate_help">您的舉手之勞能使本專案繼續活躍！</string>
+    <string name="acra_toast_text">Sorry, an error occurred. Please, send the report to the developers.</string>
 </resources>

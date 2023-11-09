@@ -19,6 +19,7 @@
     <string name="open">打开</string>
     <string name="settings">设置</string>
     <string name="control_settings">操作设置</string>
+    <string name="default_button">默认按钮</string>
     <string name="shapes">形状</string>
     <string name="animations">动画</string>
     <string name="vibration">触摸反馈</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">当前雷场可能不是“无需猜测”的！</string>
     <string name="fixed_size">固定尺寸</string>
     <string name="progressive">渐进</string>
+    <string name="value_limit_min">Min is %d</string>
+    <string name="value_limit_max">Max is %d</string>
+    <string name="proportion_too_high">Proportion is too high!</string>
     <string name="highlight_unsolved_numbers">高亮未解决的数字</string>
     <string name="show_clock">显示时钟</string>
     <string name="donate_request">如果您喜欢这个游戏，捐助我们吧</string>
     <string name="donate_help">这有助于保持该项目活跃</string>
+    <string name="acra_toast_text">Sorry, an error occurred. Please, send the report to the developers.</string>
 </resources>

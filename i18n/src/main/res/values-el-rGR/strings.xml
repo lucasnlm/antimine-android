@@ -19,6 +19,7 @@
     <string name="open">Άνοιγμα</string>
     <string name="settings">Ρυθμίσεις</string>
     <string name="control_settings">Ρυθμίσεις Ελέγχου</string>
+    <string name="default_button">Προεπιλεγμένο Κουμπί</string>
     <string name="shapes">Σχήματα</string>
     <string name="animations">Εφέ Κίνησης</string>
     <string name="vibration">Δόνηση</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">Το τρέχον ναρκοπέδιο δεν μπορεί να λυθεί χωρίς μαντεψιές!</string>
     <string name="fixed_size">Προεπιλεγμένο Μέγεθος</string>
     <string name="progressive">Προοδευτικό</string>
+    <string name="value_limit_min">Το ελάχιστο είναι %d</string>
+    <string name="value_limit_max">Το μέγιστο είναι %d</string>
+    <string name="proportion_too_high">Η αναλογία είναι πολύ υψηλή!</string>
     <string name="highlight_unsolved_numbers">Επισήμανση άλυτων αριθμών</string>
     <string name="show_clock">Εμφάνιση ρολογιού</string>
     <string name="donate_request">Αν σας αρέσει αυτό το παιχνίδι, σκεφτείτε να κάνετε μια δωρεά.</string>
     <string name="donate_help">Θα βοηθήσει να διατηρηθεί αυτό το έργο ενεργό!</string>
+    <string name="acra_toast_text">Λυπούμαστε, προέκυψε ένα σφάλμα. Παρακαλούμε, στείλτε την αναφορά στους προγραμματιστές.</string>
 </resources>

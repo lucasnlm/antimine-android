@@ -19,6 +19,7 @@
     <string name="open">Aç</string>
     <string name="settings">Ayarlar</string>
     <string name="control_settings">Kontrol ayarları</string>
+    <string name="default_button">Default Button</string>
     <string name="shapes">Şekiller</string>
     <string name="animations">Animasyonlar</string>
     <string name="vibration">Dokunsal Geribildirim</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">Mevcut mayın tarlası tahmin edilemez olmayabilir!</string>
     <string name="fixed_size">Sabit Boyut</string>
     <string name="progressive">İlerleme</string>
+    <string name="value_limit_min">Min is %d</string>
+    <string name="value_limit_max">Max is %d</string>
+    <string name="proportion_too_high">Proportion is too high!</string>
     <string name="highlight_unsolved_numbers">Çözülmemiş sayıları vurgula</string>
     <string name="show_clock">Saati göster</string>
     <string name="donate_request">Eğer oyunu beğendiyseniz, bağış yapmayı unutmayın.</string>
     <string name="donate_help">Projeyi ayakta tutmamıza yardımcı olacaktır!</string>
+    <string name="acra_toast_text">Sorry, an error occurred. Please, send the report to the developers.</string>
 </resources>

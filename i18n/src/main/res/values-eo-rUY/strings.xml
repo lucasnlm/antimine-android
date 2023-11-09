@@ -19,6 +19,7 @@
     <string name="open">Malfermi</string>
     <string name="settings">Agordoj</string>
     <string name="control_settings">Control Settings</string>
+    <string name="default_button">Default Button</string>
     <string name="shapes">Shapes</string>
     <string name="animations">Animacioj</string>
     <string name="vibration">Tuŝ-retrokuplado</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">La nuntempa minejo ne estas solvebla sen diveno!</string>
     <string name="fixed_size">Fiksa grando</string>
     <string name="progressive">Progressive</string>
+    <string name="value_limit_min">Min is %d</string>
+    <string name="value_limit_max">Max is %d</string>
+    <string name="proportion_too_high">Proportion is too high!</string>
     <string name="highlight_unsolved_numbers">Highlight unsolved numbers</string>
     <string name="show_clock">Show clock</string>
     <string name="donate_request">Se vi ŝatas la ludon, konsideru donaci.</string>
     <string name="donate_help">It will help keep this project active!</string>
+    <string name="acra_toast_text">Sorry, an error occurred. Please, send the report to the developers.</string>
 </resources>

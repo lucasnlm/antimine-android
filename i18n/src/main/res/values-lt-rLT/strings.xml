@@ -19,6 +19,7 @@
     <string name="open">Atidaryti</string>
     <string name="settings">Nustatymai</string>
     <string name="control_settings">Valdymo nustatymai</string>
+    <string name="default_button">Default Button</string>
     <string name="shapes">Figūros</string>
     <string name="animations">Animacijos</string>
     <string name="vibration">Vibracija</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">Dabartinis minų laukas gali būti neatspėjamas!</string>
     <string name="fixed_size">Fiksuotas dydis</string>
     <string name="progressive">Progresyvus</string>
+    <string name="value_limit_min">Min is %d</string>
+    <string name="value_limit_max">Max is %d</string>
+    <string name="proportion_too_high">Proportion is too high!</string>
     <string name="highlight_unsolved_numbers">Paryškinti neišspręstus skaičius</string>
     <string name="show_clock">Rodyti laikrodį</string>
     <string name="donate_request">Jei jums patinka šis žaidimas, apsvarstykite galimybę paremti kūrėją.</string>
     <string name="donate_help">Tai padės šiam projektui išlikti aktyviam!</string>
+    <string name="acra_toast_text">Sorry, an error occurred. Please, send the report to the developers.</string>
 </resources>
