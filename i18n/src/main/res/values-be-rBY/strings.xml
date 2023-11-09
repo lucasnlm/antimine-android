@@ -19,6 +19,7 @@
     <string name="open">Адчыніць</string>
     <string name="settings">Налады</string>
     <string name="control_settings">Налады кіравання</string>
+    <string name="default_button">Default Button</string>
     <string name="shapes">Формы</string>
     <string name="animations">Анімацыі</string>
     <string name="vibration">Тактыльная зваротная сувязь</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">Бягучае міннае поле магчыма не без угадвання!</string>
     <string name="fixed_size">Нязменны памер</string>
     <string name="progressive">Прагрэсіўны</string>
+    <string name="value_limit_min">Min is %d</string>
+    <string name="value_limit_max">Max is %d</string>
+    <string name="proportion_too_high">Proportion is too high!</string>
     <string name="highlight_unsolved_numbers">Вылучыце нявырашаныя лікі</string>
     <string name="show_clock">Паказваць гадзіннік</string>
     <string name="donate_request">Калі вам падабаецца гэтая гульня, падумайце аб ахвяраванні.</string>
     <string name="donate_help">Гэта дапаможа падтрымліваць гэты праект актыўным!</string>
+    <string name="acra_toast_text">Sorry, an error occurred. Please, send the report to the developers.</string>
 </resources>

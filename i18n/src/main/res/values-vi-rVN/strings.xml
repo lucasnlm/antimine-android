@@ -19,6 +19,7 @@
     <string name="open">Mở</string>
     <string name="settings">Cài đặt</string>
     <string name="control_settings">Tùy chỉnh kiểm soát</string>
+    <string name="default_button">Default Button</string>
     <string name="shapes">Hình thể</string>
     <string name="animations">Hiệu ứng động</string>
     <string name="vibration">Phản hồi rung</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">Bãi mìn hiện tại có thể sẽ không giải được mà không đoán!</string>
     <string name="fixed_size">Kích thước cố định</string>
     <string name="progressive">Tiến trình</string>
+    <string name="value_limit_min">Min is %d</string>
+    <string name="value_limit_max">Max is %d</string>
+    <string name="proportion_too_high">Proportion is too high!</string>
     <string name="highlight_unsolved_numbers">Đánh dấu các số chưa giải</string>
     <string name="show_clock">Hiển thị đồng hồ</string>
     <string name="donate_request">Nếu bạn thích trò chơi này, hãy cân nhắc ủng hộ tôi.</string>
     <string name="donate_help">Việc đó sẽ giúp giữ cho dự án này hoạt động!</string>
+    <string name="acra_toast_text">Sorry, an error occurred. Please, send the report to the developers.</string>
 </resources>

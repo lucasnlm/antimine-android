@@ -19,6 +19,7 @@
     <string name="open">විවෘත</string>
     <string name="settings">සැකසුම්</string>
     <string name="control_settings">Control Settings</string>
+    <string name="default_button">Default Button</string>
     <string name="shapes">Shapes</string>
     <string name="animations">චලන දසුන්</string>
     <string name="vibration">හප්ටික් ප්‍රතිපෝෂණය</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">වත්මන් බිම්බෝම්බය අනුමාන-නිදහස් නොවිය හැක!</string>
     <string name="fixed_size">ස්ථාවර ප්රමාණය</string>
     <string name="progressive">ප්‍රගතිශීලී</string>
+    <string name="value_limit_min">Min is %d</string>
+    <string name="value_limit_max">Max is %d</string>
+    <string name="proportion_too_high">Proportion is too high!</string>
     <string name="highlight_unsolved_numbers">නොවිසඳුණු අංක ඉස්මතු කරන්න</string>
     <string name="show_clock">Show clock</string>
     <string name="donate_request">ඔබ මෙම ක්‍රීඩාවට කැමති නම්, පරිත්‍යාගයක් කිරීමට සලකා බලන්න.</string>
     <string name="donate_help">එය මෙම ව්‍යාපෘතිය ක්‍රියාකාරීව තබා ගැනීමට උපකාරී වනු ඇත!</string>
+    <string name="acra_toast_text">Sorry, an error occurred. Please, send the report to the developers.</string>
 </resources>

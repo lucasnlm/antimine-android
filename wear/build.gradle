@@ -9,10 +9,10 @@ android {
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
         applicationId 'dev.lucasnlm.antimine'
-        versionCode 1705080
-        versionName '17.5.8 W'
+        versionCode 1705090
+        versionName '17.5.9 W'
         minSdk 25
-        targetSdk 34
+        targetSdk 33
         compileSdk 34
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true

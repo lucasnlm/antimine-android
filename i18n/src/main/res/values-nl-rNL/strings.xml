@@ -19,6 +19,7 @@
     <string name="open">Open</string>
     <string name="settings">Instellingen</string>
     <string name="control_settings">Besturingsinstellingen</string>
+    <string name="default_button">Standaardknop</string>
     <string name="shapes">Vormen</string>
     <string name="animations">Animaties</string>
     <string name="vibration">Haptische feedback</string>
@@ -70,7 +71,7 @@
     <string name="use_question_mark">Gebruik vraagteken</string>
     <string name="no_guessing_mode">\'Niet-gokken\' modus</string>
     <string name="control">Besturing</string>
-    <string name="control_types">Control Types</string>
+    <string name="control_types">Controletype</string>
     <string name="single_click">Enkele tik</string>
     <string name="double_click">Dubbeltik</string>
     <string name="long_press">Lang aanraken</string>
@@ -80,7 +81,7 @@
     <string name="retry">Opnieuw</string>
     <string name="continue_game">Doorgaan</string>
     <string name="empty">Leeg</string>
-    <string name="cant_do_it_now">Onmogelijk om dat nu te doen</string>
+    <string name="cant_do_it_now">Impossible to do that now</string>
     <string name="mine_revealed">Er is een mijn onthuld</string>
     <string name="fail_to_load_ad">Kon advertentie niet laden</string>
     <string name="you_have_received">Je hebt ontvangen: +%1$d</string>
@@ -115,7 +116,7 @@
     <string name="delete_all">Alles verwijderen</string>
     <string name="appearance">Uiterlijk</string>
     <string name="themes">Thema\'s</string>
-    <string name="delete_all_message">Verwijder alle gebeurtenissen permanent.</string>
+    <string name="delete_all_message">Delete all events permanently.</string>
     <string name="remove_ad">Verwijder advertenties</string>
     <string name="help">Hint</string>
     <string name="back">Terug</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">Het huidige mijnenveld kan meschien niet opgelost worden zonder te raden!</string>
     <string name="fixed_size">Vaste afmetingen</string>
     <string name="progressive">Progressief</string>
+    <string name="value_limit_min">Min is %d</string>
+    <string name="value_limit_max">Max is %d</string>
+    <string name="proportion_too_high">Proportion is too high!</string>
     <string name="highlight_unsolved_numbers">Onopgeloste nummers markeren</string>
     <string name="show_clock">Klok weergeven</string>
     <string name="donate_request">Overweeg een donatie te doen als je dit spel leuk vind.</string>
     <string name="donate_help">Hierdoor kan het project actief blijven!</string>
+    <string name="acra_toast_text">Sorry, er is een fout opgetreden. Stuur het rapport naar de ontwikkelaars.</string>
 </resources>

@@ -19,11 +19,12 @@
     <string name="open">Öppna</string>
     <string name="settings">Inställningar</string>
     <string name="control_settings">Kontrollinställningar</string>
+    <string name="default_button">Standardknapp</string>
     <string name="shapes">Former</string>
     <string name="animations">Animationer</string>
     <string name="vibration">Haptik-feedback</string>
     <string name="about">Om</string>
-    <string name="quit">Quit</string>
+    <string name="quit">Avsluta</string>
     <string name="events">Statistik</string>
     <string name="custom">Anpassa</string>
     <string name="start">Börja</string>
@@ -55,10 +56,10 @@
     <string name="fail_to_share">Misslyckades att dela</string>
     <string name="version_s">Version %1$s</string>
     <string name="sound_effects">Ljudeffekter</string>
-    <string name="music">Music</string>
-    <string name="music_by">Music by %1$s</string>
-    <string name="check_music">Listen on Spotify…</string>
-    <string name="selected">Selected</string>
+    <string name="music">Musik</string>
+    <string name="music_by">Musik av %1$s</string>
+    <string name="check_music">Lyssna på Spotify…</string>
+    <string name="selected">Vald</string>
     <string name="are_you_sure">Är du säker?</string>
     <string name="enable_automatic_flags">Aktivera automatisk placering av flaggor</string>
     <string name="open_areas">Öppna områden</string>
@@ -99,7 +100,7 @@
     <string name="more">Mer</string>
     <string name="source_code">Källkod</string>
     <string name="translation">Översättning</string>
-    <string name="language">Language</string>
+    <string name="language">Språk</string>
     <string name="licenses">Licenser</string>
     <string name="google_play_games">Google Play Spel</string>
     <string name="loading">Laddar…</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">Den nuvarande minfälten kanske inte är gissningsfria!</string>
     <string name="fixed_size">Fast storlek</string>
     <string name="progressive">Progressiv</string>
+    <string name="value_limit_min">Minsta är %d</string>
+    <string name="value_limit_max">Max är %d</string>
+    <string name="proportion_too_high">Andel är för hög!</string>
     <string name="highlight_unsolved_numbers">Markera olösta tal</string>
     <string name="show_clock">Visa klocka</string>
     <string name="donate_request">Om du gillar spelet, överväg om du vill göra en donation.</string>
     <string name="donate_help">Det kommer hjälpa till att hålla projektet aktivt!</string>
+    <string name="acra_toast_text">Tyvärr, ett fel inträffade. Vänligen skicka rapporten till utvecklarna.</string>
 </resources>

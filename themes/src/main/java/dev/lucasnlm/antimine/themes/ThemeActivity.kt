@@ -146,10 +146,10 @@ class ThemeActivity : ThemedActivity() {
                 setHasFixedSize(true)
                 layoutManager =
                     object : GridLayoutManager(context, skinsColumns) {
-                        override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
+                        override fun checkLayoutParams(layoutParams: RecyclerView.LayoutParams?): Boolean {
                             val lpSize = width / (skinsColumns + 1)
-                            lp?.height = lpSize
-                            lp?.width = lpSize
+                            layoutParams?.height = lpSize
+                            layoutParams?.width = lpSize
                             return true
                         }
                     }

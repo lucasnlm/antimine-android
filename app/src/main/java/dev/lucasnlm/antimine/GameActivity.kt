@@ -544,6 +544,9 @@ class GameActivity :
 
         binding.appBar.apply {
             setBackgroundColor(usingTheme.palette.background.toAndroidColor(200))
+            setOnClickListener {
+                // No-op
+            }
         }
 
         if (applicationContext.isPortrait()) {

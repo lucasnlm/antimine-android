@@ -19,6 +19,7 @@
     <string name="open">Открыть</string>
     <string name="settings">Настройки</string>
     <string name="control_settings">Настройки управления</string>
+    <string name="default_button">Кнопка по умолчанию</string>
     <string name="shapes">Формы</string>
     <string name="animations">Анимации</string>
     <string name="vibration">Виброотклик</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">Вам может понадобиться подсказка, чтобы пройти этот уровень!</string>
     <string name="fixed_size">Фиксированный размер</string>
     <string name="progressive">Прогрессивный</string>
+    <string name="value_limit_min">Мин. — %d</string>
+    <string name="value_limit_max">Макс. — %d</string>
+    <string name="proportion_too_high">Пропорция слишком велика!</string>
     <string name="highlight_unsolved_numbers">Подсвечивать неразгаданные числа</string>
     <string name="show_clock">Отображать часы</string>
     <string name="donate_request">Если вам нравится эта игра, подумайте о том, чтобы сделать пожертвование.</string>
     <string name="donate_help">Это поможет сохранить проект активным!</string>
+    <string name="acra_toast_text">Извините, произошла ошибка. Пожалуйста, отправьте отчет разработчикам.</string>
 </resources>

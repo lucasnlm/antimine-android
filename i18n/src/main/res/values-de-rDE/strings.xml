@@ -19,6 +19,7 @@
     <string name="open">Öffnen</string>
     <string name="settings">Einstellungen</string>
     <string name="control_settings">Steuerungseinstellungen</string>
+    <string name="default_button">Default Button</string>
     <string name="shapes">Formen</string>
     <string name="animations">Animationen</string>
     <string name="vibration">Haptische Rückmeldung</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">Das aktuelle Minenfeld ist möglicherweise nicht ratenfrei!</string>
     <string name="fixed_size">Feste Größe</string>
     <string name="progressive">Fortschrittlich</string>
+    <string name="value_limit_min">Min is %d</string>
+    <string name="value_limit_max">Max is %d</string>
+    <string name="proportion_too_high">Proportion is too high!</string>
     <string name="highlight_unsolved_numbers">Ungelöste Zahlen hervorheben</string>
     <string name="show_clock">Uhr anzeigen</string>
     <string name="donate_request">Wenn dir dieses Spiel gefällt, erwäge eine Spende zu tätigen.</string>
     <string name="donate_help">Es wird helfen, dieses Projekt aktiv zu halten!</string>
+    <string name="acra_toast_text">Sorry, an error occurred. Please, send the report to the developers.</string>
 </resources>

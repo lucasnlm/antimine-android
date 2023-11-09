@@ -19,6 +19,7 @@
     <string name="open">Verzi</string>
     <string name="settings">Inpostasion</string>
     <string name="control_settings">Inpostasion Comandi</string>
+    <string name="default_button">Default Button</string>
     <string name="shapes">Figure</string>
     <string name="animations">Animasion</string>
     <string name="vibration">Feedback Tàtiłe</string>
@@ -136,8 +137,12 @@
     <string name="no_guess_fail_warning">\'Sto canpo minà no el se połe mìa conpletar sensa intivar!</string>
     <string name="fixed_size">Dimension fisà</string>
     <string name="progressive">Progresivo</string>
+    <string name="value_limit_min">Min is %d</string>
+    <string name="value_limit_max">Max is %d</string>
+    <string name="proportion_too_high">Proportion is too high!</string>
     <string name="highlight_unsolved_numbers">Evidensia i nùmari mìa desbrocài</string>
     <string name="show_clock">Mostra rełojo</string>
     <string name="donate_request">Se\'l te piaze \'sto zogo, consìdera ła posibiłità de far na donasion.</string>
     <string name="donate_help">Mantenjarà \'sto projeto ativo!</string>
+    <string name="acra_toast_text">Sorry, an error occurred. Please, send the report to the developers.</string>
 </resources>
