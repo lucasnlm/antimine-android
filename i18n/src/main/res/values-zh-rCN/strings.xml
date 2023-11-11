@@ -137,12 +137,12 @@
     <string name="no_guess_fail_warning">当前雷场可能不是“无需猜测”的！</string>
     <string name="fixed_size">固定尺寸</string>
     <string name="progressive">渐进</string>
-    <string name="value_limit_min">Min is %d</string>
-    <string name="value_limit_max">Max is %d</string>
-    <string name="proportion_too_high">Proportion is too high!</string>
+    <string name="value_limit_min">最小值：%d</string>
+    <string name="value_limit_max">最大值：%d</string>
+    <string name="proportion_too_high">比例太高了！</string>
     <string name="highlight_unsolved_numbers">高亮未解决的数字</string>
     <string name="show_clock">显示时钟</string>
     <string name="donate_request">如果您喜欢这个游戏，捐助我们吧</string>
     <string name="donate_help">这有助于保持该项目活跃</string>
-    <string name="acra_toast_text">Sorry, an error occurred. Please, send the report to the developers.</string>
+    <string name="acra_toast_text">抱歉，出现了一个错误。请将报告发送给开发人员。</string>
 </resources>
