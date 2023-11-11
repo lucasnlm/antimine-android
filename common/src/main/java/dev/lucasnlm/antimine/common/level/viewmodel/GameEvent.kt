@@ -77,6 +77,11 @@ sealed class GameEvent {
     data object EngineReady : GameEvent()
 
     /**
+     * Indicates that the actors are loaded.
+     */
+    data object ActorLoaded : GameEvent()
+
+    /**
      * Indicates No Guess mode failed.
      */
     data object ShowNoGuessFailWarning : GameEvent()

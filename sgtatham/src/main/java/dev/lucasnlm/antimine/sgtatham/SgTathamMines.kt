@@ -5,6 +5,7 @@ class SgTathamMines {
      * Uses the same minefield generator of SgTatham mines game.
      *
      * @param seed The seed to be used to generate the minefield.
+     * @param sliceWidth The width of the slice.
      * @param width The width of the minefield.
      * @param height The height of the minefield.
      * @param mines The number of mines in the minefield.
@@ -13,6 +14,7 @@ class SgTathamMines {
      */
     external fun createMinefield(
         seed: Long,
+        sliceWidth: Int,
         width: Int,
         height: Int,
         mines: Int,

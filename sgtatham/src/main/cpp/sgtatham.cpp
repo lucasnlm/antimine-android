@@ -1251,6 +1251,7 @@ Java_dev_lucasnlm_antimine_sgtatham_SgTathamMines_createMinefield(
         JNIEnv *env,
         jobject javaThis,
         jlong inSeed,
+        jint slice_width,
         jint inWidth,
         jint inHeight,
         jint inMines,
@@ -1258,6 +1259,6 @@ Java_dev_lucasnlm_antimine_sgtatham_SgTathamMines_createMinefield(
         jint inY
 ) {
     std::mt19937 random(inSeed);
-    std::string minefield = new_mine_layout(inWidth, inHeight, inMines, inX, inY, random);
+    std::string minefield = new_mine_layout(slice_width, inWidth, inHeight, inMines, inX, inY, random);
     return env->NewStringUTF(minefield.c_str());
 }

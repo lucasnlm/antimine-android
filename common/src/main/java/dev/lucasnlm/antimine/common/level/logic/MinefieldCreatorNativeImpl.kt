@@ -42,15 +42,34 @@ class MinefieldCreatorNativeImpl(
         return createMutableEmpty()
     }
 
-    override suspend fun create(safeIndex: Int): List<Area> =
-        withContext(Dispatchers.IO) {
+    private fun getAreaFor(
+        index: Int,
+        value: Char,
+        width: Int,
+    ): Area {
+        val yPosition = floor((index / width).toDouble()).toInt()
+        val xPosition = (index % width)
+        return Area(
+            id = index,
+            posX = xPosition,
+            posY = yPosition,
+            minesAround = 0,
+            hasMine = value == '1',
+            neighborsIds = emptyList(),
+        )
+    }
+
+    override suspend fun create(safeIndex: Int): List<Area> {
+        return withContext(Dispatchers.IO) {
             val x = safeIndex % minefield.width
             val y = safeIndex / minefield.width
             val width = minefield.width
 
+            val sliceWidth = getSliceWidth(minefield.width)
             val nativeResult =
                 sgTathamMines.createMinefield(
                     seed = seed,
+                    sliceWidth = sliceWidth,
                     width = minefield.width,
                     height = minefield.height,
                     mines = minefield.mines,
@@ -59,17 +78,40 @@ class MinefieldCreatorNativeImpl(
                 )
 
             val resultList =
-                nativeResult.mapIndexed { index, char ->
-                    val yPosition = floor((index / width).toDouble()).toInt()
-                    val xPosition = (index % width)
-                    Area(
-                        id = index,
-                        posX = xPosition,
-                        posY = yPosition,
-                        minesAround = 0,
-                        hasMine = char == '1',
-                        neighborsIds = emptyList(),
-                    )
+                if (sliceWidth != NO_SLICE) {
+                    val slices = nativeResult.split(SLICE_DIVIDER).map { it.toList() }
+                    val size = minefield.width * minefield.height
+                    var index = 0
+                    var line = 0
+
+                    buildList {
+                        while (index < size) {
+                            slices.forEach { slice ->
+                                slice
+                                    .drop(line * sliceWidth)
+                                    .take(sliceWidth)
+                                    .map { char ->
+                                        getAreaFor(
+                                            index,
+                                            char,
+                                            width,
+                                        ).also {
+                                            index++
+                                        }
+                                    }
+                                    .also(::addAll)
+                            }
+                            line++
+                        }
+                    }
+                } else {
+                    nativeResult.mapIndexed { index, char ->
+                        getAreaFor(
+                            index,
+                            char,
+                            width,
+                        )
+                    }
                 }
 
             resultList.map { area ->
@@ -93,4 +135,26 @@ class MinefieldCreatorNativeImpl(
                 }
             }.toList()
         }
+    }
+
+    private fun getSliceWidth(width: Int): Int {
+        return if (width < 50) {
+            NO_SLICE
+        } else {
+            listOf(
+                20 to width % 20,
+                25 to width % 25,
+                22 to width % 22,
+                24 to width % 24,
+                width / 4 to width % 4,
+                width / 3 to width % 3,
+                width / 2 to width % 2,
+            ).firstOrNull { it.second == 0 }?.first ?: NO_SLICE
+        }
+    }
+
+    companion object {
+        private const val SLICE_DIVIDER = ","
+        private const val NO_SLICE = -1
+    }
 }
