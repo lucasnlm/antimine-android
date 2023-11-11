@@ -194,18 +194,6 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
                         binding.tapToBegin.isVisible = false
                     }
 
-                    if (it.isCreatingGame) {
-                        launch {
-                            // Show loading indicator only when it takes more than:
-                            delay(500)
-                            if (singleState().isCreatingGame) {
-                                binding.loadingGame.show()
-                            }
-                        }
-                    } else if (binding.loadingGame.isVisible) {
-                        binding.loadingGame.hide()
-                    }
-
                     if (it.duration % 10 > 2) {
                         binding.timer.apply {
                             isVisible = preferencesRepository.showTimer()
