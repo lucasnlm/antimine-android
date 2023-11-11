@@ -80,8 +80,9 @@ open class GameViewModel(
             hasMines = false,
             isCreatingGame = false,
             useHelp = preferencesRepository.useHelp(),
-            isLoadingMap = true,
+            isEngineLoading = true,
             showTutorial = preferencesRepository.showTutorialButton(),
+            isActorsLoaded = false,
         )
     }
 
@@ -136,11 +137,14 @@ open class GameViewModel(
                         )
                     emit(newState)
                 }
+                is GameEvent.ActorLoaded -> {
+                    emit(state.copy(isActorsLoaded = true))
+                }
                 is GameEvent.EngineReady -> {
-                    if (state.isLoadingMap) {
+                    if (state.isEngineLoading) {
                         emit(
                             state.copy(
-                                isLoadingMap = false,
+                                isEngineLoading = false,
                                 selectedAction =
                                     if (initialized) {
                                         gameController.getSelectedAction()
@@ -151,7 +155,7 @@ open class GameViewModel(
                         )
                     }
 
-                    if (initialized && !state.isGameCompleted && state.hasMines && !state.isLoadingMap) {
+                    if (initialized && !state.isGameCompleted && state.hasMines && !state.isEngineLoading) {
                         if (
                             !gameController.isGameOver() &&
                             !gameController.isVictory() &&
@@ -165,7 +169,7 @@ open class GameViewModel(
                 }
                 is GameEvent.LoadingNewGame -> {
                     stopClock()
-                    emit(state.copy(isLoadingMap = true, duration = 0L, isActive = false))
+                    emit(state.copy(isEngineLoading = true, duration = 0L, isActive = false))
                 }
                 is GameEvent.ChangeSelectedAction -> {
                     val newState = state.copy(selectedAction = event.action)
@@ -201,7 +205,7 @@ open class GameViewModel(
                                 val totalMines = gameController.mines().count()
                                 val sideEffect =
                                     GameEvent.VictoryDialog(
-                                        delayToShow = 1500L,
+                                        delayToShow = VICTORY_DELAY_MS,
                                         totalMines = totalMines,
                                         rightMines = totalMines,
                                         timestamp = state.duration,
@@ -240,7 +244,7 @@ open class GameViewModel(
                         }
                     }
 
-                    if (!wasCompleted && hasMines && !newState.isLoadingMap) {
+                    if (!wasCompleted && hasMines && !newState.isEngineLoading) {
                         runClock()
                     } else {
                         stopClock()
@@ -293,7 +297,8 @@ open class GameViewModel(
                     hasMines = false,
                     isCreatingGame = false,
                     useHelp = preferencesRepository.useHelp(),
-                    isLoadingMap = true,
+                    isEngineLoading = true,
+                    isActorsLoaded = false,
                     showTutorial = preferencesRepository.showTutorialButton(),
                 )
 
@@ -344,13 +349,14 @@ open class GameViewModel(
                 isActive = !gameController.allMinesFound(),
                 hasMines = true,
                 useHelp = preferencesRepository.useHelp(),
-                isLoadingMap = true,
+                isEngineLoading = true,
+                isActorsLoaded = false,
                 showTutorial = preferencesRepository.showTutorialButton(),
             )
 
         sendEvent(GameEvent.NewGame(newGameState))
 
-        if (newGameState.isActive && !newGameState.isGameCompleted && !newGameState.isLoadingMap) {
+        if (newGameState.isActive && !newGameState.isGameCompleted && !newGameState.isEngineLoading) {
             runClock()
         }
 
@@ -390,7 +396,8 @@ open class GameViewModel(
                 isActive = true,
                 hasMines = false,
                 useHelp = preferencesRepository.useHelp(),
-                isLoadingMap = true,
+                isEngineLoading = true,
+                isActorsLoaded = false,
                 showTutorial = preferencesRepository.showTutorialButton(),
             )
 
@@ -959,6 +966,7 @@ open class GameViewModel(
     }
 
     companion object {
+        const val VICTORY_DELAY_MS = 1500L
         const val EXPLOSION_DELAY_MS = 1000L
         const val THIRTY_SECONDS_ACHIEVEMENT = 30L
         const val MIN_REWARD_GAME_SECONDS = 10L

@@ -21,7 +21,8 @@ import dev.lucasnlm.antimine.preferences.models.Minefield
  * @property useHelp If true, user may use help.
  * @property isGameCompleted If true, the game is completed.
  * @property isActive If true, user may interact with the minefield.
- * @property isLoadingMap If true, the map is being loaded.
+ * @property isEngineLoading If true, the map is being loaded.
+ * @property isActorsLoaded If true, the actors are loaded.
  * @property isCreatingGame If true, a valid game is being created.
  * @property showTutorial If false, it will hide tutorial tip during this session.
  */
@@ -40,16 +41,17 @@ data class GameState(
     val useHelp: Boolean,
     val isGameCompleted: Boolean,
     val isActive: Boolean,
-    val isLoadingMap: Boolean,
+    val isEngineLoading: Boolean,
+    val isActorsLoaded: Boolean,
     val isCreatingGame: Boolean,
     val showTutorial: Boolean,
 ) {
     /** Indicates whether is a new game */
-    val isNewGame = turn == 0 && (saveId == null || isLoadingMap || isCreatingGame)
+    val isNewGame = turn == 0 && (saveId == null || isEngineLoading || isCreatingGame)
 
     /** Indicates whether the game is started */
     val isGameStarted = (turn > 0 || saveId != null)
 
     /** Indicates whether show controls text */
-    val shouldShowControls = turn < 1 && saveId == null && !isLoadingMap && showTutorial
+    val shouldShowControls = turn < 1 && saveId == null && !isEngineLoading && showTutorial
 }

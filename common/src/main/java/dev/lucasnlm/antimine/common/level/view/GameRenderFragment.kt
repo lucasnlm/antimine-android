@@ -105,6 +105,11 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                     gameViewModel.sendEvent(GameEvent.EngineReady)
                 }
             },
+            onActorsLoaded = {
+                lifecycleScope.launch {
+                    gameViewModel.sendEvent(GameEvent.ActorLoaded)
+                }
+            },
             onEmptyActors = {
                 forceRefresh()
             },

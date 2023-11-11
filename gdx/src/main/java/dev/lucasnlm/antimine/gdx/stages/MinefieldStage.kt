@@ -25,6 +25,7 @@ class MinefieldStage(
     private val onLongTouch: (Int) -> Unit,
     private val onEngineReady: () -> Unit,
     private val onEmptyActors: () -> Unit,
+    private val onActorsLoaded: () -> Unit,
 ) : Stage() {
     private var minefield: Minefield? = null
     private var minefieldSize: SizeF? = null
@@ -37,6 +38,7 @@ class MinefieldStage(
     private var forceRefreshVisibleAreas: Boolean = true
     private var resetEvents: Boolean = true
     private var engineReady: Boolean = false
+    private var actorsFlag: Boolean = false
 
     var boundAreas = listOf<Area>()
     private var newBoundAreas: List<Area>? = null
@@ -147,6 +149,7 @@ class MinefieldStage(
     }
 
     fun bindSize(newMinefield: Minefield?) {
+        actorsFlag = false
         minefield = newMinefield
         minefieldSize =
             newMinefield?.let {
@@ -243,6 +246,14 @@ class MinefieldStage(
 
         val forceRefresh = refreshVisibleActorsIfNeeded()
         refreshAreas(forceRefresh)
+
+        if (!actorsFlag) {
+            actorsFlag = !actors.isEmpty
+
+            if (actorsFlag) {
+                onActorsLoaded()
+            }
+        }
 
         if (BuildConfig.DEBUG) {
             Gdx.app.log("GDX", "GDX FPS = ${Gdx.graphics.framesPerSecond}")

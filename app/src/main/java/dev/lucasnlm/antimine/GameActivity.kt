@@ -54,7 +54,6 @@ import dev.lucasnlm.external.ReviewWrapperImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
@@ -247,7 +246,10 @@ class GameActivity :
                                 it.isCreatingGame -> {
                                     getString(i18n.string.creating_valid_game)
                                 }
-                                it.isLoadingMap -> {
+                                it.isEngineLoading -> {
+                                    getString(i18n.string.loading)
+                                }
+                                !it.isActorsLoaded -> {
                                     getString(i18n.string.loading)
                                 }
                                 else -> {

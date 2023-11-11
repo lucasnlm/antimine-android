@@ -174,14 +174,14 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
         gameViewModel.apply {
             lifecycleScope.launch {
                 observeState().collect {
-                    if (it.turn == 0 && (it.saveId == null || it.isLoadingMap || it.isCreatingGame)) {
+                    if (it.turn == 0 && (it.saveId == null || it.isEngineLoading || it.isCreatingGame)) {
                         binding.tapToBegin.apply {
                             text =
                                 when {
                                     it.isCreatingGame -> {
                                         getString(i18n.string.creating_valid_game)
                                     }
-                                    it.isLoadingMap -> {
+                                    it.isEngineLoading -> {
                                         getString(i18n.string.loading)
                                     }
                                     else -> {

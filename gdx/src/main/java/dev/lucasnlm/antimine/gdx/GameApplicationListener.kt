@@ -27,6 +27,7 @@ class GameApplicationListener(
     private val onDoubleTap: (Int) -> Unit,
     private val onLongTap: (Int) -> Unit,
     private val onEngineReady: () -> Unit,
+    private val onActorsLoaded: () -> Unit,
     private val onEmptyActors: () -> Unit,
 ) : ApplicationAdapter() {
     private var boundAreas: List<Area> = listOf()
@@ -51,6 +52,7 @@ class GameApplicationListener(
             onDoubleTap = onDoubleTap,
             onLongTouch = onLongTap,
             onEngineReady = onEngineReady,
+            onActorsLoaded = onActorsLoaded,
             onEmptyActors = onEmptyActors,
         ).apply {
             bindField(boundAreas)
