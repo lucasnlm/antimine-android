@@ -61,7 +61,6 @@ class MinefieldHandler(
                 null
             }
 
-
         return when {
             nearestTarget != null -> {
                 field[nearestTarget.id] = nearestTarget.copy(revealed = true)
