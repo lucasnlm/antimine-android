@@ -40,14 +40,20 @@ class MinefieldHandler(
             .forEach { field[it.id] = it.copy(mistake = false) }
     }
 
+    private fun hasUncoveredNeighbor(area: Area): Boolean {
+        return area.neighborsIds.map { field[it] }.count { !it.isCovered } > 0
+    }
+
     fun revealRandomMineNearUncoveredArea(
         lastX: Int? = null,
         lastY: Int? = null,
     ): Int? {
         val unrevealedMines = field.filter { it.hasMine && it.mark.isNone() && !it.revealed && it.isCovered }
+        val unrevealedMinesWithUncoveredNeighbors = unrevealedMines.filter(::hasUncoveredNeighbor)
+        val potentialTargets = unrevealedMinesWithUncoveredNeighbors.ifEmpty { unrevealedMines }
         val nearestTarget =
             if (lastX != null && lastY != null) {
-                unrevealedMines.filter {
+                potentialTargets.filter {
                     (lastX - it.posX).absoluteValue < NEAR_MINE_THRESHOLD &&
                         (lastY - it.posY).absoluteValue < NEAR_MINE_THRESHOLD
                 }.shuffled().firstOrNull()
@@ -55,13 +61,14 @@ class MinefieldHandler(
                 null
             }
 
+
         return when {
             nearestTarget != null -> {
                 field[nearestTarget.id] = nearestTarget.copy(revealed = true)
                 nearestTarget.id
             }
             else -> {
-                unrevealedMines.shuffled().firstOrNull()?.run {
+                potentialTargets.shuffled().firstOrNull()?.run {
                     field[this.id] = this.copy(revealed = true)
                     this.id
                 }
