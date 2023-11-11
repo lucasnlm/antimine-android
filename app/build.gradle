@@ -77,7 +77,7 @@ android {
         }
 
         googleInstant {
-            versionCode 161
+            versionCode 162
             dimension 'version'
             applicationId 'dev.lucasnlm.antimine'
             versionNameSuffix ' I'

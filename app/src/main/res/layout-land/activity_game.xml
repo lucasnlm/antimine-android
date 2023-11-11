@@ -26,7 +26,7 @@
         android:clickable="false"
         android:paddingHorizontal="12dp"
         android:paddingVertical="8dp"
-        android:text="@string/tap_to_begin"
+        android:text="@string/loading"
         android:textAllCaps="true"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
