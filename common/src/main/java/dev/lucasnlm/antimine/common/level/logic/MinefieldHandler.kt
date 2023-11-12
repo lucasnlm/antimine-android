@@ -40,20 +40,34 @@ class MinefieldHandler(
             .forEach { field[it.id] = it.copy(mistake = false) }
     }
 
-    private fun hasUncoveredNeighbor(area: Area): Boolean {
-        return area.neighborsIds.map { field[it] }.count { !it.isCovered } > 0
+    private fun Area.hasUncoveredNeighbor(): Boolean {
+        return neighborsIds.map { field[it] }.any { !it.isCovered }
+    }
+
+    private fun Area.potentialMineReveal(): Boolean {
+        return hasMine && mark.isNone() && !revealed && isCovered
     }
 
     fun revealRandomMineNearUncoveredArea(
+        visibleMines: Set<Int>,
         lastX: Int? = null,
         lastY: Int? = null,
     ): Int? {
-        val unrevealedMines = field.filter { it.hasMine && it.mark.isNone() && !it.revealed && it.isCovered }
-        val unrevealedMinesWithUncoveredNeighbors = unrevealedMines.filter(::hasUncoveredNeighbor)
-        val potentialTargets = unrevealedMinesWithUncoveredNeighbors.ifEmpty { unrevealedMines }
+        // / Prioritized mines are mines that are visible and have a potential to be revealed.
+        // / If there are no prioritized mines, then we get all mines that have a potential to be revealed.
+        val prioritizedMines =
+            visibleMines
+                .map { field[it] }
+                .filter { it.potentialMineReveal() && it.hasUncoveredNeighbor() }
+
+        val unrevealedMines =
+            prioritizedMines.ifEmpty {
+                field.filter { it.potentialMineReveal() && it.hasUncoveredNeighbor() }
+            }
+
         val nearestTarget =
             if (lastX != null && lastY != null) {
-                potentialTargets.filter {
+                unrevealedMines.filter {
                     (lastX - it.posX).absoluteValue < NEAR_MINE_THRESHOLD &&
                         (lastY - it.posY).absoluteValue < NEAR_MINE_THRESHOLD
                 }.shuffled().firstOrNull()
@@ -67,7 +81,7 @@ class MinefieldHandler(
                 nearestTarget.id
             }
             else -> {
-                potentialTargets.shuffled().firstOrNull()?.run {
+                unrevealedMines.shuffled().firstOrNull()?.run {
                     field[this.id] = this.copy(revealed = true)
                     this.id
                 }

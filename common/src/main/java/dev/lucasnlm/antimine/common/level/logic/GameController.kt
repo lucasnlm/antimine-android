@@ -409,7 +409,13 @@ class GameController {
             }
     }
 
-    fun revealRandomMine(): Int? {
+    /**
+     * Reveal a random mine near an uncovered area.
+     *
+     * @param visibleMines It will prioritize mines that are in the visible area.
+     * @return The id of the revealed mine.
+     */
+    fun revealRandomMine(visibleMines: Set<Int>): Int? {
         val resultId: Int?
         field =
             MinefieldHandler(
@@ -417,7 +423,12 @@ class GameController {
                 useQuestionMark = false,
                 individualActions = useIndividualActions(),
             ).run {
-                resultId = revealRandomMineNearUncoveredArea(lastIdInteractionX, lastIdInteractionY)
+                resultId =
+                    revealRandomMineNearUncoveredArea(
+                        visibleMines = visibleMines,
+                        lastX = lastIdInteractionX,
+                        lastY = lastIdInteractionY,
+                    )
                 result()
             }
         return resultId
