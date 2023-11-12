@@ -2,6 +2,9 @@ package dev.lucasnlm.antimine.gdx
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
+import dev.lucasnlm.antimine.gdx.GdxExt.dim
+import dev.lucasnlm.antimine.gdx.GdxExt.toGdxColor
+import dev.lucasnlm.antimine.gdx.GdxExt.toInverseBackOrWhite
 import dev.lucasnlm.antimine.gdx.models.GameTextures
 import dev.lucasnlm.antimine.ui.model.AppTheme
 
