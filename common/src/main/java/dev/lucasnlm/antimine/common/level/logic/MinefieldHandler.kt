@@ -41,7 +41,7 @@ class MinefieldHandler(
     }
 
     private fun Area.hasUncoveredNeighbor(): Boolean {
-        return neighborsIds.map { field[it] }.any { !it.isCovered }
+        return neighborsIds.toArea().any { !it.isCovered }
     }
 
     private fun Area.potentialMineReveal(): Boolean {
@@ -57,7 +57,7 @@ class MinefieldHandler(
         // / If there are no prioritized mines, then we get all mines that have a potential to be revealed.
         val prioritizedMines =
             visibleMines
-                .map { field[it] }
+                .toArea()
                 .filter { it.potentialMineReveal() && it.hasUncoveredNeighbor() }
 
         val unrevealedMines =
@@ -141,7 +141,7 @@ class MinefieldHandler(
 
                 if (!hasMine && minesAround == 0 && openNeighbors) {
                     neighborsIds
-                        .map { field[it] }
+                        .toArea()
                         .filter { it.isCovered }
                         .onEach {
                             openAt(it.id, openNeighbors = true, passive = true)
@@ -154,7 +154,7 @@ class MinefieldHandler(
     fun openOrFlagNeighborsOf(index: Int) {
         field.getOrNull(index)?.run {
             if (!isCovered) {
-                val neighbors = neighborsIds.map { field[it] }
+                val neighbors = neighborsIds.toArea()
                 val flaggedCount = neighbors.count { it.mark.isFlag() || (!it.isCovered && it.hasMine) }
                 if (flaggedCount >= minesAround) {
                     neighbors
@@ -178,8 +178,8 @@ class MinefieldHandler(
     fun openNeighborsOf(index: Int) {
         field.getOrNull(index)?.run {
             if (!isCovered) {
-                val neighbors = neighborsIds.map { field[it] }
-                neighbors
+                neighborsIds
+                    .toArea()
                     .filter { it.isCovered && it.mark.isNone() }
                     .forEach { openAt(it.id, passive = false, openNeighbors = true) }
             }
@@ -187,6 +187,8 @@ class MinefieldHandler(
     }
 
     fun result(): List<Area> = field.toList()
+
+    private fun Collection<Int>.toArea(): Collection<Area> = map { field[it] }
 
     companion object {
         const val NEAR_MINE_THRESHOLD = 5
