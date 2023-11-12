@@ -326,6 +326,14 @@ class MinefieldStage(
         this.actionSettings = actionSettings
     }
 
+    fun getVisibleMineActors(): Set<Int> {
+        return actors.filter {
+            it.isVisible && (it as? AreaActor)?.area?.hasMine == true
+        }.mapNotNull {
+            (it as? AreaActor)?.area?.id
+        }.toSet()
+    }
+
     companion object {
         const val MAX_ZOOM_OUT = 0.35f
         const val MAX_ZOOM_IN = 3.0f

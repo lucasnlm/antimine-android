@@ -25,7 +25,6 @@ import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.wear.databinding.ActivityGameBinding
 import dev.lucasnlm.antimine.wear.message.GameOverActivity
 import dev.lucasnlm.antimine.wear.message.VictoryActivity
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -192,18 +191,6 @@ class WearGameActivity : ThemedActivity(), AndroidFragmentApplication.Callbacks 
                         }
                     } else {
                         binding.tapToBegin.isVisible = false
-                    }
-
-                    if (it.isCreatingGame) {
-                        launch {
-                            // Show loading indicator only when it takes more than:
-                            delay(500)
-                            if (singleState().isCreatingGame) {
-                                binding.loadingGame.show()
-                            }
-                        }
-                    } else if (binding.loadingGame.isVisible) {
-                        binding.loadingGame.hide()
                     }
 
                     if (it.duration % 10 > 2) {

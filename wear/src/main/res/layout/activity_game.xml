@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".game.WearGameActivity">
 
     <dev.lucasnlm.antimine.wear.game.view.CustomDismissibleFrameLayout
         android:id="@+id/levelContainer"
@@ -52,20 +53,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="12:00" />
-
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/loadingGame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="gone"
-        app:hideAnimationBehavior="outward"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:showAnimationBehavior="inward"
-        app:trackThickness="2dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/newGame"

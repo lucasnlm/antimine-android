@@ -19,6 +19,7 @@ import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
+import dev.lucasnlm.antimine.common.level.logic.VisibleMineStream
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameState
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -37,6 +38,7 @@ import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.repository.ThemeRepository
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.map
@@ -52,6 +54,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
     private val preferencesRepository: PreferencesRepository by inject()
     private val appVersionManager: AppVersionManager by inject()
     private val gameAudioManager: GameAudioManager by inject()
+    private val visibleMineStream: VisibleMineStream by inject()
 
     private val layoutParent: FrameLayout? by lazy {
         view?.parent as? FrameLayout
@@ -180,6 +183,13 @@ open class GameRenderFragment : AndroidFragmentApplication() {
         this.engineReady = true
 
         Gdx.graphics.requestRendering()
+
+        lifecycleScope.launch {
+            visibleMineStream
+                .observeRequestVisibleMines()
+                .map { levelApplicationListener.getVisibleMineActors() }
+                .collect(visibleMineStream::update)
+        }
 
         lifecycleScope.launch {
             gameViewModel

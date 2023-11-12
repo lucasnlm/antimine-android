@@ -10,17 +10,17 @@ import dev.lucasnlm.antimine.core.getNeighborIdAtPos
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.AtlasNames
 import dev.lucasnlm.antimine.gdx.GameContext
+import dev.lucasnlm.antimine.gdx.GdxExt.alpha
+import dev.lucasnlm.antimine.gdx.GdxExt.dim
+import dev.lucasnlm.antimine.gdx.GdxExt.drawAsset
+import dev.lucasnlm.antimine.gdx.GdxExt.drawRegion
+import dev.lucasnlm.antimine.gdx.GdxExt.toGdxColor
+import dev.lucasnlm.antimine.gdx.GdxExt.toInverseBackOrWhite
 import dev.lucasnlm.antimine.gdx.actors.AreaForm.AREA_FULL_FORM
 import dev.lucasnlm.antimine.gdx.actors.AreaForm.AREA_NO_FORM
 import dev.lucasnlm.antimine.gdx.actors.AreaForm.areaFormOf
 import dev.lucasnlm.antimine.gdx.actors.AreaForm.toAtlasNames
-import dev.lucasnlm.antimine.gdx.alpha
-import dev.lucasnlm.antimine.gdx.dim
-import dev.lucasnlm.antimine.gdx.drawAsset
-import dev.lucasnlm.antimine.gdx.drawRegion
 import dev.lucasnlm.antimine.gdx.models.GameRenderingContext
-import dev.lucasnlm.antimine.gdx.toGdxColor
-import dev.lucasnlm.antimine.gdx.toInverseBackOrWhite
 import dev.lucasnlm.antimine.ui.model.minesAround
 import dev.lucasnlm.antimine.ui.repository.Themes
 

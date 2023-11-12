@@ -54,6 +54,7 @@ import dev.lucasnlm.external.ReviewWrapperImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
@@ -617,7 +618,7 @@ class GameActivity :
                                     if (wasPlaying) {
                                         gameAudioManager.resumeMusic()
                                     }
-                                    gameViewModel.revealRandomMine(false)
+                                    revealRandomMineShowWarning(false)
                                     gameViewModel.sendEvent(GameEvent.GiveMoreTip)
                                 },
                                 onFail = {
@@ -690,19 +691,28 @@ class GameActivity :
         }
     }
 
-    private fun revealRandomMine() {
+    private suspend fun revealRandomMine() {
         analyticsManager.sentEvent(Analytics.UseHint)
 
         val hintAmount = gameViewModel.getTips()
         if (hintAmount > 0) {
-            val revealedId = gameViewModel.revealRandomMine()
-            if (revealedId == null) {
-                showGameWarning(i18n.string.cant_do_it_now)
-            } else {
-                showGameWarning(i18n.string.mine_revealed)
-            }
+            revealRandomMineShowWarning()
         } else {
             showGameWarning(i18n.string.help_win_a_game)
+        }
+    }
+
+    private fun revealRandomMineShowWarning(consume: Boolean = true) {
+        lifecycleScope.launch {
+            gameViewModel
+                .revealRandomMine(consume)
+                .collect { revealedId ->
+                    if (revealedId == null) {
+                        showGameWarning(i18n.string.cant_do_it_now)
+                    } else {
+                        showGameWarning(i18n.string.mine_revealed)
+                    }
+                }
         }
     }
 

@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.common.level.di
 
+import dev.lucasnlm.antimine.common.level.logic.VisibleMineStream
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepositoryImpl
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
@@ -33,4 +34,8 @@ val LevelModule =
         single {
             TipRepositoryImpl(get(), get())
         } bind TipRepository::class
+
+        single {
+            VisibleMineStream()
+        }
     }

@@ -195,6 +195,10 @@ class GameApplicationListener(
         minefieldStage.scaleZoom(delta)
     }
 
+    fun getVisibleMineActors(): Set<Int> {
+        return minefieldStage.getVisibleMineActors()
+    }
+
     fun refreshSettings() {
         actionSettings =
             with(preferencesRepository) {

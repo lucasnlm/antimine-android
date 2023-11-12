@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.common.io.models.FirstOpen
 import dev.lucasnlm.antimine.common.io.models.Save
 import dev.lucasnlm.antimine.common.level.logic.GameController
+import dev.lucasnlm.antimine.common.level.logic.VisibleMineStream
 import dev.lucasnlm.antimine.common.level.models.ActionCompleted
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
@@ -33,8 +34,12 @@ import dev.lucasnlm.external.Leaderboard
 import dev.lucasnlm.external.PlayGamesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
@@ -52,6 +57,7 @@ open class GameViewModel(
     private val playGamesManager: PlayGamesManager,
     private val tipRepository: TipRepository,
     private val clockManager: ClockManager,
+    private val visibleMineStream: VisibleMineStream,
 ) : IntentViewModel<GameEvent, GameState>() {
     private lateinit var gameController: GameController
     private var initialized = false
@@ -649,20 +655,30 @@ open class GameViewModel(
         gameController.revealAllEmptyAreas()
     }
 
-    fun revealRandomMine(consume: Boolean = true): Int? {
+    suspend fun revealRandomMine(consume: Boolean = true): Flow<Int?> {
         return if (initialized) {
-            val result = gameController.revealRandomMine()
+            visibleMineStream
+                .observeVisibleMines()
+                .take(1)
+                .map {
+                    gameController
+                        .revealRandomMine(it)
+                        .also { result ->
+                            if (result != null) {
+                                soundManager.playRevealBomb()
 
-            if (result != null) {
-                soundManager.playRevealBomb()
-
-                if (consume) {
-                    sendEvent(GameEvent.ConsumeTip)
+                                if (consume) {
+                                    sendEvent(GameEvent.ConsumeTip)
+                                }
+                            }
+                        }
                 }
-            }
-            result
+                .also {
+                    visibleMineStream
+                        .requestVisibleMines()
+                }
         } else {
-            null
+            flowOf(null)
         }
     }
 
