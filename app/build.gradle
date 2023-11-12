@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode 1705091
-        versionName '17.5.9'
+        versionCode 1705101
+        versionName '17.5.10'
         minSdk 21
         targetSdk 34
         compileSdk 34
@@ -77,7 +77,7 @@ android {
         }
 
         googleInstant {
-            versionCode 162
+            versionCode 163
             dimension 'version'
             applicationId 'dev.lucasnlm.antimine'
             versionNameSuffix ' I'
