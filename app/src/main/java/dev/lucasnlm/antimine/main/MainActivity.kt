@@ -14,7 +14,6 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.widget.ViewPager2
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
@@ -72,7 +71,6 @@ class MainActivity : ThemedActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private lateinit var viewPager: ViewPager2
     private lateinit var googlePlayLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -397,14 +395,8 @@ class MainActivity : ThemedActivity() {
             is MainEvent.ShowCustomDifficultyDialogEvent -> {
                 showCustomLevelDialog()
             }
-            is MainEvent.GoToMainPageEvent -> {
-                viewPager.setCurrentItem(0, true)
-            }
             is MainEvent.OpenActivity -> {
                 startActivity(event.intent)
-            }
-            is MainEvent.GoToSettingsPageEvent -> {
-                viewPager.setCurrentItem(1, true)
             }
             is MainEvent.ShowControlsEvent -> {
                 showControlDialog()

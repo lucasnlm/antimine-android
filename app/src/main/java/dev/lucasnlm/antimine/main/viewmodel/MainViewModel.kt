@@ -32,8 +32,6 @@ class MainViewModel(
             is MainEvent.ShowCustomDifficultyDialogEvent -> showCustomDifficultyDialogEvent()
             is MainEvent.StartTutorialEvent -> startTutorial()
             is MainEvent.StartLanguageEvent -> startLocalization()
-            is MainEvent.GoToSettingsPageEvent -> goToSettingsPageEvent()
-            is MainEvent.GoToMainPageEvent -> goToMainPageEvent()
             is MainEvent.ShowControlsEvent -> showControlsEvent()
             is MainEvent.ShowGooglePlayGamesEvent -> showGooglePlayGames()
             is MainEvent.FetchCloudSave -> fetchCloudSave(event.playGamesId)
@@ -44,14 +42,6 @@ class MainViewModel(
 
     private fun showCustomDifficultyDialogEvent() {
         sendSideEffect(MainEvent.ShowCustomDifficultyDialogEvent)
-    }
-
-    private fun goToSettingsPageEvent() {
-        sendSideEffect(MainEvent.GoToSettingsPageEvent)
-    }
-
-    private fun goToMainPageEvent() {
-        sendSideEffect(MainEvent.GoToMainPageEvent)
     }
 
     private fun showControlsEvent() {

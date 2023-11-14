@@ -111,7 +111,8 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="start|center_vertical"
                                     android:paddingHorizontal="18dp"
-                                    android:text="@string/progressive" />
+                                    android:text="@string/progressive"
+                                    app:icon="@drawable/progressive" />
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/standardSize"
@@ -136,7 +137,8 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="start|center_vertical"
                                     android:paddingHorizontal="18dp"
-                                    android:text="@string/fixed_size" />
+                                    android:text="@string/fixed_size"
+                                    app:icon="@drawable/fixed_size" />
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/fixedSizeSize"
@@ -294,11 +296,11 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
                                 android:paddingHorizontal="18dp"
-                                android:text="@string/custom" />
+                                android:text="@string/custom"
+                                app:icon="@drawable/custom" />
 
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
-
                 </LinearLayout>
 
 
@@ -340,9 +342,9 @@
                             android:id="@+id/newThemesIcon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/new_icon"
                             android:layout_gravity="center_vertical|end"
-                            android:paddingHorizontal="16dp"/>
+                            android:paddingHorizontal="16dp"
+                            app:srcCompat="@drawable/new_icon" />
                     </FrameLayout>
 
                     <com.google.android.material.button.MaterialButton
