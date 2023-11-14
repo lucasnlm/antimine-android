@@ -70,11 +70,10 @@
             android:animateLayoutChanges="true"
             android:orientation="horizontal">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/back"
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?selectableItemBackgroundBorderless"
                 android:contentDescription="@string/back"
                 android:padding="20dp"
                 app:srcCompat="@drawable/arrow_left" />
@@ -142,12 +141,11 @@
                     app:indicatorSize="24dp"
                     app:trackThickness="3dp" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/shortcutIcon"
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:alpha="0.0"
-                    android:background="?selectableItemBackgroundBorderless"
                     android:clickable="false"
                     android:contentDescription="@string/new_game"
                     android:padding="20dp"
