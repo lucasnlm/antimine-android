@@ -2,19 +2,13 @@ package dev.lucasnlm.antimine.main
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.pm.ShortcutInfoCompat
-import androidx.core.content.pm.ShortcutManagerCompat
-import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.withCreated
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
@@ -22,7 +16,6 @@ import dev.lucasnlm.antimine.common.io.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.control.ControlActivity
-import dev.lucasnlm.antimine.core.ActivityExt.compatOverridePendingTransition
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
@@ -41,14 +34,14 @@ import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.support.IapHandler
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
+import dev.lucasnlm.antimine.utils.ActivityExt.compatOverridePendingTransition
+import dev.lucasnlm.antimine.utils.BuildExt.androidNougat
 import dev.lucasnlm.external.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import dev.lucasnlm.antimine.common.R as CR
 import dev.lucasnlm.antimine.i18n.R as i18n
 
 class MainActivity : ThemedActivity() {
@@ -265,17 +258,16 @@ class MainActivity : ThemedActivity() {
             }
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            binding.language.apply {
-                setText(i18n.string.language)
-                setOnClickListener {
-                    soundManager.playClickSound()
-                    analyticsManager.sentEvent(Analytics.OpenLanguage)
-                    viewModel.sendEvent(MainEvent.StartLanguageEvent)
+        binding.language.apply {
+            isVisible =
+                androidNougat {
+                    setText(i18n.string.language)
+                    setOnClickListener {
+                        soundManager.playClickSound()
+                        analyticsManager.sentEvent(Analytics.OpenLanguage)
+                        viewModel.sendEvent(MainEvent.StartLanguageEvent)
+                    }
                 }
-            }
-        } else {
-            binding.language.isVisible = false
         }
 
         binding.stats.setOnClickListener {

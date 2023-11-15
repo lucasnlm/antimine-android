@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.main.viewmodel
 import android.app.Application
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.core.content.pm.ShortcutInfoCompat
@@ -13,7 +12,6 @@ import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.common.io.models.Stats
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
-import dev.lucasnlm.antimine.core.BuildExt.withAndroidOreo
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
 import dev.lucasnlm.antimine.i18n.R
@@ -22,6 +20,7 @@ import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
+import dev.lucasnlm.antimine.utils.BuildExt.androidOreo
 import dev.lucasnlm.external.CloudStorageManager
 import dev.lucasnlm.external.InstantAppManager
 import dev.lucasnlm.external.model.CloudSave
@@ -119,7 +118,7 @@ class MainViewModel(
     private fun continueGame(difficulty: Difficulty? = null) {
         val context = application.applicationContext
 
-        withAndroidOreo {
+        androidOreo {
             difficulty?.let(::pushShortcutOf)
         }
 
@@ -153,13 +152,15 @@ class MainViewModel(
      */
     fun loadDefaultShortcuts() {
         val context = application.applicationContext
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !instantAppManager.isEnabled(context)) {
-            listOf(
-                Difficulty.Standard,
-                Difficulty.Intermediate,
-                Difficulty.Expert,
-                Difficulty.Master,
-            ).forEach(::pushShortcutOf)
+        androidOreo {
+            if (!instantAppManager.isEnabled(context)) {
+                listOf(
+                    Difficulty.Standard,
+                    Difficulty.Intermediate,
+                    Difficulty.Expert,
+                    Difficulty.Master,
+                ).forEach(::pushShortcutOf)
+            }
         }
     }
 

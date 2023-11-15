@@ -38,6 +38,7 @@ dependencies {
     implementation project(':i18n')
     implementation project(':preferences')
     implementation project(':ui')
+    implementation project(':utils')
     implementation project(':gdx')
     implementation project(':sgtatham')
     implementation project(':control')

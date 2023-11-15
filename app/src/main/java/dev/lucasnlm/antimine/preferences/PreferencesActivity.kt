@@ -3,7 +3,6 @@ package dev.lucasnlm.antimine.preferences
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
@@ -20,6 +19,8 @@ import dev.lucasnlm.antimine.databinding.ActivityPreferencesBinding
 import dev.lucasnlm.antimine.ui.ext.SnackbarExt.showWarning
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
 import dev.lucasnlm.antimine.ui.model.TopBarAction
+import dev.lucasnlm.antimine.utils.BuildExt.androidMarshmallow
+import dev.lucasnlm.antimine.utils.BuildExt.androidOreo
 import dev.lucasnlm.external.PlayGamesManager
 import org.koin.android.ext.android.inject
 import dev.lucasnlm.antimine.i18n.R as i18n
@@ -136,13 +137,13 @@ class PreferencesActivity :
         )
 
         binding.soundEffects.bindItem(
-            visible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M,
+            visible = androidMarshmallow(),
             initialValue = preferencesRepository.isSoundEffectsEnabled(),
             onChangeValue = { preferencesRepository.setSoundEffectsEnabled(it) },
         )
 
         binding.music.bindItem(
-            visible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M,
+            visible = androidMarshmallow(),
             initialValue = preferencesRepository.isMusicEnabled(),
             onChangeValue = { preferencesRepository.setMusicEnabled(it) },
         )
@@ -229,7 +230,7 @@ class PreferencesActivity :
                     putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)
                     type = "application/json"
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    androidOreo {
                         val documentsDir =
                             Environment.getExternalStoragePublicDirectory(
                                 Environment.DIRECTORY_DOCUMENTS,
@@ -248,7 +249,7 @@ class PreferencesActivity :
                     putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)
                     type = "application/json"
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    androidOreo {
                         val documentsDir =
                             Environment.getExternalStoragePublicDirectory(
                                 Environment.DIRECTORY_DOCUMENTS,

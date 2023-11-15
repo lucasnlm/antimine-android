@@ -5,11 +5,11 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.MaterialToolbar
-import dev.lucasnlm.antimine.core.ActivityExt.compatOverridePendingTransition
 import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.TopBarAction
 import dev.lucasnlm.antimine.ui.repository.ThemeRepository
+import dev.lucasnlm.antimine.utils.ActivityExt.compatOverridePendingTransition
 import org.koin.android.ext.android.inject
 
 /**

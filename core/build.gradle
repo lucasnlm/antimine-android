@@ -26,14 +26,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
-    
 }
 
 dependencies {
     // Dependencies must be hardcoded to support F-droid
 
     implementation project(':preferences')
+    implementation project(':utils')
 
     // Kotlin
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'

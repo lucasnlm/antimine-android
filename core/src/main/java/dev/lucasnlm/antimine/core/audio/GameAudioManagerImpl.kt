@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.res.AssetFileDescriptor
 import android.media.AudioAttributes
 import android.media.MediaPlayer
-import android.os.Build
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
+import dev.lucasnlm.antimine.utils.BuildExt.androidQuinceTart
 
 class GameAudioManagerImpl(
     private val context: Context,
@@ -131,7 +131,7 @@ class GameAudioManagerImpl(
                 setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
             }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            androidQuinceTart {
                 if (isMusic) {
                     setAllowedCapturePolicy(AudioAttributes.ALLOW_CAPTURE_BY_NONE)
                 } else {

@@ -17,11 +17,11 @@ import dev.lucasnlm.antimine.common.level.view.GameRenderFragment
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.core.serializableNonSafe
 import dev.lucasnlm.antimine.preferences.PreferencesRepositoryImpl
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
+import dev.lucasnlm.antimine.utils.serializableNonSafe
 import dev.lucasnlm.antimine.wear.databinding.ActivityGameBinding
 import dev.lucasnlm.antimine.wear.message.GameOverActivity
 import dev.lucasnlm.antimine.wear.message.VictoryActivity

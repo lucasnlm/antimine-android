@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import dev.lucasnlm.antimine.core.ActivityExt.compatOverridePendingTransition
+import dev.lucasnlm.antimine.utils.ActivityExt.compatOverridePendingTransition
 
 class StartActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

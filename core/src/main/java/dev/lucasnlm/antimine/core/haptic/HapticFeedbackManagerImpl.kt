@@ -3,11 +3,12 @@ package dev.lucasnlm.antimine.core.haptic
 import android.app.Application
 import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
-import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import dev.lucasnlm.antimine.preferences.PreferencesRepositoryImpl
+import dev.lucasnlm.antimine.utils.BuildExt.androidOreo
+import dev.lucasnlm.antimine.utils.BuildExt.androidSnowCone
 
 class HapticFeedbackManagerImpl(
     application: Application,
@@ -17,12 +18,15 @@ class HapticFeedbackManagerImpl(
     private val vibrator by lazy {
         val context = application.applicationContext
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val vibratorManager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-            vibratorManager.defaultVibrator
-        } else {
-            @Suppress("DEPRECATION")
-            context.getSystemService(VIBRATOR_SERVICE) as Vibrator
+        when {
+            androidSnowCone() -> {
+                val vibratorManager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+                vibratorManager.defaultVibrator
+            }
+            else -> {
+                @Suppress("DEPRECATION")
+                context.getSystemService(VIBRATOR_SERVICE) as Vibrator
+            }
         }
     }
 
@@ -49,13 +53,16 @@ class HapticFeedbackManagerImpl(
             val feedbackLevel = preferencesRepository.getHapticFeedbackLevel().toDouble() / 100.0
             val realAmplitude = (feedbackLevel * amplitude).toInt()
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(
-                    VibrationEffect.createOneShot(time, realAmplitude),
-                )
-            } else {
-                @Suppress("DEPRECATION")
-                vibrator.vibrate(time)
+            when {
+                androidOreo() -> {
+                    vibrator.vibrate(
+                        VibrationEffect.createOneShot(time, realAmplitude),
+                    )
+                }
+                else -> {
+                    @Suppress("DEPRECATION")
+                    vibrator.vibrate(time)
+                }
             }
         }
     }

@@ -11,7 +11,7 @@ import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.ui.databinding.ViewCardButtonBinding
-import dev.lucasnlm.antimine.ui.ext.toAndroidColor
+import dev.lucasnlm.antimine.ui.ext.ColorExt.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import com.google.android.material.R as GR
 

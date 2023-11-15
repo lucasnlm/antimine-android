@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.KeyEvent
@@ -18,7 +17,6 @@ import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.core.models.Analytics
-import dev.lucasnlm.antimine.core.parcelable
 import dev.lucasnlm.antimine.databinding.GameOverDialogBinding
 import dev.lucasnlm.antimine.gameover.model.CommonDialogState
 import dev.lucasnlm.antimine.gameover.model.GameResult
@@ -26,6 +24,8 @@ import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogEvent
 import dev.lucasnlm.antimine.gameover.viewmodel.EndGameDialogViewModel
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
+import dev.lucasnlm.antimine.utils.BuildExt.androidSnowCone
+import dev.lucasnlm.antimine.utils.BundleExt.parcelable
 import dev.lucasnlm.external.AnalyticsManager
 import dev.lucasnlm.external.FeatureFlagManager
 import kotlinx.coroutines.delay
@@ -216,8 +216,7 @@ class GameOverDialogFragment : CommonGameDialogFragment() {
 
             window?.apply {
                 setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                androidSnowCone {
                     addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
                     attributes?.blurBehindRadius = BACKGROUND_BLUR_RADIUS
                 }
