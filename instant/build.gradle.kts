@@ -4,14 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "dev.lucasnlm.antimine.i18n"
+    namespace = "dev.lucasnlm.antimine.instant"
 
     defaultConfig {
         minSdk = 21
         compileSdk = 34
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
