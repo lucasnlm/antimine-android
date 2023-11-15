@@ -77,14 +77,15 @@ tasks.register("copyAndroidNatives") {
         file("libs/x86_64/").mkdirs()
         file("libs/x86/").mkdirs()
 
-        natives.files.forEach {  jar ->
-            val outputDir: File? = when {
-                jar.name.endsWith("natives-arm64-v8a.jar") -> file("libs/arm64-v8a")
-                jar.name.endsWith("natives-armeabi-v7a.jar") -> file("libs/armeabi-v7a")
-                jar.name.endsWith("natives-x86_64.jar") -> file("libs/x86_64")
-                jar.name.endsWith("natives-x86.jar") -> file("libs/x86")
-                else -> null
-            }
+        natives.files.forEach { jar ->
+            val outputDir: File? =
+                when {
+                    jar.name.endsWith("natives-arm64-v8a.jar") -> file("libs/arm64-v8a")
+                    jar.name.endsWith("natives-armeabi-v7a.jar") -> file("libs/armeabi-v7a")
+                    jar.name.endsWith("natives-x86_64.jar") -> file("libs/x86_64")
+                    jar.name.endsWith("natives-x86.jar") -> file("libs/x86")
+                    else -> null
+                }
 
             if (outputDir != null) {
                 copy {
@@ -97,9 +98,8 @@ tasks.register("copyAndroidNatives") {
     }
 }
 
-
 //
-//tasks.register("copyAndroidNatives") {
+// tasks.register("copyAndroidNatives") {
 //    doFirst {
 
 //
@@ -107,7 +107,7 @@ tasks.register("copyAndroidNatives") {
 
 //        }
 //    }
-//}
+// }
 //
-//preBuild.dependsOn copyAndroidNatives
+// preBuild.dependsOn copyAndroidNatives
 project.tasks.preBuild.dependsOn("copyAndroidNatives")

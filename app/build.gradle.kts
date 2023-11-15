@@ -1,25 +1,23 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
+val isGoogleBuild = System.getenv("IS_GOOGLE_BUILD") == "1"
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
 }
 
 android {
-    namespace = "dev.lucasnlm.antimine.wear"
+    namespace = "dev.lucasnlm.antimine"
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        applicationId = "dev.lucasnlm.antimine"
-        versionCode = 1705110
-        versionName = "17.5.11 W"
-
-        //noinspection OldTargetApi
-        targetSdk = 33 // PlayStore has different settings for Wear apps
-        minSdk = 25
+        versionCode = 1705111
+        versionName = "17.5.11"
+        minSdk = 21
+        targetSdk = 34
         compileSdk = 34
         multiDexEnabled = true
-
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
@@ -37,6 +35,14 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
+        }
+
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
@@ -45,14 +51,6 @@ android {
                 "proguard-rules.pro",
             )
             signingConfig = signingConfigs.getByName("release")
-        }
-
-        getByName("debug") {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android.txt"),
-                "proguard-rules.pro",
-            )
         }
     }
 
@@ -76,7 +74,43 @@ android {
         buildConfig = true
         viewBinding = true
     }
+
+    flavorDimensions.add("version")
+    productFlavors {
+        create("google") {
+            dimension = "version"
+            applicationId = "dev.lucasnlm.antimine"
+            versionNameSuffix = " S"
+
+            if (isGoogleBuild) {
+                plugins.apply("com.google.gms.google-services")
+                plugins.apply("com.bugsnag.android.gradle")
+            }
+        }
+
+        create("googleInstant") {
+            versionCode = 163
+            dimension = "version"
+            applicationId = "dev.lucasnlm.antimine"
+            versionNameSuffix = " I"
+
+            if (isGoogleBuild) {
+                plugins.apply("com.google.gms.google-services")
+            }
+        }
+
+        create("foss") {
+            dimension = "version"
+            // There"s a typo on F-Droid release :(
+            applicationId = "dev.lucanlm.antimine"
+            versionNameSuffix = " F"
+        }
+    }
 }
+
+val googleImplementation by configurations
+val googleInstantImplementation by configurations
+val fossImplementation by configurations
 
 dependencies {
     // Dependencies must be hardcoded to support F-droid
@@ -84,15 +118,24 @@ dependencies {
     implementation(project(":external"))
     implementation(project(":common"))
     implementation(project(":control"))
+    implementation(project(":about"))
     implementation(project(":ui"))
+    implementation(project(":utils"))
     implementation(project(":preferences"))
+    implementation(project(":themes"))
+    implementation(project(":tutorial"))
     implementation(project(":core"))
     implementation(project(":gdx"))
-    implementation(project(":foss"))
-    implementation(project(":utils"))
 
-    // Wear OS
-    implementation("androidx.wear:wear:1.3.0")
+    googleImplementation(project(":proprietary"))
+    googleInstantImplementation(project(":proprietary"))
+    googleInstantImplementation(project(":instant"))
+    fossImplementation(project(":foss"))
+    fossImplementation(project(":donation"))
+
+    googleImplementation(project(":audio"))
+    fossImplementation(project(":audio"))
+    googleInstantImplementation(project(":audio-low"))
 
     // AndroidX
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -101,7 +144,6 @@ dependencies {
     implementation("androidx.multidex:multidex:2.0.1")
     implementation("androidx.activity:activity-ktx:1.8.0")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
-    implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
 
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
@@ -123,6 +165,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.10")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+
+    // Konfetti
+    implementation("nl.dionsegijn:konfetti-xml:2.0.3")
 
     // Tests
     testImplementation("junit:junit:4.13.2")
@@ -172,4 +217,26 @@ tasks.withType<Test>().configureEach {
             }
         },
     )
+}
+
+// The following code disables Google Services when building for F-Droid
+if (isGoogleBuild) {
+    android.applicationVariants.configureEach {
+        if (flavorName == "foss") {
+            project
+                .tasks
+                .names
+                .map { name ->
+                    name.lowercase() to project.tasks.named(name)
+                }
+                .filter { (name, _) ->
+                    name.contains("google") || name.contains("bugsnag")
+                }
+                .forEach { (_, task) ->
+                    task.configure {
+                        enabled = false
+                    }
+                }
+        }
+    }
 }
