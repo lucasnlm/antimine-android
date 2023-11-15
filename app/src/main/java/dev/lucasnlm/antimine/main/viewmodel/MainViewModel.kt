@@ -2,20 +2,28 @@ package dev.lucasnlm.antimine.main.viewmodel
 
 import android.app.Application
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.viewModelScope
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.common.io.models.Stats
 import dev.lucasnlm.antimine.common.level.repository.StatsRepository
+import dev.lucasnlm.antimine.core.BuildExt.withAndroidOreo
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.viewmodel.StatelessViewModel
+import dev.lucasnlm.antimine.i18n.R
 import dev.lucasnlm.antimine.l10n.LocalizationActivity
 import dev.lucasnlm.antimine.main.MainActivity
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
 import dev.lucasnlm.external.CloudStorageManager
+import dev.lucasnlm.external.InstantAppManager
 import dev.lucasnlm.external.model.CloudSave
 import kotlinx.coroutines.launch
 
@@ -24,6 +32,7 @@ class MainViewModel(
     private val preferencesRepository: PreferencesRepository,
     private val statsRepository: StatsRepository,
     private val saveCloudStorageManager: CloudStorageManager,
+    private val instantAppManager: InstantAppManager,
 ) : StatelessViewModel<MainEvent>() {
     override fun onEvent(event: MainEvent) {
         when (event) {
@@ -109,6 +118,11 @@ class MainViewModel(
 
     private fun continueGame(difficulty: Difficulty? = null) {
         val context = application.applicationContext
+
+        withAndroidOreo {
+            difficulty?.let(::pushShortcutOf)
+        }
+
         val intent =
             Intent(context, GameActivity::class.java).apply {
                 difficulty?.let {
@@ -132,5 +146,68 @@ class MainViewModel(
         val context = application.applicationContext
         val intent = Intent(context, LocalizationActivity::class.java)
         sendSideEffect(MainEvent.OpenActivity(intent))
+    }
+
+    /**
+     * Pushes the default shortcuts to the Home launcher.
+     */
+    fun loadDefaultShortcuts() {
+        val context = application.applicationContext
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !instantAppManager.isEnabled(context)) {
+            listOf(
+                Difficulty.Standard,
+                Difficulty.Intermediate,
+                Difficulty.Expert,
+                Difficulty.Master,
+            ).forEach(::pushShortcutOf)
+        }
+    }
+
+    /**
+     * Pushes a shortcut to the Home launcher.
+     * @param difficulty The difficulty to be used as a shortcut.
+     */
+    private fun pushShortcutOf(difficulty: Difficulty) {
+        val context = application.applicationContext
+
+        if (instantAppManager.isEnabled(context)) {
+            // Ignore. Instant App doesn't support shortcuts.
+            return
+        }
+
+        val name =
+            when (difficulty) {
+                Difficulty.Standard -> R.string.standard
+                Difficulty.Beginner -> R.string.beginner
+                Difficulty.Intermediate -> R.string.intermediate
+                Difficulty.Expert -> R.string.expert
+                Difficulty.Master -> R.string.master
+                Difficulty.Legend -> R.string.legend
+                else -> return
+            }
+
+        val icon =
+            when (difficulty) {
+                Difficulty.Beginner -> dev.lucasnlm.antimine.common.R.mipmap.shortcut_one
+                Difficulty.Intermediate -> dev.lucasnlm.antimine.common.R.mipmap.shortcut_two
+                Difficulty.Expert -> dev.lucasnlm.antimine.common.R.mipmap.shortcut_three
+                Difficulty.Master -> dev.lucasnlm.antimine.common.R.mipmap.shortcut_four
+                Difficulty.Legend -> dev.lucasnlm.antimine.common.R.mipmap.shortcut_four
+                else -> return
+            }
+
+        val shortcut =
+            ShortcutInfoCompat.Builder(context, difficulty.id)
+                .setShortLabel(context.getString(name))
+                .setIcon(IconCompat.createWithResource(context, icon))
+                .setIntent(Intent(Intent.ACTION_VIEW, difficulty.toDeeplink()))
+                .build()
+
+        ShortcutManagerCompat.pushDynamicShortcut(context, shortcut)
+    }
+
+    private fun Difficulty.toDeeplink(): Uri {
+        val idLow = id.lowercase()
+        return Uri.parse("app://antimine/game?difficulty=$idLow")
     }
 }

@@ -14,6 +14,7 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withCreated
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
@@ -61,7 +62,6 @@ class MainActivity : ThemedActivity() {
     private val billingManager: BillingManager by inject()
     private val savesRepository: SavesRepository by inject()
     private val inAppUpdateManager: InAppUpdateManager by inject()
-    private val instantAppManager: InstantAppManager by inject()
     private val preferenceRepository: PreferencesRepository by inject()
     private val soundManager: GameAudioManager by inject()
     private val gameLocaleManager: GameLocaleManager by inject()
@@ -90,14 +90,7 @@ class MainActivity : ThemedActivity() {
 
         bindMenuButtons()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && instantAppManager.isEnabled(applicationContext)) {
-            listOf(
-                Difficulty.Beginner,
-                Difficulty.Intermediate,
-                Difficulty.Expert,
-                Difficulty.Master,
-            ).forEach(::pushShortcutOf)
-        }
+        viewModel.loadDefaultShortcuts()
 
         lifecycleScope.launch {
             viewModel
@@ -190,10 +183,6 @@ class MainActivity : ThemedActivity() {
             binding.startLegend to Difficulty.Legend,
         ).forEach { (view, difficulty) ->
             view.setOnClickListener {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    pushShortcutOf(difficulty)
-                }
-
                 soundManager.playClickSound()
 
                 viewModel.sendEvent(
@@ -312,49 +301,6 @@ class MainActivity : ThemedActivity() {
         } else {
             binding.playGames.isVisible = false
         }
-    }
-
-    /**
-     * Pushes a shortcut to the Home launcher.
-     * @param difficulty The difficulty to be used as a shortcut.
-     */
-    private fun pushShortcutOf(difficulty: Difficulty) {
-        if (instantAppManager.isEnabled(applicationContext)) {
-            // Ignore. Instant App doesn't support shortcuts.
-            return
-        }
-
-        val idLow = difficulty.id.lowercase()
-        val deeplink = Uri.parse("app://antimine/game?difficulty=$idLow")
-
-        val name =
-            when (difficulty) {
-                Difficulty.Beginner -> i18n.string.beginner
-                Difficulty.Intermediate -> i18n.string.intermediate
-                Difficulty.Expert -> i18n.string.expert
-                Difficulty.Master -> i18n.string.master
-                Difficulty.Legend -> i18n.string.legend
-                else -> return
-            }
-
-        val icon =
-            when (difficulty) {
-                Difficulty.Beginner -> CR.mipmap.shortcut_one
-                Difficulty.Intermediate -> CR.mipmap.shortcut_two
-                Difficulty.Expert -> CR.mipmap.shortcut_three
-                Difficulty.Master -> CR.mipmap.shortcut_four
-                Difficulty.Legend -> CR.mipmap.shortcut_four
-                else -> return
-            }
-
-        val shortcut =
-            ShortcutInfoCompat.Builder(applicationContext, difficulty.id)
-                .setShortLabel(getString(name))
-                .setIcon(IconCompat.createWithResource(applicationContext, icon))
-                .setIntent(Intent(Intent.ACTION_VIEW, deeplink))
-                .build()
-
-        ShortcutManagerCompat.pushDynamicShortcut(applicationContext, shortcut)
     }
 
     override fun onResume() {
