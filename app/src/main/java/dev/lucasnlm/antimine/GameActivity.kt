@@ -5,7 +5,6 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.os.Build
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.util.Log
@@ -29,10 +28,8 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.ControlActivity
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
-import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.core.serializableNonSafe
 import dev.lucasnlm.antimine.databinding.ActivityGameBinding
 import dev.lucasnlm.antimine.gameover.GameOverDialogFragment
 import dev.lucasnlm.antimine.gameover.WinGameDialogFragment
@@ -42,9 +39,12 @@ import dev.lucasnlm.antimine.gdx.GameContext
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.tutorial.TutorialActivity
+import dev.lucasnlm.antimine.ui.ext.ColorExt.toAndroidColor
 import dev.lucasnlm.antimine.ui.ext.SnackbarExt.showWarning
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
-import dev.lucasnlm.antimine.ui.ext.toAndroidColor
+import dev.lucasnlm.antimine.utils.BuildExt.androidNougat
+import dev.lucasnlm.antimine.utils.BundleExt.serializableNonSafe
+import dev.lucasnlm.antimine.utils.ContextExt.isPortrait
 import dev.lucasnlm.external.AdsManager
 import dev.lucasnlm.external.AnalyticsManager
 import dev.lucasnlm.external.FeatureFlagManager
@@ -54,7 +54,6 @@ import dev.lucasnlm.external.ReviewWrapperImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
@@ -675,10 +674,14 @@ class GameActivity :
                     }
                     isVisible = true
                     max = TIP_COOLDOWN_MS.toInt()
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        setProgress(dt.toInt(), true)
-                    } else {
-                        progress = dt.toInt()
+
+                    when {
+                        androidNougat() -> {
+                            setProgress(dt.toInt(), true)
+                        }
+                        else -> {
+                            progress = dt.toInt()
+                        }
                     }
                 }
 

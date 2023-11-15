@@ -10,6 +10,7 @@ import dev.lucasnlm.antimine.ui.R
 import dev.lucasnlm.antimine.ui.model.AppSkin
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.ui.model.AreaPalette
+import dev.lucasnlm.antimine.utils.BuildExt.androidSnowCone
 import dev.lucasnlm.antimine.i18n.R as i18n
 
 class ThemeRepositoryImpl(
@@ -71,7 +72,7 @@ class ThemeRepositoryImpl(
             id = 0L,
             theme = R.style.AppTheme,
             palette =
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (androidSnowCone()) {
                     fromMaterialYou(context)
                 } else {
                     fromDefaultPalette(context)

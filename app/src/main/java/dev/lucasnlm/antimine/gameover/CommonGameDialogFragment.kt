@@ -12,13 +12,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.core.audio.GameAudioManagerImpl
-import dev.lucasnlm.antimine.core.dpToPx
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.databinding.DonationRequestBinding
 import dev.lucasnlm.antimine.databinding.HexBannerBinding
 import dev.lucasnlm.antimine.databinding.MusicLinkBinding
 import dev.lucasnlm.antimine.preferences.PreferencesActivity
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
+import dev.lucasnlm.antimine.utils.ContextExt.dpToPx
 import dev.lucasnlm.external.AdsManager
 import dev.lucasnlm.external.AnalyticsManager
 import dev.lucasnlm.external.BillingManager

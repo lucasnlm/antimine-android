@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Touchable
-import dev.lucasnlm.antimine.core.getNeighborIdAtPos
+import dev.lucasnlm.antimine.core.AreaExt.getNeighborIdAtPos
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.AtlasNames
 import dev.lucasnlm.antimine.gdx.GameContext

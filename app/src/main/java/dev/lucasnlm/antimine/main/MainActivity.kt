@@ -2,19 +2,13 @@ package dev.lucasnlm.antimine.main
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.pm.ShortcutInfoCompat
-import androidx.core.content.pm.ShortcutManagerCompat
-import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.widget.ViewPager2
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
@@ -22,7 +16,6 @@ import dev.lucasnlm.antimine.common.io.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
 import dev.lucasnlm.antimine.control.ControlActivity
-import dev.lucasnlm.antimine.core.ActivityExt.compatOverridePendingTransition
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.models.Analytics
 import dev.lucasnlm.antimine.core.models.Difficulty
@@ -41,14 +34,14 @@ import dev.lucasnlm.antimine.stats.StatsActivity
 import dev.lucasnlm.antimine.support.IapHandler
 import dev.lucasnlm.antimine.themes.ThemeActivity
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
+import dev.lucasnlm.antimine.utils.ActivityExt.compatOverridePendingTransition
+import dev.lucasnlm.antimine.utils.BuildExt.androidNougat
 import dev.lucasnlm.external.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import dev.lucasnlm.antimine.common.R as CR
 import dev.lucasnlm.antimine.i18n.R as i18n
 
 class MainActivity : ThemedActivity() {
@@ -62,7 +55,6 @@ class MainActivity : ThemedActivity() {
     private val billingManager: BillingManager by inject()
     private val savesRepository: SavesRepository by inject()
     private val inAppUpdateManager: InAppUpdateManager by inject()
-    private val instantAppManager: InstantAppManager by inject()
     private val preferenceRepository: PreferencesRepository by inject()
     private val soundManager: GameAudioManager by inject()
     private val gameLocaleManager: GameLocaleManager by inject()
@@ -72,7 +64,6 @@ class MainActivity : ThemedActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private lateinit var viewPager: ViewPager2
     private lateinit var googlePlayLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,14 +83,7 @@ class MainActivity : ThemedActivity() {
 
         bindMenuButtons()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && instantAppManager.isEnabled(applicationContext)) {
-            listOf(
-                Difficulty.Beginner,
-                Difficulty.Intermediate,
-                Difficulty.Expert,
-                Difficulty.Master,
-            ).forEach(::pushShortcutOf)
-        }
+        viewModel.loadDefaultShortcuts()
 
         lifecycleScope.launch {
             viewModel
@@ -192,10 +176,6 @@ class MainActivity : ThemedActivity() {
             binding.startLegend to Difficulty.Legend,
         ).forEach { (view, difficulty) ->
             view.setOnClickListener {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    pushShortcutOf(difficulty)
-                }
-
                 soundManager.playClickSound()
 
                 viewModel.sendEvent(
@@ -278,17 +258,16 @@ class MainActivity : ThemedActivity() {
             }
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            binding.language.apply {
-                setText(i18n.string.language)
-                setOnClickListener {
-                    soundManager.playClickSound()
-                    analyticsManager.sentEvent(Analytics.OpenLanguage)
-                    viewModel.sendEvent(MainEvent.StartLanguageEvent)
+        binding.language.apply {
+            isVisible =
+                androidNougat {
+                    setText(i18n.string.language)
+                    setOnClickListener {
+                        soundManager.playClickSound()
+                        analyticsManager.sentEvent(Analytics.OpenLanguage)
+                        viewModel.sendEvent(MainEvent.StartLanguageEvent)
+                    }
                 }
-            }
-        } else {
-            binding.language.isVisible = false
         }
 
         binding.stats.setOnClickListener {
@@ -314,49 +293,6 @@ class MainActivity : ThemedActivity() {
         } else {
             binding.playGames.isVisible = false
         }
-    }
-
-    /**
-     * Pushes a shortcut to the Home launcher.
-     * @param difficulty The difficulty to be used as a shortcut.
-     */
-    private fun pushShortcutOf(difficulty: Difficulty) {
-        if (instantAppManager.isEnabled(applicationContext)) {
-            // Ignore. Instant App doesn't support shortcuts.
-            return
-        }
-
-        val idLow = difficulty.id.lowercase()
-        val deeplink = Uri.parse("app://antimine/game?difficulty=$idLow")
-
-        val name =
-            when (difficulty) {
-                Difficulty.Beginner -> i18n.string.beginner
-                Difficulty.Intermediate -> i18n.string.intermediate
-                Difficulty.Expert -> i18n.string.expert
-                Difficulty.Master -> i18n.string.master
-                Difficulty.Legend -> i18n.string.legend
-                else -> return
-            }
-
-        val icon =
-            when (difficulty) {
-                Difficulty.Beginner -> CR.mipmap.shortcut_one
-                Difficulty.Intermediate -> CR.mipmap.shortcut_two
-                Difficulty.Expert -> CR.mipmap.shortcut_three
-                Difficulty.Master -> CR.mipmap.shortcut_four
-                Difficulty.Legend -> CR.mipmap.shortcut_four
-                else -> return
-            }
-
-        val shortcut =
-            ShortcutInfoCompat.Builder(applicationContext, difficulty.id)
-                .setShortLabel(getString(name))
-                .setIcon(IconCompat.createWithResource(applicationContext, icon))
-                .setIntent(Intent(Intent.ACTION_VIEW, deeplink))
-                .build()
-
-        ShortcutManagerCompat.pushDynamicShortcut(applicationContext, shortcut)
     }
 
     override fun onResume() {
@@ -397,14 +333,8 @@ class MainActivity : ThemedActivity() {
             is MainEvent.ShowCustomDifficultyDialogEvent -> {
                 showCustomLevelDialog()
             }
-            is MainEvent.GoToMainPageEvent -> {
-                viewPager.setCurrentItem(0, true)
-            }
             is MainEvent.OpenActivity -> {
                 startActivity(event.intent)
-            }
-            is MainEvent.GoToSettingsPageEvent -> {
-                viewPager.setCurrentItem(1, true)
             }
             is MainEvent.ShowControlsEvent -> {
                 showControlDialog()

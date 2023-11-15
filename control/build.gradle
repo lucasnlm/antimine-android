@@ -39,6 +39,7 @@ dependencies {
     implementation project(':i18n')
     implementation project(':preferences')
     implementation project(':ui')
+    implementation project(':utils')
 
     // Google
     implementation 'com.google.android.material:material:1.10.0'

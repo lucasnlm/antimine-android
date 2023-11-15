@@ -3,10 +3,10 @@ package dev.lucasnlm.antimine.ui.ext
 import android.view.View
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
-import dev.lucasnlm.antimine.core.dpToPx
-import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
+import dev.lucasnlm.antimine.utils.ContextExt.dpToPx
+import dev.lucasnlm.antimine.utils.ContextExt.isPortrait
 
 object SnackbarExt {
     /**

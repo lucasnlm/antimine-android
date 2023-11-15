@@ -10,7 +10,7 @@ import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
 import androidx.core.view.isVisible
 import dev.lucasnlm.antimine.ui.databinding.ViewOfferCardButtonBinding
-import dev.lucasnlm.antimine.ui.ext.toAndroidColor
+import dev.lucasnlm.antimine.ui.ext.ColorExt.toAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 
 class OfferCardButtonView : FrameLayout {

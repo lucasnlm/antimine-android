@@ -8,8 +8,8 @@ import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.themes.R
 import dev.lucasnlm.antimine.themes.databinding.ViewThemeBinding
 import dev.lucasnlm.antimine.themes.viewmodel.ThemeViewModel
-import dev.lucasnlm.antimine.ui.ext.toAndroidColor
-import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
+import dev.lucasnlm.antimine.ui.ext.ColorExt.toAndroidColor
+import dev.lucasnlm.antimine.ui.ext.ColorExt.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.i18n.R as i18n
 

@@ -16,13 +16,9 @@ sealed class MainEvent {
 
     data object StartLanguageEvent : MainEvent()
 
-    data object GoToMainPageEvent : MainEvent()
-
     data class OpenActivity(
         val intent: Intent,
     ) : MainEvent()
-
-    data object GoToSettingsPageEvent : MainEvent()
 
     data object ShowControlsEvent : MainEvent()
 

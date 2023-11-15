@@ -44,6 +44,7 @@ dependencies {
     implementation project(':core')
     implementation project(':preferences')
     implementation project(':ui')
+    implementation project(':utils')
 
     // AndroidX
     implementation 'androidx.appcompat:appcompat:1.6.1'

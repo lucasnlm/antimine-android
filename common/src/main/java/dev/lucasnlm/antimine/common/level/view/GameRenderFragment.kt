@@ -26,8 +26,6 @@ import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
 import dev.lucasnlm.antimine.control.SwitchButtonView
 import dev.lucasnlm.antimine.core.AppVersionManager
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
-import dev.lucasnlm.antimine.core.dpToPx
-import dev.lucasnlm.antimine.core.isPortrait
 import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.gdx.GameApplicationListener
 import dev.lucasnlm.antimine.gdx.GameContext
@@ -37,8 +35,9 @@ import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.repository.ThemeRepository
+import dev.lucasnlm.antimine.utils.ContextExt.dpToPx
+import dev.lucasnlm.antimine.utils.ContextExt.isPortrait
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.map

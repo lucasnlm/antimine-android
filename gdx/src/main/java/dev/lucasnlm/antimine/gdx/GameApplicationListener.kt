@@ -15,9 +15,9 @@ import dev.lucasnlm.antimine.gdx.stages.MinefieldStage
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.preferences.models.Minefield
-import dev.lucasnlm.antimine.ui.ext.blue
-import dev.lucasnlm.antimine.ui.ext.green
-import dev.lucasnlm.antimine.ui.ext.red
+import dev.lucasnlm.antimine.ui.ext.ColorExt.blue
+import dev.lucasnlm.antimine.ui.ext.ColorExt.green
+import dev.lucasnlm.antimine.ui.ext.ColorExt.red
 
 class GameApplicationListener(
     private val gameRenderingContext: GameRenderingContext,

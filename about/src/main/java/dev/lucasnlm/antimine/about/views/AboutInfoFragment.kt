@@ -5,7 +5,6 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +17,7 @@ import dev.lucasnlm.antimine.about.viewmodel.AboutEvent
 import dev.lucasnlm.antimine.about.viewmodel.AboutViewModel
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.models.Analytics
+import dev.lucasnlm.antimine.utils.BuildExt.androidTiramisu
 import dev.lucasnlm.external.AnalyticsManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -36,10 +36,13 @@ class AboutInfoFragment : Fragment() {
         flags: Int = 0,
     ): PackageInfo? {
         return runCatching {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
-            } else {
-                getPackageInfo(packageName, flags)
+            when {
+                androidTiramisu() -> {
+                    getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
+                }
+                else -> {
+                    getPackageInfo(packageName, flags)
+                }
             }
         }.getOrNull()
     }
@@ -49,12 +52,14 @@ class AboutInfoFragment : Fragment() {
         flags: Int = 0,
     ): ApplicationInfo? {
         return runCatching {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                val applicationInfoFlags = PackageManager.ApplicationInfoFlags.of(flags.toLong())
-                getApplicationInfo(packageName, applicationInfoFlags)
-            } else {
-                @Suppress("DEPRECATION")
-                getApplicationInfo(packageName, flags)
+            when {
+                androidTiramisu() -> {
+                    val applicationInfoFlags = PackageManager.ApplicationInfoFlags.of(flags.toLong())
+                    getApplicationInfo(packageName, applicationInfoFlags)
+                }
+                else -> {
+                    getApplicationInfo(packageName, flags)
+                }
             }
         }.getOrNull()
     }
