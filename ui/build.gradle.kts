@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.lucasnlm.antimine.tutorial"
+    namespace = "dev.lucasnlm.antimine.ui"
 
     defaultConfig {
         minSdk = 21
@@ -41,19 +41,17 @@ dependencies {
     // Dependencies must be hardcoded to support F-droid
 
     implementation(project(":core"))
-    implementation(project(":external"))
     implementation(project(":i18n"))
     implementation(project(":preferences"))
-    implementation(project(":ui"))
     implementation(project(":utils"))
+
+    // Google
+    implementation("com.google.android.material:material:1.10.0")
 
     // AndroidX
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.activity:activity-ktx:1.8.0")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
-
-    // Google
-    implementation("com.google.android.material:material:1.10.0")
 
     // RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.3.2")
