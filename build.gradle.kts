@@ -1,6 +1,13 @@
 buildscript {
+    extra.apply{
+        set("isGoogleBuild", System.getenv("IS_GOOGLE_BUILD")?.isNotBlank() == true)
+        set("isReleaseBuild", System.getenv("IS_RELEASE_BUILD")?.isNotBlank() == true)
+    }
+
     dependencies {
-        classpath("com.bugsnag:bugsnag-android-gradle-plugin:8.1.0")
+        if (System.getenv("IS_GOOGLE_BUILD") == "1") {
+            classpath("com.bugsnag:bugsnag-android-gradle-plugin:8.1.0")
+        }
     }
 }
 
@@ -16,8 +23,4 @@ allprojects {
         mavenCentral()
         google()
     }
-}
-
-tasks.register<Delete>("clean") {
-    delete(rootProject.layout.buildDirectory)
 }

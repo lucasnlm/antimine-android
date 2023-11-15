@@ -1,6 +1,7 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
-val isGoogleBuild = System.getenv("IS_GOOGLE_BUILD") == "1"
+val isGoogleBuild: Boolean by rootProject.extra
+val isReleaseBuild: Boolean by rootProject.extra
 
 plugins {
     id("com.android.application")
@@ -25,7 +26,7 @@ android {
 
     signingConfigs {
         create("release") {
-            if (System.getenv("IS_RELEASE_BUILD") == "1") {
+            if (isReleaseBuild) {
                 storeFile = file("../keystore")
                 keyAlias = System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
                 storePassword = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
