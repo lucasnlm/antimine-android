@@ -87,7 +87,6 @@ class AreaActor(
                             bottomRight = field.getOrNull(bottomRightId)?.canLinkTo(area) == true,
                         )
                     }
-
                     else -> {
                         AREA_NO_FORM
                     }
@@ -341,12 +340,7 @@ class AreaActor(
         val area = this.area ?: return
 
         batch?.run {
-            val isOdd: Boolean =
-                if (area.posY % 2 == 0) {
-                    area.posX % 2 != 0
-                } else {
-                    area.posX % 2 == 0
-                }
+            val isOdd = area.isOdd
 
             drawBackground(this, isOdd)
 
