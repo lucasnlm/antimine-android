@@ -159,6 +159,7 @@ dependencies {
 
     // Google
     implementation(libs.material)
+    testImplementation(libs.truth)
 
     // Koin
     implementation(libs.koin.android)

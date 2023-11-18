@@ -32,4 +32,15 @@ object AtlasNames {
     const val FLAG = "flag"
     const val MINE = "mine"
     const val QUESTION = "question"
+
+    const val TILE_FULL = "tile-full"
+    const val TILE_NONE = "tile-none"
+    const val TILE_SIDE_TOP = "tile-side-t"
+    const val TILE_SIDE_BOTTOM = "tile-side-b"
+    const val TILE_SIDE_LEFT = "tile-side-l"
+    const val TILE_SIDE_RIGHT = "tile-side-r"
+    const val TILE_CORNER_TR = "tile-corner-tl"
+    const val TILE_CORNER_TL = "tile-corner-tr"
+    const val TILE_CORNER_BR = "tile-corner-br"
+    const val TILE_CORNER_BL = "tile-corner-bl"
 }

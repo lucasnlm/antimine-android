@@ -31,7 +31,7 @@ class AreaActor(
     inputListener: InputListener,
     var isPressed: Boolean = false,
     private var focusScale: Float = 1.0f,
-    private var pieces: Set<String> = setOf(),
+    private var sprite: String? = null,
     private val gameRenderingContext: GameRenderingContext,
 ) : Actor() {
     var area: Area? = null
@@ -95,7 +95,7 @@ class AreaActor(
 
             if ((area.isCovered || area.hasMine) && this.areaForm != newForm) {
                 this.areaForm = newForm
-                pieces = newForm.toAtlasNames()
+                sprite = newForm.toAtlasNames()
             }
         }
     }
@@ -167,9 +167,9 @@ class AreaActor(
                     blend = false,
                 )
             } else {
-                pieces.forEach { piece ->
+                sprite?.let {
                     batch.drawRegion(
-                        texture = GameContext.gameTextures!!.pieces[piece]!!,
+                        texture = GameContext.gameTextures!!.pieces[it]!!,
                         x = x - 0.5f,
                         y = y - 0.5f,
                         width = width + 0.5f,
@@ -186,17 +186,15 @@ class AreaActor(
         val coverColor = Color(0.8f, 0.3f, 0.3f, 1.0f)
 
         GameContext.atlas?.let { atlas ->
-            pieces.forEach { piece ->
-                batch.drawRegion(
-                    texture = atlas.findRegion(piece),
-                    x = x - 0.5f,
-                    y = y - 0.5f,
-                    width = width + 1.0f,
-                    height = height + 1.0f,
-                    color = coverColor,
-                    blend = false,
-                )
-            }
+            batch.drawRegion(
+                texture = atlas.findRegion(sprite),
+                x = x - 0.5f,
+                y = y - 0.5f,
+                width = width + 1.0f,
+                height = height + 1.0f,
+                color = coverColor,
+                blend = false,
+            )
         }
     }
 
@@ -396,7 +394,7 @@ class AreaActor(
         other as AreaActor
 
         if (area != other.area) return false
-        if (pieces != other.pieces) return false
+        if (sprite != other.sprite) return false
         if (areaForm != other.areaForm) return false
 
         return true
@@ -404,7 +402,7 @@ class AreaActor(
 
     override fun hashCode(): Int {
         var result = area.hashCode()
-        result = 31 * result + pieces.hashCode()
+        result = 31 * result + sprite.hashCode()
         result = 31 * result + (areaForm?.hashCode() ?: 0)
         return result
     }

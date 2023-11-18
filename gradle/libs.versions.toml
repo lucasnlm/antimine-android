@@ -1,6 +1,7 @@
 [versions]
 minSdk = "21"
 targetSdk = "34"
+truth = "1.1.4"
 wearTargetSdk = "33"
 wearMinSdk = "25"
 compileSdk = "34"
@@ -99,6 +100,7 @@ robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectr
 rules = { module = "androidx.test:rules", version.ref = "coreKtxVersion" }
 runner = { module = "androidx.test:runner", version.ref = "runner" }
 test-core-ktx = { module = "androidx.test:core-ktx", version.ref = "coreKtxVersion" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
 wear = { module = "androidx.wear:wear", version.ref = "wear" }
 
 [plugins]

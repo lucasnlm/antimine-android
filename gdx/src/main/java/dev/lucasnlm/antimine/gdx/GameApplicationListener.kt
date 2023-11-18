@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputMultiplexer
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.input.GestureDetector
+import com.badlogic.gdx.maps.tiled.TiledMap
+import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import dev.lucasnlm.antimine.core.AppVersionManager
 import dev.lucasnlm.antimine.core.models.Area
 import dev.lucasnlm.antimine.gdx.controller.GameInputController
@@ -71,6 +73,9 @@ class GameApplicationListener(
     override fun create() {
         super.create()
 
+        val tiledMap = TiledMap()
+
+
         val currentSkin = gameRenderingContext.appSkin
 
         GameContext.run {
@@ -97,6 +102,17 @@ class GameApplicationListener(
                                 ).map(::findRegion),
                             pieces =
                                 listOf(
+                                    AtlasNames.TILE_FULL,
+                                    AtlasNames.TILE_NONE,
+                                    AtlasNames.TILE_SIDE_TOP,
+                                    AtlasNames.TILE_SIDE_BOTTOM,
+                                    AtlasNames.TILE_SIDE_LEFT,
+                                    AtlasNames.TILE_SIDE_RIGHT,
+                                    AtlasNames.TILE_CORNER_TR,
+                                    AtlasNames.TILE_CORNER_TL,
+                                    AtlasNames.TILE_CORNER_BR,
+                                    AtlasNames.TILE_CORNER_BL,
+
                                     AtlasNames.CORE,
                                     AtlasNames.BOTTOM,
                                     AtlasNames.TOP,
