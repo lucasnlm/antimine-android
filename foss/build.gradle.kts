@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.lucasnlm.antimine.utils"
+    namespace = "dev.lucasnlm.foss"
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -17,10 +17,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
+            setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"))
         }
     }
 
@@ -40,11 +37,21 @@ android {
 }
 
 dependencies {
+    implementation(project(":external"))
+    implementation(project(":i18n"))
+
     // Kotlin
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlin.stdlib)
     testImplementation(libs.kotlinx.coroutines.test)
 
-    // AndroidX
-    implementation(libs.appcompat)
+    // Koin
+    implementation(libs.koin.android)
+    testImplementation(libs.koin.test)
+
+    // Acra
+    implementation(libs.acra.core)
+    implementation(libs.acra.mail)
+    implementation(libs.acra.toast)
+    implementation(libs.acra.limiter)
 }

@@ -6,8 +6,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
-import dev.lucasnlm.antimine.ui.ext.toAndroidColor
-import dev.lucasnlm.antimine.ui.ext.toInvertedAndroidColor
+import dev.lucasnlm.antimine.ui.ext.ColorExt.toAndroidColor
+import dev.lucasnlm.antimine.ui.ext.ColorExt.toInvertedAndroidColor
 import dev.lucasnlm.antimine.ui.model.AppTheme
 import dev.lucasnlm.antimine.wear.R
 import dev.lucasnlm.antimine.wear.databinding.ViewThemeBinding

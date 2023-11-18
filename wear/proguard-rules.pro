@@ -81,3 +81,7 @@
 
 -dontwarn javax.annotation.processing.AbstractProcessor
 -dontwarn javax.annotation.processing.SupportedOptions
+-dontwarn java.lang.invoke.StringConcatFactory
+-dontwarn com.google.android.material.R$attr
+-dontwarn dev.lucasnlm.antimine.i18n.R$string
+

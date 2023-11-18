@@ -15,7 +15,7 @@ jobs:
       - name: Run script
         run: |
           chmod +x ./gdx/check_import.sh
-          bash ./gdx/check_import.sh ./gdx/build.gradle
+          bash ./gdx/check_import.sh ./gdx/build.gradle.kts
         shell: bash
 
   ktlint:

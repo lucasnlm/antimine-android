@@ -4,23 +4,17 @@ plugins {
 }
 
 android {
-    namespace = "dev.lucasnlm.antimine.utils"
+    namespace = "dev.lucasnlm.antimine.audio"
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
         compileSdk = libs.versions.compileSdk.get().toInt()
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
+            setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"))
         }
     }
 
@@ -37,14 +31,4 @@ android {
         buildConfig = true
         viewBinding = true
     }
-}
-
-dependencies {
-    // Kotlin
-    implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.kotlin.stdlib)
-    testImplementation(libs.kotlinx.coroutines.test)
-
-    // AndroidX
-    implementation(libs.appcompat)
 }

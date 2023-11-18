@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.lucasnlm.antimine.utils"
+    namespace = "dev.lucasnlm.antimine.i18n"
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -17,10 +17,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
+            setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"))
         }
     }
 
@@ -37,14 +34,4 @@ android {
         buildConfig = true
         viewBinding = true
     }
-}
-
-dependencies {
-    // Kotlin
-    implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.kotlin.stdlib)
-    testImplementation(libs.kotlinx.coroutines.test)
-
-    // AndroidX
-    implementation(libs.appcompat)
 }

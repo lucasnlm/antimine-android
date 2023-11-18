@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.lucasnlm.antimine.utils"
+    namespace = "dev.lucasnlm.antimine.proprietary"
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -17,10 +17,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
+            setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"))
         }
     }
 
@@ -40,11 +37,32 @@ android {
 }
 
 dependencies {
+    implementation(project(":external"))
+
+    // Amplitude
+    implementation(libs.amplitude.sdk)
+    implementation(libs.okhttp)
+
+    // Bugsnag
+    implementation(libs.bugsnag.android)
+
+    // Google
+    implementation(libs.google.billing.ktx)
+    implementation(libs.play.services.instantapps)
+    implementation(libs.play.services.games)
+    implementation(libs.play.services.auth)
+    implementation(libs.play.services.ads)
+    implementation(libs.play.core.ktx)
+
+    // Jetbrains
+    implementation(libs.kotlinx.coroutines.play.services)
+
     // Kotlin
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlin.stdlib)
     testImplementation(libs.kotlinx.coroutines.test)
 
-    // AndroidX
-    implementation(libs.appcompat)
+    // Koin
+    implementation(libs.koin.android)
+    testImplementation(libs.koin.test)
 }

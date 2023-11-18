@@ -4,7 +4,14 @@ plugins {
 }
 
 android {
-    namespace = "dev.lucasnlm.antimine.utils"
+    namespace = "dev.lucasnlm.antimine.sgtatham"
+    ndkVersion = "25.1.8937393"
+
+    externalNativeBuild {
+        cmake {
+            version = "3.19.0+"
+        }
+    }
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -12,15 +19,18 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        externalNativeBuild {
+            cmake {
+                cppFlags("-std=c++20 -Ofast -g0")
+            }
+        }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
+            setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"))
         }
     }
 
@@ -37,14 +47,16 @@ android {
         buildConfig = true
         viewBinding = true
     }
+
+    externalNativeBuild {
+        cmake {
+            path("src/main/cpp/CMakeLists.txt")
+        }
+    }
 }
 
 dependencies {
-    // Kotlin
-    implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.kotlin.stdlib)
-    testImplementation(libs.kotlinx.coroutines.test)
-
-    // AndroidX
     implementation(libs.appcompat)
+    androidTestImplementation(libs.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 }
