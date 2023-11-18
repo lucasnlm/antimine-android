@@ -138,6 +138,8 @@ class GameApplicationListener(
             atlas = null
         }
 
+        minefieldStage.dispose()
+
         Gdx.input.inputProcessor = null
         boundMinefield = null
     }

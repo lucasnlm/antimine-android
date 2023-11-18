@@ -19,4 +19,11 @@ data class Area(
     companion object {
         const val BYTE_SIZE = 20 * Int.SIZE_BYTES
     }
+
+    val isOdd: Boolean =
+        if (posY % 2 == 0) {
+            posX % 2 != 0
+        } else {
+            posX % 2 == 0
+        }
 }
