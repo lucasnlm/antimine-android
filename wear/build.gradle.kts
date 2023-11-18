@@ -1,7 +1,7 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
-val isGoogleBuild: Boolean by rootProject.extra
-val isReleaseBuild: Boolean by rootProject.extra
+val isGoogleBuild: Boolean = System.getenv("IS_GOOGLE_BUILD")?.isNotBlank() == true
+val isReleaseBuild: Boolean = System.getenv("IS_RELEASE_BUILD")?.isNotBlank() == true
 
 plugins {
     id("com.android.application")
@@ -12,15 +12,14 @@ android {
     namespace = "dev.lucasnlm.antimine.wear"
 
     defaultConfig {
-        // versionCode and versionName must be hardcoded to support F-droid
         applicationId = "dev.lucasnlm.antimine"
-        versionCode = 1705110
-        versionName = "17.5.11 W"
+        versionCode = 1706000
+        versionName = "17.6.0 W"
 
         //noinspection OldTargetApi
-        targetSdk = 33 // PlayStore has different settings for Wear apps
-        minSdk = 25
-        compileSdk = 34
+        targetSdk = libs.versions.wearTargetSdk.get().toInt()
+        minSdk = libs.versions.wearMinSdk.get().toInt()
+        compileSdk = libs.versions.compileSdk.get().toInt()
         multiDexEnabled = true
 
         vectorDrawables.useSupportLibrary = true
@@ -60,12 +59,12 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     testOptions {
@@ -82,8 +81,6 @@ android {
 }
 
 dependencies {
-    // Dependencies must be hardcoded to support F-droid
-
     implementation(project(":external"))
     implementation(project(":common"))
     implementation(project(":control"))
@@ -95,60 +92,60 @@ dependencies {
     implementation(project(":utils"))
 
     // Wear OS
-    implementation("androidx.wear:wear:1.3.0")
+    implementation(libs.wear)
 
     // AndroidX
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.preference:preference-ktx:1.2.1")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("androidx.multidex:multidex:2.0.1")
-    implementation("androidx.activity:activity-ktx:1.8.0")
-    implementation("androidx.fragment:fragment-ktx:1.6.2")
-    implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
+    implementation(libs.appcompat)
+    implementation(libs.preference.ktx)
+    implementation(libs.recyclerview)
+    implementation(libs.multidex)
+    implementation(libs.activity.ktx)
+    implementation(libs.fragment.ktx)
+    implementation(libs.core.splashscreen)
 
     // Lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.6.2")
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.common.java8)
 
     // Constraint
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(libs.constraintlayout)
 
     // Google
-    implementation("com.google.android.material:material:1.10.0")
+    implementation(libs.material)
 
     // Koin
-    implementation("io.insert-koin:koin-android:3.1.2")
-    testImplementation("io.insert-koin:koin-test:3.1.2")
+    implementation(libs.koin.android)
+    testImplementation(libs.koin.test)
 
     // Kotlin
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.10")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlin.stdlib)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     // Tests
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("androidx.core:core-ktx:1.12.0")
-    testImplementation("androidx.test:core-ktx:1.5.0")
-    testImplementation("androidx.test:rules:1.5.0")
-    testImplementation("androidx.test:runner:1.5.2")
-    testImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    testImplementation("androidx.fragment:fragment-testing:1.6.2")
-    testImplementation("org.robolectric:robolectric:4.5.1")
-    testImplementation("androidx.test.ext:junit:1.1.5")
-    testImplementation("io.mockk:mockk:1.13.5")
+    testImplementation(libs.junit)
+    testImplementation(libs.core.ktx)
+    testImplementation(libs.test.core.ktx)
+    testImplementation(libs.rules)
+    testImplementation(libs.runner)
+    testImplementation(libs.espresso.core)
+    testImplementation(libs.fragment.testing)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.ext.junit)
+    testImplementation(libs.mockk)
 
     // Core library
-    androidTestImplementation("androidx.test:core:1.5.0")
+    androidTestImplementation(libs.test.core)
 
     // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation("androidx.test:core:1.5.0")
-    androidTestImplementation("androidx.test:core-ktx:1.5.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.test:runner:1.5.2")
-    androidTestImplementation("androidx.test:rules:1.5.0")
-    androidTestUtil("androidx.test:orchestrator:1.4.2")
+    androidTestImplementation(libs.test.core)
+    androidTestImplementation(libs.test.core.ktx)
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.runner)
+    androidTestImplementation(libs.rules)
+    androidTestUtil(libs.orchestrator)
 }
 
 tasks.withType<Test>().configureEach {

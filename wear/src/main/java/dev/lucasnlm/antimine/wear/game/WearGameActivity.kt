@@ -21,7 +21,7 @@ import dev.lucasnlm.antimine.preferences.PreferencesRepositoryImpl
 import dev.lucasnlm.antimine.preferences.models.Action
 import dev.lucasnlm.antimine.preferences.models.ControlStyle
 import dev.lucasnlm.antimine.ui.ext.ThemedActivity
-import dev.lucasnlm.antimine.utils.serializableNonSafe
+import dev.lucasnlm.antimine.utils.BundleExt.serializableNonSafe
 import dev.lucasnlm.antimine.wear.databinding.ActivityGameBinding
 import dev.lucasnlm.antimine.wear.message.GameOverActivity
 import dev.lucasnlm.antimine.wear.message.VictoryActivity

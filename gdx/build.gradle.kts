@@ -9,8 +9,8 @@ android {
     namespace = "dev.lucasnlm.antimine.gdx"
 
     defaultConfig {
-        minSdk = 21
-        compileSdk = 34
+        minSdk = libs.versions.minSdk.get().toInt()
+        compileSdk = libs.versions.compileSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -18,18 +18,18 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"))
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     buildFeatures {
@@ -53,21 +53,22 @@ dependencies {
     implementation(project(":utils"))
 
     // AndroidX
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.activity:activity-ktx:1.8.0")
-    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation(libs.appcompat)
+    implementation(libs.activity.ktx)
+    implementation(libs.fragment.ktx)
 
     // Koin
-    implementation("io.insert-koin:koin-android:3.1.2")
-    testImplementation("io.insert-koin:koin-test:3.1.2")
+    implementation(libs.koin.android)
+    testImplementation(libs.koin.test)
 
     // LibGDX
-    api("com.badlogicgames.gdx:gdx-backend-android:1.11.0")
-    api("com.badlogicgames.gdx:gdx:1.11.0")
-    natives("com.badlogicgames.gdx:gdx-platform:1.11.0:natives-armeabi-v7a")
-    natives("com.badlogicgames.gdx:gdx-platform:1.11.0:natives-arm64-v8a")
-    natives("com.badlogicgames.gdx:gdx-platform:1.11.0:natives-x86")
-    natives("com.badlogicgames.gdx:gdx-platform:1.11.0:natives-x86_64")
+    val gdxVersion = libs.versions.gdx.get()
+    api(libs.libgdx.backend.android)
+    api(libs.libgdx)
+    natives("com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a")
+    natives("com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a")
+    natives("com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86")
+    natives("com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86_64")
 }
 
 tasks.register("copyAndroidNatives") {
@@ -98,16 +99,4 @@ tasks.register("copyAndroidNatives") {
     }
 }
 
-//
-// tasks.register("copyAndroidNatives") {
-//    doFirst {
-
-//
-//        configurations.natives.files.each { jar ->
-
-//        }
-//    }
-// }
-//
-// preBuild.dependsOn copyAndroidNatives
 project.tasks.preBuild.dependsOn("copyAndroidNatives")

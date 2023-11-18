@@ -1,9 +1,4 @@
 buildscript {
-    extra.apply{
-        set("isGoogleBuild", System.getenv("IS_GOOGLE_BUILD")?.isNotBlank() == true)
-        set("isReleaseBuild", System.getenv("IS_RELEASE_BUILD")?.isNotBlank() == true)
-    }
-
     dependencies {
         if (System.getenv("IS_GOOGLE_BUILD") == "1") {
             classpath("com.bugsnag:bugsnag-android-gradle-plugin:8.1.0")
@@ -12,10 +7,13 @@ buildscript {
 }
 
 plugins {
-    id("com.android.application") version "8.1.3" apply false
-    id("com.android.library") version "8.1.3" apply false
-    id("org.jetbrains.kotlin.android") version "1.9.10" apply false
-    id("com.google.gms.google-services") version "4.4.0" apply false
+    alias(libs.plugins.android) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+
+    if (System.getenv("IS_GOOGLE_BUILD")?.isNotBlank() == true) {
+        alias(libs.plugins.google.services) apply false
+    }
 }
 
 allprojects {

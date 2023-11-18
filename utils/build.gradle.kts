@@ -7,8 +7,8 @@ android {
     namespace = "dev.lucasnlm.antimine.utils"
 
     defaultConfig {
-        minSdk = 21
-        compileSdk = 34
+        minSdk = libs.versions.minSdk.get().toInt()
+        compileSdk = libs.versions.compileSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -25,12 +25,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     buildFeatures {
@@ -41,10 +41,10 @@ android {
 
 dependencies {
     // Kotlin
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.10")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlin.stdlib)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     // AndroidX
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation(libs.appcompat)
 }

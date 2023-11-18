@@ -7,8 +7,8 @@ android {
     namespace = "dev.lucasnlm.antimine.preferences"
 
     defaultConfig {
-        minSdk = 21
-        compileSdk = 34
+        minSdk = libs.versions.minSdk.get().toInt()
+        compileSdk = libs.versions.compileSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -16,18 +16,18 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"))
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     buildFeatures {
@@ -37,15 +37,13 @@ android {
 }
 
 dependencies {
-    // Dependencies must be hardcoded to support F-droid
-
     // AndroidX
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.preference:preference-ktx:1.2.1")
+    implementation(libs.appcompat)
+    implementation(libs.preference.ktx)
 
     // Unit Tests
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("org.mockito:mockito-core:4.6.1")
-    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0")
-    testImplementation("io.mockk:mockk:1.13.5")
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.mockk)
 }

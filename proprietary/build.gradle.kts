@@ -7,8 +7,8 @@ android {
     namespace = "dev.lucasnlm.antimine.proprietary"
 
     defaultConfig {
-        minSdk = 21
-        compileSdk = 34
+        minSdk = libs.versions.minSdk.get().toInt()
+        compileSdk = libs.versions.compileSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -16,18 +16,18 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"))
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     buildFeatures {
@@ -37,34 +37,32 @@ android {
 }
 
 dependencies {
-    // Dependencies must be hardcoded to support F-droid
-
     implementation(project(":external"))
 
     // Amplitude
-    implementation("com.amplitude:android-sdk:2.32.1")
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation(libs.amplitude.sdk)
+    implementation(libs.okhttp)
 
     // Bugsnag
-    implementation("com.bugsnag:bugsnag-android:5.31.2")
+    implementation(libs.bugsnag.android)
 
     // Google
-    implementation("com.android.billingclient:billing-ktx:6.0.1")
-    implementation("com.google.android.gms:play-services-instantapps:18.0.1")
-    implementation("com.google.android.gms:play-services-games:23.1.0")
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
-    implementation("com.google.android.gms:play-services-ads:22.4.0")
-    implementation("com.google.android.play:core-ktx:1.8.1")
+    implementation(libs.google.billing.ktx)
+    implementation(libs.play.services.instantapps)
+    implementation(libs.play.services.games)
+    implementation(libs.play.services.auth)
+    implementation(libs.play.services.ads)
+    implementation(libs.play.core.ktx)
 
     // Jetbrains
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+    implementation(libs.kotlinx.coroutines.play.services)
 
     // Kotlin
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.10")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlin.stdlib)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     // Koin
-    implementation("io.insert-koin:koin-android:3.1.2")
-    testImplementation("io.insert-koin:koin-test:3.1.2")
+    implementation(libs.koin.android)
+    testImplementation(libs.koin.test)
 }

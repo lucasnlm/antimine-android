@@ -7,8 +7,8 @@ android {
     namespace = "dev.lucasnlm.antimine.core"
 
     defaultConfig {
-        minSdk = 21
-        compileSdk = 34
+        minSdk = libs.versions.minSdk.get().toInt()
+        compileSdk = libs.versions.compileSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -16,18 +16,18 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"))
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     buildFeatures {
@@ -37,26 +37,24 @@ android {
 }
 
 dependencies {
-    // Dependencies must be hardcoded to support F-droid
-
     implementation(project(":preferences"))
     implementation(project(":utils"))
 
     // Kotlin
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.10")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlin.stdlib)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     // Koin
-    implementation("io.insert-koin:koin-android:3.1.2")
-    testImplementation("io.insert-koin:koin-test:3.1.2")
+    implementation(libs.koin.android)
+    testImplementation(libs.koin.test)
 
     // AndroidX
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation(libs.appcompat)
 
     // Lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.6.2")
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.common.java8)
 }
