@@ -5,11 +5,12 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.content.res.TypedArray
 import android.os.Build
+import android.util.DisplayMetrics
 import android.view.KeyCharacterMap
 import android.view.KeyEvent
 import android.view.ViewConfiguration
 import dev.lucasnlm.antimine.core.R
-import dev.lucasnlm.antimine.core.models.MinefieldSize
+import kotlin.math.min
 
 class DimensionRepositoryImpl(
     private val context: Context,
@@ -28,7 +29,13 @@ class DimensionRepositoryImpl(
     }
 
     override fun areaSize(): Float {
-        return displaySize().width / 11.0f
+        val displayMetrics = displayMetrics()
+        val minSide =
+            min(
+                displayMetrics.widthPixels,
+                displayMetrics.heightPixels,
+            )
+        return minSide / 11.0f
     }
 
     override fun areaSeparator(): Float {
@@ -39,10 +46,9 @@ class DimensionRepositoryImpl(
         return areaSize() + 2 * areaSeparator()
     }
 
-    override fun displaySize(): MinefieldSize =
-        with(Resources.getSystem().displayMetrics) {
-            return MinefieldSize(this.widthPixels, this.heightPixels)
-        }
+    override fun displayMetrics(): DisplayMetrics {
+        return Resources.getSystem().displayMetrics
+    }
 
     override fun actionBarSizeWithStatus(): Int {
         val styledAttributes: TypedArray =

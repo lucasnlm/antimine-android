@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import dev.lucasnlm.antimine.GameActivity
 import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.about.AboutActivity
+import dev.lucasnlm.antimine.auto.AutoExt.isAndroidAuto
 import dev.lucasnlm.antimine.common.io.models.SaveStatus
 import dev.lucasnlm.antimine.common.level.repository.MinefieldRepository
 import dev.lucasnlm.antimine.common.level.repository.SavesRepository
@@ -284,7 +285,7 @@ class MainActivity : ThemedActivity() {
             startActivity(intent)
         }
 
-        if (playGamesManager.hasGooglePlayGames()) {
+        if (playGamesManager.hasGooglePlayGames() && !isAndroidAuto()) {
             binding.playGames.setOnClickListener {
                 soundManager.playClickSound()
                 analyticsManager.sentEvent(Analytics.OpenGooglePlayGames)
@@ -384,7 +385,8 @@ class MainActivity : ThemedActivity() {
     private fun launchGooglePlayGames() {
         if (playGamesManager.hasGooglePlayGames() &&
             playGamesManager.shouldRequestLogin() &&
-            preferenceRepository.keepRequestPlayGames()
+            preferenceRepository.keepRequestPlayGames() &&
+            !isAndroidAuto()
         ) {
             playGamesManager.keepRequestingLogin(false)
 

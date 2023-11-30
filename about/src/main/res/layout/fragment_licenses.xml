@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
+    android:paddingVertical="@dimen/root_vertical_spacing"
+    android:paddingHorizontal="@dimen/root_horizontal_spacing"
     tools:context="dev.lucasnlm.antimine.licenses.LicenseActivity">
 
     <androidx.recyclerview.widget.RecyclerView

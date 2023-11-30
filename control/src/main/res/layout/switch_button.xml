@@ -35,11 +35,14 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/questionButton"
                     style="@style/Widget.App.Button.OutlinedButton.IconOnly"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_gravity="center"
+                    android:layout_width="@dimen/base_switch_button_size"
+                    android:layout_height="@dimen/base_switch_button_size"
+                    android:padding="0dp"
                     android:visibility="gone"
                     app:icon="@drawable/question"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="@dimen/base_icon_control_size"
                     app:strokeWidth="0dp"
                     tools:visibility="visible" />
             </com.google.android.material.card.MaterialCardView>
@@ -57,10 +60,13 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/flagButton"
                     style="@style/Widget.App.Button.OutlinedButton.IconOnly"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_gravity="center"
+                    android:layout_width="@dimen/base_switch_button_size"
+                    android:layout_height="@dimen/base_switch_button_size"
+                    android:padding="0dp"
                     app:icon="@drawable/flag"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="@dimen/base_icon_control_size"
                     app:strokeWidth="0dp" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -78,10 +84,13 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/openButton"
                     style="@style/Widget.App.Button.OutlinedButton.IconOnly"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_gravity="center"
+                    android:layout_width="@dimen/base_switch_button_size"
+                    android:layout_height="@dimen/base_switch_button_size"
+                    android:padding="0dp"
                     app:icon="@drawable/touch"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="@dimen/base_icon_control_size"
                     app:strokeWidth="0dp" />
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="CustomToolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="titleTextAppearance">?attr/textAppearanceHeadline6</item>
+    </style>
+
     <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerFamily">cut</item>
         <item name="cornerSize">0dp</item>
@@ -19,17 +24,20 @@
     </style>
 
     <style name="SectionTitle" parent="@style/TextAppearance.Material3.TitleMedium">
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">@bool/base_font_bold</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/base_font_size</item>
     </style>
 
     <style name="CustomButtonActive" parent="@style/Widget.Material3.Button.IconButton.Filled">
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">@bool/base_font_bold</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:gravity">start</item>
+        <item name="android:textSize">@dimen/base_font_size</item>
         <item name="elevation">0dp</item>
         <item name="cornerRadius">8dp</item>
-        <item name="iconPadding">8dp</item>
+        <item name="iconPadding">@dimen/base_icon_padding</item>
+        <item name="iconSize">@dimen/base_icon_size</item>
         <item name="startIconContentDescription">null</item>
         <item name="android:soundEffectsEnabled">false</item>
     </style>
@@ -37,23 +45,27 @@
     <style name="CustomButtonOutlined" parent="@style/Widget.Material3.Button.IconButton.Outlined">
         <item name="strokeColor">?colorPrimaryDark</item>
         <item name="strokeWidth">1dp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">@bool/base_font_bold</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:gravity">start</item>
+        <item name="android:textSize">@dimen/base_font_size</item>
         <item name="elevation">0dp</item>
         <item name="cornerRadius">8dp</item>
-        <item name="iconPadding">8dp</item>
+        <item name="iconPadding">@dimen/base_icon_padding</item>
+        <item name="iconSize">@dimen/base_icon_size</item>
         <item name="startIconContentDescription">null</item>
         <item name="android:soundEffectsEnabled">false</item>
     </style>
 
     <style name="CustomButton" parent="@style/Widget.Material3.Button.IconButton">
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">@bool/base_font_bold</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:gravity">start</item>
+        <item name="android:textSize">@dimen/base_font_size</item>
         <item name="elevation">0dp</item>
         <item name="cornerRadius">8dp</item>
-        <item name="iconPadding">8dp</item>
+        <item name="iconPadding">@dimen/base_icon_padding</item>
+        <item name="iconSize">@dimen/base_icon_size</item>
         <item name="startIconContentDescription">null</item>
         <item name="android:soundEffectsEnabled">false</item>
     </style>
@@ -61,6 +73,7 @@
     <style name="CustomButtonFlat" parent="@style/Widget.Material3.Button.TextButton">
         <item name="android:textAllCaps">true</item>
         <item name="android:gravity">start</item>
+        <item name="android:textSize">@dimen/base_font_size</item>
         <item name="elevation">0dp</item>
         <item name="cornerRadius">0dp</item>
         <item name="startIconContentDescription">null</item>
@@ -74,15 +87,19 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/launcher_background_night</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">
+            @color/launcher_background_night
+        </item>
         <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">1000</item>
-        <item name="android:windowSplashScreenBehavior" tools:targetApi="tiramisu">icon_preferred</item>
+        <item name="android:windowSplashScreenBehavior" tools:targetApi="tiramisu">icon_preferred
+        </item>
     </style>
 
     <style name="AntimineLight" parent="Theme.Material3.DynamicColors.Light">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AntimineDark" parent="Theme.Material3.DynamicColors.Dark">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -197,7 +214,8 @@
         <item name="colorSecondary">@color/colors_garden_light_secondary</item>
         <item name="colorOnSecondary">@color/colors_garden_light_onSecondary</item>
         <item name="colorSecondaryContainer">@color/colors_garden_light_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/colors_garden_light_onSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_garden_light_onSecondaryContainer
+        </item>
         <item name="colorTertiary">@color/colors_garden_light_tertiary</item>
         <item name="colorOnTertiary">@color/colors_garden_light_onTertiary</item>
         <item name="colorTertiaryContainer">@color/colors_garden_light_tertiaryContainer</item>
@@ -477,7 +495,8 @@
         <item name="colorSecondary">@color/colors_light_purple_secondary</item>
         <item name="colorOnSecondary">@color/colors_light_purple_onSecondary</item>
         <item name="colorSecondaryContainer">@color/colors_light_purple_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/colors_light_purple_onSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_light_purple_onSecondaryContainer
+        </item>
         <item name="colorTertiary">@color/colors_light_purple_tertiary</item>
         <item name="colorOnTertiary">@color/colors_light_purple_onTertiary</item>
         <item name="colorTertiaryContainer">@color/colors_light_purple_tertiaryContainer</item>
@@ -617,7 +636,8 @@
         <item name="colorSecondary">@color/colors_light_banana_secondary</item>
         <item name="colorOnSecondary">@color/colors_light_banana_onSecondary</item>
         <item name="colorSecondaryContainer">@color/colors_light_banana_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/colors_light_banana_onSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/colors_light_banana_onSecondaryContainer
+        </item>
         <item name="colorTertiary">@color/colors_light_banana_tertiary</item>
         <item name="colorOnTertiary">@color/colors_light_banana_onTertiary</item>
         <item name="colorTertiaryContainer">@color/colors_light_banana_tertiaryContainer</item>

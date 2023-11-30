@@ -28,4 +28,5 @@ include(
     ":audio",
     ":audio-low",
     ":utils",
+    ":auto",
 )

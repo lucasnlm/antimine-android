@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/main_activity_padding"
+            android:paddingHorizontal="@dimen/root_horizontal_spacing"
             android:paddingTop="32dp"
             android:paddingBottom="48dp">
 
@@ -110,9 +110,12 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="start|center_vertical"
-                                    android:paddingHorizontal="18dp"
+                                    android:paddingStart="9dp"
+                                    android:paddingEnd="18dp"
                                     android:text="@string/progressive"
-                                    app:icon="@drawable/progressive" />
+                                    app:icon="@drawable/progressive"
+                                    app:iconSize="@dimen/base_icon_size"
+                                    app:iconPadding="8dp" />
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/standardSize"
@@ -136,9 +139,12 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="start|center_vertical"
-                                    android:paddingHorizontal="18dp"
+                                    android:paddingStart="9dp"
+                                    android:paddingEnd="18dp"
                                     android:text="@string/fixed_size"
-                                    app:icon="@drawable/fixed_size" />
+                                    app:icon="@drawable/fixed_size"
+                                    app:iconSize="@dimen/base_icon_size"
+                                    app:iconPadding="8dp" />
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/fixedSizeSize"
@@ -295,9 +301,12 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
-                                android:paddingHorizontal="18dp"
+                                android:paddingStart="9dp"
+                                android:paddingEnd="18dp"
                                 android:text="@string/custom"
-                                app:icon="@drawable/custom" />
+                                app:icon="@drawable/custom"
+                                app:iconSize="@dimen/base_icon_size"
+                                app:iconPadding="8dp" />
 
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>

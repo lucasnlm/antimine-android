@@ -3,6 +3,7 @@ package dev.lucasnlm.antimine
 import androidx.multidex.MultiDexApplication
 import com.badlogic.gdx.utils.GdxNativesLoader
 import com.google.android.material.color.DynamicColors
+import dev.lucasnlm.antimine.auto.AutoExt.isAndroidAuto
 import dev.lucasnlm.antimine.common.io.di.CommonIoModule
 import dev.lucasnlm.antimine.common.level.di.LevelModule
 import dev.lucasnlm.antimine.core.di.CommonModule
@@ -55,7 +56,11 @@ open class MainApplication : MultiDexApplication() {
         if (featureFlagManager.isFoss) {
             preferencesRepository.setPremiumFeatures(true)
         } else {
-            adsManager.start(this)
+            if (applicationContext.isAndroidAuto()) {
+                preferencesRepository.setPremiumFeatures(true)
+            } else {
+                adsManager.start(this)
+            }
         }
 
         val lastAppVersion = preferencesRepository.lastAppVersion()

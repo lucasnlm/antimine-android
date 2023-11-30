@@ -29,7 +29,7 @@ class MinefieldRepositoryTest {
             mockk<DimensionRepository>(relaxed = true) {
                 every { areaSize() } returns 10.0f
                 every { verticalNavigationBarHeight() } returns 0
-                every { displaySize() } returns MinefieldSize(1000, 1000)
+                every { displayMetrics() } returns MinefieldSize(1000, 1000)
             }
 
         val minefield =
@@ -53,7 +53,7 @@ class MinefieldRepositoryTest {
             mockk<DimensionRepository>(relaxed = true) {
                 every { areaSize() } returns 10.0f
                 every { verticalNavigationBarHeight() } returns 100
-                every { displaySize() } returns MinefieldSize(1000, 1000)
+                every { displayMetrics() } returns MinefieldSize(1000, 1000)
             }
 
         val minefield =
@@ -77,7 +77,7 @@ class MinefieldRepositoryTest {
             mockk<DimensionRepository>(relaxed = true) {
                 every { areaSize() } returns 10.0f
                 every { verticalNavigationBarHeight() } returns 100
-                every { displaySize() } returns MinefieldSize(1000, 1000)
+                every { displayMetrics() } returns MinefieldSize(1000, 1000)
             }
 
         val minefield =
@@ -101,7 +101,7 @@ class MinefieldRepositoryTest {
             mockk<DimensionRepository>(relaxed = true) {
                 every { areaSize() } returns 10.0f
                 every { verticalNavigationBarHeight() } returns 100
-                every { displaySize() } returns MinefieldSize(1000, 1000)
+                every { displayMetrics() } returns MinefieldSize(1000, 1000)
             }
 
         val minefield =

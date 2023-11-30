@@ -12,7 +12,7 @@ class FixedDimensionRepository : DimensionRepository {
 
     override fun areaSeparator(): Float = 1.0f
 
-    override fun displaySize(): MinefieldSize = MinefieldSize(50 * 15, 50 * 30)
+    override fun displayMetrics(): MinefieldSize = MinefieldSize(50 * 15, 50 * 30)
 
     override fun actionBarSizeWithStatus(): Int = 55
 

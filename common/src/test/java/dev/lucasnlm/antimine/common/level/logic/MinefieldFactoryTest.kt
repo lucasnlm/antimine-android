@@ -83,7 +83,7 @@ class MinefieldFactoryTest {
             mock {
                 on { areaSize() } doReturn 10.0f
                 on { actionBarSizeWithStatus() } doReturn 10
-                on { displaySize() } doReturn MinefieldSize(500, 1000)
+                on { displayMetrics() } doReturn MinefieldSize(500, 1000)
             }
 
         MinefieldRepositoryImpl().fromDifficulty(

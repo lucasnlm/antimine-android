@@ -29,7 +29,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/root_horizontal_spacing"
+            android:paddingVertical="@dimen/root_vertical_spacing">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/generalSettings"
@@ -65,6 +67,7 @@
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
                         android:text="@string/vibration"
+                        android:textSize="@dimen/base_font_size"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/general_label" />
@@ -74,6 +77,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/sound_effects" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -81,6 +85,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/music" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -88,6 +93,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/show_windows" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -95,6 +101,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/open_on_game" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -102,6 +109,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/google_play_games" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -109,6 +117,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/immersive_mode" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -137,6 +146,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingVertical="8dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/settings_gameplay"
                         tools:text="Gameplay" />
 
@@ -145,6 +155,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/use_question_mark" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -152,6 +163,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/enable_automatic_flags" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -159,6 +171,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/click_numbers" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -166,6 +179,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/flag_when_tap_numbers" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -173,6 +187,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/help" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -180,6 +195,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/highlight_unsolved_numbers" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -187,6 +203,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/show_clock" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -194,6 +211,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="16dp"
+                        android:textSize="@dimen/base_font_size"
                         android:text="@string/no_guessing_mode" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -214,7 +232,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="16dp"
+                    android:textSize="@dimen/base_font_size"
                     android:text="@string/export_settings"
+                    app:iconSize="@dimen/base_icon_size"
                     app:icon="@drawable/export_file"
                     app:iconGravity="end" />
 
@@ -223,7 +243,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="16dp"
+                    android:textSize="@dimen/base_font_size"
                     android:text="@string/import_settings"
+                    app:iconSize="@dimen/base_icon_size"
                     app:icon="@drawable/import_file"
                     app:iconGravity="end" />
             </LinearLayout>

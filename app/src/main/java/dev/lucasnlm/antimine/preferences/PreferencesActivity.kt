@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
 import com.google.android.material.materialswitch.MaterialSwitch
 import dev.lucasnlm.antimine.R
+import dev.lucasnlm.antimine.auto.AutoExt.isAndroidAuto
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.databinding.ActivityPreferencesBinding
@@ -223,42 +224,48 @@ class PreferencesActivity :
             binding.playGames.isVisible = false
         }
 
-        binding.exportSettings.setOnClickListener {
-            val exportIntent =
-                Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
-                    addCategory(Intent.CATEGORY_OPENABLE)
-                    putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)
-                    type = "application/json"
+        binding.exportSettings.apply {
+            isVisible = !isAndroidAuto()
+            setOnClickListener {
+                val exportIntent =
+                    Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                        addCategory(Intent.CATEGORY_OPENABLE)
+                        putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)
+                        type = "application/json"
 
-                    androidOreo {
-                        val documentsDir =
-                            Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_DOCUMENTS,
-                            )
-                        putExtra(DocumentsContract.EXTRA_INITIAL_URI, documentsDir.toUri())
+                        androidOreo {
+                            val documentsDir =
+                                Environment.getExternalStoragePublicDirectory(
+                                    Environment.DIRECTORY_DOCUMENTS,
+                                )
+                            putExtra(DocumentsContract.EXTRA_INITIAL_URI, documentsDir.toUri())
+                        }
                     }
-                }
 
-            exportResultLauncher.launch(exportIntent)
+                exportResultLauncher.launch(exportIntent)
+            }
         }
 
-        binding.importSettings.setOnClickListener {
-            val exportIntent =
-                Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                    addCategory(Intent.CATEGORY_OPENABLE)
-                    putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)
-                    type = "application/json"
+        binding.importSettings.apply {
+            isVisible = !isAndroidAuto()
+            setOnClickListener {
+                val exportIntent =
+                    Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                        addCategory(Intent.CATEGORY_OPENABLE)
+                        putExtra(Intent.EXTRA_TITLE, SettingsBackupManager.FILE_NAME)
+                        type = "application/json"
 
-                    androidOreo {
-                        val documentsDir =
-                            Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_DOCUMENTS,
-                            )
-                        putExtra(DocumentsContract.EXTRA_INITIAL_URI, documentsDir.toUri())
+                        androidOreo {
+                            val documentsDir =
+                                Environment.getExternalStoragePublicDirectory(
+                                    Environment.DIRECTORY_DOCUMENTS,
+                                )
+                            putExtra(DocumentsContract.EXTRA_INITIAL_URI, documentsDir.toUri())
+                        }
                     }
-                }
 
-            importResultLauncher.launch(exportIntent)
+                importResultLauncher.launch(exportIntent)
+            }
         }
     }
 
