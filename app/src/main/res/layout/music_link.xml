@@ -38,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/check_music"
+            android:textSize="@dimen/base_font_size"
             android:textStyle="bold"
             tools:textColor="?colorOnBackground" />
 
@@ -46,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/music_by"
+            android:textSize="@dimen/base_font_size"
             tools:textColor="?colorOnBackground" />
     </LinearLayout>
 

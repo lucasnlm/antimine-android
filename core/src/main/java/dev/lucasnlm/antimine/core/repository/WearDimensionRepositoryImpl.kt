@@ -2,15 +2,15 @@ package dev.lucasnlm.antimine.core.repository
 
 import android.content.Context
 import android.content.res.Resources
+import android.util.DisplayMetrics
 import dev.lucasnlm.antimine.core.R
-import dev.lucasnlm.antimine.core.models.MinefieldSize
 
 class WearDimensionRepositoryImpl(
     private val context: Context,
 ) : DimensionRepository {
 
     override fun areaSize(): Float {
-        return displaySize().width / 5.0f
+        return displayMetrics().widthPixels / 5.0f
     }
 
     override fun areaSeparator(): Float {
@@ -21,10 +21,9 @@ class WearDimensionRepositoryImpl(
         return areaSize() + 2 * areaSeparator()
     }
 
-    override fun displaySize(): MinefieldSize =
-        with(Resources.getSystem().displayMetrics) {
-            return MinefieldSize(this.widthPixels, this.heightPixels)
-        }
+    override fun displayMetrics(): DisplayMetrics {
+        return Resources.getSystem().displayMetrics
+    }
 
     override fun actionBarSizeWithStatus(): Int {
         return 0

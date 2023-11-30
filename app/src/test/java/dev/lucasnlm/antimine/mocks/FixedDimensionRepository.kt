@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.mocks
 
-import dev.lucasnlm.antimine.core.models.MinefieldSize
+import android.util.DisplayMetrics
 import dev.lucasnlm.antimine.core.repository.DimensionRepository
 
 class FixedDimensionRepository : DimensionRepository {
@@ -12,7 +12,12 @@ class FixedDimensionRepository : DimensionRepository {
 
     override fun areaSeparator(): Float = 1.0f
 
-    override fun displaySize(): MinefieldSize = MinefieldSize(50 * 15, 50 * 30)
+    override fun displayMetrics(): DisplayMetrics {
+        return DisplayMetrics().apply {
+            widthPixels = 50 * 15
+            heightPixels = 50 * 30
+        }
+    }
 
     override fun actionBarSizeWithStatus(): Int = 50
 

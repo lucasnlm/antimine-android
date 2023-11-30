@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:fadeScrollbars="false"
-        android:paddingHorizontal="@dimen/main_activity_padding"
+        android:paddingHorizontal="@dimen/root_horizontal_spacing"
         android:paddingTop="24dp"
         android:clipToPadding="false"
         android:scrollbarStyle="outsideInset">

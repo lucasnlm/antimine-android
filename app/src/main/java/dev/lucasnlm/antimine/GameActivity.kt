@@ -22,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import dev.lucasnlm.antimine.common.auto.AutoExt.isAndroidAuto
 import dev.lucasnlm.antimine.common.level.view.GameRenderFragment
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -789,7 +790,7 @@ class GameActivity :
         }
 
         lifecycleScope.launch {
-            if (preferencesRepository.showTutorialDialog()) {
+            if (preferencesRepository.showTutorialDialog() && !isAndroidAuto()) {
                 val firstLocale = ConfigurationCompat.getLocales(resources.configuration).get(0)
                 val lang = firstLocale?.language
 

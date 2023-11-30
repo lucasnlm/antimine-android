@@ -40,6 +40,7 @@
             android:gravity="center_horizontal"
             android:textAlignment="center"
             android:textAllCaps="true"
+            android:textSize="@dimen/base_font_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +55,7 @@
             android:gravity="center_horizontal"
             android:text="@string/you_lost"
             android:textAlignment="center"
+            android:textSize="@dimen/base_font_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title"
@@ -65,11 +67,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?selectableItemBackgroundBorderless"
-            android:tooltipText="@string/close"
             android:contentDescription="@string/cancel"
             android:importantForAccessibility="no"
             android:padding="8dp"
+            android:tooltipText="@string/close"
             app:icon="@drawable/close"
+            app:iconSize="@dimen/base_icon_size"
             app:iconTint="?colorOnBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -85,6 +88,7 @@
             android:padding="8dp"
             android:tooltipText="@string/settings"
             app:icon="@drawable/settings"
+            app:iconSize="@dimen/base_icon_size"
             app:iconTint="?colorOnBackground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -111,6 +115,7 @@
                     android:text="@string/continue_game"
                     android:textAllCaps="true"
                     android:textColor="?colorSurfaceVariant"
+                    android:textSize="@dimen/base_font_size"
                     app:backgroundTint="?colorAccent"
                     app:iconPadding="0dp"
                     app:iconTint="?colorSurfaceVariant"
@@ -124,6 +129,7 @@
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="4dp"
                     android:textColor="?colorSurfaceVariant"
+                    android:textSize="@dimen/base_font_size"
                     android:textStyle="bold"
                     android:visibility="gone"
                     tools:text="10"
@@ -137,6 +143,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/new_game"
                 android:textAllCaps="true"
+                android:textSize="@dimen/base_font_size"
                 app:strokeWidth="0dp">
 
                 <requestFocus />
@@ -149,6 +156,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/remove_ad"
                 android:textAllCaps="true"
+                android:textSize="@dimen/base_font_size"
                 android:visibility="gone"
                 app:strokeWidth="0dp"
                 tools:visibility="visible" />
@@ -160,6 +168,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tutorial"
                 android:textAllCaps="true"
+                android:textSize="@dimen/base_font_size"
                 android:visibility="gone"
                 app:strokeWidth="0dp"
                 tools:visibility="visible" />
@@ -175,8 +184,8 @@
         android:gravity="center"
         android:minHeight="50dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/dialog"
         app:layout_constraintEnd_toEndOf="@+id/dialog"
+        app:layout_constraintStart_toStartOf="@+id/dialog"
         app:layout_constraintTop_toBottomOf="@+id/dialog" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

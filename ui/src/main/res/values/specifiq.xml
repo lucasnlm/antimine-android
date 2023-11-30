@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="base_spacing">4dp</dimen>
+    <dimen name="base_icon_size">20dp</dimen>
+    <dimen name="base_icon_control_size">24dp</dimen>
+    <dimen name="base_font_size">14sp</dimen>
+    <bool name="base_font_bold">true</bool>
+    <dimen name="base_icon_padding">8dp</dimen>
+    <dimen name="base_scrollbar_size">4dp</dimen>
+    <dimen name="base_switch_button_size">52dp</dimen>
+    <dimen name="base_icon_bar_size">52dp</dimen>
+</resources>

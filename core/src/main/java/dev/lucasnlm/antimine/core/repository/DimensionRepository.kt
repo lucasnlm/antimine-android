@@ -1,6 +1,6 @@
 package dev.lucasnlm.antimine.core.repository
 
-import dev.lucasnlm.antimine.core.models.MinefieldSize
+import android.util.DisplayMetrics
 
 interface DimensionRepository {
     fun areaSize(): Float
@@ -9,7 +9,7 @@ interface DimensionRepository {
 
     fun areaSeparator(): Float
 
-    fun displaySize(): MinefieldSize
+    fun displayMetrics(): DisplayMetrics
 
     fun actionBarSizeWithStatus(): Int
 

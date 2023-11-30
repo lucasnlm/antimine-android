@@ -21,8 +21,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fadeScrollbars="false"
-        android:paddingHorizontal="@dimen/main_activity_padding"
+        android:paddingHorizontal="@dimen/root_horizontal_spacing"
+        android:paddingVertical="@dimen/root_vertical_spacing"
         android:scrollbarStyle="outsideInset"
+        android:scrollbarSize="@dimen/base_scrollbar_size"
         app:layout_constraintBottom_toTopOf="@+id/playGame"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,11 +36,12 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/basic"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
                 android:paddingBottom="16dp"
                 android:text="@string/tutorial_basic"
-                android:textSize="18sp"
+                android:textSize="@dimen/base_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -62,11 +65,12 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
                 android:paddingVertical="16dp"
                 android:text="@string/tutorial_text_1"
-                android:textSize="18sp"
+                android:textSize="@dimen/base_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image" />
@@ -90,11 +94,12 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
                 android:paddingVertical="16dp"
                 android:text="@string/tutorial_text_2"
-                android:textSize="18sp"
+                android:textSize="@dimen/base_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image2" />
@@ -118,11 +123,12 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
                 android:paddingVertical="16dp"
                 android:text="@string/tutorial_text_3"
-                android:textSize="18sp"
+                android:textSize="@dimen/base_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image3" />
@@ -147,11 +153,12 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text4"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
                 android:paddingVertical="16dp"
                 android:text="@string/tutorial_text_4"
-                android:textSize="18sp"
+                android:textSize="@dimen/base_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image4" />
@@ -161,8 +168,8 @@
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:dividerInsetEnd="16dp"
-        app:dividerInsetStart="16dp"
+        app:dividerInsetEnd="@dimen/root_horizontal_spacing"
+        app:dividerInsetStart="@dimen/root_horizontal_spacing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/scrollView" />
@@ -170,9 +177,9 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/playGame"
         style="@style/CustomButton"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
+        android:layout_marginHorizontal="@dimen/root_horizontal_spacing"
         android:gravity="center"
         android:paddingVertical="16dp"
         android:text="@string/start"

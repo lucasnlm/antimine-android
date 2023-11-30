@@ -1,5 +1,6 @@
 <resources>
-    <dimen name="main_activity_padding">16dp</dimen>
+    <dimen name="root_vertical_spacing">4dp</dimen>
+    <dimen name="root_horizontal_spacing">16dp</dimen>
 
     <dimen name="field_size">38dp</dimen>
     <dimen name="field_radius">1.5dp</dimen>

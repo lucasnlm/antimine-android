@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:paddingHorizontal="@dimen/main_activity_padding"
+    android:paddingHorizontal="@dimen/root_horizontal_spacing"
     tools:context="dev.lucasnlm.antimine.about.AboutActivity">
 
     <LinearLayout
         android:id="@+id/version_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_height="0dp"
+        android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/buttons"
+        app:layout_constraintBottom_toTopOf="@+id/musicCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +39,7 @@
             android:textAllCaps="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/base_font_size"
             android:textStyle="bold" />
 
         <TextView
@@ -47,6 +48,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/base_font_size"
             tools:text="Version 7.1.0" />
 
         <TextView
@@ -55,6 +57,7 @@
             android:layout_height="wrap_content"
             android:text="Instant Build"
             android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/base_font_size"
             tools:ignore="HardcodedText" />
     </LinearLayout>
 

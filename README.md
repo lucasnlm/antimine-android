@@ -36,6 +36,7 @@ Feel free to contribute with [issues](https://github.com/lucasnlm/antimine-andro
 ## Features
 
 - Support to [Android Wear OS](https://developer.android.com/wear)
+- Support to [Android Auto](https://www.android.com/auto/)
 - No guessing algorithm
 - Multiple themes colors (including dynamic colors and AMOLED)
 - Multiple skins (including the classic)

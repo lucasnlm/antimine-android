@@ -29,8 +29,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/main_activity_padding"
-            android:paddingVertical="8dp">
+            android:paddingHorizontal="@dimen/root_horizontal_spacing"
+            android:paddingVertical="@dimen/root_vertical_spacing">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/control_styles"
@@ -54,7 +54,7 @@
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="16dp"
                         android:paddingTop="12dp"
-                        android:paddingBottom="8dp"
+                        android:paddingBottom="@dimen/base_spacing"
                         android:text="@string/control_types" />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -116,22 +116,24 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="8dp"
-                            android:text="@string/touch_sensibility" />
+                            android:text="@string/touch_sensibility"
+                            android:textSize="@dimen/base_font_size" />
 
                         <com.google.android.material.slider.Slider
                             android:id="@+id/touchSensibility"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:max="15"
+                            android:paddingVertical="@dimen/base_spacing"
                             android:stepSize="1"
                             android:value="1"
                             android:valueFrom="0"
                             android:valueTo="15"
-                            app:tickVisible="false"
-                            app:trackHeight="24dp"
-                            app:thumbElevation="0dp"
                             app:thumbColor="?colorOnPrimary"
-                            app:trackColorInactive="?colorOnSurfaceVariant" />
+                            app:thumbElevation="0dp"
+                            app:tickVisible="false"
+                            app:trackColorInactive="?colorOnSurfaceVariant"
+                            app:trackHeight="@dimen/base_icon_size" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -146,22 +148,24 @@
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="8dp"
                             android:text="@string/vibration"
-                            android:textColor="?colorOnSurfaceVariant" />
+                            android:textColor="?colorOnSurfaceVariant"
+                            android:textSize="@dimen/base_font_size" />
 
                         <com.google.android.material.slider.Slider
                             android:id="@+id/hapticLevel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:max="15"
+                            android:paddingVertical="@dimen/base_spacing"
                             android:stepSize="1"
                             android:value="100"
                             android:valueFrom="0"
                             android:valueTo="200"
-                            app:tickVisible="false"
-                            app:trackHeight="24dp"
-                            app:thumbElevation="0dp"
                             app:thumbColor="?colorOnPrimary"
-                            app:trackColorInactive="?colorOnSurfaceVariant" />
+                            app:thumbElevation="0dp"
+                            app:tickVisible="false"
+                            app:trackColorInactive="?colorOnSurfaceVariant"
+                            app:trackHeight="@dimen/base_icon_size" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -176,21 +180,23 @@
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="8dp"
                             android:text="@string/long_press"
-                            android:textColor="?colorOnSurfaceVariant" />
+                            android:textColor="?colorOnSurfaceVariant"
+                            android:textSize="@dimen/base_font_size" />
 
                         <com.google.android.material.slider.Slider
                             android:id="@+id/longPress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingVertical="@dimen/base_spacing"
                             android:stepSize="5"
                             android:value="500"
                             android:valueFrom="0"
                             android:valueTo="2000"
-                            app:tickVisible="false"
-                            app:trackHeight="24dp"
-                            app:thumbElevation="0dp"
                             app:thumbColor="?colorOnPrimary"
-                            app:trackColorInactive="?colorOnSurfaceVariant" />
+                            app:thumbElevation="0dp"
+                            app:tickVisible="false"
+                            app:trackColorInactive="?colorOnSurfaceVariant"
+                            app:trackHeight="@dimen/base_icon_size" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -205,21 +211,23 @@
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="8dp"
                             android:text="@string/double_click"
-                            android:textColor="?colorOnSurfaceVariant" />
+                            android:textColor="?colorOnSurfaceVariant"
+                            android:textSize="@dimen/base_font_size" />
 
                         <com.google.android.material.slider.Slider
                             android:id="@+id/doubleClick"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:paddingVertical="@dimen/base_spacing"
                             android:stepSize="5"
                             android:value="250"
                             android:valueFrom="100"
                             android:valueTo="700"
-                            app:trackHeight="24dp"
-                            app:tickVisible="false"
-                            app:thumbElevation="0dp"
                             app:thumbColor="?colorOnPrimary"
-                            app:trackColorInactive="?colorOnSurfaceVariant" />
+                            app:thumbElevation="0dp"
+                            app:tickVisible="false"
+                            app:trackColorInactive="?colorOnSurfaceVariant"
+                            app:trackHeight="@dimen/base_icon_size" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -255,19 +263,20 @@
                         android:paddingHorizontal="16dp"
                         android:paddingTop="12dp"
                         android:paddingBottom="20dp"
-                        android:text="@string/default_button" />
+                        android:text="@string/default_button"
+                        android:textSize="@dimen/base_font_size" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="16dp"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:paddingBottom="16dp">
 
                         <dev.lucasnlm.antimine.control.SwitchButtonView
                             android:id="@+id/switch_button_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"/>
+                            android:layout_gravity="center_horizontal" />
 
                     </FrameLayout>
 

@@ -44,6 +44,7 @@
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
                     android:text="@string/games"
+                    android:textSize="@dimen/base_font_size"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -53,6 +54,7 @@
                     android:paddingVertical="8dp"
                     android:text="0"
                     android:textColor="?colorTertiary"
+                    android:textSize="@dimen/base_font_size"
                     tools:ignore="HardcodedText" />
             </TableRow>
 
@@ -62,6 +64,7 @@
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
                     android:text="@string/mines"
+                    android:textSize="@dimen/base_font_size"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -71,6 +74,7 @@
                     android:paddingVertical="8dp"
                     android:text="-"
                     android:textColor="?colorTertiary"
+                    android:textSize="@dimen/base_font_size"
                     tools:ignore="HardcodedText" />
             </TableRow>
 
@@ -80,6 +84,7 @@
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
                     android:text="@string/total_time"
+                    android:textSize="@dimen/base_font_size"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -89,6 +94,7 @@
                     android:paddingVertical="8dp"
                     android:text="-"
                     android:textColor="?colorTertiary"
+                    android:textSize="@dimen/base_font_size"
                     tools:ignore="HardcodedText" />
             </TableRow>
 
@@ -98,6 +104,7 @@
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
                     android:text="@string/average_time"
+                    android:textSize="@dimen/base_font_size"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -107,6 +114,7 @@
                     android:paddingVertical="8dp"
                     android:text="-"
                     android:textColor="?colorTertiary"
+                    android:textSize="@dimen/base_font_size"
                     tools:ignore="HardcodedText" />
             </TableRow>
 
@@ -116,6 +124,7 @@
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
                     android:text="@string/shortest_time"
+                    android:textSize="@dimen/base_font_size"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -125,6 +134,7 @@
                     android:paddingVertical="8dp"
                     android:text="-"
                     android:textColor="?colorTertiary"
+                    android:textSize="@dimen/base_font_size"
                     tools:ignore="HardcodedText" />
             </TableRow>
 
@@ -134,6 +144,7 @@
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
                     android:text="@string/open_areas"
+                    android:textSize="@dimen/base_font_size"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -143,6 +154,7 @@
                     android:paddingVertical="8dp"
                     android:text="-"
                     android:textColor="?colorTertiary"
+                    android:textSize="@dimen/base_font_size"
                     tools:ignore="HardcodedText" />
             </TableRow>
 
@@ -152,6 +164,7 @@
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
                     android:text="@string/performance"
+                    android:textSize="@dimen/base_font_size"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -161,6 +174,7 @@
                     android:paddingVertical="8dp"
                     android:text="-"
                     android:textColor="?colorTertiary"
+                    android:textSize="@dimen/base_font_size"
                     tools:ignore="HardcodedText" />
             </TableRow>
 
@@ -170,6 +184,7 @@
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
                     android:text="@string/victories"
+                    android:textSize="@dimen/base_font_size"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -179,6 +194,7 @@
                     android:paddingVertical="8dp"
                     android:text="-"
                     android:textColor="?colorTertiary"
+                    android:textSize="@dimen/base_font_size"
                     tools:ignore="HardcodedText" />
             </TableRow>
 
@@ -188,6 +204,7 @@
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
                     android:text="@string/defeats"
+                    android:textSize="@dimen/base_font_size"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -197,6 +214,7 @@
                     android:paddingVertical="8dp"
                     android:text="-"
                     android:textColor="?colorTertiary"
+                    android:textSize="@dimen/base_font_size"
                     tools:ignore="HardcodedText" />
             </TableRow>
         </TableLayout>

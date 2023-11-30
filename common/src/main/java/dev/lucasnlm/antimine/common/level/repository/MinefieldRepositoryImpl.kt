@@ -24,9 +24,9 @@ class MinefieldRepositoryImpl : MinefieldRepository {
                 VERTICAL_STANDARD_GAP_WITHOUT_BOTTOM
             }
 
-        val display = dimensionRepository.displaySize()
-        val width = display.width
-        val height = display.height
+        val display = dimensionRepository.displayMetrics()
+        val width = display.widthPixels
+        val height = display.heightPixels
 
         val calculatedWidth = ((width / fieldSize).toInt() - horizontalGap)
         val calculatedHeight = ((height / fieldSize).toInt() - verticalGap)

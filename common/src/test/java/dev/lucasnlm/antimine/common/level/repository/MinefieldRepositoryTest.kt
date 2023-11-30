@@ -1,7 +1,7 @@
 package dev.lucasnlm.antimine.common.level.repository
 
+import android.util.DisplayMetrics
 import dev.lucasnlm.antimine.core.models.Difficulty
-import dev.lucasnlm.antimine.core.models.MinefieldSize
 import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
@@ -29,7 +29,11 @@ class MinefieldRepositoryTest {
             mockk<DimensionRepository>(relaxed = true) {
                 every { areaSize() } returns 10.0f
                 every { verticalNavigationBarHeight() } returns 0
-                every { displaySize() } returns MinefieldSize(1000, 1000)
+                every { displayMetrics() } returns
+                    DisplayMetrics().apply {
+                        widthPixels = 1000
+                        heightPixels = 1000
+                    }
             }
 
         val minefield =
@@ -53,7 +57,11 @@ class MinefieldRepositoryTest {
             mockk<DimensionRepository>(relaxed = true) {
                 every { areaSize() } returns 10.0f
                 every { verticalNavigationBarHeight() } returns 100
-                every { displaySize() } returns MinefieldSize(1000, 1000)
+                every { displayMetrics() } returns
+                    DisplayMetrics().apply {
+                        widthPixels = 1000
+                        heightPixels = 1000
+                    }
             }
 
         val minefield =
@@ -77,7 +85,11 @@ class MinefieldRepositoryTest {
             mockk<DimensionRepository>(relaxed = true) {
                 every { areaSize() } returns 10.0f
                 every { verticalNavigationBarHeight() } returns 100
-                every { displaySize() } returns MinefieldSize(1000, 1000)
+                every { displayMetrics() } returns
+                    DisplayMetrics().apply {
+                        widthPixels = 1000
+                        heightPixels = 1000
+                    }
             }
 
         val minefield =
@@ -101,7 +113,11 @@ class MinefieldRepositoryTest {
             mockk<DimensionRepository>(relaxed = true) {
                 every { areaSize() } returns 10.0f
                 every { verticalNavigationBarHeight() } returns 100
-                every { displaySize() } returns MinefieldSize(1000, 1000)
+                every { displayMetrics() } returns
+                    DisplayMetrics().apply {
+                        widthPixels = 1000
+                        heightPixels = 1000
+                    }
             }
 
         val minefield =

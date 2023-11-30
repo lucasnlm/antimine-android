@@ -87,15 +87,15 @@ class ThemeActivity : ThemedActivity() {
         }
 
         lifecycleScope.launch {
-            val size = dimensionRepository.displaySize()
+            val size = dimensionRepository.displayMetrics()
             val themesColumns =
-                if (size.width > size.height) {
+                if (size.widthPixels > size.heightPixels) {
                     5
                 } else {
                     3
                 }
             val skinsColumns =
-                if (size.width > size.height) {
+                if (size.widthPixels > size.heightPixels) {
                     2
                 } else {
                     5
@@ -147,7 +147,7 @@ class ThemeActivity : ThemedActivity() {
                 layoutManager =
                     object : GridLayoutManager(context, skinsColumns) {
                         override fun checkLayoutParams(layoutParams: RecyclerView.LayoutParams?): Boolean {
-                            val lpSize = width / (skinsColumns + 1)
+                            val lpSize = binding.skins.measuredWidth / (skinsColumns + 1)
                             layoutParams?.height = lpSize
                             layoutParams?.width = lpSize
                             return true

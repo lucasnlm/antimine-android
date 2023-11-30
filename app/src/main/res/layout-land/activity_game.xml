@@ -29,6 +29,7 @@
         android:text="@string/loading"
         android:textAllCaps="true"
         android:textStyle="bold"
+        android:textSize="@dimen/base_font_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +47,7 @@
         android:paddingVertical="8dp"
         android:textAllCaps="true"
         android:textStyle="bold"
+        android:textSize="@dimen/base_font_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,10 +72,10 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/back"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_width="@dimen/base_icon_bar_size"
+                android:layout_height="@dimen/base_icon_bar_size"
                 android:contentDescription="@string/back"
-                android:padding="20dp"
+                android:padding="16dp"
                 app:srcCompat="@drawable/arrow_left" />
 
             <LinearLayout
@@ -140,13 +142,13 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/shortcutIcon"
-                    android:layout_width="?attr/actionBarSize"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_width="@dimen/base_icon_bar_size"
+                    android:layout_height="@dimen/base_icon_bar_size"
                     android:layout_gravity="center_horizontal"
                     android:alpha="0.0"
                     android:clickable="false"
                     android:contentDescription="@string/new_game"
-                    android:padding="20dp"
+                    android:padding="16dp"
                     app:srcCompat="@drawable/retry"
                     tools:alpha="1.0" />
 
