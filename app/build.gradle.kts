@@ -13,8 +13,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode = 1706001
-        versionName = "17.6.0"
+        versionCode = 1706011
+        versionName = "17.6.1"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         compileSdk = libs.versions.compileSdk.get().toInt()
