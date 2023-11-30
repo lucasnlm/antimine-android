@@ -22,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import dev.lucasnlm.antimine.auto.AutoExt.isAndroidAuto
 import dev.lucasnlm.antimine.common.level.view.GameRenderFragment
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameViewModel
@@ -528,7 +529,7 @@ class GameActivity :
             setTextColor(usingTheme.palette.background.toAndroidColor())
         }
 
-        if (preferencesRepository.showTutorialButton()) {
+        if (preferencesRepository.showTutorialButton() && !isAndroidAuto()) {
             binding.controlsToast.apply {
                 setTextColor(usingTheme.palette.background.toAndroidColor())
             }

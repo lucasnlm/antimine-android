@@ -82,7 +82,6 @@ android {
             dimension = "version"
             applicationId = "dev.lucasnlm.antimine"
             versionNameSuffix = " S"
-            resValue("string", "androidAuto", "0")
 
             if (isGoogleBuild) {
                 plugins.apply("com.google.gms.google-services")
@@ -95,7 +94,6 @@ android {
             dimension = "version"
             applicationId = "dev.lucasnlm.antimine"
             versionNameSuffix = " I"
-            resValue("string", "androidAuto", "0")
 
             if (isGoogleBuild) {
                 plugins.apply("com.google.gms.google-services")
@@ -106,7 +104,6 @@ android {
             dimension = "version"
             applicationId = "dev.lucasnlm.antimine"
             versionNameSuffix = " C"
-            resValue("string", "androidAuto", "1")
 
             if (isGoogleBuild) {
                 plugins.apply("com.google.gms.google-services")
@@ -119,7 +116,6 @@ android {
             // There"s a typo on F-Droid release :(
             applicationId = "dev.lucanlm.antimine"
             versionNameSuffix = " F"
-            resValue("string", "androidAuto", "0")
         }
     }
 

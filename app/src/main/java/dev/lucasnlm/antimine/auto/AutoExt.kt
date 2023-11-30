@@ -1,10 +1,18 @@
 package dev.lucasnlm.antimine.auto
 
 import android.content.Context
-import dev.lucasnlm.antimine.R
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.annotation.RequiresApi
+import dev.lucasnlm.antimine.utils.BuildExt.androidMarshmallow
 
 object AutoExt {
     fun Context.isAndroidAuto(): Boolean {
-        return getString(R.string.androidAuto) == "1"
+        return androidMarshmallow() && featureAutomotive()
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private fun Context.featureAutomotive(): Boolean {
+        return packageManager.hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE)
     }
 }
