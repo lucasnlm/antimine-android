@@ -100,6 +100,17 @@ android {
             }
         }
 
+        create("auto") {
+            dimension = "version"
+            applicationId = "dev.lucasnlm.antimine"
+            versionNameSuffix = " C"
+
+            if (isGoogleBuild) {
+                plugins.apply("com.google.gms.google-services")
+                plugins.apply("com.bugsnag.android.gradle")
+            }
+        }
+
         create("foss") {
             dimension = "version"
             // There"s a typo on F-Droid release :(
@@ -114,6 +125,7 @@ android {
 }
 
 val googleImplementation by configurations
+val autoImplementation by configurations
 val googleInstantImplementation by configurations
 val fossImplementation by configurations
 
@@ -131,12 +143,14 @@ dependencies {
     implementation(project(":gdx"))
 
     googleImplementation(project(":proprietary"))
+    autoImplementation(project(":proprietary"))
     googleInstantImplementation(project(":proprietary"))
     googleInstantImplementation(project(":instant"))
     fossImplementation(project(":foss"))
     fossImplementation(project(":donation"))
 
-    googleImplementation(project(":auto"))
+    autoImplementation(project(":audio"))
+    autoImplementation(project(":auto"))
     googleImplementation(project(":audio"))
     fossImplementation(project(":audio"))
     googleInstantImplementation(project(":audio-low"))

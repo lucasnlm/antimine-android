@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-feature
         android:name="android.hardware.type.automotive"
-        android:required="false" />
+        android:required="true" />
     <uses-feature
         android:name="android.hardware.wifi"
         android:required="false"/>
