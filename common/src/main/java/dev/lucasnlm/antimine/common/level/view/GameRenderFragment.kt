@@ -19,6 +19,7 @@ import androidx.lifecycle.lifecycleScope
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration
 import com.badlogic.gdx.backends.android.AndroidFragmentApplication
+import dev.lucasnlm.antimine.common.auto.AutoExt.isAndroidAuto
 import dev.lucasnlm.antimine.common.level.logic.VisibleMineStream
 import dev.lucasnlm.antimine.common.level.viewmodel.GameEvent
 import dev.lucasnlm.antimine.common.level.viewmodel.GameState
@@ -279,8 +280,13 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                     } else {
                         context.dpToPx(BOTTOM_MARGIN_WITH_NAV_DP)
                     }
+                val autoBottomMargin = if (context.isAndroidAuto()) {
+                    bottomMargin * 1.5
+                } else {
+                    bottomMargin
+                }.toInt()
                 gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
-                setMargins(0, 0, 0, bottomMargin)
+                setMargins(0, 0, 0, autoBottomMargin)
             } else {
                 val rightMargin = context.dpToPx(RIGHT_MARGIN_DP)
                 gravity = Gravity.END or Gravity.CENTER_VERTICAL

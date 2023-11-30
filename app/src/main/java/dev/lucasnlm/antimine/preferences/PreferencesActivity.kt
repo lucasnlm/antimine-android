@@ -13,7 +13,7 @@ import androidx.core.view.isVisible
 import androidx.preference.PreferenceManager
 import com.google.android.material.materialswitch.MaterialSwitch
 import dev.lucasnlm.antimine.R
-import dev.lucasnlm.antimine.auto.AutoExt.isAndroidAuto
+import dev.lucasnlm.antimine.common.auto.AutoExt.isAndroidAuto
 import dev.lucasnlm.antimine.core.audio.GameAudioManager
 import dev.lucasnlm.antimine.core.cloud.CloudSaveManager
 import dev.lucasnlm.antimine.databinding.ActivityPreferencesBinding

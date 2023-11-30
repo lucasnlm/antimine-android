@@ -1,4 +1,4 @@
-package dev.lucasnlm.antimine.auto
+package dev.lucasnlm.antimine.common.auto
 
 import android.content.Context
 import android.content.pm.PackageManager

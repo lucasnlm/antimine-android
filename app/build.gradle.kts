@@ -13,8 +13,8 @@ android {
 
     defaultConfig {
         // versionCode and versionName must be hardcoded to support F-droid
-        versionCode = 1706011
-        versionName = "17.6.1"
+        versionCode = 1706031
+        versionName = "17.6.3"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         compileSdk = libs.versions.compileSdk.get().toInt()
@@ -90,7 +90,7 @@ android {
         }
 
         create("googleInstant") {
-            versionCode = 163
+            versionCode = 164
             dimension = "version"
             applicationId = "dev.lucasnlm.antimine"
             versionNameSuffix = " I"
