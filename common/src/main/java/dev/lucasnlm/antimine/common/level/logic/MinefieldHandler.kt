@@ -60,9 +60,14 @@ class MinefieldHandler(
                 .toArea()
                 .filter { it.potentialMineReveal() && it.hasUncoveredNeighbor() }
 
-        val unrevealedMines =
+        val unrevealedMinesWithUncoveredNeighbor =
             prioritizedMines.ifEmpty {
                 field.filter { it.potentialMineReveal() && it.hasUncoveredNeighbor() }
+            }
+
+        val unrevealedMines =
+            unrevealedMinesWithUncoveredNeighbor.ifEmpty {
+                field.filter { it.potentialMineReveal() }
             }
 
         val nearestTarget =

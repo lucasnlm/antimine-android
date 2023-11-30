@@ -780,6 +780,13 @@ open class GameViewModel(
         }
     }
 
+    private fun matchExpectedValueStoch(x: Double): Int {
+
+        val randomNum = (1..100).random()
+
+        return if (randomNum <= (x - x.toInt())*100) x.toInt() + 1 else x.toInt()
+    }
+
     private fun calcRewardHints(): Int {
         return if (clockManager.timeInSeconds() > MIN_REWARD_GAME_SECONDS && preferencesRepository.isPremiumEnabled()) {
             val rewardedHints =
@@ -789,7 +796,7 @@ open class GameViewModel(
                     (state.minefield.mines * REWARD_RATIO_WITHOUT_MISTAKES)
                 }
 
-            rewardedHints.toInt().coerceAtLeast(1)
+            matchExpectedValueStoch(rewardedHints).coerceAtLeast(1)
         } else {
             0
         }
