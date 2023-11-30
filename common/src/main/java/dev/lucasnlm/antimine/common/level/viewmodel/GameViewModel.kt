@@ -34,7 +34,6 @@ import dev.lucasnlm.external.Leaderboard
 import dev.lucasnlm.external.PlayGamesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
@@ -780,11 +779,9 @@ open class GameViewModel(
         }
     }
 
-    private fun matchExpectedValueStoch(x: Double): Int {
-
+    private fun matchExpectedValueStoch(value: Double): Int {
         val randomNum = (1..100).random()
-
-        return if (randomNum <= (x - x.toInt())*100) x.toInt() + 1 else x.toInt()
+        return if (randomNum <= (value - value.toInt()) * 100) value.toInt() + 1 else value.toInt()
     }
 
     private fun calcRewardHints(): Int {
