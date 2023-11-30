@@ -280,11 +280,12 @@ open class GameRenderFragment : AndroidFragmentApplication() {
                     } else {
                         context.dpToPx(BOTTOM_MARGIN_WITH_NAV_DP)
                     }
-                val autoBottomMargin = if (context.isAndroidAuto()) {
-                    bottomMargin * 1.5
-                } else {
-                    bottomMargin
-                }.toInt()
+                val autoBottomMargin =
+                    if (context.isAndroidAuto()) {
+                        bottomMargin * 1.5
+                    } else {
+                        bottomMargin
+                    }.toInt()
                 gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
                 setMargins(0, 0, 0, autoBottomMargin)
             } else {
