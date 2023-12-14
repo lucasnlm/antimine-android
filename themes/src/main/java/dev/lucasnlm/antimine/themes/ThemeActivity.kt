@@ -98,7 +98,7 @@ class ThemeActivity : ThemedActivity() {
                 if (size.widthPixels > size.heightPixels) {
                     2
                 } else {
-                    5
+                    4
                 }
 
             val themeAdapter =

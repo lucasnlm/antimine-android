@@ -94,7 +94,7 @@ class SkinAdapter(
                 } else {
                     setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY)
                 }
-                if (!skin.hasPadding) {
+                if (!skin.joinAreas) {
                     setPadding(0, 0, 0, 0)
                 } else {
                     setPadding(paddingValue, paddingValue, paddingValue, paddingValue)

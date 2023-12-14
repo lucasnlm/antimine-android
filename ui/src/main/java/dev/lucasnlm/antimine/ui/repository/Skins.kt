@@ -10,7 +10,7 @@ object Skins {
             file = "standard.png",
             canTint = true,
             isPremium = false,
-            hasPadding = true,
+            joinAreas = true,
             thumbnailImageRes = R.drawable.skin_standard,
         )
 
@@ -20,7 +20,7 @@ object Skins {
             file = "square.png",
             canTint = true,
             isPremium = true,
-            hasPadding = true,
+            joinAreas = true,
             thumbnailImageRes = R.drawable.skin_square,
         )
 
@@ -30,7 +30,7 @@ object Skins {
             file = "square-2.png",
             canTint = true,
             isPremium = true,
-            hasPadding = true,
+            joinAreas = true,
             thumbnailImageRes = R.drawable.skin_square_2,
         )
 
@@ -40,7 +40,7 @@ object Skins {
             file = "square-3.png",
             canTint = true,
             isPremium = true,
-            hasPadding = false,
+            joinAreas = false,
             thumbnailImageRes = R.drawable.skin_square_3,
             showPadding = false,
         )
@@ -51,7 +51,7 @@ object Skins {
             file = "classic.png",
             canTint = true,
             isPremium = true,
-            hasPadding = true,
+            joinAreas = true,
             thumbnailImageRes = R.drawable.skin_classic,
             background = 4,
         )
@@ -62,7 +62,7 @@ object Skins {
             file = "classic.png",
             canTint = false,
             isPremium = true,
-            hasPadding = true,
+            joinAreas = true,
             thumbnailImageRes = R.drawable.skin_classic,
             background = 4,
         )
@@ -73,7 +73,7 @@ object Skins {
             file = "glass.png",
             canTint = true,
             isPremium = true,
-            hasPadding = true,
+            joinAreas = true,
             thumbnailImageRes = R.drawable.skin_glass_2,
         )
 
@@ -83,7 +83,7 @@ object Skins {
             file = "stone.png",
             canTint = false,
             isPremium = true,
-            hasPadding = true,
+            joinAreas = true,
             thumbnailImageRes = R.drawable.skin_stone,
             background = 4,
         )
@@ -94,7 +94,7 @@ object Skins {
             file = "stone-2.png",
             canTint = true,
             isPremium = true,
-            hasPadding = true,
+            joinAreas = true,
             thumbnailImageRes = R.drawable.skin_stone_2,
             background = 4,
         )
@@ -105,9 +105,34 @@ object Skins {
             file = "standard.png",
             canTint = true,
             isPremium = true,
-            hasPadding = false,
+            joinAreas = false,
             thumbnailImageRes = R.drawable.skin_standard_no_connection,
             showPadding = false,
+        )
+
+    private fun oldschool() =
+        AppSkin(
+            id = 10,
+            file = "oldschool.png",
+            canTint = true,
+            isPremium = true,
+            joinAreas = false,
+            backgroundOnAll = true,
+            thumbnailImageRes = R.drawable.oldschool,
+            showPadding = true,
+        )
+
+    private fun oldschool2() =
+        AppSkin(
+            id = 11,
+            file = "oldschool2.png",
+            canTint = false,
+            isPremium = true,
+            joinAreas = false,
+            backgroundOnAll = true,
+            thumbnailImageRes = R.drawable.oldschool2,
+            forceBackground = 0x7f8773,
+            showPadding = true,
         )
 
     fun getAllSkins() =
@@ -122,5 +147,7 @@ object Skins {
             square3(),
             stone2(),
             defaultNoJoin(),
+            oldschool(),
+            oldschool2(),
         )
 }
