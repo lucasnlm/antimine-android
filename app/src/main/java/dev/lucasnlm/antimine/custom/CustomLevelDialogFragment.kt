@@ -5,12 +5,10 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
-import dev.lucasnlm.antimine.R
 import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.custom.viewmodel.CreateGameViewModel
 import dev.lucasnlm.antimine.custom.viewmodel.CustomEvent
@@ -125,56 +123,6 @@ class CustomLevelDialogFragment : AppCompatDialogFragment() {
                 gameViewModel.sendEvent(MainEvent.StartNewGameEvent(Difficulty.Custom))
             }
         }.create()
-    }
-
-    private fun checkLimitFeedbacks(): Boolean {
-        val wantedWidth = binding.mapWidth.text.toString().toIntOrNull()
-        var allValid = true
-        if (wantedWidth == null) {
-            binding.mapWidth.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
-            allValid = false
-        } else if (wantedWidth >= MAX_WIDTH) {
-            binding.mapWidth.setText(MAX_WIDTH.toString())
-            binding.mapWidth.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
-            allValid = false
-        } else if (wantedWidth <= MIN_WIDTH) {
-            binding.mapWidth.setText(MIN_WIDTH.toString())
-            binding.mapWidth.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
-            allValid = false
-        }
-
-        val wantedHeight = binding.mapHeight.text.toString().toIntOrNull()
-        if (wantedHeight == null) {
-            binding.mapHeight.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
-            allValid = false
-        } else if (wantedHeight >= MAX_HEIGHT) {
-            binding.mapHeight.setText(MAX_HEIGHT.toString())
-            binding.mapHeight.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
-            allValid = false
-        } else if (wantedHeight <= MIN_HEIGHT) {
-            binding.mapHeight.setText(MIN_HEIGHT.toString())
-            binding.mapHeight.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
-            allValid = false
-        }
-
-        if (allValid && wantedWidth != null && wantedHeight != null) {
-            val wantedMines = binding.mapMines.text.toString().toIntOrNull()
-            val maxMines = wantedWidth * wantedHeight - MIN_SAFE_AREA
-            if (wantedMines == null) {
-                binding.mapMines.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
-                allValid = false
-            } else if (wantedMines >= maxMines) {
-                binding.mapMines.setText((wantedWidth * wantedHeight - MIN_SAFE_AREA).toString())
-                binding.mapMines.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
-                allValid = false
-            } else if (wantedMines <= MIN_MINES) {
-                binding.mapMines.setText(MIN_MINES.toString())
-                binding.mapMines.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fast_shake))
-                allValid = false
-            }
-        }
-
-        return allValid
     }
 
     override fun onDismiss(dialog: DialogInterface) {

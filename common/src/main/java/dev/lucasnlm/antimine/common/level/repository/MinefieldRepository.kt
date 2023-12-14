@@ -15,6 +15,7 @@ interface MinefieldRepository {
     fun baseStandardSize(
         dimensionRepository: DimensionRepository,
         progressiveMines: Int,
+        limitToMax: Boolean,
     ): Minefield
 
     /**

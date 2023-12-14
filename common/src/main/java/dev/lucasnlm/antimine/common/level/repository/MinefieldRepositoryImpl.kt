@@ -4,11 +4,13 @@ import dev.lucasnlm.antimine.core.models.Difficulty
 import dev.lucasnlm.antimine.core.repository.DimensionRepository
 import dev.lucasnlm.antimine.preferences.PreferencesRepository
 import dev.lucasnlm.antimine.preferences.models.Minefield
+import java.lang.Integer.min
 
 class MinefieldRepositoryImpl : MinefieldRepository {
     override fun baseStandardSize(
         dimensionRepository: DimensionRepository,
         progressiveMines: Int,
+        limitToMax: Boolean,
     ): Minefield {
         val fieldSize = dimensionRepository.areaSize()
         val horizontalGap =
@@ -33,7 +35,13 @@ class MinefieldRepositoryImpl : MinefieldRepository {
         val fitWidth = calculatedWidth.coerceAtLeast(MIN_STANDARD_WIDTH)
         val fitHeight = calculatedHeight.coerceAtLeast(MIN_STANDARD_HEIGHT)
         val fieldArea = fitWidth * fitHeight
-        val fitMines = ((fieldArea * CUSTOM_LEVEL_MINE_RATIO).toInt() + progressiveMines)
+        val maxMines =
+            if (limitToMax) {
+                (fieldArea * 0.75).toInt()
+            } else {
+                Int.MAX_VALUE
+            }
+        val fitMines = min(maxMines, ((fieldArea * CUSTOM_LEVEL_MINE_RATIO).toInt() + progressiveMines))
         return Minefield(fitWidth, fitHeight, fitMines)
     }
 
@@ -49,7 +57,12 @@ class MinefieldRepositoryImpl : MinefieldRepository {
             Difficulty.Expert -> expertMinefield
             Difficulty.Master -> masterMinefield
             Difficulty.Legend -> legendMinefield
-            Difficulty.FixedSize -> baseStandardSize(dimensionRepository, preferencesRepository.getProgressiveValue())
+            Difficulty.FixedSize ->
+                baseStandardSize(
+                    dimensionRepository = dimensionRepository,
+                    progressiveMines = preferencesRepository.getProgressiveValue(),
+                    limitToMax = true,
+                )
             Difficulty.Custom -> preferencesRepository.customGameMode()
         }
 
@@ -59,8 +72,9 @@ class MinefieldRepositoryImpl : MinefieldRepository {
     ): Minefield {
         var result: Minefield =
             baseStandardSize(
-                dimensionRepository,
-                preferencesRepository.getProgressiveValue(),
+                dimensionRepository = dimensionRepository,
+                progressiveMines = preferencesRepository.getProgressiveValue(),
+                limitToMax = false,
             )
         var resultWidth = result.width
         var resultHeight = result.height

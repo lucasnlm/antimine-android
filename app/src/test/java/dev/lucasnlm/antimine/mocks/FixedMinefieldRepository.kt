@@ -10,6 +10,7 @@ class FixedMinefieldRepository : MinefieldRepository {
     override fun baseStandardSize(
         dimensionRepository: DimensionRepository,
         progressiveMines: Int,
+        limitToMax: Boolean,
     ): Minefield = Minefield(9, 9, 9 + progressiveMines)
 
     override fun fromDifficulty(
