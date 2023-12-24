@@ -36,10 +36,14 @@ object GameContext {
     fun refreshColors(theme: AppTheme) {
         GameContext.apply {
             backgroundColor =
-                if (theme.isDarkTheme && canTintAreas) {
-                    theme.palette.covered.toGdxColor(0.035f * zoomLevelAlpha)
+                if (canTintAreas) {
+                    if (theme.isDarkTheme) {
+                        theme.palette.covered.toGdxColor(0.035f * zoomLevelAlpha)
+                    } else {
+                        theme.palette.background.toInverseBackOrWhite(0.1f * zoomLevelAlpha)
+                    }
                 } else {
-                    theme.palette.background.toInverseBackOrWhite(0.1f * zoomLevelAlpha)
+                    Color.WHITE
                 }
             coveredAreaColor = theme.palette.covered.toGdxColor(1.0f)
             coveredMarkedAreaColor = theme.palette.covered.toGdxColor(1.0f).dim(0.6f)

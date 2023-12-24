@@ -25,7 +25,12 @@ class StatsViewModel(
     private val expertSize = sizeOf(Difficulty.Expert)
     private val intermediateSize = sizeOf(Difficulty.Intermediate)
     private val beginnerSize = sizeOf(Difficulty.Beginner)
-    private val standardSize = minefieldRepository.baseStandardSize(dimensionRepository, 0)
+    private val standardSize =
+        minefieldRepository.baseStandardSize(
+            dimensionRepository = dimensionRepository,
+            progressiveMines = 0,
+            limitToMax = false,
+        )
 
     private fun sizeOf(difficulty: Difficulty): Minefield {
         return minefieldRepository.fromDifficulty(

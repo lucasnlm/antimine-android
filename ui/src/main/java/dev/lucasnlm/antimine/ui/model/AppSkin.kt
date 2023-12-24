@@ -1,5 +1,6 @@
 package dev.lucasnlm.antimine.ui.model
 
+import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 
 /**
@@ -9,7 +10,7 @@ import androidx.annotation.DrawableRes
  * @property thumbnailImageRes The resource id of the skin.
  * @property canTint Whether the skin can be tinted.
  * @property isPremium Whether the skin is premium.
- * @property hasPadding Whether the skin has padding.
+ * @property joinAreas Whether the skin has padding.
  * @property background The background of the skin.
  * @property showPadding Whether the skin should show padding.
  */
@@ -19,7 +20,9 @@ data class AppSkin(
     @DrawableRes val thumbnailImageRes: Int,
     val canTint: Boolean,
     val isPremium: Boolean,
-    val hasPadding: Boolean,
+    val joinAreas: Boolean,
     val background: Int = 0,
     val showPadding: Boolean = true,
+    val backgroundOnAll: Boolean = false,
+    @ColorInt val forceBackground: Int? = null,
 )

@@ -74,7 +74,7 @@ open class GameRenderFragment : AndroidFragmentApplication() {
             navigationBarHeight = dimensionRepository.navigationBarHeight().toFloat(),
             appBarWithStatusHeight = dimensionRepository.actionBarSizeWithStatus().toFloat(),
             appBarHeight = appBarHeight(context),
-            joinAreas = themeRepository.getSkin().hasPadding,
+            joinAreas = themeRepository.getSkin().joinAreas,
             appSkin = themeRepository.getSkin(),
         )
     }

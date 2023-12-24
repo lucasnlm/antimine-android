@@ -159,7 +159,8 @@ class GameApplicationListener(
 
         minefieldStage.run {
             val currentTheme = gameRenderingContext.theme
-            currentTheme.palette.background.run {
+            val backgroundColor = gameRenderingContext.appSkin.forceBackground ?: currentTheme.palette.background
+            backgroundColor.run {
                 Gdx.gl.glClearColor(red(), green(), blue(), 1f)
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
             }

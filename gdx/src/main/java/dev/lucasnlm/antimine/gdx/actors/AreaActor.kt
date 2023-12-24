@@ -128,8 +128,9 @@ class AreaActor(
         isOdd: Boolean,
     ) {
         val area = this.area ?: return
+        val backgroundOnAll = gameRenderingContext.appSkin.backgroundOnAll
 
-        if (!isOdd && !area.isCovered && GameContext.zoomLevelAlpha > 0.0f) {
+        if ((backgroundOnAll || !isOdd) && !area.isCovered && GameContext.zoomLevelAlpha > 0.0f) {
             GameContext.gameTextures?.areaBackground?.let {
                 batch.drawRegion(
                     texture = it,
@@ -264,11 +265,16 @@ class AreaActor(
                         },
                 )
             } else if (area.hasMine) {
-                val color = gameRenderingContext.theme.palette.uncovered
+                val color =
+                    if (gameRenderingContext.appSkin.canTint) {
+                        gameRenderingContext.theme.palette.covered.toInverseBackOrWhite(1.0f)
+                    } else {
+                        Color.WHITE
+                    }
                 drawAsset(
                     batch = batch,
                     texture = it.mine,
-                    color = color.toInverseBackOrWhite(1.0f),
+                    color = color,
                     scale = BASE_ICON_SCALE,
                 )
             }
