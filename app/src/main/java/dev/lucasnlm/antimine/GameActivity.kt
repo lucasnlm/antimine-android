@@ -93,14 +93,15 @@ class GameActivity :
     }
 
     @SuppressLint("MissingSuperCall")
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        intent?.run(::handleIntent)
+        intent.run(::handleIntent)
 
         GameContext.zoom = 1.0f
         GameContext.zoomLevelAlpha = 1.0f
     }
 
+    @SuppressLint("DefaultLocale")
     private fun Int.toL10nString() = String.format("%d", this)
 
     private fun showGameWarning(
@@ -154,7 +155,7 @@ class GameActivity :
             when {
                 queryParamDifficulty != null -> {
                     val upperDifficulty = queryParamDifficulty.uppercase()
-                    val difficulty = Difficulty.values().firstOrNull { it.id == upperDifficulty }
+                    val difficulty = Difficulty.entries.firstOrNull { it.id == upperDifficulty }
                     if (difficulty == null) {
                         gameViewModel.loadLastGame()
                     } else {
