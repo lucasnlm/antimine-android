@@ -1,7 +1,7 @@
 # Antimine - Minesweeper
 ![Android CI](https://github.com/lucasnlm/antimine-android/workflows/Android%20CI/badge.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![GitHub release](https://img.shields.io/github/release/lucasnlm/antimine-android.svg?maxAge=60)](https://github.com/lucasnlm/antimine-android/releases) [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/) [![crowdin](https://badges.crowdin.net/antimine-android/localized.svg)](https://crowdin.com/project/antimine-android) [![Antimine: no guess minesweeper Downloads](https://www.appbrain.com/shield/com.logical.minato.svg)](https://www.appbrain.com/app/antimine-no-guess-minesweeper/com.logical.minato)
 
-> Note: Updates are slowdown now because I'm migrating to Jetpack Compose.
+>  If you are insterested in the flutter port of this repository, check this [link](https://github.com/lucasnlm/antimine-flutter).
 
 ### Description
 
